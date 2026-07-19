@@ -16,21 +16,22 @@ answers:
   - "what is the safe Julia cursor implementation order"
   - "which Julia files own rule local cursor migration"
 date: 2026-07-18
-status: verified historical preflight; normalization/runtime/descriptor/generated source superseded by .9.1.6.1-.4
+status: verified historical preflight; implementation superseded through .9.1.6.5
 tags: [julia, cursor, parse-mode, rule-family, bare-edge, descriptor, generated-source, cli, preflight, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.6.0 reads ADR 0044, the neutral/admitted authorities, Julia architecture/root-route facts, toolbox, and complete drivers before source inspection. Contract-driven API probes parse all 36 headers, but current `is_and` agrees on only 34 because `RuleMode(\"Pipe\")` is classified AND even though `|` is the accepted compact OR spelling. All 36 engines hold global seek, so only the 22 seek families agree intrinsically. Of 18 edge rows, Julia parses 3 action, 3 blind, 1 lifecycle, and 11 raw; only five of thirteen expected-success rows compile, none of the seven edge/edge-set error cases has its portable code, and `=> Child[0]` is silently accepted after prefix parsing. Exact admitted parent/child fixtures agree on 5/8 definedness rows; OR-to-AND blind/action/call are false positives, while recursive agreement is accidental. Structural replacements agree 1/2 because anchored choice also false-positively seeks. Descriptor metadata retains `parse_mode=seek` and lacks cursor contract/policy. Generated source is v1/format 1, and an AND generated plan accepts leading junk. Normalized and loaded engines default seek; engine and loaded factories accept consume overrides. Shared primary passes exactly 32/65 in default and POSIX: 22 help/usage plus 11 medium-or-higher request-trace failures. Package execution reaches the frozen 56/57 help mismatch; standalone corpus is 105/105; neutral governance is 67 files, 4 complete / 4 pending, and 39 mutations. No executable, contract, fixture, rollout, or public semantic behavior changes in the preflight."
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 supersedes the measured generated v1 boundary with current v2/format 2 family-derived execution and contract-before-payload validation. Public option removal and admission remain .9.1.6.5-.6."
-reverify: "python3 tools/check_rule_local_cursor_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3; d=JSON3.read(read(\"capability_conformance/rule_local_cursor_contract.json\", String), Dict{String,Any}); println(length(d[\"family_cases\"])); println(parse_mode_name(LinkedSpecRuntimeEngine(compile_spec(parse_spec(\"Top::AND\\n /x/\\n\"))).parse_mode))' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute"
+evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 supersedes the measured public/global seam: engine, loaded-engine, corpus, help, execution, and request trace carry no override; legacy API/CLI spellings fail with the targeted diagnostic. Composed admission alone remains .9.1.6.6."
+reverify: "python3 tools/check_rule_local_cursor_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_option_removal_test.jl\")'"
 ---
 
 # Julia rule-local cursor preflight
 
 This card preserves the measured pre-implementation boundary. Typed family and
 edge normalization has since landed under `.9.1.6.1`; see
-[[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-execution]], and
-[[julia-rule-local-cursor-descriptor]], and [[julia-generated-source-v2-rule-local-cursor]]. Generated v1
-measurements below are historical; option and admission measurements remain the staged boundaries for
-`.9.1.6.5-.6`.
+[[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-execution]],
+[[julia-rule-local-cursor-descriptor]], [[julia-generated-source-v2-rule-local-cursor]], and
+[[julia-global-cursor-option-removal]]. Generated-v1 and public-option measurements below are historical;
+composed admission remains the sole staged boundary for `.9.1.6.6`.
 
 Julia's parser already recognizes every neutral header spelling, but recognition is not yet the accepted semantic
 classification. `julia/src/spec/Ast.jl` includes `Pipe` in `is_and(...)`; ADR 0044 instead assigns `|` to the
@@ -59,10 +60,12 @@ The gate-safe implementation order is:
 6. `.9.1.6.6` adds one 15-role omission-sensitive Julia consumer, locks backend/canonical topology, advances only
    Julia, and closes the parent before Julia root admission.
 
-The governed token inventory names nine Julia production/test paths. Non-token semantic owners are
+The preflight's governed token inventory named nine Julia production/test paths. After `.5` makes the loader and
+corpus owners token-free and adds the removal test, the current Julia group contains eight paths. Non-token semantic owners are
 `julia/src/spec/Ast.jl`, `julia/src/spec/Validator.jl`, and `julia/src/source/SourceEmitter.jl`; focused source-
 emitter, loader, root-route, and new cursor tests consume those seams. `tools/check_julia_primary_cli.sh` is the
-neutral-group driver path whose remaining legacy token must retire with Julia `.5`. `tools/run_julia_local.sh` and
+neutral-group driver path whose legacy token is now only the exact retired-flag rejection fixture.
+`tools/run_julia_local.sh` and
 the optional Julia registration in `tools/run_ci_local.sh` are the backend/canonical topology owners.
 
 Related: [[rule-local-cursor-neutral-contract]], [[julia-root-rule-selection-routes]],

@@ -289,15 +289,15 @@ end
 
 function execute_corpus_fixtures(
     corpus_path::AbstractString;
-    parse_mode = nothing,
     spec_parser = nothing,
     trace_config = nothing,
     case_names = String[],
     offset = 0,
     limit = nothing,
+    kwargs...,
 )
+    _reject_removed_runtime_options(kwargs)
     validation = load_corpus_fixtures(corpus_path)
-    effective_parse_mode = parse_mode === nothing ? SeekParseMode : parse_mode
     fixtures = _select_corpus_execution_fixtures(
         validation.fixtures;
         case_names = case_names,
@@ -308,7 +308,6 @@ function execute_corpus_fixtures(
         _execute_corpus_fixture(
             validation,
             fixture;
-            parse_mode = effective_parse_mode,
             spec_parser = spec_parser,
             trace_config = trace_config,
         )
@@ -370,7 +369,6 @@ end
 function _execute_corpus_fixture(
     validation::CorpusValidationResult,
     fixture::CorpusFixture;
-    parse_mode,
     spec_parser,
     trace_config,
 )
@@ -381,7 +379,6 @@ function _execute_corpus_fixture(
         compiled = compile_spec(spec)
         engine = LinkedSpecRuntimeEngine(
             compiled;
-            parse_mode = parse_mode,
             spec_name = fixture.name,
             spec_path = joinpath(validation.root, fixture.name, "input.spec"),
         )

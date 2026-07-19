@@ -101,10 +101,19 @@ expect_empty "$STDERR_FILE"
 FUNCTION_SPEC=$'fn wrap(value) { return(hash("wrapped", value)) }\nTop::\n /x/\n E { return(wrap(match_text())) }\n'
 printf '%s\n' '{"wrapped":"x"}' >"$EXPECTED_FILE"
 run_primary function-inline \
- --inline-spec "$FUNCTION_SPEC" --input x --top-rule Top --parse-mode consume
+ --inline-spec "$FUNCTION_SPEC" --input x --top-rule Top
 expect_status 0
 expect_exact "$EXPECTED_FILE" "$STDOUT_FILE"
 expect_empty "$STDERR_FILE"
+
+run_primary removed-parse-mode \
+ --inline-spec 'not a spec' --input-file "$TEMP_ROOT/missing-input.txt" \
+ --parse-mode consume
+expect_status 2
+expect_empty "$STDOUT_FILE"
+expect_first_line \
+ "linkedspec: --parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)" \
+ "$STDERR_FILE"
 
 run_primary retired-subcommand status
 expect_status 2

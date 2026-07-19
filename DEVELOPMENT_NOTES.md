@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.5` — reject compatibility; preserve only the primitive):
+  Julia's high-level keyword APIs are dynamic, so deleting a named keyword alone would turn a deliberate migration
+  boundary into a generic host-language error. The engine, loader, and corpus adapters instead collect remaining
+  keywords and reject the exact legacy snake/camel spellings through one `prepare_options` diagnostic before any
+  source, input, iteration-limit, or user-code work. Unrelated unknown keywords stay generic. This makes old callers
+  fail loudly without retaining an ignored or behavior-changing compatibility path.
+
+  The low-level type is not the global option. `LinkedSpecParseMode`, `runtime_match`, `seek_match`, and
+  `consume_match` still implement the two rule-derived matching algorithms; deleting those would erase the runtime
+  mechanism rather than the caller override. Static proof therefore simultaneously forbids high-level state/tokens
+  and requires the matcher primitives. Former loader/corpus token-owner files are entirely token-free.
+
+  Entry selection is orthogonal. `--top-rule` stays accepted and wins over authored markers; only the retired cursor
+  flag leaves help/request trace. Its focused two-rule regression uses `I` entry handlers deliberately. An earlier
+  diagnostic probe used `E`, whose exit lifecycle can produce the same value after a successful match and therefore
+  weakens causal attribution; the committed fixture proves selected-rule entry directly instead of relying on that
+  incidental equivalence.
+
+  Final proof passes focused removal 53, package 3,187, ten primary-process families, shared primary 65x2, corpus
+  105, and neutral governance 66/4+4/39. Canonical local CI repeats root 7+5, cursor 288, reference primary 65x2,
+  and Phase 0 1,031/1,031 in 637 seconds. The generated 11 MiB book and 28 KiB Python cache are removed.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.4` — version before decode; derive rather than serialize):
   Julia's v1 module reconstructed its normalized payload eagerly and only then validated label/family rows. It also
   forced a seek engine and used the plan only for legacy structure, so changing runtime semantics without a format

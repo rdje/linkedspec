@@ -15,15 +15,21 @@ status: current
 tags: [julia, cli, arguments, resolution, io, parity, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.1 reads raw bytes, requires isvalid UTF-8, and proves exact shared help/loading behavior."
 evidence_update_2026_07_11_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.4 delegates named/file source loading and compilation to the public 14/9/4 native API and removes the recursive repository fallback; 61x2 canonical CLI remains exact."
+evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes --parse-mode from accepted options and help. The exact retired spelling returns usage exit 2 with targeted structural guidance before invalid source or a missing input file; --top-rule remains accepted. Shared primary is 65/65 twice."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh"
 ---
 
 `JULIA-BACKEND-PARITY.7.3.2.2` replaces Julia's rollout-era primary
 `status`/`corpus` dispatch. The primary module now accepts only ADR `0023`'s
-source, input, parser, trace, and help options. `status`, `corpus`, every other
+source, input, entry-selection, trace, and help options. `status`, `corpus`, every other
 positional argument, unknown options, missing values, invalid selector counts,
 and invalid modes/levels return usage exit `2`. Corpus execution remains in the
 separate `julia/bin/corpus_runner.jl` developer adapter.
+
+The former global `--parse-mode` control is not an accepted parser option and is
+absent from help. It is recognized only to return the exact targeted removal
+message before source compilation or deferred input loading. Cursor semantics
+come from rule families; `--top-rule` remains the independent entry selector.
 
 Named `--spec NAME` resolution is deterministic:
 
@@ -52,4 +58,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-primary-cli-mechanism-audit]], [[cross-backend-cli-contract-gap]],
 [[native-in-memory-backend-contract]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]], [[julia-global-cli-61-audit]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-global-cursor-option-removal]],
+[[julia-global-cli-61-audit]].

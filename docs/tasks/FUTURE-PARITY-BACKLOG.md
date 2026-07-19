@@ -5285,7 +5285,7 @@ before implementation.
     Knowledge Map facts, and mdBook; clean safe generated artifacts and commit before activating `.9.1.6.5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.5`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Julia caller-global cursor options and migrate the exact 65-case primary projection.
   Dependencies: `.9.1.6.4`
   Acceptance: Remove engine state and high-level engine/loader/corpus/public overrides while retaining only
@@ -5294,8 +5294,41 @@ before implementation.
     flag only for its exact targeted usage exit/message, omit it from help and request trace, migrate Julia package/
     process callers plus `tools/check_julia_primary_cli.sh`, update the neutral migration inventory, and pass the
     unchanged already-reference-owned shared manifest 65x2 plus corpus 105.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-18 only after generated-source v2 `.9.1.6.4` landed at
+    clean commit `20a37cd2`, `git_message_brief.txt` was zero bytes, tracked/untracked state was clean at ahead 227,
+    and generated mdBook/Python-cache artifacts were absent. Knowledge Map/ADR/admitted-removal retrieval and exact
+    Julia token/runtime reproduction preceded implementation. Static audit now leaves only the targeted rejection,
+    authored-family parser, diagnostic/trace naming, and low-level matcher tokens; loader/corpus are token-free.
+    Focused removal passes 53/53; complete `tools/run_julia_local.sh` passes 3,187 package assertions, ten real
+    process families, and corpus 105/105; unchanged shared primary passes 65/65 with `POSIXLY_CORRECT` unset and
+    set. Neutral cursor governance is 66 files / 4 complete + 4 pending / 39 mutations; generated 80/0/0, logical
+    8/0, root 4/7+34, capability 80/0/0, KM 619/4,498, mdBook, doctrines, task metadata, memory, JSON, and whitespace
+    gates pass. The director-identified two-rule `--top-rule` fixture now uses entry lifecycle `I`, not incidental
+    exit `E`; rationale is durable in `DEVELOPMENT_NOTES.md`. Canonical local CI exits 0 after all registered
+    doctrines/contracts, root 7+5, cursor 288, primary 65/65 in both environments, and Phase 0 1,031/1,031 in
+    637 seconds. The generated 11 MiB mdBook output and 28 KiB Python cache are removed; composed admission `.6`
+    stays excluded until the clean per-leaf commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.6.5 - remove Julia global cursor overrides`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / AUDIT** — Follow the Knowledge Map to ADR `0044`, Julia runtime/descriptor/generated/primary
+    facts, and admitted Perl/Rust/Dart removal designs; classify every Julia parse-mode token as caller-owned,
+    rule-derived, historical/diagnostic, or permitted low-level matcher state before editing behavior.
+  - [x] **REMOVE PUBLIC/GLOBAL OVERRIDES** — Delete engine state plus engine-constructor, loaded-engine, corpus,
+    staged-parser, and every other caller-owned global option while retaining the contract-permitted low-level
+    seek/consume matcher primitives and intrinsic per-entered-rule/generated-v2 derivation.
+  - [x] **MIGRATE PRIMARY COMMAND** — Remove the help/execution/request-trace field, retain `--top-rule`, and reject
+    exact retired `--parse-mode` spellings at usage exit 2 with the neutral targeted migration message before
+    input loading or user code.
+  - [x] **PROVE STATIC AND EXECUTABLE BOUNDARIES** — Add focused source-removal and retired-flag proof; pass affected
+    suites, complete package, exact unchanged shared primary 65x2, corpus 105, and updated neutral inventory with
+    every mutation effective.
+  - [x] **NO REGRESSION / SCOPE** — Preserve generated-source v2, cursor descriptor v1, root precedence/routes,
+    low-level matching, capability state, and rollout; leave the exact 15-role consumer and Julia promotion to `.6`.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize source/tests, task/index/roadmap/live/memory, Knowledge Map, Julia/public
+    docs, mdBook, changes/notes, and pass governance plus canonical local CI; clean safe artifacts and commit before
+    activating `.9.1.6.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.6`
   Status: `pending`
@@ -7889,13 +7922,13 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `done` | Exact 15-role topology, 39 mutations, package 271, primary 65x2, corpus 105, and Dart-only 4/4 promotion pass. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight through descriptor `.0-.3` are committed; generated-source v2 `.4` is verified pending its clean commit before option removal `.5` and admission `.6`. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight through generated-source v2 `.0-.4` are committed; global option/CLI removal `.5` is active before admission `.6`. |
 | 217.0 | `FUTURE-PARITY-BACKLOG.9.1.6.0` | `done` | Exact behavior-free preflight, 614/4,445 KM, 67/4+4/39 governance, mdBook, canonical 1,031, and cleanup pass. |
 | 217.1 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `done` | Exact 36/18/6 typed normalization, six diagnostics, 353 focused, 2,215+known-one package, 105 corpus, and canonical proof pass. |
 | 217.2 | `FUTURE-PARITY-BACKLOG.9.1.6.2` | `done` | Julia live/loaded/normalized/recursive/traced intrinsic execution; focused 104, generated 60, package 2,320+known-one, corpus 105, primary 32/65x2, canonical green. |
 | 217.3 | `FUTURE-PARITY-BACKLOG.9.1.6.3` | `done` | Cursor v1, 809 focused, package 3,129+known-one, corpus 105, primary 32/65x2, governance/KM/mdBook/canonical signoff pass. |
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
-| 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `pending` | Julia public/global option and exact 65x2 primary migration. |
+| 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
 | 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `pending` | Exact composed Julia admission, rollout promotion, and parent closeout. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
@@ -8582,15 +8615,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.3` are cleanly
-  committed; generated-source v2 `.4` is fully verified and awaits its prepared clean commit. Julia's 33 remaining
-  shared-primary failures are the exact option/CLI boundary owned by `.5`, not a regression. Admission `.6` then
-  precedes root admission `.4.3`.
+- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.4` are cleanly
+  committed. Public/global option removal `.5` is fully verified and awaits its prepared clean commit with no
+  shared-primary failures. Admission `.6` then precedes root admission `.4.3`.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.5` | Exact engine/loader/corpus/primary override removal; targeted snake/camel API and CLI migration diagnostics before input/user code; retained low-level matcher primitives; entry-`I` top-rule precedence; focused 53; ten real processes; package 3,187; primary 65x2; corpus 105; cursor 66/4+4/39; generated/capability 80/0/0; logical 8/0+26; root 4/7+34; KM 619/4,498; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 637s; generated 11 MiB book/28 KiB cache cleanup. | PASS; Julia has no high-level caller-global cursor authority, while composed admission/rollout remain `.6`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.4` | V2/format 2 minimal family plan; contract-before-payload validation; five seek/five consume; compact-pipe OR; direct/traced/fresh-loaded/current-consumer migration; v1 legacy rejection; focused emitter 65 and cursor 104; package 3,133+known-one; corpus 105; Julia primary 32/65x2; generated 80/0/0, cursor 67/4+4/39, logical 8/0+26, root 4/7+34; KM 618/4,489; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 643s; generated book/cache cleanup. | PASS; generated v2 is current, while public options/admission/capability/rollout remain `.5-.6`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.3` | Cursor-v1 root/rule/edge projection; direct/normalized/loaded bytes; all 36 families; every valid/invalid edge/set; focused 809; package 3,129+known-one; corpus 105; primary 32/65x2; cursor 67/4+4/39; root 4/7+34; KM 617/4,476; mdBook/doctrines/JSON/whitespace/cleanup; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 622s. | PASS; generated/public/admission/rollout unchanged. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.2` | Entered-rule policy; 36 families; 8 parent-child; 2 structural; live/loaded/normalized/recursive/trace; generated-v1 isolation; 104+60; package 2,320+known-one; primary 32/65x2; corpus 105; governance 67/4+4/39; KM 616/4,466; mdBook/doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 611s. | PASS; no rollout/artifact/public promotion. |
@@ -8783,6 +8816,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.6.5` | `FUTURE-PARITY-BACKLOG.9.1.6.5 - remove Julia global cursor overrides` | Exact API/CLI removal diagnostics, 53 focused, 3,187 package, ten processes, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup. |
 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `FUTURE-PARITY-BACKLOG.9.1.6.4 - emit Julia generated-source v2` | Exact minimal family plan, contract-before-payload v1 rejection, 65 focused, 3,133+known-one package, corpus/staged-primary/governance/KM/mdBook/canonical signoff, and `.5` handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `FUTURE-PARITY-BACKLOG.9.1.6.1 - normalize Julia cursor families and edges` | Exact typed 36/18/6 normalization, six portable diagnostics, compiled lowering, 353 focused, 2,215+known-one package, 105 corpus, and canonical signoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 - admit Dart root selection` | Exact 15-role consumer, 34 mutations, package 270, primary 65x2, Dart-only 4/7 promotion, parent closeout, and Julia handoff. |
@@ -8958,6 +8992,17 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Julia public-option removal `.9.1.6.5` deletes caller-global cursor ownership from engine, loader,
+  corpus, primary execution, help, and request trace while retaining exact targeted API/CLI migration failures and
+  the low-level matcher primitives. The corrected two-rule selection regression uses `I` to prove selected entry;
+  `--top-rule` remains higher priority than authored `Rule::`. Focused proof is 53, package 3,187, ten real-process
+  families, primary 65x2, corpus 105, and neutral governance 66/4+4/39. KM 619/4,498, mdBook/four doctrines, and
+  canonical root 7+5/cursor 288/primary 65x2/Phase 0 1,031 in 637 seconds pass. Generated 11 MiB book and 28 KiB
+  cache cleanup pass; only the prepared clean commit may precede composed admission `.6`.
+- `2026-07-18`: Clean commit `20a37cd2` lands Julia generated-source v2 `.9.1.6.4`; tracked/untracked state is
+  clean, the brief is zero bytes, generated book/cache artifacts are absent, and ahead is 227. Global cursor-option
+  removal `.9.1.6.5` activates task-tree-first before exact token/runtime reproduction; admission, capabilities,
+  shared fixture bytes, and rollout remain `.6`.
 - `2026-07-18`: Julia generated-source `.9.1.6.4` advances current emission to v2/format 2 while preserving exact
   minimal ordered label/family rows. Contract identity validates before payload reconstruction; family derives the
   neutral five-seek/five-consume policies; compact pipe is OR; current direct/traced/emitted consumers use v2; and

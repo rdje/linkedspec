@@ -11,6 +11,7 @@ struct RuntimeDiagnostic
     rule_label::Union{Nothing,String}
     handler_source_label::Union{Nothing,String}
     code::Union{Nothing,String}
+    option_name::Union{Nothing,String}
     helper_name::Union{Nothing,String}
     actual_arity::Union{Nothing,Int}
     expected_arity::Union{Nothing,String}
@@ -29,6 +30,7 @@ function RuntimeDiagnostic(;
     rule_label = nothing,
     handler_source_label = nothing,
     code = nothing,
+    option_name = nothing,
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
@@ -47,6 +49,7 @@ function RuntimeDiagnostic(;
         optional_string(rule_label),
         optional_string(handler_source_label),
         optional_string(code),
+        optional_string(option_name),
         optional_string(helper_name),
         actual_arity === nothing ? nothing : Int(actual_arity),
         optional_string(expected_arity),
@@ -98,25 +101,60 @@ end
 
 struct LinkedSpecRuntimeEngine
     compiled_spec::CompiledSpec
-    parse_mode::Union{Nothing,LinkedSpecParseMode}
     max_iterations::Int
     spec_name::Union{Nothing,String}
     spec_path::Union{Nothing,String}
 end
 
+const _PARSE_MODE_OVERRIDE_REMOVED_DETAIL =
+    "cursor policy is derived from each rule (OR/default=seek, AND=consume)"
+
+function _removed_parse_mode_override_error(; spec_name = nothing, spec_path = nothing)
+    summary = "Global parse mode option has been removed"
+    return RuntimeInterpreterException(
+        "$summary; $(_PARSE_MODE_OVERRIDE_REMOVED_DETAIL)";
+        diagnostic = RuntimeDiagnostic(
+            type = "runtime_parser",
+            stage = "prepare_options",
+            owner_stage = "julia_runtime",
+            summary = summary,
+            detail = _PARSE_MODE_OVERRIDE_REMOVED_DETAIL,
+            spec_name = spec_name,
+            spec_path = spec_path,
+            handler_source_label = "julia_runtime",
+            code = "parse_mode_override_removed",
+            option_name = "parse_mode",
+        ),
+    )
+end
+
+function _reject_removed_runtime_options(options; spec_name = nothing, spec_path = nothing)
+    if haskey(options, :parse_mode) || haskey(options, :parseMode)
+        throw(_removed_parse_mode_override_error(
+            spec_name = spec_name,
+            spec_path = spec_path,
+        ))
+    end
+    if !isempty(options)
+        option = first(keys(options))
+        throw(ArgumentError("unsupported runtime option '$(String(option))'"))
+    end
+    return nothing
+end
+
 function LinkedSpecRuntimeEngine(
     compiled_spec::CompiledSpec;
-    parse_mode = nothing,
     max_iterations::Int = 10_000,
     spec_name = nothing,
     spec_path = nothing,
+    kwargs...,
 )
+    _reject_removed_runtime_options(kwargs; spec_name = spec_name, spec_path = spec_path)
     if max_iterations <= 0
         throw(ArgumentError("max_iterations must be positive"))
     end
     return LinkedSpecRuntimeEngine(
         compiled_spec,
-        parse_mode === nothing ? nothing : _normalize_parse_mode(parse_mode),
         max_iterations,
         spec_name === nothing ? nothing : String(spec_name),
         spec_path === nothing ? nothing : String(spec_path),
@@ -525,7 +563,7 @@ function _execute_runtime_rule!(
             "generated rule plan does not contain '$label'",
         ))
     end
-    execution_policy = _runtime_rule_execution_policy(engine, rule, generated_family)
+    execution_policy = _runtime_rule_execution_policy(rule, generated_family)
 
     recursion_key = (label, entry_regex_index, context.cursor_codeunit)
     if recursion_key in context.active_rule_entries
@@ -638,7 +676,6 @@ function _execute_runtime_rule!(
 end
 
 function _runtime_rule_execution_policy(
-    engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
     generated_family,
 )
@@ -652,10 +689,7 @@ function _runtime_rule_execution_policy(
     end
     return _RuntimeRuleExecutionPolicy(
         family,
-        something(
-            engine.parse_mode,
-            rule.mode_metadata.is_and ? ConsumeParseMode : SeekParseMode,
-        ),
+        rule.mode_metadata.is_and ? ConsumeParseMode : SeekParseMode,
         rule.mode_metadata.is_and,
     )
 end
@@ -5922,6 +5956,7 @@ function _runtime_diagnostic(
             (effective_rule === nothing ? "julia_runtime" : "julia_runtime:rule:$effective_rule") :
             handler_source_label,
         code = code,
+        option_name = nothing,
         helper_name = helper_name,
         actual_arity = actual_arity,
         expected_arity = expected_arity,
@@ -5972,6 +6007,7 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "rule_label" => diagnostic.rule_label,
         "handler_source_label" => diagnostic.handler_source_label,
         "code" => diagnostic.code,
+        "option_name" => diagnostic.option_name,
         "helper_name" => diagnostic.helper_name,
         "actual_arity" => diagnostic.actual_arity,
         "expected_arity" => diagnostic.expected_arity,

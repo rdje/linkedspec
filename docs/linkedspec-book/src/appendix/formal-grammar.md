@@ -210,9 +210,9 @@ one-or-more-rule source and applies the same resolver for native/primary executi
 code. Zero rules fail with `no_rules_defined` / `validate_spec` before an explicit selector is considered; an
 unknown selector fails with `entry_rule_not_found` / `select_entry_rule` and the requested `entry_rule` field.
 Definition order and authored `is_top` remain immutable, and strict-unused still counts authored edges only.
-Julia's exact shared primary result is now 32/65 in both option environments; all 33 remaining failures are the
-separately owned legacy cursor help/usage/trace projection. Composed routes `.4.2`, cursor migration `.9.1.6`, and
-root admission `.4.3` remain dependency-ordered. Lua still blocks markerless source at validation. Until `.4-.6`
+Julia cursor implementation through `.9.1.6.5` removes the legacy help/usage/trace projection while preserving
+entry selection, so exact shared primary is now 65/65 in both environments. Composed cursor admission `.9.1.6.6`
+and root admission `.4.3` remain dependency-ordered. Lua still blocks markerless source at validation. Until `.4-.6`
 close, retain a `::` for uniform composed cross-backend execution and pass an explicit selector when identity
 matters.
 

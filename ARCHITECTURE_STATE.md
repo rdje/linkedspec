@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
+- `2026-07-18` Julia cursor-option refresh: `FUTURE-PARITY-BACKLOG.9.1.6.5` removes the final caller-global
+  high-level seam. `LinkedSpecRuntimeEngine` stores no cursor mode; engine construction, loaded `create_engine`,
+  corpus execution, and primary execution derive only from entered rule family. Dynamic `parse_mode`/`parseMode`
+  keys fail before input/user code with `prepare_options/parse_mode_override_removed` and normalized
+  `option_name=parse_mode`. Primary help and request trace omit the field; retired `--parse-mode` returns exact
+  usage exit 2 guidance; `--top-rule` is unchanged. `LinkedSpecParseMode` survives only in low-level matching.
+  Focused removal is 53, complete Julia is 3,187, real-process primary is green, shared primary is 65/65x2,
+  corpus is 105/105, and neutral governance is 66 files / 4+4 rollout / 39 mutations. Composed admission `.6`
+  remains the only Julia cursor leaf allowed to advance rollout.
 - `2026-07-18` Julia generated-source v2 refresh: `FUTURE-PARITY-BACKLOG.9.1.6.4` advances new artifacts to
   `linkedspec-generated-source-v2` / format 2 while retaining the minimal ordered label/family plan. Validation
   derives seek for default/OR/repetition families and consume for the five AND families; runtime uses that derived
@@ -13,7 +22,8 @@ This document is the current high-level technical reading of the project shape. 
   and `.spec` regeneration guidance. The private forced-seek v1 engine is gone; compact `Pipe` is generated OR.
   Direct, traced, accepted-subset, root-route, diagnostic, logical, variadic, binding, punctuation, named-mark, and
   fresh isolated module roles pass. Complete Julia is 3,133 plus only the frozen help mismatch; primary remains
-  32/65x2, corpus 105, and governance 67/4+4/39. Public override removal and admission remain `.5-.6`.
+  32/65x2, corpus 105, and governance 67/4+4/39. Public override removal has since landed in `.5`; admission
+  remains `.6`.
 - `2026-07-18` Julia cursor descriptor refresh: `FUTURE-PARITY-BACKLOG.9.1.6.3` makes the outward descriptor a
   pure cursor-v1 projection. Root metadata replaces global `parse_mode` with
   `linkedspec-rule-local-cursor-v1`; each rule derives family/policy and projects aggregate ownership plus exact
@@ -29,7 +39,8 @@ This document is the current high-level technical reading of the project shape. 
   explicit value remains a temporary outer CLI/corpus adapter. Generated v1 uses a private seek/family adapter so
   its v1/format-1 meaning could not drift before `.4`. Focused execution is 104, generated proof 60, complete package
   2,320 plus the frozen help mismatch, corpus 105, shared primary 32/65x2, and governance 67/4+4/39. Generated-v2,
-  descriptor `.3` followed; `.4` has now removed the generated-v1 adapter, while option removal/admission `.5-.6` remain.
+  descriptor `.3` followed; `.4` removed the generated-v1 adapter, `.5` has now removed public options, and
+  admission `.6` remains.
 - `2026-07-18` root-selection decision: ADR `0046` and `linkedspec-root-rule-selection-v1` order selection as
   explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
   Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains
@@ -37,9 +48,10 @@ This document is the current high-level technical reading of the project shape. 
   three failure, and three strict cases plus 34 mutations now govern 4/7: neutral, Perl, Rust, and Dart are
   admitted. Julia preflight `.9.1.1.2.4.0` measures exact shared primary at 31/65 in both environments. Its one
   root-owned failure is markerless validation; 22 help/usage and 11 request-trace failures belong to pending
-  cursor migration `.9.1.6`. Julia already preserves ordered authored markers and its bypass-only runtime resolves
-  explicit > first marker > first rule. Root core `.4.1`, composed routes `.4.2`, cursor `.9.1.6`, and exact 65x2
-  admission `.4.3` are dependency-ordered. Julia is marker-optional; Lua remains marker-required; final
+  cursor migration `.9.1.6`. Julia now preserves ordered authored markers across all composed routes and `.9.1.6.5`
+  has removed those 33 cursor-owned mismatches, producing exact shared 65/65x2. Root core `.4.1`, composed routes
+  `.4.2`, cursor admission `.9.1.6.6`, and exact root admission `.4.3` remain dependency-ordered. Julia is
+  marker-optional; Lua remains marker-required; final
   public no-drift remains `.6`.
 - `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
   spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/

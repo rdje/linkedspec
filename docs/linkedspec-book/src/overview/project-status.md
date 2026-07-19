@@ -22,10 +22,9 @@ explicit/first-marker/first-rule selection before user code, returns portable ze
 strict authored-edge analysis, and publishes immutable descriptor root identity. Its neutral-consuming focused
 suite passes. Route leaf `.4.2` proves loaded/normalized and generated/emitted direct/traced reuse, low requested/
 effective/basis trace, portable loader/generated failures, and generated-plan-first validation through 57
-assertions. Shared primary is exactly 32/65 in both option environments, and corpus remains
-105/105. The 33
-remaining failures are exclusively the pending Julia cursor migration's legacy help/usage/request-trace
-`parse_mode` projection. Dart composed cursor admission `.9.1.5.6` now closes its backend parent with one exact
+assertions. That route leaf measured shared primary at 32/65 in both option environments and corpus 105/105; its
+33 cursor-owned help/usage/request-trace failures are now removed by Julia cursor `.9.1.6.5`. Dart composed cursor
+admission `.9.1.5.6` closes its backend parent with one exact
 15-role consumer, package 271, primary 65x2, corpus 105, and neutral 67-file / 4-of-8 / 39-mutation governance.
 Clean commit `7aa9c578` lands that admission. Behavior-free Julia cursor preflight `.9.1.6.0` is verified, and
 normalization `.9.1.6.1` now classifies every authored family, retains every governed bare-edge shape as typed AST,
@@ -34,8 +33,10 @@ Intrinsic runtime `.9.1.6.2` now derives cursor plus sequence/choice once at eve
 normalized, recursive, and traced rule entry. Children rederive from their own family. Descriptor `.9.1.6.3` now
 publishes cursor v1 plus per-rule family/policy/ownership/edge facts with direct/normalized/loaded byte identity.
 Generated-source `.9.1.6.4` now emits v2/format 2, derives the exact family policy, rejects v1 before payload
-reconstruction, and removes the private v1 engine. Public-option and admission `.5-.6` still precede final exact
-65x2 root admission `.4.3`.
+reconstruction, and removes the private v1 engine. Public-option `.9.1.6.5` now removes engine/loader/corpus/
+primary global ownership, returns targeted API/CLI diagnostics, omits the help/request-trace field, and preserves
+`--top-rule`. Complete Julia is 3,187, shared primary is 65/65 twice, corpus is 105/105, and neutral governance is
+66/4+4/39. Cursor admission `.6` still precedes final root admission `.4.3`.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
@@ -49,10 +50,10 @@ spellings on live and normalized routes, all eight mixed parent/child mechanisms
 loaded-default behavior, recursion, and trace attribution. AND consumes/sequences; OR/default seeks/chooses; each
 child rederives. Descriptor v1 has no descriptor-global field and projects exact semantic edge rows; its focused
 suite passes 809. Generated v2 retains only ordered label/family rows, derives five seek and five consume policies,
-and passes 64 focused assertions across direct, traced, accepted-subset, and fresh-loaded routes. Package execution
-passes 3,133 assertions plus the known help mismatch, primary is 32/65 twice, corpus is 105/105, and governance
-remains 67/4+4/39. Public option removal and admission follow in `.5-.6`; no rollout row advances at generated
-projection.
+and passes focused assertions across direct, traced, accepted-subset, and fresh-loaded routes. Public removal
+leaves only low-level seek/consume matcher primitives and deliberately rejects legacy high-level options before
+execution. Package execution passes 3,187 assertions, primary is 65/65 twice, corpus is 105/105, and governance is
+66/4+4/39. Admission follows in `.6`; no rollout row advances before that composed consumer.
 
 ## Completed phases
 

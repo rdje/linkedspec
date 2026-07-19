@@ -17,11 +17,12 @@ answers:
   - "does generated plan validation run before Julia root selection"
   - "is Julia root rule selection admitted after route convergence"
 date: 2026-07-18
-status: composed routes and generated-v2 prerequisite implemented; topology admission remains pending
+status: composed routes, generated-v2, and cursor-option prerequisite implemented; topology admission remains pending
 tags: [julia, root-rule, top-rule, loader, normalized-json, generated-source, emitted-source, trace, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 adds a 57-assertion route suite. File-loaded and normalized-JSON reconstructed `CompiledSpec` state preserves definition order, authored `is_top`, and descriptor JSON while default and explicit execution call `resolve_entry_rule`. Generated direct/traced and a fresh isolated emitted module apply explicit selector > first authored marker > first authored rule through the same runtime. Low `julia_runtime:entry_rule_selection` decisions record requested/effective/basis; failures record requested identity plus portable stage/code. Loader zero-rule validation projects `no_rules_defined` / `validate_spec`. Generated zero and unknown selection project `no_rules_defined` / `validate_spec` and `entry_rule_not_found` / `select_entry_rule` with requested `entry_rule`, while unrelated execution failures retain `generated_execution_failed`. Generated plan validation remains before selection. Artifacts stay `linkedspec-generated-source-v1` / format 1 with the unchanged minimal ordered label/family plan and existing optional `top_rule` signatures. Core 79, loader 82, emitter 59, routes 57, package progression through the frozen cursor-owned 56/57 help mismatch, exact primary 32/65 twice, corpus 105, and root governance 4/7 plus 34 mutations pass. No admission consumer or rollout row changes; cursor `.9.1.6` and admission `.4.3` remain required."
 evidence_update_2026_07_18_dependency_order: "The route commit satisfies one Julia cursor dependency, not the whole frontier. ADR 0044 and the task graph require active Dart composed admission `.9.1.5.6` to close `.9.1.5` first; Julia cursor `.9.1.6` then precedes root topology admission `.4.3`."
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 advances artifacts to v2/format 2 without changing the minimal plan or top_rule signatures. Root route tests now execute the v2 direct/traced/emitted APIs; contract-first rejection remains before entry selection."
+evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes Julia's 33 cursor-owned shared-primary mismatches while preserving --top-rule. Shared primary is now 65/65 twice; only the composed cursor admission .9.1.6.6 and root topology admission .4.3 remain."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/root_rule_selection_routes_test.jl\")' && python3 tools/check_root_rule_selection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute"
 ---
 
@@ -41,9 +42,11 @@ effective rule, and basis; failure trace uses `<none>` effective/basis plus the 
 generated boundaries preserve zero-rule and unknown-selection identities, while unrelated generated execution
 errors retain their generic classification. Generated plan validation still occurs before selection.
 
-This remains mechanism proof, not rollout admission. Julia stays at shared 32/65 until cursor public removal and
-admission `.9.1.6.5-.6`; `.4.3` must then topology-check all root routes and pass exact 65x2 before advancing 4/7.
+This remains mechanism proof, not rollout admission. Cursor public removal now makes Julia's shared command exact
+at 65/65 twice. Cursor admission `.9.1.6.6` and root admission `.4.3` must still topology-check their complete
+route sets before either rollout advances.
 
 Related: [[julia-root-rule-selection-core]], [[julia-generated-source-scaffold]],
 [[julia-generated-source-v2-rule-local-cursor]],
+[[julia-global-cursor-option-removal]],
 [[dart-root-rule-selection-routes]], and [[rust-root-rule-selection-routes]].

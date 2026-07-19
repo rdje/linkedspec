@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.5 — remove Julia global cursor overrides
+
+Julia's public execution boundary is now rule-local. `LinkedSpecRuntimeEngine` no longer stores or accepts a
+global cursor policy; loaded `create_engine(...)`, corpus execution, and the primary command construct the same
+intrinsic engine. Legacy dynamic `parse_mode` and `parseMode` keywords are rejected before input or user code with
+`stage=prepare_options`, `code=parse_mode_override_removed`, normalized `option_name=parse_mode`, and structural
+authoring guidance. Unknown unrelated keywords retain their ordinary unsupported-option failure.
+
+The primary command removes `--parse-mode` from help, execution state, and canonical request trace. The exact
+retired flag remains recognized only for targeted usage exit 2 and is proven to win over invalid source plus a
+missing input file. `--top-rule` remains independent and keeps priority over authored `Rule::`. Low-level
+`LinkedSpecParseMode`, `runtime_match`, `seek_match`, and `consume_match` remain the internal/public regex matcher
+primitives; they are not high-level parser options.
+
+Focused source/API/process proof passes 53/53 and the ten-family real-process checker. The complete Julia package
+passes 3,187 assertions, the unchanged shared primary manifest passes 65/65 with `POSIXLY_CORRECT` unset and set,
+and corpus remains 105/105. The neutral migration inventory contracts from 67 to 66 files while rollout remains
+4 complete / 4 pending with all 39 mutations effective. Canonical local CI passes root 7+5, cursor 288, reference
+primary 65x2, and Phase 0 1,031/1,031 in 637 seconds. Generated book/cache cleanup passes. Composed 15-role
+admission alone remains `.9.1.6.6`.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.4 — emit Julia generated-source v2
 
 Julia now emits `linkedspec-generated-source-v2` / format 2. The artifact retains exactly one deterministic ordered

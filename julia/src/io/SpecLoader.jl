@@ -134,16 +134,16 @@ end
 
 function create_engine(
     loaded::LoadedCompiledSpec;
-    parse_mode = nothing,
     max_iterations::Int = 10_000,
+    kwargs...,
 )
     request = loaded.loaded.resolved.request
     return LinkedSpecRuntimeEngine(
         loaded.compiled;
-        parse_mode = parse_mode,
         max_iterations = max_iterations,
         spec_name = request.kind == NamedSpecRequest ? request.requested : nothing,
         spec_path = loaded.loaded.resolved.path,
+        kwargs...,
     )
 end
 

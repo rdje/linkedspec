@@ -12,9 +12,9 @@ answers:
   - "how does generated source derive cursor policy"
   - "how do I express AND seek or OR consume without parse_mode"
 date: 2026-07-18
-status: accepted; Perl and Rust admitted, Dart implemented through public removal; rollout 3 complete / 5 pending
+status: accepted; Perl, Rust, and Dart admitted; Julia implemented through public removal; rollout 4 complete / 4 pending
 tags: [dsl, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptor, generated-source, parity]
-evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3` and Rust `.9.1.4` are composed-admitted. Dart `.9.1.5.1-.5` implements normalization, live/reconstructed spending, descriptor v1, generated v2, and exact public/CLI override removal; composed admission remains `.6`. Rollout remains 3/5 while inventory contracts to 66 files with 34 mutations."
+evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3`, Rust `.9.1.4`, and Dart `.9.1.5` are composed-admitted. Julia `.9.1.6.1-.5` implements normalization, live/reconstructed spending, descriptor v1, generated v2, and exact public/CLI override removal; composed admission remains `.6`. Rollout is 4/4 and the current inventory is 66 files with 39 mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
 ---
 
@@ -51,13 +51,12 @@ Generated source moves to `linkedspec-generated-source-v2`. Its plan remains
 families, so no second mutable policy field can drift. Version-1 artifacts must
 be regenerated for v2 admission.
 
-Neutral contract/inventory `.9.1.2` is at 3 complete / 5 pending after composed
-Perl and Rust admission. Rust parser/runtime/descriptor/generated/API/CLI
-behavior plus the exact 15-role consumer are current through `.9.1.4.7`.
-Dart behavior is current through public removal `.9.1.5.5`; its composed
-admission `.6`, Julia, dual-ABI Lua, recurring five-backend admission, and public
-closeout remain dependency-ordered.
+Neutral contract/inventory `.9.1.2` is at 4 complete / 4 pending after composed
+Perl, Rust, and Dart admission. Julia behavior is current through public removal
+`.9.1.6.5`; its composed admission `.6`, dual-ABI Lua, recurring five-backend
+admission, and public closeout remain dependency-ordered.
 
 Related: [[and-or-cursor-ownership-audit]],
 [[rule-local-cursor-ownership-decision]], [[spec-edge-syntax-contract]], and
-[[rule-local-cursor-neutral-contract]], [[FUTURE-PARITY-BACKLOG]].
+[[rule-local-cursor-neutral-contract]], [[julia-global-cursor-option-removal]],
+[[FUTURE-PARITY-BACKLOG]].

@@ -16,6 +16,7 @@ include("root_rule_selection_routes_test.jl")
 include("rule_local_cursor_normalization_test.jl")
 include("rule_local_cursor_execution_test.jl")
 include("rule_local_cursor_descriptor_test.jl")
+include("rule_local_cursor_option_removal_test.jl")
 include("logical_helper_contract_test.jl")
 include("variadic_user_function_contract_test.jl")
 include("uniform_binding_contract_test.jl")
@@ -502,8 +503,6 @@ end
         "--inline-spec=Top:: /x/",
         "--top-rule",
         "Top",
-        "--parse-mode",
-        "consume",
         "--trace",
         "DEBUG",
         "--trace-file",
@@ -516,7 +515,6 @@ end
     @test inline_options.inline_spec == "Top:: /x/"
     @test inline_options.input == "x"
     @test inline_options.top_rule == "Top"
-    @test inline_options.parse_mode == "consume"
     @test inline_options.trace_level == "DEBUG"
     @test inline_options.trace_file == "trace.log"
     @test inline_options.trace_mode == "route"
@@ -559,7 +557,8 @@ end
     )
     @test usage_failure(
         ["--inline-spec", "Top:: /x/", "--input", "x", "--parse-mode", "scan"],
-        "--parse-mode must be 'seek' or 'consume'",
+        "--parse-mode has been removed; " *
+        "cursor policy is derived from each rule (OR/default=seek, AND=consume)",
     )
     @test usage_failure(
         ["--inline-spec", "Top:: /x/", "--input", "x", "--trace", "loud"],
@@ -783,8 +782,6 @@ Alternate:
         "x",
         "--top-rule",
         "Alternate",
-        "--parse-mode",
-        "consume",
     ])
     @test status == 0
     @test output == "\"alternate\"\n"
@@ -801,8 +798,6 @@ Top::AND
         consume_spec,
         "--input",
         "prefix abcd",
-        "--parse-mode",
-        "consume",
     ]
     status, output, error_output = cli_run(consume_args)
     @test status == 0
@@ -854,7 +849,7 @@ Top::
         @test trace_text ==
             "[linkedspec][low] compile:start\n" *
             "[linkedspec][medium] request source=file input=file " *
-            "top_rule=<default> parse_mode=seek\n" *
+            "top_rule=<default>\n" *
             "[linkedspec][high] arguments source_bytes=$(ncodeunits(spec_path)) " *
             "input_bytes=$(ncodeunits(input_path))\n" *
             "[linkedspec][low] compile:ok\n" *
@@ -942,7 +937,7 @@ end
         expected_trace =
             "[linkedspec][low] compile:start\n" *
             "[linkedspec][medium] request source=inline input=literal " *
-            "top_rule=<default> parse_mode=seek\n" *
+            "top_rule=<default>\n" *
             "[linkedspec][high] arguments source_bytes=$(ncodeunits(trace_spec)) input_bytes=1\n" *
             "[linkedspec][low] compile:ok\n" *
             "[linkedspec][low] input:start\n" *
@@ -1828,10 +1823,9 @@ end
 end
 
 @testset "Runtime rule interpreter" begin
-    runtime_engine(source; parse_mode = SeekParseMode, max_iterations = 10_000) =
+    runtime_engine(source; max_iterations = 10_000) =
         LinkedSpecRuntimeEngine(
             compile_spec(parse_spec(source));
-            parse_mode = parse_mode,
             max_iterations = max_iterations,
         )
 
@@ -2010,15 +2004,12 @@ Top::OR{1}
         "line" => 2,
     )
 
-    consume_and = runtime_engine(
-        raw"""
+    consume_and = runtime_engine(raw"""
 Top::AND
  /ab/
  /cd/
  E { return(match_text()) }
-""";
-        parse_mode = "consume",
-    )
+""")
     consume_result = runtime_parse(consume_and, "abcd")
     @test consume_result.value == "cd"
     @test consume_result.cursor_codeunit == 4
@@ -2129,8 +2120,7 @@ Top::
 end
 
 @testset "Runtime core value stores and capture helpers" begin
-    runtime_engine(source; parse_mode = SeekParseMode) =
-        LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)); parse_mode = parse_mode)
+    runtime_engine(source) = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
 
     typed_stores = runtime_engine(raw"""
 Top::
@@ -3241,11 +3231,9 @@ Top::
 end
 
 @testset "Runtime cursor controls and boundary capture" begin
-    runtime_engine(source; parse_mode = SeekParseMode) =
-        LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)); parse_mode = parse_mode)
+    runtime_engine(source) = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
 
-    saved_cursor = runtime_engine(
-        raw"""
+    saved_cursor = runtime_engine(raw"""
 Top::AND
  /ab/ -> Top[0] { save_cursor() }
  /cd/ -> Top[1] { save_cursor() }
@@ -3261,9 +3249,7 @@ Top::AND
      "marker", marker
    ))
  }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     saved_result = runtime_parse(saved_cursor, "abcd")
     @test saved_result.value == Dict{String,Any}(
         "first_restore" => 4,
@@ -3308,15 +3294,12 @@ Top::AND
     )
     @test entry_rewind_result.cursor_codeunit == 0
 
-    consume_rewind = runtime_engine(
-        raw"""
+    consume_rewind = runtime_engine(raw"""
 Top::AND
  /ab/ -> Top[0] { rewind_match_start() }
  /ab/
  E { return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     consume_rewind_result = runtime_parse(consume_rewind, "ab")
     @test consume_rewind_result.value == Dict{String,Any}(
         "cursor" => 2,
@@ -3324,8 +3307,7 @@ Top::AND
     )
     @test consume_rewind_result.cursor_codeunit == 2
 
-    char_helpers = runtime_engine(
-        raw"""
+    char_helpers = runtime_engine(raw"""
 Top::AND
  /é/
  /x/
@@ -3344,9 +3326,7 @@ Top::AND
      "end_col", input_end_col()
    ))
  }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     @test runtime_parse(char_helpers, "éx").value == Dict{String,Any}(
         "cursor" => 2,
         "cursor_line" => 1,
@@ -3361,8 +3341,7 @@ Top::AND
         "end_col" => 3,
     )
 
-    anonymous_capture_readers = runtime_engine(
-        raw"""
+    anonymous_capture_readers = runtime_engine(raw"""
 Top::AND
  /BEGIN\n/ -> Top[0] { start_capture_slice() }
  /ébody/
@@ -3393,9 +3372,7 @@ Top::AND
      "remaining_len", capture_rest_len()
    ))
  }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     @test runtime_parse(anonymous_capture_readers, "BEGIN\nébodyENDTAIL").value == Dict{String,Any}(
         "slice" => "ébody",
         "slice_len" => 5,
@@ -3411,8 +3388,7 @@ Top::AND
         "remaining_len" => 0,
     )
 
-    anonymous_capture_take = runtime_engine(
-        raw"""
+    anonymous_capture_take = runtime_engine(raw"""
 Top::AND
  /BEGIN\n/ -> Top[0] { start_capture_slice() }
  /ébody/
@@ -3421,13 +3397,10 @@ Top::AND
    tail_len = capture_take_rest_len()
    return(array(taken, tail_len, capture_rest()))
  }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     @test runtime_parse(anonymous_capture_take, "BEGIN\nébodyENDTAIL").value == Any["ébody", 4, ""]
 
-    anonymous_capture_until_cursor = runtime_engine(
-        raw"""
+    anonymous_capture_until_cursor = runtime_engine(raw"""
 Top::AND
  /BEGIN\n/ -> Top[0] { start_capture_slice() }
  /ébody/ -> Top[1] {
@@ -3438,9 +3411,7 @@ Top::AND
    close_len = capture_take_until_cursor_len()
    return(array(body, body_remainder_len, close_len, capture_slice_pos(), capture_rest()))
  }
-""";
-        parse_mode = ConsumeParseMode,
-    )
+""")
     @test runtime_parse(anonymous_capture_until_cursor, "BEGIN\nébodyENDTAIL").value ==
         Any["ébody", 0, 3, 14, "TAIL"]
 

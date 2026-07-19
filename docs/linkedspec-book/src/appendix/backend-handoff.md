@@ -70,8 +70,8 @@ the same optional controls:
 
 The retired `--parse-mode` flag is recognized only as a usage error: exit `2`
 with `--parse-mode has been removed; cursor policy is derived from each rule
-(OR/default=seek, AND=consume)`. Perl, Rust, and Dart project those shared
-fixture bytes; Julia and Lua migrate to the same interface in order.
+(OR/default=seek, AND=consume)`. Perl, Rust, Dart, and Julia project those
+shared fixture bytes; Lua migrates to the same interface later in order.
 
 There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
 status probes are separate developer commands. Trace levels accept numeric values plus the
@@ -2079,7 +2079,12 @@ ownership/target/child-index/block/fluent rows. Direct, normalized `SpecFile`-JS
 agree across a focused 809-assertion suite, including all valid and invalid neutral edge cases. Generated-source
 `.9.1.6.4` now emits v2/format 2 with the same minimal label/family plan, derives all five seek/five consume
 policies, rejects v1 before payload reconstruction, and removes the private v1 adapter. Public option removal
-remains `.9.1.6.5`; admission alone advances the rollout in `.9.1.6.6`.
+`.9.1.6.5` now removes engine state plus engine/loader/corpus/primary overrides. Legacy dynamic API spellings fail
+before input/user code with `prepare_options/parse_mode_override_removed`; the primary flag fails at usage exit 2,
+help and request trace omit the field, and `--top-rule` remains independent. Low-level seek/consume matcher
+primitives remain. Complete Julia passes 3,187 package assertions, the ten-family real-process checker, the shared
+65-case primary manifest twice, and 105/105 corpus fixtures. Neutral governance is 66 files, 4 complete / 4
+pending, and 39 mutations. Admission alone advances the rollout in `.9.1.6.6`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

@@ -34,8 +34,11 @@ sequence and OR-default-seek/choice once at every live, loaded-default, normaliz
 entry. All 36 families, eight parent/child rows, and two structural replacements are exact in 104 focused
 assertions. Descriptor v1 and generated-source v2 are now complete through `.4`: new Julia artifacts carry
 contract/format 2, derive five seek and five consume policies from minimal label/family rows, and reject v1 before
-payload reconstruction with regeneration guidance. Public option removal `.5` and admission `.6` remain before
-exact 65x2 root admission `.4.3`. Lua fallback remains blocked by
+payload reconstruction with regeneration guidance. Public option removal `.5` now deletes engine state and every
+high-level engine/loader/corpus/primary override, rejects legacy API keys during `prepare_options`, removes the
+help/request-trace field, and preserves `--top-rule` while the retired flag returns targeted usage exit 2.
+Complete Julia passes 3,187 assertions, exact shared primary 65/65 in both environments, corpus 105/105, and
+neutral governance 66/4+4/39. Composed cursor admission `.6` remains before exact root admission `.4.3`. Lua fallback remains blocked by
 validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
@@ -45,8 +48,8 @@ structural replacements are exact. Descriptor state now publishes cursor-contrac
 derived policy, ownership, and ordered semantic edges with no global mode. Direct, normalized, and loaded
 descriptor bytes agree. Generated source now emits v2/format 2 and executes direct, traced, and freshly loaded
 modules from family-derived policy without a serialized cursor field; old v1 artifacts are legacy and must be
-regenerated from `.spec`. Outer CLI/corpus callers retain an explicit compatibility override until `.5`; the
-remaining order is option/CLI removal followed by 15-role admission.
+regenerated from `.spec`. Normal engine, loaded-engine, corpus, and primary callers expose no global cursor option;
+legacy dynamic keys fail deliberately rather than being accepted or ignored. Only 15-role admission remains.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

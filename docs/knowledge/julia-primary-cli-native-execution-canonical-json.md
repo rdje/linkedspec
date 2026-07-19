@@ -8,12 +8,14 @@ answers:
   - does Julia CLI output use RuntimeParseResult value or output
   - how does the Julia primary CLI sort JSON object keys
   - are nested Julia CLI JSON keys canonical
-  - does Julia primary execution support top rule parse mode and trace
+  - does Julia primary execution support top rule and trace
+  - does Julia primary execution accept a global parse mode
   - what did JULIA-BACKEND-PARITY.7.3.2.3 implement
 date: 2026-07-10
 status: current
 tags: [julia, cli, execution, json, parser, compiler, runtime, parity, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.3 composes prepared requests through native rule/function parsing, compile/runtime controls, and recursive canonical JSON. Twenty-two focused assertions, the 942-assertion suite, direct canonical primary smoke, and 99/99 pass."
+evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes the global cursor control from prepared requests and engine construction. Rule families now provide the only high-level cursor policy; explicit --top-rule and all trace controls remain."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_execute_primary_cli_request|_parse_primary_cli_spec|_write_primary_cli_canonical_json|Primary CLI execution and canonical JSON' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl"
 ---
 
@@ -21,7 +23,7 @@ Julia's primary parser command executes prepared requests entirely in process. I
 tries rule-only `parse_spec(...)` first and falls back to
 `parse_spec_with_staged_user_function_definitions(...)` only on a source parse
 exception. It then uses `compile_spec(...)`, constructs
-`LinkedSpecRuntimeEngine` with source identity and seek/consume mode, and calls
+`LinkedSpecRuntimeEngine` with source identity, and calls
 `runtime_execute(...)` with the selected top rule. One optional trace emitter is
 shared across every phase.
 
@@ -34,7 +36,7 @@ object level lexicographically before encoding and the command adds exactly one
 newline, so Julia dictionary insertion order cannot change stdout.
 
 Focused coverage includes rule-only and top-level-function source, explicit top
-rule, consume mode, inline/file source and input, routed trace reset, direct
+rule, family-derived AND consumption, inline/file source and input, routed trace reset, direct
 scalar/null/array values, JSON escaping, nested unsorted maps, and rejection of
 non-string object keys. `.7.3.2.4` has since closed failure/exit normalization
 and the complete trace routing matrix.
@@ -42,4 +44,4 @@ and the complete trace routing matrix.
 Related facts: [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-mechanism-audit]], [[julia-frontend-compiler-staged-trace-events]],
 [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-global-cursor-option-removal]].

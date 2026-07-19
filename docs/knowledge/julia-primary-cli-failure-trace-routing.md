@@ -15,6 +15,7 @@ date: 2026-07-10
 status: current
 tags: [julia, cli, diagnostics, trace, routing, exit-status, parity, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.4 adds native phase/trace controls; FUTURE-PARITY-BACKLOG.1.5.4.1 narrows primary stderr to one phase heading while native structured exceptions remain available."
+evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes parse_mode from canonical request trace and returns the retired --parse-mode migration message as usage exit 2 before operational phases."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_print_primary_cli_runtime_error|_load_primary_cli_request_input|_primary_cli_fatal_error|_trace_emoji_prefix|Primary CLI failures and trace routing' julia/src julia/test/runtests.jl"
 ---
 
@@ -46,6 +47,10 @@ Emoji rendering is owned by the shared emitter, not the CLI adapter. The level
 threshold prefixes are `🛑`, `ℹ️`, `🔎`, `🧭`, `🐞`, and `🔥` from none through
 debug. A disabled level still emits nothing.
 
+Canonical request trace identifies source, input, and requested top rule only.
+It contains no global cursor field; entered-rule trace below the primary adapter
+continues to report each rule's derived family policy.
+
 This began as Julia-local completion. `.1.5.4.1` locks phase-only primary stderr and exact shared help. `.1.5.4.2`
 now projects canonical phase trace through the primary command while preserving rich native exceptions/trace below
 the adapter. Julia passes 61/61 default/POSIX.
@@ -53,5 +58,6 @@ the adapter. Julia passes 61/61 default/POSIX.
 Related facts: [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-arguments-resolution-loading]], [[julia-trace-controls-sinks]],
 [[julia-runtime-structured-diagnostics]], [[user-observable-backend-cli-parity-contract]],
-[[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]].
+[[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]],
+[[julia-global-cursor-option-removal]].
 See also [[julia-primary-cli-process-conformance]].

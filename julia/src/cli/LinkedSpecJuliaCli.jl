@@ -18,7 +18,6 @@ struct _PrimaryCliOptions
     input::Union{Nothing,String}
     input_file::Union{Nothing,String}
     top_rule::Union{Nothing,String}
-    parse_mode::Union{Nothing,String}
     trace_level::Union{Nothing,String}
     trace_file::Union{Nothing,String}
     trace_mode::Union{Nothing,String}
@@ -52,7 +51,6 @@ const _PRIMARY_CLI_VALUE_OPTIONS = Set([
     "--input",
     "--input-file",
     "--top-rule",
-    "--parse-mode",
     "--trace",
     "--trace-file",
     "--trace-mode",
@@ -80,7 +78,6 @@ Text encoding:
 
 Parser options:
   --top-rule NAME      Select the entry rule
-  --parse-mode MODE    MODE is seek or consume
 
 Trace options:
   --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
@@ -128,7 +125,16 @@ function _parse_primary_cli_args(args)
         argument = arguments[index]
         option, inline_value = _split_primary_cli_option(argument)
 
-        if option == "--help" || option == "-h"
+        if option == "--parse-mode"
+            push!(errors,
+                "--parse-mode has been removed; " *
+                "cursor policy is derived from each rule (OR/default=seek, AND=consume)",
+            )
+            if inline_value === nothing && index < length(arguments) &&
+                    !startswith(arguments[index + 1], "-")
+                index += 1
+            end
+        elseif option == "--help" || option == "-h"
             if inline_value !== nothing
                 push!(errors, "$option does not accept a value")
             else
@@ -174,7 +180,6 @@ function _parse_primary_cli_args(args)
         values["--input"],
         values["--input-file"],
         values["--top-rule"],
-        values["--parse-mode"],
         values["--trace"],
         values["--trace-file"],
         values["--trace-mode"],
@@ -200,9 +205,6 @@ function _parse_primary_cli_args(args)
         throw(_PrimaryCliUsageException(
             "choose exactly one input option: --input or --input-file",
         ))
-    end
-    if options.parse_mode !== nothing && !(options.parse_mode in ("seek", "consume"))
-        throw(_PrimaryCliUsageException("--parse-mode must be 'seek' or 'consume'"))
     end
     if options.trace_level !== nothing
         if !_primary_cli_valid_trace_level(options.trace_level)
@@ -567,7 +569,6 @@ function _compile_primary_cli_request(
     if request.loaded_spec !== nothing
         return LinkedSpecRuntimeEngine(
             request.loaded_spec.compiled;
-            parse_mode = something(request.options.parse_mode, "seek"),
             spec_name = request.spec_name,
             spec_path = request.spec_path,
         )
@@ -576,7 +577,6 @@ function _compile_primary_cli_request(
     compiled = compile_spec(spec; trace = trace)
     return LinkedSpecRuntimeEngine(
         compiled;
-        parse_mode = something(request.options.parse_mode, "seek"),
         spec_name = request.spec_name,
         spec_path = request.spec_path,
     )
@@ -714,14 +714,12 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
     input_argument = something(options.input_file, options.input, "")
     top_rule = options.top_rule === nothing ? "<default>" :
         _primary_cli_trace_field(options.top_rule)
-    parse_mode = something(options.parse_mode, "seek")
-
     initial_events = (
         (100, "low", "compile:start"),
         (
             200,
             "medium",
-            "request source=$source_kind input=$input_kind top_rule=$top_rule parse_mode=$parse_mode",
+            "request source=$source_kind input=$input_kind top_rule=$top_rule",
         ),
         (
             300,

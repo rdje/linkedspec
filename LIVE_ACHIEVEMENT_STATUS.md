@@ -8,13 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.4` — Julia generated-source v2 is fully signed off from clean descriptor commit
-  `3caeb097` at ahead 226 and awaits only its prepared commit. Public option removal `.5` and admission `.6` stay
-  excluded and may activate only after the clean boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.6.5` — Julia global cursor-option removal is complete and verified from clean
+  generated-v2 commit `20a37cd2` at ahead 227. Engine/loader/corpus/primary removal and exact API/CLI diagnostics
+  are implemented; focused 53, complete package 3,187, ten processes, shared primary 65x2, corpus 105, neutral
+  66/4+4/39, capability/KM/mdBook/doctrines all pass. Canonical local CI also passes root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 637 seconds. Generated book/cache cleanup is complete; only the
+  per-leaf commit remains, and composed admission `.6` stays excluded until the repository is clean.
 
 ## Latest Completed Slice
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.4 — emit Julia generated-source v2**
-  (DONE, verified, and awaiting its prepared clean commit).
+  (DONE at clean commit `20a37cd2`).
 
   **Result:** Current Julia emission is v2/format 2 from minimal ordered label/family rows. Contract identity
   validates before payload reconstruction; the neutral five-seek/five-consume map drives current direct/traced/
@@ -26,7 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   618/4,489; mdBook/four doctrines; canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031 in 643 seconds.
   Generated 11 MiB book and 28 KiB Python cache are removed.
 
-  **Next:** Commit `.9.1.6.4` cleanly, then activate public-option/CLI migration `.9.1.6.5` task-tree-first.
+  **Next:** Public-option/CLI migration `.9.1.6.5` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.3 — project Julia cursor descriptor v1**
   (DONE at clean commit `3caeb097`).

@@ -74,10 +74,13 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > and semantic edge rows with no global cursor field. Generated-source v2 is
 > now current: its minimal family plan derives five seek and five consume
 > policies, rejects v1 before payload reconstruction, and has no serialized
-> cursor override. Option removal and admission remain `.5-.6`.
+> cursor override. Julia `.9.1.6.5` now removes engine/loader/corpus/primary
+> global options, rejects the retired API/CLI spellings before execution,
+> removes the help/request-trace field, and preserves `--top-rule`.
+> Admission alone remains `.9.1.6.6`.
 > Rollout is 4 complete / 4 pending, with Julia, Lua, recurring five-backend,
 > and public no-drift work dependency-ordered under `.9.1.6-.9`; the current
-> governed inventory is 67 files with 39 effective mutations.
+> governed inventory is 66 files with 39 effective mutations.
 
 ## Current rule-label surface
 
@@ -586,7 +589,7 @@ Generated-source v2 now derives the same policy from its minimal ordered family 
 cursor field. Rust execution options now select only an entry rule; the primary command rejects the retired
 global flag and request traces carry no global cursor field. Express cursor semantics with rule families.
 
-## Removed Perl, Rust, and Dart option boundaries
+## Removed Perl, Rust, Dart, and Julia option boundaries
 
 The Perl reference rejects `parse_mode` in inline, file-oriented, and generated-source construction. The failure
 occurs before source parsing with `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, and
@@ -615,7 +618,7 @@ my $cursor_contract = $descriptor->{meta}{cursor_contract};
 # linkedspec-rule-local-cursor-v1
 ```
 
-Inspect each rule's family-derived `cursor_policy`. The Perl, Rust, and Dart primary `--parse-mode` flag is
+Inspect each rule's family-derived `cursor_policy`. The Perl, Rust, Dart, and Julia primary `--parse-mode` flag is
 recognized only far enough to produce usage exit 2 and the targeted structural-migration message.
 The flag is never accepted or ignored. Rust native callers use `ExecutionOptions` only to select an entry rule.
 Dart native callers construct `LinkedSpecRuntimeEngine(compiled)` and loaded callers use
@@ -633,6 +636,28 @@ final loadedValue = loaded.createEngine().execute(input).value;
 
 Dart still exports `LinkedSpecParseMode` for the low-level regex matcher primitives that implement seek and
 consume. That primitive is not a parser, loader, corpus, or staged-parser option.
+
+Julia has the same boundary. Construct an engine without a cursor option; a
+loaded engine and corpus execution do the same:
+
+```julia
+using LinkedSpecJulia
+
+compiled = compile_spec(parse_spec(source))
+value = runtime_execute(LinkedSpecRuntimeEngine(compiled), input; top_rule="Top").value
+
+loaded = load_and_compile_spec(request, load_options)
+loaded_value = runtime_execute(create_engine(loaded), input).value
+```
+
+The retired dynamic `parse_mode` and `parseMode` keywords are not silently
+ignored. They fail before input or user code with
+`prepare_options/parse_mode_override_removed` and
+`option_name = "parse_mode"`. Julia retains `LinkedSpecParseMode`,
+`runtime_match`, `seek_match`, and `consume_match` only as low-level matching
+primitives. The primary command retains `--top-rule`, omits global cursor state
+from help and request trace, and returns the same targeted usage error for the
+retired flag.
 
 ## Choosing a mode
 
@@ -656,7 +681,7 @@ input is the goal. Compose strict and progressive rules structurally when one gr
 Rule composition, action/lifecycle placement, and cursor discipline remain distinct diagnostic axes. If a rule
 does not behave as expected, inspect the label-derived family/policy first, then the body edge family (`->` versus
 `=>`), then the exact cursor at which the rule was entered. Do not try to debug normal Perl execution with the
-removed `parse_mode` option; author or inspect the rule structure instead.
+removed `parse_mode` option on a migrated backend; author or inspect the rule structure instead.
 
 ## Rule-local rollout
 
@@ -686,12 +711,12 @@ The Perl reference implements both the decision's bare-edge normalization and no
 implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
 derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
 family/policy/edge facts through descriptor v1. Dart `.9.1.5.1-.5` now implements the same typed normalization,
-live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1-.4` now
+live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1-.5` now
 implements typed normalization, live/loaded/normalized/recursive/traced entered-rule policy, descriptor v1, and
-generated-source v2:
+generated-source v2, then removes the public/primary override:
 every family and edge shape is exact in AST/validation/compiled state, every ordinary rule spends its own derived
 policy, outward descriptors project those same normalized facts, and generated artifacts derive the same policy
-from their minimal family plan. Public option removal and admission remain staged. A
+from their minimal family plan. Composed admission remains staged. A
 complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;

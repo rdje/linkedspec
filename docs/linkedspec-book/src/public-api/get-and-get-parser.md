@@ -5,8 +5,8 @@
 > `emit_generated_source` now reject the legacy dynamic key during
 > `prepare_options` with `parse_mode_override_removed`; the primary
 > `--parse-mode` flag returns usage exit 2 with a targeted migration message.
-> Rust has also removed its static execution/runtime override and primary flag;
-> Dart, Julia, and Lua follow in their dependency-ordered rollout leaves.
+> Rust, Dart, and Julia have also removed their engine/runtime overrides and
+> primary flag; Lua follows in its dependency-ordered rollout leaf.
 
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
@@ -545,11 +545,11 @@ projects `no_rules_defined` at `validate_spec`. Generated unknown selection proj
 `validate_spec`. Invalid generated plans still fail at `validate_generated_plan` before any selection attempt.
 Unrelated generated runtime failures retain `generated_execution_failed`.
 
-The exact shared primary boundary is now 32/65 twice. All 33 remaining failures are not root selection: 22
-help/usage cases still expose the pending global `--parse-mode` removal, and 11 medium-or-higher request traces
-still include `parse_mode=seek`. Route convergence `.4.2` is complete and isolated from cursor work. Exact 65x2
-topology admission `.4.3` waits for cursor migration `.9.1.6`, preventing either semantic program from hiding the
-other's failures.
+Julia's exact shared primary boundary is now 65/65 twice. Cursor-option removal `.9.1.6.5` deleted the former 22
+help/usage and 11 request-trace mismatches while preserving `--top-rule`; the retired flag now returns the targeted
+usage error and request trace carries no global cursor field. Route convergence `.4.2` remains isolated from cursor
+work. Cursor admission `.9.1.6.6` and exact root topology admission `.4.3` still have independent composed-role
+obligations, so passing command bytes alone does not advance either rollout.
 
 Until those leaves land, use a marker when the same source must run on Lua or satisfy the not-yet-complete
 five-backend admission, even when supplying `--top-rule`:

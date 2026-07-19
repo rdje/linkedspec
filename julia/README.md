@@ -6,7 +6,7 @@ parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
 composition plus full ordered 105-fixture library and CLI execution. Local-gate integration and native primary
-rule/function execution with direct canonical JSON, stable failure/trace routing, and nine-family direct-process
+rule/function execution with direct canonical JSON, stable failure/trace routing, and ten-family direct-process
 conformance are complete. Cross-backend cursor admission and final complete-parity closeout remain open; current
 generated source is v2/format 2. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
 identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
@@ -17,24 +17,25 @@ Current global rollout is intentionally ahead of this historical local milestone
 `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` accepts one-or-more-rule markerless sources and resolves an explicit selector,
 the first authored marker, or the first authored rule from one compiled-state owner before runtime context or user
 code. Portable zero/unknown failures, strict authored-edge behavior, and immutable descriptor root identity are
-locked by a neutral-consuming focused suite. Shared primary now passes exactly 32/65 cases in both default and
-POSIX environments; the identical 33 remaining failures are the separately pending cursor migration's legacy
-global-option help/usage/request-trace projection. The package gate reaches the same cursor boundary at 56/57 in
-its primary-arguments testset, while standalone corpus execution remains 105/105. Composed root routes `.4.2`
+locked by a neutral-consuming focused suite. The root-core leaf initially reached 32/65 in both environments with
+33 cursor-owned failures; cursor option removal has since advanced the unchanged manifest to 65/65 twice and the
+complete package to 3,187/3,187. Standalone corpus execution remains 105/105. Composed root routes `.4.2`
 now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
 same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
 zero/unknown identities, and plan validation remains first. Cursor generated-source `.9.1.6.4` now emits
 contract-v2/format 2 with the same minimal label/family plan, derives the exact five seek/five consume mapping,
 rejects v1 before payload reconstruction, and removes the private v1 forced-seek engine. Dart cursor admission is
-cleanly committed at `7aa9c578`, satisfying Julia's final cursor dependency; exact 65x2 root admission `.4.3`
-follows Julia cursor, so rollout remains 4/7.
+cleanly committed at `7aa9c578`, satisfying Julia's final cursor dependency. Public cursor-option removal `.5`
+now removes engine/loader/corpus/primary global state, rejects legacy API/CLI spellings before execution, omits the
+help/request-trace field, and preserves `--top-rule`. Complete Julia is 3,187, shared primary is 65/65 twice, and
+corpus is 105/105. Composed cursor admission `.6` and exact root admission `.4.3` remain, so rollout stays 4/7.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
 was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal
-execution `.2`, descriptor v1 `.3`, and generated v2 `.4` have now corrected their owned seams. Shared primary
-remains 32/65 twice and the package retains only the 56/57 help boundary until option/CLI removal `.5`; composed
-admission remains `.6`, and corpus stays 105/105.
+execution `.2`, descriptor v1 `.3`, generated v2 `.4`, and public option removal `.5` have now corrected their
+owned seams. Shared primary is 65/65 twice, the package passes all 3,187 assertions, and corpus stays 105/105;
+composed admission remains `.6`.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -66,7 +67,7 @@ Run the complete repo-owned Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It runs package tests, the nine-family primary process checker in `tools/check_julia_primary_cli.sh`, corpus-
+It runs package tests, the ten-family primary process checker in `tools/check_julia_primary_cli.sh`, corpus-
 runner help, and the full 105-fixture corpus. The shared
 core gate includes it only when explicitly requested:
 
@@ -74,9 +75,9 @@ core gate includes it only when explicitly requested:
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
-At the active route boundary this complete driver is expected to stop at the pending cursor-owned help mismatch;
-do not report it green. Use the exact shared runner to classify 32/65 twice and the standalone corpus command to
-verify 105/105 until cursor migration and root admission converge. The focused route suite is:
+The complete driver is now expected to pass. Use the exact shared runner to verify 65/65 in both environments and
+the standalone corpus command to verify 105/105; cursor/root rollout still waits for their separate topology
+admission leaves. The focused route suite is:
 
 ```bash
 JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \

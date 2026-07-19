@@ -33,6 +33,7 @@ dart_routes_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 proves Dart lo
 dart_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 admits Dart through one topology-checked 15-role consumer and exact package 270 / primary 65x2 / corpus 105 proof. Root-selection rollout is now 4 complete / 3 pending; Julia, Lua/LuaJIT, and final no-drift remain."
 julia_core_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 implements marker-optional Julia core selection through one compiled-state resolver before user code, portable zero/unknown failures, strict authored-edge no-drift, and immutable descriptor root identity. Shared primary is exactly 32/65 twice with only the 33 cursor failures remaining; composed routes/admission stay pending, so rollout remains 4/7."
 julia_routes_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 makes Julia loaded/normalized/generated/emitted direct/traced routes reuse the resolver, adds low requested/effective/basis trace, preserves portable loader/generated failures and generated v1 identity, and keeps plan validation before selection. Cursor/admission stay pending, so rollout remains 4/7."
+julia_cursor_option_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.6.1-.5 implements Julia cursor normalization/runtime/descriptor/generated-v2/public removal while preserving --top-rule. Shared primary is now 65/65 twice; cursor admission .6 and root admission .4.3 remain separate topology gates."
 reverify: "perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b/\\n\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, runtime_ctx_ref=>\\%c); print ${$c{parser_source_chunks_ref}};'  # emits a standard `Pair => sub { ... while ($idx < 2) { LinkedRE::or(...) } ... }` AND handler -- a top rule compiled exactly like a body rule"
 ---
 
@@ -61,7 +62,8 @@ This supersedes the earlier June 17 "no regex on top / two-rule minimum" validit
   first by the authored-marker default. The accepted 2026-07-18 direction adds two surrounding selection rules:
   an explicit selector has higher priority than the marker, while the first authored ordinary rule is the fallback
   when no marker exists. Perl, Rust, and Dart implement and admit that exact order. Julia core and composed routes
-  implement it without admission; Julia cursor/admission, Lua, and final five-backend admission remain tracked
+  implement it without admission, and its cursor/CLI prerequisites are current through `.9.1.6.5`; Julia
+  cursor/root admission, Lua, and final five-backend admission remain tracked
   under `FUTURE-PARITY-BACKLOG.9.1.1.2.4-.6`.
 
 ## The idiom vs the law (ADR 0010)

@@ -2,14 +2,13 @@
 
 > **Rule-local descriptor v1:** ADR `0044` removes descriptor-wide
 > `meta.parse_mode` and every public rule field named `parse_mode`. Perl
-> `.9.1.3.3`, Rust `.9.1.4.4`, and Dart `.9.1.5.3` expose
+> `.9.1.3.3`, Rust `.9.1.4.4`, Dart `.9.1.5.3`, and Julia `.9.1.6.3` expose
 > `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
-> `resolved_edges`. Perl, Rust, and Dart generated-source v2 and option/CLI removal are complete.
-> Dart composed admission remains `.9.1.5.6`;
-> Julia and Lua cursor migration, recurring five-backend admission, and public no-drift remain dependency-ordered.
-> Independently, Julia root core now publishes root-selection identity while retaining its cursor-owned legacy
-> `parse_mode` field until `.9.1.6`.
+> `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2 and option/CLI removal are complete. Julia
+> composed cursor admission remains `.9.1.6.6`; Lua cursor migration, recurring five-backend admission, and public
+> no-drift remain dependency-ordered. Independently, Julia root core publishes root-selection identity and its
+> descriptor contains no cursor-owned legacy field.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 
@@ -394,7 +393,7 @@ functions. This descriptor fact does not promote the separately future generic c
 Important current fields include:
 
 - `descriptor_model`
-- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, and Dart)
+- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
 - `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl, Rust, Dart, and Julia; Julia composed
   root-route admission is pending)
 - `definition_order`
@@ -531,7 +530,8 @@ compiled state does not retain that non-semantic provenance.
 Julia does not deserialize the outward descriptor. Its reconstruction route round-trips normalized `SpecFile`
 JSON and recompiles; file loading invokes that same compiler. Direct, normalized, and file-loaded projections are
 JSON-byte-identical, while invalid reconstructed edge state fails portable validation before projection. Generated
-source remains a separate v1 artifact contract until Julia's ordered generated-v2 leaf.
+source is a separate v2 artifact contract derived from the same family facts; it does not deserialize descriptor
+cursor fields.
 
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
