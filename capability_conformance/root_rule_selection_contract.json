@@ -273,6 +273,36 @@
       "trace_failure_invoke_escaped_field"
     ]
   },
+  "julia_admission": {
+    "consumer_path": "julia/test/root_rule_selection_admission_test.jl",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_julia_local.sh",
+    "roles": [
+      "neutral_selection",
+      "neutral_failures",
+      "neutral_strict",
+      "native",
+      "loaded",
+      "reconstructed",
+      "generated_direct",
+      "generated_traced",
+      "emitted_source_direct",
+      "emitted_source_traced",
+      "descriptor",
+      "diagnostic",
+      "runtime_trace",
+      "primary_cli",
+      "primary_request_trace"
+    ],
+    "primary_case_ids": [
+      "success_default_first_authored_marker",
+      "success_markerless_first_authored_rule",
+      "success_explicit_top_rule",
+      "failure_invocation_missing_top_rule",
+      "trace_stdout_medium",
+      "trace_failure_invoke_escaped_field"
+    ]
+  },
   "implementation_inventory": [
     {
       "backend": "perl",
@@ -330,7 +360,7 @@
     {"id": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.1"},
     {"id": "rust", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.2"},
     {"id": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.3"},
-    {"id": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.4"},
+    {"id": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.4"},
     {"id": "lua", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.5"},
     {"id": "admission_and_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.1.2.6"}
   ]

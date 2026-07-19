@@ -58,8 +58,8 @@ canonical trace projection. During the rule-local cursor migration, Perl establi
 and Rust later passed them unchanged in both environments after `.9.1.4.6`. Root-selection admission advances the
 shared manifest reference-first to 65 cases. Perl owns the reference bytes; Rust core/routes/admission `.2.1-.3`
 and Dart `.3.1-.3` now pass them exactly at 65/65 in both environments. Julia core `.4.1` passes the root-owned
-cases, route `.4.2` passes its 57-assertion composed proof, and cursor `.9.1.6.5` makes the shared command 65/65
-twice; cursor/root topology admission remain dependency-ordered. Lua
+cases, route `.4.2` passes its 57-assertion composed proof, cursor `.9.1.6.5` makes the shared command 65/65 twice,
+and root admission `.4.3` topology-locks that complete boundary. Lua
 leaf `.5` owns its migration.
 `tools/run_rust_local.sh` and `tools/run_dart_local.sh` are
 green against the expanded manifest. UTF-16/UTF-32 are not
@@ -68,12 +68,16 @@ implicit inputs.
 Julia core `.9.1.1.2.4.1` improved the expanded manifest from its 31/65 preflight to 32/65 in each environment by
 closing the sole root-owned markerless compilation case. Cursor `.9.1.6.5` then removes the identical 22 help/
 usage and 11 medium-or-higher request-trace failures. Julia now passes 65/65 twice; cursor admission `.6` closes
-its separate topology requirement, while root admission `.4.3` remains next.
+its cursor topology requirement, and root admission `.4.3` closes the separate root topology requirement through
+137 focused assertions.
 
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace
-mismatches and locked the complete cursor topology; root topology admission `.4.3` retains its separate promotion.
+mismatches and locked the complete cursor topology. Root topology admission `.4.3` now adds one exact 15-role
+consumer, raises governance to 5/7 plus 39 rejected mutations, and passes package 3,428, primary 65x2, and corpus
+105 without changing semantic owners. Canonical CI then passes root consumers 7+5, cursor admission 288, the
+reference primary 65x2, and Phase 0 1,031/1,031 in 616 seconds.
 
 Task dependencies preserve backend order around that root work. Dart's composed cursor admission `.9.1.5.6`
 locks one exact 15-role consumer, advances only Dart from 3/5 to 4/4, and closes `.9.1.5` after package 271,
@@ -88,12 +92,14 @@ Descriptor state is still global-mode, generated source is v1, package execution
 32/65 twice, corpus is 105/105, and cursor governance remains 67 files / 4 complete / 4 pending / 39 mutations.
 No executable behavior changes in `.0`; `.1-.6` isolate old v1 semantics until the generated-v2 leaf owns the bump.
 
-Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
+Rust, Dart, and Julia root-selection admissions are omission-sensitive. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
 descriptor, diagnostic, trace, and primary routes. Its checker requires one exact function marker per role, the
 six shared root-selection/request-trace primary case identities, each tracked canonical input, the complete
-backend-package driver, and optional canonical registration; 34 mutations reject semantic, topology, inventory,
-and rollout drift.
+backend-package driver, and optional canonical registration. Julia additionally locks inclusion from
+`julia/test/runtests.jl`; 39 mutations reject semantic, topology, inventory, and rollout drift. Its authored
+selection fixtures return from `I`, distinguishing entered-rule proof from a coincidentally equal successful `E`
+result, while the fixed shared request-trace fixture retains its canonical source bytes.
 
 Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
 checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package

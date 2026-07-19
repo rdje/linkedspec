@@ -188,8 +188,8 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 4 complete / 3 pending, the neutral contract plus composed Perl, Rust, and Dart backends are executable
-but full backend parity is not yet uniform. All three accept markerless one-or-more-rule sources, apply the exact precedence
+At rollout 5 complete / 2 pending, the neutral contract plus composed Perl, Rust, Dart, and Julia backends are
+executable but full backend parity is not yet uniform. All four accept markerless one-or-more-rule sources, apply the exact precedence
 above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
 explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
 per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,
@@ -211,10 +211,11 @@ code. Zero rules fail with `no_rules_defined` / `validate_spec` before an explic
 unknown selector fails with `entry_rule_not_found` / `select_entry_rule` and the requested `entry_rule` field.
 Definition order and authored `is_top` remain immutable, and strict-unused still counts authored edges only.
 Julia cursor implementation through `.9.1.6.5` removes the legacy help/usage/trace projection while preserving
-entry selection, so exact shared primary is now 65/65 in both environments. Composed cursor admission `.9.1.6.6`
-and root admission `.4.3` remain dependency-ordered. Lua still blocks markerless source at validation. Until `.4-.6`
-close, retain a `::` for uniform composed cross-backend execution and pass an explicit selector when identity
-matters.
+entry selection, so exact shared primary is 65/65 in both environments. Root admission `.4.3` composes all 15
+declared roles once; its authored marked/markerless selection fixtures use `I` returns to prove entered-rule
+identity directly. Focused admission is 137, package proof is 3,428, corpus is 105/105, and the checker rejects 39
+mutations. Lua still blocks markerless source at validation. Until `.5-.6` close, retain a `::` for uniform
+composed cross-backend execution and pass an explicit selector when identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.

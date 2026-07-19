@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` — entry lifecycle makes a selection test causally sharp):
+  A final value returned from `E` after a successful local match can equal the value an entered rule would return
+  from `I`, but it does not isolate entry as clearly. Julia's admission fixtures therefore give each candidate
+  rule a distinct `I { return(...) }`. Default marker, markerless fallback, explicit ordinary, and later-marker
+  outcomes then prove the selected rule was entered before matching. The checked-in shared request-trace fixture
+  remains byte-canonical and is not repurposed as lifecycle evidence.
+
+  Admission composes existing owners rather than implementing another resolver. One 15-role map runs neutral
+  rows and every native/loaded/reconstructed/generated/emitted/descriptor/diagnostic/trace/primary projection
+  once in contract order. The checker locks exact source role order, package inclusion, backend/canonical drivers,
+  six shared case ids, Julia-only rollout, and five new mutations. Fresh emitted modules require both callable
+  invocation and binding retrieval through `Base.invokelatest` under Julia 1.12; resolving the binding itself
+  avoids world-age warnings that a later Julia release plans to make errors.
+
+  Focused proof is 137; complete Julia is 3,428; primary is 65x2; corpus is 105. Root governance reaches
+  5 complete / 2 pending / 39 mutations. Only Julia advances; Lua/LuaJIT and final public no-drift retain `.5-.6`.
+  The Knowledge Map is 622/4,524. Canonical closeout passes all four doctrines, root 7+5, cursor 288, primary
+  65x2, and Phase 0 1,031/1,031 in 616 seconds; generated book/cache cleanup passes.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.6` — composition is a topology proof, not another implementation):
   Julia's normalization, execution, descriptor, generated-v2, removal, primary, and diagnostic owners were
   already independently green through `.1-.5`. Admission therefore adds one contract-declared orchestrator whose

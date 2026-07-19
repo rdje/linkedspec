@@ -7,8 +7,9 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2, option/CLI removal, and composed cursor
 > admission are complete through `.9.1.6.6`; Lua cursor migration, recurring five-backend admission, and public
-> no-drift remain dependency-ordered. Independently, Julia root core publishes root-selection identity and its
-> descriptor contains no cursor-owned legacy field.
+> no-drift remain dependency-ordered. Independently, Julia root admission now composes the immutable
+> root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
+> legacy field.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

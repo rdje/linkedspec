@@ -6,12 +6,12 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract rejects 34 drift mutations, so rollout is 4 complete / 3 pending. Composed
-Perl, Rust, and Dart backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
+backend-neutral executable contract rejects 39 drift mutations, so rollout is 5 complete / 2 pending. Composed
+Perl, Rust, Dart, and Julia backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
 marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
-markerless, explicit/unknown, and request-trace outcomes. Rust and Dart additionally have topology-checked 15-role
-consumers that each execute every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
+markerless, explicit/unknown, and request-trace outcomes. Rust, Dart, and Julia additionally have topology-checked
+15-role consumers that each execute every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
 one-or-more-rule sources, resolves explicit > first marker > first rule once before user code, reports portable
 zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Route
 leaf `.3.2` now proves loaded/normalized and generated/emitted direct/traced reuse, low
@@ -35,11 +35,12 @@ publishes cursor v1 plus per-rule family/policy/ownership/edge facts with direct
 Generated-source `.9.1.6.4` now emits v2/format 2, derives the exact family policy, rejects v1 before payload
 reconstruction, and removes the private v1 engine. Public-option `.9.1.6.5` now removes engine/loader/corpus/
 primary global ownership, returns targeted API/CLI diagnostics, omits the help/request-trace field, and preserves
-`--top-rule`. Admission `.6` composes one exact 15-role Julia consumer. Complete Julia is 3,291, shared primary is
-65/65 twice, corpus is 105/105, and neutral governance is 67/5+3/44. Cursor parent `.9.1.6` is closed; final root
-admission `.4.3` is next.
-Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
-4/7 until admission.
+`--top-rule`. Cursor admission `.6` composes one exact 15-role Julia cursor consumer. Root admission `.4.3` now
+adds a separate exact 15-role root-selection consumer over every neutral/native/composed/diagnostic/trace/primary
+route; authored selection fixtures return from entry lifecycle `I` so their distinct results prove which rule was
+entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/105, cursor governance remains
+67/5+3/44, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is complete.
+Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout is 5/7.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted

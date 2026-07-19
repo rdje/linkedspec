@@ -62,10 +62,10 @@ backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to 
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
-the exact 15-role Rust and Dart admission consumers, configured CI/backend execution, first-marker/markerless/
-explicit/unknown primary cases, and default/explicit request trace while rejecting 34 semantic, topology,
-inventory, and rollout drift mutations. Rollout is 4 complete / 3 pending: neutral decision plus the composed
-Perl, Rust, and Dart backends are admitted. Perl records marker-
+the exact 15-role Rust, Dart, and Julia admission consumers, configured CI/backend execution, first-marker/
+markerless/explicit/unknown primary cases, and default/explicit request trace while rejecting 39 semantic,
+topology, inventory, and rollout drift mutations. Rollout is 5 complete / 2 pending: neutral decision plus the
+composed Perl, Rust, Dart, and Julia backends are admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
@@ -86,9 +86,10 @@ Julia route `.4.2` proves loaded/normalized and generated/emitted direct/traced 
 basis trace, portable loader/generated failures, and plan-first rejection through 57 assertions. Dart cursor
 admission is clean at `7aa9c578`; Julia cursor `.9.1.6` now implements and composes exact normalization, live
 execution, descriptor v1, generated-source v2, public/CLI option removal, and one 15-role admission. Shared Julia
-primary is exact at 65/65 twice. Julia root admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6`
-remain pending. Current backend differences stay explicit in the inventory until their owning leaves
-land.
+primary is exact at 65/65 twice. Julia root admission `.4.3` composes the contract through one exact 15-role
+consumer; its authored selection fixtures use entry lifecycle returns so the result proves which rule was entered
+rather than merely which successful match exited. Lua/LuaJIT and cross-backend no-drift leg `.6` remain pending.
+Current backend differences stay explicit in the inventory until their owning leaves land.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,
@@ -106,6 +107,14 @@ authored-edge analysis, and descriptors publish immutable `is_top` plus the root
 portable route failures, and stale-contract-first ordering without changing v2 identity. Admission `.3.3` adds one
 contract-declared 15-role consumer, exact driver/case registration, and five additional omission mutations; Dart
 is therefore admitted and rollout is 4 complete / 3 pending.
+
+Julia admission `.4.3` applies the same omission-sensitive 15-role topology to the already-admitted core and
+route mechanisms, including loaded/reconstructed, generated/emitted direct and traced, immutable descriptor,
+portable diagnostics, selected-rule runtime failure identity, primary selection, and exact shared request-trace
+bytes. The canonical and Julia package drivers own the consumer, and five additional mutations prevent its role,
+consumer, shared-primary, driver, or rollout identity from silently regressing.
+Focused composition passes 137; package 3,428, primary 65x2, corpus 105, and canonical Phase 0 1,031 in 616
+seconds pass.
 
 Perl preflight assigns the ten shared manifest/help/usage/trace byte fixtures to the reference migration leaf
 `.9.1.3.5`: removing the reference option affected 35 cases in the then-63-case suite that local CI always

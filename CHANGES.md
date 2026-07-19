@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection
+
+Julia root-rule selection is now composed-admitted against `linkedspec-root-rule-selection-v1`. One new package
+consumer executes the contract's 15 exact roles once in declared order: neutral selection/failure/strict, native,
+loaded, reconstructed, generated direct/traced, emitted direct/traced, descriptor, diagnostic, runtime trace,
+primary CLI, and primary request trace. It adds no second resolver or new semantic behavior.
+
+The authored marked and markerless selection fixtures return distinct values from entry lifecycle `I`. That makes
+their result direct evidence of which rule was entered; the existing exact shared request-trace source alone keeps
+its canonical `E` lifecycle because that role verifies checked-in bytes. Generated-module calls use world-age-safe
+binding retrieval, so the focused test passes without Julia 1.12 warnings.
+
+The neutral contract/checker now locks Julia's exact role order, consumer path, package include, complete backend
+driver, canonical tracked registration, six shared primary case ids, rollout row, and five new omission mutations.
+Only Julia advances. Root rollout moves from 4 complete / 3 pending / 34 mutations to 5 complete / 2 pending / 39
+mutations; Lua/LuaJIT and final public no-drift remain pending.
+
+Focused admission passes 137/137. The registered Julia gate passes 3,428 package assertions, exact shared primary
+65/65 in default and POSIX environments, and corpus 105/105. The Knowledge Map advances to 622 facts / 4,524
+question keys; capability, task/live, development, and mdBook projections now report the same 5/7 boundary.
+Canonical local CI passes all four doctrines, root consumers 7+5, cursor admission 288, reference primary 65x2,
+and Phase 0 1,031/1,031 in 616 seconds. Cleanup removes the generated 11 MiB book and 28 KiB Python cache.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.6 — admit Julia rule-local cursor contract
 
 Julia is now composed-admitted against `linkedspec-rule-local-cursor-v1`. One contract-declared consumer executes

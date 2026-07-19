@@ -457,14 +457,14 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 4 complete / 3 pending. Composed Perl, Rust,
-and Dart
+has no marker, select the first authored rule. That contract is at 5 complete / 2 pending. Composed Perl, Rust,
+Dart, and Julia
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
-markerless, explicit, unknown, and request-trace outcomes. Rust and Dart admission each topology-check one 15-role
-consumer across the neutral rows and every real backend route family. Julia core, loaded/normalized, and
-generated/emitted direct/traced execution now implement the same order; its topology admission waits for cursor
-`.9.1.6`, and Lua validation still blocks fallback. Use an explicit selector and retain a marker when current
+markerless, explicit, unknown, and request-trace outcomes. Rust, Dart, and Julia admission each topology-check one
+15-role consumer across the neutral rows and every real backend route family. Julia's selection-focused fixtures
+use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua validation still blocks
+fallback. Use an explicit selector and retain a marker when current
 composed multi-backend execution must be independent of those staged differences.
 
 ```perl
@@ -487,10 +487,9 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, and Dart native,
-loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted. Julia
-core plus loaded/normalized/generated/emitted routes also accept it; Julia topology admission and Lua remain
-pending, so it is not yet an admitted five-backend source:
+With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, Dart, and Julia
+native, loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted.
+Lua remains pending, so it is not yet an admitted five-backend source:
 
 ```text
 First:
@@ -500,7 +499,7 @@ Second:
  /second/
 ```
 
-### Julia core and composed routes
+### Julia core, composed routes, and admission
 
 Julia's parser preserves definition order and records each `Rule::` as immutable `is_top` metadata. Validation now
 requires one or more rules, not a marker. `resolve_entry_rule(compiled, selector)` is the single compiled-state
@@ -545,14 +544,18 @@ projects `no_rules_defined` at `validate_spec`. Generated unknown selection proj
 `validate_spec`. Invalid generated plans still fail at `validate_generated_plan` before any selection attempt.
 Unrelated generated runtime failures retain `generated_execution_failed`.
 
-Julia's exact shared primary boundary is now 65/65 twice. Cursor-option removal `.9.1.6.5` deleted the former 22
-help/usage and 11 request-trace mismatches while preserving `--top-rule`; the retired flag now returns the targeted
-usage error and request trace carries no global cursor field. Route convergence `.4.2` remains isolated from cursor
-work. Cursor admission `.9.1.6.6` and exact root topology admission `.4.3` still have independent composed-role
-obligations, so passing command bytes alone does not advance either rollout.
+Julia's exact shared primary boundary is 65/65 twice. Cursor-option removal `.9.1.6.5` deleted the former 22
+help/usage and 11 request-trace mismatches while preserving `--top-rule`; the retired flag returns the targeted
+usage error and request trace carries no global cursor field. Route convergence `.4.2` remains isolated from
+cursor work. Root admission `.4.3` now runs 15 contract-declared roles exactly once across neutral
+selection/failure/strict, native, loaded/reconstructed, generated/emitted direct and traced, descriptor,
+diagnostic, runtime trace, primary CLI, and canonical request-trace projections. Its authored selection fixtures
+return distinct values from `I`, proving which rule was entered; the fixed request-trace fixture retains its
+canonical lifecycle source. Focused proof is 137, package proof is 3,428, primary is 65x2, corpus is 105, and root
+governance is 5/7 plus 39 rejected mutations.
 
-Until those leaves land, use a marker when the same source must run on Lua or satisfy the not-yet-complete
-five-backend admission, even when supplying `--top-rule`:
+Until Lua and final five-backend admission land, use a marker when the same source must run on Lua, even when
+supplying `--top-rule`:
 
 ```text
 FallbackMarker::

@@ -6,8 +6,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 Root-selection contract (2026-07-18): ADR `0046` / `linkedspec-root-rule-selection-v1` fixes explicit selector >
 first authored `Rule::` > first authored `Rule:` precedence, keeps authored `is_top` separate from effective
 execution state, and preserves strict-unused as defined-minus-authored-references. Neutral contract `.9.1.1.2.0`
-plus composed Perl, Rust, and Dart `.9.1.1.2.1-.3` are complete; Julia `.4` is active, while Lua/LuaJIT `.5` and
-composed public admission `.6` remain pending, so rollout is 4 complete / 3 pending. Clean preflight `.4.0`
+plus composed Perl, Rust, Dart, and Julia `.9.1.1.2.1-.4` are complete; Lua/LuaJIT `.5` and composed public
+admission `.6` remain pending, so rollout is 5 complete / 2 pending. Clean preflight `.4.0`
 freezes the seam; Julia core/descriptor `.4.1` and composed routes `.2` are signed off. Dart cursor admission
 `.9.1.5.6` is cleanly committed at `7aa9c578`; Julia cursor preflight `.9.1.6.0` and normalization `.1` are clean
 through `ac7010ee`. Intrinsic normal runtime `.2` now derives family policy at every live, loaded-default,
@@ -17,8 +17,10 @@ with direct/loaded/normalized byte identity. Generated-source `.4` now emits v2/
 rows, derives all five seek and five consume policies, rejects v1 before reconstruction, and removes the private
 v1 execution adapter. Option removal `.5` now removes engine/loader/corpus/primary global ownership, returns exact
 API/CLI migration diagnostics, omits help/request-trace state, and preserves `--top-rule`. Admission `.6` now
-composes one exact 15-role consumer, advances only Julia, and closes the cursor parent. Current proof is package
-3,291, primary 65/65x2, corpus 105, and neutral 67/5+3/44. Root admission `.9.1.1.2.4.3` is next.
+composes one exact 15-role consumer, advances only Julia, and closes the cursor parent. Root admission `.4.3`
+now composes a separate exact 15-role consumer; authored selection fixtures use entry lifecycle `I` to prove the
+entered rule. Current proof is package 3,428, primary 65/65x2, corpus 105, cursor 67/5+3/44, and root 5/7+39.
+Canonical closeout passes at Phase 0 1,031/1,031 in 616 seconds; the clean `.4.3` commit precedes Lua root `.5`.
 
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.

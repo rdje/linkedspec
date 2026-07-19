@@ -10,18 +10,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.6.6` — Julia rule-local cursor composition is fully verified;
-  the prepared clean commit is the only remaining closeout action.
-- latest_commit: `ecc03c59` — `FUTURE-PARITY-BACKLOG.9.1.6.5 - remove Julia global cursor overrides`
-  (ahead: 228; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.6.6 - admit Julia rule-local cursor contract`.
-- active_work_unit: `.9.1.6.6` is verified and staged for its prepared commit from clean `ecc03c59`; no pivot has
-  occurred. The cursor parent is closed in candidate state.
-- next_action: commit `.9.1.6.6` per `COMMIT.md`, verify clean tree/zero brief, then activate root admission
-  `.9.1.1.2.4.3` task-tree-first from that clean commit.
-- current_proof: Julia root core/routes remain signed off: one resolver owns explicit > first marker > first rule,
-  loaded/normalized/generated/emitted direct/traced reuse it; cursor removal now preserves `--top-rule` at exact
-  primary 65/65x2, corpus 105, and root governance 4/7 plus 34 mutations. Root admission remains `.4.3`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` — Julia root selection is fully signed off at exact
+  15-role/topology proof; the prepared commit remains the only in-flight step.
+- latest_commit: `e6b71530` — `FUTURE-PARITY-BACKLOG.9.1.6.6 - admit Julia rule-local cursor contract`
+  (ahead: 229; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 - admit Julia root selection`.
+- active_work_unit: `.9.1.1.2.4.3` is complete and staged from clean `e6b71530`; only commit/brief/clean proof remain.
+- next_action: commit `.4.3`, clear `git_message_brief.txt`, prove clean, then activate Lua root `.5` task-tree-first.
+- current_proof: Julia root admission composes one exact 15-role consumer. Authored selection fixtures return from
+  entry lifecycle `I`; the canonical shared request-trace fixture retains its exact source. Focused admission 137,
+  package 3,428, primary 65/65x2, corpus 105, and root governance 5/7 plus 39 mutations pass. Only Julia advances;
+  Lua/LuaJIT and final no-drift remain pending. KM is 622/4,524; mdBook/four doctrines/JSON/whitespace pass.
+  Canonical passes root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 616 seconds.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
   diagnostics, eight parent-child mechanisms, and two structural replacements are exact. Normal entered rules
   derive policy once; children rederive independently. Descriptor v1 has no global mode and projects exact facts;
@@ -42,9 +42,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 20-minute timeout; allow
   at least 30 minutes for the complete canonical gate when the machine is under concurrent build load.
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
-- deferred: root admission `.9.1.1.2.4.3-.6`; generated parser+stimuli `.8.1`; cursor `.9.1.7-.9`;
+- deferred: root admission `.9.1.1.2.5-.6`; generated parser+stimuli `.8.1`; cursor `.9.1.7-.9`;
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: fully verified/staged `.9.1.6.6` closeout candidate; commit remains.
-  Generated mdBook/Python-cache artifacts are being cleaned and the commit brief is zero bytes.
+- blockers: none. in_flight_uncommitted: completed `.4.3` is staged for its prepared commit. Generated 11 MiB
+  mdBook and 28 KiB Python cache are absent; the populated commit brief must be cleared after commit.

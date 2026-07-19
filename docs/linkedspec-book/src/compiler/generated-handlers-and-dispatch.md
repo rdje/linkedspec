@@ -110,7 +110,7 @@ through their compiled payload. Direct, traced, and freshly emitted execution ac
 is required. The low `dart_runtime:entry_rule_selection` decision records requested selector, effective rule, and
 selection basis. Generated zero/unknown failures retain the neutral stage/code/requested-entry fields, while v1
 contract or invalid-plan rejection still occurs before entry selection. Route proof is complete under
-`.9.1.1.2.3.2`; admission `.3.3` composes every declared Dart route role exactly once and promotes Dart at the
+`.9.1.1.2.3.2`; admission `.3.3` composes every declared Dart route role exactly once and promotes Dart at its
 4/7 root-selection boundary without changing generated behavior.
 
 Julia core `.9.1.1.2.4.1` publishes the same root contract in compiled descriptors and makes native selection use
@@ -119,7 +119,9 @@ direct/traced execution pass optional `top_rule` to that resolver. Low `julia_ru
 records requested/effective/basis; generated zero/unknown failures retain portable stages/codes after plan
 validation. Generated-source contract v1/format 1 and its ordered `{label, family}` plan remain unchanged.
 Cursor migration `.9.1.6.4` subsequently advanced new Julia artifacts to contract v2/format 2 without widening
-that plan or changing the invocation-local root selector.
+that plan or changing the invocation-local root selector. Root admission `.4.3` now executes generated direct,
+generated traced, emitted direct, and emitted traced roles through one exact 15-role consumer. This topology proof
+does not add a second resolver or widen generated artifacts; Julia alone advances root rollout to 5/7.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

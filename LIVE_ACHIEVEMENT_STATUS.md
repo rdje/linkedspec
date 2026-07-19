@@ -8,13 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.6` — composed Julia rule-local cursor admission is fully verified and staged for
-  the prepared clean commit from `ecc03c59` at ahead 228. No pivot occurs until commit/clean verification; root
-  admission `.9.1.1.2.4.3` is the next task-tree activation afterward.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` — exact Julia root-selection admission is fully signed off and staged from
+  clean cursor commit `e6b71530` at ahead 229. Only its prepared commit, brief clearing, and clean proof remain;
+  Lua `.5` cannot activate before that boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection**
+  (DONE; prepared commit is the only remaining workflow step).
+
+  **Result:** One exact contract-declared 15-role consumer composes every neutral, native, loaded/reconstructed,
+  generated/emitted, descriptor, diagnostic, trace, and primary projection once. Authored selection fixtures use
+  entry lifecycle `I`; only the exact shared request-trace source retains canonical `E`. Julia alone advances,
+  closing parent `.4` at root 5 complete / 2 pending / 39 mutations.
+
+  **Proof:** Focused 137, package 3,428, primary 65x2, corpus 105, KM 622/4,524, mdBook/four doctrines/JSON/
+  whitespace, and canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 616 seconds. Generated
+  11 MiB book and 28 KiB Python cache are removed.
+
+  **Next:** Commit `.4.3`, clear the brief, prove clean, then activate Lua root `.9.1.1.2.5` task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.6 — admit Julia rule-local cursor contract**
-  (VERIFIED; prepared commit pending).
+  (DONE at clean commit `e6b71530`).
 
   **Result:** One exact contract-declared 15-role consumer composes native, normalized, loaded, descriptor,
   emitted/generated, trace, mixed/recursive, structural, removal, primary, and diagnostic projections once. Only
@@ -25,7 +39,7 @@ Current execution status for interruption-safe batch workflow recovery.
   primary 65x2, and Phase 0 1,031/1,031 in 641 seconds. Stacked-depot gate repair is verified offline with no
   malformed artifact recurrence.
 
-  **Next:** Commit and verify clean, then activate exact Julia root admission `.9.1.1.2.4.3` task-tree-first.
+  **Next:** Exact Julia root admission `.9.1.1.2.4.3` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.5 — remove Julia global cursor overrides**
   (DONE at clean commit `ecc03c59`).

@@ -109,6 +109,7 @@ require_tracked_file dart/test/rule_local_cursor_contract_test.dart
 require_tracked_file julia/test/rule_local_cursor_contract_test.jl
 require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs
 require_tracked_file dart/test/root_rule_selection_admission_test.dart
+require_tracked_file julia/test/root_rule_selection_admission_test.jl
 require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
 require_tracked_file capability_conformance/callable_codeblock_contract.json
