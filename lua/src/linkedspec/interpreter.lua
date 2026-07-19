@@ -114,6 +114,8 @@ function M.runtime_engine(compiled, options)
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     fail("trace must be a LinkedSpecTraceEmitter")
   end
+  local parse_mode = nil
+  if options.parse_mode ~= nil then parse_mode = matching.parse_mode_from_name(options.parse_mode) end
   return trace_support.run(
     options.trace,
     "lua_runtime:create_engine",
@@ -123,7 +125,7 @@ function M.runtime_engine(compiled, options)
       compiled_spec.validate_no_removed_aggregate_selectors(compiled)
       return setmetatable({
         compiled_spec = compiled,
-        parse_mode = matching.parse_mode_from_name(options.parse_mode or "seek"),
+        parse_mode = parse_mode,
         max_iterations = max_iterations,
         spec_name = options.spec_name,
         spec_path = options.spec_path,
@@ -3532,14 +3534,14 @@ local function trace_regex_decision(ctx, rule, one, cursor_before, reason)
   )
 end
 
-local function match_specific(engine, rule, index, ctx)
+local function match_specific(engine, rule, index, ctx, execution_policy)
   local key = rule.label .. ":" .. index
   local alternation = engine.regex_cache[key]
   if not alternation then
     alternation = matching.compile_runtime_regex_alternation({ rule.regex_patterns[index + 1] })
     engine.regex_cache[key] = alternation
   end
-  local one = alternation:match(ctx.input, ctx.cursor_byte, engine.parse_mode)
+  local one = alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
   return one and matching.reindex_runtime_regex_match(one, index) or nil
 end
 
@@ -3568,17 +3570,30 @@ local function accept_match(engine, rule, one, ctx, accumulator)
   lifecycle(engine, rule, "LE", ctx, accumulator)
 end
 
-local function regex_once(engine, rule, entry_index, ctx, accumulator)
+local function regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
   local cursor_before = ctx.cursor_byte
   if #rule.regex_patterns == 0 then
-    trace_regex_decision(ctx, rule, nil, cursor_before, "patterns=0")
+    trace_regex_decision(
+      ctx,
+      rule,
+      nil,
+      cursor_before,
+      "cursor_policy=" .. execution_policy.cursor_policy .. " patterns=0"
+    )
     return false
   end
-  if rule.mode_metadata.is_and and #rule.regex_patterns > 1 then
+  if execution_policy.uses_and_execution and #rule.regex_patterns > 1 then
     for index = 0, #rule.regex_patterns - 1 do
       cursor_before = ctx.cursor_byte
-      local one = match_specific(engine, rule, index, ctx)
-      trace_regex_decision(ctx, rule, one, cursor_before, "mode=AND expected_index=" .. tostring(index))
+      local one = match_specific(engine, rule, index, ctx, execution_policy)
+      trace_regex_decision(
+        ctx,
+        rule,
+        one,
+        cursor_before,
+        "cursor_policy=" .. execution_policy.cursor_policy ..
+          " mode=AND expected_index=" .. tostring(index)
+      )
       if not one then return false end
       accept_match(engine, rule, one, ctx, accumulator)
     end
@@ -3586,22 +3601,28 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator)
   end
   local one
   if entry_index > 0 and entry_index < #rule.regex_patterns then
-    one = match_specific(engine, rule, entry_index, ctx)
+    one = match_specific(engine, rule, entry_index, ctx, execution_policy)
   else
     local alternation = engine.regex_cache[rule.label]
     if not alternation then
       alternation = matching.compile_runtime_regex_alternation(rule)
       engine.regex_cache[rule.label] = alternation
     end
-    one = alternation:match(ctx.input, ctx.cursor_byte, engine.parse_mode)
+    one = alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
   end
-  trace_regex_decision(ctx, rule, one, cursor_before, "entry_regex=" .. tostring(entry_index))
+  trace_regex_decision(
+    ctx,
+    rule,
+    one,
+    cursor_before,
+    "cursor_policy=" .. execution_policy.cursor_policy .. " entry_regex=" .. tostring(entry_index)
+  )
   if not one then return false end
   accept_match(engine, rule, one, ctx, accumulator)
   return true
 end
 
-local function blind_once(engine, rule, ctx, accumulator)
+local function blind_once(engine, rule, ctx, accumulator, execution_policy)
   local any = false
   for edge_index, edge in ipairs(rule.blind_edges) do
     local cursor_before = ctx.cursor_byte
@@ -3610,7 +3631,7 @@ local function blind_once(engine, rule, ctx, accumulator)
       ctx,
       "lua_runtime:child_dispatch",
       child.matched,
-      "edge_family=blind mode=" .. (rule.mode_metadata.is_and and "AND" or "OR") ..
+      "edge_family=blind mode=" .. (execution_policy.uses_and_execution and "AND" or "OR") ..
         " rule=" .. rule.label .. " index=" .. tostring(edge_index - 1) ..
         " target=" .. edge.target.label .. "[" .. tostring(edge.target.index) .. "]" ..
         " cursor_before=" .. tostring(cursor_before) .. " cursor_after=" .. tostring(ctx.cursor_byte),
@@ -3618,13 +3639,17 @@ local function blind_once(engine, rule, ctx, accumulator)
     )
     ctx.retv = copy_value(child.value)
     if edge.action_payload then execute_block(engine, edge.action_payload.action_ast, ctx, accumulator, nil) end
-    if rule.mode_metadata.is_and and not child.matched then return false end
+    if execution_policy.uses_and_execution and not child.matched then return false end
     if child.matched then
       any = true
-      if rule.mode_metadata.is_and then accumulator[#accumulator + 1] = copy_value(child.value) else return true end
+      if execution_policy.uses_and_execution then
+        accumulator[#accumulator + 1] = copy_value(child.value)
+      else
+        return true
+      end
     end
   end
-  return rule.mode_metadata.is_and and true or any
+  return execution_policy.uses_and_execution and true or any
 end
 
 local function finish_value(accumulator, fallback)
@@ -3658,6 +3683,30 @@ execute_rule = function(engine, label, entry_index, ctx)
       }),
     })
   end
+  local generated_family = ctx.generated_families and ctx.generated_families[label] or nil
+  local uses_and_execution
+  local uses_blind_dispatch
+  local cursor_policy
+  if generated_family == nil then
+    uses_and_execution = rule.mode_metadata.is_and
+    uses_blind_dispatch = #rule.blind_edges > 0
+    cursor_policy = engine.parse_mode or (uses_and_execution and "consume" or "seek")
+  else
+    -- Contract-v1 generated artifacts retain their validated handler-family
+    -- interpretation and historical seek default until generated-source v2.
+    uses_and_execution = generated_family == "and_single_acode" or
+      generated_family == "and_acode_seq" or generated_family == "and_bcode" or
+      generated_family == "rep_and_acode" or generated_family == "rep_and_bcode"
+    uses_blind_dispatch = generated_family == "and_bcode" or generated_family == "or_bcode" or
+      generated_family == "rep_bcode" or generated_family == "rep_and_bcode"
+    cursor_policy = engine.parse_mode or "seek"
+  end
+  local execution_policy = {
+    family = uses_and_execution and "and" or "or_default",
+    cursor_policy = cursor_policy,
+    uses_and_execution = uses_and_execution,
+    uses_blind_dispatch = uses_blind_dispatch,
+  }
   local recursion_key = label .. ":" .. entry_index .. ":" .. ctx.cursor_byte
   if ctx.active[recursion_key] then
     runtime_trace_decision(
@@ -3686,18 +3735,10 @@ execute_rule = function(engine, label, entry_index, ctx)
     ctx,
     "lua_runtime:rule",
     "rule=" .. label .. " entry_regex=" .. tostring(entry_index) ..
-      " mode=" .. rule.mode_metadata.name .. " cursor=" .. tostring(ctx.cursor_byte),
+      " mode=" .. rule.mode_metadata.name .. " family=" .. execution_policy.family ..
+      " cursor_policy=" .. execution_policy.cursor_policy .. " cursor=" .. tostring(ctx.cursor_byte),
     trace.TRACE_HIGH
   )
-  local generated_family = ctx.generated_families and ctx.generated_families[label] or nil
-  local generated_uses_blind_dispatch
-  if generated_family == nil then
-    generated_uses_blind_dispatch = #rule.blind_edges > 0
-  else
-    generated_uses_blind_dispatch = generated_family == "and_bcode" or
-      generated_family == "or_bcode" or generated_family == "rep_bcode" or
-      generated_family == "rep_and_bcode"
-  end
   if generated_family ~= nil and ctx.generated_source_identity ~= nil then
     runtime_trace_event(
       ctx,
@@ -3725,10 +3766,10 @@ execute_rule = function(engine, label, entry_index, ctx)
       for _ = 1, engine.max_iterations do
         local before = ctx.cursor_byte
         local attempt = nextable(function()
-          if generated_uses_blind_dispatch then
-            return blind_once(engine, rule, ctx, accumulator)
+          if execution_policy.uses_blind_dispatch then
+            return blind_once(engine, rule, ctx, accumulator, execution_policy)
           end
-          return regex_once(engine, rule, entry_index, ctx, accumulator)
+          return regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
         end)
         if not attempt.nexted then
           matched = attempt.value or matched_any
@@ -3749,10 +3790,10 @@ execute_rule = function(engine, label, entry_index, ctx)
       local before = ctx.cursor_byte
       lifecycle(engine, rule, "LS", ctx, accumulator)
       local attempt = nextable(function()
-        if generated_uses_blind_dispatch then
-          return blind_once(engine, rule, ctx, accumulator)
+        if execution_policy.uses_blind_dispatch then
+          return blind_once(engine, rule, ctx, accumulator, execution_policy)
         end
-        return regex_once(engine, rule, entry_index, ctx, accumulator)
+        return regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
       end)
       if attempt.nexted then
         count = count + 1

@@ -65,8 +65,13 @@ That normalization is now implemented identically on PUC Lua and LuaJIT. Compact
 complete-line/header-rest bare plain/index/group/block/fluent forms are typed and JSON-roundtrippable; all six
 portable edge diagnostics carry exact stage/code/fields; and valid family-derived ownership lowers into existing
 compiled action/blind tables. Exact proof moves from 44/166 RED failures to 258/258 green assertions per ABI;
-package stays 176/177 with only staged help, primary stays 32/65x4, corpus stays 105/105x2, and governance stays
-67/5+3/44. Live cursor spending, descriptor v1, generated v2, option removal, and admission remain `.2-.6`.
+package stays 176/177 with only staged help, primary stays 32/65x4, corpus stays 105/105x2, and normalization
+governance was 67/5+3/44. Clean commit `67909eb6` activates live cursor spending `.2` task-tree-first. That runtime leaf now
+passes the exact 110-assertion dual-ABI proof: every normal live/loaded/normalized/traced rule derives AND-consume/
+sequence or OR-default-seek/choice independently, and all eight child mechanisms plus both structural rows are
+exact. Its registered consumer makes current inventory 68/5+3/44. Explicit outer policy and generated-v1 legacy
+seek/family behavior remain isolated compatibility seams; descriptor v1, generated v2, option removal, and
+admission remain `.3-.6`.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

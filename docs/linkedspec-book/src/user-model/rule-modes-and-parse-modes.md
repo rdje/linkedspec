@@ -81,7 +81,7 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > current projection and locks its complete/canonical driver topology.
 > Rollout is 5 complete / 3 pending, with Lua, recurring five-backend, and
 > public no-drift work dependency-ordered under `.9.1.7-.9`; the current
-> governed inventory is 67 files with 44 effective mutations.
+> governed inventory is 68 files with 44 effective mutations after Lua registers its runtime consumer.
 > Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
 > point: all 36 headers parse, but compact `|` accounts for the 34/36 family
 > classification; global seek makes 22/36 family executions intrinsic; valid
@@ -94,8 +94,16 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > six portable edge diagnostics carry the neutral stage/code/fields; and valid
 > ownership lowers into compiled action/blind tables. The exact proof is
 > 258/258 assertions on PUC Lua and LuaJIT after identical 44/166 RED failures.
-> This does not yet change Lua cursor spending, descriptor/artifact versions,
-> public options, or rollout; those remain `.2-.6`.
+> Runtime `.9.1.7.2` now makes omitted-policy normal live, loaded, normalized,
+> recursive, and traced execution intrinsic too. Every entered AND rule consumes
+> and sequences; every OR/default rule seeks and chooses; every action, blind,
+> direct-call, or recursive child derives again from its own family. Both ABIs
+> pass the same 110 assertions over all 36 families, eight child mechanisms, two
+> structural replacements, loaded/normalized routes, and policy-bearing trace.
+> An explicit outer policy remains a compatibility seam until `.5`, while
+> generated-source v1 deliberately retains historical seek and its legacy
+> handler-family interpretation until `.4`. Descriptor v1, generated v2, public
+> option removal, and rollout admission remain `.3-.6`.
 
 ## Current rule-label surface
 
@@ -124,8 +132,9 @@ Mechanically, `::` is an authored **default-entry marker**. Without an explicit 
 
 Entry selection is separate from cursor policy. An explicit selector such as `--top-rule`
 wins over authored `::` markers and may name any declared rule. Otherwise the first marker,
-then the first authored rule, wins. Perl, Rust, and Dart library/primary routes implement all three branches and
-are admitted; Julia/Lua convergence and final no-drift remain staged. See [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
+then the first authored rule, wins. Perl, Rust, Dart, and Julia library/primary routes implement all three
+branches and are admitted; Lua implements the selection core and composed routes, while its topology admission
+and final no-drift remain staged. See [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
 
 The current public suffix surface is intentionally small and exact:
 
@@ -570,11 +579,10 @@ For more detail on cursor-stack helpers, anchor rewinds, and their interaction w
 ## Current cursor policies
 
 Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
-The two low-level algorithms are `seek` and `consume`, but normal Perl, Rust, Dart, and Julia live execution
+The two low-level algorithms are `seek` and `consume`, but normal Perl, Rust, Dart, Julia, and Lua live execution
 select them from the rule family rather than a parser-wide override. Their loaded, reconstructed, and
-generated-v2 routes preserve that identity at every entered rule. Lua now normalizes the same authored family and
-edge ownership in AST/compiled state, but its ordinary runtime still spends an engine-wide policy until
-`.9.1.7.2`.
+ordinary runtime routes preserve that identity at every entered rule. Perl, Rust, Dart, and Julia generated-v2
+routes do too; Lua generated-v1 remains an explicit versioned compatibility seam until `.9.1.7.4`.
 
 ### `seek`
 
@@ -844,9 +852,10 @@ format 2 with no cursor field, derives five seek/five consume policies, rejects 
 requires regeneration of legacy v1 files. Option/CLI removal and one exact composed 15-role admission are current
 through `.9.1.6.6`, so Julia now advances the rollout row.
 Lua and LuaJIT now share exact authored family identity, typed bare edges, family-derived compiled ownership, and
-the six portable diagnostics through normalization `.9.1.7.1`. Normal/loaded/normalized execution still spends
-one global policy, descriptor metadata still publishes global seek, and generated source still identifies v1;
-runtime, descriptor, generated v2, option removal, and admission remain `.9.1.7.2-.6` in that order.
+the six portable diagnostics through normalization `.9.1.7.1`. Runtime `.2` makes omitted-policy normal, loaded,
+normalized, recursive, and traced execution intrinsic at each entered rule; all eight child mechanisms rederive
+independently. Descriptor metadata still publishes global seek, generated source still identifies v1, and an
+explicit outer policy remains accepted; descriptor, generated v2, option removal, and admission remain `.3-.6`.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/
@@ -855,5 +864,5 @@ mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 neutral checker requires every declared role and canonical registration. Dart adds its own 15-role native/
 normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
 also requires one exact Julia consumer over the same normalized topology. It currently reports 36 family
-spellings, 18 edge cases, eight parent/child cases, 67 migration files, 5 complete / 3 pending, and 44 rejected
+spellings, 18 edge cases, eight parent/child cases, 68 migration files, 5 complete / 3 pending, and 44 rejected
 drift mutations.

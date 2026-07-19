@@ -15,9 +15,9 @@ answers:
   - "does Lua generated source v1 still classify compact pipe as AND"
   - "does Lua cursor normalization advance rollout"
 date: 2026-07-19
-status: verified normalization; live cursor execution remains FUTURE-PARITY-BACKLOG.9.1.7.2
+status: verified normalization; live cursor execution is verified under FUTURE-PARITY-BACKLOG.9.1.7.2
 tags: [lua, luajit, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
-evidence: "Lua now classifies compact `|` as authored OR/default and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through SpecValidationException code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. The focused neutral consumer passes 258 assertions identically on PUC Lua and LuaJIT over all 36 family rows, all 18 edge rows, all six ownership sets, AST/diagnostic JSON roundtrips, and physical-line boundaries. The package remains at only the pre-existing 176/177 shared-help mismatch per ABI, all four primary legs remain exactly 32/65, corpus remains 105/105 per ABI, and no rollout row advances. Runtime cursor spending, descriptor v1, generated-source v2, option removal, and admission remain .2-.6. Generated-source v1 deliberately retains its staged compact-Pipe AND classifier until .4."
+evidence: "Lua now classifies compact `|` as authored OR/default and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through SpecValidationException code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. The focused neutral consumer passes 258 assertions identically on PUC Lua and LuaJIT over all 36 family rows, all 18 edge rows, all six ownership sets, AST/diagnostic JSON roundtrips, and physical-line boundaries. The package remains at only the pre-existing 176/177 shared-help mismatch per ABI, all four primary legs remain exactly 32/65, corpus remains 105/105 per ABI, and no rollout row advances. Runtime cursor spending is now implemented by .2; descriptor v1, generated-source v2, option removal, and admission remain .3-.6. Generated-source v1 deliberately retains its staged compact-Pipe AND classifier until .4."
 reverify: "env LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' lua lua/test/rule_local_cursor_normalization_test.lua && env LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' luajit lua/test/rule_local_cursor_normalization_test.lua && python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -43,9 +43,10 @@ The six portable edge codes are `bare_edge_target_undefined`, `bare_edge_index_r
 `blind_call_index_forbidden`. Lifecycle names retain lexical priority; an edge to a same-named rule must use
 explicit `->` or `=>` syntax.
 
-Normalization deliberately stops at AST, validation, and compiled ownership. The ordinary Lua runtime still
-spends its engine-wide policy until `.9.1.7.2`; descriptor state still publishes its old global field until `.3`;
-generated artifacts remain v1/format 1 until `.4`; and high-level API/CLI overrides remain until `.5`. In
+Normalization deliberately stopped at AST, validation, and compiled ownership in `.9.1.7.1`. The following `.2`
+runtime slice now derives ordinary entered-rule policy from that compiled identity; descriptor state still
+publishes its old global field until `.3`, generated artifacts remain v1/format 1 until `.4`, and high-level
+API/CLI overrides remain until `.5`. In
 particular, generated-v1 classification still maps the authored `Pipe` mode name to its legacy AND structural
 family even though normal compiled metadata now records `is_and = false`. That isolation prevents this syntax
 slice from silently migrating a versioned artifact.
@@ -56,6 +57,6 @@ the exact AST/parser/validator/compiler owners. The complete native package and 
 proofs; their unchanged staged results show the slice did not pull runtime, descriptor, generated, or public
 option work forward.
 
-Related: [[lua-rule-local-cursor-preflight]], [[rule-local-cursor-and-bare-edge-contract]],
+Related: [[lua-rule-local-cursor-execution]], [[lua-rule-local-cursor-preflight]], [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[julia-rule-local-cursor-normalization]], and
 [[FUTURE-PARITY-BACKLOG]].

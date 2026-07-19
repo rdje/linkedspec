@@ -27,8 +27,12 @@ OR/default and compact `&` is AND. Complete-line or header-rest bare child membe
 grouped, block, and fluent forms; lifecycle markers take precedence, forward targets resolve after all labels are
 known, and explicit `->` / `=>` keeps written ownership. Valid AND bare members lower to blind edges and valid
 OR/default bare members lower to action edges. Invalid governed shapes expose the neutral diagnostic code, stage,
-and fields. Runtime policy is still engine-wide, descriptor metadata is still pre-cursor-v1, generated source is
-still v1/format 1, and `parse_mode` remains a staged public option until `.9.1.7.2-.5` migrate those owners.
+and fields. Normal live, loaded, normalized, recursive, and traced execution now derives one immutable policy at
+each entered rule: AND consumes/sequences and OR/default seeks/chooses, while every child re-enters the same owner
+and derives from its own family. Rule and regex trace records expose the effective family/policy. An explicitly
+supplied outer `parse_mode` remains a staged compatibility adapter until `.9.1.7.5`; generated source remains
+v1/format 1 with its historical seek and handler-family interpretation until `.4`; descriptor metadata remains
+pre-cursor-v1 until `.3`. None of those later seams changes ordinary intrinsic execution.
 
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {

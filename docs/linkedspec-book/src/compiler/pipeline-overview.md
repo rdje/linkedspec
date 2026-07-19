@@ -51,6 +51,14 @@ ten-family plans, authoritative root/nested dispatch, portable generated-family 
 module are current under `.8.2`. Contract-sourced interpreter-first 8/105 fresh-host proof closes under `.8.3`,
 and `.8.4` admits Lua across all 16 capability rows at five-backend 80/0/0 and closes the backend handoff.
 
+Ordinary Lua runtime entry now treats compiled rule family as execution policy. At every live, loaded,
+normalized, direct-call, blind/action-child, recursive, or traced rule entry, AND derives consume plus sequence
+and OR/default derives seek plus choice. Only the current cursor crosses a child boundary; the child re-enters
+the same owner and derives again. An explicit outer `parse_mode` remains temporarily distinguishable from an
+omitted value for compatibility removal in `.9.1.7.5`. Existing generated-source v1 is separately interpreted
+from its validated legacy family plan with historical seek until generated-source v2 replaces it in `.4`; the
+ordinary intrinsic path does not silently change a versioned artifact.
+
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
 ## Staged linked parsing

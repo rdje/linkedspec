@@ -86,9 +86,15 @@ after all labels are known; and explicit edges keep written ownership. Validatio
 edge codes with governed stage/fields, while valid family-derived ownership lowers into existing compiled
 action/blind tables. The exact contract proof moves from 44/166 RED failures to 258/258 green assertions per ABI;
 all five focused consumers pass 936 assertions per ABI. Package remains 176/177 with only staged help, all four
-primary legs remain 32/65, corpus remains 105/105 per ABI, and cursor governance remains 67/5+3/44. Runtime still
-uses the global engine policy, descriptor still carries its old global field, generated source remains v1/format
-1, and public options/rollout remain unchanged for `.2-.6`.
+primary legs remain 32/65, corpus remains 105/105 per ABI, and cursor governance was 67/5+3/44 at normalization. Runtime now
+uses that normalized identity in `.9.1.7.2`: omitted-policy live, loaded, normalized, recursive, and traced entries
+derive AND-consume/sequence or OR-default-seek/choice independently, including all eight child mechanisms and both
+structural replacements. Its exact proof moves from 44/110 RED failures to 110/110 per ABI, and six focused
+consumers total 1,046 assertions per ABI; registering that consumer makes current governance 68/5+3/44. Explicit
+outer policy remains a compatibility seam until `.5`, and
+generated-source v1 retains historical seek plus legacy family interpretation until `.4`. Descriptor still
+carries its old global field, generated source remains v1/format 1, and public options/rollout remain unchanged
+for `.3-.6`.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted

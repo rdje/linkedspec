@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.2` — policy belongs to entered-rule execution, not call edges):
+  Lua now derives one execution-policy record immediately after resolving the entered compiled rule. That record
+  carries authored family, effective seek/consume policy, AND sequence versus OR/default choice, and the normal or
+  generated-v1 dispatch family. Matching functions consume that record; they no longer consult engine state
+  implicitly. Child dispatch remains deliberately thin: action, blind, direct-call, and recursive paths pass the
+  live cursor into `execute_rule(...)`, where the child derives again from its own compiled family.
+
+  Missing outer policy and explicit outer policy must remain distinguishable during the staged migration. A
+  missing `parse_mode` now means intrinsic AND-consume or OR/default-seek; an explicit value remains an intentional
+  compatibility adapter until `.5` removes that high-level surface. Low-level seek/consume matcher primitives are
+  unchanged. This separation also keeps root selection orthogonal: selection chooses the entered label, then that
+  label owns its execution policy.
+
+  Generated-source v1 is a versioned semantic boundary rather than ordinary compiled execution. Its validated
+  handler-family row still determines sequence/choice and blind/action dispatch, while its historical default
+  remains seek. That preserves compact Pipe's v1 AND/sequence interpretation even though normal compiled Pipe is
+  now OR/choice. `.4` must replace that isolation explicitly with generated-source v2; silently inheriting normal
+  family metadata here would mutate old artifacts without a contract bump.
+
+  Lua's top-level-local limit also shaped the implementation: adding another file-scope helper crossed the
+  interpreter chunk's 200-local ceiling, so the small derivation remains localized inside `execute_rule(...)`
+  instead of introducing hidden module state. Exact RED was 44/110 on each ABI; green is 110/110, with 1,046
+  focused assertions per ABI. Package 176/177x2, primary 32/65x4, and corpus 105/105x2 stay at their staged
+  boundaries. Registering the new execution consumer moves inventory only to 68 files / 5+3 rollout / 44
+  mutations because descriptor/generated/public/admission work remains `.3-.6`.
+
+  Final signoff is KM 628/4,600, mdBook, all four doctrines, root consumers 7+5, cursor admission 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Cleanup removes only the generated book, Python cache, and
+  caller-created dual-ABI native-module trees before commit.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.1` — syntax identity can move without moving versioned execution):
   Lua's normal compiled `is_and` fact and generated-v1 family classifier are separate owners. Removing `Pipe`
   from `rule_mode_is_and(...)` makes authored compact `|` exact for AST/compiled normalization, while the v1

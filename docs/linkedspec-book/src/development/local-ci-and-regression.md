@@ -90,6 +90,14 @@ mutations. The preflight changes documentation and task ownership only.
 Canonical closeout repeats root consumers 7+5, cursor admission 288, reference primary 65/65 twice, and Phase 0
 1,031/1,031 in 631 seconds.
 
+Lua runtime leaf `.9.1.7.2` registers a separate 110-assertion contract consumer in both ABI legs. Its identical
+44-failure RED boundary is now green across all 36 families, 8/8 parent-child mechanisms, 2/2 structural
+replacements, loaded/normalized/recursive/trace paths, and explicit generated-v1/outer compatibility isolation.
+Together with diagnostic, logical, root-core, root-route, and normalization consumers, focused proof is 1,046
+assertions per ABI. The known complete-package help mismatch and 33 shared primary cursor residuals remain expected
+until option-removal leaf `.5`; do not reinterpret those staged failures as runtime-policy regressions. Registering
+the consumer advances only inventory to 68 files; rollout remains 5 complete / 3 pending with 44 mutations.
+
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace
@@ -128,7 +136,7 @@ Rust package that contains the consumer. Dart cursor admission applies the same 
 15-role consumer is a tracked canonical input, `tools/run_dart_local.sh` runs the complete Dart suite containing
 it, and `LINKEDSPEC_RUN_DART=1` invokes that registered driver. Julia now applies the same pattern: one exact
 15-role consumer is included by the complete package driver, tracked by canonical CI, and reachable through
-`LINKEDSPEC_RUN_JULIA=1`. The current cursor ledger is 5 complete / 3 pending with 67 governed migration files and
+`LINKEDSPEC_RUN_JULIA=1`. The current cursor ledger is 5 complete / 3 pending with 68 governed migration files and
 44 rejected drift mutations.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`

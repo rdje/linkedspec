@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.2 — derive Lua rule-local runtime policy
+
+PUC Lua and LuaJIT normal execution now derives one immutable policy at every entered rule. AND-family rules
+consume and sequence; OR/default-family rules seek and choose. Action, blind, direct-call, and recursive children
+receive only the current cursor and re-enter the same owner, so each child derives from its own compiled family.
+Live source, loaded source, normalized-AST reconstruction, and traced execution all share that path. Rule scopes
+now identify `family` and `cursor_policy`, and regex decisions identify the effective policy that performed the
+match.
+
+The new contract-driven test first failed exactly 44 of 110 assertions on each ABI. It now passes 110/110 per ABI
+over all 36 family spellings, all eight parent-child mechanisms, both structural replacements, loaded/default,
+normalized, recursive, and trace behavior. Six focused consumers pass 1,046 assertions per ABI. The complete
+package remains 176/177 per ABI with only the separately owned primary-help mismatch; all four default/POSIX
+primary legs remain 32/65 with the same later-owned 33 failures, and corpus remains 105/105 per ABI.
+Registering the new execution consumer moves only the governed inventory to 68 files; rollout stays 5 complete /
+3 pending and all 44 mutations remain rejected.
+
+Explicit outer `parse_mode` input remains effective only as a staged compatibility seam for `.5`. Generated-
+source v1 retains its historical seek default and validated legacy handler-family interpretation—including compact
+Pipe as AND/sequence—until `.4`; ordinary compact Pipe is already OR/choice. Descriptor identity, artifact
+version, public options, shared fixture bytes, and rollout do not move in this slice. Descriptor v1 remains `.3`,
+generated-source v2 `.4`, high-level option removal `.5`, and exact dual-ABI admission `.6`.
+
+Knowledge Map generation reaches 628 facts / 4,600 question keys. The mdBook, memory/task/KM checks, and all four
+doctrines pass; canonical local CI closes with root consumers 7+5, cursor admission 288, reference primary 65x2,
+and Phase 0 1,031/1,031 in 624 seconds. Cleanup removes the generated 11 MiB book, Python cache, and both disposable
+104 KiB native test trees.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.1 — normalize Lua authored families and bare edges
 
 PUC Lua and LuaJIT now classify all 36 neutral rule headers by exact authored family: compact `|` is OR/default

@@ -5421,9 +5421,21 @@ Boundary: /STOP/
   )
   assert_equal(traced.value.body, "gap ", "boundary result")
 
-  find_event(traced_emitter, "lua_runtime:rule", "rule=Top entry_regex=0 mode=And")
-  find_event(traced_emitter, "lua_runtime:regex_match", "rule=Top mode=AND expected_index=0")
-  find_event(traced_emitter, "lua_runtime:regex_match", "rule=Child entry_regex=0")
+  find_event(
+    traced_emitter,
+    "lua_runtime:rule",
+    "rule=Top entry_regex=0 mode=And family=and cursor_policy=consume"
+  )
+  find_event(
+    traced_emitter,
+    "lua_runtime:regex_match",
+    "rule=Top cursor_policy=consume mode=AND expected_index=0"
+  )
+  find_event(
+    traced_emitter,
+    "lua_runtime:regex_match",
+    "rule=Child cursor_policy=seek entry_regex=0"
+  )
   find_event(traced_emitter, "lua_runtime:child_dispatch", "edge_family=action rule=Top target=Child[0]")
   find_event(traced_emitter, "lua_runtime:lifecycle_block", "rule=Top lifecycle=I")
   find_event(traced_emitter, "lua_runtime:lifecycle_block", "rule=Top lifecycle=E")
@@ -5452,7 +5464,11 @@ Boundary: /STOP/
     json.encode(linkedspec.interpreter.to_json(miss_untraced)),
     "no-match trace result identity"
   )
-  local miss_event = find_event(miss_emitter, "lua_runtime:regex_match", "rule=Top mode=AND expected_index=0")
+  local miss_event = find_event(
+    miss_emitter,
+    "lua_runtime:regex_match",
+    "rule=Top cursor_policy=consume mode=AND expected_index=0"
+  )
   assert_contains(miss_event.details, "taken=0", "regex no-match decision")
 
   local recursive = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
@@ -5969,7 +5985,7 @@ test("runtime input cursor views and explicit controls are Unicode exact", funct
 Top::AND
  => Value
 
-Value:AND
+Value:OR+
  /é/
  /ab🙂/
  -> Value[1] {

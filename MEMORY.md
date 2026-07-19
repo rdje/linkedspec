@@ -10,22 +10,22 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.1` — exact PUC Lua/LuaJIT authored-family and bare-edge
-  normalization is verified, documented, and cleaned; commit workflow is in progress.
-- latest_commit: `47a1d166` — `FUTURE-PARITY-BACKLOG.9.1.7.0 - map Lua cursor rollout`
-  (ahead: 234; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.1 - normalize Lua cursor edges` from clean base `47a1d166`.
-- active_work_unit: none after prepared `.9.1.7.1`; do not activate `.9.1.7.2` before the clean commit.
-- next_action: commit prepared `.9.1.7.1`, clear `git_message_brief.txt`, verify clean, then activate intrinsic
-  runtime `.9.1.7.2` task-tree-first from the new commit.
-- current_proof: PUC Lua and LuaJIT share identical 44/166 RED normalization failures and now pass 258/258 exact
-  assertions over 36 families, 18 edge rows, six ownership sets, six portable diagnostics, AST JSON, physical-line
-  boundaries, and compiled action/blind lowering. Five focused consumers pass 936 assertions per ABI. Package is
-  unchanged at 176/177 per ABI with only staged cursor help; every default/POSIX primary leg remains 32/65 with
-  the same 33 later-owned failures; corpus is 105/105 per ABI; neutral governance remains 67 files / 5 complete +
-  3 pending / 44 mutations. Runtime remains engine-global, descriptor global-seek, and generated source v1/format
-  1; no option/shared-fixture/rollout state moves. KM is 627/4,587; mdBook/all four doctrines pass; canonical closes
-  root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 632 seconds. Safe artifacts are removed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.2` — intrinsic PUC Lua/LuaJIT runtime is verified,
+  documented, cleaned, and prepared for commit.
+- latest_commit: `67909eb6` — `FUTURE-PARITY-BACKLOG.9.1.7.1 - normalize Lua cursor edges`
+  (ahead: 235; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.2 - derive Lua rule-local runtime` from clean base `67909eb6`.
+- active_work_unit: none after prepared `.9.1.7.2`; do not activate descriptor `.9.1.7.3` before the clean commit.
+- next_action: commit prepared `.9.1.7.2`, clear `git_message_brief.txt`, verify clean, then activate descriptor
+  v1 `.9.1.7.3` task-tree-first from the new commit.
+- current_proof: PUC Lua and LuaJIT shared identical 44/110 runtime RED failures and now pass 110/110 each over all
+  36 families, 8/8 parent-child mechanisms, 2/2 structural replacements, loaded/normalized/recursive/trace, and
+  explicit outer/generated-v1 isolation. Six focused consumers pass 1,046 assertions per ABI. Missing engine
+  policy is intrinsic at every entered rule; children rederive. Explicit outer policy remains staged for `.5`,
+  generated v1 retains historical seek/family semantics for `.4`, and descriptor/public/rollout do not move.
+  Package remains 176/177x2 with only staged help; primary remains 32/65x4, corpus 105/105x2, governance is
+  68/5+3/44 after registering the execution consumer. KM is 628/4,600; mdBook/all four doctrines pass; canonical
+  closes root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Safe artifacts are removed.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
   diagnostics, eight parent-child mechanisms, and two structural replacements are exact. Normal entered rules
   derive policy once; children rederive independently. Descriptor v1 has no global mode and projects exact facts;
@@ -50,5 +50,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: only the fully verified, documented, cleaned `.9.1.7.1` prepared commit;
-  commit and message-file cleanup remain before the tree is handoff-ready or runtime `.2` may activate.
+- blockers: none. in_flight_uncommitted: fully verified prepared `.9.1.7.2` commit only.

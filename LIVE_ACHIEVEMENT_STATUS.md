@@ -8,13 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.1` — typed Lua/LuaJIT normalization is signoff-complete from clean preflight
-  commit `47a1d166` at ahead 234. The commit workflow is in progress; runtime `.9.1.7.2` may activate only after
-  this verified slice lands and the tree is clean.
+- None after prepared `FUTURE-PARITY-BACKLOG.9.1.7.2`; do not activate descriptor `.9.1.7.3` until the runtime
+  commit lands cleanly and `git_message_brief.txt` is cleared.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.2 — derive Lua rule-local runtime policy**
+  (DONE and prepared for commit from clean base `67909eb6`).
+
+  **Result:** Every normal live/loaded/normalized/recursive/traced rule entry derives AND-consume/sequence or
+  OR-default-seek/choice; every action, blind, direct-call, and recursive child rederives from its own compiled
+  family. Trace exposes effective family/policy. Explicit outer policy and generated-v1 historical seek/family
+  behavior remain test-locked for `.5`/`.4`; descriptor/public/artifact/rollout owners do not move.
+
+  **Proof:** Identical 44/110 RED becomes 110/110 per ABI; six focused consumers pass 1,046 assertions per ABI.
+  Package remains 176/177x2 with only staged help, primary remains 32/65x4, corpus is 105/105x2, cursor governance
+  is 68/5+3/44, and KM is 628/4,600. mdBook/all four doctrines pass; canonical closes root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Generated 11 MiB book, Python cache, and two 104 KiB
+  native trees are removed.
+
+  **Next:** Commit `.2`, clear the brief, verify clean, then activate descriptor v1 `.9.1.7.3` task-tree-first.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.1 — normalize Lua authored families and bare edges**
-  (DONE; clean commit in progress).
+  (DONE at clean commit `67909eb6`).
 
   **Result:** Compact `|` is authored OR/default; complete-line/header-rest bare plain/index/group/block/fluent
   candidates are typed and JSON-roundtrippable; lifecycle/forward/explicit precedence is exact; six portable
@@ -27,7 +42,7 @@ Current execution status for interruption-safe batch workflow recovery.
   7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 632 seconds. Generated 11 MiB book, 28 KiB Python
   cache, and two 104 KiB native trees are removed.
 
-  **Next:** Commit `.1` cleanly, then activate intrinsic runtime `.9.1.7.2` task-tree-first.
+  **Next:** Intrinsic runtime `.9.1.7.2` is active task-tree-first from the clean commit.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.0 — map Lua rule-local cursor rollout**
   (DONE at clean commit `47a1d166`).

@@ -4,7 +4,17 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-18`
+- Last refreshed: `2026-07-19`
+- `2026-07-19` Lua cursor-runtime refresh: `FUTURE-PARITY-BACKLOG.9.1.7.2` derives one execution policy at every
+  ordinary `execute_rule(...)` entry. Exact AND consumes and sequences; OR/default seeks and chooses. Action,
+  blind, direct-call, and recursive children carry the current cursor but re-enter the same owner and derive from
+  their own compiled family. Live, loaded-default, normalized `SpecFile` JSON, and traced execution share this
+  path; rule and regex trace records expose the effective family/policy. Missing engine policy means intrinsic
+  behavior, while an explicit value remains the staged outer compatibility seam for `.5`. Generated-source v1
+  remains separately derived from its validated legacy handler family with historical seek—including compact
+  Pipe AND/sequence—until `.4`. Focused execution is 110 per ABI and six focused consumers total 1,046 per ABI;
+  package remains 176/177x2, primary 32/65x4, corpus 105/105x2, and governance is 68/5+3/44 after registering the
+  execution consumer. Descriptor, generated-v2, public-removal, and admission owners remain `.3-.6`.
 - `2026-07-18` Julia cursor admission refresh: `FUTURE-PARITY-BACKLOG.9.1.6.6` adds one exact
   contract-declared 15-role consumer over native default/AND, normalized, loaded, descriptor v1, emitted/generated
   v2 direct/trace, mixed/recursive, both structural replacements, static removal, primary, and all diagnostics.

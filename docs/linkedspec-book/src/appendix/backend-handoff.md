@@ -6,11 +6,13 @@
 > `cursor_policy`, and emit/consume `linkedspec-generated-source-v2`. Version-2
 > plan rows retain `{label, family}` and derive policy from family. Perl is
 > admitted across the composed contract, as are Rust and Dart through their own
-> topology-checked consumers. Julia now has typed normalization, intrinsic
-> live/loaded/normalized execution, cursor descriptor v1, and generated-source
-> v2; its outer option remains until `.9.1.6.5`. Lua
-> retains staged generated-source-v1 and global-option behavior until its
-> dependency-ordered rollout leaves.
+> topology-checked consumers. Julia is fully admitted with typed normalization,
+> intrinsic execution, cursor descriptor v1, generated-source v2, and no public
+> override. Lua now has typed normalization plus intrinsic normal live, loaded,
+> normalized, recursive, and traced execution. Its descriptor, generated-source
+> v2, global-option removal, and dual-ABI admission remain dependency-ordered
+> under `.9.1.7.3-.6`; generated-source v1 and explicit outer callers keep their
+> test-locked compatibility behavior until those owners move.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
@@ -71,7 +73,8 @@ the same optional controls:
 The retired `--parse-mode` flag is recognized only as a usage error: exit `2`
 with `--parse-mode has been removed; cursor policy is derived from each rule
 (OR/default=seek, AND=consume)`. Perl, Rust, Dart, and Julia project those
-shared fixture bytes; Lua migrates to the same interface later in order.
+shared fixture bytes. Lua ordinary runtime execution is already intrinsic, but
+its CLI/help/request-trace removal remains `.9.1.7.5`.
 
 There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
 status probes are separate developer commands. Trace levels accept numeric values plus the
