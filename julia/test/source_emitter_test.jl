@@ -460,8 +460,10 @@ catch error
     error
 end
 @assert execution_error isa LinkedSpecJulia.GeneratedSourceException
-@assert LinkedSpecJulia.generated_source_stage_name(execution_error.stage) == "execute_generated"
-@assert LinkedSpecJulia.generated_source_code_name(execution_error.code) == "generated_execution_failed"
+@assert LinkedSpecJulia.generated_source_stage_name(execution_error.stage) == "select_entry_rule"
+@assert LinkedSpecJulia.generated_source_code_name(execution_error.code) == "entry_rule_not_found"
+@assert execution_error.entry_rule == "Missing"
+@assert execution_error.rule_label == "Missing"
 print("generated-host-ok")
 """,
         )

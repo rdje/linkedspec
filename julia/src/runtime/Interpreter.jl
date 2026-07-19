@@ -324,6 +324,7 @@ function runtime_parse(
         resolve_entry_rule(engine.compiled_spec, top_rule)
     catch error
         if error isa EntryRuleSelectionException
+            _trace_entry_rule_selection_failure!(trace, top_rule, error)
             throw(RuntimeInterpreterException(
                 error.message;
                 diagnostic = _runtime_diagnostic(
@@ -341,6 +342,7 @@ function runtime_parse(
         rethrow()
     end
     label = selection.rule.label
+    _trace_entry_rule_selection_success!(trace, top_rule, selection)
     context = _RuntimeExecutionContext(
         input,
         label,
@@ -400,6 +402,42 @@ function runtime_parse(
             exit_trace_scope!(trace, trace_scope, trace_exit_details)
         end
     end
+end
+
+function _trace_entry_rule_selection_success!(
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+    explicit_selector,
+    selection::ResolvedEntryRule,
+)
+    trace === nothing && return nothing
+    requested = explicit_selector === nothing ? "<default>" : String(explicit_selector)
+    trace_decision!(
+        trace,
+        "julia_runtime:entry_rule_selection",
+        true,
+        "requested=$requested effective=$(selection.rule.label) " *
+            "basis=$(entry_rule_selection_basis_name(selection.basis))",
+        LinkedSpecTraceLow,
+    )
+    return nothing
+end
+
+function _trace_entry_rule_selection_failure!(
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+    explicit_selector,
+    error::EntryRuleSelectionException,
+)
+    trace === nothing && return nothing
+    requested = explicit_selector === nothing ? "<default>" : String(explicit_selector)
+    trace_decision!(
+        trace,
+        "julia_runtime:entry_rule_selection",
+        false,
+        "requested=$requested effective=<none> basis=<none> " *
+            "stage=$(error.stage) code=$(error.code)",
+        LinkedSpecTraceLow,
+    )
+    return nothing
 end
 
 runtime_execute(

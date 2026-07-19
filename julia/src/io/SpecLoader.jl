@@ -50,6 +50,7 @@ end
     SpecReadFailedCode
     InvalidUtf8Code
     SpecParseFailedCode
+    SpecNoRulesDefinedCode
     SpecValidationFailedCode
     SpecCompileFailedCode
 end
@@ -73,6 +74,7 @@ const _SPEC_PIPELINE_CODE_NAMES = Dict(
     SpecReadFailedCode => "spec_read_failed",
     InvalidUtf8Code => "invalid_utf8",
     SpecParseFailedCode => "spec_parse_failed",
+    SpecNoRulesDefinedCode => "no_rules_defined",
     SpecValidationFailedCode => "spec_validation_failed",
     SpecCompileFailedCode => "spec_compile_failed",
 )
@@ -254,10 +256,14 @@ function load_and_compile_spec(request::SpecRequest, options::SpecLoadOptions)
         validate_spec(spec)
     catch error
         _spec_pipeline_fatal_error(error) && rethrow()
+        code = error isa SpecValidationException &&
+            error.diagnostic !== nothing &&
+            error.diagnostic.code == "no_rules_defined" ?
+            SpecNoRulesDefinedCode : SpecValidationFailedCode
         throw(_spec_pipeline_error(
             request,
             ValidateSpecStage,
-            SpecValidationFailedCode,
+            code,
             "Spec validation failed";
             resolved_path = loaded.resolved.path,
             detail = sprint(showerror, error),

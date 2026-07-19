@@ -58,7 +58,8 @@ canonical trace projection. During the rule-local cursor migration, Perl establi
 and Rust later passed them unchanged in both environments after `.9.1.4.6`. Root-selection admission advances the
 shared manifest reference-first to 65 cases. Perl owns the reference bytes; Rust core/routes/admission `.2.1-.3`
 and Dart `.3.1-.3` now pass them exactly at 65/65 in both environments. Julia core `.4.1` passes the root-owned
-cases and leaves composed routes/cursor/admission dependency-ordered; Lua leaf `.5` owns its migration.
+cases and route `.4.2` passes its 57-assertion composed proof; cursor/admission remain dependency-ordered. Lua
+leaf `.5` owns its migration.
 `tools/run_rust_local.sh` and `tools/run_dart_local.sh` are
 green against the expanded manifest. UTF-16/UTF-32 are not
 implicit inputs.
@@ -68,6 +69,11 @@ environment by closing the sole root-owned markerless compilation case. The iden
 22 help/usage and 11 medium-or-higher request-trace cases owned by the separately pending cursor migration. Julia
 root admission waits for that migration after composed root routes, so 65x2 remains the admission standard rather
 than being weakened around known failures.
+
+Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
+governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
+not advance Julia's rollout row: cursor `.9.1.6` must first remove the 33 option/trace mismatches, after which
+topology admission `.4.3` owns exact 65x2 promotion.
 
 Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
@@ -101,7 +107,7 @@ Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted bou
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
-Julia core is measured at 32/65 twice before route/cursor convergence, and Lua remains `.5`. A green 5x2x65 run is the
+Julia core/routes are measured at 32/65 twice before cursor convergence, and Lua remains `.5`. A green 5x2x65 run is the
 final rollout target rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
@@ -253,14 +259,14 @@ zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
-stable primary failure/trace routing, and unbounded full-manifest CLI execution. At the active core boundary,
+stable primary failure/trace routing, and unbounded full-manifest CLI execution. At the active route boundary,
 the complete package command reaches `Primary CLI arguments resolution and loading` and fails exactly 1/57 there:
 Julia help still includes the cursor-owned global option while the shared reference has removed it. The
 independent full shared runner classifies the complete current boundary as 32/65 twice, with the root-owned
 markerless case passing and only 33 cursor-owned help/usage/trace failures remaining. The neutral-consuming core
-suite passes 79 assertions and the standalone complete corpus remains 105/105. This is an expected dependency
-boundary, not a green local-gate claim; composed root routes, Julia cursor migration, and final root admission
-must land in that order before this section can report complete Julia green.
+suite passes 79 assertions, route proof passes 57, and the standalone complete corpus remains 105/105. This is an
+expected dependency boundary, not a green local-gate claim; Julia cursor migration and final root admission must
+land in that order before this section can report complete Julia green.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

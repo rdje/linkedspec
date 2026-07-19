@@ -46,9 +46,10 @@ selector, the first authored `Rule::` in definition order wins; without a marker
 authored rule wins.
 
 The composed Perl, Rust, and Dart backends implement all three branches across their admitted native,
-loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command routes. Julia core/native/
-primary execution now does too, but its composed route proof remains pending and Lua still requires an entry
-marker. Markerless execution is therefore **not yet uniform portable behavior**. Until
+loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command routes. Julia core plus loaded/
+normalized/generated/emitted routes now do too, but its topology admission waits for cursor migration and Lua
+still requires an entry marker. Markerless execution is therefore **not yet uniformly admitted portable
+behavior**. Until
 `FUTURE-PARITY-BACKLOG.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule

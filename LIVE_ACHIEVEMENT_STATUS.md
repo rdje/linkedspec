@@ -8,14 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` — fully verified at the commit boundary after clean preflight commit
-  `a10bec0d`. Marker-optional parser/validation, one structure-first compiled resolver, portable zero/unknown
-  failures, strict no-drift, descriptor identity, neutral 79, loader 82, exact root primary 32/65x2 with the
-  frozen 33 cursor failures, corpus 105, root governance 4/7 plus 34 mutations, KM 611/4,408, mdBook, all four
-  doctrines, and canonical Phase 0 1,031/1,031 in 619 seconds pass. Cleanup is complete. Do not activate composed
-  routes `.4.2` or claim rollout promotion until the `.4.1` commit is clean.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` — fully signed off after clean core commit `6553a4c3`. Loaded,
+  normalized/reconstructed, generated-plan, independently emitted, trace, and diagnostic routes reuse one
+  compiled resolver. Routes 57, core 79, loader 82, emitter 59, package progression through cursor 56/57, primary
+  32/65x2, corpus 105, root 34, KM 612/4,421, book/live sync, four doctrines, canonical pre-gates, exact Phase 0
+  1,031 in 611 seconds, and safe cleanup pass. Only commit/brief-clear/clean proof remain; do not promote rollout
+  or activate cursor `.9.1.6` before that clean boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 — implement Julia root resolution**
+  (DONE at clean commit `6553a4c3` — core/native/descriptor signoff complete).
+
+  **Result:** Markerless one-or-more-rule Julia source is valid; one structure-first compiled resolver owns
+  explicit selector > first authored marker > first authored rule before context/user code. Portable zero/unknown
+  failures, strict authored-edge no-drift, and immutable descriptor root identity pass without route promotion.
+
+  **Proof:** Neutral core 79, loader 82, exact primary 32/65 default/POSIX with only 33 cursor failures, corpus
+  105, root governance 4/7 plus 34 mutations, KM 611/4,408, mdBook, four doctrines, canonical Perl root 7+5,
+  cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 619 seconds pass. Generated book/Python cache
+  cleanup passes.
+
+  **Next:** Composed Julia root routes `.9.1.1.2.4.2` are active task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 — map Julia root selection**
   (DONE at clean commit `a10bec0d` — behavior-free preflight signed off).
 

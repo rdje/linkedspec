@@ -114,9 +114,10 @@ contract or invalid-plan rejection still occurs before entry selection. Route pr
 4/7 root-selection boundary without changing generated behavior.
 
 Julia core `.9.1.1.2.4.1` publishes the same root contract in compiled descriptors and makes native selection use
-one ordered compiled-state resolver. Julia generated direct/emitted/traced failure and selection composition is
-intentionally not claimed here yet; route leaf `.4.2` owns proving those artifacts reuse the resolver while
-preserving generated-source v1 identity and validation order.
+one ordered compiled-state resolver. Route leaf `.4.2` proves generated direct/traced and independently emitted
+direct/traced execution pass optional `top_rule` to that resolver. Low `julia_runtime:entry_rule_selection` trace
+records requested/effective/basis; generated zero/unknown failures retain portable stages/codes after plan
+validation. Generated-source contract v1/format 1 and its ordered `{label, family}` plan remain unchanged.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

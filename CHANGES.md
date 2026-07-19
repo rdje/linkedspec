@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 — converge Julia root routes
+
+Julia loaded source and normalized-JSON reconstruction now have explicit route locks proving they preserve
+definition order, authored `is_top`, and descriptor identity while default and invocation-local `top_rule`
+execution reuse the compiled resolver. Generated-plan direct/traced execution and a fresh independently loaded
+emitted module prove the same explicit selector > first authored marker > first authored rule order. Selectors
+remain per-call state; generated-source stays contract v1/format 1 and its plan remains ordered `{label, family}`.
+
+Low runtime trace now emits one `julia_runtime:entry_rule_selection` decision before context or user code.
+Successful decisions record requested selector or `<default>`, effective label, and exact basis. Failed decisions
+record requested identity, `<none>` effective/basis, and portable stage/code. File-loaded zero-rule source now
+projects `no_rules_defined` at `validate_spec` rather than generic `spec_validation_failed`. Generated zero and
+unknown selection preserve `no_rules_defined` / `validate_spec` and `entry_rule_not_found` / `select_entry_rule`;
+unknown failures retain `entry_rule` plus `rule_label`. Unrelated generated runtime errors remain
+`generated_execution_failed`, and generated plan validation still happens before selection.
+
+Focused routes pass 57/57, core 79/79, loader 82/82, and emitter 59/59. The complete package progresses through
+all new and existing groups before the unchanged cursor-owned 56/57 help mismatch. Shared primary remains exactly
+32/65 in default and POSIX environments with the same 33 cursor failures; corpus is 105/105 and root governance
+stays 4 complete / 3 pending with all 34 mutations rejected. Cursor `.9.1.6` and topology admission `.4.3` remain
+dependency-ordered; no rollout row advances.
+
+Final signoff passes Knowledge Map 612/4,421, mdBook, memory/task/all four doctrines, whitespace, and every
+canonical pre-Phase-0 stage. A retained exact Phase-0 rerun passes 1,031/1,031 in 611 seconds. Cleanup removes the
+11 MB generated mdBook and 28 KB Python bytecode cache; reusable backend build state and durable issue logs remain.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 — implement Julia root resolution
 
 Julia now accepts valid one-or-more-rule `.spec` sources without requiring an authored `Rule::` marker.

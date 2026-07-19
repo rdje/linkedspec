@@ -26,9 +26,11 @@ first rule once from compiled state before user code, returns portable zero/unkn
 authored-edge analysis, and publishes immutable descriptor identity. Its focused neutral consumer passes 79
 assertions, shared primary improves from 31/65 to exactly 32/65 in both option environments, and corpus remains
 105/105; the identical 33 remaining help/usage/request-trace failures belong to cursor migration `.9.1.6`.
-Composed Julia routes `.4.2` remain root-owned and precede that cursor leaf; exact 65x2 admission `.4.3` follows
-without absorbing unrelated option/trace work. Lua fallback remains blocked by validation, and root no-drift leg
-`.6` remains separately owned, so rollout stays 4/7.
+Composed Julia routes `.4.2` now prove loaded/normalized and generated/emitted direct/traced reuse, low
+requested/effective/basis trace, portable loader/generated zero/unknown failures, unchanged generated v1 identity,
+and generated-plan-first rejection in a 57-assertion suite. Cursor `.9.1.6` follows before exact 65x2 admission
+`.4.3`; Lua fallback remains blocked by validation, and root no-drift leg `.6` remains separately owned, so
+rollout stays 4/7.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

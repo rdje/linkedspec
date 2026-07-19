@@ -450,9 +450,10 @@ This stage exists to reject malformed input early and clearly. The validation ow
 first content line is a valid rule label. The Perl reference validator now requires one or more rules rather than a
 `RuleName::` marker. Its ordered resolver applies ADR `0046` / `linkedspec-root-rule-selection-v1`: explicit
 selector > first authored marker > first authored rule. Rust and Dart implement the same marker-optional envelope
-and ordered resolver across composed routes. Julia core validation and native/primary execution now do too;
-loaded/normalized/generated/emitted convergence remains its `.4.2` route leaf. Lua retains the temporary
-marker-required envelope until its dependency-ordered rollout leaf lands.
+and ordered resolver across composed routes. Julia core validation plus loaded/normalized/generated/emitted
+direct/traced routes now do too; its generated plan still validates before selection and remains the minimal
+ordered label/family shape. Lua retains the temporary marker-required envelope until its dependency-ordered
+rollout leaf lands.
 
 **Paragraph-level validation** (`validate_dsl_syntax`): the deepest layer. It detects duplicate rule definitions, rejects rule definitions inside still-open blocks, checks that action edges (`->`) and blind-call edges (`=>`) have valid target labels and block-depth balance, rejects mixed action/blind-call modes within one rule, validates Perl regex literals for compile-ability, verifies rule-header right-hand-side content, checks split-marker syntax, and reports unused/undefined rule references. When `strict_syntax => 1` is set, unused-rule and undefined-reference warnings become hard errors, which is useful for CI regressions.
 

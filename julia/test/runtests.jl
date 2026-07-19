@@ -12,6 +12,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 include("root_rule_selection_core_test.jl")
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
+include("root_rule_selection_routes_test.jl")
 include("logical_helper_contract_test.jl")
 include("variadic_user_function_contract_test.jl")
 include("uniform_binding_contract_test.jl")

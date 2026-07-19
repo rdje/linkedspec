@@ -21,7 +21,11 @@ locked by a neutral-consuming focused suite. Shared primary now passes exactly 3
 POSIX environments; the identical 33 remaining failures are the separately pending cursor migration's legacy
 global-option help/usage/request-trace projection. The package gate reaches the same cursor boundary at 56/57 in
 its primary-arguments testset, while standalone corpus execution remains 105/105. Composed root routes `.4.2`
-precede cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows it, so rollout remains 4/7.
+now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
+same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
+zero/unknown identities, plan validation remains first, and generated contract v1/format 1 plus the minimal
+label/family plan remain unchanged. Cursor `.9.1.6` precedes exact 65x2 root admission `.4.3`, so rollout remains
+4/7.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -61,9 +65,17 @@ core gate includes it only when explicitly requested:
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
-At the active core boundary this complete driver is expected to stop at the pending cursor-owned help mismatch;
+At the active route boundary this complete driver is expected to stop at the pending cursor-owned help mismatch;
 do not report it green. Use the exact shared runner to classify 32/65 twice and the standalone corpus command to
-verify 105/105 until composed root routes and cursor migration converge.
+verify 105/105 until cursor migration and root admission converge. The focused route suite is:
+
+```bash
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
+  julia --project=julia -e \
+  'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/root_rule_selection_routes_test.jl")'
+```
+
+It passes 57 assertions, including a fresh isolated generated module.
 
 Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
 `LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot. Without a depot override, the script

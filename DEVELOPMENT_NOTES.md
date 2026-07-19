@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` — route adapters preserve selection, not reimplement it):
+  Post-core probes found success routing was already mostly correct: loaded markerless source, normalized JSON,
+  generated direct calls, and emitted modules all reached the new resolver. The remaining route defects were
+  boundary projection: loader zero-rule validation collapsed to `spec_validation_failed`, generated zero/unknown
+  selection collapsed to `generated_execution_failed`, and low trace contained no selection decision. Plan
+  validation already ran before runtime and stays there.
+
+  The implementation keeps precedence in `resolve_entry_rule`. `runtime_parse` only emits a low decision around
+  that call, with requested/effective/basis on success and requested/none/stage/code on failure. The loader maps
+  only the validator's typed `no_rules_defined` diagnostic; other validation failures keep their prior code.
+  Generated wrapping specializes only runtime diagnostics with the two portable selection codes, leaving sink,
+  exit, plan, compile/load, and unrelated execution failures on their established paths. New generated enum
+  variants project exact portable strings without changing contract v1, format 1, or plan rows.
+
+  The 57-assertion route suite treats identity as a no-drift surface: descriptors compare before/after loaded and
+  reconstructed execution; plans are required to expose only `label` and `family`; selectors are passed only at
+  invocation; and a fresh offline process independently loads the emitted markerless module, executes default and
+  explicit routes, and checks low trace. Focused core 79, loader 82, emitter 59, routes 57, package progression
+  through the unchanged cursor 56/57 boundary, exact primary 32/65 twice, corpus 105, and root governance 34 pass.
+  Rollout remains 4/7 until cursor `.9.1.6` and topology admission `.4.3` complete.
+
+  Final signoff passes KM 612/4,421, mdBook, memory/task/all four doctrines, whitespace, and every canonical stage
+  through Phase 0. Because the original long gate's session handle was lost during context compaction after it
+  completed, the exact terminal Phase-0 command was rerun under a retained handle and passed 1,031/1,031 in 611
+  seconds. Safe cleanup removes the generated 11 MB book and 28 KB Python bytecode cache; the 99 MB reusable Rust
+  target baseline and Julia package/source state remain for dependency-ordered cursor work.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` — make compiled state the only Julia entry-selection owner):
   Julia's preflight fallback loop already knew how to choose the first marker and then row zero, but explicit
   selection bypassed it and went straight to rule execution. Keeping those branches split made failure ordering

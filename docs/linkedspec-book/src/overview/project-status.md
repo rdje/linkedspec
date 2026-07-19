@@ -20,10 +20,13 @@ Admission `.3.3` locks driver/case topology and advances Dart after a 270-test p
 and 105/105 corpus proof. Julia core `.9.1.1.2.4.1` accepts markerless one-or-more-rule source, centralizes exact
 explicit/first-marker/first-rule selection before user code, returns portable zero/unknown identities, preserves
 strict authored-edge analysis, and publishes immutable descriptor root identity. Its neutral-consuming focused
-suite passes, shared primary is exactly 32/65 in both option environments, and corpus remains 105/105. The 33
+suite passes. Route leaf `.4.2` proves loaded/normalized and generated/emitted direct/traced reuse, low requested/
+effective/basis trace, portable loader/generated failures, generated-plan-first validation, and unchanged v1
+identity through 57 assertions. Shared primary is exactly 32/65 in both option environments, and corpus remains
+105/105. The 33
 remaining failures are exclusively the pending Julia cursor migration's legacy help/usage/request-trace
-`parse_mode` projection. Julia composed routes `.4.2` therefore precede cursor `.9.1.6`, and final exact 65x2 root
-admission `.4.3` follows it. Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
+`parse_mode` projection. Julia cursor `.9.1.6` therefore precedes final exact 65x2 root admission `.4.3`.
+Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
 ## Completed phases

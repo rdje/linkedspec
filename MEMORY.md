@@ -11,26 +11,32 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` — Julia marker-optional core resolution, portable
-  failures, descriptor/strict identity, neutral 79, primary 32/65x2, corpus 105, and canonical signoff are ready
-  for the prepared commit; composed routes and rollout remain unclaimed.
-- latest_commit: `a10bec0d` — `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0 - map Julia root selection`
-  (ahead: 219; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 - implement Julia root resolution`.
-- active_work_unit: Julia root core/descriptor `.9.1.1.2.4.1` is implemented, documented, fully verified, and
-  cleaned; only its prepared commit, brief clearing, and clean-tree proof remain. Composed routes `.4.2`, cursor
-  `.9.1.6`, and final admission `.4.3` stay dependency-ordered and unclaimed.
-- next_action: run the final staged/doctrine/whitespace review, commit `.4.1`, clear the brief, prove clean, and
-  only then activate composed routes `.4.2` task-tree-first.
+  failures, descriptor/strict identity, neutral 79, primary 32/65x2, corpus 105, canonical signoff, and cleanup
+  land at clean `6553a4c3`.
+- latest_commit: `6553a4c3` — `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 - implement Julia root resolution`
+  (ahead: 220; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 - converge Julia root routes`.
+- active_work_unit: Julia composed root routes `.9.1.1.2.4.2` are fully implemented, synchronized, verified, and
+  cleaned; only the prepared commit, brief clear, and clean-tree proof remain. Cursor `.9.1.6` and final admission
+  `.4.3` stay dependency-ordered and unclaimed until that clean boundary.
+- next_action: commit `.4.2`, clear `git_message_brief.txt`, prove the tree clean, then activate cursor `.9.1.6`
+  task-tree-first as the next dependency-safe leaf.
 - current_proof: Root-selection rollout stays 4 complete / 3 pending. Julia now accepts markerless one-or-more-rule
   source and one compiled resolver owns zero-first then explicit > first marker > first rule selection before
   context/user code. Portable zero/unknown failures, strict authored-edge no-drift, and immutable descriptor root
   identity pass neutral 79/79; loader 82/82 passes after replacing an obsolete markerless negative fixture.
   Shared primary is exactly 32/65 in default and POSIX environments; all 33 failures are the pending cursor help/
   usage/request-trace projection. `Pkg.test()` reaches only the known 56/57 cursor help mismatch; corpus is
-  105/105 and root governance is 4/7 with 34 mutations. KM 611/4,408, public/book/live synchronization, mdBook,
-  memory/task/all four doctrines, whitespace, and canonical CI pass; Phase 0 is 1,031/1,031 in 619 seconds.
+  105/105 and root governance is 4/7 with 34 mutations. KM 612/4,421, public/book/live synchronization, mdBook,
+  memory/task/all four doctrines, whitespace, and canonical CI pass; the retained Phase 0 rerun is 1,031/1,031
+  in 611 seconds.
   Verification also proves a compiled-only temp Julia depot must explicitly layer the source-bearing user depot;
   trailing `:` adds system depots, not the user depot here.
+- current_route_proof: Loaded/normalized/generated/emitted direct/traced paths reuse the one resolver. Low trace
+  records requested/effective/basis or failure stage/code; loader/generated zero/unknown identities stay portable;
+  generated plan validation remains first; v1/format 1 and label/family plans are unchanged. Routes 57, core 79,
+  loader 82, emitter 59, package progression through cursor 56/57, primary 32/65x2, corpus 105, and root 34 pass.
+  Cleanup removes the 11 MB generated book and 28 KB Python bytecode cache while retaining reusable build state.
 - latest_bootstrap_read: 2026-07-18 — full roadmap, repository codebase, mdBook, active task, Knowledge Map,
   Toolbox, ADR `0046`, neutral/Perl/Rust/Dart root precedent, and exact Julia preflight seams/gates reviewed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -42,5 +48,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: fully verified Julia `.4.1` code/tests/docs await their atomic commit;
-  no background job runs. Generated book/Python cache cleanup is complete; parked ignored work is untouched.
+- blockers: none. in_flight_uncommitted: Julia `.4.2` route code/tests/docs are fully signed off and ready for the
+  prepared commit. No background job runs; parked ignored work is untouched.

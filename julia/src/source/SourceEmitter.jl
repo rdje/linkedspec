@@ -2,6 +2,8 @@
     EmitSourceStage
     CompileOrLoadGeneratedSourceStage
     ValidateGeneratedPlanStage
+    ValidateGeneratedSpecStage
+    SelectGeneratedEntryRuleStage
     ExecuteGeneratedStage
 end
 
@@ -12,6 +14,8 @@ end
     GeneratedPlanLabelMismatchCode
     GeneratedPlanFamilyMismatchCode
     GeneratedPlanUnknownFamilyCode
+    GeneratedNoRulesDefinedCode
+    GeneratedEntryRuleNotFoundCode
     GeneratedExecutionFailedCode
 end
 
@@ -220,6 +224,10 @@ function execute_generated_parser_v1(
         error isa GeneratedSourceException && rethrow()
         error isa _GeneratedDiagnosticOutputSinkFailure && throw(error.error)
         error isa RuntimeExitNow && rethrow()
+        if error isa RuntimeInterpreterException && error.diagnostic !== nothing &&
+                error.diagnostic.code in ("no_rules_defined", "entry_rule_not_found")
+            throw(generated_source_entry_rule_selection_failed(source_identity, error))
+        end
         rule_label = error isa RuntimeInterpreterException && error.diagnostic !== nothing ?
             error.diagnostic.rule_label : nothing
         family = rule_label === nothing ? nothing : get(families, rule_label, nothing)
@@ -260,6 +268,10 @@ function generated_source_stage_name(stage::GeneratedSourceStage)
         return "compile_or_load_generated_source"
     elseif stage == ValidateGeneratedPlanStage
         return "validate_generated_plan"
+    elseif stage == ValidateGeneratedSpecStage
+        return "validate_spec"
+    elseif stage == SelectGeneratedEntryRuleStage
+        return "select_entry_rule"
     end
     return "execute_generated"
 end
@@ -277,6 +289,10 @@ function generated_source_code_name(code::GeneratedSourceCode)
         return "generated_plan_family_mismatch"
     elseif code == GeneratedPlanUnknownFamilyCode
         return "generated_plan_unknown_family"
+    elseif code == GeneratedNoRulesDefinedCode
+        return "no_rules_defined"
+    elseif code == GeneratedEntryRuleNotFoundCode
+        return "entry_rule_not_found"
     end
     return "generated_execution_failed"
 end
@@ -286,6 +302,7 @@ struct GeneratedSourceException <: Exception
     code::GeneratedSourceCode
     summary::String
     source_identity::String
+    entry_rule::Union{Nothing,String}
     rule_label::Union{Nothing,String}
     handler_family::Union{Nothing,String}
     detail::Union{Nothing,String}
@@ -296,6 +313,7 @@ function GeneratedSourceException(
     code::GeneratedSourceCode,
     summary::AbstractString,
     source_identity::AbstractString;
+    entry_rule = nothing,
     rule_label = nothing,
     handler_family = nothing,
     detail = nothing,
@@ -306,6 +324,7 @@ function GeneratedSourceException(
         code,
         String(summary),
         String(source_identity),
+        optional_string(entry_rule),
         optional_string(rule_label),
         optional_string(handler_family),
         optional_string(detail),
@@ -346,6 +365,27 @@ function generated_source_execution_failed(
     )
 end
 
+function generated_source_entry_rule_selection_failed(
+    source_identity::AbstractString,
+    error::RuntimeInterpreterException,
+)
+    diagnostic = error.diagnostic
+    if diagnostic === nothing ||
+            !(diagnostic.code in ("no_rules_defined", "entry_rule_not_found"))
+        throw(ArgumentError("runtime error is not an entry-rule selection failure"))
+    end
+    zero_rules = diagnostic.code == "no_rules_defined"
+    return GeneratedSourceException(
+        zero_rules ? ValidateGeneratedSpecStage : SelectGeneratedEntryRuleStage,
+        zero_rules ? GeneratedNoRulesDefinedCode : GeneratedEntryRuleNotFoundCode,
+        "Generated Julia parser entry-rule selection failed",
+        source_identity;
+        entry_rule = diagnostic.entry_rule,
+        rule_label = diagnostic.rule_label,
+        detail = diagnostic.detail,
+    )
+end
+
 _generated_source_detail(detail::Exception) = sprint(showerror, detail)
 _generated_source_detail(detail) = string(detail)
 
@@ -357,6 +397,7 @@ function to_json(error::GeneratedSourceException)
         "summary" => error.summary,
         "source_identity" => error.source_identity,
     )
+    _put_if_present!(result, "entry_rule", error.entry_rule)
     _put_if_present!(result, "rule_label", error.rule_label)
     _put_if_present!(result, "handler_family", error.handler_family)
     _put_if_present!(result, "detail", error.detail)

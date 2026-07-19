@@ -462,10 +462,10 @@ and Dart
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
 markerless, explicit, unknown, and request-trace outcomes. Rust and Dart admission each topology-check one 15-role
-consumer across the neutral rows and every real backend route family. Julia core/native/primary execution now
-implements the same order, while its composed routes remain `.4.2`; Lua validation still blocks fallback. Use an
-explicit selector and retain a marker when current composed multi-backend execution must be independent of those
-staged differences.
+consumer across the neutral rows and every real backend route family. Julia core, loaded/normalized, and
+generated/emitted direct/traced execution now implement the same order; its topology admission waits for cursor
+`.9.1.6`, and Lua validation still blocks fallback. Use an explicit selector and retain a marker when current
+composed multi-backend execution must be independent of those staged differences.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -489,8 +489,8 @@ Later:
 
 With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, and Dart native,
 loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted. Julia
-core/native/primary execution also accepts it; Julia composed routes and Lua remain pending, so it is not yet a
-portable five-backend source:
+core plus loaded/normalized/generated/emitted routes also accept it; Julia topology admission and Lua remain
+pending, so it is not yet an admitted five-backend source:
 
 ```text
 First:
@@ -500,7 +500,7 @@ Second:
  /second/
 ```
 
-### Julia core boundary
+### Julia core and composed routes
 
 Julia's parser preserves definition order and records each `Rule::` as immutable `is_top` metadata. Validation now
 requires one or more rules, not a marker. `resolve_entry_rule(compiled, selector)` is the single compiled-state
@@ -523,13 +523,36 @@ Empty/comment-only source remains a parser envelope so validation can return `no
 `entry_rule_contract=linkedspec-root-rule-selection-v1` while selection leaves definition order and every authored
 `is_top` bit unchanged. Strict-unused still derives only from authored rule edges.
 
+Loaded source and normalized JSON compile back to the same ordered state. Generated direct/traced and emitted
+module APIs already expose optional `top_rule`, so they pass it to the same resolver without changing contract
+v1/format 1 or the minimal `{label, family}` plan:
+
+```julia
+plan = build_generated_rule_plan(compiled)
+execute_generated_parser_v1(
+    compiled,
+    plan,
+    "x",
+    "examples/markerless.spec";
+    top_rule = "Second",
+) # "Second" rule result
+```
+
+At low trace, `julia_runtime:entry_rule_selection` records `requested`, `effective`, and `basis`. A failed
+selection records `effective=<none>`, `basis=<none>`, and its portable stage/code. File-loaded empty source now
+projects `no_rules_defined` at `validate_spec`. Generated unknown selection projects `entry_rule_not_found` at
+`select_entry_rule` with `entry_rule` and `rule_label`; generated zero-rule state projects `no_rules_defined` at
+`validate_spec`. Invalid generated plans still fail at `validate_generated_plan` before any selection attempt.
+Unrelated generated runtime failures retain `generated_execution_failed`.
+
 The exact shared primary boundary is now 32/65 twice. All 33 remaining failures are not root selection: 22
 help/usage cases still expose the pending global `--parse-mode` removal, and 11 medium-or-higher request traces
-still include `parse_mode=seek`. Route convergence `.4.2` remains isolated from cursor work. Exact 65x2 topology
-admission `.4.3` waits for cursor migration `.9.1.6`, preventing either semantic program from hiding the other's
-failures.
+still include `parse_mode=seek`. Route convergence `.4.2` is complete and isolated from cursor work. Exact 65x2
+topology admission `.4.3` waits for cursor migration `.9.1.6`, preventing either semantic program from hiding the
+other's failures.
 
-Until those leaves land, use a marker for composed Julia and Lua portability even when supplying `--top-rule`:
+Until those leaves land, use a marker when the same source must run on Lua or satisfy the not-yet-complete
+five-backend admission, even when supplying `--top-rule`:
 
 ```text
 FallbackMarker::
@@ -540,8 +563,8 @@ RequestedOrdinary:
 ```
 
 `--top-rule RequestedOrdinary` selects the ordinary rule on current Julia and has priority over
-`FallbackMarker::`; omission selects `FallbackMarker`. A markerless Julia native call may omit the option and
-select its first declared rule.
+`FallbackMarker::`; omission selects `FallbackMarker`. Markerless Julia native, loaded, normalized, generated,
+and emitted calls may omit the option and select the first declared rule.
 
 ## Removed `parse_mode`
 
