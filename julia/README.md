@@ -24,8 +24,16 @@ its primary-arguments testset, while standalone corpus execution remains 105/105
 now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
 same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
 zero/unknown identities, plan validation remains first, and generated contract v1/format 1 plus the minimal
-label/family plan remain unchanged. Active Dart cursor admission `.9.1.5.6` must close its parent before Julia
-cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows, so rollout remains 4/7.
+label/family plan remain unchanged. Dart cursor admission is cleanly committed at `7aa9c578`, satisfying Julia's
+final cursor dependency; exact 65x2 root admission `.4.3` follows Julia cursor, so rollout remains 4/7.
+
+Behavior-free Julia preflight `.9.1.6.0`
+has mapped the exact starting boundary. All 36 headers parse, but compact `|` is currently misclassified as AND;
+all 36 engines carry global seek, bare rule-label members remain raw, and `=> Child[0]` is silently accepted after
+prefix parsing. Exact parent/child agreement is 5/8 and structural agreement is 1/2. Descriptor state still has
+global cursor-mode metadata; generated source is v1/format 1; shared primary remains 32/65 twice; the package reaches the
+56/57 help boundary; corpus remains 105/105. Implementation is frozen as normalization `.1`, intrinsic normal
+execution `.2`, descriptor v1 `.3`, generated v2 `.4`, option/CLI removal `.5`, and composed admission `.6`.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing

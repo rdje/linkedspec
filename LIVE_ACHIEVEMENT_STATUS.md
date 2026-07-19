@@ -8,12 +8,42 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.5.6` — final closeout after exact 15-role Dart consumer, backend/canonical topology,
-  package 271, primary 65x2, corpus 105, and neutral 67 files / 4 complete / 4 pending / 39 mutations pass.
-  KM 613/4,432, governance, mdBook, canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0
-  1,031/1,031 in 613 seconds pass. Only cleanup and the clean commit remain; Julia `.9.1.6` stays dependency-gated.
+- `FUTURE-PARITY-BACKLOG.9.1.6.0` — verified behavior-free Julia cursor preflight/split in commit closeout after clean Dart admission
+  `7aa9c578` at ahead 222 and committed Julia root routes `42c98dfe`. Retrieval and exact seam probes are complete:
+  36 headers parse but compact `|` is misclassified; engines are globally seek; edges are 3 action / 3 blind /
+  1 lifecycle / 11 raw with no portable error matches; parent-child is 5/8; structural is 1/2; descriptor is
+  global-mode v0; generated is v1; package reaches 56/57; primary is 32/65x2; corpus is 105; governance is
+  67 / 4+4 / 39. `.1-.6` are frozen. KM 614/4,445, mdBook/four doctrines, canonical root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 613 seconds pass; cleanup removes 11 MB book plus 28 KB bytecode.
+  Only the prepared commit/clean-boundary verification remains before `.1` activation.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.0 — map Julia rule-local cursor rollout**
+  (DONE verification; prepared clean commit `FUTURE-PARITY-BACKLOG.9.1.6.0 - map Julia cursor rollout`).
+
+  **Result:** Exact read-only probes expose compact-pipe misclassification, global seek, 11 raw edge rows,
+  parent-child 5/8, structural 1/2, descriptor v0, and generated v1. `.1-.6` freeze normalization through admission
+  without changing Julia/shared executable, contract, fixture, capability, rollout, or public semantic behavior.
+
+  **Proof:** Package boundary 56/57, primary 32/65x2, corpus 105, cursor governance 67/4+4/39, root governance
+  4/7 plus 34 mutations, KM 614/4,445, mdBook/four doctrines, canonical Perl root 7+5, cursor 288, primary 65x2,
+  and Phase 0 1,031/1,031 in 613 seconds pass. Generated book/cache cleanup passes; reusable Julia depot remains.
+
+  **Next:** Commit/clean `.0`, then activate family/edge normalization `.9.1.6.1` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.5.6 — admit Dart rule-local cursor contract**
+  (DONE at clean commit `7aa9c578` — Dart parent closes at 4 complete / 4 pending).
+
+  **Result:** One exact contract-declared 15-role consumer composes native/normalized/loaded/descriptor/emitted/
+  generated/trace/composition/removal/primary/diagnostic roles once. Governance locks backend/canonical topology,
+  67 migration files, and 39 mutations; only Dart advances.
+
+  **Proof:** Dart format 61/0, analyzer, package 271, primary 65x2, corpus 105; KM 613/4,432; mdBook and four
+  doctrines; canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613 seconds.
+  Generated 11 MB book plus 28 KB bytecode cleanup passes.
+
+  **Next:** Julia cursor behavior-free preflight/split `.9.1.6.0` is active task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 — converge Julia root routes**
   (DONE at clean commit `42c98dfe` — composed route signoff complete without rollout promotion).
 

@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.0 — map Julia rule-local cursor rollout
+
+The behavior-free Julia cursor preflight freezes the complete migration seam before implementation. Contract-
+driven probes parse all 36 headers, but current family classification agrees only 34/36 because compact `|` is
+still included in Julia's AND predicate. Every normal engine stores global seek, so only the 22 seek-family rows
+agree intrinsically; all 14 AND-family rows still depend on the global option.
+
+Julia has no bare-edge normalization yet. The 18 exact edge rows parse as three action, three blind, one lifecycle,
+and eleven raw elements. Only five of thirteen expected-success rows compile. None of the seven edge/edge-set
+portable error cases reports its accepted code, and explicit `=> Child[0]` is silently accepted after the parser
+consumes only the unindexed prefix. Exact admitted mixed-family fixtures agree on 5/8 definedness rows: OR-to-AND
+blind, action, and explicit-call paths seek false-positively. Structural agreement is 1/2 because anchored choice
+also false-positively seeks; the recursive negative happens to agree through the existing recursion path.
+
+Descriptors still publish `meta.parse_mode=seek` without cursor contract/per-rule policy. Normalized and loaded
+engines default seek, high-level engine/loader options still accept consume, and generated execution remains v1/
+format 1; an AND generated plan therefore accepts leading junk. Package execution reaches the frozen one-of-57
+help mismatch. The shared primary runner passes exactly 32/65 in both default and POSIX environments: 22 help/
+usage and 11 request-trace failures. Standalone corpus execution remains 105/105, and neutral governance remains
+67 files, 4 complete / 4 pending, and 39 rejected mutations.
+
+The refined `.1-.6` split corrects typed family/edge normalization first, then intrinsic normal execution while
+explicitly isolating v1 generated and outer CLI/corpus legacy semantics. Descriptor v1 follows; generated v2 then
+bumps identity and rejects v1 before reconstruction; public/global option removal migrates only Julia consumers
+against the already-current shared 65-case manifest; final admission adds one 15-role topology consumer and alone
+advances Julia. No Julia/shared executable, contract, fixture, capability, rollout, or public semantic behavior
+changes in this preflight.
+
+Signoff passes cursor and root governance, Knowledge Map 614/4,445, memory architecture, all four doctrines,
+JSON, whitespace, and mdBook. Canonical CI repeats Perl root 7+5, cursor admission 288, primary 65/65 under both
+option environments, and Phase 0 1,031/1,031 in 613 seconds. Cleanup removes the ignored 11 MB generated book and
+28 KB Python bytecode cache; the reusable 138 MB Julia depot stays for the immediately following implementation.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.6 — admit Dart rule-local cursor contract
 
 Dart now has one omission-sensitive, contract-declared rule-local cursor admission consumer. Its 15 roles execute

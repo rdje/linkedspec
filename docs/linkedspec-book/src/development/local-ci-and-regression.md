@@ -75,10 +75,18 @@ governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,
 not advance Julia's rollout row: cursor `.9.1.6` must first remove the 33 option/trace mismatches, after which
 topology admission `.4.3` owns exact 65x2 promotion.
 
-Task dependencies preserve backend order around that root work. Dart's composed cursor admission `.9.1.5.6` now
+Task dependencies preserve backend order around that root work. Dart's composed cursor admission `.9.1.5.6`
 locks one exact 15-role consumer, advances only Dart from 3/5 to 4/4, and closes `.9.1.5` after package 271,
-primary 65x2, and corpus 105. Its clean commit is the remaining boundary before Julia `.9.1.6` may begin; the
-clean Julia root-route commit already satisfies Julia cursor's separate root dependency.
+primary 65x2, and corpus 105. It is cleanly committed at `7aa9c578`; with Julia root routes already committed,
+both cursor dependencies are satisfied and behavior-free Julia preflight `.9.1.6.0` is verified; its clean commit
+precedes `.1-.6`.
+That preflight parses all 36 neutral headers but finds current family classification at 34/36 because Julia still
+treats compact `|` as AND. All engines store global seek; bare-edge parsing is 3 action / 3 blind / 1 lifecycle /
+11 raw, with no exact portable result across the seven edge/edge-set error rows and silent acceptance of indexed
+blind syntax. Exact mixed-family execution agrees on 5/8 rows and the two structural replacements on 1/2.
+Descriptor state is still global-mode, generated source is v1, package execution reaches 56/57, shared primary is
+32/65 twice, corpus is 105/105, and cursor governance remains 67 files / 4 complete / 4 pending / 39 mutations.
+No executable behavior changes in `.0`; `.1-.6` isolate old v1 semantics until the generated-v2 leaf owns the bump.
 
 Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,

@@ -80,9 +80,16 @@ one-or-more-rule sources, reports portable zero/unknown failures, and publishes 
 advancing rollout; native/root-primary proof is exactly 32/65 twice with only the 33 cursor-owned cases remaining.
 Julia route `.4.2` now proves loaded/normalized and generated/emitted direct/traced execution, low requested/
 effective/basis trace, portable loader/generated failures, plan-first rejection, and unchanged v1/format 1
-identity through 57 assertions. Dart cursor admission `.9.1.5.6` is signed off; its clean commit precedes cursor `.9.1.6`. Julia
+identity through 57 assertions. Dart cursor admission is clean at `7aa9c578`; Julia cursor preflight `.9.1.6.0`
+is verified and its clean commit precedes `.1-.6`. Julia
 admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay explicit in the inventory until their owning leaves
 land.
+
+The Julia cursor preflight measures the exact pending differences without advancing rollout: 36/36 headers parse
+but family classification is 34/36 because compact `|` is still AND; every engine owns global seek; 11 of 18 edge
+rows remain raw and none of seven edge/edge-set error cases reports its portable code; parent-child agreement is
+5/8 and structural agreement 1/2. Descriptor cursor v1 and generated v2 are absent. Package progression is 56/57,
+shared primary is 32/65 twice, corpus is 105/105, and neutral governance remains 67 files / 4+4 / 39 mutations.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

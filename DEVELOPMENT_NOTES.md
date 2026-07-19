@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.0` — version boundaries must prevent silent semantic relabeling):
+  Julia's normal runtime, descriptor, and generated artifacts currently share one global-seek assumption, but
+  they cannot migrate in one indistinguishable step. `LinkedSpecRuntimeEngine.parse_mode` is read at both ordinary
+  alternation and specific-index matching, so every blind/action/call/recursive child reuses the same override.
+  Generated v1 calls that engine without recording cursor policy; changing the engine default first would silently
+  change a v1 artifact while retaining its v1 identity. The rollout therefore makes normal native/loaded-default/
+  normalized execution intrinsic in `.2` but explicitly freezes generated v1 and outer CLI/corpus legacy routes
+  until `.4-.5`. `.4` is the only leaf that may change generated meaning because it also emits v2 and rejects v1
+  at the v2 reconstruction boundary.
+
+  Parser normalization must precede compiled state. Julia currently recognizes explicit edges and lifecycle
+  markers while leaving complete bare rule-label members raw; declared-label knowledge exists only after the full
+  spec is collected. `.1` therefore owns a post-collection typed normalization pass with lifecycle precedence,
+  forward references, block/fluent suffixes, explicit authority, and source provenance. The same seam fixes two
+  foundational current defects: `RuleMode("Pipe")` is incorrectly included in `is_and` despite `|` being accepted
+  compact OR, and the blind parser accepts `=> Child[0]` by consuming only the `=> Child` prefix. Validator checks
+  then consume normalized ownership and emit exact portable diagnostics instead of legacy malformed-line text.
+
+  The outer option removal stays late but is not an ignore shim. `.5` removes engine state and high-level loader/
+  corpus/primary ownership; a received legacy key must fail at `prepare_options`, and the CLI recognizes the old
+  flag only for its exact targeted usage message. `runtime_match` plus seek/consume primitives remain low-level.
+  The shared 65-case manifest is already canonical after Perl migration, so Julia changes its adapter, tests, and
+  `tools/check_julia_primary_cli.sh`, not shared expected bytes. Final `.6` follows the Dart 15-role topology and
+  alone changes the rollout row. Behavior-free signoff locks this split with Knowledge Map 614/4,445, both
+  neutral governance checkers, all four doctrines, mdBook, canonical Perl root 7+5, cursor 288, primary 65x2,
+  and Phase 0 1,031/1,031 in 613 seconds.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.6` — composed admission proves topology, not a new cursor mechanism):
   The six committed Dart mechanism leaves already owned semantics. Admission therefore adds one compact consumer
   whose 15 contract-declared role functions execute exactly once and compose native default/AND, ordinary
