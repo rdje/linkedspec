@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.4 — emit Julia generated-source v2
+
+Julia now emits `linkedspec-generated-source-v2` / format 2. The artifact retains exactly one deterministic ordered
+plan whose rows contain only `label` and `family`; it serializes no cursor override. Its validator derives seek for
+`default`, both OR families, and the two non-AND repetition families, and consume for the five AND families.
+Compact `Pipe` now classifies as generated OR, matching normalized authored semantics.
+
+Contract validation runs before normalized payload reconstruction. A v1 identity therefore produces
+`validate_generated_plan/generated_source_contract_version_mismatch` with exact `expected_contract`,
+`actual_contract`, and regenerate-from-`.spec` guidance even when the payload is corrupt. Existing standalone v1
+files remain legacy artifacts and must be regenerated. The old private forced-seek v1 engine is removed; generated
+direct, traced, nested, recursive, and structural execution derive policy from each entered plan family.
+
+All current Julia generated consumers use the v2 APIs and emitted module. Focused source-emitter proof passes
+65/65, the cursor execution suite remains 104/104, and the complete package reaches 3,133 passes plus only the exact
+frozen help mismatch owned by `.5`. Corpus remains 105/105, shared primary remains 32/65 in both environments, and
+generated/cursor/logical/root governance remains green at 80/0/0, 67/4+4/39, 8/0, and 4/7+34 respectively. Public
+option removal, composed admission, capabilities, and rollout remain unchanged for `.5-.6`.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.3 — project Julia cursor descriptors
 
 Julia's outward compiled descriptor now consumes the rule-local cursor-v1 metadata variant. Root metadata exposes

@@ -158,14 +158,14 @@ Done::
     @testset "generated state preserves and executes variadic signatures" begin
         compiled = _compile_variadic_source(_callable_fixture_source())
         plan = build_generated_rule_plan(compiled)
-        @test execute_generated_parser_v1(
+        @test execute_generated_parser_v2(
             compiled,
             plan,
             "xx",
             "variadic-contract.spec",
         ) == CALLABLE_SIGNATURE_CONTRACT["fixture"]["expected"]
 
-        generated = emit_julia_source_v1(compiled, "variadic-contract.spec")
+        generated = emit_julia_source_v2(compiled, "variadic-contract.spec")
         matched = match(r"const _COMPILED_SPEC_JSON_HEX = \"([^\"]+)\"", generated)
         @test matched !== nothing
         normalized = JSON3.read(String(hex2bytes(matched.captures[1])), Dict{String,Any})

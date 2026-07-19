@@ -8,13 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.3` — cursor descriptor-v1 implementation/signoff is complete after clean runtime
-  `290cb731` at ahead 225. Its prepared commit is the only remaining boundary; generated-source-v2 `.9.1.6.4`
-  may activate task-tree-first only after the tree and brief are clean.
+- `FUTURE-PARITY-BACKLOG.9.1.6.4` — Julia generated-source v2 is fully signed off from clean descriptor commit
+  `3caeb097` at ahead 226 and awaits only its prepared commit. Public option removal `.5` and admission `.6` stay
+  excluded and may activate only after the clean boundary.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.4 — emit Julia generated-source v2**
+  (DONE, verified, and awaiting its prepared clean commit).
+
+  **Result:** Current Julia emission is v2/format 2 from minimal ordered label/family rows. Contract identity
+  validates before payload reconstruction; the neutral five-seek/five-consume map drives current direct/traced/
+  emitted execution; compact pipe is OR; and the private v1 forced-seek adapter is removed. Existing v1 files are
+  legacy/regenerate-only. Options, admission, capabilities, and rollout do not advance.
+
+  **Proof:** Focused emitter 65, cursor execution 104, package 3,133 plus the exact staged help mismatch, corpus
+  105, Julia primary 32/65x2, generated/cursor/logical/root governance 80/0/0, 67/4+4/39, 8/0, and 4/7+34; KM
+  618/4,489; mdBook/four doctrines; canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031 in 643 seconds.
+  Generated 11 MiB book and 28 KiB Python cache are removed.
+
+  **Next:** Commit `.9.1.6.4` cleanly, then activate public-option/CLI migration `.9.1.6.5` task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.3 — project Julia cursor descriptor v1**
-  (DONE and verified; clean commit pending).
+  (DONE at clean commit `3caeb097`).
 
   **Result:** Root metadata replaces global mode with cursor-contract v1; every rule projects normalized family,
   derived policy, ownership, and exact semantic edge rows. Direct, normalized, and loaded descriptor bytes agree.
@@ -24,7 +39,7 @@ Current execution status for interruption-safe batch workflow recovery.
   cursor 67/4+4/39; root 4/7+34; KM 617/4,476; mdBook/four doctrines; canonical root 7+5, cursor 288, primary
   65x2, and Phase 0 1,031/1,031 in 622 seconds. Generated book/cache cleanup passes.
 
-  **Next:** Commit `.9.1.6.3`, prove clean, then activate generated-source-v2 `.9.1.6.4` task-tree-first.
+  **Next:** Generated-source-v2 `.9.1.6.4` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors**
   (DONE at clean commit `290cb731`).

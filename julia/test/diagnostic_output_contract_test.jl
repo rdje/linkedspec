@@ -239,7 +239,7 @@ end
         expected = _diagnostic_output_scenario("ordered_unicode_with_sink")["expected"]
         events = RuntimeDiagnosticOutputEvent[]
 
-        value = execute_generated_parser_v1(
+        value = execute_generated_parser_v2(
             compiled,
             plan,
             "x",
@@ -250,7 +250,7 @@ end
         @test _diagnostic_output_event_json(events) == expected["events"]
 
         traced_events = RuntimeDiagnosticOutputEvent[]
-        traced = execute_generated_parser_with_trace_v1(
+        traced = execute_generated_parser_with_trace_v2(
             compiled,
             plan,
             "x",
@@ -269,7 +269,7 @@ end
         failure = DiagnosticOutputCallerSinkFailure("generated-caller-sink-failure")
         invocation = Ref(0)
         captured = try
-            execute_generated_parser_v1(
+            execute_generated_parser_v2(
                 failure_compiled,
                 build_generated_rule_plan(failure_compiled),
                 "x",
@@ -291,7 +291,7 @@ end
         )
         exit_events = RuntimeDiagnosticOutputEvent[]
         captured_exit = try
-            execute_generated_parser_v1(
+            execute_generated_parser_v2(
                 exit_compiled,
                 build_generated_rule_plan(exit_compiled),
                 "x",

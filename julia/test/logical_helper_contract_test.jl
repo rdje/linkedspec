@@ -28,7 +28,7 @@ function _logical_helper_compile(source::AbstractString)
 end
 
 function _logical_helper_reconstruct(compiled::CompiledSpec, identity::AbstractString)
-    emitted = emit_julia_source_v1(compiled, identity)
+    emitted = emit_julia_source_v2(compiled, identity)
     encoded = match(r"const _COMPILED_SPEC_JSON_HEX = \"([^\"]+)\"", emitted)
     @assert encoded !== nothing
     normalized = JSON3.read(
@@ -73,7 +73,7 @@ function _logical_helper_generated_failure(
 )
     try
         if traced
-            execute_generated_parser_with_trace_v1(
+            execute_generated_parser_with_trace_v2(
                 compiled,
                 build_generated_rule_plan(compiled),
                 "x",
@@ -82,7 +82,7 @@ function _logical_helper_generated_failure(
                 stdout_io = IOBuffer(),
             )
         else
-            execute_generated_parser_v1(
+            execute_generated_parser_v2(
                 compiled,
                 build_generated_rule_plan(compiled),
                 "x",
@@ -190,14 +190,14 @@ end
 
             plan = build_generated_rule_plan(compiled)
             identity = "logical-helper/$fixture_id-generated.spec"
-            generated = execute_generated_parser_v1(
+            generated = execute_generated_parser_v2(
                 compiled,
                 plan,
                 "x",
                 identity,
             )
             @test generated == expected
-            @test execute_generated_parser_with_trace_v1(
+            @test execute_generated_parser_with_trace_v2(
                 compiled,
                 plan,
                 "x",
@@ -274,7 +274,7 @@ end
                 fixture = _logical_helper_fixture(fixture_id)
                 write(
                     joinpath(scratch, "$fixture_id.jl"),
-                    emit_julia_source_v1(
+                    emit_julia_source_v2(
                         _logical_helper_compile(fixture["spec_source"]),
                         "logical-helper/$fixture_id-emitted.spec",
                     ),
@@ -286,7 +286,7 @@ end
             )
             write(
                 joinpath(scratch, "invalid.jl"),
-                emit_julia_source_v1(
+                emit_julia_source_v2(
                     _logical_helper_compile(invalid_fixture["spec_source"]),
                     "logical-helper/not_many-emitted.spec",
                 ),

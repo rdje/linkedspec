@@ -5244,15 +5244,45 @@ before implementation.
     Knowledge Map facts describe cursor v1 while generated/public/admission remain `.4-.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.4`
-  Status: `pending`
+  Status: `done`
   Goal: Advance Julia generated source to v2 with family-derived cursor and structural execution.
   Dependencies: `.9.1.6.3`
   Acceptance: Emit exact v2 identity/format from minimal ordered label/family rows, validate the five seek/five
     consume mapping, reject v1 at the v2 boundary before reconstruction with exact portable identity, and prove
     direct/traced/fresh-loaded execution without a serialized cursor override. Remove the `.2` v1 semantic
     isolation only when v2 owns execution; keep old standalone v1 artifacts classified legacy/regenerate-only.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-18 only after descriptor `.9.1.6.3` landed at clean commit
+    `3caeb097`, `git_message_brief.txt` was zero bytes, the tree was clean at ahead 226, and generated book/cache
+    artifacts were absent. Knowledge Map retrieval identifies the existing Julia v1 scaffold/family plan plus the
+    admitted Perl/Rust/Dart v2 precedents. Exact probes reproduced v1/format 1, eager payload reconstruction,
+    post-reconstruction plan validation, the private forced-seek engine, and compact-pipe generated AND drift.
+    Current implementation emits v2/format 2, validates contract before payload decode, derives the governed
+    five-seek/five-consume map from minimal label/family rows, classifies compact pipe as OR, deletes the private
+    v1 engine, and migrates all current generated consumers. Focused source-emitter proof is 65/65; complete Julia
+    is 3,133 pass plus the exact frozen help mismatch; cursor execution is 104/104; corpus is 105/105; primary is
+    32/65 in default and POSIX; generated/cursor/logical/root governance passes at 80/0/0, 67/4+4/39, 8/0, and
+    4/7+34. Knowledge Map is 618 facts / 4,489 keys; mdBook, memory, four doctrines, JSON, and whitespace pass;
+    canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds pass. Generated 11 MiB
+    mdBook output and 28 KiB Python cache are removed. Public options, shared fixtures, capability state, admission,
+    and rollout remain unchanged; only the prepared clean commit precedes `.9.1.6.5`.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.6.4 - emit Julia generated-source v2`
+
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Use the governed neutral contract and LinkedSpec source/runtime probes to record
+    the exact current v1 identity/format, serialized plan, reconstruction order, direct/trace/load routes, and
+    private v1 compatibility owner before editing.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Identify the single emission/reconstruction seams that still encode v1
+    meaning and explain why intrinsic live cursor behavior cannot safely flow into an unversioned old artifact.
+  - [x] **FIX** — Emit v2/format 2 from minimal ordered label/family rows, derive all five seek and five consume
+    families after validation, reject v1 before reconstruction with exact expected/actual/regeneration identity,
+    and retire the private v1 adapter only from newly emitted v2 execution.
+  - [x] **ADDRESSED (verified)** — Prove deterministic bytes plus direct, traced, source-identity, and fresh-loaded
+    execution for all families and root routes, including exact old-v1 legacy/regenerate-only rejection.
+  - [x] **NO REGRESSION** — Pass focused/complete Julia, corpus, exact staged primary boundary, neutral governance,
+    adjacent generated/logical/root suites, and the canonical local gate without option/admission/rollout drift.
+  - [x] **LOCKSTEP** — Synchronize source/test contract ownership, task/live/memory/roadmap/architecture records,
+    Knowledge Map facts, and mdBook; clean safe generated artifacts and commit before activating `.9.1.6.5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6.5`
   Status: `pending`
@@ -7574,9 +7604,9 @@ are now committed through `f33d6d24`; loaded/generated/runtime-context/trace con
 complete and canonically verified. Its clean commit is the required boundary before Perl composed admission `.1.3`.
 
 Subsequent cursor rollout has closed Perl, Rust, and Dart at 4 complete / 4 pending. Julia preflight `.9.1.6.0`,
-normalization `.1`, and intrinsic runtime `.2` are clean through `290cb731`; descriptor-v1 `.3` now has complete
-809/3,129+known-one/105/32x2/governance/KM/mdBook/canonical signoff. Its prepared clean commit is the only boundary
-before generated-source v2 `.4` may activate; option removal `.5`, admission `.6`, and Julia root admission follow.
+normalization `.1`, intrinsic runtime `.2`, and descriptor-v1 `.3` are clean through `3caeb097`; descriptor proof
+is 809/3,129+known-one/105/32x2 plus governance/KM/mdBook/canonical signoff. Generated-source v2 `.4` is now active
+task-tree-first from that clean boundary; option removal `.5`, admission `.6`, and Julia root admission follow.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -7859,12 +7889,12 @@ before generated-source v2 `.4` may activate; option removal `.5`, admission `.6
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `done` | Exact 15-role topology, 39 mutations, package 271, primary 65x2, corpus 105, and Dart-only 4/4 promotion pass. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight `.0`, normalization `.1`, and intrinsic runtime `.2` are committed; descriptor-v1 `.3` is verified and awaits its clean commit before generated v2 `.4`. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight through descriptor `.0-.3` are committed; generated-source v2 `.4` is verified pending its clean commit before option removal `.5` and admission `.6`. |
 | 217.0 | `FUTURE-PARITY-BACKLOG.9.1.6.0` | `done` | Exact behavior-free preflight, 614/4,445 KM, 67/4+4/39 governance, mdBook, canonical 1,031, and cleanup pass. |
 | 217.1 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `done` | Exact 36/18/6 typed normalization, six diagnostics, 353 focused, 2,215+known-one package, 105 corpus, and canonical proof pass. |
 | 217.2 | `FUTURE-PARITY-BACKLOG.9.1.6.2` | `done` | Julia live/loaded/normalized/recursive/traced intrinsic execution; focused 104, generated 60, package 2,320+known-one, corpus 105, primary 32/65x2, canonical green. |
 | 217.3 | `FUTURE-PARITY-BACKLOG.9.1.6.3` | `done` | Cursor v1, 809 focused, package 3,129+known-one, corpus 105, primary 32/65x2, governance/KM/mdBook/canonical signoff pass. |
-| 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `pending` | Julia generated-source v2. |
+| 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `pending` | Julia public/global option and exact 65x2 primary migration. |
 | 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `pending` | Exact composed Julia admission, rollout promotion, and parent closeout. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
@@ -8535,8 +8565,8 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. Root selection is 4/7 after neutral, Perl, Rust, and Dart. Julia root preflight `.4.0`, core
-  `.4.1`, and routes `.4.2` are signed off; cursor preflight/normalization/runtime `.9.1.6.0-.2` are cleanly
-  committed. Descriptor `.3` is verified and awaits its clean commit; `.4-.6` precede exact root admission `.4.3`.
+  `.4.1`, and routes `.4.2` are signed off; cursor preflight through generated v2 `.9.1.6.0-.4` are complete,
+  with `.4` awaiting only its clean commit. Option removal/admission `.5-.6` precede exact root admission `.4.3`.
   Identical
   dependency-regex slot identity remains a non-blocking separate question
   with explicit post-admission owner `.9.1.8.1`.
@@ -8552,15 +8582,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.2` are cleanly
-  committed. Descriptor `.3` is verified pending its clean commit. Julia's 33 cursor-owned shared-primary failures
-  are the exact later implementation boundary, not a regression: generated/options/admission `.4-.6` follow
-  descriptor before root admission `.4.3`.
+- None. Julia root routes `.9.1.1.2.4.2`, Dart admission `.9.1.5.6`, and Julia cursor `.9.1.6.0-.3` are cleanly
+  committed; generated-source v2 `.4` is fully verified and awaits its prepared clean commit. Julia's 33 remaining
+  shared-primary failures are the exact option/CLI boundary owned by `.5`, not a regression. Admission `.6` then
+  precedes root admission `.4.3`.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.4` | V2/format 2 minimal family plan; contract-before-payload validation; five seek/five consume; compact-pipe OR; direct/traced/fresh-loaded/current-consumer migration; v1 legacy rejection; focused emitter 65 and cursor 104; package 3,133+known-one; corpus 105; Julia primary 32/65x2; generated 80/0/0, cursor 67/4+4/39, logical 8/0+26, root 4/7+34; KM 618/4,489; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 643s; generated book/cache cleanup. | PASS; generated v2 is current, while public options/admission/capability/rollout remain `.5-.6`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.3` | Cursor-v1 root/rule/edge projection; direct/normalized/loaded bytes; all 36 families; every valid/invalid edge/set; focused 809; package 3,129+known-one; corpus 105; primary 32/65x2; cursor 67/4+4/39; root 4/7+34; KM 617/4,476; mdBook/doctrines/JSON/whitespace/cleanup; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 622s. | PASS; generated/public/admission/rollout unchanged. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.2` | Entered-rule policy; 36 families; 8 parent-child; 2 structural; live/loaded/normalized/recursive/trace; generated-v1 isolation; 104+60; package 2,320+known-one; primary 32/65x2; corpus 105; governance 67/4+4/39; KM 616/4,466; mdBook/doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 611s. | PASS; no rollout/artifact/public promotion. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.1` | Exact 36-family/18-edge/six-ownership syntax and compiled projection; six portable diagnostics; focused 353; nested complete Julia 2,215 pass plus exact one staged help failure; ordinary package 56/57; shared Julia primary 32/65 default/POSIX; corpus 105; cursor 67/4+4/39; root 4/7 plus 34 mutations; KM 615/4,455; memory/four doctrines/JSON/whitespace/mdBook; canonical Perl root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 614s; generated 11 MB book/cache cleanup. | PASS. Julia typed normalization is exact without runtime/descriptor/generated/option/rollout promotion; clean commit precedes `.2`. |
@@ -8752,6 +8783,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.6.4` | `FUTURE-PARITY-BACKLOG.9.1.6.4 - emit Julia generated-source v2` | Exact minimal family plan, contract-before-payload v1 rejection, 65 focused, 3,133+known-one package, corpus/staged-primary/governance/KM/mdBook/canonical signoff, and `.5` handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `FUTURE-PARITY-BACKLOG.9.1.6.1 - normalize Julia cursor families and edges` | Exact typed 36/18/6 normalization, six portable diagnostics, compiled lowering, 353 focused, 2,215+known-one package, 105 corpus, and canonical signoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 - admit Dart root selection` | Exact 15-role consumer, 34 mutations, package 270, primary 65x2, Dart-only 4/7 promotion, parent closeout, and Julia handoff. |
 | `FUTURE-PARITY-BACKLOG.9.1.3.6` | `FUTURE-PARITY-BACKLOG.9.1.3.6 - admit Perl cursor projection` | Exact 14-role consumer, canonical registration, 2/6 rollout, 29 mutations, parent closure, and Rust handoff. |
@@ -8926,6 +8958,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Julia generated-source `.9.1.6.4` advances current emission to v2/format 2 while preserving exact
+  minimal ordered label/family rows. Contract identity validates before payload reconstruction; family derives the
+  neutral five-seek/five-consume policies; compact pipe is OR; current direct/traced/emitted consumers use v2; and
+  the private v1 forced-seek engine is gone. Focused proof is 65, package 3,133 plus known one, corpus 105, primary
+  32/65x2, and generated/cursor/logical/root governance 80/0/0, 67/4+4/39, 8/0, and 4/7+34. KM 618/4,489,
+  mdBook/four doctrines, canonical root 7+5/cursor 288/primary 65x2/Phase 0 1,031 in 643 seconds, and generated
+  book/cache cleanup pass. Public options, capability/rollout state, and admission remain untouched; only the
+  prepared clean commit may precede `.5`.
+- `2026-07-18`: Clean commit `3caeb097` lands Julia cursor descriptor v1 `.9.1.6.3`; tracked/untracked state is
+  clean, the brief is zero bytes, generated book/cache artifacts are absent, and ahead is 226. Generated-source
+  v2 `.9.1.6.4` activates task-tree-first before exact v1 source/runtime reproduction; public option removal,
+  admission, shared fixtures, capabilities, and rollout remain `.5-.6`.
 - `2026-07-18`: Julia descriptor `.9.1.6.3` replaces root global mode with cursor-contract v1 and projects each
   rule's normalized family, derived policy, ownership, and exact ordered semantic edges without new mutable state
   or a decoder. Direct/normalized/loaded bytes agree; focused proof is 809, package 3,129 plus known one, corpus

@@ -13,6 +13,7 @@ date: 2026-07-12
 status: current
 tags: [julia, functions, variadic, rest-parameter, descriptor, staged-parsing, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.3.2 updates Julia AST/staged projection, validation, registry/action resolution, runtime, descriptors, and normalized emitted state. The 55 assertions in variadic_user_function_contract_test.jl consume the unchanged neutral fixture; tools/run_julia_local.sh passes all package tests, 61x2 CLI, and 105 corpus fixtures."
+evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 migrates the unchanged variadic generated-plan and independently emitted roles to contract-v2 source."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/variadic_user_function_contract_test.jl\")'"
 ---
 
@@ -29,7 +30,7 @@ fresh scalar, array, and hash stores, binds fixed params, and stores a newly all
 `Vector{Any}` of all extras under the rest name in both scalar and typed-array views. Empty, nested, hash, boolean,
 and null values preserve their shapes.
 
-`emit_julia_source_v1` needs no host splat logic: normalized `SpecFile` JSON emits the exact v1/v2 union as strict
+`emit_julia_source_v2` needs no host splat logic: normalized `SpecFile` JSON emits the exact v1/v2 callable union as strict
 UTF-8 bytes represented by ASCII hex. The generated module reconstructs `SpecFile` and compiles and executes the
 same runtime. The neutral fixture passes both direct generated-plan execution and serialization round-trip.
 

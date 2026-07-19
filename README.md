@@ -26,15 +26,16 @@ first rule once from compiled state before user code, returns portable zero/unkn
 authored-edge analysis, and publishes immutable descriptor identity. Its focused neutral consumer passes 79
 assertions, shared primary improves from 31/65 to exactly 32/65 in both option environments, and corpus remains
 105/105; the identical 33 remaining help/usage/request-trace failures belong to cursor migration `.9.1.6`.
-Composed Julia routes `.4.2` now prove loaded/normalized and generated/emitted direct/traced reuse, low
-requested/effective/basis trace, portable loader/generated zero/unknown failures, unchanged generated v1 identity,
-and generated-plan-first rejection in a 57-assertion suite. Julia cursor preflight `.9.1.6.0` and typed
+Composed Julia routes `.4.2` prove loaded/normalized and generated/emitted direct/traced reuse, low
+requested/effective/basis trace, portable loader/generated zero/unknown failures, and generated-plan-first
+rejection in a 57-assertion suite. Julia cursor preflight `.9.1.6.0` and typed
 normalization `.1` are cleanly committed through `ac7010ee`. Intrinsic runtime `.2` now derives AND-consume/
 sequence and OR-default-seek/choice once at every live, loaded-default, normalized, recursive, and traced rule
 entry. All 36 families, eight parent/child rows, and two structural replacements are exact in 104 focused
-assertions; generated v1 remains behind its private compatibility engine. Descriptor v1, generated v2,
-option/CLI removal, and admission were dependency-ordered as `.3-.6`; descriptor `.3` is complete, while
-generated/public/admission `.4-.6` remain before exact 65x2 root admission `.4.3`. Lua fallback remains blocked by
+assertions. Descriptor v1 and generated-source v2 are now complete through `.4`: new Julia artifacts carry
+contract/format 2, derive five seek and five consume policies from minimal label/family rows, and reject v1 before
+payload reconstruction with regeneration guidance. Public option removal `.5` and admission `.6` remain before
+exact 65x2 root admission `.4.3`. Lua fallback remains blocked by
 validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
@@ -42,9 +43,10 @@ sets with the six portable diagnostics. Normal direct, loaded-default, and norma
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
 structural replacements are exact. Descriptor state now publishes cursor-contract v1 plus per-rule family,
 derived policy, ownership, and ordered semantic edges with no global mode. Direct, normalized, and loaded
-descriptor bytes agree. Generated source remains v1/format 1, and outer CLI/corpus callers retain an explicit
-compatibility override. The remaining order is generated v2, option/CLI removal, then 15-role admission; v1
-generated semantics stay isolated until the v2 bump.
+descriptor bytes agree. Generated source now emits v2/format 2 and executes direct, traced, and freshly loaded
+modules from family-derived policy without a serialized cursor field; old v1 artifacts are legacy and must be
+regenerated from `.spec`. Outer CLI/corpus callers retain an explicit compatibility override until `.5`; the
+remaining order is option/CLI removal followed by 15-role admission.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

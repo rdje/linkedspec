@@ -14,6 +14,7 @@ end
     GeneratedPlanLabelMismatchCode
     GeneratedPlanFamilyMismatchCode
     GeneratedPlanUnknownFamilyCode
+    GeneratedSourceContractVersionMismatchCode
     GeneratedNoRulesDefinedCode
     GeneratedEntryRuleNotFoundCode
     GeneratedExecutionFailedCode
@@ -32,8 +33,8 @@ function _generated_diagnostic_output_sink(sink)
     end
 end
 
-const GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"
-const GENERATED_SOURCE_FORMAT = 1
+const GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"
+const GENERATED_SOURCE_FORMAT = 2
 
 @enum GeneratedRuleFamily begin
     DefaultGeneratedFamily
@@ -99,6 +100,28 @@ _generated_family_uses_and_execution(family::AbstractString) = String(family) in
     "rep_and_bcode",
 )
 
+function _generated_family_cursor_policy(family::AbstractString)
+    text = String(family)
+    if text in (
+        "default",
+        "or_acode",
+        "or_bcode",
+        "rep_acode",
+        "rep_bcode",
+    )
+        return SeekParseMode
+    elseif text in (
+        "and_single_acode",
+        "and_acode_seq",
+        "and_bcode",
+        "rep_and_acode",
+        "rep_and_bcode",
+    )
+        return ConsumeParseMode
+    end
+    throw(ArgumentError("unknown generated rule family '$text'"))
+end
+
 function classify_generated_rule_family(rule::CompiledRule)
     mode = rule.mode_metadata.name
     repetition = mode in (
@@ -118,14 +141,14 @@ function classify_generated_rule_family(rule::CompiledRule)
         return rule.mode_metadata.is_and ?
             RepAndAcodeGeneratedFamily : RepAcodeGeneratedFamily
     elseif !isempty(rule.blind_edges)
-        return mode == "Or" ? OrBcodeGeneratedFamily : AndBcodeGeneratedFamily
+        return rule.mode_metadata.is_and ? AndBcodeGeneratedFamily : OrBcodeGeneratedFamily
     elseif mode == "Default"
         return DefaultGeneratedFamily
-    elseif mode == "Or"
+    elseif mode in ("Or", "Pipe")
         return OrAcodeGeneratedFamily
     elseif mode == "Single"
         return AndSingleAcodeGeneratedFamily
-    elseif mode in ("And", "Pipe")
+    elseif mode == "And"
         return length(rule.regex_patterns) <= 1 && length(rule.action_edges) <= 1 ?
             AndSingleAcodeGeneratedFamily : AndAcodeSeqGeneratedFamily
     end
@@ -142,12 +165,32 @@ function build_generated_rule_plan(compiled::CompiledSpec)
     ]
 end
 
-function validate_generated_rule_plan_v1(
+function validate_generated_source_contract_v2(
+    actual_contract::AbstractString,
+    source_identity::AbstractString,
+)
+    actual = String(actual_contract)
+    actual == GENERATED_SOURCE_CONTRACT && return nothing
+    throw(GeneratedSourceException(
+        ValidateGeneratedPlanStage,
+        GeneratedSourceContractVersionMismatchCode,
+        "Generated source contract does not match the active validator",
+        source_identity;
+        detail = "regenerate the generated artifact from its .spec source",
+        expected_contract = GENERATED_SOURCE_CONTRACT,
+        actual_contract = actual,
+    ))
+end
+
+function validate_generated_rule_plan_v2(
     compiled::CompiledSpec,
     plan::AbstractVector{GeneratedPlanRow},
     source_identity::AbstractString,
+    ;
+    actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
 )
     identity = String(source_identity)
+    validate_generated_source_contract_v2(actual_contract, identity)
     try
         validate_no_removed_aggregate_selectors(compiled)
     catch error
@@ -206,7 +249,7 @@ function validate_generated_rule_plan_v1(
     return validated
 end
 
-function execute_generated_parser_v1(
+function execute_generated_parser_v2(
     compiled::CompiledSpec,
     plan::AbstractVector{GeneratedPlanRow},
     input::AbstractString,
@@ -214,11 +257,17 @@ function execute_generated_parser_v1(
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
 )
-    families = validate_generated_rule_plan_v1(compiled, plan, source_identity)
+    families = validate_generated_rule_plan_v2(
+        compiled,
+        plan,
+        source_identity;
+        actual_contract = actual_contract,
+    )
     try
         return runtime_parse(
-            _generated_v1_compatibility_engine(compiled),
+            LinkedSpecRuntimeEngine(compiled),
             input;
             top_rule = top_rule,
             trace = trace,
@@ -248,7 +297,7 @@ function execute_generated_parser_v1(
     end
 end
 
-function execute_generated_parser_with_trace_v1(
+function execute_generated_parser_with_trace_v2(
     compiled::CompiledSpec,
     plan::AbstractVector{GeneratedPlanRow},
     input::AbstractString,
@@ -257,8 +306,9 @@ function execute_generated_parser_with_trace_v1(
     top_rule = nothing,
     stdout_io::IO = stdout,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
 )
-    return execute_generated_parser_v1(
+    return execute_generated_parser_v2(
         compiled,
         plan,
         input,
@@ -266,6 +316,7 @@ function execute_generated_parser_with_trace_v1(
         top_rule = top_rule,
         trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io),
         diagnostic_output_sink = diagnostic_output_sink,
+        actual_contract = actual_contract,
     )
 end
 
@@ -297,6 +348,8 @@ function generated_source_code_name(code::GeneratedSourceCode)
         return "generated_plan_family_mismatch"
     elseif code == GeneratedPlanUnknownFamilyCode
         return "generated_plan_unknown_family"
+    elseif code == GeneratedSourceContractVersionMismatchCode
+        return "generated_source_contract_version_mismatch"
     elseif code == GeneratedNoRulesDefinedCode
         return "no_rules_defined"
     elseif code == GeneratedEntryRuleNotFoundCode
@@ -314,6 +367,8 @@ struct GeneratedSourceException <: Exception
     rule_label::Union{Nothing,String}
     handler_family::Union{Nothing,String}
     detail::Union{Nothing,String}
+    expected_contract::Union{Nothing,String}
+    actual_contract::Union{Nothing,String}
 end
 
 function GeneratedSourceException(
@@ -325,6 +380,8 @@ function GeneratedSourceException(
     rule_label = nothing,
     handler_family = nothing,
     detail = nothing,
+    expected_contract = nothing,
+    actual_contract = nothing,
 )
     optional_string(value) = value === nothing ? nothing : String(value)
     return GeneratedSourceException(
@@ -336,6 +393,8 @@ function GeneratedSourceException(
         optional_string(rule_label),
         optional_string(handler_family),
         optional_string(detail),
+        optional_string(expected_contract),
+        optional_string(actual_contract),
     )
 end
 
@@ -409,6 +468,8 @@ function to_json(error::GeneratedSourceException)
     _put_if_present!(result, "rule_label", error.rule_label)
     _put_if_present!(result, "handler_family", error.handler_family)
     _put_if_present!(result, "detail", error.detail)
+    _put_if_present!(result, "expected_contract", error.expected_contract)
+    _put_if_present!(result, "actual_contract", error.actual_contract)
     return result
 end
 
@@ -432,8 +493,8 @@ function to_json(metadata::GeneratedSourceMetadata)
     )
 end
 
-"""Emit a deterministic contract-v1 Julia module using the compatibility identity."""
-emit_julia_source(compiled::CompiledSpec) = emit_julia_source_v1(compiled, "<inline>")
+"""Emit a deterministic contract-v2 Julia module using the compatibility identity."""
+emit_julia_source(compiled::CompiledSpec) = emit_julia_source_v2(compiled, "<inline>")
 
 """
 Emit deterministic Julia source from effective compiled state.
@@ -442,7 +503,7 @@ The logical payload is Unicode scalar text. The generated-file boundary encodes
 its canonical JSON as strict UTF-8 and renders those bytes as ASCII hexadecimal;
 UTF-8 is the selected boundary encoding, not a synonym for Unicode.
 """
-function emit_julia_source_v1(compiled::CompiledSpec, source_identity::AbstractString)
+function emit_julia_source_v2(compiled::CompiledSpec, source_identity::AbstractString)
     identity = String(source_identity)
     if isempty(identity)
         throw(GeneratedSourceException(
@@ -472,8 +533,8 @@ function emit_julia_source_v1(compiled::CompiledSpec, source_identity::AbstractS
 
         output = IOBuffer()
         print(output, """# Generated LinkedSpec parser module.
-# Contract id: linkedspec-generated-source-v1.
-# Source format: LinkedSpecJulia source_emitter v1.
+# Contract id: linkedspec-generated-source-v2.
+# Source format: LinkedSpecJulia source_emitter v2.
 # Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.
 
 module LinkedSpecGeneratedParser
@@ -481,8 +542,8 @@ module LinkedSpecGeneratedParser
 import JSON3
 import LinkedSpecJulia
 
-const LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"
-const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1
+const LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"
+const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2
 """)
         println(
             output,
@@ -506,6 +567,8 @@ const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1
         print(output, """
 
 metadata() = LinkedSpecJulia.GeneratedSourceMetadata(
+    LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+    LINKEDSPEC_GENERATED_SOURCE_FORMAT,
     LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
 )
 
@@ -525,14 +588,30 @@ function _load_compiled_spec()
     end
 end
 
+LinkedSpecJulia.validate_generated_source_contract_v2(
+    LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+    LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+)
 const _COMPILED_SPEC = _load_compiled_spec()
 plan() = copy(_GENERATED_PLAN)
 
 function validate_plan(actual::AbstractVector{LinkedSpecJulia.GeneratedPlanRow})
-    LinkedSpecJulia.validate_generated_rule_plan_v1(
+    validate_plan_for_contract(actual, LINKEDSPEC_GENERATED_SOURCE_CONTRACT)
+end
+
+function validate_plan_for_contract(
+    actual::AbstractVector{LinkedSpecJulia.GeneratedPlanRow},
+    actual_contract::AbstractString,
+)
+    LinkedSpecJulia.validate_generated_source_contract_v2(
+        actual_contract,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+    )
+    LinkedSpecJulia.validate_generated_rule_plan_v2(
         _COMPILED_SPEC,
         actual,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+        actual_contract = actual_contract,
     )
     return nothing
 end
@@ -542,13 +621,14 @@ function execute(
     top_rule = nothing,
     diagnostic_output_sink = nothing,
 )
-    return LinkedSpecJulia.execute_generated_parser_v1(
+    return LinkedSpecJulia.execute_generated_parser_v2(
         _COMPILED_SPEC,
         _GENERATED_PLAN,
         input,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
         top_rule = top_rule,
         diagnostic_output_sink = diagnostic_output_sink,
+        actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 end
 
@@ -559,7 +639,7 @@ function execute_with_trace(
     stdout_io::IO = stdout,
     diagnostic_output_sink = nothing,
 )
-    return LinkedSpecJulia.execute_generated_parser_with_trace_v1(
+    return LinkedSpecJulia.execute_generated_parser_with_trace_v2(
         _COMPILED_SPEC,
         _GENERATED_PLAN,
         input,
@@ -568,6 +648,7 @@ function execute_with_trace(
         top_rule = top_rule,
         stdout_io = stdout_io,
         diagnostic_output_sink = diagnostic_output_sink,
+        actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 end
 

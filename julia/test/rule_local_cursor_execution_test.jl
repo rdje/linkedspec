@@ -239,18 +239,18 @@ end
         )
     end
 
-    @testset "generated-v1 compatibility remains isolated" begin
+    @testset "generated-v2 derives intrinsic family policy" begin
         and_compiled = compile_spec(parse_spec(raw"""
 Top::AND
  /x/ -> Top { return("hit") }
 """))
         @test runtime_parse(LinkedSpecRuntimeEngine(and_compiled), "prefix x").value === nothing
-        @test execute_generated_parser_v1(
+        @test execute_generated_parser_v2(
             and_compiled,
             build_generated_rule_plan(and_compiled),
             "prefix x",
-            "cursor-v1-and.spec",
-        ) == "hit"
+            "cursor-v2-and.spec",
+        ) === nothing
 
         pipe_compiled = compile_spec(parse_spec(raw"""
 Top::|
@@ -263,12 +263,12 @@ Y: /y/ E { return("y") }
         @test runtime_parse(LinkedSpecRuntimeEngine(pipe_compiled), "xy").value == "x"
         @test generated_rule_family_name(classify_generated_rule_family(
             compiled_rule(pipe_compiled, "Top"),
-        )) == "and_bcode"
-        @test execute_generated_parser_v1(
+        )) == "or_bcode"
+        @test execute_generated_parser_v2(
             pipe_compiled,
             build_generated_rule_plan(pipe_compiled),
             "xy",
-            "cursor-v1-pipe.spec",
-        ) == "y"
+            "cursor-v2-pipe.spec",
+        ) == "x"
     end
 end

@@ -49,8 +49,9 @@ Rust driver topology. A separate 15-role Dart consumer composes native default/A
 emitted/generated direct/trace, mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 checker locks each marker, the complete Dart test command, canonical tracked input, and optional backend-driver
 registration. `neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, and `dart_backend` are complete,
-so rollout is 4 complete / 4 pending; later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
-remains the convergence baseline for unmigrated backends while the cursor rollout advances each current emitter.
+so rollout is 4 complete / 4 pending; later legs remain dependency-ordered. The shared generated-source-v1
+capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, and Julia emitters use
+v2 and Lua awaits its cursor rollout.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
@@ -78,18 +79,19 @@ wide driver passes 270 tests, the shared command passes 65/65 in both option env
 105/105. Julia core `.4.1` consumes every neutral selection/failure/strict row, accepts markerless
 one-or-more-rule sources, reports portable zero/unknown failures, and publishes the descriptor contract without
 advancing rollout; native/root-primary proof is exactly 32/65 twice with only the 33 cursor-owned cases remaining.
-Julia route `.4.2` now proves loaded/normalized and generated/emitted direct/traced execution, low requested/
-effective/basis trace, portable loader/generated failures, plan-first rejection, and unchanged v1/format 1
-identity through 57 assertions. Dart cursor admission is clean at `7aa9c578`; Julia cursor preflight `.9.1.6.0`
-is verified and its clean commit precedes `.1-.6`. Julia
+Julia route `.4.2` proves loaded/normalized and generated/emitted direct/traced execution, low requested/effective/
+basis trace, portable loader/generated failures, and plan-first rejection through 57 assertions. Dart cursor
+admission is clean at `7aa9c578`; Julia cursor `.9.1.6.1-.4` now implements exact normalization, live execution,
+descriptor v1, and generated-source v2 without advancing rollout. Julia
 admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay explicit in the inventory until their owning leaves
 land.
 
-The Julia cursor preflight measures the exact pending differences without advancing rollout: 36/36 headers parse
-but family classification is 34/36 because compact `|` is still AND; every engine owns global seek; 11 of 18 edge
-rows remain raw and none of seven edge/edge-set error cases reports its portable code; parent-child agreement is
-5/8 and structural agreement 1/2. Descriptor cursor v1 and generated v2 are absent. Package progression is 56/57,
-shared primary is 32/65 twice, corpus is 105/105, and neutral governance remains 67 files / 4+4 / 39 mutations.
+The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
+was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,
+structural agreement was 1/2, and descriptor/generated cursor identities were absent. Current `.1-.4` proof now
+covers all 36 family spellings, all 18 edge rows, 8/8 parent-child, 2/2 structural, cursor descriptor v1, and
+generated-source v2 with contract-before-payload rejection. Package progression is 3,133 plus the frozen help
+mismatch, shared primary remains 32/65 twice, corpus is 105/105, and governance remains 67 / 4+4 / 39.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

@@ -11,12 +11,15 @@ answers:
   - "how does Julia trace entered rule cursor policy"
   - "does Julia generated source v1 use intrinsic cursor policy"
   - "why does Julia keep a generated v1 compatibility engine"
+  - "did Julia remove the generated v1 compatibility engine"
+  - "does Julia generated source v2 derive cursor policy"
   - "does Julia still accept an explicit global parse mode"
   - "what tests prove Julia rule local cursor execution"
 date: 2026-07-18
-status: verified normal execution; descriptor superseded by .9.1.6.3; generated/public/admission remain .4-.6
+status: verified normal and generated-v2 execution; public/admission remain .9.1.6.5-.6
 tags: [julia, runtime, cursor, rule-family, trace, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.6.2 derives family/cursor/sequence-choice once at every ordinary _execute_runtime_rule! entry. Live, loaded-default, normalized SpecFile JSON, recursive, and traced routes pass 104 neutral assertions over all 36 families, eight parent-child mechanisms, and two structural replacements. Generated v1 remains behind a private seek/family compatibility engine and focused emitter proof passes 60. Complete package is 2,320 pass plus the one frozen help mismatch; corpus is 105/105; shared primary remains 32/65 twice; neutral governance remains 67 files / 4 complete + 4 pending / 39 mutations."
+evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 removes _generated_v1_compatibility_engine after every current generated role moves to v2. Generated entry policy derives from the validated ten-family plan: five seek and five consume, with the same sequence/choice dimension. Focused emitter is 65/65; complete Julia is 3,133 plus the frozen help mismatch; corpus 105 and primary 32/65x2 remain exact."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && python3 tools/check_rule_local_cursor_contract.py"
 ---
 
@@ -36,11 +39,11 @@ and loaded `create_engine(...)` are intrinsic; ordinary normalized `SpecFile` JS
 metadata. Rule trace entries identify `family=and|or_default` and `cursor_policy=consume|seek`, and regex decisions
 record the effective policy.
 
-Two staged compatibility boundaries remain explicit. An explicitly supplied engine option is still honored for
-outer CLI/corpus callers until `.9.1.6.5`. Generated-source v1 uses a private compatibility engine with historical
-seek and derives legacy sequence/choice from its validated v1 handler-family plan. This prevents a v1 artifact
-from silently changing meaning before generated-source v2 `.9.1.6.4`. Descriptor v1 is now current under `.3`;
-generated v2, option removal, and 15-role admission remain `.4-.6`, so rollout stays 4 complete / 4 pending.
+One staged compatibility boundary remains explicit. An explicitly supplied engine option is still honored for
+outer CLI/corpus callers until `.9.1.6.5`. Generated-source v2 no longer uses a private engine: validated family
+derives both cursor and sequence/choice at every generated rule entry. A v1 contract is rejected before payload
+reconstruction and must be regenerated. Descriptor v1 and generated v2 are current through `.4`; option removal
+and 15-role admission remain `.5-.6`, so rollout stays 4 complete / 4 pending.
 
 `julia/test/rule_local_cursor_execution_test.jl` reads the unchanged neutral JSON contract. It covers every one
 of the 36 family spellings on live and normalized routes, all eight parent-child mechanisms, both structural
@@ -48,6 +51,7 @@ replacements, loaded execution, recursion, trace attribution, and generated-v1 i
 tests additionally lock all ten v1 families and the historical repeated-child ordering.
 
 Related: [[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-descriptor]],
+[[julia-generated-source-v2-rule-local-cursor]],
 [[julia-rule-local-cursor-preflight]],
 [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]],
 [[dart-rule-local-cursor-execution]], and [[rust-rule-local-cursor-execution]].

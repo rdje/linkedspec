@@ -524,12 +524,12 @@ Empty/comment-only source remains a parser envelope so validation can return `no
 `is_top` bit unchanged. Strict-unused still derives only from authored rule edges.
 
 Loaded source and normalized JSON compile back to the same ordered state. Generated direct/traced and emitted
-module APIs already expose optional `top_rule`, so they pass it to the same resolver without changing contract
-v1/format 1 or the minimal `{label, family}` plan:
+module APIs expose optional `top_rule`, so they pass it to the same resolver. Current artifacts use contract
+v2/format 2 while retaining the minimal `{label, family}` plan:
 
 ```julia
 plan = build_generated_rule_plan(compiled)
-execute_generated_parser_v1(
+execute_generated_parser_v2(
     compiled,
     plan,
     "x",

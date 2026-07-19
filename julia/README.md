@@ -7,8 +7,8 @@ families, cursor/boundary behavior, structured diagnostics/tracing, registered f
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
 composition plus full ordered 105-fixture library and CLI execution. Local-gate integration and native primary
 rule/function execution with direct canonical JSON, stable failure/trace routing, and nine-family direct-process
-conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
-parity closeout remain open. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
+conformance are complete. Cross-backend cursor admission and final complete-parity closeout remain open; current
+generated source is v2/format 2. Public named/exact-path resolution, strict UTF-8 loading, staged compilation, source
 identity, and structured pipeline exceptions now also live in the native module rather than only the CLI; this
 status remains a Julia-local milestone, not a complete backend-parity claim. Julia consumes the complete native,
 generated, primary, and recurring `linkedspec-logical-helper-v1` proof; its public no-drift admission is closed.
@@ -23,17 +23,18 @@ global-option help/usage/request-trace projection. The package gate reaches the 
 its primary-arguments testset, while standalone corpus execution remains 105/105. Composed root routes `.4.2`
 now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
 same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
-zero/unknown identities, plan validation remains first, and generated contract v1/format 1 plus the minimal
-label/family plan remain unchanged. Dart cursor admission is cleanly committed at `7aa9c578`, satisfying Julia's
-final cursor dependency; exact 65x2 root admission `.4.3` follows Julia cursor, so rollout remains 4/7.
+zero/unknown identities, and plan validation remains first. Cursor generated-source `.9.1.6.4` now emits
+contract-v2/format 2 with the same minimal label/family plan, derives the exact five seek/five consume mapping,
+rejects v1 before payload reconstruction, and removes the private v1 forced-seek engine. Dart cursor admission is
+cleanly committed at `7aa9c578`, satisfying Julia's final cursor dependency; exact 65x2 root admission `.4.3`
+follows Julia cursor, so rollout remains 4/7.
 
-Behavior-free Julia preflight `.9.1.6.0`
-has mapped the exact starting boundary. All 36 headers parse, but compact `|` is currently misclassified as AND;
-all 36 engines carry global seek, bare rule-label members remain raw, and `=> Child[0]` is silently accepted after
-prefix parsing. Exact parent/child agreement is 5/8 and structural agreement is 1/2. Descriptor state still has
-global cursor-mode metadata; generated source is v1/format 1; shared primary remains 32/65 twice; the package reaches the
-56/57 help boundary; corpus remains 105/105. Implementation is frozen as normalization `.1`, intrinsic normal
-execution `.2`, descriptor v1 `.3`, generated v2 `.4`, option/CLI removal `.5`, and composed admission `.6`.
+Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
+engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
+was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal
+execution `.2`, descriptor v1 `.3`, and generated v2 `.4` have now corrected their owned seams. Shared primary
+remains 32/65 twice and the package retains only the 56/57 help boundary until option/CLI removal `.5`; composed
+admission remains `.6`, and corpus stays 105/105.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing

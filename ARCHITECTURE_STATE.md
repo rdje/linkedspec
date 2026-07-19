@@ -5,22 +5,31 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
+- `2026-07-18` Julia generated-source v2 refresh: `FUTURE-PARITY-BACKLOG.9.1.6.4` advances new artifacts to
+  `linkedspec-generated-source-v2` / format 2 while retaining the minimal ordered label/family plan. Validation
+  derives seek for default/OR/repetition families and consume for the five AND families; runtime uses that derived
+  policy and structural interpretation at every generated rule entry. Contract validation precedes normalized
+  payload reconstruction, so a v1 identity wins over even corrupt payload bytes with exact expected/actual fields
+  and `.spec` regeneration guidance. The private forced-seek v1 engine is gone; compact `Pipe` is generated OR.
+  Direct, traced, accepted-subset, root-route, diagnostic, logical, variadic, binding, punctuation, named-mark, and
+  fresh isolated module roles pass. Complete Julia is 3,133 plus only the frozen help mismatch; primary remains
+  32/65x2, corpus 105, and governance 67/4+4/39. Public override removal and admission remain `.5-.6`.
 - `2026-07-18` Julia cursor descriptor refresh: `FUTURE-PARITY-BACKLOG.9.1.6.3` makes the outward descriptor a
   pure cursor-v1 projection. Root metadata replaces global `parse_mode` with
   `linkedspec-rule-local-cursor-v1`; each rule derives family/policy and projects aggregate ownership plus exact
   ownership/target/child-index/block/fluent edge rows from normalized compiled tables. Direct, normalized
   `SpecFile`-JSON, and loaded descriptor bytes agree; no descriptor decoder or cursor input exists. Focused proof
   is 809, complete package is 3,129 plus the frozen help mismatch, corpus 105, primary 32/65x2, and governance
-  67/4+4/39. Generated v2, public removal, admission, and rollout remain `.4-.6`.
+  67/4+4/39. That slice left generated/public/admission staged; generated v2 is now complete and `.5-.6` remain.
 - `2026-07-18` Julia cursor runtime refresh: `FUTURE-PARITY-BACKLOG.9.1.6.2` adds one entered-rule execution
   policy in `julia/src/runtime/Interpreter.jl`. Exact AND consumes and sequences; OR/default seeks and chooses.
   Blind, action, explicit-call, and recursive children receive only the current cursor and rederive from their own
   compiled family. Direct, loaded-default, normalized `SpecFile` JSON, and traced routes share this owner; rule
   trace scopes expose family plus effective policy. Missing engine option means intrinsic behavior, while an
   explicit value remains a temporary outer CLI/corpus adapter. Generated v1 uses a private seek/family adapter so
-  its v1/format-1 meaning cannot drift before `.4`. Focused execution is 104, generated proof 60, complete package
+  its v1/format-1 meaning could not drift before `.4`. Focused execution is 104, generated proof 60, complete package
   2,320 plus the frozen help mismatch, corpus 105, shared primary 32/65x2, and governance 67/4+4/39. Generated-v2,
-  descriptor `.3` is complete; option removal, admission, and rollout remain `.4-.6`.
+  descriptor `.3` followed; `.4` has now removed the generated-v1 adapter, while option removal/admission `.5-.6` remain.
 - `2026-07-18` root-selection decision: ADR `0046` and `linkedspec-root-rule-selection-v1` order selection as
   explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
   Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains

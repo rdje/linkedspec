@@ -19,6 +19,7 @@ date: 2026-07-16
 status: current
 tags: [Julia, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.1.5 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. FUTURE-PARITY-BACKLOG.5.1.7 threads the optional sink through generated helpers and emitted direct/traced entrypoints. diagnostic_output_contract_test.jl consumes native and generated linkedspec-diagnostic-output-v1 scenarios and proves exact events, values, trace separation, caller-object identity, and typed exit."
+evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 migrates the unchanged generated diagnostic direct/traced roles to execute_generated_parser_v2 and emitted contract-v2 modules."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnostic_output_sink' julia/src julia/test/diagnostic_output_contract_test.jl"
 ---
 
@@ -51,7 +52,7 @@ preceding events arrive and later actions do not run. Neither rich event data no
 Before `.5.1.5`, Julia sent helper messages through low trace, accepted permissive arities, gave omitted
 `print_each` suffixes a newline, and wrapped `exit_now` as `RuntimeInterpreterException`. Those facts remain
 historical root-cause evidence; they are not current native behavior. Generated callers now pass
-`diagnostic_output_sink = ...` to `execute_generated_parser_v1` or its traced counterpart; emitted `execute` and
+`diagnostic_output_sink = ...` to `execute_generated_parser_v2` or its traced counterpart; emitted `execute` and
 `execute_with_trace` expose the same keyword. A private generated carrier restores arbitrary caller failures while
 ordinary failures retain generated-source attribution.
 

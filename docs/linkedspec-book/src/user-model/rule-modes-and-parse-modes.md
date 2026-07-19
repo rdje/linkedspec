@@ -70,10 +70,11 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > blind tables. Runtime `.9.1.6.2` now derives AND-consume/sequence and
 > OR-default-seek/choice once at every normal live, loaded, normalized,
 > recursive, and traced entry; children rederive from their own family.
-> Descriptor v1 is now current too: it exposes per-rule family, policy,
-> ownership, and semantic edge rows with no global cursor field. Generated v2,
-> option removal, and admission remain `.4-.6`, while generated v1 stays on its
-> private compatibility path until `.4`.
+> Descriptor v1 is current too: it exposes per-rule family, policy, ownership,
+> and semantic edge rows with no global cursor field. Generated-source v2 is
+> now current: its minimal family plan derives five seek and five consume
+> policies, rejects v1 before payload reconstruction, and has no serialized
+> cursor override. Option removal and admission remain `.5-.6`.
 > Rollout is 4 complete / 4 pending, with Julia, Lua, recurring five-backend,
 > and public no-drift work dependency-ordered under `.9.1.6-.9`; the current
 > governed inventory is 67 files with 39 effective mutations.
@@ -685,10 +686,12 @@ The Perl reference implements both the decision's bare-edge normalization and no
 implements the same typed normalization and portable validation through `.9.1.4.2`, `.9.1.4.3` applies the
 derived policy to normal live, loaded, and ordinary reconstructed execution, and `.9.1.4.4` projects the same
 family/policy/edge facts through descriptor v1. Dart `.9.1.5.1-.5` now implements the same typed normalization,
-live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1-.3` now
-implements typed normalization, live/loaded/normalized/recursive/traced entered-rule policy, and descriptor v1:
+live/loaded/reconstructed policy, descriptor, generated-v2, and public-removal boundary. Julia `.9.1.6.1-.4` now
+implements typed normalization, live/loaded/normalized/recursive/traced entered-rule policy, descriptor v1, and
+generated-source v2:
 every family and edge shape is exact in AST/validation/compiled state, every ordinary rule spends its own derived
-policy, and outward descriptors project those same normalized facts. Generated/public artifacts remain staged. A
+policy, outward descriptors project those same normalized facts, and generated artifacts derive the same policy
+from their minimal family plan. Public option removal and admission remain staged. A
 complete bare paragraph member such as `Child`, `Child { ... }`, or `Child.return(...)` normalizes to:
 
 - `=> Child...` in an AND-family rule;
@@ -747,8 +750,10 @@ projection, generated-source-v2 reconstruction, and public option/CLI removal ar
 In Julia, authored family identity, typed bare edges, family-derived ownership, compiled action/blind lowering,
 the same six portable diagnostics, normal live/loaded/reconstructed policy spending, and descriptor v1 are
 current. Descriptor root metadata has no global cursor field; each rule publishes family, derived policy,
-ownership, and exact semantic edge rows, and direct/normalized/loaded bytes agree. Generated-source v2,
-option/CLI removal, and composed admission remain `.9.1.6.4-.6`, so Julia does not yet advance the rollout row.
+ownership, and exact semantic edge rows, and direct/normalized/loaded bytes agree. Generated-source v2 emits
+format 2 with no cursor field, derives five seek/five consume policies, rejects v1 before reconstruction, and
+requires regeneration of legacy v1 files. Option/CLI removal and composed admission remain `.9.1.6.5-.6`, so
+Julia does not yet advance the rollout row.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

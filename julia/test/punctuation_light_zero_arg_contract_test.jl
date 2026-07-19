@@ -140,18 +140,18 @@ end
         ).value == expected
 
         plan = build_generated_rule_plan(compiled)
-        @test execute_generated_parser_v1(
+        @test execute_generated_parser_v2(
             compiled,
             plan,
             fixture["input"],
             "punctuation-light-zero-arg.spec",
         ) == expected
 
-        generated = emit_julia_source_v1(
+        generated = emit_julia_source_v2(
             compiled,
             "punctuation-light-zero-arg.spec",
         )
-        @test occursin("linkedspec-generated-source-v1", generated)
+        @test occursin("linkedspec-generated-source-v2", generated)
         encoded = match(
             r"const _COMPILED_SPEC_JSON_HEX = \"([0-9a-f]+)\"",
             generated,

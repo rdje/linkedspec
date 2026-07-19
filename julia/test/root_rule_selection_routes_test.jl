@@ -145,14 +145,14 @@ end
         compiled = compile_spec(parse_spec(route.source))
         plan = build_generated_rule_plan(compiled)
         descriptor_before = to_descriptor_json(compiled)
-        @test execute_generated_parser_v1(
+        @test execute_generated_parser_v2(
             compiled,
             plan,
             "x",
             route.identity,
         ) == route.default_value
         result, events, output = _root_route_trace_events() do trace
-            execute_generated_parser_v1(
+            execute_generated_parser_v2(
                 compiled,
                 plan,
                 "x",
@@ -179,7 +179,7 @@ end
     compiled = compile_spec(parse_spec(_ROOT_ROUTE_MARKED_SOURCE))
     plan = build_generated_rule_plan(compiled)
     explicit, events, _ = _root_route_trace_events() do trace
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             compiled,
             plan,
             "x",
@@ -206,7 +206,7 @@ end
     trace_output = IOBuffer()
     trace = LinkedSpecTraceEmitter(trace_config_enabled("low"); stdout_io = trace_output)
     unknown = _root_route_failure() do
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             compiled,
             plan,
             "x",
@@ -241,7 +241,7 @@ end
 
     empty = compile_spec(SpecFile(rules = Rule[]); validate_source = false)
     zero = _root_route_failure() do
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             empty,
             GeneratedPlanRow[],
             "",
@@ -263,7 +263,7 @@ end
 
     stale_plan = plan[1:(end - 1)]
     stale = _root_route_failure() do
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             compiled,
             stale_plan,
             "x",
@@ -281,7 +281,7 @@ end
 @testset "Independently emitted Julia root routes" begin
     compiled = compile_spec(parse_spec(_ROOT_ROUTE_MARKERLESS_SOURCE))
     identity = "root-routes/emitted-markerless.spec"
-    generated = emit_julia_source_v1(compiled, identity)
+    generated = emit_julia_source_v2(compiled, identity)
 
     mktempdir() do scratch
         private_depot = joinpath(scratch, "depot")
@@ -301,8 +301,8 @@ end
 import LinkedSpecJulia
 include(ARGS[1])
 const Parser = LinkedSpecGeneratedParser
-@assert Parser.LINKEDSPEC_GENERATED_SOURCE_CONTRACT == "linkedspec-generated-source-v1"
-@assert Parser.LINKEDSPEC_GENERATED_SOURCE_FORMAT == 1
+@assert Parser.LINKEDSPEC_GENERATED_SOURCE_CONTRACT == "linkedspec-generated-source-v2"
+@assert Parser.LINKEDSPEC_GENERATED_SOURCE_FORMAT == 2
 @assert Parser.execute("x") == "first"
 @assert Parser.execute("x"; top_rule = "Second") == "second"
 @assert all(Set(keys(LinkedSpecJulia.to_json(row))) == Set(["label", "family"]) for row in Parser.plan())

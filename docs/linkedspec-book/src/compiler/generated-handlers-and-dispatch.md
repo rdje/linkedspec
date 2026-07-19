@@ -118,6 +118,8 @@ one ordered compiled-state resolver. Route leaf `.4.2` proves generated direct/t
 direct/traced execution pass optional `top_rule` to that resolver. Low `julia_runtime:entry_rule_selection` trace
 records requested/effective/basis; generated zero/unknown failures retain portable stages/codes after plan
 validation. Generated-source contract v1/format 1 and its ordered `{label, family}` plan remain unchanged.
+Cursor migration `.9.1.6.4` subsequently advanced new Julia artifacts to contract v2/format 2 without widening
+that plan or changing the invocation-local root selector.
 
 ```rust
 use linkedspec_runtime::source_emitter::{
@@ -188,8 +190,8 @@ exact values, metadata, plans, portable trace roles, and source identity. The
 contract checker locks that test path and proof shape. Dart generated source is
 therefore admitted pass.
 
-Julia now exposes the first contract-v1 scaffold through
-`emit_julia_source_v1(compiled, "specs/example.spec")` and the `<inline>`
+Julia emits the current contract-v2 scaffold through
+`emit_julia_source_v2(compiled, "specs/example.spec")` and the `<inline>`
 compatibility adapter `emit_julia_source(compiled)`. The generated native
 module exposes contract/version/identity metadata plus direct-value `execute`
 and `execute_with_trace` entrypoints. Emission reconstructs the effective
@@ -199,7 +201,7 @@ not change.
 
 ```julia
 compiled = compile_spec(parse_spec(source))
-generated = emit_julia_source_v1(compiled, "specs/example.spec")
+generated = emit_julia_source_v2(compiled, "specs/example.spec")
 
 # Persist `generated` as UTF-8 in caller-owned storage, then load it.
 include("generated_parser.jl")
@@ -213,6 +215,10 @@ Unicode defines characters/code points; UTF-8, UTF-16, and UTF-32 are encoding
 forms. LinkedSpec selects strict UTF-8 for this persisted boundary without
 equating Unicode with UTF-8.
 
+Contract validation runs before normalized payload reconstruction. A v1 artifact identity therefore raises
+`generated_source_contract_version_mismatch` with exact expected/actual contract fields and regeneration guidance,
+even when its payload is corrupt. Standalone v1 files are legacy artifacts and must be regenerated from `.spec`.
+
 The scaffold proof runs valid and deliberately corrupted generated modules in
 fresh processes from a caller-owned temporary project. Compiled modules are
 disabled, the writable depot layer is private to the test, execution and typed
@@ -223,14 +229,15 @@ proofs landed.
 Julia's plan/direct layer is now implemented. `GeneratedRuleFamily` names the
 same ten families as the neutral contract, while `GeneratedPlanRow` carries
 ordered label/family pairs. `build_generated_rule_plan(...)` classifies
-effective compiled rules; `validate_generated_rule_plan_v1(...)` rejects row-
+effective compiled rules; `validate_generated_rule_plan_v2(...)` rejects row-
 count, label, known-family mismatch, and unknown-family mutations before any
 parser action runs.
 
 Validated families are not decorative. Every generated root and nested rule
-entry reads the typed plan and selects regex/acode or blind/bcode structural
-dispatch from that family; native interpreter calls still derive the same
-choice from compiled structure. Generated traced execution adds
+entry reads the typed plan, derives seek for default/OR/repetition families and
+consume for the five AND families, and selects regex/acode or blind/bcode
+structural dispatch from the same family. No cursor field is serialized.
+Generated traced execution adds
 `generated_rule_enter`, `generated_family_decision`, and
 `generated_rule_exit` with source/rule/family identity beside the native Julia
 trace. One emitted module independently executes all ten families against

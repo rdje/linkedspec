@@ -16,7 +16,7 @@ function _expect_uniform_binding_native_and_generated(
 )
     compiled = _compile_uniform_binding_source(source)
     @test runtime_execute(LinkedSpecRuntimeEngine(compiled), input).value == expected
-    @test execute_generated_parser_v1(
+    @test execute_generated_parser_v2(
         compiled,
         build_generated_rule_plan(compiled),
         input,
@@ -63,7 +63,7 @@ function _expect_uniform_binding_wrong_kind(
     end
 
     generated_error = try
-        execute_generated_parser_v1(
+        execute_generated_parser_v2(
             compiled,
             build_generated_rule_plan(compiled),
             "xx",
@@ -195,7 +195,7 @@ end
         diagnostic = _uniform_binding_selector_diagnostic("array", "items")
 
         emit_error = try
-            emit_julia_source_v1(invalid, "selector-generated.spec")
+            emit_julia_source_v2(invalid, "selector-generated.spec")
             nothing
         catch caught
             caught
@@ -208,7 +208,7 @@ end
         end
 
         plan_error = try
-            validate_generated_rule_plan_v1(invalid, plan, "selector-generated.spec")
+            validate_generated_rule_plan_v2(invalid, plan, "selector-generated.spec")
             nothing
         catch caught
             caught

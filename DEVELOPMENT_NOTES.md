@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.4` — version before decode; derive rather than serialize):
+  Julia's v1 module reconstructed its normalized payload eagerly and only then validated label/family rows. It also
+  forced a seek engine and used the plan only for legacy structure, so changing runtime semantics without a format
+  bump would silently reinterpret persisted artifacts. V2 validates the embedded contract identity before calling
+  `_load_compiled_spec`; a deliberately corrupt payload with a v1 identity must therefore return the portable
+  version mismatch, while the same corrupt payload under v2 proceeds to the distinct compile/load failure.
+
+  The plan stays minimal. `_generated_family_cursor_policy` and `_generated_family_uses_and_execution` derive the
+  two execution dimensions from the already validated ten-family name; no policy field is added to normalized or
+  generated state. This is also why compact `Pipe` classification must follow `is_and`/normalized OR identity
+  rather than the old literal-mode branch. Once v2 owns every current direct/traced/emitted consumer, the private
+  `_generated_v1_compatibility_engine` can be deleted instead of becoming permanent dual semantics.
+
+  Fresh-host proof is important at both layers. Direct all-family tests can establish value equality against the
+  native engine, but only an independently included module proves emitted constants, validation-before-decode,
+  ASCII-hex reconstruction, public `validate_plan_for_contract`, metadata, root selection, and trace/source
+  identity. The shared v1 capability contract remains the semantic accepted-subset ledger; its Julia consumer now
+  emits current v2 source just as the already-migrated Rust and Dart consumers do.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.3` — descriptors project normalized facts; they do not own policy):
   Julia already had every cursor-v1 descriptor fact in immutable compiled state after `.1`: exact family metadata
   plus normalized action/blind tables. The descriptor therefore adds no cursor field to `CompiledSpec` and no

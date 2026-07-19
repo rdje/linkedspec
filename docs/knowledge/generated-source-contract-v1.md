@@ -33,6 +33,7 @@ evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 changes curren
 evidence_update_2026_07_16_diagnostic_output: "FUTURE-PARITY-BACKLOG.5.1.7 extends every available generated direct/traced role with an idiomatic optional or paired caller-owned diagnostic sink while preserving legacy APIs, values, portable trace roles, ordinary generated-source attribution, caller sink failures, and typed immediate exit. The five primary commands deliberately omit the sink and pass the shared quiet 62nd CLI case under default and POSIX environments."
 evidence_update_2026_07_17_perl_v2: "FUTURE-PARITY-BACKLOG.9.1.3.4 advances new Perl emission to generated-source v2 for rule-local cursor semantics. This card remains the shared semantic convergence baseline and historical Perl admission record; Rust, Dart, Julia, and Lua retain v1 until their ordered cursor migrations."
 evidence_update_2026_07_18_dart_v2: "FUTURE-PARITY-BACKLOG.9.1.5.4 advances new Dart emission to generated-source v2 for rule-local cursor semantics. The v1 semantic ledger and accepted subset remain the cross-backend admission baseline; current Dart artifacts use exact label/family plans, reject v1 before payload decoding, and derive policy at each entered rule."
+evidence_update_2026_07_18_julia_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 advances new Julia emission to generated-source v2 while the shared v1 semantic ledger remains unchanged. Julia's accepted-subset consumer now emits current v2 source, validates contract before ASCII-hex payload reconstruction, and retains all interpreter-first/trace/load roles."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -81,11 +82,12 @@ identity, fixed user-function execution, cleanup, and unconditional
 registration. Lua census admission closes under `.8.4` at five-backend 80/0/0.
 
 ADR `0044` now migrates current emitters in dependency order. Perl new emission
-has advanced to v2 under `.9.1.3.4`, Rust under `.9.1.4.5`, and Dart under
-`.9.1.5.4`; this v1 card remains the shared convergence baseline and historical
+has advanced to v2 under `.9.1.3.4`, Rust under `.9.1.4.5`, Dart under
+`.9.1.5.4`, and Julia under `.9.1.6.4`; this v1 card remains the shared convergence baseline and historical
 admission record. See [[perl-generated-source-contract-v2]],
-[[rust-generated-source-v2-rule-local-cursor]], and
-[[dart-generated-source-v2-rule-local-cursor]].
+[[rust-generated-source-v2-rule-local-cursor]],
+[[dart-generated-source-v2-rule-local-cursor]], and
+[[julia-generated-source-v2-rule-local-cursor]].
 
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],

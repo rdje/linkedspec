@@ -280,8 +280,8 @@ fail('Julia accepted-subset test must consume the executable contract list')
         $julia_accepted_subset_text =~ /\["accepted_subset"\]/;
 fail('Julia accepted-subset test must compare the interpreter before emission')
  unless $julia_accepted_subset_text =~ /\@test\s+interpreter_value\s*==\s*fixture\.expected_json/;
-fail('Julia accepted-subset test must emit contract-v1 source')
- unless $julia_accepted_subset_text =~ /emit_julia_source_v1\(compiled, identity\)/;
+fail('Julia accepted-subset test must emit current contract-v2 source')
+ unless $julia_accepted_subset_text =~ /emit_julia_source_v2\(compiled, identity\)/;
 fail('Julia accepted-subset test must independently include generated modules')
  unless $julia_accepted_subset_text =~ /Base\.include\(host, String\(case\["path"\]\)\)/;
 fail('Julia accepted-subset test must prove portable trace roles and source identity')

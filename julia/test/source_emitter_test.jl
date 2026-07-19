@@ -171,7 +171,7 @@ end
 
             identity = "generated-source/julia-subset/$case_name.spec"
             generated_path = joinpath(scratch, "case_$index.jl")
-            write(generated_path, emit_julia_source_v1(compiled, identity))
+            write(generated_path, emit_julia_source_v2(compiled, identity))
             push!(cases, Dict(
                 "name" => case_name,
                 "path" => generated_path,
@@ -218,8 +218,8 @@ for (index, case) in enumerate(subset["cases"])
     plans[name] = normalize([LinkedSpecJulia.to_json(row) for row in case_plan])
     @assert values[name] == normalize(case["expected"])
     @assert metadata[name] == Dict(
-        "contract_id" => "linkedspec-generated-source-v1",
-        "format_version" => 1,
+        "contract_id" => "linkedspec-generated-source-v2",
+        "format_version" => 2,
         "source_identity" => String(case["identity"]),
     )
     @assert plans[name] == normalize(case["plan"])
@@ -270,25 +270,62 @@ end
           [case.family for case in _GENERATED_FAMILY_CASES]
     @test Set(case.family for case in _GENERATED_FAMILY_CASES) ==
           Set(generated_rule_family_name(family) for family in instances(GeneratedRuleFamily))
-    @test validate_generated_rule_plan_v1(compiled, plan, identity) == plan_by_label
+    @test validate_generated_rule_plan_v2(compiled, plan, identity) == plan_by_label
 
-    generated_v1_results = Dict{String,Any}()
+    cursor_contract = JSON3.read(
+        read(
+            joinpath(REPO_ROOT, "capability_conformance", "rule_local_cursor_contract.json"),
+            String,
+        ),
+        Dict{String,Any},
+    )["generated_source_v2"]
+    @test Dict(
+        generated_rule_family_name(family) => (
+            LinkedSpecJulia._generated_family_cursor_policy(
+                generated_rule_family_name(family),
+            ) == SeekParseMode ? "seek" : "consume"
+        ) for family in instances(GeneratedRuleFamily)
+    ) == merge(
+        Dict(String(family) => "seek" for family in cursor_contract["seek_families"]),
+        Dict(String(family) => "consume" for family in cursor_contract["consume_families"]),
+    )
+
+    version_failure = _generated_plan_failure(() -> validate_generated_rule_plan_v2(
+        compiled,
+        plan,
+        identity;
+        actual_contract = "linkedspec-generated-source-v1",
+    ))
+    @test version_failure isa GeneratedSourceException
+    @test version_failure.stage == ValidateGeneratedPlanStage
+    @test version_failure.code == GeneratedSourceContractVersionMismatchCode
+    @test to_json(version_failure) == Dict(
+        "type" => "generated_source_error",
+        "stage" => "validate_generated_plan",
+        "code" => "generated_source_contract_version_mismatch",
+        "summary" => "Generated source contract does not match the active validator",
+        "source_identity" => identity,
+        "detail" => "regenerate the generated artifact from its .spec source",
+        "expected_contract" => "linkedspec-generated-source-v2",
+        "actual_contract" => "linkedspec-generated-source-v1",
+    )
+
+    generated_v2_results = Dict{String,Any}()
     for case in _GENERATED_FAMILY_CASES
-        legacy = runtime_execute(
-            LinkedSpecJulia._generated_v1_compatibility_engine(compiled),
+        native = runtime_execute(
+            LinkedSpecRuntimeEngine(compiled),
             case.input;
             top_rule = case.label,
         ).value
-        generated_v1_results[case.label] = legacy
-        @test execute_generated_parser_v1(
+        generated_v2_results[case.label] = native
+        @test execute_generated_parser_v2(
             compiled,
             plan,
             case.input,
             identity;
             top_rule = case.label,
-        ) == legacy
+        ) == native
     end
-    @test generated_v1_results["RepBcode"] == Any["A", "A", "B"]
 
     mutations = [
         (plan[1:(end - 1)], GeneratedPlanRowCountMismatchCode),
@@ -298,14 +335,14 @@ end
     ]
     for (mutated, expected_code) in mutations
         failure = _generated_plan_failure(
-            () -> validate_generated_rule_plan_v1(compiled, mutated, identity),
+            () -> validate_generated_rule_plan_v2(compiled, mutated, identity),
         )
         @test failure isa GeneratedSourceException
         @test failure.stage == ValidateGeneratedPlanStage
         @test failure.code == expected_code
     end
 
-    generated = emit_julia_source_v1(compiled, identity)
+    generated = emit_julia_source_v2(compiled, identity)
     mktempdir() do scratch
         private_depot = joinpath(scratch, "depot")
         mkpath(private_depot)
@@ -327,7 +364,7 @@ end
                         "label" => case.label,
                         "family" => case.family,
                         "input" => case.input,
-                        "expected" => generated_v1_results[case.label],
+                        "expected" => generated_v2_results[case.label],
                     )
                     for case in _GENERATED_FAMILY_CASES
                 ],
@@ -378,11 +415,11 @@ end
 @testset "Generated Julia source scaffold" begin
     compiled, expected_value = _generated_source_test_spec()
     identity = string("generated/λ", Char(0x24), ".spec")
-    generated = emit_julia_source_v1(compiled, identity)
+    generated = emit_julia_source_v2(compiled, identity)
     inline_generated = emit_julia_source(compiled)
 
-    @test generated == emit_julia_source_v1(compiled, identity)
-    @test generated != emit_julia_source_v1(compiled, "generated/other.spec")
+    @test generated == emit_julia_source_v2(compiled, identity)
+    @test generated != emit_julia_source_v2(compiled, "generated/other.spec")
     @test generated == replace(
         inline_generated,
         bytes2hex(codeunits("<inline>")) => bytes2hex(codeunits(identity)),
@@ -392,16 +429,17 @@ end
     @test occursin(bytes2hex(codeunits(identity)), generated)
     @test occursin(bytes2hex(codeunits(expected_value)), generated)
     @test !occursin(identity, generated)
+    @test !occursin("cursor_policy", generated)
 
     metadata = GeneratedSourceMetadata(identity)
     @test to_json(metadata) == Dict(
-        "contract_id" => "linkedspec-generated-source-v1",
-        "format_version" => 1,
+        "contract_id" => "linkedspec-generated-source-v2",
+        "format_version" => 2,
         "source_identity" => identity,
     )
 
     empty_identity_error = try
-        emit_julia_source_v1(compiled, "")
+        emit_julia_source_v2(compiled, "")
         nothing
     catch error
         error
@@ -434,22 +472,58 @@ end
             "version = \"0.1.0\"\n",
         )
         generated_path = joinpath(scratch, "generated_parser.jl")
+        legacy_corrupt_path = joinpath(scratch, "legacy_v1_corrupt.jl")
         runner_path = joinpath(scratch, "runner.jl")
         write(generated_path, generated)
+        corrupted_payload = replace(
+            generated,
+            r"const _COMPILED_SPEC_JSON_HEX = \"[^\"]+\"" =>
+                "const _COMPILED_SPEC_JSON_HEX = \"not-hex\"",
+        )
+        write(
+            legacy_corrupt_path,
+            replace(
+                corrupted_payload,
+                "linkedspec-generated-source-v2" => "linkedspec-generated-source-v1",
+            ),
+        )
         write(
             runner_path,
             """
 import LinkedSpecJulia
+
+legacy_failure = try
+    Base.include(
+        Module(:LegacyGeneratedSourceHost),
+        joinpath(dirname(ARGS[1]), "legacy_v1_corrupt.jl"),
+    )
+    nothing
+catch error
+    error
+end
+legacy_failure = legacy_failure isa LoadError ? legacy_failure.error : legacy_failure
+@assert legacy_failure isa LinkedSpecJulia.GeneratedSourceException
+@assert LinkedSpecJulia.to_json(legacy_failure) == Dict(
+    "type" => "generated_source_error",
+    "stage" => "validate_generated_plan",
+    "code" => "generated_source_contract_version_mismatch",
+    "summary" => "Generated source contract does not match the active validator",
+    "source_identity" => string("generated/λ", Char(0x24), ".spec"),
+    "detail" => "regenerate the generated artifact from its .spec source",
+    "expected_contract" => "linkedspec-generated-source-v2",
+    "actual_contract" => "linkedspec-generated-source-v1",
+)
+
 include(ARGS[1])
 
 const Parser = LinkedSpecGeneratedParser
 expected_identity = string("generated/λ", Char(0x24), ".spec")
 expected_value = string("λ:", Char(0x24))
-@assert Parser.LINKEDSPEC_GENERATED_SOURCE_CONTRACT == "linkedspec-generated-source-v1"
-@assert Parser.LINKEDSPEC_GENERATED_SOURCE_FORMAT == 1
+@assert Parser.LINKEDSPEC_GENERATED_SOURCE_CONTRACT == "linkedspec-generated-source-v2"
+@assert Parser.LINKEDSPEC_GENERATED_SOURCE_FORMAT == 2
 @assert LinkedSpecJulia.to_json(Parser.metadata()) == Dict(
-    "contract_id" => "linkedspec-generated-source-v1",
-    "format_version" => 1,
+    "contract_id" => "linkedspec-generated-source-v2",
+    "format_version" => 2,
     "source_identity" => expected_identity,
 )
 @assert Parser.execute("é") == expected_value

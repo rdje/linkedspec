@@ -7,8 +7,8 @@
 > plan rows retain `{label, family}` and derive policy from family. Perl is
 > admitted across the composed contract, as are Rust and Dart through their own
 > topology-checked consumers. Julia now has typed normalization, intrinsic
-> live/loaded/normalized execution, and cursor descriptor v1; its generated
-> source remains v1 and its outer option remains until `.9.1.6.4-.5`. Lua
+> live/loaded/normalized execution, cursor descriptor v1, and generated-source
+> v2; its outer option remains until `.9.1.6.5`. Lua
 > retains staged generated-source-v1 and global-option behavior until its
 > dependency-ordered rollout leaves.
 
@@ -2073,13 +2073,13 @@ blind/action tables. The contract-driven Julia suite passes 353 assertions over 
 rows, all six ownership sets, JSON roundtrips, and physical-line boundaries. Runtime `.9.1.6.2` now adds 104
 execution assertions across all 36 families on live/normalized routes, all eight parent-child mechanisms, both
 structural replacements, loaded-default execution, recursion, and trace attribution. Normal AND consumes and
-sequences; OR/default seeks and chooses; every child entry rederives. Generated v1 stays on a private historical
-seek/family adapter and passes 60 focused emitter assertions. Descriptor `.9.1.6.3` is now cursor v1: root metadata
+sequences; OR/default seeks and chooses; every child entry rederives. Descriptor `.9.1.6.3` is cursor v1: root metadata
 has no global mode, and each rule projects normalized family, derived policy, ownership, and exact ordered
 ownership/target/child-index/block/fluent rows. Direct, normalized `SpecFile`-JSON, and loaded descriptor bytes
-agree across a focused 809-assertion suite, including all valid and invalid neutral edge cases. Generated source
-remains v1/format 1, and the public option remains until `.9.1.6.4-.5`; admission alone advances the rollout in
-`.9.1.6.6`.
+agree across a focused 809-assertion suite, including all valid and invalid neutral edge cases. Generated-source
+`.9.1.6.4` now emits v2/format 2 with the same minimal label/family plan, derives all five seek/five consume
+policies, rejects v1 before payload reconstruction, and removes the private v1 adapter. Public option removal
+remains `.9.1.6.5`; admission alone advances the rollout in `.9.1.6.6`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

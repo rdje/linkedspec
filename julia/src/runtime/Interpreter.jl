@@ -123,9 +123,6 @@ function LinkedSpecRuntimeEngine(
     )
 end
 
-_generated_v1_compatibility_engine(compiled_spec::CompiledSpec) =
-    LinkedSpecRuntimeEngine(compiled_spec; parse_mode = SeekParseMode)
-
 struct _RuntimeRuleLocalBinding
     variable_present::Bool
     variable::Any
@@ -647,11 +644,9 @@ function _runtime_rule_execution_policy(
 )
     family = rule_family(rule.mode_metadata)
     if generated_family !== nothing
-        # Contract-v1 generated artifacts retain their validated handler-family
-        # interpretation and historical seek default until generated-source v2.
         return _RuntimeRuleExecutionPolicy(
             family,
-            something(engine.parse_mode, SeekParseMode),
+            _generated_family_cursor_policy(generated_family),
             _generated_family_uses_and_execution(generated_family),
         )
     end
