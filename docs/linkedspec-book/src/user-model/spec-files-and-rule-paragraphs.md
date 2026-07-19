@@ -50,10 +50,12 @@ loaded/reconstructed, generated/emitted, traced, diagnostic, and primary-command
 selection fixtures return distinct values from entry lifecycle `I`, which directly proves which rule was entered;
 an `E` block can coincidentally return the same final value after a successful match and is weaker evidence.
 
-Lua's ordered runtime fallback already works when its current marker-required validation is bypassed, but
-validated source does not yet expose it. Exact PUC Lua/LuaJIT preflight therefore freezes core, route, cursor, and
-admission work under `.9.1.1.2.5`. Markerless execution is **not yet uniformly admitted portable behavior**.
-Until `.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
+Lua core now exposes the same order on PUC Lua and LuaJIT: validation accepts one-or-more-rule markerless source,
+one compiled-state resolver selects before runtime context/user code, zero/unknown failures are portable, and the
+descriptor preserves authored marker identity. Its hand-authored regressions use `I` for direct entry evidence.
+Loaded/reconstructed/generated/emitted trace composition, cursor migration, and final Lua admission remain under
+`.9.1.1.2.5.2-.3` and `.9.1.7`, so markerless execution is **implemented but not yet uniformly admitted portable
+behavior**. Until `.9.1.1.2` closes, cross-backend specs should retain a `::` marker.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 

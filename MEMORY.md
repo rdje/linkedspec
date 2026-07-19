@@ -10,23 +10,20 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` — behavior-free Lua root seam preflight is fully
-  measured and synchronized; its prepared commit remains the only in-flight step.
-- latest_commit: `b7b55161` — `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 - admit Julia root selection`
-  (ahead: 230; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 - map Lua root selection`.
-- active_work_unit: `.9.1.1.2.5.0` is complete from clean `b7b55161`; only commit/brief/clean proof remain.
-- next_action: commit `.5.0`, clear `git_message_brief.txt`, prove clean, then activate Lua root core `.5.1`
-  task-tree-first.
-- current_proof: PUC Lua and LuaJIT are identical. Shared primary is 31/65 in default/POSIX on both ABIs: one
-  root-owned markerless failure plus 22 cursor help/usage and 11 cursor request-trace failures. Complete packages
-  are 176 pass plus one cursor help failure and corpora are 105/105 per ABI. Native/reconstructed/generated-v1
-  ordered fallback already works when validation is bypassed; parser/validator, portable failures, descriptor,
-  trace, loaded, and emitted boundaries are frozen for `.5.1-.2`. Cursor `.9.1.7` then precedes 15-role admission
-  `.5.3`. Authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`. Only Julia is admitted;
-  Lua/LuaJIT and final no-drift remain pending. KM is 623/4,533; focused root 5/7+39, cursor 5+3/44, and all
-  four doctrines and mdBook pass. Canonical exits 0 after root 7+5, cursor 288, primary 65x2, and Phase 0
-  1,031/1,031 in 609 seconds.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` — Lua root core is implemented, verified, documented,
+  cleaned, and prepared for its one commit.
+- latest_commit: `c8324dce` — `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 - map Lua root selection`
+  (ahead: 231; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core`.
+- active_work_unit: `.5.1` completion; do not activate `.5.2` until commit/brief cleanup/clean-tree proof.
+- next_action: commit `.5.1`, clear `git_message_brief.txt`, prove clean, then activate composed Lua routes `.5.2`.
+- current_proof: PUC Lua and LuaJIT now accept markerless one-or-more-rule source and share one pre-context resolver
+  for explicit > first marker > first rule. Portable zero/unknown failures, immutable descriptor identity, strict
+  authored-edge no-drift, and entry-`I` result evidence pass focused 99, diagnostic 119, and logical 359 per ABI.
+  Package is 176/177 with only the cursor-help mismatch; every default/POSIX ABI leg is exactly 32/65 with the same
+  33 cursor-owned failures; corpus is 105/105 per ABI. Routes `.5.2`, cursor `.9.1.7`, and admission `.5.3` remain;
+  rollout stays 5/7+39. KM is 624/4,546; mdBook/four doctrines pass. Canonical exits 0 after root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 613 seconds. Generated book/cache/native trees are absent.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
   diagnostics, eight parent-child mechanisms, and two structural replacements are exact. Normal entered rules
   derive policy once; children rederive independently. Descriptor v1 has no global mode and projects exact facts;
@@ -51,5 +48,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed behavior-free Lua root preflight `.5.0` docs/KM/book closeout;
-  no Lua executable, test, fixture, contract, capability, or rollout change. Commit brief is zero bytes.
+- blockers: none. in_flight_uncommitted: completed `.5.1` source/tests/docs await the prepared commit; no background
+  job remains. Commit brief is zero bytes until populated immediately before commit.

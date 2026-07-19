@@ -41,12 +41,22 @@ local LIFECYCLE_NAMES = {
   LX = true,
 }
 
-local function validation_fail(message, code)
-  error(setmetatable({ message = message, code = code }, VALIDATION_ERROR_MT), 0)
+local function validation_fail(message, code, stage)
+  error(setmetatable({ message = message, code = code, stage = stage }, VALIDATION_ERROR_MT), 0)
 end
 
 function M.is_validation_error(value)
   return getmetatable(value) == VALIDATION_ERROR_MT
+end
+
+function M.validation_error_to_json(value)
+  if not M.is_validation_error(value) then
+    validation_fail("validation_error_to_json expects SpecValidationException")
+  end
+  local result = json.harray({ message = value.message, fields = json.harray() })
+  if value.code ~= nil then result.code = value.code end
+  if value.stage ~= nil then result.stage = value.stage end
+  return result
 end
 
 local function is_identifier(value)
@@ -61,9 +71,9 @@ local function string_lists_equal(left, right)
   return true
 end
 
-local function check_top_rule(spec)
-  if ast.top_rule(spec) == nil then
-    validation_fail("no top rule found: at least one rule must use '::' (double colon)")
+local function check_at_least_one_rule(spec)
+  if #spec.rules == 0 then
+    validation_fail("spec does not define any rules", "no_rules_defined", "validate_spec")
   end
 end
 
@@ -385,7 +395,7 @@ function M.validate_spec(spec, options)
     "rules=" .. #spec.rules .. " functions=" .. #spec.functions ..
       " strict=" .. (options.strict_syntax and "1" or "0"),
     function()
-      check_top_rule(spec)
+      check_at_least_one_rule(spec)
       check_duplicate_rule_labels(spec)
       check_duplicate_function_names(spec)
       check_function_registry(spec)

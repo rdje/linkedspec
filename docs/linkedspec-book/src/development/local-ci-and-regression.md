@@ -71,12 +71,12 @@ usage and 11 medium-or-higher request-trace failures. Julia now passes 65/65 twi
 its cursor topology requirement, and root admission `.4.3` closes the separate root topology requirement through
 137 focused assertions.
 
-Lua behavior-free preflight `.9.1.1.2.5.0` runs the same shared manifest through disposable native adapters. PUC
-Lua and LuaJIT are identical with `POSIXLY_CORRECT` unset and set: 31/65 in every leg. Only
-`success_markerless_first_authored_rule` belongs to root selection; 22 help/usage and 11 request-trace mismatches
-belong to cursor `.9.1.7`. Complete package execution is 176 passing groups plus one cursor help failure per ABI,
-and corpus execution is 105/105 per ABI. Root core `.5.1` should improve only that single root row to 32/65;
-routes `.5.2` preserve generated v1 identity, cursor `.9.1.7` owns the remaining 33, and topology admission `.5.3`
+Lua behavior-free preflight `.9.1.1.2.5.0` ran the same shared manifest through disposable native adapters. Core
+`.5.1` now makes PUC Lua and LuaJIT identical with `POSIXLY_CORRECT` unset and set at 32/65 in every leg by closing
+only `success_markerless_first_authored_rule`. The 22 help/usage and 11 request-trace mismatches still belong to
+cursor `.9.1.7`. Focused root proof is 99 assertions, complete package execution is 176 passing groups plus one
+cursor help failure, and corpus execution is 105/105 per ABI. Routes `.5.2` preserve generated v1 identity,
+cursor `.9.1.7` owns the remaining 33, and topology admission `.5.3`
 requires both tracks. Hand-authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`.
 
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
@@ -138,8 +138,8 @@ Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted bou
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
-Julia now passes 65/65 twice and is topology-admitted. Lua preflight is exactly 31/65 twice on both PUC Lua and
-LuaJIT, with one root-owned and 33 cursor-owned mismatches. A green 5x2x65 run is the
+Julia now passes 65/65 twice and is topology-admitted. Lua core is exactly 32/65 twice on both PUC Lua and LuaJIT,
+with all 33 remaining mismatches cursor-owned. A green 5x2x65 run is the
 final rollout target rather than a current cross-backend claim.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
@@ -318,9 +318,11 @@ bash tools/run_lua_local.sh
 ```
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
-PUC Lua and LuaJIT, runs all 61 primary CLI cases under default and POSIX environments on PUC Lua, and validates
-plus executes the exact 105-case manifest
-through the developer corpus command. The current suite passes 177/177 on each ABI. Its library-level controlled corpus tests
+PUC Lua and LuaJIT, runs the current 65-case primary manifest under default and POSIX environments on PUC Lua, and
+validates plus executes the exact 105-case corpus through the developer command. During the dependency-ordered
+root/cursor migration, the complete package currently reaches 176/177 on each ABI and stops only at the known
+cursor-help mismatch; the independent shared-primary proof is 32/65 in all four PUC Lua/LuaJIT environment legs,
+with all 33 remaining mismatches owned by cursor `.9.1.7`. Its library-level controlled corpus tests
 exercise automatic function-aware parsing, explicit validation/compilation, source-identified execution, exact
 wrapped output comparison, trace/diagnostic/endpoints, stable failure stages, named/bounded selection, and
 continuation after failures. The developer corpus command validates by default and executes the complete manifest

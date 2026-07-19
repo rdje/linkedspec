@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 — implement Lua root selection core
+
+Lua now accepts valid one-or-more-rule `.spec` sources without requiring an authored `Rule::` marker. Empty and
+comment-only source remains an empty `SpecFile` parser envelope so validation owns the portable
+`no_rules_defined` / `validate_spec` failure; malformed non-rule text remains a parser error. Existing validation
+fixtures that depended on the obsolete marker requirement now use genuine zero-rule sources.
+
+`resolve_entry_rule(...)` is the single compiled-state selection owner. It checks zero-rule structure first, then
+an exact explicit selector, the first authored `is_top` marker, and the first compiled rule. Native execution calls
+it before creating runtime context or entering lifecycle/user code. Unknown explicit selection returns typed
+`entry_rule_not_found` / `select_entry_rule` with the requested `entry_rule`; zero rules retain an empty field set.
+The outward descriptor publishes `entry_rule_contract = linkedspec-root-rule-selection-v1` without changing
+definition order or authored `is_top`, and strict-unused remains authored-edge-only.
+
+The neutral-consuming Lua regression uses lifecycle `I` for its hand-authored result fixtures because `I`
+directly proves entry into the selected rule; a matching `E` return can produce the same value only after a
+successful match. Fixed shared request-trace source bytes remain unchanged. The test consumes all eight selection,
+three failure, and three strict cases plus parser/validation, pre-effect native failure, descriptor immutability,
+and primary behavior on PUC Lua and LuaJIT.
+
+Focused proof passes 99 assertions, diagnostic 119, and logical 359 on each ABI. Complete package execution is
+176/177 with only the known cursor-help mismatch; all four PUC Lua/LuaJIT default/POSIX shared-primary legs move
+by exactly the root-owned markerless row from 31/65 to 32/65, leaving 22 help/usage and 11 request-trace failures
+owned by cursor `.9.1.7`. Corpus execution is 105/105 per ABI and root governance remains 5/7 plus 39 rejected
+mutations. Composed loaded/reconstructed/generated/emitted/trace routes remain `.5.2`; rollout does not advance.
+
+Knowledge Map closes at 624 facts / 4,546 question keys; the mdBook, JSON, shell, whitespace, and all four doctrine
+checks pass. Canonical local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary 65x2,
+and Phase 0 1,031/1,031 in 613 seconds. Cleanup removes the generated book, Python cache, and two disposable
+104 KiB native-module trees.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 — map Lua root selection
 
 The behavior-free Lua root-selection preflight is complete. Real disposable PUC Lua and LuaJIT probes establish

@@ -585,9 +585,24 @@ the parser scans nested blocks. Lua strings may contain arbitrary bytes, so
 text. `parse_spec` parses rule paragraphs only; the automatic composed API executes the spec-owned top-level
 function grammar before delegating the stripped rule source to `parse_spec`.
 `validate_spec(parsed, { strict_syntax = true })` adds the
-portable strict unused-rule check; ordinary validation already checks tops,
+portable strict unused-rule check; ordinary validation already checks that at least one rule exists,
 duplicates, function/helper collisions, raw syntax, edge families/targets/
 slots, and regex structure.
+
+Lua accepts a valid one-or-more-rule source without requiring `Rule::`. `resolve_entry_rule(compiled, selector)`
+is the single native selection owner: an explicit exact selector wins, otherwise the first authored `Rule::`
+wins, otherwise the first authored rule wins. `runtime_parse(...)` resolves before it constructs runtime context
+or invokes lifecycle/user code. Empty and comment-only text parse to an empty `SpecFile` so validation returns
+typed `no_rules_defined` / `validate_spec`; non-rule text remains a parser failure. An unknown explicit selector
+returns typed `entry_rule_not_found` / `select_entry_rule` with its requested `entry_rule`.
+
+The outward descriptor publishes
+`meta.entry_rule_contract = "linkedspec-root-rule-selection-v1"` while preserving definition order and each
+authored `is_top` bit; a dynamic selection never rewrites source identity or adds a strict-unused reference.
+Hand-authored selection regressions use lifecycle `I` because it directly proves that the selected rule was
+entered. A successful `E` block may return the same value after matching, but is weaker entry evidence. This
+`.9.1.1.2.5.1` core is exact on PUC Lua and LuaJIT; loaded/reconstructed/generated/emitted trace composition and
+final topology admission remain separately owned by `.5.2-.3`.
 
 Function-shell semantics are not raw-scanned by Lua. The automatic path executes the cached owning grammar and
 stages body ASTs directly:

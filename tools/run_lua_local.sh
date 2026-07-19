@@ -39,6 +39,7 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
 log "running primary PUC Lua tests"
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/diagnostic_output_contract_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/logical_helper_contract_test.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/root_rule_selection_core_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/run.lua
 
 log "running shared primary CLI contract (default environment)"
@@ -76,6 +77,8 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
  "$LUAJIT_CMD" lua/test/diagnostic_output_contract_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/logical_helper_contract_test.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/root_rule_selection_core_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/run.lua
 else

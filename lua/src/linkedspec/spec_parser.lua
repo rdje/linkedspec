@@ -969,9 +969,6 @@ function M.parse_spec(source, options)
           index = index + 1
         end
       end
-      if #rules == 0 then
-        parse_fail(1, "no rule definitions found in spec")
-      end
       trace_support.decision(
         options.trace,
         "lua_frontend:parse_spec:rules",

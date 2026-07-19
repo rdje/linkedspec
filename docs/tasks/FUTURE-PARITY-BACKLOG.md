@@ -3996,9 +3996,10 @@ before implementation.
   Children: `.9.1.1.2.5.0`, `.9.1.1.2.5.1`, `.9.1.1.2.5.2`, `.9.1.1.2.5.3`
   Acceptance: Align parser/validation, PUC Lua/LuaJIT runtime and generated routes, descriptors/traces, strict
     checks, and primary CLI with the unchanged neutral contract and reference bytes.
-  Verification: `active; behavior-free .5.0 is complete at the exact symmetric dual-ABI boundary and freezes
-    .5.1 core, .5.2 routes, cursor .9.1.7, then .5.3 admission; no Lua behavior or rollout changed and .5.1
-    follows only after the clean .5.0 commit`
+  Verification: `active; behavior-free .5.0 and core .5.1 are complete; marker-optional native/primary resolution,
+    portable failures, strict no-drift, and descriptor identity pass identically on both ABIs at focused 99,
+    package 176/177 with the cursor-help mismatch, primary 32/65x4, corpus 105x2, and canonical Phase 0 1,031;
+    composed routes .5.2 follow only after the clean .5.1 commit, then cursor .9.1.7 and admission .5.3`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0`
@@ -4050,7 +4051,7 @@ before implementation.
     clean safe artifacts, commit `.0`, clear the brief, and only then activate the first implementation leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement Lua marker-optional validation, ordered native selection, portable failures, and descriptor identity.
   Dependencies: `.9.1.1.2.5.0`
   Acceptance: Preserve empty/comment-only source as an empty `SpecFile` while retaining non-rule preamble errors;
@@ -4059,8 +4060,38 @@ before implementation.
     runtime context or user code; return typed `entry_rule_not_found` / `select_entry_rule`; publish immutable
     descriptor `entry_rule_contract`; retain authored order/`is_top` and strict authored-edge-only behavior; prove
     both ABIs and improve only the root-owned shared-primary markerless case from 31/65 to 32/65.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-18 only after preflight `.5.0` committed cleanly at
+    `c8324dce`, `git_message_brief.txt` was zero bytes, generated book/Python-cache artifacts were absent, and the
+    branch was clean at ahead 231. A RED focused consumer first proved `resolve_entry_rule` was absent. Lua now
+    preserves empty/comment-only parser envelopes, validates one-or-more-rule source, and uses one compiled-state
+    resolver for explicit > first marker > first rule before runtime context/user code. Typed zero/unknown
+    failures, immutable descriptor root identity, and authored-edge-only strict semantics pass on PUC Lua and
+    LuaJIT. Hand-authored result fixtures use entry lifecycle `I`; fixed request-trace bytes retain `E`. Focused
+    root 99, diagnostic 119, logical 359, package 176/177 with only the cursor-help mismatch, corpus 105/105, and
+    all four default/POSIX primary legs at exactly 32/65 pass per ABI. Root governance stays 5/7+39; KM is
+    624/4,546; mdBook, JSON, shell, whitespace, and all four doctrines pass. Canonical local CI exits 0 after root
+    consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613 seconds. Generated
+    book, 28 KiB-class Python cache, and two 104 KiB disposable native trees are removed. Routes/admission do not
+    advance; `.5.2` follows only after the clean `.5.1` commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core`
+
+  #### Acceptance Checklist
+
+  - [x] **PARSER / VALIDATION OWNERSHIP** — Preserve empty/comment-only source as an empty `SpecFile`, keep
+    malformed non-rule input at the parser boundary, and replace marker-required validation with typed
+    one-or-more-rule `no_rules_defined` / `validate_spec` behavior on both ABIs.
+  - [x] **ONE ORDERED RESOLVER** — Add one compiled-state selection owner with explicit `--top-rule` > first
+    authored `Rule::` > first authored ordinary `Rule:` precedence and public requested/effective/basis identity.
+  - [x] **PRE-EFFECT PORTABLE FAILURES** — Select before runtime context or user code; make unknown explicit roots
+    fail as typed `entry_rule_not_found` / `select_entry_rule`; prove zero/unknown failure identity and no effects.
+  - [x] **DESCRIPTOR / STRICT NO-DRIFT** — Publish immutable `entry_rule_contract`, preserve authored order and
+    `is_top`, and prove strict-unused reachability still counts only authored call edges rather than entry choice.
+  - [x] **DUAL-ABI / PRIMARY BOUNDARY** — Prove focused PUC Lua and LuaJIT behavior and improve only
+    `success_markerless_first_authored_rule`, moving every default/POSIX leg from 31/65 to exactly 32/65 while the
+    33 cursor-owned mismatches remain exact.
+  - [x] **LOCKSTEP / COMMIT** — Synchronize tests, neutral-facing projections where owned, live docs, roadmap,
+    Knowledge Map, and mdBook; pass focused plus canonical gates; clean safe artifacts; commit `.5.1`; clear the
+    brief; and only then activate composed routes `.5.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2`
   Status: `pending`
@@ -8043,9 +8074,9 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 212.2.4.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` | `done` | Marker-optional Julia core resolution, failures, strict no-drift, descriptor, neutral 79, primary 32/65x2, corpus 105, and canonical signoff pass without route/admission promotion. |
 | 212.2.4.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | `done` | Loaded/normalized/generated/emitted/trace/diagnostic routes pass 57 focused assertions, the exact current Julia boundary, KM/book/live lockstep, canonical proof, and cleanup without rollout promotion. |
 | 212.2.4.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `done` | Exact 15 roles, focused 137, package 3,428, primary 65x2, corpus 105, 39 mutations, Julia-only 5/7 promotion, canonical 1,031/616s, and cleanup pass. |
-| 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `active` | Behavior-free `.5.0` is complete at identical PUC Lua/LuaJIT 31/65x2 seams; its clean commit precedes core `.5.1`. |
+| 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `active` | Preflight `.5.0` and core `.5.1` are complete; marker-optional native resolution is exact on both ABIs and the clean core commit precedes routes `.5.2`. |
 | 212.2.5.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | `done` | Exact symmetric dual-ABI seam map freezes parser/validation, core, routes, cursor, and 15-role admission order without behavior or rollout change; canonical 1,031/609s passes. |
-| 212.2.5.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | `pending` | Implement marker-optional core selection, failures, strict no-drift, and descriptor identity after preflight. |
+| 212.2.5.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | `done` | Marker-optional parser/validation, one ordered resolver, portable failures, strict/descriptor identity, focused 99x2, primary 32/65x4, corpus 105x2, and canonical 1,031/613s pass. |
 | 212.2.5.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | `pending` | Converge loaded/reconstructed/generated/emitted/trace/diagnostic routes after core. |
 | 212.2.5.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` | `pending` | Topology-check both Lua ABIs, pass shared primary 65x2, promote only Lua, and close parent `.5`. |
 | 212.2.6 | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | `pending` | Admit five-backend parity and close public no-drift. |
@@ -8750,8 +8781,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. Root selection is 5/7 after neutral, Perl, Rust, Dart, and Julia. Julia root parent `.4` is fully
-  signed off; its prepared clean commit must precede activation of Lua root parent `.5`.
+- None blocking. Root selection is 5/7 after neutral, Perl, Rust, Dart, and Julia. Lua preflight `.5.0` and core
+  `.5.1` are complete; the prepared clean core commit must precede activation of composed routes `.5.2`.
   Identical
   dependency-regex slot identity remains a non-blocking separate question
   with explicit post-admission owner `.9.1.8.1`.
@@ -8767,13 +8798,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Behavior-free Lua root preflight `.5.0` passes focused dual-ABI, governance, book, and canonical proof.
-  Only its prepared commit remains before core `.5.1` may activate.
+- None. Lua root core `.5.1` passes focused dual-ABI, package-boundary, governance, book, and canonical proof.
+  Only its prepared clean commit remains before composed routes `.5.2` may activate.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | RED missing-resolver proof; empty/comment parser envelopes and typed one-or-more-rule validation; neutral 8/3/3 consumer plus native/primary precedence; pre-context zero/unknown failures; immutable descriptor/strict authored-edge no-drift; entry-`I` result fixtures; focused root 99, diagnostic 119, logical 359 per ABI; package 176/177 and corpus 105 per ABI; primary 32/65 in all four default/POSIX ABI legs with exactly 33 cursor residuals; root 5/7+39; KM 624/4,546; mdBook/JSON/shell/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 613s; generated book/cache/native-tree cleanup. | PASS. Lua core/native/primary behavior is exact on both ABIs without route/admission promotion; only the clean `.5.1` commit may precede `.5.2`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | ADR/KM/Toolbox/admitted-precedent retrieval; exact parser/validator/native/loaded/reconstructed/generated-v1/emitted/descriptor/trace/diagnostic/strict/zero/unknown seam probes on PUC Lua and LuaJIT; primary 31/65 in all four default/POSIX legs with one root-owned plus 33 cursor-owned residuals; package 176+known-one and corpus 105 per ABI; entry-`I` fixture decision; `.5.1`/`.5.2`/cursor `.9.1.7`/`.5.3` dependency freeze; root 5/7+39; cursor 5+3/44; KM 623/4,533; mdBook/four doctrines/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 609s. | PASS. No Lua behavior, fixture, neutral contract, capability, or rollout change; only the clean `.5.0` commit may precede core `.5.1`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | Exact ordered 15-role once-only Julia consumer; entry-`I` selection evidence; world-age-safe emitted bindings; package/canonical driver and six shared-primary locks; focused 137; package 3,428; primary 65x2; corpus 105; root 5/7+39; KM 622/4,524; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 616s; generated 11 MiB book/28 KiB cache cleanup. | PASS. Only Julia advances; parent `.4` closes and Lua `.5` waits for the clean commit. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.6.5` | Exact engine/loader/corpus/primary override removal; targeted snake/camel API and CLI migration diagnostics before input/user code; retained low-level matcher primitives; entry-`I` top-rule precedence; focused 53; ten real processes; package 3,187; primary 65x2; corpus 105; cursor 66/4+4/39; generated/capability 80/0/0; logical 8/0+26; root 4/7+34; KM 619/4,498; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031 in 637s; generated 11 MiB book/28 KiB cache cleanup. | PASS; Julia has no high-level caller-global cursor authority, while composed admission/rollout remain `.6`. |
@@ -8969,6 +9001,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core` | Marker-optional parser/validation, one pre-effect resolver, portable failures, immutable descriptor/strict identity, entry-`I` fixtures, 99x2 focused, 32/65x4 primary, 105x2 corpus, 624/4,546 KM, canonical 1,031/613s, and cleanup without rollout promotion. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 - map Lua root selection` | Exact symmetric dual-ABI seam map, 31/65x4 primary split, entry-`I` fixture decision, root/cursor dependency freeze, 623/4,533 KM, canonical 1,031/609s, and no behavior or rollout change. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 - admit Julia root selection` | Exact 15-role consumer, entry-`I` proof, 39 mutations, package 3,428, primary 65x2, corpus 105, Julia-only 5/7 promotion, parent closeout, canonical 1,031/616s, and cleanup. |
 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `FUTURE-PARITY-BACKLOG.9.1.6.5 - remove Julia global cursor overrides` | Exact API/CLI removal diagnostics, 53 focused, 3,187 package, ten processes, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup. |
@@ -9147,6 +9180,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-18`: Lua root core `.9.1.1.2.5.1` makes markerless one-or-more-rule source valid on PUC Lua and
+  LuaJIT, centralizes explicit > first marker > first rule selection before runtime context/user code, returns
+  portable zero/unknown failures, and preserves authored descriptor/strict identity. New selection results use
+  lifecycle `I`; fixed request-trace source bytes retain `E`. Focused root 99, diagnostic 119, logical 359,
+  package 176/177, primary 32/65 default/POSIX, and corpus 105 pass per ABI; root stays 5/7+39. KM 624/4,546,
+  mdBook/four doctrines, and canonical root 7+5/cursor 288/primary 65x2/Phase 0 1,031 in 613 seconds pass. Safe
+  generated book/cache/native-tree cleanup passes; only the prepared clean commit may precede routes `.5.2`.
 - `2026-07-18`: Behavior-free Lua root preflight `.9.1.1.2.5.0` maps identical PUC Lua/LuaJIT parser,
   validation, native, loaded/reconstructed, generated-v1/emitted, descriptor, trace, diagnostic, strict, and
   primary seams. All four default/POSIX primary legs are 31/65: one root-owned markerless residual and 33

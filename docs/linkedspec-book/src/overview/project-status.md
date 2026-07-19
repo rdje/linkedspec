@@ -50,6 +50,16 @@ native/reconstructed/generated-v1 fallback already exists behind marker-required
 frozen as core `.5.1`, composed routes `.5.2`, cursor `.9.1.7`, then exact 15-role admission `.5.3`. New authored
 selection fixtures use entry lifecycle `I`; the fixed request-trace fixture retains its canonical `E` bytes.
 
+Lua core `.5.1` now removes that validation blocker on both ABIs. Empty/comment-only source remains an empty parser
+envelope; validation accepts one-or-more-rule markerless source and returns typed `no_rules_defined` /
+`validate_spec` for zero rules. One compiled-state resolver applies explicit selector > first authored marker >
+first authored rule before runtime context or user code, and an unknown selector returns
+`entry_rule_not_found` / `select_entry_rule`. Definition order and authored `is_top` stay immutable, strict-unused
+remains authored-edge-only, and descriptors publish `linkedspec-root-rule-selection-v1`. Focused proof passes 99
+assertions per ABI; package execution reaches 176/177 with only the cursor help mismatch, shared primary is exactly
+32/65 in all four ABI/environment legs, and corpus is 105/105 per ABI. Composed route, cursor, and admission work
+remain pending, so root rollout stays 5/7.
+
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
 versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation

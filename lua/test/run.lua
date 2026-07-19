@@ -367,9 +367,8 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
       trace = failure_emitter,
     })
     assert_equal(failure_ok, false, "traced failure remains a failure")
-    assert_equal(#linkedspec.trace_events(failure_emitter), 2, "failure scope balance")
-    assert_equal(linkedspec.trace_events(failure_emitter)[2].kind, linkedspec.TRACE_EXIT, "failure exit event")
-    assert_contains(table.concat(failure_stdout), "error=rule 'Missing' is not compiled", "failure exit detail")
+    assert_equal(#linkedspec.trace_events(failure_emitter), 0, "selection fails before runtime scopes")
+    assert_equal(table.concat(failure_stdout), "", "selection failure has no legacy runtime-scope trace")
 
     local runtime_path = root .. "/runtime.log"
     local runtime_options = { top_rule = "Top" }
@@ -703,7 +702,7 @@ end)
 test("native spec pipeline maps parse validation compile and missing-name failures", function()
   with_temp_directory(function(root)
     write_file(root .. "/parse.spec", "not a spec\n")
-    write_file(root .. "/validation.spec", "Only:\n /x/\n")
+    write_file(root .. "/validation.spec", "# no rules\n")
     write_file(
       root .. "/compile.spec",
       "Top::\n /x/\n E { return(array" .. "(items)) }\n" -- selector-rejection fixture
@@ -869,7 +868,7 @@ test("full-pipeline tracing filters levels stays quiet and preserves attributed 
     local valid_path = root .. "/valid.spec"
     local invalid_path = root .. "/invalid.spec"
     write_file(valid_path, "Top::\n /x/\n")
-    write_file(invalid_path, "Only:\n /x/\n")
+    write_file(invalid_path, "# no rules\n")
 
     local function run_with(emitter)
       local loaded = linkedspec.load_and_compile_spec(
@@ -942,7 +941,7 @@ test("full-pipeline tracing filters levels stays quiet and preserves attributed 
       end
     end
     assert_equal(validation_exit ~= nil, true, "validation failure closes its phase scope")
-    assert_contains(validation_exit.details, "no top rule found", "validation failure detail")
+    assert_contains(validation_exit.details, "spec does not define any rules", "validation failure detail")
     assert_equal(exits, enters, "failure scopes stay balanced")
 
     assert_error_contains(function()
@@ -1231,7 +1230,7 @@ test("corpus library records staged failures and continues through every selecte
     write_manifest(root, cases)
     write_fixture(root, "parse_failure", { spec_source = "not a spec", expected_source = '"unused"' })
     write_fixture(root, "validate_failure", {
-      spec_source = "Top:\n /x/\n",
+      spec_source = "# no rules\n",
       expected_source = '"unused"',
     })
     write_fixture(root, "runtime_failure", {
@@ -1946,10 +1945,19 @@ local function spec_with_functions(functions)
   })
 end
 
-test("source validator checks top and duplicate rule labels", function()
-  assert_validation_error(function()
-    linkedspec.validate_spec(linkedspec.parse_spec("Top:\n /a/"))
-  end, "no top rule", "missing top")
+test("source validator checks minimum rule count and duplicate rule labels", function()
+  assert_equal(
+    linkedspec.validate_spec(linkedspec.parse_spec("Top:\n /a/")),
+    nil,
+    "markerless source"
+  )
+  local zero_ok, zero_error = pcall(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("# no rules\n"))
+  end)
+  assert_equal(zero_ok, false, "zero-rule source rejected")
+  assert_equal(linkedspec.is_spec_validation_error(zero_error), true, "zero-rule validation type")
+  assert_equal(zero_error.code, "no_rules_defined", "zero-rule validation code")
+  assert_equal(zero_error.stage, "validate_spec", "zero-rule validation stage")
   assert_validation_error(function()
     linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /a/\n\nTop:\n /b/"))
   end, "duplicate rule label", "duplicate rule")
@@ -2626,7 +2634,7 @@ test("spec-defined function parser preserves typed failure ownership", function(
 
   local validation_ok, validation_error = pcall(
     linkedspec.user_function_definition_ast_parser_from_spec_source,
-    "Only:\n /x/\n"
+    "# no rules\n"
   )
   assert_equal(validation_ok, false, "parser-spec validation rejection")
   assert_equal(
@@ -5460,33 +5468,35 @@ test("runtime failures carry neutral structured diagnostics with deepest rule at
   assert_equal(missing_ok, false, "missing selected rule fails")
   assert_equal(linkedspec.is_runtime_interpreter_error(missing_error), true, "missing rule typed error")
   assert_equal(linkedspec.interpreter.node_type(missing_error), "RuntimeInterpreterException", "error node type")
-  assert_equal(missing_error.message, "rule 'Missing' is not compiled", "missing rule text stays unchanged")
+  assert_equal(missing_error.message, "entry rule 'Missing' is not defined", "missing entry rule text")
   assert_equal(
     tostring(missing_error),
-    "RuntimeInterpreterException: rule 'Missing' is not compiled",
-    "missing rule display stays unchanged"
+    "RuntimeInterpreterException: entry rule 'Missing' is not defined",
+    "missing entry rule display"
   )
   assert_equal(linkedspec.is_runtime_diagnostic(missing_error.diagnostic), true, "missing rule diagnostic type")
   assert_equal(
     json.encode(linkedspec.interpreter.to_json(missing_error.diagnostic)),
     json.encode(json.harray({
       type = "runtime_parser",
-      stage = "rule_lookup",
+      stage = "select_entry_rule",
       owner_stage = "lua_runtime",
-      summary = "Lua runtime rule lookup failed",
-      detail = "rule 'Missing' is not compiled",
+      summary = "Lua runtime entry-rule selection failed",
+      detail = "entry rule 'Missing' is not defined",
       spec_name = "diagnostic.spec",
       spec_path = "specs/diagnostic.spec",
       top_rule = "Missing",
+      entry_rule = "Missing",
       rule_label = "Missing",
       handler_source_label = "lua_runtime:rule:Missing",
+      code = "entry_rule_not_found",
     })),
     "missing rule diagnostic JSON"
   )
   assert_equal(
     json.encode(linkedspec.interpreter.to_json(missing_error)),
     json.encode(json.harray({
-      message = "rule 'Missing' is not compiled",
+      message = "entry rule 'Missing' is not defined",
       diagnostic = linkedspec.interpreter.to_json(missing_error.diagnostic),
     })),
     "runtime error JSON carries diagnostic"
@@ -5534,7 +5544,8 @@ Top::
     ""
   )
   assert_equal(empty_ok, false, "empty compiled state fails")
-  assert_equal(empty_error.diagnostic.stage, "top_rule_selection", "empty state stage")
+  assert_equal(empty_error.diagnostic.stage, "validate_spec", "empty state stage")
+  assert_equal(empty_error.diagnostic.code, "no_rules_defined", "empty state code")
   assert_equal(empty_error.diagnostic.handler_source_label, "lua_runtime", "empty state handler")
 
   local input_ok, input_error = pcall(linkedspec.runtime_parse, identified, string.char(255))

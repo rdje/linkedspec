@@ -118,10 +118,10 @@ INVENTORY = [
     ),
     (
         "lua",
-        "requires_authored_marker",
+        "marker_optional_one_or_more_rules",
         "first_authored_marker_then_first_authored_rule",
         "supported_and_wins",
-        "implemented_but_blocked_by_validation",
+        "implemented",
         "shares_runtime_fallback",
         "present",
         "FUTURE-PARITY-BACKLOG.9.1.1.2.5",

@@ -8,13 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` — behavior-free PUC Lua/LuaJIT root-selection seam preflight is complete
-  from clean Julia root commit `b7b55161` at ahead 230. Its task/KM/live/book closeout, prepared commit, brief
-  clearing, and clean proof remain; core `.5.1` cannot activate before that boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` — PUC Lua/LuaJIT root core is complete and prepared for its one clean
+  commit from `c8324dce` at ahead 231. No new leaf is active while the tree is dirty; composed routes `.5.2`
+  activate only after this commit, brief cleanup, and clean-tree proof.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 — implement Lua root selection core**
+  (DONE; prepared commit `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core`).
+
+  **Result:** Lua now preserves empty/comment-only parser envelopes, validates one-or-more-rule source, and uses
+  one compiled-state resolver for explicit selector > first authored marker > first authored rule before runtime
+  context or user code. Zero/unknown failures are portable; descriptor order/authored `is_top` and strict
+  authored-edge semantics remain immutable. Hand-authored result fixtures use entry lifecycle `I`; fixed shared
+  request-trace bytes retain `E`. Composed routes/admission do not advance, so rollout stays 5/7+39.
+
+  **Proof:** Focused root 99, diagnostic 119, logical 359, package 176/177 with only the cursor-help mismatch, and
+  corpus 105/105 pass on PUC Lua and LuaJIT. Every default/POSIX primary leg is exactly 32/65 with the same 33
+  cursor-owned failures. KM is 624/4,546; mdBook, JSON, shell, whitespace, and all four doctrines pass. Canonical
+  local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0
+  1,031/1,031 in 613 seconds. Generated book/cache and disposable native trees are removed.
+
+  **Next:** Commit `.5.1`, clear the brief, prove the tree clean, then activate composed Lua routes `.5.2`.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 — map Lua root selection**
-  (DONE; prepared commit is the only remaining workflow step).
+  (DONE at clean commit `c8324dce`).
 
   **Result:** PUC Lua and LuaJIT have the same ordered native/composed mechanisms. Validation alone blocks the
   existing markerless fallback; parser empty/comment-only handling, portable failures, descriptor identity, and
@@ -29,7 +46,7 @@ Current execution status for interruption-safe batch workflow recovery.
   KM is 623/4,533; root 5/7+39, cursor 5+3/44, mdBook and all four doctrines pass. Canonical local CI exits 0
   after root consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 609 seconds.
 
-  **Next:** Commit `.5.0`, clear the brief, prove clean, then activate Lua root core `.9.1.1.2.5.1` task-tree-first.
+  **Next:** Lua root core `.9.1.1.2.5.1` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 — admit Julia root selection**
   (DONE at clean commit `b7b55161`).

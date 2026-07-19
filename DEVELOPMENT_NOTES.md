@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` — one Lua resolver makes fallback reachable and failures causal):
+  Lua already preserved authored `compiled_rule_order` and `is_top`, but its validator required a marker and its
+  runtime split explicit selection from the default fallback. That made a correct first-rule fallback unreachable
+  from validated markerless source and left zero/unknown failures on legacy owners. The implementation now puts
+  all successful bases and both structural/selector failures behind `resolve_entry_rule(compiled, selector)`.
+  Runtime wraps only that typed owner before context creation; later child lookup remains an unrelated mechanism.
+
+  Empty/comment-only source is a recognized envelope, not a valid executable spec. The parser therefore returns
+  `SpecFile(rules={})` and the validator emits stable `no_rules_defined` / `validate_spec`; arbitrary non-rule text
+  still fails parsing. Markerless validation invalidates old negative fixtures that used a lone ordinary rule, so
+  those tests now use empty/comment-only source and continue to prove the same validation-stage ownership.
+
+  Selection state must not become authored identity. Exact before/after descriptor comparisons prove definition
+  order and every `is_top` bit are immutable, while the descriptor adds only the neutral root contract id. Strict
+  cases prove selection and markers add no authored reference/exemption. The hand-authored result fixtures use
+  lifecycle `I`: it directly proves the rule was entered, whereas `E` can return the same result only after match
+  success. Frozen request-trace fixture bytes are not repurposed as lifecycle proof.
+
+  The exact process boundary moves by one case and no more on both Lua ABIs: focused root 99, package 176/177,
+  primary 32/65 in default and POSIX environments, corpus 105/105, and root governance 5/7+39. The remaining 33
+  primary mismatches are cursor-owned. Loaded/reconstructed/generated/emitted, selection trace, and composed
+  wrapper specialization stay `.5.2`; cursor `.9.1.7` and dual-ABI topology admission `.5.3` remain ordered after
+  it.
+
+  Final signoff passes KM 624/4,546, mdBook, JSON, shell, whitespace, all four doctrines, and canonical local CI:
+  reference root 7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 613 seconds. Generated book,
+  Python cache, and the two disposable ABI-specific native trees are removed; only the clean core commit may
+  precede route activation.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` — Lua already stores the ordering; validation hides it):
   PUC Lua and LuaJIT preserve authored `definition_order` and `is_top` identically. Their existing runtime default
   helper already selects first marker then first rule, so bypassed markerless native, normalized, and generated-v1

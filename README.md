@@ -12,8 +12,8 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The neutral decision plus composed Perl, Rust, and Dart backends are complete at 4/7, with 34 drift mutations. All
-three apply
+The neutral decision plus composed Perl, Rust, Dart, and Julia backends are complete at 5/7, with 39 drift
+mutations. All four apply
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust and Dart each have one omission-sensitive 15-role admission consumer and exact
@@ -38,10 +38,15 @@ payload reconstruction with regeneration guidance. Public option removal `.5` no
 high-level engine/loader/corpus/primary override, rejects legacy API keys during `prepare_options`, removes the
 help/request-trace field, and preserves `--top-rule` while the retired flag returns targeted usage exit 2.
 Complete Julia passes 3,291 assertions, exact shared primary 65/65 in both environments, corpus 105/105, and
-neutral governance 67/5+3/44. One exact 15-role consumer admits Julia and closes cursor parent `.9.1.6`; exact root
-admission `.4.3` is next. Lua fallback remains blocked by
-validation, and root no-drift leg `.6` remains separately owned, so
-rollout stays 4/7.
+neutral governance 67/5+3/44. One exact 15-role consumer admits Julia and closes cursor parent `.9.1.6`; a separate
+exact 15-role consumer admits Julia root selection and closes parent `.4`. Lua core `.9.1.1.2.5.1` now accepts
+markerless one-or-more-rule sources, resolves explicit selector > first marker > first rule once from compiled
+state before runtime context or user code, returns portable zero/unknown failures, preserves strict authored-edge
+analysis, and publishes immutable descriptor identity on PUC Lua and LuaJIT. Its focused consumer passes 99
+assertions per ABI, shared primary moves from 31/65 to exactly 32/65 in all four ABI/environment legs, and corpus
+remains 105/105 per ABI. Composed Lua loaded/reconstructed/generated/emitted/trace routes remain `.5.2`, cursor
+remains `.9.1.7`, and topology admission remains `.5.3`; root no-drift `.6` is separately owned, so rollout stays
+5/7.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
@@ -660,13 +665,15 @@ content migration exists yet.
   packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
   registration, exact primary cases, rollout, and omission mutations. Dart admission has the same exact 15-role
-  topology and package-wide driver proof; Julia/Lua root leaves remain staged.
+  topology and package-wide driver proof; Julia is admitted and Lua core is implemented while its composed routes
+  and admission remain staged.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
 - Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both shared primary-command
   environments on PUC Lua, and complete 105-fixture corpus execution. Root-selection leaf `.9.1.1.2.5` owns
-  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest.
+  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest; core `.5.1` is
+  marker-optional and exact at 32/65 in both environments on both ABIs, while routes/cursor/admission remain.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
   `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary

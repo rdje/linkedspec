@@ -10,9 +10,24 @@ local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
 
+M.ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
+
+local ENTRY_RULE_SELECTION_BASES = {
+  explicit_selector = true,
+  first_authored_marker = true,
+  first_authored_rule = true,
+}
+
 local ERROR_MT = {
   __tostring = function(value)
     return "CompiledSpecException: " .. value.message
+  end,
+}
+
+local ENTRY_RULE_SELECTION_ERROR_MT = {
+  __compiled_spec_type = "EntryRuleSelectionException",
+  __tostring = function(value)
+    return "EntryRuleSelectionException: " .. value.message
   end,
 }
 
@@ -36,6 +51,7 @@ local RULE_SLOT_EVENT_MT = type_metatable("CompiledRuleSlotEvent")
 local DEPENDENCY_ENTRY_MT = type_metatable("CompiledDependencyRegexEntry")
 local DEPENDENCY_STATE_MT = type_metatable("CompiledDependencyRegexState")
 local DESCRIPTOR_STATE_MT = type_metatable("CompiledDescriptorState")
+local RESOLVED_ENTRY_RULE_MT = type_metatable("ResolvedEntryRule")
 
 local function fail(message, fields)
   fields = fields or {}
@@ -45,6 +61,10 @@ end
 
 function M.is_compiled_spec_error(value)
   return getmetatable(value) == ERROR_MT
+end
+
+function M.is_entry_rule_selection_error(value)
+  return getmetatable(value) == ENTRY_RULE_SELECTION_ERROR_MT
 end
 
 function M.node_type(value)
@@ -57,6 +77,36 @@ local function copy_list(values)
   local result = {}
   for index, value in ipairs(values) do result[index] = value end
   return result
+end
+
+local function entry_rule_selection_fail(code, stage, message, entry_rule)
+  error(setmetatable({
+    code = code,
+    stage = stage,
+    message = message,
+    entry_rule = entry_rule,
+  }, ENTRY_RULE_SELECTION_ERROR_MT), 0)
+end
+
+function M.entry_rule_selection_basis_name(basis)
+  if type(basis) ~= "string" or not ENTRY_RULE_SELECTION_BASES[basis] then
+    fail("unknown entry-rule selection basis")
+  end
+  return basis
+end
+
+function M.entry_rule_selection_error_to_json(value)
+  if not M.is_entry_rule_selection_error(value) then
+    fail("entry_rule_selection_error_to_json expects EntryRuleSelectionException")
+  end
+  local fields = json.harray()
+  if value.entry_rule ~= nil then fields.entry_rule = value.entry_rule end
+  return json.harray({
+    code = value.code,
+    stage = value.stage,
+    message = value.message,
+    fields = fields,
+  })
 end
 
 local function typed_array(values, project)
@@ -494,6 +544,48 @@ function CompiledSpecMethods:rule(label)
   return self.rules_by_label[label]
 end
 
+function M.resolve_entry_rule(compiled, explicit_selector)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("resolve_entry_rule expects CompiledSpec")
+  end
+  if explicit_selector ~= nil and type(explicit_selector) ~= "string" then
+    fail("explicit entry-rule selector must be a string when present")
+  end
+  if #compiled.compiled_rule_order == 0 then
+    entry_rule_selection_fail(
+      "no_rules_defined",
+      "validate_spec",
+      "compiled spec does not contain any rules"
+    )
+  end
+  if explicit_selector ~= nil then
+    local selected = compiled.rules_by_label[explicit_selector]
+    if selected == nil then
+      entry_rule_selection_fail(
+        "entry_rule_not_found",
+        "select_entry_rule",
+        "entry rule '" .. explicit_selector .. "' is not defined",
+        explicit_selector
+      )
+    end
+    return setmetatable({ rule = selected, basis = "explicit_selector" }, RESOLVED_ENTRY_RULE_MT)
+  end
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local candidate = compiled.rules_by_label[label]
+    if candidate.header.is_top then
+      return setmetatable({ rule = candidate, basis = "first_authored_marker" }, RESOLVED_ENTRY_RULE_MT)
+    end
+  end
+  return setmetatable({
+    rule = compiled.rules_by_label[compiled.compiled_rule_order[1]],
+    basis = "first_authored_rule",
+  }, RESOLVED_ENTRY_RULE_MT)
+end
+
+function CompiledSpecMethods:resolve_entry_rule(explicit_selector)
+  return M.resolve_entry_rule(self, explicit_selector)
+end
+
 function CompiledSpecMethods:functions()
   return copy_list(self.function_registry.entries)
 end
@@ -696,6 +788,7 @@ local function descriptor_state_to_json(state)
       descriptor_model = "compiled_descriptor_state",
       compiled_spec_model = "compiled_spec_state",
       compiled_dependency_regex_model = "compiled_dependency_regex_state",
+      entry_rule_contract = M.ENTRY_RULE_CONTRACT_ID,
       parse_mode = "seek",
       definition_order = typed_array(compiled.definition_order),
       compiled_rule_order = typed_array(compiled.compiled_rule_order),
@@ -707,6 +800,7 @@ local function descriptor_state_to_json(state)
 end
 
 function M.to_json(value)
+  if M.is_entry_rule_selection_error(value) then return M.entry_rule_selection_error_to_json(value) end
   local node_type = M.node_type(value)
   if node_type == "CompiledSpec" then return compiled_spec_to_json(value) end
   if node_type == "CompiledRule" then return rule_to_json(value) end

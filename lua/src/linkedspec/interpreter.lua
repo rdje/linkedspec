@@ -152,7 +152,7 @@ local function runtime_diagnostic(engine, fields)
     handler_source_label = fields.handler_source_label or
       (effective_rule and ("lua_runtime:rule:" .. effective_rule) or "lua_runtime"),
   }
-  for _, name in ipairs({ "code", "helper_name", "actual_arity", "expected_arity" }) do
+  for _, name in ipairs({ "code", "entry_rule", "helper_name", "actual_arity", "expected_arity" }) do
     if fields[name] ~= nil then diagnostic[name] = fields[name] end
   end
   return setmetatable(diagnostic, DIAGNOSTIC_MT)
@@ -164,13 +164,6 @@ local function with_runtime_diagnostic(value, diagnostic)
   for key, field_value in pairs(value) do wrapped[key] = field_value end
   wrapped.diagnostic = diagnostic
   return setmetatable(wrapped, ERROR_MT)
-end
-
-local function default_top(engine)
-  for _, label in ipairs(engine.compiled_spec.compiled_rule_order) do
-    if engine.compiled_spec.rules_by_label[label].header.is_top then return label end
-  end
-  return engine.compiled_spec.compiled_rule_order[1]
 end
 
 local function public_parser_start_byte(input)
@@ -3847,17 +3840,29 @@ function M.runtime_parse(engine, input, options)
   if (options._generated_families == nil) ~= (options._generated_source_identity == nil) then
     fail("internal generated plan and source identity must be provided together")
   end
-  local top = options.top_rule or default_top(engine)
-  if not top then
-    local detail = "compiled spec does not contain any rules"
-    fail(detail, {
+  local selection_ok, selection = pcall(
+    compiled_spec.resolve_entry_rule,
+    engine.compiled_spec,
+    options.top_rule
+  )
+  if not selection_ok then
+    if not compiled_spec.is_entry_rule_selection_error(selection) then error(selection, 0) end
+    fail(selection.message, {
+      code = selection.code,
+      stage = selection.stage,
+      entry_rule = selection.entry_rule,
       diagnostic = runtime_diagnostic(engine, {
-        stage = "top_rule_selection",
-        summary = "Lua runtime top-rule selection failed",
-        detail = detail,
+        stage = selection.stage,
+        summary = "Lua runtime entry-rule selection failed",
+        detail = selection.message,
+        top_rule = selection.entry_rule,
+        entry_rule = selection.entry_rule,
+        rule_label = selection.entry_rule,
+        code = selection.code,
       }),
     })
   end
+  local top = selection.rule.label
   local ctx = context(
     engine,
     input,
@@ -3964,7 +3969,7 @@ function M.to_json(value)
       rule_label = value.rule_label,
       handler_source_label = value.handler_source_label,
     })
-    for _, name in ipairs({ "code", "helper_name", "actual_arity", "expected_arity" }) do
+    for _, name in ipairs({ "code", "entry_rule", "helper_name", "actual_arity", "expected_arity" }) do
       if value[name] ~= nil then diagnostic[name] = value[name] end
     end
     return diagnostic
