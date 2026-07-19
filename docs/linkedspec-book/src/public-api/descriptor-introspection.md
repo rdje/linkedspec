@@ -2,21 +2,21 @@
 
 > **Rule-local descriptor v1:** ADR `0044` removes descriptor-wide
 > `meta.parse_mode` and every public rule field named `parse_mode`. Perl
-> `.9.1.3.3`, Rust `.9.1.4.4`, Dart `.9.1.5.3`, and Julia `.9.1.6.3` expose
+> `.9.1.3.3`, Rust `.9.1.4.4`, Dart `.9.1.5.3`, Julia `.9.1.6.3`, and Lua
+> `.9.1.7.3` on both PUC Lua and LuaJIT expose
 > `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"`,
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, and Julia generated-source v2, option/CLI removal, and composed cursor
-> admission are complete through `.9.1.6.6`; Lua cursor migration, recurring five-backend admission, and public
-> no-drift remain dependency-ordered. Independently, Julia root admission now composes the immutable
+> admission are complete through `.9.1.6.6`; Lua generated v2, option removal, dual-ABI admission, recurring
+> five-backend admission, and public no-drift remain dependency-ordered. Independently, Julia root admission now composes the immutable
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
 > legacy field.
 >
-> Lua/LuaJIT preflight `.9.1.7.0` confirms that current Lua descriptors still expose
-> `meta.parse_mode = "seek"` and do not expose `meta.cursor_contract` or per-rule `cursor_policy`. Direct,
-> normalized, and loaded callers still retain an explicit global engine option as a compatibility seam, while
-> omitted-policy normal execution is already intrinsic at every entered rule. Descriptor migration `.9.1.7.3`
-> follows typed normalization and intrinsic normal runtime; generated-source v2 and option removal follow it. Do
-> not read Lua's current global field as the accepted language contract—it is the measured compatibility boundary.
+> Lua/LuaJIT descriptor `.9.1.7.3` now projects cursor v1 directly from normalized compiled rules. Direct,
+> normalized, and loaded descriptor bytes agree, including handler/root-marker identity and exact action/blind
+> semantic rows. An explicit global engine option remains a separate compatibility seam until `.9.1.7.5`, and
+> generated source remains version 1 until `.4`; neither compatibility boundary appears in or alters the v1
+> descriptor.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

@@ -11,13 +11,13 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.7.2` — intrinsic PUC Lua/LuaJIT runtime is verified,
-  documented, cleaned, and prepared for commit.
-- latest_commit: `67909eb6` — `FUTURE-PARITY-BACKLOG.9.1.7.1 - normalize Lua cursor edges`
-  (ahead: 235; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.2 - derive Lua rule-local runtime` from clean base `67909eb6`.
-- active_work_unit: none after prepared `.9.1.7.2`; do not activate descriptor `.9.1.7.3` before the clean commit.
-- next_action: commit prepared `.9.1.7.2`, clear `git_message_brief.txt`, verify clean, then activate descriptor
-  v1 `.9.1.7.3` task-tree-first from the new commit.
+  documented, cleaned, and committed.
+- latest_commit: `d4b910e8` — `FUTURE-PARITY-BACKLOG.9.1.7.2 - derive Lua rule-local runtime`
+  (ahead: 236; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.3` is complete and prepared for commit from clean base `d4b910e8`.
+- next_action: commit `.9.1.7.3`, clear and verify `git_message_brief.txt`, confirm the clean commit, and only then
+  activate generated-source v2 `.9.1.7.4` task-tree-first.
 - current_proof: PUC Lua and LuaJIT shared identical 44/110 runtime RED failures and now pass 110/110 each over all
   36 families, 8/8 parent-child mechanisms, 2/2 structural replacements, loaded/normalized/recursive/trace, and
   explicit outer/generated-v1 isolation. Six focused consumers pass 1,046 assertions per ABI. Missing engine
@@ -26,6 +26,12 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Package remains 176/177x2 with only staged help; primary remains 32/65x4, corpus 105/105x2, governance is
   68/5+3/44 after registering the execution consumer. KM is 628/4,600; mdBook/all four doctrines pass; canonical
   closes root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Safe artifacts are removed.
+- current_lua_descriptor: Exact descriptor RED is 364/776 on each ABI and green is 875/875. Root metadata now
+  names cursor v1 and omits global mode; rule metadata derives family/policy/ownership plus ordered semantic edges
+  from normalized compiled state. Direct/normalized/loaded bytes and loaded AND execution agree. Seven focused
+  consumers total 1,921 assertions per ABI; package 176/177x2, primary 32/65x4, corpus 105/105x2, and governance
+  68/5+3/44 remain staged. KM is 629/4,611; mdBook/four doctrines pass; canonical closes root 7+5, cursor 288,
+  primary 65x2, and Phase 0 1,031/1,031 in 621 seconds. Safe generated artifacts are removed.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
   diagnostics, eight parent-child mechanisms, and two structural replacements are exact. Normal entered rules
   derive policy once; children rederive independently. Descriptor v1 has no global mode and projects exact facts;
@@ -50,4 +56,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: fully verified prepared `.9.1.7.2` commit only.
+- blockers: none. in_flight_uncommitted: completed, fully verified descriptor `.9.1.7.3` is prepared for its
+  per-slice commit; no background job remains.

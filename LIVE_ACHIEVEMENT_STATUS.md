@@ -8,12 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None after prepared `FUTURE-PARITY-BACKLOG.9.1.7.2`; do not activate descriptor `.9.1.7.3` until the runtime
-  commit lands cleanly and `git_message_brief.txt` is cleared.
+- `FUTURE-PARITY-BACKLOG.9.1.7.3` — Lua/LuaJIT cursor descriptor v1 is complete after task-tree-first activation from clean runtime
+  commit `d4b910e8` at ahead 236. Exact identical 364/776 RED is now 875/875 green per ABI; seven focused
+  consumers total 1,921 assertions per ABI, package remains at the staged 176/177 help boundary, primary remains
+  32/65x4, corpus is 105/105x2, and cursor governance is 68/5+3/44. KM is 629/4,611; mdBook/four doctrines and
+  canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 621 seconds pass. Safe artifacts are
+  removed and the slice is prepared for commit; generated/public/admission owners remain `.4-.6`.
 
 ## Latest Completed Slice
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.2 — derive Lua rule-local runtime policy**
-  (DONE and prepared for commit from clean base `67909eb6`).
+  (DONE at clean commit `d4b910e8`).
 
   **Result:** Every normal live/loaded/normalized/recursive/traced rule entry derives AND-consume/sequence or
   OR-default-seek/choice; every action, blind, direct-call, and recursive child rederives from its own compiled
@@ -26,7 +30,7 @@ Current execution status for interruption-safe batch workflow recovery.
   primary 65x2, and Phase 0 1,031/1,031 in 624 seconds. Generated 11 MiB book, Python cache, and two 104 KiB
   native trees are removed.
 
-  **Next:** Commit `.2`, clear the brief, verify clean, then activate descriptor v1 `.9.1.7.3` task-tree-first.
+  **Next:** Descriptor v1 `.9.1.7.3` is active task-tree-first from the clean commit.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.1 — normalize Lua authored families and bare edges**
   (DONE at clean commit `67909eb6`).

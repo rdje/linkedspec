@@ -25,7 +25,7 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while
 `meta_contract_variants.rule_local_cursor_v1` requires `cursor_contract`, forbids `parse_mode`, and fixes the v1
 identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`, Rust as of `.9.1.4.4`, Dart as
-of `.9.1.5.3`, and Julia as of `.9.1.6.3`; Lua remains on the legacy variant until its dependency-ordered leaf.
+of `.9.1.5.3`, Julia as of `.9.1.6.3`, and Lua on both supported ABIs as of `.9.1.7.3`.
 Its `function_record_variants` object is the authoritative three-way union: fixed-v1 stores `params`/`arity`,
 variadic-v2 stores `signature`, and final-codeblock-v3 stores `params`/`arity` plus exact final-only
 `parameter_kinds`. `tools/check_callable_signature_contract.py` rejects schema/order/version/storage/policy drift.

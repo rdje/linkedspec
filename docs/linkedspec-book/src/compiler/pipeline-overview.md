@@ -59,6 +59,13 @@ omitted value for compatibility removal in `.9.1.7.5`. Existing generated-source
 from its validated legacy family plan with historical seek until generated-source v2 replaces it in `.4`; the
 ordinary intrinsic path does not silently change a versioned artifact.
 
+The Lua outward descriptor now projects that same normalized identity without becoming another policy owner.
+Root metadata names `linkedspec-rule-local-cursor-v1` and has no global cursor field. Per-rule metadata derives
+`family` and `cursor_policy` from compiled mode metadata and derives ownership plus ordered
+`ownership`/`target`/`regex_index`/`block`/`fluent` rows from the compiled action/blind tables. Direct source,
+normalized `SpecFile` JSON, and loaded source produce byte-identical descriptors. The projection has no decoder
+and does not serialize the still-staged outer compatibility option.
+
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
 ## Staged linked parsing

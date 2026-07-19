@@ -4076,9 +4076,22 @@ test("compiled descriptor matches the exact outward contract", function()
     table.concat(sorted_values(contract.top_level_keys), ","),
     "descriptor top-level keys"
   )
+  local legacy_variant = contract.meta_contract_variants.legacy_global_v0
+  local cursor_variant = contract.meta_contract_variants.rule_local_cursor_v1
+  local legacy_required = {}
+  for _, key in ipairs(legacy_variant.required_keys) do legacy_required[key] = true end
   for _, key in ipairs(contract.required_meta_keys) do
-    if descriptor.meta[key] == nil then fail("descriptor missing meta key " .. key) end
+    if not legacy_required[key] and descriptor.meta[key] == nil then
+      fail("descriptor missing meta key " .. key)
+    end
   end
+  for _, key in ipairs(cursor_variant.required_keys) do
+    if descriptor.meta[key] == nil then fail("descriptor missing cursor meta key " .. key) end
+  end
+  for _, key in ipairs(cursor_variant.forbidden_keys) do
+    assert_equal(descriptor.meta[key], nil, "descriptor forbidden cursor meta key " .. key)
+  end
+  assert_equal(descriptor.meta.cursor_contract, cursor_variant.cursor_contract, "cursor descriptor identity")
   for key, expected in pairs(contract.model_values) do
     assert_equal(descriptor.meta[key], expected, "descriptor model " .. key)
   end
@@ -4114,7 +4127,11 @@ test("compiled descriptor matches the exact outward contract", function()
     json.encode(descriptor.functions.apply.body_payload.parameter_kinds),
     "codeblock descriptor parameter-kinds preservation"
   )
-  assert_equal(json.decode(json.encode(descriptor)).meta.parse_mode, "seek", "descriptor JSON round-trip")
+  assert_equal(
+    json.decode(json.encode(descriptor)).meta.cursor_contract,
+    linkedspec.RULE_LOCAL_CURSOR_CONTRACT_ID,
+    "descriptor JSON round-trip"
+  )
 end)
 
 test("generated source metadata and portable errors match the neutral contract", function()

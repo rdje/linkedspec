@@ -9,10 +9,10 @@ answers:
   - does Lua compiled state carry ActionIR payloads
   - does Lua match the outward descriptor contract
   - does Lua snapshot source before compilation
-date: 2026-07-11
+date: 2026-07-19
 status: current
 tags: [lua, compiler, compiled-state, descriptor, dependency-regex, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.3.4 adds typed compile/descriptor state; .5.3.1 makes the descriptor projection consume the exact fixed-v1/variadic-v2/final-codeblock-v3 union. The complete PUC Lua and LuaJIT gates pass 153/153."
+evidence: "LUA-BACKEND-PARITY.3.4 adds typed compile/descriptor state; .5.3.1 makes function projection consume the exact fixed-v1/variadic-v2/final-codeblock-v3 union. FUTURE-PARITY-BACKLOG.9.1.7.3 moves root/rule metadata to cursor v1 directly from normalized compiled mode/action/blind tables; exact descriptor proof is 875/875 on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -40,10 +40,12 @@ does not execute or host-compile regexes.
 model identities; order/count metadata; and canonical fixed-v1, variadic-v2, or final-codeblock-v3 staged function
 records.
 Lua handlers are explicitly `lua_interpreter_rule` / `compiled_state_only`.
+Cursor-v1 rule metadata derives family/policy/ownership and ordered semantic edge rows from this state; it stores
+no independent policy and has no outward decoder. Direct, normalized-AST, and loaded descriptor bytes agree.
 `compiled:to_json()` separately exposes typed effective internal state.
 
 Related facts: [[lua-user-function-registry]],
 [[lua-actionir-contract-resolver]],
 [[outward-compiled-descriptor-four-backend-contract]],
 [[dart-compiled-spec-state]], [[julia-compiled-spec-state]],
-[[compilerstate-internal-model]].
+[[compilerstate-internal-model]], [[lua-rule-local-cursor-descriptor]].

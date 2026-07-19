@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-19` (Lua/LuaJIT intrinsic runtime `.9.1.7.2` is exact and prepared for commit;
-  descriptor v1 `.9.1.7.3` follows only after the clean runtime commit)
+- Last updated: `2026-07-19` (Lua/LuaJIT descriptor v1 `.9.1.7.3` is fully verified and prepared for commit from
+  clean runtime commit `d4b910e8`; generated-source v2 `.4` remains pending)
 - Owner: repo-local workflow
 
 ## Goal
@@ -5568,9 +5568,10 @@ before implementation.
     `.9.1.1.2.5.2` were complete, route leaf `.5.2` landed at clean commit `c3bdca44`,
     `git_message_brief.txt` was zero bytes, generated book/cache/native artifacts were absent, and the branch was
     clean at ahead 233. Child `.0` completed exact dual-ABI boundary reproduction and the dependency-safe `.1-.6`
-    split at clean commit `47a1d166`; `.1` completed at clean commit `67909eb6`; `.2` is exact and prepared for
-    commit; descriptor `.3` must wait for that clean handoff.
-  Commit: `pending`
+    split at clean commit `47a1d166`; `.1` completed at clean commit `67909eb6`; `.2` completed at clean commit
+    `d4b910e8`; descriptor `.3` is fully verified and prepared for its commit from that handoff.
+  Commit: through `d4b910e8`; `.3` prepared as
+    `FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.0`
   Status: `done`
@@ -5705,27 +5706,34 @@ before implementation.
     descriptor `.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.3`
-  Status: `pending`
+  Status: `done` (prepared for commit)
   Goal: Project Lua cursor descriptor v1 from normalized compiled rule state.
   Dependencies: `.9.1.7.2`
   Acceptance: Remove descriptor-global `parse_mode`; publish `linkedspec-rule-local-cursor-v1`; project each rule's
     authored family, derived policy, ownership, ordered resolved semantic edges, and permitted source provenance;
     expose no independent cursor override; preserve root-selection identity and direct/loaded/normalized descriptor
     byte agreement with live execution.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `activated task-tree-first on 2026-07-19 only after runtime commit d4b910e8 landed cleanly at
+    ahead 236; admitted authority retrieval proves normalized compiled facts are sufficient and no descriptor
+    decoder exists; exact PUC Lua/LuaJIT RED is 364/776 failures and green is 875/875 assertions per ABI; seven
+    focused consumers total 1,921 per ABI, package remains 176/177x2 only at staged help, primary remains 32/65x4,
+    corpus remains 105/105x2, and governance is 68/5+3/44; KM is 629 facts / 4,611 keys; mdBook, memory/KM checks,
+    and all doctrines pass; canonical local CI exits 0 after root 7+5, cursor 288, primary 65x2, and Phase 0
+    1,031/1,031 in 621 seconds; generated book, Python cache, rust/target, dart/.dart_tool, and the temporary native
+    RED tree are safely removed, while referenced durable reproduction logs are retained`
+  Commit: `prepared — FUTURE-PARITY-BACKLOG.9.1.7.3 - project Lua cursor descriptor v1`
 
   #### Acceptance Checklist
 
-  - [ ] **REPRODUCE / ISSUE** — Dump current direct/loaded/normalized descriptor JSON and compare it with the
+  - [x] **REPRODUCE / ISSUE** — Dump current direct/loaded/normalized descriptor JSON and compare it with the
     neutral contract and admitted backend projections.
-  - [ ] **ROOT CAUSE (WHY + WHERE)** — Locate stale descriptor-global projection and every decoder/consumer seam,
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Locate stale descriptor-global projection and every decoder/consumer seam,
     proving whether normalized compiled facts are already sufficient.
-  - [ ] **FIX** — Project exact cursor-v1 root/rule/edge fields from normalized semantics without adding mutable
+  - [x] **FIX** — Project exact cursor-v1 root/rule/edge fields from normalized semantics without adding mutable
     policy state or disturbing root-selection metadata.
-  - [ ] **ADDRESSED (verified)** — Pass exact field sets, all family/edge rows, portable failures, byte-identical
+  - [x] **ADDRESSED (verified)** — Pass exact field sets, all family/edge rows, portable failures, byte-identical
     direct/loaded/normalized routes, and live agreement on both ABIs.
-  - [ ] **NO REGRESSION / LOCKSTEP** — Pass dual-ABI package/corpus/primary/governance/canonical gates, synchronize
+  - [x] **NO REGRESSION / LOCKSTEP** — Pass dual-ABI package/corpus/primary/governance/canonical gates, synchronize
     docs/KM/book, clean artifacts, commit `.3`, and only then activate generated v2 `.4`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.4`
@@ -8386,11 +8394,11 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
 | 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `done` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff pass. |
-| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Dual-ABI preflight, typed normalization, and intrinsic runtime `.0-.2` are complete; descriptor `.3` follows after the clean runtime commit, then generated/removal/admission `.4-.6`. |
+| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Dual-ABI preflight through descriptor `.0-.3` are complete; `.3` is prepared for commit from `d4b910e8`, then generated/removal/admission `.4-.6`. |
 | 218.0 | `FUTURE-PARITY-BACKLOG.9.1.7.0` | `done` | Exact dual-ABI behavior-free boundary recorded: 36/34/22 families, 5/13+2/4 valid edges, 0/7 diagnostics, 4/8 parent-child, 1/2 structural, 176/177x2 package, 32/65x4 primary, and 105/105x2 corpus. |
 | 218.1 | `FUTURE-PARITY-BACKLOG.9.1.7.1` | `done` | Exact RED 44/166x2 repaired to 258/258x2; package 176/177x2, primary 32/65x4, corpus 105/105x2, governance/KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.2 | `FUTURE-PARITY-BACKLOG.9.1.7.2` | `done` | Exact 44/110x2 RED repaired to 110/110x2; focused 1,046x2, package 176/177x2, primary 32/65x4, corpus 105/105x2, governance 68/5+3/44, KM/mdBook/doctrines/canonical proof, and cleanup pass. |
-| 218.3 | `FUTURE-PARITY-BACKLOG.9.1.7.3` | `pending` | Project cursor descriptor v1 with family/policy/ownership/resolved-edge identity. |
+| 218.3 | `FUTURE-PARITY-BACKLOG.9.1.7.3` | `done` | Exact 364/776x2 RED repaired to 875/875x2; focused 1,921x2, byte-identical direct/normalized/loaded descriptors, governance/KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.4 | `FUTURE-PARITY-BACKLOG.9.1.7.4` | `pending` | Emit minimal generated v2, derive policy by family, reject v1, and prove both ABIs. |
 | 218.5 | `FUTURE-PARITY-BACKLOG.9.1.7.5` | `pending` | Remove global API/CLI/trace options and pass exact shared 65x4 primary bytes. |
 | 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `pending` | Add exact dual-ABI 15-role admission, promote only Lua, close parent, and hand off root admission. |
@@ -9077,14 +9085,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Lua intrinsic runtime `.9.1.7.2` passes focused dual-ABI, staged package/primary/corpus, governance, book,
-  doctrine, canonical, and cleanup proof. Only the prepared clean commit remains before descriptor `.3` may
-  activate.
+- None. Lua descriptor `.9.1.7.3` is fully verified and prepared for commit from clean base `d4b910e8`;
+  generated-source v2 `.4` remains pending until that commit leaves a clean tree.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.3` | Exact 364/776x2 RED; cursor-v1 root/rule/semantic-edge projection; all 36 families and valid/invalid edge rows; direct/normalized/loaded byte identity and loaded AND execution; focused 1,921x2; package 176/177x2; primary 32/65x4; corpus 105/105x2; cursor 68/5+3/44; KM 629/4,611; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 621s; generated book/cache/build/native-tree cleanup. | PASS. Lua descriptors use cursor v1 on both ABIs without generated-source, public-option, fixture, or rollout promotion; only the clean `.3` commit may precede generated v2 `.4`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.2` | Exact 44/110x2 RED; entered-rule family/cursor/sequence-choice derivation; 36 families; 8/8 parent-child; 2/2 structural; live/loaded/normalized/recursive/trace; explicit outer and generated-v1 isolation; focused 1,046x2; package 176/177x2; primary 32/65x4; corpus 105/105x2; cursor 68/5+3/44; KM 628/4,600; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 624s; generated book/cache/native-tree cleanup. | PASS. Ordinary Lua runtime policy is intrinsic on both ABIs without descriptor, artifact, public-option, fixture, or rollout promotion; only the clean `.2` commit may precede descriptor `.3`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | RED 27/79 route gaps; loaded/reconstructed/generated-v1/emitted direct/traced reuse; typed loader/generated zero/unknown projection; plan-validation-first ordering; low requested/effective/basis and failure stage/code trace; entry-`I` result fixtures; focused routes 101, diagnostic 119 per ABI; package 176/177 and corpus 105 per ABI; primary 32/65 in all four default/POSIX ABI legs with exactly 33 cursor residuals; root 5/7+39; KM 625/4,561; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 643s; generated book/cache/native-tree cleanup. | PASS. Lua route behavior is exact on both ABIs without artifact or rollout promotion; only the clean `.5.2` commit may precede cursor `.9.1.7`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | RED missing-resolver proof; empty/comment parser envelopes and typed one-or-more-rule validation; neutral 8/3/3 consumer plus native/primary precedence; pre-context zero/unknown failures; immutable descriptor/strict authored-edge no-drift; entry-`I` result fixtures; focused root 99, diagnostic 119, logical 359 per ABI; package 176/177 and corpus 105 per ABI; primary 32/65 in all four default/POSIX ABI legs with exactly 33 cursor residuals; root 5/7+39; KM 624/4,546; mdBook/JSON/shell/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 613s; generated book/cache/native-tree cleanup. | PASS. Lua core/native/primary behavior is exact on both ABIs without route/admission promotion; only the clean `.5.1` commit may precede `.5.2`. |
@@ -9463,6 +9471,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-19`: Lua cursor descriptor v1 `.9.1.7.3` replaces root-global `parse_mode` with the neutral contract id
+  and projects per-rule family/policy/ownership plus ordered semantic edges from normalized compiled state, without
+  adding a decoder or override. Exact 364/776 RED becomes 875/875 per ABI; seven focused consumers pass 1,921 per
+  ABI; package 176/177x2, primary 32/65x4, corpus 105/105x2, cursor 68/5+3/44, KM 629/4,611, mdBook/four doctrines,
+  and canonical root 7+5/cursor 288/primary 65x2/Phase 0 1,031 in 621 seconds pass. Safe generated build/cache/native
+  artifacts are removed; referenced durable reproduction logs are retained. Only the prepared clean commit may
+  precede generated-source v2 `.4`.
+- `2026-07-19`: Clean commit `d4b910e8` lands Lua intrinsic runtime `.9.1.7.2`; tracked/untracked state is clean,
+  `git_message_brief.txt` is zero bytes, generated book/cache/native artifacts are absent, and ahead is 236.
+  Descriptor v1 `.9.1.7.3` activates task-tree-first; generated/public/admission `.4-.6` remain untouched.
 - `2026-07-19`: Lua intrinsic runtime `.9.1.7.2` derives AND-consume/sequence and OR-default-seek/choice at every
   ordinary live, loaded, normalized, recursive, and traced rule entry on PUC Lua and LuaJIT. Every child rederives;
   trace exposes effective family/policy; explicit outer policy and generated-v1 seek/family semantics remain

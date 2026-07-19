@@ -102,8 +102,11 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > structural replacements, loaded/normalized routes, and policy-bearing trace.
 > An explicit outer policy remains a compatibility seam until `.5`, while
 > generated-source v1 deliberately retains historical seek and its legacy
-> handler-family interpretation until `.4`. Descriptor v1, generated v2, public
-> option removal, and rollout admission remain `.3-.6`.
+> handler-family interpretation until `.4`. Descriptor `.9.1.7.3` is now v1 on
+> both ABIs: root metadata contains the cursor contract rather than a global
+> mode, and every rule projects normalized family, policy, ownership, and exact
+> semantic edge rows. Its focused proof passes 875 assertions per ABI. Generated
+> v2, public option removal, and rollout admission remain `.4-.6`.
 
 ## Current rule-label surface
 

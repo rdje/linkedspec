@@ -98,6 +98,15 @@ assertions per ABI. The known complete-package help mismatch and 33 shared prima
 until option-removal leaf `.5`; do not reinterpret those staged failures as runtime-policy regressions. Registering
 the consumer advances only inventory to 68 files; rollout remains 5 complete / 3 pending with 44 mutations.
 
+Descriptor leaf `.9.1.7.3` adds the next standalone dual-ABI consumer. Before implementation it reports the same
+364 failures of 776 assertions on PUC Lua and LuaJIT: only the legacy root global field and missing rule/edge
+projection differ. After implementation it passes 875/875 per ABI across exact root/rule fields, all 36 families,
+every valid semantic edge, normalized invalid diagnostics, direct rule projection, byte-identical direct/
+normalized/loaded descriptors, and loaded AND execution. The seven focused consumers total 1,921 assertions per
+ABI. Package, primary, corpus, inventory, rollout, and mutation boundaries remain deliberately unchanged until
+their later owners. Full signoff also passes memory/Knowledge Map checks, all four doctrines, and canonical root
+consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 621 seconds.
+
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace

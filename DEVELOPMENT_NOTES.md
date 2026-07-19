@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.3` — descriptors project normalized facts; they do not own policy):
+  Lua's stale descriptor field was isolated to `descriptor_state_to_json(...)`; normal runtime was already
+  intrinsic and normalized compiled rules already carried every fact required by the neutral v1 schema. The fix
+  therefore adds no field to `CompiledRule`, no outward decoder, and no descriptor option. Root metadata swaps
+  the legacy global field for one contract id, while rule projection reads only exact mode metadata and the
+  existing action/blind edge tables.
+
+  Edge rows are semantic rather than syntactic. Action edges emit the resolved `child_regex_index`, including
+  zero for omitted authored slots. Blind edges emit JSON null because no child slot is selected. `block` comes
+  from compiled edge code, and a non-empty structured fluent chain renders as normalized dot-separated calls.
+  Bare versus explicit source form is intentionally omitted: ADR `0044` permits it only as optional provenance,
+  and Lua's post-normalization compiled state correctly converges equivalent forms.
+
+  The regression consumes both neutral JSON authorities and starts at the actual public seams. Exact RED is
+  364/776 on both PUC Lua and LuaJIT; green expands to 875 assertions because semantic-row fields become
+  reachable. Seven focused consumers pass 1,921 assertions per ABI. Package 176/177, primary 32/65x4, corpus
+  105/105x2, and cursor governance 68/5+3/44 stay staged exactly: descriptor migration must not pre-empt generated
+  v2, option/CLI removal, or composed admission `.4-.6`.
+
+  Final signoff is KM 629/4,611, mdBook, all four doctrines, root consumers 7+5, cursor admission 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 621 seconds. Disk-pressure cleanup removes only known-regenerable
+  `rust/target`, `dart/.dart_tool`, mdBook output, Python bytecode, and the temporary native RED tree. The roughly
+  109 MiB reproduction-bundle logs are retained because tracked documentation and manifests cite them as durable
+  evidence, so deletion is not 100% safe.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.2` — policy belongs to entered-rule execution, not call edges):
   Lua now derives one execution-policy record immediately after resolving the entered compiled rule. That record
   carries authored family, effective seek/consume policy, AND sequence versus OR/default choice, and the normal or

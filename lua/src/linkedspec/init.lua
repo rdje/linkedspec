@@ -144,6 +144,7 @@ M.parse_spec_with_staged_user_function_definitions =
 M.is_user_function_definition_parser_error = user_function_definition_parser.is_error
 M.compiled_spec = compiled_spec
 M.ENTRY_RULE_CONTRACT_ID = compiled_spec.ENTRY_RULE_CONTRACT_ID
+M.RULE_LOCAL_CURSOR_CONTRACT_ID = compiled_spec.RULE_LOCAL_CURSOR_CONTRACT_ID
 M.compile_spec = compiled_spec.compile_spec
 M.is_compiled_spec_error = compiled_spec.is_compiled_spec_error
 M.resolve_entry_rule = compiled_spec.resolve_entry_rule

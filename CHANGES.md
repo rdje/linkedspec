@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.3 — project Lua cursor descriptor v1
+
+PUC Lua and LuaJIT outward compiled descriptors now use the neutral `rule_local_cursor_v1` metadata variant.
+Root metadata publishes `cursor_contract = linkedspec-rule-local-cursor-v1` and no longer publishes a descriptor-
+global `parse_mode`. The independent entry-rule contract, authored definition/compile order, redefinition state,
+function order/count, dependency map, handler identity, and authored `is_top` values remain unchanged.
+
+Every rule now projects `family`, `cursor_policy`, aggregate `edge_ownership`, and ordered `resolved_edges`
+directly from normalized compiled mode/action/blind tables. Semantic rows contain exactly `ownership`, `target`,
+`regex_index`, `block`, and `fluent`: action indices are resolved child slots (omitted means zero), blind indices
+and absent fluents are JSON null, and equivalent bare/explicit syntax converges. Optional `source_form` is omitted
+because normalized compiled state does not retain non-semantic provenance. The descriptor has no decoder or cursor
+override input.
+
+The contract-driven test fails exactly 364 of 776 assertions before the projection and passes 875/875 afterward
+on both ABIs. It covers all 36 family spellings, every valid semantic edge, all normalized portable invalid edge/
+set outcomes, exact root/rule field sets, direct rule projection, and byte-identical direct/normalized/loaded
+descriptors coupled to loaded AND execution. Seven focused consumers total 1,921 assertions per ABI. Package
+execution remains at the intentionally staged 176/177 help boundary, all four primary legs remain 32/65, corpus
+remains 105/105 per ABI, and governance remains 68 files / 5 complete + 3 pending / 44 rejected mutations.
+Generated-source v1, explicit outer options, shared help/request-trace bytes, and rollout remain owned by `.4-.6`.
+
+Knowledge Map generation reaches 629 facts / 4,611 question keys. The mdBook, memory/task/KM checks, and all four
+doctrines pass; canonical local CI closes with root consumers 7+5, cursor admission 288, reference primary 65x2,
+and Phase 0 1,031/1,031 in 621 seconds. Cleanup removes `rust/target`, `dart/.dart_tool`, the generated mdBook,
+Python bytecode, and the temporary native RED tree. Referenced reproduction-bundle logs remain because they are
+durable evidence rather than disposable output.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.2 — derive Lua rule-local runtime policy
 
 PUC Lua and LuaJIT normal execution now derives one immutable policy at every entered rule. AND-family rules

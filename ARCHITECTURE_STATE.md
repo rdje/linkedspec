@@ -5,6 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` Lua cursor-descriptor refresh: `FUTURE-PARITY-BACKLOG.9.1.7.3` replaces the descriptor-global
+  seek field with `linkedspec-rule-local-cursor-v1`. Each rule projects authored family, derived cursor policy,
+  normalized aggregate ownership, and ordered semantic edge rows directly from `mode_metadata`, `action_edges`,
+  and `blind_edges`; no decoder, mutable descriptor policy, or second edge-normalization path exists. Action rows
+  expose resolved child slots, including omitted-to-zero normalization; blind rows expose JSON null. Handler,
+  label/line/top-marker/mode, entry-rule identity, and the established function/dependency records remain exact.
+  Direct, normalized `SpecFile` JSON, and loaded descriptor bytes agree with loaded AND execution. Identical
+  364/776 RED becomes 875/875 green per ABI; seven focused consumers total 1,921 assertions per ABI. Generated
+  v1, explicit outer options, primary help/request trace, and rollout remain staged for `.4-.6`. Final proof is
+  KM 629/4,611, mdBook/four doctrines, and canonical root 7+5, cursor 288, primary 65x2, plus Phase 0
+  1,031/1,031 in 621 seconds.
 - `2026-07-19` Lua cursor-runtime refresh: `FUTURE-PARITY-BACKLOG.9.1.7.2` derives one execution policy at every
   ordinary `execute_rule(...)` entry. Exact AND consumes and sequences; OR/default seeks and chooses. Action,
   blind, direct-call, and recursive children carry the current cursor but re-enter the same owner and derive from

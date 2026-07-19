@@ -71,7 +71,14 @@ passes the exact 110-assertion dual-ABI proof: every normal live/loaded/normaliz
 sequence or OR-default-seek/choice independently, and all eight child mechanisms plus both structural rows are
 exact. Its registered consumer makes current inventory 68/5+3/44. Explicit outer policy and generated-v1 legacy
 seek/family behavior remain isolated compatibility seams; descriptor v1, generated v2, option removal, and
-admission remain `.3-.6`.
+admission remain `.3-.6`. Clean runtime commit `d4b910e8` activates descriptor v1 `.3` task-tree-first. That
+projection now passes an exact 875-assertion consumer on both ABIs after identical 364/776 RED failures. Root
+metadata publishes `linkedspec-rule-local-cursor-v1` without a global mode; each rule derives family/policy/
+ownership and ordered semantic edges from normalized compiled state; direct/normalized/loaded descriptor bytes
+agree. Seven focused consumers total 1,921 assertions per ABI, while package 176/177, primary 32/65x4, corpus
+105/105x2, and governance 68/5+3/44 remain staged. Generated v2, option removal, and dual-ABI admission remain
+`.4-.6`. KM is 629/4,611; mdBook/four doctrines and canonical root 7+5, cursor 288, primary 65x2, and Phase 0
+1,031/1,031 in 621 seconds pass. The descriptor slice is prepared for commit before `.4` activates.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

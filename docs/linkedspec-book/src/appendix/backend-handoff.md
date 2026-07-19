@@ -8,10 +8,11 @@
 > admitted across the composed contract, as are Rust and Dart through their own
 > topology-checked consumers. Julia is fully admitted with typed normalization,
 > intrinsic execution, cursor descriptor v1, generated-source v2, and no public
-> override. Lua now has typed normalization plus intrinsic normal live, loaded,
-> normalized, recursive, and traced execution. Its descriptor, generated-source
-> v2, global-option removal, and dual-ABI admission remain dependency-ordered
-> under `.9.1.7.3-.6`; generated-source v1 and explicit outer callers keep their
+> override. Lua now has typed normalization, intrinsic normal live/loaded/
+> normalized/recursive/traced execution, and cursor descriptor v1 with exact
+> direct/normalized/loaded byte identity on both ABIs. Its generated-source v2,
+> global-option removal, and dual-ABI admission remain dependency-ordered
+> under `.9.1.7.4-.6`; generated-source v1 and explicit outer callers keep their
 > test-locked compatibility behavior until those owners move.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend

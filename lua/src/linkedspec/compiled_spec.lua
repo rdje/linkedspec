@@ -11,6 +11,7 @@ local user_function_registry = require("linkedspec.user_function_registry")
 local M = {}
 
 M.ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
+M.RULE_LOCAL_CURSOR_CONTRACT_ID = "linkedspec-rule-local-cursor-v1"
 
 local ENTRY_RULE_SELECTION_BASES = {
   explicit_selector = true,
@@ -747,6 +748,57 @@ local function rule_to_json(rule)
   })
 end
 
+local function descriptor_rule_family(rule)
+  return rule.mode_metadata.is_and and "and" or "or_default"
+end
+
+local function descriptor_cursor_policy(rule)
+  return rule.mode_metadata.is_and and "consume" or "seek"
+end
+
+local function descriptor_edge_ownership(rule)
+  local has_action = #rule.action_edges > 0
+  local has_blind = #rule.blind_edges > 0
+  if has_action and has_blind then return "mixed" end
+  if has_action then return "action" end
+  if has_blind then return "blind" end
+  return "none"
+end
+
+local function descriptor_fluent_text(fluent_chain)
+  if #fluent_chain == 0 then return json.null end
+  local calls = {}
+  for index, call in ipairs(fluent_chain) do
+    calls[index] = call.args == "" and call.method or (call.method .. "(" .. call.args .. ")")
+  end
+  return table.concat(calls, ".")
+end
+
+local function resolved_edge_descriptors(rule)
+  local result = json.array()
+  for _, edge in ipairs(rule.action_edges) do
+    for _, target in ipairs(edge.targets) do
+      result[#result + 1] = json.harray({
+        ownership = "action",
+        target = target.label,
+        regex_index = edge.child_regex_index,
+        block = edge.code ~= nil,
+        fluent = descriptor_fluent_text(edge.fluent_chain),
+      })
+    end
+  end
+  for _, edge in ipairs(rule.blind_edges) do
+    result[#result + 1] = json.harray({
+      ownership = "blind",
+      target = edge.target.label,
+      regex_index = json.null,
+      block = edge.code ~= nil,
+      fluent = descriptor_fluent_text(edge.fluent_chain),
+    })
+  end
+  return result
+end
+
 local function descriptor_rule_to_json(rule)
   return json.harray({
     handler = json.harray({ kind = "lua_interpreter_rule", label = rule.label, status = "compiled_state_only" }),
@@ -761,6 +813,10 @@ local function descriptor_rule_to_json(rule)
       label = rule.label,
       line = rule.header.line,
       is_top = rule.header.is_top,
+      family = descriptor_rule_family(rule),
+      cursor_policy = descriptor_cursor_policy(rule),
+      edge_ownership = descriptor_edge_ownership(rule),
+      resolved_edges = resolved_edge_descriptors(rule),
       mode = mode_metadata_to_json(rule.mode_metadata),
     }),
   })
@@ -826,7 +882,7 @@ local function descriptor_state_to_json(state)
       compiled_spec_model = "compiled_spec_state",
       compiled_dependency_regex_model = "compiled_dependency_regex_state",
       entry_rule_contract = M.ENTRY_RULE_CONTRACT_ID,
-      parse_mode = "seek",
+      cursor_contract = M.RULE_LOCAL_CURSOR_CONTRACT_ID,
       definition_order = typed_array(compiled.definition_order),
       compiled_rule_order = typed_array(compiled.compiled_rule_order),
       redefined_rule_labels = typed_array(compiled.redefined_rule_labels),

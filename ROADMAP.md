@@ -56,6 +56,13 @@ traced entries derive AND-consume/sequence or OR-default-seek/choice independent
 mechanisms and both structural replacements are exact. Registering that consumer moves current inventory only to
 68/5+3/44. Explicit outer policy remains staged for `.5`, and generated-v1 retains historical seek plus legacy
 family interpretation until `.4`. Descriptor/generated/public/admission owners remain `.3-.6`.
+Clean runtime commit `d4b910e8` activates descriptor v1 `.3` task-tree-first.
+That descriptor is now exact on both ABIs: identical 364/776 RED becomes 875/875 green, root global mode is
+replaced by cursor-contract v1, every rule projects normalized family/policy/ownership/semantic edges, and direct/
+normalized/loaded bytes agree. Seven focused consumers total 1,921 assertions per ABI. Package 176/177x2, primary
+32/65x4, corpus 105/105x2, and governance 68/5+3/44 remain intentionally staged; generated/public/admission owners
+remain `.4-.6`. KM 629/4,611, mdBook/four doctrines, and canonical root 7+5, cursor 288, primary 65x2, and Phase 0
+1,031/1,031 in 621 seconds pass; safe generated artifacts are removed before the prepared descriptor commit.
 
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.

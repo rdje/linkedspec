@@ -31,8 +31,11 @@ and fields. Normal live, loaded, normalized, recursive, and traced execution now
 each entered rule: AND consumes/sequences and OR/default seeks/chooses, while every child re-enters the same owner
 and derives from its own family. Rule and regex trace records expose the effective family/policy. An explicitly
 supplied outer `parse_mode` remains a staged compatibility adapter until `.9.1.7.5`; generated source remains
-v1/format 1 with its historical seek and handler-family interpretation until `.4`; descriptor metadata remains
-pre-cursor-v1 until `.3`. None of those later seams changes ordinary intrinsic execution.
+v1/format 1 with its historical seek and handler-family interpretation until `.4`. Outward descriptors now use
+`linkedspec-rule-local-cursor-v1`: root metadata has no global mode, and every rule projects its authored family,
+derived policy, aggregate ownership, and ordered semantic edge rows from normalized compiled state. Direct,
+normalized, and loaded descriptor bytes agree. This descriptor projection does not remove the separately staged
+outer runtime/CLI option and does not change generated-v1 behavior.
 
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {

@@ -93,8 +93,11 @@ structural replacements. Its exact proof moves from 44/110 RED failures to 110/1
 consumers total 1,046 assertions per ABI; registering that consumer makes current governance 68/5+3/44. Explicit
 outer policy remains a compatibility seam until `.5`, and
 generated-source v1 retains historical seek plus legacy family interpretation until `.4`. Descriptor still
-carries its old global field, generated source remains v1/format 1, and public options/rollout remain unchanged
-for `.3-.6`.
+uses cursor v1 as of `.9.1.7.3`: root metadata has the neutral contract rather than a global mode, and each rule
+projects normalized family, policy, ownership, and exact ordered semantic edges. Direct, normalized, and loaded
+bytes agree, and focused proof passes 875 assertions per ABI. Generated source remains v1/format 1, and public
+options/rollout remain unchanged for `.4-.6`. Full canonical proof passes through Phase 0 1,031/1,031 in 621
+seconds; the descriptor slice is prepared for commit before generated-source v2 activates.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
