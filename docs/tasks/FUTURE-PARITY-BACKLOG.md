@@ -3926,7 +3926,8 @@ before implementation.
     612/4,421; public/book/live synchronization, mdBook, memory/task/all four doctrines, Knowledge Map, and
     whitespace pass. Canonical CI reaches and passes every pre-Phase-0 stage; the retained exact Phase-0 rerun is
     1,031/1,031 in 611 seconds. Generated book/Python-cache cleanup passes while reusable backend build state and
-    durable issue logs remain. Rollout is unchanged; the clean commit is the sole boundary before cursor `.9.1.6`.
+    durable issue logs remain. Rollout is unchanged; the clean commit returns to Dart admission `.9.1.5.6`, whose
+    parent closeout is the remaining dependency before cursor `.9.1.6`.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 - converge Julia root routes`
 
   #### Acceptance checklist
@@ -3949,7 +3950,7 @@ before implementation.
     the honest 32/65x2 cursor boundary; keep root governance at 4/7 and do not create the final admission consumer.
   - [x] **LOCKSTEP / CANONICAL / COMMIT** — Synchronize task/live/current docs, mdBook, and Knowledge Map; pass
     memory/task/doctrines/mdBook/whitespace and canonical CI; clean safe artifacts, commit `.2`, clear the brief,
-    prove clean, and only then activate cursor `.9.1.6` task-tree-first.
+    prove clean, and only then return to Dart admission `.9.1.5.6`; activate cursor `.9.1.6` only after Dart closes.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3`
   Status: `pending`
@@ -4676,7 +4677,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.4.7 - admit Rust rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart native/reconstructed/generated/primary behavior with ADR `0044`.
   Children: `.9.1.5.0` (preflight/split), `.9.1.5.1` (family/edge normalization), `.9.1.5.2`
     (live/loaded/reconstructed execution), `.9.1.5.3` (descriptor v1), `.9.1.5.4` (generated-source v2),
@@ -4686,12 +4687,11 @@ before implementation.
     surface; remove legacy public and command options with exact diagnostics; consume descriptor/generated v2;
     migrate fixtures/callers; and prove native, normalized emitted, reconstructed plan, trace, recursion, loaded-
     spec, and primary-command parity against the unchanged neutral contract.
-  Verification: Child `.0` owns the completed read-only preflight and safe split. Normalization `.1`, rule-local
-    execution `.2`, cursor descriptor v1 `.3`, and generated-source v2 `.4` are done in dependency order; `.4`
-    retains exact minimal label/family plans and reconstructs cursor/structure from each validated family with full
-    focused/governance/canonical signoff. Children `.5-.6` retain public option/CLI migration and composed-admission
-    ownership.
-  Commit: `pending`
+  Verification: Children `.0-.5` complete the dependency-ordered preflight, typed normalization, rule-local
+    execution, descriptor v1, generated-source v2, and public option/CLI removal. Composed admission `.6` adds one
+    exact 15-role Dart consumer, locks the complete backend/canonical driver topology, advances only Dart to reach
+    4 complete / 4 pending, and closes this parent without changing the already-signed-off mechanisms.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.9.1.5.6 - admit Dart rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.0`
   Status: `done`
@@ -5002,15 +5002,51 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.5.5 - remove Dart global cursor overrides`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.5.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit and close the complete Dart projection of the neutral rule-local cursor contract.
   Dependencies: `.9.1.5.5`
   Acceptance: Add one omission-sensitive contract-driven Dart consumer spanning native, loaded, normalized,
     descriptor, emitted/generated, trace, diagnostics, recursion/mixed parents, structural replacement, and
-    primary roles; register it canonically; advance only `dart_backend`; pass complete Dart/63x2/canonical proof;
+    primary roles; register it canonically; advance only `dart_backend`; pass complete Dart/65x2/canonical proof;
     synchronize public/live/KM docs; close `.9.1.5`; and hand off Julia only after a clean commit.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance Checklist:
+  - [x] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, the neutral contract/checker, Perl and
+    Rust composed-admission precedents, and every committed Dart normalization/execution/descriptor/generated/
+    option/primary fact; reproduce the exact constituent and 3/5 rollout boundary before executable edits.
+  - [x] **DEFINE DART COMPOSED TOPOLOGY** — Extend the neutral authority with one exact omission-sensitive Dart
+    admission surface spanning native, loaded, normalized, descriptor, emitted/generated direct/trace,
+    diagnostics, mixed/recursive parents, structural replacement, static removal, and primary roles without
+    cloning the constituent semantic suites.
+  - [x] **IMPLEMENT ONE CONSUMER** — Add one contract-driven Dart consumer that executes every required role and
+    portable diagnostic/removal outcome exactly once from unchanged neutral fixtures, preserving exact source,
+    descriptor, trace, result, and generated-v2 identity.
+  - [x] **REGISTER / ADVANCE ONLY DART** — Register the consumer in the complete Dart and canonical gates, advance
+    only `dart_backend` from pending to complete, preserve Julia/Lua/final legs, and make missing registration or
+    any omitted/duplicated role fail the neutral checker and mutation suite.
+  - [x] **LOCKSTEP / CLOSEOUT** — Pass constituent, composed, complete Dart, 65x2, corpus, neutral mutation,
+    governance, mdBook, and canonical gates; synchronize task/index/roadmap/live/memory/KM docs; close `.9.1.5`;
+    commit cleanly before activating Julia `.9.1.6`.
+  Verification: Activation followed clean root-route commit `42c98dfe`, zero-byte brief,
+    and clean tree at ahead 221. Dart mechanism/removal leaf `.9.1.5.5` is durably committed at `82999046`; its
+    director-prioritized root-selection pivot has now returned after Julia root routes satisfied `.9.1.6`'s other
+    dependency. Exact task dependencies prove this Dart admission must close parent `.9.1.5` before Julia cursor
+    `.9.1.6` may activate. Retrieval reproduced the pre-edit 36 family / 18 edge / 8 parent-child / 14 Perl /
+    15 Rust / 66-file / 3-complete / 5-pending / 34-mutation boundary. The neutral authority now declares 15
+    exact Dart roles and locks the consumer, complete Dart test command, canonical tracked input, and optional
+    backend registration. Five new mutations cover every new topology/rollout seam.
+
+    `dart/test/rule_local_cursor_contract_test.dart` maps every declared role once and runs native default/AND,
+    normalized JSON, loaded spec, descriptor v1, emitted/generated v2 direct/trace, mixed parent-child, recursion,
+    both structural replacements, static option removal, primary retirement, and all eight portable diagnostic
+    codes. Focused analyze and admission pass. The complete registered Dart driver passes format over 61 files,
+    strict analysis, all 271 package tests, exact shared primary 65/65 in default and POSIX environments, and
+    corpus 105/105. Neutral governance now reports 67 owned migration files, 4 complete / 4 pending, and all 39
+    mutations rejected. Only Dart advances; Julia, Lua, recurring, and public no-drift remain pending. Knowledge
+    Map passes at 613 facts / 4,432 question keys; memory/task/all four doctrines, JSON, shell, whitespace, and
+    mdBook pass. Canonical local CI repeats Perl root consumers 7+5, Perl cursor admission 288, reference primary
+    65/65 in both environments, and Phase 0 1,031/1,031 in 613 seconds before exit 0. Cleanup removes the ignored
+    11 MB generated mdBook plus 28 KB Python bytecode cache. The clean commit remains the closeout boundary.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.5.6 - admit Dart rule-local cursor contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.6`
   Status: `pending`
@@ -7589,15 +7625,15 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 215.5 | `FUTURE-PARITY-BACKLOG.9.1.4.5` | `done` | Generated-source v2, exact family derivation/v1 rejection, recurring-role migration, and full signoff pass. |
 | 215.6 | `FUTURE-PARITY-BACKLOG.9.1.4.6` | `done` | Option/CLI/trace overrides are removed; exact 63x2, focused, canonical, docs, governance, and mutation proof pass. |
 | 215.7 | `FUTURE-PARITY-BACKLOG.9.1.4.7` | `done` | Fifteen-role Rust admission, complete Rust/canonical proof, and parent closeout pass. |
-| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `active` | Dependency-ordered Dart cursor rollout container; `.1-.4` are committed, `.5` has full signoff, and `.6` admission remains. |
+| 216 | `FUTURE-PARITY-BACKLOG.9.1.5` | `done` | All preflight/mechanism/removal leaves plus exact 15-role composed admission close at 4/4. |
 | 216.0 | `FUTURE-PARITY-BACKLOG.9.1.5.0` | `done` | Exact 11-path/non-token audit, 244/1 package boundary, 104/104 focused, 105/105 corpus, 30/63x2 primary baseline, and `.1-.6` split pass signoff. |
 | 216.1 | `FUTURE-PARITY-BACKLOG.9.1.5.1` | `done` | Typed family/bare-edge ownership, portable diagnostics, focused/full staged-boundary proof, and canonical signoff pass. |
 | 216.2 | `FUTURE-PARITY-BACKLOG.9.1.5.2` | `done` | Every normal live/loaded/reconstructed rule entry derives its own cursor and structural policy; full signoff passes. |
 | 216.3 | `FUTURE-PARITY-BACKLOG.9.1.5.3` | `done` | Cursor descriptor v1 projects normalized family/policy/ownership/edge/source facts and passes full signoff. |
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
-| 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `pending` | Compose Dart admission, advance only Dart, and close the parent. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | After root routes `.9.1.1.2.4.2`, align Julia native/reconstructed/generated/primary cursor roles. |
+| 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `done` | Exact 15-role topology, 39 mutations, package 271, primary 65x2, corpus 105, and Dart-only 4/4 promotion pass. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `pending` | After the clean Dart admission commit and committed root routes `.9.1.1.2.4.2`, align Julia native/reconstructed/generated/primary cursor roles. |
 | 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
@@ -7612,7 +7648,7 @@ complete and canonically verified. Its clean commit is the required boundary bef
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044`, neutral contract, and Perl `.9.1.3` reach 2/6; Rust preflight/gate `.0-.1` are done and normalization `.2` is next. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | ADR `0044` plus neutral, Perl, Rust, and Dart cursor admission reach 4/4; Julia `.9.1.6` follows the clean Dart commit. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -8266,7 +8302,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. Root selection is 4/7 after neutral, Perl, Rust, and Dart. Julia preflight `.4.0`, core `.4.1`,
-  and routes `.4.2` are signed off; the clean `.4.2` commit is the sole boundary before cursor `.9.1.6`, then exact
+  and routes `.4.2` are signed off; clean Dart cursor admission `.9.1.5.6` is the sole remaining boundary before `.9.1.6`, then exact
   root admission `.4.3`. Identical dependency-regex slot identity remains a non-blocking separate question
   with explicit post-admission owner `.9.1.8.1`.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -8281,14 +8317,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Julia root routes `.9.1.1.2.4.2` are fully signed off; their clean commit is the sole boundary before cursor
-  `.9.1.6`. Julia's 33 cursor-owned shared-primary failures are a dependency, not an unresolved test surprise:
+- None. Julia root routes `.9.1.1.2.4.2` and Dart admission `.9.1.5.6` are fully signed off; the clean Dart commit is
+  the sole boundary before cursor `.9.1.6`. Julia's 33 cursor-owned shared-primary failures are a dependency, not an unresolved test surprise:
   root routes precede cursor migration, and exact root admission `.4.3` follows it.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.5.6` | ADR/KM/neutral/Perl/Rust/Dart retrieval; exact 15-role once-only consumer; native/normalized/loaded/descriptor/emitted/generated/trace/mixed/recursive/structural/removal/primary/eight-diagnostic proof; canonical and backend-driver topology; focused consumer/analyzer; Dart format 61/0, analyzer, package 271, primary 65x2, corpus 105; neutral 36/18/8/14+15+15/67 at 4/4 plus 39 mutations; public/book/capability/live lockstep; KM 613/4,432; memory/task/four doctrines/JSON/shell/whitespace/mdBook; canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613s; generated 11 MB book plus 28 KB bytecode cleanup. | PASS. Only Dart advances, parent `.9.1.5` closes, and the clean commit precedes Julia `.9.1.6`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | Loaded/normalized/generated/emitted direct/traced invocation-local reuse; portable loader/generated zero/unknown errors; plan-first ordering; unchanged descriptor/generated v1 identity; routes 57, core 79, loader 82, emitter 59; package progression through cursor 56/57; shared primary 32/65 default/POSIX; corpus 105; root governance 4/7 plus 34 mutations; public/book/live lockstep; KM 612/4,421; mdBook; memory/task/four doctrines/whitespace; canonical pre-Phase-0 stages plus retained exact Phase 0 1,031/1,031 in 611s; generated book/Python-cache cleanup. | PASS. Composed Julia mechanisms are signed off without rollout promotion; clean commit precedes cursor `.9.1.6`, then topology admission `.4.3`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.0` | ADR/KM/admitted precedent; exact parser/validator/runtime/loader/normalized/generated/emitted/descriptor/diagnostic/trace/strict/zero/unknown probes; shared Julia primary 31/65 default and POSIX split as one root plus 33 cursor failures; current package help boundary 56/57; corpus 105; root governance 4/7 plus 34 mutations; roadmap 1/7 drift root cause/repair and `.6` enforcement owner; KM 609/4,390; memory/task/four doctrines/cursor/whitespace/mdBook; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 641s; generated book/cache/temp-log cleanup. | PASS. No Julia behavior/contract/capability/rollout change; safe order is root core `.4.1`, routes `.4.2`, cursor `.9.1.6`, then admission `.4.3`; clean commit is the only remaining boundary. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.3.3` | Exact ordered 15-role once-only consumer; no missing/duplicate/reordered/invented roles; canonical/package drivers; six shared primary ids; focused admission/core/routes/emitter 1+14; Dart format 60/0, analyzer, package 270, primary 65x2, corpus 105; root governance 8/3/3/5 at 4/3 plus 34 mutations; public/book/capability/live lockstep; KM 607/4,371; memory/four doctrines/whitespace; canonical Perl root 7+5, cursor 288, reference primary 65x2, Phase 0 1,031/1,031 in 656s. | PASS. Only Dart advances, reaching 4 complete / 3 pending; parent `.3` closes and Julia `.4` waits for this leaf's clean commit. |
@@ -8654,7 +8691,7 @@ Read-only evidence recorded on 2026-07-10:
   format 1 and label/family plans remain unchanged. Routes 57, core 79, loader 82, emitter 59, package progression
   through cursor 56/57, primary 32/65x2, corpus 105, root 34, KM 612/4,421, mdBook, four doctrines, canonical
   pre-gates, and exact Phase 0 1,031 in 611 seconds pass. Generated book/cache cleanup passes; rollout remains 4/7
-  and the clean commit is the only boundary before cursor `.9.1.6`.
+  and the clean commit returns to Dart admission `.9.1.5.6`; Julia cursor `.9.1.6` follows that parent closeout.
 - `2026-07-18`: Clean commit `6553a4c3` lands Julia root core `.4.1`; tree and brief are clean at ahead 220.
   Composed routes `.4.2` activate task-tree-first for one-resolver invocation locality, wrapped portable failures,
   effective selection trace/diagnostic attribution, immutable descriptor/generated identity, complete current

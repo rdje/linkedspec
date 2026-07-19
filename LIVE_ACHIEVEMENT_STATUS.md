@@ -8,14 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` — fully signed off after clean core commit `6553a4c3`. Loaded,
-  normalized/reconstructed, generated-plan, independently emitted, trace, and diagnostic routes reuse one
-  compiled resolver. Routes 57, core 79, loader 82, emitter 59, package progression through cursor 56/57, primary
-  32/65x2, corpus 105, root 34, KM 612/4,421, book/live sync, four doctrines, canonical pre-gates, exact Phase 0
-  1,031 in 611 seconds, and safe cleanup pass. Only commit/brief-clear/clean proof remain; do not promote rollout
-  or activate cursor `.9.1.6` before that clean boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.5.6` — final closeout after exact 15-role Dart consumer, backend/canonical topology,
+  package 271, primary 65x2, corpus 105, and neutral 67 files / 4 complete / 4 pending / 39 mutations pass.
+  KM 613/4,432, governance, mdBook, canonical Perl root 7+5, cursor 288, reference primary 65x2, and Phase 0
+  1,031/1,031 in 613 seconds pass. Only cleanup and the clean commit remain; Julia `.9.1.6` stays dependency-gated.
 
 ## Latest Completed Slice
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 — converge Julia root routes**
+  (DONE at clean commit `42c98dfe` — composed route signoff complete without rollout promotion).
+
+  **Result:** Loaded/normalized and generated/emitted direct/traced execution reuse the compiled root resolver.
+  Low trace attributes requested/effective/basis or portable failure stage/code; loader/generated zero/unknown
+  errors remain portable; plan-first ordering and generated v1 identity are unchanged.
+
+  **Proof:** Routes 57, core 79, loader 82, emitter 59, package cursor boundary 56/57, exact primary 32/65x2,
+  corpus 105, root 4/7 plus 34 mutations, KM 612/4,421, mdBook, four doctrines, canonical pre-gates, and exact
+  Phase 0 1,031/1,031 in 611 seconds pass. Generated book/Python cache cleanup passes.
+
+  **Next:** Exact dependencies require Dart cursor admission `.9.1.5.6` to close parent `.9.1.5` before Julia
+  cursor `.9.1.6`; root admission `.4.3` follows Julia.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.4.1 — implement Julia root resolution**
   (DONE at clean commit `6553a4c3` — core/native/descriptor signoff complete).
 

@@ -25,7 +25,9 @@ effective/basis trace, portable loader/generated failures, generated-plan-first 
 identity through 57 assertions. Shared primary is exactly 32/65 in both option environments, and corpus remains
 105/105. The 33
 remaining failures are exclusively the pending Julia cursor migration's legacy help/usage/request-trace
-`parse_mode` projection. Julia cursor `.9.1.6` therefore precedes final exact 65x2 root admission `.4.3`.
+`parse_mode` projection. Dart composed cursor admission `.9.1.5.6` now closes its backend parent with one exact
+15-role consumer, package 271, primary 65x2, corpus 105, and neutral 67-file / 4-of-8 / 39-mutation governance.
+Its clean commit precedes Julia cursor `.9.1.6`, which then precedes final exact 65x2 root admission `.4.3`.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 

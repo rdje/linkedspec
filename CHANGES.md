@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.5.6 — admit Dart rule-local cursor contract
+
+Dart now has one omission-sensitive, contract-declared rule-local cursor admission consumer. Its 15 roles execute
+exactly once across native default/AND, ordinary normalized JSON, loaded specs, descriptor v1, emitted/generated
+v2 direct and trace, mixed parent-child ownership, recursion, ordered-landmark and anchored-choice replacements,
+static global-option removal, primary-command retirement, and all eight portable diagnostics. Existing cursor,
+descriptor, generated-plan, and CLI semantics are unchanged; this slice composes and admits the committed pieces.
+
+The neutral checker locks every Dart role marker, the consumer path, the complete Dart test command, the tracked
+canonical input, and optional backend registration. Five new mutation cases reject any missing Dart topology or
+rollout seam. The consumer is itself a governed migration-token owner, so inventory moves from 66 to 67 files.
+Only `dart_backend` advances: rollout is now 4 complete / 4 pending with 39 rejected mutations.
+
+Focused admission and analysis pass. The registered Dart driver passes formatting over 61 files, strict analysis,
+all 271 package tests, exact shared primary 65/65 in default and POSIX environments, and corpus 105/105. Parent
+`.9.1.5` closes. Knowledge Map is 613/4,432; governance and mdBook pass; canonical CI repeats Perl root 7+5,
+cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613 seconds. Julia cursor `.9.1.6` follows only
+after this leaf's clean commit. Cleanup removes the ignored 11 MB generated book and 28 KB Python bytecode cache.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.4.2 — converge Julia root routes
 
 Julia loaded source and normalized-JSON reconstruction now have explicit route locks proving they preserve

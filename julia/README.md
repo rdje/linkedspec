@@ -24,8 +24,8 @@ its primary-arguments testset, while standalone corpus execution remains 105/105
 now make loaded, normalized, generated direct/traced, and independently emitted direct/traced execution reuse the
 same resolver. Low trace records requested/effective/basis, loader and generated wrappers preserve portable
 zero/unknown identities, plan validation remains first, and generated contract v1/format 1 plus the minimal
-label/family plan remain unchanged. Cursor `.9.1.6` precedes exact 65x2 root admission `.4.3`, so rollout remains
-4/7.
+label/family plan remain unchanged. Active Dart cursor admission `.9.1.5.6` must close its parent before Julia
+cursor `.9.1.6`; exact 65x2 root admission `.4.3` follows, so rollout remains 4/7.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing

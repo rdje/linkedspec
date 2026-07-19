@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.6` — composed admission proves topology, not a new cursor mechanism):
+  The six committed Dart mechanism leaves already owned semantics. Admission therefore adds one compact consumer
+  whose 15 contract-declared role functions execute exactly once and compose native default/AND, ordinary
+  normalized state, loaded specs, descriptor v1, emitted/generated v2 direct/trace, mixed parent-child,
+  recursion, both structural replacements, static removal, primary retirement, and all eight portable diagnostic
+  codes. It does not introduce another cursor field, plan format, or behavior branch.
+
+  The neutral checker now locks one role marker each, the consumer as a canonical tracked input, the complete Dart
+  test command, and optional backend-driver registration. Five new mutations cover role, consumer, canonical
+  driver, backend driver, and rollout drift. Because the new executable consumer itself names the retired
+  diagnostic surface, it is deliberately added to the migration inventory: the current exact boundary is 67
+  owned files, 4 complete / 4 pending, and 39 rejected mutations. Complete Dart proof is format 61/0, strict
+  analyzer, package 271, primary 65x2, and corpus 105/105 through the registered driver. Knowledge Map closes at
+  613/4,432; governance/mdBook pass; canonical CI repeats Perl root 7+5, cursor 288, reference primary 65x2, and
+  Phase 0 1,031/1,031 in 613 seconds.
+
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.5.6` — exact dependencies, not shortened resume prose, choose PNT):
+  Clean Julia root-route commit `42c98dfe` satisfies `.9.1.6`'s root dependency, but Julia cursor also depends on
+  the whole Dart parent `.9.1.5`. That parent remains active until its composed admission `.9.1.5.6` advances only
+  Dart from 3/5 and closes it. Therefore the legal order is Dart admission `.9.1.5.6`, Julia cursor `.9.1.6`, then
+  Julia root admission `.9.1.1.2.4.3`. Current continuity text and Julia root fact cards now record the full graph
+  so a later clean-boundary handoff cannot accidentally skip an earlier backend admission.
+
+  The mechanism boundary is already complete through Dart `.9.1.5.5`: normalization, live/loaded/normalized
+  execution, descriptor v1, generated-source v2, public/global option removal, package 260, primary 63x2, corpus
+  105, neutral inventory 66, rollout 3/5, and 34 mutations are committed. Active `.6` is topology/admission work,
+  not another semantic implementation leaf.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` — route adapters preserve selection, not reimplement it):
   Post-core probes found success routing was already mostly correct: loaded markerless source, normalized JSON,
   generated direct calls, and emitted modules all reached the new resolver. The remaining route defects were

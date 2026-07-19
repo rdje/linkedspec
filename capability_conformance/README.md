@@ -24,8 +24,8 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
 Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while
 `meta_contract_variants.rule_local_cursor_v1` requires `cursor_contract`, forbids `parse_mode`, and fixes the v1
-identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`, and Rust consumes it as of
-`.9.1.4.4`; later backends remain on the legacy variant until their dependency-ordered leaves.
+identity for migrated backends. Perl consumes that variant as of `.9.1.3.3`, Rust as of `.9.1.4.4`, and Dart as
+of `.9.1.5.3`; later backends remain on the legacy variant until their dependency-ordered leaves.
 Its `function_record_variants` object is the authoritative three-way union: fixed-v1 stores `params`/`arity`,
 variadic-v2 stores `signature`, and final-codeblock-v3 stores `params`/`arity` plus exact final-only
 `parameter_kinds`. `tools/check_callable_signature_contract.py` rejects schema/order/version/storage/policy drift.
@@ -38,15 +38,18 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 66-file migration inventory and rejects 34 representative semantic, topology,
+The checker currently owns an exact 67-file migration inventory and rejects 39 representative semantic, topology,
 diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
 runs that consumer. A separate 15-role Rust consumer composes native default/AND, ordinary serialized, loaded,
 descriptor-v1, emitted-v2, generated direct/trace, mixed/recursive, structural, static-removal, primary, and
 portable-diagnostic projections. The checker requires every role marker plus the canonical/default-to-optional-
-Rust driver topology. `neutral_contract_and_inventory`, `perl_reference`, and `rust_parity` are complete, so
-rollout is 3 complete / 5 pending; later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
+Rust driver topology. A separate 15-role Dart consumer composes native default/AND, normalized, loaded, descriptor,
+emitted/generated direct/trace, mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
+checker locks each marker, the complete Dart test command, canonical tracked input, and optional backend-driver
+registration. `neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, and `dart_backend` are complete,
+so rollout is 4 complete / 4 pending; later legs remain dependency-ordered. The shared generated-source-v1 capability ledger
 remains the convergence baseline for unmigrated backends while the cursor rollout advances each current emitter.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
@@ -77,8 +80,8 @@ one-or-more-rule sources, reports portable zero/unknown failures, and publishes 
 advancing rollout; native/root-primary proof is exactly 32/65 twice with only the 33 cursor-owned cases remaining.
 Julia route `.4.2` now proves loaded/normalized and generated/emitted direct/traced execution, low requested/
 effective/basis trace, portable loader/generated failures, plan-first rejection, and unchanged v1/format 1
-identity through 57 assertions. Cursor `.9.1.6`, Julia admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift
-leg `.6` remain pending. Current backend differences stay explicit in the inventory until their owning leaves
+identity through 57 assertions. Dart cursor admission `.9.1.5.6` is signed off; its clean commit precedes cursor `.9.1.6`. Julia
+admission `.4.3`, Lua/LuaJIT, and cross-backend no-drift leg `.6` remain pending. Current backend differences stay explicit in the inventory until their owning leaves
 land.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now

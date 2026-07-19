@@ -75,6 +75,11 @@ governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,
 not advance Julia's rollout row: cursor `.9.1.6` must first remove the 33 option/trace mismatches, after which
 topology admission `.4.3` owns exact 65x2 promotion.
 
+Task dependencies preserve backend order around that root work. Dart's composed cursor admission `.9.1.5.6` now
+locks one exact 15-role consumer, advances only Dart from 3/5 to 4/4, and closes `.9.1.5` after package 271,
+primary 65x2, and corpus 105. Its clean commit is the remaining boundary before Julia `.9.1.6` may begin; the
+clean Julia root-route commit already satisfies Julia cursor's separate root dependency.
+
 Rust and Dart root-selection admissions are omission-sensitive too. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
 descriptor, diagnostic, trace, and primary routes. Its checker requires one exact function marker per role, the
@@ -86,8 +91,10 @@ Rust cursor admission is also omission-sensitive. The neutral contract declares 
 checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package
 command in `tools/run_rust_local.sh`, and that optional Rust driver's registration in `tools/run_ci_local.sh`.
 The default canonical gate remains toolchain-independent; setting `LINKEDSPEC_RUN_RUST=1` executes the same complete
-Rust package that contains the consumer. The current cursor ledger is 3 complete / 5 pending with 68 governed
-migration files and 34 rejected drift mutations.
+Rust package that contains the consumer. Dart cursor admission applies the same omission-sensitive pattern: its
+15-role consumer is a tracked canonical input, `tools/run_dart_local.sh` runs the complete Dart suite containing
+it, and `LINKEDSPEC_RUN_DART=1` invokes that registered driver. The current cursor ledger is 4 complete / 4 pending
+with 67 governed migration files and 39 rejected drift mutations.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is

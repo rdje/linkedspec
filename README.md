@@ -6,7 +6,7 @@ mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 3 complete / 5 pending. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 4 complete / 4 pending. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
@@ -28,8 +28,9 @@ assertions, shared primary improves from 31/65 to exactly 32/65 in both option e
 105/105; the identical 33 remaining help/usage/request-trace failures belong to cursor migration `.9.1.6`.
 Composed Julia routes `.4.2` now prove loaded/normalized and generated/emitted direct/traced reuse, low
 requested/effective/basis trace, portable loader/generated zero/unknown failures, unchanged generated v1 identity,
-and generated-plan-first rejection in a 57-assertion suite. Cursor `.9.1.6` follows before exact 65x2 admission
-`.4.3`; Lua fallback remains blocked by validation, and root no-drift leg `.6` remains separately owned, so
+and generated-plan-first rejection in a 57-assertion suite. Dart cursor admission `.9.1.5.6` now closes its
+parent; after its clean commit, Julia cursor `.9.1.6`, then exact 65x2 root admission `.4.3` follows. Lua fallback remains blocked by
+validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
@@ -65,10 +66,11 @@ retains only ordered label/family plan rows, and derives cursor plus structure f
 traced, and fresh-loaded roles. A v1 artifact fails with exact contract identities and `.spec` regeneration
 guidance. Option/CLI removal `.9.1.5.5` now deletes the engine, loader, corpus, and staged-parser global override,
 retains only low-level matcher policy primitives, removes the help/request-trace field, and returns the targeted
-usage error for `--parse-mode`. The complete Dart package passes 260 tests, the shared primary matrix passes 63/63
-in both environments, corpus remains 105/105, and the governed inventory contracts to 66 files. Composed
-admission remains owned by `.9.1.5.6`. Canonical signoff repeats Perl cursor admission 288, reference primary
-63x2, and Phase 0 1,031/1,031 in 627 seconds.
+usage error for `--parse-mode`. Composed admission `.9.1.5.6` adds one exact contract-declared 15-role consumer
+across native, normalized, loaded, descriptor, emitted/generated, trace, mixed/recursive, structural, removal,
+primary, and portable-diagnostic projections. The complete Dart package passes 271 tests, the shared primary
+matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
+4 complete / 4 pending, and 39 rejected mutations.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

@@ -61,10 +61,11 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > global options, rejects primary `--parse-mode`, omits the request-trace field,
 > and passed the exact then-63-case primary manifest in both environments.
 > Root-selection route convergence and topology admission are complete under
-> `.9.1.1.2.3.2-.3`. Only composed Dart cursor admission remains `.9.1.5.6`.
-> Rollout is 3 complete / 5 pending, with Dart, Julia, Lua, recurring
-> five-backend, and public no-drift work dependency-ordered under `.9.1.5-.9`;
-> the current governed inventory is 66 files with 34 effective mutations.
+> `.9.1.1.2.3.2-.3`. Composed cursor admission `.9.1.5.6` now adds one exact
+> 15-role Dart consumer and closes its backend parent.
+> Rollout is 4 complete / 4 pending, with Julia, Lua, recurring five-backend,
+> and public no-drift work dependency-ordered under `.9.1.6-.9`; the current
+> governed inventory is 67 files with 39 effective mutations.
 
 ## Current rule-label surface
 
@@ -728,13 +729,13 @@ version-1 artifacts must be regenerated. Bare-edge source, per-rule `family`,
 in Perl and Rust are current. Primary-command/API removal is also current in both backends.
 In Dart, authored family identity, typed bare edges, family-derived ownership, compiled action/blind lowering,
 the six neutral normalization/validation diagnostics, live/reconstructed policy spending, descriptor-v1
-projection, generated-source-v2 reconstruction, and public option/CLI removal are current. Only composed
-admission remains `.9.1.5.6`.
+projection, generated-source-v2 reconstruction, and public option/CLI removal are current and admitted.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/
 AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
-neutral checker requires every declared role and canonical registration. It
+neutral checker requires every declared role and canonical registration. Dart adds its own 15-role native/
+normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
 currently reports 36 family spellings, 18 edge cases, eight parent/child cases,
-66 migration files, 3 complete / 5 pending, and 34 rejected drift mutations.
+67 migration files, 4 complete / 4 pending, and 39 rejected drift mutations.

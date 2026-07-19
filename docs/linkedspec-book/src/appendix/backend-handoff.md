@@ -2054,10 +2054,11 @@ with exact contract identities and `.spec` regeneration guidance.
 Dart's public execution boundary is now rule-local too. `LinkedSpecRuntimeEngine(compiled)`,
 `loaded.createEngine()`, corpus execution, and the staged function parser expose no caller-global mode. The
 primary command omits the option and request-trace field, while retired `--parse-mode` invocations return the
-exact structural-migration usage error. Complete Dart cursor proof is 260 package tests, the then-63-case primary
-manifest in both environments, and 105/105 corpus fixtures. Root-selection leaf `.9.1.1.2.3` owns convergence to
-the current 65-case manifest. Canonical cursor signoff passed Perl admission 288, reference primary 63x2,
-and Phase 0 1,031/1,031 in 627 seconds; composed cursor admission remains the next Dart leaf.
+exact structural-migration usage error. One exact 15-role consumer now composes native, normalized, loaded,
+descriptor, emitted/generated, trace, mixed/recursive, structural, removal, primary, and all portable diagnostic
+roles once. Complete Dart cursor proof is 271 package tests, the current 65-case primary manifest in both
+environments, and 105/105 corpus fixtures. Neutral governance is 67 files, 4 complete / 4 pending, and 39
+mutations; parent `.9.1.5` is closed and Julia follows the clean admission commit.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

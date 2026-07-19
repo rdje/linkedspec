@@ -162,6 +162,28 @@
       "portable_diagnostics"
     ]
   },
+  "dart_backend_admission": {
+    "consumer_path": "dart/test/rule_local_cursor_contract_test.dart",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_dart_local.sh",
+    "roles": [
+      "native_default_family",
+      "native_and_family",
+      "ordinary_normalized",
+      "loaded_spec",
+      "descriptor_v1",
+      "emitted_source_v2",
+      "generated_direct",
+      "generated_trace",
+      "mixed_parent_child",
+      "recursion",
+      "structural_ordered_landmarks",
+      "structural_anchored_choice",
+      "static_option_removal",
+      "primary_command",
+      "portable_diagnostics"
+    ]
+  },
   "diagnostics": [
     {"code": "parse_mode_override_removed", "stage": "prepare_options", "fields": ["option_name"]},
     {"code": "bare_edge_target_undefined", "stage": "normalize_edges", "fields": ["rule_label", "target"]},
@@ -175,12 +197,12 @@
   "migration_inventory": {
     "token_patterns": ["parse_mode", "parseMode", "parse-mode"],
     "scan_roots": ["README.md", "TOOLBOX.md", "USER_GUIDE.md", "bin", "perl", "rust", "dart", "julia", "lua", "capability_conformance", "cli_conformance", "t", "tools", "docs/linkedspec-book/src"],
-    "expected_file_count": 66,
+    "expected_file_count": 67,
     "groups": [
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.2", "kind": "neutral_contract_and_shared_authority", "action": "define exact future semantics and keep current generated/descriptor authorities explicitly versioned until backend migration", "paths": ["capability_conformance/README.md", "capability_conformance/generated_source_contract.json", "capability_conformance/manifest.json", "capability_conformance/outward_descriptor_contract.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_callable_signature_contract.py", "tools/check_generated_source_contract.pl", "tools/check_julia_primary_cli.sh", "tools/check_rule_local_cursor_contract.py"]},
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.3", "kind": "perl_reference", "action": "derive family policy, normalize edges, remove public override, migrate descriptor/emitted/generated/primary roles, and migrate the shared manifest plus exact help/usage/trace expectations with the canonical Perl reference so main stays green", "paths": ["bin/linkedspec", "cli_conformance/manifest.json", "perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/GeneratedSource.pm", "t/generated_source_contract.t", "t/phase0_regression.t", "t/rule_local_cursor_perl_execution.t"]},
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.4", "kind": "rust_backend", "action": "remove ExecutionOptions/runtime override and blind-call special case; migrate parsed, serialized, generated, descriptor, test, primary, and backend-public roles", "paths": ["rust/README.md", "rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/tests/types_test.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/primary_cli.rs", "rust/linkedspec-runtime/tests/rule_local_cursor_execution.rs", "rust/linkedspec-runtime/tests/source_emitter.rs"]},
-      {"owner": "FUTURE-PARITY-BACKLOG.9.1.5", "kind": "dart_backend", "action": "replace engine-wide mode, normalize edges, remove options, and migrate compiled, reconstructed, loaded, test, corpus, primary, and public-guidance roles", "paths": ["dart/README.md", "dart/lib/src/cli/primary_cli.dart", "dart/lib/src/parser/spec_parser.dart", "dart/lib/src/runtime/interpreter.dart", "dart/lib/src/runtime/matching.dart", "dart/test/primary_cli_test.dart", "dart/test/rule_local_cursor_descriptor_test.dart", "dart/test/rule_local_cursor_execution_test.dart", "dart/test/runtime_matching_test.dart"]},
+      {"owner": "FUTURE-PARITY-BACKLOG.9.1.5", "kind": "dart_backend", "action": "replace engine-wide mode, normalize edges, remove options, and migrate compiled, reconstructed, loaded, test, corpus, primary, and public-guidance roles", "paths": ["dart/README.md", "dart/lib/src/cli/primary_cli.dart", "dart/lib/src/parser/spec_parser.dart", "dart/lib/src/runtime/interpreter.dart", "dart/lib/src/runtime/matching.dart", "dart/test/primary_cli_test.dart", "dart/test/rule_local_cursor_contract_test.dart", "dart/test/rule_local_cursor_descriptor_test.dart", "dart/test/rule_local_cursor_execution_test.dart", "dart/test/runtime_matching_test.dart"]},
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.6", "kind": "julia_backend", "action": "replace engine-wide mode, normalize edges, remove options, and migrate emitted, reconstructed, loaded, test, corpus, and primary roles", "paths": ["julia/src/LinkedSpecJulia.jl", "julia/src/cli/LinkedSpecJuliaCli.jl", "julia/src/compiler/CompiledSpec.jl", "julia/src/corpus/CorpusManifest.jl", "julia/src/io/SpecLoader.jl", "julia/src/runtime/Interpreter.jl", "julia/src/runtime/Matching.jl", "julia/src/spec/Parser.jl", "julia/test/runtests.jl"]},
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.7", "kind": "lua_backend", "action": "replace engine-wide mode on both ABIs, normalize edges, remove options, and migrate reconstructed, emitted, loaded, test, corpus, and primary roles", "paths": ["lua/README.md", "lua/src/linkedspec/compiled_spec.lua", "lua/src/linkedspec/corpus.lua", "lua/src/linkedspec/interpreter.lua", "lua/src/linkedspec/matching.lua", "lua/src/linkedspec/primary_cli.lua", "lua/src/linkedspec/spec_parser.lua", "lua/test/run.lua"]},
       {"owner": "FUTURE-PARITY-BACKLOG.9.1.8", "kind": "shared_cli_and_admission", "action": "close shared CLI documentation and prove the already reference-migrated primary contract plus all native/generated/descriptor legs symmetrically", "paths": ["cli_conformance/README.md"]},
@@ -191,7 +213,7 @@
     {"leg": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.2"},
     {"leg": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.3"},
     {"leg": "rust_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.4"},
-    {"leg": "dart_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.5"},
+    {"leg": "dart_backend", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.5"},
     {"leg": "julia_backend", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.6"},
     {"leg": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.7"},
     {"leg": "recurring_five_backend_gate", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8"},

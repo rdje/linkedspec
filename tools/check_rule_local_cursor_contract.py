@@ -53,7 +53,7 @@ ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.9.1.2"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.3"),
     ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.9.1.4"),
-    ("dart_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.5"),
+    ("dart_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.5"),
     ("julia_backend", "pending", "FUTURE-PARITY-BACKLOG.9.1.6"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.7"),
     ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.9.1.8"),
@@ -87,6 +87,28 @@ RUST_PARITY_ADMISSION = {
         "native_default_family",
         "native_and_family",
         "ordinary_serialized",
+        "loaded_spec",
+        "descriptor_v1",
+        "emitted_source_v2",
+        "generated_direct",
+        "generated_trace",
+        "mixed_parent_child",
+        "recursion",
+        "structural_ordered_landmarks",
+        "structural_anchored_choice",
+        "static_option_removal",
+        "primary_command",
+        "portable_diagnostics",
+    ],
+}
+DART_BACKEND_ADMISSION = {
+    "consumer_path": "dart/test/rule_local_cursor_contract_test.dart",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_dart_local.sh",
+    "roles": [
+        "native_default_family",
+        "native_and_family",
+        "ordinary_normalized",
         "loaded_spec",
         "descriptor_v1",
         "emitted_source_v2",
@@ -278,6 +300,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "generated_source_v2",
             "perl_reference_admission",
             "rust_parity_admission",
+            "dart_backend_admission",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -561,6 +584,36 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if backend_invocation not in rust_canonical_text:
         fail("canonical driver omits the registered Rust backend driver")
 
+    dart_admission = require_fields(
+        contract["dart_backend_admission"],
+        {"consumer_path", "canonical_driver", "backend_driver", "roles"},
+        "Dart backend admission",
+    )
+    if dart_admission != DART_BACKEND_ADMISSION:
+        fail("Dart backend admission topology drifted")
+    dart_consumer_path = ROOT / dart_admission["consumer_path"]
+    dart_canonical_path = ROOT / dart_admission["canonical_driver"]
+    dart_backend_path = ROOT / dart_admission["backend_driver"]
+    if not all(
+        path.is_file()
+        for path in (dart_consumer_path, dart_canonical_path, dart_backend_path)
+    ):
+        fail("Dart backend admission consumer or driver is missing")
+    dart_consumer_text = dart_consumer_path.read_text(encoding="utf-8")
+    for role in dart_admission["roles"]:
+        marker = re.compile(rf"^void role_{re.escape(role)}\(", re.MULTILINE)
+        if len(marker.findall(dart_consumer_text)) != 1:
+            fail(f"Dart backend admission role marker drifted: {role}")
+    dart_canonical_text = dart_canonical_path.read_text(encoding="utf-8")
+    if f"require_tracked_file {dart_admission['consumer_path']}" not in dart_canonical_text:
+        fail("canonical driver omits the Dart backend admission consumer")
+    dart_backend_text = dart_backend_path.read_text(encoding="utf-8")
+    if '"$DART_CMD" test' not in dart_backend_text:
+        fail("Dart backend driver omits the test suite containing cursor admission")
+    backend_invocation = f'bash "$REPO_ROOT/{dart_admission["backend_driver"]}"'
+    if backend_invocation not in dart_canonical_text:
+        fail("canonical driver omits the registered Dart backend driver")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -651,6 +704,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Rust admission consumer", lambda c: c["rust_parity_admission"].__setitem__("consumer_path", "missing")),
         ("Rust admission canonical driver", lambda c: c["rust_parity_admission"].__setitem__("canonical_driver", "missing")),
         ("Rust admission driver", lambda c: c["rust_parity_admission"].__setitem__("backend_driver", "missing")),
+        ("Dart admission role", lambda c: c["dart_backend_admission"]["roles"].pop()),
+        ("Dart admission consumer", lambda c: c["dart_backend_admission"].__setitem__("consumer_path", "missing")),
+        ("Dart admission canonical driver", lambda c: c["dart_backend_admission"].__setitem__("canonical_driver", "missing")),
+        ("Dart admission driver", lambda c: c["dart_backend_admission"].__setitem__("backend_driver", "missing")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -660,6 +717,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("rollout_removed", lambda c: c["rollout"].pop()),
         ("rollout_admission", lambda c: c["rollout"][1].__setitem__("status", "pending")),
         ("Rust rollout admission", lambda c: c["rollout"][2].__setitem__("status", "pending")),
+        ("Dart rollout admission", lambda c: c["rollout"][3].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -679,6 +737,7 @@ def main() -> int:
         f"{len(contract['parent_child_cases'])} parent/child cases; "
         f"{len(contract['perl_reference_admission']['roles'])} Perl admission roles; "
         f"{len(contract['rust_parity_admission']['roles'])} Rust admission roles; "
+        f"{len(contract['dart_backend_admission']['roles'])} Dart admission roles; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )
