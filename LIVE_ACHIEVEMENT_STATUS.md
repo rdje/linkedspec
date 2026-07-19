@@ -8,15 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.6` — Exact dual-ABI Lua cursor admission is signoff-complete from clean
-  option-removal commit `e96d389e` at ahead 239. One contract-declared 15-role consumer now passes 119/119 from
-  identical source on PUC Lua and LuaJIT after exact pre-contract 3/3 failures per ABI. The complete driver passes
-  package 177/177 per ABI, primary 65/65 across all four ABI/default-POSIX legs, and corpus 105/105 per ABI.
-  Governance is 69 files / 6 complete + 2 pending / 49 mutations; adjacent gates, KM 632/4,642, mdBook/four
-  doctrines, and canonical Phase 0 1,031/1,031 in 647 seconds pass. Safe cleanup passes. The commit is prepared;
-  root admission `.9.1.1.2.5.3` stays untouched until the clean boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` — Exact dual-ABI Lua root-selection admission and parent `.5` are signoff-
+  complete from clean cursor commit `7dd70a2d` at ahead 240. Exact 3/3x2 topology RED becomes 139/139x2; package
+  177/177x2, primary 65/65x4, corpus 105/105x2, root 6/1/44, KM 633/4,653, mdBook/four doctrines, and canonical
+  Phase 0 1,031/1,031 in 641 seconds pass. Safe cleanup is complete; the commit is prepared before `.6`.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.6 — admit Lua rule-local cursor contract**
+  (DONE at clean commit `7dd70a2d`).
+
+  **Result:** One contract-declared 15-role consumer runs identical source on PUC Lua and LuaJIT without adding a
+  semantic route. Only Lua advances to 69 files / 6 complete + 2 pending / 49 mutations; parent `.9.1.7` closes.
+
+  **Proof:** Exact 3/3x2 pre-contract RED becomes 119/119x2; package 177/177x2, primary 65/65x4, corpus 105/105x2,
+  KM 632/4,642, mdBook/four doctrines, and canonical Phase 0 1,031/1,031 in 647 seconds pass. Cleanup passes.
+
+  **Next:** Lua root topology admission `.9.1.1.2.5.3` is active task-tree-first from the clean commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.5 — remove Lua global cursor overrides**
   (DONE at clean commit `e96d389e`).
 

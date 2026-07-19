@@ -32,6 +32,7 @@ TOP_LEVEL_FIELDS = {
     "rust_admission",
     "dart_admission",
     "julia_admission",
+    "lua_admission",
     "implementation_inventory",
     "rollout",
 }
@@ -133,7 +134,7 @@ ROLLOUT = [
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.2"),
     ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.3"),
     ("julia", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.4"),
-    ("lua", "pending", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
+    ("lua", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
     (
         "admission_and_public_no_drift",
         "pending",
@@ -204,6 +205,36 @@ JULIA_ADMISSION = {
     "consumer_path": "julia/test/root_rule_selection_admission_test.jl",
     "canonical_driver": "tools/run_ci_local.sh",
     "backend_driver": "tools/run_julia_local.sh",
+    "roles": [
+        "neutral_selection",
+        "neutral_failures",
+        "neutral_strict",
+        "native",
+        "loaded",
+        "reconstructed",
+        "generated_direct",
+        "generated_traced",
+        "emitted_source_direct",
+        "emitted_source_traced",
+        "descriptor",
+        "diagnostic",
+        "runtime_trace",
+        "primary_cli",
+        "primary_request_trace",
+    ],
+    "primary_case_ids": [
+        "success_default_first_authored_marker",
+        "success_markerless_first_authored_rule",
+        "success_explicit_top_rule",
+        "failure_invocation_missing_top_rule",
+        "trace_stdout_medium",
+        "trace_failure_invoke_escaped_field",
+    ],
+}
+LUA_ADMISSION = {
+    "consumer_path": "lua/test/root_rule_selection_admission_test.lua",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "backend_driver": "tools/run_lua_local.sh",
     "roles": [
         "neutral_selection",
         "neutral_failures",
@@ -351,7 +382,7 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
         "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
-        "capability_conformance/README.md": [CONTRACT_ID, "5 complete / 2 pending"],
+        "capability_conformance/README.md": [CONTRACT_ID, "6 complete / 1 pending"],
         "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
         "t/root_rule_selection_perl_core.t": [
             "selection_cases",
@@ -676,6 +707,75 @@ def validate_julia_admission(
     )
 
 
+def validate_lua_admission(
+    contract: dict[str, Any], *, check_filesystem: bool
+) -> None:
+    admission = require_fields(
+        contract["lua_admission"],
+        {
+            "consumer_path",
+            "canonical_driver",
+            "backend_driver",
+            "roles",
+            "primary_case_ids",
+        },
+        "Lua admission",
+    )
+    require(admission == LUA_ADMISSION, "Lua admission topology drifted")
+    if not check_filesystem:
+        return
+
+    consumer_path = ROOT / admission["consumer_path"]
+    canonical_path = ROOT / admission["canonical_driver"]
+    backend_path = ROOT / admission["backend_driver"]
+    require(
+        all(path.is_file() for path in (consumer_path, canonical_path, backend_path)),
+        "Lua admission consumer or driver is missing",
+    )
+
+    consumer_text = consumer_path.read_text(encoding="utf-8")
+    source_roles = re.findall(
+        r"^local function role_([A-Za-z0-9_]+)\(", consumer_text, re.MULTILINE
+    )
+    require(
+        source_roles == admission["roles"],
+        "Lua admission source role order or inventory drifted",
+    )
+    for role in admission["roles"]:
+        marker = re.compile(rf"^local function role_{re.escape(role)}\(", re.MULTILINE)
+        require(
+            len(marker.findall(consumer_text)) == 1,
+            f"Lua admission role marker drifted: {role}",
+        )
+
+    canonical_text = canonical_path.read_text(encoding="utf-8")
+    require(
+        f"require_tracked_file {admission['consumer_path']}" in canonical_text,
+        "canonical driver omits the Lua admission consumer",
+    )
+    require(
+        f'bash "$REPO_ROOT/{admission["backend_driver"]}"' in canonical_text,
+        "canonical driver omits the registered Lua backend driver",
+    )
+    backend_text = backend_path.read_text(encoding="utf-8")
+    require(
+        backend_text.count('"$LUA_CMD" lua/test/root_rule_selection_admission_test.lua') == 1,
+        "Lua backend driver omits the PUC Lua admission consumer",
+    )
+    require(
+        backend_text.count('"$LUAJIT_CMD" lua/test/root_rule_selection_admission_test.lua') == 1,
+        "Lua backend driver omits the LuaJIT admission consumer",
+    )
+
+    manifest_path = ROOT / "cli_conformance" / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest_ids = {case["id"] for case in manifest["cases"]}
+    require(
+        set(admission["primary_case_ids"]) <= manifest_ids,
+        "Lua admission primary case identity is missing from the shared manifest",
+    )
+
+
 def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True) -> None:
     require_fields(contract, TOP_LEVEL_FIELDS, "contract")
     require(contract["format"] == 1, "format drifted")
@@ -802,6 +902,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     validate_rust_admission(contract, check_filesystem=check_filesystem)
     validate_dart_admission(contract, check_filesystem=check_filesystem)
     validate_julia_admission(contract, check_filesystem=check_filesystem)
+    validate_lua_admission(contract, check_filesystem=check_filesystem)
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list) and len(inventory) == 5, "implementation inventory count drifted")
@@ -979,6 +1080,20 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda value: value["julia_admission"].__setitem__("canonical_driver", "missing"),
         ),
         ("regressed Julia rollout", lambda value: value["rollout"][4].__setitem__("status", "pending")),
+        ("Lua admission role", lambda value: value["lua_admission"]["roles"].pop()),
+        (
+            "Lua admission consumer",
+            lambda value: value["lua_admission"].__setitem__("consumer_path", "missing"),
+        ),
+        (
+            "Lua admission primary case",
+            lambda value: value["lua_admission"]["primary_case_ids"].pop(),
+        ),
+        (
+            "Lua admission canonical driver",
+            lambda value: value["lua_admission"].__setitem__("canonical_driver", "missing"),
+        ),
+        ("regressed Lua rollout", lambda value: value["rollout"][5].__setitem__("status", "pending")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

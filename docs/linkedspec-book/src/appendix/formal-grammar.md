@@ -188,8 +188,8 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 5 complete / 2 pending, the neutral contract plus composed Perl, Rust, Dart, and Julia backends are
-executable but full backend parity is not yet uniform. All four accept markerless one-or-more-rule sources, apply the exact precedence
+At rollout 6 complete / 1 pending, the neutral contract plus composed Perl, Rust, Dart, Julia, and dual-ABI Lua
+backends are admitted; final recurring/public no-drift remains. All five accept markerless one-or-more-rule sources, apply the exact precedence
 above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
 explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
 per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,
@@ -214,14 +214,14 @@ Julia cursor implementation through `.9.1.6.5` removes the legacy help/usage/tra
 entry selection, so exact shared primary is 65/65 in both environments. Root admission `.4.3` composes all 15
 declared roles once; its authored marked/markerless selection fixtures use `I` returns to prove entered-rule
 identity directly. Focused admission is 137, package proof is 3,428, corpus is 105/105, and the checker rejects 39
-mutations. Lua core `.5.1` now accepts markerless source on both ABIs, resolves the same order before runtime
+mutations. Lua core `.5.1` accepts markerless source on both ABIs, resolves the same order before runtime
 context/user code, returns portable zero/unknown failures, preserves authored descriptor identity, and passes 99
 focused assertions per ABI. Route `.5.2` proves loaded/normalized and generated-v1/emitted direct/traced reuse,
 portable loader/generated failures, plan-first ordering, and low selection trace in 101 assertions per ABI without
-widening the minimal plan or changing v1/format-1 identity. All four default/POSIX primary legs remain exactly
-32/65; the remaining 33 mismatches are owned by cursor migration. Cursor `.9.1.7` and exact admission `.5.3`
-remain dependency-ordered. Until `.5-.6` close, retain a `::` for uniformly admitted composed cross-backend
-execution and pass an explicit selector when identity matters.
+widening the minimal plan. Cursor `.9.1.7` advances emitted source to v2 and closes the former 33 primary
+mismatches. Exact admission `.5.3` then runs one 15-role source on both ABIs at 139/139x2, package 177/177x2,
+primary 65/65x4, corpus 105/105x2, and 44 rejected mutations. Pass an explicit selector when identity matters;
+otherwise first marker then first rule is now backend-admitted behavior.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.

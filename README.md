@@ -12,8 +12,8 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The neutral decision plus composed Perl, Rust, Dart, and Julia backends are complete at 5/7, with 39 drift
-mutations. All four apply
+The neutral decision plus composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends are complete at 6/7, with
+44 drift mutations. All five apply
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust and Dart each have one omission-sensitive 15-role admission consumer and exact
@@ -46,9 +46,10 @@ analysis, and publishes immutable descriptor identity on PUC Lua and LuaJIT. Its
 assertions per ABI, shared primary moves from 31/65 to exactly 32/65 in all four ABI/environment legs, and corpus
 remains 105/105 per ABI. Composed route `.5.2` now proves loaded/reconstructed and generated-v1/emitted direct/
 traced reuse, low selection trace, portable loader/generated failures, and plan-validation-first order in 101
-assertions per ABI without changing contract v1/format 1 or the minimal plan. Cursor remains `.9.1.7`, topology
-admission remains `.5.3`, and root no-drift `.6` is separately owned, so rollout stays 5/7. Route closeout passes
-canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds.
+assertions per ABI without changing contract v1/format 1 or the minimal plan. Cursor `.9.1.7` is complete, and
+one exact shared-source 15-role consumer now admits Lua root selection on PUC Lua and LuaJIT. Exact topology RED
+3/3x2 becomes 139/139x2; package 177/177x2, primary 65/65x4, corpus 105/105x2, and 44 drift mutations pass.
+Canonical Phase 0 is 1,031/1,031 in 641 seconds. Only final public no-drift `.6` remains, so rollout is 6/7.
 Behavior-free Lua cursor preflight `.9.1.7.0` now fixes the exact dual-ABI starting boundary. PUC Lua and LuaJIT
 both parse all 36 family headers, classify 34 correctly because compact `|` is still AND, and agree with only the
 22 globally seeking runtime rows. Expected-success edge normalization is 5/13 and ownership-set normalization is
@@ -100,8 +101,8 @@ native/default-AND, normalized, loaded, descriptor-v1, emitted/generated-v2, tra
 removal, primary, and diagnostic topology once on PUC Lua and once on LuaJIT. Exact pre-contract RED is 3/3 per
 ABI and green is 119/119 per ABI. Complete package is 177/177x2, primary is 65/65x4, corpus is 105/105x2, and
 governance advances only Lua to 69 files / 6 complete + 2 pending / 49 mutations. Canonical signoff passes
-through Phase 0 1,031/1,031 in 647 seconds; the clean commit remains before the separate Lua root-selection
-admission activates.
+through Phase 0 1,031/1,031 in 647 seconds. Clean cursor commit `7dd70a2d` activates exact dual-ABI root-selection
+admission `.9.1.1.2.5.3` task-tree-first.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
@@ -720,9 +721,9 @@ content migration exists yet.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
   packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
-  registration, exact primary cases, rollout, and omission mutations. Dart admission has the same exact 15-role
-  topology and package-wide driver proof; Julia is admitted and Lua core is implemented while its composed routes
-  and admission remain staged.
+  registration, exact primary cases, rollout, and omission mutations. Dart and Julia admission have the same
+  exact 15-role topology and package-wide driver proof. Lua is admitted by one shared consumer source run on PUC
+  Lua and LuaJIT; root governance is now 6/1/44 with only final public no-drift pending.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.

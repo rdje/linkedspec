@@ -138,12 +138,13 @@ Descriptor state is still global-mode, generated source is v1, package execution
 32/65 twice, corpus is 105/105, and cursor governance remains 67 files / 4 complete / 4 pending / 39 mutations.
 No executable behavior changes in `.0`; `.1-.6` isolate old v1 semantics until the generated-v2 leaf owns the bump.
 
-Rust, Dart, and Julia root-selection admissions are omission-sensitive. The neutral contract declares one 15-role
+Rust, Dart, Julia, and Lua root-selection admissions are omission-sensitive. The neutral contract declares one 15-role
 consumer per backend over selection/failure/strict rows plus native, loaded/reconstructed, generated/emitted,
 descriptor, diagnostic, trace, and primary routes. Its checker requires one exact function marker per role, the
 six shared root-selection/request-trace primary case identities, each tracked canonical input, the complete
 backend-package driver, and optional canonical registration. Julia additionally locks inclusion from
-`julia/test/runtests.jl`; 39 mutations reject semantic, topology, inventory, and rollout drift. Its authored
+`julia/test/runtests.jl`. Lua uses one shared consumer source and requires distinct PUC Lua and LuaJIT driver
+invocations. With Lua admitted, 44 mutations reject semantic, topology, inventory, and rollout drift. Authored
 selection fixtures return from `I`, distinguishing entered-rule proof from a coincidentally equal successful `E`
 result, while the fixed shared request-trace fixture retains its canonical source bytes.
 

@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` — Lua root admission is shared topology, not another resolver):
+  Lua core, route, generated-v2, cursor, descriptor, diagnostic, trace, and primary mechanisms were already exact.
+  Admission therefore adds one consumer source and executes it unchanged on PUC Lua and LuaJIT. Its declared and
+  completed role sets must equal the contract's ordered 15-role inventory; duplicates, omissions, invented roles,
+  reordering, missing drivers, and missing primary identities fail governance.
+
+  New selection-focused sources return from lifecycle `I` because that observes entry before the rule's own
+  regex. A successful `E` return can look identical after matching and is weaker evidence. The canonical shared
+  request-trace source is a protocol fixture, so it deliberately retains its byte-identical `E` form.
+
+  Before the admission object existed, the consumer failed exactly 3/3 topology assertions per ABI. Green proof
+  is 139/139x2, complete package 177/177x2, primary 65/65x4, corpus 105/105x2, and root governance 6+1/44. Five
+  new mutations cover the Lua role list, consumer, primary case set, canonical driver, and rollout row. Only Lua
+  advances; final recurring/public no-drift remains `.9.1.1.2.6`. KM 633/4,653, mdBook/four doctrines, and
+  canonical root 7+5 / cursor 288 / primary 65x2 / Phase 0 1,031 in 641 seconds pass. The safe cleanup boundary
+  removes book/Python/Julia-compiled caches and four closed repo-local logs, preserving depot content, tracked
+  `rgx` evidence, and unrelated temp artifacts.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.6` — dual-ABI admission is one topology, not two semantic paths):
   Lua normalization, runtime, descriptor, generated-v2, removal, primary, and diagnostic owners were already
   independently green through `.1-.5`. Admission therefore adds one contract-declared orchestrator and runs that

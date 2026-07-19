@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.3 — admit dual-ABI Lua root selection
+
+Lua root-rule selection is now composed-admitted on PUC Lua and LuaJIT. One shared-source consumer executes the
+contract's exact 15 roles once: neutral selection, failures, strict behavior, native, loaded, reconstructed,
+generated direct/traced, emitted-source direct/traced, descriptor, diagnostic, runtime trace, primary command,
+and primary request trace. It adds no resolver or runtime path.
+
+Hand-authored selection sources return distinct lifecycle-`I` values so the result proves which rule was entered
+before matching. The fixed shared request-trace source remains byte-identical and retains `E`. The checker locks
+the consumer, ordered role markers, both ABI driver invocations, canonical tracked input/optional driver, six
+shared primary cases, Lua rollout, and five new omission mutations. Only Lua advances root governance from
+5 complete / 2 pending / 39 mutations to 6 complete / 1 pending / 44 mutations.
+
+Exact pre-contract topology RED is 3/3 per ABI and green is 139/139 per ABI. Complete package proof is 177/177
+per ABI; primary is 65/65 in all four ABI/default-POSIX legs; corpus is 105/105 per ABI. Final public no-drift
+`.9.1.1.2.6` remains separately owned. Knowledge Map generation is 633 facts / 4,653 question keys; mdBook and all
+four doctrines pass. Canonical local CI closes with root 7+5, cursor 288, primary 65/65x2, and Phase 0
+1,031/1,031 in 641 seconds. Cleanup removes the 11 MiB generated book, Python cache, 147 MiB dedicated Julia
+compiled cache, and four completed LinkedSpec proof logs while preserving depot source, tracked `rgx` evidence,
+and unrelated temporary files.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.6 — admit Lua rule-local cursor contract
 
 Lua is now composed-admitted against `linkedspec-rule-local-cursor-v1` on both supported ABIs. One contract-

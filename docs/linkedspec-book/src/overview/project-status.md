@@ -6,11 +6,11 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
 authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract rejects 39 drift mutations, so rollout is 5 complete / 2 pending. Composed
-Perl, Rust, Dart, and Julia backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
+backend-neutral executable contract rejects 44 drift mutations, so rollout is 6 complete / 1 pending. Composed
+Perl, Rust, Dart, Julia, and dual-ABI Lua backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
 marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
-markerless, explicit/unknown, and request-trace outcomes. Rust, Dart, and Julia additionally have topology-checked
+markerless, explicit/unknown, and request-trace outcomes. Rust, Dart, Julia, and Lua additionally have topology-checked
 15-role consumers that each execute every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
 one-or-more-rule sources, resolves explicit > first marker > first rule once before user code, reports portable
 zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Route
@@ -39,11 +39,11 @@ primary global ownership, returns targeted API/CLI diagnostics, omits the help/r
 adds a separate exact 15-role root-selection consumer over every neutral/native/composed/diagnostic/trace/primary
 route; authored selection fixtures return from entry lifecycle `I` so their distinct results prove which rule was
 entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/105, cursor governance remains
-67/5+3/44 at Julia admission, and root governance is 5/7 plus 39 rejected mutations. Julia root parent `.4` is
-complete. Lua/LuaJIT public-option removal and composed cursor admission are now implemented. One exact 15-role
-consumer passes 119/119 per ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2; cursor governance is
-69/6+2/49. Canonical Phase 0 passes 1,031/1,031 in 647 seconds; the clean cursor commit and separate root topology
-admission remain.
+67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
+cursor consumer passes 119/119 per ABI with governance 69/6+2/49. A separate shared-source root consumer now
+executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary
+65/65x4, and corpus 105/105x2. Root governance is 6/7 plus 44 rejected mutations. Only final recurring/public
+no-drift remains.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole
@@ -68,7 +68,7 @@ failures retain the corresponding portable stage/code, and unrelated validation 
 stage/code on failure. Focused route proof passes 101 assertions per ABI; package execution remains 176/177 with
 only the cursor help mismatch, shared primary is exactly 32/65 in all four ABI/environment legs, and corpus is
 105/105 per ABI. Route closeout passes canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
-643 seconds. Cursor and admission work remain pending, so root rollout stays 5/7.
+643 seconds. Cursor and exact dual-ABI admission are now complete, so root rollout is 6/7.
 Cursor generated-source leaf `.9.1.7.4` subsequently advances new Lua artifacts to v2/format 2 while preserving
 that root-selection route and minimal plan.
 

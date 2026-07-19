@@ -403,8 +403,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
-- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on Perl, Rust, Dart, Julia, and Lua; Lua topology
-  admission remains pending even though its core and composed routes preserve this descriptor identity)
+- `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on admitted Perl, Rust, Dart, Julia, and Lua routes)
 - `definition_order`
 - `compiled_rule_order`
 - `redefined_rule_labels`

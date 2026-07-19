@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` Lua root-selection-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` composes every already-
+  current Lua root-selection projection through one contract-declared 15-role source run unchanged on PUC Lua and
+  LuaJIT. The consumer adds no semantic owner. Hand-authored selection evidence returns from lifecycle `I`; the
+  fixed shared request-trace source preserves canonical `E` bytes. The root checker locks exact role order and
+  completion, both backend-driver legs, canonical tracked input/optional registration, six primary case ids, Lua
+  rollout, and five new omission mutations. Exact topology RED 3/3x2 becomes 139/139x2; package 177/177x2,
+  primary 65/65x4, corpus 105/105x2, and root governance 6 complete + 1 pending / 44 mutations pass. KM
+  633/4,653, mdBook/four doctrines, and canonical Phase 0 1,031/1,031 in 641 seconds pass. Safe cleanup removes
+  reproducible book/Python/Julia-compiled output plus four closed repo-local logs. Only final recurring/public
+  no-drift `.9.1.1.2.6` remains after the prepared commit.
 - `2026-07-19` Lua cursor-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.7.6` composes the already-current Lua
   normalization, native/normalized/loaded execution, descriptor v1, emitted/generated v2, trace, mixed/recursive,
   structural, removal, primary, and diagnostic owners through one exact 15-role consumer on PUC Lua and LuaJIT.

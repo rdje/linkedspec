@@ -65,10 +65,10 @@ backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to 
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
-the exact 15-role Rust, Dart, and Julia admission consumers, configured CI/backend execution, first-marker/
-markerless/explicit/unknown primary cases, and default/explicit request trace while rejecting 39 semantic,
-topology, inventory, and rollout drift mutations. Rollout is 5 complete / 2 pending: neutral decision plus the
-composed Perl, Rust, Dart, and Julia backends are admitted. Perl records marker-
+the exact 15-role Rust, Dart, Julia, and Lua admission consumers, configured CI/backend execution, first-marker/
+markerless/explicit/unknown primary cases, and default/explicit request trace while rejecting 44 semantic,
+topology, inventory, and rollout drift mutations. Rollout is 6 complete / 1 pending: neutral decision plus the
+composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends are admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local

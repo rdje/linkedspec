@@ -18,11 +18,12 @@ answers:
   - "which lifecycle proves Lua root rule entry"
   - "is Lua root rule selection admitted after route convergence"
 date: 2026-07-19
-status: composed routes and generated-source v2 implemented identically; option removal and topology admission remain pending
+status: composed routes, generated-source v2, option removal, and dual-ABI topology admission complete
 tags: [lua, luajit, root-rule, top-rule, loader, normalized-ast, generated-source, emitted-source, trace, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 adds a 101-assertion route consumer on each Lua ABI. File-loaded and normalized-AST reconstructed compiled state preserves definition order, authored `is_top`, and descriptor JSON while default and explicit execution call `resolve_entry_rule`. Generated-v1 direct/traced and freshly persisted emitted direct/traced calls apply explicit selector > first authored marker > first authored rule through that same runtime owner. Low `lua_runtime:entry_rule_selection` decisions record requested/effective/basis; failure records requested identity, effective `<none>`, and portable stage/code before any parse scope. Loader zero-rule validation projects `no_rules_defined` / `validate_spec`, while unrelated validation retains `spec_validation_failed`. Generated zero and unknown selection project `no_rules_defined` / `validate_spec` and `entry_rule_not_found` / `select_entry_rule` with requested `entry_rule`; unrelated execution retains `generated_execution_failed`. Generated plan validation remains before selection. Artifacts stay `linkedspec-generated-source-v1` / format 1 with the unchanged minimal ordered label/family plan. Hand-authored result fixtures use entry lifecycle `I`; fixed shared request-trace bytes retain canonical `E`. Package remains 176/177 per ABI with only the cursor-help mismatch; all four default/POSIX primary legs remain exactly 32/65 with the same 33 cursor-owned residuals; corpus is 105/105 per ABI. No admission consumer or rollout row changes; cursor `.9.1.7` and admission `.5.3` remain required."
 evidence_update_2026_07_19_signoff: "Root governance remains 5/7+39 and KM is 625/4,561. Canonical local CI exits 0 after reference root consumers 7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds. Generated book, Python cache, and both disposable ABI-native trees are removed before the clean route commit."
 evidence_update_2026_07_19_generated_v2: "Cursor leaf .9.1.7.4 advances new emitted modules and migrated route consumers to linkedspec-generated-source-v2/format 2 without widening the plan or changing the invocation-local selector. V2 derives cursor and structure from family and rejects stale v1 before payload reconstruction."
+evidence_update_2026_07_19_admission: "Cursor `.9.1.7` and root admission `.9.1.1.2.5.3` are complete. One exact shared-source 15-role consumer passes 139/139 on PUC Lua and LuaJIT, package 177/177x2, primary 65/65x4, corpus 105/105x2, and root governance 6/1/44. Follow [[lua-root-rule-selection-admission]]."
 reverify: "bash tools/run_lua_local.sh && python3 tools/check_root_rule_selection_contract.py"
 ---
 
@@ -42,10 +43,10 @@ effective rule, and basis. A failed selection records `effective=<none>` plus po
 parse scope. Loader and generated boundaries preserve zero-rule and unknown-selection identities without
 specializing unrelated failures. PUC Lua and LuaJIT produce the same result, trace, and diagnostic projection.
 
-This is mechanism proof, not rollout admission. The authored selection fixtures return distinct values from
+The authored selection fixtures return distinct values from
 lifecycle `I`, directly proving which rule was entered; a matching `E` result would be weaker evidence because it
-occurs only after successful matching. Cursor migration `.9.1.7` and root topology admission `.5.3` must still
-close before Lua advances the neutral rollout.
+occurs only after successful matching. Cursor migration `.9.1.7` and root topology admission `.5.3` are now
+complete, advancing Lua to the admitted rollout; only final public no-drift `.6` remains.
 
 Related: [[lua-generated-source-v2-rule-local-cursor]], [[lua-root-rule-selection-core]], [[lua-root-rule-selection-preflight]],
 [[julia-root-rule-selection-routes]], [[dart-root-rule-selection-routes]], and

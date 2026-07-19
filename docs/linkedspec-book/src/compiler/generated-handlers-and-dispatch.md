@@ -133,7 +133,9 @@ Generated-plan validation runs before entry selection. After a valid plan, an un
 `entry_rule_not_found` at `select_entry_rule` with `entry_rule` and `rule_label`; a zero-rule compiled state becomes
 `no_rules_defined` at `validate_spec`. Both use summary `Generated Lua parser entry-rule selection failed` and
 retain the source identity. Other runtime failures remain `generated_execution_failed`. This behavior and the low
-selection trace are identical on PUC Lua and LuaJIT; root-selection topology admission remains a later leaf. Cursor leaf
+selection trace are identical on PUC Lua and LuaJIT. Root-selection admission now composes generated direct,
+generated traced, emitted direct, and emitted traced roles in one exact 15-role shared-source consumer on each ABI
+without adding another resolver. Cursor leaf
 `.9.1.7.4` subsequently advances new Lua artifacts to v2/format 2 without widening the plan or changing that
 invocation-local selector. V2 derives family-owned cursor/structure at each generated entry and rejects a v1
 identity before embedded payload decoding.

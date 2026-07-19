@@ -457,16 +457,15 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 5 complete / 2 pending. Composed Perl, Rust,
-Dart, and Julia
+has no marker, select the first authored rule. That contract is at 6 complete / 1 pending. Composed Perl, Rust,
+Dart, Julia, and dual-ABI Lua
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
-markerless, explicit, unknown, and request-trace outcomes. Rust, Dart, and Julia admission each topology-check one
+markerless, explicit, unknown, and request-trace outcomes. Rust, Dart, Julia, and Lua admission each topology-check one
 15-role consumer across the neutral rows and every real backend route family. Julia's selection-focused fixtures
-use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua core and composed routes
-now implement the same order on PUC Lua and LuaJIT, but cursor migration and the Lua topology consumer remain
-pending. Retain a marker when execution must satisfy the current composed admission ledger rather than merely the
-implemented runtime behavior.
+use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua's one consumer source
+runs unchanged on PUC Lua and LuaJIT and retains the fixed request-trace fixture's canonical `E` bytes. Only final
+recurring/public no-drift remains pending.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -592,10 +591,10 @@ selection/failure/strict, native, loaded/reconstructed, generated/emitted direct
 diagnostic, runtime trace, primary CLI, and canonical request-trace projections. Its authored selection fixtures
 return distinct values from `I`, proving which rule was entered; the fixed request-trace fixture retains its
 canonical lifecycle source. Focused proof is 137, package proof is 3,428, primary is 65x2, corpus is 105, and root
-governance is 5/7 plus 39 rejected mutations.
+governance at that boundary was 5/7 plus 39 rejected mutations. Lua admission now advances it to 6/7 plus 44.
 
-Until Lua and final five-backend admission land, use a marker when the same source must satisfy the current
-admission ledger, even though current Lua execution already supports the markerless fallback:
+Lua and all other backends now admit markerless fallback. Final recurring/public no-drift is the remaining
+contract-program closeout:
 
 ```text
 FallbackMarker::

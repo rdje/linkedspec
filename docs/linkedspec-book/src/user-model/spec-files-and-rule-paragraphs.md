@@ -56,9 +56,10 @@ descriptor preserves authored marker identity. Its hand-authored regressions use
 Loaded source, normalized reconstruction, generated-v1 direct/traced, and freshly emitted direct/traced calls now
 reuse that resolver without adding selection fields to generated plans. Low trace and portable wrapper failures
 carry the same requested/effective/basis or stage/code identity on both ABIs. Cursor migration and final Lua
-admission remain under `.9.1.7` and `.9.1.1.2.5.3`, so markerless execution is **implemented but not yet uniformly
-admitted portable behavior**. Until `.9.1.1.2` closes, cross-backend specs that must satisfy the current admission
-ledger should retain a `::` marker.
+admission are now complete under `.9.1.7` and `.9.1.1.2.5.3`. One exact shared-source 15-role consumer passes
+139/139 on each ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2. Markerless execution is implemented
+and backend-admitted at rollout 6/7; final recurring/public no-drift `.9.1.1.2.6` remains before the whole program
+closes.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 
