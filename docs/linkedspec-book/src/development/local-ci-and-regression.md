@@ -80,6 +80,16 @@ passing groups plus one cursor help failure, and corpus execution is 105/105 per
 generated v1/format-1 identity and its minimal plan; cursor `.9.1.7` owns the remaining 33, and topology admission
 `.5.3` requires both tracks. Hand-authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`.
 
+Lua cursor preflight `.9.1.7.0` runs separately built PUC Lua and LuaJIT native modules and records identical
+results. Family parsing/classification/intrinsic execution is 36/36, 34/36, and 22/36; expected-success edge and
+ownership normalization is 5/13 and 2/4; portable invalid diagnostics are 0/7; mixed parent/child and structural
+execution is 4/8 and 1/2. Package remains 176/177 per ABI, each default/POSIX primary leg remains 32/65, and each
+corpus remains 105/105. These expected staged failures are not a green backend gate; they are the frozen input to
+`.1-.6`. The neutral checker itself is green at 67 migration files, 5 complete / 3 pending, and 44 rejected
+mutations. The preflight changes documentation and task ownership only.
+Canonical closeout repeats root consumers 7+5, cursor admission 288, reference primary 65/65 twice, and Phase 0
+1,031/1,031 in 631 seconds.
+
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does
 not advance Julia's rollout row. Cursor implementation and admission have since removed the 33 option/trace

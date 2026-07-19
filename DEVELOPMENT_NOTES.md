@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.0` — Lua's recursion exposes the global policy more completely):
+  PUC Lua and LuaJIT share the same semantic source but require ABI-specific native regex/filesystem modules. Real
+  dual-runtime probes agree exactly, so later work must keep every focused consumer dual-ABI rather than treating
+  LuaJIT as an inferred compatibility claim.
+
+  Header recognition is not classification. `spec_parser.lua` parses all 36 neutral spellings, while
+  `spec_ast.rule_mode_is_and(...)` includes `Pipe`; that single semantic choice accounts for the 34/36 family
+  result. Bare candidates never become typed nodes, so `spec_validator.lua` sees raw syntax and cannot emit the
+  normalize/validate codes. `=> Child[0]` retains `[0]` as raw input—safer than prefix loss, but still not the
+  required `blind_call_index_forbidden` diagnostic.
+
+  One `engine.parse_mode` drives both matching sites and is reused by every child entry. Therefore all eight mixed
+  fixtures return a value under default seek: the four AND-parent/OR-child cases happen to agree, and all four
+  OR-parent/AND-child cases false-positive, including recursion. Lua's preflight is 4/8 rather than Julia's
+  historical 5/8. This is not a new semantic decision; it is exact evidence that `.2` must rederive on recursive
+  entry as well as blind/action/direct calls.
+
+  Compatibility seams must move in dependency order. `.1` can normalize family/edges without spending policy;
+  `.2` can migrate ordinary execution while keeping generated v1 isolated; `.3` projects descriptor facts; `.4`
+  bumps generated identity before removing isolation; `.5` removes high-level options and shared CLI state; `.6`
+  topology-locks all roles on both ABIs. Low-level seek/consume matchers remain. The unchanged proof is package
+  176/177x2, primary 32/65x4, corpus 105/105x2, and governance 67/5+3/44.
+
+  Final signoff is KM 626/4,575, mdBook, all four doctrines, root consumers 7+5, cursor admission 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 631 seconds. The generated book/cache and caller-created preflight
+  probe/native trees are safe disposable artifacts and are removed before commit.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` — adapters project identity; they do not select):
   Lua's loaded, reconstructed, generated, and emitted routes already converge on ordinary compiled execution. The
   safe implementation therefore adds no route-local precedence algorithm and no generated plan field. One

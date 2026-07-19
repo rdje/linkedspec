@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.0 — map Lua rule-local cursor rollout
+
+The behavior-free Lua cursor preflight is complete on real PUC Lua and LuaJIT native-module pairings. Both parse
+all 36 family headers, classify 34/36 because compact `|` is still treated as AND, and agree with 22/36 intrinsic
+runtime rows because one engine-wide seek policy reaches every entered rule. Expected-success edge normalization
+is 5/13, ownership-set normalization is 2/4, and none of the seven invalid edge/set cases exposes its neutral
+portable diagnostic. Mixed-family composition is 4/8 and structural replacement is 1/2 on both ABIs.
+
+Normalized-AST and loaded routes retain the global default/override. Rule trace shows authored mode and cursor but
+not derived policy. Descriptor metadata remains `parse_mode=seek`; generated source remains
+`linkedspec-generated-source-v1` / format 1, misclassifies compact pipe, and accepts leading junk for AND. The
+snake-case engine option remains effective, while dynamic camel `parseMode` is accepted and ignored. Loader,
+corpus, primary help, and request trace retain their later-removal seams.
+
+Complete package proof is 176/177 per ABI with only the expected help mismatch. All four PUC Lua/LuaJIT
+default/POSIX shared-primary legs are exactly 32/65 with the identical 33 cursor-owned residuals, and corpus is
+105/105 per ABI. Neutral governance remains 67 files / 5 complete + 3 pending / 44 rejected mutations. The safe
+implementation order is frozen as normalization `.1`, live/loaded/reconstructed runtime `.2`, descriptor v1 `.3`,
+generated v2 `.4`, option/CLI removal `.5`, and exact dual-ABI admission `.6`. No executable source, shared
+fixture, neutral contract, or rollout state changes in this slice.
+
+Knowledge Map closes at 626 facts / 4,575 question keys. mdBook, memory/task/KM checks, and all four doctrines
+pass. Canonical local CI passes root consumers 7+5, cursor admission 288, reference primary 65/65 twice, and
+Phase 0 1,031/1,031 in 631 seconds. Cleanup removes the generated 11 MiB book, 28 KiB Python cache, 16 KiB
+temporary probe, and two 104 KiB ABI-specific native trees.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 — align Lua root selection routes
 
 Lua loaded source, normalized-AST reconstruction, generated-v1 direct/traced execution, and freshly persisted

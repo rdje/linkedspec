@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (Lua root core `.5.1` is clean at `5a8d3fcf`; composed dual-ABI route `.5.2` passes
-  focused proof and is in canonical closeout while rollout stays 5/7)
+- Last updated: `2026-07-19` (Lua/LuaJIT behavior-free cursor preflight `.9.1.7.0` is exact and prepared for
+  signoff; typed family/edge normalization `.9.1.7.1` follows only after the clean preflight commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -5554,15 +5554,234 @@ before implementation.
     `.9.1.1.2.4.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7`
-  Status: `pending`
+  Status: `active`
   Goal: Align Lua and LuaJIT native/reconstructed/generated/primary behavior with ADR `0044`.
+  Children: `.9.1.7.0` (preflight/split), `.9.1.7.1` (family/edge normalization), `.9.1.7.2`
+    (live/loaded/reconstructed execution), `.9.1.7.3` (descriptor v1), `.9.1.7.4` (generated-source v2),
+    `.9.1.7.5` (option/CLI migration), `.9.1.7.6` (dual-ABI composed admission/closeout)
   Dependencies: `.9.1.6`, `.9.1.1.2.5.2`
   Acceptance: Replace engine-wide seek ownership with family-derived rule policy; normalize the full bare-edge
     surface; remove legacy public and command options with exact diagnostics; consume descriptor/generated v2;
     migrate fixtures/callers; and prove native, reconstructed/emitted plan, trace, recursion, loaded-spec, and
     primary-command parity on both PUC Lua and LuaJIT against the unchanged neutral contract.
+  Verification: Activated task-tree-first on 2026-07-19 only after Julia cursor `.9.1.6` and Lua root routes
+    `.9.1.1.2.5.2` were complete, route leaf `.5.2` landed at clean commit `c3bdca44`,
+    `git_message_brief.txt` was zero bytes, generated book/cache/native artifacts were absent, and the branch was
+    clean at ahead 233. Child `.0` owns read-only retrieval, exact dual-ABI boundary reproduction, and the
+    dependency-safe `.1-.6` split before any Lua cursor behavior edit.
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.0`
+  Status: `done`
+  Goal: Map the exact PUC Lua/LuaJIT rule-local cursor boundary and freeze a gate-safe implementation split.
+  Dependencies: `.9.1.6`, `.9.1.1.2.5.2`
+  Acceptance: Use the Knowledge Map and LinkedSpec toolbox first; retrieve ADR `0044`, neutral and admitted
+    Perl/Rust/Dart/Julia authorities, current Lua parser/compiler/runtime/loader/normalized/emitter/descriptor/
+    primary/trace/corpus seams, both-ABI drivers, and local/canonical gates; reproduce family, edge, parent-child,
+    option, descriptor, generated, focused/package, 65-case primary, corpus, and governance boundaries without
+    behavior changes; then freeze dependency-ordered implementation leaves that keep main green.
+  Verification: `complete 2026-07-19; PUC Lua and LuaJIT agree exactly: family parse/classification/runtime
+    36/36, 34/36, and 22/36; valid edge/ownership compilation 5/13 and 2/4; portable invalid diagnostics 0/7;
+    parent-child 4/8; structural 1/2; descriptor global seek; generated v1/format 1; package 176/177; primary
+    32/65 in all four ABI/environment legs; corpus 105/105 per ABI; governance 67 files / 5 complete + 3 pending /
+    44 rejected mutations. No Lua/shared executable behavior or fixture changed.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.7.0 - map Lua cursor rollout`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Follow the Knowledge Map to ADR `0044`, the neutral contract/checker,
+    admitted backend precedents, Lua architecture/root-route/generated/CLI facts, `TOOLBOX.md`, and complete
+    dual-ABI drivers before inspecting or probing implementation seams.
+  - [x] **EXACT LUA SURFACE MAP** — Account for every governed Lua inventory path plus non-token AST, parser,
+    validation, compiled state, runtime dispatch, normalized reconstruction, source emission, loader, corpus,
+    primary, trace, descriptor, test, native-module, and public-document seam on both ABIs.
+  - [x] **REPRODUCE CURRENT BOUNDARIES** — Prove all 36 family spellings, all 18 edge rows and six ownership sets,
+    eight parent-child mechanisms, two structural replacements, public option/CLI/request trace, descriptor/
+    generated versions, focused/package state, exact default/POSIX PUC Lua/LuaJIT primary boundary, all 105 corpus
+    fixtures, and neutral governance without behavior edits.
+  - [x] **FREEZE SAFE IMPLEMENTATION SPLIT** — Confirm or refine `.1-.6` ownership for typed normalization,
+    live/loaded/reconstructed execution, descriptor v1, generated-source v2, option/CLI migration, and exact
+    dual-ABI composed admission; isolate compatibility seams and shared-fixture order so canonical main stays green.
+  - [x] **NO REGRESSION / LOCKSTEP** — Change no Lua/shared executable behavior; synchronize task/index/roadmaps/
+    live/memory, Knowledge Map, mdBook, changes/notes, run focused governance/book/canonical checks, clean safe
+    generated artifacts, commit `.0`, clear the brief, and only then activate `.9.1.7.1`.
+
+  #### Completion Evidence
+
+  - Contract-driven public-API probes run with separately built PUC Lua and LuaJIT PCRE2/filesystem modules return
+    identical results. All 36 headers parse; compact `|` is the only family-classification drift (34/36); the
+    engine-wide default seek makes only the 22 seek rows intrinsically correct. Normalized-AST and loaded routes
+    preserve that default and both accept a global consume override. Rule trace reports authored mode and cursor,
+    but no derived cursor policy.
+  - Only the two explicit action rows, two explicit blind rows (including the reserved-label target), and lifecycle
+    row make the expected-success edge boundary (5/13); only the two all-explicit ownership sets pass (2/4).
+    Bare members remain raw syntax. All five invalid edge rows and both invalid ownership-set rows lack the neutral
+    diagnostic codes. The indexed blind suffix is retained as raw syntax rather than being silently discarded.
+  - Every mixed-family case returns a defined value under global seek, so exact parent-child agreement is 4/8;
+    this differs from Julia's historical 5/8 preflight because Lua's OR-to-AND recursive case is also a false
+    positive. Structural replacement agreement is 1/2: ordered landmarks work, anchored AND children seek.
+  - Descriptor metadata retains `meta.parse_mode = "seek"` with no cursor contract or rule policy. Generated
+    source retains `linkedspec-generated-source-v1` / format 1, classifies compact pipe as `and_single_acode`, and
+    accepts leading junk in an AND plan. Engine `parse_mode` is effective; unknown camel `parseMode` is accepted
+    and ignored. Loader and corpus propagate the snake-case option; primary help and medium-or-higher request
+    trace still expose it.
+  - Package proof is 176/177 per ABI with only the expected help assertion. Shared primary is exactly 32/65 for
+    PUC Lua default/POSIX and LuaJIT default/POSIX, with the same 22 help/usage plus 11 request-trace residuals.
+    Corpus execution is 105/105 per ABI. Neutral governance passes at 67 migration files, 5 complete / 3 pending,
+    and all 44 drift mutations rejected. Knowledge Map is 626 facts / 4,575 question keys; mdBook and all four
+    doctrines pass. Canonical local CI closes with root consumers 7+5, cursor admission 288, reference primary
+    65x2, and Phase 0 1,031/1,031 in 631 seconds. The `.1-.6` dependency order is confirmed unchanged.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.1`
+  Status: `pending`
+  Goal: Normalize Lua authored families and mode-sensitive bare-edge ownership with portable diagnostics.
+  Dependencies: `.9.1.7.0`
+  Acceptance: Consume all 36 neutral family rows, all 18 edge rows, and all six ownership sets in Lua AST/parser/
+    validation/compiled state. Correct compact `|` if required; normalize complete-line and header-rest bare
+    plain/indexed/grouped/block/fluent members only after labels are known; preserve lifecycle precedence, forward
+    targets, explicit overrides, and provenance; reject every governed invalid edge/set with exact portable fields.
   Verification: `pending`
   Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **REPRODUCE / ISSUE** — Use contract-driven Lua probes on PUC Lua and LuaJIT to record every family,
+    edge, ownership, and diagnostic mismatch before editing.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Use parsed/compiled/tool trace output to locate family classification,
+    bare-member retention/normalization, validation, and lowering owners with exact source locations.
+  - [ ] **FIX** — Add one typed normalization path and portable diagnostic projection without changing live cursor
+    spending, descriptor/generated versions, public options, shared fixtures, or rollout.
+  - [ ] **ADDRESSED (verified)** — Pass the exact neutral 36/18/6 rows and all invalid mutations identically on
+    both ABIs with compiled ownership and roundtrip identity.
+  - [ ] **NO REGRESSION / LOCKSTEP** — Pass complete dual-ABI package/corpus/primary/governance/canonical proof,
+    synchronize durable docs/KM/book, clean artifacts, commit `.1`, and only then activate runtime `.2`.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.2`
+  Status: `pending`
+  Goal: Derive Lua normal live, loaded, normalized, recursive, and traced execution from every entered rule.
+  Dependencies: `.9.1.7.1`
+  Acceptance: Derive seek/consume and sequence/choice once from each entered compiled rule across action, blind,
+    direct call, recursion, loaded source, normalized reconstruction, and trace; remove parent/global propagation
+    from normal execution while preserving low-level matcher primitives. Prove all eight parent-child mechanisms
+    and both structural replacements; retain only explicit test-locked compatibility seams for generated v1 and
+    outer callers until `.4-.5`; keep root-selection routes exact.
+  Verification: `pending`
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **REPRODUCE / ISSUE** — Use the neutral contract through exact dual-ABI runtime probes to record family,
+    parent-child, structural, loaded/normalized, recursive, and trace drift.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Trace every policy spending site and parent/global propagation seam to exact
+    runtime/compiler locations, including generated-v1 interaction.
+  - [ ] **FIX** — Derive immutable execution policy at each rule entry and make every child rederive independently,
+    without weakening low-level seek/consume APIs or changing later artifact/public owners.
+  - [ ] **ADDRESSED (verified)** — Pass all 36 families, 8/8 parent-child, 2/2 structural, native/loaded/normalized/
+    recursive/trace roles, root routes, and explicit generated-v1 isolation on PUC Lua and LuaJIT.
+  - [ ] **NO REGRESSION / LOCKSTEP** — Pass complete dual-ABI and canonical gates, synchronize docs/KM/book, clean
+    artifacts, commit `.2`, and only then activate descriptor `.3`.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.3`
+  Status: `pending`
+  Goal: Project Lua cursor descriptor v1 from normalized compiled rule state.
+  Dependencies: `.9.1.7.2`
+  Acceptance: Remove descriptor-global `parse_mode`; publish `linkedspec-rule-local-cursor-v1`; project each rule's
+    authored family, derived policy, ownership, ordered resolved semantic edges, and permitted source provenance;
+    expose no independent cursor override; preserve root-selection identity and direct/loaded/normalized descriptor
+    byte agreement with live execution.
+  Verification: `pending`
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **REPRODUCE / ISSUE** — Dump current direct/loaded/normalized descriptor JSON and compare it with the
+    neutral contract and admitted backend projections.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Locate stale descriptor-global projection and every decoder/consumer seam,
+    proving whether normalized compiled facts are already sufficient.
+  - [ ] **FIX** — Project exact cursor-v1 root/rule/edge fields from normalized semantics without adding mutable
+    policy state or disturbing root-selection metadata.
+  - [ ] **ADDRESSED (verified)** — Pass exact field sets, all family/edge rows, portable failures, byte-identical
+    direct/loaded/normalized routes, and live agreement on both ABIs.
+  - [ ] **NO REGRESSION / LOCKSTEP** — Pass dual-ABI package/corpus/primary/governance/canonical gates, synchronize
+    docs/KM/book, clean artifacts, commit `.3`, and only then activate generated v2 `.4`.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.4`
+  Status: `pending`
+  Goal: Advance Lua generated source to v2 with family-derived cursor and structural execution.
+  Dependencies: `.9.1.7.3`
+  Acceptance: Emit `linkedspec-generated-source-v2` / format 2 from minimal ordered `{label, family}` rows; derive
+    exact five-seek/five-consume policy without a serialized cursor field; reject v1 before payload reconstruction
+    with portable expected/actual/regeneration identity; prove deterministic emission, direct/traced/fresh-process
+    execution, all families, structural rows, source identity, corpus subset/classifier breadth, and both ABIs.
+  Verification: `pending`
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **REPRODUCE / ISSUE** — Dump current Lua generated source/plan and run exact v1, compact-pipe, AND-leading-
+    junk, direct/traced, and fresh-process probes on both ABIs.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Locate emitter identity, plan validation/reconstruction ordering, runtime
+    compatibility overrides, and all generated consumer seams with exact source locations.
+  - [ ] **FIX** — Move new artifacts to v2/format 2, validate contract before payload reconstruction, derive policy
+    only from minimal family rows, and remove the v1 compatibility seam once v2 owns execution.
+  - [ ] **ADDRESSED (verified)** — Pass exact family mapping, v1 rejection, deterministic bytes, direct/traced/
+    fresh-process execution, corpus subset and exhaustive classifier evidence on PUC Lua and LuaJIT.
+  - [ ] **NO REGRESSION / LOCKSTEP** — Migrate affected consumers, pass complete dual-ABI/canonical gates,
+    synchronize docs/KM/book, clean artifacts, commit `.4`, and only then activate option removal `.5`.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.5`
+  Status: `pending`
+  Goal: Remove Lua global cursor overrides and migrate the shared primary-command projection.
+  Dependencies: `.9.1.7.4`
+  Acceptance: Remove engine/runtime/loader/corpus/emitter/generated and other high-level caller-owned `parse_mode`
+    options while preserving contract-permitted low-level matcher primitives; reject legacy dynamic keys before
+    input/user code with `parse_mode_override_removed` / `prepare_options`; remove primary `--parse-mode` help and
+    request-trace state while retaining targeted usage exit 2; migrate all non-removal callers and pass the exact
+    shared 65 cases under default/POSIX on PUC Lua and LuaJIT without unrelated byte drift.
+  Verification: `pending`
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **REPRODUCE / ISSUE** — Inventory and probe every public option/engine/loader/corpus/emitter/generated/CLI/
+    trace owner and exact 33-case dual-ABI primary residual set before editing.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Distinguish high-level global authority from permitted low-level matcher
+    primitives and locate all request parsing/validation/effect-order seams.
+  - [ ] **FIX** — Delete or reject every high-level override, preserve targeted migration diagnostics, remove help/
+    request-trace exposure, and migrate only legitimate internal/tests/spec callers.
+  - [ ] **ADDRESSED (verified)** — Pass exact API removal-before-effect cases and all four 65/65 default/POSIX ABI
+    primary legs with unchanged non-retired bytes.
+  - [ ] **NO REGRESSION / LOCKSTEP** — Pass complete dual-ABI package/process/corpus/governance/canonical gates,
+    synchronize docs/KM/book, clean artifacts, commit `.5`, and only then activate admission `.6`.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.7.6`
+  Status: `pending`
+  Goal: Admit and close the complete dual-ABI Lua projection of the neutral rule-local cursor contract.
+  Dependencies: `.9.1.7.5`
+  Acceptance: Add one omission-sensitive contract-driven Lua consumer spanning the exact 15 native, normalized,
+    loaded, descriptor, emitted/generated, trace, diagnostic, recursion/mixed-parent, structural-replacement,
+    static-removal, and primary roles; run it on PUC Lua and LuaJIT; lock driver/canonical registration and
+    mutations; advance only `lua_dual_abi` from pending to complete; pass full dual-ABI/65x4/corpus/canonical proof;
+    synchronize public/live/KM/book records; close `.9.1.7`; and hand off root admission `.9.1.1.2.5.3` only after
+    a clean commit.
+  Verification: `pending`
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [ ] **RETRIEVE / REPRODUCE** — Follow the Knowledge Map to ADR `0044`, neutral checker, all admitted 15-role
+    consumers, every committed Lua `.1-.5` owner, current dual-ABI driver/canonical registration, rollout,
+    inventory, and mutation families before behavior or governance edits.
+  - [ ] **ADD ONE DUAL-ABI CONSUMER** — Run every contract-declared role exactly once in order on PUC Lua and
+    LuaJIT, with explicit assertions against skipping, duplication, stale v1, or ABI asymmetry.
+  - [ ] **REGISTER / ADVANCE LUA ONLY** — Lock consumer path/markers/order, complete Lua driver, canonical opt-in,
+    migration inventory, exact primary cases, and mutations; promote only `lua_dual_abi`.
+  - [ ] **PROVE COMPOSITION / NO REGRESSION** — Pass the focused consumer and all constituent suites, complete
+    dual-ABI package/process/65x4/corpus proof, neutral checker with every mutation rejected, adjacent root/
+    generated/logical/capability governance, and canonical local CI without shared fixture byte drift.
+  - [ ] **LOCKSTEP / CLOSEOUT** — Synchronize task/index/roadmaps/architecture/live/memory, Knowledge Map, Lua and
+    public mdBook status, changes/notes, and cleanup; close `.9.1.7`, commit `.6`, clear the brief, and only then
+    activate root topology admission `.9.1.1.2.5.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8`
   Status: `pending`
@@ -8136,15 +8355,22 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 216.4 | `FUTURE-PARITY-BACKLOG.9.1.5.4` | `done` | Minimal v2, family-derived execution, exact v1 rejection, affected/full Dart boundary, governance, mdBook, and canonical signoff pass. |
 | 216.5 | `FUTURE-PARITY-BACKLOG.9.1.5.5` | `done` | Public/global overrides are removed; 260/63x2/105, 66-file mutation, and canonical proof pass. |
 | 216.6 | `FUTURE-PARITY-BACKLOG.9.1.5.6` | `done` | Exact 15-role topology, 39 mutations, package 271, primary 65x2, corpus 105, and Dart-only 4/4 promotion pass. |
-| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `active` | Preflight through generated-source v2 `.0-.4` are committed; global option/CLI removal `.5` is active before admission `.6`. |
+| 217 | `FUTURE-PARITY-BACKLOG.9.1.6` | `done` | Preflight through dual-ABI-independent Julia composed admission `.0-.6` are complete; rollout is 5+3. |
 | 217.0 | `FUTURE-PARITY-BACKLOG.9.1.6.0` | `done` | Exact behavior-free preflight, 614/4,445 KM, 67/4+4/39 governance, mdBook, canonical 1,031, and cleanup pass. |
 | 217.1 | `FUTURE-PARITY-BACKLOG.9.1.6.1` | `done` | Exact 36/18/6 typed normalization, six diagnostics, 353 focused, 2,215+known-one package, 105 corpus, and canonical proof pass. |
 | 217.2 | `FUTURE-PARITY-BACKLOG.9.1.6.2` | `done` | Julia live/loaded/normalized/recursive/traced intrinsic execution; focused 104, generated 60, package 2,320+known-one, corpus 105, primary 32/65x2, canonical green. |
 | 217.3 | `FUTURE-PARITY-BACKLOG.9.1.6.3` | `done` | Cursor v1, 809 focused, package 3,129+known-one, corpus 105, primary 32/65x2, governance/KM/mdBook/canonical signoff pass. |
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
-| 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `active` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff. |
-| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `pending` | Align PUC Lua/LuaJIT native/reconstructed/generated/primary roles. |
+| 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `done` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff pass. |
+| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Behavior-free dual-ABI preflight `.0` is complete; typed normalization `.1` is next before runtime/descriptor/generated/removal/admission `.2-.6`. |
+| 218.0 | `FUTURE-PARITY-BACKLOG.9.1.7.0` | `done` | Exact dual-ABI behavior-free boundary recorded: 36/34/22 families, 5/13+2/4 valid edges, 0/7 diagnostics, 4/8 parent-child, 1/2 structural, 176/177x2 package, 32/65x4 primary, and 105/105x2 corpus. |
+| 218.1 | `FUTURE-PARITY-BACKLOG.9.1.7.1` | `pending` | Normalize all families and mode-sensitive bare edges with portable diagnostics on both ABIs. |
+| 218.2 | `FUTURE-PARITY-BACKLOG.9.1.7.2` | `pending` | Derive live/loaded/normalized/recursive/traced policy independently at every rule entry. |
+| 218.3 | `FUTURE-PARITY-BACKLOG.9.1.7.3` | `pending` | Project cursor descriptor v1 with family/policy/ownership/resolved-edge identity. |
+| 218.4 | `FUTURE-PARITY-BACKLOG.9.1.7.4` | `pending` | Emit minimal generated v2, derive policy by family, reject v1, and prove both ABIs. |
+| 218.5 | `FUTURE-PARITY-BACKLOG.9.1.7.5` | `pending` | Remove global API/CLI/trace options and pass exact shared 65x4 primary bytes. |
+| 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `pending` | Add exact dual-ABI 15-role admission, promote only Lua, close parent, and hand off root admission. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `pending` | Admit the symmetric five-backend/generated/descriptor/CLI contract. |
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |

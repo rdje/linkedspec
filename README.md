@@ -49,6 +49,17 @@ traced reuse, low selection trace, portable loader/generated failures, and plan-
 assertions per ABI without changing contract v1/format 1 or the minimal plan. Cursor remains `.9.1.7`, topology
 admission remains `.5.3`, and root no-drift `.6` is separately owned, so rollout stays 5/7. Route closeout passes
 canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds.
+Behavior-free Lua cursor preflight `.9.1.7.0` now fixes the exact dual-ABI starting boundary. PUC Lua and LuaJIT
+both parse all 36 family headers, classify 34 correctly because compact `|` is still AND, and agree with only the
+22 globally seeking runtime rows. Expected-success edge normalization is 5/13 and ownership-set normalization is
+2/4; portable invalid diagnostics are 0/7. Mixed-family composition is 4/8 and structural replacement is 1/2.
+Normalized and loaded routes inherit engine-wide seek and accept global consume; descriptor metadata remains
+global seek, trace has no derived policy, and generated source remains v1/format 1. Package proof is 176/177 per
+ABI, every default/POSIX primary leg is exactly 32/65 with the same 33 cursor-owned residuals, corpus is 105/105
+per ABI, and governance stays 67 files / 5 complete + 3 pending / 44 mutations. No executable behavior or shared
+fixture changed. Typed normalization, runtime, descriptor v1, generated v2, option removal, and dual-ABI admission
+remain dependency-ordered `.9.1.7.1-.6`. Canonical signoff passes root consumers 7+5, cursor admission 288,
+reference primary 65x2, and Phase 0 1,031/1,031 in 631 seconds.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

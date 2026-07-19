@@ -67,6 +67,18 @@ only the cursor help mismatch, shared primary is exactly 32/65 in all four ABI/e
 105/105 per ABI. Route closeout passes canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
 643 seconds. Cursor and admission work remain pending, so root rollout stays 5/7.
 
+Behavior-free Lua cursor preflight `.9.1.7.0` now makes that pending boundary exact on both PUC Lua and LuaJIT.
+All 36 authored family headers parse, but only 34 classify correctly because compact `|` still enters the AND
+family. One engine-wide default seek policy makes 22/36 family rows intrinsic. Of the 13 expected-success edge
+rows only five compile, and of four expected-success ownership sets only the two all-explicit sets compile; bare
+members remain raw syntax and none of the seven invalid edge/set rows has its portable diagnostic code. Mixed
+parent/child execution is 4/8 and the structural replacements are 1/2. Normalized and loaded engines inherit the
+same global option, rule trace has no derived cursor policy, descriptors retain global seek, and generated source
+remains v1/format 1. Package proof is 176/177 per ABI, all four ABI/environment primary legs are 32/65, corpus is
+105/105 per ABI, and neutral governance stays 67 files / 5 complete + 3 pending / 44 mutations. No executable
+behavior or shared fixture changes in the preflight; `.9.1.7.1-.6` retain the dependency order normalization,
+normal runtime, descriptor v1, generated v2, option removal, and dual-ABI admission.
+
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
 versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation

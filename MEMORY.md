@@ -11,20 +11,22 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` — composed Lua root routes are implemented,
-  verified, documented, and prepared for their clean commit.
-- latest_commit: `5a8d3fcf` — `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core`
-  (ahead: 232; the prepared `.5.2` commit follows; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes`.
-- active_work_unit: composed Lua root routes `.9.1.1.2.5.2` prepared from clean `5a8d3fcf`.
-- next_action: commit `.5.2`, verify the clean handoff, clear the brief, then activate cursor `.9.1.7` task-tree-first.
-- current_proof: PUC Lua and LuaJIT loaded, normalized, generated-v1, and emitted direct/traced routes reuse the
-  core resolver without descriptor/plan/artifact drift. Typed loader/generated zero/unknown projection,
-  plan-validation-first order, and low requested/effective/basis or requested/none/stage/code trace pass focused
-  101 per ABI; hand-authored selection results use entry `I`. Diagnostic is 119 per ABI. Package remains 176/177
-  with only the cursor-help mismatch; every default/POSIX ABI leg remains exactly 32/65 with the same 33 cursor-
-  owned failures; corpus is 105/105 per ABI. Root governance stays 5/7+39 and KM is 625/4,561. mdBook, syntax,
-  shell, whitespace, memory/KM/task/doctrine checks, and canonical local CI pass; canonical closes with root 7+5,
-  cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds. Cursor `.9.1.7` and admission `.5.3` remain.
+  verified, documented, cleaned, and committed.
+- latest_commit: `c3bdca44` — `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes`
+  (ahead: 233; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.7.0` behavior-free Lua cursor preflight is in signoff from
+  `c3bdca44`; no executable/shared fixture behavior changed.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.7.0` from clean `c3bdca44`.
+- next_action: finish docs/KM/book/canonical gates, clean safe generated artifacts, commit `.9.1.7.0`, clear the
+  brief, verify a clean tree, then activate typed normalization `.9.1.7.1` task-tree-first.
+- current_proof: PUC Lua and LuaJIT exact preflight is family parse/classification/runtime 36/36, 34/36, 22/36;
+  valid edge/ownership 5/13 and 2/4; portable invalid diagnostics 0/7; parent-child 4/8; structural 1/2. Normalized
+  and loaded engines default global seek and accept consume; trace has authored mode but no derived policy;
+  descriptor retains global seek; generated source is v1/format 1 and AND accepts leading junk. Package is
+  176/177 per ABI with only cursor help; every default/POSIX ABI leg is 32/65 with the same 33 cursor failures;
+  corpus is 105/105 per ABI; neutral governance is 67 files / 5 complete + 3 pending / 44 mutations. KM is
+  626/4,575; mdBook/four doctrines pass; canonical closes with root 7+5, cursor 288, primary 65x2, and Phase 0
+  1,031/1,031 in 631 seconds. No executable, contract, fixture, or rollout behavior changed.
 - current_cursor_normalization: All 36 parsed/compiled family rows, 18 edge rows, six ownership sets, six portable
   diagnostics, eight parent-child mechanisms, and two structural replacements are exact. Normal entered rules
   derive policy once; children rederive independently. Descriptor v1 has no global mode and projects exact facts;
@@ -49,5 +51,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.5.2` runtime/adapter/test/docs/KM implementation is fully verified and
-  cleaned; only its prepared commit and brief clearing remain before the cursor pivot.
+- blockers: none. in_flight_uncommitted: signed-off task/docs/KM/book completion record for behavior-free Lua cursor
+  preflight `.9.1.7.0`; safe cleanup and commit remain; no executable behavior has changed.

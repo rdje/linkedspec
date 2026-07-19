@@ -82,6 +82,14 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > Rollout is 5 complete / 3 pending, with Lua, recurring five-backend, and
 > public no-drift work dependency-ordered under `.9.1.7-.9`; the current
 > governed inventory is 67 files with 44 effective mutations.
+> Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
+> point: all 36 headers parse, but compact `|` accounts for the 34/36 family
+> classification; global seek makes 22/36 family executions intrinsic; valid
+> edge/ownership rows are 5/13 and 2/4; portable invalid diagnostics are 0/7;
+> parent/child composition is 4/8; and structural replacement is 1/2. Normalized
+> and loaded engines still accept the global override, descriptor metadata still
+> publishes global seek, and generated source is still v1. No Lua behavior changes
+> until typed normalization `.9.1.7.1`.
 
 ## Current rule-label surface
 
@@ -762,7 +770,7 @@ blind) with `-> Other` fails as `mixed_edge_ownership`. `Child[0]` in AND fails
 as `bare_edge_index_requires_action`; spell `-> Child[0]` when indexed action
 dispatch is intended.
 
-Perl, Rust, and Dart now remove `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
+Perl, Rust, Dart, and Julia now remove `parse_mode` / `--parse-mode` with targeted diagnostics rather than preserving an
 accepted-and-ignored option. Their descriptors replace root
 `meta.parse_mode` with `meta.cursor_contract`, retain per-rule `meta.cursor_policy`, and expose ordered
 `meta.resolved_edges` rows with ownership/target/index/block/fluent facts.
@@ -780,6 +788,10 @@ ownership, and exact semantic edge rows, and direct/normalized/loaded bytes agre
 format 2 with no cursor field, derives five seek/five consume policies, rejects v1 before reconstruction, and
 requires regeneration of legacy v1 files. Option/CLI removal and one exact composed 15-role admission are current
 through `.9.1.6.6`, so Julia now advances the rollout row.
+Lua and LuaJIT are still on the measured compatibility boundary: compact `|` is classified as AND, bare members
+remain raw, normal/loaded/normalized execution spends one global policy, descriptor metadata publishes global
+seek, and generated source identifies v1. Preflight `.9.1.7.0` records exact agreement across both ABIs without
+changing it; `.9.1.7.1-.6` owns convergence in that order.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

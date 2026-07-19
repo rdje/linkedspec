@@ -10,6 +10,12 @@
 > no-drift remain dependency-ordered. Independently, Julia root admission now composes the immutable
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
 > legacy field.
+>
+> Lua/LuaJIT preflight `.9.1.7.0` confirms that current Lua descriptors still expose
+> `meta.parse_mode = "seek"` and do not expose `meta.cursor_contract` or per-rule `cursor_policy`. Direct,
+> normalized, and loaded execution also retain the global engine option. Descriptor migration `.9.1.7.3` follows
+> typed normalization and intrinsic normal runtime; generated-source v2 and option removal follow it. Do not read
+> Lua's current global field as the accepted language contract—it is the measured compatibility boundary.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

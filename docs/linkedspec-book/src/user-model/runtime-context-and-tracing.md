@@ -473,6 +473,13 @@ migration remain pending, so markerless behavior is implemented but not yet unif
 Cursor policy comes from each authored rule family. Perl, Rust, Dart, and Julia reject the retired `--parse-mode`
 flag; Lua's later rollout leaf owns removal.
 
+Lua cursor preflight `.9.1.7.0` makes the trace limitation concrete. A high native rule-entry scope currently
+records details such as `rule=Top entry_regex=0 mode=And cursor=0`; it does not record a derived
+`cursor_policy=consume`, and the runtime still spends the engine-wide default seek. Normalized-AST and loaded
+engines produce the same result on PUC Lua and LuaJIT, while a caller-supplied global consume option changes both.
+Runtime trace therefore exposes the authored mode but is not yet proof that the entered rule spent intrinsic
+policy. That proof belongs to runtime leaf `.9.1.7.2`; request-trace removal remains `.9.1.7.5`.
+
 ADR `0025` requires Unicode scalar text encoded as strict UTF-8 while preserving BOM/code points/newlines and
 performing no trimming or normalization. The Perl command now enforces that boundary: invalid spec/input bytes
 fail in compilation/input loading, and canonical nested JSON is encoded once. UTF-16/UTF-32 files are not
