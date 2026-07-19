@@ -3847,6 +3847,16 @@ function M.runtime_parse(engine, input, options)
   )
   if not selection_ok then
     if not compiled_spec.is_entry_rule_selection_error(selection) then error(selection, 0) end
+    if options.trace ~= nil then
+      trace.trace_decision(
+        options.trace,
+        "lua_runtime:entry_rule_selection",
+        false,
+        "requested=" .. (options.top_rule == nil and "<default>" or options.top_rule) ..
+          " effective=<none> stage=" .. selection.stage .. " code=" .. selection.code,
+        trace.TRACE_LOW
+      )
+    end
     fail(selection.message, {
       code = selection.code,
       stage = selection.stage,
@@ -3861,6 +3871,17 @@ function M.runtime_parse(engine, input, options)
         code = selection.code,
       }),
     })
+  end
+  if options.trace ~= nil then
+    trace.trace_decision(
+      options.trace,
+      "lua_runtime:entry_rule_selection",
+      true,
+      "requested=" .. (options.top_rule == nil and "<default>" or options.top_rule) ..
+        " effective=" .. selection.rule.label ..
+        " basis=" .. compiled_spec.entry_rule_selection_basis_name(selection.basis),
+      trace.TRACE_LOW
+    )
   end
   local top = selection.rule.label
   local ctx = context(

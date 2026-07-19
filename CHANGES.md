@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 — align Lua root selection routes
+
+Lua loaded source, normalized-AST reconstruction, generated-v1 direct/traced execution, and freshly persisted
+emitted direct/traced execution now all reuse the compiled-state `resolve_entry_rule(...)` owner. Default and
+explicit invocation preserve authored definition order, marker bits, and descriptor bytes. Generated source stays
+`linkedspec-generated-source-v1` / format 1, and its ordered plan remains the minimal `{label, family}` shape.
+
+The file loader now preserves the typed zero-rule `no_rules_defined` / `validate_spec` identity while leaving
+unrelated validation failures on `spec_validation_failed`. Generated wrappers specialize only the runtime's typed
+zero/unknown selection failures: zero rules project `no_rules_defined` / `validate_spec`, while an unknown selector
+projects `entry_rule_not_found` / `select_entry_rule` with `entry_rule` and `rule_label`. Generated plan validation
+still runs first; unrelated execution retains `generated_execution_failed`.
+
+Every traced invocation emits one low `lua_runtime:entry_rule_selection` decision before runtime context or parse
+scope. Success records requested selector or `<default>`, effective rule, and basis; failure records requested,
+`effective=<none>`, stage, and code. PUC Lua and LuaJIT pass the same 101-assertion route consumer. Its authored
+fixtures return from lifecycle `I` so results prove rule entry; fixed shared request-trace bytes remain unchanged.
+
+The complete native package boundary remains 176/177 on each ABI with only the cursor-help mismatch. Every PUC
+Lua/LuaJIT default/POSIX primary leg remains exactly 32/65 with the same 22 cursor help/usage and 11 cursor trace
+failures; corpus is 105/105 and diagnostic output is 119/119 per ABI. Route convergence does not promote rollout:
+cursor `.9.1.7` and exact dual-ABI topology admission `.5.3` remain required.
+
+Final signoff passes root governance 5/7+39, KM 625/4,561, mdBook, syntax, shell, whitespace, all memory/Knowledge
+Map/task/doctrine checks, and canonical local CI. The canonical gate closes with reference root consumers 7+5,
+cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds. Generated book, Python cache, and both
+disposable ABI-native trees are removed before commit.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 — implement Lua root selection core
 
 Lua now accepts valid one-or-more-rule `.spec` sources without requiring an authored `Rule::` marker. Empty and

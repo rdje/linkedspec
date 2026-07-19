@@ -8,13 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` — PUC Lua/LuaJIT root core is complete and prepared for its one clean
-  commit from `c8324dce` at ahead 231. No new leaf is active while the tree is dirty; composed routes `.5.2`
-  activate only after this commit, brief cleanup, and clean-tree proof.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` — composed PUC Lua/LuaJIT root routes are complete and prepared for their
+  clean commit from core commit `5a8d3fcf` at ahead 232. Loaded/reconstructed/generated-v1/emitted direct/traced
+  reuse, portable route failures, generated-plan-first ordering, and requested/effective/basis trace identity pass
+  101/101 per ABI. Package remains 176/177, every primary leg remains 32/65, corpus is 105/105 per ABI, root stays
+  5/7+39, and canonical Phase 0 passes 1,031/1,031 in 643 seconds. Cursor `.9.1.7` may activate only after the
+  route commit is clean.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 — align Lua root selection routes**
+  (DONE; prepared clean commit `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes`).
+
+  **Result:** Loaded source, normalized reconstruction, generated-v1 direct/traced execution, and freshly
+  persisted emitted direct/traced execution all reuse the core selector without changing descriptor, plan, or
+  artifact identity. Loader/generated boundaries preserve portable zero/unknown failures and plan-first ordering;
+  low trace records the effective decision before parse scope. Authored result fixtures use lifecycle `I`.
+
+  **Proof:** Focused routes 101 and diagnostic 119 pass per ABI. Package remains 176/177 with only cursor help,
+  every default/POSIX primary leg stays 32/65 with the same 33 cursor residuals, and corpus is 105/105 per ABI.
+  KM is 625/4,561; mdBook, syntax, shell, whitespace, all memory/KM/task/doctrine checks, and canonical local CI
+  pass. Canonical closes at root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds.
+
+  **Next:** Commit and clean `.5.2`, then activate Lua cursor `.9.1.7` task-tree-first.
+
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 — implement Lua root selection core**
-  (DONE; prepared commit `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core`).
+  (DONE at clean commit `5a8d3fcf`).
 
   **Result:** Lua now preserves empty/comment-only parser envelopes, validates one-or-more-rule source, and uses
   one compiled-state resolver for explicit selector > first authored marker > first authored rule before runtime
@@ -28,7 +46,7 @@ Current execution status for interruption-safe batch workflow recovery.
   local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary 65x2, and Phase 0
   1,031/1,031 in 613 seconds. Generated book/cache and disposable native trees are removed.
 
-  **Next:** Commit `.5.1`, clear the brief, prove the tree clean, then activate composed Lua routes `.5.2`.
+  **Next:** Composed Lua routes `.5.2` are active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 — map Lua root selection**
   (DONE at clean commit `c8324dce`).

@@ -354,7 +354,12 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
       json.encode(linkedspec.interpreter.to_json(untraced)),
       "direct trace result neutrality"
     )
-    assert_equal(#linkedspec.trace_events(direct_emitter), 4, "parse and runtime rule scopes")
+    assert_equal(#linkedspec.trace_events(direct_emitter), 5, "selection plus parse and runtime rule scopes")
+    assert_equal(
+      linkedspec.trace_events(direct_emitter)[1].topic,
+      "lua_runtime:entry_rule_selection",
+      "selection precedes runtime scopes"
+    )
     assert_contains(table.concat(direct_stdout), "lua_runtime:parse top_rule=Top", "direct parse enter")
     assert_contains(table.concat(direct_stdout), "matched=true cursor=1", "direct parse exit")
 
@@ -367,8 +372,20 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
       trace = failure_emitter,
     })
     assert_equal(failure_ok, false, "traced failure remains a failure")
-    assert_equal(#linkedspec.trace_events(failure_emitter), 0, "selection fails before runtime scopes")
-    assert_equal(table.concat(failure_stdout), "", "selection failure has no legacy runtime-scope trace")
+    local failure_events = linkedspec.trace_events(failure_emitter)
+    assert_equal(#failure_events, 1, "selection failure emits one decision before runtime scopes")
+    assert_equal(failure_events[1].topic, "lua_runtime:entry_rule_selection", "selection failure topic")
+    assert_contains(failure_events[1].details, "taken=0", "selection failure decision")
+    assert_contains(
+      table.concat(failure_stdout),
+      "lua_runtime:entry_rule_selection taken=0",
+      "selection failure renders its decision"
+    )
+    assert_equal(
+      table.concat(failure_stdout):find("lua_runtime:parse", 1, true),
+      nil,
+      "selection failure enters no runtime parse scope"
+    )
 
     local runtime_path = root .. "/runtime.log"
     local runtime_options = { top_rule = "Top" }
@@ -710,7 +727,7 @@ test("native spec pipeline maps parse validation compile and missing-name failur
     local options = linkedspec.spec_load_options({ cwd = root, search_roots = {} })
     local cases = {
       { path = "parse.spec", stage = "parse_spec", code = "spec_parse_failed" },
-      { path = "validation.spec", stage = "validate_spec", code = "spec_validation_failed" },
+      { path = "validation.spec", stage = "validate_spec", code = "no_rules_defined" },
       { path = "compile.spec", stage = "compile_spec", code = "spec_compile_failed" },
     }
     for _, case in ipairs(cases) do
@@ -891,7 +908,12 @@ test("full-pipeline tracing filters levels stays quiet and preserves attributed 
       stdout_writer = function() end,
     })
     local low_result = run_with(low)
-    assert_equal(#linkedspec.trace_events(low), 0, "low filters medium and high pipeline events")
+    local low_events = linkedspec.trace_events(low)
+    assert_equal(#low_events, 2, "low retains only staged and requested entry-rule selections")
+    for _, event in ipairs(low_events) do
+      assert_equal(event.topic, "lua_runtime:entry_rule_selection", "low selection topic")
+      assert_equal(event.kind, linkedspec.TRACE_DECISION, "low selection kind")
+    end
     assert_equal(
       json.encode(linkedspec.interpreter.to_json(low_result)),
       json.encode(linkedspec.interpreter.to_json(quiet_result)),
@@ -4395,8 +4417,8 @@ test("generated Lua module executes direct and traced roles in process", functio
   local failed_ok, failed_error = pcall(generated.execute, "x", { top_rule = "Missing" })
   assert_equal(failed_ok, false, "generated missing rule fails")
   assert_equal(linkedspec.is_generated_source_error(failed_error), true, "generated failure type")
-  assert_equal(failed_error.stage, "execute_generated", "generated failure stage")
-  assert_equal(failed_error.code, "generated_execution_failed", "generated failure code")
+  assert_equal(failed_error.stage, "select_entry_rule", "generated failure stage")
+  assert_equal(failed_error.code, "entry_rule_not_found", "generated failure code")
   assert_equal(failed_error.source_identity, "generated/λ$module.spec", "generated failure identity")
   assert_equal(failed_error.rule_label, "Missing", "generated failure rule")
 
@@ -4688,8 +4710,8 @@ test("generated Lua source loads and fails in fresh dual ABI host processes with
       valid_stdout,
       '{"direct":"λ:$","metadata":{"contract_id":"linkedspec-generated-source-v1",' ..
         '"format_version":1,"source_identity":"generated/λ$isolated.spec"},' ..
-        '"missing":{"code":"generated_execution_failed","rule_label":"Missing",' ..
-        '"stage":"execute_generated"},"trace_has_runtime":true,"traced":"λ:$"}\n',
+        '"missing":{"code":"entry_rule_not_found","rule_label":"Missing",' ..
+        '"stage":"select_entry_rule"},"trace_has_runtime":true,"traced":"λ:$"}\n',
       "fresh valid host output"
     )
 

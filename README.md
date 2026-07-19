@@ -44,9 +44,11 @@ markerless one-or-more-rule sources, resolves explicit selector > first marker >
 state before runtime context or user code, returns portable zero/unknown failures, preserves strict authored-edge
 analysis, and publishes immutable descriptor identity on PUC Lua and LuaJIT. Its focused consumer passes 99
 assertions per ABI, shared primary moves from 31/65 to exactly 32/65 in all four ABI/environment legs, and corpus
-remains 105/105 per ABI. Composed Lua loaded/reconstructed/generated/emitted/trace routes remain `.5.2`, cursor
-remains `.9.1.7`, and topology admission remains `.5.3`; root no-drift `.6` is separately owned, so rollout stays
-5/7.
+remains 105/105 per ABI. Composed route `.5.2` now proves loaded/reconstructed and generated-v1/emitted direct/
+traced reuse, low selection trace, portable loader/generated failures, and plan-validation-first order in 101
+assertions per ABI without changing contract v1/format 1 or the minimal plan. Cursor remains `.9.1.7`, topology
+admission remains `.5.3`, and root no-drift `.6` is separately owned, so rollout stays 5/7. Route closeout passes
+canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

@@ -216,10 +216,12 @@ declared roles once; its authored marked/markerless selection fixtures use `I` r
 identity directly. Focused admission is 137, package proof is 3,428, corpus is 105/105, and the checker rejects 39
 mutations. Lua core `.5.1` now accepts markerless source on both ABIs, resolves the same order before runtime
 context/user code, returns portable zero/unknown failures, preserves authored descriptor identity, and passes 99
-focused assertions per ABI. All four default/POSIX primary legs are exactly 32/65; the remaining 33 mismatches are
-owned by cursor migration. Composed routes `.5.2`, cursor `.9.1.7`, and exact admission `.5.3` remain dependency-
-ordered. Until `.5-.6` close, retain a `::` for uniformly admitted composed cross-backend execution and pass an
-explicit selector when identity matters.
+focused assertions per ABI. Route `.5.2` proves loaded/normalized and generated-v1/emitted direct/traced reuse,
+portable loader/generated failures, plan-first ordering, and low selection trace in 101 assertions per ABI without
+widening the minimal plan or changing v1/format-1 identity. All four default/POSIX primary legs remain exactly
+32/65; the remaining 33 mismatches are owned by cursor migration. Cursor `.9.1.7` and exact admission `.5.3`
+remain dependency-ordered. Until `.5-.6` close, retain a `::` for uniformly admitted composed cross-backend
+execution and pass an explicit selector when identity matters.
 
 Perl keeps authored identity separate from execution state. Bootstrap preserves source order and distinguishes
 each `Rule::`; compiled rule metadata now carries `is_top`, while one ordered resolver chooses the effective entry.
@@ -1035,9 +1037,9 @@ A valid `.spec` file must satisfy the following current portable checks. Item 1 
 behavior from composed admission while `.9.1.1.2.4-.6` roll out:
 
 1. At least one rule exists. Perl, Rust, Dart, Julia, and Lua validation accept a markerless file. Lua core `.5.1`
-   now exposes the same selection and validation rule on PUC Lua and LuaJIT, while its composed route/admission
-   proof remains `.5.2-.3`; use a marker until the remaining rollout closes when uniformly admitted portable
-   execution matters. A zero-rule executable spec is always invalid. Admitted loader/generated routes report portable
+   and composed routes `.5.2` expose the same selection and validation rule on PUC Lua and LuaJIT, while topology
+   admission remains `.5.3`; use a marker until the remaining rollout closes when uniformly admitted portable
+   execution matters. A zero-rule executable spec is always invalid. Implemented loader/generated routes report portable
    `no_rules_defined` / `validate_spec` before considering either default or explicit selection.
 2. Every rule label is unique. Duplicate labels are rejected.
 3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.

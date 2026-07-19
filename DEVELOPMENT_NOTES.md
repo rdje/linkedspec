@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` — adapters project identity; they do not select):
+  Lua's loaded, reconstructed, generated, and emitted routes already converge on ordinary compiled execution. The
+  safe implementation therefore adds no route-local precedence algorithm and no generated plan field. One
+  invocation-local `top_rule` continues through each adapter to `runtime_parse(...)`, which calls the core
+  resolver. Exact descriptor comparisons and plan-row assertions guard that boundary.
+
+  Failure projection belongs at adapter boundaries without erasing the core cause. Loader validation recognizes
+  only typed zero-rule validation and keeps every unrelated validation error generic. Generated execution first
+  validates the plan, then recognizes only the runtime diagnostic codes `no_rules_defined` and
+  `entry_rule_not_found`; all other runtime errors keep `generated_execution_failed`. This both preserves portable
+  identity and prevents a broad wrapper exception policy from becoming accidental semantic classification.
+
+  Selection trace must exist before context creation so failures can be observed without implying that parsing
+  began. One low decision records requested/effective/basis on success or requested/none/stage/code on failure.
+  `runtime_parse_with_trace(...)` and emitted `execute_with_trace(...)` create or receive their emitter before
+  calling the same runtime, so direct and traced routes need no duplicated instrumentation.
+
+  The focused proof passes 101 assertions on PUC Lua and LuaJIT. Complete package execution remains at its frozen
+  176/177 cursor-help boundary, all four primary legs remain 32/65 with the exact 33 cursor-owned residuals, and
+  corpus is 105/105 per ABI. The authored selection fixtures use lifecycle `I`; an `E` result is not treated as
+  equivalent causal evidence. Cursor `.9.1.7` and root topology admission `.5.3` remain dependency-ordered.
+
+  Final signoff passes root governance 5/7+39, KM 625/4,561, mdBook, syntax, shell, whitespace, memory/KM/task and
+  all four doctrine checks. Canonical local CI exits 0 after reference root 7+5, cursor admission 288, primary
+  65x2, and Phase 0 1,031/1,031 in 643 seconds. The generated book, Python cache, and two disposable native trees
+  are safe verification artifacts and are removed before the clean route commit.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` — one Lua resolver makes fallback reachable and failures causal):
   Lua already preserved authored `compiled_rule_order` and `is_top`, but its validator required a marker and its
   runtime split explicit selection from the default fallback. That made a correct first-rule fallback unreachable

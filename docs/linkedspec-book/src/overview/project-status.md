@@ -55,10 +55,17 @@ envelope; validation accepts one-or-more-rule markerless source and returns type
 `validate_spec` for zero rules. One compiled-state resolver applies explicit selector > first authored marker >
 first authored rule before runtime context or user code, and an unknown selector returns
 `entry_rule_not_found` / `select_entry_rule`. Definition order and authored `is_top` stay immutable, strict-unused
-remains authored-edge-only, and descriptors publish `linkedspec-root-rule-selection-v1`. Focused proof passes 99
-assertions per ABI; package execution reaches 176/177 with only the cursor help mismatch, shared primary is exactly
-32/65 in all four ABI/environment legs, and corpus is 105/105 per ABI. Composed route, cursor, and admission work
-remain pending, so root rollout stays 5/7.
+remains authored-edge-only, and descriptors publish `linkedspec-root-rule-selection-v1`. Focused core proof passes
+99 assertions per ABI. Route leaf `.5.2` now proves loaded source, normalized-AST reconstruction, generated-v1
+direct/traced execution, and freshly persisted emitted direct/traced execution all reuse that resolver. Generated
+artifacts remain contract v1/format 1 with the minimal ordered `{label, family}` plan; plan validation still
+precedes selection. Loader zero-rule failures retain `no_rules_defined` / `validate_spec`, generated zero/unknown
+failures retain the corresponding portable stage/code, and unrelated validation remains generic. Low
+`lua_runtime:entry_rule_selection` decisions record requested/effective/basis on success and requested/`<none>`/
+stage/code on failure. Focused route proof passes 101 assertions per ABI; package execution remains 176/177 with
+only the cursor help mismatch, shared primary is exactly 32/65 in all four ABI/environment legs, and corpus is
+105/105 per ABI. Route closeout passes canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
+643 seconds. Cursor and admission work remain pending, so root rollout stays 5/7.
 
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted

@@ -123,6 +123,18 @@ that plan or changing the invocation-local root selector. Root admission `.4.3` 
 generated traced, emitted direct, and emitted traced roles through one exact 15-role consumer. This topology proof
 does not add a second resolver or widen generated artifacts; Julia alone advances root rollout to 5/7.
 
+Lua route leaf `.9.1.1.2.5.2` keeps generated source at
+`linkedspec-generated-source-v1` / format 1. Its plan remains only ordered `{label, family}` rows; neither
+`top_rule` nor authored `is_top` is copied into a plan row. Generated direct/traced and freshly persisted emitted
+direct/traced calls pass the optional per-invocation `top_rule` to the ordinary runtime resolver. The resolver
+therefore owns explicit > first marker > first rule for every route without an emitter-local selection algorithm.
+
+Generated-plan validation runs before entry selection. After a valid plan, an unknown selector becomes
+`entry_rule_not_found` at `select_entry_rule` with `entry_rule` and `rule_label`; a zero-rule compiled state becomes
+`no_rules_defined` at `validate_spec`. Both use summary `Generated Lua parser entry-rule selection failed` and
+retain the source identity. Other runtime failures remain `generated_execution_failed`. This behavior and the low
+selection trace are identical on PUC Lua and LuaJIT; topology admission remains a later leaf.
+
 ```rust
 use linkedspec_runtime::source_emitter::{
     GeneratedSourceError, emit_rust_source_v2,

@@ -74,10 +74,11 @@ its cursor topology requirement, and root admission `.4.3` closes the separate r
 Lua behavior-free preflight `.9.1.1.2.5.0` ran the same shared manifest through disposable native adapters. Core
 `.5.1` now makes PUC Lua and LuaJIT identical with `POSIXLY_CORRECT` unset and set at 32/65 in every leg by closing
 only `success_markerless_first_authored_rule`. The 22 help/usage and 11 request-trace mismatches still belong to
-cursor `.9.1.7`. Focused root proof is 99 assertions, complete package execution is 176 passing groups plus one
-cursor help failure, and corpus execution is 105/105 per ABI. Routes `.5.2` preserve generated v1 identity,
-cursor `.9.1.7` owns the remaining 33, and topology admission `.5.3`
-requires both tracks. Hand-authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`.
+cursor `.9.1.7`. Focused root proof is 99 assertions; route proof is 101 assertions over loaded/reconstructed,
+generated/emitted direct/traced, trace, diagnostics, and plan-first ordering. Complete package execution is 176
+passing groups plus one cursor help failure, and corpus execution is 105/105 per ABI. Route `.5.2` preserves
+generated v1/format-1 identity and its minimal plan; cursor `.9.1.7` owns the remaining 33, and topology admission
+`.5.3` requires both tracks. Hand-authored selection fixtures use `I`; fixed shared request-trace bytes retain `E`.
 
 Route leaf `.4.2` signs off with its 57 focused assertions, core 79, loader 82, emitter 59, corpus 105, root
 governance 4/7 plus 34 rejected mutations, and the canonical Phase-0 total of 1,031 tests. It deliberately does

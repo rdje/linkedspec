@@ -400,7 +400,14 @@ end
 local function run_source_stage(request_value, resolved_path, stage, code, summary, operation)
   local ok, result = pcall(operation)
   if not ok then
-    raise_pipeline_error(request_value, stage, code, summary, resolved_path, tostring(result))
+    local failure_code = code
+    local detail = tostring(result)
+    if stage == "validate_spec" and spec_validator.is_validation_error(result) and
+        result.code == "no_rules_defined" then
+      failure_code = result.code
+      detail = result.message
+    end
+    raise_pipeline_error(request_value, stage, failure_code, summary, resolved_path, detail)
   end
   return result
 end

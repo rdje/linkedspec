@@ -162,8 +162,14 @@ selector is invocation state and is not written into the generated family plan o
 Dart emits the equivalent low-level `dart_runtime:entry_rule_selection` decision for native, generated, and
 freshly emitted traced execution. Its detail records `requested`, `effective`, and `basis`; failed selection uses
 `effective=<none>` and retains the portable stage/code. Because the decision is low-level, every enabled Dart
-trace observes the entry boundary. The route proof is complete, while omission-sensitive topology admission
-remains `.9.1.1.2.3.3`.
+trace observes the entry boundary. Route proof and omission-sensitive topology admission are complete through
+`.9.1.1.2.3.3`.
+
+Lua emits `lua_runtime:entry_rule_selection` at low level before it creates runtime context or enters the parse
+scope. Native, loaded, normalized-AST, generated-v1, and freshly emitted traced calls therefore report the same
+invocation-local selector. Success details are `requested=... effective=... basis=...`; failure details are
+`requested=... effective=<none> stage=... code=...`. PUC Lua and LuaJIT produce the same event. Quiet tracing
+remains empty, and caller-owned emitters are reused rather than replaced.
 
 Example Rust usage:
 

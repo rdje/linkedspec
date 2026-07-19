@@ -16,7 +16,7 @@ answers:
   - "why do Lua root selection fixtures use I instead of E"
   - "is Lua root selection admitted"
 date: 2026-07-18
-status: core implemented on PUC Lua and LuaJIT; composed routes, cursor, and admission remain pending
+status: core and composed routes implemented on PUC Lua and LuaJIT; cursor and admission remain pending
 tags: [lua, luajit, root-rule, top-rule, markerless, parser, validation, diagnostics, descriptor, strict-syntax, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 adds `resolve_entry_rule`, the single ordered resolver over `CompiledSpec.compiled_rule_order`: structural zero-rule failure first, then exact explicit selector, first authored `header.is_top`, and row one. Empty state returns `no_rules_defined` / `validate_spec`; unknown explicit selection returns `entry_rule_not_found` / `select_entry_rule` with requested `entry_rule`, before runtime context or user code. Validation accepts one-or-more-rule markerless source. `parse_spec` preserves empty/comment-only `SpecFile` envelopes so validation owns the portable zero-rule identity, while non-rule text remains a parser error. Descriptor metadata publishes `linkedspec-root-rule-selection-v1`; definition order and authored `is_top` bits remain unchanged before and after selection. Neutral strict-unused rows remain authored-edge-only. The focused consumer passes 99 assertions on PUC Lua and LuaJIT; package execution is 176/177 with only the cursor-help mismatch on each ABI; shared primary is exactly 32/65 with `POSIXLY_CORRECT` unset and set on both ABIs, leaving the same 33 cursor-owned failures; corpus is 105/105 per ABI. Root governance stays 5 complete / 2 pending with 39 mutations because composed routes `.5.2`, cursor `.9.1.7`, and topology admission `.5.3` have not landed. KM is 624/4,546; mdBook/four doctrines pass; canonical local CI closes with root consumers 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 613 seconds."
 reverify: "bash tools/run_lua_local.sh && python3 tools/check_root_rule_selection_contract.py"
@@ -42,7 +42,8 @@ shared request-trace source bytes remain unchanged.
 
 This card covers parser/validation, compiled resolution, native/primary behavior, portable selection failures,
 descriptor identity, and strict no-drift. Loaded/reconstructed/generated/emitted, low trace, and composed failure
-convergence remain `.5.2`; cursor `.9.1.7` and final dual-ABI topology admission `.5.3` follow.
+convergence are now implemented by `.5.2`; follow [[lua-root-rule-selection-routes]]. Cursor `.9.1.7` and final
+dual-ABI topology admission `.5.3` follow.
 
 Related: [[lua-root-rule-selection-preflight]], [[root-rule-selection-precedence]],
 [[julia-root-rule-selection-core]], and [[dart-root-rule-selection-core]].

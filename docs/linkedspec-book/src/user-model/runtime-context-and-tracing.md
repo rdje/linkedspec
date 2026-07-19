@@ -459,9 +459,17 @@ Julia native, loaded, normalized-JSON, generated, and independently emitted rout
 `julia_runtime:entry_rule_selection` decisions record requested selector, effective rule, and basis; failures use
 `<none>` effective/basis plus portable stage/code. Loader and generated wrappers preserve zero/unknown identities
 after generated-plan validation. Julia cursor-option removal and its exact 15-role topology admission are current
-through `.9.1.6.6`. Lua core now accepts markerless one-or-more-rule source and applies the same precedence before
-runtime context/user code on both ABIs; composed route trace/diagnostic convergence and admission remain pending,
-so markerless behavior is implemented but not yet uniformly admitted.
+through `.9.1.6.6`. Lua now applies the same resolver across native, loaded, normalized-AST, generated-v1, and
+freshly emitted direct/traced execution on both ABIs. A low success decision has this shape:
+
+```text
+[LOW][decision] lua_runtime:entry_rule_selection taken=1 reason=requested=Second effective=Second basis=explicit_selector
+```
+
+Omitted selection writes `requested=<default>` and either `basis=first_authored_marker` or
+`basis=first_authored_rule`. Failure writes `effective=<none>` followed by portable `stage` and `code`; it occurs
+before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua topology admission and cursor
+migration remain pending, so markerless behavior is implemented but not yet uniformly admitted.
 Cursor policy comes from each authored rule family. Perl, Rust, Dart, and Julia reject the retired `--parse-mode`
 flag; Lua's later rollout leaf owns removal.
 

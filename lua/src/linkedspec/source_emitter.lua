@@ -11,6 +11,8 @@ M.GENERATED_SOURCE_FORMAT = 1
 M.EMIT_SOURCE_STAGE = "emit_source"
 M.COMPILE_OR_LOAD_GENERATED_SOURCE_STAGE = "compile_or_load_generated_source"
 M.VALIDATE_GENERATED_PLAN_STAGE = "validate_generated_plan"
+M.VALIDATE_GENERATED_SPEC_STAGE = "validate_spec"
+M.SELECT_GENERATED_ENTRY_RULE_STAGE = "select_entry_rule"
 M.EXECUTE_GENERATED_STAGE = "execute_generated"
 
 M.GENERATED_SOURCE_EMIT_FAILED_CODE = "generated_source_emit_failed"
@@ -19,12 +21,16 @@ M.GENERATED_PLAN_ROW_COUNT_MISMATCH_CODE = "generated_plan_row_count_mismatch"
 M.GENERATED_PLAN_LABEL_MISMATCH_CODE = "generated_plan_label_mismatch"
 M.GENERATED_PLAN_FAMILY_MISMATCH_CODE = "generated_plan_family_mismatch"
 M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE = "generated_plan_unknown_family"
+M.GENERATED_NO_RULES_DEFINED_CODE = "no_rules_defined"
+M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE = "entry_rule_not_found"
 M.GENERATED_EXECUTION_FAILED_CODE = "generated_execution_failed"
 
 local STAGES = {
   [M.EMIT_SOURCE_STAGE] = true,
   [M.COMPILE_OR_LOAD_GENERATED_SOURCE_STAGE] = true,
   [M.VALIDATE_GENERATED_PLAN_STAGE] = true,
+  [M.VALIDATE_GENERATED_SPEC_STAGE] = true,
+  [M.SELECT_GENERATED_ENTRY_RULE_STAGE] = true,
   [M.EXECUTE_GENERATED_STAGE] = true,
 }
 
@@ -35,6 +41,8 @@ local CODES = {
   [M.GENERATED_PLAN_LABEL_MISMATCH_CODE] = true,
   [M.GENERATED_PLAN_FAMILY_MISMATCH_CODE] = true,
   [M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE] = true,
+  [M.GENERATED_NO_RULES_DEFINED_CODE] = true,
+  [M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE] = true,
   [M.GENERATED_EXECUTION_FAILED_CODE] = true,
 }
 
@@ -131,6 +139,7 @@ function M.generated_source_error(options)
       "generated source error source_identity",
       true
     ),
+    entry_rule = optional_string(options.entry_rule, "generated source error entry_rule"),
     rule_label = optional_string(options.rule_label, "generated source error rule_label"),
     handler_family = optional_string(options.handler_family, "generated source error handler_family"),
     detail = optional_string(options.detail, "generated source error detail"),
@@ -148,6 +157,7 @@ function M.generated_source_error_to_json(value)
     summary = value.summary,
     source_identity = value.source_identity,
   })
+  if value.entry_rule ~= nil then result.entry_rule = value.entry_rule end
   if value.rule_label ~= nil then result.rule_label = value.rule_label end
   if value.handler_family ~= nil then result.handler_family = value.handler_family end
   if value.detail ~= nil then result.detail = value.detail end
@@ -175,6 +185,27 @@ function M.generated_source_execution_failed(source_identity, detail, options)
     rule_label = options.rule_label,
     handler_family = options.handler_family,
     detail = tostring(detail),
+  })
+end
+
+function M.generated_source_entry_rule_selection_failed(source_identity, runtime_error)
+  if not interpreter.is_runtime_interpreter_error(runtime_error) or runtime_error.diagnostic == nil then
+    fail("runtime error is not an entry-rule selection failure")
+  end
+  local diagnostic = runtime_error.diagnostic
+  if diagnostic.code ~= M.GENERATED_NO_RULES_DEFINED_CODE and
+      diagnostic.code ~= M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE then
+    fail("runtime error is not an entry-rule selection failure")
+  end
+  local zero_rules = diagnostic.code == M.GENERATED_NO_RULES_DEFINED_CODE
+  return M.generated_source_error({
+    stage = zero_rules and M.VALIDATE_GENERATED_SPEC_STAGE or M.SELECT_GENERATED_ENTRY_RULE_STAGE,
+    code = zero_rules and M.GENERATED_NO_RULES_DEFINED_CODE or M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE,
+    summary = "Generated Lua parser entry-rule selection failed",
+    source_identity = require_string(source_identity, "source_identity", true),
+    entry_rule = diagnostic.entry_rule,
+    rule_label = diagnostic.rule_label,
+    detail = diagnostic.detail,
   })
 end
 
@@ -388,6 +419,11 @@ local function execute_generated(compiled, plan, input, source_identity, options
     raise(result.failure)
   end
   if interpreter.is_runtime_exit_now(result) then raise(result) end
+  if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil and
+      (result.diagnostic.code == M.GENERATED_NO_RULES_DEFINED_CODE or
+        result.diagnostic.code == M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE) then
+    raise(M.generated_source_entry_rule_selection_failed(identity, result))
+  end
   local rule_label = nil
   if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil then
     rule_label = result.diagnostic.rule_label

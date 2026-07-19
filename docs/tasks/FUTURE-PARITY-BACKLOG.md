@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-18` (clean commit `5be5fc55` lands Dart composed root routes; topology/reference
-  admission `.9.1.1.2.3.3` is active task-tree-first and rollout stays 3/7)
+- Last updated: `2026-07-18` (Lua root core `.5.1` is clean at `5a8d3fcf`; composed dual-ABI route `.5.2` passes
+  focused proof and is in canonical closeout while rollout stays 5/7)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3996,10 +3996,11 @@ before implementation.
   Children: `.9.1.1.2.5.0`, `.9.1.1.2.5.1`, `.9.1.1.2.5.2`, `.9.1.1.2.5.3`
   Acceptance: Align parser/validation, PUC Lua/LuaJIT runtime and generated routes, descriptors/traces, strict
     checks, and primary CLI with the unchanged neutral contract and reference bytes.
-  Verification: `active; behavior-free .5.0 and core .5.1 are complete; marker-optional native/primary resolution,
-    portable failures, strict no-drift, and descriptor identity pass identically on both ABIs at focused 99,
-    package 176/177 with the cursor-help mismatch, primary 32/65x4, corpus 105x2, and canonical Phase 0 1,031;
-    composed routes .5.2 follow only after the clean .5.1 commit, then cursor .9.1.7 and admission .5.3`
+  Verification: `active; behavior-free .5.0, core .5.1, and composed routes .5.2 are complete. Both ABIs pass
+    marker-optional native/primary resolution plus loaded/reconstructed/generated-v1/emitted direct/traced reuse,
+    portable failures, trace, strict/descriptor/plan/artifact no-drift, focused core 99 and routes 101, package
+    176/177 with the cursor-help mismatch, primary 32/65x4, corpus 105x2, and canonical Phase 0 1,031. Cursor
+    .9.1.7 follows only after the clean .5.2 commit, then admission .5.3.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0`
@@ -4094,7 +4095,7 @@ before implementation.
     brief; and only then activate composed routes `.5.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Lua loaded, reconstructed, generated/emitted, trace, and diagnostic root-selection routes.
   Dependencies: `.9.1.1.2.5.1`
   Acceptance: Prove loaded source and normalized AST reconstruction preserve order/markers and reuse the resolver;
@@ -4102,8 +4103,37 @@ before implementation.
     same invocation-local selector without changing the minimal plan or v1/format-1 identity; specialize only zero/
     unknown generated failures; keep plan validation before selection; add low requested/effective/basis success and
     requested/none/stage/code failure trace; prove both ABIs and leave the 33 cursor-owned primary mismatches exact.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-18 only after core `.5.1` committed cleanly at `5a8d3fcf`,
+    `git_message_brief.txt` was zero bytes, generated book/Python-cache/disposable native artifacts were absent,
+    and the branch was clean at ahead 232. Route ownership was retrieved before behavior edits. A RED focused
+    consumer exposed 27 planned failures: loader zero-rule code/detail, absent success/failure selection trace, and
+    generic generated zero/unknown wrappers; loaded/reconstructed execution, artifact identity, and plan-first
+    ordering were already green. The implementation now makes all loaded/normalized/generated-v1/emitted direct/
+    traced routes reuse the core resolver, specializes only portable zero/unknown adapter failures, and emits the
+    low selection decision before context/parse scope. Focused route proof is 101/101 on PUC Lua and LuaJIT;
+    diagnostic is 119/119, package remains 176/177 with only the cursor-help mismatch, all four primary legs remain
+    exactly 32/65 with the same 33 cursor-owned residuals, and corpus is 105/105 per ABI. Root governance remains
+    5/7+39; KM is 625/4,561; mdBook, syntax, shell, whitespace, memory, Knowledge Map, task metadata, and all four
+    doctrines pass. Canonical local CI exits 0 after root consumers 7+5, cursor admission 288, reference primary
+    65x2, and Phase 0 1,031/1,031 in 643 seconds. Generated book, Python cache, and both disposable native trees
+    are removed. Rollout remains 5/7; cursor `.9.1.7` follows only after the clean `.5.2` commit.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / ROUTE OWNERS** — Re-read the Lua preflight/core cards, admitted Julia/Dart route precedents,
+    generated-v1 and loader/runtime/trace owners, Toolbox, exact neutral contract, and current tests before edits.
+  - [x] **LOADED / RECONSTRUCTED REUSE** — Prove source loading and normalized AST reconstruction preserve authored
+    order/markers and reach the core resolver without a second selection algorithm or descriptor mutation.
+  - [x] **GENERATED / EMITTED REUSE** — Make generated-v1 direct/traced and freshly emitted direct/traced calls use
+    one invocation-local selector while retaining contract v1, format 1, and the minimal label/family plan.
+  - [x] **FAILURE ORDER / PROJECTION** — Preserve loader zero-rule identity, specialize only zero/unknown generated
+    selection failures, and keep generated contract/plan validation before selection.
+  - [x] **TRACE IDENTITY** — Add low requested/effective/basis success decisions and requested/none/stage/code
+    failure decisions with direct/traced identity and no caller-owned emitter leakage.
+  - [x] **DUAL-ABI / LOCKSTEP / COMMIT** — Prove focused and complete PUC Lua/LuaJIT route behavior, retain exact
+    32/65x4 primary and 33 cursor-owned residuals, synchronize live/public/book/KM records, pass canonical gates,
+    clean safe artifacts, commit `.5.2`, and clear the brief before cursor `.9.1.7` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3`
   Status: `pending`
@@ -8074,10 +8104,10 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 212.2.4.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.1` | `done` | Marker-optional Julia core resolution, failures, strict no-drift, descriptor, neutral 79, primary 32/65x2, corpus 105, and canonical signoff pass without route/admission promotion. |
 | 212.2.4.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.2` | `done` | Loaded/normalized/generated/emitted/trace/diagnostic routes pass 57 focused assertions, the exact current Julia boundary, KM/book/live lockstep, canonical proof, and cleanup without rollout promotion. |
 | 212.2.4.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `done` | Exact 15 roles, focused 137, package 3,428, primary 65x2, corpus 105, 39 mutations, Julia-only 5/7 promotion, canonical 1,031/616s, and cleanup pass. |
-| 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `active` | Preflight `.5.0` and core `.5.1` are complete; marker-optional native resolution is exact on both ABIs and the clean core commit precedes routes `.5.2`. |
+| 212.2.5 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5` | `active` | Preflight `.5.0`, core `.5.1`, and composed loaded/generated/trace routes `.5.2` are complete; cursor `.9.1.7` must precede admission `.5.3`. |
 | 212.2.5.0 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | `done` | Exact symmetric dual-ABI seam map freezes parser/validation, core, routes, cursor, and 15-role admission order without behavior or rollout change; canonical 1,031/609s passes. |
 | 212.2.5.1 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | `done` | Marker-optional parser/validation, one ordered resolver, portable failures, strict/descriptor identity, focused 99x2, primary 32/65x4, corpus 105x2, and canonical 1,031/613s pass. |
-| 212.2.5.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | `pending` | Converge loaded/reconstructed/generated/emitted/trace/diagnostic routes after core. |
+| 212.2.5.2 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | `done` | Route mechanisms pass 101x2 with unchanged generated v1 identity, exact 32/65x4 primary residuals, and canonical Phase 0 1,031/643s. |
 | 212.2.5.3 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` | `pending` | Topology-check both Lua ABIs, pass shared primary 65x2, promote only Lua, and close parent `.5`. |
 | 212.2.6 | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | `pending` | Admit five-backend parity and close public no-drift. |
 | 213 | `FUTURE-PARITY-BACKLOG.9.1.2` | `done` | Executable neutral contract, exact 91-file inventory, 27 mutations, canonical CI, and 1/7 ledger are locked. |
@@ -8798,13 +8828,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Lua root core `.5.1` passes focused dual-ABI, package-boundary, governance, book, and canonical proof.
-  Only its prepared clean commit remains before composed routes `.5.2` may activate.
+- None. Composed Lua root routes `.5.2` pass focused dual-ABI, package-boundary, governance, book, and canonical
+  proof. Only the prepared clean commit remains before cursor `.9.1.7` may activate.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | RED 27/79 route gaps; loaded/reconstructed/generated-v1/emitted direct/traced reuse; typed loader/generated zero/unknown projection; plan-validation-first ordering; low requested/effective/basis and failure stage/code trace; entry-`I` result fixtures; focused routes 101, diagnostic 119 per ABI; package 176/177 and corpus 105 per ABI; primary 32/65 in all four default/POSIX ABI legs with exactly 33 cursor residuals; root 5/7+39; KM 625/4,561; mdBook/syntax/shell/whitespace/memory/KM/task/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 643s; generated book/cache/native-tree cleanup. | PASS. Lua route behavior is exact on both ABIs without artifact or rollout promotion; only the clean `.5.2` commit may precede cursor `.9.1.7`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | RED missing-resolver proof; empty/comment parser envelopes and typed one-or-more-rule validation; neutral 8/3/3 consumer plus native/primary precedence; pre-context zero/unknown failures; immutable descriptor/strict authored-edge no-drift; entry-`I` result fixtures; focused root 99, diagnostic 119, logical 359 per ABI; package 176/177 and corpus 105 per ABI; primary 32/65 in all four default/POSIX ABI legs with exactly 33 cursor residuals; root 5/7+39; KM 624/4,546; mdBook/JSON/shell/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 613s; generated book/cache/native-tree cleanup. | PASS. Lua core/native/primary behavior is exact on both ABIs without route/admission promotion; only the clean `.5.1` commit may precede `.5.2`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | ADR/KM/Toolbox/admitted-precedent retrieval; exact parser/validator/native/loaded/reconstructed/generated-v1/emitted/descriptor/trace/diagnostic/strict/zero/unknown seam probes on PUC Lua and LuaJIT; primary 31/65 in all four default/POSIX legs with one root-owned plus 33 cursor-owned residuals; package 176+known-one and corpus 105 per ABI; entry-`I` fixture decision; `.5.1`/`.5.2`/cursor `.9.1.7`/`.5.3` dependency freeze; root 5/7+39; cursor 5+3/44; KM 623/4,533; mdBook/four doctrines/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 609s. | PASS. No Lua behavior, fixture, neutral contract, capability, or rollout change; only the clean `.5.0` commit may precede core `.5.1`. |
 | `2026-07-18` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | Exact ordered 15-role once-only Julia consumer; entry-`I` selection evidence; world-age-safe emitted bindings; package/canonical driver and six shared-primary locks; focused 137; package 3,428; primary 65x2; corpus 105; root 5/7+39; KM 622/4,524; mdBook/four doctrines/JSON/whitespace; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 616s; generated 11 MiB book/28 KiB cache cleanup. | PASS. Only Julia advances; parent `.4` closes and Lua `.5` waits for the clean commit. |
@@ -9001,6 +9032,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes` | Loaded/reconstructed/generated-v1/emitted route convergence, typed wrapper failures, low selection trace, entry-`I` fixtures, 101x2 focused, exact 32/65x4 primary, 105x2 corpus, 625/4,561 KM, canonical 1,031/643s, and cleanup without artifact or rollout promotion. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.1 - implement Lua root selection core` | Marker-optional parser/validation, one pre-effect resolver, portable failures, immutable descriptor/strict identity, entry-`I` fixtures, 99x2 focused, 32/65x4 primary, 105x2 corpus, 624/4,546 KM, canonical 1,031/613s, and cleanup without rollout promotion. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.0 - map Lua root selection` | Exact symmetric dual-ABI seam map, 31/65x4 primary split, entry-`I` fixture decision, root/cursor dependency freeze, 623/4,533 KM, canonical 1,031/609s, and no behavior or rollout change. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3` | `FUTURE-PARITY-BACKLOG.9.1.1.2.4.3 - admit Julia root selection` | Exact 15-role consumer, entry-`I` proof, 39 mutations, package 3,428, primary 65x2, corpus 105, Julia-only 5/7 promotion, parent closeout, canonical 1,031/616s, and cleanup. |
@@ -9180,6 +9212,18 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-19`: Lua composed root routes `.9.1.1.2.5.2` converge loaded/reconstructed/generated-v1/emitted
+  direct/traced execution on the core resolver, preserve v1/format-1 minimal plan identity and plan-first
+  validation, specialize only typed zero/unknown boundary failures, and add low selection decisions before parse
+  scope. Hand-authored results use entry `I`; fixed request-trace bytes retain `E`. Focused routes 101, diagnostic
+  119, package 176/177, primary 32/65 default/POSIX, and corpus 105 pass per ABI; root stays 5/7+39. KM
+  625/4,561, mdBook/four doctrines, and canonical root 7+5/cursor 288/primary 65x2/Phase 0 1,031 in 643 seconds
+  pass. Safe generated book/cache/native-tree cleanup passes; only the prepared clean commit may precede cursor
+  `.9.1.7`.
+- `2026-07-18`: Clean commit `5a8d3fcf` lands Lua root core `.9.1.1.2.5.1`; tracked/untracked state is clean,
+  `git_message_brief.txt` is zero bytes, generated book/cache/native artifacts are absent, and ahead is 232.
+  Composed routes `.5.2` activate task-tree-first; cursor `.9.1.7`, admission `.5.3`, shared fixture bytes, and
+  rollout rows remain untouched.
 - `2026-07-18`: Lua root core `.9.1.1.2.5.1` makes markerless one-or-more-rule source valid on PUC Lua and
   LuaJIT, centralizes explicit > first marker > first rule selection before runtime context/user code, returns
   portable zero/unknown failures, and preserves authored descriptor/strict identity. New selection results use

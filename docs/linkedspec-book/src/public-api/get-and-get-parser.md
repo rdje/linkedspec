@@ -463,9 +463,10 @@ backends implement the exact order across native, loaded/reconstructed, generate
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
 markerless, explicit, unknown, and request-trace outcomes. Rust, Dart, and Julia admission each topology-check one
 15-role consumer across the neutral rows and every real backend route family. Julia's selection-focused fixtures
-use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua validation still blocks
-fallback. Use an explicit selector and retain a marker when current
-composed multi-backend execution must be independent of those staged differences.
+use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua core and composed routes
+now implement the same order on PUC Lua and LuaJIT, but cursor migration and the Lua topology consumer remain
+pending. Retain a marker when execution must satisfy the current composed admission ledger rather than merely the
+implemented runtime behavior.
 
 ```perl
 my $parser = LinkedSpec::Get(
@@ -487,9 +488,9 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, Dart, and Julia
-native, loaded/reconstructed, generated/emitted, traced, and primary routes accept this shape and are admitted.
-Lua remains pending, so it is not yet an admitted five-backend source:
+With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, Dart, Julia, and Lua
+native, loaded/reconstructed, generated/emitted, and traced routes accept this shape. Lua is not yet topology-
+admitted, so this is implemented on all runtimes but is not yet an admitted five-backend source:
 
 ```text
 First:
@@ -498,6 +499,45 @@ First:
 Second:
  /second/
 ```
+
+### Lua core and composed routes
+
+Lua exposes the same invocation-local selector through `runtime_parse(...)`, loaded engines, normalized AST
+reconstruction, generated-v1 execution, and emitted modules. Use lifecycle `I` when a test must prove which rule
+was entered, because `E` runs only after matching:
+
+```lua
+local linkedspec = require("linkedspec")
+
+local source = [[
+First:
+ /x/
+ I { return("first") }
+
+Second:
+ /x/
+ I { return("second") }
+]]
+
+local compiled = linkedspec.compile_spec(linkedspec.parse_spec(source))
+local engine = linkedspec.runtime_engine(compiled)
+
+assert(linkedspec.runtime_parse(engine, "x").value == "first")
+assert(linkedspec.runtime_parse(engine, "x", { top_rule = "Second" }).value == "second")
+```
+
+The compiled descriptor and generated family plan do not change between calls. Generated source remains
+`linkedspec-generated-source-v1` / format 1, and plan rows remain `{label, family}` only. A low traced call emits
+one selection decision for the invocation:
+
+```text
+[LOW][decision] lua_runtime:entry_rule_selection taken=1 reason=requested=Second effective=Second basis=explicit_selector
+```
+
+Empty loaded source reports `no_rules_defined` at `validate_spec`. After a valid generated plan, an unknown
+selector reports `entry_rule_not_found` at `select_entry_rule` with `entry_rule` and `rule_label`; a zero-rule
+compiled state reports `no_rules_defined` at `validate_spec`. Invalid plans still fail at
+`validate_generated_plan` before selection, and unrelated failures retain their generic codes.
 
 ### Julia core, composed routes, and admission
 
@@ -554,8 +594,8 @@ return distinct values from `I`, proving which rule was entered; the fixed reque
 canonical lifecycle source. Focused proof is 137, package proof is 3,428, primary is 65x2, corpus is 105, and root
 governance is 5/7 plus 39 rejected mutations.
 
-Until Lua and final five-backend admission land, use a marker when the same source must run on Lua, even when
-supplying `--top-rule`:
+Until Lua and final five-backend admission land, use a marker when the same source must satisfy the current
+admission ledger, even though current Lua execution already supports the markerless fallback:
 
 ```text
 FallbackMarker::
