@@ -46,7 +46,12 @@ override, descriptor remains global seek, trace lacks derived policy, and genera
 Package is 176/177 per ABI, primary is exactly 32/65x4, corpus is 105/105x2, and cursor governance stays
 67/5+3/44. No executable behavior or shared fixture changed; normalization `.9.1.7.1` is next after the clean
 preflight commit. Canonical preflight signoff passes root 7+5, cursor 288, reference primary 65x2, and Phase 0
-1,031/1,031 in 631 seconds.
+1,031/1,031 in 631 seconds. Clean commit `47a1d166` activates typed family/edge normalization `.9.1.7.1`.
+Normalization `.1` is now exact on both ABIs: the contract-driven proof moves from identical 44/166 RED failures
+to 258/258 green assertions over all 36 families, 18 edge rows, six ownership sets, portable diagnostics, AST
+roundtrips, and compiled action/blind lowering. Package remains 176/177x2 with only staged help, primary remains
+32/65x4, corpus remains 105/105x2, and governance remains 67/5+3/44. Runtime `.2` is the next dependency after
+normalization is signed off and committed; descriptor/generated/public/admission owners remain `.3-.6`.
 
 ## Scope and Objective
 - Make LinkedSpec a serious, stable, respected parser prototyping tool.

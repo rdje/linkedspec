@@ -79,6 +79,17 @@ remains v1/format 1. Package proof is 176/177 per ABI, all four ABI/environment 
 behavior or shared fixture changes in the preflight; `.9.1.7.1-.6` retain the dependency order normalization,
 normal runtime, descriptor v1, generated v2, option removal, and dual-ABI admission.
 
+Lua normalization `.9.1.7.1` now closes the first implementation step identically on PUC Lua and LuaJIT. Compact
+`|` is authored OR/default; complete-line and header-rest bare plain/index/group/block/fluent candidates retain
+typed provenance and nullable authored indices; lifecycle markers keep lexical priority; forward targets resolve
+after all labels are known; and explicit edges keep written ownership. Validation emits the exact six neutral
+edge codes with governed stage/fields, while valid family-derived ownership lowers into existing compiled
+action/blind tables. The exact contract proof moves from 44/166 RED failures to 258/258 green assertions per ABI;
+all five focused consumers pass 936 assertions per ABI. Package remains 176/177 with only staged help, all four
+primary legs remain 32/65, corpus remains 105/105 per ABI, and cursor governance remains 67/5+3/44. Runtime still
+uses the global engine policy, descriptor still carries its old global field, generated source remains v1/format
+1, and public options/rollout remain unchanged for `.2-.6`.
+
 Julia normalization now passes 353 contract-driven assertions over all 36 family spellings, all 18 edge rows, and
 all six ownership sets. Compact `|` is OR/default; complete-line and header-rest bare references preserve omitted
 versus authored `[0]` indices, blocks, fluents, forward targets, source form, and lifecycle precedence. Validation

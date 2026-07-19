@@ -59,7 +59,14 @@ ABI, every default/POSIX primary leg is exactly 32/65 with the same 33 cursor-ow
 per ABI, and governance stays 67 files / 5 complete + 3 pending / 44 mutations. No executable behavior or shared
 fixture changed. Typed normalization, runtime, descriptor v1, generated v2, option removal, and dual-ABI admission
 remain dependency-ordered `.9.1.7.1-.6`. Canonical signoff passes root consumers 7+5, cursor admission 288,
-reference primary 65x2, and Phase 0 1,031/1,031 in 631 seconds.
+reference primary 65x2, and Phase 0 1,031/1,031 in 631 seconds. Clean commit `47a1d166` activates typed family/
+bare-edge normalization `.9.1.7.1` without advancing later runtime/artifact/public owners.
+That normalization is now implemented identically on PUC Lua and LuaJIT. Compact `|` is authored OR/default;
+complete-line/header-rest bare plain/index/group/block/fluent forms are typed and JSON-roundtrippable; all six
+portable edge diagnostics carry exact stage/code/fields; and valid family-derived ownership lowers into existing
+compiled action/blind tables. Exact proof moves from 44/166 RED failures to 258/258 green assertions per ABI;
+package stays 176/177 with only staged help, primary stays 32/65x4, corpus stays 105/105x2, and governance stays
+67/5+3/44. Live cursor spending, descriptor v1, generated v2, option removal, and admission remain `.2-.6`.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both

@@ -5567,8 +5567,8 @@ before implementation.
   Verification: Activated task-tree-first on 2026-07-19 only after Julia cursor `.9.1.6` and Lua root routes
     `.9.1.1.2.5.2` were complete, route leaf `.5.2` landed at clean commit `c3bdca44`,
     `git_message_brief.txt` was zero bytes, generated book/cache/native artifacts were absent, and the branch was
-    clean at ahead 233. Child `.0` owns read-only retrieval, exact dual-ABI boundary reproduction, and the
-    dependency-safe `.1-.6` split before any Lua cursor behavior edit.
+    clean at ahead 233. Child `.0` completed exact dual-ABI boundary reproduction and the dependency-safe `.1-.6`
+    split at clean commit `47a1d166`; `.1` is now active from that handoff.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.0`
@@ -5633,28 +5633,36 @@ before implementation.
     65x2, and Phase 0 1,031/1,031 in 631 seconds. The `.1-.6` dependency order is confirmed unchanged.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.1`
-  Status: `pending`
+  Status: `done`
   Goal: Normalize Lua authored families and mode-sensitive bare-edge ownership with portable diagnostics.
   Dependencies: `.9.1.7.0`
   Acceptance: Consume all 36 neutral family rows, all 18 edge rows, and all six ownership sets in Lua AST/parser/
     validation/compiled state. Correct compact `|` if required; normalize complete-line and header-rest bare
     plain/indexed/grouped/block/fluent members only after labels are known; preserve lifecycle precedence, forward
     targets, explicit overrides, and provenance; reject every governed invalid edge/set with exact portable fields.
-  Verification: `pending`
+  Verification: `activated task-tree-first from clean preflight commit 47a1d166 at ahead 234; exact contract
+    RED is identical at 44/166 failures on PUC Lua and LuaJIT; implementation passes 258/258 assertions per ABI
+    over 36 family rows, 18 edge rows, six ownership sets, portable diagnostics, AST JSON, and compiled lowering;
+    all five focused consumers pass 936 assertions per ABI; package remains 176/177 with only the staged help
+    mismatch, primary remains 32/65x4, and corpus remains 105/105x2; cursor governance is 67/5+3/44, KM is
+    627/4,587, mdBook/all four doctrines pass, and canonical local CI closes with root 7+5, cursor 288, reference
+    primary 65x2, and Phase 0 1,031/1,031 in 632 seconds; generated book, Python cache, and two 104 KiB native
+    trees removed`
   Commit: `pending`
 
   #### Acceptance Checklist
 
-  - [ ] **REPRODUCE / ISSUE** — Use contract-driven Lua probes on PUC Lua and LuaJIT to record every family,
+  - [x] **REPRODUCE / ISSUE** — Use contract-driven Lua probes on PUC Lua and LuaJIT to record every family,
     edge, ownership, and diagnostic mismatch before editing.
-  - [ ] **ROOT CAUSE (WHY + WHERE)** — Use parsed/compiled/tool trace output to locate family classification,
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Use parsed/compiled/tool trace output to locate family classification,
     bare-member retention/normalization, validation, and lowering owners with exact source locations.
-  - [ ] **FIX** — Add one typed normalization path and portable diagnostic projection without changing live cursor
+  - [x] **FIX** — Add one typed normalization path and portable diagnostic projection without changing live cursor
     spending, descriptor/generated versions, public options, shared fixtures, or rollout.
-  - [ ] **ADDRESSED (verified)** — Pass the exact neutral 36/18/6 rows and all invalid mutations identically on
+  - [x] **ADDRESSED (verified)** — Pass the exact neutral 36/18/6 rows and all invalid mutations identically on
     both ABIs with compiled ownership and roundtrip identity.
-  - [ ] **NO REGRESSION / LOCKSTEP** — Pass complete dual-ABI package/corpus/primary/governance/canonical proof,
-    synchronize durable docs/KM/book, clean artifacts, commit `.1`, and only then activate runtime `.2`.
+  - [x] **NO REGRESSION** — Pass complete dual-ABI package/corpus/primary/governance/canonical proof and clean
+    generated artifacts.
+  - [x] **LOCKSTEP** — Synchronize durable docs/KM/book, commit `.1`, and only then activate runtime `.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.7.2`
   Status: `pending`
@@ -5672,7 +5680,7 @@ before implementation.
 
   - [ ] **REPRODUCE / ISSUE** — Use the neutral contract through exact dual-ABI runtime probes to record family,
     parent-child, structural, loaded/normalized, recursive, and trace drift.
-  - [ ] **ROOT CAUSE (WHY + WHERE)** — Trace every policy spending site and parent/global propagation seam to exact
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Trace every policy application site and parent/global propagation seam to exact
     runtime/compiler locations, including generated-v1 interaction.
   - [ ] **FIX** — Derive immutable execution policy at each rule entry and make every child rederive independently,
     without weakening low-level seek/consume APIs or changing later artifact/public owners.
@@ -8363,9 +8371,9 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 217.4 | `FUTURE-PARITY-BACKLOG.9.1.6.4` | `done` | V2 minimal family plan, contract-before-payload validation, 65 focused, package/corpus/staged-primary/governance/KM/mdBook/canonical proof, and cleanup pass. |
 | 217.5 | `FUTURE-PARITY-BACKLOG.9.1.6.5` | `done` | Julia high-level global option removal, exact diagnostics, 3,187/package, ten-process, 65x2 primary, 105 corpus, 66/4+4/39 governance, canonical 1,031/637s, and cleanup pass. |
 | 217.6 | `FUTURE-PARITY-BACKLOG.9.1.6.6` | `done` | Exact composed 15-role Julia admission, Julia-only rollout promotion, parent closeout, and root-admission handoff pass. |
-| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Behavior-free dual-ABI preflight `.0` is complete; typed normalization `.1` is next before runtime/descriptor/generated/removal/admission `.2-.6`. |
+| 218 | `FUTURE-PARITY-BACKLOG.9.1.7` | `active` | Dual-ABI preflight `.0` and typed normalization `.1` are complete; intrinsic runtime `.2` is next before descriptor/generated/removal/admission `.3-.6`. |
 | 218.0 | `FUTURE-PARITY-BACKLOG.9.1.7.0` | `done` | Exact dual-ABI behavior-free boundary recorded: 36/34/22 families, 5/13+2/4 valid edges, 0/7 diagnostics, 4/8 parent-child, 1/2 structural, 176/177x2 package, 32/65x4 primary, and 105/105x2 corpus. |
-| 218.1 | `FUTURE-PARITY-BACKLOG.9.1.7.1` | `pending` | Normalize all families and mode-sensitive bare edges with portable diagnostics on both ABIs. |
+| 218.1 | `FUTURE-PARITY-BACKLOG.9.1.7.1` | `done` | Exact RED 44/166x2 repaired to 258/258x2; package 176/177x2, primary 32/65x4, corpus 105/105x2, governance/KM/mdBook/doctrines/canonical proof, and cleanup pass. |
 | 218.2 | `FUTURE-PARITY-BACKLOG.9.1.7.2` | `pending` | Derive live/loaded/normalized/recursive/traced policy independently at every rule entry. |
 | 218.3 | `FUTURE-PARITY-BACKLOG.9.1.7.3` | `pending` | Project cursor descriptor v1 with family/policy/ownership/resolved-edge identity. |
 | 218.4 | `FUTURE-PARITY-BACKLOG.9.1.7.4` | `pending` | Emit minimal generated v2, derive policy by family, reject v1, and prove both ABIs. |

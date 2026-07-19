@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.1` — syntax identity can move without moving versioned execution):
+  Lua's normal compiled `is_and` fact and generated-v1 family classifier are separate owners. Removing `Pipe`
+  from `rule_mode_is_and(...)` makes authored compact `|` exact for AST/compiled normalization, while the v1
+  emitter continues to branch on `mode.name == "Pipe"` and therefore preserves its staged legacy AND family.
+  This is the safe isolation boundary: `.1` repairs semantic source identity without silently changing a
+  versioned artifact that `.4` must explicitly replace.
+
+  Bare recognition belongs at the first complete physical member, not at every remaining token. Passing
+  `allow_bare_edge = (#elements == 0)` into both body-line and header-rest parsing prevents `/x/ Child` from
+  reinterpreting `Child` as a new edge, while still allowing multiline blocks. Lifecycle parsing remains earlier
+  than bare parsing, so `I` retains lifecycle meaning even when a rule named `I` exists; explicit `=> I` remains
+  an edge. Forward targets are retained as typed candidates and resolved only during whole-spec validation.
+
+  Nullable authored indices are structural evidence. `BareEdgeTarget.index = nil` means no index was written;
+  `[0]` remains zero and can produce `bare_edge_index_requires_action` in an AND parent. Explicit blind edges now
+  retain the same authored index long enough to produce `blind_call_index_forbidden` instead of falling back to
+  raw syntax. Valid bare ownership lowers into existing compiled tables, so runtime and later descriptor/emitter
+  work consume one normalized state rather than re-parsing syntax.
+
+  The contract-driven proof intentionally imports AST/parser/validator/compiler owners directly, avoiding the
+  native matcher dependency while still executing the same semantic source under PUC Lua and LuaJIT. Exact RED
+  was 44/166 failures on each ABI; green is 258/258. The native package remains 176/177 only because `.5` still
+  owns shared help; primary stays 32/65x4; corpus stays 105/105x2; governance stays 67/5+3/44. Runtime policy,
+  descriptor v1, generated v2, public removal, and rollout do not move in this slice.
+  Canonical local CI passes through Phase 0 1,031/1,031 in 632 seconds, and only safe generated book/cache/native
+  artifacts are removed after proof.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.7.0` — Lua's recursion exposes the global policy more completely):
   PUC Lua and LuaJIT share the same semantic source but require ABI-specific native regex/filesystem modules. Real
   dual-runtime probes agree exactly, so later work must keep every focused consumer dual-ABI rather than treating

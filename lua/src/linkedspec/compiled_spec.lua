@@ -224,7 +224,7 @@ local function compile_rule(rule, registry)
       end
       last_regex_line = nil
     elseif node_type == "BlindEdgeBodyElementKind" then
-      local ref = dependency_ref(kind.target, 0)
+      local ref = dependency_ref(kind.target, kind.index or 0)
       dependency_refs[#dependency_refs + 1] = ref
       blind_edges[#blind_edges + 1] = setmetatable({
         line = element.line,
@@ -234,6 +234,43 @@ local function compile_rule(rule, registry)
         fluent_chain = copy_list(kind.fluent_chain),
         action_payload = optional_action_payload("blind_edge", element, kind.code, kind.fluent_chain, registry),
       }, BLIND_EDGE_MT)
+      last_regex_line = nil
+    elseif node_type == "BareEdgeBodyElementKind" then
+      local payload_role = spec_ast.rule_mode_is_and(rule.header.mode) and "blind_edge" or "action_edge"
+      local payload = optional_action_payload(payload_role, element, kind.code, kind.fluent_chain, registry)
+      if spec_ast.rule_mode_is_and(rule.header.mode) then
+        for _, target in ipairs(kind.targets) do
+          local ref = dependency_ref(target.label, target.index or 0)
+          dependency_refs[#dependency_refs + 1] = ref
+          blind_edges[#blind_edges + 1] = setmetatable({
+            line = element.line,
+            source = element.source,
+            target = ref,
+            code = kind.code,
+            fluent_chain = copy_list(kind.fluent_chain),
+            action_payload = payload,
+          }, BLIND_EDGE_MT)
+        end
+      else
+        local has_parent_regex = last_regex_line == element.line and #regex_patterns > 0
+        local regex_index = has_parent_regex and (#regex_patterns - 1) or 0
+        for _, target in ipairs(kind.targets) do
+          local child_regex_index = target.index or 0
+          local ref = dependency_ref(target.label, child_regex_index)
+          dependency_refs[#dependency_refs + 1] = ref
+          action_edges[#action_edges + 1] = setmetatable({
+            line = element.line,
+            source = element.source,
+            targets = { ref },
+            regex_index = regex_index,
+            child_regex_index = child_regex_index,
+            has_parent_regex = has_parent_regex,
+            code = kind.code,
+            fluent_chain = copy_list(kind.fluent_chain),
+            action_payload = payload,
+          }, ACTION_EDGE_MT)
+        end
+      end
       last_regex_line = nil
     elseif node_type == "CodeBlockBodyElementKind" then
       lifecycle_action_payloads[#lifecycle_action_payloads + 1] = action_payload(

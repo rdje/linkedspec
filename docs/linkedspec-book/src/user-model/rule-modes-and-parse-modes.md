@@ -88,8 +88,14 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > edge/ownership rows are 5/13 and 2/4; portable invalid diagnostics are 0/7;
 > parent/child composition is 4/8; and structural replacement is 1/2. Normalized
 > and loaded engines still accept the global override, descriptor metadata still
-> publishes global seek, and generated source is still v1. No Lua behavior changes
-> until typed normalization `.9.1.7.1`.
+> publishes global seek, and generated source is still v1. Typed normalization
+> `.9.1.7.1` is now complete on both Lua ABIs: compact `|` is authored OR/default;
+> complete-line/header-rest bare targets are typed and JSON-roundtrippable; all
+> six portable edge diagnostics carry the neutral stage/code/fields; and valid
+> ownership lowers into compiled action/blind tables. The exact proof is
+> 258/258 assertions on PUC Lua and LuaJIT after identical 44/166 RED failures.
+> This does not yet change Lua cursor spending, descriptor/artifact versions,
+> public options, or rollout; those remain `.2-.6`.
 
 ## Current rule-label surface
 
@@ -409,6 +415,53 @@ UpToTwoPairs:AND{,2}
 
 Use the repeated `AND` family when a whole group needs to recur. Do not model a repeated ordered group as a repeated choice unless each iteration should pick only one alternative.
 
+## Bare child members derive edge ownership
+
+A complete child rule name may be written without an explicit edge token when it starts a physical body line or
+the rule-header rest:
+
+```text
+Record::AND
+ Header
+ Body.return(child_result)
+
+Header:
+ /HEADER/
+
+Body:
+ /BODY/
+```
+
+The parent family supplies the default ownership:
+
+- a bare member in an AND-family rule normalizes to blind ownership, like `=> Child`;
+- a bare member in an OR/default-family rule normalizes to action ownership, like `-> Child`.
+
+That default is only for bare syntax. An explicit `->` or `=>` remains legal in either family and keeps its
+written ownership. A rule may not mix action and blind ownership after normalization.
+
+Bare syntax can retain one child, an action-owned group, a shared block, or a fluent continuation:
+
+```text
+Choice::|
+ Word | Number { return(child_result) }
+
+Word:
+ /[A-Za-z_][A-Za-z0-9_]*/
+
+Number:
+ /[0-9]+/
+```
+
+Grouped or indexed bare members require action ownership, so they are invalid in an AND parent unless written
+explicitly with `->`. A grouped action also requires a shared block. `=> Child[0]` is invalid because a blind call
+does not select a child regex slot.
+
+Recognition is line-scoped. `Top:: Child` is a bare candidate, but the suffix in `Top:: /x/ Child` is not; write
+an explicit edge when it follows another same-line member. Lifecycle markers have lexical priority. If a rule is
+named `I`, a bare `I` remains the lifecycle marker, while `=> I` explicitly calls the rule. Forward-declared bare
+targets are valid because resolution happens after the complete rule-label set is known.
+
 ## Blind calls follow the rule label
 
 A blind call directly invokes another rule as a parser step:
@@ -517,9 +570,11 @@ For more detail on cursor-stack helpers, anchor rewinds, and their interaction w
 ## Current cursor policies
 
 Cursor policy controls where a rule may find its next match. It does not replace the rule's composition meaning.
-The two low-level algorithms are `seek` and `consume`, but normal Perl and Rust live execution select them from
-the rule family rather than a parser-wide override. Dart normal, loaded, normalized-JSON, and generated-v2
-execution now do the same at every entered rule.
+The two low-level algorithms are `seek` and `consume`, but normal Perl, Rust, Dart, and Julia live execution
+select them from the rule family rather than a parser-wide override. Their loaded, reconstructed, and
+generated-v2 routes preserve that identity at every entered rule. Lua now normalizes the same authored family and
+edge ownership in AST/compiled state, but its ordinary runtime still spends an engine-wide policy until
+`.9.1.7.2`.
 
 ### `seek`
 
@@ -788,10 +843,10 @@ ownership, and exact semantic edge rows, and direct/normalized/loaded bytes agre
 format 2 with no cursor field, derives five seek/five consume policies, rejects v1 before reconstruction, and
 requires regeneration of legacy v1 files. Option/CLI removal and one exact composed 15-role admission are current
 through `.9.1.6.6`, so Julia now advances the rollout row.
-Lua and LuaJIT are still on the measured compatibility boundary: compact `|` is classified as AND, bare members
-remain raw, normal/loaded/normalized execution spends one global policy, descriptor metadata publishes global
-seek, and generated source identifies v1. Preflight `.9.1.7.0` records exact agreement across both ABIs without
-changing it; `.9.1.7.1-.6` owns convergence in that order.
+Lua and LuaJIT now share exact authored family identity, typed bare edges, family-derived compiled ownership, and
+the six portable diagnostics through normalization `.9.1.7.1`. Normal/loaded/normalized execution still spends
+one global policy, descriptor metadata still publishes global seek, and generated source still identifies v1;
+runtime, descriptor, generated v2, option removal, and admission remain `.9.1.7.2-.6` in that order.
 The canonical Perl consumer composes 14 live default/AND, descriptor, emitted,
 generated direct/trace, loaded, mixed/recursive, structural, removal, primary,
 and diagnostic roles. The Rust consumer separately composes 15 native default/

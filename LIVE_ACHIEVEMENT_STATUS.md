@@ -8,19 +8,40 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.7.0` — behavior-free PUC Lua/LuaJIT rule-local cursor preflight signoff is prepared
-  from clean route commit `c3bdca44` at ahead 233. Both ABIs agree on family parse/classification/runtime
-  36/36, 34/36, and 22/36; valid edge/ownership normalization 5/13 and 2/4; portable invalid diagnostics 0/7;
-  parent-child 4/8; structural 1/2; descriptor global seek; generated v1/format 1; package 176/177; primary
-  32/65 in all four ABI/environment legs; corpus 105/105; and neutral governance 67/5+3/44.
-
-  No Lua/shared executable behavior, neutral contract, fixture, or rollout row changed. The `.1-.6` order remains
-  normalization, live routes, descriptor v1, generated v2, option/CLI removal, then exact dual-ABI admission.
-  KM is 626/4,575; mdBook and all four doctrines pass. Canonical local CI closes with root 7+5, cursor 288,
-  reference primary 65x2, and Phase 0 1,031/1,031 in 631 seconds. Safe artifact cleanup and the clean `.0` commit
-  precede activation of `.9.1.7.1`.
+- `FUTURE-PARITY-BACKLOG.9.1.7.1` — typed Lua/LuaJIT normalization is signoff-complete from clean preflight
+  commit `47a1d166` at ahead 234. The commit workflow is in progress; runtime `.9.1.7.2` may activate only after
+  this verified slice lands and the tree is clean.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.1 — normalize Lua authored families and bare edges**
+  (DONE; clean commit in progress).
+
+  **Result:** Compact `|` is authored OR/default; complete-line/header-rest bare plain/index/group/block/fluent
+  candidates are typed and JSON-roundtrippable; lifecycle/forward/explicit precedence is exact; six portable
+  diagnostics expose governed stage/code/fields; and valid family-derived ownership lowers into compiled
+  action/blind tables. Runtime/artifact/public/rollout owners remain `.2-.6`.
+
+  **Proof:** Identical 44/166 RED failures become 258/258 green assertions per ABI; all five focused consumers
+  pass 936 assertions per ABI. Package remains 176/177x2 with only staged help, primary 32/65x4, corpus
+  105/105x2, cursor governance 67/5+3/44, and KM 627/4,587. mdBook/all four doctrines pass; canonical closes root
+  7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 632 seconds. Generated 11 MiB book, 28 KiB Python
+  cache, and two 104 KiB native trees are removed.
+
+  **Next:** Commit `.1` cleanly, then activate intrinsic runtime `.9.1.7.2` task-tree-first.
+
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.0 — map Lua rule-local cursor rollout**
+  (DONE at clean commit `47a1d166`).
+
+  **Result:** PUC Lua and LuaJIT agree exactly on the pre-implementation boundary: family
+  parse/classification/runtime 36/36, 34/36, and 22/36; valid edges/sets 5/13 and 2/4; diagnostics 0/7;
+  parent-child 4/8; structural 1/2; descriptor global seek; generated v1/format 1; package 176/177x2; primary
+  32/65x4; corpus 105/105x2; and governance 67/5+3/44. No executable/shared fixture behavior changed.
+
+  **Proof:** KM is 626/4,575; mdBook/four doctrines and canonical root 7+5, cursor 288, primary 65x2, and Phase 0
+  1,031/1,031 in 631 seconds pass. Generated book/cache/probe/native artifacts are removed.
+
+  **Next:** Typed normalization `.9.1.7.1` is active from the clean commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 — align Lua root selection routes**
   (DONE at clean commit `c3bdca44`).
 

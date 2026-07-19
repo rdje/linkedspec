@@ -548,6 +548,48 @@ local function parse_action_prefix(text)
   }
 end
 
+local function parse_bare_prefix(text)
+  local position = 1
+  local labels = {}
+  local label
+  label, position = read_word(text, position)
+  if not label then return nil end
+  labels[#labels + 1] = label
+  while true do
+    local before_pipe = position
+    position = skip_spaces(text, position)
+    if text:sub(position, position) ~= "|" then
+      position = before_pipe
+      break
+    end
+    position = skip_spaces(text, position + 1)
+    label, position = read_word(text, position)
+    if not label then return nil end
+    labels[#labels + 1] = label
+  end
+
+  position = skip_spaces(text, position)
+  local target_index = nil
+  if text:sub(position, position) == "[" then
+    local closing = text:find("]", position + 1, true)
+    if not closing then return nil end
+    local digits = text:sub(position + 1, closing - 1)
+    if not digits:match("^%d+$") then return nil end
+    target_index = tonumber(digits)
+    position = closing + 1
+  end
+
+  local targets = {}
+  for index, target_label in ipairs(labels) do
+    targets[index] = ast.bare_edge_target({ label = target_label, index = target_index })
+  end
+  return {
+    targets = targets,
+    full_match = trim(text:sub(1, position - 1)),
+    rest = ltrim(text:sub(position)),
+  }
+end
+
 local function parse_lifecycle_prefix(text)
   local markers = { "LS", "LE", "LX", "EX", "IT", "I", "E" }
   for _, marker in ipairs(markers) do
@@ -593,7 +635,7 @@ local function lifecycle_fluent_code(lines, cursor, rest)
   }
 end
 
-local function parse_single_element(text, lines, cursor, line_number)
+local function parse_single_element(text, lines, cursor, line_number, allow_bare_edge)
   local regex = parse_regex_element(text, line_number)
   if regex then
     return regex
@@ -646,6 +688,16 @@ local function parse_single_element(text, lines, cursor, line_number)
     local target
     target, position = read_word(text, position)
     if target then
+      position = skip_spaces(text, position)
+      local target_index = nil
+      if text:sub(position, position) == "[" then
+        local closing = text:find("]", position + 1, true)
+        if not closing then return nil end
+        local digits = text:sub(position + 1, closing - 1)
+        if not digits:match("^%d+$") then return nil end
+        target_index = tonumber(digits)
+        position = closing + 1
+      end
       local full_match = trim(text:sub(1, position - 1))
       local rest = ltrim(text:sub(position))
       local saved_index = cursor.index
@@ -666,7 +718,12 @@ local function parse_single_element(text, lines, cursor, line_number)
       end
       return {
         element = ast.body_element({
-          kind = ast.blind_edge_body_kind({ target = target, code = code, fluent_chain = fluent_chain }),
+          kind = ast.blind_edge_body_kind({
+            target = target,
+            index = target_index,
+            code = code,
+            fluent_chain = fluent_chain,
+          }),
           source = full_match,
           line = line_number,
         }),
@@ -794,6 +851,53 @@ local function parse_single_element(text, lines, cursor, line_number)
       advanced = cursor.index > saved_index,
     }
   end
+  if allow_bare_edge then
+    local bare = parse_bare_prefix(text)
+    if bare then
+      local saved_index = cursor.index
+      if bare.rest == "" or bare.rest:sub(1, 1) == "#" then
+        return {
+          element = ast.body_element({
+            kind = ast.bare_edge_body_kind({ targets = bare.targets }),
+            source = bare.full_match,
+            line = line_number,
+          }),
+          remainder = bare.rest,
+          advanced = false,
+        }
+      elseif bare.rest:sub(1, 1) == "{" then
+        local block = consume_block(lines, cursor, bare.rest)
+        if not block then return nil end
+        return {
+          element = ast.body_element({
+            kind = ast.bare_edge_body_kind({ targets = bare.targets, code = block.code }),
+            source = bare.full_match,
+            line = line_number,
+          }),
+          remainder = block.remainder,
+          advanced = cursor.index > saved_index,
+        }
+      elseif bare.rest:sub(1, 1) == "." then
+        local fluent = parse_fluent_chain(bare.rest)
+        local remainder = trim(fluent.remainder)
+        if #fluent.calls == 0 or (remainder ~= "" and remainder:sub(1, 1) ~= "#") then
+          return nil
+        end
+        return {
+          element = ast.body_element({
+            kind = ast.bare_edge_body_kind({
+              targets = bare.targets,
+              fluent_chain = fluent.calls,
+            }),
+            source = bare.full_match,
+            line = line_number,
+          }),
+          remainder = fluent.remainder,
+          advanced = false,
+        }
+      end
+    end
+  end
   return nil
 end
 
@@ -807,7 +911,7 @@ local function parse_body_elements(lines, cursor)
     if text == "" or text:sub(1, 1) == "#" then
       break
     end
-    local parsed = parse_single_element(text, lines, cursor, line_number)
+    local parsed = parse_single_element(text, lines, cursor, line_number, #elements == 0)
     if not parsed then
       elements[#elements + 1] = ast.body_element({
         kind = ast.raw_body_kind({ text = text }),
@@ -896,7 +1000,7 @@ local function parse_inline_body(rest, line_number, lines, cursor)
       break
     end
     local before = text
-    local parsed = parse_single_element(text, lines, cursor, line_number)
+    local parsed = parse_single_element(text, lines, cursor, line_number, #elements == 0)
     if not parsed then
       elements[#elements + 1] = ast.body_element({
         kind = ast.raw_body_kind({ text = text }),

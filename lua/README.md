@@ -22,6 +22,14 @@ engine identity, top and deepest-rule attribution, Lua handler identity, exact
 top-selection/input/lookup/execution stages, deterministic JSON projection, and
 unchanged successful results pass on PUC Lua and LuaJIT.
 
+Rule-local cursor normalization is now exact in source and compiled state on both ABIs. Compact `|` is authored
+OR/default and compact `&` is AND. Complete-line or header-rest bare child members retain typed plain, indexed,
+grouped, block, and fluent forms; lifecycle markers take precedence, forward targets resolve after all labels are
+known, and explicit `->` / `=>` keeps written ownership. Valid AND bare members lower to blind edges and valid
+OR/default bare members lower to action edges. Invalid governed shapes expose the neutral diagnostic code, stage,
+and fields. Runtime policy is still engine-wide, descriptor metadata is still pre-cursor-v1, generated source is
+still v1/format 1, and `parse_mode` remains a staged public option until `.9.1.7.2-.5` migrate those owners.
+
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
   spec_name = "Example",

@@ -41,8 +41,13 @@ local LIFECYCLE_NAMES = {
   LX = true,
 }
 
-local function validation_fail(message, code, stage)
-  error(setmetatable({ message = message, code = code, stage = stage }, VALIDATION_ERROR_MT), 0)
+local function validation_fail(message, code, stage, fields)
+  error(setmetatable({
+    message = message,
+    code = code,
+    stage = stage,
+    fields = fields or json.harray(),
+  }, VALIDATION_ERROR_MT), 0)
 end
 
 function M.is_validation_error(value)
@@ -53,7 +58,7 @@ function M.validation_error_to_json(value)
   if not M.is_validation_error(value) then
     validation_fail("validation_error_to_json expects SpecValidationException")
   end
-  local result = json.harray({ message = value.message, fields = json.harray() })
+  local result = json.harray({ message = value.message, fields = value.fields or json.harray() })
   if value.code ~= nil then result.code = value.code end
   if value.stage ~= nil then result.stage = value.stage end
   return result
@@ -223,6 +228,87 @@ local function check_raw_body_lines(spec)
   end
 end
 
+local function target_labels(targets)
+  local result = json.array()
+  for index, target in ipairs(targets) do result[index] = target.label end
+  return result
+end
+
+local function check_edge_structure(spec)
+  local declared_labels = {}
+  for _, rule in ipairs(spec.rules) do declared_labels[rule.header.label] = true end
+
+  for _, rule in ipairs(spec.rules) do
+    local rule_label = rule.header.label
+    for _, element in ipairs(rule.body) do
+      local kind = element.kind
+      local node_type = ast.node_type(kind)
+      if node_type == "BareEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do
+          if not declared_labels[target.label] then
+            validation_fail(
+              "bare edge in rule '" .. rule_label .. "' targets undefined rule '" .. target.label .. "'",
+              "bare_edge_target_undefined",
+              "normalize_edges",
+              json.harray({ rule_label = rule_label, target = target.label })
+            )
+          end
+        end
+        if ast.rule_mode_is_and(rule.header.mode) then
+          for _, target in ipairs(kind.targets) do
+            if target.index ~= nil then
+              validation_fail(
+                "indexed bare edge in AND rule '" .. rule_label .. "' requires explicit action ownership",
+                "bare_edge_index_requires_action",
+                "normalize_edges",
+                json.harray({
+                  rule_label = rule_label,
+                  target = target.label,
+                  regex_index = target.index,
+                })
+              )
+            end
+          end
+          if #kind.targets > 1 then
+            validation_fail(
+              "grouped bare edge in AND rule '" .. rule_label .. "' requires explicit action ownership",
+              "bare_edge_group_requires_action",
+              "normalize_edges",
+              json.harray({ rule_label = rule_label, targets = target_labels(kind.targets) })
+            )
+          end
+        elseif #kind.targets > 1 and kind.code == nil then
+          validation_fail(
+            "rule '" .. rule_label .. "': grouped action-edge targets require a shared code block",
+            "grouped_action_shared_block_required",
+            "validate_rule",
+            json.harray({ rule_label = rule_label, targets = target_labels(kind.targets) })
+          )
+        end
+      elseif node_type == "ActionEdgeBodyElementKind" and #kind.targets > 1 and kind.code == nil then
+        validation_fail(
+          "rule '" .. rule_label .. "': grouped action-edge targets require a shared code block",
+          "grouped_action_shared_block_required",
+          "validate_rule",
+          json.harray({ rule_label = rule_label, targets = target_labels(kind.targets) })
+        )
+      elseif node_type == "BlindEdgeBodyElementKind" and kind.index ~= nil then
+        validation_fail(
+          "blind-call target '" .. kind.target .. "' in rule '" .. rule_label ..
+            "' cannot select a regex index",
+          "blind_call_index_forbidden",
+          "validate_rule",
+          json.harray({
+            rule_label = rule_label,
+            target = kind.target,
+            regex_index = kind.index,
+          })
+        )
+      end
+    end
+  end
+end
+
 local function check_mixed_edges(spec)
   for _, rule in ipairs(spec.rules) do
     local has_action = false
@@ -233,23 +319,24 @@ local function check_mixed_edges(spec)
         has_action = true
       elseif kind == "BlindEdgeBodyElementKind" then
         has_blind = true
+      elseif kind == "BareEdgeBodyElementKind" then
+        if ast.rule_mode_is_and(rule.header.mode) then
+          has_blind = true
+        else
+          has_action = true
+        end
       end
     end
     if has_action and has_blind then
-      validation_fail("rule '" .. rule.header.label .. "' mixes action (->) and blind-call (=>) edges")
-    end
-  end
-end
-
-local function check_grouped_action_edges(spec)
-  for _, rule in ipairs(spec.rules) do
-    for _, element in ipairs(rule.body) do
-      local kind = element.kind
-      if ast.node_type(kind) == "ActionEdgeBodyElementKind" and #kind.targets > 1 and kind.code == nil then
-        validation_fail(
-          "rule '" .. rule.header.label .. "': grouped action-edge targets require a shared code block"
-        )
-      end
+      validation_fail(
+        "rule '" .. rule.header.label .. "' mixes action and blind edge ownership",
+        "mixed_edge_ownership",
+        "validate_rule",
+        json.harray({
+          rule_label = rule.header.label,
+          ownerships = json.array({ "action", "blind" }),
+        })
+      )
     end
   end
 end
@@ -293,6 +380,10 @@ local function check_edge_targets(spec)
         end
       elseif node_type == "BlindEdgeBodyElementKind" then
         check_target(rule, rules_by_label, kind.target, 0)
+      elseif node_type == "BareEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do
+          check_target(rule, rules_by_label, target.label, target.index or 0)
+        end
       end
     end
   end
@@ -361,6 +452,8 @@ local function check_unused_rules(spec)
         end
       elseif node_type == "BlindEdgeBodyElementKind" then
         used[kind.target] = true
+      elseif node_type == "BareEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do used[target.label] = true end
       end
     end
   end
@@ -400,8 +493,8 @@ function M.validate_spec(spec, options)
       check_duplicate_function_names(spec)
       check_function_registry(spec)
       check_raw_body_lines(spec)
+      check_edge_structure(spec)
       check_mixed_edges(spec)
-      check_grouped_action_edges(spec)
       check_edge_targets(spec)
       check_regex_syntax(spec)
       if options.strict_syntax then check_unused_rules(spec) end

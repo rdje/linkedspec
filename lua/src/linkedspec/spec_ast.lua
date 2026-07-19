@@ -19,6 +19,7 @@ local BODY_KIND_TYPES = {
   RegexBodyElementKind = true,
   ActionEdgeBodyElementKind = true,
   BlindEdgeBodyElementKind = true,
+  BareEdgeBodyElementKind = true,
   CodeBlockBodyElementKind = true,
   PlainBlockBodyElementKind = true,
   SplitMarkerBodyElementKind = true,
@@ -401,7 +402,7 @@ end
 function M.rule_mode_is_and(mode)
   require_node(mode, "RuleMode", "mode")
   return mode.name == "And" or mode.name == "AndPlus" or mode.name == "AndBounded" or
-    mode.name == "Pipe" or mode.name == "Single"
+    mode.name == "Single"
 end
 
 function M.rule_mode_is_repetition(mode)
@@ -452,6 +453,14 @@ function M.edge_target(options)
   })
 end
 
+function M.bare_edge_target(options)
+  options = options_table(options, "BareEdgeTarget")
+  return node("BareEdgeTarget", {
+    label = required_string(options, "label", "BareEdgeTarget"),
+    index = optional_integer(options, "index", "BareEdgeTarget"),
+  })
+end
+
 function M.fluent_call(options)
   options = options_table(options, "FluentCall")
   return node("FluentCall", {
@@ -480,8 +489,18 @@ function M.blind_edge_body_kind(options)
   options = options_table(options, "BlindEdgeBodyElementKind")
   return node("BlindEdgeBodyElementKind", {
     target = required_string(options, "target", "BlindEdgeBodyElementKind"),
+    index = optional_integer(options, "index", "BlindEdgeBodyElementKind"),
     code = optional_string(options, "code", "BlindEdgeBodyElementKind"),
     fluent_chain = copy_node_list(options.fluent_chain or {}, "FluentCall", "BlindEdgeBodyElementKind.fluent_chain"),
+  })
+end
+
+function M.bare_edge_body_kind(options)
+  options = options_table(options, "BareEdgeBodyElementKind")
+  return node("BareEdgeBodyElementKind", {
+    targets = copy_node_list(options.targets, "BareEdgeTarget", "BareEdgeBodyElementKind.targets"),
+    code = optional_string(options, "code", "BareEdgeBodyElementKind"),
+    fluent_chain = copy_node_list(options.fluent_chain or {}, "FluentCall", "BareEdgeBodyElementKind.fluent_chain"),
   })
 end
 
@@ -617,6 +636,12 @@ local function project_body_kind(kind)
   elseif node_type == "BlindEdgeBodyElementKind" then
     result.kind = "blind_edge"
     result.target = kind.target
+    put_optional(result, "index", kind.index)
+    result.code = kind.code == nil and json.null or kind.code
+    result.fluent_chain = json_array_of(kind.fluent_chain, project)
+  elseif node_type == "BareEdgeBodyElementKind" then
+    result.kind = "bare_edge"
+    result.targets = json_array_of(kind.targets, project)
     result.code = kind.code == nil and json.null or kind.code
     result.fluent_chain = json_array_of(kind.fluent_chain, project)
   elseif node_type == "CodeBlockBodyElementKind" then
@@ -732,6 +757,9 @@ project = function(value)
   elseif node_type == "EdgeTarget" then
     result.label = value.label
     result.index = value.index
+  elseif node_type == "BareEdgeTarget" then
+    result.label = value.label
+    put_optional(result, "index", value.index)
   elseif node_type == "FluentCall" then
     result.method = value.method
     result.args = value.args
@@ -887,6 +915,17 @@ local function build_body_kind(value)
   elseif kind == "blind_edge" then
     return M.blind_edge_body_kind({
       target = json_string(object, "target", "BodyElementKind"),
+      index = json_optional_integer(object, "index", "BodyElementKind"),
+      code = json_optional_string(object, "code", "BodyElementKind"),
+      fluent_chain = json_object_list(object, "fluent_chain", "BodyElementKind", function(item)
+        return build("FluentCall", item)
+      end, true),
+    })
+  elseif kind == "bare_edge" then
+    return M.bare_edge_body_kind({
+      targets = json_object_list(object, "targets", "BodyElementKind", function(item)
+        return build("BareEdgeTarget", item)
+      end),
       code = json_optional_string(object, "code", "BodyElementKind"),
       fluent_chain = json_object_list(object, "fluent_chain", "BodyElementKind", function(item)
         return build("FluentCall", item)
@@ -1033,6 +1072,11 @@ build = function(node_type, value)
     return M.edge_target({
       label = json_string(object, "label", node_type),
       index = json_integer(object, "index", node_type),
+    })
+  elseif node_type == "BareEdgeTarget" then
+    return M.bare_edge_target({
+      label = json_string(object, "label", node_type),
+      index = json_optional_integer(object, "index", node_type),
     })
   elseif node_type == "FluentCall" then
     return M.fluent_call({

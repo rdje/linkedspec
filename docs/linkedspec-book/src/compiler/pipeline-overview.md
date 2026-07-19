@@ -419,9 +419,9 @@ The Perl reference no longer accepts a parser-wide `parse_mode`; it rejects that
 preparation. Rust also removes its static and runtime-context override: `ExecutionOptions` selects only an entry
 rule, and every entered rule derives seek/consume from its authored family. Its composed 15-role admission locks
 native, reconstructed, generated, descriptor, primary, and diagnostic projections. Dart also removes its engine,
-loader, corpus, staged-parser, and primary-command global override; only Dart composed admission and the later
-Julia/Lua leaves remain. Pipeline preparation must therefore not be read as a semantic license for a caller-global
-cursor policy.
+loader, corpus, staged-parser, and primary-command global override; Julia removes the corresponding high-level
+state too. Lua still retains that staged option until `.9.1.7.5`. Pipeline preparation must therefore not be read
+as a semantic license for a caller-global cursor policy.
 
 Two specialty compilation modes are also set here: `parse_only` (build compiled rule-table state without generating handlers or emitting parser code) and `generate_only` (regenerate handlers from an already-compiled rule table without re-parsing). These modes support introspection and tooling workflows that need intermediate compiler artifacts.
 
@@ -452,10 +452,16 @@ first content line is a valid rule label. The Perl reference validator now requi
 selector > first authored marker > first authored rule. Rust and Dart implement the same marker-optional envelope
 and ordered resolver across composed routes. Julia core validation plus loaded/normalized/generated/emitted
 direct/traced routes now do too; its generated plan still validates before selection and remains the minimal
-ordered label/family shape. Lua retains the temporary marker-required envelope until its dependency-ordered
-rollout leaf lands.
+ordered label/family shape. Lua core and composed routes now apply the same marker-optional resolver on PUC Lua
+and LuaJIT, including portable zero/unknown failures and generated-plan-first ordering.
 
 **Paragraph-level validation** (`validate_dsl_syntax`): the deepest layer. It detects duplicate rule definitions, rejects rule definitions inside still-open blocks, checks that action edges (`->`) and blind-call edges (`=>`) have valid target labels and block-depth balance, rejects mixed action/blind-call modes within one rule, validates Perl regex literals for compile-ability, verifies rule-header right-hand-side content, checks split-marker syntax, and reports unused/undefined rule references. When `strict_syntax => 1` is set, unused-rule and undefined-reference warnings become hard errors, which is useful for CI regressions.
+
+Lua normalization now retains complete-line/header-rest bare child members as typed AST before validation. Once
+the whole declared-label set exists, an AND-parent bare member owns blind dispatch and an OR/default-parent bare
+member owns action dispatch. Undefined targets, indexed/grouped AND bare forms, mixed ownership, indexed blind
+calls, and blockless grouped actions return the same portable stage/code/fields as the admitted backends. Valid
+members lower into existing compiled action/blind tables; cursor execution remains the following runtime stage.
 
 **Cross-reference validation** (`validate_dependency_regex_references`): checks that every dependency-regex entry references a rule that exists, every rule reference targets a valid regex index, and every rule's `dependency_refs` entries carry the required `label`/`idx` keys.
 

@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.1 — normalize Lua authored families and bare edges
+
+PUC Lua and LuaJIT now classify all 36 neutral rule headers by exact authored family: compact `|` is OR/default
+and compact `&` is AND. The source AST adds a JSON-roundtrippable `BareEdgeBodyElementKind` with nullable target
+indices, so omitted selection remains distinct from authored `[0]`. The parser retains complete-line and
+header-rest plain, indexed, grouped, block, and fluent candidates while preserving lifecycle precedence,
+forward declarations, explicit `->`/`=>` ownership, and same-line suffix exclusion.
+
+Validation resolves those candidates after the complete declared-label set is available. Valid AND bare edges
+lower to the existing blind table; valid OR/default bare edges lower to the existing action table. Undefined bare
+targets, indexed/grouped AND bare forms, mixed ownership, indexed blind calls, and blockless grouped actions now
+return the neutral diagnostic code, stage, and exact typed fields. Existing generic validation remains unchanged
+outside those governed forms.
+
+The exact RED proof was identical on both ABIs at 44 failures of 166 assertions. The implemented contract proof
+passes 258 assertions per ABI over all 36 family rows, 18 edge rows, six ownership sets, portable diagnostic and
+AST JSON roundtrips, compiled ownership, lifecycle priority, and physical-line scoping. All five focused consumers
+pass 936 assertions per ABI. Complete package execution remains 176/177 with only the pre-existing help mismatch;
+all four default/POSIX primary legs remain exactly 32/65; corpus remains 105/105 per ABI; and neutral governance
+remains 67 files / 5 complete + 3 pending / 44 mutations.
+
+This slice does not change live cursor spending, descriptor identity, generated artifact identity, high-level
+options, shared fixtures, or rollout. Generated-source v1 deliberately keeps its compact-Pipe legacy structural
+classification until `.4`; normal runtime policy remains `.2`, descriptor v1 `.3`, generated v2 `.4`, option
+removal `.5`, and exact dual-ABI admission `.6`. Knowledge Map generation reaches 627 facts / 4,587 question keys.
+The mdBook and all four doctrine gates pass; canonical local CI closes with root consumers 7+5, cursor admission
+288, reference primary 65x2, and Phase 0 1,031/1,031 in 632 seconds. Cleanup removes the generated 11 MiB book,
+28 KiB Python cache, and both disposable 104 KiB native test trees.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.7.0 — map Lua rule-local cursor rollout
 
 The behavior-free Lua cursor preflight is complete on real PUC Lua and LuaJIT native-module pairings. Both parse
