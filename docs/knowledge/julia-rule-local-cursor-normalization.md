@@ -13,7 +13,7 @@ answers:
   - "which Julia leaf changes live cursor execution"
   - "does Julia cursor normalization advance rollout"
 date: 2026-07-18
-status: verified normalization; live cursor execution remains FUTURE-PARITY-BACKLOG.9.1.6.2
+status: verified normalization; live execution and descriptor superseded by .9.1.6.2-.3
 tags: [julia, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "Julia classifies compact `|` as authored OR/default and `&` as authored AND; retains complete-line/header-rest bare targets as BareEdgeBodyElementKind with nullable authored indices; validates all six neutral edge diagnostics through SpecPortableDiagnostic code/stage/fields; and lowers family-derived ownership into compiled action/blind tables. The focused neutral consumer passes 353 assertions over all 36 family rows, all 18 edge rows, all six ownership sets, AST/diagnostic JSON roundtrips, and physical-line boundaries. The package reaches only the pre-existing 56/57 shared-help mismatch, corpus remains 105/105, neutral governance remains 67 files / 4 complete + 4 pending / 39 mutations, and no rollout row advances. Runtime cursor spending, descriptor v1, generated-source v2, option removal, and admission remain .2-.6."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_normalization_test.jl\")' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute && python3 tools/check_rule_local_cursor_contract.py"
@@ -49,12 +49,10 @@ The six portable edge codes are `bare_edge_target_undefined`,
 `EX`, and `IT` retain lexical priority; an edge to a same-named rule remains
 explicit.
 
-Normalization deliberately stops at compiled ownership. Julia's normal engine
-still stores and propagates its existing global parse mode, descriptor metadata
-still publishes `parse_mode`, generated source remains v1/format 1, and the
-public/primary override remains present. Those boundaries belong respectively
-to `.9.1.6.2-.5`; the 15-role admission and rollout promotion belong only to
-`.9.1.6.6`.
+At the `.1` boundary, normalization deliberately stopped at compiled ownership. Later leaves now make normal
+execution derive policy at rule entry (`.2`) and make the outward descriptor project cursor-v1 facts (`.3`).
+Generated source remains v1/format 1 and the public/primary override remains present; those boundaries belong to
+`.9.1.6.4-.5`, while 15-role admission and rollout promotion belong only to `.9.1.6.6`.
 
 `julia/test/rule_local_cursor_normalization_test.jl` reads the unchanged
 neutral JSON contract directly. Its 353 assertions cover all 36 top/body family
@@ -66,6 +64,7 @@ full package boundary remains the later CLI-owned 56/57 help mismatch, while
 the standalone interpreter corpus stays 105/105.
 
 Related: [[julia-rule-local-cursor-preflight]],
+[[julia-rule-local-cursor-execution]], [[julia-rule-local-cursor-descriptor]],
 [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[dart-rule-local-cursor-normalization]],
 and [[FUTURE-PARITY-BACKLOG]].

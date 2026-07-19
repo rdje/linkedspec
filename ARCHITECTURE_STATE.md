@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-18`
+- `2026-07-18` Julia cursor descriptor refresh: `FUTURE-PARITY-BACKLOG.9.1.6.3` makes the outward descriptor a
+  pure cursor-v1 projection. Root metadata replaces global `parse_mode` with
+  `linkedspec-rule-local-cursor-v1`; each rule derives family/policy and projects aggregate ownership plus exact
+  ownership/target/child-index/block/fluent edge rows from normalized compiled tables. Direct, normalized
+  `SpecFile`-JSON, and loaded descriptor bytes agree; no descriptor decoder or cursor input exists. Focused proof
+  is 809, complete package is 3,129 plus the frozen help mismatch, corpus 105, primary 32/65x2, and governance
+  67/4+4/39. Generated v2, public removal, admission, and rollout remain `.4-.6`.
 - `2026-07-18` Julia cursor runtime refresh: `FUTURE-PARITY-BACKLOG.9.1.6.2` adds one entered-rule execution
   policy in `julia/src/runtime/Interpreter.jl`. Exact AND consumes and sequences; OR/default seeks and chooses.
   Blind, action, explicit-call, and recursive children receive only the current cursor and rederive from their own
@@ -12,8 +19,8 @@ This document is the current high-level technical reading of the project shape. 
   trace scopes expose family plus effective policy. Missing engine option means intrinsic behavior, while an
   explicit value remains a temporary outer CLI/corpus adapter. Generated v1 uses a private seek/family adapter so
   its v1/format-1 meaning cannot drift before `.4`. Focused execution is 104, generated proof 60, complete package
-  2,320 plus the frozen help mismatch, corpus 105, shared primary 32/65x2, and governance 67/4+4/39. Descriptor,
-  generated-v2, option removal, admission, and rollout remain `.3-.6`.
+  2,320 plus the frozen help mismatch, corpus 105, shared primary 32/65x2, and governance 67/4+4/39. Generated-v2,
+  descriptor `.3` is complete; option removal, admission, and rollout remain `.4-.6`.
 - `2026-07-18` root-selection decision: ADR `0046` and `linkedspec-root-rule-selection-v1` order selection as
   explicit selector (including `--top-rule NAME`) > first authored `Rule::` > first authored ordinary `Rule:`.
   Authored `is_top` remains syntax identity, effective selection is execution state, request trace retains
@@ -23,7 +30,7 @@ This document is the current high-level technical reading of the project shape. 
   root-owned failure is markerless validation; 22 help/usage and 11 request-trace failures belong to pending
   cursor migration `.9.1.6`. Julia already preserves ordered authored markers and its bypass-only runtime resolves
   explicit > first marker > first rule. Root core `.4.1`, composed routes `.4.2`, cursor `.9.1.6`, and exact 65x2
-  admission `.4.3` are dependency-ordered. Julia and Lua remain marker-required in normal validation; final
+  admission `.4.3` are dependency-ordered. Julia is marker-optional; Lua remains marker-required; final
   public no-drift remains `.6`.
 - `2026-07-18` refresh: Rust cursor admission `FUTURE-PARITY-BACKLOG.9.1.4.7` declares one exact 15-role consumer
   spanning native default/AND, ordinary serialized, loaded, descriptor v1, emitted source v2, generated direct/

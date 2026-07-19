@@ -8,13 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.6.2` — intrinsic ordinary Julia runtime implementation/signoff is complete after
-  clean normalization `ac7010ee` at ahead 224. Its prepared commit is the only remaining boundary; descriptor-v1
-  `.9.1.6.3` may activate task-tree-first only after the tree and brief are clean.
+- `FUTURE-PARITY-BACKLOG.9.1.6.3` — cursor descriptor-v1 implementation/signoff is complete after clean runtime
+  `290cb731` at ahead 225. Its prepared commit is the only remaining boundary; generated-source-v2 `.9.1.6.4`
+  may activate task-tree-first only after the tree and brief are clean.
 
 ## Latest Completed Slice
-- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors**
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.3 — project Julia cursor descriptor v1**
   (DONE and verified; clean commit pending).
+
+  **Result:** Root metadata replaces global mode with cursor-contract v1; every rule projects normalized family,
+  derived policy, ownership, and exact semantic edge rows. Direct, normalized, and loaded descriptor bytes agree.
+  No mutable compiler/runtime state, descriptor decoder, generated-v2, option, admission, or rollout change exists.
+
+  **Proof:** Focused 809; complete package 3,129 pass plus the frozen help mismatch; corpus 105; primary 32/65x2;
+  cursor 67/4+4/39; root 4/7+34; KM 617/4,476; mdBook/four doctrines; canonical root 7+5, cursor 288, primary
+  65x2, and Phase 0 1,031/1,031 in 622 seconds. Generated book/cache cleanup passes.
+
+  **Next:** Commit `.9.1.6.3`, prove clean, then activate generated-source-v2 `.9.1.6.4` task-tree-first.
+
+- 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors**
+  (DONE at clean commit `290cb731`).
 
   **Result:** Each normal live, loaded-default, normalized, recursive, and traced rule entry derives cursor and
   sequence/choice policy once from its own family. Children rederive independently; generated v1 and explicit
@@ -24,7 +37,7 @@ Current execution status for interruption-safe batch workflow recovery.
   one help mismatch; corpus 105; primary 32/65x2; cursor 67/4+4/39; root 4/7+34; KM 616/4,466; mdBook/four
   doctrines; canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 611 seconds.
 
-  **Next:** Commit `.9.1.6.2`, prove clean, then activate descriptor-v1 leaf `.9.1.6.3` task-tree-first.
+  **Next:** Descriptor-v1 leaf `.9.1.6.3` is active task-tree-first.
 
 - 2026-07-18: **FUTURE-PARITY-BACKLOG.9.1.6.1 — normalize Julia cursor families and edges**
   (DONE at clean commit `ac7010ee`).

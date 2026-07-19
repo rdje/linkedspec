@@ -33,15 +33,18 @@ normalization `.1` are cleanly committed through `ac7010ee`. Intrinsic runtime `
 sequence and OR-default-seek/choice once at every live, loaded-default, normalized, recursive, and traced rule
 entry. All 36 families, eight parent/child rows, and two structural replacements are exact in 104 focused
 assertions; generated v1 remains behind its private compatibility engine. Descriptor v1, generated v2,
-option/CLI removal, and admission remain `.3-.6`, then exact 65x2 root admission `.4.3` follows. Lua fallback remains blocked by
+option/CLI removal, and admission were dependency-ordered as `.3-.6`; descriptor `.3` is complete, while
+generated/public/admission `.4-.6` remain before exact 65x2 root admission `.4.3`. Lua fallback remains blocked by
 validation, and root no-drift leg `.6` remains separately owned, so
 rollout stays 4/7.
 Julia now classifies all 36 authored families and normalizes all 18 bare/explicit edge rows plus six ownership
 sets with the six portable diagnostics. Normal direct, loaded-default, and normalized engines no longer read a
 parent/global default: every entered rule derives independently, so mixed parent/child agreement is 8/8 and both
-structural replacements are exact. Descriptor state remains global-mode v0, generated source remains v1/format 1,
-and outer CLI/corpus callers retain an explicit compatibility override. The remaining order is descriptor v1,
-generated v2, option/CLI removal, then 15-role admission; v1 generated semantics stay isolated until the v2 bump.
+structural replacements are exact. Descriptor state now publishes cursor-contract v1 plus per-rule family,
+derived policy, ownership, and ordered semantic edges with no global mode. Direct, normalized, and loaded
+descriptor bytes agree. Generated source remains v1/format 1, and outer CLI/corpus callers retain an explicit
+compatibility override. The remaining order is generated v2, option/CLI removal, then 15-role admission; v1
+generated semantics stay isolated until the v2 bump.
 Rust preflight `.9.1.4.0` records compact-`|` family drift, silently ignored bare edges, serialized/global cursor
 ownership, v1 generated state, and the exact 51/63 primary boundary without executable changes. Gate hardening
 `.9.1.4.1` now runs the complete `linkedspec-core` package before the complete runtime package. Verified normalization

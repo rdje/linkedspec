@@ -5,10 +5,11 @@
 > public/global overrides with portable diagnostics, project per-rule
 > `cursor_policy`, and emit/consume `linkedspec-generated-source-v2`. Version-2
 > plan rows retain `{label, family}` and derive policy from family. Perl is
-> admitted across the composed contract. Rust now emits/validates v2, derives
-> policy in live and reconstructed execution, and removes the API/CLI override;
-> its composed admission remains the next Rust leaf. Dart, Julia, and Lua retain
-> their staged generated-source-v1 and global-option behavior until their
+> admitted across the composed contract, as are Rust and Dart through their own
+> topology-checked consumers. Julia now has typed normalization, intrinsic
+> live/loaded/normalized execution, and cursor descriptor v1; its generated
+> source remains v1 and its outer option remains until `.9.1.6.4-.5`. Lua
+> retains staged generated-source-v1 and global-option behavior until its
 > dependency-ordered rollout leaves.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
@@ -69,8 +70,8 @@ the same optional controls:
 
 The retired `--parse-mode` flag is recognized only as a usage error: exit `2`
 with `--parse-mode has been removed; cursor policy is derived from each rule
-(OR/default=seek, AND=consume)`. Perl and Rust project those shared fixture
-bytes; later backends migrate to the same interface in order.
+(OR/default=seek, AND=consume)`. Perl, Rust, and Dart project those shared
+fixture bytes; Julia and Lua migrate to the same interface in order.
 
 There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
 status probes are separate developer commands. Trace levels accept numeric values plus the
@@ -2073,9 +2074,12 @@ rows, all six ownership sets, JSON roundtrips, and physical-line boundaries. Run
 execution assertions across all 36 families on live/normalized routes, all eight parent-child mechanisms, both
 structural replacements, loaded-default execution, recursion, and trace attribution. Normal AND consumes and
 sequences; OR/default seeks and chooses; every child entry rederives. Generated v1 stays on a private historical
-seek/family adapter and passes 60 focused emitter assertions. Descriptor metadata still has global `parse_mode`,
-generated source remains v1/format 1, and the public option remains until `.9.1.6.3-.5`; admission alone advances
-the rollout in `.9.1.6.6`.
+seek/family adapter and passes 60 focused emitter assertions. Descriptor `.9.1.6.3` is now cursor v1: root metadata
+has no global mode, and each rule projects normalized family, derived policy, ownership, and exact ordered
+ownership/target/child-index/block/fluent rows. Direct, normalized `SpecFile`-JSON, and loaded descriptor bytes
+agree across a focused 809-assertion suite, including all valid and invalid neutral edge cases. Generated source
+remains v1/format 1, and the public option remains until `.9.1.6.4-.5`; admission alone advances the rollout in
+`.9.1.6.6`.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`

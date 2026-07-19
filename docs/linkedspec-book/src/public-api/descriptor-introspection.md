@@ -488,8 +488,53 @@ provenance. Direct, file-loaded, and ordinary compiled-JSON-reconstructed descri
 the same policy normal live execution spends. Generated-source v2 is a separate artifact contract that derives
 the same policy from its minimal neutral family plan rather than copying descriptor fields.
 
+## Julia in-memory cursor descriptor API
+
+Julia exposes the same rule-local cursor-v1 facts through the existing outward projection:
+
+```julia
+using LinkedSpecJulia
+
+source = """
+Top::AND
+ -> Child[1] { return(\"hit\") }
+Child:
+ /a/
+ /b/
+"""
+
+compiled = compile_spec(parse_spec(source))
+descriptor = to_descriptor_json(compiled)
+top = descriptor["spec"]["Top"]["meta"]
+
+@assert descriptor["meta"]["cursor_contract"] ==
+    "linkedspec-rule-local-cursor-v1"
+@assert !haskey(descriptor["meta"], "parse_mode")
+@assert top["family"] == "and"
+@assert top["cursor_policy"] == "consume"
+@assert top["edge_ownership"] == "action"
+@assert top["resolved_edges"][1] == Dict(
+    "ownership" => "action",
+    "target" => "Child",
+    "regex_index" => 1,
+    "block" => true,
+    "fluent" => nothing,
+)
+```
+
+Julia derives these fields from `CompiledRuleModeMetadata` and the normalized action/blind tables; the descriptor
+does not add mutable execution state. Action rows identify the child's selected regex slot. Blind rows use a null
+index because they do not select a child slot. Fluent-only edges retain `block = false` and publish their fluent
+chain separately. Bare and explicit equivalent edges converge, and optional `source_form` is omitted because
+compiled state does not retain that non-semantic provenance.
+
+Julia does not deserialize the outward descriptor. Its reconstruction route round-trips normalized `SpecFile`
+JSON and recompiles; file loading invokes that same compiler. Direct, normalized, and file-loaded projections are
+JSON-byte-identical, while invalid reconstructed edge state fails portable validation before projection. Generated
+source remains a separate v1 artifact contract until Julia's ordered generated-v2 leaf.
+
 All four implemented variants expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
-contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrates by explicit
-variant: Perl, Rust, and Dart currently consume rule-local v1, while Julia retains the legacy variant until its
-ordered cursor-rollout leaf.
+contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrated by explicit
+variant: Perl, Rust, Dart, and Julia now consume rule-local v1; generated/public cursor admission remains separately
+staged per backend.

@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.3 — project Julia cursor descriptors
+
+Julia's outward compiled descriptor now consumes the rule-local cursor-v1 metadata variant. Root metadata exposes
+`cursor_contract = linkedspec-rule-local-cursor-v1` and no longer exposes descriptor-wide `parse_mode`.
+Root-selection contract identity, definition/compile order, authored top markers, redefinition state, staged
+function order/count, and all established top-level records remain unchanged.
+
+Every rule projects normalized `family`, authored-family-derived `cursor_policy`, aggregate `edge_ownership`, and
+deterministic `resolved_edges`. Each semantic edge row contains exactly ownership, target, child regex index,
+block presence, and normalized fluent text. Action rows preserve omitted-index-as-zero and explicit indices; blind
+rows use a null index. Bare and explicit forms intentionally converge, and optional non-semantic `source_form` is
+omitted because compiled state does not retain it.
+
+The new contract-driven suite passes 809/809 across all 36 family spellings, every valid governed edge, every
+portable invalid edge/set case, direct/normalized/file-loaded descriptor byte identity, and loaded live execution.
+The complete Julia package passes 3,129 assertions with only the exact frozen shared-help mismatch; corpus remains
+105/105 and primary remains exactly 32/65 in default and POSIX environments. Neutral governance remains 67 files /
+4 complete + 4 pending / 39 rejected mutations by replacing the now-token-free compiler path with the focused
+descriptor no-drift test. Generated source stays v1/format 1, public options remain, and rollout does not advance.
+
 ## 2026-07-18 — FUTURE-PARITY-BACKLOG.9.1.6.2 — execute Julia rule-local cursors
 
 Julia normal execution now derives one immutable policy from every rule as it is entered. Exact AND-family rules

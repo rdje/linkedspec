@@ -5,6 +5,7 @@ end
 Base.showerror(io::IO, error::CompiledSpecException) = print(io, error.message)
 
 const ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
+const RULE_LOCAL_CURSOR_CONTRACT_ID = "linkedspec-rule-local-cursor-v1"
 
 @enum EntryRuleSelectionBasis begin
     ExplicitSelectorBasis
@@ -666,9 +667,60 @@ function to_descriptor_json(rule::CompiledRule)
             "label" => rule.label,
             "line" => rule.header.line,
             "is_top" => rule.header.is_top,
+            "family" => rule_family(rule.mode_metadata),
+            "cursor_policy" => cursor_policy(rule.mode_metadata),
+            "edge_ownership" => _descriptor_edge_ownership(rule),
+            "resolved_edges" => _resolved_edge_descriptor_json(rule),
             "mode" => to_json(rule.mode_metadata),
         ),
     )
+end
+
+function _descriptor_edge_ownership(rule::CompiledRule)
+    has_action = !isempty(rule.action_edges)
+    has_blind = !isempty(rule.blind_edges)
+    if has_action && has_blind
+        return "mixed"
+    elseif has_action
+        return "action"
+    elseif has_blind
+        return "blind"
+    end
+    return "none"
+end
+
+function _resolved_edge_descriptor_json(rule::CompiledRule)
+    rows = Dict{String,Any}[]
+    for edge in rule.action_edges
+        for target in edge.targets
+            push!(rows, Dict{String,Any}(
+                "ownership" => "action",
+                "target" => target.label,
+                "regex_index" => edge.child_regex_index,
+                "block" => edge.code !== nothing,
+                "fluent" => _descriptor_fluent_text(edge.fluent_chain),
+            ))
+        end
+    end
+    for edge in rule.blind_edges
+        push!(rows, Dict{String,Any}(
+            "ownership" => "blind",
+            "target" => edge.target.label,
+            "regex_index" => nothing,
+            "block" => edge.code !== nothing,
+            "fluent" => _descriptor_fluent_text(edge.fluent_chain),
+        ))
+    end
+    return rows
+end
+
+function _descriptor_fluent_text(chain)
+    if isempty(chain)
+        return nothing
+    end
+    return join([
+        isempty(call.args) ? call.method : "$(call.method)($(call.args))" for call in chain
+    ], ".")
 end
 
 function to_json(entry::CompiledDependencyRegexEntry)
@@ -717,7 +769,7 @@ function to_json(state::CompiledDescriptorState)
             "descriptor_model" => "compiled_descriptor_state",
             "compiled_spec_model" => "compiled_spec_state",
             "compiled_dependency_regex_model" => "compiled_dependency_regex_state",
-            "parse_mode" => "seek",
+            "cursor_contract" => RULE_LOCAL_CURSOR_CONTRACT_ID,
             "entry_rule_contract" => ENTRY_RULE_CONTRACT_ID,
             "definition_order" => compiled.definition_order,
             "compiled_rule_order" => compiled.compiled_rule_order,

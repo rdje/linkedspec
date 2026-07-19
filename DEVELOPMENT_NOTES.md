@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.3` — descriptors project normalized facts; they do not own policy):
+  Julia already had every cursor-v1 descriptor fact in immutable compiled state after `.1`: exact family metadata
+  plus normalized action/blind tables. The descriptor therefore adds no cursor field to `CompiledSpec` and no
+  input decoder. Root `parse_mode` is replaced with the contract identity; per-rule policy calls the same pure
+  family derivation used by runtime, and edge rows are rebuilt from normalized tables on every outward projection.
+
+  Resolved-edge rows deliberately publish child selection identity, not the parent's expanded regex-table index.
+  Action rows therefore use `child_regex_index`, with an omitted authored index normalized to zero; blind rows use
+  null because blind dispatch selects no child regex slot. `block` reads the authored compiled edge code rather
+  than the synthesized fluent action payload, so a fluent-only edge remains `block=false`. Fluent chains render as
+  stable dot-separated method text. Bare/explicit provenance is omitted because it is non-semantic and no longer
+  exists in compiled state.
+
+  Contract proof must compare reconstruction routes, not deserialize the outward descriptor. Julia's real route is
+  `SpecFile` JSON roundtrip followed by normal compilation; file loading follows the same compiler. The focused
+  suite therefore locks value and JSON-byte identity across direct, normalized, and loaded projections, then proves
+  loaded AND execution spends the same family facts. It also reruns every invalid normalized edge/set row so no
+  descriptor can be obtained by bypassing portable validation.
+
+  Focused proof is 809/809; final complete package proof is 3,129 pass plus the one frozen help mismatch; corpus is
+  105/105 and shared primary is 32/65 twice with the same later-owned failures. Replacing
+  `julia/src/compiler/CompiledSpec.jl` with `julia/test/rule_local_cursor_descriptor_test.jl` in the 67-file
+  migration inventory is intentional: production projection is now free of migration tokens, while the focused
+  test retains the forbidden-field/current-contract lock. Generated v2, public removal, and admission remain
+  `.9.1.6.4-.6`.
+
 - 2026-07-18 (`FUTURE-PARITY-BACKLOG.9.1.6.2` — derive at rule entry and version every compatibility seam):
   Julia's runtime needs one policy value at the top of `_execute_runtime_rule!`, not repeated family tests inside
   match helpers and not parent state threaded through child calls. `_RuntimeRuleExecutionPolicy` therefore binds

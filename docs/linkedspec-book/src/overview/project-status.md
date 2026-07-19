@@ -31,8 +31,9 @@ Clean commit `7aa9c578` lands that admission. Behavior-free Julia cursor preflig
 normalization `.9.1.6.1` now classifies every authored family, retains every governed bare-edge shape as typed AST,
 emits the six portable edge diagnostics, and lowers family-derived ownership into compiled action/blind tables.
 Intrinsic runtime `.9.1.6.2` now derives cursor plus sequence/choice once at every live, loaded-default,
-normalized, recursive, and traced rule entry. Children rederive from their own family. Descriptor, generated-v2,
-public-option, and admission `.3-.6` still precede final exact 65x2 root admission `.4.3`.
+normalized, recursive, and traced rule entry. Children rederive from their own family. Descriptor `.9.1.6.3` now
+publishes cursor v1 plus per-rule family/policy/ownership/edge facts with direct/normalized/loaded byte identity.
+Generated-v2, public-option, and admission `.4-.6` still precede final exact 65x2 root admission `.4.3`.
 Lua/LuaJIT and final composed five-backend admission remain `.5-.6`; rollout stays
 4/7 until admission.
 
@@ -44,11 +45,12 @@ and blockless grouped-action failures. Compiled state exposes the derived family
 into its existing action/blind tables. Normal execution now passes 104 contract-driven assertions: all 36 family
 spellings on live and normalized routes, all eight mixed parent/child mechanisms, both structural replacements,
 loaded-default behavior, recursion, and trace attribution. AND consumes/sequences; OR/default seeks/chooses; each
-child rederives. Generated v1 remains on its private compatibility engine, descriptors retain global `parse_mode`,
-and public CLI/corpus compatibility remains until `.5`. Focused generated proof is 60; package execution passes
-2,320 assertions plus the known help mismatch, primary is 32/65 twice, corpus is 105/105, and governance remains
-67/4+4/39. Descriptor v1, generated v2, option/CLI removal, and admission follow in `.3-.6`; no rollout row
-advances at runtime.
+child rederives. Generated v1 remains on its private compatibility engine, and public CLI/corpus compatibility
+remains until `.5`. Descriptor v1 now has no descriptor-global field and projects exact semantic edge rows; its
+focused suite passes 809. Focused generated proof is 60; package execution
+passes 3,129 assertions plus the known help mismatch, primary is 32/65 twice, corpus is 105/105, and governance
+remains 67/4+4/39. Generated v2, option/CLI removal, and admission follow in `.4-.6`; no rollout row advances at
+descriptor projection.
 
 ## Completed phases
 
