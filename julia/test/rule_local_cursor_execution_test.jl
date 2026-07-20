@@ -84,7 +84,7 @@ Child:AND
     (
         id = "and_to_or_recursion",
         input = "p junk xp junk z",
-        expected = "done",
+        expected = Any[Any["done"]],
         source = raw"""
 Top::AND
  /p/
@@ -179,7 +179,21 @@ end
             header = String(row["header"])
             prefix = startswith(header, "Top::") ? "" : "Root::\n I { return(\"unused\") }\n\n"
             source = prefix * header * "\n /x/ -> Top { return(\"hit\") }\n"
-            expected = row["cursor_policy"] == "seek" ? "hit" : nothing
+            case_id = String(row["id"])
+            expected = if row["cursor_policy"] != "seek"
+                nothing
+            elseif case_id in (
+                "default_body",
+                "default_top",
+                "compact_or_body",
+                "compact_or_top",
+            )
+                "hit"
+            elseif case_id in ("optional_body", "optional_top")
+                Any["hit"]
+            else
+                Any["hit", "hit"]
+            end
             routes = (
                 (name = "live", spec = parse_spec(source)),
                 (name = "normalized", spec = _normalized_cursor_execution_spec(source)),

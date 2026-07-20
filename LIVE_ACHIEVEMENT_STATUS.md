@@ -8,17 +8,39 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.3` is active task-tree-first from clean Rust admission commit `293b10ea` at ahead
-  255. Dart now treats bare `OR` as minimum-one repetition with `rep_acode`/`rep_bcode` and collects one typed
-  action-block or fluent return per accepted hit at the action-edge boundary in native/generated execution. The
-  omission-sensitive Dart consumer composes 15 exact roles; the checker advances only Dart to 4 complete / 4
-  pending and rejects 29 mutations. Focused 3/3, analyzer, package 276, primary 65x2, corpus 105/105, and canonical
-  Perl primary 65x2 plus Phase 0 1,031/1,031 in 635 seconds pass; final docs/gates, exact cleanup, commit, and brief
-  reset remain in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.4` is active task-tree-first from clean Dart admission commit `128ead52` at ahead
+  256. Implementation and signoff are complete: Julia now classifies bare OR as minimum-one repetition and
+  collects typed action-edge values per accepted hit without swallowing implicit child dispatch or lifecycle
+  control. Rollout is 5 complete / 3 pending with 32 rejected mutations; lockstep/commit is in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity**
+  (IMPLEMENTED AND VERIFIED from clean base `128ead52`; commit workflow in progress).
+
+  **Result:** Julia treats bare `OR` as minimum-one repetition, captures typed action-edge values per accepted hit
+  in native and generated execution, preserves lifecycle/pipe/bounds/progress/cursor/slot contracts, and passes
+  one exact 15-role admission. Rollout reaches 5 complete / 3 pending with 32 rejected mutations.
+
+  **Proof:** Focused 162/162, package 3,711, fresh emitted direct/traced host, primary 65x2, corpus 105/105,
+  checker 8 modes / 10 specials / 32 mutations, canonical Perl primary 65x2, and Phase 0 1,031/1,031 in 638
+  seconds pass. Disposable Julia compiled cache was removed after the authoritative backend gate.
+
+  **Next:** Commit and clean `.4`; dual-ABI Lua `.9.1.10.5` follows from that boundary.
+
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity**
+  (DONE at clean commit `128ead52` from base `293b10ea`).
+
+  **Result:** Dart treats bare `OR` as minimum-one repetition, captures typed action-edge values per accepted hit
+  without swallowing lifecycle control or implicit child dispatch, and passes one exact 15-role admission.
+  Rollout reaches 4 complete / 4 pending with 29 rejected mutations.
+
+  **Proof:** Focused 3/3, format/analyzer, package 276, primary 65x2, corpus 105/105, mdBook, Knowledge Map, four
+  doctrines, canonical Perl primary 65x2, and Phase 0 1,031/1,031 in 635 seconds pass; generated caches are absent.
+
+  **Next:** Julia parity leaf `.9.1.10.4` is active task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity**
   (DONE at clean commit `293b10ea` from base `00ee7085`).
 

@@ -185,13 +185,13 @@ rule_family(mode::RuleMode) = is_and(mode) ? "and" : "or_default"
 cursor_policy(mode::RuleMode) = is_and(mode) ? "consume" : "seek"
 
 function is_repetition(mode::RuleMode)
-    return mode.name in ("Default", "Star", "Plus", "OrPlus", "AndPlus", "Optional", "OrBounded", "AndBounded")
+    return mode.name in ("Default", "Star", "Plus", "Or", "OrPlus", "AndPlus", "Optional", "OrBounded", "AndBounded")
 end
 
 function rep_min(mode::RuleMode)
     if mode.name in ("Default", "Star", "Optional")
         return 0
-    elseif mode.name in ("Plus", "OrPlus", "AndPlus")
+    elseif mode.name in ("Plus", "Or", "OrPlus", "AndPlus")
         return 1
     elseif mode.name in ("OrBounded", "AndBounded")
         return mode.min

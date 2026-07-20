@@ -8,11 +8,12 @@ family. The cursor rollout is closed at 75 migration files, 8 complete / 0 pendi
 `bash tools/check_rule_local_cursor_five_backend.sh` is the recurring six-runtime plus selected 5x2x5 proof.
 ADR `0048` accepts per-hit action-result collection for explicit repetition and scalar pipe choice after exact
 five-backend audit found bare-OR classification plus action-return propagation defects in all four newer
-backends. The exact neutral contract, ten-role Perl reference admission, and 15-role Rust and Dart admissions are
-complete at 4 complete / 4 pending. Rust and Dart now treat bare `OR` as minimum-one repetition, collect explicit
+backends. The exact neutral contract, ten-role Perl reference admission, and 15-role Rust, Dart, and Julia
+admissions are complete at 5 complete / 3 pending. Rust, Dart, and Julia now treat bare `OR` as minimum-one
+repetition, collect explicit
 repeated action returns per hit across native/generated routes, preserve lifecycle authority and scalar pipe, and
-retain generated-source v2; Julia, dual-ABI Lua, recurring, and public rollout remain
-`FUTURE-PARITY-BACKLOG.9.1.10.4-.7`. Logical-helper
+retain generated-source v2; dual-ABI Lua, recurring, and public rollout remain
+`FUTURE-PARITY-BACKLOG.9.1.10.5-.7`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI

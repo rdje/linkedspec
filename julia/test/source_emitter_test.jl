@@ -32,7 +32,7 @@ DefaultRoot::
  LE { push(words, match_group(0)) }
  E { return(copy(words)) }
 
-OrAcode:OR
+OrAcode:|
  /go/ -> OrDone { return("or-acode") }
 OrDone: /go/
 
@@ -53,7 +53,7 @@ AndBcode:AND
 AndBlindA: /a/
 AndBlindB: /[ \t]+b/
 
-OrBcode:OR
+OrBcode:|
  => OrBlindA
  => OrBlindB
  E { return(cat("or-bcode:", retv)) }

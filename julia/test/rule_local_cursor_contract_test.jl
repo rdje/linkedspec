@@ -196,7 +196,10 @@ end
 
 function role_recursion(_contract, _state)
     compiled = _julia_cursor_admission_compile(JULIA_CURSOR_ADMISSION_RECURSION_SOURCE)
-    @test runtime_parse(LinkedSpecRuntimeEngine(compiled), "p junk xp junk z").value == "done"
+    @test runtime_parse(
+        LinkedSpecRuntimeEngine(compiled),
+        "p junk xp junk z",
+    ).value == Any[Any["done"]]
 end
 
 function role_structural_ordered_landmarks(_contract, _state)

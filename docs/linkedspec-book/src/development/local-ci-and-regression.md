@@ -228,19 +228,23 @@ python3 tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
 (cd dart && dart test test/repeated_action_result_contract_test.dart)
+julia --project=julia --compiled-modules=no julia/test/repeated_action_result_contract_test.jl
 ```
 
 The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
 nested/null/fluent values, zero and below-minimum results, lifecycle override authority, scalar pipe, and blind
 bare-OR classification. It also locks descriptors, generated-source-v2 family rows, selected-slot trace, route
-topology, a checked-in corpus bundle, six-runtime inventory, and 29 independent mutation failures. The Perl
+topology, a checked-in corpus bundle, six-runtime inventory, and 32 independent mutation failures. The Perl
 consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Rust adds one exact
 15-role consumer spanning native, loaded/reconstructed, descriptor, emitted/generated direct/traced, primary,
 corpus, lifecycle, bounds, progress, and slot traces; the complete Rust-local driver runs it unconditionally.
 Dart adds the same 15-role topology through normalized reconstruction and its native/generated/emitted/trace/
 primary/corpus routes; `tools/run_dart_local.sh` runs that consumer with format, analyzer, package, primary, and
-corpus gates. Neutral, Perl, Rust, and Dart are admitted at 4 complete / 4 pending; `.9.1.10.4-.7` own Julia,
-dual-ABI Lua, recurring proof, and public closeout. This gate does not claim cross-backend parity early.
+corpus gates. Julia adds the same 15-role topology, including a fresh isolated emitted-source host, loaded/
+reconstructed state, stale-family rejection, and native/generated selected-slot traces; `tools/run_julia_local.sh`
+runs it with package, primary, and corpus gates. Neutral, Perl, Rust, Dart, and Julia are admitted at 5 complete /
+3 pending; `.9.1.10.5-.7` own dual-ABI Lua, recurring proof, and public closeout. This gate does not claim
+cross-backend parity early.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

@@ -762,6 +762,17 @@ function _runtime_rule_execution_policy(
     )
 end
 
+function _collects_explicit_action_iteration_values(rule::CompiledRule)
+    return !isempty(rule.action_edges) && rule.mode_metadata.name in (
+        "Star",
+        "Plus",
+        "Optional",
+        "Or",
+        "OrPlus",
+        "OrBounded",
+    )
+end
+
 function _execute_runtime_blind_rule!(
     engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
@@ -1016,6 +1027,7 @@ function _execute_runtime_regex_rule!(
         return _RuntimeRuleResult(matched_any, nothing)
     end
 
+    action_iteration_values = _collects_explicit_action_iteration_values(rule) ? Any[] : nothing
     matches = 0
     made_failed_attempt = false
     for _ in 1:engine.max_iterations
@@ -1035,6 +1047,7 @@ function _execute_runtime_regex_rule!(
             context;
             cursor_policy = cursor_policy,
             and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
+            action_iteration_values = action_iteration_values,
         ))
         if matched.nexted
             matches += 1
@@ -1063,6 +1076,9 @@ function _execute_runtime_regex_rule!(
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
         end
+        if action_iteration_values !== nothing
+            return _RuntimeRuleResult(false, nothing)
+        end
         throw(RuntimeInterpreterException(
             "rule '$(rule.label)' expected at least $minimum matches, got $matches",
         ))
@@ -1082,7 +1098,9 @@ function _execute_runtime_regex_rule!(
     if exit_return !== nothing
         return _runtime_returned(exit_return.value)
     end
-    return _RuntimeRuleResult(matches > 0, nothing)
+    value = action_iteration_values === nothing ?
+        nothing : Any[action_iteration_values...]
+    return _RuntimeRuleResult(matches > 0, value)
 end
 
 function _execute_runtime_regex_once!(
@@ -1092,6 +1110,7 @@ function _execute_runtime_regex_once!(
     entry_regex_index::Int = 0,
     cursor_policy::LinkedSpecParseMode,
     and_sequence::Bool = false,
+    action_iteration_values = nothing,
 )
     cursor_before = context.cursor_codeunit
     if isempty(rule.regex_patterns)
@@ -1145,7 +1164,13 @@ function _execute_runtime_regex_once!(
                 expected_target,
                 expected_regex_index,
             )
-            _accept_runtime_regex_match!(engine, rule, one_match, context)
+            _accept_runtime_regex_match!(
+                engine,
+                rule,
+                one_match,
+                context;
+                action_iteration_values = action_iteration_values,
+            )
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
             if loop_end !== nothing
                 throw(loop_end)
@@ -1191,7 +1216,13 @@ function _execute_runtime_regex_once!(
         regex_index,
     )
 
-    _accept_runtime_regex_match!(engine, rule, one_match, context)
+    _accept_runtime_regex_match!(
+        engine,
+        rule,
+        one_match,
+        context;
+        action_iteration_values = action_iteration_values,
+    )
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
     if loop_end !== nothing
         throw(loop_end)
@@ -1268,6 +1299,8 @@ function _accept_runtime_regex_match!(
     rule::CompiledRule,
     one_match::RuntimeRegexMatch,
     context::_RuntimeExecutionContext,
+    ;
+    action_iteration_values = nothing,
 )
     context.cursor_codeunit = one_match.codeunit_end
     context.registers = with_local_match(context.registers, one_match)
@@ -1292,7 +1325,10 @@ function _accept_runtime_regex_match!(
             current_edge,
         )
         if action_return !== nothing
-            throw(action_return)
+            if action_iteration_values === nothing
+                throw(action_return)
+            end
+            push!(action_iteration_values, _runtime_copy(action_return.value))
         end
         if !current_edge.child_dispatched && target.label != rule.label
             child = _execute_runtime_action_edge_child!(engine, current_edge, context)

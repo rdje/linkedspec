@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity
+
+Julia now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families
+as `rep_acode`/`rep_bcode`. Explicit repeated choice modes `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR` collect
+one typed action-block or fluent return per accepted hit in native and generated-plan execution. Collection occurs
+at the action-edge boundary, so implicit child dispatch still completes after capture; lifecycle returns retain
+immediate whole-rule authority. Default, AND, blind-result, scalar pipe, bounds, progress, cursor, structural slot
+identity, and generated-source-v2 contracts remain unchanged.
+
+One omission-sensitive Julia consumer executes 15 exact roles across neutral metadata, all mode/special cases,
+loaded and normalized reconstruction, descriptor, fresh emitted source, generated direct/traced execution, native
+trace, primary command, corpus bundle, lifecycle, bounds, progress, cursor, and selected slots. It launches a
+fresh isolated Julia host for emitted direct/traced proof and rejects stale `or_acode` plans. The checker requires
+that consumer plus Julia mechanism seams, rejects 32 mutations, and advances only Julia to 5 complete / 3
+pending. Red proof first observed non-repetition metadata, `or_acode`, scalar `"A"`, and one selected slot; green
+proof returns `["A", "B"]` and two slots.
+
+Adjacent generated-family controls use `::|`, nested cursor recursion preserves the inner bare-OR result array as
+one outer iteration value, and the 36-family execution matrix distinguishes scalar default/pipe, one-hit
+optional, and two-hit explicit repetition without changing cursor assertions. Focused proof passes 162/162; the
+authoritative Julia gate passes package 3,711, primary CLI 65/65 in both environments, and corpus 105/105.
+Canonical local CI passes reference primary 65x2 and Phase 0 1,031/1,031 in 638 seconds.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity
 
 Dart now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families

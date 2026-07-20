@@ -19,10 +19,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > ordered label/family plan. The recurring gate composes all six runtime legs, selected 5x2x5 primary cases, and
 > support ledgers. Public no-drift closes the executable ledger at 75 migration files, 8 complete / 0 pending,
 > and 60 rejected mutations. ADR `0048` now accepts per-hit action-result collection for explicit repetition
-> (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl, Rust, and Dart implement that
-> rule; Julia and Lua currently stop at the first action-edge return. The executable neutral contract plus
-> ten-role Perl and 15-role Rust/Dart admissions are complete at 4 complete / 4 pending; remaining backend work
-> is `.9.1.10.4-.5`, recurring `.6`, and public closeout `.7`.
+> (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl, Rust, Dart, and Julia implement
+> that rule; Lua currently stops at the first action-edge return. The executable neutral contract plus ten-role
+> Perl and 15-role Rust/Dart/Julia admissions are complete at 5 complete / 3 pending; remaining backend work is
+> dual-ABI Lua `.9.1.10.5`, recurring `.6`, and public closeout `.7`.
 
 ## Current rule-label surface
 
@@ -197,7 +197,7 @@ alternative. The contract is `linkedspec-duplicate-regex-slot-identity-v1`;
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit it. Rollout is
 closed at 7 complete / 0 pending. Explicit repeated `::OR` is a different family;
 ADR `0048` makes its action-edge results a per-hit collection, with rollout
-at 4 complete / 4 pending under `FUTURE-PARITY-BACKLOG.9.1.10.4-.7`.
+at 5 complete / 3 pending under `FUTURE-PARITY-BACKLOG.9.1.10.5-.7`.
 
 ## Single choice: `:|`
 
@@ -285,11 +285,11 @@ Input `ab` has the accepted result `["A", "B"]`. Use `::|` instead when the
 intended result is one scalar choice. Returned arrays remain nested as one outer
 element, and an explicit null result remains one null element.
 
-This is the accepted ADR `0048` contract and current Perl/Rust/Dart behavior.
-Rust and Dart also publish bare `OR` as minimum-one repetition and generated
+This is the accepted ADR `0048` contract and current Perl/Rust/Dart/Julia behavior.
+Rust, Dart, and Julia also publish bare `OR` as minimum-one repetition and generated
 `rep_acode`/`rep_bcode` without a generated-source format bump. During the
-remaining migration, Julia and Lua still return only `"A"` for that example and
-misclassify bare `OR` as non-repetition. Do not treat that temporary first-hit
+remaining migration, Lua still returns only `"A"` for that example and
+misclassifies bare `OR` as non-repetition. Do not treat that temporary first-hit
 behavior as the language contract.
 
 `:OR+` is the shorthand spelling for the same open-ended repeated-choice family:

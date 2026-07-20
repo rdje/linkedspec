@@ -130,6 +130,7 @@ function classify_generated_rule_family(rule::CompiledRule)
         "Plus",
         "Star",
         "Optional",
+        "Or",
         "OrPlus",
         "AndPlus",
         "OrBounded",
@@ -146,7 +147,7 @@ function classify_generated_rule_family(rule::CompiledRule)
         return rule.mode_metadata.is_and ? AndBcodeGeneratedFamily : OrBcodeGeneratedFamily
     elseif mode == "Default"
         return DefaultGeneratedFamily
-    elseif mode in ("Or", "Pipe")
+    elseif mode == "Pipe"
         return OrAcodeGeneratedFamily
     elseif mode == "Single"
         return AndSingleAcodeGeneratedFamily

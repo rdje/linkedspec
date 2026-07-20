@@ -6589,15 +6589,50 @@ before implementation.
     task/roadmap/live/changes/notes and commit `.3` before activating Julia `.4`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.4`
-  Status: `pending`
+  Status: `done`
   Goal: Align Julia repeated-choice classification and action-result collection.
   Dependencies: `.9.1.10.3`
   Acceptance: Apply the accepted contract through Julia AST metadata, runtime return flow, descriptor,
     generated-v2 classification/execution, emitted source, loading/reconstruction, trace, primary, and corpus;
     preserve lifecycle authority, bounds, progress, slot/cursor semantics, and pipe scalar choice; add one exact
     neutral admission consumer and pass package, primary, corpus, and fresh emitted-host gates.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean Dart admission commit `128ead52` at ahead
+    256. No Julia AST, runtime, descriptor, generated-source, fixture, driver, or documentation edit preceded
+    activation. The exact 15-role consumer and pending-state checker landed before behavior; focused red proved
+    authored bare `OR` reported `is_repetition = false`, `rep_min = nothing`, emitted family `or_acode`, and
+    returned first-hit scalar `"A"` with one selected slot. Julia now gives bare `Or` minimum one, classifies
+    action/blind forms as `rep_acode`/`rep_bcode`, and collects typed action-block or fluent values at the
+    action-edge boundary for `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`. Implicit child dispatch continues after
+    capture; later lifecycle returns retain immediate whole-rule authority. Default, AND, blind-result, pipe,
+    bounds, zero-progress, cursor, slot identity, and generated-source-v2 shape are preserved. The checker passes
+    at 5 complete / 3 pending with 32 mutations. Adjacent generated-family controls use `::|`, nested recursion
+    preserves the inner collection as one outer value, and the 36-family cursor matrix distinguishes scalar,
+    optional, and repeated results without changing cursor assertions. Focused proof passes 162/162; the complete
+    Julia package passes 3,711 tests, primary passes 65x2, corpus passes 105/105, and the fresh isolated emitted
+    host proves direct/traced execution plus stale-family rejection. Canonical local CI exits 0 after Perl primary
+    65x2 and Phase 0 1,031/1,031 in 638 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.4 - admit Julia repeated action results`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY JULIA SEAMS** — Follow the Knowledge Map, toolbox, neutral contract, and admitted
+    Rust/Dart precedents to the exact Julia authored-mode metadata, compiler/runtime action-result flow,
+    descriptor, emitted/generated-v2, loaded/reconstructed, trace, primary, corpus, and driver seams before
+    editing behavior.
+  - [x] **RED / NEUTRAL CONSUMER** — Add one omission-sensitive contract consumer that proves all eight modes,
+    ten special cases where representable, and the required native/composed/artifact/trace/primary/corpus routes;
+    demonstrate the current bare-OR family and first-return failures before repair.
+  - [x] **CLASSIFY BARE OR AS REPETITION** — Make authored Julia `or` minimum-one repetition and generated
+    `rep_acode`/`rep_bcode` without widening generated-source v2 or changing scalar pipe.
+  - [x] **COLLECT ACTION ITERATION VALUES** — Preserve action-edge return context through each accepted repeated
+    hit, collect one typed value per hit, and retain lifecycle return as immediate whole-rule authority with exact
+    bounds, zero progress, cursor, and slot identity.
+  - [x] **COMPOSE / ADMIT ONLY JULIA** — Prove native, loaded, reconstructed, descriptor, emitted/generated direct
+    and traced, primary, corpus, and diagnostics through the complete Julia gate; advance only Julia to complete
+    and leave Lua/recurring/public pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass neutral and adjacent checkers, focused and complete Julia gates,
+    mdBook/KM/memory/doctrines, canonical CI where warranted, whitespace, and exact artifact cleanup; synchronize
+    task/roadmap/live/changes/notes and commit `.4` before activating Lua `.5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.5`
   Status: `pending`
@@ -8878,10 +8913,11 @@ remains staged for `.9.1.5.6`. Root-selection neutral decision `.9.1.1.2.0` and 
 are now committed through `f33d6d24`; loaded/generated/runtime-context/trace convergence `.9.1.1.2.1.2` is
 complete and canonically verified. Its clean commit is the required boundary before Perl composed admission `.1.3`.
 
-Subsequent cursor rollout has closed Perl, Rust, and Dart at 4 complete / 4 pending. Julia preflight `.9.1.6.0`,
-normalization `.1`, intrinsic runtime `.2`, and descriptor-v1 `.3` are clean through `3caeb097`; descriptor proof
-is 809/3,129+known-one/105/32x2 plus governance/KM/mdBook/canonical signoff. Generated-source v2 `.4` is now active
-task-tree-first from that clean boundary; option removal `.5`, admission `.6`, and Julia root admission follow.
+All later cursor, root-selection, duplicate-slot, and public no-drift children are now closed. The current AND/OR
+frontier is repeated action results under ADR `0048`: neutral/Perl `.1`, Rust `.2`, Dart `.3`, and Julia `.4` are
+implemented and admitted at 5 complete / 3 pending with 32 rejected mutations. Julia proof is focused 162,
+package 3,711, primary 65x2, corpus 105/105, and canonical Phase 0 1,031/1,031. Dual-ABI Lua `.9.1.10.5` is the
+next eligible leaf after the clean Julia commit; recurring `.6` and public/parent closeout `.7` follow.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
@@ -9199,7 +9235,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `done` | Neutral executable contract/checker and exact Perl route admission committed at `00ee7085`. |
 | 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `done` | Rust classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `done` | Dart classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
-| 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `pending` | Align Julia classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `done` | Julia classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `pending` | Align one PUC Lua/LuaJIT source across all native/generated/public routes. |
 | 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `pending` | Compose recurring six-runtime plus selected five-primary/support proof. |
 | 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `pending` | Close public no-drift and exact `.9.1.10`/`.9.1`/`.9` status. |
@@ -10279,6 +10315,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Julia `.9.1.10.4` advances only Julia to 5 complete / 3 pending. Bare `OR` is minimum-one
+  repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
+  typed value per accepted hit at the action-edge boundary, preserving implicit child dispatch and lifecycle
+  whole-rule authority. One 15-role consumer covers the exact neutral matrix, loaded/reconstructed, descriptor,
+  fresh emitted/generated direct/traced, primary, corpus, lifecycle, bounds, progress, and slot traces. Focused
+  162, package 3,711, primary 65x2, corpus 105/105, canonical 65x2/1,031, doctrines, mdBook, and exact generated
+  cleanup pass; dual-ABI Lua `.5` follows.
 - `2026-07-20`: Dart `.9.1.10.3` advances only Dart to 4 complete / 4 pending. Bare `OR` is minimum-one
   repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
   typed value per accepted hit at the action-edge boundary, preserving implicit child dispatch and lifecycle
