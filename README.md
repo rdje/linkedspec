@@ -12,8 +12,8 @@ removal, all eight portable diagnostics, and the 63x2 primary matrix through one
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
 `FUTURE-PARITY-BACKLOG.9.1.1.2`: an explicit entry selector such as `--top-rule NAME` has priority over authored
 `Rule::`; absent an explicit selector, the first authored `::` wins; absent any `::`, the first ordinary `:` wins.
-The neutral decision plus composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends are complete at 6/7, with
-44 drift mutations. All five apply
+The neutral decision, composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends, and final recurring/public
+admission are complete at 7 complete / 0 pending, with 54 drift mutations. All five apply
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
 routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust and Dart each have one omission-sensitive 15-role admission consumer and exact
@@ -49,7 +49,10 @@ traced reuse, low selection trace, portable loader/generated failures, and plan-
 assertions per ABI without changing contract v1/format 1 or the minimal plan. Cursor `.9.1.7` is complete, and
 one exact shared-source 15-role consumer now admits Lua root selection on PUC Lua and LuaJIT. Exact topology RED
 3/3x2 becomes 139/139x2; package 177/177x2, primary 65/65x4, corpus 105/105x2, and 44 drift mutations pass.
-Canonical Phase 0 is 1,031/1,031 in 641 seconds. Only final public no-drift `.6` remains, so rollout is 6/7.
+Canonical Phase 0 is 1,031/1,031 in 641 seconds. Final public no-drift `.6` adds the six-runtime plus 5x2x6
+recurring driver, requires 25 current public/task/KM documents including both roadmaps, forbids 19 stale current
+claims, and closes rollout at 7 complete / 0 pending. Its canonical gate passes primary 65/65x2 and Phase 0
+1,031/1,031 in 642 seconds.
 Behavior-free Lua cursor preflight `.9.1.7.0` now fixes the exact dual-ABI starting boundary. PUC Lua and LuaJIT
 both parse all 36 family headers, classify 34 correctly because compact `|` is still AND, and agree with only the
 22 globally seeking runtime rows. Expected-success edge normalization is 5/13 and ownership-set normalization is
@@ -155,7 +158,8 @@ primary, and portable-diagnostic projections. The complete Dart package passes 2
 matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
 4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
 advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission has since moved
-the current ledger to 69 files, 6 complete / 2 pending, and 49 rejected mutations.
+the current ledger to 71 files, 6 complete / 2 pending, and 49 rejected mutations after final root-selection
+governance added two cross-contract scanner paths.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 
@@ -705,9 +709,9 @@ content migration exists yet.
   and Dart. Root-selection admission has since advanced the shared manifest reference-first to 65 cases: Perl and
   Rust and Dart are admitted at 65/65 in both environments. Dart's exact 15-role consumer composes native, loaded/
   reconstructed, generated/emitted, descriptor, diagnostic, runtime-trace, primary, and request-trace roles.
-  Julia and Lua remain `.4-.5`
-  before final five-backend admission `.6`. The all-five 65x2 primary matrix is therefore the rollout target, not
-  a current green claim.
+  Julia and Lua are now admitted too. Root-selection rollout is closed at 7 complete / 0 pending, and
+  `bash tools/check_root_rule_selection_five_backend.sh` composes every backend admission with the exact six
+  selected root/request-trace cases across the five commands and both option environments.
   Exact CLI lane `.1.5` and governed 246-name/105+1-fixture
   surface `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; complete
   documented named-mark inventory remains explicitly owned by `.17`; native resolution `.1.6.4`, Dart full-
@@ -723,18 +727,21 @@ content migration exists yet.
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
   registration, exact primary cases, rollout, and omission mutations. Dart and Julia admission have the same
   exact 15-role topology and package-wide driver proof. Lua is admitted by one shared consumer source run on PUC
-  Lua and LuaJIT; root governance is now 6/1/44 with only final public no-drift pending.
+  Lua and LuaJIT. Final recurring/public no-drift closes root governance at 7 complete / 0 pending with 54
+  rejected mutations.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
 - Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both shared primary-command
   environments on PUC Lua, and complete 105-fixture corpus execution. Root-selection leaf `.9.1.1.2.5` owns
-  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest; core `.5.1` is
-  marker-optional and exact at 32/65 in both environments on both ABIs, while routes/cursor/admission remain.
+  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest. Core, composed
+  routes, cursor migration, and exact dual-ABI admission are complete; the shared manifest is 65/65 in all four
+  Lua ABI/default-POSIX legs.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
   `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary
-  CLI matrix from that gate.
+  CLI matrix from that gate. Set `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1` to run the focused recurring root-selection
+  composition.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 
 ## Maintenance Policy for README

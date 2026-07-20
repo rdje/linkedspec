@@ -58,8 +58,8 @@ reuse that resolver without adding selection fields to generated plans. Low trac
 carry the same requested/effective/basis or stage/code identity on both ABIs. Cursor migration and final Lua
 admission are now complete under `.9.1.7` and `.9.1.1.2.5.3`. One exact shared-source 15-role consumer passes
 139/139 on each ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2. Markerless execution is implemented
-and backend-admitted at rollout 6/7; final recurring/public no-drift `.9.1.1.2.6` remains before the whole program
-closes.
+and final recurring/public no-drift closes rollout at 7 complete / 0 pending. Run
+`bash tools/check_root_rule_selection_five_backend.sh` for the composed six-runtime and selected-primary proof.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 

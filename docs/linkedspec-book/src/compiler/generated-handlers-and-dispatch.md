@@ -140,6 +140,10 @@ without adding another resolver. Cursor leaf
 invocation-local selector. V2 derives family-owned cursor/structure at each generated entry and rejects a v1
 identity before embedded payload decoding.
 
+Across all five backends, root-selection parity is closed without widening any generated family plan. Run
+`bash tools/check_root_rule_selection_five_backend.sh` to recheck generated direct/traced and emitted-source
+direct/traced admission roles beside the native, descriptor, diagnostic, trace, and primary projections.
+
 ```rust
 use linkedspec_runtime::source_emitter::{
     GeneratedSourceError, emit_rust_source_v2,

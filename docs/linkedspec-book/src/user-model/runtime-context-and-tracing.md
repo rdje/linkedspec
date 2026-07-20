@@ -470,7 +470,8 @@ Omitted selection writes `requested=<default>` and either `basis=first_authored_
 `basis=first_authored_rule`. Failure writes `effective=<none>` followed by portable `stage` and `code`; it occurs
 before any `lua_runtime:parse` scope. Generated-plan validation still runs first. Lua cursor admission and the
 separate shared-source 15-role root-selection admission are complete on both ABIs, so markerless behavior is
-backend-admitted. Final recurring/public no-drift remains the only root-contract rollout leg.
+backend-admitted. Cross-backend root-selection parity is closed at 7 complete / 0 pending; the recurring proof
+keeps requested selector identity, effective attribution, and fixed request-trace bytes aligned.
 Cursor policy comes from each authored rule family. All five backends reject the retired `--parse-mode` flag with
 the targeted usage diagnostic.
 

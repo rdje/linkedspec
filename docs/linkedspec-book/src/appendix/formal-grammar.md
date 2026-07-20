@@ -188,8 +188,9 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` ratify the exact target order
 2. otherwise the first authored `::` in definition order wins;
 3. otherwise the first authored rule wins.
 
-At rollout 6 complete / 1 pending, the neutral contract plus composed Perl, Rust, Dart, Julia, and dual-ABI Lua
-backends are admitted; final recurring/public no-drift remains. All five accept markerless one-or-more-rule sources, apply the exact precedence
+At rollout 7 complete / 0 pending, the neutral contract, composed Perl, Rust, Dart, Julia, dual-ABI Lua, and final
+recurring/public no-drift are admitted. `bash tools/check_root_rule_selection_five_backend.sh` reruns the exact
+cross-backend composition. All five accept markerless one-or-more-rule sources and apply the exact precedence
 above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
 explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
 per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,

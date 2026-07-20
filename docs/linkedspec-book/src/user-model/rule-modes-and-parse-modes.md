@@ -80,7 +80,8 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > Admission `.9.1.6.6` now adds one exact 15-role Julia consumer over every
 > current projection and locks its complete/canonical driver topology.
 > At Julia admission rollout was 5 complete / 3 pending. Lua `.9.1.7.6` now advances only the dual-ABI row after
-> one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. The current governed inventory is 69 files,
+> one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. Final root-selection governance adds two
+> cross-contract scanner paths, so the current governed inventory is 71 files,
 > 6 complete / 2 pending, and 49 effective mutations; recurring five-backend and public no-drift work remain
 > dependency-ordered under `.9.1.8-.9`.
 > Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
@@ -142,8 +143,10 @@ Mechanically, `::` is an authored **default-entry marker**. Without an explicit 
 Entry selection is separate from cursor policy. An explicit selector such as `--top-rule`
 wins over authored `::` markers and may name any declared rule. Otherwise the first marker,
 then the first authored rule, wins. Perl, Rust, Dart, and Julia library/primary routes implement all three
-branches and are admitted; Lua implements the selection core and composed routes, while its topology admission
-and final no-drift remain staged. See [`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
+branches and are admitted; Lua implements and admits the same selection on both ABIs. Cross-backend root-selection
+parity is closed, and `bash tools/check_root_rule_selection_five_backend.sh` is its recurring gate. See [`.spec`
+Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#entry-selection-precedence-and-current-rollout).
+Cross-backend root-selection parity is closed.
 
 The current public suffix surface is intentionally small and exact:
 

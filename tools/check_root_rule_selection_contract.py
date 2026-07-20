@@ -34,6 +34,8 @@ TOP_LEVEL_FIELDS = {
     "julia_admission",
     "lua_admission",
     "implementation_inventory",
+    "recurring_gate",
+    "public_contract",
     "rollout",
 }
 PRECEDENCE = ["explicit_selector", "first_authored_marker", "first_authored_rule"]
@@ -137,7 +139,7 @@ ROLLOUT = [
     ("lua", "complete", "FUTURE-PARITY-BACKLOG.9.1.1.2.5"),
     (
         "admission_and_public_no_drift",
-        "pending",
+        "complete",
         "FUTURE-PARITY-BACKLOG.9.1.1.2.6",
     ),
 ]
@@ -261,6 +263,303 @@ LUA_ADMISSION = {
         "trace_failure_invoke_escaped_field",
     ],
 }
+RECURRING_GATE = {
+    "driver": "tools/check_root_rule_selection_five_backend.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_paths", "roles"],
+        "role_policy": "the Perl core/route pair and every ordered backend admission role are required",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_paths": [
+                "t/root_rule_selection_perl_core.t",
+                "t/root_rule_selection_perl_routes.t",
+            ],
+            "roles": ["core", "routes"],
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_paths": [RUST_ADMISSION["consumer_path"]],
+            "roles": RUST_ADMISSION["roles"],
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_paths": [DART_ADMISSION["consumer_path"]],
+            "roles": DART_ADMISSION["roles"],
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_paths": [JULIA_ADMISSION["consumer_path"]],
+            "roles": JULIA_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_paths": [LUA_ADMISSION["consumer_path"]],
+            "roles": LUA_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_paths": [LUA_ADMISSION["consumer_path"]],
+            "roles": LUA_ADMISSION["roles"],
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": RUST_ADMISSION["primary_case_ids"],
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_ROOT_RULE_MATRIX",
+    },
+}
+PUBLIC_CONTRACT = {
+    "documents": [
+        {
+            "path": "README.md",
+            "required_markers": [
+                "tools/check_root_rule_selection_five_backend.sh",
+                "7 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "USER_GUIDE.md",
+            "required_markers": [
+                "explicit `top_rule` wins",
+                "first authored `Rule::`",
+                "first authored ordinary `Rule:`",
+            ],
+        },
+        {
+            "path": "rust/README.md",
+            "required_markers": ["Root-selection parity is closed", "7 complete / 0 pending"],
+        },
+        {
+            "path": "dart/README.md",
+            "required_markers": [
+                "Root-selection parity is closed",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "julia/README.md",
+            "required_markers": ["Root-selection parity is closed", "7 complete / 0 pending"],
+        },
+        {
+            "path": "lua/README.md",
+            "required_markers": [
+                "Root-selection parity is closed",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": [
+                "54 semantic, topology, recurring, public, and rollout drift mutations",
+                "7 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "cli_conformance/README.md",
+            "required_markers": [
+                "5x2x6 selected root-rule matrix",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "ROADMAP.md",
+            "required_markers": [
+                "Root-selection rollout is closed at 7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "required_markers": [
+                "Root-selection rollout is closed at 7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "ARCHITECTURE_STATE.md",
+            "required_markers": ["root-selection public no-drift", "7 complete / 0 pending"],
+        },
+        {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "required_markers": [
+                "FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift",
+                "7 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "docs/TASK_TREE.md",
+            "required_markers": ["final five-backend recurring/public no-drift"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": [
+                "7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "required_markers": [
+                "7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "required_markers": ["explicit `top_rule` wins", "7 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "required_markers": ["root-selection parity is closed", "7 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+            "required_markers": [
+                "root-selection parity is closed",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "required_markers": [
+                "7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+            "required_markers": ["root-selection parity is closed", "7 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "required_markers": [
+                "root-selection parity is closed",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "required_markers": [
+                "LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1",
+                "5x2x6 selected root-rule matrix",
+            ],
+        },
+        {
+            "path": "docs/knowledge/root-rule-selection-precedence.md",
+            "required_markers": [
+                "7 complete / 0 pending",
+                "tools/check_root_rule_selection_five_backend.sh",
+            ],
+        },
+        {
+            "path": "docs/knowledge/root-rule-selection-five-backend-admission.md",
+            "required_markers": [
+                "7 complete / 0 pending",
+                "LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1",
+            ],
+        },
+        {
+            "path": "docs/knowledge/root-rule-rollout-roadmap-projection.md",
+            "required_markers": [
+                "gap_status: resolved",
+                "ROADMAP.md and ROADMAP_V2.md are required current-state checker inputs",
+            ],
+        },
+    ],
+    "forbidden_current_claims": [
+        {
+            "path": "USER_GUIDE.md",
+            "text": "If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry.",
+        },
+        {
+            "path": "README.md",
+            "text": "Julia and Lua remain `.4-.5`\n  before final five-backend admission `.6`.",
+        },
+        {
+            "path": "README.md",
+            "text": "root governance is now 6/1/44 with only final public no-drift pending.",
+        },
+        {
+            "path": "dart/README.md",
+            "text": "Dart is now admitted while Julia, Lua, and final no-drift remain.",
+        },
+        {
+            "path": "julia/README.md",
+            "text": "Exact root\nadmission `.4.3` is next, while root rollout stays 4/7.",
+        },
+        {
+            "path": "lua/README.md",
+            "text": "final topology admission remain separately owned by `.5.2-.3`.",
+        },
+        {"path": "capability_conformance/README.md", "text": "6 complete / 1 pending"},
+        {
+            "path": "capability_conformance/README.md",
+            "text": "Lua/LuaJIT and cross-backend no-drift leg `.6` remain pending.",
+        },
+        {
+            "path": "ROADMAP.md",
+            "text": "only composed public\nadmission `.6` remains pending",
+        },
+        {
+            "path": "ROADMAP.md",
+            "text": "active; neutral + all five backends complete at 6/7; final public no-drift pending",
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "text": "complete at 6/7 with 44 rejected mutations",
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "text": "root 6/1/44; final root no-drift `.6` follows",
+        },
+        {
+            "path": "ARCHITECTURE_STATE.md",
+            "text": "root governance 6 complete + 1 pending / 44 mutations pass",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "Root governance is 6/7 plus 44 rejected mutations. Only final recurring/public\nno-drift remains.",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "text": "At rollout 6 complete / 1 pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "text": "That contract is at 6 complete / 1 pending.",
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "text": "backend-admitted at rollout 6/7; final recurring/public no-drift",
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "text": "Lua implements the selection core and composed routes, while its topology admission\nand final no-drift remain staged.",
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "text": "A green 5x2x65 run is the\nfinal rollout target rather than a current cross-backend claim.",
+        },
+    ],
+}
 
 
 class ContractError(ValueError):
@@ -382,7 +681,16 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
         "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
-        "capability_conformance/README.md": [CONTRACT_ID, "6 complete / 1 pending"],
+        "capability_conformance/README.md": [CONTRACT_ID, "7 complete / 0 pending"],
+        "ROADMAP.md": [
+            CONTRACT_ID,
+            "Root-selection rollout is closed at 7 complete / 0 pending",
+            "tools/check_root_rule_selection_five_backend.sh",
+        ],
+        "ROADMAP_V2.md": [
+            "Root-selection rollout is closed at 7 complete / 0 pending",
+            "tools/check_root_rule_selection_five_backend.sh",
+        ],
         "docs/linkedspec-book/src/appendix/formal-grammar.md": ["ADR `0046`", CONTRACT_ID],
         "t/root_rule_selection_perl_core.t": [
             "selection_cases",
@@ -413,6 +721,9 @@ def validate_filesystem_contract() -> None:
             "require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",
             "require_tracked_file dart/test/root_rule_selection_admission_test.dart",
             "require_tracked_file julia/test/root_rule_selection_admission_test.jl",
+            "require_tracked_file lua/test/root_rule_selection_admission_test.lua",
+            "require_tracked_file tools/check_root_rule_selection_five_backend.sh",
+            "LINKEDSPEC_RUN_ROOT_RULE_MATRIX",
         ],
     }
     for relative, required in markers.items():
@@ -776,6 +1087,87 @@ def validate_lua_admission(
     )
 
 
+def validate_recurring_and_public_contract(
+    contract: dict[str, Any], *, check_filesystem: bool
+) -> None:
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology drifted")
+    require(contract["public_contract"] == PUBLIC_CONTRACT, "public root-selection contract drifted")
+    if not check_filesystem:
+        return
+
+    gate_path = ROOT / RECURRING_GATE["driver"]
+    require(gate_path.is_file(), "recurring root-selection gate driver is missing")
+    require(gate_path.stat().st_mode & 0o111, "recurring root-selection gate is not executable")
+    gate_text = gate_path.read_text(encoding="utf-8")
+    consumer_markers = {
+        "perl": "prove -Iperl t/root_rule_selection_perl_core.t t/root_rule_selection_perl_routes.t",
+        "rust": "--test root_rule_selection_admission",
+        "dart": "test test/root_rule_selection_admission_test.dart",
+        "julia": 'include("julia/test/root_rule_selection_admission_test.jl")',
+        "puc_lua": '"$LUA_CMD" lua/test/root_rule_selection_admission_test.lua',
+        "luajit": '"$LUAJIT_CMD" lua/test/root_rule_selection_admission_test.lua',
+    }
+    for consumer in RECURRING_GATE["consumers"]:
+        for test_path in consumer["test_paths"]:
+            require(
+                (ROOT / test_path).is_file(),
+                f"recurring root-selection consumer is missing: {test_path}",
+            )
+        require(
+            consumer_markers[consumer["runtime"]] in gate_text,
+            f"recurring root-selection gate omits consumer: {consumer['runtime']}",
+        )
+
+    primary = RECURRING_GATE["primary_cli"]
+    require(
+        (ROOT / primary["matrix_driver"]).is_file()
+        and primary["matrix_driver"] in gate_text,
+        "recurring root-selection gate omits the primary matrix driver",
+    )
+    for case_id in primary["case_ids"]:
+        require(
+            gate_text.count(f"--case {case_id}") == 1,
+            f"recurring root-selection primary case drifted: {case_id}",
+        )
+    manifest = json.loads((ROOT / "cli_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    manifest_ids = [case["id"] for case in manifest["cases"]]
+    for case_id in primary["case_ids"]:
+        require(
+            manifest_ids.count(case_id) == 1,
+            f"recurring root-selection primary manifest identity drifted: {case_id}",
+        )
+
+    for support_path in RECURRING_GATE["support_checks"]:
+        require(
+            (ROOT / support_path).is_file() and support_path in gate_text,
+            f"recurring root-selection gate omits support check: {support_path}",
+        )
+
+    local_ci = RECURRING_GATE["local_ci"]
+    local_ci_text = (ROOT / local_ci["driver"]).read_text(encoding="utf-8")
+    require(
+        RECURRING_GATE["driver"] in local_ci_text
+        and local_ci["switch"] in local_ci_text,
+        "recurring root-selection local-CI registration drifted",
+    )
+
+    for document in PUBLIC_CONTRACT["documents"]:
+        public_path = ROOT / document["path"]
+        require(public_path.is_file(), f"public root-selection document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            require(
+                marker in public_text,
+                f"public root-selection marker is missing from {document['path']}: {marker}",
+            )
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        public_text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        require(
+            forbidden["text"] not in public_text,
+            f"stale public root-selection claim remains in {forbidden['path']}: {forbidden['text']}",
+        )
+
+
 def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True) -> None:
     require_fields(contract, TOP_LEVEL_FIELDS, "contract")
     require(contract["format"] == 1, "format drifted")
@@ -903,6 +1295,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     validate_dart_admission(contract, check_filesystem=check_filesystem)
     validate_julia_admission(contract, check_filesystem=check_filesystem)
     validate_lua_admission(contract, check_filesystem=check_filesystem)
+    validate_recurring_and_public_contract(contract, check_filesystem=check_filesystem)
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list) and len(inventory) == 5, "implementation inventory count drifted")
@@ -1094,6 +1487,31 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda value: value["lua_admission"].__setitem__("canonical_driver", "missing"),
         ),
         ("regressed Lua rollout", lambda value: value["rollout"][5].__setitem__("status", "pending")),
+        ("recurring backend omission", lambda value: value["recurring_gate"]["consumers"].pop()),
+        ("recurring role omission", lambda value: value["recurring_gate"]["consumers"][1]["roles"].pop()),
+        ("root primary omission", lambda value: value["recurring_gate"]["primary_cli"]["case_ids"].pop()),
+        ("support-ledger omission", lambda value: value["recurring_gate"]["support_checks"].pop()),
+        (
+            "CI registration omission",
+            lambda value: value["recurring_gate"]["local_ci"].__setitem__("switch", "wrong_switch"),
+        ),
+        (
+            "recurring driver omission",
+            lambda value: value["recurring_gate"].__setitem__("driver", "tools/missing.sh"),
+        ),
+        ("public document omission", lambda value: value["public_contract"]["documents"].pop()),
+        (
+            "public marker omission",
+            lambda value: value["public_contract"]["documents"][0]["required_markers"].pop(),
+        ),
+        (
+            "forbidden claim omission",
+            lambda value: value["public_contract"]["forbidden_current_claims"].pop(),
+        ),
+        (
+            "regressed final rollout",
+            lambda value: value["rollout"][6].__setitem__("status", "pending"),
+        ),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
@@ -1113,6 +1531,8 @@ def main() -> int:
         f"{len(contract['strict_cases'])} strict cases; "
         f"{len(contract['implementation_inventory'])} backends; "
         f"{complete} complete / {pending} pending; "
+        f"{len(contract['public_contract']['documents'])} public documents; "
+        f"{len(contract['public_contract']['forbidden_current_claims'])} forbidden current claims; "
         f"{mutation_count} drift mutations)"
     )
     return 0

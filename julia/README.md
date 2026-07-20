@@ -31,7 +31,10 @@ now removes engine/loader/corpus/primary global state, rejects legacy API/CLI sp
 help/request-trace field, and preserves `--top-rule`. Admission `.6` adds one exact contract-declared 15-role
 consumer and locks the complete/canonical driver topology. Complete Julia is 3,291, shared primary is 65/65 twice,
 corpus is 105/105, and neutral cursor rollout is 5 complete / 3 pending with 67 files and 44 mutations. Exact root
-admission `.4.3` is next, while root rollout stays 4/7.
+admission `.4.3` subsequently passed as a separate 15-role consumer. Root-selection parity is closed at 7
+complete / 0 pending; `bash tools/check_root_rule_selection_five_backend.sh` composes that consumer with every
+other backend and the selected primary matrix.
+The final root-selection ledger is 7 complete / 0 pending.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement

@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection parity
+
+Root-rule selection is closed at 7 complete / 0 pending without adding a resolver or changing generated-plan
+shape. `tools/check_root_rule_selection_five_backend.sh` composes the neutral checker; Perl core/routes; the exact
+Rust, Dart, and Julia admissions; the same 15-role Lua consumer on PUC Lua and LuaJIT; six shared primary cases
+through all five commands and both option environments; and generated-source, capability, and language-coverage
+ledgers. Canonical CI requires and syntax-checks the driver on every run and exposes the complete all-toolchain
+gate behind `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1`.
+
+The neutral checker now makes public truth executable: 25 current README/guide/roadmap/book/task/Knowledge Map
+documents are required, 19 stale current claims are forbidden, both roadmap projections are mandatory, and 54
+mutations cover semantics, topology, recurring registration, public omission, and rollout drift. The shared
+current primary label is corrected from 63 to 65 in logical-helper and diagnostic-output governance. Because the
+root contract and checker name the parse-mode mdBook chapter, both paths are explicitly added to the adjacent
+cursor inventory, now 71 files at unchanged 6 complete / 2 pending and 49 mutations.
+
+The recurring gate passes all six runtime legs, Lua 139/139 on both ABIs, the selected 5x2x6 primary projection,
+capability 80/0/0, and language coverage 246 names / 105 corpus + 1 fixture / 122 Perl contracts. Knowledge Map
+generation reaches 634 facts / 4,662 question keys; mdBook, memory architecture, whitespace, JSON/shell, and all
+four doctrines pass. Canonical local CI passes the full reference primary suite 65/65 twice and Phase 0
+1,031/1,031 in 642 seconds. Safe cleanup removes only reproducible generated build/cache/book outputs and keeps
+tracked `rgx/pgen-issues` logs as durable evidence.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.1.2.5.3 — admit dual-ABI Lua root selection
 
 Lua root-rule selection is now composed-admitted on PUC Lua and LuaJIT. One shared-source consumer executes the

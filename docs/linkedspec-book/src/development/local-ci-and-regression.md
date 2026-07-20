@@ -148,6 +148,16 @@ invocations. With Lua admitted, 44 mutations reject semantic, topology, inventor
 selection fixtures return from `I`, distinguishing entered-rule proof from a coincidentally equal successful `E`
 result, while the fixed shared request-trace fixture retains its canonical source bytes.
 
+Final root-selection admission adds `bash tools/check_root_rule_selection_five_backend.sh`. It reruns Perl core
+and routes, each exact Rust/Dart/Julia admission, the same Lua source on PUC Lua and LuaJIT, the 5x2x6 selected
+root-rule matrix, and generated/capability/corpus-proof ledgers. The public contract requires both roadmaps and 23
+other current surfaces, forbids 19 stale current claims, and raises drift coverage to 54 mutations. Canonical CI
+keeps this all-toolchain composition optional: run
+`LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1 bash tools/run_ci_local.sh`.
+This is the 5x2x6 selected root-rule matrix.
+Ordinary canonical signoff still syntax-checks and requires the recurring driver; the final closeout passes the
+65-case reference suite twice and Phase 0 1,031/1,031 in 642 seconds.
+
 Rust cursor admission is also omission-sensitive. The neutral contract declares one 15-role consumer, and its
 checker requires the consumer as a tracked canonical input, one exact marker per role, the complete runtime-package
 command in `tools/run_rust_local.sh`, and that optional Rust driver's registration in `tools/run_ci_local.sh`.
@@ -179,9 +189,8 @@ Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted bou
 rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted before their remaining backend
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
-Julia now passes 65/65 twice and is topology-admitted. Lua core is exactly 32/65 twice on both PUC Lua and LuaJIT,
-with all 33 remaining mismatches cursor-owned. A green 5x2x65 run is the
-final rollout target rather than a current cross-backend claim.
+Julia now passes 65/65 twice and is topology-admitted. Lua subsequently removed its 33 cursor-owned mismatches;
+the complete five-backend 5x2x65 matrix is green, while the recurring root gate selects only its six owned cases.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at

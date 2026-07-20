@@ -8,12 +8,39 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` — Exact dual-ABI Lua root-selection admission and parent `.5` are signoff-
-  complete from clean cursor commit `7dd70a2d` at ahead 240. Exact 3/3x2 topology RED becomes 139/139x2; package
-  177/177x2, primary 65/65x4, corpus 105/105x2, root 6/1/44, KM 633/4,653, mdBook/four doctrines, and canonical
-  Phase 0 1,031/1,031 in 641 seconds pass. Safe cleanup is complete; the commit is prepared before `.6`.
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.6` — Final five-backend recurring/public root-selection no-drift is signoff-
+  complete from clean Lua admission commit `c8583edf` at ahead 241. The per-leaf commit and clean handoff are the
+  only remaining boundaries; no different task-tree is active.
+
+- `FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift` is the active closeout title.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift**
+  (DONE and prepared for its per-leaf commit).
+
+  **Result:** Root-selection parity is closed at 7 complete / 0 pending. One recurring driver composes Perl,
+  Rust, Dart, Julia, PUC Lua, LuaJIT, the exact selected 5x2x6 primary projection, and all support ledgers. The
+  public contract requires 25 current documents, forbids 19 stale claims, and rejects 54 mutations.
+
+  **Proof:** Root checker 8/3/3, all six runtime legs, Lua 139/139x2, selected primary 5x2x6, capability 80/0/0,
+  language coverage 246/105+1/122, KM 634/4,662, mdBook, and all four doctrines pass. Canonical CI passes primary
+  65/65x2 and Phase 0 1,031/1,031 in 642 seconds. Adjacent current-marker and cursor-inventory no-drift repairs
+  pass at 65 cases and 71 files; safe generated-output cleanup passes.
+
+  **Next:** Commit `.9.1.1.2.6`, clear the brief, prove the tree clean, then select the next roadmap leaf.
+
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.3 — admit dual-ABI Lua root selection**
+  (DONE at clean commit `c8583edf`).
+
+  **Result:** One shared-source exact 15-role consumer admits Lua on PUC Lua and LuaJIT without another resolver.
+  Only Lua advances root governance to 6 complete + 1 pending / 44 mutations; parent `.5` closes.
+
+  **Proof:** Exact topology RED 3/3x2 becomes 139/139x2; package 177/177x2, primary 65/65x4, corpus 105/105x2,
+  KM 633/4,653, mdBook/four doctrines, and canonical Phase 0 1,031/1,031 in 641 seconds pass. Safe cleanup removes
+  reproducible book/Python/Julia-compiled output and four closed LinkedSpec logs while preserving durable data.
+
+  **Next:** Final root recurring/public no-drift `.9.1.1.2.6` is active from the clean commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.7.6 — admit Lua rule-local cursor contract**
   (DONE at clean commit `7dd70a2d`).
 

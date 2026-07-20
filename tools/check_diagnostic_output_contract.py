@@ -269,7 +269,7 @@ PUBLIC_CONTRACT = {
         },
         {
             "path": "cli_conformance/README.md",
-            "required_markers": ["success_diagnostic_helpers_quiet", "5x2x63 matrix"],
+            "required_markers": ["success_diagnostic_helpers_quiet", "5x2x65 matrix"],
         },
     ],
     "forbidden_current_claims": [

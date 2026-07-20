@@ -32,6 +32,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus
 evidence_update_2026_07_19_lua_runtime: "Lua runtime leaf .9.1.7.2 registers its new dual-ABI execution consumer, moving inventory from 67 to 68 files without advancing the pending lua_dual_abi rollout row or changing the 44 effective mutations."
 evidence_update_2026_07_19_lua_generated_v2: "Lua generated-source leaf .9.1.7.4 registers its dedicated dual-ABI consumer, moving inventory from 68 to 69 files without advancing the pending lua_dual_abi rollout row or changing the 44 effective mutations."
 evidence_update_2026_07_19_lua_admission: "Lua admission .9.1.7.6 adds one exact 15-role consumer run on PUC Lua and LuaJIT, advances only lua_dual_abi, and locks both driver legs plus canonical optional registration. Exact pre-contract RED is 3/3 per ABI and green is 119/119 per ABI. Governance is 69 migration files, 6 complete / 2 pending, and 49 mutations."
+evidence_update_2026_07_19_root_governance: "Final root-selection public no-drift adds its neutral contract and independent checker to the cursor inventory because both scan the parse-mode-named mdBook chapter. The current inventory is therefore 71 files; cursor rollout remains 6 complete / 2 pending with 49 mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -77,6 +78,8 @@ Lua runtime `.9.1.7.2` adds its governed execution consumer because the proof it
 `parse_mode` compatibility seam. That produces the current 68-file inventory without advancing rollout.
 Lua generated-source `.9.1.7.4` adds its governed v2 consumer because that proof names both the retired v1 API and
 the still-staged public override field. That produces the current 69-file inventory without advancing rollout.
+Final root-selection public governance then adds two cross-contract scanner paths that name the parse-mode mdBook
+chapter. The exact current inventory is 71 files without advancing cursor rollout or changing its mutations.
 
 Perl preflight `.9.1.3.0` corrected one ordering detail without changing the 91-
 file set or runtime semantics: the ten shared manifest/help/usage/trace files
@@ -94,9 +97,9 @@ marker plus each canonical/backend registration seam. Julia separately declares 
 the checker locks its complete package driver and optional canonical registration too. Lua declares the same
 15-role normalized topology and runs it on both ABIs; the checker locks both invocations and optional canonical
 registration. Its 49 mutations reject topology, role, driver, inventory, or rollout drift. Recurring five-backend
-admission and public no-drift follow. Generated-
-source v1 remains the unmigrated-backend baseline, while the 63-case primary interface is current on Perl, Rust,
-and Dart through the current 65-case command projection.
+admission and public no-drift follow. Generated-source v1 remains the historical unmigrated-backend baseline.
+The shared primary interface reached 63 cases during cursor rollout and is now a current 65-case five-backend
+projection after root-selection admission.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[and-or-cursor-ownership-audit]], and [[rule-local-cursor-ownership-decision]].

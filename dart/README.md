@@ -117,8 +117,9 @@ priority over any authored `Rule::` and may select an ordinary `Rule:`; the
 primary CLI regression suite locks that precedence. Core leaf `.9.1.1.2.3.1`
 also accepts markerless one-or-more-rule sources and selects their first authored
 rule. Neutral/five-backend rollout remains tracked under
-`FUTURE-PARITY-BACKLOG.9.1.1.2`; Dart is now admitted while Julia, Lua, and final no-drift remain. Canonical medium
-request trace records contain source, input, and top-rule identity but no
+`FUTURE-PARITY-BACKLOG.9.1.1.2`; all five backends are now admitted. Root-selection parity is closed at 7
+complete / 0 pending, with `bash tools/check_root_rule_selection_five_backend.sh` owning recurring composition.
+Canonical medium request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
 Core/descriptor leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: one compiled resolver applies explicit
@@ -130,7 +131,7 @@ Low trace records requested/effective/basis, route failures keep portable zero/u
 contract validation remains first, and generated v2/format 2 identity plus its minimal family plan are unchanged.
 Dart now passes 270 package tests, the shared 65-case primary suite in default and POSIX environments, and 105/105
 corpus fixtures. Admission leaf `.3.3` composes all 15 contract-declared roles exactly once, topology-locks the
-package-wide and canonical drivers plus six shared primary case ids, and advances Dart at the honest 4/7 boundary.
+package-wide and canonical drivers plus six shared primary case ids, and recorded Dart's historical 4/7 boundary.
 
 ## Status
 

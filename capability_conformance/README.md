@@ -38,7 +38,7 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 69-file migration inventory and rejects 49 representative semantic, topology,
+The checker currently owns an exact 71-file migration inventory and rejects 49 representative semantic, topology,
 diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
@@ -66,9 +66,11 @@ authored `::` > first authored `:` precedence, eight successful selections, thre
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
 the exact 15-role Rust, Dart, Julia, and Lua admission consumers, configured CI/backend execution, first-marker/
-markerless/explicit/unknown primary cases, and default/explicit request trace while rejecting 44 semantic,
-topology, inventory, and rollout drift mutations. Rollout is 6 complete / 1 pending: neutral decision plus the
-composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends are admitted. Perl records marker-
+markerless/explicit/unknown primary cases, and default/explicit request trace. Final admission adds the composed
+six-runtime recurring gate, a 25-document public contract, and both roadmap projections as required current-state
+inputs while rejecting 54 semantic, topology, recurring, public, and rollout drift mutations. Rollout is 7
+complete / 0 pending: neutral decision, composed Perl, Rust, Dart, Julia, dual-ABI Lua, and final recurring/public
+no-drift are admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
@@ -91,8 +93,10 @@ admission is clean at `7aa9c578`; Julia cursor `.9.1.6` now implements and compo
 execution, descriptor v1, generated-source v2, public/CLI option removal, and one 15-role admission. Shared Julia
 primary is exact at 65/65 twice. Julia root admission `.4.3` composes the contract through one exact 15-role
 consumer; its authored selection fixtures use entry lifecycle returns so the result proves which rule was entered
-rather than merely which successful match exited. Lua/LuaJIT and cross-backend no-drift leg `.6` remain pending.
-Current backend differences stay explicit in the inventory until their owning leaves land.
+rather than merely which successful match exited. Lua/LuaJIT use the same exact source on both ABIs. Run
+`bash tools/check_root_rule_selection_five_backend.sh` for the recurring native/composed proof and selected
+5x2x6 primary projection; canonical CI exposes it behind `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1`.
+The final root-selection ledger is 7 complete / 0 pending.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

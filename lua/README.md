@@ -620,7 +620,9 @@ authored `is_top` bit; a dynamic selection never rewrites source identity or add
 Hand-authored selection regressions use lifecycle `I` because it directly proves that the selected rule was
 entered. A successful `E` block may return the same value after matching, but is weaker entry evidence. This
 `.9.1.1.2.5.1` core is exact on PUC Lua and LuaJIT; loaded/reconstructed/generated/emitted trace composition and
-final topology admission remain separately owned by `.5.2-.3`.
+final topology admission subsequently closed under `.5.2-.3`. Root-selection parity is closed at 7 complete / 0
+pending; `bash tools/check_root_rule_selection_five_backend.sh` reruns this same shared admission source on both
+PUC Lua and LuaJIT as part of the recurring five-backend proof.
 
 Function-shell semantics are not raw-scanned by Lua. The automatic path executes the cached owning grammar and
 stages body ASTs directly:

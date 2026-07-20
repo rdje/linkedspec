@@ -61,6 +61,10 @@ an explicit selector, the first authored marker, or the first authored rule. Unk
 `entry_rule_not_found` at `select_entry_rule`; zero-rule reconstructed state returns `no_rules_defined` at
 `validate_spec`. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>` identity.
 
+Root-selection parity is closed at 7 complete / 0 pending. The recurring proof is
+`bash tools/check_root_rule_selection_five_backend.sh`; it composes this exact 15-role Rust admission with Perl,
+Dart, Julia, PUC Lua, LuaJIT, and the selected shared primary cases.
+
 ## Quick Start
 
 ```bash

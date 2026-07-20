@@ -1320,7 +1320,9 @@ Interactive prompt helpers follow the same rule, but with the extra cleanup step
 - `runtime_ctx_ref => \$ctx` or `runtime_ctx_ref => \%ctx` for advanced runtime-state capture
 
 `LinkedSpec::Get(\$spec, %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before runtime dispatch; odd trailing option lists fall back to an empty option set for backward compatibility.
-If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry.
+For entry selection, explicit `top_rule` wins and may name any declared rule. When it is omitted, the first authored `Rule::`
+wins; if the source has no marker, the first authored ordinary `Rule:` wins. Authored `is_top`
+remains source identity and is not rewritten by a dynamic selection.
 `parse_only` and `generate_only` are successful introspection modes, not failure signals. They intentionally return `undef` on success, and when `runtime_ctx_ref` is present they should leave `$ctx->{last_error}` clear unless some earlier compile stage actually failed.
 
 For independently loadable generated Perl, prefer the dedicated public method:

@@ -9,11 +9,12 @@ answers:
   - how does the CLI matrix handle Julia precompile output
   - how do I include the primary CLI matrix in local CI
   - what did FUTURE-PARITY-BACKLOG 1.5.4.3 implement
-date: 2026-07-15
+date: 2026-07-19
 status: current
 tags: [cli, parity, matrix, perl, rust, dart, julia, lua, ci, FUTURE-PARITY-BACKLOG, LUA-BACKEND-PARITY]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.3 adds tools/run_primary_cli_matrix.sh at 4x2x61; LUA-BACKEND-PARITY.7.2 adds a disposable PUC Lua native build and extends the unchanged recurring manifest to Perl/Rust/Dart/Julia/Lua at 5x2x61."
 evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 reruns the complete 5x2x61 matrix as final all-pass evidence before admitting Lua to the five-backend 80/0/0 capability census."
+evidence_update_2026_07_19_root_selection: "Rule-local cursor rollout first moved the shared target to 63 cases. Root-selection admission adds first-marker and markerless-default success rows, producing the current 65-case manifest. All five backends pass 65/65 with POSIXLY_CORRECT unset and set; the driver now reports 5x2x65."
 reverify: "bash tools/run_primary_cli_matrix.sh && rg -n 'LINKEDSPEC_RUN_CLI_MATRIX|run_primary_cli_matrix' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -23,7 +24,7 @@ the normal Julia project; builds Lua's native adapters in disposable temporary s
 `tools/run_cli_conformance.pl` against all five commands.
 
 Each backend receives the same unchanged manifest twice: once with `POSIXLY_CORRECT` unset and once with it set.
-Each leg contains 61 exact cases, so a green run proves 5 backends x 2 environments x 61 cases. Expected help uses
+Each leg contains 65 exact cases, so a green run proves 5 backends x 2 environments x 65 cases. Expected help uses
 only the command-token placeholder; stdout, stderr, exit status, and generated files remain otherwise identical.
 
 Warmup is part of the driver because Dart compilation and Julia precompilation may emit toolchain progress before
@@ -35,8 +36,9 @@ LINKEDSPEC_RUN_CLI_MATRIX=1 bash tools/run_ci_local.sh
 ```
 
 The focused Rust, Dart, Julia, and Lua gates remain separate owners of native/package/corpus depth. The original
-four-backend matrix closed exact CLI parent `.1.5`; Lua `.7.2` extends the same command-identity proof, and final
-admission `.8.4` now includes Lua in the five-backend 80/0/0 capability census.
+four-backend matrix closed exact CLI parent `.1.5`; Lua `.7.2` extended the same command-identity proof, cursor
+rollout moved the shared interface to 63, and root selection added two success rows for the current 65-case
+boundary. Final Lua admission `.8.4` includes Lua in the five-backend 80/0/0 capability census.
 
 Related facts: [[neutral-cli-fixture-runner]], [[cross-backend-cli-contract-gap]],
 [[canonical-primary-cli-trace-protocol]], [[rust-local-verification-gate]], [[dart-local-verification-gate]],

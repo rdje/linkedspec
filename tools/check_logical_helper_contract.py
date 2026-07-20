@@ -306,7 +306,7 @@ PUBLIC_CONTRACT = {
         },
         {
             "path": "cli_conformance/README.md",
-            "required_markers": ["success_logical_helpers_eager", "5x2x63 matrix"],
+            "required_markers": ["success_logical_helpers_eager", "5x2x65 matrix"],
         },
         {
             "path": "ROADMAP.md",

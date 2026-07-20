@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.1.2.6` — parity closes by composition plus executable public truth):
+  The final root-selection leaf adds no selection implementation. Its recurring driver calls each already-admitted
+  runtime consumer, treats PUC Lua and LuaJIT as distinct legs over one source, selects the six root-owned shared
+  primary cases across five commands and default/POSIX environments, and finishes with the generated/capability/
+  coverage ledgers. The neutral checker owns exact driver commands, registrations, cases, documents, stale-claim
+  guards, rollout, and representative mutations; omissions therefore fail before a backend can drift silently.
+
+  Canonical no-drift exposed two adjacent current-state assumptions. First, logical-helper and diagnostic-output
+  public markers still required `5x2x63` after root selection expanded the shared manifest to 65; their contracts
+  and independent checkers now require the real current `5x2x65`. Second, the new root contract/checker each name
+  the `rule-modes-and-parse-modes.md` public chapter, so the cursor token scan correctly discovered two unowned
+  paths. Assigning them to neutral shared authority makes the cursor inventory 71 without changing its 6+2
+  rollout or 49 mutations. These are governance coupling repairs, not semantic changes.
+
+  Exact proof is root 8/3/3 at 7+0 with 25 documents, 19 stale guards, and 54 mutations; all six runtime legs;
+  Lua 139/139x2; selected primary 5x2x6; capability 80/0/0; language coverage 246/105+1/122; KM 634/4,662; mdBook
+  and four doctrines. Canonical CI passes reference primary 65/65x2 and Phase 0 1,031/1,031 in 642 seconds.
+  Generated Rust/Dart/Julia/Python/book outputs are safe cleanup targets; tracked issue logs are retained.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` — Lua root admission is shared topology, not another resolver):
   Lua core, route, generated-v2, cursor, descriptor, diagnostic, trace, and primary mechanisms were already exact.
   Admission therefore adds one consumer source and executes it unchanged on PUC Lua and LuaJIT. Its declared and

@@ -8,7 +8,8 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, Julia, and dual-ABI Lua generated-source v2, option/CLI removal, and composed
 > cursor admission are complete through `.9.1.7.6`; recurring five-backend admission and public no-drift remain
-> dependency-ordered. Independently, Julia root admission now composes the immutable
+> dependency-ordered. Independently, root-selection parity is closed at 7 complete / 0 pending. Its recurring
+> contract composes every immutable root-selection descriptor identity; Julia root admission composes the
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
 > legacy field.
 >

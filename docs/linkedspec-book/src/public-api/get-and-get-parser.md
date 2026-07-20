@@ -457,15 +457,15 @@ single-colon rule, and has priority over every authored `::` marker. The primary
 `--top-rule NAME`.
 
 ADR `0046` fixes the cross-backend default when the option is omitted: select the first authored `::`; if the file
-has no marker, select the first authored rule. That contract is at 6 complete / 1 pending. Composed Perl, Rust,
-Dart, Julia, and dual-ABI Lua
+has no marker, select the first authored rule. In short: explicit `top_rule` wins, then the first marker, then the
+first rule. That contract is closed at 7 complete / 0 pending. Composed Perl, Rust, Dart, Julia, and dual-ABI Lua
 backends implement the exact order across native, loaded/reconstructed, generated direct/traced, emitted where
 available, and primary-command routes; the shared 65-case CLI manifest passes twice on each and locks first-marker,
 markerless, explicit, unknown, and request-trace outcomes. Rust, Dart, Julia, and Lua admission each topology-check one
 15-role consumer across the neutral rows and every real backend route family. Julia's selection-focused fixtures
 use entry lifecycle `I` returns so each distinct result proves which rule was entered. Lua's one consumer source
-runs unchanged on PUC Lua and LuaJIT and retains the fixed request-trace fixture's canonical `E` bytes. Only final
-recurring/public no-drift remains pending.
+runs unchanged on PUC Lua and LuaJIT and retains the fixed request-trace fixture's canonical `E` bytes. The final
+recurring gate composes those consumers and the six selected shared primary cases.
 
 ```perl
 my $parser = LinkedSpec::Get(

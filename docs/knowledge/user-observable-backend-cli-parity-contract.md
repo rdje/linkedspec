@@ -12,12 +12,13 @@ answers:
   - is generated source required for complete backend parity
   - what task owns cross backend CLI parity
   - does the current primary CLI contract include parse mode
-date: 2026-07-15
-status: accepted; cursor-option migration reference-first, five-backend reconvergence pending
+date: 2026-07-19
+status: accepted; five-backend 65-case command identity current
 tags: [cli, parity, public-api, backends, ADR-0023, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 closes the original recurring 4x2x61 CLI identity; LUA-BACKEND-PARITY.7.2 extends that exact matrix to 5x2x61. The capability census remains 64/0/0 across four admitted backends until Lua generated-source admission."
 evidence_update_2026_07_16_lua_admission: "LUA-BACKEND-PARITY.8.4 admits Lua after exact native/corpus/CLI/generated proof; the recurring primary matrix is 5x2x61 and the executable capability census is five-backend 80/0/0."
 evidence_update_2026_07_17_cursor_reference: "FUTURE-PARITY-BACKLOG.9.1.3.5 migrates the shared 63-case target and Perl reference first: --parse-mode leaves help/request trace, returns targeted usage exit 2, and structural default-seek/AND-consume cases replace global-mode success. Perl passes 63x2; Rust/Dart/Julia/Lua reconverge in .9.1.4-.8."
+evidence_update_2026_07_19_root_selection: "Rust, Dart, Julia, and dual-ABI Lua cursor migration reconverged the five commands. Root-selection rollout adds first-authored-marker and markerless-first-rule successes, taking the shared target to 65 cases. Perl, Rust, Dart, Julia, and Lua pass 65/65 with POSIXLY_CORRECT unset and set; root recurring/public admission is closed while cursor recurring/public governance remains separately owned."
 reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
 ---
 
@@ -35,17 +36,17 @@ Each backend keeps a distinct primary executable name. After that token, the int
 - no subcommands and no positional arguments.
 
 The retired `--parse-mode` spelling is recognized only to produce usage exit 2
-and the ADR `0044` migration message. The shared target and Perl reference are
-current; Rust, Dart, Julia, and Lua are temporarily on the prior interface until
-their dependency-ordered cursor leaves restore full five-backend identity.
+and the ADR `0044` migration message. All five commands use the current shared
+target and reject the retired spelling identically.
 
 Success/help exits `0`; normalized compilation/input/runtime failure exits `1`; usage failure exits `2`. Successful
 parsing prints one canonical JSON value plus one newline. A neutral fixture suite compares stdout, stderr, and exit
 status across variants. Corpus runners and status tools remain separate developer commands.
 
-`FUTURE-PARITY-BACKLOG.1.5` closes current Perl/Rust/Dart/Julia CLI convergence, `.1.6` establishes the public
-capability census, and `.3` closes generated-source parity. Lua `.7.2` extends exact CLI convergence to the fifth
-primary command at 5x2x61, and `.8.4` now admits Lua to the capability census. Because Rust publicly exports `source_emitter`, generated
+`FUTURE-PARITY-BACKLOG.1.5` closed Perl/Rust/Dart/Julia CLI convergence, `.1.6` established the public capability
+census, and `.3` closed generated-source parity. Lua `.7.2` extended exact CLI convergence to the fifth command;
+cursor and root rollout now establish the current 5x2x65 identity, and `.8.4` admits Lua to the capability census.
+Because Rust publicly exports `source_emitter`, generated
 source is required before another active backend can claim complete user-visible parity, even though interpreter
 corpus execution remains the primary correctness oracle. Julia `.7.3.2.1` closes the missing parser/compiler/
 function-shell/staged trace meaning required by the shared trace options. `.7.3.2.2` closes exact options and

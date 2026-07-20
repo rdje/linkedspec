@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` root-selection public no-drift refresh: final admission `.9.1.1.2.6` closes the ADR `0046`
+  rollout at 7 complete / 0 pending. `tools/check_root_rule_selection_five_backend.sh` composes Perl, Rust, Dart,
+  Julia, PUC Lua, LuaJIT, the selected 5x2x6 primary projection, and the generated/capability/coverage ledgers.
+  The neutral checker now requires 25 public/KM/task documents, forbids 19 stale current claims, requires both
+  roadmap projections, and rejects 54 semantic, topology, recurring, public, and rollout mutations. Canonical CI
+  passes primary 65/65x2 plus Phase 0 1,031/1,031 in 642 seconds. The root scanner's reference to the parse-mode-
+  named mdBook chapter is explicitly owned by the adjacent cursor inventory, now 71 files at unchanged 6+2/49.
 - `2026-07-19` Lua root-selection-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` composes every already-
   current Lua root-selection projection through one contract-declared 15-role source run unchanged on PUC Lua and
   LuaJIT. The consumer adds no semantic owner. Hand-authored selection evidence returns from lifecycle `I`; the
   fixed shared request-trace source preserves canonical `E` bytes. The root checker locks exact role order and
   completion, both backend-driver legs, canonical tracked input/optional registration, six primary case ids, Lua
   rollout, and five new omission mutations. Exact topology RED 3/3x2 becomes 139/139x2; package 177/177x2,
-  primary 65/65x4, corpus 105/105x2, and root governance 6 complete + 1 pending / 44 mutations pass. KM
+  primary 65/65x4, corpus 105/105x2, and the then-current root boundary was 6+1 / 44 mutations. KM
   633/4,653, mdBook/four doctrines, and canonical Phase 0 1,031/1,031 in 641 seconds pass. Safe cleanup removes
   reproducible book/Python/Julia-compiled output plus four closed repo-local logs. Only final recurring/public
   no-drift `.9.1.1.2.6` remains after the prepared commit.

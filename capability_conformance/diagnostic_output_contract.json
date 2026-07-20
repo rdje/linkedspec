@@ -247,7 +247,7 @@
       {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["caller-owned diagnostic event"]},
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["`linkedspec-diagnostic-output-v1`", "8 complete / 0 pending"]},
       {"path": "capability_conformance/README.md", "required_markers": ["20 representative", "8 complete / 0 pending"]},
-      {"path": "cli_conformance/README.md", "required_markers": ["success_diagnostic_helpers_quiet", "5x2x63 matrix"]}
+      {"path": "cli_conformance/README.md", "required_markers": ["success_diagnostic_helpers_quiet", "5x2x65 matrix"]}
     ],
     "forbidden_current_claims": [
       {"path": "dart/README.md", "text": "Generated parser entrypoint propagation remains owned"},

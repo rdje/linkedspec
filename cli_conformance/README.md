@@ -16,24 +16,27 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
-`bash tools/run_primary_cli_matrix.sh` runs all 63 cases through all five current commands in default and POSIX
+`bash tools/run_primary_cli_matrix.sh` runs all 65 cases through all five current commands in default and POSIX
 environments. Pass one or more `--case ID` arguments to that matrix driver for a contract-owned focused gate; for
 example, the recurring diagnostic-output gate uses
 `bash tools/run_primary_cli_matrix.sh --case success_diagnostic_helpers_quiet`. Omitting `--case` remains the full
-5x2x63 matrix. The recurring logical gate selects
+5x2x65 matrix. The recurring logical gate selects
 `bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`; that case records eager effects and
 the same canonical boolean result across all five commands and both environments.
 
+The recurring root-selection gate runs a 5x2x6 selected root-rule matrix through
+`bash tools/check_root_rule_selection_five_backend.sh`: first authored marker, markerless first rule, explicit
+override, unknown explicit selection, default request trace, and escaped explicit request-trace failure.
+
 ADR `0044`'s future primary-command migration is now executable in
 `capability_conformance/rule_local_cursor_contract.json`. The target removes `--parse-mode` from help and returns
-usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 63-case manifest
+usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 65-case manifest
 and Perl reference now project that target: structural default-rule seeking and AND-rule consumption replace the
 two global-mode success cases, and request trace omits the retired field. Rust, Dart, Julia, and Lua retain their
-prior interface until their dependency-ordered `.9.1.4-.8` migrations consume the same shared target. Perl's
-14-role composed admission now includes representative primary help, default/AND success, and retired-flag proof;
-the complete byte-exact 63x2 suite remains the authoritative reference gate. Final five-backend symmetry is pending.
+historically retained their prior interface until dependency-ordered `.9.1.4-.8` migrations consumed the same
+shared target. All five commands now pass the complete byte-exact 65x2 suite.
 
-The current manifest contains 63 cases: exact long/short help, 20 strict usage families, nine successful
+The current manifest contains 65 cases: exact long/short help, 20 strict usage families, eleven successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20
 canonical trace families, and eight strict UTF-8 behavior cases. Success cases lock named/file/inline source,
 literal/file input, explicit top rule, default-family seek, AND-family consume, canonical JSON, exact input bytes,

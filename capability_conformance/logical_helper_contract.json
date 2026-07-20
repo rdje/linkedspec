@@ -266,7 +266,7 @@
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["`linkedspec-logical-helper-v1`", "8 complete / 0 pending"]},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["`success_logical_helpers_eager`", "8 complete / 0 pending", "parent `.5.2` is closed"]},
       {"path": "capability_conformance/README.md", "required_markers": ["26 semantic/topology/public drift mutations", "8 complete / 0 pending"]},
-      {"path": "cli_conformance/README.md", "required_markers": ["success_logical_helpers_eager", "5x2x63 matrix"]},
+      {"path": "cli_conformance/README.md", "required_markers": ["success_logical_helpers_eager", "5x2x65 matrix"]},
       {"path": "ROADMAP.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
       {"path": "ROADMAP_V2.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["logical public no-drift", "8 complete / 0 pending"]},
