@@ -288,6 +288,67 @@
       "switch": "LINKEDSPEC_RUN_CURSOR_MATRIX"
     }
   },
+  "public_contract": {
+    "documents": [
+      {"path": "README.md", "required_markers": ["cursor rollout is closed at 75 migration files, 8 complete / 0 pending, and 60 rejected mutations", "tools/check_rule_local_cursor_five_backend.sh"]},
+      {"path": "TOOLBOX.md", "required_markers": ["cursor policy comes from each authored rule family", "former `parse_mode` key is a removal-diagnostic probe only"]},
+      {"path": "USER_GUIDE.md", "required_markers": ["The former public `parse_mode` / `parseMode` option is removed from every backend", "rollout is 8 complete / 0 pending"]},
+      {"path": "capability_conformance/README.md", "required_markers": ["8 complete / 0 pending", "60 semantic, topology, recurring, public, and rollout drift mutations"]},
+      {"path": "cli_conformance/README.md", "required_markers": ["public no-drift is closed at 8 complete / 0 pending", "tools/check_rule_local_cursor_five_backend.sh"]},
+      {"path": "ROADMAP.md", "required_markers": ["Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations", "tools/check_rule_local_cursor_five_backend.sh"]},
+      {"path": "ROADMAP_V2.md", "required_markers": ["Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations", "selected 5x2x5 recurring and public proof"]},
+      {"path": "ARCHITECTURE_STATE.md", "required_markers": ["rule-local cursor public no-drift refresh", "75 migration files / 8 complete + 0 pending / 60 mutations"]},
+      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift", "75 migration files / 8 complete + 0 pending / 60 mutations"]},
+      {"path": "docs/TASK_TREE.md", "required_markers": ["rule-local cursor recurring/public no-drift at 75 files / 8 complete + 0 pending / 60 mutations", "Explicit repeated-OR action-result shape `.9.1.10` remains"]},
+      {"path": "docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md", "required_markers": ["accepted; implemented and public no-drift closed", "8 complete / 0 pending"]},
+      {"path": "docs/knowledge/rule-local-cursor-and-bare-edge-contract.md", "required_markers": ["accepted and public-admitted; rollout 8 complete / 0 pending", "60 mutations"]},
+      {"path": "docs/knowledge/rule-local-cursor-five-backend-admission.md", "required_markers": ["recurring and public admission complete; rollout 8 complete / 0 pending", "75 migration files / 8 complete + 0 pending / 60 mutations"]},
+      {"path": "docs/knowledge/rule-local-cursor-neutral-contract.md", "required_markers": ["backend, recurring, and public rollout admitted at 8 complete / 0 pending", "75 migration files / 8 complete + 0 pending / 60 mutations"]},
+      {"path": "docs/knowledge/rule-local-cursor-public-no-drift.md", "required_markers": ["public no-drift complete; rollout 8 complete / 0 pending", "leaves `.9.1`/`.9` active"]},
+      {"path": "docs/linkedspec-book/src/SUMMARY.md", "required_markers": ["Rule Modes and Cursor Policy"]},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["75 migration", "8 complete / 0 pending, and 60 rejected mutations"]},
+      {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "required_markers": ["Public no-drift is closed at 8 complete / 0 pending", "## 1. Derived Cursor Policies"]},
+      {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "required_markers": ["Caller-global cursor options are removed from all engine", "Current generated-source v2 retains only ordered"]},
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": ["current cursor ledger is 8 complete / 0 pending", "60 rejected drift mutations"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["75 migration files / 8 complete + 0 pending / 60 rejected mutations", "tools/check_rule_local_cursor_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["cursor no-drift is closed at 8 complete / 0 pending", "admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT"]},
+      {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "required_markers": ["Public no-drift is closed at 8 complete / 0 pending", "Cursor discipline comes from each authored rule"]},
+      {"path": "docs/linkedspec-book/src/public-api/native-spec-loading.md", "required_markers": ["there is no caller-global cursor override", "complete:create_engine({ trace = emitter })"]},
+      {"path": "docs/linkedspec-book/src/user-model/regex-in-spec.md", "required_markers": ["Rule Modes and Cursor Policy", "Derived cursor policies"]},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "required_markers": ["75 migration files, 8 complete / 0 pending", "60 rejected mutations"]},
+      {"path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md", "required_markers": ["Cursor policy comes from each authored rule family", "All five backends reject the retired `--parse-mode` flag"]},
+      {"path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md", "required_markers": ["Cursor public no-drift is separately closed at 75 migration files, 8 complete / 0 pending", "authored family, not a caller option"]},
+      {"path": "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md", "required_markers": ["Rule Modes and Cursor Policy", "linkedspec-rule-local-cursor-v1"]}
+    ],
+    "forbidden_current_claims": [
+      {"path": "TOOLBOX.md", "text": "(`return_descriptor`, `dump_parser_source`, `parse_mode`, `top_rule`, `runtime_ctx_ref`, …)"},
+      {"path": "TOOLBOX.md", "text": "top_rule=>\"Top\", parse_mode=>\"consume\""},
+      {"path": "USER_GUIDE.md", "text": "- `parse_mode => 'seek' | 'consume'`"},
+      {"path": "USER_GUIDE.md", "text": "`parse_mode` now controls the runtime matching discipline for generated handlers"},
+      {"path": "USER_GUIDE.md", "text": "**Ratified target (not current behavior):**"},
+      {"path": "USER_GUIDE.md", "text": "If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`."},
+      {"path": "USER_GUIDE.md", "text": "File-oriented callers can use the same `parse_mode => 'seek' | 'consume'`"},
+      {"path": "capability_conformance/README.md", "text": "rollout is 7 complete / 1 pending"},
+      {"path": "capability_conformance/README.md", "text": "public no-drift remains dependency-ordered"},
+      {"path": "cli_conformance/README.md", "text": "ADR `0044`'s future primary-command migration"},
+      {"path": "README.md", "text": "executable cursor rollout is now 7 complete / 1 pending"},
+      {"path": "ROADMAP.md", "text": "Public cursor no-drift `.9.1.9` remains next"},
+      {"path": "ROADMAP_V2.md", "text": "public cursor no-drift `.9.1.9` remains next"},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "with top-rule, parse-mode,\nand trace controls"},
+      {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "public no-drift remain dependency-ordered"},
+      {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "text": "An explicit outer `parse_mode` remains temporarily distinguishable"},
+      {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "text": "Lua still retains that staged option until `.9.1.7.5`"},
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "final public no-drift remains separately owned"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "at the current\n72/7+1/56 boundary"},
+      {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "text": "Lua generated/public\ncursor admission remains separately staged"},
+      {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "text": "Lua follows in its dependency-ordered rollout leaf"},
+      {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "text": "Lua is not yet topology-\nadmitted"},
+      {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "text": "Final recurring/public no-drift is the remaining\ncontract-program closeout"},
+      {"path": "docs/linkedspec-book/src/public-api/native-spec-loading.md", "text": "complete:create_engine({ parse_mode = \"seek\""},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "text": "**Current staged implementation:**"},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "text": "75 migration files, 7 complete / 1 pending"}
+    ]
+  },
   "diagnostics": [
     {"code": "parse_mode_override_removed", "stage": "prepare_options", "fields": ["option_name"]},
     {"code": "bare_edge_target_undefined", "stage": "normalize_edges", "fields": ["rule_label", "target"]},
@@ -321,6 +382,6 @@
     {"leg": "julia_backend", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.6"},
     {"leg": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.7"},
     {"leg": "recurring_five_backend_gate", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8"},
-    {"leg": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.9"}
+    {"leg": "public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.9"}
   ]
 }

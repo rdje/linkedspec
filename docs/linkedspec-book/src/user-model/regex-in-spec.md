@@ -57,7 +57,7 @@ ThirdChild:AND
 ```
 
 Here `/first/` is slot `0` and `/second/` is slot `1`. How the slots combine is decided
-by the **rule mode** (see [Rule Modes and Parse Modes](rule-modes-and-parse-modes.md)):
+by the **rule mode** (see [Rule Modes and Cursor Policy](rule-modes-and-parse-modes.md)):
 
 - In an **AND** rule, the slots form an **ordered sequence**: slot `0`, then slot `1`, …
   each must match in turn.
@@ -88,7 +88,7 @@ Where a regex is *allowed* to match is controlled by the runtime **parse mode**:
 - **`consume`**: the pattern must match **contiguously at the cursor** (`\G`-anchored).
 
 The same rule behaves differently per mode — see
-[Parse modes](rule-modes-and-parse-modes.md#parse-modes) for worked input examples.
+[Derived cursor policies](rule-modes-and-parse-modes.md#current-cursor-policies) for worked input examples.
 
 ## Capture groups
 
@@ -227,7 +227,7 @@ chapter collects this alongside the other backend obligations.
 
 ## Where to go next
 
-- [Rule Modes and Parse Modes](rule-modes-and-parse-modes.md) — how slots combine
+- [Rule Modes and Cursor Policy](rule-modes-and-parse-modes.md) — how slots combine
   (AND/OR) and how `seek`/`consume` anchor them.
 - [Capture, Marks, and Source Locations](../dsl/capture-marks-and-source-locations.md) —
   the full `entry_*` / `match_*` / `capture_*` / `mark_*` / `cursor_*` mental model.

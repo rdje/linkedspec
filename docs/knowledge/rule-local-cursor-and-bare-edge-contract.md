@@ -11,14 +11,14 @@ answers:
   - "what descriptor field reports cursor policy"
   - "how does generated source derive cursor policy"
   - "how do I express AND seek or OR consume without parse_mode"
-date: 2026-07-19
-status: accepted; all backends plus recurring composition admitted; rollout 7 complete / 1 pending
+date: 2026-07-20
+status: accepted and public-admitted; rollout 8 complete / 0 pending
 tags: [dsl, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptor, generated-source, parity]
-evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, generated-source v2 family derivation, and dependency-ordered rollout. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3`, Rust `.9.1.4`, Dart `.9.1.5`, Julia `.9.1.6`, and dual-ABI Lua `.9.1.7` are composed-admitted. Lua `.9.1.7.6` adds one exact 15-role consumer on both ABIs and advances only lua_dual_abi. Final root-selection governance adds two cross-contract scanner paths. Recurring cursor admission `.9.1.8` composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, and support ledgers. Julia duplicate-slot `.9.1.8.1.5` classifies its parse-mode-aware consumer under the existing Julia owner. Duplicate-slot public `.9.1.8.1.7` classifies its contract/checker under pending cursor public owner `.9.1.9`. Rollout is 7 complete / 1 pending and the current inventory is 75 files with 56 mutations."
+evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, and generated-source v2 family derivation. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3`, Rust `.9.1.4`, Dart `.9.1.5`, Julia `.9.1.6`, dual-ABI Lua `.9.1.7`, recurring composition `.9.1.8`, and public no-drift `.9.1.9` are admitted. The public contract locks README/guide/API/backend/roadmap/task/architecture/mdBook/ADR/Knowledge Map markers and exact stale-current denials. Rollout is 8 complete / 0 pending; inventory is 75 files; the checker rejects 60 mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
 ---
 
-ADR `0044` fixes the future contract before implementation:
+ADR `0044` fixes the implemented contract:
 
 - AND-family rules (`&`, `AND`, `AND+`, `AND{...}`) intrinsically consume.
 - OR/default-family rules (bare/default, `|`, `+`, `*`, `?`, `OR`, `OR+`,
@@ -39,7 +39,7 @@ ADR `0044` fixes the future contract before implementation:
   Anchored choice is expressed as OR over consume-owning one-anchor AND
   children.
 
-The public/global `parse_mode` option is removed during rollout rather than
+The public/global `parse_mode` option is removed rather than
 ignored. Dynamic option boundaries use `parse_mode_override_removed`; primary
 commands remove the help entry and return usage exit 2 for `--parse-mode`.
 Descriptors remove root `meta.parse_mode`, add
@@ -51,9 +51,9 @@ Generated source moves to `linkedspec-generated-source-v2`. Its plan remains
 families, so no second mutable policy field can drift. Version-1 artifacts must
 be regenerated for v2 admission.
 
-Neutral contract/inventory `.9.1.2` is at 7 complete / 1 pending after composed
-Perl, Rust, Dart, Julia, dual-ABI Lua, and recurring five-backend admission.
-Identical dependency-regex identity and public closeout remain dependency-ordered.
+Neutral contract/inventory `.9.1.2` is at 8 complete / 0 pending after composed
+Perl, Rust, Dart, Julia, dual-ABI Lua, recurring five-backend admission, and
+public no-drift. Explicit repeated-OR action-result shape is separate `.9.1.10` work.
 
 Related: [[and-or-cursor-ownership-audit]],
 [[rule-local-cursor-ownership-decision]], [[spec-edge-syntax-contract]], and
@@ -61,4 +61,5 @@ Related: [[and-or-cursor-ownership-audit]],
 [[julia-rule-local-cursor-admission]],
 [[lua-rule-local-cursor-admission]],
 [[rule-local-cursor-five-backend-admission]],
+[[rule-local-cursor-public-no-drift]],
 [[FUTURE-PARITY-BACKLOG]].

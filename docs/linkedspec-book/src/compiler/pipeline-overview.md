@@ -54,8 +54,8 @@ and `.8.4` admits Lua across all 16 capability rows at five-backend 80/0/0 and c
 Ordinary Lua runtime entry now treats compiled rule family as execution policy. At every live, loaded,
 normalized, direct-call, blind/action-child, recursive, or traced rule entry, AND derives consume plus sequence
 and OR/default derives seek plus choice. Only the current cursor crosses a child boundary; the child re-enters
-the same owner and derives again. An explicit outer `parse_mode` remains temporarily distinguishable from an
-omitted value for compatibility removal in `.9.1.7.5`. Current generated-source v2 retains only ordered
+the same owner and derives again. Caller-global cursor options are removed from all engine, loader, corpus,
+generated, and primary-command routes on both Lua ABIs. Current generated-source v2 retains only ordered
 label/family rows and derives the same five seek and five consume policies at generated entry; compact Pipe is
 OR/choice. A stale v1 artifact is rejected before embedded spec reconstruction with regeneration guidance.
 
@@ -64,7 +64,7 @@ Root metadata names `linkedspec-rule-local-cursor-v1` and has no global cursor f
 `family` and `cursor_policy` from compiled mode metadata and derives ownership plus ordered
 `ownership`/`target`/`regex_index`/`block`/`fluent` rows from the compiled action/blind tables. Direct source,
 normalized `SpecFile` JSON, and loaded source produce byte-identical descriptors. The projection has no decoder
-and does not serialize the still-staged outer compatibility option.
+and serializes no compatibility cursor option.
 
 The stages above are a **backend-neutral** description of how any LinkedSpec backend turns `.spec` source into a parser or descriptor. The concrete module names, line counts, and signatures used as examples in this chapter (`LinkedSpec::Validation`, `LinkedSpec::Get(...)`, `Runtime::run_get`, `pos($$input_ref)`, …) are the **Perl reference backend's** realization of those stages; another backend implements the same stage sequence in its own language.
 
@@ -434,9 +434,8 @@ The Perl reference no longer accepts a parser-wide `parse_mode`; it rejects that
 preparation. Rust also removes its static and runtime-context override: `ExecutionOptions` selects only an entry
 rule, and every entered rule derives seek/consume from its authored family. Its composed 15-role admission locks
 native, reconstructed, generated, descriptor, primary, and diagnostic projections. Dart also removes its engine,
-loader, corpus, staged-parser, and primary-command global override; Julia removes the corresponding high-level
-state too. Lua still retains that staged option until `.9.1.7.5`. Pipeline preparation must therefore not be read
-as a semantic license for a caller-global cursor policy.
+loader, corpus, staged-parser, and primary-command global override; Julia and dual-ABI Lua remove the corresponding
+high-level state too. Pipeline preparation therefore is not a semantic license for a caller-global cursor policy.
 
 Two specialty compilation modes are also set here: `parse_only` (build compiled rule-table state without generating handlers or emitting parser code) and `generate_only` (regenerate handlers from an already-compiled rule table without re-parsing). These modes support introspection and tooling workflows that need intermediate compiler artifacts.
 

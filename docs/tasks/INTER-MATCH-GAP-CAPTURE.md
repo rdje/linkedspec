@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `proposed` / direction ratified; implementation dependency-gated
+- Status: `proposed` / direction ratified; awaiting explicit activation
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
-- Last updated: `2026-07-17`
+- Last updated: `2026-07-20`
 - Owner: repo-local workflow
 
 ## Goal
@@ -20,7 +20,7 @@ orchestration or to raw Perl cursor arithmetic.
 
 - Do not treat blind calls as part of the “super split” contract.
 - Do not change parser/compiler/runtime behavior in the decision-capture leaf.
-- Do not start backend rollout before the current rule-local cursor program is complete.
+- Do not start backend rollout without explicit activation; the rule-local cursor prerequisite is complete.
 - Do not silently change the existing `@move_pos`, `@capture_from_here`, or `@capture_slice`
   compatibility behavior before a neutral migration contract exists.
 
@@ -44,7 +44,7 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `proposed` / direction ratified; implementation dependency-gated
+  Status: `proposed` / direction ratified; awaiting explicit activation
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -60,7 +60,7 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.0 - ratify inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1`
-  Status: `pending` / dependency-gated
+  Status: `pending` / awaiting explicit activation
   Goal: Define an executable backend-neutral `@capture_gaps` and typed gap-span contract.
   Acceptance: The contract fixes prefix/interstitial/tail policy, empty-gap preservation, offsets,
     action ordering, tail handling, state commit, recursion scope, compatibility, diagnostics, and
@@ -119,7 +119,7 @@ orchestration or to raw Perl cursor arithmetic.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `INTER-MATCH-GAP-CAPTURE.0` | `done` | History, runtime truth, terminology, ownership, future name, and named-slot syntax are durably ratified without behavior change. |
-| 2 | `INTER-MATCH-GAP-CAPTURE.1` | `pending` / dependency-gated | Activate only after the current rule-local cursor rollout completes and the director selects this program. |
+| 2 | `INTER-MATCH-GAP-CAPTURE.1` | `pending` / awaiting explicit activation | Cursor rollout is complete at 8/0; activate only when the director selects this program. |
 
 ## Decisions
 
@@ -145,6 +145,9 @@ orchestration or to raw Perl cursor arithmetic.
   regex slot; Rust drops the parsed marker during compilation; Dart and Julia preserve it only in
   compiled body/source state and do not consume it in native runtime execution. No backend behavior is
   changed in `.0`; `.1` owns the migration decision and executable reconciliation.
+- `2026-07-20`: Rule-local cursor recurring/public rollout closes at 8 complete / 0 pending. The dependency
+  prerequisite is satisfied; `.1-.7` remain proposed and require explicit activation rather than starting
+  automatically.
 
 ## Open Questions
 
@@ -181,10 +184,10 @@ this finding.
 - Consider a neutral `entry_slot()` / `entry_variant()` lifecycle accessor so a multi-regex target rule
   can distinguish the slot that entered it without pattern inspection or backend-specific state.
 
-## Blockers
+## Activation Boundary
 
-- Implementation leaves `.1-.7` are dependency-gated behind completion of the active
-  `FUTURE-PARITY-BACKLOG.9.1` rule-local cursor rollout.
+- The cursor prerequisite is satisfied. Implementation leaves `.1-.7` remain inactive until explicit selection;
+  no gap-capture implementation is in flight.
 
 ## Verification Log
 

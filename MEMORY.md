@@ -10,14 +10,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.7` — duplicate-slot recurring/public no-drift is
-  signoff-complete from clean base `9211c9a8`; its final commit and clean boundary remain.
-- latest_commit: `9211c9a8` — `FUTURE-PARITY-BACKLOG.9.1.8.1.6 - implement dual ABI Lua duplicate regex slot identity`
-  (ahead: 250; push at threshold 300).
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.7` — signoff is complete; prepare its clean commit boundary.
-- next_action: stage the final proof records, rerun lightweight governance/whitespace checks, clean exact generated
-  artifacts, commit `.7`, clear the brief, verify a clean tree, then activate public cursor no-drift `.9.1.9`
-  task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.7` — duplicate-slot recurring/public no-drift is committed
+  and clean at `92394bb7`.
+- latest_commit: `92394bb7` — `FUTURE-PARITY-BACKLOG.9.1.8.1.7 - close duplicate slot recurring public no drift`
+  (ahead: 251; push at threshold 300).
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.9` — cursor public no-drift is signoff-complete; only its final
+  commit/clean boundary remains.
+- next_action: rerun lightweight governance after final proof records, clean regenerated artifacts, commit
+  `.9.1.9`, clear the brief, verify a clean tree, then activate `.9.1.10` task-tree-first.
 - current_duplicate_slot: ADR `0047` and all backend mechanisms are admitted. One recurring driver composes Perl
   12 roles, Rust/Dart/Julia 15 roles, Lua 112x2, selected primary 5x2x1, and three support ledgers. The checker
   reports 5 fixtures / 2 diagnostics / 6 runtime rows / 7 complete + 0 pending / 22 public documents /
@@ -31,27 +31,26 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   25 required current documents, 19 stale-claim guards, and 54 rejected mutations. No resolver or generated-plan
   behavior changed. Hand-authored selection fixtures use lifecycle `I`; the fixed request-trace fixture retains
   canonical `E` bytes.
-- current_signoff: Focused duplicate recurring proof passes every six-runtime, primary, and support leg. A first
-  run exposed only an empty Julia-depot harness default; the repaired rerun passed. Canonical local CI passes root
-  7+5, cursor 288, duplicate Perl 12, primary 65x2, and Phase 0 1,031/1,031 in 640 seconds. KM 645/4,745, mdBook,
-  four doctrines, syntax, and whitespace pass. Free space is about 43 GiB; unrelated `/private/tmp/claude-501`
-  remains untouched because ownership is uncertain.
 - current_cursor_admission: One recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, five selected
   primary cases across default/POSIX environments, and all support ledgers. Exact runtime proof passes at Perl
   288, Julia 104, Lua 119x2, primary 5x2x5, capability 80/0/0, and coverage 246/105+1/122. Governance is
-  75 migration files / 7 complete + 1 pending / 56 mutations; duplicate-slot public governance adds two
-  parse-mode-chapter scanner paths under `.9.1.9` and changes no semantic cursor path. KM 635/4,670, mdBook,
-  four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 631 seconds pass; cleanup is complete.
+  75 migration files / 8 complete + 0 pending / 60 mutations with 29 required public documents and 26 exact
+  stale-current denials. The closeout changes no semantic cursor path.
+- current_signoff: Focused cursor/root/duplicate checkers, Python/shell syntax, recurring runtime/support proof,
+  KM 646/4,751, mdBook, memory, four doctrines, and whitespace pass. Canonical local CI passes primary 65x2 and
+  Phase 0 1,031/1,031, then exits 0. Cleanup removed 1.8 GiB of Rust output plus Dart, book, and Python caches;
+  uncertain `/private/tmp/claude-501` remains untouched.
 - latest_bootstrap_read: 2026-07-20 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
-  task, Knowledge Map, Toolbox, ADR `0047`, all duplicate consumers, public surfaces, and recurring precedents read.
+  task, Knowledge Map, Toolbox, ADRs `0044`/`0047`, public cursor surfaces, and recurring precedents read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0. Full phase0 needs a 20-minute timeout; allow
   at least 30 minutes for the complete canonical gate when the machine is under concurrent build load.
   Julia offline verification may use a writable depot stacked before the installed read-only package depot.
-- deferred: generated parser+stimuli `.8.1`; public cursor no-drift `.9.1.9`; explicit repeated-OR result shape
-  `.9.1.10`; inter-match gap/named-slot contract `.1-.7` only
-  after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
+- deferred: generated parser+stimuli `.8.1`; explicit repeated-OR result shape `.9.1.10`; inter-match gap/named-slot
+  contract `.1-.7` has its cursor prerequisite but still requires explicit activation; semantic/MCP `.10.1`;
+  inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.8.1.7` public/gate/checker/docs/KM sources are dirty but fully
-  verified; final proof records, exact cleanup, commit, brief clearing, and clean-tree verification remain.
+- blockers: none. in_flight_uncommitted: `.9.1.9` public contract/checker/docs/KM and Julia recurring-driver fix are
+  dirty but fully verified; lightweight recheck, exact cleanup, commit, brief clearing, and clean verification
+  remain.

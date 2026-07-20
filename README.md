@@ -1,13 +1,14 @@
 # LinkedSpec
 
-Current design frontier (2026-07-19): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
-ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
-mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
-override, per-rule descriptor facts, and generated-source v2 family derivation.
-Implementation is split under `.9.1.2-.9`. Logical-helper
+Current design frontier (2026-07-20): ADR `0044` is implemented and public-admitted across Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT. Default/OR rules intrinsically seek, AND rules intrinsically consume, child rules own
+their cursor policy, bare declared-rule members normalize by parent family, and the public/global `parse_mode`
+override is removed. Descriptors expose derived per-rule facts and generated-source v2 derives from authored
+family. The cursor rollout is closed at 75 migration files, 8 complete / 0 pending, and 60 rejected mutations;
+`bash tools/check_rule_local_cursor_five_backend.sh` is the recurring six-runtime plus selected 5x2x5 proof.
+Explicit repeated-OR action-result shape remains separately owned by `FUTURE-PARITY-BACKLOG.9.1.10`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 7 complete / 1 pending after recurring six-runtime
-admission. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
@@ -161,8 +162,8 @@ matrix passes 65/65 in both environments, corpus remains 105/105, and neutral go
 advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission, final root
 governance, and recurring admission moved the ledger to 72 files. Julia duplicate-slot admission now classifies
 its parse-mode-aware proof path too. Final duplicate-slot public governance classifies its two parse-mode-chapter
-scanner paths under cursor public owner `.9.1.9`, so the current ledger is 75 files, 7 complete / 1 pending, and 56 rejected
-mutations.
+scanner paths under cursor public owner `.9.1.9`; public no-drift now closes the current ledger at 75 files,
+8 complete / 0 pending, and 60 rejected mutations.
 Run `bash tools/check_rule_local_cursor_five_backend.sh` for the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof,
 selected 5x2x5 primary projection, and support ledgers; canonical CI registers it behind
 `LINKEDSPEC_RUN_CURSOR_MATRIX=1`. Duplicate regex-slot audit `.9.1.8.1.0` established the exact next boundary:

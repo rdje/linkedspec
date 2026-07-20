@@ -142,7 +142,7 @@ Pair:AND
 ```
 
 The full rule-label and cursor-discipline matrix is in
-[Rule Modes and Parse Modes](rule-modes-and-parse-modes.md).
+[Rule Modes and Cursor Policy](rule-modes-and-parse-modes.md).
 
 ## Running it inline
 
@@ -337,6 +337,6 @@ This small example demonstrates the default authoring loop:
 
 From here, the next chapters to read are:
 
-- [Rule Modes and Parse Modes](rule-modes-and-parse-modes.md) for the full rule-label and cursor-discipline matrix.
+- [Rule Modes and Cursor Policy](rule-modes-and-parse-modes.md) for the full rule-label and cursor-discipline matrix.
 - [Blind Calls and Parser Orchestration](blind-calls-and-parser-orchestration.md) for parent/child parser composition.
 - [Action Model and Helper Surface](../dsl/action-model-and-helper-surface.md) for the broader helper DSL.

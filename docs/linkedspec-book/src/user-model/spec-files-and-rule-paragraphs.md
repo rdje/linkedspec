@@ -60,6 +60,8 @@ admission are now complete under `.9.1.7` and `.9.1.1.2.5.3`. One exact shared-s
 139/139 on each ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2. Markerless execution is implemented
 and final recurring/public no-drift closes rollout at 7 complete / 0 pending. Run
 `bash tools/check_root_rule_selection_five_backend.sh` for the composed six-runtime and selected-primary proof.
+Cursor public no-drift is separately closed at 75 migration files, 8 complete / 0 pending, and 60 rejected
+mutations; rule-local cursor behavior is defined by authored family, not a caller option.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule
 
@@ -226,7 +228,7 @@ header's body rest. This keeps `Child.return(...)` convenient without reinterpre
 after another paragraph member. All rule labels are collected before bare targets are validated, so forward
 references work. Lifecycle names keep lexical priority: write an explicit `-> I` or `=> I` when a rule is actually
 named `I`. Grouped and indexed bare forms still obey the ownership rules described in
-[Rule Modes and Parse Modes](rule-modes-and-parse-modes.md#current-cursor-policies).
+[Rule Modes and Cursor Policy](rule-modes-and-parse-modes.md#current-cursor-policies).
 
 ## Same-line and multiline styles
 
@@ -278,6 +280,6 @@ Those questions will explain most of the syntax behavior more reliably than a st
 ## Where to go next
 
 - Read [Worked `.spec` Walkthrough](worked-spec-walkthrough.md) for a small end-to-end inline parser.
-- Read the rule-modes and parse-modes chapter next for execution behavior.
+- Read the rule-modes and cursor-policy chapter next for execution behavior.
 - Read [Action and Lifecycle Placement](../dsl/action-and-lifecycle-placement.md) when you need to know where action edges and lifecycle blocks run.
 - Use the repo `USER_GUIDE.md` when you want the denser working reference while this book is still growing.

@@ -41,9 +41,10 @@ adds a separate exact 15-role root-selection consumer over every neutral/native/
 route; authored selection fixtures return from entry lifecycle `I` so their distinct results prove which rule was
 entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/105, cursor governance remains
 67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
-cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission now
-composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, and support ledgers at the current
-72/7+1/56 boundary. A separate shared-source root consumer
+cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission and public
+no-drift now compose Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, support ledgers, and
+the current public surface at 75 migration files / 8 complete + 0 pending / 60 rejected mutations. Run
+`bash tools/check_rule_local_cursor_five_backend.sh` for the exact recurring proof. A separate shared-source root consumer
 executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary
 65/65x4, and corpus 105/105x2. Final recurring/public admission closes root governance at 7 complete / 0 pending
 with 54 rejected mutations and a 25-document public contract. Run

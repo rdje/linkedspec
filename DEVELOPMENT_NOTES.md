@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.9` — make the implemented cursor contract the only current public one):
+  The neutral checker now mirrors a 29-document public contract and 26 forbidden exact stale-current statements.
+  Four new mutations remove a document, a required marker, a forbidden-claim guard, or final rollout admission.
+  Together with the existing inventory and topology mutations, this closes governance at 75 migration files,
+  8 complete / 0 pending, and 60 rejected mutations. The update is deliberately documentation/governance-only:
+  no semantic execution path, descriptor shape, generated plan, primary bytes, or fixture changes.
+
+  Public guidance now derives seek/consume from every entered rule family and explains bare-edge normalization.
+  Removed `parse_mode` / `parseMode` keys are diagnostic probes rather than accepted options; `get_parser` and
+  native-load examples no longer imply global cursor control; generated-source v2 derives policy from family-only
+  rows. The mdBook's old staged-implementation chapter is replaced by the current contract and examples. Exact
+  root-selection and duplicate-slot checker phrases remain contiguous in the shared task index because all three
+  no-drift checkers govern that public surface independently.
+
+  Safe cache cleanup reproduced a harness defect that a populated temp depot had hidden: the cursor recurring
+  driver exported only a writable Julia depot, so JSON3 source disappeared after cleanup. The default now asks the
+  selected Julia executable for `Base.DEPOT_PATH` and prepends the disposable writable depot, while preserving
+  either explicit environment override. A full rerun then passes Perl 288, Julia 104, Lua 119x2, selected primary
+  5x2x5, generated-source 10/1/8+105, capability 80/0/0, and coverage 246/105+1/122.
+
+  `.9.1.9` closes only cursor public no-drift. Exact repeated-OR action values remain a real five-backend gap under
+  `.9.1.10`, so `.9.1`/`.9` remain active. `INTER-MATCH-GAP-CAPTURE` now has its cursor prerequisite but remains a
+  proposed, inactive program pending explicit activation. Cleanup removes 1.8 GiB of reproducible Rust output and
+  the regenerated Dart/mdBook/Python caches without touching Julia package sources or uncertain external trees.
+
+  Final lockstep passes KM 646 facts / 4,751 keys, mdBook, memory architecture, all four doctrines, cursor/root/
+  duplicate governance, Python/shell syntax, whitespace, primary CLI 65x2, and Phase 0 1,031/1,031. Canonical
+  local CI exits 0.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.7` — compose duplicate-slot parity without another runtime path):
   The final leaf is topology and no-drift only. `tools/check_duplicate_regex_slot_identity_five_backend.sh`
   executes every contract-declared backend role, both Lua ABIs, the existing `success_and_rule_consumes` primary

@@ -8,19 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.7` is active from clean Lua commit `9211c9a8` at ahead 250. The neutral
-  contract now declares 7 complete / 0 pending, one recurring driver composes all six runtime legs plus selected
-  primary/support proof, and 22 public documents plus 12 stale-current denials are checker-owned. Exact recurring
-  proof is green at Perl 12 roles, Rust/Dart/Julia 15 roles, Lua 112x2, primary 5x2x1, capability 80/0/0, and
-  coverage 246/105+1/122. Cursor cross-contract inventory is 75/7+1/56. KM 645/4,745, mdBook/four doctrines,
-  canonical root 7+5, cursor 288, duplicate Perl 12, primary 65x2, and Phase 0 1,031/1,031 in 640 seconds pass.
-  Final cleanup and the clean commit boundary remain.
+- `FUTURE-PARITY-BACKLOG.9.1.9` is active task-tree-first from clean duplicate-slot commit `92394bb7` at ahead
+  251. Public no-drift makes README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
+  ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model surfaces executable. The target
+  cursor boundary is achieved at 75 migration files / 8 complete + 0 pending / 60 mutations; exact recurring and
+  canonical proof pass. Only the commit/clean boundary remains. Exact repeated-OR result shape remains child
+  `.9.1.10`, so `.9.1`/`.9` stay active rather than being falsely closed.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift**
+  (SIGNOFF COMPLETE from clean base `92394bb7`; final commit boundary in progress).
+
+  **Result:** The implemented rule-local cursor/bare-edge contract is the only current public contract across 29
+  governed surfaces. Twenty-six stale-current denials and four new mutations close rollout at 75 migration files /
+  8 complete + 0 pending / 60 mutations without changing any semantic execution path. `.9.1`/`.9` stay active for
+  explicit repeated-OR result shape `.9.1.10`.
+
+  **Proof:** Recurring Perl 288, Julia 104, Lua 119x2, selected primary 5x2x5, capability 80/0/0, generated-source
+  10/1/8+105, and coverage 246/105+1/122; KM 646/4,751; mdBook/memory/four doctrines; root/duplicate cross-contract
+  checks; canonical primary 65x2 and Phase 0 1,031/1,031; local CI exit 0; exact 1.8-GiB generated cleanup.
+
+  **Next:** Commit and clean `.9.1.9`, then activate `.9.1.10` task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift**
-  (DONE; commit prepared from clean base `9211c9a8`).
+  (DONE at clean commit `92394bb7` from base `9211c9a8`).
 
   **Result:** One omission-sensitive driver composes every admitted runtime/generated role, selected primary and
   support proof, and the final public/capability/no-drift surface without adding another semantic execution path.
@@ -30,7 +43,7 @@ Current execution status for interruption-safe batch workflow recovery.
   59 mutations, cursor cross-contract 75/7+1/56, KM 645/4,745, mdBook/four doctrines, canonical root 7+5, cursor
   288, primary 65x2, and Phase 0 1,031/1,031 in 640 seconds.
 
-  **Next:** Commit and clean `.7`, then activate public cursor no-drift `.9.1.9` task-tree-first.
+  **Next:** Public cursor no-drift `.9.1.9` is active task-tree-first.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.6 — implement dual-ABI Lua duplicate regex-slot identity**
   (DONE; commit prepared from clean base `01f2e574`).

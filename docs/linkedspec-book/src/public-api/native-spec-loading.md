@@ -53,7 +53,7 @@ local source = loaded.source_text
 
 local complete = linkedspec.load_and_compile_spec(request, options)
 assert(complete.loaded.source_text == source)
-local engine = complete:create_engine({ parse_mode = "seek", trace = emitter })
+local engine = complete:create_engine({ trace = emitter })
 local result = linkedspec.runtime_parse(engine, "input", { trace = emitter })
 ```
 
@@ -74,7 +74,8 @@ callers can inspect one with `linkedspec.spec_loader.node_type(value)`, which re
 parsing, staged body dispatch, explicit source validation, and compilation. The returned `LoadedCompiledSpec`
 keeps the full `LoadedSpec` under `loaded` and ordinary backend-native compiled state under `compiled`. Use either
 `complete:create_engine(options)` or `linkedspec.create_loaded_spec_engine(complete, options)` to create a runtime
-engine. Both forms copy the caller's options. A named request attaches its exact requested identity as `spec_name`;
+engine. Both forms copy the caller's supported options; there is no caller-global cursor override. A named
+request attaches its exact requested identity as `spec_name`;
 an exact-path request attaches no logical name; both attach the winning `resolved.path` as `spec_path`.
 
 The optional `trace` field in `SpecLoadOptions` is a caller-created `LinkedSpecTraceEmitter`. The same emitter may

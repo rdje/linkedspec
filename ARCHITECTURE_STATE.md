@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` rule-local cursor public no-drift refresh: `FUTURE-PARITY-BACKLOG.9.1.9` makes current public
+  accuracy executable. README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
+  ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model pages carry exact required markers;
+  stale current global-option, pending-backend, generated-v1, and pending-public claims fail mechanically. Cursor
+  governance closes at 75 migration files / 8 complete + 0 pending / 60 mutations, while `.9.1`/`.9` remain active
+  because child `.9.1.10` separately owns explicit repeated-OR action-result shape. The recurring driver remains
+  `tools/check_rule_local_cursor_five_backend.sh`; inter-match gap capture has satisfied its cursor prerequisite
+  but still requires explicit activation.
 - `2026-07-20` duplicate-slot recurring/public no-drift refresh: final leaf
   `FUTURE-PARITY-BACKLOG.9.1.8.1.7` adds no semantic execution path. One omission-sensitive recurring driver
   composes the exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions, selected 5x2x1 primary AND-consume

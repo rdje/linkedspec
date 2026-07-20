@@ -26,8 +26,8 @@ answers:
   - "what is the rule local cursor rollout after Dart admission"
   - "how many Julia cursor admission roles exist"
   - "what is the rule local cursor rollout after Julia admission"
-date: 2026-07-19
-status: accepted neutral contract; all backends plus recurring gate admitted at 7 complete / 1 pending
+date: 2026-07-20
+status: accepted neutral contract; backend, recurring, and public rollout admitted at 8 complete / 0 pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust .9.1.4.7 adds a 15-role consumer and advances only rust_parity. Dart .9.1.5.6 adds a governed 15-role consumer and reaches 67 files, 4 complete / 4 pending, and 39 mutations. Julia .9.1.6.6 adds its governed 15-role consumer, advances only julia_backend, retains 67 files, and reaches 5 complete / 3 pending with 44 effective mutations."
 evidence_update_2026_07_19_lua_runtime: "Lua runtime leaf .9.1.7.2 registers its new dual-ABI execution consumer, moving inventory from 67 to 68 files without advancing the pending lua_dual_abi rollout row or changing the 44 effective mutations."
@@ -37,6 +37,7 @@ evidence_update_2026_07_19_root_governance: "Final root-selection public no-drif
 evidence_update_2026_07_19_recurring_admission: "Recurring cursor admission .9.1.8 adds one six-runtime driver over Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; a selected 5x2x5 primary projection; and all three support ledgers. It advances only recurring_five_backend_gate. Governance is 72 migration files, 7 complete / 1 pending, and 56 mutations."
 evidence_update_2026_07_20_julia_duplicate_slot: "Julia duplicate-slot admission .9.1.8.1.5 adds a parse-mode-aware contract consumer. The cursor inventory deliberately classifies that proof under the existing Julia backend owner, advancing only the file count from 72 to 73; rollout remains 7 complete / 1 pending and mutations remain 56."
 evidence_update_2026_07_20_duplicate_public_closeout: "Duplicate-slot public closeout .9.1.8.1.7 makes its contract and checker name the parse-mode mdBook chapter. Both paths are classified under pending cursor public owner .9.1.9, advancing only the inventory from 73 to 75 files; rollout remains 7 complete / 1 pending and mutations remain 56."
+evidence_update_2026_07_20_cursor_public_no_drift: "Public no-drift .9.1.9 locks current documentation markers and exact stale-current denials, advances only public_no_drift, and closes the cursor ledger at 75 migration files / 8 complete + 0 pending / 60 mutations."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -86,7 +87,7 @@ Final root-selection public governance then adds two cross-contract scanner path
 chapter. Recurring cursor admission adds its own governed driver path, producing a 72-file boundary. Julia
 duplicate-slot admission adds its parse-mode-aware consumer under the existing Julia owner, producing 73 files.
 Duplicate-slot public governance then adds its contract and checker under cursor public owner `.9.1.9`, producing
-the exact current inventory of 75 files without changing cursor rollout or mutation status.
+the exact current inventory of 75 files. Public no-drift then admits that surface without changing inventory.
 
 Perl preflight `.9.1.3.0` corrected one ordering detail without changing the 91-
 file set or runtime semantics: the ten shared manifest/help/usage/trace files
@@ -104,10 +105,11 @@ marker plus each canonical/backend registration seam. Julia separately declares 
 the checker locks its complete package driver and optional canonical registration too. Lua declares the same
 15-role normalized topology and runs it on both ABIs; the checker locks both invocations and optional canonical
 registration. One recurring driver composes all six runtime legs, selected primary cases, and support ledgers;
-seven additional mutations raise the total to 56. Public no-drift follows after the separately owned identical-
-dependency-regex decision. Generated-source v1 remains the historical unmigrated-backend baseline.
+seven additional mutations raised the total to 56. Public contract coverage and admission add four rejected
+mutations, closing the ledger at 60. Generated-source v1 remains the historical unmigrated-backend baseline.
 The shared primary interface reached 63 cases during cursor rollout and is now a current 65-case five-backend
 projection after root-selection admission.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[and-or-cursor-ownership-audit]], and [[rule-local-cursor-ownership-decision]].
+See also [[rule-local-cursor-public-no-drift]].

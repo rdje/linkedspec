@@ -1,4 +1,4 @@
-# Rule Modes and Parse Modes
+# Rule Modes and Cursor Policy
 
 LinkedSpec rule execution has two related axes:
 
@@ -10,113 +10,16 @@ Keep composition and cursor discipline conceptually separate even though one aut
 A label such as `Item:AND` says "compose this body as an ordered sequence" and gives that rule the `consume` policy.
 A default/OR-family label composes choices or repetition and gives that rule the `seek` policy.
 
-> **Current staged implementation:** Audit `FUTURE-PARITY-BACKLOG.9.1.0` found
-> that the caller-global option changes every nested rule and already creates an
-> uncovered default-AND backend difference: Perl, Dart, Julia, and Lua default
-> to global `seek`, while Rust defaults to its compiled AND=`consume` mode when
-> no override is supplied. ADR `0044` now ratifies the replacement: OR/default families
-> intrinsically seek and AND families intrinsically consume, removes the public
-> global override, and retains seek/consume only as low-level matcher
-> algorithms. Parent mode never
-> propagates to or overrides child mode: an OR child remains seek under an AND
-> parent, and an AND child remains consume under an OR parent. Mode-sensitive
-> bare edges, explicit exceptions, descriptor/generated metadata, and removal
-> diagnostics are also fixed below. Perl `.9.1.3.1` parses and normalizes those
-> bare edges, and `.9.1.3.2` makes normal live and loaded Perl handlers spend
-> each rule's derived policy independently. Descriptor slice `.9.1.3.3` now
-> publishes `linkedspec-rule-local-cursor-v1`, removes root global-mode metadata,
-> and exposes normalized resolved-edge rows. Generated-source slice `.9.1.3.4`
-> now emits `linkedspec-generated-source-v2`, derives its five seek and five
-> consume policies from the ten handler families, and rejects v1 reconstruction.
-> Perl `.9.1.3.5` now rejects the removed `parse_mode` argument during
-> `prepare_options` and the primary `--parse-mode` flag at usage exit 2. Help and
-> canonical request trace no longer expose the global field;
-> composed Perl admission `.9.1.3.6` is executable through 14 required roles;
-> Rust `.9.1.4.2` parses and validates the same family/bare-edge shapes and
-> lowers them into typed action/blind dispatch tables. Rust `.9.1.4.3` now makes
-> normal live, loaded, and ordinary JSON-reconstructed rules derive policy at
-> each rule entry. Its compiled rule no longer stores an independent mutable
-> policy.
-> Rust `.9.1.4.4` now publishes descriptor-v1 family/policy/resolved-edge facts
-> without root/rule global fields. Rust `.9.1.4.5` emits and reconstructs
-> generated-source v2 from only ordered label/family rows, derives the same five
-> seek and five consume policies, and rejects v1 before reconstruction. Rust
-> `.9.1.4.6` removes static `ExecutionOptions` and runtime-context global mode
-> state, rejects primary `--parse-mode` with the targeted usage error, omits the
-> global request-trace field, and passes all 63 primary cases in both environments.
-> Rust admission `.9.1.4.7` composes 15 exact native, serialized, loaded,
-> descriptor, emitted/generated, trace, recursive/structural, removal, primary,
-> and diagnostic roles. The neutral checker requires every role plus canonical
-> registration and advances only `rust_parity`. Dart `.9.1.5.1` now parses and
-> validates the same typed family/bare-edge surface and lowers it into compiled
-> action/blind tables. Dart `.9.1.5.2` now derives seek/consume and sequence/choice
-> independently at every normal live, loaded, or normalized-JSON rule entry;
-> mixed action, blind, direct-call, and recursive children keep their own family
-> policy, and trace scopes report that entered policy. Dart `.9.1.5.3` now
-> publishes descriptor-v1 contract/family/policy/ownership/resolved-edge facts
-> from normalized compiled state with no root global field; direct,
-> normalized-JSON, and loaded projections agree. Dart `.9.1.5.4` emits
-> generated-source v2 from only ordered label/family rows and rejects v1 before
-> payload reconstruction. Dart `.9.1.5.5` removes engine/loader/corpus/parser
-> global options, rejects primary `--parse-mode`, omits the request-trace field,
-> and passed the exact then-63-case primary manifest in both environments.
-> Root-selection route convergence and topology admission are complete under
-> `.9.1.1.2.3.2-.3`. Composed cursor admission `.9.1.5.6` now adds one exact
-> 15-role Dart consumer and closes its backend parent.
-> Julia `.9.1.6.1` now supplies the same exact syntax boundary: compact `|`
-> is OR/default, complete-line/header-rest bare targets remain typed until the
-> full declared-label set is available, all six edge diagnostics carry the
-> neutral stage/code/fields, and valid ownership lowers into compiled action or
-> blind tables. Runtime `.9.1.6.2` now derives AND-consume/sequence and
-> OR-default-seek/choice once at every normal live, loaded, normalized,
-> recursive, and traced entry; children rederive from their own family.
-> Descriptor v1 is current too: it exposes per-rule family, policy, ownership,
-> and semantic edge rows with no global cursor field. Generated-source v2 is
-> now current: its minimal family plan derives five seek and five consume
-> policies, rejects v1 before payload reconstruction, and has no serialized
-> cursor override. Julia `.9.1.6.5` now removes engine/loader/corpus/primary
-> global options, rejects the retired API/CLI spellings before execution,
-> removes the help/request-trace field, and preserves `--top-rule`.
-> Admission `.9.1.6.6` now adds one exact 15-role Julia consumer over every
-> current projection and locks its complete/canonical driver topology.
-> At Julia admission rollout was 5 complete / 3 pending. Lua `.9.1.7.6` now advances only the dual-ABI row after
-> one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. Final root-selection governance adds two
-> cross-contract scanner paths. Recurring five-backend admission then adds its governed driver and composes all
-> six runtime legs plus selected 5x2x5 primary and support-ledger proof. Julia duplicate-slot admission adds its
-> parse-mode-aware proof path to the governed cursor inventory. Duplicate-slot public governance adds two
-> parse-mode-chapter scanner paths under `.9.1.9`, so it is now 75 files, 7 complete / 1 pending,
-> and 56 effective mutations. Identical dependency-regex identity `.9.1.8.1` and
-> final public no-drift `.9.1.9` remain dependency-ordered.
-> Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
-> point: all 36 headers parse, but compact `|` accounts for the 34/36 family
-> classification; global seek makes 22/36 family executions intrinsic; valid
-> edge/ownership rows are 5/13 and 2/4; portable invalid diagnostics are 0/7;
-> parent/child composition is 4/8; and structural replacement is 1/2. Normalized
-> and loaded engines still accept the global override, descriptor metadata still
-> publishes global seek, and generated source is still v1. Typed normalization
-> `.9.1.7.1` is now complete on both Lua ABIs: compact `|` is authored OR/default;
-> complete-line/header-rest bare targets are typed and JSON-roundtrippable; all
-> six portable edge diagnostics carry the neutral stage/code/fields; and valid
-> ownership lowers into compiled action/blind tables. The exact proof is
-> 258/258 assertions on PUC Lua and LuaJIT after identical 44/166 RED failures.
-> Runtime `.9.1.7.2` now makes omitted-policy normal live, loaded, normalized,
-> recursive, and traced execution intrinsic too. Every entered AND rule consumes
-> and sequences; every OR/default rule seeks and chooses; every action, blind,
-> direct-call, or recursive child derives again from its own family. Both ABIs
-> pass the same 110 assertions over all 36 families, eight child mechanisms, two
-> structural replacements, loaded/normalized routes, and policy-bearing trace.
-> Descriptor `.9.1.7.3` is now v1 on
-> both ABIs: root metadata contains the cursor contract rather than a global
-> mode, and every rule projects normalized family, policy, ownership, and exact
-> semantic edge rows. Its focused proof passes 875 assertions per ABI. Generated
-> source `.9.1.7.4` is now v2/format 2 on both ABIs: its unchanged label/family
-> plan derives exact cursor policy, compact Pipe is OR/choice, and v1 is rejected
-> before payload reconstruction. Public-option leaf `.9.1.7.5` now removes engine,
-> parse, loader, corpus, generated, primary-help, and request-trace override ownership.
-> Legacy dynamic keys fail with `prepare_options` / `parse_mode_override_removed`;
-> the retired CLI flag returns the targeted usage exit 2, while `--top-rule` retains
-> priority over authored `Rule::`. Composed dual-ABI admission `.6` now proves all 15 declared roles exactly once
-> on each ABI without adding another semantic path.
+> **Current implementation:** ADR `0044` is implemented and admitted across Perl, Rust, Dart, Julia, PUC Lua,
+> and LuaJIT. Default/OR families intrinsically seek; AND families intrinsically consume; every child derives its
+> own policy at entry. Bare declared-rule members normalize to blind ownership in AND and action ownership in
+> OR/default, while explicit `->` / `=>` remain legal cross-family exceptions. Public `parse_mode` / `parseMode`
+> options and `--parse-mode` are removed with targeted diagnostics. Descriptors publish
+> `linkedspec-rule-local-cursor-v1` plus derived per-rule facts, and generated source v2 derives policy from its
+> ordered label/family plan. The recurring gate composes all six runtime legs, selected 5x2x5 primary cases, and
+> support ledgers. Public no-drift closes the executable ledger at 75 migration files, 8 complete / 0 pending,
+> and 60 rejected mutations. Explicit repeated-OR action-result shape is tracked separately by
+> `FUTURE-PARITY-BACKLOG.9.1.10`.
 
 ## Current rule-label surface
 
@@ -702,7 +605,7 @@ Generated-source v2 now derives the same policy from its minimal ordered family 
 cursor field. Rust execution options now select only an entry rule; the primary command rejects the retired
 global flag and request traces carry no global cursor field. Express cursor semantics with rule families.
 
-## Removed Perl, Rust, Dart, and Julia option boundaries
+## Removed public option boundaries
 
 The Perl reference rejects `parse_mode` in inline, file-oriented, and generated-source construction. The failure
 occurs before source parsing with `stage = "prepare_options"`, `code = "parse_mode_override_removed"`, and
@@ -731,7 +634,7 @@ my $cursor_contract = $descriptor->{meta}{cursor_contract};
 # linkedspec-rule-local-cursor-v1
 ```
 
-Inspect each rule's family-derived `cursor_policy`. The Perl, Rust, Dart, and Julia primary `--parse-mode` flag is
+Inspect each rule's family-derived `cursor_policy`. Every primary `--parse-mode` flag is
 recognized only far enough to produce usage exit 2 and the targeted structural-migration message.
 The flag is never accepted or ignored. Rust native callers use `ExecutionOptions` only to select an entry rule.
 Dart native callers construct `LinkedSpecRuntimeEngine(compiled)` and loaded callers use
@@ -909,6 +812,5 @@ neutral checker requires every declared role and canonical registration. Dart ad
 normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
 also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. One recurring gate now
 runs all six runtime legs, five cursor-owned primary cases across five commands and two environments, and the
-support ledgers. With the Julia duplicate-slot proof path classified, it currently reports 36 family spellings,
-18 edge cases, eight parent/child cases, 75 migration files, 7 complete / 1 pending, and 56 rejected drift
-mutations.
+support ledgers. With public no-drift admitted, it reports 36 family spellings, 18 edge cases, eight parent/child
+cases, 75 migration files, 8 complete / 0 pending, and 60 rejected drift mutations.

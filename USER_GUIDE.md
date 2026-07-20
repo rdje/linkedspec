@@ -1338,7 +1338,6 @@ Interactive prompt helpers follow the same rule, but with the extra cleanup step
 - `parse_only => 1`
 - `generate_only => 1`
 - `return_descriptor => 1`
-- `parse_mode => 'seek' | 'consume'`
 - `top_rule => 'RuleName'`
 - `dump_parser_source => 1`
 - `parser_source_ref => \$out`
@@ -1356,7 +1355,6 @@ For independently loadable generated Perl, prefer the dedicated public method:
 my $source = LinkedSpec::emit_generated_source(
   \$spec,
   source_identity => 'examples/parser.spec',
-  parse_mode => 'consume',
 );
 
 eval "package Example::Generated;\n$source\n1;" or die $@;
@@ -1369,52 +1367,18 @@ The source carries generated-source contract/version/identity markers and an ord
 `ValidateGeneratedPlan(...)` expose the remaining semantic roles. The historical `generate_only` plus
 `dump_parser_source`/`parser_source_ref` path emits identical source and remains supported for diagnostics.
 
-`parse_mode` now controls the runtime matching discipline for generated handlers:
-- `seek`
-  - the historical default
-  - progressive matching that can skip forward to a later anchor
-- `consume`
-  - contiguous matching at the current input position
-  - later anchors are not searched automatically if the current position does not match
+Cursor discipline is intrinsic to each authored rule family. Default/OR-family rules seek progressively;
+AND-family rules consume contiguously. A child starts at the caller cursor and derives its own policy again, so
+parent policy and edge kind never override it. Bare declared-rule members normalize to blind ownership in AND
+and action ownership in OR/default; explicit `->` and `=>` remain the cross-family exceptions.
 
-`parse_mode` is a different axis from rule mode:
-- `seek` / `consume`
-  - cursor discipline: may it scan forward to the next anchor, or must it start exactly here?
-- `OR` / `AND`
-  - rule composition: are alternatives being tried, or are ordered steps being composed?
-
-So future implementation should keep these concepts independent:
-- `OR + seek`
-  - try alternatives, and let matching scan forward to the next anchor
-- `OR + consume`
-  - try alternatives, but require one of them to match at the current position
-- `AND + seek`
-  - require ordered steps, while still allowing the next step to scan forward
-- `AND + consume`
-  - require ordered steps, and require each next step to continue contiguously
-
-At the intuition level, `seek` can feel more extraction-like and `consume` can feel more grammar-like, but they are not aliases for `OR` and `AND`.
-
-**Ratified target (not current behavior):** `FUTURE-PARITY-BACKLOG.9.1.0`
-found that this global option changes every nested rule and already creates an
-uncovered default-AND backend split. ADR `0044` / `.9.1.1.1` now ratifies its
-replacement: OR/default rules intrinsically seek, AND rules intrinsically
-consume, parent and edge kind never override a child, and the public/global
-option is removed with targeted diagnostics. Low-level matchers retain both
-algorithms. Ordered landmarks remain expressible as AND over seek-owning OR
-children; anchored choice remains expressible as OR over consume-owning AND
-children.
-
-The same decision adds future mode-sensitive bare edge lines. A bare child
-member normalizes to a blind call in AND and an action edge in OR/default.
-Explicit cross-family `->` / `=>` remains legal, but resolved action/blind
-ownership still cannot mix. Descriptors move from root `meta.parse_mode` to
-derived per-rule `cursor_policy`; generated source moves to v2 and derives
-policy from family. Implementation is split under `.9.1.2-.9`. No API or
-runtime behavior has changed yet.
-
-If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.
-If you ask for `return_descriptor => 1`, the generated descriptor now also exposes the selected mode at `$descr->{meta}{parse_mode}`.
+The former public `parse_mode` / `parseMode` option is removed from every backend, loader, emitter, generated
+role, corpus adapter, and primary command. Supplying the legacy dynamic key fails before input or user code with
+`prepare_options` / `parse_mode_override_removed`; `--parse-mode` returns usage exit 2 with migration guidance.
+Descriptors expose `meta.cursor_contract = "linkedspec-rule-local-cursor-v1"` and derived
+`spec.<label>.meta.cursor_policy`, never a root `meta.parse_mode`. Generated source uses v2 and derives policy from
+its ordered label/family plan. Run `bash tools/check_rule_local_cursor_five_backend.sh` for the admitted
+Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof; rollout is 8 complete / 0 pending.
 
 `runtime_ctx_ref` is an opt-in diagnostics/introspection hook. You can pass either:
 - a scalar slot like `\$ctx`, in which case LinkedSpec stores the live per-run runtime context hashref there before compilation continues,
@@ -1540,7 +1504,7 @@ On the successful path, `runtime_ctx->{last_error}` should be treated as a failu
 3. Try module-relative `../specs/name.spec`.
 4. If still unresolved, fall back to `PathSearch`.
 
-`LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility. File-oriented callers can use the same `parse_mode => 'seek' | 'consume'` and `top_rule => 'RuleName'` options there too, and they flow into the generated descriptor/runtime parser behavior the same way as on `LinkedSpec::Get(...)`.
+`LinkedSpec::get_parser('name', %options)` keeps the public flat key/value call style. The wrapper normalizes those pairs before parser-factory dispatch; odd trailing option lists still fall back to an empty option set for backward compatibility. File-oriented callers can use `top_rule => 'RuleName'`; cursor policy derives from each authored family. Supplying the removed `parse_mode` / `parseMode` key fails with the same targeted `prepare_options` diagnostic as `LinkedSpec::Get(...)`.
 
 `get_parser(...)` also accepts `runtime_ctx_ref => \$ctx` for diagnostics continuity. On success, the captured context exposes the resolved `spec_path` and later runtime-owned fields like `top_rule`. On failure before compilation starts, it exposes a parser-factory `last_error` payload; on failure during compilation, the same shared context is upgraded to the compiler-pipeline `last_error` payload or, when the runtime owner has to supply a fallback because the delegated compiler path came back empty, to `runtime_owner:run_get_pipeline`; and if a returned parser later hits a runtime execution failure, that same shared context is upgraded again to a `runtime_handler` or `runtime_parser` payload depending on where the failure surfaced. That continuity now includes top-level parser invocation failures too: after `get_parser(...)` has already resolved and loaded a spec file, a later `runtime_parser` failure still preserves the resolved `spec_path`, selected `top_rule`, and generated-handler identity in the shared runtime context instead of dropping back to a file-less runtime-only view.
 

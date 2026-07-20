@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift
+
+Rule-local cursor rollout is closed at 75 migration files / 8 complete + 0 pending / 60 mutations. The executable
+public contract now requires 29 README, guide, API/backend, roadmap/status, ADR, Knowledge Map, and mdBook surfaces
+and rejects 26 exact stale-current claims. Current guidance consistently states that each authored rule family
+owns its cursor policy and bare-edge normalization, caller-global `parse_mode` / `parseMode` options are removed,
+the primary CLI rejects `--parse-mode`, and generated-source v2 derives policy from its minimal family plan.
+
+This is a public/governance closeout and changes no parser, compiler, runtime, descriptor, generated-plan, CLI, or
+fixture behavior. The existing recurring driver proves Perl 288, Julia 104, PUC Lua/LuaJIT 119 each, selected
+primary 5x2x5, capability 80/0/0, generated-source 10/1/8+105, and language coverage 246/105+1/122. A clean-cache
+run exposed that the driver's default Julia depot discarded installed package-source locations; it now preserves
+an explicit override or prepends its writable temp depot to Julia's actual `Base.DEPOT_PATH`.
+
+Exact parent review keeps `.9.1` and `.9` active because explicit repeated-OR action-result shape remains pending
+under `.9.1.10`. The cursor prerequisite for proposed `INTER-MATCH-GAP-CAPTURE` is satisfied, but that program
+remains inactive until explicitly activated. Safe cleanup removed 1.8 GiB of reproducible Rust output plus Dart,
+mdBook, and Python caches; source-bearing and uncertain external caches remain untouched.
+
+Final lockstep passes Knowledge Map 646/4,751, mdBook, memory architecture, all four doctrines, cursor/root/
+duplicate governance, Python/shell syntax, whitespace, primary CLI 65/65 in default and POSIX environments, and
+Phase 0 1,031/1,031; canonical local CI exits 0.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift
 
 Duplicate regex-slot rollout is closed at 7 complete / 0 pending. One omission-sensitive recurring driver runs

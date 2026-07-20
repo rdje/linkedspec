@@ -58,7 +58,7 @@ ROLLOUT = [
     ("julia_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.6"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.7"),
     ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.9.1.8"),
-    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.9"),
+    ("public_no_drift", "complete", "FUTURE-PARITY-BACKLOG.9.1.9"),
 ]
 PERL_REFERENCE_ADMISSION = {
     "consumer_path": "t/rule_local_cursor_perl_contract.t",
@@ -233,6 +233,247 @@ RECURRING_GATE = {
         "driver": "tools/run_ci_local.sh",
         "switch": "LINKEDSPEC_RUN_CURSOR_MATRIX",
     },
+}
+def public_document(path: str, *markers: str) -> dict[str, Any]:
+    return {"path": path, "required_markers": list(markers)}
+
+
+def forbidden_claim(path: str, text: str) -> dict[str, str]:
+    return {"path": path, "text": text}
+
+
+PUBLIC_CONTRACT = {
+    "documents": [
+        public_document(
+            "README.md",
+            "cursor rollout is closed at 75 migration files, 8 complete / 0 pending, and 60 rejected mutations",
+            "tools/check_rule_local_cursor_five_backend.sh",
+        ),
+        public_document(
+            "TOOLBOX.md",
+            "cursor policy comes from each authored rule family",
+            "former `parse_mode` key is a removal-diagnostic probe only",
+        ),
+        public_document(
+            "USER_GUIDE.md",
+            "The former public `parse_mode` / `parseMode` option is removed from every backend",
+            "rollout is 8 complete / 0 pending",
+        ),
+        public_document(
+            "capability_conformance/README.md",
+            "8 complete / 0 pending",
+            "60 semantic, topology, recurring, public, and rollout drift mutations",
+        ),
+        public_document(
+            "cli_conformance/README.md",
+            "public no-drift is closed at 8 complete / 0 pending",
+            "tools/check_rule_local_cursor_five_backend.sh",
+        ),
+        public_document(
+            "ROADMAP.md",
+            "Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations",
+            "tools/check_rule_local_cursor_five_backend.sh",
+        ),
+        public_document(
+            "ROADMAP_V2.md",
+            "Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations",
+            "selected 5x2x5 recurring and public proof",
+        ),
+        public_document(
+            "ARCHITECTURE_STATE.md",
+            "rule-local cursor public no-drift refresh",
+            "75 migration files / 8 complete + 0 pending / 60 mutations",
+        ),
+        public_document(
+            "LIVE_ACHIEVEMENT_STATUS.md",
+            "FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift",
+            "75 migration files / 8 complete + 0 pending / 60 mutations",
+        ),
+        public_document(
+            "docs/TASK_TREE.md",
+            "rule-local cursor recurring/public no-drift at 75 files / 8 complete + 0 pending / 60 mutations",
+            "Explicit repeated-OR action-result shape `.9.1.10` remains",
+        ),
+        public_document(
+            "docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md",
+            "accepted; implemented and public no-drift closed",
+            "8 complete / 0 pending",
+        ),
+        public_document(
+            "docs/knowledge/rule-local-cursor-and-bare-edge-contract.md",
+            "accepted and public-admitted; rollout 8 complete / 0 pending",
+            "60 mutations",
+        ),
+        public_document(
+            "docs/knowledge/rule-local-cursor-five-backend-admission.md",
+            "recurring and public admission complete; rollout 8 complete / 0 pending",
+            "75 migration files / 8 complete + 0 pending / 60 mutations",
+        ),
+        public_document(
+            "docs/knowledge/rule-local-cursor-neutral-contract.md",
+            "backend, recurring, and public rollout admitted at 8 complete / 0 pending",
+            "75 migration files / 8 complete + 0 pending / 60 mutations",
+        ),
+        public_document(
+            "docs/knowledge/rule-local-cursor-public-no-drift.md",
+            "public no-drift complete; rollout 8 complete / 0 pending",
+            "leaves `.9.1`/`.9` active",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/SUMMARY.md",
+            "Rule Modes and Cursor Policy",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "75 migration",
+            "8 complete / 0 pending, and 60 rejected mutations",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "Public no-drift is closed at 8 complete / 0 pending",
+            "## 1. Derived Cursor Policies",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "Caller-global cursor options are removed from all engine",
+            "Current generated-source v2 retains only ordered",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "current cursor ledger is 8 complete / 0 pending",
+            "60 rejected drift mutations",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/overview/project-status.md",
+            "75 migration files / 8 complete + 0 pending / 60 rejected mutations",
+            "tools/check_rule_local_cursor_five_backend.sh",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "cursor no-drift is closed at 8 complete / 0 pending",
+            "admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "Public no-drift is closed at 8 complete / 0 pending",
+            "Cursor discipline comes from each authored rule",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+            "there is no caller-global cursor override",
+            "complete:create_engine({ trace = emitter })",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/user-model/regex-in-spec.md",
+            "Rule Modes and Cursor Policy",
+            "Derived cursor policies",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "75 migration files, 8 complete / 0 pending",
+            "60 rejected mutations",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+            "Cursor policy comes from each authored rule family",
+            "All five backends reject the retired `--parse-mode` flag",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+            "Cursor public no-drift is separately closed at 75 migration files, 8 complete / 0 pending",
+            "authored family, not a caller option",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md",
+            "Rule Modes and Cursor Policy",
+            "linkedspec-rule-local-cursor-v1",
+        ),
+    ],
+    "forbidden_current_claims": [
+        forbidden_claim(
+            "TOOLBOX.md",
+            "(`return_descriptor`, `dump_parser_source`, `parse_mode`, `top_rule`, `runtime_ctx_ref`, …)",
+        ),
+        forbidden_claim("TOOLBOX.md", 'top_rule=>"Top", parse_mode=>"consume"'),
+        forbidden_claim("USER_GUIDE.md", "- `parse_mode => 'seek' | 'consume'`"),
+        forbidden_claim(
+            "USER_GUIDE.md",
+            "`parse_mode` now controls the runtime matching discipline for generated handlers",
+        ),
+        forbidden_claim("USER_GUIDE.md", "**Ratified target (not current behavior):**"),
+        forbidden_claim(
+            "USER_GUIDE.md",
+            "If `parse_mode` is omitted, LinkedSpec keeps the old behavior and treats it as `seek`.",
+        ),
+        forbidden_claim(
+            "USER_GUIDE.md",
+            "File-oriented callers can use the same `parse_mode => 'seek' | 'consume'`",
+        ),
+        forbidden_claim("capability_conformance/README.md", "rollout is 7 complete / 1 pending"),
+        forbidden_claim(
+            "capability_conformance/README.md",
+            "public no-drift remains dependency-ordered",
+        ),
+        forbidden_claim(
+            "cli_conformance/README.md",
+            "ADR `0044`'s future primary-command migration",
+        ),
+        forbidden_claim("README.md", "executable cursor rollout is now 7 complete / 1 pending"),
+        forbidden_claim("ROADMAP.md", "Public cursor no-drift `.9.1.9` remains next"),
+        forbidden_claim("ROADMAP_V2.md", "public cursor no-drift `.9.1.9` remains next"),
+        forbidden_claim(
+            "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "with top-rule, parse-mode,\nand trace controls",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "public no-drift remain dependency-ordered",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "An explicit outer `parse_mode` remains temporarily distinguishable",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+            "Lua still retains that staged option until `.9.1.7.5`",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "final public no-drift remains separately owned",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/overview/project-status.md",
+            "at the current\n72/7+1/56 boundary",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "Lua generated/public\ncursor admission remains separately staged",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "Lua follows in its dependency-ordered rollout leaf",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "Lua is not yet topology-\nadmitted",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+            "Final recurring/public no-drift is the remaining\ncontract-program closeout",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+            'complete:create_engine({ parse_mode = "seek"',
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "**Current staged implementation:**",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "75 migration files, 7 complete / 1 pending",
+        ),
+    ],
 }
 GROUPS = [
     ("FUTURE-PARITY-BACKLOG.9.1.2", "neutral_contract_and_shared_authority"),
@@ -415,6 +656,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "julia_backend_admission",
             "lua_dual_abi_admission",
             "recurring_gate",
+            "public_contract",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -870,6 +1112,31 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if local_ci["switch"] not in local_ci_text or f'bash "$REPO_ROOT/{recurring["driver"]}"' not in local_ci_text:
         fail("recurring cursor local-CI registration drifted")
 
+    public = require_fields(
+        contract["public_contract"],
+        {"documents", "forbidden_current_claims"},
+        "public contract",
+    )
+    if public != PUBLIC_CONTRACT:
+        fail("public contract drifted")
+    for document in public["documents"]:
+        public_path = ROOT / document["path"]
+        if not public_path.is_file():
+            fail(f"public cursor document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            if marker not in public_text:
+                fail(f"public cursor marker is missing from {document['path']}: {marker}")
+    for forbidden in public["forbidden_current_claims"]:
+        public_path = ROOT / forbidden["path"]
+        if not public_path.is_file():
+            fail(f"forbidden-claim document is missing: {forbidden['path']}")
+        if forbidden["text"] in public_path.read_text(encoding="utf-8"):
+            fail(
+                f"stale public cursor claim remains in {forbidden['path']}: "
+                f"{forbidden['text']}"
+            )
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -979,6 +1246,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("recurring CI omission", lambda c: c["recurring_gate"]["local_ci"].__setitem__("switch", "wrong")),
         ("recurring driver omission", lambda c: c["recurring_gate"].__setitem__("driver", "missing")),
         ("recurring rollout admission", lambda c: c["rollout"][6].__setitem__("status", "pending")),
+        ("public document omission", lambda c: c["public_contract"]["documents"].pop()),
+        ("public marker omission", lambda c: c["public_contract"]["documents"][0]["required_markers"].pop()),
+        ("forbidden current claim omission", lambda c: c["public_contract"]["forbidden_current_claims"].pop()),
+        ("public rollout admission", lambda c: c["rollout"][7].__setitem__("status", "pending")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -1014,6 +1285,8 @@ def main() -> int:
         f"{len(contract['julia_backend_admission']['roles'])} Julia admission roles; "
         f"{len(contract['lua_dual_abi_admission']['roles'])} Lua admission roles; "
         f"{len(contract['recurring_gate']['consumers'])} recurring runtime legs; "
+        f"{len(contract['public_contract']['documents'])} public documents; "
+        f"{len(contract['public_contract']['forbidden_current_claims'])} forbidden current claims; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )

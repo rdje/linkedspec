@@ -8,8 +8,7 @@ DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
-DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
-JULIA_DEPOT=${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}
+DEFAULT_JULIA_WRITE_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
 
 log() {
  printf '[rule-local-cursor-five] %s\n' "$*"
@@ -27,6 +26,18 @@ require_command() {
 for command in python3 perl prove "$CARGO_CMD" "$DART_CMD" "$JULIA_CMD" "$LUA_CMD" "$LUAJIT_CMD"; do
  require_command "$command"
 done
+
+if [[ -n ${LINKEDSPEC_JULIA_DEPOT_PATH:-} ]]; then
+ JULIA_DEPOT=$LINKEDSPEC_JULIA_DEPOT_PATH
+elif [[ -n ${JULIA_DEPOT_PATH:-} ]]; then
+ JULIA_DEPOT=$JULIA_DEPOT_PATH
+else
+ JULIA_BASE_DEPOT=$(
+  "$JULIA_CMD" --startup-file=no --history-file=no \
+   -e 'print(join(Base.DEPOT_PATH, ":"))'
+ )
+ JULIA_DEPOT="$DEFAULT_JULIA_WRITE_DEPOT:$JULIA_BASE_DEPOT"
+fi
 
 cd "$REPO_ROOT"
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"

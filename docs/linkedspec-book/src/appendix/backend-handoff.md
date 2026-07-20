@@ -15,7 +15,9 @@
 > complete too: high-level legacy keys fail with the portable removal diagnostic,
 > and primary help/request trace no longer expose the retired flag. One exact
 > 15-role consumer now admits the complete projection on both Lua ABIs;
-> v1 generated artifacts must be regenerated.
+> v1 generated artifacts must be regenerated. The recurring six-runtime plus
+> selected 5x2x5 gate and current public surfaces are admitted at 75 migration
+> files, 8 complete / 0 pending, and 60 rejected mutations.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
@@ -1317,8 +1319,9 @@ The Julia primary command now exposes ADR `0023`'s parser-oriented help and acce
 parser/trace flags. It rejects `status`, `corpus`, and all positional arguments with usage exit `2`; corpus work
 remains in the separate runner. Named specs resolve through exact current path, current `NAME.spec`, repository
 `specs/NAME.spec`, then deterministic authored fallback. File and inline content is loaded exactly. Rule-only and
-spec-driven top-level-function source now execute through the native compiler/runtime with top-rule, parse-mode,
-and trace controls. Success prints the direct top-rule value with recursively sorted object keys and one newline.
+spec-driven top-level-function source now execute through the native compiler/runtime with top-rule and trace
+controls; cursor policy derives from each authored family. Success prints the direct top-rule value with
+recursively sorted object keys and one newline.
 Source compilation precedes input-file loading. Compilation, input-load, and invocation failures use stable stderr
 headings and exit `1`; usage errors exit `2`. Native trace retains stdout/route/mirror, reset, quiet, and emoji
 controls; the primary command now uses a separate canonical phase recorder. `.7.3.2.5` locks nine process families with

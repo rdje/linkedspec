@@ -6356,7 +6356,7 @@ before implementation.
     KM 645/4,745, mdBook, all four doctrines, syntax, whitespace, and exact generated-artifact cleanup pass. The
     duplicate contract/checker name the parse-mode mdBook chapter and are classified under cursor public owner
     `.9.1.9`, advancing only that inventory from 73 to 75 files at unchanged 7+1/56.
-  Commit: `pending`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.7 - close duplicate slot recurring public no drift` (`92394bb7`)
 
   #### Acceptance Checklist
 
@@ -6376,15 +6376,43 @@ before implementation.
     selecting any later leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.9`
-  Status: `pending`
+  Status: `done`
   Goal: Close cursor/edge rollout with public no-drift, migration guidance, and exact parent status.
   Dependencies: `.9.1.8.1`
   Acceptance: README, guides, mdBook, API/backend companions, examples, help, architecture, Knowledge Map,
     capability/status ledgers, and recurring scanners describe only the current implemented rule-local contract;
     stale current `parse_mode` guidance and v1 generated admission fail mechanically while explicit historical
-    evidence remains classified. Close `.9.1`/`.9` only when all backend and public projections are exact.
-  Verification: `pending`
-  Commit: `pending`
+    evidence remains classified. Close the cursor rollout at 8/0 while keeping `.9.1`/`.9` active for pending
+    explicit repeated-OR result-shape child `.9.1.10`.
+  Verification: Activated task-tree-first on 2026-07-20 from clean duplicate-slot closeout commit `92394bb7`;
+    no public, checker, capability, status, or parent-closeout edit preceded this activation. Exact parent review
+    found `.9.1.10` correctly nested under AND/OR semantics, so this leaf corrects its stale parent-closeout
+    sentence rather than falsely completing a parent with a pending child. The executable public contract now
+    locks 29 documents and 26 stale-current denials; the cursor checker reports 75 migration files / 8 complete +
+    0 pending / 60 mutations. Focused cursor/root/duplicate checkers, Python syntax, the complete recurring cursor
+    driver, Knowledge Map generation, mdBook, memory architecture, all four doctrines, and whitespace pass. A
+    first clean-cache recurring run exposed a Julia harness default that discarded installed package sources; the
+    repaired driver prepends its writable depot to Julia's actual `Base.DEPOT_PATH` and passes every runtime and
+    support leg. Final lockstep passes KM 646/4,751, mdBook, memory, four doctrines, syntax, whitespace, primary
+    65/65 in default and POSIX environments, and Phase 0 1,031/1,031; canonical local CI exits 0. Exact cleanup
+    removes 1.8 GiB of reproducible Rust output plus regenerated Dart, mdBook, and Python caches without touching
+    source-bearing or uncertain external data.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.9 - close cursor public no drift`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY CURRENT PUBLIC SURFACE** — Follow the Knowledge Map to ADR `0044`, the recurring
+    cursor admission, exact migration inventory, public guides, backend/API companions, status ledgers, and
+    historical classifications before changing public claims.
+  - [x] **CLOSE PUBLIC NO-DRIFT** — Require every current public surface to state intrinsic rule-local cursor and
+    bare-edge semantics exactly; reject stale global `parse_mode`, removed CLI/API override, and generated-v1
+    claims while retaining explicitly classified history.
+  - [x] **KEEP PARENT STATUS EXACT** — Advance only cursor public admission to 8/0 after all neutral, backend,
+    recurring, public, capability, roadmap, task, and Knowledge Map projections agree; keep `.9.1` and `.9`
+    active while child `.9.1.10` remains pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass focused public/migration mutations, recurring runtime proof where
+    warranted, capability/coverage ledgers, mdBook/KM/doctrines, canonical CI, exact artifact cleanup, and
+    whitespace; synchronize live docs and commit `.9.1.9` before selecting `.9.1.10` or another leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10`
   Status: `pending`
@@ -8965,7 +8993,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `done` | Direct authored-slot matching and exact module-isolated 15-role Julia admission pass at 5+2/41; package 3,549, primary 65x2, corpus 105, KM 641/4,720, canonical 1,031/623s, and cleanup signoff pass before Lua `.6`. |
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `done` | Direct authored-slot matching and one shared exact 15-role consumer pass 112x2; complete package 177x2, primary 65x2, corpus 105, 6+1/46 governance, KM 643/4,735, canonical 1,031/653s, and cleanup signoff pass before `.7`. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
-| 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
+| 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `done` | Twenty-nine required documents, 26 stale-current denials, 60 mutations, recurring proof, KM 646/4,751, canonical 65x2 plus Phase 0 1,031, and exact cleanup close cursor rollout at 8/0 without falsely closing `.9.1`/`.9`. |
 | 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `pending` | Decide explicit repeated-OR action result shape after the duplicate-slot fixture correction exposed Perl collection versus four-backend scalar drift. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
@@ -10043,6 +10071,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Cursor public no-drift `.9.1.9` is signoff-complete from clean base `92394bb7`. The executable
+  contract requires 29 documents, rejects 26 stale-current claims, and closes rollout at 75 files / 8+0 /
+  60 mutations. Recurring runtime/support proof, KM 646/4,751, mdBook/doctrines, canonical primary 65x2 and
+  Phase 0 1,031/1,031 pass; safe cleanup removes 1.8 GiB plus regenerated book/Dart/Python caches. `.9.1.10`
+  remains the pending AND/OR frontier, so `.9.1`/`.9` stay active.
+- `2026-07-20`: Clean commit `92394bb7` lands duplicate-slot recurring/public closeout `.9.1.8.1.7`; tracked and
+  untracked root state is clean, the brief is zero bytes, task artifacts are absent, free disk is 44 GiB, and
+  ahead is 251. Public cursor no-drift `.9.1.9` activates task-tree-first before its inventory or public edits.
 - `2026-07-20`: Duplicate-slot recurring/public closeout `.9.1.8.1.7` is signoff-complete from clean base
   `9211c9a8`. Six-runtime recurring and selected 5x2x1 primary/support proof pass; governance closes at
   7/0/59 with 22 required documents and 12 stale-current denials. Cursor cross-contract inventory is

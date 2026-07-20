@@ -5,8 +5,8 @@
 > `emit_generated_source` now reject the legacy dynamic key during
 > `prepare_options` with `parse_mode_override_removed`; the primary
 > `--parse-mode` flag returns usage exit 2 with a targeted migration message.
-> Rust, Dart, and Julia have also removed their engine/runtime overrides and
-> primary flag; Lua follows in its dependency-ordered rollout leaf.
+> Rust, Dart, Julia, PUC Lua, and LuaJIT have also removed their engine/runtime
+> overrides and primary flag. Public no-drift is closed at 8 complete / 0 pending.
 
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
@@ -487,9 +487,8 @@ Later:
  /later/
 ```
 
-With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, Dart, Julia, and Lua
-native, loaded/reconstructed, generated/emitted, and traced routes accept this shape. Lua is not yet topology-
-admitted, so this is implemented on all runtimes but is not yet an admitted five-backend source:
+With no `::`, the accepted default is simply the first declared rule. Perl reference, Rust, Dart, Julia, PUC Lua,
+and LuaJIT native, loaded/reconstructed, generated/emitted, and traced routes accept and admit this shape:
 
 ```text
 First:
@@ -593,8 +592,8 @@ return distinct values from `I`, proving which rule was entered; the fixed reque
 canonical lifecycle source. Focused proof is 137, package proof is 3,428, primary is 65x2, corpus is 105, and root
 governance at that boundary was 5/7 plus 39 rejected mutations. Lua admission now advances it to 6/7 plus 44.
 
-Lua and all other backends now admit markerless fallback. Final recurring/public no-drift is the remaining
-contract-program closeout:
+Lua and all other backends admit markerless fallback. Final recurring/public no-drift is closed at
+7 complete / 0 pending:
 
 ```text
 FallbackMarker::

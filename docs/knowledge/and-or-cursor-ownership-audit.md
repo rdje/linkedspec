@@ -9,8 +9,8 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.9.1.0 find"
   - "are AND seek and OR consume meaningful combinations"
   - "what should replace the global parse_mode option"
-date: 2026-07-18
-status: confirmed historical audit; Perl and Rust rollout now removes the audited override
+date: 2026-07-20
+status: confirmed historical audit; override removal and public no-drift complete across all backends
 tags: [dsl, runtime, cursor, parse-mode, and-rule, or-rule, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.0 traced parser construction, compiled state, engines, primary commands, descriptors, generated execution, tests, and public docs across Perl/Rust/Dart/Julia/Lua. Exact primary probes over `Top::AND /x/` plus input `prefix x` return `hit` by default on Perl/Dart/Julia/Lua but null on Rust; explicit seek returns hit and explicit consume returns null on all five. Perl toolbox output proves the selected global mode was baked into every generated LinkedRE call. Rust compiler.rs derived Consume for AND and Seek otherwise, but ExecutionOptions could globally overwrite every compiled rule. The shared 62-case CLI matrix did not contain default-AND-leading-junk coverage. ADR 0044 adopts the recommendation; Perl .9.1.3 and Rust .9.1.4.2-.6 now implement intrinsic family policy and override removal."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG.9.1.0|Top::AND|ExecutionOptions::with_parse_mode|default parity defect' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md; python3 tools/check_rule_local_cursor_contract.py"
@@ -41,8 +41,7 @@ not cover default AND behavior.
 Descriptor state was also inconsistent with runtime ownership. Perl recorded the
 selected global mode; Dart/Julia/Lua and Rust outward descriptor metadata
 hard-coded global `seek`; only Rust rule metadata carried a derived per-rule
-mode. Perl and Rust have since migrated; later backend leaves own the remaining
-staged surfaces.
+mode. All five backends and both Lua ABIs have since migrated and are public-admitted.
 
 ## The legitimate semantic objective
 
@@ -97,8 +96,7 @@ Implementation migrates, rather than silently ignoring:
 - current tests and examples that use global consume to obtain strict parsing.
 
 Legacy public options fail with a targeted migration diagnostic rather than
-being accepted and ignored. Perl is composed-admitted and Rust is current
-through public removal; Dart, Julia, and Lua remain dependency-ordered rollout
-work.
+being accepted and ignored. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are
+composed- and public-admitted at 8 complete / 0 pending.
 
 Related task: [[FUTURE-PARITY-BACKLOG]] `.9.1.0` / `.9.1.1`.

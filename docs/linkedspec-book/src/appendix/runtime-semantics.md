@@ -6,8 +6,8 @@
 > parent and edge kind never override a child, and the public/global
 > `parse_mode` option is removed. Perl, Rust, Dart, Julia, and dual-ABI Lua are
 > composed-admitted. One recurring gate now proves all six runtime legs plus the
-> selected 5x2x5 primary projection; identical dependency-regex identity and
-> public no-drift remain dependency-ordered.
+> selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending;
+> explicit repeated-OR action-result shape remains separately tracked.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -19,7 +19,7 @@ same `.spec` input. No Perl implementation knowledge is required.
 > position primitive. The behavioral contracts below are what every backend must
 > reproduce, independent of that spelling.
 
-## 1. Parse Modes
+## 1. Derived Cursor Policies
 
 ### 1.1 Seek Mode
 
@@ -55,9 +55,9 @@ position. The match must start exactly at the current cursor.
 **Key property**: Children must match in order, contiguously. No gaps allowed.
 This is a structuring mode — the parser consumes input in exact sequence.
 
-### 1.3 Parse Mode Determination
+### 1.3 Cursor Policy Determination
 
-The parse mode for a rule is determined by:
+The cursor policy for a rule is determined by:
 1. The **rule mode** from the label (`:AND` → consume, `:OR` and default → seek).
 2. The **handler variant** selected by the compiler.
 3. AND variants use consume. OR and REP variants use seek.

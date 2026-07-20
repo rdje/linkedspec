@@ -54,10 +54,13 @@ The checker locks its markers, complete package driver, canonical tracked input,
 One Lua consumer composes the same 15 normalized roles and runs unchanged on both PUC Lua and LuaJIT. The checker
 locks its markers, both backend-driver invocations, canonical tracked input, and optional backend registration.
 `neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, `julia_backend`,
-`lua_dual_abi`, and `recurring_five_backend_gate` are complete, so rollout is 7 complete / 1 pending. Run
+`lua_dual_abi`, `recurring_five_backend_gate`, and `public_no_drift` are complete, so rollout is
+8 complete / 0 pending. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` for the recurring Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT
 composition, selected 5x2x5 primary projection, and support ledgers. Canonical local CI exposes the same
-all-toolchain leg behind `LINKEDSPEC_RUN_CURSOR_MATRIX=1`; public no-drift remains dependency-ordered. The shared generated-source-v1
+all-toolchain leg behind `LINKEDSPEC_RUN_CURSOR_MATRIX=1`. The public contract requires current README, guide,
+API/backend, roadmap, task, architecture, mdBook, ADR, and Knowledge Map surfaces and rejects exact stale-current
+claims; the checker rejects 60 semantic, topology, recurring, public, and rollout drift mutations. The shared generated-source-v1
 capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, Julia, and Lua
 emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
 its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
@@ -135,8 +138,8 @@ corpus/primary ownership while retaining low-level matcher primitives and target
 progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance was 67 / 5+3 / 44 at
 Julia admission. Lua admission later advanced the ledger to 69 / 6+2 / 49, root-governance scanning moved the
 inventory to 71, recurring admission established 72 / 7+1 / 56, the Julia duplicate-slot proof path advanced it
-to 73, and duplicate-slot public governance adds two parse-mode-chapter scanner paths under `.9.1.9`, making the
-current boundary 75 / 7+1 / 56.
+to 73, and duplicate-slot public governance added two parse-mode-chapter scanner paths under `.9.1.9`. Final
+public no-drift closes the current boundary at 75 / 8+0 / 60.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

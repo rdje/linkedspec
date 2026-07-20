@@ -43,13 +43,14 @@ set `LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1` on canonical local CI. Backend
 admission consumers own all five duplicate-slot fixtures; the shared primary
 manifest remains 65 cases and supplies the exact AND-consumption projection.
 
-ADR `0044`'s future primary-command migration is now executable in
-`capability_conformance/rule_local_cursor_contract.json`. The target removes `--parse-mode` from help and returns
+ADR `0044`'s primary-command migration is executable and admitted in
+`capability_conformance/rule_local_cursor_contract.json`. It removes `--parse-mode` from help and returns
 usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 65-case manifest
 and Perl reference now project that target: structural default-rule seeking and AND-rule consumption replace the
-two global-mode success cases, and request trace omits the retired field. Rust, Dart, Julia, and Lua retain their
-historically retained their prior interface until dependency-ordered `.9.1.4-.8` migrations consumed the same
-shared target. All five commands now pass the complete byte-exact 65x2 suite.
+two global-mode success cases, and request trace omits the retired field. Perl, Rust, Dart, Julia, PUC Lua, and
+LuaJIT consume the same family-derived contract. All five commands pass the complete byte-exact 65x2 suite;
+public no-drift is closed at 8 complete / 0 pending through
+`bash tools/check_rule_local_cursor_five_backend.sh`.
 
 The current manifest contains 65 cases: exact long/short help, 20 strict usage families, eleven successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20

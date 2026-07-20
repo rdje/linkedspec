@@ -91,10 +91,10 @@ check, not proof that the cited commands were run.
     print JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\"hello world")), "\n";'  # run
   ```
 - **OUTPUT:** the parser's top-level value (`["hello","world"]`). Accepts the debug options in §2
-  (`return_descriptor`, `dump_parser_source`, `parse_mode`, `top_rule`, `runtime_ctx_ref`, …).
+  (`return_descriptor`, `dump_parser_source`, `top_rule`, `runtime_ctx_ref`, …).
 - **Entry rule model:** a valid `.spec` needs one or more rules, not a mandatory `::`. Explicit
   `top_rule` wins; otherwise the first authored `::` wins; without a marker, the first authored rule
-  wins. The Perl reference implements all three branches; later backend rollout remains staged.
+  wins. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit all three branches.
   Authored `::` is default-entry identity, and after selection `::` and `:` rules have the same
   regex/mode/action feature surface ([[top-rule-is-ordinary-rule-entered-first]]). The two-rule
   no-regex wrapper above is a useful stream-parser idiom, not a validity minimum.
@@ -169,7 +169,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```bash
   perl -Iperl -MLinkedSpec -e '
     my $s = "Top::AND\n /a/\n /b/\n -> Top[0] { assign(scalar(x), 1) }\n -> Top[1] { return(1) }\n";
-    my %ctx; LinkedSpec::Get(\$s, top_rule=>"Top", parse_mode=>"consume",
+    my %ctx; LinkedSpec::Get(\$s, top_rule=>"Top",
                              dump_parser_source=>1, runtime_ctx_ref=>\%ctx);
     print ${$ctx{parser_source_chunks_ref}} if $ctx{parser_source_chunks_ref};'
   ```
@@ -197,7 +197,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `detail`, `top_rule`, `handler_source_label`), `spec_name`/`spec_path`, selected `top_rule`, and the
   parser-source capture.
 - **WHEN:** "why did this build/parse fail, and where?" — read `$ctx{last_error}`. Pair with
-  `parse_mode => "consume"|"seek"` and `top_rule => "..."` to reproduce a runtime path.
+  `top_rule => "..."` to reproduce a selected entry path; cursor policy comes from each authored rule family.
+  The former `parse_mode` key is a removal-diagnostic probe only, never a supported debug option.
 
 ---
 

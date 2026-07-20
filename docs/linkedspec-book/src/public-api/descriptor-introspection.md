@@ -410,7 +410,7 @@ functions. This descriptor fact does not promote the separately future generic c
 Important current fields include:
 
 - `descriptor_model`
-- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
+- `cursor_contract` (`linkedspec-rule-local-cursor-v1` on admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT)
 - `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT)
 - `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on admitted Perl, Rust, Dart, Julia, and Lua routes)
 - `definition_order`
@@ -555,8 +555,8 @@ JSON-byte-identical, while invalid reconstructed edge state fails portable valid
 source is a separate v2 artifact contract derived from the same family facts; it does not deserialize descriptor
 cursor fields.
 
-All four implemented variants expose the exact top-level projection, composing/nested model identities, and
+All five implemented backends expose the exact top-level projection, composing/nested model identities, and
 canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
 contract and final four-backend admission closed under `.1.6.2.3`. Cursor metadata then migrated by explicit
-variant: Perl, Rust, Dart, and Julia now consume rule-local v1 and are composed-admitted; Lua generated/public
-cursor admission remains separately staged.
+variant: Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consume rule-local v1 and are composed-admitted. Public
+cursor no-drift is closed at 8 complete / 0 pending.

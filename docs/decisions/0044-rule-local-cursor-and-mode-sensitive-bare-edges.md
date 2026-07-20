@@ -1,13 +1,13 @@
 # 0044 - Rule families own cursor policy and bare edge ownership
 
 - Date: 2026-07-17
-- Status: accepted; implementation pending
+- Status: accepted; implemented and public no-drift closed
 - Tags: architecture, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptors, generated-source, cli, parity
 
 ## Context
 
-`FUTURE-PARITY-BACKLOG.9.1.0` proved that the public `parse_mode` option is a whole-grammar override. Perl, Dart,
-Julia, and Lua currently default that override to seek, while Rust derives AND=consume and OR/default=seek before
+`FUTURE-PARITY-BACKLOG.9.1.0` proved that the former public `parse_mode` option was a whole-grammar override. At
+that audit boundary Perl, Dart, Julia, and Lua defaulted the override to seek, while Rust derived AND=consume and OR/default=seek before
 permitting an execution-wide override. The same default `Top::AND` grammar therefore already behaves differently
 across backends. The audit also proved that seek and consume are both legitimate low-level matcher algorithms, but
 found no semantic objective for letting a caller silently rewrite every nested rule.
@@ -140,13 +140,14 @@ cross-combinations, mixed parent/child families across every call mechanism, bar
 grouped, fluent, block, reserved-name, mixed-ownership, API/CLI retirement, descriptor shape, generated-v2 family
 derivation, trace attribution, both Lua ABIs, and native/reconstructed/generated/primary projections.
 
-## Implementation order
+## Implementation and admission
 
-Implementation is dependency-ordered under `FUTURE-PARITY-BACKLOG.9.1.2-.9`: neutral executable contract and
-migration inventory; Perl reference; Rust; Dart; Julia; Lua/LuaJIT; symmetric five-backend/generated/CLI admission;
-then public no-drift and parent closeout. This decision leaf changes no parser, compiler, runtime, descriptor,
-generated-source, CLI, fixture, test, or capability behavior. The active frontier returns to Rust logical helper
-rollout `.5.2.3` before the cursor implementation program is activated.
+Implementation completed in dependency order under `FUTURE-PARITY-BACKLOG.9.1.2-.9`: neutral executable contract
+and migration inventory; Perl reference; Rust; Dart; Julia; Lua/LuaJIT; symmetric five-backend/generated/CLI
+admission; recurring proof; then public no-drift. The executable ledger is 75 migration files,
+8 complete / 0 pending, and 60 rejected drift mutations. The recurring driver is
+`tools/check_rule_local_cursor_five_backend.sh`; explicit repeated-OR action-result shape remains separately owned
+by `.9.1.10`, so semantic parents remain active until that child is resolved.
 
 ## Consequences
 

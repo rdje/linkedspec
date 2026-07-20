@@ -171,9 +171,8 @@ LuaJIT by `tools/run_lua_local.sh`; canonical CI tracks it and `LINKEDSPEC_RUN_L
 dual-ABI driver. One recurring driver now composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, the selected 5x2x5
 primary projection, and generated/capability/language-coverage ledgers. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` directly or set `LINKEDSPEC_RUN_CURSOR_MATRIX=1` on the
-canonical local gate. The current cursor ledger is 7 complete / 1 pending with 73 governed migration files and
-56 rejected drift mutations after the Julia duplicate-slot proof path is classified under its existing cursor
-owner; final public no-drift remains separately owned.
+canonical local gate. The current cursor ledger is 8 complete / 0 pending with 75 governed migration files and
+60 rejected drift mutations after recurring and public no-drift admission.
 
 The duplicate-slot audit following that admission deliberately uses temporary probes rather than adding a new
 gate before the neutral contract exists. `LinkedSpec::Get`, `return_descriptor`, emitted/standalone source, and a
