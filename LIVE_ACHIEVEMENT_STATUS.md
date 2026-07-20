@@ -8,19 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.5` — Julia duplicate-slot parity is active task-tree-first from clean Dart commit
-  `0e2807c2` at ahead 248. Direct authored-slot matching, validation/descriptor/emitter/trace projection, exact
-  15-role admission, 5+2/41 governance, and the complete Julia driver (package 3,549, primary 65x2, corpus 105)
-  pass. The first canonical pass correctly required the new proof's cursor-inventory classification; that ledger
-  is now 73 files / 7+1 / 56. KM 641/4,720, mdBook/four doctrines, canonical root 7+5, cursor 288, primary 65x2,
-  Phase 0 1,031/1,031 in 623 seconds, and exact cleanup pass. The commit is prepared; Lua `.6` is not yet active.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.6` — dual-ABI Lua duplicate-slot parity is signoff-complete from clean Julia
+  commit `01f2e574` at ahead 249. Direct authored-slot matching, exact 112x2 admission, complete Lua 177x2 / primary
+  65x2 / corpus 105, 6+1/46 governance, KM 643/4,735, mdBook/four doctrines, canonical root 7+5 / cursor 288 /
+  primary 65x2 / Phase 0 1,031 in 653 seconds, and exact cleanup pass. The commit is prepared; `.7` is not active.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.5 — implement Julia duplicate regex-slot identity parity` is the active slice
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.6 — implement dual-ABI Lua duplicate regex-slot identity parity` is the active slice
   title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.6 — implement dual-ABI Lua duplicate regex-slot identity**
+  (DONE; commit prepared from clean base `01f2e574`).
+
+  **Result:** PUC Lua and LuaJIT ordered native/generated execution directly select an existing authored
+  alternative, map it to structural target/index identity, and project validation, descriptor/emitted metadata,
+  trace, and diagnostics without widening generated-v2 plans.
+
+  **Proof:** One byte-identical 15-role admission at 112x2; complete package 177x2 / primary 65x2 / corpus 105;
+  duplicate 6+1/46 and cursor 73/7+1/56 governance; KM 643/4,735; mdBook/four doctrines; canonical root 7+5,
+  cursor 288, primary 65x2, Phase 0 1,031/1,031 in 653 seconds; and exact generated-artifact cleanup pass.
+
+  **Next:** Commit and clean `.6`, then activate recurring/public closeout `.7` task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.5 — implement Julia duplicate regex-slot identity**
-  (DONE; commit prepared from clean base `0e2807c2`).
+  (DONE at clean commit `01f2e574`).
 
   **Result:** Julia ordered native/generated execution directly matches an authored alternative, maps it to
   structural target/index identity, and projects validation, descriptor/emitted metadata, trace, and diagnostics
@@ -30,7 +41,7 @@ Current execution status for interruption-safe batch workflow recovery.
   duplicate 5+2/41 and cursor 73/7+1/56 governance, KM 641/4,720, mdBook/four doctrines, canonical root 7+5,
   cursor 288, primary 65x2, Phase 0 1,031/1,031 in 623 seconds, and exact generated-artifact cleanup pass.
 
-  **Next:** Commit and clean `.5`, then activate dual-ABI Lua `.6` task-tree-first.
+  **Next:** Lua `.6` is active task-tree-first from this clean commit.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.4 — implement Dart duplicate regex-slot identity**
   (DONE at clean commit `0e2807c2`).

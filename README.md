@@ -185,7 +185,14 @@ gate. Julia `.5` now selects the authored alternative directly rather than match
 its compiler/runtime/emitter validation, descriptor/emitted/trace identity, and module-isolated exact 15-role
 consumer pass through normalized-spec generated source. Governance is 5 complete + 2 pending / 41 mutations.
 The complete Julia driver passes package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 passes
-1,031/1,031 in 623 seconds. Dual-ABI Lua `.6` and recurring/public `.7` remain dependency-ordered.
+1,031/1,031 in 623 seconds. Dual-ABI Lua `.6` now selects an existing authored alternative directly through one
+shared PUC Lua/LuaJIT implementation, validates compiled target/index identity at compile, runtime, emitter, and
+generated-plan boundaries, and publishes exact descriptor/emitted/trace identity without widening normalized
+generated-v2 plans. One byte-identical 15-role consumer passes 112 assertions per ABI; the complete Lua driver
+passes package 177x2, primary 65x2, and corpus 105/105. Governance is 6 complete + 1 pending / 46 mutations;
+recurring/public closeout `.7` remains dependency-ordered. Final Lua signoff passes Knowledge Map 643/4,735,
+mdBook/four doctrines, canonical root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 653
+seconds, followed by exact generated-artifact cleanup.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

@@ -12,6 +12,7 @@ local M = {}
 
 M.ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
 M.RULE_LOCAL_CURSOR_CONTRACT_ID = "linkedspec-rule-local-cursor-v1"
+M.REGEX_SLOT_IDENTITY_CONTRACT_ID = "linkedspec-duplicate-regex-slot-identity-v1"
 
 local ENTRY_RULE_SELECTION_BASES = {
   explicit_selector = true,
@@ -494,6 +495,61 @@ local function validate_no_removed_aggregate_selectors(compiled)
   end
 end
 
+local function authored_regex_count(rule)
+  local count = 0
+  for _, element in ipairs(rule.body_elements) do
+    if spec_ast.node_type(element.kind) == "RegexBodyElementKind" then count = count + 1 end
+  end
+  return count
+end
+
+function M.validate_compiled_regex_slot_identities(compiled)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("validate_compiled_regex_slot_identities expects CompiledSpec")
+  end
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local rule = compiled.rules_by_label[label]
+    if rule == nil then fail("compiled rule order refers to missing rule '" .. label .. "'") end
+    for _, edge in ipairs(rule.action_edges) do
+      local target = #edge.targets == 1 and edge.targets[1] or nil
+      local target_label = target and target.label or label
+      local identity_index = type(edge.child_regex_index) == "number" and edge.child_regex_index or -1
+      local target_rule = compiled.rules_by_label[target_label]
+      local target_regex_count = target_rule and authored_regex_count(target_rule) or 0
+      local identity_is_valid = target ~= nil and type(target_label) == "string" and
+        identity_index % 1 == 0 and identity_index >= 0 and identity_index < target_regex_count and
+        target.index == identity_index and type(edge.regex_index) == "number" and edge.regex_index % 1 == 0 and
+        edge.regex_index >= 0 and edge.regex_index < #rule.regex_patterns
+      if not identity_is_valid then
+        spec_validator.regex_slot_identity_invalid(label, tostring(target_label), identity_index)
+      end
+    end
+  end
+end
+
+function M.compiled_regex_slot_identities_for(rule, regex_index)
+  if M.node_type(rule) ~= "CompiledRule" then
+    fail("compiled_regex_slot_identities_for expects CompiledRule")
+  end
+  if type(regex_index) ~= "number" or regex_index % 1 ~= 0 or regex_index < 0 or
+      regex_index >= #rule.regex_patterns then
+    fail("compiled regex slot index is out of range")
+  end
+  local identities = {}
+  for _, edge in ipairs(rule.action_edges) do
+    if edge.regex_index == regex_index and #edge.targets == 1 then
+      identities[#identities + 1] = {
+        target_rule = edge.targets[1].label,
+        regex_index = edge.child_regex_index,
+      }
+    end
+  end
+  if #identities == 0 then
+    identities[1] = { target_rule = rule.label, regex_index = regex_index }
+  end
+  return identities
+end
+
 function M.compile_spec(spec, options)
   if spec_ast.node_type(spec) ~= "SpecFile" then fail("compile_spec expects SpecFile") end
   options = options or {}
@@ -567,6 +623,7 @@ function M.compile_spec(spec, options)
         function_registry = registry,
         dependency_regex_state = dependency_state,
       }, COMPILED_SPEC_MT)
+      M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
       return compiled
     end,
@@ -883,6 +940,7 @@ local function descriptor_state_to_json(state)
       compiled_dependency_regex_model = "compiled_dependency_regex_state",
       entry_rule_contract = M.ENTRY_RULE_CONTRACT_ID,
       cursor_contract = M.RULE_LOCAL_CURSOR_CONTRACT_ID,
+      regex_slot_identity_contract = M.REGEX_SLOT_IDENTITY_CONTRACT_ID,
       definition_order = typed_array(compiled.definition_order),
       compiled_rule_order = typed_array(compiled.compiled_rule_order),
       redefined_rule_labels = typed_array(compiled.redefined_rule_labels),

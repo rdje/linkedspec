@@ -10,31 +10,29 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.5` — Julia duplicate regex-slot identity repair/admission
-  is fully verified, documented, and cleaned; its commit is prepared.
-- latest_commit: `0e2807c2` — `FUTURE-PARITY-BACKLOG.9.1.8.1.4 - implement Dart duplicate regex slot identity`
-  (ahead: 248; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.5 - implement Julia duplicate regex slot identity`.
-- active_work_unit: `.9.1.8.1.5` signoff-complete and staged from clean base `0e2807c2`; no next leaf is active.
-- next_action: commit `.9.1.8.1.5`, clear/verify the brief and clean tree, then activate dual-ABI Lua `.6`
-  task-tree-first.
-- current_duplicate_slot: Perl, Rust, Dart, and Julia ordered handlers match required compiled slots directly; repeated,
-  cross-target, control, choice, loaded/reconstructed, descriptor, emitted/generated, trace, primary, capture, and
-  diagnostic roles are admitted. Julia `match_runtime_regex_slot` preserves the authored index without singleton
-  recompile/reindex; compiled action edges map it to target/index identity. Shared compiler/runtime/emitter
-  validation and normalized-spec generated-v2 reconstruction keep `{label,family}` plans unchanged. Governance
-  is 5 complete + 2 pending / 41 mutations.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.6` — dual-ABI Lua duplicate regex-slot identity repair/
+  admission is fully verified, documented, cleaned, and prepared for commit.
+- latest_commit: `01f2e574` — `FUTURE-PARITY-BACKLOG.9.1.8.1.5 - implement Julia duplicate regex slot identity`
+  (ahead: 249; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.6 - implement dual ABI Lua duplicate regex slot identity`.
+- active_work_unit: `.9.1.8.1.6` signoff-complete from clean base `01f2e574`; no next leaf is active.
+- next_action: stage and commit `.9.1.8.1.6`, clear/verify the brief and clean tree, then activate recurring/public
+  duplicate-slot closeout `.7` task-tree-first.
+- current_duplicate_slot: Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT ordered handlers match required compiled/
+  authored slots directly. Lua maps parent indices to target/child identity, validates compile/runtime/emitter/
+  generated-plan boundaries, and preserves normalized-spec generated-v2 `{label,family}` plans. One shared
+  15-role consumer passes 112x2; complete package 177x2, primary 65x2, corpus 105, and governance 6 complete +
+  1 pending / 46 mutations pass. Recurring/public closeout remains `.7`.
 - current_root_selection: ADR `0046` precedence is explicit selector > first authored `Rule::` > first authored
   `Rule:`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions plus the selected five-command/default-POSIX
   5x2x6 projection and support ledgers pass from one recurring driver. Governance is 7 complete / 0 pending,
   25 required current documents, 19 stale-claim guards, and 54 rejected mutations. No resolver or generated-plan
   behavior changed. Hand-authored selection fixtures use lifecycle `I`; the fixed request-trace fixture retains
   canonical `E` bytes.
-- current_signoff: Julia duplicate-slot admission passes 121 focused assertions; the complete Julia driver passes
-  package 3,549, primary 65x2, and corpus 105/105. Neutral governance is 5 fixtures / 2 diagnostics / 6 runtime
-  rows / 5+2 rollout / 41 mutations. Cursor governance classifies the new Julia proof at 73 files / 7+1 / 56.
-  KM 641/4,720, mdBook/four doctrines, canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
-  623 seconds pass. Generated book, Julia depot, and Python caches are absent; free space is 63 GiB.
+- current_signoff: Lua duplicate-slot proof passes 112x2, package 177x2, primary 65x2, and corpus 105/105. Neutral
+  governance is 5 fixtures / 2 diagnostics / 6 runtime rows / 6+1 rollout / 46 mutations; cursor is unchanged at
+  73/7+1/56. KM 643/4,735, mdBook/four doctrines, canonical root 7+5, cursor 288, primary 65x2, and Phase 0
+  1,031/1,031 in 653 seconds pass. Book/native/Python/target/log/bin task artifacts are absent; free space is 47 GiB.
 - current_cursor_admission: One recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, five selected
   primary cases across default/POSIX environments, and all support ledgers. Exact runtime proof passes at Perl
   288, Julia 104, Lua 119x2, primary 5x2x5, capability 80/0/0, and coverage 246/105+1/122. Governance is
@@ -52,5 +50,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.8.1.5` is signoff-complete and staged for its prepared commit;
-  no background job or generated task artifact remains.
+- blockers: none. in_flight_uncommitted: `.9.1.8.1.6` is signoff-complete and awaiting its prepared commit; no
+  background job or generated task artifact remains.

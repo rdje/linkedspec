@@ -6292,13 +6292,54 @@ before implementation.
     to the existing Julia cursor-owner group moves only that cross-contract inventory from 72 to 73 files.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.6`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and admit dual-ABI Lua duplicate-slot identity parity.
   Dependencies: `.9.1.8.1.5`
   Acceptance: Run one shared-source exact consumer on PUC Lua and LuaJIT across native, normalized, reconstructed,
     generated-v2, trace, primary, and corpus roles with identical stable slot identity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-20.** Activated task-tree-first from clean Julia-admission commit
+    `01f2e574` at ahead 249. ADR `0047`, duplicate-slot/Lua Knowledge Map facts, neutral checker, prior dual-ABI
+    admission topology, and Toolbox routes were retrieved before implementation. Baseline values were exact but
+    ordered matching compiled a singleton and reindexed branch zero. Lua now selects the existing authored slot,
+    maps and validates target/child identity at every trust boundary, and publishes descriptor/emitted/trace
+    identity plus both portable diagnostics. One shared 15-role consumer passes 112 assertions on PUC Lua and
+    LuaJIT. The complete Lua driver passes package 177x2, primary 65x2, and corpus 105/105. Duplicate governance
+    is 6 complete + 1 pending / 46 mutations; cursor governance remains 73 files / 7+1 / 56. KM 643/4,735,
+    mdBook, all four doctrines, JSON/Python/Lua/shell/whitespace, canonical root 7+5, cursor 288, reference primary
+    65x2, and Phase 0 1,031/1,031 in 653 seconds pass. Exact cleanup removes the consumed 11 MiB book and 28 KiB
+    Python cache after the complete Lua driver removed both native trees; no task artifact remains.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.6 - implement dual ABI Lua duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE BASELINE** — Retrieve ADR `0047`, neutral/Lua Knowledge Map and generated/cursor
+    precedents, then prove all five native fixtures already return exact values before implementation.
+  - [x] **PRESERVE REQUIRED IDENTITY DIRECTLY** — Replace singleton matching plus index rewriting with an explicit
+    existing authored-alternative matcher while retaining complete-alternation choice priority.
+  - [x] **PROJECT / VALIDATE / DIAGNOSE** — Validate structural slots across native and artifact trust boundaries;
+    publish descriptor/emitted identity, native/generated trace, and both portable invariants.
+  - [x] **ADMIT BOTH LUA ABIS / NO REGRESSION** — Run one byte-identical 15-role consumer on PUC Lua and LuaJIT;
+    pass complete package 177x2, primary 65x2, and 105-case corpus proof.
+  - [x] **LOCKSTEP / COMMIT** — Align governance/task/roadmaps/live/memory/changes/notes/README/book/KM, pass
+    canonical proof and exact cleanup, commit `.6`, clear the brief, and activate recurring/public `.7` only from
+    a clean boundary.
+
+  #### Implementation Evidence
+
+  - `match_runtime_regex_slot` addresses an existing alternative in the rule-owned compiled alternation and
+    returns its authored index. Ordered/repeated execution no longer builds a singleton and reindexes branch zero;
+    full `runtime_match` remains the earliest-start/first-authored choice owner.
+  - Compiled action edges translate parent indexes to `{target_rule, child_regex_index}` for the ordered invariant
+    and `lua_runtime:regex_slot_selected`, including cross-target `First#0,Second#0` projection.
+  - `validate_compiled_regex_slot_identities` protects compile, runtime-engine, source-emitter, and generated-plan
+    boundaries. Portable spec/runtime/generated failures retain the contract's exact target/index fields.
+  - Lua descriptors and emitted v2 modules publish `linkedspec-duplicate-regex-slot-identity-v1`; normalized
+    `SpecFile` JSON remains the generated payload and public plans remain exactly `{label, family}`.
+  - `lua/test/duplicate_regex_slot_identity_contract_test.lua` executes each of 15 declared roles once from the
+    same source on both ABIs. It passes 112 assertions per ABI; complete Lua proof passes package 177x2, primary
+    65x2, and corpus 105/105. Governance advances only Lua to 6 complete + 1 pending / 46 mutations.
+  - Lua's interpreter chunk is at the Lua 5.1 200-local ceiling. The implementation avoids new chunk locals by
+    using the existing module namespace; a Knowledge Map card preserves this maintenance constraint.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.7`
   Status: `pending`
@@ -8880,7 +8921,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `done` | Required-slot native/generated execution and one exact 15-role Rust admission pass at 3+4/31; complete Rust, KM/mdBook/doctrines, canonical 1,031/619s, and cleanup signoff pass before Dart `.4`. |
 | 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `done` | Direct authored-slot matching and exact 15-role Dart admission pass at 4+3/36; complete Dart, KM/mdBook/doctrines, canonical 1,031/616s, and cleanup signoff precede Julia `.5`. |
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `done` | Direct authored-slot matching and exact module-isolated 15-role Julia admission pass at 5+2/41; package 3,549, primary 65x2, corpus 105, KM 641/4,720, canonical 1,031/623s, and cleanup signoff pass before Lua `.6`. |
-| 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `pending` | Implement and admit PUC Lua plus LuaJIT parity. |
+| 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `done` | Direct authored-slot matching and one shared exact 15-role consumer pass 112x2; complete package 177x2, primary 65x2, corpus 105, 6+1/46 governance, KM 643/4,735, canonical 1,031/653s, and cleanup signoff pass before `.7`. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `pending` | Close recurring five-backend and public no-drift admission. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
@@ -9959,6 +10000,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Dual-ABI Lua duplicate-slot `.9.1.8.1.6` selects an existing authored alternative directly,
+  validates target/child identity across compile/runtime/emitter/generated-plan boundaries, projects exact
+  descriptor/emitted/trace/diagnostic identity, and passes one byte-identical 15-role consumer at 112x2. The
+  complete Lua driver passes package 177x2, primary 65x2, corpus 105, duplicate governance 6+1/46, and unchanged
+  cursor governance 73/7+1/56. KM 643/4,735, mdBook/four doctrines, canonical root 7+5, cursor 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 653 seconds pass. Exact cleanup completes signoff before the commit and
+  clean recurring/public `.7` pivot.
+- `2026-07-20`: Clean commit `01f2e574` lands Julia duplicate-slot repair/admission `.9.1.8.1.5`; tracked and
+  untracked root state is clean, the brief is zero bytes, task caches/book output are absent, free disk is 63 GiB,
+  and ahead is 249. Dual-ABI Lua `.9.1.8.1.6` activates task-tree-first before Lua implementation/admission.
 - `2026-07-20`: Julia duplicate-slot `.9.1.8.1.5` now matches existing authored alternatives directly, projects
   structural target/index identity through validation/descriptor/emitter/trace, and passes one module-isolated
   exact 15-role consumer (121 assertions), complete Julia package 3,549 / primary 65x2 / corpus 105, 5+2/41

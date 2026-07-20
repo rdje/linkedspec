@@ -593,11 +593,27 @@ normalized `SpecFile` JSON and keeps plan rows exactly `{label, family}`.
 `julia_runtime:regex_slot_selected` supplies ordered/choice trace identity, and
 portable spec/runtime/generated errors preserve invalid target/index fields.
 
+Lua `.6` removes the last behavior-preserving singleton/reindex route. Both PUC
+Lua and LuaJIT call `match_runtime_regex_slot` with the complete compiled
+alternation and the required authored index. The matcher invokes only that
+existing alternative under the rule's cursor policy and returns its original
+index. Full-alternation choice remains unchanged. Compiled action edges map the
+parent index to target rule/child index for the ordered invariant and
+`lua_runtime:regex_slot_selected`, including `First#0`, `Second#0` cross-target
+sequences.
+
+Lua validates compiled slot identity after compilation and before runtime-engine,
+emitter, and generated-plan trust boundaries. Descriptor and emitted-module
+metadata publish the neutral contract id. Emitted source remains v2/format 2,
+retains normalized `SpecFile` JSON plus exact `{label, family}` plans, and exposes
+portable invalid-slot and ordered-invariant diagnostics. One shared 15-role
+consumer runs unchanged on PUC Lua and LuaJIT.
+
 The executable neutral contract is
 `linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
 v2 because reconstructed compiled state already retains slot identity. Perl,
-Rust, Dart, and Julia are admitted through `.2-.5`; dual-ABI Lua and
-recurring/public closeout remain `.6-.7`.
+Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted through `.2-.6`;
+recurring/public closeout remains `.7`.
 
 ## 9. Zero-Progress Guard
 

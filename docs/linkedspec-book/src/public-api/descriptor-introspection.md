@@ -9,7 +9,7 @@
 > `resolved_edges`. Perl, Rust, Dart, Julia, and dual-ABI Lua generated-source v2, option/CLI removal, and composed
 > cursor admission are complete through `.9.1.7.6`; recurring five-backend admission `.9.1.8` now composes all
 > six runtime legs and selected 5x2x5 primary proof. Duplicate regex-slot descriptor identity is admitted on Perl,
-> Rust, Dart, and Julia; the dual-ABI Lua lock and public no-drift remain dependency-ordered. Independently, root-selection parity is closed
+> Rust, Dart, Julia, PUC Lua, and LuaJIT; only recurring/public no-drift remains dependency-ordered. Independently, root-selection parity is closed
 > at 7 complete / 0 pending. Its recurring
 > contract composes every immutable root-selection descriptor identity; Julia root admission composes the
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned

@@ -32,6 +32,7 @@ TOP_LEVEL_FIELDS = {
     "rust_admission",
     "dart_admission",
     "julia_admission",
+    "lua_admission",
     "implementation_inventory",
     "migration",
     "rollout",
@@ -120,8 +121,8 @@ INVENTORY = [
     (
         "lua",
         "puc_lua",
-        "match_required_pattern_then_reindex",
-        "behavior_matches",
+        "match_required_slot_directly",
+        "implemented",
         "first_authored",
         "preserved",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.6",
@@ -129,8 +130,8 @@ INVENTORY = [
     (
         "lua",
         "luajit",
-        "match_required_pattern_then_reindex",
-        "behavior_matches",
+        "match_required_slot_directly",
+        "implemented",
         "first_authored",
         "preserved",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.6",
@@ -142,7 +143,7 @@ ROLLOUT = [
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
     ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
     ("julia", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.5"),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
+    ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
     (
         "recurring_and_public_no_drift",
         "pending",
@@ -228,6 +229,29 @@ DART_ADMISSION = {
 JULIA_ADMISSION = {
     "consumer": MIGRATION["julia_consumer"],
     "canonical_driver": "tools/run_julia_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "normalized_spec_file_json",
+    "roles": [
+        "neutral_fixtures",
+        "native_ordered",
+        "native_choice",
+        "repeated_ordered",
+        "repeated_control",
+        "cross_target",
+        "loaded",
+        "reconstructed",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "native_trace",
+        "generated_trace",
+        "primary_command",
+        "invalid_identity_diagnostics",
+    ],
+}
+LUA_ADMISSION = {
+    "consumer": MIGRATION["lua_consumer"],
+    "canonical_driver": "tools/run_lua_local.sh",
     "ordered_mechanism": "match_required_slot_directly",
     "generated_slot_payload": "normalized_spec_file_json",
     "roles": [
@@ -535,6 +559,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     require(contract["rust_admission"] == RUST_ADMISSION, "Rust admission drifted")
     require(contract["dart_admission"] == DART_ADMISSION, "Dart admission drifted")
     require(contract["julia_admission"] == JULIA_ADMISSION, "Julia admission drifted")
+    require(contract["lua_admission"] == LUA_ADMISSION, "Lua admission drifted")
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list), "implementation inventory must be an array")
@@ -603,6 +628,7 @@ def validate_filesystem_contract() -> None:
         ROOT / RUST_ADMISSION["consumer"],
         ROOT / DART_ADMISSION["consumer"],
         ROOT / JULIA_ADMISSION["consumer"],
+        ROOT / LUA_ADMISSION["consumer"],
     ]
     require(all(path.is_file() for path in required_paths), "neutral contract file is missing")
     index_text = (ROOT / "docs" / "decisions" / "INDEX.md").read_text(encoding="utf-8")
@@ -642,6 +668,10 @@ def validate_filesystem_contract() -> None:
     require(
         f"require_tracked_file {JULIA_ADMISSION['consumer']}" in ci_text,
         "canonical CI omits Julia consumer tracked input",
+    )
+    require(
+        f"require_tracked_file {LUA_ADMISSION['consumer']}" in ci_text,
+        "canonical CI omits Lua consumer tracked input",
     )
     require(
         "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
@@ -690,6 +720,16 @@ def validate_filesystem_contract() -> None:
     require(
         'Pkg.test()' in julia_driver_text,
         "Julia canonical driver omits the Julia consumer suite",
+    )
+    lua_consumer_text = (ROOT / LUA_ADMISSION["consumer"]).read_text(encoding="utf-8")
+    require(
+        all(f"local function role_{role}" in lua_consumer_text for role in LUA_ADMISSION["roles"]),
+        "Lua consumer role inventory drifted",
+    )
+    lua_driver_text = (ROOT / LUA_ADMISSION["canonical_driver"]).read_text(encoding="utf-8")
+    require(
+        lua_driver_text.count(LUA_ADMISSION["consumer"]) == 2,
+        "Lua canonical driver must execute the consumer on both ABIs",
     )
     linked_re_text = (ROOT / "perl" / "LinkedRE.pm").read_text(encoding="utf-8")
     emitter_text = (ROOT / "perl" / "LinkedSpec" / "HandlerVariantEmitter.pm").read_text(encoding="utf-8")
@@ -767,6 +807,27 @@ def validate_filesystem_contract() -> None:
         "LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT" in julia_emitter_text,
         "Julia generated-source slot-contract projection is missing",
     )
+    lua_matching_text = (ROOT / "lua" / "src" / "linkedspec" / "matching.lua").read_text(encoding="utf-8")
+    lua_engine_text = (ROOT / "lua" / "src" / "linkedspec" / "interpreter.lua").read_text(encoding="utf-8")
+    lua_compiler_text = (ROOT / "lua" / "src" / "linkedspec" / "compiled_spec.lua").read_text(encoding="utf-8")
+    lua_emitter_text = (ROOT / "lua" / "src" / "linkedspec" / "source_emitter.lua").read_text(encoding="utf-8")
+    require(
+        "match_runtime_regex_slot" in lua_matching_text,
+        "Lua required-slot matcher is missing",
+    )
+    require(
+        "lua_runtime:regex_slot_selected" in lua_engine_text
+        and "assert_ordered_regex_slot_identity" in lua_engine_text,
+        "Lua native/generated slot trace or invariant seam is missing",
+    )
+    require(
+        "regex_slot_identity_contract" in lua_compiler_text,
+        "Lua descriptor slot-contract projection is missing",
+    )
+    require(
+        "LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT" in lua_emitter_text,
+        "Lua generated-source slot-contract projection is missing",
+    )
 
 
 def expect_mutation_failure(
@@ -809,6 +870,9 @@ def mutation_checks(contract: dict[str, Any]) -> int:
     def regress_julia(value: dict[str, Any]) -> None:
         value["rollout"][4]["status"] = "pending"
 
+    def regress_lua(value: dict[str, Any]) -> None:
+        value["rollout"][5]["status"] = "pending"
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("contract id", lambda value: value.__setitem__("contract_id", "stale")),
         ("duplicate legality", lambda value: value["identity"].__setitem__("duplicate_pattern_text_is_legal", False)),
@@ -838,17 +902,22 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Julia admission consumer", lambda value: value["julia_admission"].__setitem__("consumer", "julia/test/other.jl")),
         ("Julia admission role", lambda value: value["julia_admission"]["roles"].pop()),
         ("Julia ordered mechanism", lambda value: value["julia_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
+        ("Lua admission consumer", lambda value: value["lua_admission"].__setitem__("consumer", "lua/test/other.lua")),
+        ("Lua admission role", lambda value: value["lua_admission"]["roles"].pop()),
+        ("Lua ordered mechanism", lambda value: value["lua_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
         ("inventory omission", remove_inventory),
         ("Perl inventory regression", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift")),
         ("Rust inventory regression", lambda value: value["implementation_inventory"][1].__setitem__("ordered_status", "drift")),
         ("Dart inventory regression", lambda value: value["implementation_inventory"][2].__setitem__("ordered_status", "drift")),
         ("Julia inventory regression", lambda value: value["implementation_inventory"][3].__setitem__("ordered_status", "drift")),
+        ("Lua inventory regression", lambda value: value["implementation_inventory"][4].__setitem__("ordered_status", "drift")),
         ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
         ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
         ("Perl rollout regression", regress_perl),
         ("Rust rollout regression", regress_rust),
         ("Dart rollout regression", regress_dart),
         ("Julia rollout regression", regress_julia),
+        ("Lua rollout regression", regress_lua),
         ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
         ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
     ]

@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.6 — implement dual-ABI Lua duplicate regex-slot identity
+
+Lua ordered execution now selects an existing authored alternative directly through
+`match_runtime_regex_slot`. PUC Lua and LuaJIT share the same source and PCRE2 adapter contract. Ordered and
+repeated AND pass the required alternative index into the full compiled alternation instead of compiling a
+singleton and rewriting branch zero. OR/default choice still evaluates every alternative with earliest-start,
+first-authored priority.
+
+Compiled action edges translate parent indexes into structural `{target_rule, regex_index}` identity. One
+validator checks the executed child index, target-reference agreement, authored target bound, and parent dispatch
+bound after compilation and before runtime-engine, emitter, or generated-plan use. Descriptors and emitted Lua v2
+modules publish `linkedspec-duplicate-regex-slot-identity-v1`; normalized `SpecFile` JSON and exact
+`{label, family}` plans remain unchanged. Native/generated trace emits `lua_runtime:regex_slot_selected`, and
+stable spec/runtime/generated errors preserve both portable invariants.
+
+One contract-declared 15-role Lua consumer runs unchanged on both ABIs and passes 112 assertions per runtime.
+The complete Lua driver passes all 177 package tests per ABI, primary CLI 65/65 in default and POSIX environments,
+and corpus 105/105. Neutral governance advances only Lua to 6 complete + 1 pending and rejects 46 mutations;
+cursor governance remains 73 migration files / 7+1 / 56. The complete driver consumes and removes its disposable
+native trees, and no generated binary or cache remains in the repository.
+
+Final lockstep passes Knowledge Map 643/4,735, mdBook, all four doctrines, canonical root 7+5, cursor 288,
+reference primary 65x2, and Phase 0 1,031/1,031 in 653 seconds. Exact cleanup removes the consumed 11 MiB book and
+28 KiB Python cache; no LinkedSpec task-local native, target, log, or binary artifact remains.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.5 — implement Julia duplicate regex-slot identity
 
 Julia ordered execution now selects an authored `RuntimeRegexAlternative` directly through

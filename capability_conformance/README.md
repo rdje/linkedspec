@@ -110,7 +110,7 @@ duplicates, a non-duplicate repeated control, and cross-target duplicates. The c
 invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
 inventory, migration paths, and the seven-leg rollout. Run
 `python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
-and rejects 41 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
+and rejects 46 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
 mutations. Perl `.2` is composed-admitted through 12 exact roles. Rust `.3` is composed-admitted through 15 exact
 roles covering native, reconstructed, loaded, descriptor, emitted/generated, native/generated trace, primary,
 all five neutral fixtures, and typed diagnostics. Rust matches required slots directly, retains combined choice,
@@ -118,8 +118,10 @@ publishes descriptor/emitted contract identity, and keeps generated v2 plans min
 admitted through the same 15-role shape over direct authored-alternative matching, normalized-spec generated
 payload, descriptor/emitted/trace identity, primary, and diagnostics. Julia `.5` is now admitted through a
 module-isolated 15-role consumer over direct authored-alternative matching,
-normalized-spec generated payload, descriptor/emitted/trace identity, primary, and diagnostics. Governance is
-5 complete / 2 pending with 41 rejected mutations; dual-ABI Lua `.6` is the next behavior-lock owner.
+normalized-spec generated payload, descriptor/emitted/trace identity, primary, and diagnostics. Dual-ABI Lua
+`.6` runs one unchanged 15-role consumer on PUC Lua and LuaJIT, replaces required-pattern/reindex with direct
+authored-alternative matching, and preserves normalized-spec generated v2. Governance is 6+1 with 46 rejected
+mutations; recurring/public no-drift `.7` is the final owner.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

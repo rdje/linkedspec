@@ -1277,6 +1277,30 @@ UTF-8 input, non-boundary offsets, and parse modes are typed failures. The gate
 passes 60/60 on PUC Lua and 60/60 on LuaJIT and leaves no native artifact;
 compiled rule dispatch remains `.4.2`.
 
+Required-slot execution now addresses the authored alternative directly:
+
+```lua
+local required = linkedspec.match_runtime_regex_slot(
+  alternatives,
+  1,
+  "aa",
+  1,
+  "consume"
+)
+assert(required.alternative_index == 1)
+```
+
+This operation is distinct from choice matching. Ordered and repeated-AND
+execution supply the required index; OR/default continues to evaluate the full
+alternation. `validate_compiled_regex_slot_identities` checks target-rule/child-
+index identity at compiler, runtime-engine, emitted-source, and generated-plan
+boundaries. Descriptor metadata and emitted v2 modules publish
+`linkedspec-duplicate-regex-slot-identity-v1`; generated plans remain exactly
+label/family rows. High trace emits `lua_runtime:regex_slot_selected` with rule,
+selection role, target rule, and regex index. The same 15-role admission source
+passes 112 assertions on PUC Lua and LuaJIT; the complete driver retains 177
+package tests per ABI, primary 65/65 in both environments, and corpus 105/105.
+
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with

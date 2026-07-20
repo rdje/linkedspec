@@ -144,6 +144,23 @@ function M.runtime_engine(compiled, options)
     "rules=" .. #compiled.compiled_rule_order ..
       " functions=" .. #compiled.function_registry.entries,
     function()
+      local valid_slots, slot_error = pcall(compiled_spec.validate_compiled_regex_slot_identities, compiled)
+      if not valid_slots then
+        if type(slot_error) ~= "table" or slot_error.code ~= "regex_slot_identity_invalid" then
+          error(slot_error, 0)
+        end
+        fail(slot_error.message, {
+          diagnostic = runtime_diagnostic({ spec_name = options.spec_name, spec_path = options.spec_path }, {
+            stage = slot_error.stage,
+            code = slot_error.code,
+            summary = "Compiled regex slot identity is invalid",
+            detail = slot_error.message,
+            rule_label = slot_error.fields.rule_label,
+            target_rule = slot_error.fields.target_rule,
+            regex_index = slot_error.fields.regex_index,
+          }),
+        })
+      end
       compiled_spec.validate_no_removed_aggregate_selectors(compiled)
       return setmetatable({
         compiled_spec = compiled,
@@ -182,6 +199,10 @@ runtime_diagnostic = function(engine, fields)
     "helper_name",
     "actual_arity",
     "expected_arity",
+    "target_rule",
+    "regex_index",
+    "expected_regex_index",
+    "actual_regex_index",
   }) do
     if fields[name] ~= nil then diagnostic[name] = fields[name] end
   end
@@ -3563,14 +3584,56 @@ local function trace_regex_decision(ctx, rule, one, cursor_before, reason)
 end
 
 local function match_specific(engine, rule, index, ctx, execution_policy)
-  local key = rule.label .. ":" .. index
-  local alternation = engine.regex_cache[key]
+  local alternation = engine.regex_cache[rule.label]
   if not alternation then
-    alternation = matching.compile_runtime_regex_alternation({ rule.regex_patterns[index + 1] })
-    engine.regex_cache[key] = alternation
+    alternation = matching.compile_runtime_regex_alternation(rule)
+    engine.regex_cache[rule.label] = alternation
   end
-  local one = alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
-  return one and matching.reindex_runtime_regex_match(one, index) or nil
+  return matching.match_runtime_regex_slot(
+    alternation,
+    index,
+    ctx.input,
+    ctx.cursor_byte,
+    execution_policy.cursor_policy
+  )
+end
+
+function M.assert_ordered_regex_slot_identity(
+    rule_label,
+    expected_target_rule,
+    expected_regex_index,
+    actual_target_rule,
+    actual_regex_index
+  )
+  if expected_target_rule == actual_target_rule and expected_regex_index == actual_regex_index then return end
+  local message = "ordered_regex_slot_identity_lost stage=execute_rule rule_label=" .. rule_label ..
+    " target_rule=" .. expected_target_rule .. " expected_regex_index=" .. expected_regex_index ..
+    " actual_regex_index=" .. actual_regex_index
+  fail(message, {
+    diagnostic = runtime_diagnostic({}, {
+      stage = "execute_rule",
+      code = "ordered_regex_slot_identity_lost",
+      summary = "Lua ordered regex-slot identity invariant failed",
+      detail = message,
+      rule_label = rule_label,
+      target_rule = expected_target_rule,
+      expected_regex_index = expected_regex_index,
+      actual_regex_index = actual_regex_index,
+    }),
+  })
+end
+
+function M.trace_regex_slot_selected(ctx, rule, regex_index, selection_role)
+  for _, identity in ipairs(compiled_spec.compiled_regex_slot_identities_for(rule, regex_index)) do
+    runtime_trace_event(
+      ctx,
+      trace.TRACE_MARK,
+      "lua_runtime:regex_slot_selected",
+      "rule_label=" .. rule.label .. " selection_role=" .. selection_role ..
+        " target_rule=" .. identity.target_rule .. " regex_index=" .. identity.regex_index,
+      trace.TRACE_HIGH
+    )
+  end
 end
 
 local function accept_match(engine, rule, one, ctx, accumulator)
@@ -3623,6 +3686,16 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator, execution
           " mode=AND expected_index=" .. tostring(index)
       )
       if not one then return false end
+      local expected = compiled_spec.compiled_regex_slot_identities_for(rule, index)[1]
+      local actual = compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)[1]
+      M.assert_ordered_regex_slot_identity(
+        rule.label,
+        expected.target_rule,
+        expected.regex_index,
+        actual.target_rule,
+        actual.regex_index
+      )
+      M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
       accept_match(engine, rule, one, ctx, accumulator)
     end
     return true
@@ -3646,6 +3719,24 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator, execution
     "cursor_policy=" .. execution_policy.cursor_policy .. " entry_regex=" .. tostring(entry_index)
   )
   if not one then return false end
+  local selection_role = entry_index > 0 and "ordered_required" or "choice"
+  if selection_role == "ordered_required" then
+    local expected = compiled_spec.compiled_regex_slot_identities_for(rule, entry_index)[1]
+    local actual = compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)[1]
+    M.assert_ordered_regex_slot_identity(
+      rule.label,
+      expected.target_rule,
+      expected.regex_index,
+      actual.target_rule,
+      actual.regex_index
+    )
+  end
+  M.trace_regex_slot_selected(
+    ctx,
+    rule,
+    one.alternative_index,
+    selection_role
+  )
   accept_match(engine, rule, one, ctx, accumulator)
   return true
 end
@@ -4075,6 +4166,10 @@ function M.to_json(value)
       "helper_name",
       "actual_arity",
       "expected_arity",
+      "target_rule",
+      "regex_index",
+      "expected_regex_index",
+      "actual_regex_index",
     }) do
       if value[name] ~= nil then diagnostic[name] = value[name] end
     end

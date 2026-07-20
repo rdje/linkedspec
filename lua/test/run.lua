@@ -354,11 +354,20 @@ test("trace sinks and direct runtime entrypoints stay caller-owned and result-ne
       json.encode(linkedspec.interpreter.to_json(untraced)),
       "direct trace result neutrality"
     )
-    assert_equal(#linkedspec.trace_events(direct_emitter), 5, "selection plus parse and runtime rule scopes")
+    assert_equal(
+      #linkedspec.trace_events(direct_emitter),
+      6,
+      "selection, regex-slot identity, parse, and runtime rule scopes"
+    )
     assert_equal(
       linkedspec.trace_events(direct_emitter)[1].topic,
       "lua_runtime:entry_rule_selection",
       "selection precedes runtime scopes"
+    )
+    assert_equal(
+      linkedspec.trace_events(direct_emitter)[4].topic,
+      "lua_runtime:regex_slot_selected",
+      "runtime trace includes structural regex-slot identity"
     )
     assert_contains(table.concat(direct_stdout), "lua_runtime:parse top_rule=Top", "direct parse enter")
     assert_contains(table.concat(direct_stdout), "matched=true cursor=1", "direct parse exit")

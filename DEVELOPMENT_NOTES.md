@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.6` — make Lua's correct value behavior structurally direct):
+  Lua already returned every neutral fixture value correctly, but `match_specific` compiled only the required
+  pattern, received alternative zero, and rebuilt the match with the expected index. `match_runtime_regex_slot`
+  now selects the existing alternative from the rule's full compiled alternation and returns that authored index.
+  The engine cache is consequently rule-owned for both required and choice paths; choice semantics are unchanged.
+
+  Parent alternative index is not portable identity. Compiled action edges map it to target rule plus child regex
+  index, including the cross-target parent sequence `0,1` becoming `First#0,Second#0`. This mapping drives the
+  ordered assertion and high-level `lua_runtime:regex_slot_selected` event. The pre-existing generic trace-count
+  lock correctly detected the new event and now names it explicitly.
+
+  Caller-mutated compiled Lua tables make every artifact boundary a trust boundary. The shared validator checks
+  `child_regex_index`, its equality with the target ref, the target's authored body-regex bound, and the parent
+  dispatch bound. Compile, runtime-engine, generated-plan, and source-emitter routes all call it. The generated
+  adapter maps invalid identity without collapsing target/index fields; emitted v2 source still reconstructs
+  normalized `SpecFile` JSON and keeps label/family-only plans. Source validation supplies the same portable code
+  for action-owned missing or out-of-range slots while preserving ordinary blind-edge errors.
+
+  The exact 15-role consumer uses one byte-identical Lua file on PUC Lua and LuaJIT. It passes 112 assertions per
+  ABI over native ordered/choice, repeated duplicate/control, cross-target, loaded, reconstructed, descriptor,
+  emitted/generated, native/generated trace, primary, and diagnostic roles. The complete Lua driver passes its
+  177-test package suite on both ABIs, primary 65x2, and corpus 105/105. Adding the descriptor contract metadata
+  deliberately extends the cursor descriptor key lock; the cursor governance scanner remains unchanged at
+  73 / 7+1 / 56 because the new consumer does not introduce a cursor-migration token. Duplicate-slot governance
+  advances to 6+1 with 46 mutations.
+
+  Lua 5.1's 200-local main-function ceiling is already binding in `interpreter.lua`: one additional top-level
+  module binding plus one local helper made `luac -p` fail before runtime. The repair deliberately reuses an
+  existing required module and publishes the trace helper through `M`, consuming no new chunk-level local. Future
+  interpreter work must prefer module/table methods or split a coherent helper module, and must run `luac -p`
+  before runtime proof. `docs/knowledge/lua-interpreter-local-variable-ceiling.md` records the durable constraint.
+
+  Final lockstep passes KM 643 facts / 4,735 keys, mdBook, all four doctrines, canonical root 7+5, cursor 288,
+  reference primary 65x2, and Phase 0 1,031/1,031 in 653 seconds. Cleanup removes the consumed 11 MiB rendered book
+  and 28 KiB Python cache after verification; the complete Lua driver had already removed both disposable native
+  trees. No task-local target, native, log, binary, book, or Python-cache output remains.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.5` — preserve Julia's authored alternative instead of reindexing):
   Julia's baseline fixture values were already correct, but `_match_runtime_specific` constructed a one-pattern
   `RuntimeRegexAlternation`, received alternative zero, and rebuilt the match with the expected index. The new

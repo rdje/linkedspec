@@ -64,6 +64,22 @@ function M.validation_error_to_json(value)
   return result
 end
 
+function M.regex_slot_identity_invalid(rule_label, target_rule, regex_index, message)
+  local detail = message or
+    ("rule '" .. rule_label .. "' references rule '" .. target_rule .. "' regex slot " .. regex_index ..
+      ", but that structural slot does not exist")
+  validation_fail(
+    detail,
+    "regex_slot_identity_invalid",
+    "validate_compiled_rule",
+    json.harray({
+      rule_label = rule_label,
+      target_rule = target_rule,
+      regex_index = regex_index,
+    })
+  )
+end
+
 local function is_identifier(value)
   return type(value) == "string" and value:match("^[A-Za-z_][A-Za-z0-9_]*$") ~= nil
 end
@@ -351,17 +367,27 @@ local function regex_count(rule)
   return count
 end
 
-local function check_target(owner, rules_by_label, target, index)
+local function check_target(owner, rules_by_label, target, index, structural_action)
   local target_rule = rules_by_label[target]
   if not target_rule then
-    validation_fail("rule '" .. owner.header.label .. "' references undefined rule '" .. target .. "'")
+    local message = "rule '" .. owner.header.label .. "' references undefined rule '" .. target .. "'"
+    if structural_action then
+      M.regex_slot_identity_invalid(
+        owner.header.label,
+        target,
+        index,
+        message .. " for regex slot " .. index .. "; that structural slot does not exist"
+      )
+    end
+    validation_fail(message)
   end
   local count = regex_count(target_rule)
   if index < 0 or index >= count then
-    validation_fail(
-      "rule '" .. owner.header.label .. "' references rule '" .. target .. "' regex slot " .. index ..
-      ", but that rule has " .. count .. " regex slot(s)"
-    )
+    if structural_action then
+      M.regex_slot_identity_invalid(owner.header.label, target, index)
+    end
+    validation_fail("rule '" .. owner.header.label .. "' references rule '" .. target .. "' regex slot " .. index ..
+      ", but that rule has " .. count .. " regex slot(s)")
   end
 end
 
@@ -376,13 +402,19 @@ local function check_edge_targets(spec)
       local node_type = ast.node_type(kind)
       if node_type == "ActionEdgeBodyElementKind" then
         for _, target in ipairs(kind.targets) do
-          check_target(rule, rules_by_label, target.label, target.index)
+          check_target(rule, rules_by_label, target.label, target.index, true)
         end
       elseif node_type == "BlindEdgeBodyElementKind" then
         check_target(rule, rules_by_label, kind.target, 0)
       elseif node_type == "BareEdgeBodyElementKind" then
         for _, target in ipairs(kind.targets) do
-          check_target(rule, rules_by_label, target.label, target.index or 0)
+          check_target(
+            rule,
+            rules_by_label,
+            target.label,
+            target.index or 0,
+            not ast.rule_mode_is_and(rule.header.mode)
+          )
         end
       end
     end

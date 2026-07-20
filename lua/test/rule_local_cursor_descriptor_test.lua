@@ -101,6 +101,7 @@ local function expected_root_meta_keys(outward_contract)
   for _, key in ipairs(variants.legacy_global_v0.required_keys) do result[key] = nil end
   for _, key in ipairs(variants.rule_local_cursor_v1.required_keys) do result[key] = true end
   result.entry_rule_contract = true
+  result.regex_slot_identity_contract = true
   return sorted_keys(result)
 end
 
@@ -135,6 +136,11 @@ for _, row in ipairs(contract.family_cases) do
   check_equal(direct.meta.cursor_contract, descriptor_contract.meta.cursor_contract, row.id .. " cursor contract")
   check_equal(direct.meta.cursor_contract, descriptor_variant.cursor_contract, row.id .. " descriptor variant")
   check_equal(direct.meta.entry_rule_contract, linkedspec.ENTRY_RULE_CONTRACT_ID, row.id .. " entry contract")
+  check_equal(
+    direct.meta.regex_slot_identity_contract,
+    linkedspec.REGEX_SLOT_IDENTITY_CONTRACT_ID,
+    row.id .. " regex-slot identity contract"
+  )
   for _, key in ipairs(descriptor_variant.forbidden_keys) do
     check_equal(direct.meta[key], nil, row.id .. " omits root " .. key)
   end

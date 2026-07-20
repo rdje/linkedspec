@@ -280,6 +280,21 @@ function M.runtime_match(alternation, input, byte_cursor, parse_mode)
   return M.consume_match(alternation, input, byte_cursor)
 end
 
+function M.match_runtime_regex_slot(alternation, alternative_index, input, byte_cursor, parse_mode)
+  validate_alternation(alternation)
+  if type(alternative_index) ~= "number" or alternative_index % 1 ~= 0 or alternative_index < 0 or
+      alternative_index >= #alternation.alternatives then
+    fail("runtime regex slot index is out of range", {
+      stage = "regex_slot",
+      alternative_index = alternative_index,
+    })
+  end
+  input = validate_utf8(input, "regex input")
+  local cursor = checked_byte_offset(input, byte_cursor or 0)
+  local mode = normalize_mode(parse_mode)
+  return native_match(alternation.alternatives[alternative_index + 1], input, cursor, mode == "consume")
+end
+
 function AlternationMethods:seek_match(input, byte_cursor)
   return M.seek_match(self, input, byte_cursor)
 end
@@ -290,6 +305,10 @@ end
 
 function AlternationMethods:match(input, byte_cursor, parse_mode)
   return M.runtime_match(self, input, byte_cursor, parse_mode)
+end
+
+function AlternationMethods:match_slot(alternative_index, input, byte_cursor, parse_mode)
+  return M.match_runtime_regex_slot(self, alternative_index, input, byte_cursor, parse_mode)
 end
 
 function AlternationMethods:is_empty()

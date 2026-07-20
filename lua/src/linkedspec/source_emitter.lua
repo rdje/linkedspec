@@ -11,9 +11,11 @@ M.GENERATED_SOURCE_FORMAT = 2
 M.EMIT_SOURCE_STAGE = "emit_source"
 M.COMPILE_OR_LOAD_GENERATED_SOURCE_STAGE = "compile_or_load_generated_source"
 M.VALIDATE_GENERATED_PLAN_STAGE = "validate_generated_plan"
+M.VALIDATE_COMPILED_RULE_STAGE = "validate_compiled_rule"
 M.VALIDATE_GENERATED_SPEC_STAGE = "validate_spec"
 M.SELECT_GENERATED_ENTRY_RULE_STAGE = "select_entry_rule"
 M.EXECUTE_GENERATED_STAGE = "execute_generated"
+M.EXECUTE_RULE_STAGE = "execute_rule"
 
 M.GENERATED_SOURCE_EMIT_FAILED_CODE = "generated_source_emit_failed"
 M.GENERATED_SOURCE_COMPILE_FAILED_CODE = "generated_source_compile_failed"
@@ -22,6 +24,8 @@ M.GENERATED_PLAN_LABEL_MISMATCH_CODE = "generated_plan_label_mismatch"
 M.GENERATED_PLAN_FAMILY_MISMATCH_CODE = "generated_plan_family_mismatch"
 M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE = "generated_plan_unknown_family"
 M.GENERATED_SOURCE_CONTRACT_VERSION_MISMATCH_CODE = "generated_source_contract_version_mismatch"
+M.REGEX_SLOT_IDENTITY_INVALID_CODE = "regex_slot_identity_invalid"
+M.ORDERED_REGEX_SLOT_IDENTITY_LOST_CODE = "ordered_regex_slot_identity_lost"
 M.GENERATED_NO_RULES_DEFINED_CODE = "no_rules_defined"
 M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE = "entry_rule_not_found"
 M.GENERATED_EXECUTION_FAILED_CODE = "generated_execution_failed"
@@ -30,9 +34,11 @@ local STAGES = {
   [M.EMIT_SOURCE_STAGE] = true,
   [M.COMPILE_OR_LOAD_GENERATED_SOURCE_STAGE] = true,
   [M.VALIDATE_GENERATED_PLAN_STAGE] = true,
+  [M.VALIDATE_COMPILED_RULE_STAGE] = true,
   [M.VALIDATE_GENERATED_SPEC_STAGE] = true,
   [M.SELECT_GENERATED_ENTRY_RULE_STAGE] = true,
   [M.EXECUTE_GENERATED_STAGE] = true,
+  [M.EXECUTE_RULE_STAGE] = true,
 }
 
 local CODES = {
@@ -43,6 +49,8 @@ local CODES = {
   [M.GENERATED_PLAN_FAMILY_MISMATCH_CODE] = true,
   [M.GENERATED_PLAN_UNKNOWN_FAMILY_CODE] = true,
   [M.GENERATED_SOURCE_CONTRACT_VERSION_MISMATCH_CODE] = true,
+  [M.REGEX_SLOT_IDENTITY_INVALID_CODE] = true,
+  [M.ORDERED_REGEX_SLOT_IDENTITY_LOST_CODE] = true,
   [M.GENERATED_NO_RULES_DEFINED_CODE] = true,
   [M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE] = true,
   [M.GENERATED_EXECUTION_FAILED_CODE] = true,
@@ -98,6 +106,12 @@ local function optional_string(value, label)
   return require_string(value, label, true)
 end
 
+local function optional_integer(value, label)
+  if value == nil then return nil end
+  if type(value) ~= "number" or value % 1 ~= 0 then fail(label .. " must be an integer") end
+  return value
+end
+
 local function raise(value)
   error(value, 0)
 end
@@ -146,6 +160,16 @@ function M.generated_source_error(options)
     handler_family = optional_string(options.handler_family, "generated source error handler_family"),
     expected_contract = optional_string(options.expected_contract, "generated source error expected_contract"),
     actual_contract = optional_string(options.actual_contract, "generated source error actual_contract"),
+    target_rule = optional_string(options.target_rule, "generated source error target_rule"),
+    regex_index = optional_integer(options.regex_index, "generated source error regex_index"),
+    expected_regex_index = optional_integer(
+      options.expected_regex_index,
+      "generated source error expected_regex_index"
+    ),
+    actual_regex_index = optional_integer(
+      options.actual_regex_index,
+      "generated source error actual_regex_index"
+    ),
     detail = optional_string(options.detail, "generated source error detail"),
   }, ERROR_MT)
 end
@@ -166,6 +190,10 @@ function M.generated_source_error_to_json(value)
   if value.handler_family ~= nil then result.handler_family = value.handler_family end
   if value.expected_contract ~= nil then result.expected_contract = value.expected_contract end
   if value.actual_contract ~= nil then result.actual_contract = value.actual_contract end
+  if value.target_rule ~= nil then result.target_rule = value.target_rule end
+  if value.regex_index ~= nil then result.regex_index = value.regex_index end
+  if value.expected_regex_index ~= nil then result.expected_regex_index = value.expected_regex_index end
+  if value.actual_regex_index ~= nil then result.actual_regex_index = value.actual_regex_index end
   if value.detail ~= nil then result.detail = value.detail end
   return result
 end
@@ -177,6 +205,40 @@ function M.generated_source_compile_failed(source_identity, detail)
     summary = "Generated Lua source failed to compile or load",
     source_identity = require_string(source_identity, "source_identity", true),
     detail = tostring(detail),
+  })
+end
+
+function M.generated_source_regex_slot_identity_failed(source_identity, validation_error)
+  if type(validation_error) ~= "table" or validation_error.code ~= M.REGEX_SLOT_IDENTITY_INVALID_CODE then
+    fail("spec validation error is not a regex-slot identity failure")
+  end
+  return M.generated_source_error({
+    stage = M.VALIDATE_COMPILED_RULE_STAGE,
+    code = M.REGEX_SLOT_IDENTITY_INVALID_CODE,
+    summary = "Compiled regex slot identity is invalid",
+    source_identity = require_string(source_identity, "source_identity", true),
+    rule_label = validation_error.fields.rule_label,
+    target_rule = validation_error.fields.target_rule,
+    regex_index = validation_error.fields.regex_index,
+    detail = validation_error.message,
+  })
+end
+
+function M.generated_source_ordered_regex_slot_identity_lost(source_identity, runtime_error)
+  local diagnostic = type(runtime_error) == "table" and runtime_error.diagnostic or nil
+  if diagnostic == nil or diagnostic.code ~= M.ORDERED_REGEX_SLOT_IDENTITY_LOST_CODE then
+    fail("runtime error is not an ordered regex-slot identity failure")
+  end
+  return M.generated_source_error({
+    stage = M.EXECUTE_RULE_STAGE,
+    code = M.ORDERED_REGEX_SLOT_IDENTITY_LOST_CODE,
+    summary = "Ordered regex-slot identity invariant failed",
+    source_identity = require_string(source_identity, "source_identity", true),
+    rule_label = diagnostic.rule_label,
+    target_rule = diagnostic.target_rule,
+    expected_regex_index = diagnostic.expected_regex_index,
+    actual_regex_index = diagnostic.actual_regex_index,
+    detail = diagnostic.detail,
   })
 end
 
@@ -345,6 +407,13 @@ function M.validate_generated_rule_plan_v2(compiled, plan, source_identity, actu
     raise(M.generated_source_compile_failed(identity, "compiled must be a CompiledSpec"))
   end
   if type(plan) ~= "table" then fail("generated rule plan must be a table") end
+  local slots_ok, slots_error = pcall(compiled_spec.validate_compiled_regex_slot_identities, compiled)
+  if not slots_ok then
+    if type(slots_error) == "table" and slots_error.code == M.REGEX_SLOT_IDENTITY_INVALID_CODE then
+      raise(M.generated_source_regex_slot_identity_failed(identity, slots_error))
+    end
+    raise(M.generated_source_compile_failed(identity, slots_error))
+  end
   local selector_ok, selector_error = pcall(compiled_spec.validate_no_removed_aggregate_selectors, compiled)
   if not selector_ok then raise(M.generated_source_compile_failed(identity, selector_error)) end
   if #compiled.compiled_rule_order ~= #plan then
@@ -456,6 +525,10 @@ local function execute_generated(compiled, plan, input, source_identity, options
     raise(result)
   end
   if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil and
+      result.diagnostic.code == M.ORDERED_REGEX_SLOT_IDENTITY_LOST_CODE then
+    raise(M.generated_source_ordered_regex_slot_identity_lost(identity, result))
+  end
+  if interpreter.is_runtime_interpreter_error(result) and result.diagnostic ~= nil and
       (result.diagnostic.code == M.GENERATED_NO_RULES_DEFINED_CODE or
         result.diagnostic.code == M.GENERATED_ENTRY_RULE_NOT_FOUND_CODE) then
     raise(M.generated_source_entry_rule_selection_failed(identity, result))
@@ -533,6 +606,7 @@ local function generated_module_source(identity_hex, spec_json_hex, plan)
     "",
     'M.LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"',
     "M.LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2",
+    'M.LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT = "linkedspec-duplicate-regex-slot-identity-v1"',
     'local _SOURCE_IDENTITY_HEX = "' .. identity_hex .. '"',
     'local _EFFECTIVE_SPEC_JSON_HEX = "' .. spec_json_hex .. '"',
     "",
@@ -644,6 +718,7 @@ function M.emit_lua_source_v2(compiled, source_identity)
   end
 
   local ok, result = pcall(function()
+    compiled_spec.validate_compiled_regex_slot_identities(compiled)
     compiled_spec.validate_no_removed_aggregate_selectors(compiled)
     local spec_json = json.encode(spec_ast.to_json(effective_spec(compiled)))
     return generated_module_source(
@@ -654,6 +729,9 @@ function M.emit_lua_source_v2(compiled, source_identity)
   end)
   if ok then return result end
   if M.is_generated_source_error(result) then raise(result) end
+  if type(result) == "table" and result.code == M.REGEX_SLOT_IDENTITY_INVALID_CODE then
+    raise(M.generated_source_regex_slot_identity_failed(identity, result))
+  end
   emit_failure(
     identity,
     "Failed to serialize compiled spec for generated Lua source",

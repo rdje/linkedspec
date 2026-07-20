@@ -170,13 +170,20 @@
     "generated_slot_payload": "normalized_spec_file_json",
     "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]
   },
+  "lua_admission": {
+    "consumer": "lua/test/duplicate_regex_slot_identity_contract_test.lua",
+    "canonical_driver": "tools/run_lua_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "normalized_spec_file_json",
+    "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]
+  },
   "implementation_inventory": [
     {"backend": "perl", "runtime": "perl", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
     {"backend": "rust", "runtime": "rust", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
     {"backend": "dart", "runtime": "dart", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
     {"backend": "julia", "runtime": "julia", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
-    {"backend": "lua", "runtime": "puc_lua", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
-    {"backend": "lua", "runtime": "luajit", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"}
+    {"backend": "lua", "runtime": "puc_lua", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
+    {"backend": "lua", "runtime": "luajit", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"}
   ],
   "migration": {
     "decision": "docs/decisions/0047-duplicate-regex-slot-identity.md",
@@ -194,7 +201,7 @@
     {"capability": "rust", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
     {"capability": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
     {"capability": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
-    {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
+    {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
     {"capability": "recurring_and_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.7"}
   ],
   "canonical_ci": {
