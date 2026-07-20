@@ -13,9 +13,11 @@ and caller-owned runtime snapshots, explanations, rollout inventory, and the han
 `python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
 six fixture groups and reports 50 rejected mutations. Neutral rollout is 1 complete / 8 pending; native backend
 admission remains 0 complete / 6 pending. No parser, compiler, runtime, descriptor, generated-source, CLI, trace,
-or MCP behavior is added by the neutral contract. Behavior-free Perl audit `.10.3.0` now maps strict source,
-descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities;
-implementation remains pending in `.10.3.1-.10.3.6`, so neither rollout ledger advances.
+or MCP behavior is added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
+descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
+Perl foundation `.10.3.1` now implements opaque in-memory construction, strict source normalization/mapping, and
+immutable compiled-or-failed outcomes, but exposes no semantic records, capabilities, or queries. Later leaves
+`.10.3.2-.10.3.6` retain those behaviors and exact admission, so neither rollout ledger advances.
 
 Run its structural and ownership gate from the repository root:
 

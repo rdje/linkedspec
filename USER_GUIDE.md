@@ -1128,6 +1128,33 @@ Examples:
 
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
+### Semantic-index construction (Perl foundation)
+
+Perl now has the source/compilation foundation for the planned semantic-query API:
+
+```perl
+use LinkedSpec;
+
+my $source = "Top::\n /x/\n";
+my $index = LinkedSpec::semantic_index(
+  \$source,
+  logical_name => "example.spec",
+  source_detail_ceiling => "text",
+);
+```
+
+The source must be an in-memory scalar reference containing decoded characters or strict UTF-8 bytes. The caller
+must register `logical_name` and choose the exact ceiling `none`, `identity`, `span`, or `text`; `top_rule` is the
+only optional compilation selector. The constructor never opens a path, copies the source, preserves canonical
+UTF-8 bytes for later byte spans/digests, rejects malformed UTF-8 with a typed
+`LinkedSpec::SemanticIndex::Error`, and does not execute the parser.
+
+The returned object is opaque. Both successful compilation and a structured language compilation failure produce
+an immutable snapshot foundation; compiler hashes, handler coderefs, compiled regex objects, and source text are
+not exposed. This is intentionally a staged API: public `capabilities` and `query` methods are not implemented yet,
+and Perl is not admitted to the semantic-query contract merely because construction exists. Use descriptor mode
+below for current introspection answers.
+
 ### Descriptor introspection with `return_descriptor => 1`
 Use descriptor mode when you want to inspect rule readiness, migration metadata, or the current compiled-descriptor topology.
 
@@ -1135,17 +1162,17 @@ The descriptor is not a portable semantic-query wire format. In the Perl referen
 regexes are native coderef/compiled-regex values, while other backends use their own typed projections. Its stable
 facts remain useful inputs, but callers should not attempt to serialize backend objects as a cross-backend model.
 
-ADR `0049` designs a separate future `linkedspec-semantic-model-v1` /
-`linkedspec-semantic-query-v1` surface. It will expose normalized read-only records and relations for rules,
+ADRs `0049`/`0050` define a separate `linkedspec-semantic-model-v1` /
+`linkedspec-semantic-query-v1` surface. Its later Perl leaves will expose normalized read-only records and relations for rules,
 regex slots, edges, lifecycle actions, symbols/calls, inferred shapes, staged/generated provenance, diagnostics,
 and explain-why evidence. Queries have deterministic snapshot-local ids/order, bounded pagination and traversal,
 and `none`/`identity`/`span`/`text` source ceilings with explicit redactions. Runtime explanations consume an
 already captured caller-owned observation; querying never runs the parser. MCP will be a two-tool handle adapter
 over the same native capabilities/query calls, with no implicit source loading or semantic implementation.
 
-That semantic index is planned, not current API. `FUTURE-PARITY-BACKLOG.10.2-.10.10` own its executable neutral
-contract, five-backend/six-runtime rollout, thin MCP transport, and public closeout. Continue using
-`return_descriptor => 1` for current descriptor work.
+Only the construction foundation is current Perl API. `FUTURE-PARITY-BACKLOG.10.3.2-.10.10` own records/query,
+five-backend/six-runtime rollout, thin MCP transport, and public closeout. Continue using `return_descriptor => 1`
+for current introspection answers until the query leaves close.
 
 Typical shape:
 

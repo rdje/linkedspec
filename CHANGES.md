@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.3.1 — add Perl semantic source foundation
+
+Perl now exposes the planned `LinkedSpec::semantic_index(...)` constructor without prematurely implementing the
+semantic query API. It requires an in-memory scalar reference, caller-registered `logical_name`, and a `none` /
+`identity` / `span` / `text` source ceiling; optional `top_rule` reuses existing entry selection. Decoded character
+input and strict UTF-8 bytes normalize to one copied character source plus canonical bytes. Malformed UTF-8,
+unsupported/duplicate options, non-scalar sources, and invalid logical names return typed native construction
+errors before compilation. The constructor never reads a path or executes the parser.
+
+`LinkedSpec::SemanticIndex` uses opaque inside-out storage so callers cannot reach source text, compiler hashes,
+handler coderefs, or compiled regex objects. It compiles once through the existing runtime/descriptor authority and
+retains either a compiled descriptor authority or a structured failed-compilation outcome; language compilation
+failure returns the same immutable object instead of collapsing into a constructor error. Clone-safe private
+foundation projections prevent returned hashes from mutating captured state.
+
+`LinkedSpec::SemanticSourceMap` derives zero-based half-open strict-UTF-8 byte offsets and one-based line/Unicode-
+scalar columns, rejects mid-codepoint ranges, preserves exact excerpts, and locates duplicate text in explicit
+cursor order. The focused canonical consumer covers graph/privacy/failed sources, raw/decoded convergence,
+malformed UTF-8, exact digests/spans, failure preservation, mutation isolation, and host-object-free JSON. Public
+records, capabilities/query, staged/call projection, runtime observations, and Perl admission remain
+`.10.3.2-.10.3.6`; rollout stays 1/9 and native admission 0/6.
+
+Signoff passes the focused foundation at 5 top-level tests, adjacent native loading/root proof at 17 tests across
+three files, semantic oracle 6/20/50, aggregate-selector census 59/27/0, both primary command environments at
+66/66, and Phase 0 at 1,031/1,031 in 610 seconds. Knowledge Map is 651 facts / 4,796 question keys; mdBook,
+memory, all doctrines, adjacent contracts, whitespace, and canonical exit 0 pass.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.3.0 — map Perl semantic authorities
 
 The Perl reference implementation now has a behavior-free authority map and six dependency-ordered implementation

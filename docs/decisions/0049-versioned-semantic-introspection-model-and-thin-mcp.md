@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral contract executable; Perl authority map complete; adapters pending
+- Status: accepted; amended by ADR 0050; neutral contract executable; Perl source foundation implemented; adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -316,8 +316,9 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 - Runtime introspection remains opt-in and non-interfering because queries consume caller-owned observations after
   execution.
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
-- This decision changes no current parser, compiler, runtime, descriptor, generated artifact, CLI, trace, or MCP
-  behavior. Public docs must label the model and APIs as planned until their implementation leaves close.
+- This decision changes no parser, compiler, runtime, descriptor, generated artifact, CLI, trace, or MCP behavior.
+  Public docs must distinguish the current Perl construction-only foundation from the still-planned semantic
+  record/query, execution-observation, backend-admission, and MCP surfaces.
 
 The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
 characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
@@ -325,6 +326,12 @@ decoded source and retain canonical bytes for byte spans/digests. The descriptor
 records, structured runtime-context failures, and generated-v2 plan metadata are separate reusable authorities.
 Generated metadata cannot reconstruct a semantic snapshot, rule/edge/lifecycle coordinates need a source mapper,
 and optional execution observations require an invocation-local typed sink separate from textual trace.
+
+Perl leaf `.10.3.1` implements only that constructor foundation. `LinkedSpec::semantic_index(...)` copies decoded
+text or strict UTF-8 bytes, accepts caller logical identity/source ceiling with no path, precomputes exact
+byte/Unicode-scalar coordinates, compiles once through the existing descriptor/runtime-context path without
+execution, and retains an opaque immutable compiled-or-failed outcome. It deliberately has no public
+`capabilities` or `query` methods yet; `.10.3.2-.10.3.6` retain projection, evaluation, observation, and admission.
 
 ## Links
 

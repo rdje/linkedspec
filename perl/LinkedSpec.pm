@@ -162,6 +162,23 @@ sub Get {
 }
 
 #------------------------------------------------------------------------------
+# Function: semantic_index
+# Purpose : Build one opaque immutable semantic-index snapshot from in-memory
+#           decoded text or strict UTF-8 bytes without executing the parser.
+# Args    : ($spec_scalar_ref, logical_name => ..., source_detail_ceiling => ...)
+# Returns : LinkedSpec::SemanticIndex object (compiled or failed-compilation)
+#------------------------------------------------------------------------------
+sub semantic_index {
+ my $spec_content_ref = shift @_;
+ return _dispatch_owner_call(
+  'LinkedSpec::SemanticIndex',
+  'create',
+  $spec_content_ref,
+  @_,
+ )
+}
+
+#------------------------------------------------------------------------------
 # Function: emit_generated_source
 # Purpose : Compile a .spec source and return independently loadable Perl source
 #           conforming to linkedspec-generated-source-v2.

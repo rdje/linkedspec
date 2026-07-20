@@ -71,6 +71,7 @@ check, not proof that the cited commands were run.
 | "Cross-variant / self-host parity (oracle ↔ candidate, Perl ↔ Rust)" | [§4.2 cross-check / oracle corpus](#42-toolscross_check_spec_parserspl--toolsgen_oracle_corpuspl) |
 | "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
 | "Did the neutral semantic introspection schema/query answers drift?" | [§4.9 semantic introspection contract](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
+| "Did Perl semantic-index source normalization, spans, or compile outcomes drift?" | [§4.9 Perl source foundation](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -365,6 +366,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
   a semantic snapshot. See [[perl-semantic-introspection-authority-map]].
+- **PERL SOURCE FOUNDATION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t` verifies the `.10.3.1`
+  constructor boundary: decoded/raw strict-UTF-8 convergence, canonical byte/scalar coordinates, opaque clone-safe
+  state, compiled and failed outcomes, logical-name-only identity, malformed-byte rejection, and no path option.
+  It does not prove records, queries, execution observations, or backend admission. See
+  [[perl-semantic-index-source-foundation]].
 
 ---
 

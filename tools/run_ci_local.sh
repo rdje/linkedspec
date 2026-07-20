@@ -177,6 +177,7 @@ require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
+require_tracked_file t/semantic_index_perl_foundation.t
 require_tracked_file tools/check_aggregate_selector_retirement.py
 require_tracked_file tools/check_public_aggregate_selector_surface.py
 require_tracked_file tools/check_executable_aggregate_selector_sources.py
@@ -184,6 +185,8 @@ require_tracked_file perl/LinkedSpec.pm
 require_tracked_file perl/LinkedSpec/BindingRuntime.pm
 require_tracked_file perl/LinkedSpec/SpecLoader.pm
 require_tracked_file perl/LinkedSpec/GeneratedSource.pm
+require_tracked_file perl/LinkedSpec/SemanticIndex.pm
+require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
@@ -239,7 +242,10 @@ perl -c -Iperl t/root_rule_selection_perl_routes.t
 perl -c -Iperl t/variadic_user_function_contract.t
 perl -c -Iperl t/callable_codeblock_literal_contract.t
 perl -c -Iperl t/uniform_binding_contract.t
+perl -c -Iperl t/semantic_index_perl_foundation.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
+perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
+perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -262,6 +268,9 @@ python3 tools/check_root_rule_selection_contract.py
 
 log "checking backend-neutral semantic introspection model/query contract"
 python3 tools/check_semantic_introspection_contract.py
+
+log "running Perl semantic-index source/map/outcome foundation"
+PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

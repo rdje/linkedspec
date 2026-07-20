@@ -8,22 +8,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.0` is signoff-complete from clean neutral commit `a891d7af`. Knowledge Map and Toolbox-
-  first probes map decoded source/canonical bytes, descriptor, typed ActionIR, staged records, structured failures,
-  generated-v2 metadata, and missing source/event seams without implementation behavior. The `.10.3.1-.10.3.6`
-  dependency split and complete canonical gate are green; only the per-leaf commit/clean boundary precedes `.10.3.1`.
+- `FUTURE-PARITY-BACKLOG.10.3.1` is active task-tree-first from clean authority-map commit `e679a3eb`. The opaque
+  `LinkedSpec::semantic_index(...)` constructor, strict UTF-8/canonical-byte source map, typed construction errors,
+  immutable compiled-or-failed outcome, exact focused consumer, canonical registration, Knowledge Map, and public
+  documentation are signoff-complete. Exact proof is foundation 5, adjacent 17, semantic 6/20/50, selector
+  59/27/0, primary 66x2, Knowledge Map 651/4,796, and Phase 0 1,031/1,031 in 610 seconds; mdBook, doctrines,
+  whitespace, and canonical exit 0 pass. Only cleanup, commit, and brief clearing remain before `.10.3.2`.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
-observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle advances only
-1/9 rollout legs; native backend admission remains 0/6 and no backend API behavior is implemented.
+observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
+rollout legs and native backend admission 0/6: Perl construction exists, but records/capabilities/query do not.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.3.0 — map Perl semantic authorities**
-  (SIGNOFF-COMPLETE from clean base `a891d7af`; commit boundary in flight).
+  (DONE at clean commit `e679a3eb` from base `a891d7af`).
 
   **Result:** Exact probes prove the reusable descriptor/ActionIR/staged/failure/generated authorities, the strict
   decoded-text plus canonical-byte constructor boundary, and the missing source-map/typed-observer work. Six
@@ -33,7 +35,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   lowering, and generated-source probes; semantic 6/20/50; selector 59/27/0; primary 66x2; Phase 0 1,031/1,031 in
   608 seconds; mdBook, all doctrines, adjacent contracts, whitespace, and canonical exit 0.
 
-  **Next:** Commit and clean `.10.3.0`, then activate strict source/outcome leaf `.10.3.1` task-tree-first.
+  **Next:** Strict source/outcome leaf `.10.3.1` is active task-tree-first.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.2 — freeze executable semantic introspection contract**
   (DONE at clean commit `a891d7af` from base `056d413b`).

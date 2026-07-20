@@ -209,16 +209,19 @@ canonical trace, passes 61/61 in both environments, and adds `tools/run_rust_loc
     Dart and Julia close their corresponding focused legs, and `tools/run_primary_cli_matrix.sh` is the global
     recurring identity owner. Complete capability census `.1.6` and generated-source `.3` remain separate.
 
-ADR `0049` and `FUTURE-PARITY-BACKLOG.10.1` now design deep semantic introspection before implementation. The
-planned `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is an immutable normalized index exposed
+ADRs `0049`/`0050` and `FUTURE-PARITY-BACKLOG.10.2` make deep semantic introspection executable before backend
+admission. The planned `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is an immutable normalized index exposed
 idiomatically from every native backend: rules, regex slots, edges, lifecycle, calls, inferred value/target shapes,
 staged/generated provenance, portable diagnostics, and ordered explain-why evidence. Snapshot-local ids/order,
 bounded pages and logical traversal cost, structural source ceilings/redactions, optional caller-captured runtime
 observations, and exact cross-backend fixtures are mandatory. The existing outward descriptor remains a separate
 compatibility projection; no backend AST/IR, callable, compiled regex, object identity, or implicit host path can
 enter the semantic response. MCP will expose only native capabilities/query calls over a registered handle. It
-cannot compile, read a path, derive facts, or own explanations. `.10.2-.10.10` own implementation; the APIs and
-MCP tools are not shipped yet.
+cannot compile, read a path, derive facts, or own explanations. Perl now ships only the `.10.3.1` construction
+foundation: `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller logical
+name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path. Semantic
+records, capabilities/query, runtime observations, full Perl admission, the other backends, and MCP remain later
+`.10.3-.10.10` work.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

@@ -19,8 +19,10 @@ This document is the current high-level technical reading of the project shape. 
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
   state has no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/text trace
-  has no typed invocation-local event sink. Leaves `.10.3.1-.10.3.6` own those implementation boundaries. No
-  current parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
+  has no typed invocation-local event sink. Leaf `.10.3.1` now implements the first boundary: an opaque inside-out
+  Perl index, strict decoded/byte normalization, canonical-byte digest/source mapper, typed constructor errors, and
+  immutable compiled-or-failed outcome via the existing runtime/descriptor path. It never reads a path or executes;
+  no semantic records, queries, observations, or admission are claimed. `.10.3.2-.10.3.6` own those later layers.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

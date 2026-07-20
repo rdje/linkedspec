@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-20` (Perl authority map `.10.3.0` is signoff-complete; strict source/outcome leaf `.10.3.1`
-  is next only after the clean audit commit)
+- Last updated: `2026-07-20` (strict Perl source/map/outcome leaf `.10.3.1` is active task-tree-first from clean
+  authority-map commit `e679a3eb`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -6938,7 +6938,7 @@ before implementation.
     guides; pass doctrines/book/whitespace/canonical checks, clean artifacts, and commit before behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add the strict source, source-map, and compilation-outcome foundation for an immutable Perl index.
   Depends on: `.10.3.0`
   Acceptance: Add `LinkedSpec::semantic_index(...)` construction ownership without query behavior. Normalize an
@@ -6949,6 +6949,33 @@ before implementation.
     spans through a source mapper that correlates accepted source with compiler order rather than inventing grammar
     semantics. Prove graph/privacy/failed sources including malformed UTF-8, immutability, no host-object leakage,
     and unchanged `Get`/loader/CLI behavior.
+  Verification: Activated task-tree-first on 2026-07-20 from clean authority-map commit `e679a3eb` at ahead 263;
+    `git_message_brief.txt` was zero bytes and generated mdBook/Python output was absent. No Perl/API/test/fixture/
+    consumer/CI edit preceded activation. `.10.3.0` supplies the exact decoded-source, runtime-context failure, and
+    absent source-map boundary. Baseline Toolbox probes reproduced raw-byte Unicode failure versus strict-decoded
+    success, exact `U+0054,U+00F6,U+0070` label code points, malformed `C3 28` rejection, descriptor compilation,
+    and `bare_edge_target_undefined` at `normalize_edges`. The new focused consumer passes five top-level subtests
+    covering opaque/lazy construction, exact graph spans and repeated occurrence order, raw/decoded Unicode
+    convergence, immutable failed compilation, strict typed validation, and adjacent native loading/root behavior.
+    Canonical signoff passes semantic 6/20/50, foundation 5, selector 59/27/0, primary 66x2, and Phase 0
+    1,031/1,031 in 610 seconds before exit 0. Knowledge Map is 651/4,796; mdBook, memory, doctrines, adjacent
+    contracts, whitespace, and exact cleanup pass. Neutral rollout remains 1/9 and native admission 0/6.
+  Commit: `FUTURE-PARITY-BACKLOG.10.3.1 - add Perl semantic source foundation`
+
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Use exact neutral graph/privacy/failed source probes to lock decoded-scalar,
+    raw-byte, malformed-byte, compiled-outcome, and failed-outcome behavior before implementation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Use `LinkedSpec::Get`, `runtime_ctx_ref`, bootstrap/source probes, and
+    generated-source capture to locate source normalization/map ownership without guessing from `.spec` text.
+  - [x] **FIX** — Add only immutable construction/source-map/outcome foundations; no semantic query, static record
+    projection, call/staged projection, observer, rollout, or public admission work from `.10.3.2-.10.3.6`.
+  - [x] **ADDRESSED (verified)** — Exact focused tests cover decoded/bytes/malformed UTF-8, graph/privacy/failure,
+    byte/scalar spans, logical-name-only identity, clone isolation, and no host-object leakage.
+  - [x] **NO REGRESSION** — Existing direct/loaded/CLI/generated behavior plus semantic 6/20/50 and complete
+    canonical Phase 0 remain exact; no new failure set or early rollout/admission.
+  - [x] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
+    are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.2`
   Status: `pending`
@@ -9257,9 +9284,9 @@ Semantic-introspection design `.10.1` is complete before behavior. ADR `0049` fi
 model/query, exact identity/order/records/relations/shapes/evidence, source/privacy/page/budget/evolution rules,
 optional caller-captured runtime observations, no descriptor/backend-IR leakage, and handle-only MCP boundary.
 Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is committed clean at `a891d7af`. Perl authority-map leaf
-`.10.3.0` is signoff-complete after proving the exact decoded-source/compiler/ActionIR/staged/generated/diagnostic/
-runtime seams, splitting all implementation work, and passing canonical Phase 0 1,031/1,031 in 608 seconds.
-Strict source/outcome leaf `.10.3.1` is next only after the clean audit commit.
+`.10.3.0` is committed clean at `e679a3eb` after proving the exact decoded-source/compiler/ActionIR/staged/
+generated/diagnostic/runtime seams, splitting all implementation work, and passing canonical Phase 0 1,031/1,031
+in 608 seconds. Strict source/outcome leaf `.10.3.1` is active task-tree-first from that boundary.
 
 ### Historical frontier sequence
 
@@ -9635,7 +9662,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups, 20 digest-locked responses, 50 rejected mutations, and canonical registration freeze the neutral oracle before adapters. |
 | 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `active` | Implement the Perl semantic index, native query surface, and exact reference conformance through owned children. |
 | 74.2.0 | `FUTURE-PARITY-BACKLOG.10.3.0` | `done` | Exact toolbox probes map decoded source, descriptor, ActionIR, staged, generated, diagnostic, and missing runtime seams before behavior. |
-| 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `pending` | Add strict source normalization, source mapping, and immutable compilation-outcome construction. |
+| 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `done` | Opaque construction, strict UTF-8/canonical source mapping, and immutable compiled-or-failed outcomes pass exact canonical proof without query or admission. |
 | 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `pending` | Project static grammar, source, entry, diagnostic, and explanation semantics. |
 | 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `pending` | Project ActionIR calls/shapes/bindings plus staged/generated provenance. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
@@ -10307,7 +10334,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl authority map `.10.3.0` is signoff-complete; strict source/outcome `.10.3.1` waits for its clean commit.
+- None. Strict source/map/outcome `.10.3.1` is active from clean commit `e679a3eb`.
 
 ## Verification Log
 

@@ -1,16 +1,53 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. It does **not** yet
-have a public native semantic-index implementation. The distinction matters:
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl also has the
+first construction foundation, but it does **not** yet have public `capabilities` or `query` answers. The
+distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
 - the neutral checker derives and digest-locks exact answers without admitting a backend early; and
-- the current `return_descriptor` / descriptor APIs remain the available introspection surface until the rollout
-  leaves implement the new native APIs.
+- `LinkedSpec::semantic_index(...)` now constructs an opaque compiled-or-failed Perl snapshot; and
+- the current `return_descriptor` / descriptor APIs remain the usable introspection surface until the later Perl
+  leaves implement records and queries.
 
-The neutral contract is complete. Backend admission is **0 complete / 6 pending** for Perl, Rust, Dart, Julia,
-PUC Lua, and LuaJIT. MCP remains later transport work and does not own semantics.
+The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT: a constructor foundation is not semantic-query admission. MCP remains later transport
+work and does not own semantics.
+
+## Current Perl construction foundation
+
+Perl callers can now construct the immutable source/compilation foundation using in-memory source only:
+
+```perl
+use LinkedSpec;
+
+my $source = "Top::\n /x/\n";
+my $index = LinkedSpec::semantic_index(
+  \$source,
+  logical_name => "example.spec",
+  source_detail_ceiling => "text",
+);
+```
+
+Both `logical_name` and `source_detail_ceiling` are required. The ceiling is exactly `none`, `identity`, `span`,
+or `text`; an optional `top_rule` selects the same existing compilation entry rule. The constructor accepts a
+decoded Perl character scalar or unflagged strict UTF-8 bytes. It copies the input, retains canonical UTF-8 bytes
+for spans/digests, rejects malformed UTF-8 with a typed `LinkedSpec::SemanticIndex::Error`, and never accepts or
+reads a source path.
+
+The returned `LinkedSpec::SemanticIndex` is opaque rather than a blessed compiler hash. Successful source retains
+the private descriptor authority; a language compilation failure still returns the same object with an immutable
+`failed_compilation` outcome and the existing structured runtime-context failure. Construction does not execute
+the parser. Public `$index->capabilities` and `$index->query(...)` are deliberately not present yet, so callers
+that need answers today should continue using descriptor mode. The staged boundary prevents descriptor coderefs,
+compiled regex objects, decoded source, or filesystem identities from leaking while later leaves build the exact
+neutral records.
+
+The internal source mapper is already exact: zero-based half-open strict-UTF-8 byte offsets, one-based lines,
+one-based Unicode-scalar columns, rejected mid-codepoint ranges, and deterministic cursor-ordered lookup for
+duplicate source text. Record-specific source correlation remains the next Perl leaf rather than being guessed by
+this general mapper.
 
 ## Why this is separate from the descriptor
 
@@ -39,9 +76,9 @@ semantic snapshot:
 
 `LinkedSpec::Get` is character-oriented internally. Direct raw UTF-8 bytes for the privacy fixture's `Töp::`
 label fail validation, while strict UTF-8 decoding first compiles the exact label and Unicode regex. Existing file
-loaders already use strict decoding. The future semantic constructor must accept decoded text or strict UTF-8
-bytes, reject malformed input, preserve canonical bytes for byte offsets and digests, and accept only a
-caller-registered logical name—never an implicit host path.
+loaders already use strict decoding. The current semantic constructor now owns that boundary: it accepts decoded
+text or strict UTF-8 bytes, rejects malformed input, preserves canonical bytes for byte offsets and digests, and
+accepts only a caller-registered logical name—never an implicit host path.
 
 ## Exact v1 record model
 
@@ -233,7 +270,8 @@ The dependency order is:
 |---|---|---|
 | `.10.2` | neutral contract, fixtures, exact oracle | complete |
 | `.10.3.0` | Perl authority map and safe implementation split | complete |
-| `.10.3.1-.10.3.6` | Perl source/outcome, static graph, calls/staging, query, runtime/routes, admission | pending |
+| `.10.3.1` | Perl strict source/map/compiled-or-failed outcome foundation | implemented; admission unchanged |
+| `.10.3.2-.10.3.6` | Perl static graph, calls/staging, query, runtime/routes, admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |

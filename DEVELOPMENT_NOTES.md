@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.3.1` — establish immutable source and outcome ownership): The constructor
+  deliberately uses the existing descriptor-return compile path rather than adding a parser or reconstruction
+  route. It copies/normalizes source before compilation, passes no path identity into runtime context, requests no
+  parser execution, and retains the descriptor only in opaque lexical state. A compiler-language failure and a
+  constructor-boundary failure are different: the former creates `failed_compilation` with the structured
+  `last_error`; malformed UTF-8/options throw `LinkedSpec::SemanticIndex::Error` before the compiler runs.
+
+  The source mapper precomputes every character boundary's canonical UTF-8 byte offset plus line/scalar-column.
+  Byte-range conversion therefore rejects a boundary inside `ö`/`é` rather than rounding, and duplicate literal
+  correlation requires an explicit `after_byte` cursor. It supplies coordinates only: later static projection must
+  correlate compiler order and accepted source constructs, so this leaf does not invent rule/edge/lifecycle
+  semantics or expose excerpts above a query ceiling. `text` makes the content digest available; lower ceilings
+  retain the internal digest but do not expose it through the clone-safe foundation identity.
+
+  An inside-out scalar object was chosen over a locked blessed hash because locking would still expose descriptor
+  coderefs/regex objects and decoded source to callers inspecting the hash. All foundation data that crosses the
+  boundary is freshly cloned and JSON-safe; the compiler authority has no accessor. The exact focused suite also
+  proves constructor lazy loading, caller-source mutation isolation, raw/decoded Unicode convergence, failed-source
+  mapping, and existing loader/root-selection compatibility. Canonical registration adds only this foundation
+  consumer and does not alter the neutral rollout inventory.
+
+  Complete canonical proof passes the neutral semantic oracle at 6/20/50, the foundation consumer at five tests,
+  public aggregate-selector census 59/27/0, primary CLI 66/66 twice, and Phase 0 1,031/1,031 in 610 seconds before
+  exit 0. Knowledge Map reaches 651/4,796; mdBook, memory, doctrines, adjacent contracts, and whitespace also pass.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.3.0` — map Perl authorities before behavior): Knowledge Map retrieval and
   LinkedSpec's own probes were used before implementation inspection. `return_descriptor` proves a large reusable
   projection: deterministic definition/compiled/function order; rule family, cursor, repetition, entry, edge, and
