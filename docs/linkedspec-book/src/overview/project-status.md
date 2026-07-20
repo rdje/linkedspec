@@ -69,8 +69,13 @@ trace, both typed diagnostics, loaded execution, and independently loaded genera
 ordinary and generated-plan execution, leaves combined choice intact, validates malformed compiled slots before
 native/generated execution, publishes descriptor/emitted contract identity, and passes one exact 15-role
 admission over all five fixtures plus loaded/reconstructed, artifact, trace, primary, and diagnostic routes.
-Governance is 3 complete + 4 pending with 31 rejected mutations. Preserving-backend locks `.4-.6` and recurring/
-public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
+Although Dart already returned the correct fixture values, `.4` removes its internal single-pattern recompile+
+reindex approximation. Ordered execution now calls an explicit authored-alternative matcher that returns the
+required index directly; choice retains earliest-start/first-authored priority. Shared compiled-state validation,
+descriptor metadata, emitted-v2 identity, native/generated `regex_slot_selected` trace, primary execution, and
+both portable diagnostics pass one exact 15-role consumer. Generated source still embeds normalized-spec JSON and
+keeps its `{label,family}` plan unchanged. Governance is 4 complete + 3 pending with 36 rejected mutations.
+Julia/Lua locks `.5-.6` and recurring/public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
 oracle/classifier layers, exact primary 65x2, Knowledge Map/mdBook/doctrines, and canonical Phase 0 1,031/1,031
 in 619 seconds.
 

@@ -7,6 +7,7 @@ import '../action/function_registry.dart';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
+import '../validation/spec_validator.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
 import 'unicode_case_mapping.dart';
@@ -31,6 +32,10 @@ final class RuntimeDiagnostic {
     this.entryRule,
     this.ruleLabel,
     this.handlerSourceLabel,
+    this.targetRule,
+    this.regexIndex,
+    this.expectedRegexIndex,
+    this.actualRegexIndex,
   });
 
   final String type;
@@ -48,6 +53,10 @@ final class RuntimeDiagnostic {
   final String? entryRule;
   final String? ruleLabel;
   final String? handlerSourceLabel;
+  final String? targetRule;
+  final int? regexIndex;
+  final int? expectedRegexIndex;
+  final int? actualRegexIndex;
 
   JsonObject toJson() => {
     'type': type,
@@ -65,6 +74,10 @@ final class RuntimeDiagnostic {
     if (entryRule != null) 'entry_rule': entryRule,
     if (ruleLabel != null) 'rule_label': ruleLabel,
     if (handlerSourceLabel != null) 'handler_source_label': handlerSourceLabel,
+    if (targetRule != null) 'target_rule': targetRule,
+    if (regexIndex != null) 'regex_index': regexIndex,
+    if (expectedRegexIndex != null) 'expected_regex_index': expectedRegexIndex,
+    if (actualRegexIndex != null) 'actual_regex_index': actualRegexIndex,
   };
 }
 
@@ -231,6 +244,23 @@ final class LinkedSpecRuntimeEngine {
     Map<String, GeneratedRuleFamily>? generatedPlan,
     String? generatedSourceIdentity,
   }) {
+    try {
+      validateCompiledRegexSlotIdentities(compiledSpec);
+    } on SpecValidationException catch (error) {
+      final diagnostic = error.diagnostic;
+      throw RuntimeInterpreterException(
+        error.message,
+        diagnostic: _diagnostic(
+          stage: diagnostic?.stage ?? 'validate_compiled_rule',
+          code: diagnostic?.code ?? 'regex_slot_identity_invalid',
+          summary: 'Dart compiled regex-slot identity validation failed',
+          detail: error.message,
+          ruleLabel: diagnostic?.field('rule_label') as String?,
+          targetRule: diagnostic?.field('target_rule') as String?,
+          regexIndex: diagnostic?.field('regex_index') as int?,
+        ),
+      );
+    }
     final ResolvedEntryRule selection;
     try {
       selection = compiledSpec.resolveEntryRule(topRule);
@@ -565,6 +595,10 @@ final class LinkedSpecRuntimeEngine {
     String? entryRule,
     String? ruleLabel,
     String? handlerSourceLabel,
+    String? targetRule,
+    int? regexIndex,
+    int? expectedRegexIndex,
+    int? actualRegexIndex,
   }) {
     final effectiveRule = ruleLabel ?? topRule;
     return RuntimeDiagnostic(
@@ -587,6 +621,10 @@ final class LinkedSpecRuntimeEngine {
           (effectiveRule == null
               ? 'dart_runtime'
               : 'dart_runtime:rule:$effectiveRule'),
+      targetRule: targetRule,
+      regexIndex: regexIndex,
+      expectedRegexIndex: expectedRegexIndex,
+      actualRegexIndex: actualRegexIndex,
     );
   }
 
@@ -988,6 +1026,18 @@ final class LinkedSpecRuntimeEngine {
           match: match,
           reason: 'mode=AND expected_index=$expectedIndex',
         );
+        _assertOrderedRegexMatchIdentity(
+          context,
+          rule,
+          expectedIndex,
+          match.alternativeIndex,
+        );
+        _traceRegexSlotSelected(
+          context,
+          rule,
+          match.alternativeIndex,
+          selectionRole: 'ordered_required',
+        );
         _acceptRegexMatch(rule, match, context);
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
@@ -999,7 +1049,7 @@ final class LinkedSpecRuntimeEngine {
 
     final match = entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
         ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
-        : RuntimeRegexAlternation.compile(plan.patterns).match(
+        : plan.matcher.match(
             context.input,
             context.cursorCodeUnit,
             parseMode: cursorPolicy,
@@ -1024,6 +1074,21 @@ final class LinkedSpecRuntimeEngine {
       cursorPolicy: cursorPolicy,
       match: match,
       reason: 'entry_regex=$entryRegexIndex',
+    );
+    final selectionRole = entryRegexIndex > 0 ? 'ordered_required' : 'choice';
+    if (selectionRole == 'ordered_required') {
+      _assertOrderedRegexMatchIdentity(
+        context,
+        rule,
+        entryRegexIndex,
+        match.alternativeIndex,
+      );
+    }
+    _traceRegexSlotSelected(
+      context,
+      rule,
+      match.alternativeIndex,
+      selectionRole: selectionRole,
     );
     _acceptRegexMatch(rule, match, context);
     final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1060,16 +1125,63 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     LinkedSpecParseMode cursorPolicy,
   ) {
-    final match = RuntimeRegexAlternation.compile([
-      plan.patterns[expectedIndex],
-    ]).match(context.input, context.cursorCodeUnit, parseMode: cursorPolicy);
-    if (match == null) {
-      return null;
+    return plan.matcher.matchAlternative(
+      expectedIndex,
+      context.input,
+      context.cursorCodeUnit,
+      parseMode: cursorPolicy,
+    );
+  }
+
+  void _assertOrderedRegexMatchIdentity(
+    _RuntimeExecutionContext context,
+    CompiledRule rule,
+    int expectedIndex,
+    int actualIndex,
+  ) {
+    final expected = compiledRegexSlotIdentitiesFor(rule, expectedIndex).first;
+    final actual = compiledRegexSlotIdentitiesFor(rule, actualIndex).first;
+    try {
+      assertOrderedRegexSlotIdentity(
+        ruleLabel: rule.label,
+        expectedTargetRule: expected.targetRule,
+        expectedRegexIndex: expected.regexIndex,
+        actualTargetRule: actual.targetRule,
+        actualRegexIndex: actual.regexIndex,
+      );
+    } on OrderedRegexSlotIdentityException catch (error) {
+      throw RuntimeInterpreterException(
+        error.toString(),
+        diagnostic: context.diagnostic(
+          stage: 'execute_rule',
+          code: 'ordered_regex_slot_identity_lost',
+          summary: 'Dart ordered regex-slot identity invariant failed',
+          detail: error.toString(),
+          ruleLabel: error.ruleLabel,
+          targetRule: error.targetRule,
+          expectedRegexIndex: error.expectedRegexIndex,
+          actualRegexIndex: error.actualRegexIndex,
+        ),
+      );
     }
-    if (match.alternativeIndex == expectedIndex) {
-      return match;
+  }
+
+  void _traceRegexSlotSelected(
+    _RuntimeExecutionContext context,
+    CompiledRule rule,
+    int regexIndex, {
+    required String selectionRole,
+  }) {
+    for (final identity in compiledRegexSlotIdentitiesFor(rule, regexIndex)) {
+      context.trace?.emitEvent(
+        LinkedSpecTraceEventKind.mark,
+        'dart_runtime:regex_slot_selected',
+        'rule_label=${rule.label} selection_role=$selectionRole '
+            'target_rule=${identity.targetRule} '
+            'regex_index=${identity.regexIndex}',
+        LinkedSpecTraceLevel.high,
+      );
     }
-    return RuntimeRegexMatch.reindexed(match, expectedIndex);
   }
 
   void _acceptRegexMatch(
@@ -6537,6 +6649,10 @@ final class _RuntimeExecutionContext {
     String? expectedArity,
     String? ruleLabel,
     String? handlerSourceLabel,
+    String? targetRule,
+    int? regexIndex,
+    int? expectedRegexIndex,
+    int? actualRegexIndex,
   }) {
     final effectiveRule = ruleLabel ?? currentRuleLabel ?? topRule;
     return engine._diagnostic(
@@ -6550,6 +6666,10 @@ final class _RuntimeExecutionContext {
       topRule: topRule,
       ruleLabel: effectiveRule,
       handlerSourceLabel: handlerSourceLabel,
+      targetRule: targetRule,
+      regexIndex: regexIndex,
+      expectedRegexIndex: expectedRegexIndex,
+      actualRegexIndex: actualRegexIndex,
     );
   }
 
@@ -6826,9 +6946,11 @@ final class _EvaluatedAccessSegment {
 enum _EvaluatedAccessSegmentKind { key, arrayIndex }
 
 final class _RegexPlan {
-  const _RegexPlan({required this.patterns});
+  _RegexPlan({required this.patterns})
+    : matcher = RuntimeRegexAlternation.compile(patterns);
 
   final List<String> patterns;
+  final RuntimeRegexAlternation matcher;
 }
 
 final class _MatchedActionEdge {

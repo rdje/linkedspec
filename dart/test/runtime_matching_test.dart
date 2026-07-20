@@ -35,6 +35,32 @@ void main() {
     expect(tie.seekMatch('cat', 0)!.alternativeIndex, 0);
   });
 
+  test(
+    'matches one required duplicate alternative with its authored index',
+    () {
+      final alternation = RuntimeRegexAlternation.compile(['(a)', '(a)']);
+
+      final first = alternation.matchAlternative(
+        0,
+        'aa',
+        0,
+        parseMode: LinkedSpecParseMode.consume,
+      );
+      final second = alternation.matchAlternative(
+        1,
+        'aa',
+        1,
+        parseMode: LinkedSpecParseMode.consume,
+      );
+
+      expect(first?.alternativeIndex, 0);
+      expect(first?.captures, ['a']);
+      expect(second?.alternativeIndex, 1);
+      expect(second?.captures, ['a']);
+      expect(second?.codeUnitStart, 1);
+    },
+  );
+
   test('matches regex lists carried by compiled rules', () {
     final compiled = compileSpec(parseSpec('Top::\n /cat/ /dog/'));
     final top = compiled.rule('Top')!;

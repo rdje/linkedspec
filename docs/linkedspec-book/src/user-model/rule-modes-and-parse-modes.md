@@ -284,8 +284,9 @@ iteration.
 Choice is intentionally different. When two eligible choice slots match at the
 same earliest position, the first authored slot wins. This is stable source
 priority, not an attempt to recover identity from pattern text. The contract is
-`linkedspec-duplicate-regex-slot-identity-v1`; the Perl reference implements it,
-with the remaining backend admissions tracked separately.
+`linkedspec-duplicate-regex-slot-identity-v1`; Perl, Rust, and Dart implement
+and admit it, with Julia and dual-ABI Lua tracked in the remaining backend
+lanes.
 
 ## Single choice: `:|`
 

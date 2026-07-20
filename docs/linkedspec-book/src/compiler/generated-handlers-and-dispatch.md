@@ -215,6 +215,16 @@ Generated traced execution adds `generated_rule_enter`,
 native trace. One isolated host package compiles and runs all ten families
 against native interpreter values.
 
+Dart duplicate-slot admission keeps that v2 boundary unchanged. Emitted source
+adds `linkedspecRegexSlotIdentityContract`, while the normalized `SpecFile` JSON
+payload remains the owner from which compiled target/index identities are
+reconstructed. Ordered native and generated-plan execution call the same
+`matchAlternative` required-slot primitive; OR/default still evaluates the
+complete alternation. Both emit `dart_runtime:regex_slot_selected` with rule,
+selection role, target rule, and regex index. Malformed reconstructed slots fail
+as `regex_slot_identity_invalid` at `validate_compiled_rule` before plan
+execution or source emission; the plan remains exactly `{label, family}`.
+
 Dart admission now consumes the contract's exact eight-case list rather than
 copying a backend-local list. Every fixture—including staged user-function
 execution—must first equal its checked-in interpreter result. One isolated

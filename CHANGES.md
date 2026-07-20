@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.4 — implement Dart duplicate regex-slot identity
+
+Dart ordered execution now matches a required authored regex alternative directly. The new
+`RuntimeRegexAlternation.matchAlternative` uses the selected compiled regex and constructs a match with that
+alternative's original index; `AND` and repeated-`AND` no longer recompile a one-pattern alternation and then
+rewrite its branch index. OR/default choice still evaluates the complete alternation with earliest-start and
+first-authored priority.
+
+Compiled action edges retain structural `{target_rule, regex_index}` identity. One validator runs after compile
+and before runtime, descriptor, emission, or generated-plan execution. Descriptors publish
+`linkedspec-duplicate-regex-slot-identity-v1`; emitted Dart v2 source publishes the same identity while retaining
+normalized `SpecFile` JSON and exact `{label, family}` plans. Native/generated trace emits
+`dart_runtime:regex_slot_selected`. Stable compiled-slot and ordered-invariant diagnostics carry the portable
+fields through `SpecValidationException`, `RuntimeDiagnostic`, and `GeneratedSourceException`.
+
+One contract-declared 15-role Dart consumer covers all five fixtures, native, loaded, reconstructed, descriptor,
+emitted/generated, native/generated trace, primary command, and diagnostic routes. The neutral checker advances
+only Dart to 4 complete + 3 pending with 36 rejected mutations. Focused proof and the complete Dart-local gate
+pass format, fatal analyzer, 272 tests, primary CLI 65/65 in default and POSIX environments, and all 105 corpus
+fixtures. Final lockstep passes Knowledge Map 640/4,711, mdBook, all four doctrines, canonical root 7+5, cursor
+288, reference primary 65x2, and Phase 0 1,031/1,031 in 616 seconds. Exact generated-output cleanup follows the
+consumed proof.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity
 
 Rust ordered action execution now matches the already-required compiled regex slot directly in both ordinary

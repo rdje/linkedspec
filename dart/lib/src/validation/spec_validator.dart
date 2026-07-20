@@ -394,13 +394,25 @@ void _checkEdgeTargets(SpecFile spec) {
       switch (element.kind) {
         case ActionEdgeBodyElementKind(:final targets):
           for (final target in targets) {
-            _checkTarget(rule, rulesByLabel, target.label, target.index);
+            _checkTarget(
+              rule,
+              rulesByLabel,
+              target.label,
+              target.index,
+              regexSlotIdentity: true,
+            );
           }
         case BlindEdgeBodyElementKind(:final target):
           _checkTarget(rule, rulesByLabel, target, 0);
         case BareEdgeBodyElementKind(:final targets):
           for (final target in targets) {
-            _checkTarget(rule, rulesByLabel, target.label, target.index ?? 0);
+            _checkTarget(
+              rule,
+              rulesByLabel,
+              target.label,
+              target.index ?? 0,
+              regexSlotIdentity: !rule.header.mode.isAnd,
+            );
           }
         default:
           break;
@@ -413,20 +425,51 @@ void _checkTarget(
   Rule owner,
   Map<String, Rule> rulesByLabel,
   String target,
-  int index,
-) {
+  int index, {
+  bool regexSlotIdentity = false,
+}) {
   final targetRule = rulesByLabel[target];
   if (targetRule == null) {
+    final message =
+        "rule '${owner.header.label}' references undefined rule '$target'";
+    if (!regexSlotIdentity) {
+      throw SpecValidationException(message);
+    }
     throw SpecValidationException(
-      "rule '${owner.header.label}' references undefined rule '$target'",
+      message,
+      diagnostic: SpecPortableDiagnostic(
+        code: 'regex_slot_identity_invalid',
+        stage: 'validate_compiled_rule',
+        message: message,
+        fields: {
+          'rule_label': owner.header.label,
+          'target_rule': target,
+          'regex_index': index,
+        },
+      ),
     );
   }
 
   final regexCount = _regexCount(targetRule);
   if (index < 0 || index >= regexCount) {
+    final message =
+        "rule '${owner.header.label}' references rule '$target' regex slot "
+        '$index, but that rule has $regexCount regex slot(s)';
+    if (!regexSlotIdentity) {
+      throw SpecValidationException(message);
+    }
     throw SpecValidationException(
-      "rule '${owner.header.label}' references rule '$target' regex slot "
-      '$index, but that rule has $regexCount regex slot(s)',
+      message,
+      diagnostic: SpecPortableDiagnostic(
+        code: 'regex_slot_identity_invalid',
+        stage: 'validate_compiled_rule',
+        message: message,
+        fields: {
+          'rule_label': owner.header.label,
+          'target_rule': target,
+          'regex_index': index,
+        },
+      ),
     );
   }
 }

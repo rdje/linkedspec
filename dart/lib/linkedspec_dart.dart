@@ -97,6 +97,7 @@ export 'src/compiler/compiled_spec.dart'
         CompiledDependencyRegexEntry,
         CompiledDependencyRegexState,
         CompiledDescriptorState,
+        CompiledRegexSlotIdentity,
         CompiledRule,
         CompiledRuleModeMetadata,
         CompiledSpec,
@@ -104,9 +105,14 @@ export 'src/compiler/compiled_spec.dart'
         DependencyRef,
         EntryRuleSelectionBasis,
         EntryRuleSelectionException,
+        OrderedRegexSlotIdentityException,
         ResolvedEntryRule,
+        assertOrderedRegexSlotIdentity,
+        compiledRegexSlotIdentitiesFor,
         compileSpec,
+        linkedSpecRegexSlotIdentityContract,
         linkedSpecRootRuleSelectionContract,
+        validateCompiledRegexSlotIdentities,
         validateNoRemovedAggregateSelectors;
 export 'src/corpus/manifest_runner.dart'
     show

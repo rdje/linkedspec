@@ -25,7 +25,7 @@ void main() {
         {..._strings(_descriptorContract['required_meta_keys'])}
           ..removeAll(_strings(legacyVariant['required_keys']))
           ..addAll(_strings(outwardCursorVariant['required_keys']))
-          ..add('entry_rule_contract');
+          ..addAll({'entry_rule_contract', 'regex_slot_identity_contract'});
 
     for (final row in _rows('family_cases')) {
       final id = row['id']! as String;
@@ -58,6 +58,11 @@ void main() {
         rootMeta['entry_rule_contract'],
         linkedSpecRootRuleSelectionContract,
         reason: '$id root selection contract',
+      );
+      expect(
+        rootMeta['regex_slot_identity_contract'],
+        linkedSpecRegexSlotIdentityContract,
+        reason: '$id regex-slot identity contract',
       );
       for (final field in _strings(outwardCursorVariant['forbidden_keys'])) {
         expect(rootMeta, isNot(contains(field)), reason: '$id root $field');

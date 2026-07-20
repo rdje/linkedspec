@@ -130,6 +130,17 @@ invalid compiled state as `GeneratedSourceStage::ValidateCompiledRule` /
 `GeneratedSourceCode::RegexSlotIdentityInvalid` with the same target identity;
 the source emitter rejects it before producing an artifact.
 
+Dart uses the same portable codes and fields. `compileSpec(...)`,
+`validateCompiledRegexSlotIdentities(...)`, runtime entry, descriptor projection,
+and generated-source validation all reject a missing or out-of-range action slot
+as `regex_slot_identity_invalid` / `validate_compiled_rule`. `RuntimeDiagnostic`
+adds optional `target_rule` and `regex_index`; `GeneratedSourceException` maps
+the failure to `GeneratedSourceStage.validateCompiledRule` and
+`GeneratedSourceCode.regexSlotIdentityInvalid`. The public
+`assertOrderedRegexSlotIdentity(...)` seam exposes
+`ordered_regex_slot_identity_lost` / `execute_rule` with expected and actual
+indices for invariant testing.
+
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or
 `execute_value_with_diagnostic_output(input, options, sink)` with an optional caller-owned

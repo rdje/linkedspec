@@ -63,6 +63,43 @@ final class RuntimeRegexAlternation {
     };
   }
 
+  /// Match only the required authored alternative while preserving its index.
+  RuntimeRegexMatch? matchAlternative(
+    int alternativeIndex,
+    String input,
+    int codeUnitCursor, {
+    LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+  }) {
+    if (alternativeIndex < 0 || alternativeIndex >= alternatives.length) {
+      throw RangeError.index(
+        alternativeIndex,
+        alternatives,
+        'alternativeIndex',
+      );
+    }
+    final alternative = alternatives[alternativeIndex];
+    final cursor = _clampCodeUnitOffset(input, codeUnitCursor);
+    final RegExpMatch? rawMatch;
+    switch (parseMode) {
+      case LinkedSpecParseMode.seek:
+        rawMatch = alternative.regex.allMatches(input, cursor).firstOrNull;
+      case LinkedSpecParseMode.consume:
+        final prefix = alternative.regex.matchAsPrefix(input, cursor);
+        rawMatch = prefix != null && prefix.start == cursor
+            ? prefix as RegExpMatch
+            : null;
+    }
+    if (rawMatch == null) {
+      return null;
+    }
+    return RuntimeRegexMatch._fromRegExpMatch(
+      input: input,
+      alternativeIndex: alternative.index,
+      pattern: alternative.pattern,
+      match: rawMatch,
+    );
+  }
+
   RuntimeRegexMatch? seekMatch(String input, int codeUnitCursor) {
     final cursor = _clampCodeUnitOffset(input, codeUnitCursor);
     RuntimeRegexMatch? best;

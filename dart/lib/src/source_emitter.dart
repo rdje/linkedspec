@@ -5,6 +5,7 @@ import 'compiler/compiled_spec.dart';
 import 'runtime/generated_plan.dart';
 import 'runtime/interpreter.dart';
 import 'trace/trace.dart';
+import 'validation/spec_validator.dart';
 
 /// Backend-neutral generated-source contract implemented by this emitter.
 const linkedSpecGeneratedSourceContract = 'linkedspec-generated-source-v2';
@@ -39,8 +40,10 @@ enum GeneratedSourceStage {
   emitSource('emit_source'),
   compileOrLoadGeneratedSource('compile_or_load_generated_source'),
   validateGeneratedPlan('validate_generated_plan'),
+  validateCompiledRule('validate_compiled_rule'),
   validateSpec('validate_spec'),
   selectEntryRule('select_entry_rule'),
+  executeRule('execute_rule'),
   executeGenerated('execute_generated');
 
   const GeneratedSourceStage(this.wireName);
@@ -59,6 +62,8 @@ enum GeneratedSourceCode {
   generatedSourceContractVersionMismatch(
     'generated_source_contract_version_mismatch',
   ),
+  regexSlotIdentityInvalid('regex_slot_identity_invalid'),
+  orderedRegexSlotIdentityLost('ordered_regex_slot_identity_lost'),
   noRulesDefined('no_rules_defined'),
   entryRuleNotFound('entry_rule_not_found'),
   generatedExecutionFailed('generated_execution_failed');
@@ -81,6 +86,10 @@ final class GeneratedSourceException implements Exception {
     this.detail,
     this.expectedContract,
     this.actualContract,
+    this.targetRule,
+    this.regexIndex,
+    this.expectedRegexIndex,
+    this.actualRegexIndex,
   });
 
   factory GeneratedSourceException.emitFailed(
@@ -137,6 +146,10 @@ final class GeneratedSourceException implements Exception {
   final String? detail;
   final String? expectedContract;
   final String? actualContract;
+  final String? targetRule;
+  final int? regexIndex;
+  final int? expectedRegexIndex;
+  final int? actualRegexIndex;
 
   JsonObject toJson() {
     return {
@@ -151,6 +164,11 @@ final class GeneratedSourceException implements Exception {
       if (detail != null) 'detail': detail,
       if (expectedContract != null) 'expected_contract': expectedContract,
       if (actualContract != null) 'actual_contract': actualContract,
+      if (targetRule != null) 'target_rule': targetRule,
+      if (regexIndex != null) 'regex_index': regexIndex,
+      if (expectedRegexIndex != null)
+        'expected_regex_index': expectedRegexIndex,
+      if (actualRegexIndex != null) 'actual_regex_index': actualRegexIndex,
     };
   }
 
@@ -172,6 +190,8 @@ final class GeneratedSourceMetadata {
   String get contractId => linkedSpecGeneratedSourceContract;
 
   int get formatVersion => linkedSpecGeneratedSourceFormatVersion;
+
+  String get regexSlotIdentityContract => linkedSpecRegexSlotIdentityContract;
 
   JsonObject toJson() {
     return {
@@ -398,7 +418,10 @@ String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
   }
 
   try {
+    validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+  } on SpecValidationException catch (error) {
+    throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {
     throw GeneratedSourceException.emitFailed(
       sourceIdentity,
@@ -445,6 +468,8 @@ import 'package:linkedspec_dart/linkedspec_dart.dart';
 const linkedspecGeneratedSourceContract =
     'linkedspec-generated-source-v2';
 const linkedspecGeneratedSourceFormat = 2;
+const linkedspecRegexSlotIdentityContract =
+    'linkedspec-duplicate-regex-slot-identity-v1';
 const linkedspecGeneratedSourceIdentity = $identityLiteral;
 const _compiledSpecJsonBase64 = '$specJsonBase64';
 const _generatedPlan = <GeneratedPlanRow>[
@@ -558,7 +583,10 @@ Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV2(
   String sourceIdentity,
 ) {
   try {
+    validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+  } on SpecValidationException catch (error) {
+    throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {
     throw GeneratedSourceException.compileFailed(sourceIdentity, error.message);
   }
@@ -634,6 +662,19 @@ GeneratedSourceException _generatedExecutionFailure(
 }) {
   if (error is RuntimeInterpreterException) {
     final diagnostic = error.diagnostic;
+    if (diagnostic?.code == 'ordered_regex_slot_identity_lost') {
+      return GeneratedSourceException(
+        stage: GeneratedSourceStage.executeRule,
+        code: GeneratedSourceCode.orderedRegexSlotIdentityLost,
+        summary: 'Generated ordered regex-slot identity invariant failed',
+        sourceIdentity: sourceIdentity,
+        ruleLabel: diagnostic?.ruleLabel,
+        targetRule: diagnostic?.targetRule,
+        expectedRegexIndex: diagnostic?.expectedRegexIndex,
+        actualRegexIndex: diagnostic?.actualRegexIndex,
+        detail: diagnostic?.detail,
+      );
+    }
     if (diagnostic?.code == 'no_rules_defined' ||
         diagnostic?.code == 'entry_rule_not_found') {
       return GeneratedSourceException(
@@ -666,6 +707,23 @@ GeneratedSourceException _generatedExecutionFailure(
     handlerFamily: effectiveRule == null
         ? null
         : validatedPlan[effectiveRule]?.wireName,
+  );
+}
+
+GeneratedSourceException _generatedRegexSlotIdentityInvalid(
+  String sourceIdentity,
+  SpecValidationException error,
+) {
+  final diagnostic = error.diagnostic;
+  return GeneratedSourceException(
+    stage: GeneratedSourceStage.validateCompiledRule,
+    code: GeneratedSourceCode.regexSlotIdentityInvalid,
+    summary: 'Generated compiled regex-slot identity validation failed',
+    sourceIdentity: sourceIdentity,
+    ruleLabel: diagnostic?.field('rule_label') as String?,
+    targetRule: diagnostic?.field('target_rule') as String?,
+    regexIndex: diagnostic?.field('regex_index') as int?,
+    detail: error.message,
   );
 }
 

@@ -7,6 +7,78 @@ import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 
 const linkedSpecRootRuleSelectionContract = 'linkedspec-root-rule-selection-v1';
+const linkedSpecRegexSlotIdentityContract =
+    'linkedspec-duplicate-regex-slot-identity-v1';
+
+/// Stable structural identity for one compiled regex slot.
+final class CompiledRegexSlotIdentity {
+  const CompiledRegexSlotIdentity({
+    required this.targetRule,
+    required this.regexIndex,
+  });
+
+  final String targetRule;
+  final int regexIndex;
+
+  String get wireName => '$targetRule#$regexIndex';
+
+  JsonObject toJson() => {'target_rule': targetRule, 'regex_index': regexIndex};
+}
+
+/// Stable ordered-execution invariant failure for a mismatched regex slot.
+final class OrderedRegexSlotIdentityException implements Exception {
+  const OrderedRegexSlotIdentityException({
+    required this.ruleLabel,
+    required this.targetRule,
+    required this.expectedRegexIndex,
+    required this.actualRegexIndex,
+  });
+
+  final String ruleLabel;
+  final String targetRule;
+  final int expectedRegexIndex;
+  final int actualRegexIndex;
+
+  SpecPortableDiagnostic get diagnostic => SpecPortableDiagnostic(
+    code: 'ordered_regex_slot_identity_lost',
+    stage: 'execute_rule',
+    message: toString(),
+    fields: {
+      'rule_label': ruleLabel,
+      'target_rule': targetRule,
+      'expected_regex_index': expectedRegexIndex,
+      'actual_regex_index': actualRegexIndex,
+    },
+  );
+
+  @override
+  String toString() {
+    return 'ordered_regex_slot_identity_lost stage=execute_rule '
+        'rule_label=$ruleLabel target_rule=$targetRule '
+        'expected_regex_index=$expectedRegexIndex '
+        'actual_regex_index=$actualRegexIndex';
+  }
+}
+
+/// Assert that an ordered matcher returned its required structural slot.
+void assertOrderedRegexSlotIdentity({
+  required String ruleLabel,
+  required String expectedTargetRule,
+  required int expectedRegexIndex,
+  required String actualTargetRule,
+  required int actualRegexIndex,
+}) {
+  if (expectedTargetRule == actualTargetRule &&
+      expectedRegexIndex == actualRegexIndex) {
+    return;
+  }
+  throw OrderedRegexSlotIdentityException(
+    ruleLabel: ruleLabel,
+    targetRule: expectedTargetRule,
+    expectedRegexIndex: expectedRegexIndex,
+    actualRegexIndex: actualRegexIndex,
+  );
+}
 
 final class CompiledSpecException implements Exception {
   const CompiledSpecException(this.message);
@@ -144,6 +216,7 @@ CompiledSpec compileSpec(
       functionRegistry: functionRegistry,
       dependencyRegexState: dependencyRegexState,
     );
+    validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
     if (traceScope != null) {
       trace?.exitScope(
@@ -224,6 +297,7 @@ final class CompiledSpec {
   }
 
   CompiledDescriptorState get descriptorState {
+    validateCompiledRegexSlotIdentities(this);
     return CompiledDescriptorState(
       compiledSpecState: this,
       dependencyRegexState: dependencyRegexState,
@@ -248,6 +322,84 @@ final class CompiledSpec {
   }
 
   JsonObject toDescriptorJson() => descriptorState.toJson();
+}
+
+/// Validate every action edge's typed target-rule plus regex-index identity.
+///
+/// This boundary is intentionally public: generated-source adapters and
+/// runtimes must reject caller-constructed malformed compiled state before
+/// matching it.
+void validateCompiledRegexSlotIdentities(CompiledSpec compiled) {
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label];
+    if (rule == null) {
+      continue;
+    }
+    for (final edge in rule.actionEdges) {
+      if (edge.targets.length != 1) {
+        continue;
+      }
+      final target = edge.targets.single;
+      final targetRule = compiled.rulesByLabel[target.label];
+      final targetRegexCount = targetRule == null
+          ? 0
+          : _authoredRegexCount(targetRule);
+      final identityIndex = edge.childRegexIndex;
+      final identityIsValid =
+          targetRule != null &&
+          identityIndex >= 0 &&
+          identityIndex < targetRegexCount &&
+          target.index == identityIndex &&
+          edge.regexIndex >= 0 &&
+          edge.regexIndex < rule.regexPatterns.length;
+      if (identityIsValid) {
+        continue;
+      }
+      final message =
+          "rule '$label' references rule '${target.label}' regex slot "
+          '$identityIndex, but that structural slot does not exist';
+      throw SpecValidationException(
+        message,
+        diagnostic: SpecPortableDiagnostic(
+          code: 'regex_slot_identity_invalid',
+          stage: 'validate_compiled_rule',
+          message: message,
+          fields: {
+            'rule_label': label,
+            'target_rule': target.label,
+            'regex_index': identityIndex,
+          },
+        ),
+      );
+    }
+  }
+}
+
+/// Return the authored structural identities selected by one compiled slot.
+List<CompiledRegexSlotIdentity> compiledRegexSlotIdentitiesFor(
+  CompiledRule rule,
+  int regexIndex,
+) {
+  final identities = [
+    for (final edge in rule.actionEdges)
+      if (edge.regexIndex == regexIndex && edge.targets.length == 1)
+        CompiledRegexSlotIdentity(
+          targetRule: edge.targets.single.label,
+          regexIndex: edge.childRegexIndex,
+        ),
+  ];
+  if (identities.isNotEmpty) {
+    return List.unmodifiable(identities);
+  }
+  return List.unmodifiable([
+    CompiledRegexSlotIdentity(targetRule: rule.label, regexIndex: regexIndex),
+  ]);
+}
+
+int _authoredRegexCount(CompiledRule rule) {
+  return rule.bodyElements
+      .where((element) => element.kind is RegexBodyElementKind)
+      .length;
 }
 
 /// Reject removed public aggregate selectors in every executable part of a
@@ -686,6 +838,7 @@ final class CompiledDescriptorState {
         'compiled_dependency_regex_model': 'compiled_dependency_regex_state',
         'cursor_contract': 'linkedspec-rule-local-cursor-v1',
         'entry_rule_contract': linkedSpecRootRuleSelectionContract,
+        'regex_slot_identity_contract': linkedSpecRegexSlotIdentityContract,
         'definition_order': compiledSpecState.definitionOrder,
         'compiled_rule_order': compiledSpecState.compiledRuleOrder,
         'redefined_rule_labels': compiledSpecState.redefinedRuleLabels,

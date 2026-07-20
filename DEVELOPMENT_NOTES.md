@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.4` — preserve the authored index in the match, not afterward):
+  Dart's baseline values were correct, but `_matchSpecific` created a new one-pattern alternation whose native
+  result was necessarily branch zero, then repaired the result with `RuntimeRegexMatch.reindexed`. That preserved
+  behavior without satisfying ADR `0047`'s stronger invariant. `RuntimeRegexAlternation.matchAlternative` now
+  selects the existing authored alternative directly and constructs the match with its original index. The full
+  alternation remains cached beside it for genuine OR/default choice.
+
+  Parent alternation index and structural identity are not interchangeable. Compiled action edges map the matched
+  parent slot to target rule plus child regex index; this is why a two-step cross-target parent sequence reports
+  `First#0`, then `Second#0`, rather than parent indices zero and one. One helper exposes those identities to the
+  ordered invariant and `dart_runtime:regex_slot_selected` trace. Multiple action rows remain distinct even when
+  their pattern strings are equal.
+
+  Normalized generated Dart source embeds `SpecFile` JSON rather than serialized `CompiledSpec`, so reconstruction
+  recompiles structural indices through the ordinary compiler. Caller-constructed compiled objects are still a
+  trust boundary. `validateCompiledRegexSlotIdentities` therefore runs after compile and at runtime, descriptor,
+  source-emitter, and generated-plan boundaries. Portable invalid-slot fields flow through spec, runtime, and
+  generated exceptions; the explicit ordered-identity assertion provides the second invariant without inventing
+  an unreachable matcher corruption path.
+
+  The exact 15-role admission covers all five fixtures, loaded/reconstructed state, descriptor, emitted normalized
+  payload, generated plan, native/generated trace, primary command, and both diagnostic routes. Complete Dart-
+  local proof passes format, fatal analyzer, 272 tests, both 65-case CLI environments, and 105/105 corpus. The
+  neutral checker advances only Dart to 4 complete + 3 pending and rejects 36 mutations. Final proof passes
+  Knowledge Map 640/4,711, mdBook, all four doctrines, canonical root 7+5, cursor 288, reference primary 65x2,
+  and Phase 0 1,031/1,031 in 616 seconds. Exact generated-output cleanup follows proof consumption.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.3` — retain direct matchers beside the choice matcher):
   Rust's first pass already compiled each rule pattern independently to derive capture metadata, then discarded
   those regex objects after building the combined alternation. Retaining them makes the repair both narrower and

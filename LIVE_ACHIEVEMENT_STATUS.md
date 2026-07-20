@@ -8,17 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.3` — Rust duplicate-slot parity is active task-tree-first from clean Perl commit
-  `568d3825` at ahead 246. Required-slot native/generated execution, descriptor/generated identity, trace,
-  diagnostics, and the exact 15-role admission are signoff-complete at 3 complete + 4 pending / 31 mutations.
-  Complete Rust-local, canonical, lockstep, and cleanup pass; the clean commit is the only remaining boundary.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.4` — Dart duplicate-slot parity is signoff-complete from clean Rust commit
+  `cad15db3` at ahead 247. Its exact commit is prepared; Julia `.5` must not activate until `.4` lands and the
+  root is clean.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity parity` is the active slice
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.4 — implement Dart duplicate regex-slot identity parity` is the active slice
   title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.4 — implement Dart duplicate regex-slot identity**
+  (DONE; commit prepared from clean `cad15db3`).
+
+  **Result:** Dart ordered native/generated execution matches an existing authored alternative directly, maps
+  it to structural target/index identity, and projects exact validation, descriptor/emitted metadata, trace, and
+  typed diagnostics without widening generated-v2 plans.
+
+  **Proof:** Exact 15-role admission, complete Dart format/analyzer/272 tests/primary 65x2/corpus 105, 4+3 rollout
+  with 36 mutations, KM 640/4,711, mdBook/four doctrines, canonical root 7+5, cursor 288, reference primary 65x2,
+  and Phase 0 1,031/1,031 in 616 seconds pass. Exact generated-output cleanup completes signoff.
+
+  **Next:** Commit `.4`, clear the brief, prove clean, then activate Julia `.5` task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity**
-  (DONE, signed off and awaiting its prepared clean commit).
+  (DONE at clean commit `cad15db3`).
 
   **Result:** Rust ordered native/generated execution matches the required compiled slot directly, preserves
   combined choice, and projects descriptor/emitted identity, trace, captures, and exact typed diagnostics.
@@ -27,7 +39,7 @@ Current execution status for interruption-safe batch workflow recovery.
   3+4 rollout with 31 mutations, KM 639/4,702, mdBook/four doctrines, canonical primary 65x2, Phase 0
   1,031/1,031 in 619 seconds, and exact cleanup pass.
 
-  **Next:** Commit and clean `.3`; only then activate Dart repair/admission `.9.1.8.1.4` task-tree-first.
+  **Next:** Dart repair/admission `.9.1.8.1.4` is active task-tree-first from the clean Rust boundary.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity**
   (DONE at clean commit `568d3825`).

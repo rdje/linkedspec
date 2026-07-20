@@ -177,8 +177,11 @@ diagnostic routes. Rust `.3` now uses retained individually compiled regexes for
 and generated-plan execution while leaving combined choice matching intact. Its exact 15-role consumer covers all
 neutral fixtures plus loaded/reconstructed, descriptor, emitted/generated, native/generated trace, primary, and
 diagnostic routes. Rust descriptors and emitted source publish the contract identity; malformed compiled slots
-fail before execution or artifact reconstruction; v2 plans stay `{label,family}`. Governance is 3 complete + 4
-pending / 31 mutations. Preserving-backend locks `.4-.6` and recurring/public `.7` remain dependency-ordered.
+fail before execution or artifact reconstruction; v2 plans stay `{label,family}`. Dart `.4` now matches the
+required authored alternative directly, projects the same descriptor/emitted/trace identity, validates native and
+generated reconstructed state, and passes one exact 15-role admission plus its complete 272-test/65x2/105 local
+gate. Governance is 4 complete + 3 pending / 36 mutations. Julia/Lua locks `.5-.6` and recurring/public `.7`
+remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

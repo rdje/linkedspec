@@ -5974,9 +5974,9 @@ before implementation.
     at clean commit `a1911ec6`. Audit `.0` landed at `4902f218`; neutral `.1` landed at clean commit `93ee7935`
     with 5/2/6/1+6/23 governance. Perl repair `.2` landed at clean commit `568d3825` with 12 roles, 2+5/26
     governance, canonical 1,031/615s, no generated artifacts, a zero-byte brief, and no background job. Rust
-    repair `.3` is signoff-complete from that boundary: required-slot execution, descriptor/generated-source
-    identity, stable diagnostics, native/generated trace, exact 15-role admission, complete Rust-local, KM/book/
-    doctrines, canonical 1,031/619s, and cleanup pass. Its clean commit is the only boundary before Dart `.4`.`
+    repair `.3` landed at clean commit `cad15db3`: required-slot execution, descriptor/generated-source identity,
+    stable diagnostics, native/generated trace, exact 15-role admission, complete Rust-local, KM/book/doctrines,
+    canonical 1,031/619s, and cleanup pass. Dart `.4` activates task-tree-first from that clean boundary.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.0`
@@ -6192,13 +6192,56 @@ before implementation.
     changes/notes/book/KM; commit `.3`, clear the brief, and activate Dart `.4` only from a clean boundary.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and admit Dart duplicate-slot identity parity.
   Dependencies: `.9.1.8.1.3`
   Acceptance: Match the ratified reference through native, normalized emitted, reconstructed, generated-plan/
     source, trace, primary, and corpus roles with portable failures and stable slot identity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-20.** Activated task-tree-first from clean Rust-admission commit `cad15db3` at ahead 247. Root status
+    is clean, `git_message_brief.txt` is zero bytes, task-named Rust/book/cache/log artifacts are absent, free disk
+    is 63 GiB, and no background job remains. Retrieve ADR `0047`, the duplicate-slot Knowledge Map cards,
+    neutral contract/checker, Dart cursor/generated-source precedents, and Toolbox routes before changing Dart.
+    Exact baseline probes returned every neutral result while source audit located the one-pattern compile+reindex
+    approximation. `matchAlternative` now retains the authored index directly; compiled identity validation,
+    descriptor/emitted/trace projection, generated-v2 reconstruction, both diagnostics, and one exact 15-role
+    consumer pass. Governance is 4 complete + 3 pending / 36 mutations. The complete Dart-local gate passes
+    format, fatal analyzer, 272 tests, primary 65x2, and corpus 105/105. Knowledge Map 640/4,711, mdBook, memory,
+    all four doctrines, JSON/Python/shell/whitespace, canonical root 7+5, cursor 288, reference primary 65x2, and
+    Phase 0 1,031/1,031 in 616 seconds pass. Exact post-proof generated-output cleanup and commit preparation
+    complete signoff.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.4 - implement Dart duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE BASELINE** — Retrieve ADR `0047`, neutral/Dart Knowledge Map and generated/cursor
+    precedents, then prove all five native fixtures already return exact values before implementation.
+  - [x] **PRESERVE REQUIRED IDENTITY DIRECTLY** — Replace one-pattern matching plus index rewriting with an
+    explicit required authored-alternative matcher while retaining complete-alternation choice priority.
+  - [x] **PROJECT / VALIDATE / DIAGNOSE** — Validate compiled structural slots across native and artifact trust
+    boundaries; publish descriptor/emitted identity, native/generated trace, and both portable invariants.
+  - [x] **ADMIT DART / NO REGRESSION** — Run one exact 15-role consumer over every fixture and native, loaded,
+    reconstructed, descriptor, emitted/generated, trace, primary, and diagnostic route; pass the complete Dart
+    package, 65x2 primary, and 105-case corpus gate.
+  - [x] **LOCKSTEP / COMMIT** — Update governance/task/roadmaps/live/memory/changes/notes/book/KM, pass canonical
+    proof and cleanup, commit `.4`, clear the brief, and activate Julia `.5` only from a clean boundary.
+
+  #### Completion Evidence
+
+  - `RuntimeRegexAlternation.matchAlternative` addresses one existing authored alternative and constructs the
+    match with its original index. AND and repeated-AND use it; full-alternation OR/default choice retains
+    earliest-start and first-authored priority. Whole and capture-group values remain unchanged.
+  - Compiled action rows map parent alternatives to `{target_rule, regex_index}`, so cross-target ordered trace
+    reports `First#0`, then `Second#0`. One shared validator protects compiler, runtime, descriptor, source-emitter,
+    and generated-plan boundaries without recovering identity from regex text.
+  - Dart descriptors and emitted v2 source publish `linkedspec-duplicate-regex-slot-identity-v1`; normalized
+    `SpecFile` JSON reconstructs compiled identities while public plans remain exactly `{label, family}`.
+    `regex_slot_selected` covers ordered and choice selection. Both portable diagnostics retain exact fields.
+  - `dart/test/duplicate_regex_slot_identity_contract_test.dart` executes each of 15 declared roles once over all
+    five fixtures, native/loaded/reconstructed, descriptor/emitted/generated, native/generated trace, primary,
+    and invalid-state routes. Governance advances only Dart to 4 complete + 3 pending / 36 mutations.
+  - Complete Dart-local proof passes format, fatal analyzer, 272 tests, 65/65 primary cases in both default and
+    POSIX environments, and 105/105 corpus fixtures. Final lockstep passes Knowledge Map 640 facts / 4,711 keys,
+    mdBook, all four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 616 seconds.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.5`
   Status: `pending`
@@ -8796,7 +8839,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `done` | ADR 0047, 5 fixtures, 2 diagnostics, 6 runtime rows, 1+6 rollout, 23 mutations, KM 637/4,685, canonical 1,031/635s, lockstep, and cleanup pass without backend behavior changes. |
 | 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `done` | Required-slot Perl execution and its 12-role admission pass at 2+5/26, KM 638/4,693, canonical 1,031/615s, lockstep, and exact cleanup before Rust `.3`. |
 | 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `done` | Required-slot native/generated execution and one exact 15-role Rust admission pass at 3+4/31; complete Rust, KM/mdBook/doctrines, canonical 1,031/619s, and cleanup signoff pass before Dart `.4`. |
-| 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `pending` | Implement and admit Dart parity. |
+| 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `done` | Direct authored-slot matching and exact 15-role Dart admission pass at 4+3/36; complete Dart, KM/mdBook/doctrines, canonical 1,031/616s, and cleanup signoff precede Julia `.5`. |
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `pending` | Implement and admit Julia parity. |
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `pending` | Implement and admit PUC Lua plus LuaJIT parity. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `pending` | Close recurring five-backend and public no-drift admission. |
@@ -9877,6 +9920,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Dart duplicate-slot `.9.1.8.1.4` is signoff-complete from clean `cad15db3`. Direct authored-
+  alternative matching, compiled identity validation, descriptor/emitted/trace projection, both diagnostics, and
+  the exact 15-role admission pass at 4+3/36. Complete Dart-local passes format/analyzer, 272 tests, primary 65x2,
+  and corpus 105/105. KM 640/4,711, mdBook/four doctrines, canonical root 7+5, cursor 288, reference primary 65x2,
+  and Phase 0 1,031/1,031 in 616 seconds pass. Exact generated-output cleanup and commit preparation are the sole
+  remaining operations before Julia `.5` activates from a clean commit.
+- `2026-07-20`: Clean commit `cad15db3` lands Rust duplicate-slot repair/admission `.9.1.8.1.3`; root tracked and
+  untracked state is clean, the brief is zero bytes, task artifacts are absent, free disk is 63 GiB, and ahead is
+  247. Dart parity `.9.1.8.1.4` activates task-tree-first before any Dart implementation or admission change.
 - `2026-07-20`: Rust duplicate-slot `.9.1.8.1.3` is signoff-complete from clean `568d3825`. Required-slot native/
   generated execution, descriptors, emitted identity, trace, diagnostics, and one exact 15-role consumer pass at
   3+4/31. Complete Rust-local passes core 193+4+5+8, runtime 138, oracle/classifier 105+105, integration 197,

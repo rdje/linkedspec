@@ -16,6 +16,10 @@ void main() {
       'format_version': 2,
       'source_identity': identity,
     });
+    expect(
+      metadata.regexSlotIdentityContract,
+      linkedSpecRegexSlotIdentityContract,
+    );
 
     expect(
       () => emitDartSourceV2(_compileProbe(), ''),

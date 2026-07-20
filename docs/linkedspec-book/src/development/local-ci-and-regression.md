@@ -192,13 +192,14 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
 two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
-runtime legs, fixes the `.1-.7` migration, and rejects 31 mutations. Canonical CI tracks the contract, checker,
-and admitted Perl/Rust consumers. The default gate runs the checker and Perl consumer; the complete Rust package
-driver runs its Rust consumer:
+runtime legs, fixes the `.1-.7` migration, and rejects 36 mutations. Canonical CI tracks the contract, checker,
+and admitted Perl/Rust/Dart consumers. The default gate runs the checker and Perl consumer; complete backend
+drivers run the Rust and Dart consumers:
 
 ```bash
 prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 CARGO_TARGET_DIR=/tmp/linkedspec-rust-target bash tools/run_rust_local.sh
+bash tools/run_dart_local.sh
 ```
 
 The consumer's 12 roles cover native and loaded execution, repeated duplicate and non-duplicate sequences,
@@ -207,8 +208,11 @@ native/generated trace, and both typed diagnostics. Generated v2 embeds `depende
 but keeps its plan rows exactly `{label, family}`. Rust's 15-role consumer adds native, loaded, reconstructed,
 descriptor, emitted/generated, native/generated trace, primary, repeated/control/cross-target/choice, and typed
 diagnostic proof. Its serialized `CompiledSpec` remains the generated execution payload, and emitted source
-publishes the slot-contract constant without widening the plan. Rollout is now 3 complete / 4 pending: neutral,
-Perl, and Rust are complete; Dart is the next preserving-backend lock.
+publishes the slot-contract constant without widening the plan. Dart's 15-role consumer uses normalized-spec JSON
+as the generated payload, checks direct authored-alternative matching, loaded/reconstructed/descriptor/emitted/
+generated/native-trace/generated-trace/primary/diagnostic routes, and retains exact `{label, family}` plans.
+Rollout is now 4 complete / 3 pending: neutral, Perl, Rust, and Dart are complete; Julia is the next preserving-
+backend lock.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

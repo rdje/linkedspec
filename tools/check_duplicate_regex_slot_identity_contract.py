@@ -30,6 +30,7 @@ TOP_LEVEL_FIELDS = {
     "trace_contract",
     "perl_admission",
     "rust_admission",
+    "dart_admission",
     "implementation_inventory",
     "migration",
     "rollout",
@@ -100,8 +101,8 @@ INVENTORY = [
     (
         "dart",
         "dart",
-        "match_required_pattern_then_reindex",
-        "behavior_matches",
+        "match_required_slot_directly",
+        "implemented",
         "first_authored",
         "preserved",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.4",
@@ -138,7 +139,7 @@ ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.1"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.2"),
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
-    ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
+    ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.5"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
     (
@@ -182,6 +183,29 @@ RUST_ADMISSION = {
     "canonical_driver": "tools/run_rust_local.sh",
     "ordered_mechanism": "match_required_slot_directly",
     "generated_slot_payload": "serialized_compiled_rule",
+    "roles": [
+        "neutral_fixtures",
+        "native_ordered",
+        "native_choice",
+        "repeated_ordered",
+        "repeated_control",
+        "cross_target",
+        "loaded",
+        "reconstructed",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "native_trace",
+        "generated_trace",
+        "primary_command",
+        "invalid_identity_diagnostics",
+    ],
+}
+DART_ADMISSION = {
+    "consumer": MIGRATION["dart_consumer"],
+    "canonical_driver": "tools/run_dart_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "normalized_spec_file_json",
     "roles": [
         "neutral_fixtures",
         "native_ordered",
@@ -485,6 +509,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     )
     require(contract["perl_admission"] == PERL_ADMISSION, "Perl admission drifted")
     require(contract["rust_admission"] == RUST_ADMISSION, "Rust admission drifted")
+    require(contract["dart_admission"] == DART_ADMISSION, "Dart admission drifted")
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list), "implementation inventory must be an array")
@@ -551,6 +576,7 @@ def validate_filesystem_contract() -> None:
         ROOT / "docs" / "knowledge" / "duplicate-regex-slot-identity-contract.md",
         ROOT / PERL_ADMISSION["consumer"],
         ROOT / RUST_ADMISSION["consumer"],
+        ROOT / DART_ADMISSION["consumer"],
     ]
     require(all(path.is_file() for path in required_paths), "neutral contract file is missing")
     index_text = (ROOT / "docs" / "decisions" / "INDEX.md").read_text(encoding="utf-8")
@@ -584,6 +610,10 @@ def validate_filesystem_contract() -> None:
         "canonical CI omits Rust consumer tracked input",
     )
     require(
+        f"require_tracked_file {DART_ADMISSION['consumer']}" in ci_text,
+        "canonical CI omits Dart consumer tracked input",
+    )
+    require(
         "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
         "canonical CI omits neutral checker execution",
     )
@@ -606,6 +636,16 @@ def validate_filesystem_contract() -> None:
     require(
         'test --manifest-path rust/Cargo.toml -p linkedspec-runtime' in rust_driver_text,
         "Rust canonical driver omits the runtime package consumer",
+    )
+    dart_consumer_text = (ROOT / DART_ADMISSION["consumer"]).read_text(encoding="utf-8")
+    require(
+        all(f"void role_{role}" in dart_consumer_text for role in DART_ADMISSION["roles"]),
+        "Dart consumer role inventory drifted",
+    )
+    dart_driver_text = (ROOT / DART_ADMISSION["canonical_driver"]).read_text(encoding="utf-8")
+    require(
+        '"$DART_CMD" test' in dart_driver_text,
+        "Dart canonical driver omits the Dart consumer suite",
     )
     linked_re_text = (ROOT / "perl" / "LinkedRE.pm").read_text(encoding="utf-8")
     emitter_text = (ROOT / "perl" / "LinkedSpec" / "HandlerVariantEmitter.pm").read_text(encoding="utf-8")
@@ -640,6 +680,27 @@ def validate_filesystem_contract() -> None:
     require(
         "LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT" in rust_emitter_text,
         "Rust generated-source slot-contract projection is missing",
+    )
+    dart_matching_text = (ROOT / "dart" / "lib" / "src" / "runtime" / "matching.dart").read_text(encoding="utf-8")
+    dart_engine_text = (ROOT / "dart" / "lib" / "src" / "runtime" / "interpreter.dart").read_text(encoding="utf-8")
+    dart_compiler_text = (ROOT / "dart" / "lib" / "src" / "compiler" / "compiled_spec.dart").read_text(encoding="utf-8")
+    dart_emitter_text = (ROOT / "dart" / "lib" / "src" / "source_emitter.dart").read_text(encoding="utf-8")
+    require(
+        "matchAlternative" in dart_matching_text,
+        "Dart required-slot matcher is missing",
+    )
+    require(
+        "dart_runtime:regex_slot_selected" in dart_engine_text
+        and "assertOrderedRegexSlotIdentity" in dart_engine_text,
+        "Dart native/generated slot trace or invariant seam is missing",
+    )
+    require(
+        "regex_slot_identity_contract" in dart_compiler_text,
+        "Dart descriptor slot-contract projection is missing",
+    )
+    require(
+        "linkedspecRegexSlotIdentityContract" in dart_emitter_text,
+        "Dart generated-source slot-contract projection is missing",
     )
 
 
@@ -677,6 +738,9 @@ def mutation_checks(contract: dict[str, Any]) -> int:
     def regress_rust(value: dict[str, Any]) -> None:
         value["rollout"][2]["status"] = "pending"
 
+    def regress_dart(value: dict[str, Any]) -> None:
+        value["rollout"][3]["status"] = "pending"
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("contract id", lambda value: value.__setitem__("contract_id", "stale")),
         ("duplicate legality", lambda value: value["identity"].__setitem__("duplicate_pattern_text_is_legal", False)),
@@ -700,13 +764,18 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Rust admission consumer", lambda value: value["rust_admission"].__setitem__("consumer", "rust/other.rs")),
         ("Rust admission role", lambda value: value["rust_admission"]["roles"].pop()),
         ("Rust ordered mechanism", lambda value: value["rust_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
+        ("Dart admission consumer", lambda value: value["dart_admission"].__setitem__("consumer", "dart/test/other.dart")),
+        ("Dart admission role", lambda value: value["dart_admission"]["roles"].pop()),
+        ("Dart ordered mechanism", lambda value: value["dart_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
         ("inventory omission", remove_inventory),
         ("Perl inventory regression", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift")),
         ("Rust inventory regression", lambda value: value["implementation_inventory"][1].__setitem__("ordered_status", "drift")),
+        ("Dart inventory regression", lambda value: value["implementation_inventory"][2].__setitem__("ordered_status", "drift")),
         ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
         ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
         ("Perl rollout regression", regress_perl),
         ("Rust rollout regression", regress_rust),
+        ("Dart rollout regression", regress_dart),
         ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
         ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
     ]

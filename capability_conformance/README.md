@@ -110,12 +110,14 @@ duplicates, a non-duplicate repeated control, and cross-target duplicates. The c
 invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
 inventory, migration paths, and the seven-leg rollout. Run
 `python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
-and rejects 31 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
+and rejects 36 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
 mutations. Perl `.2` is composed-admitted through 12 exact roles. Rust `.3` is composed-admitted through 15 exact
 roles covering native, reconstructed, loaded, descriptor, emitted/generated, native/generated trace, primary,
 all five neutral fixtures, and typed diagnostics. Rust matches required slots directly, retains combined choice,
-publishes descriptor/emitted contract identity, and keeps generated v2 plans minimal. Governance is 3 complete /
-4 pending; Dart `.4` is the next behavior-lock owner.
+publishes descriptor/emitted contract identity, and keeps generated v2 plans minimal. Dart `.4` is composed-
+admitted through the same 15-role shape over direct authored-alternative matching, normalized-spec generated
+payload, descriptor/emitted/trace identity, primary, and diagnostics. Governance is 4 complete / 3 pending; Julia
+`.5` is the next behavior-lock owner.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

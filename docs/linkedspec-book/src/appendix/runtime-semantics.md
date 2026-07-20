@@ -569,11 +569,19 @@ combined matchers remain the choice owner, so earliest-start and source-order
 priority are unchanged. Both implementations preserve whole, positional, and
 named captures when matching a required slot.
 
+Dart `.4` replaces its earlier behavior-preserving implementation detail—
+compile one required pattern, then rewrite the host match index—with
+`RuntimeRegexAlternation.matchAlternative`. The direct matcher retains the
+authored alternative index in the match itself. Ordered and repeated execution
+use it; choice continues to use the complete alternation. Target-rule/index
+identity is derived from compiled action edges for descriptor, invariant, and
+trace projection, including cross-target `First#0`, `Second#0` sequences.
+
 The executable neutral contract is
 `linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
-v2 because reconstructed compiled state already retains slot identity. Perl and
-Rust are admitted through `.2-.3`; Dart, Julia, and Lua conformance locks plus
-recurring/public closeout remain `.4-.7`.
+v2 because reconstructed compiled state already retains slot identity. Perl,
+Rust, and Dart are admitted through `.2-.4`; Julia, Lua, and recurring/public
+closeout remain `.5-.7`.
 
 ## 9. Zero-Progress Guard
 

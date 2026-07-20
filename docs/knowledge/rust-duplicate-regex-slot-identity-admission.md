@@ -37,5 +37,6 @@ failures retain the portable target rule/index fields.
 
 Related: [[duplicate-regex-slot-identity-contract]],
 [[duplicate-regex-slot-identity-cross-backend-audit]],
-[[perl-duplicate-regex-slot-identity-admission]], and
+[[perl-duplicate-regex-slot-identity-admission]],
+[[dart-duplicate-regex-slot-identity-admission]], and
 [[FUTURE-PARITY-BACKLOG]].
