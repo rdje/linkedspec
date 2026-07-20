@@ -58,6 +58,7 @@ changed* lives in git (layer D), not here.
 | [0045](0045-inter-match-gap-capture.md) | Inter-match gap capture preserves action-edge target ownership | 2026-07-17 | accepted direction; implementation dependency-gated | architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity |
 | [0046](0046-root-rule-selection-precedence.md) | Root-rule selection uses explicit selector, first authored marker, then first authored rule | 2026-07-18 | accepted; backend rollout pending | architecture, grammar, root-rule, entry-rule, top-rule, cli, descriptor, generated-source, trace, validation, parity |
 | [0047](0047-duplicate-regex-slot-identity.md) | Duplicate regex text does not erase structural slot identity | 2026-07-20 | accepted; rollout complete | architecture, regex, slot-identity, and-rule, or-rule, repetition, descriptor, generated-source, trace, diagnostics, parity |
+| [0048](0048-explicit-repetition-action-result-collection.md) | Explicit repetition action returns are per-hit collection values | 2026-07-20 | accepted; backend rollout pending | architecture, grammar, repetition, or-rule, action-edge, lifecycle, result-shape, descriptor, generated-source, trace, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

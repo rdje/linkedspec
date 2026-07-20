@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10 — decide and split explicit repetition action results
+
+ADR `0048` accepts the Perl/reference result contract for explicit repetition forms `*`, `+`, `?`, `OR`, `OR+`,
+and bounded `OR`: an action-edge `return(value)` contributes one typed value per accepted hit, while a lifecycle
+return remains a whole-rule return and `|` remains direct scalar choice. Bare `OR` has minimum one and must use the
+repeated action/blind generated families. Existing bounds, progress, rule-local cursor, regex-slot identity, and
+generated-source-v2 plan shape remain unchanged; stale newer-backend bare-OR family rows must be regenerated.
+
+Exact Perl live, loaded, generated, and generated-traced probes return `["A","B"]` for two-hit repetition and
+`"A"` for pipe. A disposable five-primary matrix proves Rust, Dart, Julia, and Lua currently return the first
+scalar for every repeated row. Source audit isolates two independent shared defects: all four newer ASTs exclude
+bare `OR` from repetition and generated classification, and all four repeated executors propagate an action-edge
+return through the lifecycle/whole-rule channel.
+
+No parser, compiler, runtime, descriptor, generated, CLI, or corpus behavior changes in this decision slice.
+Neutral/reference, Rust, Dart, Julia, dual-ABI Lua, recurring, and public work is split into `.9.1.10.1-.7` before
+code. README, roadmaps, task/live state, Knowledge Map, decision index, guide, and mdBook state the accepted rule
+and the exact current four-backend drift.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift
 
 Rule-local cursor rollout is closed at 75 migration files / 8 complete + 0 pending / 60 mutations. The executable

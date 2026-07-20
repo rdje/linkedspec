@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10` — separate repetition classification from action-return control):
+  The duplicate-slot choice fixture exposed only `::OR`, but the exact matrix now covers the complete explicit
+  repeated-action handler family. Perl collects two distinct hits for `OR`, `OR+`, bounded OR, `+`, and `*`, one
+  optional hit for `?`, and one scalar for pipe. Rust, Dart, Julia, and Lua return the first scalar for every row.
+  Perl live/file-loaded/generated/generated-traced routes agree and trace both selected slots, so this is not a
+  primary adapter projection defect.
+
+  The newer sources contain two orthogonal faults. Their AST comments call `Or` repeated choice, yet
+  `is_repetition`/`rep_min` omits it; every generated-v2 classifier therefore groups `Or` with `Pipe` as
+  `or_acode`. The bounded/plus/optional branches do enter their repetition loops, but action-edge return uses the
+  same exception/flow object as a lifecycle whole-rule return and exits on the first hit. A safe repair must fix
+  family metadata/generated classification and preserve action source context through the successful iteration;
+  changing only one seam leaves the other failure intact.
+
+  ADR `0048` chooses the reference behavior: explicit repeated-action returns are per-hit iteration values;
+  lifecycle returns stay whole-rule; pipe stays scalar. Returned containers remain nested, explicit null remains
+  an element, zero permitted hits produce an empty collection, below-min retains reference failure/null, and
+  bounds/progress/cursor/slot rules do not move. Generated-source v2 already has distinct `or_*` and `rep_*` rows,
+  so no format bump is warranted; stale bare-OR rows fail exact plan validation and require regeneration.
+
+  Seven children isolate the neutral/Perl contract, four backend migrations, dual-ABI Lua, recurring proof, and
+  public no-drift. The unadorned historical default handler remains outside this scoped decision. This slice is
+  behavior-free and removes its disposable primary script and regenerated Dart cache after measurement.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.9` — make the implemented cursor contract the only current public one):
   The neutral checker now mirrors a 29-document public contract and 26 forbidden exact stale-current statements.
   Four new mutations remove a document, a required marker, a forbidden-claim guard, or final rollout admission.

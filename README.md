@@ -6,7 +6,10 @@ their cursor policy, bare declared-rule members normalize by parent family, and 
 override is removed. Descriptors expose derived per-rule facts and generated-source v2 derives from authored
 family. The cursor rollout is closed at 75 migration files, 8 complete / 0 pending, and 60 rejected mutations;
 `bash tools/check_rule_local_cursor_five_backend.sh` is the recurring six-runtime plus selected 5x2x5 proof.
-Explicit repeated-OR action-result shape remains separately owned by `FUTURE-PARITY-BACKLOG.9.1.10`. Logical-helper
+ADR `0048` accepts per-hit action-result collection for explicit repetition and scalar pipe choice after exact
+five-backend audit found bare-OR classification plus action-return propagation defects in all four newer
+backends. Behavior/public rollout is split under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`; no behavior has migrated
+yet. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI

@@ -6,8 +6,10 @@
 > parent and edge kind never override a child, and the public/global
 > `parse_mode` option is removed. Perl, Rust, Dart, Julia, and dual-ABI Lua are
 > composed-admitted. One recurring gate now proves all six runtime legs plus the
-> selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending;
-> explicit repeated-OR action-result shape remains separately tracked.
+> selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending.
+> ADR `0048` accepts per-hit action-result collection for explicit repetition and
+> scalar pipe choice. Perl implements it; Rust, Dart, Julia, and Lua currently
+> return the first scalar. Rollout is split under `.9.1.10.1-.7` and remains pending.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -78,7 +80,7 @@ A rule with mode `:AND` (bounded, non-repeated) or compact AND `:&`:
 
 ### 2.2 Repeated Rules
 
-A rule with repetition (`:*`, `:+`, `OR+`, `AND+`, bounded `{N,M}` forms):
+A rule with repetition (`:*`, `:+`, `:?`, `OR`, `OR+`, `AND+`, bounded `{N,M}` forms):
 
 1. If the rule has an **I-block**: execute it once.
 2. Enter the repetition loop:
@@ -114,6 +116,29 @@ A rule with repetition (`:*`, `:+`, `OR+`, `AND+`, bounded `{N,M}` forms):
 
 Unbounded is represented as a large sentinel value (≥ 10⁹). Implementations should
 use an explicit "unbounded" representation.
+
+### 2.4 Explicit repeated-action result channel
+
+For action-edge handlers in `:*`, `:+`, `:?`, `:OR`, `:OR+`, and bounded
+`:OR{...}`, an explicit edge `return(value)` produces the successful iteration's
+value. The handler completes the successful-iteration path, appends one typed
+value to the ordered rule collection, and continues while its bound and progress
+permit. It does not treat the edge return as an immediate whole-rule exit.
+
+The collection is flat only at the iteration boundary: a returned array remains
+one nested element, and an explicit null remains one null element. Zero allowed
+hits return `[]`; failure below `rep_min` retains the reference null/failure
+result. `:OR` has `rep_min = 1` and generated family `rep_acode` (or `rep_bcode`
+for blind calls). `:|` is non-repeating and returns its selected action value
+directly.
+
+Lifecycle `return(...)` retains whole-rule authority. A backend must distinguish
+the return's action-edge context from `I`/`LS`/`LE`/`LX`/`IT`/`EX`/`E` rather
+than changing the meaning of every return event.
+
+This is the accepted ADR `0048` contract and current Perl behavior. Rust, Dart,
+Julia, and Lua still expose the pre-migration first-scalar behavior; the neutral
+and backend rollout is pending under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
 
 ## 3. Lifecycle Execution Order
 
@@ -310,11 +335,15 @@ expression, it yields the updated hash snapshot after the field write.
 
 ### 5.4 Return Value
 
-The rule's portable return value is whatever an explicit `return(...)` in an action or
-lifecycle block yields. Lifecycle blocks are statement blocks: a final `set(...)`,
-helper call, or value expression is not a portable implicit return. A rule that should
-surface an accumulator should say so directly, for example
-`return(copy(accumulator))`.
+Outside explicit repeated-action handlers, the rule's portable return value is
+whatever an explicit `return(...)` in an action or lifecycle block yields. In
+the explicit repetition families listed in §2.4, an action-edge return is one
+iteration value and the default rule result is the ordered collection of those
+values. Lifecycle returns remain whole-rule returns in every family.
+
+Lifecycle blocks are statement blocks: a final `set(...)`, helper call, or value
+expression is not a portable implicit return. A rule that should surface an
+accumulator should say so directly, for example `return(copy(accumulator))`.
 
 ### 5.5 What a Parser Returns (Top-Level Output)
 
@@ -421,8 +450,10 @@ Two distinct mechanisms produce a rule's data; do not conflate them:
 
 - The **implicit accumulator** (§5.1–§5.3) is the rule's working array; `push(Child)` /
   `push(target, value)` append to it across repetitions.
-- **`return(expr)`** sets the rule's **return value** — the value the parent sees for
-  that rule. It is the rule's value channel, separate from the accumulator.
+- **`return(expr)`** normally sets the rule's **return value** — the value the
+  parent sees for that rule. In an explicit repeated-choice action edge, it
+  instead supplies one per-hit iteration value to the rule's default collection
+  (§2.4). Lifecycle returns retain the whole-rule channel.
 
 A child rule's `return(...)` becomes that child's value for the parent to consume
 **explicitly** (for example `push(results, call(Child))`); it is **not**

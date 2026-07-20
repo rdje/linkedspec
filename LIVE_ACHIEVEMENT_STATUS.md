@@ -8,18 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.9` is active task-tree-first from clean duplicate-slot commit `92394bb7` at ahead
-  251. Public no-drift makes README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
-  ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model surfaces executable. The target
-  cursor boundary is achieved at 75 migration files / 8 complete + 0 pending / 60 mutations; exact recurring and
-  canonical proof pass. Only the commit/clean boundary remains. Exact repeated-OR result shape remains child
-  `.9.1.10`, so `.9.1`/`.9` stay active rather than being falsely closed.
+- `FUTURE-PARITY-BACKLOG.9.1.10` is active task-tree-first from clean cursor public-no-drift commit `4ceec12d` at
+  ahead 252. Exact Perl route and five-primary proof expands across `*`, `+`, `?`, `OR`, `OR+`, bounded OR, and
+  pipe. ADR `0048` accepts per-hit action collections for explicit repetition, lifecycle whole-rule authority,
+  scalar pipe, bare-OR repetition, and unchanged generated-source v2. Neutral, Rust, Dart, Julia, dual-ABI Lua,
+  recurring, and public leaves `.1-.7` are split before behavior code. KM 646/4,755, memory 56/60, task metadata,
+  all four doctrines, mdBook, and whitespace pass; decision commit/brief cleanup is in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10 — ratify and split explicit repetition action-result parity` is the active slice title.
 
 ## Latest Completed Slice
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift**
-  (SIGNOFF COMPLETE from clean base `92394bb7`; final commit boundary in progress).
+  (DONE at clean commit `4ceec12d` from base `92394bb7`).
 
   **Result:** The implemented rule-local cursor/bare-edge contract is the only current public contract across 29
   governed surfaces. Twenty-six stale-current denials and four new mutations close rollout at 75 migration files /
@@ -30,7 +30,7 @@ Current execution status for interruption-safe batch workflow recovery.
   10/1/8+105, and coverage 246/105+1/122; KM 646/4,751; mdBook/memory/four doctrines; root/duplicate cross-contract
   checks; canonical primary 65x2 and Phase 0 1,031/1,031; local CI exit 0; exact 1.8-GiB generated cleanup.
 
-  **Next:** Commit and clean `.9.1.9`, then activate `.9.1.10` task-tree-first.
+  **Next:** Explicit repeated-OR result-shape decision `.9.1.10` is active task-tree-first.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift**
   (DONE at clean commit `92394bb7` from base `9211c9a8`).

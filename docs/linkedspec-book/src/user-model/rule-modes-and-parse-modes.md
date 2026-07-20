@@ -18,8 +18,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > `linkedspec-rule-local-cursor-v1` plus derived per-rule facts, and generated source v2 derives policy from its
 > ordered label/family plan. The recurring gate composes all six runtime legs, selected 5x2x5 primary cases, and
 > support ledgers. Public no-drift closes the executable ledger at 75 migration files, 8 complete / 0 pending,
-> and 60 rejected mutations. Explicit repeated-OR action-result shape is tracked separately by
-> `FUTURE-PARITY-BACKLOG.9.1.10`.
+> and 60 rejected mutations. ADR `0048` now accepts per-hit action-result collection for explicit repetition
+> (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl already implements that rule;
+> Rust, Dart, Julia, and Lua currently stop at the first action-edge return. The behavior rollout is split under
+> `FUTURE-PARITY-BACKLOG.9.1.10.1-.7` and is not yet cross-backend complete.
 
 ## Current rule-label surface
 
@@ -193,8 +195,8 @@ single-choice `::|` rule therefore returns the first authored equal-start
 alternative. The contract is `linkedspec-duplicate-regex-slot-identity-v1`;
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit it. Rollout is
 closed at 7 complete / 0 pending. Explicit repeated `::OR` is a different family;
-its action-result collection shape is tracked separately by
-`FUTURE-PARITY-BACKLOG.9.1.10`.
+ADR `0048` makes its action-edge results a per-hit collection, with rollout
+pending under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
 
 ## Single choice: `:|`
 
@@ -219,6 +221,9 @@ Literal:|
 ```
 
 Use `:|` when exactly one alternative should provide the rule's result. Do not use `:|` when the rule should keep collecting repeated alternatives; use the repeated-choice family for that.
+
+For action edges, a selected `return(value)` in a pipe rule is the direct scalar
+rule value. It is not wrapped in a one-element collection.
 
 ## Compact repetition: `:+`, `:*`, and `:?`
 
@@ -265,6 +270,26 @@ TokenStream:OR
 
 On each iteration, the rule tries the alternatives and collects one successful hit. It repeats until no configured alternative matches or until a bound stops it.
 
+When a selected action edge explicitly returns a value, that value is the
+iteration result. The default result of an explicit repetition is the flat,
+ordered collection of those per-hit values:
+
+```text
+Letters::OR
+ /a/ -> Letters[0] { return("A") }
+ /b/ -> Letters[1] { return("B") }
+```
+
+Input `ab` has the accepted result `["A", "B"]`. Use `::|` instead when the
+intended result is one scalar choice. Returned arrays remain nested as one outer
+element, and an explicit null result remains one null element.
+
+This is the accepted ADR `0048` contract and the existing Perl behavior. During
+the current migration, Rust, Dart, Julia, and Lua still return only `"A"` for
+that example. Their ASTs also currently misclassify bare `OR` as non-repetition,
+although their public comments call it repeated choice. Do not treat that
+temporary first-hit behavior as the language contract.
+
 `:OR+` is the shorthand spelling for the same open-ended repeated-choice family:
 
 ```text
@@ -275,6 +300,13 @@ TokenStream:OR+
 ```
 
 Use `:OR+` when you want the plus sign visible in the label. Use `:OR` when the bare word is clearer. Both have the same "at least one repeated choice hit" authoring contract as `OR{1,}`.
+
+The same per-hit action-result rule applies to `:*`, `:+`, `:?`, `:OR+`, and
+bounded `:OR{...}`. Bounds count accepted hits before shaping the result:
+zero permitted hits produce `[]`, `:?` produces zero or one element, and a miss
+below the minimum produces the reference null/failure result. A return from a
+rule lifecycle block (`I`, `LS`, `LE`, `LX`, `IT`, `EX`, or `E`) remains a
+whole-rule return and may deliberately override the default collection.
 
 `OR{N}` requires exactly `N` successful choice iterations:
 

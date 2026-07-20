@@ -5756,7 +5756,7 @@ before implementation.
     mutations; KM is 628/4,600; mdBook, syntax, shell, whitespace, memory, KM, task metadata, and all four doctrines
     pass; canonical local CI exits 0 after root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 624
     seconds; generated 11 MiB book, Python cache, and two 104 KiB native trees removed`
-  Commit: `pending`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10 - decide repeated action results`
 
   #### Acceptance Checklist
 
@@ -6397,7 +6397,7 @@ before implementation.
     65/65 in default and POSIX environments, and Phase 0 1,031/1,031; canonical local CI exits 0. Exact cleanup
     removes 1.8 GiB of reproducible Rust output plus regenerated Dart, mdBook, and Python caches without touching
     source-bearing or uncertain external data.
-  Commit: `FUTURE-PARITY-BACKLOG.9.1.9 - close cursor public no drift`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.9 - close cursor public no drift` (`4ceec12d`)
 
   #### Acceptance Checklist
 
@@ -6415,20 +6415,126 @@ before implementation.
     whitespace; synchronize live docs and commit `.9.1.9` before selecting `.9.1.10` or another leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10`
-  Status: `pending`
+  Status: `active`
   Goal: Decide and align explicit repeated-OR action-edge result shape across all five backends.
+  Children: `.9.1.10.1`, `.9.1.10.2`, `.9.1.10.3`, `.9.1.10.4`, `.9.1.10.5`, `.9.1.10.6`, `.9.1.10.7`
   Dependencies: `.9.1.9`
-  Acceptance: Reproduce `Rule::OR`, bounded `OR{N,M}`, and single-choice `Rule::|` with duplicate and distinct
-    action-edge patterns across native, loaded, generated, traced, primary, and corpus routes. Decide whether
-    explicit repeated OR returns the Perl reference's per-hit collection or a single direct action value; preserve
-    `::|` as non-repeating single choice; then split any behavior migration and public no-drift work before code.
-  Verification: `Discovered and root-caused during duplicate-slot closeout `.9.1.8.1.7`. The neutral choice fixture
-    used `Top::OR` but declared scalar `"first"`. Perl primary returns `["first"]`; Rust, Dart, Julia, and Lua
-    primary adapters return `"first"`. `return_descriptor` classifies Perl `::OR` as looping `REP_ACODE`, and
-    `dump_parser_source` shows `_emit_rep_acode_handler` rewrites action return into `$Top`, pushes it into
-    `@Top_collect`, and returns the collection. `Top::|` instead selects non-looping `OR_ACODE` and returns the
-    scalar on every intended single-choice path. Duplicate-slot `.7` corrects its identity fixture to `::|` and
-    does not decide or change the broader explicit-OR result contract.`
+  Acceptance: Reproduce every repeated action-choice spelling (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) plus
+    single-choice `Rule::|` with duplicate and distinct action-edge patterns across native, loaded, reconstructed,
+    generated, traced, primary, and corpus routes. Decide whether repeated choice returns the Perl reference's
+    per-hit collection or a single direct action value; preserve `::|` as non-repeating single choice; distinguish
+    action-edge iteration results from lifecycle whole-rule returns; and split neutral, backend, recurring, and
+    public work before behavior code.
+  Verification: Activated task-tree-first on 2026-07-20 from clean cursor public-no-drift commit `4ceec12d` at
+    ahead 252; no audit, decision, public, or behavior edit preceded activation. Exact Perl live, loaded,
+    generated, and generated-traced toolbox probes return `["A","B"]` for `::OR`, `::OR+`, bounded `::OR`,
+    and `::+`, `["A"]` for `::?`, and scalar `"A"` for `::|`; generated trace records two selected slots for
+    the two-hit repetitions and one for pipe. The same distinct-pattern source through all five primary adapters
+    proves Perl collection versus Rust/Dart/Julia/Lua first-scalar drift for every repeated spelling, while pipe
+    agrees. Source audit isolates two defects shared by all four newer implementations: their AST documentation
+    calls bare `OR` repeated choice but `is_repetition`/`rep_min` excludes it and generated v2 classifies it as
+    `or_acode`; independently, their repeated execution paths propagate an action-edge return as an immediate
+    whole-rule return. Perl `REP_ACODE` instead rewrites only action-edge return into the iteration value, runs the
+    remaining successful-iteration path, collects once per hit, and leaves lifecycle returns authoritative.
+    ADR `0048` accepts the Perl/reference collection rule, keeps generated-source v2 with corrected family rows,
+    and splits all behavior/public work below before code. The decision slice changes documentation/governance
+    only. Knowledge Map generation/check passes at 646 facts / 4,755 question keys; memory architecture passes at
+    56/60 lines; task metadata and all four doctrines pass; mdBook builds; whitespace is clean; regenerated book,
+    Dart, and disposable probe artifacts are removed before commit.
+  Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Follow the Knowledge Map to the existing gap, rule-mode, collection-shape,
+    HandlerIR, generated-source, and cursor records; use `return_descriptor`, generated source, handler
+    substitution, and routed trace before reading implementation branches.
+  - [x] **REPRODUCE / ISOLATE** — Prove the exact Perl route shape and five-primary drift for distinct/duplicate
+    choice, then source-audit native/generated classification and return propagation in all four newer backends.
+  - [x] **DECIDE WITHOUT BEHAVIOR** — Ratify per-hit collection for repeated action choice, scalar pipe, lifecycle
+    whole-rule authority, stable bounds/slot/cursor semantics, descriptor projection, and unchanged generated-v2
+    format; record the two independent root causes durably.
+  - [x] **SPLIT BEFORE CODE** — Create neutral/reference, Rust, Dart, Julia, dual-ABI Lua, recurring, and public
+    leaves with exact route and signoff obligations before any parser/compiler/runtime behavior edit.
+  - [ ] **COMPLETE CHILDREN / CLOSE PARENTS** — Land `.1-.7` in dependency order, then close `.9.1.10`, `.9.1`,
+    and `.9` only after every runtime, generated, primary, corpus, descriptor, trace, and public projection agrees.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.1`
+  Status: `pending`
+  Goal: Make repeated-choice action results an executable neutral contract and admit the Perl reference.
+  Dependencies: `.9.1.10` decision/split commit
+  Acceptance: Add one backend-neutral contract/checker with exact `*`, `+`, `?`, `OR`, `OR+`, bounded-OR, and
+    `|` fixtures; distinct and duplicate slots; block/fluent returns; scalar/null/nested values; zero/below-min/
+    bounded results; lifecycle overrides; blind-choice classification control; descriptors; generated family;
+    selected-slot trace; loaded/generated/primary/corpus roles; exact Perl consumer; rollout inventory; and
+    omission-sensitive mutations. No non-Perl runtime behavior changes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.2`
+  Status: `pending`
+  Goal: Align Rust repeated-choice classification and action-result collection.
+  Dependencies: `.9.1.10.1`
+  Acceptance: Make authored `RuleMode::Or` repetition with minimum one and generated `rep_acode`; collect one
+    action-edge return value per successful repeated-choice hit without converting lifecycle returns into
+    iteration values; preserve bounds, progress, slot identity, cursor policy, pipe scalar choice, diagnostics,
+    and generated-source v2; prove native, loaded, reconstructed, generated direct/traced, emitted, descriptor,
+    primary, and corpus roles through one neutral consumer plus the complete Rust gate.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.3`
+  Status: `pending`
+  Goal: Align Dart repeated-choice classification and action-result collection.
+  Dependencies: `.9.1.10.2`
+  Acceptance: Apply the accepted contract through Dart AST metadata, runtime return flow, descriptor,
+    generated-v2 classification/execution, emitted source, loading/reconstruction, trace, primary, and corpus;
+    preserve lifecycle authority, bounds, progress, slot/cursor semantics, and pipe scalar choice; add one exact
+    neutral admission consumer and pass format, analyzer, package, primary, and corpus gates.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.4`
+  Status: `pending`
+  Goal: Align Julia repeated-choice classification and action-result collection.
+  Dependencies: `.9.1.10.3`
+  Acceptance: Apply the accepted contract through Julia AST metadata, runtime return flow, descriptor,
+    generated-v2 classification/execution, emitted source, loading/reconstruction, trace, primary, and corpus;
+    preserve lifecycle authority, bounds, progress, slot/cursor semantics, and pipe scalar choice; add one exact
+    neutral admission consumer and pass package, primary, corpus, and fresh emitted-host gates.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.5`
+  Status: `pending`
+  Goal: Align PUC Lua and LuaJIT repeated-choice classification and action-result collection.
+  Dependencies: `.9.1.10.4`
+  Acceptance: One byte-identical Lua consumer applies the accepted contract through AST metadata, runtime return
+    flow, descriptor, generated-v2 classification/execution, emitted source, loading/reconstruction, trace,
+    primary, and corpus on both ABIs; preserve lifecycle authority, bounds, progress, slot/cursor semantics, pipe
+    scalar choice, Lua 5.1 compatibility, and the interpreter chunk-local ceiling; pass both complete ABI gates.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.6`
+  Status: `pending`
+  Goal: Compose recurring six-runtime repeated-choice result parity without another semantic path.
+  Dependencies: `.9.1.10.5`
+  Acceptance: One omission-sensitive recurring driver composes the neutral checker, Perl/Rust/Dart/Julia/Lua
+    consumers, both Lua ABIs, selected five-command default/POSIX primary cases, corpus/generated/descriptor/trace
+    support ledgers, exact rollout, mutation inventory, and canonical registration; advance only recurring
+    admission after every constituent passes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10.7`
+  Status: `pending`
+  Goal: Close repeated-choice result parity with public no-drift and exact semantic-parent status.
+  Dependencies: `.9.1.10.6`
+  Acceptance: README, guides, mdBook, API/backend companions, examples, architecture, capability/status ledgers,
+    ADR/Knowledge Map, and recurring scanners describe only the implemented per-hit collection/scalar-pipe rule;
+    reject stale current first-scalar and bare-OR-nonrepetition claims; close `.9.1.10`, `.9.1`, and `.9` only when
+    no child remains, then pass canonical CI, cleanup, memory/doctrines, and commit workflow.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.10`
@@ -8994,7 +9100,14 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `done` | Direct authored-slot matching and one shared exact 15-role consumer pass 112x2; complete package 177x2, primary 65x2, corpus 105, 6+1/46 governance, KM 643/4,735, canonical 1,031/653s, and cleanup signoff pass before `.7`. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `done` | Twenty-nine required documents, 26 stale-current denials, 60 mutations, recurring proof, KM 646/4,751, canonical 65x2 plus Phase 0 1,031, and exact cleanup close cursor rollout at 8/0 without falsely closing `.9.1`/`.9`. |
-| 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `pending` | Decide explicit repeated-OR action result shape after the duplicate-slot fixture correction exposed Perl collection versus four-backend scalar drift. |
+| 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `active` | ADR `0048` accepts reference per-hit action collections, scalar pipe, lifecycle authority, bare-OR repetition, and unchanged generated v2; seven rollout children are split before code. |
+| 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `pending` | Lock the neutral executable contract/checker and exact Perl route admission. |
+| 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `pending` | Align Rust classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `pending` | Align Dart classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `pending` | Align Julia classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `pending` | Align one PUC Lua/LuaJIT source across all native/generated/public routes. |
+| 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `pending` | Compose recurring six-runtime plus selected five-primary/support proof. |
+| 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `pending` | Close public no-drift and exact `.9.1.10`/`.9.1`/`.9` status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
 | 223 | `FUTURE-PARITY-BACKLOG.5.2.6` | `done` | Both Lua ABIs share typed truth, exact arity, and native/generated/primary behavior. |
@@ -10071,6 +10184,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: `.9.1.10` expands the exact primary matrix and Perl toolbox proof from bare `OR` to every
+  explicit repeated-action spelling plus pipe. Perl live/loaded/generated/traced routes collect per hit; all five
+  primary adapters agree only on scalar pipe, while Rust/Dart/Julia/Lua exit on the first return for every
+  repeated row. Source audit isolates bare-OR non-repetition metadata/generated-family classification separately
+  from repeated-handler return propagation. ADR `0048` accepts reference collection, lifecycle whole-rule
+  authority, corrected `rep_acode`/`rep_bcode`, and unchanged generated-v2 format. Neutral, Rust, Dart, Julia,
+  dual-ABI Lua, recurring, and public leaves `.1-.7` are split before behavior code.
+- `2026-07-20`: Clean commit `4ceec12d` lands cursor public no-drift `.9.1.9`; tracked/untracked root state is
+  clean, the brief is zero bytes, ahead is 252, and generated caches are absent. Explicit repeated-OR result-shape
+  decision `.9.1.10` activates task-tree-first before audit or behavior edits.
 - `2026-07-20`: Cursor public no-drift `.9.1.9` is signoff-complete from clean base `92394bb7`. The executable
   contract requires 29 documents, rejects 26 stale-current claims, and closes rollout at 75 files / 8+0 /
   60 mutations. Recurring runtime/support proof, KM 646/4,751, mdBook/doctrines, canonical primary 65x2 and

@@ -366,8 +366,9 @@ Top::|
 ```
 
 Use `::|` when the rule should make one choice. Explicit repeated `::OR` is a
-different family; its cross-backend action-result collection shape is tracked
-separately by `FUTURE-PARITY-BACKLOG.9.1.10`.
+different family. ADR `0048` accepts one collected action result per hit while
+preserving scalar pipe; Perl implements that rule, and Rust/Dart/Julia/Lua
+migration is split under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 
