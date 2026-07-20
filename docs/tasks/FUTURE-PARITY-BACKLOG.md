@@ -6459,7 +6459,7 @@ before implementation.
     and `.9` only after every runtime, generated, primary, corpus, descriptor, trace, and public projection agrees.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.1`
-  Status: `pending`
+  Status: `done`
   Goal: Make repeated-choice action results an executable neutral contract and admit the Perl reference.
   Dependencies: `.9.1.10` decision/split commit
   Acceptance: Add one backend-neutral contract/checker with exact `*`, `+`, `?`, `OR`, `OR+`, bounded-OR, and
@@ -6467,8 +6467,39 @@ before implementation.
     bounded results; lifecycle overrides; blind-choice classification control; descriptors; generated family;
     selected-slot trace; loaded/generated/primary/corpus roles; exact Perl consumer; rollout inventory; and
     omission-sensitive mutations. No non-Perl runtime behavior changes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean decision commit `34ad7548` at ahead 253;
+    no neutral schema, checker, fixture, Perl consumer, gate, capability, or behavior edit preceded activation.
+    `linkedspec-explicit-repetition-action-result-v1` now locks 8 exact mode cases, 10 special cases, independent
+    result/cursor/selected-slot evaluation, descriptors, generated-source v2, trace, routes, a checked-in corpus
+    bundle, six runtime mechanism rows, and 2 complete + 6 pending rollout. The checker rejects 25 independent
+    drift mutations. One Perl consumer passes 10 composed roles spanning neutral/live/special/loaded/descriptor/
+    emitted/generated-direct/generated-trace/primary/corpus. Canonical CI requires and runs both unconditionally;
+    no parser, compiler, runtime, descriptor, or generated-source behavior changes. Adjacent cursor verification
+    exposed that decision commit `34ad7548` had wrapped the stable `75 migration files / 8 complete + 0 pending /
+    60 mutations` marker across lines in `LIVE_ACHIEVEMENT_STATUS.md` and replaced the task-index sentence that
+    names `.9.1.10` as the remaining AND/OR frontier. This leaf restores both exact historical no-drift markers
+    while updating their current context. Focused adjacent contract checks pass at duplicate 7+0/59, cursor
+    75/8+0/60, and root 7+0/54; Knowledge Map is 646 facts / 4,757 question keys; memory is 56/60 lines; task
+    metadata, all four doctrines, mdBook, and whitespace pass. Canonical local CI exits 0 after the new checker,
+    all 10 Perl roles, primary CLI 65/65 in default and POSIX environments, and Phase 0 1,031/1,031 in 614 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.1 - admit repeated action result contract`
+
+  #### Acceptance Checklist
+
+  - [x] **SCHEMA / MODEL** — Lock exact explicit-repetition modes, pipe control, per-hit typed collection,
+    lifecycle authority, bounds/progress, descriptor facts, generated-v2 family rows, trace observations, route
+    roles, current six-runtime mechanism inventory, rollout ownership, and the unadorned-default exclusion.
+  - [x] **FIXTURES / PERL ROUTES** — Execute distinct and duplicate block returns, fluent return, nested/null values,
+    zero/below-min bounds, E/LE lifecycle overrides, blind OR, and scalar pipe through live, loaded, descriptor,
+    emitted/generated direct/traced, primary, and checked-in corpus-bundle routes on Perl.
+  - [x] **CHECKER / MUTATIONS** — Validate exact schema/source/result/model/route/rollout topology, require only the
+    admitted Perl consumer while declaring future paths, and reject omission plus semantic/family/lifecycle/
+    generated/trace/consumer/rollout mutations independently.
+  - [x] **REGISTER / NO BEHAVIOR** — Add the neutral checker and Perl consumer unconditionally to canonical CI,
+    preserve all parser/compiler/runtime behavior, and leave Rust/Dart/Julia/Lua plus recurring/public pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass checker mutations, Perl syntax/admission, existing adjacent contracts,
+    mdBook/KM/memory/doctrines, canonical gate where warranted, whitespace, and exact cleanup; synchronize
+    task/roadmaps/live/changes/notes and commit `.1` before activating Rust `.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.2`
   Status: `pending`
@@ -9101,7 +9132,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `done` | Twenty-nine required documents, 26 stale-current denials, 60 mutations, recurring proof, KM 646/4,751, canonical 65x2 plus Phase 0 1,031, and exact cleanup close cursor rollout at 8/0 without falsely closing `.9.1`/`.9`. |
 | 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `active` | ADR `0048` accepts reference per-hit action collections, scalar pipe, lifecycle authority, bare-OR repetition, and unchanged generated v2; seven rollout children are split before code. |
-| 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `pending` | Lock the neutral executable contract/checker and exact Perl route admission. |
+| 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `active` | Lock the neutral executable contract/checker and exact Perl route admission from clean decision `34ad7548`. |
 | 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `pending` | Align Rust classification, collection, descriptors, generated/traced, primary, and corpus routes. |
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `pending` | Align Dart classification, collection, descriptors, generated/traced, primary, and corpus routes. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `pending` | Align Julia classification, collection, descriptors, generated/traced, primary, and corpus routes. |
@@ -10184,6 +10215,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Neutral/reference `.9.1.10.1` is signoff-complete from clean base `34ad7548`. The exact checker
+  passes 8 mode cases / 10 special cases / 2 complete + 6 pending / 25 mutations; Perl passes all 10 composed
+  roles; adjacent duplicate/cursor/root contracts pass; KM 646/4,757, memory 56/60, mdBook, task metadata, four
+  doctrines, and whitespace pass. Canonical CI exits 0 after primary 65x2 and Phase 0 1,031/1,031 in 614 seconds.
+  Generated book/Python caches are removed; commit and brief cleanup precede Rust `.9.1.10.2` activation.
+- `2026-07-20`: Clean decision commit `34ad7548` lands ADR `0048` and the exact seven-child split; tracked and
+  untracked state is clean, `git_message_brief.txt` is zero bytes, generated caches are absent, and ahead is 253.
+  Neutral/reference executable-contract child `.9.1.10.1` activates task-tree-first before schema, fixture,
+  checker, consumer, gate, capability, or behavior edits.
 - `2026-07-20`: `.9.1.10` expands the exact primary matrix and Perl toolbox proof from bare `OR` to every
   explicit repeated-action spelling plus pipe. Perl live/loaded/generated/traced routes collect per hit; all five
   primary adapters agree only on scalar pipe, while Rust/Dart/Julia/Lua exit on the first return for every

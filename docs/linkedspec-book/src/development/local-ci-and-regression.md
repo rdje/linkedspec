@@ -220,6 +220,21 @@ and language-coverage ledgers. Rollout is closed at 7 complete / 0 pending.
 Julia-local signoff is package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 is 1,031/1,031 in 623
 seconds.
 
+ADR `0048` has a separate executable boundary for repeated action results. Ordinary canonical CI runs both:
+
+```bash
+python3 tools/check_repeated_action_result_contract.py
+PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
+```
+
+The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
+nested/null/fluent values, zero and below-minimum results, lifecycle override authority, scalar pipe, and blind
+bare-OR classification. It also locks descriptors, generated-source-v2 family rows, selected-slot trace, route
+topology, a checked-in corpus bundle, six-runtime inventory, and 25 independent mutation failures. The Perl
+consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Neutral and Perl are
+admitted at 2 complete / 6 pending; `.9.1.10.2-.7` own the four newer backends, recurring proof, and public
+closeout. This gate does not claim cross-backend parity early.
+
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.
 Rust admission `.9.1.8.1.3` independently passes the complete Rust-local package (including both 105-fixture

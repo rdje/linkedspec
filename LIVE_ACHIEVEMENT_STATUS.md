@@ -8,22 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10` is active task-tree-first from clean cursor public-no-drift commit `4ceec12d` at
-  ahead 252. Exact Perl route and five-primary proof expands across `*`, `+`, `?`, `OR`, `OR+`, bounded OR, and
-  pipe. ADR `0048` accepts per-hit action collections for explicit repetition, lifecycle whole-rule authority,
-  scalar pipe, bare-OR repetition, and unchanged generated-source v2. Neutral, Rust, Dart, Julia, dual-ABI Lua,
-  recurring, and public leaves `.1-.7` are split before behavior code. KM 646/4,755, memory 56/60, task metadata,
-  all four doctrines, mdBook, and whitespace pass; decision commit/brief cleanup is in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.1` is active task-tree-first from clean decision commit `34ad7548` at ahead 253.
+  The exact neutral contract covers 8 mode cases, 10 special cases, descriptor/generated-v2/trace/routes, one
+  checked-in corpus bundle, 6 runtime rows, and a 2-complete/6-pending rollout with 25 rejected mutations. The
+  existing Perl mechanism is composed through 10 roles. KM 646/4,757, memory 56/60, mdBook/four doctrines,
+  adjacent contracts, primary 65x2, and Phase 0 1,031/1,031 in 614 seconds pass; final commit/brief cleanup is in
+  flight. No parser, compiler, runtime, descriptor, or generated behavior changes.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10 — ratify and split explicit repetition action-result parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission` is the active slice
+  title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10 — decide and split explicit repetition action results**
+  (DONE at clean commit `34ad7548` from base `4ceec12d`).
+
+  **Result:** ADR `0048` accepts per-hit action collections for explicit repetition, scalar pipe, lifecycle
+  whole-rule authority, bare-OR min-one repetition, and unchanged generated-source v2. Exact route/matrix and
+  source proof isolate bare-OR classification and first-action-return propagation as independent defects in the
+  four newer backends; `.1-.7` split neutral through public rollout before behavior code.
+
+  **Next:** Neutral/reference contract leaf `.9.1.10.1` is active task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift**
   (DONE at clean commit `4ceec12d` from base `92394bb7`).
 
   **Result:** The implemented rule-local cursor/bare-edge contract is the only current public contract across 29
-  governed surfaces. Twenty-six stale-current denials and four new mutations close rollout at 75 migration files /
-  8 complete + 0 pending / 60 mutations without changing any semantic execution path. `.9.1`/`.9` stay active for
+  governed surfaces. Twenty-six stale-current denials and four new mutations close rollout at
+  75 migration files / 8 complete + 0 pending / 60 mutations without changing any semantic execution path. `.9.1`/`.9` stay active for
   explicit repeated-OR result shape `.9.1.10`.
 
   **Proof:** Recurring Perl 288, Julia 104, Lua 119x2, selected primary 5x2x5, capability 80/0/0, generated-source

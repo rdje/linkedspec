@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission
+
+The new `linkedspec-explicit-repetition-action-result-v1` contract makes ADR `0048` executable through eight exact
+mode cases and ten special cases. Its independent neutral model locks results, cursors, selected-slot order,
+duplicate priority, nested/null/fluent values, zero and below-minimum bounds, lifecycle authority, scalar pipe,
+and blind bare-OR classification. Descriptor, generated-source-v2, trace, route, checked-in corpus-bundle,
+six-runtime mechanism, and migration facts are exact; 25 mutations reject semantic and topology drift.
+
+One ten-role Perl consumer composes neutral, live mode, special-case, loaded, descriptor, emitted-source,
+generated-direct, generated-trace, primary-CLI, and corpus-bundle proof. Canonical local CI now requires and runs
+the checker plus Perl consumer unconditionally. Rollout advances only neutral and Perl to 2 complete / 6 pending;
+Rust, Dart, Julia, dual-ABI Lua, recurring, and public closeout remain `.9.1.10.2-.7`.
+
+No parser, compiler, runtime, descriptor, or generated-source behavior changes. Adjacent cursor governance caught
+and repairs a prior line-wrap that had split its stable 75-files / 8-complete / 60-mutation live-status marker.
+Safe artifact cleanup removes the regenerated Python cache and standard Git maintenance packs roughly 114 MiB of
+loose objects without touching source, tracked regression logs, or nested-submodule history.
+
+Signoff passes the new 8-mode/10-special/25-mutation checker, all ten Perl roles, adjacent duplicate/cursor/root
+contracts, Knowledge Map 646/4,757, memory 56/60, mdBook, task metadata, all four doctrines, and whitespace.
+Canonical local CI exits 0 after primary CLI 65/65 in both environments and Phase 0 1,031/1,031 in 614 seconds.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10 — decide and split explicit repetition action results
 
 ADR `0048` accepts the Perl/reference result contract for explicit repetition forms `*`, `+`, `?`, `OR`, `OR+`,

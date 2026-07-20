@@ -4,10 +4,16 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
-The active language-contract frontier is ADR `0046`: an explicit selector, including `--top-rule NAME`, wins over
-authored markers; otherwise the first authored `::` wins; without a marker, the first authored rule wins. The
-backend-neutral executable contract rejects 54 drift mutations, and final recurring/public admission closes
-rollout at 7 complete / 0 pending. Composed
+The active language-contract frontier is ADR `0048`: explicit repetition collects one action-edge value per
+accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable
+neutral contract covers eight mode cases and ten special cases and rejects 25 mutations. Its ten-role Perl
+reference admission is complete, so rollout is 2 complete / 6 pending; Rust, Dart, Julia, dual-ABI Lua, recurring,
+and public closeout remain `.9.1.10.2-.7`.
+
+The separately completed ADR `0046` root-selection contract says an explicit selector, including
+`--top-rule NAME`, wins over authored markers; otherwise the first authored `::` wins; without a marker, the first
+authored rule wins. The backend-neutral executable contract rejects 54 drift mutations, and final
+recurring/public admission closes rollout at 7 complete / 0 pending. Composed
 Perl, Rust, Dart, Julia, and dual-ABI Lua backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
 marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,

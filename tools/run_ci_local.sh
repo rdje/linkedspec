@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t t/repeated_action_result_perl_contract.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -93,6 +93,7 @@ require_tracked_file tools/check_logical_helper_contract.py
 require_tracked_file tools/check_logical_helper_five_backend.sh
 require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
+require_tracked_file tools/check_repeated_action_result_contract.py
 require_tracked_file tools/check_root_rule_selection_contract.py
 require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
@@ -107,6 +108,7 @@ require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
+require_tracked_file t/repeated_action_result_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs
 require_tracked_file dart/test/duplicate_regex_slot_identity_contract_test.dart
 require_tracked_file julia/test/duplicate_regex_slot_identity_contract_test.jl
@@ -130,6 +132,10 @@ require_tracked_file capability_conformance/diagnostic_output_contract.json
 require_tracked_file capability_conformance/duplicate_regex_slot_identity_contract.json
 require_tracked_file capability_conformance/logical_helper_contract.json
 require_tracked_file capability_conformance/punctuation_light_zero_arg_contract.json
+require_tracked_file capability_conformance/repeated_action_result_contract.json
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.spec
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.input
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.expected.json
 require_tracked_file capability_conformance/root_rule_selection_contract.json
 require_tracked_file capability_conformance/rule_local_cursor_contract.json
 require_tracked_file capability_conformance/uniform_binding_contract.json
@@ -219,6 +225,7 @@ perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+perl -c -Iperl t/repeated_action_result_perl_contract.t
 perl -c -Iperl t/root_rule_selection_perl_core.t
 perl -c -Iperl t/root_rule_selection_perl_routes.t
 perl -c -Iperl t/variadic_user_function_contract.t
@@ -250,6 +257,12 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 log "running composed Perl duplicate regex-slot identity consumer"
 PERL5LIB= prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+
+log "checking backend-neutral explicit-repetition action-result contract"
+python3 tools/check_repeated_action_result_contract.py
+
+log "running composed Perl explicit-repetition action-result consumer"
+PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t

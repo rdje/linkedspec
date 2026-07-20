@@ -11,11 +11,13 @@ answers:
   - "is bare OR classified as repetition in every backend"
   - "do repeated action edge returns exit the whole rule"
   - "does explicit repeated choice require generated source v3"
+  - "where is the explicit repetition action result neutral contract"
+  - "how is Perl repeated action result behavior admitted"
 date: 2026-07-20
-status: ADR 0048 accepted; backend rollout pending FUTURE-PARITY-BACKLOG.9.1.10.1-.7
+status: ADR 0048 accepted; neutral and Perl complete; six rollout legs pending FUTURE-PARITY-BACKLOG.9.1.10.2-.7
 tags: [or, repetition, action-edge, output-shape, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.10 toolbox probes cover Perl live, loaded, generated, and generated-traced routes, and a disposable exact five-primary-adapter matrix covers distinct patterns. On input ab, Perl returns [\"A\",\"B\"] for ::OR, ::OR+, ::OR{2}, ::+, and ::*, [\"A\"] for ::?, and scalar \"A\" for ::|; Rust, Dart, Julia, and Lua return scalar \"A\" for every repeated row and pipe. Perl descriptor/source reports REP_OR_EXPLICIT / REP_ACODE, min 1, repeat_loop, rewrites only action-edge return to the iteration scalar, and pushes once per successful iteration. Rust, Dart, Julia, and Lua AST metadata all omit Or from is_repetition/rep_min despite comments calling it repeated choice, and all four generated-v2 classifiers map Or with Pipe to or_acode. Their repeated runtime paths independently propagate an action-edge return through the whole-rule return channel. ADR 0048 accepts reference collection, scalar pipe, lifecycle whole-rule authority, corrected rep_acode classification, and unchanged generated-source v2."
-reverify: "perl -Iperl bin/linkedspec --inline-spec 'Top::OR\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n' --input ab; perl -Iperl bin/linkedspec --inline-spec 'Top::|\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n' --input ab; rg -n 'is_repetition|isRepetition|is_generated_repetition|classify_generated_rule_family|classifyGeneratedRuleFamily' rust/linkedspec-core/src/ast.rs rust/linkedspec-runtime/src/source_emitter.rs dart/lib/src/ast/spec_ast.dart dart/lib/src/source_emitter.dart julia/src/spec/Ast.jl julia/src/source/SourceEmitter.jl lua/src/linkedspec/spec_ast.lua lua/src/linkedspec/source_emitter.lua"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.10 toolbox probes cover Perl live, loaded, generated, and generated-traced routes, and a disposable exact five-primary-adapter matrix covers distinct patterns. On input ab, Perl returns [\"A\",\"B\"] for ::OR, ::OR+, ::OR{2}, ::+, and ::*, [\"A\"] for ::?, and scalar \"A\" for ::|; Rust, Dart, Julia, and Lua return scalar \"A\" for every repeated row and pipe. ADR 0048 accepts reference collection, scalar pipe, lifecycle whole-rule authority, corrected rep_acode classification, and unchanged generated-source v2. FUTURE-PARITY-BACKLOG.9.1.10.1 adds linkedspec-explicit-repetition-action-result-v1 with 8 mode cases, 10 special cases, selected-slot/cursor/result modeling, exact descriptor/generated/trace/routes, one checked-in corpus bundle, a six-runtime inventory, 2 complete plus 6 pending rollout, and 25 rejected mutations. Its Perl consumer admits 10 composed roles without changing runtime behavior."
+reverify: "python3 tools/check_repeated_action_result_contract.py && PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t"
 ---
 
 `Rule::OR` and `Rule::|` are not interchangeable. ADR `0048` fixes the portable
@@ -46,8 +48,11 @@ newer-backend bare-`OR` row fails exact family validation and must be regenerate
 The unadorned historical default handler is outside this scoped decision.
 
 The duplicate-slot contract uses `::|` for its genuine single-choice priority
-fixture. Behavior rollout is split under `.9.1.10.1-.7`; no backend may claim
-parity from the primary matrix alone.
+fixture. The executable contract lives at
+`capability_conformance/repeated_action_result_contract.json`; its checker owns
+the neutral evaluator and its Perl consumer owns ten route roles. Neutral and
+Perl are complete at 2 complete / 6 pending. Newer-backend behavior begins at
+`.9.1.10.2`; no backend may claim parity from the primary matrix alone.
 
 Related: [[duplicate-regex-slot-identity-contract]],
 [[blind-call-collection-shape]], [[handler-ir-design]],

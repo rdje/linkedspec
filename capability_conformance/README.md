@@ -129,6 +129,24 @@ authored-alternative matching, and preserves normalized-spec generated v2. The r
 primary case, and generated/capability/language-coverage support ledgers. Governance is closed at
 7 complete / 0 pending with 59 rejected mutations.
 
+`repeated_action_result_contract.json` (`linkedspec-explicit-repetition-action-result-v1`) makes ADR `0048`
+executable while the four newer backends migrate. It fixes eight exact mode rows for `*`, `+`, `?`, bare `OR`,
+`OR+`, exact/up-to bounded OR, and scalar pipe, plus ten cases for duplicate priority, nested/null values, fluent
+returns, zero/below-minimum bounds, lifecycle authority, duplicate pipe, and blind bare-OR classification. Run:
+
+```bash
+python3 tools/check_repeated_action_result_contract.py
+PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
+```
+
+The checker independently evaluates results, cursors, and selected-slot order, locks exact source bytes,
+descriptor and generated-source-v2 family facts, trace/route topology, the checked-in distinct-OR corpus bundle,
+six-runtime mechanism inventory, and migration ownership, and rejects 25 drift mutations. The Perl consumer
+composes ten roles: neutral model, live modes, special cases, loaded source, descriptor, emitted source,
+generated direct, generated trace, primary CLI, and corpus bundle. Canonical local CI runs both unconditionally.
+Rollout is 2 complete / 6 pending: neutral and Perl are admitted; Rust, Dart, Julia, dual-ABI Lua, recurring, and
+public no-drift remain `.9.1.10.2-.7`. No non-Perl runtime behavior changes in the neutral/reference leaf.
+
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,
 structural agreement was 1/2, and descriptor/generated cursor identities were absent. Current `.1-.4` proof now

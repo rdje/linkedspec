@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.1` — make the decision executable without changing Perl behavior):
+  The neutral evaluator deliberately does not invoke a backend. It applies earliest-start/first-authored choice,
+  accepted-hit bounds, zero-progress protection, per-hit typed values, and explicit E/LE overrides to eight mode
+  cases and ten edge cases, then compares exact result, final cursor, and selected identities. Exact source hashes
+  keep a fixture spelling change from silently redefining the contract. Twenty-five independent mutations cover
+  schema, result shape, bounds, family classification, lifecycle authority, routes, artifacts, rollout, and CI.
+
+  The Perl consumer is composed rather than fragmented: ten named subtests prove neutral model, live modes,
+  specials, loaded source, descriptor, emitted source, generated direct, generated trace, primary CLI, and the
+  checked-in distinct-OR corpus bundle. Bare OR reports `rep_acode`, pipe reports `or_acode`, and generated trace
+  records one slot-selection event per accepted hit. Existing `REP_ACODE` iteration-value behavior needs no source
+  change; this leaf advances only neutral and Perl to 2 complete / 6 pending.
+
+  The adjacent cursor checker initially failed despite no cursor edit. Root cause is commit `34ad7548` replacing
+  the active cursor summary, wrapping the only surviving exact completion phrase between `files /` and
+  `8 complete`, and replacing the task-index sentence naming `.9.1.10` as the remaining AND/OR frontier.
+  Restoring both historical markers in current context repairs no-drift while the live frontier moves forward.
+  The finding is recorded here and in the owning task verification so it cannot be rediscovered as a runtime
+  issue.
+
+  Artifact cleanup finds no Rust target, Dart tool cache, mdBook build, requested Rust `.bin`/`.log`, or untracked
+  log. Twenty-six visible `rgx` trace logs are tracked submodule evidence and 1.9 GiB of nested-submodule Git data
+  is live history, so both remain. Python bytecode is removed; non-aggressive `git gc` packs parent loose objects
+  from about 114 MiB to zero loose bytes without touching the in-flight work.
+
+  Final proof passes adjacent duplicate 7+0/59, cursor 75/8+0/60, and root 7+0/54 governance; Knowledge Map
+  646/4,757; memory 56/60; mdBook; task metadata; all four doctrines; and whitespace. Canonical CI runs the new
+  checker and ten-role consumer unconditionally, passes primary 65x2, and closes Phase 0 1,031/1,031 in 614
+  seconds without enabling any build-heavy optional backend gate.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10` — separate repetition classification from action-return control):
   The duplicate-slot choice fixture exposed only `::OR`, but the exact matrix now covers the complete explicit
   repeated-action handler family. Perl collects two distinct hits for `OR`, `OR+`, bounded OR, `+`, and `*`, one

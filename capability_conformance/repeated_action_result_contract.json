@@ -1,0 +1,503 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-explicit-repetition-action-result-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.9.1.10",
+  "decision": "docs/decisions/0048-explicit-repetition-action-result-collection.md",
+  "scope": {
+    "explicit_repetition_modes": ["Star", "Plus", "Optional", "Or", "OrPlus", "OrBounded"],
+    "single_choice_control": "Pipe",
+    "unadorned_default_handler_in_scope": false,
+    "action_surfaces": ["block_return", "fluent_return"],
+    "edge_families": ["action", "blind_classification_control"]
+  },
+  "semantics": {
+    "repeated_action_return": "one_typed_iteration_value_per_successful_hit",
+    "default_repeated_result": "flat_ordered_collection_of_iteration_values",
+    "returned_array_policy": "one_nested_outer_element",
+    "returned_null_policy": "one_null_outer_element",
+    "pipe_action_return": "direct_scalar_value",
+    "lifecycle_return": "whole_rule_return",
+    "bare_or_bounds": {"min": 1, "max": null},
+    "zero_permitted_hits": [],
+    "below_minimum": null,
+    "bounds_count": "accepted_hits",
+    "zero_progress": "accept_once_then_stop",
+    "preserved_contracts": [
+      "linkedspec-rule-local-cursor-v1",
+      "linkedspec-duplicate-regex-slot-identity-v1",
+      "linkedspec-generated-source-v2"
+    ]
+  },
+  "mode_cases": [
+    {
+      "id": "compact_star_two_hits",
+      "header": "Top::*",
+      "source": "Top::*\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 0,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "compact_plus_two_hits",
+      "header": "Top::+",
+      "source": "Top::+\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "compact_optional_one_hit",
+      "header": "Top::?",
+      "source": "Top::?\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 0,
+      "rep_max": 1,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A"],
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    },
+    {
+      "id": "explicit_or_two_hits",
+      "header": "Top::OR",
+      "source": "Top::OR\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "explicit_or_plus_two_hits",
+      "header": "Top::OR+",
+      "source": "Top::OR+\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "bounded_exact_two_hits",
+      "header": "Top::OR{2}",
+      "source": "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 2,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "bounded_up_to_two_hits",
+      "header": "Top::OR{,2}",
+      "source": "Top::OR{,2}\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": 0,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#1"]
+    },
+    {
+      "id": "pipe_distinct_scalar",
+      "header": "Top::|",
+      "source": "Top::|\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "action_block",
+      "rep_min": null,
+      "rep_max": null,
+      "is_repetition": false,
+      "generated_family": "or_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "Top#0"},
+        {"pattern": "b", "value": "B", "identity": "Top#1"}
+      ],
+      "result_policy": "scalar",
+      "lifecycle_override": null,
+      "expected_result": "A",
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    }
+  ],
+  "special_cases": [
+    {
+      "id": "duplicate_or_first_authored_each_hit",
+      "header": "Top::OR",
+      "source": "Top::OR\n /a/ -> Top[0] { return(\"first\") }\n /a/ -> Top[1] { return(\"second\") }\n",
+      "input": "aa",
+      "edge_surface": "action_block",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "first", "identity": "Top#0"},
+        {"pattern": "a", "value": "second", "identity": "Top#1"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["first", "first"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#0"]
+    },
+    {
+      "id": "nested_value_stays_nested",
+      "header": "Top::OR{2}",
+      "source": "Top::OR{2}\n /a/ -> Top[0] { return(array(\"A\")) }\n",
+      "input": "aa",
+      "edge_surface": "action_block",
+      "rep_min": 2,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": ["A"], "identity": "Top#0"}],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": [["A"], ["A"]],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#0"]
+    },
+    {
+      "id": "null_value_stays_element",
+      "header": "Top::OR{1}",
+      "source": "Top::OR{1}\n /a/ -> Top[0] { return_undef() }\n",
+      "input": "a",
+      "edge_surface": "action_block",
+      "rep_min": 1,
+      "rep_max": 1,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": null, "identity": "Top#0"}],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": [null],
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    },
+    {
+      "id": "fluent_return_collects",
+      "header": "Top::+",
+      "source": "Top::+\n /a/ -> Top .return(\"A\")\n",
+      "input": "aa",
+      "edge_surface": "action_fluent",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": "A", "identity": "Top#0"}],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "A"],
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#0"]
+    },
+    {
+      "id": "zero_permitted_hits_empty",
+      "header": "Top::OR{,2}",
+      "source": "Top::OR{,2}\n /a/ -> Top[0] { return(\"A\") }\n",
+      "input": "z",
+      "edge_surface": "action_block",
+      "rep_min": 0,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": "A", "identity": "Top#0"}],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": [],
+      "expected_position": 0,
+      "expected_selected_slots": []
+    },
+    {
+      "id": "below_minimum_is_null",
+      "header": "Top::OR{2}",
+      "source": "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n",
+      "input": "a",
+      "edge_surface": "action_block",
+      "rep_min": 2,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": "A", "identity": "Top#0"}],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": null,
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    },
+    {
+      "id": "exit_lifecycle_overrides_collection",
+      "header": "Top::OR{2}",
+      "source": "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n E { return(\"override\") }\n",
+      "input": "aa",
+      "edge_surface": "action_block",
+      "rep_min": 2,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": "A", "identity": "Top#0"}],
+      "result_policy": "lifecycle_override",
+      "lifecycle_override": {"marker": "E", "value": "override", "after_hits": 2},
+      "expected_result": "override",
+      "expected_position": 2,
+      "expected_selected_slots": ["Top#0", "Top#0"]
+    },
+    {
+      "id": "loop_end_lifecycle_exits_rule",
+      "header": "Top::OR{2}",
+      "source": "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n LE { return(\"stop\") }\n",
+      "input": "aa",
+      "edge_surface": "action_block",
+      "rep_min": 2,
+      "rep_max": 2,
+      "is_repetition": true,
+      "generated_family": "rep_acode",
+      "alternatives": [{"pattern": "a", "value": "A", "identity": "Top#0"}],
+      "result_policy": "lifecycle_override",
+      "lifecycle_override": {"marker": "LE", "value": "stop", "after_hits": 1},
+      "expected_result": "stop",
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    },
+    {
+      "id": "pipe_duplicate_first_scalar",
+      "header": "Top::|",
+      "source": "Top::|\n /a/ -> Top[0] { return(\"first\") }\n /a/ -> Top[1] { return(\"second\") }\n",
+      "input": "a",
+      "edge_surface": "action_block",
+      "rep_min": null,
+      "rep_max": null,
+      "is_repetition": false,
+      "generated_family": "or_acode",
+      "alternatives": [
+        {"pattern": "a", "value": "first", "identity": "Top#0"},
+        {"pattern": "a", "value": "second", "identity": "Top#1"}
+      ],
+      "result_policy": "scalar",
+      "lifecycle_override": null,
+      "expected_result": "first",
+      "expected_position": 1,
+      "expected_selected_slots": ["Top#0"]
+    },
+    {
+      "id": "blind_or_repeats",
+      "header": "Top::OR",
+      "source": "Top::OR\n => A\n => B\n\nA:\n /a/ -> A { return(\"A\") }\n\nB:\n /b/ -> B { return(\"B\") }\n",
+      "input": "ab",
+      "edge_surface": "blind",
+      "rep_min": 1,
+      "rep_max": null,
+      "is_repetition": true,
+      "generated_family": "rep_bcode",
+      "alternatives": [
+        {"pattern": "a", "value": "A", "identity": "A#0"},
+        {"pattern": "b", "value": "B", "identity": "B#0"}
+      ],
+      "result_policy": "collect",
+      "lifecycle_override": null,
+      "expected_result": ["A", "B"],
+      "expected_position": 2,
+      "expected_selected_slots": ["A#0", "B#0"]
+    }
+  ],
+  "descriptor_contract": {
+    "family": "or_default",
+    "cursor_policy": "seek",
+    "bare_or": {
+      "execution_shape": "repeat_loop",
+      "rep_min": 1,
+      "rep_max": null,
+      "handler_family": "rep_acode",
+      "uses_loop": true
+    },
+    "pipe": {
+      "execution_shape": "or_choice_dispatch",
+      "rep_min": null,
+      "rep_max": null,
+      "handler_family": "or_acode",
+      "uses_loop": false
+    },
+    "perl_unbounded_sentinel": 1000000000,
+    "new_mutable_result_option": false
+  },
+  "generated_source_v2": {
+    "contract_id": "linkedspec-generated-source-v2",
+    "format_version": 2,
+    "plan_row_fields": ["label", "family"],
+    "format_bump_required": false,
+    "bare_or_action_family": "rep_acode",
+    "bare_or_blind_family": "rep_bcode",
+    "pipe_action_family": "or_acode",
+    "stale_bare_or_policy": "family_plan_validation_failure_then_regenerate_from_spec"
+  },
+  "trace_contract": {
+    "selected_event": "regex_slot_selected",
+    "required_fields": ["rule_label", "selection_role", "target_rule", "regex_index"],
+    "repeated_choice_role": "choice",
+    "observation": "one_selected_event_per_accepted_hit",
+    "direct_traced_result_identity": true
+  },
+  "required_routes": [
+    "native",
+    "loaded",
+    "reconstructed",
+    "descriptor",
+    "generated_direct",
+    "generated_traced",
+    "emitted_source_direct",
+    "emitted_source_traced",
+    "primary_cli",
+    "corpus_bundle"
+  ],
+  "corpus_bundle": {
+    "source": "capability_conformance/repeated_action_result/explicit_or_distinct.spec",
+    "input": "capability_conformance/repeated_action_result/explicit_or_distinct.input",
+    "expected": "capability_conformance/repeated_action_result/explicit_or_distinct.expected.json",
+    "fixture_id": "explicit_or_two_hits"
+  },
+  "admissions": {
+    "perl_reference": {
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1",
+      "consumer": "t/repeated_action_result_perl_contract.t",
+      "canonical_driver": "tools/run_ci_local.sh",
+      "roles": [
+        "neutral_contract",
+        "live_mode_matrix",
+        "live_special_cases",
+        "loaded",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "generated_trace",
+        "primary_cli",
+        "corpus_bundle"
+      ]
+    },
+    "rust": {
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2",
+      "consumer": "rust/linkedspec-runtime/tests/repeated_action_result_contract.rs",
+      "canonical_driver": "tools/run_rust_local.sh"
+    },
+    "dart": {
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3",
+      "consumer": "dart/test/repeated_action_result_contract_test.dart",
+      "canonical_driver": "tools/run_dart_local.sh"
+    },
+    "julia": {
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4",
+      "consumer": "julia/test/repeated_action_result_contract_test.jl",
+      "canonical_driver": "tools/run_julia_local.sh"
+    },
+    "lua_dual_abi": {
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5",
+      "consumer": "lua/test/repeated_action_result_contract_test.lua",
+      "canonical_driver": "tools/run_lua_local.sh"
+    }
+  },
+  "implementation_inventory": [
+    {"backend": "perl", "runtime": "perl", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
+    {"backend": "rust", "runtime": "rust", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2"},
+    {"backend": "dart", "runtime": "dart", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3"},
+    {"backend": "julia", "runtime": "julia", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
+    {"backend": "lua", "runtime": "puc_lua", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
+    {"backend": "lua", "runtime": "luajit", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"}
+  ],
+  "rollout": [
+    {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
+    {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
+    {"capability": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2"},
+    {"capability": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3"},
+    {"capability": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
+    {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
+    {"capability": "recurring", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.6"},
+    {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.7"}
+  ],
+  "migration": {
+    "checker": "tools/check_repeated_action_result_contract.py",
+    "perl_consumer": "t/repeated_action_result_perl_contract.t",
+    "recurring_driver": "tools/check_repeated_action_result_five_backend.sh",
+    "public_closeout": "FUTURE-PARITY-BACKLOG.9.1.10.7"
+  },
+  "canonical_ci": {
+    "driver": "tools/run_ci_local.sh",
+    "neutral_checker": "unconditional",
+    "perl_consumer": "unconditional",
+    "future_recurring_switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"
+  }
+}

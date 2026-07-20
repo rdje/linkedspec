@@ -9,7 +9,8 @@
 > selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending.
 > ADR `0048` accepts per-hit action-result collection for explicit repetition and
 > scalar pipe choice. Perl implements it; Rust, Dart, Julia, and Lua currently
-> return the first scalar. Rollout is split under `.9.1.10.1-.7` and remains pending.
+> return the first scalar. The neutral contract plus ten-role Perl admission are
+> complete at 2 complete / 6 pending; `.9.1.10.2-.7` own the remaining rollout.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -137,8 +138,9 @@ the return's action-edge context from `I`/`LS`/`LE`/`LX`/`IT`/`EX`/`E` rather
 than changing the meaning of every return event.
 
 This is the accepted ADR `0048` contract and current Perl behavior. Rust, Dart,
-Julia, and Lua still expose the pre-migration first-scalar behavior; the neutral
-and backend rollout is pending under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
+Julia, and Lua still expose the pre-migration first-scalar behavior. The executable
+neutral contract and Perl admission are complete; backend and closeout rollout is
+2 complete / 6 pending under `FUTURE-PARITY-BACKLOG.9.1.10.2-.7`.
 
 ## 3. Lifecycle Execution Order
 

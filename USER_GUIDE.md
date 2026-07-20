@@ -368,7 +368,9 @@ Top::|
 Use `::|` when the rule should make one choice. Explicit repeated `::OR` is a
 different family. ADR `0048` accepts one collected action result per hit while
 preserving scalar pipe; Perl implements that rule, and Rust/Dart/Julia/Lua
-migration is split under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
+migration remains under `FUTURE-PARITY-BACKLOG.9.1.10.2-.5`. The executable
+neutral contract and Perl reference admission are complete at 2 complete / 6
+pending; recurring and public closeout remain `.6-.7`.
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 

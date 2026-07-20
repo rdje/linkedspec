@@ -20,8 +20,9 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > support ledgers. Public no-drift closes the executable ledger at 75 migration files, 8 complete / 0 pending,
 > and 60 rejected mutations. ADR `0048` now accepts per-hit action-result collection for explicit repetition
 > (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl already implements that rule;
-> Rust, Dart, Julia, and Lua currently stop at the first action-edge return. The behavior rollout is split under
-> `FUTURE-PARITY-BACKLOG.9.1.10.1-.7` and is not yet cross-backend complete.
+> Rust, Dart, Julia, and Lua currently stop at the first action-edge return. The executable neutral contract and
+> ten-role Perl admission are complete at 2 complete / 6 pending; newer-backend work remains `.9.1.10.2-.5`,
+> recurring `.6`, and public closeout `.7`.
 
 ## Current rule-label surface
 
@@ -196,7 +197,7 @@ alternative. The contract is `linkedspec-duplicate-regex-slot-identity-v1`;
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit it. Rollout is
 closed at 7 complete / 0 pending. Explicit repeated `::OR` is a different family;
 ADR `0048` makes its action-edge results a per-hit collection, with rollout
-pending under `FUTURE-PARITY-BACKLOG.9.1.10.1-.7`.
+at 2 complete / 6 pending under `FUTURE-PARITY-BACKLOG.9.1.10.2-.7`.
 
 ## Single choice: `:|`
 
