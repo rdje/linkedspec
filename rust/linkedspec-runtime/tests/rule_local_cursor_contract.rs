@@ -324,7 +324,9 @@ Child:OR
 "#;
     assert_eq!(
         execute(compile_source(source), "p junk xp junk z").expect("execute recursive admission"),
-        json!("done")
+        // The inner Child repetition contributes ["done"]. Its recursive
+        // caller then preserves that returned array as one iteration value.
+        json!([["done"]])
     );
 }
 

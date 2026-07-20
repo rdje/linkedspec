@@ -225,15 +225,18 @@ ADR `0048` has a separate executable boundary for repeated action results. Ordin
 ```bash
 python3 tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
 ```
 
 The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
 nested/null/fluent values, zero and below-minimum results, lifecycle override authority, scalar pipe, and blind
 bare-OR classification. It also locks descriptors, generated-source-v2 family rows, selected-slot trace, route
-topology, a checked-in corpus bundle, six-runtime inventory, and 25 independent mutation failures. The Perl
-consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Neutral and Perl are
-admitted at 2 complete / 6 pending; `.9.1.10.2-.7` own the four newer backends, recurring proof, and public
-closeout. This gate does not claim cross-backend parity early.
+topology, a checked-in corpus bundle, six-runtime inventory, and 26 independent mutation failures. The Perl
+consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Rust adds one exact
+15-role consumer spanning native, loaded/reconstructed, descriptor, emitted/generated direct/traced, primary,
+corpus, lifecycle, bounds, progress, and slot traces; the complete Rust-local driver runs it unconditionally.
+Neutral, Perl, and Rust are admitted at 3 complete / 5 pending; `.9.1.10.3-.7` own Dart, Julia, dual-ABI Lua,
+recurring proof, and public closeout. This gate does not claim cross-backend parity early.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

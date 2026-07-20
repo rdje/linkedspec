@@ -8,9 +8,10 @@
 > composed-admitted. One recurring gate now proves all six runtime legs plus the
 > selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending.
 > ADR `0048` accepts per-hit action-result collection for explicit repetition and
-> scalar pipe choice. Perl implements it; Rust, Dart, Julia, and Lua currently
-> return the first scalar. The neutral contract plus ten-role Perl admission are
-> complete at 2 complete / 6 pending; `.9.1.10.2-.7` own the remaining rollout.
+> scalar pipe choice. Perl and Rust implement it; Dart, Julia, and Lua currently
+> return the first scalar. The neutral contract plus ten-role Perl and 15-role
+> Rust admissions are complete at 3 complete / 5 pending; `.9.1.10.3-.7` own the
+> remaining rollout.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -137,10 +138,11 @@ Lifecycle `return(...)` retains whole-rule authority. A backend must distinguish
 the return's action-edge context from `I`/`LS`/`LE`/`LX`/`IT`/`EX`/`E` rather
 than changing the meaning of every return event.
 
-This is the accepted ADR `0048` contract and current Perl behavior. Rust, Dart,
-Julia, and Lua still expose the pre-migration first-scalar behavior. The executable
-neutral contract and Perl admission are complete; backend and closeout rollout is
-2 complete / 6 pending under `FUTURE-PARITY-BACKLOG.9.1.10.2-.7`.
+This is the accepted ADR `0048` contract and current Perl/Rust behavior. Rust
+proves the same channel split in native and generated execution while retaining
+generated-source v2. Dart, Julia, and Lua still expose the pre-migration
+first-scalar behavior. Neutral, Perl, and Rust are complete; backend and closeout
+rollout is 3 complete / 5 pending under `FUTURE-PARITY-BACKLOG.9.1.10.3-.7`.
 
 ## 3. Lifecycle Execution Order
 

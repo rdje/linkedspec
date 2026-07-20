@@ -3041,8 +3041,8 @@ fn terse_2_3_3_1_action_edge_fluent_return_closes_recursive_rule() {
     let grammar = "top::\n -> box .push\n E { return(copy(top)) }\n\nbox:* /\\[/ /\\]/\n -> item .push\n -> box[1] .return(array(\"?box:\", copy(box)))\n\nitem:\n /x/\n I { return(entry_text()) }\n";
     assert_eq!(
         build_and_run(grammar, "[x]"),
-        serde_json::json!([[["?box:", ["x"]]]]),
-        "action-edge .return(expr) returns the current rule payload at the close edge"
+        serde_json::json!([[[["?box:", ["x"]]]]]),
+        "explicit-star action-edge .return(expr) preserves the returned array as one iteration element"
     );
 }
 

@@ -123,6 +123,7 @@ impl RuleMode {
             RuleMode::Default
                 | RuleMode::Star
                 | RuleMode::Plus
+                | RuleMode::Or
                 | RuleMode::OrPlus
                 | RuleMode::AndPlus
                 | RuleMode::Optional
@@ -135,7 +136,7 @@ impl RuleMode {
     pub fn rep_min(&self) -> Option<usize> {
         match self {
             RuleMode::Default | RuleMode::Star | RuleMode::Optional => Some(0),
-            RuleMode::Plus | RuleMode::OrPlus | RuleMode::AndPlus => Some(1),
+            RuleMode::Plus | RuleMode::Or | RuleMode::OrPlus | RuleMode::AndPlus => Some(1),
             RuleMode::OrBounded { min, .. } | RuleMode::AndBounded { min, .. } => Some(*min),
             _ => None,
         }

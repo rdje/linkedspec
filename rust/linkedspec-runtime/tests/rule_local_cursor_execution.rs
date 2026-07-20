@@ -32,6 +32,7 @@ enum ValueFactory {
     Null,
     String(&'static str),
     Strings(&'static [&'static str]),
+    NestedStrings(&'static [&'static str]),
 }
 
 impl ValueFactory {
@@ -40,6 +41,7 @@ impl ValueFactory {
             Self::Null => Value::Null,
             Self::String(value) => json!(value),
             Self::Strings(values) => json!(values),
+            Self::NestedStrings(values) => json!([values]),
         }
     }
 }
@@ -116,7 +118,7 @@ Child:AND
     ExecutionCase {
         id: "and_to_or_recursion",
         input: "p junk xp junk z",
-        expected: ValueFactory::String("done"),
+        expected: ValueFactory::NestedStrings(&["done"]),
         source: r#"Top::AND
  /p/
  -> Top { return(call(Child)) }
@@ -280,10 +282,13 @@ fn every_neutral_family_spelling_spends_its_authored_policy() {
             "{id}: descriptor/live policy agreement"
         );
         let options = ExecutionOptions::new().with_entry_rule("Top");
-        let expected = if case["cursor_policy"] == "consume" {
-            Value::Null
-        } else {
-            json!("hit")
+        let expected = match id {
+            _ if case["cursor_policy"] == "consume" => Value::Null,
+            "default_body" | "default_top" | "compact_or_body" | "compact_or_top" => {
+                json!("hit")
+            }
+            "optional_body" | "optional_top" => json!(["hit"]),
+            _ => json!(["hit", "hit"]),
         };
         let serialized = serde_json::to_string(&compiled).expect("serialize family fixture");
         let reconstructed: CompiledSpec =

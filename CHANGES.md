@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity
+
+Rust now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families
+as `rep_acode`/`rep_bcode`. Explicit repeated choice modes `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR` collect
+one typed action-block or fluent return per accepted hit in both the native and generated-plan executors. Returned
+arrays and nulls remain one outer element; zero hits, below-minimum null, exact bounds, and zero-progress stopping
+follow the neutral contract. Lifecycle returns remain immediate whole-rule authority, while default handlers,
+AND families, blind result shape, and scalar pipe retain their prior contracts. Generated-source stays v2.
+
+One omission-sensitive Rust consumer executes 15 exact roles across neutral metadata, all mode/special cases,
+loaded and reconstructed state, descriptor, emitted source, generated direct and traced execution, native trace,
+primary command, corpus bundle, lifecycle authority, bounds, progress, cursor, and structural slot identity. The
+neutral checker now requires the Rust consumer and implementation seams, rejects 26 mutations, and advances only
+Rust to 3 complete / 5 pending. Adjacent generated-family controls now use `::|`, and the existing explicit-star
+fluent-return test expects the returned array as one nested iteration value. The cursor contract's recursive
+bare-OR fixtures likewise expect the inner repetition's returned array to remain one outer iteration value, and
+the cursor family matrix now distinguishes scalar default/pipe rows from collected `+`/`*`/`?`/`OR` rows.
+
+Focused red proof first observed `is_repetition = false` and scalar `"A"`; focused green admits `["A", "B"]`.
+The complete Rust wrapper passes core 193 plus auxiliary suites, runtime 138 plus every integration/contract file,
+the emitted family matrix, and primary CLI 65/65 in both environments. Canonical local CI passes primary 65x2
+and Phase 0 1,031/1,031 in 632 seconds. Cleanup removes the 2.6-GiB initial target and the final 1.7-GiB
+incremental-disabled rebuild, mdBook HTML, and Python bytecode. Dart `.9.1.10.3` remains next after commit.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission
 
 The new `linkedspec-explicit-repetition-action-result-v1` contract makes ADR `0048` executable through eight exact

@@ -6502,7 +6502,7 @@ before implementation.
     task/roadmaps/live/changes/notes and commit `.1` before activating Rust `.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.2`
-  Status: `pending`
+  Status: `done`
   Goal: Align Rust repeated-choice classification and action-result collection.
   Dependencies: `.9.1.10.1`
   Acceptance: Make authored `RuleMode::Or` repetition with minimum one and generated `rep_acode`; collect one
@@ -6510,8 +6510,41 @@ before implementation.
     iteration values; preserve bounds, progress, slot identity, cursor policy, pipe scalar choice, diagnostics,
     and generated-source v2; prove native, loaded, reconstructed, generated direct/traced, emitted, descriptor,
     primary, and corpus roles through one neutral consumer plus the complete Rust gate.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean neutral/reference commit `00ee7085` at ahead
+    254; no Rust AST, runtime, descriptor, generated-source, fixture, driver, or documentation edit preceded
+    activation. The omission-sensitive neutral consumer and 26-mutation checker were added before behavior;
+    focused red execution independently proved authored bare `OR` reported `is_repetition = false` and repeated
+    action execution returned first-hit scalar `"A"` instead of `["A", "B"]`. Rust now reports bare `OR` as
+    minimum-one repetition, classifies action/blind forms as `rep_acode`/`rep_bcode`, and collects one typed
+    action-block or fluent return per accepted hit in native and generated execution. Pipe, default, AND,
+    blind-result, lifecycle, bounds, zero-progress, cursor, slot identity, and generated-source-v2 boundaries are
+    preserved. The exact 15-role consumer, 26-mutation checker, core 193 plus auxiliaries, adjacent emitted-source
+    matrix, complete runtime package, Rust primary 65x2, and canonical Perl primary 65x2 plus Phase 0 1,031 in
+    632 seconds pass. Broad-suite expectations now preserve a returned array as one
+    explicit-star iteration element, through both cursor-contract nested bare-OR recursion routes, and across the
+    cursor execution matrix's explicit repetition families without changing its cursor assertions. Exact cleanup
+    removes the initial 2.6-GiB target and final 1.7-GiB incremental-disabled rebuild.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.2 - admit Rust repeated action results`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY RUST SEAMS** — Follow the Knowledge Map and neutral contract to the exact Rust
+    authored-mode metadata, compiler/runtime action-result flow, descriptor, emitted/generated-v2, loaded/
+    reconstructed, trace, primary, corpus, and driver seams before editing behavior.
+  - [x] **RED / NEUTRAL CONSUMER** — Add one omission-sensitive contract consumer that proves all eight modes,
+    ten special cases where representable, and the required native/composed/artifact/trace/primary/corpus routes;
+    demonstrate the current bare-OR family and first-return failures before repair.
+  - [x] **CLASSIFY BARE OR AS REPETITION** — Make authored Rust `Or` minimum-one repetition and generated
+    `rep_acode`/`rep_bcode` without widening generated-source v2 or changing scalar pipe.
+  - [x] **COLLECT ACTION ITERATION VALUES** — Preserve action-edge return context through each accepted repeated
+    hit, collect one typed value per hit, and retain lifecycle return as immediate whole-rule authority with exact
+    bounds, zero progress, cursor, and slot identity.
+  - [x] **COMPOSE / ADMIT ONLY RUST** — Prove native, loaded, reconstructed, descriptor, emitted/generated direct
+    and traced, primary, corpus, and diagnostics through the complete Rust gate; advance only Rust to complete and
+    leave Dart/Julia/Lua/recurring/public pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass neutral and adjacent checkers, focused and complete Rust gates,
+    mdBook/KM/memory/doctrines, canonical CI where warranted, whitespace, and exact artifact cleanup; synchronize
+    task/roadmap/live/changes/notes and commit `.2` before activating Dart `.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.3`
   Status: `pending`
@@ -9132,8 +9165,8 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `done` | Twenty-nine required documents, 26 stale-current denials, 60 mutations, recurring proof, KM 646/4,751, canonical 65x2 plus Phase 0 1,031, and exact cleanup close cursor rollout at 8/0 without falsely closing `.9.1`/`.9`. |
 | 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `active` | ADR `0048` accepts reference per-hit action collections, scalar pipe, lifecycle authority, bare-OR repetition, and unchanged generated v2; seven rollout children are split before code. |
-| 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `active` | Lock the neutral executable contract/checker and exact Perl route admission from clean decision `34ad7548`. |
-| 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `pending` | Align Rust classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `done` | Neutral executable contract/checker and exact Perl route admission committed at `00ee7085`. |
+| 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `done` | Rust classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `pending` | Align Dart classification, collection, descriptors, generated/traced, primary, and corpus routes. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `pending` | Align Julia classification, collection, descriptors, generated/traced, primary, and corpus routes. |
 | 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `pending` | Align one PUC Lua/LuaJIT source across all native/generated/public routes. |
@@ -10215,6 +10248,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Rust `.9.1.10.2` advances only Rust to 3 complete / 5 pending. Bare `OR` is minimum-one
+  repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
+  typed value per accepted hit in native and generated execution. One 15-role consumer covers the exact neutral
+  matrix, loaded/reconstructed, descriptor, emitted/generated direct/traced, primary, corpus, lifecycle, bounds,
+  progress, and slot traces. Core, emitted-source, focused, complete runtime, Rust primary 65x2, canonical
+  65x2/1,031, doctrines, mdBook, and exact generated cleanup pass; Dart `.3` follows.
 - `2026-07-20`: Neutral/reference `.9.1.10.1` is signoff-complete from clean base `34ad7548`. The exact checker
   passes 8 mode cases / 10 special cases / 2 complete + 6 pending / 25 mutations; Perl passes all 10 composed
   roles; adjacent duplicate/cursor/root contracts pass; KM 646/4,757, memory 56/60, mdBook, task metadata, four

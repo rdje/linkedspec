@@ -8,17 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.1` is active task-tree-first from clean decision commit `34ad7548` at ahead 253.
-  The exact neutral contract covers 8 mode cases, 10 special cases, descriptor/generated-v2/trace/routes, one
-  checked-in corpus bundle, 6 runtime rows, and a 2-complete/6-pending rollout with 25 rejected mutations. The
-  existing Perl mechanism is composed through 10 roles. KM 646/4,757, memory 56/60, mdBook/four doctrines,
-  adjacent contracts, primary 65x2, and Phase 0 1,031/1,031 in 614 seconds pass; final commit/brief cleanup is in
-  flight. No parser, compiler, runtime, descriptor, or generated behavior changes.
+- `FUTURE-PARITY-BACKLOG.9.1.10.2` is active task-tree-first from clean neutral/reference commit `00ee7085` at
+  ahead 254. Rust now treats bare `OR` as minimum-one repetition with `rep_acode`/`rep_bcode` and collects one
+  typed action-block or fluent return per accepted hit in native and generated execution. The omission-sensitive
+  Rust consumer composes 15 exact roles; the neutral checker advances only Rust to 3 complete / 5 pending and
+  rejects 26 mutations. Focused, core, complete runtime, emitted-family, Rust primary 65x2, canonical Perl
+  primary 65x2 plus Phase 0 1,031/1,031 in 632 seconds, and exact 1.7-GiB final cleanup pass; final docs/gates,
+  commit, and brief reset remain in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission` is the active slice
-  title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission**
+  (DONE at clean commit `00ee7085` from base `34ad7548`).
+
+  **Result:** The neutral executable contract locks eight modes, ten special cases, descriptors, generated v2,
+  traces, routes, one corpus bundle, and six runtime rows. Perl is composed through ten roles, so rollout reaches
+  2 complete / 6 pending with 25 rejected mutations and no parser/compiler/runtime behavior change.
+
+  **Next:** Rust parity leaf `.9.1.10.2` is active task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10 — decide and split explicit repetition action results**
   (DONE at clean commit `34ad7548` from base `4ceec12d`).
 

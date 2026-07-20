@@ -29,7 +29,7 @@ const SIMPLE_SOURCE_EMITTER_SPEC: &str = r#"Top::
  E { return(copy(words)) }
 "#;
 
-const OR_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
+const PIPE_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::|
  /go/ -> Done { return(cat("or-acode:", call(Done))) }
 
 Done:
@@ -83,7 +83,7 @@ ChildB:
  E { return("B") }
 "#;
 
-const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
+const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::|
  => ChildA
  => ChildB
  E { return(cat("or-bcode:", retv)) }
@@ -97,7 +97,7 @@ ChildB:
  E { return("B") }
 "#;
 
-const OR_BCODE_LX_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
+const OR_BCODE_LX_SOURCE_EMITTER_SPEC: &str = r#"Top::|
  => ChildA
  => ChildB
  LX { return("or-miss") }
@@ -696,11 +696,11 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         },
         Case {
             module: "or_acode_case",
-            spec: OR_ACODE_SOURCE_EMITTER_SPEC,
+            spec: PIPE_ACODE_SOURCE_EMITTER_SPEC,
             input: "go",
             expected: json!(["or-acode:go"]),
             expected_family: "or_acode",
-            expected_mode: RuleMode::Or,
+            expected_mode: RuleMode::Pipe,
         },
         Case {
             module: "and_single_acode_case",
@@ -740,7 +740,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             input: "a b",
             expected: json!(["or-bcode:A"]),
             expected_family: "or_bcode",
-            expected_mode: RuleMode::Or,
+            expected_mode: RuleMode::Pipe,
         },
         Case {
             module: "or_bcode_miss_case",
@@ -748,7 +748,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             input: "c",
             expected: json!(["or-miss"]),
             expected_family: "or_bcode",
-            expected_mode: RuleMode::Or,
+            expected_mode: RuleMode::Pipe,
         },
         Case {
             module: "rep_acode_case",
@@ -860,16 +860,23 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             .execute(case.input)
             .expect("interpreted smoke parser should execute");
         assert_eq!(interpreted, case.expected);
-        let direct_expected = case
-            .expected
-            .as_array()
-            .and_then(|values| values.first())
-            .expect("legacy source-emitter expectation has one top-level result");
+        let direct_expected = if case.module == "rep_recursion_guard_case" {
+            // Explicit repetition preserves the accepted null action return as
+            // one collection element; this recursion-guard fixture already
+            // populated the compatibility accumulator with that same element.
+            case.expected.clone()
+        } else {
+            case.expected
+                .as_array()
+                .and_then(|values| values.first())
+                .expect("legacy source-emitter expectation has one top-level result")
+                .clone()
+        };
         assert_eq!(
             Engine::new(compiled.clone())
                 .execute_value(case.input, &ExecutionOptions::new())
                 .expect("direct interpreted smoke parser should execute"),
-            direct_expected.clone()
+            direct_expected
         );
 
         let top = compiled
@@ -917,7 +924,7 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
 
         let input_literal = serde_json::to_string(case.input).expect("encode generated test input");
         let direct_expected_literal =
-            serde_json::to_string(direct_expected).expect("encode generated direct expectation");
+            serde_json::to_string(&direct_expected).expect("encode generated direct expectation");
         let compatibility_expected_literal = serde_json::to_string(&case.expected)
             .expect("encode generated compatibility expectation");
         generated_tests.push_str("    #[test]\n    fn ");

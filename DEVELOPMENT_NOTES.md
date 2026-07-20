@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.2` — split action iteration values from lifecycle control in Rust):
+  The focused neutral consumer independently reproduced both Rust defects before behavior: `RuleMode::Or`
+  omitted repetition metadata/generated classification, and an action-edge return consumed the same
+  `RuntimeContext::return_value` channel as lifecycle control, exiting after the first hit. The repair adds bare
+  `Or` to minimum-one repetition and the generated repetition classifier, then intercepts that return channel
+  only immediately after action-block or fluent execution for the six ADR-0048 explicit choice-repetition modes.
+  Native and generated executors collect the typed value and continue; lifecycle macros still return immediately.
+  A scoped helper excludes historical default, AND, and blind-result paths. Below-minimum explicit action
+  repetition drops partial values and returns neutral null; zero progress retains its accepted hit before stop.
+  The 15-role consumer proves all composed routes, exact two-event slot traces, stale `or_acode` rejection, nested
+  and null values, lifecycle authority, bounds, primary, and corpus. The adjacent source-emitter matrix moved
+  genuine non-repeating `or_acode`/`or_bcode` controls from bare `OR` to pipe and updated the existing OR+ null
+  action fixture's direct expectation. The complete wrapper additionally exposed a cursor-contract recursion
+  fixture whose inner bare-OR returned `["done"]`; the outer bare-OR correctly preserves that container as one
+  iteration value, yielding `[["done"]]`. Its 36-family execution matrix also had to distinguish historical
+  scalar default/pipe from explicit repetition collections (`?` one hit; the other seek repetitions two fixture
+  hits). Rollout is 3 complete / 5 pending with 26 rejected mutations.
+
+  Final proof runs the complete Rust wrapper with incremental compilation disabled: core 193 plus 4/5/8,
+  runtime 138 plus every integration/contract file, the 197-test integration suite, exact repeated-action 3/3,
+  cursor contract 1/1 and execution 6/6, emitted source 6/6, and primary CLI 65x2 all pass. Canonical local CI
+  independently passes Perl primary 65x2 and Phase 0 1,031/1,031 in 632 seconds. Artifact cleanup removes the
+  original 2.6-GiB target and the final 1.7-GiB incremental-disabled rebuild rather than retaining build output.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.1` — make the decision executable without changing Perl behavior):
   The neutral evaluator deliberately does not invoke a backend. It applies earliest-start/first-authored choice,
   accepted-hit bounds, zero-progress protection, per-hit typed values, and explicit E/LE overrides to eight mode

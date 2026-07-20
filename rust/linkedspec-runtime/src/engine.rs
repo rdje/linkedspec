@@ -39,6 +39,7 @@ use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
 };
+use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_compiled_regex_slot_identities;
 use linkedspec_core::entry_rule::{
     ENTRY_RULE_NOT_FOUND_CODE, EntryRuleSelectionBasis, NO_RULES_DEFINED_CODE,
@@ -101,6 +102,22 @@ fn structural_slot_identity(rule: &CompiledRule, dispatch_index: usize) -> (&str
         .find(|entry| entry.regex_idx == dispatch_index)
         .map(|entry| (entry.child_label.as_str(), entry.child_regex_idx))
         .unwrap_or((rule.label.as_str(), dispatch_index))
+}
+
+/// True only for the explicit choice-repetition action families admitted by
+/// ADR 0048. The historical unadorned default handler and every AND/blind
+/// family deliberately retain their existing return contract.
+fn collects_explicit_action_iteration_values(rule: &CompiledRule) -> bool {
+    !rule.acode_dispatch.is_empty()
+        && matches!(
+            rule.mode,
+            RuleMode::Star
+                | RuleMode::Plus
+                | RuleMode::Optional
+                | RuleMode::Or
+                | RuleMode::OrPlus
+                | RuleMode::OrBounded { .. }
+        )
 }
 
 fn strict_decimal_text(value: &str) -> bool {
@@ -874,6 +891,22 @@ impl GeneratedPlanExecutor<'_> {
         let is_rep = rule.rep_min.is_some();
         let rep_min = rule.rep_min.unwrap_or(0);
         let rep_max = rule.rep_max;
+        let collects_action_values = collects_explicit_action_iteration_values(rule);
+        let mut action_iteration_values = Vec::new();
+
+        macro_rules! collect_or_return_action_value {
+            () => {
+                if let Some(value) = ctx.take_return_value() {
+                    if collects_action_values {
+                        action_iteration_values.push(value);
+                    } else {
+                        ctx.restore_return_value(caller_return);
+                        saved_match.restore(ctx);
+                        return Ok(value);
+                    }
+                }
+            };
+        }
         let is_rep_and_acode_seq = is_rep
             && matches!(family, GeneratedRuleFamily::RepAndAcode)
             && rule.regex_patterns.len() > 1;
@@ -1058,14 +1091,14 @@ impl GeneratedPlanExecutor<'_> {
                                     let block_result = self.engine.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                     ctx.set_retv(child_retv);
                                 } else if entry.child_label == label {
                                     self.engine.execute_block(block, ctx, label)?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                 } else {
                                     self.engine.execute_block(block, ctx, label)?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
@@ -1086,10 +1119,7 @@ impl GeneratedPlanExecutor<'_> {
                             .execute_action_edge_fluent_chain(entry, ctx, label)?
                             == ActionEdgeFlow::Returned
                         {
-                            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
-                            ctx.restore_return_value(caller_return);
-                            saved_match.restore(ctx);
-                            return Ok(my_return);
+                            collect_or_return_action_value!();
                         }
                     }
                 }
@@ -1148,6 +1178,11 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if is_rep && matches < rep_min {
+            if collects_action_values {
+                ctx.restore_return_value(caller_return);
+                saved_match.restore(ctx);
+                return Ok(RuntimeValue::Undef);
+            }
             return Err(format!(
                 "rule '{}': expected at least {} matches, got {}",
                 label, rep_min, matches
@@ -1172,7 +1207,13 @@ impl GeneratedPlanExecutor<'_> {
             return_if_rule_returned!();
         }
 
-        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        let my_return = ctx.take_return_value().unwrap_or_else(|| {
+            if collects_action_values {
+                RuntimeValue::Array(action_iteration_values)
+            } else {
+                RuntimeValue::Undef
+            }
+        });
         ctx.restore_return_value(caller_return);
         saved_match.restore(ctx);
         Ok(my_return)
@@ -2769,6 +2810,22 @@ impl Engine {
         }
 
         // ── Regex-based matching loop ──
+        let collects_action_values = collects_explicit_action_iteration_values(rule);
+        let mut action_iteration_values = Vec::new();
+
+        macro_rules! collect_or_return_action_value {
+            () => {
+                if let Some(value) = ctx.take_return_value() {
+                    if collects_action_values {
+                        action_iteration_values.push(value);
+                    } else {
+                        ctx.restore_return_value(caller_return);
+                        saved_match.restore(ctx);
+                        return Ok(value);
+                    }
+                }
+            };
+        }
         let is_rep_and_acode_seq = is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
         let is_and_acode_seq = (!is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1)
             || is_rep_and_acode_seq;
@@ -2975,7 +3032,7 @@ impl Engine {
                                     let block_result = self.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                     ctx.set_retv(child_retv);
                                 } else if entry.child_label == label {
                                     // A self-recursive code edge such as
@@ -2987,14 +3044,14 @@ impl Engine {
                                     // past the current construct before the
                                     // block can return.
                                     self.execute_block(block, ctx, label)?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                 } else {
                                     // Blocks that do not call the child run before
                                     // the generated Perl handler dispatches that
                                     // child. The child return then seeds `retv`
                                     // for later edges / lifecycle blocks.
                                     self.execute_block(block, ctx, label)?;
-                                    return_if_rule_returned!();
+                                    collect_or_return_action_value!();
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
@@ -3013,10 +3070,7 @@ impl Engine {
                         } else if self.execute_action_edge_fluent_chain(entry, ctx, label)?
                             == ActionEdgeFlow::Returned
                         {
-                            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
-                            ctx.restore_return_value(caller_return);
-                            saved_match.restore(ctx);
-                            return Ok(my_return);
+                            collect_or_return_action_value!();
                         }
                     }
                 }
@@ -3083,6 +3137,11 @@ impl Engine {
 
         // Check min bound for REP variants (not for non-REP with no matches)
         if is_rep && matches < rep_min {
+            if collects_action_values {
+                ctx.restore_return_value(caller_return);
+                saved_match.restore(ctx);
+                return Ok(RuntimeValue::Undef);
+            }
             return Err(format!(
                 "rule '{}': expected at least {} matches, got {}",
                 label, rep_min, matches
@@ -3110,7 +3169,13 @@ impl Engine {
         // This invocation's return value is whatever its blocks last returned;
         // restore the caller's pending return and match lexicals so nested
         // dispatch is transparent to the parent.
-        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        let my_return = ctx.take_return_value().unwrap_or_else(|| {
+            if collects_action_values {
+                RuntimeValue::Array(action_iteration_values)
+            } else {
+                RuntimeValue::Undef
+            }
+        });
         ctx.restore_return_value(caller_return);
         saved_match.restore(ctx);
         Ok(my_return)

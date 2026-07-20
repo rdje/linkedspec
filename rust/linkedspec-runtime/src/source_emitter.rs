@@ -1265,6 +1265,7 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
         RuleMode::Plus
             | RuleMode::Star
             | RuleMode::Optional
+            | RuleMode::Or
             | RuleMode::OrPlus
             | RuleMode::OrBounded { .. }
             | RuleMode::AndPlus
@@ -1294,7 +1295,7 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
 
     match rule.mode {
         RuleMode::Default => GeneratedRuleFamily::Default,
-        RuleMode::Or | RuleMode::Pipe => GeneratedRuleFamily::OrAcode,
+        RuleMode::Pipe => GeneratedRuleFamily::OrAcode,
         RuleMode::Single => GeneratedRuleFamily::AndSingleAcode,
         RuleMode::And => {
             if rule.regex_patterns.len() <= 1 && rule.acode_dispatch.len() <= 1 {
@@ -1306,6 +1307,7 @@ pub fn classify_generated_rule_family(rule: &CompiledRule) -> GeneratedRuleFamil
         RuleMode::Plus
         | RuleMode::Star
         | RuleMode::Optional
+        | RuleMode::Or
         | RuleMode::OrPlus
         | RuleMode::OrBounded { .. }
         | RuleMode::AndPlus

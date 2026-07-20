@@ -1,6 +1,6 @@
 ---
 id: explicit-or-action-result-shape-parity-gap
-title: "Explicit repetition action returns collect per hit; four newer backends currently exit on the first hit"
+title: "Explicit repetition action returns collect per hit; Rust is admitted and three newer backends remain"
 answers:
   - "why does Perl Top OR return an array"
   - "does Top double colon OR return the same shape on every backend"
@@ -14,10 +14,10 @@ answers:
   - "where is the explicit repetition action result neutral contract"
   - "how is Perl repeated action result behavior admitted"
 date: 2026-07-20
-status: ADR 0048 accepted; neutral and Perl complete; six rollout legs pending FUTURE-PARITY-BACKLOG.9.1.10.2-.7
+status: ADR 0048 accepted; neutral, Perl, and Rust complete; five rollout legs pending FUTURE-PARITY-BACKLOG.9.1.10.3-.7
 tags: [or, repetition, action-edge, output-shape, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.10 toolbox probes cover Perl live, loaded, generated, and generated-traced routes, and a disposable exact five-primary-adapter matrix covers distinct patterns. On input ab, Perl returns [\"A\",\"B\"] for ::OR, ::OR+, ::OR{2}, ::+, and ::*, [\"A\"] for ::?, and scalar \"A\" for ::|; Rust, Dart, Julia, and Lua return scalar \"A\" for every repeated row and pipe. ADR 0048 accepts reference collection, scalar pipe, lifecycle whole-rule authority, corrected rep_acode classification, and unchanged generated-source v2. FUTURE-PARITY-BACKLOG.9.1.10.1 adds linkedspec-explicit-repetition-action-result-v1 with 8 mode cases, 10 special cases, selected-slot/cursor/result modeling, exact descriptor/generated/trace/routes, one checked-in corpus bundle, a six-runtime inventory, 2 complete plus 6 pending rollout, and 25 rejected mutations. Its Perl consumer admits 10 composed roles without changing runtime behavior."
-reverify: "python3 tools/check_repeated_action_result_contract.py && PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t"
+evidence: "The original five-primary audit found Rust, Dart, Julia, and Lua returned first-hit scalar A while Perl collected explicit repetition. ADR 0048 accepted reference collection, scalar pipe, lifecycle whole-rule authority, corrected rep_acode classification, and unchanged generated-source v2. FUTURE-PARITY-BACKLOG.9.1.10.1 added the 8-mode/10-special executable contract and ten-role Perl admission. FUTURE-PARITY-BACKLOG.9.1.10.2 makes Rust bare OR minimum-one repetition, classifies bare action/blind OR as rep_acode/rep_bcode, collects typed action-block and fluent returns per hit in both native and generated executors, preserves returned arrays/nulls as one outer element, and retains lifecycle/default/AND/pipe/blind-result boundaries. One exact 15-role Rust consumer proves native, loaded, reconstructed, descriptor, emitted/generated direct/traced, primary, corpus, lifecycle, bounds, progress, and selected-slot trace. The checker reports 3 complete plus 5 pending and rejects 26 mutations."
+reverify: "python3 tools/check_repeated_action_result_contract.py && PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract"
 ---
 
 `Rule::OR` and `Rule::|` are not interchangeable. ADR `0048` fixes the portable
@@ -36,7 +36,7 @@ Fixing only one branch would leave the other drift intact.
 Current primary result matrix for distinct `/a/` and `/b/` action slots on
 input `ab`:
 
-| Mode | Perl reference | Rust / Dart / Julia / Lua | Accepted contract |
+| Mode | Perl / Rust | Dart / Julia / Lua | Accepted contract |
 | --- | --- | --- | --- |
 | `::OR`, `::OR+`, `::OR{2}`, `::+`, `::*` | `["A","B"]` | `"A"` | `["A","B"]` |
 | `::?` | `["A"]` | `"A"` | `["A"]` |
@@ -50,9 +50,10 @@ The unadorned historical default handler is outside this scoped decision.
 The duplicate-slot contract uses `::|` for its genuine single-choice priority
 fixture. The executable contract lives at
 `capability_conformance/repeated_action_result_contract.json`; its checker owns
-the neutral evaluator and its Perl consumer owns ten route roles. Neutral and
-Perl are complete at 2 complete / 6 pending. Newer-backend behavior begins at
-`.9.1.10.2`; no backend may claim parity from the primary matrix alone.
+the neutral evaluator; its Perl consumer owns ten route roles and its Rust
+consumer owns 15. Neutral, Perl, and Rust are complete at 3 complete / 5
+pending. Remaining backend behavior begins at `.9.1.10.3`; no backend may claim
+parity from the primary matrix alone.
 
 Related: [[duplicate-regex-slot-identity-contract]],
 [[blind-call-collection-shape]], [[handler-ir-design]],
