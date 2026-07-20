@@ -6635,15 +6635,54 @@ before implementation.
     task/roadmap/live/changes/notes and commit `.4` before activating Lua `.5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.5`
-  Status: `pending`
+  Status: `done`
   Goal: Align PUC Lua and LuaJIT repeated-choice classification and action-result collection.
   Dependencies: `.9.1.10.4`
   Acceptance: One byte-identical Lua consumer applies the accepted contract through AST metadata, runtime return
     flow, descriptor, generated-v2 classification/execution, emitted source, loading/reconstruction, trace,
     primary, and corpus on both ABIs; preserve lifecycle authority, bounds, progress, slot/cursor semantics, pipe
     scalar choice, Lua 5.1 compatibility, and the interpreter chunk-local ceiling; pass both complete ABI gates.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean Julia admission commit `1c61c2ba` at ahead
+    257. No Lua AST, runtime, descriptor, generated-source, fixture, driver, or public-documentation edit preceded
+    activation. One byte-identical 15-role consumer and the pending-state checker reproduced both defects before
+    behavior repair: focused PUC Lua failed 64 of 174 assertions because bare `Or` lacked repetition metadata,
+    emitted `or_acode`, returned first-hit scalars, and stopped after one selected slot. Lua now gives bare `Or`
+    minimum one, emits `rep_acode`/`rep_bcode`, and captures copied scalar/null/container action-block or fluent
+    returns at the accepted action-edge boundary for `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`. Implicit child
+    dispatch continues; lifecycle returns remain immediate whole-rule authority. Default, AND, blind-result,
+    pipe, bounds, zero progress, cursor, slot identity, Lua 5.1 compatibility, chunk-local structure, and
+    generated-source-v2 shape remain unchanged. Adjacent generated-family controls now use `:|`, nested cursor
+    recursion preserves `[["done"]]`, and the 36-family cursor matrix distinguishes scalar default/pipe,
+    one-hit optional, and two-hit explicit repetition without changing its seek/consume assertions. The checker
+    passes 8 modes / 10 specials / 6 complete + 2 pending / 35 mutations. The exact consumer passes 175/175 on
+    each ABI. The authoritative Lua gate passes every focused suite, 177 package tests per ABI, primary 65x2,
+    and corpus 105/105. Knowledge Map regeneration/check passes at 646 facts / 4,760 question keys; memory is
+    58/60 lines; task metadata, all four doctrines, mdBook, cross-contract cursor/root/duplicate governance, and
+    whitespace pass. Canonical local CI exits 0 after the repeated-result checker and Perl consumer, primary
+    65x2, and Phase 0 1,031/1,031 in 654 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.5 - admit Lua repeated action results`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY LUA SEAMS** — Follow the Knowledge Map, toolbox, neutral contract, and admitted
+    Rust/Dart/Julia precedents to the exact Lua authored-mode metadata, compiler/runtime action-result flow,
+    descriptor, emitted/generated-v2, loaded/reconstructed, trace, primary, corpus, and driver seams before
+    editing behavior.
+  - [x] **RED / NEUTRAL CONSUMER** — Add one byte-identical omission-sensitive contract consumer that proves all
+    eight modes, ten special cases where representable, and the required native/composed/artifact/trace/primary/
+    corpus routes on PUC Lua and LuaJIT; demonstrate the current bare-OR family and first-return failures before
+    repair.
+  - [x] **CLASSIFY BARE OR AS REPETITION** — Make authored Lua `Or` minimum-one repetition and generated
+    `rep_acode`/`rep_bcode` without widening generated-source v2 or changing scalar pipe.
+  - [x] **COLLECT ACTION ITERATION VALUES** — Capture action-block and fluent returns at the action-edge boundary,
+    collect one copied typed value per accepted hit, continue implicit child dispatch, and retain lifecycle return
+    as immediate whole-rule authority with exact bounds, zero progress, cursor, and slot identity.
+  - [x] **COMPOSE / ADMIT ONLY LUA** — Prove native, loaded, reconstructed, descriptor, emitted/generated direct
+    and traced, primary, corpus, and diagnostics through both complete ABI gates; advance only dual-ABI Lua to
+    complete and leave recurring/public pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass neutral and adjacent checkers, focused and complete Lua gates,
+    mdBook/KM/memory/doctrines, canonical CI where warranted, whitespace, and exact artifact cleanup; synchronize
+    task/roadmap/live/changes/notes and commit `.5` before activating recurring `.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.6`
   Status: `pending`
@@ -9236,7 +9275,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `done` | Rust classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `done` | Dart classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `done` | Julia classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
-| 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `pending` | Align one PUC Lua/LuaJIT source across all native/generated/public routes. |
+| 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `done` | One byte-identical 15-role consumer passes 175x2; bare OR repeats from minimum one, explicit action returns collect per hit, and the complete dual-ABI Lua gate advances governance to 6+2/35. |
 | 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `pending` | Compose recurring six-runtime plus selected five-primary/support proof. |
 | 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `pending` | Close public no-drift and exact `.9.1.10`/`.9.1`/`.9` status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
@@ -10315,6 +10354,12 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Dual-ABI Lua `.9.1.10.5` advances only Lua to 6 complete / 2 pending. Bare `OR` is minimum-one
+  repetition and generated `rep_acode`/`rep_bcode`; explicit action-block/fluent returns collect one copied typed
+  value per accepted hit at the edge boundary while implicit child dispatch continues and lifecycle returns stay
+  authoritative. One byte-identical 15-role consumer passes 175/175 on PUC Lua and LuaJIT. The complete Lua gate
+  passes all focused suites, 177 package tests per ABI, primary 65x2, corpus 105/105, and the 35-mutation checker.
+  Canonical primary 65x2 and Phase 0 1,031/1,031 in 654 seconds pass; recurring `.6` follows.
 - `2026-07-20`: Julia `.9.1.10.4` advances only Julia to 5 complete / 3 pending. Bare `OR` is minimum-one
   repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
   typed value per accepted hit at the action-edge boundary, preserving implicit child dispatch and lifecycle

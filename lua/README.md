@@ -40,6 +40,15 @@ derived policy, aggregate ownership, and ordered semantic edge rows from normali
 normalized, and loaded descriptor bytes agree. This descriptor projection does not remove the separately staged
 root-selection and composed-admission contracts.
 
+Explicit action repetition follows ADR `0048` on both ABIs. Authored `*`, `+`, `?`, `OR`, `OR+`, and bounded
+`OR` collect one copied action-edge return value per accepted hit; bare `OR` has minimum one and generated
+`rep_acode`/`rep_bcode` classification. Compact `|` remains non-repeating scalar choice. Action-block and fluent
+returns are captured at the edge boundary so implicit child dispatch still completes, while lifecycle returns
+remain immediate whole-rule authority. Returned arrays stay nested as one outer element, returned null remains
+one null element, a permitted zero-hit result is `[]`, and progress/bounds/cursor/slot rules are unchanged. One
+byte-identical 15-role consumer passes 175 assertions under PUC Lua and LuaJIT; `bash tools/run_lua_local.sh`
+runs it beside the complete package, primary-command, and corpus gates.
+
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
   spec_name = "Example",

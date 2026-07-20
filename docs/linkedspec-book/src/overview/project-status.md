@@ -6,11 +6,11 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0048`: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable
-neutral contract covers eight mode cases and ten special cases and rejects 32 mutations. Its ten-role Perl and
-15-role Rust/Dart/Julia admissions are complete, so rollout is 5 complete / 3 pending. Rust, Dart, and Julia now classify bare
-`OR` as minimum-one repetition and collect action returns per hit across native/generated routes without changing
-lifecycle authority, scalar pipe, or generated-source v2. Dual-ABI Lua, recurring, and public closeout
-remain `.9.1.10.5-.7`.
+neutral contract covers eight mode cases and ten special cases and rejects 35 mutations. Its ten-role Perl and
+15-role Rust/Dart/Julia/dual-ABI Lua admissions are complete, so rollout is 6 complete / 2 pending. Every backend
+classifies bare `OR` as minimum-one repetition and collects action returns per hit across native/generated routes
+without changing lifecycle authority, scalar pipe, or generated-source v2. Recurring and public closeout remain
+`.9.1.10.6-.7`.
 
 The separately completed ADR `0046` root-selection contract says an explicit selector, including
 `--top-rule NAME`, wins over authored markers; otherwise the first authored `::` wins; without a marker, the first

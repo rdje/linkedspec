@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.5 — admit dual-ABI Lua repeated action-result parity
+
+PUC Lua and LuaJIT now treat authored bare `OR` as minimum-one repetition and classify action/blind generated
+families as `rep_acode`/`rep_bcode`. Explicit `*`, `+`, `?`, `OR`, `OR+`, and bounded-`OR` action returns are
+captured at the accepted action-edge boundary and copied into one typed result element per hit. Implicit child
+dispatch still completes after capture; lifecycle returns retain immediate whole-rule authority. Default, AND,
+blind-result, scalar pipe, bounds, progress, cursor policy, structural slot identity, Lua 5.1 compatibility, and
+generated-source v2 remain unchanged.
+
+One byte-identical 15-role consumer covers neutral metadata, all mode/special cases, loaded and normalized
+reconstruction, descriptor, emitted-source and generated direct/traced execution, stale-family rejection, native
+trace, primary command, corpus bundle, lifecycle, bounds, progress, cursor, and selected slots on both ABIs. Its
+pre-repair PUC run failed 64 of 174 assertions with non-repetition metadata, `or_acode`, scalar first returns, and
+one selected slot. The repaired consumer passes 175/175 on PUC Lua and LuaJIT. The neutral checker advances only
+dual-ABI Lua to 6 complete / 2 pending and rejects 35 mutations.
+
+Adjacent generated-family controls now spell genuine scalar choice as `:|`; nested bare-OR recursion preserves
+`[["done"]]`; and the 36-family cursor matrix distinguishes scalar default/pipe, one-hit optional, and two-hit
+explicit repetition without weakening its seek/consume assertions. The authoritative Lua gate passes all focused
+suites, 177 package tests per ABI, primary CLI 65/65 in default and POSIX environments, and corpus 105/105.
+Canonical local CI independently passes the checker, ten-role Perl consumer, primary 65x2, and Phase 0
+1,031/1,031 in 654 seconds. Recurring six-runtime composition and public no-drift remain `.9.1.10.6-.7`.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity
 
 Julia now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families

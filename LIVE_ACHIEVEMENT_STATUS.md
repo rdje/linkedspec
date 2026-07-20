@@ -8,16 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.4` is active task-tree-first from clean Dart admission commit `128ead52` at ahead
-  256. Implementation and signoff are complete: Julia now classifies bare OR as minimum-one repetition and
-  collects typed action-edge values per accepted hit without swallowing implicit child dispatch or lifecycle
-  control. Rollout is 5 complete / 3 pending with 32 rejected mutations; lockstep/commit is in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.5` is active task-tree-first from clean Julia admission commit `1c61c2ba` at ahead
+  257. Implementation and backend signoff are complete: PUC Lua and LuaJIT now classify bare OR as minimum-one
+  repetition and collect copied typed action-edge values per accepted hit without swallowing implicit child
+  dispatch or lifecycle control. Rollout is 6 complete / 2 pending with 35 rejected mutations; canonical signoff
+  is green and final cleanup/commit is in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.5 — admit Lua repeated action-result parity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.5 — admit Lua repeated action-result parity**
+  (IMPLEMENTED AND VERIFIED from clean base `1c61c2ba`; cleanup/commit in progress).
+
+  **Result:** Bare `OR` is minimum-one repetition on both Lua ABIs; explicit action-repetition returns collect one
+  copied typed value per accepted hit in native and generated execution. Lifecycle/pipe/bounds/progress/cursor/
+  slot contracts and generated source v2 remain stable. One shared exact 15-role admission advances rollout to
+  6 complete / 2 pending with 35 rejected mutations.
+
+  **Proof:** Pre-repair PUC proof failed 64/174. Repaired exact consumers pass 175/175 on PUC Lua and LuaJIT; the
+  authoritative dual-ABI gate passes all focused suites, 177 full runtime tests per ABI, primary 65x2, and corpus
+  105/105. Canonical local CI passes checker/Perl admission, primary 65x2, and Phase 0 1,031/1,031 in 654 seconds.
+
+  **Next:** Finish cleanup and commit `.5`; recurring composition `.9.1.10.6` follows from a clean
+  boundary.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity**
-  (IMPLEMENTED AND VERIFIED from clean base `128ead52`; commit workflow in progress).
+  (DONE at clean commit `1c61c2ba` from base `128ead52`).
 
   **Result:** Julia treats bare `OR` as minimum-one repetition, captures typed action-edge values per accepted hit
   in native and generated execution, preserves lifecycle/pipe/bounds/progress/cursor/slot contracts, and passes
@@ -27,7 +43,7 @@ Current execution status for interruption-safe batch workflow recovery.
   checker 8 modes / 10 specials / 32 mutations, canonical Perl primary 65x2, and Phase 0 1,031/1,031 in 638
   seconds pass. Disposable Julia compiled cache was removed after the authoritative backend gate.
 
-  **Next:** Commit and clean `.4`; dual-ABI Lua `.9.1.10.5` follows from that boundary.
+  **Next:** Dual-ABI Lua `.9.1.10.5` is active task-tree-first from that boundary.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity**
   (DONE at clean commit `128ead52` from base `293b10ea`).

@@ -162,7 +162,7 @@ Child:AND
   {
     id = "and_to_or_recursion",
     input = "p junk xp junk z",
-    expected = "done",
+    expected = json.array({ json.array({ "done" }) }),
     source = [[
 Top::AND
  /p/
@@ -278,6 +278,14 @@ for _, case in ipairs(structural_cases) do
 end
 
 check_equal(#contract.family_cases, 36, "family row count")
+local action_collecting_modes = {
+  Star = true,
+  Plus = true,
+  Optional = true,
+  Or = true,
+  OrPlus = true,
+  OrBounded = true,
+}
 for _, row in ipairs(contract.family_cases) do
   local prefix = row.header:sub(1, 5) == "Top::" and "" or
     "Root::\n I { return(\"unused\") }\n\n"
@@ -290,7 +298,16 @@ for _, row in ipairs(contract.family_cases) do
       return runtime_value(route.compiled, "prefix x", nil, { top_rule = "Top" })
     end)
     if row.cursor_policy == "seek" then
-      check(ok and result == "hit", row.id .. " " .. route.name .. " seeks")
+      local mode_name = route.compiled:rule("Top").mode_metadata.name
+      local expected = "hit"
+      if action_collecting_modes[mode_name] then
+        expected = mode_name == "Optional" and json.array({ "hit" }) or
+          json.array({ "hit", "hit" })
+      end
+      check(
+        ok and json.encode(result) == json.encode(expected),
+        row.id .. " " .. route.name .. " seeks"
+      )
     else
       check(
         (ok and result == json.null) or

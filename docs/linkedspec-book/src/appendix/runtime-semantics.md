@@ -8,10 +8,10 @@
 > composed-admitted. One recurring gate now proves all six runtime legs plus the
 > selected 5x2x5 primary projection. Public no-drift is closed at 8 complete / 0 pending.
 > ADR `0048` accepts per-hit action-result collection for explicit repetition and
-> scalar pipe choice. Perl, Rust, Dart, and Julia implement it; Lua currently
-> returns the first scalar. The neutral contract plus ten-role Perl and 15-role
-> Rust/Dart/Julia admissions are complete at 5 complete / 3 pending; `.9.1.10.5-.7` own
-> the remaining rollout.
+> scalar pipe choice. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement it.
+> The neutral contract plus ten-role Perl and byte-identical 15-role
+> Rust/Dart/Julia/Lua admissions are complete at 6 complete / 2 pending;
+> `.9.1.10.6-.7` own the remaining rollout.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -138,14 +138,13 @@ Lifecycle `return(...)` retains whole-rule authority. A backend must distinguish
 the return's action-edge context from `I`/`LS`/`LE`/`LX`/`IT`/`EX`/`E` rather
 than changing the meaning of every return event.
 
-This is the accepted ADR `0048` contract and current Perl/Rust/Dart/Julia behavior.
-Rust, Dart, and Julia prove the same channel split in native and generated
-execution while retaining generated-source v2. Dart and Julia capture the value
-at the action-edge boundary, which allows implicit child dispatch to complete
-before lifecycle control resumes. Lua still exposes the pre-migration
-first-scalar behavior. Neutral, Perl, Rust, Dart, and Julia are complete; backend
-and closeout rollout is 5 complete / 3 pending under
-`FUTURE-PARITY-BACKLOG.9.1.10.5-.7`.
+This is the accepted ADR `0048` contract and current Perl/Rust/Dart/Julia/Lua behavior.
+Every newer backend proves the same channel split in native and generated execution
+while retaining generated-source v2. Dart, Julia, and Lua capture the value at the
+action-edge boundary, which allows implicit child dispatch to complete before
+lifecycle control resumes. Neutral and all five backends are complete; recurring
+and public closeout remain 6 complete / 2 pending under
+`FUTURE-PARITY-BACKLOG.9.1.10.6-.7`.
 
 ## 3. Lifecycle Execution Order
 

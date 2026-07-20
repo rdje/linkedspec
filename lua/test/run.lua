@@ -4243,7 +4243,7 @@ DefaultRoot::
  LE { push(words, match_group(0)) }
  E { return(copy(words)) }
 
-OrAcode:OR
+OrAcode:|
  /go/ -> OrDone { return("or-acode") }
 OrDone: /go/
 
@@ -4264,7 +4264,7 @@ AndBcode:AND
 AndBlindA: /a/
 AndBlindB: /[ \t]+b/
 
-OrBcode:OR
+OrBcode:|
  => OrBlindA
  => OrBlindB
  E { return(cat("or-bcode:", retv)) }
@@ -4580,12 +4580,12 @@ test("generated Lua plans classify validate execute and trace all ten structural
     plan,
     "a",
     identity,
-    { top_rule = "RepAcode" }
+    { top_rule = "RepBcode" }
   )
   assert_equal(failed_ok, false, "generated family failure status")
   assert_equal(linkedspec.is_generated_source_error(failed_error), true, "generated family failure type")
-  assert_equal(failed_error.rule_label, "RepAcode", "generated family failure rule")
-  assert_equal(failed_error.handler_family, "rep_acode", "generated family failure attribution")
+  assert_equal(failed_error.rule_label, "RepBcode", "generated family failure rule")
+  assert_equal(failed_error.handler_family, "rep_bcode", "generated family failure attribution")
 end)
 
 test("generated Lua reconstructs and executes the neutral variadic callable fixture", function()
@@ -5355,7 +5355,7 @@ test("runtime interpreter guards bounds recursion zero progress and unsupported 
   assert_equal(linkedspec.is_runtime_interpreter_error(bounded_error), true, "bounded typed error")
   assert_contains(bounded_error.message, "expected at least 2 matches", "bounded detail")
 
-  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
+  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Pipe"), {
     ast.body_element({ kind = ast.regex_body_kind({ pattern = "" }), source = "//", line = 1 }),
     ast.body_element({ kind = ast.blind_edge_body_kind({ target = "Top" }), source = "=> Top", line = 1 }),
   })
@@ -5493,7 +5493,7 @@ Boundary: /STOP/
   )
   assert_contains(miss_event.details, "taken=0", "regex no-match decision")
 
-  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
+  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Pipe"), {
     ast.body_element({ kind = ast.regex_body_kind({ pattern = "" }), source = "//", line = 1 }),
     ast.body_element({ kind = ast.blind_edge_body_kind({ target = "Top" }), source = "=> Top", line = 1 }),
   })
@@ -6070,7 +6070,7 @@ Value:OR+
     linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
     "é\nab🙂z"
   )
-  local value = result.value[1]
+  local value = result.value[1][1]
   assert_equal(value.after_match, 5, "cursor character position")
   assert_equal(value.line, 2, "cursor line")
   assert_equal(value.col, 4, "cursor column")

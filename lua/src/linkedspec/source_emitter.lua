@@ -332,7 +332,7 @@ function M.classify_generated_rule_family(rule)
     fail("classify_generated_rule_family expects CompiledRule")
   end
   local mode = rule.mode_metadata.name
-  local is_generated_repetition = mode == "Plus" or mode == "Star" or mode == "Optional" or
+  local is_generated_repetition = mode == "Plus" or mode == "Star" or mode == "Optional" or mode == "Or" or
     mode == "OrPlus" or mode == "AndPlus" or mode == "OrBounded" or mode == "AndBounded"
   if is_generated_repetition then
     if #rule.blind_edges > 0 then
@@ -344,7 +344,7 @@ function M.classify_generated_rule_family(rule)
     return (mode == "Or" or mode == "Pipe") and "or_bcode" or "and_bcode"
   end
   if mode == "Default" then return "default" end
-  if mode == "Or" or mode == "Pipe" then return "or_acode" end
+  if mode == "Pipe" then return "or_acode" end
   if mode == "Single" then return "and_single_acode" end
   if mode == "And" then
     if #rule.regex_patterns <= 1 and #rule.action_edges <= 1 then

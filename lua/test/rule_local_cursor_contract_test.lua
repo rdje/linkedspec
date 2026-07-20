@@ -321,9 +321,9 @@ local function role_mixed_parent_child()
 end
 
 local function role_recursion()
-  check_equal(
+  check_same_json(
     runtime_value(compile_source(recursion_source), "p junk xp junk z"),
-    "done",
+    json.array({ json.array({ "done" }) }),
     "recursive entries re-derive family policy"
   )
 end

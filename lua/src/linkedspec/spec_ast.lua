@@ -408,7 +408,7 @@ end
 function M.rule_mode_is_repetition(mode)
   require_node(mode, "RuleMode", "mode")
   return mode.name == "Default" or mode.name == "Star" or mode.name == "Plus" or
-    mode.name == "OrPlus" or mode.name == "AndPlus" or mode.name == "Optional" or
+    mode.name == "Or" or mode.name == "OrPlus" or mode.name == "AndPlus" or mode.name == "Optional" or
     mode.name == "OrBounded" or mode.name == "AndBounded"
 end
 
@@ -416,7 +416,7 @@ function M.rule_mode_rep_min(mode)
   require_node(mode, "RuleMode", "mode")
   if mode.name == "Default" or mode.name == "Star" or mode.name == "Optional" then
     return 0
-  elseif mode.name == "Plus" or mode.name == "OrPlus" or mode.name == "AndPlus" then
+  elseif mode.name == "Plus" or mode.name == "Or" or mode.name == "OrPlus" or mode.name == "AndPlus" then
     return 1
   elseif mode.name == "OrBounded" or mode.name == "AndBounded" then
     return mode.min

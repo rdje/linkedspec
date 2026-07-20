@@ -229,12 +229,13 @@ PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
 (cd dart && dart test test/repeated_action_result_contract_test.dart)
 julia --project=julia --compiled-modules=no julia/test/repeated_action_result_contract_test.jl
+bash tools/run_lua_local.sh
 ```
 
 The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
 nested/null/fluent values, zero and below-minimum results, lifecycle override authority, scalar pipe, and blind
 bare-OR classification. It also locks descriptors, generated-source-v2 family rows, selected-slot trace, route
-topology, a checked-in corpus bundle, six-runtime inventory, and 32 independent mutation failures. The Perl
+topology, a checked-in corpus bundle, six-runtime inventory, and 35 independent mutation failures. The Perl
 consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Rust adds one exact
 15-role consumer spanning native, loaded/reconstructed, descriptor, emitted/generated direct/traced, primary,
 corpus, lifecycle, bounds, progress, and slot traces; the complete Rust-local driver runs it unconditionally.
@@ -242,8 +243,11 @@ Dart adds the same 15-role topology through normalized reconstruction and its na
 primary/corpus routes; `tools/run_dart_local.sh` runs that consumer with format, analyzer, package, primary, and
 corpus gates. Julia adds the same 15-role topology, including a fresh isolated emitted-source host, loaded/
 reconstructed state, stale-family rejection, and native/generated selected-slot traces; `tools/run_julia_local.sh`
-runs it with package, primary, and corpus gates. Neutral, Perl, Rust, Dart, and Julia are admitted at 5 complete /
-3 pending; `.9.1.10.5-.7` own dual-ABI Lua, recurring proof, and public closeout. This gate does not claim
+runs it with package, primary, and corpus gates. Lua adds one byte-identical 15-role consumer covering both PUC
+Lua and LuaJIT, including fresh emitted-module execution, stale-family rejection, and exact native/generated
+slot traces; `tools/run_lua_local.sh` runs it unconditionally on both installed ABIs. Neutral, Perl, Rust, Dart,
+Julia, and dual-ABI Lua are admitted at 6 complete / 2 pending; `.9.1.10.6-.7` own recurring proof and public
+closeout. This gate does not claim
 cross-backend parity early.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,

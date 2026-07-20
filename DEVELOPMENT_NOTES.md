@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.5` — capture Lua action returns at the edge boundary): The exact
+  consumer landed before behavior and failed 64 of 174 PUC assertions. `spec_ast.rule_mode_is_repetition` omitted
+  bare `Or`, `source_emitter.generated_rule_family` routed action/blind bare OR to scalar choice families, and
+  `accept_match` let the action block's `return` flow escape through the same broad rule-exit path as lifecycle
+  control. The repair adds minimum-one bare-OR metadata and catches only an action-edge return while one of the six
+  ADR-0048 explicit action-repetition modes is active. The copied typed value enters the iteration array, implicit
+  child dispatch and slot/`LE` work continue, and later lifecycle returns remain outside collection. Default,
+  AND, blind-result, and pipe never allocate this action-iteration channel. Below-minimum scoped repetitions
+  return neutral no-match/null, zero permitted hits return an empty typed array, and one accepted zero-width hit is
+  retained before progress protection stops.
+
+  The shared 15-role consumer exercises native, loaded, normalized, descriptor, emitted-module direct/traced,
+  generated-plan direct/traced, stale-family rejection, native trace, primary, corpus, lifecycle, bounds,
+  progress, cursor, and slot observations under PUC Lua and LuaJIT. The checker locks the consumer, both driver
+  registrations, Lua mechanism seams, rollout state, and three new Lua omission/regression mutations at
+  6 complete / 2 pending / 35. Adjacent family controls moved from `OR` to `|`; nested cursor recursion now expects
+  `[["done"]]`; and the seek-family matrix expects one optional result or both `x` hits in `prefix x` without
+  changing its cursor-policy question.
+
+  The focused consumer passes 175/175 on each ABI. `tools/run_lua_local.sh` passes all focused suites, the full
+  177-test runtime suite per ABI, shared primary 65x2, and the 105-case corpus. Recurring composition `.6` and
+  public no-drift `.7` deliberately remain pending; this leaf advances only the dual-ABI Lua row. Canonical local
+  CI independently passes the 35-mutation checker, ten-role Perl consumer, primary 65x2, and Phase 0
+  1,031/1,031 in 654 seconds.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.4` — capture Julia action-edge values without weakening lifecycle
   control): The unchanged consumer first reproduced both Julia defects: `RuleMode.Or` lacked repetition metadata
   and generated classification, while `_accept_runtime_regex_match!` returned `_RuntimeActionReturn` through the

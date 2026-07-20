@@ -49,6 +49,7 @@ LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/rule_local_cursor_gen
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/rule_local_cursor_option_removal_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/rule_local_cursor_contract_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/duplicate_regex_slot_identity_contract_test.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/repeated_action_result_contract_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/run.lua
 
 log "running shared primary CLI contract (default environment)"
@@ -106,6 +107,8 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
   "$LUAJIT_CMD" lua/test/rule_local_cursor_contract_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/duplicate_regex_slot_identity_contract_test.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/repeated_action_result_contract_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/run.lua
 else

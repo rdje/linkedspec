@@ -117,7 +117,7 @@ DefaultRoot::
  /hello[ \t]+(\w+)/
  LE { return(match_group(0)) }
 
-OrAcode:OR
+OrAcode:|
  /go/ -> OrDone { return("or-acode") }
 OrDone: /go/
 
@@ -137,7 +137,7 @@ AndBcode:AND
 AndBlindA:& /a/ LE { return("A") }
 AndBlindB:& /[ \t]+b/ LE { return("B") }
 
-OrBcode:OR
+OrBcode:|
  => OrBlindA
  => OrBlindB
 OrBlindA: /a/ LE { return("A") }

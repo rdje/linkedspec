@@ -167,13 +167,30 @@ JULIA_ROLES = [
     "lifecycle_authority",
     "bounds_and_progress",
 ]
+LUA_ROLES = [
+    "neutral_contract",
+    "ast_metadata",
+    "native_mode_matrix",
+    "native_special_cases",
+    "loaded",
+    "reconstructed",
+    "descriptor",
+    "emitted_source",
+    "generated_direct",
+    "native_trace",
+    "generated_trace",
+    "primary_command",
+    "corpus_bundle",
+    "lifecycle_authority",
+    "bounds_and_progress",
+]
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.2"),
     ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
     ("julia", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
+    ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
     ("recurring", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.6"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.7"),
 ]
@@ -182,8 +199,8 @@ INVENTORY = [
     ("rust", "rust", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.2"),
     ("dart", "dart", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
     ("julia", "julia", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
-    ("lua", "puc_lua", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
-    ("lua", "luajit", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
+    ("lua", "puc_lua", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
+    ("lua", "luajit", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
 ]
 
 
@@ -332,11 +349,8 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     require(dart == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3", "consumer": "dart/test/repeated_action_result_contract_test.dart", "canonical_driver": "tools/run_dart_local.sh", "roles": DART_ROLES}, "Dart admission drifted")
     julia = require_fields(admissions["julia"], {"status", "owner", "consumer", "canonical_driver", "roles"}, "Julia admission")
     require(julia == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4", "consumer": "julia/test/repeated_action_result_contract_test.jl", "canonical_driver": "tools/run_julia_local.sh", "roles": JULIA_ROLES}, "Julia admission drifted")
-    for backend, owner, consumer, driver in [
-        ("lua_dual_abi", "FUTURE-PARITY-BACKLOG.9.1.10.5", "lua/test/repeated_action_result_contract_test.lua", "tools/run_lua_local.sh"),
-    ]:
-        row = require_fields(admissions[backend], {"status", "owner", "consumer", "canonical_driver"}, f"{backend} admission")
-        require(row == {"status": "pending", "owner": owner, "consumer": consumer, "canonical_driver": driver}, f"{backend} pending admission drifted")
+    lua = require_fields(admissions["lua_dual_abi"], {"status", "owner", "consumer", "canonical_driver", "roles"}, "Lua admission")
+    require(lua == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5", "consumer": "lua/test/repeated_action_result_contract_test.lua", "canonical_driver": "tools/run_lua_local.sh", "roles": LUA_ROLES}, "Lua admission drifted")
 
     inventory = [(row["backend"], row["runtime"], row["bare_or_family"], row["action_return"], row["status"], row["owner"]) for row in contract["implementation_inventory"]]
     require(inventory == INVENTORY, "six-runtime mechanism inventory drifted")
@@ -428,6 +442,24 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require('"Optional",\n        "Or",\n        "OrPlus"' in julia_emitter_text and 'elseif mode == "Pipe"' in julia_emitter_text, "Julia bare-OR generated-family seam drifted")
     julia_engine_text = (ROOT / "julia/src/runtime/Interpreter.jl").read_text(encoding="utf-8")
     require("function _collects_explicit_action_iteration_values" in julia_engine_text and julia_engine_text.count("action_iteration_values") >= 12, "Julia repeated action-result collection seam drifted")
+    lua_consumer_path = ROOT / contract["admissions"]["lua_dual_abi"]["consumer"]
+    require(lua_consumer_path.is_file(), "Lua admission consumer is missing")
+    lua_consumer_text = lua_consumer_path.read_text(encoding="utf-8")
+    require(all(f"local function role_{role}" in lua_consumer_text for role in LUA_ROLES), "Lua admission role inventory drifted")
+    lua_task_status = re.search(
+        r"- ID: `FUTURE-PARITY-BACKLOG\.9\.1\.10\.5`\n  Status: `(active|done)`",
+        task_text,
+    )
+    require(lua_task_status is not None, "Lua task is neither active nor complete")
+    require("**RETRIEVE / INVENTORY LUA SEAMS**" in task_text and "**COLLECT ACTION ITERATION VALUES**" in task_text, "Lua task acceptance checklist drifted")
+    lua_driver_text = (ROOT / contract["admissions"]["lua_dual_abi"]["canonical_driver"]).read_text(encoding="utf-8")
+    require(lua_driver_text.count("lua/test/repeated_action_result_contract_test.lua") == 2, "Lua canonical driver registration drifted")
+    lua_ast_text = (ROOT / "lua/src/linkedspec/spec_ast.lua").read_text(encoding="utf-8")
+    require(lua_ast_text.count('mode.name == "Or" or mode.name == "OrPlus"') >= 2, "Lua bare-OR repetition metadata seam drifted")
+    lua_emitter_text = (ROOT / "lua/src/linkedspec/source_emitter.lua").read_text(encoding="utf-8")
+    require('mode == "Optional" or mode == "Or" or' in lua_emitter_text and 'if mode == "Pipe" then return "or_acode" end' in lua_emitter_text, "Lua bare-OR generated-family seam drifted")
+    lua_engine_text = (ROOT / "lua/src/linkedspec/interpreter.lua").read_text(encoding="utf-8")
+    require("local function collects_explicit_action_iteration_values" in lua_engine_text and lua_engine_text.count("action_iteration_values") >= 10, "Lua repeated action-result collection seam drifted")
     ci_text = (ROOT / contract["canonical_ci"]["driver"]).read_text(encoding="utf-8")
     required_ci = [
         "require_tracked_file tools/check_repeated_action_result_contract.py",
@@ -482,6 +514,9 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("remove_rust_role", lambda value: value["admissions"]["rust"]["roles"].pop()),
         ("remove_dart_role", lambda value: value["admissions"]["dart"]["roles"].pop()),
         ("remove_julia_role", lambda value: value["admissions"]["julia"]["roles"].pop()),
+        ("remove_lua_role", lambda value: value["admissions"]["lua_dual_abi"]["roles"].pop()),
+        ("regress_lua_rollout", lambda value: value["rollout"][5].__setitem__("status", "pending")),
+        ("hide_lua_mechanism", lambda value: value["implementation_inventory"][4].__setitem__("action_return", "whole_rule_exit")),
         ("regress_julia_rollout", lambda value: value["rollout"][4].__setitem__("status", "pending")),
         ("hide_julia_mechanism", lambda value: value["implementation_inventory"][3].__setitem__("action_return", "whole_rule_exit")),
         ("regress_dart_rollout", lambda value: value["rollout"][3].__setitem__("status", "pending")),

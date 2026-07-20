@@ -515,10 +515,27 @@
       ]
     },
     "lua_dual_abi": {
-      "status": "pending",
+      "status": "complete",
       "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5",
       "consumer": "lua/test/repeated_action_result_contract_test.lua",
-      "canonical_driver": "tools/run_lua_local.sh"
+      "canonical_driver": "tools/run_lua_local.sh",
+      "roles": [
+        "neutral_contract",
+        "ast_metadata",
+        "native_mode_matrix",
+        "native_special_cases",
+        "loaded",
+        "reconstructed",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "native_trace",
+        "generated_trace",
+        "primary_command",
+        "corpus_bundle",
+        "lifecycle_authority",
+        "bounds_and_progress"
+      ]
     }
   },
   "implementation_inventory": [
@@ -526,8 +543,8 @@
     {"backend": "rust", "runtime": "rust", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2"},
     {"backend": "dart", "runtime": "dart", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3"},
     {"backend": "julia", "runtime": "julia", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
-    {"backend": "lua", "runtime": "puc_lua", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
-    {"backend": "lua", "runtime": "luajit", "bare_or_family": "or_acode", "action_return": "whole_rule_exit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"}
+    {"backend": "lua", "runtime": "puc_lua", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
+    {"backend": "lua", "runtime": "luajit", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"}
   ],
   "rollout": [
     {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
@@ -535,7 +552,7 @@
     {"capability": "rust", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2"},
     {"capability": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3"},
     {"capability": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
-    {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
+    {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
     {"capability": "recurring", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.6"},
     {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.7"}
   ],

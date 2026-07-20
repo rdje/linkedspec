@@ -3636,7 +3636,14 @@ function M.trace_regex_slot_selected(ctx, rule, regex_index, selection_role)
   end
 end
 
-local function accept_match(engine, rule, one, ctx, accumulator)
+local function collects_explicit_action_iteration_values(rule)
+  if #rule.action_edges == 0 then return false end
+  local mode = rule.mode_metadata.name
+  return mode == "Star" or mode == "Plus" or mode == "Optional" or mode == "Or" or
+    mode == "OrPlus" or mode == "OrBounded"
+end
+
+local function accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
   for _, edge in ipairs(rule.action_edges) do
@@ -3648,7 +3655,22 @@ local function accept_match(engine, rule, one, ctx, accumulator)
         child_dispatched = false,
       }
       if edge.action_payload then
-        execute_block(engine, edge.action_payload.action_ast, ctx, accumulator, edge_state)
+        local action_ok, action_flow = pcall(
+          execute_block,
+          engine,
+          edge.action_payload.action_ast,
+          ctx,
+          accumulator,
+          edge_state
+        )
+        if not action_ok then
+          if action_iteration_values ~= nil and getmetatable(action_flow) == FLOW_MT and
+              action_flow.kind == "return" then
+            action_iteration_values[#action_iteration_values + 1] = copy_value(action_flow.value)
+          else
+            error(action_flow, 0)
+          end
+        end
         if not edge_state.child_dispatched and edge_state.target.label ~= rule.label then
           dispatch_edge_child(engine, edge_state, ctx)
         end
@@ -3661,7 +3683,15 @@ local function accept_match(engine, rule, one, ctx, accumulator)
   lifecycle(engine, rule, "LE", ctx, accumulator)
 end
 
-local function regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
+local function regex_once(
+    engine,
+    rule,
+    entry_index,
+    ctx,
+    accumulator,
+    execution_policy,
+    action_iteration_values
+  )
   local cursor_before = ctx.cursor_byte
   if #rule.regex_patterns == 0 then
     trace_regex_decision(
@@ -3696,7 +3726,7 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator, execution
         actual.regex_index
       )
       M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
-      accept_match(engine, rule, one, ctx, accumulator)
+      accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
     end
     return true
   end
@@ -3737,7 +3767,7 @@ local function regex_once(engine, rule, entry_index, ctx, accumulator, execution
     one.alternative_index,
     selection_role
   )
-  accept_match(engine, rule, one, ctx, accumulator)
+  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
   return true
 end
 
@@ -3857,6 +3887,7 @@ execute_rule = function(engine, label, entry_index, ctx)
   ctx.harrays = copy_store(saved_harrays)
   ctx.rule_stack[#ctx.rule_stack + 1] = label
   local accumulator = json.array()
+  local action_iteration_values = collects_explicit_action_iteration_values(rule) and json.array() or nil
   ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
   local trace_scope = runtime_trace_scope(
     ctx,
@@ -3896,7 +3927,15 @@ execute_rule = function(engine, label, entry_index, ctx)
           if execution_policy.uses_blind_dispatch then
             return blind_once(engine, rule, ctx, accumulator, execution_policy)
           end
-          return regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
+          return regex_once(
+            engine,
+            rule,
+            entry_index,
+            ctx,
+            accumulator,
+            execution_policy,
+            action_iteration_values
+          )
         end)
         if not attempt.nexted then
           matched = attempt.value or matched_any
@@ -3920,7 +3959,15 @@ execute_rule = function(engine, label, entry_index, ctx)
         if execution_policy.uses_blind_dispatch then
           return blind_once(engine, rule, ctx, accumulator, execution_policy)
         end
-        return regex_once(engine, rule, entry_index, ctx, accumulator, execution_policy)
+        return regex_once(
+          engine,
+          rule,
+          entry_index,
+          ctx,
+          accumulator,
+          execution_policy,
+          action_iteration_values
+        )
       end)
       if attempt.nexted then
         count = count + 1
@@ -3934,6 +3981,7 @@ execute_rule = function(engine, label, entry_index, ctx)
     end
     if count < minimum then
       lifecycle(engine, rule, "LX", ctx, accumulator)
+      if action_iteration_values ~= nil then return rule_result(false, json.null) end
       fail("rule '" .. label .. "' expected at least " .. minimum .. " matches, got " .. count, {
         rule_label = label,
       })
@@ -3941,7 +3989,8 @@ execute_rule = function(engine, label, entry_index, ctx)
     lifecycle(engine, rule, "EX", ctx, accumulator)
     if failed or count > 0 then lifecycle(engine, rule, "LX", ctx, accumulator) end
     lifecycle(engine, rule, "E", ctx, accumulator)
-    return rule_result(count > 0, finish_value(accumulator, ctx.retv))
+    local value = action_iteration_values ~= nil and action_iteration_values or finish_value(accumulator, ctx.retv)
+    return rule_result(count > 0, value)
   end)
   if not ok and getmetatable(result_or_flow) == ERROR_MT then
     result_or_flow = with_runtime_diagnostic(result_or_flow, runtime_diagnostic(engine, {
