@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.5 — implement Julia duplicate regex-slot identity
+
+Julia ordered execution now selects an authored `RuntimeRegexAlternative` directly through
+`match_runtime_regex_slot`. The returned match retains that alternative's original index; ordered and repeated
+AND no longer compile a one-pattern alternation and repair branch zero afterward. OR/default choice still owns
+the complete alternation and keeps earliest-start, first-authored priority.
+
+Compiled action edges map parent alternatives to structural `{target_rule, regex_index}` identities. Shared
+validation runs after compilation and before runtime construction, source emission, or generated-plan execution.
+It checks the executed child index, its agreement with the target reference, the target's authored-regex bound,
+and the parent dispatch bound, so caller-built inconsistent compiled state cannot pass on a duplicate field.
+Descriptors and emitted Julia v2 modules publish `linkedspec-duplicate-regex-slot-identity-v1`; emitted source
+still embeds normalized `SpecFile` JSON as ASCII hex and its public plan remains exactly `{label, family}`.
+Native and generated execution emit `julia_runtime:regex_slot_selected`, and stable spec/runtime/generated
+diagnostics cover invalid compiled slots plus ordered matcher invariant loss.
+
+One module-isolated, contract-declared 15-role Julia consumer covers all five fixtures, native, loaded,
+reconstructed, descriptor, emitted/generated, native/generated trace, primary command, and diagnostic routes.
+It passes 121 focused assertions. The complete Julia driver passes 3,549 package assertions, all 65 shared primary
+cases in both option environments, and all 105 corpus fixtures. Neutral governance advances only Julia to
+5 complete + 2 pending with 41 rejected mutations. The first canonical pass correctly rejects the new test as an
+unowned parse-mode-bearing cursor migration path; classifying it under the existing Julia cursor owner advances
+that inventory from 72 to 73 files without changing its 7+1 rollout or 56 mutations. A second pre-test pass catches
+and repairs a split exact root-selection marker. Final lockstep passes Knowledge Map 641/4,720, mdBook, all four
+doctrines, canonical root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 623 seconds.
+Cleanup removes each consumed task-local Julia depot (134 MiB before review and 125 MiB after the hardened
+validator rerun), each regenerated 11 MiB book, and the 28 KiB Python cache; free space remains 63 GiB.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.4 — implement Dart duplicate regex-slot identity
 
 Dart ordered execution now matches a required authored regex alternative directly. The new

@@ -11,7 +11,7 @@ answers:
   - "how do repeated AND rules behave with duplicate regex slots"
   - "what is the migration inventory for duplicate regex slot identity"
 date: 2026-07-20
-status: confirmed historical audit; Perl and Rust repairs admitted; preserving-backend locks remain
+status: confirmed historical audit; Perl/Rust repairs and Dart/Julia preserving locks admitted; Lua lock remains
 tags: [regex, slot-identity, and, or, repetition, perl, rust, dart, julia, lua, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.8.1.0 used LinkedSpec::Get, return_descriptor, emitted-source capture, standalone Perl generated source, routed debug trace, and temporary native/generated probes. For Top::AND with two /a/ action slots over input aa, Perl live/emitted and Rust native/generated return null; Dart, Julia, PUC Lua, and LuaJIT native/generated return ordered-ok. The same OR duplicate chooses the first authored slot on every runtime. For Top::AND{2} over aaaa, Perl live/emitted returns null while PUC Lua and LuaJIT native/generated return [[a,a],[a,a]]; the non-identical Perl control /a/ then /b/ over abab returns [[a,b],[a,b]] live/emitted. Descriptors and compiled payloads retain ordered patterns and action-edge regex_index values. Perl LinkedRE::oredRE and Rust CompiledAlternation collapse execution into one alternation; the engine reports the first matching duplicate branch and the ordered handler rejects it against the already-known later expected index. Dart _matchSpecific, Julia _match_runtime_specific, and Lua match_specific compile the required pattern alone and reattach its authored index. Choice matching in every backend deterministically breaks identical ties toward the lowest authored index. Generated v2 plan rows remain only {label,family}; slot identity belongs to the reconstructed compiled payload and runtime match result, so no plan-format bump is indicated."
 reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=join qq{\\n},q{Top::AND},q{ /a/ -> Top[0] { set(seen, \"first\") }},q{ /a/ -> Top[1] { return(\"ordered-ok\") }},q{}; my $p=LinkedSpec::Get(\\$s); my $i=q{aa}; print JSON::PP->new->allow_nonref(1)->encode($p->(\\$i)),qq{\\n}' && rg -n 'sub oredRE|required_sequence_index|CompiledAlternation|expected_and_idx|_matchSpecific|_match_runtime_specific|match_specific' perl/LinkedRE.pm perl/LinkedSpec/HandlerVariantEmitter.pm rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/helpers.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
@@ -39,10 +39,11 @@ eligible, so source-order priority is the deterministic tie-break. Leaf `.1`
 owns ratification of that language rule; this audit changes no behavior.
 
 Current status: Perl `.2` and Rust `.3` now match the required compiled slot
-directly and retain combined matching only for choice. Dart, Julia, and Lua
-already exhibited the target behavior and remain dedicated conformance-lock
-leaves. The table above remains the reproducible pre-repair baseline, not a
-current limitation claim.
+directly and retain combined matching only for choice. Dart `.4` and Julia `.5`
+replace behavior-preserving singleton-match/reindex seams with direct authored-
+alternative matching and exact conformance locks. Lua already exhibits the
+target behavior and remains the final dedicated backend lock. The table above
+remains the reproducible pre-repair baseline, not a current limitation claim.
 
 The repair boundary is narrow. Perl owns combined matching in
 `LinkedRE::oredRE`, dependency assembly in `LinkedSpec::Compiler`, and the

@@ -12,6 +12,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 include("root_rule_selection_core_test.jl")
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")
+include("duplicate_regex_slot_identity_contract_test.jl")
 include("root_rule_selection_routes_test.jl")
 include("root_rule_selection_admission_test.jl")
 include("rule_local_cursor_normalization_test.jl")

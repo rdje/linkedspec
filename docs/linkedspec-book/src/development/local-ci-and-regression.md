@@ -171,8 +171,9 @@ LuaJIT by `tools/run_lua_local.sh`; canonical CI tracks it and `LINKEDSPEC_RUN_L
 dual-ABI driver. One recurring driver now composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, the selected 5x2x5
 primary projection, and generated/capability/language-coverage ledgers. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` directly or set `LINKEDSPEC_RUN_CURSOR_MATRIX=1` on the
-canonical local gate. The current cursor ledger is 7 complete / 1 pending with 72 governed migration files and
-56 rejected drift mutations; final public no-drift remains separately owned.
+canonical local gate. The current cursor ledger is 7 complete / 1 pending with 73 governed migration files and
+56 rejected drift mutations after the Julia duplicate-slot proof path is classified under its existing cursor
+owner; final public no-drift remains separately owned.
 
 The duplicate-slot audit following that admission deliberately uses temporary probes rather than adding a new
 gate before the neutral contract exists. `LinkedSpec::Get`, `return_descriptor`, emitted/standalone source, and a
@@ -192,14 +193,15 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
 two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
-runtime legs, fixes the `.1-.7` migration, and rejects 36 mutations. Canonical CI tracks the contract, checker,
-and admitted Perl/Rust/Dart consumers. The default gate runs the checker and Perl consumer; complete backend
-drivers run the Rust and Dart consumers:
+runtime legs, fixes the `.1-.7` migration, and rejects 41 mutations. Canonical CI tracks the contract, checker,
+and admitted Perl/Rust/Dart/Julia consumers. The default gate runs the checker and Perl consumer; complete backend
+drivers run the Rust, Dart, and Julia consumers:
 
 ```bash
 prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 CARGO_TARGET_DIR=/tmp/linkedspec-rust-target bash tools/run_rust_local.sh
 bash tools/run_dart_local.sh
+LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh
 ```
 
 The consumer's 12 roles cover native and loaded execution, repeated duplicate and non-duplicate sequences,
@@ -211,8 +213,12 @@ diagnostic proof. Its serialized `CompiledSpec` remains the generated execution 
 publishes the slot-contract constant without widening the plan. Dart's 15-role consumer uses normalized-spec JSON
 as the generated payload, checks direct authored-alternative matching, loaded/reconstructed/descriptor/emitted/
 generated/native-trace/generated-trace/primary/diagnostic routes, and retains exact `{label, family}` plans.
-Rollout is now 4 complete / 3 pending: neutral, Perl, Rust, and Dart are complete; Julia is the next preserving-
-backend lock.
+Julia's module-isolated 15-role consumer covers the same routes using direct authored-alternative matching and
+canonical normalized `SpecFile` JSON as its generated payload. It publishes descriptor/emitted identity, locks
+native/generated trace and typed failures, and retains exact `{label, family}` plans. Rollout is now 5 complete /
+2 pending: neutral, Perl, Rust, Dart, and Julia are complete; dual-ABI Lua is the next preserving-backend lock.
+Julia-local signoff is package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 is 1,031/1,031 in 623
+seconds.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

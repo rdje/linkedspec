@@ -108,6 +108,34 @@ function runtime_match(
     return consume_match(alternation, input, codeunit_cursor)
 end
 
+"""Match one authored alternative without changing its structural identity."""
+function match_runtime_regex_slot(
+    alternation::RuntimeRegexAlternation,
+    zero_based_index::Int,
+    input::AbstractString,
+    codeunit_cursor::Int = 0;
+    parse_mode = SeekParseMode,
+)
+    if zero_based_index < 0 || zero_based_index >= length(alternation.alternatives)
+        throw(RuntimeRegexException(
+            "regex alternative index $zero_based_index is outside 0:$(length(alternation.alternatives) - 1)",
+        ))
+    end
+
+    input_text = String(input)
+    cursor = _checked_codeunit_offset(input_text, codeunit_cursor)
+    start_index = _codeunit_offset_to_string_index(input_text, cursor)
+    alternative = alternation.alternatives[zero_based_index + 1]
+    raw_match = match(alternative.regex, input_text, start_index)
+    raw_match === nothing && return nothing
+
+    mode = _normalize_parse_mode(parse_mode)
+    if mode == ConsumeParseMode && raw_match.offset - 1 != cursor
+        return nothing
+    end
+    return _runtime_regex_match(input_text, alternative, raw_match)
+end
+
 function seek_match(
     alternation::RuntimeRegexAlternation,
     input::AbstractString,

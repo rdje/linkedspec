@@ -34,6 +34,7 @@ evidence_update_2026_07_19_lua_generated_v2: "Lua generated-source leaf .9.1.7.4
 evidence_update_2026_07_19_lua_admission: "Lua admission .9.1.7.6 adds one exact 15-role consumer run on PUC Lua and LuaJIT, advances only lua_dual_abi, and locks both driver legs plus canonical optional registration. Exact pre-contract RED is 3/3 per ABI and green is 119/119 per ABI. Governance is 69 migration files, 6 complete / 2 pending, and 49 mutations."
 evidence_update_2026_07_19_root_governance: "Final root-selection public no-drift adds its neutral contract and independent checker to the cursor inventory because both scan the parse-mode-named mdBook chapter. The then-current inventory became 71 files; cursor rollout remained 6 complete / 2 pending with 49 mutations before recurring cursor admission."
 evidence_update_2026_07_19_recurring_admission: "Recurring cursor admission .9.1.8 adds one six-runtime driver over Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; a selected 5x2x5 primary projection; and all three support ledgers. It advances only recurring_five_backend_gate. Governance is 72 migration files, 7 complete / 1 pending, and 56 mutations."
+evidence_update_2026_07_20_julia_duplicate_slot: "Julia duplicate-slot admission .9.1.8.1.5 adds a parse-mode-aware contract consumer. The cursor inventory deliberately classifies that proof under the existing Julia backend owner, advancing only the file count from 72 to 73; rollout remains 7 complete / 1 pending and mutations remain 56."
 reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
@@ -80,8 +81,9 @@ Lua runtime `.9.1.7.2` adds its governed execution consumer because the proof it
 Lua generated-source `.9.1.7.4` adds its governed v2 consumer because that proof names both the retired v1 API and
 the still-staged public override field. That produces the current 69-file inventory without advancing rollout.
 Final root-selection public governance then adds two cross-contract scanner paths that name the parse-mode mdBook
-chapter. Recurring cursor admission adds its own governed driver path, producing the exact current inventory of
-72 files.
+chapter. Recurring cursor admission adds its own governed driver path, producing a 72-file boundary. Julia
+duplicate-slot admission adds its parse-mode-aware consumer under the existing Julia owner, producing the exact
+current inventory of 73 files without changing cursor rollout or mutation status.
 
 Perl preflight `.9.1.3.0` corrected one ordering detail without changing the 91-
 file set or runtime semantics: the ten shared manifest/help/usage/trace files

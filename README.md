@@ -158,9 +158,10 @@ across native, normalized, loaded, descriptor, emitted/generated, trace, mixed/r
 primary, and portable-diagnostic projections. The complete Dart package passes 271 tests, the shared primary
 matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
 4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
-advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission has since moved
-the current ledger to 72 files, 7 complete / 1 pending, and 56 rejected mutations after final root-selection
-governance added two cross-contract scanner paths and recurring cursor admission added its governed driver.
+advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission, final root
+governance, and recurring admission moved the ledger to 72 files. Julia duplicate-slot admission now classifies
+its parse-mode-aware proof path too, so the current ledger is 73 files, 7 complete / 1 pending, and 56 rejected
+mutations.
 Run `bash tools/check_rule_local_cursor_five_backend.sh` for the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof,
 selected 5x2x5 primary projection, and support ledgers; canonical CI registers it behind
 `LINKEDSPEC_RUN_CURSOR_MATRIX=1`. Duplicate regex-slot audit `.9.1.8.1.0` established the exact next boundary:
@@ -180,8 +181,11 @@ diagnostic routes. Rust descriptors and emitted source publish the contract iden
 fail before execution or artifact reconstruction; v2 plans stay `{label,family}`. Dart `.4` now matches the
 required authored alternative directly, projects the same descriptor/emitted/trace identity, validates native and
 generated reconstructed state, and passes one exact 15-role admission plus its complete 272-test/65x2/105 local
-gate. Governance is 4 complete + 3 pending / 36 mutations. Julia/Lua locks `.5-.6` and recurring/public `.7`
-remain dependency-ordered.
+gate. Julia `.5` now selects the authored alternative directly rather than matching a singleton and reindexing;
+its compiler/runtime/emitter validation, descriptor/emitted/trace identity, and module-isolated exact 15-role
+consumer pass through normalized-spec generated source. Governance is 5 complete + 2 pending / 41 mutations.
+The complete Julia driver passes package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 passes
+1,031/1,031 in 623 seconds. Dual-ABI Lua `.6` and recurring/public `.7` remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

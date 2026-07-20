@@ -398,13 +398,25 @@ function _check_edge_targets(spec::SpecFile)
             kind = element.kind
             if kind isa ActionEdgeBodyElementKind
                 for target in kind.targets
-                    _check_target(rule, rules_by_label, target.label, target.index)
+                    _check_target(
+                        rule,
+                        rules_by_label,
+                        target.label,
+                        target.index;
+                        structural_action = true,
+                    )
                 end
             elseif kind isa BlindEdgeBodyElementKind
                 _check_target(rule, rules_by_label, kind.target, 0)
             elseif kind isa BareEdgeBodyElementKind
                 for target in kind.targets
-                    _check_target(rule, rules_by_label, target.label, something(target.index, 0))
+                    _check_target(
+                        rule,
+                        rules_by_label,
+                        target.label,
+                        something(target.index, 0);
+                        structural_action = !is_and(rule.header.mode),
+                    )
                 end
             end
         end
@@ -412,14 +424,44 @@ function _check_edge_targets(spec::SpecFile)
     return nothing
 end
 
-function _check_target(owner::Rule, rules_by_label::Dict{String,Rule}, target::String, index::Int)
+function _check_target(
+    owner::Rule,
+    rules_by_label::Dict{String,Rule},
+    target::String,
+    index::Int;
+    structural_action::Bool = false,
+)
     target_rule = get(rules_by_label, target, nothing)
     if target_rule === nothing
+        if structural_action
+            throw(_portable_validation_exception(
+                code = "regex_slot_identity_invalid",
+                stage = "validate_compiled_rule",
+                message = "rule '$(owner.header.label)' references undefined rule '$target' for regex slot $index; that structural slot does not exist",
+                fields = Dict{String,Any}(
+                    "rule_label" => owner.header.label,
+                    "target_rule" => target,
+                    "regex_index" => index,
+                ),
+            ))
+        end
         throw(SpecValidationException("rule '$(owner.header.label)' references undefined rule '$target'"))
     end
 
     regex_count = _regex_count(target_rule)
     if index < 0 || index >= regex_count
+        if structural_action
+            throw(_portable_validation_exception(
+                code = "regex_slot_identity_invalid",
+                stage = "validate_compiled_rule",
+                message = "rule '$(owner.header.label)' references rule '$target' regex slot $index, but that structural slot does not exist",
+                fields = Dict{String,Any}(
+                    "rule_label" => owner.header.label,
+                    "target_rule" => target,
+                    "regex_index" => index,
+                ),
+            ))
+        end
         throw(SpecValidationException(
             "rule '$(owner.header.label)' references rule '$target' regex slot $index, but that rule has $regex_count regex slot(s)",
         ))

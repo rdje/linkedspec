@@ -577,11 +577,27 @@ use it; choice continues to use the complete alternation. Target-rule/index
 identity is derived from compiled action edges for descriptor, invariant, and
 trace projection, including cross-target `First#0`, `Second#0` sequences.
 
+Julia `.5` makes the same invariant explicit through
+`match_runtime_regex_slot`. The matcher receives the full compiled
+`RuntimeRegexAlternation`, selects one existing authored alternative, and
+returns that alternative's original index. Ordered and repeated-AND execution
+use this direct route; OR/default choice continues to evaluate the full
+alternation. Compiled action edges translate parent alternative indices into
+target-rule/child-index identity, so cross-target trace remains
+`First#0`, `Second#0`.
+
+Julia validates those typed action-edge references after compile and at runtime,
+emission, and generated-plan boundaries. Descriptors and emitted modules publish
+the slot-contract identity; emitted v2 source still reconstructs canonical
+normalized `SpecFile` JSON and keeps plan rows exactly `{label, family}`.
+`julia_runtime:regex_slot_selected` supplies ordered/choice trace identity, and
+portable spec/runtime/generated errors preserve invalid target/index fields.
+
 The executable neutral contract is
 `linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
 v2 because reconstructed compiled state already retains slot identity. Perl,
-Rust, and Dart are admitted through `.2-.4`; Julia, Lua, and recurring/public
-closeout remain `.5-.7`.
+Rust, Dart, and Julia are admitted through `.2-.5`; dual-ABI Lua and
+recurring/public closeout remain `.6-.7`.
 
 ## 9. Zero-Progress Guard
 

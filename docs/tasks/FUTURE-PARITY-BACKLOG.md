@@ -6244,13 +6244,52 @@ before implementation.
     mdBook, all four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 616 seconds.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.5`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and admit Julia duplicate-slot identity parity.
   Dependencies: `.9.1.8.1.4`
   Acceptance: Match the ratified reference through native, normalized emitted, reconstructed, generated-plan/
     source, trace, primary, and corpus roles with portable failures and stable slot identity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-20.** Activated task-tree-first from clean Dart-admission commit `0e2807c2` at ahead 248. Julia now
+    matches the existing authored alternative directly, maps parent alternatives to target/child identity,
+    validates compiled state at compile/runtime/emitter/generated-plan boundaries, publishes descriptor/emitted
+    contract identity, and traces ordered/choice selection. One module-isolated exact 15-role consumer passes 121
+    assertions; the complete Julia driver passes package 3,549, primary 65x2, and corpus 105/105. Governance is
+    5 complete + 2 pending / 41 mutations. The first canonical run identifies and resolves the new test's
+    required cursor-inventory classification, advancing that ledger only to 73 files / 7+1 / 56. KM 641/4,720,
+    mdBook, all four doctrines, JSON/Python/shell/whitespace, canonical root 7+5, cursor 288, reference primary
+    65x2, and Phase 0 1,031/1,031 in 623 seconds pass. The hardened target/child-index validator rerun retains
+    complete Julia package 3,549 / primary 65x2 / corpus 105. Cleanup removes both consumed Julia depots and all
+    regenerated book/Python caches; free space is 63 GiB.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.5 - implement Julia duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE BASELINE** — Retrieve ADR `0047`, neutral/Julia Knowledge Map and generated/cursor
+    precedents, then prove all five native fixtures already return exact values before implementation.
+  - [x] **PRESERVE REQUIRED IDENTITY DIRECTLY** — Replace singleton matching plus index rewriting with an explicit
+    authored-alternative matcher while retaining complete-alternation choice priority.
+  - [x] **PROJECT / VALIDATE / DIAGNOSE** — Validate structural slots across native and artifact trust boundaries;
+    publish descriptor/emitted identity, native/generated trace, and both portable invariants.
+  - [x] **ADMIT JULIA / NO REGRESSION** — Run one module-isolated exact 15-role consumer over every fixture and
+    route; pass the complete Julia package, primary 65x2, and 105-case corpus gate.
+  - [x] **LOCKSTEP / COMMIT** — Align duplicate-slot and cursor governance, task/roadmaps/live/memory/changes/notes/
+    book/KM, pass canonical proof and cleanup, commit `.5`, clear the brief, and activate Lua `.6` only from a
+    clean boundary.
+  Implementation evidence:
+  - `match_runtime_regex_slot` selects an existing `RuntimeRegexAlternative` and returns its authored index;
+    ordered/repeated execution no longer compiles a singleton then calls `reindex_runtime_regex_match`. Full
+    `runtime_match` remains the earliest-start/first-authored choice owner.
+  - Compiled action edges translate parent indices to `{target_rule, child_regex_index}` for the ordered invariant
+    and `julia_runtime:regex_slot_selected`, including cross-target `First#0,Second#0` projection.
+  - `validate_compiled_regex_slot_identities` protects compile, runtime-engine, emitter, and generated-plan trust
+    boundaries. Portable spec/runtime/generated failures preserve the contract's exact target/index fields.
+  - Julia descriptors and emitted v2 modules publish `linkedspec-duplicate-regex-slot-identity-v1`; normalized
+    `SpecFile` JSON remains the generated payload and plans remain exactly `{label, family}`.
+  - `julia/test/duplicate_regex_slot_identity_contract_test.jl` executes each of 15 declared roles once in an
+    isolated module. Focused 121, complete package 3,549, primary 65x2, and corpus 105 pass without method
+    overwrite warnings.
+  - The cursor migration checker inventories the new test because it intentionally names `parse_mode`. Adding it
+    to the existing Julia cursor-owner group moves only that cross-contract inventory from 72 to 73 files.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.6`
   Status: `pending`
@@ -8840,7 +8879,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `done` | Required-slot Perl execution and its 12-role admission pass at 2+5/26, KM 638/4,693, canonical 1,031/615s, lockstep, and exact cleanup before Rust `.3`. |
 | 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `done` | Required-slot native/generated execution and one exact 15-role Rust admission pass at 3+4/31; complete Rust, KM/mdBook/doctrines, canonical 1,031/619s, and cleanup signoff pass before Dart `.4`. |
 | 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `done` | Direct authored-slot matching and exact 15-role Dart admission pass at 4+3/36; complete Dart, KM/mdBook/doctrines, canonical 1,031/616s, and cleanup signoff precede Julia `.5`. |
-| 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `pending` | Implement and admit Julia parity. |
+| 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `done` | Direct authored-slot matching and exact module-isolated 15-role Julia admission pass at 5+2/41; package 3,549, primary 65x2, corpus 105, KM 641/4,720, canonical 1,031/623s, and cleanup signoff pass before Lua `.6`. |
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `pending` | Implement and admit PUC Lua plus LuaJIT parity. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `pending` | Close recurring five-backend and public no-drift admission. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
@@ -9920,6 +9959,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Julia duplicate-slot `.9.1.8.1.5` now matches existing authored alternatives directly, projects
+  structural target/index identity through validation/descriptor/emitter/trace, and passes one module-isolated
+  exact 15-role consumer (121 assertions), complete Julia package 3,549 / primary 65x2 / corpus 105, 5+2/41
+  neutral governance, and cursor 73/7+1/56. KM 641/4,720, mdBook/four doctrines, canonical root 7+5, cursor 288,
+  reference primary 65x2, and Phase 0 1,031/1,031 in 623 seconds pass. Exact generated-artifact cleanup completes
+  signoff before the commit and clean Lua `.6` pivot.
+- `2026-07-20`: Clean commit `0e2807c2` lands Dart duplicate-slot repair/admission `.9.1.8.1.4`; tracked and
+  untracked root state is clean, the brief is zero bytes, generated artifacts are absent, free disk is 63 GiB,
+  and ahead is 248. Julia parity `.9.1.8.1.5` activates task-tree-first before Julia implementation/admission.
 - `2026-07-20`: Dart duplicate-slot `.9.1.8.1.4` is signoff-complete from clean `cad15db3`. Direct authored-
   alternative matching, compiled identity validation, descriptor/emitted/trace projection, both diagnostics, and
   the exact 15-role admission pass at 4+3/36. Complete Dart-local passes format/analyzer, 272 tests, primary 65x2,

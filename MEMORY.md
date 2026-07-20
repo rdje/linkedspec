@@ -10,35 +10,36 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.4` — Dart duplicate regex-slot identity repair/admission
-  is fully verified and documented; exact cleanup/commit are prepared.
-- latest_commit: `cad15db3` — `FUTURE-PARITY-BACKLOG.9.1.8.1.3 - implement Rust duplicate regex slot identity`
-  (ahead: 247; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.4 - implement Dart duplicate regex slot identity`.
-- active_work_unit: `.9.1.8.1.4` done with commit prepared from clean `cad15db3`; parent `.8.1` retains pending
-  Julia/Lua/closeout children `.5-.7`, and `.5` is not active before a clean commit.
-- next_action: perform exact post-proof cleanup, rerun lightweight gates, commit `.9.1.8.1.4`, clear the brief,
-  verify clean, then activate Julia `.5` task-tree-first from the new commit.
-- current_duplicate_slot: Perl, Rust, and Dart ordered handlers match required compiled slots directly; repeated,
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.5` — Julia duplicate regex-slot identity repair/admission
+  is fully verified, documented, and cleaned; its commit is prepared.
+- latest_commit: `0e2807c2` — `FUTURE-PARITY-BACKLOG.9.1.8.1.4 - implement Dart duplicate regex slot identity`
+  (ahead: 248; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.5 - implement Julia duplicate regex slot identity`.
+- active_work_unit: `.9.1.8.1.5` signoff-complete and staged from clean base `0e2807c2`; no next leaf is active.
+- next_action: commit `.9.1.8.1.5`, clear/verify the brief and clean tree, then activate dual-ABI Lua `.6`
+  task-tree-first.
+- current_duplicate_slot: Perl, Rust, Dart, and Julia ordered handlers match required compiled slots directly; repeated,
   cross-target, control, choice, loaded/reconstructed, descriptor, emitted/generated, trace, primary, capture, and
-  diagnostic roles are admitted. Dart `matchAlternative` preserves the authored index without one-pattern
-  recompile/reindex; compiled action edges map it to target/index identity. Shared compiler/runtime/descriptor/
-  emitter validation and normalized-spec generated-v2 reconstruction keep `{label,family}` plans unchanged.
-  Governance is 4 complete + 3 pending / 36 mutations.
+  diagnostic roles are admitted. Julia `match_runtime_regex_slot` preserves the authored index without singleton
+  recompile/reindex; compiled action edges map it to target/index identity. Shared compiler/runtime/emitter
+  validation and normalized-spec generated-v2 reconstruction keep `{label,family}` plans unchanged. Governance
+  is 5 complete + 2 pending / 41 mutations.
 - current_root_selection: ADR `0046` precedence is explicit selector > first authored `Rule::` > first authored
   `Rule:`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions plus the selected five-command/default-POSIX
   5x2x6 projection and support ledgers pass from one recurring driver. Governance is 7 complete / 0 pending,
   25 required current documents, 19 stale-claim guards, and 54 rejected mutations. No resolver or generated-plan
   behavior changed. Hand-authored selection fixtures use lifecycle `I`; the fixed request-trace fixture retains
   canonical `E` bytes.
-- current_signoff: Dart duplicate-slot admission passes all 15 declared roles and the complete Dart-local gate:
-  format, fatal analyzer, 272 tests, primary 65x2, and corpus 105/105. Neutral governance is 5 fixtures / 2
-  diagnostics / 6 runtime rows / 4+3 rollout / 36 mutations. KM 640/4,711, mdBook, all four doctrines, canonical
-  root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 616 seconds pass.
+- current_signoff: Julia duplicate-slot admission passes 121 focused assertions; the complete Julia driver passes
+  package 3,549, primary 65x2, and corpus 105/105. Neutral governance is 5 fixtures / 2 diagnostics / 6 runtime
+  rows / 5+2 rollout / 41 mutations. Cursor governance classifies the new Julia proof at 73 files / 7+1 / 56.
+  KM 641/4,720, mdBook/four doctrines, canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in
+  623 seconds pass. Generated book, Julia depot, and Python caches are absent; free space is 63 GiB.
 - current_cursor_admission: One recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, five selected
   primary cases across default/POSIX environments, and all support ledgers. Exact runtime proof passes at Perl
   288, Julia 104, Lua 119x2, primary 5x2x5, capability 80/0/0, and coverage 246/105+1/122. Governance is
-  72 migration files / 7 complete + 1 pending / 56 mutations; no semantic path changed. KM 635/4,670, mdBook,
+  73 migration files / 7 complete + 1 pending / 56 mutations; the Julia duplicate-slot proof adds only one
+  classified test path and changes no semantic cursor path. KM 635/4,670, mdBook,
   four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 631 seconds pass; cleanup is complete.
 - latest_bootstrap_read: 2026-07-19 — full roadmap/codebase/mdBook, active task, Knowledge Map, Toolbox, ADRs
   `0044`/`0046`, neutral/admitted cursor precedent, Lua architecture/root routes, and exact drivers reviewed.
@@ -51,6 +52,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed `.9.1.8.1.4` implementation/admission/docs/KM are staged from
-  `cad15db3`; no background job remains. Exact cleanup, lightweight recheck, commit, brief clear, and clean-status
-  proof finish the handoff before Julia activation.
+- blockers: none. in_flight_uncommitted: `.9.1.8.1.5` is signoff-complete and staged for its prepared commit;
+  no background job or generated task artifact remains.

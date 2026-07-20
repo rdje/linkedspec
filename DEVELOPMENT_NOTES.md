@@ -1,5 +1,41 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.5` — preserve Julia's authored alternative instead of reindexing):
+  Julia's baseline fixture values were already correct, but `_match_runtime_specific` constructed a one-pattern
+  `RuntimeRegexAlternation`, received alternative zero, and rebuilt the match with the expected index. The new
+  `match_runtime_regex_slot` selects the existing authored alternative and returns its original index directly.
+  `_execute_runtime_regex_once!` compiles the full rule alternation once per attempt, spends the required slot for
+  ordered execution, and leaves full-alternation evaluation exclusively with genuine choice.
+
+  A parent alternative index is not the portable identity. Action edges translate it to target rule plus child
+  regex index, which makes the cross-target sequence parent `0,1` appear correctly as `First#0,Second#0`. The same
+  mapping drives the ordered invariant and `julia_runtime:regex_slot_selected`; repeated AND naturally restarts
+  the sequence on every iteration.
+
+  Normalized Julia generated source reconstructs compiled state from canonical `SpecFile` JSON encoded as ASCII
+  hex. A caller can still construct a malformed `CompiledSpec`, so `validate_compiled_regex_slot_identities`
+  protects compile, runtime-engine, generated-plan, and emitter boundaries. Source validation reports the same
+  `regex_slot_identity_invalid` identity without changing blind-call failure timing. Runtime and generated-source
+  errors retain target/index fields, while `assert_ordered_regex_slot_identity` supplies the second typed
+  invariant. The compiled validator must inspect `child_regex_index`, because that is the field execution and
+  trace consume; it also requires equality with the duplicated target-reference index and bounds the target by
+  authored body regexes rather than dependency-expanded patterns.
+
+  The exact 15-role consumer is isolated in its own Julia module so its generic role names cannot overwrite other
+  admission methods in the complete package suite. Focused proof passes 121 assertions, and the complete package
+  suite passes after admitting the new descriptor metadata key and retaining the established `undefined rule`
+  message fragment for source validation. The complete Julia driver passes 3,549 package assertions, primary
+  65x2, and corpus 105/105. Neutral governance advances only Julia to 5 complete + 2 pending and rejects 41
+  mutations. The canonical cursor checker deliberately inventories any tracked parse-mode-bearing test; adding
+  the duplicate-slot consumer therefore requires classifying it under the already admitted Julia cursor owner.
+  This changes only the cursor inventory count from 72 to 73, not rollout or behavior. Knowledge Map regenerates
+  at 641 facts / 4,720 question keys and mdBook builds cleanly. The next canonical pre-test pass also catches a
+  root-selection phrase split in `docs/TASK_TREE.md`; retaining its exact contiguous governed marker restores the
+  already closed 7/0/54 contract. The clean rerun passes root 7+5, cursor 288, primary 65x2, and Phase 0
+  1,031/1,031 in 623 seconds. Exact post-proof cleanup removes generated book/Python output after the earlier
+  145 MiB book/Julia-cache cleanup; hardening validation then reruns the complete Julia gate and removes its
+  regenerated 125 MiB depot plus 11 MiB book output too.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.4` — preserve the authored index in the match, not afterward):
   Dart's baseline values were correct, but `_matchSpecific` created a new one-pattern alternation whose native
   result was necessarily branch zero, then repaired the result with `RuntimeRegexMatch.reindexed`. That preserved

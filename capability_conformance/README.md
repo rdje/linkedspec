@@ -110,14 +110,16 @@ duplicates, a non-duplicate repeated control, and cross-target duplicates. The c
 invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
 inventory, migration paths, and the seven-leg rollout. Run
 `python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
-and rejects 36 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
+and rejects 41 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
 mutations. Perl `.2` is composed-admitted through 12 exact roles. Rust `.3` is composed-admitted through 15 exact
 roles covering native, reconstructed, loaded, descriptor, emitted/generated, native/generated trace, primary,
 all five neutral fixtures, and typed diagnostics. Rust matches required slots directly, retains combined choice,
 publishes descriptor/emitted contract identity, and keeps generated v2 plans minimal. Dart `.4` is composed-
 admitted through the same 15-role shape over direct authored-alternative matching, normalized-spec generated
-payload, descriptor/emitted/trace identity, primary, and diagnostics. Governance is 4 complete / 3 pending; Julia
-`.5` is the next behavior-lock owner.
+payload, descriptor/emitted/trace identity, primary, and diagnostics. Julia `.5` is now admitted through a
+module-isolated 15-role consumer over direct authored-alternative matching,
+normalized-spec generated payload, descriptor/emitted/trace identity, primary, and diagnostics. Governance is
+5 complete / 2 pending with 41 rejected mutations; dual-ABI Lua `.6` is the next behavior-lock owner.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,
@@ -127,7 +129,8 @@ generated-source v2 with contract-before-payload rejection. Public removal then 
 corpus/primary ownership while retaining low-level matcher primitives and targeted legacy diagnostics. Package
 progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance was 67 / 5+3 / 44 at
 Julia admission. Lua admission later advanced the ledger to 69 / 6+2 / 49, root-governance scanning moved the
-inventory to 71, and recurring admission now establishes the current 72 / 7+1 / 56 boundary.
+inventory to 71, recurring admission established 72 / 7+1 / 56, and the Julia duplicate-slot proof path now
+makes the current boundary 73 / 7+1 / 56.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

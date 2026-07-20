@@ -53,6 +53,7 @@ function _descriptor_expected_root_meta_keys()
         push!(result, String(key))
     end
     push!(result, "entry_rule_contract")
+    push!(result, "regex_slot_identity_contract")
     return result
 end
 

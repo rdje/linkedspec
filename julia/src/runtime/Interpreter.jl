@@ -15,6 +15,10 @@ struct RuntimeDiagnostic
     helper_name::Union{Nothing,String}
     actual_arity::Union{Nothing,Int}
     expected_arity::Union{Nothing,String}
+    target_rule::Union{Nothing,String}
+    regex_index::Union{Nothing,Int}
+    expected_regex_index::Union{Nothing,Int}
+    actual_regex_index::Union{Nothing,Int}
 end
 
 function RuntimeDiagnostic(;
@@ -34,6 +38,10 @@ function RuntimeDiagnostic(;
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
+    target_rule = nothing,
+    regex_index = nothing,
+    expected_regex_index = nothing,
+    actual_regex_index = nothing,
 )
     optional_string(value) = value === nothing ? nothing : String(value)
     return RuntimeDiagnostic(
@@ -53,6 +61,10 @@ function RuntimeDiagnostic(;
         optional_string(helper_name),
         actual_arity === nothing ? nothing : Int(actual_arity),
         optional_string(expected_arity),
+        optional_string(target_rule),
+        regex_index === nothing ? nothing : Int(regex_index),
+        expected_regex_index === nothing ? nothing : Int(expected_regex_index),
+        actual_regex_index === nothing ? nothing : Int(actual_regex_index),
     )
 end
 
@@ -65,6 +77,38 @@ RuntimeInterpreterException(message::AbstractString; diagnostic = nothing) =
     RuntimeInterpreterException(String(message), diagnostic)
 
 Base.showerror(io::IO, error::RuntimeInterpreterException) = print(io, error.message)
+
+struct OrderedRegexSlotIdentityException <: Exception
+    diagnostic::SpecPortableDiagnostic
+end
+
+Base.showerror(io::IO, error::OrderedRegexSlotIdentityException) =
+    print(io, error.diagnostic.message)
+
+function assert_ordered_regex_slot_identity(;
+    rule_label,
+    expected_target_rule,
+    expected_regex_index,
+    actual_target_rule,
+    actual_regex_index,
+)
+    if expected_target_rule == actual_target_rule &&
+            expected_regex_index == actual_regex_index
+        return nothing
+    end
+    diagnostic = SpecPortableDiagnostic(
+        code = "ordered_regex_slot_identity_lost",
+        stage = "execute_rule",
+        message = "ordered_regex_slot_identity_lost stage=execute_rule rule_label=$rule_label target_rule=$expected_target_rule expected_regex_index=$expected_regex_index actual_regex_index=$actual_regex_index",
+        fields = Dict{String,Any}(
+            "rule_label" => String(rule_label),
+            "target_rule" => String(expected_target_rule),
+            "expected_regex_index" => Int(expected_regex_index),
+            "actual_regex_index" => Int(actual_regex_index),
+        ),
+    )
+    throw(OrderedRegexSlotIdentityException(diagnostic))
+end
 
 struct RuntimeDiagnosticOutputEvent
     helper_name::String
@@ -152,6 +196,30 @@ function LinkedSpecRuntimeEngine(
     _reject_removed_runtime_options(kwargs; spec_name = spec_name, spec_path = spec_path)
     if max_iterations <= 0
         throw(ArgumentError("max_iterations must be positive"))
+    end
+    try
+        validate_compiled_regex_slot_identities(compiled_spec)
+    catch error
+        if error isa SpecValidationException && error.diagnostic !== nothing &&
+                error.diagnostic.code == "regex_slot_identity_invalid"
+            fields = error.diagnostic.fields
+            throw(RuntimeInterpreterException(
+                error.diagnostic.message;
+                diagnostic = RuntimeDiagnostic(
+                    type = "runtime_parser",
+                    stage = error.diagnostic.stage,
+                    owner_stage = "julia_runtime",
+                    summary = "Compiled regex slot identity is invalid",
+                    detail = error.diagnostic.message,
+                    rule_label = fields["rule_label"],
+                    handler_source_label = "julia_runtime:rule:$(fields["rule_label"])",
+                    code = error.diagnostic.code,
+                    target_rule = fields["target_rule"],
+                    regex_index = fields["regex_index"],
+                ),
+            ))
+        end
+        rethrow()
     end
     return LinkedSpecRuntimeEngine(
         compiled_spec,
@@ -1037,11 +1105,13 @@ function _execute_runtime_regex_once!(
         return false
     end
 
+    alternation = RuntimeRegexAlternation(rule)
+
     if and_sequence
         for expected_index in eachindex(rule.regex_patterns)
             zero_based_index = expected_index - 1
             one_match = _match_runtime_specific(
-                rule.regex_patterns,
+                alternation,
                 zero_based_index,
                 context,
                 cursor_policy,
@@ -1057,6 +1127,24 @@ function _execute_runtime_regex_once!(
             if one_match === nothing
                 return false
             end
+            expected_target, expected_regex_index =
+                _runtime_regex_slot_identity(rule, zero_based_index)
+            actual_target, actual_regex_index =
+                _runtime_regex_slot_identity(rule, one_match.alternative_index)
+            assert_ordered_regex_slot_identity(
+                rule_label = rule.label,
+                expected_target_rule = expected_target,
+                expected_regex_index = expected_regex_index,
+                actual_target_rule = actual_target,
+                actual_regex_index = actual_regex_index,
+            )
+            _trace_runtime_regex_slot_selected!(
+                context,
+                rule.label,
+                "ordered_required",
+                expected_target,
+                expected_regex_index,
+            )
             _accept_runtime_regex_match!(engine, rule, one_match, context)
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
             if loop_end !== nothing
@@ -1068,14 +1156,14 @@ function _execute_runtime_regex_once!(
 
     one_match = if entry_regex_index > 0 && entry_regex_index < length(rule.regex_patterns)
         _match_runtime_specific(
-            rule.regex_patterns,
+            alternation,
             entry_regex_index,
             context,
             cursor_policy,
         )
     else
         runtime_match(
-            RuntimeRegexAlternation(rule),
+            alternation,
             context.input,
             context.cursor_codeunit;
             parse_mode = cursor_policy,
@@ -1091,6 +1179,17 @@ function _execute_runtime_regex_once!(
     if one_match === nothing
         return false
     end
+
+    target_rule, regex_index =
+        _runtime_regex_slot_identity(rule, one_match.alternative_index)
+    selection_role = rule.mode_metadata.is_and ? "ordered_required" : "choice"
+    _trace_runtime_regex_slot_selected!(
+        context,
+        rule.label,
+        selection_role,
+        target_rule,
+        regex_index,
+    )
 
     _accept_runtime_regex_match!(engine, rule, one_match, context)
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -1123,18 +1222,45 @@ function _trace_runtime_regex_decision!(
 end
 
 function _match_runtime_specific(
-    patterns::Vector{String},
+    alternation::RuntimeRegexAlternation,
     zero_based_index::Int,
     context::_RuntimeExecutionContext,
     cursor_policy::LinkedSpecParseMode,
 )
-    one_match = runtime_match(
-        RuntimeRegexAlternation([patterns[zero_based_index + 1]]),
+    return match_runtime_regex_slot(
+        alternation,
+        zero_based_index,
         context.input,
         context.cursor_codeunit;
         parse_mode = cursor_policy,
     )
-    return one_match === nothing ? nothing : reindex_runtime_regex_match(one_match, zero_based_index)
+end
+
+function _runtime_regex_slot_identity(rule::CompiledRule, alternative_index::Int)
+    for edge in rule.action_edges
+        if edge.regex_index == alternative_index
+            target = only(edge.targets)
+            return (target.label, edge.child_regex_index)
+        end
+    end
+    return (rule.label, alternative_index)
+end
+
+function _trace_runtime_regex_slot_selected!(
+    context::_RuntimeExecutionContext,
+    rule_label::AbstractString,
+    selection_role::AbstractString,
+    target_rule::AbstractString,
+    regex_index::Int,
+)
+    _emit_runtime_trace_event!(
+        context,
+        LinkedSpecTraceMark,
+        "julia_runtime:regex_slot_selected",
+        "rule_label=$rule_label selection_role=$selection_role target_rule=$target_rule regex_index=$regex_index",
+        LinkedSpecTraceHigh,
+    )
+    return nothing
 end
 
 function _accept_runtime_regex_match!(
@@ -5939,6 +6065,10 @@ function _runtime_diagnostic(
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
+    target_rule = nothing,
+    regex_index = nothing,
+    expected_regex_index = nothing,
+    actual_regex_index = nothing,
 )
     effective_rule = rule_label === nothing ? top_rule : rule_label
     return RuntimeDiagnostic(
@@ -5960,6 +6090,10 @@ function _runtime_diagnostic(
         helper_name = helper_name,
         actual_arity = actual_arity,
         expected_arity = expected_arity,
+        target_rule = target_rule,
+        regex_index = regex_index,
+        expected_regex_index = expected_regex_index,
+        actual_regex_index = actual_regex_index,
     )
 end
 
@@ -6011,6 +6145,10 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "helper_name" => diagnostic.helper_name,
         "actual_arity" => diagnostic.actual_arity,
         "expected_arity" => diagnostic.expected_arity,
+        "target_rule" => diagnostic.target_rule,
+        "regex_index" => diagnostic.regex_index,
+        "expected_regex_index" => diagnostic.expected_regex_index,
+        "actual_regex_index" => diagnostic.actual_regex_index,
     )
     for (key, field_value) in optional_fields
         if field_value !== nothing

@@ -74,8 +74,14 @@ reindex approximation. Ordered execution now calls an explicit authored-alternat
 required index directly; choice retains earliest-start/first-authored priority. Shared compiled-state validation,
 descriptor metadata, emitted-v2 identity, native/generated `regex_slot_selected` trace, primary execution, and
 both portable diagnostics pass one exact 15-role consumer. Generated source still embeds normalized-spec JSON and
-keeps its `{label,family}` plan unchanged. Governance is 4 complete + 3 pending with 36 rejected mutations.
-Julia/Lua locks `.5-.6` and recurring/public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
+keeps its `{label,family}` plan unchanged. At the Dart boundary, governance was 4 complete + 3 pending with 36
+rejected mutations.
+Julia `.5` replaces its behavior-preserving singleton-match/reindex seam with direct authored-alternative
+matching. Shared compiled-state validation, descriptor/emitted identity, native/generated slot trace, primary,
+and typed diagnostics pass one module-isolated exact 15-role consumer; generated source still reconstructs
+normalized `SpecFile` JSON and keeps the minimal plan. Governance is 5 complete + 2 pending with 41 rejected
+mutations. Julia signoff passes package 3,549, primary 65x2, corpus 105/105, and canonical Phase 0 1,031/1,031 in
+623 seconds. Dual-ABI Lua `.6` and recurring/public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
 oracle/classifier layers, exact primary 65x2, Knowledge Map/mdBook/doctrines, and canonical Phase 0 1,031/1,031
 in 619 seconds.
 

@@ -9,7 +9,7 @@
 > `resolved_edges`. Perl, Rust, Dart, Julia, and dual-ABI Lua generated-source v2, option/CLI removal, and composed
 > cursor admission are complete through `.9.1.7.6`; recurring five-backend admission `.9.1.8` now composes all
 > six runtime legs and selected 5x2x5 primary proof. Duplicate regex-slot descriptor identity is admitted on Perl,
-> Rust, and Dart; Julia/Lua locks and public no-drift remain dependency-ordered. Independently, root-selection parity is closed
+> Rust, Dart, and Julia; the dual-ABI Lua lock and public no-drift remain dependency-ordered. Independently, root-selection parity is closed
 > at 7 complete / 0 pending. Its recurring
 > contract composes every immutable root-selection descriptor identity; Julia root admission composes the
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
@@ -252,7 +252,7 @@ dependency_refs
 
 That list describes which other rule regexes this rule depends on when building combined dependency regex dispatch.
 
-Migrated Perl, Rust, and Dart rule metadata exposes `resolved_edges` in normalized source order. A grouped action edge produces one row per
+Migrated Perl, Rust, Dart, and Julia rule metadata exposes `resolved_edges` in normalized source order. A grouped action edge produces one row per
 target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `block`, and `fluent`:
 
 - action edges always carry their resolved zero-based regex index, including `0` when the source omitted it;
@@ -410,7 +410,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
-- `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl, Rust, and Dart)
+- `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl, Rust, Dart, and Julia)
 - `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on admitted Perl, Rust, Dart, Julia, and Lua routes)
 - `definition_order`
 - `compiled_rule_order`

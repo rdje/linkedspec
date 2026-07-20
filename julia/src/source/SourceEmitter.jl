@@ -2,6 +2,7 @@
     EmitSourceStage
     CompileOrLoadGeneratedSourceStage
     ValidateGeneratedPlanStage
+    ValidateCompiledRuleStage
     ValidateGeneratedSpecStage
     SelectGeneratedEntryRuleStage
     ExecuteGeneratedStage
@@ -15,6 +16,7 @@ end
     GeneratedPlanFamilyMismatchCode
     GeneratedPlanUnknownFamilyCode
     GeneratedSourceContractVersionMismatchCode
+    RegexSlotIdentityInvalidCode
     GeneratedNoRulesDefinedCode
     GeneratedEntryRuleNotFoundCode
     GeneratedExecutionFailedCode
@@ -192,6 +194,15 @@ function validate_generated_rule_plan_v2(
     identity = String(source_identity)
     validate_generated_source_contract_v2(actual_contract, identity)
     try
+        validate_compiled_regex_slot_identities(compiled)
+    catch error
+        if error isa SpecValidationException && error.diagnostic !== nothing &&
+                error.diagnostic.code == "regex_slot_identity_invalid"
+            throw(generated_source_regex_slot_identity_failed(identity, error))
+        end
+        rethrow()
+    end
+    try
         validate_no_removed_aggregate_selectors(compiled)
     catch error
         throw(generated_source_compile_failed(identity, error))
@@ -327,6 +338,8 @@ function generated_source_stage_name(stage::GeneratedSourceStage)
         return "compile_or_load_generated_source"
     elseif stage == ValidateGeneratedPlanStage
         return "validate_generated_plan"
+    elseif stage == ValidateCompiledRuleStage
+        return "validate_compiled_rule"
     elseif stage == ValidateGeneratedSpecStage
         return "validate_spec"
     elseif stage == SelectGeneratedEntryRuleStage
@@ -350,6 +363,8 @@ function generated_source_code_name(code::GeneratedSourceCode)
         return "generated_plan_unknown_family"
     elseif code == GeneratedSourceContractVersionMismatchCode
         return "generated_source_contract_version_mismatch"
+    elseif code == RegexSlotIdentityInvalidCode
+        return "regex_slot_identity_invalid"
     elseif code == GeneratedNoRulesDefinedCode
         return "no_rules_defined"
     elseif code == GeneratedEntryRuleNotFoundCode
@@ -369,6 +384,8 @@ struct GeneratedSourceException <: Exception
     detail::Union{Nothing,String}
     expected_contract::Union{Nothing,String}
     actual_contract::Union{Nothing,String}
+    target_rule::Union{Nothing,String}
+    regex_index::Union{Nothing,Int}
 end
 
 function GeneratedSourceException(
@@ -382,6 +399,8 @@ function GeneratedSourceException(
     detail = nothing,
     expected_contract = nothing,
     actual_contract = nothing,
+    target_rule = nothing,
+    regex_index = nothing,
 )
     optional_string(value) = value === nothing ? nothing : String(value)
     return GeneratedSourceException(
@@ -395,6 +414,8 @@ function GeneratedSourceException(
         optional_string(detail),
         optional_string(expected_contract),
         optional_string(actual_contract),
+        optional_string(target_rule),
+        regex_index === nothing ? nothing : Int(regex_index),
     )
 end
 
@@ -412,6 +433,27 @@ function generated_source_compile_failed(source_identity::AbstractString, detail
         "Generated Julia source failed to compile or load",
         source_identity;
         detail = _generated_source_detail(detail),
+    )
+end
+
+function generated_source_regex_slot_identity_failed(
+    source_identity::AbstractString,
+    error::SpecValidationException,
+)
+    diagnostic = error.diagnostic
+    if diagnostic === nothing || diagnostic.code != "regex_slot_identity_invalid"
+        throw(ArgumentError("spec validation error is not a regex-slot identity failure"))
+    end
+    fields = diagnostic.fields
+    return GeneratedSourceException(
+        ValidateCompiledRuleStage,
+        RegexSlotIdentityInvalidCode,
+        "Compiled regex slot identity is invalid",
+        source_identity;
+        rule_label = fields["rule_label"],
+        target_rule = fields["target_rule"],
+        regex_index = fields["regex_index"],
+        detail = diagnostic.message,
     )
 end
 
@@ -470,6 +512,8 @@ function to_json(error::GeneratedSourceException)
     _put_if_present!(result, "detail", error.detail)
     _put_if_present!(result, "expected_contract", error.expected_contract)
     _put_if_present!(result, "actual_contract", error.actual_contract)
+    _put_if_present!(result, "target_rule", error.target_rule)
+    _put_if_present!(result, "regex_index", error.regex_index)
     return result
 end
 
@@ -524,6 +568,15 @@ function emit_julia_source_v2(compiled::CompiledSpec, source_identity::AbstractS
     end
 
     try
+        try
+            validate_compiled_regex_slot_identities(compiled)
+        catch error
+            if error isa SpecValidationException && error.diagnostic !== nothing &&
+                    error.diagnostic.code == "regex_slot_identity_invalid"
+                throw(generated_source_regex_slot_identity_failed(identity, error))
+            end
+            rethrow()
+        end
         validate_no_removed_aggregate_selectors(compiled)
         normalized_spec = _generated_effective_spec(compiled)
         spec_json = _generated_canonical_json(to_json(normalized_spec))
@@ -544,6 +597,7 @@ import LinkedSpecJulia
 
 const LINKEDSPEC_GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v2"
 const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2
+const LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT = "linkedspec-duplicate-regex-slot-identity-v1"
 """)
         println(
             output,

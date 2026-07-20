@@ -6,6 +6,7 @@ Base.showerror(io::IO, error::CompiledSpecException) = print(io, error.message)
 
 const ENTRY_RULE_CONTRACT_ID = "linkedspec-root-rule-selection-v1"
 const RULE_LOCAL_CURSOR_CONTRACT_ID = "linkedspec-rule-local-cursor-v1"
+const REGEX_SLOT_IDENTITY_CONTRACT_ID = "linkedspec-duplicate-regex-slot-identity-v1"
 
 @enum EntryRuleSelectionBasis begin
     ExplicitSelectorBasis
@@ -405,6 +406,59 @@ function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
     return nothing
 end
 
+function _compiled_regex_slot_identity_exception(
+    rule_label::AbstractString,
+    target_rule::AbstractString,
+    regex_index::Int,
+)
+    diagnostic = SpecPortableDiagnostic(
+        code = "regex_slot_identity_invalid",
+        stage = "validate_compiled_rule",
+        message = "rule '$rule_label' references rule '$target_rule' regex slot $regex_index, but that structural slot does not exist",
+        fields = Dict{String,Any}(
+            "rule_label" => String(rule_label),
+            "target_rule" => String(target_rule),
+            "regex_index" => regex_index,
+        ),
+    )
+    return SpecValidationException(diagnostic.message; diagnostic = diagnostic)
+end
+
+"""Validate typed action-edge slot identities before any executable route uses them."""
+function validate_compiled_regex_slot_identities(compiled::CompiledSpec)
+    for label in compiled.compiled_rule_order
+        rule = get(compiled.rules_by_label, label, nothing)
+        rule === nothing && throw(CompiledSpecException(
+            "compiled rule order refers to missing rule '$label'",
+        ))
+        for edge in rule.action_edges
+            target = isempty(edge.targets) ? nothing : first(edge.targets)
+            target_label = target === nothing ? label : target.label
+            identity_index = edge.child_regex_index
+            target_rule = get(compiled.rules_by_label, target_label, nothing)
+            authored_regex_count = target_rule === nothing ? 0 : count(
+                element -> element.kind isa RegexBodyElementKind,
+                target_rule.body_elements,
+            )
+            identity_is_valid = length(edge.targets) == 1 &&
+                                target_rule !== nothing &&
+                                identity_index >= 0 &&
+                                identity_index < authored_regex_count &&
+                                target.index == identity_index &&
+                                edge.regex_index >= 0 &&
+                                edge.regex_index < length(rule.regex_patterns)
+            if !identity_is_valid
+                throw(_compiled_regex_slot_identity_exception(
+                    label,
+                    target_label,
+                    identity_index,
+                ))
+            end
+        end
+    end
+    return nothing
+end
+
 function compile_spec(
     spec::SpecFile;
     validate_source::Bool = true,
@@ -565,6 +619,7 @@ function _compile_spec(
         function_registry = function_registry,
         dependency_regex_state = dependency_regex_state,
     )
+    validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
     return compiled
 end
@@ -771,6 +826,7 @@ function to_json(state::CompiledDescriptorState)
             "compiled_dependency_regex_model" => "compiled_dependency_regex_state",
             "cursor_contract" => RULE_LOCAL_CURSOR_CONTRACT_ID,
             "entry_rule_contract" => ENTRY_RULE_CONTRACT_ID,
+            "regex_slot_identity_contract" => REGEX_SLOT_IDENTITY_CONTRACT_ID,
             "definition_order" => compiled.definition_order,
             "compiled_rule_order" => compiled.compiled_rule_order,
             "redefined_rule_labels" => compiled.redefined_rule_labels,

@@ -87,6 +87,16 @@ directly and emit `regex_slot_selected`. Decoding malformed embedded state fails
 at `validate_compiled_rule` with `regex_slot_identity_invalid` before family-plan
 execution.
 
+Julia emitted v2 modules likewise publish
+`LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT =
+"linkedspec-duplicate-regex-slot-identity-v1"`. Their
+`_COMPILED_SPEC_JSON_HEX` payload remains canonical normalized `SpecFile` JSON;
+ordinary compilation reconstructs action-edge identities before execution. The
+generated plan remains label/family only. Native and generated routes call the
+same direct authored-slot matcher for ordered steps, emit
+`julia_runtime:regex_slot_selected`, and reject malformed caller-constructed
+compiled state at `validate_compiled_rule` before emission or plan execution.
+
 The original `emit_rust_source(&compiled) -> Result<String, String>` remains a
 compatibility adapter with `<inline>` identity. Generated `parse` and
 `parse_with_trace` likewise retain raw-string diagnostics, so adopting v2 does
