@@ -104,6 +104,7 @@ require_tracked_file tools/check_native_spec_resolution_contract.pl
 require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
 require_tracked_file t/rule_local_cursor_perl_contract.t
+require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
 require_tracked_file t/root_rule_selection_perl_core.t
 require_tracked_file t/root_rule_selection_perl_routes.t
 require_tracked_file rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs
@@ -211,6 +212,7 @@ perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
+perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 perl -c -Iperl t/root_rule_selection_perl_core.t
 perl -c -Iperl t/root_rule_selection_perl_routes.t
 perl -c -Iperl t/variadic_user_function_contract.t
@@ -239,6 +241,9 @@ python3 tools/check_root_rule_selection_contract.py
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py
+
+log "running composed Perl duplicate regex-slot identity consumer"
+PERL5LIB= prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t

@@ -410,7 +410,9 @@ sub trace_generated_handler_branch {
   'branch=' . $branch,
  );
  push @context, 'handler_kind=' . $handler_kind if length($handler_kind);
- foreach my $field (qw(match_index call pos loop_count rep_min rep_max)) {
+ foreach my $field (
+  qw(match_index call pos loop_count rep_min rep_max selection_role target_rule regex_index)
+ ) {
   push @context, $field . '=' . $args{$field} if defined($args{$field});
  }
 

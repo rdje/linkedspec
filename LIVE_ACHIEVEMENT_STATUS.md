@@ -8,16 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.1` — Neutral duplicate-slot ADR/contract/checker is signoff-complete from
-  clean audit commit `4902f218` at ahead 244. It owns ratification, exact portable fixtures, rollout/inventory,
-  diagnostics, omission-sensitive mutations, and canonical registration without backend behavior changes. ADR
-  `0047`, 5 fixtures / 2 diagnostics / 6 runtime rows / 1+6 rollout / 23 mutations, docs, and KM 637/4,685 pass.
-  Canonical primary 65x2 and Phase 0 1,031/1,031 in 635 seconds pass; cleanup and the prepared commit remain before
-  Perl `.2` activation.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.2` — Perl duplicate-slot repair/admission is active task-tree-first from clean
+  neutral commit `93ee7935` at ahead 245. Required-slot ordinary/repeated/cross-target execution, descriptor/trace/
+  generated-v2 projection, exact diagnostics, and the 12-role consumer are signoff-complete at 2+5/26. Canonical
+  Phase 0 passes 1,031/1,031 in 615 seconds and exact cleanup passes; only commit preparation remains before Rust
+  `.3`.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract**
+  (DONE at clean commit `93ee7935`).
+
+  **Result:** ADR `0047` and the independent executable model adopt structural target-rule/index identity,
+  required-slot ordered matching, first-authored choice ties, repeated reset, and unchanged generated-source v2.
+
+  **Proof:** 5 fixtures, 2 diagnostics, 6 runtime rows, 1+6 rollout, 23 mutations, KM 637/4,685, mdBook/four
+  doctrines, canonical primary 65x2, Phase 0 1,031/1,031 in 635 seconds, and exact cleanup pass.
+
+  **Next:** Perl repair/admission `.9.1.8.1.2` is active from the clean neutral commit.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity**
   (DONE at clean commit `4902f218`).
 

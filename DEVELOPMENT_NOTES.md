@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.2` — ordered execution must spend the identity it already owns):
+  The Perl failure was not regex compilation or descriptor loss. `dependency_refs` retained both rows, but the
+  ordered handlers invoked `LinkedRE::oredRE`, whose duplicate branch report could only be the first alternative.
+  `LinkedRE::match_slot` now compiles no text-derived identity: the handler supplies the required compiled row,
+  the matcher tests that row under the rule-owned consume policy, and dispatch asserts the same target/index.
+
+  Perl match variables are dynamically scoped to the successful match branch. Capturing `${^MATCH}`, positional
+  groups, and named groups after leaving that branch silently produced stale data, so the matcher snapshots all
+  three inside the branch before constructing match info. This preserves `match_text`, `match_group`, and named
+  capture behavior while adding structural identity fields.
+
+  Standalone generated source exposed a second seam: its plan was correctly minimal, but the emitted descriptor
+  had only the combined dependency regex. The v2 source now embeds `dependency_slot_map` as compiled execution
+  payload, separate from the unchanged `{label,family}` plan. Live execution falls back to the full descriptor's
+  `dependency_refs` and target regex arrays; generated execution consumes the embedded row. Cross-target AND
+  also had metadata selecting `AND_ACODE` while emission fell back to `default` because it counted only local
+  regexes. Variant construction now counts structural dependency rows, matching the pre-existing metadata.
+
+  Trace formatting previously accepted arbitrary slot fields at the emitter call but serialized only its older
+  fixed context list. Adding `selection_role`, `target_rule`, and `regex_index` to that list makes the portable
+  event observable rather than source-only. The composed 12-role consumer locks live, loaded, descriptor,
+  emitted/generated, trace, repeated, control, cross-target, choice, and diagnostic behavior.
+
+  Final canonical proof passes both 65-case primary environments and Phase 0 1,031/1,031 in 615 seconds. KM is
+  638/4,693, mdBook and all doctrines pass, and post-proof cleanup removes only the rendered 11 MiB book plus a
+  28 KiB Python bytecode cache. No tracked evidence or active verification output is removed.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.1` — required identity and choice priority are separate):
   ADR `0047` deliberately does not describe every duplicate match as ambiguous. An AND sequence already owns the
   required structural slot, so selecting a combined alternation and checking its branch afterward throws away

@@ -363,6 +363,78 @@ sub _linkedre_or_expr {
         : "LinkedRE::or(\$STRING, \$\$descr{dependency_regex_map}{$label}, \$info)";
 }
 
+sub _dependency_ref_expr {
+    my (%args) = @_;
+    my $label = $args{label};
+    my $index_expr = $args{index_expr};
+    return '(exists($$descr{dependency_slot_map})'
+        . ' ? $$descr{dependency_slot_map}{' . $label . '}[' . $index_expr . ']'
+        . ' : $$descr{spec}{' . $label . '}{dependency_refs}[' . $index_expr . '])';
+}
+
+sub _linkedre_required_slot_expr {
+    my (%args) = @_;
+    my $label = $args{label};
+    my $index_expr = $args{index_expr};
+    my $cursor_policy = defined($args{cursor_policy}) && length($args{cursor_policy})
+        ? $args{cursor_policy}
+        : 'consume';
+    my $dependency_ref = _dependency_ref_expr(label => $label, index_expr => $index_expr);
+    my $slot_re = '($$required_slot{re}'
+        . ' // $$descr{spec}{$$required_slot{label}}{re}[$$required_slot{idx}])';
+    return 'do { my $required_slot = ' . $dependency_ref
+        . '; LinkedRE::match_slot($STRING, ' . $slot_re . ', ' . $index_expr . ', '
+        . _quote_perl_string($label)
+        . ', $$required_slot{label}, $$required_slot{idx}, '
+        . _quote_perl_string($cursor_policy)
+        . ', $info) }';
+}
+
+sub _slot_identity_condition {
+    my (%args) = @_;
+    my $label = $args{label};
+    my $index_expr = $args{index_expr};
+    my $dependency_ref = _dependency_ref_expr(label => $label, index_expr => $index_expr);
+    return 'do { my $required_slot = ' . $dependency_ref
+        . '; LinkedRE::assert_slot_identity($minfo, '
+        . _quote_perl_string($label)
+        . ', ' . $index_expr
+        . ', $$required_slot{label}, $$required_slot{idx}) }';
+}
+
+sub _slot_selection_trace {
+    my (%args) = @_;
+    my $selection_role = $args{selection_role};
+    my $target_rule_expr;
+    my $regex_index_expr;
+    if ($selection_role eq 'ordered_required') {
+        $target_rule_expr = '$$minfo{target_rule}';
+        $regex_index_expr = '$$minfo{regex_index}';
+    } else {
+        my $dependency_ref = _dependency_ref_expr(
+            label => $args{label},
+            index_expr => '$$minfo{index}',
+        );
+        $target_rule_expr = $dependency_ref . '->{label}';
+        $regex_index_expr = $dependency_ref . '->{idx}';
+    }
+    return _trace_branch_statement(
+        enabled => $args{enabled},
+        indent => $args{indent},
+        label => $args{label},
+        handler_kind => $args{handler_kind},
+        branch => 'regex_slot_selected',
+        taken_expr => '1',
+        meta => [
+            [ selection_role => _quote_perl_string($selection_role) ],
+            [ target_rule => $target_rule_expr ],
+            [ regex_index => $regex_index_expr ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "compiled_structural_slot" }',
+    );
+}
+
 #------------------------------------------------------------------------------
 # Function: _build_acodes_dispatch_block
 # Purpose : Build the if/elsif dispatch block for per-regex acode entries.
@@ -569,6 +641,13 @@ sub _emit_default_handler {
         ],
         details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
     );
+    my $slot_trace = _slot_selection_trace(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        selection_role => 'choice',
+    );
     my $lx_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '   ',
@@ -591,6 +670,7 @@ sub _emit_default_handler {
 ' . $lx_trace . '
   ' . $lxcode . '
   }
+' . $slot_trace . '
 ' . $lmatch . '
 
   ' . $lscode . '
@@ -724,7 +804,7 @@ sub _emit_and_single_acode_handler {
     my $label      = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
-    my $match_expr = _linkedre_or_expr(%$ir, label => $label);
+    my $match_expr = _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '0');
     my $lxcode     = $ir->{lxcode} || 'return undef';
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
@@ -771,12 +851,19 @@ sub _emit_and_single_acode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'required_index_0',
-        taken_expr => '$$minfo{index} == 0',
+        taken_expr => _slot_identity_condition(label => $label, index_expr => '0'),
         meta => [
             [ match_index => '$$minfo{index}' ],
             [ pos => 'pos($$STRING)' ],
         ],
         details_expr => 'sub { "expected_index=0" }',
+    );
+    my $slot_trace = _slot_selection_trace(
+        enabled => $trace_enabled,
+        indent => ' ',
+        label => $label,
+        handler_kind => $handler_kind,
+        selection_role => 'ordered_required',
     );
 
     # Per-regex I-block code (routed through acode_entries by RuleIR for AND rules).
@@ -815,6 +902,7 @@ sub _emit_and_single_acode_handler {
  unless(' . $index_condition . ') {
   ' . $lxcode . '
  }
+' . $slot_trace . '
 ' . $lmatch . '
 ' . $and_icode_block . '
  ' . $lscode . '
@@ -835,7 +923,7 @@ sub _emit_and_acode_seq_handler {
     my $label       = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
-    my $match_expr  = _linkedre_or_expr(%$ir, label => $label);
+    my $match_expr  = _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '$idx');
     my $lxcode      = $ir->{lxcode} || 'return undef';
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
@@ -875,13 +963,20 @@ sub _emit_and_acode_seq_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'required_sequence_index',
-        taken_expr => '$$minfo{index} == $idx',
+        taken_expr => _slot_identity_condition(label => $label, index_expr => '$idx'),
         meta => [
             [ loop_count => '$idx' ],
             [ match_index => '$$minfo{index}' ],
             [ pos => 'pos($$STRING)' ],
         ],
         details_expr => 'sub { "expected_index=$idx" }',
+    );
+    my $slot_trace = _slot_selection_trace(
+        enabled => $trace_enabled,
+        indent => '  ',
+        label => $label,
+        handler_kind => $handler_kind,
+        selection_role => 'ordered_required',
     );
     return '
 
@@ -898,6 +993,7 @@ sub _emit_and_acode_seq_handler {
   unless(' . $index_condition . ') {
    ' . $lxcode . '
   }
+' . $slot_trace . '
 ' . $lmatch . '
 
   ' . $lscode . '
@@ -1002,6 +1098,13 @@ sub _emit_or_acode_handler {
         ],
         details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
     );
+    my $slot_trace = _slot_selection_trace(
+        enabled => $trace_enabled,
+        indent => ' ',
+        label => $label,
+        handler_kind => $handler_kind,
+        selection_role => 'choice',
+    );
     my $lx_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '  ',
@@ -1022,6 +1125,7 @@ sub _emit_or_acode_handler {
 ' . $lx_trace . '
  ' . $lxcode . '
  }
+' . $slot_trace . '
 ' . $lmatch . '
 
  ' . $acodes . '
@@ -1532,6 +1636,13 @@ sub _emit_rep_acode_handler {
         ],
         details_expr => 'sub { "return_ref=" . (ref($' . $label . ') || "") }',
     );
+    my $slot_trace = _slot_selection_trace(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        selection_role => 'choice',
+    );
     my $max_continue_condition = _trace_branch_condition(
         enabled => $trace_enabled,
         label => $label,
@@ -1564,6 +1675,7 @@ sub _emit_rep_acode_handler {
       return undef
      }
     }
+' . $slot_trace . '
 ' . $lmatch . '
 
     ' . $lscode . '

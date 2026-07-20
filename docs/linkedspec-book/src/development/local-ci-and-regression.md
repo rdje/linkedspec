@@ -192,10 +192,18 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
 two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
-runtime legs, fixes the `.1-.7` migration, and rejects 23 mutations. Canonical CI tracks both files and runs this
-neutral checker unconditionally. The rollout begins at 1 complete / 6 pending; no backend is promoted by `.1`.
-Its signoff passes Knowledge Map 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0
-1,031/1,031 in 635 seconds.
+runtime legs, fixes the `.1-.7` migration, and rejects 26 mutations. Canonical CI tracks the contract, checker,
+and admitted Perl consumer and runs:
+
+```bash
+prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+```
+
+The consumer's 12 roles cover native and loaded execution, repeated duplicate and non-duplicate sequences,
+first-authored choice, cross-target slots, descriptor, emitted and independently loaded generated v2 source,
+native/generated trace, and both typed diagnostics. Generated v2 embeds `dependency_slot_map` execution payload
+but keeps its plan rows exactly `{label, family}`. Rollout is now 2 complete / 5 pending: neutral plus Perl are
+complete, and Rust is the next repair owner.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

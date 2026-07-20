@@ -170,8 +170,11 @@ first authored slot. Descriptors and generated-v2 payloads preserve both identit
 decision does not imply a format bump. ADR `0047` and `linkedspec-duplicate-regex-slot-identity-v1` now ratify
 duplicate-text legality, `{target_rule, regex_index}` identity, required-slot ordered matching, earliest/first-
 authored choice priority, and repeated-sequence reset. The checker passes five exact fixtures, two diagnostics,
-six runtime inventory rows, 1 complete + 6 pending rollout, and 23 drift mutations. Perl/Rust repair, preserving-
-backend locks, and recurring/public children `.9.1.8.1.2-.7` remain dependency-ordered.
+and six runtime inventory rows. Perl `.2` now matches required compiled rows directly for ordinary, repeated, and
+cross-target AND execution; keeps first-authored choice; embeds exact generated-v2 slot payload without widening
+its `{label,family}` plan; and passes one 12-role consumer over live/loaded/descriptor/emitted/generated/trace and
+diagnostic routes. Governance is 2 complete + 5 pending / 26 mutations. Rust `.3`, preserving-backend locks
+`.4-.6`, and recurring/public `.7` remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

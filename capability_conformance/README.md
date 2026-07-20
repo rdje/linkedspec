@@ -110,8 +110,10 @@ duplicates, a non-duplicate repeated control, and cross-target duplicates. The c
 invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
 inventory, migration paths, and the seven-leg rollout. Run
 `python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
-and rejects 23 representative semantic, fixture, diagnostic, artifact, inventory, rollout, and CI mutations.
-Neutral governance is 1 complete / 6 pending; Perl `.2` is the first behavior owner.
+and rejects 26 representative semantic, fixture, diagnostic, artifact, inventory, rollout, admission, and CI
+mutations. Perl `.2` is now composed-admitted through 12 exact roles: required-slot execution, repeated reset,
+choice priority, cross-target identity, loaded/descriptor/emitted/generated routes, native/generated trace, and
+typed diagnostics. Governance is 2 complete / 5 pending; Rust `.3` is the next behavior owner.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

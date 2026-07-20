@@ -193,8 +193,8 @@ ok(ref($and_parser) eq 'CODE', 'AND top rule compiles without a global cursor op
 ok(!defined($and_result), 'AND top rule consumes at the current cursor from its family');
 like(
  $and_parser_source,
- qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, 'consume', \$info\)/,
- 'captured generated-source v2 derives the same consume policy as live AND execution',
+ qr/LinkedRE::match_slot\(\$STRING,[^\n]+, 'consume', \$info\)/,
+ 'captured generated-source v2 derives required-slot consume policy from live AND execution',
 );
 
 my $or_source = <<'SPEC';

@@ -188,8 +188,13 @@ sub _build_handler_variants {
 	 );
 	 $handlers{AND_SINGLE_ACODE} = $emit_handler->($ir_v) if defined $ir_v;
 	}
- # AND multi-regex: sequential matching (only when > 1 regex and > 1 acode)
- if ($isAND && $has_acodes && @$acodes_ref > 1 && ($args{regex_count} // 0) > 1) {
+ # AND action sequences are driven by compiled dependency slots.  Same-rule
+ # edges contribute local regexes; cross-target indexed edges do not, but they
+ # still form the same ordered structural-slot sequence.
+ my $dependency_count = ref($args{dependency_refs}) eq 'ARRAY'
+  ? scalar(@{$args{dependency_refs}})
+  : 0;
+ if ($isAND && $has_acodes && @$acodes_ref > 1 && $dependency_count > 1) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
    %ir_args, acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
   );

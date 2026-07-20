@@ -457,8 +457,8 @@ SPEC
  );
  like(
   $consume_source,
-  qr/LinkedRE::or\([^\n]+,\s*'consume'/,
-  'AND generated handler uses the family-derived contiguous matcher form',
+  qr/LinkedRE::match_slot\([^\n]+,\s*'consume',\s*\$info\)/,
+  'AND generated handler uses the family-derived required-slot consume form',
  );
 
  my $seek_input = 'junkx';

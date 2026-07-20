@@ -61,10 +61,12 @@ the same Perl failure and dual-ABI Lua success, while a non-identical Perl repea
 audit changes no runtime behavior. Neutral `.1` now adopts ADR `0047` and executable
 `linkedspec-duplicate-regex-slot-identity-v1`: ordered execution matches its required structural slot, repeated
 AND resets its sequence, and choice uses earliest start then first-authored priority. Five fixtures, two
-diagnostics, six runtime inventory rows, and 23 mutations pass at 1 complete + 6 pending. Perl/Rust repairs
-`.2-.3`, preserving-backend locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered.
-Neutral signoff passes Knowledge Map 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0
-1,031/1,031 in 635 seconds.
+diagnostics, and six runtime inventory rows. Perl `.2` now matches required compiled rows directly for ordinary,
+repeated, and cross-target AND actions while preserving first-authored choice. Descriptor identity, exact slot
+trace, both typed diagnostics, loaded execution, and independently loaded generated v2 source are locked by one
+12-role consumer. Generated v2 embeds `dependency_slot_map` execution payload without widening its
+`{label,family}` plan. Governance is 2 complete + 5 pending with 26 rejected mutations. Rust repair `.3`,
+preserving-backend locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole

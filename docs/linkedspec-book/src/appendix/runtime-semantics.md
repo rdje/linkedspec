@@ -477,9 +477,18 @@ dispatch sequentially, bare `:` children dispatch as repeated choice.
 
 For rules with multiple edges:
 1. **AND mode**: edges are dispatched sequentially in declaration order.
-   Edge 0 must match for edge 1 to be attempted (contiguous consume).
-2. **OR mode**: edges are tried in any order. The first match wins. On the
-   next repetition, all edges are retried.
+   Edge 0 must match for edge 1 to be attempted (contiguous consume). Each step
+   matches its already-required target-rule/regex-index slot directly, so equal
+   regex text cannot alias a later step to an earlier slot.
+2. **OR mode**: all eligible edges participate in choice. Earliest match start
+   wins, and an equal-start tie selects the lowest authored order. On the next
+   repetition, all edges are eligible again.
+
+Duplicate regex text is legal. Structural slot identity is currently
+`{target_rule, regex_index}` and must survive descriptors, loaded/reconstructed
+state, generated-source execution, and trace. Ordered invariant loss reports
+`ordered_regex_slot_identity_lost`; an invalid compiled reference reports
+`regex_slot_identity_invalid`.
 
 ### 6.4 Mixed Edge Rejection
 

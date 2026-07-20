@@ -28,6 +28,7 @@ TOP_LEVEL_FIELDS = {
     "descriptor_contract",
     "generated_source_v2",
     "trace_contract",
+    "perl_admission",
     "implementation_inventory",
     "migration",
     "rollout",
@@ -80,8 +81,8 @@ INVENTORY = [
     (
         "perl",
         "perl",
-        "combined_alternation_then_expected_index",
-        "drift",
+        "match_required_slot_directly",
+        "implemented",
         "first_authored",
         "preserved",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.2",
@@ -134,7 +135,7 @@ INVENTORY = [
 ]
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.1"),
-    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.2"),
+    ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.2"),
     ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
     ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.5"),
@@ -154,6 +155,26 @@ MIGRATION = {
     "julia_consumer": "julia/test/duplicate_regex_slot_identity_contract_test.jl",
     "lua_consumer": "lua/test/duplicate_regex_slot_identity_contract_test.lua",
     "recurring_driver": "tools/check_duplicate_regex_slot_identity_five_backend.sh",
+}
+PERL_ADMISSION = {
+    "consumer": MIGRATION["perl_consumer"],
+    "canonical_driver": "tools/run_ci_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "dependency_slot_map",
+    "roles": [
+        "neutral_fixtures",
+        "live_ordered",
+        "live_choice",
+        "repeated_ordered",
+        "repeated_control",
+        "cross_target",
+        "loaded",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "generated_trace",
+        "invalid_identity_diagnostics",
+    ],
 }
 
 
@@ -438,6 +459,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
         },
         "trace contract drifted",
     )
+    require(contract["perl_admission"] == PERL_ADMISSION, "Perl admission drifted")
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list), "implementation inventory must be an array")
@@ -502,6 +524,7 @@ def validate_filesystem_contract() -> None:
         ROOT / MIGRATION["decision"],
         ROOT / MIGRATION["checker"],
         ROOT / "docs" / "knowledge" / "duplicate-regex-slot-identity-contract.md",
+        ROOT / PERL_ADMISSION["consumer"],
     ]
     require(all(path.is_file() for path in required_paths), "neutral contract file is missing")
     index_text = (ROOT / "docs" / "decisions" / "INDEX.md").read_text(encoding="utf-8")
@@ -527,8 +550,34 @@ def validate_filesystem_contract() -> None:
         "canonical CI omits checker tracked input",
     )
     require(
+        f"require_tracked_file {PERL_ADMISSION['consumer']}" in ci_text,
+        "canonical CI omits Perl consumer tracked input",
+    )
+    require(
         "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
         "canonical CI omits neutral checker execution",
+    )
+    require(
+        f"perl -c -Iperl {PERL_ADMISSION['consumer']}" in ci_text
+        and f"PERL5LIB= prove -Iperl {PERL_ADMISSION['consumer']}" in ci_text,
+        "canonical CI omits Perl consumer syntax or execution",
+    )
+    perl_consumer_text = (ROOT / PERL_ADMISSION["consumer"]).read_text(encoding="utf-8")
+    require(
+        all(f"sub role_{role}" in perl_consumer_text for role in PERL_ADMISSION["roles"]),
+        "Perl consumer role inventory drifted",
+    )
+    linked_re_text = (ROOT / "perl" / "LinkedRE.pm").read_text(encoding="utf-8")
+    emitter_text = (ROOT / "perl" / "LinkedSpec" / "HandlerVariantEmitter.pm").read_text(encoding="utf-8")
+    compiler_text = (ROOT / "perl" / "LinkedSpec" / "Compiler.pm").read_text(encoding="utf-8")
+    require("sub match_slot" in linked_re_text, "Perl required-slot matcher is missing")
+    require(
+        "LinkedRE::match_slot" in emitter_text and "regex_slot_selected" in emitter_text,
+        "Perl emitted required-slot or trace seam is missing",
+    )
+    require(
+        "dependency_slot_map" in compiler_text,
+        "Perl generated compiled-slot payload is missing",
     )
 
 
@@ -560,8 +609,8 @@ def mutation_checks(contract: dict[str, Any]) -> int:
     def remove_inventory(value: dict[str, Any]) -> None:
         value["implementation_inventory"].pop()
 
-    def advance_perl(value: dict[str, Any]) -> None:
-        value["rollout"][1]["status"] = "complete"
+    def regress_perl(value: dict[str, Any]) -> None:
+        value["rollout"][1]["status"] = "pending"
 
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("contract id", lambda value: value.__setitem__("contract_id", "stale")),
@@ -580,11 +629,14 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("generated format bump", lambda value: value["generated_source_v2"].__setitem__("plan_format_bump_required", True)),
         ("generated plan fields", lambda value: value["generated_source_v2"]["plan_row_fields"].append("regex_index")),
         ("trace identity", lambda value: value["trace_contract"]["fields"].remove("regex_index")),
+        ("Perl admission consumer", lambda value: value["perl_admission"].__setitem__("consumer", "t/other.t")),
+        ("Perl admission role", lambda value: value["perl_admission"]["roles"].pop()),
+        ("Perl ordered mechanism", lambda value: value["perl_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
         ("inventory omission", remove_inventory),
-        ("Perl inventory promotion", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "behavior_matches")),
+        ("Perl inventory regression", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift")),
         ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
         ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
-        ("premature Perl rollout", advance_perl),
+        ("Perl rollout regression", regress_perl),
         ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
         ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
     ]

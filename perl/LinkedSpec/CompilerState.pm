@@ -177,6 +177,7 @@ sub build_compiled_descriptor_meta {
  my $meta = compiled_spec_state_meta($compiled_spec_state);
  $meta->{cursor_contract} = 'linkedspec-rule-local-cursor-v1';
  $meta->{entry_rule_contract} = 'linkedspec-root-rule-selection-v1';
+ $meta->{regex_slot_identity_contract} = 'linkedspec-duplicate-regex-slot-identity-v1';
  $meta->{action_rewriter_migration} = $args{action_rewriter_migration}
   if exists $args{action_rewriter_migration};
  return $meta

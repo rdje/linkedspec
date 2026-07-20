@@ -266,6 +266,27 @@ returns. (The `\s*=\s*` separator is folded into the name slot: a bare edge-less
 in an `AND` rule is a positional anchor that is not separately captured, so attach the
 separator to a slot that owns an edge.)
 
+Regex text does not define slot identity. Two ordered slots may deliberately use
+the same pattern:
+
+```text
+Top::AND
+ /a/ -> Top[0] { set(first_seen, true) }
+ /a/ -> Top[1] { return("ordered-ok") }
+```
+
+On input `aa`, the first step matches `Top[0]` and the second matches `Top[1]`.
+The second action is not mistaken for the first merely because both patterns are
+`/a/`. Each action edge selects a structural `{target rule, regex index}` slot,
+and a repeated `AND{...}` rule restarts that ordered slot sequence on every
+iteration.
+
+Choice is intentionally different. When two eligible choice slots match at the
+same earliest position, the first authored slot wins. This is stable source
+priority, not an attempt to recover identity from pattern text. The contract is
+`linkedspec-duplicate-regex-slot-identity-v1`; the Perl reference implements it,
+with the remaining backend admissions tracked separately.
+
 ## Single choice: `:|`
 
 `:|` means one successful choice among the configured alternatives:

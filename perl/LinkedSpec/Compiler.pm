@@ -168,6 +168,31 @@ sub _dependency_regex_source_expression {
  return 'LinkedRE::oredRE(' . join(', ', @regex_exprs) . ')'
 }
 
+sub _dependency_slot_map_source_expression {
+ my ($compiled_spec_state, $owner_label) = @_;
+ my $owner_info = _call_compiler_state('compiled_spec_state_rule_info', $compiled_spec_state, $owner_label);
+ return undef unless ref($owner_info) eq 'HASH' && ref($owner_info->{dependency_refs}) eq 'ARRAY';
+ my @slot_exprs;
+ foreach my $dependency_ref (@{$owner_info->{dependency_refs}}) {
+  next unless ref($dependency_ref) eq 'HASH';
+  my $dependency_label = $dependency_ref->{label};
+  my $dependency_index = $dependency_ref->{idx};
+  my $dependency_info = _call_compiler_state(
+   'compiled_spec_state_rule_info', $compiled_spec_state, $dependency_label,
+  );
+  next unless ref($dependency_info) eq 'HASH' && ref($dependency_info->{re}) eq 'ARRAY';
+  next unless defined($dependency_index) && exists $dependency_info->{re}[$dependency_index];
+  my $pattern_literal = _quote_generated_source_string('' . $dependency_info->{re}[$dependency_index]);
+  push @slot_exprs,
+   '  { label => ' . _quote_generated_source_string($dependency_label)
+    . ', idx => ' . (0 + $dependency_index)
+    . ', re => do { my $linkedspec_pattern = ' . $pattern_literal
+    . '; qr/$linkedspec_pattern/ } }';
+ }
+ return undef unless @slot_exprs;
+ return "[\n" . join(",\n", @slot_exprs) . "\n ]"
+}
+
 sub _generated_source_postamble {
  my (%args) = @_;
  my $plan_literal = _generated_source_plan_literal($args{plan});
@@ -1429,6 +1454,18 @@ if ($validate_dependency_regex_references_error) {
   my $source_identity = _generated_source_identity($option, $runtime_ctx);
   my $plan = _generated_source_plan_rows($compiled_spec_state);
   my $entry_rules = _generated_source_entry_rule_rows($compiled_spec_state);
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n },\n dependency_slot_map => {\n");
+  my $slot_once = 0;
+  foreach my $label (@glabels) {
+   my $slot_rows = _dependency_slot_map_source_expression($compiled_spec_state, $label);
+   next unless defined $slot_rows;
+   my $prefix = $slot_once++ ? ",\n" : '';
+   _call_runtime_ctx(
+    'emit_runtime_ctx_parser_source_line',
+    $runtime_ctx,
+    $prefix . ' ' . $label . ' => ' . $slot_rows,
+   );
+  }
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n");
   _call_runtime_ctx(
    'emit_runtime_ctx_parser_source_line',

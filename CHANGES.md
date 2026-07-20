@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity
+
+Perl ordered action execution now matches the already-required structural slot directly instead of asking a
+combined alternation to rediscover its index. Same-rule duplicates, repeated duplicates, non-duplicate controls,
+and cross-target indexed duplicates all preserve `{target_rule, regex_index}` through action dispatch. OR/default
+choice keeps its existing earliest-start and first-authored tie behavior.
+
+Descriptors publish `linkedspec-duplicate-regex-slot-identity-v1`. Standalone generated-source v2 embeds an exact
+`dependency_slot_map` compiled payload while its public format and minimal `{label, family}` plan rows remain
+unchanged. Ordered execution asserts its matcher identity, and debug trace now exposes `regex_slot_selected` with
+rule, selection role, target rule, and regex index. Stable `regex_slot_identity_invalid` and
+`ordered_regex_slot_identity_lost` failures cover malformed state and execution invariant loss.
+
+The exact Perl consumer runs 12 roles over the neutral fixtures, live and loaded parsers, descriptor, emitted and
+independently loaded generated source, native/generated trace, repetition, choice, cross-target identity, and
+diagnostics. Perl advances the contract to implemented and rollout governance to 2 complete + 5 pending with 26
+rejected mutations; Rust remains the next repair owner.
+
+Signoff passes Knowledge Map 638 facts / 4,693 question keys, mdBook, all four doctrines, canonical primary CLI
+65/65 in both environments, and Phase 0 1,031/1,031 in 615 seconds. Exact cleanup removes the consumed 11 MiB
+mdBook build and 28 KiB Python cache while preserving tracked evidence.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract
 
 ADR `0047` and executable `linkedspec-duplicate-regex-slot-identity-v1` now distinguish structural identity from

@@ -5971,9 +5971,9 @@ before implementation.
     and lock repeated identical slots, actions, marks, generated plans, traces, and non-identical behavior without
     relying on author-written regex distinctions.
   Verification: `Activated task-tree-first on 2026-07-19 only after recurring cursor admission `.9.1.8` landed
-    at clean commit `a1911ec6`. Audit `.0` then landed at clean commit `4902f218` with exact six-runtime evidence,
-    canonical 1,031/619s, no generated artifacts, a zero-byte brief, and no background job; neutral `.1` activates
-    from that boundary before any backend behavior changes.`
+    at clean commit `a1911ec6`. Audit `.0` landed at `4902f218`; neutral `.1` landed at clean commit `93ee7935`
+    with 5/2/6/1+6/23 governance, canonical 1,031/635s, no generated artifacts, a zero-byte brief, and no
+    background job. Perl repair `.2` activates from that boundary.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.0`
@@ -6100,13 +6100,54 @@ before implementation.
     635 seconds. Exact generated book/Python/cache/temp cleanup follows proof.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and admit the Perl reference duplicate-slot identity contract.
   Dependencies: `.9.1.8.1.1`
   Acceptance: Repair the narrow compiler/matcher/handler seam or emit the ratified typed rejection; lock live,
     loaded, descriptor, emitted/generated-v2, trace, recursive, indexed, and non-identical behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `Activated task-tree-first from clean neutral-contract commit `93ee7935` at ahead 245. The tree
+    and untracked state were clean, `git_message_brief.txt` was zero bytes, generated Rust/Dart/Python/mdBook/temp
+    output was absent, free disk was 61 GiB, and no background job remained. Retrieve ADR `0047`, the executable
+    contract/checker, audit mechanisms, and Perl toolbox seams before changing matcher/handler behavior. Exact
+    toolbox RED reproduced the later duplicate alias while descriptors retained both rows. Focused GREEN
+    passes all five neutral fixtures, the 12-role Perl consumer, generated-source/cursor/trace regression suites,
+    and neutral governance at 2 complete + 5 pending / 26 mutations. Knowledge Map 638/4,693, mdBook, memory,
+    task metadata, whitespace, JSON/shell, all four doctrines, canonical primary CLI 65/65x2, and Phase 0
+    1,031/1,031 in 615 seconds pass. Exact generated mdBook/Python-cache cleanup completes proof.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.2 - implement Perl duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE RED** — Use the neutral fixture plus `LinkedSpec::Get`, descriptor/emitted source,
+    and trace/toolbox evidence to reproduce exact live/generated ordered failure and green choice/control behavior.
+  - [x] **REPAIR REQUIRED-SLOT EXECUTION** — Preserve the known target-rule/regex-index identity through ordinary
+    and repeated Perl ordered handlers without regex-text recovery or choice-priority changes.
+  - [x] **PROJECT / DIAGNOSE** — Publish the contract identity in descriptors, preserve generated-v2 plan shape,
+    emit exact slot-selection trace/invariants where applicable, and retain portable invalid-identity diagnostics.
+  - [x] **ADMIT PERL REFERENCE** — Add one exact contract consumer over live, loaded, descriptor, emitted/generated,
+    trace, repeated, cross-target, non-identical, choice, and diagnostic roles; advance only Perl rollout.
+  - [x] **LOCKSTEP / COMMIT** — Update contract/checker inventory, task/index/roadmaps/architecture/live/memory,
+    changes/notes/book/KM; pass focused/canonical proof and cleanup; commit `.2`; activate Rust `.3` only cleanly.
+
+  #### Completion Evidence
+
+  - `LinkedRE::match_slot` tests only the already-required compiled regex under the rule-local seek/consume policy,
+    snapshots whole/positional/named captures inside Perl's successful dynamic match scope, and returns the exact
+    selection role, target rule, and regex index. Ordered handlers assert that identity before dispatch.
+  - Live descriptors retain full `dependency_refs`; generated-source v2 embeds a compiled `dependency_slot_map`
+    execution payload while the public generated format and minimal `{label,family}` plan rows remain unchanged.
+    Cross-target AND variant selection now counts dependency rows, eliminating its metadata/emitter family drift.
+  - Portable trace serializes `regex_slot_selected` identity. Stable `regex_slot_identity_invalid` and
+    `ordered_regex_slot_identity_lost` failures cover malformed compiled rows and matcher/handler identity loss.
+  - `t/duplicate_regex_slot_identity_perl_contract.t` passes 12 exact roles spanning all five neutral fixtures,
+    live/loaded/generated execution, descriptor/emitted source, native/generated trace, ordinary/repeated/control/
+    cross-target/choice behavior, capture snapshots, and both diagnostic routes.
+  - Governance reports five fixtures, two diagnostics, six runtime rows, 2 complete + 5 pending rollout legs,
+    and 26 rejected mutations. Only Perl advances; Rust `.3` remains the next repair owner.
+  - Final signoff passes Knowledge Map 638 facts / 4,693 question keys, mdBook, memory/task metadata, whitespace,
+    JSON/shell, all four doctrines, canonical primary CLI 65/65 in default and POSIX environments, and Phase 0
+    1,031/1,031 in 615 seconds. The consumed 11 MiB mdBook build and 28 KiB Python cache are removed exactly;
+    tracked evidence is preserved and no background verification remains.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.3`
   Status: `pending`
@@ -8720,7 +8761,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `active` | Duplicate-slot identity is split into audit, neutral contract, five backend lanes, and recurring/public closeout `.0-.7`. |
 | 219.1.0 | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `done` | Exact six-runtime native/generated ordered/choice audit, repeated/control evidence, mechanism split, KM 636/4,678, canonical 1,031/619s, lockstep, and cleanup pass without behavior changes. |
 | 219.1.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `done` | ADR 0047, 5 fixtures, 2 diagnostics, 6 runtime rows, 1+6 rollout, 23 mutations, KM 637/4,685, canonical 1,031/635s, lockstep, and cleanup pass without backend behavior changes. |
-| 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `pending` | Implement and admit the Perl reference contract. |
+| 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `done` | Required-slot Perl execution and its 12-role admission pass at 2+5/26, KM 638/4,693, canonical 1,031/615s, lockstep, and exact cleanup before Rust `.3`. |
 | 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `pending` | Implement and admit Rust parity. |
 | 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `pending` | Implement and admit Dart parity. |
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `pending` | Implement and admit Julia parity. |
@@ -9803,6 +9844,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Clean commit `93ee7935` lands neutral duplicate-slot contract `.9.1.8.1.1`; tracked/untracked
+  state is clean, the brief is zero bytes, generated artifacts are absent, free disk is 61 GiB, and ahead is 245.
+  Perl reference repair/admission `.9.1.8.1.2` activates task-tree-first before Rust or preserving-backend lanes.
+- `2026-07-20`: Perl `.9.1.8.1.2` focused proof passes all five fixtures and 12 admission roles. Ordered handlers
+  match required compiled rows directly, generated v2 embeds slot payload without plan widening, cross-target
+  AND uses dependency-row sequence shape, trace exposes exact identity, and governance reaches 2+5/26. KM
+  638/4,693, mdBook/four doctrines, canonical primary 65x2, Phase 0 1,031/1,031 in 615 seconds, and exact cleanup
+  pass; commit preparation is the only remaining workflow step before any Rust pivot.
 - `2026-07-20`: Neutral duplicate regex-slot identity `.9.1.8.1.1` is signoff-complete from clean `4902f218`.
   ADR `0047`, the independent 5-fixture model, 2 diagnostics, descriptor/trace/generated-v2 obligations, 6 runtime
   rows, 1+6 rollout, and 23 mutations pass without backend behavior changes. The first canonical attempt caught a

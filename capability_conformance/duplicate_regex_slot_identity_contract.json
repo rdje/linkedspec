@@ -142,8 +142,15 @@
     "selection_role_values": ["ordered_required", "choice"],
     "identity_source": "compiled_structural_slot"
   },
+  "perl_admission": {
+    "consumer": "t/duplicate_regex_slot_identity_perl_contract.t",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "dependency_slot_map",
+    "roles": ["neutral_fixtures", "live_ordered", "live_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "descriptor", "emitted_source", "generated_direct", "generated_trace", "invalid_identity_diagnostics"]
+  },
   "implementation_inventory": [
-    {"backend": "perl", "runtime": "perl", "ordered_mechanism": "combined_alternation_then_expected_index", "ordered_status": "drift", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
+    {"backend": "perl", "runtime": "perl", "ordered_mechanism": "match_required_slot_directly", "ordered_status": "implemented", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
     {"backend": "rust", "runtime": "rust", "ordered_mechanism": "combined_alternation_then_expected_index", "ordered_status": "drift", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
     {"backend": "dart", "runtime": "dart", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
     {"backend": "julia", "runtime": "julia", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
@@ -162,7 +169,7 @@
   },
   "rollout": [
     {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.1"},
-    {"capability": "perl_reference", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
+    {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
     {"capability": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
     {"capability": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
     {"capability": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
