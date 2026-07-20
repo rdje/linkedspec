@@ -174,6 +174,19 @@ primary projection, and generated/capability/language-coverage ledgers. Run
 canonical local gate. The current cursor ledger is 7 complete / 1 pending with 72 governed migration files and
 56 rejected drift mutations; final public no-drift remains separately owned.
 
+The duplicate-slot audit following that admission deliberately uses temporary probes rather than adding a new
+gate before the neutral contract exists. `LinkedSpec::Get`, `return_descriptor`, emitted/standalone source, and a
+routed debug trace establish the Perl failure mechanism. Native/generated probes then freeze the six-runtime
+boundary: Perl and Rust reject the later duplicate in ordered AND; Dart, Julia, PUC Lua, and LuaJIT preserve it;
+all six choose the first duplicate in OR. Repeated Perl versus dual-ABI Lua and a non-identical Perl control prove
+that the distinction is slot identity rather than repetition generally. All disposable Rust/Dart/Julia/Lua probe
+outputs are removed immediately after measurement. Leaf `.9.1.8.1.1` owns the first durable neutral contract,
+checker, fixtures, mutations, and canonical registration; audit `.0` does not pre-empt that decision or change
+runtime behavior.
+
+The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
+all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.
+
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.

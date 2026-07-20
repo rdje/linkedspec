@@ -5960,14 +5960,148 @@ before implementation.
     a clean handoff before activating `.9.1.8.1` or public no-drift `.9.1.9`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1`
-  Status: `pending`
+  Status: `active`
   Goal: Decide and repair indexed dependency identity when one rule owns textually identical regex alternatives.
   Dependencies: `.9.1.8`
+  Children: `.9.1.8.1.0`, `.9.1.8.1.1`, `.9.1.8.1.2`, `.9.1.8.1.3`, `.9.1.8.1.4`, `.9.1.8.1.5`,
+    `.9.1.8.1.6`, `.9.1.8.1.7`
   Acceptance: Reproduce the Perl `LinkedRE::oredRE` leftmost-alternative index alias with the toolbox; inventory
     whether native/generated roles in all five backends preserve slot identity for identical patterns; ratify the
     language-level expectation; implement the narrow compiler/runtime representation or emit a portable rejection;
     and lock repeated identical slots, actions, marks, generated plans, traces, and non-identical behavior without
     relying on author-written regex distinctions.
+  Verification: `Activated task-tree-first on 2026-07-19 only after recurring cursor admission `.9.1.8` landed
+    at clean commit `a1911ec6`; the branch was clean at ahead 243, `git_message_brief.txt` was zero bytes, no
+    background job remained, and Rust/Dart/Julia/mdBook/Python/temp generated artifacts were absent. Reproduce
+    the identical-alternative index alias with LinkedSpec's toolbox before changing compiler/runtime behavior.`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.0`
+  Status: `done`
+  Goal: Reproduce, inventory, and mechanism-split identical dependency-regex slot identity before behavior changes.
+  Dependencies: `.9.1.8`
+  Acceptance: Use `LinkedSpec::Get`, `return_descriptor`, emitted-source capture, routed debug trace, and exact
+    native/generated probes to freeze duplicate-slot behavior for ordered AND and choice/OR roles across Perl,
+    Rust, Dart, Julia, PUC Lua, and LuaJIT. Distinguish language ambiguity from a lost known sequence identity;
+    locate every compiler/runtime/generated/descriptor seam; define focused fixtures, diagnostics, migration
+    inventory, and per-backend child boundaries without changing parser/compiler/runtime behavior.
+  Verification: `Activated with parent `.9.1.8.1` from clean `a1911ec6`; Knowledge Map fact
+    `perl-identical-dependency-regex-index-aliasing`, Toolbox, ADR `0044`, and ADR `0045` were retrieved before
+    reproduction. Exact non-repeated native/generated evidence is Perl+Rust null versus Dart+Julia+PUC Lua+
+    LuaJIT ordered-ok; every choice role selects the first authored duplicate. Repeated Perl live/emitted is null,
+    repeated PUC Lua/LuaJIT native/generated returns two ordered pairs, and non-identical Perl live/emitted remains
+    exact. Descriptor/compiled/generated payload identity survives; only Perl/Rust combined-alternation execution
+    aliases the later required slot. No behavior edit occurred. Focused governance, Knowledge Map 636/4,678,
+    mdBook, all four doctrines, canonical primary 65/65x2, and Phase 0 1,031/1,031 in 619 seconds pass; exact
+    generated-output cleanup completes signoff.`
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE** — Routed Perl debug trace reproduces later slot 3 as match index 1 and marks
+    `required_sequence_index` skipped; `return_descriptor` retains indices 0..4 and emitted handler source shows
+    the combined match followed by expected-index comparison.
+  - [x] **INVENTORY ALL ROLES** — Temporary exact native/generated probes measured ordered AND and choice/OR on
+    Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; reconstructed compiled payloads, descriptors, emitted source, and
+    minimal generated plans retain both slots. Repeated and non-identical controls isolate the same boundary.
+  - [x] **ROOT CAUSE / SEMANTIC BOUNDARY** — `LinkedRE::oredRE` and Rust `CompiledAlternation` return the first
+    matching duplicate from a combined alternation, then ordered handlers reject it against their already-known
+    later slot. Dart/Julia/Lua match that known slot directly. Choice remains genuine first-authored ambiguity.
+  - [x] **SPLIT / FREEZE** — Card `duplicate-regex-slot-identity-cross-backend-audit` freezes exact fixtures,
+    expected-slot versus choice semantics, ADR/contract/checker/test/driver migration paths, source seams, no-plan-
+    bump boundary, children `.1-.7`, and ADR `0045` stable-slot alignment before implementation.
+  - [x] **LOCKSTEP / COMMIT** — Synchronize task/index/roadmaps/architecture/live/memory/changes/notes/book/KM,
+    pass focused governance plus canonical CI, clean artifacts, commit `.0`, and only then activate `.1`.
+
+  #### Completion Evidence
+
+  - The durable five-slot Perl probe preserves dependency and action indices in its descriptor and emitted source,
+    but routed debug trace reports `match_index=1` where ordered execution requires `expected_index=3`; the handler
+    follows its existing `LX`/undefined path. This locates the failure after compilation and before action dispatch.
+  - The minimal two-slot `Top::AND` fixture over `aa` returns null on Perl live/standalone-emitted and Rust native/
+    generated execution. Dart, Julia, PUC Lua, and LuaJIT native/generated execution returns `ordered-ok`. The
+    corresponding duplicate `OR` fixture returns the first authored result on all six runtime legs.
+  - `Top::AND{2}` with two `/a/` slots over `aaaa` returns null in Perl live/emitted execution. PUC Lua and LuaJIT
+    native/generated execution returns `[["a","a"],["a","a"]]`; all three preserving backend sources reuse
+    their expected-slot loops for repetition. The non-identical `/a/`, `/b/` Perl control over `abab` still returns
+    `[["a","b"],["a","b"]]` live/emitted, proving ordinary order and repetition are not generally broken.
+  - Perl `LinkedRE.pm:48-52`, `Compiler.pm:654-725`, and `HandlerVariantEmitter.pm:833-914,1335-1429` form one
+    aliasing chain. Rust repeats it in generated-plan `engine.rs:803-933` and ordinary `engine.rs:2665-2777`, over
+    `helpers.rs:52-150`. Dart `interpreter.dart:938-1073`, Julia `Interpreter.jl:1024-1155`, and Lua
+    `interpreter.lua:3565-3635` instead test one required pattern and reindex the resulting match.
+  - The proposed `.1` decision is intentionally not pre-ratified here: ordered execution should preserve its known
+    structural slot, choice should retain first-authored priority, duplicate text should remain legal, and identity
+    must never be recovered from text/adjacency. Exact neutral governance will make that language decision in ADR
+    `0047`; `.2-.6` then repair/lock backends and `.7` owns recurring/public admission.
+  - Disk-pressure cleanup is operationally complete: exact inactive pgen build/test logs and one log-only battery
+    directory had no process or open handle and were removed from `/private/tmp`, raising free space from 25 GiB to
+    64 GiB. Final LinkedSpec book/Python/temp generated output was removed after proof and tracked `rgx` evidence
+    is preserved.
+  - Focused Knowledge Map, memory, task metadata, mdBook, whitespace, and four-doctrine checks pass. The canonical
+    local gate passes primary CLI 65/65 in both default and POSIX environments and Phase 0 1,031/1,031 in 619
+    seconds; optional backend matrices remain independently owned by the already-captured exact audit probes.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.1`
+  Status: `pending`
+  Goal: Ratify and executable-lock portable duplicate regex-slot identity before backend repair.
+  Dependencies: `.9.1.8.1.0`
+  Acceptance: Adopt the ordered-versus-choice language rule, descriptor/generated identity, typed diagnostics,
+    exact neutral fixtures, rollout ledger, migration inventory, and omission-sensitive mutations without changing
+    backend behavior; reconcile ADR `0044` with ADR `0045` named-slot direction.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.2`
+  Status: `pending`
+  Goal: Implement and admit the Perl reference duplicate-slot identity contract.
+  Dependencies: `.9.1.8.1.1`
+  Acceptance: Repair the narrow compiler/matcher/handler seam or emit the ratified typed rejection; lock live,
+    loaded, descriptor, emitted/generated-v2, trace, recursive, indexed, and non-identical behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.3`
+  Status: `pending`
+  Goal: Implement and admit Rust duplicate-slot identity parity.
+  Dependencies: `.9.1.8.1.2`
+  Acceptance: Match the ratified Perl reference through native, reconstructed, generated-plan/source, trace,
+    primary, and corpus roles without source-text identity recovery.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.4`
+  Status: `pending`
+  Goal: Implement and admit Dart duplicate-slot identity parity.
+  Dependencies: `.9.1.8.1.3`
+  Acceptance: Match the ratified reference through native, normalized emitted, reconstructed, generated-plan/
+    source, trace, primary, and corpus roles with portable failures and stable slot identity.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.5`
+  Status: `pending`
+  Goal: Implement and admit Julia duplicate-slot identity parity.
+  Dependencies: `.9.1.8.1.4`
+  Acceptance: Match the ratified reference through native, normalized emitted, reconstructed, generated-plan/
+    source, trace, primary, and corpus roles with portable failures and stable slot identity.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.6`
+  Status: `pending`
+  Goal: Implement and admit dual-ABI Lua duplicate-slot identity parity.
+  Dependencies: `.9.1.8.1.5`
+  Acceptance: Run one shared-source exact consumer on PUC Lua and LuaJIT across native, normalized, reconstructed,
+    generated-v2, trace, primary, and corpus roles with identical stable slot identity.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.7`
+  Status: `pending`
+  Goal: Close duplicate-slot identity with recurring five-backend and public no-drift admission.
+  Dependencies: `.9.1.8.1.6`
+  Acceptance: Compose every admitted runtime/generated role, exact primary/corpus cases, public guidance, capability
+    truth, migration/stale guards, and independent mutations; close `.9.1.8.1` only with clean canonical proof.
   Verification: `pending`
   Commit: `pending`
 
@@ -8535,7 +8669,15 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 218.5 | `FUTURE-PARITY-BACKLOG.9.1.7.5` | `done` | Global API/CLI/trace ownership removed; exact 96/96x2, package 177/177x2, primary 65/65x4, corpus 105/105x2, governance 68/5+3/44, KM 631/4,632, canonical 1,031/646s, and cleanup pass. |
 | 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `done` | Exact 15-role admission passes 119x2, package 177x2, primary 65x4, corpus 105x2, 69/6+2/49 governance, KM/mdBook/doctrines, and canonical 1,031/647s. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `done` | Recurring six-runtime plus selected 5x2x5 cursor admission passes at 72/7+1/56; KM 635/4,670, canonical 1,031/631s, lockstep, and cleanup pass from clean base `6693ffb4`. |
-| 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `pending` | Decide and repair/reject identical dependency-regex slot-index aliasing across all backends. |
+| 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `active` | Duplicate-slot identity is split into audit, neutral contract, five backend lanes, and recurring/public closeout `.0-.7`. |
+| 219.1.0 | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `done` | Exact six-runtime native/generated ordered/choice audit, repeated/control evidence, mechanism split, KM 636/4,678, canonical 1,031/619s, lockstep, and cleanup pass without behavior changes. |
+| 219.1.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `pending` | Ratify and executable-lock portable duplicate-slot semantics, identity, diagnostics, inventory, and rollout. |
+| 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `pending` | Implement and admit the Perl reference contract. |
+| 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `pending` | Implement and admit Rust parity. |
+| 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `pending` | Implement and admit Dart parity. |
+| 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `pending` | Implement and admit Julia parity. |
+| 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `pending` | Implement and admit PUC Lua plus LuaJIT parity. |
+| 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `pending` | Close recurring five-backend and public no-drift admission. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
@@ -9224,6 +9366,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | Toolbox descriptor/emitted/trace proof; exact six-runtime native/generated ordered and choice probes; repeated Perl and dual-ABI Lua plus non-identical control; source-mechanism inventory; KM 636/4,678; mdBook/memory/task/four doctrines/whitespace; canonical primary 65x2 and Phase 0 1,031/1,031 in 619s; exact generated-output and disk-pressure cleanup. | PASS. Identity survives compilation and artifact reconstruction; only ordered Perl/Rust combined-alternation execution aliases a later duplicate slot. No behavior changes; neutral `.1` waits for this clean commit. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.8` | Exact schema/driver/registration RED sequence; neutral 36/18/8 and 14+15+15+15+15 roles; Perl 288; Rust/Dart exact consumers; Julia 104; Lua 119x2; selected primary 5x2x5; generated/capability 80/0/0; coverage 246/105+1/122; governance 72/7+1/56; KM 635/4,670; mdBook/memory/KM/JSON/shell/whitespace/four doctrines; canonical primary 65x2 and Phase 0 1,031/1,031 in 631s; safe generated-output cleanup. | PASS. One omission-sensitive recurring gate admits six runtime legs without another semantic path; only recurring admission advances and the clean commit must precede `.9.1.8.1`. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | Root checker exact schema/registration/public RED sequence to 8/3/3, 7+0, 25 documents, 19 stale guards, and 54 mutations; recurring Perl 7+5, Rust/Dart/Julia exact admissions, Lua 139x2, selected primary 5x2x6, generated/capability/coverage ledgers; current primary marker 63->65 repair in logical/diagnostic contracts; cursor inventory 69->71 cross-contract ownership at unchanged 6+2/49; KM 634/4,662; mdBook/memory/KM/JSON/shell/whitespace/four doctrines; canonical primary 65x2 and Phase 0 1,031/1,031 in 642s; safe generated-output cleanup. | PASS. Root-selection parity and parent `.9.1.1.2` close without another resolver or generated-plan change; clean commit must precede the next task-tree. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.7.6` | Exact 3/3x2 pre-contract RED; one shared-source 15-role consumer; focused 119/119x2; complete dual-ABI package 177/177x2; primary 65/65x4; corpus 105/105x2; cursor 69/6+2/49; adjacent root/generated/logical/capability; KM 632/4,642; mdBook/memory/task/KM/JSON/shell/whitespace/four doctrines; canonical root 7+5, cursor 288, primary 65x2, Phase 0 1,031/1,031 in 647s; safe book/cache cleanup with durable issue logs retained. | PASS. Only Lua advances; parent `.9.1.7` closes and the clean commit precedes root admission `.9.1.1.2.5.3`. |
@@ -9427,6 +9570,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity` | Exact ordered/choice/repeated/control cross-runtime audit, mechanism split, roadmap/book/KM lockstep, canonical 1,031/619s, and cleanup freeze the boundary without behavior changes. |
 | `FUTURE-PARITY-BACKLOG.9.1.8` | `FUTURE-PARITY-BACKLOG.9.1.8 - admit recurring cursor parity` | Six-runtime recurring gate, selected 5x2x5 primary proof, 72/7+1/56 governance, roadmap/book/KM lockstep, canonical 1,031/631s, and cleanup admit cursor parity. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.6` | `FUTURE-PARITY-BACKLOG.9.1.1.2.6 - close root selection parity` | Six-runtime recurring gate, 5x2x6 primary proof, 25-document/19-stale public contract, 54 mutations, roadmap/book/KM lockstep, canonical 1,031/642s, and cleanup close root parity. |
 | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2` | `FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 - align Lua root selection routes` | Loaded/reconstructed/generated-v1/emitted route convergence, typed wrapper failures, low selection trace, entry-`I` fixtures, 101x2 focused, exact 32/65x4 primary, 105x2 corpus, 625/4,561 KM, canonical 1,031/643s, and cleanup without artifact or rollout promotion. |
@@ -9609,6 +9753,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Duplicate regex-slot identity audit `.9.1.8.1.0` is signoff-complete from clean `a1911ec6`.
+  Exact six-runtime native/generated ordered and choice probes, repeated/control evidence, descriptors/emitted/
+  reconstructed payloads, and source mechanisms isolate ordered Perl/Rust combined-alternation aliasing without
+  a behavior edit. KM 636/4,678, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619
+  seconds pass. Exact disk-pressure and generated-output cleanup completes before the commit and neutral `.1`.
+- `2026-07-19`: Clean commit `a1911ec6` lands recurring cursor admission `.9.1.8`; tracked/untracked state is
+  clean, the brief is zero bytes, safe generated artifacts are absent, and ahead is 243. Identical dependency-
+  regex slot identity `.9.1.8.1` activates task-tree-first for toolbox reproduction before semantic decisions.
 - `2026-07-19`: Cursor recurring admission `.9.1.8` is signoff-complete from clean `6693ffb4`. One
   omission-sensitive driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected primary 5x2x5, and support
   ledgers without another semantic path. Governance is 72 files / 7 complete + 1 pending / 56 mutations; KM

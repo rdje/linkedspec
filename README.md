@@ -163,8 +163,12 @@ the current ledger to 72 files, 7 complete / 1 pending, and 56 rejected mutation
 governance added two cross-contract scanner paths and recurring cursor admission added its governed driver.
 Run `bash tools/check_rule_local_cursor_five_backend.sh` for the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof,
 selected 5x2x5 primary projection, and support ledgers; canonical CI registers it behind
-`LINKEDSPEC_RUN_CURSOR_MATRIX=1`. Identical dependency-regex identity `.9.1.8.1` and final public no-drift
-`.9.1.9` remain dependency-ordered.
+`LINKEDSPEC_RUN_CURSOR_MATRIX=1`. Behavior-free duplicate regex-slot audit `.9.1.8.1.0` now establishes the exact
+next boundary: Perl and Rust lose a later identical slot only in ordered combined-alternation execution, while
+Dart, Julia, PUC Lua, and LuaJIT preserve the required slot; every backend resolves duplicate OR choice to the
+first authored slot. Descriptors and generated-v2 payloads preserve both identities, so the staged neutral
+decision does not imply a format bump. Neutral contract, backend repair/lock, and recurring/public children
+`.9.1.8.1.1-.7` plus final cursor no-drift `.9.1.9` remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

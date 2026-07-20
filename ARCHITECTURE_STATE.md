@@ -4,7 +4,19 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-19`
+- Last refreshed: `2026-07-20`
+- `2026-07-20` duplicate regex-slot audit refresh: behavior-free `FUTURE-PARITY-BACKLOG.9.1.8.1.0` proves every
+  parser/compiler/descriptor/generated payload retains two identical authored slots, while ordered execution
+  diverges later. Perl `LinkedRE::oredRE` and Rust `CompiledAlternation` match one combined alternation, report
+  the earlier duplicate branch, and fail their expected-sequence-index check. Dart `_matchSpecific`, Julia
+  `_match_runtime_specific`, and Lua `match_specific` instead compile the already-required pattern alone and
+  reattach its authored index. Exact ordinary native/generated probes return null for Perl/Rust and `ordered-ok`
+  for Dart/Julia/PUC Lua/LuaJIT; every duplicate OR chooses the first authored slot. Repeated Perl live/emitted
+  fails where both Lua ABIs native/generated preserve two pairs; a non-identical Perl repeated control is exact.
+  Generated plan v2 stays minimal `{label,family}` because compiled payload identity survives. ADR/neutral contract
+  `.1`, Perl/Rust repair `.2-.3`, preserving-backend locks `.4-.6`, and recurring/public closeout `.7` are frozen;
+  no executable behavior changes in the audit. Signoff passes KM 636/4,678, mdBook/four doctrines, canonical
+  primary 65x2, and Phase 0 1,031/1,031 in 619 seconds, followed by exact generated-output cleanup.
 - `2026-07-19` recurring cursor-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.8` adds no cursor semantics. One
   omission-sensitive driver composes the 14-role Perl consumer, exact 15-role Rust/Dart/Julia consumers, the same
   15-role Lua source on PUC Lua and LuaJIT, the selected 5x2x5 primary projection, and generated/capability/

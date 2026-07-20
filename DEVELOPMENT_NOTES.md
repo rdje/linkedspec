@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.0` — slot identity is structural, not regex-text identity):
+  The exact Perl trace is decisive: dependency slot 3 matches the correct bytes but `LinkedRE::oredRE` reports
+  slot 1 because both alternatives are `/\w+/`; the generated AND handler then rejects
+  `match_index=1` against `expected_index=3`. Descriptor and emitted-source inspection prove that compilation did
+  not deduplicate the slots. Rust independently repeats the same architecture in ordinary and generated-plan
+  loops over `CompiledAlternation`.
+
+  Dart, Julia, and Lua reveal the narrower portable implementation seam. Their ordered loops already know the
+  next index, compile only that pattern, then reindex the host match before action dispatch. Their OR matchers
+  still compare all eligible alternatives and break equal-position ties toward the lowest authored index. This
+  separates two questions that a combined matcher had conflated: ordered execution must preserve its required
+  structural slot; choice execution has a genuine ambiguity and uses deterministic source priority. Leaf `.1`
+  owns ratification, so `.0` records this boundary without silently changing the language contract.
+
+  The direct two-slot probes cover native and generated execution in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+  Compiled/descriptor/emitted inspection covers reconstruction and artifact identity. Repeated Perl versus both
+  Lua ABIs and a non-identical Perl control prove the defect composes through the repeated inner AND sequence but
+  is not a general repetition failure. The generated plan stays `{label,family}`: its reconstructed compiled rule
+  already carries ordered patterns and edge indices.
+
+  Cleanup followed the exact-artifact rule under acute disk pressure. A provenance sample identified 38 GiB of
+  `/private/tmp` logs as completed pgen builds, not LinkedSpec or durable source. Host process inspection and
+  `lsof` showed no writer; the exact resolved files and one log-only 1.6 GiB directory were removed. Free space
+  increased from 25 GiB to 64 GiB. Repository history, tracked `rgx/pgen-issues` logs, `.claude` state, and the
+  zero-byte commit brief were deliberately retained.
+
+  Final signoff passes Knowledge Map 636/4,678, mdBook, memory/task governance, all four doctrines, canonical
+  primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds. Generated book and Python cache
+  output is disposable and removed only after its proof has been consumed.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.8` — recurring admission composes; it does not reimplement):
   Every semantic cursor projection was already admitted before this leaf. The new driver therefore calls the
   contract-declared consumers as authoritative units, with PUC Lua and LuaJIT treated as distinct runtime legs

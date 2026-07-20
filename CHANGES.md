@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity
+
+This behavior-free audit separates duplicate pattern text from structural slot identity before changing a
+backend. LinkedSpec toolbox evidence shows that the parser/compiler, dependency references, action-edge indices,
+descriptors, emitted source, and generated-v2 reconstructed payload all preserve two authored slots. The loss
+occurs only when ordered Perl or Rust execution asks one combined alternation which duplicate branch matched and
+then compares its first-branch answer with an already-known later sequence index.
+
+Exact native/generated `Top::AND` probes return null on Perl and Rust and `ordered-ok` on Dart, Julia, PUC Lua,
+and LuaJIT. Exact duplicate `OR` probes choose the first authored slot on every runtime. A repeated duplicate
+fixture returns null in Perl live/emitted execution and two ordered pairs in PUC Lua/LuaJIT native/generated
+execution; a non-identical repeated Perl control remains exact live/emitted. The preserving runtimes match the
+required sequence pattern directly and attach its authored index.
+
+The durable audit freezes ADR/neutral contract `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, dual-ABI Lua
+`.6`, and recurring/public `.7`. It also fixes the migration inventory and records that generated-source v2 needs
+no plan-format bump: ordered pattern and edge identity already lives in its compiled payload. No source, compiler,
+runtime, descriptor, generated format, fixture, or capability behavior changes in `.0`.
+
+Artifact cleanup independently verifies 38 GiB of closed pgen build/test logs plus a 1.6 GiB log-only battery
+directory had no active process or open file handle before exact deletion. Free space rose from 25 GiB to 64 GiB;
+LinkedSpec build/cache/book/temp outputs remain absent and tracked `rgx` evidence is preserved.
+
+Signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance, all four doctrines,
+canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds. Final generated book and
+Python cache output is removed after proof.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity
 
 Rule-local cursor parity now has one recurring, omission-sensitive gate without another compiler or runtime path.

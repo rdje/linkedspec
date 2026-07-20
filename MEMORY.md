@@ -11,14 +11,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8` — recurring six-runtime cursor admission is fully verified,
-  documented, and cleaned; its per-leaf commit is prepared from clean base `6693ffb4`.
-- latest_commit: `6693ffb4` — `FUTURE-PARITY-BACKLOG.9.1.1.2.6 - close root selection parity`
-  (ahead: 242; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8 - admit recurring cursor parity` after complete signoff.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8` is commit-prepared; identical dependency-regex identity
-  `.9.1.8.1` remains dependency-gated until the repository is clean.
-- next_action: rerun final doc-only governance, commit `.9.1.8`, clear the brief, prove a clean handoff, and only
-  then activate `.9.1.8.1` task-tree-first.
+  documented, cleaned, and committed.
+- latest_commit: `a1911ec6` — `FUTURE-PARITY-BACKLOG.9.1.8 - admit recurring cursor parity`
+  (ahead: 243; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.0` duplicate-slot identity audit is signoff-complete from
+  clean `a1911ec6`; parent `.8.1` remains split through neutral/backend/closeout children `.0-.7`.
+- next_action: commit the completed behavior-free `.0` audit, clear and verify `git_message_brief.txt`, prove a
+  clean handoff, and only then activate neutral contract `.1` task-tree-first.
 - current_root_selection: ADR `0046` precedence is explicit selector > first authored `Rule::` > first authored
   `Rule:`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions plus the selected five-command/default-POSIX
   5x2x6 projection and support ledgers pass from one recurring driver. Governance is 7 complete / 0 pending,
@@ -45,5 +45,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.8` is verified, documented, and cleaned; only final doc-only checks,
-  its commit, and brief clearing remain. No background job is running.
+- blockers: none. in_flight_uncommitted: `.9.1.8.1.0` exact audit and lockstep docs/KM are focused-green; no
+  behavior edit exists. Canonical local CI passes primary 65x2 and Phase 0 1,031/1,031 in 619 seconds; exact
+  generated-output cleanup is complete and no background job remains. Only the prepared commit is in flight.

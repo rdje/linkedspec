@@ -516,13 +516,43 @@ to identify which child matched. Each child regex is compiled into a combined al
 ```
 
 The `(?{$pos=N})` embedded code sets a position variable when a branch matches.
-After the match, `$pos` identifies which child matched.
+After the match, `$pos` identifies which branch the regex engine selected.
 
 **For non-Perl backends**, this pattern must be mapped to the host language's
-regex or pattern-matching capabilities. The contract is:
+regex or pattern-matching capabilities. For choice-oriented rules, the current
+cross-backend behavior is:
+
 1. Match any of N alternatives against the input from the current position.
 2. Identify **which** alternative matched (index 0..N-1).
 3. Return the match info for the matched alternative.
+4. If identical alternatives tie at the same position, select the first authored
+   alternative.
+
+Ordered `AND` execution has a stricter requirement: the executor already knows
+which sequence slot is required next. A portable implementation can therefore
+match only that slot and attach its authored index to the match. Dart, Julia,
+PUC Lua, and LuaJIT currently do this for ordinary and repeated AND execution.
+
+Perl and Rust currently have a known duplicate-slot limitation. They match a
+combined alternation first and compare its reported branch index with the
+required sequence index afterward. If two slots contain the same regex, the
+engine reports the earlier branch for both positions; a later required slot is
+then rejected even though its pattern accepts the input. For example, this
+currently returns `null` on Perl and Rust but `"ordered-ok"` on Dart, Julia,
+PUC Lua, and LuaJIT:
+
+```text
+Top::AND
+ /a/ -> Top[0] { set(seen, "first") }
+ /a/ -> Top[1] { return("ordered-ok") }
+```
+
+The corresponding `OR` rule deterministically chooses slot 0 on every backend.
+Descriptors and generated-v2 payloads preserve both slot indices; the divergence
+is in ordered runtime matching, not parsing or artifact format. The neutral
+language decision and backend repairs are tracked by
+`FUTURE-PARITY-BACKLOG.9.1.8.1.1-.7`; until they land, authors who need current
+Perl/Rust portability should make ordered slot patterns mutually exclusive.
 
 ## 9. Zero-Progress Guard
 

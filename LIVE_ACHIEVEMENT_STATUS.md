@@ -8,16 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8` — Recurring five-backend cursor admission is signoff-complete from clean
-  root-selection closeout commit `6693ffb4` at ahead 242. Governance is 72 files / 7 complete + 1 pending / 56
-  mutations; KM, book, doctrines, canonical 1,031/631s, and cleanup pass. Its commit is prepared before
-  duplicate-regex identity `.9.1.8.1` may activate.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.0` — Duplicate-slot identity audit is signoff-complete from clean
+  recurring-admission commit `a1911ec6` at ahead 243. Exact six-runtime native/generated, descriptor/emitted/
+  reconstructed identity, repeated/control, and mechanism evidence is documented with no behavior edit. Focused
+  KM 636/4,678, mdBook, four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds pass.
+  Generated-output cleanup is complete; the prepared commit is the only boundary before neutral `.1` activation.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity` is the active slice title.
 
 ## Latest Completed Slice
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity**
-  (DONE; clean-base commit `6693ffb4`, per-leaf commit prepared).
+  (DONE at clean commit `a1911ec6`).
 
   **Result:** One omission-sensitive recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, the
   selected 5x2x5 primary projection, and support ledgers without adding a semantic execution path. Only recurring
@@ -27,7 +28,7 @@ Current execution status for interruption-safe batch workflow recovery.
   capability 80/0/0, coverage 246/105+1/122, KM 635/4,670, mdBook/four doctrines, canonical primary 65x2, and
   Phase 0 1,031/1,031 in 631 seconds pass. Safe cleanup leaves no disposable build/cache/book/temp output.
 
-  **Next:** Commit `.9.1.8`, clear the brief, prove clean, then activate duplicate-regex identity `.9.1.8.1`.
+  **Next:** Duplicate-regex identity `.9.1.8.1` is active task-tree-first from the clean commit.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift**
   (DONE at clean commit `6693ffb4`).

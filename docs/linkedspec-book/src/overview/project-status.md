@@ -51,6 +51,17 @@ with 54 rejected mutations and a 25-document public contract. Run
 Canonical local CI passes the complete 65-case reference command suite in both option environments and Phase 0
 1,031/1,031 in 642 seconds.
 
+Duplicate regex-slot identity is the active post-cursor frontier. Behavior-free audit
+`FUTURE-PARITY-BACKLOG.9.1.8.1.0` proves that compiled rules, descriptors, and generated-v2 payloads retain two
+identical authored slots, but ordered execution diverges afterward. Perl and Rust match one combined alternation,
+report the first duplicate branch, and reject it when a later sequence slot was required; their native/generated
+ordered fixture returns `null`. Dart, Julia, PUC Lua, and LuaJIT match the required slot directly and return
+`ordered-ok`. Every runtime resolves duplicate OR/choice ties to the first authored slot. Repeated evidence shows
+the same Perl failure and dual-ABI Lua success, while a non-identical Perl repeated control remains exact. The
+audit changes no runtime behavior. Neutral ADR/contract leaf `.1`, Perl/Rust repairs `.2-.3`, preserving-backend
+locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered. Audit signoff passes Knowledge Map
+636/4,678, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds.
+
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole
 root-owned failure, while 22 help/usage and 11 request-trace failures belong to cursor migration `.9.1.7`. Each
