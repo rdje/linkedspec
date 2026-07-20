@@ -38,8 +38,8 @@ promote the separately future generic callable-codeblock capability.
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
-The checker currently owns an exact 71-file migration inventory and rejects 49 representative semantic, topology,
-diagnostic, generated, consumer-omission, inventory, and admission mutations. A 14-role Perl consumer composes
+The checker currently owns an exact 72-file migration inventory and rejects 56 representative semantic, topology,
+diagnostic, generated, consumer-omission, recurring-gate, inventory, and admission mutations. A 14-role Perl consumer composes
 live default/AND, descriptor v1, emitted v2, generated direct/trace, loaded spec, mixed parent/child, recursion,
 both structural replacements, dynamic removal, primary command, and all portable diagnostic codes. Canonical CI
 runs that consumer. A separate 15-role Rust consumer composes native default/AND, ordinary serialized, loaded,
@@ -53,8 +53,11 @@ loaded, descriptor-v1, emitted/generated-v2, trace, composition, removal, primar
 The checker locks its markers, complete package driver, canonical tracked input, and optional backend registration.
 One Lua consumer composes the same 15 normalized roles and runs unchanged on both PUC Lua and LuaJIT. The checker
 locks its markers, both backend-driver invocations, canonical tracked input, and optional backend registration.
-`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, `julia_backend`, and
-`lua_dual_abi` are complete, so rollout is 6 complete / 2 pending; later legs remain dependency-ordered. The shared generated-source-v1
+`neutral_contract_and_inventory`, `perl_reference`, `rust_parity`, `dart_backend`, `julia_backend`,
+`lua_dual_abi`, and `recurring_five_backend_gate` are complete, so rollout is 7 complete / 1 pending. Run
+`bash tools/check_rule_local_cursor_five_backend.sh` for the recurring Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT
+composition, selected 5x2x5 primary projection, and support ledgers. Canonical local CI exposes the same
+all-toolchain leg behind `LINKEDSPEC_RUN_CURSOR_MATRIX=1`; public no-drift remains dependency-ordered. The shared generated-source-v1
 capability ledger remains the semantic convergence baseline while current Perl, Rust, Dart, Julia, and Lua
 emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
 its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
@@ -105,7 +108,8 @@ covers all 36 family spellings, all 18 edge rows, 8/8 parent-child, 2/2 structur
 generated-source v2 with contract-before-payload rejection. Public removal then deletes global engine/loader/
 corpus/primary ownership while retaining low-level matcher primitives and targeted legacy diagnostics. Package
 progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and governance was 67 / 5+3 / 44 at
-Julia admission. Lua admission has since advanced the current ledger to 69 / 6+2 / 49.
+Julia admission. Lua admission later advanced the ledger to 69 / 6+2 / 49, root-governance scanning moved the
+inventory to 71, and recurring admission now establishes the current 72 / 7+1 / 56 boundary.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and

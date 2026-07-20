@@ -4,9 +4,10 @@
 > this appendix describe shipped behavior. ADR `0044` ratifies the rule-local
 > contract: OR/default families seek, AND families consume,
 > parent and edge kind never override a child, and the public/global
-> `parse_mode` option is removed. Perl is composed-admitted; Rust is admitted;
-> Dart is current through public removal and awaits composed admission. Julia,
-> Lua, recurring five-backend proof, and public no-drift remain dependency-ordered.
+> `parse_mode` option is removed. Perl, Rust, Dart, Julia, and dual-ABI Lua are
+> composed-admitted. One recurring gate now proves all six runtime legs plus the
+> selected 5x2x5 primary projection; identical dependency-regex identity and
+> public no-drift remain dependency-ordered.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the

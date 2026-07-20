@@ -1,12 +1,13 @@
 # LinkedSpec
 
-Current design frontier (2026-07-18): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
+Current design frontier (2026-07-19): ADR `0044` / `FUTURE-PARITY-BACKLOG.9.1.1.1`
 ratifies intrinsic OR/default seek and AND consume, child-owned cursor semantics,
 mode-sensitive bare edges, targeted removal of the public/global `parse_mode`
 override, per-rule descriptor facts, and generated-source v2 family derivation.
 Implementation is split under `.9.1.2-.9`. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
-`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 6 complete / 2 pending. Perl reference parent
+`FUTURE-PARITY-BACKLOG.5.2`; executable cursor rollout is now 7 complete / 1 pending after recurring six-runtime
+admission. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
 removal, all eight portable diagnostics, and the 63x2 primary matrix through one 14-role admission consumer.
 ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately parked root-selection question under
@@ -158,8 +159,12 @@ primary, and portable-diagnostic projections. The complete Dart package passes 2
 matrix passes 65/65 in both environments, corpus remains 105/105, and neutral governance reports 67 files,
 4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
 advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission has since moved
-the current ledger to 71 files, 6 complete / 2 pending, and 49 rejected mutations after final root-selection
-governance added two cross-contract scanner paths.
+the current ledger to 72 files, 7 complete / 1 pending, and 56 rejected mutations after final root-selection
+governance added two cross-contract scanner paths and recurring cursor admission added its governed driver.
+Run `bash tools/check_rule_local_cursor_five_backend.sh` for the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof,
+selected 5x2x5 primary projection, and support ledgers; canonical CI registers it behind
+`LINKEDSPEC_RUN_CURSOR_MATRIX=1`. Identical dependency-regex identity `.9.1.8.1` and final public no-drift
+`.9.1.9` remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

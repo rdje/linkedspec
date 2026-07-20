@@ -5,13 +5,22 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-19`
+- `2026-07-19` recurring cursor-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.8` adds no cursor semantics. One
+  omission-sensitive driver composes the 14-role Perl consumer, exact 15-role Rust/Dart/Julia consumers, the same
+  15-role Lua source on PUC Lua and LuaJIT, the selected 5x2x5 primary projection, and generated/capability/
+  language-coverage ledgers. The neutral checker locks all six commands, role lists, case ids, support checks,
+  canonical `LINKEDSPEC_RUN_CURSOR_MATRIX=1` registration, and seven new recurring mutations. Exact proof is
+  Perl 288, Rust/Dart admission, Julia 104, Lua 119/119x2, primary 5x2x5, capability 80/0/0, and coverage
+  246/105+1/122. Governance is now 72 migration files / 7 complete + 1 pending / 56 mutations. Identical-regex
+  dependency identity `.9.1.8.1` and final public no-drift `.9.1.9` remain separate owners.
 - `2026-07-19` root-selection public no-drift refresh: final admission `.9.1.1.2.6` closes the ADR `0046`
   rollout at 7 complete / 0 pending. `tools/check_root_rule_selection_five_backend.sh` composes Perl, Rust, Dart,
   Julia, PUC Lua, LuaJIT, the selected 5x2x6 primary projection, and the generated/capability/coverage ledgers.
   The neutral checker now requires 25 public/KM/task documents, forbids 19 stale current claims, requires both
   roadmap projections, and rejects 54 semantic, topology, recurring, public, and rollout mutations. Canonical CI
   passes primary 65/65x2 plus Phase 0 1,031/1,031 in 642 seconds. The root scanner's reference to the parse-mode-
-  named mdBook chapter is explicitly owned by the adjacent cursor inventory, now 71 files at unchanged 6+2/49.
+  named mdBook chapter is explicitly owned by the adjacent cursor inventory, producing the then-current 71 files
+  at unchanged 6+2/49 before recurring cursor admission.
 - `2026-07-19` Lua root-selection-admission refresh: `FUTURE-PARITY-BACKLOG.9.1.1.2.5.3` composes every already-
   current Lua root-selection projection through one contract-declared 15-role source run unchanged on PUC Lua and
   LuaJIT. The consumer adds no semantic owner. Hand-authored selection evidence returns from lifecycle `I`; the

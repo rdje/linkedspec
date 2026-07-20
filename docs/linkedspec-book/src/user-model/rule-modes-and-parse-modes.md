@@ -81,9 +81,10 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > current projection and locks its complete/canonical driver topology.
 > At Julia admission rollout was 5 complete / 3 pending. Lua `.9.1.7.6` now advances only the dual-ABI row after
 > one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. Final root-selection governance adds two
-> cross-contract scanner paths, so the current governed inventory is 71 files,
-> 6 complete / 2 pending, and 49 effective mutations; recurring five-backend and public no-drift work remain
-> dependency-ordered under `.9.1.8-.9`.
+> cross-contract scanner paths. Recurring five-backend admission then adds its governed driver and composes all
+> six runtime legs plus selected 5x2x5 primary and support-ledger proof. The current governed inventory is 72
+> files, 7 complete / 1 pending, and 56 effective mutations. Identical dependency-regex identity `.9.1.8.1` and
+> final public no-drift `.9.1.9` remain dependency-ordered.
 > Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
 > point: all 36 headers parse, but compact `|` accounts for the 34/36 family
 > classification; global seek makes 22/36 family executions intrinsic; valid
@@ -879,6 +880,7 @@ AND, ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and diagnostic roles. The
 neutral checker requires every declared role and canonical registration. Dart adds its own 15-role native/
 normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary/diagnostic consumer. It
-also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. It currently reports 36
-family spellings, 18 edge cases, eight parent/child cases, 69 migration files, 6 complete / 2 pending, and 49
-rejected drift mutations.
+also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. One recurring gate now
+runs all six runtime legs, five cursor-owned primary cases across five commands and two environments, and the
+support ledgers. It currently reports 36 family spellings, 18 edge cases, eight parent/child cases, 72 migration
+files, 7 complete / 1 pending, and 56 rejected drift mutations.

@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity
+
+Rule-local cursor parity now has one recurring, omission-sensitive gate without another compiler or runtime path.
+`tools/check_rule_local_cursor_five_backend.sh` composes the neutral checker; the 14-role Perl consumer; exact
+15-role Rust, Dart, and Julia consumers; the same 15-role Lua source on PUC Lua and LuaJIT; five cursor-owned
+primary cases across all five commands and both option environments; and generated-source, capability, and
+language-coverage ledgers.
+
+The neutral contract locks the six runtime commands, exact admitted role lists, selected case identities, support
+checks, canonical tracked input, and `LINKEDSPEC_RUN_CURSOR_MATRIX=1` registration. Seven new mutations reject a
+missing backend, role, primary case, support check, CI switch, driver, or rollout promotion. Only
+`recurring_five_backend_gate` advances, producing 72 migration files / 7 complete + 1 pending / 56 mutations.
+Identical dependency-regex identity `.9.1.8.1` and final public no-drift `.9.1.9` remain separate owners.
+
+The exact governance RED progresses from unknown `recurring_gate`, to missing driver, to missing canonical
+registration. Green proof is neutral 36/18/8 plus 14+15+15+15+15 roles; Perl 288; Rust and Dart exact consumers;
+Julia 104; PUC Lua 119; LuaJIT 119; selected primary 5x2x5; generated-source 80/0/0; capability 80/0/0; and
+language coverage 246 names / 105 corpus + 1 fixture / 122 public Perl contracts.
+
+Canonical local CI passes primary 65/65 in both environments and Phase 0 1,031/1,031 in 631 seconds. Knowledge
+Map 635/4,670, mdBook, memory, all four doctrines, and exact cleanup pass; no reproducible Rust, Dart, Julia,
+book, Python, or temporary harness output remains.
+
 ## 2026-07-19 — FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection parity
 
 Root-rule selection is closed at 7 complete / 0 pending without adding a resolver or changing generated-plan

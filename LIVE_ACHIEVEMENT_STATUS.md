@@ -8,15 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.6` — Final five-backend recurring/public root-selection no-drift is signoff-
-  complete from clean Lua admission commit `c8583edf` at ahead 241. The per-leaf commit and clean handoff are the
-  only remaining boundaries; no different task-tree is active.
+- `FUTURE-PARITY-BACKLOG.9.1.8` — Recurring five-backend cursor admission is signoff-complete from clean
+  root-selection closeout commit `6693ffb4` at ahead 242. Governance is 72 files / 7 complete + 1 pending / 56
+  mutations; KM, book, doctrines, canonical 1,031/631s, and cleanup pass. Its commit is prepared before
+  duplicate-regex identity `.9.1.8.1` may activate.
 
-- `FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift` is the active closeout title.
+- `FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity**
+  (DONE; clean-base commit `6693ffb4`, per-leaf commit prepared).
+
+  **Result:** One omission-sensitive recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, the
+  selected 5x2x5 primary projection, and support ledgers without adding a semantic execution path. Only recurring
+  admission advances, producing 72 files / 7 complete + 1 pending / 56 mutations.
+
+  **Proof:** Perl 288, Rust/Dart exact consumers, Julia 104, Lua 119x2, selected primary 5x2x5, generated and
+  capability 80/0/0, coverage 246/105+1/122, KM 635/4,670, mdBook/four doctrines, canonical primary 65x2, and
+  Phase 0 1,031/1,031 in 631 seconds pass. Safe cleanup leaves no disposable build/cache/book/temp output.
+
+  **Next:** Commit `.9.1.8`, clear the brief, prove clean, then activate duplicate-regex identity `.9.1.8.1`.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift**
-  (DONE and prepared for its per-leaf commit).
+  (DONE at clean commit `6693ffb4`).
 
   **Result:** Root-selection parity is closed at 7 complete / 0 pending. One recurring driver composes Perl,
   Rust, Dart, Julia, PUC Lua, LuaJIT, the exact selected 5x2x6 primary projection, and all support ledgers. The
@@ -27,7 +41,7 @@ Current execution status for interruption-safe batch workflow recovery.
   65/65x2 and Phase 0 1,031/1,031 in 642 seconds. Adjacent current-marker and cursor-inventory no-drift repairs
   pass at 65 cases and 71 files; safe generated-output cleanup passes.
 
-  **Next:** Commit `.9.1.1.2.6`, clear the brief, prove the tree clean, then select the next roadmap leaf.
+  **Next:** Recurring five-backend cursor admission `.9.1.8` is active task-tree-first from the clean commit.
 
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.1.2.5.3 — admit dual-ABI Lua root selection**
   (DONE at clean commit `c8583edf`).

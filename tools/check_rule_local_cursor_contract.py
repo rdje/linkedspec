@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -56,7 +57,7 @@ ROLLOUT = [
     ("dart_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.5"),
     ("julia_backend", "complete", "FUTURE-PARITY-BACKLOG.9.1.6"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.7"),
-    ("recurring_five_backend_gate", "pending", "FUTURE-PARITY-BACKLOG.9.1.8"),
+    ("recurring_five_backend_gate", "complete", "FUTURE-PARITY-BACKLOG.9.1.8"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.9"),
 ]
 PERL_REFERENCE_ADMISSION = {
@@ -166,6 +167,72 @@ LUA_DUAL_ABI_ADMISSION = {
         "primary_command",
         "portable_diagnostics",
     ],
+}
+RECURRING_GATE = {
+    "driver": "tools/check_rule_local_cursor_five_backend.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_path", "roles"],
+        "role_policy": "the Perl 14-role consumer and every ordered 15-role backend consumer are required",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_path": PERL_REFERENCE_ADMISSION["consumer_path"],
+            "roles": PERL_REFERENCE_ADMISSION["roles"],
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_path": RUST_PARITY_ADMISSION["consumer_path"],
+            "roles": RUST_PARITY_ADMISSION["roles"],
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_path": DART_BACKEND_ADMISSION["consumer_path"],
+            "roles": DART_BACKEND_ADMISSION["roles"],
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_path": JULIA_BACKEND_ADMISSION["consumer_path"],
+            "roles": JULIA_BACKEND_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_path": LUA_DUAL_ABI_ADMISSION["consumer_path"],
+            "roles": LUA_DUAL_ABI_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_path": LUA_DUAL_ABI_ADMISSION["consumer_path"],
+            "roles": LUA_DUAL_ABI_ADMISSION["roles"],
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": [
+            "help",
+            "usage_removed_parse_mode",
+            "success_default_rule_seeks",
+            "success_and_rule_consumes",
+            "trace_stdout_medium",
+        ],
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_CURSOR_MATRIX",
+    },
 }
 GROUPS = [
     ("FUTURE-PARITY-BACKLOG.9.1.2", "neutral_contract_and_shared_authority"),
@@ -347,6 +414,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
             "dart_backend_admission",
             "julia_backend_admission",
             "lua_dual_abi_admission",
+            "recurring_gate",
             "diagnostics",
             "migration_inventory",
             "rollout",
@@ -733,6 +801,75 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if backend_invocation not in lua_canonical_text:
         fail("canonical driver omits the registered Lua backend driver")
 
+    recurring = require_fields(
+        contract["recurring_gate"],
+        {
+            "driver",
+            "consumer_schema",
+            "consumers",
+            "primary_cli",
+            "support_checks",
+            "local_ci",
+        },
+        "recurring gate",
+    )
+    if recurring != RECURRING_GATE:
+        fail("recurring gate topology drifted")
+    recurring_driver_path = ROOT / recurring["driver"]
+    if not recurring_driver_path.is_file():
+        fail("recurring gate driver is missing")
+    if not os.access(recurring_driver_path, os.X_OK):
+        fail("recurring gate driver is not executable")
+    recurring_driver_text = recurring_driver_path.read_text(encoding="utf-8")
+    required_driver_markers = [
+        "python3 tools/check_rule_local_cursor_contract.py",
+        "prove -Iperl t/rule_local_cursor_perl_contract.t",
+        "--test rule_local_cursor_contract",
+        "test test/rule_local_cursor_contract_test.dart",
+        "julia/test/rule_local_cursor_contract_test.jl",
+    ]
+    for marker in required_driver_markers:
+        if marker not in recurring_driver_text:
+            fail(f"recurring gate driver omits required consumer command: {marker}")
+    lua_consumer = LUA_DUAL_ABI_ADMISSION["consumer_path"]
+    if recurring_driver_text.count(lua_consumer) != 2:
+        fail("recurring gate driver must invoke the Lua cursor consumer exactly twice")
+    for marker in ('LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD"', 'LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD"'):
+        if marker not in recurring_driver_text:
+            fail(f"recurring gate driver omits Lua ABI identity: {marker}")
+
+    primary = recurring["primary_cli"]
+    primary_manifest_path = ROOT / "cli_conformance" / "manifest.json"
+    if not primary_manifest_path.is_file():
+        fail("shared primary manifest is missing")
+    primary_manifest = json.loads(primary_manifest_path.read_text(encoding="utf-8"))
+    manifest_case_ids = {
+        case["id"] for case in primary_manifest.get("cases", []) if isinstance(case, dict) and "id" in case
+    }
+    if not set(primary["case_ids"]).issubset(manifest_case_ids):
+        fail("recurring cursor primary cases are absent from the shared manifest")
+    if f'bash {primary["matrix_driver"]}' not in recurring_driver_text:
+        fail("recurring gate driver omits the shared primary matrix")
+    for case_id in primary["case_ids"]:
+        if f"--case {case_id}" not in recurring_driver_text:
+            fail(f"recurring gate driver omits primary case: {case_id}")
+
+    for support_path in recurring["support_checks"]:
+        if not (ROOT / support_path).is_file():
+            fail(f"recurring support check is missing: {support_path}")
+        if support_path not in recurring_driver_text:
+            fail(f"recurring gate driver omits support check: {support_path}")
+
+    local_ci = recurring["local_ci"]
+    local_ci_path = ROOT / local_ci["driver"]
+    if not local_ci_path.is_file():
+        fail("recurring gate canonical driver is missing")
+    local_ci_text = local_ci_path.read_text(encoding="utf-8")
+    if f"require_tracked_file {recurring['driver']}" not in local_ci_text:
+        fail("canonical driver does not require the recurring cursor gate")
+    if local_ci["switch"] not in local_ci_text or f'bash "$REPO_ROOT/{recurring["driver"]}"' not in local_ci_text:
+        fail("recurring cursor local-CI registration drifted")
+
     diagnostics = contract["diagnostics"]
     if not isinstance(diagnostics, list):
         fail("diagnostics must be a list")
@@ -835,6 +972,13 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Lua admission consumer", lambda c: c["lua_dual_abi_admission"].__setitem__("consumer_path", "missing")),
         ("Lua admission canonical driver", lambda c: c["lua_dual_abi_admission"].__setitem__("canonical_driver", "missing")),
         ("Lua admission driver", lambda c: c["lua_dual_abi_admission"].__setitem__("backend_driver", "missing")),
+        ("recurring backend omission", lambda c: c["recurring_gate"]["consumers"].pop()),
+        ("recurring role omission", lambda c: c["recurring_gate"]["consumers"][0]["roles"].pop()),
+        ("recurring primary omission", lambda c: c["recurring_gate"]["primary_cli"]["case_ids"].pop()),
+        ("recurring support omission", lambda c: c["recurring_gate"]["support_checks"].pop()),
+        ("recurring CI omission", lambda c: c["recurring_gate"]["local_ci"].__setitem__("switch", "wrong")),
+        ("recurring driver omission", lambda c: c["recurring_gate"].__setitem__("driver", "missing")),
+        ("recurring rollout admission", lambda c: c["rollout"][6].__setitem__("status", "pending")),
         ("diagnostic_removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic_stage", lambda c: c["diagnostics"][0].__setitem__("stage", "execute")),
         ("inventory_pattern", lambda c: c["migration_inventory"]["token_patterns"].pop()),
@@ -869,6 +1013,7 @@ def main() -> int:
         f"{len(contract['dart_backend_admission']['roles'])} Dart admission roles; "
         f"{len(contract['julia_backend_admission']['roles'])} Julia admission roles; "
         f"{len(contract['lua_dual_abi_admission']['roles'])} Lua admission roles; "
+        f"{len(contract['recurring_gate']['consumers'])} recurring runtime legs; "
         f"{contract['migration_inventory']['expected_file_count']} migration files; "
         f"{complete} complete / {pending} pending; {mutation_count} drift mutations)"
     )

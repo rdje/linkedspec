@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.8` — recurring admission composes; it does not reimplement):
+  Every semantic cursor projection was already admitted before this leaf. The new driver therefore calls the
+  contract-declared consumers as authoritative units, with PUC Lua and LuaJIT treated as distinct runtime legs
+  over one source. The shared selected primary set deliberately spans interface removal (`help` and retired
+  `--parse-mode`), OR/default seek, AND consume, and trace bytes without rerunning unrelated primary families.
+
+  The contract owns orchestration rather than relying on shell convention. It fixes each exact command and role
+  list, the five primary ids, all three support checkers, the canonical switch, and six-runtime identity. Mutation
+  cases independently remove a backend, role, case, support checker, switch, driver, and rollout state. This moves
+  governance from 71/6+2/49 to 72/7+1/56 while advancing only `recurring_five_backend_gate`.
+
+  Three intentional RED boundaries made the missing layers explicit: the pre-schema checker rejected unknown
+  fields; after schema support it rejected the missing driver; after adding the driver it rejected missing local-
+  CI registration. Full runtime proof passes Perl 288, Rust/Dart admissions, Julia 104, PUC Lua 119, LuaJIT 119,
+  selected primary 5x2x5, generated-source and capability 80/0/0, and coverage 246/105+1/122. Recreating the
+  cleaned Julia depot required `Pkg.instantiate()` and an explicit supported depot override; that is environment
+  provisioning, not a product or driver defect.
+
+  Final canonical proof passes the shared primary matrix at 65/65 in both environments and Phase 0 at
+  1,031/1,031 in 631 seconds. Cleanup is deliberately exact: generated compiler, package, book, Python, and
+  temporary harness paths are absent, while tracked `rgx/pgen-issues` logs remain durable regression evidence.
+
 - 2026-07-19 (`FUTURE-PARITY-BACKLOG.9.1.1.2.6` — parity closes by composition plus executable public truth):
   The final root-selection leaf adds no selection implementation. Its recurring driver calls each already-admitted
   runtime consumer, treats PUC Lua and LuaJIT as distinct legs over one source, selects the six root-owned shared

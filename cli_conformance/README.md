@@ -28,6 +28,12 @@ The recurring root-selection gate runs a 5x2x6 selected root-rule matrix through
 `bash tools/check_root_rule_selection_five_backend.sh`: first authored marker, markerless first rule, explicit
 override, unknown explicit selection, default request trace, and escaped explicit request-trace failure.
 
+The recurring rule-local cursor gate runs a 5x2x5 selected projection through
+`bash tools/check_rule_local_cursor_five_backend.sh`: help, retired `--parse-mode`, default-OR seeking,
+default-AND consumption, and medium request trace. The same driver first executes the six admitted runtime legs
+and then verifies generated-source, capability, and language-coverage ledgers. Canonical local CI exposes this
+all-toolchain proof behind `LINKEDSPEC_RUN_CURSOR_MATRIX=1`.
+
 ADR `0044`'s future primary-command migration is now executable in
 `capability_conformance/rule_local_cursor_contract.json`. The target removes `--parse-mode` from help and returns
 usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 65-case manifest
