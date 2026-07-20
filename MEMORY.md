@@ -10,29 +10,30 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.1` — neutral duplicate regex-slot identity contract is
-  fully verified, documented, cleaned, and committed.
-- latest_commit: `93ee7935` — `FUTURE-PARITY-BACKLOG.9.1.8.1.1 - adopt duplicate regex slot identity contract`
-  (ahead: 245; push at threshold 300).
-- prepared_commit: none.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.2` Perl duplicate-slot identity repair/admission, active
-  task-tree-first from clean `93ee7935`; parent `.8.1` retains Rust/preserving/closeout children `.3-.7`.
-- next_action: run final post-signoff docs/KM/doctrine checks, commit Perl `.2`, clear the brief, and prove a clean
-  handoff; do not activate Rust `.3` until the repository is clean at that commit.
-- current_duplicate_slot: Perl ordered handlers match required compiled rows directly; repeated and cross-target
-  fixtures, choice priority, capture snapshots, descriptor marker, generated-v2 `dependency_slot_map`, exact trace,
-  and two diagnostics pass one 12-role consumer. Governance is 2 complete + 5 pending / 26 mutations; generated
-  plan rows remain `{label,family}`. Focused generated-source/cursor/trace suites pass.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.3` — Rust duplicate regex-slot identity repair/admission
+  is fully verified, documented, and cleaned; its prepared commit remains.
+- latest_commit: `568d3825` — `FUTURE-PARITY-BACKLOG.9.1.8.1.2 - implement Perl duplicate regex slot identity`
+  (ahead: 246; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.3 - implement Rust duplicate regex slot identity` after cleanup.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.3` Rust duplicate-slot identity repair/admission, signoff-complete
+  from clean `568d3825`; parent `.8.1` retains preserving/closeout children `.4-.7`.
+- next_action: stage final lockstep evidence, run the commit workflow, commit `.9.1.8.1.3`, clear the brief,
+  verify clean, then activate Dart `.9.1.8.1.4` task-tree-first.
+- current_duplicate_slot: Perl and Rust ordered handlers match required compiled slots directly; repeated,
+  cross-target, control, choice, loaded/reconstructed, descriptor, emitted/generated, trace, primary, capture, and
+  diagnostic roles are signoff-complete. Rust retains individual compiled regexes beside combined choice, validates
+  malformed compiled state before every execution/artifact route, and publishes descriptor/emitted contract
+  identity without widening `{label,family}` plans. Governance is 3 complete + 4 pending / 31 mutations.
 - current_root_selection: ADR `0046` precedence is explicit selector > first authored `Rule::` > first authored
   `Rule:`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions plus the selected five-command/default-POSIX
   5x2x6 projection and support ledgers pass from one recurring driver. Governance is 7 complete / 0 pending,
   25 required current documents, 19 stale-claim guards, and 54 rejected mutations. No resolver or generated-plan
   behavior changed. Hand-authored selection fixtures use lifecycle `I`; the fixed request-trace fixture retains
   canonical `E` bytes.
-- current_signoff: Duplicate-slot checker passes 5 fixtures / 2 diagnostics / 6 runtime rows / 2+5 rollout / 26
-  mutations; capability 80/0/0, language coverage 246/105+1/122, Knowledge Map 638/4,693, mdBook, memory,
-  whitespace, JSON/shell, and all four doctrines pass. Canonical CI passes primary 65/65x2 and Phase 0
-  1,031/1,031 in 615 seconds. Exact 11 MiB mdBook-build and 28 KiB Python-cache cleanup preserves tracked evidence.
+- current_signoff: Rust duplicate-slot admission passes 15/15 declared roles; complete Rust-local passes core
+  193+4+5+8, runtime 138, oracle/classifier 105+105, integration 197, adjacent suites, and primary 65x2. Neutral
+  governance is 5 fixtures / 2 diagnostics / 6 runtime rows / 3+4 rollout / 31 mutations. KM 639/4,702, mdBook,
+  doctrines, canonical root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/619s pass.
 - current_cursor_admission: One recurring driver composes Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, five selected
   primary cases across default/POSIX environments, and all support ledgers. Exact runtime proof passes at Perl
   288, Julia 104, Lua 119x2, primary 5x2x5, capability 80/0/0, and coverage 246/105+1/122. Governance is
@@ -49,6 +50,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.8.1.2` implementation, consumer, contract/checker/CI admission,
-  Knowledge Map sources, live docs, and mdBook are fully signoff-green but uncommitted; final checks and commit
-  preparation are next, exact generated artifacts are absent, and no background job is running.
+- blockers: none. in_flight_uncommitted: `.9.1.8.1.3` owns Rust matcher/compiler/descriptor/runtime/generated-source,
+  contract/checker/CI, admission test, task/live/public/book/Knowledge Map changes from clean `568d3825`. All proof
+  is consumed and exact cleanup is complete; only final staging/checks, commit, and brief clearing remain.

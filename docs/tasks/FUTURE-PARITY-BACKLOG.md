@@ -5972,8 +5972,11 @@ before implementation.
     relying on author-written regex distinctions.
   Verification: `Activated task-tree-first on 2026-07-19 only after recurring cursor admission `.9.1.8` landed
     at clean commit `a1911ec6`. Audit `.0` landed at `4902f218`; neutral `.1` landed at clean commit `93ee7935`
-    with 5/2/6/1+6/23 governance, canonical 1,031/635s, no generated artifacts, a zero-byte brief, and no
-    background job. Perl repair `.2` activates from that boundary.`
+    with 5/2/6/1+6/23 governance. Perl repair `.2` landed at clean commit `568d3825` with 12 roles, 2+5/26
+    governance, canonical 1,031/615s, no generated artifacts, a zero-byte brief, and no background job. Rust
+    repair `.3` is signoff-complete from that boundary: required-slot execution, descriptor/generated-source
+    identity, stable diagnostics, native/generated trace, exact 15-role admission, complete Rust-local, KM/book/
+    doctrines, canonical 1,031/619s, and cleanup pass. Its clean commit is the only boundary before Dart `.4`.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.0`
@@ -6150,13 +6153,43 @@ before implementation.
     tracked evidence is preserved and no background verification remains.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and admit Rust duplicate-slot identity parity.
   Dependencies: `.9.1.8.1.2`
   Acceptance: Match the ratified Perl reference through native, reconstructed, generated-plan/source, trace,
     primary, and corpus roles without source-text identity recovery.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-20.** Activated task-tree-first from clean Perl-admission commit `568d3825` at
+    ahead 246. The exact primary-interface toolbox probe returned null for `ordered_same_rule_duplicate` while
+    compilation succeeded, isolating the combined-alternation/expected-index chain in ordinary `Engine` and
+    `GeneratedPlanExecutor`. Both loops now match known sequence slots through retained individual regexes while
+    combined choice remains unchanged. All five fixtures return exact values. The 15-role admission covers native,
+    loaded, reconstructed, descriptor, emitted/generated, trace, primary, capture, and diagnostic routes.
+    Complete Rust-local proof passes core 193+4+5+8, runtime 138, oracle 105, generated classifier 105,
+    integrations 197, all adjacent suites, and primary 65x2. The neutral checker passes 3 complete + 4 pending /
+    31 mutations. Strict Clippy adds no finding in a changed hunk. Knowledge Map 639/4,702, mdBook, memory, all
+    four doctrines, formatting, JSON/shell, and whitespace pass. Canonical CI passes root 7+5, cursor 288,
+    reference primary 65x2, and Phase 0 1,031/1,031 in 619 seconds after its first run correctly caught and the
+    slice repaired a split exact root-selection public marker. Exact cleanup removes the initial 3.0 GiB and final
+    1.5 GiB isolated Rust targets, rendered book, Python cache, and consumed logs; free space closes at 63 GiB.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.3 - implement Rust duplicate regex slot identity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / REPRODUCE RED** — Retrieve ADR `0047`, all duplicate-slot Knowledge Map facts, the neutral
+    contract/checker, Rust cursor admission, and `TOOLBOX.md`; the exact Rust primary probe returns null for the
+    neutral ordered duplicate while compile/validation succeed.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `rust/linkedspec-runtime/src/engine.rs` ordinary and generated-plan loops
+    both call combined `CompiledAlternation`, obtain branch zero for identical patterns, then reject it against
+    the already-required later `expected_and_idx`; compiled/action/descriptor rows remain distinct.
+  - [x] **REPAIR NATIVE / GENERATED** — Match only the required compiled slot in both ordered loops, preserve
+    combined earliest/first-authored choice, assert returned identity, and keep captures/cursor/repetition exact.
+  - [x] **PROJECT / DIAGNOSE** — Publish descriptor contract identity, exact native/generated selection trace, and
+    stable compiled-slot plus ordered-identity diagnostics without widening generated-source v2 plan rows.
+  - [x] **ADMIT RUST / NO REGRESSION** — Add one exact neutral consumer over native, reconstructed, loaded,
+    descriptor, emitted/generated-plan/source, trace, primary, corpus, repeated/control/cross-target/choice, and
+    diagnostics; pass focused, complete Rust, canonical, lockstep, and cleanup proof.
+  - [x] **LOCKSTEP / COMMIT** — Update contract/checker inventory, task/index/roadmaps/architecture/live/memory,
+    changes/notes/book/KM; commit `.3`, clear the brief, and activate Dart `.4` only from a clean boundary.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.4`
   Status: `pending`
@@ -8762,7 +8795,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.0 | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `done` | Exact six-runtime native/generated ordered/choice audit, repeated/control evidence, mechanism split, KM 636/4,678, canonical 1,031/619s, lockstep, and cleanup pass without behavior changes. |
 | 219.1.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `done` | ADR 0047, 5 fixtures, 2 diagnostics, 6 runtime rows, 1+6 rollout, 23 mutations, KM 637/4,685, canonical 1,031/635s, lockstep, and cleanup pass without backend behavior changes. |
 | 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `done` | Required-slot Perl execution and its 12-role admission pass at 2+5/26, KM 638/4,693, canonical 1,031/615s, lockstep, and exact cleanup before Rust `.3`. |
-| 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `pending` | Implement and admit Rust parity. |
+| 219.1.3 | `FUTURE-PARITY-BACKLOG.9.1.8.1.3` | `done` | Required-slot native/generated execution and one exact 15-role Rust admission pass at 3+4/31; complete Rust, KM/mdBook/doctrines, canonical 1,031/619s, and cleanup signoff pass before Dart `.4`. |
 | 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `pending` | Implement and admit Dart parity. |
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `pending` | Implement and admit Julia parity. |
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `pending` | Implement and admit PUC Lua plus LuaJIT parity. |
@@ -9844,6 +9877,16 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Rust duplicate-slot `.9.1.8.1.3` is signoff-complete from clean `568d3825`. Required-slot native/
+  generated execution, descriptors, emitted identity, trace, diagnostics, and one exact 15-role consumer pass at
+  3+4/31. Complete Rust-local passes core 193+4+5+8, runtime 138, oracle/classifier 105+105, integration 197,
+  adjacent suites, and primary 65x2. KM 639/4,702, mdBook/four doctrines, canonical root 7+5, cursor 288,
+  reference primary 65x2, and Phase 0 1,031/1,031 in 619 seconds pass. A split exact root public marker is caught
+  and repaired before the full rerun. Exact target/book/cache/log cleanup closes at 63 GiB free; commit preparation
+  is the only remaining step before Dart `.4`.
+- `2026-07-20`: Clean commit `568d3825` lands Perl duplicate-slot repair/admission `.9.1.8.1.2`; tracked and
+  untracked state is clean, the brief is zero bytes, generated artifacts are absent, free disk is 62 GiB, and
+  ahead is 246. Rust parity `.9.1.8.1.3` activates task-tree-first before native/generated-plan implementation.
 - `2026-07-20`: Clean commit `93ee7935` lands neutral duplicate-slot contract `.9.1.8.1.1`; tracked/untracked
   state is clean, the brief is zero bytes, generated artifacts are absent, free disk is 61 GiB, and ahead is 245.
   Perl reference repair/admission `.9.1.8.1.2` activates task-tree-first before Rust or preserving-backend lanes.

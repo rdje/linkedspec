@@ -1,5 +1,38 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.3` — retain direct matchers beside the choice matcher):
+  Rust's first pass already compiled each rule pattern independently to derive capture metadata, then discarded
+  those regex objects after building the combined alternation. Retaining them makes the repair both narrower and
+  cheaper than recompiling on every sequence step. `consume_slot_match` / `seek_slot_match` use the required
+  authored parent index and local capture numbering; the combined matcher remains unchanged for genuine choice.
+
+  Structural identity is the action edge's target rule plus child regex index, not merely the parent alternation
+  index. The ordinary and generated-plan loops map both the required and reported parent indices through compiled
+  action entries before asserting identity and tracing the selected slot. This matters for cross-target sequences,
+  whose second parent slot may still be `Second#0` structurally.
+
+  Deserialization is a trust boundary. A valid compiler normally prevents missing targets and bad indices, but
+  reconstructed or generated JSON can be mutated independently. One shared validator now runs after dependency
+  resolution and before every ordinary/generated execution and emission/decode route. Native diagnostics retain
+  target/index fields; generated-source errors project the same identity at `ValidateCompiledRule`. The emitted
+  module publishes the neutral slot-contract constant, while its v2 family plan remains untouched.
+
+  The exact neutral fixtures are green through the primary command. Complete Rust-local proof passes core
+  193+4+5+8, runtime 138, all 105 interpreter-oracle fixtures, all 105 generated-classifier fixtures, integration
+  197, every adjacent suite, the exact 15-role admission, and primary 65x2. Strict Rust 1.95 Clippy reports no
+  finding in a changed hunk. Moving the new generated diagnostic fields into the pre-existing flattened boxed
+  context restores `GeneratedSourceError` to its `HEAD` size and preserves exact top-level JSON without adding
+  twelve size-lint regressions.
+
+  Canonical CI first stopped on a real no-drift defect: wrapping `root-selection parity is closed` across a source
+  newline removed the checker's exact marker. Restoring the contiguous phrase makes the 54-mutation root checker
+  and 31-mutation duplicate-slot checker pass together. The complete rerun passes root 7+5, cursor 288, reference
+  primary 65x2, and Phase 0 1,031/1,031 in 619 seconds (1,436.56 seconds for the entire gate). Knowledge Map is
+  639 facts / 4,702 keys; mdBook, memory, all four doctrines, formatting, JSON, shell, and whitespace pass.
+  Cleanup is deliberately exact: an initial inactive 3.0 GiB isolated Rust target and the final 1.5 GiB rebuild
+  target, rendered book, Python cache, and consumed logs are removed after their results are consumed. Free space
+  closes at 63 GiB; tracked RGX evidence, nested-submodule history, and the pre-existing dirty pgen work remain.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.2` — ordered execution must spend the identity it already owns):
   The Perl failure was not regex compilation or descriptor loss. `dependency_refs` retained both rows, but the
   ordered handlers invoked `LinkedRE::oredRE`, whose duplicate branch report could only be the first alternative.

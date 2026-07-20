@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity
+
+Rust ordered action execution now matches the already-required compiled regex slot directly in both ordinary
+`Engine` and generated-plan execution. `CompiledAlternation` retains the individually compiled patterns it
+already used for capture metadata; known AND sequence steps call those slot matchers, while OR/default choice
+continues to use combined earliest-start and first-authored selection. Repeated and cross-target sequences preserve
+their structural target/index identity, and whole, positional, and named capture snapshots remain exact.
+
+Compilation now rejects missing or out-of-bounds action targets with portable
+`regex_slot_identity_invalid` / `validate_compiled_rule` fields. Ordinary reconstructed execution, the emitted-
+source boundary, and generated-plan decoding reuse that validator. Ordered matcher mismatch is a typed invariant
+rather than an ordinary miss. Native/generated trace emits `regex_slot_selected` with selection role, target rule,
+and regex index. Rust descriptors and emitted modules publish `linkedspec-duplicate-regex-slot-identity-v1`; the
+generated-source contract stays v2/format 2 and its plan stays exactly `{label, family}`.
+
+One contract-declared 15-role Rust consumer covers all five neutral fixtures, native, loaded, reconstructed,
+descriptor, emitted/generated, native/generated trace, primary command, and diagnostic routes. The neutral checker
+advances only Rust, reaching 3 complete + 4 pending with 31 rejected mutations. Focused proof passes the consumer,
+all 193 core tests plus integration suites, exact primary fixture values, formatting, and governance. The complete
+Rust-local gate passes core 193+4+5+8, runtime 138, all 105 oracle and generated-classifier fixtures, integration
+197, every adjacent suite, and primary 65x2. Strict Clippy adds no finding in a changed hunk. Final lockstep passes
+Knowledge Map 639/4,702, mdBook, all four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds.
+The first canonical attempt caught a split exact root-selection marker; restoring the phrase makes both contracts
+pass together. Exact cleanup removes the initial inactive 3.0 GiB Rust target, the final 1.5 GiB rebuild target,
+the rendered book, Python cache, and consumed verification logs; free space closes at 63 GiB.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity
 
 Perl ordered action execution now matches the already-required structural slot directly instead of asking a

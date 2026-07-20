@@ -28,12 +28,16 @@
 //! in `AcodeEntry.child_regex_idx` and used during Phase 2 resolution.
 
 use crate::ast::{BodyElementKind, Rule, SpecFile};
-use crate::error::{LinkedSpecError, Result};
+use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::expr::{CodeBlock, RemovedAggregateSelector};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
 };
+
+/// Portable duplicate regex-slot identity contract implemented by compiled
+/// validation, descriptors, and every Rust execution route.
+pub const REGEX_SLOT_IDENTITY_CONTRACT: &str = "linkedspec-duplicate-regex-slot-identity-v1";
 
 /// Compile a parsed `SpecFile` into a `CompiledSpec` ready for the runtime.
 pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
@@ -49,6 +53,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     let mut compiled = CompiledSpec { functions, rules };
     validate_no_removed_aggregate_selectors(&compiled)?;
     build_dependency_regex_map(&mut compiled)?;
+    validate_compiled_regex_slot_identities(&compiled)?;
     Ok(compiled)
 }
 
@@ -211,6 +216,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
         },
     )?;
     dependency_result?;
+    validate_compiled_regex_slot_identities(&compiled)?;
 
     Ok(compiled)
 }
@@ -298,6 +304,39 @@ pub fn validate_no_removed_aggregate_selectors(spec: &CompiledSpec) -> Result<()
         }
     }
 
+    Ok(())
+}
+
+/// Validate every compiled action edge's structural target-rule/regex-index
+/// identity after dependency regex resolution.
+///
+/// Serialized and generated adapters call the same validator before execution
+/// so malformed compiled state cannot be interpreted as an ordinary miss.
+pub fn validate_compiled_regex_slot_identities(spec: &CompiledSpec) -> Result<()> {
+    for rule in &spec.rules {
+        for entry in &rule.acode_dispatch {
+            let target_exists = spec
+                .find(&entry.child_label)
+                .is_some_and(|target| entry.child_regex_idx < target.regex_patterns.len());
+            let dispatch_exists = entry.regex_idx < rule.regex_patterns.len();
+            if target_exists && dispatch_exists {
+                continue;
+            }
+            return Err(LinkedSpecError::Diagnostic(
+                PortableDiagnostic::new(
+                    "regex_slot_identity_invalid",
+                    "validate_compiled_rule",
+                    format!(
+                        "compiled action edge in rule '{}' references missing structural slot '{}#{}'",
+                        rule.label, entry.child_label, entry.child_regex_idx
+                    ),
+                )
+                .with_field("rule_label", rule.label.clone())
+                .with_field("target_rule", entry.child_label.clone())
+                .with_field("regex_index", entry.child_regex_idx),
+            ));
+        }
+    }
     Ok(())
 }
 
@@ -869,7 +908,8 @@ mod tests {
     fn compile_action_edge_associated_with_preceding_regex() {
         // /a/ -> Child_A    should associate with regex index 0
         // /b/ -> Child_B    should associate with regex index 1
-        let src = "DemoParser::\n /a/ -> Child_A\n /b/ -> Child_B";
+        let src =
+            "DemoParser::\n /a/ -> Child_A\n /b/ -> Child_B\n\nChild_A:\n /ca/\nChild_B:\n /cb/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = &compiled.rules[0];
@@ -886,7 +926,7 @@ mod tests {
     #[test]
     fn compile_action_edge_multiple_targets_per_regex() {
         // /a/ -> Child_A | Child_B    both associated with regex[0]
-        let src = "DemoParser::\n /a/ -> Child_A | Child_B";
+        let src = "DemoParser::\n /a/ -> Child_A | Child_B\n\nChild_A:\n /ca/\nChild_B:\n /cb/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = &compiled.rules[0];
@@ -915,7 +955,7 @@ mod tests {
     #[test]
     fn compile_preserves_child_regex_index() {
         // -> Child[2]  should preserve child_regex_idx = 2
-        let src = "DemoParser::\n /a/ -> Child[2]";
+        let src = "DemoParser::\n /a/ -> Child[2]\n\nChild:\n /zero/ /one/ /two/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = &compiled.rules[0];
@@ -1067,30 +1107,41 @@ child: /x/
     }
 
     #[test]
-    fn build_dependency_regex_map_missing_child_rule_warns_and_continues() {
-        // Missing child rules emit a warning but don't fail compilation.
-        // The edge-only entry keeps regex_idx = 0 (placeholder, will never match).
+    fn compile_rejects_missing_child_structural_slot() {
         let src = "Top::\n -> DoesNotExist\n";
         let spec = parse_spec(src).unwrap();
-        let result = compile(&spec);
-        assert!(result.is_ok()); // compiles despite missing child
-        let compiled = result.unwrap();
-        let top = compiled.find("Top").unwrap();
-        assert_eq!(top.regex_patterns.len(), 0); // nothing resolved
-        assert_eq!(top.acode_dispatch[0].regex_idx, 0); // placeholder kept
-        assert!(!top.acode_dispatch[0].has_parent_regex);
+        let error = compile(&spec).unwrap_err();
+        let diagnostic = error.diagnostic().expect("portable slot diagnostic");
+        assert_eq!(diagnostic.code, "regex_slot_identity_invalid");
+        assert_eq!(diagnostic.stage, "validate_compiled_rule");
+        assert_eq!(
+            diagnostic.field("rule_label"),
+            Some(&serde_json::json!("Top"))
+        );
+        assert_eq!(
+            diagnostic.field("target_rule"),
+            Some(&serde_json::json!("DoesNotExist"))
+        );
+        assert_eq!(diagnostic.field("regex_index"), Some(&serde_json::json!(0)));
     }
 
     #[test]
-    fn build_dependency_regex_map_child_regex_out_of_bounds_warns_and_continues() {
+    fn compile_rejects_out_of_bounds_child_structural_slot() {
         let src = "Top::\n -> Child[5]\n\nChild:\n /only_one/\n";
         let spec = parse_spec(src).unwrap();
-        let result = compile(&spec);
-        assert!(result.is_ok()); // compiles despite OOB index
-        let compiled = result.unwrap();
-        let top = compiled.find("Top").unwrap();
-        assert_eq!(top.regex_patterns.len(), 0); // nothing resolved (index 5 >= 1)
-        assert_eq!(top.acode_dispatch[0].regex_idx, 0); // placeholder kept
+        let error = compile(&spec).unwrap_err();
+        let diagnostic = error.diagnostic().expect("portable slot diagnostic");
+        assert_eq!(diagnostic.code, "regex_slot_identity_invalid");
+        assert_eq!(diagnostic.stage, "validate_compiled_rule");
+        assert_eq!(
+            diagnostic.field("rule_label"),
+            Some(&serde_json::json!("Top"))
+        );
+        assert_eq!(
+            diagnostic.field("target_rule"),
+            Some(&serde_json::json!("Child"))
+        );
+        assert_eq!(diagnostic.field("regex_index"), Some(&serde_json::json!(5)));
     }
 
     #[test]

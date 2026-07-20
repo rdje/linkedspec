@@ -16,8 +16,12 @@ use crate::{
     RuntimeDiagnosticOutputSinkFailure, RuntimeExitNow,
 };
 use linkedspec_core::ast::RuleMode;
-use linkedspec_core::compiler::validate_no_removed_aggregate_selectors;
+use linkedspec_core::compiler::{
+    REGEX_SLOT_IDENTITY_CONTRACT, validate_compiled_regex_slot_identities,
+    validate_no_removed_aggregate_selectors,
+};
 use linkedspec_core::entry_rule::{ENTRY_RULE_NOT_FOUND_CODE, NO_RULES_DEFINED_CODE};
+use linkedspec_core::error::LinkedSpecError;
 use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
 use serde::Serialize;
@@ -35,6 +39,7 @@ pub enum GeneratedSourceStage {
     EmitSource,
     CompileOrLoadGeneratedSource,
     ValidateGeneratedPlan,
+    ValidateCompiledRule,
     ValidateSpec,
     SelectEntryRule,
     ExecuteGenerated,
@@ -51,15 +56,22 @@ pub enum GeneratedSourceCode {
     GeneratedPlanFamilyMismatch,
     GeneratedPlanUnknownFamily,
     GeneratedSourceContractVersionMismatch,
+    RegexSlotIdentityInvalid,
     NoRulesDefined,
     EntryRuleNotFound,
     GeneratedExecutionFailed,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-struct GeneratedSourceContractMismatch {
-    expected_contract: Box<str>,
-    actual_contract: Box<str>,
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
+struct GeneratedSourceErrorContext {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    expected_contract: Option<Box<str>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    actual_contract: Option<Box<str>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    target_rule: Option<Box<str>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    regex_index: Option<usize>,
 }
 
 /// Serializable generated-source failure with portable source attribution.
@@ -80,7 +92,7 @@ pub struct GeneratedSourceError {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub detail: Option<Box<str>>,
     #[serde(flatten, skip_serializing_if = "Option::is_none")]
-    contract_mismatch: Option<Box<GeneratedSourceContractMismatch>>,
+    context: Option<Box<GeneratedSourceErrorContext>>,
 }
 
 impl GeneratedSourceError {
@@ -100,7 +112,7 @@ impl GeneratedSourceError {
             entry_rule: None,
             handler_family: None,
             detail: None,
-            contract_mismatch: None,
+            context: None,
         }
     }
 
@@ -119,6 +131,15 @@ impl GeneratedSourceError {
         self
     }
 
+    fn with_regex_slot(mut self, target_rule: impl Into<String>, regex_index: usize) -> Self {
+        let context = self
+            .context
+            .get_or_insert_with(|| Box::new(GeneratedSourceErrorContext::default()));
+        context.target_rule = Some(target_rule.into().into_boxed_str());
+        context.regex_index = Some(regex_index);
+        self
+    }
+
     fn with_detail(mut self, detail: impl Into<String>) -> Self {
         self.detail = Some(detail.into().into_boxed_str());
         self
@@ -129,25 +150,40 @@ impl GeneratedSourceError {
         expected_contract: impl Into<String>,
         actual_contract: impl Into<String>,
     ) -> Self {
-        self.contract_mismatch = Some(Box::new(GeneratedSourceContractMismatch {
-            expected_contract: expected_contract.into().into_boxed_str(),
-            actual_contract: actual_contract.into().into_boxed_str(),
-        }));
+        let context = self
+            .context
+            .get_or_insert_with(|| Box::new(GeneratedSourceErrorContext::default()));
+        context.expected_contract = Some(expected_contract.into().into_boxed_str());
+        context.actual_contract = Some(actual_contract.into().into_boxed_str());
         self
     }
 
     /// Return the active contract expected by a version-mismatch failure.
     pub fn expected_contract(&self) -> Option<&str> {
-        self.contract_mismatch
+        self.context
             .as_deref()
-            .map(|mismatch| mismatch.expected_contract.as_ref())
+            .and_then(|context| context.expected_contract.as_deref())
     }
 
     /// Return the artifact contract supplied to a version-mismatch failure.
     pub fn actual_contract(&self) -> Option<&str> {
-        self.contract_mismatch
+        self.context
             .as_deref()
-            .map(|mismatch| mismatch.actual_contract.as_ref())
+            .and_then(|context| context.actual_contract.as_deref())
+    }
+
+    /// Return the target rule attributed to an invalid compiled regex slot.
+    pub fn target_rule(&self) -> Option<&str> {
+        self.context
+            .as_deref()
+            .and_then(|context| context.target_rule.as_deref())
+    }
+
+    /// Return the slot index attributed to an invalid compiled regex slot.
+    pub fn regex_index(&self) -> Option<usize> {
+        self.context
+            .as_deref()
+            .and_then(|context| context.regex_index)
     }
 
     /// Project a host compiler/loader failure into the portable error contract.
@@ -347,6 +383,8 @@ pub fn emit_rust_source_v2(
         )
         .with_detail(error.to_string())
     })?;
+    validate_compiled_regex_slot_identities(compiled)
+        .map_err(|error| generated_compiled_slot_error(source_identity, &error))?;
 
     let spec_json = serde_json::to_string(compiled).map_err(|error| {
         GeneratedSourceError::new(
@@ -393,6 +431,9 @@ pub fn emit_rust_source_v2(
     ));
     source.push_str(&format!(
         "pub const LINKEDSPEC_GENERATED_SOURCE_FORMAT: u32 = {GENERATED_SOURCE_FORMAT};\n"
+    ));
+    source.push_str(&format!(
+        "pub const LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT: &str = {REGEX_SLOT_IDENTITY_CONTRACT:?};\n"
     ));
     source.push_str("pub const LINKEDSPEC_GENERATED_SOURCE_IDENTITY: &str = ");
     source.push_str(&source_identity_literal);
@@ -907,7 +948,40 @@ fn decode_generated_compiled_spec_v2(
     validate_no_removed_aggregate_selectors(&compiled).map_err(|error| {
         GeneratedSourceError::compile_failed(source_identity, error.to_string())
     })?;
+    validate_compiled_regex_slot_identities(&compiled)
+        .map_err(|error| generated_compiled_slot_error(source_identity, &error))?;
     Ok(compiled)
+}
+
+fn generated_compiled_slot_error(
+    source_identity: &str,
+    error: &LinkedSpecError,
+) -> GeneratedSourceError {
+    let diagnostic = error
+        .diagnostic()
+        .expect("compiled slot validator returns a portable diagnostic");
+    let rule_label = diagnostic
+        .field("rule_label")
+        .and_then(serde_json::Value::as_str)
+        .unwrap_or("");
+    let target_rule = diagnostic
+        .field("target_rule")
+        .and_then(serde_json::Value::as_str)
+        .unwrap_or("");
+    let regex_index = diagnostic
+        .field("regex_index")
+        .and_then(serde_json::Value::as_u64)
+        .and_then(|index| usize::try_from(index).ok())
+        .unwrap_or(0);
+    GeneratedSourceError::new(
+        GeneratedSourceStage::ValidateCompiledRule,
+        GeneratedSourceCode::RegexSlotIdentityInvalid,
+        "Generated Rust compiled regex slot identity is invalid",
+        source_identity,
+    )
+    .with_rule_label(rule_label)
+    .with_regex_slot(target_rule, regex_index)
+    .with_detail(diagnostic.message.clone())
 }
 
 fn resolve_generated_entry_context(

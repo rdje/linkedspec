@@ -8,15 +8,38 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.2` — Perl duplicate-slot repair/admission is active task-tree-first from clean
-  neutral commit `93ee7935` at ahead 245. Required-slot ordinary/repeated/cross-target execution, descriptor/trace/
-  generated-v2 projection, exact diagnostics, and the 12-role consumer are signoff-complete at 2+5/26. Canonical
-  Phase 0 passes 1,031/1,031 in 615 seconds and exact cleanup passes; only commit preparation remains before Rust
-  `.3`.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.3` — Rust duplicate-slot parity is active task-tree-first from clean Perl commit
+  `568d3825` at ahead 246. Required-slot native/generated execution, descriptor/generated identity, trace,
+  diagnostics, and the exact 15-role admission are signoff-complete at 3 complete + 4 pending / 31 mutations.
+  Complete Rust-local, canonical, lockstep, and cleanup pass; the clean commit is the only remaining boundary.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity parity` is the active slice
+  title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.3 — implement Rust duplicate regex-slot identity**
+  (DONE, signed off and awaiting its prepared clean commit).
+
+  **Result:** Rust ordered native/generated execution matches the required compiled slot directly, preserves
+  combined choice, and projects descriptor/emitted identity, trace, captures, and exact typed diagnostics.
+
+  **Proof:** Exact 15-role admission, complete Rust core/runtime/oracle/classifier/integration/primary proof,
+  3+4 rollout with 31 mutations, KM 639/4,702, mdBook/four doctrines, canonical primary 65x2, Phase 0
+  1,031/1,031 in 619 seconds, and exact cleanup pass.
+
+  **Next:** Commit and clean `.3`; only then activate Dart repair/admission `.9.1.8.1.4` task-tree-first.
+
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.2 — implement Perl duplicate regex-slot identity**
+  (DONE at clean commit `568d3825`).
+
+  **Result:** Perl ordered execution matches required compiled slots directly; descriptors, generated-v2 payload,
+  capture snapshots, trace identity, and stable invariants pass one exact 12-role admission consumer.
+
+  **Proof:** Five fixtures, two diagnostics, six runtime rows, 2+5 rollout, 26 mutations, KM 638/4,693,
+  mdBook/four doctrines, canonical primary 65x2, Phase 0 1,031/1,031 in 615 seconds, and exact cleanup pass.
+
+  **Next:** Rust repair/admission `.9.1.8.1.3` is active from the clean Perl commit.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract**
   (DONE at clean commit `93ee7935`).
 

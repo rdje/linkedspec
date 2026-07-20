@@ -39,6 +39,7 @@ use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
 };
+use linkedspec_core::compiler::validate_compiled_regex_slot_identities;
 use linkedspec_core::entry_rule::{
     ENTRY_RULE_NOT_FOUND_CODE, EntryRuleSelectionBasis, NO_RULES_DEFINED_CODE,
     SELECT_ENTRY_RULE_STAGE, VALIDATE_SPEC_STAGE,
@@ -46,11 +47,61 @@ use linkedspec_core::entry_rule::{
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
-    BcodeEntry, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
+    BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
 };
 use serde_json::Value;
+use std::fmt;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
+
+/// Internal invariant failure raised when ordered matching reports an identity
+/// other than the structural slot the sequence already required.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OrderedRegexSlotIdentityError {
+    pub rule_label: String,
+    pub target_rule: String,
+    pub expected_regex_index: usize,
+    pub actual_regex_index: usize,
+}
+
+impl fmt::Display for OrderedRegexSlotIdentityError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            formatter,
+            "ordered_regex_slot_identity_lost stage=execute_rule rule_label={} target_rule={} expected_regex_index={} actual_regex_index={}",
+            self.rule_label, self.target_rule, self.expected_regex_index, self.actual_regex_index
+        )
+    }
+}
+
+impl std::error::Error for OrderedRegexSlotIdentityError {}
+
+/// Assert the portable ordered slot-identity invariant.
+pub fn assert_ordered_regex_slot_identity(
+    rule_label: &str,
+    expected_target_rule: &str,
+    expected_regex_index: usize,
+    actual_target_rule: &str,
+    actual_regex_index: usize,
+) -> Result<(), OrderedRegexSlotIdentityError> {
+    if expected_target_rule == actual_target_rule && expected_regex_index == actual_regex_index {
+        return Ok(());
+    }
+    Err(OrderedRegexSlotIdentityError {
+        rule_label: rule_label.to_string(),
+        target_rule: expected_target_rule.to_string(),
+        expected_regex_index,
+        actual_regex_index,
+    })
+}
+
+fn structural_slot_identity(rule: &CompiledRule, dispatch_index: usize) -> (&str, usize) {
+    rule.acode_dispatch
+        .iter()
+        .find(|entry| entry.regex_idx == dispatch_index)
+        .map(|entry| (entry.child_label.as_str(), entry.child_regex_idx))
+        .unwrap_or((rule.label.as_str(), dispatch_index))
+}
 
 fn strict_decimal_text(value: &str) -> bool {
     let bytes = value.as_bytes();
@@ -865,6 +916,11 @@ impl GeneratedPlanExecutor<'_> {
             // Generated-source v2 derives cursor spending from the validated
             // family row; no mutable/global cursor field crosses the artifact.
             let cursor_policy = family.cursor_policy();
+            let required_and_idx = is_and_acode_seq.then_some(if is_rep_and_acode_seq {
+                and_acode_idx
+            } else {
+                matches
+            });
             let match_result = if has_entry_idx && matches == 0 {
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
                 let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
@@ -876,6 +932,13 @@ impl GeneratedPlanExecutor<'_> {
                     m.index = entry_regex_idx;
                     m
                 })
+            } else if let Some(required_index) = required_and_idx {
+                match cursor_policy {
+                    ParseMode::Consume => {
+                        alt.consume_slot_match(&ctx.input, ctx.pos, required_index)
+                    }
+                    ParseMode::Seek => alt.seek_slot_match(&ctx.input, ctx.pos, required_index),
+                }
             } else {
                 match cursor_policy {
                     ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
@@ -909,28 +972,41 @@ impl GeneratedPlanExecutor<'_> {
             }
 
             if let Some(m) = match_result {
-                let expected_and_idx = if is_rep_and_acode_seq {
-                    and_acode_idx
-                } else {
-                    matches
-                };
-                if is_and_acode_seq && m.index != expected_and_idx {
-                    ctx.trace_decision(
-                        "rust_runtime:generated_plan:and_sequence_slot",
-                        false,
-                        format!(
-                            "rule={label} regex_idx={} expected_idx={expected_and_idx} matches={matches}",
-                            m.index
-                        ),
-                        TraceLevel::MEDIUM,
+                let dispatch_index = required_and_idx.unwrap_or(m.index);
+                let (target_rule, target_regex_index) =
+                    structural_slot_identity(rule, dispatch_index);
+                let (actual_target_rule, actual_regex_index) =
+                    structural_slot_identity(rule, m.index);
+                if required_and_idx.is_some()
+                    && let Err(error) = assert_ordered_regex_slot_identity(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        actual_target_rule,
+                        actual_regex_index,
+                    )
+                {
+                    ctx.capture_ordered_regex_slot_identity_lost(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        actual_regex_index,
                     );
-                    if let Some(ref lxcode) = rule.lxcode {
-                        self.engine
-                            .execute_lifecycle_block("LX", lxcode, ctx, label)?;
-                        return_if_rule_returned!();
-                    }
-                    break;
+                    return Err(error.to_string());
                 }
+                ctx.trace_decision(
+                    "rust_runtime:generated_plan:regex_slot_selected",
+                    true,
+                    format!(
+                        "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
+                        if rule.mode.is_and() {
+                            "ordered_required"
+                        } else {
+                            "choice"
+                        }
+                    ),
+                    TraceLevel::MEDIUM,
+                );
 
                 let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);
@@ -2061,6 +2137,10 @@ impl Engine {
                 actual_arity: failure.and_then(|context| context.actual_arity),
                 expected_arity: failure
                     .and_then(|context| context.expected_arity.map(str::to_string)),
+                target_rule: failure.and_then(|context| context.target_rule.clone()),
+                regex_index: failure.and_then(|context| context.regex_index),
+                expected_regex_index: failure.and_then(|context| context.expected_regex_index),
+                actual_regex_index: failure.and_then(|context| context.actual_regex_index),
                 handler_source_label,
             },
         )
@@ -2136,7 +2216,30 @@ impl Engine {
         }
     }
 
+    fn validate_compiled_slot_identities(&self, ctx: &mut RuntimeContext) -> Result<(), String> {
+        validate_compiled_regex_slot_identities(&self.spec).map_err(|error| {
+            if let Some(diagnostic) = error.diagnostic() {
+                let target_rule = diagnostic
+                    .field("target_rule")
+                    .and_then(Value::as_str)
+                    .unwrap_or("");
+                let regex_index = diagnostic
+                    .field("regex_index")
+                    .and_then(Value::as_u64)
+                    .and_then(|index| usize::try_from(index).ok())
+                    .unwrap_or(0);
+                ctx.capture_regex_slot_identity_invalid(
+                    diagnostic.field("rule_label").and_then(Value::as_str),
+                    target_rule,
+                    regex_index,
+                );
+            }
+            error.to_string()
+        })
+    }
+
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
+        self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, None)?;
         ctx.trace_decision(
             "rust_runtime:engine:top_rule",
@@ -2156,6 +2259,7 @@ impl Engine {
         ctx: &mut RuntimeContext,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:engine:entry_rule",
@@ -2177,6 +2281,7 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
@@ -2204,6 +2309,7 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
@@ -2707,6 +2813,11 @@ impl Engine {
 
             // ── Match ──
             let parse_mode = rule.cursor_policy();
+            let required_and_idx = is_and_acode_seq.then_some(if is_rep_and_acode_seq {
+                and_acode_idx
+            } else {
+                matches
+            });
             let match_result = if has_entry_idx && matches == 0 {
                 // Self-recursive entry: only try the specified regex slot.
                 // Build a single-pattern alternation for this slot.
@@ -2721,6 +2832,13 @@ impl Engine {
                     m.index = entry_regex_idx;
                     m
                 })
+            } else if let Some(required_index) = required_and_idx {
+                match parse_mode {
+                    ParseMode::Consume => {
+                        alt.consume_slot_match(&ctx.input, ctx.pos, required_index)
+                    }
+                    ParseMode::Seek => alt.seek_slot_match(&ctx.input, ctx.pos, required_index),
+                }
             } else {
                 match parse_mode {
                     ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
@@ -2754,27 +2872,41 @@ impl Engine {
             }
 
             if let Some(m) = match_result {
-                let expected_and_idx = if is_rep_and_acode_seq {
-                    and_acode_idx
-                } else {
-                    matches
-                };
-                if is_and_acode_seq && m.index != expected_and_idx {
-                    ctx.trace_decision(
-                        "rust_runtime:engine:and_sequence_slot",
-                        false,
-                        format!(
-                            "rule={label} regex_idx={} expected_idx={expected_and_idx} matches={matches}",
-                            m.index
-                        ),
-                        TraceLevel::MEDIUM,
+                let dispatch_index = required_and_idx.unwrap_or(m.index);
+                let (target_rule, target_regex_index) =
+                    structural_slot_identity(rule, dispatch_index);
+                let (actual_target_rule, actual_regex_index) =
+                    structural_slot_identity(rule, m.index);
+                if required_and_idx.is_some()
+                    && let Err(error) = assert_ordered_regex_slot_identity(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        actual_target_rule,
+                        actual_regex_index,
+                    )
+                {
+                    ctx.capture_ordered_regex_slot_identity_lost(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        actual_regex_index,
                     );
-                    if let Some(ref lxcode) = rule.lxcode {
-                        self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
-                        return_if_rule_returned!();
-                    }
-                    break;
+                    return Err(error.to_string());
                 }
+                ctx.trace_decision(
+                    "rust_runtime:engine:regex_slot_selected",
+                    true,
+                    format!(
+                        "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
+                        if rule.mode.is_and() {
+                            "ordered_required"
+                        } else {
+                            "choice"
+                        }
+                    ),
+                    TraceLevel::MEDIUM,
+                );
 
                 let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);

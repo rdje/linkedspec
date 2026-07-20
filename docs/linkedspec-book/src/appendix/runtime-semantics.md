@@ -540,16 +540,11 @@ cross-backend behavior is:
 ADR `0047` makes ordered identity normative: the executor already knows which
 sequence slot is required next, so it matches only that structural target-rule/
 regex-index slot and reports that identity. A repeated AND resets to its first
-required slot for every accepted iteration. Dart, Julia, PUC Lua, and LuaJIT
-currently exhibit this behavior for ordinary and repeated AND execution.
+required slot for every accepted iteration. Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT now exhibit this behavior for ordinary and repeated AND execution.
 
-Perl and Rust currently have a known duplicate-slot limitation. They match a
-combined alternation first and compare its reported branch index with the
-required sequence index afterward. If two slots contain the same regex, the
-engine reports the earlier branch for both positions; a later required slot is
-then rejected even though its pattern accepts the input. For example, this
-currently returns `null` on Perl and Rust but `"ordered-ok"` on Dart, Julia,
-PUC Lua, and LuaJIT:
+For example, every implementation accepts both structural slots below and
+returns `"ordered-ok"` even though their pattern text is identical:
 
 ```text
 Top::AND
@@ -558,19 +553,27 @@ Top::AND
 ```
 
 The corresponding `OR` rule deterministically chooses slot 0 on every backend.
-Descriptors and generated-v2 payloads preserve both slot indices; the divergence
-is in ordered runtime matching, not parsing or artifact format. Duplicate text
-remains legal. Choice still evaluates every eligible slot and breaks equal-start
-ties toward the first authored slot. Numeric selectors and ADR `0045`'s future
-named selectors resolve to the same structural identity; pattern text, adjacency,
-capture text, and alternation guesses never recover identity.
+Duplicate text remains legal. Choice still evaluates every eligible slot and
+breaks equal-start ties toward the first authored slot. Numeric selectors and
+ADR `0045`'s future named selectors resolve to the same structural identity;
+pattern text, adjacency, capture text, and alternation guesses never recover
+identity.
+
+Perl and Rust originally exposed the same ordered-only defect: a combined
+alternation reported the earlier duplicate branch, after which the handler
+rejected it against its already-known later sequence index. Perl now passes a
+compiled required row to `LinkedRE::match_slot`. Rust retains individually
+compiled regexes beside `CompiledAlternation` and calls `consume_slot_match` or
+`seek_slot_match` from both ordinary and generated-plan ordered loops. Their
+combined matchers remain the choice owner, so earliest-start and source-order
+priority are unchanged. Both implementations preserve whole, positional, and
+named captures when matching a required slot.
 
 The executable neutral contract is
 `linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
-v2 because reconstructed compiled state already retains slot identity. Backend
-repairs and conformance locks are tracked by
-`FUTURE-PARITY-BACKLOG.9.1.8.1.2-.7`; until Perl and Rust land, authors who need
-current portability should make their ordered slot patterns mutually exclusive.
+v2 because reconstructed compiled state already retains slot identity. Perl and
+Rust are admitted through `.2-.3`; Dart, Julia, and Lua conformance locks plus
+recurring/public closeout remain `.4-.7`.
 
 ## 9. Zero-Progress Guard
 

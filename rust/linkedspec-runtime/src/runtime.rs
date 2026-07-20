@@ -143,6 +143,10 @@ pub(crate) struct RuntimeFailureContext {
     pub(crate) helper_name: Option<String>,
     pub(crate) actual_arity: Option<usize>,
     pub(crate) expected_arity: Option<&'static str>,
+    pub(crate) target_rule: Option<String>,
+    pub(crate) regex_index: Option<usize>,
+    pub(crate) expected_regex_index: Option<usize>,
+    pub(crate) actual_regex_index: Option<usize>,
 }
 
 #[derive(Debug, Clone)]
@@ -260,6 +264,10 @@ impl RuntimeContext {
                 helper_name: None,
                 actual_arity: None,
                 expected_arity: None,
+                target_rule: None,
+                regex_index: None,
+                expected_regex_index: None,
+                actual_regex_index: None,
             });
         }
     }
@@ -280,6 +288,10 @@ impl RuntimeContext {
                 helper_name: None,
                 actual_arity: None,
                 expected_arity: None,
+                target_rule: None,
+                regex_index: None,
+                expected_regex_index: None,
+                actual_regex_index: None,
             });
         }
     }
@@ -300,6 +312,57 @@ impl RuntimeContext {
                 helper_name: Some(helper_name.to_string()),
                 actual_arity: Some(actual_arity),
                 expected_arity: Some(expected_arity),
+                target_rule: None,
+                regex_index: None,
+                expected_regex_index: None,
+                actual_regex_index: None,
+            });
+        }
+    }
+
+    pub(crate) fn capture_regex_slot_identity_invalid(
+        &mut self,
+        rule_label: Option<&str>,
+        target_rule: &str,
+        regex_index: usize,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage: "validate_compiled_rule",
+                summary: "Rust compiled regex slot identity validation failed",
+                rule_label: rule_label.map(str::to_string),
+                code: Some("regex_slot_identity_invalid"),
+                helper_name: None,
+                actual_arity: None,
+                expected_arity: None,
+                target_rule: Some(target_rule.to_string()),
+                regex_index: Some(regex_index),
+                expected_regex_index: None,
+                actual_regex_index: None,
+            });
+        }
+    }
+
+    pub(crate) fn capture_ordered_regex_slot_identity_lost(
+        &mut self,
+        rule_label: &str,
+        target_rule: &str,
+        expected_regex_index: usize,
+        actual_regex_index: usize,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage: "execute_rule",
+                summary: "Rust ordered regex slot identity invariant failed",
+                rule_label: Some(rule_label.to_string()),
+                code: Some("ordered_regex_slot_identity_lost"),
+                helper_name: None,
+                actual_arity: None,
+                expected_arity: None,
+                target_rule: Some(target_rule.to_string()),
+                regex_index: None,
+                expected_regex_index: Some(expected_regex_index),
+                actual_regex_index: Some(actual_regex_index),
             });
         }
     }

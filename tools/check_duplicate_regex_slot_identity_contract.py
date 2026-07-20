@@ -29,6 +29,7 @@ TOP_LEVEL_FIELDS = {
     "generated_source_v2",
     "trace_contract",
     "perl_admission",
+    "rust_admission",
     "implementation_inventory",
     "migration",
     "rollout",
@@ -90,8 +91,8 @@ INVENTORY = [
     (
         "rust",
         "rust",
-        "combined_alternation_then_expected_index",
-        "drift",
+        "match_required_slot_directly",
+        "implemented",
         "first_authored",
         "preserved",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.3",
@@ -136,7 +137,7 @@ INVENTORY = [
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.1"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.2"),
-    ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
+    ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
     ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.5"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
@@ -173,6 +174,29 @@ PERL_ADMISSION = {
         "emitted_source",
         "generated_direct",
         "generated_trace",
+        "invalid_identity_diagnostics",
+    ],
+}
+RUST_ADMISSION = {
+    "consumer": MIGRATION["rust_consumer"],
+    "canonical_driver": "tools/run_rust_local.sh",
+    "ordered_mechanism": "match_required_slot_directly",
+    "generated_slot_payload": "serialized_compiled_rule",
+    "roles": [
+        "neutral_fixtures",
+        "native_ordered",
+        "native_choice",
+        "repeated_ordered",
+        "repeated_control",
+        "cross_target",
+        "loaded",
+        "reconstructed",
+        "descriptor",
+        "emitted_source",
+        "generated_direct",
+        "native_trace",
+        "generated_trace",
+        "primary_command",
         "invalid_identity_diagnostics",
     ],
 }
@@ -460,6 +484,7 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
         "trace contract drifted",
     )
     require(contract["perl_admission"] == PERL_ADMISSION, "Perl admission drifted")
+    require(contract["rust_admission"] == RUST_ADMISSION, "Rust admission drifted")
 
     inventory = contract["implementation_inventory"]
     require(isinstance(inventory, list), "implementation inventory must be an array")
@@ -525,6 +550,7 @@ def validate_filesystem_contract() -> None:
         ROOT / MIGRATION["checker"],
         ROOT / "docs" / "knowledge" / "duplicate-regex-slot-identity-contract.md",
         ROOT / PERL_ADMISSION["consumer"],
+        ROOT / RUST_ADMISSION["consumer"],
     ]
     require(all(path.is_file() for path in required_paths), "neutral contract file is missing")
     index_text = (ROOT / "docs" / "decisions" / "INDEX.md").read_text(encoding="utf-8")
@@ -554,6 +580,10 @@ def validate_filesystem_contract() -> None:
         "canonical CI omits Perl consumer tracked input",
     )
     require(
+        f"require_tracked_file {RUST_ADMISSION['consumer']}" in ci_text,
+        "canonical CI omits Rust consumer tracked input",
+    )
+    require(
         "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
         "canonical CI omits neutral checker execution",
     )
@@ -567,6 +597,16 @@ def validate_filesystem_contract() -> None:
         all(f"sub role_{role}" in perl_consumer_text for role in PERL_ADMISSION["roles"]),
         "Perl consumer role inventory drifted",
     )
+    rust_consumer_text = (ROOT / RUST_ADMISSION["consumer"]).read_text(encoding="utf-8")
+    require(
+        all(f"fn role_{role}" in rust_consumer_text for role in RUST_ADMISSION["roles"]),
+        "Rust consumer role inventory drifted",
+    )
+    rust_driver_text = (ROOT / RUST_ADMISSION["canonical_driver"]).read_text(encoding="utf-8")
+    require(
+        'test --manifest-path rust/Cargo.toml -p linkedspec-runtime' in rust_driver_text,
+        "Rust canonical driver omits the runtime package consumer",
+    )
     linked_re_text = (ROOT / "perl" / "LinkedRE.pm").read_text(encoding="utf-8")
     emitter_text = (ROOT / "perl" / "LinkedSpec" / "HandlerVariantEmitter.pm").read_text(encoding="utf-8")
     compiler_text = (ROOT / "perl" / "LinkedSpec" / "Compiler.pm").read_text(encoding="utf-8")
@@ -578,6 +618,28 @@ def validate_filesystem_contract() -> None:
     require(
         "dependency_slot_map" in compiler_text,
         "Perl generated compiled-slot payload is missing",
+    )
+    rust_helpers_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "helpers.rs").read_text(encoding="utf-8")
+    rust_engine_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "engine.rs").read_text(encoding="utf-8")
+    rust_descriptor_text = (ROOT / "rust" / "linkedspec-core" / "src" / "descriptor.rs").read_text(encoding="utf-8")
+    rust_emitter_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "source_emitter.rs").read_text(encoding="utf-8")
+    require(
+        "consume_slot_match" in rust_helpers_text and "seek_slot_match" in rust_helpers_text,
+        "Rust required-slot matchers are missing",
+    )
+    require(
+        "rust_runtime:engine:regex_slot_selected" in rust_engine_text
+        and "rust_runtime:generated_plan:regex_slot_selected" in rust_engine_text
+        and "assert_ordered_regex_slot_identity" in rust_engine_text,
+        "Rust native/generated slot trace or invariant seam is missing",
+    )
+    require(
+        "regex_slot_identity_contract" in rust_descriptor_text,
+        "Rust descriptor slot-contract projection is missing",
+    )
+    require(
+        "LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT" in rust_emitter_text,
+        "Rust generated-source slot-contract projection is missing",
     )
 
 
@@ -612,6 +674,9 @@ def mutation_checks(contract: dict[str, Any]) -> int:
     def regress_perl(value: dict[str, Any]) -> None:
         value["rollout"][1]["status"] = "pending"
 
+    def regress_rust(value: dict[str, Any]) -> None:
+        value["rollout"][2]["status"] = "pending"
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("contract id", lambda value: value.__setitem__("contract_id", "stale")),
         ("duplicate legality", lambda value: value["identity"].__setitem__("duplicate_pattern_text_is_legal", False)),
@@ -632,11 +697,16 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Perl admission consumer", lambda value: value["perl_admission"].__setitem__("consumer", "t/other.t")),
         ("Perl admission role", lambda value: value["perl_admission"]["roles"].pop()),
         ("Perl ordered mechanism", lambda value: value["perl_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
+        ("Rust admission consumer", lambda value: value["rust_admission"].__setitem__("consumer", "rust/other.rs")),
+        ("Rust admission role", lambda value: value["rust_admission"]["roles"].pop()),
+        ("Rust ordered mechanism", lambda value: value["rust_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
         ("inventory omission", remove_inventory),
         ("Perl inventory regression", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift")),
+        ("Rust inventory regression", lambda value: value["implementation_inventory"][1].__setitem__("ordered_status", "drift")),
         ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
         ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
         ("Perl rollout regression", regress_perl),
+        ("Rust rollout regression", regress_rust),
         ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
         ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
     ]

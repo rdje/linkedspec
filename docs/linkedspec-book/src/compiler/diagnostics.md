@@ -118,6 +118,18 @@ empty compiled state uses `top_rule_selection`. Existing `execute(...)` / `execu
 canonical primary CLI projection are unchanged. The complete Rust/CLI recurring gate passes, and `.1.6.3.2`
 admits this capability for all four variants.
 
+Rust also rejects malformed compiled action-slot identity before ordinary,
+loaded/reconstructed, or generated-plan execution. The portable failure is
+`regex_slot_identity_invalid` at `validate_compiled_rule` with `rule_label`,
+`target_rule`, and `regex_index`. If an ordered matcher ever returns an identity
+other than the already-required slot, the invariant is
+`ordered_regex_slot_identity_lost` at `execute_rule` with `rule_label`,
+`target_rule`, `expected_regex_index`, and `actual_regex_index`.
+`RuntimeDiagnostic` exposes those optional fields. Generated adapters project
+invalid compiled state as `GeneratedSourceStage::ValidateCompiledRule` /
+`GeneratedSourceCode::RegexSlotIdentityInvalid` with the same target identity;
+the source emitter rejects it before producing an artifact.
+
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or
 `execute_value_with_diagnostic_output(input, options, sink)` with an optional caller-owned

@@ -58,6 +58,9 @@ pub mod regex_engine {
     pub struct CompiledAlternation {
         /// Combined regex: `(pat1)|(pat2)|...` — None if no patterns.
         combined_regex: Option<Regex>,
+        /// Individually compiled patterns used when ordered execution already
+        /// owns one required structural slot.
+        slot_regexes: Vec<Regex>,
         /// Per-alternative group metadata for capture extraction.
         alt_infos: Vec<AltInfo>,
     }
@@ -76,6 +79,7 @@ pub mod regex_engine {
             if patterns.is_empty() {
                 return Ok(Self {
                     combined_regex: None,
+                    slot_regexes: Vec::new(),
                     alt_infos: Vec::new(),
                 });
             }
@@ -88,6 +92,7 @@ pub mod regex_engine {
             // First pass: compile each pattern individually to count capture groups
             // and collect named capture names.
             let mut alt_infos: Vec<AltInfo> = Vec::with_capacity(patterns.len());
+            let mut slot_regexes: Vec<Regex> = Vec::with_capacity(patterns.len());
             let mut group_offset: usize = 1; // start after group 0 (full match)
 
             for (i, pat) in normalized_patterns.iter().enumerate() {
@@ -105,6 +110,7 @@ pub mod regex_engine {
                     group_offset,
                     capture_names,
                 });
+                slot_regexes.push(re);
                 group_offset += group_count;
             }
 
@@ -121,6 +127,7 @@ pub mod regex_engine {
 
             Ok(Self {
                 combined_regex: Some(combined_regex),
+                slot_regexes,
                 alt_infos,
             })
         }
@@ -148,8 +155,8 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let (groups, captures) = extract_groups(combined, remaining, info);
-            let named = extract_named(combined, remaining, info);
+            let (groups, captures) = extract_groups(combined, remaining, info, info.group_offset);
+            let named = extract_named(combined, remaining, info, info.group_offset);
 
             Some(MatchResult {
                 index: alt_idx,
@@ -182,13 +189,64 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let (groups, captures) = extract_groups(combined, remaining, info);
-            let named = extract_named(combined, remaining, info);
+            let (groups, captures) = extract_groups(combined, remaining, info, info.group_offset);
+            let named = extract_named(combined, remaining, info, info.group_offset);
 
             Some(MatchResult {
                 index: alt_idx,
                 start: pos,
                 end: pos + m.end,
+                groups,
+                captures,
+                named,
+            })
+        }
+
+        /// Match one already-required structural slot in seek mode and report
+        /// that same authored index. This avoids asking a combined alternation
+        /// to rediscover identity for duplicate pattern text.
+        pub fn seek_slot_match(
+            &self,
+            input: &str,
+            pos: usize,
+            slot_index: usize,
+        ) -> Option<MatchResult> {
+            self.match_slot(input, pos, slot_index, false)
+        }
+
+        /// Match one already-required structural slot in consume mode and
+        /// report that same authored index.
+        pub fn consume_slot_match(
+            &self,
+            input: &str,
+            pos: usize,
+            slot_index: usize,
+        ) -> Option<MatchResult> {
+            self.match_slot(input, pos, slot_index, true)
+        }
+
+        fn match_slot(
+            &self,
+            input: &str,
+            pos: usize,
+            slot_index: usize,
+            consume: bool,
+        ) -> Option<MatchResult> {
+            let regex = self.slot_regexes.get(slot_index)?;
+            let info = self.alt_infos.get(slot_index)?;
+            let remaining = &input[pos..];
+            let matched = if consume {
+                let matched = regex.find_first_at(remaining, 0)?;
+                (matched.start == 0).then_some(matched)?
+            } else {
+                regex.find_first(remaining)?
+            };
+            let (groups, captures) = extract_groups(regex, remaining, info, 1);
+            let named = extract_named(regex, remaining, info, 1);
+            Some(MatchResult {
+                index: slot_index,
+                start: pos + matched.start,
+                end: pos + matched.end,
                 groups,
                 captures,
                 named,
@@ -371,7 +429,12 @@ pub mod regex_engine {
     /// match, then every capture slot in the winning branch. `captures` is the
     /// LinkedSpec helper surface: capture-only, compacted by participation like
     /// Perl `LinkedRE.pm`'s `grep { defined } $1..$N`.
-    fn extract_groups(regex: &Regex, haystack: &str, info: &AltInfo) -> (Vec<String>, Vec<String>) {
+    fn extract_groups(
+        regex: &Regex,
+        haystack: &str,
+        info: &AltInfo,
+        group_offset: usize,
+    ) -> (Vec<String>, Vec<String>) {
         let mut groups = Vec::with_capacity(1 + info.group_count);
         let mut captures = Vec::with_capacity(info.group_count);
         if let Some(caps) = regex.captures(haystack) {
@@ -383,7 +446,7 @@ pub mod regex_engine {
             );
             // Winning branch's groups (offset by info.group_offset)
             for local_idx in 0..info.group_count {
-                let global_idx = info.group_offset + local_idx;
+                let global_idx = group_offset + local_idx;
                 if let Some(m) = caps.get(global_idx) {
                     captures.push(m.as_str().to_string());
                 }
@@ -398,7 +461,12 @@ pub mod regex_engine {
     }
 
     /// Extract named capture groups belonging to the winning alternative.
-    fn extract_named(regex: &Regex, haystack: &str, info: &AltInfo) -> HashMap<String, String> {
+    fn extract_named(
+        regex: &Regex,
+        haystack: &str,
+        info: &AltInfo,
+        group_offset: usize,
+    ) -> HashMap<String, String> {
         let mut named = HashMap::new();
         if let Some(caps) = regex.captures(haystack) {
             // capture_names includes group 0 at index 0 (always None).
@@ -406,7 +474,7 @@ pub mod regex_engine {
             // Global group index = group_offset + (capture_names_index - 1).
             for (cap_idx, name_opt) in info.capture_names.iter().enumerate().skip(1) {
                 if let Some(name) = name_opt {
-                    let global_idx = info.group_offset + (cap_idx - 1);
+                    let global_idx = group_offset + (cap_idx - 1);
                     if let Some(m) = caps.get(global_idx) {
                         named.insert(name.clone(), m.as_str().to_string());
                     }
@@ -469,6 +537,22 @@ pub mod regex_engine {
             let alt = CompiledAlternation::compile(&["cat".into(), "cat".into()]).unwrap();
             let result = alt.seek_match("the cat sat", 0).unwrap();
             assert_eq!(result.index, 0);
+        }
+
+        #[test]
+        fn required_slot_match_preserves_duplicate_index_and_captures() {
+            let alt = CompiledAlternation::compile(&["(?P<word>a)".into(), "(?P<word>a)".into()])
+                .unwrap();
+            let combined = alt.consume_match("aa", 0).unwrap();
+            assert_eq!(combined.index, 0, "choice ties remain first-authored");
+
+            let required = alt.consume_slot_match("aa", 1, 1).unwrap();
+            assert_eq!(required.index, 1);
+            assert_eq!(required.start, 1);
+            assert_eq!(required.end, 2);
+            assert_eq!(required.matched_text(), "a");
+            assert_eq!(required.captures, vec!["a"]);
+            assert_eq!(required.named_capture("word"), Some("a"));
         }
 
         #[test]

@@ -8,8 +8,9 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, Julia, and dual-ABI Lua generated-source v2, option/CLI removal, and composed
 > cursor admission are complete through `.9.1.7.6`; recurring five-backend admission `.9.1.8` now composes all
-> six runtime legs and selected 5x2x5 primary proof. Identical dependency-regex identity and public no-drift remain
-> dependency-ordered. Independently, root-selection parity is closed at 7 complete / 0 pending. Its recurring
+> six runtime legs and selected 5x2x5 primary proof. Duplicate regex-slot descriptor identity is admitted on Perl
+> and Rust; Dart/Julia/Lua locks and public no-drift remain dependency-ordered. Independently, root-selection parity is closed
+> at 7 complete / 0 pending. Its recurring
 > contract composes every immutable root-selection descriptor identity; Julia root admission composes the
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
 > legacy field.
@@ -148,6 +149,7 @@ In rough form:
   meta => {
     descriptor_model => 'compiled_descriptor_state',
     cursor_contract => 'linkedspec-rule-local-cursor-v1',
+    regex_slot_identity_contract => 'linkedspec-duplicate-regex-slot-identity-v1',
     entry_rule_contract => 'linkedspec-root-rule-selection-v1',
     definition_order => [ ... ],
     compiled_rule_order => [ ... ],
@@ -405,6 +407,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
+- `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl and Rust)
 - `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on admitted Perl, Rust, Dart, Julia, and Lua routes)
 - `definition_order`
 - `compiled_rule_order`
@@ -440,6 +443,10 @@ let compiled = compile(&spec)?;
 let descriptor = compiled.descriptor_state();
 assert_eq!(descriptor.meta.descriptor_model, "compiled_descriptor_state");
 assert_eq!(descriptor.meta.cursor_contract, "linkedspec-rule-local-cursor-v1");
+assert_eq!(
+    descriptor.meta.regex_slot_identity_contract,
+    "linkedspec-duplicate-regex-slot-identity-v1",
+);
 assert_eq!(descriptor.meta.entry_rule_contract, "linkedspec-root-rule-selection-v1");
 assert_eq!(descriptor.meta.compiled_rule_order, ["Top", "Child"]);
 assert_eq!(descriptor.spec["Top"].dependency_refs[0].label, "Child");
@@ -462,6 +469,7 @@ identities survive compiled-state serialization round trips.
 
 Rust uses the rule-local cursor descriptor-v1 metadata variant and root-rule selection v1. Descriptor-wide
 metadata contains `cursor_contract = "linkedspec-rule-local-cursor-v1"`,
+`regex_slot_identity_contract = "linkedspec-duplicate-regex-slot-identity-v1"`,
 `entry_rule_contract = "linkedspec-root-rule-selection-v1"`, and no global cursor field. Definition order and
 each rule's boolean `is_top` remain authored identity even when an explicit ordinary rule executes first. Each
 rule's metadata also contains:

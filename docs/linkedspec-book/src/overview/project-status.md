@@ -57,16 +57,22 @@ identical authored slots, but ordered execution diverges afterward. Perl and Rus
 report the first duplicate branch, and reject it when a later sequence slot was required; their native/generated
 ordered fixture returns `null`. Dart, Julia, PUC Lua, and LuaJIT match the required slot directly and return
 `ordered-ok`. Every runtime resolves duplicate OR/choice ties to the first authored slot. Repeated evidence shows
-the same Perl failure and dual-ABI Lua success, while a non-identical Perl repeated control remains exact. The
-audit changes no runtime behavior. Neutral `.1` now adopts ADR `0047` and executable
+the same original Perl failure and dual-ABI Lua success, while a non-identical Perl repeated control remains exact.
+The audit changes no runtime behavior. Neutral `.1` now adopts ADR `0047` and executable
 `linkedspec-duplicate-regex-slot-identity-v1`: ordered execution matches its required structural slot, repeated
 AND resets its sequence, and choice uses earliest start then first-authored priority. Five fixtures, two
 diagnostics, and six runtime inventory rows. Perl `.2` now matches required compiled rows directly for ordinary,
 repeated, and cross-target AND actions while preserving first-authored choice. Descriptor identity, exact slot
 trace, both typed diagnostics, loaded execution, and independently loaded generated v2 source are locked by one
 12-role consumer. Generated v2 embeds `dependency_slot_map` execution payload without widening its
-`{label,family}` plan. Governance is 2 complete + 5 pending with 26 rejected mutations. Rust repair `.3`,
-preserving-backend locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered.
+`{label,family}` plan. Rust `.3` now retains individually compiled patterns for known ordered steps in both
+ordinary and generated-plan execution, leaves combined choice intact, validates malformed compiled slots before
+native/generated execution, publishes descriptor/emitted contract identity, and passes one exact 15-role
+admission over all five fixtures plus loaded/reconstructed, artifact, trace, primary, and diagnostic routes.
+Governance is 3 complete + 4 pending with 31 rejected mutations. Preserving-backend locks `.4-.6` and recurring/
+public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
+oracle/classifier layers, exact primary 65x2, Knowledge Map/mdBook/doctrines, and canonical Phase 0 1,031/1,031
+in 619 seconds.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole

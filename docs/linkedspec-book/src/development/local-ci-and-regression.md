@@ -192,21 +192,31 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
 two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
-runtime legs, fixes the `.1-.7` migration, and rejects 26 mutations. Canonical CI tracks the contract, checker,
-and admitted Perl consumer and runs:
+runtime legs, fixes the `.1-.7` migration, and rejects 31 mutations. Canonical CI tracks the contract, checker,
+and admitted Perl/Rust consumers. The default gate runs the checker and Perl consumer; the complete Rust package
+driver runs its Rust consumer:
 
 ```bash
 prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+CARGO_TARGET_DIR=/tmp/linkedspec-rust-target bash tools/run_rust_local.sh
 ```
 
 The consumer's 12 roles cover native and loaded execution, repeated duplicate and non-duplicate sequences,
 first-authored choice, cross-target slots, descriptor, emitted and independently loaded generated v2 source,
 native/generated trace, and both typed diagnostics. Generated v2 embeds `dependency_slot_map` execution payload
-but keeps its plan rows exactly `{label, family}`. Rollout is now 2 complete / 5 pending: neutral plus Perl are
-complete, and Rust is the next repair owner.
+but keeps its plan rows exactly `{label, family}`. Rust's 15-role consumer adds native, loaded, reconstructed,
+descriptor, emitted/generated, native/generated trace, primary, repeated/control/cross-target/choice, and typed
+diagnostic proof. Its serialized `CompiledSpec` remains the generated execution payload, and emitted source
+publishes the slot-contract constant without widening the plan. Rollout is now 3 complete / 4 pending: neutral,
+Perl, and Rust are complete; Dart is the next preserving-backend lock.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.
+Rust admission `.9.1.8.1.3` independently passes the complete Rust-local package (including both 105-fixture
+execution layers), its exact 15-role consumer, primary 65/65 twice, Knowledge Map 639/4,702, mdBook, all four
+doctrines, and canonical Phase 0 1,031/1,031 in 619 seconds. The first canonical run rejected a root-selection
+marker split across a source newline; the corrected contiguous marker and duplicate-slot additions pass together
+on the full rerun.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is

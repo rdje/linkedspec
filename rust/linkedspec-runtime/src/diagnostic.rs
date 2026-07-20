@@ -45,6 +45,18 @@ pub struct RuntimeDiagnostic {
     /// Portable expected-arity spelling, when applicable.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub expected_arity: Option<String>,
+    /// Structural target rule for regex slot identity diagnostics.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub target_rule: Option<String>,
+    /// Structural regex slot for compiled identity diagnostics.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub regex_index: Option<usize>,
+    /// Required structural slot for ordered identity diagnostics.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expected_regex_index: Option<usize>,
+    /// Matcher-reported slot for ordered identity diagnostics.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub actual_regex_index: Option<usize>,
     /// Stable Rust runtime handler identity.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub handler_source_label: Option<String>,

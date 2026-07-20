@@ -173,8 +173,12 @@ authored choice priority, and repeated-sequence reset. The checker passes five e
 and six runtime inventory rows. Perl `.2` now matches required compiled rows directly for ordinary, repeated, and
 cross-target AND execution; keeps first-authored choice; embeds exact generated-v2 slot payload without widening
 its `{label,family}` plan; and passes one 12-role consumer over live/loaded/descriptor/emitted/generated/trace and
-diagnostic routes. Governance is 2 complete + 5 pending / 26 mutations. Rust `.3`, preserving-backend locks
-`.4-.6`, and recurring/public `.7` remain dependency-ordered.
+diagnostic routes. Rust `.3` now uses retained individually compiled regexes for known ordered steps in ordinary
+and generated-plan execution while leaving combined choice matching intact. Its exact 15-role consumer covers all
+neutral fixtures plus loaded/reconstructed, descriptor, emitted/generated, native/generated trace, primary, and
+diagnostic routes. Rust descriptors and emitted source publish the contract identity; malformed compiled slots
+fail before execution or artifact reconstruction; v2 plans stay `{label,family}`. Governance is 3 complete + 4
+pending / 31 mutations. Preserving-backend locks `.4-.6` and recurring/public `.7` remain dependency-ordered.
 
 LinkedSpec is a progressive extraction parser DSL for fast parser prototyping with strong support for recursion, nested constructs, and staged coarse-to-fine parsing.
 

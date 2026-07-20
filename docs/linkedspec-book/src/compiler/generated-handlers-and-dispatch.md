@@ -77,6 +77,16 @@ stage, code, summary, identity, and available rule/family/detail attribution;
 `GeneratedSourceError::compile_failed(...)` projects the caller-owned Rust
 compiler/load boundary into that same record.
 
+Rust duplicate-slot admission adds
+`LINKEDSPEC_REGEX_SLOT_IDENTITY_CONTRACT =
+"linkedspec-duplicate-regex-slot-identity-v1"` to emitted modules. The embedded
+serialized `CompiledSpec` remains the owner of ordered patterns and action-edge
+target indices; `GeneratedPlanRow` stays exactly `label` plus `family`. Both
+ordinary and generated-plan ordered handlers match the required compiled slot
+directly and emit `regex_slot_selected`. Decoding malformed embedded state fails
+at `validate_compiled_rule` with `regex_slot_identity_invalid` before family-plan
+execution.
+
 The original `emit_rust_source(&compiled) -> Result<String, String>` remains a
 compatibility adapter with `<inline>` identity. Generated `parse` and
 `parse_with_trace` likewise retain raw-string diagnostics, so adopting v2 does
