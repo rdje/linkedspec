@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted direction; implementation pending
+- Status: accepted; amended by ADR 0050; neutral contract executable; backend rollout pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -326,3 +326,4 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 - Selective trace/observation direction: ADR `0037`
 - Staged provenance: ADRs `0012`-`0016`
 - Current outward descriptor contract: `capability_conformance/outward_descriptor_contract.json`
+- Staged-artifact schema correction: ADR `0050`

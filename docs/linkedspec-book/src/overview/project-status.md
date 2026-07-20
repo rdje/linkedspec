@@ -501,13 +501,14 @@ Three backbone items tracked major structural modernization — all done:
   General multi-spec composition remains future work under `FUTURE-PARITY-BACKLOG.14.1-.14.4`; the EBNF recursive-
   regex and portmap complex-regex walkthrough wording is tracked audit/migration evidence, not the target general
   authoring idiom.
-- **Semantic introspection / MCP direction** - ADR `0049` and completed design leaf `.10.1` fix the planned
-  `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1`: immutable normalized records/relations for
-  rules, regex slots, edges, lifecycle, calls/shapes, staged/generated provenance, portable diagnostics, and
-  ordered explanations; snapshot-local ids/order; bounded pages/logical cost; structural source ceilings and
-  redactions; and optional caller-captured runtime observations. The existing descriptor is reusable input, not
-  the wire model. MCP has only handle capabilities/query projection and owns no semantic or filesystem behavior.
-  Implementation remains pending under `.10.2-.10.10`; `.10.2` is next for the executable neutral contract.
+- **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make
+  `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
+  groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
+  runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
+  50 mutations. ADR `0050` explicitly separates staged payload/job/result records from generated artifacts. The
+  descriptor remains reusable input, not the wire model. Neutral rollout is 1 complete / 8 pending; backend
+  admission is 0 complete / 6 pending, with Perl `.10.3` next. MCP remains handle-only later transport and owns
+  no semantic or filesystem behavior. No current backend API or parser/compiler/runtime behavior changed.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The

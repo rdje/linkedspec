@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-20` (ADR `0049` and semantic-introspection design `.10.1` are complete before behavior;
-  executable neutral schema/checker `.10.2` is the next roadmap-aligned owner)
+- Last updated: `2026-07-20` (executable neutral semantic contract `.10.2` is signoff-complete; Perl reference
+  adapter `.10.3` is next only after the clean per-leaf commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -6839,7 +6839,7 @@ before implementation.
     mdBook and guides; pass governance/book/whitespace/canonical checks, clean artifacts, and commit before code.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.2`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze the executable neutral semantic-model/query contract and omission-sensitive parity checker.
   Depends on: `.10.1`
   Acceptance: Encode ADR `0049` without backend behavior: exact model/query ids, record/relation/fact vocabularies,
@@ -6847,6 +6847,46 @@ before implementation.
     diagnostics/explanations, compilation/runtime snapshots, fixture sources, expected normalized answers, rollout
     inventory, and missing/renamed/reordered/leaked/over-budget/transport-semantics mutations. The contract and
     checker must admit no backend until all shared questions and routes are represented.
+  Verification: Activated task-tree-first on 2026-07-20 from clean design commit `056d413b` at ahead 261;
+    `git_message_brief.txt` was zero bytes and generated mdBook/Python/Rust/Dart artifacts were absent. No neutral
+    contract, fixture, expected-answer, checker, CI, or implementation edit preceded activation. First executable
+    modeling exposed one foundational design defect before contract code: ADR `0049` required staged payload/job/
+    result provenance but its exact vocabulary had no staged record, so a parse job could only be falsely labeled
+    as a generated artifact or hidden on an untyped relation. ADR `0050` owns the pre-implementation correction:
+    explicit staged payload/job/result records plus consumes/produces direction and exact policy/status facts.
+    Implementation now freezes five exact UTF-8 source bundles, six immutable compiled/failed/runtime/ceiling
+    snapshots, the complete record/relation/fact/nested-shape/signature/source/query schema, 20 independently
+    evaluated canonical response digests, and nine dependency-ordered rollout legs. Focused neutral proof reports
+    six fixture groups / 20 exact queries / 50 rejected mutations; `mdbook build docs/linkedspec-book`, Knowledge
+    Map 649/4,783, and `git diff --check` pass.
+    The first canonical attempt reached and passed the new semantic-introspection checker, then the adjacent
+    repeated-action public checker rejected the updated task index because its exact historical marker
+    `repeated-action recurring/public no-drift is closed` had been replaced. The state was unchanged; restoring
+    that marker fixed the adjacent checker. The second canonical attempt passed through the new and prior semantic
+    contracts, then the final public aggregate-selector checker rejected the new mdBook page as an unreviewed 59th
+    public file against its 58-file census. The new chapter contains zero current selector examples; `.10.2` owns
+    advancing that omission-sensitive inventory to 59/27/0 and synchronizing its two Knowledge Map facts.
+    The third canonical run passes the new neutral checker at 6/20/50, all adjacent no-drift checks including the
+    59/27/0 public census, all four doctrines, primary CLI 66/66 twice, and Phase 0 1,031/1,031 in 612 seconds;
+    `tools/run_ci_local.sh` exits 0. Generated Python/mdBook output is removed before commit.
+  Commit: `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Reuse ADR `0049`, descriptor/ActionIR/staged/generated/diagnostic/trace
+    authorities, the Knowledge Map, and `TOOLBOX.md`; no backend layout was re-derived into the wire model.
+  - [x] **ROOT CAUSE / SCHEMA CORRECTION** — The first staged fixture proved ADR `0049` had provenance relations
+    but no honest payload/job/result record; ADR `0050` adds exact staged records, facts, target shape, and
+    consumes/produces direction before v1 implementation.
+  - [x] **FIX / EXECUTABLE ORACLE** — Exact fixtures/model/query cases derive capabilities/list/get/relations/
+    explain responses across compiled, failed, execution, Unicode/privacy, pagination, and every budget class.
+  - [x] **ADDRESSED (verified)** — `python3 tools/check_semantic_introspection_contract.py` passes six fixture
+    groups and 20 SHA-256-locked responses while rejecting 50 omission/semantic/topology/privacy/rollout mutations.
+  - [x] **LOCKSTEP** — ADR/index, Knowledge Map facts, capability guide, roadmaps, architecture/live/memory/task,
+    checker registration, and mdBook semantic-introspection chapter describe 1 complete / 8 pending neutral
+    rollout and 0 complete / 6 pending native admission without claiming an available API.
+  - [x] **NO REGRESSION / COMMIT** — Stage exact scope, pass doctrines plus canonical local CI, clean generated
+    output, record final proof, commit `.10.2`, clear the brief, and hand off cleanly to `.10.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3`
   Status: `pending`
@@ -9110,9 +9150,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 Semantic-introspection design `.10.1` is complete before behavior. ADR `0049` fixes the immutable native semantic
 model/query, exact identity/order/records/relations/shapes/evidence, source/privacy/page/budget/evolution rules,
 optional caller-captured runtime observations, no descriptor/backend-IR leakage, and handle-only MCP boundary.
-Dependency-ordered `.10.2-.10.10` own implementation. The next roadmap-aligned owner is
-`FUTURE-PARITY-BACKLOG.10.2` for the executable neutral schema, fixtures/expected answers, rollout inventory, and
-omission/mutation checker after the clean `.10.1` commit.
+Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is complete and signoff-green from clean design commit
+`056d413b`; it freezes schema, fixtures/expected answers, rollout inventory, and omission/mutation checking before
+any adapter or MCP implementation. Perl reference leaf `.10.3` is next only after the clean `.10.2` commit.
 
 ### Historical frontier sequence
 
@@ -9485,7 +9525,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `done` | ADR `0049` fixes the backend-neutral semantic schema, idiomatic native APIs, exact parity gate, and thin MCP projection before code. |
-| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `pending` | Freeze the executable neutral schema, fixtures/expected answers, rollout inventory, and omission/mutation checker before adapters. |
+| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups, 20 digest-locked responses, 50 rejected mutations, and canonical registration freeze the neutral oracle before adapters. |
+| 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `pending` | Implement the Perl semantic index, native query surface, and exact reference conformance after the clean `.10.2` commit. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -10152,13 +10193,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Semantic-introspection design `.10.1` is signoff-complete from clean base `f183e468`; its per-leaf commit
-  is the only remaining boundary before executable neutral contract `.10.2` may activate.
+- None. Executable neutral contract `.10.2` is signoff-complete; its per-leaf commit is the only remaining boundary
+  before Perl reference adapter `.10.3` may activate task-tree-first.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.2` | Five exact UTF-8 bundles; six immutable snapshots; 20 independently derived SHA-256-locked responses; 50 schema/semantic/topology/privacy/rollout mutations; staged-artifact ADR `0050`; aggregate-selector public census 59/27/0; KM 649/4,783; mdBook, memory, task, all four doctrines, adjacent contracts, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 612s, exit 0. | PASS. Neutral rollout is 1/9 and native admission 0/6; no parser/compiler/runtime/descriptor/generated/CLI/trace/native semantic API/MCP behavior changes; Perl `.10.3` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.1` | Knowledge/TOOLBOX inventory of descriptor/compiled/ActionIR/function/staged/generated/diagnostic/trace/API authorities; Perl descriptor native-object probe; ADR `0049`; exact model/query/id/order/record/relation/fact/shape/envelope/source/span/page/budget/privacy/evolution/explain/API/CLI/MCP/fixture/mutation design; dependency split `.10.2-.10.10`; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59, repeated 8+0/54 including first-run live-marker RED/repair; KM 647/4,769; mdBook, memory, task, doctrines, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 657s, exit 0. | PASS. The descriptor remains reusable compatibility state but not a portable semantic wire schema; one immutable native semantic index owns future answers and MCP is handle-only transport. No behavior changes; executable neutral `.10.2` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.10.7` | Contract-first 25-document/12-denial/four-parent/next-owner public closure; 54 mutations at 8+0; recurring Perl 10, Rust/Dart/Julia exact admissions, Lua 175x2, selected primary 5x2x1, generated/capability 80/0/0, coverage 246/105+1/122; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59; KM 646/4,763; mdBook, memory, task, four doctrines, JSON/Python, whitespace, cleanup; canonical primary 66x2, Phase 0 1,031/1,031 in 645s, enabled recurring matrix, exit 0. | PASS. Public no-drift closes repeated-action at 8/0/54, exact inventory corrects stale `.9.1.1`, all four semantic parents close, no behavior changes, and `.10.1` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | ADR 0047; independent 5-fixture ordered/choice/repeated/control/cross-target model; 2 diagnostics; descriptor/trace/generated-v2 obligations; 6 runtime inventory rows; exact migration and 1+6 rollout; 23 mutations; root-public marker RED/repair; KM 637/4,685; mdBook/memory/task/four doctrines/whitespace; canonical primary 65x2 and Phase 0 1,031/1,031 in 635s; exact cleanup. | PASS. Neutral structural identity is executable without backend changes; Perl `.2` waits for this clean commit. |
@@ -10366,6 +10408,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.2` | `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract` | Six neutral groups, 20 exact responses, 50 mutations, ADR `0050`, 59/27/0 adjacent public census, roadmap/book/KM lockstep, canonical 1,031/612s, and cleanup freeze the executable oracle without backend behavior. |
 | `FUTURE-PARITY-BACKLOG.10.1` | `FUTURE-PARITY-BACKLOG.10.1 - design semantic introspection` | ADR `0049`, native-authority inventory, exact model/query/API/privacy/parity/MCP design, nine-leaf dependency split, roadmap/book/KM lockstep, canonical 1,031/657s, and cleanup close design without behavior. |
 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `FUTURE-PARITY-BACKLOG.9.1.10.7 - close repeated action result parity` | Twenty-five documents, 12 stale denials, 54 mutations, recurring/canonical proof, exact four-parent closure, roadmap/book/KM lockstep, and cleanup close ADR 0048 rollout at 8/0. |
 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `FUTURE-PARITY-BACKLOG.9.1.8.1.1 - adopt duplicate regex slot identity contract` | ADR 0047, independent 5/2/6/1+6/23 governance, exact migration, canonical registration, roadmap/book/KM lockstep, 1,031/635s, and cleanup adopt the neutral contract without backend changes. |

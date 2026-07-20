@@ -15,6 +15,7 @@ evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_re
 evidence_update_2026_07_12_lua_array_closeout: "The public inventory remains 56 files and zero current examples; its corrected classified count is 27 after four `array (statement)` formal-grammar prose false positives were removed. Runtime/source retirement counts are unchanged."
 evidence_update_2026_07_15_structured_format_page: "The discovered public inventory is now 57 files after FUTURE-PARITY-BACKLOG.18.0 added one mdBook architecture page. The classified/current counts remain 27/0; LUA-BACKEND-PARITY.4.3.7.4 updates the stale exact expected count without weakening discovery or admission."
 evidence_update_2026_07_15_native_loading_page: "The discovered public inventory is now 58 files after LUA-BACKEND-PARITY.5.2.1 added the native spec loading API page. Classified/current counts remain 27/0."
+evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.10.2 adds the semantic-introspection mdBook page. The public no-drift checker reviews it and advances the exact discovered inventory to 59 files while classified/current selector counts stay 27/0."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -36,7 +37,7 @@ diagnostics, and classified historical/documentation evidence. Generated Perl `$
 implementation details and are not spec-facing selector forms.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
-bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 58-file inventory prevents a backend
+bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 59-file inventory prevents a backend
 entry document from falling outside the public zero-current-example claim.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],

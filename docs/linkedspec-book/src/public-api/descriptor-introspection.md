@@ -38,14 +38,14 @@ The active public option is:
 return_descriptor => 1
 ```
 
-## Planned semantic index is a separate contract
+## The executable neutral semantic contract is separate
 
 The descriptor is reusable semantic input, not the future semantic-query wire format. This distinction is
 observable in the Perl reference: handler and dependency-regex entries are native coderef and compiled-regex
 objects, so direct portable JSON encoding is neither supported nor meaningful. Rust, Dart, Julia, and Lua expose
 the same descriptor meanings through their own typed projections.
 
-ADR `0049` therefore designs a separate immutable `linkedspec-semantic-model-v1` with
+ADRs `0049` and `0050` define a separate immutable `linkedspec-semantic-model-v1` with
 `linkedspec-semantic-query-v1`. It normalizes rules, regex slots, edges, lifecycle actions, functions/helpers,
 calls/bindings, inferred value and target shapes, staged/generated provenance, portable diagnostics, and ordered
 explanation evidence. Ids and traversal are deterministic within a snapshot; pages and logical traversal cost are
@@ -57,11 +57,12 @@ projection. MCP will only forward capabilities and query requests for a caller-r
 compile a spec, read an implicit path, inspect backend objects, derive facts, or invent explanations. The primary
 CLI gains no v1 command or option.
 
-This model is **planned, not implemented**. `FUTURE-PARITY-BACKLOG.10.2-.10.10` own the executable schema and
-fixtures, Perl/Rust/Dart/Julia/Lua rollout, recurring proof, thin MCP transport, and public closeout. Today,
-continue using the descriptor API documented below.
+The neutral schema, fixtures, exact evaluator, and 50-mutation gate are executable under
+`FUTURE-PARITY-BACKLOG.10.2`, but no backend is admitted yet. `.10.3-.10.10` own Perl/Rust/Dart/Julia/Lua rollout,
+recurring proof, thin MCP transport, and public closeout. Today, continue using the descriptor API documented
+below. [Semantic Introspection](semantic-introspection.md) documents the exact neutral model and current rollout.
 
-For orientation, the future neutral projection of “describe `Top`, with spans but no source text” is designed as:
+For orientation, the executable neutral contract represents “describe `Top`, with spans but no source text” as:
 
 ```json
 {
@@ -77,9 +78,9 @@ For orientation, the future neutral projection of “describe `Top`, with spans 
 }
 ```
 
-The native response and the future MCP response must be identical after canonical JSON encoding. A request for
+The future native response and MCP response must be identical after canonical JSON encoding. A request for
 `text` against an index whose ceiling is `span` is rejected; MCP cannot raise that ceiling. This example is a
-design preview, not an available call.
+contract example, not an available backend call.
 
 Example:
 

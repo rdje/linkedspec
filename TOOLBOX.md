@@ -70,6 +70,7 @@ check, not proof that the cited commands were run.
 | "Inspect what a `.spec` compiles to" | [§4.1 `inspect_spec_codegen.pl`](#41-toolsinspect_spec_codegenpl--codegen-inspection) |
 | "Cross-variant / self-host parity (oracle ↔ candidate, Perl ↔ Rust)" | [§4.2 cross-check / oracle corpus](#42-toolscross_check_spec_parserspl--toolsgen_oracle_corpuspl) |
 | "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
+| "Did the neutral semantic introspection schema/query answers drift?" | [§4.9 semantic introspection contract](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -349,6 +350,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **OUTPUT:** `callable-signature-contract: OK (3 definitions; 9 calls; 7 invalid definitions)`.
 - **PERL ADAPTER:** `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` consumes the same fixture through
   the spec-owned shell, staged/outward records, generated source, eager/fresh binding, diagnostics, and execution.
+
+### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
+
+- **WHAT:** validates `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` without admitting a
+  backend. It checks the exact schema, source bytes/spans/digests, normalized records/relations, staged payload/job/
+  result topology, deterministic query evaluation, digest-locked responses, rollout omissions, privacy, budgets,
+  and the handle-only MCP boundary.
+- **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
+  source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
+- **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 50 rejected mutations, rollout 1 complete / 8 pending`.
 
 ---
 

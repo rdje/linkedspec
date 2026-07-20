@@ -4,6 +4,17 @@
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
 66-case primary CLI manifest.
 
+`semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
+`0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and
+`linkedspec-semantic-query-v1`: exact record/relation/fact vocabularies, staged payload/job/result records,
+snapshot-local ids/order, value and target shapes, request/response envelopes, deterministic directional
+traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
+and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
+`python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
+six fixture groups and reports 50 rejected mutations. Neutral rollout is 1 complete / 8 pending; native backend
+admission remains 0 complete / 6 pending. No parser, compiler, runtime, descriptor, generated-source, CLI, trace,
+or MCP behavior is added by the neutral contract.
+
 Run its structural and ownership gate from the repository root:
 
 ```bash

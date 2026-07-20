@@ -763,13 +763,17 @@ content migration exists yet.
   pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
-- Deep semantic introspection plus MCP is designed under ADR `0049` / `FUTURE-PARITY-BACKLOG.10.1` before any
-  behavior code. The planned `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` expose immutable,
+- Deep semantic introspection plus MCP is contract-frozen under ADRs `0049`/`0050` and
+  `FUTURE-PARITY-BACKLOG.10.2` before any backend behavior. `linkedspec-semantic-model-v1` and
+  `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
-  runtime observations. The outward descriptor remains a separate compatibility projection. MCP will provide only
-  native capabilities/query calls over a registered handle; it does not compile, read paths, or own semantics.
-  Executable schema and fixture work begins at `.10.2`; none of these APIs or tools is implemented yet.
+  runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
+  outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
+  across six fixture groups and rejects 50 mutations in canonical CI; neutral rollout is 1 complete / 8 pending,
+  while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
+  over a registered handle; it does not compile, read paths, or own semantics. No native semantic API is available
+  yet; Perl implementation starts at `.10.3`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

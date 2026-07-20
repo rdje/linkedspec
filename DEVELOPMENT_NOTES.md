@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.2` — make semantic parity executable before adapters): The neutral model
+  is deliberately an oracle, not a prototype backend. Exact authored fixture bytes and immutable normalized
+  snapshots let the checker validate public records/relations and derive query responses without consulting Perl
+  layout or blessing one host serialization. Canonical response digests use sorted JSON object keys while keeping
+  array order significant, so object insertion order is irrelevant but record/relation/evidence order cannot drift.
+  The evaluator implements the same read-only capabilities/list/get/relations/explain boundary later adapters must
+  consume, including canonical after-id pages, deterministic budget prefixes, directional breadth-first traversal,
+  failed-compilation snapshots, and caller-supplied execution observations.
+
+  Modeling the staged function-body fixture found a real pre-contract design defect. ADR `0049` named `staged_by`
+  and required payload/job/result provenance, but its closed record vocabulary jumped from `call` directly to
+  `generated_artifact`. A parse job cannot honestly be a generated artifact, and placing parser spec, top rule,
+  parent path, result/failure policy, or status on an untyped relation would evade the exact fact schema. ADR `0050`
+  therefore amends v1 before its first executable contract: three `staged_artifact` roles, fixed facts/statuses,
+  `consumes`/`produces`, source lowering, and an explicit staged target shape. The checker rejects role collapse,
+  direction reversal, provenance loss, and job/generated misclassification.
+
+  The final oracle covers six groups and 20 full responses rather than selected-field assertions. Fifty mutations
+  exercise schema omissions/renames/order, ids and uppercase UTF-8 escaping, value/target shapes, nullable fields,
+  host leakage, source redaction/span/digest, explanations, record/relation/depth budget prefixes, runtime and
+  dual-ABI rollout omissions, premature admission, semantics moved into MCP, fixture-byte drift, response-digest
+  drift, and canonical registration. The neutral checker runs unconditionally in local CI but all six backend
+  consumers remain null/pending; `.10.3` must implement the Perl native index against this oracle rather than
+  widening the descriptor or serializing coderef/compiled-regex values.
+
+  Canonical CI caught two intended adjacent guards while integrating the public page: the mutable task-index row
+  had displaced the repeated-action closeout's exact historical marker, and the aggregate-selector checker treated
+  the semantic-introspection chapter as an unreviewed 59th public file. Restoring the true closeout marker and
+  explicitly admitting the selector-free chapter at census 59/27/0 preserve both earlier no-drift contracts. The
+  third canonical run then passed the neutral checker at 6/20/50, primary 66x2, Phase 0 1,031/1,031 in 612 seconds,
+  all doctrines, and the complete adjacent governance chain before exiting 0.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.1` — separate semantic facts from host projections before code): Knowledge
   retrieval reused the exact outward-descriptor contract, native embedding/parity ADRs, staged provenance,
   selective observability, portable diagnostics, generated-source v2, and all five compiled-state projections.

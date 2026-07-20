@@ -11,11 +11,13 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: accepted direction; implementation pending
+status: neutral contract executable; backend rollout pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
-reverify: "rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_07_20_staged_schema: "Executable modeling in .10.2 exposed that ADR 0049 required staged payload/job/result provenance but named no staged record. ADR 0050 corrects v1 before implementation with explicit staged_artifact payload/parse_job/result records, consumes/produces relations, exact policy/status/value facts, source provenance, and a strict separation from generated_artifact."
+evidence_update_2026_07_20_neutral_contract: "FUTURE-PARITY-BACKLOG.10.2 makes the model/query executable without backend behavior: six fixture groups, 20 independently derived digest-locked responses, record/relation/depth/page/source failures, exact staged topology, 50 rejected mutations, and unconditional canonical-CI registration. Neutral rollout is 1 complete / 8 pending; native backend admission remains 0 complete / 6 pending."
+reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 Deep semantic introspection is a strong fit for LinkedSpec because the project already constructs and relates
@@ -45,6 +47,14 @@ MCP has only native capabilities and query projections over a caller-registered 
 reads implicit files, derives records, or invents explanations. `.10.2-.10.8` own the executable neutral contract
 and six-runtime rollout, `.10.9` owns that thin transport, and `.10.10` owns public no-drift. ADR `0049` and design
 leaf `.10.1` change no current parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior.
+
+ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
+explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
+misclassified as generated artifacts.
+
+The neutral contract is now executable through six fixture groups and 20 exact response digests; its independent
+checker rejects 50 schema, identity, ordering, topology, privacy, budget, rollout, and MCP-ownership mutations.
+This advances only `neutral_contract_and_inventory`: all six native runtime admissions remain pending.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

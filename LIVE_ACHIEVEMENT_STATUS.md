@@ -8,23 +8,34 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.2` is the next executable leaf after the design commit. It will freeze the neutral
-  semantic schema, exact fixtures/answers, expected rollout, and omission/mutation checker before any backend or
-  MCP behavior. The task is not activated until the clean `.10.1` commit boundary.
+- `FUTURE-PARITY-BACKLOG.10.2` is signoff-complete from clean base `056d413b`. The executable neutral contract,
+  six fixture groups, 20 digest-locked responses, 50-mutation checker, canonical registration, ADR correction,
+  Knowledge Map, and mdBook pass the complete local gate. Only its per-leaf commit and clean boundary remain before
+  Perl reference adapter `.10.3` can activate task-tree-first.
 
-- `FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code` is signoff-complete; only its clean
-  per-leaf commit boundary remains before `.10.2` activates task-tree-first.
-
-ADR `0049` fixes the planned immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
-records/relations/shapes/evidence, optional caller-captured runtime observations, no backend IR leakage, and a
-two-tool handle-only MCP transport. No behavior is implemented in `.10.1`.
+ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
+records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
+observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle advances only
+1/9 rollout legs; native backend admission remains 0/6 and no backend API behavior is implemented.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.10.2 — freeze executable semantic introspection contract**
+  (SIGNOFF-COMPLETE from clean base `056d413b`; commit boundary in flight).
+
+  **Result:** Five exact UTF-8 bundles feed six immutable neutral snapshots and 20 independently derived,
+  SHA-256-locked query responses. The checker rejects 50 schema/semantic/topology/privacy/rollout mutations.
+  ADR `0050` repairs the pre-implementation staged payload/job/result record omission without backend behavior.
+
+  **Proof:** Neutral 6/20/50; aggregate-selector public census 59/27/0; Knowledge Map 649/4,783; mdBook, doctrines,
+  adjacent contracts, and whitespace; canonical primary 66x2 and Phase 0 1,031/1,031 in 612 seconds, exit 0.
+
+  **Next:** Commit and clean `.10.2`, then activate Perl semantic-index leaf `.10.3` task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code**
-  (DONE at the per-leaf commit from clean base `f183e468`).
+  (DONE at clean commit `056d413b` from base `f183e468`).
 
   **Result:** ADR `0049` fixes the planned immutable native semantic model/query, exact records/relations/shapes/
   evidence/ids/order/pages/cost/source privacy, failed-compile and optional caller-captured runtime snapshots,

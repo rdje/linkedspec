@@ -5,15 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
-- `2026-07-20` semantic-introspection design refresh: ADR `0049` / `FUTURE-PARITY-BACKLOG.10.1` fixes the planned
+- `2026-07-20` semantic-introspection neutral-contract refresh: ADRs `0049`/`0050` and
+  `FUTURE-PARITY-BACKLOG.10.2` make
   `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` before behavior. One immutable native
   `SemanticIndex` normalizes existing compiled/ActionIR/provenance/generated/diagnostic authorities plus optional
   caller-captured execution observations; exact snapshot-local ids/order, record/relation/shape/evidence vocabularies,
   page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
   descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
-  MCP is only registered-handle capabilities/query transport. Dependency-ordered `.10.2-.10.10` split neutral,
-  five backend/six runtime, recurring, MCP, and public work; executable neutral contract `.10.2` is next. No current
-  parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
+  ADR `0050` adds truthful staged payload/job/result records and consumes/produces direction without collapsing
+  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 50 rejected mutations now run
+  in canonical CI. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
+  pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
+  MCP, and public work. No current parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

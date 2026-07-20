@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.2 — freeze executable semantic introspection contract
+
+`linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` now have an executable neutral oracle before
+backend implementation. Five exact strict-UTF-8 fixture bundles feed six semantic groups and six immutable model
+snapshots: compiled graph, calls/staging, failed compilation, caller-owned runtime observation, full Unicode source
+detail, and a lowered source ceiling. Twenty full canonical responses are independently derived and SHA-256 locked
+across capabilities/list/get/relations/explain, reverse traversal, page cursors/boundaries, record/relation/depth
+budgets, redactions/spans/excerpts/digests, failed diagnostics, execution events, invalid requests, and unsupported
+contracts.
+
+The first staged fixture exposed a foundational schema omission before implementation: ADR `0049` related staged
+payloads, jobs, and results but had no record kind that could truthfully carry their parser/policy/status facts.
+ADR `0050` corrects v1 with explicit `staged_artifact` payload/parse-job/result records, `consumes`/`produces`
+direction, `lowered_from`/`staged_by` provenance, and a target-shape kind. Generated artifacts remain separate.
+
+`tools/check_semantic_introspection_contract.py` validates exact record/relation/fact/nested-shape/signature/source/
+query schemas, deterministic ids and ordering, directional traversal, source privacy, fixture bytes, staged
+topology, rollout ownership, and canonical CI registration. It rejects 50 representative omission, rename,
+reorder, id, shape, provenance, explanation, budget, privacy, early-admission, MCP-ownership, and registration
+mutations. Canonical local CI runs the checker unconditionally. Neutral rollout is 1 complete / 8 pending and
+native admission remains 0 complete / 6 pending; Perl `.10.3` is next. This slice changes no parser, compiler,
+runtime, descriptor, generated-source, CLI, trace, native semantic API, or MCP behavior.
+
+The new public mdBook chapter is also admitted by the existing aggregate-selector no-drift census. That adjacent
+checker advances from 58 to 59 reviewed public files while retaining 27 explicitly historical selector references
+and zero current examples. Canonical local CI passes the neutral checker at 6/20/50, primary CLI 66/66 twice,
+Phase 0 1,031/1,031 in 612 seconds, all four doctrines, and every adjacent no-drift contract before exiting 0.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code
 
 ADR `0049` accepts `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` as a separate immutable
