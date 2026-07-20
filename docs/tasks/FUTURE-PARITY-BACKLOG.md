@@ -6547,15 +6547,46 @@ before implementation.
     task/roadmap/live/changes/notes and commit `.2` before activating Dart `.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.3`
-  Status: `pending`
+  Status: `done`
   Goal: Align Dart repeated-choice classification and action-result collection.
   Dependencies: `.9.1.10.2`
   Acceptance: Apply the accepted contract through Dart AST metadata, runtime return flow, descriptor,
     generated-v2 classification/execution, emitted source, loading/reconstruction, trace, primary, and corpus;
     preserve lifecycle authority, bounds, progress, slot/cursor semantics, and pipe scalar choice; add one exact
     neutral admission consumer and pass format, analyzer, package, primary, and corpus gates.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean Rust admission commit `293b10ea` at ahead
+    255. No Dart AST, runtime, descriptor, generated-source, fixture, driver, or documentation edit preceded
+    activation. The exact 15-role consumer and 27-mutation pending checker landed before behavior; focused red
+    independently proved bare `OR` reported `isRepetition = false` and two accepted action hits returned scalar
+    `"A"` instead of `["A", "B"]`. Dart now gives bare `Or` minimum one, classifies action/blind forms as
+    `rep_acode`/`rep_bcode`, and collects typed action-block/fluent returns at the action-edge boundary so implicit
+    child dispatch still completes while `LE` and all other lifecycle returns retain immediate whole-rule
+    authority. Default, AND, blind-result, pipe, bounds, zero-progress, cursor, slot identity, and generated-v2
+    shape are preserved. The checker passes at 4 complete / 4 pending with 29 mutations. Adjacent source-family,
+    nested recursion, and 36-family cursor expectations are aligned without changing their cursor assertions.
+    The complete Dart gate passes format, analyzer, 276 tests, primary 65x2, and corpus 105/105; canonical CI
+    passes Perl primary 65x2 and Phase 0 1,031/1,031 in 635 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.3 - admit Dart repeated action results`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY DART SEAMS** — Follow the Knowledge Map and neutral contract to the exact Dart
+    authored-mode metadata, compiler/runtime action-result flow, descriptor, emitted/generated-v2, loaded/
+    reconstructed, trace, primary, corpus, and driver seams before editing behavior.
+  - [x] **RED / NEUTRAL CONSUMER** — Add one omission-sensitive contract consumer that proves all eight modes,
+    ten special cases where representable, and the required native/composed/artifact/trace/primary/corpus routes;
+    demonstrate the current bare-OR family and first-return failures before repair.
+  - [x] **CLASSIFY BARE OR AS REPETITION** — Make authored Dart `or` minimum-one repetition and generated
+    `rep_acode`/`rep_bcode` without widening generated-source v2 or changing scalar pipe.
+  - [x] **COLLECT ACTION ITERATION VALUES** — Preserve action-edge return context through each accepted repeated
+    hit, collect one typed value per hit, and retain lifecycle return as immediate whole-rule authority with exact
+    bounds, zero progress, cursor, and slot identity.
+  - [x] **COMPOSE / ADMIT ONLY DART** — Prove native, loaded, reconstructed, descriptor, emitted/generated direct
+    and traced, primary, corpus, and diagnostics through the complete Dart gate; advance only Dart to complete and
+    leave Julia/Lua/recurring/public pending.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass neutral and adjacent checkers, focused and complete Dart gates,
+    mdBook/KM/memory/doctrines, canonical CI where warranted, whitespace, and exact artifact cleanup; synchronize
+    task/roadmap/live/changes/notes and commit `.3` before activating Julia `.4`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.4`
   Status: `pending`
@@ -9167,7 +9198,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `active` | ADR `0048` accepts reference per-hit action collections, scalar pipe, lifecycle authority, bare-OR repetition, and unchanged generated v2; seven rollout children are split before code. |
 | 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `done` | Neutral executable contract/checker and exact Perl route admission committed at `00ee7085`. |
 | 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `done` | Rust classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
-| 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `pending` | Align Dart classification, collection, descriptors, generated/traced, primary, and corpus routes. |
+| 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `done` | Dart classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `pending` | Align Julia classification, collection, descriptors, generated/traced, primary, and corpus routes. |
 | 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `pending` | Align one PUC Lua/LuaJIT source across all native/generated/public routes. |
 | 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `pending` | Compose recurring six-runtime plus selected five-primary/support proof. |
@@ -10248,6 +10279,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Dart `.9.1.10.3` advances only Dart to 4 complete / 4 pending. Bare `OR` is minimum-one
+  repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
+  typed value per accepted hit at the action-edge boundary, preserving implicit child dispatch and lifecycle
+  whole-rule authority. One 15-role consumer covers the exact neutral matrix, loaded/reconstructed, descriptor,
+  emitted/generated direct/traced, primary, corpus, lifecycle, bounds, progress, and slot traces. Package 276,
+  primary 65x2, corpus 105/105, canonical 65x2/1,031, doctrines, mdBook, and exact generated cleanup pass; Julia
+  `.4` follows.
 - `2026-07-20`: Rust `.9.1.10.2` advances only Rust to 3 complete / 5 pending. Bare `OR` is minimum-one
   repetition and generated `rep_acode`/`rep_bcode`; explicit repeated action-block and fluent returns collect one
   typed value per accepted hit in native and generated execution. One 15-role consumer covers the exact neutral

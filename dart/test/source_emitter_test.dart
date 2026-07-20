@@ -702,7 +702,7 @@ Top::
     family: 'or_acode',
     input: 'go',
     spec: r'''
-Top::OR
+Top::|
  /go/ -> Done { return(cat("or-acode:", call(Done))) }
 Done: /go/ E { return(entry_text()) }
 ''',
@@ -746,7 +746,7 @@ ChildB: /[ \t]+b/ E { return("B") }
     family: 'or_bcode',
     input: 'a',
     spec: r'''
-Top::OR
+Top::|
  => ChildA
  => ChildB
  E { return(cat("or-bcode:", retv)) }

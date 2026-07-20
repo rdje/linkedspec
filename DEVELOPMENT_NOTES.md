@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.3` — collect Dart action-edge values without capturing lifecycle
+  control): The unchanged consumer first reproduced both Dart defects: `RuleMode.or` lacked repetition metadata
+  and generated classification, while `_acceptRegexMatch` converted an action-block return into the same broad
+  `_ActionReturn` used for lifecycle control. The repair adds `Or` to minimum-one metadata/generated repetition,
+  then captures the return directly in `_acceptRegexMatch` only when the enclosing rule is one of the six
+  explicit action-repetition modes. This placement is important: it records null/container/scalar values and
+  still executes an implicit child after a block that did not call it, while the later `LE` lifecycle return is
+  outside the collection boundary and continues to exit the rule immediately. Default, AND, blind-result, and
+  pipe paths never receive the collection list. Below-minimum action repetition discards partial values for null;
+  zero hits produce an empty list and one zero-width hit is retained before progress protection stops.
+
+  The exact 15-role consumer covers metadata, all native cases, loaded/normalized, descriptor, emitted and stale
+  generated plan, generated direct/traced, native trace, primary, corpus, lifecycle, bounds, progress, cursor,
+  and selected slots. The checker advances Dart only, reaching 4 complete / 4 pending with 29 mutations. Adjacent
+  source-emitter OR controls move to pipe; cursor recursion expects `[["done"]]`; and the 36-family matrix uses
+  scalar default/pipe, one-element optional, and two-element explicit repetition expectations while retaining its
+  seek/consume proof. The complete Dart driver passes format, analyzer, package 276, primary 65x2, and corpus
+  105/105. Canonical local CI independently passes reference primary 65x2 and Phase 0 1,031/1,031 in 635 seconds.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.2` — split action iteration values from lifecycle control in Rust):
   The focused neutral consumer independently reproduced both Rust defects before behavior: `RuleMode::Or`
   omitted repetition metadata/generated classification, and an action-edge return consumed the same

@@ -249,10 +249,9 @@ void role_mixed_parent_child(Map<String, Object?> _, _AdmissionState __) {
 }
 
 void role_recursion(Map<String, Object?> _, _AdmissionState __) {
-  expect(
-    _engine(_compile(_recursionSource)).parse('p junk xp junk z').value,
-    'done',
-  );
+  expect(_engine(_compile(_recursionSource)).parse('p junk xp junk z').value, [
+    ['done'],
+  ]);
 }
 
 void role_structural_ordered_landmarks(

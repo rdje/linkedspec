@@ -435,6 +435,7 @@ final class RuleMode {
     return name == 'Default' ||
         name == 'Star' ||
         name == 'Plus' ||
+        name == 'Or' ||
         name == 'OrPlus' ||
         name == 'AndPlus' ||
         name == 'Optional' ||
@@ -445,7 +446,7 @@ final class RuleMode {
   int? get repMin {
     return switch (name) {
       'Default' || 'Star' || 'Optional' => 0,
-      'Plus' || 'OrPlus' || 'AndPlus' => 1,
+      'Plus' || 'Or' || 'OrPlus' || 'AndPlus' => 1,
       'OrBounded' || 'AndBounded' => min,
       _ => null,
     };

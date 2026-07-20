@@ -209,6 +209,7 @@ GeneratedRuleFamily classifyGeneratedRuleFamily(CompiledRule rule) {
     'Plus' ||
     'Star' ||
     'Optional' ||
+    'Or' ||
     'OrPlus' ||
     'AndPlus' ||
     'OrBounded' ||
@@ -235,7 +236,7 @@ GeneratedRuleFamily classifyGeneratedRuleFamily(CompiledRule rule) {
 
   return switch (mode) {
     'Default' => GeneratedRuleFamily.defaultFamily,
-    'Or' || 'Pipe' => GeneratedRuleFamily.orAcode,
+    'Pipe' => GeneratedRuleFamily.orAcode,
     'Single' => GeneratedRuleFamily.andSingleAcode,
     'And' =>
       rule.regexPatterns.length <= 1 && rule.actionEdges.length <= 1

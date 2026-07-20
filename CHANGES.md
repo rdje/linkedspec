@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity
+
+Dart now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families
+as `rep_acode`/`rep_bcode`. Explicit repeated choice modes `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR` collect
+one typed action-block or fluent return per accepted hit in native and generated-plan execution. Collection occurs
+at the action-edge boundary, so an implicit child dispatch still completes after the iteration value is captured;
+`LE` and every other lifecycle return retain immediate whole-rule authority. Default, AND, blind-result, scalar
+pipe, bounds, progress, cursor, slot identity, and generated-source-v2 contracts remain unchanged.
+
+One omission-sensitive Dart consumer executes 15 exact roles across neutral metadata, all mode/special cases,
+loaded and normalized reconstruction, descriptor, emitted source, generated direct/traced execution, native
+trace, primary command, corpus bundle, lifecycle, bounds, progress, cursor, and slot identity. The checker now
+requires the Dart consumer plus implementation seams, rejects 29 mutations, and advances only Dart to 4 complete
+/ 4 pending. Red proof first observed `isRepetition = false` and scalar `"A"`; green proof returns `["A", "B"]`.
+
+Adjacent generated-family controls use `::|`, nested cursor recursion preserves the inner bare-OR result array as
+one outer iteration value, and the 36-family execution matrix distinguishes scalar default/pipe, one-hit
+optional, and two-hit explicit repetition without changing cursor assertions. The authoritative Dart gate passes
+format, analyzer, 276 tests, primary CLI 65/65 in both environments, and corpus 105/105. Canonical local CI passes
+reference primary 65x2 and Phase 0 1,031/1,031 in 635 seconds.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity
 
 Rust now treats authored bare `OR` as minimum-one repetition and classifies its action/blind generated families

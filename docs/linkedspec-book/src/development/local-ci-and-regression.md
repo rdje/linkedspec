@@ -220,23 +220,27 @@ and language-coverage ledgers. Rollout is closed at 7 complete / 0 pending.
 Julia-local signoff is package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 is 1,031/1,031 in 623
 seconds.
 
-ADR `0048` has a separate executable boundary for repeated action results. Ordinary canonical CI runs both:
+ADR `0048` has a separate executable boundary for repeated action results. Run its neutral/reference proof and
+the admitted backend consumers with:
 
 ```bash
 python3 tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
+(cd dart && dart test test/repeated_action_result_contract_test.dart)
 ```
 
 The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
 nested/null/fluent values, zero and below-minimum results, lifecycle override authority, scalar pipe, and blind
 bare-OR classification. It also locks descriptors, generated-source-v2 family rows, selected-slot trace, route
-topology, a checked-in corpus bundle, six-runtime inventory, and 26 independent mutation failures. The Perl
+topology, a checked-in corpus bundle, six-runtime inventory, and 29 independent mutation failures. The Perl
 consumer composes ten live/loaded/descriptor/emitted/generated/trace/primary/corpus roles. Rust adds one exact
 15-role consumer spanning native, loaded/reconstructed, descriptor, emitted/generated direct/traced, primary,
 corpus, lifecycle, bounds, progress, and slot traces; the complete Rust-local driver runs it unconditionally.
-Neutral, Perl, and Rust are admitted at 3 complete / 5 pending; `.9.1.10.3-.7` own Dart, Julia, dual-ABI Lua,
-recurring proof, and public closeout. This gate does not claim cross-backend parity early.
+Dart adds the same 15-role topology through normalized reconstruction and its native/generated/emitted/trace/
+primary/corpus routes; `tools/run_dart_local.sh` runs that consumer with format, analyzer, package, primary, and
+corpus gates. Neutral, Perl, Rust, and Dart are admitted at 4 complete / 4 pending; `.9.1.10.4-.7` own Julia,
+dual-ABI Lua, recurring proof, and public closeout. This gate does not claim cross-backend parity early.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.

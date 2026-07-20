@@ -903,6 +903,9 @@ final class LinkedSpecRuntimeEngine {
       return _RuleResult(matched: matchedAny, value: null);
     }
 
+    final actionIterationValues = _collectsExplicitActionIterationValues(rule)
+        ? <Object?>[]
+        : null;
     var matches = 0;
     var madeFailedAttempt = false;
     for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
@@ -922,6 +925,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           cursorPolicy: cursorPolicy,
           andSequence: usesAndExecution && rule.regexPatterns.length > 1,
+          actionIterationValues: actionIterationValues,
         ),
       );
       if (matched.nexted) {
@@ -951,6 +955,9 @@ final class LinkedSpecRuntimeEngine {
       if (loopExit != null) {
         return _returned(loopExit.value);
       }
+      if (actionIterationValues != null) {
+        return const _RuleResult(matched: false, value: null);
+      }
       throw RuntimeInterpreterException(
         "rule '${rule.label}' expected at least $min matches, got $matches",
       );
@@ -970,7 +977,12 @@ final class LinkedSpecRuntimeEngine {
     if (exitReturn != null) {
       return _returned(exitReturn.value);
     }
-    return _RuleResult(matched: matches > 0, value: null);
+    return _RuleResult(
+      matched: matches > 0,
+      value: actionIterationValues == null
+          ? null
+          : List<Object?>.unmodifiable(actionIterationValues),
+    );
   }
 
   bool _executeRegexOnce(
@@ -979,6 +991,7 @@ final class LinkedSpecRuntimeEngine {
     int entryRegexIndex = 0,
     required LinkedSpecParseMode cursorPolicy,
     bool andSequence = false,
+    List<Object?>? actionIterationValues,
   }) {
     final plan = _regexPlanFor(rule);
     final cursorBefore = context.cursorCodeUnit;
@@ -1038,7 +1051,12 @@ final class LinkedSpecRuntimeEngine {
           match.alternativeIndex,
           selectionRole: 'ordered_required',
         );
-        _acceptRegexMatch(rule, match, context);
+        _acceptRegexMatch(
+          rule,
+          match,
+          context,
+          actionIterationValues: actionIterationValues,
+        );
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
           throw _ActionReturn(loopEnd.value);
@@ -1090,7 +1108,12 @@ final class LinkedSpecRuntimeEngine {
       match.alternativeIndex,
       selectionRole: selectionRole,
     );
-    _acceptRegexMatch(rule, match, context);
+    _acceptRegexMatch(
+      rule,
+      match,
+      context,
+      actionIterationValues: actionIterationValues,
+    );
     final loopEnd = _executeLifecycle(rule, 'LE', context);
     if (loopEnd != null) {
       throw _ActionReturn(loopEnd.value);
@@ -1187,8 +1210,9 @@ final class LinkedSpecRuntimeEngine {
   void _acceptRegexMatch(
     CompiledRule rule,
     RuntimeRegexMatch match,
-    _RuntimeExecutionContext context,
-  ) {
+    _RuntimeExecutionContext context, {
+    List<Object?>? actionIterationValues,
+  }) {
     context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
 
@@ -1216,7 +1240,10 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: edgeContext,
       );
       if (actionReturn != null) {
-        throw _ActionReturn(actionReturn.value);
+        if (actionIterationValues == null) {
+          throw _ActionReturn(actionReturn.value);
+        }
+        actionIterationValues.add(_copyValue(actionReturn.value));
       }
       if (!edgeContext.childDispatched &&
           edgeMatch.target.label != rule.label) {
@@ -6997,6 +7024,20 @@ final class _NextableBool {
 
   final bool value;
   final bool nexted;
+}
+
+const _explicitActionResultRepetitionModes = <String>{
+  'Star',
+  'Plus',
+  'Optional',
+  'Or',
+  'OrPlus',
+  'OrBounded',
+};
+
+bool _collectsExplicitActionIterationValues(CompiledRule rule) {
+  return rule.actionEdges.isNotEmpty &&
+      _explicitActionResultRepetitionModes.contains(rule.modeMetadata.name);
 }
 
 _NextableBool _nextableBool(bool Function() callback) {

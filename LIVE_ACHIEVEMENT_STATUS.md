@@ -8,17 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.2` is active task-tree-first from clean neutral/reference commit `00ee7085` at
-  ahead 254. Rust now treats bare `OR` as minimum-one repetition with `rep_acode`/`rep_bcode` and collects one
-  typed action-block or fluent return per accepted hit in native and generated execution. The omission-sensitive
-  Rust consumer composes 15 exact roles; the neutral checker advances only Rust to 3 complete / 5 pending and
-  rejects 26 mutations. Focused, core, complete runtime, emitted-family, Rust primary 65x2, canonical Perl
-  primary 65x2 plus Phase 0 1,031/1,031 in 632 seconds, and exact 1.7-GiB final cleanup pass; final docs/gates,
-  commit, and brief reset remain in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.3` is active task-tree-first from clean Rust admission commit `293b10ea` at ahead
+  255. Dart now treats bare `OR` as minimum-one repetition with `rep_acode`/`rep_bcode` and collects one typed
+  action-block or fluent return per accepted hit at the action-edge boundary in native/generated execution. The
+  omission-sensitive Dart consumer composes 15 exact roles; the checker advances only Dart to 4 complete / 4
+  pending and rejects 29 mutations. Focused 3/3, analyzer, package 276, primary 65x2, corpus 105/105, and canonical
+  Perl primary 65x2 plus Phase 0 1,031/1,031 in 635 seconds pass; final docs/gates, exact cleanup, commit, and brief
+  reset remain in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.3 — admit Dart repeated action-result parity` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.2 — admit Rust repeated action-result parity**
+  (DONE at clean commit `293b10ea` from base `00ee7085`).
+
+  **Result:** Rust treats bare `OR` as minimum-one repetition, collects typed action-edge values per hit in both
+  native/generated executors, and passes one exact 15-role admission. Rollout reaches 3 complete / 5 pending
+  with 26 rejected mutations while lifecycle, pipe, bounds, cursor, slots, and generated v2 remain stable.
+
+  **Next:** Dart parity leaf `.9.1.10.3` is active task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.1 — adopt repeated action-result contract and Perl admission**
   (DONE at clean commit `00ee7085` from base `34ad7548`).
 

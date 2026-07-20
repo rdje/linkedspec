@@ -133,11 +133,28 @@ RUST_ROLES = [
     "lifecycle_authority",
     "bounds_and_progress",
 ]
+DART_ROLES = [
+    "neutral_contract",
+    "ast_metadata",
+    "native_mode_matrix",
+    "native_special_cases",
+    "loaded",
+    "reconstructed",
+    "descriptor",
+    "emitted_source",
+    "generated_direct",
+    "native_trace",
+    "generated_trace",
+    "primary_command",
+    "corpus_bundle",
+    "lifecycle_authority",
+    "bounds_and_progress",
+]
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
     ("rust", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.2"),
-    ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
+    ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
     ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
     ("recurring", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.6"),
@@ -146,7 +163,7 @@ ROLLOUT = [
 INVENTORY = [
     ("perl", "perl", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
     ("rust", "rust", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.2"),
-    ("dart", "dart", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
+    ("dart", "dart", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
     ("julia", "julia", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
     ("lua", "puc_lua", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
     ("lua", "luajit", "or_acode", "whole_rule_exit", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
@@ -294,8 +311,9 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     require(perl == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1", "consumer": "t/repeated_action_result_perl_contract.t", "canonical_driver": "tools/run_ci_local.sh", "roles": PERL_ROLES}, "Perl admission drifted")
     rust = require_fields(admissions["rust"], {"status", "owner", "consumer", "canonical_driver", "roles"}, "Rust admission")
     require(rust == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.2", "consumer": "rust/linkedspec-runtime/tests/repeated_action_result_contract.rs", "canonical_driver": "tools/run_rust_local.sh", "roles": RUST_ROLES}, "Rust admission drifted")
+    dart = require_fields(admissions["dart"], {"status", "owner", "consumer", "canonical_driver", "roles"}, "Dart admission")
+    require(dart == {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3", "consumer": "dart/test/repeated_action_result_contract_test.dart", "canonical_driver": "tools/run_dart_local.sh", "roles": DART_ROLES}, "Dart admission drifted")
     for backend, owner, consumer, driver in [
-        ("dart", "FUTURE-PARITY-BACKLOG.9.1.10.3", "dart/test/repeated_action_result_contract_test.dart", "tools/run_dart_local.sh"),
         ("julia", "FUTURE-PARITY-BACKLOG.9.1.10.4", "julia/test/repeated_action_result_contract_test.jl", "tools/run_julia_local.sh"),
         ("lua_dual_abi", "FUTURE-PARITY-BACKLOG.9.1.10.5", "lua/test/repeated_action_result_contract_test.lua", "tools/run_lua_local.sh"),
     ]:
@@ -356,12 +374,31 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require("RuleMode::Optional\n            | RuleMode::Or\n            | RuleMode::OrPlus" in emitter_text, "Rust bare-OR generated-family seam drifted")
     engine_text = (ROOT / "rust/linkedspec-runtime/src/engine.rs").read_text(encoding="utf-8")
     require("fn collects_explicit_action_iteration_values" in engine_text and engine_text.count("collect_or_return_action_value!") == 8, "Rust repeated action-result collection seam drifted")
+    dart_consumer_path = ROOT / contract["admissions"]["dart"]["consumer"]
+    require(dart_consumer_path.is_file(), "Dart admission consumer is missing")
+    dart_consumer_text = dart_consumer_path.read_text(encoding="utf-8")
+    require(all(f"void role_{role}" in dart_consumer_text for role in DART_ROLES), "Dart admission role inventory drifted")
+    dart_task_status = re.search(
+        r"- ID: `FUTURE-PARITY-BACKLOG\.9\.1\.10\.3`\n  Status: `(active|done)`",
+        task_text,
+    )
+    require(dart_task_status is not None, "Dart task is neither active nor complete")
+    require("**RETRIEVE / INVENTORY DART SEAMS**" in task_text and "**COLLECT ACTION ITERATION VALUES**" in task_text, "Dart task acceptance checklist drifted")
+    dart_driver_text = (ROOT / contract["admissions"]["dart"]["canonical_driver"]).read_text(encoding="utf-8")
+    require('"$DART_CMD" test' in dart_driver_text, "Dart canonical driver registration drifted")
+    dart_ast_text = (ROOT / "dart/lib/src/ast/spec_ast.dart").read_text(encoding="utf-8")
+    require("name == 'Or' ||" in dart_ast_text and "'Plus' || 'Or' || 'OrPlus'" in dart_ast_text, "Dart bare-OR repetition metadata seam drifted")
+    dart_emitter_text = (ROOT / "dart/lib/src/source_emitter.dart").read_text(encoding="utf-8")
+    require("'Optional' ||\n    'Or' ||\n    'OrPlus'" in dart_emitter_text, "Dart bare-OR generated-family seam drifted")
+    dart_engine_text = (ROOT / "dart/lib/src/runtime/interpreter.dart").read_text(encoding="utf-8")
+    require("bool _collectsExplicitActionIterationValues" in dart_engine_text and dart_engine_text.count("actionIterationValues") >= 12, "Dart repeated action-result collection seam drifted")
     ci_text = (ROOT / contract["canonical_ci"]["driver"]).read_text(encoding="utf-8")
     required_ci = [
         "require_tracked_file tools/check_repeated_action_result_contract.py",
         "require_tracked_file capability_conformance/repeated_action_result_contract.json",
         "require_tracked_file t/repeated_action_result_perl_contract.t",
         "require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs",
+        "require_tracked_file dart/test/repeated_action_result_contract_test.dart",
         "python3 tools/check_repeated_action_result_contract.py",
         "perl -c -Iperl t/repeated_action_result_perl_contract.t",
         "PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t",
@@ -406,6 +443,9 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("change_corpus_fixture", lambda value: value["corpus_bundle"].__setitem__("fixture_id", "pipe_distinct_scalar")),
         ("remove_perl_role", lambda value: value["admissions"]["perl_reference"]["roles"].pop()),
         ("remove_rust_role", lambda value: value["admissions"]["rust"]["roles"].pop()),
+        ("remove_dart_role", lambda value: value["admissions"]["dart"]["roles"].pop()),
+        ("regress_dart_rollout", lambda value: value["rollout"][3].__setitem__("status", "pending")),
+        ("hide_dart_mechanism", lambda value: value["implementation_inventory"][2].__setitem__("action_return", "whole_rule_exit")),
         ("regress_rust_rollout", lambda value: value["rollout"][2].__setitem__("status", "pending")),
         ("hide_rust_mechanism", lambda value: value["implementation_inventory"][1].__setitem__("action_return", "whole_rule_exit")),
         ("remove_rollout", lambda value: value["rollout"].pop()),

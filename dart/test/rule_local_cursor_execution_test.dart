@@ -87,7 +87,9 @@ Child:AND
   _ExecutionCase(
     id: 'and_to_or_recursion',
     input: 'p junk xp junk z',
-    expected: 'done',
+    expected: [
+      ['done'],
+    ],
     source: '''
 Top::AND
  /p/
@@ -203,6 +205,15 @@ void main() {
         _jsonObject(jsonDecode(jsonEncode(parsed.toJson()))),
       );
       final seeks = row['cursor_policy'] == 'seek';
+      final expected = switch (id) {
+        _ when !seeks => null,
+        'default_body' ||
+        'default_top' ||
+        'compact_or_body' ||
+        'compact_or_top' => 'hit',
+        'optional_body' || 'optional_top' => ['hit'],
+        _ => ['hit', 'hit'],
+      };
 
       for (final (route, spec) in [
         ('live', parsed),
@@ -212,7 +223,7 @@ void main() {
           final value = LinkedSpecRuntimeEngine(
             compileSpec(spec),
           ).parse('prefix x', topRule: 'Top').value;
-          expect(value, seeks ? 'hit' : null, reason: '$id: $route');
+          expect(value, expected, reason: '$id: $route');
         } on RuntimeInterpreterException catch (error) {
           expect(seeks, isFalse, reason: '$id: $route: $error');
           expect(error.message, contains('expected at least'));
@@ -239,7 +250,7 @@ void main() {
           'rule-local-cursor/$id.spec',
           topRule: 'Top',
         );
-        expect(value, seeks ? 'hit' : null, reason: '$id: generated v2');
+        expect(value, expected, reason: '$id: generated v2');
       } on GeneratedSourceException catch (error) {
         expect(seeks, isFalse, reason: '$id: generated v2: $error');
         expect(error.code, GeneratedSourceCode.generatedExecutionFailed);
