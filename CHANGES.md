@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift
+
+Repeated-action result parity is now a closed public contract. Twenty-five current surfaces cover the README,
+guide, four backend companions, capability/CLI guidance, roadmaps, architecture/live/task state, ADR/index,
+five mdBook domains, and two Knowledge Map facts. Twelve exact stale-current claims are denied. The neutral
+checker advances only public no-drift, reports 8 complete / 0 pending, and rejects 54 mutations.
+
+Exact closure inventory found that semantic parent `.9.1.1` was still marked active even though its three children
+and all nested root-selection work were done. The public leaf therefore locks four done parents—`.9.1.1`,
+`.9.1.10`, `.9.1`, and `.9`—and routes the clean frontier to semantic-introspection design `.10.1`. No parser,
+compiler, runtime, descriptor, generated-source, CLI, fixture, or primary-manifest behavior changes in this slice.
+The recurring driver passes all exact runtime consumers, Lua 175x2, selected primary 5x2x1, and three support
+ledgers. Canonical local CI exits 0 after reference primary 66x2, Phase 0 1,031/1,031 in 645 seconds, and the
+enabled recurring matrix; Knowledge Map 646/4,763, mdBook, memory, doctrines, adjacent contracts, whitespace, and
+generated-output cleanup also pass.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof
 
 One omission-sensitive driver now composes the neutral checker, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT

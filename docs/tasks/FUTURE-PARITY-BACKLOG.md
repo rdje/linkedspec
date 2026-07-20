@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-19` (Lua/LuaJIT root topology admission `.9.1.1.2.5.3` and parent `.5` are cleanly
-  committed at `c8583edf`; final recurring/public no-drift `.9.1.1.2.6` is active task-tree-first)
+- Last updated: `2026-07-20` (repeated-action recurring/public no-drift closes the complete AND/OR semantic arc;
+  semantic-introspection design `.10.1` is the next roadmap-aligned owner after the clean `.9.1.10.7` commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -3183,11 +3183,13 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9`
-  Status: `active`
+  Status: `done`
   Goal: Revisit AND/OR edge defaults and top-rule ceremony as future `.spec` language design.
   Children: `.9.0`, `.9.1`
   Acceptance: The director's correction to edge defaults is durable, design work is split before implementation,
     and any later implementation keeps Perl/Rust/Dart semantics aligned instead of silently changing one backend.
+  Verification: **PASS 2026-07-20.** Child `.9.0` captures the direction and `.9.1` closes the complete neutral,
+    five-backend, recurring, and public AND/OR semantic rollout. No child remains active or pending.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.0`
   Status: `done`
@@ -3199,7 +3201,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1`
-  Status: `active`
+  Status: `done`
   Goal: Ratify and dependency-order the corrected AND/OR edge-default and cursor contract before rollout.
   Children: `.9.1.0`, `.9.1.1`, `.9.1.2`, `.9.1.3`, `.9.1.4`, `.9.1.5`, `.9.1.6`, `.9.1.7`, `.9.1.8`,
     `.9.1.8.1`, `.9.1.9`, `.9.1.10`
@@ -3216,8 +3218,10 @@ before implementation.
     intrinsically seek and AND rules are intrinsically consume, with no public/global `parse_mode` override capable
     of contradicting the rule kind. Retain an override only if the audit proves a concrete semantic objective that
     cannot be expressed by rule kind or ordinary grammar composition.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-20.** ADR `0044` rule-local cursor/bare-edge semantics, root selection, duplicate
+    slot identity, and ADR `0048` repeated-action result shape are implemented across Perl, Rust, Dart, Julia,
+    PUC Lua, and LuaJIT. Exact recurring and public no-drift gates are closed; every declared child is done.
+  Commit: closed by the complete child commit series through `FUTURE-PARITY-BACKLOG.9.1.10.7`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.0`
   Status: `done`
@@ -3255,7 +3259,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.9.1.0 - audit cursor semantic ownership`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Ratify the corrected AND/OR edge and cursor-semantics contract before implementation.
   Dependencies: `.9.1.0`
   Children: `.9.1.1.0`, `.9.1.1.1`, `.9.1.1.2`
@@ -3265,7 +3269,9 @@ before implementation.
     in a separately split follow-on leaf and return to `.5.2.3` after the design commitment is cleanly committed.
   Verification: Cursor/edge design is complete: `.9.1.1.0` fixes nested child ownership and `.9.1.1.1` adopts
     ADR `0044` plus the exact implementation split. Director clarification on 2026-07-18 resolves the separately
-    parked entry-selection question; `.9.1.1.2` now owns its neutral decision and five-backend rollout.
+    parked entry-selection question; `.9.1.1.2` owns and completes its neutral decision, five-backend rollout,
+    recurring proof, and public no-drift. Closure inventory on 2026-07-20 found this parent still marked active
+    after every child and nested child was done; `.9.1.10.7` corrects that stale status under executable closure.
   Commit: `.9.1.1.0` and `.9.1.1.1` commit rows below
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.1.0`
@@ -6415,7 +6421,7 @@ before implementation.
     whitespace; synchronize live docs and commit `.9.1.9` before selecting `.9.1.10` or another leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10`
-  Status: `active`
+  Status: `done`
   Goal: Decide and align explicit repeated-OR action-edge result shape across all five backends.
   Children: `.9.1.10.1`, `.9.1.10.2`, `.9.1.10.3`, `.9.1.10.4`, `.9.1.10.5`, `.9.1.10.6`, `.9.1.10.7`
   Dependencies: `.9.1.9`
@@ -6441,7 +6447,7 @@ before implementation.
     only. Knowledge Map generation/check passes at 646 facts / 4,755 question keys; memory architecture passes at
     56/60 lines; task metadata and all four doctrines pass; mdBook builds; whitespace is clean; regenerated book,
     Dart, and disposable probe artifacts are removed before commit.
-  Commit: `pending`
+  Commit: closed by the complete child commit series through `FUTURE-PARITY-BACKLOG.9.1.10.7`
 
   #### Acceptance Checklist
 
@@ -6455,8 +6461,9 @@ before implementation.
     format; record the two independent root causes durably.
   - [x] **SPLIT BEFORE CODE** — Create neutral/reference, Rust, Dart, Julia, dual-ABI Lua, recurring, and public
     leaves with exact route and signoff obligations before any parser/compiler/runtime behavior edit.
-  - [ ] **COMPLETE CHILDREN / CLOSE PARENTS** — Land `.1-.7` in dependency order, then close `.9.1.10`, `.9.1`,
-    and `.9` only after every runtime, generated, primary, corpus, descriptor, trace, and public projection agrees.
+  - [x] **COMPLETE CHILDREN / CLOSE PARENTS** — Land `.1-.7` in dependency order, then close `.9.1.1`, `.9.1.10`,
+    `.9.1`, and `.9` only after every runtime, generated, primary, corpus, descriptor, trace, and public projection
+    agrees. The extra `.9.1.1` parent was found by exact closure inventory after all of its children were done.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.1`
   Status: `done`
@@ -6732,15 +6739,44 @@ before implementation.
     synchronize task/roadmap/live/changes/notes and commit `.6` before activating public closeout `.7`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.7`
-  Status: `pending`
+  Status: `done`
   Goal: Close repeated-choice result parity with public no-drift and exact semantic-parent status.
   Dependencies: `.9.1.10.6`
   Acceptance: README, guides, mdBook, API/backend companions, examples, architecture, capability/status ledgers,
     ADR/Knowledge Map, and recurring scanners describe only the implemented per-hit collection/scalar-pipe rule;
-    reject stale current first-scalar and bare-OR-nonrepetition claims; close `.9.1.10`, `.9.1`, and `.9` only when
-    no child remains, then pass canonical CI, cleanup, memory/doctrines, and commit workflow.
-  Verification: `pending`
-  Commit: `pending`
+    reject stale current first-scalar and bare-OR-nonrepetition claims; close `.9.1.1`, `.9.1.10`, `.9.1`, and `.9`
+    only when no child remains, then pass canonical CI, cleanup, memory/doctrines, and commit workflow.
+  Verification: Activated task-tree-first on 2026-07-20 from clean recurring-proof commit `9b0c8007` at ahead
+    259; `git_message_brief.txt` was zero bytes and generated book/Python/recurring-driver artifacts were absent.
+    No public-contract topology, public document, ADR, parent status, or closure edit preceded activation. The
+    public contract was defined before synchronization and failed RED on the first missing guide marker. It now
+    requires 25 current documents, denies 12 stale claims, locks exact `.9.1.1`/`.9.1.10`/`.9.1`/`.9` closure and
+    `.10.1` handoff, advances public only, and rejects 54 mutations at 8 complete + 0 pending. Exact closure
+    inventory found `.9.1.1` stale-active after every child completed; adjacent cursor governance then caught the
+    new contract's incidental retired-option token inside a referenced mdBook filename, whose decoded path remains
+    exact without expanding the closed 75-file inventory. The recurring driver passes Perl 10 roles, Rust/Dart/
+    Julia exact admissions, Lua 175x2, primary 5x2x1, and all three support ledgers. Canonical local CI exits 0
+    with reference primary 66x2, Phase 0 1,031/1,031 in 645 seconds, and the enabled recurring driver. Knowledge
+    Map 646/4,763, mdBook, memory, task metadata, all four doctrines, adjacent contracts, JSON/Python, whitespace,
+    and exact generated cleanup pass. No parser/compiler/runtime/descriptor/generated/CLI/fixture behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.7 - close repeated action result parity`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY PUBLIC PRECEDENTS** — Follow the Knowledge Map and closed cursor/root/duplicate
+    public-contract checkers to the exact required-document, forbidden-current-claim, closure, and mutation seams.
+  - [x] **DEFINE PUBLIC NO-DRIFT FIRST** — Add an omission-sensitive public contract before broad synchronization;
+    require every current public/API/backend/mdBook/roadmap/status/ADR/KM surface and exact stale-claim denials.
+  - [x] **SYNC EVERY PUBLIC PROJECTION** — Align README, guides, API/backend companions, architecture/status,
+    capability/CLI guidance, ADR/index, Knowledge Map, and mdBook examples with only the implemented collection/
+    scalar-pipe rule, recurring driver, 66-case manifest, and closed rollout.
+  - [x] **LOCK EXACT CLOSURE** — Advance public only after recurring proof passes; close `.9.1.1`, `.9.1.10`, `.9.1`,
+    and `.9` only if their complete child inventories permit it, and point the frontier to the next roadmap-aligned
+    leaf.
+  - [x] **REJECT OMISSION / STALE CLAIMS** — Reject missing documents/markers, stale first-scalar or bare-OR
+    non-repetition claims, pending-backend/recurring/public claims, premature parent closure, and next-owner drift.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass the closed checker, recurring driver, mdBook/KM/memory/doctrines,
+    canonical CI, whitespace, exact cleanup, and commit workflow; hand off clean before any next pivot.
 
 - ID: `FUTURE-PARITY-BACKLOG.10`
   Status: `active`
@@ -8957,6 +8993,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
+Repeated-action recurring/public no-drift is closed at 8 complete / 0 pending and 54 rejected mutations. Exact
+closure inventory found that `.9.1.1` had remained stale-active after all of its children completed; the final
+public leaf therefore closes `.9.1.1`, `.9.1.10`, `.9.1`, and `.9` together. The next roadmap-aligned owner is
+`FUTURE-PARITY-BACKLOG.10.1` for semantic-introspection schema/API/MCP design, and it may activate only after the
+clean `.9.1.10.7` commit.
+
+### Historical frontier sequence
+
 The backend rollout parent `.1` and delegated Lua `.8.4` are closed at five exact backends and 80/0/0.
 Diagnostic-output parent `.5.1` is also closed at 8/0. Logical helper audit-and-split `.5.2.0` is complete after
 exact toolbox/native/generated proof exposed three truthiness profiles and two Perl mechanisms. Executable
@@ -9306,14 +9350,14 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `done` | Direct authored-slot matching and one shared exact 15-role consumer pass 112x2; complete package 177x2, primary 65x2, corpus 105, 6+1/46 governance, KM 643/4,735, canonical 1,031/653s, and cleanup signoff pass before `.7`. |
 | 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `done` | Twenty-nine required documents, 26 stale-current denials, 60 mutations, recurring proof, KM 646/4,751, canonical 65x2 plus Phase 0 1,031, and exact cleanup close cursor rollout at 8/0 without falsely closing `.9.1`/`.9`. |
-| 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `active` | ADR `0048` accepts reference per-hit action collections, scalar pipe, lifecycle authority, bare-OR repetition, and unchanged generated v2; seven rollout children are split before code. |
+| 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `done` | ADR `0048` per-hit collection, all six runtimes, recurring proof, 25-document public no-drift, 54 mutations, and exact parent closure are complete. |
 | 220.1.1 | `FUTURE-PARITY-BACKLOG.9.1.10.1` | `done` | Neutral executable contract/checker and exact Perl route admission committed at `00ee7085`. |
 | 220.1.2 | `FUTURE-PARITY-BACKLOG.9.1.10.2` | `done` | Rust classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `done` | Dart classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `done` | Julia classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `done` | One byte-identical 15-role consumer passes 175x2; bare OR repeats from minimum one, explicit action returns collect per hit, and the complete dual-ABI Lua gate advances governance to 6+2/35. |
 | 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `done` | One recurring driver composes all six runtime legs, selected primary 5x2x1, three support ledgers, and 7+1/44 governance. |
-| 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `pending` | Close public no-drift and exact `.9.1.10`/`.9.1`/`.9` status. |
+| 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `done` | Public no-drift closes at 8/0/54, corrects stale `.9.1.1`, closes all four semantic parents, and hands off `.10.1`. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
 | 223 | `FUTURE-PARITY-BACKLOG.5.2.6` | `done` | Both Lua ABIs share typed truth, exact arity, and native/generated/primary behavior. |
@@ -9324,8 +9368,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 70 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 71 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `active` | Cursor admission remains 4/4; Julia preflight/normalization are committed and intrinsic ordinary runtime `.9.1.6.2` is verified pending clean commit before descriptor `.3`. |
-| 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
+| 74 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Next after the clean `.9.1.10.7` commit: design the backend-neutral semantic-introspection API and thin MCP projection before code. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -9977,11 +10021,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. Root selection is closed at 7 complete / 0 pending after neutral, all five backends, dual-ABI
-  Lua, and final recurring/public admission. Cursor recurring admission `.9.1.8` is complete; identical-regex
-  identity `.9.1.8.1` and public no-drift `.9.1.9` remain separately owned. Identical
-  dependency-regex slot identity remains a non-blocking separate question
-  with explicit post-admission owner `.9.1.8.1`.
+- None blocking. Root selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result shape
+  are closed across neutral, all five backends, dual-ABI Lua, recurring composition, and public no-drift. Semantic
+  introspection design `.10.1` is the next roadmap-aligned owner.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
   architecture diagram in `appendix/backend-handoff.md` as Rust doctests, producing two pre-existing failures.
@@ -9994,13 +10036,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Cursor recurring admission `.9.1.8` is signoff-complete from clean base `6693ffb4`; its per-leaf commit
-  is prepared before identical-regex identity `.9.1.8.1` may activate.
+- None. Repeated-action public closeout `.9.1.10.7` is signoff-complete from clean base `9b0c8007`; its per-leaf
+  commit is the only remaining boundary before semantic-introspection design `.10.1` may activate.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.10.7` | Contract-first 25-document/12-denial/four-parent/next-owner public closure; 54 mutations at 8+0; recurring Perl 10, Rust/Dart/Julia exact admissions, Lua 175x2, selected primary 5x2x1, generated/capability 80/0/0, coverage 246/105+1/122; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59; KM 646/4,763; mdBook, memory, task, four doctrines, JSON/Python, whitespace, cleanup; canonical primary 66x2, Phase 0 1,031/1,031 in 645s, enabled recurring matrix, exit 0. | PASS. Public no-drift closes repeated-action at 8/0/54, exact inventory corrects stale `.9.1.1`, all four semantic parents close, no behavior changes, and `.10.1` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | ADR 0047; independent 5-fixture ordered/choice/repeated/control/cross-target model; 2 diagnostics; descriptor/trace/generated-v2 obligations; 6 runtime inventory rows; exact migration and 1+6 rollout; 23 mutations; root-public marker RED/repair; KM 637/4,685; mdBook/memory/task/four doctrines/whitespace; canonical primary 65x2 and Phase 0 1,031/1,031 in 635s; exact cleanup. | PASS. Neutral structural identity is executable without backend changes; Perl `.2` waits for this clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | Toolbox descriptor/emitted/trace proof; exact six-runtime native/generated ordered and choice probes; repeated Perl and dual-ABI Lua plus non-identical control; source-mechanism inventory; KM 636/4,678; mdBook/memory/task/four doctrines/whitespace; canonical primary 65x2 and Phase 0 1,031/1,031 in 619s; exact generated-output and disk-pressure cleanup. | PASS. Identity survives compilation and artifact reconstruction; only ordered Perl/Rust combined-alternation execution aliases a later duplicate slot. No behavior changes; neutral `.1` waits for this clean commit. |
 | `2026-07-19` | `FUTURE-PARITY-BACKLOG.9.1.8` | Exact schema/driver/registration RED sequence; neutral 36/18/8 and 14+15+15+15+15 roles; Perl 288; Rust/Dart exact consumers; Julia 104; Lua 119x2; selected primary 5x2x5; generated/capability 80/0/0; coverage 246/105+1/122; governance 72/7+1/56; KM 635/4,670; mdBook/memory/KM/JSON/shell/whitespace/four doctrines; canonical primary 65x2 and Phase 0 1,031/1,031 in 631s; safe generated-output cleanup. | PASS. One omission-sensitive recurring gate admits six runtime legs without another semantic path; only recurring admission advances and the clean commit must precede `.9.1.8.1`. |
@@ -10206,6 +10249,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.9.1.10.7` | `FUTURE-PARITY-BACKLOG.9.1.10.7 - close repeated action result parity` | Twenty-five documents, 12 stale denials, 54 mutations, recurring/canonical proof, exact four-parent closure, roadmap/book/KM lockstep, and cleanup close ADR 0048 rollout at 8/0. |
 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `FUTURE-PARITY-BACKLOG.9.1.8.1.1 - adopt duplicate regex slot identity contract` | ADR 0047, independent 5/2/6/1+6/23 governance, exact migration, canonical registration, roadmap/book/KM lockstep, 1,031/635s, and cleanup adopt the neutral contract without backend changes. |
 | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity` | Exact ordered/choice/repeated/control cross-runtime audit, mechanism split, roadmap/book/KM lockstep, canonical 1,031/619s, and cleanup freeze the boundary without behavior changes. |
 | `FUTURE-PARITY-BACKLOG.9.1.8` | `FUTURE-PARITY-BACKLOG.9.1.8 - admit recurring cursor parity` | Six-runtime recurring gate, selected 5x2x5 primary proof, 72/7+1/56 governance, roadmap/book/KM lockstep, canonical 1,031/631s, and cleanup admit cursor parity. |

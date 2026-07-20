@@ -18,6 +18,12 @@
 > v1 generated artifacts must be regenerated. The recurring six-runtime plus
 > selected 5x2x5 gate and current public surfaces are admitted at 75 migration
 > files, 8 complete / 0 pending, and 60 rejected mutations.
+>
+> **Repeated-action handoff:** Every backend must consume
+> `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns
+> collect per hit, lifecycle returns remain whole-rule authority, pipe remains scalar, and generated source remains
+> v2. The repeated-action recurring gate is `tools/check_repeated_action_result_five_backend.sh`; its public
+> rollout is closed at 8 complete / 0 pending.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,

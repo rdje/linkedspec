@@ -5,12 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
+  The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
+  repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain
+  whole-rule authority, pipe remains scalar, and generated source remains v2. Complete child inventory also closes
+  `.9.1.1`, `.9.1.10`, `.9.1`, and `.9`; semantic-introspection design `.10.1` is next.
 - `2026-07-20` repeated-action recurring refresh: `FUTURE-PARITY-BACKLOG.9.1.10.6` adds no semantic path. One
   omission-sensitive driver composes the neutral model, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers,
   the contract-projected `success_explicit_repeated_action_results` case across five commands and two option
   environments, and generated/capability/language-coverage ledgers. Governance advances only recurring to
-  7 complete / 1 pending with 44 rejected mutations. Canonical CI exposes the driver behind
-  `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`; public no-drift remains `.9.1.10.7`.
+  seven of eight rollout legs and 44 rejected mutations at that recurring-only boundary. Canonical CI exposes the
+  driver behind `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`; the following public leaf closes the rollout.
 - `2026-07-20` rule-local cursor public no-drift refresh: `FUTURE-PARITY-BACKLOG.9.1.9` makes current public
   accuracy executable. README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
   ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model pages carry exact required markers;

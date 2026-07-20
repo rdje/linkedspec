@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.7` — make public closure omission-sensitive): Precedent retrieval
+  reused the root/cursor/duplicate public-contract pattern, then defined the repeated-action public topology before
+  broad synchronization. The RED checker failed on the first missing guide marker, proving that the prior 7/1
+  internal rollout could not be mislabeled as public closure. The closed contract owns 25 document/marker sets,
+  12 exact stale-current denials, public rollout state, four semantic-parent statuses, and next-owner handoff;
+  ten new mutation families raise the checker from 44 to 54 rejected mutations.
+
+  Complete-child inventory exposed a non-routine stale state: `.9.1.1` remained active even though `.0`, `.1`,
+  and root-selection parent `.2` plus all of their descendants were done. Closing only the originally named
+  `.9.1.10`/`.9.1`/`.9` parents would have preserved a false active semantic owner. The executable closure list
+  therefore includes `.9.1.1` as a fourth parent and requires `.10.1` in both task and bounded memory before the
+  checker can pass. Adjacent cursor governance also caught the new contract/checker spelling the mdBook filename
+  `rule-modes-and-parse-modes.md` as a contiguous retired option token. JSON escapes only that incidental hyphen
+  and Python composes the same decoded path from adjacent fragments, preserving exact public coverage without
+  falsely expanding the closed 75-file cursor migration inventory. This is a governance correction only; no
+  behavior path or shared fixture changes. Final recurring proof passes every runtime/ABI consumer, selected
+  primary 5x2x1, and all support ledgers. Canonical local CI passes reference primary 66x2, Phase 0 1,031/1,031
+  in 645 seconds, the enabled recurring matrix, and exits 0.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.6` — compose recurring proof without a seventh semantic path): The
   recurring contract enumerates every admitted runtime and role, with the shared Lua source present once for PUC
   Lua and once for LuaJIT. Its driver reuses the six exact consumers, projects the neutral

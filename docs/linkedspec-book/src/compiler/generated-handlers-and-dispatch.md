@@ -1,5 +1,10 @@
 # Generated Handlers and Dispatch
 
+> **Repeated-action generated parity:** Bare `OR` uses minimum-one repetition and generated
+> `rep_acode`/`rep_bcode`; explicit repeated action-edge returns collect per hit, lifecycle returns retain
+> whole-rule authority, and pipe remains scalar. Generated-source stays v2. Cross-backend repeated-action parity is closed
+> at 8 complete / 0 pending through `tools/check_repeated_action_result_five_backend.sh`.
+
 LinkedSpec generates rule handlers dynamically, but the project has been moving away from opaque, repeatedly-evaled behavior toward a cleaner and more attributable runtime model.
 
 The dispatch **model** in this chapter is backend-neutral: a compiled dependency-regex alternation selects a matched index, the handler dispatches to the corresponding child rule, generated handlers carry stable identity labels, and handler generation is a two-phase **variant builder → HandlerIR → backend emitter** flow. That HandlerIR / backend-emitter seam is precisely the multi-backend decoupling point — a structured intermediate representation that holds everything an emitter needs without raw host-language source (see [Backend Handoff](../appendix/backend-handoff.md)). The concrete utilities and encodings named below — `LinkedRE::or`, `perl/LinkedRE.pm`, the `LinkedSpec::generated_handler:` label spelling, `HandlerVariantEmitter.pm`, `JSON::PP`, `pos($$STRING)`, and the `$BACKEND` package variable — are the **Perl reference backend's** implementation of that model.

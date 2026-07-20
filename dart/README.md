@@ -128,6 +128,12 @@ normalized, generated, descriptor, trace, primary, and diagnostic routes. Run
 `bash tools/check_duplicate_regex_slot_identity_five_backend.sh` for the exact
 six-runtime recurring proof.
 
+Repeated-action result parity is closed at 8 complete / 0 pending. Dart treats
+bare `OR` as minimum-one repetition, collects one typed action-edge return per
+accepted explicit-repetition hit, preserves lifecycle whole-rule returns and
+scalar pipe, and retains generated-source v2. The exact recurring proof is
+`tools/check_repeated_action_result_five_backend.sh`.
+
 Core/descriptor leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: one compiled resolver applies explicit
 selector > first authored marker > first authored rule before user code; validation accepts markerless sources,
 zero/unknown selection failures use the portable stages and codes, and descriptors retain immutable authored

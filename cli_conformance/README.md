@@ -51,6 +51,8 @@ fixture and returns `["A","B"]`. Run
 `bash tools/check_repeated_action_result_five_backend.sh` directly, or set
 `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1` on canonical local CI. This
 addition raises the current shared manifest from 65 to 66 cases.
+Repeated-action public no-drift is closed at 8 complete / 0 pending; the same
+66 cases remain the canonical byte-exact primary manifest.
 
 ADR `0044`'s primary-command migration is executable and admitted in
 `capability_conformance/rule_local_cursor_contract.json`. It removes `--parse-mode` from help and returns

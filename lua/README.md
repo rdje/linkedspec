@@ -49,6 +49,11 @@ one null element, a permitted zero-hit result is `[]`, and progress/bounds/curso
 byte-identical 15-role consumer passes 175 assertions under PUC Lua and LuaJIT; `bash tools/run_lua_local.sh`
 runs it beside the complete package, primary-command, and corpus gates.
 
+Repeated-action result parity is closed at 8 complete / 0 pending. The exact
+six-runtime recurring proof is `tools/check_repeated_action_result_five_backend.sh`;
+the public contract keeps both Lua ABIs, lifecycle authority, scalar pipe, bounds,
+cursor policy, slot identity, and generated-source v2 in lockstep.
+
 ```lua
 local engine = linkedspec.runtime_engine(compiled, {
   spec_name = "Example",

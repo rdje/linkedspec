@@ -71,6 +71,12 @@ choice, and preserves exact slot identity through descriptors, generated source,
 trace, and diagnostics. The cross-backend recurring proof is
 `bash tools/check_duplicate_regex_slot_identity_five_backend.sh`.
 
+Repeated-action result parity is closed at 8 complete / 0 pending. Rust treats
+bare `OR` as minimum-one repetition, collects one typed action-edge return per
+accepted explicit-repetition hit, preserves lifecycle whole-rule returns and
+scalar pipe, and retains generated-source v2. The exact six-runtime recurring
+proof is `tools/check_repeated_action_result_five_backend.sh`.
+
 ## Quick Start
 
 ```bash

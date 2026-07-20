@@ -151,8 +151,9 @@ recurring driver composes those six runtime legs, the contract-projected
 `success_explicit_repeated_action_results` case through five commands in default and POSIX environments, and the
 generated-source/capability/language-coverage ledgers. Canonical local CI runs the neutral checker and Perl
 consumer unconditionally and exposes the all-toolchain composition behind
-`LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`. Rollout is 7 complete / 1 pending; only public no-drift
-`.9.1.10.7` remains.
+`LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`. Repeated-action rollout is closed at 8 complete / 0 pending;
+the public contract covers 25 current documents, denies 12 stale claims, and the checker rejects 54 drift mutations.
+The exact recurring proof is `tools/check_repeated_action_result_five_backend.sh`.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

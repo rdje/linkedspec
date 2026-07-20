@@ -22,6 +22,11 @@
 > Generated source is v2/format 2 and derives policy from family without copying cursor state into this descriptor
 > or its minimal generated plan. One exact 15-role consumer now admits this descriptor projection together with
 > every other Lua cursor role on both ABIs.
+>
+> **Repeated-action descriptor parity:** `linkedspec-explicit-repetition-action-result-v1` has admitted Perl,
+> Rust, Dart, Julia, PUC Lua, and LuaJIT. Bare `OR` descriptors report minimum-one repetition and generated
+> `rep_acode`/`rep_bcode`, while pipe reports non-repetition. The outward descriptor shape stays versioned and
+> unchanged; public no-drift closes at 8 complete / 0 pending.
 
 LinkedSpec can expose descriptor information in addition to a normal runnable parser.
 

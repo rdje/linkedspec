@@ -1,7 +1,7 @@
 # 0048 - Explicit repetition action returns are per-hit collection values
 
 - Date: 2026-07-20
-- Status: accepted; backend rollout pending
+- Status: accepted; rollout complete
 - Tags: architecture, grammar, repetition, or-rule, action-edge, lifecycle, result-shape, descriptor, generated-source, trace, parity
 
 ## Context
@@ -92,6 +92,8 @@ both Lua ABIs, exact rollout inventory, and omission-sensitive mutations.
 
 Rollout proceeds in dependency order: neutral plus Perl reference, Rust, Dart, Julia, PUC Lua and LuaJIT, one
 recurring six-runtime admission, then public no-drift. No backend may claim parity from a primary-only fixture.
+All eight rollout legs are complete. The composed recurring proof is
+`tools/check_repeated_action_result_five_backend.sh`; the public contract closes at 8 complete / 0 pending.
 
 ## Consequences
 

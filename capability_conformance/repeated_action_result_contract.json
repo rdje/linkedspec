@@ -698,6 +698,135 @@
       "switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"
     }
   },
+  "public_contract": {
+    "documents": [
+      {
+        "path": "README.md",
+        "required_markers": ["tools/check_repeated_action_result_five_backend.sh", "Repeated-action rollout is closed at 8 complete / 0 pending"]
+      },
+      {
+        "path": "USER_GUIDE.md",
+        "required_markers": ["Explicit repetition collects", "Repeated-action rollout is closed at 8 complete / 0 pending"]
+      },
+      {
+        "path": "rust/README.md",
+        "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "dart/README.md",
+        "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "julia/README.md",
+        "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "lua/README.md",
+        "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "54 drift mutations", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "cli_conformance/README.md",
+        "required_markers": ["tools/check_repeated_action_result_five_backend.sh", "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1", "66 cases"]
+      },
+      {
+        "path": "ROADMAP.md",
+        "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "ROADMAP_V2.md",
+        "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "ARCHITECTURE_STATE.md",
+        "required_markers": ["repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]
+      },
+      {
+        "path": "LIVE_ACHIEVEMENT_STATUS.md",
+        "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift", "Repeated-action rollout is closed at 8 complete / 0 pending"]
+      },
+      {
+        "path": "docs/TASK_TREE.md",
+        "required_markers": ["repeated-action recurring/public no-drift is closed"]
+      },
+      {
+        "path": "docs/decisions/0048-explicit-repetition-action-result-collection.md",
+        "required_markers": ["Status: accepted; rollout complete", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/decisions/INDEX.md",
+        "required_markers": ["accepted; rollout complete", "Explicit repetition action returns are per-hit collection values"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse\u002dmodes.md",
+        "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+        "required_markers": ["admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT", "linkedspec-explicit-repetition-action-result-v1"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+        "required_markers": ["explicit repeated-action result collection", "linkedspec-explicit-repetition-action-result-v1"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+        "required_markers": ["repeated-action parity is closed", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+        "required_markers": ["Repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+        "required_markers": ["repeated-action recurring gate", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "required_markers": ["LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md",
+        "required_markers": ["all eight rollout legs complete", "tools/check_repeated_action_result_five_backend.sh"]
+      },
+      {
+        "path": "docs/knowledge/rule-local-cursor-public-no-drift.md",
+        "required_markers": ["AND/OR parent is closed", "FUTURE-PARITY-BACKLOG.9.1.10.7"]
+      }
+    ],
+    "forbidden_current_claims": [
+      {"path": "README.md", "text": "7 complete / 1 pending with 44 rejected"},
+      {"path": "capability_conformance/README.md", "text": "Rollout is 7 complete / 1 pending"},
+      {"path": "ROADMAP.md", "text": "ADR `0048` repeated-action rollout is 7 complete / 1 pending"},
+      {"path": "ROADMAP_V2.md", "text": "Repeated action results are 7 complete / 1 pending"},
+      {"path": "USER_GUIDE.md", "text": "at 7 complete / 1 pending with 44 rejected mutations"},
+      {"path": "ARCHITECTURE_STATE.md", "text": "7 complete / 1 pending with 44 rejected mutations"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "7 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse\u002dmodes.md", "text": "7 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "7 complete / 1 pending"},
+      {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "text": "public rollout pending FUTURE-PARITY-BACKLOG.9.1.10.7"},
+      {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
+      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"}
+    ]
+  },
+  "closure": {
+    "final_leaf": "FUTURE-PARITY-BACKLOG.9.1.10.7",
+    "closed_parents": [
+      "FUTURE-PARITY-BACKLOG.9.1.1",
+      "FUTURE-PARITY-BACKLOG.9.1.10",
+      "FUTURE-PARITY-BACKLOG.9.1",
+      "FUTURE-PARITY-BACKLOG.9"
+    ],
+    "parent_status": "done",
+    "next_owner": "FUTURE-PARITY-BACKLOG.10.1"
+  },
   "rollout": [
     {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
@@ -706,7 +835,7 @@
     {"capability": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
     {"capability": "recurring", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.6"},
-    {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.7"}
+    {"capability": "public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.7"}
   ],
   "migration": {
     "checker": "tools/check_repeated_action_result_contract.py",

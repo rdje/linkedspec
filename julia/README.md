@@ -42,6 +42,12 @@ normalized `SpecFile` reconstruction, emitted source, descriptors, trace,
 primary execution, and typed diagnostics. The recurring proof is
 `bash tools/check_duplicate_regex_slot_identity_five_backend.sh`.
 
+Repeated-action result parity is closed at 8 complete / 0 pending. Julia treats
+bare `OR` as minimum-one repetition, collects one typed action-edge return per
+accepted explicit-repetition hit, preserves lifecycle whole-rule returns and
+scalar pipe, and retains generated-source v2. The exact recurring proof is
+`tools/check_repeated_action_result_five_backend.sh`.
+
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
 was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal

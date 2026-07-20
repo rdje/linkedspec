@@ -32,6 +32,8 @@ TOP_LEVEL_FIELDS = {
     "admissions",
     "implementation_inventory",
     "recurring_gate",
+    "public_contract",
+    "closure",
     "rollout",
     "migration",
     "canonical_ci",
@@ -193,7 +195,7 @@ ROLLOUT = [
     ("julia", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
     ("recurring", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.6"),
-    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.7"),
+    ("public_no_drift", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.7"),
 ]
 INVENTORY = [
     ("perl", "perl", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.1"),
@@ -263,6 +265,60 @@ RECURRING_GATE = {
         "driver": "tools/run_ci_local.sh",
         "switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX",
     },
+}
+PUBLIC_CONTRACT = {
+    "documents": [
+        {"path": "README.md", "required_markers": ["tools/check_repeated_action_result_five_backend.sh", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
+        {"path": "USER_GUIDE.md", "required_markers": ["Explicit repetition collects", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
+        {"path": "rust/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "dart/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "julia/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "lua/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "capability_conformance/README.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "54 drift mutations", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "cli_conformance/README.md", "required_markers": ["tools/check_repeated_action_result_five_backend.sh", "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1", "66 cases"]},
+        {"path": "ROADMAP.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "ROADMAP_V2.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "ARCHITECTURE_STATE.md", "required_markers": ["repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]},
+        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
+        {"path": "docs/TASK_TREE.md", "required_markers": ["repeated-action recurring/public no-drift is closed"]},
+        {"path": "docs/decisions/0048-explicit-repetition-action-result-collection.md", "required_markers": ["Status: accepted; rollout complete", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/decisions/INDEX.md", "required_markers": ["accepted; rollout complete", "Explicit repetition action returns are per-hit collection values"]},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-" "parse" "-modes.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT", CONTRACT_ID]},
+        {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "required_markers": ["explicit repeated-action result collection", CONTRACT_ID]},
+        {"path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "required_markers": ["repeated-action parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "required_markers": ["Repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["repeated-action recurring gate", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": ["LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "required_markers": ["all eight rollout legs complete", "tools/check_repeated_action_result_five_backend.sh"]},
+        {"path": "docs/knowledge/rule-local-cursor-public-no-drift.md", "required_markers": ["AND/OR parent is closed", "FUTURE-PARITY-BACKLOG.9.1.10.7"]},
+    ],
+    "forbidden_current_claims": [
+        {"path": "README.md", "text": "7 complete / 1 pending with 44 rejected"},
+        {"path": "capability_conformance/README.md", "text": "Rollout is 7 complete / 1 pending"},
+        {"path": "ROADMAP.md", "text": "ADR `0048` repeated-action rollout is 7 complete / 1 pending"},
+        {"path": "ROADMAP_V2.md", "text": "Repeated action results are 7 complete / 1 pending"},
+        {"path": "USER_GUIDE.md", "text": "at 7 complete / 1 pending with 44 rejected mutations"},
+        {"path": "ARCHITECTURE_STATE.md", "text": "7 complete / 1 pending with 44 rejected mutations"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "7 complete / 1 pending"},
+        {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-" "parse" "-modes.md", "text": "7 complete / 1 pending"},
+        {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "7 complete / 1 pending"},
+        {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "text": "public rollout pending FUTURE-PARITY-BACKLOG.9.1.10.7"},
+        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
+        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"},
+    ],
+}
+CLOSURE = {
+    "final_leaf": "FUTURE-PARITY-BACKLOG.9.1.10.7",
+    "closed_parents": [
+        "FUTURE-PARITY-BACKLOG.9.1.1",
+        "FUTURE-PARITY-BACKLOG.9.1.10",
+        "FUTURE-PARITY-BACKLOG.9.1",
+        "FUTURE-PARITY-BACKLOG.9",
+    ],
+    "parent_status": "done",
+    "next_owner": "FUTURE-PARITY-BACKLOG.10.1",
 }
 
 
@@ -417,6 +473,8 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
     inventory = [(row["backend"], row["runtime"], row["bare_or_family"], row["action_return"], row["status"], row["owner"]) for row in contract["implementation_inventory"]]
     require(inventory == INVENTORY, "six-runtime mechanism inventory drifted")
     require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology drifted")
+    require(contract["public_contract"] == PUBLIC_CONTRACT, "public contract drifted")
+    require(contract["closure"] == CLOSURE, "closure contract drifted")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout topology drifted")
     require(contract["migration"] == {"checker": "tools/check_repeated_action_result_contract.py", "perl_consumer": "t/repeated_action_result_perl_contract.t", "recurring_driver": "tools/check_repeated_action_result_five_backend.sh", "public_closeout": "FUTURE-PARITY-BACKLOG.9.1.10.7"}, "migration paths drifted")
@@ -612,6 +670,40 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     emitter_text = (ROOT / "perl/LinkedSpec/HandlerVariantEmitter.pm").read_text(encoding="utf-8")
     require("sub _emit_rep_acode_handler" in emitter_text and "REP: replace return with assignment so loop collects" in emitter_text and "_collect, $" in emitter_text, "Perl REP_ACODE collection seam drifted")
 
+    for document in PUBLIC_CONTRACT["documents"]:
+        public_path = ROOT / document["path"]
+        require(public_path.is_file(), f"public repeated-action document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            require(
+                marker in public_text,
+                f"public repeated-action marker is missing from {document['path']}: {marker}",
+            )
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        public_text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        require(
+            forbidden["text"] not in public_text,
+            f"stale repeated-action claim remains in {forbidden['path']}: {forbidden['text']}",
+        )
+
+    for parent in CLOSURE["closed_parents"]:
+        parent_status = re.search(
+            rf"- ID: `{re.escape(parent)}`\n  Status: `([^`]+)`",
+            task_text,
+        )
+        require(
+            parent_status is not None and parent_status.group(1) == CLOSURE["parent_status"],
+            f"repeated-action parent is not closed: {parent}",
+        )
+    require(
+        "- [x] **COMPLETE CHILDREN / CLOSE PARENTS**" in task_text,
+        "repeated-action parent closeout checklist drifted",
+    )
+    require(
+        CLOSURE["next_owner"] in task_text and CLOSURE["next_owner"] in (ROOT / "MEMORY.md").read_text(encoding="utf-8"),
+        "repeated-action next-owner handoff drifted",
+    )
+
 
 def expect_mutation_failure(contract: dict[str, Any], name: str, mutate: Callable[[dict[str, Any]], None]) -> None:
     mutated = copy.deepcopy(contract)
@@ -668,7 +760,17 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("recurring_driver_drift", lambda value: value["recurring_gate"].__setitem__("driver", "tools/missing.sh")),
         ("recurring_fixture_drift", lambda value: value["recurring_gate"]["primary_cli"].__setitem__("contract_case_id", "pipe_distinct_scalar")),
         ("recurring_rollout_regression", lambda value: value["rollout"][6].__setitem__("status", "pending")),
-        ("premature_public_rollout", lambda value: value["rollout"][7].__setitem__("status", "complete")),
+        ("public_rollout_owner_drift", lambda value: value["rollout"][7].__setitem__("owner", "FUTURE-PARITY-BACKLOG.9.1.10.6")),
+        ("public_document_omission", lambda value: value["public_contract"]["documents"].pop()),
+        ("public_marker_omission", lambda value: value["public_contract"]["documents"][0]["required_markers"].pop()),
+        ("public_document_path_drift", lambda value: value["public_contract"]["documents"][0].__setitem__("path", "missing.md")),
+        ("forbidden_claim_omission", lambda value: value["public_contract"]["forbidden_current_claims"].pop()),
+        ("forbidden_claim_drift", lambda value: value["public_contract"]["forbidden_current_claims"][0].__setitem__("text", "wrong claim")),
+        ("public_rollout_regression", lambda value: value["rollout"][7].__setitem__("status", "pending")),
+        ("closure_parent_omission", lambda value: value["closure"]["closed_parents"].pop()),
+        ("closure_status_regression", lambda value: value["closure"].__setitem__("parent_status", "active")),
+        ("closure_next_owner_drift", lambda value: value["closure"].__setitem__("next_owner", "FUTURE-PARITY-BACKLOG.9.1.10")),
+        ("canonical_recurring_switch_drift", lambda value: value["canonical_ci"].__setitem__("recurring_switch", "wrong_switch")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

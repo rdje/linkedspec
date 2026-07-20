@@ -368,10 +368,12 @@ Top::|
 Use `::|` when the rule should make one choice. Explicit repeated `::OR` is a
 different family. ADR `0048` accepts one collected action result per hit while
 preserving scalar pipe. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement
-that rule across native and generated execution. The executable neutral contract
-and backend admissions now compose through one recurring six-runtime/five-command
-gate at 7 complete / 1 pending with 44 rejected mutations. Only public closeout
-`FUTURE-PARITY-BACKLOG.9.1.10.7` remains.
+that rule across native and generated execution. Explicit repetition collects
+one typed action-edge result per accepted hit; returned arrays remain one nested
+element and lifecycle returns retain whole-rule authority. The executable neutral
+contract and backend admissions compose through one recurring six-runtime/five-command
+gate. Repeated-action rollout is closed at 8 complete / 0 pending with 54 rejected
+drift mutations.
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 

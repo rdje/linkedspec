@@ -10,10 +10,10 @@ ADR `0048` accepts per-hit action-result collection for explicit repetition and 
 five-backend audit found bare-OR classification plus action-return propagation defects in all four newer
 backends. The exact neutral contract, ten-role Perl reference admission, and 15-role Rust, Dart, Julia, and
 dual-ABI Lua admissions are composed by
-`tools/check_repeated_action_result_five_backend.sh`; rollout is 7 complete / 1 pending with 44 rejected
-mutations. All five backends treat bare `OR` as minimum-one repetition, collect explicit repeated action returns
-per hit across native/generated routes, preserve lifecycle authority and scalar pipe, and retain generated-source
-v2. Only public no-drift `FUTURE-PARITY-BACKLOG.9.1.10.7` remains. Logical-helper
+`tools/check_repeated_action_result_five_backend.sh`. Repeated-action rollout is closed at 8 complete / 0 pending
+with 54 rejected drift mutations. All five backends treat bare `OR` as minimum-one repetition, collect explicit
+repeated action returns per hit across native/generated routes, preserve lifecycle authority and scalar pipe, and
+retain generated-source v2. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI

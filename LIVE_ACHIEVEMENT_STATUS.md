@@ -8,15 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first from clean dual-ABI Lua admission commit `843d40ce`
-  at ahead 258. One omission-sensitive recurring driver now composes every exact runtime/ABI consumer, the
-  selected five-command/default-POSIX primary result, and all three support ledgers. Rollout is 7 complete /
-  1 pending with 44 rejected mutations. Canonical signoff is green at reference primary 66x2 and Phase 0
-  1,031/1,031 in 641 seconds (complete gate 1,505.50 seconds); cleanup and commit are in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.7` is active task-tree-first from clean recurring-proof commit `9b0c8007`
+  at ahead 259. The omission-sensitive public contract requires 25 current documents, denies 12 stale claims,
+  closes all eight rollout legs, and locks exact four-parent closure plus `.10.1` handoff. Recurring and canonical
+  signoff are green; only the clean commit boundary is in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift` is the active slice title.
+
+Repeated-action rollout is closed at 8 complete / 0 pending. The checker rejects 54 mutations; recurring passes
+all six runtime legs and selected primary/support proof; canonical passes reference primary 66x2, Phase 0
+1,031/1,031 in 645 seconds, the enabled recurring matrix, and exits 0.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof**
+  (DONE at clean commit `9b0c8007` from base `843d40ce`).
+
+  **Result:** One recurring driver composes the exact six runtime legs, selected 5x2x1 primary case, and three
+  support ledgers without adding another semantic path. Governance reaches 7 complete / 1 pending / 44 mutations.
+
+  **Proof:** Perl 10 roles, Rust/Dart/Julia exact admissions, Lua 175x2, primary 5x2x1, support ledgers, canonical
+  reference primary 66x2, and Phase 0 1,031/1,031 pass; complete local CI exits 0 in 1,505.50 seconds.
+
+  **Next:** Public closeout `.9.1.10.7` is active from that clean boundary.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.5 — admit Lua repeated action-result parity**
   (DONE at clean commit `843d40ce` from base `1c61c2ba`).
 

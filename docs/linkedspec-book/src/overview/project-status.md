@@ -4,15 +4,15 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
-The active language-contract frontier is ADR `0048`: explicit repetition collects one action-edge value per
+ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable
-neutral contract covers eight mode cases and ten special cases and rejects 44 mutations. Its ten-role Perl and
+neutral contract covers eight mode cases and ten special cases. Its ten-role Perl and
 15-role Rust/Dart/Julia/dual-ABI Lua admissions are composed by one recurring driver, so rollout is
-7 complete / 1 pending. Every backend
-classifies bare `OR` as minimum-one repetition and collects action returns per hit across native/generated routes
-without changing lifecycle authority, scalar pipe, or generated-source v2. The driver also proves the exact
-`["A","B"]` primary result across five commands and two environments plus all three support ledgers. Only public
-closeout `.9.1.10.7` remains.
+closed. Every backend classifies bare `OR` as minimum-one repetition and collects action returns per hit across
+native/generated routes without changing lifecycle authority, scalar pipe, or generated-source v2. The driver
+also proves the exact `["A","B"]` primary result across five commands and two environments plus all three support
+ledgers. Repeated-action rollout is closed at 8 complete / 0 pending with 54 rejected mutations. Run
+`tools/check_repeated_action_result_five_backend.sh` for the exact six-runtime recurring proof.
 
 The separately completed ADR `0046` root-selection contract says an explicit selector, including
 `--top-rule NAME`, wins over authored markers; otherwise the first authored `::` wins; without a marker, the first

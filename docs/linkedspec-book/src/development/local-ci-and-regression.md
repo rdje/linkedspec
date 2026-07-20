@@ -249,9 +249,10 @@ Lua and LuaJIT, including fresh emitted-module execution, stale-family rejection
 slot traces; `tools/run_lua_local.sh` runs it unconditionally on both installed ABIs. The recurring driver runs
 all six admitted runtime legs, projects `explicit_or_two_hits` as
 `success_explicit_repeated_action_results` across five commands in default and POSIX environments, and checks
-generated-source, capability, and language-coverage ledgers. The checker rejects 44 mutations and reports
-7 complete / 1 pending. Set `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1` to include this all-toolchain driver
-in canonical local CI; its default remains SDK-independent. Only public closeout `.9.1.10.7` remains.
+generated-source, capability, and language-coverage ledgers. The closed checker rejects 54 mutations and reports
+8 complete / 0 pending. Set `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1` to include this all-toolchain driver
+in canonical local CI; its default remains SDK-independent. Public no-drift covers 25 current documents and 12
+stale-current denials.
 Recurring signoff passes the selected case on every 5x2 leg; canonical reference proof passes all 66 cases in
 both environments and Phase 0 passes 1,031/1,031 in 641 seconds.
 

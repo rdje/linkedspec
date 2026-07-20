@@ -7,6 +7,10 @@
 > `--parse-mode` flag returns usage exit 2 with a targeted migration message.
 > Rust, Dart, Julia, PUC Lua, and LuaJIT have also removed their engine/runtime
 > overrides and primary flag. Public no-drift is closed at 8 complete / 0 pending.
+>
+> The same native APIs expose explicit repeated-action result collection under
+> `linkedspec-explicit-repetition-action-result-v1`: `*`, `+`, `?`, `OR`, `OR+`, and bounded `OR` collect one
+> typed action-edge value per accepted hit, lifecycle returns remain whole-rule authority, and pipe stays scalar.
 
 These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
