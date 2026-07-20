@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral contract executable; backend rollout pending
+- Status: accepted; amended by ADR 0050; neutral contract executable; Perl authority map complete; adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -296,7 +296,8 @@ change an explanation, or move semantics into MCP.
 Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 
 - `.10.2` neutral executable schema, fixtures, expected answers, and omission/mutation checker;
-- `.10.3` Perl semantic model/native reference adapter;
+- `.10.3` Perl semantic model/native reference adapter, split after the authority audit into strict source/outcome,
+  static graph/diagnostic, call/staged provenance, query/privacy/budget, runtime/routes, and exact admission leaves;
 - `.10.4` Rust adapter;
 - `.10.5` Dart adapter;
 - `.10.6` Julia adapter;
@@ -317,6 +318,13 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
 - This decision changes no current parser, compiler, runtime, descriptor, generated artifact, CLI, trace, or MCP
   behavior. Public docs must label the model and APIs as planned until their implementation leaves close.
+
+The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
+characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
+decoded source and retain canonical bytes for byte spans/digests. The descriptor, typed ActionIR, staged function
+records, structured runtime-context failures, and generated-v2 plan metadata are separate reusable authorities.
+Generated metadata cannot reconstruct a semantic snapshot, rule/edge/lifecycle coordinates need a source mapper,
+and optional execution observations require an invocation-local typed sink separate from textual trace.
 
 ## Links
 

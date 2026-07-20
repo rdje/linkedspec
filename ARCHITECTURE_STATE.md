@@ -16,7 +16,11 @@ This document is the current high-level technical reading of the project shape. 
   jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 50 rejected mutations now run
   in canonical CI. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
   pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
-  MCP, and public work. No current parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
+  MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
+  typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
+  state has no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/text trace
+  has no typed invocation-local event sink. Leaves `.10.3.1-.10.3.6` own those implementation boundaries. No
+  current parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

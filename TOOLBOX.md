@@ -361,6 +361,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
 - **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 50 rejected mutations, rollout 1 complete / 8 pending`.
+- **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
+  bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
+  plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
+  a semantic snapshot. See [[perl-semantic-introspection-authority-map]].
 
 ---
 

@@ -773,7 +773,10 @@ content migration exists yet.
   across six fixture groups and rejects 50 mutations in canonical CI; neutral rollout is 1 complete / 8 pending,
   while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. No native semantic API is available
-  yet; Perl implementation starts at `.10.3`.
+  yet. Behavior-free Perl audit `.10.3.0` maps strict decoded source/canonical bytes, descriptor, typed ActionIR,
+  staged/diagnostic/generated authorities, missing source mapping, and missing typed runtime observations.
+  Implementation is split across `.10.3.1-.10.3.6`; strict source/outcome `.10.3.1` is next after the clean audit
+  commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

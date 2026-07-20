@@ -10,15 +10,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.2` — executable neutral semantic-introspection contract is
-  signoff-complete; its clean commit boundary is in flight.
-- latest_commit: `056d413b` — `FUTURE-PARITY-BACKLOG.10.1 - design semantic introspection`
-  (ahead: 261; push at threshold 300).
-- active_work_unit: `FUTURE-PARITY-BACKLOG.10.2` — executable neutral semantic model/query contract, fixtures,
-  evaluator, mutation gate, canonical registration, ADR correction, Knowledge Map, and mdBook are implemented and
-  fully verified; only the per-leaf commit and brief clearing remain before `.10.3`.
-- next_action: commit `.10.2` per `COMMIT.md`, clear and verify `git_message_brief.txt`, verify the clean boundary,
-  then activate Perl reference leaf `.10.3` task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.0` — behavior-free Perl semantic-authority map and exact
+  `.10.3.1-.10.3.6` implementation split are signoff-complete; only commit/brief clearing remain in flight.
+- latest_commit: `a891d7af` — `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract`
+  (ahead: 262; push at threshold 300).
+- active_work_unit: `FUTURE-PARITY-BACKLOG.10.3.0` — Toolbox/KM authority probes and lockstep docs are complete;
+  canonical signoff passes; cleanup, per-leaf commit, and brief clearing remain before `.10.3.1`.
+- next_action: clean generated output, run final lightweight checks, commit/clear the brief, verify clean, then
+  activate strict source/outcome `.10.3.1` task-tree-first.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 50 rejected mutations. Neutral rollout is
@@ -32,14 +31,18 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - current_descriptor_boundary: current outward `spec/functions/dependency_regex_map/meta` is reusable derived
   compatibility state, not the semantic wire schema. TOOLBOX proof shows native Perl coderef/compiled-regex values
   and direct JSON failure; backend AST/IR/object identity is forbidden from semantic responses.
-- implementation_split: `.10.2` neutral executable schema/checker; `.3` Perl; `.4` Rust; `.5` Dart; `.6` Julia;
-  `.7` dual-ABI Lua; `.8` recurring six-runtime; `.9` MCP; `.10` public no-drift/closure.
+- current_perl_authority_map: strict decoded source plus canonical bytes owns text/spans; descriptor owns stable
+  graph/function/staged facts; typed ActionIR owns nested call/binding spans; runtime context owns compile failure;
+  generated v2 owns plan metadata only. Rule/edge/lifecycle source mapping and typed invocation-local execution
+  observations are absent/new work. Raw UTF-8 bytes must be strictly decoded before character-oriented `Get`.
+- perl_split: `.10.3.1` source/map/outcome; `.2` static graph/diagnostic; `.3` calls/shapes/staged/generated; `.4`
+  capabilities/query/privacy/budgets; `.5` runtime/direct/loaded/generated observations; `.6` exact admission.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
-  repeated action is 8+0/54. The first canonical design run caught/restored the repeated-action live marker.
-- current_signoff: focused and canonical neutral checker pass 6 groups / 20 exact responses / 50 rejected
-  mutations; primary CLI passes 66/66 twice; Phase 0 passes 1,031/1,031 in 612 seconds; mdBook, Knowledge Map at
-  649/4,783, all four doctrines, adjacent no-drift contracts, and whitespace pass. No parser/compiler/runtime/
-  descriptor/generated/CLI/trace/native semantic API/MCP behavior changes.
+  repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`. The first canonical design
+  run caught/restored the repeated-action live marker.
+- current_signoff: `.10.3.0` passes semantic 6/20/50, selector 59/27/0, KM 650/4,790, primary 66x2, Phase 0
+  1,031/1,031 in 608 seconds, mdBook, all doctrines/adjacent contracts/whitespace, and canonical exit 0. First run
+  caught/restored the repeated-action task/memory markers. No parser/compiler/runtime/API behavior changes.
 - latest_bootstrap_read: 2026-07-20 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
   task, Knowledge Map, Toolbox, ADRs `0012`-`0016`, `0022`/`0023`, `0037`, `0042`, `0044`, `0047`-`0050`,
   descriptor/compiled/ActionIR/diagnostic/trace/generated/API authorities, and public precedents read.
@@ -51,5 +54,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.10.2` is fully verified; only its clean commit and brief clearing remain
-  before task-tree-first activation of `.10.3`.
+- blockers: none. in_flight_uncommitted: `.10.3.0` is fully verified; only cleanup, clean commit, and brief clearing
+  remain before task-tree-first activation of `.10.3.1`.

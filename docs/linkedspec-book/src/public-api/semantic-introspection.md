@@ -23,6 +23,26 @@ The semantic model therefore normalizes those meanings into closed records and r
 identity, backend AST/IR type names, callable objects, compiled regex objects, implicit filesystem paths, host
 exceptions, and generated implementation source.
 
+## Perl authority map
+
+The behavior-free Perl audit establishes how the first adapter must be assembled. No single current object is a
+semantic snapshot:
+
+| Authority | Reusable meaning | Work still owned by the semantic adapter |
+|---|---|---|
+| decoded source plus canonical UTF-8 bytes | exact accepted text | source coordinates, excerpts, digests, logical-name-only identity |
+| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | removal of coderef/compiled-regex host values; normalized records and relations |
+| typed ActionIR AST | source-preorder calls, bindings, and nested spans | registry resolution, portable shapes, evidence |
+| runtime context | structured compilation failure | v1 diagnostic code/stage/message/field normalization |
+| generated-source v2 metadata | contract/format, source identity, ordered family plan, entries | separate generated-artifact relation; never snapshot reconstruction |
+| runtime handlers | exact accepted slot and final-result seams | a new invocation-local typed observation sink separate from trace |
+
+`LinkedSpec::Get` is character-oriented internally. Direct raw UTF-8 bytes for the privacy fixture's `Töp::`
+label fail validation, while strict UTF-8 decoding first compiles the exact label and Unicode regex. Existing file
+loaders already use strict decoding. The future semantic constructor must accept decoded text or strict UTF-8
+bytes, reject malformed input, preserve canonical bytes for byte offsets and digests, and accept only a
+caller-registered logical name—never an implicit host path.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -212,7 +232,8 @@ The dependency order is:
 | Owner | Work | Current state |
 |---|---|---|
 | `.10.2` | neutral contract, fixtures, exact oracle | complete |
-| `.10.3` | Perl native reference index/API | pending |
+| `.10.3.0` | Perl authority map and safe implementation split | complete |
+| `.10.3.1-.10.3.6` | Perl source/outcome, static graph, calls/staging, query, runtime/routes, admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |

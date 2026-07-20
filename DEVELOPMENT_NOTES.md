@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.3.0` — map Perl authorities before behavior): Knowledge Map retrieval and
+  LinkedSpec's own probes were used before implementation inspection. `return_descriptor` proves a large reusable
+  projection: deterministic definition/compiled/function order; rule family, cursor, repetition, entry, edge, and
+  regex-slot identity; plus exact function and staged body records. It deliberately also contains coderefs and
+  compiled regex objects. `ActionIR::AST::parse_action_block` gives source-preorder nested spans for the calls
+  fixture, including assignment, `normalize(...)`, nested `match_text()`, and return nodes; semantic call/binding
+  projection must traverse that typed AST and resolve the function registry, not reuse compatibility-lowered text.
+
+  The Unicode source probe corrected a potentially misleading first symptom. Passing the exact privacy fixture as
+  raw UTF-8 bytes directly to the character-oriented `Get` boundary failed at rule-label validation. Strict
+  `Encode::decode('UTF-8', ..., FB_CROAK)` immediately compiled `Töp` with exact code points and the Unicode regex;
+  `SpecLoader` and the primary CLI already enforce the same public boundary. The semantic constructor therefore
+  needs explicit decoded-text/strict-byte normalization and canonical UTF-8 retention for byte spans/digests, not
+  a grammar workaround. It must reject malformed UTF-8 and never infer or reveal a filesystem path.
+
+  The failed fixture produces structured `bare_edge_target_undefined` at `normalize_edges`; the adapter must map
+  that authority to the neutral `unknown_rule_reference` compile diagnostic. Generated-source v2 metadata carries
+  contract/format/source identity, ordered `{label,family}` plan, and entry rules, but not a semantic snapshot.
+  `RuntimeContext` retains identity, last error, and optional generated-source capture while `Trace` is global text;
+  neither is the typed invocation-local event sink needed for optional runtime snapshots. Rule/edge/lifecycle
+  coordinates are also absent from current compiled projections and need a deterministic source mapper over the
+  already accepted source. These boundaries produced the dependency-safe `.10.3.1-.10.3.6` split without changing
+  behavior or advancing neutral rollout/native admission.
+
+  Canonical CI then exercised the audit-only patch against every current contract. Its first run stopped at the
+  repeated-action public checker because replacing the active task-index row displaced that closed program's exact
+  marker; the focused rerun also required its historical `.10.1` next-owner token in bounded memory. Restoring both
+  preserves the intended cross-program no-drift topology. The full restart passes semantic 6/20/50, selector
+  59/27/0, primary 66x2, and Phase 0 1,031/1,031 in 608 seconds before exiting 0. This is a documentation-guard
+  correction, not a runtime finding.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.2` — make semantic parity executable before adapters): The neutral model
   is deliberately an oracle, not a prototype backend. Exact authored fixture bytes and immutable normalized
   snapshots let the checker validate public records/relations and derive query responses without consulting Perl

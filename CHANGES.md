@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.3.0 — map Perl semantic authorities
+
+The Perl reference implementation now has a behavior-free authority map and six dependency-ordered implementation
+children before a native semantic API is added. Toolbox probes establish that the outward descriptor already owns
+deterministic definition/rule/function order, normalized rule/edge/slot topology, function signatures, and staged
+body records; typed ActionIR owns exact nested call/binding spans; runtime context owns structured compile failure;
+and generated-source v2 owns its validated plan metadata. Source coordinates, normalized shapes/evidence, query
+evaluation, and typed execution observations remain new semantic work.
+
+The audit also root-caused the Unicode privacy fixture's raw-byte rejection. `LinkedSpec::Get` expects decoded
+characters internally: direct UTF-8 bytes made `Töp::` fail rule-label validation, while strict decoding first
+compiled the exact Unicode label and regex. Existing public loaders already use `FB_CROAK`. The future constructor
+must therefore normalize decoded text or strict UTF-8 bytes to one character source, retain canonical bytes for
+spans/digests, reject malformed UTF-8, and accept only a caller logical name. Generated metadata is not a semantic
+snapshot, and current runtime context/text trace has no typed invocation-local event sink. Leaves `.10.3.1-.10.3.6`
+now own source/outcome construction, static graph/diagnostics, calls/staged provenance, query/privacy/budgets,
+runtime/routes, and exact Perl admission. This audit changes no parser, compiler, runtime, descriptor, generated
+source, CLI, trace, fixture, contract rollout, or public API behavior.
+
+Canonical signoff passes the semantic oracle at 6 fixture groups / 20 exact queries / 50 rejected mutations,
+public aggregate-selector census 59/27/0, both primary command environments at 66/66, and Phase 0 at
+1,031/1,031 in 608 seconds. Its first run correctly rejected a displaced repeated-action task-index marker; the
+exact closed marker and historical next-owner token were restored, the focused 8/10/8+0/54 guard passed, and the
+complete rerun exited 0. Knowledge Map is 650 facts / 4,790 question keys; mdBook, memory, all doctrines, adjacent
+contracts, whitespace, and generated-output cleanup pass.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.2 — freeze executable semantic introspection contract
 
 `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` now have an executable neutral oracle before

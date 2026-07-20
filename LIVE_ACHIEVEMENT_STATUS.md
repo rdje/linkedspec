@@ -8,10 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.2` is signoff-complete from clean base `056d413b`. The executable neutral contract,
-  six fixture groups, 20 digest-locked responses, 50-mutation checker, canonical registration, ADR correction,
-  Knowledge Map, and mdBook pass the complete local gate. Only its per-leaf commit and clean boundary remain before
-  Perl reference adapter `.10.3` can activate task-tree-first.
+- `FUTURE-PARITY-BACKLOG.10.3.0` is signoff-complete from clean neutral commit `a891d7af`. Knowledge Map and Toolbox-
+  first probes map decoded source/canonical bytes, descriptor, typed ActionIR, staged records, structured failures,
+  generated-v2 metadata, and missing source/event seams without implementation behavior. The `.10.3.1-.10.3.6`
+  dependency split and complete canonical gate are green; only the per-leaf commit/clean boundary precedes `.10.3.1`.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -22,8 +22,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.10.3.0 — map Perl semantic authorities**
+  (SIGNOFF-COMPLETE from clean base `a891d7af`; commit boundary in flight).
+
+  **Result:** Exact probes prove the reusable descriptor/ActionIR/staged/failure/generated authorities, the strict
+  decoded-text plus canonical-byte constructor boundary, and the missing source-map/typed-observer work. Six
+  dependency-ordered leaves own implementation without advancing neutral rollout or backend admission.
+
+  **Proof:** Knowledge Map 650/4,790; `Get(return_descriptor)`, runtime-context, bootstrap, typed ActionIR,
+  lowering, and generated-source probes; semantic 6/20/50; selector 59/27/0; primary 66x2; Phase 0 1,031/1,031 in
+  608 seconds; mdBook, all doctrines, adjacent contracts, whitespace, and canonical exit 0.
+
+  **Next:** Commit and clean `.10.3.0`, then activate strict source/outcome leaf `.10.3.1` task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.2 — freeze executable semantic introspection contract**
-  (SIGNOFF-COMPLETE from clean base `056d413b`; commit boundary in flight).
+  (DONE at clean commit `a891d7af` from base `056d413b`).
 
   **Result:** Five exact UTF-8 bundles feed six immutable neutral snapshots and 20 independently derived,
   SHA-256-locked query responses. The checker rejects 50 schema/semantic/topology/privacy/rollout mutations.
@@ -32,7 +45,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   **Proof:** Neutral 6/20/50; aggregate-selector public census 59/27/0; Knowledge Map 649/4,783; mdBook, doctrines,
   adjacent contracts, and whitespace; canonical primary 66x2 and Phase 0 1,031/1,031 in 612 seconds, exit 0.
 
-  **Next:** Commit and clean `.10.2`, then activate Perl semantic-index leaf `.10.3` task-tree-first.
+  **Next:** Behavior-free Perl authority map `.10.3.0` activated task-tree-first and is now signoff-complete.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code**
   (DONE at clean commit `056d413b` from base `f183e468`).

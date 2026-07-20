@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-20` (executable neutral semantic contract `.10.2` is signoff-complete; Perl reference
-  adapter `.10.3` is next only after the clean per-leaf commit)
+- Last updated: `2026-07-20` (Perl authority map `.10.3.0` is signoff-complete; strict source/outcome leaf `.10.3.1`
+  is next only after the clean audit commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -6889,13 +6889,119 @@ before implementation.
     output, record final proof, commit `.10.2`, clear the brief, and hand off cleanly to `.10.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Perl semantic index, native query surface, and reference conformance consumer.
   Depends on: `.10.2`
   Acceptance: Build immutable semantic facts from compiler/ActionIR/provenance/generated/diagnostic authorities;
     never serialize coderefs, compiled regex objects, or host AST layout; expose idiomatic in-process capabilities
     and queries; capture optional runtime observations without interference; pass every exact fixture, error,
     privacy, page/budget, explain, direct/generated/loaded route, omission check, and complete Perl/canonical gate.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.0`
+  Status: `done`
+  Goal: Map every Perl semantic authority and freeze a safe implementation split before behavior.
+  Depends on: `.10.2`
+  Acceptance: Use the Knowledge Map and LinkedSpec toolbox first to prove the exact compiler, ActionIR, function/
+    staged/generated provenance, diagnostic, descriptor, trace/runtime-observation, loader/reconstruction, and
+    public embedding seams that the neutral oracle requires. Record which facts can be projected directly, which
+    require stable derived metadata, where immutable snapshot construction belongs, how failures and optional
+    caller-captured execution observations enter, and how direct/loaded/generated routes converge. Split `.10.3`
+    into dependency-ordered index, query/runtime-route, and admission children before modifying Perl behavior.
+  Verification: Activated task-tree-first on 2026-07-20 from clean neutral-contract commit `a891d7af` at ahead
+    262; `git_message_brief.txt` was zero bytes and generated mdBook/Python output was absent. No Perl semantic
+    implementation, API, fixture, consumer, or CI edit preceded activation. Knowledge Map and TOOLBOX retrieval
+    led to exact `LinkedSpec::Get(return_descriptor)`, `runtime_ctx_ref`, bootstrap, ActionIR AST,
+    `call_spec_handler_subst`, and `emit_generated_source` probes on every neutral source family. They establish:
+    the descriptor owns deterministic definition/rule/function order, families/cursor/repetition/entry identity,
+    resolved edge/slot topology, function/staged records, and generated family inputs; the typed ActionIR parser
+    produces exact nested call/binding spans and function-body AST; runtime context owns structured compile failure;
+    generated v2 metadata owns contract/format/plan/entry/source identity. Rule/edge/lifecycle source coordinates,
+    normalized value/target shapes and evidence remain derived semantic work. A raw-byte privacy probe failed at
+    `Validation::_parse_rule_label_line`, while strict UTF-8 decoding before `Get` compiled exact code points
+    `U+0054,U+00F6,U+0070`; `SpecLoader` already proves this decode boundary with `FB_CROAK`. Therefore the native
+    constructor must normalize strict UTF-8 to decoded text while retaining canonical bytes for byte spans/digests.
+    Failed fixture `Missing` yields structured `bare_edge_target_undefined` at `normalize_edges`, which the adapter
+    must normalize to the v1 compile diagnostic. Runtime context has no event sink and generated metadata is not a
+    semantic snapshot, so optional observation and generated-route proof remain explicit later children. The
+    dependency split `.10.3.1-.10.3.6` assigns every gap before behavior.
+  Commit: `FUTURE-PARITY-BACKLOG.10.3.0 - map Perl semantic authorities`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Follow Knowledge Map pointers and use LinkedSpec probes for every existing
+    Perl semantic authority and direct/loaded/generated/runtime route before reading implementation details.
+  - [x] **MAP / ROOT CAUSE** — Establish exact reusable versus missing facts, stable construction boundaries,
+    failure/runtime-observation entry points, native API ownership, and forbidden host-object leakage.
+  - [x] **SPLIT BEFORE BEHAVIOR** — Add dependency-ordered `.10.3.1+` children whose acceptance covers immutable
+    index construction, query/privacy/budget evaluation, runtime/routes, exact conformance, and canonical admission.
+  - [x] **LOCKSTEP / COMMIT** — Synchronize task/index/roadmaps/architecture/live/memory, Knowledge Map, mdBook and
+    guides; pass doctrines/book/whitespace/canonical checks, clean artifacts, and commit before behavior.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.1`
+  Status: `pending`
+  Goal: Add the strict source, source-map, and compilation-outcome foundation for an immutable Perl index.
+  Depends on: `.10.3.0`
+  Acceptance: Add `LinkedSpec::semantic_index(...)` construction ownership without query behavior. Normalize an
+    in-memory decoded character scalar or strict UTF-8 byte scalar to one decoded source plus exact canonical UTF-8
+    bytes; accept only a caller-registered logical name and source ceiling, never an implicit host path. Compile
+    once through existing `Get`/runtime-context authorities without executing the parser. Preserve a compiled or
+    failed-compilation outcome, source digest policy, and deterministic zero-based byte/one-based Unicode-scalar
+    spans through a source mapper that correlates accepted source with compiler order rather than inventing grammar
+    semantics. Prove graph/privacy/failed sources including malformed UTF-8, immutability, no host-object leakage,
+    and unchanged `Get`/loader/CLI behavior.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.2`
+  Status: `pending`
+  Goal: Project exact static rule, regex-slot, edge, lifecycle, entry, and diagnostic semantics on Perl.
+  Depends on: `.10.3.1`
+  Acceptance: Build canonical ids/order and normalized spec/source/rule/regex-slot/edge/lifecycle/diagnostic/
+    decision/explanation records plus relations from descriptor, source map, entry selection, and runtime-context
+    authorities. Normalize internal family/cursor/unbounded representations without serializing regexes, coderefs,
+    AST layout, or paths. Deep-equal the graph, privacy/full+limited, and failed-compilation neutral snapshots;
+    prove duplicate slots, exact source redaction inputs, failure normalization, immutable copies, and no behavior
+    change outside semantic construction.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.3`
+  Status: `pending`
+  Goal: Project Perl calls, shapes, bindings, staged provenance, and generated-plan semantics.
+  Depends on: `.10.3.2`
+  Acceptance: Traverse typed ActionIR AST in source preorder, resolve registered functions before helper contracts,
+    infer only contract-authorized value/target shapes, and project exact helper/function/binding/call records and
+    evidence. Normalize outward function body payload/job/AST into ADR `0050` payload/parse-job/result records and
+    preserve consumes/produces/lowered/staged direction. Reuse one shared generated-family classifier to add the
+    separate v2 handler-plan artifact. Deep-equal the complete calls/staging neutral snapshot and reject host IR,
+    generated implementation source, unsupported shape strengthening, and provenance collapse.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.4`
+  Status: `pending`
+  Goal: Implement the immutable Perl capabilities/query evaluator with exact privacy and logical costs.
+  Depends on: `.10.3.3`
+  Acceptance: Expose `$index->capabilities` and `$index->query($request)` with the exact v1 request/response keys,
+    ids/order, clone isolation, list/get/relations/explain behavior, after-id pages, deterministic breadth-first
+    traversal, record/relation/depth budgets, source ceilings/redactions/digests, and portable invalid/unsupported/
+    forbidden/budget diagnostics. Match every static neutral query response digest without compiling, executing,
+    reading a path, enabling trace, or leaking mutable internal state during queries.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.5`
+  Status: `pending`
+  Goal: Add opt-in non-interfering Perl execution observations across native, loaded, and generated routes.
+  Depends on: `.10.3.4`
+  Acceptance: Add an invocation-local typed observation sink separate from trace and diagnostic output; emit exact
+    regex-slot selections and final rule result with stable rule/slot identity and positions from shared handler
+    seams. Let a caller derive a new immutable runtime snapshot from a completed observation; queries never execute.
+    Prove byte/result/error/trace/diagnostic neutrality when absent or present, observer failure identity, exact
+    runtime model/query answers, and equivalent direct parser, loaded spec, captured generated source, independently
+    loaded generated direct/traced, and reconstructed plan roles.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.3.6`
+  Status: `pending`
+  Goal: Admit the Perl reference semantic surface through one omission-sensitive exact consumer and canonical gate.
+  Depends on: `.10.3.5`
+  Acceptance: Add one shared-contract consumer covering source normalization, every compiled/failed/runtime snapshot,
+    all 20 query cases, immutable native object API plus neutral JSON, direct/loaded/generated/traced roles, privacy,
+    page/budget/errors/explain, non-interference, and stale-host-leak denials. Extend the neutral checker with exact
+    Perl path/role/registration/admission mutations, promote only Perl rollout/admission, run focused and complete
+    Perl/canonical gates, and synchronize public API/mdBook/roadmaps/Knowledge Map before closing parent `.10.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4`
   Status: `pending`
@@ -9150,9 +9256,10 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 Semantic-introspection design `.10.1` is complete before behavior. ADR `0049` fixes the immutable native semantic
 model/query, exact identity/order/records/relations/shapes/evidence, source/privacy/page/budget/evolution rules,
 optional caller-captured runtime observations, no descriptor/backend-IR leakage, and handle-only MCP boundary.
-Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is complete and signoff-green from clean design commit
-`056d413b`; it freezes schema, fixtures/expected answers, rollout inventory, and omission/mutation checking before
-any adapter or MCP implementation. Perl reference leaf `.10.3` is next only after the clean `.10.2` commit.
+Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is committed clean at `a891d7af`. Perl authority-map leaf
+`.10.3.0` is signoff-complete after proving the exact decoded-source/compiler/ActionIR/staged/generated/diagnostic/
+runtime seams, splitting all implementation work, and passing canonical Phase 0 1,031/1,031 in 608 seconds.
+Strict source/outcome leaf `.10.3.1` is next only after the clean audit commit.
 
 ### Historical frontier sequence
 
@@ -9526,7 +9633,14 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `done` | ADR `0049` fixes the backend-neutral semantic schema, idiomatic native APIs, exact parity gate, and thin MCP projection before code. |
 | 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups, 20 digest-locked responses, 50 rejected mutations, and canonical registration freeze the neutral oracle before adapters. |
-| 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `pending` | Implement the Perl semantic index, native query surface, and exact reference conformance after the clean `.10.2` commit. |
+| 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `active` | Implement the Perl semantic index, native query surface, and exact reference conformance through owned children. |
+| 74.2.0 | `FUTURE-PARITY-BACKLOG.10.3.0` | `done` | Exact toolbox probes map decoded source, descriptor, ActionIR, staged, generated, diagnostic, and missing runtime seams before behavior. |
+| 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `pending` | Add strict source normalization, source mapping, and immutable compilation-outcome construction. |
+| 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `pending` | Project static grammar, source, entry, diagnostic, and explanation semantics. |
+| 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `pending` | Project ActionIR calls/shapes/bindings plus staged/generated provenance. |
+| 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
+| 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
+| 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -10193,13 +10307,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Executable neutral contract `.10.2` is signoff-complete; its per-leaf commit is the only remaining boundary
-  before Perl reference adapter `.10.3` may activate task-tree-first.
+- None. Perl authority map `.10.3.0` is signoff-complete; strict source/outcome `.10.3.1` waits for its clean commit.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.3.0` | Knowledge Map and Toolbox retrieval; exact `Get(return_descriptor)`, `runtime_ctx_ref`, bootstrap, typed ActionIR, lowering, and generated-v2 probes across every neutral source family; raw-byte Unicode failure plus strict-decode success; six-child dependency split; KM 650/4,790; mdBook, memory, task, four doctrines, whitespace, selector 59/27/0; semantic 6/20/50; primary 66x2; Phase 0 1,031/1,031 in 608s; canonical exit 0. | PASS. First canonical run caught displaced repeated-action task/memory markers; focused 8/10/8+0/54 repair and complete restart pass. No behavior, fixture, contract, query, rollout, admission, or public API change; `.10.3.1` waits for the clean boundary. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.2` | Five exact UTF-8 bundles; six immutable snapshots; 20 independently derived SHA-256-locked responses; 50 schema/semantic/topology/privacy/rollout mutations; staged-artifact ADR `0050`; aggregate-selector public census 59/27/0; KM 649/4,783; mdBook, memory, task, all four doctrines, adjacent contracts, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 612s, exit 0. | PASS. Neutral rollout is 1/9 and native admission 0/6; no parser/compiler/runtime/descriptor/generated/CLI/trace/native semantic API/MCP behavior changes; Perl `.10.3` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.1` | Knowledge/TOOLBOX inventory of descriptor/compiled/ActionIR/function/staged/generated/diagnostic/trace/API authorities; Perl descriptor native-object probe; ADR `0049`; exact model/query/id/order/record/relation/fact/shape/envelope/source/span/page/budget/privacy/evolution/explain/API/CLI/MCP/fixture/mutation design; dependency split `.10.2-.10.10`; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59, repeated 8+0/54 including first-run live-marker RED/repair; KM 647/4,769; mdBook, memory, task, doctrines, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 657s, exit 0. | PASS. The descriptor remains reusable compatibility state but not a portable semantic wire schema; one immutable native semantic index owns future answers and MCP is handle-only transport. No behavior changes; executable neutral `.10.2` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.9.1.10.7` | Contract-first 25-document/12-denial/four-parent/next-owner public closure; 54 mutations at 8+0; recurring Perl 10, Rust/Dart/Julia exact admissions, Lua 175x2, selected primary 5x2x1, generated/capability 80/0/0, coverage 246/105+1/122; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59; KM 646/4,763; mdBook, memory, task, four doctrines, JSON/Python, whitespace, cleanup; canonical primary 66x2, Phase 0 1,031/1,031 in 645s, enabled recurring matrix, exit 0. | PASS. Public no-drift closes repeated-action at 8/0/54, exact inventory corrects stale `.9.1.1`, all four semantic parents close, no behavior changes, and `.10.1` waits for the clean commit. |
@@ -10408,6 +10522,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.3.0` | `FUTURE-PARITY-BACKLOG.10.3.0 - map Perl semantic authorities` | Strict source/canonical-byte, descriptor, ActionIR, staged, failure, generated, source-map, and typed-observer boundaries plus `.10.3.1-.10.3.6` split; KM/book/doctrines/semantic/primary/1,031-in-608s canonical signoff and cleanup complete. |
 | `FUTURE-PARITY-BACKLOG.10.2` | `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract` | Six neutral groups, 20 exact responses, 50 mutations, ADR `0050`, 59/27/0 adjacent public census, roadmap/book/KM lockstep, canonical 1,031/612s, and cleanup freeze the executable oracle without backend behavior. |
 | `FUTURE-PARITY-BACKLOG.10.1` | `FUTURE-PARITY-BACKLOG.10.1 - design semantic introspection` | ADR `0049`, native-authority inventory, exact model/query/API/privacy/parity/MCP design, nine-leaf dependency split, roadmap/book/KM lockstep, canonical 1,031/657s, and cleanup close design without behavior. |
 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `FUTURE-PARITY-BACKLOG.9.1.10.7 - close repeated action result parity` | Twenty-five documents, 12 stale denials, 54 mutations, recurring/canonical proof, exact four-parent closure, roadmap/book/KM lockstep, and cleanup close ADR 0048 rollout at 8/0. |

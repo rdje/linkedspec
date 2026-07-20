@@ -506,9 +506,14 @@ Three backbone items tracked major structural modernization — all done:
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
   runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
   50 mutations. ADR `0050` explicitly separates staged payload/job/result records from generated artifacts. The
-  descriptor remains reusable input, not the wire model. Neutral rollout is 1 complete / 8 pending; backend
-  admission is 0 complete / 6 pending, with Perl `.10.3` next. MCP remains handle-only later transport and owns
-  no semantic or filesystem behavior. No current backend API or parser/compiler/runtime behavior changed.
+  descriptor remains reusable input, not the wire model. Perl authority audit `.10.3.0` now proves the exact
+  decoded-source/canonical-byte, descriptor, typed ActionIR, staged-function, runtime-context diagnostic, and
+  generated-v2 plan inputs. It also proves that source coordinates and invocation-local typed execution events are
+  new adapter work, generated metadata cannot reconstruct a snapshot, and raw UTF-8 bytes must be strictly decoded
+  before the internal character-oriented compiler. Leaves `.10.3.1-.10.3.6` own the implementation. Neutral
+  rollout remains 1 complete / 8 pending and backend admission 0 complete / 6 pending. MCP remains handle-only
+  later transport and owns no semantic or filesystem behavior. No current backend API or parser/compiler/runtime
+  behavior changed.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The
