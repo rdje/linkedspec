@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.1` — required identity and choice priority are separate):
+  ADR `0047` deliberately does not describe every duplicate match as ambiguous. An AND sequence already owns the
+  required structural slot, so selecting a combined alternation and checking its branch afterward throws away
+  knowledge the executor already had. The portable algorithm matches the required pattern and reports that slot.
+  OR/default is the actual ambiguity: it evaluates eligible slots, uses earliest start, then authored order.
+
+  Current numeric identity is `{target_rule, regex_index}`. ADR `0045`'s future named selector resolves to that
+  identity and may add `target_slot_id`; it does not derive identity from regex text, adjacency, capture equality,
+  or branch guessing. This also explains why generated-source v2 needs no format bump: embedded/reconstructed
+  compiled rules already preserve every pattern and action-edge index.
+
+  The neutral checker uses a small independent regex model rather than executing one backend. It proves five exact
+  same-rule/cross-target/ordered/choice/repeated/control fixtures, two diagnostics, six runtime inventory rows,
+  and the exact 1-complete/6-pending rollout. Twenty-three mutations independently attack semantics, fixtures,
+  diagnostics, descriptors, generated plans, trace, inventory, migration, rollout, and CI registration.
+
+  Final canonical proof passes both 65-case primary environments and Phase 0 1,031/1,031 in 635 seconds. The first
+  attempt stopped at the existing root checker because the active-frontier cell had dropped one required public
+  phrase. That was a useful cross-contract RED: restore the marker, preserve the new frontier, and rerun from the
+  beginning rather than weakening either checker. KM 637/4,685, mdBook, and all doctrines also pass.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.0` — slot identity is structural, not regex-text identity):
   The exact Perl trace is decisive: dependency slot 3 matches the correct bytes but `LinkedRE::oredRE` reports
   slot 1 because both alternatives are `/\w+/`; the generated AND handler then rejects

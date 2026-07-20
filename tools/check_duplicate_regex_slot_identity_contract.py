@@ -1,0 +1,612 @@
+#!/usr/bin/env python3
+"""Validate ADR 0047's neutral duplicate-regex slot identity contract."""
+
+from __future__ import annotations
+
+import copy
+import json
+import re
+from pathlib import Path
+from typing import Any, Callable
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CONTRACT_PATH = (
+    ROOT / "capability_conformance" / "duplicate_regex_slot_identity_contract.json"
+)
+CONTRACT_ID = "linkedspec-duplicate-regex-slot-identity-v1"
+TASK_OWNER = "FUTURE-PARITY-BACKLOG.9.1.8.1"
+TOP_LEVEL_FIELDS = {
+    "format",
+    "contract_id",
+    "task_owner",
+    "terminology",
+    "identity",
+    "selection",
+    "fixtures",
+    "diagnostics",
+    "descriptor_contract",
+    "generated_source_v2",
+    "trace_contract",
+    "implementation_inventory",
+    "migration",
+    "rollout",
+    "canonical_ci",
+}
+FIXTURE_FIELDS = {
+    "id",
+    "role",
+    "source",
+    "input",
+    "cursor_policy",
+    "repeat_count",
+    "slots",
+    "required_sequence",
+    "expected_match_identities",
+    "expected_result",
+}
+FIXTURE_IDS = [
+    "ordered_same_rule_duplicate",
+    "choice_same_rule_duplicate",
+    "repeated_ordered_duplicate",
+    "repeated_non_duplicate_control",
+    "ordered_cross_target_duplicate",
+]
+EXPECTED_RESULTS: dict[str, Any] = {
+    "ordered_same_rule_duplicate": "ordered-ok",
+    "choice_same_rule_duplicate": "first",
+    "repeated_ordered_duplicate": [["a", "a"], ["a", "a"]],
+    "repeated_non_duplicate_control": [["a", "b"], ["a", "b"]],
+    "ordered_cross_target_duplicate": "cross-target-ok",
+}
+DIAGNOSTICS = [
+    (
+        "regex_slot_identity_invalid",
+        "validate_compiled_rule",
+        ["rule_label", "target_rule", "regex_index"],
+    ),
+    (
+        "ordered_regex_slot_identity_lost",
+        "execute_rule",
+        [
+            "rule_label",
+            "target_rule",
+            "expected_regex_index",
+            "actual_regex_index",
+        ],
+    ),
+]
+INVENTORY = [
+    (
+        "perl",
+        "perl",
+        "combined_alternation_then_expected_index",
+        "drift",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.2",
+    ),
+    (
+        "rust",
+        "rust",
+        "combined_alternation_then_expected_index",
+        "drift",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.3",
+    ),
+    (
+        "dart",
+        "dart",
+        "match_required_pattern_then_reindex",
+        "behavior_matches",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.4",
+    ),
+    (
+        "julia",
+        "julia",
+        "match_required_pattern_then_reindex",
+        "behavior_matches",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.5",
+    ),
+    (
+        "lua",
+        "puc_lua",
+        "match_required_pattern_then_reindex",
+        "behavior_matches",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.6",
+    ),
+    (
+        "lua",
+        "luajit",
+        "match_required_pattern_then_reindex",
+        "behavior_matches",
+        "first_authored",
+        "preserved",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.6",
+    ),
+]
+ROLLOUT = [
+    ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.1"),
+    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.2"),
+    ("rust", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.3"),
+    ("dart", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.4"),
+    ("julia", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.5"),
+    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
+    (
+        "recurring_and_public_no_drift",
+        "pending",
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.7",
+    ),
+]
+MIGRATION = {
+    "decision": "docs/decisions/0047-duplicate-regex-slot-identity.md",
+    "checker": "tools/check_duplicate_regex_slot_identity_contract.py",
+    "perl_consumer": "t/duplicate_regex_slot_identity_perl_contract.t",
+    "rust_consumer": "rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs",
+    "dart_consumer": "dart/test/duplicate_regex_slot_identity_contract_test.dart",
+    "julia_consumer": "julia/test/duplicate_regex_slot_identity_contract_test.jl",
+    "lua_consumer": "lua/test/duplicate_regex_slot_identity_contract_test.lua",
+    "recurring_driver": "tools/check_duplicate_regex_slot_identity_five_backend.sh",
+}
+
+
+class ContractError(ValueError):
+    """Stable neutral-contract validation failure."""
+
+
+def fail(detail: str) -> None:
+    raise ContractError(detail)
+
+
+def require(condition: bool, detail: str) -> None:
+    if not condition:
+        fail(detail)
+
+
+def require_fields(value: Any, fields: set[str], context: str) -> dict[str, Any]:
+    if not isinstance(value, dict) or set(value) != fields:
+        fail(f"{context} fields drifted")
+    return value
+
+
+def slot_identity(slot: dict[str, Any]) -> str:
+    return f"{slot['target_rule']}#{slot['regex_index']}"
+
+
+def validate_slots(value: Any, context: str) -> list[dict[str, Any]]:
+    require(isinstance(value, list) and value, f"{context} slots must be non-empty")
+    slots: list[dict[str, Any]] = []
+    identities: set[str] = set()
+    orders: set[int] = set()
+    for index, raw_slot in enumerate(value):
+        slot = require_fields(
+            raw_slot,
+            {"target_rule", "regex_index", "authored_order", "pattern"},
+            f"{context} slot {index}",
+        )
+        require(
+            isinstance(slot["target_rule"], str) and slot["target_rule"],
+            f"{context} target rule is invalid",
+        )
+        require(
+            isinstance(slot["regex_index"], int) and slot["regex_index"] >= 0,
+            f"{context} regex index is invalid",
+        )
+        require(
+            isinstance(slot["authored_order"], int) and slot["authored_order"] >= 0,
+            f"{context} authored order is invalid",
+        )
+        require(isinstance(slot["pattern"], str), f"{context} pattern is invalid")
+        try:
+            re.compile(slot["pattern"])
+        except re.error as exc:
+            fail(f"{context} pattern does not compile: {exc}")
+        identity = slot_identity(slot)
+        require(identity not in identities, f"{context} repeats structural identity")
+        require(
+            slot["authored_order"] not in orders,
+            f"{context} repeats authored order",
+        )
+        identities.add(identity)
+        orders.add(slot["authored_order"])
+        slots.append(slot)
+    require(orders == set(range(len(slots))), f"{context} authored order drifted")
+    return slots
+
+
+def match_slot(
+    slot: dict[str, Any], text: str, cursor: int, cursor_policy: str
+) -> re.Match[str] | None:
+    pattern = re.compile(slot["pattern"])
+    if cursor_policy == "consume":
+        return pattern.match(text, cursor)
+    if cursor_policy == "seek":
+        return pattern.search(text, cursor)
+    fail(f"unknown cursor policy: {cursor_policy}")
+
+
+def evaluate_fixture(fixture: dict[str, Any], slots: list[dict[str, Any]]) -> list[str]:
+    cursor = 0
+    identities: list[str] = []
+    by_identity = {slot_identity(slot): slot for slot in slots}
+    if fixture["role"] == "ordered":
+        sequence = fixture["required_sequence"]
+        require(sequence, f"{fixture['id']} ordered sequence is empty")
+        for _ in range(fixture["repeat_count"]):
+            for required_identity in sequence:
+                require(
+                    required_identity in by_identity,
+                    f"{fixture['id']} requires an unknown slot",
+                )
+                slot = by_identity[required_identity]
+                match = match_slot(
+                    slot, fixture["input"], cursor, fixture["cursor_policy"]
+                )
+                require(match is not None, f"{fixture['id']} required slot did not match")
+                identities.append(slot_identity(slot))
+                cursor = match.end()
+    elif fixture["role"] == "choice":
+        require(
+            fixture["required_sequence"] == [],
+            f"{fixture['id']} choice has a required sequence",
+        )
+        candidates: list[tuple[int, int, re.Match[str], dict[str, Any]]] = []
+        for slot in slots:
+            match = match_slot(
+                slot, fixture["input"], cursor, fixture["cursor_policy"]
+            )
+            if match is not None:
+                candidates.append(
+                    (match.start(), slot["authored_order"], match, slot)
+                )
+        require(candidates, f"{fixture['id']} choice has no match")
+        _, _, match, selected = min(candidates, key=lambda item: (item[0], item[1]))
+        identities.append(slot_identity(selected))
+        cursor = match.end()
+    else:
+        fail(f"{fixture['id']} role drifted")
+    require(cursor <= len(fixture["input"]), f"{fixture['id']} cursor escaped input")
+    return identities
+
+
+def validate_fixtures(contract: dict[str, Any]) -> None:
+    fixtures = contract["fixtures"]
+    require(isinstance(fixtures, list), "fixtures must be an array")
+    require(
+        [fixture.get("id") for fixture in fixtures] == FIXTURE_IDS,
+        "fixture identity or order drifted",
+    )
+    for fixture in fixtures:
+        require_fields(fixture, FIXTURE_FIELDS, f"fixture {fixture.get('id')}")
+        fixture_id = fixture["id"]
+        require(
+            fixture["role"] in {"ordered", "choice"},
+            f"{fixture_id} role drifted",
+        )
+        require(
+            fixture["cursor_policy"] in {"consume", "seek"},
+            f"{fixture_id} cursor policy drifted",
+        )
+        require(
+            isinstance(fixture["repeat_count"], int)
+            and fixture["repeat_count"] >= 1,
+            f"{fixture_id} repeat count drifted",
+        )
+        require(
+            isinstance(fixture["source"], str)
+            and fixture["source"].endswith("\n"),
+            f"{fixture_id} source bytes drifted",
+        )
+        require(isinstance(fixture["input"], str), f"{fixture_id} input drifted")
+        slots = validate_slots(fixture["slots"], fixture_id)
+        actual_identities = evaluate_fixture(fixture, slots)
+        require(
+            actual_identities == fixture["expected_match_identities"],
+            f"{fixture_id} model result drifted",
+        )
+        require(
+            fixture["expected_result"] == EXPECTED_RESULTS[fixture_id],
+            f"{fixture_id} expected runtime result drifted",
+        )
+
+
+def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True) -> None:
+    require_fields(contract, TOP_LEVEL_FIELDS, "contract")
+    require(contract["format"] == 1, "format drifted")
+    require(contract["contract_id"] == CONTRACT_ID, "contract id drifted")
+    require(contract["task_owner"] == TASK_OWNER, "task owner drifted")
+
+    require_fields(
+        contract["terminology"],
+        {
+            "structural_slot",
+            "ordered_selection",
+            "choice_selection",
+            "duplicate_pattern",
+        },
+        "terminology",
+    )
+    identity = require_fields(
+        contract["identity"],
+        {
+            "duplicate_pattern_text_is_legal",
+            "required_fields",
+            "future_optional_field",
+            "numeric_and_named_selectors_resolve_to_same_identity",
+            "identity_recovery_forbidden",
+            "preserved_across",
+        },
+        "identity",
+    )
+    require(identity["duplicate_pattern_text_is_legal"] is True, "duplicates became illegal")
+    require(
+        identity["required_fields"] == ["target_rule", "regex_index"],
+        "structural identity fields drifted",
+    )
+    require(identity["future_optional_field"] == "target_slot_id", "named slot seam drifted")
+    require(
+        identity["numeric_and_named_selectors_resolve_to_same_identity"] is True,
+        "numeric/name identity convergence drifted",
+    )
+    require(
+        identity["identity_recovery_forbidden"]
+        == ["regex_text", "source_adjacency", "capture_text", "alternation_branch_guess"],
+        "forbidden identity recovery drifted",
+    )
+    require(
+        identity["preserved_across"]
+        == ["compiled_rule", "descriptor", "loaded", "reconstructed", "generated_source_v2", "trace"],
+        "identity projection inventory drifted",
+    )
+
+    selection = require_fields(contract["selection"], {"ordered", "choice"}, "selection")
+    ordered = require_fields(
+        selection["ordered"],
+        {"algorithm", "cursor_policy", "mismatch_policy", "repetition"},
+        "ordered selection",
+    )
+    require(
+        ordered["algorithm"]
+        == "match_only_the_required_structural_slot_and_report_that_same_identity",
+        "ordered algorithm drifted",
+    )
+    require(
+        ordered["repetition"]
+        == "reset to the first required sequence slot for each accepted iteration",
+        "ordered repetition drifted",
+    )
+    choice = require_fields(
+        selection["choice"],
+        {"algorithm", "primary_priority", "tie_break", "duplicate_tie_result"},
+        "choice selection",
+    )
+    require(choice["algorithm"] == "evaluate_every_eligible_structural_slot", "choice algorithm drifted")
+    require(choice["primary_priority"] == "earliest_match_start", "choice priority drifted")
+    require(choice["tie_break"] == "lowest_authored_order", "choice tie break drifted")
+    require(choice["duplicate_tie_result"] == "first_authored_slot", "duplicate choice drifted")
+
+    validate_fixtures(contract)
+
+    diagnostics = contract["diagnostics"]
+    require(isinstance(diagnostics, list), "diagnostics must be an array")
+    require(
+        [(row.get("code"), row.get("stage"), row.get("fields")) for row in diagnostics]
+        == DIAGNOSTICS,
+        "diagnostic identity drifted",
+    )
+    for row in diagnostics:
+        require_fields(row, {"code", "stage", "fields", "meaning"}, f"diagnostic {row.get('code')}")
+        require(isinstance(row["meaning"], str) and row["meaning"], "diagnostic meaning is empty")
+
+    require(
+        contract["descriptor_contract"]
+        == {
+            "meta_field": "regex_slot_identity_contract",
+            "meta_value": CONTRACT_ID,
+            "edge_identity_fields": ["target", "regex_index"],
+            "future_optional_edge_field": "target_slot_id",
+            "duplicate_patterns_remain_distinct_rows": True,
+        },
+        "descriptor contract drifted",
+    )
+    require(
+        contract["generated_source_v2"]
+        == {
+            "contract_id": "linkedspec-generated-source-v2",
+            "format_version": 2,
+            "plan_row_fields": ["label", "family"],
+            "plan_format_bump_required": False,
+            "identity_owner": "embedded_or_reconstructed_compiled_rule",
+            "execution_requirement": "preserve structural slot identity through native and generated-plan matching",
+        },
+        "generated-source v2 contract drifted",
+    )
+    require(
+        contract["trace_contract"]
+        == {
+            "event": "regex_slot_selected",
+            "fields": ["rule_label", "selection_role", "target_rule", "regex_index"],
+            "selection_role_values": ["ordered_required", "choice"],
+            "identity_source": "compiled_structural_slot",
+        },
+        "trace contract drifted",
+    )
+
+    inventory = contract["implementation_inventory"]
+    require(isinstance(inventory, list), "implementation inventory must be an array")
+    require(
+        [
+            (
+                row.get("backend"),
+                row.get("runtime"),
+                row.get("ordered_mechanism"),
+                row.get("ordered_status"),
+                row.get("choice_tie"),
+                row.get("identity_artifacts"),
+                row.get("owner"),
+            )
+            for row in inventory
+        ]
+        == INVENTORY,
+        "implementation inventory drifted",
+    )
+    for row in inventory:
+        require_fields(
+            row,
+            {
+                "backend",
+                "runtime",
+                "ordered_mechanism",
+                "ordered_status",
+                "choice_tie",
+                "identity_artifacts",
+                "owner",
+            },
+            f"inventory {row.get('runtime')}",
+        )
+
+    require(contract["migration"] == MIGRATION, "migration inventory drifted")
+    rollout = contract["rollout"]
+    require(isinstance(rollout, list), "rollout must be an array")
+    require(
+        [(row.get("capability"), row.get("status"), row.get("owner")) for row in rollout]
+        == ROLLOUT,
+        "rollout drifted",
+    )
+    for row in rollout:
+        require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
+    require(
+        contract["canonical_ci"]
+        == {
+            "driver": "tools/run_ci_local.sh",
+            "mode": "unconditional_neutral_checker",
+            "backend_execution": "dependency_ordered_by_rollout",
+        },
+        "canonical CI contract drifted",
+    )
+
+    if check_filesystem:
+        validate_filesystem_contract()
+
+
+def validate_filesystem_contract() -> None:
+    required_paths = [
+        CONTRACT_PATH,
+        ROOT / MIGRATION["decision"],
+        ROOT / MIGRATION["checker"],
+        ROOT / "docs" / "knowledge" / "duplicate-regex-slot-identity-contract.md",
+    ]
+    require(all(path.is_file() for path in required_paths), "neutral contract file is missing")
+    index_text = (ROOT / "docs" / "decisions" / "INDEX.md").read_text(encoding="utf-8")
+    require(
+        "[0047](0047-duplicate-regex-slot-identity.md)" in index_text,
+        "decision index omits ADR 0047",
+    )
+    capability_text = (ROOT / "capability_conformance" / "README.md").read_text(encoding="utf-8")
+    require(CONTRACT_ID in capability_text, "capability README omits duplicate-slot contract")
+    task_text = (ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md").read_text(encoding="utf-8")
+    require(
+        "FUTURE-PARITY-BACKLOG.9.1.8.1.1" in task_text
+        and "RATIFY PORTABLE IDENTITY" in task_text,
+        "task tree omits neutral duplicate-slot acceptance",
+    )
+    ci_text = (ROOT / "tools" / "run_ci_local.sh").read_text(encoding="utf-8")
+    require(
+        "require_tracked_file capability_conformance/duplicate_regex_slot_identity_contract.json" in ci_text,
+        "canonical CI omits contract tracked input",
+    )
+    require(
+        "require_tracked_file tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
+        "canonical CI omits checker tracked input",
+    )
+    require(
+        "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
+        "canonical CI omits neutral checker execution",
+    )
+
+
+def expect_mutation_failure(
+    contract: dict[str, Any], name: str, mutate: Callable[[dict[str, Any]], None]
+) -> None:
+    mutated = copy.deepcopy(contract)
+    mutate(mutated)
+    try:
+        validate_contract(mutated, check_filesystem=False)
+    except ContractError:
+        return
+    fail(f"mutation {name!r} was not rejected")
+
+
+def mutation_checks(contract: dict[str, Any]) -> int:
+    def remove_fixture(value: dict[str, Any]) -> None:
+        value["fixtures"].pop()
+
+    def change_fixture_result(value: dict[str, Any]) -> None:
+        value["fixtures"][0]["expected_result"] = None
+
+    def change_fixture_identity(value: dict[str, Any]) -> None:
+        value["fixtures"][0]["expected_match_identities"][1] = "Top#0"
+
+    def remove_diagnostic(value: dict[str, Any]) -> None:
+        value["diagnostics"].pop()
+
+    def remove_inventory(value: dict[str, Any]) -> None:
+        value["implementation_inventory"].pop()
+
+    def advance_perl(value: dict[str, Any]) -> None:
+        value["rollout"][1]["status"] = "complete"
+
+    mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
+        ("contract id", lambda value: value.__setitem__("contract_id", "stale")),
+        ("duplicate legality", lambda value: value["identity"].__setitem__("duplicate_pattern_text_is_legal", False)),
+        ("identity fields", lambda value: value["identity"].__setitem__("required_fields", ["regex_text"])),
+        ("forbidden recovery", lambda value: value["identity"]["identity_recovery_forbidden"].pop()),
+        ("ordered algorithm", lambda value: value["selection"]["ordered"].__setitem__("algorithm", "combined_alternation")),
+        ("repeated reset", lambda value: value["selection"]["ordered"].__setitem__("repetition", "continue_last_slot")),
+        ("choice tie", lambda value: value["selection"]["choice"].__setitem__("tie_break", "regex_text")),
+        ("fixture omitted", remove_fixture),
+        ("fixture result", change_fixture_result),
+        ("fixture identity", change_fixture_identity),
+        ("diagnostic omitted", remove_diagnostic),
+        ("diagnostic fields", lambda value: value["diagnostics"][1]["fields"].pop()),
+        ("descriptor metadata", lambda value: value["descriptor_contract"].__setitem__("meta_value", "stale")),
+        ("generated format bump", lambda value: value["generated_source_v2"].__setitem__("plan_format_bump_required", True)),
+        ("generated plan fields", lambda value: value["generated_source_v2"]["plan_row_fields"].append("regex_index")),
+        ("trace identity", lambda value: value["trace_contract"]["fields"].remove("regex_index")),
+        ("inventory omission", remove_inventory),
+        ("Perl inventory promotion", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "behavior_matches")),
+        ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
+        ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
+        ("premature Perl rollout", advance_perl),
+        ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
+        ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
+    ]
+    for name, mutate in mutations:
+        expect_mutation_failure(contract, name, mutate)
+    return len(mutations)
+
+
+def main() -> int:
+    contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+    validate_contract(contract)
+    mutation_count = mutation_checks(contract)
+    complete = sum(row["status"] == "complete" for row in contract["rollout"])
+    pending = sum(row["status"] == "pending" for row in contract["rollout"])
+    print(
+        "duplicate-regex-slot identity contract: OK "
+        f"({len(contract['fixtures'])} fixtures, {len(contract['diagnostics'])} diagnostics, "
+        f"{len(contract['implementation_inventory'])} runtime rows, "
+        f"{complete} complete + {pending} pending rollout, {mutation_count} drift mutations)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

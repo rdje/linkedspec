@@ -1,0 +1,177 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-duplicate-regex-slot-identity-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.9.1.8.1",
+  "terminology": {
+    "structural_slot": "a typed target-rule plus zero-based regex-index identity, optionally carrying a future stable slot id",
+    "ordered_selection": "a sequence step whose required structural slot is already known",
+    "choice_selection": "a step where two or more authored structural slots are concurrently eligible",
+    "duplicate_pattern": "two distinct structural slots whose regex pattern text is equal"
+  },
+  "identity": {
+    "duplicate_pattern_text_is_legal": true,
+    "required_fields": ["target_rule", "regex_index"],
+    "future_optional_field": "target_slot_id",
+    "numeric_and_named_selectors_resolve_to_same_identity": true,
+    "identity_recovery_forbidden": ["regex_text", "source_adjacency", "capture_text", "alternation_branch_guess"],
+    "preserved_across": ["compiled_rule", "descriptor", "loaded", "reconstructed", "generated_source_v2", "trace"]
+  },
+  "selection": {
+    "ordered": {
+      "algorithm": "match_only_the_required_structural_slot_and_report_that_same_identity",
+      "cursor_policy": "the entered rule family still determines consume or seek",
+      "mismatch_policy": "a matcher result for another slot is an invariant failure, not an ordinary miss",
+      "repetition": "reset to the first required sequence slot for each accepted iteration"
+    },
+    "choice": {
+      "algorithm": "evaluate_every_eligible_structural_slot",
+      "primary_priority": "earliest_match_start",
+      "tie_break": "lowest_authored_order",
+      "duplicate_tie_result": "first_authored_slot"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "ordered_same_rule_duplicate",
+      "role": "ordered",
+      "source": "Top::AND\n /a/ -> Top[0] { set(seen, \"first\") }\n /a/ -> Top[1] { return(\"ordered-ok\") }\n",
+      "input": "aa",
+      "cursor_policy": "consume",
+      "repeat_count": 1,
+      "slots": [
+        {"target_rule": "Top", "regex_index": 0, "authored_order": 0, "pattern": "a"},
+        {"target_rule": "Top", "regex_index": 1, "authored_order": 1, "pattern": "a"}
+      ],
+      "required_sequence": ["Top#0", "Top#1"],
+      "expected_match_identities": ["Top#0", "Top#1"],
+      "expected_result": "ordered-ok"
+    },
+    {
+      "id": "choice_same_rule_duplicate",
+      "role": "choice",
+      "source": "Top::OR\n /a/ -> Top[0] { return(\"first\") }\n /a/ -> Top[1] { return(\"second\") }\n",
+      "input": "a",
+      "cursor_policy": "seek",
+      "repeat_count": 1,
+      "slots": [
+        {"target_rule": "Top", "regex_index": 0, "authored_order": 0, "pattern": "a"},
+        {"target_rule": "Top", "regex_index": 1, "authored_order": 1, "pattern": "a"}
+      ],
+      "required_sequence": [],
+      "expected_match_identities": ["Top#0"],
+      "expected_result": "first"
+    },
+    {
+      "id": "repeated_ordered_duplicate",
+      "role": "ordered",
+      "source": "Top::AND{2}\n I { set(pairs, []); set(pair, []) }\n /a/ -> Top[0] { push(pair, match_text()) }\n /a/ -> Top[1] { push(pair, match_text()) }\n IT { push(pairs, copy(pair)); set(pair, []) }\n E { return(copy(pairs)) }\n",
+      "input": "aaaa",
+      "cursor_policy": "consume",
+      "repeat_count": 2,
+      "slots": [
+        {"target_rule": "Top", "regex_index": 0, "authored_order": 0, "pattern": "a"},
+        {"target_rule": "Top", "regex_index": 1, "authored_order": 1, "pattern": "a"}
+      ],
+      "required_sequence": ["Top#0", "Top#1"],
+      "expected_match_identities": ["Top#0", "Top#1", "Top#0", "Top#1"],
+      "expected_result": [["a", "a"], ["a", "a"]]
+    },
+    {
+      "id": "repeated_non_duplicate_control",
+      "role": "ordered",
+      "source": "Top::AND{2}\n I { set(pairs, []); set(pair, []) }\n /a/ -> Top[0] { push(pair, match_text()) }\n /b/ -> Top[1] { push(pair, match_text()) }\n IT { push(pairs, copy(pair)); set(pair, []) }\n E { return(copy(pairs)) }\n",
+      "input": "abab",
+      "cursor_policy": "consume",
+      "repeat_count": 2,
+      "slots": [
+        {"target_rule": "Top", "regex_index": 0, "authored_order": 0, "pattern": "a"},
+        {"target_rule": "Top", "regex_index": 1, "authored_order": 1, "pattern": "b"}
+      ],
+      "required_sequence": ["Top#0", "Top#1"],
+      "expected_match_identities": ["Top#0", "Top#1", "Top#0", "Top#1"],
+      "expected_result": [["a", "b"], ["a", "b"]]
+    },
+    {
+      "id": "ordered_cross_target_duplicate",
+      "role": "ordered",
+      "source": "First:\n /a/\n\nSecond:\n /a/\n\nTop::AND\n -> First[0] { set(seen, \"first-target\") }\n -> Second[0] { return(\"cross-target-ok\") }\n",
+      "input": "aa",
+      "cursor_policy": "consume",
+      "repeat_count": 1,
+      "slots": [
+        {"target_rule": "First", "regex_index": 0, "authored_order": 0, "pattern": "a"},
+        {"target_rule": "Second", "regex_index": 0, "authored_order": 1, "pattern": "a"}
+      ],
+      "required_sequence": ["First#0", "Second#0"],
+      "expected_match_identities": ["First#0", "Second#0"],
+      "expected_result": "cross-target-ok"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "regex_slot_identity_invalid",
+      "stage": "validate_compiled_rule",
+      "fields": ["rule_label", "target_rule", "regex_index"],
+      "meaning": "a compiled action edge references a structural regex slot that does not exist"
+    },
+    {
+      "code": "ordered_regex_slot_identity_lost",
+      "stage": "execute_rule",
+      "fields": ["rule_label", "target_rule", "expected_regex_index", "actual_regex_index"],
+      "meaning": "ordered execution received a matcher identity different from its required structural slot"
+    }
+  ],
+  "descriptor_contract": {
+    "meta_field": "regex_slot_identity_contract",
+    "meta_value": "linkedspec-duplicate-regex-slot-identity-v1",
+    "edge_identity_fields": ["target", "regex_index"],
+    "future_optional_edge_field": "target_slot_id",
+    "duplicate_patterns_remain_distinct_rows": true
+  },
+  "generated_source_v2": {
+    "contract_id": "linkedspec-generated-source-v2",
+    "format_version": 2,
+    "plan_row_fields": ["label", "family"],
+    "plan_format_bump_required": false,
+    "identity_owner": "embedded_or_reconstructed_compiled_rule",
+    "execution_requirement": "preserve structural slot identity through native and generated-plan matching"
+  },
+  "trace_contract": {
+    "event": "regex_slot_selected",
+    "fields": ["rule_label", "selection_role", "target_rule", "regex_index"],
+    "selection_role_values": ["ordered_required", "choice"],
+    "identity_source": "compiled_structural_slot"
+  },
+  "implementation_inventory": [
+    {"backend": "perl", "runtime": "perl", "ordered_mechanism": "combined_alternation_then_expected_index", "ordered_status": "drift", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
+    {"backend": "rust", "runtime": "rust", "ordered_mechanism": "combined_alternation_then_expected_index", "ordered_status": "drift", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
+    {"backend": "dart", "runtime": "dart", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
+    {"backend": "julia", "runtime": "julia", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
+    {"backend": "lua", "runtime": "puc_lua", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
+    {"backend": "lua", "runtime": "luajit", "ordered_mechanism": "match_required_pattern_then_reindex", "ordered_status": "behavior_matches", "choice_tie": "first_authored", "identity_artifacts": "preserved", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"}
+  ],
+  "migration": {
+    "decision": "docs/decisions/0047-duplicate-regex-slot-identity.md",
+    "checker": "tools/check_duplicate_regex_slot_identity_contract.py",
+    "perl_consumer": "t/duplicate_regex_slot_identity_perl_contract.t",
+    "rust_consumer": "rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs",
+    "dart_consumer": "dart/test/duplicate_regex_slot_identity_contract_test.dart",
+    "julia_consumer": "julia/test/duplicate_regex_slot_identity_contract_test.jl",
+    "lua_consumer": "lua/test/duplicate_regex_slot_identity_contract_test.lua",
+    "recurring_driver": "tools/check_duplicate_regex_slot_identity_five_backend.sh"
+  },
+  "rollout": [
+    {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.1"},
+    {"capability": "perl_reference", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
+    {"capability": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.3"},
+    {"capability": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
+    {"capability": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
+    {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
+    {"capability": "recurring_and_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.7"}
+  ],
+  "canonical_ci": {
+    "driver": "tools/run_ci_local.sh",
+    "mode": "unconditional_neutral_checker",
+    "backend_execution": "dependency_ordered_by_rollout"
+  }
+}

@@ -120,6 +120,7 @@ require_tracked_file capability_conformance/callable_codeblock_contract.json
 require_tracked_file capability_conformance/callable_signature_contract.json
 require_tracked_file capability_conformance/complete_named_mark_contract.json
 require_tracked_file capability_conformance/diagnostic_output_contract.json
+require_tracked_file capability_conformance/duplicate_regex_slot_identity_contract.json
 require_tracked_file capability_conformance/logical_helper_contract.json
 require_tracked_file capability_conformance/punctuation_light_zero_arg_contract.json
 require_tracked_file capability_conformance/root_rule_selection_contract.json
@@ -155,6 +156,7 @@ require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
+require_tracked_file tools/check_duplicate_regex_slot_identity_contract.py
 require_tracked_file tools/check_aggregate_selector_retirement.py
 require_tracked_file tools/check_public_aggregate_selector_surface.py
 require_tracked_file tools/check_executable_aggregate_selector_sources.py
@@ -234,6 +236,9 @@ python3 tools/check_rule_local_cursor_contract.py
 
 log "checking backend-neutral root-rule selection contract"
 python3 tools/check_root_rule_selection_contract.py
+
+log "checking backend-neutral duplicate regex-slot identity contract"
+python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t

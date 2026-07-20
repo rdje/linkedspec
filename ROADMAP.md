@@ -3,15 +3,19 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 
 Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.
 
-Duplicate-slot audit (2026-07-20): behavior-free `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-cursor
-identity boundary before a language decision. Perl live/emitted and Rust native/generated return null when an
+Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
+cursor identity boundary. Perl live/emitted and Rust native/generated return null when an
 ordered AND requires the later of two identical regex slots. Dart, Julia, PUC Lua, and LuaJIT native/generated
 preserve the required slot; all six runtime legs choose the first authored duplicate for OR. Repeated Perl versus
 dual-ABI Lua and a non-identical Perl control isolate the same mechanism. Descriptors, compiled payloads, and
 generated-v2 reconstruction retain both indices; only Perl/Rust combined-alternation execution aliases them. The
-dependency-safe path is neutral ADR/contract/checker `.1`, Perl `.2`, Rust `.3`, Dart/Julia/Lua locks `.4-.6`,
-then recurring/public admission `.7`; this audit changes no compiler/runtime behavior.
-Signoff passes KM 636/4,678, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds.
+neutral `.1` now adopts ADR `0047` / `linkedspec-duplicate-regex-slot-identity-v1`: duplicate text is legal,
+ordered execution matches its required structural slot, choice ties use first-authored priority, and repetition
+resets the required sequence. Five fixtures, two diagnostics, six runtime rows, and 23 mutations pass at
+1 complete + 6 pending. The dependency-safe path continues Perl `.2`, Rust `.3`, Dart/Julia/Lua locks `.4-.6`,
+then recurring/public admission `.7`; neutral governance changes no compiler/runtime behavior.
+Neutral signoff passes KM 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in
+635 seconds. The preceding audit independently passed KM 636/4,678 and Phase 0 in 619 seconds.
 
 Root-selection contract (2026-07-18): ADR `0046` / `linkedspec-root-rule-selection-v1` fixes explicit selector >
 first authored `Rule::` > first authored `Rule:` precedence, keeps authored `is_top` separate from effective

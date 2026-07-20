@@ -101,6 +101,18 @@ rather than merely which successful match exited. Lua/LuaJIT use the same exact 
 5x2x6 primary projection; canonical CI exposes it behind `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1`.
 The final root-selection ledger is 7 complete / 0 pending.
 
+`duplicate_regex_slot_identity_contract.json` (`linkedspec-duplicate-regex-slot-identity-v1`) makes ADR `0047`
+executable before backend repair. Duplicate regex text remains legal and never replaces typed target-rule plus
+regex-index identity. Ordered execution matches its already-required structural slot; repeated AND resets that
+sequence per iteration. Choice evaluates all eligible slots, prefers the earliest start, and breaks equal-start
+ties toward the first authored slot. Five exact fixtures cover same-rule ordered and choice duplicates, repeated
+duplicates, a non-duplicate repeated control, and cross-target duplicates. The contract also fixes two portable
+invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
+inventory, migration paths, and the seven-leg rollout. Run
+`python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
+and rejects 23 representative semantic, fixture, diagnostic, artifact, inventory, rollout, and CI mutations.
+Neutral governance is 1 complete / 6 pending; Perl `.2` is the first behavior owner.
+
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,
 structural agreement was 1/2, and descriptor/generated cursor identities were absent. Current `.1-.4` proof now

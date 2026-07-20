@@ -58,9 +58,13 @@ report the first duplicate branch, and reject it when a later sequence slot was 
 ordered fixture returns `null`. Dart, Julia, PUC Lua, and LuaJIT match the required slot directly and return
 `ordered-ok`. Every runtime resolves duplicate OR/choice ties to the first authored slot. Repeated evidence shows
 the same Perl failure and dual-ABI Lua success, while a non-identical Perl repeated control remains exact. The
-audit changes no runtime behavior. Neutral ADR/contract leaf `.1`, Perl/Rust repairs `.2-.3`, preserving-backend
-locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered. Audit signoff passes Knowledge Map
-636/4,678, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds.
+audit changes no runtime behavior. Neutral `.1` now adopts ADR `0047` and executable
+`linkedspec-duplicate-regex-slot-identity-v1`: ordered execution matches its required structural slot, repeated
+AND resets its sequence, and choice uses earliest start then first-authored priority. Five fixtures, two
+diagnostics, six runtime inventory rows, and 23 mutations pass at 1 complete + 6 pending. Perl/Rust repairs
+`.2-.3`, preserving-backend locks `.4-.6`, and recurring/public admission `.7` remain dependency-ordered.
+Neutral signoff passes Knowledge Map 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0
+1,031/1,031 in 635 seconds.
 
 Behavior-free Lua preflight `.9.1.1.2.5.0` proves PUC Lua and LuaJIT have the same boundary. The shared primary
 manifest is exactly 31/65 in both default and POSIX environments on each ABI: markerless default is the sole

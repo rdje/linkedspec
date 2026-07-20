@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract
+
+ADR `0047` and executable `linkedspec-duplicate-regex-slot-identity-v1` now distinguish structural identity from
+pattern text. Duplicate regex text remains legal. Ordered execution must match its already-required target-rule/
+regex-index slot and repeated AND resets that sequence each iteration. Choice evaluates every eligible slot,
+prefers earliest match start, and resolves equal starts to the first authored slot.
+
+Five exact neutral fixtures cover same-rule ordered duplicates, duplicate choice, repeated duplicates, a repeated
+non-duplicate control, and cross-target duplicates. The independent checker evaluates those selections and locks
+two typed invariants, descriptor/trace identity, unchanged generated-source v2/format 2, six runtime inventory
+rows, exact migration paths, and a seven-leg rollout. It rejects 23 representative mutations; governance starts
+at 1 complete + 6 pending.
+
+Canonical local CI tracks the contract and checker and runs the neutral proof unconditionally. This slice changes
+no parser, compiler, runtime, descriptor, generated artifact, trace, CLI, fixture execution, or capability
+behavior. Perl `.2` remains the first repair owner; Dart, Julia, and Lua remain behavior-matching but unadmitted
+until their dedicated locks.
+
+Signoff passes Knowledge Map 637 facts / 4,685 question keys, mdBook, all four doctrines, canonical primary CLI
+65/65 in both environments, and Phase 0 1,031/1,031 in 635 seconds. The first canonical attempt correctly rejected
+a missing root public-contract marker introduced by the frontier summary update; restoring that exact phrase made
+both contracts pass together before generated-output cleanup.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity
 
 This behavior-free audit separates duplicate pattern text from structural slot identity before changing a

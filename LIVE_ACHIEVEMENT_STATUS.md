@@ -8,15 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.0` — Duplicate-slot identity audit is signoff-complete from clean
-  recurring-admission commit `a1911ec6` at ahead 243. Exact six-runtime native/generated, descriptor/emitted/
-  reconstructed identity, repeated/control, and mechanism evidence is documented with no behavior edit. Focused
-  KM 636/4,678, mdBook, four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 619 seconds pass.
-  Generated-output cleanup is complete; the prepared commit is the only boundary before neutral `.1` activation.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.1` — Neutral duplicate-slot ADR/contract/checker is signoff-complete from
+  clean audit commit `4902f218` at ahead 244. It owns ratification, exact portable fixtures, rollout/inventory,
+  diagnostics, omission-sensitive mutations, and canonical registration without backend behavior changes. ADR
+  `0047`, 5 fixtures / 2 diagnostics / 6 runtime rows / 1+6 rollout / 23 mutations, docs, and KM 637/4,685 pass.
+  Canonical primary 65x2 and Phase 0 1,031/1,031 in 635 seconds pass; cleanup and the prepared commit remain before
+  Perl `.2` activation.
 
-- `FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.8.1.1 — adopt duplicate regex-slot identity contract` is the active slice title.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.8.1.0 — audit duplicate regex-slot identity**
+  (DONE at clean commit `4902f218`).
+
+  **Result:** Exact ordered/choice/repeated/control evidence isolates a later-slot identity loss in Perl/Rust
+  combined-alternation execution while every compiled, descriptor, and generated artifact retains both slots.
+  No executable behavior changes.
+
+  **Proof:** Six-runtime native/generated probes, routed Perl trace, source mechanism inventory, KM 636/4,678,
+  mdBook/four doctrines, canonical primary 65x2, Phase 0 1,031/1,031 in 619 seconds, and exact cleanup pass.
+
+  **Next:** Neutral ADR/contract/checker `.9.1.8.1.1` is active from the clean audit commit.
+
 - 2026-07-19: **FUTURE-PARITY-BACKLOG.9.1.8 — admit recurring five-backend cursor parity**
   (DONE at clean commit `a1911ec6`).
 

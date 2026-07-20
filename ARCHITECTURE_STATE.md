@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` duplicate regex-slot contract refresh: ADR `0047` and
+  `linkedspec-duplicate-regex-slot-identity-v1` make the audited boundary executable without changing a backend.
+  Duplicate pattern text stays legal; structural identity is target rule plus regex index, with ADR `0045`'s
+  future stable name resolving to that same identity. Ordered execution matches its known required slot and resets
+  the sequence per repeated iteration. Choice prefers earliest start then lowest authored order. Descriptor/trace
+  obligations carry typed identity, while generated source stays v2/format 2 because compiled payload identity
+  survives. The checker passes 5 fixtures, 2 diagnostics, 6 runtime rows, 1 complete + 6 pending rollout, and 23
+  drift mutations. KM 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 635
+  seconds pass. Perl `.2` is the first behavior owner.
 - `2026-07-20` duplicate regex-slot audit refresh: behavior-free `FUTURE-PARITY-BACKLOG.9.1.8.1.0` proves every
   parser/compiler/descriptor/generated payload retains two identical authored slots, while ordered execution
   diverges later. Perl `LinkedRE::oredRE` and Rust `CompiledAlternation` match one combined alternation, report

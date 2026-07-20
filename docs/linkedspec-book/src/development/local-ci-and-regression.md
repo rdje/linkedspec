@@ -184,6 +184,19 @@ outputs are removed immediately after measurement. Leaf `.9.1.8.1.1` owns the fi
 checker, fixtures, mutations, and canonical registration; audit `.0` does not pre-empt that decision or change
 runtime behavior.
 
+ADR `0047` now supplies that neutral boundary. Run:
+
+```bash
+python3 tools/check_duplicate_regex_slot_identity_contract.py
+```
+
+The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
+two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
+runtime legs, fixes the `.1-.7` migration, and rejects 23 mutations. Canonical CI tracks both files and runs this
+neutral checker unconditionally. The rollout begins at 1 complete / 6 pending; no backend is promoted by `.1`.
+Its signoff passes Knowledge Map 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0
+1,031/1,031 in 635 seconds.
+
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.
 

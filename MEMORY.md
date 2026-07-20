@@ -10,15 +10,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8` — recurring six-runtime cursor admission is fully verified,
-  documented, cleaned, and committed.
-- latest_commit: `a1911ec6` — `FUTURE-PARITY-BACKLOG.9.1.8 - admit recurring cursor parity`
-  (ahead: 243; push at threshold 300).
-- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity`.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.0` duplicate-slot identity audit is signoff-complete from
-  clean `a1911ec6`; parent `.8.1` remains split through neutral/backend/closeout children `.0-.7`.
-- next_action: commit the completed behavior-free `.0` audit, clear and verify `git_message_brief.txt`, prove a
-  clean handoff, and only then activate neutral contract `.1` task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.1.8.1.0` — behavior-free duplicate regex-slot identity audit is
+  fully verified, documented, cleaned, and committed.
+- latest_commit: `4902f218` — `FUTURE-PARITY-BACKLOG.9.1.8.1.0 - audit duplicate regex slot identity`
+  (ahead: 244; push at threshold 300).
+- prepared_commit: `FUTURE-PARITY-BACKLOG.9.1.8.1.1 - adopt duplicate regex slot identity contract`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.9.1.8.1.1` neutral duplicate-slot identity ADR/contract/checker is
+  signoff-complete from clean `4902f218`; parent `.8.1` retains backend/closeout children `.2-.7`.
+- next_action: clean exact canonical generated outputs, rerun focused governance, commit `.1`, clear/verify the
+  brief, prove a clean handoff, and only then activate Perl repair `.2` task-tree-first.
 - current_root_selection: ADR `0046` precedence is explicit selector > first authored `Rule::` > first authored
   `Rule:`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions plus the selected five-command/default-POSIX
   5x2x6 projection and support ledgers pass from one recurring driver. Governance is 7 complete / 0 pending,
@@ -45,6 +45,6 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   inter-match gap/named-slot contract `.1-.7` only
   after cursor completion and activation; semantic/MCP `.10.1`; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.9.1.8.1.0` exact audit and lockstep docs/KM are focused-green; no
-  behavior edit exists. Canonical local CI passes primary 65x2 and Phase 0 1,031/1,031 in 619 seconds; exact
-  generated-output cleanup is complete and no background job remains. Only the prepared commit is in flight.
+- blockers: none. in_flight_uncommitted: `.9.1.8.1.1` ADR/contract/checker and 5/2/6/1+6/23 governance are
+  signoff-green; KM 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in 635
+  seconds pass. No backend behavior edit or background job exists; exact cleanup and the prepared commit remain.

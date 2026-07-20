@@ -1,10 +1,14 @@
 # ROADMAP V2
 Execution-oriented companion to `ROADMAP.md`.
 
-Duplicate-slot audit `.9.1.8.1.0` is signoff-complete without behavior changes. Exact six-runtime ordered/choice
+Duplicate-slot audit `.9.1.8.1.0` is clean without behavior changes. Exact six-runtime ordered/choice
 and repeated/control evidence isolates Perl/Rust combined-alternation slot aliasing while structural identity
-survives every compiled/descriptor/generated artifact. KM 636/4,678, mdBook/four doctrines, canonical primary
-65x2, and Phase 0 1,031/1,031 in 619 seconds pass; neutral decision `.1` follows only after the clean commit.
+survives every compiled/descriptor/generated artifact. Neutral `.1` adopts ADR `0047` and executable
+`linkedspec-duplicate-regex-slot-identity-v1`: required-slot ordered matching, earliest/first-authored choice,
+repeated reset, two typed invariants, and unchanged generated-source v2. Governance is 5 fixtures / 2 diagnostics /
+6 runtime rows / 1 complete + 6 pending / 23 mutations. Perl `.2` follows only after the clean neutral commit.
+Neutral signoff passes KM 637/4,685, mdBook/four doctrines, canonical primary 65x2, and Phase 0 1,031/1,031 in
+635 seconds.
 
 Root-selection contract (ADR `0046`, 2026-07-18): an explicit selector, including primary-command
 `--top-rule NAME`, may name any declared rule and wins over authored markers. Without one, the first authored

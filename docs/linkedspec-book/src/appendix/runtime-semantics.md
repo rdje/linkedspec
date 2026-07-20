@@ -528,10 +528,11 @@ cross-backend behavior is:
 4. If identical alternatives tie at the same position, select the first authored
    alternative.
 
-Ordered `AND` execution has a stricter requirement: the executor already knows
-which sequence slot is required next. A portable implementation can therefore
-match only that slot and attach its authored index to the match. Dart, Julia,
-PUC Lua, and LuaJIT currently do this for ordinary and repeated AND execution.
+ADR `0047` makes ordered identity normative: the executor already knows which
+sequence slot is required next, so it matches only that structural target-rule/
+regex-index slot and reports that identity. A repeated AND resets to its first
+required slot for every accepted iteration. Dart, Julia, PUC Lua, and LuaJIT
+currently exhibit this behavior for ordinary and repeated AND execution.
 
 Perl and Rust currently have a known duplicate-slot limitation. They match a
 combined alternation first and compare its reported branch index with the
@@ -549,10 +550,18 @@ Top::AND
 
 The corresponding `OR` rule deterministically chooses slot 0 on every backend.
 Descriptors and generated-v2 payloads preserve both slot indices; the divergence
-is in ordered runtime matching, not parsing or artifact format. The neutral
-language decision and backend repairs are tracked by
-`FUTURE-PARITY-BACKLOG.9.1.8.1.1-.7`; until they land, authors who need current
-Perl/Rust portability should make ordered slot patterns mutually exclusive.
+is in ordered runtime matching, not parsing or artifact format. Duplicate text
+remains legal. Choice still evaluates every eligible slot and breaks equal-start
+ties toward the first authored slot. Numeric selectors and ADR `0045`'s future
+named selectors resolve to the same structural identity; pattern text, adjacency,
+capture text, and alternation guesses never recover identity.
+
+The executable neutral contract is
+`linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
+v2 because reconstructed compiled state already retains slot identity. Backend
+repairs and conformance locks are tracked by
+`FUTURE-PARITY-BACKLOG.9.1.8.1.2-.7`; until Perl and Rust land, authors who need
+current portability should make their ordered slot patterns mutually exclusive.
 
 ## 9. Zero-Progress Guard
 
