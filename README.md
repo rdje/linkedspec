@@ -9,11 +9,11 @@ family. The cursor rollout is closed at 75 migration files, 8 complete / 0 pendi
 ADR `0048` accepts per-hit action-result collection for explicit repetition and scalar pipe choice after exact
 five-backend audit found bare-OR classification plus action-return propagation defects in all four newer
 backends. The exact neutral contract, ten-role Perl reference admission, and 15-role Rust, Dart, Julia, and
-dual-ABI Lua admissions are complete at 6 complete / 2 pending. All five backends now treat bare `OR` as minimum-one
-repetition, collect explicit
-repeated action returns per hit across native/generated routes, preserve lifecycle authority and scalar pipe, and
-retain generated-source v2; recurring and public rollout remain
-`FUTURE-PARITY-BACKLOG.9.1.10.6-.7`. Logical-helper
+dual-ABI Lua admissions are composed by
+`tools/check_repeated_action_result_five_backend.sh`; rollout is 7 complete / 1 pending with 44 rejected
+mutations. All five backends treat bare `OR` as minimum-one repetition, collect explicit repeated action returns
+per hit across native/generated routes, preserve lifecycle authority and scalar pipe, and retain generated-source
+v2. Only public no-drift `FUTURE-PARITY-BACKLOG.9.1.10.7` remains. Logical-helper
 native/generated behavior, recurring admission, and public no-drift are complete at 8 complete / 0 pending under
 `FUTURE-PARITY-BACKLOG.5.2`. Perl reference parent
 `.9.1.3` composes normalization, intrinsic live/loaded policy, descriptor v1, generated-source v2, targeted API/CLI
@@ -24,7 +24,7 @@ ADR `0046` and `linkedspec-root-rule-selection-v1` now ratify the separately par
 The neutral decision, composed Perl, Rust, Dart, Julia, and dual-ABI Lua backends, and final recurring/public
 admission are complete at 7 complete / 0 pending, with 54 drift mutations. All five apply
 that order across native, loaded/reconstructed, generated, traced, diagnostic, descriptor, and primary-command
-routes; the 65-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
+routes; the 66-case shared primary manifest locks first-marker and markerless defaults beside explicit, unknown,
 and request-trace selection. Rust and Dart each have one omission-sensitive 15-role admission consumer and exact
 65x2 command proof. Dart core/route leaves `.9.1.1.2.3.1-.2` accept markerless one-or-more-rule sources, resolve
 explicit > first marker > first rule once before user code, preserve descriptor and generated-v2 identity, record
@@ -741,10 +741,10 @@ content migration exists yet.
   accepted eight-case proof; Dart promotes and the live census is 59/0/1. Julia `.3.4.1` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, eleven success (including root-selection,
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, twelve success (including root-selection,
   quiet diagnostic, and eager logical helpers), four baseline failure, 20 canonical trace, and eight strict UTF-8
   behavior cases.
-  Perl passes all 65 current cases. ADR `0025`
+  Perl passes all 66 current cases. ADR `0025`
   defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
@@ -779,8 +779,8 @@ content migration exists yet.
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
 - Run `bash tools/run_lua_local.sh` from the repo root for dual-ABI native tests, both shared primary-command
   environments on PUC Lua, and complete 105-fixture corpus execution. Root-selection leaf `.9.1.1.2.5` owns
-  convergence from Lua's previously admitted 63-case boundary to the current 65-case manifest. Core, composed
-  routes, cursor migration, and exact dual-ABI admission are complete; the shared manifest is 65/65 in all four
+  convergence from Lua's previously admitted 63-case boundary to the current 66-case manifest. Core, composed
+  routes, cursor migration, and exact dual-ABI admission are complete; the shared manifest is 66/66 in all four
   Lua ABI/default-POSIX legs.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before

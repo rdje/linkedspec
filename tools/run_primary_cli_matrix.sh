@@ -110,7 +110,7 @@ run_contract Lua 'lua/bin/linkedspec-lua' \
  '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
 
 if (( ${#CASE_IDS[@]} == 0 )); then
- log "primary CLI matrix passed: 5 backends x 2 environments x 65 cases"
+ log "primary CLI matrix passed: 5 backends x 2 environments x 66 cases"
 else
  log "primary CLI matrix passed: 5 backends x 2 environments x ${#CASE_IDS[@]} selected case(s): ${CASE_IDS[*]}"
 fi

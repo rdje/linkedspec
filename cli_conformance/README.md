@@ -16,11 +16,11 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
-`bash tools/run_primary_cli_matrix.sh` runs all 65 cases through all five current commands in default and POSIX
+`bash tools/run_primary_cli_matrix.sh` runs all 66 cases through all five current commands in default and POSIX
 environments. Pass one or more `--case ID` arguments to that matrix driver for a contract-owned focused gate; for
 example, the recurring diagnostic-output gate uses
 `bash tools/run_primary_cli_matrix.sh --case success_diagnostic_helpers_quiet`. Omitting `--case` remains the full
-5x2x65 matrix. The recurring logical gate selects
+5x2x66 matrix. The recurring logical gate selects
 `bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`; that case records eager effects and
 the same canonical boolean result across all five commands and both environments.
 
@@ -41,18 +41,27 @@ three support ledgers. Run
 `bash tools/check_duplicate_regex_slot_identity_five_backend.sh` directly, or
 set `LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1` on canonical local CI. Backend
 admission consumers own all five duplicate-slot fixtures; the shared primary
-manifest remains 65 cases and supplies the exact AND-consumption projection.
+manifest now contains 66 cases and continues to supply the exact AND-consumption projection.
+
+The repeated-action-result recurring gate runs every admitted Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT consumer, then selects
+`success_explicit_repeated_action_results` across the 5x2 primary matrix. That
+case is projected byte-for-byte from ADR `0048`'s `explicit_or_two_hits`
+fixture and returns `["A","B"]`. Run
+`bash tools/check_repeated_action_result_five_backend.sh` directly, or set
+`LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1` on canonical local CI. This
+addition raises the current shared manifest from 65 to 66 cases.
 
 ADR `0044`'s primary-command migration is executable and admitted in
 `capability_conformance/rule_local_cursor_contract.json`. It removes `--parse-mode` from help and returns
-usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 65-case manifest
+usage exit `2` with the exact targeted removal message if the legacy flag is supplied. The current 66-case manifest
 and Perl reference now project that target: structural default-rule seeking and AND-rule consumption replace the
 two global-mode success cases, and request trace omits the retired field. Perl, Rust, Dart, Julia, PUC Lua, and
-LuaJIT consume the same family-derived contract. All five commands pass the complete byte-exact 65x2 suite;
+LuaJIT consume the same family-derived contract. All five commands pass the complete byte-exact 66x2 suite;
 public no-drift is closed at 8 complete / 0 pending through
 `bash tools/check_rule_local_cursor_five_backend.sh`.
 
-The current manifest contains 65 cases: exact long/short help, 20 strict usage families, eleven successful
+The current manifest contains 66 cases: exact long/short help, 20 strict usage families, twelve successful
 source/input/parser-control/quiet-diagnostic/logical-helper families, four baseline operational failures, 20
 canonical trace families, and eight strict UTF-8 behavior cases. Success cases lock named/file/inline source,
 literal/file input, explicit top rule, default-family seek, AND-family consume, canonical JSON, exact input bytes,

@@ -193,7 +193,7 @@ recurring/public no-drift are admitted. `bash tools/check_root_rule_selection_fi
 cross-backend composition. All five accept markerless one-or-more-rule sources and apply the exact precedence
 above across native, loaded/reconstructed, generated direct/traced, and primary execution, reject an unknown
 explicit selector at `select_entry_rule` before invoking user code, and publish definition order plus immutable
-per-rule `is_top` identity. The 65-case shared primary manifest locks first-marker, markerless, explicit, unknown,
+per-rule `is_top` identity. The 66-case shared primary manifest locks first-marker, markerless, explicit, unknown,
 and request-trace bytes twice on each admitted backend.
 
 Rust now applies the same ordered resolver across native, loaded, serialized/reconstructed, generated direct/

@@ -21,8 +21,8 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > and 60 rejected mutations. ADR `0048` now accepts per-hit action-result collection for explicit repetition
 > (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl, Rust, Dart, Julia, PUC Lua,
 > and LuaJIT implement that rule. The executable neutral contract plus ten-role Perl and byte-identical 15-role
-> Rust/Dart/Julia/Lua admissions are complete at 6 complete / 2 pending; remaining work is recurring `.9.1.10.6`
-> and public closeout `.7`.
+> Rust/Dart/Julia/Lua admissions now compose through one recurring gate at 7 complete / 1 pending with 44
+> rejected mutations. Only public closeout `.9.1.10.7` remains.
 
 ## Current rule-label surface
 
@@ -196,8 +196,8 @@ single-choice `::|` rule therefore returns the first authored equal-start
 alternative. The contract is `linkedspec-duplicate-regex-slot-identity-v1`;
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit it. Rollout is
 closed at 7 complete / 0 pending. Explicit repeated `::OR` is a different family;
-ADR `0048` makes its action-edge results a per-hit collection, with rollout
-at 6 complete / 2 pending under `FUTURE-PARITY-BACKLOG.9.1.10.6-.7`.
+ADR `0048` makes its action-edge results a per-hit collection. The recurring six-runtime/five-command proof is
+complete at 7 complete / 1 pending; public closeout remains `FUTURE-PARITY-BACKLOG.9.1.10.7`.
 
 ## Single choice: `:|`
 

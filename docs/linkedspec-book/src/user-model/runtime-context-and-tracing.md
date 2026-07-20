@@ -448,7 +448,7 @@ Use `--spec NAME` for shipped specs resolved by `get_parser(...)`, `--spec-file 
 first authored `::` wins; without a marker, the first ordinary `:` wins.
 
 Perl native, loaded, generated-direct, generated-traced, generated `Get`, and primary-command routes implement
-that exact order and attribute runtime trace to the effective rule. The shared 65-case primary manifest locks the
+that exact order and attribute runtime trace to the effective rule. The shared 66-case primary manifest locks the
 requested explicit label or `<default>` separately from runtime attribution. Rust native, loaded, serialized/
 reconstructed, generated-plan, emitted-module, and primary-command APIs implement the same order. Dart native,
 loaded, normalized-JSON, generated, freshly emitted, traced, diagnostic, and primary execution does too, including

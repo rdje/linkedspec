@@ -230,6 +230,7 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated
 (cd dart && dart test test/repeated_action_result_contract_test.dart)
 julia --project=julia --compiled-modules=no julia/test/repeated_action_result_contract_test.jl
 bash tools/run_lua_local.sh
+bash tools/check_repeated_action_result_five_backend.sh
 ```
 
 The neutral checker evaluates eight exact mode cases and ten special cases, including duplicate slots,
@@ -245,10 +246,14 @@ corpus gates. Julia adds the same 15-role topology, including a fresh isolated e
 reconstructed state, stale-family rejection, and native/generated selected-slot traces; `tools/run_julia_local.sh`
 runs it with package, primary, and corpus gates. Lua adds one byte-identical 15-role consumer covering both PUC
 Lua and LuaJIT, including fresh emitted-module execution, stale-family rejection, and exact native/generated
-slot traces; `tools/run_lua_local.sh` runs it unconditionally on both installed ABIs. Neutral, Perl, Rust, Dart,
-Julia, and dual-ABI Lua are admitted at 6 complete / 2 pending; `.9.1.10.6-.7` own recurring proof and public
-closeout. This gate does not claim
-cross-backend parity early.
+slot traces; `tools/run_lua_local.sh` runs it unconditionally on both installed ABIs. The recurring driver runs
+all six admitted runtime legs, projects `explicit_or_two_hits` as
+`success_explicit_repeated_action_results` across five commands in default and POSIX environments, and checks
+generated-source, capability, and language-coverage ledgers. The checker rejects 44 mutations and reports
+7 complete / 1 pending. Set `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1` to include this all-toolchain driver
+in canonical local CI; its default remains SDK-independent. Only public closeout `.9.1.10.7` remains.
+Recurring signoff passes the selected case on every 5x2 leg; canonical reference proof passes all 66 cases in
+both environments and Phase 0 passes 1,031/1,031 in 641 seconds.
 
 The audit's final signoff passes Knowledge Map 636 facts / 4,678 question keys, mdBook, memory/task governance,
 all four doctrines, canonical primary CLI 65/65 in both environments, and Phase 0 1,031/1,031 in 619 seconds.
@@ -277,7 +282,7 @@ rule-local cursor boundary reached 63 cases, with Perl, Rust, and Dart admitted 
 leaves. Root-selection admission expands the current manifest to 65 cases reference-first: Perl and Rust are
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
 Julia now passes 65/65 twice and is topology-admitted. Lua subsequently removed its 33 cursor-owned mismatches;
-the complete five-backend 5x2x65 matrix is green, while the recurring root gate selects only its six owned cases.
+the complete five-backend 5x2x66 matrix is green, while the recurring root gate selects only its six owned cases.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at
@@ -356,7 +361,8 @@ compiler/validation/descriptor/serialization and embedding paths central to the 
 
 The `.9.1.4.6` cursor boundary passed the then-63-case manifest in default and POSIX environments. The retired
 flag returns the reference-owned targeted usage error and all eleven cursor-era request-trace projections omit
-the legacy global field. Root-selection leaf `.9.1.1.2.2` owns Rust convergence to the current 65-case manifest.
+the legacy global field. Root-selection leaf `.9.1.1.2.2` established Rust's 65-case boundary; the repeated-action
+recurring leaf adds and proves the 66th shared case.
 
 The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
 
@@ -455,7 +461,7 @@ bash tools/run_lua_local.sh
 ```
 
 The gate builds ABI-specific disposable PCRE2 adapters, syntax-checks the Lua tree, runs the full native suite on
-PUC Lua and LuaJIT, runs the current 65-case primary manifest under default and POSIX environments on PUC Lua, and
+PUC Lua and LuaJIT, runs the current 66-case primary manifest under default and POSIX environments on PUC Lua, and
 validates plus executes the exact 105-case corpus through the developer command. During the dependency-ordered
 root/cursor migration, the complete package currently reaches 176/177 on each ABI and stops only at the known
 cursor-help mismatch; the independent shared-primary proof is 32/65 in all four PUC Lua/LuaJIT environment legs,

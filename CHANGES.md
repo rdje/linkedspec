@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof
+
+One omission-sensitive driver now composes the neutral checker, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT
+admission consumers, the contract-projected `success_explicit_repeated_action_results` case across five commands
+and default/POSIX environments, and generated-source/capability/language-coverage ledgers. It introduces no
+semantic evaluator or backend behavior path. The shared primary manifest grows from 65 to 66 cases with exact
+`["A","B"]` bytes for authored bare-OR repetition.
+
+The contract advances only recurring to 7 complete / 1 pending and rejects 44 mutations. Canonical CI tracks the
+new driver and the shared Lua consumer exactly once and exposes the all-toolchain proof behind
+`LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`. This also repairs a topology omission discovered during
+precedent retrieval: the prior required-CI list repeated Julia and omitted Lua. The disposable driver passes Perl
+10, Rust/Dart/Julia 15-role consumers, Lua 175x2, selected primary 5x2x1, and all three support ledgers. Public
+no-drift remains `.9.1.10.7`. Knowledge Map 646/4,763, mdBook, memory, all four doctrines, and adjacent governance
+pass. Canonical local CI passes reference primary 66/66 twice and Phase 0 1,031/1,031 in 641 seconds; the complete
+gate exits 0 in 1,505.50 seconds.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.5 — admit dual-ABI Lua repeated action-result parity
 
 PUC Lua and LuaJIT now treat authored bare `OR` as minimum-one repetition and classify action/blind generated

@@ -2095,7 +2095,8 @@ Dart's public execution boundary is now rule-local too. `LinkedSpecRuntimeEngine
 primary command omits the option and request-trace field, while retired `--parse-mode` invocations return the
 exact structural-migration usage error. One exact 15-role consumer now composes native, normalized, loaded,
 descriptor, emitted/generated, trace, mixed/recursive, structural, removal, primary, and all portable diagnostic
-roles once. Complete Dart cursor proof is 271 package tests, the current 65-case primary manifest in both
+roles once. Complete Dart cursor proof is 271 package tests; its 65-case admission plus the repeated-action
+recurring projection now cover the current 66-case primary manifest in both
 environments, and 105/105 corpus fixtures. Neutral governance was 67 files, 4 complete / 4 pending, and 39
 mutations at Dart admission; parent `.9.1.5` is closed.
 
@@ -2122,7 +2123,7 @@ before input/user code with `prepare_options/parse_mode_override_removed`; the p
 help and request trace omit the field, and `--top-rule` remains independent. Low-level seek/consume matcher
 primitives remain. One exact 15-role consumer now composes native, normalized, loaded, descriptor, emitted/
 generated, trace, mixed/recursive, structural, removal, primary, and diagnostic roles once. Complete Julia passes
-3,291 package assertions, the ten-family real-process checker, the shared 65-case primary manifest twice, and
+3,291 package assertions, the ten-family real-process checker, the shared 66-case primary manifest twice, and
 105/105 corpus fixtures. Neutral governance is 67 files, 5 complete / 3 pending, and 44 mutations. Cursor parent
 `.9.1.6` is closed.
 Dart corpus parity has started with controlled manifest fixtures and now has safe

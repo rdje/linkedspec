@@ -31,6 +31,7 @@ TOP_LEVEL_FIELDS = {
     "corpus_bundle",
     "admissions",
     "implementation_inventory",
+    "recurring_gate",
     "rollout",
     "migration",
     "canonical_ci",
@@ -191,7 +192,7 @@ ROLLOUT = [
     ("dart", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.3"),
     ("julia", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.4"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
-    ("recurring", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.6"),
+    ("recurring", "complete", "FUTURE-PARITY-BACKLOG.9.1.10.6"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.9.1.10.7"),
 ]
 INVENTORY = [
@@ -202,6 +203,67 @@ INVENTORY = [
     ("lua", "puc_lua", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
     ("lua", "luajit", "rep_acode", "iteration_value", "implemented", "FUTURE-PARITY-BACKLOG.9.1.10.5"),
 ]
+RECURRING_GATE = {
+    "driver": "tools/check_repeated_action_result_five_backend.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_paths", "roles"],
+        "role_policy": "every admitted backend role is required; the shared Lua source runs once per ABI",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_paths": ["t/repeated_action_result_perl_contract.t"],
+            "roles": PERL_ROLES,
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_paths": ["rust/linkedspec-runtime/tests/repeated_action_result_contract.rs"],
+            "roles": RUST_ROLES,
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_paths": ["dart/test/repeated_action_result_contract_test.dart"],
+            "roles": DART_ROLES,
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_paths": ["julia/test/repeated_action_result_contract_test.jl"],
+            "roles": JULIA_ROLES,
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_paths": ["lua/test/repeated_action_result_contract_test.lua"],
+            "roles": LUA_ROLES,
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_paths": ["lua/test/repeated_action_result_contract_test.lua"],
+            "roles": LUA_ROLES,
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": ["success_explicit_repeated_action_results"],
+        "contract_case_id": "explicit_or_two_hits",
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX",
+    },
+}
 
 
 class ContractError(ValueError):
@@ -354,10 +416,11 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
 
     inventory = [(row["backend"], row["runtime"], row["bare_or_family"], row["action_return"], row["status"], row["owner"]) for row in contract["implementation_inventory"]]
     require(inventory == INVENTORY, "six-runtime mechanism inventory drifted")
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology drifted")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout topology drifted")
     require(contract["migration"] == {"checker": "tools/check_repeated_action_result_contract.py", "perl_consumer": "t/repeated_action_result_perl_contract.t", "recurring_driver": "tools/check_repeated_action_result_five_backend.sh", "public_closeout": "FUTURE-PARITY-BACKLOG.9.1.10.7"}, "migration paths drifted")
-    require(contract["canonical_ci"] == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "perl_consumer": "unconditional", "future_recurring_switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"}, "canonical CI contract drifted")
+    require(contract["canonical_ci"] == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "perl_consumer": "unconditional", "recurring_switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"}, "canonical CI contract drifted")
 
     if check_filesystem:
         validate_filesystem(contract)
@@ -460,6 +523,71 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require('mode == "Optional" or mode == "Or" or' in lua_emitter_text and 'if mode == "Pipe" then return "or_acode" end' in lua_emitter_text, "Lua bare-OR generated-family seam drifted")
     lua_engine_text = (ROOT / "lua/src/linkedspec/interpreter.lua").read_text(encoding="utf-8")
     require("local function collects_explicit_action_iteration_values" in lua_engine_text and lua_engine_text.count("action_iteration_values") >= 10, "Lua repeated action-result collection seam drifted")
+    recurring_task_status = re.search(
+        r"- ID: `FUTURE-PARITY-BACKLOG\.9\.1\.10\.6`\n  Status: `(active|done)`",
+        task_text,
+    )
+    require(recurring_task_status is not None, "recurring task is neither active nor complete")
+    require(
+        "**ADD ONE RECURRING DRIVER**" in task_text
+        and "**OMISSION-SENSITIVE GOVERNANCE**" in task_text,
+        "recurring task acceptance checklist drifted",
+    )
+
+    gate_path = ROOT / RECURRING_GATE["driver"]
+    require(gate_path.is_file(), "recurring repeated-action-result gate driver is missing")
+    require(gate_path.stat().st_mode & 0o111, "recurring repeated-action-result gate is not executable")
+    gate_text = gate_path.read_text(encoding="utf-8")
+    consumer_markers = {
+        "perl": "prove -Iperl t/repeated_action_result_perl_contract.t",
+        "rust": "--test repeated_action_result_contract",
+        "dart": "test test/repeated_action_result_contract_test.dart",
+        "julia": 'include("julia/test/repeated_action_result_contract_test.jl")',
+        "puc_lua": '"$LUA_CMD" lua/test/repeated_action_result_contract_test.lua',
+        "luajit": '"$LUAJIT_CMD" lua/test/repeated_action_result_contract_test.lua',
+    }
+    for consumer in RECURRING_GATE["consumers"]:
+        for test_path in consumer["test_paths"]:
+            require((ROOT / test_path).is_file(), f"recurring consumer is missing: {test_path}")
+        require(
+            gate_text.count(consumer_markers[consumer["runtime"]]) == 1,
+            f"recurring gate omits or duplicates consumer: {consumer['runtime']}",
+        )
+
+    primary = RECURRING_GATE["primary_cli"]
+    require(
+        (ROOT / primary["matrix_driver"]).is_file() and gate_text.count(primary["matrix_driver"]) == 1,
+        "recurring gate omits or duplicates the primary matrix driver",
+    )
+    manifest = json.loads((ROOT / "cli_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    fixture = next(case for case in contract["mode_cases"] if case["id"] == primary["contract_case_id"])
+    for case_id in primary["case_ids"]:
+        manifest_cases = [case for case in manifest["cases"] if case["id"] == case_id]
+        require(len(manifest_cases) == 1, f"recurring manifest identity drifted: {case_id}")
+        require(gate_text.count(f"--case {case_id}") == 1, f"recurring primary case drifted: {case_id}")
+        manifest_case = manifest_cases[0]
+        require(
+            manifest_case == {
+                "id": case_id,
+                "family": "success",
+                "args": ["--inline-spec", fixture["source"], "--input", fixture["input"]],
+                "files": [],
+                "expect": {
+                    "exit": 0,
+                    "stdout": {"text": json.dumps(fixture["expected_result"], separators=(",", ":")) + "\n"},
+                    "stderr": {"text": ""},
+                    "files": [],
+                },
+            },
+            f"recurring primary case projection drifted: {case_id}",
+        )
+
+    for support_path in RECURRING_GATE["support_checks"]:
+        require(
+            (ROOT / support_path).is_file() and gate_text.count(support_path) == 1,
+            f"recurring gate omits or duplicates support check: {support_path}",
+        )
+
     ci_text = (ROOT / contract["canonical_ci"]["driver"]).read_text(encoding="utf-8")
     required_ci = [
         "require_tracked_file tools/check_repeated_action_result_contract.py",
@@ -468,11 +596,19 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         "require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs",
         "require_tracked_file dart/test/repeated_action_result_contract_test.dart",
         "require_tracked_file julia/test/repeated_action_result_contract_test.jl",
+        "require_tracked_file lua/test/repeated_action_result_contract_test.lua",
+        "require_tracked_file tools/check_repeated_action_result_five_backend.sh",
         "python3 tools/check_repeated_action_result_contract.py",
         "perl -c -Iperl t/repeated_action_result_perl_contract.t",
         "PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t",
     ]
     require(all(marker in ci_text for marker in required_ci), "canonical CI registration drifted")
+    local_ci = RECURRING_GATE["local_ci"]
+    require(
+        local_ci["switch"] in ci_text
+        and ci_text.count(f"bash \"$REPO_ROOT/{RECURRING_GATE['driver']}\"") == 1,
+        "recurring local-CI switch registration drifted",
+    )
     emitter_text = (ROOT / "perl/LinkedSpec/HandlerVariantEmitter.pm").read_text(encoding="utf-8")
     require("sub _emit_rep_acode_handler" in emitter_text and "REP: replace return with assignment so loop collects" in emitter_text and "_collect, $" in emitter_text, "Perl REP_ACODE collection seam drifted")
 
@@ -524,6 +660,15 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("regress_rust_rollout", lambda value: value["rollout"][2].__setitem__("status", "pending")),
         ("hide_rust_mechanism", lambda value: value["implementation_inventory"][1].__setitem__("action_return", "whole_rule_exit")),
         ("remove_rollout", lambda value: value["rollout"].pop()),
+        ("recurring_backend_omission", lambda value: value["recurring_gate"]["consumers"].pop()),
+        ("recurring_role_omission", lambda value: value["recurring_gate"]["consumers"][1]["roles"].pop()),
+        ("recurring_primary_omission", lambda value: value["recurring_gate"]["primary_cli"]["case_ids"].pop()),
+        ("recurring_support_omission", lambda value: value["recurring_gate"]["support_checks"].pop()),
+        ("recurring_ci_switch_drift", lambda value: value["recurring_gate"]["local_ci"].__setitem__("switch", "wrong_switch")),
+        ("recurring_driver_drift", lambda value: value["recurring_gate"].__setitem__("driver", "tools/missing.sh")),
+        ("recurring_fixture_drift", lambda value: value["recurring_gate"]["primary_cli"].__setitem__("contract_case_id", "pipe_distinct_scalar")),
+        ("recurring_rollout_regression", lambda value: value["rollout"][6].__setitem__("status", "pending")),
+        ("premature_public_rollout", lambda value: value["rollout"][7].__setitem__("status", "complete")),
     ]
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)

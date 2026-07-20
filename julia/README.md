@@ -463,8 +463,9 @@ lengths. It covers stable/advancing slice, cursor, rest, from, and between reads
 and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND` blind-call rules surface ordered
 child returns when no explicit parent return overrides them. Native named/file resolution added 82 direct contract
 and pipeline assertions; at that historical boundary the package suite reached 1,110 assertions, shared CLI was
-61/61 in both environments, and corpus was 105/105. The current global 65-case/root-and-cursor boundary is
-described at the top of this file and supersedes those counts for present gate status.
+61/61 in both environments, and corpus was 105/105. The current global 66-case boundary adds the repeated-action
+projection to the root-and-cursor baseline described at the top of this file and supersedes those historical
+counts for present gate status.
 
 Library example:
 

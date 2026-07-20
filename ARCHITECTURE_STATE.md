@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` repeated-action recurring refresh: `FUTURE-PARITY-BACKLOG.9.1.10.6` adds no semantic path. One
+  omission-sensitive driver composes the neutral model, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers,
+  the contract-projected `success_explicit_repeated_action_results` case across five commands and two option
+  environments, and generated/capability/language-coverage ledgers. Governance advances only recurring to
+  7 complete / 1 pending with 44 rejected mutations. Canonical CI exposes the driver behind
+  `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`; public no-drift remains `.9.1.10.7`.
 - `2026-07-20` rule-local cursor public no-drift refresh: `FUTURE-PARITY-BACKLOG.9.1.9` makes current public
   accuracy executable. README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
   ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model pages carry exact required markers;

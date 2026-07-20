@@ -546,6 +546,158 @@
     {"backend": "lua", "runtime": "puc_lua", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
     {"backend": "lua", "runtime": "luajit", "bare_or_family": "rep_acode", "action_return": "iteration_value", "status": "implemented", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"}
   ],
+  "recurring_gate": {
+    "driver": "tools/check_repeated_action_result_five_backend.sh",
+    "consumer_schema": {
+      "fields": ["backend", "runtime", "test_paths", "roles"],
+      "role_policy": "every admitted backend role is required; the shared Lua source runs once per ABI"
+    },
+    "consumers": [
+      {
+        "backend": "perl",
+        "runtime": "perl",
+        "test_paths": ["t/repeated_action_result_perl_contract.t"],
+        "roles": [
+          "neutral_contract",
+          "live_mode_matrix",
+          "live_special_cases",
+          "loaded",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "generated_trace",
+          "primary_cli",
+          "corpus_bundle"
+        ]
+      },
+      {
+        "backend": "rust",
+        "runtime": "rust",
+        "test_paths": ["rust/linkedspec-runtime/tests/repeated_action_result_contract.rs"],
+        "roles": [
+          "neutral_contract",
+          "ast_metadata",
+          "native_mode_matrix",
+          "native_special_cases",
+          "loaded",
+          "reconstructed",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "native_trace",
+          "generated_trace",
+          "primary_command",
+          "corpus_bundle",
+          "lifecycle_authority",
+          "bounds_and_progress"
+        ]
+      },
+      {
+        "backend": "dart",
+        "runtime": "dart",
+        "test_paths": ["dart/test/repeated_action_result_contract_test.dart"],
+        "roles": [
+          "neutral_contract",
+          "ast_metadata",
+          "native_mode_matrix",
+          "native_special_cases",
+          "loaded",
+          "reconstructed",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "native_trace",
+          "generated_trace",
+          "primary_command",
+          "corpus_bundle",
+          "lifecycle_authority",
+          "bounds_and_progress"
+        ]
+      },
+      {
+        "backend": "julia",
+        "runtime": "julia",
+        "test_paths": ["julia/test/repeated_action_result_contract_test.jl"],
+        "roles": [
+          "neutral_contract",
+          "ast_metadata",
+          "native_mode_matrix",
+          "native_special_cases",
+          "loaded",
+          "reconstructed",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "native_trace",
+          "generated_trace",
+          "primary_command",
+          "corpus_bundle",
+          "lifecycle_authority",
+          "bounds_and_progress"
+        ]
+      },
+      {
+        "backend": "lua",
+        "runtime": "puc_lua",
+        "test_paths": ["lua/test/repeated_action_result_contract_test.lua"],
+        "roles": [
+          "neutral_contract",
+          "ast_metadata",
+          "native_mode_matrix",
+          "native_special_cases",
+          "loaded",
+          "reconstructed",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "native_trace",
+          "generated_trace",
+          "primary_command",
+          "corpus_bundle",
+          "lifecycle_authority",
+          "bounds_and_progress"
+        ]
+      },
+      {
+        "backend": "lua",
+        "runtime": "luajit",
+        "test_paths": ["lua/test/repeated_action_result_contract_test.lua"],
+        "roles": [
+          "neutral_contract",
+          "ast_metadata",
+          "native_mode_matrix",
+          "native_special_cases",
+          "loaded",
+          "reconstructed",
+          "descriptor",
+          "emitted_source",
+          "generated_direct",
+          "native_trace",
+          "generated_trace",
+          "primary_command",
+          "corpus_bundle",
+          "lifecycle_authority",
+          "bounds_and_progress"
+        ]
+      }
+    ],
+    "primary_cli": {
+      "matrix_driver": "tools/run_primary_cli_matrix.sh",
+      "case_ids": ["success_explicit_repeated_action_results"],
+      "contract_case_id": "explicit_or_two_hits",
+      "backend_count": 5,
+      "environments": ["default", "posix"]
+    },
+    "support_checks": [
+      "tools/check_generated_source_contract.pl",
+      "tools/check_capability_conformance.pl",
+      "tools/check_language_capability_coverage.pl"
+    ],
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"
+    }
+  },
   "rollout": [
     {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.1"},
@@ -553,7 +705,7 @@
     {"capability": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.3"},
     {"capability": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.4"},
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.5"},
-    {"capability": "recurring", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.6"},
+    {"capability": "recurring", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.6"},
     {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.10.7"}
   ],
   "migration": {
@@ -566,6 +718,6 @@
     "driver": "tools/run_ci_local.sh",
     "neutral_checker": "unconditional",
     "perl_consumer": "unconditional",
-    "future_recurring_switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"
+    "recurring_switch": "LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX"
   }
 }

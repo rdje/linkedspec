@@ -8,17 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.5` is active task-tree-first from clean Julia admission commit `1c61c2ba` at ahead
-  257. Implementation and backend signoff are complete: PUC Lua and LuaJIT now classify bare OR as minimum-one
-  repetition and collect copied typed action-edge values per accepted hit without swallowing implicit child
-  dispatch or lifecycle control. Rollout is 6 complete / 2 pending with 35 rejected mutations; canonical signoff
-  is green and final cleanup/commit is in flight.
+- `FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first from clean dual-ABI Lua admission commit `843d40ce`
+  at ahead 258. One omission-sensitive recurring driver now composes every exact runtime/ABI consumer, the
+  selected five-command/default-POSIX primary result, and all three support ledgers. Rollout is 7 complete /
+  1 pending with 44 rejected mutations. Canonical signoff is green at reference primary 66x2 and Phase 0
+  1,031/1,031 in 641 seconds (complete gate 1,505.50 seconds); cleanup and commit are in flight.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.5 — admit Lua repeated action-result parity` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof` is the active slice title.
 
 ## Latest Completed Slice
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.5 — admit Lua repeated action-result parity**
-  (IMPLEMENTED AND VERIFIED from clean base `1c61c2ba`; cleanup/commit in progress).
+  (DONE at clean commit `843d40ce` from base `1c61c2ba`).
 
   **Result:** Bare `OR` is minimum-one repetition on both Lua ABIs; explicit action-repetition returns collect one
   copied typed value per accepted hit in native and generated execution. Lifecycle/pipe/bounds/progress/cursor/
@@ -29,8 +29,7 @@ Current execution status for interruption-safe batch workflow recovery.
   authoritative dual-ABI gate passes all focused suites, 177 full runtime tests per ABI, primary 65x2, and corpus
   105/105. Canonical local CI passes checker/Perl admission, primary 65x2, and Phase 0 1,031/1,031 in 654 seconds.
 
-  **Next:** Finish cleanup and commit `.5`; recurring composition `.9.1.10.6` follows from a clean
-  boundary.
+  **Next:** Recurring composition `.9.1.10.6` is active from that clean boundary.
 
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.4 — admit Julia repeated action-result parity**
   (DONE at clean commit `1c61c2ba` from base `128ead52`).

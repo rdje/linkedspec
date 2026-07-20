@@ -10,8 +10,8 @@
 > ADR `0048` accepts per-hit action-result collection for explicit repetition and
 > scalar pipe choice. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement it.
 > The neutral contract plus ten-role Perl and byte-identical 15-role
-> Rust/Dart/Julia/Lua admissions are complete at 6 complete / 2 pending;
-> `.9.1.10.6-.7` own the remaining rollout.
+> Rust/Dart/Julia/Lua admissions compose through one recurring gate at
+> 7 complete / 1 pending with 44 rejected mutations. `.9.1.10.7` owns public closeout.
 
 This appendix defines LinkedSpec's runtime behavior at the precision needed for
 independent reimplementation. Every backend must produce identical behavior for the
@@ -142,9 +142,9 @@ This is the accepted ADR `0048` contract and current Perl/Rust/Dart/Julia/Lua be
 Every newer backend proves the same channel split in native and generated execution
 while retaining generated-source v2. Dart, Julia, and Lua capture the value at the
 action-edge boundary, which allows implicit child dispatch to complete before
-lifecycle control resumes. Neutral and all five backends are complete; recurring
-and public closeout remain 6 complete / 2 pending under
-`FUTURE-PARITY-BACKLOG.9.1.10.6-.7`.
+lifecycle control resumes. Neutral and all five backends are complete, and the recurring gate composes their
+exact consumers plus a five-command/default-POSIX projection. Rollout is 7 complete / 1 pending; public closeout
+remains `FUTURE-PARITY-BACKLOG.9.1.10.7`.
 
 ## 3. Lifecycle Execution Order
 

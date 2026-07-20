@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t t/repeated_action_result_perl_contract.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t t/repeated_action_result_perl_contract.t lua/test/repeated_action_result_contract_test.lua perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -94,6 +94,7 @@ require_tracked_file tools/check_logical_helper_five_backend.sh
 require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
 require_tracked_file tools/check_repeated_action_result_contract.py
+require_tracked_file tools/check_repeated_action_result_five_backend.sh
 require_tracked_file tools/check_root_rule_selection_contract.py
 require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
@@ -113,6 +114,7 @@ require_tracked_file rust/linkedspec-runtime/tests/duplicate_regex_slot_identity
 require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs
 require_tracked_file dart/test/repeated_action_result_contract_test.dart
 require_tracked_file julia/test/repeated_action_result_contract_test.jl
+require_tracked_file lua/test/repeated_action_result_contract_test.lua
 require_tracked_file dart/test/duplicate_regex_slot_identity_contract_test.dart
 require_tracked_file julia/test/duplicate_regex_slot_identity_contract_test.jl
 require_tracked_file lua/test/duplicate_regex_slot_identity_contract_test.lua
@@ -458,6 +460,14 @@ if [[ "${LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_duplicate_regex_slot_identity_five_backend.sh"
 else
  log "skipping optional five-backend duplicate regex-slot matrix (set LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX:-0}" == "1" ]]; then
+ log "running optional five-backend repeated action-result matrix (LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1)"
+ require_tracked_file tools/check_repeated_action_result_five_backend.sh
+ bash "$REPO_ROOT/tools/check_repeated_action_result_five_backend.sh"
+else
+ log "skipping optional five-backend repeated action-result matrix (set LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_PUNCTUATION_MATRIX:-0}" == "1" ]]; then

@@ -6,11 +6,13 @@ LinkedSpec is also a multi-backend system. The `.spec` language is the one unive
 
 The active language-contract frontier is ADR `0048`: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable
-neutral contract covers eight mode cases and ten special cases and rejects 35 mutations. Its ten-role Perl and
-15-role Rust/Dart/Julia/dual-ABI Lua admissions are complete, so rollout is 6 complete / 2 pending. Every backend
+neutral contract covers eight mode cases and ten special cases and rejects 44 mutations. Its ten-role Perl and
+15-role Rust/Dart/Julia/dual-ABI Lua admissions are composed by one recurring driver, so rollout is
+7 complete / 1 pending. Every backend
 classifies bare `OR` as minimum-one repetition and collects action returns per hit across native/generated routes
-without changing lifecycle authority, scalar pipe, or generated-source v2. Recurring and public closeout remain
-`.9.1.10.6-.7`.
+without changing lifecycle authority, scalar pipe, or generated-source v2. The driver also proves the exact
+`["A","B"]` primary result across five commands and two environments plus all three support ledgers. Only public
+closeout `.9.1.10.7` remains.
 
 The separately completed ADR `0046` root-selection contract says an explicit selector, including
 `--top-rule NAME`, wins over authored markers; otherwise the first authored `::` wins; without a marker, the first
@@ -18,11 +20,12 @@ authored rule wins. The backend-neutral executable contract rejects 54 drift mut
 recurring/public admission closes rollout at 7 complete / 0 pending. Composed
 Perl, Rust, Dart, Julia, and dual-ABI Lua backends implement native, loaded/reconstructed, generated-direct/traced, emitted where available,
 descriptor, diagnostics, runtime/request trace, strict, and primary-command routes while preserving authored
-marker identity. Their 65-case primary proofs pass in both option environments and include exact first-marker,
-markerless, explicit/unknown, and request-trace outcomes. Rust, Dart, Julia, and Lua additionally have topology-checked
+marker identity. Their root-selection admissions established 65 primary cases in both option environments,
+including exact first-marker, markerless, explicit/unknown, and request-trace outcomes; the repeated-action
+recurring projection adds the 66th case. Rust, Dart, Julia, and Lua additionally have topology-checked
 15-role consumers that each execute every declared admission role exactly once. Dart core `.9.1.1.2.3.1` accepts markerless
 one-or-more-rule sources, resolves explicit > first marker > first rule once before user code, reports portable
-zero/unknown failures, preserves descriptor marker identity, and passes the 65-case primary suite twice. Route
+zero/unknown failures, preserves descriptor marker identity, and passed the then-current 65-case primary suite twice. Route
 leaf `.3.2` now proves loaded/normalized and generated/emitted direct/traced reuse, low
 requested/effective/basis trace, portable failures, unchanged generated-v2 identity, and contract-first rejection.
 Admission `.3.3` locks driver/case topology and advances Dart after a 270-test package gate, 65x2 primary proof,

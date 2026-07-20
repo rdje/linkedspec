@@ -6685,15 +6685,51 @@ before implementation.
     task/roadmap/live/changes/notes and commit `.5` before activating recurring `.6`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.6`
-  Status: `pending`
+  Status: `done`
   Goal: Compose recurring six-runtime repeated-choice result parity without another semantic path.
   Dependencies: `.9.1.10.5`
   Acceptance: One omission-sensitive recurring driver composes the neutral checker, Perl/Rust/Dart/Julia/Lua
     consumers, both Lua ABIs, selected five-command default/POSIX primary cases, corpus/generated/descriptor/trace
     support ledgers, exact rollout, mutation inventory, and canonical registration; advance only recurring
     admission after every constituent passes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Activated task-tree-first on 2026-07-20 from clean dual-ABI Lua admission commit `843d40ce` at
+    ahead 258; the brief was zero bytes and generated book/Python/native-probe artifacts were absent. No recurring
+    driver, checker topology, canonical registration, support-ledger, or documentation edit preceded activation.
+    Precedent retrieval found a real canonical topology omission left by `.5`: `tools/run_ci_local.sh` and the
+    neutral checker's required-CI list tracked the Julia repeated-result consumer twice but did not track the
+    shared Lua consumer. The `.6` RED contract required the missing Lua edge and the absent recurring driver,
+    failing exactly on the latter before implementation. One new executable driver now composes the neutral
+    checker; exact Perl 10-role, Rust/Dart/Julia 15-role, and shared PUC-Lua/LuaJIT 15-role consumers; the
+    contract-projected `success_explicit_repeated_action_results` case over five commands in default and POSIX
+    environments; and generated-source/capability/language-coverage ledgers. Canonical CI now tracks the Lua
+    source and driver exactly once and exposes the all-toolchain proof behind
+    `LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`. Governance advances only recurring to 7 complete + 1
+    pending and rejects 44 mutations. The disposable recurring proof passes checker 8 modes / 10 specials /
+    7+1/44, Perl 10, Rust 3 tests including exact roles, Dart 3 tests, Julia 162 assertions, Lua 175x2, selected
+    primary 5x2x1, generated source 80/0/0, capability 80/0/0, and coverage 246/105+1/122; its temporary
+    Rust/Lua/Julia build root is removed on exit. Public no-drift remains `.7`.
+    Knowledge Map regeneration/check passes at 646 facts / 4,763 question keys; mdBook renders, memory remains
+    within its 55-line cap, all four doctrines and every adjacent contract pass, and whitespace is clean.
+    Canonical local CI exits 0 after reference primary 66/66 in both environments and Phase 0 1,031/1,031 in
+    641 seconds (complete gate 1,505.50 seconds).
+  Commit: `FUTURE-PARITY-BACKLOG.9.1.10.6 - compose repeated action result proof`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / INVENTORY RECURRING PRECEDENTS** — Follow the Knowledge Map and admitted root/cursor/
+    duplicate/logical drivers to the exact omission-sensitive composition, selected-primary, support-ledger,
+    canonical-registration, and rollout seams before editing.
+  - [x] **ADD ONE RECURRING DRIVER** — Compose the neutral checker; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+    consumers; and no independent semantic evaluator or duplicate behavior path.
+  - [x] **LOCK SELECTED PRIMARY / SUPPORT PROOF** — Run the governed repeated-action primary case across five
+    commands and default/POSIX environments, then require exact corpus/generated/descriptor/trace support ledgers.
+  - [x] **OMISSION-SENSITIVE GOVERNANCE** — Require each runtime/ABI/primary/support constituent exactly once,
+    reject missing, duplicate, reordered, gated, or premature-rollout mutations, and advance only recurring.
+  - [x] **REGISTER / COMPOSE CANONICALLY** — Add the recurring gate to canonical CI using the repository's
+    explicit optional multi-toolchain convention while keeping the core-only default independent of SDKs.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass every constituent and exact checker mutation, focused and complete
+    backend gates where warranted, mdBook/KM/memory/doctrines/canonical CI, whitespace, and exact cleanup;
+    synchronize task/roadmap/live/changes/notes and commit `.6` before activating public closeout `.7`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.10.7`
   Status: `pending`
@@ -9276,7 +9312,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 220.1.3 | `FUTURE-PARITY-BACKLOG.9.1.10.3` | `done` | Dart classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.4 | `FUTURE-PARITY-BACKLOG.9.1.10.4` | `done` | Julia classification, collection, descriptors, generated/traced, primary, and corpus routes are admitted. |
 | 220.1.5 | `FUTURE-PARITY-BACKLOG.9.1.10.5` | `done` | One byte-identical 15-role consumer passes 175x2; bare OR repeats from minimum one, explicit action returns collect per hit, and the complete dual-ABI Lua gate advances governance to 6+2/35. |
-| 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `pending` | Compose recurring six-runtime plus selected five-primary/support proof. |
+| 220.1.6 | `FUTURE-PARITY-BACKLOG.9.1.10.6` | `done` | One recurring driver composes all six runtime legs, selected primary 5x2x1, three support ledgers, and 7+1/44 governance. |
 | 220.1.7 | `FUTURE-PARITY-BACKLOG.9.1.10.7` | `pending` | Close public no-drift and exact `.9.1.10`/`.9.1`/`.9` status. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |

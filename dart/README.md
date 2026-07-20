@@ -135,8 +135,9 @@ zero/unknown selection failures use the portable stages and codes, and descripto
 normalized-JSON reconstructed state plus generated and fresh emitted direct/traced execution reuse that resolver.
 Low trace records requested/effective/basis, route failures keep portable zero/unknown fields, stale generated
 contract validation remains first, and generated v2/format 2 identity plus its minimal family plan are unchanged.
-Dart now passes 270 package tests, the shared 65-case primary suite in default and POSIX environments, and 105/105
-corpus fixtures. Admission leaf `.3.3` composes all 15 contract-declared roles exactly once, topology-locks the
+Dart's root-selection admission passed 270 package tests and 65 primary cases in both environments; the recurring
+repeated-action projection now extends the shared primary suite to 66 cases. The corpus remains 105/105.
+Admission leaf `.3.3` composes all 15 contract-declared roles exactly once, topology-locks the
 package-wide and canonical drivers plus six shared primary case ids, and recorded Dart's historical 4/7 boundary.
 
 ## Status

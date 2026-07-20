@@ -436,6 +436,23 @@
       }
     },
     {
+      "id": "success_explicit_repeated_action_results",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::OR\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n",
+        "--input",
+        "ab"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "[\"A\",\"B\"]\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
       "id": "success_input_file_exact_bytes",
       "family": "success",
       "args": [

@@ -2,7 +2,7 @@
 
 `manifest.json` is the machine-readable census of current user-observable LinkedSpec capabilities across the five
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
-65-case primary CLI manifest.
+66-case primary CLI manifest.
 
 Run its structural and ownership gate from the repository root:
 
@@ -80,14 +80,15 @@ no-drift are admitted. Perl records marker-
 optional validation, exact explicit/first-marker/first-rule resolution, markerless fallback, immutable descriptor
 `is_top`, and the same resolution across loaded, generated-direct, generated-traced, and generated `Get` execution. Generated artifacts
 retain ordered authored entry state separately from their minimal label/family plan, and an invocation-local
-selector overrides an emission-time configured selector. The reference-first shared manifest now has 65 cases,
-including exact first-marker and markerless-default bytes beside explicit and unknown selection. Rust now carries
+selector overrides an emission-time configured selector. Root-selection established 65 reference-first cases,
+including exact first-marker and markerless-default bytes beside explicit and unknown selection; repeated-action
+recurring proof adds the 66th shared case. Rust now carries
 the same marker-optional resolver through native, loaded, serialized/reconstructed, generated direct/traced, and
 emitted direct/traced execution. Existing generated signatures remain intact; option-bearing siblings accept
 per-invocation `ExecutionOptions`, return portable zero/unknown selection failures, and keep the selector out of
 authored descriptor identity and the minimal family plan. One omission-sensitive Rust consumer composes all 15
 neutral, native, loaded/reconstructed, generated/emitted, descriptor, diagnostic, trace, and primary roles exactly
-once; the Rust primary command passes all 65 cases in default and POSIX option environments. Dart now has the same
+once; the Rust primary command passes all 66 cases in default and POSIX option environments. Dart now has the same
 exact 15-role admission topology across loaded/normalized/generated/emitted/trace/diagnostic paths. Its package-
 wide driver passes 270 tests, the shared command passes 65/65 in both option environments, and the corpus passes
 105/105. Julia core `.4.1` consumes every neutral selection/failure/strict row, accepts markerless
@@ -130,22 +131,28 @@ primary case, and generated/capability/language-coverage support ledgers. Govern
 7 complete / 0 pending with 59 rejected mutations.
 
 `repeated_action_result_contract.json` (`linkedspec-explicit-repetition-action-result-v1`) makes ADR `0048`
-executable while the four newer backends migrate. It fixes eight exact mode rows for `*`, `+`, `?`, bare `OR`,
+executable across all admitted backends. It fixes eight exact mode rows for `*`, `+`, `?`, bare `OR`,
 `OR+`, exact/up-to bounded OR, and scalar pipe, plus ten cases for duplicate priority, nested/null values, fluent
 returns, zero/below-minimum bounds, lifecycle authority, duplicate pipe, and blind bare-OR classification. Run:
 
 ```bash
 python3 tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
+bash tools/check_repeated_action_result_five_backend.sh
 ```
 
 The checker independently evaluates results, cursors, and selected-slot order, locks exact source bytes,
 descriptor and generated-source-v2 family facts, trace/route topology, the checked-in distinct-OR corpus bundle,
-six-runtime mechanism inventory, and migration ownership, and rejects 25 drift mutations. The Perl consumer
-composes ten roles: neutral model, live modes, special cases, loaded source, descriptor, emitted source,
-generated direct, generated trace, primary CLI, and corpus bundle. Canonical local CI runs both unconditionally.
-Rollout is 2 complete / 6 pending: neutral and Perl are admitted; Rust, Dart, Julia, dual-ABI Lua, recurring, and
-public no-drift remain `.9.1.10.2-.7`. No non-Perl runtime behavior changes in the neutral/reference leaf.
+six-runtime mechanism inventory, exact recurring topology, and migration ownership, and rejects 44 drift
+mutations. The Perl consumer composes ten roles: neutral model, live modes, special cases, loaded source,
+descriptor, emitted source, generated direct, generated trace, primary CLI, and corpus bundle. Rust, Dart,
+Julia, PUC Lua, and LuaJIT each run their exact 15-role admission; the shared Lua source runs once per ABI. The
+recurring driver composes those six runtime legs, the contract-projected
+`success_explicit_repeated_action_results` case through five commands in default and POSIX environments, and the
+generated-source/capability/language-coverage ledgers. Canonical local CI runs the neutral checker and Perl
+consumer unconditionally and exposes the all-toolchain composition behind
+`LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1`. Rollout is 7 complete / 1 pending; only public no-drift
+`.9.1.10.7` remains.
 
 The Julia cursor preflight recorded the historical starting differences without advancing rollout: compact `|`
 was generated AND, every engine owned global seek, 11 edge rows remained raw, parent-child agreement was 5/8,

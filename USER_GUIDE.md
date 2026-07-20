@@ -369,8 +369,9 @@ Use `::|` when the rule should make one choice. Explicit repeated `::OR` is a
 different family. ADR `0048` accepts one collected action result per hit while
 preserving scalar pipe. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement
 that rule across native and generated execution. The executable neutral contract
-and backend admissions are complete at 6 complete / 2 pending; recurring and
-public closeout remain `FUTURE-PARITY-BACKLOG.9.1.10.6-.7`.
+and backend admissions now compose through one recurring six-runtime/five-command
+gate at 7 complete / 1 pending with 44 rejected mutations. Only public closeout
+`FUTURE-PARITY-BACKLOG.9.1.10.7` remains.
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 

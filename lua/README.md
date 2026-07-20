@@ -515,7 +515,7 @@ removal, or newline conversion. Success prints one recursively key-sorted canoni
 exits `0`; compilation/input-load/invocation failures use one stable phase heading and exit `1`; usage exits `2`.
 The command delegates named/file compilation, staged inline compilation, engine construction, and execution to the
 same in-memory module APIs. Its canonical phase trace is intentionally separate from richer native trace. The
-shared 65-case process manifest is a recurring focused gate in both default and POSIX environments. The retired
+shared 66-case process manifest is a recurring focused gate in both default and POSIX environments. The retired
 `--parse-mode` spelling produces a targeted usage error; it is absent from help and request trace. Public status is
 `runtime-corpus-primary-cli`.
 

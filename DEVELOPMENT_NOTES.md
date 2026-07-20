@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.6` — compose recurring proof without a seventh semantic path): The
+  recurring contract enumerates every admitted runtime and role, with the shared Lua source present once for PUC
+  Lua and once for LuaJIT. Its driver reuses the six exact consumers, projects the neutral
+  `explicit_or_two_hits` fixture into one primary manifest case, runs that case through five commands under both
+  option environments, and then runs generated-source, capability, and language-coverage ledgers. Rust targets,
+  Lua native modules, and Julia compiled output live below one disposable root that is removed on exit.
+
+  Governance-first RED failed exactly because the driver was absent. Precedent retrieval also exposed a durable
+  canonical topology defect from `.5`: the checker's required-CI list repeated the Julia consumer, while both it
+  and `tools/run_ci_local.sh` omitted `lua/test/repeated_action_result_contract_test.lua`. The recurring leaf is
+  the owning correction: canonical tracking now names Lua and the recurring driver exactly once, and nine new
+  mutations lock backend, role, primary, support, switch, driver, fixture, recurring-rollout, and premature-public
+  omissions. The checker passes at 7 complete / 1 pending / 44.
+
+  The recurring driver passes Perl 10 roles, Rust's three-test admission, Dart's three-test admission, Julia 162,
+  Lua 175 on each ABI, the selected primary case on all 5x2 legs, generated-source 80/0/0, capability 80/0/0,
+  and coverage 246/105+1/122. The new byte-exact primary case returns `["A","B"]` and raises the current manifest
+  to 66 cases. Knowledge Map is 646/4,763; mdBook, memory, all four doctrines, and adjacent governance pass.
+  Canonical local CI independently passes reference primary 66x2 and Phase 0 1,031/1,031 in 641 seconds, exiting
+  0 in 1,505.50 seconds. Public no-drift deliberately remains `.9.1.10.7`.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.5` — capture Lua action returns at the edge boundary): The exact
   consumer landed before behavior and failed 64 of 174 PUC assertions. `spec_ast.rule_mode_is_repetition` omitted
   bare `Or`, `source_emitter.generated_rule_family` routed action/blind bare OR to scalar choice families, and
