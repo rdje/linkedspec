@@ -1131,6 +1131,22 @@ The tool is especially useful when you are deciding between two equivalent-looki
 ### Descriptor introspection with `return_descriptor => 1`
 Use descriptor mode when you want to inspect rule readiness, migration metadata, or the current compiled-descriptor topology.
 
+The descriptor is not a portable semantic-query wire format. In the Perl reference, handlers and dependency
+regexes are native coderef/compiled-regex values, while other backends use their own typed projections. Its stable
+facts remain useful inputs, but callers should not attempt to serialize backend objects as a cross-backend model.
+
+ADR `0049` designs a separate future `linkedspec-semantic-model-v1` /
+`linkedspec-semantic-query-v1` surface. It will expose normalized read-only records and relations for rules,
+regex slots, edges, lifecycle actions, symbols/calls, inferred shapes, staged/generated provenance, diagnostics,
+and explain-why evidence. Queries have deterministic snapshot-local ids/order, bounded pagination and traversal,
+and `none`/`identity`/`span`/`text` source ceilings with explicit redactions. Runtime explanations consume an
+already captured caller-owned observation; querying never runs the parser. MCP will be a two-tool handle adapter
+over the same native capabilities/query calls, with no implicit source loading or semantic implementation.
+
+That semantic index is planned, not current API. `FUTURE-PARITY-BACKLOG.10.2-.10.10` own its executable neutral
+contract, five-backend/six-runtime rollout, thin MCP transport, and public closeout. Continue using
+`return_descriptor => 1` for current descriptor work.
+
 Typical shape:
 
 ```perl

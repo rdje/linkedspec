@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.1` — separate semantic facts from host projections before code): Knowledge
+  retrieval reused the exact outward-descriptor contract, native embedding/parity ADRs, staged provenance,
+  selective observability, portable diagnostics, generated-source v2, and all five compiled-state projections.
+  A TOOLBOX-first `return_descriptor` probe produced the canonical four top keys and deterministic rule/function
+  metadata, but also proved `dependency_regex_map.Top` is a Perl `Regexp` object and the handler is a coderef.
+  Direct JSON encoding failed at that compiled regex. The durable conclusion is not that descriptor projection is
+  impure—it remains derived and read-only—but that its native values are intentionally not a portable query wire
+  representation. The new Knowledge Map card records this boundary so future work does not re-derive it.
+
+  ADR `0049` therefore gives introspection its own model/query ids and consumes existing semantic authorities
+  through adapters. It fixes snapshot-local ids from source/preorder rather than host identity; canonical kind/
+  relation ordering; one exact record/relation envelope; closed value/target shape lattices; logical traversal
+  accounting independent of implementation work; structural source ceilings and redaction paths; failed-compile
+  plus optional post-execution snapshots; and evidence chains made from portable rules rather than raw trace text.
+  MCP has only registered-handle capabilities/query tools and cannot become a semantic cache, file loader, compiler,
+  or explanation engine. Exact fixture groups cover graphs, call/shape resolution, staged/generated provenance,
+  diagnostics/explanations, runtime observations, and privacy/page/budget failures. `.10.2-.10.10` freeze the
+  executable schema before Perl, then advance Rust/Dart/Julia/Lua, recurring proof, transport, and public no-drift.
+  No implementation behavior changes in this design slice.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.10.7` — make public closure omission-sensitive): Precedent retrieval
   reused the root/cursor/duplicate public-contract pattern, then defined the repeated-action public topology before
   broad synchronization. The RED checker failed on the first missing guide marker, proving that the prior 7/1

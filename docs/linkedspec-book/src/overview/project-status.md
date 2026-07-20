@@ -501,10 +501,13 @@ Three backbone items tracked major structural modernization — all done:
   General multi-spec composition remains future work under `FUTURE-PARITY-BACKLOG.14.1-.14.4`; the EBNF recursive-
   regex and portmap complex-regex walkthrough wording is tracked audit/migration evidence, not the target general
   authoring idiom.
-- **Semantic introspection / MCP direction** - parked `.10.1` will design one versioned, deterministic semantic
-  query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
-  resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that
-  model; backend AST/IR layouts and transport-specific behavior are explicitly outside the public contract.
+- **Semantic introspection / MCP direction** - ADR `0049` and completed design leaf `.10.1` fix the planned
+  `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1`: immutable normalized records/relations for
+  rules, regex slots, edges, lifecycle, calls/shapes, staged/generated provenance, portable diagnostics, and
+  ordered explanations; snapshot-local ids/order; bounded pages/logical cost; structural source ceilings and
+  redactions; and optional caller-captured runtime observations. The existing descriptor is reusable input, not
+  the wire model. MCP has only handle capabilities/query projection and owns no semantic or filesystem behavior.
+  Implementation remains pending under `.10.2-.10.10`; `.10.2` is next for the executable neutral contract.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The

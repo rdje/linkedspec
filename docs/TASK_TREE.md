@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Root selection is closed at 7/0/54, duplicate-slot identity at 7/0/59, rule-local cursor at 75 files / 8/0/60, and repeated-action recurring/public no-drift is closed at 8/0/54. Exact closure corrects stale parent `.9.1.1` and closes `.9.1.10`, `.9.1`, and `.9`; semantic-introspection design `.10.1` is the next roadmap-aligned leaf after the clean public-closeout commit. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Closed status: repeated-action recurring/public no-drift is closed. ADR `0049` and semantic-introspection design `.10.1` are complete before behavior. Exact immutable native model/query, identity/order/cost/privacy/evidence, no-backend-IR, and handle-only MCP boundaries are fixed; executable neutral schema/checker `.10.2` is next after the clean design commit. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `INTER-MATCH-GAP-CAPTURE` | `proposed` / direction ratified; awaiting explicit activation | `.spec language evolution / lossless segmentation and source preservation` | `.0` is done: ADR `0045` fixes automatic action-edge gaps, target ownership, accepted future `@capture_gaps`, spacing-insensitive `name=/regex/` → `Rule[name]` slots, and the existing Perl/Lua/Rust/Dart/Julia marker divergence without behavior change. Cursor rollout prerequisite is satisfied at 8 complete / 0 pending; `.1-.7` still require explicit activation. | [docs/tasks/INTER-MATCH-GAP-CAPTURE.md](docs/tasks/INTER-MATCH-GAP-CAPTURE.md) |
 | `LUA-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Lua third)` | `.8.4` admits Lua as the fifth exact backend: 16 capabilities, 80/0/0, 177/177 on PUC Lua and LuaJIT, primary 61x2, corpus 105/105, and shared matrix 5x2x61. No Lua frontier remains. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `STRUCTURED-TEXT-FORMAT-PROGRAM` | `proposed` / parity prerequisite satisfied | `Post-current-backend-parity format coverage and evidence-driven .spec evolution` | `.0` ratifies the exact 91-row program; backlog `.18.1` adds the authoring invariant, `.18.2` adds correlated compile/runtime trace plus exact emission-only rule filters, and `.18.3` links a separate optional native-acceleration horizon. Five-backend parity is complete; readiness `.1` is pending and not active. | [docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md](docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md) |
@@ -1605,10 +1605,18 @@ Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` is done. Rust now d
 from a real zero-width match and matches the exact position fixture. All 137 library and 193 integration tests plus
 the unchanged 99-case oracle pass; active `.2.2.2.2` aligns Dart.
 
-Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.10.0` captures the director's deep semantic-introspection API/MCP
-direction without changing the active frontier. Pending `.10.1` must design one versioned, deterministic semantic
+Index note 2026-07-20: `FUTURE-PARITY-BACKLOG.10.1` accepts ADR `0049` before behavior. The planned
+`linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is an immutable native index with exact
+snapshot-local ids/order, normalized records/relations/value and target shapes/evidence, source ceilings/redaction,
+page/budget accounting, failed-compile and optional caller-captured runtime observations, and no backend AST/IR
+leakage. A toolbox probe proved the outward descriptor's native compiled-regex/callable values cannot be the
+portable wire schema. `.10.2-.10.10` split neutral schema/checker, Perl/Rust/Dart/Julia/Lua, recurring six-runtime,
+two-tool handle-only MCP, and public closeout; executable neutral contract `.10.2` is next.
+
+Historical index note 2026-07-10: `FUTURE-PARITY-BACKLOG.10.0` captured the director's deep semantic-introspection
+API/MCP direction without changing the then-active frontier. It required one versioned, deterministic semantic
 model exposed by every native backend, exact parity fixtures, stable provenance, bounded/privacy-aware queries,
-and a thin MCP transport that owns no semantic behavior. The active backend frontier is Dart `.1.5.3`.
+and a thin MCP transport that owns no semantic behavior.
 
 Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.1.4` is done. ADR `0022` ratifies native in-memory embedding as
 the primary multi-backend product contract: Perl/Rust/Dart/Julia expose host-process parse/compile/execute

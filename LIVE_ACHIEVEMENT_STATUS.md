@@ -8,18 +8,46 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.9.1.10.7` is active task-tree-first from clean recurring-proof commit `9b0c8007`
-  at ahead 259. The omission-sensitive public contract requires 25 current documents, denies 12 stale claims,
-  closes all eight rollout legs, and locks exact four-parent closure plus `.10.1` handoff. Recurring and canonical
-  signoff are green; only the clean commit boundary is in flight.
+- `FUTURE-PARITY-BACKLOG.10.2` is the next executable leaf after the design commit. It will freeze the neutral
+  semantic schema, exact fixtures/answers, expected rollout, and omission/mutation checker before any backend or
+  MCP behavior. The task is not activated until the clean `.10.1` commit boundary.
 
-- `FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift` is the active slice title.
+- `FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code` is signoff-complete; only its clean
+  per-leaf commit boundary remains before `.10.2` activates task-tree-first.
 
-Repeated-action rollout is closed at 8 complete / 0 pending. The checker rejects 54 mutations; recurring passes
-all six runtime legs and selected primary/support proof; canonical passes reference primary 66x2, Phase 0
-1,031/1,031 in 645 seconds, the enabled recurring matrix, and exits 0.
+ADR `0049` fixes the planned immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
+records/relations/shapes/evidence, optional caller-captured runtime observations, no backend IR leakage, and a
+two-tool handle-only MCP transport. No behavior is implemented in `.10.1`.
+
+Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
+recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code**
+  (DONE at the per-leaf commit from clean base `f183e468`).
+
+  **Result:** ADR `0049` fixes the planned immutable native semantic model/query, exact records/relations/shapes/
+  evidence/ids/order/pages/cost/source privacy, failed-compile and optional caller-captured runtime snapshots,
+  idiomatic host APIs, unchanged primary CLI, no backend IR leakage, and two-tool registered-handle MCP boundary.
+  `.10.2-.10.10` split every executable contract/backend/recurring/transport/public owner before behavior.
+
+  **Proof:** TOOLBOX and source inventory across all five authorities; descriptor native-object serialization
+  boundary; Knowledge Map 647/4,769; mdBook, memory, task, four doctrines, adjacent public contracts, whitespace,
+  and cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 657 seconds. No behavior changed.
+
+  **Next:** Executable neutral contract/checker `.10.2` activates only from the clean design commit.
+
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift**
+  (DONE at clean commit `f183e468` from base `9b0c8007`).
+
+  **Result:** Twenty-five required public surfaces, 12 stale denials, 54 mutations, recurring proof, and exact
+  four-parent closure close repeated-action parity at 8 complete / 0 pending and hand off `.10.1`.
+
+  **Proof:** All runtime/ABI consumers, selected primary/support proof, canonical primary 66x2, Phase 0
+  1,031/1,031 in 645 seconds, Knowledge Map, mdBook, doctrines, adjacent contracts, and cleanup pass.
+
+  **Next:** Semantic-introspection design `.10.1` is active task-tree-first from the clean boundary.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.9.1.10.6 — compose recurring repeated action-result proof**
   (DONE at clean commit `9b0c8007` from base `843d40ce`).
 

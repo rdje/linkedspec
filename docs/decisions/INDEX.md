@@ -59,6 +59,7 @@ changed* lives in git (layer D), not here.
 | [0046](0046-root-rule-selection-precedence.md) | Root-rule selection uses explicit selector, first authored marker, then first authored rule | 2026-07-18 | accepted; backend rollout pending | architecture, grammar, root-rule, entry-rule, top-rule, cli, descriptor, generated-source, trace, validation, parity |
 | [0047](0047-duplicate-regex-slot-identity.md) | Duplicate regex text does not erase structural slot identity | 2026-07-20 | accepted; rollout complete | architecture, regex, slot-identity, and-rule, or-rule, repetition, descriptor, generated-source, trace, diagnostics, parity |
 | [0048](0048-explicit-repetition-action-result-collection.md) | Explicit repetition action returns are per-hit collection values | 2026-07-20 | accepted; rollout complete | architecture, grammar, repetition, or-rule, action-edge, lifecycle, result-shape, descriptor, generated-source, trace, parity |
+| [0049](0049-versioned-semantic-introspection-model-and-thin-mcp.md) | Semantic introspection uses one versioned native model and a thin MCP transport | 2026-07-20 | accepted direction; implementation pending | architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

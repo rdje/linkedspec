@@ -209,12 +209,16 @@ canonical trace, passes 61/61 in both environments, and adds `tools/run_rust_loc
     Dart and Julia close their corresponding focused legs, and `tools/run_primary_cli_matrix.sh` is the global
     recurring identity owner. Complete capability census `.1.6` and generated-source `.3` remain separate.
 
-A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
-contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:
-rules, edges, calls, regex/lifecycle meaning, source spans and provenance, inferred value/target shapes, helper and
-function resolution, generated-source relationships, diagnostics, and explain-why paths. Stable ids and ordering,
-bounded query costs, source/privacy controls, and exact cross-backend fixtures are mandatory. MCP is a thin
-transport over that model; it must not own semantics or expose backend AST/IR layouts as the public contract.
+ADR `0049` and `FUTURE-PARITY-BACKLOG.10.1` now design deep semantic introspection before implementation. The
+planned `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is an immutable normalized index exposed
+idiomatically from every native backend: rules, regex slots, edges, lifecycle, calls, inferred value/target shapes,
+staged/generated provenance, portable diagnostics, and ordered explain-why evidence. Snapshot-local ids/order,
+bounded pages and logical traversal cost, structural source ceilings/redactions, optional caller-captured runtime
+observations, and exact cross-backend fixtures are mandatory. The existing outward descriptor remains a separate
+compatibility projection; no backend AST/IR, callable, compiled regex, object identity, or implicit host path can
+enter the semantic response. MCP will expose only native capabilities/query calls over a registered handle. It
+cannot compile, read a path, derive facts, or own explanations. `.10.2-.10.10` own implementation; the APIs and
+MCP tools are not shipped yet.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

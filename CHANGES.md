@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.1 — design semantic introspection before code
+
+ADR `0049` accepts `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` as a separate immutable
+native model rather than widening the outward descriptor. It fixes snapshot-local ids and cross-backend ordering,
+normalized record/relation/fact and value/target-shape vocabularies, exact request/response envelopes, bounded
+pages and logical traversal cost, source-detail ceilings/redactions, schema evolution, portable diagnostics and
+ordered explanations, failed-compilation snapshots, and optional caller-captured runtime observations. Queries
+are read-only and never execute a parser, evaluate user code, load an undeclared path, or enable trace.
+
+Toolbox and source inventory established why that separation is required: the stable four-key descriptor remains
+useful semantic input, but the Perl projection contains native handler coderefs and compiled regex objects and
+cannot be directly encoded as portable JSON. Backend AST/IR layouts and object identities are therefore forbidden
+from semantic responses. MCP is limited to native capabilities/query calls over a caller-registered opaque handle;
+it cannot compile, read paths, derive records, or invent explanations. Dependency-ordered `.10.2-.10.10` split
+neutral executable contract/checker, Perl/Rust/Dart/Julia/Lua, recurring six-runtime proof, MCP transport, and
+public closeout before implementation. This slice changes no current parser, compiler, runtime, descriptor,
+generated-source, CLI, trace, fixture, or MCP behavior.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift
 
 Repeated-action result parity is now a closed public contract. Twenty-five current surfaces cover the README,

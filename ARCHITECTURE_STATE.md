@@ -5,11 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` semantic-introspection design refresh: ADR `0049` / `FUTURE-PARITY-BACKLOG.10.1` fixes the planned
+  `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` before behavior. One immutable native
+  `SemanticIndex` normalizes existing compiled/ActionIR/provenance/generated/diagnostic authorities plus optional
+  caller-captured execution observations; exact snapshot-local ids/order, record/relation/shape/evidence vocabularies,
+  page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
+  descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
+  MCP is only registered-handle capabilities/query transport. Dependency-ordered `.10.2-.10.10` split neutral,
+  five backend/six runtime, recurring, MCP, and public work; executable neutral contract `.10.2` is next. No current
+  parser/compiler/runtime/descriptor/generated/CLI/trace/MCP behavior changed.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain
   whole-rule authority, pipe remains scalar, and generated source remains v2. Complete child inventory also closes
-  `.9.1.1`, `.9.1.10`, `.9.1`, and `.9`; semantic-introspection design `.10.1` is next.
+  `.9.1.1`, `.9.1.10`, `.9.1`, and `.9`; semantic-introspection design `.10.1` follows and is now complete.
 - `2026-07-20` repeated-action recurring refresh: `FUTURE-PARITY-BACKLOG.9.1.10.6` adds no semantic path. One
   omission-sensitive driver composes the neutral model, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers,
   the contract-projected `success_explicit_repeated_action_results` case across five commands and two option
