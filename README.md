@@ -160,7 +160,8 @@ matrix passes 65/65 in both environments, corpus remains 105/105, and neutral go
 4 complete / 4 pending, and 39 rejected mutations at the Dart admission boundary. Julia admission has since
 advanced the ledger to 67 files, 5 complete / 3 pending, and 44 rejected mutations; Lua admission, final root
 governance, and recurring admission moved the ledger to 72 files. Julia duplicate-slot admission now classifies
-its parse-mode-aware proof path too, so the current ledger is 73 files, 7 complete / 1 pending, and 56 rejected
+its parse-mode-aware proof path too. Final duplicate-slot public governance classifies its two parse-mode-chapter
+scanner paths under cursor public owner `.9.1.9`, so the current ledger is 75 files, 7 complete / 1 pending, and 56 rejected
 mutations.
 Run `bash tools/check_rule_local_cursor_five_backend.sh` for the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof,
 selected 5x2x5 primary projection, and support ledgers; canonical CI registers it behind
@@ -183,14 +184,17 @@ required authored alternative directly, projects the same descriptor/emitted/tra
 generated reconstructed state, and passes one exact 15-role admission plus its complete 272-test/65x2/105 local
 gate. Julia `.5` now selects the authored alternative directly rather than matching a singleton and reindexing;
 its compiler/runtime/emitter validation, descriptor/emitted/trace identity, and module-isolated exact 15-role
-consumer pass through normalized-spec generated source. Governance is 5 complete + 2 pending / 41 mutations.
+consumer pass through normalized-spec generated source. At the Julia admission boundary, governance was
+5 complete + 2 pending / 41 mutations.
 The complete Julia driver passes package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 passes
 1,031/1,031 in 623 seconds. Dual-ABI Lua `.6` now selects an existing authored alternative directly through one
 shared PUC Lua/LuaJIT implementation, validates compiled target/index identity at compile, runtime, emitter, and
 generated-plan boundaries, and publishes exact descriptor/emitted/trace identity without widening normalized
 generated-v2 plans. One byte-identical 15-role consumer passes 112 assertions per ABI; the complete Lua driver
-passes package 177x2, primary 65x2, and corpus 105/105. Governance is 6 complete + 1 pending / 46 mutations;
-recurring/public closeout `.7` remains dependency-ordered. Final Lua signoff passes Knowledge Map 643/4,735,
+passes package 177x2, primary 65x2, and corpus 105/105. Final recurring/public no-drift `.7` composes Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT plus selected primary/support proof through
+`tools/check_duplicate_regex_slot_identity_five_backend.sh`. Duplicate-slot rollout is closed at
+7 complete / 0 pending with 59 rejected mutations. Final Lua signoff passes Knowledge Map 643/4,735,
 mdBook/four doctrines, canonical root 7+5, cursor 288, reference primary 65x2, and Phase 0 1,031/1,031 in 653
 seconds, followed by exact generated-artifact cleanup.
 

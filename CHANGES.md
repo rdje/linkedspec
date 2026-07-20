@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift
+
+Duplicate regex-slot rollout is closed at 7 complete / 0 pending. One omission-sensitive recurring driver runs
+the neutral 59-mutation checker, exact Perl/Rust/Dart/Julia admissions, the shared Lua consumer on PUC Lua and
+LuaJIT, the selected five-command/default-POSIX AND-consume case, and all three support ledgers. Canonical local
+CI exposes the complete toolchain proof behind `LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1`.
+
+The public contract now requires 22 root/backend/API/mdBook/task/Knowledge Map surfaces and forbids 12 stale
+current claims. ADR `0047` is rollout-complete; the backend companions explain direct authored-slot identity;
+and generated-source v2 remains unchanged. The neutral choice fixture now uses genuine single-choice `Top::|`.
+Toolbox evidence showed explicit repeated `Top::OR` returns a collection on Perl but a scalar on the other four
+backends, so that broader result-shape decision is preserved under new leaf `.9.1.10` rather than hidden here.
+The duplicate contract/checker also name the parse-mode mdBook chapter; both paths are classified under cursor
+public owner `.9.1.9`, advancing only that inventory from 73 to 75 at unchanged 7+1/56.
+
+The recurring gate passes Perl 12 roles, Rust/Dart/Julia 15 roles, Lua 112 assertions per ABI, primary 5x2x1,
+generated-source 10/1/8+105, capability 80/0/0, and language coverage 246/105+1/122. Its Julia environment uses a
+disposable writable depot before the installed stack; the primary matrix creates only that first path rather than
+a colon-literal directory. All disposable Rust, Lua, and Julia artifacts are removed after the run.
+
+Final lockstep passes Knowledge Map 645/4,745, mdBook, all four doctrines, canonical root 7+5, cursor 288,
+duplicate Perl 12, reference primary 65x2, and Phase 0 1,031/1,031 in 640 seconds. Exact cleanup removes the consumed
+generated book, Dart tool cache, and Python cache; no LinkedSpec task-local native, target, log, binary, or temp
+artifact remains.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.9.1.8.1.6 — implement dual-ABI Lua duplicate regex-slot identity
 
 Lua ordered execution now selects an existing authored alternative directly through

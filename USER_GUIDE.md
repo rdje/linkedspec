@@ -343,6 +343,31 @@ Most important syntax elements:
   - `I { ... }`
   - `LS { ... }`
   - `LE { ... }`
+
+### Duplicate regex slots
+
+Duplicate regex text does not merge structural slots. In an ordered rule, each
+edge keeps its authored target and zero-based regex index even when adjacent
+patterns are byte-identical:
+
+```text
+Top::AND
+ /a/ -> Top[0] { set(first_seen, true) }
+ /a/ -> Top[1] { return("ordered-ok") }
+```
+
+On input `aa`, the two steps select `Top[0]` and `Top[1]` in that order. In a
+single-choice rule, equal-start candidates use source order: the first authored eligible slot wins.
+
+```text
+Top::|
+ /a/ -> Top[0] { return("first") }
+ /a/ -> Top[1] { return("second") }
+```
+
+Use `::|` when the rule should make one choice. Explicit repeated `::OR` is a
+different family; its cross-backend action-result collection shape is tracked
+separately by `FUTURE-PARITY-BACKLOG.9.1.10`.
   - `LX { ... }`
   - also supported in advanced specs: `E`, `EX`, `IT`
 

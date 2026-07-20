@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.7` — compose duplicate-slot parity without another runtime path):
+  The final leaf is topology and no-drift only. `tools/check_duplicate_regex_slot_identity_five_backend.sh`
+  executes every contract-declared backend role, both Lua ABIs, the existing `success_and_rule_consumes` primary
+  case across 5x2 command environments, and the generated/capability/language-coverage ledgers. The neutral
+  checker now locks six runtime rows, 22 public documents, 12 stale-current denials, final parent/next-owner state,
+  and 59 independent mutations. Because the duplicate public contract and checker name the parse-mode mdBook
+  chapter, the cursor scanner classifies both under pending public owner `.9.1.9`; only its inventory moves from
+  73 to 75, while cursor rollout and mutations remain 7+1/56.
+
+  The neutral choice fixture originally used explicit repeated `Top::OR` while declaring scalar `"first"`.
+  LinkedSpec's `return_descriptor` classified Perl `::OR` as looping `REP_ACODE`; `dump_parser_source` showed the
+  emitted handler collecting each action value into the rule array. Perl therefore returns `["first"]`, while
+  Rust, Dart, Julia, and Lua return `"first"`. `Top::|` is non-looping `OR_ACODE` and returns the intended scalar
+  everywhere, so the duplicate-slot fixture now uses `::|`. The broader explicit-OR result-shape gap is not an
+  identity bug and is durably owned by `.9.1.10` plus
+  `docs/knowledge/explicit-or-action-result-shape-parity-gap.md`.
+
+  A first recurring run passed Perl/Rust/Dart but failed before Julia execution because the new harness exported
+  only an empty depot. The fixed driver prepends a disposable writable depot to Julia's installed `Base.DEPOT_PATH`
+  stack and removes it on exit. That exposed an older primary-matrix cleanup bug: `mkdir -p` received the entire
+  colon-separated stack as one pathname. `tools/run_primary_cli_matrix.sh` now creates only the first writable
+  depot entry. The exact colon-literal directory was empty and removed; the successful rerun passes all runtime,
+  primary, and support legs and leaves no task-owned temp tree.
+
+  Final lockstep passes KM 645 facts / 4,745 keys, mdBook, all four doctrines, canonical root 7+5, cursor 288,
+  duplicate Perl 12, reference primary 65x2, and Phase 0 1,031/1,031 in 640 seconds. Cleanup removes the consumed
+  generated book, Dart tool cache, and Python cache; the recurring driver leaves no disposable Rust, Julia, Lua,
+  log, binary, or temp output.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.9.1.8.1.6` — make Lua's correct value behavior structurally direct):
   Lua already returned every neutral fixture value correctly, but `match_specific` compiled only the required
   pattern, received alternative zero, and rebuilt the match with the expected index. `match_runtime_regex_slot`

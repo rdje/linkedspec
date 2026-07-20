@@ -47,7 +47,8 @@ done
 
 cd "$REPO_ROOT"
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
-mkdir -p "$JULIA_DEPOT_PATH"
+JULIA_WRITE_DEPOT=${JULIA_DEPOT_PATH%%:*}
+mkdir -p "$JULIA_WRITE_DEPOT"
 LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-cli-matrix-lua.XXXXXX")
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 

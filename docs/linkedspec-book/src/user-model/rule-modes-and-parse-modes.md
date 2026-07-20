@@ -83,7 +83,8 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > one exact 15-role consumer passes 119/119 on PUC Lua and LuaJIT. Final root-selection governance adds two
 > cross-contract scanner paths. Recurring five-backend admission then adds its governed driver and composes all
 > six runtime legs plus selected 5x2x5 primary and support-ledger proof. Julia duplicate-slot admission adds its
-> parse-mode-aware proof path to the governed cursor inventory, which is now 73 files, 7 complete / 1 pending,
+> parse-mode-aware proof path to the governed cursor inventory. Duplicate-slot public governance adds two
+> parse-mode-chapter scanner paths under `.9.1.9`, so it is now 75 files, 7 complete / 1 pending,
 > and 56 effective mutations. Identical dependency-regex identity `.9.1.8.1` and
 > final public no-drift `.9.1.9` remain dependency-ordered.
 > Behavior-free Lua/LuaJIT preflight `.9.1.7.0` now measures the exact starting
@@ -284,9 +285,13 @@ iteration.
 
 Choice is intentionally different. When two eligible choice slots match at the
 same earliest position, the first authored slot wins. This is stable source
-priority, not an attempt to recover identity from pattern text. The contract is
-`linkedspec-duplicate-regex-slot-identity-v1`; Perl, Rust, Dart, and Julia
-implement and admit it. Dual-ABI Lua remains the final backend lock.
+priority, not an attempt to recover identity from pattern text. A genuine
+single-choice `::|` rule therefore returns the first authored equal-start
+alternative. The contract is `linkedspec-duplicate-regex-slot-identity-v1`;
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT implement and admit it. Rollout is
+closed at 7 complete / 0 pending. Explicit repeated `::OR` is a different family;
+its action-result collection shape is tracked separately by
+`FUTURE-PARITY-BACKLOG.9.1.10`.
 
 ## Single choice: `:|`
 
@@ -905,5 +910,5 @@ normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary
 also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. One recurring gate now
 runs all six runtime legs, five cursor-owned primary cases across five commands and two environments, and the
 support ledgers. With the Julia duplicate-slot proof path classified, it currently reports 36 family spellings,
-18 edge cases, eight parent/child cases, 73 migration files, 7 complete / 1 pending, and 56 rejected drift
+18 edge cases, eight parent/child cases, 75 migration files, 7 complete / 1 pending, and 56 rejected drift
 mutations.

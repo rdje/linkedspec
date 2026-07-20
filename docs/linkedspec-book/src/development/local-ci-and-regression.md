@@ -193,15 +193,14 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
 two typed invariants, locks descriptor/trace identity and unchanged generated-source v2, inventories all six
-runtime legs, fixes the `.1-.7` migration, and rejects 41 mutations. Canonical CI tracks the contract, checker,
-and admitted Perl/Rust/Dart/Julia consumers. The default gate runs the checker and Perl consumer; complete backend
-drivers run the Rust, Dart, and Julia consumers:
+runtime legs, fixes the `.1-.7` migration, requires 22 public documents and 12 stale-current denials, and rejects
+59 mutations. Canonical CI tracks the contract, checker, every admitted consumer, and the recurring driver. The
+default gate runs the neutral checker and Perl consumer. Run the exact all-toolchain composition directly, or opt
+it into canonical CI:
 
 ```bash
-prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
-CARGO_TARGET_DIR=/tmp/linkedspec-rust-target bash tools/run_rust_local.sh
-bash tools/run_dart_local.sh
-LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh
+bash tools/check_duplicate_regex_slot_identity_five_backend.sh
+LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1 bash tools/run_ci_local.sh
 ```
 
 The consumer's 12 roles cover native and loaded execution, repeated duplicate and non-duplicate sequences,
@@ -215,8 +214,10 @@ as the generated payload, checks direct authored-alternative matching, loaded/re
 generated/native-trace/generated-trace/primary/diagnostic routes, and retains exact `{label, family}` plans.
 Julia's module-isolated 15-role consumer covers the same routes using direct authored-alternative matching and
 canonical normalized `SpecFile` JSON as its generated payload. It publishes descriptor/emitted identity, locks
-native/generated trace and typed failures, and retains exact `{label, family}` plans. Rollout is now 5 complete /
-2 pending: neutral, Perl, Rust, Dart, and Julia are complete; dual-ABI Lua is the next preserving-backend lock.
+native/generated trace and typed failures, and retains exact `{label, family}` plans. One shared Lua 15-role
+consumer covers the same topology on PUC Lua and LuaJIT. The recurring driver then runs the selected
+`success_and_rule_consumes` case across five commands and two environments plus the generated-source, capability,
+and language-coverage ledgers. Rollout is closed at 7 complete / 0 pending.
 Julia-local signoff is package 3,549, primary 65x2, and corpus 105/105; canonical Phase 0 is 1,031/1,031 in 623
 seconds.
 

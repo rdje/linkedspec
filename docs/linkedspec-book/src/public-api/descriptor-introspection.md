@@ -8,8 +8,9 @@
 > derived per-rule `family` / `cursor_policy` / `edge_ownership`, and normalized
 > `resolved_edges`. Perl, Rust, Dart, Julia, and dual-ABI Lua generated-source v2, option/CLI removal, and composed
 > cursor admission are complete through `.9.1.7.6`; recurring five-backend admission `.9.1.8` now composes all
-> six runtime legs and selected 5x2x5 primary proof. Duplicate regex-slot descriptor identity is admitted on Perl,
-> Rust, Dart, Julia, PUC Lua, and LuaJIT; only recurring/public no-drift remains dependency-ordered. Independently, root-selection parity is closed
+> six runtime legs and selected 5x2x5 primary proof. Duplicate regex-slot descriptor identity uses
+> `linkedspec-duplicate-regex-slot-identity-v1` and has admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT;
+> recurring/public no-drift is closed. Independently, root-selection parity is closed
 > at 7 complete / 0 pending. Its recurring
 > contract composes every immutable root-selection descriptor identity; Julia root admission composes the
 > root-selection descriptor identity through its exact 15-role consumer; the descriptor contains no cursor-owned
@@ -410,7 +411,7 @@ Important current fields include:
 
 - `descriptor_model`
 - `cursor_contract` (`linkedspec-rule-local-cursor-v1` on migrated Perl, Rust, Dart, and Julia)
-- `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl, Rust, Dart, and Julia)
+- `regex_slot_identity_contract` (`linkedspec-duplicate-regex-slot-identity-v1` on admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT)
 - `entry_rule_contract` (`linkedspec-root-rule-selection-v1` on admitted Perl, Rust, Dart, Julia, and Lua routes)
 - `definition_order`
 - `compiled_rule_order`

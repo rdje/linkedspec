@@ -122,6 +122,12 @@ complete / 0 pending, with `bash tools/check_root_rule_selection_five_backend.sh
 Canonical medium request trace records contain source, input, and top-rule identity but no
 global cursor field.
 
+Duplicate regex-slot identity is closed at 7 complete / 0 pending. Dart's direct
+authored-alternative matcher preserves the required target/index across native,
+normalized, generated, descriptor, trace, primary, and diagnostic routes. Run
+`bash tools/check_duplicate_regex_slot_identity_five_backend.sh` for the exact
+six-runtime recurring proof.
+
 Core/descriptor leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: one compiled resolver applies explicit
 selector > first authored marker > first authored rule before user code; validation accepts markerless sources,
 zero/unknown selection failures use the portable stages and codes, and descriptors retain immutable authored

@@ -97,6 +97,11 @@ same direct authored-slot matcher for ordered steps, emit
 `julia_runtime:regex_slot_selected`, and reject malformed caller-constructed
 compiled state at `validate_compiled_rule` before emission or plan execution.
 
+Dual-ABI Lua follows the same normalized-spec reconstruction boundary. With the
+exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers composed by
+`tools/check_duplicate_regex_slot_identity_five_backend.sh`, duplicate-slot parity is closed at
+7 complete / 0 pending without widening generated v2 plans.
+
 The original `emit_rust_source(&compiled) -> Result<String, String>` remains a
 compatibility adapter with `<inline>` identity. Generated `parse` and
 `parse_with_trace` likewise retain raw-string diagnostics, so adopting v2 does

@@ -36,6 +36,12 @@ complete / 0 pending; `bash tools/check_root_rule_selection_five_backend.sh` com
 other backend and the selected primary matrix.
 The final root-selection ledger is 7 complete / 0 pending.
 
+Duplicate regex-slot identity is closed at 7 complete / 0 pending. Julia uses
+direct authored-alternative matching and preserves target/index identity through
+normalized `SpecFile` reconstruction, emitted source, descriptors, trace,
+primary execution, and typed diagnostics. The recurring proof is
+`bash tools/check_duplicate_regex_slot_identity_five_backend.sh`.
+
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
 was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal

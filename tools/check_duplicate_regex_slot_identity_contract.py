@@ -35,6 +35,9 @@ TOP_LEVEL_FIELDS = {
     "lua_admission",
     "implementation_inventory",
     "migration",
+    "recurring_gate",
+    "public_contract",
+    "closure",
     "rollout",
     "canonical_ci",
 }
@@ -63,6 +66,35 @@ EXPECTED_RESULTS: dict[str, Any] = {
     "repeated_ordered_duplicate": [["a", "a"], ["a", "a"]],
     "repeated_non_duplicate_control": [["a", "b"], ["a", "b"]],
     "ordered_cross_target_duplicate": "cross-target-ok",
+}
+EXPECTED_SOURCES = {
+    "ordered_same_rule_duplicate": (
+        'Top::AND\n /a/ -> Top[0] { set(seen, "first") }\n'
+        ' /a/ -> Top[1] { return("ordered-ok") }\n'
+    ),
+    "choice_same_rule_duplicate": (
+        'Top::|\n /a/ -> Top[0] { return("first") }\n'
+        ' /a/ -> Top[1] { return("second") }\n'
+    ),
+    "repeated_ordered_duplicate": (
+        'Top::AND{2}\n I { set(pairs, []); set(pair, []) }\n'
+        ' /a/ -> Top[0] { push(pair, match_text()) }\n'
+        ' /a/ -> Top[1] { push(pair, match_text()) }\n'
+        ' IT { push(pairs, copy(pair)); set(pair, []) }\n'
+        ' E { return(copy(pairs)) }\n'
+    ),
+    "repeated_non_duplicate_control": (
+        'Top::AND{2}\n I { set(pairs, []); set(pair, []) }\n'
+        ' /a/ -> Top[0] { push(pair, match_text()) }\n'
+        ' /b/ -> Top[1] { push(pair, match_text()) }\n'
+        ' IT { push(pairs, copy(pair)); set(pair, []) }\n'
+        ' E { return(copy(pairs)) }\n'
+    ),
+    "ordered_cross_target_duplicate": (
+        'First:\n /a/\n\nSecond:\n /a/\n\nTop::AND\n'
+        ' -> First[0] { set(seen, "first-target") }\n'
+        ' -> Second[0] { return("cross-target-ok") }\n'
+    ),
 }
 DIAGNOSTICS = [
     (
@@ -146,7 +178,7 @@ ROLLOUT = [
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.9.1.8.1.6"),
     (
         "recurring_and_public_no_drift",
-        "pending",
+        "complete",
         "FUTURE-PARITY-BACKLOG.9.1.8.1.7",
     ),
 ]
@@ -271,6 +303,224 @@ LUA_ADMISSION = {
         "primary_command",
         "invalid_identity_diagnostics",
     ],
+}
+RECURRING_GATE = {
+    "driver": MIGRATION["recurring_driver"],
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "test_paths", "roles"],
+        "role_policy": "every admitted backend role is required; the shared Lua source runs once per ABI",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_paths": [PERL_ADMISSION["consumer"]],
+            "roles": PERL_ADMISSION["roles"],
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_paths": [RUST_ADMISSION["consumer"]],
+            "roles": RUST_ADMISSION["roles"],
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_paths": [DART_ADMISSION["consumer"]],
+            "roles": DART_ADMISSION["roles"],
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_paths": [JULIA_ADMISSION["consumer"]],
+            "roles": JULIA_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_paths": [LUA_ADMISSION["consumer"]],
+            "roles": LUA_ADMISSION["roles"],
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_paths": [LUA_ADMISSION["consumer"]],
+            "roles": LUA_ADMISSION["roles"],
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": ["success_and_rule_consumes"],
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+        "fixture_primary_policy": (
+            "Rust, Dart, Julia, PUC Lua, and LuaJIT admissions execute all five "
+            "neutral fixtures through their primary adapters"
+        ),
+    },
+    "support_checks": [
+        "tools/check_generated_source_contract.pl",
+        "tools/check_capability_conformance.pl",
+        "tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX",
+    },
+}
+PUBLIC_CONTRACT = {
+    "documents": [
+        {
+            "path": "README.md",
+            "required_markers": [MIGRATION["recurring_driver"], "7 complete / 0 pending"],
+        },
+        {
+            "path": "USER_GUIDE.md",
+            "required_markers": [
+                "Duplicate regex text does not merge structural slots",
+                "first authored eligible slot wins",
+            ],
+        },
+        {
+            "path": "rust/README.md",
+            "required_markers": ["Duplicate regex-slot identity is closed", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "dart/README.md",
+            "required_markers": ["Duplicate regex-slot identity is closed", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "julia/README.md",
+            "required_markers": ["Duplicate regex-slot identity is closed", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "lua/README.md",
+            "required_markers": ["Duplicate regex-slot identity is closed", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": ["7 complete / 0 pending", "59 rejected mutations", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "cli_conformance/README.md",
+            "required_markers": [MIGRATION["recurring_driver"], "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1"],
+        },
+        {
+            "path": "ROADMAP.md",
+            "required_markers": [
+                "Duplicate-slot rollout is closed at 7 complete / 0 pending",
+                MIGRATION["recurring_driver"],
+            ],
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "required_markers": [
+                "Duplicate-slot rollout is closed at 7 complete / 0 pending",
+                MIGRATION["recurring_driver"],
+            ],
+        },
+        {
+            "path": "ARCHITECTURE_STATE.md",
+            "required_markers": ["duplicate-slot recurring/public no-drift", "7 complete / 0 pending"],
+        },
+        {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "required_markers": [
+                "FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift",
+                "7 complete / 0 pending",
+            ],
+        },
+        {
+            "path": "docs/TASK_TREE.md",
+            "required_markers": ["duplicate-slot recurring/public no-drift is closed"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": ["7 complete / 0 pending", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "required_markers": ["single-choice `::|`", "7 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "required_markers": ["admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT", CONTRACT_ID],
+        },
+        {
+            "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+            "required_markers": ["duplicate-slot parity is closed", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "required_markers": ["recurring/public no-drift is closed", "7 complete / 0 pending"],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": ["duplicate-slot recurring gate", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "required_markers": ["LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "docs/knowledge/duplicate-regex-slot-identity-contract.md",
+            "required_markers": ["all seven rollout legs complete", MIGRATION["recurring_driver"]],
+        },
+        {
+            "path": "docs/knowledge/duplicate-regex-slot-identity-five-backend-admission.md",
+            "required_markers": ["7 complete / 0 pending", "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1"],
+        },
+    ],
+    "forbidden_current_claims": [
+        {"path": "README.md", "text": "Governance is 6 complete + 1 pending / 46 mutations"},
+        {"path": "capability_conformance/README.md", "text": "Governance is 6+1 with 46 rejected"},
+        {
+            "path": "ROADMAP.md",
+            "text": (
+                "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are now "
+                "5 complete + 2 pending / 41 mutations"
+            ),
+        },
+        {
+            "path": "ROADMAP_V2.md",
+            "text": "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are 5 complete + 2 pending / 41 mutations",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "Perl, Rust, Dart, and Julia implement and admit the contract",
+        },
+        {
+            "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+            "text": "Dual-ABI Lua remains the final backend lock",
+        },
+        {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "text": "on admitted Perl, Rust, Dart, and Julia)",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+            "text": "recurring/public closeout remains `.7`",
+        },
+        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "rejects 41 mutations"},
+        {"path": "docs/knowledge/duplicate-regex-slot-identity-contract.md", "text": "recurring closeout pending"},
+        {
+            "path": "docs/decisions/0047-duplicate-regex-slot-identity.md",
+            "text": "Status: accepted; backend rollout pending",
+        },
+        {
+            "path": "docs/decisions/INDEX.md",
+            "text": (
+                "| [0047](0047-duplicate-regex-slot-identity.md) | Duplicate regex text does not erase "
+                "structural slot identity | 2026-07-20 | accepted; backend rollout pending |"
+            ),
+        },
+    ],
+}
+CLOSURE = {
+    "final_leaf": "FUTURE-PARITY-BACKLOG.9.1.8.1.7",
+    "parent": TASK_OWNER,
+    "parent_status": "done",
+    "next_owner": "FUTURE-PARITY-BACKLOG.9.1.9",
 }
 
 
@@ -420,6 +670,10 @@ def validate_fixtures(contract: dict[str, Any]) -> None:
             isinstance(fixture["source"], str)
             and fixture["source"].endswith("\n"),
             f"{fixture_id} source bytes drifted",
+        )
+        require(
+            fixture["source"] == EXPECTED_SOURCES[fixture_id],
+            f"{fixture_id} exact source bytes drifted",
         )
         require(isinstance(fixture["input"], str), f"{fixture_id} input drifted")
         slots = validate_slots(fixture["slots"], fixture_id)
@@ -595,6 +849,9 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
         )
 
     require(contract["migration"] == MIGRATION, "migration inventory drifted")
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology drifted")
+    require(contract["public_contract"] == PUBLIC_CONTRACT, "public contract drifted")
+    require(contract["closure"] == CLOSURE, "closure contract drifted")
     rollout = contract["rollout"]
     require(isinstance(rollout, list), "rollout must be an array")
     require(
@@ -608,8 +865,8 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
         contract["canonical_ci"]
         == {
             "driver": "tools/run_ci_local.sh",
-            "mode": "unconditional_neutral_checker",
-            "backend_execution": "dependency_ordered_by_rollout",
+            "mode": "unconditional_neutral_checker_and_tracked_recurring_gate",
+            "backend_execution": "opt_in_all_toolchain_recurring_driver",
         },
         "canonical CI contract drifted",
     )
@@ -743,10 +1000,14 @@ def validate_filesystem_contract() -> None:
         "dependency_slot_map" in compiler_text,
         "Perl generated compiled-slot payload is missing",
     )
-    rust_helpers_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "helpers.rs").read_text(encoding="utf-8")
+    rust_helpers_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "helpers.rs").read_text(
+        encoding="utf-8"
+    )
     rust_engine_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "engine.rs").read_text(encoding="utf-8")
     rust_descriptor_text = (ROOT / "rust" / "linkedspec-core" / "src" / "descriptor.rs").read_text(encoding="utf-8")
-    rust_emitter_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "source_emitter.rs").read_text(encoding="utf-8")
+    rust_emitter_text = (ROOT / "rust" / "linkedspec-runtime" / "src" / "source_emitter.rs").read_text(
+        encoding="utf-8"
+    )
     require(
         "consume_slot_match" in rust_helpers_text and "seek_slot_match" in rust_helpers_text,
         "Rust required-slot matchers are missing",
@@ -767,7 +1028,9 @@ def validate_filesystem_contract() -> None:
     )
     dart_matching_text = (ROOT / "dart" / "lib" / "src" / "runtime" / "matching.dart").read_text(encoding="utf-8")
     dart_engine_text = (ROOT / "dart" / "lib" / "src" / "runtime" / "interpreter.dart").read_text(encoding="utf-8")
-    dart_compiler_text = (ROOT / "dart" / "lib" / "src" / "compiler" / "compiled_spec.dart").read_text(encoding="utf-8")
+    dart_compiler_text = (ROOT / "dart" / "lib" / "src" / "compiler" / "compiled_spec.dart").read_text(
+        encoding="utf-8"
+    )
     dart_emitter_text = (ROOT / "dart" / "lib" / "src" / "source_emitter.dart").read_text(encoding="utf-8")
     require(
         "matchAlternative" in dart_matching_text,
@@ -829,6 +1092,84 @@ def validate_filesystem_contract() -> None:
         "Lua generated-source slot-contract projection is missing",
     )
 
+    gate_path = ROOT / RECURRING_GATE["driver"]
+    require(gate_path.is_file(), "recurring duplicate-slot gate driver is missing")
+    require(gate_path.stat().st_mode & 0o111, "recurring duplicate-slot gate is not executable")
+    gate_text = gate_path.read_text(encoding="utf-8")
+    consumer_markers = {
+        "perl": "prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t",
+        "rust": "--test duplicate_regex_slot_identity_contract",
+        "dart": "test test/duplicate_regex_slot_identity_contract_test.dart",
+        "julia": 'include("julia/test/duplicate_regex_slot_identity_contract_test.jl")',
+        "puc_lua": '"$LUA_CMD" lua/test/duplicate_regex_slot_identity_contract_test.lua',
+        "luajit": '"$LUAJIT_CMD" lua/test/duplicate_regex_slot_identity_contract_test.lua',
+    }
+    for consumer in RECURRING_GATE["consumers"]:
+        for test_path in consumer["test_paths"]:
+            require(
+                (ROOT / test_path).is_file(),
+                f"recurring duplicate-slot consumer is missing: {test_path}",
+            )
+        require(
+            consumer_markers[consumer["runtime"]] in gate_text,
+            f"recurring duplicate-slot gate omits consumer: {consumer['runtime']}",
+        )
+
+    primary = RECURRING_GATE["primary_cli"]
+    require(
+        (ROOT / primary["matrix_driver"]).is_file()
+        and primary["matrix_driver"] in gate_text,
+        "recurring duplicate-slot gate omits the primary matrix driver",
+    )
+    manifest = json.loads((ROOT / "cli_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    manifest_ids = [case["id"] for case in manifest["cases"]]
+    for case_id in primary["case_ids"]:
+        require(
+            gate_text.count(f"--case {case_id}") == 1,
+            f"recurring duplicate-slot primary case drifted: {case_id}",
+        )
+        require(
+            manifest_ids.count(case_id) == 1,
+            f"recurring duplicate-slot manifest identity drifted: {case_id}",
+        )
+
+    for support_path in RECURRING_GATE["support_checks"]:
+        require(
+            (ROOT / support_path).is_file() and support_path in gate_text,
+            f"recurring duplicate-slot gate omits support check: {support_path}",
+        )
+
+    local_ci = RECURRING_GATE["local_ci"]
+    local_ci_text = (ROOT / local_ci["driver"]).read_text(encoding="utf-8")
+    require(
+        f"require_tracked_file {RECURRING_GATE['driver']}" in local_ci_text
+        and RECURRING_GATE["driver"] in local_ci_text
+        and local_ci["switch"] in local_ci_text,
+        "recurring duplicate-slot local-CI registration drifted",
+    )
+
+    for document in PUBLIC_CONTRACT["documents"]:
+        public_path = ROOT / document["path"]
+        require(public_path.is_file(), f"public duplicate-slot document is missing: {document['path']}")
+        public_text = public_path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            require(
+                marker in public_text,
+                f"public duplicate-slot marker is missing from {document['path']}: {marker}",
+            )
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        public_text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        require(
+            forbidden["text"] not in public_text,
+            f"stale public duplicate-slot claim remains in {forbidden['path']}: {forbidden['text']}",
+        )
+
+    parent_pattern = re.compile(
+        rf"- ID: `{re.escape(CLOSURE['parent'])}`\n  Status: `{CLOSURE['parent_status']}`"
+    )
+    require(parent_pattern.search(task_text) is not None, "duplicate-slot parent task is not closed")
+    require(CLOSURE["next_owner"] in task_text, "duplicate-slot next owner is missing")
+
 
 def expect_mutation_failure(
     contract: dict[str, Any], name: str, mutate: Callable[[dict[str, Any]], None]
@@ -878,39 +1219,96 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("duplicate legality", lambda value: value["identity"].__setitem__("duplicate_pattern_text_is_legal", False)),
         ("identity fields", lambda value: value["identity"].__setitem__("required_fields", ["regex_text"])),
         ("forbidden recovery", lambda value: value["identity"]["identity_recovery_forbidden"].pop()),
-        ("ordered algorithm", lambda value: value["selection"]["ordered"].__setitem__("algorithm", "combined_alternation")),
-        ("repeated reset", lambda value: value["selection"]["ordered"].__setitem__("repetition", "continue_last_slot")),
+        (
+            "ordered algorithm",
+            lambda value: value["selection"]["ordered"].__setitem__("algorithm", "combined_alternation"),
+        ),
+        (
+            "repeated reset",
+            lambda value: value["selection"]["ordered"].__setitem__("repetition", "continue_last_slot"),
+        ),
         ("choice tie", lambda value: value["selection"]["choice"].__setitem__("tie_break", "regex_text")),
         ("fixture omitted", remove_fixture),
         ("fixture result", change_fixture_result),
         ("fixture identity", change_fixture_identity),
+        (
+            "single-choice fixture mode",
+            lambda value: value["fixtures"][1].__setitem__(
+                "source", value["fixtures"][1]["source"].replace("Top::|", "Top::OR")
+            ),
+        ),
         ("diagnostic omitted", remove_diagnostic),
         ("diagnostic fields", lambda value: value["diagnostics"][1]["fields"].pop()),
         ("descriptor metadata", lambda value: value["descriptor_contract"].__setitem__("meta_value", "stale")),
-        ("generated format bump", lambda value: value["generated_source_v2"].__setitem__("plan_format_bump_required", True)),
+        (
+            "generated format bump",
+            lambda value: value["generated_source_v2"].__setitem__("plan_format_bump_required", True),
+        ),
         ("generated plan fields", lambda value: value["generated_source_v2"]["plan_row_fields"].append("regex_index")),
         ("trace identity", lambda value: value["trace_contract"]["fields"].remove("regex_index")),
         ("Perl admission consumer", lambda value: value["perl_admission"].__setitem__("consumer", "t/other.t")),
         ("Perl admission role", lambda value: value["perl_admission"]["roles"].pop()),
-        ("Perl ordered mechanism", lambda value: value["perl_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
+        (
+            "Perl ordered mechanism",
+            lambda value: value["perl_admission"].__setitem__("ordered_mechanism", "combined_alternation"),
+        ),
         ("Rust admission consumer", lambda value: value["rust_admission"].__setitem__("consumer", "rust/other.rs")),
         ("Rust admission role", lambda value: value["rust_admission"]["roles"].pop()),
-        ("Rust ordered mechanism", lambda value: value["rust_admission"].__setitem__("ordered_mechanism", "combined_alternation")),
-        ("Dart admission consumer", lambda value: value["dart_admission"].__setitem__("consumer", "dart/test/other.dart")),
+        (
+            "Rust ordered mechanism",
+            lambda value: value["rust_admission"].__setitem__("ordered_mechanism", "combined_alternation"),
+        ),
+        (
+            "Dart admission consumer",
+            lambda value: value["dart_admission"].__setitem__("consumer", "dart/test/other.dart"),
+        ),
         ("Dart admission role", lambda value: value["dart_admission"]["roles"].pop()),
-        ("Dart ordered mechanism", lambda value: value["dart_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
-        ("Julia admission consumer", lambda value: value["julia_admission"].__setitem__("consumer", "julia/test/other.jl")),
+        (
+            "Dart ordered mechanism",
+            lambda value: value["dart_admission"].__setitem__(
+                "ordered_mechanism", "match_required_pattern_then_reindex"
+            ),
+        ),
+        (
+            "Julia admission consumer",
+            lambda value: value["julia_admission"].__setitem__("consumer", "julia/test/other.jl"),
+        ),
         ("Julia admission role", lambda value: value["julia_admission"]["roles"].pop()),
-        ("Julia ordered mechanism", lambda value: value["julia_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
+        (
+            "Julia ordered mechanism",
+            lambda value: value["julia_admission"].__setitem__(
+                "ordered_mechanism", "match_required_pattern_then_reindex"
+            ),
+        ),
         ("Lua admission consumer", lambda value: value["lua_admission"].__setitem__("consumer", "lua/test/other.lua")),
         ("Lua admission role", lambda value: value["lua_admission"]["roles"].pop()),
-        ("Lua ordered mechanism", lambda value: value["lua_admission"].__setitem__("ordered_mechanism", "match_required_pattern_then_reindex")),
+        (
+            "Lua ordered mechanism",
+            lambda value: value["lua_admission"].__setitem__(
+                "ordered_mechanism", "match_required_pattern_then_reindex"
+            ),
+        ),
         ("inventory omission", remove_inventory),
-        ("Perl inventory regression", lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift")),
-        ("Rust inventory regression", lambda value: value["implementation_inventory"][1].__setitem__("ordered_status", "drift")),
-        ("Dart inventory regression", lambda value: value["implementation_inventory"][2].__setitem__("ordered_status", "drift")),
-        ("Julia inventory regression", lambda value: value["implementation_inventory"][3].__setitem__("ordered_status", "drift")),
-        ("Lua inventory regression", lambda value: value["implementation_inventory"][4].__setitem__("ordered_status", "drift")),
+        (
+            "Perl inventory regression",
+            lambda value: value["implementation_inventory"][0].__setitem__("ordered_status", "drift"),
+        ),
+        (
+            "Rust inventory regression",
+            lambda value: value["implementation_inventory"][1].__setitem__("ordered_status", "drift"),
+        ),
+        (
+            "Dart inventory regression",
+            lambda value: value["implementation_inventory"][2].__setitem__("ordered_status", "drift"),
+        ),
+        (
+            "Julia inventory regression",
+            lambda value: value["implementation_inventory"][3].__setitem__("ordered_status", "drift"),
+        ),
+        (
+            "Lua inventory regression",
+            lambda value: value["implementation_inventory"][4].__setitem__("ordered_status", "drift"),
+        ),
         ("Lua ABI identity", lambda value: value["implementation_inventory"][5].__setitem__("runtime", "lua")),
         ("migration checker", lambda value: value["migration"].__setitem__("checker", "tools/other.py")),
         ("Perl rollout regression", regress_perl),
@@ -919,6 +1317,21 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("Julia rollout regression", regress_julia),
         ("Lua rollout regression", regress_lua),
         ("neutral rollout regression", lambda value: value["rollout"][0].__setitem__("status", "pending")),
+        ("recurring backend omission", lambda value: value["recurring_gate"]["consumers"].pop()),
+        ("recurring role omission", lambda value: value["recurring_gate"]["consumers"][1]["roles"].pop()),
+        ("primary projection omission", lambda value: value["recurring_gate"]["primary_cli"]["case_ids"].pop()),
+        ("support-ledger omission", lambda value: value["recurring_gate"]["support_checks"].pop()),
+        (
+            "local CI registration omission",
+            lambda value: value["recurring_gate"]["local_ci"].__setitem__("switch", "wrong_switch"),
+        ),
+        ("recurring driver omission", lambda value: value["recurring_gate"].__setitem__("driver", "tools/missing.sh")),
+        ("public document omission", lambda value: value["public_contract"]["documents"].pop()),
+        ("public marker omission", lambda value: value["public_contract"]["documents"][0]["required_markers"].pop()),
+        ("forbidden current claim omission", lambda value: value["public_contract"]["forbidden_current_claims"].pop()),
+        ("final rollout regression", lambda value: value["rollout"][6].__setitem__("status", "pending")),
+        ("parent closure regression", lambda value: value["closure"].__setitem__("parent_status", "active")),
+        ("next-owner drift", lambda value: value["closure"].__setitem__("next_owner", "FUTURE-PARITY-BACKLOG.9.1.10")),
         ("canonical CI mode", lambda value: value["canonical_ci"].__setitem__("mode", "optional")),
     ]
     for name, mutate in mutations:
@@ -936,7 +1349,10 @@ def main() -> int:
         "duplicate-regex-slot identity contract: OK "
         f"({len(contract['fixtures'])} fixtures, {len(contract['diagnostics'])} diagnostics, "
         f"{len(contract['implementation_inventory'])} runtime rows, "
-        f"{complete} complete + {pending} pending rollout, {mutation_count} drift mutations)"
+        f"{complete} complete + {pending} pending rollout, "
+        f"{len(contract['public_contract']['documents'])} public documents, "
+        f"{len(contract['public_contract']['forbidden_current_claims'])} forbidden current claims, "
+        f"{mutation_count} drift mutations)"
     )
     return 0
 

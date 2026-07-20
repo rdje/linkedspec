@@ -51,7 +51,7 @@ with 54 rejected mutations and a 25-document public contract. Run
 Canonical local CI passes the complete 65-case reference command suite in both option environments and Phase 0
 1,031/1,031 in 642 seconds.
 
-Duplicate regex-slot identity is the active post-cursor frontier. Behavior-free audit
+Duplicate regex-slot identity is closed across all current runtime legs. Behavior-free audit
 `FUTURE-PARITY-BACKLOG.9.1.8.1.0` proves that compiled rules, descriptors, and generated-v2 payloads retain two
 identical authored slots, but ordered execution diverges afterward. Perl and Rust match one combined alternation,
 report the first duplicate branch, and reject it when a later sequence slot was required; their native/generated
@@ -79,9 +79,12 @@ rejected mutations.
 Julia `.5` replaces its behavior-preserving singleton-match/reindex seam with direct authored-alternative
 matching. Shared compiled-state validation, descriptor/emitted identity, native/generated slot trace, primary,
 and typed diagnostics pass one module-isolated exact 15-role consumer; generated source still reconstructs
-normalized `SpecFile` JSON and keeps the minimal plan. Governance is 5 complete + 2 pending with 41 rejected
-mutations. Julia signoff passes package 3,549, primary 65x2, corpus 105/105, and canonical Phase 0 1,031/1,031 in
-623 seconds. Dual-ABI Lua `.6` and recurring/public admission `.7` remain dependency-ordered. Rust signoff passes the complete Rust package and both 105-case
+normalized `SpecFile` JSON and keeps the minimal plan. Dual-ABI Lua `.6` preserves the same direct-slot contract
+through one shared 15-role consumer on PUC Lua and LuaJIT. Final `.7` adds no semantic path: it composes all six
+runtime admissions, selected 5x2x1 primary proof, and support ledgers through
+`tools/check_duplicate_regex_slot_identity_five_backend.sh`. Governance is 7 complete / 0 pending with 59
+rejected mutations and a 22-document public contract. Julia signoff passes package 3,549, primary 65x2, corpus
+105/105, and canonical Phase 0 1,031/1,031 in 623 seconds. Rust signoff passes the complete Rust package and both 105-case
 oracle/classifier layers, exact primary 65x2, Knowledge Map/mdBook/doctrines, and canonical Phase 0 1,031/1,031
 in 619 seconds.
 

@@ -613,7 +613,8 @@ The executable neutral contract is
 `linkedspec-duplicate-regex-slot-identity-v1`. It does not bump generated-source
 v2 because reconstructed compiled state already retains slot identity. Perl,
 Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted through `.2-.6`;
-recurring/public closeout remains `.7`.
+recurring/public no-drift is closed by `.7` at 7 complete / 0 pending. The exact
+composition proof is `tools/check_duplicate_regex_slot_identity_five_backend.sh`.
 
 ## 9. Zero-Progress Guard
 

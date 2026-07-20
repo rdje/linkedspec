@@ -627,6 +627,12 @@ PUC Lua and LuaJIT as part of the recurring five-backend proof.
 Function-shell semantics are not raw-scanned by Lua. The automatic path executes the cached owning grammar and
 stages body ASTs directly:
 
+Duplicate regex-slot identity is closed at 7 complete / 0 pending. Lua matches
+ordered rules' required authored alternative directly and preserves target/index
+identity across native, reconstructed, generated, descriptor, trace, primary,
+and diagnostic routes. The shared 15-role consumer runs once on PUC Lua and once
+on LuaJIT through `bash tools/check_duplicate_regex_slot_identity_five_backend.sh`.
+
 ```lua
 local staged = linkedspec.parse_spec_with_staged_user_function_definitions(source)
 ```

@@ -49,7 +49,7 @@
     {
       "id": "choice_same_rule_duplicate",
       "role": "choice",
-      "source": "Top::OR\n /a/ -> Top[0] { return(\"first\") }\n /a/ -> Top[1] { return(\"second\") }\n",
+      "source": "Top::|\n /a/ -> Top[0] { return(\"first\") }\n /a/ -> Top[1] { return(\"second\") }\n",
       "input": "a",
       "cursor_policy": "seek",
       "repeat_count": 1,
@@ -195,6 +195,76 @@
     "lua_consumer": "lua/test/duplicate_regex_slot_identity_contract_test.lua",
     "recurring_driver": "tools/check_duplicate_regex_slot_identity_five_backend.sh"
   },
+  "recurring_gate": {
+    "driver": "tools/check_duplicate_regex_slot_identity_five_backend.sh",
+    "consumer_schema": {
+      "fields": ["backend", "runtime", "test_paths", "roles"],
+      "role_policy": "every admitted backend role is required; the shared Lua source runs once per ABI"
+    },
+    "consumers": [
+      {"backend": "perl", "runtime": "perl", "test_paths": ["t/duplicate_regex_slot_identity_perl_contract.t"], "roles": ["neutral_fixtures", "live_ordered", "live_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "descriptor", "emitted_source", "generated_direct", "generated_trace", "invalid_identity_diagnostics"]},
+      {"backend": "rust", "runtime": "rust", "test_paths": ["rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs"], "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]},
+      {"backend": "dart", "runtime": "dart", "test_paths": ["dart/test/duplicate_regex_slot_identity_contract_test.dart"], "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]},
+      {"backend": "julia", "runtime": "julia", "test_paths": ["julia/test/duplicate_regex_slot_identity_contract_test.jl"], "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]},
+      {"backend": "lua", "runtime": "puc_lua", "test_paths": ["lua/test/duplicate_regex_slot_identity_contract_test.lua"], "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]},
+      {"backend": "lua", "runtime": "luajit", "test_paths": ["lua/test/duplicate_regex_slot_identity_contract_test.lua"], "roles": ["neutral_fixtures", "native_ordered", "native_choice", "repeated_ordered", "repeated_control", "cross_target", "loaded", "reconstructed", "descriptor", "emitted_source", "generated_direct", "native_trace", "generated_trace", "primary_command", "invalid_identity_diagnostics"]}
+    ],
+    "primary_cli": {
+      "matrix_driver": "tools/run_primary_cli_matrix.sh",
+      "case_ids": ["success_and_rule_consumes"],
+      "backend_count": 5,
+      "environments": ["default", "posix"],
+      "fixture_primary_policy": "Rust, Dart, Julia, PUC Lua, and LuaJIT admissions execute all five neutral fixtures through their primary adapters"
+    },
+    "support_checks": ["tools/check_generated_source_contract.pl", "tools/check_capability_conformance.pl", "tools/check_language_capability_coverage.pl"],
+    "local_ci": {"driver": "tools/run_ci_local.sh", "switch": "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX"}
+  },
+  "public_contract": {
+    "documents": [
+      {"path": "README.md", "required_markers": ["tools/check_duplicate_regex_slot_identity_five_backend.sh", "7 complete / 0 pending"]},
+      {"path": "USER_GUIDE.md", "required_markers": ["Duplicate regex text does not merge structural slots", "first authored eligible slot wins"]},
+      {"path": "rust/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "dart/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "julia/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "lua/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "capability_conformance/README.md", "required_markers": ["7 complete / 0 pending", "59 rejected mutations", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "cli_conformance/README.md", "required_markers": ["tools/check_duplicate_regex_slot_identity_five_backend.sh", "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1"]},
+      {"path": "ROADMAP.md", "required_markers": ["Duplicate-slot rollout is closed at 7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "ROADMAP_V2.md", "required_markers": ["Duplicate-slot rollout is closed at 7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "ARCHITECTURE_STATE.md", "required_markers": ["duplicate-slot recurring/public no-drift", "7 complete / 0 pending"]},
+      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift", "7 complete / 0 pending"]},
+      {"path": "docs/TASK_TREE.md", "required_markers": ["duplicate-slot recurring/public no-drift is closed"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "required_markers": ["single-choice `::|`", "7 complete / 0 pending"]},
+      {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT", "linkedspec-duplicate-regex-slot-identity-v1"]},
+      {"path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "required_markers": ["duplicate-slot parity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "required_markers": ["recurring/public no-drift is closed", "7 complete / 0 pending"]},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["duplicate-slot recurring gate", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": ["LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "docs/knowledge/duplicate-regex-slot-identity-contract.md", "required_markers": ["all seven rollout legs complete", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
+      {"path": "docs/knowledge/duplicate-regex-slot-identity-five-backend-admission.md", "required_markers": ["7 complete / 0 pending", "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1"]}
+    ],
+    "forbidden_current_claims": [
+      {"path": "README.md", "text": "Governance is 6 complete + 1 pending / 46 mutations"},
+      {"path": "capability_conformance/README.md", "text": "Governance is 6+1 with 46 rejected"},
+      {"path": "ROADMAP.md", "text": "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are now 5 complete + 2 pending / 41 mutations"},
+      {"path": "ROADMAP_V2.md", "text": "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are 5 complete + 2 pending / 41 mutations"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Perl, Rust, Dart, and Julia implement and admit the contract"},
+      {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "text": "Dual-ABI Lua remains the final backend lock"},
+      {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "text": "on admitted Perl, Rust, Dart, and Julia)"},
+      {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "recurring/public closeout remains `.7`"},
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "rejects 41 mutations"},
+      {"path": "docs/knowledge/duplicate-regex-slot-identity-contract.md", "text": "recurring closeout pending"},
+      {"path": "docs/decisions/0047-duplicate-regex-slot-identity.md", "text": "Status: accepted; backend rollout pending"},
+      {"path": "docs/decisions/INDEX.md", "text": "| [0047](0047-duplicate-regex-slot-identity.md) | Duplicate regex text does not erase structural slot identity | 2026-07-20 | accepted; backend rollout pending |"}
+    ]
+  },
+  "closure": {
+    "final_leaf": "FUTURE-PARITY-BACKLOG.9.1.8.1.7",
+    "parent": "FUTURE-PARITY-BACKLOG.9.1.8.1",
+    "parent_status": "done",
+    "next_owner": "FUTURE-PARITY-BACKLOG.9.1.9"
+  },
   "rollout": [
     {"capability": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.1"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.2"},
@@ -202,11 +272,11 @@
     {"capability": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.4"},
     {"capability": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.5"},
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.6"},
-    {"capability": "recurring_and_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.7"}
+    {"capability": "recurring_and_public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.9.1.8.1.7"}
   ],
   "canonical_ci": {
     "driver": "tools/run_ci_local.sh",
-    "mode": "unconditional_neutral_checker",
-    "backend_execution": "dependency_ordered_by_rollout"
+    "mode": "unconditional_neutral_checker_and_tracked_recurring_gate",
+    "backend_execution": "opt_in_all_toolchain_recurring_driver"
   }
 }

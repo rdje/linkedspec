@@ -1301,6 +1301,11 @@ selection role, target rule, and regex index. The same 15-role admission source
 passes 112 assertions on PUC Lua and LuaJIT; the complete driver retains 177
 package tests per ABI, primary 65/65 in both environments, and corpus 105/105.
 
+The duplicate-slot recurring gate is
+`tools/check_duplicate_regex_slot_identity_five_backend.sh`. It runs this shared
+consumer on both Lua ABIs and composes the Perl, Rust, Dart, and Julia admissions,
+selected primary case, and support ledgers in one omission-sensitive proof.
+
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with

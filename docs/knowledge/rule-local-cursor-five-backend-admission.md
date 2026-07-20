@@ -17,6 +17,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.8 adds `tools/check_rule_local_cursor_five_
 evidence_update_2026_07_19_runtime_proof: "The composed driver passes Perl 288, Rust and Dart exact admission consumers, Julia 104, PUC Lua 119, LuaJIT 119, the selected 5x2x5 primary projection, generated-source v1 support at 80/0/0, capability 80/0/0, and language coverage 246/105+1/122."
 evidence_update_2026_07_19_signoff: "Knowledge Map 635/4,670, mdBook, memory, all four doctrines, canonical primary 65/65 in both environments, and Phase 0 1,031/1,031 in 631 seconds pass. Exact cleanup leaves no Rust target, Dart tool cache, Julia depot, mdBook build, Python cache, or temporary LinkedSpec harness output."
 evidence_update_2026_07_20_julia_duplicate_slot: "Julia duplicate-slot admission adds one parse-mode-aware proof file to the cursor migration inventory under its existing Julia owner. Current governance is 73 files / 7 complete + 1 pending / 56 mutations; the recurring runtime topology and behavior remain unchanged."
+evidence_update_2026_07_20_duplicate_public_closeout: "Duplicate-slot public governance adds its contract and checker to pending cursor public owner .9.1.9 because both name the parse-mode mdBook chapter. Current governance is 75 files / 7 complete + 1 pending / 56 mutations; recurring cursor runtime topology and behavior remain unchanged."
 reverify: "bash tools/check_rule_local_cursor_five_backend.sh"
 ---
 

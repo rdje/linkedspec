@@ -65,6 +65,12 @@ Root-selection parity is closed at 7 complete / 0 pending. The recurring proof i
 `bash tools/check_root_rule_selection_five_backend.sh`; it composes this exact 15-role Rust admission with Perl,
 Dart, Julia, PUC Lua, LuaJIT, and the selected shared primary cases.
 
+Duplicate regex-slot identity is closed at 7 complete / 0 pending. Rust matches
+an ordered rule's required compiled slot directly, retains combined matching for
+choice, and preserves exact slot identity through descriptors, generated source,
+trace, and diagnostics. The cross-backend recurring proof is
+`bash tools/check_duplicate_regex_slot_identity_five_backend.sh`.
+
 ## Quick Start
 
 ```bash

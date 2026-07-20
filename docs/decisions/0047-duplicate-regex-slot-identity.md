@@ -1,7 +1,7 @@
 # 0047 - Duplicate regex text does not erase structural slot identity
 
 - Date: 2026-07-20
-- Status: accepted; backend rollout pending
+- Status: accepted; rollout complete
 - Tags: architecture, regex, slot-identity, and-rule, or-rule, repetition, descriptor, generated-source, trace, diagnostics, parity
 
 ## Context
@@ -74,9 +74,10 @@ same-rule ordered duplicates, duplicate choice, repeated ordered duplicates, a n
 cross-target duplicates. The independent checker evaluates the selection model, locks diagnostics/descriptors/
 generated/trace shapes, freezes the six-runtime inventory and migration paths, and rejects representative drift.
 
-This leaf changes no parser, compiler, runtime, descriptor, generated artifact, trace, fixture execution, CLI, or
-capability behavior. Rollout is dependency-ordered: Perl, Rust, Dart lock, Julia lock, dual-ABI Lua lock, then one
-recurring/public no-drift closeout.
+This decision leaf changed no parser, compiler, runtime, descriptor, generated artifact, trace, fixture execution,
+CLI, or capability behavior. Rollout then completed in dependency order: Perl, Rust, Dart, Julia, dual-ABI Lua,
+and one recurring/public no-drift closeout. The final recurring owner is
+`tools/check_duplicate_regex_slot_identity_five_backend.sh`; governance is 7 complete / 0 pending.
 
 ## Consequences
 

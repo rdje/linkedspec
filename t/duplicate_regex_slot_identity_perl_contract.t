@@ -119,7 +119,7 @@ sub role_live_choice {
  my ($fixture, $parser) = compile_fixture('choice_same_rule_duplicate');
  my ($result, $error, undef, $trace) = run_traced_parser($parser, $fixture->{input});
  is($error, '', 'live duplicate choice execution does not die');
- is_deeply($result, [$fixture->{expected_result}], 'live duplicate choice keeps first-authored action priority');
+ is($result, $fixture->{expected_result}, 'live single-choice duplicate keeps first-authored action priority');
  like($trace, qr/regex_slot_selected => TAKEN/, 'choice emits the portable slot-selection event');
  like($trace, qr/selection_role=choice/, 'choice trace reports choice role');
  like($trace, qr/target_rule=Top/, 'choice trace reports target rule');

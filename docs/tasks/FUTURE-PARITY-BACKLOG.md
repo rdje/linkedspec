@@ -3202,7 +3202,7 @@ before implementation.
   Status: `active`
   Goal: Ratify and dependency-order the corrected AND/OR edge-default and cursor contract before rollout.
   Children: `.9.1.0`, `.9.1.1`, `.9.1.2`, `.9.1.3`, `.9.1.4`, `.9.1.5`, `.9.1.6`, `.9.1.7`, `.9.1.8`,
-    `.9.1.8.1`, `.9.1.9`
+    `.9.1.8.1`, `.9.1.9`, `.9.1.10`
   Acceptance: Specify grammar and runtime semantics for mode-sensitive bare edge lines. In AND rules (`:&`, `::&`,
     `:AND`, `::AND`, and bounded/repeated variants), a bare `entry { ... }` line should mean an explicit
     blind-call `=> entry { ... }`; in OR/default rules, a bare `entry { ... }` line should mean an explicit
@@ -5960,7 +5960,7 @@ before implementation.
     a clean handoff before activating `.9.1.8.1` or public no-drift `.9.1.9`.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1`
-  Status: `active`
+  Status: `done`
   Goal: Decide and repair indexed dependency identity when one rule owns textually identical regex alternatives.
   Dependencies: `.9.1.8`
   Children: `.9.1.8.1.0`, `.9.1.8.1.1`, `.9.1.8.1.2`, `.9.1.8.1.3`, `.9.1.8.1.4`, `.9.1.8.1.5`,
@@ -5970,13 +5970,11 @@ before implementation.
     language-level expectation; implement the narrow compiler/runtime representation or emit a portable rejection;
     and lock repeated identical slots, actions, marks, generated plans, traces, and non-identical behavior without
     relying on author-written regex distinctions.
-  Verification: `Activated task-tree-first on 2026-07-19 only after recurring cursor admission `.9.1.8` landed
-    at clean commit `a1911ec6`. Audit `.0` landed at `4902f218`; neutral `.1` landed at clean commit `93ee7935`
-    with 5/2/6/1+6/23 governance. Perl repair `.2` landed at clean commit `568d3825` with 12 roles, 2+5/26
-    governance, canonical 1,031/615s, no generated artifacts, a zero-byte brief, and no background job. Rust
-    repair `.3` landed at clean commit `cad15db3`: required-slot execution, descriptor/generated-source identity,
-    stable diagnostics, native/generated trace, exact 15-role admission, complete Rust-local, KM/book/doctrines,
-    canonical 1,031/619s, and cleanup pass. Dart `.4` activates task-tree-first from that clean boundary.`
+  Verification: `Audit `.0` landed at `4902f218`; neutral `.1` at `93ee7935`; Perl `.2` at `568d3825`; Rust
+    `.3` at `cad15db3`; Dart `.4` at `0e2807c2`; Julia `.5` at `01f2e574`; and dual-ABI Lua `.6` at `9211c9a8`.
+    Final recurring/public `.7` composes the exact 12/15/15/15/15x2 role admissions, selected 5x2x1 primary
+    proof, three support ledgers, 22 current public documents, 12 stale-current denials, and 59 mutations. The
+    seven-leg rollout is closed at 7 complete / 0 pending without a new semantic path.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.0`
@@ -6342,13 +6340,40 @@ before implementation.
     using the existing module namespace; a Knowledge Map card preserves this maintenance constraint.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.8.1.7`
-  Status: `pending`
+  Status: `done`
   Goal: Close duplicate-slot identity with recurring five-backend and public no-drift admission.
   Dependencies: `.9.1.8.1.6`
   Acceptance: Compose every admitted runtime/generated role, exact primary/corpus cases, public guidance, capability
     truth, migration/stale guards, and independent mutations; close `.9.1.8.1` only with clean canonical proof.
-  Verification: `pending`
+  Verification: **PASS 2026-07-20.** Activated task-tree-first from clean Lua commit `9211c9a8`. The contract, exact
+    recurring driver, CI switch, corrected genuine single-choice `::|` fixture, 22 public documents, 12 stale-
+    current denials, two Knowledge Map cards, and 59-mutation campaign are complete. Exact recurring proof passes:
+    Perl 12 roles; Rust/Dart/Julia 15 roles; PUC Lua/LuaJIT 112 assertions each; primary 5x2x1; generated-source
+    10/1/8+105; capability 80/0/0; language coverage 246/105+1/122. A first run exposed only an empty Julia depot
+    default; the repaired driver prepends a disposable writable depot to Julia's installed stack. The selected
+    primary helper now creates only its first writable depot entry, preventing a colon-literal artifact. Canonical
+    local CI passes root 7+5, cursor 288, duplicate Perl 12, primary 65x2, and Phase 0 1,031/1,031 in 640 seconds.
+    KM 645/4,745, mdBook, all four doctrines, syntax, whitespace, and exact generated-artifact cleanup pass. The
+    duplicate contract/checker name the parse-mode mdBook chapter and are classified under cursor public owner
+    `.9.1.9`, advancing only that inventory from 73 to 75 files at unchanged 7+1/56.
   Commit: `pending`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / FREEZE THE COMPLETE SURFACE** — Follow the Knowledge Map to ADR `0047`, the neutral checker,
+    all five backend consumers and both Lua ABIs, emitted/generated/descriptor/trace/diagnostic roles, exact
+    primary/corpus support ledgers, recurring-driver precedents, public documents, and canonical registration.
+  - [x] **ADD ONE OMISSION-SENSITIVE RECURRING GATE** — Compose every declared backend consumer and generated role,
+    both Lua ABIs, exact selected primary and corpus/support proof, and the neutral model without adding a semantic
+    execution path.
+  - [x] **CLOSE PUBLIC / CAPABILITY NO-DRIFT** — Make current guidance, backend/API companions, mdBook, capability
+    truth, Knowledge Map, migration inventory, and stale-claim guards state the complete contract exactly.
+  - [x] **ADVANCE ONLY FINAL ROLLOUT / CLOSE PARENT** — Reject missing, skipped, stale, asymmetric, public, support,
+    driver, registration, rollout, and parent-status mutations; complete only recurring/public `.7` and close
+    `.9.1.8.1` after every constituent remains admitted.
+  - [x] **PROVE / LOCKSTEP / COMMIT** — Pass the recurring gate, focused and canonical proof, mdBook/KM/doctrines,
+    exact cleanup, and whitespace; synchronize task/index/roadmaps/live/memory/changes/notes and commit `.7` before
+    selecting any later leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.9.1.9`
   Status: `pending`
@@ -6359,6 +6384,23 @@ before implementation.
     stale current `parse_mode` guidance and v1 generated admission fail mechanically while explicit historical
     evidence remains classified. Close `.9.1`/`.9` only when all backend and public projections are exact.
   Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1.10`
+  Status: `pending`
+  Goal: Decide and align explicit repeated-OR action-edge result shape across all five backends.
+  Dependencies: `.9.1.9`
+  Acceptance: Reproduce `Rule::OR`, bounded `OR{N,M}`, and single-choice `Rule::|` with duplicate and distinct
+    action-edge patterns across native, loaded, generated, traced, primary, and corpus routes. Decide whether
+    explicit repeated OR returns the Perl reference's per-hit collection or a single direct action value; preserve
+    `::|` as non-repeating single choice; then split any behavior migration and public no-drift work before code.
+  Verification: `Discovered and root-caused during duplicate-slot closeout `.9.1.8.1.7`. The neutral choice fixture
+    used `Top::OR` but declared scalar `"first"`. Perl primary returns `["first"]`; Rust, Dart, Julia, and Lua
+    primary adapters return `"first"`. `return_descriptor` classifies Perl `::OR` as looping `REP_ACODE`, and
+    `dump_parser_source` shows `_emit_rep_acode_handler` rewrites action return into `$Top`, pushes it into
+    `@Top_collect`, and returns the collection. `Top::|` instead selects non-looping `OR_ACODE` and returns the
+    scalar on every intended single-choice path. Duplicate-slot `.7` corrects its identity fixture to `::|` and
+    does not decide or change the broader explicit-OR result contract.`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.10`
@@ -8914,7 +8956,7 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 218.5 | `FUTURE-PARITY-BACKLOG.9.1.7.5` | `done` | Global API/CLI/trace ownership removed; exact 96/96x2, package 177/177x2, primary 65/65x4, corpus 105/105x2, governance 68/5+3/44, KM 631/4,632, canonical 1,031/646s, and cleanup pass. |
 | 218.6 | `FUTURE-PARITY-BACKLOG.9.1.7.6` | `done` | Exact 15-role admission passes 119x2, package 177x2, primary 65x4, corpus 105x2, 69/6+2/49 governance, KM/mdBook/doctrines, and canonical 1,031/647s. |
 | 219 | `FUTURE-PARITY-BACKLOG.9.1.8` | `done` | Recurring six-runtime plus selected 5x2x5 cursor admission passes at 72/7+1/56; KM 635/4,670, canonical 1,031/631s, lockstep, and cleanup pass from clean base `6693ffb4`. |
-| 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `active` | Duplicate-slot identity is split into audit, neutral contract, five backend lanes, and recurring/public closeout `.0-.7`. |
+| 219.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1` | `done` | Duplicate-slot identity is closed across audit, neutral contract, five backend lanes, and recurring/public closeout `.0-.7` at 7/0/59. |
 | 219.1.0 | `FUTURE-PARITY-BACKLOG.9.1.8.1.0` | `done` | Exact six-runtime native/generated ordered/choice audit, repeated/control evidence, mechanism split, KM 636/4,678, canonical 1,031/619s, lockstep, and cleanup pass without behavior changes. |
 | 219.1.1 | `FUTURE-PARITY-BACKLOG.9.1.8.1.1` | `done` | ADR 0047, 5 fixtures, 2 diagnostics, 6 runtime rows, 1+6 rollout, 23 mutations, KM 637/4,685, canonical 1,031/635s, lockstep, and cleanup pass without backend behavior changes. |
 | 219.1.2 | `FUTURE-PARITY-BACKLOG.9.1.8.1.2` | `done` | Required-slot Perl execution and its 12-role admission pass at 2+5/26, KM 638/4,693, canonical 1,031/615s, lockstep, and exact cleanup before Rust `.3`. |
@@ -8922,8 +8964,9 @@ task-tree-first from that clean boundary; option removal `.5`, admission `.6`, a
 | 219.1.4 | `FUTURE-PARITY-BACKLOG.9.1.8.1.4` | `done` | Direct authored-slot matching and exact 15-role Dart admission pass at 4+3/36; complete Dart, KM/mdBook/doctrines, canonical 1,031/616s, and cleanup signoff precede Julia `.5`. |
 | 219.1.5 | `FUTURE-PARITY-BACKLOG.9.1.8.1.5` | `done` | Direct authored-slot matching and exact module-isolated 15-role Julia admission pass at 5+2/41; package 3,549, primary 65x2, corpus 105, KM 641/4,720, canonical 1,031/623s, and cleanup signoff pass before Lua `.6`. |
 | 219.1.6 | `FUTURE-PARITY-BACKLOG.9.1.8.1.6` | `done` | Direct authored-slot matching and one shared exact 15-role consumer pass 112x2; complete package 177x2, primary 65x2, corpus 105, 6+1/46 governance, KM 643/4,735, canonical 1,031/653s, and cleanup signoff pass before `.7`. |
-| 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `pending` | Close recurring five-backend and public no-drift admission. |
+| 219.1.7 | `FUTURE-PARITY-BACKLOG.9.1.8.1.7` | `done` | Six-runtime recurring composition, 5x2x1 primary/support proof, 22 public documents, 12 stale denials, 59 mutations, KM 645/4,745, and canonical 1,031/640s close duplicate-slot rollout at 7/0; cursor cross-contract inventory is 75/7+1/56. |
 | 220 | `FUTURE-PARITY-BACKLOG.9.1.9` | `pending` | Close public no-drift, migration guidance, and parent status. |
+| 220.1 | `FUTURE-PARITY-BACKLOG.9.1.10` | `pending` | Decide explicit repeated-OR action result shape after the duplicate-slot fixture correction exposed Perl collection versus four-backend scalar drift. |
 | 221 | `FUTURE-PARITY-BACKLOG.5.2.4` | `done` | Dart shares typed helper/control truth, eager values, pre-effect arity, and every native/generated role. |
 | 222 | `FUTURE-PARITY-BACKLOG.5.2.5` | `done` | Julia retains eager typed truth and adds exact pre-effect arity across native/generated roles. |
 | 223 | `FUTURE-PARITY-BACKLOG.5.2.6` | `done` | Both Lua ABIs share typed truth, exact arity, and native/generated/primary behavior. |
@@ -10000,6 +10043,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-20`: Duplicate-slot recurring/public closeout `.9.1.8.1.7` is signoff-complete from clean base
+  `9211c9a8`. Six-runtime recurring and selected 5x2x1 primary/support proof pass; governance closes at
+  7/0/59 with 22 required documents and 12 stale-current denials. Cursor cross-contract inventory is
+  75/7+1/56. KM 645/4,745, mdBook/four doctrines, canonical root 7+5, cursor 288, duplicate Perl 12, primary
+  65x2, and Phase 0 1,031/1,031 in 640 seconds pass. Exact cleanup completes signoff before the commit and clean
+  public cursor no-drift `.9.1.9` pivot.
+- `2026-07-20`: Clean commit `9211c9a8` lands dual-ABI Lua duplicate-slot repair/admission `.9.1.8.1.6`; tracked
+  and untracked state is clean, the brief is zero bytes, ahead is 250, and generated task artifacts are absent.
+  Final recurring/public no-drift `.9.1.8.1.7` activates task-tree-first before recurring or public edits.
 - `2026-07-20`: Dual-ABI Lua duplicate-slot `.9.1.8.1.6` selects an existing authored alternative directly,
   validates target/child identity across compile/runtime/emitter/generated-plan boundaries, projects exact
   descriptor/emitted/trace/diagnostic identity, and passes one byte-identical 15-role consumer at 112x2. The

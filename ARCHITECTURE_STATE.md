@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-20`
+- `2026-07-20` duplicate-slot recurring/public no-drift refresh: final leaf
+  `FUTURE-PARITY-BACKLOG.9.1.8.1.7` adds no semantic execution path. One omission-sensitive recurring driver
+  composes the exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions, selected 5x2x1 primary AND-consume
+  proof, and generated/capability/language-coverage ledgers. The executable contract requires 22 current public
+  documents, forbids 12 stale current claims, rejects 59 mutations, and closes rollout at
+  7 complete / 0 pending. Its two parse-mode-chapter scanner paths are classified under cursor public owner
+  `.9.1.9`, advancing only that inventory to 75 files / 7 complete + 1 pending / 56 mutations. The driver is
+  `tools/check_duplicate_regex_slot_identity_five_backend.sh`. KM 645/4,745, mdBook/four doctrines, canonical
+  root 7+5, cursor 288, duplicate Perl 12, primary 65x2, and Phase 0 1,031/1,031 in 640 seconds pass.
 - `2026-07-20` duplicate regex-slot contract refresh: ADR `0047` and
   `linkedspec-duplicate-regex-slot-identity-v1` make the audited boundary executable without changing a backend.
   Duplicate pattern text stays legal; structural identity is target rule plus regex index, with ADR `0045`'s
