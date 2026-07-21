@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl source/projections/native static query implemented; observations and admission pending
+- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl source/projections/native query/runtime observations implemented; admission pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -382,6 +382,16 @@ costs, explanations, and portable response diagnostics match all 19 static canon
 does not compile, execute, read a path, enable trace, expose host state, or retain caller mutations. The twentieth
 `runtime_events` response, route equivalence, composed Perl admission, other backends, and MCP remain later leaves;
 rollout/admission therefore remain 1/9 and 0/6.
+
+Perl leaf `.10.3.5` adds the optional execution authority without changing that model. Normal parser invocation may
+receive a `semantic_observation_sink` callback. `LinkedSpec::RuntimeSemanticObservation` delivers typed
+`regex_slot_selected` events from the same exact target/index/position seam as selected-slot trace and one final
+`rule_result` event from the invocation wrapper. It has distinct descriptor slots and control-error identity from
+both textual trace and diagnostic output. The caller then passes the completed event array to
+`$index->with_execution_observation(...)`, which returns a new immutable index and never executes. The base index
+remains static. Direct, loaded, captured/emitted generated direct/Get/traced, and validated-plan routes produce the
+same three-event canonical runtime snapshot and twentieth response digest. Perl admission remains `.10.3.6`, so
+rollout/admission remain 1/9 and 0/6.
 
 ## Links
 

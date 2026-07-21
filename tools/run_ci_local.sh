@@ -181,9 +181,12 @@ require_tracked_file t/semantic_index_perl_foundation.t
 require_tracked_file t/semantic_index_perl_static_projection.t
 require_tracked_file t/semantic_index_perl_calls_projection.t
 require_tracked_file t/semantic_index_perl_query.t
+require_tracked_file t/semantic_index_perl_runtime_observation.t
 require_tracked_file perl/LinkedSpec/SemanticCallProjection.pm
 require_tracked_file perl/LinkedSpec/SemanticQuery.pm
+require_tracked_file perl/LinkedSpec/SemanticRuntimeProjection.pm
 require_tracked_file perl/LinkedSpec/SemanticStaticProjection.pm
+require_tracked_file perl/LinkedSpec/RuntimeSemanticObservation.pm
 require_tracked_file tools/check_aggregate_selector_retirement.py
 require_tracked_file tools/check_public_aggregate_selector_surface.py
 require_tracked_file tools/check_executable_aggregate_selector_sources.py
@@ -252,12 +255,15 @@ perl -c -Iperl t/semantic_index_perl_foundation.t
 perl -c -Iperl t/semantic_index_perl_static_projection.t
 perl -c -Iperl t/semantic_index_perl_calls_projection.t
 perl -c -Iperl t/semantic_index_perl_query.t
+perl -c -Iperl t/semantic_index_perl_runtime_observation.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
 perl -c -Iperl perl/LinkedSpec/SemanticCallProjection.pm
 perl -c -Iperl perl/LinkedSpec/SemanticQuery.pm
+perl -c -Iperl perl/LinkedSpec/SemanticRuntimeProjection.pm
 perl -c -Iperl perl/LinkedSpec/SemanticStaticProjection.pm
+perl -c -Iperl perl/LinkedSpec/RuntimeSemanticObservation.pm
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -292,6 +298,9 @@ PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t
 
 log "running Perl immutable semantic capabilities/query evaluator"
 PERL5LIB= prove -Iperl t/semantic_index_perl_query.t
+
+log "running Perl typed runtime semantic observation and route projection"
+PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

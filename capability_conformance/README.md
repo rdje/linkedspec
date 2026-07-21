@@ -34,8 +34,12 @@ identity, Unicode coordinates, interleaved function masking, immutable plain-dat
 generated implementation text. Query leaf `.10.3.4` adds
 `PERL5LIB= prove -Iperl t/semantic_index_perl_query.t`: native `$index->capabilities` and `$index->query(...)`
 match all 19 static canonical response digests, plus strict request/error, privacy, paging, traversal, budget/cost,
-clone/silence, and no-recompile/no-path proof. Runtime observation and a composed admission consumer remain
-`.10.3.5-.10.3.6`, so neither rollout ledger advances.
+clone/silence, and no-recompile/no-path proof. Runtime leaf `.10.3.5` adds typed invocation-local slot/result
+capture plus immutable post-execution derivation. `PERL5LIB= prove -Iperl
+t/semantic_index_perl_runtime_observation.t` matches the twentieth exact response across native, loaded,
+captured/emitted generated direct/Get/traced, and validated-plan roles while proving failure identity and
+trace/diagnostic non-interference. The composed admission consumer remains `.10.3.6`, so neither rollout ledger
+advances.
 
 Run its structural and ownership gate from the repository root:
 

@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.5 — capture Perl runtime semantics
+
+Perl parser invocation now accepts an optional `semantic_observation_sink` callback separate from textual trace
+and `diagnostic_sink`. New owner `LinkedSpec::RuntimeSemanticObservation` synchronously delivers typed
+`LinkedSpec::RuntimeSemanticObservationEvent` objects for every exact selected regex slot and the final entry-rule
+result. Slot identity comes from the same `HandlerVariantEmitter` target/index/position seam as selected-slot
+trace; final result/input identity comes from the live or generated invocation wrapper. No sink means a no-op.
+
+`$index->with_execution_observation(\@events)` validates a completed native event sequence and returns a new opaque
+immutable `LinkedSpec::SemanticIndex`. New `LinkedSpec::SemanticRuntimeProjection` adds execution/event records and
+`observed_as` relations to a clone of the static projection, reuses its canonical ordering owner, and derives value
+shapes from static rule/edge authority rather than host runtime types. The base index remains static, caller
+mutation cannot alter the derived snapshot, and querying never compiles or executes.
+
+`t/semantic_index_perl_runtime_observation.t` locks 106 assertions. The canonical `ab\n` observation selects
+`Top[0]`/`Top[1]` at positions 1/2 and reports the final result at position 2 with identity over all three input
+bytes. Its twentieth query response matches SHA-256 `36897041...` through direct, loaded-spec, portable-loader,
+captured generated direct/Get, independently loaded generated direct/traced, and validated reconstructed-plan
+roles. Malformed/foreign observations fail structurally; observer exceptions retain exact identity; result, input,
+cursor, generated-plan, trace, and diagnostic streams remain unchanged. The 11-suite adjacent gate passes 468
+assertions. Composed Perl admission stays owned by `.10.3.6`; neutral rollout/admission remain 1/9 and 0/6.
+
+Complete signoff passes the primary CLI manifest at 66/66 in both default and POSIX environments, standalone
+Phase 0 at 1,031/1,031 in 639 seconds, and the complete local CI gate through its independently repeated
+1,031/1,031 Phase 0 leg in 650 seconds. The gate also locks semantic governance at 6/20/57, the Knowledge Map at
+658 facts / 4,857 questions, and all four doctrines. Safe disk-pressure cleanup removed reproducible Rust/Dart
+build caches, inactive Claude session trees, and orphaned large `/private/tmp` probes while preserving the only
+session with open files; reported free space rose from 27 GiB to 117 GiB.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.4 — expose immutable Perl semantic queries
 
 The opaque Perl semantic index now exposes `$index->capabilities` and `$index->query($request)`. New lazy owner

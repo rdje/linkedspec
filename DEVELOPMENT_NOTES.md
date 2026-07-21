@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.5` — runtime introspection is caller-owned evidence, not a query side
+  effect): the exact runtime snapshot needs two distinct seams. `HandlerVariantEmitter` already resolves the
+  accepted structural slot to target rule, authored regex index, and post-match cursor for every handler variant;
+  the live/generated invocation wrappers already own selected entry rule, original input, final cursor/result, and
+  control-error propagation. A dedicated typed sink composes those meanings without coupling semantic events to
+  trace text or diagnostic output.
+
+  The observer has its own descriptor sink/control slots. Slot delivery happens immediately after accepted-slot
+  resolution; final delivery happens after the existing successful invocation/trace exit. A callback exception is
+  marked before rethrow so the inner `SpecEntry` wrapper and generated outer wrapper preserve the exact caller
+  object rather than normalize it as a parser failure. With no callback, slot and final emitters return before
+  allocating events or hashing input. With a callback, the input digest covers the complete original byte string:
+  the canonical fixture is `ab\n`, not `ab`, which is why its identity begins `a63d8014`.
+
+  Runtime projection deliberately never inspects the returned Perl value. It verifies typed event schema,
+  entry-rule identity, and that every observed target slot is selected by the recorded executing rule, then reuses
+  static edge/rule `value_shape` facts. This preserves the neutral rule that a backend cannot infer stronger facts
+  from host runtime types. The base index keeps its static projection; the derived object owns a cloned additive
+  projection, so event/response mutation is harmless and a query remains executable with `run_get` replaced by a
+  die. RED was 12/55 only at absent observation behavior; GREEN is 106 assertions plus 468 adjacent assertions.
+  Canonical primary 66x2, standalone Phase 0 1,031/1,031 in 639 seconds, and complete local CI through repeated
+  Phase 0 in 650 seconds pass. Admission and both rollout ledgers remain unchanged for `.10.3.6`. A concurrent safe
+  artifact sweep removed only reproducible build trees and inactive temporary sessions, retained the sole temp
+  session with open files, and raised reported free space from 27 GiB to 117 GiB.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.4` — a semantic query is a projection evaluator, not another compiler):
   the exact v1 query boundary needs only the immutable normalized records, relations, source-reference table, and
   snapshot facts already retained by the index. `SemanticIndex` therefore lazy-dispatches a cloned plain projection

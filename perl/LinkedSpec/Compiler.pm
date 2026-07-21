@@ -15,6 +15,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
+use LinkedSpec::RuntimeSemanticObservation ();
 use LinkedSpec::EntryRuleSelection ();
 
 use constant {
@@ -130,6 +131,7 @@ sub _generated_source_preamble {
   . "use LinkedSpec::GeneratedSource ();\n"
   . "use LinkedSpec::EntryRuleSelection ();\n"
   . "use LinkedSpec::RuntimeDiagnosticOutput ();\n"
+  . "use LinkedSpec::RuntimeSemanticObservation ();\n"
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
@@ -234,6 +236,9 @@ sub Execute {
  my \$diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(
   \$invocation_options,
  );
+ my \$semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options(
+  \$invocation_options,
+ );
  my \$explicit_entry_rule = \$LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;
  if (ref(\$invocation_options) eq 'HASH'
   && defined(\$invocation_options->{top_rule})
@@ -270,8 +275,15 @@ sub Execute {
  );
  my \$sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
  my \$control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
+ my \$semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();
+ my \$semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();
  local \$descr->{\$sink_slot} = \$diagnostic_sink;
  local \$descr->{\$control_error_slot} = undef;
+ local \$descr->{\$semantic_sink_slot} = \$semantic_observation_sink;
+ local \$descr->{\$semantic_control_error_slot} = undef;
+ my \$semantic_input_identity = defined(\$semantic_observation_sink)
+  ? LinkedSpec::RuntimeSemanticObservation::input_identity(\$input_ref)
+  : undef;
  LinkedSpec::GeneratedSource::trace_role(
   role => 'generated_entry_selection',
   source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
@@ -306,9 +318,15 @@ sub Execute {
   status => \$ok ? 'ok' : 'error',
  );
  die \$execution_error
-  if !\$ok && LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error(
-   \$descr,
-   \$execution_error,
+  if !\$ok && (
+   LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error(
+    \$descr,
+    \$execution_error,
+   )
+   || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error(
+    \$descr,
+    \$execution_error,
+   )
   );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
@@ -319,6 +337,12 @@ sub Execute {
   handler_family => \$entry_family,
   detail => \$execution_error,
  ) unless \$ok;
+ LinkedSpec::RuntimeSemanticObservation::emit_rule_result(
+  \$descr,
+  rule_label => \$entry_rule,
+  position => pos(\$\$input_ref),
+  input_identity => \$semantic_input_identity,
+ );
  return \$result
 }
 
@@ -1614,10 +1638,18 @@ if ($validate_dependency_regex_references_error) {
  }
  _trace_decision('validate_input_ref', 1, 'Top-level parser received SCALAR reference input', DUMP_DEBUG);
  my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options($_[1]);
+ my $semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options($_[1]);
  my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
  my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
+ my $semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();
+ my $semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();
  local $final_descriptor->{$sink_slot} = $diagnostic_sink;
  local $final_descriptor->{$control_error_slot} = undef;
+ local $final_descriptor->{$semantic_sink_slot} = $semantic_observation_sink;
+ local $final_descriptor->{$semantic_control_error_slot} = undef;
+ my $semantic_input_identity = defined($semantic_observation_sink)
+  ? LinkedSpec::RuntimeSemanticObservation::input_identity($input_ref)
+  : undef;
 
  my $retv;
  my $eval_ok = eval {
@@ -1626,7 +1658,8 @@ if ($validate_dependency_regex_references_error) {
  };
   my $eval_error = $@;
   unless ($eval_ok) {
-   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($final_descriptor, $eval_error)) {
+   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($final_descriptor, $eval_error)
+    || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($final_descriptor, $eval_error)) {
     _trace_decision("invoke_top_rule_control:$top_rule", 1, $eval_error, DUMP_DEBUG);
     _trace_exit($runtime_scope, { status => 'control', stage => 'invoke_top_rule', returned_defined => 0, return_ref => ref($eval_error) || '', return_size => undef }, DUMP_HIGH);
     die $eval_error
@@ -1668,6 +1701,12 @@ if ($validate_dependency_regex_references_error) {
     return_size => (ref($retv) eq 'ARRAY') ? scalar(@$retv) : undef,
    },
    DUMP_HIGH
+  );
+  LinkedSpec::RuntimeSemanticObservation::emit_rule_result(
+   $final_descriptor,
+   rule_label => $top_rule,
+   position => pos($$input_ref),
+   input_identity => $semantic_input_identity,
   );
   return $retv
  }

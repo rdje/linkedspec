@@ -2,7 +2,8 @@
 # Package: LinkedSpec::SemanticIndex
 # Purpose: Own immutable Perl semantic-index construction, strict source
 #          normalization, source mapping, compiled/failed outcomes, and the
-#          public lazy capabilities/query gateway.
+#          public lazy capabilities/query gateway and immutable runtime
+#          observation derivation.
 #------------------------------------------------------------------------------
 package LinkedSpec::SemanticIndex;
 
@@ -186,6 +187,7 @@ sub create {
   compilation_error => $compilation_error,
   descriptor_authority => $state_name eq 'compiled' ? $descriptor : undef,
   static_projection => $static_projection,
+  query_projection => $static_projection,
   top_rule => defined($top_rule) ? "$top_rule" : undef,
  };
  return $self
@@ -219,7 +221,7 @@ sub capabilities {
   __PACKAGE__,
   'LinkedSpec::SemanticQuery',
   'capabilities',
-  _clone_plain_data(_state($self)->{static_projection}),
+  _clone_plain_data(_state($self)->{query_projection}),
  )
 }
 
@@ -229,9 +231,28 @@ sub query {
   __PACKAGE__,
   'LinkedSpec::SemanticQuery',
   'evaluate',
-  _clone_plain_data(_state($self)->{static_projection}),
+  _clone_plain_data(_state($self)->{query_projection}),
   $request,
  )
+}
+
+sub with_execution_observation {
+ my ($self, $observation) = @_;
+ my $state = _state($self);
+ my $runtime_projection = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::SemanticRuntimeProjection',
+  'build',
+  _clone_plain_data($state->{static_projection}),
+  $observation,
+ );
+ my $token = 0;
+ my $derived = bless \$token, __PACKAGE__;
+ $STATE_BY_ADDRESS{refaddr($derived)} = {
+  %$state,
+  query_projection => $runtime_projection,
+ };
+ return $derived
 }
 
 sub _foundation_source_identity {

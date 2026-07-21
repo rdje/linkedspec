@@ -402,7 +402,7 @@ sub _slot_identity_condition {
         . ', $$required_slot{label}, $$required_slot{idx}) }';
 }
 
-sub _slot_selection_trace {
+sub _slot_selection_observation_and_trace {
     my (%args) = @_;
     my $selection_role = $args{selection_role};
     my $target_rule_expr;
@@ -418,7 +418,13 @@ sub _slot_selection_trace {
         $target_rule_expr = $dependency_ref . '->{label}';
         $regex_index_expr = $dependency_ref . '->{idx}';
     }
-    return _trace_branch_statement(
+    my $observation = ($args{indent} // '')
+        . 'LinkedSpec::RuntimeSemanticObservation::emit_slot_selected('
+        . '$descr, rule_label => ' . _quote_perl_string($args{label})
+        . ', target_rule => ' . $target_rule_expr
+        . ', regex_index => ' . $regex_index_expr
+        . ', position => pos($$STRING));' . "\n";
+    my $trace = _trace_branch_statement(
         enabled => $args{enabled},
         indent => $args{indent},
         label => $args{label},
@@ -433,6 +439,7 @@ sub _slot_selection_trace {
         ],
         details_expr => 'sub { "compiled_structural_slot" }',
     );
+    return $observation . $trace;
 }
 
 #------------------------------------------------------------------------------
@@ -641,7 +648,7 @@ sub _emit_default_handler {
         ],
         details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
     );
-    my $slot_trace = _slot_selection_trace(
+    my $slot_trace = _slot_selection_observation_and_trace(
         enabled => $trace_enabled,
         indent => '  ',
         label => $label,
@@ -858,7 +865,7 @@ sub _emit_and_single_acode_handler {
         ],
         details_expr => 'sub { "expected_index=0" }',
     );
-    my $slot_trace = _slot_selection_trace(
+    my $slot_trace = _slot_selection_observation_and_trace(
         enabled => $trace_enabled,
         indent => ' ',
         label => $label,
@@ -971,7 +978,7 @@ sub _emit_and_acode_seq_handler {
         ],
         details_expr => 'sub { "expected_index=$idx" }',
     );
-    my $slot_trace = _slot_selection_trace(
+    my $slot_trace = _slot_selection_observation_and_trace(
         enabled => $trace_enabled,
         indent => '  ',
         label => $label,
@@ -1098,7 +1105,7 @@ sub _emit_or_acode_handler {
         ],
         details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
     );
-    my $slot_trace = _slot_selection_trace(
+    my $slot_trace = _slot_selection_observation_and_trace(
         enabled => $trace_enabled,
         indent => ' ',
         label => $label,
@@ -1636,7 +1643,7 @@ sub _emit_rep_acode_handler {
         ],
         details_expr => 'sub { "return_ref=" . (ref($' . $label . ') || "") }',
     );
-    my $slot_trace = _slot_selection_trace(
+    my $slot_trace = _slot_selection_observation_and_trace(
         enabled => $trace_enabled,
         indent => '    ',
         label => $label,

@@ -792,7 +792,12 @@ content migration exists yet.
   19 static canonical response digests for capabilities/list/get/relations/explain, structural source privacy,
   canonical pages, filtered directional breadth-first traversal, logical budgets/costs, and portable query errors
   without compilation, execution, path reads, trace changes, or mutable aliases. Runtime observation/routes and
-  exact Perl admission remain `.10.3.5-.10.3.6`, so rollout/admission stay 1/9 and 0/6.
+  exact Perl admission were split deliberately. Runtime leaf `.10.3.5` now adds the invocation-local
+  `semantic_observation_sink`, typed exact regex-slot/final-result events, and
+  `$index->with_execution_observation(\@events)`. The derived immutable snapshot matches the twentieth canonical
+  runtime response across direct, loaded, captured/emitted generated direct/Get/traced, and validated-plan routes;
+  observer failure identity and trace/diagnostic neutrality are exact. Querying still never executes. Composed
+  Perl admission remains `.10.3.6`, so rollout/admission stay 1/9 and 0/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

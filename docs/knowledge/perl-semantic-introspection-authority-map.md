@@ -20,8 +20,9 @@ reverify: rg -n "return_descriptor|runtime_ctx_ref|parse_action_block|LinkedSpec
 Perl's semantic index must compose existing authorities rather than serialize one host object: strict decoded
 source plus canonical UTF-8 bytes; the outward descriptor's deterministic graph/function facts; typed ActionIR
 for nested call/binding spans; function staged payload/job/result records; runtime-context compile diagnostics;
-and generated-v2 plan metadata. The descriptor contains coderefs/compiled regexes, generated metadata is not a
-semantic snapshot, and `RuntimeContext`/text trace has no typed invocation-local semantic-event sink.
+and generated-v2 plan metadata. The descriptor contains coderefs/compiled regexes and generated metadata is not a
+semantic snapshot. Runtime leaf `.10.3.5` now supplies the previously absent typed invocation-local semantic-event
+sink separately from `RuntimeContext`, text trace, and diagnostic output.
 
 `LinkedSpec::Get` is character-oriented: passing the privacy fixture's raw UTF-8 bytes makes the Unicode rule
 label fail validation, while strict `Encode::decode(..., FB_CROAK)` compiles the exact `Töp` label. Public loaders
@@ -34,7 +35,9 @@ binding facts from descriptor plus typed ActionIR, explicit staged payload/job/r
 sidecars, and generated-plan identity from shared generated-v2 owners. Descriptor function and ActionIR spans are
 character offsets; only `SemanticSourceMap` converts the final references to bytes and scalar columns. Query leaf
 `.10.3.4` consumes only the cloned plain projection and exposes exact static capabilities/query without reopening
-any authority. Observations and admission remain `.10.3.5-.10.3.6`. See [[perl-semantic-static-projection]],
+any authority. `.10.3.5` composes slot/result events from runtime handlers plus invocation wrappers and derives an
+immutable runtime projection after execution; admission remains `.10.3.6`. See [[perl-semantic-runtime-observation]],
+[[perl-semantic-static-projection]],
 [[perl-semantic-call-staged-projection]], [[perl-semantic-query-evaluator]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[semantic-introspection-neutral-contract]], and
 [[perl-generated-source-contract-v2]].

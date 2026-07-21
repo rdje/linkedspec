@@ -1,8 +1,9 @@
 # Semantic Introspection
 
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
-native static query surface: opaque construction, exact static plus call/staged/generated projections, and public
-`capabilities`/`query` answers. Runtime observations and backend admission are still pending. The distinction
+native query surface: opaque construction, exact static plus call/staged/generated projections, public
+`capabilities`/`query` answers, and optional caller-captured runtime observations. Backend admission is still
+pending. The distinction
 matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -11,6 +12,8 @@ matters:
 - `LinkedSpec::semantic_index(...)` constructs an opaque compiled-or-failed Perl snapshot and retains clone-safe
   static plus compiled call/staging/generated records/relations;
 - `$index->capabilities` and `$index->query($request)` expose the exact v1 static answer surface today; and
+- `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
+  and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
@@ -84,6 +87,51 @@ for my $rule (@{$answer->{records}}) {
 Queries never compile, execute, read a path, enable trace, or mutate the request. Invalid requests are returned as
 portable response diagnostics rather than host exceptions.
 
+Capture runtime facts during a normal parser invocation, then derive a separate immutable index:
+
+```perl
+my $runtime_source = <<'SPEC';
+Top::OR{2}
+ /a/ -> Top[0] { return("A") }
+ /b/ -> Top[1] { return("B") }
+SPEC
+my $parser = LinkedSpec::Get(\$runtime_source);
+my $runtime_base_index = LinkedSpec::semantic_index(
+  \$runtime_source,
+  logical_name => "runtime.spec",
+  source_detail_ceiling => "text",
+);
+my @events;
+my $input = "ab\n";
+my $value = $parser->(
+  \$input,
+  {semantic_observation_sink => sub { push @events, $_[0] }},
+);
+
+my $runtime_index = $runtime_base_index->with_execution_observation(\@events);
+my $runtime_answer = $runtime_index->query({
+  contract => "linkedspec-semantic-query-v1",
+  operation => "list",
+  subjects => [],
+  record_kinds => ["execution", "event"],
+  relation_kinds => [],
+  direction => "outgoing",
+  page => {after_id => undef, limit => 100},
+  budget => {max_records => 1000, max_relations => 2000, max_depth => 4},
+  source => {detail => "identity", include_content_digest => JSON::PP::false},
+});
+```
+
+The sink receives `LinkedSpec::RuntimeSemanticObservationEvent` objects synchronously. Slot events contain the
+executing rule, exact selected target rule/authored regex index, and post-match position. The final event contains
+the selected entry rule, final position, `succeeded` status, and `input:sha256:...` identity over every original
+input byte, including a trailing newline. If the callback dies, its exact exception identity is rethrown. The
+observer is separate from textual trace and `diagnostic_sink`; all three can be active together.
+
+The base `$index` stays static. Derivation validates native event type/schema, selected rule/slot topology, final
+entry result, and input identity, copies the observation, and returns a different opaque index. Later caller
+mutation cannot alter it. A query never captures events or runs a parser itself.
+
 The internal source mapper is already exact: zero-based half-open strict-UTF-8 byte offsets, one-based lines,
 one-based Unicode-scalar columns, rejected mid-codepoint ranges, and deterministic cursor-ordered lookup for
 duplicate source text. Record-specific correlation is now performed only after compilation, against descriptor
@@ -115,7 +163,7 @@ backend AST/IR, object identities, and paths are rejected at the clone boundary.
 The focused projection test materializes internal source keys and deep-compares the complete graph, Unicode privacy
 at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
 neutral oracle. The public evaluator now owns query-time source redaction, pages, traversal, budgets, and costs.
-Execution observations, route identity, and the composed consumer remain later leaves.
+The composed Perl admission consumer remains a later leaf; runtime projection is described below.
 
 ## Current private call, staging, and generated projection
 
@@ -168,7 +216,7 @@ function therefore cannot become a synthetic bare edge.
 These projection mechanics remain internal implementation evidence, while their normalized records are now
 callable through the public query surface. Returned answers contain only canonical JSON data and booleans: no
 descriptor coderef/compiled regex, raw function record, ActionIR layout, generated source, object identity, or
-path. Runtime observations, route equivalence, and Perl admission remain `.10.3.5-.10.3.6`.
+path. Runtime observation/routes are now implemented by `.10.3.5`; Perl admission remains `.10.3.6`.
 
 ## Why this is separate from the descriptor
 
@@ -193,7 +241,7 @@ semantic snapshot:
 | typed ActionIR AST | source-preorder calls, bindings, and nested spans | private resolution, portable shapes, and evidence now projected |
 | runtime context | structured compilation failure | static unknown-rule normalization now implemented; other portable failures remain later |
 | generated-source v2 owners | contract/format and handler family | separate generated-artifact relation now projected; never snapshot reconstruction |
-| runtime handlers | exact accepted slot and final-result seams | a new invocation-local typed observation sink separate from trace |
+| runtime handlers | exact accepted slot and final-result seams | typed invocation-local observation delivery now implemented separately from trace/diagnostics |
 
 The query evaluator is deliberately not another semantic authority. It receives one cloned plain-data projection,
 selects and redacts it under the v1 protocol, and returns a fresh plain-data response.
@@ -377,15 +425,17 @@ Digests are `sha256:` plus lowercase hex over the exact source bytes. A query ab
 never silently downgraded. The Unicode fixture locks uppercase id escaping, multibyte offsets, scalar columns,
 redaction, excerpt, and digest behavior.
 
-## Runtime observations do not execute parsers
+## Runtime observations do not make queries execute parsers
 
 A semantic query is read-only. It cannot compile a spec, evaluate an action, run a parser, load an undeclared
-file, or enable tracing. Runtime records appear only when the caller gives the index an already captured immutable
+file, or enable tracing. Runtime records appear only when the caller gives the index an already completed typed
 execution observation. A failed compilation may still produce a diagnostic-only semantic snapshot.
 
-The current Perl index reports `has_execution` and `execution_observation` as false. Its 19 static canonical
-answers are available now; the twentieth `runtime_events` case and direct/loaded/generated route equivalence remain
-owned by `.10.3.5`.
+The base Perl index reports `has_execution` and `execution_observation` as false. A derived index reports both as
+true and adds `execution:0`, two exact slot events, one final rule-result event, and their `observed_as` relations
+for the canonical `Top::OR{2}` / `ab\n` fixture. All 20 canonical answers are available through the native API.
+Direct parsers, loaded specs, portable loader results, captured generated source, independently loaded generated
+`Execute`/`Get`/`ExecuteWithTrace`, and validated reconstructed plans produce the same observation and response.
 
 ## Executable oracle
 
@@ -424,6 +474,17 @@ canonical requests, and compares every full response digest. Additional cases lo
 privacy, clone isolation, silence, path/host-layout denial, and successful query evaluation while the compilation
 entrypoint is disabled.
 
+The runtime route gate is:
+
+```bash
+PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
+```
+
+Its 106 assertions match the twentieth response digest across eight execution roles, preserve exact result/input/
+cursor and generated-plan behavior, reject malformed or foreign observations, prove derived queries work with the
+execution entrypoint replaced by a die, preserve exact observer exception identity, and compare trace plus
+diagnostic streams with and without semantic capture.
+
 The static rule facts also have an authority outside the semantic model. The checker reads
 `linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
 entry/repetition from each exact header, and reconciles rule ownership with normalized edge records. Therefore a
@@ -454,7 +515,8 @@ The dependency order is:
 | `.10.3.3.0-.10.3.3.1.0` | correct generated family and spec identity before projection | complete |
 | `.10.3.3.1.1` | Perl private calls/bindings/staged/generated projection | implemented; admission unchanged |
 | `.10.3.4` | Perl capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
-| `.10.3.5-.10.3.6` | Perl runtime observations/routes and admission | pending |
+| `.10.3.5` | Perl runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
+| `.10.3.6` | composed Perl semantic admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
@@ -467,7 +529,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Perl callers can use the native static query surface now. Runtime-event answers are not available until `.10.3.5`,
-and no backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
+Perl callers can use the native static and caller-captured runtime query surface now. No backend may claim
+semantic-introspection admission until its composed conformance leaf closes. Other
 backends should continue using their existing descriptor APIs described in
 [Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.

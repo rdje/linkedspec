@@ -8,23 +8,37 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.4` is complete and canonical-green from clean calls projection `b4805f23` at ahead
-  269; final commit/clean verification is in progress. Public Perl `capabilities`/`query` match all 19 static
-  canonical response digests plus exact privacy, paging, filtered BFS, budget/cost, errors, clone/silence/no-
-  recompile/no-path boundaries. Runtime observations/routes `.10.3.5` is next after the clean commit.
+- `FUTURE-PARITY-BACKLOG.10.3.5` is signoff-complete from clean immutable-query commit `91b0c9b0` at ahead 270.
+  Typed invocation-local slot/result capture and immutable post-execution derivation match the twentieth exact
+  response across eight direct/loaded/generated/traced/reconstructed roles. Focused runtime 106, adjacent 468,
+  semantic 6/20/57, KM 658/4,857, primary 66x2, standalone Phase 0 1,031/1,031 in 639 seconds, complete local CI
+  through repeated Phase 0 in 650 seconds, doctrines, mdBook, and safe artifact cleanup pass. This commit closes the
+  leaf; composed admission `.10.3.6` follows only from the clean boundary.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
 observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
-rollout legs and native backend admission 0/6: Perl static capabilities/query now exist, but runtime observation,
-route equivalence, and the composed backend consumer do not. Query implementation changes neither ledger.
+rollout legs and native backend admission 0/6: Perl static capabilities/query and runtime observation/routes now
+exist, but only the composed `.10.3.6` consumer can advance admission. This implementation changes neither ledger.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.5 — capture Perl runtime semantics**
+  (DONE in this commit from base `91b0c9b0`).
+
+  **Result:** Perl exposes caller-owned typed slot/final runtime evidence and immutable post-execution semantic
+  derivation without query execution, trace/diagnostic coupling, host-type inference, or rollout promotion.
+
+  **Proof:** Runtime 106 across eight roles, adjacent 468, semantic 6/20/57, KM 658/4,857, primary 66x2,
+  standalone Phase 0 1,031/1,031 in 639 seconds, and complete local CI through Phase 0 in 650 seconds. Safe cleanup
+  raised reported free space from 27 GiB to 117 GiB while retaining the only live temp session.
+
+  **Next:** Activate composed Perl semantic admission `.10.3.6` task-tree-first after this clean commit.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.4 — expose immutable Perl semantic queries**
-  (DONE and canonical-green from base `b4805f23`; commit in progress).
+  (DONE at clean commit `91b0c9b0` from base `b4805f23`).
 
   **Result:** The opaque Perl semantic index exposes exact immutable v1 capabilities/list/get/relations/explain
   queries without compilation, execution, path reads, trace, host-layout leakage, or caller-visible mutation.

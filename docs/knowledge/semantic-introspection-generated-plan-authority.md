@@ -32,7 +32,7 @@ The private Perl calls/staging projector now consumes this correction without du
 `LinkedSpec::GeneratedSource` owns both contract identity and handler-variant classification, while `Compiler` and
 `SemanticCallProjection` delegate to it. This refactor preserves emitted behavior and keeps implementation source
 outside the semantic record. The later Perl query leaf exposes that record through the public immutable evaluator;
-runtime observations, rollout, and backend admission remain pending.
+runtime observation is now supplied separately by `.10.3.5`. Rollout and backend admission remain pending.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-introspection-static-rule-authority]],
 [[perl-semantic-introspection-authority-map]], [[perl-generated-source-contract-v2]].

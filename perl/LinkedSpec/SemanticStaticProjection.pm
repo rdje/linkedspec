@@ -1034,6 +1034,13 @@ sub _canonicalize {
  }
 }
 
+# Internal shared ordering owner for additive runtime projections. Callers must
+# supply the same closed record/relation shapes accepted by build().
+sub canonicalize {
+ my ($projection) = @_;
+ return _canonicalize($projection)
+}
+
 sub _rule_id {
  my ($label) = @_;
  return 'rule:' . _escape_name($label)

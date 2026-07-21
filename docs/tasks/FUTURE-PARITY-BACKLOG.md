@@ -7345,7 +7345,7 @@ before implementation.
   - [x] **LOCKSTEP** — API/docs/book/task/index/roadmaps/architecture/live/memory/KM and commit workflow are exact.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.5`
-  Status: `pending`
+  Status: `done`
   Goal: Add opt-in non-interfering Perl execution observations across native, loaded, and generated routes.
   Depends on: `.10.3.4`
   Acceptance: Add an invocation-local typed observation sink separate from trace and diagnostic output; emit exact
@@ -7354,6 +7354,49 @@ before implementation.
     Prove byte/result/error/trace/diagnostic neutrality when absent or present, observer failure identity, exact
     runtime model/query answers, and equivalent direct parser, loaded spec, captured generated source, independently
     loaded generated direct/traced, and reconstructed plan roles.
+  Verification: Activated task-tree-first from clean immutable-query commit `91b0c9b0` at ahead 270;
+    `git_message_brief.txt` is zero bytes and no untracked/generated artifact is present. Retrieve the exact runtime
+    observation oracle, trace/diagnostic separation, handler-entry/slot/result seams, and direct/loaded/generated
+    route authorities through the Knowledge Map and LinkedSpec toolbox before implementation. Retrieval confirmed
+    the runtime oracle's `execution:0` plus three ordered events: `Top` slots 0/1 at positions 1/2 and the final
+    `Top` result at position 2, with response digest `36897041...`. The pre-edit descriptor reports `REP_ACODE`,
+    resolved slot rows 0/1, and result `["A", "B"]` at position 2; an otherwise valid
+    `semantic_observation_sink` option currently receives zero events. Generated-source lines 42/50 and the traced
+    route prove `HandlerVariantEmitter::_slot_selection_trace` already owns exact target/index/position, while live
+    `Compiler` lines 1616-1672 and generated `Execute` lines 231-322 own invocation setup, final result, and exact
+    control-failure propagation. `RuntimeDiagnosticOutput` supplies the independent typed-callback/error-identity
+    precedent; `SpecEntry` line 340 is the inner control-failure normalization boundary. Loaded/captured/emitted/
+    independently evaluated generated direct/traced routes all reconstruct or execute those shared owners. RED
+    `t/semantic_index_perl_runtime_observation.t` is syntax-clean and fails 12/55 only at the intended gap: all
+    eight routes deliver zero semantic events, the native index has no observation derivation method, observer
+    failures/types are not active, and trace/diagnostic coexistence has no semantic stream; all pre-existing
+    result/input/cursor/generated-plan/trace/diagnostic behavior remains green inside the same lock. GREEN is
+    106 assertions: all eight required routes match the exact three-event sequence and twentieth response digest,
+    base/derived immutability and no-execute queries are exact, malformed/foreign observations reject, slot/final
+    observer exceptions preserve identity, and trace/diagnostic streams are unchanged. Eleven adjacent semantic,
+    handler, generated, diagnostic, root, and cursor suites pass 468 assertions. Canonical primary passes 66/66
+    in both default and POSIX environments. Standalone Phase 0 passes 1,031/1,031 in 639 seconds; the complete local
+    CI gate repeats all doctrine, semantic 6/20/57, focused/contract, primary 66x2, and Phase 0 1,031/1,031 checks,
+    with the registered Phase 0 leg completing in 650 seconds and the gate exiting 0. Memory, Knowledge Map
+    658/4,857, mdBook, whitespace, and lockstep checks pass. Disk-pressure cleanup removed the reproducible
+    `rust/target` and `dart/.dart_tool` trees plus inactive Claude temporary sessions and four orphaned large Rust
+    probe files while retaining the sole session with open files; reported free space rose from 27 GiB to 117 GiB.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read the canonical runtime-event/query target and probe exact existing
+    execution, slot-selection, final-result, trace, diagnostic, loader, and generated-route seams before code.
+  - [x] **RED / ORACLE** — Lock the missing `runtime_events` response plus absent/present observer neutrality and
+    route equivalence against current behavior before production edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Identify one invocation-local typed observation owner and the smallest
+    shared runtime seams that cover exact slot selection and final result without trace coupling.
+  - [x] **FIX** — Add opt-in caller-owned capture and immutable post-execution snapshot derivation without making
+    queries execute or changing default parser, error, trace, diagnostic, loader, or generated behavior.
+  - [x] **ADDRESSED (verified)** — Match the twentieth canonical response and all required native/loaded/generated/
+    traced/reconstructed roles with stable identities, positions, ordering, and observer-failure behavior.
+  - [x] **NO REGRESSION** — Static semantic responses, parser results/bytes/errors, trace/diagnostic contracts,
+    generated source, primary behavior, and canonical Phase 0 remain exact; admission stays owned by `.10.3.6`.
+  - [x] **LOCKSTEP** — API/docs/book/task/index/roadmaps/architecture/live/memory/KM and commit workflow are exact.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.6`
   Status: `pending`
@@ -9634,10 +9677,11 @@ than caller logical identity. Correction `.10.3.3.1.0` passes semantic 6/20/57, 
 KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds at clean commit `7d9077c4`. Projector child `.1.1`
 then completed the exact 22/25 calls/staged/generated target with Unicode/interleaving/privacy locks, semantic
 6/20/57, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds.
-Immutable capabilities/query/privacy/budgets `.10.3.4` is complete and canonical-green from clean commit
-`b4805f23` at ahead 269: all 19 static digests, 26 request/error boundaries, primary 66x2, and Phase 0
-1,031/1,031 in 643 seconds pass. Its commit is in progress; runtime observations/routes `.10.3.5` is the precise
-next action after the clean boundary. Rollout/admission remain 1/9 and 0/6.
+Immutable capabilities/query/privacy/budgets `.10.3.4` is clean at `91b0c9b0` after all 19 static digests,
+26 request/error boundaries, primary 66x2, and Phase 0 1,031/1,031 in 643 seconds. Runtime observations/routes
+`.10.3.5` is active from that boundary: exact typed slot/result capture and immutable derivation pass 106 assertions
+across eight direct/loaded/generated roles, the adjacent 11-suite gate passes 468, and KM is 658/4,857. Canonical
+signoff is next. Rollout/admission remain 1/9 and 0/6.
 
 ### Historical frontier sequence
 
@@ -10023,7 +10067,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.3.1.0 | `FUTURE-PARITY-BACKLOG.10.3.3.1.0` | `done` | Correct and independently gate the calls spec name against logical identity at semantic 6/20/57 and canonical Phase 0 1,031/1,031. |
 | 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `done` | Exact private calls/staged/generated projection passes canonical Phase 0 1,031/1,031. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `done` | Exact immutable capabilities/query/privacy/page/budget behavior passes all 19 static digests and canonical Phase 0 1,031/1,031. |
-| 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
+| 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `done` | Typed execution observations match the twentieth digest across eight routes and pass complete canonical signoff. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -10691,12 +10735,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Strict source/map/outcome `.10.3.1` is active from clean commit `e679a3eb`.
+- None. Composed Perl semantic admission `.10.3.6` is next after the clean `.10.3.5` commit.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.5` | Typed invocation-local observation owner; exact slot/final events; immutable runtime derivation; twentieth digest across eight direct/loaded/generated/traced/reconstructed roles; RED 12/55 to focused 106 and adjacent 468; semantic 6/20/57; KM 658/4,857; mdBook, memory, task, four doctrines, whitespace; canonical primary 66x2; standalone Phase 0 1,031/1,031 in 639s; complete local gate including registered Phase 0 in 650s; disk-pressure cleanup from 27 GiB to 117 GiB free while retaining the only live temp session. | PASS. Runtime evidence is caller-owned and query-pure; observer failures preserve exact identity; parser/result/input/cursor/trace/diagnostic/generated behavior is unchanged; rollout/admission remain 1/9 and 0/6, and `.10.3.6` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.3.0` | Knowledge Map and Toolbox retrieval; exact `Get(return_descriptor)`, `runtime_ctx_ref`, bootstrap, typed ActionIR, lowering, and generated-v2 probes across every neutral source family; raw-byte Unicode failure plus strict-decode success; six-child dependency split; KM 650/4,790; mdBook, memory, task, four doctrines, whitespace, selector 59/27/0; semantic 6/20/50; primary 66x2; Phase 0 1,031/1,031 in 608s; canonical exit 0. | PASS. First canonical run caught displaced repeated-action task/memory markers; focused 8/10/8+0/54 repair and complete restart pass. No behavior, fixture, contract, query, rollout, admission, or public API change; `.10.3.1` waits for the clean boundary. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.2` | Five exact UTF-8 bundles; six immutable snapshots; 20 independently derived SHA-256-locked responses; 50 schema/semantic/topology/privacy/rollout mutations; staged-artifact ADR `0050`; aggregate-selector public census 59/27/0; KM 649/4,783; mdBook, memory, task, all four doctrines, adjacent contracts, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 612s, exit 0. | PASS. Neutral rollout is 1/9 and native admission 0/6; no parser/compiler/runtime/descriptor/generated/CLI/trace/native semantic API/MCP behavior changes; Perl `.10.3` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.1` | Knowledge/TOOLBOX inventory of descriptor/compiled/ActionIR/function/staged/generated/diagnostic/trace/API authorities; Perl descriptor native-object probe; ADR `0049`; exact model/query/id/order/record/relation/fact/shape/envelope/source/span/page/budget/privacy/evolution/explain/API/CLI/MCP/fixture/mutation design; dependency split `.10.2-.10.10`; adjacent cursor 75/8+0/60, root 7+0/54, duplicate 7+0/59, repeated 8+0/54 including first-run live-marker RED/repair; KM 647/4,769; mdBook, memory, task, doctrines, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 657s, exit 0. | PASS. The descriptor remains reusable compatibility state but not a portable semantic wire schema; one immutable native semantic index owns future answers and MCP is handle-only transport. No behavior changes; executable neutral `.10.2` waits for the clean commit. |
@@ -10906,6 +10951,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.3.5` | `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across eight routes, focused 106/adjacent 468, semantic 6/20/57, canonical 66x2 and 1,031/650s, docs/KM lockstep, and safe disk-pressure cleanup without admission promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.0` | `FUTURE-PARITY-BACKLOG.10.3.0 - map Perl semantic authorities` | Strict source/canonical-byte, descriptor, ActionIR, staged, failure, generated, source-map, and typed-observer boundaries plus `.10.3.1-.10.3.6` split; KM/book/doctrines/semantic/primary/1,031-in-608s canonical signoff and cleanup complete. |
 | `FUTURE-PARITY-BACKLOG.10.2` | `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract` | Six neutral groups, 20 exact responses, 50 mutations, ADR `0050`, 59/27/0 adjacent public census, roadmap/book/KM lockstep, canonical 1,031/612s, and cleanup freeze the executable oracle without backend behavior. |
 | `FUTURE-PARITY-BACKLOG.10.1` | `FUTURE-PARITY-BACKLOG.10.1 - design semantic introspection` | ADR `0049`, native-authority inventory, exact model/query/API/privacy/parity/MCP design, nine-leaf dependency split, roadmap/book/KM lockstep, canonical 1,031/657s, and cleanup close design without behavior. |
@@ -11093,6 +11139,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-21`: `.10.3.5` adds caller-owned typed Perl runtime observations without coupling queries to execution.
+  Exact slot selections and final results come from shared live/generated seams, and a completed event stream derives
+  a new immutable runtime snapshot while leaving its base index static. Focused proof is 106 assertions across eight
+  direct/loaded/generated/traced/reconstructed roles plus 468 adjacent assertions and the twentieth exact query
+  digest. Canonical primary 66x2, standalone Phase 0 1,031/1,031 in 639 seconds, and the complete local gate through
+  registered Phase 0 in 650 seconds pass. Safe pressure cleanup raises reported free space 27 GiB to 117 GiB while
+  retaining the only temp session with open files. Rollout/admission stay 1/9 and 0/6; composed admission `.10.3.6`
+  follows only after this clean commit.
 
 - `2026-07-20`: `.10.1` accepts ADR `0049` before implementation. Exact current-authority inventory plus a
   TOOLBOX descriptor probe prove the stable four-key outward projection is reusable input but its native Perl

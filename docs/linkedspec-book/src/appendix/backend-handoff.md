@@ -217,11 +217,12 @@ bounded pages and logical traversal cost, structural source ceilings/redactions,
 observations, and exact cross-backend fixtures are mandatory. The existing outward descriptor remains a separate
 compatibility projection; no backend AST/IR, callable, compiled regex, object identity, or implicit host path can
 enter the semantic response. MCP will expose only native capabilities/query calls over a registered handle. It
-cannot compile, read a path, derive facts, or own explanations. Perl now ships only the `.10.3.1` construction
-foundation: `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller logical
-name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path. Semantic
-records, capabilities/query, runtime observations, full Perl admission, the other backends, and MCP remain later
-`.10.3-.10.10` work.
+cannot compile, read a path, derive facts, or own explanations. Perl now ships opaque construction, static/call/
+staged/generated projections, exact capabilities/query, and typed caller-captured runtime observation through
+`.10.3.1-.10.3.5`. `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller
+logical name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path;
+`with_execution_observation` derives a separate immutable runtime snapshot only after normal parsing. Full Perl
+admission, the other backends, and MCP remain `.10.3.6-.10.10` work.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

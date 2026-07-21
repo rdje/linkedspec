@@ -16,6 +16,7 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::HandlerVariantEmitter ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
+use LinkedSpec::RuntimeSemanticObservation ();
 
 our $BACKEND;
 
@@ -337,7 +338,8 @@ sub _build_runtime_handler {
   my $eval_error = $@;
   delete $__ls_recursion_active{$progress_key} if defined($progress_key);
   unless ($eval_ok) {
-   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)) {
+   if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)
+    || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($descr, $eval_error)) {
     _trace_decision("rule_handler_control:$label", 1, $eval_error, DUMP_DEBUG);
     _trace_exit(
      $runtime_scope,

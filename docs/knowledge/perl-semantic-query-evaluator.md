@@ -13,7 +13,7 @@ answers:
   - "what does semantic_index_perl_query test"
   - "is Perl semantic introspection admitted after query implementation"
 date: 2026-07-21
-status: current static native query surface; runtime observations, routes, and admission pending
+status: current native query evaluator; runtime projection available separately; admission pending
 tags: [perl, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: perl/LinkedSpec/SemanticQuery.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_query.t; FUTURE-PARITY-BACKLOG.10.3.4
 reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && python3 tools/check_semantic_introspection_contract.py
@@ -30,12 +30,14 @@ record/relation/depth budget prefixes, logical costs, source `none`/`identity`/`
 fact redaction, digest ceilings, and portable invalid/unsupported/forbidden/budget diagnostics. Responses and
 capabilities are fresh clone-safe plain data on every call.
 
-The focused test matches all 19 static neutral response SHA-256 digests byte-for-byte; only the `runtime_events`
-case remains owned by `.10.3.5`. It also exercises 26 request/error boundaries, including the JSON-boolean type
+The focused test matches all 19 static neutral response SHA-256 digests byte-for-byte. Runtime leaf `.10.3.5` now
+feeds the same evaluator a separately derived immutable projection and matches the twentieth `runtime_events`
+digest; see [[perl-semantic-runtime-observation]]. The static test also exercises 26 request/error boundaries,
+including the JSON-boolean type
 fence, mutates returned answers, replaces the compiler entrypoint with a die during a successful query, captures
 stdout/stderr, and scans encoded answers for
-paths and host object identities. Runtime observations/routes and composed Perl admission remain absent, so neutral
-rollout stays 1/9 and native backend admission stays 0/6.
+paths and host object identities. Composed Perl admission remains absent, so neutral rollout stays 1/9 and native
+backend admission stays 0/6.
 
 Canonical signoff passes both primary CLI environments at 66/66 and Phase 0 at 1,031/1,031 in 643 seconds. The
 complete local gate exits 0 with capability 80/0/0 and semantic governance 6/20/57 unchanged.

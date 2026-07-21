@@ -10,13 +10,11 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.4` — immutable public Perl capabilities/query is complete and
-  canonical-green, awaiting its current commit from clean base `b4805f23`.
-- latest_commit: `b4805f23` — `FUTURE-PARITY-BACKLOG.10.3.3.1.1 - project Perl call semantics`
-  (ahead: 269; push at threshold 300).
-- active_work_unit: `FUTURE-PARITY-BACKLOG.10.3.4` — implementation, exact proof, canonical signoff, and lockstep
-  docs are complete; final doctrine/memory checks and commit/clean verification remain.
-- next_action: commit/clean `.10.3.4`, then activate runtime-observation/routes leaf `.10.3.5` task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.5` — Perl runtime observation/routes close in this commit.
+- latest_commit: this commit — `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` (ahead: 271).
+- active_work_unit: none after this commit; `.10.3.5` passes exact route, runtime-query, lockstep, and canonical proof.
+- next_action: activate composed Perl semantic admission `FUTURE-PARITY-BACKLOG.10.3.6` task-tree-first from the
+  clean `.10.3.5` boundary.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 57 rejected mutations. Static/generated facts
@@ -33,13 +31,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   and direct JSON failure; backend AST/IR/object identity is forbidden from semantic responses.
 - current_perl_authority_map: decoded source/map plus descriptor order/topology, typed ActionIR calls/bindings,
   staged sidecars, shared generated-v2 identity, and runtime failures project private v1 facts. Query consumes only
-  cloned plain projection data; invocation-local observations remain absent. Function/ActionIR spans are characters.
+  cloned plain projection data. Typed invocation-local slot/final events now derive an immutable runtime projection
+  after execution, separately from trace/diagnostics. Function/ActionIR spans are characters.
 - perl_split: `.10.3.1` source/map/outcome; `.2.0` static oracle correction; `.2.1` static projection; `.3.0`
   generated-plan correction; `.3.1.0` spec-name correction; `.3.1.1` calls/shapes/staged/generated; `.4`
   capabilities/query/privacy/budgets; `.5` runtime/direct/loaded/generated observations; `.6` exact admission.
 - current_perl_foundation: `semantic_index` compiles in-memory decoded/strict-UTF-8 source once without execution;
   retains opaque source/map/outcome plus clone-safe static/call/staged/generated records; never reads a path.
-  Public capabilities/query now match all 19 static canonical responses without compile/execute/path/trace.
+  Public capabilities/query match all 19 static responses, and caller-captured runtime derivation matches the
+  twentieth without query-side compile/execute/path/trace.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
 - current_signoff: `.10.3.4` query 9 groups/19 exact static digests/26 request-error boundaries, foundation/static/
@@ -55,5 +55,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.10.3.4` implementation/tests/docs/KM/task closure are fully green;
-  final lightweight checks, commit, and clean verification remain.
+- blockers: none. in_flight_uncommitted: `.10.3.5` typed runtime delivery/projection/test/docs are focused-green;
+  canonical signoff, final durable counters, task close, and commit remain.
