@@ -2,9 +2,8 @@
 
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
 native query surface: opaque construction, exact static plus call/staged/generated projections, public
-`capabilities`/`query` answers, and optional caller-captured runtime observations. Backend admission is still
-pending. The distinction
-matters:
+`capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
+consumer. Perl is the first admitted backend. The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
@@ -13,12 +12,11 @@ matters:
   static plus compiled call/staging/generated records/relations;
 - `$index->capabilities` and `$index->query($request)` expose the exact v1 static answer surface today; and
 - `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
-  and
+- `t/semantic_introspection_perl_admission.t` composes every required Perl path once; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
-Julia, PUC Lua, and LuaJIT: static query availability is not runtime/route/admission completion. MCP remains later
-transport work and does not own semantics.
+The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
+Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
 ## Current Perl construction and query surface
 
@@ -163,7 +161,7 @@ backend AST/IR, object identities, and paths are rejected at the clone boundary.
 The focused projection test materializes internal source keys and deep-compares the complete graph, Unicode privacy
 at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
 neutral oracle. The public evaluator now owns query-time source redaction, pages, traversal, budgets, and costs.
-The composed Perl admission consumer remains a later leaf; runtime projection is described below.
+The composed Perl admission consumer is described with the executable oracle below; runtime projection follows.
 
 ## Current private call, staging, and generated projection
 
@@ -216,7 +214,7 @@ function therefore cannot become a synthetic bare edge.
 These projection mechanics remain internal implementation evidence, while their normalized records are now
 callable through the public query surface. Returned answers contain only canonical JSON data and booleans: no
 descriptor coderef/compiled regex, raw function record, ActionIR layout, generated source, object identity, or
-path. Runtime observation/routes are now implemented by `.10.3.5`; Perl admission remains `.10.3.6`.
+path. Runtime observation/routes are implemented by `.10.3.5`; composed admission closes through `.10.3.6`.
 
 ## Why this is separate from the descriptor
 
@@ -455,13 +453,14 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 57 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 65 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
-The checker runs unconditionally in canonical local CI. This is contract evidence only: it deliberately rejects
-premature backend admission.
+The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
+ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
+fails if promoted early.
 
 Perl's native evaluator has a separate exact gate:
 
@@ -484,6 +483,18 @@ Its 106 assertions match the twentieth response digest across eight execution ro
 cursor and generated-plan behavior, reject malformed or foreign observations, prove derived queries work with the
 execution entrypoint replaced by a die, preserve exact observer exception identity, and compare trace plus
 diagnostic streams with and without semantic capture.
+
+Perl admission composes those separate gates through one omission-sensitive consumer:
+
+```bash
+PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t
+```
+
+Its 12 exact-once roles cover strict byte/text source normalization, compiled graph/calls/privacy snapshots,
+failed compilation, runtime direct/loaded/generated/traced routes, native capabilities plus neutral JSON, all 20
+canonical query digests, privacy/page/budget/error/explain behavior, query non-interference, immutable returned
+data, and stale host-path/object/IR denial. The neutral checker rejects eight additional Perl
+path/role/driver/registration/admission mutations and advances only the Perl rows.
 
 The static rule facts also have an authority outside the semantic model. The checker reads
 `linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
@@ -516,7 +527,7 @@ The dependency order is:
 | `.10.3.3.1.1` | Perl private calls/bindings/staged/generated projection | implemented; admission unchanged |
 | `.10.3.4` | Perl capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
 | `.10.3.5` | Perl runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
-| `.10.3.6` | composed Perl semantic admission | pending |
+| `.10.3.6` | composed Perl semantic admission | complete; 12 roles, 20 exact queries, Perl-only promotion |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
@@ -529,7 +540,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Perl callers can use the native static and caller-captured runtime query surface now. No backend may claim
-semantic-introspection admission until its composed conformance leaf closes. Other
+Perl callers can use the admitted native static and caller-captured runtime query surface now. No later backend may
+claim semantic-introspection admission until its composed conformance leaf closes. Other
 backends should continue using their existing descriptor APIs described in
 [Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.

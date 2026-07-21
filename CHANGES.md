@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.6 — admit Perl semantic introspection
+
+Perl is the first admitted native implementation of `linkedspec-semantic-model-v1` and
+`linkedspec-semantic-query-v1`. New `t/semantic_introspection_perl_admission.t` composes existing owners through
+12 contract-declared exact-once roles: strict byte/text normalization; compiled graph/calls/privacy, failed, and
+runtime snapshots; direct/loaded/generated/traced observation; native capabilities and neutral JSON; all 20 exact
+response digests; privacy/page/budget/error/explain behavior; query non-interference and immutability; and stale
+host-path/object/IR denial. RED failed exactly 4/18 on the pending Perl status, consumer, rollout, and registration;
+GREEN passes 18/18 without a new semantic path.
+
+`semantic_introspection_contract.json` now records the exact Perl consumer topology, advances only
+`perl_reference` and the Perl native admission row, and canonically requires the consumer. The neutral checker
+locks its path, ordered roles, driver, tracked registration, native status, and rollout status; eight new mutations
+raise the total to 65, while early admission now targets Rust. Governance reports six fixture groups, 20 exact
+queries, rollout 2 complete / 7 pending, and admission 1 complete / 5 pending. Canonical local CI syntax-checks and
+runs the consumer after the five focused semantic suites. Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, MCP,
+and public no-drift remain pending.
+
+Signoff passes the six semantic suites at 149 assertions, the broader semantic/generated/diagnostic/root/cursor
+gate at 471 assertions plus 127 supplemental cursor/trace assertions, the Knowledge Map at 659 facts / 4,867
+questions, mdBook, all four doctrines, primary CLI 66/66 in default and POSIX environments, and the complete local
+CI gate through Phase 0 1,031/1,031 in 633 seconds. The gate exits 0. No production semantic implementation changes
+in this admission-only slice.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.5 — capture Perl runtime semantics
 
 Perl parser invocation now accepts an optional `semantic_observation_sink` callback separate from textual trace

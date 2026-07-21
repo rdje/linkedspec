@@ -13,7 +13,7 @@ answers:
   - "what does semantic_index_perl_query test"
   - "is Perl semantic introspection admitted after query implementation"
 date: 2026-07-21
-status: current native query evaluator; runtime projection available separately; admission pending
+status: current admitted native query evaluator; runtime projection remains separately derived
 tags: [perl, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: perl/LinkedSpec/SemanticQuery.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_query.t; FUTURE-PARITY-BACKLOG.10.3.4
 reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && python3 tools/check_semantic_introspection_contract.py
@@ -36,11 +36,12 @@ digest; see [[perl-semantic-runtime-observation]]. The static test also exercise
 including the JSON-boolean type
 fence, mutates returned answers, replaces the compiler entrypoint with a die during a successful query, captures
 stdout/stderr, and scans encoded answers for
-paths and host object identities. Composed Perl admission remains absent, so neutral rollout stays 1/9 and native
-backend admission stays 0/6.
+paths and host object identities. Composed Perl admission `.10.3.6` reuses this evaluator for every one of the 20
+exact responses and advances only Perl, so neutral rollout is 2/9 and native backend admission is 1/6.
 
 Canonical signoff passes both primary CLI environments at 66/66 and Phase 0 at 1,031/1,031 in 643 seconds. The
 complete local gate exits 0 with capability 80/0/0 and semantic governance 6/20/57 unchanged.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[perl-semantic-static-projection]],
 [[perl-semantic-call-staged-projection]], [[perl-semantic-introspection-authority-map]].
+See also [[perl-semantic-introspection-admission]].

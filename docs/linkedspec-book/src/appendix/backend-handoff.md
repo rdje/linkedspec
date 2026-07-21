@@ -218,11 +218,12 @@ observations, and exact cross-backend fixtures are mandatory. The existing outwa
 compatibility projection; no backend AST/IR, callable, compiled regex, object identity, or implicit host path can
 enter the semantic response. MCP will expose only native capabilities/query calls over a registered handle. It
 cannot compile, read a path, derive facts, or own explanations. Perl now ships opaque construction, static/call/
-staged/generated projections, exact capabilities/query, and typed caller-captured runtime observation through
-`.10.3.1-.10.3.5`. `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller
+staged/generated projections, exact capabilities/query, typed caller-captured runtime observation, and composed
+admission through `.10.3.1-.10.3.6`. `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller
 logical name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path;
-`with_execution_observation` derives a separate immutable runtime snapshot only after normal parsing. Full Perl
-admission, the other backends, and MCP remain `.10.3.6-.10.10` work.
+`with_execution_observation` derives a separate immutable runtime snapshot only after normal parsing. One 12-role
+consumer locks all 20 exact responses and direct/loaded/generated/traced equivalence; Perl is admission 1/6 and
+rollout 2/9. The other backends and MCP remain `.10.4-.10.10` work.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

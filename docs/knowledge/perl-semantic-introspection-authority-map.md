@@ -36,7 +36,8 @@ sidecars, and generated-plan identity from shared generated-v2 owners. Descripto
 character offsets; only `SemanticSourceMap` converts the final references to bytes and scalar columns. Query leaf
 `.10.3.4` consumes only the cloned plain projection and exposes exact static capabilities/query without reopening
 any authority. `.10.3.5` composes slot/result events from runtime handlers plus invocation wrappers and derives an
-immutable runtime projection after execution; admission remains `.10.3.6`. See [[perl-semantic-runtime-observation]],
+immutable runtime projection after execution; `.10.3.6` admits the composition without another authority. See
+[[perl-semantic-runtime-observation]], [[perl-semantic-introspection-admission]],
 [[perl-semantic-static-projection]],
 [[perl-semantic-call-staged-projection]], [[perl-semantic-query-evaluator]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[semantic-introspection-neutral-contract]], and

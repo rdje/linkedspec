@@ -13,7 +13,7 @@ answers:
   - "what does semantic_index_perl_calls_projection test"
   - "are Perl semantic capabilities and query public after calls projection"
 date: 2026-07-21
-status: current private compiled projection; public query/runtime layers added separately; admission pending
+status: current private compiled projection; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/GeneratedSource.pm; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.3.1.1
 reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t && python3 tools/check_semantic_introspection_contract.py && perl tools/check_generated_source_contract.pl
@@ -41,11 +41,12 @@ compiler's function-blanked rule input and preventing an interleaved `fn` shell 
 
 Every retained result is cloned plain data. Descriptor coderefs/compiled regexes, raw function records, ActionIR
 layouts, generated implementation text, object identity, and paths do not cross the boundary. Public
-`capabilities`/`query` are now supplied by `.10.3.4`; `.10.3.5` adds runtime observations without changing this
-compiled layer. The composed Perl consumer and ledger admission remain `.10.3.6`, so neutral rollout stays 1/9
-and backend admission 0/6.
+`capabilities`/`query` are supplied by `.10.3.4`; `.10.3.5` adds runtime observations without changing this
+compiled layer; `.10.3.6` admits their composition through one exact consumer. This layer remains the only
+compiled-call projection.
 
 Related facts: [[perl-semantic-static-projection]], [[perl-semantic-introspection-authority-map]],
 [[perl-semantic-query-evaluator]], [[perl-semantic-runtime-observation]],
+[[perl-semantic-introspection-admission]],
 [[semantic-introspection-staged-artifact-schema]], [[semantic-introspection-generated-plan-authority]],
 [[outward-descriptor-is-not-semantic-wire-model]].

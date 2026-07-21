@@ -8,23 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.5` is signoff-complete from clean immutable-query commit `91b0c9b0` at ahead 270.
-  Typed invocation-local slot/result capture and immutable post-execution derivation match the twentieth exact
-  response across eight direct/loaded/generated/traced/reconstructed roles. Focused runtime 106, adjacent 468,
-  semantic 6/20/57, KM 658/4,857, primary 66x2, standalone Phase 0 1,031/1,031 in 639 seconds, complete local CI
-  through repeated Phase 0 in 650 seconds, doctrines, mdBook, and safe artifact cleanup pass. This commit closes the
-  leaf; composed admission `.10.3.6` follows only from the clean boundary.
+- `FUTURE-PARITY-BACKLOG.10.3.6` and parent `.10.3` are signoff-complete in this commit from clean base `aad4045f`
+  at ahead 271. The next PNT-eligible leaf is Rust semantic adapter `.10.4`, which may activate task-tree-first only
+  after this admission commit is clean. No later backend, recurring proof, MCP, or public no-drift row is promoted.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
-observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
-rollout legs and native backend admission 0/6: Perl static capabilities/query and runtime observation/routes now
-exist, but only the composed `.10.3.6` consumer can advance admission. This implementation changes neither ledger.
+observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle is now 2/9
+rollout legs and native backend admission 1/6: the exact composed `.10.3.6` consumer admits Perl while every later
+backend, recurring proof, MCP, and public no-drift leg remains pending.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.6 — admit Perl semantic introspection**
+  (DONE in this commit from base `aad4045f`).
+
+  **Result:** One exact 12-role consumer composes the already-implemented Perl semantic surface, matches all 20
+  neutral response digests, denies stale host state, and advances only Perl to rollout 2/9 and admission 1/6.
+
+  **Proof:** Consumer 18, all semantic suites 149, broader adjacent 471 plus supplemental 127, governance 6/20/65,
+  KM 659/4,867, mdBook, four doctrines, primary 66x2, and complete local CI through Phase 0 1,031/1,031 in 633
+  seconds all pass. No production semantic implementation changes.
+
+  **Next:** After the clean commit, activate Rust semantic adapter `.10.4` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.5 — capture Perl runtime semantics**
   (DONE in this commit from base `91b0c9b0`).
 
@@ -35,7 +44,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   standalone Phase 0 1,031/1,031 in 639 seconds, and complete local CI through Phase 0 in 650 seconds. Safe cleanup
   raised reported free space from 27 GiB to 117 GiB while retaining the only live temp session.
 
-  **Next:** Activate composed Perl semantic admission `.10.3.6` task-tree-first after this clean commit.
+  **Next:** Execute active composed Perl semantic admission `.10.3.6` from clean `aad4045f`.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.4 — expose immutable Perl semantic queries**
   (DONE at clean commit `91b0c9b0` from base `b4805f23`).

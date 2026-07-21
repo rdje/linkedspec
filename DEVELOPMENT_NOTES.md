@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.6` — admission is composition, not another semantic implementation):
+  each preceding Perl leaf deliberately proved one authority boundary, but no one gate established omission-
+  sensitive end-to-end topology. The admission consumer therefore declares 12 ordered roles in the neutral
+  contract and executes each exactly once. It reconstructs all compiled/failed/runtime inputs from the shared
+  fixtures, derives runtime evidence only through normal parsing, evaluates all 20 requests through the public
+  native object, round-trips neutral JSON, and rejects host leakage without reaching into private projection state.
+
+  The checker, not the consumer, owns admission metadata: exact path, ordered roles, canonical driver/registration,
+  native status, and rollout status. Eight mutations separately remove or alter those obligations, and the existing
+  early-admission mutation now targets Rust. The initial consumer RED also demonstrated why probes must preserve
+  their inputs: `Encode::decode` without `LEAVE_SRC` consumed the raw source scalar and manufactured a false
+  normalization failure. A direct native query showed the product answers were identical; correcting the probe
+  left exactly the four intended pending-ledger failures. GREEN is 18 top-level tests; checker proof is
+  6 groups / 20 responses / 65 mutations / rollout 2+7 / admission 1+5. No production semantic code changed.
+  Complete local CI passes primary 66x2 and Phase 0 1,031/1,031 in 633 seconds; the six semantic suites total 149.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.5` — runtime introspection is caller-owned evidence, not a query side
   effect): the exact runtime snapshot needs two distinct seams. `HandlerVariantEmitter` already resolves the
   accepted structural slot to target rule, authored regex index, and post-match cursor for every handler variant;

@@ -108,6 +108,7 @@ require_tracked_file tools/check_language_capability_coverage.pl
 require_tracked_file tools/check_native_spec_resolution_contract.pl
 require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
+require_tracked_file t/semantic_introspection_perl_admission.t
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
 require_tracked_file t/repeated_action_result_perl_contract.t
@@ -256,6 +257,7 @@ perl -c -Iperl t/semantic_index_perl_static_projection.t
 perl -c -Iperl t/semantic_index_perl_calls_projection.t
 perl -c -Iperl t/semantic_index_perl_query.t
 perl -c -Iperl t/semantic_index_perl_runtime_observation.t
+perl -c -Iperl t/semantic_introspection_perl_admission.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
@@ -301,6 +303,9 @@ PERL5LIB= prove -Iperl t/semantic_index_perl_query.t
 
 log "running Perl typed runtime semantic observation and route projection"
 PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
+
+log "running composed Perl semantic-introspection admission consumer"
+PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

@@ -15,7 +15,7 @@ answers:
   - "what is the twentieth Perl semantic response digest"
   - "is Perl semantic introspection admitted after runtime observations"
 date: 2026-07-21
-status: current runtime observation/query surface; composed admission pending
+status: current admitted runtime observation/query surface
 tags: [perl, semantic-introspection, runtime, observation, immutability, generated-source, trace, diagnostics]
 evidence: perl/LinkedSpec/RuntimeSemanticObservation.pm; perl/LinkedSpec/SemanticRuntimeProjection.pm; perl/LinkedSpec/HandlerVariantEmitter.pm; perl/LinkedSpec/Compiler.pm; t/semantic_index_perl_runtime_observation.t; FUTURE-PARITY-BACKLOG.10.3.5
 reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
@@ -40,9 +40,10 @@ position 2, and the input identity hashes all three bytes as
 `runtime_events` response matches digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`
 through direct, loaded-spec, portable-loader, captured generated direct/Get, independently loaded generated
 direct/traced, and validated reconstructed-plan roles. The focused test has 106 assertions and proves malformed/
-foreign rejection plus trace/diagnostic neutrality. Composed Perl admission remains `.10.3.6`, so rollout and
-admission remain 1/9 and 0/6.
+foreign rejection plus trace/diagnostic neutrality. Composed Perl admission `.10.3.6` reuses those owners across
+its direct/loaded/generated/traced roles and advances only Perl, so rollout is 2/9 and admission is 1/6.
 
 Related facts: [[perl-semantic-query-evaluator]], [[perl-semantic-introspection-authority-map]],
+[[perl-semantic-introspection-admission]],
 [[perl-duplicate-regex-slot-identity-admission]], [[diagnostic-output-neutral-contract]],
 [[trace-cross-variant-capability-contract]].

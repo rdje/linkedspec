@@ -505,7 +505,7 @@ Three backbone items tracked major structural modernization — all done:
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
   runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
-  57 mutations. ADR `0050` explicitly separates staged payload/job/result records from generated artifacts. The
+  65 mutations. ADR `0050` explicitly separates staged payload/job/result records from generated artifacts. The
   descriptor remains reusable input, not the wire model. Perl authority audit `.10.3.0` now proves the exact
   decoded-source/canonical-byte, descriptor, typed ActionIR, staged-function, runtime-context diagnostic, and
   generated-v2 plan inputs. It also proves that source coordinates and invocation-local typed execution events are
@@ -515,8 +515,10 @@ Three backbone items tracked major structural modernization — all done:
   state without parser execution or path reads. Static/calls/query leaves `.10.3.2-.10.3.4` now expose all 19
   non-runtime answers. Runtime leaf `.10.3.5` adds a typed invocation-local slot/result sink and immutable
   post-execution derivation matching the twentieth answer across direct, loaded, and generated routes; queries
-  still never execute. Composed admission remains `.10.3.6`. Neutral
-  rollout remains 1 complete / 8 pending and backend admission 0 complete / 6 pending. MCP remains handle-only
+  still never execute. Composed admission `.10.3.6` adds one exact 12-role consumer across source normalization,
+  every snapshot/query, native/neutral JSON, direct/loaded/generated/traced runtime evidence, privacy/budgets/
+  errors/explain, non-interference, and host-leak denial. Neutral rollout is 2 complete / 7 pending and backend
+  admission 1 complete / 5 pending; only Perl advances. MCP remains handle-only
   later transport and owns no semantic or filesystem behavior. Default parser, trace, diagnostic, generated-v2,
   loader, and primary behavior remain unchanged when the observer is absent.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the

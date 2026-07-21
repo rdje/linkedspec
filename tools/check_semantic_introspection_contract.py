@@ -117,7 +117,7 @@ SOURCE_FIXTURES = [
 ]
 ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.10.2"),
-    ("perl_reference", "pending", "FUTURE-PARITY-BACKLOG.10.3"),
+    ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
     ("rust_parity", "pending", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart_parity", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia_parity", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
@@ -127,13 +127,31 @@ ROLLOUT = [
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.10.10"),
 ]
 ADMISSIONS = [
-    ("perl", "perl", "pending", "FUTURE-PARITY-BACKLOG.10.3"),
+    ("perl", "perl", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
     ("rust", "rust", "pending", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart", "dart", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia", "julia", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua", "puc_lua", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
     ("lua", "luajit", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
 ]
+PERL_ADMISSION = {
+    "path": "t/semantic_introspection_perl_admission.t",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": [
+        "source_normalization",
+        "compiled_snapshots",
+        "failed_snapshot",
+        "runtime_direct",
+        "runtime_loaded",
+        "runtime_generated",
+        "runtime_traced",
+        "native_and_neutral_json",
+        "exact_twenty_queries",
+        "privacy_page_budget_error_explain",
+        "query_non_interference",
+        "stale_host_leak_denial",
+    ],
+}
 
 
 class ContractError(ValueError):
@@ -402,13 +420,15 @@ def validate_contract(contract: dict[str, Any]) -> None:
     for row in contract["target_admissions"]: require_fields(row, {"backend", "runtime", "status", "owner", "native_api", "consumer"}, f"target admission {row.get('runtime')}")
     admissions = [(row["backend"], row["runtime"], row["status"], row["owner"]) for row in contract["target_admissions"]]
     require(admissions == ADMISSIONS, "six-runtime admission inventory drifted")
-    require(all(row["native_api"] == "capabilities_plus_query" and row["consumer"] is None for row in contract["target_admissions"]), "backend admitted before its owned leaf")
+    require(all(row["native_api"] == "capabilities_plus_query" for row in contract["target_admissions"]), "native API inventory drifted")
+    require(contract["target_admissions"][0]["consumer"] == PERL_ADMISSION, "Perl admission consumer topology drifted")
+    require(all(row["consumer"] is None for row in contract["target_admissions"][1:]), "backend admitted before its owned leaf")
     for row in contract["rollout"]: require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 57 and len(set(contract["mutations"])) == 57, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 65 and len(set(contract["mutations"])) == 65, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -911,10 +931,30 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     for path in contract["canonical_ci"]["required_tracked_files"]:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
+    consumer = contract["target_admissions"][0]["consumer"]
+    consumer_path = ROOT / consumer["path"]
+    require(consumer_path.is_file(), "Perl semantic admission consumer is missing")
+    consumer_text = consumer_path.read_text(encoding="utf-8")
+    for role in consumer["roles"]:
+        marker = re.compile(rf"^\s*{re.escape(role)}\s*=>\s*sub\s*\{{", re.MULTILINE)
+        require(len(marker.findall(consumer_text)) == 1, f"Perl semantic admission role marker drifted: {role}")
+    require(f"require_tracked_file {consumer['path']}" in ci_text, "canonical CI does not require the Perl semantic admission consumer")
+    require(f"PERL5LIB= prove -Iperl {consumer['path']}" in ci_text, "canonical CI does not run the Perl semantic admission consumer")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
-    require(CONTRACT_ID in readme and "57 rejected mutations" in readme, "capability-conformance guide is not synchronized")
+    require(
+        CONTRACT_ID in readme
+        and "65 rejected mutations" in readme
+        and "2 complete / 7 pending" in readme
+        and "1 complete / 5 pending" in readme,
+        "capability-conformance guide is not synchronized",
+    )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
-    require(MODEL_ID in book and "0 complete / 6 pending" in book, "mdBook semantic introspection page is not synchronized")
+    require(
+        MODEL_ID in book
+        and "1 complete / 5 pending" in book
+        and "t/semantic_introspection_perl_admission.t" in book,
+        "mdBook semantic introspection page is not synchronized",
+    )
 
 
 def validate_bundle(contract: dict[str, Any], model: dict[str, Any], *, check_filesystem: bool) -> dict[str, str]:
@@ -1006,7 +1046,15 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["omit_redaction"] = lambda c, m: c["schema"]["source_sensitive_fact_paths"].pop("regex_slot")
     mutations["wrong_utf8_span"] = lambda c, m: next(s for s in m["snapshots"] if s["id"] == "privacy")["source_refs"]["regex"]["span"].update({"start_byte": 9})
     mutations["wrong_content_digest"] = lambda c, m: next(s for s in m["snapshots"] if s["id"] == "privacy")["source_refs"]["regex"].update({"content_digest": "sha256:" + "0" * 64})
-    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][0].update({"status": "complete"})
+    mutations["unadmit_perl"] = lambda c, m: c["target_admissions"][0].update({"status": "pending"})
+    mutations["omit_perl_consumer_path"] = lambda c, m: c["target_admissions"][0]["consumer"].pop("path")
+    mutations["alter_perl_consumer_path"] = lambda c, m: c["target_admissions"][0]["consumer"].update({"path": "t/missing_semantic_consumer.t"})
+    mutations["omit_perl_consumer_role"] = lambda c, m: c["target_admissions"][0]["consumer"]["roles"].pop()
+    mutations["reorder_perl_consumer_roles"] = lambda c, m: c["target_admissions"][0]["consumer"]["roles"].reverse()
+    mutations["alter_perl_consumer_driver"] = lambda c, m: c["target_admissions"][0]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
+    mutations["unpromote_perl_rollout"] = lambda c, m: c["rollout"][1].update({"status": "pending"})
+    mutations["omit_perl_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("t/semantic_introspection_perl_admission.t")
+    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][1].update({"status": "complete"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)
@@ -1014,7 +1062,7 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["remove_fixture_group"] = lambda c, m: c["fixture_groups"].pop()
     mutations["alter_fixture_bytes"] = lambda c, m: c["source_fixtures"][0].update({"bytes": 127})
     mutations["alter_expected_hash"] = lambda c, m: c["query_cases"][0]["expected"].update({"response_sha256": "f" * 64})
-    mutations["omit_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].pop()
+    mutations["omit_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].pop(0)
     return mutations
 
 
@@ -1054,7 +1102,14 @@ def main() -> int:
         return 0
     hashes = validate_bundle(contract, model, check_filesystem=True)
     rejected = validate_mutations(contract, model)
-    print(f"semantic introspection contract: {len(contract['fixture_groups'])} fixture groups, {len(hashes)} exact queries, {rejected} rejected mutations, rollout 1 complete / 8 pending")
+    rollout_complete = sum(row["status"] == "complete" for row in contract["rollout"])
+    admission_complete = sum(row["status"] == "complete" for row in contract["target_admissions"])
+    print(
+        f"semantic introspection contract: {len(contract['fixture_groups'])} fixture groups, "
+        f"{len(hashes)} exact queries, {rejected} rejected mutations, "
+        f"rollout {rollout_complete} complete / {len(contract['rollout']) - rollout_complete} pending, "
+        f"admission {admission_complete} complete / {len(contract['target_admissions']) - admission_complete} pending"
+    )
     return 0
 
 

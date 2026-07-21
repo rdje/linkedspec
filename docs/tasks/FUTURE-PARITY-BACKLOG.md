@@ -6889,7 +6889,7 @@ before implementation.
     output, record final proof, commit `.10.2`, clear the brief, and hand off cleanly to `.10.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement the Perl semantic index, native query surface, and reference conformance consumer.
   Depends on: `.10.2`
   Acceptance: Build immutable semantic facts from compiler/ActionIR/provenance/generated/diagnostic authorities;
@@ -7399,7 +7399,7 @@ before implementation.
   - [x] **LOCKSTEP** — API/docs/book/task/index/roadmaps/architecture/live/memory/KM and commit workflow are exact.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit the Perl reference semantic surface through one omission-sensitive exact consumer and canonical gate.
   Depends on: `.10.3.5`
   Acceptance: Add one shared-contract consumer covering source normalization, every compiled/failed/runtime snapshot,
@@ -7407,6 +7407,46 @@ before implementation.
     page/budget/errors/explain, non-interference, and stale-host-leak denials. Extend the neutral checker with exact
     Perl path/role/registration/admission mutations, promote only Perl rollout/admission, run focused and complete
     Perl/canonical gates, and synchronize public API/mdBook/roadmaps/Knowledge Map before closing parent `.10.3`.
+  Verification: Activated task-tree-first from clean runtime-observation commit `aad4045f` at ahead 271;
+    `git_message_brief.txt` is zero bytes, the worktree is clean, and reported disk availability is 113 GiB after
+    safe pressure cleanup. Retrieve the exact neutral consumer, rollout, mutation, native-path, registration,
+    privacy, query, route, and public-admission authorities through the Knowledge Map and toolbox before edits.
+    Compose existing source/static/calls/query/runtime owners without adding another semantic projection path.
+    Retrieval confirms the checker still requires every native consumer to be null, hardcodes Perl pending,
+    registers only the five separate semantic suites, and rejects 57 mutations. Prior cursor/root admission gates
+    establish contract-declared exact-once roles plus checker-owned path/role/driver/rollout topology. New RED
+    `t/semantic_introspection_perl_admission.t` executes 12 exact-once roles: strict source normalization, all
+    compiled/failed/runtime snapshots, direct/loaded/generated/traced observation, native/neutral JSON, all 20
+    canonical query digests, privacy/page/budget/errors/explain, no-execute immutability, and host-leak denial.
+    The first harness run exposed two test mistakes, not product drift: `Encode::decode` consumed the raw probe
+    without `LEAVE_SRC`, and pagination had been assumed incomplete against the canonical true flag. The native
+    query probe proved raw/decoded Unicode answers byte-identical; after correcting the harness, RED fails exactly
+    4/18 only because Perl status, consumer topology, rollout status, and canonical registration remain pending.
+    GREEN registers that exact consumer without production semantic code: its 18 top-level tests pass, and the
+    checker passes six fixture groups, 20 complete response digests, 65 rejected mutations, rollout 2 complete / 7
+    pending, and native admission 1 complete / 5 pending. Eight new mutations independently lock Perl path, roles,
+    driver, registration, native status, and rollout status; the prior early-admission mutation now targets Rust.
+    Complete signoff passes all six semantic suites at 149 assertions, the broader semantic/generated/diagnostic/
+    root/cursor gate at 471 assertions plus 127 supplemental cursor/trace assertions, Knowledge Map 659/4,867,
+    mdBook, all four doctrines, primary 66/66 in default and POSIX environments, and canonical local CI through
+    Phase 0 1,031/1,031 in 633 seconds; the gate exits 0. Generated book/cache output is removed before commit.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read the neutral semantic contract/checker, rollout ledger, canonical
+    registration, public no-drift, and all native Perl semantic authority cards before deriving the admission gate.
+  - [x] **RED / ORACLE** — Add one omission-sensitive exact Perl consumer and checker mutations that fail only
+    because Perl path/role/registration/admission topology and rollout promotion are still absent.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Prove the composed consumer reuses the existing constructor, static/calls/
+    query/runtime projection, direct/loaded/generated/traced, privacy, page/budget/error, and no-execute seams.
+  - [x] **FIX** — Register the one exact composed consumer, extend neutral validation/mutations, and promote only
+    the Perl rollout/admission rows without introducing another model, query evaluator, observer, or transport.
+  - [x] **ADDRESSED (verified)** — Pass all 20 exact queries, compiled/failed/runtime snapshots, native/neutral
+    object answers, required roles, privacy/budgets/errors/explain, non-interference, and stale-host-leak denials.
+  - [x] **NO REGRESSION** — Existing semantic/focused/adjacent contracts, primary 66x2, and canonical Phase 0 remain
+    exact; Rust/Dart/Julia/Lua and MCP rollout stay pending.
+  - [x] **LOCKSTEP** — Public API/book/task/index/roadmaps/ADR/live/memory/KM and commit workflow close parent
+    `.10.3` with exact Perl-only rollout/admission totals.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4`
   Status: `pending`
@@ -10055,7 +10095,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `done` | ADR `0049` fixes the backend-neutral semantic schema, idiomatic native APIs, exact parity gate, and thin MCP projection before code. |
 | 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups and 20 digest-locked responses freeze the neutral oracle; `.10.3.2.0` corrects static drift to 53 mutations and `.10.3.3.0` corrects generated-plan drift to 55. |
-| 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `active` | Implement the Perl semantic index, native query surface, and exact reference conformance through owned children. |
+| 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `done` | Perl opaque construction, exact static/call/runtime projection, immutable query surface, and 12-role admission pass all 20 digests and canonical signoff. |
 | 74.2.0 | `FUTURE-PARITY-BACKLOG.10.3.0` | `done` | Exact toolbox probes map decoded source, descriptor, ActionIR, staged, generated, diagnostic, and missing runtime seams before behavior. |
 | 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `done` | Opaque construction, strict UTF-8/canonical source mapping, and immutable compiled-or-failed outcomes pass exact canonical proof without query or admission. |
 | 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `done` | Corrected the neutral static oracle, then projected exact static grammar, source, entry, diagnostic, and explanation semantics. |
@@ -10068,7 +10108,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `done` | Exact private calls/staged/generated projection passes canonical Phase 0 1,031/1,031. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `done` | Exact immutable capabilities/query/privacy/page/budget behavior passes all 19 static digests and canonical Phase 0 1,031/1,031. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `done` | Typed execution observations match the twentieth digest across eight routes and pass complete canonical signoff. |
-| 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |
+| 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `done` | Exact 12-role Perl consumer passes 18, governance 6/20/65, primary 66x2, and canonical Phase 0 1,031/1,031. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -10735,12 +10775,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Composed Perl semantic admission `.10.3.6` is next after the clean `.10.3.5` commit.
+- None. Rust semantic adapter `.10.4` is next after the clean `.10.3.6` commit.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.6` | One exact 12-role consumer; RED corrected to exact topology-only 4/18 then GREEN 18/18; all six semantic suites 149; broader semantic/generated/diagnostic/root/cursor 471 plus supplemental cursor/trace 127; checker 6/20/65 at rollout 2/9 and admission 1/6; KM 659/4,867; mdBook, memory, task, ADR, four doctrines, JSON/shell/whitespace; primary 66x2; complete local CI through Phase 0 1,031/1,031 in 633s; generated-output cleanup. | PASS. Perl is the first admitted native semantic backend through composition only; no production implementation changes, later backends/MCP remain pending, and parent `.10.3` closes. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.5` | Typed invocation-local observation owner; exact slot/final events; immutable runtime derivation; twentieth digest across eight direct/loaded/generated/traced/reconstructed roles; RED 12/55 to focused 106 and adjacent 468; semantic 6/20/57; KM 658/4,857; mdBook, memory, task, four doctrines, whitespace; canonical primary 66x2; standalone Phase 0 1,031/1,031 in 639s; complete local gate including registered Phase 0 in 650s; disk-pressure cleanup from 27 GiB to 117 GiB free while retaining the only live temp session. | PASS. Runtime evidence is caller-owned and query-pure; observer failures preserve exact identity; parser/result/input/cursor/trace/diagnostic/generated behavior is unchanged; rollout/admission remain 1/9 and 0/6, and `.10.3.6` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.3.0` | Knowledge Map and Toolbox retrieval; exact `Get(return_descriptor)`, `runtime_ctx_ref`, bootstrap, typed ActionIR, lowering, and generated-v2 probes across every neutral source family; raw-byte Unicode failure plus strict-decode success; six-child dependency split; KM 650/4,790; mdBook, memory, task, four doctrines, whitespace, selector 59/27/0; semantic 6/20/50; primary 66x2; Phase 0 1,031/1,031 in 608s; canonical exit 0. | PASS. First canonical run caught displaced repeated-action task/memory markers; focused 8/10/8+0/54 repair and complete restart pass. No behavior, fixture, contract, query, rollout, admission, or public API change; `.10.3.1` waits for the clean boundary. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.2` | Five exact UTF-8 bundles; six immutable snapshots; 20 independently derived SHA-256-locked responses; 50 schema/semantic/topology/privacy/rollout mutations; staged-artifact ADR `0050`; aggregate-selector public census 59/27/0; KM 649/4,783; mdBook, memory, task, all four doctrines, adjacent contracts, whitespace, cleanup; canonical primary 66x2 and Phase 0 1,031/1,031 in 612s, exit 0. | PASS. Neutral rollout is 1/9 and native admission 0/6; no parser/compiler/runtime/descriptor/generated/CLI/trace/native semantic API/MCP behavior changes; Perl `.10.3` waits for the clean commit. |
@@ -10951,6 +10992,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.3.6` | `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` | Exact 12-role composed consumer, all 20 digests, 65 mutations, rollout 2/9, admission 1/6, KM/book/doctrines, primary 66x2, canonical 1,031/633s, cleanup, and parent `.10.3` closure. |
 | `FUTURE-PARITY-BACKLOG.10.3.5` | `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across eight routes, focused 106/adjacent 468, semantic 6/20/57, canonical 66x2 and 1,031/650s, docs/KM lockstep, and safe disk-pressure cleanup without admission promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.0` | `FUTURE-PARITY-BACKLOG.10.3.0 - map Perl semantic authorities` | Strict source/canonical-byte, descriptor, ActionIR, staged, failure, generated, source-map, and typed-observer boundaries plus `.10.3.1-.10.3.6` split; KM/book/doctrines/semantic/primary/1,031-in-608s canonical signoff and cleanup complete. |
 | `FUTURE-PARITY-BACKLOG.10.2` | `FUTURE-PARITY-BACKLOG.10.2 - freeze semantic introspection contract` | Six neutral groups, 20 exact responses, 50 mutations, ADR `0050`, 59/27/0 adjacent public census, roadmap/book/KM lockstep, canonical 1,031/612s, and cleanup freeze the executable oracle without backend behavior. |
@@ -11139,6 +11181,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-21`: `.10.3.6` admits Perl semantic introspection through one exact 12-role composed consumer without a
+  new projection/evaluator/observer or production semantic edit. It covers source normalization, every snapshot,
+  direct/loaded/generated/traced runtime evidence, native/neutral JSON, all 20 digests, privacy/pages/budgets/errors/
+  explain, non-interference, immutability, and host-leak denial. Eight new mutations make governance 6/20/65 and
+  advance only Perl to rollout 2/9 and admission 1/6. Semantic 149, adjacent 471+127, KM 659/4,867, primary 66x2,
+  and canonical Phase 0 1,031/1,031 in 633 seconds pass; parent `.10.3` closes and Rust `.10.4` is next.
 
 - `2026-07-21`: `.10.3.5` adds caller-owned typed Perl runtime observations without coupling queries to execution.
   Exact slot selections and final results come from shared live/generated seams, and a completed event stream derives

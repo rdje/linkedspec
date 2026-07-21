@@ -763,20 +763,21 @@ content migration exists yet.
   pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
-- Deep semantic introspection plus MCP is contract-frozen under ADRs `0049`/`0050` and
-  `FUTURE-PARITY-BACKLOG.10.2` before any backend behavior. `linkedspec-semantic-model-v1` and
+- Deep semantic introspection plus MCP was contract-frozen under ADRs `0049`/`0050` and
+  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl is now the first admitted native implementation.
+  `linkedspec-semantic-model-v1` and
   `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 57 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 65 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
   authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
-  Neutral rollout is 1 complete / 8 pending,
-  while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
+  Neutral rollout is 2 complete / 7 pending,
+  while native backend admission is 1 complete / 5 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -797,7 +798,10 @@ content migration exists yet.
   `$index->with_execution_observation(\@events)`. The derived immutable snapshot matches the twentieth canonical
   runtime response across direct, loaded, captured/emitted generated direct/Get/traced, and validated-plan routes;
   observer failure identity and trace/diagnostic neutrality are exact. Querying still never executes. Composed
-  Perl admission remains `.10.3.6`, so rollout/admission stay 1/9 and 0/6.
+  admission `.10.3.6` adds one 12-role consumer covering strict source normalization, compiled/failed/runtime
+  snapshots, direct/loaded/generated/traced observations, native/neutral JSON, all 20 exact queries, privacy,
+  pages/budgets/errors/explain, no-execute immutability, and host-leak denial. The checker locks exact consumer
+  path/role/driver topology and Perl-only promotion; Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

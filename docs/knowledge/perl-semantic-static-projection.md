@@ -10,7 +10,7 @@ answers:
   - "are Perl semantic capabilities and query public yet"
   - "what does semantic_index_perl_static_projection test"
 date: 2026-07-21
-status: current private static foundation; public query and runtime projection added separately; admission pending
+status: current private static foundation; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, records, relations, source-map, diagnostics, immutability]
 evidence: perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_static_projection.t; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.2.1; FUTURE-PARITY-BACKLOG.10.3.3.1.1
 reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t && python3 tools/check_semantic_introspection_contract.py
@@ -32,9 +32,10 @@ copying.
 The focused static test deep-compares graph, privacy full/limited, failed compilation, and the runtime fixture's
 static half with `linkedspec-semantic-model-v1` after materializing source refs. Compiled sources with functions now
 delegate their typed call/binding/staged/generated rows to the separately tested call projection. Public
-`capabilities`/`query` are now supplied by `.10.3.4`; execution observations are an additive derived layer supplied
-by `.10.3.5`. Composed admission and MCP remain later leaves, so rollout stays 1/9 and native admission 0/6. See
+`capabilities`/`query` are supplied by `.10.3.4`; execution observations are an additive derived layer supplied by
+`.10.3.5`; one exact consumer admits their composition in `.10.3.6`. MCP and later backends remain separate. See
 [[perl-semantic-index-source-foundation]], [[perl-semantic-query-evaluator]],
 [[perl-semantic-runtime-observation]],
+[[perl-semantic-introspection-admission]],
 [[perl-semantic-call-staged-projection]], [[semantic-introspection-static-rule-authority]], and
 [[semantic-introspection-neutral-contract]].

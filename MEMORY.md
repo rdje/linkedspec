@@ -10,16 +10,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.5` — Perl runtime observation/routes close in this commit.
-- latest_commit: this commit — `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` (ahead: 271).
-- active_work_unit: none after this commit; `.10.3.5` passes exact route, runtime-query, lockstep, and canonical proof.
-- next_action: activate composed Perl semantic admission `FUTURE-PARITY-BACKLOG.10.3.6` task-tree-first from the
-  clean `.10.3.5` boundary.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.6` — composed Perl semantic admission in this commit.
+- latest_commit: this commit — `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` (ahead: 272).
+- active_work_unit: none; `.10.3.6` and parent `.10.3` are closed at the pre-commit signoff boundary.
+- next_action: after verifying the clean admission commit, activate Rust semantic adapter `.10.4` task-tree-first.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
-  exact ids/order/shapes/source policies/pages/budgets/errors, and 57 rejected mutations. Static/generated facts
-  cross-check admitted authority; spec names derive from caller logical identity. Coordinated model/hash drift fails. Neutral rollout is
-  1 complete / 8 pending; native backend admission is 0 complete / 6 pending.
+  exact ids/order/shapes/source policies/pages/budgets/errors, and 65 rejected mutations. Static/generated facts
+  cross-check admitted authority; spec names derive from caller logical identity. Coordinated model/hash drift
+  fails. Perl is the first exact 12-role consumer; neutral rollout is 2 complete / 7 pending and native backend
+  admission is 1 complete / 5 pending.
 - staged_schema_correction: ADR `0050` amends v1 before backend implementation with explicit `staged_artifact`
   payload/parse-job/result records, fixed facts/status, consumes/produces direction, lowered/staged provenance, and
   a staged target shape. Parse jobs remain distinct from generated artifacts.
@@ -42,9 +42,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   twentieth without query-side compile/execute/path/trace.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.3.4` query 9 groups/19 exact static digests/26 request-error boundaries, foundation/static/
-  calls/query 25, semantic 6/20/57, capability 80/0/0, selector 59/27/0, primary 66x2, and Phase 0 1,031/1,031 in
-  643 seconds; the complete canonical local gate exits 0.
+- current_signoff: `.10.3.6` consumer 18; all semantic 149; broader adjacent 471 plus supplemental cursor/trace
+  127; semantic governance 6/20/65; KM 659/4,867; mdBook/four doctrines; primary 66x2; complete local CI through
+  Phase 0 1,031/1,031 in 633 seconds; exit 0.
 - latest_bootstrap_read: 2026-07-21 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
   task, Knowledge Map, Toolbox, ADRs `0012`-`0016`, `0022`/`0023`, `0037`, `0042`, `0044`, `0047`-`0050`,
   descriptor/compiled/ActionIR/diagnostic/trace/generated/API authorities, and public precedents read.
@@ -55,5 +55,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: `.10.3.5` typed runtime delivery/projection/test/docs are focused-green;
-  canonical signoff, final durable counters, task close, and commit remain.
+- blockers: none. in_flight_uncommitted: signoff-complete `.10.3.6` admission closeout awaits only its commit.

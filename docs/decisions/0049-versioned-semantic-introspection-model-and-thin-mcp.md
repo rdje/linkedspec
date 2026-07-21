@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl source/projections/native query/runtime observations implemented; admission pending
+- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl native semantic surface admitted
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -390,8 +390,16 @@ receive a `semantic_observation_sink` callback. `LinkedSpec::RuntimeSemanticObse
 both textual trace and diagnostic output. The caller then passes the completed event array to
 `$index->with_execution_observation(...)`, which returns a new immutable index and never executes. The base index
 remains static. Direct, loaded, captured/emitted generated direct/Get/traced, and validated-plan routes produce the
-same three-event canonical runtime snapshot and twentieth response digest. Perl admission remains `.10.3.6`, so
-rollout/admission remain 1/9 and 0/6.
+same three-event canonical runtime snapshot and twentieth response digest. At the `.10.3.5` boundary, Perl
+admission still belonged to `.10.3.6`, so rollout/admission were intentionally unchanged at 1/9 and 0/6.
+
+Perl leaf `.10.3.6` composes the complete native surface without adding another semantic owner. One contract-
+declared 12-role consumer covers strict source normalization, compiled/failed/runtime snapshots, direct/loaded/
+generated/traced observations, native and neutral JSON, all 20 exact query digests, privacy/pages/budgets/errors/
+explain, non-interference, immutability, and stale host-leak denial. The neutral checker locks the consumer path,
+ordered roles, canonical driver/registration, and Perl-only admission/rollout promotion with eight additional
+mutations, for 65 total. Perl advances rollout to 2/9 and native admission to 1/6; Rust, Dart, Julia, PUC Lua,
+LuaJIT, recurring proof, MCP, and public no-drift remain owned by `.10.4-.10.10`.
 
 ## Links
 

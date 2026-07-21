@@ -11,16 +11,16 @@ snapshot-local ids/order, value and target shapes, request/response envelopes, d
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
 `python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
-six fixture groups and reports 57 rejected mutations. Static rule facts are independently derived from
+six fixture groups and reports 65 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
 mutations prove response-digest self-consistency cannot hide those facts. Generated artifact identity/family is
 also cross-checked against that contract's generated-source-v2 authority: the calls fixture emits `default`, and
 both illegal and coordinated valid-but-wrong family mutations fail. Every semantic spec name is independently
 derived from its caller-registered fixture logical name after removing `.spec`; the calls snapshot is therefore
-`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 1 complete / 8 pending; native backend
-admission remains 0 complete / 6 pending. No parser, compiler, runtime, descriptor, generated-source, CLI, trace,
-or MCP behavior is added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
+`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 2 complete / 7 pending;
+native backend admission is 1 complete / 5 pending. No parser, compiler, runtime, descriptor, generated-source,
+CLI, trace, or MCP behavior was added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
 Perl foundation `.10.3.1` implements opaque in-memory construction, strict source normalization/mapping, and
 immutable compiled-or-failed outcomes. Static leaf `.10.3.2.1` adds a private clone-safe projection whose graph,
@@ -38,8 +38,13 @@ clone/silence, and no-recompile/no-path proof. Runtime leaf `.10.3.5` adds typed
 capture plus immutable post-execution derivation. `PERL5LIB= prove -Iperl
 t/semantic_index_perl_runtime_observation.t` matches the twentieth exact response across native, loaded,
 captured/emitted generated direct/Get/traced, and validated-plan roles while proving failure identity and
-trace/diagnostic non-interference. The composed admission consumer remains `.10.3.6`, so neither rollout ledger
-advances.
+trace/diagnostic non-interference. Composed admission `.10.3.6` adds
+`PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t`: one exact 12-role consumer covers source
+normalization, all compiled/failed/runtime snapshots, direct/loaded/generated/traced observations, native and
+neutral JSON, every one of the 20 response digests, privacy/page/budget/error/explain behavior, no-execute
+immutability, and stale-host-leak denial. The checker requires its path, ordered role inventory, canonical driver,
+tracked registration, Perl admission/rollout promotion, and eight new path/role/driver/registration/admission
+mutations. Only Perl advances; the other five runtime admissions remain pending.
 
 Run its structural and ownership gate from the repository root:
 
