@@ -42,6 +42,29 @@ my %FAMILY_CURSOR_POLICY = (
  rep_and_bcode => 'consume',
 );
 
+my %HANDLER_VARIANT_FAMILY = (
+ _default => 'default',
+ '<none>' => 'default',
+ OR_ACODE => 'or_acode',
+ AND_SINGLE_ACODE => 'and_single_acode',
+ AND_ACODE => 'and_acode_seq',
+ AND_BCODE => 'and_bcode',
+ OR_BCODE => 'or_bcode',
+ REP_ACODE => 'rep_acode',
+ REP_BCODE => 'rep_bcode',
+ REP_AND_ACODE => 'rep_and_acode',
+ REP_AND_BCODE => 'rep_and_bcode',
+);
+
+sub contract_identity {
+ return { contract_id => $CONTRACT_ID, format_version => $FORMAT_VERSION }
+}
+
+sub family_for_handler_variant {
+ my ($variant) = @_;
+ return $HANDLER_VARIANT_FAMILY{defined($variant) ? $variant : ''} // 'default'
+}
+
 sub family_cursor_policy {
  my ($family) = @_;
  return undef unless defined $family;

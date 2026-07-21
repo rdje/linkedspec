@@ -57,6 +57,10 @@ changing a required kind, fact, or relation follows ADR `0049`'s new-version rul
 - This correction changes no parser, compiler, scheduler, runtime, descriptor, generated artifact, CLI, trace, or
   MCP behavior.
 
+Perl implementation note (2026-07-21): `.10.3.3.1.1` is the first native private projection of this decision.
+The exact calls model retains three separate function-body records and the required directed chain while the
+handler plan remains a distinct `generated_artifact`. Public query and backend admission remain pending.
+
 ## Links
 
 - Amends: ADR `0049`

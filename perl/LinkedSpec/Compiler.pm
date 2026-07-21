@@ -61,20 +61,12 @@ sub _generated_source_identity {
 
 sub _generated_source_family_for_variant {
  my ($variant) = @_;
- my %family = (
-  _default => 'default',
-  '<none>' => 'default',
-  OR_ACODE => 'or_acode',
-  AND_SINGLE_ACODE => 'and_single_acode',
-  AND_ACODE => 'and_acode_seq',
-  AND_BCODE => 'and_bcode',
-  OR_BCODE => 'or_bcode',
-  REP_ACODE => 'rep_acode',
-  REP_BCODE => 'rep_bcode',
-  REP_AND_ACODE => 'rep_and_acode',
-  REP_AND_BCODE => 'rep_and_bcode',
- );
- return $family{defined($variant) ? $variant : ''} // 'default'
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::GeneratedSource',
+  'family_for_handler_variant',
+  $variant,
+ )
 }
 
 sub _generated_source_plan_rows {

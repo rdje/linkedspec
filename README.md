@@ -783,9 +783,13 @@ content migration exists yet.
   runtime-context failure authority without parser execution or path reads. Static leaf `.10.3.2.1` now retains a
   private clone-safe projection of exact spec/source/rule/regex-slot/edge/lifecycle/diagnostic/decision/explanation
   records and relations. It deep-equals the corrected graph, Unicode privacy, failed-compilation, and runtime-static
-  neutral targets without exposing descriptor coderefs, compiled regexes, AST layout, or paths. Public
-  `capabilities` and `query` are still absent, so rollout/admission remain 1/9 and 0/6; corrected calls/staging
-  projection `.10.3.3.1` follows, then query/runtime/admission `.10.3.4-.10.3.6`.
+  neutral targets without exposing descriptor coderefs, compiled regexes, AST layout, or paths. Calls leaf
+  `.10.3.3.1.1` now adds the complete private function/helper/call/binding, staged payload/job/result, resolution-
+  evidence, and generated-plan projection: all corrected 22 records and 25 relations match exactly. Source-preorder
+  typed ActionIR supplies calls, descriptor function spans remain character coordinates until the source-map
+  boundary, and compiler plus projector share generated-v2 identity/family ownership. Public `capabilities` and
+  `query` are still absent, so rollout/admission remain 1/9 and 0/6; query/runtime/admission
+  `.10.3.4-.10.3.6` follow.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

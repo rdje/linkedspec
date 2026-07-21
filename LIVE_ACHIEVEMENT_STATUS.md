@@ -8,24 +8,46 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.3.1.0` is complete before its clean commit after calls projection parent `.10.3.3.1` activated task-tree-first
-  from clean generated-plan correction `c07ba618` at ahead 267. Complete 22/25 RED found the calls model alone used
-  snapshot id `calls` as spec name instead of caller identity stem `calls_and_staging`. The model and independent
-  all-snapshot identity guard now reject direct/coordinated old-name drift. Semantic 6/20/57, static 10,
-  generated/rule-local, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary
-  5x2x66, KM 655/4,824, mdBook/governance, canonical primary 66x2, and Phase 0 1,031/1,031 in 618 seconds pass
-  with exit 0. Only the clean correction commit remains before projector `.10.3.3.1.1`.
+- `FUTURE-PARITY-BACKLOG.10.3.3.1.1` is complete and canonical-green from clean spec-identity correction
+  `7d9077c4` at ahead 268; final commit/clean verification is in progress. The private projector deep-equals the
+  corrected 22-record/25-relation calls target and locks typed preorder/resolution, staged direction, all handler
+  variants, clone/host-layout denial, Unicode coordinates, and interleaved function-shell masking. Public query/
+  observations and rollout/admission remain absent; immutable capabilities/query `.10.3.4` is next after clean.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
 observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
-rollout legs and native backend admission 0/6: Perl construction and private static records exist, but public
+rollout legs and native backend admission 0/6: Perl construction and private static/call/staged records exist, but public
 capabilities/query and a composed backend consumer do not. Static projection changes neither ledger.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.1.1 — project Perl call semantics**
+  (DONE and canonical-green from base `7d9077c4`; commit in progress).
+
+  **Result:** The opaque Perl index retains the exact 22-record/25-relation calls, bindings, shapes, staged
+  payload/job/result, and generated-plan projection with no public query or host-layout leakage.
+
+  **Proof:** Calls 6, foundation/static 10, semantic 6/20/57, generated/rule-local, capability 80/0/0, selector
+  59/27/0, repeated action 8/10/8+0/54, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2,
+  Phase 0 1,031/1,031 in 636 seconds, canonical exit 0.
+
+  **Next:** Activate immutable Perl capabilities/query/privacy/budgets `.10.3.4` after the clean commit.
+
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.1.0 — correct semantic spec identity**
+  (DONE at clean commit `7d9077c4` from base `c07ba618`).
+
+  **Result:** Every semantic spec name derives from caller logical identity; calls uses `calls_and_staging`, and
+  independent direct/coordinated mutations reject the old snapshot-id shortcut without changing query hashes.
+
+  **Proof:** Semantic 6/20/57, foundation/static 10, generated/rule-local authorities, capability 80/0/0,
+  selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary 5x2x66, KM 655/4,824, canonical primary
+  66x2, Phase 0 1,031/1,031 in 618 seconds, canonical exit 0.
+
+  **Next:** Fully corrected private calls projection `.10.3.3.1.1` activated from the clean boundary.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.0 — correct generated plan oracle**
   (DONE at clean commit `c07ba618` from base `e0aeee63`).
 

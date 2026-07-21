@@ -1,17 +1,17 @@
 # Semantic Introspection
 
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl also has the
-construction and private static-projection foundations, but it does **not** yet have public `capabilities` or
-`query` answers. The
+construction and private static plus call/staged/generated projections, but it does **not** yet have public
+`capabilities` or `query` answers. The
 distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
 - the neutral checker derives and digest-locks exact answers without admitting a backend early; and
 - `LinkedSpec::semantic_index(...)` constructs an opaque compiled-or-failed Perl snapshot and retains private
-  clone-safe static records/relations; and
+  clone-safe static plus compiled call/staging/generated records/relations; and
 - the current `return_descriptor` / descriptor APIs remain the usable introspection surface until the later Perl
-  leaves implement calls/staging and public queries.
+  leaves implement public queries.
 
 The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT: a constructor foundation is not semantic-query admission. MCP remains later transport
@@ -76,8 +76,61 @@ backend AST/IR, object identities, and paths are rejected at the clone boundary.
 
 The focused adapter test materializes internal source keys and deep-compares the complete graph, Unicode privacy
 at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
-neutral oracle. This still does not make the backend admitted: call/staged records, query-time source redaction,
-pages/budgets, execution observations, route identity, and the composed consumer remain later leaves.
+neutral oracle. This still does not make the backend admitted: query-time source redaction, pages/budgets,
+execution observations, route identity, and the composed consumer remain later leaves.
+
+## Current private call, staging, and generated projection
+
+The corrected calls fixture exercises every compiled authority that the static graph alone cannot represent:
+
+```spec
+fn normalize(value) { return(trim(value)) }
+
+Top::
+ /x/ -> Done {
+   result = normalize(match_text())
+   return(result)
+ }
+
+Done:
+ /x/
+```
+
+The private Perl projection now matches all 22 neutral records and 25 relations for this source. Definition order
+is `function:normalize`, `rule:Top`, `rule:Done`. Typed ActionIR traversal records `trim` in the function body,
+then outer `normalize`, nested `match_text`, and the later `return` in the action block. The assignment creates a
+mutable action binding; `normalize` writes it, and `return` reads it. Exact registered function resolution carries
+a decision and two ordered explanation steps instead of exposing the registry object.
+
+Value shapes are intentionally conservative. `trim` and `match_text` return `string` under the governed semantic
+helper vocabulary, so `normalize`, the binding, the return call, the edge, and the owning rule can retain string
+shape. A literal, binding, registered function, or governed helper may strengthen a shape; an unrecognized
+expression remains `unknown` rather than inheriting a backend guess.
+
+Function-body staging remains three distinct records:
+
+```text
+payload <-consumed by- parse_job -produces-> result
+   ^                                      |
+   +-------------- lowered_from ----------+
+                         result -staged_by-> parse_job
+```
+
+The separate generated artifact reports `linkedspec-generated-source-v2`, format 2, family `default`. Compiler
+and semantic projector call the same `LinkedSpec::GeneratedSource` identity and handler-family owners, so the
+semantic layer neither duplicates the family classifier nor generates implementation text.
+
+Source coordinates have an important split. Function registry `source_span`/`body_span` fields and typed ActionIR
+local spans count decoded characters. Only the final source-reference boundary converts them to strict UTF-8 byte
+offsets and one-based Unicode-scalar columns. A focused `# préface` case locks exact call excerpts and columns so
+ASCII cannot hide byte/character confusion. The original-source rule scanner also masks descriptor-owned top-level
+function ranges while preserving newlines, matching the compiler's function-blanked rule input; an interleaved
+function therefore cannot become a synthetic bare edge.
+
+This remains internal implementation evidence, not a callable query surface. Returned private copies contain only
+canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
+generated source, object identity, or path. Public capabilities/query, runtime observations, route equivalence,
+and Perl admission remain `.10.3.4-.10.3.6`.
 
 ## Why this is separate from the descriptor
 
@@ -97,11 +150,11 @@ semantic snapshot:
 
 | Authority | Reusable meaning | Work still owned by the semantic adapter |
 |---|---|---|
-| decoded source plus canonical UTF-8 bytes | exact accepted text | static source coordinates/excerpts/digests now projected; call/staged spans remain later |
-| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | static host values are normalized privately; functions/calls/staging remain later |
-| typed ActionIR AST | source-preorder calls, bindings, and nested spans | registry resolution, portable shapes, evidence |
+| decoded source plus canonical UTF-8 bytes | exact accepted text | static and call coordinates/excerpts/digests now projected; query ceilings remain later |
+| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | host values are normalized privately; public query remains later |
+| typed ActionIR AST | source-preorder calls, bindings, and nested spans | private resolution, portable shapes, and evidence now projected |
 | runtime context | structured compilation failure | static unknown-rule normalization now implemented; other portable failures remain later |
-| generated-source v2 metadata | contract/format, source identity, ordered family plan, entries | separate generated-artifact relation; never snapshot reconstruction |
+| generated-source v2 owners | contract/format and handler family | separate generated-artifact relation now projected; never snapshot reconstruction |
 | runtime handlers | exact accepted slot and final-result seams | a new invocation-local typed observation sink separate from trace |
 
 `LinkedSpec::Get` is character-oriented internally. Direct raw UTF-8 bytes for the privacy fixture's `Töp::`
@@ -319,7 +372,9 @@ The dependency order is:
 | `.10.3.1` | Perl strict source/map/compiled-or-failed outcome foundation | implemented; admission unchanged |
 | `.10.3.2.0` | correct and independently gate neutral static rule facts | complete |
 | `.10.3.2.1` | Perl private static graph/diagnostic projection | implemented; admission unchanged |
-| `.10.3.3-.10.3.6` | Perl calls/staging, query, runtime/routes, admission | pending |
+| `.10.3.3.0-.10.3.3.1.0` | correct generated family and spec identity before projection | complete |
+| `.10.3.3.1.1` | Perl private calls/bindings/staged/generated projection | implemented; admission unchanged |
+| `.10.3.4-.10.3.6` | Perl query, runtime/routes, admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |

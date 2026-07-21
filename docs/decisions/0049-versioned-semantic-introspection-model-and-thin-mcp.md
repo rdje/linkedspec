@@ -365,6 +365,15 @@ the `.spec`-stripped caller logical identity, yet the calls row alone used snaps
 rejects direct or coordinated old-name drift. It changes no response digest, path policy, behavior, rollout, or
 admission; projector child `.10.3.3.1.1` consumes the fully corrected target.
 
+Perl child `.10.3.3.1.1` now implements that private compiled layer. Descriptor function order/signatures,
+source-preorder typed ActionIR, staged function sidecars, and generated-source-v2 identity compose all corrected
+22 records and 25 relations without serializing the descriptor, AST, or generated implementation. Function and
+ActionIR source spans are character coordinates until the final source-map projection; a multibyte-prefix lock
+prevents ASCII-only byte/character aliasing. The original source scanner masks descriptor-owned top-level function
+ranges before rule-member classification, matching the compiler's function-blanked input. Compiler and projector
+delegate handler-family and artifact-identity facts to shared `LinkedSpec::GeneratedSource` owners. This adds no
+public query, observation, rollout, or admission; `.10.3.4-.10.3.6` remain responsible for those boundaries.
+
 ## Links
 
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10-.10.10`)

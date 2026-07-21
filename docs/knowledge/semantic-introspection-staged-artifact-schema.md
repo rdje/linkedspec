@@ -9,7 +9,7 @@ answers:
   - why did ADR 0050 amend semantic model v1
   - what schema defect was found in FUTURE-PARITY-BACKLOG.10.2
 date: 2026-07-20
-status: neutral contract executable; backend rollout pending
+status: neutral contract executable; private Perl projection implemented; backend rollout pending
 tags: [introspection, semantic-api, staged-parsing, provenance, schema, FUTURE-PARITY-BACKLOG]
 evidence: "The first executable staged function-body model under FUTURE-PARITY-BACKLOG.10.2 could not place parser spec, top rule, stitch/failure policy, parent path, or status on ADR 0049's record vocabulary without falsely calling the parse job a generated artifact. ADR 0050 added explicit staged_artifact payload/parse_job/result records and consumes/produces/staged_by/lowered_from relations before v1 implementation; the completed neutral model and checker now enforce all three roles and reject their collapse, reversal, or misclassification."
 reverify: "rg -n 'staged_artifact|consumes|produces|generated_artifact' docs/decisions/0050-semantic-introspection-staged-artifact-records.md capability_conformance/semantic_introspection_contract.json tools/check_semantic_introspection_contract.py"
@@ -26,6 +26,11 @@ source provenance.
 A staged parse job is not a `generated_artifact`. Generated artifacts are emitted/reconstructed backend products
 and remain separate targets of `generated_as`. This distinction was made explicit by ADR `0050` after the first
 executable schema model showed that ADR `0049` required staged provenance but had omitted a record to carry it.
+
+Perl leaf `.10.3.3.1.1` is the first native private projection of this chain. Each compiled function produces
+separate payload, parse-job, and result records with exact directed relations and plain-data policies; the generated
+handler plan remains a separate record. The focused 22-record/25-relation equality test rejects collapsing or
+reversing those roles, but public query and backend admission are still pending.
 
 Related facts: [[semantic-introspection-api-mcp-direction]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[staged-parser-registry-dispatch-contract]].

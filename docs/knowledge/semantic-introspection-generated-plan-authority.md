@@ -9,9 +9,9 @@ answers:
   - can semantic model and response hashes hide generated plan family drift
   - which task corrected the semantic generated plan oracle
 date: 2026-07-21
-status: current corrected neutral authority boundary
+status: current corrected neutral authority boundary; private Perl projector consumes shared owner
 tags: [semantic-introspection, generated-source, handler-family, oracle, mutations, parity]
-evidence: "FUTURE-PARITY-BACKLOG.10.3.3.0 compared exact LinkedSpec::Get(return_descriptor) selected_handler_variant and independently loaded emit_generated_source metadata with linkedspec-rule-local-cursor-v1 generated_source_v2 before adapter implementation. The calls fixture selects _default and emits default; and_acode is absent from the ten-family v2 vocabulary. The neutral model was corrected to default and the checker now rejects illegal or coordinated wrong-family drift."
+evidence: "FUTURE-PARITY-BACKLOG.10.3.3.0 compared exact LinkedSpec::Get(return_descriptor) selected_handler_variant and independently loaded emit_generated_source metadata with linkedspec-rule-local-cursor-v1 generated_source_v2 before adapter implementation. The calls fixture selects _default and emits default; and_acode is absent from the ten-family v2 vocabulary. FUTURE-PARITY-BACKLOG.10.3.3.1.1 moves handler-variant classification and contract identity behind LinkedSpec::GeneratedSource owners shared by Compiler and the private semantic projector."
 reverify: "python3 tools/check_semantic_introspection_contract.py && perl -Iperl -MLinkedSpec -e 'print q{use TOOLBOX emit_generated_source metadata probe for calls_and_staging.spec}'"
 ---
 
@@ -28,8 +28,10 @@ external generated-source-v2 authority, requires the exact default entry header 
 checks membership in the ten-family vocabulary, and rejects both the old illegal value and a coordinated valid-
 but-wrong family even if response hashes are refreshed.
 
-This correction changes no compiler, runtime, generated source, query response, rollout, or backend admission.
-It fixes the oracle before the Perl calls/staging projector consumes it.
+The private Perl calls/staging projector now consumes this correction without duplicating the family table:
+`LinkedSpec::GeneratedSource` owns both contract identity and handler-variant classification, while `Compiler` and
+`SemanticCallProjection` delegate to it. This refactor preserves emitted behavior and keeps implementation source
+outside the semantic record. Public query, rollout, and backend admission remain unchanged.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-introspection-static-rule-authority]],
 [[perl-semantic-introspection-authority-map]], [[perl-generated-source-contract-v2]].

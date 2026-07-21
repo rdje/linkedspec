@@ -31,8 +31,12 @@ This document is the current high-level technical reading of the project shape. 
   `.10.3.2.1` now correlates accepted source with descriptor order/topology and runtime failure to retain clone-safe
   normalized spec/source/rule/regex/edge/lifecycle/diagnostic/decision/explanation records and relations. It
   deep-equals graph, privacy full/limited, failure, and runtime-static neutral targets; self-indexed edges select
-  their slot without a redundant self-dispatch relation. No path is read, parser executed, public query exposed,
-  observation captured, or backend admitted. `.10.3.3.1-.10.3.6` own the later layers after the oracle correction.
+  their slot without a redundant self-dispatch relation. Calls leaf `.10.3.3.1.1` composes descriptor function
+  facts, source-preorder typed ActionIR, explicit staged sidecars, and shared generated-v2 identity into the exact
+  corrected 22-record/25-relation calls target. Descriptor/ActionIR spans remain character coordinates until final
+  source mapping; function shells are masked before original-source rule classification, matching compiler
+  blanking. No path is read, parser executed, public query exposed, observation captured, or backend admitted.
+  `.10.3.4-.10.3.6` own query, runtime/routes, and admission.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

@@ -1,5 +1,38 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.1.1` — semantic calls are a composition, not an AST export): the
+  corrected calls target cannot be recovered from the outward descriptor alone. Descriptor function definitions
+  own stable order and callable signatures; typed ActionIR owns nested source-preorder expression structure;
+  staged function sidecars own payload/job/result policy; `GeneratedSource` owns emitted artifact identity and
+  structural family. The private projector maps only those meanings into the closed neutral vocabulary and keeps
+  unknown shapes unknown.
+
+  Call ids are owner-local while canonical call order is global source traversal. Outer calls precede nested
+  arguments; the function body is traversed at its authored definition position; action assignment produces one
+  binding with an exact `writes` relation and later `return(binding)` produces `reads`. Registered function
+  resolution adds the exact decision and two explanation steps, while helper resolution carries only authorized
+  contract facts. Staged payload, parse job, and result remain three records with explicit consumes/produces/
+  lowered/staged direction. They are never relabeled as the separate generated handler-plan artifact.
+
+  The first 22/25 equality implementation passed for ASCII and still contained a coordinate bug. A synthetic
+  `# préface` prefix made the exact function-body `trim(value)` excerpt become `(trim(value`: descriptor
+  `source_span.start = 10` and `body_span.start = 27` counted decoded characters even though the prefix occupied
+  11 UTF-8 bytes. The source mapper had correctly maintained both coordinate systems; the projector was wrong to
+  reinterpret registry spans as bytes. All registry/ActionIR composition now remains in character coordinates and
+  only final source references convert to byte plus scalar-column spans. The permanent Unicode lock makes that
+  distinction executable.
+
+  A second structural lock covers interleaved top-level functions. The compiler blanks function shells while
+  preserving newlines before ordinary rule parsing, but the semantic source scanner intentionally sees original
+  caller text. It now performs the same descriptor-span masking locally before member classification; otherwise a
+  function after `Top` can be read as a bare member of `Top`. This is source correlation only, not a second
+  function parser. Public query, observations, generated execution, runtime behavior, rollout, and admission do
+  not change.
+
+  Complete proof is calls 6 and exact 22/25, foundation/static 10, semantic 6/20/57, generated/rule-local,
+  capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary 5x2x66, Knowledge Map
+  656/4,834, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The complete local gate exits 0.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.1.0` — snapshot ids are not spec identities): full 22/25 calls RED
   stopped before missing records at `spec:0.name`. Construction uses required caller identity
   `calls_and_staging.spec` and the established stem rule yields `calls_and_staging`; the hand-authored model alone

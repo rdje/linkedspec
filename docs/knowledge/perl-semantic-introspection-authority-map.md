@@ -9,7 +9,7 @@ answers:
   - "does Perl RuntimeContext capture semantic execution events"
   - "can generated metadata reconstruct a semantic index"
   - "how should the Perl failed-compilation diagnostic be normalized"
-date: 2026-07-20
+date: 2026-07-21
 status: current
 tags: [perl, semantic-introspection, utf8, descriptor, actionir, provenance, diagnostics]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.3.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/linkedspec-book/src/public-api/semantic-introspection.md
@@ -28,7 +28,11 @@ already enforce that strict boundary. The native constructor must therefore acce
 bytes, retain canonical bytes for spans/digests, reject malformed UTF-8, and use only a caller logical name.
 Rule/edge/lifecycle coordinates require a source mapper over accepted text because no descriptor owns them. Static
 leaf `.10.3.2.1` now performs that private correlation and normalizes internal `bare_edge_target_undefined` /
-`normalize_edges` to the v1 portable compile diagnostic. Calls/staging, query, observations, and admission remain
-split under `.10.3.3-.10.3.6`. See [[perl-semantic-static-projection]],
+`normalize_edges` to the v1 portable compile diagnostic. Call leaf `.10.3.3.1.1` now composes function/helper/call/
+binding facts from descriptor plus typed ActionIR, explicit staged payload/job/result provenance from the function
+sidecars, and generated-plan identity from shared generated-v2 owners. Descriptor function and ActionIR spans are
+character offsets; only `SemanticSourceMap` converts the final references to bytes and scalar columns. Query,
+observations, and admission remain split under `.10.3.4-.10.3.6`. See [[perl-semantic-static-projection]],
+[[perl-semantic-call-staged-projection]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[semantic-introspection-neutral-contract]], and
 [[perl-generated-source-contract-v2]].

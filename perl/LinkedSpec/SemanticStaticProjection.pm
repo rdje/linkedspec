@@ -13,6 +13,8 @@ use utf8;
 use Encode qw(encode FB_CROAK LEAVE_SRC);
 use JSON::PP ();
 
+use LinkedSpec::SemanticCallProjection ();
+
 my @RECORD_KINDS = qw(
  capabilities spec source rule regex_slot edge lifecycle function helper
  binding call staged_artifact generated_artifact diagnostic decision execution
@@ -46,7 +48,8 @@ sub build {
  $snapshot->{content_digest_available} = _boolean($snapshot->{content_digest_available});
  $args{snapshot} = $snapshot;
 
- my $scan = _scan_source($source_text);
+ my $scan_text = _mask_function_definitions($source_text, $args{descriptor});
+ my $scan = _scan_source($scan_text);
  my $projection = ref($args{descriptor}) eq 'HASH'
   ? _build_compiled(
      %args,
@@ -85,8 +88,31 @@ sub _build_compiled {
   ? 'explicit_selector'
   : (_first_marker(\@definition_order, $args{scan}) ? 'first_marker' : 'first_rule');
 
+ my %components;
+ foreach my $label (@definition_order) {
+  my $rule = ref($descriptor->{spec}{$label}) eq 'HASH' ? $descriptor->{spec}{$label} : {};
+  my $rule_meta = ref($rule->{meta}) eq 'HASH' ? $rule->{meta} : {};
+  my $section = $args{scan}{by_label}{$label};
+  $components{$label} = _compiled_components($label, $rule_meta, $section);
+ }
+ my $call_projection = LinkedSpec::SemanticCallProjection::build(
+  %args,
+  descriptor => $descriptor,
+  rule_order => \@definition_order,
+  rule_ids => \%rule_ids,
+  components => \%components,
+  selected_rule => $selected_rule,
+ );
+ foreach my $label (@definition_order) {
+  my $rule_id = $rule_ids{$label};
+  foreach my $edge (@{$components{$label}{edges} || []}) {
+   my $shape = $call_projection->{edge_value_shapes}{"edge:$rule_id:$edge->{order}"};
+   $edge->{value_shape} = $shape if ref($shape) eq 'HASH';
+  }
+ }
+
  my (@records, @relations);
- my %source_refs;
+ my %source_refs = %{$call_projection->{source_refs}};
  push @records, _record(
   id => 'spec:0',
   kind => 'spec',
@@ -95,21 +121,15 @@ sub _build_compiled {
   order => 0,
   source => undef,
   facts => {
-   definition_order => [map { $rule_ids{$_} } @definition_order],
+   definition_order => $call_projection->{definition_order_ids},
    compiled_rule_order => [map { _rule_id($_) } @compiled_order],
    entry_rule_id => defined($selected_rule) ? _rule_id($selected_rule) : undef,
    entry_selection_basis => $entry_basis,
   },
  );
  push @records, _source_record();
-
- my %components;
- foreach my $label (@definition_order) {
-  my $rule = ref($descriptor->{spec}{$label}) eq 'HASH' ? $descriptor->{spec}{$label} : {};
-  my $rule_meta = ref($rule->{meta}) eq 'HASH' ? $rule->{meta} : {};
-  my $section = $args{scan}{by_label}{$label};
-  $components{$label} = _compiled_components($label, $rule_meta, $section);
- }
+ push @records, @{$call_projection->{records}};
+ push @relations, @{$call_projection->{relations}};
 
  foreach my $label (@definition_order) {
   my $rule = ref($descriptor->{spec}{$label}) eq 'HASH' ? $descriptor->{spec}{$label} : {};
@@ -265,7 +285,10 @@ sub _build_compiled {
 
  # A multi-rule selection has a non-trivial choice worth retaining as ordered
  # evidence. Single-rule selection remains fully represented by the spec facts.
- if (@definition_order > 1 && defined($selected_rule) && exists($rule_ids{$selected_rule})) {
+ if (!@{$call_projection->{records}}
+  && @definition_order > 1
+  && defined($selected_rule)
+  && exists($rule_ids{$selected_rule})) {
   _add_entry_explanation(
    records => \@records,
    relations => \@relations,
@@ -438,6 +461,7 @@ sub _compiled_components {
    has_block => $descriptor_edge->{block} ? 1 : 0,
    value_shape => ref($member) eq 'HASH' ? _infer_return_shape($member->{text}) : _value_shape('unknown'),
    range => ref($member) eq 'HASH' ? $member->{range} : undef,
+   action_block => ref($member) eq 'HASH' ? $member->{action_block} : undef,
   };
  }
 
@@ -591,6 +615,38 @@ sub _scan_source {
  return { rules => \@rules, by_label => \%by_label }
 }
 
+sub _mask_function_definitions {
+ my ($source_text, $descriptor) = @_;
+ return $source_text unless ref($descriptor) eq 'HASH';
+ # The compiler's rule parser sees function shells blanked in place, while the
+ # semantic projector intentionally retains original caller text. Reproduce
+ # that structural blanking locally so a top-level fn after a rule is never
+ # misclassified as one of the rule's members; newlines and offsets stay exact.
+ my $functions = ref($descriptor->{functions}) eq 'HASH' ? $descriptor->{functions} : {};
+ my @ranges = sort { $b->{start} <=> $a->{start} }
+  grep {
+   ref($_) eq 'HASH'
+    && defined($_->{start})
+    && defined($_->{end})
+    && $_->{start} >= 0
+    && $_->{end} >= $_->{start}
+    && $_->{end} <= length($source_text)
+  }
+  map {
+   my $definition = $functions->{$_};
+   ref($definition) eq 'HASH' ? $definition->{source_span} : undef
+  }
+  keys %$functions;
+ my $masked = $source_text;
+ foreach my $range (@ranges) {
+  my $length = $range->{end} - $range->{start};
+  my $replacement = substr($masked, $range->{start}, $length);
+  $replacement =~ s/[^\n]/ /g;
+  substr($masked, $range->{start}, $length, $replacement);
+ }
+ return $masked
+}
+
 sub _source_lines {
  my ($text) = @_;
  my @lines;
@@ -629,6 +685,7 @@ sub _finish_member {
  my $text = substr($source_text, $member->{start}, $member->{end} - $member->{start});
  my $regex = _leading_regex($text);
  my $edge = _edge_fields($text);
+ my $action_block = _edge_action_block($text, $member->{start}, $edge);
  my $lifecycle_marker;
  $lifecycle_marker = $1 if $text =~ /\A(?:\s*)(I|E|EX|IT|LX|LS|LE)\s*\{/s;
  push @{$rule->{members}}, {
@@ -636,6 +693,7 @@ sub _finish_member {
   range => { start => $member->{start}, end => $member->{end} },
   regex => $regex,
   edge => $edge,
+  action_block => $action_block,
   lifecycle_marker => $lifecycle_marker,
  };
  return
@@ -654,10 +712,49 @@ sub _edge_fields {
    target => $1,
    target_index => defined($2) ? 0 + $2 : undef,
    ownership => index($&, '->') >= 0 ? 'action' : 'blind',
+   target_end => $+[0],
   }
  }
  if ($text =~ /\A\s*(\w+)\b/s && $text !~ /\A\s*(?:I|E|EX|IT|LX|LS|LE)\s*\{/s) {
-  return { target => $1, target_index => undef, ownership => undef }
+  return { target => $1, target_index => undef, ownership => undef, target_end => $+[0] }
+ }
+ return undef
+}
+
+sub _edge_action_block {
+ my ($text, $absolute_start, $edge) = @_;
+ return undef unless ref($edge) eq 'HASH';
+ my $search_start = defined($edge->{target_end}) ? $edge->{target_end} : 0;
+ my $open = index($text, '{', $search_start);
+ return undef if $open < 0;
+ my ($depth, $quote, $escaped) = (0, undef, 0);
+ for (my $index = $open; $index < length($text); ++$index) {
+  my $character = substr($text, $index, 1);
+  if (defined $quote) {
+   if ($escaped) {
+    $escaped = 0;
+   } elsif ($character eq '\\') {
+    $escaped = 1;
+   } elsif ($character eq $quote) {
+    $quote = undef;
+   }
+   next;
+  }
+  if ($character eq q{'} || $character eq q{"}) {
+   $quote = $character;
+   next;
+  }
+  ++$depth if $character eq '{';
+  if ($character eq '}') {
+   --$depth;
+   if ($depth == 0) {
+    return {
+     start => $absolute_start + $open + 1,
+     end => $absolute_start + $index,
+     text => substr($text, $open + 1, $index - $open - 1),
+    }
+   }
+  }
  }
  return undef
 }

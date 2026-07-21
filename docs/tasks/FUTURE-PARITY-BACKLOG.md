@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (calls spec-identity oracle correction `.10.3.3.1.0` is complete and canonical-green;
-  its clean commit is the only boundary before fully corrected projector `.10.3.3.1.1`)
+- Last updated: `2026-07-21` (fully corrected calls projector `.10.3.3.1.1` is active from clean spec-identity
+  correction `7d9077c4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7110,7 +7110,7 @@ before implementation.
       are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Project Perl calls, shapes, bindings, staged provenance, and generated-plan semantics.
   Depends on: `.10.3.2`
   Acceptance: Traverse typed ActionIR AST in source preorder, resolve registered functions before helper contracts,
@@ -7119,6 +7119,12 @@ before implementation.
     preserve consumes/produces/lowered/staged direction. Reuse one shared generated-family classifier to add the
     separate v2 handler-plan artifact. Deep-equal the complete calls/staging neutral snapshot and reject host IR,
     generated implementation source, unsupported shape strengthening, and provenance collapse.
+  Verification: Completed through correction leaves `.10.3.3.0`/`.10.3.3.1.0` and projector leaf
+    `.10.3.3.1.1`. The corrected private projection deep-equals 22 records/25 relations and passes focused calls 6,
+    foundation/static 10, semantic 6/20/57, generated/rule-local, capability 80/0/0, selector 59/27/0, repeated
+    action 8/10/8+0/54, the five-backend primary matrix 5x2x66, Knowledge Map 656/4,834, mdBook, memory/doctrines/
+    whitespace, canonical primary 66x2, and independently observed Phase 0 1,031/1,031 in 636 seconds. The complete
+    local gate exits 0 through the same Phase 0 boundary; rollout/admission remain 1/9 and 0/6.
 
   #### Acceptance Checklist
 
@@ -7126,13 +7132,13 @@ before implementation.
     inventory descriptor, typed ActionIR, function staging registry, and generated-plan inputs in source order.
   - [x] **ROOT CAUSE (WHY + WHERE)** — Map every call, binding, helper/function, shape, evidence, staged payload/job/
     result, and generated artifact field to one native authority; preserve unknown/absent seams without inference.
-  - [ ] **FIX** — Extend only the private immutable projection behind `semantic_index` with calls/shapes/bindings,
+  - [x] **FIX** — Extend only the private immutable projection behind `semantic_index` with calls/shapes/bindings,
     ADR `0050` staged provenance, and separate generated-plan semantics; do not add public query or observations.
-  - [ ] **ADDRESSED (verified)** — Deep-equal the complete calls/staging snapshot and prove source preorder, function-
+  - [x] **ADDRESSED (verified)** — Deep-equal the complete calls/staging snapshot and prove source preorder, function-
     before-helper resolution, exact authorized shapes, provenance direction, clone isolation, and host-IR/source denial.
-  - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase 0
+  - [x] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase 0
     remain exact; rollout/admission stay 1/9 and 0/6.
-  - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow are
+  - [x] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow are
     synchronized, or explicitly unchanged with evidence.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.3.3.0`
@@ -7176,7 +7182,7 @@ before implementation.
       synchronized, or explicitly unchanged with evidence.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1`
-    Status: `active`
+    Status: `done`
     Goal: Project exact corrected calls, shapes, bindings, staged provenance, and generated-plan semantics on Perl.
     Depends on: `.10.3.3.0`
     Acceptance: Implement the parent `.10.3.3` projection scope against the corrected independently guarded
@@ -7188,6 +7194,9 @@ before implementation.
       Full 22/25 RED then stops first at `spec:0.name`: native construction consistently derives
       `calls_and_staging` from caller identity `calls_and_staging.spec`, while the neutral row alone says `calls`.
       After isolating that field, RED advances to the expected missing function-first definition-order projection.
+      Correction `.10.3.3.1.0` and implementation `.10.3.3.1.1` now complete the exact target. Final proof is calls
+      6, foundation/static 10, semantic 6/20/57, all adjacent authority/consumer gates, primary 5x2x66, canonical
+      primary 66x2, and Phase 0 1,031/1,031 in 636 seconds; public query/observations and admission remain absent.
 
     #### Acceptance Checklist
 
@@ -7195,13 +7204,13 @@ before implementation.
       exact descriptor/ActionIR/staged/generated probe evidence for every missing record/relation.
     - [x] **ROOT CAUSE (WHY + WHERE)** — Map function/helper/call/binding/shape/evidence, staged payload/job/result,
       and generated artifact fields to their exact source-preorder native authorities without host-layout leakage.
-    - [ ] **FIX** — Extend only the private immutable projection with calls/shapes/bindings, staged provenance, and
+    - [x] **FIX** — Extend only the private immutable projection with calls/shapes/bindings, staged provenance, and
       generated-v2 artifact facts; reuse one generated-family classifier and keep public query/observation absent.
-    - [ ] **ADDRESSED (verified)** — Deep-equal all 22 records and 25 relations; prove nested preorder, resolution
+    - [x] **ADDRESSED (verified)** — Deep-equal all 22 records and 25 relations; prove nested preorder, resolution
       precedence, authorized shape inference, staging direction, corrected `default` family, clone/JSON safety.
-    - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase
+    - [x] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase
       0 remain exact; rollout/admission stay 1/9 and 0/6.
-    - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
+    - [x] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
       are synchronized, or explicitly unchanged with evidence.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1.0`
@@ -7238,10 +7247,55 @@ before implementation.
       - [x] **LOCKSTEP** — Neutral docs, ADR/book/task/index/roadmaps/live/memory/KM and commit workflow are exact.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1.1`
-      Status: `pending`
+      Status: `done`
       Goal: Project the fully corrected calls/shapes/bindings/staged/generated target on Perl.
       Depends on: `.10.3.3.1.0`
       Acceptance: Implement parent `.10.3.3.1` after spec-name correction and deep-equal all 22/25 rows.
+      Verification: Activated task-tree-first from clean correction `7d9077c4` at ahead 268; the commit brief is
+        zero bytes and mdBook/Python/Rust-incremental generated artifacts are absent. Reuse the already materialized
+        22-record/25-relation target and exact descriptor/ActionIR/staged/generated authority probes; do not
+        re-derive established facts outside their Knowledge Map homes.
+        Fresh focused RED constructs silently and fails exact deep equality first at the missing function
+        declaration/order (`actual relation order 0`, target function declaration order 2); the corrected
+        `calls_and_staging` spec identity no longer differs. The remaining gap is exactly the owned function/helper/
+        binding/call/staged/generated records and relations. The first exact implementation reaches 22/25 equality;
+        a follow-on multibyte-prefix regression then exposes an ASCII-masked source-coordinate defect: the staged
+        function descriptor reports character offsets (`source_span.start = 10`, `body_span.start = 27`) for a
+        source whose prefix occupies 11 UTF-8 bytes, while the projector initially reinterprets them as bytes and
+        shifts `trim(value)` to `(trim(value`. The typed descriptor/ActionIR probe fixes the authority boundary:
+        descriptor shell/body spans and ActionIR-local spans are character coordinates; only final public source
+        spans are converted to byte plus scalar line/column coordinates by `SemanticSourceMap`. The static source
+        scan also consumes original caller text rather than the compiler's function-blanked rule source, so it must
+        mask descriptor-owned function spans locally before classifying rule members; otherwise an interleaved
+        top-level `fn` after a rule can be mistaken for that rule's bare edge.
+        `SemanticCallProjection` now composes the exact target behind the opaque index. Focused proof passes all six
+        top-level subtests: complete 22/25 equality; typed preorder/resolution/staging; all eleven handler variants
+        through one shared generated owner; clone/JSON/host-layout denial; exact multibyte-prefix excerpts/columns;
+        and interleaved-function masking with only the two authored rules/one Top edge. Foundation/static and the
+        generated-source contract remain green; public capabilities/query and observations remain absent.
+        Complete signoff adds semantic 6/20/57, generated/rule-local authority, capability 80/0/0, selector
+        59/27/0, repeated action 8/10/8+0/54, five-backend primary 5x2x66, Knowledge Map 656/4,834, mdBook, memory
+        architecture, doctrines, whitespace, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The
+        complete canonical local gate exits 0; rollout/admission remain 1/9 and 0/6.
+      Commit: `FUTURE-PARITY-BACKLOG.10.3.3.1.1 - project Perl call semantics`
+
+      #### Acceptance Checklist
+
+      - [x] **RETRIEVE / TOOLBOX FIRST** — Read the semantic authority/source/action/staged/generated cards and use
+        exact LinkedSpec descriptors/typed probes before interpreting implementation state.
+      - [x] **RED / ORACLE** — Deep-compare the current private projection with the fully corrected 22/25 target;
+        preserve the first real missing field plus complete expected records/relations before production edits.
+      - [x] **ROOT CAUSE (WHY + WHERE)** — Map definition order, helpers/functions/bindings/calls/shapes/evidence,
+        staged payload/job/result, and generated plan to shared native authorities with exact source preorder.
+      - [x] **FIX** — Extend only the private immutable projector; share the generated-family classifier and keep
+        public query, runtime observation, rollout, and admission absent.
+      - [x] **ADDRESSED (verified)** — Deep-equal all 22 records/25 relations; prove nested call preorder,
+        function-before-helper resolution, contract-only shapes, staging direction, clone/JSON safety, and denial
+        of host IR/generated implementation source.
+      - [x] **NO REGRESSION** — Foundation/static, semantic 6/20/57, generated/rule-local, capability, primary, and
+        canonical Phase 0 remain exact; rollout/admission stay 1/9 and 0/6.
+      - [x] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
+        are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.4`
   Status: `pending`
@@ -9539,9 +9593,12 @@ at ahead 266, brief zero, and generated artifacts absent. Exact probes then foun
 Correction child `.10.3.3.0` is clean at `c07ba618` after semantic 6/20/55, primary 66x2, and Phase 0 1,031/1,031
 in 610 seconds. Calls projection parent `.10.3.3.1` activated task-tree-first from that boundary at ahead 267,
 brief zero, and artifacts absent. Full RED found the calls model alone derived spec name from snapshot id rather
-than caller logical identity. Correction `.10.3.3.1.0` now passes semantic 6/20/57, five-backend primary 5x2x66,
-KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds; its clean commit is the only boundary before
-projector child `.1.1`. Rollout/admission remain 1/9 and 0/6.
+than caller logical identity. Correction `.10.3.3.1.0` passes semantic 6/20/57, five-backend primary 5x2x66,
+KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds at clean commit `7d9077c4`. Projector child `.1.1`
+then completed the exact 22/25 calls/staged/generated target with Unicode/interleaving/privacy locks, semantic
+6/20/57, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds.
+The next pending Perl leaf is immutable capabilities/query/privacy/budgets `.10.3.4`; rollout/admission remain 1/9
+and 0/6.
 
 ### Historical frontier sequence
 
@@ -9921,11 +9978,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `done` | Corrected the neutral static oracle, then projected exact static grammar, source, entry, diagnostic, and explanation semantics. |
 | 74.2.2.0 | `FUTURE-PARITY-BACKLOG.10.3.2.0` | `done` | Correct default/no-edge static facts and independently gate them at semantic 6/20/53 before adapter behavior. |
 | 74.2.2.1 | `FUTURE-PARITY-BACKLOG.10.3.2.1` | `done` | Private exact graph/privacy/failure/runtime-static projection passes canonical Phase 0 1,031/1,031. |
-| 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `active` | Correct generated-plan oracle drift, then project ActionIR calls/shapes/bindings plus staged/generated provenance. |
+| 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `done` | Corrected generated-plan/spec-identity oracle drift, then projected exact ActionIR calls/shapes/bindings plus staged/generated provenance. |
 | 74.2.3.0 | `FUTURE-PARITY-BACKLOG.10.3.3.0` | `done` | Correct and independently gate the calls snapshot's stale/illegal generated-plan family at semantic 6/20/55. |
-| 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `active` | Project the corrected complete 22-record/25-relation calls/staging target on Perl. |
+| 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `done` | Projected the corrected complete 22-record/25-relation calls/staging target on Perl. |
 | 74.2.3.1.0 | `FUTURE-PARITY-BACKLOG.10.3.3.1.0` | `done` | Correct and independently gate the calls spec name against logical identity at semantic 6/20/57 and canonical Phase 0 1,031/1,031. |
-| 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `pending` | Project the fully corrected complete calls target on Perl. |
+| 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `done` | Exact private calls/staged/generated projection passes canonical Phase 0 1,031/1,031. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |

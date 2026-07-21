@@ -18,8 +18,10 @@ backends/ABIs, recurring, MCP, and public rollout. Perl authority audit `.10.3.0
 bytes, descriptor, typed ActionIR, staged/failure/generated inputs, missing source mapping, and missing typed event
 capture. `.10.3.1` implements opaque strict source/map/compiled-or-failed construction without path reads or
 execution. Corrected projection `.10.3.2.1` now retains exact private static records/relations for graph, privacy,
-failure, and runtime-static targets without public query or admission. Corrected calls/staging projection `.10.3.3.1` follows;
-`.10.3.4-.10.3.6` retain query/privacy, observations/routes, and exact Perl admission.
+failure, and runtime-static targets without public query or admission. Corrected calls/staging leaf `.10.3.3.1.1`
+now privately matches all 22 records/25 relations with typed source-preorder calls, explicit staged roles, and a
+shared generated-v2 family owner; `.10.3.4-.10.3.6` retain query/privacy, observations/routes, and exact Perl
+admission.
 
 Duplicate-slot audit `.9.1.8.1.0` is clean without behavior changes. Exact six-runtime ordered/choice
 and repeated/control evidence isolates Perl/Rust combined-alternation slot aliasing while structural identity

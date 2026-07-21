@@ -27,8 +27,12 @@ immutable compiled-or-failed outcomes. Static leaf `.10.3.2.1` adds a private cl
 privacy full/limited, failed-compilation, and runtime-static records/relations deep-equal the neutral model after
 source references are materialized. `PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t` checks
 deterministic ids/order, duplicate and self-indexed slots, normalized failure evidence, immutable copies, JSON
-booleans, and absence of host-object/path leakage. Public capabilities/query, call/staged records, observation,
-and a composed consumer remain `.10.3.3-.10.3.6`, so neither rollout ledger advances.
+booleans, and absence of host-object/path leakage. Calls leaf `.10.3.3.1.1` adds a second recurring private test:
+`PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t` deep-equals all 22 corrected records and 25
+relations, locks source-preorder/nested calls, resolution evidence, shapes, staged direction, shared generated-v2
+identity, Unicode coordinates, interleaved function masking, immutable plain-data copies, and absence of host IR or
+generated implementation text. Public capabilities/query, observation, and a composed consumer remain
+`.10.3.4-.10.3.6`, so neither rollout ledger advances.
 
 Run its structural and ownership gate from the repository root:
 

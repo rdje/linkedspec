@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.1.1 — project Perl call and staged semantics
+
+The opaque Perl semantic index now retains the complete corrected compiled calls projection without exposing a
+public query prematurely. New `LinkedSpec::SemanticCallProjection` composes descriptor function order/signatures,
+source-preorder typed ActionIR calls and bindings, function-body staged sidecars, and generated-source-v2 identity.
+After internal source refs are materialized, the calls fixture deep-equals all 22 neutral records and 25 relations:
+function/helper/binding/call records, conservative value/target shapes, exact user-function decision/explanation
+evidence, separate payload/parse-job/result artifacts, and the `default` generated handler plan.
+
+Generated-source contract identity and handler-variant classification now have one owner in
+`LinkedSpec::GeneratedSource`; both the compiler and semantic projector delegate there. Emission behavior and the
+v2 plan schema are unchanged. The private projection emits no generated implementation text and retains no raw
+descriptor or ActionIR layout.
+
+An added Unicode regression found and repaired an ASCII-masked coordinate error during implementation. Function
+registry shell/body spans and local ActionIR spans are character offsets, not byte offsets. The projector now
+converts only final source references through `SemanticSourceMap`, preserving exact excerpts, UTF-8 byte ranges,
+and scalar columns after a multibyte prefix. The original-source scanner also masks descriptor-owned function
+ranges before rule-member classification, matching compiler blanking and preventing an interleaved top-level
+function from becoming a synthetic edge.
+
+`t/semantic_index_perl_calls_projection.t` has six top-level subtests covering exact 22/25 equality, typed nested
+preorder and resolution, staging direction, all eleven handler variants plus artifact identity through the shared
+owner, clone/JSON/host-layout denial, Unicode coordinates, and interleaved function masking. It is required and run
+unconditionally by canonical local CI. Foundation/static projection and generated-source focused tests remain
+green. Public `capabilities`/`query`, runtime observations, composed admission, and both rollout ledgers remain
+unchanged at 1/9 and 0/6.
+
+Complete signoff passes calls 6, foundation/static 10, semantic 6/20/57, generated-source and rule-local
+authorities, capability 80/0/0, aggregate-selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary
+5x2x66, Knowledge Map 656/4,834, mdBook, memory architecture, doctrines, and whitespace. Canonical primary passes
+66/66 twice, Phase 0 passes 1,031/1,031 in 636 seconds, and the complete local gate exits 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.1.0 — correct semantic spec identity
 
 The complete calls projection RED exposed a third pre-adapter oracle mismatch before projector code changed.
