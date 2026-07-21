@@ -437,11 +437,11 @@ bindings, Unicode source references, function-shell isolation, staged directions
 deep-equal the neutral oracle. Leaf `.10.4.4` exposes typed and raw-neutral capabilities/query over fresh clones of
 that normalized projection and matches all 19 static response digests.
 
-Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
-currently emit textual trace decisions only; no typed semantic observer exists. The static query object above has
-no access to either execution seam. The planned runtime leaf adds a separate optional invocation-local sink at
-those seams and derives a new immutable post-execution index. It must not parse trace text, alter diagnostic output,
-or let queries execute.
+Direct and generated Rust executors use authoritative slot-selection and rule-result seams. Completed leaf
+`.10.4.5` adds a separate optional invocation-local typed observation sink there and derives a new immutable
+post-execution index. It matches the twentieth response across direct, loaded, reconstructed, generated-plan,
+source-emitter, traced, and untraced routes. It never parses trace text, changes diagnostic output, or lets queries
+execute. Composed `.10.4.6` then admits those already-complete layers with one exact 12-role consumer.
 
 The prerequisite is resolved by ADR `0051` and task `.10.4.0.2`: the published/Rust rule-label contract is a
 nonempty sequence of pinned Unicode 17.0.0 `XID_Continue` scalars at every position. Identity is exact,
@@ -453,6 +453,27 @@ semantic API at that prerequisite boundary. The later Dart/Julia/Lua semantic ba
 label prerequisite before their own v1 fixture admission. Toolbox repair `.10.4.0.1` made the semantic diagnostic
 entry mechanically current; composed Rust admission advances its guarded claims to executable 6/20/73, rollout
 3+6, admission 2+4, and complete Perl/Rust observation/admission state without changing response digests.
+
+Dart audit `.10.5.0` now maps the next backend before behavior. Its staged `SpecFile` and function sidecars,
+`CompiledSpec`, function registry, typed ActionIR resolution, portable diagnostics, strict loaded text, generated-v2
+plan, and runtime slot/result seams are reusable authorities. Ordinary rule/body state is line-oriented, action
+spans are local to normalized action text, and `LoadedSpec` also carries a host path; exact v1 construction therefore
+needs a copied accepted-source byte/scalar mapper plus caller logical identity. Immutable source/outcome, static,
+calls/staging/generated, query, runtime observation, and composed admission are frozen as `.10.5.1-.10.5.6`.
+
+The audit also proves why two label prerequisites come first. Dart's host-`\w` header scanner rejects `Töp`, its
+action/blind scanners silently truncate that target to `T`, bare Unicode targets remain raw, and deserialized or
+programmatic `Top-Rule` labels pass validation and compile. Once a valid Unicode label is supplied externally,
+compiled maps, descriptors, generated plans/emitted source, and explicit selectors preserve it exactly. Moreover,
+first-authoritative `specs/spec.spec` still embeds host `\w`, conflicting with ADRs `0012` and `0051`.
+Shared executable-grammar/checker closure `.10.5.0.1` therefore precedes generated Dart scanner/validator parity
+`.10.5.0.2`. Neither audit nor either prerequisite may advance semantic rollout/admission.
+
+The complete Dart corpus's 105/105 result is not yet proof of that current self-hosted authority. Its four
+`spec_spec_*` inputs are identical older snapshots: they omit the canonical bare-edge productions and retain broad
+lifecycle `(\w++)`, while current `specs/spec.spec` uses the explicit lifecycle alternation. Direct Dart execution
+of current source reaches an unsupported structural PCRE group. The shared prerequisite must regenerate those
+fixtures verbatim, reject byte/hash drift, and make current-source execution green before citing corpus parity.
 
 ## Exact v1 record model
 

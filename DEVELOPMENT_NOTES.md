@@ -1,5 +1,40 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0` — Unicode label membership and semantic meaning require distinct
+  owners): Dart's typed compiler pipeline already preserves exact string identity after parsing. A programmatically
+  supplied `Töp` survives compiled maps, descriptors, generated plans/emitted source, and explicit selection. The
+  defect is earlier: header/action/blind/bare scanners use host `\w`, and validation assumes parser-originated
+  labels. Exact probes show declarations reject Unicode, action/blind targets truncate `Töp` to `T`, bare targets
+  remain raw, and externally constructed `Top-Rule` compiles. The safe repair is one generated pinned classifier
+  used by scanners and by validation, while compiled/artifact/selector routes stay exact-string consumers.
+
+  This is not only a Dart hardcoded-parser issue. ADR `0012` makes `specs/spec.spec` the first authoritative grammar,
+  but its label productions still use host `\w`; ADR `0051` explicitly forbids that as semantic authority. A shared
+  executable-grammar/checker leaf must resolve that representation before the Dart-specific scanner leaf can claim
+  parity. Folding both into the semantic source foundation would hide a language prerequisite and make semantic
+  promotion capable of passing over a truncated graph.
+
+  The corpus audit also invalidates a tempting inference from 105/105 green. All four checked-in `spec_spec_*`
+  inputs are one old byte-identical grammar snapshot (`e0a1b63...`), while canonical `specs/spec.spec` is
+  `9cb540e2...`. The old inputs lack bare-edge productions and use broad lifecycle `(\w++)`; current source uses an
+  explicit lifecycle alternation that Dart's structural PCRE bridge does not yet recognize. The generator already
+  copies source verbatim, so the causal defect is regeneration/freshness enforcement, not oracle semantics.
+  `.10.5.0.1` must make canonical bytes/hash part of the proof and execute current source before any 105-fixture
+  result can be cited as self-hosted grammar parity.
+
+  The remaining semantic split mirrors the already-proven Perl/Rust dependency shape because Dart exposes the same
+  typed seams: staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`, typed ActionIR contract
+  resolution, `SpecPortableDiagnostic`, strict loaded text, generated-v2 plan, and authoritative post-match/final-
+  result runtime points. Ordinary rule/body nodes retain only lines and action spans are local to normalized action
+  text, so exact v1 source references need an immutable accepted-source mapper. `LoadedSpec` also carries a host
+  path, which cannot become logical semantic identity. Trace text and `RuntimeDiagnosticOutputSink` remain separate
+  products; runtime semantics need a new optional typed invocation-local observer.
+
+  Behavior-free proof passes the neutral semantic and Unicode checkers plus complete Dart format/analyzer, 276
+  package tests, primary 66x2, and corpus 105/105. No rollout row changes: semantic state remains 6/20/73, rollout
+  3/9, admission 2/6. Knowledge Map is 670/4,975; book/doctrines pass; canonical local CI passes Phase 0
+  1,031/1,031 in 659 seconds and exits 0.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.6` — admission is an omission-sensitive composition proof, not another
   implementation): Rust's five preceding semantic leaves already owned every source, projection, query, and runtime
   mechanism. The admission target therefore declares one explicit ordered 12-role topology and invokes only those

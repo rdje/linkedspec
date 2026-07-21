@@ -505,37 +505,26 @@ Three backbone items tracked major structural modernization — all done:
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
   runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
-  65 mutations. ADR `0050` explicitly separates staged payload/job/result records from generated artifacts. The
-  descriptor remains reusable input, not the wire model. Perl authority audit `.10.3.0` now proves the exact
-  decoded-source/canonical-byte, descriptor, typed ActionIR, staged-function, runtime-context diagnostic, and
-  generated-v2 plan inputs. It also proves that source coordinates and invocation-local typed execution events are
-  adapter-owned work, generated metadata cannot reconstruct a snapshot, and raw UTF-8 bytes must be strictly decoded
-  before the internal character-oriented compiler. Perl foundation `.10.3.1` now supplies opaque in-memory
-  construction, canonical byte/scalar source mapping, typed option/UTF-8 rejection, and immutable compiled-or-failed
-  state without parser execution or path reads. Static/calls/query leaves `.10.3.2-.10.3.4` now expose all 19
-  non-runtime answers. Runtime leaf `.10.3.5` adds a typed invocation-local slot/result sink and immutable
-  post-execution derivation matching the twentieth answer across direct, loaded, and generated routes; queries
-  still never execute. Composed admission `.10.3.6` adds one exact 12-role consumer across source normalization,
-  every snapshot/query, native/neutral JSON, direct/loaded/generated/traced runtime evidence, privacy/budgets/
-  errors/explain, non-interference, and host-leak denial. Neutral rollout is 2 complete / 7 pending and backend
-  admission 1 complete / 5 pending; only Perl advances. MCP remains handle-only
-  later transport and owns no semantic or filesystem behavior. Default parser, trace, diagnostic, generated-v2,
-  loader, and primary behavior remain unchanged when the observer is absent. Rust audit `.10.4.0` maps parsed/
-  compiled/ActionIR/staged/generated/diagnostic/loader/runtime owners, proves serde-safe compiled state and parallel
-  direct/generated slot/result seams, and freezes source/static/calls/query/runtime/admission children before code.
-  It also exposed a real prerequisite: neutral v1 requires Unicode label `Töp`, while the published grammar and
-  Rust parser were ASCII-label-only. `.10.4.0.1` repaired semantic toolbox current state to 6/20/65,
-  rollout 2+7, admission 1+5, and complete Perl ownership; the checker now proves exact-claim, omission, and
-  wrong-value no-drift behavior. The director selected Unicode expansion; completed `.10.4.0.2` implements ADR
-  `0051` with generated Unicode 17.0.0 `XID_Continue` labels, exact case- and normalization-sensitive scalar
-  identity, and complete Rust source/artifact/runtime route proof. Completed source/outcome `.10.4.1` now provides
-  copied decoded/strict-UTF-8 construction, exact byte/scalar mapping, source ceilings, opaque immutable
-  compiled-or-failed state, entry identity, and shared generated-v2 plan input. Completed static projection
-  `.10.4.2` adds exact private graph/privacy/failure/runtime-static records and relations with deliberate Rust
-  failure normalization. `.10.4.3` now adds exact source-preorder calls, bindings, staged payload/job/result
-  directions, and generated provenance at 22 records / 25 relations. Public query/promotion remain absent;
-  `.10.4.4` follows, and rollout/admission remain 2/9 and 1/6. Governance follow-up `.22` tracks a stable home for immutable
-  cross-contract status markers after repeated active-row rewrites required avoidable canonical restarts.
+  73 mutations. ADR `0050` separates staged payload/job/result records from generated artifacts, and descriptors
+  remain reusable input rather than the wire model. Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` each ship
+  opaque strict in-memory construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated
+  projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
+  exact 12-role admission consumer. Queries cannot compile, execute, read paths, or expose host IR. Rollout is
+  3 complete / 6 pending and native admission 2 complete / 4 pending; only Perl and Rust are admitted. MCP remains
+  handle-only later transport and owns no semantic or filesystem behavior.
+
+  ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
+  with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,
+  ActionIR, staged sidecars, diagnostics, generated-v2 plan, and runtime seams are reusable, while exact source
+  mapping, normalized projection/query, and typed observation are new adapter work. It also finds that current
+  host-`\w` declarations reject `Töp`, action/blind references silently truncate it to `T`, bare references remain
+  raw, and external invalid labels bypass validation. First-authoritative `specs/spec.spec` still uses host `\w` as
+  well. Shared executable-grammar closure `.10.5.0.1` and Dart label parity `.10.5.0.2` therefore precede semantic
+  source/static/calls/query/runtime/admission `.10.5.1-.10.5.6`. The four green `spec_spec_*` corpus inputs are stale
+  identical grammar copies, so shared closure also requires verbatim regeneration, byte/hash freshness, and Dart
+  execution of current canonical source before 105/105 can prove self-hosting. Neither audit nor prerequisites
+  promote a ledger.
+  Governance follow-up `.22` separately tracks a stable home for immutable cross-contract status markers.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The

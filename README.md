@@ -831,7 +831,16 @@ content migration exists yet.
   failed-execution non-completion are exact. Composed admission `.10.4.6` now adds one omission-sensitive 12-role
   Rust consumer over those existing owners, all 20 digests, exact query boundaries, immutability, and host-leak
   denial. The checker locks eight Rust-specific topology mutations and canonical registration, advancing only Rust
-  to rollout 3/9 and native admission 2/6; Dart, Julia, PUC Lua, and LuaJIT remain pending.
+  to rollout 3/9 and native admission 2/6; Dart, Julia, PUC Lua, and LuaJIT remain pending. Dart audit `.10.5.0`
+  proves its compiled/ActionIR/staged/generated authorities are reusable, while exact source mapping, normalized
+  projection/query, and typed observation are new adapter layers. It also proves current host-`\w` declarations
+  reject `Töp`, action/blind references silently truncate it to `T`, and external invalid labels bypass validation.
+  Because first-authoritative `specs/spec.spec` also retains host `\w`, shared executable-grammar closure
+  `.10.5.0.1` precedes Dart label parity `.10.5.0.2`; semantic foundation through admission then follows as
+  `.10.5.1-.10.5.6` without changing the current 6/20/73, 3/9, and 2/6 ledgers during audit. The four checked-in
+  `spec_spec_*` inputs are stale identical copies rather than current canonical source, so `.10.5.0.1` also owns
+  verbatim regeneration, a freshness gate, and current-source Dart structural execution; 105/105 alone does not
+  yet prove today's self-hosted grammar.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

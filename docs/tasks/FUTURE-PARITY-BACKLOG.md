@@ -7823,8 +7823,10 @@ before implementation.
     clean reproducible artifacts, and complete the per-slice commit workflow.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Dart semantic index adapter and exact native conformance.
+  Children: `.10.5.0`, `.10.5.0.1`, `.10.5.0.2`, `.10.5.1`, `.10.5.2`, `.10.5.3`, `.10.5.4`, `.10.5.5`,
+    `.10.5.6`
   Depends on: `.10.4`
   Acceptance: Project the same model from Dart compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Dart types plus neutral JSON; prove exact reference answers and non-interference across every shared
@@ -7832,6 +7834,195 @@ before implementation.
     canonical gate without exposing Dart AST serialization as the contract. Before the `Töp` privacy fixture can
     be admitted, align every Dart rule declaration/reference/artifact/selector route with ADR `0051`'s pinned
     Unicode 17 `XID_Continue` and exact identity contract.
+  Verification: Activated task-tree-first on 2026-07-21 from clean Rust admission commit `0de66ae9` at ahead 281.
+    `git_message_brief.txt` is zero bytes and reproducible target/book/cache artifacts are absent. Knowledge Map
+    retrieval and ADR `0051` establish that label alignment is a prerequisite distinct from semantic projection;
+    `.10.5` therefore begins with an exact Dart authority/gap audit and dependency-ordered split before behavior.
+
+  #### Acceptance Checklist
+
+  - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate only from clean `0de66ae9`; preserve semantic governance at
+    6/20/73, rollout 3/9, and admission 2/6 until an exact composed Dart consumer passes.
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read and probe the exact Dart source/validation/compiled/ActionIR/staged/
+    generated/diagnostic/runtime/trace/load authorities plus ADR `0051` before source archaeology or behavior.
+  - [x] **SPLIT BEFORE CODE** — Freeze bounded dependency-ordered Unicode-label, semantic construction/projection,
+    query, runtime-observation, and admission children before implementing any Dart behavior.
+  - [ ] **UNICODE LABEL PREREQUISITE** — Apply pinned Unicode 17 `XID_Continue` exact scalar identity to every Dart
+    declaration/reference/selector/artifact/diagnostic/trace/generated route without semantic promotion.
+  - [ ] **EXACT SEMANTIC ADAPTER** — Compose idiomatic immutable Dart source/static/call/query/runtime owners and
+    one omission-sensitive consumer that matches all 20 neutral responses without AST/IR/path/host leakage.
+  - [ ] **LOCKSTEP / SIGNOFF** — Pass focused, complete Dart package/corpus/generated/primary and canonical gates;
+    synchronize public/book/task/roadmap/live/memory/KM surfaces, cleanup, commit each child, and close cleanly.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.0`
+  Status: `done`
+  Goal: Map every Dart semantic and Unicode-label authority, then freeze a safe dependency-ordered split.
+  Depends on: `.10.4.6`
+  Acceptance: Retrieve the exact Dart parser/validator/compiled descriptor/ActionIR/staged/generated/loader/
+    diagnostic/trace/runtime authorities through the Knowledge Map and LinkedSpec toolbox before re-deriving facts.
+    Probe all five neutral semantic source bundles plus the Unicode label contract through current native routes;
+    identify exact source mapping, compiled/failed/static/calls/query/runtime observation, route, and host-leak seams;
+    freeze bounded prerequisite and implementation/admission children before behavior; preserve package/corpus/
+    generated/primary behavior and semantic rollout/admission; synchronize task/index/live/memory/KM/book evidence.
+  Verification: Activated task-tree-first from clean Rust admission `0de66ae9` at ahead 281 with a zero-byte
+    commit brief and no reproducible artifacts. Knowledge Map/Toolbox retrieval preceded exact temporary Dart
+    probes. Graph, calls/staging, and runtime sources parse, validate, compile, reconstruct through `SpecFile` JSON,
+    and retain generated plans; runtime returns `["A","B"]`. Failed source reports
+    `bare_edge_target_undefined` at `normalize_edges`; privacy source stops at the current `Töp::` header boundary.
+    Current host-`\w` declarations reject every non-ASCII contract label, action/blind `Töp` targets silently
+    truncate to `T`, bare `Töp` stays raw, and programmatic/deserialized invalid `Top-Rule` labels validate and
+    compile. A valid externally supplied `Töp` survives compiled order, descriptor, generated plan, emitted source,
+    selector, and trace exactly. Reusable staged/compiled/ActionIR/function/diagnostic/generated/runtime owners and
+    missing exact source map, immutable projection/query, and typed observation seams are recorded in the durable
+    authority card; bounded `.10.5.0.1-.10.5.6` children own every dependency before behavior.
+
+    The audit also proves shared authority and evidence drift. Canonical `specs/spec.spec` still uses host `\w` for
+    label productions. Its SHA-256 is `9cb540e26622741b90a97f25e46e4c27accdece43c40cc106cf30cc273f3eab1`,
+    while all four `spec_spec_*` corpus inputs are one stale snapshot at
+    `e0a1b63b276c2a896c577192d4b399c88f21539555835018ce8117b91a14b25f`. The stale source omits bare-edge
+    productions and retains lifecycle `(\w++)`; direct Dart execution of current canonical source reaches an
+    unsupported lifecycle/named-group `FormatException`. `.10.5.0.1` owns verbatim regeneration, mechanical
+    byte/hash freshness, the current Dart structural bridge, and shared pinned-label closure; 105/105 is retained
+    as a baseline but not cited as current self-hosted proof.
+
+    Complete behavior-free signoff passes Dart format 63/0, fatal analysis, package 276, primary 66/66 default and
+    POSIX, and corpus 105/105. Neutral semantic governance passes 6 fixture groups / 20 exact queries / 73 rejected
+    mutations at rollout 3/9 and admission 2/6; Unicode proof passes version 17.0.0, 806 ranges, 9 positive, 8
+    negative, and 2 distinct pairs. Knowledge Map is 670 facts / 4,975 keys; memory, task metadata, all four
+    doctrines, mdBook, and whitespace pass. Canonical local CI independently passes its semantic/primary stages and
+    Phase 0 1,031/1,031 in 659 seconds, exit 0. No Dart or neutral executable behavior changed.
+
+  #### Acceptance Checklist
+
+  - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate from clean `0de66ae9` before Dart source inspection or behavior.
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read exact neutral, ADR `0051`, Dart authority cards, toolbox probes, and
+    canonical/complete gate registration before source archaeology.
+  - [x] **BASELINE / ORACLE** — Run the neutral checker and exact Dart probes over graph/calls/failed/runtime/privacy
+    sources, typed compiled/generated/loaded/traced routes, label fixtures, primary, and package/corpus baselines.
+  - [x] **ROOT CAUSE / AUTHORITY MAP** — Record each reusable typed owner and every missing mapping, observation,
+    source-span, failure normalization, label, query, and route seam without treating AST JSON as the contract.
+  - [x] **SPLIT BEFORE CODE** — Add bounded dependency-ordered label prerequisite, semantic foundation/projection/
+    query/runtime/admission children with precise acceptance before any Dart behavior changes.
+  - [x] **CORPUS FRESHNESS AUDIT** — Prove the four checked-in `spec_spec_*` inputs are byte-identical stale
+    snapshots rather than current `specs/spec.spec`, record both hashes and the current Dart canonical failure,
+    and assign regeneration plus freshness enforcement to `.10.5.0.1` before counting self-hosted corpus proof.
+  - [x] **NO REGRESSION / LOCKSTEP** — Preserve semantic 6/20/73 at 3/9 + 2/6, pass complete/canonical baselines,
+    sync public/book/task/index/live/memory/KM, cleanup, and commit the behavior-free audit cleanly.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.0.1`
+  Status: `pending`
+  Goal: Reconcile the first-authoritative self-hosted grammar with ADR `0051` before claiming another backend.
+  Depends on: `.10.5.0`
+  Acceptance: Replace `specs/spec.spec`'s host-`\w` rule-label authority with a deterministic repository-pinned
+    Unicode 17 `XID_Continue` route that preserves exact scalar identity and remains executable across the admitted
+    runtime set. Extend the neutral generator/checker and self-hosted corpus proof so declarations plus action,
+    blind, and bare references cannot truncate, normalize, inherit host Unicode versions, or drift from the formal
+    grammar. Regenerate every checked-in `spec_spec_*` `input.spec` from the current canonical source, require
+    byte/hash freshness mechanically, and update Dart's structural PCRE bridge so the actual current lifecycle and
+    bare-edge grammar executes rather than accepting a stale snapshot. Do not advance Dart or semantic rollout/
+    admission.
+
+  #### Acceptance Checklist
+
+  - [ ] **TASK-TREE-FIRST / CLEAN BASE** — Activate only after clean `.10.5.0`; keep semantic 6/20/73, rollout
+    3/9, and admission 2/6 unchanged.
+  - [ ] **FIRST AUTHORITY** — Resolve the exact ADR `0012`/`0051` contract for `specs/spec.spec` without making a
+    bootstrap parser, host `\w`, locale, or toolchain Unicode table the lasting language owner.
+  - [ ] **DETERMINISTIC CONTRACT DATA** — Reuse the verified Unicode 17 source/ranges and generate or validate the
+    self-hosted representation byte-for-byte; reject version, omission, range, and normalization drift.
+  - [ ] **ALL LABEL PRODUCTIONS** — Cover rule headers plus action-block/fluent/bare, blind-block/fluent/bare, and
+    bare-edge group/index forms while leaving lifecycle/function/helper/mark identifiers under their own grammar.
+  - [ ] **CANONICAL CORPUS FRESHNESS** — Regenerate all four `spec_spec_*` fixtures through
+    `tools/gen_oracle_corpus.pl`, require their `input.spec` bytes/hash to equal current `specs/spec.spec`, and make
+    stale copies fail before any backend can count them as current self-hosted grammar evidence.
+  - [ ] **CURRENT DART STRUCTURAL BRIDGE** — Admit the canonical lifecycle alternation and bare-edge productions in
+    Dart's structural PCRE recognizer, then prove the current source itself executes; 105/105 over stale copies is
+    explicitly not acceptance evidence.
+  - [ ] **CROSS-RUNTIME PROOF** — Execute positive, negative, distinct, and no-prefix-truncation cases through the
+    self-hosted grammar on every currently admitted runtime route required by the neutral grammar owner.
+  - [ ] **NO FALSE PROMOTION / SIGNOFF** — Synchronize formal/public/KM/task state and pass complete affected/
+    canonical gates without claiming Dart label or semantic admission.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.0.2`
+  Status: `pending`
+  Goal: Implement exact pinned Unicode rule-label identity across every Dart route.
+  Depends on: `.10.5.0.1`
+  Acceptance: Generate one Dart Unicode 17 `XID_Continue` classifier from the neutral contract and consume it for
+    declarations plus action/blind/bare references. Validate parsed and externally constructed AST labels; preserve
+    exact case/normalization-sensitive identity through selectors, compiled maps, descriptors, generated plans/
+    emitted source, diagnostics, traces, strict loaders, and primary routes. Reject invalid labels and partial
+    prefixes deterministically without broadening function/helper/lifecycle/fluent/mark identifiers or promoting
+    semantic introspection.
+
+  #### Acceptance Checklist
+
+  - [ ] **GENERATED CLASSIFIER** — Extend deterministic generation/checking with one Dart range table, binary-search
+    scalar classifier, complete-label validator, and longest-valid-prefix scanner; never consult host `RegExp \w`.
+  - [ ] **PARSE / VALIDATE ALL ROUTES** — Use the scanner for header/action/blind/bare syntax and the validator for
+    declarations and every target from parsed, deserialized, or programmatic ASTs; prohibit silent prefix parsing.
+  - [ ] **EXACT IDENTITY** — Preserve all positive labels plus precomposed/decomposed/case distinctions through
+    validation, compilation, descriptor, generated plan/source/reconstruction, explicit selector, diagnostics,
+    trace, loaded source, and primary command routes.
+  - [ ] **NEGATIVE / GRAMMAR ISOLATION** — Reject every negative fixture at a stable parser/validation boundary and
+    prove unrelated function/helper/lifecycle/fluent/mark identifier grammars are unchanged.
+  - [ ] **NO FALSE PROMOTION / SIGNOFF** — Complete Dart, Unicode/semantic checker, canonical, mdBook/KM/docs, and
+    cleanup pass while semantic rollout/admission remain 3/9 and 2/6.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.1`
+  Status: `pending`
+  Goal: Add the opaque Dart semantic source-map and compiled-or-failed outcome foundation.
+  Depends on: `.10.5.0.2`
+  Acceptance: Construct once from copied decoded `String` or strict UTF-8 bytes plus caller logical name and source
+    ceiling; retain canonical bytes/scalar mapping, staged parsed/validated/compiled-or-failed state, entry
+    identity, and shared generated-plan input without execution, implicit path reads, records/query, or host-state
+    exposure. Prove malformed UTF-8, Unicode coordinates, graph/privacy/failure fixtures, clone isolation, and
+    exact existing diagnostics.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.2`
+  Status: `pending`
+  Goal: Project exact Dart static graph, privacy, failure, and runtime-static semantics.
+  Depends on: `.10.5.1`
+  Acceptance: Correlate immutable source evidence with typed `CompiledSpec` entry/family/cursor/repetition/slot/
+    edge/lifecycle authority and normalize the existing failed-spec diagnostic deliberately. Retain clone-safe
+    plain v1 data that deep-equals graph, both privacy ceilings, failed, and runtime-static targets without exposing
+    query, AST JSON, descriptor layout, compiled regexes, host paths, or execution.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.3`
+  Status: `pending`
+  Goal: Project exact Dart calls, bindings, staged payload/job/result, and generated provenance.
+  Depends on: `.10.5.2`
+  Acceptance: Compose `UserFunctionRegistry`, typed ActionIR resolution, authored-source correlation, normalized
+    function sidecars, and generated-v2 plan identity into the exact 22-record / 25-relation calls target. Lock
+    source-preorder calls, conservative shapes, resolution evidence, Unicode spans, staged directions, function-
+    shell masking, and denial of AST/ActionIR/generated-source/path leakage; expose no query yet.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.4`
+  Status: `pending`
+  Goal: Expose immutable Dart semantic capabilities and query evaluation.
+  Depends on: `.10.5.3`
+  Acceptance: Add idiomatic typed capabilities/query plus raw-neutral validation over fresh clones of normalized
+    projection data only. Match all 19 static digests and exact ids/order/source privacy, pages/cursors, directional
+    traversal, budgets/costs, errors, and explanations; prove clone isolation, deterministic JSON identity, and no
+    compiler/executor/trace/path/IR access. Runtime records remain absent.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.5`
+  Status: `pending`
+  Goal: Capture typed Dart runtime semantic observations through every execution route.
+  Depends on: `.10.5.4`
+  Acceptance: Add an optional invocation-local typed sink, separate from trace and diagnostic output, at the
+    authoritative post-match regex-slot and successful final-result seams. Derive a new immutable observed index
+    and match the twentieth digest across direct, loaded, reconstructed, generated/source-emitter, and traced/
+    untraced routes without changing results/cursors/traces/diagnostics or permitting query-side execution.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.5.6`
+  Status: `pending`
+  Goal: Admit the exact Dart semantic implementation and close the Dart parent.
+  Depends on: `.10.5.5`
+  Acceptance: Add one omission-sensitive Dart consumer covering source/compiled/failed/runtime snapshots, native/
+    neutral JSON, all 20 exact query digests, direct/loaded/reconstructed/generated/emitted/traced routes, privacy,
+    pages, budgets, errors, explain, no-execute immutability, and stale-host denial. Register it canonically, add
+    omission mutations, advance only Dart rollout/admission, pass complete package/primary/corpus/generated and
+    canonical gates, synchronize public state, and close `.10.5` cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6`
   Status: `pending`
@@ -10532,6 +10723,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `done` | Immutable typed/raw-neutral capabilities/query match all 19 static digests with canonical signoff. |
 | 74.3.5 | `FUTURE-PARITY-BACKLOG.10.4.5` | `done` | Typed invocation-local observations match the twentieth digest across all Rust routes with canonical signoff. |
 | 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `done` | Exact 12-role Rust consumer, governance 6/20/73, complete Rust, and canonical 1,031 close the parent. |
+| 74.4 | `FUTURE-PARITY-BACKLOG.10.5` | `active` | Implement the Dart semantic adapter only after an exact Unicode-label prerequisite and authority split. |
+| 74.4.0 | `FUTURE-PARITY-BACKLOG.10.5.0` | `done` | Mapped exact Dart semantic/label owners, exposed stale self-hosted corpus proof, and froze bounded children without behavior. |
+| 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `pending` | Reconcile first-authoritative `specs/spec.spec` with pinned Unicode labels across admitted grammar routes. |
+| 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `pending` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
+| 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
+| 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
+| 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
+| 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
+| 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |
+| 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 

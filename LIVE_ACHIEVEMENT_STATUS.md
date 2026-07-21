@@ -8,9 +8,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No implementation slice is active. Rust semantic admission `.10.4.6` and parent `.10.4` are verified and closed;
-  the per-slice commit workflow is the only in-flight action. Dart semantic adapter `.10.5` may activate only from
-  the resulting clean boundary.
+- Dart semantic authority/split leaf `FUTURE-PARITY-BACKLOG.10.5.0` is complete under `.10.5` from
+  clean Rust admission commit `0de66ae9` at ahead 281. Exact ADR `0051` label/source/compiled/ActionIR/staged/
+  generated/diagnostic/runtime retrieval and probes are complete. Shared executable-label closure `.10.5.0.1`,
+  Dart label parity `.10.5.0.2`, and semantic implementation/admission `.10.5.1-.6` are frozen before behavior;
+  only cleanup and the per-slice commit remain before `.10.5.0.1` activation.
+
+The audit proves current Dart declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
+targets remain raw, and externally constructed invalid labels bypass validation. Once supplied a valid Unicode
+label, compiled/descriptor/generated/emitted/selector routes preserve it exactly. `specs/spec.spec` also retains
+host `\w` despite ADR `0012` first-authority and ADR `0051` pinned-membership requirements, so its separate shared
+closure precedes Dart implementation. All four green `spec_spec_*` inputs are stale identical grammar copies;
+`.10.5.0.1` additionally owns verbatim regeneration, byte/hash freshness enforcement, and current canonical Dart
+execution before 105/105 can count as self-hosted proof.
+
+Behavior-free signoff passes semantic 6/20/73, Unicode 806/9/8/2, complete Dart format/analyzer/package 276/primary
+66x2/corpus 105, KM 670/4,975, book/doctrines, and canonical Phase 0 1,031/1,031 in 659 seconds. No executable or
+ledger state changes.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime

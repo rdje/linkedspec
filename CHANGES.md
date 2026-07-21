@@ -1,5 +1,40 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0 — audit and split Dart semantic introspection
+
+Completed a behavior-free Dart authority/gap audit before semantic implementation. Exact probes consume all five
+neutral sources through the staged parser, validator, compiler, `SpecFile` reconstruction, generated plan/emitter,
+and runtime where applicable. Graph/calls/runtime compile, the runtime fixture returns `["A","B"]`, failed source
+reports `bare_edge_target_undefined` at `normalize_edges`, and privacy fails at the current ASCII host-`\w` header
+scanner. Current typed owners are sufficient for static/call/staged/generated projection, but exact source mapping,
+immutable semantic projection/query, and typed runtime observation are new adapter layers.
+
+The label probe found two concrete correctness gaps. Dart action and blind references silently truncate `Töp` to
+`T`; bare Unicode references remain raw. `validateSpec` also accepts and compiles invalid labels such as `Top-Rule`
+when supplied through deserialized/programmatic AST state. Once a valid Unicode label is supplied externally,
+compiled maps, descriptors, generated plans/emitted source, and explicit selectors preserve it exactly. A generated
+Dart Unicode 17 classifier plus universal parsed/external-AST validation is therefore a bounded prerequisite.
+
+The audit also found that `specs/spec.spec`, despite being the first authoritative `.spec` grammar under ADR `0012`,
+still embeds host `\w` in rule-header and edge productions. The task split gives this shared authority conflict its
+own `.10.5.0.1` closure before Dart-specific label parity `.10.5.0.2`, then source foundation, static projection,
+calls/staging/generated projection, query, runtime observation, and composed admission `.10.5.1-.10.5.6`.
+
+A second audit finding qualifies the green corpus baseline. The four `spec_spec_*` `input.spec` files are identical
+stale snapshots at SHA-256 `e0a1b63b276c2a896c577192d4b399c88f21539555835018ce8117b91a14b25f`, not current
+`specs/spec.spec` at `9cb540e26622741b90a97f25e46e4c27accdece43c40cc106cf30cc273f3eab1`. They omit newer bare-edge
+productions and retain broad lifecycle `(\w++)`; direct Dart execution of canonical source instead reaches its
+unsupported explicit lifecycle/named-group structure. `.10.5.0.1` now owns generator-based regeneration, a
+byte/hash freshness gate, and current Dart structural-bridge execution. Thus 105/105 is a valid unchanged baseline,
+but not evidence that Dart executes today's self-hosted grammar.
+
+No executable behavior or neutral fixture changes here. The complete Dart baseline passes formatting, fatal
+analysis, 276 package tests, primary 66/66 twice, and corpus 105/105; semantic governance remains 6/20/73 at rollout
+3/9 and native admission 2/6. Unicode proof passes 806 ranges / 9 positive / 8 negative / 2 distinct pairs;
+Knowledge Map is 670 facts / 4,975 keys; mdBook, memory, task metadata, four doctrines, and whitespace pass.
+Canonical local CI independently passes its semantic/primary stages plus Phase 0 1,031/1,031 in 659 seconds and
+exits 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.6 — admit Rust semantic introspection
 
 One omission-sensitive Rust consumer now composes the already-complete semantic source, compiled/failed/static,

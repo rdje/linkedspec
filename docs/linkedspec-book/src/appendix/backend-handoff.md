@@ -210,30 +210,39 @@ canonical trace, passes 61/61 in both environments, and adds `tools/run_rust_loc
     recurring identity owner. Complete capability census `.1.6` and generated-source `.3` remain separate.
 
 ADRs `0049`/`0050` and `FUTURE-PARITY-BACKLOG.10.2` make deep semantic introspection executable before backend
-admission. The planned `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is an immutable normalized index exposed
-idiomatically from every native backend: rules, regex slots, edges, lifecycle, calls, inferred value/target shapes,
-staged/generated provenance, portable diagnostics, and ordered explain-why evidence. Snapshot-local ids/order,
-bounded pages and logical traversal cost, structural source ceilings/redactions, optional caller-captured runtime
-observations, and exact cross-backend fixtures are mandatory. The existing outward descriptor remains a separate
-compatibility projection; no backend AST/IR, callable, compiled regex, object identity, or implicit host path can
-enter the semantic response. MCP will expose only native capabilities/query calls over a registered handle. It
-cannot compile, read a path, derive facts, or own explanations. Perl now ships opaque construction, static/call/
-staged/generated projections, exact capabilities/query, typed caller-captured runtime observation, and composed
-admission through `.10.3.1-.10.3.6`. `LinkedSpec::semantic_index(...)` accepts decoded text or strict UTF-8 bytes plus a caller
-logical name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path;
-`with_execution_observation` derives a separate immutable runtime snapshot only after normal parsing. One 12-role
-consumer locks all 20 exact responses and direct/loaded/generated/traced equivalence; Perl is admission 1/6 and
-rollout 2/9. Rust audit `.10.4.0` confirms `CompiledSpec`/ActionIR/staged sidecars/generated-v2/diagnostic/loader and
-parallel direct/generated runtime seams are reusable, while exact source mapping, normalized failed projection,
-immutable query, and typed observations are new adapter work. `.10.4.0.1` repairs and mechanically guards exact
-semantic toolbox state (6/20/65, rollout 2+7, admission 1+5, Perl 12-role ownership). ADR `0051` and `.10.4.0.2`
-resolve the former `Töp` prerequisite by pinning Unicode 17.0.0 `XID_Continue` labels with exact case- and
-normalization-sensitive scalar identity, then implementing that contract across all Rust source/artifact/runtime
-identity routes. `.10.4.1-.10.4.3` now retain the strict copied-source/compiled-or-failed foundation plus exact
-private static and call/staged/generated projections; the call target deep-equals 22 records / 25 relations without
-public query or promotion. Rust is still not admitted. The Dart,
-Julia, and Lua semantic backend lanes must align their label parsers before their v1 fixture admission; the other
-backend work and MCP remain `.10.5-.10.10`.
+admission. `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` define an immutable normalized native
+index for rules, regex slots, edges, lifecycle, calls, shapes, staged/generated provenance, portable diagnostics,
+runtime observations, and explanations. Snapshot-local ids/order, bounded pages/cost, structural source privacy,
+and exact fixtures are mandatory. Descriptors remain a separate compatibility projection; AST/IR, callables,
+compiled regexes, object identities, implicit paths, and generated implementation source cannot enter responses.
+MCP is later handle-only transport and cannot compile, read paths, derive facts, or own explanations.
+
+Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` now each provide strict in-memory compiled-or-failed
+construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated projection, all 19 static
+queries, typed caller-captured runtime observation for the twentieth answer, and one omission-sensitive 12-role
+admission consumer. Both queries remain unable to execute. The checker is exact at six fixture groups, 20 query
+digests, and 73 rejected mutations; rollout is 3/9 and native admission 2/6.
+
+For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
+typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the
+runtime's post-match slot/final-result seams. Do not serialize AST JSON or derive semantics from descriptor layout.
+Ordinary Dart rule/body nodes are line-oriented and loaded state includes a host path, so a new opaque constructor
+must copy caller source and logical identity and own exact byte/scalar correlation. Runtime observation must be a
+typed invocation-local channel distinct from trace and diagnostic output.
+
+Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
+exact case- and normalization-sensitive identity. Current Dart host-`\w` headers reject `Töp`; action/blind
+references silently truncate it to `T`; bare Unicode references stay raw; and external invalid labels bypass
+validation. First-authoritative `specs/spec.spec` also retains host `\w`, contrary to ADR `0012`/`0051`.
+Shared executable-grammar closure `.10.5.0.1` therefore precedes Dart classifier/scanner/validator parity
+`.10.5.0.2`; source/static/calls/query/runtime/admission follow as `.10.5.1-.10.5.6`. Julia and Lua later inherit
+the same pinned-label prerequisite before their v1 admissions.
+
+Do not interpret Dart's current 105/105 corpus result as execution proof for today's self-hosted grammar. The four
+`spec_spec_*` inputs are stale identical copies that predate canonical bare-edge productions and the explicit
+lifecycle alternation. The generator is specified to copy source verbatim, so `.10.5.0.1` must regenerate them,
+enforce byte/hash freshness, and repair Dart's structural PCRE bridge for current `specs/spec.spec` before another
+backend can claim the shared grammar prerequisite.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
