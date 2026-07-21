@@ -1,15 +1,17 @@
 # Semantic Introspection
 
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl also has the
-first construction foundation, but it does **not** yet have public `capabilities` or `query` answers. The
+construction and private static-projection foundations, but it does **not** yet have public `capabilities` or
+`query` answers. The
 distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
 - the neutral checker derives and digest-locks exact answers without admitting a backend early; and
-- `LinkedSpec::semantic_index(...)` now constructs an opaque compiled-or-failed Perl snapshot; and
+- `LinkedSpec::semantic_index(...)` constructs an opaque compiled-or-failed Perl snapshot and retains private
+  clone-safe static records/relations; and
 - the current `return_descriptor` / descriptor APIs remain the usable introspection surface until the later Perl
-  leaves implement records and queries.
+  leaves implement calls/staging and public queries.
 
 The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT: a constructor foundation is not semantic-query admission. MCP remains later transport
@@ -41,13 +43,41 @@ the private descriptor authority; a language compilation failure still returns t
 `failed_compilation` outcome and the existing structured runtime-context failure. Construction does not execute
 the parser. Public `$index->capabilities` and `$index->query(...)` are deliberately not present yet, so callers
 that need answers today should continue using descriptor mode. The staged boundary prevents descriptor coderefs,
-compiled regex objects, decoded source, or filesystem identities from leaking while later leaves build the exact
-neutral records.
+compiled regex objects, decoded source, or filesystem identities from leaking. The next private layer now builds
+the exact static neutral records, but the absence of public query methods remains intentional.
 
 The internal source mapper is already exact: zero-based half-open strict-UTF-8 byte offsets, one-based lines,
 one-based Unicode-scalar columns, rejected mid-codepoint ranges, and deterministic cursor-ordered lookup for
-duplicate source text. Record-specific source correlation remains the next Perl leaf rather than being guessed by
-this general mapper.
+duplicate source text. Record-specific correlation is now performed only after compilation, against descriptor
+order/topology and already accepted source; the general mapper still invents no grammar semantics.
+
+## Current private static projection
+
+`LinkedSpec::SemanticStaticProjection` is an internal layer retained by the opaque index. It is deliberately not a
+second public API. It combines four authorities without serializing any one of them:
+
+- the descriptor supplies compiled rule order, normalized family/cursor/repetition, ownership, and resolved edges;
+- accepted decoded source distinguishes direct and indexed authored forms and supplies rule, slot, edge, and
+  lifecycle ranges;
+- the source mapper turns those ranges into exact strict-UTF-8 byte/line/scalar-column references; and
+- runtime context supplies structured failed-compilation fields.
+
+The result contains v1 spec, source, rule, regex-slot, edge, lifecycle, diagnostic, decision, and explanation
+records plus their static relations. Record ids percent-escape strict UTF-8 bytes with uppercase hex, duplicate
+patterns keep separate authored slot numbers, unbounded repetition becomes null, and no-edge rules report `none`.
+An indexed edge has target shape `regex_slot`; a direct edge has target shape `rule`. A self-indexed edge emits
+`selects_regex` but not a redundant `dispatches_to` relation back to the same rule.
+
+Failed `Top: / Missing`-style dependency intent remains source-aware even though no descriptor was produced. The
+private projection normalizes the runtime `bare_edge_target_undefined` failure to portable
+`unknown_rule_reference`, with `rule_id`/`missing_rule_id`, a dependency-resolution decision, and its ordered
+explanation step. Returned copies admit only plain data and JSON booleans; coderefs, compiled regex objects,
+backend AST/IR, object identities, and paths are rejected at the clone boundary.
+
+The focused adapter test materializes internal source keys and deep-compares the complete graph, Unicode privacy
+at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
+neutral oracle. This still does not make the backend admitted: call/staged records, query-time source redaction,
+pages/budgets, execution observations, route identity, and the composed consumer remain later leaves.
 
 ## Why this is separate from the descriptor
 
@@ -67,10 +97,10 @@ semantic snapshot:
 
 | Authority | Reusable meaning | Work still owned by the semantic adapter |
 |---|---|---|
-| decoded source plus canonical UTF-8 bytes | exact accepted text | source coordinates, excerpts, digests, logical-name-only identity |
-| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | removal of coderef/compiled-regex host values; normalized records and relations |
+| decoded source plus canonical UTF-8 bytes | exact accepted text | static source coordinates/excerpts/digests now projected; call/staged spans remain later |
+| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | static host values are normalized privately; functions/calls/staging remain later |
 | typed ActionIR AST | source-preorder calls, bindings, and nested spans | registry resolution, portable shapes, evidence |
-| runtime context | structured compilation failure | v1 diagnostic code/stage/message/field normalization |
+| runtime context | structured compilation failure | static unknown-rule normalization now implemented; other portable failures remain later |
 | generated-source v2 metadata | contract/format, source identity, ordered family plan, entries | separate generated-artifact relation; never snapshot reconstruction |
 | runtime handlers | exact accepted slot and final-result seams | a new invocation-local typed observation sink separate from trace |
 
@@ -279,7 +309,8 @@ The dependency order is:
 | `.10.3.0` | Perl authority map and safe implementation split | complete |
 | `.10.3.1` | Perl strict source/map/compiled-or-failed outcome foundation | implemented; admission unchanged |
 | `.10.3.2.0` | correct and independently gate neutral static rule facts | complete |
-| `.10.3.2.1-.10.3.6` | Perl static graph, calls/staging, query, runtime/routes, admission | pending |
+| `.10.3.2.1` | Perl private static graph/diagnostic projection | implemented; admission unchanged |
+| `.10.3.3-.10.3.6` | Perl calls/staging, query, runtime/routes, admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |

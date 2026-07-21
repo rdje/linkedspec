@@ -26,8 +26,9 @@ semantic snapshot, and `RuntimeContext`/text trace has no typed invocation-local
 label fail validation, while strict `Encode::decode(..., FB_CROAK)` compiles the exact `Töp` label. Public loaders
 already enforce that strict boundary. The native constructor must therefore accept decoded text or strict UTF-8
 bytes, retain canonical bytes for spans/digests, reject malformed UTF-8, and use only a caller logical name.
-Rule/edge/lifecycle coordinates require a source mapper over accepted text because no current descriptor owns
-them. Internal `bare_edge_target_undefined` / `normalize_edges` must normalize to the v1 portable compile
-diagnostic. Implementation is split under task leaves `.10.3.1-.10.3.6`. See
+Rule/edge/lifecycle coordinates require a source mapper over accepted text because no descriptor owns them. Static
+leaf `.10.3.2.1` now performs that private correlation and normalizes internal `bare_edge_target_undefined` /
+`normalize_edges` to the v1 portable compile diagnostic. Calls/staging, query, observations, and admission remain
+split under `.10.3.3-.10.3.6`. See [[perl-semantic-static-projection]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[semantic-introspection-neutral-contract]], and
 [[perl-generated-source-contract-v2]].

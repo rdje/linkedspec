@@ -8,25 +8,35 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.2.0` is active task-tree-first from clean source-foundation commit `0558c65a`.
-  Toolbox/Knowledge retrieval plus exact descriptors found stale neutral default-family and no-edge ownership
-  facts before adapter code. The corrected model uses `or`/`seek`, `none` for compiled no-edge rules, and `action`
-  for the failed default bare edge. The checker now derives those facts from `linkedspec-rule-local-cursor-v1` and
-  rejects 53 mutations including three coordinated model-plus-hash drifts. Signoff passes semantic 6/20/53,
-  rule-local 36/18/8 plus 60 mutations, foundation 5, capability 80/0/0, selector 59/27/0, primary 66x2,
-  Knowledge Map 652/4,805, and Phase 0 1,031/1,031 in 612 seconds; mdBook, memory, doctrines, whitespace, and full
-  canonical exit 0 pass. Only final cleanup, commit, and brief clearing remain before `.10.3.2.1`.
+- `FUTURE-PARITY-BACKLOG.10.3.2.1` is active task-tree-first from clean static-oracle commit `40d35201` at ahead
+  265. The private Perl projector now composes accepted source, descriptor topology, entry selection, and runtime
+  failure into clone-safe static v1 records/relations. Graph, privacy full/limited, failed compilation, and the
+  runtime fixture's static half deep-equal the neutral oracle; clone/no-host-object proof passes. Static 5,
+  foundation 5, semantic 6/20/53, rule-local 36/18/8+60, capability 80/0/0, selector 59/27/0, repeated action
+  8/10/8+0/54, primary 66x2, KM 653/4,812, mdBook/governance, and Phase 0 1,031/1,031 in 611 seconds pass with
+  canonical exit 0. Final durable closeout, cleanup, and the clean commit remain before `.10.3.3` can activate.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
 observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
-rollout legs and native backend admission 0/6: Perl construction exists, but records/capabilities/query do not.
-Static oracle correction changes neither ledger.
+rollout legs and native backend admission 0/6: Perl construction and private static records exist, but public
+capabilities/query and a composed backend consumer do not. Static projection changes neither ledger.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.2.0 — correct semantic static oracle**
+  (DONE at clean commit `40d35201` from base `0558c65a`).
+
+  **Result:** Default rules are neutral `or`/`seek`, compiled no-edge ownership is `none`, the failed default bare
+  edge retains `action`, and independent rule-local cross-checking rejects coordinated model-plus-hash drift.
+
+  **Proof:** Semantic 6/20/53, rule-local 36/18/8+60 mutations, foundation 5, capability 80/0/0, selector 59/27/0,
+  primary 66x2, Knowledge Map 652/4,805, Phase 0 1,031/1,031 in 612 seconds, canonical exit 0.
+
+  **Next:** Private corrected static projection `.10.3.2.1` is active task-tree-first.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.3.1 — add Perl semantic source foundation**
   (DONE at clean commit `0558c65a` from base `e679a3eb`).
 

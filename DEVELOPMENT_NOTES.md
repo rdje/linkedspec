@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.2.1` — static semantics are a composed projection, not a descriptor
+  dump): the compiled descriptor is authoritative for rule order, family/cursor/repetition, normalized ownership,
+  and resolved edge topology, but it cannot own authored source form or coordinates and contains native regex/
+  coderef values. The private Perl projector therefore correlates only already accepted decoded source constructs
+  with descriptor order and uses runtime context only for failed compilation. No backend object crosses the clone
+  boundary.
+
+  Static source correlation preserves two distinct identities that pattern equality cannot recover. A target
+  rule's repeated `/a/` definitions become separate authored slots even when their patterns match; an indexed edge
+  points to the requested slot. For a self-indexed repeated rule, the authored edge line is also the slot's source,
+  and `selects_regex` is sufficient—the neutral oracle intentionally has no redundant `dispatches_to` self-edge.
+  Direct edges instead target a rule and retain `dispatches_to`.
+
+  Neutral booleans must remain JSON booleans in retained records, not Perl numeric lookalikes. The inside-out
+  clone helper now admits only `JSON::PP::Boolean` in addition to arrays/hashes/scalars, preserving exact wire type
+  while continuing to reject coderefs, regex objects, blessed compiler state, and all other host values. Full
+  source refs remain private at construction; later query policy applies `none`/`identity`/`span`/`text` ceilings
+  before any response leaves the index.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.2.0` — correct the oracle before projecting it): Toolbox-first
   descriptor probes exposed a foundational contradiction before Perl adapter code. `Töp::`, `Top::`, `Done:`, and
   failed `Top:` are default-family headers, but the neutral model labeled them `and`/`contiguous`; exact current

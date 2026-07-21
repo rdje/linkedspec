@@ -24,5 +24,7 @@ the structured runtime diagnostic; malformed UTF-8 or constructor options throw 
 `LinkedSpec::SemanticSourceMap` derives zero-based half-open byte ranges and one-based line/Unicode-scalar columns
 from the canonical bytes, rejects mid-codepoint boundaries, and supports cursor-ordered exact occurrence mapping.
 Only clone-safe foundation projections cross the object boundary; descriptor coderefs/regex objects and decoded
-source remain private. Public `capabilities`/`query` records are still owned by later `.10.3` leaves. See
-[[perl-semantic-introspection-authority-map]] and [[semantic-introspection-neutral-contract]].
+source remain private. Leaf `.10.3.2.1` now retains private static records/relations on that boundary, while public
+`capabilities`/`query`, calls/staging, observations, and admission remain later. See
+[[perl-semantic-static-projection]], [[perl-semantic-introspection-authority-map]], and
+[[semantic-introspection-neutral-contract]].

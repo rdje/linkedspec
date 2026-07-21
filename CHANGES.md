@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.2.1 — project Perl static semantic records
+
+`LinkedSpec::semantic_index(...)` now retains a private immutable static semantic projection behind its opaque
+constructor boundary. `LinkedSpec::SemanticStaticProjection` combines accepted decoded source, canonical source
+mapping, stable descriptor authority, selected entry identity, and structured runtime compilation failure. It emits
+canonical clone-safe spec, source, rule, regex-slot, edge, lifecycle, diagnostic, decision, and explanation records
+plus declares/contains/dispatches/selects/diagnoses/explains relations. Names use uppercase percent-escaped UTF-8;
+records and relations use the fixed v1 kind/order rules; source references contain only the caller logical identity,
+exact UTF-8 spans/excerpts/digest, and empty provenance.
+
+The projection normalizes descriptor `or_default`/`seek` to neutral `or`/`seek`, `consume` to `contiguous`, the
+unbounded repetition sentinel to null, and compiled no-edge ownership to `none`. Authored source distinguishes
+direct versus indexed targets and correlates duplicate slots without serializing compiled regexes. Self-indexed
+edges select their slot without a redundant self-dispatch relation. The failed bare-edge authority becomes the
+portable `unknown_rule_reference` compile diagnostic with exact decision/explanation evidence.
+
+`t/semantic_index_perl_static_projection.t` materializes internal source references and deep-compares the complete
+graph, Unicode privacy full/limited, and failed-compilation targets plus the runtime fixture's complete static half
+against `linkedspec-semantic-model-v1`. It also proves clone isolation, canonical JSON encodability, and absence of
+coderef/regex/object/path leakage. The existing five-subtest foundation, semantic 6/20/53, rule-local
+36/18/8+60-mutation gate, and calls/staging construction smoke remain green. Public `capabilities`/`query`,
+ActionIR call/staged projection, runtime observation, rollout, and admission remain later leaves; ledgers stay
+1/9 and 0/6.
+
+Complete signoff also passes the five static projection subtests, capability 80/0/0, aggregate-selector
+59/27/0, repeated-action 8/10/8+0/54, primary CLI 66/66 twice, Knowledge Map 653/4,812, mdBook, memory
+architecture, all doctrines, and whitespace. Canonical Phase 0 passes 1,031/1,031 in 611 seconds and the complete
+local gate exits 0. No optional backend matrix is needed because this leaf changes only the private Perl index.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.2.0 — correct neutral static rule authority
 
 The semantic-introspection oracle no longer encodes the obsolete assumption that bare/default rule headers are

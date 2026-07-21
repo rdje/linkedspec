@@ -375,6 +375,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   state, compiled and failed outcomes, logical-name-only identity, malformed-byte rejection, and no path option.
   It does not prove records, queries, execution observations, or backend admission. See
   [[perl-semantic-index-source-foundation]].
+- **PERL STATIC PROJECTION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t` verifies the
+  `.10.3.2.1` private static graph/diagnostic layer. It materializes internal source keys and deep-compares graph,
+  Unicode privacy full/limited, failed compilation, and runtime-static records/relations with the neutral oracle;
+  it also proves clone isolation and no coderef/compiled-regex/object/path leakage. It does not prove public query,
+  ActionIR calls/staging, runtime observation, or backend admission. See [[perl-semantic-static-projection]].
 
 ---
 

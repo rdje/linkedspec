@@ -42,9 +42,11 @@ prefixes; page cursor/boundary behavior; reverse traversal; source `none`/`ident
 Unicode-scalar coordinates; digests; redactions; a lowered ceiling; invalid requests; and unsupported contracts are
 all executable.
 
-The neutral leaf deliberately admits no native backend and adds no semantic API behavior. Perl `.10.3` is the next
-owner, followed by Rust, Dart, Julia, dual-ABI Lua, recurring six-runtime proof, thin MCP transport, and public
-no-drift.
+The neutral leaf deliberately admits no native backend. Perl now has opaque construction plus a private exact
+static projection, but still no public semantic query or composed consumer; its rollout/admission rows therefore
+remain pending. Calls/staging, query/runtime/routes, and admission precede Rust, Dart, Julia, dual-ABI Lua,
+recurring six-runtime proof, thin MCP transport, and public no-drift.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
-[[semantic-introspection-staged-artifact-schema]], [[outward-descriptor-is-not-semantic-wire-model]].
+[[perl-semantic-static-projection]], [[semantic-introspection-staged-artifact-schema]],
+[[outward-descriptor-is-not-semantic-wire-model]].

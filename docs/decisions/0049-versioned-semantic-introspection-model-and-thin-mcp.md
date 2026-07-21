@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral static-rule oracle corrected and cross-gated; Perl source foundation implemented; adapters pending
+- Status: accepted; amended by ADR 0050; neutral static oracle corrected; Perl source and private static projection implemented; public adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -341,6 +341,15 @@ its diagnostic. The semantic checker now consumes `linkedspec-rule-local-cursor-
 for header family/cursor, repetition, entry-marker, and ownership facts. Coordinated wrong-model plus refreshed-
 hash mutations are rejected. This is an oracle correction only: it changes no parser, compiler, runtime,
 descriptor, generated artifact, CLI, trace, backend admission, or MCP behavior.
+
+Perl leaf `.10.3.2.1` consumes that corrected boundary without turning the outward descriptor into the model. A
+private immutable projector combines descriptor rule/edge authority, accepted decoded source/source-map ranges,
+selected entry identity, and structured failed-compilation context. Its spec/source/rule/regex-slot/edge/lifecycle/
+diagnostic/decision/explanation records and relations deep-equal the graph, privacy full/limited, failed, and
+runtime-static neutral targets after internal source keys are materialized. Duplicate patterns retain authored slot
+ids, self-indexed edges select their slot without redundant self-dispatch, and only JSON booleans plus plain data
+cross the clone boundary. Public query/capability behavior, ActionIR calls/staging, observations, and admission are
+still absent, so rollout and backend admission do not advance.
 
 ## Links
 

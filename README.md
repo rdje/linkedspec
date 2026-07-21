@@ -777,10 +777,12 @@ content migration exists yet.
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
-  runtime-context failure authority without parser execution or path reads. It does not yet expose semantic
-  records, `capabilities`, or `query`, so rollout/admission remain 1/9 and 0/6. Correction leaf `.10.3.2.0`
-  repairs the neutral default-family facts before static Perl projection `.10.3.2.1`; `.10.3.3-.10.3.6` retain
-  later Perl work.
+  runtime-context failure authority without parser execution or path reads. Static leaf `.10.3.2.1` now retains a
+  private clone-safe projection of exact spec/source/rule/regex-slot/edge/lifecycle/diagnostic/decision/explanation
+  records and relations. It deep-equals the corrected graph, Unicode privacy, failed-compilation, and runtime-static
+  neutral targets without exposing descriptor coderefs, compiled regexes, AST layout, or paths. Public
+  `capabilities` and `query` are still absent, so rollout/admission remain 1/9 and 0/6; calls/staging `.10.3.3` is
+  next, followed by query/runtime/admission `.10.3.4-.10.3.6`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

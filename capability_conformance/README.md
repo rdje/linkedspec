@@ -18,9 +18,13 @@ mutations prove response-digest self-consistency cannot hide those facts. Neutra
 admission remains 0 complete / 6 pending. No parser, compiler, runtime, descriptor, generated-source, CLI, trace,
 or MCP behavior is added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
-Perl foundation `.10.3.1` now implements opaque in-memory construction, strict source normalization/mapping, and
-immutable compiled-or-failed outcomes, but exposes no semantic records, capabilities, or queries. Later leaves
-`.10.3.2.1-.10.3.6` retain those behaviors and exact admission, so neither rollout ledger advances.
+Perl foundation `.10.3.1` implements opaque in-memory construction, strict source normalization/mapping, and
+immutable compiled-or-failed outcomes. Static leaf `.10.3.2.1` adds a private clone-safe projection whose graph,
+privacy full/limited, failed-compilation, and runtime-static records/relations deep-equal the neutral model after
+source references are materialized. `PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t` checks
+deterministic ids/order, duplicate and self-indexed slots, normalized failure evidence, immutable copies, JSON
+booleans, and absence of host-object/path leakage. Public capabilities/query, call/staged records, observation,
+and a composed consumer remain `.10.3.3-.10.3.6`, so neither rollout ledger advances.
 
 Run its structural and ownership gate from the repository root:
 

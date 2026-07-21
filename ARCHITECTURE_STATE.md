@@ -21,11 +21,15 @@ This document is the current high-level technical reading of the project shape. 
   pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
-  state has no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/text trace
-  has no typed invocation-local event sink. Leaf `.10.3.1` now implements the first boundary: an opaque inside-out
-  Perl index, strict decoded/byte normalization, canonical-byte digest/source mapper, typed constructor errors, and
-  immutable compiled-or-failed outcome via the existing runtime/descriptor path. It never reads a path or executes;
-  no semantic records, queries, observations, or admission are claimed. `.10.3.2.1-.10.3.6` own those later layers.
+  state originally had no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/
+  text trace has no typed invocation-local event sink. Leaf `.10.3.1` implements the first boundary: an opaque
+  inside-out Perl index, strict decoded/byte normalization, canonical-byte digest/source mapper, typed constructor
+  errors, and immutable compiled-or-failed outcome via the existing runtime/descriptor path. Static leaf
+  `.10.3.2.1` now correlates accepted source with descriptor order/topology and runtime failure to retain clone-safe
+  normalized spec/source/rule/regex/edge/lifecycle/diagnostic/decision/explanation records and relations. It
+  deep-equals graph, privacy full/limited, failure, and runtime-static neutral targets; self-indexed edges select
+  their slot without a redundant self-dispatch relation. No path is read, parser executed, public query exposed,
+  observation captured, or backend admitted. `.10.3.3-.10.3.6` own the later layers.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

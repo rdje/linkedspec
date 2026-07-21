@@ -12,10 +12,12 @@ use utf8;
 
 use Digest::SHA qw(sha256_hex);
 use Encode qw(decode encode FB_CROAK LEAVE_SRC);
+use JSON::PP ();
 use Scalar::Util qw(refaddr);
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::SemanticSourceMap ();
+use LinkedSpec::SemanticStaticProjection ();
 
 my %STATE_BY_ADDRESS;
 my %SOURCE_DETAIL = map { $_ => 1 } qw(none identity span text);
@@ -149,6 +151,26 @@ sub create {
   };
  }
 
+ my $snapshot = {
+  id => 'snapshot:0',
+  state => $state_name,
+  has_execution => 0,
+  source_detail_ceiling => "$source_detail_ceiling",
+  content_digest_available => $source_detail_ceiling eq 'text' ? 1 : 0,
+ };
+ my $content_digest = 'sha256:' . sha256_hex($source_bytes);
+ my $static_projection = LinkedSpec::SemanticStaticProjection::build(
+  source_text => $source_text,
+  source_map => $source_map,
+  logical_name => $logical_name,
+  content_digest => $content_digest,
+  snapshot => $snapshot,
+  descriptor => $state_name eq 'compiled' ? $descriptor : undef,
+  compilation_error => $compilation_error,
+  selected_top_rule => $runtime_ctx->{top_rule},
+  requested_top_rule => $top_rule,
+ );
+
  my $token = 0;
  my $self = bless \$token, __PACKAGE__;
  $STATE_BY_ADDRESS{refaddr($self)} = {
@@ -156,12 +178,13 @@ sub create {
   source_bytes => "$source_bytes",
   logical_name => "$logical_name",
   source_detail_ceiling => "$source_detail_ceiling",
-  content_digest => 'sha256:' . sha256_hex($source_bytes),
+  content_digest => $content_digest,
   content_digest_available => $source_detail_ceiling eq 'text' ? 1 : 0,
   source_map => $source_map,
   compilation_state => $state_name,
   compilation_error => $compilation_error,
   descriptor_authority => $state_name eq 'compiled' ? $descriptor : undef,
+  static_projection => $static_projection,
   top_rule => defined($top_rule) ? "$top_rule" : undef,
  };
  return $self
@@ -180,6 +203,11 @@ sub _foundation_snapshot {
   source_detail_ceiling => $state->{source_detail_ceiling},
   content_digest_available => $state->{content_digest_available} ? 1 : 0,
  }
+}
+
+sub _static_projection {
+ my ($self) = @_;
+ return _clone_plain_data(_state($self)->{static_projection})
 }
 
 sub _foundation_source_identity {
@@ -249,6 +277,7 @@ sub _normalize_utf8_scalar {
 sub _clone_plain_data {
  my ($value) = @_;
  return $value unless ref $value;
+ return $value ? JSON::PP::true : JSON::PP::false if ref($value) eq 'JSON::PP::Boolean';
  return [map { _clone_plain_data($_) } @$value] if ref($value) eq 'ARRAY';
  if (ref($value) eq 'HASH') {
   return { map { $_ => _clone_plain_data($value->{$_}) } keys %$value }
