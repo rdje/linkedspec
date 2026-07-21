@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0.1.0 — generate self-hosted Unicode label class
+
+The verified Unicode 17 rule-label generator now emits one additional deterministic artifact:
+`unicode_case/unicode_rule_label_regex_class.txt`. Its 5,991 UTF-8 bytes include contract/version/data-hash
+metadata plus one literal character class whose endpoints encode the exact 806 maximally merged
+`XID_Continue` ranges. It uses neither host `\w` nor a runtime Unicode-property escape, and the generator rejects
+any contract membership that would require regex or `.spec` delimiter escaping.
+
+The neutral checker independently reconstructs the class from contract rows, checks exact metadata/bytes,
+compiles it, and proves all 9 positive, 8 negative, and 2 distinct fixtures. Initial RED fails on the missing
+artifact; a deliberate `17.0.0` → `17.0.1` metadata mutation fails deterministic regeneration, and restored GREEN
+passes. Canonical CI now requires the tracked artifact. This foundation deliberately does not change
+`specs/spec.spec`, corpus fixtures, runtime behavior, or semantic governance; `.10.5.0.1.1` owns consumption.
+
+Focused Unicode, semantic, memory/task/Knowledge Map, four-doctrine, mdBook, and whitespace checks pass. The
+corrected canonical local gate passes primary 66/66 under both environments and Phase 0 1,031/1,031, exit 0.
+Knowledge Map is 670 facts / 4,977 keys; semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0 — audit and split Dart semantic introspection
 
 Completed a behavior-free Dart authority/gap audit before semantic implementation. Exact probes consume all five

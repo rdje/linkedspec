@@ -8,11 +8,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Dart semantic authority/split leaf `FUTURE-PARITY-BACKLOG.10.5.0` is complete under `.10.5` from
-  clean Rust admission commit `0de66ae9` at ahead 281. Exact ADR `0051` label/source/compiled/ActionIR/staged/
-  generated/diagnostic/runtime retrieval and probes are complete. Shared executable-label closure `.10.5.0.1`,
-  Dart label parity `.10.5.0.2`, and semantic implementation/admission `.10.5.1-.6` are frozen before behavior;
-  only cleanup and the per-slice commit remain before `.10.5.0.1` activation.
+- Shared executable-label/corpus-freshness/current-bridge leaf `FUTURE-PARITY-BACKLOG.10.5.0.1` is active
+  task-tree-first from clean audit commit `0110ea40` at ahead 282. It must reconcile canonical `specs/spec.spec`
+  with pinned Unicode 17 labels, regenerate and mechanically freshness-lock all four stale `spec_spec_*` inputs,
+  and execute today's canonical lifecycle/bare-edge grammar through Dart before `.10.5.0.2` can begin. Safe split
+  `.10.5.0.1.0-.2` freezes generated class authority/checker, grammar+Dart structural consumption, then refreshed
+  corpus/cross-runtime closeout. `.0` is verified complete without behavior changes; `.1` is next after its clean
+  commit.
 
 The audit proves current Dart declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
 targets remain raw, and externally constructed invalid labels bypass validation. Once supplied a valid Unicode
@@ -22,9 +24,10 @@ closure precedes Dart implementation. All four green `spec_spec_*` inputs are st
 `.10.5.0.1` additionally owns verbatim regeneration, byte/hash freshness enforcement, and current canonical Dart
 execution before 105/105 can count as self-hosted proof.
 
-Behavior-free signoff passes semantic 6/20/73, Unicode 806/9/8/2, complete Dart format/analyzer/package 276/primary
-66x2/corpus 105, KM 670/4,975, book/doctrines, and canonical Phase 0 1,031/1,031 in 659 seconds. No executable or
-ledger state changes.
+The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
+regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
+drift, semantic 6/20/73, KM 670/4,977, book/doctrines, primary 66x2, and canonical Phase 0 1,031/1,031 all pass.
+No executable, corpus, or ledger state changes.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -36,6 +39,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.0 — generate self-hosted Unicode label class**
+  (DONE in this commit from clean base `0110ea40`).
+
+  **Result:** One generated metadata-bearing UTF-8 literal class pins all 806 Unicode 17 `XID_Continue` ranges
+  without host properties. The neutral checker independently reconstructs its bytes, rejects delimiter hazards
+  and drift, and proves every label fixture. Canonical grammar, corpus, runtime, and semantic ledgers are unchanged.
+
+  **Proof:** Missing-artifact RED; 5 lines / 5,991 bytes; deliberate version mutation; Unicode 806/9/8/2;
+  semantic 6/20/73; KM 670/4,977; mdBook/memory/task/four doctrines/diff; primary 66x2; corrected canonical local
+  gate and Phase 0 1,031/1,031, exit 0.
+
+  **Next:** Commit cleanly, then activate `.10.5.0.1.1` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.6 — admit Rust semantic introspection**
   (DONE in this commit from clean base `a79512c9`).
 

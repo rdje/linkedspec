@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0.1.0` — portable pinned regex data should be literal, generated, and
+  independently reconstructed): A host property escape such as `\p{XID_Continue}` would still inherit each regex
+  engine's Unicode version, while engine-specific numeric escapes do not share syntax across PCRE and Dart.
+  Unicode `XID_Continue` excludes `/`, backslash, brackets, caret, hyphen, line terminators, and NUL, so one UTF-8
+  literal character class can encode all 806 merged ranges portably without escaping. Supplementary endpoints
+  remain exact decoded scalars; the later Dart consumer must enable Unicode regex mode when such literals occur.
+
+  The generator writes metadata plus that class, but the checker does not trust coordinated generator/output
+  changes: it rebuilds the class independently from neutral JSON rows, byte-compares the complete artifact,
+  compiles it, and full-matches every fixture. Missing-artifact RED and deliberate version drift both fail before
+  restored GREEN. Keeping artifact creation separate from `specs/spec.spec` consumption gives the next slice a
+  stable exact input while leaving all grammar/runtime/corpus behavior unchanged at this commit.
+
+  Corrected canonical signoff passes primary 66x2 and Phase 0 1,031/1,031, exit 0, alongside Unicode 806/9/8/2,
+  semantic 6/20/73, Knowledge Map 670/4,977, mdBook, and all four doctrines. The first canonical attempt exposed
+  the already-tracked `.22` coupling to the mutable repeated-action task-index sentence; restoring its exact
+  unchanged marker made the focused 8/0/54 checker and the complete rerun green.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0` — Unicode label membership and semantic meaning require distinct
   owners): Dart's typed compiler pipeline already preserves exact string identity after parsing. A programmatically
   supplied `Töp` survives compiled maps, descriptors, generated plans/emitted source, and explicit selection. The

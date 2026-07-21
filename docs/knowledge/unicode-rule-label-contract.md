@@ -8,12 +8,14 @@ answers:
   - "are Töp and decomposed Töp the same rule label"
   - "are rule labels case sensitive"
   - "where is the Rust Unicode rule label classifier generated"
+  - "where is the portable self-hosted rule label regex class generated"
+  - "is the self-hosted rule label class derived from host Unicode tables"
   - "which Rust parser routes consume the Unicode rule label contract"
   - "which backends still need Unicode rule label alignment"
 date: 2026-07-21
 status: current
 tags: [grammar, unicode, rule-labels, rust, generated-data, validation, portability]
-evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
 reverify: "python3 tools/check_unicode_rule_label_contract.py; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
@@ -28,7 +30,14 @@ are valid but distinct declarations, references, selectors, compiled keys, descr
 labels, diagnostics, and trace identities. Strict UTF-8 decoding remains the boundary before scanning.
 
 `unicode_case/generate_unicode_rule_label_contract.py` verifies the pinned upstream hashes and deterministically
-writes the neutral JSON plus `linkedspec-core`'s range-table classifier. The Rust parser consumes the classifier
+writes the neutral JSON, `linkedspec-core`'s range-table classifier, and one portable UTF-8 literal-range class in
+`unicode_case/unicode_rule_label_regex_class.txt`. That self-hosted artifact encodes the same 806 merged range
+endpoints directly, not a host Unicode property escape. Its checker independently reconstructs and byte-compares
+the class, rejects regex/delimiter membership that would need engine-specific escaping, compiles it, and exercises
+every positive, negative, and distinct fixture. Leaf `.10.5.0.1.0` adds only this generated authority; canonical
+`specs/spec.spec` consumes it in `.10.5.0.1.1`.
+
+The Rust parser consumes its generated classifier
 for headers and action, blind, and bare references; validation rechecks declarations and all edge targets so a
 deserialized or programmatically constructed AST cannot bypass the policy. Focused proof covers positive/negative
 membership, all syntax routes, exact compiled/descriptor/generated/emitted identities, explicit selectors, strict

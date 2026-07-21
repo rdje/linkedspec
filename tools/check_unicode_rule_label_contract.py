@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -13,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.json"
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
+SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 GENERATOR = ROOT / "unicode_case" / "generate_unicode_rule_label_contract.py"
 FORMAL_GRAMMAR = ROOT / "docs" / "linkedspec-book" / "src" / "appendix" / "formal-grammar.md"
 PARSER_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "parser.rs"
@@ -46,13 +48,30 @@ def valid_label(ranges: list[tuple[int, int]], label: str) -> bool:
     return bool(label) and all(contains(ranges, ord(character)) for character in label)
 
 
+def render_self_hosted_regex_class(ranges: list[tuple[int, int]]) -> str:
+    pieces: list[str] = []
+    for start, end in ranges:
+        pieces.append(chr(start))
+        if start != end:
+            pieces.extend(("-", chr(end)))
+    return "[" + "".join(pieces) + "]+"
+
+
 def main() -> None:
-    for path in (CONTRACT_PATH, RUST_PATH, GENERATOR, CORE_TEST_PATH, RUNTIME_TEST_PATH):
+    for path in (
+        CONTRACT_PATH,
+        RUST_PATH,
+        SELF_HOSTED_REGEX_PATH,
+        GENERATOR,
+        CORE_TEST_PATH,
+        RUNTIME_TEST_PATH,
+    ):
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
     with tempfile.TemporaryDirectory(prefix="linkedspec-unicode-label-") as temp:
         generated_contract = Path(temp) / "contract.json"
         generated_rust = Path(temp) / "unicode_rule_label.rs"
+        generated_self_hosted_regex = Path(temp) / "unicode_rule_label_regex_class.txt"
         subprocess.run(
             [
                 sys.executable,
@@ -61,6 +80,8 @@ def main() -> None:
                 str(generated_contract),
                 "--rust-output",
                 str(generated_rust),
+                "--self-hosted-regex-output",
+                str(generated_self_hosted_regex),
             ],
             cwd=ROOT,
             check=True,
@@ -69,6 +90,8 @@ def main() -> None:
             fail("contract differs from deterministic regeneration")
         if generated_rust.read_bytes() != RUST_PATH.read_bytes():
             fail("Rust classifier differs from deterministic regeneration")
+        if generated_self_hosted_regex.read_bytes() != SELF_HOSTED_REGEX_PATH.read_bytes():
+            fail("self-hosted regex class differs from deterministic regeneration")
 
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     expected_top = {
@@ -116,17 +139,39 @@ def main() -> None:
     counts = contract["counts"]
     if counts["xid_continue_ranges"] != len(ranges):
         fail("range count drifted")
+    for unsafe in ("\\", "/", "[", "]", "^", "-", "\n", "\r", "\0"):
+        if contains(ranges, ord(unsafe)):
+            fail(f"self-hosted literal regex class requires escaping for {unsafe!r}")
+
+    expected_class = render_self_hosted_regex_class(ranges)
+    expected_artifact = (
+        "# Generated pinned Unicode rule-label regex class. Do not edit by hand.\n"
+        f"# contract: {contract['contract_id']}\n"
+        f"# unicode: {contract['unicode_version']}\n"
+        f"# data-sha256: {contract['data_sha256']}\n"
+        f"{expected_class}\n"
+    )
+    actual_artifact = SELF_HOSTED_REGEX_PATH.read_text(encoding="utf-8", errors="strict")
+    if actual_artifact != expected_artifact:
+        fail("self-hosted regex artifact does not independently encode the contract ranges")
+    compiled_class = re.compile(rf"^(?:{expected_class})$")
     for row in contract["positive_fixtures"]:
         if not valid_label(ranges, row["label"]):
             fail(f"positive fixture rejected: {row['id']}")
+        if compiled_class.fullmatch(row["label"]) is None:
+            fail(f"self-hosted regex rejects positive fixture: {row['id']}")
     for row in contract["negative_fixtures"]:
         if valid_label(ranges, row["label"]):
             fail(f"negative fixture accepted: {row['id']}")
+        if compiled_class.fullmatch(row["label"]) is not None:
+            fail(f"self-hosted regex accepts negative fixture: {row['id']}")
     for row in contract["distinct_fixtures"]:
         if not valid_label(ranges, row["left"]) or not valid_label(ranges, row["right"]):
             fail(f"distinct fixture is not valid: {row['id']}")
         if row["left"] == row["right"]:
             fail(f"distinct fixture collapsed: {row['id']}")
+        if compiled_class.fullmatch(row["left"]) is None or compiled_class.fullmatch(row["right"]) is None:
+            fail(f"self-hosted regex rejects distinct fixture: {row['id']}")
 
     formal = FORMAL_GRAMMAR.read_text(encoding="utf-8")
     required_formal = [
@@ -168,6 +213,7 @@ def main() -> None:
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
         "require_tracked_file tools/check_unicode_rule_label_contract.py",
         "require_tracked_file unicode_case/generate_unicode_rule_label_contract.py",
+        "require_tracked_file unicode_case/unicode_rule_label_regex_class.txt",
         "require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs",
         "require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs",
         "require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs",

@@ -42,11 +42,16 @@ python3 tools/check_unicode_rule_label_contract.py
 ```
 
 Label identity remains the exact case- and normalization-sensitive scalar sequence; this generator performs no
-normalization or case mapping.
+normalization or case mapping. The same run also writes
+`unicode_case/unicode_rule_label_regex_class.txt`: one metadata-bearing UTF-8 literal-range class for the
+self-hosted grammar. Its endpoints encode the same 806 ranges without host `\w`, Unicode-property lookup, or
+runtime-version dependence. The checker reconstructs that class independently, byte-compares it, proves every
+fixture, and rejects any delimiter character that would require host-specific escaping. Canonical
+`specs/spec.spec` consumption is the next task-tree slice; the generated artifact alone changes no grammar.
 
 Do not manually edit `capability_conformance/unicode_case_contract.json`,
 `perl/LinkedSpec/UnicodeCaseMapping.pm`, `rust/linkedspec-runtime/src/unicode_case_mapping.rs`,
 `dart/lib/src/runtime/unicode_case_mapping.dart`, `julia/src/runtime/UnicodeCaseMapping.jl`,
 `lua/src/linkedspec/unicode_case_mapping.lua`, `capability_conformance/unicode_rule_label_contract.json`, or
-`rust/linkedspec-core/src/unicode_rule_label.rs`. A Unicode upgrade requires a new ADR, reviewed source hashes,
-regenerated artifacts, and explicit fixture-delta review.
+`rust/linkedspec-core/src/unicode_rule_label.rs`, or `unicode_case/unicode_rule_label_regex_class.txt`. A Unicode
+upgrade requires a new ADR, reviewed source hashes, regenerated artifacts, and explicit fixture-delta review.

@@ -242,6 +242,30 @@ pub fn take_rule_label_prefix(input: &str) -> Option<(&str, &str)> {{
 '''
 
 
+def render_self_hosted_regex_artifact(
+    ranges: list[tuple[int, int]], data_sha256: str
+) -> str:
+    unsafe = {"\\", "/", "[", "]", "^", "-", "\n", "\r", "\0"}
+    for character in unsafe:
+        if contains(ranges, ord(character)):
+            raise ValueError(
+                f"XID_Continue includes regex/delimiter character requiring escaping: {character!r}"
+            )
+    pieces: list[str] = []
+    for start, end in ranges:
+        pieces.append(chr(start))
+        if start != end:
+            pieces.extend(("-", chr(end)))
+    regex_class = "[" + "".join(pieces) + "]+"
+    return (
+        "# Generated pinned Unicode rule-label regex class. Do not edit by hand.\n"
+        f"# contract: {CONTRACT_ID}\n"
+        f"# unicode: {UNICODE_VERSION}\n"
+        f"# data-sha256: {data_sha256}\n"
+        f"{regex_class}\n"
+    )
+
+
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser()
@@ -260,6 +284,11 @@ def main() -> None:
         type=Path,
         default=root / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs",
     )
+    parser.add_argument(
+        "--self-hosted-regex-output",
+        type=Path,
+        default=root / "unicode_case" / "unicode_rule_label_regex_class.txt",
+    )
     args = parser.parse_args()
     contract = build_contract(args.upstream)
     ranges = [
@@ -267,10 +296,15 @@ def main() -> None:
     ]
     contract_text = json.dumps(contract, ensure_ascii=True, indent=2, sort_keys=False) + "\n"
     rust_text = render_rust_module(ranges, str(contract["data_sha256"]))
+    self_hosted_regex_text = render_self_hosted_regex_artifact(
+        ranges, str(contract["data_sha256"])
+    )
     args.contract_output.parent.mkdir(parents=True, exist_ok=True)
     args.rust_output.parent.mkdir(parents=True, exist_ok=True)
+    args.self_hosted_regex_output.parent.mkdir(parents=True, exist_ok=True)
     args.contract_output.write_text(contract_text, encoding="utf-8")
     args.rust_output.write_text(rust_text, encoding="utf-8")
+    args.self_hosted_regex_output.write_text(self_hosted_regex_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -161,6 +161,7 @@ require_tracked_file capability_conformance/scalar_numeric_contract.json
 require_tracked_file unicode_case/README.md
 require_tracked_file unicode_case/generate_unicode_case_contract.py
 require_tracked_file unicode_case/generate_unicode_rule_label_contract.py
+require_tracked_file unicode_case/unicode_rule_label_regex_class.txt
 require_tracked_file unicode_case/upstream/17.0.0/UnicodeData.txt.gz
 require_tracked_file unicode_case/upstream/17.0.0/SpecialCasing.txt.gz
 require_tracked_file unicode_case/upstream/17.0.0/DerivedCoreProperties.txt.gz

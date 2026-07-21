@@ -187,6 +187,11 @@ UTF-8 is rejected rather than replaced. This contract is generated from the repo
 Database rather than a host language's `\w` behavior. See ADR `0051` and
 `capability_conformance/unicode_rule_label_contract.json`.
 
+The pinned generator also emits `unicode_case/unicode_rule_label_regex_class.txt`, a UTF-8 literal-range class
+whose endpoints encode all 806 merged ranges. The checker reconstructs and byte-compares it independently, so the
+self-hosted grammar can consume exact repository data without a host property lookup. The artifact is generated
+authority; wiring it into `specs/spec.spec` is tracked separately from its creation.
+
 Rust implements the contract across headers, action/blind/bare references, validation, selectors, compiled and
 descriptor identity, generated-source plans, loaders, and traces. Perl's strict-decoded `\w` route already accepts
 the admitted semantic fixture's `Töp`; exact five-backend label admission is not claimed by this Rust prerequisite

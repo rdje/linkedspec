@@ -7910,8 +7910,9 @@ before implementation.
     sync public/book/task/index/live/memory/KM, cleanup, and commit the behavior-free audit cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1`
-  Status: `pending`
+  Status: `active`
   Goal: Reconcile the first-authoritative self-hosted grammar with ADR `0051` before claiming another backend.
+  Children: `.10.5.0.1.0`, `.10.5.0.1.1`, `.10.5.0.1.2`
   Depends on: `.10.5.0`
   Acceptance: Replace `specs/spec.spec`'s host-`\w` rule-label authority with a deterministic repository-pinned
     Unicode 17 `XID_Continue` route that preserves exact scalar identity and remains executable across the admitted
@@ -7924,11 +7925,11 @@ before implementation.
 
   #### Acceptance Checklist
 
-  - [ ] **TASK-TREE-FIRST / CLEAN BASE** — Activate only after clean `.10.5.0`; keep semantic 6/20/73, rollout
+  - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate only after clean `.10.5.0`; keep semantic 6/20/73, rollout
     3/9, and admission 2/6 unchanged.
   - [ ] **FIRST AUTHORITY** — Resolve the exact ADR `0012`/`0051` contract for `specs/spec.spec` without making a
     bootstrap parser, host `\w`, locale, or toolchain Unicode table the lasting language owner.
-  - [ ] **DETERMINISTIC CONTRACT DATA** — Reuse the verified Unicode 17 source/ranges and generate or validate the
+  - [x] **DETERMINISTIC CONTRACT DATA** — Reuse the verified Unicode 17 source/ranges and generate or validate the
     self-hosted representation byte-for-byte; reject version, omission, range, and normalization drift.
   - [ ] **ALL LABEL PRODUCTIONS** — Cover rule headers plus action-block/fluent/bare, blind-block/fluent/bare, and
     bare-edge group/index forms while leaving lifecycle/function/helper/mark identifiers under their own grammar.
@@ -7942,6 +7943,59 @@ before implementation.
     self-hosted grammar on every currently admitted runtime route required by the neutral grammar owner.
   - [ ] **NO FALSE PROMOTION / SIGNOFF** — Synchronize formal/public/KM/task state and pass complete affected/
     canonical gates without claiming Dart label or semantic admission.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.0`
+    Status: `done`
+    Goal: Generate and independently guard one portable pinned self-hosted rule-label regex class.
+    Depends on: `.10.5.0`
+    Acceptance: Extend the verified Unicode 17 generator with one deterministic UTF-8 literal-range regex-class
+      artifact derived from the same 806 ranges. Independently reconstruct and byte-check it in the neutral
+      checker, prove every positive/negative/distinct fixture and delimiter safety, and register the artifact in
+      canonical CI. Do not yet change `specs/spec.spec`, runtime behavior, corpus fixtures, or semantic ledgers.
+    Verification: Activated task-tree-first from clean audit `0110ea40` at ahead 282. Missing-artifact RED failed
+      before generation. The shared generator now writes a 5-line / 5,991-byte UTF-8 artifact carrying exact
+      contract id, Unicode 17.0.0, source-data SHA-256
+      `d1b00bda47306e61ee20a7f63db783f98b15d8d15b876c7506bc4b79ecebc0bb`, and one literal class encoding all
+      806 maximally merged ranges. Its independent checker reconstructs metadata and class bytes from the neutral
+      JSON rows, rejects unsafe delimiter membership, compiles the result, accepts all 9 positive labels plus 2
+      distinct pairs, and rejects all 8 negative labels. Deliberate `17.0.0` to `17.0.1` metadata drift fails the
+      byte check; restored generation passes. Canonical CI requires the tracked artifact and passes the four
+      doctrines, semantic 6/20/73, Unicode 806/9/8/2, Rust admission, primary 66/66 twice, and Phase 0
+      1,031/1,031, exit 0. Its first run exposed only the known `.22` mutable task-index marker coupling; restoring
+      the exact unchanged repeated-action marker made its focused 8/0/54 check and the corrected full run green.
+      Knowledge Map is 670 facts / 4,977 keys; mdBook, memory/task metadata, whitespace, and artifact cleanup pass.
+      `specs/spec.spec`, all corpus inputs, runtime behavior, and semantic ledgers remain unchanged.
+
+    #### Acceptance Checklist
+
+    - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate from clean audit `0110ea40` before generator/checker changes.
+    - [x] **RED / INDEPENDENT ORACLE** — Make the checker require the missing generated artifact and independently
+      derive its exact literal range class from neutral contract rows rather than trusting generator output alone.
+    - [x] **GENERATED AUTHORITY** — Emit one metadata-bearing UTF-8 class whose scalar endpoints exactly encode all
+      806 maximally merged ranges and contain no regex/delimiter characters requiring host-specific escaping.
+    - [x] **FIXTURE / DRIFT PROOF** — Compile the class independently, accept every positive/distinct label, reject
+      complete negative labels, and reject version/hash/range/class/artifact omission or byte drift.
+    - [x] **NO BEHAVIOR / SIGNOFF** — Keep canonical grammar/corpus/runtime and semantic 6/20/73 at 3/9 + 2/6
+      unchanged; pass generator/checker, governance, docs/KM/book where affected, cleanup, and commit cleanly.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.1`
+    Status: `pending`
+    Goal: Consume the pinned class in canonical grammar and execute its current structural forms on Dart.
+    Depends on: `.10.5.0.1.0`
+    Acceptance: Replace only rule declaration/reference `\w` sites in `specs/spec.spec` with the generated exact
+      class while preserving function/helper/lifecycle/fluent/mark grammars. Extend Dart regex compilation and
+      bounded structural recognizers for the generated label atom, explicit lifecycle alternation, and bare-edge
+      block/fluent families. Prove direct execution of current canonical source and exact group/capture behavior;
+      do not regenerate corpus or claim Dart label/semantic admission yet.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.2`
+    Status: `pending`
+    Goal: Regenerate, freshness-lock, and compose the current self-hosted corpus proof across admitted runtimes.
+    Depends on: `.10.5.0.1.1`
+    Acceptance: Regenerate all four `spec_spec_*` inputs and expected outputs through the oracle generator, add a
+      mechanical canonical byte/hash freshness check, and execute positive/negative/distinct/no-truncation grammar
+      cases plus the refreshed fixtures across required Perl/Rust/Dart/Julia/Lua routes. Pass complete affected and
+      canonical gates, synchronize public/durable state, close parent `.10.5.0.1`, and preserve semantic ledgers.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2`
   Status: `pending`
@@ -10725,7 +10779,10 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `done` | Exact 12-role Rust consumer, governance 6/20/73, complete Rust, and canonical 1,031 close the parent. |
 | 74.4 | `FUTURE-PARITY-BACKLOG.10.5` | `active` | Implement the Dart semantic adapter only after an exact Unicode-label prerequisite and authority split. |
 | 74.4.0 | `FUTURE-PARITY-BACKLOG.10.5.0` | `done` | Mapped exact Dart semantic/label owners, exposed stale self-hosted corpus proof, and froze bounded children without behavior. |
-| 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `pending` | Reconcile first-authoritative `specs/spec.spec` with pinned Unicode labels across admitted grammar routes. |
+| 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `active` | Reconcile first-authoritative labels, stale corpus freshness, and the current Dart structural bridge. |
+| 74.4.0.1.0 | `FUTURE-PARITY-BACKLOG.10.5.0.1.0` | `done` | Generated and independently guarded one exact 806-range portable pinned self-hosted label regex class. |
+| 74.4.0.1.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.1` | `pending` | Consume the class in canonical grammar and execute current structural forms on Dart. |
+| 74.4.0.1.2 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2` | `pending` | Regenerate/freshness-lock self-hosted corpus and compose cross-runtime proof. |
 | 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `pending` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
