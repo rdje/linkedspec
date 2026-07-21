@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (fully corrected calls projector `.10.3.3.1.1` is active from clean spec-identity
-  correction `7d9077c4`)
+- Last updated: `2026-07-21` (Rust Unicode-label prerequisite `.10.4.0.2` is signoff-complete; source/outcome
+  foundation `.10.4.1` is next after the clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7549,7 +7549,7 @@ before implementation.
     and canonical Phase 0 1,031/1,031 pass; generated artifacts are removed before commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.0.2`
-  Status: `pending`
+  Status: `done`
   Goal: Resolve and implement the Rust rule-label contract prerequisite selected by the director.
   Depends on: `.10.4.0.1`
   Acceptance: Reconcile the accepted neutral/Perl `Töp` fixture with the published ASCII-only formal grammar and
@@ -7558,6 +7558,39 @@ before implementation.
     and add positive/negative cross-route proof. If ASCII is selected, revise the neutral fixture/model/digests and
     every already-admitted Perl proof through a separately justified contract correction. In either direction,
     prevent parser/validator/book drift, run complete Rust/canonical gates, and make no semantic admission claim.
+  Verification: **PASS 2026-07-21.** Director selected the recommended Unicode expansion. Activated task-tree-first from
+    clean toolbox-guard commit `c234d993` at ahead 274 with zero-byte `git_message_brief.txt`, no generated book,
+    Python bytecode, or repository Rust target, and 102 GiB available. The accepted v1 `Töp` fixture/digests and
+    admitted Perl behavior remain authoritative; exact Unicode class/normalization/case policy and Rust route
+    inventory are the first implementation step. ADR `0051` fixes nonempty pinned Unicode 17 `XID_Continue` at
+    every position, exact case-sensitive/normalization-sensitive identity, no normalization/folding, and strict
+    UTF-8; it preserves the complete former ASCII class including digit/underscore starts.
+    Generated contract/table and one classifier now drive Rust headers plus action/blind/bare references and a
+    validator pass for external ASTs. Focused core proof covers Unicode 17 metadata, positive/negative boundaries,
+    all source reference forms, invalid programmatic labels, and exact case/normalization identity; focused runtime
+    proof covers selectors, descriptor/compiled/generated/emitted identities, strict loader, and trace. Dart,
+    Julia, and Lua still contain host-regex label scanners; their `.10.5-.10.7` semantic admissions now explicitly
+    inherit ADR `0051` rather than this Rust prerequisite falsely claiming five-backend label rollout.
+    Contract regeneration/checking passes at 806 ranges, nine positive fixtures, eight negative fixtures, and two
+    distinct pairs. Focused core is 5/5 and runtime is 3/3. Complete Rust passes core 193, runtime 138, integration
+    197, exact 105-fixture oracle, full generated manifest, all package contracts, and primary 66x2. Knowledge Map
+    is 661 facts / 4,887 keys; mdBook, memory architecture, and all four doctrines pass. Canonical local CI passes
+    primary 66x2 and Phase 0 1,031/1,031 in 636 seconds, exit 0. The 2.5 GiB external Cargo target, generated book,
+    comparison files, and Python cache are removed. Rollout/admission remain 2/9 and 1/6; `.10.4.1` is next only
+    after this leaf's clean commit.
+
+  - [x] **EXACT CONTRACT** — ADR `0051` pins nonempty Unicode 17.0.0 `XID_Continue` at every position, exact
+    case-sensitive/normalization-sensitive scalar identity, no normalization/folding, and strict UTF-8.
+  - [x] **GENERATED AUTHORITY** — Verified pinned inputs deterministically generate the 806-range neutral contract
+    and one Rust classifier; byte comparison and CI ownership prevent data/code drift.
+  - [x] **COMPLETE RUST SYNTAX** — Headers plus action/blind/bare references share the classifier; validation also
+    rejects invalid external AST declarations/targets through a portable diagnostic.
+  - [x] **ROUTE IDENTITY** — Native selectors, compiled descriptors, generated plans/source, trace, and strict file
+    loading preserve precomposed/decomposed/case distinctions exactly.
+  - [x] **NO FALSE PROMOTION** — Semantic rollout/admission stay 2/9 and 1/6; Dart/Julia/Lua alignment is explicitly
+    inherited by `.10.5-.10.7` rather than claimed by this Rust prerequisite.
+  - [x] **SIGNOFF / CLEANUP** — Focused 5+3, complete Rust, mdBook/KM/doctrines, canonical 66x2 plus Phase 0
+    1,031/1,031, and generated target/book/cache cleanup pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.1`
   Status: `pending`
@@ -7618,7 +7651,9 @@ before implementation.
   Acceptance: Project the same model from Dart compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Dart types plus neutral JSON; prove exact reference answers and non-interference across every shared
     route, privacy/page/budget/explain case, omission mutation, complete package/primary/corpus/generated gate, and
-    canonical gate without exposing Dart AST serialization as the contract.
+    canonical gate without exposing Dart AST serialization as the contract. Before the `Töp` privacy fixture can
+    be admitted, align every Dart rule declaration/reference/artifact/selector route with ADR `0051`'s pinned
+    Unicode 17 `XID_Continue` and exact identity contract.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6`
   Status: `pending`
@@ -7627,7 +7662,9 @@ before implementation.
   Acceptance: Project the same model from Julia compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Julia types plus neutral JSON; prove exact reference answers and non-interference across every shared
     route, privacy/page/budget/explain case, omission mutation, full package/primary/corpus/generated gate, and
-    canonical gate without exposing Julia dictionaries or type layout as semantic schema.
+    canonical gate without exposing Julia dictionaries or type layout as semantic schema. Before the `Töp` privacy
+    fixture can be admitted, align every Julia rule declaration/reference/artifact/selector route with ADR `0051`'s
+    pinned Unicode 17 `XID_Continue` and exact identity contract.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
   Status: `pending`
@@ -7636,7 +7673,9 @@ before implementation.
   Acceptance: Project the same model from Lua compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Lua objects plus neutral JSON; use one byte-identical consumer on both ABIs; prove every reference
     answer, runtime observation, privacy/page/budget/explain case, omission mutation, full package/primary/corpus/
-    generated gate, and canonical gate without metatables or Lua object identity entering portable records.
+    generated gate, and canonical gate without metatables or Lua object identity entering portable records. Before
+    the `Töp` privacy fixture can be admitted, align every shared PUC Lua/LuaJIT rule declaration/reference/artifact/
+    selector route with ADR `0051`'s pinned Unicode 17 `XID_Continue` and exact identity contract.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.8`
   Status: `pending`
@@ -9859,11 +9898,12 @@ complete Rust packages/105-fixture oracle/full generated manifest/primary 66x2, 
 in 617 seconds. It maps parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
 generated-v2 owners, missing source/query/observation seams, and the full `.10.4.0.1-.10.4.6` dependency order.
 
-Toolbox no-drift `.10.4.0.1` is complete in the current commit: exact 6/20/65, rollout 2+7, admission 1+5,
-106/eight-route runtime, and 12-role Perl claims are checker-owned with omission/wrong-value proof. The next
-frontier `.10.4.0.2` requires the director's contract choice because accepted neutral/Perl privacy requires Unicode
-label `Töp`, while the published grammar and current Rust parser accept ASCII labels only. Rust source/outcome
-foundation `.10.4.1` cannot start until that choice is resolved and proven. No Rust semantic API or promotion exists.
+Toolbox no-drift `.10.4.0.1` is clean at `c234d993`: exact 6/20/65, rollout 2+7, admission 1+5, 106/eight-route
+runtime, and 12-role Perl claims are checker-owned with omission/wrong-value proof. Unicode prerequisite
+`.10.4.0.2` is signoff-complete in the current commit: ADR `0051`, a generated Unicode 17 `XID_Continue`
+classifier, unified Rust syntax/validation, exact source/artifact/runtime route proof, and canonical 1,031/636s
+preserve accepted `Töp` without normalization or promotion. Rust source/outcome foundation `.10.4.1` is next only
+after this clean commit. No Rust semantic API or promotion exists yet.
 
 ### Historical frontier sequence
 
@@ -10254,7 +10294,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3 | `FUTURE-PARITY-BACKLOG.10.4` | `active` | Implement the Rust semantic index, exact native query surface, runtime observations/routes, and conformance admission. |
 | 74.3.0 | `FUTURE-PARITY-BACKLOG.10.4.0` | `done` | Exact Rust owners/gaps, Unicode-label conflict, toolbox drift, and dependency-ordered implementation split are frozen before behavior. |
 | 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `done` | Exact 6/20/65, rollout 2+7, admission 1+5, runtime, and 12-role Perl toolbox claims are checker-owned with omission/wrong-value proof. |
-| 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `pending` | Resolve the neutral Unicode-label versus published/Rust ASCII-label contract conflict as directed. |
+| 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `done` | Unicode 17 `XID_Continue` exact identity is generated, implemented across Rust routes, and canonical-signoff complete without semantic promotion. |
 | 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `pending` | Add strict source mapping and immutable compiled-or-failed Rust foundation. |
 | 74.3.2 | `FUTURE-PARITY-BACKLOG.10.4.2` | `pending` | Project exact static graph/privacy/failure/runtime-static semantics. |
 | 74.3.3 | `FUTURE-PARITY-BACKLOG.10.4.3` | `pending` | Project exact calls, bindings, staged records, and generated provenance. |
@@ -10912,8 +10952,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. Semantic-introspection design `.10.1` is complete without behavior; executable neutral contract
-  `.10.2` is next. Root selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result
+- None blocking. Semantic design, neutral oracle, Perl admission, Rust audit/toolbox guard, and Unicode prerequisite
+  `.10.1-.10.4.0.2` are complete; Rust source/outcome foundation `.10.4.1` is next after the clean commit. Root
+  selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result
   shape remain closed across neutral, all five backends, dual-ABI Lua, recurring composition, and public no-drift.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
   optional `mdbook test` command treats an intentionally partial Rust embedding example and an untyped
@@ -10927,14 +10968,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- Rust implementation is blocked at `.10.4.0.2` on the director's label-contract choice: expand the published/Rust
-  ASCII label contract to an exact Unicode word policy, or revise the already-admitted neutral/Perl `Töp` oracle.
-  `.10.4.0.1` is complete with the independent toolbox repair/guard; `.10.4.0.2` is not activated before direction.
+- None. `.10.4.1` waits only for the mandatory clean commit boundary after completed prerequisite `.10.4.0.2`.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0.2` | ADR 0051; generated Unicode 17 contract/classifier at 806 ranges, 9 positive, 8 negative, 2 distinct; core 5/runtime 3; complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle/full generated manifest/all packages, primary 66x2; KM 661/4,887; mdBook/memory/four doctrines/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 636s; 2.5 GiB target/book/comparison/cache cleanup. | PASS. `Töp` and all exact label routes are accepted without normalization; ASCII compatibility and strict UTF-8 remain; rollout/admission stay 2/9 and 1/6; later backends inherit ADR 0051 before semantic admission. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0.1` | Toolbox exact 6/20/65, rollout 2+7, admission 1+5, runtime 106/eight routes, and Perl 12-role claims; checker required/stale/omission/wrong-value probes; semantic 149; repeated-action marker regression caught and restored; KM 660/4,879; mdBook/memory/four doctrines/diff; canonical semantic/primary 66x2 and Phase 0 1,031/1,031 in 611s; generated book/bytecode cleanup; 102 GiB available. | PASS. Diagnostic source of truth is mechanically current; all 20 digests and 65 contract mutations remain exact; no product/Rust/rollout/admission change. `.10.4.0.2` awaits director direction. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0` | Knowledge/toolbox authority retrieval; exact five-source Rust probe; zero semantic API/sink scan; focused descriptor/runtime seams; semantic 6/20/65; full Rust core 193, runtime unit 138, integration 197, exact 105-fixture oracle/full generated manifest/all package contracts, primary 66x2; KM 660/4,877; mdBook, memory, task, four doctrines, diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 617s; disposable target/book and no-longer-live 6.5 GiB session cleanup; final 102 GiB available versus initial 27 GiB. | PASS. No Rust behavior/API/rollout/admission change; exact source/compiled/failure/calls/generated/runtime owners and gaps are durable, TOOLBOX drift has its first child, the Unicode-label conflict has a director-decision child, and `.10.4.0.1-.10.4.6` are dependency ordered. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.6` | One exact 12-role consumer; RED corrected to exact topology-only 4/18 then GREEN 18/18; all six semantic suites 149; broader semantic/generated/diagnostic/root/cursor 471 plus supplemental cursor/trace 127; checker 6/20/65 at rollout 2/9 and admission 1/6; KM 659/4,867; mdBook, memory, task, ADR, four doctrines, JSON/shell/whitespace; primary 66x2; complete local CI through Phase 0 1,031/1,031 in 633s; generated-output cleanup. | PASS. Perl is the first admitted native semantic backend through composition only; no production implementation changes, later backends/MCP remain pending, and parent `.10.3` closes. |
@@ -11148,6 +11188,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.4.0.2` | `FUTURE-PARITY-BACKLOG.10.4.0.2 - implement Unicode rule labels` | ADR 0051, generated 806-range contract/classifier, unified Rust syntax/validation/routes, focused 5+3, complete Rust/105/66x2 plus canonical 1,031/636s, KM/book/doctrines, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.0` | `FUTURE-PARITY-BACKLOG.10.4.0 - map Rust semantic authorities` | Exact typed-owner/gap map, durable Unicode-label conflict and TOOLBOX guard child, dependency split, complete Rust/105/66x2 plus canonical 1,031/617s, KM/book/doctrines, and cleanup without behavior or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.6` | `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` | Exact 12-role composed consumer, all 20 digests, 65 mutations, rollout 2/9, admission 1/6, KM/book/doctrines, primary 66x2, canonical 1,031/633s, cleanup, and parent `.10.3` closure. |
 | `FUTURE-PARITY-BACKLOG.10.3.5` | `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across eight routes, focused 106/adjacent 468, semantic 6/20/57, canonical 66x2 and 1,031/650s, docs/KM lockstep, and safe disk-pressure cleanup without admission promotion. |
@@ -11338,6 +11379,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-21`: `.10.4.0.2` implements ADR `0051` in Rust. Verified Unicode 17 data generates an exact 806-range
+  `XID_Continue` classifier used by headers, action/blind/bare references, and external-AST validation. Exact scalar
+  identity keeps `Töp`, decomposed `To\u{0308}p`, and `töp` distinct through selectors, compiled descriptors,
+  generated plans/source, trace, and strict loaders. Focused 5+3, complete Rust packages/105/full manifest/66x2,
+  KM 661/4,887, mdBook/doctrines, and canonical 66x2 plus Phase 0 1,031/1,031 in 636 seconds pass. Disposable target,
+  book, comparison, and cache artifacts are removed. Rollout/admission stay 2/9 and 1/6; `.10.4.1` follows after
+  the clean commit, while `.10.5-.10.7` inherit universal label alignment before their semantic admissions.
 
 - `2026-07-21`: `.10.3.6` admits Perl semantic introspection through one exact 12-role composed consumer without a
   new projection/evaluator/observer or production semantic edit. It covers source normalization, every snapshot,

@@ -175,12 +175,23 @@ rule_label  :: [mode]  [rest-of-line]
 
 ### 2.1 Rule Labels
 
-A rule label is one or more word characters: `[A-Za-z0-9_]+`.
+A rule label is a nonempty sequence of Unicode 17.0.0 `XID_Continue` characters. The same class applies at every
+position, including the first. This deliberately preserves the complete historical ASCII surface
+`[A-Za-z0-9_]+`, including labels beginning with a digit or underscore, while admitting labels such as `Töp`,
+`Δelta`, `變體`, and `a·b`.
 
-This is the current published Rust-compatible contract. The accepted semantic-introspection privacy oracle uses
-`Töp`, which Perl accepts after strict UTF-8 decoding but Rust currently rejects at header parsing. The conflict is
-tracked explicitly by `FUTURE-PARITY-BACKLOG.10.4.0.2`; do not infer Unicode-label portability until that decision
-and its cross-backend proof land.
+Label identity is the exact decoded Unicode scalar sequence: it is case-sensitive and normalization-sensitive.
+No normalization or case folding is performed. For example, precomposed `Töp`, decomposed `To\u{0308}p`, and
+lowercase `töp` are three different labels. Source bytes must first pass the strict UTF-8 boundary; malformed
+UTF-8 is rejected rather than replaced. This contract is generated from the repository-pinned Unicode Character
+Database rather than a host language's `\w` behavior. See ADR `0051` and
+`capability_conformance/unicode_rule_label_contract.json`.
+
+Rust implements the contract across headers, action/blind/bare references, validation, selectors, compiled and
+descriptor identity, generated-source plans, loaders, and traces. Perl's strict-decoded `\w` route already accepts
+the admitted semantic fixture's `Töp`; exact five-backend label admission is not claimed by this Rust prerequisite
+slice. Dart, Julia, and both Lua ABIs must consume this pinned contract in their semantic-introspection backend
+lanes before those backends can admit the v1 fixture.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.
@@ -1047,17 +1058,18 @@ behavior from composed admission while `.9.1.1.2.4-.6` roll out:
    admission remains `.5.3`; use a marker until the remaining rollout closes when uniformly admitted portable
    execution matters. A zero-rule executable spec is always invalid. Implemented loader/generated routes report portable
    `no_rules_defined` / `validate_spec` before considering either default or explicit selection.
-2. Every rule label is unique. Duplicate labels are rejected.
-3. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
-4. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.
-5. Rule and function definitions must not appear inside open `{ }` blocks.
-6. Every `{ }` block opened inside a rule paragraph or function body must be closed before end of file.
-7. Every `->` edge target must reference an existing rule.
-8. Every regex cluster must be a compilable regex literal.
-9. Rule mode suffixes must use exact supported spellings (§2.2).
-10. Stray preamble text before the first rule paragraph or top-level function definition (after blank/comment lines) is
+2. Every rule declaration and edge target satisfies the Unicode rule-label contract in §2.1.
+3. Every rule label is unique. Duplicate labels are rejected by exact scalar-sequence identity.
+4. Every function name is unique and must not collide with any rule label or built-in helper/control name, including numeric word aliases such as `add`.
+5. Function parameters must be unique valid identifiers and must not use reserved runtime/lifecycle/function symbols.
+6. Rule and function definitions must not appear inside open `{ }` blocks.
+7. Every `{ }` block opened inside a rule paragraph or function body must be closed before end of file.
+8. Every `->` edge target must reference an existing rule.
+9. Every regex cluster must be a compilable regex literal.
+10. Rule mode suffixes must use exact supported spellings (§2.2).
+11. Stray preamble text before the first rule paragraph or top-level function definition (after blank/comment lines) is
    rejected.
-11. Action edges and blind-call edges must not be mixed in a single rule (mixed-edge
+12. Action edges and blind-call edges must not be mixed in a single rule (mixed-edge
    detection). A rule with both `->` and `=>` edges is invalid.
 
 ## 11. Compatibility Surface

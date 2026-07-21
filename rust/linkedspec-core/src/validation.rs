@@ -2,22 +2,23 @@
 //!
 //! Checks performed (every mode):
 //! 1. At least one rule exists (an authored `::` marker is optional)
-//! 2. No duplicate rule labels
-//! 3. User-function names are unique and do not collide with rule labels,
+//! 2. Every declaration and edge target uses the pinned Unicode rule-label class
+//! 3. No duplicate rule labels
+//! 4. User-function names are unique and do not collide with rule labels,
 //!    lifecycle markers, reserved runtime symbols, or built-in helper/control names
-//! 4. User-function parameters are valid, unique, and not reserved runtime symbols
-//! 5. Bare edges resolve against the complete rule set and obey family shape
-//! 6. No rule mixes action and blind ownership after bare normalization
-//! 7. All `{` blocks are balanced (no unclosed blocks)
-//! 8. All edge targets reference existing rules
-//! 9. Rule headers are not inside open blocks (handled by parser)
+//! 5. User-function parameters are valid, unique, and not reserved runtime symbols
+//! 6. Bare edges resolve against the complete rule set and obey family shape
+//! 7. No rule mixes action and blind ownership after bare normalization
+//! 8. All `{` blocks are balanced (no unclosed blocks)
+//! 9. All edge targets reference existing rules
+//! 10. Rule headers are not inside open blocks (handled by parser)
 //!
 //! Strict mode (`validate_with_options(spec, strict_syntax = true)`) promotes the
 //! Perl reference's *reference warnings* to hard errors:
-//! 9. No unused rules — every defined rule must be referenced by some edge (the
+//! 11. No unused rules — every defined rule must be referenced by some edge (the
 //!    top rule is NOT exempt, matching `Validation.pm`'s strict_syntax check).
 //!
-//! Note: undefined references are a hard error here in *every* mode (check 5),
+//! Note: undefined references are a hard error here in *every* mode (check 9),
 //! which is stricter than the Perl reference's default (it warns, and only
 //! `strict_syntax` makes them fatal). Strict mode keeps them fatal too, so the
 //! observable addition of strict mode in this backend is the unused-rule check;
@@ -28,6 +29,7 @@ use crate::ast::{BodyElementKind, SpecFile};
 use crate::entry_rule::no_rules_defined_diagnostic;
 use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
+use crate::unicode_rule_label::is_rule_label;
 use rgx_core::Regex;
 use std::collections::HashSet;
 
@@ -57,6 +59,7 @@ pub fn validate_with_trace_emitter(spec: &SpecFile, trace: &mut TraceEmitter) ->
 /// unused-rule rejection.
 pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()> {
     check_rules_exist(spec)?;
+    check_rule_labels(spec)?;
     check_duplicate_labels(spec)?;
     check_duplicate_function_names(spec)?;
     check_function_registry(spec)?;
@@ -99,6 +102,7 @@ pub fn validate_with_options_with_trace_emitter(
     )?;
     let result = (|| {
         trace_validation_pass(trace, "rules_exist", || check_rules_exist(spec))?;
+        trace_validation_pass(trace, "rule_labels", || check_rule_labels(spec))?;
         trace_validation_pass(trace, "duplicate_labels", || check_duplicate_labels(spec))?;
         trace_validation_pass(trace, "duplicate_function_names", || {
             check_duplicate_function_names(spec)
@@ -161,6 +165,66 @@ fn check_rules_exist(spec: &SpecFile) -> Result<()> {
         return Err(LinkedSpecError::Diagnostic(no_rules_defined_diagnostic()));
     }
     Ok(())
+}
+
+/// Rule declarations and references share one generated, pinned Unicode contract.
+fn check_rule_labels(spec: &SpecFile) -> Result<()> {
+    for rule in &spec.rules {
+        if !is_rule_label(&rule.header.label) {
+            return Err(invalid_rule_label_diagnostic(
+                &rule.header.label,
+                "declaration",
+                rule.header.line,
+                None,
+            ));
+        }
+        for element in &rule.body {
+            let targets: Vec<&str> = match &element.kind {
+                BodyElementKind::ActionEdge { targets, .. } => {
+                    targets.iter().map(|target| target.label.as_str()).collect()
+                }
+                BodyElementKind::BlindEdge { target, .. } => vec![target.as_str()],
+                BodyElementKind::BareEdge { targets, .. } => {
+                    targets.iter().map(|target| target.label.as_str()).collect()
+                }
+                _ => continue,
+            };
+            for target in targets {
+                if !is_rule_label(target) {
+                    return Err(invalid_rule_label_diagnostic(
+                        target,
+                        "edge_target",
+                        element.line,
+                        Some(&rule.header.label),
+                    ));
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+fn invalid_rule_label_diagnostic(
+    label: &str,
+    role: &str,
+    line: usize,
+    owner: Option<&str>,
+) -> LinkedSpecError {
+    let mut diagnostic = diagnostic(
+        "invalid_rule_label",
+        "validate_rule_labels",
+        format!(
+            "{role} '{}' is not a nonempty Unicode 17.0.0 XID_Continue rule label",
+            label
+        ),
+    )
+    .with_field("label", label)
+    .with_field("line", line)
+    .with_field("role", role);
+    if let Some(owner) = owner {
+        diagnostic = diagnostic.with_field("rule_label", owner);
+    }
+    LinkedSpecError::Diagnostic(diagnostic)
 }
 
 /// Rule labels must be unique.

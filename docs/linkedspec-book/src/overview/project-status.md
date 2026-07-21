@@ -523,11 +523,13 @@ Three backbone items tracked major structural modernization — all done:
   loader, and primary behavior remain unchanged when the observer is absent. Rust audit `.10.4.0` maps parsed/
   compiled/ActionIR/staged/generated/diagnostic/loader/runtime owners, proves serde-safe compiled state and parallel
   direct/generated slot/result seams, and freezes source/static/calls/query/runtime/admission children before code.
-  It also exposes a real prerequisite: neutral v1 requires Unicode label `Töp`, while the published grammar and
-  Rust parser remain ASCII-label-only. `.10.4.0.1` has repaired semantic toolbox current state to 6/20/65,
+  It also exposed a real prerequisite: neutral v1 requires Unicode label `Töp`, while the published grammar and
+  Rust parser were ASCII-label-only. `.10.4.0.1` repaired semantic toolbox current state to 6/20/65,
   rollout 2+7, admission 1+5, and complete Perl ownership; the checker now proves exact-claim, omission, and
-  wrong-value no-drift behavior. `.10.4.0.2` awaits the director's contract choice. Rust rollout/admission remain
-  pending.
+  wrong-value no-drift behavior. The director selected Unicode expansion; completed `.10.4.0.2` implements ADR
+  `0051` with generated Unicode 17.0.0 `XID_Continue` labels, exact case- and normalization-sensitive scalar
+  identity, and complete Rust source/artifact/runtime route proof. Rust semantic construction proceeds with
+  source/outcome foundation `.10.4.1`; rollout/admission remain pending.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The

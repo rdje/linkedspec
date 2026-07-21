@@ -8,10 +8,11 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.4.0.1` is complete in the current commit from clean Rust audit `0d9e395c`.
-  Exact semantic TOOLBOX 6/20/65 / rollout 2+7 / admission 1+5 / runtime / Perl 12-role state is checker-owned with
-  omission/wrong-value proof. `.10.4.0.2` is the next frontier but requires the director's Unicode-versus-ASCII
-  label-contract decision before activation. Rollout/admission remain 2/9 and 1/6.
+- Unicode label prerequisite `FUTURE-PARITY-BACKLOG.10.4.0.2` is signoff-complete from clean toolbox-guard commit
+  `c234d993` at ahead 274 and awaits its mandatory commit boundary. ADR `0051`, generated Unicode 17
+  `XID_Continue` classification, unified Rust parsing/validation, and exact source/artifact/runtime route proof
+  preserve accepted `Töp` without normalization. Source/outcome foundation `.10.4.1` is next only after the clean
+  commit; rollout/admission stay 2/9 and 1/6.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -23,6 +24,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0.2 — implement pinned Unicode rule labels**
+  (DONE in this commit from clean base `c234d993`).
+
+  **Result:** ADR `0051` defines nonempty pinned Unicode 17 `XID_Continue` labels at every position with exact
+  case-sensitive/normalization-sensitive scalar identity. Generated data drives every Rust declaration/reference
+  scanner and external-AST validation; selectors, descriptors, generated plans/source, trace, and loaders retain
+  exact identity. Later backend semantic lanes inherit alignment rather than this Rust leaf claiming parity.
+
+  **Proof:** Contract 806/9/8/2; focused core 5 and runtime 3; complete Rust core 193, runtime 138, integration 197,
+  exact 105-fixture oracle/full generated manifest/all packages, primary 66x2; KM 661/4,887; mdBook/four doctrines;
+  canonical primary 66x2 and Phase 0 1,031/1,031 in 636 seconds, exit 0. The 2.5 GiB Cargo target, generated book,
+  comparison files, and Python cache are removed; rollout/admission remain 2/9 and 1/6.
+
+  **Next:** Commit cleanly, then activate Rust semantic source/outcome foundation `.10.4.1` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0.1 — guard semantic toolbox current state**
   (DONE in this commit from clean base `0d9e395c`).
 

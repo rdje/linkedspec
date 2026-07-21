@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0.2` — rule labels need generated Unicode authority, not host regex
+  shorthand): ADR `0051` resolves the accepted `Töp` versus Rust/published-ASCII conflict with nonempty Unicode
+  17.0.0 `XID_Continue` at every position. Applying the same class to the first position is intentional: changing
+  to `XID_Start` would silently reject existing digit- and underscore-start labels. Exact scalar identity also
+  means `Töp`, `To\u{0308}p`, and `töp` are distinct; no backend may normalize or fold them.
+
+  The implementation derives 806 maximally merged ranges from the already pinned, SHA-256-verified
+  `DerivedCoreProperties.txt`. One generated binary-search classifier owns complete-label validation and longest
+  prefix scanning. Rust header, action, blind, and bare parsing use that classifier directly; the validator repeats
+  the complete-label check for caller-constructed or deserialized ASTs and emits a stable portable diagnostic.
+  Manual edge scanning preserves the former action shared-index grammar, blind/bare spaced indices, header-rest
+  regex handling, and ASCII compatibility instead of inheriting a toolchain Unicode table through `\w`.
+
+  Public-route proof deliberately distinguishes syntax acceptance from identity preservation. Native selection,
+  compiled descriptors, generated plans/source, and trace retain precomposed, decomposed, and lowercase labels
+  byte-for-byte; strict loaders reject malformed UTF-8 before parsing. The deterministic checker regenerates JSON
+  and Rust into temporary files and byte-compares them, then guards parser/validator/test/formal-grammar ownership.
+  Complete Rust and canonical proof pass; the 2.5 GiB external Cargo target and generated book/cache artifacts are
+  deleted after consumption.
+
+  This Rust prerequisite does not prove five-backend Unicode membership parity. Dart, Julia, and Lua still use
+  host-regex label scanners, so `.10.5-.10.7` now explicitly require ADR `0051` alignment before semantic fixture
+  admission. The current `ROADMAP_V2.md` summary was also corrected from stale pre-Perl-admission 57 / 1+8 / 0+6
+  counts to executable 65 / 2+7 / 1+5 while this leaf synchronized the roadmap.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0.1` — diagnostic documentation needs executable ownership): the
   semantic contract, conformance guide, and mdBook were already current after Perl admission, but the toolbox
   command entry was outside the checker's filesystem assertions. That made a high-value debugging source retain

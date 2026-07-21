@@ -264,11 +264,14 @@ currently emit textual trace decisions only; no typed semantic observer or query
 leaf adds a separate optional invocation-local sink at those seams and derives a new immutable post-execution index.
 It must not parse trace text, alter diagnostic output, or let queries execute.
 
-One prerequisite is unresolved. The accepted v1 privacy oracle and admitted Perl implementation require rule label
-`Töp`, while the published grammar and current Rust header parser accept ASCII `[A-Za-z0-9_]+`; Rust rejects the
-fixture before validation. Task `.10.4.0.2` requires a director decision between expanding the Rust/published label
-contract to an exact Unicode word policy or revising the already-admitted neutral oracle. Rust semantic construction
-does not start before that decision. Toolbox repair `.10.4.0.1` has aligned the semantic diagnostic entry with the
+The prerequisite is resolved by ADR `0051` and task `.10.4.0.2`: the published/Rust rule-label contract is a
+nonempty sequence of pinned Unicode 17.0.0 `XID_Continue` scalars at every position. Identity is exact,
+case-sensitive, and normalization-sensitive; no normalization or folding occurs. Rust now parses and validates
+the admitted `Töp` fixture label across source, references, selectors, compiled/descriptor/generated identity,
+strict loaders, and traces. Positive, negative, decomposed, and case-distinct route proofs prevent parser/book
+drift. This removes the blocker for Rust semantic construction `.10.4.1` without itself implementing or admitting
+the Rust semantic API. The later Dart/Julia/Lua semantic backend lanes inherit the pinned-label prerequisite before
+their own v1 fixture admission. Toolbox repair `.10.4.0.1` has aligned the semantic diagnostic entry with the
 executable 6/20/65, rollout 2+7, admission 1+5, and complete Perl observation/admission state. The checker now
 requires those high-value claims exactly once, denies their stale forms, and runs omission plus wrong-value guard
 probes without changing the neutral response digests or 65 contract-mutation inventory.

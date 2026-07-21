@@ -1,0 +1,42 @@
+---
+id: unicode-rule-label-contract
+title: Rule labels use pinned Unicode 17 XID_Continue with exact scalar identity
+answers:
+  - "what Unicode characters are allowed in a LinkedSpec rule label"
+  - "can a LinkedSpec rule label start with a digit or underscore"
+  - "does LinkedSpec normalize Unicode rule labels"
+  - "are Töp and decomposed Töp the same rule label"
+  - "are rule labels case sensitive"
+  - "where is the Rust Unicode rule label classifier generated"
+  - "which Rust parser routes consume the Unicode rule label contract"
+  - "which backends still need Unicode rule label alignment"
+date: 2026-07-21
+status: current
+tags: [grammar, unicode, rule-labels, rust, generated-data, validation, portability]
+evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+reverify: "python3 tools/check_unicode_rule_label_contract.py; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+---
+
+ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
+every position. This preserves all historical `[A-Za-z0-9_]+` labels, including digit and underscore starts. The
+normative repository-pinned `DerivedCoreProperties.txt` produces 806 maximally merged ranges; host `\w`, locale,
+PCRE tables, and toolchain Unicode versions are not authorities.
+
+Identity is the exact decoded scalar sequence and remains case-sensitive and normalization-sensitive. LinkedSpec
+does no normalization, case mapping, or folding. Precomposed `Töp`, decomposed `To\u{0308}p`, and lowercase `töp`
+are valid but distinct declarations, references, selectors, compiled keys, descriptor entries, generated-plan
+labels, diagnostics, and trace identities. Strict UTF-8 decoding remains the boundary before scanning.
+
+`unicode_case/generate_unicode_rule_label_contract.py` verifies the pinned upstream hashes and deterministically
+writes the neutral JSON plus `linkedspec-core`'s range-table classifier. The Rust parser consumes the classifier
+for headers and action, blind, and bare references; validation rechecks declarations and all edge targets so a
+deserialized or programmatically constructed AST cannot bypass the policy. Focused proof covers positive/negative
+membership, all syntax routes, exact compiled/descriptor/generated/emitted identities, explicit selectors, strict
+loading, and traces.
+
+This prerequisite removes the Rust semantic privacy fixture's former `Töp` blocker but does not advance semantic
+rollout or claim exhaustive five-backend label membership. Perl already accepts the strict-decoded fixture route.
+Dart, Julia, PUC Lua, and LuaJIT parser alignment is explicitly required by semantic backend leaves
+`FUTURE-PARITY-BACKLOG.10.5-.10.7` before those backends admit the v1 privacy fixture. See
+[[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
+[[primary-cli-strict-utf8-text-contract]], and [[rust-native-spec-resolution]].

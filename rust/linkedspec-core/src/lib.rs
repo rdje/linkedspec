@@ -19,6 +19,7 @@ pub mod expr;
 pub mod parser;
 pub mod trace;
 pub mod types;
+pub mod unicode_rule_label;
 pub mod validation;
 
 /// Crate version, matching the workspace version.

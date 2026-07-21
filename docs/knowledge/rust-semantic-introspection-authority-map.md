@@ -15,8 +15,8 @@ answers:
 date: 2026-07-21
 status: current
 tags: [rust, semantic-introspection, source-map, unicode, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_model.json; rust/linkedspec-core/src/parser.rs; rust/linkedspec-runtime/src/engine.rs
-reverify: "python3 tools/check_semantic_introspection_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.0.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-core/src/parser.rs; rust/linkedspec-runtime/src/engine.rs
+reverify: "python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test --test unicode_rule_label_contract; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
 ---
 
 Rust semantic introspection must compose several existing typed owners. `parse_spec_with_user_functions` owns the
@@ -42,12 +42,13 @@ Current native probes establish these exact boundaries:
   `regex_slot_identity_invalid` at `validate_compiled_rule`; the neutral model's
   `unknown_rule_reference`/`compile` record therefore needs an explicit normalized projection;
 - the runtime fixture directly returns `["A","B"]`; and
-- the privacy source fails before validation because Rust's header regex uses `\w+` through the current ASCII
-  regex engine and the published formal grammar explicitly defines labels as `[A-Za-z0-9_]+`.
+- the privacy source formerly failed before validation because Rust's header regex used project-ASCII `\w+`.
 
-The privacy result is a contract conflict, not an adapter detail. Accepted neutral v1 plus admitted Perl require
-the exact `Töp` label and percent-encoded id, while published/Rust DSL behavior is ASCII-only. Leaf `.10.4.0.2`
-must resolve that direction before Rust semantic construction; `.10.4.1` depends on it.
+ADR `0051` and leaf `.10.4.0.2` resolve that contract conflict in favor of the accepted neutral v1 and admitted
+Perl fixture. Published/Rust labels now use pinned Unicode 17.0.0 `XID_Continue` at every position with exact
+case- and normalization-sensitive scalar identity. Rust source, validator, compiled/descriptor/generated,
+selector, loader, and trace routes preserve `Töp` exactly. `.10.4.1` remains dependent on the clean completion of
+that prerequisite. See [[unicode-rule-label-contract]].
 
 There is no current `SemanticIndex`, semantic query evaluator, or typed semantic observation sink in Rust. Direct
 and generated executors nevertheless have parallel authoritative seams: after structural slot identity is checked,

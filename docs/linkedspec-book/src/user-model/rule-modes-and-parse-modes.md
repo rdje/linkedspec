@@ -27,7 +27,24 @@ A default/OR-family label composes choices or repetition and gives that rule the
 
 ## Current rule-label surface
 
-A rule label starts with a rule name and a colon form. The ordinary form uses one colon:
+A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class is the same at the first and later
+positions, so the historical ASCII forms—including `1Rule` and `_`—remain valid while names such as `Töp`,
+`Δelta`, and `變體` are also valid. Punctuation such as `-`, `/`, and `:` is not part of a label.
+
+Labels are exact, case-sensitive, and normalization-sensitive. LinkedSpec does not normalize or fold them:
+
+```text
+Töp:          # precomposed ö
+Töp:          # o followed by U+0308
+töp:          # lowercase t
+```
+
+Those are three distinct declarations and selectors. Files are decoded as strict UTF-8 before label parsing.
+The pinned class comes from Unicode data shipped in this repository, so it does not change with the host regex
+engine or toolchain. ADR `0051` and the [formal grammar §2.1](../appendix/formal-grammar.md#21-rule-labels) are the
+normative references.
+
+A rule label is followed by a colon form. The ordinary form uses one colon:
 
 ```text
 Item:

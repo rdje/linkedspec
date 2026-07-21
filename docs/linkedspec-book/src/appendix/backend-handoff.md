@@ -225,11 +225,13 @@ logical name/source ceiling, produces an opaque compiled-or-failed snapshot, and
 consumer locks all 20 exact responses and direct/loaded/generated/traced equivalence; Perl is admission 1/6 and
 rollout 2/9. Rust audit `.10.4.0` confirms `CompiledSpec`/ActionIR/staged sidecars/generated-v2/diagnostic/loader and
 parallel direct/generated runtime seams are reusable, while exact source mapping, normalized failed projection,
-immutable query, and typed observations are new adapter work. It also stops on a contract prerequisite: neutral
-privacy requires `Töp`, but the published grammar and Rust header parser are ASCII-label-only. `.10.4.0.1` repairs
-and mechanically guards exact semantic toolbox state (6/20/65, rollout 2+7, admission 1+5, Perl 12-role
-ownership). `.10.4.0.2` requires the director's Unicode-versus-ASCII contract choice before Rust construction.
-Rust is not admitted. The other backends and MCP remain `.10.5-.10.10` work.
+immutable query, and typed observations are new adapter work. `.10.4.0.1` repairs and mechanically guards exact
+semantic toolbox state (6/20/65, rollout 2+7, admission 1+5, Perl 12-role ownership). ADR `0051` and `.10.4.0.2`
+resolve the former `Töp` prerequisite by pinning Unicode 17.0.0 `XID_Continue` labels with exact case- and
+normalization-sensitive scalar identity, then implementing that contract across all Rust source/artifact/runtime
+identity routes. Rust semantic construction may proceed, but Rust is not admitted by this prerequisite. The Dart,
+Julia, and Lua semantic backend lanes must align their label parsers before their v1 fixture admission; the other
+backend work and MCP remain `.10.5-.10.10`.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

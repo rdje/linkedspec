@@ -32,8 +32,21 @@ rule (`Final_Sigma`), deliberately rejects changes to the locale-tailoring inven
 modules. The checker regenerates all generated outputs into temporary owned storage,
 byte-compares them, validates the neutral schema/counts/order/digest, and independently executes every fixture.
 
+ADR `0051` reuses the same pinned `DerivedCoreProperties.txt` to define rule labels independently of host `\w`
+tables. It extracts maximally merged Unicode 17.0.0 `XID_Continue` ranges, applies the same class at every label
+position, and writes the neutral contract plus the Rust classifier:
+
+```bash
+python3 unicode_case/generate_unicode_rule_label_contract.py
+python3 tools/check_unicode_rule_label_contract.py
+```
+
+Label identity remains the exact case- and normalization-sensitive scalar sequence; this generator performs no
+normalization or case mapping.
+
 Do not manually edit `capability_conformance/unicode_case_contract.json`,
 `perl/LinkedSpec/UnicodeCaseMapping.pm`, `rust/linkedspec-runtime/src/unicode_case_mapping.rs`,
-`dart/lib/src/runtime/unicode_case_mapping.dart`, or `julia/src/runtime/UnicodeCaseMapping.jl`. A Unicode upgrade
-or `lua/src/linkedspec/unicode_case_mapping.lua`. A Unicode upgrade requires a new ADR, reviewed source hashes,
+`dart/lib/src/runtime/unicode_case_mapping.dart`, `julia/src/runtime/UnicodeCaseMapping.jl`,
+`lua/src/linkedspec/unicode_case_mapping.lua`, `capability_conformance/unicode_rule_label_contract.json`, or
+`rust/linkedspec-core/src/unicode_rule_label.rs`. A Unicode upgrade requires a new ADR, reviewed source hashes,
 regenerated artifacts, and explicit fixture-delta review.

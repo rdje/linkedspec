@@ -1,6 +1,6 @@
 //! `.spec` file parser — reads grammar files into structured AST.
 //!
-//! Parses rule paragraphs: each starts with a rule header (`Word:` or `Word::`)
+//! Parses rule paragraphs: each starts with a rule header (`Label:` or `Label::`)
 //! and continues until the next rule header at top-level block depth.
 //!
 //! Body elements are classified into: regex literals, action edges, blind-call
@@ -13,6 +13,7 @@ use crate::ast::{
 };
 use crate::error::{LinkedSpecError, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
+use crate::unicode_rule_label::take_rule_label_prefix;
 use rgx_core::Regex;
 
 /// Parse a `.spec` source string into a `SpecFile` AST.
@@ -134,24 +135,17 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     let line = lines[i];
     let trimmed = line.trim();
 
-    // Group 3 (the mode suffix) is `[^\s/]*`, NOT `\S*`: a greedy `\S*` swallows a
+    // The mode suffix stops at whitespace or `/`: consuming `/` here would swallow a
     // `/…/` regex written on the rule's header line (e.g. `name : /re/` or a
     // `/open/ /close/` bracket pair), `parse_mode_suffix` then falls to
     // `RuleMode::Default`, and the regex is silently dropped — the rule registers
     // 0 (or, for a pair, 1) regexes, so every `-> child[N]` dispatch edge never
     // fires (RUST-PARITY.7.5.1). Stopping the class at `/` lets a `/`-led regex
-    // fall through to group 4 (`rest`), where `parse_inline_body` registers it.
+    // fall through to `rest`, where `parse_inline_body` registers it.
     // Every real mode suffix (AND, OR+, &, *, ?, AND{2,4}, …) is slash-free, so
-    // this is identical to `\S*` for all non-regex header content.
-    let header_re = Regex::compile(r"^(\w+)[ \t]*(::|:)[ \t]*([^\s/]*)[ \t]*(.*)")
-        .map_err(|e| LinkedSpecError::Compile(format!("header regex: {e}")))?;
-
-    if let Some(caps) = header_re.captures(trimmed) {
-        let label = caps.get(1).unwrap().as_str().to_string();
-        let colon = caps.get(2).unwrap().as_str();
-        let mode_raw = caps.get(3).unwrap().as_str();
+    // this is identical to the old tokenization for all non-regex header content.
+    if let Some((label, is_top, mode_raw, rest_raw)) = parse_rule_header_fields(trimmed) {
         let parsed_mode = parse_mode_suffix_strict(mode_raw);
-        let rest_raw = caps.get(4).unwrap().as_str();
         let (mode, rest) = match parsed_mode {
             Some(mode) => (mode, rest_raw.to_string()),
             None => {
@@ -163,8 +157,6 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
                 (RuleMode::Default, restored)
             }
         };
-        let is_top = colon == "::";
-
         Ok(Some((
             RuleHeader {
                 label,
@@ -178,6 +170,29 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     } else {
         Ok(None)
     }
+}
+
+/// Split one complete rule-header prefix using the pinned Unicode label class.
+fn parse_rule_header_fields(trimmed: &str) -> Option<(String, bool, &str, &str)> {
+    let (label, after_label) = take_rule_label_prefix(trimmed)?;
+    let after_label = after_label.trim_start_matches([' ', '\t']);
+    let (is_top, after_colon) = if let Some(rest) = after_label.strip_prefix("::") {
+        (true, rest)
+    } else if let Some(rest) = after_label.strip_prefix(':') {
+        (false, rest)
+    } else {
+        return None;
+    };
+    let after_colon = after_colon.trim_start_matches([' ', '\t']);
+    let mode_end = after_colon
+        .char_indices()
+        .find_map(|(offset, character)| {
+            (character.is_whitespace() || character == '/').then_some(offset)
+        })
+        .unwrap_or(after_colon.len());
+    let mode = &after_colon[..mode_end];
+    let rest = after_colon[mode_end..].trim_start_matches([' ', '\t']);
+    Some((label.to_string(), is_top, mode, rest))
 }
 
 /// Parse a mode suffix only when the token is a recognized mode.
@@ -284,9 +299,6 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
     let mut i = start;
     let len = lines.len();
 
-    // Header regex for detecting next rule start
-    let header_re = Regex::compile(r"^\w+[ \t]*(::|:)[ \t]*\S*").unwrap();
-
     while i < len {
         let trimmed = lines[i].trim();
         let line_num = i + 1;
@@ -300,7 +312,7 @@ fn collect_body(lines: &[&str], start: usize) -> (Vec<BodyElement>, usize) {
         // Stop if we hit a new rule header. Top-level user functions are stripped
         // by the runtime-level spec-defined parser before this core rule parser
         // sees the source.
-        if header_re.is_match(trimmed) {
+        if parse_rule_header_fields(trimmed).is_some() {
             break;
         }
 
@@ -418,9 +430,6 @@ fn parse_single_element(
 ) -> Option<(BodyElement, String, bool)> {
     // Regex patterns for classification (order matters!)
     let re_regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
-    let re_action =
-        Regex::compile(r"^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)").unwrap();
-    let re_blind = Regex::compile(r"^=>[ \t]*(\w+)(?:[ \t]*\[[ \t]*(\d+)[ \t]*\])?").unwrap();
     let re_lifecycle = Regex::compile(r"^(I|LS|LE|LX|E|EX|IT)\b").unwrap();
     let re_split = Regex::compile(
         r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))",
@@ -443,25 +452,9 @@ fn parse_single_element(
     }
 
     // 2. Action edge: `-> Target` or `-> Target1 | Target2` optionally with block
-    if let Some(caps) = re_action.captures(trimmed) {
-        let full_match = caps.get(0).unwrap();
-        let targets_str = caps.get(1).unwrap().as_str();
-        let index: usize = caps
-            .get(3)
-            .map(|m| m.as_str().parse().unwrap_or(0))
-            .unwrap_or(0);
-
-        let targets: Vec<EdgeTarget> = targets_str
-            .split('|')
-            .map(|t| t.trim())
-            .filter(|t| !t.is_empty())
-            .map(|label| EdgeTarget {
-                label: label.to_string(),
-                index,
-            })
-            .collect();
-
-        let rest = trimmed[full_match.end()..].trim_start().to_string();
+    if let Some((targets, match_end)) = parse_action_edge_prefix(trimmed) {
+        let full_match = &trimmed[..match_end];
+        let rest = trimmed[match_end..].trim_start().to_string();
 
         let saved_i = *i;
         if let Some((code, remainder)) = parse_attached_fluent_when_chain(lines, i, &rest) {
@@ -471,7 +464,7 @@ fn parse_single_element(
                     code: Some(code),
                     fluent_chain: Vec::new(),
                 },
-                full_match.as_str(),
+                full_match,
                 line_num,
             );
             let advanced = *i > saved_i;
@@ -486,7 +479,7 @@ fn parse_single_element(
                     code: Some(code),
                     fluent_chain: Vec::new(),
                 },
-                full_match.as_str(),
+                full_match,
                 line_num,
             );
             let advanced = *i > saved_i;
@@ -499,7 +492,7 @@ fn parse_single_element(
                     code: None,
                     fluent_chain,
                 },
-                full_match.as_str(),
+                full_match,
                 line_num,
             );
             return Some((elem, remainder, false));
@@ -507,11 +500,9 @@ fn parse_single_element(
     }
 
     // 3. Blind-call edge: `=> Target` optionally with block
-    if let Some(caps) = re_blind.captures(trimmed) {
-        let full_match = caps.get(0).unwrap();
-        let target = caps.get(1).unwrap().as_str().to_string();
-        let index = caps.get(2).map(|value| value.as_str().parse().unwrap());
-        let rest = trimmed[full_match.end()..].trim_start().to_string();
+    if let Some((target, index, match_end)) = parse_blind_edge_prefix(trimmed) {
+        let full_match = &trimmed[..match_end];
+        let rest = trimmed[match_end..].trim_start().to_string();
 
         let (code, fluent_chain, advanced, remainder) = if rest.starts_with('{') {
             let saved_i = *i;
@@ -529,7 +520,7 @@ fn parse_single_element(
                 code,
                 fluent_chain,
             },
-            full_match.as_str(),
+            full_match,
             line_num,
         );
         return Some((elem, remainder, advanced));
@@ -656,35 +647,10 @@ fn parse_bare_edge(
     i: &mut usize,
     line_num: usize,
 ) -> Option<(BodyElement, String, bool)> {
-    let targets_re = Regex::compile(
-        r"^(\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?(?:[ \t]*\|[ \t]*\w+(?:[ \t]*\[[ \t]*\d+[ \t]*\])?)*)",
-    )
-    .ok()?;
-    let target_re = Regex::compile(r"^(\w+)(?:[ \t]*\[[ \t]*(\d+)[ \t]*\])?$").ok()?;
-    let captures = targets_re.captures(trimmed)?;
-    let targets_match = captures.get(1)?;
-    let targets = targets_match
-        .as_str()
-        .split('|')
-        .map(str::trim)
-        .map(|target| {
-            let captures = target_re.captures(target)?;
-            Some(BareEdgeTarget {
-                label: captures.get(1)?.as_str().to_string(),
-                index: captures
-                    .get(2)
-                    .map(|value| value.as_str().parse())
-                    .transpose()
-                    .ok()?,
-            })
-        })
-        .collect::<Option<Vec<_>>>()?;
-    if targets.is_empty() {
-        return None;
-    }
+    let (targets, targets_end) = parse_bare_target_list_prefix(trimmed)?;
 
     let start_i = *i;
-    let mut rest = trimmed[targets_match.end()..].trim_start().to_string();
+    let mut rest = trimmed[targets_end..].trim_start().to_string();
     let mut code = None;
     let mut fluent_chain = Vec::new();
 
@@ -719,6 +685,118 @@ fn parse_bare_edge(
         line_num,
     );
     Some((element, String::new(), advanced))
+}
+
+/// Parse the label group and shared optional index at the start of an action edge.
+fn parse_action_edge_prefix(input: &str) -> Option<(Vec<EdgeTarget>, usize)> {
+    let mut offset = input
+        .strip_prefix("->")
+        .map(|rest| input.len() - rest.len())?;
+    offset = skip_horizontal_space(input, offset);
+    let mut labels = Vec::new();
+    loop {
+        let (label, after_label) = take_rule_label_at(input, offset)?;
+        labels.push(label.to_string());
+        offset = after_label;
+
+        let after_space = skip_horizontal_space(input, offset);
+        if input[after_space..].starts_with('|') {
+            let next_target = skip_horizontal_space(input, after_space + 1);
+            if take_rule_label_at(input, next_target).is_some() {
+                offset = next_target;
+                continue;
+            }
+        }
+        break;
+    }
+
+    // Preserve the established action syntax: `[N]` is adjacent to the final
+    // label and applies to every target in the group.
+    let (index, match_end) = parse_index_at(input, offset, false).unwrap_or((0, offset));
+    let targets = labels
+        .into_iter()
+        .map(|label| EdgeTarget { label, index })
+        .collect();
+    Some((targets, match_end))
+}
+
+/// Parse the target and optional spaced index at the start of a blind edge.
+fn parse_blind_edge_prefix(input: &str) -> Option<(String, Option<usize>, usize)> {
+    let mut offset = input
+        .strip_prefix("=>")
+        .map(|rest| input.len() - rest.len())?;
+    offset = skip_horizontal_space(input, offset);
+    let (label, after_label) = take_rule_label_at(input, offset)?;
+    let (index, match_end) = match parse_index_at(input, after_label, true) {
+        Some((index, end)) => (Some(index), end),
+        None => (None, after_label),
+    };
+    Some((label.to_string(), index, match_end))
+}
+
+/// Parse a grouped bare-edge target list, retaining each optional target index.
+fn parse_bare_target_list_prefix(input: &str) -> Option<(Vec<BareEdgeTarget>, usize)> {
+    let mut offset = 0;
+    let mut targets = Vec::new();
+    loop {
+        let (label, after_label) = take_rule_label_at(input, offset)?;
+        let (index, after_target) = match parse_index_at(input, after_label, true) {
+            Some((index, end)) => (Some(index), end),
+            None => (None, after_label),
+        };
+        targets.push(BareEdgeTarget {
+            label: label.to_string(),
+            index,
+        });
+        offset = after_target;
+
+        let after_space = skip_horizontal_space(input, offset);
+        if input[after_space..].starts_with('|') {
+            let next_target = skip_horizontal_space(input, after_space + 1);
+            if take_rule_label_at(input, next_target).is_some() {
+                offset = next_target;
+                continue;
+            }
+        }
+        break;
+    }
+    Some((targets, offset))
+}
+
+fn take_rule_label_at(input: &str, offset: usize) -> Option<(&str, usize)> {
+    let (label, rest) = take_rule_label_prefix(input.get(offset..)?)?;
+    Some((label, input.len() - rest.len()))
+}
+
+/// Parse `[N]` at `offset`; with `allow_space`, horizontal space may precede it.
+fn parse_index_at(input: &str, offset: usize, allow_space: bool) -> Option<(usize, usize)> {
+    let bracket = if allow_space {
+        skip_horizontal_space(input, offset)
+    } else {
+        offset
+    };
+    input.get(bracket..)?.strip_prefix('[')?;
+    let mut cursor = bracket + 1;
+    cursor = skip_horizontal_space(input, cursor);
+    let digits_start = cursor;
+    while input.as_bytes().get(cursor).is_some_and(u8::is_ascii_digit) {
+        cursor += 1;
+    }
+    if cursor == digits_start {
+        return None;
+    }
+    let index = input[digits_start..cursor].parse().ok()?;
+    cursor = skip_horizontal_space(input, cursor);
+    input.get(cursor..)?.strip_prefix(']')?;
+    let end = cursor + 1;
+    Some((index, end))
+}
+
+fn skip_horizontal_space(input: &str, mut offset: usize) -> usize {
+    while matches!(input.as_bytes().get(offset), Some(b' ' | b'\t')) {
+        offset += 1;
+    }
+    offset
 }
 
 /// Consume a `{ ... }` block that starts in `rest` and may continue on subsequent lines.

@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0.2 — implement pinned Unicode rule labels
+
+ADR `0051` now defines one universal rule-label contract: a nonempty sequence of pinned Unicode 17.0.0
+`XID_Continue` scalars at every position, including the first. This preserves every former ASCII
+`[A-Za-z0-9_]+` label while admitting the accepted `Töp` privacy fixture. Identity is the exact decoded scalar
+sequence: comparisons are case-sensitive and normalization-sensitive, with no normalization, case mapping, or
+folding. Strict UTF-8 remains the source and process boundary.
+
+The verified Unicode inputs now generate a neutral 806-range contract and a Rust classifier. That classifier
+drives rule headers plus action, blind, and bare references; validation applies the same policy to parsed and
+programmatically/deserialized ASTs through portable `invalid_rule_label` diagnostics. Focused core proof covers
+nine positive fixtures, eight negative fixtures, two exact-identity pairs, all reference spellings, and compiled
+identity. Runtime proof covers explicit selectors, descriptors, generated plans/source, trace, strict loading,
+and invalid UTF-8. A regeneration/byte-comparison checker guards the data, Rust table, parser/validator ownership,
+tests, and formal grammar from drift, and canonical CI runs it.
+
+Focused Rust proof passes 5 core and 3 runtime tests. The complete Rust local gate passes core 193, runtime 138,
+integration 197, the exact 105-fixture oracle, the full generated manifest, both primary CLI legs at 66/66, and
+all package suites. mdBook, Knowledge Map 661/4,887, memory architecture, and all four doctrines pass. Canonical
+local CI independently passes primary 66x2 and Phase 0 1,031/1,031 in 636 seconds. The disposable 2.5 GiB Cargo
+target, generated book, comparison outputs, and Python cache are removed afterward. Semantic-introspection
+rollout/admission remain 2/9 and 1/6; Dart, Julia, and Lua must align their host-regex label scanners with ADR
+`0051` in their own semantic lanes before fixture admission.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0.1 — guard semantic toolbox current state
 
 `TOOLBOX.md` §4.9 now reports the executable semantic contract exactly: six fixture groups, 20 digest-locked

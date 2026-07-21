@@ -61,6 +61,7 @@ changed* lives in git (layer D), not here.
 | [0048](0048-explicit-repetition-action-result-collection.md) | Explicit repetition action returns are per-hit collection values | 2026-07-20 | accepted; rollout complete | architecture, grammar, repetition, or-rule, action-edge, lifecycle, result-shape, descriptor, generated-source, trace, parity |
 | [0049](0049-versioned-semantic-introspection-model-and-thin-mcp.md) | Semantic introspection uses one versioned native model and a thin MCP transport | 2026-07-20 | accepted; neutral oracle corrected/cross-gated; Perl static native query implemented; runtime/routes/admission pending | architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity |
 | [0050](0050-semantic-introspection-staged-artifact-records.md) | Semantic introspection names staged payloads, jobs, and results explicitly | 2026-07-20 | accepted correction; neutral contract executable; backend rollout pending | architecture, introspection, semantic-api, staged-parsing, provenance, schema, portability, parity |
+| [0051](0051-unicode-17-xid-continue-rule-labels.md) | Rule labels use pinned Unicode 17 XID_Continue scalars | 2026-07-21 | accepted; Rust implemented | architecture, grammar, unicode, identifiers, rust, validation, generated-data, portability, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
