@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (static Perl graph/diagnostic projection `.10.3.2.1` has complete canonical signoff;
-  calls/staging `.10.3.3` follows only after the clean commit)
+- Last updated: `2026-07-21` (generated-plan neutral-oracle correction `.10.3.3.0` has complete canonical signoff;
+  corrected calls/staging projection `.10.3.3.1` follows only after the clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7110,7 +7110,7 @@ before implementation.
       are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Project Perl calls, shapes, bindings, staged provenance, and generated-plan semantics.
   Depends on: `.10.3.2`
   Acceptance: Traverse typed ActionIR AST in source preorder, resolve registered functions before helper contracts,
@@ -7119,6 +7119,68 @@ before implementation.
     preserve consumes/produces/lowered/staged direction. Reuse one shared generated-family classifier to add the
     separate v2 handler-plan artifact. Deep-equal the complete calls/staging neutral snapshot and reject host IR,
     generated implementation source, unsupported shape strengthening, and provenance collapse.
+
+  #### Acceptance Checklist
+
+  - [x] **RED / PROBE** — Materialize the complete calls/staging neutral target and use the exact toolbox probes to
+    inventory descriptor, typed ActionIR, function staging registry, and generated-plan inputs in source order.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Map every call, binding, helper/function, shape, evidence, staged payload/job/
+    result, and generated artifact field to one native authority; preserve unknown/absent seams without inference.
+  - [ ] **FIX** — Extend only the private immutable projection behind `semantic_index` with calls/shapes/bindings,
+    ADR `0050` staged provenance, and separate generated-plan semantics; do not add public query or observations.
+  - [ ] **ADDRESSED (verified)** — Deep-equal the complete calls/staging snapshot and prove source preorder, function-
+    before-helper resolution, exact authorized shapes, provenance direction, clone isolation, and host-IR/source denial.
+  - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/55, adjacent consumers, primary, and canonical Phase 0
+    remain exact; rollout/admission stay 1/9 and 0/6.
+  - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow are
+    synchronized, or explicitly unchanged with evidence.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.3.3.0`
+    Status: `done`
+    Goal: Correct and independently gate the calls snapshot's generated-plan family before Perl projection.
+    Depends on: `.10.3.2`
+    Acceptance: Treat the actual generated-source-v2 family classifier and admitted rule-local cursor generated
+      family table as authority. Correct the calls snapshot only where exact `emit_generated_source` metadata,
+      descriptor `selected_handler_variant`, source header, and generated-v2 vocabulary agree it is wrong. Add an
+      independent checker guard so model-plus-response-hash edits cannot preserve the stale family. Do not change
+      parser/compiler/runtime/generated behavior, query responses, rollout, or admission.
+    Verification: Activated before non-task-tree changes from clean static projection commit `e0aeee63` at ahead
+      266, brief zero, and generated artifacts absent. Exact `Get(return_descriptor)` shows calls `Top` selects
+      `_default`; exact independently loaded `emit_generated_source` metadata reports both rows as `default` under
+      `linkedspec-generated-source-v2` format 2; `perl/LinkedSpec/Compiler.pm::_generated_source_family_for_variant`
+      maps `_default` to `default`; and the admitted rule-local contract lists `default` as a v2 seek family. The
+      neutral calls snapshot instead says `and_acode`, which is absent from the ten-family v2 vocabulary (whose
+      valid sequential AND spelling is `and_acode_seq`). This is neutral-oracle drift, not backend behavior.
+      The neutral artifact now says `default`. The checker consumes the external v2 identity/format/family table
+      and exact default entry header, and semantic proof passes 6 fixture groups / 20 unchanged exact query hashes /
+      55 rejected mutations. Both the old illegal family and coordinated valid-but-wrong `or_acode` with refreshed
+      hashes fail. Generated-source and rule-local authority gates plus the existing Perl static 10 tests pass.
+      Complete signoff adds capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, primary 66x2,
+      Knowledge Map 654/4,818, mdBook/memory/doctrines/whitespace, Phase 0 1,031/1,031 in 610 seconds, and canonical
+      exit 0. No optional backend matrix is needed because model/checker/docs only change neutral authority.
+    Commit: `FUTURE-PARITY-BACKLOG.10.3.3.0 - correct generated plan oracle`
+
+    #### Acceptance Checklist
+
+    - [x] **RED / PROBE** — Exact descriptor and independently loaded generated-v2 metadata reproduce `_default` →
+      `default` while the neutral calls snapshot says illegal `and_acode`.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — The model encoded a semantic guess instead of the generated artifact's
+      actual family authority; no checker cross-validated `plan_family` against the source/header/v2 family table.
+    - [x] **FIX** — Correct only the calls generated artifact to `default` and add independent source/contract-
+      derived checker validation plus a coordinated-wrong-model mutation.
+    - [x] **ADDRESSED (verified)** — Semantic 6/20 governance rejects the new family mutations; generated-v2 and
+      rule-local contracts, calls target, and any affected exact query hashes agree.
+    - [x] **NO REGRESSION** — Existing Perl/static/generated/CLI behavior and canonical Phase 0 remain exact;
+      rollout/admission stay 1/9 and 0/6.
+    - [x] **LOCKSTEP** — Neutral contract docs, ADR/book/task/index/roadmaps/live/memory/KM and commit workflow are
+      synchronized, or explicitly unchanged with evidence.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1`
+    Status: `pending`
+    Goal: Project exact corrected calls, shapes, bindings, staged provenance, and generated-plan semantics on Perl.
+    Depends on: `.10.3.3.0`
+    Acceptance: Implement the parent `.10.3.3` projection scope against the corrected independently guarded
+      calls/staging target, deep-equal all 22 records and 25 relations, and preserve private/API/admission boundaries.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.4`
   Status: `pending`
@@ -9409,9 +9471,13 @@ Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is committed clean at `a89
 generated/diagnostic/runtime seams, splitting all implementation work, and passing canonical Phase 0 1,031/1,031
 in 608 seconds. Strict source/outcome `.10.3.1` is clean at `0558c65a`; static-oracle correction `.10.3.2.0` is
 clean at `40d35201` with semantic 6/20/53 and canonical Phase 0 1,031/1,031. Corrected Perl static projection
-`.10.3.2.1` has complete uncommitted signoff at static 5, foundation 5, primary 66x2, and Phase 0 1,031/1,031 in
-611 seconds; rollout/admission remain 1/9 and 0/6. Its clean commit is the only boundary before calls/staging
-`.10.3.3` can activate.
+`.10.3.2.1` is clean at `e0aeee63` after static 5, foundation 5, primary 66x2, and Phase 0 1,031/1,031 in 611
+seconds. Calls/shapes/staged/generated parent `.10.3.3` activated task-tree-first from that handoff-ready boundary
+at ahead 266, brief zero, and generated artifacts absent. Exact probes then found the neutral calls snapshot's
+`and_acode` is not a legal v2 family: actual `_default` classification and loaded metadata both say `default`.
+Correction child `.10.3.3.0` has complete uncommitted signoff at semantic 6/20/55, primary 66x2, and Phase 0
+1,031/1,031 in 610 seconds. Its clean commit is the only boundary before `.10.3.3.1` can activate;
+rollout/admission remain 1/9 and 0/6.
 
 ### Historical frontier sequence
 
@@ -9784,14 +9850,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `done` | ADR `0049` fixes the backend-neutral semantic schema, idiomatic native APIs, exact parity gate, and thin MCP projection before code. |
-| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups and 20 digest-locked responses freeze the neutral oracle; `.10.3.2.0` later corrects static rule drift and raises its guard from 50 to 53 mutations. |
+| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups and 20 digest-locked responses freeze the neutral oracle; `.10.3.2.0` corrects static drift to 53 mutations and `.10.3.3.0` corrects generated-plan drift to 55. |
 | 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `active` | Implement the Perl semantic index, native query surface, and exact reference conformance through owned children. |
 | 74.2.0 | `FUTURE-PARITY-BACKLOG.10.3.0` | `done` | Exact toolbox probes map decoded source, descriptor, ActionIR, staged, generated, diagnostic, and missing runtime seams before behavior. |
 | 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `done` | Opaque construction, strict UTF-8/canonical source mapping, and immutable compiled-or-failed outcomes pass exact canonical proof without query or admission. |
 | 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `done` | Corrected the neutral static oracle, then projected exact static grammar, source, entry, diagnostic, and explanation semantics. |
 | 74.2.2.0 | `FUTURE-PARITY-BACKLOG.10.3.2.0` | `done` | Correct default/no-edge static facts and independently gate them at semantic 6/20/53 before adapter behavior. |
 | 74.2.2.1 | `FUTURE-PARITY-BACKLOG.10.3.2.1` | `done` | Private exact graph/privacy/failure/runtime-static projection passes canonical Phase 0 1,031/1,031. |
-| 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `pending` | Project ActionIR calls/shapes/bindings plus staged/generated provenance. |
+| 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `active` | Correct generated-plan oracle drift, then project ActionIR calls/shapes/bindings plus staged/generated provenance. |
+| 74.2.3.0 | `FUTURE-PARITY-BACKLOG.10.3.3.0` | `done` | Correct and independently gate the calls snapshot's stale/illegal generated-plan family at semantic 6/20/55. |
+| 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `pending` | Project the corrected complete 22-record/25-relation calls/staging target on Perl. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |

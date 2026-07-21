@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.0 — correct semantic generated-plan authority
+
+Toolbox-first proof found a second pre-adapter neutral-oracle error. The calls/staging snapshot described its
+generated handler-plan family as `and_acode`, but exact `LinkedSpec::Get(return_descriptor)` selects `_default`
+for the fixture's `Top::` rule and an independently loaded `LinkedSpec::emit_generated_source(...)` artifact
+reports `default` under `linkedspec-generated-source-v2` format 2. `and_acode` is not one of that contract's ten
+families; the legal sequential-AND spelling is `and_acode_seq`.
+
+The neutral model now records `default`. `tools/check_semantic_introspection_contract.py` reads the admitted
+rule-local contract's generated-source-v2 identity, format, seek/consume family inventory, exact calls snapshot,
+and default entry header before accepting the artifact. One mutation restores the old illegal value; another
+changes it to valid-but-wrong `or_acode` and refreshes every query hash. Both fail independently, advancing
+semantic governance from 53 to 55 rejected mutations while all 20 exact response digests remain unchanged.
+
+This is an oracle/checker correction only. No parser, compiler, runtime, generated source, query response, backend
+API, rollout, admission, CLI, or trace behavior changes. Corrected Perl projection remains `.10.3.3.1`.
+
+Complete signoff passes generated-source-v2 and rule-local authorities, Perl foundation/static 10, capability
+80/0/0, aggregate-selector 59/27/0, repeated action 8/10/8+0/54, primary CLI 66/66 twice, Knowledge Map
+654/4,818, mdBook, memory architecture, doctrines, and whitespace. Canonical Phase 0 passes 1,031/1,031 in 610
+seconds and the complete local gate exits 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.2.1 — project Perl static semantic records
 
 `LinkedSpec::semantic_index(...)` now retains a private immutable static semantic projection behind its opaque

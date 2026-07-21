@@ -11,10 +11,12 @@ snapshot-local ids/order, value and target shapes, request/response envelopes, d
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
 `python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
-six fixture groups and reports 53 rejected mutations. Static rule facts are independently derived from
+six fixture groups and reports 55 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
-mutations prove response-digest self-consistency cannot hide those facts. Neutral rollout is 1 complete / 8 pending; native backend
+mutations prove response-digest self-consistency cannot hide those facts. Generated artifact identity/family is
+also cross-checked against that contract's generated-source-v2 authority: the calls fixture emits `default`, and
+both illegal and coordinated valid-but-wrong family mutations fail. Neutral rollout is 1 complete / 8 pending; native backend
 admission remains 0 complete / 6 pending. No parser, compiler, runtime, descriptor, generated-source, CLI, trace,
 or MCP behavior is added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.

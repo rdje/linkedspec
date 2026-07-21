@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral static oracle corrected; Perl source and private static projection implemented; public adapters pending
+- Status: accepted; amended by ADR 0050; neutral static/generated-plan oracle corrected; Perl source and private static projection implemented; public adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -350,6 +350,14 @@ runtime-static neutral targets after internal source keys are materialized. Dupl
 ids, self-indexed edges select their slot without redundant self-dispatch, and only JSON booleans plus plain data
 cross the clone boundary. Public query/capability behavior, ActionIR calls/staging, observations, and admission are
 still absent, so rollout and backend admission do not advance.
+
+Before calls/staging projection, `.10.3.3.0` found the same class of independent-authority gap on the generated
+artifact. The calls model said handler family `and_acode`; exact descriptor selection was `_default`, independently
+loaded generated-source-v2 metadata reported `default`, and `and_acode` was absent from the ten-family v2
+vocabulary. The model now says `default`. The checker consumes the admitted contract's generated-source-v2
+identity/format/family inventory and exact default header, rejecting both the old illegal family and a coordinated
+valid-but-wrong family with refreshed query hashes. This also changes no behavior, query digest, rollout, or
+admission; `.10.3.3.1` consumes the corrected calls/staging target.
 
 ## Links
 

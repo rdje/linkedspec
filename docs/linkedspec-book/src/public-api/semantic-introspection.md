@@ -284,7 +284,7 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 53 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 55 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
@@ -298,6 +298,11 @@ entry/repetition from each exact header, and reconciles rule ownership with norm
 bare/default rule is never treated as an AND rule merely because a hand-authored model row says so, and a rule
 with no compiled edges reports `none` instead of invented blind ownership. Three mutations update the wrong model
 fact and all affected response hashes together; the independent cross-contract check still rejects each change.
+
+Generated-plan identity has the same external-authority rule. The checker reads the admitted generated-source-v2
+contract and exact ten-family vocabulary. The calls fixture's default entry compiles and emits family `default`;
+the earlier `and_acode` model value was neither the selected family nor a legal v2 spelling. Illegal and
+coordinated valid-but-wrong family mutations fail without relying on a selected query response.
 
 ## Rollout and MCP boundary
 

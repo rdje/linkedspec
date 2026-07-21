@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.0` — generated artifacts must report the generator's family, not a
+  semantic guess): the calls neutral target said `and_acode`, but the exact default-header descriptor selected
+  `_default` and independently loaded generated-v2 metadata reported `default`. The stale spelling was especially
+  revealing because it is outside the ten-family v2 vocabulary; `and_acode_seq` is the actual sequential-AND
+  spelling. A semantic generated-artifact record must preserve emitted artifact identity, not infer a family from
+  the presence of an action edge.
+
+  Query hashes alone could not expose this error because the generated-provenance case selects the relation, not
+  the generated record. The independent guard now reads `linkedspec-rule-local-cursor-v1`'s generated-source-v2
+  identity, format, and family sets, confirms the exact calls snapshot/default entry source, and requires family
+  `default`. It rejects the old illegal family plus a valid-but-wrong `or_acode` change even after every response
+  hash is refreshed. Governance advances from 53 to 55 without changing any query digest or runtime behavior.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.2.1` — static semantics are a composed projection, not a descriptor
   dump): the compiled descriptor is authoritative for rule order, family/cursor/repetition, normalized ownership,
   and resolved edge topology, but it cannot own authored source form or coordinates and contains native regex/

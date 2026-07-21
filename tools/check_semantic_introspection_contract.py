@@ -30,11 +30,22 @@ STATIC_RULE_AUTHORITY = {
     "compiled_rule_without_edges": "none",
     "failed_bare_edge_ownership_by_family": {"and": "blind", "or_default": "action"},
 }
+GENERATED_PLAN_AUTHORITY = {
+    "contract_id": RULE_LOCAL_CONTRACT_ID,
+    "path": "capability_conformance/rule_local_cursor_contract.json",
+    "generated_contract_key": "generated_source_v2",
+    "snapshot": "calls",
+    "fixture": "calls_and_staging",
+    "artifact_record_id": "generated:handler_plan:0",
+    "entry_rule_id": "rule:Top",
+    "default_selected_variant_family": "default",
+}
 
 TOP_LEVEL_FIELDS = {
     "format", "contract_id", "model_id", "query_id", "task_owner", "decisions", "scope", "schema",
     "query_contract", "source_contract", "fixture_groups", "source_fixtures", "snapshots", "query_cases",
-    "static_rule_authority", "target_admissions", "rollout", "canonical_ci", "mutations",
+    "static_rule_authority", "generated_plan_authority", "target_admissions", "rollout", "canonical_ci",
+    "mutations",
 }
 MODEL_FIELDS = {"format", "model", "query", "snapshots"}
 MODEL_SNAPSHOT_FIELDS = {"id", "fixture", "snapshot", "source_refs", "records", "relations"}
@@ -354,6 +365,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(source["forbidden_identity"] == ["implicit_host_path", "host_uri", "backend_type", "object_identity", "memory_address", "callable_value", "compiled_regex_object", "host_exception", "generated_implementation_source"], "privacy denylist drifted")
     require(source["none"] == "null_source_and_source_derived_facts_redacted" and source["identity"] == "source_id_and_registered_logical_name_only" and source["span"] == "identity_plus_span" and source["text"] == "span_plus_excerpt_and_optional_digest", "source projection policy drifted")
     require(contract["static_rule_authority"] == STATIC_RULE_AUTHORITY, "static rule authority drifted")
+    require(contract["generated_plan_authority"] == GENERATED_PLAN_AUTHORITY, "generated plan authority drifted")
 
     require([row["id"] for row in contract["fixture_groups"]] == FIXTURE_GROUP_IDS, "six fixture groups drifted")
     require(contract["fixture_groups"] == [
@@ -396,7 +408,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
     require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 53 and len(set(contract["mutations"])) == 53, "mutation inventory drifted")
+    require(len(contract["mutations"]) == 55 and len(set(contract["mutations"])) == 55, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -481,6 +493,39 @@ def validate_static_rule_authority(contract: dict[str, Any], model: dict[str, An
         require(spec["facts"]["entry_rule_id"] == expected_entry, f"snapshot {snapshot['id']} entry selection contradicts rule headers")
 
 
+def validate_generated_plan_authority(contract: dict[str, Any], model: dict[str, Any]) -> None:
+    authority = contract["generated_plan_authority"]
+    rule_local = load_json(ROOT / authority["path"])
+    require(rule_local.get("contract_id") == authority["contract_id"], "generated-plan rule-local authority identity drifted")
+    generated = rule_local.get(authority["generated_contract_key"])
+    require(isinstance(generated, dict), "generated-source-v2 authority is missing")
+    require(
+        generated.get("contract_id") == "linkedspec-generated-source-v2" and generated.get("format_version") == 2,
+        "generated-source-v2 identity drifted",
+    )
+    allowed_families = generated.get("seek_families", []) + generated.get("consume_families", [])
+    require(len(allowed_families) == 10 and len(set(allowed_families)) == 10, "generated-source-v2 family inventory drifted")
+
+    snapshot = next(row for row in model["snapshots"] if row["id"] == authority["snapshot"])
+    require(snapshot["fixture"] == authority["fixture"], "generated-plan fixture authority drifted")
+    records = {row["id"]: row for row in snapshot["records"]}
+    artifact = records[authority["artifact_record_id"]]
+    entry_rule = records[authority["entry_rule_id"]]
+    require(artifact["kind"] == "generated_artifact", "generated-plan authority record kind drifted")
+    require(entry_rule["kind"] == "rule" and entry_rule["source"] in snapshot["source_refs"], "generated-plan entry-rule authority drifted")
+    header = snapshot["source_refs"][entry_rule["source"]]["excerpt"]
+    require(header == entry_rule["name"] + "::", "calls generated-plan authority is not the exact default entry header")
+
+    facts = artifact["facts"]
+    require(facts["contract_id"] == generated["contract_id"], "generated artifact contract contradicts v2 authority")
+    require(facts["format_version"] == generated["format_version"], "generated artifact format contradicts v2 authority")
+    require(facts["plan_family"] in allowed_families, "generated artifact family is outside the v2 vocabulary")
+    require(
+        facts["plan_family"] == authority["default_selected_variant_family"],
+        "generated artifact family contradicts the exact default selected-variant authority",
+    )
+
+
 def validate_model(contract: dict[str, Any], model: dict[str, Any]) -> None:
     require_fields(model, MODEL_FIELDS, "model")
     require(model["format"] == 1 and model["model"] == MODEL_ID and model["query"] == QUERY_ID, "model identity drifted")
@@ -552,6 +597,7 @@ def validate_model(contract: dict[str, Any], model: dict[str, Any]) -> None:
         require(all(kind in record_kinds for kind in group.get("required_kinds", [])), f"fixture group {group['id']} omits a required record kind")
         require(all(kind in relation_kinds for kind in group.get("required_relations", [])), f"fixture group {group['id']} omits a required relation kind")
     validate_static_rule_authority(contract, model)
+    validate_generated_plan_authority(contract, model)
 
 
 def validate_no_private_leaks(value: Any, context: str, path: str = "$") -> None:
@@ -862,7 +908,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
-    require(CONTRACT_ID in readme and "53 rejected mutations" in readme, "capability-conformance guide is not synchronized")
+    require(CONTRACT_ID in readme and "55 rejected mutations" in readme, "capability-conformance guide is not synchronized")
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(MODEL_ID in book and "0 complete / 6 pending" in book, "mdBook semantic introspection page is not synchronized")
 
@@ -934,6 +980,8 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["coordinated_family_and_hash_drift"] = mutate_and_refresh_hashes(model_record("privacy", "rule:T%C3%B6p"), lambda row: row["facts"].update({"family": "and"}))
     mutations["coordinated_cursor_and_hash_drift"] = mutate_and_refresh_hashes(model_record("calls", "rule:Top"), lambda row: row["facts"].update({"cursor_policy": "contiguous"}))
     mutations["coordinated_edge_ownership_and_hash_drift"] = mutate_and_refresh_hashes(model_record("graph", "rule:Child"), lambda row: row["facts"].update({"edge_ownership": "blind"}))
+    mutations["illegal_generated_plan_family"] = apply_to(model_record("calls", "generated:handler_plan:0"), lambda row: row["facts"].update({"plan_family": "and_acode"}))
+    mutations["coordinated_generated_plan_family_and_hash_drift"] = mutate_and_refresh_hashes(model_record("calls", "generated:handler_plan:0"), lambda row: row["facts"].update({"plan_family": "or_acode"}))
     mutations["remove_request_field"] = lambda c, m: c["query_contract"]["request_fields"].remove("budget")
     mutations["remove_response_field"] = lambda c, m: c["query_contract"]["response_fields"].remove("cost")
     mutations["remove_snapshot_field"] = lambda c, m: c["query_contract"]["snapshot_fields"].remove("has_execution")

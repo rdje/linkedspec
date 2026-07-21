@@ -770,9 +770,10 @@ content migration exists yet.
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 53 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 55 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
-  default-family or no-edge-ownership drift. Neutral rollout is 1 complete / 8 pending,
+  default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
+  authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Neutral rollout is 1 complete / 8 pending,
   while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -781,8 +782,8 @@ content migration exists yet.
   private clone-safe projection of exact spec/source/rule/regex-slot/edge/lifecycle/diagnostic/decision/explanation
   records and relations. It deep-equals the corrected graph, Unicode privacy, failed-compilation, and runtime-static
   neutral targets without exposing descriptor coderefs, compiled regexes, AST layout, or paths. Public
-  `capabilities` and `query` are still absent, so rollout/admission remain 1/9 and 0/6; calls/staging `.10.3.3` is
-  next, followed by query/runtime/admission `.10.3.4-.10.3.6`.
+  `capabilities` and `query` are still absent, so rollout/admission remain 1/9 and 0/6; corrected calls/staging
+  projection `.10.3.3.1` follows, then query/runtime/admission `.10.3.4-.10.3.6`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

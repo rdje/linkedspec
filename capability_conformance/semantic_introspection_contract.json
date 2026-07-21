@@ -148,6 +148,16 @@
     "compiled_rule_without_edges": "none",
     "failed_bare_edge_ownership_by_family": {"and": "blind", "or_default": "action"}
   },
+  "generated_plan_authority": {
+    "contract_id": "linkedspec-rule-local-cursor-v1",
+    "path": "capability_conformance/rule_local_cursor_contract.json",
+    "generated_contract_key": "generated_source_v2",
+    "snapshot": "calls",
+    "fixture": "calls_and_staging",
+    "artifact_record_id": "generated:handler_plan:0",
+    "entry_rule_id": "rule:Top",
+    "default_selected_variant_family": "default"
+  },
   "fixture_groups": [
     {"id": "rule_regex_edge_lifecycle_graph", "sources": ["graph"], "required_kinds": ["rule", "regex_slot", "edge", "lifecycle", "decision", "explanation_step"]},
     {"id": "call_resolution_and_shapes", "sources": ["calls_and_staging"], "required_kinds": ["function", "helper", "binding", "call", "decision", "explanation_step"]},
@@ -331,7 +341,8 @@
     "lowercase_id_escape", "alter_relation_id", "reorder_records", "reorder_relations", "remove_nullable_field",
     "extra_backend_field", "invalid_value_shape", "strengthen_unknown_shape", "invalid_target_shape",
     "coordinated_family_and_hash_drift", "coordinated_cursor_and_hash_drift",
-    "coordinated_edge_ownership_and_hash_drift",
+    "coordinated_edge_ownership_and_hash_drift", "illegal_generated_plan_family",
+    "coordinated_generated_plan_family_and_hash_drift",
     "remove_request_field", "remove_response_field", "remove_snapshot_field", "remove_page_field",
     "remove_cost_field", "remove_query_diagnostic_field", "raise_page_max", "raise_depth_max", "omit_budget_case",
     "change_budget_prefix", "omit_reverse_relation_case", "omit_explanation", "change_explanation_order",

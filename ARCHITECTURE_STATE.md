@@ -13,11 +13,13 @@ This document is the current high-level technical reading of the project shape. 
   page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
   descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
   ADR `0050` adds truthful staged payload/job/result records and consumes/produces direction without collapsing
-  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 53 rejected mutations now run
+  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 55 rejected mutations now run
   in canonical CI. Correction `.10.3.2.0` cross-checks every snapshot rule header against the admitted rule-local
   cursor contract: default rules normalize to neutral `or`/`seek`, compiled rules with no edges report `none`,
   and the failed default-family bare edge retains `action`. This repairs stale self-consistent model/digest facts
-  before an adapter can encode them. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
+  before an adapter can encode them. Correction `.10.3.3.0` independently checks generated artifacts against the
+  admitted v2 family authority: the calls fixture's selected `_default` handler emits `default`, not the stale and
+  invalid `and_acode` model value. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
   pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
@@ -29,7 +31,7 @@ This document is the current high-level technical reading of the project shape. 
   normalized spec/source/rule/regex/edge/lifecycle/diagnostic/decision/explanation records and relations. It
   deep-equals graph, privacy full/limited, failure, and runtime-static neutral targets; self-indexed edges select
   their slot without a redundant self-dispatch relation. No path is read, parser executed, public query exposed,
-  observation captured, or backend admitted. `.10.3.3-.10.3.6` own the later layers.
+  observation captured, or backend admitted. `.10.3.3.1-.10.3.6` own the later layers after the oracle correction.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

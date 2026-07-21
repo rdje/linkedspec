@@ -8,13 +8,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.2.1` is active task-tree-first from clean static-oracle commit `40d35201` at ahead
-  265. The private Perl projector now composes accepted source, descriptor topology, entry selection, and runtime
-  failure into clone-safe static v1 records/relations. Graph, privacy full/limited, failed compilation, and the
-  runtime fixture's static half deep-equal the neutral oracle; clone/no-host-object proof passes. Static 5,
-  foundation 5, semantic 6/20/53, rule-local 36/18/8+60, capability 80/0/0, selector 59/27/0, repeated action
-  8/10/8+0/54, primary 66x2, KM 653/4,812, mdBook/governance, and Phase 0 1,031/1,031 in 611 seconds pass with
-  canonical exit 0. Final durable closeout, cleanup, and the clean commit remain before `.10.3.3` can activate.
+- `FUTURE-PARITY-BACKLOG.10.3.3.0` is active after parent `.10.3.3` activated task-tree-first from clean static-
+  projection commit `e0aeee63` at ahead 266. Exact descriptor and independently loaded generated-v2 metadata prove
+  the calls fixture selects/emits family `default`; the neutral row's `and_acode` was not even a legal v2 family.
+  The model is corrected and an external-authority guard rejects both illegal and coordinated valid-but-wrong
+  family drift. Complete signoff passes semantic 6/20/55 with unchanged hashes, generated-v2/rule-local/static
+  authorities, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, primary 66x2, KM 654/4,818,
+  mdBook/governance, and Phase 0 1,031/1,031 in 610 seconds with canonical exit 0. Final cleanup and the clean
+  correction commit remain before projector `.10.3.3.1` can activate.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -26,6 +27,17 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.2.1 — project Perl static semantics**
+  (DONE at clean commit `e0aeee63` from base `40d35201`).
+
+  **Result:** The private clone-safe static projection deep-equals graph, privacy full/limited, failed, and
+  runtime-static neutral targets without exposing host regex/coderef/object/path state or public query.
+
+  **Proof:** Static 5, foundation 5, semantic 6/20/53, rule-local 36/18/8+60, capability 80/0/0, selector 59/27/0,
+  repeated action 8/10/8+0/54, primary 66x2, KM 653/4,812, Phase 0 1,031/1,031 in 611 seconds, canonical exit 0.
+
+  **Next:** Calls/staging parent `.10.3.3` activated cleanly; generated-plan correction `.10.3.3.0` is active.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.2.0 — correct semantic static oracle**
   (DONE at clean commit `40d35201` from base `0558c65a`).
 
