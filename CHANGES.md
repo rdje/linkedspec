@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.2 — add Rust semantic static projection
+
+`SemanticIndex` now privately retains a clone-safe plain-data static v1 projection built after its immutable
+source/outcome snapshot. Authored source correlation and the exact UTF-8 mapper combine with typed `CompiledSpec`
+root, family, cursor, repetition, regex-slot, resolved edge, lifecycle, value-shape, entry, and generated-plan
+authority. Canonical ids, ordering, source references, records, and relations are derived without serializing AST,
+compiled regex, host object identity, or paths.
+
+Failed authored target intent is normalized deliberately: Rust's validation-time
+`bare_edge_target_undefined` and direct compiled `regex_slot_identity_invalid` seams project to the neutral
+`unknown_rule_reference` compile diagnostic with exact rule/missing-rule fields, source evidence, dependency-
+resolution decision, ordered explanation, and relations. The raw foundation diagnostic remains unchanged.
+
+Five internal tests deep-compare the entire graph, Unicode privacy at text and identity construction ceilings,
+failed compilation, and runtime-static target with the executable neutral model, then prove clone isolation and
+host-object/path denial. The projection remains private; calls/staging, public capabilities/query, runtime
+observation, and composed Rust admission stay owned by `.10.4.3-.10.4.6`. Rollout/admission remain 2/9 and 1/6.
+
+Signoff passes complete Rust core 193, runtime units 143, integration 197, the exact 105-fixture oracle, full
+generated manifest, all package contracts, and primary 66x2. Semantic governance remains 6/20/65; Knowledge Map is
+665 facts / 4,912 keys; mdBook, memory, and four doctrines pass. The first canonical run reproduced the known
+mutable task-index marker-anchor defect tracked by `.22`; focused repeated-action proof caught the capitalization
+drift, the exact marker was restored, and the full restart passes primary 66x2 plus Phase 0 1,031/1,031 in 609
+seconds, exit 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.1 — add Rust semantic source/outcome foundation
 
 `linkedspec-runtime` now exposes an opaque `SemanticIndex` foundation constructed from copied decoded text or

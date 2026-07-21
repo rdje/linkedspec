@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (Rust source/outcome foundation `.10.4.1` is signoff-complete; static projection
-  `.10.4.2` follows only after its clean commit)
+- Last updated: `2026-07-21` (Rust static projection `.10.4.2` is signoff-complete from clean source-foundation
+  commit `c92172b8`; `.10.4.3` follows after the clean commit and rollout/admission remain 2/9 and 1/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7628,12 +7628,40 @@ before implementation.
     Phase 0 1,031/1,031, and disposable Cargo/book/cache cleanup pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Project exact Rust static graph, privacy, failure, and runtime-static semantics.
   Depends on: `.10.4.1`
   Acceptance: Compose parsed source plus typed `CompiledSpec`, root/family/cursor/slot authorities, and failed
     validation/compile evidence into clone-safe v1 static records/relations. Deep-equal graph, privacy full/limited,
     failed, and runtime-static neutral targets; normalize the Rust failure seam deliberately; expose no query yet.
+  Verification: Activated task-tree-first from clean source-foundation commit `c92172b8` at ahead 276. Five
+    internal exact-oracle tests deep-equal the complete graph, Unicode privacy text/identity, failed compilation,
+    and runtime-static projection, then prove clone isolation and host-object/path denial; foundation remains 6/6.
+    Rust formatting and library Clippy pass (the broader test Clippy command reaches an existing unrelated denied
+    `3.14` approximate-constant fixture). Complete Rust passes core 193, runtime units 143, integration 197, exact
+    105-fixture oracle, full generated manifest, all package contracts, and primary 66x2. Semantic governance stays
+    6/20/65 at rollout 2/9 and admission 1/6; Knowledge Map is 665 facts / 4,912 keys; mdBook, memory, and four
+    doctrines pass. The first canonical run reproduced `.22`'s mutable task-index marker defect through one
+    capitalization change; exact repeated-action proof caught it, the checker-owned lowercase marker was restored,
+    and the complete restart passes primary 66x2 plus Phase 0 1,031/1,031 in 609 seconds, exit 0. Private static
+    data adds no capabilities/query/runtime observer/admission surface. Disposable Cargo/book/cache artifacts are
+    removed before commit; calls/staging `.10.4.3` is the next clean-base leaf.
+
+  #### Acceptance Checklist
+
+  - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate only from clean `c92172b8`, preserve rollout/admission at
+    2/9 and 1/6, and record any startup audit finding under a separate pending owner rather than widening this leaf.
+  - [x] **STATIC AUTHORITY** — Correlate immutable authored source/parsed lines with typed compiled root, family,
+    cursor, repetition, regex-slot, edge, lifecycle, code-value-shape, and ordering authority without host objects.
+  - [x] **FAILED NORMALIZATION** — Preserve authored failed-rule intent and exact source evidence while deliberately
+    mapping Rust `bare_edge_target_undefined` / `regex_slot_identity_invalid` seams to the v1
+    `unknown_rule_reference` compile diagnostic, decision, explanation, and relations.
+  - [x] **EXACT ORACLE / PRIVACY** — Deep-equal graph, Unicode privacy text/identity ceilings, failed compilation,
+    and runtime fixture static-half records, relations, ids, source spans, digests, shapes, and canonical order.
+  - [x] **CLONE / SCOPE BOUNDARY** — Retain only clone-safe serializable normalized data, prove returned-copy
+    isolation and no AST/compiled regex/object/path leak, and expose neither capabilities/query nor execution.
+  - [x] **LOCKSTEP / SIGNOFF** — Focused and complete Rust, semantic checker, mdBook/KM/doctrines, canonical CI,
+    live docs, cleanup, commit/brief, and clean handoff agree before `.10.4.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.3`
   Status: `pending`
@@ -9232,6 +9260,44 @@ before implementation.
     repair after the current dirty semantic leaf is committed; it is not active and does not authorize a pivot.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.23`
+  Status: `pending`
+  Goal: Repair and mechanically guard mdBook current-state drift exposed by a complete startup review.
+  Children: `.23.1`, `.23.2`
+  Acceptance: Root-cause every recorded current-facing contradiction against executable contracts and git history;
+    repair only under dependency-correct leaves; strengthen the owning no-drift checks so semantic meaning, not
+    merely anchor/count presence, is enforced; preserve genuinely dated history; synchronize book/KM/live docs;
+    pass focused and canonical gates before closure.
+  Finding: The 2026-07-21 full 46-page startup review found two distinct drift classes. Commit `ac217f6c`
+    mechanically removed aggregate-selector spellings from the migration examples themselves, yielding meaningless
+    identity rewrites such as ``items` becomes `items``; `check_public_aggregate_selector_surface.py` validates
+    classified-occurrence counts and bare-binding anchors but does not require an old-selector-to-new-binding
+    contrast. Separately, current-facing pages retain superseded rollout statements, including semantic
+    introspection at 50 mutations/no backend, bare-edge rollout as Perl-only, logical-helper rollout as pending,
+    and formal-grammar backend/marker status that contradicts admitted current contracts. At discovery this task
+    was queued only: active Rust `.10.4.2` remained the dirty-tree frontier, so no pivot was authorized before its
+    clean commit.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.23.1`
+  Status: `pending`
+  Goal: Restore meaningful aggregate-selector migration examples and guard their semantic contrast.
+  Depends on: `.23`
+  Acceptance: Inventory every mechanically collapsed old-to-new selector example, restore exact rejected
+    `array(IDENTIFIER)` / `hash(IDENTIFIER)` source only in explicit migration context, and extend the public
+    checker with exact contrast mutations so another broad replacement cannot produce identity guidance while
+    retaining the expected file/reference counts.
+
+- ID: `FUTURE-PARITY-BACKLOG.23.2`
+  Status: `pending`
+  Goal: Reconcile remaining current-facing mdBook rollout and backend-status claims with executable contracts.
+  Depends on: `.23.1`
+  Acceptance: Audit the startup finding set plus adjacent prose; correct semantic-introspection, bare-edge,
+    logical-helper/truthiness, structured-control, and root-marker current status from their canonical contracts;
+    distinguish dated history from current guidance; add omission/stale-claim checks at the owning gates; build and
+    review the complete book before closing `.23`.
 
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 

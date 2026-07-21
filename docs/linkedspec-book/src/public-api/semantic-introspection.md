@@ -3,8 +3,9 @@
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
 admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
-consumer. Rust now has its first implementation layer: an opaque strict-source, exact-coordinate,
-compiled-or-failed foundation, without v1 records/query or admission yet. The distinction matters:
+consumer. Rust now has two private implementation layers: an opaque strict-source, exact-coordinate,
+compiled-or-failed foundation and an exact clone-safe static v1 projection, without public query or admission yet.
+The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
@@ -14,8 +15,8 @@ compiled-or-failed foundation, without v1 records/query or admission yet. The di
 - `$index->capabilities` and `$index->query($request)` expose the exact v1 static answer surface today; and
 - `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
 - `t/semantic_introspection_perl_admission.t` composes every required Perl path once; and
-- `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority needed by later
-  projection leaves; and
+- `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority and exact private
+  static projection needed by later calls/query leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
@@ -58,9 +59,10 @@ The ceiling also governs these foundation accessors: `none` rejects source ident
 the source digest. The custom debug representation redacts logical identity at `none` and never prints source text.
 
 Construction parses and compiles the source but never invokes the resulting target parser or target lifecycle and
-action code. It does not capture runtime observations, enable trace, or expose semantic records. Static v1
-projection and normalized failure evidence belong to `.10.4.2`; calls/staging, query, runtime observation, and
-admission remain later Rust leaves. Therefore the global rollout and native-admission ledgers remain 2/9 and 1/6.
+action code. It does not capture runtime observations or enable trace. The opaque index now retains exact private
+static v1 records/relations plus normalized failure evidence, but exposes no public record or query method yet.
+Calls/staging, query, runtime observation, and admission remain later Rust leaves. Therefore the global rollout and
+native-admission ledgers remain 2/9 and 1/6.
 
 ## Current Perl construction and query surface
 
@@ -179,16 +181,18 @@ one-based Unicode-scalar columns, rejected mid-codepoint ranges, and determinist
 duplicate source text. Record-specific correlation is now performed only after compilation, against descriptor
 order/topology and already accepted source; the general mapper still invents no grammar semantics.
 
-## Current private static projection
+## Current private static projections
 
-`LinkedSpec::SemanticStaticProjection` is an internal layer retained by the opaque index. It is deliberately not a
-second public API. It combines four authorities without serializing any one of them:
+Perl's `LinkedSpec::SemanticStaticProjection` and Rust's `semantic_index::static_projection` are internal layers
+retained by their opaque indexes. Neither is a second public API. Each combines four authorities without
+serializing any one of them:
 
-- the descriptor supplies compiled rule order, normalized family/cursor/repetition, ownership, and resolved edges;
+- the backend's typed compiled owner supplies rule order, normalized family/cursor/repetition, ownership, and
+  resolved edges;
 - accepted decoded source distinguishes direct and indexed authored forms and supplies rule, slot, edge, and
   lifecycle ranges;
 - the source mapper turns those ranges into exact strict-UTF-8 byte/line/scalar-column references; and
-- runtime context supplies structured failed-compilation fields.
+- structured diagnostic authority supplies failed-compilation fields.
 
 The result contains v1 spec, source, rule, regex-slot, edge, lifecycle, diagnostic, decision, and explanation
 records plus their static relations. Record ids percent-escape strict UTF-8 bytes with uppercase hex, duplicate
@@ -199,13 +203,14 @@ An indexed edge has target shape `regex_slot`; a direct edge has target shape `r
 Failed `Top: / Missing`-style dependency intent remains source-aware even though no descriptor was produced. The
 private projection normalizes the runtime `bare_edge_target_undefined` failure to portable
 `unknown_rule_reference`, with `rule_id`/`missing_rule_id`, a dependency-resolution decision, and its ordered
-explanation step. Returned copies admit only plain data and JSON booleans; coderefs, compiled regex objects,
-backend AST/IR, object identities, and paths are rejected at the clone boundary.
+explanation step. Returned copies admit only plain data and booleans; coderefs, compiled regex objects, backend
+AST/IR, object identities, and paths are rejected at the clone boundary.
 
-The focused projection test materializes internal source keys and deep-compares the complete graph, Unicode privacy
-at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
-neutral oracle. The public evaluator now owns query-time source redaction, pages, traversal, budgets, and costs.
-The composed Perl admission consumer is described with the executable oracle below; runtime projection follows.
+Each backend's focused projection test materializes internal source keys and deep-compares the complete graph,
+Unicode privacy at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static
+half, against the neutral oracle. Perl's public evaluator owns query-time source redaction, pages, traversal,
+budgets, and costs today; Rust's equivalent remains `.10.4.4`. The composed Perl admission consumer is described
+with the executable oracle below; Rust calls/staging projection is the next dependency.
 
 ## Current private call, staging, and generated projection
 
@@ -294,7 +299,7 @@ loaders already use strict decoding. The current semantic constructor now owns t
 text or strict UTF-8 bytes, rejects malformed input, preserves canonical bytes for byte offsets and digests, and
 accepts only a caller-registered logical name—never an implicit host path.
 
-## Rust authority map and current foundation
+## Rust authority map and current private projection
 
 The Rust audit reaches a similar composition boundary with different native owners. Parsed rules and
 function extraction, `CompiledSpec`, typed ActionIR, structured diagnostics, strict loaders, and generated-source-v2
@@ -305,8 +310,12 @@ function sidecars are the richer exception, retaining character spans, typed bod
 
 Leaf `.10.4.1` implements that foundation in `linkedspec-runtime`. It preserves caller-owned logical identity,
 strict UTF-8 bytes, exact byte/scalar coordinates, source ceilings, raw portable compilation failure, effective
-entry identity, and shared generated-v2 plan rows around private parsed/compiled authority. It neither serializes
-host state nor projects the v1 semantic model yet.
+entry identity, and shared generated-v2 plan rows around private parsed/compiled authority. It serializes no host
+state. Leaf `.10.4.2` now composes that source with typed `CompiledSpec` root/family/cursor/repetition/slot/edge/
+lifecycle authority into private plain-data static records and relations. It deliberately normalizes Rust's
+`bare_edge_target_undefined` / `regex_slot_identity_invalid` seams to the neutral
+`unknown_rule_reference`/`compile` evidence and deep-equals graph, both privacy ceilings, failure, and the runtime
+static half. Public capabilities/query remain absent.
 
 Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
 currently emit textual trace decisions only; no typed semantic observer or query object exists. The planned runtime
@@ -605,7 +614,7 @@ The dependency order is:
 | `.10.3.4` | Perl capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
 | `.10.3.5` | Perl runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
 | `.10.3.6` | composed Perl semantic admission | complete; 12 roles, 20 exact queries, Perl-only promotion |
-| `.10.4` | Rust parity | pending |
+| `.10.4` | Rust parity | source/outcome and static projection complete; calls/query/runtime/admission pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

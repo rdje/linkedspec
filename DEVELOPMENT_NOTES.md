@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.2` — static semantics are a normalized private projection, not
+  serialized compiler state): Rust already had every static meaning, but no single owner had both exact source
+  evidence and compiled topology. The projector therefore correlates parsed authored lines against the immutable
+  source map, then reads canonical root/family/cursor/repetition/slot/edge/lifecycle/order and shape facts from
+  typed `CompiledSpec`. Its output is plain clone-safe data retained inside `SemanticIndex`; the compiler remains
+  authoritative and no AST, compiled regex, object identity, or path crosses the boundary.
+
+  The privacy ceiling is query policy, not collection damage. The private projection retains complete exact source
+  references even when the index was constructed at `identity`, while the existing public foundation accessors
+  still enforce their immutable ceiling and no projection/query accessor exists. A later query leaf can therefore
+  apply structural redaction from one full private snapshot without recompiling or trying to recover discarded
+  coordinates. Exact text/identity neutral comparisons prove both construction ceilings without creating a public
+  elevation path.
+
+  Failure normalization belongs here rather than in source/outcome construction. Validation reports
+  `bare_edge_target_undefined` at `normalize_edges`; direct compiled validation can report
+  `regex_slot_identity_invalid`. Both remain valuable backend diagnostics, while the private v1 layer deliberately
+  maps the accepted unknown-target intent to `unknown_rule_reference` at `compile` with canonical decision and
+  explanation evidence. Five full-object comparisons prevent a self-consistent partial adapter from passing.
+
+  Full-book startup review separately found mechanically corrupted selector-migration examples whose old and new
+  forms became identical in `ac217f6c`; the existing checker validates anchors/counts, not semantic contrast. That
+  causal fact is durable in `mdbook-mechanical-migration-contrast-drift`, and pending `.23.1-.23.2` own repair plus
+  a stronger guard after this dirty leaf is committed.
+
+  Signoff is focused static 5 plus foundation 6; complete Rust core 193, runtime 143, integration 197, exact
+  105-fixture oracle/full generated manifest/all packages, and primary 66x2. Semantic governance remains 6/20/65
+  at rollout 2/9 and admission 1/6; KM is 665/4,912. The first canonical attempt usefully reproduced `.22`'s
+  marker-anchor hazard after a capitalization-only task-index rewrite. The repeated-action checker rejected it,
+  the exact lowercase marker was restored, and the full restart passes primary 66x2 plus Phase 0 1,031/1,031 in
+  609 seconds, exit 0.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.1` — source/outcome state is an opaque compiler composition, not a
   serialized AST): Rust semantic construction must own accepted source because ordinary parsed/compiled nodes do
   not retain enough exact positions. `SemanticIndex` therefore copies both decoded text and canonical UTF-8 bytes

@@ -816,8 +816,11 @@ content migration exists yet.
   normalization-sensitive identity and implement them across Rust parser/validator/artifact/runtime routes.
   Rust semantic source/outcome foundation `.10.4.1` now adds opaque `SemanticIndex::from_source` / `from_utf8`
   construction, strict canonical byte/scalar mapping, immutable source ceilings, compiled-or-failed authority,
-  exact entry identity, and the shared generated-v2 plan without target execution, path reads, host-IR exposure,
-  v1 records, or query. Static projection `.10.4.2` follows; rollout/admission remain 2/9 and 1/6.
+  exact entry identity, and the shared generated-v2 plan without target execution, path reads, or host-IR
+  exposure. Static leaf `.10.4.2` now privately retains exact plain-data graph/privacy/failure/runtime-static v1
+  records and relations, including deliberate normalization of both Rust unknown-target failure seams. No public
+  capabilities/query or admission is claimed; calls/staging `.10.4.3` follows and rollout/admission remain 2/9
+  and 1/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

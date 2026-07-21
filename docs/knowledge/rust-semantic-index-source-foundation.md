@@ -36,11 +36,12 @@ Accepted source retains parsed, validated, compiled, exact entry-selection, and 
 authority. The plan rows use the same `classify_generated_rule_family` owner as code generation. Parse,
 validation, compilation, or entry-selection language failures still return an opaque `failed_compilation`
 snapshot with raw `PortableDiagnostic` evidence and available source mapping; constructor policy errors remain
-typed `SemanticIndexError`s. Static v1 records and normalized failure projection are deliberately later leaf
-`.10.4.2`.
+typed `SemanticIndexError`s. Static v1 records and normalized failure projection are now supplied by the separate
+private `.10.4.2` layer; this foundation remains their source/outcome owner rather than becoming a second
+projection.
 
 The full-source parser internally uses LinkedSpec's admitted staged parser for user-function definitions. The
 no-execution guarantee is about the caller's target specification: construction never invokes the resulting
 target parser, target lifecycle/action code, trace, or runtime semantic observation. Queries do not exist in this
 foundation leaf. See [[rust-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
-and [[rust-generated-source-v2-rule-local-cursor]].
+and [[rust-generated-source-v2-rule-local-cursor]], [[rust-semantic-static-projection]].

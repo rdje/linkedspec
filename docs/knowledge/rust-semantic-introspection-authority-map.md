@@ -1,6 +1,6 @@
 ---
 id: rust-semantic-introspection-authority-map
-title: Rust semantic introspection composes a source foundation with typed compiler/runtime owners and still needs an observation seam
+title: Rust semantic introspection composes private source and static layers with typed compiler/runtime owners
 answers:
   - "which Rust authorities build the semantic index"
   - "can Rust parse the semantic privacy fixture Töp"
@@ -13,10 +13,11 @@ answers:
   - "can CompiledSpec be serialized without host state"
   - "why is TOOLBOX semantic introspection output stale"
   - "does Rust now have a semantic source map"
+  - "does Rust now have a semantic static projection"
 date: 2026-07-21
 status: current
 tags: [rust, semantic-introspection, source-map, unicode, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.1; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/engine.rs
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; rust/linkedspec-runtime/src/engine.rs
 reverify: "python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
 ---
 
@@ -51,8 +52,9 @@ case- and normalization-sensitive scalar identity. Rust source, validator, compi
 selector, loader, and trace routes preserve `Töp` exactly. `.10.4.1` remains dependent on the clean completion of
 that prerequisite. See [[unicode-rule-label-contract]].
 
-Rust now has an opaque `SemanticIndex` source/outcome foundation but no static v1 projection, query evaluator, or
-typed semantic observation sink. Its strict source constructors copy caller text/bytes, retain private
+Rust now has an opaque `SemanticIndex` source/outcome foundation plus a private clone-safe static v1 projection,
+but no query evaluator or typed semantic observation sink. Its strict source constructors copy caller text/bytes,
+retain private
 parsed/validated/compiled-or-failed authority and the shared generated-v2 plan, enforce a source ceiling, and
 expose only clone-safe foundation metadata/spans/excerpts/diagnostics. Direct and generated executors nevertheless
 have parallel authoritative runtime seams: after structural slot identity is checked, both emit
@@ -60,6 +62,11 @@ have parallel authoritative runtime seams: after structural slot identity is che
 rule wrappers own final typed result and final cursor. A future optional invocation-local semantic sink can attach
 there, separately from buffered text trace and `RuntimeDiagnosticOutputSink`, and a post-execution builder can
 derive a new immutable snapshot without query-side execution. See [[rust-semantic-index-source-foundation]].
+
+The `.10.4.2` projector composes parsed source correlation with typed compiled root/family/cursor/repetition/slot/
+edge/lifecycle authority and normalizes both Rust failure seams into the exact neutral unknown-rule diagnostic,
+decision, and explanation. Its private graph/privacy/failed/runtime-static answers deep-equal the neutral oracle;
+it exposes neither capabilities/query nor host state. See [[rust-semantic-static-projection]].
 
 During this audit, `TOOLBOX.md` §4.9 still advertised 57 rejected mutations, rollout 1+8, and pre-admission Perl
 state even though the executable checker reports 65, rollout 2+7, and admission 1+5. The checker guards contract,

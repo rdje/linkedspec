@@ -57,10 +57,12 @@ projection. MCP will only forward capabilities and query requests for a caller-r
 compile a spec, read an implicit path, inspect backend objects, derive facts, or invent explanations. The primary
 CLI gains no v1 command or option.
 
-The neutral schema, fixtures, exact evaluator, and 50-mutation gate are executable under
-`FUTURE-PARITY-BACKLOG.10.2`, but no backend is admitted yet. `.10.3-.10.10` own Perl/Rust/Dart/Julia/Lua rollout,
-recurring proof, thin MCP transport, and public closeout. Today, continue using the descriptor API documented
-below. [Semantic Introspection](semantic-introspection.md) documents the exact neutral model and current rollout.
+The neutral schema, fixtures, exact evaluator, and 65-mutation gate are executable under
+`FUTURE-PARITY-BACKLOG.10.2`. Perl is the first admitted backend. Rust now retains private source/outcome and exact
+static-projection layers but exposes no public semantic query yet. `.10.3-.10.10` own Perl/Rust/Dart/Julia/Lua
+rollout, recurring proof, thin MCP transport, and public closeout. Until a backend's native semantic adapter is
+admitted, continue using the descriptor API documented below. [Semantic Introspection](semantic-introspection.md)
+documents the exact neutral model and current rollout.
 
 For orientation, the executable neutral contract represents “describe `Top`, with spans but no source text” as:
 

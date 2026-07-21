@@ -1,10 +1,13 @@
-//! Opaque source-map and compilation-outcome foundation for semantic introspection.
+//! Opaque source/outcome authority and normalized static semantic projection.
 //!
-//! This module implements only `FUTURE-PARITY-BACKLOG.10.4.1`. It copies one
-//! caller-supplied source, builds exact strict-UTF-8 byte/scalar coordinates,
-//! parses/validates/compiles without executing the target specification, and
-//! retains clone-safe compiled-or-failed authority. Normalized semantic records,
-//! queries, runtime observations, and backend admission belong to later leaves.
+//! `FUTURE-PARITY-BACKLOG.10.4.1` copies one caller-supplied source, builds exact
+//! strict-UTF-8 byte/scalar coordinates, and retains compiled-or-failed authority.
+//! `.10.4.2` additionally lowers the static rule graph or failed outcome into
+//! clone-safe `linkedspec-semantic-model-v1` records and relations. The normalized
+//! projection remains crate-private until later leaves add call/staged facts and a
+//! ceiling-enforcing query surface. Construction never executes the target spec.
+
+mod static_projection;
 
 use crate::source_emitter::{
     GENERATED_SOURCE_CONTRACT, GENERATED_SOURCE_FORMAT, classify_generated_rule_family,
@@ -279,6 +282,10 @@ pub struct SemanticIndex {
     compilation_diagnostic: Option<PortableDiagnostic>,
     entry_selection: Option<SemanticEntrySelection>,
     generated_plan: Option<SemanticGeneratedPlanInput>,
+    // `.10.4.2` retains this for later crate-internal query composition; until
+    // `.10.4.4`, only the focused in-module conformance tests consume the clone.
+    #[cfg_attr(not(test), allow(dead_code))]
+    static_projection: static_projection::SemanticStaticProjection,
 }
 
 impl std::fmt::Debug for SemanticIndex {
@@ -407,6 +414,29 @@ impl SemanticIndex {
             }
         }
 
+        let snapshot = SemanticSnapshot {
+            id: SNAPSHOT_ID.to_string(),
+            state: if compiled.is_some() {
+                SemanticSnapshotState::Compiled
+            } else {
+                SemanticSnapshotState::FailedCompilation
+            },
+            has_execution: false,
+            source_detail_ceiling: options.source_detail_ceiling,
+            content_digest_available: options.source_detail_ceiling == SemanticSourceDetail::Text,
+        };
+        let static_projection = static_projection::build(static_projection::BuildInput {
+            source_text: &source_text,
+            source_map: &source_map,
+            logical_name: &options.logical_name,
+            content_digest: &content_digest,
+            snapshot,
+            parsed: parsed.as_ref(),
+            compiled: compiled.as_ref(),
+            diagnostic: compilation_diagnostic.as_ref(),
+            entry_selection: entry_selection.as_ref(),
+        })?;
+
         Ok(Self {
             source_text,
             source_bytes,
@@ -420,6 +450,7 @@ impl SemanticIndex {
             compilation_diagnostic,
             entry_selection,
             generated_plan,
+            static_projection,
         })
     }
 
@@ -478,6 +509,17 @@ impl SemanticIndex {
     pub fn generated_plan(&self) -> Result<Option<SemanticGeneratedPlanInput>, SemanticIndexError> {
         self.require_source_detail(SemanticSourceDetail::Identity)?;
         Ok(self.generated_plan.clone())
+    }
+
+    /// Return a fresh crate-private normalized static projection.
+    ///
+    /// This deliberately is not a public pre-query escape hatch: source filtering
+    /// and capabilities/query are owned by later leaves. Keeping the clone seam
+    /// here lets those evaluators consume only plain normalized data, never AST or
+    /// compiled host state.
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn static_projection(&self) -> static_projection::SemanticStaticProjection {
+        self.static_projection.clone()
     }
 
     /// Map an exact byte range when the caller permitted span detail.
