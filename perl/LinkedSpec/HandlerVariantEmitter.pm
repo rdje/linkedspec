@@ -179,7 +179,7 @@ sub _build_and_acode_sequence_body {
     my $acode_count = $args{acode_count};
     return undef unless ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
     return undef unless defined($acode_count) && $acode_count > 0;
-    return {
+    my $ir = {
         kind        => 'and_acode_seq',
         label       => $args{label},
         cursor_policy => $args{cursor_policy} // 'seek',
@@ -190,6 +190,13 @@ sub _build_and_acode_sequence_body {
         acodes_ref  => $acodes_ref,
         acode_count => $acode_count,
     };
+    $ir->{required_slot_mode} = $args{required_slot_mode}
+        if defined($args{required_slot_mode});
+    $ir->{required_slot_count} = $args{required_slot_count}
+        if defined($args{required_slot_count});
+    $ir->{acode_dispatch_indices} = [@{$args{acode_dispatch_indices}}]
+        if ref($args{acode_dispatch_indices}) eq 'ARRAY';
+    return $ir;
 }
 
 sub _build_and_acode_variant {
@@ -304,7 +311,7 @@ sub _build_rep_and_acode_variant {
     return undef unless defined $min && defined $max;
     my $acodes_ref = $args{acodes_ref};
     return undef unless ref($acodes_ref) eq 'ARRAY' && @$acodes_ref;
-    return {
+    my $ir = {
         kind        => 'rep_and_acode',
         label       => $args{label},
         cursor_policy => $args{cursor_policy} // 'seek',
@@ -317,6 +324,13 @@ sub _build_rep_and_acode_variant {
         rep_min     => $min,
         rep_max     => $max,
     };
+    $ir->{required_slot_mode} = $args{required_slot_mode}
+        if defined($args{required_slot_mode});
+    $ir->{required_slot_count} = $args{required_slot_count}
+        if defined($args{required_slot_count});
+    $ir->{acode_dispatch_indices} = [@{$args{acode_dispatch_indices}}]
+        if ref($args{acode_dispatch_indices}) eq 'ARRAY';
+    return $ir;
 }
 
 #------------------------------------------------------------------------------
@@ -390,6 +404,21 @@ sub _linkedre_required_slot_expr {
         . ', $info) }';
 }
 
+sub _linkedre_local_structural_slot_expr {
+    my (%args) = @_;
+    my $label = $args{label};
+    my $index_expr = $args{index_expr};
+    my $cursor_policy = defined($args{cursor_policy}) && length($args{cursor_policy})
+        ? $args{cursor_policy}
+        : 'consume';
+    my $slot_re = '(exists($$descr{dependency_slot_map})'
+        . ' ? $$descr{dependency_slot_map}{' . $label . '}[' . $index_expr . ']{re}'
+        . ' : $$descr{spec}{' . $label . '}{re}[' . $index_expr . '])';
+    return 'LinkedRE::match_slot($STRING, ' . $slot_re . ', ' . $index_expr . ', '
+        . _quote_perl_string($label) . ', ' . _quote_perl_string($label) . ', '
+        . $index_expr . ', ' . _quote_perl_string($cursor_policy) . ', $info)';
+}
+
 sub _slot_identity_condition {
     my (%args) = @_;
     my $label = $args{label};
@@ -400,6 +429,15 @@ sub _slot_identity_condition {
         . _quote_perl_string($label)
         . ', ' . $index_expr
         . ', $$required_slot{label}, $$required_slot{idx}) }';
+}
+
+sub _local_structural_slot_identity_condition {
+    my (%args) = @_;
+    my $label = $args{label};
+    my $index_expr = $args{index_expr};
+    return 'LinkedRE::assert_slot_identity($minfo, '
+        . _quote_perl_string($label) . ', ' . $index_expr . ', '
+        . _quote_perl_string($label) . ', ' . $index_expr . ')';
 }
 
 sub _slot_selection_observation_and_trace {
@@ -456,7 +494,11 @@ sub _build_acodes_dispatch_block {
     my $idx    = 0;
     my $acodes = '';
     foreach my $acode (@$acodes_ref) {
-        my $expected_idx = $idx++;
+        my $expected_idx = ref($args{dispatch_indices}) eq 'ARRAY'
+            && defined($args{dispatch_indices}->[$idx])
+            ? $args{dispatch_indices}->[$idx]
+            : $idx;
+        ++$idx;
         my $condition = _trace_branch_condition(
             enabled => $trace_enabled,
             label => $label,
@@ -930,11 +972,17 @@ sub _emit_and_acode_seq_handler {
     my $label       = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
-    my $match_expr  = _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '$idx');
+    my $uses_local_structural_slots = ($ir->{required_slot_mode} // '') eq 'local_structural';
+    my $match_expr  = $uses_local_structural_slots
+        ? _linkedre_local_structural_slot_expr(%$ir, label => $label, index_expr => '$idx')
+        : _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '$idx');
     my $lxcode      = $ir->{lxcode} || 'return undef';
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
+    my $required_slot_count = $uses_local_structural_slots
+        ? $ir->{required_slot_count}
+        : $acode_count;
     # Edge acodes are emitted verbatim: they are already lowered (e.g.
     # return(array(...)) -> `return [...]`, assignment helpers -> in-place mutation). A
     # `return` edge then surfaces the author payload directly — from the whole
@@ -950,6 +998,7 @@ sub _emit_and_acode_seq_handler {
         label => $label,
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
+        dispatch_indices => $ir->{acode_dispatch_indices},
     );
     my $lmatch      = _build_lmatch_extraction();
     my $match_trace = _trace_branch_statement(
@@ -970,7 +1019,9 @@ sub _emit_and_acode_seq_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'required_sequence_index',
-        taken_expr => _slot_identity_condition(label => $label, index_expr => '$idx'),
+        taken_expr => $uses_local_structural_slots
+            ? _local_structural_slot_identity_condition(label => $label, index_expr => '$idx')
+            : _slot_identity_condition(label => $label, index_expr => '$idx'),
         meta => [
             [ loop_count => '$idx' ],
             [ match_index => '$$minfo{index}' ],
@@ -990,7 +1041,7 @@ sub _emit_and_acode_seq_handler {
  my @' . $label . '_collect;
  my $idx = 0;
 
- while ($idx < ' . $acode_count . ') {
+ while ($idx < ' . $required_slot_count . ') {
   my $minfo = ' . $match_expr . ';
 ' . $match_trace . '
   unless($minfo) {

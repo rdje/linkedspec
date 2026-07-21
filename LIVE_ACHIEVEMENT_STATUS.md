@@ -13,15 +13,15 @@ Current execution status for interruption-safe batch workflow recovery.
   with pinned Unicode 17 labels, regenerate and mechanically freshness-lock all four stale `spec_spec_*` inputs,
   and execute today's canonical lifecycle/bare-edge grammar through Dart before `.10.5.0.2` can begin. Safe split
   `.10.5.0.1.0-.2` freezes generated class authority/checker, grammar+Dart structural consumption, then refreshed
-  corpus/cross-runtime closeout. `.0` is cleanly committed as `f356a2dd`; `.1` is verified complete from that
-  clean ahead-283 boundary, and `.2` is next after its clean commit.
+  corpus/cross-runtime closeout. `.0` is cleanly committed as `f356a2dd`; `.1` is cleanly committed as `15c97761`;
+  `.2` is active task-tree-first from that clean ahead-284 boundary.
 
 The audit proves Dart's hardcoded declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
-targets remain raw, and externally constructed invalid labels bypass validation. `.1` now consumes the generated
-class at all 12 first-authoritative grammar sites and makes Dart directly execute current explicit lifecycle and
-bare-edge forms without duplicating the classifier. All four green `spec_spec_*` inputs remain stale identical
-grammar copies; `.2` owns verbatim regeneration, freshness enforcement, and cross-runtime composition before
-105/105 can count as current self-hosted proof.
+targets remain raw, and externally constructed invalid labels bypass validation. `.1` consumes the generated class
+at all 12 first-authoritative grammar sites and makes Dart directly execute current explicit lifecycle and bare-edge
+forms without duplicating the classifier. `.2.0` now makes all four `spec_spec_*` inputs exact canonical copies and
+repairs the Perl sparse-AND regression exposed by atomic regeneration. Full Rust/Dart/Julia/Lua corpus and
+canonical routes are green. `.2.1` remains pending until the clean `.2.0` commit, then owns label-boundary closeout.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -40,6 +40,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.1.2.0 — refresh self-hosted corpus and repair sparse AND slots**
+  (DONE in this commit from clean base `15c97761`).
+
+  **Result:** All four `spec_spec_*` inputs exactly equal canonical `specs/spec.spec` and the independent checker
+  locks their bytes/hash. Perl live/generated consuming AND handlers traverse every local structural regex while
+  dispatching only sparse authored actions; repeated AND with one action and duplicate-slot identity remain exact.
+
+  **Proof:** Two atomic 105-case generations around exact TOOLBOX root cause; no surviving expected-output drift;
+  sparse 3 / duplicate-slot 12 / Unicode 806/9/8/2; Rust/Dart/Julia/Lua 105/105; dual-ABI Lua 177; KM 671/4,990;
+  mdBook/memory/task/four doctrines/diff; canonical Rust admission 79.65s, primary 66x2, and Phase 0 1,031/1,031
+  in 648s, exit 0.
+
+  **Next:** Commit cleanly, then activate `.10.5.0.1.2.1` task-tree-first for physical-line label boundaries and
+  five-runtime current-grammar closeout.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.1 — consume Unicode labels in self-hosted grammar**
   (DONE in this commit from clean base `f356a2dd`).
 
@@ -51,7 +66,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   package 279 / fatal analysis / primary 66x2 / stale corpus 105; Perl current-source compile; KM 670/4,981;
   mdBook/memory/task/four doctrines/diff; canonical Phase 0 1,031/1,031, exit 0.
 
-  **Next:** Commit cleanly, then activate `.10.5.0.1.2` task-tree-first.
+  **Next:** `.10.5.0.1.2.0` is complete in the next clean commit; `.2.1` follows task-tree-first.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.0 — generate self-hosted Unicode label class**
   (DONE in this commit from clean base `0110ea40`).

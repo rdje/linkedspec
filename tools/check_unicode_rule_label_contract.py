@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import subprocess
@@ -28,6 +29,13 @@ DART_SELF_HOSTED_TEST_PATH = (
     ROOT / "dart" / "test" / "self_hosted_unicode_rule_label_test.dart"
 )
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+SELF_HOSTED_CORPUS_CASES = (
+    "spec_spec_minimal_rule",
+    "spec_spec_action_edge",
+    "spec_spec_user_function_definition",
+    "spec_spec_comment_skip",
+)
+CORPUS_ROOT = ROOT / "rust" / "linkedspec-runtime" / "tests" / "corpus"
 
 
 def fail(message: str) -> None:
@@ -71,6 +79,7 @@ def main() -> None:
         CORE_TEST_PATH,
         RUNTIME_TEST_PATH,
         DART_SELF_HOSTED_TEST_PATH,
+        *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
@@ -163,6 +172,17 @@ def main() -> None:
     self_hosted_grammar = SELF_HOSTED_GRAMMAR_PATH.read_text(
         encoding="utf-8", errors="strict"
     )
+    canonical_grammar_bytes = SELF_HOSTED_GRAMMAR_PATH.read_bytes()
+    canonical_grammar_sha256 = hashlib.sha256(canonical_grammar_bytes).hexdigest()
+    for case in SELF_HOSTED_CORPUS_CASES:
+        corpus_path = CORPUS_ROOT / case / "input.spec"
+        corpus_bytes = corpus_path.read_bytes()
+        if corpus_bytes != canonical_grammar_bytes:
+            corpus_sha256 = hashlib.sha256(corpus_bytes).hexdigest()
+            fail(
+                f"{corpus_path.relative_to(ROOT)} is stale: sha256 "
+                f"{corpus_sha256}, expected canonical {canonical_grammar_sha256}"
+            )
     expected_label_sites = {
         "rule_header": 1,
         "action_block": 2,

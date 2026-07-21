@@ -73,6 +73,17 @@ does not rewrite `is_top`. An unknown label fails at `select_entry_rule` before
 user code, and `generated_entry_selection` trace records the effective label
 and basis before the existing enter/family/exit roles.
 
+Perl ordered action handlers distinguish structural slots from action dispatch
+slots. For a same-rule sparse sequence such as action indices `0, 2` over three
+authored regexes, live and generated handlers consume structural indices
+`0, 1, 2` and run code only at `0` and `2`. The classification requires valid,
+strictly increasing same-owner dependency indices; cross-rule sequences retain
+their compiled dependency order. Standalone generated source embeds every local
+regex required by the structural walk, including repeated `AND` with only one
+sparse action. This prevents cursor-derived consuming execution from silently
+skipping an edge-less delimiter while leaving the minimal generated family plan
+unchanged.
+
 Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use
 `emit_rust_source_v2(&compiled, "path/to/input.spec")`; the generated module

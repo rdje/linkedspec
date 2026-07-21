@@ -188,9 +188,26 @@ Pair:AND
 
 Embed this matcher behind a no-regex `Top::` wrapper when it is part of a stream parser.
 The rule mode controls the ordered matching; the action code controls what value the rule
-returns. (The `\s*=\s*` separator is folded into the name slot: a bare edge-less regex slot
-in an `AND` rule is a positional anchor that is not separately captured, so attach the
-separator to a slot that owns an edge.)
+returns.
+
+Actions may be sparse; structural matching is not. Every authored regex in an
+`AND` rule remains a required, consuming slot even when that slot has no `->`
+edge. The handler walks all slots in order and runs code only at the authored
+action indices:
+
+```text
+CaptureSpan:AND
+ /A/   -> CaptureSpan[0] { start_capture_slice() }
+ /xxB/
+ /C/   -> CaptureSpan[2] { return(capture_slice()) }
+```
+
+On `AxxBC`, the middle `/xxB/` is consumed even though it has no action; the
+final action sees the span between the first and last action sites. Omitting an
+edge means "no code for this slot," not "remove this slot from the sequence."
+The same rule applies inside each `AND+` or `AND{...}` iteration. If an
+edge-less separator should contribute to a captured value directly, fold it
+into an action-owning regex or use the explicit capture-boundary helpers.
 
 Regex text does not define slot identity. Two ordered slots may deliberately use
 the same pattern:

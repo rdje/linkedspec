@@ -9,12 +9,12 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.0.1.1` — exact 12-site self-hosted Unicode labels plus
-  current lifecycle/bare-edge Dart structural execution.
-- latest_commit: this `.10.5.0.1.1` commit from clean `f356a2dd` (ahead 284 after commit).
-- active_work_unit: none; `.10.5.0.1.1` closeout/commit workflow is in flight.
-- next_action: after the clean commit, activate `FUTURE-PARITY-BACKLOG.10.5.0.1.2` task-tree-first and regenerate,
-  freshness-lock, and compose cross-runtime proof for all four `spec_spec_*` fixtures.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.0.1.2.0` — canonical self-hosted corpus freshness plus Perl
+  sparse-AND structural-slot repair across live/generated routes.
+- latest_commit: this `.10.5.0.1.2.0` commit from clean `15c97761` (ahead 285 after commit).
+- active_work_unit: none; `.10.5.0.1.2.0` closeout/commit workflow is in flight.
+- next_action: after the clean commit, activate `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` task-tree-first and add exact
+  physical-line label boundaries plus five-runtime current-grammar closeout.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -33,8 +33,8 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   case-/normalization-sensitive identity and strict UTF-8. One generated 5,991-byte literal class now pins all 806
   ranges for self-hosted consumption and is independently byte/fixture checked. `specs/spec.spec` now consumes it at
   all 12 label sites; Dart directly executes current lifecycle/bare forms. Dart's hardcoded host-`\w` parser still
-  rejects/truncates Unicode and external invalid labels pass validation. Four stale corpus inputs remain
-  `e0a1b63...`, canonical is `43cddeae...`; 105/105 does not prove current grammar. `.10.5.0.2` owns Dart scanner/
+  rejects/truncates Unicode and external invalid labels pass validation. Four `spec_spec_*` corpus inputs now equal
+  canonical `43cddeae...` bytes and are freshness-locked. `.10.5.0.2` owns Dart scanner/
   validator/artifact/selector/diagnostic/trace/loader parity before semantic code.
 - current_dart_semantic_map: staged `SpecFile`/function sidecars, `CompiledSpec`, function registry, typed ActionIR,
   portable diagnostics, generated-v2 plan, and runtime slot/result seams are reusable. Exact accepted-source map,
@@ -43,9 +43,10 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   `["A","B"]`, and privacy currently fails at the label prerequisite.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.5.0.1.1` passes RED/GREEN/omission mutation, Dart focused 93, package 279, fatal analysis,
-  primary 66x2, unchanged corpus 105/105, Perl compilation, KM 670/4,981, book/doctrines, and canonical Phase 0
-  1,031/1,031, exit 0. Semantic rollout/admission stay 6/20/73, 3/9, and 2/6.
+- current_signoff: `.10.5.0.1.2.0` passes atomic 105-case generation with no expected-output drift, sparse-AND 3,
+  duplicate-slot 12, Unicode 806/9/8/2, Rust/Dart/Julia/Lua corpus 105/105, Lua 177 on both ABIs, KM 671/4,990,
+  mdBook/doctrines, primary 66x2, and canonical Phase 0 1,031/1,031 in 648s, exit 0. Semantic governance stays
+  6/20/73 at rollout 3/9 and admission 2/6.
 - latest_bootstrap_read: 2026-07-21 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete
   codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -54,5 +55,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.5.0.1.1` verified closeout awaits its per-slice commit; four corpus
-  inputs remain intentionally unchanged for `.2`. Startup book finding `.23` stays durably queued.
+- blockers: none. in_flight_uncommitted: `.10.5.0.1.2.0` is verified and documented; only cleanup and the commit
+  workflow remain. Startup book finding `.23` stays durably queued.

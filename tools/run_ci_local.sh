@@ -113,6 +113,7 @@ require_tracked_file t/semantic_introspection_perl_admission.t
 require_tracked_file rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
+require_tracked_file t/sparse_and_action_slots_perl_regression.t
 require_tracked_file t/repeated_action_result_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs
 require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs
@@ -257,6 +258,7 @@ perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
 perl -c -Iperl t/repeated_action_result_perl_contract.t
 perl -c -Iperl t/root_rule_selection_perl_core.t
 perl -c -Iperl t/root_rule_selection_perl_routes.t
@@ -329,6 +331,9 @@ python3 tools/check_duplicate_regex_slot_identity_contract.py
 
 log "running composed Perl duplicate regex-slot identity consumer"
 PERL5LIB= prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+
+log "running Perl sparse-AND action-slot regression consumer"
+PERL5LIB= prove -Iperl t/sparse_and_action_slots_perl_regression.t
 
 log "checking backend-neutral explicit-repetition action-result contract"
 python3 tools/check_repeated_action_result_contract.py

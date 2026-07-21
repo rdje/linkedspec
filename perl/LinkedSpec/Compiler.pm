@@ -166,8 +166,33 @@ sub _dependency_slot_map_source_expression {
  my ($compiled_spec_state, $owner_label) = @_;
  my $owner_info = _call_compiler_state('compiled_spec_state_rule_info', $compiled_spec_state, $owner_label);
  return undef unless ref($owner_info) eq 'HASH' && ref($owner_info->{dependency_refs}) eq 'ARRAY';
+ my @dependency_refs = @{$owner_info->{dependency_refs}};
+ my $regexes = $owner_info->{re};
+ my $use_local_structural_slots = ref($regexes) eq 'ARRAY'
+  && @$regexes > @dependency_refs
+  && @dependency_refs > 0;
+ if ($use_local_structural_slots) {
+  my $prior_index = -1;
+  foreach my $dependency_ref (@dependency_refs) {
+   my $index = ref($dependency_ref) eq 'HASH' ? $dependency_ref->{idx} : undef;
+   if (ref($dependency_ref) ne 'HASH'
+    || !defined($dependency_ref->{label})
+    || $dependency_ref->{label} ne $owner_label
+    || !defined($index)
+    || $index !~ /\A\d+\z/
+    || $index <= $prior_index
+    || $index >= @$regexes) {
+    $use_local_structural_slots = 0;
+    last
+   }
+   $prior_index = $index;
+  }
+ }
+ if ($use_local_structural_slots) {
+  @dependency_refs = map { {label => $owner_label, idx => $_} } 0 .. $#$regexes;
+ }
  my @slot_exprs;
- foreach my $dependency_ref (@{$owner_info->{dependency_refs}}) {
+ foreach my $dependency_ref (@dependency_refs) {
   next unless ref($dependency_ref) eq 'HASH';
   my $dependency_label = $dependency_ref->{label};
   my $dependency_index = $dependency_ref->{idx};

@@ -195,9 +195,38 @@ sub _build_handler_variants {
  my $dependency_count = ref($args{dependency_refs}) eq 'ARRAY'
   ? scalar(@{$args{dependency_refs}})
   : 0;
+ my @local_action_indices;
+ my $local_structural_sequence = $dependency_count == @$acodes_ref
+  && $regex_count > $dependency_count;
+ if ($local_structural_sequence) {
+  my $prior_index = -1;
+  foreach my $dependency_ref (@{$args{dependency_refs}}) {
+   my $index = ref($dependency_ref) eq 'HASH' ? $dependency_ref->{idx} : undef;
+   if (ref($dependency_ref) ne 'HASH'
+    || !defined($dependency_ref->{label})
+    || $dependency_ref->{label} ne $label
+    || !defined($index)
+    || $index !~ /\A\d+\z/
+    || $index <= $prior_index
+    || $index >= $regex_count) {
+    $local_structural_sequence = 0;
+    last
+   }
+   push @local_action_indices, 0 + $index;
+   $prior_index = $index;
+  }
+ }
+ my %ordered_slot_args = $local_structural_sequence
+  ? (
+     required_slot_mode => 'local_structural',
+     required_slot_count => $regex_count,
+     acode_dispatch_indices => \@local_action_indices,
+    )
+  : ();
  if ($isAND && $has_acodes && @$acodes_ref > 1 && $dependency_count > 1) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
-   %ir_args, acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
+   %ir_args, %ordered_slot_args,
+   acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
   );
   $handlers{AND_ACODE} = $emit_handler->($ir_v) if defined $ir_v;
  }
@@ -233,7 +262,7 @@ sub _build_handler_variants {
  }
  if ($isREP_AND && $has_acodes) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_rep_and_acode_variant(
-   %ir_args, acodes_ref => $acodes_ref,
+   %ir_args, %ordered_slot_args, acodes_ref => $acodes_ref,
   );
   $handlers{REP_AND_ACODE} = $emit_handler->($ir_v) if defined $ir_v;
  }

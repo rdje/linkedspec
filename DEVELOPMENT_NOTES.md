@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.1.2.0` — ordered structure and action dispatch are separate
+  sequences): An `AND` rule's regexes are all required structural slots; action edges are a sparse projection over
+  those slots. Driving a consuming ordered handler from compact action count worked only while every regex owned an
+  action. The rule-local cursor migration made the latent mismatch observable: capture fixtures with regexes
+  `A`, `xxB`, `C` and actions at `0`, `2` consumed `A`, then tried `C` at cursor 1 and returned null.
+
+  The repair is deliberately narrower than "always use owner regexes." `SpecEntry` selects local-structural mode
+  only when every dependency is same-owner, valid, and strictly increasing and the regex count exceeds the action
+  count. The handler traverses all local indices but dispatches at the preserved authored indices. Cross-target
+  dependency sequences retain their compiled dependency route. `Compiler` must also expand the emitted dependency
+  slot map for one-or-more sparse local actions; otherwise live repeated `AND{1}` succeeds through descriptor
+  fallback while standalone generated source sees an incomplete map and fails at cursor zero.
+
+  Oracle output is evidence, not an instruction to accept drift. The first atomic regeneration changed the two
+  capture expectations to null, so LinkedSpec toolbox probes established the descriptor/source/trace cause before
+  any fixture was accepted. After the repair, a second complete 105-case generation restored both governed values
+  and left only the intended four canonical grammar copies changed. The freshness checker now byte-compares those
+  inputs to `specs/spec.spec`, making a green corpus incapable of silently proving an old self-hosted grammar.
+
+  Focused proof passes sparse-AND 3 and duplicate-slot 12. Complete corpus execution is 105/105 on Rust, Dart,
+  Julia, and PUC Lua; the Lua local gate is 177/177 on both PUC Lua and LuaJIT. Unicode proof remains 806/9/8/2,
+  and the Knowledge Map grows to 671 facts / 4,990 keys. Canonical CI passes the same focused regression,
+  semantic 6/20/73, Rust admission in 79.65 seconds, primary 66x2, and Phase 0 1,031/1,031 in 648 seconds, exit 0.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0.1.1` — structural regex bridges should derive pinned atoms from the
   authored pattern): Repeating the 806-range class in Dart source would create a second generated-data owner. The
   bounded bridge instead extracts the exact class from each recognized `spec.spec` pattern, compiles only the

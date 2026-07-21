@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.1.2.0 — refresh self-hosted corpus and repair sparse AND slots
+
+The four `spec_spec_*` oracle inputs are now byte-identical copies of canonical `specs/spec.spec` at SHA-256
+`43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce`. The Unicode-label contract checker reads
+each fixture as bytes and reports both actual and canonical hashes on drift. One authoritative
+`ORACLE_TIMEOUT=30` regeneration completed all 105 cases without changing any checked-in expected output.
+
+That atomic regeneration exposed an independent Perl regression in the two governed capture fixtures. Consuming
+`and_acode_seq` used the compact action-dependency count and therefore matched action slots `0, 2` as a two-step
+sequence, skipping the edge-less middle regex at structural slot `1`. Perl now recognizes valid same-owner,
+strictly increasing sparse action dependencies, walks every local structural regex in authored order, and
+dispatches code only at the authored action indices. Standalone generated source embeds the complete structural
+slot map; repeated `AND` with one sparse action is covered as well. Cross-target dependency sequencing and
+duplicate-pattern slot identity remain unchanged.
+
+The new focused regression passes 3 subtests across both governed capture fixtures and the one-action repeated
+case; the duplicate-slot contract passes 12 tests. Rust, Dart, and Julia each execute the complete refreshed
+manifest at 105/105. The dual-ABI Lua local gate passes 177 assertions on PUC Lua and LuaJIT and the complete PUC
+corpus at 105/105. Unicode freshness passes 806 ranges / 9 positive / 8 negative / 2 distinct pairs. The Knowledge
+Map now records the sparse structural-slot invariant and the self-hosted generator boundary; the mdBook explains
+sparse action semantics for users and generated-handler maintainers. Knowledge Map 671/4,990, mdBook,
+memory/task metadata, all four doctrines, and whitespace pass. Canonical CI passes semantic 6/20/73, Rust
+admission in 79.65 seconds, primary 66/66 twice, the focused sparse regression, and Phase 0 1,031/1,031 in 648
+seconds, exit 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0.1.1 — consume Unicode labels in self-hosted grammar
 
 Canonical `specs/spec.spec` now consumes the generated Unicode 17 literal class at exactly 12 rule-label sites:
