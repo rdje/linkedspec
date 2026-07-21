@@ -229,7 +229,9 @@ immutable query, and typed observations are new adapter work. `.10.4.0.1` repair
 semantic toolbox state (6/20/65, rollout 2+7, admission 1+5, Perl 12-role ownership). ADR `0051` and `.10.4.0.2`
 resolve the former `Töp` prerequisite by pinning Unicode 17.0.0 `XID_Continue` labels with exact case- and
 normalization-sensitive scalar identity, then implementing that contract across all Rust source/artifact/runtime
-identity routes. Rust semantic construction may proceed, but Rust is not admitted by this prerequisite. The Dart,
+identity routes. `.10.4.1-.10.4.3` now retain the strict copied-source/compiled-or-failed foundation plus exact
+private static and call/staged/generated projections; the call target deep-equals 22 records / 25 relations without
+public query or promotion. Rust is still not admitted. The Dart,
 Julia, and Lua semantic backend lanes must align their label parsers before their v1 fixture admission; the other
 backend work and MCP remain `.10.5-.10.10`.
 

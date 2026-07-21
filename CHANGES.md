@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.3 — project Rust call and staged semantics
+
+`SemanticIndex` now privately composes the compiled function registry, typed ActionIR, normalized function-body
+sidecars, immutable authored-source map, and existing generated-v2 plan into clone-safe v1 function, helper, call,
+binding, staged-artifact, generated-artifact, decision, and explanation data. Definition order and call order are
+source preorder; user functions resolve before governed helpers; literal/binding/function/helper shapes strengthen
+only from typed authority, while unknown expressions remain conservative.
+
+The exact calls fixture deep-equals all 22 records and 25 relations. Function payload, parse job, and result remain
+separate with canonical `consumes`, `produces`, `lowered_from`, and `staged_by` directions. Generated provenance
+reuses the plan already owned by source emission and retains no generated implementation source. Source correlation
+uses the exact authored brace interior only to locate typed calls, converts scalar spans to bytes once, and keeps an
+interleaved function shell from becoming rule material.
+
+Four new regression tests lock full-object equality, preorder/resolution/staging, Unicode excerpts/columns, and
+function-shell/host-leak denial. Complete Rust signoff passes core 193, runtime units 147, integration 197, the exact
+105-fixture oracle, full generated manifest, all packages, and primary 66x2. Library Clippy exits 0 with the existing
+repository warning baseline. Semantic governance remains 6/20/65 at rollout 2/9 and admission 1/6; capabilities,
+query, runtime observation, and Rust admission remain `.10.4.4-.10.4.6`.
+
+Knowledge Map is 666 facts / 4,923 keys; mdBook, memory, task metadata, formatting, whitespace, and all four
+doctrines pass. Canonical local CI passes primary 66x2 plus Phase 0 1,031/1,031 in 619 seconds, exit 0. The generated
+3.0 GiB Rust target, 12 MiB book, and Python cache are removed before commit.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.2 — add Rust semantic static projection
 
 `SemanticIndex` now privately retains a clone-safe plain-data static v1 projection built after its immutable

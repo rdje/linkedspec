@@ -3,8 +3,9 @@
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
 admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
-consumer. Rust now has two private implementation layers: an opaque strict-source, exact-coordinate,
-compiled-or-failed foundation and an exact clone-safe static v1 projection, without public query or admission yet.
+consumer. Rust now has three private implementation layers: an opaque strict-source, exact-coordinate,
+compiled-or-failed foundation, an exact clone-safe static v1 projection, and an exact call/staged/generated
+projection. Rust still has no public query or admission.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -16,7 +17,7 @@ The distinction matters:
 - `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
 - `t/semantic_introspection_perl_admission.t` composes every required Perl path once; and
 - `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority and exact private
-  static projection needed by later calls/query leaves; and
+  static plus call/staged/generated projections needed by the later query leaf; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
@@ -60,9 +61,9 @@ the source digest. The custom debug representation redacts logical identity at `
 
 Construction parses and compiles the source but never invokes the resulting target parser or target lifecycle and
 action code. It does not capture runtime observations or enable trace. The opaque index now retains exact private
-static v1 records/relations plus normalized failure evidence, but exposes no public record or query method yet.
-Calls/staging, query, runtime observation, and admission remain later Rust leaves. Therefore the global rollout and
-native-admission ledgers remain 2/9 and 1/6.
+static v1 records/relations, normalized failure evidence, and the 22-record/25-relation call/binding/staged/
+generated target, but exposes no public record or query method yet. Query, runtime observation, and admission
+remain later Rust leaves. Therefore the global rollout and native-admission ledgers remain 2/9 and 1/6.
 
 ## Current Perl construction and query surface
 
@@ -206,11 +207,11 @@ private projection normalizes the runtime `bare_edge_target_undefined` failure t
 explanation step. Returned copies admit only plain data and booleans; coderefs, compiled regex objects, backend
 AST/IR, object identities, and paths are rejected at the clone boundary.
 
-Each backend's focused projection test materializes internal source keys and deep-compares the complete graph,
+Each backend's focused projection tests materialize internal source keys and deep-compare the complete graph,
 Unicode privacy at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static
 half, against the neutral oracle. Perl's public evaluator owns query-time source redaction, pages, traversal,
 budgets, and costs today; Rust's equivalent remains `.10.4.4`. The composed Perl admission consumer is described
-with the executable oracle below; Rust calls/staging projection is the next dependency.
+with the executable oracle below; Rust now has the same private call/staging dependency, and `.10.4.4` owns query.
 
 ## Current private call, staging, and generated projection
 
@@ -229,8 +230,8 @@ Done:
  /x/
 ```
 
-The private Perl projection now matches all 22 neutral records and 25 relations for this source. Definition order
-is `function:normalize`, `rule:Top`, `rule:Done`. Typed ActionIR traversal records `trim` in the function body,
+The private Perl and Rust projections now each match all 22 neutral records and 25 relations for this source.
+Definition order is `function:normalize`, `rule:Top`, `rule:Done`. Typed ActionIR traversal records `trim` in the function body,
 then outer `normalize`, nested `match_text`, and the later `return` in the action block. The assignment creates a
 mutable action binding; `normalize` writes it, and `return` reads it. Exact registered function resolution carries
 a decision and two ordered explanation steps instead of exposing the registry object.
@@ -249,21 +250,22 @@ payload <-consumed by- parse_job -produces-> result
                          result -staged_by-> parse_job
 ```
 
-The separate generated artifact reports `linkedspec-generated-source-v2`, format 2, family `default`. Compiler
-and semantic projector call the same `LinkedSpec::GeneratedSource` identity and handler-family owners, so the
-semantic layer neither duplicates the family classifier nor generates implementation text.
+The separate generated artifact reports `linkedspec-generated-source-v2`, format 2, family `default`. Each
+compiler and semantic projector share their backend's existing generated-plan identity and handler-family owner,
+so the semantic layer neither duplicates the family classifier nor generates implementation text.
 
-Source coordinates have an important split. Function registry `source_span`/`body_span` fields and typed ActionIR
-local spans count decoded characters. Only the final source-reference boundary converts them to strict UTF-8 byte
-offsets and one-based Unicode-scalar columns. A focused `# préface` case locks exact call excerpts and columns so
-ASCII cannot hide byte/character confusion. The original-source rule scanner also masks descriptor-owned top-level
-function ranges while preserving newlines, matching the compiler's function-blanked rule input; an interleaved
-function therefore cannot become a synthetic bare edge.
+Source coordinates have an important split. Function sidecar `source_span`/`body_span` fields count decoded
+characters, while the typed call trees own semantic call structure. Only the final source-reference boundary
+converts scalar spans to strict UTF-8 byte offsets and one-based Unicode-scalar columns. A focused `# préface`
+case locks exact call excerpts and columns so ASCII cannot hide byte/character confusion. Original-source
+correlation also treats top-level function shells as definitions, not rule material; an interleaved function
+therefore cannot become a synthetic bare edge.
 
-These projection mechanics remain internal implementation evidence, while their normalized records are now
-callable through the public query surface. Returned answers contain only canonical JSON data and booleans: no
-descriptor coderef/compiled regex, raw function record, ActionIR layout, generated source, object identity, or
-path. Runtime observation/routes are implemented by `.10.3.5`; composed admission closes through `.10.3.6`.
+These projection mechanics remain internal implementation evidence. Perl exposes the normalized records through
+its public query surface; Rust retains them privately until `.10.4.4`. Returned or retained values contain only
+canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
+generated source, object identity, or path. Perl runtime observation/routes and admission are implemented by
+`.10.3.5-.10.3.6`; Rust runtime observation and admission remain `.10.4.5-.10.4.6`.
 
 ## Why this is separate from the descriptor
 
@@ -315,7 +317,11 @@ state. Leaf `.10.4.2` now composes that source with typed `CompiledSpec` root/fa
 lifecycle authority into private plain-data static records and relations. It deliberately normalizes Rust's
 `bare_edge_target_undefined` / `regex_slot_identity_invalid` seams to the neutral
 `unknown_rule_reference`/`compile` evidence and deep-equals graph, both privacy ceilings, failure, and the runtime
-static half. Public capabilities/query remain absent.
+static half. Leaf `.10.4.3` then composes compiled function registry data, typed ActionIR, normalized staged
+sidecars, exact authored-source correlation, and the existing generated-v2 plan into the corrected 22-record/
+25-relation call target. Definition/call preorder, helper and exact function resolution, conservative shapes,
+bindings, Unicode source references, function-shell isolation, staged directions, and generated provenance now
+deep-equal the neutral oracle. Public capabilities/query remain absent.
 
 Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
 currently emit textual trace decisions only; no typed semantic observer or query object exists. The planned runtime

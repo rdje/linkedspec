@@ -1,8 +1,8 @@
 //! Clone-safe static `linkedspec-semantic-model-v1` lowering.
 
 use super::{
-    SemanticEntrySelection, SemanticIndexError, SemanticSnapshot, SemanticSourceMap,
-    SemanticSourceSpan,
+    SemanticEntrySelection, SemanticGeneratedPlanInput, SemanticIndexError, SemanticSnapshot,
+    SemanticSourceMap, SemanticSourceSpan, call_projection,
 };
 use linkedspec_core::ast::{BodyElement, BodyElementKind, RuleMode, SpecFile};
 use linkedspec_core::error::PortableDiagnostic;
@@ -152,6 +152,7 @@ pub(super) struct BuildInput<'a> {
     pub(super) compiled: Option<&'a CompiledSpec>,
     pub(super) diagnostic: Option<&'a PortableDiagnostic>,
     pub(super) entry_selection: Option<&'a SemanticEntrySelection>,
+    pub(super) generated_plan: Option<&'a SemanticGeneratedPlanInput>,
 }
 
 pub(super) fn build(input: BuildInput<'_>) -> Result<SemanticStaticProjection, SemanticIndexError> {
@@ -168,6 +169,7 @@ pub(super) fn build(input: BuildInput<'_>) -> Result<SemanticStaticProjection, S
             parsed,
             compiled,
             input.entry_selection,
+            input.generated_plan,
         )?
     } else {
         build_failed(&context, input.snapshot, input.parsed, input.diagnostic)?
@@ -189,6 +191,7 @@ fn build_compiled(
     parsed: &SpecFile,
     compiled: &CompiledSpec,
     entry_selection: Option<&SemanticEntrySelection>,
+    generated_plan: Option<&SemanticGeneratedPlanInput>,
 ) -> Result<SemanticStaticProjection, SemanticIndexError> {
     let scans = scan_rules(context.source_text, parsed)?;
     let scans_by_label = scans
@@ -432,6 +435,18 @@ fn build_compiled(
         None,
         Vec::new(),
     ));
+
+    call_projection::extend(call_projection::BuildInput {
+        source_text: context.source_text,
+        source_map: context.source_map,
+        logical_name: context.logical_name,
+        content_digest: context.content_digest,
+        parsed,
+        compiled,
+        entry_selection,
+        generated_plan,
+        projection: &mut projection,
+    })?;
 
     if parsed.functions.is_empty()
         && compiled.rules.len() > 1
@@ -1193,7 +1208,7 @@ fn common_shape(mut shapes: impl Iterator<Item = Value>) -> Value {
     }
 }
 
-fn value_shape(kind: &str) -> Value {
+pub(super) fn value_shape(kind: &str) -> Value {
     json!({
         "kind": kind,
         "element": null,
@@ -1279,7 +1294,7 @@ fn source_record() -> SemanticRecord {
     )
 }
 
-fn record(
+pub(super) fn record(
     id: &str,
     kind: &str,
     name: Option<String>,
@@ -1300,7 +1315,7 @@ fn record(
     }
 }
 
-fn relation(
+pub(super) fn relation(
     kind: &str,
     from_id: &str,
     to_id: &str,
@@ -1426,6 +1441,9 @@ mod tests {
         include_bytes!("../../../../capability_conformance/semantic_introspection/failed.spec");
     const RUNTIME: &[u8] =
         include_bytes!("../../../../capability_conformance/semantic_introspection/runtime.spec");
+    const CALLS: &[u8] = include_bytes!(
+        "../../../../capability_conformance/semantic_introspection/calls_and_staging.spec"
+    );
 
     fn projection(source: &[u8], name: &str, detail: SemanticSourceDetail) -> Value {
         let index = SemanticIndex::from_utf8(source, SemanticIndexOptions::new(name, detail))
@@ -1539,6 +1557,122 @@ mod tests {
         ));
         let wanted = materialize_sources(expected("failed"));
         assert_eq!(actual, wanted);
+    }
+
+    #[test]
+    fn calls_and_staging_projection_deep_equals_neutral_model() {
+        let actual = materialize_sources(projection(
+            CALLS,
+            "calls_and_staging.spec",
+            SemanticSourceDetail::Text,
+        ));
+        let wanted = materialize_sources(expected("calls"));
+        assert_eq!(actual, wanted);
+    }
+
+    #[test]
+    fn calls_preserve_typed_preorder_resolution_and_staged_directions() {
+        let actual = projection(CALLS, "calls_and_staging.spec", SemanticSourceDetail::Text);
+        let calls = actual["records"]
+            .as_array()
+            .expect("records")
+            .iter()
+            .filter(|record| record["kind"] == "call")
+            .map(|record| {
+                (
+                    record["name"].as_str().expect("call name"),
+                    record["facts"]["resolution_kind"]
+                        .as_str()
+                        .expect("resolution kind"),
+                    record["facts"]["return_shape"]["kind"]
+                        .as_str()
+                        .expect("return kind"),
+                )
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(
+            calls,
+            vec![
+                ("trim", "helper", "string"),
+                ("normalize", "user_function", "string"),
+                ("match_text", "helper", "string"),
+                ("return", "helper", "string"),
+            ]
+        );
+        assert_eq!(
+            actual["records"][0]["facts"]["definition_order"],
+            json!(["function:normalize", "rule:Top", "rule:Done"])
+        );
+        let relation_kinds = actual["relations"]
+            .as_array()
+            .expect("relations")
+            .iter()
+            .filter_map(|relation| relation["kind"].as_str())
+            .collect::<BTreeSet<_>>();
+        for kind in ["consumes", "produces", "lowered_from", "staged_by"] {
+            assert!(relation_kinds.contains(kind), "missing {kind}");
+        }
+    }
+
+    #[test]
+    fn call_source_correlation_converts_unicode_scalars_once() {
+        let source = b"# pr\xC3\xA9face\nfn clean(value) { return(trim(value)) }\n\nTop::\n /x/ -> Done { return(clean(match_text())) }\n\nDone:\n /x/\n";
+        let actual = projection(source, "unicode_calls.spec", SemanticSourceDetail::Text);
+        let source_refs = actual["source_refs"].as_object().expect("source refs");
+        let calls = actual["records"]
+            .as_array()
+            .expect("records")
+            .iter()
+            .filter(|record| record["kind"] == "call")
+            .collect::<Vec<_>>();
+        let excerpts = calls
+            .iter()
+            .map(|record| {
+                source_refs[record["source"].as_str().expect("source key")]["excerpt"]
+                    .as_str()
+                    .expect("excerpt")
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(
+            excerpts,
+            vec![
+                "trim(value)",
+                "return(clean(match_text()))",
+                "clean(match_text())",
+                "match_text()"
+            ]
+        );
+        let columns = calls
+            .iter()
+            .map(|record| {
+                source_refs[record["source"].as_str().expect("source key")]["span"]["start_column"]
+                    .as_u64()
+                    .expect("start column")
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(columns, vec![26, 16, 23, 29]);
+    }
+
+    #[test]
+    fn interleaved_function_shell_remains_one_definition_not_a_rule_member() {
+        let source = b"Top::\n /x/ -> Done { return(clean(match_text())) }\n\nfn clean(value) { return(trim(value)) }\n\nDone:\n /x/\n";
+        let actual = projection(source, "interleaved_calls.spec", SemanticSourceDetail::Text);
+        assert_eq!(
+            actual["records"][0]["facts"]["definition_order"],
+            json!(["rule:Top", "function:clean", "rule:Done"])
+        );
+        let rule_ids = actual["records"]
+            .as_array()
+            .expect("records")
+            .iter()
+            .filter(|record| record["kind"] == "rule")
+            .map(|record| record["id"].as_str().expect("rule id"))
+            .collect::<Vec<_>>();
+        assert_eq!(rule_ids, vec!["rule:Top", "rule:Done"]);
+        let encoded = serde_json::to_string(&actual).expect("serialize projection");
+        assert!(!encoded.contains("body_ast"));
+        assert!(!encoded.contains("body_source"));
+        assert!(!encoded.contains("GENERATED_PLAN"));
     }
 
     #[test]

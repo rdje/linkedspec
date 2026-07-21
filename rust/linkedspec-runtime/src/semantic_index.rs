@@ -1,12 +1,14 @@
-//! Opaque source/outcome authority and normalized static semantic projection.
+//! Opaque source/outcome authority and normalized semantic projection.
 //!
 //! `FUTURE-PARITY-BACKLOG.10.4.1` copies one caller-supplied source, builds exact
 //! strict-UTF-8 byte/scalar coordinates, and retains compiled-or-failed authority.
-//! `.10.4.2` additionally lowers the static rule graph or failed outcome into
-//! clone-safe `linkedspec-semantic-model-v1` records and relations. The normalized
-//! projection remains crate-private until later leaves add call/staged facts and a
-//! ceiling-enforcing query surface. Construction never executes the target spec.
+//! `.10.4.2` lowers the static rule graph or failed outcome, and `.10.4.3` composes
+//! typed calls, bindings, staged artifacts, and generated-plan provenance. The
+//! clone-safe `linkedspec-semantic-model-v1` projection remains crate-private until
+//! a later leaf adds the ceiling-enforcing query surface. Construction never
+//! executes the target spec.
 
+mod call_projection;
 mod static_projection;
 
 use crate::source_emitter::{
@@ -435,6 +437,7 @@ impl SemanticIndex {
             compiled: compiled.as_ref(),
             diagnostic: compilation_diagnostic.as_ref(),
             entry_selection: entry_selection.as_ref(),
+            generated_plan: generated_plan.as_ref(),
         })?;
 
         Ok(Self {

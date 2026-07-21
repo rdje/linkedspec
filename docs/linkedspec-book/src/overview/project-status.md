@@ -531,9 +531,10 @@ Three backbone items tracked major structural modernization — all done:
   identity, and complete Rust source/artifact/runtime route proof. Completed source/outcome `.10.4.1` now provides
   copied decoded/strict-UTF-8 construction, exact byte/scalar mapping, source ceilings, opaque immutable
   compiled-or-failed state, entry identity, and shared generated-v2 plan input. Completed static projection
-  `.10.4.2` now adds exact private graph/privacy/failure/runtime-static records and relations with deliberate Rust
-  failure normalization and no public query or promotion. Calls/staging `.10.4.3` follows; rollout/admission remain
-  2/9 and 1/6. Governance follow-up `.22` tracks a stable home for immutable
+  `.10.4.2` adds exact private graph/privacy/failure/runtime-static records and relations with deliberate Rust
+  failure normalization. `.10.4.3` now adds exact source-preorder calls, bindings, staged payload/job/result
+  directions, and generated provenance at 22 records / 25 relations. Public query/promotion remain absent;
+  `.10.4.4` follows, and rollout/admission remain 2/9 and 1/6. Governance follow-up `.22` tracks a stable home for immutable
   cross-contract status markers after repeated active-row rewrites required avoidable canonical restarts.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use

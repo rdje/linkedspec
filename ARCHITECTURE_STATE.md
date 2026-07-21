@@ -42,9 +42,11 @@ This document is the current high-level technical reading of the project shape. 
   runtime observation/routes and one exact 12-role admission are now complete through `.10.3.5-.10.3.6`. Rust
   source/outcome `.10.4.1` owns copied strict source, exact scalar coordinates, compiled-or-failed authority, and
   generated-v2 plan identity. Rust static `.10.4.2` composes that source with typed compiled root/family/cursor/
-  repetition/slot/edge/lifecycle state into exact clone-safe private graph/privacy/failure/runtime-static v1 data,
-  including deliberate unknown-target failure normalization. It exposes no query and does not advance rollout or
-  admission; calls/staging `.10.4.3` is next.
+  repetition/slot/edge/lifecycle state into exact clone-safe private graph/privacy/failure/runtime-static v1 data.
+  Rust calls `.10.4.3` further composes compiled functions, typed ActionIR, staged sidecars, authored-source
+  correlation, and the shared generated plan into exact call/binding/staged/generated facts at 22 records and 25
+  relations. The projection remains private and does not advance rollout or admission; immutable query `.10.4.4`
+  is next.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

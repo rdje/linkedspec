@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.3` — semantic call structure and source location need different
+  authorities): Rust's compiled function registry and ActionIR already own which expressions are calls, their
+  nesting, bindings, and resolution inputs. They do not retain one universal original-source range, while the
+  parser-normalized body text is not a byte-for-byte source oracle. The projector therefore traverses typed trees
+  for meaning and scans only each exact authored brace interior to correlate that meaning with a source range.
+  This prevents formatting normalization from inventing semantics while preserving exact excerpts and columns.
+
+  Function sidecar spans are decoded-scalar offsets. The immutable source mapper performs the single scalar-to-
+  UTF-8-byte conversion at the source-reference boundary; the multibyte-prefix regression proves the conversion is
+  neither skipped nor applied twice. Function shells are located as the exact source occurrence containing their
+  staged body span, so duplicate-looking source and interleaved definitions remain stable definitions rather than
+  synthetic rule members.
+
+  Shape inference is deliberately a small fixed point over typed literals, parameters/bindings, registered
+  functions, and the semantic helper vocabulary used by the frozen fixture. Unknown expressions stay `unknown`.
+  Generated provenance similarly reuses `SemanticGeneratedPlanInput`; the projector never parses generated code or
+  reclassifies a rule family. Four exact regressions plus all nine static-projection tests lock 22 records / 25
+  relations, definition/call preorder, helper/function resolution, staging directions, Unicode positions, and
+  clone-safe host-leak denial without exposing a public query.
+
+  Complete Rust proof passes core 193, runtime 147, integration 197, exact 105, full generated manifest, all
+  packages, and primary 66x2. Normal library Clippy exits 0 with only the existing repository warning baseline;
+  semantic governance stays 6/20/65 at rollout 2/9 and admission 1/6. KM is 666/4,923; mdBook/memory/four
+  doctrines/task/format/diff pass; canonical primary 66x2 plus Phase 0 1,031/1,031 passes in 619 seconds. Generated
+  3.0 GiB Rust target, 12 MiB book, and Python cache are removed before commit.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.2` — static semantics are a normalized private projection, not
   serialized compiler state): Rust already had every static meaning, but no single owner had both exact source
   evidence and compiled topology. The projector therefore correlates parsed authored lines against the immutable

@@ -817,10 +817,10 @@ content migration exists yet.
   Rust semantic source/outcome foundation `.10.4.1` now adds opaque `SemanticIndex::from_source` / `from_utf8`
   construction, strict canonical byte/scalar mapping, immutable source ceilings, compiled-or-failed authority,
   exact entry identity, and the shared generated-v2 plan without target execution, path reads, or host-IR
-  exposure. Static leaf `.10.4.2` now privately retains exact plain-data graph/privacy/failure/runtime-static v1
-  records and relations, including deliberate normalization of both Rust unknown-target failure seams. No public
-  capabilities/query or admission is claimed; calls/staging `.10.4.3` follows and rollout/admission remain 2/9
-  and 1/6.
+  exposure. Static leaf `.10.4.2` privately retains exact plain-data graph/privacy/failure/runtime-static v1
+  facts. Calls leaf `.10.4.3` now composes typed ActionIR, function sidecars, authored-source correlation, and the
+  shared generated-v2 plan into the corrected 22-record/25-relation call, binding, staging, and provenance target.
+  No capabilities/query or admission is claimed; `.10.4.4` follows and rollout/admission remain 2/9 and 1/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
