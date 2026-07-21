@@ -10,11 +10,10 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.4.0.2` — pinned Unicode rule labels are signoff-complete.
-- latest_commit: `c234d993` — `.10.4.0.1 - guard semantic toolbox state` (ahead: 274; `.0.2` commit pending).
-- active_work_unit: `FUTURE-PARITY-BACKLOG.10.4.0.2` — complete, verified, and awaiting its clean commit boundary.
-- next_action: commit `.10.4.0.2`, clear/verify the brief and clean tree, then activate Rust semantic source/outcome
-  foundation `.10.4.1` task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.4.1` — Rust semantic source/outcome foundation is complete.
+- latest_commit: this commit — `.10.4.1 - add Rust semantic source foundation` (ahead: 276 after commit).
+- active_work_unit: none; `.10.4.1` is signoff-complete and no successor is activated across its dirty boundary.
+- next_action: after the clean `.10.4.1` commit, activate static Rust v1 projection `.10.4.2` task-tree-first.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 65 rejected mutations. Static/generated facts
@@ -31,8 +30,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   compatibility state, not the semantic wire schema. TOOLBOX proof shows native Perl coderef/compiled-regex values
   and direct JSON failure; backend AST/IR/object identity is forbidden from semantic responses.
 - current_rust_authority_map: parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
-  generated-v2 owners compose stable facts. Ordinary source metadata is line-only; exact spans need a new mapper.
-  Direct/generated executors have parallel slot/result seams but only text trace, not typed semantic observation.
+  generated-v2 owners compose stable facts. `.10.4.1` now privately retains copied strict source, exact byte/scalar
+  mapping, parsed/validated/compiled-or-failed state, entry identity, and shared plan input behind opaque clone-safe
+  accessors. V1 records/query remain absent; direct/generated runtimes still lack typed semantic observation.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
   case-/normalization-sensitive identity and strict UTF-8. Generated Rust parsing/validation/routes are complete;
   Dart/Julia/Lua inherit alignment before their semantic admissions. No semantic rollout/admission promotion.
@@ -40,9 +40,9 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   diagnostic/typed observation owners, matches all 20 answers, never reads a path, and query never executes.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.4.0.2` contract 806/9/8/2, focused Rust 5+3, complete Rust core 193/runtime 138/integration
-  197/exact 105/full manifest/primary 66x2; KM 661/4,887; mdBook/four doctrines; canonical primary 66x2 and Phase 0
-  1,031/1,031 in 636 seconds, exit 0. External 2.5 GiB Cargo target/book/cache removed; rollout remains 2/9 + 1/6.
+- current_signoff: `.10.4.1` focused 6; complete Rust core 193/runtime 138/integration 197/exact 105/full manifest/
+  all packages/primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 663/4,900; canonical primary 66x2 and Phase 0
+  1,031/1,031 in 607 seconds, exit 0. Rust targets/book/caches removed; 93 GiB free versus 27 GiB at cleanup start.
 - latest_bootstrap_read: 2026-07-21 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
   task, Knowledge Map, Toolbox, ADRs `0012`-`0016`, `0022`/`0023`, `0037`, `0042`, `0044`, `0047`-`0050`,
   descriptor/compiled/ActionIR/diagnostic/trace/generated/API authorities, ADR `0051`, and public precedents read.
@@ -52,6 +52,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
-  parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: completed `.10.4.0.2` source/tests/contracts/docs staged from clean
-  `c234d993`; all proof consumed and generated artifacts removed; commit/brief cleanup is the only remaining step.
+  marker-anchor structural repair `.22`; parenthesis-free conditions; lexical codeblock capture only if justified.
+- blockers: none. in_flight_uncommitted: none after this commit; no background verification remains to consume.

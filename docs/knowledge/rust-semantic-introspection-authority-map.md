@@ -1,6 +1,6 @@
 ---
 id: rust-semantic-introspection-authority-map
-title: Rust semantic introspection composes typed compiler/runtime owners and needs new source and observation seams
+title: Rust semantic introspection composes a source foundation with typed compiler/runtime owners and still needs an observation seam
 answers:
   - "which Rust authorities build the semantic index"
   - "can Rust parse the semantic privacy fixture Töp"
@@ -12,11 +12,12 @@ answers:
   - "can Rust generated metadata reconstruct a semantic index"
   - "can CompiledSpec be serialized without host state"
   - "why is TOOLBOX semantic introspection output stale"
+  - "does Rust now have a semantic source map"
 date: 2026-07-21
 status: current
 tags: [rust, semantic-introspection, source-map, unicode, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.0.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-core/src/parser.rs; rust/linkedspec-runtime/src/engine.rs
-reverify: "python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test --test unicode_rule_label_contract; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.1; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/engine.rs
+reverify: "python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
 ---
 
 Rust semantic introspection must compose several existing typed owners. `parse_spec_with_user_functions` owns the
@@ -28,7 +29,7 @@ generated-source-v2 artifact adds exact ordered `{label,family}` plan identity a
 but it neither retains accepted authored source nor constitutes a semantic snapshot. Strict spec loaders own file
 decoding/identity only; a semantic constructor must still take caller logical identity and never infer a path.
 
-Exact source evidence needs a new immutable mapper over the accepted `&str` plus canonical UTF-8 bytes. Ordinary
+Exact source evidence uses the immutable `.10.4.1` mapper over accepted `&str` plus canonical UTF-8 bytes. Ordinary
 rule headers and body members retain only one-based lines, and compiled `CodeBlock`/`Expr` nodes have no general
 source spans. Function extraction is richer: staged function sidecars retain character-offset source/body spans,
 payload/job/result policy, and typed body AST. The mapper/correlator must convert final references to zero-based
@@ -50,12 +51,15 @@ case- and normalization-sensitive scalar identity. Rust source, validator, compi
 selector, loader, and trace routes preserve `Töp` exactly. `.10.4.1` remains dependent on the clean completion of
 that prerequisite. See [[unicode-rule-label-contract]].
 
-There is no current `SemanticIndex`, semantic query evaluator, or typed semantic observation sink in Rust. Direct
-and generated executors nevertheless have parallel authoritative seams: after structural slot identity is checked,
-both emit `regex_slot_selected` trace decisions with executing rule, target rule, authored regex index, and cursor;
-their rule wrappers own final typed result and final cursor. A future optional invocation-local semantic sink can
-attach there, separately from buffered text trace and `RuntimeDiagnosticOutputSink`, and a post-execution builder
-can derive a new immutable snapshot without query-side execution.
+Rust now has an opaque `SemanticIndex` source/outcome foundation but no static v1 projection, query evaluator, or
+typed semantic observation sink. Its strict source constructors copy caller text/bytes, retain private
+parsed/validated/compiled-or-failed authority and the shared generated-v2 plan, enforce a source ceiling, and
+expose only clone-safe foundation metadata/spans/excerpts/diagnostics. Direct and generated executors nevertheless
+have parallel authoritative runtime seams: after structural slot identity is checked, both emit
+`regex_slot_selected` trace decisions with executing rule, target rule, authored regex index, and cursor; their
+rule wrappers own final typed result and final cursor. A future optional invocation-local semantic sink can attach
+there, separately from buffered text trace and `RuntimeDiagnosticOutputSink`, and a post-execution builder can
+derive a new immutable snapshot without query-side execution. See [[rust-semantic-index-source-foundation]].
 
 During this audit, `TOOLBOX.md` §4.9 still advertised 57 rejected mutations, rollout 1+8, and pre-admission Perl
 state even though the executable checker reports 65, rollout 2+7, and admission 1+5. The checker guards contract,

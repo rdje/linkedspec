@@ -15,6 +15,7 @@ pub mod engine;
 pub mod helpers;
 pub mod primary_cli;
 pub mod runtime;
+pub mod semantic_index;
 pub mod source_emitter;
 pub mod spec_loader;
 pub mod spec_parser;

@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.1 — add Rust semantic source/outcome foundation
+
+`linkedspec-runtime` now exposes an opaque `SemanticIndex` foundation constructed from copied decoded text or
+strict UTF-8 bytes plus caller logical identity and an immutable source-detail ceiling. Its private source mapper
+uses exact zero-based half-open byte offsets and one-based line/Unicode-scalar columns, rejects mid-scalar ranges,
+and preserves canonical bytes for ceiling-controlled SHA-256 identity and text excerpts. Constructors reject
+malformed bytes and invalid options before a snapshot exists and never accept or infer a filesystem path.
+
+Successful snapshots retain private parsed, validated, compiled, effective-entry, and shared generated-source-v2
+plan authority. Language parse/validation/compile/entry-selection failures return the same opaque object in
+`failed_compilation` state with cloned raw portable diagnostics and allowed source evidence. Public foundation
+accessors return owned plain values only; accepted source, source-map objects, AST, `CompiledSpec`, generated
+implementation text, execution, records, queries, and runtime observations do not escape this leaf.
+
+The six-test foundation suite proves graph compilation, exact generated family reuse, Unicode raw/decoded
+convergence, byte/scalar coordinates and excerpts, strict boundary/ceiling enforcement, failed-source evidence,
+malformed UTF-8/options, exact-entry failure, and caller-mutation isolation. Canonical CI now requires both new
+Rust files as tracked inputs; the semantic checker guards the Toolbox command. Rollout/admission remain 2/9 and
+1/6; `.10.4.2` owns normalized static v1 projection.
+
+Signoff passes complete Rust core 193, runtime 138, integration 197, the exact 105-fixture oracle, full generated
+manifest, all package contracts, and primary 66x2. Semantic governance remains exact at 6/20/65 with rollout 2/9
+and admission 1/6; Knowledge Map is 663 facts / 4,900 keys. The complete canonical restart passes primary 66x2
+and Phase 0 1,031/1,031 in 607 seconds. Its preceding run exposed the recurring loss of a closed-contract marker
+from the mutable active task-index row; the marker is restored and pending `.22` now owns structural repair.
+Disposable 1.2 GiB and 2.7 GiB Cargo targets, generated book output, and caches are removed, leaving 93 GiB free
+versus 27 GiB when cleanup began.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0.2 — implement pinned Unicode rule labels
 
 ADR `0051` now defines one universal rule-label contract: a nonempty sequence of pinned Unicode 17.0.0

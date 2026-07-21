@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (Rust Unicode-label prerequisite `.10.4.0.2` is signoff-complete; source/outcome
-  foundation `.10.4.1` is next after the clean commit)
+- Last updated: `2026-07-21` (Rust source/outcome foundation `.10.4.1` is signoff-complete; static projection
+  `.10.4.2` follows only after its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7593,13 +7593,39 @@ before implementation.
     1,031/1,031, and generated target/book/cache cleanup pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add the opaque Rust semantic source-map and compiled-or-failed outcome foundation.
   Depends on: `.10.4.0.2`
   Acceptance: Construct once from decoded `&str` or strict UTF-8 bytes plus caller logical name and source ceiling;
     retain canonical bytes/scalar mapping, parsed/validated/compiled-or-failed state, stable generated-plan input,
     and clone-safe private ownership without execution, implicit path reads, public records/query, or host IR leaks.
     Prove malformed UTF-8, exact Unicode coordinates, graph/privacy/failure fixtures, immutability, and diagnostics.
+  Verification: Activated task-tree-first from clean Unicode-label commit `5afa0a61` at ahead 275 with a zero-byte
+    `git_message_brief.txt`, no generated book, Python cache, repository Rust target, or external Unicode Cargo
+    target, and 93 GiB available. Knowledge Map/Toolbox/ADR retrieval fixed the seam before code. Focused
+    `semantic_index_foundation` is 6/6: copied raw/decoded source, strict UTF-8 and options, exact multibyte
+    byte/scalar coordinates, ceilings, compiled/failed fixtures, shared generated plan, and clone isolation pass.
+    Complete Rust passes core 193, runtime units 138, integration 197, exact 105-fixture oracle, full generated
+    manifest, all package contracts, and primary 66x2. Semantic governance is 6/20/65 at rollout 2/9 and admission
+    1/6; Knowledge Map is 663 facts / 4,900 keys; mdBook, memory, four doctrines, and diff checks pass. The first
+    canonical run caught the recurring task-index marker-anchor defect; the exact repeated-action marker was
+    restored, focused 8/10/8+0/54 passed, and pending `.22` now owns structural repair. The complete restart passes
+    primary 66x2 and Phase 0 1,031/1,031 in 607 seconds, exit 0. The redundant 1.2 GiB external target, final
+    2.7 GiB repository target, 12 MiB book, and caches are removed; 93 GiB is available versus 27 GiB at cleanup
+    start.
+
+  - [x] **STRICT CONSTRUCTION** — `from_source` and `from_utf8` copy caller input, require logical identity plus
+    immutable ceiling, share exact Unicode entry validation, reject malformed UTF-8/options, and read no path.
+  - [x] **CANONICAL SOURCE MAP** — Private mapping owns zero-based half-open UTF-8 bytes plus one-based line and
+    Unicode-scalar columns, rejects mid-scalar ranges, enforces ceilings, and hashes exact bytes only at text.
+  - [x] **COMPILED OR FAILED** — Opaque state retains private parsed/validated/compiled authority or raw portable
+    failure, exact entry identity, and shared generated-source-v2 plan input without invoking the target parser.
+  - [x] **CLONE / HOST BOUNDARY** — Public foundation accessors return owned plain values; caller mutation cannot
+    alter the index, and source/map/AST/`CompiledSpec`/generated implementation text are not exposed or serialized.
+  - [x] **NO FALSE PROMOTION** — No v1 record/query/runtime observation/admission surface is claimed; rollout and
+    native admission remain 2/9 and 1/6, with normalized static projection owned by `.10.4.2`.
+  - [x] **SIGNOFF / CLEANUP** — Complete Rust, semantic governance, mdBook/KM/doctrines, canonical 66x2 plus
+    Phase 0 1,031/1,031, and disposable Cargo/book/cache cleanup pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.2`
   Status: `pending`
@@ -9193,6 +9219,20 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.22`
+  Status: `pending`
+  Goal: Make immutable cross-contract status markers survive mutable task-index frontier rewrites by construction.
+  Acceptance: Inventory every contract checker that anchors an unrelated closed-state marker inside a mutable
+    `docs/TASK_TREE.md` active-row summary; move or derive those markers through one stable governed status section
+    without weakening current public claims; prove an active-row rewrite cannot erase repeated-action or another
+    closed contract; update checker diagnostics, task-tree guidance, Knowledge Map, roadmaps, and mdBook together.
+  Finding: `.10.2`, `.10.3.0`, `.10.3.2.0`, `.10.4.0.1`, and `.10.4.1` canonical runs independently lost the
+    exact repeated-action closeout sentence when the same active row was refreshed. The existing checker prevents
+    a bad commit, but the mutable anchor repeatedly burns a full canonical restart. This task owns the structural
+    repair after the current dirty semantic leaf is committed; it is not active and does not authorize a pivot.
+  Verification: `pending`
+  Commit: `pending`
+
 ## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
 
 Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
@@ -9900,10 +9940,11 @@ generated-v2 owners, missing source/query/observation seams, and the full `.10.4
 
 Toolbox no-drift `.10.4.0.1` is clean at `c234d993`: exact 6/20/65, rollout 2+7, admission 1+5, 106/eight-route
 runtime, and 12-role Perl claims are checker-owned with omission/wrong-value proof. Unicode prerequisite
-`.10.4.0.2` is signoff-complete in the current commit: ADR `0051`, a generated Unicode 17 `XID_Continue`
-classifier, unified Rust syntax/validation, exact source/artifact/runtime route proof, and canonical 1,031/636s
-preserve accepted `Töp` without normalization or promotion. Rust source/outcome foundation `.10.4.1` is next only
-after this clean commit. No Rust semantic API or promotion exists yet.
+`.10.4.0.2` is clean at `5afa0a61`: ADR `0051`, a generated Unicode 17 `XID_Continue` classifier, unified Rust
+syntax/validation, exact source/artifact/runtime route proof, and canonical 1,031/636s preserve accepted `Töp`
+without normalization or promotion. Rust source/outcome foundation `.10.4.1` is signoff-complete from that clean
+commit: strict copied source and exact coordinates now surround opaque compiled-or-failed authority, but v1
+records/query and promotion do not exist. `.10.4.2` is next only after the clean commit.
 
 ### Historical frontier sequence
 
@@ -10295,7 +10336,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.0 | `FUTURE-PARITY-BACKLOG.10.4.0` | `done` | Exact Rust owners/gaps, Unicode-label conflict, toolbox drift, and dependency-ordered implementation split are frozen before behavior. |
 | 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `done` | Exact 6/20/65, rollout 2+7, admission 1+5, runtime, and 12-role Perl toolbox claims are checker-owned with omission/wrong-value proof. |
 | 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `done` | Unicode 17 `XID_Continue` exact identity is generated, implemented across Rust routes, and canonical-signoff complete without semantic promotion. |
-| 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `pending` | Add strict source mapping and immutable compiled-or-failed Rust foundation. |
+| 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `done` | Strict copied-source mapping and opaque compiled-or-failed Rust authority pass complete/canonical signoff without promotion. |
 | 74.3.2 | `FUTURE-PARITY-BACKLOG.10.4.2` | `pending` | Project exact static graph/privacy/failure/runtime-static semantics. |
 | 74.3.3 | `FUTURE-PARITY-BACKLOG.10.4.3` | `pending` | Project exact calls, bindings, staged records, and generated provenance. |
 | 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `pending` | Expose immutable capabilities/query and match all 19 static digests. |
@@ -10952,8 +10993,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. Semantic design, neutral oracle, Perl admission, Rust audit/toolbox guard, and Unicode prerequisite
-  `.10.1-.10.4.0.2` are complete; Rust source/outcome foundation `.10.4.1` is next after the clean commit. Root
+- None blocking. Semantic design, neutral oracle, Perl admission, Rust audit/toolbox guard, Unicode prerequisite,
+  and source/outcome foundation `.10.1-.10.4.1` are complete; Rust static projection `.10.4.2` is next. Root
   selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result
   shape remain closed across neutral, all five backends, dual-ABI Lua, recurring composition, and public no-drift.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -10968,12 +11009,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.10.4.1` waits only for the mandatory clean commit boundary after completed prerequisite `.10.4.0.2`.
+- None.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.1` | Strict copied source/map/outcome foundation; focused 6; complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle/full generated manifest/all packages, primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 663/4,900; mdBook/memory/four doctrines/diff; repeated-action marker RED/restoration plus durable `.22`; canonical primary 66x2 and Phase 0 1,031/1,031 in 607s; 1.2+2.7 GiB targets/book/cache cleanup; 93 GiB available. | PASS. Opaque Rust construction retains exact private compiled-or-failed authority and ceiling-safe source detail without target execution/path/host leaks or rollout promotion; `.10.4.2` follows after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0.2` | ADR 0051; generated Unicode 17 contract/classifier at 806 ranges, 9 positive, 8 negative, 2 distinct; core 5/runtime 3; complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle/full generated manifest/all packages, primary 66x2; KM 661/4,887; mdBook/memory/four doctrines/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 636s; 2.5 GiB target/book/comparison/cache cleanup. | PASS. `Töp` and all exact label routes are accepted without normalization; ASCII compatibility and strict UTF-8 remain; rollout/admission stay 2/9 and 1/6; later backends inherit ADR 0051 before semantic admission. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0.1` | Toolbox exact 6/20/65, rollout 2+7, admission 1+5, runtime 106/eight routes, and Perl 12-role claims; checker required/stale/omission/wrong-value probes; semantic 149; repeated-action marker regression caught and restored; KM 660/4,879; mdBook/memory/four doctrines/diff; canonical semantic/primary 66x2 and Phase 0 1,031/1,031 in 611s; generated book/bytecode cleanup; 102 GiB available. | PASS. Diagnostic source of truth is mechanically current; all 20 digests and 65 contract mutations remain exact; no product/Rust/rollout/admission change. `.10.4.0.2` awaits director direction. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0` | Knowledge/toolbox authority retrieval; exact five-source Rust probe; zero semantic API/sink scan; focused descriptor/runtime seams; semantic 6/20/65; full Rust core 193, runtime unit 138, integration 197, exact 105-fixture oracle/full generated manifest/all package contracts, primary 66x2; KM 660/4,877; mdBook, memory, task, four doctrines, diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 617s; disposable target/book and no-longer-live 6.5 GiB session cleanup; final 102 GiB available versus initial 27 GiB. | PASS. No Rust behavior/API/rollout/admission change; exact source/compiled/failure/calls/generated/runtime owners and gaps are durable, TOOLBOX drift has its first child, the Unicode-label conflict has a director-decision child, and `.10.4.0.1-.10.4.6` are dependency ordered. |
@@ -11188,6 +11230,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.4.1` | `FUTURE-PARITY-BACKLOG.10.4.1 - add Rust semantic source foundation` | Strict copied-source map and opaque compiled-or-failed authority; focused 6, complete Rust/105/66x2, canonical 1,031/607s, KM/book/doctrines, marker-risk task `.22`, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `FUTURE-PARITY-BACKLOG.10.4.0.2 - implement Unicode rule labels` | ADR 0051, generated 806-range contract/classifier, unified Rust syntax/validation/routes, focused 5+3, complete Rust/105/66x2 plus canonical 1,031/636s, KM/book/doctrines, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.0` | `FUTURE-PARITY-BACKLOG.10.4.0 - map Rust semantic authorities` | Exact typed-owner/gap map, durable Unicode-label conflict and TOOLBOX guard child, dependency split, complete Rust/105/66x2 plus canonical 1,031/617s, KM/book/doctrines, and cleanup without behavior or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.6` | `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` | Exact 12-role composed consumer, all 20 digests, 65 mutations, rollout 2/9, admission 1/6, KM/book/doctrines, primary 66x2, canonical 1,031/633s, cleanup, and parent `.10.3` closure. |
@@ -11379,6 +11422,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-21`: `.10.4.1` adds opaque Rust semantic construction from copied decoded or strict-UTF-8 source.
+  Exact byte/scalar mapping, immutable source ceilings, private parsed/validated/compiled-or-failed state, raw
+  diagnostics, exact entry identity, and the shared generated-v2 plan are retained without invoking target code or
+  exposing paths/host IR/records/query. Focused 6, complete Rust packages/105/full manifest/66x2, KM 663/4,900,
+  mdBook/doctrines, and canonical 66x2 plus Phase 0 1,031/1,031 in 607 seconds pass. A recurring task-index marker
+  RED was restored and structural repair is tracked by `.22`. Disposable 1.2+2.7 GiB Cargo targets and book/cache
+  output are removed; rollout/admission stay 2/9 and 1/6, and `.10.4.2` follows after the clean commit.
 
 - `2026-07-21`: `.10.4.0.2` implements ADR `0051` in Rust. Verified Unicode 17 data generates an exact 806-range
   `XID_Continue` classifier used by headers, action/blind/bare references, and external-AST validation. Exact scalar

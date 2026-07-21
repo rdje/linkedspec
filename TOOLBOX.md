@@ -380,6 +380,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   state, compiled and failed outcomes, logical-name-only identity, malformed-byte rejection, and no path option.
   It does not prove records, queries, execution observations, or backend admission. See
   [[perl-semantic-index-source-foundation]].
+- **RUST SOURCE FOUNDATION:** `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation`
+  verifies the `.10.4.1` constructor boundary: copied decoded/strict-UTF-8 input, exact byte/scalar coordinates,
+  source-ceiling enforcement, opaque clone-safe parsed/validated/compiled-or-failed authority, exact entry identity,
+  shared generated-v2 plan input, malformed-byte/option rejection, and target-execution absence. It exposes no v1
+  records/query, runtime observation, host compiler object, implicit path, or backend admission. See
+  [[rust-semantic-index-source-foundation]].
 - **PERL STATIC PROJECTION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t` verifies the
   `.10.3.2.1` private static graph/diagnostic layer. It materializes internal source keys and deep-compares graph,
   Unicode privacy full/limited, failed compilation, and runtime-static records/relations with the neutral oracle;

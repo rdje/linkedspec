@@ -159,6 +159,7 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
     "Its 12 exact-once roles cover strict byte/text source normalization",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
     "57 rejected mutations",

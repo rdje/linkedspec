@@ -167,7 +167,9 @@ require_tracked_file unicode_case/upstream/17.0.0/LICENSE.txt.gz
 require_tracked_file perl/LinkedSpec/UnicodeCaseMapping.pm
 require_tracked_file rust/linkedspec-runtime/src/unicode_case_mapping.rs
 require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs
+require_tracked_file rust/linkedspec-runtime/src/semantic_index.rs
 require_tracked_file rust/linkedspec-runtime/tests/unicode_case_mapping.rs
+require_tracked_file rust/linkedspec-runtime/tests/semantic_index_foundation.rs
 require_tracked_file dart/lib/src/runtime/unicode_case_mapping.dart
 require_tracked_file dart/test/unicode_case_mapping_test.dart
 require_tracked_file julia/src/runtime/UnicodeCaseMapping.jl

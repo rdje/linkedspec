@@ -814,7 +814,10 @@ content migration exists yet.
   changing the 65 contract mutations or any response digest. The director selected Unicode expansion;
   ADR `0051` and `.10.4.0.2` pin Unicode 17.0.0 `XID_Continue` labels with exact case- and
   normalization-sensitive identity and implement them across Rust parser/validator/artifact/runtime routes.
-  Rust semantic construction may proceed, but rollout/admission remain pending.
+  Rust semantic source/outcome foundation `.10.4.1` now adds opaque `SemanticIndex::from_source` / `from_utf8`
+  construction, strict canonical byte/scalar mapping, immutable source ceilings, compiled-or-failed authority,
+  exact entry identity, and the shared generated-v2 plan without target execution, path reads, host-IR exposure,
+  v1 records, or query. Static projection `.10.4.2` follows; rollout/admission remain 2/9 and 1/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

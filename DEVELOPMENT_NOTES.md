@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.1` — source/outcome state is an opaque compiler composition, not a
+  serialized AST): Rust semantic construction must own accepted source because ordinary parsed/compiled nodes do
+  not retain enough exact positions. `SemanticIndex` therefore copies both decoded text and canonical UTF-8 bytes
+  once, builds a scalar-boundary map, and keeps parsed/validated/compiled state private. Exact source references
+  are derived only through the map; returned identity/span/diagnostic/entry/plan values are fresh owned data.
+
+  Signoff is focused 6/6 plus complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle, full
+  generated manifest, all packages, and primary 66x2. Semantic governance stays 6/20/65 at rollout 2/9 and native
+  admission 1/6. Canonical local CI passes primary 66x2 and Phase 0 1,031/1,031 in 607 seconds; Knowledge Map is
+  663 facts / 4,900 keys. Removing the redundant external and repository Cargo targets plus generated book/cache
+  output leaves 93 GiB available versus 27 GiB at cleanup start.
+
+  A recurring governance hazard is now durable rather than conversational: rewriting the mutable active row in
+  `docs/TASK_TREE.md` again erased the repeated-action closeout marker, although its checker caught the drift before
+  commit. Pending `FUTURE-PARITY-BACKLOG.22` owns moving cross-contract markers to an immutable structural anchor
+  so routine frontier edits cannot force another full canonical restart.
+
+  Construction policy errors and language failures are intentionally different. Malformed UTF-8, invalid logical
+  names, and syntactically invalid entry selectors prevent an index and return `SemanticIndexError`. Parse,
+  validation, compilation, or unknown valid entry selection are facts about the supplied language source and
+  return an opaque `failed_compilation` snapshot with raw `PortableDiagnostic` authority. `.10.4.2` owns the later
+  normalization from Rust's `bare_edge_target_undefined` / `normalize_edges` seam to the neutral v1 diagnostic;
+  doing it in the foundation would mix collection with projection.
+
+  Generated semantic provenance must not reclassify rules. The foundation calls the same
+  `classify_generated_rule_family` owner as source emission and retains its exact contract/format/ordered rows.
+  The focused graph fixture caught this usefully: repeated `Child` is canonical `rep_acode`, not an assumed
+  `default`. Similarly, failed-source proof retained the validator's exact lowercase diagnostic rather than
+  rewriting it in a test.
+
+  The full-source parser stages top-level user functions using LinkedSpec's admitted function-definition parser.
+  That is source-language parsing, not target execution: semantic construction never invokes the resulting target
+  parser or target lifecycle/action code, captures no runtime events, and enables no trace. The six focused tests
+  cover copied-input isolation, Unicode coordinates, strict ceilings/boundaries/options, successful and failed
+  authority, generated-plan reuse, and clone isolation. Public v1 records/query remain deliberately absent, so
+  rollout/admission do not advance.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0.2` — rule labels need generated Unicode authority, not host regex
   shorthand): ADR `0051` resolves the accepted `Töp` versus Rust/published-ASCII conflict with nonempty Unicode
   17.0.0 `XID_Continue` at every position. Applying the same class to the first position is intentional: changing

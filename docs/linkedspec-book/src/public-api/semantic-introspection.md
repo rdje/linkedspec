@@ -1,9 +1,10 @@
 # Semantic Introspection
 
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
-native query surface: opaque construction, exact static plus call/staged/generated projections, public
+admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
-consumer. Perl is the first admitted backend. The distinction matters:
+consumer. Rust now has its first implementation layer: an opaque strict-source, exact-coordinate,
+compiled-or-failed foundation, without v1 records/query or admission yet. The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
@@ -13,10 +14,53 @@ consumer. Perl is the first admitted backend. The distinction matters:
 - `$index->capabilities` and `$index->query($request)` expose the exact v1 static answer surface today; and
 - `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
 - `t/semantic_introspection_perl_admission.t` composes every required Perl path once; and
+- `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority needed by later
+  projection leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
 Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
+
+## Current Rust construction foundation
+
+Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
+
+```rust
+use linkedspec_runtime::semantic_index::{
+    SemanticIndex, SemanticIndexOptions, SemanticSnapshotState, SemanticSourceDetail,
+};
+
+let source = "Töp::\n /é/\n";
+let options = SemanticIndexOptions::new("privacy.spec", SemanticSourceDetail::Text);
+let index = SemanticIndex::from_utf8(source.as_bytes(), options)?;
+
+assert_eq!(index.snapshot().state, SemanticSnapshotState::Compiled);
+assert_eq!(index.source_identity()?.logical_name, "privacy.spec");
+assert_eq!(index.source_excerpt_for_bytes(0, 6)?, "Töp::");
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`SemanticIndex::from_source` is the decoded-text twin. Both constructors copy their input, require a nonempty
+control-free logical name and immutable `none`/`identity`/`span`/`text` ceiling, and optionally accept one exact
+entry-rule selector. They never accept or infer a source path. The byte constructor rejects malformed UTF-8 before
+language parsing. Its private map uses zero-based half-open UTF-8 byte ranges, one-based lines, and one-based
+Unicode-scalar columns; byte ranges that split a scalar are typed errors.
+
+Successful construction privately retains parsed, validated, compiled, exact entry-selection, and shared
+generated-source-v2 plan authority. A parse, validation, compile, or entry-selection failure instead returns the
+same opaque object in `failed_compilation` state with a cloned portable diagnostic and the permitted source
+evidence. Constructor policy/decode errors are `SemanticIndexError`s because no snapshot can exist. Returned
+identity, span, diagnostic, entry, and plan values are owned copies; callers cannot obtain the source-map object,
+accepted source, AST, `CompiledSpec`, or another host IR object.
+
+The ceiling also governs these foundation accessors: `none` rejects source identity and generated-plan identity,
+`identity` permits those but no spans or digest, `span` adds coordinate access, and `text` adds exact excerpts plus
+the source digest. The custom debug representation redacts logical identity at `none` and never prints source text.
+
+Construction parses and compiles the source but never invokes the resulting target parser or target lifecycle and
+action code. It does not capture runtime observations, enable trace, or expose semantic records. Static v1
+projection and normalized failure evidence belong to `.10.4.2`; calls/staging, query, runtime observation, and
+admission remain later Rust leaves. Therefore the global rollout and native-admission ledgers remain 2/9 and 1/6.
 
 ## Current Perl construction and query surface
 
@@ -250,14 +294,19 @@ loaders already use strict decoding. The current semantic constructor now owns t
 text or strict UTF-8 bytes, rejects malformed input, preserves canonical bytes for byte offsets and digests, and
 accepts only a caller-registered logical name—never an implicit host path.
 
-## Rust authority map and current prerequisite
+## Rust authority map and current foundation
 
-The behavior-free Rust audit reaches a similar composition boundary with different native owners. Parsed rules and
+The Rust audit reaches a similar composition boundary with different native owners. Parsed rules and
 function extraction, `CompiledSpec`, typed ActionIR, structured diagnostics, strict loaders, and generated-source-v2
 plans collectively own reusable meaning. `CompiledSpec` is serde-safe and preserves descriptor equality after an
 exact round trip, but ordinary rule/body AST nodes retain only lines and compiled expressions have no general source
-span. Rust therefore also needs an immutable source mapper over accepted text plus canonical UTF-8 bytes; staged
+span. Rust therefore uses an immutable source mapper over accepted text plus canonical UTF-8 bytes; staged
 function sidecars are the richer exception, retaining character spans, typed body AST, and payload/job metadata.
+
+Leaf `.10.4.1` implements that foundation in `linkedspec-runtime`. It preserves caller-owned logical identity,
+strict UTF-8 bytes, exact byte/scalar coordinates, source ceilings, raw portable compilation failure, effective
+entry identity, and shared generated-v2 plan rows around private parsed/compiled authority. It neither serializes
+host state nor projects the v1 semantic model yet.
 
 Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
 currently emit textual trace decisions only; no typed semantic observer or query object exists. The planned runtime
@@ -269,8 +318,8 @@ nonempty sequence of pinned Unicode 17.0.0 `XID_Continue` scalars at every posit
 case-sensitive, and normalization-sensitive; no normalization or folding occurs. Rust now parses and validates
 the admitted `Töp` fixture label across source, references, selectors, compiled/descriptor/generated identity,
 strict loaders, and traces. Positive, negative, decomposed, and case-distinct route proofs prevent parser/book
-drift. This removes the blocker for Rust semantic construction `.10.4.1` without itself implementing or admitting
-the Rust semantic API. The later Dart/Julia/Lua semantic backend lanes inherit the pinned-label prerequisite before
+drift. This removed the blocker for completed Rust semantic construction `.10.4.1` without admitting the Rust
+semantic API. The later Dart/Julia/Lua semantic backend lanes inherit the pinned-label prerequisite before
 their own v1 fixture admission. Toolbox repair `.10.4.0.1` has aligned the semantic diagnostic entry with the
 executable 6/20/65, rollout 2+7, admission 1+5, and complete Perl observation/admission state. The checker now
 requires those high-value claims exactly once, denies their stale forms, and runs omission plus wrong-value guard

@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl native semantic surface admitted
+- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl admitted; Rust source foundation implemented
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -246,7 +246,7 @@ errors, ordering, and privacy are equivalent:
 | Backend | Planned native surface |
 |---|---|
 | Perl | `LinkedSpec::semantic_index(...)`; `$index->capabilities`; `$index->query($query)` |
-| Rust | `SemanticIndex::from_compiled(...)`; `index.capabilities()`; `index.query(&SemanticQuery)` |
+| Rust | `SemanticIndex::from_source(...)` / `from_utf8(...)`; later `index.capabilities()` and `index.query(&SemanticQuery)` |
 | Dart | `SemanticIndex.fromCompiledSpec(...)`; `index.capabilities`; `index.query(query)` |
 | Julia | `semantic_index(...)`; `semantic_capabilities(index)`; `semantic_query(index, query)` |
 | Lua | `linkedspec.semantic_index(...)`; `index:capabilities()`; `index:query(query)` |
@@ -316,9 +316,8 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 - Runtime introspection remains opt-in and non-interfering because queries consume caller-owned observations after
   execution.
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
-- This decision changes no parser, compiler, runtime, descriptor, generated artifact, CLI, trace, or MCP behavior.
-  Public docs must distinguish the current Perl static native query surface from the still-planned execution-
-  observation, route-equivalence, backend-admission, other-backend, and MCP surfaces.
+- Each rollout leaf must keep implemented native layers distinct from still-planned projection/query/observation/
+  admission/MCP layers. Perl is fully admitted; Rust currently has only its source/outcome foundation.
 
 The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
 characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
@@ -400,6 +399,15 @@ explain, non-interference, immutability, and stale host-leak denial. The neutral
 ordered roles, canonical driver/registration, and Perl-only admission/rollout promotion with eight additional
 mutations, for 65 total. Perl advances rollout to 2/9 and native admission to 1/6; Rust, Dart, Julia, PUC Lua,
 LuaJIT, recurring proof, MCP, and public no-drift remain owned by `.10.4-.10.10`.
+
+Rust leaf `.10.4.1` implements its first native layer without claiming the model response surface. Opaque
+`SemanticIndex::from_source` / `from_utf8` constructors copy accepted decoded text and canonical strict-UTF-8
+bytes, build exact byte/line/Unicode-scalar mapping, enforce one immutable source-detail ceiling, and retain
+private parsed/validated/compiled-or-failed state. Successful state also retains effective entry identity and the
+shared generated-source-v2 plan; language failures retain raw portable diagnostics. Returned foundation values
+are owned clones and cannot expose source, map, AST, `CompiledSpec`, or another host object. Construction never
+invokes the resulting target parser or target code. Static records and normalized diagnostics remain `.10.4.2`,
+so rollout/admission remain 2/9 and 1/6.
 
 ## Links
 

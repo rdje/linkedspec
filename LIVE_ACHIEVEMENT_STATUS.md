@@ -8,11 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Unicode label prerequisite `FUTURE-PARITY-BACKLOG.10.4.0.2` is signoff-complete from clean toolbox-guard commit
-  `c234d993` at ahead 274 and awaits its mandatory commit boundary. ADR `0051`, generated Unicode 17
-  `XID_Continue` classification, unified Rust parsing/validation, and exact source/artifact/runtime route proof
-  preserve accepted `Töp` without normalization. Source/outcome foundation `.10.4.1` is next only after the clean
-  commit; rollout/admission stay 2/9 and 1/6.
+- Rust semantic source/outcome foundation `FUTURE-PARITY-BACKLOG.10.4.1` is signoff-complete from clean
+  Unicode-label commit `5afa0a61` at ahead 275; its commit workflow is in progress. No successor leaf is active
+  while this tree is dirty. Static v1 projection `.10.4.2` follows task-tree-first only after the clean commit.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -24,6 +22,22 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.1 — add Rust semantic source/outcome foundation**
+  (DONE in this commit from clean base `5afa0a61`).
+
+  **Result:** Copied decoded/strict-UTF-8 constructors own exact byte/Unicode-scalar mapping, immutable source
+  ceilings, private parsed/validated/compiled-or-failed authority, exact entry selection, and shared generated-v2
+  plan input. No public v1 records/query, target execution, implicit path reads, host-IR leakage, or promotion land.
+
+  **Proof:** Focused 6/6; complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle/full
+  generated manifest/all packages, primary 66x2; semantic 6/20/65 at rollout 2/9 and admission 1/6; KM 663/4,900;
+  mdBook/memory/four doctrines; canonical primary 66x2 and Phase 0 1,031/1,031 in 607 seconds, exit 0. The first
+  canonical run caught the recurring mutable task-index marker loss; the marker is restored and pending `.22`
+  durably owns structural repair. Redundant 1.2 GiB and 2.7 GiB Cargo targets, generated book, and caches are
+  removed; 93 GiB is available versus 27 GiB at cleanup start.
+
+  **Next:** Commit cleanly, then activate static Rust v1 projection `.10.4.2` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0.2 — implement pinned Unicode rule labels**
   (DONE in this commit from clean base `c234d993`).
 

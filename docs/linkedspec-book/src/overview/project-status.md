@@ -528,8 +528,11 @@ Three backbone items tracked major structural modernization — all done:
   rollout 2+7, admission 1+5, and complete Perl ownership; the checker now proves exact-claim, omission, and
   wrong-value no-drift behavior. The director selected Unicode expansion; completed `.10.4.0.2` implements ADR
   `0051` with generated Unicode 17.0.0 `XID_Continue` labels, exact case- and normalization-sensitive scalar
-  identity, and complete Rust source/artifact/runtime route proof. Rust semantic construction proceeds with
-  source/outcome foundation `.10.4.1`; rollout/admission remain pending.
+  identity, and complete Rust source/artifact/runtime route proof. Completed source/outcome `.10.4.1` now provides
+  copied decoded/strict-UTF-8 construction, exact byte/scalar mapping, source ceilings, opaque immutable
+  compiled-or-failed state, entry identity, and shared generated-v2 plan input. Static projection `.10.4.2`
+  follows; rollout/admission remain 2/9 and 1/6. Governance follow-up `.22` tracks a stable home for immutable
+  cross-contract status markers after repeated active-row rewrites required avoidable canonical restarts.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The
