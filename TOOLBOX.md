@@ -415,6 +415,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   result/input/cursor and generated-plan behavior, reject malformed or foreign observations, and prove semantic
   capture does not perturb results, exception identity, trace, or diagnostics. See
   [[perl-semantic-runtime-observation]].
+- **RUST RUNTIME OBSERVATION:** `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_runtime_observation`
+  verifies `.10.4.5`. Its seven tests match the twentieth response digest through typed and raw-neutral queries
+  across direct, loaded, reconstructed, generated-plan, source-emitter, traced/untraced, and independently compiled
+  emitted-module routes. They also lock typed schema/topology rejection, immutable base/event/response isolation,
+  query non-execution, exact observer panic identity, Unicode-scalar positions, trace/diagnostic neutrality, quiet
+  no-sink execution, and no false completion after failed entry selection. See
+  [[rust-semantic-runtime-observation]].
 - **PERL COMPOSED ADMISSION:** `PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t` verifies
   `.10.3.6`. Its 12 exact-once roles cover strict byte/text source normalization, compiled and failed snapshots,
   direct/loaded/generated/traced runtime routes, native and neutral JSON, all 20 exact query digests, query

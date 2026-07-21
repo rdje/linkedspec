@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.5` — runtime semantics must be caller-owned typed evidence, not
+  reconstructed trace): Rust already had parallel authoritative slot-selection seams in direct `Engine` execution
+  and `GeneratedPlanExecutor`, plus option-bearing entry wrappers that alone know when an invocation completed
+  successfully. The observer therefore attaches to `ExecutionOptions`, is cloned into only that invocation's
+  `RuntimeContext`, emits after the accepted match advances the cursor, and emits the single final result only after
+  the entry execution returns successfully. This preserves exact slot identity and prevents partial execution from
+  being mislabeled complete.
+
+  Positions cross the API as Unicode-scalar offsets, not internal UTF-8 byte cursors. The result hashes the exact
+  input bytes only when a sink exists. The sink is a synchronous cloneable caller callback: ordinary code pays one
+  absent-option branch, trace and diagnostics retain separate channels, and caller panic payloads unwind unchanged.
+  The runtime context was already invocation-local and non-`Send` through caller sinks, so this does not create a
+  new shared/global state model.
+
+  Post-execution derivation deliberately does not retain or invoke the engine. It validates the closed typed event
+  vocabulary, field combinations, exactly one final succeeded selected-entry result, input identity, and each
+  selected rule/slot edge against a cloned static projection. Canonicalization then reuses the established record/
+  relation ordering. The base `SemanticIndex`, the caller's events, the derived index, and query responses remain
+  independent owned values; runtime queries use the same evaluator as the 19 static cases.
+
+  Seven focused tests lock the twentieth digest through typed/raw-neutral requests and direct, loaded,
+  reconstructed, generated-plan, source-emitter, traced/untraced, and independently compiled emitted-module
+  routes. They also cover malformed streams, observer panic identity at slot/result delivery, Unicode positions,
+  trace/diagnostic neutrality, quiet no-sink behavior, mutation isolation, and failed-entry non-completion. Complete
+  Rust passes core 193, runtime 147, integration 197, exact 105/full manifest/all packages, and primary 66x2. The
+  semantic checker remains 6/20/65 at rollout 2/9 and admission 1/6. KM is 668/4,949; mdBook, memory, task, and all
+  four doctrines pass; canonical primary 66x2 plus Phase 0 1,031/1,031 passes in 647 seconds, exit 0. Generated
+  3.2 GiB target, 12 MiB book, and Python cache are removed. `.10.4.6` alone owns composed promotion.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.4` — native typing and wire validation should share one evaluator):
   Rust callers benefit from typed operations, directions, paging, budgets, source policy, and response records, but
   the neutral contract must also diagnose structurally malformed JSON that cannot deserialize into those types.

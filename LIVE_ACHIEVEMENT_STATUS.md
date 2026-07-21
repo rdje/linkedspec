@@ -8,10 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Immutable Rust semantic capabilities/query `FUTURE-PARITY-BACKLOG.10.4.4` is signoff-complete from clean
-  `68e31222` at ahead 278. Implementation, exact proof, complete Rust, canonical CI, public/live docs, and generated
-  artifact cleanup agree. Its commit and clean-boundary verification are in flight; only then may runtime observer
-  `.10.4.5` activate. Runtime observation and admission remain absent and both ledgers remain unchanged.
+- Typed Rust runtime semantic observations `FUTURE-PARITY-BACKLOG.10.4.5` are signoff-complete task-tree-first from
+  clean immutable-query commit `1cb0c353` at ahead 279. Implementation, focused/complete Rust proof, public/KM/live
+  synchronization, canonical CI, and generated-artifact cleanup agree. Its commit and clean-boundary verification
+  are in flight; only then may composed Rust admission `.10.4.6` activate. Rollout/admission remain 2/9 and 1/6.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -23,8 +23,24 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.5 — capture Rust runtime semantic observations**
+  (DONE in this commit from clean base `1cb0c353`).
+
+  **Result:** Rust now captures caller-owned typed regex-slot/final-result events at the authoritative direct and
+  generated execution seams, then validates them into a separate immutable semantic index. The twentieth response
+  is exact through typed/raw-neutral queries and every direct/loaded/reconstructed/generated/source-emitter/traced
+  route. Query still never executes; base/event/derived/response isolation, Unicode positions, observer panic
+  identity, trace/diagnostic neutrality, quiet execution, and failed-execution non-completion are exact.
+
+  **Proof:** Focused foundation 6/query 5/observation 7; complete Rust core 193/runtime 147/integration 197/exact
+  105/full manifest/all packages/primary 66x2; focused new-code Clippy clean; semantic 6/20/65 at 2/9 + 1/6; KM
+  668/4,949; mdBook/memory/task/four doctrines/format/diff; canonical primary 66x2 plus Phase 0 1,031/1,031 in 647
+  seconds, exit 0; 3.2 GiB target/12 MiB book/Python-cache cleanup.
+
+  **Next:** Commit cleanly, then activate composed Rust semantic admission `.10.4.6` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.4 — expose Rust semantic query**
-  (DONE in this commit from clean base `68e31222`).
+  (DONE in `1cb0c353` from clean base `68e31222`).
 
   **Result:** Rust now exposes owned typed capabilities/query plus exact raw-neutral request validation over fresh
   normalized-projection clones. All 19 static answers match the oracle with exact privacy, traversal, paging,
@@ -36,7 +52,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   KM 667/4,937; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 plus Phase 0 1,031/1,031 in
   631 seconds, exit 0; 3.3 GiB target/12 MiB book/28 KiB cache cleanup.
 
-  **Next:** Commit cleanly, then activate typed Rust runtime semantic observations `.10.4.5` task-tree-first.
+  **Next:** Typed Rust runtime semantic observations `.10.4.5` is active task-tree-first from `1cb0c353`.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.3 — project Rust call and staged semantics**
   (DONE in `68e31222` from clean base `c1a7e413`).

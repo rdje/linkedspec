@@ -16,7 +16,7 @@ answers:
   - "does Rust semantic query include runtime events"
   - "is Rust semantic introspection admitted after static query"
 date: 2026-07-21
-status: current static native query; runtime observation and composed Rust admission remain separate leaves
+status: current native static/runtime query evaluator; composed Rust admission remains separate
 tags: [rust, semantic-introspection, query, privacy, pagination, budgets, immutability, json]
 evidence: rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs; FUTURE-PARITY-BACKLOG.10.4.4
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query; python3 tools/check_semantic_introspection_contract.py"
@@ -42,9 +42,10 @@ queries are deterministic.
 `semantic_index_query.rs` matches all 19 non-runtime canonical response SHA-256 digests through both typed and
 raw-neutral entrypoints, covers the exact 26 request/error boundaries, and separately locks privacy, response
 mutation isolation, input isolation, deterministic interleaving, absent execution state, and host/path/IR denial.
-The twentieth runtime response remains `.10.4.5`, and composed Rust admission remains `.10.4.6`; neutral rollout
-and backend admission therefore stay 2/9 and 1/6.
+The twentieth runtime response is supplied by the separate typed observation/derivation owner in `.10.4.5` without
+changing this projection-only evaluator. Composed Rust admission remains `.10.4.6`; neutral rollout and backend
+admission therefore stay 2/9 and 1/6.
 
-See [[rust-semantic-static-projection]], [[rust-semantic-call-staged-projection]],
+See [[rust-semantic-runtime-observation]], [[rust-semantic-static-projection]], [[rust-semantic-call-staged-projection]],
 [[rust-semantic-index-source-foundation]], [[perl-semantic-query-evaluator]], and
 [[semantic-introspection-neutral-contract]].

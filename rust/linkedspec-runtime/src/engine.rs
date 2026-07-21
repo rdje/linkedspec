@@ -38,6 +38,7 @@ use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
     RuntimeDiagnosticOutputSink, RuntimeExecutionError, RuntimeExitNow,
+    RuntimeSemanticObservationSink,
 };
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::validate_compiled_regex_slot_identities;
@@ -247,11 +248,13 @@ fn validate_eager_helper_arity(
 
 /// Per-invocation controls for direct effective-entry value execution.
 ///
-/// These options do not mutate the compiled specification. They select only an
-/// optional entry rule; every entered rule retains its authored cursor policy.
+/// These options do not mutate the compiled specification. They select an
+/// optional entry rule and optional typed semantic observation sink; every
+/// entered rule retains its authored cursor policy.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ExecutionOptions {
     entry_rule: Option<String>,
+    semantic_observation_sink: Option<RuntimeSemanticObservationSink>,
 }
 
 impl ExecutionOptions {
@@ -269,6 +272,17 @@ impl ExecutionOptions {
     /// Return the selected entry rule, if any.
     pub fn entry_rule(&self) -> Option<&str> {
         self.entry_rule.as_deref()
+    }
+
+    /// Install one caller-owned typed semantic sink for this invocation.
+    pub fn with_semantic_observation_sink(mut self, sink: RuntimeSemanticObservationSink) -> Self {
+        self.semantic_observation_sink = Some(sink);
+        self
+    }
+
+    /// Return the invocation-local semantic sink, if one was selected.
+    pub fn semantic_observation_sink(&self) -> Option<&RuntimeSemanticObservationSink> {
+        self.semantic_observation_sink.as_ref()
     }
 }
 
@@ -1043,6 +1057,14 @@ impl GeneratedPlanExecutor<'_> {
 
                 let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);
+                if ctx.semantic_observation_enabled() {
+                    ctx.emit_regex_slot_selected(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        byte_to_char_offset(&ctx.input, m.end),
+                    );
+                }
                 ctx.match_groups = m.captures.clone();
                 ctx.match_named = m.named.clone();
                 ctx.match_start_byte = m.start;
@@ -2300,6 +2322,7 @@ impl Engine {
         ctx: &mut RuntimeContext,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -2311,8 +2334,11 @@ impl Engine {
             ),
             TraceLevel::LOW,
         );
-        self.execute_rule(&label, 0, ctx)
-            .map(|value| value.to_json())
+        let value = self.execute_rule(&label, 0, ctx)?;
+        if ctx.semantic_observation_enabled() {
+            ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
+        }
+        Ok(value.to_json())
     }
 
     fn execute_generated_with_plan_context(
@@ -2322,6 +2348,7 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -2340,6 +2367,9 @@ impl Engine {
             source_identity,
         };
         generated.execute_rule(&label, 0, ctx)?;
+        if ctx.semantic_observation_enabled() {
+            ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
+        }
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
     }
 
@@ -2350,6 +2380,7 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -2367,9 +2398,11 @@ impl Engine {
             generated_rules,
             source_identity,
         };
-        generated
-            .execute_rule(&label, 0, ctx)
-            .map(|value| value.to_json())
+        let value = generated.execute_rule(&label, 0, ctx)?;
+        if ctx.semantic_observation_enabled() {
+            ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
+        }
+        Ok(value.to_json())
     }
 
     /// Execute a specific rule by label, entering at the given regex index
@@ -2967,6 +3000,14 @@ impl Engine {
 
                 let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);
+                if ctx.semantic_observation_enabled() {
+                    ctx.emit_regex_slot_selected(
+                        label,
+                        target_rule,
+                        target_regex_index,
+                        byte_to_char_offset(&ctx.input, m.end),
+                    );
+                }
                 // LOCAL match (`LMATCH`) — the rule's own regex match. This is
                 // what `match_*` helpers read; it must NOT touch the entry match
                 // (Perl keeps `IMATCH` and `LMATCH` separate — only an explicit

@@ -823,9 +823,15 @@ content migration exists yet.
   Query leaf `.10.4.4` now exposes typed `SemanticQuery` requests plus `index.capabilities()`, `index.query(...)`,
   and the exact raw-neutral validation seam. Both paths consume only a fresh clone of the normalized projection and
   match all 19 static response digests, including privacy, pages, directional traversal, budgets/costs, errors, and
-  explanations. Runtime observation and Rust admission remain `.10.4.5-.10.4.6`, so rollout/admission stay 2/9 and
-  1/6. Signoff passes complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all packages,
-  primary 66x2, and canonical Phase 0 1,031/1,031.
+  explanations. Runtime leaf `.10.4.5` adds the invocation-local typed `RuntimeSemanticObservationSink` to
+  `ExecutionOptions`, exact regex-slot/final-result events at the shared direct/generated seams, and
+  `SemanticIndex::with_execution_observation(...)`. The immutable derived index matches the twentieth digest
+  through typed and raw-neutral queries across direct, loaded, reconstructed, generated-plan, source-emitter,
+  traced/untraced, and independently compiled emitted-module routes. Result/cursor/trace/diagnostic behavior,
+  Unicode-scalar positions, observer panic identity, base/event/response isolation, quiet no-sink execution, and
+  failed-execution non-completion are exact. Composed Rust admission remains `.10.4.6`, so rollout/admission stay
+  2/9 and 1/6. Signoff passes complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all
+  packages and primary 66x2, plus canonical primary 66x2 and Phase 0 1,031/1,031.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

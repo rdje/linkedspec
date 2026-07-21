@@ -4,8 +4,9 @@ LinkedSpec now has an executable, backend-neutral contract for deep semantic int
 admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
 consumer. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
-static and call/staged/generated projections; and a public immutable typed/raw-neutral static query evaluator.
-Rust runtime observation and composed admission remain later leaves.
+static and call/staged/generated projections; a public immutable typed/raw-neutral query evaluator; and optional
+caller-captured typed runtime observations that derive a separate immutable post-execution index. Composed Rust
+admission remains a later leaf.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -19,7 +20,9 @@ The distinction matters:
 - `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority and exact private
   static plus call/staged/generated projections;
 - `SemanticIndex::capabilities()`, `query(&SemanticQuery)`, and `query_neutral(&Value)` expose Rust's exact 19-case
-  static answer surface without exposing those private projections; and
+  static answer surface without exposing those private projections;
+- `RuntimeSemanticObservationSink` captures typed events during normal Rust execution, and
+  `SemanticIndex::with_execution_observation(...)` validates them into the twentieth exact answer; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
@@ -62,10 +65,11 @@ The ceiling also governs these foundation accessors: `none` rejects source ident
 the source digest. The custom debug representation redacts logical identity at `none` and never prints source text.
 
 Construction parses and compiles the source but never invokes the resulting target parser or target lifecycle and
-action code. It does not capture runtime observations or enable trace. The opaque index now retains exact private
+action code. It does not itself capture runtime observations or enable trace. The opaque index now retains exact private
 static v1 records/relations, normalized failure evidence, and the 22-record/25-relation call/binding/staged/
 generated target. Public queries can now select and redact those normalized records, but no projection accessor or
-host compiler object is exposed. Runtime observation and admission remain later Rust leaves. Therefore the global
+host compiler object is exposed. Runtime observation is supplied only by a completed typed caller-owned event
+sequence; composed admission remains a later Rust leaf. Therefore the global
 rollout and native-admission ledgers remain 2/9 and 1/6.
 
 Use the typed native request for normal Rust embedding. `SemanticQuery::new` supplies the exact v1 contract plus
@@ -101,8 +105,9 @@ assert_eq!(
 ```
 
 `index.capabilities()` is the canonical capabilities operation and returns effective kind vocabularies, page and
-budget defaults/maxima, construction ceiling, and `execution_observation: false`. Every response is owned: changing
-a record, fact, source reference, or diagnostic cannot change the index or a later query.
+budget defaults/maxima, construction ceiling, and whether this particular immutable snapshot has an execution
+observation. A newly constructed base reports false; a derived post-execution index reports true. Every response is
+owned: changing a record, fact, source reference, or diagnostic cannot change the index or a later query.
 
 Transport code that already has neutral JSON can call `index.query_neutral(&value)`. That seam accepts the exact
 nine-field envelope and returns portable response diagnostics even for malformed types, unknown keys, non-JSON
@@ -114,8 +119,62 @@ Rust implements `capabilities`, `list`, `get`, `relations`, and `explain` for ev
 same structural source policy, canonical after-id pages, filtered directional breadth-first traversal, logical
 budgets/costs, and exact query diagnostics described below. The evaluator receives only a fresh clone of the
 normalized projection. It has no source parser, compiler, executor, trace sink, filesystem path, ActionIR,
-`CompiledSpec`, compiled regex, or generated implementation source. The twentieth runtime-events response remains
-owned by `.10.4.5`; composed Rust admission remains `.10.4.6`.
+`CompiledSpec`, compiled regex, or generated implementation source. Runtime records become queryable only after the
+caller supplies a validated completed observation as described next; composed Rust admission remains `.10.4.6`.
+
+### Capture a Rust execution observation
+
+Install one cloneable typed sink in the `ExecutionOptions` used for a normal execution, retain its events, and then
+derive a new index. The sink is invocation-local; it is independent of trace and diagnostics and does not mutate the
+compiled specification or the base semantic index.
+
+```rust
+use linkedspec_runtime::engine::ExecutionOptions;
+use linkedspec_runtime::semantic_index::{
+    RuntimeSemanticObservationEvent, RuntimeSemanticObservationSink, SemanticIndex,
+};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+# fn observe(
+#     engine: &linkedspec_runtime::engine::Engine,
+#     base_index: &SemanticIndex,
+# ) -> Result<SemanticIndex, Box<dyn std::error::Error>> {
+let events = Rc::new(RefCell::new(Vec::<RuntimeSemanticObservationEvent>::new()));
+let retained = Rc::clone(&events);
+let sink = RuntimeSemanticObservationSink::new(move |event| {
+    retained.borrow_mut().push(event);
+});
+let options = ExecutionOptions::new().with_semantic_observation_sink(sink);
+
+let value = engine
+    .execute_value("ab\n", &options)
+    .map_err(std::io::Error::other)?;
+let completed_events = events.borrow().clone();
+let runtime_index = base_index.with_execution_observation(&completed_events)?;
+
+assert!(!base_index.snapshot().has_execution);
+assert!(runtime_index.snapshot().has_execution);
+# let _ = value;
+# Ok(runtime_index)
+# }
+```
+
+`RuntimeSemanticObservationEvent` has a closed `regex_slot_selected` / `rule_result` kind vocabulary. Slot events
+carry executing rule, authored target rule, zero-based slot index, and post-match Unicode-scalar position. The one
+final successful entry-rule result carries the final scalar position, `succeeded` status, and
+`input:sha256:<lowercase hex>` over the exact UTF-8 input bytes. An unsuccessful invocation emits no final result,
+so an incomplete stream cannot be mistaken for a completed execution.
+
+`with_execution_observation` validates the v1 contract id, field combinations, exactly one final successful entry
+result, selected rule/slot topology, and input identity. It clones the static projection, adds canonical execution
+and event records plus `observed_as` relations, and returns a new index. Later mutation of the caller's event vector
+or returned query data cannot affect either index. Query methods remain projection-only and cannot execute a parser.
+
+Direct, loaded, reconstructed-plan, generated-plan, source-emitter, traced, and untraced option-bearing routes all
+use the same authoritative slot/result seams. With no sink, they allocate no events or input digest. If a sink
+panics, Rust unwinds the original panic unchanged rather than translating it into a parser, trace, or diagnostic
+error.
 
 ## Current Perl construction and query surface
 
@@ -263,7 +322,7 @@ Each backend's focused projection tests materialize internal source keys and dee
 Unicode privacy at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static
 half, against the neutral oracle. Perl and Rust public evaluators now each own query-time source redaction, pages,
 traversal, budgets, and costs over cloned projections. The composed Perl admission consumer is described with the
-executable oracle below; Rust's runtime observation and composed admission remain `.10.4.5-.10.4.6`.
+executable oracle below; Rust's runtime observation is exact, while composed admission remains `.10.4.6`.
 
 ## Current private call, staging, and generated projection
 
@@ -317,8 +376,7 @@ These projection mechanics remain internal implementation evidence. Perl and Rus
 only through their public query surfaces. Returned or retained values contain only
 canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
 generated source, object identity, or path. Perl runtime observation/routes and admission are implemented by
-`.10.3.5-.10.3.6`; Rust static query is exact, while runtime observation and admission remain
-`.10.4.5-.10.4.6`.
+`.10.3.5-.10.3.6`; Rust static query and runtime observation/routes are exact, while admission remains `.10.4.6`.
 
 ## Why this is separate from the descriptor
 
@@ -574,13 +632,14 @@ A semantic query is read-only. It cannot compile a spec, evaluate an action, run
 file, or enable tracing. Runtime records appear only when the caller gives the index an already completed typed
 execution observation. A failed compilation may still produce a diagnostic-only semantic snapshot.
 
-The base Perl index reports `has_execution` and `execution_observation` as false. A derived index reports both as
-true and adds `execution:0`, two exact slot events, one final rule-result event, and their `observed_as` relations
-for the canonical `Top::OR{2}` / `ab\n` fixture. All 20 canonical answers are available through the native API.
+The base Perl and Rust indexes report `has_execution` and `execution_observation` as false. A derived index reports
+both as true and adds `execution:0`, two exact slot events, one final rule-result event, and their `observed_as`
+relations for the canonical `Top::OR{2}` / `ab\n` fixture. All 20 canonical answers are available through both
+native APIs.
 Direct parsers, loaded specs, portable loader results, captured generated source, independently loaded generated
 `Execute`/`Get`/`ExecuteWithTrace`, and validated reconstructed plans produce the same observation and response.
-Rust currently reports false for both fields and matches the 19 static answers; `.10.4.5` owns its typed completed-
-observation derivation and twentieth response.
+Rust's direct, loaded, reconstructed, generated-plan, source-emitter, traced, and untraced option routes likewise
+produce the same observation and twentieth response. Neither backend's query evaluator executes a parser.
 
 ## Executable oracle
 
@@ -631,6 +690,18 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic
 Its five tests reconstruct every static source/ceiling input, match all 19 non-runtime response digests through
 both typed and neutral entrypoints, cover the same exact 26 request/error boundaries, and lock privacy, response/
 input isolation, deterministic interleaving, absent execution state, and host/path/IR denial.
+
+Rust's runtime route gate is:
+
+```bash
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_runtime_observation
+```
+
+Its seven tests match the twentieth digest through typed and raw-neutral queries across direct, loaded,
+reconstructed, generated-plan, source-emitter, traced, untraced, and independently compiled emitted-module routes.
+They also lock malformed observation rejection, base/derived/event/response isolation, query non-execution, exact
+observer panic identity, Unicode-scalar positions, trace/diagnostic neutrality, and the absence of a completion
+event after failed entry selection.
 
 The runtime route gate is:
 
@@ -689,7 +760,8 @@ The dependency order is:
 | `.10.3.6` | composed Perl semantic admission | complete; 12 roles, 20 exact queries, Perl-only promotion |
 | `.10.4.1-.10.4.3` | Rust source/outcome plus static/call/staged projections | complete |
 | `.10.4.4` | Rust capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
-| `.10.4.5-.10.4.6` | Rust runtime observations and composed admission | pending |
+| `.10.4.5` | Rust runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
+| `.10.4.6` | composed Rust semantic admission | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

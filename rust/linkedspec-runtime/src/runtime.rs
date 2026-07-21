@@ -5,6 +5,7 @@
 
 use crate::{
     RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputSink, RuntimeDiagnosticOutputSinkFailure,
+    RuntimeSemanticObservationEvent, RuntimeSemanticObservationSink,
 };
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
 use linkedspec_core::types::RuntimeValue;
@@ -70,6 +71,8 @@ pub struct RuntimeContext {
     diagnostic_output_sink: Option<RuntimeDiagnosticOutputSink>,
     /// Exact caller failure retained while the interpreter unwinds.
     diagnostic_output_sink_failure: Option<RuntimeDiagnosticOutputSinkFailure>,
+    /// Optional caller-owned typed semantic sink for this invocation.
+    semantic_observation_sink: Option<RuntimeSemanticObservationSink>,
     /// Explicit cursor save stack used by save_cursor()/restore_cursor().
     cursor_stack: Vec<usize>,
     /// The current rule invocation's pending return value, set by `return(...)`.
@@ -197,6 +200,7 @@ impl RuntimeContext {
             exit_status: None,
             diagnostic_output_sink: None,
             diagnostic_output_sink_failure: None,
+            semantic_observation_sink: None,
             cursor_stack: Vec::new(),
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
@@ -399,6 +403,46 @@ impl RuntimeContext {
         &mut self,
     ) -> Option<RuntimeDiagnosticOutputSinkFailure> {
         self.diagnostic_output_sink_failure.take()
+    }
+
+    pub(crate) fn install_semantic_observation_sink(
+        &mut self,
+        sink: Option<&RuntimeSemanticObservationSink>,
+    ) {
+        self.semantic_observation_sink = sink.cloned();
+    }
+
+    pub(crate) fn semantic_observation_enabled(&self) -> bool {
+        self.semantic_observation_sink.is_some()
+    }
+
+    pub(crate) fn emit_regex_slot_selected(
+        &self,
+        rule_label: &str,
+        target_rule: &str,
+        regex_index: usize,
+        position: usize,
+    ) {
+        let Some(sink) = self.semantic_observation_sink.as_ref() else {
+            return;
+        };
+        sink.emit(RuntimeSemanticObservationEvent::regex_slot_selected(
+            rule_label,
+            target_rule,
+            regex_index,
+            position,
+        ));
+    }
+
+    pub(crate) fn emit_rule_result(&self, rule_label: &str, position: usize) {
+        let Some(sink) = self.semantic_observation_sink.as_ref() else {
+            return;
+        };
+        sink.emit(RuntimeSemanticObservationEvent::rule_result(
+            rule_label,
+            position,
+            &self.input,
+        ));
     }
 
     // ── Runtime trace recording ──

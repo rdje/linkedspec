@@ -1335,7 +1335,7 @@ pub(super) fn relation(
     }
 }
 
-fn canonicalize(projection: &mut SemanticStaticProjection) {
+pub(super) fn canonicalize(projection: &mut SemanticStaticProjection) {
     projection.records.sort_by(|left, right| {
         kind_rank(RECORD_KINDS, &left.kind)
             .cmp(&kind_rank(RECORD_KINDS, &right.kind))

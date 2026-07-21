@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.5 — capture Rust runtime semantic observations
+
+`linkedspec-runtime` now exposes an invocation-local `RuntimeSemanticObservationSink` through `ExecutionOptions`.
+Normal direct and generated execution emit typed `regex_slot_selected` events at the authoritative post-match seam
+and one final successful entry-rule `rule_result`. Events retain exact executing/target rule, authored slot index,
+Unicode-scalar cursor position, stable status, and SHA-256 identity of the exact UTF-8 input. No sink means no event
+or input-digest allocation; failed execution cannot claim a completed result; and a sink panic unwinds with the
+caller's exact payload identity.
+
+`SemanticIndex::with_execution_observation(...)` validates the v1 event schema, final-result ordering and entry
+identity, stable input identity, and selected rule/slot topology. It clones the retained static projection, adds
+canonical execution/event records plus `observed_as` relations, and returns a separate immutable index. The base
+index, caller event vector, derived index, and returned query values cannot alias one another. Query evaluation
+remains projection-only and cannot compile or execute.
+
+The new seven-test target matches the twentieth response digest through typed and raw-neutral queries across
+direct, loaded, reconstructed, generated-plan, source-emitter, traced/untraced, and independently compiled emitted-
+module routes. It also locks malformed rejection, trace/diagnostic neutrality, Unicode positions, quiet no-sink
+execution, exact panic identity, and incomplete failed execution. Focused semantic foundation/query/observation
+tests pass; the complete Rust gate passes core 193, runtime 147, integration 197, exact 105, full generated
+manifest, all package targets, and primary 66x2. The semantic checker remains exact at 6 fixture groups / 20
+digests / 65 rejected mutations. Knowledge Map is 668 facts / 4,949 keys; mdBook, memory, task metadata, all four
+doctrines, format, and diff pass. Canonical local CI passes primary 66x2 plus Phase 0 1,031/1,031 in 647 seconds,
+exit 0. The generated 3.2 GiB Rust target, 12 MiB book, and Python cache are removed before commit. Composed Rust
+admission remains `.10.4.6`, so rollout/admission stay 2/9 and 1/6.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.4 — expose Rust semantic query
 
 `linkedspec-runtime` now exposes `SemanticIndex::capabilities()`, typed `SemanticQuery` requests through

@@ -4,14 +4,19 @@
 //! strict-UTF-8 byte/scalar coordinates, and retains compiled-or-failed authority.
 //! `.10.4.2` lowers the static rule graph or failed outcome, and `.10.4.3` composes
 //! typed calls, bindings, staged artifacts, and generated-plan provenance. The
-//! clone-safe `linkedspec-semantic-model-v1` projection remains crate-private until
-//! a later leaf adds the ceiling-enforcing query surface. Construction never
-//! executes the target spec.
+//! clone-safe `linkedspec-semantic-model-v1` projection feeds the public
+//! ceiling-enforcing query surface and immutable observation derivation.
+//! Construction and query evaluation never execute the target spec.
 
 mod call_projection;
 mod query;
+mod runtime_projection;
 mod static_projection;
 
+pub use crate::semantic_observation::{
+    RUNTIME_SEMANTIC_OBSERVATION_CONTRACT, RuntimeSemanticObservationEvent,
+    RuntimeSemanticObservationEventKind, RuntimeSemanticObservationSink,
+};
 pub use query::{
     SemanticQuery, SemanticQueryBudget, SemanticQueryCost, SemanticQueryDiagnostic,
     SemanticQueryDirection, SemanticQueryOperation, SemanticQueryPage, SemanticQueryPageState,
@@ -292,9 +297,8 @@ pub struct SemanticIndex {
     compilation_diagnostic: Option<PortableDiagnostic>,
     entry_selection: Option<SemanticEntrySelection>,
     generated_plan: Option<SemanticGeneratedPlanInput>,
-    // `.10.4.2` retains this for later crate-internal query composition; until
-    // `.10.4.4`, only the focused in-module conformance tests consume the clone.
-    #[cfg_attr(not(test), allow(dead_code))]
+    // The query evaluator and immutable runtime derivation consume only clones
+    // of this normalized projection, never compiler/executor host state.
     static_projection: static_projection::SemanticStaticProjection,
 }
 
@@ -467,17 +471,7 @@ impl SemanticIndex {
 
     /// Return clone-safe foundation metadata without semantic records.
     pub fn snapshot(&self) -> SemanticSnapshot {
-        SemanticSnapshot {
-            id: SNAPSHOT_ID.to_string(),
-            state: if self.compiled.is_some() {
-                SemanticSnapshotState::Compiled
-            } else {
-                SemanticSnapshotState::FailedCompilation
-            },
-            has_execution: false,
-            source_detail_ceiling: self.source_detail_ceiling,
-            content_digest_available: self.source_detail_ceiling == SemanticSourceDetail::Text,
-        }
+        self.static_projection.snapshot.clone()
     }
 
     /// Return copied caller identity and exact source sizes without a host path.
@@ -554,6 +548,20 @@ impl SemanticIndex {
     /// expose compiler state.
     pub fn query_neutral(&self, request: &serde_json::Value) -> SemanticQueryResponse {
         query::evaluate(&self.static_projection(), request)
+    }
+
+    /// Derive a new immutable post-execution index from completed typed events.
+    ///
+    /// This method validates event schema and static topology but never invokes
+    /// the retained compiler or parser. The base index remains unchanged.
+    pub fn with_execution_observation(
+        &self,
+        observation: &[RuntimeSemanticObservationEvent],
+    ) -> Result<Self, SemanticIndexError> {
+        let static_projection = runtime_projection::build(&self.static_projection, observation)?;
+        let mut derived = self.clone();
+        derived.static_projection = static_projection;
+        Ok(derived)
     }
 
     /// Map an exact byte range when the caller permitted span detail.
