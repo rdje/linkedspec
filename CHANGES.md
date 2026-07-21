@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.2.0 — correct neutral static rule authority
+
+The semantic-introspection oracle no longer encodes the obsolete assumption that bare/default rule headers are
+AND-family rules. Exact `LinkedSpec::Get(return_descriptor, runtime_ctx_ref)` probes and the already admitted
+`linkedspec-rule-local-cursor-v1` contract agree that default rules own `or_default`/`seek`, normalized outward as
+neutral `or`/`seek`. The graph child, calls target, and Unicode privacy rules with no compiled edges now report
+`none` rather than invented blind ownership. The failed default-family bare edge reports family-derived `action`
+alongside its existing portable unknown-rule diagnostic. Explicit AND/OR, repetition, entry, and value-shape facts
+remain unchanged.
+
+`tools/check_semantic_introspection_contract.py` now reads the rule-local contract and independently derives family,
+cursor, entry-marker, repetition, and normalized ownership facts from exact headers plus semantic edge records.
+Three new mutations alter family, cursor, or ownership and refresh every response hash to the wrong model; the
+cross-contract authority still rejects them. Governance advances from 50 to 53 rejected mutations. Only the
+`graph_list_rules` response digest changes because the other corrected rule records were not selected by the
+original 20 queries—precisely the self-consistency gap the new guard closes. No parser, compiler, runtime,
+descriptor, generated-source, CLI, trace, native semantic API, rollout, admission, or MCP behavior changes.
+
+Signoff passes semantic 6/20/53, rule-local 36/18/8 plus 60 mutations, foundation 5, capability 80/0/0,
+aggregate-selector 59/27/0, primary CLI 66/66 twice, Knowledge Map 652/4,805, and Phase 0 1,031/1,031 in 612
+seconds. The first canonical attempt caught a displaced repeated-action task-index marker; restoring that exact
+closed-program marker passed focused 8/10/8+0/54 and the complete restart exited 0. mdBook, memory architecture,
+all doctrines, whitespace, and cleanup pass.
+
 ## 2026-07-20 — FUTURE-PARITY-BACKLOG.10.3.1 — add Perl semantic source foundation
 
 Perl now exposes the planned `LinkedSpec::semantic_index(...)` constructor without prematurely implementing the

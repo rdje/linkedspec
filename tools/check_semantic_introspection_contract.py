@@ -20,11 +20,21 @@ CONTRACT_ID = "linkedspec-semantic-introspection-contract-v1"
 MODEL_ID = "linkedspec-semantic-model-v1"
 QUERY_ID = "linkedspec-semantic-query-v1"
 TASK_OWNER = "FUTURE-PARITY-BACKLOG.10.2"
+RULE_LOCAL_CONTRACT_ID = "linkedspec-rule-local-cursor-v1"
+STATIC_RULE_AUTHORITY = {
+    "contract_id": RULE_LOCAL_CONTRACT_ID,
+    "path": "capability_conformance/rule_local_cursor_contract.json",
+    "neutral_family_map": {"and": "and", "or_default": "or"},
+    "neutral_cursor_map": {"consume": "contiguous", "seek": "seek"},
+    "neutral_edge_ownership_values": ["none", "action", "blind"],
+    "compiled_rule_without_edges": "none",
+    "failed_bare_edge_ownership_by_family": {"and": "blind", "or_default": "action"},
+}
 
 TOP_LEVEL_FIELDS = {
     "format", "contract_id", "model_id", "query_id", "task_owner", "decisions", "scope", "schema",
     "query_contract", "source_contract", "fixture_groups", "source_fixtures", "snapshots", "query_cases",
-    "target_admissions", "rollout", "canonical_ci", "mutations",
+    "static_rule_authority", "target_admissions", "rollout", "canonical_ci", "mutations",
 }
 MODEL_FIELDS = {"format", "model", "query", "snapshots"}
 MODEL_SNAPSHOT_FIELDS = {"id", "fixture", "snapshot", "source_refs", "records", "relations"}
@@ -343,6 +353,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(source["ceiling_is_applied_before_native_response"] is True and source["mcp_cannot_raise_ceiling"] is True, "source ceiling ownership drifted")
     require(source["forbidden_identity"] == ["implicit_host_path", "host_uri", "backend_type", "object_identity", "memory_address", "callable_value", "compiled_regex_object", "host_exception", "generated_implementation_source"], "privacy denylist drifted")
     require(source["none"] == "null_source_and_source_derived_facts_redacted" and source["identity"] == "source_id_and_registered_logical_name_only" and source["span"] == "identity_plus_span" and source["text"] == "span_plus_excerpt_and_optional_digest", "source projection policy drifted")
+    require(contract["static_rule_authority"] == STATIC_RULE_AUTHORITY, "static rule authority drifted")
 
     require([row["id"] for row in contract["fixture_groups"]] == FIXTURE_GROUP_IDS, "six fixture groups drifted")
     require(contract["fixture_groups"] == [
@@ -384,8 +395,90 @@ def validate_contract(contract: dict[str, Any]) -> None:
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "tools/check_semantic_introspection_contract.py"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 50 and len(set(contract["mutations"])) == 50, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 53 and len(set(contract["mutations"])) == 53, "mutation inventory drifted")
+
+
+def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
+    suffix = header[3:]
+    if suffix.startswith("::"):
+        mode = suffix[2:]
+    elif suffix.startswith(":"):
+        mode = suffix[1:]
+    else:
+        raise ContractError(f"rule header {header!r} has no admitted colon form")
+    if mode in {"", "AND", "&", "|"}:
+        return False, None, None
+    if mode in {"OR", "OR+", "+"}:
+        return True, 1, None
+    if mode == "*":
+        return True, 0, None
+    if mode == "?":
+        return True, 0, 1
+    bounds = re.fullmatch(r"(?:AND|OR)?\{(\d*),(\d*)\}|(?:AND|OR)?\{(\d+)\}", mode)
+    require(bounds is not None, f"rule header {header!r} has no neutral repetition mapping")
+    if bounds.group(3) is not None:
+        exact = int(bounds.group(3))
+        return True, exact, exact
+    lower = int(bounds.group(1)) if bounds.group(1) else 0
+    upper = int(bounds.group(2)) if bounds.group(2) else None
+    return True, lower, upper
+
+
+def validate_static_rule_authority(contract: dict[str, Any], model: dict[str, Any]) -> None:
+    authority = contract["static_rule_authority"]
+    rule_local = load_json(ROOT / authority["path"])
+    require(rule_local.get("contract_id") == authority["contract_id"], "rule-local authority identity drifted")
+    family_cases = {row["header"]: row for row in rule_local["family_cases"]}
+    require(len(family_cases) == len(rule_local["family_cases"]), "rule-local family header inventory is ambiguous")
+
+    for snapshot in model["snapshots"]:
+        records = snapshot["records"]
+        rules = [record for record in records if record["kind"] == "rule"]
+        edges_by_owner: dict[str, list[dict[str, Any]]] = {}
+        for edge in (record for record in records if record["kind"] == "edge"):
+            edges_by_owner.setdefault(edge["owner_id"], []).append(edge)
+        diagnostics = [record["facts"]["code"] for record in records if record["kind"] == "diagnostic"]
+
+        for rule in rules:
+            context = f"snapshot {snapshot['id']} static rule {rule['id']}"
+            require(rule["source"] in snapshot["source_refs"], f"{context} has no header source authority")
+            excerpt = snapshot["source_refs"][rule["source"]]["excerpt"]
+            require(excerpt.startswith(rule["name"] + ":"), f"{context} header/name drifted")
+            neutral_header = "Top" + excerpt[len(rule["name"]):]
+            require(neutral_header in family_cases, f"{context} header is absent from the rule-local authority")
+            family_case = family_cases[neutral_header]
+            source_family = family_case["family"]
+            expected_family = authority["neutral_family_map"][source_family]
+            expected_cursor = authority["neutral_cursor_map"][family_case["cursor_policy"]]
+            expected_repetition = neutral_repetition_from_header(neutral_header)
+            is_entry_marker = excerpt.startswith(rule["name"] + "::")
+
+            owned_edges = edges_by_owner.get(rule["id"], [])
+            if owned_edges:
+                ownerships = {edge["facts"]["ownership"] for edge in owned_edges}
+                require(len(ownerships) == 1, f"{context} mixes normalized edge ownership")
+                expected_ownership = next(iter(ownerships))
+            elif snapshot["snapshot"]["state"] == "failed_compilation" and "unknown_rule_reference" in diagnostics:
+                expected_ownership = authority["failed_bare_edge_ownership_by_family"][source_family]
+            else:
+                expected_ownership = authority["compiled_rule_without_edges"]
+
+            facts = rule["facts"]
+            require(facts["family"] == expected_family, f"{context} family contradicts rule-local authority")
+            require(facts["cursor_policy"] == expected_cursor, f"{context} cursor contradicts rule-local authority")
+            require(facts["is_entry_marker"] is is_entry_marker, f"{context} entry-marker fact contradicts its header")
+            require(
+                (facts["is_repetition"], facts["rep_min"], facts["rep_max"]) == expected_repetition,
+                f"{context} repetition facts contradict its header",
+            )
+            require(facts["edge_ownership"] == expected_ownership, f"{context} edge ownership contradicts normalized edges")
+            require(facts["edge_ownership"] in authority["neutral_edge_ownership_values"], f"{context} edge ownership is outside the neutral vocabulary")
+
+        spec = next(record for record in records if record["kind"] == "spec")
+        marked_rules = [rule["id"] for rule in rules if rule["facts"]["is_entry_marker"]]
+        expected_entry = marked_rules[0] if marked_rules and snapshot["snapshot"]["state"] == "compiled" else None
+        require(spec["facts"]["entry_rule_id"] == expected_entry, f"snapshot {snapshot['id']} entry selection contradicts rule headers")
 
 
 def validate_model(contract: dict[str, Any], model: dict[str, Any]) -> None:
@@ -458,6 +551,7 @@ def validate_model(contract: dict[str, Any], model: dict[str, Any]) -> None:
         relation_kinds = {relation["kind"] for snapshot in selected for relation in snapshot["relations"]}
         require(all(kind in record_kinds for kind in group.get("required_kinds", [])), f"fixture group {group['id']} omits a required record kind")
         require(all(kind in relation_kinds for kind in group.get("required_relations", [])), f"fixture group {group['id']} omits a required relation kind")
+    validate_static_rule_authority(contract, model)
 
 
 def validate_no_private_leaks(value: Any, context: str, path: str = "$") -> None:
@@ -768,7 +862,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
-    require(CONTRACT_ID in readme and "50 rejected mutations" in readme, "capability-conformance guide is not synchronized")
+    require(CONTRACT_ID in readme and "53 rejected mutations" in readme, "capability-conformance guide is not synchronized")
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(MODEL_ID in book and "0 complete / 6 pending" in book, "mdBook semantic introspection page is not synchronized")
 
@@ -801,6 +895,18 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     def remove_query(case_id: str) -> Callable[[dict[str, Any], dict[str, Any]], None]:
         return lambda contract, _model: contract["query_cases"].__setitem__(slice(None), [row for row in contract["query_cases"] if row["id"] != case_id])
 
+    def mutate_and_refresh_hashes(
+        finder: Callable[[dict[str, Any], dict[str, Any]], Any],
+        action: Callable[[Any], None],
+    ) -> Callable[[dict[str, Any], dict[str, Any]], None]:
+        def mutate(contract: dict[str, Any], model: dict[str, Any]) -> None:
+            action(finder(contract, model))
+            snapshots = {row["id"]: row for row in model["snapshots"]}
+            for case in contract["query_cases"]:
+                response = evaluate_query(contract, snapshots[case["snapshot"]], case["request"])
+                case["expected"]["response_sha256"] = canonical_digest(response)
+        return mutate
+
     mutations: dict[str, Callable[[dict[str, Any], dict[str, Any]], None]] = {}
     mutations["remove_record_kind"] = lambda c, m: c["schema"]["record_kinds"].remove("event")
     mutations["rename_record_kind"] = lambda c, m: c["schema"]["record_kinds"].__setitem__(11, "staging")
@@ -825,6 +931,9 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["invalid_value_shape"] = apply_to(model_record("graph", "rule:Top"), lambda row: row["facts"]["value_shape"].update({"kind": "tuple"}))
     mutations["strengthen_unknown_shape"] = apply_to(model_record("graph", "rule:Child"), lambda row: row["facts"]["value_shape"]["element"].update({"kind": "string"}))
     mutations["invalid_target_shape"] = apply_to(model_record("graph", "regex:rule:Child:0"), lambda row: row["facts"]["target_shape"].update({"kind": "perl_regex"}))
+    mutations["coordinated_family_and_hash_drift"] = mutate_and_refresh_hashes(model_record("privacy", "rule:T%C3%B6p"), lambda row: row["facts"].update({"family": "and"}))
+    mutations["coordinated_cursor_and_hash_drift"] = mutate_and_refresh_hashes(model_record("calls", "rule:Top"), lambda row: row["facts"].update({"cursor_policy": "contiguous"}))
+    mutations["coordinated_edge_ownership_and_hash_drift"] = mutate_and_refresh_hashes(model_record("graph", "rule:Child"), lambda row: row["facts"].update({"edge_ownership": "blind"}))
     mutations["remove_request_field"] = lambda c, m: c["query_contract"]["request_fields"].remove("budget")
     mutations["remove_response_field"] = lambda c, m: c["query_contract"]["response_fields"].remove("cost")
     mutations["remove_snapshot_field"] = lambda c, m: c["query_contract"]["snapshot_fields"].remove("has_execution")

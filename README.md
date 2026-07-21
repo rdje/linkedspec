@@ -770,14 +770,17 @@ content migration exists yet.
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 50 mutations in canonical CI; neutral rollout is 1 complete / 8 pending,
+  across six fixture groups and rejects 53 mutations in canonical CI. Its static rule facts are cross-checked
+  against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
+  default-family or no-edge-ownership drift. Neutral rollout is 1 complete / 8 pending,
   while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
   runtime-context failure authority without parser execution or path reads. It does not yet expose semantic
-  records, `capabilities`, or `query`, so rollout/admission remain 1/9 and 0/6. Static graph projection `.10.3.2`
-  follows only after the clean foundation commit; `.10.3.3-.10.3.6` retain later Perl work.
+  records, `capabilities`, or `query`, so rollout/admission remain 1/9 and 0/6. Correction leaf `.10.3.2.0`
+  repairs the neutral default-family facts before static Perl projection `.10.3.2.1`; `.10.3.3-.10.3.6` retain
+  later Perl work.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

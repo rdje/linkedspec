@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-20` (strict Perl source/map/outcome leaf `.10.3.1` is active task-tree-first from clean
-  authority-map commit `e679a3eb`)
+- Last updated: `2026-07-21` (static Perl graph/diagnostic projection leaf `.10.3.2` is active task-tree-first from
+  clean source-foundation commit `0558c65a`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -6978,15 +6978,97 @@ before implementation.
     are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Project exact static rule, regex-slot, edge, lifecycle, entry, and diagnostic semantics on Perl.
   Depends on: `.10.3.1`
-  Acceptance: Build canonical ids/order and normalized spec/source/rule/regex-slot/edge/lifecycle/diagnostic/
-    decision/explanation records plus relations from descriptor, source map, entry selection, and runtime-context
-    authorities. Normalize internal family/cursor/unbounded representations without serializing regexes, coderefs,
-    AST layout, or paths. Deep-equal the graph, privacy/full+limited, and failed-compilation neutral snapshots;
-    prove duplicate slots, exact source redaction inputs, failure normalization, immutable copies, and no behavior
-    change outside semantic construction.
+  Acceptance: First audit and correct any static semantic drift in the supposedly frozen neutral oracle under `.0`;
+    then build canonical ids/order and normalized spec/source/rule/regex-slot/edge/lifecycle/diagnostic/decision/
+    explanation records plus relations from descriptor, source map, entry selection, and runtime-context authorities
+    under `.1`. Normalize internal family/cursor/unbounded representations without serializing regexes, coderefs,
+    AST layout, or paths. Deep-equal the corrected graph, privacy/full+limited, and failed-compilation neutral
+    snapshots; prove duplicate slots, exact source redaction inputs, failure normalization, immutable copies, and no
+    behavior change outside semantic construction.
+  Verification: Activated task-tree-first on 2026-07-21 from clean source-foundation commit `0558c65a` at ahead
+    264. `git_message_brief.txt` was zero bytes; generated mdBook and Python-cache outputs were absent. No static
+    projection, fixture-consumer, CI, or non-task documentation edit preceded activation. `.10.3.1` supplies the
+    opaque compiled/failed authority and exact source-map boundary; this leaf owns only static normalized records,
+    relations, diagnostics, decisions, and explanations before calls/staging/query/runtime/admission. Exact Toolbox
+    reproduction then found a foundational oracle conflict before adapter code: the Unicode privacy fixture's
+    neutral rule record says `and`/`contiguous`, while the live `return_descriptor` authority for that default rule
+    says `or_default`/`seek`. Child `.0` owns correction and an independent drift guard before child `.1` projects
+    the corrected contract. `.0` then audited every rule across all six snapshots: graph `Child`, calls `Top`/
+    `Done`, failed `Top`, and privacy full/limited required correction while explicit graph/runtime family,
+    repetition, entry, and all conservative value shapes were already exact. The independent rule-local guard is
+    now green at 53 mutations; `.1` remains the next implementation child.
+
+  #### Acceptance Checklist
+
+  - [ ] **RETRIEVE / TOOLBOX FIRST** — Reuse Knowledge Map authority cards and exact descriptor/runtime-context/
+    source-map probes before inspecting implementation or deriving projection behavior.
+  - [ ] **REPRODUCE / ORACLE** — Materialize the neutral graph, privacy full/limited, and failed-compilation
+    snapshots as exact expected record/relation/source/error targets before implementation.
+  - [ ] **ROOT CAUSE (WHY + WHERE)** — Map every static field, order, id, source span, diagnostic normalization,
+    decision, and explanation step to descriptor/source/runtime authorities; record absent seams explicitly.
+  - [ ] **FIX** — Add only immutable static projection behind the opaque foundation; do not implement call/staged,
+    public capabilities/query, execution observations, rollout, or admission owned by `.10.3.3-.10.3.6`.
+  - [ ] **ADDRESSED (verified)** — Deep-equal exact graph/privacy full+limited/failed snapshots; prove duplicate
+    slot identity, source redaction inputs, normalized failures, clone isolation, deterministic ids/order, and no
+    host regex/coderef/AST/path leakage.
+  - [ ] **NO REGRESSION** — Existing construction/direct/loaded/CLI/generated behavior, semantic 6/20/53, focused
+    consumers, and complete canonical Phase 0 remain exact without advancing rollout/admission.
+  - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
+    are synchronized, or explicitly unchanged with evidence.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.3.2.0`
+    Status: `done`
+    Goal: Root-cause and correct static semantic drift in the neutral introspection oracle before Perl projection.
+    Depends on: `.10.3.1`
+    Acceptance: Cross-check every graph/privacy/failed static rule family, cursor policy, edge ownership, repetition,
+      value shape, and entry fact against the rule-local contract plus exact Perl descriptor/runtime authorities.
+      Correct every stale neutral fact and dependent digest, add an independent cross-contract guard with mutation
+      proof so coordinated model/digest edits cannot silently reintroduce drift, and synchronize the contract docs,
+      book, task tree, live docs, Knowledge Map, and canonical gate without changing any backend behavior or
+      advancing rollout/admission.
+    Verification: Opened task-tree-first inside `.10.3.2` while its only dirty file remained this task tree. No
+      neutral model, checker, Perl, fixture, consumer, CI, or non-task documentation edit preceded this subleaf.
+      Exact `LinkedSpec::Get(return_descriptor, runtime_ctx_ref)` probes established the privacy mismatch, then
+      audited graph/calls/runtime/privacy descriptors and the failed runtime diagnostic. Corrected default rows are
+      neutral `or`/`seek`, compiled no-edge rows are `none`, and the failed default bare edge is `action`; only the
+      exposed graph-rule query digest changed. The checker now consumes `linkedspec-rule-local-cursor-v1` and three
+      coordinated wrong-model plus refreshed-hash mutations. Focused proof passes semantic 6/20/53, rule-local
+      36 family / 18 edge / 8 composition plus 60 mutations, foundation 5, capability 80/0/0, Knowledge Map
+      652/4,805, mdBook, memory, doctrines, and whitespace. The first canonical attempt correctly caught that the
+      refreshed active task-index row had displaced the repeated-action closeout marker; restoring the exact marker
+      passed focused 8/10/8+0/54. The complete restart passes selector 59/27/0, primary 66x2, and Phase 0
+      1,031/1,031 in 612 seconds before canonical exit 0. No parser/compiler/runtime/descriptor/generated/CLI/
+      trace/API behavior, rollout, or admission changed; `.1` follows only from this clean correction commit.
+    Commit: `FUTURE-PARITY-BACKLOG.10.3.2.0 - correct semantic static oracle`
+
+    #### Acceptance Checklist
+
+    - [x] **RETRIEVE / TOOLBOX FIRST** — Reuse the semantic authority cards, rule-local contract, and exact
+      descriptor/runtime/source probes; do not infer semantics by eyeballing `.spec` text.
+    - [x] **REPRODUCE / ISSUE** — Lock every affected neutral fact and the exact privacy mismatch before correction.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — Identify why the existing checker accepted stale source/model semantics and
+      distinguish schema/digest self-consistency from independent behavioral authority.
+    - [x] **FIX** — Correct only neutral static facts/digests and add an independent cross-contract guard; do not add
+      Perl projection/query/runtime behavior or alter fixture execution semantics.
+    - [x] **ADDRESSED (verified)** — Mutation proof rejects stale family/cursor/ownership facts even when model and
+      response digests are updated together; the exact neutral checker and canonical registrations pass.
+    - [x] **NO REGRESSION** — Rule-local, semantic, adjacent contract, docs, and canonical Phase 0 gates remain exact;
+      rollout/admission counts do not advance.
+    - [x] **LOCKSTEP** — Contract docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow are
+      synchronized, or explicitly unchanged with evidence.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.3.2.1`
+    Status: `pending`
+    Goal: Project exact corrected static grammar, source, entry, diagnostic, decision, and explanation semantics.
+    Depends on: `.10.3.2.0`
+    Acceptance: Build canonical ids/order and normalized spec/source/rule/regex-slot/edge/lifecycle/diagnostic/
+      decision/explanation records plus relations from descriptor, source map, entry selection, and runtime-context
+      authorities. Deep-equal corrected graph, privacy full/limited, and failed snapshots; prove duplicate slots,
+      redaction inputs, failure normalization, immutable copies, deterministic order, and no host-object leakage or
+      behavior change. Do not implement calls/staging/query/runtime/admission owned by later leaves.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.3`
   Status: `pending`
@@ -9659,11 +9741,13 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 72 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 73 | `FUTURE-PARITY-BACKLOG.9.1` | `done` | Cursor/root/slot/repeated-action semantic work is closed across neutral, all runtime/ABI, recurring, and public projections. |
 | 74 | `FUTURE-PARITY-BACKLOG.10.1` | `done` | ADR `0049` fixes the backend-neutral semantic schema, idiomatic native APIs, exact parity gate, and thin MCP projection before code. |
-| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups, 20 digest-locked responses, 50 rejected mutations, and canonical registration freeze the neutral oracle before adapters. |
+| 74.1 | `FUTURE-PARITY-BACKLOG.10.2` | `done` | Six exact fixture groups and 20 digest-locked responses freeze the neutral oracle; `.10.3.2.0` later corrects static rule drift and raises its guard from 50 to 53 mutations. |
 | 74.2 | `FUTURE-PARITY-BACKLOG.10.3` | `active` | Implement the Perl semantic index, native query surface, and exact reference conformance through owned children. |
 | 74.2.0 | `FUTURE-PARITY-BACKLOG.10.3.0` | `done` | Exact toolbox probes map decoded source, descriptor, ActionIR, staged, generated, diagnostic, and missing runtime seams before behavior. |
 | 74.2.1 | `FUTURE-PARITY-BACKLOG.10.3.1` | `done` | Opaque construction, strict UTF-8/canonical source mapping, and immutable compiled-or-failed outcomes pass exact canonical proof without query or admission. |
-| 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `pending` | Project static grammar, source, entry, diagnostic, and explanation semantics. |
+| 74.2.2 | `FUTURE-PARITY-BACKLOG.10.3.2` | `active` | Correct neutral static drift first, then project exact static grammar, source, entry, diagnostic, and explanation semantics. |
+| 74.2.2.0 | `FUTURE-PARITY-BACKLOG.10.3.2.0` | `done` | Correct default/no-edge static facts and independently gate them at semantic 6/20/53 before adapter behavior. |
+| 74.2.2.1 | `FUTURE-PARITY-BACKLOG.10.3.2.1` | `pending` | Project the corrected static neutral graph and failed-diagnostic contract on Perl. |
 | 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `pending` | Project ActionIR calls/shapes/bindings plus staged/generated provenance. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |

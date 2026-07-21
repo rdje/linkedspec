@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.2.0` — correct the oracle before projecting it): Toolbox-first
+  descriptor probes exposed a foundational contradiction before Perl adapter code. `Töp::`, `Top::`, `Done:`, and
+  failed `Top:` are default-family headers, but the neutral model labeled them `and`/`contiguous`; exact current
+  descriptors and the admitted rule-local contract say `or_default`/`seek`. The same audit found `blind` on rules
+  with no compiled edges even though every backend descriptor contract uses `none`. The failed bare-edge row keeps
+  `action` because default-family bare edges normalize to action before the missing target is diagnosed.
+
+  The root cause was independent-answer coverage, not JSON or digest instability. The checker validated schema,
+  model topology, exact fixture bytes, and query-response digests, but it never compared static rule facts with a
+  parser-semantics authority. Several wrong rule records were absent from the 20 query selections; even exposed
+  records could have drifted together with freshly computed hashes. The correction adds an explicit
+  `static_rule_authority` dependency on `linkedspec-rule-local-cursor-v1`, derives exact header family/cursor,
+  marker/repetition, and ownership expectations, and adds three mutations that deliberately refresh response
+  hashes after introducing wrong facts. All are rejected without adding backend behavior or advancing rollout.
+
+  The first canonical run then exercised an intended adjacent guard: refreshing the active task-index row had
+  removed the exact historical phrase required by repeated-action public no-drift. Restoring that phrase passed
+  the focused 8 mode / 10 special / 8+0 rollout / 54 mutation check. The complete canonical restart passed semantic
+  6/20/53, selector 59/27/0, primary 66x2, and Phase 0 1,031/1,031 in 612 seconds before exit 0. This was a durable
+  documentation-topology correction, not parser/runtime behavior.
+
 - 2026-07-20 (`FUTURE-PARITY-BACKLOG.10.3.1` — establish immutable source and outcome ownership): The constructor
   deliberately uses the existing descriptor-return compile path rather than adding a parser or reconstruction
   route. It copies/normalizes source before compilation, passes no path identity into runtime context, requests no

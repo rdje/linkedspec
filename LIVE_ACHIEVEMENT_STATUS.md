@@ -8,22 +8,38 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.1` is active task-tree-first from clean authority-map commit `e679a3eb`. The opaque
-  `LinkedSpec::semantic_index(...)` constructor, strict UTF-8/canonical-byte source map, typed construction errors,
-  immutable compiled-or-failed outcome, exact focused consumer, canonical registration, Knowledge Map, and public
-  documentation are signoff-complete. Exact proof is foundation 5, adjacent 17, semantic 6/20/50, selector
-  59/27/0, primary 66x2, Knowledge Map 651/4,796, and Phase 0 1,031/1,031 in 610 seconds; mdBook, doctrines,
-  whitespace, and canonical exit 0 pass. Only cleanup, commit, and brief clearing remain before `.10.3.2`.
+- `FUTURE-PARITY-BACKLOG.10.3.2.0` is active task-tree-first from clean source-foundation commit `0558c65a`.
+  Toolbox/Knowledge retrieval plus exact descriptors found stale neutral default-family and no-edge ownership
+  facts before adapter code. The corrected model uses `or`/`seek`, `none` for compiled no-edge rules, and `action`
+  for the failed default bare edge. The checker now derives those facts from `linkedspec-rule-local-cursor-v1` and
+  rejects 53 mutations including three coordinated model-plus-hash drifts. Signoff passes semantic 6/20/53,
+  rule-local 36/18/8 plus 60 mutations, foundation 5, capability 80/0/0, selector 59/27/0, primary 66x2,
+  Knowledge Map 652/4,805, and Phase 0 1,031/1,031 in 612 seconds; mdBook, memory, doctrines, whitespace, and full
+  canonical exit 0 pass. Only final cleanup, commit, and brief clearing remain before `.10.3.2.1`.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
 observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
 rollout legs and native backend admission 0/6: Perl construction exists, but records/capabilities/query do not.
+Static oracle correction changes neither ledger.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-20: **FUTURE-PARITY-BACKLOG.10.3.1 — add Perl semantic source foundation**
+  (DONE at clean commit `0558c65a` from base `e679a3eb`).
+
+  **Result:** Opaque `LinkedSpec::semantic_index(...)` construction normalizes decoded/strict-UTF-8 source,
+  preserves exact byte/scalar mapping, compiles once without execution, and retains immutable compiled-or-failed
+  authority without paths, host-object leakage, records, query, observation, rollout, or admission.
+
+  **Proof:** Foundation 5, adjacent loading/root 17, semantic 6/20/50, selector 59/27/0, primary 66x2,
+  Knowledge Map 651/4,796, Phase 0 1,031/1,031 in 610 seconds, mdBook/doctrines/whitespace, canonical exit 0.
+
+  **Next:** Static projection parent `.10.3.2` activated from the clean boundary; correction `.10.3.2.0` now owns
+  the pre-adapter oracle drift found by exact probes.
+
 - 2026-07-20: **FUTURE-PARITY-BACKLOG.10.3.0 — map Perl semantic authorities**
   (DONE at clean commit `e679a3eb` from base `a891d7af`).
 

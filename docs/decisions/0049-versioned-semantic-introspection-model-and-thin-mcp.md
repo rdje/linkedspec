@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral contract executable; Perl source foundation implemented; adapters pending
+- Status: accepted; amended by ADR 0050; neutral static-rule oracle corrected and cross-gated; Perl source foundation implemented; adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -332,6 +332,15 @@ text or strict UTF-8 bytes, accepts caller logical identity/source ceiling with 
 byte/Unicode-scalar coordinates, compiles once through the existing descriptor/runtime-context path without
 execution, and retains an opaque immutable compiled-or-failed outcome. It deliberately has no public
 `capabilities` or `query` methods yet; `.10.3.2-.10.3.6` retain projection, evaluation, observation, and admission.
+
+Before static Perl projection, `.10.3.2.0` found that the executable model and response hashes were mutually
+consistent but contradicted ADR `0044` and the live descriptor for bare/default rule headers. The corrected
+neutral rule vocabulary maps descriptor `or_default`/`seek` to `or`/`seek`; a compiled rule with no normalized
+edges reports `none`; and the failed default-family bare-edge fixture retains family-derived `action` alongside
+its diagnostic. The semantic checker now consumes `linkedspec-rule-local-cursor-v1` as an independent authority
+for header family/cursor, repetition, entry-marker, and ownership facts. Coordinated wrong-model plus refreshed-
+hash mutations are rejected. This is an oracle correction only: it changes no parser, compiler, runtime,
+descriptor, generated artifact, CLI, trace, backend admission, or MCP behavior.
 
 ## Links
 

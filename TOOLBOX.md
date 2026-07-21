@@ -361,11 +361,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 50 rejected mutations, rollout 1 complete / 8 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 53 rejected mutations, rollout 1 complete / 8 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
   a semantic snapshot. See [[perl-semantic-introspection-authority-map]].
+- **STATIC-FACT CROSS-CHECK:** the checker reads `linkedspec-rule-local-cursor-v1` and derives family/cursor,
+  repetition, marker, and normalized ownership from exact rule headers plus edge records. This prevents a model
+  edit and matching response-hash refresh from preserving a stale but internally consistent oracle. See
+  [[semantic-introspection-static-rule-authority]].
 - **PERL SOURCE FOUNDATION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t` verifies the `.10.3.1`
   constructor boundary: decoded/raw strict-UTF-8 convergence, canonical byte/scalar coordinates, opaque clone-safe
   state, compiled and failed outcomes, logical-name-only identity, malformed-byte rejection, and no path option.

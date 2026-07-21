@@ -4,7 +4,7 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-20`
+- Last refreshed: `2026-07-21`
 - `2026-07-20` semantic-introspection neutral-contract refresh: ADRs `0049`/`0050` and
   `FUTURE-PARITY-BACKLOG.10.2` make
   `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` before behavior. One immutable native
@@ -13,8 +13,11 @@ This document is the current high-level technical reading of the project shape. 
   page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
   descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
   ADR `0050` adds truthful staged payload/job/result records and consumes/produces direction without collapsing
-  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 50 rejected mutations now run
-  in canonical CI. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
+  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 53 rejected mutations now run
+  in canonical CI. Correction `.10.3.2.0` cross-checks every snapshot rule header against the admitted rule-local
+  cursor contract: default rules normalize to neutral `or`/`seek`, compiled rules with no edges report `none`,
+  and the failed default-family bare edge retains `action`. This repairs stale self-consistent model/digest facts
+  before an adapter can encode them. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
   pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
@@ -22,7 +25,7 @@ This document is the current high-level technical reading of the project shape. 
   has no typed invocation-local event sink. Leaf `.10.3.1` now implements the first boundary: an opaque inside-out
   Perl index, strict decoded/byte normalization, canonical-byte digest/source mapper, typed constructor errors, and
   immutable compiled-or-failed outcome via the existing runtime/descriptor path. It never reads a path or executes;
-  no semantic records, queries, observations, or admission are claimed. `.10.3.2-.10.3.6` own those later layers.
+  no semantic records, queries, observations, or admission are claimed. `.10.3.2.1-.10.3.6` own those later layers.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

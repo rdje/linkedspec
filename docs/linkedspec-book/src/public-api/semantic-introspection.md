@@ -254,13 +254,20 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 50 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 53 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. This is contract evidence only: it deliberately rejects
 premature backend admission.
+
+The static rule facts also have an authority outside the semantic model. The checker reads
+`linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
+entry/repetition from each exact header, and reconciles rule ownership with normalized edge records. Therefore a
+bare/default rule is never treated as an AND rule merely because a hand-authored model row says so, and a rule
+with no compiled edges reports `none` instead of invented blind ownership. Three mutations update the wrong model
+fact and all affected response hashes together; the independent cross-contract check still rejects each change.
 
 ## Rollout and MCP boundary
 
@@ -271,7 +278,8 @@ The dependency order is:
 | `.10.2` | neutral contract, fixtures, exact oracle | complete |
 | `.10.3.0` | Perl authority map and safe implementation split | complete |
 | `.10.3.1` | Perl strict source/map/compiled-or-failed outcome foundation | implemented; admission unchanged |
-| `.10.3.2-.10.3.6` | Perl static graph, calls/staging, query, runtime/routes, admission | pending |
+| `.10.3.2.0` | correct and independently gate neutral static rule facts | complete |
+| `.10.3.2.1-.10.3.6` | Perl static graph, calls/staging, query, runtime/routes, admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |

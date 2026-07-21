@@ -139,6 +139,15 @@
     "ceiling_is_applied_before_native_response": true,
     "mcp_cannot_raise_ceiling": true
   },
+  "static_rule_authority": {
+    "contract_id": "linkedspec-rule-local-cursor-v1",
+    "path": "capability_conformance/rule_local_cursor_contract.json",
+    "neutral_family_map": {"and": "and", "or_default": "or"},
+    "neutral_cursor_map": {"consume": "contiguous", "seek": "seek"},
+    "neutral_edge_ownership_values": ["none", "action", "blind"],
+    "compiled_rule_without_edges": "none",
+    "failed_bare_edge_ownership_by_family": {"and": "blind", "or_default": "action"}
+  },
   "fixture_groups": [
     {"id": "rule_regex_edge_lifecycle_graph", "sources": ["graph"], "required_kinds": ["rule", "regex_slot", "edge", "lifecycle", "decision", "explanation_step"]},
     {"id": "call_resolution_and_shapes", "sources": ["calls_and_staging"], "required_kinds": ["function", "helper", "binding", "call", "decision", "explanation_step"]},
@@ -173,7 +182,7 @@
       "id": "graph_list_rules",
       "snapshot": "graph",
       "request": {"contract": "linkedspec-semantic-query-v1", "operation": "list", "subjects": [], "record_kinds": ["rule"], "relation_kinds": [], "direction": "outgoing", "page": {"after_id": null, "limit": 100}, "budget": {"max_records": 1000, "max_relations": 2000, "max_depth": 4}, "source": {"detail": "identity", "include_content_digest": false}},
-      "expected": {"ok": true, "record_ids": ["rule:Top", "rule:Child"], "relation_ids": [], "diagnostic_codes": [], "complete": true, "response_sha256": "fae338e899ac83f6f4b39c95474c5c8673d109be751cc25fb12282db0a7b7863"}
+      "expected": {"ok": true, "record_ids": ["rule:Top", "rule:Child"], "relation_ids": [], "diagnostic_codes": [], "complete": true, "response_sha256": "b8872b7340d2d6f4aaa409745fe0083bc744a594e09a05ed5b9786446594df0b"}
     },
     {
       "id": "graph_duplicate_regex_text",
@@ -309,6 +318,7 @@
     "required_tracked_files": [
       "capability_conformance/semantic_introspection_contract.json",
       "capability_conformance/semantic_introspection_model.json",
+      "capability_conformance/rule_local_cursor_contract.json",
       "tools/check_semantic_introspection_contract.py"
     ],
     "backend_consumers": "not_admitted_before_owned_rollout_leaf",
@@ -320,6 +330,8 @@
     "collapse_staged_roles", "stage_job_as_generated", "remove_stage_provenance", "alter_record_id",
     "lowercase_id_escape", "alter_relation_id", "reorder_records", "reorder_relations", "remove_nullable_field",
     "extra_backend_field", "invalid_value_shape", "strengthen_unknown_shape", "invalid_target_shape",
+    "coordinated_family_and_hash_drift", "coordinated_cursor_and_hash_drift",
+    "coordinated_edge_ownership_and_hash_drift",
     "remove_request_field", "remove_response_field", "remove_snapshot_field", "remove_page_field",
     "remove_cost_field", "remove_query_diagnostic_field", "raise_page_max", "raise_depth_max", "omit_budget_case",
     "change_budget_prefix", "omit_reverse_relation_case", "omit_explanation", "change_explanation_order",
