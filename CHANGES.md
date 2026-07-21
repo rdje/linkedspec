@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0.1.1 — consume Unicode labels in self-hosted grammar
+
+Canonical `specs/spec.spec` now consumes the generated Unicode 17 literal class at exactly 12 rule-label sites:
+headers and every action, blind-call, and bare-edge block/fluent/plain target position. Function, helper,
+lifecycle, fluent-method, and mark identifiers retain their separate grammars. The independent Unicode checker
+locks every production count and rejects a deliberate `action_bare` fallback to host `\w`.
+
+Dart's existing bounded structural regex bridge now derives the label atom from each authored structural pattern,
+automatically enables Unicode mode when a pattern includes supplementary literal scalars, recognizes the current
+explicit lifecycle alternation, and handles physical-line bare-edge block/fluent families with their consumed
+captures intact. A focused direct-current-source test executes all ten declaration/reference productions using
+ASCII, precomposed, decomposed, Greek, CJK, middle-dot, digit-start, underscore, and supplementary labels.
+
+Focused matching/interpreter/corpus/current-source tests pass 93 and fatal analysis is clean. The complete Dart
+gate passes formatting, fatal analysis, package 279, primary 66/66 twice, and the unchanged stale corpus 105/105;
+Perl directly compiles current canonical source. The four corpus inputs deliberately remain at SHA-256
+`e0a1b63b...` for `.10.5.0.1.2`, while current source is `43cddeae...`; no corpus fixture, hardcoded Dart label
+scanner/validator, semantic response, rollout, or admission ledger changes in this slice.
+
+Knowledge Map is 670 facts / 4,981 keys; mdBook, memory/task metadata, all four doctrines, and whitespace pass.
+Canonical CI passes semantic 6/20/73, Rust admission, primary 66/66 twice, and Phase 0 1,031/1,031, exit 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.5.0.1.0 — generate self-hosted Unicode label class
 
 The verified Unicode 17 rule-label generator now emits one additional deterministic artifact:

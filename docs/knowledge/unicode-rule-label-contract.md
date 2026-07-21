@@ -10,13 +10,15 @@ answers:
   - "where is the Rust Unicode rule label classifier generated"
   - "where is the portable self-hosted rule label regex class generated"
   - "is the self-hosted rule label class derived from host Unicode tables"
+  - "does specs/spec.spec consume the pinned Unicode rule label class"
+  - "how many self-hosted grammar sites consume the Unicode rule label class"
   - "which Rust parser routes consume the Unicode rule label contract"
   - "which backends still need Unicode rule label alignment"
 date: 2026-07-21
 status: current
 tags: [grammar, unicode, rule-labels, rust, generated-data, validation, portability]
-evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
-reverify: "python3 tools/check_unicode_rule_label_contract.py; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/runtime/matching.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
 ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
@@ -34,8 +36,16 @@ writes the neutral JSON, `linkedspec-core`'s range-table classifier, and one por
 `unicode_case/unicode_rule_label_regex_class.txt`. That self-hosted artifact encodes the same 806 merged range
 endpoints directly, not a host Unicode property escape. Its checker independently reconstructs and byte-compares
 the class, rejects regex/delimiter membership that would need engine-specific escaping, compiles it, and exercises
-every positive, negative, and distinct fixture. Leaf `.10.5.0.1.0` adds only this generated authority; canonical
-`specs/spec.spec` consumes it in `.10.5.0.1.1`.
+every positive, negative, and distinct fixture. Leaf `.10.5.0.1.0` adds only this generated authority;
+`.10.5.0.1.1` consumes it exactly 12 times in canonical `specs/spec.spec`: one declaration site and all action,
+blind-call, and bare-edge block/fluent/plain target sites. The checker rejects a missing, extra, or substituted
+site while function/helper/lifecycle/fluent-method/mark identifiers retain their separate grammars.
+
+Dart's bounded self-hosted regex bridge derives that exact label atom from each canonical structural pattern
+rather than owning another label table. It enables Unicode regex mode whenever a pattern contains supplementary
+literal scalars, recognizes the canonical explicit lifecycle alternation and bare-edge structural families, and
+directly executes current `specs/spec.spec` across all label edge forms. This shared grammar bridge does not repair
+Dart's separate hardcoded header/reference scanner or external-AST validation; `.10.5.0.2` still owns those routes.
 
 The Rust parser consumes its generated classifier
 for headers and action, blind, and bare references; validation rechecks declarations and all edge targets so a

@@ -833,16 +833,18 @@ content migration exists yet.
   denial. The checker locks eight Rust-specific topology mutations and canonical registration, advancing only Rust
   to rollout 3/9 and native admission 2/6; Dart, Julia, PUC Lua, and LuaJIT remain pending. Dart audit `.10.5.0`
   proves its compiled/ActionIR/staged/generated authorities are reusable, while exact source mapping, normalized
-  projection/query, and typed observation are new adapter layers. It also proves current host-`\w` declarations
-  reject `Töp`, action/blind references silently truncate it to `T`, and external invalid labels bypass validation.
-  Because first-authoritative `specs/spec.spec` also retains host `\w`, shared executable-grammar closure
-  `.10.5.0.1` precedes Dart label parity `.10.5.0.2`; semantic foundation through admission then follows as
+  projection/query, and typed observation are new adapter layers. It also proves Dart's hardcoded host-`\w`
+  declarations reject `Töp`, action/blind references silently truncate it to `T`, and external invalid labels
+  bypass validation. Shared executable-grammar closure `.10.5.0.1` precedes Dart label parity `.10.5.0.2`;
+  semantic foundation through admission then follows as
   `.10.5.1-.10.5.6` without changing the current 6/20/73, 3/9, and 2/6 ledgers during audit. The four checked-in
   `spec_spec_*` inputs are stale identical copies rather than current canonical source, so `.10.5.0.1` also owns
   verbatim regeneration, a freshness gate, and current-source Dart structural execution; 105/105 alone does not
-  yet prove today's self-hosted grammar. Dependency leaf `.10.5.0.1.0` now generates and independently byte-checks
-  one 5,991-byte literal regex class for all 806 pinned Unicode 17 ranges without changing grammar behavior;
-  `.10.5.0.1.1` next consumes only that class and repairs the current Dart structural bridge.
+  yet prove today's self-hosted grammar. Dependency `.10.5.0.1.0` generates and independently byte-checks one
+  5,991-byte literal regex class for all 806 pinned Unicode 17 ranges. `.10.5.0.1.1` consumes it at all 12 canonical
+  rule-label sites and makes Dart directly execute current explicit lifecycle and bare-edge forms while retaining
+  stale-corpus compatibility. `.10.5.0.1.2` next regenerates/freshness-locks those four inputs and composes the
+  cross-runtime proof.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -307,6 +307,8 @@ enum _StructuralRegexKind {
   specActionFluent,
   specBlindBlock,
   specBlindFluent,
+  specBareBlock,
+  specBareFluent,
   specLifecycleBlock,
   specLifecycleFluent,
   specFunctionDefinition;
@@ -328,22 +330,30 @@ enum _StructuralRegexKind {
     if (pattern.startsWith(r'->\s*\K(?&object_structure)(?(DEFINE)')) {
       return _StructuralRegexKind.ebnfReturnObject;
     }
-    if (pattern.startsWith(r'->[ \t]*((?:\w+')) {
+    if (pattern.startsWith(r'->[ \t]*((?:') && pattern.contains('(?<blkAB>')) {
       return _StructuralRegexKind.specActionBlock;
     }
-    if (pattern.startsWith(r'->[ \t]*(\w+)') && pattern.contains('(?<chAF>')) {
+    if (pattern.startsWith(r'->[ \t]*(') && pattern.contains('(?<chAF>')) {
       return _StructuralRegexKind.specActionFluent;
     }
-    if (pattern.startsWith(r'=>[ \t]*(\w+)[ \t]*(?<blkBB>')) {
+    if (pattern.startsWith(r'=>[ \t]*(') && pattern.contains('(?<blkBB>')) {
       return _StructuralRegexKind.specBlindBlock;
     }
-    if (pattern.startsWith(r'=>[ \t]*(\w+)(?<chBF>')) {
+    if (pattern.startsWith(r'=>[ \t]*(') && pattern.contains('(?<chBF>')) {
       return _StructuralRegexKind.specBlindFluent;
     }
-    if (pattern.startsWith(r'(\w++)[ \t]*(?<blkLB>')) {
+    if (pattern.startsWith(r'(?m:^[ \t]*(') && pattern.contains('(?<blkBE>')) {
+      return _StructuralRegexKind.specBareBlock;
+    }
+    if (pattern.startsWith(r'(?m:^[ \t]*(') && pattern.contains('(?<blkBEF>')) {
+      return _StructuralRegexKind.specBareFluent;
+    }
+    if (pattern.startsWith(r'(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLB>') ||
+        pattern.startsWith(r'(\w++)[ \t]*(?<blkLB>')) {
       return _StructuralRegexKind.specLifecycleBlock;
     }
-    if (pattern.startsWith(r'(\w++)(?<chLF>')) {
+    if (pattern.startsWith(r'(I|LS|LE|LX|E|EX|IT)(?<chLF>') ||
+        pattern.startsWith(r'(\w++)(?<chLF>')) {
       return _StructuralRegexKind.specLifecycleFluent;
     }
     if (pattern.startsWith(r'fn[ \t]+') &&
@@ -352,6 +362,81 @@ enum _StructuralRegexKind {
     }
     return null;
   }
+}
+
+RegExp? _compileSpecStructuralPrefix(
+  String pattern,
+  _StructuralRegexKind kind, {
+  required bool unicode,
+}) {
+  switch (kind) {
+    case _StructuralRegexKind.specActionBlock:
+      final label = _specRuleLabelAtom(pattern, r'->[ \t]*((?:');
+      return RegExp(
+        '->[ \\t]*((?:$label[ \\t]*(?:\\[[ \\t]*\\d+[ \\t]*\\][ \\t]*)?)'
+        '(?:[ \\t]*\\|[ \\t]*$label[ \\t]*(?:\\[[ \\t]*\\d+[ \\t]*\\][ \\t]*)?)*)[ \\t]*',
+        unicode: unicode,
+      );
+    case _StructuralRegexKind.specActionFluent:
+      final label = _specRuleLabelAtom(pattern, r'->[ \t]*(');
+      return RegExp(
+        '->[ \\t]*($label)[ \\t]*(?:\\[[ \\t]*\\d+[ \\t]*\\][ \\t]*)?',
+        unicode: unicode,
+      );
+    case _StructuralRegexKind.specBlindBlock:
+    case _StructuralRegexKind.specBlindFluent:
+      final label = _specRuleLabelAtom(pattern, r'=>[ \t]*(');
+      return RegExp('=>[ \\t]*($label)[ \\t]*', unicode: unicode);
+    case _StructuralRegexKind.specBareBlock:
+      final label = _specRuleLabelAtom(pattern, r'(?m:^[ \t]*(');
+      return RegExp(
+        '^[ \\t]*($label(?:[ \\t]*\\[[ \\t]*\\d+[ \\t]*\\])?'
+        '(?:[ \\t]*\\|[ \\t]*$label(?:[ \\t]*\\[[ \\t]*\\d+[ \\t]*\\])?)*)[ \\t]*',
+        multiLine: true,
+        unicode: unicode,
+      );
+    case _StructuralRegexKind.specBareFluent:
+      final label = _specRuleLabelAtom(pattern, r'(?m:^[ \t]*(');
+      return RegExp(
+        '^[ \\t]*($label)[ \\t]*(?:\\[[ \\t]*(\\d+)[ \\t]*\\][ \\t]*)?',
+        multiLine: true,
+        unicode: unicode,
+      );
+    case _StructuralRegexKind.specLifecycleBlock:
+      return RegExp(
+        pattern.startsWith('(I|')
+            ? r'(I|LS|LE|LX|E|EX|IT)[ \t]*'
+            : r'(\w+)[ \t]*',
+      );
+    case _StructuralRegexKind.specLifecycleFluent:
+      return RegExp(
+        pattern.startsWith('(I|') ? r'(I|LS|LE|LX|E|EX|IT)' : r'(\w+)',
+      );
+    case _StructuralRegexKind.squareBrackets:
+    case _StructuralRegexKind.ebnfReturnScalar:
+    case _StructuralRegexKind.ebnfReturnArray:
+    case _StructuralRegexKind.ebnfReturnObject:
+    case _StructuralRegexKind.specFunctionDefinition:
+      return null;
+  }
+}
+
+String _specRuleLabelAtom(String pattern, String prefix) {
+  if (!pattern.startsWith(prefix)) {
+    throw FormatException('unsupported self-hosted rule-label prefix', pattern);
+  }
+  final start = prefix.length;
+  if (pattern.startsWith(r'\w+', start)) {
+    return r'\w+';
+  }
+  if (start >= pattern.length || pattern.codeUnitAt(start) != _openBracket) {
+    throw FormatException('missing self-hosted rule-label class', pattern);
+  }
+  final end = pattern.indexOf(']+', start);
+  if (end < 0) {
+    throw FormatException('unterminated self-hosted rule-label class', pattern);
+  }
+  return pattern.substring(start, end + 2);
 }
 
 final class _StructuralRegExp implements RegExp {
@@ -365,7 +450,13 @@ final class _StructuralRegExp implements RegExp {
   }) : _isCaseSensitive = isCaseSensitive,
        _isMultiLine = isMultiLine,
        _isUnicode = isUnicode,
-       _isDotAll = isDotAll;
+       _isDotAll = isDotAll {
+    _specPrefix = _compileSpecStructuralPrefix(
+      pattern,
+      kind,
+      unicode: isUnicode,
+    );
+  }
 
   final _StructuralRegexKind kind;
 
@@ -376,6 +467,7 @@ final class _StructuralRegExp implements RegExp {
   final bool _isMultiLine;
   final bool _isUnicode;
   final bool _isDotAll;
+  late final RegExp? _specPrefix;
 
   @override
   bool get isCaseSensitive => _isCaseSensitive;
@@ -449,33 +541,35 @@ final class _StructuralRegExp implements RegExp {
       _StructuralRegexKind.specActionFluent => _matchSpecFluent(
         input,
         start,
-        prefix: _specActionFluentPrefix,
+        prefix: _specPrefix!,
         blockName: 'blkAF',
         chainName: 'chAF',
       ),
       _StructuralRegexKind.specBlindBlock => _matchSpecBlock(
         input,
         start,
-        prefix: _specBlindBlockPrefix,
+        prefix: _specPrefix!,
         blockName: 'blkBB',
       ),
       _StructuralRegexKind.specBlindFluent => _matchSpecFluent(
         input,
         start,
-        prefix: _specBlindFluentPrefix,
+        prefix: _specPrefix!,
         blockName: 'blkBF',
         chainName: 'chBF',
       ),
+      _StructuralRegexKind.specBareBlock => _matchSpecBareBlock(input, start),
+      _StructuralRegexKind.specBareFluent => _matchSpecBareFluent(input, start),
       _StructuralRegexKind.specLifecycleBlock => _matchSpecBlock(
         input,
         start,
-        prefix: _specLifecycleBlockPrefix,
+        prefix: _specPrefix!,
         blockName: 'blkLB',
       ),
       _StructuralRegexKind.specLifecycleFluent => _matchSpecFluent(
         input,
         start,
-        prefix: _specLifecycleFluentPrefix,
+        prefix: _specPrefix!,
         blockName: 'blkLF',
         chainName: 'chLF',
       ),
@@ -549,7 +643,7 @@ final class _StructuralRegExp implements RegExp {
   }
 
   _StructuralRegExpMatch? _matchSpecActionBlock(String input, int start) {
-    final prefix = _specActionBlockPrefix.matchAsPrefix(input, start);
+    final prefix = _specPrefix!.matchAsPrefix(input, start);
     if (prefix == null) {
       return null;
     }
@@ -565,6 +659,71 @@ final class _StructuralRegExp implements RegExp {
       blockEnd,
       [input.substring(start, blockEnd), prefix.group(1), block],
       named: {'blkAB': block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecBareBlock(String input, int start) {
+    final prefix = _specPrefix!.matchAsPrefix(input, start);
+    if (prefix == null) {
+      return null;
+    }
+    final blockStart = prefix.end;
+    final blockEnd = _parseBalancedCodeBlock(input, blockStart);
+    if (blockEnd == null) {
+      return null;
+    }
+    final end = _physicalLineMatchEnd(input, blockEnd);
+    if (end == null) {
+      return null;
+    }
+    final block = input.substring(blockStart, blockEnd);
+    return _match(
+      input,
+      start,
+      end,
+      [input.substring(start, end), prefix.group(1), block],
+      named: {'blkBE': block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecBareFluent(String input, int start) {
+    final prefix = _specPrefix!.matchAsPrefix(input, start);
+    if (prefix == null) {
+      return null;
+    }
+    final chainStart = prefix.end;
+    final chainEnd = _parseFluentChain(input, chainStart);
+    if (chainEnd == null) {
+      return null;
+    }
+    var contentEnd = chainEnd;
+    String? block;
+    final afterChain = _skipWhitespace(input, chainEnd);
+    if (_hasCodeUnit(input, afterChain, _openBrace)) {
+      final blockEnd = _parseBalancedCodeBlock(input, afterChain);
+      if (blockEnd == null) {
+        return null;
+      }
+      block = input.substring(afterChain, blockEnd);
+      contentEnd = blockEnd;
+    }
+    final end = _physicalLineMatchEnd(input, contentEnd);
+    if (end == null) {
+      return null;
+    }
+    final chain = input.substring(chainStart, chainEnd);
+    return _match(
+      input,
+      start,
+      end,
+      [
+        input.substring(start, end),
+        prefix.group(1),
+        prefix.group(2),
+        chain,
+        block,
+      ],
+      named: {if (block != null) 'blkBEF': block},
     );
   }
 
@@ -903,11 +1062,12 @@ RegExp compileRuntimeRegex(
   bool unicode = false,
   bool dotAll = false,
 }) {
+  final effectiveUnicode = unicode || _containsSupplementaryScalar(pattern);
   final structural = _compileStructuralRegex(
     pattern,
     caseSensitive: caseSensitive,
     multiLine: multiLine,
-    unicode: unicode,
+    unicode: effectiveUnicode,
     dotAll: dotAll,
   );
   if (structural != null) {
@@ -919,9 +1079,13 @@ RegExp compileRuntimeRegex(
     normalized.pattern,
     caseSensitive: caseSensitive && !normalized.caseInsensitive,
     multiLine: multiLine || normalized.multiLine,
-    unicode: unicode,
+    unicode: effectiveUnicode,
     dotAll: dotAll || normalized.dotAll,
   );
+}
+
+bool _containsSupplementaryScalar(String pattern) {
+  return pattern.runes.any((scalar) => scalar > 0xFFFF);
 }
 
 _NormalizedRegexPattern _normalizePattern(String pattern) {
@@ -1346,6 +1510,26 @@ int _skipWhitespace(String input, int start) {
   return cursor;
 }
 
+int? _physicalLineMatchEnd(String input, int start) {
+  var cursor = start;
+  while (cursor < input.length) {
+    final code = input.codeUnitAt(cursor);
+    if (code != _space && code != _tab) {
+      break;
+    }
+    cursor += 1;
+  }
+  if (cursor == input.length || input.codeUnitAt(cursor) == _lineFeed) {
+    return cursor;
+  }
+  if (input.codeUnitAt(cursor) == _carriageReturn &&
+      (cursor + 1 == input.length ||
+          input.codeUnitAt(cursor + 1) == _lineFeed)) {
+    return cursor;
+  }
+  return null;
+}
+
 bool _hasCodeUnit(String input, int index, int codeUnit) {
   return index >= 0 &&
       index < input.length &&
@@ -1370,16 +1554,6 @@ int _clampCodeUnitOffset(String input, int offset) {
   return offset.clamp(0, input.length);
 }
 
-final _specActionBlockPrefix = RegExp(
-  r'->[ \t]*((?:\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*',
-);
-final _specActionFluentPrefix = RegExp(
-  r'->[ \t]*(\w+)[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?',
-);
-final _specBlindBlockPrefix = RegExp(r'=>[ \t]*(\w+)[ \t]*');
-final _specBlindFluentPrefix = RegExp(r'=>[ \t]*(\w+)');
-final _specLifecycleBlockPrefix = RegExp(r'(\w+)[ \t]*');
-final _specLifecycleFluentPrefix = RegExp(r'(\w+)');
 final _specFunctionPrefix = RegExp(
   r'fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*',
 );

@@ -518,11 +518,12 @@ Three backbone items tracked major structural modernization — all done:
   ActionIR, staged sidecars, diagnostics, generated-v2 plan, and runtime seams are reusable, while exact source
   mapping, normalized projection/query, and typed observation are new adapter work. It also finds that current
   host-`\w` declarations reject `Töp`, action/blind references silently truncate it to `T`, bare references remain
-  raw, and external invalid labels bypass validation. First-authoritative `specs/spec.spec` still uses host `\w` as
-  well. Shared executable-grammar closure `.10.5.0.1` and Dart label parity `.10.5.0.2` therefore precede semantic
+  raw, and external invalid labels bypass validation. Shared `.10.5.0.1.0-.1` now generate/guard one pinned class,
+  consume it at all 12 first-authoritative `specs/spec.spec` label sites, and make Dart directly execute current
+  lifecycle/bare-edge forms. Corpus freshness `.10.5.0.1.2` and Dart label parity `.10.5.0.2` precede semantic
   source/static/calls/query/runtime/admission `.10.5.1-.10.5.6`. The four green `spec_spec_*` corpus inputs are stale
-  identical grammar copies, so shared closure also requires verbatim regeneration, byte/hash freshness, and Dart
-  execution of current canonical source before 105/105 can prove self-hosting. Neither audit nor prerequisites
+  identical grammar copies, so shared closure still requires verbatim regeneration, byte/hash freshness, and
+  cross-runtime proof before 105/105 can prove current self-hosting. Neither audit nor prerequisites
   promote a ledger.
   Governance follow-up `.22` separately tracks a stable home for immutable cross-contract status markers.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the

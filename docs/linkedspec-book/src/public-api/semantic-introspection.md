@@ -465,15 +465,16 @@ The audit also proves why two label prerequisites come first. Dart's host-`\w` h
 action/blind scanners silently truncate that target to `T`, bare Unicode targets remain raw, and deserialized or
 programmatic `Top-Rule` labels pass validation and compile. Once a valid Unicode label is supplied externally,
 compiled maps, descriptors, generated plans/emitted source, and explicit selectors preserve it exactly. Moreover,
-first-authoritative `specs/spec.spec` still embeds host `\w`, conflicting with ADRs `0012` and `0051`.
-Shared executable-grammar/checker closure `.10.5.0.1` therefore precedes generated Dart scanner/validator parity
+shared `.10.5.0.1.0-.1` now generate/guard one pinned class, consume it at all 12 first-authoritative
+`specs/spec.spec` label sites, and make Dart directly execute current explicit lifecycle and bare-edge forms.
+Corpus freshness `.10.5.0.1.2` completes that shared closure before generated Dart scanner/validator parity
 `.10.5.0.2`. Neither audit nor either prerequisite may advance semantic rollout/admission.
 
 The complete Dart corpus's 105/105 result is not yet proof of that current self-hosted authority. Its four
 `spec_spec_*` inputs are identical older snapshots: they omit the canonical bare-edge productions and retain broad
 lifecycle `(\w++)`, while current `specs/spec.spec` uses the explicit lifecycle alternation. Direct Dart execution
-of current source reaches an unsupported structural PCRE group. The shared prerequisite must regenerate those
-fixtures verbatim, reject byte/hash drift, and make current-source execution green before citing corpus parity.
+of current source is now green, but the shared prerequisite must still regenerate those fixtures verbatim, reject
+byte/hash drift, and compose cross-runtime proof before citing corpus parity.
 
 ## Exact v1 record model
 

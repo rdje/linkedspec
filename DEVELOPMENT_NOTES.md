@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0.1.1` — structural regex bridges should derive pinned atoms from the
+  authored pattern): Repeating the 806-range class in Dart source would create a second generated-data owner. The
+  bounded bridge instead extracts the exact class from each recognized `spec.spec` pattern, compiles only the
+  prefix it needs, and preserves the current capture positions consumed by self-hosted actions. The extraction is
+  deterministic because ADR `0051` excludes closing bracket from membership and the generated atom ends in `]+`.
+
+  Supplementary literal endpoints require Dart `RegExp(unicode: true)`; without it the exact class fails with
+  `FormatException: Range out of order`. `compileRuntimeRegex` now enables Unicode mode only when the authored
+  pattern actually contains a supplementary scalar. The structural-kind recognizer accepts both current explicit
+  lifecycle/bare-edge patterns and the old host-`\w` families still present in the intentionally stale corpus, so
+  this dependency slice can prove current source without prematurely regenerating evidence owned by `.2`.
+
+  Focused RED was exact: zero generated sites, supplementary-class range failure, and current lifecycle
+  `FormatException: Invalid group`. GREEN locks 12 canonical sites plus all ten header/edge productions and exact
+  Unicode/index capture results. A deliberate `action_bare` class-to-`\w` mutation fails the independent checker.
+  Focused tests pass 93, the Dart gate passes 279 / primary 66x2 / corpus 105, and Perl compiles current source.
+  Current canonical SHA-256 is `43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce`;
+  four stale corpus inputs remain `e0a1b63b...` for `.10.5.0.1.2`. Canonical CI also passes semantic 6/20/73,
+  Rust admission, primary 66x2, and Phase 0 1,031/1,031, exit 0; Knowledge Map is 670/4,981.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.5.0.1.0` — portable pinned regex data should be literal, generated, and
   independently reconstructed): A host property escape such as `\p{XID_Continue}` would still inherit each regex
   engine's Unicode version, while engine-specific numeric escapes do not share syntax across PCRE and Dart.

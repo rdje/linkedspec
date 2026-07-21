@@ -12,7 +12,7 @@ answers:
   - "where can Dart semantic slot events be captured"
   - "are the spec_spec corpus fixtures current with specs/spec.spec"
   - "does the Dart 105 fixture corpus prove the current self-hosted grammar"
-  - "why does current specs/spec.spec fail in Dart while the corpus passes"
+  - "can Dart execute current specs/spec.spec while the corpus remains stale"
   - "can Dart generated metadata reconstruct a semantic index"
   - "does Dart compiled state preserve Unicode rule labels"
   - "is specs/spec.spec aligned with Unicode rule labels"
@@ -49,22 +49,23 @@ strings, not reclassify them. The missing prerequisite is one generated Dart Uni
 header/action/blind/bare scanners and validation of externally constructed ASTs. Function/helper identifiers,
 lifecycle markers, fluent methods, and mark names are separate grammars and must not be broadened accidentally.
 
-The audit also finds a neutral authority conflict outside Dart's hardcoded parser. ADR `0012` makes
-`specs/spec.spec` the first authoritative `.spec` grammar, but its rule-header and edge productions still embed
-host `\w`. That cannot express ADR `0051`'s repository-pinned Unicode 17 membership and exact identity. The Dart
-label leaf must therefore follow a separate shared executable-grammar/checker closure rather than claiming parity
-from backend-only scanner changes.
+The audit also found a neutral authority conflict outside Dart's hardcoded parser. ADR `0012` makes
+`specs/spec.spec` the first authoritative `.spec` grammar, but its rule-header and edge productions embedded host
+`\w`. Shared leaves `.10.5.0.1.0-.1` now resolve that conflict: one generated literal class is independently
+checked and consumed at all 12 declaration/reference sites, while Dart derives that atom in its bounded structural
+bridge and directly executes current canonical source. This does not change Dart's hardcoded parser/validator;
+the Dart-specific label leaf still follows the shared closure rather than claiming parity from grammar alone.
 
 The apparently green self-hosted corpus does not cover that current authority. All four checked-in
 `rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec` files share stale SHA-256
 `e0a1b63b276c2a896c577192d4b399c88f21539555835018ce8117b91a14b25f`; current `specs/spec.spec` is
-`9cb540e26622741b90a97f25e46e4c27accdece43c40cc106cf30cc273f3eab1`. The frozen copies omit the newer
+`43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce`. The frozen copies omit the newer
 bare-edge productions and retain broad lifecycle `(\w++)`, whereas canonical source has explicit
-`(I|LS|LE|LX|E|EX|IT)`. `tools/gen_oracle_corpus.pl` promises and implements a verbatim source copy, so the defect
-is missed regeneration/freshness enforcement. Direct Dart execution of current canonical source reaches
-`FormatException: Invalid group` at that lifecycle alternation and named `blkLB` reference while the stale corpus
-passes 105/105. Leaf `.10.5.0.1` must regenerate all four inputs, reject future byte/hash drift, and repair the Dart
-structural PCRE bridge before corpus green can count as current self-hosted grammar proof.
+`(I|LS|LE|LX|E|EX|IT)`. `tools/gen_oracle_corpus.pl` promises and implements a verbatim source copy, so the remaining
+defect is missed regeneration/freshness enforcement. Direct Dart execution of current canonical source now passes
+after `.10.5.0.1.1` adds explicit lifecycle and bare-edge structural recognition, but the unchanged stale corpus
+still cannot prove that route. Leaf `.10.5.0.1.2` must regenerate all four inputs, reject future byte/hash drift,
+and compose cross-runtime proof before corpus green counts as current self-hosted grammar evidence.
 
 Exact source evidence is adapter work. Ordinary Dart rule headers/body elements retain one-based lines, while
 `ActionSourceSpan` is local to normalized action text rather than a general source map. Function-definition

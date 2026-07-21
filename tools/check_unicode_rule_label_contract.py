@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.json"
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
+SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
 GENERATOR = ROOT / "unicode_case" / "generate_unicode_rule_label_contract.py"
 FORMAL_GRAMMAR = ROOT / "docs" / "linkedspec-book" / "src" / "appendix" / "formal-grammar.md"
 PARSER_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "parser.rs"
@@ -22,6 +23,9 @@ VALIDATION_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "validation.rs"
 CORE_TEST_PATH = ROOT / "rust" / "linkedspec-core" / "tests" / "unicode_rule_label_contract.rs"
 RUNTIME_TEST_PATH = (
     ROOT / "rust" / "linkedspec-runtime" / "tests" / "unicode_rule_label_routes.rs"
+)
+DART_SELF_HOSTED_TEST_PATH = (
+    ROOT / "dart" / "test" / "self_hosted_unicode_rule_label_test.dart"
 )
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 
@@ -62,9 +66,11 @@ def main() -> None:
         CONTRACT_PATH,
         RUST_PATH,
         SELF_HOSTED_REGEX_PATH,
+        SELF_HOSTED_GRAMMAR_PATH,
         GENERATOR,
         CORE_TEST_PATH,
         RUNTIME_TEST_PATH,
+        DART_SELF_HOSTED_TEST_PATH,
     ):
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
@@ -154,6 +160,37 @@ def main() -> None:
     actual_artifact = SELF_HOSTED_REGEX_PATH.read_text(encoding="utf-8", errors="strict")
     if actual_artifact != expected_artifact:
         fail("self-hosted regex artifact does not independently encode the contract ranges")
+    self_hosted_grammar = SELF_HOSTED_GRAMMAR_PATH.read_text(
+        encoding="utf-8", errors="strict"
+    )
+    expected_label_sites = {
+        "rule_header": 1,
+        "action_block": 2,
+        "action_fluent": 1,
+        "action_bare": 1,
+        "blind_block": 1,
+        "blind_fluent": 1,
+        "blind_bare": 1,
+        "bare_edge_block": 2,
+        "bare_edge_fluent": 1,
+        "bare_edge_plain": 1,
+    }
+    grammar_lines = {
+        line.split(":", 1)[0]: line
+        for line in self_hosted_grammar.splitlines()
+        if ": /" in line
+    }
+    for production, expected_count in expected_label_sites.items():
+        line = grammar_lines.get(production)
+        if line is None:
+            fail(f"self-hosted label production is missing: {production}")
+        if line.count(expected_class) != expected_count:
+            fail(
+                f"self-hosted label production {production} does not consume "
+                f"the generated class exactly {expected_count} time(s)"
+            )
+    if self_hosted_grammar.count(expected_class) != sum(expected_label_sites.values()):
+        fail("self-hosted grammar has an unexpected generated label-class site")
     compiled_class = re.compile(rf"^(?:{expected_class})$")
     for row in contract["positive_fixtures"]:
         if not valid_label(ranges, row["label"]):
@@ -208,6 +245,14 @@ def main() -> None:
     ):
         if marker not in runtime_test:
             fail(f"runtime route proof missing: {marker}")
+    dart_test = DART_SELF_HOSTED_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "canonical grammar consumes the exact generated label atom",
+        "runtime regex enables Unicode mode for supplementary label ranges",
+        "current canonical grammar executes every Unicode label edge form",
+    ):
+        if marker not in dart_test:
+            fail(f"Dart self-hosted route proof missing: {marker}")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -217,6 +262,7 @@ def main() -> None:
         "require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs",
         "require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs",
         "require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs",
+        "require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart",
         "python3 tools/check_unicode_rule_label_contract.py",
     ):
         if marker not in ci_text:

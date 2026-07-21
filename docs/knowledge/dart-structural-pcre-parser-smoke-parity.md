@@ -11,10 +11,12 @@ answers:
   - "what does push(child,index) mean in Dart action-edge blocks"
   - "which leaf closed lispish ebnf and spec.spec parser-smoke fixtures"
   - "why did ebnf_logging_annotation lose its args on Dart"
+  - "can Dart execute current specs/spec.spec directly"
+  - "how does the Dart structural bridge consume the self-hosted Unicode label class"
 date: 2026-07-09
 status: current
 tags: [dart, regex, parser-smoke, action-edge, ebnf, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and (?(DEFINE)...), and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. Absent optional fixed parameters materialize an empty capture placeholder so zero-parameter and rest-only definitions retain positional entry_group indices. Focused matching+selector tests pass 22, all four spec_spec smokes pass, and the authoritative Dart gate passes 205 tests, CLI 61x2, and 105 corpus."
+evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. FUTURE-PARITY-BACKLOG.10.5.0.1.1 derives the generated rule-label atom from canonical structural patterns, enables Unicode mode for supplementary literals, recognizes explicit lifecycle plus bare-edge block/fluent forms, and executes current specs/spec.spec directly while retaining stale-corpus compatibility. Focused tests pass 93, the Dart package passes 279, CLI passes 66x2, and the unchanged corpus passes 105/105."
 reverify: "cd dart && dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
@@ -43,6 +45,13 @@ preserves `["expr", "term"]` under `logging_annotation`.
 The shipped-spec/parser-smoke window at offset 68 / limit 31 is now 31/31 green.
 The next Dart corpus frontier is `DART-BACKEND-PARITY.6.2.5` for top-level `fn`
 fixtures routed through the spec-defined function shell.
+
+The later `.10.5.0.1.1` shared-grammar repair extends only this bounded bridge. Structural action/blind/bare
+patterns derive their rule-label atom from the authored canonical pattern, so Dart does not duplicate the pinned
+806-range table. Patterns containing supplementary literal endpoints compile in Unicode mode. Exact explicit
+`I|LS|LE|LX|E|EX|IT` lifecycle forms and physical-line bare-edge block/fluent forms retain the captures consumed
+by `spec.spec`. Current canonical source now executes directly; the four stale checked-in corpus copies remain
+accepted until their separate `.10.5.0.1.2` regeneration/freshness closeout.
 
 Related facts: [[dart-regex-dialect-bridge]], [[dart-shipped-corpus-smoke-split]],
 [[dart-residual-parser-smoke-split]], [[rust-action-edge-child-return-dispatch]],

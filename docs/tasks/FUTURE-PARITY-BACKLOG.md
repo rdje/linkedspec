@@ -7927,16 +7927,16 @@ before implementation.
 
   - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate only after clean `.10.5.0`; keep semantic 6/20/73, rollout
     3/9, and admission 2/6 unchanged.
-  - [ ] **FIRST AUTHORITY** — Resolve the exact ADR `0012`/`0051` contract for `specs/spec.spec` without making a
+  - [x] **FIRST AUTHORITY** — Resolve the exact ADR `0012`/`0051` contract for `specs/spec.spec` without making a
     bootstrap parser, host `\w`, locale, or toolchain Unicode table the lasting language owner.
   - [x] **DETERMINISTIC CONTRACT DATA** — Reuse the verified Unicode 17 source/ranges and generate or validate the
     self-hosted representation byte-for-byte; reject version, omission, range, and normalization drift.
-  - [ ] **ALL LABEL PRODUCTIONS** — Cover rule headers plus action-block/fluent/bare, blind-block/fluent/bare, and
+  - [x] **ALL LABEL PRODUCTIONS** — Cover rule headers plus action-block/fluent/bare, blind-block/fluent/bare, and
     bare-edge group/index forms while leaving lifecycle/function/helper/mark identifiers under their own grammar.
   - [ ] **CANONICAL CORPUS FRESHNESS** — Regenerate all four `spec_spec_*` fixtures through
     `tools/gen_oracle_corpus.pl`, require their `input.spec` bytes/hash to equal current `specs/spec.spec`, and make
     stale copies fail before any backend can count them as current self-hosted grammar evidence.
-  - [ ] **CURRENT DART STRUCTURAL BRIDGE** — Admit the canonical lifecycle alternation and bare-edge productions in
+  - [x] **CURRENT DART STRUCTURAL BRIDGE** — Admit the canonical lifecycle alternation and bare-edge productions in
     Dart's structural PCRE recognizer, then prove the current source itself executes; 105/105 over stale copies is
     explicitly not acceptance evidence.
   - [ ] **CROSS-RUNTIME PROOF** — Execute positive, negative, distinct, and no-prefix-truncation cases through the
@@ -7979,7 +7979,7 @@ before implementation.
       unchanged; pass generator/checker, governance, docs/KM/book where affected, cleanup, and commit cleanly.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.1`
-    Status: `pending`
+    Status: `done`
     Goal: Consume the pinned class in canonical grammar and execute its current structural forms on Dart.
     Depends on: `.10.5.0.1.0`
     Acceptance: Replace only rule declaration/reference `\w` sites in `specs/spec.spec` with the generated exact
@@ -7987,6 +7987,39 @@ before implementation.
       bounded structural recognizers for the generated label atom, explicit lifecycle alternation, and bare-edge
       block/fluent families. Prove direct execution of current canonical source and exact group/capture behavior;
       do not regenerate corpus or claim Dart label/semantic admission yet.
+    Verification: Activated task-tree-first from clean generated-class commit `f356a2dd` at ahead 283 with a
+      zero-byte commit brief and no reproducible artifacts. Focused RED proves zero canonical generated-class sites,
+      Dart's supplementary literal class fails without Unicode mode, and current lifecycle `blkLB` reaches
+      `FormatException: Invalid group`. Canonical `specs/spec.spec` now embeds the generated atom exactly 12 times:
+      one header, two action-block targets, two bare-block targets, and one each in the remaining action/blind/bare
+      productions. The independent checker locks those per-production counts; a deliberate `action_bare` fallback
+      to `\w` fails and restored GREEN passes Unicode 806/9/8/2.
+
+      Dart derives each structural label atom from its authored pattern, automatically enables Unicode mode for
+      supplementary literals, accepts both current explicit and intentionally stale lifecycle prefixes, and adds
+      bounded physical-line bare block/fluent matchers. Direct current-source proof executes all ten productions
+      with ASCII, digit-start, underscore, precomposed/decomposed Latin, Greek, CJK, middle-dot, and supplementary
+      labels while preserving exact target/index captures. Focused matching/interpreter/corpus/current-source tests
+      pass 93; fatal analysis is clean; complete Dart passes format 64/0, package 279, primary 66/66 twice, and the
+      unchanged corpus 105/105; Perl directly compiles current source. Current canonical SHA-256 is
+      `43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce`; all four corpus copies deliberately remain
+      `e0a1b63b...` for `.2`. Knowledge Map is 670 facts / 4,981 keys; mdBook, memory/task metadata, four doctrines,
+      and whitespace pass. Canonical CI passes semantic 6/20/73, Rust admission, primary 66x2, and Phase 0
+      1,031/1,031, exit 0. Corpus inputs, Dart's hardcoded label parser/validator, and semantic ledgers are unchanged.
+
+    #### Acceptance Checklist
+
+    - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate from clean `.10.5.0.1.0` before grammar or Dart changes.
+    - [x] **EXACT PRODUCTION INVENTORY / RED** — Identify every rule-label declaration/reference site and make
+      focused tests fail for current canonical direct execution plus Unicode self-hosted declaration/references.
+    - [x] **CANONICAL GRAMMAR CONSUMER** — Replace only rule-label atoms with the generated exact class while
+      preserving lifecycle, function, helper, fluent, mark, capture, and named-group grammars and indices.
+    - [x] **DART STRUCTURAL BRIDGE** — Enable Unicode regex mode when supplementary literals require it and extend
+      only the bounded structural recognizers needed by current explicit lifecycle and bare-edge forms.
+    - [x] **DIRECT CURRENT-SOURCE PROOF** — Compile and execute current `specs/spec.spec` directly on Dart with
+      exact declaration/reference/capture/group behavior; do not count stale corpus snapshots as acceptance.
+    - [x] **NO REGENERATION / SIGNOFF** — Leave all four corpus inputs for `.10.5.0.1.2`, preserve semantic
+      6/20/73 at 3/9 + 2/6, pass affected/canonical gates, synchronize docs/KM/task state, cleanup, and commit.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.2`
     Status: `pending`
@@ -10781,7 +10814,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0 | `FUTURE-PARITY-BACKLOG.10.5.0` | `done` | Mapped exact Dart semantic/label owners, exposed stale self-hosted corpus proof, and froze bounded children without behavior. |
 | 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `active` | Reconcile first-authoritative labels, stale corpus freshness, and the current Dart structural bridge. |
 | 74.4.0.1.0 | `FUTURE-PARITY-BACKLOG.10.5.0.1.0` | `done` | Generated and independently guarded one exact 806-range portable pinned self-hosted label regex class. |
-| 74.4.0.1.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.1` | `pending` | Consume the class in canonical grammar and execute current structural forms on Dart. |
+| 74.4.0.1.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.1` | `done` | Exact 12-site class consumption and current-source lifecycle/bare-edge Dart execution pass canonical signoff. |
 | 74.4.0.1.2 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2` | `pending` | Regenerate/freshness-lock self-hosted corpus and compose cross-runtime proof. |
 | 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `pending` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |

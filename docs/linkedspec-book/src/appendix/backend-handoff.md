@@ -233,16 +233,18 @@ typed invocation-local channel distinct from trace and diagnostic output.
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Current Dart host-`\w` headers reject `Töp`; action/blind
 references silently truncate it to `T`; bare Unicode references stay raw; and external invalid labels bypass
-validation. First-authoritative `specs/spec.spec` also retains host `\w`, contrary to ADR `0012`/`0051`.
-Shared executable-grammar closure `.10.5.0.1` therefore precedes Dart classifier/scanner/validator parity
+validation. Shared `.10.5.0.1.0-.1` now generate and independently guard one portable 806-range class, consume it
+at all 12 label sites in first-authoritative `specs/spec.spec`, and make Dart directly execute current explicit
+lifecycle and bare-edge structural forms. Corpus freshness remains the last shared prerequisite in
+`.10.5.0.1.2`, before Dart classifier/scanner/validator parity
 `.10.5.0.2`; source/static/calls/query/runtime/admission follow as `.10.5.1-.10.5.6`. Julia and Lua later inherit
 the same pinned-label prerequisite before their v1 admissions.
 
 Do not interpret Dart's current 105/105 corpus result as execution proof for today's self-hosted grammar. The four
 `spec_spec_*` inputs are stale identical copies that predate canonical bare-edge productions and the explicit
 lifecycle alternation. The generator is specified to copy source verbatim, so `.10.5.0.1` must regenerate them,
-enforce byte/hash freshness, and repair Dart's structural PCRE bridge for current `specs/spec.spec` before another
-backend can claim the shared grammar prerequisite.
+enforce byte/hash freshness, and compose cross-runtime proof. The current Dart structural bridge is already green;
+the unchanged corpus cannot claim that proof until `.10.5.0.1.2` refreshes it.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

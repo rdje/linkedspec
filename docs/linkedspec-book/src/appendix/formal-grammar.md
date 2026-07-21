@@ -187,6 +187,22 @@ UTF-8 is rejected rather than replaced. This contract is generated from the repo
 Database rather than a host language's `\w` behavior. See ADR `0051` and
 `capability_conformance/unicode_rule_label_contract.json`.
 
+The first-authoritative self-hosted grammar, `specs/spec.spec`, consumes the generated literal class at all 12
+rule-label sites: headers and every action, blind-call, and bare-edge block/fluent/plain target position. Function
+names, helper names, lifecycle markers, fluent method names, and mark names retain their separate identifier
+grammars; the rule-label expansion does not broaden them.
+
+```spec
+Töp::
+ /x/
+ -> Δοκιμή
+ => 規則
+ 𐐀Rule[1]
+```
+
+Here `Töp`, `Δοκιμή`, `規則`, and the supplementary-plane label `𐐀Rule` use the same pinned membership rule.
+An index such as `[1]` and the edge punctuation are outside the label itself.
+
 The pinned generator also emits `unicode_case/unicode_rule_label_regex_class.txt`, a UTF-8 literal-range class
 whose endpoints encode all 806 merged ranges. The checker reconstructs and byte-compares it independently, so the
 self-hosted grammar can consume exact repository data without a host property lookup. The artifact is generated

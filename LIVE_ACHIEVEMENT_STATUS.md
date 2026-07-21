@@ -13,21 +13,22 @@ Current execution status for interruption-safe batch workflow recovery.
   with pinned Unicode 17 labels, regenerate and mechanically freshness-lock all four stale `spec_spec_*` inputs,
   and execute today's canonical lifecycle/bare-edge grammar through Dart before `.10.5.0.2` can begin. Safe split
   `.10.5.0.1.0-.2` freezes generated class authority/checker, grammar+Dart structural consumption, then refreshed
-  corpus/cross-runtime closeout. `.0` is verified complete without behavior changes; `.1` is next after its clean
-  commit.
+  corpus/cross-runtime closeout. `.0` is cleanly committed as `f356a2dd`; `.1` is verified complete from that
+  clean ahead-283 boundary, and `.2` is next after its clean commit.
 
-The audit proves current Dart declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
-targets remain raw, and externally constructed invalid labels bypass validation. Once supplied a valid Unicode
-label, compiled/descriptor/generated/emitted/selector routes preserve it exactly. `specs/spec.spec` also retains
-host `\w` despite ADR `0012` first-authority and ADR `0051` pinned-membership requirements, so its separate shared
-closure precedes Dart implementation. All four green `spec_spec_*` inputs are stale identical grammar copies;
-`.10.5.0.1` additionally owns verbatim regeneration, byte/hash freshness enforcement, and current canonical Dart
-execution before 105/105 can count as self-hosted proof.
+The audit proves Dart's hardcoded declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
+targets remain raw, and externally constructed invalid labels bypass validation. `.1` now consumes the generated
+class at all 12 first-authoritative grammar sites and makes Dart directly execute current explicit lifecycle and
+bare-edge forms without duplicating the classifier. All four green `spec_spec_*` inputs remain stale identical
+grammar copies; `.2` owns verbatim regeneration, freshness enforcement, and cross-runtime composition before
+105/105 can count as current self-hosted proof.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
 drift, semantic 6/20/73, KM 670/4,977, book/doctrines, primary 66x2, and canonical Phase 0 1,031/1,031 all pass.
-No executable, corpus, or ledger state changes.
+The `.1` boundary passes focused 93, fatal analysis, Dart package 279, primary 66x2, unchanged corpus 105/105,
+Perl current-source compilation, deliberate missing-class-site mutation, KM 670/4,981, book/doctrines, and
+canonical Phase 0 1,031/1,031, exit 0. Semantic 6/20/73, rollout 3/9, and admission 2/6 remain unchanged.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -39,6 +40,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.1 — consume Unicode labels in self-hosted grammar**
+  (DONE in this commit from clean base `f356a2dd`).
+
+  **Result:** Canonical grammar uses the generated atom at all 12 label sites. Dart derives it for bounded
+  structural prefixes, enables supplementary Unicode mode, recognizes explicit lifecycle and bare block/fluent
+  forms, and executes current source across all label routes without regenerating the four stale corpus inputs.
+
+  **Proof:** Exact three-failure RED; deliberate missing-site mutation; Unicode 806/9/8/2; focused 93; Dart
+  package 279 / fatal analysis / primary 66x2 / stale corpus 105; Perl current-source compile; KM 670/4,981;
+  mdBook/memory/task/four doctrines/diff; canonical Phase 0 1,031/1,031, exit 0.
+
+  **Next:** Commit cleanly, then activate `.10.5.0.1.2` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.0 — generate self-hosted Unicode label class**
   (DONE in this commit from clean base `0110ea40`).
 
@@ -50,7 +64,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   semantic 6/20/73; KM 670/4,977; mdBook/memory/task/four doctrines/diff; primary 66x2; corrected canonical local
   gate and Phase 0 1,031/1,031, exit 0.
 
-  **Next:** Commit cleanly, then activate `.10.5.0.1.1` task-tree-first.
+  **Next:** `.10.5.0.1.1` is verified complete; `.10.5.0.1.2` follows after its clean commit.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.6 — admit Rust semantic introspection**
   (DONE in this commit from clean base `a79512c9`).
