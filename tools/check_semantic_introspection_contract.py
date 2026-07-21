@@ -408,7 +408,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
     require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 55 and len(set(contract["mutations"])) == 55, "mutation inventory drifted")
+    require(len(contract["mutations"]) == 57 and len(set(contract["mutations"])) == 57, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -570,6 +570,10 @@ def validate_model(contract: dict[str, Any], model: dict[str, Any]) -> None:
             if record["kind"] == "explanation_step":
                 require(record["facts"]["output_fact"]["record_id"] in ids, f"{context} explanation output record is missing")
                 require(all(item in ids for item in record["facts"]["input_ids"]), f"{context} explanation input record is missing")
+
+        spec_record = next(record for record in records if record["kind"] == "spec")
+        expected_spec_name = fixture["logical_name"][:-5] if fixture["logical_name"].endswith(".spec") else fixture["logical_name"]
+        require(spec_record["name"] == expected_spec_name, f"{context} spec name contradicts caller logical identity")
 
         relation_ids: set[str] = set()
         record_rank = {record["id"]: index for index, record in enumerate(records)}
@@ -908,7 +912,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
-    require(CONTRACT_ID in readme and "55 rejected mutations" in readme, "capability-conformance guide is not synchronized")
+    require(CONTRACT_ID in readme and "57 rejected mutations" in readme, "capability-conformance guide is not synchronized")
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(MODEL_ID in book and "0 complete / 6 pending" in book, "mdBook semantic introspection page is not synchronized")
 
@@ -982,6 +986,8 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["coordinated_edge_ownership_and_hash_drift"] = mutate_and_refresh_hashes(model_record("graph", "rule:Child"), lambda row: row["facts"].update({"edge_ownership": "blind"}))
     mutations["illegal_generated_plan_family"] = apply_to(model_record("calls", "generated:handler_plan:0"), lambda row: row["facts"].update({"plan_family": "and_acode"}))
     mutations["coordinated_generated_plan_family_and_hash_drift"] = mutate_and_refresh_hashes(model_record("calls", "generated:handler_plan:0"), lambda row: row["facts"].update({"plan_family": "or_acode"}))
+    mutations["wrong_calls_spec_identity"] = apply_to(model_record("calls", "spec:0"), lambda row: row.update({"name": "calls"}))
+    mutations["coordinated_calls_spec_identity_and_hash_drift"] = mutate_and_refresh_hashes(model_record("calls", "spec:0"), lambda row: row.update({"name": "calls"}))
     mutations["remove_request_field"] = lambda c, m: c["query_contract"]["request_fields"].remove("budget")
     mutations["remove_response_field"] = lambda c, m: c["query_contract"]["response_fields"].remove("cost")
     mutations["remove_snapshot_field"] = lambda c, m: c["query_contract"]["snapshot_fields"].remove("has_execution")

@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.1.0 — correct semantic spec identity
+
+The complete calls projection RED exposed a third pre-adapter oracle mismatch before projector code changed.
+`LinkedSpec::semantic_index(...)` derives the spec name `calls_and_staging` from the required caller identity
+`calls_and_staging.spec`, matching the established rule for every other neutral fixture. The calls neutral row
+alone said `calls`, reusing its short snapshot id as a spec identity. After isolating that field, RED advances to
+the expected missing function-first definition-order projection.
+
+The calls spec record now says `calls_and_staging`. The checker independently derives every snapshot's expected
+spec name from `source_fixtures.logical_name`. It rejects the old calls name directly and after refreshing every
+query hash; all 20 exact digests remain unchanged because no query selects the calls spec row. Semantic governance
+advances from 55 to 57 rejected mutations without path discovery or behavior, query, rollout, or admission change.
+
+Complete signoff passes Perl foundation/static 10, generated-source-v2 and rule-local authorities, capability
+80/0/0, aggregate-selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary CLI 5x2x66, Knowledge Map
+655/4,824, mdBook, memory architecture, all doctrines, and whitespace. Canonical primary passes 66/66 twice;
+Phase 0 passes 1,031/1,031 in 618 seconds; the complete local gate exits 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.0 — correct semantic generated-plan authority
 
 Toolbox-first proof found a second pre-adapter neutral-oracle error. The calls/staging snapshot described its

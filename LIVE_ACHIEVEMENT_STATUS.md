@@ -8,14 +8,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.3.0` is active after parent `.10.3.3` activated task-tree-first from clean static-
-  projection commit `e0aeee63` at ahead 266. Exact descriptor and independently loaded generated-v2 metadata prove
-  the calls fixture selects/emits family `default`; the neutral row's `and_acode` was not even a legal v2 family.
-  The model is corrected and an external-authority guard rejects both illegal and coordinated valid-but-wrong
-  family drift. Complete signoff passes semantic 6/20/55 with unchanged hashes, generated-v2/rule-local/static
-  authorities, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, primary 66x2, KM 654/4,818,
-  mdBook/governance, and Phase 0 1,031/1,031 in 610 seconds with canonical exit 0. Final cleanup and the clean
-  correction commit remain before projector `.10.3.3.1` can activate.
+- `FUTURE-PARITY-BACKLOG.10.3.3.1.0` is complete before its clean commit after calls projection parent `.10.3.3.1` activated task-tree-first
+  from clean generated-plan correction `c07ba618` at ahead 267. Complete 22/25 RED found the calls model alone used
+  snapshot id `calls` as spec name instead of caller identity stem `calls_and_staging`. The model and independent
+  all-snapshot identity guard now reject direct/coordinated old-name drift. Semantic 6/20/57, static 10,
+  generated/rule-local, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, five-backend primary
+  5x2x66, KM 655/4,824, mdBook/governance, canonical primary 66x2, and Phase 0 1,031/1,031 in 618 seconds pass
+  with exit 0. Only the clean correction commit remains before projector `.10.3.3.1.1`.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -27,6 +26,17 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.0 — correct generated plan oracle**
+  (DONE at clean commit `c07ba618` from base `e0aeee63`).
+
+  **Result:** The calls generated artifact is exact v2 family `default`; external authority rejects stale/illegal
+  `and_acode` and coordinated valid-but-wrong family drift without query/behavior/admission change.
+
+  **Proof:** Semantic 6/20/55, generated-v2/rule-local/static, capability 80/0/0, selector 59/27/0, repeated action
+  8/10/8+0/54, primary 66x2, KM 654/4,818, Phase 0 1,031/1,031 in 610 seconds, canonical exit 0.
+
+  **Next:** Calls projection parent `.10.3.3.1` activated cleanly; spec-identity correction `.10.3.3.1.0` is active.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.2.1 — project Perl static semantics**
   (DONE at clean commit `e0aeee63` from base `40d35201`).
 

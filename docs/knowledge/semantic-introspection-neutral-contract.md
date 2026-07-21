@@ -11,11 +11,11 @@ answers:
   - how are semantic query pagination budgets and source privacy tested
   - what task follows FUTURE-PARITY-BACKLOG.10.2
   - how are semantic introspection static rule facts cross-checked
-  - why are there 55 semantic introspection mutations
+  - why are there 57 semantic introspection mutations
 date: 2026-07-21
 status: current corrected neutral contract; backend rollout pending
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; correction .10.3.2.0 derives static rule facts from linkedspec-rule-local-cursor-v1 after finding stale default-family/no-edge rows. Correction .10.3.3.0 then derives generated-plan identity from the same contract's generated-source-v2 authority after finding illegal and_acode in the calls snapshot. The independent checker validates six fixture groups, derives 20 full canonical responses and compares their SHA-256 digests, rejects 55 representative mutations including coordinated model-plus-hash changes, and is registered unconditionally in tools/run_ci_local.sh. Neutral rollout is 1 complete / 8 pending; native admission is 0 complete / 6 pending."
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; correction .10.3.2.0 derives static rule facts from linkedspec-rule-local-cursor-v1, .10.3.3.0 derives generated-plan identity from its generated-source-v2 authority, and .10.3.3.1.0 derives every spec name from caller logical identity. The independent checker validates six fixture groups, derives 20 full canonical responses and compares their SHA-256 digests, rejects 57 representative mutations including coordinated model-plus-hash changes, and is registered unconditionally in tools/run_ci_local.sh. Neutral rollout is 1 complete / 8 pending; native admission is 0 complete / 6 pending."
 reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -40,6 +40,10 @@ calls snapshot's default entry header must therefore retain generated family `de
 was neither the selected family nor a legal v2 spelling. Independent validation rejects illegal and coordinated
 valid-but-wrong family changes even when query hashes are refreshed.
 
+Spec identity is independently derived from each fixture's caller-registered logical name. A snapshot id cannot
+replace that identity: `calls_and_staging.spec` projects `calls_and_staging`, and direct/coordinated attempts to
+restore the old short `calls` value fail even though no current query selects that record.
+
 Six groups cover rule/regex/edge/lifecycle graphs, call resolution and shapes, staged/generated provenance,
 diagnostics/explanations, caller-captured runtime observations, and privacy/page/budget/error behavior. Twenty
 queries lock full canonical responses by SHA-256, not only selected fields. Record, relation, and zero-depth budget
@@ -54,5 +58,6 @@ recurring six-runtime proof, thin MCP transport, and public no-drift.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
 [[semantic-introspection-generated-plan-authority]],
+[[semantic-introspection-spec-name-authority]],
 [[perl-semantic-static-projection]], [[semantic-introspection-staged-artifact-schema]],
 [[outward-descriptor-is-not-semantic-wire-model]].

@@ -13,13 +13,14 @@ This document is the current high-level technical reading of the project shape. 
   page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
   descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
   ADR `0050` adds truthful staged payload/job/result records and consumes/produces direction without collapsing
-  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 55 rejected mutations now run
+  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 57 rejected mutations now run
   in canonical CI. Correction `.10.3.2.0` cross-checks every snapshot rule header against the admitted rule-local
   cursor contract: default rules normalize to neutral `or`/`seek`, compiled rules with no edges report `none`,
   and the failed default-family bare edge retains `action`. This repairs stale self-consistent model/digest facts
   before an adapter can encode them. Correction `.10.3.3.0` independently checks generated artifacts against the
   admitted v2 family authority: the calls fixture's selected `_default` handler emits `default`, not the stale and
-  invalid `and_acode` model value. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
+  invalid `and_acode` model value. Correction `.10.3.3.1.0` also derives every `spec.name` from caller logical
+  identity, repairing the calls-only `calls` versus `calls_and_staging` drift. MCP is only registered-handle capabilities/query transport. Neutral rollout is 1 complete / 8
   pending and backend admission 0 complete / 6 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current

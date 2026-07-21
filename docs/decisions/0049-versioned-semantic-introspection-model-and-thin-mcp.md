@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral static/generated-plan oracle corrected; Perl source and private static projection implemented; public adapters pending
+- Status: accepted; amended by ADR 0050; neutral static/generated-plan/spec-identity oracle corrected; Perl source and private static projection implemented; public adapters pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -358,6 +358,12 @@ vocabulary. The model now says `default`. The checker consumes the admitted cont
 identity/format/family inventory and exact default header, rejecting both the old illegal family and a coordinated
 valid-but-wrong family with refreshed query hashes. This also changes no behavior, query digest, rollout, or
 admission; `.10.3.3.1` consumes the corrected calls/staging target.
+
+Full calls RED then found a separate identity shortcut before projection code: every neutral spec name should be
+the `.spec`-stripped caller logical identity, yet the calls row alone used snapshot id `calls` instead of
+`calls_and_staging`. Correction `.10.3.3.1.0` derives every spec name from `source_fixtures.logical_name` and
+rejects direct or coordinated old-name drift. It changes no response digest, path policy, behavior, rollout, or
+admission; projector child `.10.3.3.1.1` consumes the fully corrected target.
 
 ## Links
 

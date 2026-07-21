@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.1.0` — snapshot ids are not spec identities): full 22/25 calls RED
+  stopped before missing records at `spec:0.name`. Construction uses required caller identity
+  `calls_and_staging.spec` and the established stem rule yields `calls_and_staging`; the hand-authored model alone
+  used short snapshot id `calls`. The bug survived because no exact query currently selects that spec row.
+
+  The independent checker now derives every spec name from the fixture logical name, never a snapshot id or host
+  path. Direct and coordinated old-name mutations fail even after response hashes are refreshed, raising semantic
+  governance from 55 to 57 while all 20 digests remain byte-identical. Once the expected field is isolated, RED
+  proceeds to function-first definition order—the real `.10.3.3.1.1` implementation gap.
+
+  Complete proof keeps the correction behavior-free: Perl foundation/static 10, external generated/rule-local
+  authorities, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, full five-backend primary
+  5x2x66, KM 655/4,824, mdBook/governance, canonical primary 66x2, and Phase 0 1,031/1,031 in 618 seconds pass.
+  A first isolated primary attempt used only a fresh writable Julia depot and therefore could not see installed
+  JSON3; stacking that depot ahead of the installed depot is the documented environment fix, after which the
+  complete matrix and canonical gate passed without repository changes.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.0` — generated artifacts must report the generator's family, not a
   semantic guess): the calls neutral target said `and_acode`, but the exact default-header descriptor selected
   `_default` and independently loaded generated-v2 metadata reported `default`. The stale spelling was especially

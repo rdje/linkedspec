@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (generated-plan neutral-oracle correction `.10.3.3.0` has complete canonical signoff;
-  corrected calls/staging projection `.10.3.3.1` follows only after the clean commit)
+- Last updated: `2026-07-21` (calls spec-identity oracle correction `.10.3.3.1.0` is complete and canonical-green;
+  its clean commit is the only boundary before fully corrected projector `.10.3.3.1.1`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7130,7 +7130,7 @@ before implementation.
     ADR `0050` staged provenance, and separate generated-plan semantics; do not add public query or observations.
   - [ ] **ADDRESSED (verified)** — Deep-equal the complete calls/staging snapshot and prove source preorder, function-
     before-helper resolution, exact authorized shapes, provenance direction, clone isolation, and host-IR/source denial.
-  - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/55, adjacent consumers, primary, and canonical Phase 0
+  - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase 0
     remain exact; rollout/admission stay 1/9 and 0/6.
   - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow are
     synchronized, or explicitly unchanged with evidence.
@@ -7176,11 +7176,72 @@ before implementation.
       synchronized, or explicitly unchanged with evidence.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1`
-    Status: `pending`
+    Status: `active`
     Goal: Project exact corrected calls, shapes, bindings, staged provenance, and generated-plan semantics on Perl.
     Depends on: `.10.3.3.0`
     Acceptance: Implement the parent `.10.3.3` projection scope against the corrected independently guarded
       calls/staging target, deep-equal all 22 records and 25 relations, and preserve private/API/admission boundaries.
+    Verification: Activated before non-task-tree changes from clean correction commit `c07ba618` at ahead 267;
+      `git_message_brief.txt` is zero bytes and mdBook/Python generated artifacts are absent. Parent probes already
+      materialize exact descriptor, source-preorder typed ActionIR, staged function records, and independently
+      loaded generated-v2 metadata; `.10.3.3.0` corrects/cross-gates the target family to `default` at 6/20/55.
+      Full 22/25 RED then stops first at `spec:0.name`: native construction consistently derives
+      `calls_and_staging` from caller identity `calls_and_staging.spec`, while the neutral row alone says `calls`.
+      After isolating that field, RED advances to the expected missing function-first definition-order projection.
+
+    #### Acceptance Checklist
+
+    - [x] **RED / PROBE** — Deep-compare current private projection with the corrected calls target and preserve the
+      exact descriptor/ActionIR/staged/generated probe evidence for every missing record/relation.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — Map function/helper/call/binding/shape/evidence, staged payload/job/result,
+      and generated artifact fields to their exact source-preorder native authorities without host-layout leakage.
+    - [ ] **FIX** — Extend only the private immutable projection with calls/shapes/bindings, staged provenance, and
+      generated-v2 artifact facts; reuse one generated-family classifier and keep public query/observation absent.
+    - [ ] **ADDRESSED (verified)** — Deep-equal all 22 records and 25 relations; prove nested preorder, resolution
+      precedence, authorized shape inference, staging direction, corrected `default` family, clone/JSON safety.
+    - [ ] **NO REGRESSION** — Foundation/static, semantic 6/20/57, adjacent consumers, primary, and canonical Phase
+      0 remain exact; rollout/admission stay 1/9 and 0/6.
+    - [ ] **LOCKSTEP** — Source/API docs, book, task/index/roadmaps/architecture/live/memory/KM and commit workflow
+      are synchronized, or explicitly unchanged with evidence.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1.0`
+      Status: `done`
+      Goal: Correct and independently gate the calls snapshot's spec identity before Perl projection.
+      Depends on: `.10.3.3.0`
+      Acceptance: Derive neutral `spec.name` from each source fixture's caller-registered logical-name stem, correct
+        only inconsistent rows, and add a coordinated wrong-model/hash mutation. Preserve all query answers,
+        parser/compiler/runtime/generated behavior, rollout, and admission.
+      Verification: Activated before non-task-tree changes from clean correction commit `c07ba618` at ahead 267,
+        brief zero, artifacts absent. Full RED proves actual `calls_and_staging` versus neutral `calls`; every other
+        snapshot already equals its fixture logical-name stem, so the defect is isolated to one model field and a
+        missing independent identity check.
+        The calls spec record now says `calls_and_staging`; the checker derives every snapshot's name from the
+        registered logical name and rejects direct plus coordinated old-name drift. Semantic 6/20/57 passes with
+        all 20 exact hashes unchanged. Complete signoff adds Perl foundation/static 10, generated-source and
+        rule-local authorities, capability 80/0/0, selector 59/27/0, repeated action 8/10/8+0/54, full five-backend
+        primary 5x2x66, Knowledge Map 655/4,824, mdBook/memory/doctrines/whitespace, canonical primary 66x2, and
+        Phase 0 1,031/1,031 in 618 seconds with canonical exit 0. The initially isolated primary invocation failed
+        only because its fresh Julia write depot hid installed JSON3; the documented writable-plus-installed depot
+        stack then completed the exact matrix, and canonical CI used the same environment successfully.
+
+      #### Acceptance Checklist
+
+      - [x] **RED / PROBE** — Full calls deep comparison reproduces exact `calls_and_staging` versus `calls` first.
+      - [x] **ROOT CAUSE (WHY + WHERE)** — The calls model used its short snapshot id as spec name; the checker
+        validated source logical identity but never derived `spec.name` from that authority.
+      - [x] **FIX** — Correct only `spec:0.name` to `calls_and_staging` and independently validate every snapshot's
+        spec name from its fixture logical name, including coordinated wrong-model/hash mutation proof.
+      - [x] **ADDRESSED (verified)** — Semantic 6/20 governance rejects direct/coordinated identity drift and all
+        20 exact query answers remain stable.
+      - [x] **NO REGRESSION** — Existing Perl/static/generated/CLI behavior and canonical Phase 0 remain exact;
+        rollout/admission stay 1/9 and 0/6.
+      - [x] **LOCKSTEP** — Neutral docs, ADR/book/task/index/roadmaps/live/memory/KM and commit workflow are exact.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.3.3.1.1`
+      Status: `pending`
+      Goal: Project the fully corrected calls/shapes/bindings/staged/generated target on Perl.
+      Depends on: `.10.3.3.1.0`
+      Acceptance: Implement parent `.10.3.3.1` after spec-name correction and deep-equal all 22/25 rows.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.4`
   Status: `pending`
@@ -9475,9 +9536,12 @@ clean at `40d35201` with semantic 6/20/53 and canonical Phase 0 1,031/1,031. Cor
 seconds. Calls/shapes/staged/generated parent `.10.3.3` activated task-tree-first from that handoff-ready boundary
 at ahead 266, brief zero, and generated artifacts absent. Exact probes then found the neutral calls snapshot's
 `and_acode` is not a legal v2 family: actual `_default` classification and loaded metadata both say `default`.
-Correction child `.10.3.3.0` has complete uncommitted signoff at semantic 6/20/55, primary 66x2, and Phase 0
-1,031/1,031 in 610 seconds. Its clean commit is the only boundary before `.10.3.3.1` can activate;
-rollout/admission remain 1/9 and 0/6.
+Correction child `.10.3.3.0` is clean at `c07ba618` after semantic 6/20/55, primary 66x2, and Phase 0 1,031/1,031
+in 610 seconds. Calls projection parent `.10.3.3.1` activated task-tree-first from that boundary at ahead 267,
+brief zero, and artifacts absent. Full RED found the calls model alone derived spec name from snapshot id rather
+than caller logical identity. Correction `.10.3.3.1.0` now passes semantic 6/20/57, five-backend primary 5x2x66,
+KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds; its clean commit is the only boundary before
+projector child `.1.1`. Rollout/admission remain 1/9 and 0/6.
 
 ### Historical frontier sequence
 
@@ -9859,7 +9923,9 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.2.1 | `FUTURE-PARITY-BACKLOG.10.3.2.1` | `done` | Private exact graph/privacy/failure/runtime-static projection passes canonical Phase 0 1,031/1,031. |
 | 74.2.3 | `FUTURE-PARITY-BACKLOG.10.3.3` | `active` | Correct generated-plan oracle drift, then project ActionIR calls/shapes/bindings plus staged/generated provenance. |
 | 74.2.3.0 | `FUTURE-PARITY-BACKLOG.10.3.3.0` | `done` | Correct and independently gate the calls snapshot's stale/illegal generated-plan family at semantic 6/20/55. |
-| 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `pending` | Project the corrected complete 22-record/25-relation calls/staging target on Perl. |
+| 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `active` | Project the corrected complete 22-record/25-relation calls/staging target on Perl. |
+| 74.2.3.1.0 | `FUTURE-PARITY-BACKLOG.10.3.3.1.0` | `done` | Correct and independently gate the calls spec name against logical identity at semantic 6/20/57 and canonical Phase 0 1,031/1,031. |
+| 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `pending` | Project the fully corrected complete calls target on Perl. |
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |

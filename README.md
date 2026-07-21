@@ -770,10 +770,12 @@ content migration exists yet.
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 55 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 57 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
-  authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Neutral rollout is 1 complete / 8 pending,
+  authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
+  names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
+  Neutral rollout is 1 complete / 8 pending,
   while native backend admission is 0 complete / 6 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
