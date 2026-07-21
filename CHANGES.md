@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.4 — expose immutable Perl semantic queries
+
+The opaque Perl semantic index now exposes `$index->capabilities` and `$index->query($request)`. New lazy owner
+`LinkedSpec::SemanticQuery` receives only a cloned plain-data projection and implements the exact
+`linkedspec-semantic-query-v1` capabilities/list/get/relations/explain envelope. It never receives descriptor,
+compiled regex, ActionIR, source-map, decoded-source, path, compiler, parser-execution, or trace authority.
+
+Query evaluation preserves canonical record/relation order, operation-specific after-id paging, relation-filtered
+directional breadth-first traversal, exact explain streams, logical record/relation/depth budgets and costs,
+structural `none`/`identity`/`span`/`text` source projection, sensitive-fact redaction, digest ceilings, and portable
+invalid/unsupported/forbidden/budget response diagnostics. Responses and capabilities are fresh clone-safe data.
+
+`t/semantic_index_perl_query.t` matches all 19 static neutral response SHA-256 digests; only `runtime_events`
+remains `.10.3.5`. Its nine top-level groups also cover 26 request/error boundaries, including the JSON-boolean
+type fence, returned-answer mutation, Unicode privacy, silence, path/host-layout denial, and successful query
+evaluation with compilation replaced by a die. Canonical CI requires, syntax-checks, and runs the evaluator/test
+unconditionally. Runtime observations,
+route equivalence, composed admission, other backends, and MCP remain unchanged; rollout/admission stay 1/9 and
+0/6.
+
+Complete canonical signoff passes both primary CLI environments at 66/66 and Phase 0 at 1,031/1,031 in 643
+seconds; capability remains 80/0/0, semantic governance 6/20/57, and the complete local CI gate exits 0.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.3.1.1 — project Perl call and staged semantics
 
 The opaque Perl semantic index now retains the complete corrected compiled calls projection without exposing a

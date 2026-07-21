@@ -180,7 +180,9 @@ require_tracked_file t/uniform_binding_contract.t
 require_tracked_file t/semantic_index_perl_foundation.t
 require_tracked_file t/semantic_index_perl_static_projection.t
 require_tracked_file t/semantic_index_perl_calls_projection.t
+require_tracked_file t/semantic_index_perl_query.t
 require_tracked_file perl/LinkedSpec/SemanticCallProjection.pm
+require_tracked_file perl/LinkedSpec/SemanticQuery.pm
 require_tracked_file perl/LinkedSpec/SemanticStaticProjection.pm
 require_tracked_file tools/check_aggregate_selector_retirement.py
 require_tracked_file tools/check_public_aggregate_selector_surface.py
@@ -249,10 +251,12 @@ perl -c -Iperl t/uniform_binding_contract.t
 perl -c -Iperl t/semantic_index_perl_foundation.t
 perl -c -Iperl t/semantic_index_perl_static_projection.t
 perl -c -Iperl t/semantic_index_perl_calls_projection.t
+perl -c -Iperl t/semantic_index_perl_query.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
 perl -c -Iperl perl/LinkedSpec/SemanticCallProjection.pm
+perl -c -Iperl perl/LinkedSpec/SemanticQuery.pm
 perl -c -Iperl perl/LinkedSpec/SemanticStaticProjection.pm
 perl -c -Iperl t/phase0_regression.t
 
@@ -285,6 +289,9 @@ PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t
 
 log "running Perl semantic-index call/staged/generated projection"
 PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t
+
+log "running Perl immutable semantic capabilities/query evaluator"
+PERL5LIB= prove -Iperl t/semantic_index_perl_query.t
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

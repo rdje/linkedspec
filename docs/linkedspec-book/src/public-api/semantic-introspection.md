@@ -1,23 +1,23 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl also has the
-construction and private static plus call/staged/generated projections, but it does **not** yet have public
-`capabilities` or `query` answers. The
-distinction matters:
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
+native static query surface: opaque construction, exact static plus call/staged/generated projections, and public
+`capabilities`/`query` answers. Runtime observations and backend admission are still pending. The distinction
+matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
 - `linkedspec-semantic-query-v1` fixes how callers ask and how answers are bounded;
 - the neutral checker derives and digest-locks exact answers without admitting a backend early; and
-- `LinkedSpec::semantic_index(...)` constructs an opaque compiled-or-failed Perl snapshot and retains private
-  clone-safe static plus compiled call/staging/generated records/relations; and
-- the current `return_descriptor` / descriptor APIs remain the usable introspection surface until the later Perl
-  leaves implement public queries.
+- `LinkedSpec::semantic_index(...)` constructs an opaque compiled-or-failed Perl snapshot and retains clone-safe
+  static plus compiled call/staging/generated records/relations;
+- `$index->capabilities` and `$index->query($request)` expose the exact v1 static answer surface today; and
+- the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission remains **0 complete / 6 pending** for Perl, Rust, Dart,
-Julia, PUC Lua, and LuaJIT: a constructor foundation is not semantic-query admission. MCP remains later transport
-work and does not own semantics.
+Julia, PUC Lua, and LuaJIT: static query availability is not runtime/route/admission completion. MCP remains later
+transport work and does not own semantics.
 
-## Current Perl construction foundation
+## Current Perl construction and query surface
 
 Perl callers can now construct the immutable source/compilation foundation using in-memory source only:
 
@@ -39,12 +39,50 @@ for spans/digests, rejects malformed UTF-8 with a typed `LinkedSpec::SemanticInd
 reads a source path.
 
 The returned `LinkedSpec::SemanticIndex` is opaque rather than a blessed compiler hash. Successful source retains
-the private descriptor authority; a language compilation failure still returns the same object with an immutable
-`failed_compilation` outcome and the existing structured runtime-context failure. Construction does not execute
-the parser. Public `$index->capabilities` and `$index->query(...)` are deliberately not present yet, so callers
-that need answers today should continue using descriptor mode. The staged boundary prevents descriptor coderefs,
-compiled regex objects, decoded source, or filesystem identities from leaking. The next private layer now builds
-the exact static neutral records, but the absence of public query methods remains intentional.
+private descriptor authority; a language compilation failure still returns the same object with an immutable
+`failed_compilation` outcome and structured diagnostic evidence. Construction does not execute the parser. Public
+queries receive only cloned plain-data projections, so descriptor coderefs, compiled regex objects, decoded source,
+source-map objects, and filesystem identities cannot leak through the API.
+
+Ask for effective limits and supported vocabularies with no request object:
+
+```perl
+my $capabilities = $index->capabilities;
+die "semantic query unavailable" unless $capabilities->{ok};
+
+my $facts = $capabilities->{records}[0]{facts};
+print $facts->{source_detail_ceiling}, "\n"; # text
+print $facts->{page_max}, "\n";              # 1000
+```
+
+`capabilities` returns the same complete response as the canonical v1 `capabilities` operation. Each call returns
+a fresh copy; changing a returned record or nested fact cannot change the index or a later response.
+
+All regular operations use the exact neutral request envelope. For example, list rules with source identity but
+without source text:
+
+```perl
+use JSON::PP ();
+
+my $answer = $index->query({
+  contract => "linkedspec-semantic-query-v1",
+  operation => "list",
+  subjects => [],
+  record_kinds => ["rule"],
+  relation_kinds => [],
+  direction => "outgoing",
+  page => {after_id => undef, limit => 100},
+  budget => {max_records => 1000, max_relations => 2000, max_depth => 4},
+  source => {detail => "identity", include_content_digest => JSON::PP::false},
+});
+
+for my $rule (@{$answer->{records}}) {
+  print $rule->{id}, " ", $rule->{source}{logical_name}, "\n";
+}
+```
+
+Queries never compile, execute, read a path, enable trace, or mutate the request. Invalid requests are returned as
+portable response diagnostics rather than host exceptions.
 
 The internal source mapper is already exact: zero-based half-open strict-UTF-8 byte offsets, one-based lines,
 one-based Unicode-scalar columns, rejected mid-codepoint ranges, and deterministic cursor-ordered lookup for
@@ -74,10 +112,10 @@ private projection normalizes the runtime `bare_edge_target_undefined` failure t
 explanation step. Returned copies admit only plain data and JSON booleans; coderefs, compiled regex objects,
 backend AST/IR, object identities, and paths are rejected at the clone boundary.
 
-The focused adapter test materializes internal source keys and deep-compares the complete graph, Unicode privacy
+The focused projection test materializes internal source keys and deep-compares the complete graph, Unicode privacy
 at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static half, against the
-neutral oracle. This still does not make the backend admitted: query-time source redaction, pages/budgets,
-execution observations, route identity, and the composed consumer remain later leaves.
+neutral oracle. The public evaluator now owns query-time source redaction, pages, traversal, budgets, and costs.
+Execution observations, route identity, and the composed consumer remain later leaves.
 
 ## Current private call, staging, and generated projection
 
@@ -127,10 +165,10 @@ ASCII cannot hide byte/character confusion. The original-source rule scanner als
 function ranges while preserving newlines, matching the compiler's function-blanked rule input; an interleaved
 function therefore cannot become a synthetic bare edge.
 
-This remains internal implementation evidence, not a callable query surface. Returned private copies contain only
-canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
-generated source, object identity, or path. Public capabilities/query, runtime observations, route equivalence,
-and Perl admission remain `.10.3.4-.10.3.6`.
+These projection mechanics remain internal implementation evidence, while their normalized records are now
+callable through the public query surface. Returned answers contain only canonical JSON data and booleans: no
+descriptor coderef/compiled regex, raw function record, ActionIR layout, generated source, object identity, or
+path. Runtime observations, route equivalence, and Perl admission remain `.10.3.5-.10.3.6`.
 
 ## Why this is separate from the descriptor
 
@@ -150,12 +188,15 @@ semantic snapshot:
 
 | Authority | Reusable meaning | Work still owned by the semantic adapter |
 |---|---|---|
-| decoded source plus canonical UTF-8 bytes | exact accepted text | static and call coordinates/excerpts/digests now projected; query ceilings remain later |
-| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | host values are normalized privately; public query remains later |
+| decoded source plus canonical UTF-8 bytes | exact accepted text | coordinates/excerpts/digests are projected; query ceilings redact them structurally |
+| outward descriptor | deterministic rule/function order, family/cursor/repetition/entry, edges, slots, staged function records | host values are normalized privately before public query |
 | typed ActionIR AST | source-preorder calls, bindings, and nested spans | private resolution, portable shapes, and evidence now projected |
 | runtime context | structured compilation failure | static unknown-rule normalization now implemented; other portable failures remain later |
 | generated-source v2 owners | contract/format and handler family | separate generated-artifact relation now projected; never snapshot reconstruction |
 | runtime handlers | exact accepted slot and final-result seams | a new invocation-local typed observation sink separate from trace |
+
+The query evaluator is deliberately not another semantic authority. It receives one cloned plain-data projection,
+selects and redacts it under the v1 protocol, and returns a fresh plain-data response.
 
 `LinkedSpec::Get` is character-oriented internally. Direct raw UTF-8 bytes for the privacy fixture's `Töp::`
 label fail validation, while strict UTF-8 decoding first compiles the exact label and Unicode regex. Existing file
@@ -272,6 +313,25 @@ Operations are:
 - `relations`: deterministic directional breadth-first relation traversal; and
 - `explain`: one decision, its ordered explanation steps, and only their `explained_by` relations.
 
+To follow incoming dispatch edges, change the operation-specific fields while keeping every envelope key:
+
+```perl
+my $incoming = $index->query({
+  contract => "linkedspec-semantic-query-v1",
+  operation => "relations",
+  subjects => ["rule:Child"],
+  record_kinds => [],
+  relation_kinds => ["dispatches_to"],
+  direction => "incoming",
+  page => {after_id => undef, limit => 100},
+  budget => {max_records => 1000, max_relations => 2000, max_depth => 4},
+  source => {detail => "identity", include_content_digest => JSON::PP::false},
+});
+```
+
+Relation filters constrain traversal itself. Results are returned in canonical relation order even though the
+frontier is explored breadth-first.
+
 The response always has exactly:
 
 ```text
@@ -297,6 +357,10 @@ When a budget is reached, the response returns a deterministic canonical prefix,
 and reports `semantic_query_budget_exceeded`. Logical cost counts emitted primary records/relations and the deepest
 emitted relation frontier, never CPU time, allocations, object visits, or other backend-private work.
 
+For example, listing with `max_records => 2` returns the first two canonical records, reports
+`cost.records_examined == 2`, leaves `page.complete` false, and names `max_records` in the warning diagnostic. A
+page limit can also make a page incomplete, but that is ordinary pagination and does not produce a budget warning.
+
 ## Source detail and privacy
 
 An index has a caller-selected source ceiling. Each query requests one level:
@@ -318,6 +382,10 @@ redaction, excerpt, and digest behavior.
 A semantic query is read-only. It cannot compile a spec, evaluate an action, run a parser, load an undeclared
 file, or enable tracing. Runtime records appear only when the caller gives the index an already captured immutable
 execution observation. A failed compilation may still produce a diagnostic-only semantic snapshot.
+
+The current Perl index reports `has_execution` and `execution_observation` as false. Its 19 static canonical
+answers are available now; the twentieth `runtime_events` case and direct/loaded/generated route equivalence remain
+owned by `.10.3.5`.
 
 ## Executable oracle
 
@@ -344,6 +412,17 @@ unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. This is contract evidence only: it deliberately rejects
 premature backend admission.
+
+Perl's native evaluator has a separate exact gate:
+
+```bash
+PERL5LIB= prove -Iperl t/semantic_index_perl_query.t
+```
+
+It reconstructs the five static source/ceiling inputs through the public constructor, executes the 19 non-runtime
+canonical requests, and compares every full response digest. Additional cases lock request validation, source
+privacy, clone isolation, silence, path/host-layout denial, and successful query evaluation while the compilation
+entrypoint is disabled.
 
 The static rule facts also have an authority outside the semantic model. The checker reads
 `linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
@@ -374,7 +453,8 @@ The dependency order is:
 | `.10.3.2.1` | Perl private static graph/diagnostic projection | implemented; admission unchanged |
 | `.10.3.3.0-.10.3.3.1.0` | correct generated family and spec identity before projection | complete |
 | `.10.3.3.1.1` | Perl private calls/bindings/staged/generated projection | implemented; admission unchanged |
-| `.10.3.4-.10.3.6` | Perl query, runtime/routes, admission | pending |
+| `.10.3.4` | Perl capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
+| `.10.3.5-.10.3.6` | Perl runtime observations/routes and admission | pending |
 | `.10.4` | Rust parity | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
@@ -387,5 +467,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Until the native rollout reaches the relevant backend, use the existing descriptor APIs described in
-[Descriptor Introspection](descriptor-introspection.md).
+Perl callers can use the native static query surface now. Runtime-event answers are not available until `.10.3.5`,
+and no backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
+backends should continue using their existing descriptor APIs described in
+[Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.

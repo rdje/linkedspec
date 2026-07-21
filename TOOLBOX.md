@@ -71,7 +71,7 @@ check, not proof that the cited commands were run.
 | "Cross-variant / self-host parity (oracle ↔ candidate, Perl ↔ Rust)" | [§4.2 cross-check / oracle corpus](#42-toolscross_check_spec_parserspl--toolsgen_oracle_corpuspl) |
 | "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
 | "Did the neutral semantic introspection schema/query answers drift?" | [§4.9 semantic introspection contract](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
-| "Did Perl semantic-index source normalization, spans, compile outcomes, calls, or staging drift?" | [§4.9 Perl projection tests](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
+| "Did Perl semantic-index source normalization, projections, privacy, paging, budgets, or queries drift?" | [§4.9 Perl semantic tests](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -383,14 +383,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **PERL STATIC PROJECTION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t` verifies the
   `.10.3.2.1` private static graph/diagnostic layer. It materializes internal source keys and deep-compares graph,
   Unicode privacy full/limited, failed compilation, and runtime-static records/relations with the neutral oracle;
-  it also proves clone isolation and no coderef/compiled-regex/object/path leakage. It does not prove public query,
-  runtime observation, or backend admission. See [[perl-semantic-static-projection]].
+  it also proves clone isolation and no coderef/compiled-regex/object/path leakage. Public query is covered by the
+  separate evaluator test below; runtime observation and backend admission remain later. See
+  [[perl-semantic-static-projection]].
 - **PERL CALL/STAGED PROJECTION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t` verifies
   `.10.3.3.1.1`. It deep-compares the complete corrected calls target (22 records / 25 relations), then locks typed
   preorder, user-function resolution, bounded shape inference, staged role/direction, the shared generated-family
   owner, clone/JSON safety, host-IR/generated-source denial, multibyte function coordinates, and interleaved
-  function-shell masking. It still proves no public query, runtime observation, rollout, or admission. See
-  [[perl-semantic-call-staged-projection]].
+  function-shell masking. Public query is covered separately; runtime observation, rollout, and admission remain
+  later. See [[perl-semantic-call-staged-projection]].
+- **PERL CAPABILITIES/QUERY:** `PERL5LIB= prove -Iperl t/semantic_index_perl_query.t` verifies the public opaque-index
+  surface. It matches all 19 static canonical response digests (the runtime-events case remains `.10.3.5`), exact
+  capabilities/list/get/relations/explain behavior, request validation and portable errors, source ceilings/
+  redactions/digests, after-id pages, filtered directional BFS, record/relation/depth budgets and logical costs,
+  clone isolation, silence, no host/path leakage, and successful queries with compilation disabled. See
+  [[perl-semantic-query-evaluator]].
 
 ---
 

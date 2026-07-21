@@ -13,9 +13,9 @@ answers:
   - how are semantic introspection static rule facts cross-checked
   - why are there 57 semantic introspection mutations
 date: 2026-07-21
-status: current corrected neutral contract; backend rollout pending
+status: current corrected neutral contract; Perl static query implemented, backend admission pending
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; correction .10.3.2.0 derives static rule facts from linkedspec-rule-local-cursor-v1, .10.3.3.0 derives generated-plan identity from its generated-source-v2 authority, and .10.3.3.1.0 derives every spec name from caller logical identity. The independent checker validates six fixture groups, derives 20 full canonical responses and compares their SHA-256 digests, rejects 57 representative mutations including coordinated model-plus-hash changes, and is registered unconditionally in tools/run_ci_local.sh. Neutral rollout is 1 complete / 8 pending; native admission is 0 complete / 6 pending."
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. The checker validates six groups, 20 full response digests, and 57 mutations. Perl .10.3.4 now matches all 19 static digests through native capabilities/query; runtime observation and composed admission remain pending. Neutral rollout is 1 complete / 8 pending; native admission is 0 complete / 6 pending."
 reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -51,14 +51,16 @@ prefixes; page cursor/boundary behavior; reverse traversal; source `none`/`ident
 Unicode-scalar coordinates; digests; redactions; a lowered ceiling; invalid requests; and unsupported contracts are
 all executable.
 
-The neutral leaf deliberately admits no native backend. Perl now has opaque construction plus private exact static
-and calls/staging/generated projections, but still no public semantic query or composed consumer; its rollout/
-admission rows therefore remain pending. Query/runtime/routes and admission precede Rust, Dart, Julia, dual-ABI Lua,
-recurring six-runtime proof, thin MCP transport, and public no-drift.
+The neutral leaf deliberately admits no native backend. Perl now has opaque construction, exact private static and
+calls/staging/generated projections, and public immutable capabilities/query for all 19 static canonical cases.
+The runtime-events case, route equivalence, and composed consumer remain pending, so its rollout/admission rows do
+not advance. Those steps precede Rust, Dart, Julia, dual-ABI Lua, recurring six-runtime proof, thin MCP transport,
+and public no-drift.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
 [[semantic-introspection-generated-plan-authority]],
 [[semantic-introspection-spec-name-authority]],
 [[perl-semantic-static-projection]], [[perl-semantic-call-staged-projection]],
+[[perl-semantic-query-evaluator]],
 [[semantic-introspection-staged-artifact-schema]],
 [[outward-descriptor-is-not-semantic-wire-model]].

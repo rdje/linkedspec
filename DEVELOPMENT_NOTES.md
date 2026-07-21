@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.4` — a semantic query is a projection evaluator, not another compiler):
+  the exact v1 query boundary needs only the immutable normalized records, relations, source-reference table, and
+  snapshot facts already retained by the index. `SemanticIndex` therefore lazy-dispatches a cloned plain projection
+  to `SemanticQuery`; the evaluator cannot reach descriptor coderefs, compiled regexes, ActionIR, source-map state,
+  source text, paths, compilation, execution, or trace.
+
+  All operations share one strict request envelope. Record streams page after filtering; relation streams first
+  perform relation-kind-filtered directional BFS and then return canonical relation order; explain pages only its
+  explanation-step stream while always returning the decision. Budget costs count emitted primary records/
+  relations and deepest emitted relation frontier. Source detail is structural: lower detail nulls source fields,
+  nulls governed source-sensitive facts, and lists exact redaction paths; it never substitutes empty text or
+  silently lowers a forbidden request.
+
+  Initial implementation matched 18/19 digests. The sole mismatch was pager-local: after slicing past a valid
+  cursor, code compared the old cursor index with the new shorter array and erased the suffix. Keeping the boundary
+  comparison on the original stream repaired `pagination_after_id`; all 19 static response digests are now exact.
+  The twentieth runtime-events response remains intentionally absent until `.10.3.5` supplies typed observations.
+  A final type audit also found that scalar `0`/`1` had been accepted for `include_content_digest`; the native
+  boundary now requires an actual `JSON::PP::Boolean`, matching the neutral JSON boolean type. The 26-case error
+  matrix locks that distinction. Canonical signoff passes primary 66x2 and Phase 0 1,031/1,031 in 643 seconds.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.3.1.1` — semantic calls are a composition, not an AST export): the
   corrected calls target cannot be recovered from the outward descriptor alone. Descriptor function definitions
   own stable order and callable signatures; typed ActionIR owns nested source-preorder expression structure;

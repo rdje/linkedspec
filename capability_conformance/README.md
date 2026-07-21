@@ -31,8 +31,11 @@ booleans, and absence of host-object/path leakage. Calls leaf `.10.3.3.1.1` adds
 `PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t` deep-equals all 22 corrected records and 25
 relations, locks source-preorder/nested calls, resolution evidence, shapes, staged direction, shared generated-v2
 identity, Unicode coordinates, interleaved function masking, immutable plain-data copies, and absence of host IR or
-generated implementation text. Public capabilities/query, observation, and a composed consumer remain
-`.10.3.4-.10.3.6`, so neither rollout ledger advances.
+generated implementation text. Query leaf `.10.3.4` adds
+`PERL5LIB= prove -Iperl t/semantic_index_perl_query.t`: native `$index->capabilities` and `$index->query(...)`
+match all 19 static canonical response digests, plus strict request/error, privacy, paging, traversal, budget/cost,
+clone/silence, and no-recompile/no-path proof. Runtime observation and a composed admission consumer remain
+`.10.3.5-.10.3.6`, so neither rollout ledger advances.
 
 Run its structural and ownership gate from the repository root:
 

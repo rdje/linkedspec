@@ -30,7 +30,8 @@ executable schema model showed that ADR `0049` required staged provenance but ha
 Perl leaf `.10.3.3.1.1` is the first native private projection of this chain. Each compiled function produces
 separate payload, parse-job, and result records with exact directed relations and plain-data policies; the generated
 handler plan remains a separate record. The focused 22-record/25-relation equality test rejects collapsing or
-reversing those roles, but public query and backend admission are still pending.
+reversing those roles, and Perl `.10.3.4` now queries them exactly. Runtime observations and backend admission are
+still pending.
 
 Related facts: [[semantic-introspection-api-mcp-direction]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[staged-parser-registry-dispatch-contract]].

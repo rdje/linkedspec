@@ -159,8 +159,8 @@ subtest 'projection copies remain private plain data without host IR or generate
   'raw descriptor and ActionIR layouts do not cross the boundary');
  unlike($encoded, qr/LinkedSpecGeneratedMetadata|sub\s*\{/,
   'generated implementation source does not cross the boundary');
- ok(!$index->can('capabilities') && !$index->can('query'),
-  'public capabilities/query remain owned by later leaves');
+ ok($index->can('capabilities') && $index->can('query'),
+  'public capabilities/query are supplied by the later query leaf');
 };
 
 subtest 'function-body byte offsets normalize to Unicode character coordinates' => sub {

@@ -8,24 +8,35 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.3.1.1` is complete and canonical-green from clean spec-identity correction
-  `7d9077c4` at ahead 268; final commit/clean verification is in progress. The private projector deep-equals the
-  corrected 22-record/25-relation calls target and locks typed preorder/resolution, staged direction, all handler
-  variants, clone/host-layout denial, Unicode coordinates, and interleaved function-shell masking. Public query/
-  observations and rollout/admission remain absent; immutable capabilities/query `.10.3.4` is next after clean.
+- `FUTURE-PARITY-BACKLOG.10.3.4` is complete and canonical-green from clean calls projection `b4805f23` at ahead
+  269; final commit/clean verification is in progress. Public Perl `capabilities`/`query` match all 19 static
+  canonical response digests plus exact privacy, paging, filtered BFS, budget/cost, errors, clone/silence/no-
+  recompile/no-path boundaries. Runtime observations/routes `.10.3.5` is next after the clean commit.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
 observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle remains at 1/9
-rollout legs and native backend admission 0/6: Perl construction and private static/call/staged records exist, but public
-capabilities/query and a composed backend consumer do not. Static projection changes neither ledger.
+rollout legs and native backend admission 0/6: Perl static capabilities/query now exist, but runtime observation,
+route equivalence, and the composed backend consumer do not. Query implementation changes neither ledger.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.4 — expose immutable Perl semantic queries**
+  (DONE and canonical-green from base `b4805f23`; commit in progress).
+
+  **Result:** The opaque Perl semantic index exposes exact immutable v1 capabilities/list/get/relations/explain
+  queries without compilation, execution, path reads, trace, host-layout leakage, or caller-visible mutation.
+
+  **Proof:** Query 9 groups/19 exact static digests/26 request-error boundaries, foundation/static/calls/query 25,
+  semantic 6/20/57, capability 80/0/0, selector 59/27/0, primary 66x2, KM 657/4,845, Phase 0 1,031/1,031 in
+  643 seconds, canonical exit 0.
+
+  **Next:** Activate runtime observations/routes `.10.3.5` task-tree-first after the clean commit.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.1.1 — project Perl call semantics**
-  (DONE and canonical-green from base `7d9077c4`; commit in progress).
+  (DONE at clean commit `b4805f23` from base `7d9077c4`).
 
   **Result:** The opaque Perl index retains the exact 22-record/25-relation calls, bindings, shapes, staged
   payload/job/result, and generated-plan projection with no public query or host-layout leakage.
@@ -34,7 +45,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   59/27/0, repeated action 8/10/8+0/54, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2,
   Phase 0 1,031/1,031 in 636 seconds, canonical exit 0.
 
-  **Next:** Activate immutable Perl capabilities/query/privacy/budgets `.10.3.4` after the clean commit.
+  **Next:** Immutable Perl capabilities/query/privacy/budgets `.10.3.4` is active from the clean boundary.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.3.1.0 — correct semantic spec identity**
   (DONE at clean commit `7d9077c4` from base `c07ba618`).

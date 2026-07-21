@@ -149,7 +149,7 @@ subtest 'projection copies are immutable and contain no host compiler objects' =
  is($second->{source_refs}{'source_ref:rule:Top'}{logical_name}, 'graph.spec', 'source mutation cannot inject a path');
  ok(eval { $JSON->encode($second); 1 }, 'the complete private projection is canonical-JSON encodable');
  unlike($JSON->encode($second), qr/(?:CODE|Regexp|SCALAR)\(0x[0-9a-f]+\)/i, 'no coderef, compiled regex, or object identity crosses the boundary');
- ok(!$index->can('capabilities') && !$index->can('query'), 'public capabilities/query remain owned by later leaves');
+ ok($index->can('capabilities') && $index->can('query'), 'public capabilities/query are supplied by the later query leaf');
 };
 
 done_testing;

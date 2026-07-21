@@ -7298,7 +7298,7 @@ before implementation.
         are synchronized, or explicitly unchanged with evidence.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Implement the immutable Perl capabilities/query evaluator with exact privacy and logical costs.
   Depends on: `.10.3.3`
   Acceptance: Expose `$index->capabilities` and `$index->query($request)` with the exact v1 request/response keys,
@@ -7306,6 +7306,43 @@ before implementation.
     traversal, record/relation/depth budgets, source ceilings/redactions/digests, and portable invalid/unsupported/
     forbidden/budget diagnostics. Match every static neutral query response digest without compiling, executing,
     reading a path, enabling trace, or leaking mutable internal state during queries.
+  Verification: Activated task-tree-first from clean calls-projection commit `b4805f23` at ahead 269;
+    `git_message_brief.txt` is zero bytes and generated mdBook/Python/Rust artifacts are absent. Retrieve the exact
+    neutral query, privacy, paging, budget, error, and immutable-clone authorities through the Knowledge Map before
+    implementation; keep runtime observations, rollout, and admission owned by `.10.3.5-.10.3.6` absent.
+    Retrieval confirms 19 of 20 canonical responses are static and owned here; only `runtime_events` requires the
+    next leaf's captured observation. The neutral checker is the executable authority for structural source
+    projection, canonical stream paging, filtered directional breadth-first traversal, logical cost/budget prefixes,
+    explain selection, and portable response diagnostics. Focused RED constructs the graph index silently, then
+    fails exactly because the opaque object has no `capabilities` or `query` method; production evaluation has not
+    begun and no deeper model mismatch is masked.
+    `LinkedSpec::SemanticQuery` now evaluates only a cloned private projection with no file/descriptor/source-map
+    authority. The focused suite passes nine top-level groups: all 19 owned canonical response digests (only
+    `runtime_events` remains `.10.3.5`), native capabilities identity, structural privacy, 26 invalid-request/error
+    boundaries including strict JSON-boolean typing, deterministic paging/traversal/budgets, clone isolation,
+    silence, host-layout denial, and successful querying while the compile entrypoint is replaced with a die.
+    Foundation/static/calls/query pass 25 top-level groups. Complete canonical signoff passes semantic 6/20/57,
+    rule-local 36/18/8 and 75 files/8+0/60, root 7+0/54, duplicate slots 7+0/59, repeated action 8/10/8+0/54,
+    capability 80/0/0, aggregate selector 59/27/0, primary 66/66 in both default and POSIX environments, and
+    Phase 0 1,031/1,031 in 643 seconds. Memory architecture, Knowledge Map 657/4,845, mdBook, four doctrines,
+    whitespace, and the complete local CI gate pass; rollout/admission remain exactly 1/9 and 0/6.
+    Commit: `FUTURE-PARITY-BACKLOG.10.3.4 - expose Perl semantic queries`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read the canonical semantic query/privacy/cost facts and exact executable
+    neutral fixtures/checker before interpreting the private Perl projection.
+  - [x] **RED / ORACLE** — Lock capabilities and all static exact response digests against the current opaque index,
+    including invalid/unsupported/forbidden/budget errors and clone isolation, before production edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Map query selection, paging/traversal, redaction/source ceilings, costs,
+    budgets, explanations, and diagnostics to one immutable backend-neutral evaluator boundary.
+  - [x] **FIX** — Expose only native `capabilities`/`query` on the opaque index without compilation, execution,
+    path reads, trace changes, mutable aliases, runtime observations, rollout, or admission.
+  - [x] **ADDRESSED (verified)** — Match all static exact responses/digests and prove deterministic order/pages,
+    logical costs/budgets, privacy monotonicity, portable errors, and clone-safe repeated calls.
+  - [x] **NO REGRESSION** — Private source/static/calls/staged/generated projections, semantic governance, adjacent
+    consumers, primary behavior, and canonical Phase 0 remain exact; rollout/admission stay 1/9 and 0/6.
+  - [x] **LOCKSTEP** — API/docs/book/task/index/roadmaps/architecture/live/memory/KM and commit workflow are exact.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.3.5`
   Status: `pending`
@@ -9597,8 +9634,10 @@ than caller logical identity. Correction `.10.3.3.1.0` passes semantic 6/20/57, 
 KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds at clean commit `7d9077c4`. Projector child `.1.1`
 then completed the exact 22/25 calls/staged/generated target with Unicode/interleaving/privacy locks, semantic
 6/20/57, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds.
-The next pending Perl leaf is immutable capabilities/query/privacy/budgets `.10.3.4`; rollout/admission remain 1/9
-and 0/6.
+Immutable capabilities/query/privacy/budgets `.10.3.4` is complete and canonical-green from clean commit
+`b4805f23` at ahead 269: all 19 static digests, 26 request/error boundaries, primary 66x2, and Phase 0
+1,031/1,031 in 643 seconds pass. Its commit is in progress; runtime observations/routes `.10.3.5` is the precise
+next action after the clean boundary. Rollout/admission remain 1/9 and 0/6.
 
 ### Historical frontier sequence
 
@@ -9983,7 +10022,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.3.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1` | `done` | Projected the corrected complete 22-record/25-relation calls/staging target on Perl. |
 | 74.2.3.1.0 | `FUTURE-PARITY-BACKLOG.10.3.3.1.0` | `done` | Correct and independently gate the calls spec name against logical identity at semantic 6/20/57 and canonical Phase 0 1,031/1,031. |
 | 74.2.3.1.1 | `FUTURE-PARITY-BACKLOG.10.3.3.1.1` | `done` | Exact private calls/staged/generated projection passes canonical Phase 0 1,031/1,031. |
-| 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `pending` | Implement exact immutable capabilities/query/privacy/page/budget behavior. |
+| 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `done` | Exact immutable capabilities/query/privacy/page/budget behavior passes all 19 static digests and canonical Phase 0 1,031/1,031. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `pending` | Add opt-in execution observations across direct, loaded, and generated routes. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `pending` | Compose exact Perl consumer, canonical admission, and public closeout. |
 

@@ -166,7 +166,8 @@ sub Get {
 # Purpose : Build one opaque immutable semantic-index snapshot from in-memory
 #           decoded text or strict UTF-8 bytes without executing the parser.
 # Args    : ($spec_scalar_ref, logical_name => ..., source_detail_ceiling => ...)
-# Returns : LinkedSpec::SemanticIndex object (compiled or failed-compilation)
+# Returns : LinkedSpec::SemanticIndex object with native capabilities/query
+#           (compiled or failed-compilation; observations are added separately)
 #------------------------------------------------------------------------------
 sub semantic_index {
  my $spec_content_ref = shift @_;

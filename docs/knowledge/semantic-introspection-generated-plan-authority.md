@@ -31,7 +31,8 @@ but-wrong family even if response hashes are refreshed.
 The private Perl calls/staging projector now consumes this correction without duplicating the family table:
 `LinkedSpec::GeneratedSource` owns both contract identity and handler-variant classification, while `Compiler` and
 `SemanticCallProjection` delegate to it. This refactor preserves emitted behavior and keeps implementation source
-outside the semantic record. Public query, rollout, and backend admission remain unchanged.
+outside the semantic record. The later Perl query leaf exposes that record through the public immutable evaluator;
+runtime observations, rollout, and backend admission remain pending.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-introspection-static-rule-authority]],
 [[perl-semantic-introspection-authority-map]], [[perl-generated-source-contract-v2]].

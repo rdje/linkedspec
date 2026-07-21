@@ -9,6 +9,7 @@ answers:
   - "does Perl RuntimeContext capture semantic execution events"
   - "can generated metadata reconstruct a semantic index"
   - "how should the Perl failed-compilation diagnostic be normalized"
+  - "what authority may the Perl semantic query evaluator consume"
 date: 2026-07-21
 status: current
 tags: [perl, semantic-introspection, utf8, descriptor, actionir, provenance, diagnostics]
@@ -31,8 +32,9 @@ leaf `.10.3.2.1` now performs that private correlation and normalizes internal `
 `normalize_edges` to the v1 portable compile diagnostic. Call leaf `.10.3.3.1.1` now composes function/helper/call/
 binding facts from descriptor plus typed ActionIR, explicit staged payload/job/result provenance from the function
 sidecars, and generated-plan identity from shared generated-v2 owners. Descriptor function and ActionIR spans are
-character offsets; only `SemanticSourceMap` converts the final references to bytes and scalar columns. Query,
-observations, and admission remain split under `.10.3.4-.10.3.6`. See [[perl-semantic-static-projection]],
-[[perl-semantic-call-staged-projection]],
+character offsets; only `SemanticSourceMap` converts the final references to bytes and scalar columns. Query leaf
+`.10.3.4` consumes only the cloned plain projection and exposes exact static capabilities/query without reopening
+any authority. Observations and admission remain `.10.3.5-.10.3.6`. See [[perl-semantic-static-projection]],
+[[perl-semantic-call-staged-projection]], [[perl-semantic-query-evaluator]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[semantic-introspection-neutral-contract]], and
 [[perl-generated-source-contract-v2]].

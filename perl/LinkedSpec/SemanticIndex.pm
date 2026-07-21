@@ -1,7 +1,8 @@
 #------------------------------------------------------------------------------
 # Package: LinkedSpec::SemanticIndex
 # Purpose: Own immutable Perl semantic-index construction, strict source
-#          normalization, source mapping, and compiled/failed outcomes.
+#          normalization, source mapping, compiled/failed outcomes, and the
+#          public lazy capabilities/query gateway.
 #------------------------------------------------------------------------------
 package LinkedSpec::SemanticIndex;
 
@@ -191,7 +192,7 @@ sub create {
 }
 
 # Internal foundation methods are intentionally not part of the public v1 host
-# surface. Later projection/query leaves consume them without exposing compiler
+# surface. Projection/query owners consume them without exposing compiler
 # objects, decoded source, or mutable state to callers.
 sub _foundation_snapshot {
  my ($self) = @_;
@@ -208,6 +209,29 @@ sub _foundation_snapshot {
 sub _static_projection {
  my ($self) = @_;
  return _clone_plain_data(_state($self)->{static_projection})
+}
+
+# Public v1 host surface. The evaluator is lazy and receives only a cloned
+# private plain-data projection, never descriptor/source-map authority.
+sub capabilities {
+ my ($self) = @_;
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::SemanticQuery',
+  'capabilities',
+  _clone_plain_data(_state($self)->{static_projection}),
+ )
+}
+
+sub query {
+ my ($self, $request) = @_;
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__,
+  'LinkedSpec::SemanticQuery',
+  'evaluate',
+  _clone_plain_data(_state($self)->{static_projection}),
+  $request,
+ )
 }
 
 sub _foundation_source_identity {

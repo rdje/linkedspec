@@ -787,9 +787,12 @@ content migration exists yet.
   `.10.3.3.1.1` now adds the complete private function/helper/call/binding, staged payload/job/result, resolution-
   evidence, and generated-plan projection: all corrected 22 records and 25 relations match exactly. Source-preorder
   typed ActionIR supplies calls, descriptor function spans remain character coordinates until the source-map
-  boundary, and compiler plus projector share generated-v2 identity/family ownership. Public `capabilities` and
-  `query` are still absent, so rollout/admission remain 1/9 and 0/6; query/runtime/admission
-  `.10.3.4-.10.3.6` follow.
+  boundary, and compiler plus projector share generated-v2 identity/family ownership. Query leaf `.10.3.4` now
+  exposes `$index->capabilities` and `$index->query($request)` on Perl. Its lazy immutable evaluator matches all
+  19 static canonical response digests for capabilities/list/get/relations/explain, structural source privacy,
+  canonical pages, filtered directional breadth-first traversal, logical budgets/costs, and portable query errors
+  without compilation, execution, path reads, trace changes, or mutable aliases. Runtime observation/routes and
+  exact Perl admission remain `.10.3.5-.10.3.6`, so rollout/admission stay 1/9 and 0/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

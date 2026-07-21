@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral static/generated-plan/spec-identity oracle corrected; Perl source and private static projection implemented; public adapters pending
+- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl source/projections/native static query implemented; observations and admission pending
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -317,8 +317,8 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
   execution.
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
 - This decision changes no parser, compiler, runtime, descriptor, generated artifact, CLI, trace, or MCP behavior.
-  Public docs must distinguish the current Perl construction-only foundation from the still-planned semantic
-  record/query, execution-observation, backend-admission, and MCP surfaces.
+  Public docs must distinguish the current Perl static native query surface from the still-planned execution-
+  observation, route-equivalence, backend-admission, other-backend, and MCP surfaces.
 
 The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
 characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
@@ -371,8 +371,17 @@ source-preorder typed ActionIR, staged function sidecars, and generated-source-v
 ActionIR source spans are character coordinates until the final source-map projection; a multibyte-prefix lock
 prevents ASCII-only byte/character aliasing. The original source scanner masks descriptor-owned top-level function
 ranges before rule-member classification, matching the compiler's function-blanked input. Compiler and projector
-delegate handler-family and artifact-identity facts to shared `LinkedSpec::GeneratedSource` owners. This adds no
-public query, observation, rollout, or admission; `.10.3.4-.10.3.6` remain responsible for those boundaries.
+delegate handler-family and artifact-identity facts to shared `LinkedSpec::GeneratedSource` owners. At that leaf,
+this added no public query, observation, rollout, or admission; `.10.3.4-.10.3.6` retained those boundaries.
+
+Perl leaf `.10.3.4` adds the first public native query boundary without widening the model. `$index->capabilities`
+is the canonical capabilities operation, and `$index->query($request)` evaluates the exact v1 envelope over a
+cloned private plain-data projection. Capabilities/list/get/relations/explain, structural source redaction and
+ceilings, after-id pages, filtered directional breadth-first traversal, logical record/relation/depth budgets and
+costs, explanations, and portable response diagnostics match all 19 static canonical response digests. Querying
+does not compile, execute, read a path, enable trace, expose host state, or retain caller mutations. The twentieth
+`runtime_events` response, route equivalence, composed Perl admission, other backends, and MCP remain later leaves;
+rollout/admission therefore remain 1/9 and 0/6.
 
 ## Links
 

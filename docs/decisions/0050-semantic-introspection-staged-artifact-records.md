@@ -59,7 +59,8 @@ changing a required kind, fact, or relation follows ADR `0049`'s new-version rul
 
 Perl implementation note (2026-07-21): `.10.3.3.1.1` is the first native private projection of this decision.
 The exact calls model retains three separate function-body records and the required directed chain while the
-handler plan remains a distinct `generated_artifact`. Public query and backend admission remain pending.
+handler plan remains a distinct `generated_artifact`. Perl `.10.3.4` now queries those records/relations through
+the exact v1 native evaluator; runtime observation and backend admission remain pending.
 
 ## Links
 

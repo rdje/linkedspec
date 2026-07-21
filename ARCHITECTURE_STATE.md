@@ -35,8 +35,11 @@ This document is the current high-level technical reading of the project shape. 
   facts, source-preorder typed ActionIR, explicit staged sidecars, and shared generated-v2 identity into the exact
   corrected 22-record/25-relation calls target. Descriptor/ActionIR spans remain character coordinates until final
   source mapping; function shells are masked before original-source rule classification, matching compiler
-  blanking. No path is read, parser executed, public query exposed, observation captured, or backend admitted.
-  `.10.3.4-.10.3.6` own query, runtime/routes, and admission.
+  blanking. Query leaf `.10.3.4` adds the public Perl `capabilities`/`query` boundary through a lazy evaluator over
+  cloned plain projection data. All 19 static canonical answers match exact digests, including source redaction/
+  ceilings/digests, canonical paging, filtered directional BFS, logical budgets/costs, explanations, and portable
+  errors. Queries read no path, compile/execute nothing, emit no trace, and expose no mutable/host state. No runtime
+  observation is captured and no backend is admitted; `.10.3.5-.10.3.6` retain runtime/routes and admission.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain
