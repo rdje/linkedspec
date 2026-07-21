@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (Rust calls/staging/generated projection `.10.4.3` is signoff-complete from clean
-  `c1a7e413`; immutable query `.10.4.4` follows after the clean commit and rollout/admission remain 2/9 and 1/6)
+- Last updated: `2026-07-21` (immutable Rust semantic capabilities/query `.10.4.4` is signoff-complete from clean
+  call projection commit `68e31222`; `.10.4.5` follows only after the clean commit boundary)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7698,13 +7698,39 @@ before implementation.
     mdBook/KM/doctrines, canonical CI, cleanup, commit/brief, and clean handoff agree before `.10.4.4`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Expose immutable Rust semantic capabilities and query evaluation.
   Depends on: `.10.4.3`
   Acceptance: Add idiomatic native capabilities/query methods over only cloned normalized projection data; match
     all 19 static digests and exact ids/order/privacy/pages/budgets/errors/explain behavior. Prove returned-value
     isolation, query non-interference, JSON identity, and inability to compile, execute, trace, inspect IR, or read
     paths. Runtime events remain pending.
+
+  #### Acceptance Checklist
+
+  - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate only from clean `68e31222`, preserve rollout/admission at 2/9
+    and 1/6, and keep runtime observation/admission absent.
+  - [x] **IMMUTABLE NATIVE SURFACE** — Expose idiomatic capabilities/query methods over fresh clones of the retained
+    normalized projection only; no AST, ActionIR, compiler object, regex, path, or generated source can escape.
+  - [x] **EXACT STATIC ORACLE** — Match all 19 static response digests plus exact ids/order/source privacy,
+    directional traversal, pages/cursors, budgets/costs, errors, and explain evidence.
+  - [x] **CEILINGS / NON-INTERFERENCE** — Enforce the immutable construction ceiling, deny elevation, preserve
+    query/input isolation, and prove queries cannot compile, execute, trace, mutate, or capture runtime events.
+  - [x] **NATIVE / JSON IDENTITY** — Return clone-safe native values whose neutral JSON projection is exact and
+    deterministic across repeated/interleaved queries without caller aliasing.
+  - [x] **LOCKSTEP / SIGNOFF** — Focused exact query proof, complete Rust, semantic checker, mdBook/KM/doctrines,
+    canonical CI, cleanup, commit/brief, and clean handoff agree before `.10.4.5`.
+
+  Implementation evidence: `SemanticQuery` supplies typed operation/direction/page/budget/source requests;
+  `SemanticIndex::capabilities`, `query`, and `query_neutral` share one evaluator over a fresh normalized-projection
+  clone. Five focused tests match all 19 static digests through native and neutral paths, cover the exact 26 error
+  boundaries, and lock privacy, traversal, pages/budgets/costs, explanations, clone/input isolation, deterministic
+  interleaving, absent execution state, and host/path/IR denial. Complete Rust passes core 193, runtime 147,
+  integration 197, exact 105/full generated manifest/all packages, and primary 66x2; the query target is
+  Clippy-clean above the existing library warning baseline. Semantic 6/20/65, KM 667/4,937, mdBook, memory, and all
+  four doctrines pass. Canonical CI passes primary 66x2 and Phase 0 1,031/1,031 in 631 seconds, exit 0. The
+  generated 3.3 GiB Rust target, 12 MiB book, and 28 KiB Python cache are removed before commit. Runtime/admission
+  and both ledgers are unchanged; `.10.4.5` follows only after the clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.5`
   Status: `pending`
@@ -10431,7 +10457,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `done` | Strict copied-source mapping and opaque compiled-or-failed Rust authority pass complete/canonical signoff without promotion. |
 | 74.3.2 | `FUTURE-PARITY-BACKLOG.10.4.2` | `done` | Exact private static graph/privacy/failure/runtime-static projection passes canonical signoff without promotion. |
 | 74.3.3 | `FUTURE-PARITY-BACKLOG.10.4.3` | `done` | Exact private 22-record/25-relation calls/bindings/staged/generated projection passes canonical signoff without promotion. |
-| 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `pending` | Expose immutable capabilities/query and match all 19 static digests. |
+| 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `done` | Immutable typed/raw-neutral capabilities/query match all 19 static digests with canonical signoff. |
 | 74.3.5 | `FUTURE-PARITY-BACKLOG.10.4.5` | `pending` | Capture typed runtime observations and match the twentieth digest across routes. |
 | 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `pending` | Admit Rust with one exact consumer and close the parent. |
 
@@ -11107,6 +11133,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.4` | Focused query 5/foundation 6 and all 19 static digests plus 26 errors; complete Rust core 193, runtime 147, integration 197, exact 105/full generated manifest/all packages, primary 66x2; focused query Clippy clean; semantic 6/20/65 at 2/9 + 1/6; KM 667/4,937; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 631s; 3.3 GiB target/12 MiB book/28 KiB cache cleanup. | PASS. Rust exposes owned typed and raw-neutral projection-only capabilities/query with exact privacy, traversal, pages, budgets, errors, explain, isolation, and no execution/host/path/IR access; runtime/admission remain pending and `.10.4.5` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.3` | Exact calls 4/all static 9/foundation 6; complete Rust core 193, runtime 147, integration 197, exact 105/full generated manifest/all packages, primary 66x2; normal library Clippy exit 0 with existing warning baseline; semantic 6/20/65 at 2/9 + 1/6; KM 666/4,923; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 619s; 3.0 GiB target/12 MiB book/cache cleanup. | PASS. Typed function/ActionIR/staged/generated authorities project all corrected 22 records / 25 relations with exact preorder, resolution, shapes, Unicode ranges, function-shell isolation, directions, and no host/source leak; query/runtime/admission remain pending and `.10.4.4` follows after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.2` | Exact static 5/foundation 6; complete Rust core 193, runtime 143, integration 197, exact 105/full generated manifest/all packages, primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 665/4,912; mdBook/memory/four doctrines/diff; repeated-action marker RED/restoration; canonical primary 66x2 and Phase 0 1,031/1,031 in 609s; cleanup. | PASS. Exact private graph/privacy/failure/runtime-static v1 projection and deliberate Rust failure normalization land without public query or promotion; `.10.4.3` follows from the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.1` | Strict copied source/map/outcome foundation; focused 6; complete Rust core 193, runtime 138, integration 197, exact 105-fixture oracle/full generated manifest/all packages, primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 663/4,900; mdBook/memory/four doctrines/diff; repeated-action marker RED/restoration plus durable `.22`; canonical primary 66x2 and Phase 0 1,031/1,031 in 607s; 1.2+2.7 GiB targets/book/cache cleanup; 93 GiB available. | PASS. Opaque Rust construction retains exact private compiled-or-failed authority and ceiling-safe source detail without target execution/path/host leaks or rollout promotion; `.10.4.2` follows after the clean commit. |

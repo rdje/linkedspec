@@ -3,9 +3,9 @@
 LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
 admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
-consumer. Rust now has three private implementation layers: an opaque strict-source, exact-coordinate,
-compiled-or-failed foundation, an exact clone-safe static v1 projection, and an exact call/staged/generated
-projection. Rust still has no public query or admission.
+consumer. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
+static and call/staged/generated projections; and a public immutable typed/raw-neutral static query evaluator.
+Rust runtime observation and composed admission remain later leaves.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -17,13 +17,15 @@ The distinction matters:
 - `$index->with_execution_observation(\@events)` derives a new immutable runtime snapshot after normal parsing;
 - `t/semantic_introspection_perl_admission.t` composes every required Perl path once; and
 - `linkedspec_runtime::semantic_index::SemanticIndex` retains the Rust source/outcome authority and exact private
-  static plus call/staged/generated projections needed by the later query leaf; and
+  static plus call/staged/generated projections;
+- `SemanticIndex::capabilities()`, `query(&SemanticQuery)`, and `query_neutral(&Value)` expose Rust's exact 19-case
+  static answer surface without exposing those private projections; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
 Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
-## Current Rust construction foundation
+## Current Rust construction and static query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
 
@@ -62,8 +64,58 @@ the source digest. The custom debug representation redacts logical identity at `
 Construction parses and compiles the source but never invokes the resulting target parser or target lifecycle and
 action code. It does not capture runtime observations or enable trace. The opaque index now retains exact private
 static v1 records/relations, normalized failure evidence, and the 22-record/25-relation call/binding/staged/
-generated target, but exposes no public record or query method yet. Query, runtime observation, and admission
-remain later Rust leaves. Therefore the global rollout and native-admission ledgers remain 2/9 and 1/6.
+generated target. Public queries can now select and redact those normalized records, but no projection accessor or
+host compiler object is exposed. Runtime observation and admission remain later Rust leaves. Therefore the global
+rollout and native-admission ledgers remain 2/9 and 1/6.
+
+Use the typed native request for normal Rust embedding. `SemanticQuery::new` supplies the exact v1 contract plus
+canonical page, budget, direction, and source defaults:
+
+```rust
+use linkedspec_runtime::semantic_index::{
+    SemanticIndex, SemanticIndexOptions, SemanticQuery, SemanticQueryOperation,
+    SemanticSourceDetail,
+};
+
+let source = "Top::\n /x/\n";
+let index = SemanticIndex::from_source(
+    source,
+    SemanticIndexOptions::new("example.spec", SemanticSourceDetail::Text),
+)?;
+
+let mut request = SemanticQuery::new(SemanticQueryOperation::List);
+request.record_kinds = vec!["rule".to_string()];
+request.source.detail = SemanticSourceDetail::Identity;
+
+let answer = index.query(&request);
+assert!(answer.ok);
+assert_eq!(answer.records[0].id, "rule:Top");
+assert_eq!(
+    answer.records[0]
+        .source
+        .as_ref()
+        .map(|source| source.logical_name.as_str()),
+    Some("example.spec"),
+);
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`index.capabilities()` is the canonical capabilities operation and returns effective kind vocabularies, page and
+budget defaults/maxima, construction ceiling, and `execution_observation: false`. Every response is owned: changing
+a record, fact, source reference, or diagnostic cannot change the index or a later query.
+
+Transport code that already has neutral JSON can call `index.query_neutral(&value)`. That seam accepts the exact
+nine-field envelope and returns portable response diagnostics even for malformed types, unknown keys, non-JSON
+booleans, invalid kind order, bad operation combinations, unknown subjects, or invalid cursors. Valid typed and
+neutral requests enter the same evaluator and produce deep-equal responses; there is no second JSON-side semantic
+implementation.
+
+Rust implements `capabilities`, `list`, `get`, `relations`, and `explain` for every static snapshot. It applies the
+same structural source policy, canonical after-id pages, filtered directional breadth-first traversal, logical
+budgets/costs, and exact query diagnostics described below. The evaluator receives only a fresh clone of the
+normalized projection. It has no source parser, compiler, executor, trace sink, filesystem path, ActionIR,
+`CompiledSpec`, compiled regex, or generated implementation source. The twentieth runtime-events response remains
+owned by `.10.4.5`; composed Rust admission remains `.10.4.6`.
 
 ## Current Perl construction and query surface
 
@@ -209,9 +261,9 @@ AST/IR, object identities, and paths are rejected at the clone boundary.
 
 Each backend's focused projection tests materialize internal source keys and deep-compare the complete graph,
 Unicode privacy at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static
-half, against the neutral oracle. Perl's public evaluator owns query-time source redaction, pages, traversal,
-budgets, and costs today; Rust's equivalent remains `.10.4.4`. The composed Perl admission consumer is described
-with the executable oracle below; Rust now has the same private call/staging dependency, and `.10.4.4` owns query.
+half, against the neutral oracle. Perl and Rust public evaluators now each own query-time source redaction, pages,
+traversal, budgets, and costs over cloned projections. The composed Perl admission consumer is described with the
+executable oracle below; Rust's runtime observation and composed admission remain `.10.4.5-.10.4.6`.
 
 ## Current private call, staging, and generated projection
 
@@ -261,11 +313,12 @@ case locks exact call excerpts and columns so ASCII cannot hide byte/character c
 correlation also treats top-level function shells as definitions, not rule material; an interleaved function
 therefore cannot become a synthetic bare edge.
 
-These projection mechanics remain internal implementation evidence. Perl exposes the normalized records through
-its public query surface; Rust retains them privately until `.10.4.4`. Returned or retained values contain only
+These projection mechanics remain internal implementation evidence. Perl and Rust expose the normalized records
+only through their public query surfaces. Returned or retained values contain only
 canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
 generated source, object identity, or path. Perl runtime observation/routes and admission are implemented by
-`.10.3.5-.10.3.6`; Rust runtime observation and admission remain `.10.4.5-.10.4.6`.
+`.10.3.5-.10.3.6`; Rust static query is exact, while runtime observation and admission remain
+`.10.4.5-.10.4.6`.
 
 ## Why this is separate from the descriptor
 
@@ -321,12 +374,14 @@ static half. Leaf `.10.4.3` then composes compiled function registry data, typed
 sidecars, exact authored-source correlation, and the existing generated-v2 plan into the corrected 22-record/
 25-relation call target. Definition/call preorder, helper and exact function resolution, conservative shapes,
 bindings, Unicode source references, function-shell isolation, staged directions, and generated provenance now
-deep-equal the neutral oracle. Public capabilities/query remain absent.
+deep-equal the neutral oracle. Leaf `.10.4.4` exposes typed and raw-neutral capabilities/query over fresh clones of
+that normalized projection and matches all 19 static response digests.
 
 Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
-currently emit textual trace decisions only; no typed semantic observer or query object exists. The planned runtime
-leaf adds a separate optional invocation-local sink at those seams and derives a new immutable post-execution index.
-It must not parse trace text, alter diagnostic output, or let queries execute.
+currently emit textual trace decisions only; no typed semantic observer exists. The static query object above has
+no access to either execution seam. The planned runtime leaf adds a separate optional invocation-local sink at
+those seams and derives a new immutable post-execution index. It must not parse trace text, alter diagnostic output,
+or let queries execute.
 
 The prerequisite is resolved by ADR `0051` and task `.10.4.0.2`: the published/Rust rule-label contract is a
 nonempty sequence of pinned Unicode 17.0.0 `XID_Continue` scalars at every position. Identity is exact,
@@ -524,6 +579,8 @@ true and adds `execution:0`, two exact slot events, one final rule-result event,
 for the canonical `Top::OR{2}` / `ab\n` fixture. All 20 canonical answers are available through the native API.
 Direct parsers, loaded specs, portable loader results, captured generated source, independently loaded generated
 `Execute`/`Get`/`ExecuteWithTrace`, and validated reconstructed plans produce the same observation and response.
+Rust currently reports false for both fields and matches the 19 static answers; `.10.4.5` owns its typed completed-
+observation derivation and twentieth response.
 
 ## Executable oracle
 
@@ -564,6 +621,16 @@ It reconstructs the five static source/ceiling inputs through the public constru
 canonical requests, and compares every full response digest. Additional cases lock request validation, source
 privacy, clone isolation, silence, path/host-layout denial, and successful query evaluation while the compilation
 entrypoint is disabled.
+
+Rust's equivalent static gate is:
+
+```bash
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query
+```
+
+Its five tests reconstruct every static source/ceiling input, match all 19 non-runtime response digests through
+both typed and neutral entrypoints, cover the same exact 26 request/error boundaries, and lock privacy, response/
+input isolation, deterministic interleaving, absent execution state, and host/path/IR denial.
 
 The runtime route gate is:
 
@@ -620,7 +687,9 @@ The dependency order is:
 | `.10.3.4` | Perl capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
 | `.10.3.5` | Perl runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
 | `.10.3.6` | composed Perl semantic admission | complete; 12 roles, 20 exact queries, Perl-only promotion |
-| `.10.4` | Rust parity | source/outcome and static projection complete; calls/query/runtime/admission pending |
+| `.10.4.1-.10.4.3` | Rust source/outcome plus static/call/staged projections | complete |
+| `.10.4.4` | Rust capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
+| `.10.4.5-.10.4.6` | Rust runtime observations and composed admission | pending |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

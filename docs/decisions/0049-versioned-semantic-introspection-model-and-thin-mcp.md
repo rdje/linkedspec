@@ -409,6 +409,15 @@ are owned clones and cannot expose source, map, AST, `CompiledSpec`, or another 
 invokes the resulting target parser or target code. Static records and normalized diagnostics remain `.10.4.2`,
 so rollout/admission remain 2/9 and 1/6.
 
+Rust leaves `.10.4.2-.10.4.3` privately compose accepted source with typed compiled graph, diagnostic, ActionIR,
+function-staged, and shared generated-plan owners. Rust leaf `.10.4.4` then exposes
+`SemanticIndex::capabilities()`, typed `query(&SemanticQuery)`, and a raw-neutral validation seam. Both public paths
+enter one evaluator over a fresh clone of the normalized projection and match all 19 static canonical response
+digests. The evaluator owns only selection, source redaction/ceilings, canonical pages, filtered directional BFS,
+logical budgets/costs, explanations, and portable request diagnostics; it has no compiler, executor, trace, path,
+host IR, or generated source. Runtime observation and composed Rust admission remain `.10.4.5-.10.4.6`, so rollout
+and admission stay 2/9 and 1/6. See [[rust-semantic-query-evaluator]].
+
 ## Links
 
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10-.10.10`)

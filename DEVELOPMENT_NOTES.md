@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.4` — native typing and wire validation should share one evaluator):
+  Rust callers benefit from typed operations, directions, paging, budgets, source policy, and response records, but
+  the neutral contract must also diagnose structurally malformed JSON that cannot deserialize into those types.
+  `SemanticIndex::query(&SemanticQuery)` therefore serializes its owned typed request into the neutral shape, while
+  `query_neutral(&Value)` accepts the untyped transport boundary; both immediately enter the same evaluator over a
+  fresh clone of `SemanticStaticProjection`. This keeps validation from becoming a second semantic engine and
+  guarantees native/neutral response identity.
+
+  The query layer owns selection, traversal, paging, budgets, privacy, and portable request diagnostics—not source
+  parsing or semantic derivation. Filtered relation traversal is directional breadth-first, then returned in the
+  projection's canonical order. A page cursor names the preceding primary id. Logical cost counts only emitted
+  primary rows and deepest emitted frontier. Source-sensitive facts are nulled with exact redaction paths below
+  `text`; a request above the construction ceiling fails rather than downgrading.
+
+  Five focused tests match all 19 static response digests through typed and neutral entrypoints, cover the admitted
+  26-case validation matrix, and lock clone/input isolation, deterministic interleaving, privacy, and host/path/IR
+  denial. The index still reports `has_execution = false`; runtime records cannot appear until `.10.4.5` supplies a
+  completed typed observation, and Rust admission remains `.10.4.6`.
+
+  Complete Rust proof passes core 193, runtime 147, integration 197, exact 105, full generated manifest, all
+  packages, and primary 66x2. The focused query target is Clippy-clean above the repository's existing runtime
+  warning baseline; semantic governance remains 6/20/65 at rollout 2/9 and admission 1/6. KM is 667/4,937 and the
+  mdBook, memory, and four doctrine checks pass. Canonical CI passes primary 66x2 plus Phase 0 1,031/1,031 in 631
+  seconds, exit 0; its generated 3.3 GiB Rust target, 12 MiB book, and 28 KiB Python cache are removed before commit.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.3` — semantic call structure and source location need different
   authorities): Rust's compiled function registry and ActionIR already own which expressions are calls, their
   nesting, bindings, and resolution inputs. They do not retain one universal original-source range, while the

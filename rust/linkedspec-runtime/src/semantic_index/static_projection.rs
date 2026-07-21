@@ -16,7 +16,7 @@ use std::collections::{BTreeMap, BTreeSet};
 const SPEC_ID: &str = "spec:0";
 const SOURCE_ID: &str = "source:0";
 
-const RECORD_KINDS: &[&str] = &[
+pub(super) const RECORD_KINDS: &[&str] = &[
     "capabilities",
     "spec",
     "source",
@@ -37,7 +37,7 @@ const RECORD_KINDS: &[&str] = &[
     "explanation_step",
 ];
 
-const RELATION_KINDS: &[&str] = &[
+pub(super) const RELATION_KINDS: &[&str] = &[
     "declares",
     "contains",
     "depends_on",

@@ -15,9 +15,9 @@ answers:
   - how is semantic introspection TOOLBOX current state guarded
   - does the semantic toolbox guard change the contract mutation count
 date: 2026-07-21
-status: current corrected neutral contract; Perl reference admitted, later backends pending
+status: current corrected neutral contract; Perl admitted, Rust static query exact but not yet admitted
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.4-.5 match all 20 exact responses, and .10.3.6 composes them through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 65 mutations. Neutral rollout is 2 complete / 7 pending; native admission is 1 complete / 5 pending. Leaf .10.4.0.1 additionally makes the checker require the exact TOOLBOX output plus current Perl runtime/admission claims exactly once, deny stale forms, and self-prove omission/wrong-value rejection without adding to the 65 contract mutations."
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.4-.5 match all 20 exact responses, and .10.3.6 composes them through one 12-role admission consumer. Rust .10.4.4 matches all 19 static responses through typed and neutral query paths but awaits runtime/composed admission. The checker validates six groups, 20 full response digests, and 65 mutations. Neutral rollout is 2 complete / 7 pending; native admission is 1 complete / 5 pending. Leaf .10.4.0.1 additionally makes the checker require the exact TOOLBOX output plus current Perl runtime/admission claims exactly once, deny stale forms, and self-prove omission/wrong-value rejection without adding to the 65 contract mutations."
 reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|PERL RUNTIME OBSERVATION|PERL COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -62,8 +62,9 @@ The neutral leaf itself deliberately admitted no native backend. Perl now compos
 private static and calls/staging/generated projections, public immutable capabilities/query for all 19 static
 canonical cases, and typed caller-captured runtime projection matching the twentieth case across direct/loaded/
 generated routes. One exact 12-role consumer admits that composed surface, so rollout is 2/9 and native admission
-is 1/6. Rust, Dart, Julia, dual-ABI Lua, recurring six-runtime proof, thin MCP transport, and public no-drift remain
-pending.
+is 1/6. Rust now also matches all 19 static responses through one typed/raw-neutral immutable evaluator, but its
+runtime response and composed admission remain `.10.4.5-.10.4.6`. Dart, Julia, dual-ABI Lua, recurring six-runtime
+proof, thin MCP transport, and public no-drift remain pending.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
 [[semantic-introspection-generated-plan-authority]],
@@ -71,5 +72,6 @@ Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspe
 [[perl-semantic-static-projection]], [[perl-semantic-call-staged-projection]],
 [[perl-semantic-query-evaluator]], [[perl-semantic-runtime-observation]],
 [[perl-semantic-introspection-admission]],
+[[rust-semantic-query-evaluator]],
 [[semantic-introspection-staged-artifact-schema]],
 [[outward-descriptor-is-not-semantic-wire-model]].

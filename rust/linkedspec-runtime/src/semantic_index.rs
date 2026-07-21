@@ -9,7 +9,15 @@
 //! executes the target spec.
 
 mod call_projection;
+mod query;
 mod static_projection;
+
+pub use query::{
+    SemanticQuery, SemanticQueryBudget, SemanticQueryCost, SemanticQueryDiagnostic,
+    SemanticQueryDirection, SemanticQueryOperation, SemanticQueryPage, SemanticQueryPageState,
+    SemanticQueryRecord, SemanticQueryRelation, SemanticQueryResponse, SemanticQuerySource,
+    SemanticQuerySourceReference,
+};
 
 use crate::source_emitter::{
     GENERATED_SOURCE_CONTRACT, GENERATED_SOURCE_FORMAT, classify_generated_rule_family,
@@ -21,7 +29,7 @@ use linkedspec_core::error::{LinkedSpecError, PortableDiagnostic};
 use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::unicode_rule_label::is_rule_label;
 use linkedspec_core::validation::validate;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 use std::fmt::Write;
@@ -31,7 +39,7 @@ const SNAPSHOT_ID: &str = "snapshot:0";
 const SOURCE_ID: &str = "source:0";
 
 /// Maximum source detail that a future semantic query may reveal.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum SemanticSourceDetail {
     None,
@@ -107,7 +115,7 @@ impl SemanticIndexError {
 }
 
 /// Immutable snapshot compilation state exposed without compiler objects.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum SemanticSnapshotState {
     Compiled,
@@ -115,7 +123,7 @@ pub enum SemanticSnapshotState {
 }
 
 /// Clone-safe foundation metadata; this is not a semantic query response.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SemanticSnapshot {
     pub id: String,
     pub state: SemanticSnapshotState,
@@ -135,7 +143,7 @@ pub struct SemanticSourceIdentity {
 }
 
 /// Exact zero-based byte / one-based line-and-scalar-column span.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SemanticSourceSpan {
     pub start_byte: usize,
     pub end_byte: usize,
@@ -523,6 +531,29 @@ impl SemanticIndex {
     #[cfg_attr(not(test), allow(dead_code))]
     pub(crate) fn static_projection(&self) -> static_projection::SemanticStaticProjection {
         self.static_projection.clone()
+    }
+
+    /// Return the canonical semantic-query-v1 capabilities response.
+    pub fn capabilities(&self) -> SemanticQueryResponse {
+        query::evaluate(
+            &self.static_projection(),
+            &SemanticQuery::capabilities_value(),
+        )
+    }
+
+    /// Evaluate one typed immutable semantic query over a cloned projection.
+    pub fn query(&self, request: &SemanticQuery) -> SemanticQueryResponse {
+        let request = serde_json::to_value(request).expect("SemanticQuery always serializes");
+        query::evaluate(&self.static_projection(), &request)
+    }
+
+    /// Evaluate the exact neutral JSON request, including portable validation errors.
+    ///
+    /// This transport-facing seam exists so malformed neutral requests receive the
+    /// same response envelope as every other backend. It does not deserialize or
+    /// expose compiler state.
+    pub fn query_neutral(&self, request: &serde_json::Value) -> SemanticQueryResponse {
+        query::evaluate(&self.static_projection(), request)
     }
 
     /// Map an exact byte range when the caller permitted span detail.

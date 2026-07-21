@@ -14,7 +14,7 @@ answers:
   - "what proves the Rust semantic calls fixture has 22 records and 25 relations"
   - "does Rust semantic introspection have public capabilities or query yet"
 date: 2026-07-21
-status: current private compiled projection; public query, runtime observation, and admission remain separate leaves
+status: current private compiled projection exposed only through exact public static query; runtime observation and admission remain separate leaves
 tags: [rust, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.3
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; python3 tools/check_semantic_introspection_contract.py; perl tools/check_generated_source_contract.pl"
@@ -42,9 +42,10 @@ Generated contract, format, entry, and family come from the existing `SemanticGe
 source emission. No generated implementation text is produced or retained. Four focused regressions lock complete
 22/25 equality, preorder and resolution, staged directions, multibyte excerpts/columns, interleaved function-shell
 isolation, and denial of AST/body/generated-source leakage. The retained projection is clone-safe plain data and
-remains crate-private. Public capabilities/query, runtime observations, and composed Rust admission belong to
-`.10.4.4-.10.4.6`; rollout/admission therefore stay 2/9 and 1/6.
+remains crate-private. `.10.4.4` now exposes it only through exact immutable capabilities/query responses;
+runtime observations and composed Rust admission remain `.10.4.5-.10.4.6`, so rollout/admission stay 2/9 and 1/6.
 
 See [[rust-semantic-static-projection]], [[rust-semantic-index-source-foundation]],
 [[rust-semantic-introspection-authority-map]], [[perl-semantic-call-staged-projection]],
-[[semantic-introspection-staged-artifact-schema]], and [[semantic-introspection-generated-plan-authority]].
+[[rust-semantic-query-evaluator]], [[semantic-introspection-staged-artifact-schema]], and
+[[semantic-introspection-generated-plan-authority]].

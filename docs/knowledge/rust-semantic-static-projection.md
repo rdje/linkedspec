@@ -10,7 +10,7 @@ answers:
   - "does Rust semantic static projection leak CompiledSpec or paths"
   - "what proves Rust graph privacy failed and runtime-static semantics"
 date: 2026-07-21
-status: current private static foundation; call projection is composed, while query, runtime observation, and admission remain separate leaves
+status: current private static foundation consumed only through the public query evaluator; runtime observation and admission remain separate leaves
 tags: [rust, semantic-introspection, records, relations, source-map, diagnostics, privacy, immutability]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.2
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; python3 tools/check_semantic_introspection_contract.py"
@@ -24,10 +24,10 @@ projector combines those owners into plain serializable v1 spec/source/rule/rege
 static relations. It does not serialize parsed nodes, compiled regexes, `CompiledSpec`, object identity, or paths.
 
 Source correlation reuses the foundation's immutable accepted text, canonical UTF-8 bytes, and exact source map.
-Projection retains complete private references so a later query evaluator can apply the caller's immutable
-`none`/`identity`/`span`/`text` ceiling structurally. No public projection accessor, capabilities method, or query
-method exists in this leaf, so private full evidence cannot bypass the current foundation accessors or their
-ceiling checks. Returned test copies are independently cloned and mutation does not alter the index.
+Projection retains complete private references so the `.10.4.4` query evaluator can apply the caller's immutable
+`none`/`identity`/`span`/`text` ceiling structurally. No public projection accessor exists: capabilities and query
+consume only a fresh private clone and cannot bypass the construction ceiling. Returned response values are owned,
+and mutation does not alter the index.
 
 Failure normalization is explicit rather than accidental. Rust validation can report
 `bare_edge_target_undefined` at `normalize_edges`, while direct compiled validation can report
@@ -38,8 +38,9 @@ source evidence, and adds the canonical dependency-resolution decision and order
 Five internal exact-oracle tests materialize private source keys and deep-compare the entire graph fixture,
 Unicode privacy fixture at text and identity construction ceilings, failed compilation, and the runtime fixture's
 static half with `linkedspec-semantic-model-v1`. A fifth boundary test proves clone isolation and rejects host
-objects and paths. Calls/staged/generated detail beyond static plan identity is now composed by `.10.4.3`; public
-query, runtime observations, and composed Rust admission remain `.10.4.4-.10.4.6`. Rollout/admission therefore stay
-2/9 and 1/6. See [[rust-semantic-call-staged-projection]], [[rust-semantic-index-source-foundation]],
+objects and paths. Calls/staged/generated detail beyond static plan identity is composed by `.10.4.3`; public
+static query is exact under `.10.4.4`, while runtime observations and composed Rust admission remain
+`.10.4.5-.10.4.6`. Rollout/admission therefore stay 2/9 and 1/6. See [[rust-semantic-query-evaluator]],
+[[rust-semantic-call-staged-projection]], [[rust-semantic-index-source-foundation]],
 [[rust-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]], and
 [[perl-semantic-static-projection]].

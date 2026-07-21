@@ -820,7 +820,12 @@ content migration exists yet.
   exposure. Static leaf `.10.4.2` privately retains exact plain-data graph/privacy/failure/runtime-static v1
   facts. Calls leaf `.10.4.3` now composes typed ActionIR, function sidecars, authored-source correlation, and the
   shared generated-v2 plan into the corrected 22-record/25-relation call, binding, staging, and provenance target.
-  No capabilities/query or admission is claimed; `.10.4.4` follows and rollout/admission remain 2/9 and 1/6.
+  Query leaf `.10.4.4` now exposes typed `SemanticQuery` requests plus `index.capabilities()`, `index.query(...)`,
+  and the exact raw-neutral validation seam. Both paths consume only a fresh clone of the normalized projection and
+  match all 19 static response digests, including privacy, pages, directional traversal, budgets/costs, errors, and
+  explanations. Runtime observation and Rust admission remain `.10.4.5-.10.4.6`, so rollout/admission stay 2/9 and
+  1/6. Signoff passes complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all packages,
+  primary 66x2, and canonical Phase 0 1,031/1,031.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

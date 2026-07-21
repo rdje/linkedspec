@@ -8,9 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Rust semantic calls/staging/generated projection `FUTURE-PARITY-BACKLOG.10.4.3` is signoff-complete from clean
-  static projection commit `c1a7e413` at ahead 277 and is in its mandated commit workflow. Immutable capabilities/
-  query `.10.4.4` follows only after the clean commit; runtime observation and admission remain later leaves.
+- Immutable Rust semantic capabilities/query `FUTURE-PARITY-BACKLOG.10.4.4` is signoff-complete from clean
+  `68e31222` at ahead 278. Implementation, exact proof, complete Rust, canonical CI, public/live docs, and generated
+  artifact cleanup agree. Its commit and clean-boundary verification are in flight; only then may runtime observer
+  `.10.4.5` activate. Runtime observation and admission remain absent and both ledgers remain unchanged.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -22,8 +23,23 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.4 — expose Rust semantic query**
+  (DONE in this commit from clean base `68e31222`).
+
+  **Result:** Rust now exposes owned typed capabilities/query plus exact raw-neutral request validation over fresh
+  normalized-projection clones. All 19 static answers match the oracle with exact privacy, traversal, paging,
+  budgets/costs, errors, explanations, isolation, and no compiler/executor/trace/path/host-IR access. Runtime
+  observation and admission remain `.10.4.5-.10.4.6`; rollout/admission remain 2/9 and 1/6.
+
+  **Proof:** Focused query 5/foundation 6 plus all 19 digests/26 errors; complete Rust core 193, runtime 147,
+  integration 197, exact 105/full manifest/all packages/primary 66x2; focused query Clippy clean; semantic 6/20/65;
+  KM 667/4,937; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 plus Phase 0 1,031/1,031 in
+  631 seconds, exit 0; 3.3 GiB target/12 MiB book/28 KiB cache cleanup.
+
+  **Next:** Commit cleanly, then activate typed Rust runtime semantic observations `.10.4.5` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.3 — project Rust call and staged semantics**
-  (DONE in this commit from clean base `c1a7e413`).
+  (DONE in `68e31222` from clean base `c1a7e413`).
 
   **Result:** Compiled functions, typed ActionIR, staged body sidecars, exact source correlation, and the shared
   generated plan now produce clone-safe private function/helper/call/binding/staged/generated v1 data. The complete
@@ -35,7 +51,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   semantic 6/20/65 at rollout 2/9 and admission 1/6; KM 666/4,923; mdBook/memory/four doctrines/task/format/diff;
   canonical primary 66x2 plus Phase 0 1,031/1,031 in 619 seconds, exit 0; 3.0 GiB target/book/cache cleanup.
 
-  **Next:** Commit cleanly, then activate immutable Rust semantic capabilities/query `.10.4.4` task-tree-first.
+  **Next:** Immutable Rust semantic capabilities/query `.10.4.4` is active task-tree-first from `68e31222`.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.2 — add Rust semantic static projection**
   (DONE in this commit from clean base `c92172b8`).

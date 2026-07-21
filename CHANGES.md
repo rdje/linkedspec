@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.4 — expose Rust semantic query
+
+`linkedspec-runtime` now exposes `SemanticIndex::capabilities()`, typed `SemanticQuery` requests through
+`SemanticIndex::query(...)`, and `query_neutral(...)` for the exact untyped JSON validation boundary. Both routes
+share one projection-only evaluator and return owned typed `SemanticQueryResponse` data. The evaluator implements
+capabilities/list/get/relations/explain, canonical after-id pages, filtered directional breadth-first traversal,
+logical record/relation/depth budgets and costs, structural source redaction and immutable ceilings, exact
+explanation evidence, and portable query diagnostics.
+
+The new five-test conformance target matches all 19 non-runtime response SHA-256 locks through both native and
+neutral paths, exercises all 26 request/error boundaries, and proves response/input isolation, deterministic
+interleaving, source privacy, host/path/IR denial, and absence of runtime observations. Query evaluation consumes a
+fresh clone of the retained normalized projection; it has no compiler, executor, trace, path, ActionIR, or
+generated-source input.
+
+Runtime observation and composed Rust admission remain `.10.4.5-.10.4.6`. The neutral rollout and backend-
+admission ledgers therefore remain 2/9 and 1/6.
+
+Focused query 5/foundation 6, complete Rust core 193, runtime units 147, integration 197, the exact 105-fixture
+oracle, full generated manifest, all package contracts, and primary CLI 66x2 pass. The semantic checker remains
+exact at 6 fixture groups / 20 digests / 65 rejected mutations; Knowledge Map, mdBook, memory, and four doctrines
+pass. Canonical local CI passes primary 66x2 plus Phase 0 1,031/1,031 in 631 seconds, exit 0. The generated 3.3 GiB
+Rust target, 12 MiB rendered book, and 28 KiB Python cache are removed before commit.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.3 — project Rust call and staged semantics
 
 `SemanticIndex` now privately composes the compiled function registry, typed ActionIR, normalized function-body

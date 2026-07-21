@@ -404,6 +404,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   redactions/digests, after-id pages, filtered directional BFS, record/relation/depth budgets and logical costs,
   clone isolation, silence, no host/path leakage, and successful queries with compilation disabled. See
   [[perl-semantic-query-evaluator]].
+- **RUST CAPABILITIES/QUERY:** `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query`
+  verifies the public opaque-index static surface. Its five tests match all 19 non-runtime canonical response
+  digests through typed `SemanticQuery` and raw-neutral JSON, cover the exact 26 request/error boundaries, and lock
+  source ceilings/redactions/digests, pages, filtered directional BFS, logical budgets/costs, explanations,
+  deterministic clone/input isolation, absent runtime observations, and host/path/IR denial. See
+  [[rust-semantic-query-evaluator]].
 - **PERL RUNTIME OBSERVATION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t` verifies
   `.10.3.5`. Its 106 assertions match the twentieth response digest across eight execution roles, preserve exact
   result/input/cursor and generated-plan behavior, reject malformed or foreign observations, and prove semantic
