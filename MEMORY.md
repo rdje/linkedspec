@@ -10,10 +10,11 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.3.6` — composed Perl semantic admission in this commit.
-- latest_commit: this commit — `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` (ahead: 272).
-- active_work_unit: none; `.10.3.6` and parent `.10.3` are closed at the pre-commit signoff boundary.
-- next_action: after verifying the clean admission commit, activate Rust semantic adapter `.10.4` task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.4.0` — Rust semantic authority/split audit is done in this commit.
+- latest_commit: `90e5e701` — `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` (ahead: 272).
+- active_work_unit: `FUTURE-PARITY-BACKLOG.10.4` — `.10.4.0` awaits commit; `.10.4.0.1` is next clean activation.
+- next_action: complete `.10.4.0` commit workflow, then activate `.10.4.0.1` task-tree-first to repair/guard stale
+  semantic TOOLBOX current state; `.10.4.0.2` then needs the director's label-contract decision.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 65 rejected mutations. Static/generated facts
@@ -29,22 +30,19 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - current_descriptor_boundary: current outward `spec/functions/dependency_regex_map/meta` is reusable derived
   compatibility state, not the semantic wire schema. TOOLBOX proof shows native Perl coderef/compiled-regex values
   and direct JSON failure; backend AST/IR/object identity is forbidden from semantic responses.
-- current_perl_authority_map: decoded source/map plus descriptor order/topology, typed ActionIR calls/bindings,
-  staged sidecars, shared generated-v2 identity, and runtime failures project private v1 facts. Query consumes only
-  cloned plain projection data. Typed invocation-local slot/final events now derive an immutable runtime projection
-  after execution, separately from trace/diagnostics. Function/ActionIR spans are characters.
-- perl_split: `.10.3.1` source/map/outcome; `.2.0` static oracle correction; `.2.1` static projection; `.3.0`
-  generated-plan correction; `.3.1.0` spec-name correction; `.3.1.1` calls/shapes/staged/generated; `.4`
-  capabilities/query/privacy/budgets; `.5` runtime/direct/loaded/generated observations; `.6` exact admission.
-- current_perl_foundation: `semantic_index` compiles in-memory decoded/strict-UTF-8 source once without execution;
-  retains opaque source/map/outcome plus clone-safe static/call/staged/generated records; never reads a path.
-  Public capabilities/query match all 19 static responses, and caller-captured runtime derivation matches the
-  twentieth without query-side compile/execute/path/trace.
+- current_rust_authority_map: parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
+  generated-v2 owners compose stable facts. Ordinary source metadata is line-only; exact spans need a new mapper.
+  Direct/generated executors have parallel slot/result seams but only text trace, not typed semantic observation.
+- rust_contract_blocker: neutral/admitted Perl privacy requires `Töp`; published grammar and current Rust parser are
+  ASCII-label-only. `.10.4.0.2` must apply the director's Unicode-expansion or neutral-revision choice before
+  `.10.4.1` construction. `.10.4.0.1` remains executable first and owns stale TOOLBOX 57/1+8 text plus checker guard.
+- current_perl_reference: admitted `semantic_index` composes strict source/descriptor/ActionIR/staged/generated/
+  diagnostic/typed observation owners, matches all 20 answers, never reads a path, and query never executes.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.3.6` consumer 18; all semantic 149; broader adjacent 471 plus supplemental cursor/trace
-  127; semantic governance 6/20/65; KM 659/4,867; mdBook/four doctrines; primary 66x2; complete local CI through
-  Phase 0 1,031/1,031 in 633 seconds; exit 0.
+- current_signoff: `.10.4.0` neutral 6/20/65; Rust core 193/runtime 138/integration 197, exact corpus 105/full
+  generated manifest, primary 66x2; KM 660/4,877; mdBook/four doctrines; canonical primary 66x2 and Phase 0
+  1,031/1,031 in 617 seconds; exit 0. No Rust behavior/promotion; cleanup ends at 102 GiB free (27 GiB initial).
 - latest_bootstrap_read: 2026-07-21 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
   task, Knowledge Map, Toolbox, ADRs `0012`-`0016`, `0022`/`0023`, `0037`, `0042`, `0044`, `0047`-`0050`,
   descriptor/compiled/ActionIR/diagnostic/trace/generated/API authorities, and public precedents read.
@@ -55,4 +53,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: none. in_flight_uncommitted: signoff-complete `.10.3.6` admission closeout awaits only its commit.
+- blockers: `.10.4.0.2` needs the director's label-contract choice; `.10.4.0.1` can run first. in_flight_uncommitted:
+  completed `.10.4.0` docs/task/KM audit awaits commit; no product code or background gate remains.

@@ -250,6 +250,27 @@ loaders already use strict decoding. The current semantic constructor now owns t
 text or strict UTF-8 bytes, rejects malformed input, preserves canonical bytes for byte offsets and digests, and
 accepts only a caller-registered logical name—never an implicit host path.
 
+## Rust authority map and current prerequisite
+
+The behavior-free Rust audit reaches a similar composition boundary with different native owners. Parsed rules and
+function extraction, `CompiledSpec`, typed ActionIR, structured diagnostics, strict loaders, and generated-source-v2
+plans collectively own reusable meaning. `CompiledSpec` is serde-safe and preserves descriptor equality after an
+exact round trip, but ordinary rule/body AST nodes retain only lines and compiled expressions have no general source
+span. Rust therefore also needs an immutable source mapper over accepted text plus canonical UTF-8 bytes; staged
+function sidecars are the richer exception, retaining character spans, typed body AST, and payload/job metadata.
+
+Direct and generated Rust executors already have parallel authoritative slot-selection and rule-result seams. They
+currently emit textual trace decisions only; no typed semantic observer or query object exists. The planned runtime
+leaf adds a separate optional invocation-local sink at those seams and derives a new immutable post-execution index.
+It must not parse trace text, alter diagnostic output, or let queries execute.
+
+One prerequisite is unresolved. The accepted v1 privacy oracle and admitted Perl implementation require rule label
+`Töp`, while the published grammar and current Rust header parser accept ASCII `[A-Za-z0-9_]+`; Rust rejects the
+fixture before validation. Task `.10.4.0.2` requires a director decision between expanding the Rust/published label
+contract to an exact Unicode word policy or revising the already-admitted neutral oracle. Rust semantic construction
+does not start before that decision. The audit also assigns stale semantic `TOOLBOX.md` current-state text to
+`.10.4.0.1` with a mechanical no-drift guard.
+
 ## Exact v1 record model
 
 Every record has exactly:

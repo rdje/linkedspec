@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0 — map Rust semantic authorities before code
+
+The behavior-free Rust semantic audit maps the exact owners needed by the next native adapter. Parsed/function
+staged state, serde-safe `CompiledSpec`, typed ActionIR, structured compiler/runtime diagnostics, strict native
+loaders, and generated-source-v2 plan metadata collectively supply stable meaning; no single object is a semantic
+snapshot. Ordinary rule/body nodes retain only source lines and compiled expression nodes have no general spans,
+so exact byte/scalar source references require a new immutable mapper over accepted text and canonical UTF-8.
+Function staged sidecars are the richer exception and retain character spans, typed body AST, and payload/job data.
+
+An exact temporary native probe exercises all five sources. Graph/calls/runtime parse, validate, and compile;
+compiled descriptor equality survives serde round trip; calls retains its ActionIR body and parse job; runtime
+returns `["A","B"]`. The failed source validates as `bare_edge_target_undefined` but direct compile reports
+`regex_slot_identity_invalid`, so v1 `unknown_rule_reference` is deliberate projection normalization. Direct and
+generated executors expose parallel typed slot-selection and rule-result seams, but only textual trace exists today;
+the future observer must be a separate optional invocation-local typed sink.
+
+The probe also exposes a real prerequisite. Neutral v1 plus admitted Perl require Unicode rule label `Töp`, while
+the published formal grammar and current Rust header parser accept ASCII `[A-Za-z0-9_]+`; Rust rejects the privacy
+fixture before validation. New `.10.4.0.2` owns the director-selected contract resolution before construction.
+Separately, `TOOLBOX.md` §4.9 is stale at 57 mutations / rollout 1+8 and pre-admission Perl prose because the checker
+does not guard those lines; `.10.4.0.1` owns the repair and no-drift guard. Dependency-ordered `.10.4.1-.10.4.6`
+split source/outcome, static projection, calls/staging/generated, query, runtime observation/routes, and admission.
+Rollout/admission remain 2/9 and 1/6; no Rust product behavior or public semantic API changes in this audit.
+Signoff passes the focused descriptor/runtime seam tests, complete Rust packages including core 193, runtime unit
+138, integration 197, the exact 105-fixture oracle and full generated manifest, and primary CLI 66/66 twice.
+Knowledge Map is 660 facts / 4,877 questions; mdBook and all doctrines pass. Canonical local CI independently passes
+primary 66x2 and Phase 0 1,031/1,031 in 617 seconds with exit 0. Disposable Cargo/book output is removed afterward.
+The previously preserved 6.5 GiB Pgen temp session is rechecked after all gates, has no open file or matching
+process, and is then removed safely. Final free space is 102 GiB versus 27 GiB when cleanup began: about 75 GiB net
+reclaimed while retaining durable repository state.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.3.6 — admit Perl semantic introspection
 
 Perl is the first admitted native implementation of `linkedspec-semantic-model-v1` and

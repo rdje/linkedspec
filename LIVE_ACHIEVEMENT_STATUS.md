@@ -8,9 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.3.6` and parent `.10.3` are signoff-complete in this commit from clean base `aad4045f`
-  at ahead 271. The next PNT-eligible leaf is Rust semantic adapter `.10.4`, which may activate task-tree-first only
-  after this admission commit is clean. No later backend, recurring proof, MCP, or public no-drift row is promoted.
+- Rust audit `FUTURE-PARITY-BACKLOG.10.4.0` is complete from clean base `90e5e701`; commit workflow is in progress.
+  The next clean-boundary frontier is `.10.4.0.1`, which repairs stale semantic TOOLBOX current-state text and adds
+  a checker guard. `.10.4.0.2` then requires the director's Unicode-versus-ASCII label-contract decision before
+  Rust semantic construction. Rollout/admission remain 2/9 and 1/6.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -22,8 +23,23 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0 — map Rust semantic authorities before code**
+  (DONE in this commit from base `90e5e701`).
+
+  **Result:** Exact probes map parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostics,
+  loaders, generated-v2 plans, source-map gaps, and parallel direct/generated slot/result seams. The audit freezes
+  nine dependency children and durably tracks both the Rust ASCII-label versus neutral `Töp` contract conflict and
+  stale-toolbox no-drift gap without changing behavior.
+
+  **Proof:** Neutral 6/20/65; full Rust core 193, runtime unit 138, integration 197, exact 105-fixture oracle/full
+  generated manifest, primary 66x2; KM 660/4,877; mdBook/four doctrines; canonical primary 66x2 and Phase 0
+  1,031/1,031 in 617 seconds, exit 0. Disposable build/book artifacts and the now-inactive retained Pgen session
+  are removed; final free space is 102 GiB versus 27 GiB at cleanup start.
+
+  **Next:** Activate `.10.4.0.1` only after this leaf's clean commit.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.6 — admit Perl semantic introspection**
-  (DONE in this commit from base `aad4045f`).
+  (DONE at clean commit `90e5e701` from base `aad4045f`).
 
   **Result:** One exact 12-role consumer composes the already-implemented Perl semantic surface, matches all 20
   neutral response digests, denies stale host state, and advances only Perl to rollout 2/9 and admission 1/6.
@@ -32,7 +48,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   KM 659/4,867, mdBook, four doctrines, primary 66x2, and complete local CI through Phase 0 1,031/1,031 in 633
   seconds all pass. No production semantic implementation changes.
 
-  **Next:** After the clean commit, activate Rust semantic adapter `.10.4` task-tree-first.
+  **Next:** Rust semantic authority/split leaf `.10.4.0` is active task-tree-first.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.5 — capture Perl runtime semantics**
   (DONE in this commit from base `91b0c9b0`).

@@ -520,7 +520,12 @@ Three backbone items tracked major structural modernization — all done:
   errors/explain, non-interference, and host-leak denial. Neutral rollout is 2 complete / 7 pending and backend
   admission 1 complete / 5 pending; only Perl advances. MCP remains handle-only
   later transport and owns no semantic or filesystem behavior. Default parser, trace, diagnostic, generated-v2,
-  loader, and primary behavior remain unchanged when the observer is absent.
+  loader, and primary behavior remain unchanged when the observer is absent. Rust audit `.10.4.0` maps parsed/
+  compiled/ActionIR/staged/generated/diagnostic/loader/runtime owners, proves serde-safe compiled state and parallel
+  direct/generated slot/result seams, and freezes source/static/calls/query/runtime/admission children before code.
+  It also exposes a real prerequisite: neutral v1 requires Unicode label `Töp`, while the published grammar and
+  Rust parser remain ASCII-label-only. `.10.4.0.2` awaits the director's contract choice; `.10.4.0.1` first repairs
+  stale semantic toolbox current-state text and adds a no-drift guard. Rust rollout/admission remain pending.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use
   final `...rest`, and execute later through `cb(args)` in dynamic caller context without lexical capture. The

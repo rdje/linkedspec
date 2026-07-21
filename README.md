@@ -802,6 +802,14 @@ content migration exists yet.
   snapshots, direct/loaded/generated/traced observations, native/neutral JSON, all 20 exact queries, privacy,
   pages/budgets/errors/explain, no-execute immutability, and host-leak denial. The checker locks exact consumer
   path/role/driver topology and Perl-only promotion; Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending.
+  Rust audit `.10.4.0` now maps its exact typed owners before behavior: parsed/function-staged state,
+  serde-safe `CompiledSpec`, ActionIR, structured diagnostics, strict loaders, generated-source-v2 plans, and
+  parallel direct/generated slot-selection plus rule-result seams. Ordinary Rust rule/body nodes are line-only and
+  compiled expressions lack general spans, so exact semantic coordinates need a new immutable source mapper; text
+  trace is not an observation API. The audit also found a real contract prerequisite: accepted neutral v1 requires
+  Unicode rule label `Töp`, while the published grammar and current Rust header parser accept ASCII labels only.
+  `.10.4.0.2` awaits the director's Unicode-versus-ASCII choice before construction; `.10.4.0.1` first repairs
+  stale semantic `TOOLBOX.md` current-state text and adds a no-drift guard. Rust rollout/admission remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

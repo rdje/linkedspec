@@ -223,7 +223,12 @@ admission through `.10.3.1-.10.3.6`. `LinkedSpec::semantic_index(...)` accepts d
 logical name/source ceiling, produces an opaque compiled-or-failed snapshot, and never executes or reads a path;
 `with_execution_observation` derives a separate immutable runtime snapshot only after normal parsing. One 12-role
 consumer locks all 20 exact responses and direct/loaded/generated/traced equivalence; Perl is admission 1/6 and
-rollout 2/9. The other backends and MCP remain `.10.4-.10.10` work.
+rollout 2/9. Rust audit `.10.4.0` confirms `CompiledSpec`/ActionIR/staged sidecars/generated-v2/diagnostic/loader and
+parallel direct/generated runtime seams are reusable, while exact source mapping, normalized failed projection,
+immutable query, and typed observations are new adapter work. It also stops on a contract prerequisite: neutral
+privacy requires `Töp`, but the published grammar and Rust header parser are ASCII-label-only. `.10.4.0.2` requires
+the director's Unicode-versus-ASCII contract choice before Rust construction; `.10.4.0.1` repairs stale toolbox
+governance text first. Rust is not admitted. The other backends and MCP remain `.10.5-.10.10` work.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

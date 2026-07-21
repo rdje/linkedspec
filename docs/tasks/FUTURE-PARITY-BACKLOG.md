@@ -7449,13 +7449,143 @@ before implementation.
     `.10.3` with exact Perl-only rollout/admission totals.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Rust semantic index adapter and exact native conformance.
+  Children: `.10.4.0`, `.10.4.0.1`, `.10.4.0.2`, `.10.4.1`, `.10.4.2`, `.10.4.3`, `.10.4.4`, `.10.4.5`,
+    `.10.4.6`
   Depends on: `.10.3`
   Acceptance: Project the same model from typed `CompiledSpec`, ActionIR, diagnostics, generated state, and optional
     execution observations through idiomatic Rust types plus neutral JSON; prove exact reference answers across
     direct, loaded, reconstructed, generated, traced/untraced, privacy, pagination/budget, and explain routes;
     reject backend IR leakage and pass the complete Rust/canonical gates.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.0`
+  Status: `done`
+  Goal: Map every Rust semantic authority and freeze a dependency-ordered implementation split before behavior.
+  Depends on: `.10.3`
+  Acceptance: Retrieve existing Rust compiler/ActionIR/descriptor/generated/diagnostic/trace/load/runtime authority
+    through the Knowledge Map and LinkedSpec toolbox before re-deriving facts. Probe exact neutral fixtures through
+    current public/native seams; identify source mapping, compiled and failed snapshot, call/staged/generated,
+    immutable query, optional execution-observation, and direct/loaded/reconstructed/generated/traced ownership and
+    gaps. Split `.10.4` into safe dependency-ordered implementation/admission leaves before Rust behavior changes,
+    preserve all current primary/corpus/generated behavior, and synchronize task/index/live/memory/KM/book evidence.
+  Verification: Activated task-tree-first from clean Perl admission commit `90e5e701` at ahead 272;
+    `git_message_brief.txt` is zero bytes and no generated repository artifact is present. Safe disk cleanup leaves
+    103 GiB available while preserving the only remaining large temp session because it has live open files. No
+    Rust implementation or semantic-publication edit precedes this authority retrieval and split. Exact native
+    probes establish that graph/calls/runtime fixtures parse/validate/compile; descriptor projection survives a
+    serde round trip; calls retains the staged body AST/job; the failed fixture validates as
+    `bare_edge_target_undefined` but compile reports `regex_slot_identity_invalid`; runtime returns `["A","B"]`;
+    and the Unicode privacy fixture fails at Rust rule-header parsing. The latter is a real contract conflict:
+    accepted neutral v1 and Perl require `Töp`, while the published formal grammar and Rust parser restrict labels
+    to ASCII word characters. Implementation cannot pass the exact oracle until the director selects whether Rust
+    expands to Unicode word labels or the neutral oracle is revised. The audit also found `TOOLBOX.md` stale at
+    57 mutations / rollout 1+8 and with pre-admission Perl prose because the checker does not currently guard its
+    current-state lines; `.10.4.0.1` owns that repair before the label decision leaf.
+    `rg` confirms no Rust semantic index/query/observation type or sink exists. Direct and generated engines expose
+    parallel structural `regex_slot_selected` trace seams and typed rule returns, while ordinary rule/body metadata
+    is line-only and staged function sidecars alone retain character spans/body AST/jobs. The temporary probe was
+    removed after capture. `python3 tools/check_semantic_introspection_contract.py` passes 6 groups / 20 queries /
+    65 mutations / rollout 2+7 / admission 1+5. Focused descriptor 4 and runtime diagnostic/output/loader/trace/
+    source-emitter 33 pass. `CARGO_TARGET_DIR=/private/tmp/linkedspec-semantic-rust-audit-target
+    bash tools/run_rust_local.sh` passes core 193, descriptor 4, normalization 5, types 8, runtime unit 138,
+    integration 197, exact 105-fixture oracle/full generated manifest and all package contracts, plus primary CLI
+    66/66 in default and POSIX environments. Repository `rust/target` remains absent. Knowledge Map generation
+    reports 660 facts / 4,877 question keys; mdBook, memory/task/doctrine/diff checks pass. Complete canonical local
+    CI repeats semantic governance 6/20/65, primary 66x2, and Phase 0 1,031/1,031 in 617 seconds with exit 0. The
+    disposable 3.3 GiB Cargo target and generated book are removed before commit. The formerly live 6.5 GiB Pgen
+    temp session has no remaining open file/process after the gate and is then safely removed; final disk is
+    102 GiB available versus 27 GiB at cleanup start. No parser/compiler/runtime/public API, neutral response,
+    rollout, or admission behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.10.4.0 - map Rust semantic authorities`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read canonical Rust semantic/compiler/ActionIR/generated/diagnostic/trace/
+    loader/runtime authority cards and use exact project probes before source archaeology.
+  - [x] **BASELINE / ORACLE** — Run the neutral checker and focused current Rust seams against all five source
+    bundles, 20 requests, generated/reconstructed routes, and optional-observation requirement without behavior edits.
+  - [x] **ROOT CAUSE / AUTHORITY MAP** — Record which stable typed owners supply each neutral fact, source span,
+    failure, provenance edge, runtime event, and route identity, and identify every missing seam precisely.
+  - [x] **SPLIT BEFORE CODE** — Add dependency-ordered source/projection/query/runtime/admission children sized so
+    each can be implemented, fully gated, documented, and committed independently.
+  - [x] **NO REGRESSION** — Rust package/primary/corpus/generated/trace gates and canonical Phase 0 remain exact;
+    semantic rollout/admission stay 2/9 and 1/6 during the audit.
+  - [x] **LOCKSTEP** — Task/index/live/memory/KM/book/architecture evidence and commit workflow describe the exact
+    Rust plan without claiming an API or promotion before implementation.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.0.1`
+  Status: `pending`
+  Goal: Repair semantic-introspection toolbox current-state drift and mechanically prevent recurrence.
+  Depends on: `.10.4.0`
+  Acceptance: Update `TOOLBOX.md` from the stale 57-mutation / rollout 1+8 / pre-admission Perl description to
+    exact current 65-mutation, rollout 2+7, admission 1+5, 12-role Perl ownership. Extend the existing checker so
+    these high-value command/output and stage claims cannot drift silently again; add omission/wrong-value proof,
+    keep all 20 response digests unchanged, synchronize docs/book/KM, and pass canonical signoff without Rust
+    semantic behavior or rollout changes.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.0.2`
+  Status: `pending`
+  Goal: Resolve and implement the Rust rule-label contract prerequisite selected by the director.
+  Depends on: `.10.4.0.1`
+  Acceptance: Reconcile the accepted neutral/Perl `Töp` fixture with the published ASCII-only formal grammar and
+    Rust header parser before semantic construction. If Unicode labels are selected, define the exact Unicode word
+    class and normalization/case policy, align every Rust label/reference scanner and validator, retain strict UTF-8,
+    and add positive/negative cross-route proof. If ASCII is selected, revise the neutral fixture/model/digests and
+    every already-admitted Perl proof through a separately justified contract correction. In either direction,
+    prevent parser/validator/book drift, run complete Rust/canonical gates, and make no semantic admission claim.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.1`
+  Status: `pending`
+  Goal: Add the opaque Rust semantic source-map and compiled-or-failed outcome foundation.
+  Depends on: `.10.4.0.2`
+  Acceptance: Construct once from decoded `&str` or strict UTF-8 bytes plus caller logical name and source ceiling;
+    retain canonical bytes/scalar mapping, parsed/validated/compiled-or-failed state, stable generated-plan input,
+    and clone-safe private ownership without execution, implicit path reads, public records/query, or host IR leaks.
+    Prove malformed UTF-8, exact Unicode coordinates, graph/privacy/failure fixtures, immutability, and diagnostics.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.2`
+  Status: `pending`
+  Goal: Project exact Rust static graph, privacy, failure, and runtime-static semantics.
+  Depends on: `.10.4.1`
+  Acceptance: Compose parsed source plus typed `CompiledSpec`, root/family/cursor/slot authorities, and failed
+    validation/compile evidence into clone-safe v1 static records/relations. Deep-equal graph, privacy full/limited,
+    failed, and runtime-static neutral targets; normalize the Rust failure seam deliberately; expose no query yet.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.3`
+  Status: `pending`
+  Goal: Project exact Rust calls, bindings, staged payload/job/result, and generated provenance.
+  Depends on: `.10.4.2`
+  Acceptance: Compose function registry sidecars, typed ActionIR, authored-source correlation, and generated-v2
+    plan identity into the corrected 22-record/25-relation calls target. Lock source-preorder calls, conservative
+    shapes, resolution evidence, Unicode spans, function-shell masking, staged directions, and no AST/source leak.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.4`
+  Status: `pending`
+  Goal: Expose immutable Rust semantic capabilities and query evaluation.
+  Depends on: `.10.4.3`
+  Acceptance: Add idiomatic native capabilities/query methods over only cloned normalized projection data; match
+    all 19 static digests and exact ids/order/privacy/pages/budgets/errors/explain behavior. Prove returned-value
+    isolation, query non-interference, JSON identity, and inability to compile, execute, trace, inspect IR, or read
+    paths. Runtime events remain pending.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.5`
+  Status: `pending`
+  Goal: Capture typed Rust runtime semantic observations through every execution route.
+  Depends on: `.10.4.4`
+  Acceptance: Add an optional invocation-local typed observation sink distinct from trace and diagnostics at the
+    parallel direct/generated slot-selection and rule-result seams. Derive a new immutable post-execution index and
+    match the twentieth digest across direct, loaded, reconstructed, generated, traced/untraced routes without
+    changing result/cursor/trace/diagnostic behavior or permitting query-side execution.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.4.6`
+  Status: `pending`
+  Goal: Admit the exact Rust semantic implementation and close the Rust parent.
+  Depends on: `.10.4.5`
+  Acceptance: One omission-sensitive Rust consumer owns exact source/compiled/failed/runtime/native/JSON/query/
+    route roles, all 20 digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak
+    denial. Register it in canonical CI, advance only Rust rollout/admission, pass full package/primary/corpus/
+    generated/trace and canonical gates, synchronize all public docs, and close `.10.4` cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5`
   Status: `pending`
@@ -9698,30 +9828,18 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-Semantic-introspection design `.10.1` is complete before behavior. ADR `0049` fixes the immutable native semantic
-model/query, exact identity/order/records/relations/shapes/evidence, source/privacy/page/budget/evolution rules,
-optional caller-captured runtime observations, no descriptor/backend-IR leakage, and handle-only MCP boundary.
-Executable neutral owner `FUTURE-PARITY-BACKLOG.10.2` is committed clean at `a891d7af`. Perl authority-map leaf
-`.10.3.0` is committed clean at `e679a3eb` after proving the exact decoded-source/compiler/ActionIR/staged/
-generated/diagnostic/runtime seams, splitting all implementation work, and passing canonical Phase 0 1,031/1,031
-in 608 seconds. Strict source/outcome `.10.3.1` is clean at `0558c65a`; static-oracle correction `.10.3.2.0` is
-clean at `40d35201` with semantic 6/20/53 and canonical Phase 0 1,031/1,031. Corrected Perl static projection
-`.10.3.2.1` is clean at `e0aeee63` after static 5, foundation 5, primary 66x2, and Phase 0 1,031/1,031 in 611
-seconds. Calls/shapes/staged/generated parent `.10.3.3` activated task-tree-first from that handoff-ready boundary
-at ahead 266, brief zero, and generated artifacts absent. Exact probes then found the neutral calls snapshot's
-`and_acode` is not a legal v2 family: actual `_default` classification and loaded metadata both say `default`.
-Correction child `.10.3.3.0` is clean at `c07ba618` after semantic 6/20/55, primary 66x2, and Phase 0 1,031/1,031
-in 610 seconds. Calls projection parent `.10.3.3.1` activated task-tree-first from that boundary at ahead 267,
-brief zero, and artifacts absent. Full RED found the calls model alone derived spec name from snapshot id rather
-than caller logical identity. Correction `.10.3.3.1.0` passes semantic 6/20/57, five-backend primary 5x2x66,
-KM 655/4,824, and canonical Phase 0 1,031/1,031 in 618 seconds at clean commit `7d9077c4`. Projector child `.1.1`
-then completed the exact 22/25 calls/staged/generated target with Unicode/interleaving/privacy locks, semantic
-6/20/57, five-backend primary 5x2x66, KM 656/4,834, canonical primary 66x2, and Phase 0 1,031/1,031 in 636 seconds.
-Immutable capabilities/query/privacy/budgets `.10.3.4` is clean at `91b0c9b0` after all 19 static digests,
-26 request/error boundaries, primary 66x2, and Phase 0 1,031/1,031 in 643 seconds. Runtime observations/routes
-`.10.3.5` is active from that boundary: exact typed slot/result capture and immutable derivation pass 106 assertions
-across eight direct/loaded/generated roles, the adjacent 11-suite gate passes 468, and KM is 658/4,857. Canonical
-signoff is next. Rollout/admission remain 1/9 and 0/6.
+Semantic-introspection design/neutral `.10.1-.10.2` and complete admitted Perl parent `.10.3` are clean through
+`90e5e701`; governance is six groups / 20 responses / 65 mutations, rollout 2/9, and native admission 1/6.
+Behavior-free Rust authority/split `.10.4.0` is complete in the current commit after exact five-source probes,
+complete Rust packages/105-fixture oracle/full generated manifest/primary 66x2, and canonical Phase 0 1,031/1,031
+in 617 seconds. It maps parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
+generated-v2 owners, missing source/query/observation seams, and the full `.10.4.0.1-.10.4.6` dependency order.
+
+The next clean-boundary frontier is `FUTURE-PARITY-BACKLOG.10.4.0.1`: repair stale semantic `TOOLBOX.md`
+57-mutation / rollout 1+8 / pre-admission Perl claims to exact 65 / 2+7 / admission 1+5 and add checker protection.
+Then `.10.4.0.2` requires the director's contract choice because accepted neutral/Perl privacy requires Unicode
+label `Töp`, while the published grammar and current Rust parser accept ASCII labels only. Rust source/outcome
+foundation `.10.4.1` cannot start until that choice is resolved and proven. No Rust semantic API or promotion exists.
 
 ### Historical frontier sequence
 
@@ -10109,6 +10227,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `done` | Exact immutable capabilities/query/privacy/page/budget behavior passes all 19 static digests and canonical Phase 0 1,031/1,031. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `done` | Typed execution observations match the twentieth digest across eight routes and pass complete canonical signoff. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `done` | Exact 12-role Perl consumer passes 18, governance 6/20/65, primary 66x2, and canonical Phase 0 1,031/1,031. |
+| 74.3 | `FUTURE-PARITY-BACKLOG.10.4` | `active` | Implement the Rust semantic index, exact native query surface, runtime observations/routes, and conformance admission. |
+| 74.3.0 | `FUTURE-PARITY-BACKLOG.10.4.0` | `done` | Exact Rust owners/gaps, Unicode-label conflict, toolbox drift, and dependency-ordered implementation split are frozen before behavior. |
+| 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `pending` | Repair stale semantic TOOLBOX current-state claims and add checker ownership before Rust behavior. |
+| 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `pending` | Resolve the neutral Unicode-label versus published/Rust ASCII-label contract conflict as directed. |
+| 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `pending` | Add strict source mapping and immutable compiled-or-failed Rust foundation. |
+| 74.3.2 | `FUTURE-PARITY-BACKLOG.10.4.2` | `pending` | Project exact static graph/privacy/failure/runtime-static semantics. |
+| 74.3.3 | `FUTURE-PARITY-BACKLOG.10.4.3` | `pending` | Project exact calls, bindings, staged records, and generated provenance. |
+| 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `pending` | Expose immutable capabilities/query and match all 19 static digests. |
+| 74.3.5 | `FUTURE-PARITY-BACKLOG.10.4.5` | `pending` | Capture typed runtime observations and match the twentieth digest across routes. |
+| 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `pending` | Admit Rust with one exact consumer and close the parent. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -10775,12 +10903,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Rust semantic adapter `.10.4` is next after the clean `.10.3.6` commit.
+- Rust implementation is blocked at `.10.4.0.2` on the director's label-contract choice: expand the published/Rust
+  ASCII label contract to an exact Unicode word policy, or revise the already-admitted neutral/Perl `Töp` oracle.
+  `.10.4.0.1` remains executable first and owns the independent stale-toolbox current-state repair/guard.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0` | Knowledge/toolbox authority retrieval; exact five-source Rust probe; zero semantic API/sink scan; focused descriptor/runtime seams; semantic 6/20/65; full Rust core 193, runtime unit 138, integration 197, exact 105-fixture oracle/full generated manifest/all package contracts, primary 66x2; KM 660/4,877; mdBook, memory, task, four doctrines, diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 617s; disposable target/book and no-longer-live 6.5 GiB session cleanup; final 102 GiB available versus initial 27 GiB. | PASS. No Rust behavior/API/rollout/admission change; exact source/compiled/failure/calls/generated/runtime owners and gaps are durable, TOOLBOX drift has its first child, the Unicode-label conflict has a director-decision child, and `.10.4.0.1-.10.4.6` are dependency ordered. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.6` | One exact 12-role consumer; RED corrected to exact topology-only 4/18 then GREEN 18/18; all six semantic suites 149; broader semantic/generated/diagnostic/root/cursor 471 plus supplemental cursor/trace 127; checker 6/20/65 at rollout 2/9 and admission 1/6; KM 659/4,867; mdBook, memory, task, ADR, four doctrines, JSON/shell/whitespace; primary 66x2; complete local CI through Phase 0 1,031/1,031 in 633s; generated-output cleanup. | PASS. Perl is the first admitted native semantic backend through composition only; no production implementation changes, later backends/MCP remain pending, and parent `.10.3` closes. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.5` | Typed invocation-local observation owner; exact slot/final events; immutable runtime derivation; twentieth digest across eight direct/loaded/generated/traced/reconstructed roles; RED 12/55 to focused 106 and adjacent 468; semantic 6/20/57; KM 658/4,857; mdBook, memory, task, four doctrines, whitespace; canonical primary 66x2; standalone Phase 0 1,031/1,031 in 639s; complete local gate including registered Phase 0 in 650s; disk-pressure cleanup from 27 GiB to 117 GiB free while retaining the only live temp session. | PASS. Runtime evidence is caller-owned and query-pure; observer failures preserve exact identity; parser/result/input/cursor/trace/diagnostic/generated behavior is unchanged; rollout/admission remain 1/9 and 0/6, and `.10.3.6` waits for the clean commit. |
 | `2026-07-20` | `FUTURE-PARITY-BACKLOG.10.3.0` | Knowledge Map and Toolbox retrieval; exact `Get(return_descriptor)`, `runtime_ctx_ref`, bootstrap, typed ActionIR, lowering, and generated-v2 probes across every neutral source family; raw-byte Unicode failure plus strict-decode success; six-child dependency split; KM 650/4,790; mdBook, memory, task, four doctrines, whitespace, selector 59/27/0; semantic 6/20/50; primary 66x2; Phase 0 1,031/1,031 in 608s; canonical exit 0. | PASS. First canonical run caught displaced repeated-action task/memory markers; focused 8/10/8+0/54 repair and complete restart pass. No behavior, fixture, contract, query, rollout, admission, or public API change; `.10.3.1` waits for the clean boundary. |
@@ -10992,6 +11123,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.4.0` | `FUTURE-PARITY-BACKLOG.10.4.0 - map Rust semantic authorities` | Exact typed-owner/gap map, durable Unicode-label conflict and TOOLBOX guard child, dependency split, complete Rust/105/66x2 plus canonical 1,031/617s, KM/book/doctrines, and cleanup without behavior or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.6` | `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` | Exact 12-role composed consumer, all 20 digests, 65 mutations, rollout 2/9, admission 1/6, KM/book/doctrines, primary 66x2, canonical 1,031/633s, cleanup, and parent `.10.3` closure. |
 | `FUTURE-PARITY-BACKLOG.10.3.5` | `FUTURE-PARITY-BACKLOG.10.3.5 - capture Perl runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across eight routes, focused 106/adjacent 468, semantic 6/20/57, canonical 66x2 and 1,031/650s, docs/KM lockstep, and safe disk-pressure cleanup without admission promotion. |
 | `FUTURE-PARITY-BACKLOG.10.3.0` | `FUTURE-PARITY-BACKLOG.10.3.0 - map Perl semantic authorities` | Strict source/canonical-byte, descriptor, ActionIR, staged, failure, generated, source-map, and typed-observer boundaries plus `.10.3.1-.10.3.6` split; KM/book/doctrines/semantic/primary/1,031-in-608s canonical signoff and cleanup complete. |

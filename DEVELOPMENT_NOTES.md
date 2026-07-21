@@ -1,5 +1,44 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0` — Rust semantic meaning is compositional and one prerequisite is a
+  language-contract choice): the exact probe confirms that `CompiledSpec` is the stable typed graph/execution owner,
+  not a source model. Its ordered rules/functions/slots/edges/families/cursor/root facts and ActionIR round-trip
+  through serde, while ordinary AST members retain lines only and compiled expressions have no general position.
+  Exact semantic excerpts, bytes, and scalar columns therefore need a constructor-owned source mapper/correlator;
+  staged function sidecars can contribute their existing character spans and body AST but cannot replace it.
+
+  Runtime observation has two parallel loci. Live `Engine` and `GeneratedPlanExecutor` both resolve structural slot
+  identity before emitting `regex_slot_selected`, and both rule wrappers own typed result plus final cursor. Those
+  are the correct optional semantic sink seams. Reusing buffered trace text would couple schema to diagnostics and
+  lose typed failure/ordering guarantees; inspecting returned host values would invent facts. The post-execution
+  projection must instead validate typed events and reuse static value-shape authority, as Perl does.
+
+  Failure normalization is likewise explicit. `failed.spec` first reports validator code
+  `bare_edge_target_undefined` / stage `normalize_edges`; compiling the still-returned AST later reports
+  `regex_slot_identity_invalid` / `validate_compiled_rule`. Neither natively spells the accepted portable
+  `unknown_rule_reference` / `compile` record. The Rust projector owns that closed mapping and its source evidence;
+  it must not expose whichever internal stage happened to fail first.
+
+  The privacy probe is not a source-mapper bug: `Töp::` never becomes a Rust AST node. The current header regex
+  spends the project's ASCII `\w`, and the published grammar says `[A-Za-z0-9_]+`; the accepted neutral oracle and
+  admitted Perl behavior instead require `Töp`. Expanding Rust silently would change the DSL contract, while
+  changing the oracle would revise an admitted v1 fixture and digests. `.10.4.0.2` therefore records both exact
+  alternatives and awaits the director. The audit can close cleanly because implementation depends on that leaf.
+
+  A second audit finding is documentation governance: the executable checker says 6/20/65, rollout 2+7, admission
+  1+5, but `TOOLBOX.md` still says 57 and 1+8 and describes observation/admission as future. Existing checker
+  topology does not read those current-state lines. `.10.4.0.1` is intentionally first after the audit so the
+  project fixes its debugging source of truth and adds a guard before semantic implementation proceeds.
+
+  Complete proof is focused descriptor/runtime seams; full Rust core 193, descriptor 4, normalization 5, types 8,
+  runtime unit 138, integration 197, exact 105-fixture oracle/full generated manifest and all package contracts;
+  Rust primary 66x2; semantic governance 6/20/65; Knowledge Map 660/4,877; mdBook/four doctrines; canonical primary
+  66x2 and Phase 0 1,031/1,031 in 617 seconds, exit 0. A disposable external Cargo target prevents `rust/target`
+  from returning after disk cleanup and is deleted with generated book output after verification.
+  The only initially retained 6.5 GiB Pgen session is re-audited after the gates: `lsof +D` and process matching are
+  empty, so it is no longer live and can be removed. The final filesystem reports 102 GiB available versus 27 GiB
+  at cleanup start, a net recovery of about 75 GiB despite the intervening verification workload.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.3.6` — admission is composition, not another semantic implementation):
   each preceding Perl leaf deliberately proved one authority boundary, but no one gate established omission-
   sensitive end-to-end topology. The admission consumer therefore declares 12 ordered roles in the neutral

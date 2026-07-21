@@ -177,6 +177,11 @@ rule_label  :: [mode]  [rest-of-line]
 
 A rule label is one or more word characters: `[A-Za-z0-9_]+`.
 
+This is the current published Rust-compatible contract. The accepted semantic-introspection privacy oracle uses
+`Töp`, which Perl accepts after strict UTF-8 decoding but Rust currently rejects at header parsing. The conflict is
+tracked explicitly by `FUTURE-PARITY-BACKLOG.10.4.0.2`; do not infer Unicode-label portability until that decision
+and its cross-backend proof land.
+
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.
 - **Double colon** (`rule_name::`): an ordinary rule carrying an authored **default-entry marker**. A `.spec` may
