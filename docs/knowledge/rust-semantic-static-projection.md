@@ -10,7 +10,7 @@ answers:
   - "does Rust semantic static projection leak CompiledSpec or paths"
   - "what proves Rust graph privacy failed and runtime-static semantics"
 date: 2026-07-21
-status: current private static foundation consumed through public static/runtime query; composed admission remains separate
+status: current private static foundation consumed through admitted public static/runtime query
 tags: [rust, semantic-introspection, records, relations, source-map, diagnostics, privacy, immutability]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.2
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; python3 tools/check_semantic_introspection_contract.py"
@@ -40,7 +40,7 @@ Unicode privacy fixture at text and identity construction ceilings, failed compi
 static half with `linkedspec-semantic-model-v1`. A fifth boundary test proves clone isolation and rejects host
 objects and paths. Calls/staged/generated detail beyond static plan identity is composed by `.10.4.3`; public
 static query is exact under `.10.4.4`, runtime derivation is exact under `.10.4.5`, and composed Rust admission
-remains `.10.4.6`. Rollout/admission therefore stay 2/9 and 1/6. See [[rust-semantic-query-evaluator]],
+`.10.4.6` subsequently advances only Rust to rollout 3/9 and admission 2/6. See [[rust-semantic-query-evaluator]],
 [[rust-semantic-runtime-observation]], [[rust-semantic-call-staged-projection]],
 [[rust-semantic-index-source-foundation]],
 [[rust-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]], and

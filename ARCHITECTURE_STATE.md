@@ -13,15 +13,15 @@ This document is the current high-level technical reading of the project shape. 
   page/budget accounting, source ceilings/redactions, and schema evolution prevent backend IR leakage. The outward
   descriptor stays separate: a toolbox probe proved its Perl compiled-regex/coderef values are not portable JSON.
   ADR `0050` adds truthful staged payload/job/result records and consumes/produces direction without collapsing
-  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 65 rejected mutations now run
+  jobs into generated artifacts. Six fixture groups, 20 digest-locked queries, and 73 rejected mutations now run
   in canonical CI. Correction `.10.3.2.0` cross-checks every snapshot rule header against the admitted rule-local
   cursor contract: default rules normalize to neutral `or`/`seek`, compiled rules with no edges report `none`,
   and the failed default-family bare edge retains `action`. This repairs stale self-consistent model/digest facts
   before an adapter can encode them. Correction `.10.3.3.0` independently checks generated artifacts against the
   admitted v2 family authority: the calls fixture's selected `_default` handler emits `default`, not the stale and
   invalid `and_acode` model value. Correction `.10.3.3.1.0` also derives every `spec.name` from caller logical
-  identity, repairing the calls-only `calls` versus `calls_and_staging` drift. MCP is only registered-handle capabilities/query transport. Neutral rollout is 2 complete / 7
-  pending and backend admission 1 complete / 5 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
+  identity, repairing the calls-only `calls` versus `calls_and_staging` drift. MCP is only registered-handle capabilities/query transport. Neutral rollout is 3 complete / 6
+  pending and backend admission 2 complete / 4 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
   state originally had no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/
@@ -45,8 +45,10 @@ This document is the current high-level technical reading of the project shape. 
   repetition/slot/edge/lifecycle state into exact clone-safe private graph/privacy/failure/runtime-static v1 data.
   Rust calls `.10.4.3` further composes compiled functions, typed ActionIR, staged sidecars, authored-source
   correlation, and the shared generated plan into exact call/binding/staged/generated facts at 22 records and 25
-  relations. The projection remains private and does not advance rollout or admission; immutable query `.10.4.4`
-  is next.
+  relations. Immutable query `.10.4.4` matches all 19 static digests, runtime observation `.10.4.5` derives the
+  twentieth across every direct/generated route, and composed admission `.10.4.6` locks one exact 12-role Rust
+  consumer without another semantic owner. Eight Rust topology mutations and canonical registration advance only
+  Rust to rollout 3/9 and native admission 2/6; Dart `.10.5` follows.
 - `2026-07-20` repeated-action public closeout: repeated-action recurring/public no-drift is closed at 8 complete / 0 pending.
   The 25-document public contract denies 12 stale claims and rejects 54 mutations. Bare `OR` is minimum-one
   repetition, explicit repeated action returns collect one typed value per accepted hit, lifecycle returns retain

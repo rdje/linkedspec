@@ -337,7 +337,7 @@ is_deeply(
  'neutral contract declares the exact Perl consumer topology',
 );
 my ($perl_rollout) = grep { $_->{capability} eq 'perl_reference' } @{$contract->{rollout}};
-is($perl_rollout->{status}, 'complete', 'only the Perl rollout leg is promoted');
+is($perl_rollout->{status}, 'complete', 'the Perl rollout leg remains complete');
 ok(
  grep({ $_ eq $CONSUMER_PATH } @{$contract->{canonical_ci}{required_tracked_files}}),
  'canonical CI requires the composed Perl consumer',

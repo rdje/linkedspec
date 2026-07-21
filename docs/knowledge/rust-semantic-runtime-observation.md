@@ -15,7 +15,7 @@ answers:
   - "does failed Rust execution emit a completed semantic result"
   - "is Rust semantic introspection admitted after runtime observations"
 date: 2026-07-21
-status: current exact runtime observation/query surface; composed Rust admission remains a separate leaf
+status: current exact runtime observation/query surface; subsequently composed into admitted Rust surface
 tags: [rust, semantic-introspection, runtime, observation, immutability, generated-source, trace, diagnostics]
 evidence: rust/linkedspec-runtime/src/semantic_observation.rs; rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs; rust/linkedspec-runtime/src/engine.rs; rust/linkedspec-runtime/src/runtime.rs; rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs; FUTURE-PARITY-BACKLOG.10.4.5
 reverify: cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_runtime_observation
@@ -43,9 +43,10 @@ through direct, loaded, reconstructed, generated-plan, source-emitter, traced/un
 emitted-module routes. Seven focused tests also prove malformed rejection, trace/diagnostic neutrality, Unicode
 positions, exact observer panic identity, quiet execution, and no final result after failed entry selection.
 
-This leaf does not promote Rust: neutral rollout remains 2/9 and backend admission remains 1/6. The composed exact
-consumer and promotion remain `FUTURE-PARITY-BACKLOG.10.4.6`.
+This observation leaf did not itself promote Rust. `FUTURE-PARITY-BACKLOG.10.4.6` subsequently composes it with
+the source/static/calls/query owners through one exact consumer and advances only Rust to rollout 3/9 and native
+admission 2/6.
 
 See [[rust-semantic-query-evaluator]], [[rust-semantic-static-projection]],
 [[rust-semantic-call-staged-projection]], [[perl-semantic-runtime-observation]], and
-[[semantic-introspection-neutral-contract]].
+[[semantic-introspection-neutral-contract]], and [[rust-semantic-introspection-admission]].

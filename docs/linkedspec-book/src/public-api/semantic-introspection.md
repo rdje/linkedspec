@@ -1,12 +1,12 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl has the first
-admitted native query surface: opaque construction, exact static plus call/staged/generated projections, public
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl and Rust have
+admitted native query surfaces: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
 consumer. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
 static and call/staged/generated projections; a public immutable typed/raw-neutral query evaluator; and optional
-caller-captured typed runtime observations that derive a separate immutable post-execution index. Composed Rust
-admission remains a later leaf.
+caller-captured typed runtime observations that derive a separate immutable post-execution index. One exact Rust
+consumer now composes those layers across every governed route.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -23,12 +23,13 @@ The distinction matters:
   static answer surface without exposing those private projections;
 - `RuntimeSemanticObservationSink` captures typed events during normal Rust execution, and
   `SemanticIndex::with_execution_observation(...)` validates them into the twentieth exact answer; and
+- `semantic_introspection_rust_admission.rs` composes every required Rust path once; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission is **1 complete / 5 pending**: Perl is admitted; Rust, Dart,
-Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
+The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
+Dart, Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
-## Current Rust construction and static query surface
+## Current Rust construction and query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
 
@@ -69,8 +70,8 @@ action code. It does not itself capture runtime observations or enable trace. Th
 static v1 records/relations, normalized failure evidence, and the 22-record/25-relation call/binding/staged/
 generated target. Public queries can now select and redact those normalized records, but no projection accessor or
 host compiler object is exposed. Runtime observation is supplied only by a completed typed caller-owned event
-sequence; composed admission remains a later Rust leaf. Therefore the global
-rollout and native-admission ledgers remain 2/9 and 1/6.
+sequence. Composed admission exercises those existing owners without adding a second projection or evaluator. The
+global rollout and native-admission ledgers are now 3/9 and 2/6.
 
 Use the typed native request for normal Rust embedding. `SemanticQuery::new` supplies the exact v1 contract plus
 canonical page, budget, direction, and source defaults:
@@ -120,7 +121,8 @@ same structural source policy, canonical after-id pages, filtered directional br
 budgets/costs, and exact query diagnostics described below. The evaluator receives only a fresh clone of the
 normalized projection. It has no source parser, compiler, executor, trace sink, filesystem path, ActionIR,
 `CompiledSpec`, compiled regex, or generated implementation source. Runtime records become queryable only after the
-caller supplies a validated completed observation as described next; composed Rust admission remains `.10.4.6`.
+caller supplies a validated completed observation as described next; composed Rust admission is exact under
+`.10.4.6`.
 
 ### Capture a Rust execution observation
 
@@ -321,8 +323,8 @@ AST/IR, object identities, and paths are rejected at the clone boundary.
 Each backend's focused projection tests materialize internal source keys and deep-compare the complete graph,
 Unicode privacy at both construction ceilings, and failed snapshots, plus the runtime fixture's complete static
 half, against the neutral oracle. Perl and Rust public evaluators now each own query-time source redaction, pages,
-traversal, budgets, and costs over cloned projections. The composed Perl admission consumer is described with the
-executable oracle below; Rust's runtime observation is exact, while composed admission remains `.10.4.6`.
+traversal, budgets, and costs over cloned projections. The composed Perl and Rust admission consumers are
+described with the executable oracle below; both runtime observation surfaces are exact and admitted.
 
 ## Current private call, staging, and generated projection
 
@@ -376,7 +378,7 @@ These projection mechanics remain internal implementation evidence. Perl and Rus
 only through their public query surfaces. Returned or retained values contain only
 canonical JSON data and booleans: no descriptor coderef/compiled regex, raw function record, ActionIR layout,
 generated source, object identity, or path. Perl runtime observation/routes and admission are implemented by
-`.10.3.5-.10.3.6`; Rust static query and runtime observation/routes are exact, while admission remains `.10.4.6`.
+`.10.3.5-.10.3.6`; Rust query, runtime observation/routes, and admission are implemented by `.10.4.4-.10.4.6`.
 
 ## Why this is separate from the descriptor
 
@@ -447,11 +449,10 @@ case-sensitive, and normalization-sensitive; no normalization or folding occurs.
 the admitted `Töp` fixture label across source, references, selectors, compiled/descriptor/generated identity,
 strict loaders, and traces. Positive, negative, decomposed, and case-distinct route proofs prevent parser/book
 drift. This removed the blocker for completed Rust semantic construction `.10.4.1` without admitting the Rust
-semantic API. The later Dart/Julia/Lua semantic backend lanes inherit the pinned-label prerequisite before
-their own v1 fixture admission. Toolbox repair `.10.4.0.1` has aligned the semantic diagnostic entry with the
-executable 6/20/65, rollout 2+7, admission 1+5, and complete Perl observation/admission state. The checker now
-requires those high-value claims exactly once, denies their stale forms, and runs omission plus wrong-value guard
-probes without changing the neutral response digests or 65 contract-mutation inventory.
+semantic API at that prerequisite boundary. The later Dart/Julia/Lua semantic backend lanes inherit the pinned-
+label prerequisite before their own v1 fixture admission. Toolbox repair `.10.4.0.1` made the semantic diagnostic
+entry mechanically current; composed Rust admission advances its guarded claims to executable 6/20/73, rollout
+3+6, admission 2+4, and complete Perl/Rust observation/admission state without changing response digests.
 
 ## Exact v1 record model
 
@@ -659,16 +660,16 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 65 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 73 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
 ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
-fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output, Perl runtime test, and
-12-role composed-admission claims. Internal omission and wrong-value probes prove that documentation guard rather
-than inflating the separately governed 65 semantic-contract mutations.
+fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl and Rust runtime/
+admission claims. Internal omission and wrong-value probes prove that documentation guard independently of the 73
+semantic-contract mutations.
 
 Perl's native evaluator has a separate exact gate:
 
@@ -726,6 +727,18 @@ canonical query digests, privacy/page/budget/error/explain behavior, query non-i
 data, and stale host-path/object/IR denial. The neutral checker rejects eight additional Perl
 path/role/driver/registration/admission mutations and advances only the Perl rows.
 
+Rust admission composes its source, projection, query, and runtime gates through one omission-sensitive consumer:
+
+```bash
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission
+```
+
+Its 12 exact-once roles cover strict byte/text convergence, compiled graph/calls/privacy and failed snapshots,
+direct/loaded/reconstructed/generated-plan/source-emitter/traced runtime routes, native typed plus neutral JSON,
+all 20 canonical digests, privacy/pages/budgets/errors/explain, no-execute immutability, and host-path/object/IR
+denial. Eight Rust-specific mutations lock path, role order, driver, canonical registration, native status, and
+Rust-only rollout promotion.
+
 The static rule facts also have an authority outside the semantic model. The checker reads
 `linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
 entry/repetition from each exact header, and reconciles rule ownership with normalized edge records. Therefore a
@@ -761,7 +774,7 @@ The dependency order is:
 | `.10.4.1-.10.4.3` | Rust source/outcome plus static/call/staged projections | complete |
 | `.10.4.4` | Rust capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
 | `.10.4.5` | Rust runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
-| `.10.4.6` | composed Rust semantic admission | pending |
+| `.10.4.6` | composed Rust semantic admission | complete; 12 roles, 20 exact queries, Rust-only promotion |
 | `.10.5` | Dart parity | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
@@ -773,7 +786,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Perl callers can use the admitted native static and caller-captured runtime query surface now. No later backend may
-claim semantic-introspection admission until its composed conformance leaf closes. Other
+Perl and Rust callers can use the admitted native static and caller-captured runtime query surfaces now. No later
+backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
 backends should continue using their existing descriptor APIs described in
 [Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.

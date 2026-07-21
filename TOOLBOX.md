@@ -361,7 +361,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 65 rejected mutations, rollout 2 complete / 7 pending, admission 1 complete / 5 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 73 rejected mutations, rollout 3 complete / 6 pending, admission 2 complete / 4 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -428,6 +428,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   non-interference, privacy/page/budget/error/explain behavior, and stale host-leak denial. The checker locks the
   consumer path, ordered roles, canonical driver and registration, Perl-only rollout/admission promotion, and the
   exact current-state claims in this section.
+- **RUST COMPOSED ADMISSION:** `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission`
+  verifies `.10.4.6`. Its 12 exact-once roles compose all 20 digests across strict byte/text source normalization,
+  compiled/failed/runtime snapshots, loaded and reconstructed execution, generated-plan/source-emitter direct and
+  traced routes, typed/native-neutral JSON, privacy/pages/budgets/errors/explain, no-execute immutability, and host-
+  leak denial. The checker locks the consumer path, ordered roles, canonical driver/registration, and Rust-only
+  rollout/admission promotion with eight Rust-specific mutations.
 
 ---
 

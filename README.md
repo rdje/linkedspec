@@ -764,20 +764,20 @@ content migration exists yet.
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
 - Deep semantic introspection plus MCP was contract-frozen under ADRs `0049`/`0050` and
-  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl is now the first admitted native implementation.
+  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl and Rust are now admitted native implementations.
   `linkedspec-semantic-model-v1` and
   `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 65 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 73 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
   authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
-  Neutral rollout is 2 complete / 7 pending,
-  while native backend admission is 1 complete / 5 pending. MCP will provide only native capabilities/query calls
+  Neutral rollout is 3 complete / 6 pending,
+  while native backend admission is 2 complete / 4 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -801,17 +801,16 @@ content migration exists yet.
   admission `.10.3.6` adds one 12-role consumer covering strict source normalization, compiled/failed/runtime
   snapshots, direct/loaded/generated/traced observations, native/neutral JSON, all 20 exact queries, privacy,
   pages/budgets/errors/explain, no-execute immutability, and host-leak denial. The checker locks exact consumer
-  path/role/driver topology and Perl-only promotion; Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending.
+  path/role/driver topology and Perl-only promotion; later backend rows remain pending at that boundary.
   Rust audit `.10.4.0` maps its exact typed owners before behavior: parsed/function-staged state,
   serde-safe `CompiledSpec`, ActionIR, structured diagnostics, strict loaders, generated-source-v2 plans, and
   parallel direct/generated slot-selection plus rule-result seams. Ordinary Rust rule/body nodes are line-only and
   compiled expressions lack general spans, so exact semantic coordinates need a new immutable source mapper; text
   trace is not an observation API. The audit also found a real contract prerequisite: accepted neutral v1 requires
   Unicode rule label `Töp`, while the published grammar and Rust header parser accepted ASCII labels only.
-  `.10.4.0.1` now repairs stale semantic `TOOLBOX.md` current-state text to exact 6/20/65, rollout 2+7,
-  admission 1+5, and complete Perl observation/admission ownership. The semantic checker requires each high-value
-  toolbox claim exactly once, denies the stale values, and self-proves omission and wrong-value rejection without
-  changing the 65 contract mutations or any response digest. The director selected Unicode expansion;
+  `.10.4.0.1` repaired the then-current semantic `TOOLBOX.md` state and added omission/wrong-value guards. Those
+  guarded claims now advance with composed Rust admission to exact 6/20/73, rollout 3+6, admission 2+4, and complete
+  Perl plus Rust admission ownership without changing any response digest. The director selected Unicode expansion;
   ADR `0051` and `.10.4.0.2` pin Unicode 17.0.0 `XID_Continue` labels with exact case- and
   normalization-sensitive identity and implement them across Rust parser/validator/artifact/runtime routes.
   Rust semantic source/outcome foundation `.10.4.1` now adds opaque `SemanticIndex::from_source` / `from_utf8`
@@ -829,9 +828,10 @@ content migration exists yet.
   through typed and raw-neutral queries across direct, loaded, reconstructed, generated-plan, source-emitter,
   traced/untraced, and independently compiled emitted-module routes. Result/cursor/trace/diagnostic behavior,
   Unicode-scalar positions, observer panic identity, base/event/response isolation, quiet no-sink execution, and
-  failed-execution non-completion are exact. Composed Rust admission remains `.10.4.6`, so rollout/admission stay
-  2/9 and 1/6. Signoff passes complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all
-  packages and primary 66x2, plus canonical primary 66x2 and Phase 0 1,031/1,031.
+  failed-execution non-completion are exact. Composed admission `.10.4.6` now adds one omission-sensitive 12-role
+  Rust consumer over those existing owners, all 20 digests, exact query boundaries, immutability, and host-leak
+  denial. The checker locks eight Rust-specific topology mutations and canonical registration, advancing only Rust
+  to rollout 3/9 and native admission 2/6; Dart, Julia, PUC Lua, and LuaJIT remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -15,10 +15,11 @@ answers:
   - "does Rust now have a semantic source map"
   - "does Rust now have a semantic static projection"
   - "does Rust now have a semantic query evaluator"
+  - "is Rust semantic introspection admitted"
 date: 2026-07-21
 status: current
 tags: [rust, semantic-introspection, source-map, unicode, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.4; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/engine.rs
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.6; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs; rust/linkedspec-runtime/src/semantic_observation.rs; rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
 reverify: "python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
 ---
 
@@ -54,15 +55,16 @@ selector, loader, and trace routes preserve `Töp` exactly. Completed `.10.4.1-.
 See [[unicode-rule-label-contract]].
 
 Rust now has an opaque `SemanticIndex` source/outcome foundation, private clone-safe static and call/staged/
-generated v1 projections, and a public projection-only query evaluator, but no typed semantic observation sink. Its strict source constructors copy caller text/bytes,
-retain private
+generated v1 projections, a public projection-only query evaluator, and a typed invocation-local semantic
+observation sink. Its strict source constructors copy caller text/bytes, retain private
 parsed/validated/compiled-or-failed authority and the shared generated-v2 plan, enforce a source ceiling, and
 expose only clone-safe foundation metadata/spans/excerpts/diagnostics. Direct and generated executors nevertheless
 have parallel authoritative runtime seams: after structural slot identity is checked, both emit
 `regex_slot_selected` trace decisions with executing rule, target rule, authored regex index, and cursor; their
-rule wrappers own final typed result and final cursor. A future optional invocation-local semantic sink can attach
-there, separately from buffered text trace and `RuntimeDiagnosticOutputSink`, and a post-execution builder can
-derive a new immutable snapshot without query-side execution. See [[rust-semantic-index-source-foundation]].
+rule wrappers own final typed result and final cursor. `RuntimeSemanticObservationSink` attaches there, separately
+from buffered text trace and `RuntimeDiagnosticOutputSink`, and `with_execution_observation` derives a new
+immutable snapshot without query-side execution. See [[rust-semantic-index-source-foundation]] and
+[[rust-semantic-runtime-observation]].
 
 The `.10.4.2` projector composes parsed source correlation with typed compiled root/family/cursor/repetition/slot/
 edge/lifecycle authority and normalizes both Rust failure seams into the exact neutral unknown-rule diagnostic,
@@ -80,6 +82,11 @@ The `.10.4.4` evaluator exposes `capabilities()`, typed `query(&SemanticQuery)`,
 Both consume fresh projection clones and have no compiler/executor/trace/path/host-IR input. Source ceilings,
 canonical pages, filtered directional BFS, logical budgets/costs, explanations, and 26 request/error boundaries are
 exact. See [[rust-semantic-query-evaluator]].
+
+Composed leaf `.10.4.6` adds no new authority. One exact 12-role consumer reuses all of the owners above across
+loaded/reconstructed/generated/source-emitter/traced routes and all 20 query digests. The checker locks its
+topology and advances only Rust to rollout 3/9 and native admission 2/6. See
+[[rust-semantic-introspection-admission]].
 
 During this audit, `TOOLBOX.md` §4.9 still advertised 57 rejected mutations, rollout 1+8, and pre-admission Perl
 state even though the executable checker reports 65, rollout 2+7, and admission 1+5. The checker guards contract,

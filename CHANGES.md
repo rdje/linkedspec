@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.6 — admit Rust semantic introspection
+
+One omission-sensitive Rust consumer now composes the already-complete semantic source, compiled/failed/static,
+calls/staging, query, runtime-observation, and execution-route owners through 12 exact ordered roles. It matches all
+20 neutral response digests through typed and raw-neutral queries, covers direct/loaded/reconstructed/generated-
+plan/source-emitter/traced routes, and locks privacy, pages, budgets, errors, explanations, query non-execution,
+clone isolation, and denial of stale host state. This slice adds no second semantic model or product behavior.
+
+The neutral contract now admits Rust alongside Perl: rollout is 3 complete / 6 pending and native backend
+admission is 2 complete / 4 pending. The checker fixes the exact Rust consumer path, role order, driver, canonical
+registration, Rust target status, and Rust-only rollout promotion with eight additional mutations, bringing the
+governed total to 73. Canonical CI now requires and runs the composed Rust admission target; public docs, ADR
+`0049`, roadmaps, live state, and the Knowledge Map describe the same boundary.
+
+Clean RED ran every role and digest before failing solely on Rust's pending contract status. GREEN passes the
+consumer alone in 78.93 seconds and the focused foundation 6/query 5/observation 7/admission 1 matrix; targeted
+new-test Clippy exits 0 above the established dependency-warning baseline. The complete Rust gate passes core 193,
+runtime units 147, integration 197, exact 105/full generated manifest/all package targets, the new admission in
+79.15 seconds, and primary CLI 66x2. Canonical local CI independently runs the tracked admission in 80.84 seconds,
+passes primary 66x2 and Phase 0 1,031/1,031 in 651 seconds, and exits 0. Knowledge Map 669/4,960, mdBook, memory,
+task metadata, all four doctrines, format, JSON, and diff checks pass. The reproducible 3.0 GiB Rust target, 12 MiB
+rendered book, and 28 KiB Python cache are removed before commit; `.10.4.6` and parent `.10.4` close cleanly with
+Dart `.10.5` next.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.5 — capture Rust runtime semantic observations
 
 `linkedspec-runtime` now exposes an invocation-local `RuntimeSemanticObservationSink` through `ExecutionOptions`.

@@ -110,6 +110,7 @@ require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
 require_tracked_file tools/check_unicode_rule_label_contract.py
 require_tracked_file t/semantic_introspection_perl_admission.t
+require_tracked_file rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
 require_tracked_file t/repeated_action_result_perl_contract.t
@@ -317,6 +318,9 @@ PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
 
 log "running composed Perl semantic-introspection admission consumer"
 PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t
+
+log "running composed Rust semantic-introspection admission consumer"
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

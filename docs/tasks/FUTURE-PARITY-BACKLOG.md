@@ -7449,7 +7449,7 @@ before implementation.
     `.10.3` with exact Perl-only rollout/admission totals.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement the Rust semantic index adapter and exact native conformance.
   Children: `.10.4.0`, `.10.4.0.1`, `.10.4.0.2`, `.10.4.1`, `.10.4.2`, `.10.4.3`, `.10.4.4`, `.10.4.5`,
     `.10.4.6`
@@ -7458,6 +7458,12 @@ before implementation.
     execution observations through idiomatic Rust types plus neutral JSON; prove exact reference answers across
     direct, loaded, reconstructed, generated, traced/untraced, privacy, pagination/budget, and explain routes;
     reject backend IR leakage and pass the complete Rust/canonical gates.
+  Verification: Children `.10.4.0-.10.4.6` map the typed owners, implement the Unicode-label prerequisite, build
+    immutable source/static/call/query/runtime projections, and admit one exact 12-role composed consumer. All 20
+    digests and every required native/neutral/route/privacy/budget/error/explain/non-interference boundary pass.
+    Complete Rust passes core 193/runtime 147/integration 197/exact 105/full manifest/all packages/primary 66x2;
+    canonical passes the tracked admission, primary 66x2, and Phase 0 1,031/1,031. Rollout/admission are exactly
+    3/9 and 2/6; no backend IR, path, generated implementation source, or query-side execution escapes.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.0`
   Status: `done`
@@ -7772,13 +7778,49 @@ before implementation.
   after the clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.6`
-  Status: `pending`
+  Status: `done`
   Goal: Admit the exact Rust semantic implementation and close the Rust parent.
   Depends on: `.10.4.5`
   Acceptance: One omission-sensitive Rust consumer owns exact source/compiled/failed/runtime/native/JSON/query/
     route roles, all 20 digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak
     denial. Register it in canonical CI, advance only Rust rollout/admission, pass full package/primary/corpus/
     generated/trace and canonical gates, synchronize all public docs, and close `.10.4` cleanly.
+  Verification: Activated task-tree-first on 2026-07-21 from clean Rust runtime-observation commit `a79512c9` at
+    ahead 280. `git_message_brief.txt` is zero bytes and generated Rust target/book/cache artifacts are absent.
+    Retrieve the exact neutral checker, Perl composed-admission precedent, Rust semantic authority cards, rollout
+    ledger, canonical registration, and prior omission-sensitive Rust consumer topology before implementation.
+    Retrieval proves this is topology-only: all semantic owners already exist. New
+    `semantic_introspection_rust_admission.rs` declares the same 12 ordered roles as Perl while covering Rust's
+    loaded/reconstructed, generated-plan/source-emitter, and traced variants. The first compile found and corrected
+    one harness-only enum assertion; clean RED then executes every role and all 20 digests before failing solely on
+    Rust status `pending`. GREEN passes the one exact consumer in 78.93s. Foundation 6/query 5/observation 7 plus
+    admission 1 pass together, and focused new-test Clippy is clean. The checker now rejects eight additional Rust
+    path/role/driver/registration/status/rollout mutations, advances only Rust, and passes at 6 fixture groups / 20
+    exact queries / 73 mutations / rollout 3+6 / admission 2+4. Public guide, roadmaps, ADR, mdBook, Toolbox, and
+    Knowledge Map 669/4,960 describe the admitted boundary. Complete Rust passes core 193, runtime units 147,
+    integration 197, exact 105/full generated manifest/all package targets, the composed admission in 79.15s, and
+    primary CLI 66x2. Canonical CI independently passes the tracked admission in 80.84s, primary 66x2, and Phase 0
+    1,031/1,031 in 651s, exit 0. mdBook, memory, task metadata, all four doctrines, format, JSON, KM, and diff pass;
+    the reproducible 3.0 GiB Rust target, 12 MiB book, and 28 KiB cache are removed. Parent `.10.4` closes and Dart
+    `.10.5` is the next clean-boundary frontier.
+  Commit: `FUTURE-PARITY-BACKLOG.10.4.6 - admit Rust semantic introspection`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / TOOLBOX FIRST** — Read the neutral semantic contract/checker, Perl composed-admission
+    precedent, Rust source/static/calls/query/runtime authorities, rollout ledger, and canonical registration.
+  - [x] **RED / ORACLE** — Add one omission-sensitive Rust admission consumer plus checker mutations that fail only
+    because Rust path/roles/registration/admission topology and Rust-only rollout promotion are absent.
+  - [x] **ONE COMPOSED CONSUMER** — Reuse the existing Rust constructor, static/calls/query/runtime projection and
+    direct/loaded/reconstructed/generated/traced seams; do not introduce another model, evaluator, or observer.
+  - [x] **EXACT BEHAVIOR** — Cover compiled/failed/runtime snapshots, native and neutral JSON, all 20 digests,
+    privacy, pagination, budgets, errors, explain, no-execute immutability, route identity, and host-leak denial.
+  - [x] **PROMOTE / REGISTER** — Lock exact consumer path and role topology, register the test canonically, and
+    advance only Rust rollout/admission while leaving Dart/Julia/Lua/MCP pending.
+  - [x] **NO REGRESSION** — Pass focused admission and adjacent semantic tests, complete Rust package/primary/
+    corpus/generated/trace gates, and canonical Phase 0 without changing parser or query behavior.
+  - [x] **LOCKSTEP / CLOSEOUT** — Synchronize public API/book/task/index/roadmaps/live/memory/KM, close `.10.4`,
+    clean reproducible artifacts, and complete the per-slice commit workflow.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5`
   Status: `pending`
@@ -10480,7 +10522,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.4 | `FUTURE-PARITY-BACKLOG.10.3.4` | `done` | Exact immutable capabilities/query/privacy/page/budget behavior passes all 19 static digests and canonical Phase 0 1,031/1,031. |
 | 74.2.5 | `FUTURE-PARITY-BACKLOG.10.3.5` | `done` | Typed execution observations match the twentieth digest across eight routes and pass complete canonical signoff. |
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `done` | Exact 12-role Perl consumer passes 18, governance 6/20/65, primary 66x2, and canonical Phase 0 1,031/1,031. |
-| 74.3 | `FUTURE-PARITY-BACKLOG.10.4` | `active` | Implement the Rust semantic index, exact native query surface, runtime observations/routes, and conformance admission. |
+| 74.3 | `FUTURE-PARITY-BACKLOG.10.4` | `done` | Rust exact source/static/call/query/runtime projection and one 12-role admission pass all 20 digests and canonical signoff. |
 | 74.3.0 | `FUTURE-PARITY-BACKLOG.10.4.0` | `done` | Exact Rust owners/gaps, Unicode-label conflict, toolbox drift, and dependency-ordered implementation split are frozen before behavior. |
 | 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `done` | Exact 6/20/65, rollout 2+7, admission 1+5, runtime, and 12-role Perl toolbox claims are checker-owned with omission/wrong-value proof. |
 | 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `done` | Unicode 17 `XID_Continue` exact identity is generated, implemented across Rust routes, and canonical-signoff complete without semantic promotion. |
@@ -10489,7 +10531,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.3 | `FUTURE-PARITY-BACKLOG.10.4.3` | `done` | Exact private 22-record/25-relation calls/bindings/staged/generated projection passes canonical signoff without promotion. |
 | 74.3.4 | `FUTURE-PARITY-BACKLOG.10.4.4` | `done` | Immutable typed/raw-neutral capabilities/query match all 19 static digests with canonical signoff. |
 | 74.3.5 | `FUTURE-PARITY-BACKLOG.10.4.5` | `done` | Typed invocation-local observations match the twentieth digest across all Rust routes with canonical signoff. |
-| 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `pending` | Admit Rust with one exact consumer and close the parent. |
+| 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `done` | Exact 12-role Rust consumer, governance 6/20/73, complete Rust, and canonical 1,031 close the parent. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -11383,6 +11425,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.4.6` | `FUTURE-PARITY-BACKLOG.10.4.6 - admit Rust semantic introspection` | One exact 12-role consumer over existing Rust owners; 20 digests, eight topology mutations, rollout 3/9, admission 2/6, complete Rust/66x2, canonical admission 80.84s plus Phase 0 1,031/651s, KM/book/doctrines, cleanup, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.10.4.5` | `FUTURE-PARITY-BACKLOG.10.4.5 - capture Rust runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across Rust routes, focused 7, complete Rust/105/66x2, canonical 1,031/647s, KM/book/doctrines, and cleanup without admission promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.4` | `FUTURE-PARITY-BACKLOG.10.4.4 - expose Rust semantic query` | Owned typed/raw-neutral projection-only query, all 19 static digests/26 errors, focused 5, complete Rust/105/66x2, canonical 1,031/631s, KM/book/doctrines, and cleanup without execution or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.3` | `FUTURE-PARITY-BACKLOG.10.4.3 - project Rust call semantics` | Exact 22-record/25-relation typed call/binding/staged/generated projection; focused 4/all static 9, complete Rust/105/66x2, canonical 1,031/619s, KM/book/doctrines, and cleanup without query or promotion. |
@@ -11579,6 +11622,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-21`: `.10.4.6` composes every existing Rust semantic owner through one omission-sensitive ordered
+  12-role consumer. It matches compiled/failed/runtime snapshots, typed/raw-neutral JSON, all 20 digests, every
+  direct/loaded/reconstructed/generated/source-emitter/traced route, privacy/pages/budgets/errors/explain,
+  non-execution immutability, and host-leak denial without adding a model or behavior path. Eight checker mutations
+  lock path/role/driver/registration/status/rollout topology; semantic becomes 6/20/73 at rollout 3/9 and admission
+  2/6. Focused foundation 6/query 5/observation 7/admission 1, complete Rust 193/147/197/exact 105/full manifest/all
+  packages/admission/primary 66x2, canonical tracked admission 80.84s plus primary 66x2 and Phase 0 1,031/1,031 in
+  651s, KM 669/4,960, mdBook/memory/task/four doctrines/format/JSON/diff, and 3.0 GiB + 12 MiB + 28 KiB cleanup
+  pass. `.10.4` closes; Dart `.10.5` follows from the clean commit.
 
 - `2026-07-21`: `.10.4.5` adds typed caller-owned Rust runtime observations at the authoritative direct/generated
   slot and successful entry-result seams. A completed event vector derives a separate immutable semantic index;

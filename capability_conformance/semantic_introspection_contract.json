@@ -329,7 +329,31 @@
         ]
       }
     },
-    {"backend": "rust", "runtime": "rust", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.4", "native_api": "capabilities_plus_query", "consumer": null},
+    {
+      "backend": "rust",
+      "runtime": "rust",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.4",
+      "native_api": "capabilities_plus_query",
+      "consumer": {
+        "path": "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
+        "canonical_driver": "tools/run_ci_local.sh",
+        "roles": [
+          "source_normalization",
+          "compiled_snapshots",
+          "failed_snapshot",
+          "runtime_direct",
+          "runtime_loaded",
+          "runtime_generated",
+          "runtime_traced",
+          "native_and_neutral_json",
+          "exact_twenty_queries",
+          "privacy_page_budget_error_explain",
+          "query_non_interference",
+          "stale_host_leak_denial"
+        ]
+      }
+    },
     {"backend": "dart", "runtime": "dart", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.5", "native_api": "capabilities_plus_query", "consumer": null},
     {"backend": "julia", "runtime": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.6", "native_api": "capabilities_plus_query", "consumer": null},
     {"backend": "lua", "runtime": "puc_lua", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7", "native_api": "capabilities_plus_query", "consumer": null},
@@ -338,7 +362,7 @@
   "rollout": [
     {"capability": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.2"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.3"},
-    {"capability": "rust_parity", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.4"},
+    {"capability": "rust_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.4"},
     {"capability": "dart_parity", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.5"},
     {"capability": "julia_parity", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
     {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
@@ -354,7 +378,8 @@
       "capability_conformance/semantic_introspection_model.json",
       "capability_conformance/rule_local_cursor_contract.json",
       "tools/check_semantic_introspection_contract.py",
-      "t/semantic_introspection_perl_admission.t"
+      "t/semantic_introspection_perl_admission.t",
+      "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs"
     ],
     "backend_consumers": "not_admitted_before_owned_rollout_leaf",
     "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"
@@ -375,7 +400,10 @@
     "omit_source_policy", "leak_host_path", "omit_redaction", "wrong_utf8_span", "wrong_content_digest",
     "unadmit_perl", "omit_perl_consumer_path", "alter_perl_consumer_path", "omit_perl_consumer_role",
     "reorder_perl_consumer_roles", "alter_perl_consumer_driver", "unpromote_perl_rollout",
-    "omit_perl_canonical_registration", "admit_backend_early", "omit_runtime", "omit_luajit",
+    "omit_perl_canonical_registration", "unadmit_rust", "omit_rust_consumer_path",
+    "alter_rust_consumer_path", "omit_rust_consumer_role", "reorder_rust_consumer_roles",
+    "alter_rust_consumer_driver", "unpromote_rust_rollout", "omit_rust_canonical_registration",
+    "admit_backend_early", "omit_runtime", "omit_luajit",
     "omit_mcp_rollout", "move_semantics_into_mcp",
     "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration"
   ]

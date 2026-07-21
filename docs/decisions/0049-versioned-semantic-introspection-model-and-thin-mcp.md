@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl admitted; Rust source foundation implemented
+- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl and Rust admitted
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -317,7 +317,8 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
   execution.
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
 - Each rollout leaf must keep implemented native layers distinct from still-planned projection/query/observation/
-  admission/MCP layers. Perl is fully admitted; Rust currently has only its source/outcome foundation.
+  admission/MCP layers. Perl and Rust are fully admitted; Dart, Julia, Lua/LuaJIT, recurring proof, MCP, and public
+  no-drift remain staged.
 
 The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
 characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
@@ -415,8 +416,10 @@ function-staged, and shared generated-plan owners. Rust leaf `.10.4.4` then expo
 enter one evaluator over a fresh clone of the normalized projection and match all 19 static canonical response
 digests. The evaluator owns only selection, source redaction/ceilings, canonical pages, filtered directional BFS,
 logical budgets/costs, explanations, and portable request diagnostics; it has no compiler, executor, trace, path,
-host IR, or generated source. Runtime observation and composed Rust admission remain `.10.4.5-.10.4.6`, so rollout
-and admission stay 2/9 and 1/6. See [[rust-semantic-query-evaluator]].
+host IR, or generated source. Runtime observation `.10.4.5` and composed admission `.10.4.6` subsequently complete
+the Rust surface. One exact 12-role consumer covers all 20 digests and governed execution/query routes; eight
+topology mutations plus canonical registration advance only Rust to rollout 3/9 and admission 2/6. See
+[[rust-semantic-query-evaluator]].
 
 ## Links
 

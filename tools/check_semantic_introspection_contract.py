@@ -119,7 +119,7 @@ SOURCE_FIXTURES = [
 ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.10.2"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
-    ("rust_parity", "pending", "FUTURE-PARITY-BACKLOG.10.4"),
+    ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart_parity", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia_parity", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
@@ -129,7 +129,7 @@ ROLLOUT = [
 ]
 ADMISSIONS = [
     ("perl", "perl", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
-    ("rust", "rust", "pending", "FUTURE-PARITY-BACKLOG.10.4"),
+    ("rust", "rust", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart", "dart", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia", "julia", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua", "puc_lua", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
@@ -153,15 +153,25 @@ PERL_ADMISSION = {
         "stale_host_leak_denial",
     ],
 }
+RUST_ADMISSION = {
+    "path": "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": PERL_ADMISSION["roles"].copy(),
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 65 rejected mutations, rollout 2 complete / 7 pending, admission 1 complete / 5 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 73 rejected mutations, rollout 3 complete / 6 pending, admission 2 complete / 4 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
     "Its 12 exact-once roles cover strict byte/text source normalization",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission",
+    "Its 12 exact-once roles compose all 20 digests",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
+    "65 rejected mutations",
+    "rollout 2 complete / 7 pending",
+    "admission 1 complete / 5 pending",
     "57 rejected mutations",
     "rollout 1 complete / 8 pending",
     "runtime observation and backend admission remain later",
@@ -207,7 +217,7 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("65 rejected mutations", "64 rejected mutations", 1)
+    wrong = text.replace("73 rejected mutations", "72 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
@@ -465,13 +475,14 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(admissions == ADMISSIONS, "six-runtime admission inventory drifted")
     require(all(row["native_api"] == "capabilities_plus_query" for row in contract["target_admissions"]), "native API inventory drifted")
     require(contract["target_admissions"][0]["consumer"] == PERL_ADMISSION, "Perl admission consumer topology drifted")
-    require(all(row["consumer"] is None for row in contract["target_admissions"][1:]), "backend admitted before its owned leaf")
+    require(contract["target_admissions"][1]["consumer"] == RUST_ADMISSION, "Rust admission consumer topology drifted")
+    require(all(row["consumer"] is None for row in contract["target_admissions"][2:]), "backend admitted before its owned leaf")
     for row in contract["rollout"]: require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 65 and len(set(contract["mutations"])) == 65, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 73 and len(set(contract["mutations"])) == 73, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -974,28 +985,40 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     for path in contract["canonical_ci"]["required_tracked_files"]:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
-    consumer = contract["target_admissions"][0]["consumer"]
-    consumer_path = ROOT / consumer["path"]
-    require(consumer_path.is_file(), "Perl semantic admission consumer is missing")
-    consumer_text = consumer_path.read_text(encoding="utf-8")
-    for role in consumer["roles"]:
+    perl_consumer = contract["target_admissions"][0]["consumer"]
+    perl_consumer_path = ROOT / perl_consumer["path"]
+    require(perl_consumer_path.is_file(), "Perl semantic admission consumer is missing")
+    perl_consumer_text = perl_consumer_path.read_text(encoding="utf-8")
+    for role in perl_consumer["roles"]:
         marker = re.compile(rf"^\s*{re.escape(role)}\s*=>\s*sub\s*\{{", re.MULTILINE)
-        require(len(marker.findall(consumer_text)) == 1, f"Perl semantic admission role marker drifted: {role}")
-    require(f"require_tracked_file {consumer['path']}" in ci_text, "canonical CI does not require the Perl semantic admission consumer")
-    require(f"PERL5LIB= prove -Iperl {consumer['path']}" in ci_text, "canonical CI does not run the Perl semantic admission consumer")
+        require(len(marker.findall(perl_consumer_text)) == 1, f"Perl semantic admission role marker drifted: {role}")
+    require(f"require_tracked_file {perl_consumer['path']}" in ci_text, "canonical CI does not require the Perl semantic admission consumer")
+    require(f"PERL5LIB= prove -Iperl {perl_consumer['path']}" in ci_text, "canonical CI does not run the Perl semantic admission consumer")
+
+    rust_consumer = contract["target_admissions"][1]["consumer"]
+    rust_consumer_path = ROOT / rust_consumer["path"]
+    require(rust_consumer_path.is_file(), "Rust semantic admission consumer is missing")
+    rust_consumer_text = rust_consumer_path.read_text(encoding="utf-8")
+    for role in rust_consumer["roles"]:
+        marker = re.compile(rf"^fn role_{re.escape(role)}\(\) \{{", re.MULTILINE)
+        require(len(marker.findall(rust_consumer_text)) == 1, f"Rust semantic admission role marker drifted: {role}")
+    require(f"require_tracked_file {rust_consumer['path']}" in ci_text, "canonical CI does not require the Rust semantic admission consumer")
+    rust_command = "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission"
+    require(rust_command in ci_text, "canonical CI does not run the Rust semantic admission consumer")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "65 rejected mutations" in readme
-        and "2 complete / 7 pending" in readme
-        and "1 complete / 5 pending" in readme,
+        and "73 rejected mutations" in readme
+        and "3 complete / 6 pending" in readme
+        and "2 complete / 4 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
-        and "1 complete / 5 pending" in book
-        and "t/semantic_introspection_perl_admission.t" in book,
+        and "2 complete / 4 pending" in book
+        and "t/semantic_introspection_perl_admission.t" in book
+        and "semantic_introspection_rust_admission" in book,
         "mdBook semantic introspection page is not synchronized",
     )
     toolbox = TOOLBOX_PATH.read_text(encoding="utf-8")
@@ -1100,7 +1123,15 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_perl_consumer_driver"] = lambda c, m: c["target_admissions"][0]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
     mutations["unpromote_perl_rollout"] = lambda c, m: c["rollout"][1].update({"status": "pending"})
     mutations["omit_perl_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("t/semantic_introspection_perl_admission.t")
-    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][1].update({"status": "complete"})
+    mutations["unadmit_rust"] = lambda c, m: c["target_admissions"][1].update({"status": "pending"})
+    mutations["omit_rust_consumer_path"] = lambda c, m: c["target_admissions"][1]["consumer"].pop("path")
+    mutations["alter_rust_consumer_path"] = lambda c, m: c["target_admissions"][1]["consumer"].update({"path": "rust/linkedspec-runtime/tests/missing_semantic_consumer.rs"})
+    mutations["omit_rust_consumer_role"] = lambda c, m: c["target_admissions"][1]["consumer"]["roles"].pop()
+    mutations["reorder_rust_consumer_roles"] = lambda c, m: c["target_admissions"][1]["consumer"]["roles"].reverse()
+    mutations["alter_rust_consumer_driver"] = lambda c, m: c["target_admissions"][1]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
+    mutations["unpromote_rust_rollout"] = lambda c, m: c["rollout"][2].update({"status": "pending"})
+    mutations["omit_rust_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs")
+    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][2].update({"status": "complete"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)

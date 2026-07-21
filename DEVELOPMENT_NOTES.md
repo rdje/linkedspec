@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.6` — admission is an omission-sensitive composition proof, not another
+  implementation): Rust's five preceding semantic leaves already owned every source, projection, query, and runtime
+  mechanism. The admission target therefore declares one explicit ordered 12-role topology and invokes only those
+  owners. Its clean RED exercised all roles and 20 response locks before failing on the contract's deliberately
+  pending Rust status; promotion changed only the neutral ledger and canonical registration.
+
+  The role split makes architectural omission visible: source normalization; compiled, failed, and runtime
+  snapshots; direct, loaded, generated, and traced routes; typed/neutral JSON identity; all 20 exact queries;
+  privacy/page/budget/error/explain behavior; query non-interference; and stale-host-leak denial. The checker rejects
+  missing, altered, or reordered Rust topology, a wrong driver, missing canonical registration, and premature or
+  missing status/rollout changes. These eight mutations extend governance from 65 to 73 while advancing only Rust
+  from rollout 2/9 and admission 1/6 to 3/9 and 2/6.
+
+  Standalone admission passes in 78.93 seconds; foundation 6/query 5/observation 7/admission 1 pass together; and
+  targeted test Clippy is clean above the repository's established dependency-warning baseline. Complete Rust
+  proof passes core 193, runtime units 147, integration 197, exact 105/full generated manifest/all packages, the
+  composed admission in 79.15 seconds, and primary 66x2. Canonical CI independently proves the tracked admission
+  in 80.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 651 seconds. KM 669/4,960, book/memory/task/doctrines,
+  format/JSON/diff checks, and cleanup of the 3.0 GiB target, 12 MiB rendered book, and 28 KiB cache close the Rust
+  parent. Dart `.10.5` inherits the exact model plus ADR `0051` label prerequisite from a clean boundary.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.5` — runtime semantics must be caller-owned typed evidence, not
   reconstructed trace): Rust already had parallel authoritative slot-selection seams in direct `Engine` execution
   and `GeneratedPlanExecutor`, plus option-bearing entry wrappers that alone know when an invocation completed

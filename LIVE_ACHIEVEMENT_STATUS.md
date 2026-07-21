@@ -8,21 +8,35 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Typed Rust runtime semantic observations `FUTURE-PARITY-BACKLOG.10.4.5` are signoff-complete task-tree-first from
-  clean immutable-query commit `1cb0c353` at ahead 279. Implementation, focused/complete Rust proof, public/KM/live
-  synchronization, canonical CI, and generated-artifact cleanup agree. Its commit and clean-boundary verification
-  are in flight; only then may composed Rust admission `.10.4.6` activate. Rollout/admission remain 2/9 and 1/6.
+- No implementation slice is active. Rust semantic admission `.10.4.6` and parent `.10.4` are verified and closed;
+  the per-slice commit workflow is the only in-flight action. Dart semantic adapter `.10.5` may activate only from
+  the resulting clean boundary.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
-observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle is now 2/9
-rollout legs and native backend admission 1/6: the exact composed `.10.3.6` consumer admits Perl while every later
-backend, recurring proof, MCP, and public no-drift leg remains pending.
+observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle is now 3/9
+rollout legs and native backend admission 2/6: exact composed `.10.3.6` and `.10.4.6` consumers admit Perl and Rust
+while Dart, Julia, Lua/LuaJIT, recurring proof, MCP, and public no-drift remain pending.
 
 Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.6 — admit Rust semantic introspection**
+  (DONE in this commit from clean base `a79512c9`).
+
+  **Result:** One exact ordered 12-role consumer composes existing Rust source/static/calls/query/runtime owners,
+  matches all 20 digests and required routes/policies, denies query execution and host leakage, and advances only
+  Rust to rollout 3/9 and native admission 2/6. Eight omission-sensitive mutations bring governance to 73; parent
+  `.10.4` closes without a second semantic implementation.
+
+  **Proof:** Standalone admission 78.93s; focused foundation 6/query 5/observation 7/admission 1; targeted Clippy;
+  complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all packages/admission 79.15s/primary
+  66x2; canonical tracked admission 80.84s, primary 66x2, Phase 0 1,031/1,031 in 651s; KM 669/4,960; mdBook,
+  memory/task/four doctrines/format/JSON/diff; 3.0 GiB target, 12 MiB book, and 28 KiB cache cleanup.
+
+  **Next:** Commit cleanly, then activate Dart semantic adapter `.10.5` task-tree-first.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.5 — capture Rust runtime semantic observations**
   (DONE in this commit from clean base `1cb0c353`).
 
@@ -37,7 +51,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   668/4,949; mdBook/memory/task/four doctrines/format/diff; canonical primary 66x2 plus Phase 0 1,031/1,031 in 647
   seconds, exit 0; 3.2 GiB target/12 MiB book/Python-cache cleanup.
 
-  **Next:** Commit cleanly, then activate composed Rust semantic admission `.10.4.6` task-tree-first.
+  **Next:** Execute active composed Rust semantic admission `.10.4.6` from clean `a79512c9`.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.4 — expose Rust semantic query**
   (DONE in `1cb0c353` from clean base `68e31222`).
