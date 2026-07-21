@@ -808,8 +808,11 @@ content migration exists yet.
   compiled expressions lack general spans, so exact semantic coordinates need a new immutable source mapper; text
   trace is not an observation API. The audit also found a real contract prerequisite: accepted neutral v1 requires
   Unicode rule label `Töp`, while the published grammar and current Rust header parser accept ASCII labels only.
-  `.10.4.0.2` awaits the director's Unicode-versus-ASCII choice before construction; `.10.4.0.1` first repairs
-  stale semantic `TOOLBOX.md` current-state text and adds a no-drift guard. Rust rollout/admission remain pending.
+  `.10.4.0.1` now repairs stale semantic `TOOLBOX.md` current-state text to exact 6/20/65, rollout 2+7,
+  admission 1+5, and complete Perl observation/admission ownership. The semantic checker requires each high-value
+  toolbox claim exactly once, denies the stale values, and self-proves omission and wrong-value rejection without
+  changing the 65 contract mutations or any response digest. `.10.4.0.2` awaits the director's
+  Unicode-versus-ASCII choice before construction; Rust rollout/admission remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

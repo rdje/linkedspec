@@ -7515,7 +7515,7 @@ before implementation.
     Rust plan without claiming an API or promotion before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.0.1`
-  Status: `pending`
+  Status: `done`
   Goal: Repair semantic-introspection toolbox current-state drift and mechanically prevent recurrence.
   Depends on: `.10.4.0`
   Acceptance: Update `TOOLBOX.md` from the stale 57-mutation / rollout 1+8 / pre-admission Perl description to
@@ -7523,6 +7523,30 @@ before implementation.
     these high-value command/output and stage claims cannot drift silently again; add omission/wrong-value proof,
     keep all 20 response digests unchanged, synchronize docs/book/KM, and pass canonical signoff without Rust
     semantic behavior or rollout changes.
+  Verification: Activated task-tree-first from clean Rust audit commit `0d9e395c` at ahead 273;
+    `git_message_brief.txt` was zero bytes, generated build/book artifacts were absent, and 102 GiB was available.
+    `TOOLBOX.md` now states exact 6/20/65, rollout 2+7, admission 1+5, the 106-assertion/eight-route runtime
+    proof, and 12-role admission. The checker requires those claims once, forbids stale forms, and internally
+    rejects an omitted claim plus 65→64 wrong value without changing the 65 contract mutations or 20 digests.
+    Focused semantic proof passes 149 assertions; Knowledge Map is 660 facts / 4,879 keys; mdBook and all four
+    doctrines pass. The first canonical run correctly exposed that activation had dropped the separately governed
+    repeated-action closeout marker from `docs/TASK_TREE.md`; restoring that exact current marker makes its checker
+    pass. The complete rerun passes primary 66x2 and Phase 0 1,031/1,031 in 611 seconds, exit 0. No Rust/product
+    behavior, response, rollout, or admission change; generated book/bytecode output is removed before commit.
+  Commit: `FUTURE-PARITY-BACKLOG.10.4.0.1 - guard semantic toolbox state`
+
+  #### Acceptance Checklist
+
+  - [x] **CURRENT STATE** — Toolbox command output and Perl runtime/admission descriptions match executable
+    6/20/65, rollout 2+7, admission 1+5, 106/eight-route, and exact 12-role ownership.
+  - [x] **MECHANICAL OWNERSHIP** — The existing semantic checker reads the toolbox and requires each high-value
+    claim exactly once while rejecting every known stale form.
+  - [x] **NEGATIVE PROOF** — Internal omission and 65→64 wrong-value probes fail the same pure claim validator
+    without changing the ordered 65 semantic-contract mutations.
+  - [x] **NO SEMANTIC DRIFT** — All 20 response digests, target rows, rollout rows, and Rust/product behavior are
+    unchanged; six Perl suites pass 149 assertions.
+  - [x] **LOCKSTEP / SIGNOFF** — Roadmaps, guide, mdBook, KM, task/live/memory records, doctrines, primary 66x2,
+    and canonical Phase 0 1,031/1,031 pass; generated artifacts are removed before commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.4.0.2`
   Status: `pending`
@@ -9835,9 +9859,9 @@ complete Rust packages/105-fixture oracle/full generated manifest/primary 66x2, 
 in 617 seconds. It maps parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
 generated-v2 owners, missing source/query/observation seams, and the full `.10.4.0.1-.10.4.6` dependency order.
 
-The next clean-boundary frontier is `FUTURE-PARITY-BACKLOG.10.4.0.1`: repair stale semantic `TOOLBOX.md`
-57-mutation / rollout 1+8 / pre-admission Perl claims to exact 65 / 2+7 / admission 1+5 and add checker protection.
-Then `.10.4.0.2` requires the director's contract choice because accepted neutral/Perl privacy requires Unicode
+Toolbox no-drift `.10.4.0.1` is complete in the current commit: exact 6/20/65, rollout 2+7, admission 1+5,
+106/eight-route runtime, and 12-role Perl claims are checker-owned with omission/wrong-value proof. The next
+frontier `.10.4.0.2` requires the director's contract choice because accepted neutral/Perl privacy requires Unicode
 label `Töp`, while the published grammar and current Rust parser accept ASCII labels only. Rust source/outcome
 foundation `.10.4.1` cannot start until that choice is resolved and proven. No Rust semantic API or promotion exists.
 
@@ -10229,7 +10253,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.2.6 | `FUTURE-PARITY-BACKLOG.10.3.6` | `done` | Exact 12-role Perl consumer passes 18, governance 6/20/65, primary 66x2, and canonical Phase 0 1,031/1,031. |
 | 74.3 | `FUTURE-PARITY-BACKLOG.10.4` | `active` | Implement the Rust semantic index, exact native query surface, runtime observations/routes, and conformance admission. |
 | 74.3.0 | `FUTURE-PARITY-BACKLOG.10.4.0` | `done` | Exact Rust owners/gaps, Unicode-label conflict, toolbox drift, and dependency-ordered implementation split are frozen before behavior. |
-| 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `pending` | Repair stale semantic TOOLBOX current-state claims and add checker ownership before Rust behavior. |
+| 74.3.0.1 | `FUTURE-PARITY-BACKLOG.10.4.0.1` | `done` | Exact 6/20/65, rollout 2+7, admission 1+5, runtime, and 12-role Perl toolbox claims are checker-owned with omission/wrong-value proof. |
 | 74.3.0.2 | `FUTURE-PARITY-BACKLOG.10.4.0.2` | `pending` | Resolve the neutral Unicode-label versus published/Rust ASCII-label contract conflict as directed. |
 | 74.3.1 | `FUTURE-PARITY-BACKLOG.10.4.1` | `pending` | Add strict source mapping and immutable compiled-or-failed Rust foundation. |
 | 74.3.2 | `FUTURE-PARITY-BACKLOG.10.4.2` | `pending` | Project exact static graph/privacy/failure/runtime-static semantics. |
@@ -10905,12 +10929,13 @@ Read-only evidence recorded on 2026-07-10:
 
 - Rust implementation is blocked at `.10.4.0.2` on the director's label-contract choice: expand the published/Rust
   ASCII label contract to an exact Unicode word policy, or revise the already-admitted neutral/Perl `Töp` oracle.
-  `.10.4.0.1` remains executable first and owns the independent stale-toolbox current-state repair/guard.
+  `.10.4.0.1` is complete with the independent toolbox repair/guard; `.10.4.0.2` is not activated before direction.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0.1` | Toolbox exact 6/20/65, rollout 2+7, admission 1+5, runtime 106/eight routes, and Perl 12-role claims; checker required/stale/omission/wrong-value probes; semantic 149; repeated-action marker regression caught and restored; KM 660/4,879; mdBook/memory/four doctrines/diff; canonical semantic/primary 66x2 and Phase 0 1,031/1,031 in 611s; generated book/bytecode cleanup; 102 GiB available. | PASS. Diagnostic source of truth is mechanically current; all 20 digests and 65 contract mutations remain exact; no product/Rust/rollout/admission change. `.10.4.0.2` awaits director direction. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.0` | Knowledge/toolbox authority retrieval; exact five-source Rust probe; zero semantic API/sink scan; focused descriptor/runtime seams; semantic 6/20/65; full Rust core 193, runtime unit 138, integration 197, exact 105-fixture oracle/full generated manifest/all package contracts, primary 66x2; KM 660/4,877; mdBook, memory, task, four doctrines, diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 617s; disposable target/book and no-longer-live 6.5 GiB session cleanup; final 102 GiB available versus initial 27 GiB. | PASS. No Rust behavior/API/rollout/admission change; exact source/compiled/failure/calls/generated/runtime owners and gaps are durable, TOOLBOX drift has its first child, the Unicode-label conflict has a director-decision child, and `.10.4.0.1-.10.4.6` are dependency ordered. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.6` | One exact 12-role consumer; RED corrected to exact topology-only 4/18 then GREEN 18/18; all six semantic suites 149; broader semantic/generated/diagnostic/root/cursor 471 plus supplemental cursor/trace 127; checker 6/20/65 at rollout 2/9 and admission 1/6; KM 659/4,867; mdBook, memory, task, ADR, four doctrines, JSON/shell/whitespace; primary 66x2; complete local CI through Phase 0 1,031/1,031 in 633s; generated-output cleanup. | PASS. Perl is the first admitted native semantic backend through composition only; no production implementation changes, later backends/MCP remain pending, and parent `.10.3` closes. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.3.5` | Typed invocation-local observation owner; exact slot/final events; immutable runtime derivation; twentieth digest across eight direct/loaded/generated/traced/reconstructed roles; RED 12/55 to focused 106 and adjacent 468; semantic 6/20/57; KM 658/4,857; mdBook, memory, task, four doctrines, whitespace; canonical primary 66x2; standalone Phase 0 1,031/1,031 in 639s; complete local gate including registered Phase 0 in 650s; disk-pressure cleanup from 27 GiB to 117 GiB free while retaining the only live temp session. | PASS. Runtime evidence is caller-owned and query-pure; observer failures preserve exact identity; parser/result/input/cursor/trace/diagnostic/generated behavior is unchanged; rollout/admission remain 1/9 and 0/6, and `.10.3.6` waits for the clean commit. |

@@ -11,12 +11,14 @@ answers:
   - how are semantic query pagination budgets and source privacy tested
   - what task follows FUTURE-PARITY-BACKLOG.10.2
   - how are semantic introspection static rule facts cross-checked
-  - why are there 57 semantic introspection mutations
+  - why are there 65 semantic introspection mutations
+  - how is semantic introspection TOOLBOX current state guarded
+  - does the semantic toolbox guard change the contract mutation count
 date: 2026-07-21
 status: current corrected neutral contract; Perl reference admitted, later backends pending
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.4-.5 match all 20 exact responses, and .10.3.6 composes them through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 65 mutations. Neutral rollout is 2 complete / 7 pending; native admission is 1 complete / 5 pending."
-reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.4-.5 match all 20 exact responses, and .10.3.6 composes them through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 65 mutations. Neutral rollout is 2 complete / 7 pending; native admission is 1 complete / 5 pending. Leaf .10.4.0.1 additionally makes the checker require the exact TOOLBOX output plus current Perl runtime/admission claims exactly once, deny stale forms, and self-prove omission/wrong-value rejection without adding to the 65 contract mutations."
+reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|PERL RUNTIME OBSERVATION|PERL COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 # Semantic Introspection Neutral Contract
@@ -34,6 +36,11 @@ The checker also consumes `capability_conformance/rule_local_cursor_contract.jso
 for rule header family/cursor semantics. It derives entry-marker and repetition facts from exact headers and
 reconciles rule ownership with normalized edge records. This closes the gap where model rows and response hashes
 could agree with each other while disagreeing with already-admitted parser semantics.
+
+The filesystem leg also owns the corresponding `TOOLBOX.md` diagnostic entry. It requires the exact 6/20/65,
+rollout 2+7, admission 1+5 output and current Perl runtime/12-role admission claims exactly once, rejects the known
+stale forms, and runs one omitted-claim plus one wrong-value probe internally. Those are documentation-guard probes,
+not semantic-contract mutations, so the governed mutation inventory remains exactly 65.
 
 The same external contract owns generated-source-v2 identity, format, and the exact ten handler families. The
 calls snapshot's default entry header must therefore retain generated family `default`; the old `and_acode` value

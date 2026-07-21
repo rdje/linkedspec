@@ -10,11 +10,11 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.4.0` — Rust semantic authority/split audit is done in this commit.
-- latest_commit: `90e5e701` — `FUTURE-PARITY-BACKLOG.10.3.6 - admit Perl semantic introspection` (ahead: 272).
-- active_work_unit: `FUTURE-PARITY-BACKLOG.10.4` — `.10.4.0` awaits commit; `.10.4.0.1` is next clean activation.
-- next_action: complete `.10.4.0` commit workflow, then activate `.10.4.0.1` task-tree-first to repair/guard stale
-  semantic TOOLBOX current state; `.10.4.0.2` then needs the director's label-contract decision.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.4.0.1` — semantic toolbox no-drift guard is complete.
+- latest_commit: `current commit` — `.10.4.0.1 - guard semantic toolbox state` (parent `0d9e395c`; ahead after commit: 274).
+- active_work_unit: `FUTURE-PARITY-BACKLOG.10.4.0.2` — pending director label-contract direction; not activated.
+- next_action: ask the director to choose exact Unicode word-label expansion (recommended) or revise neutral/Perl
+  v1 privacy to ASCII; activate `.10.4.0.2` task-tree-first only after that choice.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 65 rejected mutations. Static/generated facts
@@ -35,14 +35,15 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   Direct/generated executors have parallel slot/result seams but only text trace, not typed semantic observation.
 - rust_contract_blocker: neutral/admitted Perl privacy requires `Töp`; published grammar and current Rust parser are
   ASCII-label-only. `.10.4.0.2` must apply the director's Unicode-expansion or neutral-revision choice before
-  `.10.4.1` construction. `.10.4.0.1` remains executable first and owns stale TOOLBOX 57/1+8 text plus checker guard.
+  `.10.4.1` construction. `.10.4.0.1` has made exact toolbox 6/20/65, rollout/admission, runtime, and Perl 12-role
+  claims checker-owned with omission/wrong-value proof.
 - current_perl_reference: admitted `semantic_index` composes strict source/descriptor/ActionIR/staged/generated/
   diagnostic/typed observation owners, matches all 20 answers, never reads a path, and query never executes.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.4.0` neutral 6/20/65; Rust core 193/runtime 138/integration 197, exact corpus 105/full
-  generated manifest, primary 66x2; KM 660/4,877; mdBook/four doctrines; canonical primary 66x2 and Phase 0
-  1,031/1,031 in 617 seconds; exit 0. No Rust behavior/promotion; cleanup ends at 102 GiB free (27 GiB initial).
+- current_signoff: `.10.4.0.1` semantic 6/20/65 plus 149 Perl assertions; KM 660/4,879; mdBook/four doctrines;
+  canonical primary 66x2 and Phase 0 1,031/1,031 in 611 seconds, exit 0. No behavior/digest/rollout/admission change;
+  cleanup remains 102 GiB free versus 27 GiB initial.
 - latest_bootstrap_read: 2026-07-21 — README, memory architecture/resume pointer, roadmap, codebase, mdBook, active
   task, Knowledge Map, Toolbox, ADRs `0012`-`0016`, `0022`/`0023`, `0037`, `0042`, `0044`, `0047`-`0050`,
   descriptor/compiled/ActionIR/diagnostic/trace/generated/API authorities, and public precedents read.
@@ -53,5 +54,5 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot contract `.1-.7` has its cursor prerequisite
   but still requires explicit activation; inspector `.13.1`; authoring `.14`/`.15`;
   parenthesis-free conditions; lexical codeblock capture only if justified.
-- blockers: `.10.4.0.2` needs the director's label-contract choice; `.10.4.0.1` can run first. in_flight_uncommitted:
-  completed `.10.4.0` docs/task/KM audit awaits commit; no product code or background gate remains.
+- blockers: `.10.4.0.2` needs the director's label-contract choice. in_flight_uncommitted: none after this commit;
+  no background verification or generated artifact remains.

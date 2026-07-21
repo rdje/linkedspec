@@ -16,6 +16,7 @@ from urllib.parse import quote_from_bytes
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "semantic_introspection_contract.json"
 MODEL_PATH = ROOT / "capability_conformance" / "semantic_introspection_model.json"
+TOOLBOX_PATH = ROOT / "TOOLBOX.md"
 CONTRACT_ID = "linkedspec-semantic-introspection-contract-v1"
 MODEL_ID = "linkedspec-semantic-model-v1"
 QUERY_ID = "linkedspec-semantic-query-v1"
@@ -152,6 +153,20 @@ PERL_ADMISSION = {
         "stale_host_leak_denial",
     ],
 }
+TOOLBOX_REQUIRED_CLAIMS = [
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 65 rejected mutations, rollout 2 complete / 7 pending, admission 1 complete / 5 pending",
+    "t/semantic_index_perl_runtime_observation.t",
+    "Its 106 assertions match the twentieth response digest across eight execution roles",
+    "t/semantic_introspection_perl_admission.t",
+    "Its 12 exact-once roles cover strict byte/text source normalization",
+]
+TOOLBOX_FORBIDDEN_CLAIMS = [
+    "57 rejected mutations",
+    "rollout 1 complete / 8 pending",
+    "runtime observation and backend admission remain later",
+    "runtime observation, rollout, and admission remain later",
+    "the runtime-events case remains `.10.3.5`",
+]
 
 
 class ContractError(ValueError):
@@ -166,6 +181,33 @@ def require(condition: bool, detail: str) -> None:
 def require_fields(value: Any, fields: list[str] | set[str], context: str) -> dict[str, Any]:
     require(isinstance(value, dict) and set(value) == set(fields), f"{context} fields drifted")
     return value
+
+
+def toolbox_claim_errors(text: str) -> list[str]:
+    errors = [
+        f"required claim count is {text.count(claim)}, expected 1: {claim}"
+        for claim in TOOLBOX_REQUIRED_CLAIMS
+        if text.count(claim) != 1
+    ]
+    errors.extend(
+        f"stale claim remains: {claim}"
+        for claim in TOOLBOX_FORBIDDEN_CLAIMS
+        if claim in text
+    )
+    return errors
+
+
+def validate_toolbox_claims(text: str) -> None:
+    errors = toolbox_claim_errors(text)
+    require(not errors, "semantic toolbox current-state drifted: " + "; ".join(errors))
+
+
+def validate_toolbox_guard_probes(text: str) -> None:
+    """Prove that both an omitted claim and a wrong current value are rejected."""
+    omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
+    require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
+    wrong = text.replace("65 rejected mutations", "64 rejected mutations", 1)
+    require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -955,6 +997,9 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         and "t/semantic_introspection_perl_admission.t" in book,
         "mdBook semantic introspection page is not synchronized",
     )
+    toolbox = TOOLBOX_PATH.read_text(encoding="utf-8")
+    validate_toolbox_claims(toolbox)
+    validate_toolbox_guard_probes(toolbox)
 
 
 def validate_bundle(contract: dict[str, Any], model: dict[str, Any], *, check_filesystem: bool) -> dict[str, str]:

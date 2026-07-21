@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0.1 — guard semantic toolbox current state
+
+`TOOLBOX.md` §4.9 now reports the executable semantic contract exactly: six fixture groups, 20 digest-locked
+queries, 65 rejected contract mutations, rollout 2 complete / 7 pending, and native admission 1 complete / 5
+pending. Its Perl guidance now includes the completed 106-assertion runtime-observation proof and exact 12-role
+composed admission instead of describing either stage as future work.
+
+The existing semantic checker now reads that toolbox entry during its filesystem gate. It requires the command
+output and high-value Perl runtime/admission claims exactly once, rejects the known stale forms, and self-tests one
+omitted claim plus one wrong numeric value. Those two documentation probes remain separate from the 65 governed
+semantic mutations, and all 20 response digests, runtime behavior, rollout rows, and admission rows are unchanged.
+Focused checking reports 6/20/65/2+7/1+5 and all six Perl semantic suites pass 149 assertions. The first canonical
+run correctly caught a separately governed repeated-action closeout marker lost during task-tree activation;
+restoring it makes that checker pass. The complete canonical rerun passes primary 66x2 and Phase 0 1,031/1,031 in
+611 seconds with exit 0. Knowledge Map is 660 facts / 4,879 keys; mdBook and all four doctrines pass. Generated
+book/bytecode output is removed, leaving 102 GiB available.
+
 ## 2026-07-21 — FUTURE-PARITY-BACKLOG.10.4.0 — map Rust semantic authorities before code
 
 The behavior-free Rust semantic audit maps the exact owners needed by the next native adapter. Parsed/function

@@ -268,8 +268,10 @@ One prerequisite is unresolved. The accepted v1 privacy oracle and admitted Perl
 `Töp`, while the published grammar and current Rust header parser accept ASCII `[A-Za-z0-9_]+`; Rust rejects the
 fixture before validation. Task `.10.4.0.2` requires a director decision between expanding the Rust/published label
 contract to an exact Unicode word policy or revising the already-admitted neutral oracle. Rust semantic construction
-does not start before that decision. The audit also assigns stale semantic `TOOLBOX.md` current-state text to
-`.10.4.0.1` with a mechanical no-drift guard.
+does not start before that decision. Toolbox repair `.10.4.0.1` has aligned the semantic diagnostic entry with the
+executable 6/20/65, rollout 2+7, admission 1+5, and complete Perl observation/admission state. The checker now
+requires those high-value claims exactly once, denies their stale forms, and runs omission plus wrong-value guard
+probes without changing the neutral response digests or 65 contract-mutation inventory.
 
 ## Exact v1 record model
 
@@ -481,7 +483,9 @@ unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
 ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
-fails if promoted early.
+fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output, Perl runtime test, and
+12-role composed-admission claims. Internal omission and wrong-value probes prove that documentation guard rather
+than inflating the separately governed 65 semantic-contract mutations.
 
 Perl's native evaluator has a separate exact gate:
 

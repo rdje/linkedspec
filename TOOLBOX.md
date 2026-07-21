@@ -354,14 +354,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
-- **WHAT:** validates `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` without admitting a
-  backend. It checks the exact schema, source bytes/spans/digests, normalized records/relations, staged payload/job/
-  result topology, deterministic query evaluation, digest-locked responses, rollout omissions, privacy, budgets,
-  and the handle-only MCP boundary.
+- **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, and the owned backend-admission
+  topology. It checks the exact schema, source bytes/spans/digests, normalized records/relations, staged payload/job/
+  result topology, deterministic query evaluation, digest-locked responses, rollout/admission omissions, privacy,
+  budgets, and the handle-only MCP boundary; backend-native semantics remain owned by each admitted consumer.
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 57 rejected mutations, rollout 1 complete / 8 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 65 rejected mutations, rollout 2 complete / 7 pending, admission 1 complete / 5 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -384,20 +384,31 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `.10.3.2.1` private static graph/diagnostic layer. It materializes internal source keys and deep-compares graph,
   Unicode privacy full/limited, failed compilation, and runtime-static records/relations with the neutral oracle;
   it also proves clone isolation and no coderef/compiled-regex/object/path leakage. Public query is covered by the
-  separate evaluator test below; runtime observation and backend admission remain later. See
+  separate evaluator test below; runtime observation and composed admission are covered by their focused tests. See
   [[perl-semantic-static-projection]].
 - **PERL CALL/STAGED PROJECTION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t` verifies
   `.10.3.3.1.1`. It deep-compares the complete corrected calls target (22 records / 25 relations), then locks typed
   preorder, user-function resolution, bounded shape inference, staged role/direction, the shared generated-family
   owner, clone/JSON safety, host-IR/generated-source denial, multibyte function coordinates, and interleaved
-  function-shell masking. Public query is covered separately; runtime observation, rollout, and admission remain
-  later. See [[perl-semantic-call-staged-projection]].
+  function-shell masking. Public query, runtime observation, rollout, and admission are covered separately. See
+  [[perl-semantic-call-staged-projection]].
 - **PERL CAPABILITIES/QUERY:** `PERL5LIB= prove -Iperl t/semantic_index_perl_query.t` verifies the public opaque-index
-  surface. It matches all 19 static canonical response digests (the runtime-events case remains `.10.3.5`), exact
+  surface. It matches all 19 non-runtime canonical response digests, exact
   capabilities/list/get/relations/explain behavior, request validation and portable errors, source ceilings/
   redactions/digests, after-id pages, filtered directional BFS, record/relation/depth budgets and logical costs,
   clone isolation, silence, no host/path leakage, and successful queries with compilation disabled. See
   [[perl-semantic-query-evaluator]].
+- **PERL RUNTIME OBSERVATION:** `PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t` verifies
+  `.10.3.5`. Its 106 assertions match the twentieth response digest across eight execution roles, preserve exact
+  result/input/cursor and generated-plan behavior, reject malformed or foreign observations, and prove semantic
+  capture does not perturb results, exception identity, trace, or diagnostics. See
+  [[perl-semantic-runtime-observation]].
+- **PERL COMPOSED ADMISSION:** `PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t` verifies
+  `.10.3.6`. Its 12 exact-once roles cover strict byte/text source normalization, compiled and failed snapshots,
+  direct/loaded/generated/traced runtime routes, native and neutral JSON, all 20 exact query digests, query
+  non-interference, privacy/page/budget/error/explain behavior, and stale host-leak denial. The checker locks the
+  consumer path, ordered roles, canonical driver and registration, Perl-only rollout/admission promotion, and the
+  exact current-state claims in this section.
 
 ---
 

@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0.1` — diagnostic documentation needs executable ownership): the
+  semantic contract, conformance guide, and mdBook were already current after Perl admission, but the toolbox
+  command entry was outside the checker's filesystem assertions. That made a high-value debugging source retain
+  the pre-admission 57 / rollout 1+8 state even while the executable contract reported 65 / 2+7 / admission 1+5.
+
+  The repair uses exact required claim strings rather than parsing prose into a second contract. The checker
+  requires one copy of the complete output line, the runtime test plus its 106/eight-route claim, and the composed
+  consumer plus its 12-role claim; it also explicitly forbids each known stale sentence. A pure claim-error helper
+  lets the normal gate validate the real file and then prove that deleting the 12-role claim or changing 65 to 64
+  is rejected. These are two checker self-probes, not additions to the neutral contract's ordered 65-mutation
+  inventory. Focused proof is 6 groups / 20 exact responses / 65 contract mutations / rollout 2+7 / admission 1+5
+  plus all six Perl semantic suites at 149 assertions. No product code, response digest, rollout, or admission row
+  changes.
+
+  Canonical signoff also demonstrated why current-state markers must survive frontier rewrites: its first pass
+  rejected `docs/TASK_TREE.md` because activation had removed the independent repeated-action closeout marker.
+  Restoring the exact governed sentence repaired that cross-contract regression. The full rerun then passes
+  primary 66x2 and Phase 0 1,031/1,031 in 611 seconds, exit 0; KM is 660/4,879 and mdBook/four doctrines pass.
+
 - 2026-07-21 (`FUTURE-PARITY-BACKLOG.10.4.0` — Rust semantic meaning is compositional and one prerequisite is a
   language-contract choice): the exact probe confirms that `CompiledSpec` is the stable typed graph/execution owner,
   not a source model. Its ordered rules/functions/slots/edges/families/cursor/root facts and ActionIR round-trip

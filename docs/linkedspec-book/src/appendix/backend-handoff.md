@@ -226,9 +226,10 @@ consumer locks all 20 exact responses and direct/loaded/generated/traced equival
 rollout 2/9. Rust audit `.10.4.0` confirms `CompiledSpec`/ActionIR/staged sidecars/generated-v2/diagnostic/loader and
 parallel direct/generated runtime seams are reusable, while exact source mapping, normalized failed projection,
 immutable query, and typed observations are new adapter work. It also stops on a contract prerequisite: neutral
-privacy requires `Töp`, but the published grammar and Rust header parser are ASCII-label-only. `.10.4.0.2` requires
-the director's Unicode-versus-ASCII contract choice before Rust construction; `.10.4.0.1` repairs stale toolbox
-governance text first. Rust is not admitted. The other backends and MCP remain `.10.5-.10.10` work.
+privacy requires `Töp`, but the published grammar and Rust header parser are ASCII-label-only. `.10.4.0.1` repairs
+and mechanically guards exact semantic toolbox state (6/20/65, rollout 2+7, admission 1+5, Perl 12-role
+ownership). `.10.4.0.2` requires the director's Unicode-versus-ASCII contract choice before Rust construction.
+Rust is not admitted. The other backends and MCP remain `.10.5-.10.10` work.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

@@ -8,10 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Rust audit `FUTURE-PARITY-BACKLOG.10.4.0` is complete from clean base `90e5e701`; commit workflow is in progress.
-  The next clean-boundary frontier is `.10.4.0.1`, which repairs stale semantic TOOLBOX current-state text and adds
-  a checker guard. `.10.4.0.2` then requires the director's Unicode-versus-ASCII label-contract decision before
-  Rust semantic construction. Rollout/admission remain 2/9 and 1/6.
+- `FUTURE-PARITY-BACKLOG.10.4.0.1` is complete in the current commit from clean Rust audit `0d9e395c`.
+  Exact semantic TOOLBOX 6/20/65 / rollout 2+7 / admission 1+5 / runtime / Perl 12-role state is checker-owned with
+  omission/wrong-value proof. `.10.4.0.2` is the next frontier but requires the director's Unicode-versus-ASCII
+  label-contract decision before activation. Rollout/admission remain 2/9 and 1/6.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -23,6 +23,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0.1 — guard semantic toolbox current state**
+  (DONE in this commit from clean base `0d9e395c`).
+
+  **Result:** `TOOLBOX.md` now matches executable 6/20/65, rollout 2+7, admission 1+5, completed runtime proof,
+  and exact 12-role Perl admission. The checker requires those claims exactly once, forbids stale forms, and
+  self-proves omission plus wrong-value rejection without changing the 65 semantic mutations or 20 digests.
+
+  **Proof:** Six semantic suites 149; KM 660/4,879; mdBook/four doctrines; repeated-action closeout marker
+  regression caught/restored; canonical primary 66x2 and Phase 0 1,031/1,031 in 611 seconds, exit 0. No product,
+  Rust, rollout, or admission change; generated output removed and free space remains 102 GiB.
+
+  **Next:** Ask the director to select Unicode-label expansion or neutral-fixture ASCII revision for `.10.4.0.2`.
+
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.4.0 — map Rust semantic authorities before code**
   (DONE in this commit from base `90e5e701`).
 
@@ -36,7 +49,7 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   1,031/1,031 in 617 seconds, exit 0. Disposable build/book artifacts and the now-inactive retained Pgen session
   are removed; final free space is 102 GiB versus 27 GiB at cleanup start.
 
-  **Next:** Activate `.10.4.0.1` only after this leaf's clean commit.
+  **Next:** Completed by `.10.4.0.1` in the following clean-boundary slice.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.3.6 — admit Perl semantic introspection**
   (DONE at clean commit `90e5e701` from base `aad4045f`).
