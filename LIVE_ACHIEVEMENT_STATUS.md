@@ -8,19 +8,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Opaque staged Dart compiled-or-failed authority `FUTURE-PARITY-BACKLOG.10.5.1.2` is signoff-complete from clean
-  `ae870152`. After its clean commit, composed foundation closeout `.10.5.1.3` is the next task-tree-first leaf; no
-  later implementation leaf is active while this outcome commit is pending.
+- Aggregate-selector discovery repair `FUTURE-PARITY-BACKLOG.10.5.1.3.0` is signoff-complete from clean
+  `1e1fd368`. After its clean commit, resume already-active composed foundation closeout `.10.5.1.3`; no static
+  projection work is active while this repair commit is pending.
 
-`SemanticIndex` now invokes the staged parser, validator, compiler, entry selector, and generated-v2 plan builder
-exactly once and exposes only immutable outcome, authority, diagnostic, entry, and plan values. Language failures
-remain inspectable failed snapshots; AST/compiler objects stay private. No target or emitted source executes, and
-paths, runtime sinks, trace, semantic records, and query remain outside this foundation.
+The executable aggregate-selector scanner now includes cached and nonignored untracked files, then self-proves
+that discovery with a temporary untracked source whose cleanup is guaranteed. The Dart semantic compile-failure
+test obtains retired syntax from the canonical neutral invalid fixture rather than embedding another positive.
 
-Focused source/outcome proof passes 12/12 and 13 adjacent suites pass 71/71. Complete Dart passes format 73/0
-changed, fatal analysis, package 308, primary 66x2, and corpus 105/105. Canonical CI passes Rust semantic admission
-1/1 in 77.24 seconds, primary 66x2, and Phase 0 1,031/1,031 in 632 seconds. Semantic governance remains 6/20/73
-at rollout 3/9 and admission 2/6; Knowledge Map is 673/5,018.
+Focused semantic compilation passes 6/6; source scanning is zero-positive/19-classified with the untracked
+self-test, aggregate-selector retirement is 5/6/8/0, and public admission is 59/27/0. Canonical CI passes Rust
+semantic admission 1/1 in 79.59 seconds, primary 66x2, and Phase 0 1,031/1,031 in 642 seconds. Semantic governance
+remains 6/20/73 at rollout 3/9 and admission 2/6; Knowledge Map is 673/5,020.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -52,6 +51,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.3.0 — scan untracked selector sources**
+  (DONE in this commit from clean base `1e1fd368`).
+
+  **Result:** The executable retired-selector scan now covers tracked plus nonignored untracked files and
+  self-proves discovery/rejection with guaranteed cleanup. The semantic compiler-failure test loads the canonical
+  invalid selector fixture instead of duplicating retired executable syntax.
+
+  **Proof:** Dart focused 6/6; executable source 0 positives / 19 classified plus self-test; retirement 5 backends /
+  6 invalid / 8 retained / 0 compatibility; public 59/27/0; Knowledge Map 673/5,020; canonical Rust admission
+  79.59s, primary 66x2, Phase 0 1,031/1,031 in 642s; doctrines and diff hygiene pass.
+
+  **Next:** after this clean commit, resume `.10.5.1.3` and close the composed foundation parent.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.2 — add Dart compiled outcome**
   (DONE in this commit from clean base `ae870152`).
 

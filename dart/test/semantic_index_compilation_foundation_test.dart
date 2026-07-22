@@ -1,5 +1,6 @@
 // FUTURE-PARITY-BACKLOG.10.5.1.2 — opaque Dart compilation foundation.
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
@@ -159,8 +160,9 @@ void main() {
       "duplicate rule label 'Top'",
     );
 
+    final retiredSelector = _uniformBindingInvalidSource('array_read');
     final compiled = SemanticIndex.fromSource(
-      'Top::\n /x/ -> Done { return(array(items)) }\nDone::\n /x/\n',
+      'Top::\n /x/ -> Done { return($retiredSelector) }\nDone::\n /x/\n',
       options: _options('compile-failure.spec', SemanticSourceDetail.none),
     );
     expect(compiled.compilationAuthority.validated, isTrue);
@@ -270,3 +272,16 @@ SemanticIndexOptions _options(
 List<int> _fixture(String name) => File(
   '../capability_conformance/semantic_introspection/$name',
 ).readAsBytesSync();
+
+String _uniformBindingInvalidSource(String id) {
+  final contract =
+      jsonDecode(
+            File(
+              '../capability_conformance/uniform_binding_contract.json',
+            ).readAsStringSync(),
+          )
+          as Map<String, Object?>;
+  final cases = (contract['invalid_selector_cases']! as List<Object?>)
+      .cast<Map<String, Object?>>();
+  return cases.singleWhere((item) => item['id'] == id)['source']! as String;
+}

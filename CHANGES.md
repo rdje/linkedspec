@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.3.0 — scan untracked selector sources
+
+The composed Dart foundation gate exposed a pre-staging blind spot in the executable aggregate-selector scan. A
+new semantic test had embedded retired `array(identifier)` source, but the earlier canonical run could not see the
+untracked test because the scanner enumerated only `git ls-files`. Once the test was committed, the same gate
+correctly rejected it.
+
+`tools/check_executable_aggregate_selector_sources.py` now scans cached plus nonignored untracked files and
+self-proves discovery/rejection with a temporary untracked Dart source that is removed in a `finally` block. The
+semantic compile-failure test now loads the exact `array_read` invalid source from the neutral uniform-binding JSON
+contract instead of duplicating retired executable syntax.
+
+The focused semantic compilation suite passes 6/6. The executable scan reports zero positives, 19 classified
+implementation/rejection occurrences, and a passing tracked+untracked self-test; composed retirement remains five
+backends / six invalid selectors / eight retained classes / zero runtime compatibility, and public admission stays
+59 files / 27 classified references / zero current examples. Canonical CI passes Rust semantic admission 1/1 in
+79.59 seconds, primary 66x2, and Phase 0 1,031/1,031 in 642 seconds. Production behavior and semantic governance
+remain unchanged.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.2 — add Dart compiled outcome
 
 Dart `SemanticIndex` construction now composes the existing staged parser, validator, compiler, entry selector,

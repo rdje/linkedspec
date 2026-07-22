@@ -8437,12 +8437,66 @@ before implementation.
       gates, clean generated artifacts, and commit before activating composed closeout child `.10.5.1.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.3`
-    Status: `pending`
+    Status: `in_progress` (2026-07-22; activated from clean `1e1fd368`)
     Goal: Compose exact Dart semantic foundation proof and close `.10.5.1`.
     Depends on: `.10.5.1.2`
     Acceptance: Prove graph/privacy/failure, decoded/byte convergence, malformed UTF-8/options, Unicode and duplicate
       occurrence coordinates, source ceilings, entry selection, clone/caller mutation isolation, host-state denial,
       complete Dart/canonical no-regression, public/durable sync, cleanup, and clean parent close before `.10.5.2`.
+    Children: `.10.5.1.3.0`
+
+    #### Acceptance Checklist
+
+    - [ ] **COMPOSE EXISTING PROOF** — Drive the source-map and compilation-foundation suites together across
+      graph/privacy/failure, decoded/byte convergence, Unicode coordinates, duplicate lookup, source ceilings,
+      exact entry selection, constructor failures, and language-failure outcomes without adding new authority.
+    - [ ] **CLONE / CALLER ISOLATION** — Confirm copied input plus fresh immutable/detached source, snapshot,
+      authority, diagnostic, entry, and plan values cannot be mutated into retained state.
+    - [ ] **HOST-STATE DENIAL** — Mechanically deny implicit path IO, environment/time/random capture, target or
+      generated execution, trace/diagnostic/observation sinks, AST/IR/compiler exposure, records, and query.
+    - [ ] **COMPLETE DART / NEUTRAL** — Pass format/fatal analysis, all Dart package tests, primary 66x2, corpus
+      105/105, Unicode 806/9/8/2, semantic 6/20/73, and generated-source ten-family/80-0-0 proof.
+    - [ ] **CANONICAL / PUBLIC LOCKSTEP** — Pass canonical local CI, all doctrines, Knowledge Map, mdBook, and diff
+      hygiene while keeping semantic rollout 3/9 and native admission 2/6.
+    - [ ] **PARENT CLOSE / CLEAN HANDOFF** — Close `.10.5.1`, synchronize roadmap/live memory/change notes, clean
+      generated artifacts, and commit before activating static projection `.10.5.2`.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.5.1.3.0`
+      Status: `done` (2026-07-22)
+      Goal: Close the aggregate-selector scan's pre-staging blind spot and migrate the semantic compile-failure
+        fixture to canonical invalid-source authority.
+      Depends on: `.10.5.1.2`
+      Finding: The `.10.5.1.2` compile-failure test embedded retired `array(identifier)` source. Its pre-staging
+        canonical run passed because `tools/check_executable_aggregate_selector_sources.py` enumerated only
+        `git ls-files`, which excludes a new untracked test. The first post-commit canonical closeout correctly
+        rejected the now-tracked line. This is a scanner-discovery defect as well as a fixture defect.
+      Acceptance: Enumerate tracked plus nonignored untracked files, self-prove that an untracked executable-source
+        positive is discovered, source the compile-failure case from the canonical neutral invalid fixture instead
+        of duplicating retired syntax, and pass the focused Dart test plus aggregate-selector/public gates before
+        resuming parent `.10.5.1.3`.
+      Verification: `tools/check_executable_aggregate_selector_sources.py` now enumerates
+        `git ls-files --cached --others --exclude-standard`, creates one unique nonignored untracked Dart source,
+        proves that the candidate scan discovers and rejects it, and removes it in `finally`. The semantic
+        compile-failure test loads `array_read` from `capability_conformance/uniform_binding_contract.json` rather
+        than embedding retired executable source. Focused semantic compilation passes 6/6. The source scan reports
+        zero positives / 19 classified occurrences plus the passing discovery self-test; composed retirement is
+        five backends / six invalid selectors / eight retained classes / zero runtime compatibility; public
+        admission is 59 files / 27 classified / zero current examples. Knowledge Map is 673/5,020. Canonical CI
+        passes Rust semantic admission 1/1 in 79.59 seconds, primary 66x2, and Phase 0 1,031/1,031 in 642 seconds.
+        Production behavior and semantic rollout/admission remain unchanged.
+
+      #### Acceptance Checklist
+
+      - [x] **DISCOVERY FIX** — Scan `git ls-files --cached --others --exclude-standard` so a new untracked source
+        cannot bypass the executable aggregate-selector gate before staging.
+      - [x] **SELF-PROOF** — Exercise one temporary nonignored untracked source and require the scanner to discover
+        and reject it while guaranteeing cleanup.
+      - [x] **CANONICAL FIXTURE** — Load the compiler-failure selector from
+        `capability_conformance/uniform_binding_contract.json`; do not embed a second executable retired spelling.
+      - [x] **FOCUSED REGRESSION** — Pass the semantic compilation suite, executable-source scanner, aggregate-
+        selector retirement checker, and public surface checker with exact zero-positive evidence.
+      - [x] **DURABLE HANDOFF** — Record the discovery rule in the Knowledge Map and task verification, then return
+        to `.10.5.1.3` without promoting semantic rollout/admission or changing production behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.2`
   Status: `pending`
@@ -10793,8 +10847,9 @@ isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion si
 Unicode-label prerequisite parent from clean `ecdc1ac7`. Semantic foundation parent `.10.5.1` is split into
 `.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete, and strict copied input/private Unicode
 source-map leaf `.10.5.1.1` is committed at `ae870152`. Staged compiled-or-failed authority and generated-plan
-input `.10.5.1.2` is signoff-complete from that clean boundary; after its clean commit, composed foundation
-closeout `.10.5.1.3` is the next task-tree-first leaf.
+input `.10.5.1.2` is committed at `1e1fd368`. Composed closeout `.10.5.1.3` found an untracked-source scan blind
+spot; repair child `.10.5.1.3.0` is signoff-complete from that clean boundary, and the parent resumes only after
+the repair's clean commit.
 
 ### Historical frontier sequence
 
@@ -11210,7 +11265,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.1.0 | `FUTURE-PARITY-BACKLOG.10.5.1.0` | `done` | Frozen exact Dart foundation boundary and dependency-order input/map, outcome, and composed closeout children. |
 | 74.4.1.1 | `FUTURE-PARITY-BACKLOG.10.5.1.1` | `done` | Strict copied input, private Unicode source map, source ceilings, dependency-free digest, and complete signoff pass. |
 | 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `done` | Opaque staged compiled-or-failed authority, exact native diagnostics, entry identity, and shared generated-v2 plan pass canonical signoff. |
-| 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `pending` | Compose omission-safe foundation proof and close the parent. |
+| 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `in_progress` | Compose omission-safe foundation proof and close the parent after its scanner-repair child. |
+| 74.4.1.3.0 | `FUTURE-PARITY-BACKLOG.10.5.1.3.0` | `done` | Discover nonignored untracked selector sources, self-prove rejection, and consume the canonical invalid fixture. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |

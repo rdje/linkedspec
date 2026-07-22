@@ -8,6 +8,8 @@ answers:
   - "what locks aggregate selector diagnostic fields and compile boundaries"
   - "is aggregate selector public documentation admitted"
   - "are backend READMEs checked for removed aggregate selector examples"
+  - "does the aggregate selector source scanner inspect untracked files"
+  - "why did the pre-staging aggregate selector scan miss a new test"
 date: 2026-07-12
 status: current
 tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
@@ -16,6 +18,7 @@ evidence_update_2026_07_12_lua_array_closeout: "The public inventory remains 56 
 evidence_update_2026_07_15_structured_format_page: "The discovered public inventory is now 57 files after FUTURE-PARITY-BACKLOG.18.0 added one mdBook architecture page. The classified/current counts remain 27/0; LUA-BACKEND-PARITY.4.3.7.4 updates the stale exact expected count without weakening discovery or admission."
 evidence_update_2026_07_15_native_loading_page: "The discovered public inventory is now 58 files after LUA-BACKEND-PARITY.5.2.1 added the native spec loading API page. Classified/current counts remain 27/0."
 evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.10.2 adds the semantic-introspection mdBook page. The public no-drift checker reviews it and advances the exact discovered inventory to 59 files while classified/current selector counts stay 27/0."
+evidence_update_2026_07_22_untracked_discovery: "FUTURE-PARITY-BACKLOG.10.5.1.3.0 found that a new untracked Dart semantic test could embed a retired selector without appearing in the pre-staging git-ls-files scan. tools/check_executable_aggregate_selector_sources.py now enumerates cached plus nonignored untracked files and self-proves discovery/rejection with a temporary untracked source whose cleanup is guaranteed. The semantic compile-failure test loads the canonical neutral invalid case instead of duplicating retired executable source."
 reverify: "python3 tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -35,6 +38,12 @@ runtime-deletion admission cannot drift apart.
 The checker intentionally permits exact selector spellings only in neutral invalid fixtures, rejection logic,
 diagnostics, and classified historical/documentation evidence. Generated Perl `$name`, `@name`, and `%name` are host
 implementation details and are not spec-facing selector forms.
+
+Executable-source discovery covers both the index and nonignored untracked files. This matters because the commit
+workflow validates before staging: a scanner based on plain `git ls-files` cannot see a newly created test until
+after it is added to the index. The scanner now runs a temporary untracked-source discovery/rejection self-test on
+every invocation and removes the probe in a `finally` block. Tests that need retired syntax obtain it from the
+canonical neutral JSON invalid fixtures rather than embedding a second positive spelling.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
 bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 59-file inventory prevents a backend

@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.3.0` — pre-staging gates must discover untracked sources):
+  The commit workflow validates before staging, while plain `git ls-files` enumerates only index entries. A new
+  untracked source file can therefore evade a source scanner during its first canonical run and become visible
+  only after commit. That exact sequence occurred when the new semantic compile-failure test duplicated a retired
+  aggregate selector: `.10.5.1.2` passed pre-staging CI, then `.10.5.1.3` failed after the file became tracked.
+
+  The executable selector scanner now uses `git ls-files --cached --others --exclude-standard`. Each invocation
+  creates a unique nonignored untracked Dart probe, requires discovery and selector rejection through the same
+  scanner, and removes the probe in `finally`. Ignored build/cache products remain outside the candidate set.
+  Tests requiring removed syntax should load the neutral invalid fixture rather than create another executable
+  spelling; the semantic compiler-fallback test now reads `array_read` from the uniform-binding contract.
+
+  Focused proof is semantic compilation 6/6, executable source 0 positives / 19 classified with self-test,
+  retirement five backends / six invalid / eight retained / zero compatibility, and public 59/27/0. Canonical
+  passes Rust semantic admission 79.59s, primary 66x2, and Phase 0 1,031/1,031 in 642s. The Knowledge Map is
+  673/5,020; no production behavior or semantic rollout/admission changes.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.2` — one authority pass, two complementary debug surfaces):
   `SemanticIndex` now composes the staged parser, validator, compiler, entry selector, and generated-v2 plan
   builder without duplicating ownership. Validation runs explicitly once, then compilation receives
