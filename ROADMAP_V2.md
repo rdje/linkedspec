@@ -396,7 +396,8 @@ and final admission `.8.4` have since closed; Lua is the fifth exact backend and
 Dart semantic static projection is exact across all five private construction targets. `.10.5.2.1` owns the
 compiled graph/source/evidence and `.10.5.2.2` owns both privacy ceilings, projection-only failure normalization,
 runtime-static absence semantics, and clone/host isolation with no public query or runtime surface. `.10.5.2.3`
-next composes signoff and closes the parent.
+is composing signoff and closing the parent after repair child `.10.5.2.3.0` serialized concurrent untracked-
+selector probes outside Dart formatter traversal without weakening discovery.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

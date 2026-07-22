@@ -8,20 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Dart privacy/failure/runtime-static projection `FUTURE-PARITY-BACKLOG.10.5.2.2` is complete from clean graph
-  commit `75ae3c5a`. After its clean commit, composed static closeout `.10.5.2.3` is the next task-tree-first leaf;
-  no later calls/query/runtime work is active while this projection commit is pending.
+- Concurrent selector-probe repair `FUTURE-PARITY-BACKLOG.10.5.2.3.0` is complete from clean static commit
+  `aa24f62f`. After its clean commit, parent `.10.5.2.3` resumes composed static closeout; no later calls/query/
+  runtime work is active while this repair commit is pending.
 
-All five private static construction targets now deep-equal the neutral model. Privacy applies `text`/`identity`
-ceilings before projection; failed compilation preserves the native foundation diagnostic and normalizes only the
-projection; runtime-static contains no execution/event state. The detached oracle is package-internal and fresh,
-and topology denies host objects, descriptor/AST/IR/regex leakage, paths, generation/execution, trace/sinks, and
-runtime observation.
+The selector scanner now locks probe creation through the final repository scan and places its positive untracked
+probe at repository root, outside Dart package formatting. Public admission enforces three staggered concurrent
+scans, exact success, and zero leftover root/legacy probes without exempting a probe namespace.
 
-Focused exact/layering/isolation proof passes 6/6. Complete Dart passes format 75/0, fatal analysis, package 314,
-primary 66x2, and corpus 105/105. Unicode is 806/9/8/2, generated source is v1/10/80-0-0, and semantic governance
-remains 6/20/73 at rollout 3/9 and admission 2/6. Canonical CI passes Rust semantic admission 1/1 in 79.42 seconds,
-primary 66x2, and Phase 0 1,031/1,031 in 670 seconds; Knowledge Map is 673/5,031.
+The exact former scanner/retirement/public/formatter topology passes. Complete Dart is format 75/0, fatal
+analysis, package 314, primary 66x2, corpus 105/105; selector proof is concurrency 3/3, executable 0/19,
+retirement 5/6/8/0, and public 59/27/0. Canonical passes Rust admission 77.49s, primary 66x2, and Phase 0
+1,031/1,031 in 620s. Knowledge Map is 674/5,036; semantic governance remains 6/20/73 at rollout 3/9 and admission
+2/6.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -53,6 +52,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.3.0 — serialize untracked selector probes**
+  (DONE in this commit from clean base `aa24f62f`).
+
+  **Result:** One advisory lock spans the positive untracked probe and final repository scan; the probe remains git-
+  discoverable at repository root but cannot race Dart package formatting. Public admission enforces concurrency.
+
+  **Proof:** Three staggered scans and the former four-way topology pass with zero leftovers; Dart 75/0, analysis,
+  package 314, primary 66x2, corpus 105/105; selector 0/19, retirement 5/6/8/0, public 59/27/0; canonical Rust
+  admission 77.49s, primary 66x2, Phase 0 1,031/1,031 in 620s; Knowledge Map 674/5,036.
+
+  **Next:** after this clean commit, resume parent `.10.5.2.3` closeout.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.2 — complete Dart static projection variants**
   (DONE in this commit from clean base `75ae3c5a`).
 

@@ -8605,12 +8605,36 @@ before implementation.
       admission changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3`
-    Status: `pending`
+    Status: `in_progress` (2026-07-22; activated from clean `aa24f62f`)
     Goal: Compose static-projection signoff and close the Dart static parent.
     Depends on: `.10.5.2.2`
     Acceptance: Re-run the exact five-target/isolation proof plus complete Dart package, primary/corpus/generated,
       semantic/Unicode/public/canonical gates; synchronize roadmap/live docs/mdBook/Knowledge Map, clean generated
       artifacts, and close `.10.5.2` without promoting rollout/admission or exposing query/runtime behavior.
+    Children: `.10.5.2.3.0`
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3.0`
+      Status: `done` (2026-07-22)
+      Goal: Make the untracked aggregate-selector discovery self-test safe under concurrent repository gates.
+      Depends on: `.10.5.2.2`
+      Acceptance: Reproduce and root-cause the scanner/retirement/public-wrapper plus Dart-formatter race; hold a
+        repository-local cross-process lock across probe creation, discovery, removal, and the final candidate
+        scan; keep the positive probe outside the Dart package so formatting cannot enumerate a disappearing file;
+        add an enforced concurrent-invocation proof; guarantee cleanup; pass the exact parallel reproduction,
+        selector/public governance, complete Dart, canonical CI, and durable Knowledge Map/book/live-doc sync before
+        returning to `.10.5.2.3`. Do not weaken tracked/untracked discovery or selector rejection.
+      Verification: Exact parallel closeout reproduced the race: direct, retirement, and public scanner processes
+        created unique positive probes under `dart/test` while Dart formatting enumerated that directory; one scan
+        rejected another's probe and the formatter opened a path after its owner removed it. The scanner now holds
+        one `flock` transaction across probe creation/discovery/rejection/removal and the final candidate scan. Its
+        probe moved to the repository root, still visible to cached+nonignored-untracked inventory but outside Dart
+        package traversal. Public admission enforces three staggered concurrent scanner processes and zero leftover
+        root/legacy probes; no filename is exempted. The exact former four-way topology passes. Complete Dart passes
+        format 75/0, fatal analysis, package 314, primary 66x2, and corpus 105/105. Semantic remains 6/20/73 at 3/9
+        and 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; selector/public proof is concurrency 3/3,
+        executable 0/19, retirement 5/6/8/0, and public 59/27/0. Canonical CI passes Rust semantic admission 1/1 in
+        77.49 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds. Knowledge Map is 674/5,036. No
+        semantic behavior or rollout changes.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.3`
   Status: `pending`
@@ -11376,7 +11400,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.2.0 | `FUTURE-PARITY-BACKLOG.10.5.2.0` | `done` | Freeze the exact Dart static authority map and dependency-ordered split without behavior. |
 | 74.4.2.1 | `FUTURE-PARITY-BACKLOG.10.5.2.1` | `done` | Project detached compiled graph records, relations, sources, shapes, and entry evidence. |
 | 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `done` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
-| 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `pending` | Compose all Dart static signoff, synchronize durable state, and close the parent. |
+| 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `active` | Compose all Dart static signoff, synchronize durable state, and close the parent. |
+| 74.4.2.3.0 | `FUTURE-PARITY-BACKLOG.10.5.2.3.0` | `done` | Serialize untracked-selector self-tests and isolate their probe from Dart formatting. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |

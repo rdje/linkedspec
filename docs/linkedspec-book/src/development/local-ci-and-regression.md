@@ -597,6 +597,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
   `perl/LinkedSpec.pm`, and `t/phase0_regression.t`,
 - verifies key tracked input directories are present and non-empty,
 - rejects untracked files inside CI input areas,
+- self-proves aggregate-selector scanning under three concurrent processes while keeping the positive untracked
+  discovery probe outside backend package formatter traversal,
 - audits selected core paths for machine-specific absolute paths,
 - runs Perl syntax checks for the library, primary CLI, neutral runner, and focused tests,
 - validates the machine-readable capability census, backend evidence paths, and task ownership,
@@ -644,6 +646,12 @@ The former root `plugin/` corpus is intentionally not a CI input area. Its survi
 `noncore/plugin/`, outside the core local gate.
 
 That rule is deliberate. A local untracked file in `specs/`, `perl/`, or a corpus directory can make tests pass locally while CI fails or, worse, can hide a missing fixture. The gate forces those inputs to be tracked and reviewable.
+
+The aggregate-selector source scanner also creates one positive untracked `.dart` probe to prove that its git
+inventory cannot miss a new file. That probe is a serialized transaction: an advisory lock covers creation,
+discovery, rejection, cleanup, and the final repository scan. It lives at repository root, so the scanner sees it
+but `dart format .` does not enumerate a disappearing package test. The public admission check runs three
+staggered scanner processes and requires all to pass with no leftover root or legacy `dart/test` probes.
 
 ## Why the regression discipline is important
 

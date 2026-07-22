@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.3.0` — a discovery probe owns one serialized full scan):
+  Unique temporary filenames do not provide process isolation. The aggregate-selector scanner's self-test created
+  a positive untracked Dart file, proved discovery/rejection, removed it, and only then scanned all candidates.
+  Concurrent scanner processes could therefore reject one another's probes, while concurrent Dart formatting could
+  enumerate a probe under `dart/test` before deletion and fail when opening it.
+
+  The lock boundary must span the complete transaction, including the final candidate scan. Locking only probe
+  creation/removal would still allow process A's final scan to observe process B's probe. The scanner now uses an
+  advisory `flock` in ignored `dart/.dart_tool` state, retains `finally` cleanup, and creates the positive `.dart`
+  probe at repository root. Git still inventories that nonignored untracked source, but backend package formatters
+  cannot traverse it.
+
+  Public admission owns the regression: three child scanners use staggered probe holds, all must pass, and no root
+  or legacy `dart/test` probe may remain. The exact scanner/retirement/public/formatter topology is green; Dart is
+  format 75/0, fatal analysis, package 314, primary 66x2, corpus 105/105; selector proof is 3/3, 0/19, 5/6/8/0,
+  and 59/27/0; canonical passes Rust admission 77.49s, primary 66x2, and Phase 0 1,031/1,031 in 620s; Knowledge Map
+  is 674/5,036.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.2` — normalize at the projection boundary, preserve native evidence):
   A failed semantic snapshot still contains useful static meaning. When parsing succeeded but compilation failed,
   Dart projects authored rule intent and source plus the diagnostic, decision, and explanation rather than

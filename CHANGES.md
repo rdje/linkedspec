@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.3.0 — serialize untracked selector probes
+
+Parallel closeout exposed a race in the aggregate-selector scanner's untracked-file self-test. Direct, retirement,
+and public scanner invocations each created a unique positive probe under `dart/test`; uniqueness avoided path
+collisions but did not stop one scan from rejecting another process's probe. Concurrent `dart format` could also
+enumerate a probe immediately before its owner removed it.
+
+The scanner now holds a repository-local advisory lock across the entire transaction: probe creation, git
+inventory proof, positive rejection, cleanup, and final repository scan. The probe is created at repository root,
+where nonignored-untracked discovery still sees it but Dart package formatting does not. Public admission now
+enforces three staggered concurrent scans, exact success, and zero leftover root or legacy test probes. No path or
+probe pattern is exempted from selector rejection.
+
+The former four-way failing topology passes. Complete Dart passes format 75/0, fatal analysis, package 314,
+primary 66x2, and corpus 105/105. Selector proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, and
+public 59/27/0. Canonical CI passes Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phase 0
+1,031/1,031 in 620 seconds. Knowledge Map is 674/5,036. Semantic behavior, rollout, and admission are unchanged.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.2 — complete Dart static projection variants
 
 Dart's private static projector now covers all five neutral construction targets. The two Unicode privacy

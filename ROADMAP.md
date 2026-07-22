@@ -58,7 +58,8 @@ structural marker-home repair rather than another ad hoc restoration.
 Dart static projection is now exact across all five private construction targets: `.10.5.2.1` retains the compiled
 graph/source/evidence, and `.10.5.2.2` adds both privacy ceilings, projection-only failure normalization,
 runtime-static absence semantics, and clone/host isolation without exposing query or runtime behavior. Composed
-signoff and parent closure remain next in `.10.5.2.3`.
+signoff and parent closure are active in `.10.5.2.3`; repair child `.10.5.2.3.0` first serialized concurrent
+untracked-selector probes and moved them outside Dart formatter traversal without weakening discovery.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

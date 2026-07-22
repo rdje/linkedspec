@@ -191,6 +191,14 @@ def main() -> int:
     check_stale_status(paths)
     require_public_anchors()
     check_capability_admission()
+    concurrency = run_check(
+        [
+            sys.executable,
+            "tools/check_executable_aggregate_selector_sources.py",
+            "--concurrency-self-test",
+        ],
+        "aggregate-selector scanner concurrency",
+    )
     aggregate = run_check(
         [sys.executable, "tools/check_aggregate_selector_retirement.py"],
         "aggregate-selector retirement",
@@ -199,6 +207,8 @@ def main() -> int:
         ["perl", "tools/check_capability_conformance.pl"],
         "capability conformance",
     )
+    if concurrency:
+        print(concurrency)
     if aggregate:
         print(aggregate)
     if capability:
