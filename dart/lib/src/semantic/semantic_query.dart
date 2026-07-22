@@ -462,6 +462,30 @@ extension SemanticIndexQueryKernelTestAccess on SemanticIndex {
       _evaluateSemanticQueryKernel(_staticProjection.detachedJson(), request);
 }
 
+final class _SemanticQueryPageResult<T> {
+  const _SemanticQueryPageResult({
+    required this.selected,
+    required this.page,
+    required this.limitedByBudget,
+  });
+
+  final List<T> selected;
+  final SemanticQueryPageState page;
+  final bool limitedByBudget;
+}
+
+final class _SemanticQueryTraversal {
+  const _SemanticQueryTraversal({
+    required this.relations,
+    required this.depthById,
+    required this.depthLimited,
+  });
+
+  final List<Map<String, Object?>> relations;
+  final Map<String, int> depthById;
+  final bool depthLimited;
+}
+
 SemanticQueryResponse _evaluateSemanticQueryKernel(
   Map<String, Object?> projection,
   SemanticQuery request,
@@ -471,14 +495,16 @@ SemanticQueryResponse _evaluateSemanticQueryKernel(
   if (ceilingError != null) {
     return ceilingError;
   }
-  _requireSemanticKernelDefaults(request);
 
   final records = (projection['records']! as List<Object?>)
+      .cast<Map<String, Object?>>();
+  final relations = (projection['relations']! as List<Object?>)
       .cast<Map<String, Object?>>();
   final recordById = <String, Map<String, Object?>>{
     for (final record in records) record['id']! as String: record,
   };
-  if (request.operation == SemanticQueryOperation.get &&
+  if ((request.operation == SemanticQueryOperation.get ||
+          request.operation == SemanticQueryOperation.relations) &&
       request.subjects.any((subject) => !recordById.containsKey(subject))) {
     return _semanticEmptyQueryResponse(
       snapshot,
@@ -492,38 +518,115 @@ SemanticQueryResponse _evaluateSemanticQueryKernel(
 
   final selectedRecords = <SemanticQueryRecord>[];
   final selectedRelations = <SemanticQueryRelation>[];
+  final diagnostics = <SemanticQueryDiagnostic>[];
+  late SemanticQueryPageState page;
+  var recordCost = 0;
+  var relationCost = 0;
+  var depthReached = 0;
+  String? budgetReason;
   switch (request.operation) {
     case SemanticQueryOperation.capabilities:
-      selectedRecords.add(_semanticCapabilitiesRecord(snapshot));
+      final paged = _semanticPageStream(
+        [_semanticCapabilitiesRecord(snapshot)],
+        request,
+        request.budget.maxRecords,
+        (record) => record.id,
+      );
+      if (paged == null) {
+        return _semanticInvalidAfterId(snapshot, request);
+      }
+      selectedRecords.addAll(paged.selected);
+      page = paged.page;
+      recordCost = selectedRecords.length;
+      if (paged.limitedByBudget) {
+        budgetReason = 'max_records';
+      }
     case SemanticQueryOperation.list:
       final wanted = request.recordKinds.toSet();
-      selectedRecords.addAll(
-        records
-            .where(
-              (record) =>
-                  wanted.isEmpty || wanted.contains(record['kind']! as String),
-            )
-            .map(
-              (record) => _projectSemanticQueryRecord(
-                record,
-                projection,
-                request.source,
-              ),
-            ),
+      final candidates = records
+          .where(
+            (record) =>
+                wanted.isEmpty || wanted.contains(record['kind']! as String),
+          )
+          .toList();
+      final paged = _semanticPageStream(
+        candidates,
+        request,
+        request.budget.maxRecords,
+        (record) => record['id']! as String,
       );
+      if (paged == null) {
+        return _semanticInvalidAfterId(snapshot, request);
+      }
+      selectedRecords.addAll(
+        paged.selected.map(
+          (record) =>
+              _projectSemanticQueryRecord(record, projection, request.source),
+        ),
+      );
+      page = paged.page;
+      recordCost = selectedRecords.length;
+      if (paged.limitedByBudget) {
+        budgetReason = 'max_records';
+      }
     case SemanticQueryOperation.get:
       final wanted = request.subjects.toSet();
-      selectedRecords.addAll(
-        records
-            .where((record) => wanted.contains(record['id']! as String))
-            .map(
-              (record) => _projectSemanticQueryRecord(
-                record,
-                projection,
-                request.source,
-              ),
-            ),
+      final candidates = records
+          .where((record) => wanted.contains(record['id']! as String))
+          .toList();
+      final paged = _semanticPageStream(
+        candidates,
+        request,
+        request.budget.maxRecords,
+        (record) => record['id']! as String,
       );
+      if (paged == null) {
+        return _semanticInvalidAfterId(snapshot, request);
+      }
+      selectedRecords.addAll(
+        paged.selected.map(
+          (record) =>
+              _projectSemanticQueryRecord(record, projection, request.source),
+        ),
+      );
+      page = paged.page;
+      recordCost = selectedRecords.length;
+      if (paged.limitedByBudget) {
+        budgetReason = 'max_records';
+      }
+    case SemanticQueryOperation.relations:
+      final traversal = _traverseSemanticQueryRelations(relations, request);
+      final paged = _semanticPageStream(
+        traversal.relations,
+        request,
+        request.budget.maxRelations,
+        (relation) => relation['id']! as String,
+      );
+      if (paged == null) {
+        return _semanticInvalidAfterId(snapshot, request);
+      }
+      selectedRelations.addAll(
+        paged.selected.map(
+          (relation) => _projectSemanticQueryRelation(
+            relation,
+            projection,
+            request.source,
+          ),
+        ),
+      );
+      page = paged.page;
+      relationCost = selectedRelations.length;
+      for (final relation in paged.selected) {
+        final relationDepth = traversal.depthById[relation['id']]!;
+        if (relationDepth > depthReached) {
+          depthReached = relationDepth;
+        }
+      }
+      if (paged.limitedByBudget) {
+        budgetReason = 'max_relations';
+      } else if (traversal.depthLimited) {
+        budgetReason = 'max_depth';
+      }
     case SemanticQueryOperation.explain:
       final subject = request.subjects.single;
       Map<String, Object?>? decision;
@@ -551,25 +654,32 @@ SemanticQueryResponse _evaluateSemanticQueryKernel(
           ),
         );
       }
-      final steps = records
+      final stepCandidates = records
           .where(
             (record) =>
                 record['kind'] == 'explanation_step' &&
                 record['owner_id'] == decision!['id'],
           )
           .toList();
+      final paged = _semanticPageStream(
+        stepCandidates,
+        request,
+        request.budget.maxRecords - 1,
+        (record) => record['id']! as String,
+      );
+      if (paged == null) {
+        return _semanticInvalidAfterId(snapshot, request);
+      }
       selectedRecords.add(
         _projectSemanticQueryRecord(decision, projection, request.source),
       );
       selectedRecords.addAll(
-        steps.map(
+        paged.selected.map(
           (record) =>
               _projectSemanticQueryRecord(record, projection, request.source),
         ),
       );
-      final stepIds = steps.map((record) => record['id']).toSet();
-      final relations = (projection['relations']! as List<Object?>)
-          .cast<Map<String, Object?>>();
+      final stepIds = paged.selected.map((record) => record['id']).toSet();
       selectedRelations.addAll(
         relations
             .where(
@@ -586,14 +696,29 @@ SemanticQueryResponse _evaluateSemanticQueryKernel(
               ),
             ),
       );
-    case SemanticQueryOperation.relations:
-      throw StateError(
-        'Semantic relation traversal is owned by '
-        'FUTURE-PARITY-BACKLOG.10.5.4.2',
-      );
+      page = paged.page;
+      recordCost = selectedRecords.length;
+      relationCost = selectedRelations.length;
+      depthReached = paged.selected.isEmpty ? 0 : 1;
+      if (paged.limitedByBudget) {
+        budgetReason = 'max_records';
+      }
   }
 
-  final explain = request.operation == SemanticQueryOperation.explain;
+  if (budgetReason != null) {
+    page = SemanticQueryPageState(
+      afterId: page.afterId,
+      nextAfterId: page.nextAfterId,
+      complete: false,
+    );
+    diagnostics.add(
+      _semanticQueryDiagnostic(
+        'semantic_query_budget_exceeded',
+        reason: budgetReason,
+      ),
+    );
+  }
+
   return SemanticQueryResponse(
     contract: _semanticQueryId,
     model: _semanticModelId,
@@ -601,28 +726,141 @@ SemanticQueryResponse _evaluateSemanticQueryKernel(
     snapshot: snapshot,
     records: selectedRecords,
     relations: selectedRelations,
-    page: SemanticQueryPageState(
-      afterId: request.page.afterId,
-      nextAfterId: null,
-      complete: true,
-    ),
+    page: page,
     cost: SemanticQueryCost(
-      recordsExamined: selectedRecords.length,
-      relationsExamined: selectedRelations.length,
-      depthReached: explain && selectedRecords.length > 1 ? 1 : 0,
+      recordsExamined: recordCost,
+      relationsExamined: relationCost,
+      depthReached: depthReached,
     ),
+    diagnostics: diagnostics,
   );
 }
 
-void _requireSemanticKernelDefaults(SemanticQuery request) {
-  if (request.page != const SemanticQueryPage() ||
-      request.budget != const SemanticQueryBudget()) {
-    throw StateError(
-      'Semantic pagination and budgets are owned by '
-      'FUTURE-PARITY-BACKLOG.10.5.4.2',
-    );
+_SemanticQueryPageResult<T>? _semanticPageStream<T>(
+  List<T> items,
+  SemanticQuery request,
+  int budgetLimit,
+  String Function(T item) id,
+) {
+  var start = 0;
+  final afterId = request.page.afterId;
+  if (afterId != null) {
+    final cursor = items.indexWhere((item) => id(item) == afterId);
+    if (cursor < 0) {
+      return null;
+    }
+    start = cursor + 1;
   }
+
+  final remaining = items.sublist(start);
+  final limitedByBudget = remaining.length > budgetLimit;
+  final selectedCount = _semanticMinimum(
+    remaining.length,
+    _semanticMinimum(request.page.limit, budgetLimit),
+  );
+  final selected = remaining.sublist(0, selectedCount);
+  final complete = selectedCount == remaining.length && !limitedByBudget;
+  final nextAfterId = selected.isNotEmpty && !complete
+      ? id(selected.last)
+      : null;
+  return _SemanticQueryPageResult(
+    selected: selected,
+    page: SemanticQueryPageState(
+      afterId: afterId,
+      nextAfterId: nextAfterId,
+      complete: complete,
+    ),
+    limitedByBudget: limitedByBudget,
+  );
 }
+
+int _semanticMinimum(int left, int right) => left < right ? left : right;
+
+_SemanticQueryTraversal _traverseSemanticQueryRelations(
+  List<Map<String, Object?>> relations,
+  SemanticQuery request,
+) {
+  final wantedKinds = request.relationKinds.toSet();
+  var frontier = request.subjects.toSet();
+  final visited = {...frontier};
+  final depthById = <String, int>{};
+
+  for (var depth = 1; depth <= request.budget.maxDepth; depth += 1) {
+    final layer = _semanticRelationLayer(
+      relations,
+      frontier,
+      wantedKinds,
+      request.direction,
+      depthById.keys.toSet(),
+    );
+    if (layer.isEmpty) {
+      break;
+    }
+    final nextFrontier = <String>{};
+    for (final relation in layer) {
+      final relationId = relation['id']! as String;
+      final fromId = relation['from_id']! as String;
+      final toId = relation['to_id']! as String;
+      depthById[relationId] = depth;
+      if ((request.direction == SemanticQueryDirection.outgoing ||
+              request.direction == SemanticQueryDirection.both) &&
+          frontier.contains(fromId)) {
+        nextFrontier.add(toId);
+      }
+      if ((request.direction == SemanticQueryDirection.incoming ||
+              request.direction == SemanticQueryDirection.both) &&
+          frontier.contains(toId)) {
+        nextFrontier.add(fromId);
+      }
+    }
+    nextFrontier.removeWhere(visited.contains);
+    visited.addAll(nextFrontier);
+    frontier = nextFrontier;
+    if (frontier.isEmpty) {
+      break;
+    }
+  }
+
+  final depthLimited =
+      frontier.isNotEmpty &&
+      _semanticRelationLayer(
+        relations,
+        frontier,
+        wantedKinds,
+        request.direction,
+        depthById.keys.toSet(),
+      ).isNotEmpty;
+  return _SemanticQueryTraversal(
+    relations: relations
+        .where((relation) => depthById.containsKey(relation['id']))
+        .toList(),
+    depthById: depthById,
+    depthLimited: depthLimited,
+  );
+}
+
+List<Map<String, Object?>> _semanticRelationLayer(
+  List<Map<String, Object?>> relations,
+  Set<String> frontier,
+  Set<String> wantedKinds,
+  SemanticQueryDirection direction,
+  Set<String> selectedIds,
+) => relations.where((relation) {
+  final id = relation['id']! as String;
+  final kind = relation['kind']! as String;
+  final fromId = relation['from_id']! as String;
+  final toId = relation['to_id']! as String;
+  final kindMatches = wantedKinds.isEmpty || wantedKinds.contains(kind);
+  final outgoing =
+      (direction == SemanticQueryDirection.outgoing ||
+          direction == SemanticQueryDirection.both) &&
+      frontier.contains(fromId);
+  final incoming =
+      (direction == SemanticQueryDirection.incoming ||
+          direction == SemanticQueryDirection.both) &&
+      frontier.contains(toId);
+  return kindMatches && (outgoing || incoming) && !selectedIds.contains(id);
+}).toList();
 
 SemanticSnapshot _semanticQuerySnapshot(Map<String, Object?> projection) {
   final value = projection['snapshot']! as Map<String, Object?>;
@@ -787,6 +1025,13 @@ SemanticQueryDiagnostic _semanticQueryDiagnostic(
   String? reason,
   Object? requested,
 }) => switch (code) {
+  'semantic_query_budget_exceeded' => SemanticQueryDiagnostic(
+    code: code,
+    severity: 'warning',
+    message:
+        'Semantic query budget was reached; returning the deterministic prefix.',
+    fields: {'limit': reason},
+  ),
   'semantic_query_source_detail_forbidden' => SemanticQueryDiagnostic(
     code: code,
     severity: 'error',
@@ -821,6 +1066,18 @@ SemanticQueryResponse _semanticEmptyQueryResponse(
     depthReached: 0,
   ),
   diagnostics: [diagnostic],
+);
+
+SemanticQueryResponse _semanticInvalidAfterId(
+  SemanticSnapshot snapshot,
+  SemanticQuery request,
+) => _semanticEmptyQueryResponse(
+  snapshot,
+  request,
+  _semanticQueryDiagnostic(
+    'semantic_query_invalid',
+    reason: 'after_id_not_in_primary_stream',
+  ),
 );
 
 SemanticSourceDetail _semanticSourceDetail(Object? value) => switch (value) {

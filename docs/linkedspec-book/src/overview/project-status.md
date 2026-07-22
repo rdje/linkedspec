@@ -515,8 +515,10 @@ Three backbone items tracked major structural modernization — all done:
   fixes fresh detached normalized projection as the only evaluator authority, reconciles 19 static digests plus 26
   neutral validation boundaries, and splits record/source `.1`, traversal/limits `.2`, public typed/raw-neutral
   `.3`, and closeout `.4`. Typed kernel `.10.5.4.1` now matches nine exact static responses through immutable
-  package-private capabilities/list/get/explain/source-privacy behavior; traversal/limits `.2` are next. No Dart
-  query or runtime observation is public yet. Queries cannot compile, execute, read paths, or expose host IR.
+  package-private capabilities/list/get/explain/source-privacy behavior. Traversal/limits `.10.5.4.2` adds exact
+  directional breadth-first relations, canonical pages, logical budgets/costs, and all 16 successful static
+  responses; public typed/raw-neutral completion `.3` is next. No Dart query or runtime observation is public yet.
+  Queries cannot compile, execute, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
 

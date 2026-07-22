@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart typed record/source query kernel `.10.5.4.1` is complete at nine exact static
-  digests; relation traversal and logical limits `.10.5.4.2` are next)
+- Last updated: `2026-07-22` (Dart traversal/pages/logical limits `.10.5.4.2` complete all 16 successful static
+  digests; public typed/raw-neutral query `.10.5.4.3` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8786,7 +8786,7 @@ before implementation.
     production or public-surface changes.
   - [x] **TYPED RECORD KERNEL** — Add immutable Dart request/response values and a package-private projection-only
     kernel for capabilities, list, get, explain, source projection, and structural redaction.
-  - [ ] **TRAVERSAL / LIMITS** — Add exact directional breadth-first relations, canonical after-id pages, logical
+  - [x] **TRAVERSAL / LIMITS** — Add exact directional breadth-first relations, canonical after-id pages, logical
     budgets/costs, deterministic prefixes, and all successful static response digests.
   - [ ] **PUBLIC TYPED / RAW-NEUTRAL** — Expose `capabilities`, typed `query`, and raw-neutral validation through
     one evaluator; match all 19 static digests and all 26 portable invalid-request boundaries through fresh clones.
@@ -8838,16 +8838,30 @@ before implementation.
       1,031/1,031 in 632 seconds. No runtime record, raw-neutral validation, public API, rollout, or admission change.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.4.2`
-    Status: `in_progress` (2026-07-22; task-tree owned for the clean `.10.5.4.1` handoff)
+    Status: `done` (2026-07-22)
     Goal: Complete Dart relation traversal, pagination, budgets, costs, and successful static query parity.
     Depends on: `.10.5.4.1`
     Acceptance: Add relation-kind-filtered outgoing/incoming/both breadth-first traversal, canonical relation-id
       deduplication/order, after-id paging, depth/record/relation limits, deterministic budget prefixes and costs.
       Match every successful non-runtime query digest through the typed package-private kernel, including reverse,
       staged/generated, page-boundary, record/relation/depth-budget, privacy, and explanation cases.
+    Verification: The detached evaluator now performs relation-kind-filtered outgoing/incoming/both breadth-first
+      traversal by canonical projection order, deduplicates relation ids, advances through unvisited record
+      frontiers, and reports the maximum returned layer. One shared primary-stream pager implements exact after-id,
+      limit, continuation, completion, and invalid-cursor behavior across capabilities/list/get/relations/explain.
+      Record/relation/depth budgets return deterministic prefixes, exact logical costs, and portable warnings.
+      All 16 successful non-runtime response SHA-256 digests match exactly, including reverse dispatch, staged
+      consumes/produces, generated provenance, after-id/page boundary, record/relation budget prefixes, depth zero,
+      privacy, and explanation. An independent both-direction depth-one proof locks incoming/outgoing canonical
+      order, 0/4/1 cost, and max-depth warning. Focused proof passes 5/5; composed source/outcome/static/calls/query
+      proof passes 27/27. Complete Dart passes format 79/0, fatal analysis, package 323, primary 66x2, and corpus
+      105/105. Semantic remains 6/20/73 at rollout 3/9 and admission 2/6; Unicode is 806/9/8/2; generated source is
+      v1/10/80-0-0; public proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and
+      surface 59/27/0. Canonical CI passes Rust semantic admission 1/1 in 78.42 seconds, primary 66x2, and Phase 0
+      1,031/1,031 in 625 seconds. Public/raw-neutral query, runtime observation, rollout, and admission stay absent.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.4.3`
-    Status: `pending`
+    Status: `in_progress` (2026-07-22; task-tree owned for the clean `.10.5.4.2` handoff)
     Goal: Expose one exact public Dart typed and raw-neutral semantic-query evaluator.
     Depends on: `.10.5.4.2`
     Acceptance: Add public `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` seams over
@@ -11192,10 +11206,10 @@ lifecycle isolation, no-execution construction, fresh clones, and public omissio
 analysis clean, package 318, primary 66x2, and corpus 105/105; canonical is Rust admission 77.64s, primary 66x2,
 and Phase 0 1,031/1,031 in 624s. Query audit `.10.5.4.0` now freezes the detached-projection-only boundary and the
 dependency order: typed record/source kernel `.1`, traversal/limits `.2`, public typed/raw-neutral completion `.3`,
-then composed closeout `.4`. Typed kernel `.1` is now exact for nine capabilities/list/get/explain/privacy/error
-digests through immutable owned values over fresh detached projection data. Focused proof is 4/4, composed semantic
-proof is 26/26, complete Dart is 79/0 + 322 + 66x2 + 105/105, and canonical is Rust admission 76.58s plus Phase 0
-1,031/1,031 in 632s. Relation traversal/limits `.2` is next; runtime observation, public query, rollout, and native
+then composed closeout `.4`. Typed kernel `.1` plus traversal/limits `.2` are now exact for all 16 successful static
+digests through immutable owned values over fresh detached projection data. Focused proof is 5/5, composed semantic
+proof is 27/27, complete Dart is 79/0 + 323 + 66x2 + 105/105, and canonical is Rust admission 78.42s plus Phase 0
+1,031/1,031 in 625s. Public typed/raw-neutral completion `.3` is next; runtime observation, rollout, and native
 admission remain absent.
 
 ### Historical frontier sequence
@@ -11628,8 +11642,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `active` | Expose immutable typed/raw-neutral Dart semantic query. |
 | 74.4.4.0 | `FUTURE-PARITY-BACKLOG.10.5.4.0` | `done` | Freeze exact Dart query authorities, forbidden inputs, and dependency-ordered split without behavior. |
 | 74.4.4.1 | `FUTURE-PARITY-BACKLOG.10.5.4.1` | `done` | Add immutable typed values and package-private capabilities/list/get/explain/source kernel at nine exact digests. |
-| 74.4.4.2 | `FUTURE-PARITY-BACKLOG.10.5.4.2` | `active` | Complete relation traversal, pages, logical budgets/costs, and successful static digest parity. |
-| 74.4.4.3 | `FUTURE-PARITY-BACKLOG.10.5.4.3` | `pending` | Expose one public typed/raw-neutral evaluator with 19 digests and 26 validation boundaries. |
+| 74.4.4.2 | `FUTURE-PARITY-BACKLOG.10.5.4.2` | `done` | Complete relation traversal, pages, logical budgets/costs, and all 16 successful static digests. |
+| 74.4.4.3 | `FUTURE-PARITY-BACKLOG.10.5.4.3` | `active` | Expose one public typed/raw-neutral evaluator with 19 digests and 26 validation boundaries. |
 | 74.4.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4.4` | `pending` | Compose complete query signoff and close the parent before runtime observation. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |

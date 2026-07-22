@@ -8,19 +8,19 @@ import 'package:linkedspec_dart/src/semantic/sha256.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('typed record source kernel matches nine exact neutral digests', () {
-    for (final id in [
-      'capabilities',
-      'graph_list_rules',
-      'graph_duplicate_regex_text',
-      'graph_explain_entry',
-      'calls_symbols_and_shapes',
-      'failed_diagnostic',
-      'privacy_none',
-      'privacy_text_and_digest',
-      'source_ceiling_forbidden',
-    ]) {
-      final queryCase = _queryCase(id);
+  test('typed kernel matches all sixteen successful static digests', () {
+    final queryCases = (_contract['query_cases']! as List<Object?>)
+        .cast<Map<String, Object?>>()
+        .where(
+          (queryCase) =>
+              queryCase['id'] != 'runtime_events' &&
+              (queryCase['expected']! as Map<String, Object?>)['ok'] == true,
+        )
+        .toList();
+    expect(queryCases, hasLength(16));
+
+    for (final queryCase in queryCases) {
+      final id = queryCase['id']! as String;
       final request = _typedRequest(
         queryCase['request']! as Map<String, Object?>,
       );
@@ -111,6 +111,41 @@ void main() {
       'requested': 'span',
       'ceiling': 'identity',
     });
+    expect(
+      _canonicalDigest(limited.toJson()),
+      (_queryCase('source_ceiling_forbidden')['expected']!
+          as Map<String, Object?>)['response_sha256'],
+    );
+  });
+
+  test('both-direction traversal is breadth-first and depth bounded', () {
+    final response = _indexFor('graph').semanticQueryKernelForTesting(
+      SemanticQuery(
+        operation: SemanticQueryOperation.relations,
+        subjects: const ['rule:Top'],
+        direction: SemanticQueryDirection.both,
+        budget: const SemanticQueryBudget(maxDepth: 1),
+      ),
+    );
+
+    expect(response.records, isEmpty);
+    expect(response.relations.map((relation) => relation.id), [
+      'relation:declares:spec:0:rule:Top:0',
+      'relation:contains:rule:Top:edge:rule:Top:0:0',
+      'relation:contains:rule:Top:edge:rule:Top:1:1',
+      'relation:contains:rule:Top:lifecycle:rule:Top:E:0:2',
+    ]);
+    expect(
+      response.cost,
+      const SemanticQueryCost(
+        recordsExamined: 0,
+        relationsExamined: 4,
+        depthReached: 1,
+      ),
+    );
+    expect(response.page.complete, isFalse);
+    expect(response.page.nextAfterId, isNull);
+    expect(response.diagnostics.single.fields, {'limit': 'max_depth'});
   });
 
   test('kernel is deterministic projection-only and not publicly exported', () {

@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.2` — keep pages and budgets on one primary stream): Record queries,
+  relation queries, capabilities, and explanation steps all use one after-id page helper. The cursor must occur in
+  the already-filtered primary stream; page limits produce a continuation without a warning, while record/relation
+  budget limits produce the same deterministic prefix plus a portable `semantic_query_budget_exceeded` warning.
+  Costs count returned primary records/relations rather than host iterations.
+
+  Relation traversal is layer-based. Each breadth-first layer scans the canonical projection relation order,
+  filters kind/direction, ignores already-selected relation ids, and advances to previously unvisited record ids.
+  Returned relations are then reselected from the canonical projection order. This keeps output independent of set
+  iteration and makes outgoing/incoming/both traversal deterministic. A nonempty next layer after `max_depth`
+  marks the page incomplete with a depth-budget warning even when the returned relation stream itself was unpaged.
+
+  The typed package-private evaluator now matches every successful non-runtime response digest (16/16). Public
+  typed/raw-neutral exposure still waits for `.10.5.4.3`, which owns structural validation and the remaining exact
+  error cases; runtime observation remains a separate later projection.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.1` — make immutability and privacy structural): The Dart query value
   model owns all aggregate inputs and outputs. Constructors copy lists/maps into unmodifiable values, while
   `toJson()` returns fresh detached data. This lets native callers retain typed values without sharing evaluator

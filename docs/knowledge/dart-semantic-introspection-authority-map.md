@@ -246,8 +246,9 @@ Documentation-only closeout `.10.5.3.3` recomposes the final projection rather t
 suite jointly covers the exact calls/staged/generated target, all five static construction targets, strict source
 and compilation outcomes, Unicode/interleaved and repeated-lifecycle occurrence isolation, no-execution staged
 construction, fresh clones, and public omission. Complete Dart/public/canonical gates pass on the same code, so
-parent `.10.5.3` is composition-closed. Immutable query `.10.5.4` is the next independent adapter layer; runtime
-observation, rollout, and native admission remain unchanged.
+parent `.10.5.3` is composition-closed. Immutable query `.10.5.4.1-.2` now adds package-private typed record/source,
+directional traversal, canonical pages, budgets, and costs at all 16 successful static digests; public/raw-neutral
+completion `.10.5.4.3` is next. Runtime observation, rollout, and native admission remain unchanged.
 
 Query authority, exact static/boundary counts, the fresh detached-clone rule, and the `.10.5.4.1-.4` dependency
 split are now canonical in [[dart-semantic-query-authority-map]].

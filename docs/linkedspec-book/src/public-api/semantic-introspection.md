@@ -213,9 +213,16 @@ list, get, explain, source detail/ceiling, structural redaction, and portable re
 neutral response digests. The evaluator receives only detached normalized projection data, so it cannot compile,
 execute, inspect host objects, or acquire paths or trace state.
 
-Relation traversal/pages/budgets `.10.5.4.2` are next, followed by public typed plus raw-neutral completion `.3`
-and composed closeout `.4`. Until `.3`, no query type or method appears in the public Dart umbrella. Runtime
-`execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
+Traversal/limits `.10.5.4.2` now adds relation-kind-filtered outgoing, incoming, and both-direction breadth-first
+search. Each layer scans canonical relation order, deduplicates relation ids, and advances through unvisited record
+ids. One primary-stream pager handles valid after-id cursors and page continuation across records, relations,
+capabilities, and explanation steps. Record/relation/depth budgets return deterministic prefixes, exact logical
+costs, and portable warnings. All 16 successful non-runtime response digests now match, including reverse,
+staged/generated, page-boundary, budget, privacy, and explanation cases.
+
+Public typed plus raw-neutral completion `.10.5.4.3` is next, followed by composed closeout `.4`. Until `.3`, no
+query type or method appears in the public Dart umbrella. Runtime `execution`/`event` records remain exclusively
+owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
 
 ## Current Rust construction and query surface
 
@@ -1005,8 +1012,8 @@ The dependency order is:
 | `.10.5.3.3` | Dart calls composition closeout | complete; 22/22 final-code composition, no production change |
 | `.10.5.4.0` | Dart query authority map and dependency split | complete; behavior-free 19-digest/26-boundary plan |
 | `.10.5.4.1` | Dart typed record/source query kernel | complete; package-private, immutable, nine exact static digests |
-| `.10.5.4.2` | Dart relations/pages/budgets/costs | active next |
-| `.10.5.4.3` | Dart public typed/raw-neutral query | pending; exact 19 digests and 26 boundaries |
+| `.10.5.4.2` | Dart relations/pages/budgets/costs | complete; all 16 successful static digests exact |
+| `.10.5.4.3` | Dart public typed/raw-neutral query | active next; exact 19 digests and 26 boundaries |
 | `.10.5.4.4` | Dart composed query closeout | pending |
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | active |
 | `.10.5.5-.10.5.6` | Dart observation and admission | pending |

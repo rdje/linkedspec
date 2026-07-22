@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.2 — complete Dart semantic traversal and logical limits
+
+The package-private Dart semantic evaluator now applies canonical after-id pages to every primary stream and
+implements relation-kind-filtered outgoing, incoming, and both-direction breadth-first traversal. Canonical
+relation order/id deduplication, visited-record frontiers, record/relation/depth budgets, deterministic prefixes,
+page continuation, logical costs, and portable budget warnings match the admitted neutral semantics.
+
+All 16 successful non-runtime query responses now match their full canonical SHA-256 digests, including reverse
+dispatch, staged consumes/produces, generated provenance, pagination, page boundaries, record/relation budget
+prefixes, and depth zero. An independent both-direction proof locks exact first-layer order, cost, and depth-limit
+behavior. Focused proof passes 5/5 and composed source/outcome/static/calls/query proof passes 27/27.
+
+Complete Dart passes format 79/0, fatal analysis, package 323, primary 66x2, and corpus 105/105. Semantic remains
+6/20/73 at rollout 3/9 and native admission 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; public
+proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI
+passes Rust semantic admission 1/1 in 78.42 seconds, primary 66x2, and Phase 0 1,031/1,031 in 625 seconds. No public
+or raw-neutral query, runtime observation, rollout, or admission state changed. Knowledge Map is 677 facts / 5,076
+question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.1 — add Dart semantic record query kernel
 
 Dart now has immutable typed semantic-query operations, directions, pages, budgets, source policies, requests,
