@@ -8,14 +8,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Calls closeout `FUTURE-PARITY-BACKLOG.10.5.3.3` is verification-complete from clean exact-completion commit
-  `72398d69`; live-doc/book sync and commit remain. It adds no production/test behavior and closes parent
-  `.10.5.3`. After its clean commit, `.10.5.4` owns immutable query; runtime/rollout/admission remain later.
+- Query authority/split `FUTURE-PARITY-BACKLOG.10.5.4.0` is verification-complete from clean calls-parent commit
+  `fda7f0b7`; live-doc/book sync and commit remain. It adds no production/test/public behavior. After its clean
+  commit, `.10.5.4.1` owns the package-private typed record/source query kernel.
 
-One 22-test composition jointly passes exact calls/staged/generated 22/25, all static targets, strict source and
-compilation outcomes, failure/lifecycle/interleaving isolation, no-execution construction, detached clones, and
-public omission. Dart is 77/0 + 318 + 66x2 + 105/105; canonical signoff is Rust semantic admission 77.64s +
-primary 66x2 + Phase 0 1,031/624s.
+The audit freezes 19 non-runtime response digests, 26 neutral validation boundaries, one fresh detached-projection
+input, and four dependency-ordered implementation/closeout children. Neutral governance remains 6/20/73 at 3/9
+and 2/6; the unchanged Dart source/outcome/static/calls composition passes 22/22; Knowledge Map is 675/5,062.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -47,6 +46,17 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.0 — split Dart semantic query**
+  (DONE in this commit from clean base `fda7f0b7`).
+
+  **Result:** Exact typed/raw-neutral query authority and a `.1-.4` dependency split are frozen without behavior.
+
+  **Proof:** Neutral semantic contract 6/20/73 at rollout 3/9 and admission 2/6; unchanged Dart semantic
+  source/outcome/static/calls suites 22/22; Knowledge Map 675/5,062; no production/test/public/runtime/trace or
+  ledger change.
+
+  **Next:** after this clean commit, implement package-private typed record/source kernel `.10.5.4.1`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.3 — close Dart calls projection**
   (DONE in this commit from clean base `72398d69`).
 

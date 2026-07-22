@@ -236,7 +236,11 @@ and result records with causal directions, while the validated selected generate
 generated handler-plan record. The adapter emits no implementation source and executes no target. Immutable query,
 typed runtime observation, and one composed admission consumer remain the next independent layers. Documentation-
 only `.10.5.3.3` has recomposed 22 exact calls/static/foundation tests and closed this projection boundary;
-`.10.5.4` must query only detached normalized data.
+query audit `.10.5.4.0` now makes that boundary executable as a plan. The evaluator must receive a fresh detached
+clone containing only snapshot, source references, canonical records, and canonical relations. Typed record/source
+kernel `.1`, traversal/limits `.2`, public typed/raw-neutral completion `.3`, and closeout `.4` are ordered so no
+incomplete API escapes. The target is 19 static digests plus 26 neutral validation boundaries; runtime records stay
+owned by `.10.5.5`.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.0` — query detached meaning, never compiler authority): The Dart
+  query evaluator needs only four normalized values already retained by `_SemanticStaticProjection`: snapshot,
+  source references, canonical records, and canonical relations. Passing a fresh detached clone to the evaluator
+  is a stronger boundary than letting the query part reach back into `SemanticIndex`: it makes compilation,
+  execution, trace activation, path reads, and AST/ActionIR exposure impossible by construction rather than by
+  convention. Typed and raw-neutral requests therefore share one projection-only evaluator.
+
+  The typed and neutral seams solve different API needs without duplicating semantics. Typed values give Dart
+  callers idiomatic operations, directions, pages, budgets, source policy, and owned responses. Raw-neutral input
+  preserves the exact portable diagnostics for the 26 malformed JSON shapes that cannot all inhabit a typed
+  request. Public export waits until both enter the same complete evaluator. Work is ordered as record/source
+  kernel `.1`, relations/pages/budgets `.2`, public typed/raw-neutral validation `.3`, and composed closeout `.4`.
+  Runtime records remain an independently derived snapshot under `.10.5.5`.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.3` — close on composition, not new behavior): The final calls leaf
   deliberately adds no production or test surface. Its value is proving that source/outcome, every private static
   target, typed calls/bindings, staged payload/job/result, and selected generated-plan provenance remain one

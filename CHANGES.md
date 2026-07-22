@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.0 — split Dart semantic query
+
+The behavior-free query audit reconciles the neutral 19 static response digests and 26 malformed-request
+boundaries with the admitted Perl/Rust evaluators and Dart's exact private projection. Dart's immutable
+`_SemanticStaticProjection`—snapshot, source-reference table, canonical records, and canonical relations—is the
+only allowed evaluator input. Every query must consume a fresh detached plain-data clone; decoded source, parser/
+compiler state, staged sidecars, AST/ActionIR, compiled regexes, generated implementation, executors, trace,
+paths, and host objects stay outside the query layer.
+
+Implementation is dependency-ordered as typed record/source kernel `.10.5.4.1`, relation traversal and logical
+limits `.2`, public typed/raw-neutral completion `.3`, and composed closeout `.4`. The incomplete kernel remains
+package-private until exact validation is complete. Runtime observations stay owned by `.10.5.5`, and admission
+promotion stays owned by `.10.5.6`. The unchanged neutral checker passes 6/20/73 at rollout 3/9 and admission 2/6;
+the current Dart source/outcome/static/calls composition passes 22/22. No production/test code, public API,
+runtime behavior, trace behavior, rollout, or admission state changed. Knowledge Map is 675 facts / 5,062
+question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.3 — close Dart calls projection
 
 The Dart calls/staged/generated semantic parent is composition-closed without another production or test change.

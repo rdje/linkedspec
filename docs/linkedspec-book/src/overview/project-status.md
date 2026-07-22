@@ -511,9 +511,12 @@ Three backbone items tracked major structural modernization — all done:
   projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
   exact 12-role admission consumer. Dart now also has exact private source/static/call/staged/generated projection:
   `.10.5.3.2` completes all 22 calls records / 25 relations with distinct payload/job/result and selected generated
-  handler-plan provenance, and `.10.5.3.3` composition-closes that final private surface, but exposes no query or runtime observation. Queries cannot compile, execute, read
-  paths, or expose host IR. Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending; only
-  Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
+  handler-plan provenance, and `.10.5.3.3` composition-closes that final private surface. Query audit `.10.5.4.0`
+  fixes fresh detached normalized projection as the only evaluator authority, reconciles 19 static digests plus 26
+  neutral validation boundaries, and splits record/source `.1`, traversal/limits `.2`, public typed/raw-neutral
+  `.3`, and closeout `.4`. No Dart query or runtime observation is public yet. Queries cannot compile, execute,
+  read paths, or expose host IR. Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
+  only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

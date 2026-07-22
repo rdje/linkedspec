@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart calls/staged/generated parent `.10.5.3` is composition-closed at exact 22 records /
-  25 relations; immutable query `.10.5.4` is next)
+- Last updated: `2026-07-22` (Dart query authority/split leaf `.10.5.4.0` is complete; typed record/query kernel
+  `.10.5.4.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8777,6 +8777,79 @@ before implementation.
     projection data only. Match all 19 static digests and exact ids/order/source privacy, pages/cursors, directional
     traversal, budgets/costs, errors, and explanations; prove clone isolation, deterministic JSON identity, and no
     compiler/executor/trace/path/IR access. Runtime records remain absent.
+  Children: `.10.5.4.0`, `.10.5.4.1`, `.10.5.4.2`, `.10.5.4.3`, `.10.5.4.4`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / SPLIT FIRST** — Reconcile the neutral 19 static cases and 26 malformed-request boundaries,
+    admitted Perl/Rust evaluators, and Dart's detached private projection; freeze a dependency-ordered split before
+    production or public-surface changes.
+  - [ ] **TYPED RECORD KERNEL** — Add immutable Dart request/response values and a package-private projection-only
+    kernel for capabilities, list, get, explain, source projection, and structural redaction.
+  - [ ] **TRAVERSAL / LIMITS** — Add exact directional breadth-first relations, canonical after-id pages, logical
+    budgets/costs, deterministic prefixes, and all successful static response digests.
+  - [ ] **PUBLIC TYPED / RAW-NEUTRAL** — Expose `capabilities`, typed `query`, and raw-neutral validation through
+    one evaluator; match all 19 static digests and all 26 portable invalid-request boundaries through fresh clones.
+  - [ ] **SIGNOFF / HANDOFF** — Compose complete Dart/query/public/canonical proof, synchronize durable surfaces,
+    clean artifacts, and close `.10.5.4` before runtime-observation leaf `.10.5.5`.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.4.0`
+    Status: `done` (2026-07-22)
+    Goal: Freeze the exact Dart semantic-query authority map and omission-safe implementation split.
+    Depends on: `.10.5.3`
+    Acceptance: Reconcile all 19 non-runtime query digests, 26 raw-neutral validation boundaries, the admitted
+      Perl/Rust evaluators, and Dart's normalized static projection. Record exact API, cloning, privacy, ordering,
+      traversal, paging, budgeting, error, explanation, and forbidden-authority boundaries; create bounded
+      dependency-ordered implementation/closeout children; change no production behavior, public semantic API,
+      runtime observation, rollout, or admission state.
+    Verification: Dart's immutable `_SemanticStaticProjection` already contains the only allowed query authority:
+      one snapshot, source-reference table, canonically ordered records, and canonically ordered relations. The
+      evaluator must receive a fresh detached plain-data clone and cannot receive source text, parser/compiler
+      objects, staged sidecars, AST/ActionIR, compiled regexes, generated implementation, executor, trace, path, or
+      host state. Typed requests/responses and the raw-neutral seam must enter one evaluator; runtime events remain
+      absent until `.10.5.5`. Implementation is split into typed record/source kernel `.1`, relation traversal and
+      logical limits `.2`, public typed/raw-neutral completion `.3`, and composed closeout `.4`. The unchanged
+      neutral checker passes 6 groups / 20 queries / 73 mutations at rollout 3/9 and admission 2/6; the four Dart
+      source/outcome/static/calls suites pass 22/22. No production/test code or public behavior changed.
+      Knowledge Map is 675 facts / 5,062 question keys.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.4.1`
+    Status: `pending`
+    Goal: Add the immutable Dart semantic-query value model and package-private record/source kernel.
+    Depends on: `.10.5.4.0`
+    Acceptance: Define idiomatic immutable typed operation, direction, page, budget, source, record, relation,
+      diagnostic, cost, and response values with exact neutral JSON. Evaluate capabilities/list/get/explain over a
+      fresh detached projection clone; apply exact source identity/span/text/digest ceilings and structural
+      redactions; prove the covered canonical digests, owned-clone isolation, deterministic interleaving, and no
+      compiler/executor/trace/path/IR access. Keep the incomplete query seam out of the public umbrella.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.4.2`
+    Status: `pending`
+    Goal: Complete Dart relation traversal, pagination, budgets, costs, and successful static query parity.
+    Depends on: `.10.5.4.1`
+    Acceptance: Add relation-kind-filtered outgoing/incoming/both breadth-first traversal, canonical relation-id
+      deduplication/order, after-id paging, depth/record/relation limits, deterministic budget prefixes and costs.
+      Match every successful non-runtime query digest through the typed package-private kernel, including reverse,
+      staged/generated, page-boundary, record/relation/depth-budget, privacy, and explanation cases.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.4.3`
+    Status: `pending`
+    Goal: Expose one exact public Dart typed and raw-neutral semantic-query evaluator.
+    Depends on: `.10.5.4.2`
+    Acceptance: Add public `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` seams over
+      the same projection-only evaluator. Validate exact object keys/types/order/duplicates, operation
+      combinations, kinds, directions, pages, budgets, source policies/ceilings, subjects, cursors, unsupported
+      contracts, and numeric-boolean fences. Match all 19 static response digests through typed and neutral paths,
+      all 26 portable invalid boundaries, fresh response/request isolation, deterministic JSON identity, and
+      recursive host/path/AST/IR/execution/trace denial. Do not add runtime records or ledger promotion.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.4.4`
+    Status: `pending`
+    Goal: Compose semantic-query signoff and close the Dart query parent.
+    Depends on: `.10.5.4.3`
+    Acceptance: Re-run exact 19-query/26-boundary proof plus source/static/calls composition, complete Dart
+      package/primary/corpus/generated, semantic/Unicode/public/canonical gates, durable synchronization, and
+      artifact cleanup; close `.10.5.4` without runtime observation, rollout, or admission promotion.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.5`
   Status: `pending`
@@ -11103,8 +11176,9 @@ Calls/staging parent `.10.5.3` is composition-closed. Audit `.0`, typed core `.1
 Closeout composition passes 22/22 across calls, all static targets, strict source/outcome foundation, failure and
 lifecycle isolation, no-execution construction, fresh clones, and public omission. Complete Dart is 77/0 format,
 analysis clean, package 318, primary 66x2, and corpus 105/105; canonical is Rust admission 77.64s, primary 66x2,
-and Phase 0 1,031/1,031 in 624s. Immutable query `.10.5.4` is next; runtime observation, rollout, and native
-admission remain absent.
+and Phase 0 1,031/1,031 in 624s. Query audit `.10.5.4.0` now freezes the detached-projection-only boundary and the
+dependency order: typed record/source kernel `.1`, traversal/limits `.2`, public typed/raw-neutral completion `.3`,
+then composed closeout `.4`. Runtime observation, rollout, and native admission remain absent.
 
 ### Historical frontier sequence
 
@@ -11534,6 +11608,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.3.2 | `FUTURE-PARITY-BACKLOG.10.5.3.2` | `done` | Complete staged/generated provenance and exact 22/25 parity. |
 | 74.4.3.3 | `FUTURE-PARITY-BACKLOG.10.5.3.3` | `done` | Compose complete calls signoff and close the parent. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `active` | Expose immutable typed/raw-neutral Dart semantic query. |
+| 74.4.4.0 | `FUTURE-PARITY-BACKLOG.10.5.4.0` | `done` | Freeze exact Dart query authorities, forbidden inputs, and dependency-ordered split without behavior. |
+| 74.4.4.1 | `FUTURE-PARITY-BACKLOG.10.5.4.1` | `pending` | Add immutable typed values and package-private capabilities/list/get/explain/source kernel. |
+| 74.4.4.2 | `FUTURE-PARITY-BACKLOG.10.5.4.2` | `pending` | Complete relation traversal, pages, logical budgets/costs, and successful static digest parity. |
+| 74.4.4.3 | `FUTURE-PARITY-BACKLOG.10.5.4.3` | `pending` | Expose one public typed/raw-neutral evaluator with 19 digests and 26 validation boundaries. |
+| 74.4.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4.4` | `pending` | Compose complete query signoff and close the parent before runtime observation. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |
 

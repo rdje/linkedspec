@@ -197,7 +197,19 @@ locks the three distinct staging roles, every relation direction above, the sele
 fresh detached clones, public omission, and recursive denial of body/AST/ActionIR/generated-source/path/execution/
 trace leakage. Documentation-only `.10.5.3.3` recomposes 22 calls/static/source/outcome tests on the final code,
 reruns complete Dart/public/canonical signoff, and closes the parent. Dart still exposes no semantic query or
-runtime observation surface, and rollout/admission remain unchanged. Immutable query is next under `.10.5.4`.
+runtime observation surface, and rollout/admission remain unchanged.
+
+Behavior-free query audit `.10.5.4.0` now fixes the Dart adapter boundary before that API is exposed. The evaluator
+may consume only a fresh detached clone of the private normalized snapshot, source-reference table, records, and
+relations. It may not reach decoded source, parser/compiler objects, function sidecars, AST/ActionIR, compiled
+regexes, generated implementation source, executors, trace state, paths, or host objects. The neutral target is 19
+non-runtime response digests plus 26 malformed-request boundaries. Typed Dart requests and raw-neutral JSON will
+enter one evaluator; the neutral seam exists to represent invalid shapes that a typed request cannot contain.
+
+The implementation order is typed record/source and source-redaction kernel `.10.5.4.1`, relation traversal/pages/
+budgets `.2`, public typed plus raw-neutral completion `.3`, then composed closeout `.4`. The incomplete kernel
+stays package-private. Runtime `execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not
+admitted until `.10.5.6`.
 
 ## Current Rust construction and query surface
 
@@ -985,7 +997,12 @@ The dependency order is:
 | `.10.5.3.1` | Dart typed functions/helpers/calls/bindings core | complete; exact private 18/16 non-staged subset |
 | `.10.5.3.2` | Dart staged/generated exact completion | complete; private 22/25 target deep-equals neutral oracle |
 | `.10.5.3.3` | Dart calls composition closeout | complete; 22/22 final-code composition, no production change |
-| `.10.5.4` | Dart immutable typed/raw-neutral query | active next |
+| `.10.5.4.0` | Dart query authority map and dependency split | complete; behavior-free 19-digest/26-boundary plan |
+| `.10.5.4.1` | Dart typed record/source query kernel | active next; package-private until completion |
+| `.10.5.4.2` | Dart relations/pages/budgets/costs | pending |
+| `.10.5.4.3` | Dart public typed/raw-neutral query | pending; exact 19 digests and 26 boundaries |
+| `.10.5.4.4` | Dart composed query closeout | pending |
+| `.10.5.4` | Dart immutable typed/raw-neutral query parent | active |
 | `.10.5.5-.10.5.6` | Dart observation and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

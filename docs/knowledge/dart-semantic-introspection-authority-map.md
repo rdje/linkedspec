@@ -54,6 +54,7 @@ answers:
   - "is the Dart private calls projection exact at 22 records and 25 relations"
   - "does Dart staged semantic projection expose body AST or generated source"
   - "is the Dart calls staged generated semantic parent composition closed"
+  - "which fact card owns the Dart semantic query authority split"
 date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
@@ -247,3 +248,6 @@ and compilation outcomes, Unicode/interleaved and repeated-lifecycle occurrence 
 construction, fresh clones, and public omission. Complete Dart/public/canonical gates pass on the same code, so
 parent `.10.5.3` is composition-closed. Immutable query `.10.5.4` is the next independent adapter layer; runtime
 observation, rollout, and native admission remain unchanged.
+
+Query authority, exact static/boundary counts, the fresh detached-clone rule, and the `.10.5.4.1-.4` dependency
+split are now canonical in [[dart-semantic-query-authority-map]].
