@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.3 — expose exact public Dart semantic query
+
+Dart now exports immutable semantic-query request/response protocol types plus
+`SemanticIndex.capabilities`, typed `query(SemanticQuery)`, and raw-neutral `queryNeutral(Object?)`. Both request
+forms enter one validator/evaluator that receives only a fresh detached clone of the normalized static projection;
+the query layer gains no accepted-source, parser/compiler, staged-sidecar, AST/ActionIR, regex, generated-source,
+executor, trace, path, environment, or host-object authority.
+
+Typed and neutral paths match all 19 non-runtime response SHA-256 digests. Raw-neutral validation matches all 26
+portable malformed-request boundaries across contract/keys/types/order/duplicates, operation combinations,
+kinds/directions, pages/budgets, source policies/ceilings, subjects/cursors, and integer-versus-boolean fences.
+Rejected envelopes preserve the caller's invalid cursor as plain data without retaining or mutating the request.
+Capabilities and every response are fresh clone-safe values; deterministic interleaving, both-direction traversal,
+source privacy, public export ownership, and recursive forbidden-authority denial are independently locked.
+
+Focused proof passes 6/6 and composed source/outcome/static/calls/query proof passes 28/28. Complete Dart passes
+format 79/0, fatal analysis, package 324, primary 66x2, and corpus 105/105. Semantic remains 6/20/73 at rollout 3/9
+and native admission 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; public proof is concurrency 3/3,
+executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI passes Rust semantic
+admission 1/1 in 77.92 seconds, primary 66x2, and Phase 0 1,031/1,031 in 627 seconds. Runtime observation, rollout,
+and admission state do not change. Knowledge Map is 678 facts / 5,083 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.2 — complete Dart semantic traversal and logical limits
 
 The package-private Dart semantic evaluator now applies canonical after-id pages to every primary stream and

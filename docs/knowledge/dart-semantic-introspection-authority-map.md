@@ -131,8 +131,9 @@ Construction then invokes staged parsing, validation, compilation with duplicate
 selection, and generated-v2 plan construction exactly once. It retains the typed AST and compiled authority only
 privately while exposing detached immutable compilation state/authority/diagnostic, selected-entry identity, and
 ordered generated-plan input. Parse, validation, compile, and entry-selection failures are values in a failed
-snapshot; portable Dart diagnostics remain exact rather than being prematurely normalized across backends. Target
-execution, emitted-source execution, runtime sinks, trace, records, and query remain absent. Runtime already exposes
+snapshot; portable Dart diagnostics remain exact rather than being prematurely normalized across backends. That
+foundation layer adds no target/emitted execution, runtime sinks, trace, records, or query; public static query is
+now a separate detached-projection layer under `.10.5.4.3`. Runtime already exposes
 authoritative internal evidence:
 `_traceRegexSlotSelected` runs after accepted structural slot selection and the entry wrapper constructs the final
 `RuntimeParseResult`. Text trace and `RuntimeDiagnosticOutputSink` are different products. A later leaf must add an
@@ -240,15 +241,17 @@ The same leaf consumes rather than rebuilds the foundation's retained generated-
 identity, row order, and families are checked against compiled authority; only the selected entry row becomes one
 separate `generated_artifact` handler-plan record connected by `generated_as`. No emitter, generated parser, or
 target runtime is invoked. Full equality, staging-role/direction assertions, fresh-clone proof, and recursive
-privacy denial pass, while public query, runtime observation, semantic rollout, and native admission remain absent.
+privacy denial passed while public query was still absent from that projection leaf; `.10.5.4.3` now supplies the
+separate public static query layer. Runtime observation, semantic rollout, and native admission remain absent.
 
 Documentation-only closeout `.10.5.3.3` recomposes the final projection rather than adding behavior. One 22-test
 suite jointly covers the exact calls/staged/generated target, all five static construction targets, strict source
 and compilation outcomes, Unicode/interleaved and repeated-lifecycle occurrence isolation, no-execution staged
 construction, fresh clones, and public omission. Complete Dart/public/canonical gates pass on the same code, so
-parent `.10.5.3` is composition-closed. Immutable query `.10.5.4.1-.2` now adds package-private typed record/source,
-directional traversal, canonical pages, budgets, and costs at all 16 successful static digests; public/raw-neutral
-completion `.10.5.4.3` is next. Runtime observation, rollout, and native admission remain unchanged.
+parent `.10.5.3` is composition-closed. Immutable query `.10.5.4.1-.3` now exposes public typed capabilities/query
+plus raw-neutral validation over one detached-projection evaluator at all 19 static digests and 26 malformed-request
+boundaries. Runtime observation, rollout, and native admission remain unchanged.
 
 Query authority, exact static/boundary counts, the fresh detached-clone rule, and the `.10.5.4.1-.4` dependency
-split are now canonical in [[dart-semantic-query-authority-map]].
+split are now canonical in [[dart-semantic-query-authority-map]]; public use is recorded in
+[[dart-semantic-query-public-api]].

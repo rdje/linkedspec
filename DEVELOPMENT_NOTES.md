@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.3` — one evaluator, two caller surfaces): Typed requests and raw
+  JSON-like requests solve different representation needs, but they must not become different semantic engines.
+  `SemanticIndex.query` serializes its immutable `SemanticQuery` and enters the same neutral validator/evaluator as
+  `queryNeutral`. The latter is necessary because wrong keys, wrong container types, duplicate values, booleans in
+  integer fields, and non-string cursors cannot be represented faithfully by the typed request model.
+
+  Validation is contract-first and returns the exact portable rejected envelope. `SemanticQueryPageState.afterId`
+  therefore accepts an owned plain `Object?`: successful and typed-request responses still contain `String?`, but
+  raw validation failures can echo the rejected scalar cursor exactly. The request-side `SemanticQueryPage.afterId`
+  remains `String?`. This widening belongs only to response evidence and does not weaken typed input.
+
+  Every public call supplies `_evaluateSemanticQueryNeutral` with a new `_staticProjection.detachedJson()` value.
+  The function has no parameter through which it could compile, execute, enable trace, inspect paths/host objects,
+  or expose AST/ActionIR/generated implementation. Nineteen full response digests, 26 malformed boundaries,
+  request/response clone isolation, deterministic interleaving, public-export checks, and recursive authority
+  denial make that separation executable. Runtime `execution`/`event` records remain a later derived snapshot.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.2` — keep pages and budgets on one primary stream): Record queries,
   relation queries, capabilities, and explanation steps all use one after-id page helper. The cursor must occur in
   the already-filtered primary stream; page limits produce a continuation without a warning, while record/relation

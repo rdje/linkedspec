@@ -234,15 +234,16 @@ Dart now implements that private construction through exact static and call/stag
 deep-equal the complete 22-record / 25-relation target: native function sidecars remain distinct payload, parse-job,
 and result records with causal directions, while the validated selected generated-v2 row remains a separate
 generated handler-plan record. The adapter emits no implementation source and executes no target. Immutable query,
-typed runtime observation, and one composed admission consumer remain the next independent layers. Documentation-
+typed runtime observation, and one composed admission consumer remain independent layers. Documentation-
 only `.10.5.3.3` has recomposed 22 exact calls/static/foundation tests and closed this projection boundary;
 query audit `.10.5.4.0` now makes that boundary executable as a plan. The evaluator must receive a fresh detached
 clone containing only snapshot, source references, canonical records, and canonical relations. Typed record/source
 kernel `.1` now implements immutable package-private capabilities/list/get/explain/source privacy at nine exact
-static response digests. Traversal/limits `.2` now completes canonical directional breadth-first relations, pages,
-logical budgets/costs, deterministic prefixes, and all 16 successful static digests. Public typed/raw-neutral
-completion `.3` and closeout `.4` remain ordered so no incomplete API escapes. The target is 19 static digests plus
-26 neutral validation boundaries; runtime records stay owned by `.10.5.5`.
+static response digests. Traversal/limits `.2` completes canonical directional breadth-first relations, pages,
+logical budgets/costs, deterministic prefixes, and all 16 successful static digests. Public `.3` now exports
+`capabilities`, typed `query`, raw-neutral `queryNeutral`, and the immutable protocol types through that same
+projection-only evaluator. All 19 static digests and 26 neutral validation boundaries are exact; closeout `.4`
+remains before runtime work. Runtime records stay owned by `.10.5.5`.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

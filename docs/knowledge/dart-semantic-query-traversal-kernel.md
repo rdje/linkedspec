@@ -10,7 +10,7 @@ answers:
   - "does Dart semantic query support both traversal directions"
   - "is Dart semantic relation query public yet"
 date: 2026-07-22
-status: current exact package-private traversal/page/budget kernel; public validation remains pending
+status: current exact traversal/page/budget kernel exposed through the public typed/raw-neutral evaluator
 tags: [dart, semantic-introspection, query, traversal, pagination, budgets, costs]
 evidence: dart/lib/src/semantic/semantic_query.dart; dart/test/semantic_index_query_kernel_test.dart; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.2
 reverify: "cd dart && dart test test/semantic_index_query_kernel_test.dart test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart && dart analyze --fatal-infos --fatal-warnings"
@@ -32,9 +32,9 @@ records/relations, and depth is the maximum returned traversal layer.
 
 All 16 successful non-runtime neutral responses match their full canonical SHA-256 digests through immutable typed
 requests and responses. This includes reverse dispatch, staged payload/result edges, generated provenance,
-after-id/page boundaries, record/relation budget prefixes, depth zero, privacy, and explanations. The lowered
-source-ceiling error remains exact too. Raw-neutral structural validation, the two remaining static error cases,
-and every public `SemanticIndex` query method/export remain owned by `.10.5.4.3`.
+after-id/page boundaries, record/relation budget prefixes, depth zero, privacy, and explanations. Public completion
+`.10.5.4.3` now exposes this kernel through typed and raw-neutral paths while adding the remaining static errors and
+all 26 structural validation boundaries; see [[dart-semantic-query-public-api]].
 
 Related facts: [[dart-semantic-query-record-kernel]], [[dart-semantic-query-authority-map]],
 [[semantic-introspection-neutral-contract]], [[rust-semantic-query-evaluator]].

@@ -557,6 +557,21 @@ final class SemanticIndex {
     );
   }
 
+  /// Return a fresh exact semantic-query-v1 capabilities response.
+  SemanticQueryResponse get capabilities =>
+      query(SemanticQuery(operation: SemanticQueryOperation.capabilities));
+
+  /// Evaluate one immutable typed semantic-query-v1 request.
+  SemanticQueryResponse query(SemanticQuery request) =>
+      _evaluateSemanticQueryNeutral(
+        _staticProjection.detachedJson(),
+        request.toJson(),
+      );
+
+  /// Validate and evaluate one raw JSON-like semantic-query-v1 request.
+  SemanticQueryResponse queryNeutral(Object? request) =>
+      _evaluateSemanticQueryNeutral(_staticProjection.detachedJson(), request);
+
   /// Return copied caller identity and exact source sizes without a host path.
   SemanticSourceIdentity get sourceIdentity {
     _requireSourceDetail(SemanticSourceDetail.identity);

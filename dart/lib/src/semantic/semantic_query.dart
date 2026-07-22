@@ -1,8 +1,7 @@
 part of 'semantic_index.dart';
 
-// FUTURE-PARITY-BACKLOG.10.5.4.1 — immutable typed query values and
-// package-private record/source kernel. Public query exposure follows only
-// after traversal and raw-neutral validation are complete.
+// FUTURE-PARITY-BACKLOG.10.5.4.1-.3 — immutable typed query values, exact
+// projection-only evaluator, raw-neutral validation, and public API.
 
 const _semanticModelId = 'linkedspec-semantic-model-v1';
 const _semanticQueryId = 'linkedspec-semantic-query-v1';
@@ -14,6 +13,17 @@ const _semanticDepthBudgetDefault = 4;
 const _semanticRecordBudgetMax = 10000;
 const _semanticRelationBudgetMax = 20000;
 const _semanticDepthBudgetMax = 8;
+const _semanticRequestFields = <String>{
+  'contract',
+  'operation',
+  'subjects',
+  'record_kinds',
+  'relation_kinds',
+  'direction',
+  'page',
+  'budget',
+  'source',
+};
 
 /// One native semantic-query-v1 operation.
 enum SemanticQueryOperation {
@@ -343,18 +353,18 @@ final class SemanticQueryDiagnostic {
 
 /// Canonical response paging state.
 final class SemanticQueryPageState {
-  const SemanticQueryPageState({
-    required this.afterId,
+  SemanticQueryPageState({
+    required Object? afterId,
     required this.nextAfterId,
     required this.complete,
-  });
+  }) : afterId = _immutablePlainValue(afterId);
 
-  final String? afterId;
+  final Object? afterId;
   final String? nextAfterId;
   final bool complete;
 
   Map<String, Object?> toJson() => {
-    'after_id': afterId,
+    'after_id': _detachedPlainValue(afterId),
     'next_after_id': nextAfterId,
     'complete': complete,
   };
@@ -362,12 +372,13 @@ final class SemanticQueryPageState {
   @override
   bool operator ==(Object other) =>
       other is SemanticQueryPageState &&
-      other.afterId == afterId &&
+      _plainValuesEqual(other.afterId, afterId) &&
       other.nextAfterId == nextAfterId &&
       other.complete == complete;
 
   @override
-  int get hashCode => Object.hash(afterId, nextAfterId, complete);
+  int get hashCode =>
+      Object.hash(_plainValueHash(afterId), nextAfterId, complete);
 }
 
 /// Logical traversal cost reported by one query.
@@ -447,21 +458,6 @@ final class SemanticQueryResponse {
   int get hashCode => _plainValueHash(toJson());
 }
 
-/// Package-internal proof seam while the query evaluator is incomplete.
-///
-/// The public `linkedspec_dart.dart` umbrella deliberately omits this extension
-/// and every query type until `.10.5.4.3` completes raw-neutral validation.
-extension SemanticIndexQueryKernelTestAccess on SemanticIndex {
-  SemanticQueryResponse semanticCapabilitiesForTesting() =>
-      _evaluateSemanticQueryKernel(
-        _staticProjection.detachedJson(),
-        SemanticQuery(operation: SemanticQueryOperation.capabilities),
-      );
-
-  SemanticQueryResponse semanticQueryKernelForTesting(SemanticQuery request) =>
-      _evaluateSemanticQueryKernel(_staticProjection.detachedJson(), request);
-}
-
 final class _SemanticQueryPageResult<T> {
   const _SemanticQueryPageResult({
     required this.selected,
@@ -486,7 +482,378 @@ final class _SemanticQueryTraversal {
   final bool depthLimited;
 }
 
-SemanticQueryResponse _evaluateSemanticQueryKernel(
+SemanticQueryResponse _evaluateSemanticQueryNeutral(
+  Map<String, Object?> projection,
+  Object? requestValue,
+) {
+  final snapshot = _semanticQuerySnapshot(projection);
+  final validation = _validateSemanticQueryRequest(snapshot, requestValue);
+  final error = validation.error;
+  if (error != null) {
+    return error;
+  }
+  return _evaluateSemanticQuery(projection, validation.request!);
+}
+
+({SemanticQuery? request, SemanticQueryResponse? error})
+_validateSemanticQueryRequest(SemanticSnapshot snapshot, Object? requestValue) {
+  if (requestValue is! Map) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'request_not_object',
+    );
+  }
+  final contract = requestValue['contract'];
+  if (contract != _semanticQueryId) {
+    return _semanticQueryValidationError(
+      _semanticNeutralEmptyQueryResponse(
+        snapshot,
+        requestValue,
+        _semanticQueryDiagnostic(
+          'semantic_query_contract_unsupported',
+          requested: contract,
+        ),
+      ),
+    );
+  }
+  if (!_semanticHasExactKeys(requestValue, _semanticRequestFields)) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'request_fields',
+    );
+  }
+  final page = _semanticExactObject(requestValue['page'], const {
+    'after_id',
+    'limit',
+  });
+  if (page == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'page_fields',
+    );
+  }
+  final budget = _semanticExactObject(requestValue['budget'], const {
+    'max_records',
+    'max_relations',
+    'max_depth',
+  });
+  if (budget == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'budget_fields',
+    );
+  }
+  final source = _semanticExactObject(requestValue['source'], const {
+    'detail',
+    'include_content_digest',
+  });
+  if (source == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'source_fields',
+    );
+  }
+
+  final operation = switch (requestValue['operation']) {
+    'capabilities' => SemanticQueryOperation.capabilities,
+    'list' => SemanticQueryOperation.list,
+    'get' => SemanticQueryOperation.get,
+    'relations' => SemanticQueryOperation.relations,
+    'explain' => SemanticQueryOperation.explain,
+    _ => null,
+  };
+  if (operation == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'operation',
+    );
+  }
+  final subjects = _semanticStringArray(requestValue['subjects']);
+  if (subjects == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'subjects_type',
+    );
+  }
+  final recordKinds = _semanticStringArray(requestValue['record_kinds']);
+  if (recordKinds == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'record_kinds_type',
+    );
+  }
+  final relationKinds = _semanticStringArray(requestValue['relation_kinds']);
+  if (relationKinds == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'relation_kinds_type',
+    );
+  }
+  for (final (name, values) in [
+    ('subjects', subjects),
+    ('record_kinds', recordKinds),
+    ('relation_kinds', relationKinds),
+  ]) {
+    if (values.toSet().length != values.length) {
+      return _semanticInvalidQueryValidation(
+        snapshot,
+        requestValue,
+        reason: '${name}_duplicate',
+      );
+    }
+  }
+  if (recordKinds.any((kind) => !_semanticRecordKinds.contains(kind))) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'record_kind',
+    );
+  }
+  if (relationKinds.any((kind) => !_semanticRelationKinds.contains(kind))) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'relation_kind',
+    );
+  }
+  if (!_semanticRankOrdered(recordKinds, _semanticRecordKinds)) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'record_kind_order',
+    );
+  }
+  if (!_semanticRankOrdered(relationKinds, _semanticRelationKinds)) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'relation_kind_order',
+    );
+  }
+
+  final direction = switch (requestValue['direction']) {
+    'outgoing' => SemanticQueryDirection.outgoing,
+    'incoming' => SemanticQueryDirection.incoming,
+    'both' => SemanticQueryDirection.both,
+    _ => null,
+  };
+  if (direction == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'direction',
+    );
+  }
+  final rawAfterId = page['after_id'];
+  final String? afterId;
+  if (rawAfterId == null) {
+    afterId = null;
+  } else if (rawAfterId is String && !_semanticLooksNumeric(rawAfterId)) {
+    afterId = rawAfterId;
+  } else {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'after_id',
+    );
+  }
+  final pageLimit = _semanticIntegerInRange(
+    page['limit'],
+    minimum: 1,
+    maximum: _semanticPageMax,
+  );
+  if (pageLimit == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'page_limit',
+    );
+  }
+  final maxRecords = _semanticIntegerInRange(
+    budget['max_records'],
+    minimum: 1,
+    maximum: _semanticRecordBudgetMax,
+  );
+  if (maxRecords == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'max_records',
+    );
+  }
+  final maxRelations = _semanticIntegerInRange(
+    budget['max_relations'],
+    minimum: 1,
+    maximum: _semanticRelationBudgetMax,
+  );
+  if (maxRelations == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'max_relations',
+    );
+  }
+  final maxDepth = _semanticIntegerInRange(
+    budget['max_depth'],
+    minimum: 0,
+    maximum: _semanticDepthBudgetMax,
+  );
+  if (maxDepth == null) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'max_depth',
+    );
+  }
+  final sourceDetail = switch (source['detail']) {
+    'none' => SemanticSourceDetail.none,
+    'identity' => SemanticSourceDetail.identity,
+    'span' => SemanticSourceDetail.span,
+    'text' => SemanticSourceDetail.text,
+    _ => null,
+  };
+  final includeContentDigest = source['include_content_digest'];
+  if (sourceDetail == null || includeContentDigest is! bool) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'source_policy',
+    );
+  }
+  if (includeContentDigest && sourceDetail != SemanticSourceDetail.text) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'digest_requires_text',
+    );
+  }
+  if (sourceDetail.index > snapshot.sourceDetailCeiling.index ||
+      (includeContentDigest && !snapshot.contentDigestAvailable)) {
+    return _semanticQueryValidationError(
+      _semanticNeutralEmptyQueryResponse(
+        snapshot,
+        requestValue,
+        _semanticQueryDiagnostic(
+          'semantic_query_source_detail_forbidden',
+          reason: snapshot.sourceDetailCeiling.wireName,
+          requested: sourceDetail.wireName,
+        ),
+      ),
+    );
+  }
+
+  final validCombination = switch (operation) {
+    SemanticQueryOperation.capabilities ||
+    SemanticQueryOperation.list => subjects.isEmpty && relationKinds.isEmpty,
+    SemanticQueryOperation.get =>
+      subjects.isNotEmpty && recordKinds.isEmpty && relationKinds.isEmpty,
+    SemanticQueryOperation.relations =>
+      subjects.isNotEmpty && recordKinds.isEmpty,
+    SemanticQueryOperation.explain =>
+      subjects.length == 1 && recordKinds.isEmpty && relationKinds.isEmpty,
+  };
+  if (!validCombination) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'operation_combination',
+    );
+  }
+  if (operation == SemanticQueryOperation.capabilities &&
+      recordKinds.isNotEmpty) {
+    return _semanticInvalidQueryValidation(
+      snapshot,
+      requestValue,
+      reason: 'capability_filter',
+    );
+  }
+
+  return (
+    request: SemanticQuery(
+      contract: contract as String,
+      operation: operation,
+      subjects: subjects,
+      recordKinds: recordKinds,
+      relationKinds: relationKinds,
+      direction: direction,
+      page: SemanticQueryPage(afterId: afterId, limit: pageLimit),
+      budget: SemanticQueryBudget(
+        maxRecords: maxRecords,
+        maxRelations: maxRelations,
+        maxDepth: maxDepth,
+      ),
+      source: SemanticQuerySource(
+        detail: sourceDetail,
+        includeContentDigest: includeContentDigest,
+      ),
+    ),
+    error: null,
+  );
+}
+
+({SemanticQuery? request, SemanticQueryResponse? error})
+_semanticInvalidQueryValidation(
+  SemanticSnapshot snapshot,
+  Object? requestValue, {
+  required String reason,
+}) => _semanticQueryValidationError(
+  _semanticNeutralEmptyQueryResponse(
+    snapshot,
+    requestValue,
+    _semanticQueryDiagnostic('semantic_query_invalid', reason: reason),
+  ),
+);
+
+({SemanticQuery? request, SemanticQueryResponse? error})
+_semanticQueryValidationError(SemanticQueryResponse error) =>
+    (request: null, error: error);
+
+bool _semanticHasExactKeys(Map<Object?, Object?> value, Set<String> fields) =>
+    value.length == fields.length &&
+    value.keys.every((key) => key is String && fields.contains(key));
+
+Map<Object?, Object?>? _semanticExactObject(
+  Object? value,
+  Set<String> fields,
+) => value is Map && _semanticHasExactKeys(value, fields) ? value : null;
+
+List<String>? _semanticStringArray(Object? value) {
+  if (value is! List || value.any((item) => item is! String)) {
+    return null;
+  }
+  return value.cast<String>().toList();
+}
+
+bool _semanticRankOrdered(List<String> values, List<String> ranks) {
+  for (var index = 1; index < values.length; index += 1) {
+    if (ranks.indexOf(values[index - 1]) > ranks.indexOf(values[index])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool _semanticLooksNumeric(String value) {
+  final trimmed = value.trim();
+  return trimmed.isNotEmpty && double.tryParse(trimmed) != null;
+}
+
+int? _semanticIntegerInRange(
+  Object? value, {
+  required int minimum,
+  required int maximum,
+}) => value is int && value >= minimum && value <= maximum ? value : null;
+
+SemanticQueryResponse _evaluateSemanticQuery(
   Map<String, Object?> projection,
   SemanticQuery request,
 ) {
@@ -1032,6 +1399,15 @@ SemanticQueryDiagnostic _semanticQueryDiagnostic(
         'Semantic query budget was reached; returning the deterministic prefix.',
     fields: {'limit': reason},
   ),
+  'semantic_query_contract_unsupported' => SemanticQueryDiagnostic(
+    code: code,
+    severity: 'error',
+    message: 'Unsupported semantic query contract.',
+    fields: {
+      'requested': requested,
+      'supported': [_semanticQueryId],
+    },
+  ),
   'semantic_query_source_detail_forbidden' => SemanticQueryDiagnostic(
     code: code,
     severity: 'error',
@@ -1050,13 +1426,42 @@ SemanticQueryResponse _semanticEmptyQueryResponse(
   SemanticSnapshot snapshot,
   SemanticQuery request,
   SemanticQueryDiagnostic diagnostic,
-) => SemanticQueryResponse(
+) => _semanticRejectedQueryResponse(
+  snapshot,
+  afterId: request.page.afterId,
+  diagnostic: diagnostic,
+);
+
+SemanticQueryResponse _semanticNeutralEmptyQueryResponse(
+  SemanticSnapshot snapshot,
+  Object? request,
+  SemanticQueryDiagnostic diagnostic,
+) {
+  Object? afterId;
+  if (request is Map && request['page'] is Map) {
+    final page = request['page']! as Map;
+    if (page.containsKey('after_id')) {
+      afterId = _detachedPlainValue(page['after_id']);
+    }
+  }
+  return _semanticRejectedQueryResponse(
+    snapshot,
+    afterId: afterId,
+    diagnostic: diagnostic,
+  );
+}
+
+SemanticQueryResponse _semanticRejectedQueryResponse(
+  SemanticSnapshot snapshot, {
+  required Object? afterId,
+  required SemanticQueryDiagnostic diagnostic,
+}) => SemanticQueryResponse(
   contract: _semanticQueryId,
   model: _semanticModelId,
   ok: false,
   snapshot: snapshot,
   page: SemanticQueryPageState(
-    afterId: request.page.afterId,
+    afterId: afterId,
     nextAfterId: null,
     complete: true,
   ),

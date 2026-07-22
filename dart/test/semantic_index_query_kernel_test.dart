@@ -1,54 +1,53 @@
-// FUTURE-PARITY-BACKLOG.10.5.4.1 — typed record/source query kernel.
+// FUTURE-PARITY-BACKLOG.10.5.4.1-.3 — exact public typed/raw query.
 
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:linkedspec_dart/src/semantic/semantic_index.dart';
+import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:linkedspec_dart/src/semantic/sha256.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('typed kernel matches all sixteen successful static digests', () {
+  test('public typed and neutral paths match all nineteen static digests', () {
     final queryCases = (_contract['query_cases']! as List<Object?>)
         .cast<Map<String, Object?>>()
-        .where(
-          (queryCase) =>
-              queryCase['id'] != 'runtime_events' &&
-              (queryCase['expected']! as Map<String, Object?>)['ok'] == true,
-        )
+        .where((queryCase) => queryCase['id'] != 'runtime_events')
         .toList();
-    expect(queryCases, hasLength(16));
+    expect(queryCases, hasLength(19));
 
     for (final queryCase in queryCases) {
       final id = queryCase['id']! as String;
-      final request = _typedRequest(
-        queryCase['request']! as Map<String, Object?>,
-      );
+      final requestValue = queryCase['request']! as Map<String, Object?>;
+      final requestBefore = _cloneMap(requestValue);
+      final request = _typedRequest(requestValue);
       final index = _indexFor(queryCase['snapshot']! as String);
-      final response = id == 'capabilities'
-          ? index.semanticCapabilitiesForTesting()
-          : index.semanticQueryKernelForTesting(request);
+      final typed = id == 'capabilities'
+          ? index.capabilities
+          : index.query(request);
+      final neutral = index.queryNeutral(requestValue);
       final expected = queryCase['expected']! as Map<String, Object?>;
 
-      expect(response.ok, expected['ok'], reason: '$id status');
+      expect(requestValue, requestBefore, reason: '$id input isolation');
+      expect(typed, neutral, reason: '$id typed/neutral identity');
+      expect(typed.ok, expected['ok'], reason: '$id status');
       expect(
-        response.records.map((record) => record.id),
+        typed.records.map((record) => record.id),
         expected['record_ids'],
         reason: '$id records',
       );
       expect(
-        response.relations.map((relation) => relation.id),
+        typed.relations.map((relation) => relation.id),
         expected['relation_ids'],
         reason: '$id relations',
       );
       expect(
-        response.diagnostics.map((diagnostic) => diagnostic.code),
+        typed.diagnostics.map((diagnostic) => diagnostic.code),
         expected['diagnostic_codes'],
         reason: '$id diagnostics',
       );
-      expect(response.page.complete, expected['complete'], reason: id);
+      expect(typed.page.complete, expected['complete'], reason: id);
       expect(
-        _canonicalDigest(response.toJson()),
+        _canonicalDigest(typed.toJson()),
         expected['response_sha256'],
         reason: '$id full response digest',
       );
@@ -60,7 +59,7 @@ void main() {
     final expected =
         (queryCase['expected']! as Map<String, Object?>)['response_sha256'];
     final index = _indexFor('graph');
-    final first = index.semanticCapabilitiesForTesting();
+    final first = index.capabilities;
 
     expect(
       () => first.records.add(first.records.single),
@@ -76,7 +75,7 @@ void main() {
     final facts = capability['facts']! as Map<String, Object?>;
     (facts['record_kinds']! as List<Object?>)[0] = 'host-private';
 
-    final second = index.semanticCapabilitiesForTesting();
+    final second = index.capabilities;
     expect(second, isNot(same(first)));
     expect(_canonicalDigest(second.toJson()), expected);
     expect(index.compilationAuthority.compiled, isTrue);
@@ -85,14 +84,12 @@ void main() {
 
   test('source privacy and structural redaction are monotonic', () {
     final privacy = _indexFor('privacy');
-    final none = privacy.semanticQueryKernelForTesting(
-      _typedRequest(_requestFor('privacy_none')),
-    );
+    final none = privacy.query(_typedRequest(_requestFor('privacy_none')));
     expect(none.records.single.source, isNull);
     expect(none.records.single.facts['pattern'], isNull);
     expect(none.records.single.redactions, ['/facts/pattern']);
 
-    final text = privacy.semanticQueryKernelForTesting(
+    final text = privacy.query(
       _typedRequest(_requestFor('privacy_text_and_digest')),
     );
     expect(text.records.single.facts['pattern'], 'é');
@@ -103,9 +100,9 @@ void main() {
       allOf(startsWith('sha256:'), hasLength(71)),
     );
 
-    final limited = _indexFor('privacy_limited').semanticQueryKernelForTesting(
-      _typedRequest(_requestFor('source_ceiling_forbidden')),
-    );
+    final limited = _indexFor(
+      'privacy_limited',
+    ).query(_typedRequest(_requestFor('source_ceiling_forbidden')));
     expect(limited.ok, isFalse);
     expect(limited.diagnostics.single.fields, {
       'requested': 'span',
@@ -118,8 +115,36 @@ void main() {
     );
   });
 
+  test('raw neutral validation rejects all twenty-six boundaries', () {
+    final cases = _invalidQueryCases();
+    expect(cases, hasLength(26));
+    final index = _indexFor('graph');
+
+    for (final queryCase in cases) {
+      final before = _cloneJson(queryCase.request);
+      final response = index.queryNeutral(queryCase.request);
+
+      expect(queryCase.request, before, reason: queryCase.label);
+      expect(response.ok, isFalse, reason: queryCase.label);
+      expect(
+        response.diagnostics.single.code,
+        queryCase.code,
+        reason: queryCase.label,
+      );
+      if (queryCase.reason != null) {
+        expect(
+          response.diagnostics.single.fields['reason'],
+          queryCase.reason,
+          reason: queryCase.label,
+        );
+      }
+      expect(response.records, isEmpty, reason: queryCase.label);
+      expect(response.relations, isEmpty, reason: queryCase.label);
+    }
+  });
+
   test('both-direction traversal is breadth-first and depth bounded', () {
-    final response = _indexFor('graph').semanticQueryKernelForTesting(
+    final response = _indexFor('graph').query(
       SemanticQuery(
         operation: SemanticQueryOperation.relations,
         subjects: const ['rule:Top'],
@@ -148,13 +173,13 @@ void main() {
     expect(response.diagnostics.single.fields, {'limit': 'max_depth'});
   });
 
-  test('kernel is deterministic projection-only and not publicly exported', () {
+  test('public query is deterministic projection-only and host clean', () {
     final index = _indexFor('graph');
     final explain = _typedRequest(_requestFor('graph_explain_entry'));
     final list = _typedRequest(_requestFor('graph_list_rules'));
-    final first = index.semanticQueryKernelForTesting(explain);
-    final middle = index.semanticQueryKernelForTesting(list);
-    final second = index.semanticQueryKernelForTesting(explain);
+    final first = index.query(explain);
+    final middle = index.query(list);
+    final second = index.query(explain);
 
     expect(first, second);
     expect(first, isNot(middle));
@@ -191,13 +216,13 @@ void main() {
     }
 
     final publicLibrary = File('lib/linkedspec_dart.dart').readAsStringSync();
-    for (final omitted in [
-      'SemanticQueryOperation',
-      'SemanticQueryResponse',
-      'SemanticIndexQueryKernelTestAccess',
-    ]) {
-      expect(publicLibrary, isNot(contains(omitted)), reason: omitted);
+    for (final exposed in ['SemanticQueryOperation', 'SemanticQueryResponse']) {
+      expect(publicLibrary, contains(exposed), reason: exposed);
     }
+    expect(
+      publicLibrary,
+      isNot(contains('SemanticIndexQueryKernelTestAccess')),
+    );
   });
 }
 
@@ -216,6 +241,152 @@ Map<String, Object?> _queryCase(String id) =>
 
 Map<String, Object?> _requestFor(String id) =>
     _queryCase(id)['request']! as Map<String, Object?>;
+
+Map<String, Object?> _cloneMap(Map<String, Object?> value) =>
+    jsonDecode(jsonEncode(value))! as Map<String, Object?>;
+
+Object? _cloneJson(Object? value) => jsonDecode(jsonEncode(value));
+
+typedef _InvalidQueryCase = ({
+  String label,
+  Object? request,
+  String code,
+  String? reason,
+});
+
+List<_InvalidQueryCase> _invalidQueryCases() {
+  Map<String, Object?> request() => _cloneMap(_requestFor('graph_list_rules'));
+
+  final cases = <_InvalidQueryCase>[
+    (
+      label: 'request_not_object',
+      request: <Object?>[],
+      code: 'semantic_query_invalid',
+      reason: 'request_not_object',
+    ),
+  ];
+  void add(
+    String label,
+    Object? value, {
+    String code = 'semantic_query_invalid',
+    String? reason,
+  }) {
+    cases.add((label: label, request: value, code: code, reason: reason));
+  }
+
+  var value = request();
+  value['contract'] = 'linkedspec-semantic-query-v0';
+  add(
+    'unsupported_contract',
+    value,
+    code: 'semantic_query_contract_unsupported',
+  );
+
+  value = request()..remove('direction');
+  add('request_fields', value, reason: 'request_fields');
+
+  value = request();
+  (value['page']! as Map<String, Object?>).remove('limit');
+  add('page_fields', value, reason: 'page_fields');
+
+  value = request();
+  (value['budget']! as Map<String, Object?>).remove('max_depth');
+  add('budget_fields', value, reason: 'budget_fields');
+
+  value = request();
+  (value['source']! as Map<String, Object?>).remove('detail');
+  add('source_fields', value, reason: 'source_fields');
+
+  value = request()..['operation'] = 'search';
+  add('operation', value, reason: 'operation');
+
+  value = request()..['subjects'] = 'rule:Top';
+  add('subjects_type', value, reason: 'subjects_type');
+
+  value = request()
+    ..['operation'] = 'get'
+    ..['subjects'] = ['rule:Top', 'rule:Top']
+    ..['record_kinds'] = <Object?>[];
+  add('subjects_duplicate', value, reason: 'subjects_duplicate');
+
+  value = request()..['record_kinds'] = ['host_ast'];
+  add('record_kind', value, reason: 'record_kind');
+
+  var relation = request()
+    ..['operation'] = 'relations'
+    ..['subjects'] = ['rule:Top']
+    ..['record_kinds'] = <Object?>[]
+    ..['relation_kinds'] = ['host_edge'];
+  add('relation_kind', relation, reason: 'relation_kind');
+
+  value = request()..['record_kinds'] = ['regex_slot', 'rule'];
+  add('record_kind_order', value, reason: 'record_kind_order');
+
+  relation = request()
+    ..['operation'] = 'relations'
+    ..['subjects'] = ['rule:Top']
+    ..['record_kinds'] = <Object?>[]
+    ..['relation_kinds'] = ['contains', 'declares'];
+  add('relation_kind_order', relation, reason: 'relation_kind_order');
+
+  value = request()..['direction'] = 'sideways';
+  add('direction', value, reason: 'direction');
+
+  value = request();
+  (value['page']! as Map<String, Object?>)['after_id'] = 7;
+  add('after_id', value, reason: 'after_id');
+
+  value = request();
+  (value['page']! as Map<String, Object?>)['limit'] = 0;
+  add('page_limit', value, reason: 'page_limit');
+
+  for (final (field, invalid) in [
+    ('max_records', 0),
+    ('max_relations', 0),
+    ('max_depth', 9),
+  ]) {
+    value = request();
+    (value['budget']! as Map<String, Object?>)[field] = invalid;
+    add(field, value, reason: field);
+  }
+
+  value = request();
+  (value['source']! as Map<String, Object?>)['detail'] = 'full';
+  add('source_policy', value, reason: 'source_policy');
+
+  value = request();
+  (value['source']! as Map<String, Object?>)['include_content_digest'] = 0;
+  add('numeric_boolean', value, reason: 'source_policy');
+
+  value = request();
+  (value['source']! as Map<String, Object?>)['include_content_digest'] = true;
+  add('digest_requires_text', value, reason: 'digest_requires_text');
+
+  value = request()..['subjects'] = ['rule:Top'];
+  add('operation_combination', value, reason: 'operation_combination');
+
+  value = request()
+    ..['operation'] = 'get'
+    ..['subjects'] = ['rule:Unknown']
+    ..['record_kinds'] = <Object?>[];
+  add('unknown_subject', value, reason: 'unknown_subject');
+
+  value = request();
+  (value['page']! as Map<String, Object?>)['after_id'] = 'rule:Unknown';
+  add(
+    'after_id_not_in_primary_stream',
+    value,
+    reason: 'after_id_not_in_primary_stream',
+  );
+
+  value = request()
+    ..['operation'] = 'explain'
+    ..['subjects'] = ['rule:Child']
+    ..['record_kinds'] = <Object?>[];
+  add('not_explainable', value, reason: 'not_explainable');
+
+  return cases;
+}
 
 SemanticIndex _indexFor(String snapshot) {
   final (fixture, ceiling) = switch (snapshot) {

@@ -7,6 +7,10 @@ consumer. Rust now has an opaque strict-source, exact-coordinate, compiled-or-fa
 static and call/staged/generated projections; a public immutable typed/raw-neutral query evaluator; and optional
 caller-captured typed runtime observations that derive a separate immutable post-execution index. One exact Rust
 consumer now composes those layers across every governed route.
+Dart now also exposes its complete non-runtime static query surface: immutable public protocol values,
+`SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` share one projection-only evaluator at
+all 19 static response digests and 26 portable malformed-request boundaries. Dart runtime observation and composed
+backend admission remain later layers.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -24,6 +28,8 @@ The distinction matters:
 - `RuntimeSemanticObservationSink` captures typed events during normal Rust execution, and
   `SemanticIndex::with_execution_observation(...)` validates them into the twentieth exact answer; and
 - `semantic_introspection_rust_admission.rs` composes every required Rust path once; and
+- Dart `SemanticIndex.capabilities`, `query(SemanticQuery)`, and `queryNeutral(Object?)` expose the exact static
+  answer surface without exporting Dart's private normalized projection or compiler authorities; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
@@ -108,8 +114,8 @@ plus the neutral 128-byte graph fixture, while isolated generated callers remain
 
 Construction does **not** invoke `LinkedSpecRuntimeEngine`, a generated parser, target actions/lifecycle code,
 trace, a diagnostic-output sink, or a semantic observation sink. It performs no implicit path read. It also does
-not expose normalized records, capabilities, query, or runtime observations; those remain separately owned later
-leaves.
+not expose normalized records or runtime observations through construction accessors. Public capabilities and
+queries are a separate projection-only layer over the completed private snapshot.
 
 The source/outcome parent is composition-closed. Its proof covers graph, Unicode privacy, native failure,
 decoded/byte convergence, malformed input/options, supplementary and duplicate coordinates, all four ceilings,
@@ -135,11 +141,12 @@ private projection maps it to the neutral `unknown_rule_reference` / `compile` d
 decision, and explanation. A runtime-capable fixture initially has `has_execution: false` and no execution/event
 records or relations, so static construction cannot activate trace or execution.
 
-Dart callers still cannot query or obtain the projection, AST, ActionIR, descriptor, compiled regexes, generated
+Dart callers cannot obtain the private projection, AST, ActionIR, descriptor, compiled regexes, generated
 implementation source, paths, trace, diagnostic sinks, or runtime observers. Composed static signoff passes all
 six exact construction/isolation cases plus complete Dart/public/canonical gates and closes `.10.5.2` without
-semantic rollout or native-admission promotion. Calls/bindings/staged/generated projection is now exact through
-`.10.5.3.2`; capabilities/query, typed runtime observations, and backend admission remain later work.
+semantic rollout or native-admission promotion. Calls/bindings/staged/generated projection is exact through
+`.10.5.3`; capabilities/query are public through `.10.5.4.3`, while typed runtime observations and backend
+admission remain later work.
 
 The Dart calls projection is now exact. The complete neutral target has 22 records and 25 relations;
 `.10.5.3.1` deep-equals the 18-record / 16-relation subset left after deliberately excluding the three staged
@@ -220,9 +227,67 @@ capabilities, and explanation steps. Record/relation/depth budgets return determ
 costs, and portable warnings. All 16 successful non-runtime response digests now match, including reverse,
 staged/generated, page-boundary, budget, privacy, and explanation cases.
 
-Public typed plus raw-neutral completion `.10.5.4.3` is next, followed by composed closeout `.4`. Until `.3`, no
-query type or method appears in the public Dart umbrella. Runtime `execution`/`event` records remain exclusively
-owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
+Public typed plus raw-neutral completion `.10.5.4.3` is now implemented. Every query protocol type is exported by
+`package:linkedspec_dart/linkedspec_dart.dart`, and `SemanticIndex` exposes one exact static evaluator through
+three caller-facing forms:
+
+```dart
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final index = SemanticIndex.fromSource(
+  'Top::\n /x/\n',
+  options: const SemanticIndexOptions(
+    logicalName: 'example.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+  ),
+);
+
+final capabilities = index.capabilities;
+print(capabilities.contract); // linkedspec-semantic-query-v1
+
+final rules = index.query(
+  SemanticQuery(
+    operation: SemanticQueryOperation.list,
+    recordKinds: const ['rule'],
+    page: const SemanticQueryPage(limit: 20),
+    source: const SemanticQuerySource(detail: SemanticSourceDetail.span),
+  ),
+);
+
+for (final record in rules.records) {
+  print('${record.kind}: ${record.name}');
+}
+
+final neutral = index.queryNeutral({
+  'contract': 'linkedspec-semantic-query-v1',
+  'operation': 'get',
+  'subjects': [rules.records.first.id],
+  'record_kinds': <Object?>[],
+  'relation_kinds': <Object?>[],
+  'direction': 'outgoing',
+  'page': {'after_id': null, 'limit': 100},
+  'budget': {'max_records': 1000, 'max_relations': 2000, 'max_depth': 4},
+  'source': {'detail': 'none', 'include_content_digest': false},
+});
+print(neutral.ok); // true
+```
+
+Use typed `query` for ordinary Dart embedding. Use `queryNeutral` at a serialized protocol boundary where malformed
+JSON-like values must receive portable diagnostics rather than becoming Dart constructor/type errors. Both paths
+return the same `SemanticQueryResponse` shape and enter the same validator/evaluator. Capabilities and response
+aggregates are immutable; `toJson()` returns fresh detached data, so caller mutation cannot alter the index or a
+later response.
+
+The raw path validates the exact contract and object keys; array types/order/duplicates; operation combinations;
+record/relation kinds; direction; page cursor/limit; record/relation/depth budgets; source policy/digest request and
+construction ceiling; subjects; and integer-versus-boolean boundaries. All 19 non-runtime static response digests
+match through both paths, and all 26 portable invalid-request boundaries return exact rejected envelopes.
+
+Each public call receives only a new detached clone of snapshot/source-reference/record/relation data. Query code
+cannot access accepted source wholesale, parser/compiler objects, function sidecars, AST/ActionIR, compiled regexes,
+generated implementation source, executors, trace state, paths, environment, or host objects. It cannot compile or
+execute the target, enable trace, or invent runtime events. Composition closeout `.10.5.4.4` is next. Runtime
+`execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
 
 ## Current Rust construction and query surface
 
@@ -1013,8 +1078,8 @@ The dependency order is:
 | `.10.5.4.0` | Dart query authority map and dependency split | complete; behavior-free 19-digest/26-boundary plan |
 | `.10.5.4.1` | Dart typed record/source query kernel | complete; package-private, immutable, nine exact static digests |
 | `.10.5.4.2` | Dart relations/pages/budgets/costs | complete; all 16 successful static digests exact |
-| `.10.5.4.3` | Dart public typed/raw-neutral query | active next; exact 19 digests and 26 boundaries |
-| `.10.5.4.4` | Dart composed query closeout | pending |
+| `.10.5.4.3` | Dart public typed/raw-neutral query | complete; exact 19 digests and 26 boundaries |
+| `.10.5.4.4` | Dart composed query closeout | active next |
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | active |
 | `.10.5.5-.10.5.6` | Dart observation and admission | pending |
 | `.10.6` | Julia parity | pending |
