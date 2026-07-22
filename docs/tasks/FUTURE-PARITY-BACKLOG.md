@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart private static projection parent `.10.5.2` is composition-closed through
-  `.10.5.2.3`; exact calls/bindings/staged/generated projection `.10.5.3` is next)
+- Last updated: `2026-07-22` (Dart calls authority/split `.10.5.3.0` is complete; typed function/helper/call/
+  binding projection `.10.5.3.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8646,13 +8646,83 @@ before implementation.
         semantic behavior or rollout changes.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.3`
-  Status: `pending`
+  Status: `in_progress` (2026-07-22; activated from clean `64fdace0`)
   Goal: Project exact Dart calls, bindings, staged payload/job/result, and generated provenance.
   Depends on: `.10.5.2`
   Acceptance: Compose `UserFunctionRegistry`, typed ActionIR resolution, authored-source correlation, normalized
     function sidecars, and generated-v2 plan identity into the exact 22-record / 25-relation calls target. Lock
     source-preorder calls, conservative shapes, resolution evidence, Unicode spans, staged directions, function-
     shell masking, and denial of AST/ActionIR/generated-source/path leakage; expose no query yet.
+  Children: `.10.5.3.0`, `.10.5.3.1`, `.10.5.3.2`, `.10.5.3.3`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / SPLIT FIRST** — Compare the neutral 22/25 target and admitted Perl/Rust projections with the
+    exact Dart registry, staged sidecars, ActionIR/contracts, static projection, source map, and generated plan;
+    split authority/core/completion/closeout before production changes.
+  - [ ] **TYPED CALL GRAPH** — Project functions, helpers, bindings, source-preorder nested calls, exact resolution
+    evidence, conservative shapes, and call-driven rule/edge shapes from typed Dart owners plus authored source.
+  - [ ] **STAGED / GENERATED PROVENANCE** — Add distinct payload/parse-job/result records and exact relation
+    directions plus generated-v2 selected-plan identity without retaining body AST or implementation source.
+  - [ ] **EXACT 22 / 25 / ISOLATION** — Deep-equal the complete neutral calls target with Unicode/interleaving,
+    detached clone, public-omission, and AST/ActionIR/generated-source/path/execution/trace denial proof.
+  - [ ] **SIGNOFF / HANDOFF** — Pass focused and complete Dart, semantic/Unicode/generated/public/canonical gates,
+    synchronize durable surfaces, clean artifacts, and close before query leaf `.10.5.4`.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.3.0`
+    Status: `done` (2026-07-22)
+    Goal: Freeze the exact Dart calls/staging/generated authority map and omission-safe implementation split.
+    Depends on: `.10.5.2`
+    Acceptance: Probe the neutral calls fixture through current Dart staged parse, validation, compilation,
+      function registry, typed ActionIR/contracts, entry selection, and generated plan; reconcile it with the
+      admitted Perl/Rust projectors; record exact ordering/span/normalization/leakage constraints; split bounded
+      implementation and closeout children; change no production/query/runtime/rollout/admission behavior.
+    Verification: The neutral target is exactly 22 records / 25 relations. Dart retains registry function order,
+      exact shell/body source, body payload/job/result sidecars, typed edge ActionIR/contracts, selected entry, and
+      generated-v2 plan rows. Native `CompiledSpec.definitionOrder` contains rules only, while registry
+      `FunctionDefinition.sourceSpan` / `bodySpan` are line-only; exact authored definition order and shell source
+      must therefore locate the exact shell occurrence containing the staged body payload's decoded-scalar span.
+      Staged `body_ast` deep-equals a typed `parseActionBlock(bodySource)` result, and compiled edge
+      `actionPayload.actionAst` plus contracts retain typed nested calls and resolution. Those ActionIR spans are
+      local to normalized body/code text, so the projector must correlate occurrence-safe typed preorder back to
+      the complete authored shell/edge range instead of adding local offsets to physical source. Function registry
+      resolution precedes helper fallback; shape inference remains bounded to typed literals, current bindings,
+      registered returns, and the three governed fixture helpers. The selected generated row is `Top/default` from
+      the already-retained v2 plan; no emission is needed. Implementation is split into core typed calls `.1`,
+      staged/generated exact completion `.2`, and composed closeout `.3`. The diagnostic probe was removed; no
+      production, query, execution, trace, rollout, or admission behavior changed. Focused Dart authority proof
+      passes 31/31 across action contracts, function shell, staged registry, source/outcome foundation, and static
+      projection. Semantic remains 6/20/73 at rollout 3/9 and admission 2/6; Unicode is 806/9/8/2; generated source
+      is v1/10/80-0-0; public selector proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability
+      80/0/0, and surface 59/27/0. Knowledge Map is 674/5,042; mdBook, memory architecture, all four doctrines,
+      task metadata, diff hygiene, and generated-artifact cleanup pass.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.3.1`
+    Status: `pending`
+    Goal: Project Dart functions, helpers, bindings, typed calls, resolution evidence, and exact source shapes.
+    Depends on: `.10.5.3.0`
+    Acceptance: Extend the private static projection from `UserFunctionRegistry`, typed function/edge ActionIR,
+      contract resolution, and immutable source correlation. Merge functions/rules in authored order; emit outer-
+      before-inner calls, bindings, reads/writes, user/helper resolution, decisions/explanations, conservative
+      return/value shapes, and call-driven edge/rule shapes. Prove exact neutral core subsets, Unicode spans,
+      duplicate/interleaved shell occurrence safety, and no public/query/execution/trace/host leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.3.2`
+    Status: `pending`
+    Goal: Complete Dart staged and generated provenance with exact 22-record / 25-relation parity.
+    Depends on: `.10.5.3.1`
+    Acceptance: Add distinct function body payload/parse-job/result records with exact contains/consumes/produces/
+      lowered-from/staged-by directions and selected generated-v2 handler-plan provenance. Deep-equal the complete
+      calls target, prove fresh detached clones plus AST/ActionIR/body/generated-source/path denial, and retain no
+      query or runtime observation surface.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.3.3`
+    Status: `pending`
+    Goal: Compose calls/staging/generated signoff and close the Dart calls parent.
+    Depends on: `.10.5.3.2`
+    Acceptance: Re-run exact calls plus all-static/foundation proof, complete Dart package/primary/corpus,
+      semantic/Unicode/generated/public/canonical gates, durable synchronization and artifact cleanup; close
+      `.10.5.3` without promoting rollout/admission or exposing query/runtime behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.4`
   Status: `pending`
@@ -10981,7 +11051,14 @@ Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, pac
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
 code passes Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds.
 Repair child `.10.5.2.3.0` serializes untracked-selector probes through their owning final scan and keeps them
-outside Dart formatter traversal. Exact calls/bindings/staged/generated projection `.10.5.3` is the next leaf.
+outside Dart formatter traversal.
+
+Calls/staging audit `.10.5.3.0` is behavior-free and complete from clean base `64fdace0`. It freezes the 22-record /
+25-relation target and the exact Dart registry, sidecar, typed ActionIR/contracts, source-map, and generated-plan
+owners. Because compiled definition order omits functions and registry spans are line-only, exact function order/
+source must merge shell occurrences by staged scalar body spans; local normalized ActionIR spans require authored-
+occurrence correlation. Core typed functions/helpers/calls/bindings `.10.5.3.1` is next, followed by exact staged/
+generated completion `.2` and composed closeout `.3`.
 
 ### Historical frontier sequence
 
@@ -11405,7 +11482,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `done` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
 | 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `done` | Composed all Dart static signoff, synchronized durable state, and closed the parent. |
 | 74.4.2.3.0 | `FUTURE-PARITY-BACKLOG.10.5.2.3.0` | `done` | Serialize untracked-selector self-tests and isolate their probe from Dart formatting. |
-| 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
+| 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `active` | Project exact Dart calls/bindings/staged/generated provenance. |
+| 74.4.3.0 | `FUTURE-PARITY-BACKLOG.10.5.3.0` | `done` | Freeze exact Dart calls/staging/generated authorities and dependency split. |
+| 74.4.3.1 | `FUTURE-PARITY-BACKLOG.10.5.3.1` | `pending` | Project typed functions/helpers/calls/bindings, source, resolution, and shapes. |
+| 74.4.3.2 | `FUTURE-PARITY-BACKLOG.10.5.3.2` | `pending` | Complete staged/generated provenance and exact 22/25 parity. |
+| 74.4.3.3 | `FUTURE-PARITY-BACKLOG.10.5.3.3` | `pending` | Compose complete calls signoff and close the parent. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |

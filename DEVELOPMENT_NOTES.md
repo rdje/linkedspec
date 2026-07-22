@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.0` — typed meaning and authored location have different owners):
+  Dart already retains every semantic ingredient needed for the 22-record / 25-relation calls target, but no
+  single owner has the complete truth. `UserFunctionRegistry` owns function order/signatures and exact source;
+  staged payload/job/result sidecars own body identity/policy and decoded-scalar offsets; compiled edge
+  `actionPayload.actionAst` plus contract resolution own typed nested calls; the static projection owns rule/edge
+  identities; entry selection and the retained generated-v2 plan own handler provenance.
+
+  Compiler convenience order cannot be reused blindly. `CompiledSpec.definitionOrder` currently lists only rules,
+  and `FunctionDefinition.sourceSpan` / `bodySpan` carry line bounds only. The projector must locate the exact shell
+  occurrence that contains each staged body scalar span, then merge that byte position with static rule positions.
+  This also masks interleaved function shells from rule-member source scans without treating AST JSON as a schema.
+
+  ActionIR source spans are local to normalized body/code strings. Indentation and multiline formatting mean local
+  offsets are not physical-source offsets. Exact projection therefore walks typed outer-before-inner preorder and
+  uses an occurrence-safe authored-source cursor inside the already bounded function shell or edge range. The safe
+  order is core functions/helpers/calls/bindings `.1`, staged/generated exact completion `.2`, and closeout `.3`.
+  Focused authorities pass 31/31; semantic/Unicode/generated/public governance is unchanged and green; Knowledge
+  Map is 674/5,042.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.3` — close by composition, preserve layer boundaries):
   A static semantic parent closes only when its variants work as one omission-sensitive surface. The final Dart
   proof therefore reruns the six exact private cases together: graph, two privacy ceilings, normalized failure,

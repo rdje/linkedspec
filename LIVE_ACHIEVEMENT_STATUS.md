@@ -8,18 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Composed static closeout `FUTURE-PARITY-BACKLOG.10.5.2.3` is complete from clean repair commit `9be98a07`.
-  It closes parent `.10.5.2` without public query, runtime observation, rollout, or admission promotion. Exact
-  calls/bindings/staged/generated projection `.10.5.3` begins only after this closeout commits cleanly.
+- Calls authority/split `FUTURE-PARITY-BACKLOG.10.5.3.0` is behavior-free and complete from clean static-closeout
+  commit `64fdace0`. After its clean commit, `.10.5.3.1` implements typed functions/helpers/calls/bindings; no
+  production, query, runtime observation, rollout, or admission behavior is active in this audit.
 
-All five private construction targets are exact and composed: compiled graph, privacy at text and identity,
-projection-only normalized failure, and runtime-static absence, plus lifecycle-occurrence isolation. The native
-foundation diagnostic remains exact and no package-public projection accessor exists.
+The exact neutral calls target is 22 records / 25 relations. Registry functions, staged sidecars, compiled edge
+ActionIR/contracts, static identities, selected entry, and generated-v2 plan rows are reusable typed authorities.
 
-Focused composition is 6/6. Complete Dart is format 75/0, fatal analysis, package 314, primary 66x2, corpus
-105/105; selector proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, and public 59/27/0. Canonical
-passes Rust admission 77.49s, primary 66x2, and Phase 0 1,031/1,031 in 620s. Knowledge Map is 674/5,037; semantic
-governance remains 6/20/73 at rollout 3/9 and admission 2/6.
+Compiled definition order omits function shells and registry spans are line-only, so exact authored order/source
+must use the staged payload scalar span. Local normalized ActionIR spans require occurrence-safe correlation inside
+the bounded shell/edge source. `.1` owns the typed core, `.2` exact staged/generated completion, and `.3` closeout.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -51,6 +49,17 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.0 — split Dart calls projection**
+  (DONE in this commit from clean base `64fdace0`).
+
+  **Result:** Exact registry/ActionIR/sidecar/source-map/generated authorities and the 22/25 target are frozen;
+  source-order and normalized-span traps are explicit; bounded `.1-.3` children exist before production changes.
+
+  **Proof:** Exact native probe plus admitted Perl/Rust/neutral comparison; probe removed; focused authorities
+  31/31; semantic 6/20/73, Unicode 806/9/8/2, generated v1/10/80-0-0, public 59/27/0; KM 674/5,042.
+
+  **Next:** after this clean commit, activate `.10.5.3.1` for typed functions/helpers/calls/bindings.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.3 — close Dart private static projection**
   (DONE in this commit from clean base `9be98a07`).
 

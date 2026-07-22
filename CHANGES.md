@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.0 — split Dart calls projection
+
+The Dart calls/staging/generated semantic parent is authority-mapped and dependency-split before production
+changes. The exact neutral target contains 22 records and 25 relations. Current Dart owners already retain ordered
+function registry entries, exact shell/body source, staged payload/job/result sidecars, typed edge ActionIR and
+contract resolution, selected entry identity, and generated-v2 plan rows.
+
+The audit identifies two source-correlation constraints. `CompiledSpec.definitionOrder` contains rule labels but
+omits function shells, while registry `FunctionDefinition.sourceSpan` and `bodySpan` are line-only. Exact function
+definition order and shell ranges must therefore merge registry entries with rules by locating the exact shell
+occurrence enclosing each staged payload's decoded-scalar body span. ActionIR spans are local to normalized body or
+edge code, so typed outer-before-inner traversal must correlate occurrences back to the complete authored source
+rather than add local offsets directly.
+
+Implementation is split into typed functions/helpers/calls/bindings `.10.5.3.1`, staged/generated exact 22/25
+completion `.10.5.3.2`, and composed closeout `.10.5.3.3`. The diagnostic probe was removed. No production,
+query, execution, trace/runtime observation, semantic rollout, or native admission behavior changes.
+
+Focused Dart authority proof passes 31/31. Semantic remains 6/20/73 at rollout 3/9 and admission 2/6; Unicode is
+806/9/8/2; generated source is v1/10/80-0-0; public proof is concurrency 3/3, executable 0/19, retirement
+5/6/8/0, capability 80/0/0, and surface 59/27/0. Knowledge Map is 674 facts / 5,042 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.3 — close Dart private static projection
 
 The Dart static semantic parent is composition-closed without another production change. One focused suite now

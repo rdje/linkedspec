@@ -141,6 +141,19 @@ six exact construction/isolation cases plus complete Dart/public/canonical gates
 semantic rollout or native-admission promotion. Calls/bindings/staged/generated provenance is next in `.10.5.3`;
 capabilities/query, typed runtime observations, and backend admission remain later work.
 
+The Dart calls-projection authority audit is complete. The neutral target has 22 records and 25 relations, sourced
+from several typed owners: the ordered user-function registry, staged function-body payload/job/result sidecars,
+compiled edge ActionIR and contract resolution, the existing static rule/edge identities, selected entry, and the
+retained generated-v2 plan. `CompiledSpec.definitionOrder` lists rules but not function shells, and function
+`sourceSpan`/`bodySpan` values are line-only. Exact authored order therefore locates the shell occurrence enclosing
+the staged payload's decoded-scalar body span, then merges that position with rule positions.
+
+ActionIR spans are local to normalized body or edge code, not physical-source coordinates. Projection must walk
+typed calls in outer-before-inner preorder while matching each occurrence inside the already bounded authored
+shell or edge source. This preserves exact Unicode byte/scalar evidence and interleaved function-shell isolation
+without exposing AST JSON. Core function/helper/call/binding projection, staged/generated completion, and composed
+signoff are separate `.10.5.3.1-.3` leaves; Dart still exposes no semantic query or runtime observation surface.
+
 ## Current Rust construction and query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
@@ -923,7 +936,9 @@ The dependency order is:
 | `.10.5.2.2` | Dart privacy/failure/runtime-static and isolation parity | complete; all five private construction targets exact |
 | `.10.5.2.3` | Dart composed static signoff and parent closure | complete; focused 6/6 plus full gates |
 | `.10.5.2` | Dart private static projection parent | complete; all five construction targets exact |
-| `.10.5.3-.10.5.6` | Dart calls, query, observation, and admission | pending; calls projection next |
+| `.10.5.3.0` | Dart calls/staging/generated authority map and split | complete; behavior-free exact 22/25 plan |
+| `.10.5.3.1-.3` | Dart typed calls, staged/generated completion, and closeout | pending; typed core next |
+| `.10.5.4-.10.5.6` | Dart query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
