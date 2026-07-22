@@ -246,8 +246,14 @@ projection-only evaluator. All 19 static digests and 26 neutral validation bound
 now composition-closes the query parent on committed code. Runtime audit `.10.5.5.0` fixes existing post-match
 slot selection and successful final-result construction as the only observation authorities. It also freezes zero
 absent-sink work, exact observer exception passthrough through generated wrappers, immutable derivation only from
-static graph evidence, and the `.1-.4` order. Typed direct/loaded/reconstructed capture `.1` is active; runtime
+static graph evidence, and the `.1-.4` order. Typed direct/loaded/reconstructed capture `.1` is complete; runtime
 records remain unimplemented and admission remains `.10.5.6` work.
+
+Capture `.10.5.5.1` now exports the v1 contract, immutable slot/result event values, and optional synchronous sink.
+Direct, loaded, reconstructed, traced convenience, and validated generated-plan engine routes emit exact Unicode-
+scalar positions and final UTF-8 input identity while preserving result/cursor/trace/diagnostic values and caller
+failure identity. Null guards precede event allocation and input hashing. Public generated/emitted wrappers remain
+`.3` work, and `.2` is active for validation into a separate immutable observed index and the twentieth digest.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

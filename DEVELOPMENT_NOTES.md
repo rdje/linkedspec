@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.1` — keep capture optional and structurally cheap): The runtime tests
+  `semanticObservationSink != null` before constructing any event. This is especially important for the final
+  event because its factory hashes exact UTF-8 input bytes. The ordinary no-sink parser path therefore gains one
+  null branch but no semantic event allocation and no input hashing.
+
+  Slot position cannot be read from the context at the pre-effect seam: `_acceptRegexMatch` has not advanced its
+  cursor yet. `_recordRegexSlotSelected` receives `match.codeUnitEnd` and converts that boundary directly through
+  `codeUnitOffsetToCharOffset`. A probe seeking past `é` to match `🙂` proves both slot and final events report scalar
+  position 2 while the internal code-unit cursor is 3.
+
+  Callback failures use a private `_RuntimeSemanticObservationSinkFailure` only inside the engine. This prevents a
+  caller-thrown `RuntimeInterpreterException` from entering the runtime's own diagnostic normalization catch while
+  still letting the parser close an active trace scope. The original object and stack are immediately restored.
+  Generated/source-emitter adapters have a separate catch boundary and intentionally remain `.10.5.5.3` work.
+
+  This leaf captures typed evidence only. It neither mutates `SemanticIndex` nor adds execution/event records.
+  Active `.10.5.5.2` must validate the retained sequence against detached static topology before producing a new
+  immutable observed index; public generated/emitted propagation remains ordered after derivation in `.3`.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.0` — observe at meaning-bearing seams): Dart's existing trace marker
   is useful evidence for locating regex selection, but text trace is not the semantic event API. The actual seam is
   the point that already has a successful match plus checked structural slot identity and has not yet applied match

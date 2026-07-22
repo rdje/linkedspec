@@ -179,6 +179,12 @@ export 'src/runtime/matching.dart'
         charOffsetToCodeUnitOffset,
         codeUnitOffsetToCharOffset,
         lineColumnAtCodeUnitOffset;
+export 'src/runtime/semantic_observation.dart'
+    show
+        RuntimeSemanticObservationEvent,
+        RuntimeSemanticObservationEventKind,
+        RuntimeSemanticObservationSink,
+        linkedSpecSemanticExecutionObservationContract;
 export 'src/runtime/interpreter.dart'
     show
         LinkedSpecRuntimeEngine,

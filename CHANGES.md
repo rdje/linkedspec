@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.1 — capture typed Dart runtime semantics
+
+Dart now exports `linkedspec-semantic-execution-observation-v1`, a closed typed slot/result event vocabulary,
+immutable event values with detached JSON/equality, and `RuntimeSemanticObservationSink` for one normal runtime
+invocation. `parse`, `execute`, traced convenience methods, and the validated generated-plan engine entry thread
+the optional sink through one private execution context; loaded and reconstructed compiled state reuse those seams.
+
+Regex-slot facts are delivered only after a successful match and ordered structural identity check, before match
+effects, with the matched end converted from Dart code units to Unicode-scalar position. A final `rule_result` is
+delivered only after successful `RuntimeParseResult` construction and carries SHA-256 identity of the exact UTF-8
+input. Explicit absent-sink guards precede event construction and hashing. Callback failures are privately wrapped
+only to close trace scope and are then rethrown with the caller's exact object and stack.
+
+Focused proof passes 5/5. Canonical `ab\n` produces `Top[0]@1`, `Top[1]@2`, then successful `Top@2` with exact input
+identity; direct, loaded, reconstructed, parse/execute, traced convenience, and generated-plan engine routes agree.
+A multibyte probe locks scalar positions, immediate exit omits the final event, and results/cursors/traces/
+diagnostics are unchanged. Adjacent runtime/diagnostic/native-trace/source-emitter composition passes 81/81;
+static semantic composition remains 28/28. Complete Dart passes format 81/0, fatal analysis, package 329, primary
+66x2, and corpus 105/105. Canonical proof passes Rust semantic admission 1/1 in 79.08 seconds, primary 66x2, and
+Phase 0 1,031/1,031 in 623 seconds. Public generated/emitted propagation remains `.3`, immutable observed-index
+derivation is active `.2`, and semantic rollout/admission remain 3/9 and 2/6.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.0 — map Dart runtime observation
 
 The behavior-free Dart runtime-observation audit now freezes exact acquisition, projection, and route authority

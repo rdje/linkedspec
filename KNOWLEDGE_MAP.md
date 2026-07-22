@@ -6051,11 +6051,11 @@ _Dart semantic query has exact directional traversal pages and logical budgets_
 - **source:** [`docs/knowledge/dart-semantic-query-traversal-kernel.md`](docs/knowledge/dart-semantic-query-traversal-kernel.md)
 
 ### dart-semantic-runtime-observation-authority-map
-_Dart runtime semantics must be captured at typed post-match and successful-result seams_
+_Dart runtime semantics use typed post-match and successful-result capture seams_
 
 - **answers:** does Dart already have a semantic runtime observation sink | where must Dart capture regex slot semantic events | where must Dart capture final semantic result events | should Dart semantic observations reuse trace output | should Dart semantic observations reuse diagnostic output | what happens when no Dart semantic observation sink is installed | how must Dart semantic observer callback failures propagate | why do Dart generated wrappers need semantic observer failure passthrough | which Dart execution routes reuse the runtime observation seams | how does Dart derive an observed semantic index | can Dart semantic query execute the parser | what is the Dart semantic runtime observation implementation split
-- **date:** 2026-07-22 · **status:** current behavior-free authority audit; typed capture implementation active next
-- **evidence:** `dart/lib/src/runtime/interpreter.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.5.0`
+- **date:** 2026-07-22 · **status:** current typed direct-engine capture; immutable observed-index derivation active next
+- **evidence:** `dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.1`
 - **source:** [`docs/knowledge/dart-semantic-runtime-observation-authority-map.md`](docs/knowledge/dart-semantic-runtime-observation-authority-map.md)
 
 ### dart-shipped-corpus-smoke-split

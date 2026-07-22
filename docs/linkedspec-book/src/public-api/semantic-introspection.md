@@ -9,8 +9,9 @@ caller-captured typed runtime observations that derive a separate immutable post
 consumer now composes those layers across every governed route.
 Dart now also exposes its complete non-runtime static query surface: immutable public protocol values,
 `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` share one projection-only evaluator at
-all 19 static response digests and 26 portable malformed-request boundaries. Dart runtime observation and composed
-backend admission remain later layers.
+all 19 static response digests and 26 portable malformed-request boundaries. Dart additionally exposes exact typed
+invocation-local runtime capture across its direct engine topology. Immutable observed-index derivation, public
+generated/emitted propagation, and composed backend admission remain later layers.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -30,6 +31,8 @@ The distinction matters:
 - `semantic_introspection_rust_admission.rs` composes every required Rust path once; and
 - Dart `SemanticIndex.capabilities`, `query(SemanticQuery)`, and `queryNeutral(Object?)` expose the exact static
   answer surface without exporting Dart's private normalized projection or compiler authorities; and
+- Dart `RuntimeSemanticObservationSink` receives immutable `regex_slot_selected` and `rule_result` facts during
+  normal direct/loaded/reconstructed/traced/generated-plan engine execution; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
@@ -297,18 +300,49 @@ executing rule and each selected target rule/index. Its exact final-result autho
 entry wrapper after it constructs `RuntimeParseResult`; that seam knows the effective entry rule, final Unicode-
 scalar cursor, exact input text, and successful completion.
 
-The new sink is therefore invocation-local, typed, separate from trace and diagnostic output, and optional. With
-no sink, execution must allocate no observation events and hash no input. A sink callback failure must propagate
-as the caller's exact object and stack. This needs special care in generated-plan and emitted-source adapters:
-those adapters currently translate arbitrary execution failures into `GeneratedSourceException`, so observer
-failures require an explicit private passthrough wrapper analogous to diagnostic-output sink failures.
+Typed live capture `.10.5.5.1` now implements the engine half of that boundary. The public umbrella exports the
+contract id, closed event-kind enum, immutable event value, and synchronous callback type. Install the callback on
+one invocation only:
 
-Captured events do not mutate the static index and do not grant query-side execution. A later
+```dart
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final events = <RuntimeSemanticObservationEvent>[];
+final result = engine.parse(
+  input,
+  semanticObservationSink: events.add,
+);
+
+for (final event in events) {
+  print(event.toJson());
+}
+```
+
+For the governed `runtime.spec` and exact input `ab\n`, the callback receives `Top[0]` at Unicode-scalar position
+1, `Top[1]` at position 2, and a successful final `Top` result at position 2. Only the final event carries
+`input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece`; slot events carry no input identity
+or status. `position` is always a Unicode-scalar offset even though Dart runtime matching uses host code units
+internally.
+
+The sink is separate from trace and diagnostic output. With no sink, explicit guards run before event construction
+and before final input hashing. A callback failure propagates as the caller's exact object and stack after the
+runtime closes any active trace scope. Successful observation does not change result, cursor, lifecycle, trace, or
+diagnostic values. An immediate runtime exit may leave already-delivered slot events but never fabricates a final
+successful result event.
+
+Direct `parse`/`execute`, loaded and reconstructed engines, trace convenience methods, and the validated generated-
+plan engine entry now share this capture. Public `executeGeneratedParserV2`, emitted library wrappers, and their
+traced forms intentionally do not accept the sink yet: `.10.5.5.3` owns that adapter propagation because those
+wrappers translate arbitrary execution failures into `GeneratedSourceException` and must first preserve callback
+identity explicitly.
+
+Captured events do not mutate the static index and do not grant query-side execution. The active-next
 `withExecutionObservation(...)` call validates caller-retained events against the detached static rule, regex-slot,
 and `selects_regex` graph, derives value shapes only from that graph, and returns a separate immutable snapshot
-containing one execution, ordered events, and `observed_as` relations. Direct, loaded, and reconstructed capture is
-owned by `.10.5.5.1`; immutable derivation and the twentieth digest by `.2`; generated, emitted, and traced route
-identity by `.3`; and composition closeout by `.4`. Rollout and Dart admission remain exclusively `.10.5.6` work.
+containing one execution, ordered events, and `observed_as` relations. Direct, loaded, reconstructed, traced-
+convenience, and generated-plan engine capture is complete in `.10.5.5.1`; immutable derivation and the twentieth
+digest are active in `.2`; public generated/emitted propagation remains `.3`; and composition closeout is `.4`.
+Rollout and Dart admission remain exclusively `.10.5.6` work.
 
 ## Current Rust construction and query surface
 
@@ -1103,8 +1137,8 @@ The dependency order is:
 | `.10.5.4.4` | Dart composed query closeout | complete; final committed-code composition and gates |
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | complete |
 | `.10.5.5.0` | Dart runtime-observation authority map and split | complete; behavior-free exact seam/route plan |
-| `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | active |
-| `.10.5.5.2` | Dart immutable observed-index derivation | pending |
+| `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | complete; exact events/non-interference/failure identity |
+| `.10.5.5.2` | Dart immutable observed-index derivation | active |
 | `.10.5.5.3` | Dart generated/emitted/traced observation routes | pending |
 | `.10.5.5.4` | Dart runtime-observation composition closeout | pending |
 | `.10.5.5` | Dart typed runtime observation parent | active |

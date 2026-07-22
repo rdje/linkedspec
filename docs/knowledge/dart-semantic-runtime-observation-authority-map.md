@@ -1,6 +1,6 @@
 ---
 id: dart-semantic-runtime-observation-authority-map
-title: Dart runtime semantics must be captured at typed post-match and successful-result seams
+title: Dart runtime semantics use typed post-match and successful-result capture seams
 answers:
   - "does Dart already have a semantic runtime observation sink"
   - "where must Dart capture regex slot semantic events"
@@ -15,12 +15,12 @@ answers:
   - "can Dart semantic query execute the parser"
   - "what is the Dart semantic runtime observation implementation split"
 date: 2026-07-22
-status: current behavior-free authority audit; typed capture implementation active next
+status: current typed direct-engine capture; immutable observed-index derivation active next
 tags: [dart, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: dart/lib/src/runtime/interpreter.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.5.0
+evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.1
 last_verified: 2026-07-22
 reverify:
-  - "rg -n 'RuntimeDiagnosticOutputSink|_traceRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|_RuntimeExecutionContext' dart/lib/src/runtime/interpreter.dart"
+  - "rg -n 'RuntimeDiagnosticOutputSink|_recordRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|semanticObservationSink' dart/lib/src/runtime/interpreter.dart"
   - "rg -n '_GeneratedDiagnosticOutputSinkFailure|executeGeneratedParserV2|executeGeneratedParserWithTraceV2|Object\\? execute\\(' dart/lib/src/source_emitter.dart"
   - "sed -n '134,150p' dart/lib/src/io/spec_loader.dart"
   - "sed -n '143,178p' capability_conformance/semantic_introspection_model.json"
@@ -32,10 +32,11 @@ reverify:
 
 ## Current fact
 
-Dart has no semantic runtime-observation sink at the `.10.5.5.0` audit boundary. Trace and diagnostic output are
-already separate optional runtime products, but neither is a normalized semantic event authority.
+Dart had no semantic runtime-observation sink at the `.10.5.5.0` audit boundary. `.10.5.5.1` now exports the exact
+typed v1 event/sink API and threads it through the direct engine topology. Trace and diagnostic output remain
+separate optional runtime products; neither is a normalized semantic event authority.
 
-The exact regex-slot seam is the existing `_traceRegexSlotSelected(...)` call site in
+The exact regex-slot seam is the audited selection call site, now named `_recordRegexSlotSelected(...)`, in
 `dart/lib/src/runtime/interpreter.dart`, not the trace text it emits. Each call happens only after a regex match
 exists and any ordered structural identity check succeeds, and before `_acceptRegexMatch(...)` applies match
 effects. The seam has the executing `CompiledRule`, every selected `CompiledRegexSlotIdentity` target/index, and
@@ -47,14 +48,14 @@ result. Failed entry execution must not emit a final `rule_result` event.
 
 ## Required native boundary
 
-The new API must expose immutable typed `regex_slot_selected` and `rule_result` events under
+The public API exposes immutable typed `regex_slot_selected` and `rule_result` events under
 `linkedspec-semantic-execution-observation-v1`, delivered synchronously to an optional invocation-local callback.
-It is distinct from `LinkedSpecTraceEmitter` and `RuntimeDiagnosticOutputSink`. With no callback installed, the
-runtime must allocate no observation event and compute no input digest. A caller callback failure must escape as
-the exact original object with its original stack.
+It is distinct from `LinkedSpecTraceEmitter` and `RuntimeDiagnosticOutputSink`. Explicit null guards precede event
+construction and final input hashing. A caller callback failure escapes as the exact original object with its
+original stack after any active trace scope is closed.
 
-Direct `parse`/`execute`, their traced convenience forms, `LoadedCompiledSpec.createEngine()`, and reconstructed
-`CompiledSpec` all reuse the same `_parse` and rule-execution seams. Generated-plan execution also enters `_parse`.
+Direct `parse`/`execute`, their traced convenience forms, `LoadedCompiledSpec.createEngine()`, reconstructed
+`CompiledSpec`, and the validated generated-plan engine entry now reuse the same `_parse` and rule-execution seams.
 The public generated/source-emitter adapters need extra protection: they currently catch arbitrary `Object` values
 and translate them into `GeneratedSourceException`. Observer failures therefore need a private wrapper/passthrough
 parallel to `_GeneratedDiagnosticOutputSinkFailure`; otherwise adding the optional parameter would silently change
@@ -74,8 +75,9 @@ trace, install a sink, hash a new input, or mutate either index.
 
 ## Dependency order
 
-- `.10.5.5.1`: public typed events/sink and direct, loaded, reconstructed capture.
-- `.10.5.5.2`: validated immutable derivation and exact twentieth response digest.
+- `.10.5.5.1`: complete public typed events/sink and direct, loaded, reconstructed, traced-convenience, and
+  generated-plan engine capture.
+- `.10.5.5.2`: active validated immutable derivation and exact twentieth response digest.
 - `.10.5.5.3`: generated-plan, emitted-source, traced/untraced propagation and callback identity.
 - `.10.5.5.4`: complete composition/signoff and parent closure without Dart admission promotion.
 

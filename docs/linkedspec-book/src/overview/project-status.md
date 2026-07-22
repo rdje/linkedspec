@@ -521,7 +521,10 @@ Three backbone items tracked major structural modernization — all done:
   one evaluator at all 19 static digests and 26 validation boundaries; `.10.5.4.4` composition-closes that parent
   on committed code. Behavior-free runtime audit `.10.5.5.0` now freezes the post-match slot and successful final-
   result seams, absent-sink/no-query boundary, generated-wrapper exception passthrough, immutable derivation, and
-  `.1-.4` dependency order. Typed live capture `.10.5.5.1` is active; runtime observation is not public yet.
+  `.1-.4` dependency order. Typed live capture `.10.5.5.1` now exports immutable v1 slot/result events plus an
+  invocation-local callback across direct/loaded/reconstructed/traced/generated-plan engine routes, with exact
+  Unicode-scalar positions, input identity, failure identity, and no result/trace/diagnostic drift. Immutable
+  observed-index derivation `.10.5.5.2` is active; generated/emitted adapters and Dart admission remain later.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

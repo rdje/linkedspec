@@ -10,6 +10,7 @@ import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
+import 'semantic_observation.dart';
 import 'unicode_case_mapping.dart';
 
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
@@ -140,6 +141,13 @@ final class _RuntimeDiagnosticOutputSinkFailure implements Exception {
   final StackTrace stackTrace;
 }
 
+final class _RuntimeSemanticObservationSinkFailure implements Exception {
+  const _RuntimeSemanticObservationSinkFailure(this.error, this.stackTrace);
+
+  final Object error;
+  final StackTrace stackTrace;
+}
+
 final class RuntimeLifecycleEvent {
   const RuntimeLifecycleEvent({
     required this.ruleLabel,
@@ -204,12 +212,14 @@ final class LinkedSpecRuntimeEngine {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
   }) {
     return _parse(
       input,
       topRule: topRule,
       trace: trace,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
     );
   }
 
@@ -225,12 +235,14 @@ final class LinkedSpecRuntimeEngine {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
   }) {
     return _parse(
       input,
       topRule: topRule,
       trace: trace,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
       generatedPlan: Map.unmodifiable(generatedPlan),
       generatedSourceIdentity: sourceIdentity,
     );
@@ -241,6 +253,7 @@ final class LinkedSpecRuntimeEngine {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
     Map<String, GeneratedRuleFamily>? generatedPlan,
     String? generatedSourceIdentity,
   }) {
@@ -300,6 +313,7 @@ final class LinkedSpecRuntimeEngine {
       topRule: label,
       trace: trace,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
       generatedPlan: generatedPlan,
       generatedSourceIdentity: generatedSourceIdentity,
     );
@@ -326,6 +340,16 @@ final class LinkedSpecRuntimeEngine {
           context.lifecycleEvents,
         ),
       );
+      if (context.semanticObservationSink != null) {
+        _emitSemanticObservation(
+          context,
+          RuntimeSemanticObservationEvent.ruleResult(
+            ruleLabel: label,
+            position: parseResult.cursorCharOffset,
+            input: input,
+          ),
+        );
+      }
       if (traceScope != null) {
         trace?.exitScope(
           traceScope,
@@ -336,6 +360,11 @@ final class LinkedSpecRuntimeEngine {
     } on _RuntimeDiagnosticOutputSinkFailure catch (failure) {
       if (traceScope != null) {
         trace?.exitScope(traceScope, 'diagnostic_output_sink_error');
+      }
+      Error.throwWithStackTrace(failure.error, failure.stackTrace);
+    } on _RuntimeSemanticObservationSinkFailure catch (failure) {
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'semantic_observation_sink_error');
       }
       Error.throwWithStackTrace(failure.error, failure.stackTrace);
     } on RuntimeExitNow catch (exit) {
@@ -364,6 +393,7 @@ final class LinkedSpecRuntimeEngine {
     LinkedSpecTraceConfig traceConfig, {
     String? topRule,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
   }) {
     final trace = LinkedSpecTraceEmitter(traceConfig);
     return parse(
@@ -371,6 +401,7 @@ final class LinkedSpecRuntimeEngine {
       topRule: topRule,
       trace: trace,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
     );
   }
 
@@ -379,12 +410,14 @@ final class LinkedSpecRuntimeEngine {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
   }) {
     return parse(
       input,
       topRule: topRule,
       trace: trace,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
     );
   }
 
@@ -393,12 +426,14 @@ final class LinkedSpecRuntimeEngine {
     LinkedSpecTraceConfig traceConfig, {
     String? topRule,
     RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+    RuntimeSemanticObservationSink? semanticObservationSink,
   }) {
     return parseWithTrace(
       input,
       traceConfig,
       topRule: topRule,
       diagnosticOutputSink: diagnosticOutputSink,
+      semanticObservationSink: semanticObservationSink,
     );
   }
 
@@ -1045,10 +1080,11 @@ final class LinkedSpecRuntimeEngine {
           expectedIndex,
           match.alternativeIndex,
         );
-        _traceRegexSlotSelected(
+        _recordRegexSlotSelected(
           context,
           rule,
           match.alternativeIndex,
+          positionCodeUnit: match.codeUnitEnd,
           selectionRole: 'ordered_required',
         );
         _acceptRegexMatch(
@@ -1102,10 +1138,11 @@ final class LinkedSpecRuntimeEngine {
         match.alternativeIndex,
       );
     }
-    _traceRegexSlotSelected(
+    _recordRegexSlotSelected(
       context,
       rule,
       match.alternativeIndex,
+      positionCodeUnit: match.codeUnitEnd,
       selectionRole: selectionRole,
     );
     _acceptRegexMatch(
@@ -1189,13 +1226,28 @@ final class LinkedSpecRuntimeEngine {
     }
   }
 
-  void _traceRegexSlotSelected(
+  void _recordRegexSlotSelected(
     _RuntimeExecutionContext context,
     CompiledRule rule,
     int regexIndex, {
+    required int positionCodeUnit,
     required String selectionRole,
   }) {
     for (final identity in compiledRegexSlotIdentitiesFor(rule, regexIndex)) {
+      if (context.semanticObservationSink != null) {
+        _emitSemanticObservation(
+          context,
+          RuntimeSemanticObservationEvent.regexSlotSelected(
+            ruleLabel: rule.label,
+            targetRule: identity.targetRule,
+            regexIndex: identity.regexIndex,
+            position: codeUnitOffsetToCharOffset(
+              context.input,
+              positionCodeUnit,
+            ),
+          ),
+        );
+      }
       context.trace?.emitEvent(
         LinkedSpecTraceEventKind.mark,
         'dart_runtime:regex_slot_selected',
@@ -1204,6 +1256,21 @@ final class LinkedSpecRuntimeEngine {
             'regex_index=${identity.regexIndex}',
         LinkedSpecTraceLevel.high,
       );
+    }
+  }
+
+  void _emitSemanticObservation(
+    _RuntimeExecutionContext context,
+    RuntimeSemanticObservationEvent event,
+  ) {
+    final sink = context.semanticObservationSink;
+    if (sink == null) {
+      return;
+    }
+    try {
+      sink(event);
+    } on Object catch (error, stackTrace) {
+      throw _RuntimeSemanticObservationSinkFailure(error, stackTrace);
     }
   }
 
@@ -6547,6 +6614,7 @@ final class _RuntimeExecutionContext {
     required this.topRule,
     required this.trace,
     required this.diagnosticOutputSink,
+    required this.semanticObservationSink,
     this.generatedPlan,
     this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input);
@@ -6557,6 +6625,7 @@ final class _RuntimeExecutionContext {
   final String topRule;
   final LinkedSpecTraceEmitter? trace;
   final RuntimeDiagnosticOutputSink? diagnosticOutputSink;
+  final RuntimeSemanticObservationSink? semanticObservationSink;
   final Map<String, GeneratedRuleFamily>? generatedPlan;
   final String? generatedSourceIdentity;
   final Map<String, Object?> variables = <String, Object?>{};
