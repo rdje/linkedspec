@@ -24,6 +24,11 @@ example, the recurring diagnostic-output gate uses
 `bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`; that case records eager effects and
 the same canonical boolean result across all five commands and both environments.
 
+Pass `--manifest PATH` to route a separate schema-v1 manifest through the same matrix without changing the
+canonical 66-case suite. `unicode_case/self_hosted_cli/manifest.json` is the current-grammar Unicode-label
+contract: one aggregate case covers all neutral label fixtures and physical-line boundary behavior while compiling
+canonical `specs/spec.spec` only once per runtime/environment.
+
 The recurring root-selection gate runs a 5x2x6 selected root-rule matrix through
 `bash tools/check_root_rule_selection_five_backend.sh`: first authored marker, markerless first rule, explicit
 override, unknown explicit selection, default request trace, and escaped explicit request-trace failure.

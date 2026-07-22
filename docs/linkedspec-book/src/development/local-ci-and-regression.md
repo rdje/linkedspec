@@ -276,6 +276,19 @@ Run the complete exact-interface proof from the repository root:
 bash tools/run_primary_cli_matrix.sh
 ```
 
+Pass `--manifest PATH` to run another schema-v1 CLI manifest through the same five commands and two option
+environments without changing the canonical 66-case interface suite. The current self-hosted Unicode-label proof
+uses one aggregate case so each leg compiles `specs/spec.spec` only once:
+
+```bash
+bash tools/run_primary_cli_matrix.sh \
+  --manifest unicode_case/self_hosted_cli/manifest.json
+```
+
+That case includes all 9 positive labels, all 8 negative labels, both exact-identity pairs, the three
+header/action/blind no-prefix surfaces, and newline splitting. Canonical local CI runs both the ordinary manifest
+and this current-grammar manifest when `LINKEDSPEC_RUN_CLI_MATRIX=1`.
+
 The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, builds PUC
 Lua native adapters in disposable temporary storage, and runs the shared manifest against Perl, Rust, Dart,
 Julia, and Lua with `POSIXLY_CORRECT` unset and set. The historical admitted boundary was 5x2x61. The later
@@ -284,6 +297,7 @@ leaves. Root-selection admission expands the current manifest to 65 cases refere
 admitted at 65/65 in both environments; Dart is also admitted at 65/65 twice through its exact 15-role consumer.
 Julia now passes 65/65 twice and is topology-admitted. Lua subsequently removed its 33 cursor-owned mismatches;
 the complete five-backend 5x2x66 matrix is green, while the recurring root gate selects only its six owned cases.
+The additional current-grammar contract is 5x2x1 and intentionally remains a separate manifest.
 
 The `LUA-BACKEND-PARITY.7.3` no-drift closeout leaves those executable contracts unchanged. Its canonical local
 gate passes the Perl reference command at 61/61 in both default and POSIX option environments and Phase 0 at

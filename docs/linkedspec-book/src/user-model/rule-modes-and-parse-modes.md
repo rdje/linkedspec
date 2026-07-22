@@ -31,6 +31,18 @@ A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class 
 positions, so the historical ASCII forms—including `1Rule` and `_`—remain valid while names such as `Töp`,
 `Δelta`, and `變體` are also valid. Punctuation such as `-`, `/`, and `:` is not part of a label.
 
+Headers begin at a physical line boundary. Bare action and blind-call references own their complete physical line,
+so an invalid token is not accepted by truncating its longest valid prefix:
+
+```text
+Top-Rule::     # not a header named Rule
+ -> Top-Rule   # not an action targeting Top
+ => Top😀      # not a blind call targeting Top
+```
+
+Use block or fluent edge syntax when more syntax belongs on the same line. A newline ends a label token; for
+example, `-> Top` followed by a line containing `Rule` denotes two separate physical-line forms.
+
 Labels are exact, case-sensitive, and normalization-sensitive. LinkedSpec does not normalize or fold them:
 
 ```text

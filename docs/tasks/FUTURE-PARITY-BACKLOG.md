@@ -7910,7 +7910,7 @@ before implementation.
     sync public/book/task/index/live/memory/KM, cleanup, and commit the behavior-free audit cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1`
-  Status: `active`
+  Status: `done` (2026-07-22)
   Goal: Reconcile the first-authoritative self-hosted grammar with ADR `0051` before claiming another backend.
   Children: `.10.5.0.1.0`, `.10.5.0.1.1`, `.10.5.0.1.2`
   Depends on: `.10.5.0`
@@ -7922,6 +7922,14 @@ before implementation.
     byte/hash freshness mechanically, and update Dart's structural PCRE bridge so the actual current lifecycle and
     bare-edge grammar executes rather than accepting a stale snapshot. Do not advance Dart or semantic rollout/
     admission.
+  Verification: Children `.0-.2` generate and independently reconstruct one exact 806-range Unicode 17 class,
+    consume it at all 12 canonical declaration/reference sites, execute current lifecycle/bare syntax on Dart,
+    freshness-lock all four self-hosted corpus inputs, repair sparse Perl AND traversal, and reject physical-line
+    label-prefix truncation. Current canonical SHA-256 is
+    `ce409f572887d102543d995e197666df668e47963f572a3a376622249e57fa7c`. Exact current-grammar proof passes all
+    9 positive / 8 negative / 2 distinct fixtures plus header/action/blind no-prefix and newline cases on the
+    Perl/Rust/Dart/Julia/Lua default+POSIX matrix. Complete corpus, backend, mdBook, Knowledge Map 672/4,998,
+    doctrine, and canonical gates pass; semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6.
 
   #### Acceptance Checklist
 
@@ -7933,15 +7941,15 @@ before implementation.
     self-hosted representation byte-for-byte; reject version, omission, range, and normalization drift.
   - [x] **ALL LABEL PRODUCTIONS** — Cover rule headers plus action-block/fluent/bare, blind-block/fluent/bare, and
     bare-edge group/index forms while leaving lifecycle/function/helper/mark identifiers under their own grammar.
-  - [ ] **CANONICAL CORPUS FRESHNESS** — Regenerate all four `spec_spec_*` fixtures through
+  - [x] **CANONICAL CORPUS FRESHNESS** — Regenerate all four `spec_spec_*` fixtures through
     `tools/gen_oracle_corpus.pl`, require their `input.spec` bytes/hash to equal current `specs/spec.spec`, and make
     stale copies fail before any backend can count them as current self-hosted grammar evidence.
   - [x] **CURRENT DART STRUCTURAL BRIDGE** — Admit the canonical lifecycle alternation and bare-edge productions in
     Dart's structural PCRE recognizer, then prove the current source itself executes; 105/105 over stale copies is
     explicitly not acceptance evidence.
-  - [ ] **CROSS-RUNTIME PROOF** — Execute positive, negative, distinct, and no-prefix-truncation cases through the
+  - [x] **CROSS-RUNTIME PROOF** — Execute positive, negative, distinct, and no-prefix-truncation cases through the
     self-hosted grammar on every currently admitted runtime route required by the neutral grammar owner.
-  - [ ] **NO FALSE PROMOTION / SIGNOFF** — Synchronize formal/public/KM/task state and pass complete affected/
+  - [x] **NO FALSE PROMOTION / SIGNOFF** — Synchronize formal/public/KM/task state and pass complete affected/
     canonical gates without claiming Dart label or semantic admission.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.0`
@@ -8022,7 +8030,7 @@ before implementation.
       6/20/73 at 3/9 + 2/6, pass affected/canonical gates, synchronize docs/KM/task state, cleanup, and commit.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.2`
-    Status: `active`
+    Status: `done` (2026-07-22)
     Goal: Regenerate, freshness-lock, and compose the current self-hosted corpus proof across admitted runtimes.
     Depends on: `.10.5.0.1.1`
     Children: `.10.5.0.1.2.0`, `.10.5.0.1.2.1`
@@ -8030,27 +8038,29 @@ before implementation.
       mechanical canonical byte/hash freshness check, and execute positive/negative/distinct/no-truncation grammar
       cases plus the refreshed fixtures across required Perl/Rust/Dart/Julia/Lua routes. Pass complete affected and
       canonical gates, synchronize public/durable state, close parent `.10.5.0.1`, and preserve semantic ledgers.
-    Verification: Activated task-tree-first from clean shared-grammar commit `15c97761` at ahead 284 with a
-      zero-byte commit brief and no reproducible Rust/Dart/book/Python-cache artifacts. Retrieved the canonical
-      Perl generator plus all five manifest executors from the Knowledge Map. The new canonical checker RED rejects
-      every `spec_spec_*` input at stale SHA-256 `e0a1b63b...` versus `specs/spec.spec` `43cddeae...`; all four
-      `cmp` probes fail before regeneration. A `LinkedSpec::get_parser("spec")`/primary-CLI ground-truth probe then
-      exposed a second acceptance RED: forbidden suffixes such as `Top-Rule`, `Top Rule`, `Top😀`, and `Top:` are
-      truncated to action target `Top`, while the normalized source patterns locate the missing complete-line
-      boundary at `specs/spec.spec:109,129,141`. Fix and five-runtime proof pending.
+    Verification: Activated task-tree-first from clean shared-grammar commit `15c97761` at ahead 284. `.2.0`
+      freshness-locks all four `spec_spec_*` inputs and repairs the sparse Perl AND regression exposed by atomic
+      regeneration. `.2.1` resolves the remaining toolbox-proven prefix truncation: headers are physical-line
+      anchored with an extra-colon guard, and bare action/blind references own complete CRLF/LF-aware lines. One
+      omission-sensitive current-grammar manifest covers every neutral label fixture and all three no-prefix
+      surfaces on the exact 5x2 matrix. The first Rust leg exposed absent `entry_group(N)` returning empty string;
+      Rust now returns `Undef`/JSON null like its existing `match_group` seam and the other runtimes. Canonical
+      source and all four inputs share SHA-256 `ce409f57...`; Rust/Dart/Julia/Lua corpus routes pass 105/105,
+      complete Rust and dual-ABI Lua gates pass, and canonical CI passes Phase 0 1,031 plus stable 5x2x66 and
+      focused 5x2x1, exit 0. Knowledge Map is 672/4,998; book/doctrines/diff/cleanup pass.
 
     #### Acceptance Checklist
 
     - [x] **TASK-TREE-FIRST / CLEAN BASE** — Activate from clean `.10.5.0.1.1` before corpus or checker changes.
     - [x] **ORACLE / FRESHNESS RED** — Retrieve the exact generator and five-runtime corpus owners, prove all four
       inputs stale, and make canonical checking reject their old bytes before regeneration.
-    - [ ] **VERBATIM REGENERATION** — Regenerate all four `spec_spec_*` fixtures through `tools/gen_oracle_corpus.pl`
+    - [x] **VERBATIM REGENERATION** — Regenerate all four `spec_spec_*` fixtures through `tools/gen_oracle_corpus.pl`
       and require every input byte/SHA to equal current canonical `specs/spec.spec`.
-    - [ ] **CROSS-RUNTIME LABEL PROOF** — Execute positive, negative, distinct, and no-prefix-truncation declaration/
+    - [x] **CROSS-RUNTIME LABEL PROOF** — Execute positive, negative, distinct, and no-prefix-truncation declaration/
       reference cases through the shared self-hosted grammar on required Perl/Rust/Dart/Julia/Lua routes.
-    - [ ] **CURRENT CORPUS PROOF** — Run refreshed `spec_spec_*` cases and complete affected corpus gates without
+    - [x] **CURRENT CORPUS PROOF** — Run refreshed `spec_spec_*` cases and complete affected corpus gates without
       weakening structural, capture, lifecycle, generated, or primary behavior.
-    - [ ] **LOCKSTEP / CLOSE PARENT** — Preserve semantic 6/20/73 at 3/9 + 2/6, synchronize public/book/KM/task/
+    - [x] **LOCKSTEP / CLOSE PARENT** — Preserve semantic 6/20/73 at 3/9 + 2/6, synchronize public/book/KM/task/
       roadmap/live/memory state, pass canonical CI, cleanup, close `.10.5.0.1`, and commit cleanly.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.2.0`
@@ -8088,13 +8098,37 @@ before implementation.
       - [x] **LOCKSTEP** — Book/live docs, Knowledge Map, task/memory state, cleanup, and commit are complete.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1`
-      Status: `pending`
+      Status: `done` (2026-07-22)
       Goal: Reject Unicode-label prefix truncation and compose the five-runtime current-grammar closeout.
       Depends on: `.10.5.0.1.2.0`
       Acceptance: Add exact physical-line boundaries for self-hosted rule headers and bare action/blind references,
         execute all positive/negative/distinct/no-prefix-truncation contract cases through current `specs/spec.spec`
         on Perl/Rust/Dart/Julia/Lua, pass refreshed four-fixture and complete corpus routes, close `.10.5.0.1.2` and
         `.10.5.0.1`, synchronize all durable/public state, and commit cleanly.
+      Verification: Activated task-tree-first from clean `fef93b5a` at ahead 285. Direct `LinkedSpec::Get` RED
+        showed invalid headers producing suffix `Rule` nodes and invalid bare action/blind references producing
+        prefix `Top` nodes; newline remained a valid two-token separator. Canonical grammar now anchors the three
+        affected patterns to physical lines without changing same-line rule bodies or Unicode label identity. The
+        independent checker locks grammar topology, exact canonical/corpus bytes, manifest fixture coverage, matrix
+        routing, CI registration, and the Rust absent-capture repair. Focused Perl and exact 5x2x1 pass; Rust,
+        Dart, Julia, and Lua corpus routes pass 105/105; Dart current-source tests pass 3; complete Rust passes
+        runtime 148, integration 197, generated-source/semantic suites and primary 66x2; dual-ABI Lua passes 177
+        plus primary 66x2. Canonical CI passes all four doctrines, Unicode 806/9/8/2, semantic 6/20/73, Rust
+        admission, primary 66x2, Phase 0 1,031, stable 5x2x66, and focused 5x2x1, exit 0. Knowledge Map 672/4,998,
+        mdBook, whitespace, and generated-artifact cleanup pass.
+
+      #### Acceptance Checklist
+
+      - [x] **TOOLBOX RED / ROOT CAUSE** — Execute canonical grammar through LinkedSpec's probes and preserve exact
+        failing AST evidence for header suffix scans and bare-reference prefix acceptance before changing grammar.
+      - [x] **PHYSICAL TOKEN BOUNDARIES** — Anchor headers and bare action/blind references to their source lines,
+        reject extra-colon and trailing invalid suffixes, and preserve CRLF/LF plus valid newline token splitting.
+      - [x] **OMISSION-SENSITIVE FIVE-RUNTIME PROOF** — Execute every positive/negative/distinct fixture and all
+        three no-prefix surfaces through current canonical grammar on five backends under both option environments.
+      - [x] **RUST ABSENCE PARITY** — Return `Undef`/JSON null for an absent compacted `entry_group` index and lock
+        both absent and present cases without changing capture compaction.
+      - [x] **CORPUS / SIGNOFF / PARENT CLOSE** — Keep four canonical corpus inputs fresh, pass complete affected
+        and canonical gates, synchronize all durable/public layers, clean artifacts, and close `.2` plus `.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2`
   Status: `pending`
@@ -10465,20 +10499,18 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-Semantic-introspection design/neutral `.10.1-.10.2` and complete admitted Perl parent `.10.3` are clean through
-`90e5e701`; governance is six groups / 20 responses / 65 mutations, rollout 2/9, and native admission 1/6.
-Behavior-free Rust authority/split `.10.4.0` is complete in the current commit after exact five-source probes,
-complete Rust packages/105-fixture oracle/full generated manifest/primary 66x2, and canonical Phase 0 1,031/1,031
-in 617 seconds. It maps parsed/function-staged state, serde-safe `CompiledSpec`, ActionIR, diagnostic/loader/
-generated-v2 owners, missing source/query/observation seams, and the full `.10.4.0.1-.10.4.6` dependency order.
+Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, and admitted Rust `.10.4` are complete.
+Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native admission 2/6. Dart authority audit
+`.10.5.0` is complete, and its shared self-hosted prerequisite `.10.5.0.1.0-.2` is signoff-complete from clean base
+`fef93b5a`: one generated 806-range Unicode 17 class feeds all 12 canonical sites, Dart executes current
+lifecycle/bare structure, all four self-hosted corpus inputs are freshness-locked, physical-line boundaries reject
+label-prefix truncation, and current grammar passes the exact five-backend default+POSIX matrix.
 
-Toolbox no-drift `.10.4.0.1` is clean at `c234d993`: exact 6/20/65, rollout 2+7, admission 1+5, 106/eight-route
-runtime, and 12-role Perl claims are checker-owned with omission/wrong-value proof. Unicode prerequisite
-`.10.4.0.2` is clean at `5afa0a61`: ADR `0051`, a generated Unicode 17 `XID_Continue` classifier, unified Rust
-syntax/validation, exact source/artifact/runtime route proof, and canonical 1,031/636s preserve accepted `Töp`
-without normalization or promotion. Rust source/outcome foundation `.10.4.1` is signoff-complete from that clean
-commit: strict copied source and exact coordinates now surround opaque compiled-or-failed authority, but v1
-records/query and promotion do not exist. `.10.4.2` is next only after the clean commit.
+The precise next PNT leaf is pending `FUTURE-PARITY-BACKLOG.10.5.0.2`. Activate it task-tree-first only after the
+`.10.5.0.1.2.1` closeout commit leaves the repository clean. It owns generated Dart scalar classification and
+longest-prefix scanning, parsed plus externally constructed label validation, and exact identity across compiled,
+descriptor, generated, selector, diagnostic, trace, loader, and primary routes; it must not promote Dart semantic
+introspection.
 
 ### Historical frontier sequence
 
@@ -10878,12 +10910,12 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.3.6 | `FUTURE-PARITY-BACKLOG.10.4.6` | `done` | Exact 12-role Rust consumer, governance 6/20/73, complete Rust, and canonical 1,031 close the parent. |
 | 74.4 | `FUTURE-PARITY-BACKLOG.10.5` | `active` | Implement the Dart semantic adapter only after an exact Unicode-label prerequisite and authority split. |
 | 74.4.0 | `FUTURE-PARITY-BACKLOG.10.5.0` | `done` | Mapped exact Dart semantic/label owners, exposed stale self-hosted corpus proof, and froze bounded children without behavior. |
-| 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `active` | Reconcile first-authoritative labels, stale corpus freshness, and the current Dart structural bridge. |
+| 74.4.0.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1` | `done` | Reconciled first-authoritative labels, canonical corpus freshness, physical token boundaries, and current five-runtime execution. |
 | 74.4.0.1.0 | `FUTURE-PARITY-BACKLOG.10.5.0.1.0` | `done` | Generated and independently guarded one exact 806-range portable pinned self-hosted label regex class. |
 | 74.4.0.1.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.1` | `done` | Exact 12-site class consumption and current-source lifecycle/bare-edge Dart execution pass canonical signoff. |
-| 74.4.0.1.2 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2` | `active` | Regenerate/freshness-lock self-hosted corpus and compose cross-runtime proof. |
+| 74.4.0.1.2 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2` | `done` | Regenerated/freshness-locked the self-hosted corpus and composed exact current-grammar cross-runtime proof. |
 | 74.4.0.1.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.0` | `done` | Canonical four-input freshness and the Perl sparse-AND live/generated repair pass all affected and canonical gates. |
-| 74.4.0.1.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` | `pending` | Reject label-prefix truncation and close five-runtime current-grammar proof. |
+| 74.4.0.1.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` | `done` | Physical-line boundaries reject label-prefix truncation; focused current grammar passes exact 5x2 proof. |
 | 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `pending` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |

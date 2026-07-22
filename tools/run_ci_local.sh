@@ -109,6 +109,7 @@ require_tracked_file tools/check_native_spec_resolution_contract.pl
 require_tracked_file tools/check_scalar_numeric_contract.py
 require_tracked_file tools/check_unicode_case_contract.py
 require_tracked_file tools/check_unicode_rule_label_contract.py
+require_tracked_file unicode_case/self_hosted_cli/manifest.json
 require_tracked_file t/semantic_introspection_perl_admission.t
 require_tracked_file rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
 require_tracked_file t/rule_local_cursor_perl_contract.t
@@ -490,6 +491,7 @@ if [[ "${LINKEDSPEC_RUN_CLI_MATRIX:-0}" == "1" ]]; then
  log "running optional five-backend primary CLI matrix (LINKEDSPEC_RUN_CLI_MATRIX=1)"
  require_tracked_file tools/run_primary_cli_matrix.sh
  bash "$REPO_ROOT/tools/run_primary_cli_matrix.sh"
+ bash "$REPO_ROOT/tools/run_primary_cli_matrix.sh" --manifest unicode_case/self_hosted_cli/manifest.json
 else
  log "skipping optional five-backend primary CLI matrix (set LINKEDSPEC_RUN_CLI_MATRIX=1 when all backend toolchains are available)"
 fi

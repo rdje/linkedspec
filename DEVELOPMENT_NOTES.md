@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` — membership classes need token boundaries): Replacing host
+  `\w` with the pinned Unicode class fixed which scalars belong to labels but did not make the structural regexes
+  complete tokens. `rule_header` still sought from arbitrary offsets, so `Top-Rule::` produced a `Rule` header;
+  `action_bare` and `blind_bare` stopped after the longest valid prefix, so five invalid suffix families each
+  produced target `Top`. Direct `LinkedSpec::Get` execution against canonical `specs/spec.spec` established those
+  AST results before the grammar changed.
+
+  The boundary repair follows source structure rather than a generic word-boundary assertion. Headers begin at a
+  multiline physical-line start after horizontal indentation and reject a third colon while preserving supported
+  same-line rule content. Bare action/blind references begin at a physical-line start and permit only horizontal
+  trailing space before CRLF/LF/end. The newline negative fixture is intentionally not discarded: `Top\nRule`
+  represents two physical tokens, and the exact contract preserves that split.
+
+  Five separate canonical-grammar CLI cases repeatedly paid the roughly ten-second Perl compile cost, so the
+  recurring proof composes all neutral fixtures into one omission-sensitive input. `--manifest PATH` reuses the
+  existing runner and five-backend orchestration without inflating or redefining the stable 66-case interface
+  manifest. The checker validates fixture coverage and projected target order, not just the presence of a file.
+
+  Rust's first leg differed at the optional `index` field. Knowledge Map lookup and engine inspection showed the
+  capture list was correctly compacted; only `entry_group` used `unwrap_or_default()` and synthesized an empty
+  string beyond the vector. `match_group`, Dart, Julia, Perl, and Lua all preserved absent/null. Mapping the Rust
+  element through `RuntimeValue::Scalar` with `RuntimeValue::Undef` fallback restores the published compacted-group
+  contract and is locked for both absent and present optional captures.
+
+  Final evidence is Unicode 806/9/8/2; exact current-grammar 5x2x1; Rust/Dart/Julia/Lua corpus 105/105; dual-ABI
+  Lua 177; complete Rust runtime 148/integration 197/generated-source/semantic admission/primary 66x2; Knowledge
+  Map 672/4,998; mdBook; and all four doctrines. Canonical CI passes primary 66x2, Phase 0 1,031/1,031, stable
+  primary 5x2x66, and focused current-grammar 5x2x1, exit 0. Its first optional-matrix attempt used the empty
+  temp-only Julia depot and failed before any Julia case; the corrected full rerun used the already-documented
+  writable-plus-installed-source depot layering and passed from a clean unchanged source state.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.1.2.0` — ordered structure and action dispatch are separate
   sequences): An `AND` rule's regexes are all required structural slots; action edges are a sparse projection over
   those slots. Driving a consuming ordered handler from compact action count worked only while every regex owned an

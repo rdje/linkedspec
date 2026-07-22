@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.1.2.1 — close current-grammar Unicode label boundaries
+
+Canonical `specs/spec.spec` now gives rule headers an exact physical-line start and an extra-colon guard. Bare
+action and blind-call references own their complete physical line, including CRLF/LF-aware end boundaries. Invalid
+forms such as `Top-Rule::`, `-> Top-Rule`, `=> Top😀`, and `-> Top:` can no longer be accepted as suffix `Rule` or
+prefix `Top`; a newline remains a real separator between independently valid tokens.
+
+The Unicode checker locks those three structural patterns, canonical grammar freshness, and one bounded current-
+grammar CLI manifest. Its aggregate case executes every 9 positive / 8 negative / 2 distinct neutral fixture,
+three no-prefix surfaces, and newline splitting through Perl, Rust, Dart, Julia, and Lua under default and POSIX
+option environments. `tools/run_primary_cli_matrix.sh` now accepts `--manifest PATH`; the stable 66-case primary
+interface suite is unchanged, and opted-in canonical CI runs both manifests.
+
+The first five-runtime run exposed one real Rust helper divergence: `entry_group(N)` returned `""` when `N` was
+beyond the compacted capture list, while `match_group(N)` and all other runtimes returned absent/null. Rust now
+maps present captures to scalar values and an absent index to `RuntimeValue::Undef`; a focused unit test locks both
+the null and present-index cases. All four `spec_spec_*` inputs are refreshed again to canonical SHA-256
+`ce409f572887d102543d995e197666df668e47963f572a3a376622249e57fa7c`, with expected outputs unchanged.
+
+Focused Unicode, Rust helper, and 5x2x1 current-grammar checks pass. Rust, Dart, and Julia each execute the complete
+105-case corpus with zero failures. The dual-ABI Lua gate passes 177 assertions on PUC Lua and LuaJIT plus the
+complete PUC corpus and primary 66x2. The complete Rust gate passes runtime units 148, integration 197, generated-
+source/corpus/semantic suites, corpus 105, semantic admission, and primary 66x2. Knowledge Map 672/4,998, mdBook,
+memory/task metadata, all four doctrines, and whitespace pass. Canonical CI passes semantic 6/20/73, Rust
+admission, primary 66x2, Phase 0 1,031/1,031, stable primary 5x2x66, and focused current-grammar 5x2x1, exit 0.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.1.2.0 — refresh self-hosted corpus and repair sparse AND slots
 
 The four `spec_spec_*` oracle inputs are now byte-identical copies of canonical `specs/spec.spec` at SHA-256

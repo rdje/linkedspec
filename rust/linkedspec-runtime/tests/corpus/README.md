@@ -109,3 +109,8 @@ Later terse-language leaves added helper/receiver trailing-block, hash-tree trav
 array-tree traversal, and typed-wrapper quoted-name fixtures. `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
 then admitted six governed exhaustive capability sources after all four backends matched their exact Perl values.
 The checked-in corpus now has 105 fixtures, ending with the anonymous/named capture families.
+
+`FUTURE-PARITY-BACKLOG.10.5.0.1.2` refreshes all four `spec_spec_*` inputs to exact canonical
+`specs/spec.spec` bytes and adds a checker-enforced freshness lock. The current canonical SHA-256 is
+`ce409f572887d102543d995e197666df668e47963f572a3a376622249e57fa7c`; the four expected JSON values remain
+unchanged, and all four backend corpus runners still pass 105/105.

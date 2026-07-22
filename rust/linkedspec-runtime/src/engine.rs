@@ -6706,9 +6706,12 @@ impl Engine {
             "entry_group" => {
                 if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
-                    Ok(RuntimeValue::Scalar(
-                        ctx.entry_groups.get(idx).cloned().unwrap_or_default(),
-                    ))
+                    Ok(ctx
+                        .entry_groups
+                        .get(idx)
+                        .cloned()
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
@@ -8999,6 +9002,27 @@ ChildB:
         let result = engine.execute("hello world").unwrap();
         let arr = result.as_array().unwrap();
         assert_eq!(arr[0].as_str().unwrap(), "hello world world");
+    }
+
+    #[test]
+    fn helpers_5_2_absent_entry_group_is_undef() {
+        let grammar = r#"Top::
+ /([A-Za-z]+)(?:\[(\d+)\])?/
+ E { return(hash("target", entry_group(0), "index", entry_group(1))) }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let compiled = compile(&spec).unwrap();
+        let engine = Engine::new(compiled);
+
+        assert_eq!(
+            engine.execute("Name").unwrap(),
+            serde_json::json!([{"index": null, "target": "Name"}])
+        );
+        assert_eq!(
+            engine.execute("Name[2]").unwrap(),
+            serde_json::json!([{"index": "2", "target": "Name"}])
+        );
     }
 
     #[test]

@@ -47,7 +47,19 @@ normalization or case mapping. The same run also writes
 self-hosted grammar. Its endpoints encode the same 806 ranges without host `\w`, Unicode-property lookup, or
 runtime-version dependence. The checker reconstructs that class independently, byte-compares it, proves every
 fixture, and rejects any delimiter character that would require host-specific escaping. Canonical
-`specs/spec.spec` consumption is the next task-tree slice; the generated artifact alone changes no grammar.
+`specs/spec.spec` consumes the class at all 12 rule-label sites. Its header scanner is physical-line-start-bound,
+and bare action/blind references are complete-line-bound so invalid Unicode-label prefixes cannot truncate to a
+valid target. The checker also requires all four `spec_spec_*` corpus inputs to equal the canonical grammar bytes.
+
+The focused current-grammar command contract is intentionally separate from the stable 66-case primary manifest:
+
+```bash
+bash tools/run_primary_cli_matrix.sh \
+  --manifest unicode_case/self_hosted_cli/manifest.json
+```
+
+Its one aggregate compile covers every positive/negative/distinct fixture, header/action/blind prefix rejection,
+and newline splitting through Perl, Rust, Dart, Julia, and Lua in default and POSIX environments.
 
 Do not manually edit `capability_conformance/unicode_case_contract.json`,
 `perl/LinkedSpec/UnicodeCaseMapping.pm`, `rust/linkedspec-runtime/src/unicode_case_mapping.rs`,

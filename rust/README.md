@@ -206,7 +206,8 @@ The engine implements 80+ helpers covering:
 - **Unknown helper fallback**: helper-looking calls outside the current contract return `undef` through the generic unknown-helper path rather than a name-specific retired-helper implementation
 - **Arrays**: `array`, `copy`, `push`, explicit `is_nonempty(...)` guard plus `push(...)`, `count`
 - **Scalars**: bare scalar reads, `coalesce`, `coalesce_nonempty`, `cat`
-- **Capture**: `entry_text`, `entry_group`, `entry_groups`, `entry_len`
+- **Capture**: `entry_text`, `entry_group`, `entry_groups`, `entry_len`; an absent/out-of-range compacted capture
+  returns `undef`/JSON `null`, while a participating empty capture remains the empty string
 - **Match**: `match_text`, `match_group`, `match_groups`, `match_len`
 - **Control flow**: `return`, `return_undef`, `exit_now`, `next`
 - **Strings**: `trim`, `lowercase`, `uppercase`, `length`, `substr`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`, `filter_nonempty`, `filter_match`, `uniq`, `sorted`, `reversed`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `is_defined`, `is_undefined`, `join_values`, `flat_array`, `concat_arrays`

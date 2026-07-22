@@ -17,6 +17,9 @@ CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.j
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
+SELF_HOSTED_CLI_MANIFEST_PATH = (
+    ROOT / "unicode_case" / "self_hosted_cli" / "manifest.json"
+)
 GENERATOR = ROOT / "unicode_case" / "generate_unicode_rule_label_contract.py"
 FORMAL_GRAMMAR = ROOT / "docs" / "linkedspec-book" / "src" / "appendix" / "formal-grammar.md"
 PARSER_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "parser.rs"
@@ -25,9 +28,11 @@ CORE_TEST_PATH = ROOT / "rust" / "linkedspec-core" / "tests" / "unicode_rule_lab
 RUNTIME_TEST_PATH = (
     ROOT / "rust" / "linkedspec-runtime" / "tests" / "unicode_rule_label_routes.rs"
 )
+RUST_ENGINE_PATH = ROOT / "rust" / "linkedspec-runtime" / "src" / "engine.rs"
 DART_SELF_HOSTED_TEST_PATH = (
     ROOT / "dart" / "test" / "self_hosted_unicode_rule_label_test.dart"
 )
+MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 SELF_HOSTED_CORPUS_CASES = (
     "spec_spec_minimal_rule",
@@ -75,10 +80,13 @@ def main() -> None:
         RUST_PATH,
         SELF_HOSTED_REGEX_PATH,
         SELF_HOSTED_GRAMMAR_PATH,
+        SELF_HOSTED_CLI_MANIFEST_PATH,
         GENERATOR,
         CORE_TEST_PATH,
         RUNTIME_TEST_PATH,
+        RUST_ENGINE_PATH,
         DART_SELF_HOSTED_TEST_PATH,
+        MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
         if not path.is_file():
@@ -211,6 +219,15 @@ def main() -> None:
             )
     if self_hosted_grammar.count(expected_class) != sum(expected_label_sites.values()):
         fail("self-hosted grammar has an unexpected generated label-class site")
+    required_boundaries = {
+        "rule_header": ("rule_header: /(?m:^[ \\t]*", "(?!:))/"),
+        "action_bare": ("action_bare: /(?m:^[ \\t]*->", "[ \\t]*(?=\\r?$))/"),
+        "blind_bare": ("blind_bare: /(?m:^[ \\t]*=>", "[ \\t]*(?=\\r?$))/"),
+    }
+    for production, (prefix, suffix) in required_boundaries.items():
+        line = grammar_lines[production]
+        if not line.startswith(prefix) or not line.endswith(suffix):
+            fail(f"self-hosted label production {production} lost its physical-line boundary")
     compiled_class = re.compile(rf"^(?:{expected_class})$")
     for row in contract["positive_fixtures"]:
         if not valid_label(ranges, row["label"]):
@@ -230,11 +247,95 @@ def main() -> None:
         if compiled_class.fullmatch(row["left"]) is None or compiled_class.fullmatch(row["right"]) is None:
             fail(f"self-hosted regex rejects distinct fixture: {row['id']}")
 
+    cli_manifest = json.loads(SELF_HOSTED_CLI_MANIFEST_PATH.read_text(encoding="utf-8"))
+    if set(cli_manifest) != {"schema_version", "suite", "cases"}:
+        fail("self-hosted CLI manifest fields drifted")
+    if cli_manifest["schema_version"] != 1:
+        fail("self-hosted CLI manifest schema drifted")
+    if cli_manifest["suite"] != "linkedspec-self-hosted-unicode-rule-labels":
+        fail("self-hosted CLI manifest suite identity drifted")
+    cases = cli_manifest["cases"]
+    if not isinstance(cases, list) or len(cases) != 1:
+        fail("self-hosted CLI manifest must compose exactly one bounded compile case")
+    case = cases[0]
+    if case.get("id") != "current_grammar_unicode_contract":
+        fail("self-hosted CLI case identity drifted")
+    expected_args = [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--top-rule",
+        "spec_file",
+        "--input",
+    ]
+    args = case.get("args")
+    if not isinstance(args, list) or args[:5] != expected_args or len(args) != 6:
+        fail("self-hosted CLI case does not execute canonical specs/spec.spec via spec_file")
+    fixture_input = args[5]
+    if not isinstance(fixture_input, str):
+        fail("self-hosted CLI case input must be text")
+    for row in contract["positive_fixtures"]:
+        if f" -> {row['label']}\n" not in fixture_input:
+            fail(f"self-hosted CLI case omits positive fixture: {row['id']}")
+    for row in contract["distinct_fixtures"]:
+        for side in ("left", "right"):
+            if f" -> {row[side]}\n" not in fixture_input:
+                fail(f"self-hosted CLI case omits {side} distinct fixture: {row['id']}")
+    negative_by_id = {row["id"]: row["label"] for row in contract["negative_fixtures"]}
+    for fixture_id in ("empty", "hyphen", "space", "emoji", "colon", "dollar"):
+        label = negative_by_id[fixture_id]
+        for arrow in ("->", "=>"):
+            if f" {arrow} {label}\n" not in fixture_input:
+                fail(f"self-hosted CLI case omits {arrow} negative fixture: {fixture_id}")
+    for fixture_id in ("hyphen", "space", "emoji", "colon", "dollar", "slash"):
+        if f"{negative_by_id[fixture_id]}::\n" not in fixture_input:
+            fail(f"self-hosted CLI case omits header negative fixture: {fixture_id}")
+    newline_label = negative_by_id["newline"]
+    if f" -> {newline_label}\n" not in fixture_input or f" => {newline_label}\n" not in fixture_input:
+        fail("self-hosted CLI case omits physical newline splitting fixture")
+
+    expected = case.get("expect")
+    if not isinstance(expected, dict) or expected.get("exit") != 0:
+        fail("self-hosted CLI case must expect successful exact projection")
+    if expected.get("stderr") != {"text": ""} or expected.get("files") != []:
+        fail("self-hosted CLI case stderr/file contract drifted")
+    stdout = expected.get("stdout")
+    if not isinstance(stdout, dict) or set(stdout) != {"text"}:
+        fail("self-hosted CLI case stdout contract drifted")
+    stdout_text = stdout["text"]
+    if not isinstance(stdout_text, str) or not stdout_text.endswith("\n"):
+        fail("self-hosted CLI case stdout must be one newline-terminated JSON value")
+    try:
+        projected = json.loads(stdout_text)
+    except json.JSONDecodeError as error:
+        fail(f"self-hosted CLI expected stdout is not JSON: {error}")
+    if not isinstance(projected, list) or len(projected) != 1 or not isinstance(projected[0], list):
+        fail("self-hosted CLI expected projection paragraph shape drifted")
+    nodes = projected[0]
+    expected_targets = [row["label"] for row in contract["positive_fixtures"]]
+    expected_targets.append(
+        next(row["right"] for row in contract["distinct_fixtures"] if row["id"] == "case_sensitive")
+    )
+    expected_targets.extend(["Top", "Rule", "Top", "Rule"])
+    actual_targets = [node["target"] for node in nodes if isinstance(node, dict) and "target" in node]
+    if actual_targets != expected_targets:
+        fail("self-hosted CLI expected projection lost exact label identity or boundary order")
+
+    matrix_driver = MATRIX_DRIVER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "--manifest)",
+        'MANIFEST_ARGS=(--manifest "$2")',
+        '"${MANIFEST_ARGS[@]}" "${CASE_ARGS[@]}"',
+    ):
+        if marker not in matrix_driver:
+            fail(f"five-backend matrix manifest routing marker missing: {marker}")
+
     formal = FORMAL_GRAMMAR.read_text(encoding="utf-8")
     required_formal = [
         "Unicode 17.0.0 `XID_Continue`",
         "case-sensitive and normalization-sensitive",
         "No normalization or case folding is performed",
+        "The self-hosted structural tokens also own exact physical-line boundaries",
+        "Perl, Rust, Dart, Julia, and Lua now execute one byte-exact",
     ]
     if any(marker not in formal for marker in required_formal):
         fail("formal grammar is not synchronized")
@@ -265,6 +366,13 @@ def main() -> None:
     ):
         if marker not in runtime_test:
             fail(f"runtime route proof missing: {marker}")
+    rust_engine = RUST_ENGINE_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "helpers_5_2_absent_entry_group_is_undef",
+        '.map(RuntimeValue::Scalar)\n                        .unwrap_or(RuntimeValue::Undef)',
+    ):
+        if marker not in rust_engine:
+            fail(f"Rust absent entry-group parity marker missing: {marker}")
     dart_test = DART_SELF_HOSTED_TEST_PATH.read_text(encoding="utf-8")
     for marker in (
         "canonical grammar consumes the exact generated label atom",
@@ -283,7 +391,9 @@ def main() -> None:
         "require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs",
         "require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs",
         "require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart",
+        "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
+        "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",
     ):
         if marker not in ci_text:
             fail(f"canonical CI marker missing: {marker}")

@@ -8,20 +8,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Shared executable-label/corpus-freshness/current-bridge leaf `FUTURE-PARITY-BACKLOG.10.5.0.1` is active
-  task-tree-first from clean audit commit `0110ea40` at ahead 282. It must reconcile canonical `specs/spec.spec`
-  with pinned Unicode 17 labels, regenerate and mechanically freshness-lock all four stale `spec_spec_*` inputs,
-  and execute today's canonical lifecycle/bare-edge grammar through Dart before `.10.5.0.2` can begin. Safe split
-  `.10.5.0.1.0-.2` freezes generated class authority/checker, grammar+Dart structural consumption, then refreshed
-  corpus/cross-runtime closeout. `.0` is cleanly committed as `f356a2dd`; `.1` is cleanly committed as `15c97761`;
-  `.2` is active task-tree-first from that clean ahead-284 boundary.
+- Shared executable-label/corpus-freshness/current-bridge parent `FUTURE-PARITY-BACKLOG.10.5.0.1` is complete
+  through `.0-.2`. One generated Unicode 17 class feeds all 12 canonical sites; Dart executes current structural
+  grammar; all four self-hosted corpus inputs are freshness-locked; sparse Perl AND traversal is repaired; and
+  physical-line boundaries reject header/action/blind label-prefix truncation on the exact 5x2 matrix.
 
-The audit proves Dart's hardcoded declarations reject `Töp`, action/blind targets silently truncate it to `T`, bare
-targets remain raw, and externally constructed invalid labels bypass validation. `.1` consumes the generated class
-at all 12 first-authoritative grammar sites and makes Dart directly execute current explicit lifecycle and bare-edge
-forms without duplicating the classifier. `.2.0` now makes all four `spec_spec_*` inputs exact canonical copies and
-repairs the Perl sparse-AND regression exposed by atomic regeneration. Full Rust/Dart/Julia/Lua corpus and
-canonical routes are green. `.2.1` remains pending until the clean `.2.0` commit, then owns label-boundary closeout.
+The next PNT frontier is pending Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2`, which owns one
+generated scalar classifier/scanner plus complete parsed and externally constructed identity validation. It may be
+activated only after the `.10.5.0.1.2.1` closeout commit leaves the repository clean.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -40,6 +34,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.1.2.1 — close current-grammar Unicode label boundaries**
+  (DONE in this commit from clean base `fef93b5a`).
+
+  **Result:** Canonical headers and bare action/blind references own exact physical-line boundaries, so invalid
+  suffixes cannot produce suffix/prefix label nodes while newline remains a real token separator. One bounded
+  manifest proves every Unicode label fixture and all no-prefix surfaces on Perl/Rust/Dart/Julia/Lua default+POSIX.
+  Rust absent `entry_group(N)` now preserves `Undef`/JSON null instead of synthesizing an empty string.
+
+  **Proof:** Unicode 806/9/8/2; focused 5x2x1; Rust/Dart/Julia/Lua corpus 105/105; complete Rust runtime 148,
+  integration 197, generated/semantic suites and primary 66x2; dual-ABI Lua 177 plus primary 66x2; KM 672/4,998;
+  mdBook/four doctrines/diff/cleanup; canonical primary 66x2, Phase 0 1,031/1,031, stable 5x2x66 and focused
+  5x2x1, exit 0.
+
+  **Next:** after this clean closeout commit, activate Dart-native Unicode-label rollout `.10.5.0.2` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.1.2.0 — refresh self-hosted corpus and repair sparse AND slots**
   (DONE in this commit from clean base `15c97761`).
 
@@ -52,8 +61,8 @@ recurring proof remains the six-runtime plus selected primary/support authority.
   mdBook/memory/task/four doctrines/diff; canonical Rust admission 79.65s, primary 66x2, and Phase 0 1,031/1,031
   in 648s, exit 0.
 
-  **Next:** Commit cleanly, then activate `.10.5.0.1.2.1` task-tree-first for physical-line label boundaries and
-  five-runtime current-grammar closeout.
+  **Next:** `.10.5.0.1.2.1` is active task-tree-first from this clean commit; reject label-prefix truncation and
+  compose the five-runtime current-grammar closeout.
 
 - 2026-07-21: **FUTURE-PARITY-BACKLOG.10.5.0.1.1 — consume Unicode labels in self-hosted grammar**
   (DONE in this commit from clean base `f356a2dd`).

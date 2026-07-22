@@ -838,13 +838,16 @@ content migration exists yet.
   bypass validation. Shared executable-grammar closure `.10.5.0.1` precedes Dart label parity `.10.5.0.2`;
   semantic foundation through admission then follows as
   `.10.5.1-.10.5.6` without changing the current 6/20/73, 3/9, and 2/6 ledgers during audit. The four checked-in
-  `spec_spec_*` inputs are stale identical copies rather than current canonical source, so `.10.5.0.1` also owns
-  verbatim regeneration, a freshness gate, and current-source Dart structural execution; 105/105 alone does not
-  yet prove today's self-hosted grammar. Dependency `.10.5.0.1.0` generates and independently byte-checks one
+  `spec_spec_*` inputs were stale identical copies rather than current canonical source, so `.10.5.0.1` also owns
+  verbatim regeneration, a freshness gate, and current-source Dart structural execution; 105/105 alone did not
+  prove today's self-hosted grammar. Dependency `.10.5.0.1.0` generates and independently byte-checks one
   5,991-byte literal regex class for all 806 pinned Unicode 17 ranges. `.10.5.0.1.1` consumes it at all 12 canonical
   rule-label sites and makes Dart directly execute current explicit lifecycle and bare-edge forms while retaining
-  stale-corpus compatibility. `.10.5.0.1.2` next regenerates/freshness-locks those four inputs and composes the
-  cross-runtime proof.
+  stale-corpus compatibility. `.10.5.0.1.2` refreshes/freshness-locks those four inputs, adds exact physical-line
+  boundaries that reject header/action/blind prefix truncation, and composes all 9 positive / 8 negative / 2
+  distinct fixtures through current `specs/spec.spec` on the complete 5x2 command matrix. That proof exposed and
+  repaired Rust `entry_group(N)` returning `""` rather than null for an absent compacted capture. The four backend
+  corpus runners remain 105/105; the shared executable-grammar parent is closed before Dart native-label rollout.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

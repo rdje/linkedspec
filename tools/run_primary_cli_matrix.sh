@@ -21,8 +21,18 @@ fail() {
 
 CASE_ARGS=()
 CASE_IDS=()
+MANIFEST_ARGS=()
+MANIFEST_PATH=
 while (( $# > 0 )); do
  case "$1" in
+  --manifest)
+   (( $# >= 2 )) || fail "--manifest requires a path"
+   [[ -n "$2" ]] || fail "--manifest path must not be empty"
+   (( ${#MANIFEST_ARGS[@]} == 0 )) || fail "--manifest may be supplied only once"
+   MANIFEST_ARGS=(--manifest "$2")
+   MANIFEST_PATH=$2
+   shift 2
+   ;;
   --case)
    (( $# >= 2 )) || fail "--case requires an ID"
    [[ -n "$2" ]] || fail "--case ID must not be empty"
@@ -31,8 +41,8 @@ while (( $# > 0 )); do
    shift 2
    ;;
   --help|-h)
-   printf 'Usage: %s [--case ID ...]\n' "$0"
-   printf 'Run the full five-backend matrix, or only the selected manifest cases.\n'
+   printf 'Usage: %s [--manifest PATH] [--case ID ...]\n' "$0"
+   printf 'Run one manifest through five backends, optionally selecting cases by ID.\n'
    exit 0
    ;;
   *)
@@ -89,11 +99,11 @@ run_contract() {
 
  log "running $backend contract (default environment)"
  env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
-  "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
+  "${MANIFEST_ARGS[@]}" "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
 
  log "running $backend contract (POSIX environment)"
  env POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
-  "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
+  "${MANIFEST_ARGS[@]}" "${CASE_ARGS[@]}" --display-command "$display_command" -- "$@"
 }
 
 run_contract Perl 'perl bin/linkedspec' \
@@ -109,8 +119,10 @@ run_contract Lua 'lua/bin/linkedspec-lua' \
  env "LUA_CPATH=$LUA_NATIVE_ROOT/?.so;;" "$LUA_CMD" \
  '{{REPO_ROOT}}/lua/bin/linkedspec-lua'
 
-if (( ${#CASE_IDS[@]} == 0 )); then
+if (( ${#CASE_IDS[@]} == 0 && ${#MANIFEST_ARGS[@]} == 0 )); then
  log "primary CLI matrix passed: 5 backends x 2 environments x 66 cases"
+elif (( ${#CASE_IDS[@]} == 0 )); then
+ log "primary CLI matrix passed: 5 backends x 2 environments x manifest $MANIFEST_PATH"
 else
  log "primary CLI matrix passed: 5 backends x 2 environments x ${#CASE_IDS[@]} selected case(s): ${CASE_IDS[*]}"
 fi

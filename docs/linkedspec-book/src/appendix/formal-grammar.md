@@ -192,6 +192,14 @@ rule-label sites: headers and every action, blind-call, and bare-edge block/flue
 names, helper names, lifecycle markers, fluent method names, and mark names retain their separate identifier
 grammars; the rule-label expansion does not broaden them.
 
+The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
+of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
+prefix such as `Top-Rule::`, `Top Rule::`, or `$Top::`, and an extra colon such as `Top:::` is not part of a valid
+header token. Bare `-> Label` and `=> Label` references must occupy the complete physical line after optional
+leading/trailing horizontal whitespace. Thus `-> Top-Rule`, `=> Top😀`, and `-> Top:` are rejected as whole bare
+references instead of silently producing target `Top`. A newline is a real token boundary: `-> Top\nRule` is the
+valid action target `Top` followed by a separate bare target `Rule`, not one label containing a newline.
+
 ```spec
 Töp::
  /x/
@@ -206,13 +214,14 @@ An index such as `[1]` and the edge punctuation are outside the label itself.
 The pinned generator also emits `unicode_case/unicode_rule_label_regex_class.txt`, a UTF-8 literal-range class
 whose endpoints encode all 806 merged ranges. The checker reconstructs and byte-compares it independently, so the
 self-hosted grammar can consume exact repository data without a host property lookup. The artifact is generated
-authority; wiring it into `specs/spec.spec` is tracked separately from its creation.
+authority; all four checked-in `spec_spec_*` corpus inputs must remain byte-identical to canonical
+`specs/spec.spec`, and freshness is enforced by the same checker.
 
-Rust implements the contract across headers, action/blind/bare references, validation, selectors, compiled and
-descriptor identity, generated-source plans, loaders, and traces. Perl's strict-decoded `\w` route already accepts
-the admitted semantic fixture's `Töp`; exact five-backend label admission is not claimed by this Rust prerequisite
-slice. Dart, Julia, and both Lua ABIs must consume this pinned contract in their semantic-introspection backend
-lanes before those backends can admit the v1 fixture.
+Perl, Rust, Dart, Julia, and Lua now execute one byte-exact positive/negative/distinct/boundary projection through
+the current canonical self-hosted grammar in both default and POSIX command environments. This proves the shared
+executable grammar, not every backend's separate hardcoded parser: Rust implements the pinned label contract across
+its native headers/references/validation/selectors/artifacts/loaders/traces, while Dart's corresponding native
+scanner/validator rollout remains the next backend-specific lane before Dart can admit the semantic v1 fixture.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.

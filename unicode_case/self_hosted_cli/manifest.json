@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "suite": "linkedspec-self-hosted-unicode-rule-labels",
+  "cases": [
+    {
+      "id": "current_grammar_unicode_contract",
+      "family": "self-hosted-unicode-labels",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--top-rule",
+        "spec_file",
+        "--input",
+        "Top-Rule::\nTop Rule::\nTop😀::\nTop:::\n$Top::\nTöp::\n /x/\n -> Top\n -> 9_rule\n -> _\n -> Töp\n -> Töp\n -> Δοκιμή\n -> 規則\n -> A·B\n -> 𐐀Rule\n -> töp\n -> \n -> Top-Rule\n -> Top Rule\n -> Top😀\n -> Top:\n -> $Top\n => \n => Top-Rule\n => Top Rule\n => Top😀\n => Top:\n => $Top\n -> Top\nRule\n => Top\nRule\nTop/Rule::\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Töp\",\"mode\":\"\",\"top\":1,\"type\":\"rule\"},{\"pattern\":\"x\",\"type\":\"regex\"},{\"index\":null,\"target\":\"Top\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"9_rule\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"_\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"Töp\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"Töp\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"Δοκιμή\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"規則\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"A·B\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"𐐀Rule\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"töp\",\"type\":\"action_edge\"},{\"index\":null,\"target\":\"Top\",\"type\":\"action_edge\"},{\"index\":null,\"source_form\":\"bare\",\"target\":\"Rule\",\"type\":\"bare_edge\"},{\"target\":\"Top\",\"type\":\"blind_edge\"},{\"index\":null,\"source_form\":\"bare\",\"target\":\"Rule\",\"type\":\"bare_edge\"}]]\n"
+        },
+        "stderr": {"text": ""},
+        "files": []
+      }
+    }
+  ]
+}
