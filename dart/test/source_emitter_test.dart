@@ -91,6 +91,10 @@ void main() {
       first,
       contains('RuntimeDiagnosticOutputSink? diagnosticOutputSink'),
     );
+    expect(
+      first,
+      contains('RuntimeSemanticObservationSink? semanticObservationSink'),
+    );
     expect(first, isNot(contains('Top::')));
     expect(first, isNot(contains('"cursor_policy"')));
   });

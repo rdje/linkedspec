@@ -8,9 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Generated/emitted Dart observation propagation `FUTURE-PARITY-BACKLOG.10.5.5.3` is task-tree owned from the clean
-  immutable-derivation handoff; no `.3` implementation has started. Its first action is to inspect generated/source-
-  emitter exception translation before threading the optional sink with exact caller failure identity.
+- Dart runtime-observation closeout `FUTURE-PARITY-BACKLOG.10.5.5.4` is task-tree owned after completed generated/
+  emitted route propagation `.3`; no `.4` closeout changes have started. Its first action is to recompose exact
+  static/runtime query, malformed-observation, route, non-interference, complete Dart, and canonical proof.
 
 Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
 `query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
@@ -24,8 +24,11 @@ Derivation `.2` now validates retained events against detached rule/slot/`select
 only from static facts, creates a separate canonical execution/event/`observed_as` snapshot, and preserves the base.
 Focused 4/4, semantic composition 37/37, complete Dart 83/0 + 333 + 66x2 + 105, and twentieth digest `36897041...`
 pass. Canonical proof passes Rust admission in 76.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds;
-KM 679/5,095, mdBook, memory, task, doctrines, diff hygiene, and cleanup pass. Generated/emitted propagation,
-rollout, and admission remain absent.
+KM 679/5,095, mdBook, memory, task, doctrines, diff hygiene, and cleanup pass. Generated/emitted propagation `.3`
+now passes routes 2/2, adjacent 24/24, semantic composition 39/39, and complete Dart 84/0 + 335 + 66x2 + 105/105.
+Public direct/traced helpers and fresh isolated emitted libraries preserve exact events/twentieth digest, outputs,
+diagnostics, trace bytes, immediate-exit omission, caller error/stack identity, and v2/format 2. Rollout and
+admission remain absent; composition closeout `.4` is active.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -57,6 +60,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.3 — propagate Dart runtime semantics**
+  (DONE in this commit from clean base `babe2fd7`).
+
+  **Result:** Public generated helpers and fresh emitted libraries now accept the optional typed observation sink
+  on direct and traced APIs. A semantic-channel-specific wrapper restores exact caller error/stack identity before
+  generic generated execution translation; results, diagnostics, routed trace bytes, immediate-exit omission, and
+  generated-source v2/format 2 remain unchanged.
+
+  **Proof:** Focused routes 2/2; adjacent emitter/diagnostic/runtime 24/24; semantic composition 39/39; Dart 84/0,
+  fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6;
+  canonical Rust admission 76.72s, primary 66x2, Phase 0 1,031/1,031 in 623s; KM 679/5,095; mdBook/memory/task/
+  doctrines/cleanup pass.
+
+  **Next:** after the clean commit, composition-close runtime observations and parent `.10.5.5` in `.10.5.5.4`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.2 — derive immutable Dart runtime semantics**
 
   **Result:** `SemanticIndex.withExecutionObservation(...)` validates typed events solely against detached static

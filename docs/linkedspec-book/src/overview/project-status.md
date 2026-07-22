@@ -526,7 +526,9 @@ Three backbone items tracked major structural modernization — all done:
   Unicode-scalar positions, input identity, failure identity, and no result/trace/diagnostic drift. Immutable
   observed-index derivation `.10.5.5.2` now validates detached static topology, returns a separate canonical
   execution/event/`observed_as` snapshot, preserves the base index, and matches the twentieth digest. Generated/
-  emitted adapter propagation `.10.5.5.3` is active; Dart admission remains later.
+  emitted direct and traced propagation `.10.5.5.3` now preserves exact events, outputs, diagnostic events, trace
+  bytes, exit omission, and caller callback identity through public helpers and isolated emitted libraries without
+  changing v2/format 2. Composition closeout `.10.5.5.4` is active; Dart admission remains later.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

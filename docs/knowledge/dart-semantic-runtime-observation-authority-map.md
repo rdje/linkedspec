@@ -15,17 +15,17 @@ answers:
   - "can Dart semantic query execute the parser"
   - "what is the Dart semantic runtime observation implementation split"
 date: 2026-07-22
-status: current typed direct-engine capture plus exact immutable observed-index derivation
+status: current typed capture, immutable observed-index derivation, and public generated/emitted route propagation
 tags: [dart, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.2
+evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; dart/test/semantic_index_runtime_observation_routes_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.3
 last_verified: 2026-07-22
 reverify:
   - "rg -n 'RuntimeDiagnosticOutputSink|_recordRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|semanticObservationSink' dart/lib/src/runtime/interpreter.dart"
-  - "rg -n '_GeneratedDiagnosticOutputSinkFailure|executeGeneratedParserV2|executeGeneratedParserWithTraceV2|Object\\? execute\\(' dart/lib/src/source_emitter.dart"
+  - "rg -n '_Generated(DiagnosticOutput|SemanticObservation)SinkFailure|executeGeneratedParserV2|executeGeneratedParserWithTraceV2|semanticObservationSink|Object\\? execute\\(' dart/lib/src/source_emitter.dart"
   - "sed -n '134,150p' dart/lib/src/io/spec_loader.dart"
   - "sed -n '143,178p' capability_conformance/semantic_introspection_model.json"
   - "sed -n '236,248p' capability_conformance/semantic_introspection_contract.json"
-  - "cd dart && dart test test/semantic_index_runtime_observation_test.dart test/semantic_index_runtime_projection_test.dart test/semantic_index_query_kernel_test.dart"
+  - "cd dart && dart test test/semantic_index_runtime_observation_test.dart test/semantic_index_runtime_projection_test.dart test/semantic_index_runtime_observation_routes_test.dart test/semantic_index_query_kernel_test.dart"
   - "sed -n '1,140p' rust/linkedspec-runtime/src/semantic_observation.rs"
 ---
 
@@ -34,8 +34,9 @@ reverify:
 ## Current fact
 
 Dart had no semantic runtime-observation sink at the `.10.5.5.0` audit boundary. `.10.5.5.1` now exports the exact
-typed v1 event/sink API and threads it through the direct engine topology. Trace and diagnostic output remain
-separate optional runtime products; neither is a normalized semantic event authority.
+typed v1 event/sink API and threads it through the direct engine topology; `.10.5.5.3` propagates that same optional
+sink through public generated helpers and fresh emitted libraries, direct and traced. Trace and diagnostic output
+remain separate optional runtime products; neither is a normalized semantic event authority.
 
 The exact regex-slot seam is the audited selection call site, now named `_recordRegexSlotSelected(...)`, in
 `dart/lib/src/runtime/interpreter.dart`, not the trace text it emits. Each call happens only after a regex match
@@ -56,11 +57,11 @@ construction and final input hashing. A caller callback failure escapes as the e
 original stack after any active trace scope is closed.
 
 Direct `parse`/`execute`, their traced convenience forms, `LoadedCompiledSpec.createEngine()`, reconstructed
-`CompiledSpec`, and the validated generated-plan engine entry now reuse the same `_parse` and rule-execution seams.
-The public generated/source-emitter adapters need extra protection: they currently catch arbitrary `Object` values
-and translate them into `GeneratedSourceException`. Observer failures therefore need a private wrapper/passthrough
-parallel to `_GeneratedDiagnosticOutputSinkFailure`; otherwise adding the optional parameter would silently change
-caller exception identity.
+`CompiledSpec`, the validated generated-plan engine entry, public generated helpers, and emitted library direct/
+traced functions now reuse the same `_parse` and rule-execution seams. The source-emitter's broad execution catch
+would otherwise translate a callback failure into `GeneratedSourceException`, so `_GeneratedSemanticObservationSinkFailure`
+contains only that caller failure and the public helper restores its exact object and stack before generic
+translation. The adapter returns `null` when no sink exists, and generated-source v2/format 2 does not change.
 
 ## Required immutable derivation boundary
 
@@ -81,8 +82,8 @@ trace, install a sink, hash a new input, or mutate either index.
 - `.10.5.5.1`: complete public typed events/sink and direct, loaded, reconstructed, traced-convenience, and
   generated-plan engine capture.
 - `.10.5.5.2`: complete validated immutable derivation and exact twentieth response digest.
-- `.10.5.5.3`: active generated-plan, emitted-source, traced/untraced propagation and callback identity.
-- `.10.5.5.4`: complete composition/signoff and parent closure without Dart admission promotion.
+- `.10.5.5.3`: complete generated/emitted direct/traced propagation, non-interference, exit omission, and callback identity.
+- `.10.5.5.4`: active composition/signoff and parent closure without Dart admission promotion.
 
 ## Exact neutral anchor
 

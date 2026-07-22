@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.3 — propagate Dart runtime semantics
+
+Dart's public `executeGeneratedParserV2(...)` and `executeGeneratedParserWithTraceV2(...)` helpers now accept the
+same optional `RuntimeSemanticObservationSink` as the underlying engine. Fresh generated libraries expose the
+optional sink on `execute(...)` and `executeWithTrace(...)`. A null-preserving adapter adds no closure when the
+sink is absent, while a semantic-channel-specific private failure wrapper restores a caller callback's exact error
+object and stack before generic generated-source execution translation. Diagnostic and semantic callbacks remain
+independent; generated-source contract `linkedspec-generated-source-v2` and format 2 are unchanged.
+
+Focused route proof passes 2/2 through direct/traced helpers and isolated real emitted packages. The governed
+three-event sequence and twentieth digest `36897041...` remain exact; results and diagnostic events are equal,
+routed trace files are byte-identical with and without observation, immediate exit status 7 retains only the slot
+event, and direct/traced callback failures preserve identity. Adjacent emitter/diagnostic/runtime proof passes
+24/24; semantic composition passes 39/39. Complete Dart passes format 84/0, fatal analysis, package 335, primary
+66x2, and corpus 105/105. Neutral governance remains 6/20/73 at rollout 3/9 and admission 2/6. Composition-only
+closeout `.10.5.5.4` is next; Dart admission remains exclusively `.10.5.6`. Canonical proof passes Rust semantic
+admission 1/1 in 76.72 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds; Knowledge Map remains
+679 facts / 5,095 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.2 — derive immutable Dart runtime semantics
 
 Dart `SemanticIndex.withExecutionObservation(...)` now validates one caller-retained typed runtime event sequence

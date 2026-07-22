@@ -10,8 +10,9 @@ consumer now composes those layers across every governed route.
 Dart now also exposes its complete non-runtime static query surface: immutable public protocol values,
 `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` share one projection-only evaluator at
 all 19 static response digests and 26 portable malformed-request boundaries. Dart additionally exposes exact typed
-invocation-local runtime capture across its direct engine topology. Immutable observed-index derivation, public
-generated/emitted propagation, and composed backend admission remain later layers.
+invocation-local runtime capture, immutable observed-index derivation at the twentieth digest, and public
+generated/emitted direct and traced propagation. Composition closeout and composed backend admission remain later
+layers.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -293,10 +294,10 @@ execute the target, enable trace, or invent runtime events. Composition closeout
 parent on committed code. Runtime `execution`/`event` records remain exclusively owned by active-next `.10.5.5`,
 and Dart is not admitted until `.10.5.6`.
 
-Behavior-free runtime audit `.10.5.5.0` now fixes how Dart will acquire those records. The runtime currently has no
-semantic sink. Its exact regex-slot authority is the existing post-match structural-selection call: by then a
-match exists and ordered slot identity has been checked, while match effects have not yet run. That seam knows the
-executing rule and each selected target rule/index. Its exact final-result authority is the successful public
+Behavior-free runtime audit `.10.5.5.0` fixed how Dart would acquire those records; the following slices now
+implement that design. The exact regex-slot authority is the post-match structural-selection call: by then a match
+exists and ordered slot identity has been checked, while match effects have not yet run. That seam knows the
+executing rule and each selected target rule/index. The exact final-result authority is the successful public
 entry wrapper after it constructs `RuntimeParseResult`; that seam knows the effective entry rule, final Unicode-
 scalar cursor, exact input text, and successful completion.
 
@@ -331,10 +332,16 @@ diagnostic values. An immediate runtime exit may leave already-delivered slot ev
 successful result event.
 
 Direct `parse`/`execute`, loaded and reconstructed engines, trace convenience methods, and the validated generated-
-plan engine entry now share this capture. Public `executeGeneratedParserV2`, emitted library wrappers, and their
-traced forms intentionally do not accept the sink yet: `.10.5.5.3` owns that adapter propagation because those
-wrappers translate arbitrary execution failures into `GeneratedSourceException` and must first preserve callback
-identity explicitly.
+plan engine entry share this capture. Route propagation `.10.5.5.3` also adds the optional sink to public
+`executeGeneratedParserV2` / `executeGeneratedParserWithTraceV2` and emitted-library `execute` / `executeWithTrace`.
+A semantic-channel-specific private wrapper restores a caller callback's exact object and stack before the broad
+generated execution catch can translate it. With no sink, the adapter returns `null` and creates no callback
+closure. Generated-source contract v2 and format 2 remain unchanged.
+
+The route proof executes both in-process helpers and fresh emitted libraries in an isolated offline caller package.
+All direct and traced forms deliver the exact three events and twentieth digest; observed/unobserved results and
+diagnostics are equal, routed debug trace files are byte-identical, immediate exit retains the slot event but omits
+the final result, and callback failures retain exact identity. This is observation propagation, not admission.
 
 Captured events do not mutate the static index and do not grant query-side execution. Derive an observed snapshot
 explicitly after successful execution:
@@ -376,8 +383,9 @@ alter either index. Typed and raw-neutral queries match the twentieth governed r
 `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
 
 Direct, loaded, reconstructed, traced-convenience, and generated-plan engine capture is complete in `.10.5.5.1`;
-immutable derivation and the twentieth digest are complete in `.2`; public generated/emitted propagation remains
-active `.3`; and composition closeout is `.4`. Rollout and Dart admission remain exclusively `.10.5.6` work.
+immutable derivation and the twentieth digest are complete in `.2`; public generated/emitted direct and traced
+propagation is complete in `.3`; and composition closeout `.4` is active. Rollout and Dart admission remain
+exclusively `.10.5.6` work.
 
 ## Current Rust construction and query surface
 
@@ -1174,8 +1182,8 @@ The dependency order is:
 | `.10.5.5.0` | Dart runtime-observation authority map and split | complete; behavior-free exact seam/route plan |
 | `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | complete; exact events/non-interference/failure identity |
 | `.10.5.5.2` | Dart immutable observed-index derivation | complete; exact topology/immutability/twentieth digest |
-| `.10.5.5.3` | Dart generated/emitted/traced observation routes | active |
-| `.10.5.5.4` | Dart runtime-observation composition closeout | pending |
+| `.10.5.5.3` | Dart generated/emitted/traced observation routes | complete; exact events/outputs/traces/exit/callback identity, unchanged v2/format 2 |
+| `.10.5.5.4` | Dart runtime-observation composition closeout | active |
 | `.10.5.5` | Dart typed runtime observation parent | active |
 | `.10.5.6` | Dart composed semantic admission | pending |
 | `.10.6` | Julia parity | pending |

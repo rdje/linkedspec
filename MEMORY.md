@@ -6,10 +6,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.5.2` — immutable Dart observed-index derivation.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.5.5.2 - derive Dart runtime semantics` completes immutable derivation.
-- active_work_unit: `.10.5.5.3` is task-tree owned from the clean derivation handoff; no implementation has started.
-- next_action: inspect generated/source-emitter exception translation, then thread the optional sink through `.10.5.5.3`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.5.3` — Dart generated/emitted observation propagation.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.5.5.3 - propagate Dart runtime semantics` completes public route propagation.
+- active_work_unit: `.10.5.5.4` is task-tree owned after `.3`; no composition-closeout changes have started.
+- next_action: on the clean `.3` commit, recompose exact Dart runtime-observation signoff and close `.10.5.5`.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -43,18 +43,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   through one detached-projection evaluator; all 19 static digests and 26 portable validation boundaries are exact.
   Runtime `.10.5.5.1-.2` exports immutable typed slot/result events plus an optional invocation-local sink across
   direct/loaded/reconstructed/traced/generated-plan engine routes, with zero absent-sink event/hash work and exact
-  result/cursor/trace/diagnostic/failure identity. `withExecutionObservation` now validates detached static topology,
-  returns a separate canonical execution/event snapshot, preserves the base, and matches the twentieth digest.
+  result/cursor/trace/diagnostic/failure identity. `withExecutionObservation` returns a separate topology-validated
+  snapshot at the twentieth digest; `.3` propagates public generated/emitted direct/traced capture with exact
+  callback identity, non-interference, and unchanged generated-source v2/format 2.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: observation 5/5, derivation 4/4, semantic composition 37/37; selector concurrency 3/3,
-  executable 0/19, retirement 5/6/8/0, public 59/27/0; Dart format 83/0, analysis, package 333, primary 66x2, corpus 105/105;
-  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 76.84s,
-  primary 66x2, and Phase 0 1,031/1,031 in 620s. Knowledge Map is 679/5,095 after the runtime authority card;
-  docs/doctrines/cleanup pass.
+- current_signoff: route 2/2, adjacent 24/24, semantic composition 39/39; selector concurrency 3/3,
+  executable 0/19, retirement 5/6/8/0, public 59/27/0; Dart format 84/0, analysis, package 335, primary 66x2, corpus 105/105;
+  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 76.72s,
+  primary 66x2, Phase 0 1,031/1,031 in 623s; KM is 679/5,095. Book/doctrines/diff/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30 minutes for canonical CI. Julia
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: none; `.10.5.5.3` is next with no implementation begun; `.23` queued.
+- blockers: none. in_flight_uncommitted: `.10.5.5.3` commit assembly; `.4` starts only from its clean handoff.

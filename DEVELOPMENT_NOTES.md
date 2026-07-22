@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.3` — preserve callback ownership through generated adapters): The
+  generated public helpers already delegated to the exact engine observation seams, but their broad execution
+  catch translated arbitrary caller failures into `GeneratedSourceException`. `_generatedSemanticObservationSink`
+  now mirrors the diagnostic-channel containment pattern with its own private wrapper, and the two typed channels
+  cannot be confused. The helper catches that wrapper before runtime/generic translation and restores the original
+  object plus stack with `Error.throwWithStackTrace`.
+
+  The wrapper factory returns `null` immediately for an absent sink, preserving the engine's existing no-event and
+  no-input-hash path without introducing an adapter closure. Source emission adds only optional named parameters;
+  it neither changes serialized rule-plan rows nor advances contract v2/format 2. A real isolated emitted package
+  proves the generated text analyzes and runs rather than testing only the in-process helper.
+
+  Direct and traced generated helpers plus emitted libraries all deliver the same typed sequence used by immutable
+  derivation. Observation leaves results and diagnostics equal and routed debug traces byte-identical. Immediate
+  exit still omits the final result; caller failures retain exact identity on both direct and traced surfaces.
+  Semantic rollout/admission stays 3/9 and 2/6 because `.10.5.5.3` completes execution-route topology only;
+  composition `.4` precedes the separately owned admission leaf `.10.5.6`. Canonical proof passes Rust semantic
+  admission in 76.72 seconds and Phase 0 at 1,031/1,031 in 623 seconds.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.2` — derive from detached meaning, not runtime authority): The runtime
   projection receives only immutable typed event values and `_SemanticStaticProjection`. It cannot access the
   engine, observation sink, source bytes/map, compiler outcome, parser, compiler, or generated executor. The

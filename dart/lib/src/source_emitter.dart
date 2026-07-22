@@ -4,6 +4,7 @@ import 'ast/spec_ast.dart';
 import 'compiler/compiled_spec.dart';
 import 'runtime/generated_plan.dart';
 import 'runtime/interpreter.dart';
+import 'runtime/semantic_observation.dart';
 import 'trace/trace.dart';
 import 'validation/spec_validator.dart';
 
@@ -31,6 +32,28 @@ RuntimeDiagnosticOutputSink? _generatedDiagnosticOutputSink(
       sink(event);
     } on Object catch (error, stackTrace) {
       throw _GeneratedDiagnosticOutputSinkFailure(error, stackTrace);
+    }
+  };
+}
+
+final class _GeneratedSemanticObservationSinkFailure implements Exception {
+  const _GeneratedSemanticObservationSinkFailure(this.error, this.stackTrace);
+
+  final Object error;
+  final StackTrace stackTrace;
+}
+
+RuntimeSemanticObservationSink? _generatedSemanticObservationSink(
+  RuntimeSemanticObservationSink? sink,
+) {
+  if (sink == null) {
+    return null;
+  }
+  return (event) {
+    try {
+      sink(event);
+    } on Object catch (error, stackTrace) {
+      throw _GeneratedSemanticObservationSinkFailure(error, stackTrace);
     }
   };
 }
@@ -298,6 +321,7 @@ Object? executeGeneratedParserV2(
   String? topRule,
   String actualContract = linkedSpecGeneratedSourceContract,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+  RuntimeSemanticObservationSink? semanticObservationSink,
 }) {
   validateGeneratedSourceContractV2(actualContract, sourceIdentity);
   final validated = _validatedGeneratedRulePlanV2(
@@ -315,11 +339,16 @@ Object? executeGeneratedParserV2(
           diagnosticOutputSink: _generatedDiagnosticOutputSink(
             diagnosticOutputSink,
           ),
+          semanticObservationSink: _generatedSemanticObservationSink(
+            semanticObservationSink,
+          ),
         )
         .value;
   } on GeneratedSourceException {
     rethrow;
   } on _GeneratedDiagnosticOutputSinkFailure catch (failure) {
+    Error.throwWithStackTrace(failure.error, failure.stackTrace);
+  } on _GeneratedSemanticObservationSinkFailure catch (failure) {
     Error.throwWithStackTrace(failure.error, failure.stackTrace);
   } on RuntimeExitNow {
     rethrow;
@@ -353,6 +382,7 @@ Object? executeGeneratedParserWithTraceV2(
   String? topRule,
   String actualContract = linkedSpecGeneratedSourceContract,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+  RuntimeSemanticObservationSink? semanticObservationSink,
 }) {
   validateGeneratedSourceContractV2(actualContract, sourceIdentity);
   final validated = _validatedGeneratedRulePlanV2(
@@ -371,11 +401,16 @@ Object? executeGeneratedParserWithTraceV2(
           diagnosticOutputSink: _generatedDiagnosticOutputSink(
             diagnosticOutputSink,
           ),
+          semanticObservationSink: _generatedSemanticObservationSink(
+            semanticObservationSink,
+          ),
         )
         .value;
   } on GeneratedSourceException {
     rethrow;
   } on _GeneratedDiagnosticOutputSinkFailure catch (failure) {
+    Error.throwWithStackTrace(failure.error, failure.stackTrace);
+  } on _GeneratedSemanticObservationSinkFailure catch (failure) {
     Error.throwWithStackTrace(failure.error, failure.stackTrace);
   } on RuntimeExitNow {
     rethrow;
@@ -529,6 +564,7 @@ Object? execute(
   String input, {
   String? topRule,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+  RuntimeSemanticObservationSink? semanticObservationSink,
 }) {
   validateGeneratedSourceContractV2(
     linkedspecGeneratedSourceContract,
@@ -542,6 +578,7 @@ Object? execute(
     topRule: topRule,
     actualContract: linkedspecGeneratedSourceContract,
     diagnosticOutputSink: diagnosticOutputSink,
+    semanticObservationSink: semanticObservationSink,
   );
 }
 
@@ -550,6 +587,7 @@ Object? executeWithTrace(
   LinkedSpecTraceConfig traceConfig, {
   String? topRule,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
+  RuntimeSemanticObservationSink? semanticObservationSink,
 }) {
   validateGeneratedSourceContractV2(
     linkedspecGeneratedSourceContract,
@@ -564,6 +602,7 @@ Object? executeWithTrace(
     topRule: topRule,
     actualContract: linkedspecGeneratedSourceContract,
     diagnosticOutputSink: diagnosticOutputSink,
+    semanticObservationSink: semanticObservationSink,
   );
 }
 ''';

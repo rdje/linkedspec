@@ -80,7 +80,10 @@ runtime-observation audit `.10.5.5.0` freezes the exact live/generated authority
 Typed live capture `.10.5.5.1` now exports exact invocation-local slot/result events across direct, loaded,
 reconstructed, traced, and generated-plan engine routes. Immutable observed-index derivation `.2` now validates
 those events against detached static topology, returns a separate canonical execution/event snapshot, and matches
-the twentieth response digest; generated/emitted route propagation `.3` is active and admission remains later.
+the twentieth response digest. Generated/emitted direct and traced route propagation `.3` now preserves exact
+events, results, diagnostics, trace bytes, exit omission, and caller callback identity through public helpers and
+fresh isolated emitted libraries without changing generated-source v2/format 2. Composition-only closeout `.4` is
+active; admission remains later.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

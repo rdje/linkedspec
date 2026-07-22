@@ -414,8 +414,9 @@ absent-sink/no-query authority, generated-wrapper exception identity, immutable 
 dependency order. Typed live capture `.1` now exports exact immutable events and an optional invocation-local sink
 across direct/loaded/reconstructed/traced/generated-plan engine routes with unchanged results, cursors, traces,
 diagnostics, and failure identity. Immutable observed-index derivation `.2` now returns a separate topology-
-validated canonical snapshot at the twentieth digest; generated/emitted route propagation `.3` is active while
-rollout/admission stay absent.
+validated canonical snapshot at the twentieth digest. Generated/emitted direct and traced propagation `.3` now
+preserves exact observations, outputs, trace bytes, exit omission, and caller callback identity without changing
+generated-source v2/format 2. Composition-only closeout `.4` is active while rollout/admission stay absent.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
