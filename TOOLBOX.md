@@ -440,6 +440,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   emitted direct and traced execution, typed/native-neutral JSON, all 20 digests, privacy/pages/budgets/errors/
   explain, no-execute immutability, and host-leak denial. The checker locks its exact path, ordered roles,
   canonical driver/registration, and Dart-only rollout/admission promotion with eight Dart-specific mutations.
+- **JULIA AUTHORITY / UNICODE PREFLIGHT:** `.10.6.0` finds no existing Julia semantic API. Build the future opaque
+  index from staged `SpecFile`/function sidecars, `CompiledSpec`, typed action/contracts, portable diagnostics,
+  generated-v2 plan, and direct runtime slot/result seams; do not use the outward descriptor, resolved loader
+  path, mutable `Vector`/`Dict` identity, or trace text as semantic authority. `SourceSpan` is line-only,
+  `ActionSourceSpan` is action-local scalar offset, compiled definition order omits functions, invalid Julia
+  `String` values need explicit rejection, and raw numeric validation must fence `Bool <: Integer`. Before index
+  construction, replace all five host-PCRE2 `\w` label patterns and validate reconstructed/programmatic labels:
+  current Unicode 16 tables miss 5,175 required Unicode 17 `XID_Continue` scalars, admit 923 forbidden scalars,
+  reject required `A·B`, accept forbidden `²`, and permit external-AST target bypass. See
+  [[julia-semantic-introspection-authority-map]] and [[julia-unicode-rule-label-preflight]].
 
 ---
 

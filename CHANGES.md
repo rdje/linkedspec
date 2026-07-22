@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.0 — map Julia semantic authorities
+
+Completed a behavior-free Julia semantic-introspection and Unicode-label preflight before implementation. Julia
+has no semantic index/query/observation API today, but staged rule/function sidecars, `CompiledSpec`, typed action
+AST/contracts and registry, portable diagnostics, selected entry/generated-v2 plan, and runtime slot/result seams
+are reusable authorities. The audit records the missing canonical byte/scalar source map, rule-only compiled
+definition order, line-only and action-local spans, malformed-UTF-8 `String` boundary, resolved loader-path privacy,
+generated callback translation, mutable collection detachment, `Bool <: Integer`, and trace-versus-typed-
+observation boundaries.
+
+Exact host preflight root-causes the rule-label prerequisite. Julia 1.12.6 uses PCRE2 10.47 with Unicode 16.0.0
+tables for all five native `\w` label patterns. Against pinned Unicode 17 `XID_Continue`, the host class misses
+5,175 required scalars and accepts 923 forbidden scalars. Required `A·B` fails; forbidden `²` compiles; `Top:::`
+truncates to `Top`; and programmatic/reconstructed action, blind, and bare targets bypass validation into compiled,
+descriptor, generated-plan, and emitted-source artifacts.
+
+Two Knowledge Map cards, Toolbox, README, both roadmaps, mdBook, live state, and the task tree now preserve the
+boundary. Julia implementation is dependency-ordered as Unicode closure `.10.6.1`, source/outcome `.2`, static
+projection `.3`, calls/staging/generated `.4`, typed/raw query `.5`, runtime observation `.6`, and one exact
+12-role admission `.7`. No Julia production/test behavior, neutral fixture, semantic response, rollout, or
+admission state changed. The unchanged Julia gate passes 3,711 package assertions, primary conformance, and
+105/105 corpus; semantic 6/20/81, Unicode 806/9/8/2, mdBook, all four doctrines, and Knowledge Map 682/5,138 pass.
+The first canonical run caught a removed checker-owned repeated-action status sentence during live-doc
+condensation; restoring the exact unchanged 8/0/54 marker makes the focused checker and full rerun pass Rust
+semantic admission 1/1 in 80.05 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 653 seconds.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.6 — admit Dart semantic introspection
 
 Dart is now the third admitted native implementation of `linkedspec-semantic-model-v1` and

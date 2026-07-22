@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.0` — compose Julia authorities; do not infer parity from familiar
+  Unicode examples): Julia has sufficient typed meaning for an adapter, but no single owner is the neutral model.
+  `SpecFile` and staged function sidecars own authored definitions; `CompiledSpec`, action AST/contracts/registry,
+  entry resolution, and generated-v2 plan own accepted structure; portable diagnostics own failure evidence; the
+  runtime owns accepted regex-slot identity and final results. The outward descriptor and trace strings are derived
+  compatibility/diagnostic surfaces, not semantic storage.
+
+  Source correlation is a first-class Julia requirement. Ordinary spans retain lines, staged spans retain scalar
+  ranges, and `ActionSourceSpan` is scalar-local to normalized action text. Compiled definition order includes rules
+  but not function shells. One copied canonical UTF-8 byte/scalar map must merge those sources and expose only
+  caller logical identity. Explicitly validate both bytes and decoded strings: Julia permits invalid UTF-8 bytes in
+  `String`, and current direct/staged parsing misclassifies them as language errors. Deep-detach public values even
+  when their containing struct is immutable, and reject booleans before integer fields because `Bool <: Integer`.
+
+  Runtime evidence must use a separate optional invocation-local typed sink at accepted-slot and successful final-
+  result seams. `julia_runtime:regex_slot_selected` trace text lacks typed topology and a final-result counterpart.
+  Generated execution's broad exception translation requires a semantic-specific wrapper/pass-through so caller
+  callback object/stack identity survives independently from diagnostic output. Query must consume detached
+  projection only and must never execute.
+
+  The Unicode result is foundational rather than a cosmetic edge case. PCRE2 10.47's Unicode 16 `\w` differs from
+  pinned Unicode 17 `XID_Continue` by 5,175 false negatives and 923 false positives. The fixtures expose both
+  membership directions plus tokenization (`A·B`, `²`, `Top:::`), while external AST action/blind/bare mutations
+  prove validation bypass continues through descriptor/generated/emitted artifacts. Generate one exact Julia
+  classifier/scanner, consume it at all five parser sites and the authoritative validator, then prove positive,
+  distinct, negative, artifact, selector, diagnostic, trace, loader, primary, and unrelated-identifier isolation
+  before semantic construction. That prerequisite is `.10.6.1`; it must not promote semantic governance.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.6` — admission composes owners; it does not create another semantic
   engine): The Dart admission test consumes only the public source/index/query/runtime/generated surfaces that
   `.10.5.1-.5` already completed. Its ordered role map and completed-role set make omission, invention, duplicate

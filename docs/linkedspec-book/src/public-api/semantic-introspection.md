@@ -840,6 +840,38 @@ The complete Dart corpus's 105/105 result now includes four byte-fresh `spec_spe
 across Perl, Rust, Dart, Julia, and Lua under default and POSIX environments, so the earlier stale-snapshot caveat
 no longer applies.
 
+## Julia authority map and prerequisite
+
+Julia semantic introspection is planned, not yet a public API. Audit `.10.6.0` finds no `SemanticIndex`,
+capabilities, query, or typed observation surface to call today. The future adapter will compose existing typed
+authorities: staged rules and function shells, `CompiledSpec`, typed action nodes/contracts and function registry,
+portable diagnostics, selected entry/generated-v2 plan, accepted runtime regex slots, and final parse results.
+The outward descriptor remains a separate compatibility projection rather than a semantic wire schema.
+
+Julia needs its own private canonical source map. Ordinary spec spans retain lines only; staged spans use scalar
+positions; action spans are scalar offsets local to normalized action text. Compiled `definition_order` contains
+rules but not staged function shells, so neutral authored order must merge both authorities. The constructor must
+also explicitly reject malformed text as well as malformed bytes: Julia can represent invalid UTF-8 inside a
+`String`, and current direct parsing reports a language parse error rather than an encoding-boundary error. Only a
+caller logical name may enter semantic identity; resolved loader paths remain private.
+
+Runtime observations will use a separate optional typed sink at the accepted-slot and successful final-result
+seams. Existing `julia_runtime:regex_slot_selected` trace text is diagnostic evidence, not a typed semantic event,
+and it has no matching final-result topic. Direct, loaded, reconstructed, generated, emitted, and traced routes
+must propagate the same sink while preserving results, cursor, trace, diagnostics, and the exact callback
+exception identity through generated execution's broad error translation. Returned values also need deliberate
+deep detachment because immutable Julia structs may still contain mutable vectors and dictionaries; raw-neutral
+numeric validation must reject booleans even though `Bool` is an `Integer` subtype in Julia.
+
+ADR `0051` alignment is the first prerequisite. Julia's five declaration/reference patterns currently use host
+PCRE2 `\w` backed by Unicode 16.0.0, not the pinned Unicode 17.0.0 `XID_Continue` table. Exhaustive comparison finds
+5,175 required scalars missing and 923 forbidden scalars accepted. Required `A·B` is rejected, forbidden `²` is
+accepted, `Top:::` truncates to valid prefix `Top`, and programmatic or reconstructed action/blind/bare targets can
+bypass membership validation into compiled and generated artifacts. Leaves `.10.6.1.0-.4` therefore generate and
+route one pinned classifier, prove exact positive/distinct identity and negative/isolation across all routes, and
+close without semantic promotion. Source/outcome, static graph, calls/staging/generated, query, runtime observation,
+and one exact 12-role admission then follow as `.10.6.2-.7`.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1203,7 +1235,8 @@ The dependency order is:
 | `.10.5.5.4` | Dart runtime-observation composition closeout | complete; committed semantic/runtime/public signoff without promotion |
 | `.10.5.5` | Dart typed runtime observation parent | complete |
 | `.10.5.6` | Dart composed semantic admission | complete; 12 roles, 20 exact queries, Dart-only promotion |
-| `.10.6` | Julia parity | pending |
+| `.10.6.0` | Julia authority and Unicode preflight | complete; behavior-free map and dependency split |
+| `.10.6.1-.10.6.7` | Julia Unicode prerequisite through exact semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

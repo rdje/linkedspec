@@ -8,60 +8,64 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Exact composed Dart semantic admission `FUTURE-PARITY-BACKLOG.10.5.6` is task-tree owned after runtime-observation
-  parent `.10.5.5` closed; no admission implementation has started. Its first action is to define the one exact
-  omission-sensitive consumer and registration/mutation topology from admitted Perl/Rust precedent.
+- Behavior-free Julia authority audit `FUTURE-PARITY-BACKLOG.10.6.0` is verified and in clean commit assembly. It maps typed staged,
+  compiled, action/contract, diagnostic, generated-v2, loader, trace, and runtime authorities; no semantic API,
+  production behavior, fixture, response digest, rollout, or admission state changes.
 
-Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
-`query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
-validation boundaries. Composition is 28/28, Dart is 79/0 + 324 + 66x2 + 105/105, and final canonical is Rust
-admission 77.48s + primary 66x2 + Phase 0 1,031/656s. Audit `.10.5.5.0` freezes exact post-match slot and successful
-final-result capture, absent-sink/no-query authority, generated-wrapper callback exception passthrough, immutable
-derivation, and `.1-.4` dependency order. Capture `.1` now exports exact typed invocation-local events across
-direct/loaded/reconstructed/traced/generated-plan engine routes. Focused 5, adjacent 81, static composition 28,
-and complete Dart 81/0 + 329 + 66x2 + 105 pass.
-Derivation `.2` now validates retained events against detached rule/slot/`selects_regex` topology, derives shapes
-only from static facts, creates a separate canonical execution/event/`observed_as` snapshot, and preserves the base.
-Focused 4/4, semantic composition 37/37, complete Dart 83/0 + 333 + 66x2 + 105, and twentieth digest `36897041...`
-pass. Canonical proof passes Rust admission in 76.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds;
-KM 679/5,095, mdBook, memory, task, doctrines, diff hygiene, and cleanup pass. Generated/emitted propagation `.3`
-now passes routes 2/2, adjacent 24/24, semantic composition 39/39, and complete Dart 84/0 + 335 + 66x2 + 105/105.
-Public direct/traced helpers and fresh isolated emitted libraries preserve exact events/twentieth digest, outputs,
-diagnostics, trace bytes, immediate-exit omission, caller error/stack identity, and v2/format 2. Rollout and
-admission remain absent. Composition closeout `.4` now recomposes semantic 39/39, adjacent runtime 24/24, complete
-Dart 84/0 + 335 + 66x2 + 105/105, Unicode 806/9/8/2, generated v1/10/80-0-0, and public
-3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0. Parent `.10.5.5` is closed without promotion; `.10.5.6` is active.
+The exact audit establishes that Julia needs a private canonical byte/scalar source map because ordinary spans are
+line-only and action spans are scalar-local; compiled definition order omits function shells; invalid UTF-8 can
+inhabit `String`; loaded state carries resolved paths; generated execution broadly translates callback failures;
+immutable structs may retain mutable collections; and raw-neutral numeric validation must reject `Bool` despite
+`Bool <: Integer`. Typed runtime observation must use accepted-slot/final-result seams rather than trace text.
 
-The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
-regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
-drift, semantic 6/20/73, KM 672/5,006, book/doctrines, primary 66x2, and canonical Phase 0 1,031/1,031 all pass.
-Completed `.2` passes its focused identity suite 4/4, eight adjacent route suites 46/46, and complete Dart format,
-fatal analysis, package 291, primary 66x2, and corpus 105/105. It covers all 9 positive labels and both distinct
-pairs through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes. Canonical
-CI passes Rust admission in 76.73 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds. Semantic 6/20/73,
-rollout 3/9, and admission 2/6 remain unchanged.
+The prerequisite Unicode probe root-causes current accidental partial support. Julia 1.12.6 uses PCRE2 10.47 with
+Unicode 16.0.0 tables at all five `\w` label patterns. Against pinned Unicode 17 `XID_Continue`, 5,175 required
+scalars are missing and 923 forbidden scalars are accepted. Required `A·B` fails, forbidden `²` compiles,
+`Top:::` truncates to `Top`, and programmatic/reconstructed action/blind/bare targets bypass validation into
+compiled/descriptor/generated/emitted artifacts. Two Knowledge Map cards and the mdBook/Toolbox record the finding.
 
-Completed `.3` passes focused negative/isolation 5/5, ten adjacent suites 64/64, and complete Dart format, fatal
-analysis, package 296, primary 66x2, and corpus 105/105. All eight invalid fixtures fail 64 external-AST role/route
-checks; source/no-prefix/primary boundaries and function/helper/lifecycle/fluent/mark isolation are exact. Canonical
-passes Rust admission 1/1 in 77.14 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds. No production file
-changed; semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6.
+The Julia parent is split into Unicode closure `.10.6.1`, opaque source/outcome `.2`, private static projection
+`.3`, calls/staging/generated `.4`, immutable typed/raw query `.5`, typed runtime observation `.6`, and one exact
+12-role admission `.7`. After `.10.6.0` commits cleanly, `.10.6.1.0` is the sole next action. Semantic governance
+remains 6/20/81 at rollout 4/9 and native admission 3/6.
 
-Completed `.4` composed signoff passes complete Dart format/analyze/package 296/primary 66x2/corpus 105, Unicode
-806/9/8/2, semantic 6/20/73 at unchanged rollout 3/9 and admission 2/6, generated-source v1/10 families/80-0-0,
-four doctrines, and Knowledge Map 672/5,006. Canonical passes Rust admission 1/1 in 77.74 seconds, primary 66x2, and
-Phase 0 1,031/1,031 in 622 seconds. Parent `.10.5.0.2` closes without production or semantic-ledger change.
+Verification passes unchanged Julia 3,711 package assertions, primary conformance, corpus 105/105; semantic
+6/20/81; Unicode 806/9/8/2; Knowledge Map 682/5,138; mdBook and all four doctrines. The first canonical run caught
+the removed checker-owned repeated-action sentence in this live file; restoring the exact unchanged marker makes
+the focused 8/0/54 checker and complete rerun pass Rust semantic admission 1/1 in 80.05s, Dart admission 1/1,
+primary 66x2, and Phase 0 1,031/1,031 in 653s.
 
-ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
-records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
-observations, no backend IR leakage, and a two-tool handle-only MCP transport. The neutral oracle is now 3/9
-rollout legs and native backend admission 2/6: exact composed `.10.3.6` and `.10.4.6` consumers admit Perl and Rust
-while Dart, Julia, Lua/LuaJIT, recurring proof, MCP, and public no-drift remain pending.
-
-Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker rejects 54 mutations and its
-recurring proof remains the six-runtime plus selected primary/support authority.
+Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
+`tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.0 — map Julia semantic authorities**
+  (DONE in this commit from clean base `a0946c01`).
+
+  **Result:** Exact typed source/compiled/failure/call/staged/generated/runtime authorities and missing semantic
+  seams are mapped. PCRE2 Unicode drift and external-AST validation bypass are root-caused and durable. Unicode,
+  source/outcome, static, calls/staging/generated, query, runtime observation, and admission have bounded ordered
+  owners `.10.6.1-.7`; no behavior or semantic ledger changes.
+
+  **Proof:** Julia 3,711/primary/105; semantic 6/20/81 at 4/9 + 3/6; Unicode 806/9/8/2; KM 682/5,138;
+  book/memory/task/doctrines/diff/cleanup; canonical Rust admission 80.05s, Dart 1/1, primary 66x2, and Phase 0
+  1,031/1,031 in 653s after exact repeated-action live-marker restoration.
+
+  **Next:** after the clean commit, freeze the generated Julia Unicode classifier and route proof in `.10.6.1.0`.
+
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.6 — admit Dart semantic introspection**
+  (DONE at clean commit `a0946c01`).
+
+  **Result:** One ordered omission-sensitive Dart consumer composes strict text/bytes, compiled/failed/runtime
+  snapshots, loaded/reconstructed/generated/emitted/traced routes, typed/raw-neutral query, all 20 digests,
+  bounded behavior, immutability, and host denial. Eight topology mutations advance only Dart and close `.10.5`.
+
+  **Proof:** Admission 1/1; Dart format 85/0, fatal analysis, package 336, primary 66x2, corpus 105/105; semantic
+  6/20/81 at 4/9 + 3/6; canonical Rust 1/1 in 83.16s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 650s, and
+  complete gate 1,716.72s; KM 680/5,105; docs/doctrines/cleanup pass.
+
+  **Next:** map Julia semantic and Unicode authorities in behavior-free `.10.6.0`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.4 — close Dart runtime observation**
   (DONE in this commit from clean base `c0955aea`).
 

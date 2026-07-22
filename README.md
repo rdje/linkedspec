@@ -876,7 +876,13 @@ content migration exists yet.
   generated-plan/public-helper/standalone-emitted direct and traced execution, native/neutral JSON, all 20 exact
   digests, bounded query behavior, immutability, and host-leak denial. Eight Dart-specific topology mutations
   advance only Dart to 6/20/81, rollout 4/9, and native admission 3/6; parent `.10.5` closes and Julia `.10.6` is
-  next after the clean handoff.
+  next after the clean handoff. Behavior-free Julia audit `.10.6.0` maps reusable staged/compiled/action/
+  diagnostic/generated/runtime authorities plus the missing opaque source-map/query/observation seams. It also
+  proves the current host-PCRE2 Unicode 16 `\w` label boundary is not pinned Unicode 17 `XID_Continue`: 5,175
+  required scalars are absent, 923 forbidden scalars are accepted, and parser-prefix/external-AST validation
+  bypasses reach artifacts. Julia work is now dependency-ordered as Unicode closure `.10.6.1`, source/outcome
+  `.2`, static `.3`, calls/staging/generated `.4`, query `.5`, runtime observation `.6`, and exact admission `.7`;
+  audit `.0` changes no behavior or governance state.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

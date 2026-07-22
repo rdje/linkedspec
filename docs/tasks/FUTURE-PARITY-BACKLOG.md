@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (exact 12-role Dart semantic admission `.10.5.6` advances only Dart to 6/20/81,
-  rollout 4/9, and native admission 3/6; parent `.10.5` is closed and Julia `.10.6` is next after clean handoff)
+- Last updated: `2026-07-22` (behavior-free Julia semantic/Unicode authority audit `.10.6.0` maps exact native
+  owners and hazards and dependency-splits Unicode/source/static/calls/query/runtime/admission `.10.6.1-.7`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9086,8 +9086,9 @@ before implementation.
     production-code change.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Julia semantic index adapter and exact native conformance.
+  Children: `.10.6.0`, `.10.6.1`, `.10.6.2`, `.10.6.3`, `.10.6.4`, `.10.6.5`, `.10.6.6`, `.10.6.7`
   Depends on: `.10.5`
   Acceptance: Project the same model from Julia compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Julia types plus neutral JSON; prove exact reference answers and non-interference across every shared
@@ -9095,6 +9096,322 @@ before implementation.
     canonical gate without exposing Julia dictionaries or type layout as semantic schema. Before the `Töp` privacy
     fixture can be admitted, align every Julia rule declaration/reference/artifact/selector route with ADR `0051`'s
     pinned Unicode 17 `XID_Continue` and exact identity contract.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.0`
+  Status: `done` (2026-07-22; behavior-free Julia semantic/Unicode authority map and dependency split)
+  Goal: Map Julia semantic and Unicode-label authorities, prove the exact pre-implementation boundary, and split
+    the adapter into omission-safe dependency-ordered leaves before behavior code.
+  Depends on: `.10.5.6`
+  Acceptance: Retrieve the canonical semantic-model, rule-label, Julia architecture, generated-source, loader,
+    trace, diagnostic, primary, and verification facts through the Knowledge Map and Toolbox before source audit;
+    inventory strict source/compiled/failure/static/call/provenance/query/runtime/generated/emitted/trace owners and
+    gaps with exact probes; measure every Julia rule declaration/reference/artifact/selector route against ADR
+    `0051`; record host-object/privacy/non-interference risks; create complete dependency-ordered implementation,
+    composition, and admission children; synchronize task/index/memory/roadmap/mdBook/Knowledge Map as warranted;
+    change no Julia production/test behavior, neutral fixture, semantic ledger, or rollout/admission status.
+  Verification: Exact native/contract probes establish that Julia has rich typed parse/compile/action/staged/
+    diagnostic/generated authorities but no semantic API, complete source map, or typed observation sink. Ordinary
+    source spans are line-only, action spans are scalar-local, compiled definition order omits function shells,
+    loaded state carries resolved host paths, generated execution translates generic callback failures, and public
+    immutable structs can retain mutable collections. A separate Unicode preflight proves current PCRE2 `\w`
+    membership is not ADR `0051`: host Unicode 16 tables miss 5,175 required scalars, admit 923 forbidden scalars,
+    reject required `A·B`, accept forbidden `²`, truncate `Top:::` to `Top`, and permit programmatic/reconstructed
+    action/blind/bare target labels to bypass validation into compiled/descriptor/generated/emitted artifacts.
+    Two Knowledge Map cards record the exact boundary. Work is split into Unicode prerequisite `.1`, opaque source/
+    outcome `.2`, static projection `.3`, calls/staging/generated `.4`, query `.5`, runtime observation `.6`, and
+    exact admission `.7`; no Julia behavior or neutral governance state changes in this audit. The unchanged
+    complete Julia gate passes 3,711 package assertions, primary conformance, and corpus 105/105. Semantic
+    governance remains 6/20/81 at rollout 4/9 and admission 3/6; Unicode is 806/9/8/2; Knowledge Map is
+    682 facts / 5,138 keys; mdBook, memory architecture, all four doctrines, task metadata, and diff hygiene pass.
+    The first canonical run correctly rejected removal of the exact repeated-action live-status marker during
+    condensation; restoring the unchanged checker-owned 8/0/54 sentence makes the focused checker pass and the
+    complete canonical rerun pass Rust semantic admission 1/1 in 80.05 seconds, Dart admission 1/1, primary 66x2,
+    and Phase 0 1,031/1,031 in 653 seconds. Generated mdBook/Rust cache artifacts are removed before commit.
+  Commit: `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.1`
+  Status: `pending`
+  Goal: Align every Julia rule-label route with pinned Unicode 17 `XID_Continue` before semantic construction.
+  Children: `.10.6.1.0`, `.10.6.1.1`, `.10.6.1.2`, `.10.6.1.3`, `.10.6.1.4`
+  Depends on: `.10.6.0`
+  Acceptance: Generate one Julia classifier/scanner from the neutral 806 ranges; replace host `\w` membership at
+    every declaration/reference parser and validator route; preserve exact case/normalization-sensitive identity
+    through artifacts, selectors, diagnostics, trace, loader, and primary routes; reject all invalid/prefix and
+    external-AST bypass cases without widening unrelated identifier grammars; close complete Julia/canonical proof
+    without semantic rollout or admission promotion.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.1.0`
+    Status: `pending`
+    Goal: Freeze the generated Julia Unicode classifier/scanner contract and route/isolation proof split.
+    Depends on: `.10.6.0`
+    Acceptance: Reproduce the 5,175-missing/923-extra host census and all parser/validator/artifact bypasses; map
+      generator outputs, all five parser patterns, validator declaration/target owners, reconstructed AST routes,
+      positive/distinct/negative fixtures, downstream identities, primary/canonical commands, and exact `.1-.4`
+      dependency order before production behavior changes.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.1.1`
+    Status: `pending`
+    Goal: Generate and route one pinned Julia rule-label classifier/scanner through parser and validation seams.
+    Depends on: `.10.6.1.0`
+    Acceptance: Extend deterministic Unicode generation/checking with an exact 806-range Julia artifact; replace
+      header/body/action/blind/bare host word scans with complete-token scanning; validate parsed, programmatic, and
+      reconstructed declarations plus action/blind/bare targets; reject prefix truncation and malformed input while
+      preserving existing non-label syntax and diagnostics outside the owned boundary.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.1.2`
+    Status: `pending`
+    Goal: Prove exact positive and distinct Julia label identity through every downstream route.
+    Depends on: `.10.6.1.1`
+    Acceptance: Run all nine positive labels and both distinct pairs through source/AST, compiled state, descriptor,
+      generated plan, reconstructed JSON, emitted source, explicit/default selectors, diagnostics, trace, strict
+      loading, library APIs, and primary commands; prove exact scalar identity without normalization, folding, or
+      host-path leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.1.3`
+    Status: `pending`
+    Goal: Close Julia invalid-label and unrelated-identifier isolation.
+    Depends on: `.10.6.1.2`
+    Acceptance: Reject all eight negative fixtures at source/no-prefix, parsed, programmatic, reconstructed, action,
+      blind, bare, artifact, selector, loader, and primary boundaries; prove the classifier does not widen/narrow
+      function, parameter, helper, lifecycle, fluent, mark, regex, or action-language identifiers.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.1.4`
+    Status: `pending`
+    Goal: Compose complete Julia Unicode-label signoff without semantic promotion.
+    Depends on: `.10.6.1.3`
+    Acceptance: Re-run generated artifact, focused identity/isolation, complete Julia package/primary/corpus,
+      Unicode/semantic/generated/public/canonical gates, durable synchronization, and cleanup; close `.10.6.1`
+      while keeping Julia semantic rollout/admission pending and handing off only to `.10.6.2`.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.2`
+  Status: `pending`
+  Goal: Add the opaque Julia semantic source map and compiled-or-failed foundation.
+  Children: `.10.6.2.0`, `.10.6.2.1`, `.10.6.2.2`, `.10.6.2.3`
+  Depends on: `.10.6.1`
+  Acceptance: Construct once from copied valid `String` or strict UTF-8 bytes plus caller logical name, source
+    ceiling, and optional exact entry; retain canonical bytes/scalar mapping, staged parsed/validated/compiled-or-
+    failed authority, merged rule/function authored order, selected entry, and generated-v2 plan without execution,
+    paths, records/query, or host-object exposure.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.2.0`
+    Status: `pending`
+    Goal: Freeze the Julia source/outcome API boundary and implementation split.
+    Depends on: `.10.6.1.4`
+    Acceptance: Reconcile the neutral source/privacy contract and admitted backend precedents with Julia parser,
+      staged shell, validator, compiler, selector, loader, diagnostic, and generated-plan owners; fix public/private
+      types, malformed text/byte policy, no-path/no-execution topology, and exact `.1-.3` dependency order.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.2.1`
+    Status: `pending`
+    Goal: Implement strict copied Julia semantic input policy and a private canonical byte/scalar source map.
+    Depends on: `.10.6.2.0`
+    Acceptance: Export idiomatic options/errors/source value types; reject invalid Julia strings, malformed bytes,
+      Boolean numeric impostors, invalid options, and invalid selectors before language parsing; enforce all source
+      ceilings and exact spans/excerpts/digests/lookup with detached values and no implicit path authority.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.2.2`
+    Status: `pending`
+    Goal: Retain opaque staged compiled-or-failed Julia authority and exact generated-plan input.
+    Depends on: `.10.6.2.1`
+    Acceptance: Parse staged function shells, validate, compile, merge authored function/rule order, select entry,
+      and retain generated-v2 plan once; preserve native failures as deterministic outcome state, invoke no target
+      parser/action/lifecycle/trace/diagnostic/observer, and expose no AST/IR/compiler/descriptor/path object.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.2.3`
+    Status: `pending`
+    Goal: Compose exact Julia source/outcome foundation signoff.
+    Depends on: `.10.6.2.2`
+    Acceptance: Prove graph/privacy/failure/runtime construction, text/byte convergence, malformed boundaries,
+      Unicode/CRLF/duplicate coordinates, ceilings, selectors, clone/caller isolation, no-execution/host denial,
+      complete Julia/canonical gates, and clean `.10.6.2` closure without records/query or promotion.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.3`
+  Status: `pending`
+  Goal: Project exact private Julia static semantic graph, privacy, failure, and runtime-static state.
+  Children: `.10.6.3.0`, `.10.6.3.1`, `.10.6.3.2`, `.10.6.3.3`
+  Depends on: `.10.6.2`
+  Acceptance: Compose detached compiled/source/diagnostic authorities into the exact neutral spec/rule/regex/edge/
+    lifecycle/decision/explanation records and relations for graph, both privacy ceilings, normalized failure, and
+    runtime-static absence, without public query or runtime observation.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.3.0`
+    Status: `pending`
+    Goal: Freeze Julia static projection authorities, target counts, normalization, and proof split.
+    Depends on: `.10.6.2.3`
+    Acceptance: Map every neutral static field/relation/evidence id to compiled/source/diagnostic authority, record
+      native-to-neutral failure normalization, privacy/clone/host fences, exact five construction targets, and the
+      dependency order for graph core `.1`, remaining targets `.2`, and closeout `.3` before behavior code.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.3.1`
+    Status: `pending`
+    Goal: Implement the private Julia compiled graph/source/evidence projection.
+    Depends on: `.10.6.3.0`
+    Acceptance: Materialize exact graph records/relations in canonical order from compiled rule/family/cursor/
+      repetition/slot/edge/lifecycle plus correlated source authorities; deep-equal the neutral graph target while
+      exposing no public query, host object, mutable owner state, path, generated source, or execution authority.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.3.2`
+    Status: `pending`
+    Goal: Complete Julia privacy, normalized failure, runtime-static absence, and isolation targets.
+    Depends on: `.10.6.3.1`
+    Acceptance: Deep-equal full/limited privacy, failed compilation, and runtime-static targets; enforce source
+      ceilings before projection leaves, preserve native failure foundation while normalizing neutral evidence, and
+      prove recursive deep-copy/immutability plus host/path/AST/IR/compiler/execution denial.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.3.3`
+    Status: `pending`
+    Goal: Compose and close exact Julia private static projection.
+    Depends on: `.10.6.3.2`
+    Acceptance: Re-run all five targets and topology/isolation proof with complete Julia/neutral/canonical/docs/KM/
+      cleanup gates; close `.10.6.3` without public query, runtime observation, or ledger promotion.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.4`
+  Status: `pending`
+  Goal: Project exact Julia functions, helpers, calls, bindings, staged provenance, and generated plan.
+  Children: `.10.6.4.0`, `.10.6.4.1`, `.10.6.4.2`, `.10.6.4.3`
+  Depends on: `.10.6.3`
+  Acceptance: Merge separate staged function shells with rules into authored order, correlate local action spans to
+    canonical source, resolve user/helper calls and bindings, derive conservative shapes, distinguish staged
+    payload/job/result, and project selected generated-v2 provenance at exact 22-record/25-relation parity.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.4.0`
+    Status: `pending`
+    Goal: Freeze Julia calls/staging/generated authorities and exact dependency split.
+    Depends on: `.10.6.3.3`
+    Acceptance: Map typed function registry/action AST/contracts, staged source spans/payload/jobs/results, compiled
+      rule-only order, source correlation, call resolution/shape policy, generated plan, host/privacy fences, exact
+      22/25 target, and core `.1` / completion `.2` / closeout `.3` before production changes.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.4.1`
+    Status: `pending`
+    Goal: Implement typed Julia function/helper/call/binding core projection.
+    Depends on: `.10.6.4.0`
+    Acceptance: Project authored function/rule order, definitions, parameters/rest bindings, nested calls, exact
+      user-before-helper resolution, local-to-global Unicode source evidence, and conservative input/result shapes;
+      deep-equal the non-staged neutral subset with no staged/generated/runtime or host-IR leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.4.2`
+    Status: `pending`
+    Goal: Complete Julia staged payload/job/result and generated-plan semantic provenance.
+    Depends on: `.10.6.4.1`
+    Acceptance: Add distinct staged artifact records/relations from typed sidecars and one selected generated-v2
+      plan artifact; deep-equal all 22 records/25 relations while excluding body AST, generated implementation text,
+      paths, execution, trace, diagnostics, and mutable compiler state.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.4.3`
+    Status: `pending`
+    Goal: Compose and close exact Julia calls/staging/generated projection.
+    Depends on: `.10.6.4.2`
+    Acceptance: Re-run exact target, Unicode/interleaved-function/source-evidence, resolution/shape, isolation,
+      complete Julia/canonical/docs/KM/cleanup proof; close `.10.6.4` without public query or promotion.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.5`
+  Status: `pending`
+  Goal: Expose immutable typed and raw-neutral Julia semantic capabilities/query.
+  Children: `.10.6.5.0`, `.10.6.5.1`, `.10.6.5.2`, `.10.6.5.3`, `.10.6.5.4`
+  Depends on: `.10.6.4`
+  Acceptance: Evaluate capabilities/list/get/relations/explain over detached projection only; match all 19 static
+    digests and 26 validation boundaries with exact source ceilings, pages, filtered traversal, logical budgets/
+    costs, portable errors, deep immutability, and no parsing/compilation/execution/host inspection during query.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.5.0`
+    Status: `pending`
+    Goal: Freeze Julia query types, detached authority, validator boundaries, and implementation split.
+    Depends on: `.10.6.4.3`
+    Acceptance: Reconcile all 20 requests/19 static digests, 26 malformed boundaries including `Bool <: Integer`,
+      source/privacy/page/budget/cost/explain rules, no-execution topology, typed/raw JSON shape, and `.1-.4` order.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.5.1`
+    Status: `pending`
+    Goal: Implement private immutable Julia record/source query kernel.
+    Depends on: `.10.6.5.0`
+    Acceptance: Add closed typed request/response/error value vocabulary plus private capabilities/list/get/explain
+      and source ceiling/redaction/digest logic over fresh detached projection clones; match the owned static digests
+      without exporting a partial public evaluator.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.5.2`
+    Status: `pending`
+    Goal: Add exact Julia relation traversal, pagination, budgets, and logical costs.
+    Depends on: `.10.6.5.1`
+    Acceptance: Implement deterministic filtered directional breadth-first traversal, canonical after-id pages,
+      record/relation/depth ceilings, deterministic truncation/prefixes, and exact cost accounting; match all
+      successful static digests without touching compiler/runtime authority.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.5.3`
+    Status: `pending`
+    Goal: Export Julia semantic construction, capabilities, typed query, and raw-neutral query completion.
+    Depends on: `.10.6.5.2`
+    Acceptance: Expose one idiomatic opaque index API and one raw-neutral validator/evaluator path; match all 19
+      static digests and all malformed boundaries, recursively detach outputs, reject booleans as numerics, and
+      deny path/source-above-ceiling/AST/IR/compiler/runtime/callback authority.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.5.4`
+    Status: `pending`
+    Goal: Compose and close Julia immutable semantic query.
+    Depends on: `.10.6.5.3`
+    Acceptance: Re-run foundation/static/calls/query composition, exact digests/errors/pages/budgets/explain,
+      mutation/immutability/no-execute proof, complete Julia/canonical/docs/KM/cleanup; close `.10.6.5` without
+      runtime observations or ledger promotion.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.6`
+  Status: `pending`
+  Goal: Capture typed Julia runtime semantic observations through every execution route.
+  Children: `.10.6.6.0`, `.10.6.6.1`, `.10.6.6.2`, `.10.6.6.3`, `.10.6.6.4`
+  Depends on: `.10.6.5`
+  Acceptance: Add a separate optional invocation-local typed sink at accepted-slot and successful final-result
+    seams; derive a new immutable observed index matching the twentieth digest; propagate direct/loaded/
+    reconstructed/generated/emitted/traced routes with exact callback identity and result/trace/diagnostic
+    non-interference; keep query execution-free and no-sink work minimal.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.6.0`
+    Status: `pending`
+    Goal: Freeze Julia runtime-observation seams, topology, exception policy, and implementation split.
+    Depends on: `.10.6.5.4`
+    Acceptance: Map exact slot/result seams, all live/generated route adapters, existing trace/diagnostic channels,
+      generated broad-catch behavior, neutral event/derivation target, no-sink requirements, forbidden authorities,
+      and `.1-.4` dependency order before behavior changes.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.6.1`
+    Status: `pending`
+    Goal: Add typed Julia runtime semantic events and direct capture.
+    Depends on: `.10.6.6.0`
+    Acceptance: Export immutable closed slot/result event plus sink types; thread an optional invocation-local sink
+      through direct, loaded, reconstructed, traced, and generated-plan engine entry; emit accepted slot events and
+      one successful final result only, with scalar positions/input identity and exact caller exception identity.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.6.2`
+    Status: `pending`
+    Goal: Derive an immutable Julia semantic runtime snapshot from typed observations.
+    Depends on: `.10.6.6.1`
+    Acceptance: Validate event contracts/topology solely against detached static records/relations, require one
+      final success, derive shapes from static facts, create canonical execution/event/`observed_as` records in a
+      new snapshot, keep the base static, and match the twentieth typed/raw-neutral response digest.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.6.3`
+    Status: `pending`
+    Goal: Preserve exact Julia observations through generated, emitted, and traced public routes.
+    Depends on: `.10.6.6.2`
+    Acceptance: Thread the sink through public generated helpers and fresh emitted modules, direct and traced; add
+      semantic-specific callback passthrough before broad generated error translation; prove exact events/digest,
+      result/cursor/trace/diagnostic equality, failure omission, and unchanged generated-source v2/format 2.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.6.6.4`
+    Status: `pending`
+    Goal: Compose Julia runtime-observation signoff and close the parent.
+    Depends on: `.10.6.6.3`
+    Acceptance: Re-run static/runtime query, malformed observation, every route/non-interference/callback identity,
+      complete Julia/neutral/canonical/docs/KM/cleanup proof; close `.10.6.6` without rollout/admission promotion.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.6.7`
+  Status: `pending`
+  Goal: Admit the exact Julia semantic implementation and close `.10.6`.
+  Depends on: `.10.6.6`
+  Acceptance: Add one omission-sensitive ordered 12-role Julia consumer over strict text/bytes, compiled/failed/
+    runtime snapshots, direct/loaded/reconstructed/generated-plan/public-helper/standalone-emitted direct/traced
+    routes, typed/native-neutral JSON, all 20 digests, privacy/pages/budgets/errors/explain, no-execute immutability,
+    and stale host/path/IR denial. Register it canonically, add independent Julia topology mutations, advance only
+    Julia rollout/admission, pass complete Julia/primary/corpus/generated/canonical gates, synchronize all public
+    state, and close `.10.6` cleanly before Lua `.10.7`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
   Status: `pending`
@@ -11375,11 +11692,10 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, admitted Rust `.10.4`, and admitted
 Dart `.10.5` are complete. Governance is six groups / 20 responses / 81 mutations, rollout 4/9, and native
-admission 3/6. Dart's Unicode-label prerequisite, source/outcome foundation, static and calls/staged/generated
-projections, public typed/raw-neutral query, typed runtime observation, immutable observed-index derivation, and
-generated/emitted/traced routes are composition-closed. Exact admission `.10.5.6` adds no production semantic
-path: one ordered 12-role consumer composes all existing owners, advances only Dart, and closes the parent.
-Julia `.10.6` is the next eligible semantic backend after the clean `.10.5.6` commit.
+admission 3/6. Behavior-free Julia audit `.10.6.0` maps the reusable staged/compiled/action/diagnostic/generated/
+runtime authorities, missing opaque source/query/observation seams, and exact ADR `0051` host-regex and external-
+AST bypass prerequisite. It splits all implementation into `.10.6.1-.7` without changing Julia behavior or the
+neutral ledgers. `.10.6.1.0` is the only next eligible leaf after the audit's clean commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -11855,6 +12171,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.5.3 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `done` | Generated/emitted direct and traced APIs preserve exact observations, outputs, traces, exit omission, and caller callback identity without contract drift. |
 | 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `done` | Composed committed-code runtime-observation signoff closes the parent without semantic promotion. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `done` | One exact 12-role consumer admits Dart at 6/20/81, rollout 4/9, admission 3/6, and closes `.10.5`. |
+| 74.5.0 | `FUTURE-PARITY-BACKLOG.10.6.0` | `done` | Exact Julia semantic/Unicode authority map and `.10.6.1-.7` split close without behavior or governance change. |
+| 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `pending` | Freeze the generated Julia Unicode classifier, routes, isolation, and signoff plan after the clean audit commit. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -12529,6 +12847,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.0` | Knowledge/Toolbox/ADR retrieval; exact Julia source/compiled/failure/calls/staged/generated/runtime/trace/loader/API probes; PCRE2 10.47 Unicode 16 census versus pinned Unicode 17 (5,175 missing / 923 extra), 9-positive/8-negative/distinct and external-AST bypass probes; unchanged Julia 3,711/primary/105; semantic 6/20/81 at 4/9 + 3/6; Unicode 806/9/8/2; KM 682/5,138; book/memory/task/four doctrines/diff; focused repeated-action marker repair; canonical Rust admission 1/1 in 80.05s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 653s; cleanup. | PASS. Two fact cards and public/live docs preserve exact authorities and foundational Unicode/validation risks; `.10.6.1-.7` are dependency-ordered, no behavior or ledger changes, and `.10.6.1.0` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.6` | One exact 12-role Dart admission consumer; pre-promotion RED at status only and GREEN 1/1; all 20 digests/routes/privacy/pages/budgets/errors/explain/non-interference/denial boundaries; complete Dart format 85/0, fatal analysis, package 336/336, primary 66x2, corpus 105/105; semantic 6/20/81 at rollout 4/9 and admission 3/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 680/5,105; book/memory/task/four doctrines/diff/cleanup; canonical Rust admission 1/1 in 83.16s, Dart admission 1/1, primary 66x2, Phase 0 1,031/1,031 in 650s, complete gate 1,716.72s. | PASS. Dart is the third admitted native semantic backend, only Dart advances, `.10.5` closes without semantic production-code change, and Julia `.10.6` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.4` | No production/test change; committed semantic 39/39 and adjacent emitter/diagnostic/runtime 24/24; complete Dart format 84/0, fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 679/5,095; book/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 77.24s, primary 66x2, Phase 0 1,031/1,031 in 621s. | PASS. Runtime observation is composition-closed through every Dart route without production or ledger change; exact admission `.10.5.6` activates. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.3` | Public generated/emitted direct/traced optional sink; channel-specific callback failure passthrough; exact events/twentieth digest/result/diagnostic/trace/exit identities; unchanged v2/format 2; focused 2/2, adjacent 24/24, semantic composition 39/39; complete Dart format 84/0, fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; KM 679/5,095; mdBook/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 76.72s, primary 66x2, Phase 0 1,031/1,031 in 623s. | PASS. Every Dart generated/emitted observation route now preserves exact caller and pre-existing behavior; composition `.4` activates without semantic-ledger promotion. |
@@ -12755,6 +13074,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.0` | `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities` | Behavior-free typed authority/source/query/runtime map; exact 5,175/923 Unicode and external-AST bypass preflight; `.10.6.1-.7` split; Julia 3,711/105/primary, semantic/Unicode, KM/book/doctrines, canonical Rust 80.05s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s, and cleanup without ledger movement. |
 | `FUTURE-PARITY-BACKLOG.10.5.6` | `FUTURE-PARITY-BACKLOG.10.5.6 - admit Dart semantic introspection` | One exact 12-role consumer over existing Dart semantic owners; 20 digests, eight topology mutations, rollout 4/9, admission 3/6, complete Dart 336/105/66x2, canonical Rust admission 83.16s plus Dart admission 1/1 and Phase 0 1,031/650s, complete gate 1,716.72s, KM/book/doctrines, cleanup, and parent closeout without semantic production-code change. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `FUTURE-PARITY-BACKLOG.10.5.5.4 - close Dart runtime observation` | No-code committed composition 39/adjacent 24/complete Dart 335/105/66x2, semantic/Unicode/generated/public, canonical admission 77.24s plus Phase 0 1,031/621s, KM/book/doctrines, cleanup, and parent closure without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `FUTURE-PARITY-BACKLOG.10.5.5.3 - propagate Dart runtime semantics` | Optional public generated/emitted direct/traced sink propagation, exact callback identity and output/trace/exit non-interference, routes 2/adjacent 24/semantic 39/complete Dart 335/105/66x2, canonical admission 76.72s plus Phase 0 1,031/623s, KM/book/doctrines, and cleanup without semantic promotion. |
@@ -12959,6 +13279,18 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-22`: `.10.6.0` maps Julia semantic construction before behavior. Typed staged rules/functions,
+  `CompiledSpec`, action/contracts/registry, portable diagnostics, generated-v2 plan, and runtime slot/result seams
+  are reusable, while one private byte/scalar source map, opaque typed/raw query, and typed observation channel are
+  absent. Exact probes record line-only/action-local spans, rule-only compiled definition order, malformed Julia
+  `String`, resolved loader paths, generated callback translation, mutable collections, and `Bool <: Integer`.
+  Unicode preflight proves PCRE2 Unicode 16 `\w` differs from pinned Unicode 17: 5,175 required scalars missing,
+  923 forbidden accepted, `A·B` rejected, `²` accepted, `Top:::` truncated, and external-AST action/blind/bare
+  targets admitted into artifacts. Two fact cards, Toolbox, README, roadmaps, mdBook, and `.10.6.1-.7` preserve the
+  result; behavior and 6/20/81 at 4/9 + 3/6 remain unchanged. Julia 3,711/primary/105, Unicode, KM 682/5,138,
+  doctrines/book, and canonical Rust 80.05s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s pass after the exact
+  repeated-action live marker is restored; `.10.6.1.0` follows only after the clean audit commit.
 
 - `2026-07-21`: `.10.4.6` composes every existing Rust semantic owner through one omission-sensitive ordered
   12-role consumer. It matches compiled/failed/runtime snapshots, typed/raw-neutral JSON, all 20 digests, every

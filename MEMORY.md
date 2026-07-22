@@ -5,24 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.6` — exact composed Dart semantic admission and `.10.5` closeout.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.5.6 - admit Dart semantic introspection` is the assembled handoff commit.
-- active_work_unit: `.10.5.6` is implemented and verified; commit/clean-handoff assembly is in flight.
-- next_action: finish `.10.5.6` canonical signoff/commit, then activate Julia semantic backend `.10.6` from clean state.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.0` — behavior-free Julia semantic/Unicode map and split.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities` is the assembled handoff commit from base `a0946c01`.
+- active_work_unit: `.10.6.0` is fully verified; artifact cleanup, guard replay, and commit assembly are in flight.
+- next_action: commit `.10.6.0` cleanly, then activate only `.10.6.1.0` to freeze Julia Unicode work before code.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 81 rejected mutations. Static/generated facts
   cross-check admitted authority; spec names derive from caller logical identity. Coordinated model/hash drift
   fails. Perl, Rust, and Dart each have one exact 12-role consumer; neutral rollout is 4 complete / 5 pending and
   native backend admission is 3 complete / 3 pending.
-- current_mcp_boundary: planned MCP exposes only native capabilities/query calls over a caller-registered opaque
-  handle. It cannot compile, read implicit paths, traverse backend objects, derive facts, invent explanations, or
-  elevate source/cost ceilings. `.10.9` owns transport after six-runtime recurring admission.
-- current_descriptor_boundary: current outward `spec/functions/dependency_regex_map/meta` is reusable derived
-  compatibility state, not the semantic wire schema. TOOLBOX proof shows native Perl coderef/compiled-regex values
-  and direct JSON failure; backend AST/IR/object identity is forbidden from semantic responses.
-- current_rust_semantics: `.10.4.1-.6` compose strict source/static/calls/query/typed observation and one exact
-  12-role admission consumer; all 20 digests and direct/loaded/reconstructed/generated/traced routes are exact.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
   case-/normalization-sensitive identity and strict UTF-8. One generated 5,991-byte literal class now pins all 806
   ranges for self-hosted consumption and is independently byte/fixture checked. `specs/spec.spec` now consumes it at
@@ -46,15 +38,23 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   snapshot at the twentieth digest; `.3` propagates public generated/emitted direct/traced capture with exact
   callback identity/non-interference and v2/format 2. `.4` closes `.10.5.5`. Admission `.10.5.6` now composes all
   owners in one exact 12-role consumer, matches every digest/route, advances only Dart, and closes parent `.10.5`.
+- current_julia_semantic_map: Julia exposes no semantic API yet. Reusable owners are staged rule/function state,
+  `CompiledSpec`, typed action/contracts/registry, portable diagnostics, entry/generated-v2 plan, and runtime slot/
+  result seams. Future construction needs a private canonical byte/scalar map, merged rule/function authored order,
+  explicit invalid-`String`/byte rejection, logical-name-only identity, detached collections, a `Bool` numeric fence,
+  typed observation separate from trace, and callback identity passthrough across generated/emitted routes.
+- current_julia_unicode_preflight: Julia 1.12.6 PCRE2 10.47 uses Unicode 16 `\w`; versus pinned Unicode 17
+  `XID_Continue`, 5,175 required scalars are missed and 923 forbidden accepted. `A·B` rejects, `²` compiles,
+  `Top:::` truncates, and external-AST action/blind/bare labels bypass validation into artifacts. `.10.6.1` owns
+  generated classifier/scanner, every parse/validation/artifact route, exact identity, negative/isolation, signoff.
+- current_julia_split: `.10.6.1` Unicode; `.2` source/outcome; `.3` static; `.4` calls/staging/generated; `.5`
+  typed/raw query; `.6` typed runtime observation; `.7` exact 12-role admission. Audit changes no behavior/ledger.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: Dart admission 1/1; complete format 85/0, fatal analysis, package 336, primary 66x2, corpus
-  105/105; semantic 6/20/81 at 4/9+3/6; Unicode 806/9/8/2; generated v1/10/80-0-0; selector concurrency
-  3/3, executable 0/19, retirement 5/6/8/0, public 59/27/0. KM is 680/5,105. Canonical CI passes Rust admission
-  1/1 in 83.16s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 650s, complete gate 1,716.72s; all docs agree.
+- current_signoff: Julia 3,711/primary/105; semantic 6/20/81 at 4/9+3/6; Unicode 806/9/8/2; KM 682/5,138; canonical Rust 80.05s, Dart 1/1, primary 66x2, Phase 0 1,031/653s; docs/doctrines pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30 minutes for canonical CI. Julia
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.5.6` final cleanup, guard replay, and commit assembly.
+- blockers: none. in_flight_uncommitted: `.10.6.0` cleanup, final guards, and commit assembly only.
