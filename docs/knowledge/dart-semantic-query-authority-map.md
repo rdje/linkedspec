@@ -11,7 +11,7 @@ answers:
   - "when may Dart expose its public semantic query API"
   - "does Dart semantic query include runtime events"
 date: 2026-07-22
-status: current authority and dependency split; public typed/raw-neutral static query implemented
+status: current composition-closed public typed/raw-neutral static query authority
 tags: [dart, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.0; capability_conformance/semantic_introspection_contract.json; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_static_projection.dart; dart/lib/src/semantic/semantic_call_projection.dart; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs
 reverify: "python3 tools/check_semantic_introspection_contract.py && cd dart && dart test test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart"
@@ -39,14 +39,14 @@ The dependency split is omission-safe:
    and every successful static digest.
 3. `.10.5.4.3` exposes public capabilities/typed query/raw-neutral query after the evaluator is complete; it locks
    all 19 digests, all 26 structural boundaries, privacy, clone isolation, and forbidden-authority denial.
-4. `.10.5.4.4` composes complete signoff and closes the query parent.
+4. `.10.5.4.4` composes complete signoff and closes the query parent on committed code.
 
 Runtime `execution` and `event` records remain absent. Caller-captured runtime observation and the twentieth digest
-belong exclusively to `.10.5.5`; rollout/admission promotion belongs to `.10.5.6`.
+belong exclusively to active-next `.10.5.5`; rollout/admission promotion belongs to `.10.5.6`.
 
-Leaves `.10.5.4.1-.3` now implement immutable record/source, exact traversal/page/budget behavior, and the public
-typed/raw-neutral seams; see [[dart-semantic-query-record-kernel]], [[dart-semantic-query-traversal-kernel]], and
-[[dart-semantic-query-public-api]].
+Leaves `.10.5.4.1-.3` implement immutable record/source, exact traversal/page/budget behavior, and the public
+typed/raw-neutral seams; `.4` composition-closes the parent. See [[dart-semantic-query-record-kernel]],
+[[dart-semantic-query-traversal-kernel]], and [[dart-semantic-query-public-api]].
 
 Related facts: [[semantic-introspection-neutral-contract]], [[dart-semantic-introspection-authority-map]],
 [[perl-semantic-query-evaluator]], [[rust-semantic-query-evaluator]].

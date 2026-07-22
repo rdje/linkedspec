@@ -10,7 +10,7 @@ answers:
   - "can Dart semantic query compile execute trace or read paths"
   - "is Dart runtime semantic observation implemented"
 date: 2026-07-22
-status: current exact public static-query API; runtime observation and admission remain pending
+status: current composition-closed exact public static-query API; runtime observation is active next
 tags: [dart, semantic-introspection, query, capabilities, validation, immutability, privacy]
 evidence: dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_query.dart; dart/lib/linkedspec_dart.dart; dart/test/semantic_index_query_kernel_test.dart; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.3
 reverify: "cd dart && dart test test/semantic_index_query_kernel_test.dart test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart && dart analyze --fatal-infos --fatal-warnings"
@@ -38,8 +38,9 @@ clone-safe values; repeated and interleaved calls have deterministic JSON identi
 The evaluator receives only the normalized snapshot, source-reference table, records, and relations. It cannot
 read accepted source wholesale, parser/compiler objects, staged sidecars, AST/ActionIR, compiled regexes, generated
 implementation source, executors, trace state, paths, environment, or host objects. Query evaluation never compiles
-or executes a target and cannot enable trace. Runtime `execution` and `event` records remain absent until
-`.10.5.5`; Dart rollout/native admission remain unchanged until `.10.5.6`.
+or executes a target and cannot enable trace. Runtime `execution` and `event` records remain absent until active-
+next `.10.5.5`; Dart rollout/native admission remain unchanged until `.10.5.6`. Documentation-only `.10.5.4.4`
+recomposes the exact evaluator on committed code and closes the immutable query parent without adding a surface.
 
 Related facts: [[dart-semantic-query-authority-map]], [[dart-semantic-query-record-kernel]],
 [[dart-semantic-query-traversal-kernel]], [[dart-semantic-introspection-authority-map]],

@@ -6006,7 +6006,7 @@ _Dart semantic introspection must compose typed compiler authorities after Unico
 _Dart semantic query must consume only a fresh detached normalized projection_
 
 - **answers:** what authority may the Dart semantic query evaluator consume | how many static semantic query digests must Dart match | how many raw neutral semantic query boundaries must Dart validate | how is the Dart semantic query implementation split | may Dart semantic query access source text or compiler objects | may Dart semantic query execute or enable trace | when may Dart expose its public semantic query API | does Dart semantic query include runtime events
-- **date:** 2026-07-22 · **status:** current authority and dependency split; public typed/raw-neutral static query implemented
+- **date:** 2026-07-22 · **status:** current composition-closed public typed/raw-neutral static query authority
 - **evidence:** `docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.0; capability_conformance/semantic_introspection_contract.json; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_static_projection.dart; dart/lib/src/semantic/semantic_call_projection.dart; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs`
 - **reverify:** `python3 tools/check_semantic_introspection_contract.py && cd dart && dart test test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart`
 - **source:** [`docs/knowledge/dart-semantic-query-authority-map.md`](docs/knowledge/dart-semantic-query-authority-map.md)
@@ -6015,7 +6015,7 @@ _Dart semantic query must consume only a fresh detached normalized projection_
 _Dart exposes one exact immutable typed and raw-neutral semantic query evaluator_
 
 - **answers:** how do I call the public Dart semantic query API | what is the difference between Dart SemanticIndex query and queryNeutral | does Dart SemanticIndex expose semantic capabilities | does Dart semantic query validate malformed neutral requests | are Dart semantic query responses clone safe | can Dart semantic query compile execute trace or read paths | is Dart runtime semantic observation implemented
-- **date:** 2026-07-22 · **status:** current exact public static-query API; runtime observation and admission remain pending
+- **date:** 2026-07-22 · **status:** current composition-closed exact public static-query API; runtime observation is active next
 - **evidence:** `dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_query.dart; dart/lib/linkedspec_dart.dart; dart/test/semantic_index_query_kernel_test.dart; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.3`
 - **reverify:** `cd dart && dart test test/semantic_index_query_kernel_test.dart test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - **source:** [`docs/knowledge/dart-semantic-query-public-api.md`](docs/knowledge/dart-semantic-query-public-api.md)

@@ -286,8 +286,9 @@ match through both paths, and all 26 portable invalid-request boundaries return 
 Each public call receives only a new detached clone of snapshot/source-reference/record/relation data. Query code
 cannot access accepted source wholesale, parser/compiler objects, function sidecars, AST/ActionIR, compiled regexes,
 generated implementation source, executors, trace state, paths, environment, or host objects. It cannot compile or
-execute the target, enable trace, or invent runtime events. Composition closeout `.10.5.4.4` is next. Runtime
-`execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
+execute the target, enable trace, or invent runtime events. Composition closeout `.10.5.4.4` now closes the query
+parent on committed code. Runtime `execution`/`event` records remain exclusively owned by active-next `.10.5.5`,
+and Dart is not admitted until `.10.5.6`.
 
 ## Current Rust construction and query surface
 
@@ -1079,9 +1080,10 @@ The dependency order is:
 | `.10.5.4.1` | Dart typed record/source query kernel | complete; package-private, immutable, nine exact static digests |
 | `.10.5.4.2` | Dart relations/pages/budgets/costs | complete; all 16 successful static digests exact |
 | `.10.5.4.3` | Dart public typed/raw-neutral query | complete; exact 19 digests and 26 boundaries |
-| `.10.5.4.4` | Dart composed query closeout | active next |
-| `.10.5.4` | Dart immutable typed/raw-neutral query parent | active |
-| `.10.5.5-.10.5.6` | Dart observation and admission | pending |
+| `.10.5.4.4` | Dart composed query closeout | complete; final committed-code composition and gates |
+| `.10.5.4` | Dart immutable typed/raw-neutral query parent | complete |
+| `.10.5.5` | Dart typed runtime observation | active next |
+| `.10.5.6` | Dart composed semantic admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

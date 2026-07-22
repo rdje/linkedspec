@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.4` — close an adapter on composed proof): The query parent closes
+  without adding another seam. Re-running the 28-test source/outcome/static/calls/query composition on committed
+  code proves that public validation still consumes the exact detached graph built by the earlier layers, rather
+  than a parallel public reconstruction that could drift from staged/generated or failure evidence.
+
+  This boundary is intentionally before runtime observation. The current public evaluator is complete for all 19
+  static digests and 26 invalid requests but cannot create `execution` or `event` records. `.10.5.5` must capture
+  typed invocation-local events during normal execution and derive a new immutable index; it may not add query-side
+  execution, reuse text trace as semantic authority, or mutate the already-closed static snapshot.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.3` — one evaluator, two caller surfaces): Typed requests and raw
   JSON-like requests solve different representation needs, but they must not become different semantic engines.
   `SemanticIndex.query` serializes its immutable `SemanticQuery` and enters the same neutral validator/evaluator as

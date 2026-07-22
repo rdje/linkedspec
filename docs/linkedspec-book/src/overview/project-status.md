@@ -518,7 +518,8 @@ Three backbone items tracked major structural modernization — all done:
   package-private capabilities/list/get/explain/source-privacy behavior. Traversal/limits `.10.5.4.2` adds exact
   directional breadth-first relations, canonical pages, logical budgets/costs, and all 16 successful static
   responses. Public `.10.5.4.3` now exports `capabilities`, typed `query`, and raw-neutral `queryNeutral` through
-  one evaluator at all 19 static digests and 26 validation boundaries. Runtime observation is not public yet.
+  one evaluator at all 19 static digests and 26 validation boundaries; `.10.5.4.4` composition-closes that parent
+  on committed code. Runtime observation `.10.5.5` is next and is not public yet.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

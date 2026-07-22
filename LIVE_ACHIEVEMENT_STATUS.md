@@ -8,13 +8,13 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Public query `FUTURE-PARITY-BACKLOG.10.5.4.3` is verification-complete from clean traversal commit `810bd2f6`;
-  live-doc/book sync and commit remain. After its clean commit, `.10.5.4.4` owns composed query closeout.
+- Query closeout `FUTURE-PARITY-BACKLOG.10.5.4.4` is verification-complete from clean public-query commit
+  `f1d2b8b1`; live-doc/book sync and commit remain. After its clean commit, `.10.5.5` owns runtime observation.
 
-Public `capabilities`, typed `query`, and raw-neutral `queryNeutral` enter one detached-projection-only evaluator at
-all 19 static digests and 26 validation boundaries. Focused is 6/6, composed semantic is 28/28, Dart is
-79/0 + 324 + 66x2 + 105/105, and canonical is Rust admission 77.92s + primary 66x2 + Phase 0 1,031/627s. Runtime
-observation, rollout, and admission remain absent.
+Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
+`query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
+validation boundaries. Composition is 28/28, Dart is 79/0 + 324 + 66x2 + 105/105, and final canonical is Rust
+admission 77.48s + primary 66x2 + Phase 0 1,031/656s. Runtime observation, rollout, and admission remain absent.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -46,6 +46,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.4 — close Dart immutable query**
+  (DONE in this commit from clean base `f1d2b8b1`).
+
+  **Result:** Parent `.10.5.4` is composition-closed on committed public-query code with no production/test or
+  semantic-ledger change; runtime observation `.10.5.5` is next.
+
+  **Proof:** Composed semantic 28/28; Dart 79/0, analysis, package 324, primary 66x2, corpus 105/105; semantic
+  6/20/73, Unicode 806/9/8/2, generated v1/10/80-0-0, public 59/27/0; canonical Rust admission 77.48s, primary
+  66x2, Phase 0 1,031/1,031 in 656s; Knowledge Map 678/5,083.
+
+  **Next:** after this clean commit, implement typed runtime semantic observation `.10.5.5`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.3 — expose exact public Dart semantic query**
   (DONE in this commit from clean base `810bd2f6`).
 

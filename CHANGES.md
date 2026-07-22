@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.4 — close Dart immutable query
+
+The Dart immutable semantic-query parent is composition-closed without another production or test change. One
+explicit 28-test suite jointly proves the public typed/raw-neutral evaluator, all 19 static response digests, all
+26 malformed-request boundaries, source/outcome/static/call/staged/generated composition, deterministic failure
+normalization, fresh clone isolation, and recursive denial of compiler/executor/trace/path/host authority.
+
+Complete Dart remains format 79/0, fatal analysis, package 324, primary 66x2, and corpus 105/105. Semantic remains
+6/20/73 at rollout 3/9 and native admission 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; public
+proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI
+on committed public-query code passes Rust semantic admission 1/1 in 77.48 seconds, primary 66x2, and Phase 0
+1,031/1,031 in 656 seconds. The mdBook, memory architecture, Knowledge Map, all four doctrines, task metadata, diff
+hygiene, and artifact cleanup pass. Runtime observation `.10.5.5` is next; no rollout or admission ledger changes.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.3 — expose exact public Dart semantic query
 
 Dart now exports immutable semantic-query request/response protocol types plus
