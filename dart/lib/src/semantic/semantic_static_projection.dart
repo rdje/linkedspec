@@ -1,6 +1,6 @@
 part of 'semantic_index.dart';
 
-// FUTURE-PARITY-BACKLOG.10.5.2.1 — private compiled static v1 projection.
+// FUTURE-PARITY-BACKLOG.10.5.2.1-.2 — private static v1 projection.
 
 const _semanticSpecId = 'spec:0';
 
@@ -147,6 +147,24 @@ final class _SemanticProjectedEdge {
   final Map<String, Object?> valueShape;
 }
 
+final class _SemanticNormalizedFailure {
+  const _SemanticNormalizedFailure({
+    required this.code,
+    required this.stage,
+    required this.message,
+    required this.fields,
+    required this.ruleLabel,
+    required this.target,
+  });
+
+  final String code;
+  final String stage;
+  final String message;
+  final Map<String, Object?> fields;
+  final String? ruleLabel;
+  final String? target;
+}
+
 _SemanticStaticProjection _buildSemanticStaticProjection({
   required String sourceText,
   required _SemanticSourceMap sourceMap,
@@ -157,25 +175,304 @@ _SemanticStaticProjection _buildSemanticStaticProjection({
 }) {
   final parsed = outcome.parsed;
   final compiled = outcome.compiled;
-  if (parsed == null || compiled == null) {
-    return _SemanticStaticProjection(
+  if (parsed != null && compiled != null) {
+    return _buildCompiledStaticProjection(
+      sourceText: sourceText,
+      sourceMap: sourceMap,
+      logicalName: logicalName,
+      contentDigest: contentDigest,
       snapshot: snapshot,
-      sourceRefs: const {},
-      records: const [],
-      relations: const [],
+      parsed: parsed,
+      compiled: compiled,
+      entry: outcome.entry,
     );
   }
-  return _buildCompiledStaticProjection(
+  return _buildFailedStaticProjection(
     sourceText: sourceText,
     sourceMap: sourceMap,
     logicalName: logicalName,
     contentDigest: contentDigest,
     snapshot: snapshot,
     parsed: parsed,
-    compiled: compiled,
-    entry: outcome.entry,
+    diagnostic: outcome.diagnostic,
   );
 }
+
+_SemanticStaticProjection _buildFailedStaticProjection({
+  required String sourceText,
+  required _SemanticSourceMap sourceMap,
+  required String logicalName,
+  required String contentDigest,
+  required SemanticSnapshot snapshot,
+  required SpecFile? parsed,
+  required SemanticCompilationDiagnostic? diagnostic,
+}) {
+  final scans = parsed == null
+      ? const <_SemanticScannedRule>[]
+      : _scanSemanticRules(sourceText, parsed);
+  final sourceRefs = <String, Object?>{};
+  final records = <Map<String, Object?>>[];
+  final relations = <Map<String, Object?>>[];
+  final rules = parsed?.rules ?? const <Rule>[];
+  final normalized = _normalizeSemanticFailure(diagnostic);
+  final failedLabel = normalized.ruleLabel ?? rules.firstOrNull?.header.label;
+  final failedRuleId = failedLabel == null
+      ? null
+      : _semanticRuleId(failedLabel);
+  final failedScan = failedLabel == null
+      ? null
+      : scans.where((scan) => scan.label == failedLabel).firstOrNull;
+
+  records.add(
+    _semanticRecord(
+      id: _semanticSpecId,
+      kind: 'spec',
+      name: _semanticSpecName(logicalName),
+      ownerId: null,
+      order: 0,
+      source: null,
+      facts: {
+        'definition_order': [
+          for (final rule in rules) _semanticRuleId(rule.header.label),
+        ],
+        'compiled_rule_order': <Object?>[],
+        'entry_rule_id': null,
+        'entry_selection_basis': null,
+      },
+    ),
+  );
+  records.add(_semanticSourceRecord());
+
+  for (final (order, rule) in rules.indexed) {
+    final ruleId = _semanticRuleId(rule.header.label);
+    final scan = scans
+        .where((candidate) => candidate.label == rule.header.label)
+        .firstOrNull;
+    final source = scan == null
+        ? null
+        : _registerSemanticSource(
+            sourceRefs: sourceRefs,
+            recordId: ruleId,
+            range: scan.header,
+            sourceText: sourceText,
+            sourceMap: sourceMap,
+            logicalName: logicalName,
+            contentDigest: contentDigest,
+          );
+    final repetition = _neutralSemanticRepetition(rule.header.mode);
+    final bounds = _neutralSemanticBounds(rule.header.mode);
+    records.add(
+      _semanticRecord(
+        id: ruleId,
+        kind: 'rule',
+        name: rule.header.label,
+        ownerId: _semanticSpecId,
+        order: order,
+        source: source,
+        facts: {
+          'family': rule.header.mode.isAnd ? 'and' : 'or',
+          'cursor_policy': rule.header.mode.isAnd ? 'contiguous' : 'seek',
+          'is_entry_marker': rule.header.isTop,
+          'is_repetition': repetition,
+          'rep_min': bounds.$1,
+          'rep_max': bounds.$2,
+          'edge_ownership': _semanticScannedEdgeOwnership(scan),
+          'value_shape': _semanticValueShape('unknown'),
+        },
+      ),
+    );
+  }
+
+  const diagnosticId = 'diagnostic:compile:0';
+  final diagnosticMember = normalized.target == null || failedScan == null
+      ? null
+      : _semanticMemberForTarget(failedScan, normalized.target!);
+  final diagnosticSource = diagnosticMember == null
+      ? null
+      : _registerSemanticSource(
+          sourceRefs: sourceRefs,
+          recordId: diagnosticId,
+          range: diagnosticMember.range,
+          sourceText: sourceText,
+          sourceMap: sourceMap,
+          logicalName: logicalName,
+          contentDigest: contentDigest,
+        );
+  records.add(
+    _semanticRecord(
+      id: diagnosticId,
+      kind: 'diagnostic',
+      name: normalized.code,
+      ownerId: _semanticSpecId,
+      order: 0,
+      source: diagnosticSource,
+      facts: {
+        'code': normalized.code,
+        'stage': normalized.stage,
+        'severity': 'error',
+        'message': normalized.message,
+        'fields': normalized.fields,
+      },
+    ),
+  );
+  relations.add(
+    _semanticRelation(
+      kind: 'contains',
+      fromId: _semanticSpecId,
+      toId: _semanticSourceId,
+      order: 0,
+      source: null,
+    ),
+  );
+  relations.add(
+    _semanticRelation(
+      kind: 'contains',
+      fromId: _semanticSpecId,
+      toId: diagnosticId,
+      order: 1,
+      source: diagnosticSource,
+    ),
+  );
+
+  if (normalized.code == 'unknown_rule_reference' &&
+      failedLabel != null &&
+      failedRuleId != null &&
+      normalized.target != null) {
+    final target = normalized.target!;
+    final decisionId = 'decision:compile:$failedRuleId';
+    final explanationId = 'explanation:$decisionId:0';
+    records.add(
+      _semanticRecord(
+        id: decisionId,
+        kind: 'decision',
+        name: 'compile rule $failedLabel',
+        ownerId: failedRuleId,
+        order: 0,
+        source: diagnosticSource,
+        facts: {
+          'decision_kind': 'dependency_resolution',
+          'outcome': diagnosticId,
+        },
+      ),
+    );
+    records.add(
+      _semanticRecord(
+        id: explanationId,
+        kind: 'explanation_step',
+        name: null,
+        ownerId: decisionId,
+        order: 0,
+        source: diagnosticSource,
+        facts: {
+          'rule_code': 'dependency_target_missing',
+          'summary': 'The authored dependency $target has no declared rule.',
+          'input_ids': [failedRuleId],
+          'output_fact': {
+            'record_id': decisionId,
+            'path': '/facts/outcome',
+            'value': diagnosticId,
+          },
+        },
+      ),
+    );
+    relations.add(
+      _semanticRelation(
+        kind: 'diagnoses',
+        fromId: diagnosticId,
+        toId: failedRuleId,
+        order: 0,
+        source: diagnosticSource,
+      ),
+    );
+    relations.add(
+      _semanticRelation(
+        kind: 'explained_by',
+        fromId: decisionId,
+        toId: explanationId,
+        order: 0,
+        source: diagnosticSource,
+        evidenceIds: const [diagnosticId],
+      ),
+    );
+  }
+
+  _canonicalizeSemanticProjection(records, relations);
+  return _SemanticStaticProjection(
+    snapshot: snapshot,
+    sourceRefs: sourceRefs,
+    records: records,
+    relations: relations,
+  );
+}
+
+_SemanticNormalizedFailure _normalizeSemanticFailure(
+  SemanticCompilationDiagnostic? diagnostic,
+) {
+  final actual =
+      diagnostic ??
+      SemanticCompilationDiagnostic(
+        code: 'semantic_index_compilation_failed',
+        stage: 'compile_source',
+        message: 'Spec compilation failed.',
+      );
+  final ruleLabel = _semanticStringField(actual.fields, 'rule_label');
+  final target =
+      _semanticStringField(actual.fields, 'target') ??
+      _semanticStringField(actual.fields, 'target_rule');
+  if ((actual.code == 'bare_edge_target_undefined' ||
+          actual.code == 'regex_slot_identity_invalid') &&
+      ruleLabel != null &&
+      target != null) {
+    return _SemanticNormalizedFailure(
+      code: 'unknown_rule_reference',
+      stage: 'compile',
+      message: 'Rule $ruleLabel references unknown rule $target.',
+      fields: {
+        'rule_id': _semanticRuleId(ruleLabel),
+        'missing_rule_id': _semanticRuleId(target),
+      },
+      ruleLabel: ruleLabel,
+      target: target,
+    );
+  }
+  return _SemanticNormalizedFailure(
+    code: actual.code,
+    stage: actual.stage,
+    message: actual.message,
+    fields: _detachedFields(actual.fields),
+    ruleLabel: ruleLabel,
+    target: target,
+  );
+}
+
+String? _semanticStringField(Map<String, Object?> fields, String name) {
+  final value = fields[name];
+  return value is String ? value : null;
+}
+
+String _semanticScannedEdgeOwnership(_SemanticScannedRule? scan) {
+  final ownerships = scan == null
+      ? const <String>[]
+      : [
+          for (final member in scan.members)
+            for (final edge in member.edges) edge.ownership,
+        ];
+  final action = ownerships.contains('action');
+  final blind = ownerships.contains('blind');
+  return switch ((action, blind)) {
+    (true, false) => 'action',
+    (false, true) => 'blind',
+    (false, false) => 'none',
+    (true, true) => 'mixed',
+  };
+}
+
+_SemanticScannedMember? _semanticMemberForTarget(
+  _SemanticScannedRule scan,
+  String target,
+) => scan.members
+    .where((member) => member.edges.any((edge) => edge.target == target))
+    .firstOrNull;
 
 _SemanticStaticProjection _buildCompiledStaticProjection({
   required String sourceText,

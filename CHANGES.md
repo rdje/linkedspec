@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.2 — complete Dart static projection variants
+
+Dart's private static projector now covers all five neutral construction targets. The two Unicode privacy
+variants apply `text` and `identity` ceilings before source evidence leaves the immutable snapshot. Failed
+compilation retains the exact native Dart diagnostic at the foundation, while the projection alone normalizes it
+to `unknown_rule_reference` / `compile` with neutral rule ids, fields, source evidence, decision, and explanation.
+The runtime fixture projects only static meaning before observation: `has_execution` is false and execution/event
+records and their relations are absent.
+
+The package-internal oracle returns fresh detached JSON-compatible data, is omitted from the public umbrella, and
+passes recursive host-value/key denial plus caller-mutation proof. Static topology denies AST/ActionIR and
+descriptor serialization, regex objects, generated or target execution, paths, environment/time/random state,
+trace, diagnostic sinks, and runtime observers. No public query, trace, observation, semantic rollout, or native
+admission surface changes.
+
+Focused exact proof passes 6/6. Complete Dart passes format over 75 files with zero changes, fatal analysis,
+package 314, primary 66x2, and corpus 105/105. Canonical CI passes Rust semantic admission 1/1 in 79.42 seconds,
+primary 66x2, and Phase 0 1,031/1,031 in 670 seconds. Semantic governance remains 6/20/73 at rollout 3/9 and
+admission 2/6; Unicode remains 806/9/8/2; generated source remains v1 / ten families / 80-0-0; Knowledge Map is
+673/5,031.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.1 — add Dart compiled static graph
 
 Dart `SemanticIndex` now retains an exact private immutable v1 graph after successful staged compilation. The

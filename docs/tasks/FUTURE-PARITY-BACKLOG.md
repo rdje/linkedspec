@@ -8581,7 +8581,7 @@ before implementation.
       is exposed or promoted.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.2.2`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Complete Dart privacy, failed-compilation, runtime-static, and isolation projection parity.
     Depends on: `.10.5.2.1`
     Acceptance: Deep-equal privacy at text and identity construction ceilings, deliberately normalize Dart's
@@ -8589,6 +8589,20 @@ before implementation.
       deep-equal the runtime fixture with execution/event records absent. Prove fresh clone-safe plain results,
       construction-ceiling integrity, stable absence semantics, and denial of AST/IR, descriptor, regex object,
       generated implementation, path, executor, trace, diagnostic-sink, and runtime-observer leakage.
+    Verification: The private projector now handles failed snapshots as well as successful compiled snapshots.
+      Privacy at `text` and `identity` deep-equals both neutral targets; the foundation retains Dart's exact native
+      `bare_edge_target_undefined` / `normalize_edges` diagnostic while the projection alone emits
+      `unknown_rule_reference` / `compile` with neutral ids, fields, source, decision, and explanation. The runtime
+      fixture deep-equals its static half with `has_execution: false` and no execution/event records or relations.
+      Fresh detached JSON/plain-value proof denies caller mutation, public export, host objects, AST/ActionIR,
+      descriptor/regex state, generated execution, paths, environment/time/random, trace, diagnostic sinks, and
+      runtime observers; repeated lifecycle occurrences remain distinct. Focused exact proof passes 6/6; complete
+      Dart passes format over 75 files with zero changes, fatal analysis, package 314, primary 66x2, and corpus
+      105/105. Unicode remains 806/9/8/2; semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6;
+      generated source remains v1 / ten families / 80-0-0; selector admission remains 59/27/0 with untracked
+      self-proof. Canonical CI passes Rust semantic admission 1/1 in 79.42 seconds, primary 66x2, and Phase 0
+      1,031/1,031 in 670 seconds. Knowledge Map is 673/5,031. No public query, runtime observation, rollout, or
+      admission changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3`
     Status: `pending`
@@ -11361,7 +11375,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `active` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
 | 74.4.2.0 | `FUTURE-PARITY-BACKLOG.10.5.2.0` | `done` | Freeze the exact Dart static authority map and dependency-ordered split without behavior. |
 | 74.4.2.1 | `FUTURE-PARITY-BACKLOG.10.5.2.1` | `done` | Project detached compiled graph records, relations, sources, shapes, and entry evidence. |
-| 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `pending` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
+| 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `done` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
 | 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `pending` | Compose all Dart static signoff, synchronize durable state, and close the parent. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |

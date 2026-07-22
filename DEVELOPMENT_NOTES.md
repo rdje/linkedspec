@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.2` — normalize at the projection boundary, preserve native evidence):
+  A failed semantic snapshot still contains useful static meaning. When parsing succeeded but compilation failed,
+  Dart projects authored rule intent and source plus the diagnostic, decision, and explanation rather than
+  collapsing the snapshot to an error string. The foundation's native `bare_edge_target_undefined` /
+  `normalize_edges` diagnostic remains exact for backend diagnosis; only the backend-neutral static projection
+  maps it to `unknown_rule_reference` / `compile` with stable semantic ids and fields.
+
+  Construction ceilings are immutable snapshot-policy facts. The private projector retains the complete internal
+  source-reference authority needed by later structural query redaction, but every projected reference is already
+  bounded by the index's `none`/`identity`/`span`/`text` ceiling. The package-internal oracle returns a fresh
+  JSON-compatible clone and is absent from the public umbrella, so neither caller mutation nor host object identity
+  can become semantic state.
+
+  A runtime-capable fixture must first have an ordinary static snapshot. Before the separately owned typed
+  observation leaf runs, `has_execution` is false and execution/event records and relations do not exist. Query
+  therefore cannot activate trace or execution; later observations must derive a new immutable snapshot from typed
+  events, never scraped trace text. Focused exact proof is 6/6; Dart is format 75/0 changed, fatal analysis, package
+  314, primary 66x2, corpus 105/105; semantic governance remains 6/20/73 at 3/9 and 2/6; canonical passes Rust
+  admission 79.42s, primary 66x2, and Phase 0 1,031/1,031 in 670s; Knowledge Map is 673/5,031.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.1` — correlate typed meaning, then detach it):
   Dart's static semantic graph is derived once from private typed authorities rather than reconstructed from a
   descriptor or AST JSON document. Parsed rules establish authored order and source-line membership; compiled

@@ -119,7 +119,7 @@ tests, primary 66x2, and corpus 105/105. The closeout also fixed the retired agg
 new nonignored untracked source cannot evade pre-staging verification. Dart remains pending in both rollout and
 native-admission ledgers until the later exact admission leaf.
 
-The first private static-projection slice is implemented. Every successfully compiled `SemanticIndex` now retains
+The complete private static construction surface is implemented. Every successfully compiled `SemanticIndex` retains
 an immutable v1 graph built from accepted source and its byte/scalar map, parsed authored order/member intent,
 typed compiled rule/slot/edge/lifecycle state, and selected-entry identity. The graph includes stable UTF-8-
 escaped ids, canonical records and relations, exact source references, rule family/cursor/repetition facts,
@@ -127,14 +127,17 @@ duplicate structural slots, direct and indexed edges, lifecycle value shapes, an
 evidence. Repeated lifecycle markers correlate to their compiled payloads by authored occurrence, so equal marker
 names cannot alias distinct shapes.
 
-The package-internal oracle seam returns detached plain data only and is deliberately absent from the public
-`linkedspec_dart.dart` umbrella. Dart callers therefore still cannot query or obtain the projection, AST,
-descriptor, compiled regexes, generated implementation source, paths, or trace. The remaining static step adds
-privacy at `text` and `identity`, deliberate failed-diagnostic normalization, runtime-static equality, and complete
-isolation before composed signoff. Dart's native
-`bare_edge_target_undefined` / `normalize_edges` remains unchanged at the foundation and becomes the neutral
-`unknown_rule_reference` / `compile` diagnostic only in the private projection. Capabilities/query, typed runtime
-observations, and backend admission remain later work.
+The package-internal oracle seam returns a fresh detached plain-data clone and is deliberately absent from the
+public `linkedspec_dart.dart` umbrella. Both Unicode privacy variants deep-equal the neutral model after `text` or
+`identity` construction ceilings are applied, and recursive proof rejects host objects and forbidden private keys.
+Dart's native `bare_edge_target_undefined` / `normalize_edges` remains unchanged at the foundation; only the
+private projection maps it to the neutral `unknown_rule_reference` / `compile` diagnostic, rule ids, source,
+decision, and explanation. A runtime-capable fixture initially has `has_execution: false` and no execution/event
+records or relations, so static construction cannot activate trace or execution.
+
+Dart callers still cannot query or obtain the projection, AST, ActionIR, descriptor, compiled regexes, generated
+implementation source, paths, trace, diagnostic sinks, or runtime observers. Composed static signoff remains in
+`.10.5.2.3`; capabilities/query, typed runtime observations, and backend admission remain later work.
 
 ## Current Rust construction and query surface
 
@@ -915,7 +918,7 @@ The dependency order is:
 | `.10.5.1.3` | Dart composed source/outcome foundation closeout | complete; privacy/isolation/host-state proof |
 | `.10.5.2.0` | Dart exact static authority map and dependency split | complete; behavior-free |
 | `.10.5.2.1` | Dart compiled graph/source/evidence projection | complete; private exact graph, no public query |
-| `.10.5.2.2` | Dart privacy/failure/runtime-static and isolation parity | pending |
+| `.10.5.2.2` | Dart privacy/failure/runtime-static and isolation parity | complete; all five private construction targets exact |
 | `.10.5.2.3` | Dart composed static signoff and parent closure | pending |
 | `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
