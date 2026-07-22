@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.3` — close by composition, preserve layer boundaries):
+  A static semantic parent closes only when its variants work as one omission-sensitive surface. The final Dart
+  proof therefore reruns the six exact private cases together: graph, two privacy ceilings, normalized failure,
+  runtime-static absence, and repeated-lifecycle occurrence isolation. It does not add a convenience accessor or
+  pull later calls/query/observation work into closeout.
+
+  Final-code evidence composes the repair child rather than bypassing it: focused 6/6; Dart format 75/0, analysis,
+  package 314, primary 66x2, corpus 105/105; semantic 6/20/73 at 3/9 and 2/6; Unicode 806/9/8/2; generated
+  v1/10/80-0-0; public concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface
+  59/27/0. Canonical passes Rust semantic admission 77.49s, primary 66x2, and Phase 0 1,031/1,031 in 620s;
+  Knowledge Map is 674/5,037.
+
+  The result is a complete private static owner, not a Dart semantic admission. Public typed/raw-neutral query
+  remains `.10.5.4`, typed runtime observations remain `.10.5.5`, and rollout/admission remain unchanged until
+  `.10.5.6`. The immediate next authority slice is `.10.5.3` calls/bindings/staged/generated provenance.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.3.0` — a discovery probe owns one serialized full scan):
   Unique temporary filenames do not provide process isolation. The aggregate-selector scanner's self-test created
   a positive untracked Dart file, proved discovery/rejection, removed it, and only then scanned all candidates.

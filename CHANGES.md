@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.3 — close Dart private static projection
+
+The Dart static semantic parent is composition-closed without another production change. One focused suite now
+reconfirms all five neutral construction targets—graph, privacy at text and identity ceilings, failed compilation,
+and runtime-static—plus occurrence-safe lifecycle isolation on the exact final code. The private projection remains
+detached, clone-safe, and absent from the public umbrella; the native foundation diagnostic remains unchanged.
+
+Focused composition passes 6/6. Complete Dart remains format 75/0, fatal analysis, package 314, primary 66x2, and
+corpus 105/105. Semantic governance remains 6/20/73 at rollout 3/9 and native admission 2/6; Unicode remains
+806/9/8/2; generated source remains v1/10/80-0-0. Public admission passes concurrent selector proof 3/3,
+executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI on the final code passes
+Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds.
+The Knowledge Map contains 674 facts / 5,037 question keys.
+
+No public Dart projection/query, target execution, trace/runtime observation, semantic rollout, or native admission
+surface changes. Exact calls, bindings, staged payload/job/result, and generated provenance remain owned by
+`.10.5.3`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.3.0 — serialize untracked selector probes
 
 Parallel closeout exposed a race in the aggregate-selector scanner's untracked-file self-test. Direct, retirement,

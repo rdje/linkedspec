@@ -136,8 +136,10 @@ decision, and explanation. A runtime-capable fixture initially has `has_executio
 records or relations, so static construction cannot activate trace or execution.
 
 Dart callers still cannot query or obtain the projection, AST, ActionIR, descriptor, compiled regexes, generated
-implementation source, paths, trace, diagnostic sinks, or runtime observers. Composed static signoff remains in
-`.10.5.2.3`; capabilities/query, typed runtime observations, and backend admission remain later work.
+implementation source, paths, trace, diagnostic sinks, or runtime observers. Composed static signoff passes all
+six exact construction/isolation cases plus complete Dart/public/canonical gates and closes `.10.5.2` without
+semantic rollout or native-admission promotion. Calls/bindings/staged/generated provenance is next in `.10.5.3`;
+capabilities/query, typed runtime observations, and backend admission remain later work.
 
 ## Current Rust construction and query surface
 
@@ -919,8 +921,9 @@ The dependency order is:
 | `.10.5.2.0` | Dart exact static authority map and dependency split | complete; behavior-free |
 | `.10.5.2.1` | Dart compiled graph/source/evidence projection | complete; private exact graph, no public query |
 | `.10.5.2.2` | Dart privacy/failure/runtime-static and isolation parity | complete; all five private construction targets exact |
-| `.10.5.2.3` | Dart composed static signoff and parent closure | pending |
-| `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
+| `.10.5.2.3` | Dart composed static signoff and parent closure | complete; focused 6/6 plus full gates |
+| `.10.5.2` | Dart private static projection parent | complete; all five construction targets exact |
+| `.10.5.3-.10.5.6` | Dart calls, query, observation, and admission | pending; calls projection next |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

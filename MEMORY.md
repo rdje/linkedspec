@@ -9,10 +9,10 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.2.3.0` — concurrent untracked-selector probe isolation.
-- latest_commit: `aa24f62f` is the clean activation base; the current commit owns repair child `.10.5.2.3.0`.
-- active_work_unit: parent `.10.5.2.3` resumes only after the verified repair child is committed cleanly.
-- next_action: from the clean repair commit, resume `.10.5.2.3` and compose static parent closeout.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.2.3` — composed Dart private-static parent closeout.
+- latest_commit: `9be98a07` is the clean activation base; the current commit owns closeout leaf `.10.5.2.3`.
+- active_work_unit: `.10.5.2.3` is verified and documentation-closed; commit/clean-boundary verification remains.
+- next_action: from the clean closeout commit, activate `.10.5.3` task-tree-first for exact calls projection.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -42,14 +42,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   compile/entry/plan pass exposes only immutable ceiling-bounded source plus outcome/diagnostic/entry/plan values.
   Target/emitted execution, path access, runtime/trace/sinks, AST/IR, public records, and query remain absent;
   dependency-free SHA-256 preserves offline callers. All five private static construction targets are exact and
-  detached through `.10.5.2.1-.2`: graph, both privacy ceilings, normalized failure, and runtime-static absence.
-  Native failure evidence remains exact at the foundation; no public projection/query/runtime observation exists.
+  detached through composition-closed `.10.5.2`: graph, both privacy ceilings, normalized failure, and runtime-
+  static absence. Native failure evidence remains exact; no public projection/query/runtime observation exists.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
 - current_signoff: repair concurrency 3/3 plus exact four-way topology; selector 0/19, retirement 5/6/8/0, public
   59/27/0; Dart format 75/0, analysis, package 314, primary 66x2, corpus 105/105; semantic 6/20/73 at 3/9 and 2/6;
   Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 77.49s, primary 66x2, and Phase 0
-  1,031/1,031 in 620s. Knowledge Map is 674/5,036; mdBook/doctrines/memory/diff/cleanup pass.
+  1,031/1,031 in 620s. Knowledge Map is 674/5,037; mdBook/doctrines/memory/diff/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.5.2.3.0` scanner concurrency repair pending docs/gates/commit; `.23` queued.
+- blockers: none. in_flight_uncommitted: verified `.10.5.2.3` closeout docs/gates pending commit; `.23` queued.

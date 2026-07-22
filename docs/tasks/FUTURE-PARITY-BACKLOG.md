@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-21` (typed Rust runtime semantic observations `.10.4.5` are signoff-complete from clean
-  `1cb0c353`; commit/clean-boundary verification is in flight; rollout/admission remain 2/9 and 1/6)
+- Last updated: `2026-07-22` (Dart private static projection parent `.10.5.2` is composition-closed through
+  `.10.5.2.3`; exact calls/bindings/staged/generated projection `.10.5.3` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8511,7 +8511,7 @@ before implementation.
         to `.10.5.1.3` without promoting semantic rollout/admission or changing production behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.2`
-  Status: `in_progress` (2026-07-22; activated from clean `1eaa7d2a`)
+  Status: `done` (2026-07-22)
   Goal: Project exact Dart static graph, privacy, failure, and runtime-static semantics.
   Depends on: `.10.5.1`
   Acceptance: Correlate immutable source evidence with typed `CompiledSpec` entry/family/cursor/repetition/slot/
@@ -8526,16 +8526,16 @@ before implementation.
     projections, and exact private Dart source/compiler authorities; split the work before production if one leaf
     cannot remain omission-safe. The dependency-ordered `.10.5.2.0-.3` children now own audit, compiled graph,
     remaining exact targets, and composed closeout respectively.
-  - [ ] **NORMALIZED STATIC MODEL** — Add detached immutable v1 records/relations/shapes/evidence for entry, rule
+  - [x] **NORMALIZED STATIC MODEL** — Add detached immutable v1 records/relations/shapes/evidence for entry, rule
     family/cursor/repetition, authored slots, action/blind/bare edges, lifecycle, source identity/spans, and the
     deliberate backend-neutral failed-spec diagnostic.
-  - [ ] **EXACT FIVE TARGETS** — Deep-equal graph, privacy text, privacy identity, failed, and runtime-static neutral
+  - [x] **EXACT FIVE TARGETS** — Deep-equal graph, privacy text, privacy identity, failed, and runtime-static neutral
     targets with stable ids/order/absence semantics and no descriptor or AST/IR serialization dependency.
-  - [ ] **PRIVACY / ISOLATION** — Apply construction-time source ceilings before projection, return fresh clone-safe
+  - [x] **PRIVACY / ISOLATION** — Apply construction-time source ceilings before projection, return fresh clone-safe
     plain values, and prove caller/result mutation cannot alter retained source/compiler authority.
-  - [ ] **NONEXECUTION / LAYERING** — Expose no query yet and invoke no target/generated execution, path IO,
+  - [x] **NONEXECUTION / LAYERING** — Expose no query yet and invoke no target/generated execution, path IO,
     environment/time/random capture, trace, diagnostic sink, or runtime semantic observer.
-  - [ ] **SIGNOFF / HANDOFF** — Pass focused and complete Dart, semantic/Unicode/generated/public/canonical gates,
+  - [x] **SIGNOFF / HANDOFF** — Pass focused and complete Dart, semantic/Unicode/generated/public/canonical gates,
     synchronize roadmap/live docs/mdBook/Knowledge Map, clean artifacts, and commit before `.10.5.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.2.0`
@@ -8605,12 +8605,21 @@ before implementation.
       admission changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3`
-    Status: `in_progress` (2026-07-22; activated from clean `aa24f62f`)
+    Status: `done` (2026-07-22)
     Goal: Compose static-projection signoff and close the Dart static parent.
     Depends on: `.10.5.2.2`
     Acceptance: Re-run the exact five-target/isolation proof plus complete Dart package, primary/corpus/generated,
       semantic/Unicode/public/canonical gates; synchronize roadmap/live docs/mdBook/Knowledge Map, clean generated
       artifacts, and close `.10.5.2` without promoting rollout/admission or exposing query/runtime behavior.
+    Verification: The six-test static suite composes all five exact construction targets plus lifecycle-occurrence
+      isolation on the final repair bytes. Complete Dart remains format 75/0, fatal analysis, package 314, primary
+      66x2, and corpus 105/105. Semantic governance remains 6/20/73 at rollout 3/9 and native admission 2/6;
+      Unicode remains 806/9/8/2; generated source remains v1/10/80-0-0. Public proof passes concurrency 3/3,
+      executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI on the exact final
+      code passes Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620
+      seconds. The book, roadmaps, live docs, task/index, Knowledge Map, doctrines, memory, diff, and artifact
+      cleanup agree at 674 facts / 5,037 question keys. No public Dart query, execution/observation, rollout, or
+      admission surface changes.
     Children: `.10.5.2.3.0`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3.0`
@@ -10962,23 +10971,17 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, and admitted Rust `.10.4` are complete.
-Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native admission 2/6. Dart authority audit
-`.10.5.0` is complete, and its shared self-hosted prerequisite `.10.5.0.1.0-.2` is signoff-complete from clean base
-`fef93b5a`: one generated 806-range Unicode 17 class feeds all 12 canonical sites, Dart executes current
-lifecycle/bare structure, all four self-hosted corpus inputs are freshness-locked, physical-line boundaries reject
-label-prefix truncation, and current grammar passes the exact five-backend default+POSIX matrix.
+Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native admission 2/6. Dart authority and
+Unicode-label prerequisite `.10.5.0`, source/outcome foundation `.10.5.1`, and private static projection `.10.5.2`
+are composition-closed. All five static targets are exact: graph, privacy at text and identity ceilings, normalized
+failure, and runtime-static absence. Construction is detached and clone-safe, retains native diagnostic evidence,
+and exposes no query, execution, trace, observation, rollout, or admission surface.
 
-Generated-classifier foundation `.10.5.0.2.0`, native parser/validator consumption `.10.5.0.2.1`, and exact
-downstream identity proof `.10.5.0.2.2` are signoff-complete. All 9 positive labels and 2 distinct pairs retain
-exact identity through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes.
-Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`, negative rejection plus unrelated-identifier
-isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion signoff `.2.4` closes the Dart
-Unicode-label prerequisite parent from clean `ecdc1ac7`. Semantic foundation parent `.10.5.1` is split into
-`.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete, and strict copied input/private Unicode
-source-map leaf `.10.5.1.1` is committed at `ae870152`. Staged compiled-or-failed authority and generated-plan
-input `.10.5.1.2` is committed at `1e1fd368`. Composed closeout `.10.5.1.3` found and closed an untracked-source
-scan blind spot through committed repair child `.10.5.1.3.0` at `1529ca81`; the source/outcome parent is now
-signoff-complete from that clean boundary, and static projection `.10.5.2` is next after its clean commit.
+Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
+105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
+code passes Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds.
+Repair child `.10.5.2.3.0` serializes untracked-selector probes through their owning final scan and keeps them
+outside Dart formatter traversal. Exact calls/bindings/staged/generated projection `.10.5.3` is the next leaf.
 
 ### Historical frontier sequence
 
@@ -11396,11 +11399,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `done` | Opaque staged compiled-or-failed authority, exact native diagnostics, entry identity, and shared generated-v2 plan pass canonical signoff. |
 | 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `done` | Compose omission-safe foundation proof and close the parent after its scanner-repair child. |
 | 74.4.1.3.0 | `FUTURE-PARITY-BACKLOG.10.5.1.3.0` | `done` | Discover nonignored untracked selector sources, self-prove rejection, and consume the canonical invalid fixture. |
-| 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `active` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
+| 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `done` | Exact private Dart graph/privacy/failure/runtime-static projection passes composed signoff. |
 | 74.4.2.0 | `FUTURE-PARITY-BACKLOG.10.5.2.0` | `done` | Freeze the exact Dart static authority map and dependency-ordered split without behavior. |
 | 74.4.2.1 | `FUTURE-PARITY-BACKLOG.10.5.2.1` | `done` | Project detached compiled graph records, relations, sources, shapes, and entry evidence. |
 | 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `done` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
-| 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `active` | Compose all Dart static signoff, synchronize durable state, and close the parent. |
+| 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `done` | Composed all Dart static signoff, synchronized durable state, and closed the parent. |
 | 74.4.2.3.0 | `FUTURE-PARITY-BACKLOG.10.5.2.3.0` | `done` | Serialize untracked-selector self-tests and isolate their probe from Dart formatting. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
