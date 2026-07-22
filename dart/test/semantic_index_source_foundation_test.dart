@@ -281,14 +281,19 @@ void main() {
     expect(selector.code, 'semantic_index_invalid_option');
     expect(selector.fields, {'option': 'entry_rule'});
 
-    final sourceOnly = SemanticIndex.fromSource(
+    final languageFailure = SemanticIndex.fromSource(
       'not language syntax',
       options: _options(
-        'source-only.spec',
+        'language-failure.spec',
         SemanticSourceDetail.text,
         entryRule: 'Töp',
       ),
     );
-    expect(sourceOnly.sourceExcerptForBytes(0, 3), 'not');
+    expect(
+      languageFailure.snapshot.state,
+      SemanticSnapshotState.failedCompilation,
+    );
+    expect(languageFailure.compilationAuthority.parsed, isFalse);
+    expect(languageFailure.sourceExcerptForBytes(0, 3), 'not');
   });
 }

@@ -865,9 +865,10 @@ content migration exists yet.
   doctrine, primary, and canonical gates and closes the five-leaf Dart label prerequisite at unchanged semantic
   rollout 3/9 and admission 2/6. Opaque Dart semantic source/outcome parent `.10.5.1` is now split into a completed
   behavior-free contract leaf `.0`, strict copied input/private Unicode mapping `.1`, staged compiled-or-failed
-  authority `.2`, and composed foundation closeout `.3`. `.10.5.1.1` now exposes dependency-free source-only
-  `SemanticIndex.fromSource` / `fromUtf8` with typed options/errors, caller identity, exact byte/scalar spans,
-  excerpts, ordered lookup, digest, and structural ceilings; `.10.5.1.2` is next after its clean commit.
+  authority `.2`, and composed foundation closeout `.3`. `.10.5.1.1` exposes dependency-free strict source
+  mapping; `.10.5.1.2` now composes one staged parse/validation/compile/entry-selection pass into immutable
+  compiled-or-failed snapshot, native diagnostic, entry, and generated-v2 plan values without target execution,
+  paths, AST/IR exposure, records, or queries. `.10.5.1.3` is next after its clean commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

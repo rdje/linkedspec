@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.2` — one authority pass, two complementary debug surfaces):
+  `SemanticIndex` now composes the staged parser, validator, compiler, entry selector, and generated-v2 plan
+  builder without duplicating ownership. Validation runs explicitly once, then compilation receives
+  `validateSource: false`; selected entry and ordered `{label, family}` rows come from their existing native
+  owners. The typed AST and compiled object stay private, so later projections can copy meaning without making
+  backend layout part of the public contract.
+
+  Constructor policy, Unicode, and UTF-8 failures remain thrown input errors before language work. Parse,
+  validation, compilation, and entry-selection failures instead produce a failed immutable snapshot. Native
+  portable diagnostics are preserved exactly at this layer—including Dart's `bare_edge_target_undefined` fields—
+  because the later static projection owns cross-backend semantic normalization. An unknown explicit selector
+  reports parsed/validated authority but no usable compiled authority; callers cannot accidentally consume a plan
+  from a failed selection.
+
+  Generated-plan input is copied through `buildGeneratedRulePlan`; it does not emit or execute source. Static
+  topology tests also forbid path IO, the runtime engine, diagnostic/semantic sinks, trace, source-emitter
+  execution, records, and query. Staged parsing may internally run its parser grammar, but the caller's target spec
+  is never executed.
+
+  Trace and semantic introspection are complementary surfaces in one tool, not competing representations.
+  Introspection is deterministic, normalized, queryable, and suited to inspect-first automation; trace is temporal
+  evidence for the hard case where runtime behavior diverges. They must remain separately opt-in with separate
+  wire models. A query cannot enable execution or trace, and future runtime observations must be captured as typed
+  events that derive a new immutable snapshot rather than by scraping trace text.
+
+  Final proof is focused 12/12, adjacent 71/71, Dart format 73/0 changed, fatal analysis, package 308, primary
+  66x2, corpus 105/105, Unicode 806/9/8/2, semantic 6/20/73 at rollout 3/9 and admission 2/6, generated-source
+  v1/10 families/80-0-0, Knowledge Map 673/5,018, and canonical Rust admission 77.24s / primary 66x2 / Phase 0
+  1,031/1,031 in 632s.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.1` — exact source mapping crosses three coordinate systems):
   Dart `String` indexes UTF-16 code units, while the semantic contract exposes UTF-8 byte offsets and Unicode-
   scalar columns. The private source map therefore validates decoded surrogate structure once and builds aligned

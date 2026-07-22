@@ -196,6 +196,13 @@ export 'src/semantic/semantic_index.dart'
         SemanticIndex,
         SemanticIndexError,
         SemanticIndexOptions,
+        SemanticCompilationAuthority,
+        SemanticCompilationDiagnostic,
+        SemanticEntrySelection,
+        SemanticGeneratedPlanInput,
+        SemanticGeneratedPlanRow,
+        SemanticSnapshot,
+        SemanticSnapshotState,
         SemanticSourceDetail,
         SemanticSourceIdentity,
         SemanticSourceSpan;

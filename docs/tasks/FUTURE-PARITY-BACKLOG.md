@@ -8324,7 +8324,7 @@ before implementation.
     source-detail ceiling, and optional exact entry label; reject malformed bytes/options before language parsing.
   - [x] **PRIVATE SOURCE MAP** — Retain canonical bytes and exact zero-based half-open byte / one-based line and
     Unicode-scalar-column spans, ordered lookup, excerpts, digest policy, and mid-scalar boundary rejection.
-  - [ ] **OPAQUE COMPILED / FAILED AUTHORITY** — Parse, validate, compile, select entry, and retain shared
+  - [x] **OPAQUE COMPILED / FAILED AUTHORITY** — Parse, validate, compile, select entry, and retain shared
     generated-plan input once without execution; preserve language failure as clone-safe portable diagnostic state.
   - [ ] **CEILING / CLONE / NONINTERFERENCE** — Enforce `none`/`identity`/`span`/`text` disclosure, return fresh
     clone-safe values, deny host paths/AST/IR/compiler objects, and prove caller/source/result mutation isolation.
@@ -8398,12 +8398,43 @@ before implementation.
       gates, clean generated artifacts, and commit before activating compiled-or-failed child `.10.5.1.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.2`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Add opaque staged compiled-or-failed Dart authority and generated-plan input.
     Depends on: `.10.5.1.1`
     Acceptance: Construct once through existing parse/validate/compile/entry-selection owners, retain clone-safe
       snapshot/source/authority/diagnostic/entry/plan foundation values, preserve language failures as outcomes,
       and execute no target parser, action, lifecycle, trace, diagnostic sink, or runtime observer.
+    Verification: `SemanticIndex` now invokes `parseSpecWithStagedUserFunctionDefinitions` once, `validateSpec`
+      once, and `compileSpec(..., validateSource: false)` once, then resolves the caller selector/default through
+      `CompiledSpec.resolveEntryRule` and retains an immutable copy of `buildGeneratedRulePlan`. Public plain
+      foundation values expose snapshot state, presence-only private authority, detached diagnostics, entry
+      identity, and the generated-v2 contract/format/ordered label-family plan without exposing `SpecFile`,
+      `CompiledSpec`, ActionIR, source buffers, paths, descriptors, records, queries, or runtime objects. Native
+      portable diagnostics remain exact: `failed.spec` retains `bare_edge_target_undefined` / `normalize_edges`
+      with Dart fields `rule_label` and `target`; later static projection owns backend-neutral normalization.
+      Parse, non-portable validation, compile, and unknown-entry failures become deterministic failed-compilation
+      outcomes while constructor policy/decode failures still throw `SemanticIndexError`. One topology assertion
+      locks the single pipeline calls and forbids loader, target runtime, trace/diagnostic/observation sinks,
+      generated emission/execution, and path IO. Focused source+outcome proof passes 12/12; 13 adjacent suites pass
+      71/71. Complete Dart passes format 73/0, fatal analysis, package 308, primary 66x2, and corpus 105/105.
+      Semantic 6/20/73 at rollout 3/9 and admission 2/6, Unicode 806/9/8/2, and generated-source 10 families/80-0-0
+      pass. Canonical CI passes Rust semantic admission 1/1 in 77.24 seconds, primary 66x2, and Phase 0
+      1,031/1,031 in 632 seconds, exit 0.
+
+    #### Acceptance Checklist
+
+    - [x] **RETRIEVE / PIPELINE AUTHORITY** — Re-read the Dart semantic authority card and exact staged parser,
+      validator/portable diagnostic, compiler, entry selector, and generated-plan owners before behavior changes.
+    - [x] **OPAQUE OUTCOME API** — Add immutable success/failure status plus clone-safe snapshot, authority,
+      diagnostic, selected-entry, and generated-plan identity values without exporting AST/IR/compiler objects.
+    - [x] **CONSTRUCT ONCE / EXACT FAILURE** — Parse, validate, and compile once during construction; preserve
+      existing staged parse, validation, compile, and entry-selection failures as deterministic typed outcomes.
+    - [x] **ENTRY / PLAN FOUNDATION** — Resolve the caller selector or existing default exactly and retain one
+      shared generated-v2 plan input without generating source or executing the target spec.
+    - [x] **NONEXECUTION / ISOLATION** — Prove no target parser, action, lifecycle, trace, diagnostic sink, runtime
+      observer, path read, source disclosure, record projection, or query is invoked; returned values are detached.
+    - [x] **SIGNOFF / HANDOFF** — Pass focused/adjacent/complete Dart plus semantic/canonical/doctrine/docs/KM/diff
+      gates, clean generated artifacts, and commit before activating composed closeout child `.10.5.1.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.3`
     Status: `pending`
@@ -10761,8 +10792,9 @@ Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`, negative re
 isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion signoff `.2.4` closes the Dart
 Unicode-label prerequisite parent from clean `ecdc1ac7`. Semantic foundation parent `.10.5.1` is split into
 `.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete, and strict copied input/private Unicode
-source-map leaf `.10.5.1.1` is signoff-complete from clean `9260c526`. After its clean commit, staged
-compiled-or-failed authority and generated-plan input `.10.5.1.2` is the next task-tree-first leaf.
+source-map leaf `.10.5.1.1` is committed at `ae870152`. Staged compiled-or-failed authority and generated-plan
+input `.10.5.1.2` is signoff-complete from that clean boundary; after its clean commit, composed foundation
+closeout `.10.5.1.3` is the next task-tree-first leaf.
 
 ### Historical frontier sequence
 
@@ -11177,7 +11209,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `in_progress` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.1.0 | `FUTURE-PARITY-BACKLOG.10.5.1.0` | `done` | Frozen exact Dart foundation boundary and dependency-order input/map, outcome, and composed closeout children. |
 | 74.4.1.1 | `FUTURE-PARITY-BACKLOG.10.5.1.1` | `done` | Strict copied input, private Unicode source map, source ceilings, dependency-free digest, and complete signoff pass. |
-| 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `pending` | Add opaque staged compiled-or-failed authority and generated-plan input. |
+| 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `done` | Opaque staged compiled-or-failed authority, exact native diagnostics, entry identity, and shared generated-v2 plan pass canonical signoff. |
 | 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `pending` | Compose omission-safe foundation proof and close the parent. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |

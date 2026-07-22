@@ -1,9 +1,27 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import '../ast/spec_ast.dart' show SpecFile;
+import '../compiler/compiled_spec.dart'
+    show
+        CompiledSpec,
+        CompiledSpecException,
+        EntryRuleSelectionException,
+        compileSpec;
+import '../parser/spec_parser.dart' show SpecParseException;
 import '../parser/unicode_rule_label.dart' show isRuleLabel;
+import '../parser/user_function_definition_parser.dart'
+    show parseSpecWithStagedUserFunctionDefinitions;
+import '../source_emitter.dart'
+    show
+        buildGeneratedRulePlan,
+        linkedSpecGeneratedSourceContract,
+        linkedSpecGeneratedSourceFormatVersion;
+import '../validation/spec_validator.dart'
+    show SpecPortableDiagnostic, SpecValidationException, validateSpec;
 import 'sha256.dart' show sha256Hex;
 
+const _semanticSnapshotId = 'snapshot:0';
 const _semanticSourceId = 'source:0';
 
 /// Maximum caller-selected source detail that this index may disclose.
@@ -38,24 +56,18 @@ final class SemanticIndexError implements Exception {
     required this.code,
     required this.message,
     Map<String, Object?> fields = const {},
-  }) : fields = Map.unmodifiable(
-         Map.fromEntries(
-           (fields.entries.toList()
-                 ..sort((left, right) => left.key.compareTo(right.key)))
-               .map((entry) => MapEntry(entry.key, entry.value)),
-         ),
-       );
+  }) : fields = _immutableFields(fields);
 
   final String stage;
   final String code;
   final String message;
   final Map<String, Object?> fields;
 
-  Map<String, Object?> toJson() => {
+  Map<String, Object?> toJson() => <String, Object?>{
     'stage': stage,
     'code': code,
     'message': message,
-    'fields': Map<String, Object?>.from(fields),
+    'fields': _detachedFields(fields),
   };
 
   @override
@@ -153,11 +165,204 @@ final class SemanticSourceSpan {
   );
 }
 
-/// Opaque immutable semantic source foundation.
+/// Immutable compilation state for one semantic snapshot.
+enum SemanticSnapshotState {
+  compiled('compiled'),
+  failedCompilation('failed_compilation');
+
+  const SemanticSnapshotState(this.wireName);
+
+  final String wireName;
+}
+
+/// Clone-safe foundation metadata; this is not a query response.
+final class SemanticSnapshot {
+  const SemanticSnapshot({
+    required this.id,
+    required this.state,
+    required this.hasExecution,
+    required this.sourceDetailCeiling,
+    required this.contentDigestAvailable,
+  });
+
+  final String id;
+  final SemanticSnapshotState state;
+  final bool hasExecution;
+  final SemanticSourceDetail sourceDetailCeiling;
+  final bool contentDigestAvailable;
+
+  Map<String, Object?> toJson() => {
+    'id': id,
+    'state': state.wireName,
+    'has_execution': hasExecution,
+    'source_detail_ceiling': sourceDetailCeiling.wireName,
+    'content_digest_available': contentDigestAvailable,
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticSnapshot &&
+      other.id == id &&
+      other.state == state &&
+      other.hasExecution == hasExecution &&
+      other.sourceDetailCeiling == sourceDetailCeiling &&
+      other.contentDigestAvailable == contentDigestAvailable;
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    state,
+    hasExecution,
+    sourceDetailCeiling,
+    contentDigestAvailable,
+  );
+}
+
+/// Presence-only view of private parser/compiler authority.
+final class SemanticCompilationAuthority {
+  const SemanticCompilationAuthority({
+    required this.parsed,
+    required this.validated,
+    required this.compiled,
+  });
+
+  final bool parsed;
+  final bool validated;
+  final bool compiled;
+
+  Map<String, Object?> toJson() => {
+    'parsed': parsed,
+    'validated': validated,
+    'compiled': compiled,
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticCompilationAuthority &&
+      other.parsed == parsed &&
+      other.validated == validated &&
+      other.compiled == compiled;
+
+  @override
+  int get hashCode => Object.hash(parsed, validated, compiled);
+}
+
+/// Detached portable failure retained when language construction fails.
+final class SemanticCompilationDiagnostic {
+  SemanticCompilationDiagnostic({
+    required this.code,
+    required this.stage,
+    required this.message,
+    Map<String, Object?> fields = const {},
+  }) : fields = _immutableFields(fields);
+
+  final String code;
+  final String stage;
+  final String message;
+  final Map<String, Object?> fields;
+
+  Map<String, Object?> toJson() => {
+    'code': code,
+    'stage': stage,
+    'message': message,
+    'fields': _detachedFields(fields),
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticCompilationDiagnostic &&
+      other.code == code &&
+      other.stage == stage &&
+      other.message == message &&
+      _plainValuesEqual(other.fields, fields);
+
+  @override
+  int get hashCode =>
+      Object.hash(code, stage, message, _plainValueHash(fields));
+}
+
+/// Effective entry selection retained as identity, not compiled rule state.
+final class SemanticEntrySelection {
+  const SemanticEntrySelection({required this.label, required this.basis});
+
+  final String label;
+  final String basis;
+
+  Map<String, Object?> toJson() => {'label': label, 'basis': basis};
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticEntrySelection &&
+      other.label == label &&
+      other.basis == basis;
+
+  @override
+  int get hashCode => Object.hash(label, basis);
+}
+
+/// One immutable generated-source-v2 plan row.
+final class SemanticGeneratedPlanRow {
+  const SemanticGeneratedPlanRow({required this.label, required this.family});
+
+  final String label;
+  final String family;
+
+  Map<String, Object?> toJson() => {'label': label, 'family': family};
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticGeneratedPlanRow &&
+      other.label == label &&
+      other.family == family;
+
+  @override
+  int get hashCode => Object.hash(label, family);
+}
+
+/// Shared generated-v2 input retained without generated implementation source.
+final class SemanticGeneratedPlanInput {
+  SemanticGeneratedPlanInput({
+    required this.contractId,
+    required this.formatVersion,
+    required this.sourceIdentity,
+    required List<SemanticGeneratedPlanRow> rows,
+  }) : rows = List.unmodifiable(rows);
+
+  final String contractId;
+  final int formatVersion;
+  final String sourceIdentity;
+  final List<SemanticGeneratedPlanRow> rows;
+
+  Map<String, Object?> toJson() => {
+    'contract_id': contractId,
+    'format_version': formatVersion,
+    'source_identity': sourceIdentity,
+    'rows': [for (final row in rows) row.toJson()],
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      other is SemanticGeneratedPlanInput &&
+      other.contractId == contractId &&
+      other.formatVersion == formatVersion &&
+      other.sourceIdentity == sourceIdentity &&
+      _listsEqual(other.rows, rows);
+
+  @override
+  int get hashCode => Object.hash(
+    contractId,
+    formatVersion,
+    sourceIdentity,
+    Object.hashAll(rows),
+  );
+}
+
+/// Opaque immutable semantic source and compiled-or-failed foundation.
 ///
 /// Construction copies caller input, normalizes it to canonical strict UTF-8,
-/// and builds exact byte/scalar coordinates. It performs no parsing, target
-/// execution, path resolution, or host-state capture.
+/// builds exact byte/scalar coordinates, and retains one private staged
+/// parse/validation/compilation outcome. It performs no target execution, path
+/// resolution, semantic query, or host-state capture.
 final class SemanticIndex {
   SemanticIndex._({
     required String sourceText,
@@ -165,12 +370,14 @@ final class SemanticIndex {
     required String logicalName,
     required SemanticSourceDetail sourceDetailCeiling,
     required List<int> scalars,
+    required _SemanticCompilationOutcome compilationOutcome,
   }) : _sourceText = sourceText,
        _sourceBytes = sourceBytes,
        _logicalName = logicalName,
        _sourceDetailCeiling = sourceDetailCeiling,
        _sourceMap = _SemanticSourceMap(scalars),
-       _contentDigest = 'sha256:${sha256Hex(sourceBytes)}';
+       _contentDigest = 'sha256:${sha256Hex(sourceBytes)}',
+       _compilationOutcome = compilationOutcome;
 
   /// Capture already decoded Unicode text and copy its canonical UTF-8 form.
   factory SemanticIndex.fromSource(
@@ -192,6 +399,7 @@ final class SemanticIndex {
       logicalName: options.logicalName,
       sourceDetailCeiling: options.sourceDetailCeiling,
       scalars: scalars,
+      compilationOutcome: _compileSemanticSource(copiedText, options),
     );
   }
 
@@ -236,6 +444,7 @@ final class SemanticIndex {
       logicalName: options.logicalName,
       sourceDetailCeiling: options.sourceDetailCeiling,
       scalars: scalars,
+      compilationOutcome: _compileSemanticSource(sourceText, options),
     );
   }
 
@@ -245,6 +454,58 @@ final class SemanticIndex {
   final SemanticSourceDetail _sourceDetailCeiling;
   final _SemanticSourceMap _sourceMap;
   final String _contentDigest;
+  final _SemanticCompilationOutcome _compilationOutcome;
+
+  /// Return fresh foundation metadata without semantic records or queries.
+  SemanticSnapshot get snapshot => SemanticSnapshot(
+    id: _semanticSnapshotId,
+    state: _compilationOutcome.compiled == null
+        ? SemanticSnapshotState.failedCompilation
+        : SemanticSnapshotState.compiled,
+    hasExecution: false,
+    sourceDetailCeiling: _sourceDetailCeiling,
+    contentDigestAvailable: _sourceDetailCeiling == SemanticSourceDetail.text,
+  );
+
+  /// Return only presence bits for the retained private compiler authority.
+  SemanticCompilationAuthority get compilationAuthority =>
+      SemanticCompilationAuthority(
+        parsed: _compilationOutcome.parsed != null,
+        validated: _compilationOutcome.validated,
+        compiled: _compilationOutcome.compiled != null,
+      );
+
+  /// Return a detached portable language failure, when construction failed.
+  SemanticCompilationDiagnostic? get compilationDiagnostic {
+    final diagnostic = _compilationOutcome.diagnostic;
+    if (diagnostic == null) {
+      return null;
+    }
+    return SemanticCompilationDiagnostic(
+      code: diagnostic.code,
+      stage: diagnostic.stage,
+      message: diagnostic.message,
+      fields: diagnostic.fields,
+    );
+  }
+
+  /// Return resolved entry identity without exposing a compiled rule.
+  SemanticEntrySelection? get entrySelection => _compilationOutcome.entry;
+
+  /// Return the shared generated-v2 plan without compiled host state.
+  SemanticGeneratedPlanInput? get generatedPlan {
+    _requireSourceDetail(SemanticSourceDetail.identity);
+    final plan = _compilationOutcome.generatedPlan;
+    if (plan == null) {
+      return null;
+    }
+    return SemanticGeneratedPlanInput(
+      contractId: plan.contractId,
+      formatVersion: plan.formatVersion,
+      sourceIdentity: plan.sourceIdentity,
+      rows: plan.rows,
+    );
+  }
 
   /// Return copied caller identity and exact source sizes without a host path.
   SemanticSourceIdentity get sourceIdentity {
@@ -325,8 +586,189 @@ final class SemanticIndex {
   @override
   String toString() =>
       'SemanticIndex(sourceId: $_semanticSourceId, '
+      'state: ${snapshot.state.wireName}, '
       'sourceDetailCeiling: ${_sourceDetailCeiling.wireName})';
 }
+
+final class _SemanticCompilationOutcome {
+  const _SemanticCompilationOutcome({
+    required this.parsed,
+    required this.validated,
+    required this.compiled,
+    required this.diagnostic,
+    required this.entry,
+    required this.generatedPlan,
+  });
+
+  final SpecFile? parsed;
+  final bool validated;
+  final CompiledSpec? compiled;
+  final SemanticCompilationDiagnostic? diagnostic;
+  final SemanticEntrySelection? entry;
+  final SemanticGeneratedPlanInput? generatedPlan;
+}
+
+_SemanticCompilationOutcome _compileSemanticSource(
+  String source,
+  SemanticIndexOptions options,
+) {
+  final SpecFile parsed;
+  try {
+    parsed = parseSpecWithStagedUserFunctionDefinitions(source);
+  } on Object catch (error) {
+    return _failedCompilation(
+      diagnostic: _languageDiagnostic(
+        error,
+        fallbackCode: 'semantic_index_parse_failed',
+        fallbackStage: 'parse_source',
+      ),
+    );
+  }
+
+  try {
+    validateSpec(parsed);
+  } on Object catch (error) {
+    return _failedCompilation(
+      parsed: parsed,
+      diagnostic: _languageDiagnostic(
+        error,
+        fallbackCode: 'semantic_index_validation_failed',
+        fallbackStage: 'validate_source',
+      ),
+    );
+  }
+
+  final CompiledSpec candidate;
+  try {
+    candidate = compileSpec(parsed, validateSource: false);
+  } on Object catch (error) {
+    return _failedCompilation(
+      parsed: parsed,
+      validated: true,
+      diagnostic: _languageDiagnostic(
+        error,
+        fallbackCode: 'semantic_index_compilation_failed',
+        fallbackStage: 'compile_source',
+      ),
+    );
+  }
+
+  final SemanticEntrySelection entry;
+  try {
+    final selected = candidate.resolveEntryRule(options.entryRule);
+    entry = SemanticEntrySelection(
+      label: selected.rule.label,
+      basis: selected.basis.contractName,
+    );
+  } on Object catch (error) {
+    return _failedCompilation(
+      parsed: parsed,
+      validated: true,
+      diagnostic: _languageDiagnostic(
+        error,
+        fallbackCode: 'semantic_index_entry_selection_failed',
+        fallbackStage: 'select_entry_rule',
+      ),
+    );
+  }
+
+  final SemanticGeneratedPlanInput generatedPlan;
+  try {
+    final rows = buildGeneratedRulePlan(candidate);
+    generatedPlan = SemanticGeneratedPlanInput(
+      contractId: linkedSpecGeneratedSourceContract,
+      formatVersion: linkedSpecGeneratedSourceFormatVersion,
+      sourceIdentity: options.logicalName,
+      rows: [
+        for (final row in rows)
+          SemanticGeneratedPlanRow(label: row.label, family: row.family),
+      ],
+    );
+  } on Object catch (error) {
+    return _failedCompilation(
+      parsed: parsed,
+      validated: true,
+      diagnostic: _languageDiagnostic(
+        error,
+        fallbackCode: 'semantic_index_generated_plan_failed',
+        fallbackStage: 'build_generated_plan',
+      ),
+    );
+  }
+
+  return _SemanticCompilationOutcome(
+    parsed: parsed,
+    validated: true,
+    compiled: candidate,
+    diagnostic: null,
+    entry: entry,
+    generatedPlan: generatedPlan,
+  );
+}
+
+_SemanticCompilationOutcome _failedCompilation({
+  SpecFile? parsed,
+  bool validated = false,
+  required SemanticCompilationDiagnostic diagnostic,
+}) => _SemanticCompilationOutcome(
+  parsed: parsed,
+  validated: validated,
+  compiled: null,
+  diagnostic: diagnostic,
+  entry: null,
+  generatedPlan: null,
+);
+
+SemanticCompilationDiagnostic _languageDiagnostic(
+  Object error, {
+  required String fallbackCode,
+  required String fallbackStage,
+}) {
+  if (error is SpecValidationException && error.diagnostic != null) {
+    return _semanticDiagnostic(error.diagnostic!);
+  }
+  if (error is EntryRuleSelectionException) {
+    return SemanticCompilationDiagnostic(
+      code: error.code,
+      stage: error.stage,
+      message: error.message,
+      fields: {if (error.entryRule != null) 'entry_rule': error.entryRule},
+    );
+  }
+
+  final fields = <String, Object?>{};
+  final String message;
+  if (error is SpecParseException) {
+    fields['line'] = error.line;
+    message = error.message;
+  } else if (error is SpecValidationException) {
+    message = error.message;
+  } else if (error is CompiledSpecException) {
+    message = error.message;
+  } else if (error is FormatException) {
+    message = error.message;
+    if (error.offset != null) {
+      fields['offset'] = error.offset;
+    }
+  } else {
+    message = error.toString();
+  }
+  return SemanticCompilationDiagnostic(
+    code: fallbackCode,
+    stage: fallbackStage,
+    message: message,
+    fields: fields,
+  );
+}
+
+SemanticCompilationDiagnostic _semanticDiagnostic(
+  SpecPortableDiagnostic diagnostic,
+) => SemanticCompilationDiagnostic(
+  code: diagnostic.code,
+  stage: diagnostic.stage,
+  message: diagnostic.message,
+  fields: diagnostic.fields,
+);
 
 final class _SemanticSourceMap {
   _SemanticSourceMap(List<int> scalars) {
@@ -426,6 +868,106 @@ final class _SemanticSourceMap {
       endColumn: _columnAtScalar[end],
     );
   }
+}
+
+Map<String, Object?> _immutableFields(Map<String, Object?> fields) =>
+    Map.unmodifiable(
+      Map.fromEntries(
+        (fields.entries.toList()
+              ..sort((left, right) => left.key.compareTo(right.key)))
+            .map(
+              (entry) => MapEntry(entry.key, _immutablePlainValue(entry.value)),
+            ),
+      ),
+    );
+
+Map<String, Object?> _detachedFields(Map<String, Object?> fields) => {
+  for (final entry in fields.entries)
+    entry.key: _detachedPlainValue(entry.value),
+};
+
+Object? _immutablePlainValue(Object? value) {
+  if (value is Map) {
+    return Map<String, Object?>.unmodifiable({
+      for (final entry in value.entries)
+        entry.key.toString(): _immutablePlainValue(entry.value),
+    });
+  }
+  if (value is List) {
+    return List<Object?>.unmodifiable([
+      for (final item in value) _immutablePlainValue(item),
+    ]);
+  }
+  return value;
+}
+
+Object? _detachedPlainValue(Object? value) {
+  if (value is Map) {
+    return <String, Object?>{
+      for (final entry in value.entries)
+        entry.key.toString(): _detachedPlainValue(entry.value),
+    };
+  }
+  if (value is List) {
+    return <Object?>[for (final item in value) _detachedPlainValue(item)];
+  }
+  return value;
+}
+
+bool _plainValuesEqual(Object? left, Object? right) {
+  if (identical(left, right)) {
+    return true;
+  }
+  if (left is Map && right is Map) {
+    if (left.length != right.length) {
+      return false;
+    }
+    for (final entry in left.entries) {
+      if (!right.containsKey(entry.key) ||
+          !_plainValuesEqual(entry.value, right[entry.key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  if (left is List && right is List) {
+    return _listsEqual(left, right, equals: _plainValuesEqual);
+  }
+  return left == right;
+}
+
+int _plainValueHash(Object? value) {
+  if (value is Map) {
+    final entries = value.entries.toList()
+      ..sort(
+        (left, right) => left.key.toString().compareTo(right.key.toString()),
+      );
+    return Object.hashAll([
+      for (final entry in entries)
+        Object.hash(entry.key, _plainValueHash(entry.value)),
+    ]);
+  }
+  if (value is List) {
+    return Object.hashAll(value.map(_plainValueHash));
+  }
+  return value.hashCode;
+}
+
+bool _listsEqual<T>(
+  List<T> left,
+  List<T> right, {
+  bool Function(T left, T right)? equals,
+}) {
+  if (left.length != right.length) {
+    return false;
+  }
+  for (var index = 0; index < left.length; index += 1) {
+    if (!(equals?.call(left[index], right[index]) ??
+        left[index] == right[index])) {
+      return false;
+    }
+  }
+  return true;
 }
 
 void _validateOptions(SemanticIndexOptions options) {

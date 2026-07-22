@@ -9,11 +9,11 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.1.1` — strict copied Dart semantic source map.
-- latest_commit: `9260c526` is the clean activation base; the current commit owns completed leaf `.10.5.1.1`.
-- active_work_unit: none after the verified `.10.5.1.1` commit; do not activate `.10.5.1.2` while it is pending.
-- next_action: from the clean `.10.5.1.1` commit, activate `.10.5.1.2` task-tree-first for staged Dart
-  compiled-or-failed ownership, exact entry identity, and generated-plan input.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.1.2` — opaque staged Dart compiled outcome.
+- latest_commit: `ae870152` is the clean activation base; the current commit owns completed leaf `.10.5.1.2`.
+- active_work_unit: none after verified `.10.5.1.2`; do not activate `.10.5.1.3` while its commit is pending.
+- next_action: from the clean `.10.5.1.2` commit, activate `.10.5.1.3` task-tree-first for composed foundation
+  proof and parent `.10.5.1` closure.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -38,17 +38,17 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   and external-AST validation. All 9 positive labels and 2 distinct pairs now preserve exact identity through
   compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes. All 8 negative labels
   fail every external-AST role; source/primary/no-prefix and unrelated identifier grammars are isolation-locked.
-- current_dart_semantic_map: public source-only `SemanticIndex` copies decoded text/strict UTF-8, validates logical
-  identity/options, and privately owns canonical bytes, SHA-256, and exact byte/scalar coordinates. Typed immutable
-  identity/span/excerpt/ordered-lookup projections enforce the ceiling; no source buffer, path, parse, compile,
-  execute, query, AST/IR, or descriptor leaks. Internal SHA-256 keeps fresh-cache offline emitted callers working.
-  `.10.5.1.2` next owns staged compiled-or-failed state, exact entry identity, and generated-plan input.
+- current_dart_semantic_map: public `SemanticIndex` copies decoded text/strict UTF-8 and privately owns canonical
+  bytes, SHA-256, exact byte/scalar coordinates, typed AST, and compiled authority. One staged parse/validate/
+  compile/entry/plan pass exposes only immutable ceiling-bounded source plus outcome/diagnostic/entry/plan values.
+  Target/emitted execution, path access, runtime/trace/sinks, AST/IR, records, and query remain absent; internal
+  dependency-free SHA-256 preserves fresh-cache offline emitted callers. `.10.5.1.3` next closes the foundation.
 - current_closed_semantics: cursor is 75 files / 8+0 / 60 mutations; root is 7+0/54; duplicate slots are 7+0/59;
   repeated action is 8+0/54 and its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.10.5.1.1` passes focused 6/6, adjacent 39/39, Dart format 72/0 changed, fatal analysis, package
-  302, primary 66x2, corpus 105/105, Unicode 806/9/8/2, semantic 6/20/73 at 3/9 and 2/6, generated-source
-  v1/10 families/80-0-0, Knowledge Map 673/5,013, mdBook, four doctrines, and cleanup. Canonical CI passes Rust
-  admission 1/1 in 76.39 seconds, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds, exit 0.
+- current_signoff: `.10.5.1.2` passes focused 12/12, adjacent 71/71, Dart format 73/0 changed, fatal analysis,
+  package 308, primary 66x2, corpus 105/105, Unicode 806/9/8/2, semantic 6/20/73 at 3/9 and 2/6, generated-source
+  v1/10 families/80-0-0, Knowledge Map 673/5,018, mdBook, four doctrines, and cleanup. Canonical CI passes Rust
+  admission 1/1 in 77.24 seconds, primary 66x2, and Phase 0 1,031/1,031 in 632 seconds, exit 0.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete
   codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.5.1.1` source-map slice pending commit; `.23` stays queued.
+- blockers: none. in_flight_uncommitted: verified `.10.5.1.2` compiled-outcome slice pending commit; `.23` queued.

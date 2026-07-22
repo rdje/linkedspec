@@ -8,20 +8,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Strict copied Dart semantic input/private Unicode source map `FUTURE-PARITY-BACKLOG.10.5.1.1` is complete from
-  clean `9260c526`. After its clean commit, staged compiled-or-failed authority `.10.5.1.2` is the next
-  task-tree-first leaf; no later implementation leaf is active while this source-map commit is pending.
+- Opaque staged Dart compiled-or-failed authority `FUTURE-PARITY-BACKLOG.10.5.1.2` is signoff-complete from clean
+  `ae870152`. After its clean commit, composed foundation closeout `.10.5.1.3` is the next task-tree-first leaf; no
+  later implementation leaf is active while this outcome commit is pending.
 
-`SemanticIndex` now accepts copied decoded text or strict UTF-8 bytes plus caller identity and exposes only typed,
-ceiling-governed source identity, exact byte/scalar spans, excerpts, and ordered exact lookup. Its private map owns
-canonical UTF-8 and SHA-256 without paths, source-buffer exposure, parsing, compilation, execution, records, or
-queries. Invalid inputs and ranges return immutable typed errors. The production package remains dependency-free
-so freshly cached offline emitted callers continue to resolve it.
+`SemanticIndex` now invokes the staged parser, validator, compiler, entry selector, and generated-v2 plan builder
+exactly once and exposes only immutable outcome, authority, diagnostic, entry, and plan values. Language failures
+remain inspectable failed snapshots; AST/compiler objects stay private. No target or emitted source executes, and
+paths, runtime sinks, trace, semantic records, and query remain outside this foundation.
 
-Focused source proof passes 6/6 and 39 adjacent tests include the fresh-cache generated-caller topology. Complete
-Dart passes format 72/0 changed, fatal analysis, package 302, primary 66x2, and corpus 105/105. Canonical CI passes
-Rust semantic admission 1/1 in 76.39 seconds, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Semantic
-governance remains 6/20/73 at rollout 3/9 and admission 2/6; Knowledge Map is 673/5,013.
+Focused source/outcome proof passes 12/12 and 13 adjacent suites pass 71/71. Complete Dart passes format 73/0
+changed, fatal analysis, package 308, primary 66x2, and corpus 105/105. Canonical CI passes Rust semantic admission
+1/1 in 77.24 seconds, primary 66x2, and Phase 0 1,031/1,031 in 632 seconds. Semantic governance remains 6/20/73
+at rollout 3/9 and admission 2/6; Knowledge Map is 673/5,018.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -53,6 +52,20 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.2 — add Dart compiled outcome**
+  (DONE in this commit from clean base `ae870152`).
+
+  **Result:** Construction now composes one staged parse/validate/compile/entry/plan pass into detached immutable
+  compiled-or-failed values while retaining AST/compiler authorities privately. Failures stay inspectable; target
+  execution, paths, runtime sinks, trace, records, and query remain absent.
+
+  **Proof:** Focused 12/12; adjacent 71/71; Dart format 73/0 changed, fatal analysis, package 308, primary 66x2,
+  corpus 105/105; Unicode 806/9/8/2; semantic 6/20/73 at 3/9 and 2/6; generated-source v1/10 families/80-0-0;
+  Knowledge Map 673/5,018; canonical Rust admission 77.24s, primary 66x2, Phase 0 1,031/1,031 in 632s; doctrines,
+  mdBook, diff hygiene, and cleanup pass.
+
+  **Next:** after this clean commit, activate `.10.5.1.3` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.1 — add Dart semantic source map**
   (DONE in this commit from clean base `9260c526`).
 

@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.2 — add Dart compiled outcome
+
+Dart `SemanticIndex` construction now composes the existing staged parser, validator, compiler, entry selector,
+and generated-v2 plan builder exactly once. Public immutable values expose only the compiled-or-failed snapshot,
+parsed/validated/compiled authority bits, a detached diagnostic, exact selected-entry identity, and the ordered
+`{label, family}` plan. Typed AST and compiled objects remain private; target execution, emitted-source execution,
+path access, runtime sinks, trace, semantic records, and query remain outside this foundation.
+
+Language failures are compilation outcomes rather than constructor failures. Native portable validation and entry
+diagnostics remain exact; parse/compile fallbacks are typed and stable, while cross-backend normalization remains
+owned by the later projection leaf. Constructor policy, Unicode, and UTF-8 errors still fail before language work.
+The explicit validation pass is followed by `compileSpec(..., validateSource: false)`, preventing duplicate
+validation, and generated-plan input comes from the existing plan authority rather than source emission.
+
+Focused source/outcome proof passes 12/12 and 13 adjacent suites pass 71/71. The complete Dart gate passes format
+over 73 files with no changes, fatal analysis, 308 package tests, primary 66/66 twice, and corpus 105/105.
+Canonical CI passes Rust semantic admission 1/1 in 77.24 seconds, primary 66x2, and Phase 0 1,031/1,031 in 632
+seconds. Semantic governance remains 6/20/73 at rollout 3/9 and native admission 2/6; composed foundation closeout
+`.10.5.1.3` is next.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.1 — add Dart semantic source map
 
 Dart now exposes the source-only `SemanticIndex` foundation. Callers construct it from copied decoded text or

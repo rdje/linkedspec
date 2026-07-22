@@ -29,11 +29,11 @@ The distinction matters:
 The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
 Dart, Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
-## Current Dart source foundation
+## Current Dart source and outcome foundation
 
-Dart now exposes the first source-only layer of its future opaque semantic index. It accepts decoded scalar text or
-strict UTF-8 bytes, copies the input, requires caller-owned logical identity, and builds the exact private source map
-without parsing or executing the target specification:
+Dart now exposes the complete source/outcome foundation of its future opaque semantic index. It accepts decoded
+scalar text or strict UTF-8 bytes, copies the input, requires caller-owned logical identity, builds the exact
+private source map, and retains one staged compiled-or-failed outcome without executing the target specification:
 
 ```dart
 import 'dart:convert';
@@ -52,6 +52,13 @@ final index = SemanticIndex.fromUtf8(
 print(index.sourceIdentity.logicalName); // privacy.spec
 print(index.sourceIdentity.byteLength); // 13
 print(index.sourceIdentity.scalarLength); // 11
+print(index.snapshot.state.wireName); // compiled
+print(index.compilationAuthority.toJson());
+// {parsed: true, validated: true, compiled: true}
+print(index.entrySelection!.toJson());
+// {label: Töp, basis: explicit_selector}
+print(index.generatedPlan!.toJson()['rows']);
+// [{label: Töp, family: default}]
 print(index.sourceSpanForBytes(0, 6).toJson());
 // {start_byte: 0, end_byte: 6, start_line: 1, start_column: 1,
 //  end_line: 1, end_column: 6}
@@ -72,15 +79,38 @@ a multibyte scalar are rejected. `locateExact(needle, afterByte: ...)` supports 
 duplicate authored text without exposing the map itself. Returned identity/span/JSON values are fresh immutable or
 detached plain data, caller byte mutation cannot affect the index, and `toString()` never includes the logical name.
 
+After source policy succeeds, construction calls the existing staged user-function-aware parser once, validates
+once, and calls the compiler once with its duplicate validation disabled. It then resolves either the exact caller
+selector or the established default (first authored marker, otherwise first authored rule) and copies the existing
+generated-v2 plan. `snapshot` reports `compiled` or `failed_compilation` plus the fixed `has_execution: false`;
+`compilationAuthority` reports only whether private parsed, validated, and compiled authority exists. Neither value
+contains an AST, compiler object, source buffer, descriptor, semantic record, or query result.
+
+A parse, validation, compile, or entry-selection error is a language outcome, not a constructor failure. The index
+still exists in `failed_compilation` state with permitted source evidence and a fresh
+`SemanticCompilationDiagnostic`. Existing `SpecPortableDiagnostic` values retain their exact native code, stage,
+message, and fields. For example, `failed.spec` retains Dart's `bare_edge_target_undefined` / `normalize_edges`
+diagnostic with `rule_label` and `target`; the later static projection, not this foundation, owns cross-backend
+normalization. Parser, non-portable validator, and compiler exceptions receive deterministic semantic-foundation
+fallback codes without being thrown through the constructor. Invalid options, Unicode, bytes, or UTF-8 still throw
+`SemanticIndexError` before a language snapshot exists.
+
+`entrySelection` returns only the chosen label and basis. `generatedPlan` returns only contract
+`linkedspec-generated-source-v2`, format 2, caller source identity, and immutable ordered label/family rows; it does
+not generate Dart source. The `none` ceiling denies plan identity, just as it denies source identity. Returned
+snapshots, authority flags, diagnostics, entries, plans, and JSON are immutable or detached, so caller mutation
+cannot alter the private outcome.
+
 The Dart production package intentionally remains dependency-free. Generated-source tests resolve isolated path
 callers with a fresh empty offline package cache, so a runtime digest dependency would make emitted packages
 unresolvable. The package-internal SHA-256 implementation is checked against the standard empty and `abc` vectors
 plus the neutral 128-byte graph fixture, while isolated generated callers remain green.
 
-This layer does **not** yet expose snapshot state, compilation diagnostics, generated plans, capabilities, query,
-or runtime observations. `.10.5.1.2` composes the staged parser/validator/compiler/entry/plan owners into the same
-opaque type; later leaves add normalized projections and query. Dart therefore remains pending in both rollout and
-native-admission ledgers despite the usable source foundation.
+Construction does **not** invoke `LinkedSpecRuntimeEngine`, a generated parser, target actions/lifecycle code,
+trace, a diagnostic-output sink, or a semantic observation sink. It performs no implicit path read. It also does
+not expose normalized static/call records, capabilities, query, or runtime observations; those remain separately
+owned later leaves. `.10.5.1.3` next composes omission-safe foundation proof and closes the parent. Dart therefore
+remains pending in both rollout and native-admission ledgers despite the usable source/outcome foundation.
 
 ## Current Rust construction and query surface
 
@@ -856,8 +886,9 @@ The dependency order is:
 | `.10.4.6` | composed Rust semantic admission | complete; 12 roles, 20 exact queries, Rust-only promotion |
 | `.10.5.0` | Dart authority and Unicode-label prerequisite | complete |
 | `.10.5.1.0` | Dart source/outcome contract and dependency split | complete; behavior-free |
-| `.10.5.1.1` | Dart strict input/private map and source ceiling | complete; source-only API |
-| `.10.5.1.2-.10.5.1.3` | Dart compiled-or-failed owner and composed foundation | pending in dependency order |
+| `.10.5.1.1` | Dart strict input/private map and source ceiling | complete; dependency-free source map |
+| `.10.5.1.2` | Dart staged compiled-or-failed owner and generated-v2 plan | complete; no target execution |
+| `.10.5.1.3` | Dart composed source/outcome foundation closeout | next after the clean `.2` commit |
 | `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
