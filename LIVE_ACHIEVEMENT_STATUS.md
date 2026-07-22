@@ -8,37 +8,44 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Behavior-free Julia authority audit `FUTURE-PARITY-BACKLOG.10.6.0` is verified and in clean commit assembly. It maps typed staged,
-  compiled, action/contract, diagnostic, generated-v2, loader, trace, and runtime authorities; no semantic API,
-  production behavior, fixture, response digest, rollout, or admission state changes.
+- Behavior-free Julia Unicode plan `FUTURE-PARITY-BACKLOG.10.6.1.0` is fully verified and in final commit assembly
+  from clean audit commit `7bdb181f`. No production/generated/test/fixture/contract or semantic-ledger behavior
+  changes.
 
-The exact audit establishes that Julia needs a private canonical byte/scalar source map because ordinary spans are
-line-only and action spans are scalar-local; compiled definition order omits function shells; invalid UTF-8 can
-inhabit `String`; loaded state carries resolved paths; generated execution broadly translates callback failures;
-immutable structs may retain mutable collections; and raw-neutral numeric validation must reject `Bool` despite
-`Bool <: Integer`. Typed runtime observation must use accepted-slot/final-result seams rather than trace text.
+The exhaustive Julia rerun reproduces exactly 5,175 required Unicode 17 `XID_Continue` scalars missing from host
+PCRE2 `\w` and 923 forbidden extras; positive source parsing remains 8/9, forbidden `²` compiles, and `Top:::`
+truncates to `Top`. Both direct and JSON-reconstructed programmatic probes pass `Top-Rule` and `A·B` through
+declaration/action/blind/bare validation, compilation, descriptor, generated-plan, and emitted-source routes.
 
-The prerequisite Unicode probe root-causes current accidental partial support. Julia 1.12.6 uses PCRE2 10.47 with
-Unicode 16.0.0 tables at all five `\w` label patterns. Against pinned Unicode 17 `XID_Continue`, 5,175 required
-scalars are missing and 923 forbidden scalars are accepted. Required `A·B` fails, forbidden `²` compiles,
-`Top:::` truncates to `Top`, and programmatic/reconstructed action/blind/bare targets bypass validation into
-compiled/descriptor/generated/emitted artifacts. Two Knowledge Map cards and the mdBook/Toolbox record the finding.
+The implementation is now mechanical. `.10.6.1.1` adds one generated internal
+`julia/src/spec/UnicodeRuleLabel.jl` from the unchanged 806-range neutral contract, independently byte/endpoint
+checks it, includes it before the parser, replaces exactly five host-regex label sites with scalar-safe complete
+scanners, preserves malformed arrows as raw syntax, rejects third-colon prefixes, and validates declarations plus
+all three target kinds with one portable diagnostic. It leaves all unrelated identifier patterns untouched.
 
-The Julia parent is split into Unicode closure `.10.6.1`, opaque source/outcome `.2`, private static projection
-`.3`, calls/staging/generated `.4`, immutable typed/raw query `.5`, typed runtime observation `.6`, and one exact
-12-role admission `.7`. After `.10.6.0` commits cleanly, `.10.6.1.0` is the sole next action. Semantic governance
-remains 6/20/81 at rollout 4/9 and native admission 3/6.
-
-Verification passes unchanged Julia 3,711 package assertions, primary conformance, corpus 105/105; semantic
-6/20/81; Unicode 806/9/8/2; Knowledge Map 682/5,138; mdBook and all four doctrines. The first canonical run caught
-the removed checker-owned repeated-action sentence in this live file; restoring the exact unchanged marker makes
-the focused 8/0/54 checker and complete rerun pass Rust semantic admission 1/1 in 80.05s, Dart admission 1/1,
-primary 66x2, and Phase 0 1,031/1,031 in 653s.
+Identity `.2` owns all nine positives/two distinct pairs through every artifact/execution/loader/command route;
+negative/isolation `.3` owns all eight negatives across four programmatic/reconstructed roles plus source/primary
+and adjacent grammars; closeout `.4` owns complete Julia/canonical composition. Semantic governance remains
+6/20/81 at rollout 4/9 and native admission 3/6. After this clean planning commit, `.10.6.1.1` is the sole next leaf.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.0 — freeze Julia Unicode label routes**
+  (DONE in this commit from clean base `7bdb181f`).
+
+  **Result:** Exact generator output, scalar classifier/scanner, five parser routes, four validator roles,
+  9/8/2 identity and isolation suites, independent checker/CI registrations, and `.1-.4` gate order are frozen.
+  No behavior or semantic governance changes.
+
+  **Proof:** Exhaustive 5,175/923 census; exact 8/9, `²`, `Top:::`, and 2 labels x 4 roles x 2 trust-route artifact
+  probes; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; KM 682/5,142; mdBook/memory/four doctrines/diff;
+  canonical Rust admission 1/1 in 77.35s, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 641s; exact 1.14-GB
+  generated book/Rust/Python cleanup with the protected Pgen artifact corpus untouched.
+
+  **Next:** generate and route the classifier in `.10.6.1.1` after the clean commit.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.0 — map Julia semantic authorities**
   (DONE in this commit from clean base `a0946c01`).
 

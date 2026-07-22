@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.0` — a Unicode classifier is insufficient unless token boundaries
+  and external-AST trust are co-owned): Julia's problem has three independent layers. Host PCRE2 membership is
+  wrong in both directions (5,175 missing / 923 extra); parser prefix capture turns some malformed spellings into
+  valid partial labels; and `validate_spec` trusts programmatic/reconstructed declarations and targets. Replacing
+  `\w` with a larger regex would repair only the first layer.
+
+  The generated primitive therefore owns scalar membership and complete/prefix classification only. Parser code
+  owns punctuation and allowed remainders: one header scanner rejects a third colon and also decides body
+  termination; action/blind/bare scanners parse complete target lists, indices, and remainders; malformed arrow
+  starts become raw syntax instead of losing a partial edge. Validator code is the trust boundary and checks all
+  declarations plus action/blind/bare targets before duplicate, structure, or target-resolution checks, using one
+  portable `invalid_rule_label` diagnostic.
+
+  Julia string indices are neither scalar ordinals nor arbitrary byte offsets. The generated prefix primitive must
+  iterate characters and advance with `nextind`; tests lock supplementary labels and the exact remainder so an
+  apparently correct ASCII implementation cannot split inside a multibyte scalar. The generated file is internal,
+  derived from the existing 806 neutral ranges, included before `Parser.jl`, independently regenerated and endpoint
+  checked, and adds no host Unicode dependency or public API.
+
+  Isolation is explicit because several adjacent Julia grammars intentionally differ. Function/parameter names use
+  ASCII `_is_identifier`; ActionParser helper, variable, callee, and fluent patterns retain their current rules;
+  lifecycle, split/mark, conditional, fluent, regex, and bounded-mode parsers keep their existing owners. Exact
+  identity, negative rejection, and isolation are separate leaves before a no-promotion closeout, so no test suite
+  is asked to prove two changing mechanisms at once.
+
+  The behavior-free plan closes with Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, Knowledge Map 682/5,142,
+  mdBook/memory/doctrines, and canonical Rust admission 77.35s plus Dart 1/1, primary 66x2, and Phase 0
+  1,031/1,031 in 641 seconds. The canonical run's exact generated book, Rust dependency/incremental, and Python
+  bytecode outputs total about 1.14 GB and are safe to remove; the retained Pgen artifact corpus is not a cache.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.0` — compose Julia authorities; do not infer parity from familiar
   Unicode examples): Julia has sufficient typed meaning for an adapter, but no single owner is the neutral model.
   `SpecFile` and staged function sidecars own authored definitions; `CompiledSpec`, action AST/contracts/registry,

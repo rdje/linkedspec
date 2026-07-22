@@ -882,7 +882,10 @@ content migration exists yet.
   required scalars are absent, 923 forbidden scalars are accepted, and parser-prefix/external-AST validation
   bypasses reach artifacts. Julia work is now dependency-ordered as Unicode closure `.10.6.1`, source/outcome
   `.2`, static `.3`, calls/staging/generated `.4`, query `.5`, runtime observation `.6`, and exact admission `.7`;
-  audit `.0` changes no behavior or governance state.
+  audit `.0` changes no behavior or governance state. Unicode planning `.10.6.1.0` now freezes the internal
+  generated 806-range Julia classifier/scanner, five parser replacements, four-role validator pass, exact
+  positive/distinct/negative/isolation suites, and focused-to-canonical gate order without behavior. Generator/
+  parser/validator implementation `.10.6.1.1` is next after the clean plan commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

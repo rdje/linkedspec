@@ -15,6 +15,10 @@ answers:
   - "can programmatic Julia ASTs bypass rule-label validation"
   - "which Julia rule-label roles bypass validation"
   - "what must happen before Julia semantic privacy fixture admission"
+  - "where will the generated Julia Unicode rule-label classifier live"
+  - "which Julia files and tests own Unicode rule-label implementation"
+  - "what is the Julia Unicode rule-label implementation order"
+  - "how will Julia reject rule-label prefix truncation"
 date: 2026-07-22
 status: current
 tags: [julia, unicode, rule-labels, parser, validation, generated-source, semantic-introspection]
@@ -54,3 +58,29 @@ normalization-sensitive scalar identity through compiled/descriptor/generated/em
 loader/primary routes, and leave unrelated function, parameter, helper, lifecycle, fluent, and mark identifier
 grammars unchanged. Julia semantic construction and the `Töp` privacy fixture cannot be admitted before that route
 closure, and the Unicode prerequisite itself must not promote semantic rollout/admission.
+
+Leaf `.10.6.1.0` freezes the implementation so later code is mechanical. The existing pinned-data generator gains
+only `--julia-output`, targeting internal `julia/src/spec/UnicodeRuleLabel.jl`; the neutral JSON, Unicode version,
+806 ranges, 9/8/2 fixtures, and original contract owner do not change. The generated artifact carries exact
+contract/version/hash/range-count metadata, binary-search integer/scalar membership, nonempty complete-label
+validation, and a longest-prefix scan based on Julia character indices/`nextind`. `LinkedSpecJulia.jl` includes it
+before `Parser.jl`; it is not a new public API. The independent checker regenerates and byte-compares it, extracts
+all 806 endpoints, locks the algorithm/integration markers, and requires its tests and CI registration.
+
+Parser routing replaces only the five label-bearing patterns. Header parsing and body-header termination share one
+complete header-field scanner with explicit third-colon rejection. Action, blind, and bare target lists share
+scalar-safe label-at-offset, optional-index, delimiter, and remainder helpers; malformed arrow spellings remain raw
+syntax instead of producing a partial edge. Validator routing adds one `_check_rule_labels` immediately after the
+nonempty-spec check in both traced and untraced paths. It validates every declaration plus action, blind, and bare
+target and returns portable `invalid_rule_label` / `validate_rule_labels` evidence. Regex, lifecycle, split/mark,
+conditional, fluent, bounded-mode, function-shell, and ActionParser identifier patterns stay independently owned.
+
+The dependency order is exact: `.10.6.1.1` generates/routes the classifier and adds classifier/native route tests;
+`.2` drives the ten unique identities represented by all nine positives and both distinct pairs through AST,
+compiled maps/order/JSON, descriptor, generated plan/direct execution, reconstructed state, independently emitted
+host, selectors, diagnostics, traces, strict loader, and inline/file primary commands; `.3` drives all eight
+negatives through four declaration/target roles from both programmatic and reconstructed ASTs, whole-token and
+no-prefix source/primary failures, newline behavior, and unrelated identifier isolation; `.4` composes complete
+Julia/canonical proof and closes without semantic promotion. The exact complete commands are
+`tools/run_julia_local.sh`, `tools/run_primary_cli_matrix.sh`, the Unicode/semantic/generated/public checkers,
+mdBook/doctrines, and `tools/run_ci_local.sh`.

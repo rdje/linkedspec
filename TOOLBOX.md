@@ -450,6 +450,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   current Unicode 16 tables miss 5,175 required Unicode 17 `XID_Continue` scalars, admit 923 forbidden scalars,
   reject required `A·B`, accept forbidden `²`, and permit external-AST target bypass. See
   [[julia-semantic-introspection-authority-map]] and [[julia-unicode-rule-label-preflight]].
+- **JULIA UNICODE IMPLEMENTATION PLAN:** behavior-free `.10.6.1.0` freezes the generated target as internal
+  `julia/src/spec/UnicodeRuleLabel.jl`, produced by the existing neutral generator and independently checked for
+  all 806 endpoints, metadata, binary-search classification, complete validation, and `nextind`-safe prefix scan.
+  `.1` replaces only Julia's five label-bearing parser patterns and validates declaration/action/blind/bare AST
+  roles; `.2` proves all 9 positive/2 distinct identities through artifacts/execution/loader/CLI; `.3` owns all 8
+  negatives and unrelated grammar isolation; `.4` composes no-promotion signoff. Use a writable depot first when
+  probing locally: `LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$JULIA_DEPOT_PATH` with
+  `tools/run_julia_local.sh`; do not infer rule-label membership from host PCRE2 or from familiar examples.
 
 ---
 

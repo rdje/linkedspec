@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.0 — freeze Julia Unicode label routes
+
+Completed the behavior-free implementation plan for Julia's pinned Unicode 17 rule-label prerequisite. An
+exhaustive rerun reproduces exactly 5,175 contract scalars rejected by host PCRE2 `\w` and 923 forbidden scalars
+accepted. Native source remains 8/9 on the positive fixtures; `A·B` fails, `²` compiles, and `Top:::` becomes
+`Top`. Programmatic and JSON-reconstructed `Top-Rule` and `A·B` declarations plus action/blind/bare targets still
+pass validation, compilation, descriptor, generated-plan, and emitted-source construction.
+
+The frozen implementation adds one internal generated `julia/src/spec/UnicodeRuleLabel.jl` from the unchanged
+806-range neutral contract. It will provide exact metadata, binary-search scalar membership, complete-label
+validation, and a Julia-index-safe prefix scanner. The independent Unicode checker will regenerate/byte-compare
+the artifact, extract all endpoints, lock integration markers, and require its focused tests and CI registration.
+`LinkedSpecJulia.jl` will include it before the parser without exporting a new public API.
+
+Implementation leaf `.10.6.1.1` owns replacing only the five label-bearing parser patterns, whole-token/header/
+edge remainder handling, malformed-arrow preservation, and one four-role validator pass. Identity `.2` owns all
+nine positives and two distinct pairs through artifacts, executions, emitted host, selectors, diagnostics, trace,
+loader, and primary routes. Negative/isolation `.3` owns all eight negatives across source and external-AST trust
+paths while preserving adjacent grammars. Closeout `.4` owns composed complete/canonical proof. This planning leaf
+changes no Julia production/generated/test/fixture/contract behavior and leaves semantic governance at 6/20/81,
+rollout 4/9, and native admission 3/6.
+
+Final proof passes Unicode 806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, Knowledge Map
+682/5,142, mdBook, memory architecture, all four doctrines, and canonical local CI: Rust semantic admission 1/1
+in 77.35 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 641 seconds. Exact generated-only
+cleanup removes the 12-MB rendered book, 824-MB Rust dependency output, 303-MB incremental output, and 28-KB
+Python cache—about 1.14 GB total—while preserving tracked source and `rgx/pgen-issues/artifacts`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.0 — map Julia semantic authorities
 
 Completed a behavior-free Julia semantic-introspection and Unicode-label preflight before implementation. Julia

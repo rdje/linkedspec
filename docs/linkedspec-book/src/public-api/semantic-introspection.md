@@ -872,6 +872,21 @@ route one pinned classifier, prove exact positive/distinct identity and negative
 close without semantic promotion. Source/outcome, static graph, calls/staging/generated, query, runtime observation,
 and one exact 12-role admission then follow as `.10.6.2-.7`.
 
+Planning leaf `.10.6.1.0` is now complete without behavior changes. It fixes the generated target as internal
+`julia/src/spec/UnicodeRuleLabel.jl`, derived from the existing 806 neutral ranges and independently regenerated,
+byte-compared, and endpoint-checked. The artifact supplies binary-search scalar membership, complete-label
+validation, and a Julia-character-index-safe prefix scanner. The parser will replace only its five label-bearing
+host-regex patterns, including body-header detection and complete action/blind/bare target parsing; malformed
+suffixes and third colons cannot become valid prefixes. Both validator paths will check declarations and all three
+target kinds with one portable `invalid_rule_label` diagnostic before structural checks.
+
+The remaining proof is deliberately staged. `.10.6.1.1` owns generation plus parser/validator routing; `.2` owns
+all nine positive fixtures and both exact-distinct pairs across compiled, descriptor, generated, reconstructed,
+emitted, selector, diagnostic, trace, loader, and command routes; `.3` owns all eight negatives across source and
+external-AST roles plus unrelated identifier isolation; `.4` owns composed Julia/canonical signoff. Function,
+parameter, helper/action, lifecycle, split/mark, conditional, fluent, regex, and mode grammars remain separate and
+must not inherit the rule-label class. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1236,7 +1251,8 @@ The dependency order is:
 | `.10.5.5` | Dart typed runtime observation parent | complete |
 | `.10.5.6` | Dart composed semantic admission | complete; 12 roles, 20 exact queries, Dart-only promotion |
 | `.10.6.0` | Julia authority and Unicode preflight | complete; behavior-free map and dependency split |
-| `.10.6.1-.10.6.7` | Julia Unicode prerequisite through exact semantic admission | pending |
+| `.10.6.1.0` | Julia Unicode classifier/route plan | complete; exact behavior-free generator, parser, validator, fixture, isolation, and gate split |
+| `.10.6.1.1-.10.6.7` | Julia Unicode implementation through exact semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

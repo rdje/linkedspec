@@ -5,10 +5,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.0` — behavior-free Julia semantic/Unicode map and split.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities` is the assembled handoff commit from base `a0946c01`.
-- active_work_unit: `.10.6.0` is fully verified; artifact cleanup, guard replay, and commit assembly are in flight.
-- next_action: commit `.10.6.0` cleanly, then activate only `.10.6.1.0` to freeze Julia Unicode work before code.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.1.0` — exact behavior-free Julia Unicode implementation plan.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.6.1.0 - freeze Julia Unicode label routes` is assembled from clean `7bdb181f`.
+- active_work_unit: `.10.6.1.0` is fully planned and verified; final guards and commit are in flight.
+- next_action: commit `.10.6.1.0` cleanly, then activate only `.10.6.1.1` to generate and route the classifier.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 81 rejected mutations. Static/generated facts
@@ -45,16 +45,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   typed observation separate from trace, and callback identity passthrough across generated/emitted routes.
 - current_julia_unicode_preflight: Julia 1.12.6 PCRE2 10.47 uses Unicode 16 `\w`; versus pinned Unicode 17
   `XID_Continue`, 5,175 required scalars are missed and 923 forbidden accepted. `A·B` rejects, `²` compiles,
-  `Top:::` truncates, and external-AST action/blind/bare labels bypass validation into artifacts. `.10.6.1` owns
-  generated classifier/scanner, every parse/validation/artifact route, exact identity, negative/isolation, signoff.
+  `Top:::` truncates, and external-AST declarations/action/blind/bare targets bypass artifacts. `.10.6.1.0` freezes
+  one generated internal classifier, five parser routes, four validator roles, exact 9/8/2 identity/isolation, gates.
 - current_julia_split: `.10.6.1` Unicode; `.2` source/outcome; `.3` static; `.4` calls/staging/generated; `.5`
   typed/raw query; `.6` typed runtime observation; `.7` exact 12-role admission. Audit changes no behavior/ledger.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: Julia 3,711/primary/105; semantic 6/20/81 at 4/9+3/6; Unicode 806/9/8/2; KM 682/5,138; canonical Rust 80.05s, Dart 1/1, primary 66x2, Phase 0 1,031/653s; docs/doctrines pass.
+- current_signoff: `.1.0` probes reproduce 5,175/923, 8/9, `²`, `Top:::`, and 2x4x2 trust routes; Unicode 806/9/8/2, semantic 6/20/81 at 4/9+3/6, KM 682/5,142, book/doctrines, and canonical Rust 77.35s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s pass; exact generated cleanup reclaims about 1.14 GB.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30 minutes for canonical CI. Julia
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.0` cleanup, final guards, and commit assembly only.
+- blockers: none. in_flight_uncommitted: `.10.6.1.0` final guards and commit assembly only.

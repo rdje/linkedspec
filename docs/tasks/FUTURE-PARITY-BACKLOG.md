@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (behavior-free Julia semantic/Unicode authority audit `.10.6.0` maps exact native
-  owners and hazards and dependency-splits Unicode/source/static/calls/query/runtime/admission `.10.6.1-.7`)
+- Last updated: `2026-07-22` (behavior-free Julia Unicode plan `.10.6.1.0` freezes the exact generated classifier,
+  parser/validator routes, identity/isolation suites, and `.1-.4` gate order before implementation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9130,7 +9130,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities`
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.1`
-  Status: `pending`
+  Status: `active`
   Goal: Align every Julia rule-label route with pinned Unicode 17 `XID_Continue` before semantic construction.
   Children: `.10.6.1.0`, `.10.6.1.1`, `.10.6.1.2`, `.10.6.1.3`, `.10.6.1.4`
   Depends on: `.10.6.0`
@@ -9140,14 +9140,86 @@ before implementation.
     external-AST bypass cases without widening unrelated identifier grammars; close complete Julia/canonical proof
     without semantic rollout or admission promotion.
 
+  #### Acceptance Checklist
+
+  - [x] **FREEZE BEFORE CODE** — Reproduce the exact host-table census and parser/external-AST bypasses, then fix
+    the generated artifact, parser/validator ownership, route suites, isolation suites, and gate order in `.0`.
+  - [ ] **GENERATE / ROUTE** — Emit one deterministic internal Julia classifier/scanner from the existing neutral
+    ranges and consume it at all five parser sites plus the authoritative declaration/target validator boundary.
+  - [ ] **EXACT IDENTITY** — Prove all nine positive fixtures and both distinct pairs through every parsed,
+    compiled, reconstructed, generated, emitted, selector, diagnostic, trace, loader, and primary route.
+  - [ ] **NEGATIVE / ISOLATION** — Reject all eight negatives without prefix recovery or external-AST bypass and
+    prove function/parameter/helper/action/lifecycle/split/conditional/fluent/mark/regex grammars are unchanged.
+  - [ ] **COMPOSE / NO PROMOTION** — Pass complete Julia and canonical gates, close `.10.6.1`, and keep semantic
+    governance exactly 6/20/81 at rollout 4/9 and native admission 3/6 before handing off to `.10.6.2`.
+
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.0`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Freeze the generated Julia Unicode classifier/scanner contract and route/isolation proof split.
     Depends on: `.10.6.0`
     Acceptance: Reproduce the 5,175-missing/923-extra host census and all parser/validator/artifact bypasses; map
       generator outputs, all five parser patterns, validator declaration/target owners, reconstructed AST routes,
       positive/distinct/negative fixtures, downstream identities, primary/canonical commands, and exact `.1-.4`
       dependency order before production behavior changes.
+    Verification: Activated task-tree-first from clean audit commit `7bdb181f` at ahead 17. With the writable
+      Julia depot stacked before the installed depot, an exhaustive valid-scalar rerun reproduces exactly 5,175
+      pinned Unicode 17 `XID_Continue` false negatives and 923 false positives from host PCRE2 `^\w+$`; the first
+      missing scalars are U+00B7/U+0387/U+088F/U+0903 and the first extras are U+00B2/U+00B3/U+00B9/U+00BC. The
+      neutral positive matrix remains 8/9: only `A·B` fails. Forbidden `²` still compiles and `Top:::` still
+      parses as `Top`. Programmatic and JSON-reconstructed `Top-Rule` plus `A·B` declarations and action/blind/bare
+      targets all pass validation, compilation, descriptor, generated-plan, and emitted-source construction,
+      confirming the exact trust routes that `.1` must close.
+
+      The frozen generator target is `julia/src/spec/UnicodeRuleLabel.jl`, emitted by existing pinned-data owner
+      `unicode_case/generate_unicode_rule_label_contract.py` through a new `--julia-output` without changing the
+      neutral contract, Unicode version, ranges, fixtures, or original task-owner metadata. It contains exact
+      contract/version/hash/range-count constants, the 806 maximally merged endpoint pairs, integer/scalar binary
+      search, nonempty complete-label validation, and a longest-prefix result whose indices use Julia string
+      iteration/`nextind` rather than byte arithmetic or host properties. `tools/check_unicode_rule_label_contract.py`
+      must independently regenerate/byte-compare/extract all endpoints and lock algorithm plus integration markers;
+      `LinkedSpecJulia.jl` includes the internal artifact before `Parser.jl` and exports no new public API.
+
+      Parser work in `.1` replaces only `_HEADER_PATTERN`, `_BODY_HEADER_PATTERN`, `_ACTION_PATTERN`,
+      `_BLIND_PATTERN`, and `_BARE_EDGE_PATTERN`. One scalar-safe scanner family owns header fields/body termination,
+      action/blind/bare target lists, optional indices, delimiter/remainder validity, third-colon rejection, and raw
+      preservation for malformed arrow lines. It deliberately leaves regex, lifecycle, split/mark, conditional,
+      fluent, bounded-mode, function-shell, and ActionParser identifier patterns untouched. Validator work inserts
+      `_check_rule_labels` immediately after the at-least-one-rule check in traced and untraced paths and covers
+      every `RuleHeader`, `ActionEdgeBodyElementKind`, `BlindEdgeBodyElementKind`, and
+      `BareEdgeBodyElementKind` target with portable `invalid_rule_label` / `validate_rule_labels` diagnostics.
+
+      Proof is dependency-locked: `.1` owns generated classifier plus parser/validator routes in
+      `unicode_rule_label_classifier_test.jl` and `unicode_rule_label_routes_test.jl`; `.2` owns the ten unique
+      identities represented by 9 positives/2 distinct pairs across AST, compiled JSON/order/maps, descriptor,
+      plan, reconstruction, direct/generated execution, independently emitted host, selector, diagnostic, trace,
+      strict loader, and inline/file primary routes; `.3` owns 8 negatives x 4 roles x programmatic/reconstructed
+      trust paths, whole-token/no-prefix/newline/primary rejection, and all adjacent identifier isolation; `.4`
+      owns committed-code composition, durable sync, cleanup, and no-promotion closeout. `runtests.jl`, the Unicode
+      checker, and `run_ci_local.sh` acquire omission-sensitive registrations. Focused Julia includes, complete
+      `tools/run_julia_local.sh`, primary 66x2, Unicode/semantic/generated/public checkers, mdBook/doctrines, and
+      `tools/run_ci_local.sh` are the exact gate order. No production, generated artifact, test, fixture, contract,
+      semantic response, rollout, or admission behavior changes in `.0`.
+
+      Final proof passes the Unicode checker at 806 ranges / 9 positives / 8 negatives / 2 distinct pairs,
+      semantic governance at 6 fixture groups / 20 query digests / 81 rejected mutations with rollout 4/9 and
+      admission 3/6, Knowledge Map at 682 facts / 5,142 question keys, mdBook, memory architecture, all four
+      doctrines, and diff hygiene. Canonical local CI passes Rust semantic admission 1/1 in 77.35 seconds, Dart
+      admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 641 wallclock seconds. The rendered mdBook, Rust
+      debug dependency/incremental output, and Python bytecode cache are then removed exactly, reclaiming about
+      1.14 GB without touching tracked source or `rgx/pgen-issues/artifacts`.
+
+    #### Acceptance Checklist
+
+    - [x] **REPRODUCE EXACTLY** — Exhaustive scalar and source probes reproduce 5,175 missing / 923 extra,
+      positive 8/9, `²` acceptance, `Top:::` truncation, and declaration/action/blind/bare external-AST bypasses.
+    - [x] **GENERATOR / CLASSIFIER** — Freeze the one new generator output, constants, 806 endpoint table,
+      binary-search membership, complete validator, scalar-safe prefix scan, independent regeneration, and include.
+    - [x] **PARSER / VALIDATOR** — Name all five replaced label patterns, scanner helpers/token boundaries, raw
+      malformed-arrow preservation, validator placement, four AST roles, and exact portable diagnostic ownership.
+    - [x] **ROUTES / ISOLATION** — Assign exact 9/8/2 fixture matrices, reconstructed/programmatic trust paths,
+      every downstream identity route, and unrelated grammar assertions to `.1-.3` without overlap.
+    - [x] **GATES / NO BEHAVIOR** — Freeze focused/complete/primary/contract/book/doctrine/canonical order and `.4`
+      closeout while retaining semantic 6/20/81, rollout 4/9, and admission 3/6; `.0` changes documentation only.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.1`
     Status: `pending`
@@ -11695,7 +11767,9 @@ Dart `.10.5` are complete. Governance is six groups / 20 responses / 81 mutation
 admission 3/6. Behavior-free Julia audit `.10.6.0` maps the reusable staged/compiled/action/diagnostic/generated/
 runtime authorities, missing opaque source/query/observation seams, and exact ADR `0051` host-regex and external-
 AST bypass prerequisite. It splits all implementation into `.10.6.1-.7` without changing Julia behavior or the
-neutral ledgers. `.10.6.1.0` is the only next eligible leaf after the audit's clean commit.
+neutral ledgers. `.10.6.1.0` is complete from audit commit `7bdb181f`: the exact generated classifier, parser/
+validator routes, fixture/identity/isolation suites, and gate sequence are frozen without behavior. `.10.6.1.1`
+is the sole next eligible leaf after the clean plan commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -12172,7 +12246,9 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `done` | Composed committed-code runtime-observation signoff closes the parent without semantic promotion. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `done` | One exact 12-role consumer admits Dart at 6/20/81, rollout 4/9, admission 3/6, and closes `.10.5`. |
 | 74.5.0 | `FUTURE-PARITY-BACKLOG.10.6.0` | `done` | Exact Julia semantic/Unicode authority map and `.10.6.1-.7` split close without behavior or governance change. |
-| 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `pending` | Freeze the generated Julia Unicode classifier, routes, isolation, and signoff plan after the clean audit commit. |
+| 74.5.1 | `FUTURE-PARITY-BACKLOG.10.6.1` | `active` | Align every Julia rule-label route to pinned Unicode 17 without semantic promotion. |
+| 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `done` | Exact generated Julia classifier/scanner, five parser routes, validator roles, fixture/isolation suites, and gates are frozen without behavior. |
+| 74.5.1.1 | `FUTURE-PARITY-BACKLOG.10.6.1.1` | `pending` | Generate and route the pinned classifier through every Julia parser and validator seam. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -12847,6 +12923,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.0` | Exact Julia Unicode 17 versus PCRE2 census (5,175 missing / 923 extra), source 8/9 plus `A·B`/`²`/`Top:::` boundaries, and 2 labels x 4 AST roles x 2 trust-route artifact probes; frozen generator/classifier/parser/validator/test/gate plan; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; KM 682/5,142; book/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 77.35s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 641s; exact 1.14-GB generated book/Rust/Python cleanup. | PASS. Every Julia Unicode implementation and proof seam is dependency-owned by `.1-.4`; no production/generated/test/fixture/contract behavior or semantic ledger changes, and `.10.6.1.1` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.0` | Knowledge/Toolbox/ADR retrieval; exact Julia source/compiled/failure/calls/staged/generated/runtime/trace/loader/API probes; PCRE2 10.47 Unicode 16 census versus pinned Unicode 17 (5,175 missing / 923 extra), 9-positive/8-negative/distinct and external-AST bypass probes; unchanged Julia 3,711/primary/105; semantic 6/20/81 at 4/9 + 3/6; Unicode 806/9/8/2; KM 682/5,138; book/memory/task/four doctrines/diff; focused repeated-action marker repair; canonical Rust admission 1/1 in 80.05s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 653s; cleanup. | PASS. Two fact cards and public/live docs preserve exact authorities and foundational Unicode/validation risks; `.10.6.1-.7` are dependency-ordered, no behavior or ledger changes, and `.10.6.1.0` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.6` | One exact 12-role Dart admission consumer; pre-promotion RED at status only and GREEN 1/1; all 20 digests/routes/privacy/pages/budgets/errors/explain/non-interference/denial boundaries; complete Dart format 85/0, fatal analysis, package 336/336, primary 66x2, corpus 105/105; semantic 6/20/81 at rollout 4/9 and admission 3/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 680/5,105; book/memory/task/four doctrines/diff/cleanup; canonical Rust admission 1/1 in 83.16s, Dart admission 1/1, primary 66x2, Phase 0 1,031/1,031 in 650s, complete gate 1,716.72s. | PASS. Dart is the third admitted native semantic backend, only Dart advances, `.10.5` closes without semantic production-code change, and Julia `.10.6` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.4` | No production/test change; committed semantic 39/39 and adjacent emitter/diagnostic/runtime 24/24; complete Dart format 84/0, fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 679/5,095; book/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 77.24s, primary 66x2, Phase 0 1,031/1,031 in 621s. | PASS. Runtime observation is composition-closed through every Dart route without production or ledger change; exact admission `.10.5.6` activates. |
@@ -13074,6 +13151,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.1.0` | `FUTURE-PARITY-BACKLOG.10.6.1.0 - freeze Julia Unicode label routes` | Behavior-free exact generated classifier/scanner, five parser routes, four-role validation, 9/8/2 identity/isolation and `.1-.4` gate plan; exact census/bypass probes, semantic/Unicode/KM/book/doctrines, canonical Rust 77.35s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s, and 1.14-GB cleanup without behavior or ledger movement. |
 | `FUTURE-PARITY-BACKLOG.10.6.0` | `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities` | Behavior-free typed authority/source/query/runtime map; exact 5,175/923 Unicode and external-AST bypass preflight; `.10.6.1-.7` split; Julia 3,711/105/primary, semantic/Unicode, KM/book/doctrines, canonical Rust 80.05s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s, and cleanup without ledger movement. |
 | `FUTURE-PARITY-BACKLOG.10.5.6` | `FUTURE-PARITY-BACKLOG.10.5.6 - admit Dart semantic introspection` | One exact 12-role consumer over existing Dart semantic owners; 20 digests, eight topology mutations, rollout 4/9, admission 3/6, complete Dart 336/105/66x2, canonical Rust admission 83.16s plus Dart admission 1/1 and Phase 0 1,031/650s, complete gate 1,716.72s, KM/book/doctrines, cleanup, and parent closeout without semantic production-code change. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `FUTURE-PARITY-BACKLOG.10.5.5.4 - close Dart runtime observation` | No-code committed composition 39/adjacent 24/complete Dart 335/105/66x2, semantic/Unicode/generated/public, canonical admission 77.24s plus Phase 0 1,031/621s, KM/book/doctrines, cleanup, and parent closure without semantic promotion. |
