@@ -520,11 +520,12 @@ Three backbone items tracked major structural modernization — all done:
   host-`\w` declarations reject `Töp`, action/blind references silently truncate it to `T`, bare references remain
   raw, and external invalid labels bypass validation. Shared `.10.5.0.1.0-.1` now generate/guard one pinned class,
   consume it at all 12 first-authoritative `specs/spec.spec` label sites, and make Dart directly execute current
-  lifecycle/bare-edge forms. Corpus freshness `.10.5.0.1.2` and Dart label parity `.10.5.0.2` precede semantic
-  source/static/calls/query/runtime/admission `.10.5.1-.10.5.6`. The four green `spec_spec_*` corpus inputs are stale
-  identical grammar copies, so shared closure still requires verbatim regeneration, byte/hash freshness, and
-  cross-runtime proof before 105/105 can prove current self-hosting. Neither audit nor prerequisites
-  promote a ledger.
+  lifecycle/bare-edge forms. Corpus freshness `.10.5.0.1.2` now keeps all four `spec_spec_*` inputs byte-identical
+  to canonical source and composes five-backend current-grammar proof. Dart `.10.5.0.2.0-.1` generate and consume
+  the native classifier/scanner; `.10.5.0.2.2` proves all positive/distinct identities through compiled,
+  generated, reconstructed, emitted, selector, diagnostic, trace, loader, and command routes. Negative/isolation
+  and composed signoff remain before semantic source/static/calls/query/runtime/admission `.10.5.1-.10.5.6`.
+  Neither audit nor prerequisites promote a ledger.
   Governance follow-up `.22` separately tracks a stable home for immutable cross-contract status markers.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use

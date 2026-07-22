@@ -235,15 +235,15 @@ exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates a
 class, consumes it at all 12 label sites in first-authoritative `specs/spec.spec`, freshness-locks all four corpus
 copies, and proves current grammar on five backends. Dart `.10.5.0.2.0-.1` generates the matching native scalar
 classifier/prefix scanner, routes headers plus action/blind/bare targets through it, and validates declarations and
-targets from parsed, reconstructed, and programmatic ASTs. Exact downstream route proof and negative/identifier-
-isolation signoff remain `.10.5.0.2.2-.4`; source/static/calls/query/runtime/admission follow as
-`.10.5.1-.10.5.6`. Julia and Lua later inherit the same pinned-label prerequisite before their v1 admissions.
+targets from parsed, reconstructed, and programmatic ASTs. `.10.5.0.2.2` proves every positive/distinct neutral
+identity through compiled maps/order, descriptors, generated plans, reconstruction, isolated emitted execution,
+selectors, diagnostics, traces, strict loaders, and primary commands. Negative/identifier isolation and composed
+signoff remain `.10.5.0.2.3-.4`; source/static/calls/query/runtime/admission follow as `.10.5.1-.10.5.6`. Julia
+and Lua later inherit the same pinned-label prerequisite before their v1 admissions.
 
-Do not interpret Dart's current 105/105 corpus result as execution proof for today's self-hosted grammar. The four
-`spec_spec_*` inputs are stale identical copies that predate canonical bare-edge productions and the explicit
-lifecycle alternation. The generator is specified to copy source verbatim, so `.10.5.0.1` must regenerate them,
-enforce byte/hash freshness, and compose cross-runtime proof. The current Dart structural bridge is already green;
-the unchanged corpus cannot claim that proof until `.10.5.0.1.2` refreshes it.
+Dart's current 105/105 corpus result includes four byte-identical current `specs/spec.spec` inputs. Shared
+`.10.5.0.1.2` regenerated them verbatim, enforces byte/hash freshness, and composes current-grammar execution across
+all five backends under both command environments.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

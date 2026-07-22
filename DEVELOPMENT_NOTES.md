@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.2` — downstream label routes must be proved as identity channels):
+  The authority audit showed no missing production conversion seam after native parsing/validation: compiled maps,
+  descriptors, generated plans and payloads, selectors, diagnostics, traces, and strict-loaded text already carry
+  Dart `String` values. The bounded work is therefore omission-sensitive executable proof, not another label
+  classifier or normalization layer.
+
+  One contract-driven source declares every unique positive/distinct label and returns its own exact spelling. The
+  proof compares parsed/compiled order and keys, compiled JSON, descriptors, generated plans, reconstructed AST and
+  payload state, direct native/generated results, and both members of each distinct pair. A real isolated caller
+  package analyzes freshly emitted source and executes every label, so Base64 payload round-trip and source
+  generation are not inferred from in-process structures.
+
+  Strict loading and primary inline/file commands cover actual UTF-8 boundaries. Native/generated missing-selector
+  diagnostics assert the complete structured envelopes, including the Unicode handler-source label; native and
+  generated traces retain selected/source identity. No case folding or normalization is performed. Exhaustive
+  negative fixtures and unrelated function/helper/lifecycle/fluent/mark grammar isolation remain deliberately in
+  `.10.5.0.2.3`.
+
+  Focused identity proof passes 4/4; eight adjacent emitter/selector/loader/CLI/trace suites pass 46/46. The complete
+  Dart gate passes format, fatal analysis, package 291, primary 66x2, and corpus 105/105. Documentation sync also
+  removed a stale mdBook caveat about pre-refresh `spec_spec_*` inputs; `.10.5.0.1.2` already keeps those four files
+  byte-identical to canonical source. Knowledge Map is 672/5,002; mdBook and all four doctrines pass. Canonical CI
+  passes Rust semantic admission in 76.73 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds, exit 0.
+  Semantic governance remains 6/20/73, rollout 3/9, admission 2/6.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.1` — membership and token termination must share one scanner):
   Dart's former declaration/action/blind/bare regexes embedded host `\\w`; declarations rejected Unicode while
   action/blind references could accept only a valid prefix. All four native surfaces now call the generated

@@ -466,14 +466,16 @@ class, consumes it at all 12 first-authoritative `specs/spec.spec` label sites, 
 copies, and proves current grammar across five backends. Dart `.10.5.0.2.0-.1` generates the corresponding native
 classifier/scanner, replaces all host-regex header/action/blind/bare label scans, rejects invalid-prefix
 truncation, and validates parsed plus external AST declarations/targets. Existing compiled maps, descriptors,
-generated plans/emitted source, and explicit selectors already preserve valid Unicode strings exactly; `.2-.4`
-own exhaustive route, negative/isolation, and composed proof. No prerequisite advances semantic rollout/admission.
+generated plans/emitted source, and explicit selectors preserve valid Unicode strings exactly. Leaf `.2` now
+proves that claim for all nine positive fixtures and both distinct pairs across compiled state, reconstruction,
+an isolated emitted package, selectors, diagnostics, traces, strict loading, and primary commands. Leaves `.3-.4`
+still own exhaustive negative/identifier isolation and composed signoff. No prerequisite advances semantic
+rollout/admission.
 
-The complete Dart corpus's 105/105 result is not yet proof of that current self-hosted authority. Its four
-`spec_spec_*` inputs are identical older snapshots: they omit the canonical bare-edge productions and retain broad
-lifecycle `(\w++)`, while current `specs/spec.spec` uses the explicit lifecycle alternation. Direct Dart execution
-of current source is now green, but the shared prerequisite must still regenerate those fixtures verbatim, reject
-byte/hash drift, and compose cross-runtime proof before citing corpus parity.
+The complete Dart corpus's 105/105 result now includes four byte-fresh `spec_spec_*` inputs copied from current
+`specs/spec.spec`. Shared closeout `.10.5.0.1.2` added exact hash/byte enforcement and composed the current grammar
+across Perl, Rust, Dart, Julia, and Lua under default and POSIX environments, so the earlier stale-snapshot caveat
+no longer applies.
 
 ## Exact v1 record model
 

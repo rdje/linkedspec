@@ -12,16 +12,17 @@ answers:
   - "where can Dart semantic slot events be captured"
   - "are the spec_spec corpus fixtures current with specs/spec.spec"
   - "does the Dart 105 fixture corpus prove the current self-hosted grammar"
-  - "can Dart execute current specs/spec.spec while the corpus remains stale"
+  - "does Dart execute freshness-locked current specs/spec.spec"
   - "can Dart generated metadata reconstruct a semantic index"
   - "does Dart compiled state preserve Unicode rule labels"
+  - "which Dart routes prove exact Unicode rule label identity"
   - "is specs/spec.spec aligned with Unicode rule labels"
   - "what are the Dart semantic introspection implementation leaves"
 date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0 and .10.5.0.2.0-.1; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
-reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0 and .10.5.0.2.0-.2; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
+reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_identity_routes_test.dart && cd ..; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
 ---
 
 Dart already owns most semantic meaning in typed, reusable layers. Staged parsing produces `SpecFile` rules and
@@ -49,8 +50,11 @@ strings, not reclassify them. The generated Dart Unicode 17 classifier/complete 
 and is independently locked, including supplementary-safe UTF-16 slicing. Native header/action/blind/bare parsing
 consumes it, prevents invalid suffix truncation, and validation rejects invalid declarations/targets from parsed,
 JSON-reconstructed, and programmatic ASTs with one portable diagnostic. Function/helper identifiers, lifecycle
-markers, fluent methods, and mark names remain separate grammars. Exact downstream artifact/selector/diagnostic/
-trace/loader proof is the remaining label prerequisite before composed Dart label signoff.
+markers, fluent methods, and mark names remain separate grammars. All nine positive fixtures and both distinct
+pairs now retain exact identity through compiled maps/order, descriptors, generated plans, reconstruction,
+isolated emitted-package execution, selectors, diagnostics, traces, strict loading, and primary commands. The
+remaining label prerequisites are exhaustive negative rejection and unrelated-identifier isolation before
+composed signoff.
 
 The audit also found a neutral authority conflict outside Dart's hardcoded parser. ADR `0012` makes
 `specs/spec.spec` the first authoritative `.spec` grammar, but its rule-header and edge productions embedded host

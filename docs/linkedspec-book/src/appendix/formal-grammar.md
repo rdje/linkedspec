@@ -192,6 +192,12 @@ rule-label sites: headers and every action, blind-call, and bare-edge block/flue
 names, helper names, lifecycle markers, fluent method names, and mark names retain their separate identifier
 grammars; the rule-label expansion does not broaden them.
 
+The Dart native frontend consumes the corresponding generated scalar classifier and prefix scanner. Its exact-
+identity proof covers every positive neutral fixture and both distinct pairs through compiled maps/order, JSON,
+descriptors, generated plans and emitted source, reconstruction, selectors, diagnostics, traces, strict loading,
+and primary commands. These layers preserve the decoded label as an immutable string; they do not normalize or
+case-fold it.
+
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
 prefix such as `Top-Rule::`, `Top Rule::`, or `$Top::`, and an extra colon such as `Top:::` is not part of a valid

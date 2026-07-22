@@ -57,7 +57,11 @@ The artifact is the single native rule-label authority. Leaf `.10.5.0.2.1` route
 bare targets through its supplementary-safe prefix scanner and revalidates every declaration/target through its
 complete-label predicate. This applies equally to parsed, `SpecFile.fromJson`, and programmatic ASTs; malformed
 suffixes cannot silently truncate to a valid prefix. Function/helper/lifecycle/fluent/mark identifiers retain
-their separate existing grammars.
+their separate existing grammars. Dedicated identity proof then drives all nine positive contract labels and both
+distinct pairs through compiled maps/order, descriptors, generated plans, AST/emitted-payload reconstruction, an
+isolated emitted package, native/generated selectors, exact diagnostics/traces, strict loading, and inline/file
+primary commands. Those routes compare and transport immutable strings exactly: no normalization or case folding
+is introduced downstream.
 
 ## Generated source
 

@@ -50,6 +50,12 @@ boundaries and neutral fixtures. Dart's native header/action/blind/bare parsers 
 validation applies the complete predicate to parsed, reconstructed, and programmatic declarations/targets. Invalid
 suffixes are rejected rather than truncated; unrelated identifier grammars remain separate.
 
+The downstream Dart identity suite consumes the neutral fixtures directly. It proves all nine positive labels and
+both distinct pairs retain exact spelling and scalar order through compiled state, descriptors, generated plans,
+AST and emitted-payload reconstruction, isolated emitted-package execution, selectors, diagnostics, traces,
+strict loading, and primary inline/file commands. This is transport/identity proof only; the separate negative and
+unrelated-identifier isolation leaf remains responsible for exhaustive rejection coverage.
+
 The generator also writes
 `unicode_case/unicode_rule_label_regex_class.txt`: one metadata-bearing UTF-8 literal-range class for the
 self-hosted grammar. Its endpoints encode the same 806 ranges without host `\w`, Unicode-property lookup, or

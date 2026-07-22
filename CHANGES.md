@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.2 — prove Dart Unicode label identity
+
+A dedicated Dart suite now drives all nine positive Unicode rule-label fixtures and both distinct pairs through
+every downstream identity route. Parsed and compiled order/maps, compiled JSON, descriptors, generated plans,
+JSON-reconstructed AST state, and emitted-payload reconstruction retain the exact scalar sequence. Native and
+direct-generated execution select every label independently, including precomposed/decomposed and case-distinct
+pairs.
+
+The emitted-source leg builds an isolated caller package, runs offline dependency resolution and fatal analysis,
+then executes every exact label while checking generated metadata, plan rows, and results. Strict file loading,
+inline/file primary commands, native/generated missing-selector diagnostics, and native/generated trace output
+retain exact Unicode source and rule identity without normalization or case folding. No production adapter was
+needed because the existing downstream layers already transport immutable Dart strings exactly.
+
+The contract checker and canonical CI tracked-file topology now require the omission-sensitive suite and its
+compiled/emitted/loader/CLI/trace markers. Focused identity proof passes 4/4 and eight adjacent route suites pass
+46/46. The complete Dart gate passes format, fatal analysis, 291 package tests, primary 66x2, and corpus 105/105.
+Public docs, mdBook, and Knowledge Map now distinguish this completed positive/distinct identity proof from
+negative-label and unrelated-identifier isolation owned by `.10.5.0.2.3`. Semantic governance remains 6/20/73 at
+rollout 3/9 and native admission 2/6. Knowledge Map 672/5,002, mdBook, memory/task metadata, all four doctrines,
+and whitespace pass. Canonical CI passes Rust semantic admission in 76.73 seconds, primary 66x2, and Phase 0
+1,031/1,031 in 623 seconds, exit 0.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.1 — route Dart Unicode labels
 
 Dart's native parser now uses the generated Unicode 17.0.0 `XID_Continue` prefix scanner for rule declarations

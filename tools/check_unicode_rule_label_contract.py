@@ -41,6 +41,9 @@ DART_CLASSIFIER_TEST_PATH = (
 DART_NATIVE_ROUTES_TEST_PATH = (
     ROOT / "dart" / "test" / "unicode_rule_label_routes_test.dart"
 )
+DART_IDENTITY_ROUTES_TEST_PATH = (
+    ROOT / "dart" / "test" / "unicode_rule_label_identity_routes_test.dart"
+)
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 SELF_HOSTED_CORPUS_CASES = (
@@ -100,6 +103,7 @@ def main() -> None:
         DART_SELF_HOSTED_TEST_PATH,
         DART_CLASSIFIER_TEST_PATH,
         DART_NATIVE_ROUTES_TEST_PATH,
+        DART_IDENTITY_ROUTES_TEST_PATH,
         MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
@@ -469,6 +473,23 @@ def main() -> None:
     ):
         if marker not in dart_native_routes_test:
             fail(f"Dart native route proof missing: {marker}")
+    dart_identity_routes_test = DART_IDENTITY_ROUTES_TEST_PATH.read_text(
+        encoding="utf-8"
+    )
+    for marker in (
+        "every positive and distinct label survives compiled artifacts",
+        "emitted source reconstructs and executes every exact label",
+        "strict loading and primary commands preserve every exact label",
+        "selectors diagnostics and traces retain exact Unicode identity",
+        "_contract['positive_fixtures']",
+        "_contract['distinct_fixtures']",
+        "emitDartSourceV2",
+        "loadAndCompileSpec",
+        "runLinkedSpecDartPrimaryCli",
+        "executeGeneratedParserWithTraceV2",
+    ):
+        if marker not in dart_identity_routes_test:
+            fail(f"Dart exact-identity route proof missing: {marker}")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -482,6 +503,7 @@ def main() -> None:
         "require_tracked_file dart/lib/src/parser/unicode_rule_label.dart",
         "require_tracked_file dart/test/unicode_rule_label_classifier_test.dart",
         "require_tracked_file dart/test/unicode_rule_label_routes_test.dart",
+        "require_tracked_file dart/test/unicode_rule_label_identity_routes_test.dart",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

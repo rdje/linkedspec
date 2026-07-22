@@ -852,8 +852,12 @@ content migration exists yet.
   internal Dart artifact from the same 806 neutral ranges, with binary-search scalar classification, complete-label
   validation, and a supplementary-safe longest-prefix scanner. Consumption leaf `.10.5.0.2.1` now routes native
   headers plus action/blind/bare targets through that scanner, prohibits invalid-prefix truncation, and validates
-  parsed, reconstructed, and programmatic declarations/targets with one portable diagnostic. Downstream exact
-  artifact/selector/trace/loader identity remains `.10.5.0.2.2`; no semantic rollout/admission is promoted.
+  parsed, reconstructed, and programmatic declarations/targets with one portable diagnostic. Identity leaf
+  `.10.5.0.2.2` now drives all nine positive labels and both distinct pairs through parsed/compiled order and
+  maps, JSON/descriptors, generated plans, AST and emitted-payload reconstruction, an isolated emitted caller
+  package, native/generated selectors, diagnostics, traces, strict loading, and inline/file primary commands.
+  Every route retains the exact scalar sequence without normalization or case folding. Negative-label and
+  unrelated-identifier isolation remain `.10.5.0.2.3`; no semantic rollout/admission is promoted.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -8215,11 +8215,33 @@ before implementation.
       gate, and generated cleanup; commit from a clean boundary before activating downstream route leaf `.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.2`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Prove exact Dart Unicode rule-label identity across every downstream route.
     Depends on: `.10.5.0.2.1`
     Acceptance: Preserve every positive and distinct label through compiled maps, descriptors, generated plans,
       emitted/reconstructed source, explicit selectors, diagnostics, traces, strict loaders, and primary commands.
+    Verification: Contract-driven proof covers all 9 positive labels and 2 distinct pairs through parsed/compiled
+      order and maps, JSON/descriptors, generated plans, AST and emitted-payload reconstruction, direct native and
+      generated execution, one isolated analyzed emitted caller package, strict loading, inline/file primary
+      commands, exact selector diagnostics, and native/generated traces. Focused suite passes 4/4; eight adjacent
+      emitter/selector/loader/CLI/trace suites pass 46/46. Complete Dart passes format, fatal analysis, package 291,
+      primary 66x2, and corpus 105/105. Production code is unchanged because every downstream route already
+      transports exact immutable strings without normalization or folding. Knowledge Map 672/5,002, mdBook,
+      memory/task metadata, all four doctrines, and whitespace pass. Canonical CI passes Rust semantic admission
+      1/1 in 76.73 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds, exit 0.
+
+    #### Acceptance Checklist
+
+    - [x] **NEUTRAL FIXTURE BREADTH** — Drive all nine positive labels and both distinct pairs directly from the
+      neutral contract; retain exact spelling, scalar sequence, case, and normalization form.
+    - [x] **COMPILED / GENERATED IDENTITY** — Prove parsed order, compiled order/maps, JSON, descriptors, generated
+      plans, AST reconstruction, and direct generated execution preserve every exact label.
+    - [x] **EMITTED PACKAGE IDENTITY** — Extract and reconstruct the strict emitted payload, then analyze and run an
+      isolated caller package that selects every label and returns matching metadata, plan, and values.
+    - [x] **ROUTED IDENTITY** — Prove strict file loading, inline/file primary commands, explicit native/generated
+      selectors, portable diagnostics, and native/generated traces retain exact Unicode identities.
+    - [x] **SIGNOFF / HANDOFF** — Pass complete Dart and canonical gates, synchronize public/durable docs and the
+      Knowledge Map, clean generated artifacts, and commit before activating negative/isolation leaf `.2.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.3`
     Status: `pending`
@@ -10586,11 +10608,11 @@ Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native 
 lifecycle/bare structure, all four self-hosted corpus inputs are freshness-locked, physical-line boundaries reject
 label-prefix truncation, and current grammar passes the exact five-backend default+POSIX matrix.
 
-Generated-classifier foundation `.10.5.0.2.0` and native parser/validator consumption `.10.5.0.2.1` are signoff-
-complete. One generated scanner now owns headers plus action/blind/bare targets, invalid suffixes cannot silently
-truncate, and parsed/deserialized/programmatic labels share portable validation. After the clean `.1` commit, exact
-downstream identity leaf `.10.5.0.2.2` is the next pending frontier; negative/isolation proof and composed signoff
-remain `.3-.4`.
+Generated-classifier foundation `.10.5.0.2.0`, native parser/validator consumption `.10.5.0.2.1`, and exact
+downstream identity proof `.10.5.0.2.2` are signoff-complete. All 9 positive labels and 2 distinct pairs retain
+exact identity through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes.
+After the clean `.2` commit, negative rejection and unrelated-identifier isolation `.2.3` is next; composed signoff
+remains `.2.4`.
 
 ### Historical frontier sequence
 
@@ -10999,7 +11021,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `in_progress` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.0.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.2.0` | `done` | Generated and independently locked the exact Dart classifier/validator/prefix-scanner primitives. |
 | 74.4.0.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `done` | Native headers/targets and external-AST validation consume the exact generated Dart primitives. |
-| 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `pending` | Prove exact Unicode identity through every Dart artifact, selector, diagnostic, trace, loader, and CLI route. |
+| 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `done` | Every positive/distinct Unicode identity survives Dart artifacts, selectors, diagnostics, traces, loaders, and CLI routes. |
 | 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `pending` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
 | 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `pending` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
