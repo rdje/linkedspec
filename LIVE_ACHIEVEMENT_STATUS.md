@@ -8,9 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Immutable Dart observed-index derivation `FUTURE-PARITY-BACKLOG.10.5.5.2` is active from the clean typed-capture
-  boundary. No `.2` implementation has started; inspect the admitted Rust runtime projection first, then add exact
-  Dart topology validation and the twentieth response digest.
+- Generated/emitted Dart observation propagation `FUTURE-PARITY-BACKLOG.10.5.5.3` is task-tree owned from the clean
+  immutable-derivation handoff; no `.3` implementation has started. Its first action is to inspect generated/source-
+  emitter exception translation before threading the optional sink with exact caller failure identity.
 
 Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
 `query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
@@ -19,7 +19,13 @@ admission 77.48s + primary 66x2 + Phase 0 1,031/656s. Audit `.10.5.5.0` freezes 
 final-result capture, absent-sink/no-query authority, generated-wrapper callback exception passthrough, immutable
 derivation, and `.1-.4` dependency order. Capture `.1` now exports exact typed invocation-local events across
 direct/loaded/reconstructed/traced/generated-plan engine routes. Focused 5, adjacent 81, static composition 28,
-and complete Dart 81/0 + 329 + 66x2 + 105 pass. Observed-index derivation, rollout, and admission remain absent.
+and complete Dart 81/0 + 329 + 66x2 + 105 pass.
+Derivation `.2` now validates retained events against detached rule/slot/`selects_regex` topology, derives shapes
+only from static facts, creates a separate canonical execution/event/`observed_as` snapshot, and preserves the base.
+Focused 4/4, semantic composition 37/37, complete Dart 83/0 + 333 + 66x2 + 105, and twentieth digest `36897041...`
+pass. Canonical proof passes Rust admission in 76.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds;
+KM 679/5,095, mdBook, memory, task, doctrines, diff hygiene, and cleanup pass. Generated/emitted propagation,
+rollout, and admission remain absent.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -51,6 +57,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.2 — derive immutable Dart runtime semantics**
+
+  **Result:** `SemanticIndex.withExecutionObservation(...)` validates typed events solely against detached static
+  topology and returns a separate immutable snapshot with canonical execution/event records and `observed_as`
+  evidence. The base remains static; query stays execution-free.
+
+  **Proof:** Focused derivation 4/4, exact twentieth digest and three observed relations/evidence ids, semantic
+  composition 37/37, complete Dart format 83/0, fatal analysis, package 333, primary 66x2, corpus 105/105. Neutral
+  governance remains 6/20/73 at rollout 3/9 and admission 2/6. Canonical proof passes Rust semantic admission 1/1
+  in 76.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds; KM 679/5,095 and durable checks pass.
+
+  **Next:** after the clean commit, propagate the sink through generated/emitted public routes in `.10.5.5.3`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.1 — capture typed Dart runtime semantics**
 
   **Result:** Public immutable v1 slot/result events and an optional invocation-local sink now capture exact

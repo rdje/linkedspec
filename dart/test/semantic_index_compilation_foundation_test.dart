@@ -254,11 +254,29 @@ void main() {
       'LoadedSpec',
       'LinkedSpecRuntimeEngine',
       'RuntimeDiagnosticOutputSink',
-      'RuntimeSemanticObservation',
+      'RuntimeSemanticObservationSink',
       'emitDartSource',
       'executeGeneratedParser',
     ]) {
       expect(implementation, isNot(contains(forbidden)), reason: forbidden);
+    }
+
+    final runtimeProjection = File(
+      'lib/src/semantic/semantic_runtime_projection.dart',
+    ).readAsStringSync();
+    expect(runtimeProjection, contains('RuntimeSemanticObservationEvent'));
+    for (final forbidden in [
+      'LinkedSpecRuntimeEngine',
+      'RuntimeSemanticObservationSink',
+      '_sourceText',
+      '_sourceBytes',
+      '_sourceMap',
+      '_compilationOutcome',
+      'parseSpecWithStagedUserFunctionDefinitions(',
+      'compileSpec(',
+      'executeGeneratedParser',
+    ]) {
+      expect(runtimeProjection, isNot(contains(forbidden)), reason: forbidden);
     }
   });
 }

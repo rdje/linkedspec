@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.2 — derive immutable Dart runtime semantics
+
+Dart `SemanticIndex.withExecutionObservation(...)` now validates one caller-retained typed runtime event sequence
+against the index's immutable detached static projection and returns a new observed index. The derivation requires
+a compiled static base, exact v1 event contracts and field combinations, nonnegative positions/indices, exactly
+one final succeeded entry result, and a stable SHA-256 input identity. Selecting rules, target slots, and their
+ownership must resolve through existing rule/regex-slot/edge records plus `selects_regex`; result and event shapes
+come only from static rule/edge facts, never from a host result value.
+
+The derived projection sets only its own `has_execution`, adds canonical `execution:0` plus ordered event records,
+and links them with exact `observed_as` relations carrying slot/rule evidence. The original index remains static;
+caller list mutation, detached response mutation, repeat derivation, failed snapshots, foreign topology, malformed
+field combinations, reordered or duplicate final results, and existing-but-unselected slots are fenced by
+`execution_observation` / `semantic_index_invalid_observation`. Query remains projection-only and cannot execute.
+
+Focused derivation proof passes 4/4, including typed/raw-neutral equality, all three relation/evidence identities,
+base/derived isolation, and exact twentieth response digest `36897041...`. Full semantic composition passes 37/37.
+Complete Dart passes format 83/0, fatal analysis, package 333, primary 66x2, and corpus 105/105. Neutral semantic
+governance remains 6/20/73 at rollout 3/9 and admission 2/6. Canonical proof passes Rust semantic admission 1/1 in
+76.84 seconds, primary 66x2, and Phase 0 1,031/1,031 in 620 seconds; Knowledge Map 679/5,095 and all durable checks
+pass. Public generated/emitted propagation remains `.3`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.1 — capture typed Dart runtime semantics
 
 Dart now exports `linkedspec-semantic-execution-observation-v1`, a closed typed slot/result event vocabulary,

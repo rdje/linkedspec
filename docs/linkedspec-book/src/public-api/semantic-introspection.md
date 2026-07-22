@@ -336,13 +336,48 @@ traced forms intentionally do not accept the sink yet: `.10.5.5.3` owns that ada
 wrappers translate arbitrary execution failures into `GeneratedSourceException` and must first preserve callback
 identity explicitly.
 
-Captured events do not mutate the static index and do not grant query-side execution. The active-next
-`withExecutionObservation(...)` call validates caller-retained events against the detached static rule, regex-slot,
-and `selects_regex` graph, derives value shapes only from that graph, and returns a separate immutable snapshot
-containing one execution, ordered events, and `observed_as` relations. Direct, loaded, reconstructed, traced-
-convenience, and generated-plan engine capture is complete in `.10.5.5.1`; immutable derivation and the twentieth
-digest are active in `.2`; public generated/emitted propagation remains `.3`; and composition closeout is `.4`.
-Rollout and Dart admission remain exclusively `.10.5.6` work.
+Captured events do not mutate the static index and do not grant query-side execution. Derive an observed snapshot
+explicitly after successful execution:
+
+```dart
+final staticIndex = SemanticIndex.fromSource(
+  source,
+  options: const SemanticIndexOptions(
+    logicalName: 'runtime.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+  ),
+);
+
+final observedIndex = staticIndex.withExecutionObservation(events);
+assert(!staticIndex.snapshot.hasExecution);
+assert(observedIndex.snapshot.hasExecution);
+
+final runtimeFacts = observedIndex.query(
+  SemanticQuery(
+    operation: SemanticQueryOperation.list,
+    recordKinds: const ['execution', 'event'],
+    source: const SemanticQuerySource(
+      detail: SemanticSourceDetail.identity,
+    ),
+  ),
+);
+```
+
+`withExecutionObservation(...)` validates the contract and field combinations, requires nonnegative positions and
+indices, exactly one final successful entry result, and a stable input identity, then resolves every selected slot
+through the static rule/regex-slot/edge graph and its `selects_regex` relation. Result and event shapes come only
+from static rule/edge facts; no host result value is retained. Empty, malformed, foreign, reordered, duplicate-
+final, failed-index, already-observed, or existing-but-unselected-slot evidence throws `SemanticIndexError` with
+stage `execution_observation` and code `semantic_index_invalid_observation`.
+
+The returned index owns a fresh canonical projection containing `execution:0`, ordered event records, and exact
+`observed_as` relations with slot/rule evidence. Caller mutation of the event list or a detached response cannot
+alter either index. Typed and raw-neutral queries match the twentieth governed response digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+
+Direct, loaded, reconstructed, traced-convenience, and generated-plan engine capture is complete in `.10.5.5.1`;
+immutable derivation and the twentieth digest are complete in `.2`; public generated/emitted propagation remains
+active `.3`; and composition closeout is `.4`. Rollout and Dart admission remain exclusively `.10.5.6` work.
 
 ## Current Rust construction and query surface
 
@@ -1138,8 +1173,8 @@ The dependency order is:
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | complete |
 | `.10.5.5.0` | Dart runtime-observation authority map and split | complete; behavior-free exact seam/route plan |
 | `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | complete; exact events/non-interference/failure identity |
-| `.10.5.5.2` | Dart immutable observed-index derivation | active |
-| `.10.5.5.3` | Dart generated/emitted/traced observation routes | pending |
+| `.10.5.5.2` | Dart immutable observed-index derivation | complete; exact topology/immutability/twentieth digest |
+| `.10.5.5.3` | Dart generated/emitted/traced observation routes | active |
 | `.10.5.5.4` | Dart runtime-observation composition closeout | pending |
 | `.10.5.5` | Dart typed runtime observation parent | active |
 | `.10.5.6` | Dart composed semantic admission | pending |

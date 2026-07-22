@@ -6,10 +6,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.5.1` — typed Dart direct-engine runtime capture.
-- latest_commit: `29e0b9e8` is the clean authority-audit base; the current commit will own capture leaf `.10.5.5.1`.
-- active_work_unit: `.10.5.5.2` — immutable Dart observed-index derivation; no implementation has started.
-- next_action: inspect the admitted Rust runtime projection, then implement Dart topology validation and twentieth digest.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.5.2` — immutable Dart observed-index derivation.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.5.5.2 - derive Dart runtime semantics` completes immutable derivation.
+- active_work_unit: `.10.5.5.3` is task-tree owned from the clean derivation handoff; no implementation has started.
+- next_action: inspect generated/source-emitter exception translation, then thread the optional sink through `.10.5.5.3`.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -41,20 +41,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   paths, and execution remain absent from the index; `.10.5.3` is composition-closed.
   Query `.10.5.4.1-.3` now publicly exposes immutable `capabilities`, typed `query`, and raw-neutral `queryNeutral`
   through one detached-projection evaluator; all 19 static digests and 26 portable validation boundaries are exact.
-  Runtime `.10.5.5.1` exports immutable typed slot/result events plus an optional invocation-local sink across
+  Runtime `.10.5.5.1-.2` exports immutable typed slot/result events plus an optional invocation-local sink across
   direct/loaded/reconstructed/traced/generated-plan engine routes, with zero absent-sink event/hash work and exact
-  result/cursor/trace/diagnostic/failure identity. Immutable observed-index derivation `.2` is active.
+  result/cursor/trace/diagnostic/failure identity. `withExecutionObservation` now validates detached static topology,
+  returns a separate canonical execution/event snapshot, preserves the base, and matches the twentieth digest.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: observation 5/5, adjacent 81/81, semantic composition 28/28; selector concurrency 3/3,
-  executable 0/19, retirement 5/6/8/0, public 59/27/0; Dart format 81/0, analysis, package 329, primary 66x2, corpus 105/105;
-  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 79.08s,
-  primary 66x2, and Phase 0 1,031/1,031 in 623s. Knowledge Map is 679/5,095 after the runtime authority card;
+- current_signoff: observation 5/5, derivation 4/4, semantic composition 37/37; selector concurrency 3/3,
+  executable 0/19, retirement 5/6/8/0, public 59/27/0; Dart format 83/0, analysis, package 333, primary 66x2, corpus 105/105;
+  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 76.84s,
+  primary 66x2, and Phase 0 1,031/1,031 in 620s. Knowledge Map is 679/5,095 after the runtime authority card;
   docs/doctrines/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30 minutes for canonical CI. Julia
   offline verification may stack a writable depot before the installed read-only package depot.
-- deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
-  `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: none; `.10.5.5.2` starts from the clean capture commit; `.23` queued.
+- deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
+- blockers: none. in_flight_uncommitted: none; `.10.5.5.3` is next with no implementation begun; `.23` queued.

@@ -15,9 +15,9 @@ answers:
   - "can Dart semantic query execute the parser"
   - "what is the Dart semantic runtime observation implementation split"
 date: 2026-07-22
-status: current typed direct-engine capture; immutable observed-index derivation active next
+status: current typed direct-engine capture plus exact immutable observed-index derivation
 tags: [dart, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.1
+evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.2
 last_verified: 2026-07-22
 reverify:
   - "rg -n 'RuntimeDiagnosticOutputSink|_recordRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|semanticObservationSink' dart/lib/src/runtime/interpreter.dart"
@@ -25,6 +25,7 @@ reverify:
   - "sed -n '134,150p' dart/lib/src/io/spec_loader.dart"
   - "sed -n '143,178p' capability_conformance/semantic_introspection_model.json"
   - "sed -n '236,248p' capability_conformance/semantic_introspection_contract.json"
+  - "cd dart && dart test test/semantic_index_runtime_observation_test.dart test/semantic_index_runtime_projection_test.dart test/semantic_index_query_kernel_test.dart"
   - "sed -n '1,140p' rust/linkedspec-runtime/src/semantic_observation.rs"
 ---
 
@@ -64,11 +65,13 @@ caller exception identity.
 ## Required immutable derivation boundary
 
 Captured host values are evidence, not semantic records by themselves. `SemanticIndex.withExecutionObservation`
-must accept caller-retained typed events, validate the versioned contract and complete topology, and map them only
+now accepts caller-retained typed events, validates the versioned contract and complete topology, and maps them only
 through the base index's detached static rule, regex-slot, and `selects_regex` evidence. It derives value shapes
 from static records, never from the host result object. Exactly one successful final event must occur last. The
 derived index adds one canonical execution record, ordered event records, and `observed_as` relations to a new
-snapshot with `has_execution = true`; the base index stays static and immutable.
+snapshot with `has_execution = true`; the base index stays static and immutable. Negative Dart positions/indices,
+empty/malformed/foreign/reordered/duplicate-final sequences, failed/already-observed bases, and a selector that does
+not own the chosen slot all return the portable invalid-observation error.
 
 Semantic query remains projection-only. It can read the derived snapshot but cannot execute a parser, enable
 trace, install a sink, hash a new input, or mutate either index.
@@ -77,8 +80,8 @@ trace, install a sink, hash a new input, or mutate either index.
 
 - `.10.5.5.1`: complete public typed events/sink and direct, loaded, reconstructed, traced-convenience, and
   generated-plan engine capture.
-- `.10.5.5.2`: active validated immutable derivation and exact twentieth response digest.
-- `.10.5.5.3`: generated-plan, emitted-source, traced/untraced propagation and callback identity.
+- `.10.5.5.2`: complete validated immutable derivation and exact twentieth response digest.
+- `.10.5.5.3`: active generated-plan, emitted-source, traced/untraced propagation and callback identity.
 - `.10.5.5.4`: complete composition/signoff and parent closure without Dart admission promotion.
 
 ## Exact neutral anchor

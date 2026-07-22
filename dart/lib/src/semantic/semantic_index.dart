@@ -53,6 +53,11 @@ import '../source_emitter.dart'
         buildGeneratedRulePlan,
         linkedSpecGeneratedSourceContract,
         linkedSpecGeneratedSourceFormatVersion;
+import '../runtime/semantic_observation.dart'
+    show
+        RuntimeSemanticObservationEvent,
+        RuntimeSemanticObservationEventKind,
+        linkedSpecSemanticExecutionObservationContract;
 import '../validation/spec_validator.dart'
     show SpecPortableDiagnostic, SpecValidationException, validateSpec;
 import 'sha256.dart' show sha256Hex;
@@ -60,6 +65,7 @@ import 'sha256.dart' show sha256Hex;
 part 'semantic_static_projection.dart';
 part 'semantic_call_projection.dart';
 part 'semantic_query.dart';
+part 'semantic_runtime_projection.dart';
 
 const _semanticSnapshotId = 'snapshot:0';
 const _semanticSourceId = 'source:0';
@@ -423,9 +429,31 @@ final class SemanticIndex {
       sourceMap: _sourceMap,
       logicalName: _logicalName,
       contentDigest: _contentDigest,
-      snapshot: snapshot,
+      snapshot: SemanticSnapshot(
+        id: _semanticSnapshotId,
+        state: _compilationOutcome.compiled == null
+            ? SemanticSnapshotState.failedCompilation
+            : SemanticSnapshotState.compiled,
+        hasExecution: false,
+        sourceDetailCeiling: _sourceDetailCeiling,
+        contentDigestAvailable:
+            _sourceDetailCeiling == SemanticSourceDetail.text,
+      ),
       outcome: _compilationOutcome,
     );
+  }
+
+  SemanticIndex._derived(
+    SemanticIndex base,
+    _SemanticStaticProjection projection,
+  ) : _sourceText = base._sourceText,
+      _sourceBytes = base._sourceBytes,
+      _logicalName = base._logicalName,
+      _sourceDetailCeiling = base._sourceDetailCeiling,
+      _sourceMap = base._sourceMap,
+      _contentDigest = base._contentDigest,
+      _compilationOutcome = base._compilationOutcome {
+    _staticProjection = projection;
   }
 
   /// Capture already decoded Unicode text and copy its canonical UTF-8 form.
@@ -507,15 +535,7 @@ final class SemanticIndex {
   late final _SemanticStaticProjection _staticProjection;
 
   /// Return fresh foundation metadata without semantic records or queries.
-  SemanticSnapshot get snapshot => SemanticSnapshot(
-    id: _semanticSnapshotId,
-    state: _compilationOutcome.compiled == null
-        ? SemanticSnapshotState.failedCompilation
-        : SemanticSnapshotState.compiled,
-    hasExecution: false,
-    sourceDetailCeiling: _sourceDetailCeiling,
-    contentDigestAvailable: _sourceDetailCeiling == SemanticSourceDetail.text,
-  );
+  SemanticSnapshot get snapshot => _staticProjection.snapshot;
 
   /// Return only presence bits for the retained private compiler authority.
   SemanticCompilationAuthority get compilationAuthority =>
@@ -571,6 +591,18 @@ final class SemanticIndex {
   /// Validate and evaluate one raw JSON-like semantic-query-v1 request.
   SemanticQueryResponse queryNeutral(Object? request) =>
       _evaluateSemanticQueryNeutral(_staticProjection.detachedJson(), request);
+
+  /// Validate one completed typed observation and derive a new immutable index.
+  ///
+  /// The base index stays static. Event topology and value shapes are resolved
+  /// only through this index's detached rule, regex-slot, edge, and relation
+  /// records; semantic query remains projection-only and never executes.
+  SemanticIndex withExecutionObservation(
+    List<RuntimeSemanticObservationEvent> observation,
+  ) => SemanticIndex._derived(
+    this,
+    _buildSemanticRuntimeProjection(_staticProjection, observation),
+  );
 
   /// Return copied caller identity and exact source sizes without a host path.
   SemanticSourceIdentity get sourceIdentity {

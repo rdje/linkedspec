@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.2` — derive from detached meaning, not runtime authority): The runtime
+  projection receives only immutable typed event values and `_SemanticStaticProjection`. It cannot access the
+  engine, observation sink, source bytes/map, compiler outcome, parser, compiler, or generated executor. The
+  source-foundation guard now distinguishes required typed evidence from forbidden execution authority and scans
+  the dedicated projection part directly.
+
+  Derivation builds rule and regex-slot lookup maps from normalized records, then proves each slot event through an
+  existing `selects_regex` relation owned by the executing rule. Event value shapes come from that selection edge;
+  the final shape comes from the selected entry rule. This prevents a caller-supplied host result or invented slot
+  from becoming semantic truth. Dart additionally rejects negative positions/indices because Rust's admitted
+  `usize` event fields make those malformed values unrepresentable there.
+
+  A derived `SemanticIndex` shares only private immutable construction authority while owning a freshly cloned and
+  canonicalized projection with `has_execution = true`. Neither the caller's event list nor detached query values
+  are retained. Repeat derivation is rejected, the base remains static, and query still receives only fresh
+  detached projection data. Canonical proof passes the admitted Rust consumer in 76.84 seconds and Phase 0 at
+  1,031/1,031 in 620 seconds. Generated/emitted sink propagation remains deliberately separate `.10.5.5.3` work.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.1` — keep capture optional and structurally cheap): The runtime tests
   `semanticObservationSink != null` before constructing any event. This is especially important for the final
   event because its factory hashes exact UTF-8 input bytes. The ordinary no-sink parser path therefore gains one
