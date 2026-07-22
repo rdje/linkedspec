@@ -83,7 +83,9 @@ those events against detached static topology, returns a separate canonical exec
 the twentieth response digest. Generated/emitted direct and traced route propagation `.3` now preserves exact
 events, results, diagnostics, trace bytes, exit omission, and caller callback identity through public helpers and
 fresh isolated emitted libraries without changing generated-source v2/format 2. Composition-only closeout `.4` is
-active; admission remains later.
+now complete on committed code across semantic 39/39, adjacent runtime 24/24, complete Dart and every neutral/
+public gate. Runtime-observation parent `.10.5.5` is closed without promotion; exact composed Dart admission
+`.10.5.6` is active.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

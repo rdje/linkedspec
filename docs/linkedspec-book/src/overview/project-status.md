@@ -528,7 +528,9 @@ Three backbone items tracked major structural modernization — all done:
   execution/event/`observed_as` snapshot, preserves the base index, and matches the twentieth digest. Generated/
   emitted direct and traced propagation `.10.5.5.3` now preserves exact events, outputs, diagnostic events, trace
   bytes, exit omission, and caller callback identity through public helpers and isolated emitted libraries without
-  changing v2/format 2. Composition closeout `.10.5.5.4` is active; Dart admission remains later.
+  changing v2/format 2. Composition closeout `.10.5.5.4` now closes the runtime-observation parent on committed
+  semantic 39/39, adjacent runtime 24/24, complete Dart, and neutral/public proof without promotion. Exact composed
+  Dart admission `.10.5.6` is active.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

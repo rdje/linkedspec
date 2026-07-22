@@ -11,8 +11,8 @@ Dart now also exposes its complete non-runtime static query surface: immutable p
 `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` share one projection-only evaluator at
 all 19 static response digests and 26 portable malformed-request boundaries. Dart additionally exposes exact typed
 invocation-local runtime capture, immutable observed-index derivation at the twentieth digest, and public
-generated/emitted direct and traced propagation. Composition closeout and composed backend admission remain later
-layers.
+generated/emitted direct and traced propagation. Runtime-observation composition is closed; exact composed Dart
+backend admission is the active next layer.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -384,8 +384,8 @@ alter either index. Typed and raw-neutral queries match the twentieth governed r
 
 Direct, loaded, reconstructed, traced-convenience, and generated-plan engine capture is complete in `.10.5.5.1`;
 immutable derivation and the twentieth digest are complete in `.2`; public generated/emitted direct and traced
-propagation is complete in `.3`; and composition closeout `.4` is active. Rollout and Dart admission remain
-exclusively `.10.5.6` work.
+propagation is complete in `.3`; and composition closeout `.4` now proves all layers together on committed code.
+Parent `.10.5.5` is closed without promotion. Rollout and Dart admission remain exclusively active `.10.5.6` work.
 
 ## Current Rust construction and query surface
 
@@ -1183,9 +1183,9 @@ The dependency order is:
 | `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | complete; exact events/non-interference/failure identity |
 | `.10.5.5.2` | Dart immutable observed-index derivation | complete; exact topology/immutability/twentieth digest |
 | `.10.5.5.3` | Dart generated/emitted/traced observation routes | complete; exact events/outputs/traces/exit/callback identity, unchanged v2/format 2 |
-| `.10.5.5.4` | Dart runtime-observation composition closeout | active |
-| `.10.5.5` | Dart typed runtime observation parent | active |
-| `.10.5.6` | Dart composed semantic admission | pending |
+| `.10.5.5.4` | Dart runtime-observation composition closeout | complete; committed semantic/runtime/public signoff without promotion |
+| `.10.5.5` | Dart typed runtime observation parent | complete |
+| `.10.5.6` | Dart composed semantic admission | active |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

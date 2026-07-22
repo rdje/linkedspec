@@ -416,7 +416,8 @@ across direct/loaded/reconstructed/traced/generated-plan engine routes with unch
 diagnostics, and failure identity. Immutable observed-index derivation `.2` now returns a separate topology-
 validated canonical snapshot at the twentieth digest. Generated/emitted direct and traced propagation `.3` now
 preserves exact observations, outputs, trace bytes, exit omission, and caller callback identity without changing
-generated-source v2/format 2. Composition-only closeout `.4` is active while rollout/admission stay absent.
+generated-source v2/format 2. Composition-only closeout `.4` now closes the runtime-observation parent on committed
+code while rollout/admission stay 3/9 and 2/6; exact composed admission `.10.5.6` is active.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

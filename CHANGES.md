@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.4 — close Dart runtime observation
+
+The Dart runtime-observation parent is composition-closed on committed code without another production or test
+change. Exact source/static/calls/query/capture/derivation/routes proof passes 39/39, while the adjacent emitter,
+diagnostic-output, capture, derivation, and public-route composition passes 24/24. Together they cover all 20
+governed query digests, malformed observation boundaries, direct/loaded/reconstructed/generated-plan/public
+generated/emitted/traced topology, exact callback failure identity, immediate-exit omission, and result/trace/
+diagnostic non-interference.
+
+Complete Dart remains format 84/0, fatal analysis, package 335, primary 66x2, and corpus 105/105. Semantic
+governance remains 6/20/73 at rollout 3/9 and native admission 2/6; Unicode is 806/9/8/2; generated source is
+v1/10/80-0-0; public proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface
+59/27/0. Parent `.10.5.5` closes without promotion. Exact omission-sensitive admission `.10.5.6` is now the sole
+active Dart semantic owner. Canonical proof passes Rust semantic admission 1/1 in 77.24 seconds, primary 66x2,
+and Phase 0 1,031/1,031 in 621 seconds; Knowledge Map remains 679 facts / 5,095 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.3 — propagate Dart runtime semantics
 
 Dart's public `executeGeneratedParserV2(...)` and `executeGeneratedParserWithTraceV2(...)` helpers now accept the

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.4` — close behavior layers only after committed composition): No new
+  implementation seam belongs in the runtime-observation closeout. The 39-test semantic composition proves the
+  source/static/call/query layers consume the same immutable observation evidence and twentieth response, while
+  the 24-test adjacent composition independently exercises source emission, diagnostic output, live capture,
+  derivation, and generated/emitted direct/traced routes.
+
+  This closeout deliberately leaves the neutral and native ledgers at 3/9 and 2/6. Complete runtime behavior is a
+  prerequisite for admission, not admission itself. `.10.5.6` alone owns the omission-sensitive consumer, canonical
+  registration, mutation fences, Dart rollout/admission promotion, and eventual `.10.5` parent closure. Canonical
+  proof passes Rust semantic admission in 77.24 seconds and Phase 0 at 1,031/1,031 in 621 seconds.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.3` — preserve callback ownership through generated adapters): The
   generated public helpers already delegated to the exact engine observation seams, but their broad execution
   catch translated arbitrary caller failures into `GeneratedSourceException`. `_generatedSemanticObservationSink`

@@ -8,9 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Dart runtime-observation closeout `FUTURE-PARITY-BACKLOG.10.5.5.4` is task-tree owned after completed generated/
-  emitted route propagation `.3`; no `.4` closeout changes have started. Its first action is to recompose exact
-  static/runtime query, malformed-observation, route, non-interference, complete Dart, and canonical proof.
+- Exact composed Dart semantic admission `FUTURE-PARITY-BACKLOG.10.5.6` is task-tree owned after runtime-observation
+  parent `.10.5.5` closed; no admission implementation has started. Its first action is to define the one exact
+  omission-sensitive consumer and registration/mutation topology from admitted Perl/Rust precedent.
 
 Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
 `query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
@@ -28,7 +28,9 @@ KM 679/5,095, mdBook, memory, task, doctrines, diff hygiene, and cleanup pass. G
 now passes routes 2/2, adjacent 24/24, semantic composition 39/39, and complete Dart 84/0 + 335 + 66x2 + 105/105.
 Public direct/traced helpers and fresh isolated emitted libraries preserve exact events/twentieth digest, outputs,
 diagnostics, trace bytes, immediate-exit omission, caller error/stack identity, and v2/format 2. Rollout and
-admission remain absent; composition closeout `.4` is active.
+admission remain absent. Composition closeout `.4` now recomposes semantic 39/39, adjacent runtime 24/24, complete
+Dart 84/0 + 335 + 66x2 + 105/105, Unicode 806/9/8/2, generated v1/10/80-0-0, and public
+3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0. Parent `.10.5.5` is closed without promotion; `.10.5.6` is active.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -60,6 +62,20 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.4 — close Dart runtime observation**
+  (DONE in this commit from clean base `c0955aea`).
+
+  **Result:** The committed typed capture, immutable derivation, and generated/emitted/traced propagation layers
+  compose as one complete Dart runtime-observation surface. Parent `.10.5.5` closes with no production/test change
+  and no rollout/admission promotion; `.10.5.6` becomes the sole active admission owner.
+
+  **Proof:** Semantic composition 39/39; adjacent emitter/diagnostic/runtime 24/24; Dart 84/0, fatal analysis,
+  package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at 3/9 + 2/6; Unicode 806/9/8/2; generated
+  v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; canonical Rust admission 77.24s, primary
+  66x2, Phase 0 1,031/1,031 in 621s; KM 679/5,095; book/doctrines/cleanup pass.
+
+  **Next:** after the clean commit, implement the one exact omission-sensitive Dart admission consumer in `.10.5.6`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.3 — propagate Dart runtime semantics**
   (DONE in this commit from clean base `babe2fd7`).
 

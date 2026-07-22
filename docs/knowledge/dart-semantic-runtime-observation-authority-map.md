@@ -15,9 +15,9 @@ answers:
   - "can Dart semantic query execute the parser"
   - "what is the Dart semantic runtime observation implementation split"
 date: 2026-07-22
-status: current typed capture, immutable observed-index derivation, and public generated/emitted route propagation
+status: composition-closed typed capture, immutable derivation, and every public generated/emitted/traced route
 tags: [dart, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; dart/test/semantic_index_runtime_observation_routes_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.3
+evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; dart/test/semantic_index_runtime_observation_routes_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.4
 last_verified: 2026-07-22
 reverify:
   - "rg -n 'RuntimeDiagnosticOutputSink|_recordRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|semanticObservationSink' dart/lib/src/runtime/interpreter.dart"
@@ -83,7 +83,8 @@ trace, install a sink, hash a new input, or mutate either index.
   generated-plan engine capture.
 - `.10.5.5.2`: complete validated immutable derivation and exact twentieth response digest.
 - `.10.5.5.3`: complete generated/emitted direct/traced propagation, non-interference, exit omission, and callback identity.
-- `.10.5.5.4`: active composition/signoff and parent closure without Dart admission promotion.
+- `.10.5.5.4`: complete composition/signoff and parent closure without Dart admission promotion.
+- `.10.5.6`: active exact composed admission; only this leaf may promote Dart rollout/admission.
 
 ## Exact neutral anchor
 

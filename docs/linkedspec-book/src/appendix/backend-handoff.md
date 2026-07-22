@@ -248,7 +248,7 @@ slot selection and successful final-result construction as the only observation 
 absent-sink work, exact observer exception passthrough through generated wrappers, immutable derivation only from
 static graph evidence, and the `.1-.4` order. Typed direct-engine capture `.1`, immutable topology-validated
 runtime projection `.2`, and generated/emitted direct/traced propagation `.3` are complete; composition closeout
-`.4` is active and admission remains `.10.5.6` work.
+`.4` now closes the parent on committed code without promotion, and exact admission `.10.5.6` is active.
 
 Capture `.10.5.5.1` now exports the v1 contract, immutable slot/result event values, and optional synchronous sink.
 Direct, loaded, reconstructed, traced convenience, and validated generated-plan engine routes emit exact Unicode-
@@ -260,7 +260,7 @@ omits the final result, and generated-source v2/format 2 is unchanged. Derivatio
 events against detached static rule/slot/selection
 topology, creates a separate immutable canonical execution/event/`observed_as` snapshot, preserves the base, and
 matches the twentieth digest through typed and raw-neutral query. Generated/emitted propagation `.3` is complete;
-composition closeout `.4` is active and admission remains `.10.5.6` work.
+composition closeout `.4` is complete and admission remains exclusively active `.10.5.6` work.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
