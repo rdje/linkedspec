@@ -8147,10 +8147,10 @@ before implementation.
     scalar classifier, complete-label validator, and longest-valid-prefix scanner; never consult host `RegExp \w`.
   - [x] **PARSE / VALIDATE ALL ROUTES** — Use the scanner for header/action/blind/bare syntax and the validator for
     declarations and every target from parsed, deserialized, or programmatic ASTs; prohibit silent prefix parsing.
-  - [ ] **EXACT IDENTITY** — Preserve all positive labels plus precomposed/decomposed/case distinctions through
+  - [x] **EXACT IDENTITY** — Preserve all positive labels plus precomposed/decomposed/case distinctions through
     validation, compilation, descriptor, generated plan/source/reconstruction, explicit selector, diagnostics,
     trace, loaded source, and primary command routes.
-  - [ ] **NEGATIVE / GRAMMAR ISOLATION** — Reject every negative fixture at a stable parser/validation boundary and
+  - [x] **NEGATIVE / GRAMMAR ISOLATION** — Reject every negative fixture at a stable parser/validation boundary and
     prove unrelated function/helper/lifecycle/fluent/mark identifier grammars are unchanged.
   - [ ] **NO FALSE PROMOTION / SIGNOFF** — Complete Dart, Unicode/semantic checker, canonical, mdBook/KM/docs, and
     cleanup pass while semantic rollout/admission remain 3/9 and 2/6.
@@ -8244,11 +8244,34 @@ before implementation.
       Knowledge Map, clean generated artifacts, and commit before activating negative/isolation leaf `.2.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.3`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Lock Dart negative-label rejection and unrelated identifier-grammar isolation.
     Depends on: `.10.5.0.2.2`
     Acceptance: Cover every neutral negative fixture and no-prefix surface with deterministic failures, while proving
       function/helper/lifecycle/fluent/mark grammars retain their existing accepted and rejected spellings.
+    Verification: All 8 negative fixtures fail every declaration/action/blind/bare role from both programmatic and
+      JSON-reconstructed ASTs with exact portable diagnostics. Source declarations and all edge forms cannot
+      truncate; `$Top` no-prefix surfaces remain non-edges, primary compilation fails exactly for every invalid
+      declaration, colon remains declaration punctuation, and newline remains a two-token boundary. Direct
+      isolation proof preserves function/parameter, ActionIR helper/fluent, exact lifecycle, and named-mark
+      grammars. Focused suite passes 5/5; ten adjacent suites pass 64/64. Complete Dart passes format, fatal
+      analysis, package 296, primary 66x2, and corpus 105/105. Unicode 806/9/8/2, semantic 6/20/73, KM 672/5,004,
+      mdBook/four doctrines/diff, canonical Rust admission 1/1 in 77.14 seconds, primary 66x2, and Phase 0
+      1,031/1,031 in 623 seconds pass. Production code is unchanged; semantic rollout/admission remain 3/9 and 2/6.
+
+    #### Acceptance Checklist
+
+    - [x] **EVERY NEUTRAL NEGATIVE** — Drive all eight negative fixtures through every declaration and
+      action/blind/bare target role from both programmatic and JSON-reconstructed ASTs with the exact portable
+      `invalid_rule_label` diagnostic.
+    - [x] **SOURCE TOKEN BOUNDARIES** — Prove declaration/action/blind/bare spellings do not truncate to valid
+      prefixes or suffixes; retain colon as declaration punctuation and newline as a real two-token separator.
+    - [x] **NO-PREFIX / PRIMARY** — Lock header, action, blind, and bare `$Top` no-prefix surfaces and exact primary
+      compilation failure for every negative declaration.
+    - [x] **UNRELATED GRAMMAR ISOLATION** — Preserve existing accepted/rejected function/parameter, helper,
+      lifecycle, fluent-method, and named-mark identifier spellings without importing rule-label membership.
+    - [x] **SIGNOFF / HANDOFF** — Pass complete Dart and canonical gates, synchronize public/durable docs and the
+      Knowledge Map, clean generated artifacts, and commit before activating composed signoff leaf `.2.4`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.4`
     Status: `pending`
@@ -10611,8 +10634,8 @@ label-prefix truncation, and current grammar passes the exact five-backend defau
 Generated-classifier foundation `.10.5.0.2.0`, native parser/validator consumption `.10.5.0.2.1`, and exact
 downstream identity proof `.10.5.0.2.2` are signoff-complete. All 9 positive labels and 2 distinct pairs retain
 exact identity through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes.
-After the clean `.2` commit, negative rejection and unrelated-identifier isolation `.2.3` is next; composed signoff
-remains `.2.4`.
+Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`. Negative rejection and unrelated-identifier
+isolation `.2.3` is signoff-complete; after its clean commit, composed signoff `.2.4` is next.
 
 ### Historical frontier sequence
 
@@ -11022,7 +11045,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.2.0` | `done` | Generated and independently locked the exact Dart classifier/validator/prefix-scanner primitives. |
 | 74.4.0.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `done` | Native headers/targets and external-AST validation consume the exact generated Dart primitives. |
 | 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `done` | Every positive/distinct Unicode identity survives Dart artifacts, selectors, diagnostics, traces, loaders, and CLI routes. |
-| 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `pending` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
+| 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `done` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
 | 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `pending` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |

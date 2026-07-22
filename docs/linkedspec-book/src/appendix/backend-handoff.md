@@ -238,8 +238,10 @@ classifier/prefix scanner, routes headers plus action/blind/bare targets through
 targets from parsed, reconstructed, and programmatic ASTs. `.10.5.0.2.2` proves every positive/distinct neutral
 identity through compiled maps/order, descriptors, generated plans, reconstruction, isolated emitted execution,
 selectors, diagnostics, traces, strict loaders, and primary commands. Negative/identifier isolation and composed
-signoff remain `.10.5.0.2.3-.4`; source/static/calls/query/runtime/admission follow as `.10.5.1-.10.5.6`. Julia
-and Lua later inherit the same pinned-label prerequisite before their v1 admissions.
+signoff split into `.10.5.0.2.3-.4`: `.3` now exhausts all eight invalid labels across external AST, source,
+no-prefix, and primary routes and locks the narrower function/helper/lifecycle/fluent/mark grammars. Only composed
+`.4` remains before source/static/calls/query/runtime/admission `.10.5.1-.10.5.6`. Julia and Lua later inherit the
+same pinned-label prerequisite before their v1 admissions.
 
 Dart's current 105/105 corpus result includes four byte-identical current `specs/spec.spec` inputs. Shared
 `.10.5.0.1.2` regenerated them verbatim, enforces byte/hash freshness, and composes current-grammar execution across

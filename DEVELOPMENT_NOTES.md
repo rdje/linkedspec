@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.3` — label membership must not leak into adjacent identifiers):
+  Exhaustive negative proof belongs at both source-token and external-AST boundaries. Source syntax cannot always
+  treat the neutral fixture as one token: `Top:` is declaration `Top` plus punctuation, and `Top\nRule` is two
+  tokens. Programmatic and JSON-reconstructed ASTs can carry those exact strings, so validation is the stable place
+  to reject all eight fixtures uniformly across declaration and every action/blind/bare target role.
+
+  Source proof separately checks headers and all three edge forms for truncation, locks `$Top` as the no-prefix
+  case, retains newline splitting, and checks exact primary compilation failure for every invalid declaration. The
+  important invariant is that an invalid spelling never becomes a different edge target; it is not that delimiter
+  punctuation must stop functioning as syntax.
+
+  Isolation tests exercise the actual neighboring parsers rather than scanning source text. Valid `_function9` /
+  `value_2`, `trim(value)`, `"x"._method9()`, all seven lifecycle markers, and `mark_here(shared_9)` retain their
+  current shapes. Unicode-label-only or otherwise invalid spellings remain rejected/raw for function names and
+  parameters, helper/fluent callees, lifecycle roles, and mark variables; `trim!` stays outside the current fluent
+  grammar owned by later explicit receiver-mutation work.
+
+  Focused negative/isolation proof passes 5/5; ten adjacent suites pass 64/64. Complete Dart passes format, fatal
+  analysis, package 296, primary 66x2, and corpus 105/105. Canonical passes Rust admission 1/1 in 77.14 seconds,
+  primary 66x2, and Phase 0 1,031/1,031 in 623 seconds. No production file changes. Semantic governance remains
+  6/20/73, rollout 3/9, and admission 2/6; `.10.5.0.2.4` owns composed prerequisite signoff.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.2` — downstream label routes must be proved as identity channels):
   The authority audit showed no missing production conversion seam after native parsing/validation: compiled maps,
   descriptors, generated plans and payloads, selectors, diagnostics, traces, and strict-loaded text already carry

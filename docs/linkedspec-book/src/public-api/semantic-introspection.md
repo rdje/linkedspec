@@ -469,8 +469,10 @@ truncation, and validates parsed plus external AST declarations/targets. Existin
 generated plans/emitted source, and explicit selectors preserve valid Unicode strings exactly. Leaf `.2` now
 proves that claim for all nine positive fixtures and both distinct pairs across compiled state, reconstruction,
 an isolated emitted package, selectors, diagnostics, traces, strict loading, and primary commands. Leaves `.3-.4`
-still own exhaustive negative/identifier isolation and composed signoff. No prerequisite advances semantic
-rollout/admission.
+then split negative/isolation from composed signoff. Leaf `.3` now rejects all eight invalid fixtures across every
+external-AST declaration/target role, source/no-prefix boundaries, and primary compilation while proving unrelated
+function/parameter/helper/lifecycle/fluent/mark spellings remain unchanged. Only composed `.4` remains. No
+prerequisite advances semantic rollout/admission.
 
 The complete Dart corpus's 105/105 result now includes four byte-fresh `spec_spec_*` inputs copied from current
 `specs/spec.spec`. Shared closeout `.10.5.0.1.2` added exact hash/byte enforcement and composed the current grammar

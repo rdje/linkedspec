@@ -856,8 +856,12 @@ content migration exists yet.
   `.10.5.0.2.2` now drives all nine positive labels and both distinct pairs through parsed/compiled order and
   maps, JSON/descriptors, generated plans, AST and emitted-payload reconstruction, an isolated emitted caller
   package, native/generated selectors, diagnostics, traces, strict loading, and inline/file primary commands.
-  Every route retains the exact scalar sequence without normalization or case folding. Negative-label and
-  unrelated-identifier isolation remain `.10.5.0.2.3`; no semantic rollout/admission is promoted.
+  Every route retains the exact scalar sequence without normalization or case folding. Negative/isolation leaf
+  `.10.5.0.2.3` now rejects all eight negative fixtures across every programmatic and JSON-reconstructed
+  declaration/action/blind/bare role, locks no-prefix and primary failures, and proves function/parameter, helper,
+  lifecycle, fluent, and mark grammars retain their narrower existing spellings. Colon remains declaration
+  punctuation and newline remains a token separator; neither is reclassified as label content. No semantic
+  rollout/admission is promoted.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

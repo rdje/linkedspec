@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.3 — isolate Dart Unicode label grammar
+
+Dart now has exhaustive executable proof for every negative Unicode rule-label fixture without changing production
+behavior. All eight invalid strings fail every declaration and action/blind/bare target role from both programmatic
+and JSON-reconstructed ASTs with the exact portable `invalid_rule_label` / `validate_rule_labels` diagnostic.
+Declaration plus action/blind/bare source surfaces cannot recover a valid prefix or suffix, and the `$Top`
+no-prefix cases remain non-edges. Every invalid declaration also returns the exact primary compilation failure.
+
+The suite preserves syntax delimiters rather than overclaiming whole-string rejection. Bare `Top:` is a valid
+separate `Top` declaration, and `Top\nRule` is two source tokens; the corresponding complete strings remain invalid
+when supplied as one external-AST label. Function names and parameters remain ASCII identifier policy, ActionIR
+helper/fluent names retain their existing identifier grammar (including current bang rejection), lifecycle markers
+remain the exact seven-marker set, and named-mark variables retain their existing spelling boundary.
+
+The Unicode checker and canonical tracked-file topology now require the negative/isolation suite and its five proof
+roles. Focused proof passes 5/5; ten adjacent classifier/parser/validator/ActionIR/function/mark/primary suites pass
+64/64. The complete Dart gate passes format, fatal analysis, 296 package tests, primary 66x2, and corpus 105/105.
+Canonical CI passes Rust semantic admission 1/1 in 77.14 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623
+seconds. Production source is unchanged; composed signoff remains `.10.5.0.2.4`, and semantic governance remains
+6/20/73 at rollout 3/9 and native admission 2/6.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.2 — prove Dart Unicode label identity
 
 A dedicated Dart suite now drives all nine positive Unicode rule-label fixtures and both distinct pairs through

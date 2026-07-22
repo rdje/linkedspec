@@ -61,7 +61,11 @@ their separate existing grammars. Dedicated identity proof then drives all nine 
 distinct pairs through compiled maps/order, descriptors, generated plans, AST/emitted-payload reconstruction, an
 isolated emitted package, native/generated selectors, exact diagnostics/traces, strict loading, and inline/file
 primary commands. Those routes compare and transport immutable strings exactly: no normalization or case folding
-is introduced downstream.
+is introduced downstream. Negative proof covers all eight neutral invalid labels in every declaration and
+action/blind/bare target role from programmatic and reconstructed ASTs, source token/no-prefix boundaries, and
+primary compilation. Rule-label expansion does not change ASCII/current-policy function names and parameters,
+ActionIR helper or fluent names, lifecycle markers, or named-mark variables. Source punctuation remains
+structural: `Top:` can be a `Top` declaration, and `Top\nRule` is two tokens, while neither string is one label.
 
 ## Generated source
 

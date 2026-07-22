@@ -10,8 +10,8 @@ Current execution status for interruption-safe batch workflow recovery.
 ## Active Slice
 - Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2` is active and split into `.0-.4`. Generated
   classifier foundation `.10.5.0.2.0`, native parser/validator consumption `.1`, and exact downstream identity
-  `.2` are signoff-complete. After the clean `.2` commit, negative/isolation proof `.3` is next; composed signoff
-  remains `.4`.
+  `.2` are signoff-complete. Negative/isolation proof `.3` is also signoff-complete; after its clean commit,
+  composed signoff `.4` is next.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -21,6 +21,12 @@ fatal analysis, package 291, primary 66x2, and corpus 105/105. It covers all 9 p
 pairs through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes. Canonical
 CI passes Rust admission in 76.73 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds. Semantic 6/20/73,
 rollout 3/9, and admission 2/6 remain unchanged.
+
+Completed `.3` passes focused negative/isolation 5/5, ten adjacent suites 64/64, and complete Dart format, fatal
+analysis, package 296, primary 66x2, and corpus 105/105. All eight invalid fixtures fail 64 external-AST role/route
+checks; source/no-prefix/primary boundaries and function/helper/lifecycle/fluent/mark isolation are exact. Canonical
+passes Rust admission 1/1 in 77.14 seconds, primary 66x2, and Phase 0 1,031/1,031 in 623 seconds. No production file
+changed; semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6.
 
 ADRs `0049`/`0050` fix the immutable native semantic model/query, exact ids/order/pages/cost/privacy, normalized
 records/relations/shapes/evidence, explicit staged payload/job/result provenance, optional caller-captured runtime
@@ -32,6 +38,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.3 — isolate Dart Unicode label grammar**
+  (DONE in this commit from clean base `8e5c4a70`).
+
+  **Result:** All eight negative fixtures fail every declaration/action/blind/bare role from both programmatic and
+  reconstructed ASTs with exact portable diagnostics. Source/no-prefix/primary routes reject deterministically,
+  while colon/newline keep their structural roles and function/helper/lifecycle/fluent/mark grammars stay narrow.
+
+  **Proof:** Focused 5/5; adjacent 64/64; complete Dart format/analyze/package 296/primary 66x2/corpus 105; Unicode
+  806/9/8/2; semantic 6/20/73; KM 672/5,004; mdBook/four doctrines/diff; canonical Rust admission 77.14s, primary
+  66x2, and Phase 0 1,031/1,031 in 623s, exit 0. Production source is unchanged.
+
+  **Next:** after this clean commit, activate `.10.5.0.2.4` task-tree-first for composed prerequisite signoff.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.2 — prove Dart Unicode label identity**
   (DONE in this commit from clean base `cb689b83`).
 
