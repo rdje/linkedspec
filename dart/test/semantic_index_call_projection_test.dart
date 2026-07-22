@@ -1,4 +1,4 @@
-// FUTURE-PARITY-BACKLOG.10.5.3.1 — exact typed call/binding core.
+// FUTURE-PARITY-BACKLOG.10.5.3.1-.2 — exact typed calls and provenance.
 
 import 'dart:convert';
 import 'dart:io';
@@ -7,10 +7,58 @@ import 'package:linkedspec_dart/src/semantic/semantic_index.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('typed call and binding core deep-equals the neutral subset', () {
-    final actual = _materializeSources(_projection(_callsSource));
-    final wanted = _callsCoreExpected();
-    expect(actual, _materializeSources(wanted));
+  test(
+    'calls staging and generated projection deep-equals the neutral target',
+    () {
+      final actual = _materializeSources(_projection(_callsSource));
+      final wanted = _callsExpected();
+      expect(actual, _materializeSources(wanted));
+    },
+  );
+
+  test('staged roles stay distinct from the selected generated plan', () {
+    final projection = _projection(_callsSource);
+    final records = (projection['records']! as List<Object?>)
+        .cast<Map<String, Object?>>();
+    final staged = records
+        .where((record) => record['kind'] == 'staged_artifact')
+        .toList();
+    expect(staged.map((record) => record['id']), [
+      'staged:payload:function:normalize:0',
+      'staged:parse_job:function:normalize:1',
+      'staged:result:function:normalize:2',
+    ]);
+    expect(
+      staged.map(
+        (record) => (record['facts']! as Map<String, Object?>)['artifact_kind'],
+      ),
+      ['payload', 'parse_job', 'result'],
+    );
+    final generated = records.singleWhere(
+      (record) => record['id'] == 'generated:handler_plan:0',
+    );
+    expect(generated['kind'], 'generated_artifact');
+    expect(generated['facts'], {
+      'artifact_kind': 'handler_plan',
+      'contract_id': 'linkedspec-generated-source-v2',
+      'format_version': 2,
+      'plan_family': 'default',
+    });
+
+    final relations = (projection['relations']! as List<Object?>)
+        .cast<Map<String, Object?>>();
+    expect(
+      relations.map((relation) => relation['id']),
+      containsAll([
+        'relation:consumes:staged:parse_job:function:normalize:1:'
+            'staged:payload:function:normalize:0:0',
+        'relation:produces:staged:parse_job:function:normalize:1:'
+            'staged:result:function:normalize:2:0',
+        'relation:staged_by:staged:result:function:normalize:2:'
+            'staged:parse_job:function:normalize:1:0',
+        'relation:generated_as:spec:0:generated:handler_plan:0:0',
+      ]),
+    );
   });
 
   test('interleaved function shells keep exact Unicode call evidence', () {
@@ -112,7 +160,7 @@ SemanticIndex _index(String source) => SemanticIndex.fromSource(
 Map<String, Object?> _projection(String source) =>
     _index(source).semanticStaticProjectionForTesting();
 
-Map<String, Object?> _callsCoreExpected() {
+Map<String, Object?> _callsExpected() {
   final snapshots = _model['snapshots']! as List<Object?>;
   final wanted = _copy(
     snapshots.cast<Map<String, Object?>>().singleWhere(
@@ -121,24 +169,6 @@ Map<String, Object?> _callsCoreExpected() {
   );
   wanted.remove('id');
   wanted.remove('fixture');
-  final records = (wanted['records']! as List<Object?>)
-      .cast<Map<String, Object?>>()
-      .where(
-        (record) =>
-            record['kind'] != 'staged_artifact' &&
-            record['kind'] != 'generated_artifact',
-      )
-      .toList();
-  final retainedIds = records.map((record) => record['id']).toSet();
-  wanted['records'] = records;
-  wanted['relations'] = (wanted['relations']! as List<Object?>)
-      .cast<Map<String, Object?>>()
-      .where(
-        (relation) =>
-            retainedIds.contains(relation['from_id']) &&
-            retainedIds.contains(relation['to_id']),
-      )
-      .toList();
   return wanted;
 }
 
@@ -148,10 +178,15 @@ void _expectPlainProjection(Object? value) {
     'file_path',
     'source_text',
     'source_bytes',
+    'body_source',
+    'body_payload',
+    'body_parse_job',
+    'body_ast',
     'ast',
     'action_ir',
     'descriptor',
     'compiled_regex',
+    'generated_source',
     'executor',
     'trace',
     'diagnostic_sink',

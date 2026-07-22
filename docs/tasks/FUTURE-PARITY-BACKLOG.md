@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart typed function/helper/call/binding core `.10.5.3.1` is complete; staged and
-  generated exact completion `.10.5.3.2` is next)
+- Last updated: `2026-07-22` (Dart staged/generated exact completion `.10.5.3.2` is complete at 22 records / 25
+  relations; composed calls closeout `.10.5.3.3` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8662,9 +8662,9 @@ before implementation.
     split authority/core/completion/closeout before production changes.
   - [x] **TYPED CALL GRAPH** — Project functions, helpers, bindings, source-preorder nested calls, exact resolution
     evidence, conservative shapes, and call-driven rule/edge shapes from typed Dart owners plus authored source.
-  - [ ] **STAGED / GENERATED PROVENANCE** — Add distinct payload/parse-job/result records and exact relation
+  - [x] **STAGED / GENERATED PROVENANCE** — Add distinct payload/parse-job/result records and exact relation
     directions plus generated-v2 selected-plan identity without retaining body AST or implementation source.
-  - [ ] **EXACT 22 / 25 / ISOLATION** — Deep-equal the complete neutral calls target with Unicode/interleaving,
+  - [x] **EXACT 22 / 25 / ISOLATION** — Deep-equal the complete neutral calls target with Unicode/interleaving,
     detached clone, public-omission, and AST/ActionIR/generated-source/path/execution/trace denial proof.
   - [ ] **SIGNOFF / HANDOFF** — Pass focused and complete Dart, semantic/Unicode/generated/public/canonical gates,
     synchronize durable surfaces, clean artifacts, and close before query leaf `.10.5.4`.
@@ -8726,16 +8726,32 @@ before implementation.
       No public query, execution/observation, trace, staged/generated record, rollout, or admission surface changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.3.2`
-    Status: `in_progress` (2026-07-22; task-tree owned after the clean `.10.5.3.1` commit)
+    Status: `done` (2026-07-22)
     Goal: Complete Dart staged and generated provenance with exact 22-record / 25-relation parity.
     Depends on: `.10.5.3.1`
     Acceptance: Add distinct function body payload/parse-job/result records with exact contains/consumes/produces/
       lowered-from/staged-by directions and selected generated-v2 handler-plan provenance. Deep-equal the complete
       calls target, prove fresh detached clones plus AST/ActionIR/body/generated-source/path denial, and retain no
       query or runtime observation surface.
+    Verification: The private Dart projector now completes the neutral calls target at exactly 22 records / 25
+      relations. Each registered function's existing staged sidecars are policy-checked and projected as three
+      distinct plain-data `staged_artifact` records: decoded body payload, native ActionIR parse job, and successful
+      ActionIR result. Exact `contains`, `consumes`, `produces`, `staged_by`, and `lowered_from` directions preserve
+      payload/job/result identity without returning body source, payload internals, the typed body AST, or generated
+      implementation source. The already-retained generated-v2 plan is contract/source/order-checked against the
+      compiled authority; only the selected entry's handler-plan identity becomes a separate
+      `generated_artifact` linked by `generated_as`, and no emitter or target runtime is invoked. The complete calls
+      fixture now deep-equals the neutral oracle without filtering. Focused staged/generated and isolation proof
+      passes 4/4; combined calls/static/foundation proof passes 16/16. Complete Dart passes format 77/0, fatal
+      analysis, package 318, primary 66x2, and corpus 105/105. Semantic governance remains 6/20/73 at rollout 3/9
+      and native admission 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; public proof is concurrency
+      3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI passes Rust
+      semantic admission 1/1 in 80.50 seconds, primary 66x2, and Phase 0 1,031/1,031 in 638 seconds. No public
+      query, runtime observation, trace, path, execution, rollout, or admission surface changes.
+      Knowledge Map is 674 facts / 5,052 question keys.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.3.3`
-    Status: `pending`
+    Status: `in_progress` (2026-07-22; task-tree owned for the clean `.10.5.3.2` handoff)
     Goal: Compose calls/staging/generated signoff and close the Dart calls parent.
     Depends on: `.10.5.3.2`
     Acceptance: Re-run exact calls plus all-static/foundation proof, complete Dart package/primary/corpus,
@@ -11071,13 +11087,14 @@ code passes Rust semantic admission 1/1 in 77.49 seconds, primary 66x2, and Phas
 Repair child `.10.5.2.3.0` serializes untracked-selector probes through their owning final scan and keeps them
 outside Dart formatter traversal.
 
-Calls/staging audit `.10.5.3.0` is behavior-free and complete from clean base `64fdace0`. Typed core `.10.5.3.1`
-now deep-equals the neutral 18-record / 16-relation non-staged subset from registry, typed ActionIR/contracts, and
-authored-source correlation. It preserves merged function/rule order, outer-before-inner calls, Unicode byte/scalar
-evidence, resolution, bindings, decisions/explanations, and conservative shapes through a private detached seam.
-Complete Dart is 77/0 format, analysis clean, package 317, primary 66x2, and corpus 105/105; canonical is Rust
-admission 77.26s, primary 66x2, and Phase 0 1,031/1,031 in 627s. Exact staged/generated completion `.10.5.3.2` is
-next, followed by composed closeout `.3`; query/runtime/rollout/admission remain absent.
+Calls/staging audit `.10.5.3.0` and typed core `.10.5.3.1` are complete. Exact completion `.10.5.3.2` now maps each
+function's native body payload/parse-job/result sidecars into three distinct neutral staged records with exact
+directed provenance and maps the already-retained selected generated-v2 handler row into one separate generated
+record. The complete private calls projection deep-equals all 22 records / 25 relations; no body/AST/ActionIR,
+generated implementation, path, execution, trace, sink, or runtime observer crosses the detached seam. Focused is
+4/4, combined calls/static/foundation is 16/16, complete Dart is 77/0 format, analysis clean, package 318, primary
+66x2, and corpus 105/105; canonical is Rust admission 80.50s, primary 66x2, and Phase 0 1,031/1,031 in 638s.
+Composed closeout `.10.5.3.3` is next; query/runtime/rollout/admission remain absent.
 
 ### Historical frontier sequence
 
@@ -11504,8 +11521,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `active` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.3.0 | `FUTURE-PARITY-BACKLOG.10.5.3.0` | `done` | Freeze exact Dart calls/staging/generated authorities and dependency split. |
 | 74.4.3.1 | `FUTURE-PARITY-BACKLOG.10.5.3.1` | `done` | Exact 18/16 typed functions/helpers/calls/bindings core, source, resolution, and shapes passes canonical signoff. |
-| 74.4.3.2 | `FUTURE-PARITY-BACKLOG.10.5.3.2` | `active` | Complete staged/generated provenance and exact 22/25 parity. |
-| 74.4.3.3 | `FUTURE-PARITY-BACKLOG.10.5.3.3` | `pending` | Compose complete calls signoff and close the parent. |
+| 74.4.3.2 | `FUTURE-PARITY-BACKLOG.10.5.3.2` | `done` | Complete staged/generated provenance and exact 22/25 parity. |
+| 74.4.3.3 | `FUTURE-PARITY-BACKLOG.10.5.3.3` | `active` | Compose complete calls signoff and close the parent. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |

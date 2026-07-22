@@ -9,10 +9,10 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.3.1` — exact Dart typed call/binding core projection.
-- latest_commit: `8176053f` is the clean activation base; the current commit owns typed-core leaf `.10.5.3.1`.
-- active_work_unit: `.10.5.3.1` is implementation-, verification-, and documentation-complete; commit remains.
-- next_action: from the clean typed-core commit, continue `.10.5.3.2` staged/generated exact 22/25 completion.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.3.2` — exact Dart staged/generated calls completion.
+- latest_commit: `e87ececa` is the clean typed-core base; the current commit owns exact-completion leaf `.10.5.3.2`.
+- active_work_unit: `.10.5.3.2` is implementation-, verification-, and documentation-complete; commit remains.
+- next_action: from the clean exact-completion commit, run composed calls closeout `.10.5.3.3` and close `.10.5.3`.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -40,16 +40,16 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - current_dart_semantic_map: public `SemanticIndex` copies decoded text/strict UTF-8 and privately owns canonical
   bytes, SHA-256, exact byte/scalar coordinates, typed AST, and compiled authority. One staged parse/validate/
   compile/entry/plan pass exposes only immutable ceiling-bounded source plus outcome/diagnostic/entry/plan values.
-  All five private static targets are exact through `.10.5.2`. Typed core `.10.5.3.1` now deep-equals the neutral
-  18-record/16-relation non-staged calls subset from registry, typed ActionIR/contracts, and occurrence-safe source:
-  merged function/rule order, functions/helpers/calls/bindings, resolution, Unicode evidence, and conservative
-  shapes. Target/emitted execution, paths, runtime/trace/sinks, AST/IR, public records, and query remain absent;
-  staged/generated 22/25 completion is `.2`, and native failure/rollout/admission remain unchanged.
+  All five private static targets are exact through `.10.5.2`. Calls completion `.10.5.3.2` now deep-equals all
+  22 records/25 relations: typed functions/helpers/calls/bindings plus distinct native staged payload/job/result
+  records and one validated selected generated-v2 handler-plan record. Target/emitted execution, body/AST/IR,
+  generated implementation, paths, runtime/trace/sinks, public records, and query remain absent; composed closeout
+  is `.3`, and native failure/rollout/admission remain unchanged.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: typed core 3/3; selector concurrency 3/3, executable 0/19, retirement 5/6/8/0, public 59/27/0;
-  Dart format 77/0, analysis, package 317, primary 66x2, corpus 105/105; semantic 6/20/73 at 3/9+2/6; Unicode
-  806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 77.26s, primary 66x2, and Phase 0 1,031/1,031
-  in 627s. Knowledge Map is 674/5,048; mdBook/doctrines/memory/diff/cleanup pass.
+- current_signoff: exact calls 4/4; combined calls/static/foundation 16/16; selector concurrency 3/3, executable
+  0/19, retirement 5/6/8/0, public 59/27/0; Dart format 77/0, analysis, package 318, primary 66x2, corpus 105/105;
+  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 80.50s,
+  primary 66x2, and Phase 0 1,031/1,031 in 638s. Knowledge Map is 674/5,052; mdBook/doctrines/memory/diff/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.5.3.1` typed core docs/gates/commit pending; `.23` queued.
+- blockers: none. in_flight_uncommitted: verified `.10.5.3.2` exact calls docs/gates/commit pending; `.23` queued.

@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.2` — preserve staged versus generated provenance): Dart already
+  retained function-body payload, parse-job, and result sidecars plus one generated-v2 plan. The semantic adapter
+  validates those typed authorities and maps them; it neither reparses to invent staging facts nor runs the emitter.
+  Payload/job/result remain three records because they answer different causal questions: what source fragment was
+  staged, which parser contract consumed it, and which typed result was produced. `consumes` and `produces` point
+  from job to payload/result, while `staged_by` points result to job and `lowered_from` points result to payload.
+
+  Generated provenance is a different axis. The retained plan is cross-checked against compiled order, source
+  identity, contract, and format; only the selected handler row becomes a `generated_artifact` connected to its
+  rule by `generated_as`. No implementation source is generated or retained. This separation prevents a parse job
+  from being mislabeled as generated code and keeps the projection reproducible without executing target behavior.
+
+  The exact fixture now compares all 22 records / 25 relations with no staged/generated filtering. Recursive denial
+  includes body source/payload/job/AST plus generated source, alongside the existing ActionIR/path/execution/trace
+  ceiling. Focused proof is 4/4, combined calls/static/foundation is 16/16, complete Dart is 318 + 66x2 + 105/105,
+  and canonical signoff is Rust semantic admission 80.50s plus Phase 0 1,031/1,031 in 638s.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.1` — correlate typed meaning inside a bounded authored owner):
   Dart's typed ActionIR is the authority for call structure, arguments, resolution inputs, and value flow, but its
   local spans are not physical source coordinates. The projector therefore walks typed calls in outer-before-inner

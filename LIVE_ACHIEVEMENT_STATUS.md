@@ -8,18 +8,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Typed calls core `FUTURE-PARITY-BACKLOG.10.5.3.1` is implementation- and verification-complete from clean audit
-  commit `8176053f`; live-doc/book sync and commit remain. After its clean commit, `.10.5.3.2` adds only staged and
-  generated provenance to reach exact 22/25; no public query, runtime observation, rollout, or admission is active.
+- Exact calls completion `FUTURE-PARITY-BACKLOG.10.5.3.2` is implementation- and verification-complete from clean
+  typed-core commit `e87ececa`; live-doc/book sync and commit remain. After its clean commit, `.10.5.3.3` composes
+  final calls signoff and closes `.10.5.3`; no public query, runtime observation, rollout, or admission is active.
 
-The private projector now deep-equals the neutral 18-record / 16-relation non-staged core. Registry functions,
-typed function/edge ActionIR and contracts, static identities, and authored-source correlation emit exact function,
-helper, call, binding, resolution, source, decision/explanation, and conservative-shape evidence.
+The private projector now deep-equals all 22 neutral records / 25 relations. Existing function sidecars map to
+distinct payload, parse-job, and result records with exact directed provenance; the already-retained generated-v2
+plan maps only its validated selected handler row to one separate generated artifact. No emitter or runtime runs,
+and body source/payload/AST, ActionIR, generated implementation, paths, trace, sinks, and observers remain private.
 
-Compiled definition order omits function shells and registry spans are line-only, so exact authored order uses the
-staged body scalar span to locate and merge each shell. Local ActionIR spans remain normalized; occurrence-safe
-outer-before-inner correlation inside bounded source locks interleaving and Unicode byte/scalar evidence. Focused
-3/3, Dart 77/0 + 317 + 66x2 + 105/105, and canonical 77.26s + 66x2 + 1,031/627s pass.
+Focused staged/generated/isolation proof is 4/4, combined calls/static/foundation is 16/16, Dart is 77/0 + 318 +
+66x2 + 105/105, and canonical signoff is Rust semantic admission 80.50s + primary 66x2 + Phase 0 1,031/638s.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -51,6 +50,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.2 — complete Dart calls projection**
+  (DONE in this commit from clean base `e87ececa`).
+
+  **Result:** Native function body payload/job/result sidecars and the retained selected generated-v2 handler plan
+  complete the detached private calls target at exact 22/25, without exposing implementation or executing a target.
+
+  **Proof:** Focused 4/4; combined 16/16; Dart format 77/0, analysis, package 318, primary 66x2, corpus 105/105;
+  semantic 6/20/73, Unicode 806/9/8/2, generated v1/10/80-0-0, public 59/27/0; canonical Rust admission 80.50s,
+  primary 66x2, and Phase 0 1,031/1,031 in 638s; Knowledge Map 674/5,052.
+
+  **Next:** after this clean commit, run `.10.5.3.3` composed closeout and close the calls parent.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.1 — add Dart typed call projection**
   (DONE in this commit from clean base `8176053f`).
 

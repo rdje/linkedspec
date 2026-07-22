@@ -43,6 +43,8 @@ import '../compiler/compiled_spec.dart'
         EntryRuleSelectionException,
         compileSpec;
 import '../parser/spec_parser.dart' show SpecParseException;
+import '../parser/staged_parser_registry.dart'
+    show actionIrBodySpecId, actionIrBodyTopRule;
 import '../parser/unicode_rule_label.dart' show isRuleLabel;
 import '../parser/user_function_definition_parser.dart'
     show parseSpecWithStagedUserFunctionDefinitions;

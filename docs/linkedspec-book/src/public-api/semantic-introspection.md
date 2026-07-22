@@ -138,10 +138,10 @@ records or relations, so static construction cannot activate trace or execution.
 Dart callers still cannot query or obtain the projection, AST, ActionIR, descriptor, compiled regexes, generated
 implementation source, paths, trace, diagnostic sinks, or runtime observers. Composed static signoff passes all
 six exact construction/isolation cases plus complete Dart/public/canonical gates and closes `.10.5.2` without
-semantic rollout or native-admission promotion. Calls/bindings/staged/generated provenance is next in `.10.5.3`;
-capabilities/query, typed runtime observations, and backend admission remain later work.
+semantic rollout or native-admission promotion. Calls/bindings/staged/generated projection is now exact through
+`.10.5.3.2`; capabilities/query, typed runtime observations, and backend admission remain later work.
 
-The Dart calls-projection typed core is now exact. The complete neutral target has 22 records and 25 relations;
+The Dart calls projection is now exact. The complete neutral target has 22 records and 25 relations;
 `.10.5.3.1` deep-equals the 18-record / 16-relation subset left after deliberately excluding the three staged
 artifacts, one generated artifact, and every relation touching them. The private projector emits functions,
 helpers, calls, bindings, reads/writes, resolution evidence, decisions, explanations, and conservative shapes from
@@ -171,9 +171,32 @@ User-function registry resolution precedes helper fallback. Shape inference is i
 literals, current bindings, registered return signatures, and the three governed fixture helpers; uncertainty is
 preserved rather than guessed. Results are fresh JSON-compatible clones, and the package-internal exact-oracle
 extension is absent from the public Dart umbrella. AST/ActionIR, descriptors, compiled regexes, generated source,
-paths, executors, trace, diagnostic sinks, and runtime observers remain private. `.10.5.3.2` adds only staged and
-generated provenance to reach 22/25, and `.10.5.3.3` composes closeout; Dart still exposes no semantic query or
-runtime observation surface.
+paths, executors, trace, diagnostic sinks, and runtime observers remain private.
+
+`.10.5.3.2` completes the remaining provenance from authorities already retained by construction. For every
+registered function, Dart validates the native body sidecars and projects three separate `staged_artifact`
+records:
+
+- the `payload` identifies the function-body fragment and its parent path;
+- the `parse_job` identifies the native ActionIR parser/top rule plus result and failure policies; and
+- the `result` records successful typed lowering and its bounded value shape.
+
+Their direction is causal and fixed: the function `contains` all three, the job `consumes` the payload and
+`produces` the result, the result is `staged_by` the job, and the result is `lowered_from` the payload. The adapter
+does not return body source, the sidecar payload map, parse-job implementation state, or the typed body AST. It
+validates and maps existing state rather than reparsing to invent provenance.
+
+Generated provenance remains separate. The retained `linkedspec-generated-source-v2` plan is checked against its
+format, caller source identity, compiled rule order, and families. Only the selected entry row becomes one
+`generated_artifact` handler-plan record linked from the selected rule by `generated_as`. This does not emit Dart
+source, construct a generated parser, or execute the target specification. A staged parse job is therefore never
+misclassified as generated code.
+
+The exact calls fixture now deep-equals all 22 records and 25 relations without filtering. An additional proof
+locks the three distinct staging roles, every relation direction above, the selected generated handler identity,
+fresh detached clones, public omission, and recursive denial of body/AST/ActionIR/generated-source/path/execution/
+trace leakage. `.10.5.3.3` is the composed closeout; Dart still exposes no semantic query or runtime observation
+surface, and rollout/admission remain unchanged.
 
 ## Current Rust construction and query surface
 
@@ -959,7 +982,8 @@ The dependency order is:
 | `.10.5.2` | Dart private static projection parent | complete; all five construction targets exact |
 | `.10.5.3.0` | Dart calls/staging/generated authority map and split | complete; behavior-free exact 22/25 plan |
 | `.10.5.3.1` | Dart typed functions/helpers/calls/bindings core | complete; exact private 18/16 non-staged subset |
-| `.10.5.3.2-.3` | Dart staged/generated completion and closeout | pending; exact 22/25 completion next |
+| `.10.5.3.2` | Dart staged/generated exact completion | complete; private 22/25 target deep-equals neutral oracle |
+| `.10.5.3.3` | Dart calls composition closeout | active next; no new behavior intended |
 | `.10.5.4-.10.5.6` | Dart query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

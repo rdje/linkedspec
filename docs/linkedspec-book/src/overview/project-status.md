@@ -509,9 +509,11 @@ Three backbone items tracked major structural modernization — all done:
   remain reusable input rather than the wire model. Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` each ship
   opaque strict in-memory construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated
   projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
-  exact 12-role admission consumer. Queries cannot compile, execute, read paths, or expose host IR. Rollout is
-  3 complete / 6 pending and native admission 2 complete / 4 pending; only Perl and Rust are admitted. MCP remains
-  handle-only later transport and owns no semantic or filesystem behavior.
+  exact 12-role admission consumer. Dart now also has exact private source/static/call/staged/generated projection:
+  `.10.5.3.2` completes all 22 calls records / 25 relations with distinct payload/job/result and selected generated
+  handler-plan provenance, but exposes no query or runtime observation. Queries cannot compile, execute, read
+  paths, or expose host IR. Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending; only
+  Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

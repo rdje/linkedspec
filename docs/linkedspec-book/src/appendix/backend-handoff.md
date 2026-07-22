@@ -230,6 +230,12 @@ Ordinary Dart rule/body nodes are line-oriented and loaded state includes a host
 must copy caller source and logical identity and own exact byte/scalar correlation. Runtime observation must be a
 typed invocation-local channel distinct from trace and diagnostic output.
 
+Dart now implements that private construction through exact static and call/staged/generated projection. Calls
+deep-equal the complete 22-record / 25-relation target: native function sidecars remain distinct payload, parse-job,
+and result records with causal directions, while the validated selected generated-v2 row remains a separate
+generated handler-plan record. The adapter emits no implementation source and executes no target. Immutable query,
+typed runtime observation, and one composed admission consumer remain the next independent layers.
+
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
 class, consumes it at all 12 label sites in first-authoritative `specs/spec.spec`, freshness-locks all four corpus

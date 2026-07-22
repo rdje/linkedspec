@@ -1,6 +1,6 @@
 part of 'semantic_index.dart';
 
-// FUTURE-PARITY-BACKLOG.10.5.3.1 — private typed call/binding core.
+// FUTURE-PARITY-BACKLOG.10.5.3.1-.2 — private typed calls and provenance.
 
 final class _SemanticCallDefinition {
   const _SemanticCallDefinition.function({
@@ -103,6 +103,8 @@ void _extendSemanticCallProjection({
   required String contentDigest,
   required SpecFile parsed,
   required CompiledSpec compiled,
+  required SemanticEntrySelection? entry,
+  required SemanticGeneratedPlanInput? generatedPlan,
   required Map<String, Object?> sourceRefs,
   required List<Map<String, Object?>> records,
   required List<Map<String, Object?>> relations,
@@ -259,6 +261,14 @@ void _extendSemanticCallProjection({
     }
   }
   builder.applyEdgeShapes();
+  _addSemanticGeneratedPlan(
+    logicalName: logicalName,
+    compiled: compiled,
+    entry: entry,
+    generatedPlan: generatedPlan,
+    records: records,
+    relations: relations,
+  );
 }
 
 final class _SemanticEmittedCall {
@@ -739,6 +749,197 @@ void _addSemanticFunction({
       toId: id,
       order: declarationOrder,
       source: source,
+    ),
+  );
+  _addSemanticStagedArtifacts(
+    function: function,
+    functionId: id,
+    functionSource: source,
+    records: records,
+    relations: relations,
+  );
+}
+
+void _addSemanticStagedArtifacts({
+  required UserFunctionEntry function,
+  required String functionId,
+  required String functionSource,
+  required List<Map<String, Object?>> records,
+  required List<Map<String, Object?>> relations,
+}) {
+  final payload = function.bodyPayload;
+  final job = function.bodyParseJob;
+  if (payload is! Map<Object?, Object?> || job == null) {
+    throw _semanticCallCorrelationError(
+      'Compiled function has no staged payload/job authority',
+      function.name,
+    );
+  }
+  final expectedPath = ['functions', '${function.index}', 'body_source'];
+  if (payload['kind'] != 'staged_payload' ||
+      payload['node_kind'] != 'function_definition' ||
+      payload['payload_kind'] != 'function_body' ||
+      payload['text'] != function.bodySource ||
+      !_plainValuesEqual(payload['parent_ast_path'], expectedPath) ||
+      job.nodeKind != 'function_definition' ||
+      job.payloadKind != 'function_body' ||
+      job.text != function.bodySource ||
+      !_plainValuesEqual(job.parentAstPath, expectedPath) ||
+      job.parserSpecId != actionIrBodySpecId ||
+      job.topRule != actionIrBodyTopRule ||
+      job.resultPolicy != 'replace_field' ||
+      job.resultField != 'body_ast' ||
+      job.failurePolicy != 'fail') {
+    throw _semanticCallCorrelationError(
+      'Native staged function metadata does not match its typed owner',
+      function.name,
+    );
+  }
+
+  final status = function.bodyAst == null ? 'failed' : 'succeeded';
+  final rows = <(String, String, String)>[
+    ('payload', 'action_source', 'string'),
+    ('parse_job', 'action_program', 'unknown'),
+    ('result', 'action_program', 'unknown'),
+  ];
+  final ids = <String, String>{};
+  for (final (order, row) in rows.indexed) {
+    final (artifactKind, nodeKind, shapeKind) = row;
+    final id = 'staged:$artifactKind:$functionId:$order';
+    ids[artifactKind] = id;
+    records.add(
+      _semanticRecord(
+        id: id,
+        kind: 'staged_artifact',
+        name:
+            '${function.name} body '
+            '${artifactKind == 'parse_job' ? 'parse job' : artifactKind}',
+        ownerId: functionId,
+        order: order,
+        source: functionSource,
+        facts: {
+          'artifact_kind': artifactKind,
+          'payload_kind': 'function_body',
+          'node_kind': nodeKind,
+          'parent_path': [functionId],
+          'parser_spec_id': 'linkedspec-action-v1',
+          'top_rule': 'FunctionBody',
+          'result_policy': 'typed_action_program',
+          'failure_policy': 'compile_diagnostic',
+          'status': status,
+          'value_shape': _semanticValueShape(shapeKind),
+        },
+      ),
+    );
+    relations.add(
+      _semanticRelation(
+        kind: 'contains',
+        fromId: functionId,
+        toId: id,
+        order: order,
+        source: functionSource,
+      ),
+    );
+  }
+
+  relations.addAll([
+    _semanticRelation(
+      kind: 'lowered_from',
+      fromId: ids['payload']!,
+      toId: _semanticSourceId,
+      order: 0,
+      source: functionSource,
+    ),
+    _semanticRelation(
+      kind: 'consumes',
+      fromId: ids['parse_job']!,
+      toId: ids['payload']!,
+      order: 0,
+      source: functionSource,
+    ),
+    _semanticRelation(
+      kind: 'produces',
+      fromId: ids['parse_job']!,
+      toId: ids['result']!,
+      order: 0,
+      source: functionSource,
+    ),
+    _semanticRelation(
+      kind: 'lowered_from',
+      fromId: ids['result']!,
+      toId: ids['payload']!,
+      order: 0,
+      source: functionSource,
+    ),
+    _semanticRelation(
+      kind: 'staged_by',
+      fromId: ids['result']!,
+      toId: ids['parse_job']!,
+      order: 0,
+      source: functionSource,
+    ),
+  ]);
+}
+
+void _addSemanticGeneratedPlan({
+  required String logicalName,
+  required CompiledSpec compiled,
+  required SemanticEntrySelection? entry,
+  required SemanticGeneratedPlanInput? generatedPlan,
+  required List<Map<String, Object?>> records,
+  required List<Map<String, Object?>> relations,
+}) {
+  if (entry == null || generatedPlan == null) {
+    throw _semanticCallCorrelationError(
+      'Compiled call projection has no entry/generated-plan authority',
+      _semanticSpecId,
+    );
+  }
+  final labels = [for (final row in generatedPlan.rows) row.label];
+  if (generatedPlan.contractId != linkedSpecGeneratedSourceContract ||
+      generatedPlan.formatVersion != linkedSpecGeneratedSourceFormatVersion ||
+      generatedPlan.sourceIdentity != logicalName ||
+      !_plainValuesEqual(labels, compiled.compiledRuleOrder)) {
+    throw _semanticCallCorrelationError(
+      'Retained generated plan does not match compiled semantic authority',
+      _semanticSpecId,
+    );
+  }
+  final selected = generatedPlan.rows
+      .where((row) => row.label == entry.label)
+      .toList(growable: false);
+  if (selected.length != 1) {
+    throw _semanticCallCorrelationError(
+      'Generated plan has no unique selected entry row',
+      entry.label,
+      fields: {'selected_rows': selected.length},
+    );
+  }
+
+  const id = 'generated:handler_plan:0';
+  records.add(
+    _semanticRecord(
+      id: id,
+      kind: 'generated_artifact',
+      name: 'handler plan',
+      ownerId: _semanticSpecId,
+      order: 0,
+      source: null,
+      facts: {
+        'artifact_kind': 'handler_plan',
+        'contract_id': generatedPlan.contractId,
+        'format_version': generatedPlan.formatVersion,
+        'plan_family': selected.single.family,
+      },
+    ),
+  );
+  relations.add(
+    _semanticRelation(
+      kind: 'generated_as',
+      fromId: _semanticSpecId,
+      toId: id,
+      order: 0,
+      source: null,
     ),
   );
 }

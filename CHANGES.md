@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.2 — complete Dart calls projection
+
+Dart's private semantic projector now deep-equals the complete neutral calls target at exactly 22 records / 25
+relations. It validates each registered function's existing staged body sidecars and emits distinct plain-data
+payload, parse-job, and result records with exact `contains`, `consumes`, `produces`, `staged_by`, and
+`lowered_from` directions. Staging identity and policy are visible without returning body source/payload internals,
+the typed body AST, or ActionIR.
+
+The projector also validates the already-retained generated-v2 plan against compiled rule order, source identity,
+contract, and format. It projects only the selected entry's handler-plan identity as a separate generated artifact
+linked by `generated_as`; it does not rebuild or emit source and does not invoke the target runtime. The complete
+fixture now deep-equals the neutral oracle without filtering staged/generated records or relations, and returned
+data remains fresh, detached, JSON-compatible, and private to the package-internal testing seam.
+
+Focused staged/generated/isolation proof passes 4/4; combined calls/static/foundation proof passes 16/16. Complete
+Dart passes format 77/0, fatal analysis, package 318, primary 66x2, and corpus 105/105. Semantic remains 6/20/73 at
+rollout 3/9 and admission 2/6; Unicode is 806/9/8/2; generated source remains v1/10/80-0-0; public proof remains
+concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI passes
+Rust semantic admission 1/1 in 80.50 seconds, primary 66x2, and Phase 0 1,031/1,031 in 638 seconds. Public query,
+runtime observation, trace, path, execution, semantic rollout, and native admission remain unchanged. Knowledge
+Map is 674 facts / 5,052 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.1 — add Dart typed call projection
 
 Dart's private semantic projector now deep-equals the neutral 18-record / 16-relation non-staged calls core.

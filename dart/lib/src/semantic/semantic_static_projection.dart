@@ -185,6 +185,7 @@ _SemanticStaticProjection _buildSemanticStaticProjection({
       parsed: parsed,
       compiled: compiled,
       entry: outcome.entry,
+      generatedPlan: outcome.generatedPlan,
     );
   }
   return _buildFailedStaticProjection(
@@ -483,6 +484,7 @@ _SemanticStaticProjection _buildCompiledStaticProjection({
   required SpecFile parsed,
   required CompiledSpec compiled,
   required SemanticEntrySelection? entry,
+  required SemanticGeneratedPlanInput? generatedPlan,
 }) {
   final scans = _scanSemanticRules(sourceText, parsed);
   final scansByLabel = <String, _SemanticScannedRule>{
@@ -795,6 +797,8 @@ _SemanticStaticProjection _buildCompiledStaticProjection({
     contentDigest: contentDigest,
     parsed: parsed,
     compiled: compiled,
+    entry: entry,
+    generatedPlan: generatedPlan,
     sourceRefs: sourceRefs,
     records: records,
     relations: relations,
