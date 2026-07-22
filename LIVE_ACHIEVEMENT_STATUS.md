@@ -8,14 +8,10 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Shared executable-label/corpus-freshness/current-bridge parent `FUTURE-PARITY-BACKLOG.10.5.0.1` is complete
-  through `.0-.2`. One generated Unicode 17 class feeds all 12 canonical sites; Dart executes current structural
-  grammar; all four self-hosted corpus inputs are freshness-locked; sparse Perl AND traversal is repaired; and
-  physical-line boundaries reject header/action/blind label-prefix truncation on the exact 5x2 matrix.
-
-The next PNT frontier is pending Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2`, which owns one
-generated scalar classifier/scanner plus complete parsed and externally constructed identity validation. It may be
-activated only after the `.10.5.0.1.2.1` closeout commit leaves the repository clean.
+- Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2` is active and split into `.0-.4`. Generated
+  classifier foundation `.10.5.0.2.0` is signoff-complete; `.10.5.0.2.1` is the next pending parser/validator
+  consumption frontier and may activate only after the `.0` commit leaves the repository clean. Downstream route
+  identity, negative/isolation proof, and composed signoff remain `.2-.4`.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -34,6 +30,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.0 — generate Dart Unicode label primitives**
+  (DONE in this commit from clean base `d17c1edf`).
+
+  **Result:** One deterministic internal Dart artifact encodes all 806 pinned ranges and exposes binary-search
+  scalar membership, complete-label validation, and supplementary-safe prefix/remainder scanning. It remains
+  intentionally unused by parser/validator code until `.1`.
+
+  **Proof:** Independent regeneration/endpoint/topology checker; all range endpoints and neutral 9/8/2 fixtures;
+  focused 3; complete Dart format/analyze/package 282/primary 66x2/corpus 105; KM 672/5,000; mdBook/four doctrines/
+  diff/cleanup; canonical Rust admission 76.93s, primary 66x2, Phase 0 1,031/1,031 in 620s, exit 0.
+
+  **Next:** after this clean commit, activate `.10.5.0.2.1` task-tree-first for native parser/validator routing.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.1.2.1 — close current-grammar Unicode label boundaries**
   (DONE in this commit from clean base `fef93b5a`).
 

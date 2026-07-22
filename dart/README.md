@@ -41,6 +41,22 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 bash ../tools/run_dart_local.sh
 ```
 
+## Generated rule-label primitives
+
+`lib/src/parser/unicode_rule_label.dart` is generated from the pinned Unicode 17.0.0 `XID_Continue` contract. It
+contains all 806 merged scalar ranges, binary-search membership, complete-label validation, and a longest-prefix
+scanner that keeps supplementary UTF-16 pairs intact. Regenerate and check it from the repository root:
+
+```sh
+python3 unicode_case/generate_unicode_rule_label_contract.py
+python3 tools/check_unicode_rule_label_contract.py
+cd dart && dart test test/unicode_rule_label_classifier_test.dart
+```
+
+The artifact is an internal frontend primitive. Leaf `.10.5.0.2.0` generates and proves it without changing
+parsing; `.10.5.0.2.1` separately owns replacing host-`\w` header/action/blind/bare scanning and validating labels
+from parsed, deserialized, and programmatic ASTs.
+
 ## Generated source
 
 `emitDartSourceV2(compiled, sourceIdentity)` emits a deterministic Dart library

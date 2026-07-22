@@ -848,6 +848,11 @@ content migration exists yet.
   distinct fixtures through current `specs/spec.spec` on the complete 5x2 command matrix. That proof exposed and
   repaired Rust `entry_group(N)` returning `""` rather than null for an absent compacted capture. The four backend
   corpus runners remain 105/105; the shared executable-grammar parent is closed before Dart native-label rollout.
+  Dart rollout `.10.5.0.2` is split into five omission-safe leaves. Foundation `.10.5.0.2.0` now generates one
+  exact internal Dart artifact from the same 806 neutral ranges, with binary-search scalar classification,
+  complete-label validation, and a supplementary-safe longest-prefix scanner. It is independently regenerated,
+  endpoint-compared, and fixture-tested but intentionally not yet imported by the native parser or validator;
+  `.10.5.0.2.1` owns that behavior change.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

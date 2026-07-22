@@ -8,6 +8,8 @@ answers:
   - "are Töp and decomposed Töp the same rule label"
   - "are rule labels case sensitive"
   - "where is the Rust Unicode rule label classifier generated"
+  - "where is the Dart Unicode rule label classifier generated"
+  - "does the Dart Unicode label scanner split supplementary UTF-16 pairs"
   - "where is the portable self-hosted rule label regex class generated"
   - "is the self-hosted rule label class derived from host Unicode tables"
   - "does specs/spec.spec consume the pinned Unicode rule label class"
@@ -16,9 +18,9 @@ answers:
   - "which backends still need Unicode rule label alignment"
 date: 2026-07-21
 status: current
-tags: [grammar, unicode, rule-labels, rust, generated-data, validation, portability]
-evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/runtime/matching.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
-reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+tags: [grammar, unicode, rule-labels, rust, dart, generated-data, validation, portability]
+evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/runtime/matching.dart; dart/test/unicode_rule_label_classifier_test.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
 ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
@@ -40,6 +42,13 @@ every positive, negative, and distinct fixture. Leaf `.10.5.0.1.0` adds only thi
 `.10.5.0.1.1` consumes it exactly 12 times in canonical `specs/spec.spec`: one declaration site and all action,
 blind-call, and bare-edge block/fluent/plain target sites. The checker rejects a missing, extra, or substituted
 site while function/helper/lifecycle/fluent-method/mark identifiers retain their separate grammars.
+
+The same generator now writes `dart/lib/src/parser/unicode_rule_label.dart`: one internal table with exact
+binary-search scalar membership, complete-label validation, and longest-prefix scanning. Dart iterates runes but
+must slice UTF-16 strings, so the generated scanner advances two code units for a supplementary scalar and one for
+all other accepted scalars. The checker regenerates the file, independently compares all 806 endpoints, and locks
+the algorithm topology; focused tests exercise every range boundary and neutral fixture. This `.10.5.0.2.0`
+foundation is not imported by Dart's parser/validator until `.10.5.0.2.1`.
 
 Dart's bounded self-hosted regex bridge derives that exact label atom from each canonical structural pattern
 rather than owning another label table. It enables Unicode regex mode whenever a pattern contains supplementary

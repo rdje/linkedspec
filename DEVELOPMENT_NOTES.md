@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.0` — generated Unicode data must adapt to the host string model):
+  The neutral contract is scalar-based, but Dart strings are UTF-16. Membership therefore iterates `String.runes`
+  and binary-searches the exact 806 generated scalar ranges, while prefix scanning separately accumulates one or
+  two code units per accepted scalar before slicing. Treating a scalar offset as a Dart substring offset would
+  split supplementary labels such as `𐐀Rule`; using `RegExp \w` or a host Unicode property would reintroduce the
+  version drift that ADR `0051` forbids.
+
+  Generation and consumption remain separate task leaves. `.10.5.0.2.0` creates a formatter-stable internal Dart
+  artifact and proves its metadata, exact endpoints, algorithm topology, all neutral fixtures, invalid scalar
+  boundaries, and prefix/remainder behavior. It does not import the file into the hardcoded parser or validator,
+  so no syntax or externally constructed AST changes in this commit. `.10.5.0.2.1` owns that routing and must keep
+  function/helper/lifecycle/fluent/mark identifier grammars isolated.
+
+  Focused generation/checking, format, fatal analysis, and three tests pass. The complete Dart gate passes 282
+  package tests, primary 66x2, and corpus 105/105. Knowledge Map is 672/5,000; mdBook and all doctrines pass.
+  Canonical CI passes semantic 6/20/73, Rust admission in 76.93 seconds, primary 66x2, and Phase 0 1,031/1,031 in
+  620 seconds, exit 0; rollout remains 3/9 and admission 2/6.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` — membership classes need token boundaries): Replacing host
   `\w` with the pinned Unicode class fixed which scalars belong to labels but did not make the structural regexes
   complete tokens. `rule_header` still sought from arbitrary offsets, so `Top-Rule::` produced a `Rule` header;

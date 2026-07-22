@@ -42,7 +42,13 @@ python3 tools/check_unicode_rule_label_contract.py
 ```
 
 Label identity remains the exact case- and normalization-sensitive scalar sequence; this generator performs no
-normalization or case mapping. The same run also writes
+normalization or case mapping. The same run writes an internal Dart range-table classifier/validator/prefix
+scanner at `dart/lib/src/parser/unicode_rule_label.dart`. The scanner iterates Unicode scalars and converts accepted
+supplementary scalars to their two-code-unit Dart substring width, so it never cuts a UTF-16 surrogate pair. The
+checker independently compares every generated endpoint and algorithm marker; focused Dart tests cover all range
+boundaries and neutral fixtures. Native parser/validator consumption remains a separate rollout slice.
+
+The generator also writes
 `unicode_case/unicode_rule_label_regex_class.txt`: one metadata-bearing UTF-8 literal-range class for the
 self-hosted grammar. Its endpoints encode the same 806 ranges without host `\w`, Unicode-property lookup, or
 runtime-version dependence. The checker reconstructs that class independently, byte-compares it, proves every
@@ -65,5 +71,6 @@ Do not manually edit `capability_conformance/unicode_case_contract.json`,
 `perl/LinkedSpec/UnicodeCaseMapping.pm`, `rust/linkedspec-runtime/src/unicode_case_mapping.rs`,
 `dart/lib/src/runtime/unicode_case_mapping.dart`, `julia/src/runtime/UnicodeCaseMapping.jl`,
 `lua/src/linkedspec/unicode_case_mapping.lua`, `capability_conformance/unicode_rule_label_contract.json`, or
-`rust/linkedspec-core/src/unicode_rule_label.rs`, or `unicode_case/unicode_rule_label_regex_class.txt`. A Unicode
+`rust/linkedspec-core/src/unicode_rule_label.rs`, `dart/lib/src/parser/unicode_rule_label.dart`, or
+`unicode_case/unicode_rule_label_regex_class.txt`. A Unicode
 upgrade requires a new ADR, reviewed source hashes, regenerated artifacts, and explicit fixture-delta review.

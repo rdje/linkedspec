@@ -20,8 +20,8 @@ answers:
 date: 2026-07-21
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.0; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
-reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; bash tools/run_dart_local.sh; rg -n '\\\\w|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0 and .10.5.0.2.0; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
+reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
 ---
 
 Dart already owns most semantic meaning in typed, reusable layers. Staged parsing produces `SpecFile` rules and
@@ -45,9 +45,11 @@ The behavior-free `.10.5.0` probe establishes these exact current boundaries:
 
 Once a valid Unicode label is supplied programmatically, current compiled maps, descriptor output, generated plan,
 emitted source, and explicit selector preserve `Töp` exactly. That proves these consumers should compare immutable
-strings, not reclassify them. The missing prerequisite is one generated Dart Unicode 17 classifier consumed by
-header/action/blind/bare scanners and validation of externally constructed ASTs. Function/helper identifiers,
-lifecycle markers, fluent methods, and mark names are separate grammars and must not be broadened accidentally.
+strings, not reclassify them. The generated Dart Unicode 17 classifier/complete validator/prefix scanner now
+exists and is independently locked by `.10.5.0.2.0`, including supplementary-safe UTF-16 slicing. It is
+deliberately not yet imported. The remaining prerequisite is `.10.5.0.2.1` consumption by header/action/blind/bare
+scanners and validation of externally constructed ASTs. Function/helper identifiers, lifecycle markers, fluent
+methods, and mark names are separate grammars and must not be broadened accidentally.
 
 The audit also found a neutral authority conflict outside Dart's hardcoded parser. ADR `0012` makes
 `specs/spec.spec` the first authoritative `.spec` grammar, but its rule-header and edge productions embedded host

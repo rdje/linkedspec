@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.0 — generate Dart Unicode label primitives
+
+The pinned Unicode rule-label generator now emits `dart/lib/src/parser/unicode_rule_label.dart` from the same
+verified Unicode 17.0.0 `XID_Continue` rows as the neutral contract, Rust classifier, and self-hosted regex class.
+The Dart artifact contains all 806 maximally merged ranges plus binary-search scalar membership, complete-label
+validation, and a longest-valid-prefix scanner that advances on Unicode scalar boundaries without splitting a
+supplementary UTF-16 pair.
+
+The independent Unicode checker regenerates the Dart file into temporary storage, byte-compares it, separately
+extracts and compares all range endpoints to the neutral JSON, and requires the binary-search, scalar-iteration,
+and UTF-16-width topology. Three focused tests cover all range endpoints, all 9 positive / 8 negative / 2 distinct
+fixtures, invalid scalar boundaries, complete validation, and exact prefix/remainder identity.
+
+This foundation deliberately does not import the artifact into `spec_parser.dart` or `spec_validator.dart`; Dart's
+native host-`\w` parsing and external-AST validation gaps remain owned by `.10.5.0.2.1`. The complete Dart gate
+passes format, fatal analysis, 282 package tests, primary 66x2, and corpus 105/105. Semantic governance remains
+6/20/73 at rollout 3/9 and native admission 2/6. Knowledge Map 672/5,000, mdBook, memory/task metadata, all four
+doctrines, and whitespace pass. Canonical CI passes Rust semantic admission in 76.93 seconds, primary 66x2, and
+Phase 0 1,031/1,031 in 620 seconds, exit 0.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.1.2.1 — close current-grammar Unicode label boundaries
 
 Canonical `specs/spec.spec` now gives rule headers an exact physical-line start and an extra-colon guard. Bare

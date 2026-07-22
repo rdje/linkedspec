@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the pinned Unicode rule-label contract and generated Rust table."""
+"""Validate the pinned Unicode rule-label contract and generated artifacts."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.json"
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
+DART_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "unicode_rule_label.dart"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
 SELF_HOSTED_CLI_MANIFEST_PATH = (
@@ -31,6 +32,9 @@ RUNTIME_TEST_PATH = (
 RUST_ENGINE_PATH = ROOT / "rust" / "linkedspec-runtime" / "src" / "engine.rs"
 DART_SELF_HOSTED_TEST_PATH = (
     ROOT / "dart" / "test" / "self_hosted_unicode_rule_label_test.dart"
+)
+DART_CLASSIFIER_TEST_PATH = (
+    ROOT / "dart" / "test" / "unicode_rule_label_classifier_test.dart"
 )
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -78,6 +82,7 @@ def main() -> None:
     for path in (
         CONTRACT_PATH,
         RUST_PATH,
+        DART_PATH,
         SELF_HOSTED_REGEX_PATH,
         SELF_HOSTED_GRAMMAR_PATH,
         SELF_HOSTED_CLI_MANIFEST_PATH,
@@ -86,6 +91,7 @@ def main() -> None:
         RUNTIME_TEST_PATH,
         RUST_ENGINE_PATH,
         DART_SELF_HOSTED_TEST_PATH,
+        DART_CLASSIFIER_TEST_PATH,
         MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
@@ -94,6 +100,7 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="linkedspec-unicode-label-") as temp:
         generated_contract = Path(temp) / "contract.json"
         generated_rust = Path(temp) / "unicode_rule_label.rs"
+        generated_dart = Path(temp) / "unicode_rule_label.dart"
         generated_self_hosted_regex = Path(temp) / "unicode_rule_label_regex_class.txt"
         subprocess.run(
             [
@@ -105,6 +112,8 @@ def main() -> None:
                 str(generated_rust),
                 "--self-hosted-regex-output",
                 str(generated_self_hosted_regex),
+                "--dart-output",
+                str(generated_dart),
             ],
             cwd=ROOT,
             check=True,
@@ -113,6 +122,8 @@ def main() -> None:
             fail("contract differs from deterministic regeneration")
         if generated_rust.read_bytes() != RUST_PATH.read_bytes():
             fail("Rust classifier differs from deterministic regeneration")
+        if generated_dart.read_bytes() != DART_PATH.read_bytes():
+            fail("Dart classifier differs from deterministic regeneration")
         if generated_self_hosted_regex.read_bytes() != SELF_HOSTED_REGEX_PATH.read_bytes():
             fail("self-hosted regex class differs from deterministic regeneration")
 
@@ -162,6 +173,26 @@ def main() -> None:
     counts = contract["counts"]
     if counts["xid_continue_ranges"] != len(ranges):
         fail("range count drifted")
+
+    dart_text = DART_PATH.read_text(encoding="utf-8")
+    dart_ranges = [
+        (int(start, 16), int(end, 16))
+        for start, end in re.findall(
+            r"_RuleLabelRange\(0x([0-9A-F]{4,6}), 0x([0-9A-F]{4,6})\)",
+            dart_text,
+        )
+    ]
+    if dart_ranges != ranges:
+        fail("Dart range table does not independently encode the contract ranges")
+    for marker in (
+        f"const int unicodeRuleLabelRangeCount = {len(ranges)};",
+        "while (low < high)",
+        "for (final codePoint in label.runes)",
+        "endCodeUnit += codePoint > 0xFFFF ? 2 : 1;",
+        "RuleLabelPrefix? takeRuleLabelPrefix(String input)",
+    ):
+        if marker not in dart_text:
+            fail(f"Dart classifier/scanner topology marker missing: {marker}")
     for unsafe in ("\\", "/", "[", "]", "^", "-", "\n", "\r", "\0"):
         if contains(ranges, ord(unsafe)):
             fail(f"self-hosted literal regex class requires escaping for {unsafe!r}")
@@ -381,6 +412,14 @@ def main() -> None:
     ):
         if marker not in dart_test:
             fail(f"Dart self-hosted route proof missing: {marker}")
+    dart_classifier_test = DART_CLASSIFIER_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "generated metadata and all range boundaries match the contract",
+        "complete-label validation matches every neutral fixture",
+        "longest-prefix scanning preserves scalar and UTF-16 boundaries",
+    ):
+        if marker not in dart_classifier_test:
+            fail(f"Dart classifier proof missing: {marker}")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -391,6 +430,8 @@ def main() -> None:
         "require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs",
         "require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs",
         "require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart",
+        "require_tracked_file dart/lib/src/parser/unicode_rule_label.dart",
+        "require_tracked_file dart/test/unicode_rule_label_classifier_test.dart",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

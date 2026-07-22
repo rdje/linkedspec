@@ -222,6 +222,11 @@ the current canonical self-hosted grammar in both default and POSIX command envi
 executable grammar, not every backend's separate hardcoded parser: Rust implements the pinned label contract across
 its native headers/references/validation/selectors/artifacts/loaders/traces, while Dart's corresponding native
 scanner/validator rollout remains the next backend-specific lane before Dart can admit the semantic v1 fixture.
+The first Dart-native foundation is now present: one generated internal artifact encodes the same 806 ranges and
+provides binary-search scalar membership, complete-label validation, and a longest-prefix scanner that accounts
+for Dart's UTF-16 width without splitting supplementary scalars. That artifact is independently regenerated and
+fixture-tested but is not yet imported by Dart's hardcoded parser or validator; the next implementation leaf owns
+that behavior change and the later route proofs.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.
