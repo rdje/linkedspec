@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.0` — source policy and compilation outcome are separate layers):
+  The original Dart foundation acceptance combined strict constructors, Unicode coordinates, compiler outcome,
+  entry identity, generated-plan input, privacy ceilings, clone isolation, and composed regression proof. That is
+  too broad for one omission-safe implementation slice, so the behavior-free leaf freezes three dependency-ordered
+  children before production changes.
+
+  `.10.5.1.1` owns only copied decoded text/strict bytes, required logical identity, exact option errors, canonical
+  UTF-8, and the private byte/scalar source map. `.10.5.1.2` may then compose the existing staged parser,
+  validator/portable diagnostic, compiler, entry selector, and generated-plan builder into one opaque
+  compiled-or-failed authority. `.10.5.1.3` proves the combined foundation and closes the parent. This order keeps
+  coordinate/privacy defects distinguishable from language-compilation defects.
+
+  `LoadedSpec` is not a shortcut: it owns filesystem resolution and retains the host path alongside source text,
+  while semantic identity must be caller-registered and path-free. Likewise, `LinkedSpecRuntimeEngine` is outside
+  the foundation because staged parsing/compilation must not execute the target spec; later typed observations are
+  independently owned by `.10.5.5`. Descriptor JSON and AST/ActionIR serialization remain forbidden projections.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.4` — prerequisite composition is not semantic admission):
   The Dart label rollout deliberately ends with a no-production composition leaf. Individual classifier, native
   routing, identity, and negative/isolation proofs were omission-safe, but parent closure still needed one run that

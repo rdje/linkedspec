@@ -8,9 +8,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2.0-.4` is composition-closed. After the clean `.4`
-  commit, Dart semantic source-map/outcome foundation `.10.5.1` is the next task-tree-first leaf; it is not active
-  while this closeout commit is pending.
+- Behavior-free Dart semantic foundation split `FUTURE-PARITY-BACKLOG.10.5.1.0` is complete from clean
+  `ecdc1ac7`. After its clean commit, strict copied input/private Unicode source map `.10.5.1.1` is the next
+  task-tree-first leaf; no implementation leaf is active while this split commit is pending.
+
+The frozen owner constructs only from copied decoded text or strict bytes plus caller logical identity. It composes
+the staged parser, validator/portable diagnostic, compiler, entry selector, and generated-plan builder without
+runtime execution. `LoadedSpec` is excluded because it couples source text to a resolved host path. Children `.1`,
+`.2`, and `.3` separately own input/map, compiled-or-failed authority, and composed foundation closeout.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -42,6 +47,20 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.0 — split Dart semantic foundation**
+  (DONE in this commit from clean base `ecdc1ac7`).
+
+  **Result:** The opaque source/outcome parent is dependency-split before behavior code. `.1` owns strict copied
+  input and private byte/scalar mapping, `.2` owns staged compiled-or-failed state plus entry/plan identity, and
+  `.3` owns composed omission-safe foundation proof. No semantic API, execution, or governance ledger changes.
+
+  **Proof:** Neutral source/privacy contract, ADR `0049`, admitted Perl/Rust foundations, and exact Dart staged
+  parser/validator/diagnostic/compiler/entry/generated-plan owners agree; memory/task/roadmap/mdBook, all four
+  doctrines, semantic 6/20/73 at 3/9 and 2/6, Knowledge Map 672/5,007, whitespace, and generated cleanup pass. The
+  mdBook builds successfully and its 12 MiB generated output is removed.
+
+  **Next:** after this clean commit, activate `.10.5.1.1` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.4 — close Dart Unicode label prerequisite**
   (DONE in this commit from clean base `28ce295d`).
 

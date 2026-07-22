@@ -863,7 +863,9 @@ content migration exists yet.
   punctuation and newline remains a token separator; neither is reclassified as label content. No semantic
   rollout/admission is promoted. Composed `.10.5.0.2.4` re-runs complete Dart, Unicode/semantic/generated-source,
   doctrine, primary, and canonical gates and closes the five-leaf Dart label prerequisite at unchanged semantic
-  rollout 3/9 and admission 2/6. Opaque Dart semantic source/outcome work starts separately at `.10.5.1`.
+  rollout 3/9 and admission 2/6. Opaque Dart semantic source/outcome parent `.10.5.1` is now split into a completed
+  behavior-free contract leaf `.0`, strict copied input/private Unicode mapping `.1`, staged compiled-or-failed
+  authority `.2`, and composed foundation closeout `.3`; `.10.5.1.1` is the next implementation leaf.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

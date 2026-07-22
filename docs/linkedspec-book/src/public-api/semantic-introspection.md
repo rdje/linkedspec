@@ -801,7 +801,10 @@ The dependency order is:
 | `.10.4.4` | Rust capabilities/query/privacy/pages/budgets | implemented; all 19 static digests exact; admission unchanged |
 | `.10.4.5` | Rust runtime observations and direct/loaded/generated routes | implemented; twentieth digest exact; admission unchanged |
 | `.10.4.6` | composed Rust semantic admission | complete; 12 roles, 20 exact queries, Rust-only promotion |
-| `.10.5` | Dart parity | pending |
+| `.10.5.0` | Dart authority and Unicode-label prerequisite | complete |
+| `.10.5.1.0` | Dart source/outcome contract and dependency split | complete; behavior-free |
+| `.10.5.1.1-.10.5.1.3` | Dart strict input/map, compiled-or-failed owner, composed foundation | pending in dependency order |
+| `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

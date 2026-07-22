@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.0 — split Dart semantic foundation
+
+The Dart semantic source/outcome parent is frozen and dependency-split before any behavior code. The boundary
+constructs from copied decoded text or strict UTF-8 bytes plus a required caller logical name, source-detail
+ceiling, and optional exact entry selector. It retains private canonical byte/Unicode-scalar mapping and an opaque
+compiled-or-failed outcome without path reads, execution, semantic records/query, runtime observation, or
+AST/IR/descriptor exposure.
+
+The exact Dart owners are the staged user-function-aware parser, `validateSpec` and `SpecPortableDiagnostic`,
+`compileSpec`, `CompiledSpec.resolveEntryRule`, and `buildGeneratedRulePlan`. `LoadedSpec` is deliberately not the
+identity source because it binds decoded text to a resolved host path. Implementation now proceeds through strict
+input/private map `.10.5.1.1`, staged compiled-or-failed authority `.10.5.1.2`, and composed foundation signoff
+`.10.5.1.3` in that order.
+
+This slice changes no production behavior or semantic ledger. Governance remains six fixture groups / 20 exact
+responses / 73 rejected mutations, rollout 3/9, and native admission 2/6. Memory architecture at its 60-line cap,
+all four doctrines, Knowledge Map 672/5,007, mdBook, and diff hygiene pass; 12 MiB of generated book output is
+removed before commit.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.4 — close Dart Unicode label prerequisite
 
 The five-leaf Dart Unicode-label prerequisite is composition-closed without another production change. The final
