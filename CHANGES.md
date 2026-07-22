@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.3 — close Dart calls projection
+
+The Dart calls/staged/generated semantic parent is composition-closed without another production or test change.
+One 22-test suite jointly proves the complete 22-record / 25-relation calls target, distinct staged/generated
+provenance, Unicode and interleaved-function source isolation, all five static construction targets, repeated-
+lifecycle occurrence identity, strict decoded/byte source convergence, deterministic compilation failures, staged
+construction without target execution, detached clones, and omission from the public Dart umbrella.
+
+Complete Dart passes format 77/0, fatal analysis, package 318, primary 66x2, and corpus 105/105. Semantic remains
+6/20/73 at rollout 3/9 and native admission 2/6; Unicode is 806/9/8/2; generated source remains v1/10/80-0-0;
+public proof remains concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0.
+Canonical CI passes Rust semantic admission 1/1 in 77.64 seconds, primary 66x2, and Phase 0 1,031/1,031 in 624
+seconds. Parent `.10.5.3` closes with no query, runtime observation, execution, trace, path, rollout, or admission
+change; immutable Dart query `.10.5.4` is next. Knowledge Map is 674 facts / 5,053 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.2 — complete Dart calls projection
 
 Dart's private semantic projector now deep-equals the complete neutral calls target at exactly 22 records / 25

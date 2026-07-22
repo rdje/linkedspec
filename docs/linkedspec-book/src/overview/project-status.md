@@ -511,7 +511,7 @@ Three backbone items tracked major structural modernization — all done:
   projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
   exact 12-role admission consumer. Dart now also has exact private source/static/call/staged/generated projection:
   `.10.5.3.2` completes all 22 calls records / 25 relations with distinct payload/job/result and selected generated
-  handler-plan provenance, but exposes no query or runtime observation. Queries cannot compile, execute, read
+  handler-plan provenance, and `.10.5.3.3` composition-closes that final private surface, but exposes no query or runtime observation. Queries cannot compile, execute, read
   paths, or expose host IR. Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending; only
   Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
 

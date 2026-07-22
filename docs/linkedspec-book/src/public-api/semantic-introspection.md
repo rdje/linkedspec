@@ -195,8 +195,9 @@ misclassified as generated code.
 The exact calls fixture now deep-equals all 22 records and 25 relations without filtering. An additional proof
 locks the three distinct staging roles, every relation direction above, the selected generated handler identity,
 fresh detached clones, public omission, and recursive denial of body/AST/ActionIR/generated-source/path/execution/
-trace leakage. `.10.5.3.3` is the composed closeout; Dart still exposes no semantic query or runtime observation
-surface, and rollout/admission remain unchanged.
+trace leakage. Documentation-only `.10.5.3.3` recomposes 22 calls/static/source/outcome tests on the final code,
+reruns complete Dart/public/canonical signoff, and closes the parent. Dart still exposes no semantic query or
+runtime observation surface, and rollout/admission remain unchanged. Immutable query is next under `.10.5.4`.
 
 ## Current Rust construction and query surface
 
@@ -983,8 +984,9 @@ The dependency order is:
 | `.10.5.3.0` | Dart calls/staging/generated authority map and split | complete; behavior-free exact 22/25 plan |
 | `.10.5.3.1` | Dart typed functions/helpers/calls/bindings core | complete; exact private 18/16 non-staged subset |
 | `.10.5.3.2` | Dart staged/generated exact completion | complete; private 22/25 target deep-equals neutral oracle |
-| `.10.5.3.3` | Dart calls composition closeout | active next; no new behavior intended |
-| `.10.5.4-.10.5.6` | Dart query, observation, and admission | pending |
+| `.10.5.3.3` | Dart calls composition closeout | complete; 22/22 final-code composition, no production change |
+| `.10.5.4` | Dart immutable typed/raw-neutral query | active next |
+| `.10.5.5-.10.5.6` | Dart observation and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

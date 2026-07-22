@@ -8,17 +8,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Exact calls completion `FUTURE-PARITY-BACKLOG.10.5.3.2` is implementation- and verification-complete from clean
-  typed-core commit `e87ececa`; live-doc/book sync and commit remain. After its clean commit, `.10.5.3.3` composes
-  final calls signoff and closes `.10.5.3`; no public query, runtime observation, rollout, or admission is active.
+- Calls closeout `FUTURE-PARITY-BACKLOG.10.5.3.3` is verification-complete from clean exact-completion commit
+  `72398d69`; live-doc/book sync and commit remain. It adds no production/test behavior and closes parent
+  `.10.5.3`. After its clean commit, `.10.5.4` owns immutable query; runtime/rollout/admission remain later.
 
-The private projector now deep-equals all 22 neutral records / 25 relations. Existing function sidecars map to
-distinct payload, parse-job, and result records with exact directed provenance; the already-retained generated-v2
-plan maps only its validated selected handler row to one separate generated artifact. No emitter or runtime runs,
-and body source/payload/AST, ActionIR, generated implementation, paths, trace, sinks, and observers remain private.
-
-Focused staged/generated/isolation proof is 4/4, combined calls/static/foundation is 16/16, Dart is 77/0 + 318 +
-66x2 + 105/105, and canonical signoff is Rust semantic admission 80.50s + primary 66x2 + Phase 0 1,031/638s.
+One 22-test composition jointly passes exact calls/staged/generated 22/25, all static targets, strict source and
+compilation outcomes, failure/lifecycle/interleaving isolation, no-execution construction, detached clones, and
+public omission. Dart is 77/0 + 318 + 66x2 + 105/105; canonical signoff is Rust semantic admission 77.64s +
+primary 66x2 + Phase 0 1,031/624s.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -50,6 +47,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.3 — close Dart calls projection**
+  (DONE in this commit from clean base `72398d69`).
+
+  **Result:** Parent `.10.5.3` is composition-closed at exact private 22/25 with no new production/test behavior,
+  public query/runtime surface, execution, or semantic-ledger promotion.
+
+  **Proof:** Composition 22/22; Dart 77/0, analysis, package 318, primary 66x2, corpus 105/105; semantic 6/20/73,
+  Unicode 806/9/8/2, generated v1/10/80-0-0, public 59/27/0; canonical Rust admission 77.64s, primary 66x2, and
+  Phase 0 1,031/1,031 in 624s; Knowledge Map 674/5,053.
+
+  **Next:** after this clean commit, implement immutable Dart query `.10.5.4`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.3.2 — complete Dart calls projection**
   (DONE in this commit from clean base `e87ececa`).
 

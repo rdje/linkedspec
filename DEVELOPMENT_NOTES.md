@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.3` — close on composition, not new behavior): The final calls leaf
+  deliberately adds no production or test surface. Its value is proving that source/outcome, every private static
+  target, typed calls/bindings, staged payload/job/result, and selected generated-plan provenance remain one
+  coherent detached snapshot when exercised together. The 22-test composition suite also reasserts failure and
+  repeated-lifecycle occurrence isolation plus no-execution construction, so the parent closes on the final code
+  rather than on independent leaf results.
+
+  This is the boundary for the next adapter layer. `.10.5.4` may evaluate immutable queries only over fresh clones
+  of the normalized projection; it must not regain compiler, staged sidecar, AST/ActionIR, executor, trace, path, or
+  host-object access. Runtime observations remain separately owned by `.10.5.5`, and no semantic ledger advances
+  until the composed Dart admission consumer in `.10.5.6` passes.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.2` — preserve staged versus generated provenance): Dart already
   retained function-body payload, parse-job, and result sidecars plus one generated-v2 plan. The semantic adapter
   validates those typed authorities and maps them; it neither reparses to invent staging facts nor runs the emitter.
