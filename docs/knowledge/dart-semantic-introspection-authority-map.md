@@ -28,6 +28,7 @@ answers:
   - "what happens when Dart semantic compilation fails"
   - "how does Dart retain generated semantic plan input"
   - "does Dart semantic index construction execute target spec"
+  - "is the Dart semantic source outcome foundation complete"
 date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
@@ -121,3 +122,9 @@ rejected mutations, rollout 3 complete / 6 pending, and native admission 2 compl
 [[dart-function-definition-shell-projection]], [[dart-generated-source-v2-rule-local-cursor]],
 [[dart-runtime-structured-diagnostics]], [[dart-native-spec-resolution]], and
 [[dart-offline-generated-callers-require-dependency-free-package]].
+
+The opaque source/outcome foundation is now composition-closed through `.10.5.1.3`. Exact combined proof covers
+strict copied inputs, byte/scalar mapping and ceilings, graph/privacy/failure outcomes, entries and generated plan,
+clone/caller isolation, and negative host-state/execution/trace/query topology. Complete Dart remains 308 package,
+primary 66x2, and corpus 105/105; rollout/admission deliberately remain 3/9 and 2/6. Static normalized projection
+begins independently at `.10.5.2` rather than being inferred from foundation closure.

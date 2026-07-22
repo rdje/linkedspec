@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.3 — close Dart semantic foundation
+
+The Dart semantic source/outcome parent is composition-closed without another production change. Its two focused
+suites jointly prove graph/privacy/failure outcomes, decoded-text/byte convergence, malformed input and option
+failures, supplementary and CRLF coordinates, four ordered duplicate occurrences, all source ceilings,
+default/explicit/missing entry selection, caller-byte mutation, detached immutable values, exact native
+diagnostics, and the shared generated-v2 plan.
+
+A negative topology scan confirms that the foundation has no implicit path IO, environment/clock/random capture,
+target or generated execution, runtime/trace/diagnostic/observation sinks, semantic records, or query. Repair child
+`.10.5.1.3.0` also closes the pre-staging untracked-source scanner defect discovered during canonical closeout.
+Static normalized projection remains independently owned by `.10.5.2`.
+
+Focused composition passes 12/12. Complete Dart passes format over 73 files with no changes, fatal analysis, 308
+package tests, primary 66x2, and corpus 105/105. Unicode remains 806/9/8/2; semantic governance remains 6/20/73 at
+rollout 3/9 and admission 2/6; generated source remains v1 / ten families / 80-0-0. Canonical CI passes Rust
+semantic admission 1/1 in 79.59 seconds, primary 66x2, and Phase 0 1,031/1,031 in 642 seconds.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.3.0 — scan untracked selector sources
 
 The composed Dart foundation gate exposed a pre-staging blind spot in the executable aggregate-selector scan. A

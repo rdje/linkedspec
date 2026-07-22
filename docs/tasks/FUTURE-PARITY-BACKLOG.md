@@ -8308,7 +8308,7 @@ before implementation.
       clean generated artifacts, and commit before activating semantic source-map leaf `.10.5.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.1`
-  Status: `in_progress` (2026-07-22)
+  Status: `done` (2026-07-22)
   Goal: Add the opaque Dart semantic source-map and compiled-or-failed outcome foundation.
   Depends on: `.10.5.0.2`
   Acceptance: Construct once from copied decoded `String` or strict UTF-8 bytes plus caller logical name and source
@@ -8326,9 +8326,9 @@ before implementation.
     Unicode-scalar-column spans, ordered lookup, excerpts, digest policy, and mid-scalar boundary rejection.
   - [x] **OPAQUE COMPILED / FAILED AUTHORITY** — Parse, validate, compile, select entry, and retain shared
     generated-plan input once without execution; preserve language failure as clone-safe portable diagnostic state.
-  - [ ] **CEILING / CLONE / NONINTERFERENCE** — Enforce `none`/`identity`/`span`/`text` disclosure, return fresh
+  - [x] **CEILING / CLONE / NONINTERFERENCE** — Enforce `none`/`identity`/`span`/`text` disclosure, return fresh
     clone-safe values, deny host paths/AST/IR/compiler objects, and prove caller/source/result mutation isolation.
-  - [ ] **COMPOSED FOUNDATION SIGNOFF** — Cover graph/privacy/failure plus constructor errors, pass complete Dart,
+  - [x] **COMPOSED FOUNDATION SIGNOFF** — Cover graph/privacy/failure plus constructor errors, pass complete Dart,
     semantic checker, canonical, docs/KM/cleanup, and close `.10.5.1` before activating static projection `.10.5.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.0`
@@ -8437,28 +8437,40 @@ before implementation.
       gates, clean generated artifacts, and commit before activating composed closeout child `.10.5.1.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.3`
-    Status: `in_progress` (2026-07-22; activated from clean `1e1fd368`)
+    Status: `done` (2026-07-22)
     Goal: Compose exact Dart semantic foundation proof and close `.10.5.1`.
     Depends on: `.10.5.1.2`
     Acceptance: Prove graph/privacy/failure, decoded/byte convergence, malformed UTF-8/options, Unicode and duplicate
       occurrence coordinates, source ceilings, entry selection, clone/caller mutation isolation, host-state denial,
       complete Dart/canonical no-regression, public/durable sync, cleanup, and clean parent close before `.10.5.2`.
     Children: `.10.5.1.3.0`
+    Verification: The two foundation suites compose graph/privacy/failure, decoded/byte convergence, strict input
+      and option failures, supplementary/CRLF coordinates, four duplicate lookups, all source ceilings, exact
+      default/explicit/missing entries, detached immutable outputs, caller-byte mutation, native diagnostics, and
+      the shared generated-v2 plan in 12/12 tests. A negative topology scan denies path IO, environment/time/random
+      capture, target/generated execution, runtime/trace/diagnostic/observation sinks, records, and query. The
+      complete Dart gate passes format over 73 files with no changes, fatal analysis, package 308, primary 66x2,
+      and corpus 105/105. Unicode is 806/9/8/2; semantic governance is 6/20/73 at unchanged rollout 3/9 and native
+      admission 2/6; generated source remains v1 / ten families / 80-0-0. Scanner repair child `.1.3.0` closes the
+      pre-staging untracked-file blind spot and public aggregate-selector admission passes 59/27/0. Canonical CI
+      passes Rust semantic admission 1/1 in 79.59 seconds, primary 66x2, and Phase 0 1,031/1,031 in 642 seconds.
+      The Knowledge Map is 673/5,021; mdBook, doctrines, diff hygiene, and generated cleanup pass. Parent `.10.5.1`
+      closes without semantic promotion or another production change; static projection `.10.5.2` is next.
 
     #### Acceptance Checklist
 
-    - [ ] **COMPOSE EXISTING PROOF** — Drive the source-map and compilation-foundation suites together across
+    - [x] **COMPOSE EXISTING PROOF** — Drive the source-map and compilation-foundation suites together across
       graph/privacy/failure, decoded/byte convergence, Unicode coordinates, duplicate lookup, source ceilings,
       exact entry selection, constructor failures, and language-failure outcomes without adding new authority.
-    - [ ] **CLONE / CALLER ISOLATION** — Confirm copied input plus fresh immutable/detached source, snapshot,
+    - [x] **CLONE / CALLER ISOLATION** — Confirm copied input plus fresh immutable/detached source, snapshot,
       authority, diagnostic, entry, and plan values cannot be mutated into retained state.
-    - [ ] **HOST-STATE DENIAL** — Mechanically deny implicit path IO, environment/time/random capture, target or
+    - [x] **HOST-STATE DENIAL** — Mechanically deny implicit path IO, environment/time/random capture, target or
       generated execution, trace/diagnostic/observation sinks, AST/IR/compiler exposure, records, and query.
-    - [ ] **COMPLETE DART / NEUTRAL** — Pass format/fatal analysis, all Dart package tests, primary 66x2, corpus
+    - [x] **COMPLETE DART / NEUTRAL** — Pass format/fatal analysis, all Dart package tests, primary 66x2, corpus
       105/105, Unicode 806/9/8/2, semantic 6/20/73, and generated-source ten-family/80-0-0 proof.
-    - [ ] **CANONICAL / PUBLIC LOCKSTEP** — Pass canonical local CI, all doctrines, Knowledge Map, mdBook, and diff
+    - [x] **CANONICAL / PUBLIC LOCKSTEP** — Pass canonical local CI, all doctrines, Knowledge Map, mdBook, and diff
       hygiene while keeping semantic rollout 3/9 and native admission 2/6.
-    - [ ] **PARENT CLOSE / CLEAN HANDOFF** — Close `.10.5.1`, synchronize roadmap/live memory/change notes, clean
+    - [x] **PARENT CLOSE / CLEAN HANDOFF** — Close `.10.5.1`, synchronize roadmap/live memory/change notes, clean
       generated artifacts, and commit before activating static projection `.10.5.2`.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.5.1.3.0`
@@ -10847,9 +10859,9 @@ isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion si
 Unicode-label prerequisite parent from clean `ecdc1ac7`. Semantic foundation parent `.10.5.1` is split into
 `.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete, and strict copied input/private Unicode
 source-map leaf `.10.5.1.1` is committed at `ae870152`. Staged compiled-or-failed authority and generated-plan
-input `.10.5.1.2` is committed at `1e1fd368`. Composed closeout `.10.5.1.3` found an untracked-source scan blind
-spot; repair child `.10.5.1.3.0` is signoff-complete from that clean boundary, and the parent resumes only after
-the repair's clean commit.
+input `.10.5.1.2` is committed at `1e1fd368`. Composed closeout `.10.5.1.3` found and closed an untracked-source
+scan blind spot through committed repair child `.10.5.1.3.0` at `1529ca81`; the source/outcome parent is now
+signoff-complete from that clean boundary, and static projection `.10.5.2` is next after its clean commit.
 
 ### Historical frontier sequence
 
@@ -11261,11 +11273,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `done` | Every positive/distinct Unicode identity survives Dart artifacts, selectors, diagnostics, traces, loaders, and CLI routes. |
 | 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `done` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
 | 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `done` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
-| 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `in_progress` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
+| 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `done` | Opaque strict source mapping and compiled-or-failed Dart semantic foundation pass composed signoff. |
 | 74.4.1.0 | `FUTURE-PARITY-BACKLOG.10.5.1.0` | `done` | Frozen exact Dart foundation boundary and dependency-order input/map, outcome, and composed closeout children. |
 | 74.4.1.1 | `FUTURE-PARITY-BACKLOG.10.5.1.1` | `done` | Strict copied input, private Unicode source map, source ceilings, dependency-free digest, and complete signoff pass. |
 | 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `done` | Opaque staged compiled-or-failed authority, exact native diagnostics, entry identity, and shared generated-v2 plan pass canonical signoff. |
-| 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `in_progress` | Compose omission-safe foundation proof and close the parent after its scanner-repair child. |
+| 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `done` | Compose omission-safe foundation proof and close the parent after its scanner-repair child. |
 | 74.4.1.3.0 | `FUTURE-PARITY-BACKLOG.10.5.1.3.0` | `done` | Discover nonignored untracked selector sources, self-prove rejection, and consume the canonical invalid fixture. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |

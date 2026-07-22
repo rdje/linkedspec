@@ -868,7 +868,9 @@ content migration exists yet.
   authority `.2`, and composed foundation closeout `.3`. `.10.5.1.1` exposes dependency-free strict source
   mapping; `.10.5.1.2` now composes one staged parse/validation/compile/entry-selection pass into immutable
   compiled-or-failed snapshot, native diagnostic, entry, and generated-v2 plan values without target execution,
-  paths, AST/IR exposure, records, or queries. `.10.5.1.3` is next after its clean commit.
+  paths, AST/IR exposure, records, or queries. `.10.5.1.3` composes exact privacy/isolation/host-state proof,
+  repairs the retired-selector scanner's untracked-file discovery, and closes the parent without semantic
+  promotion. Static Dart projection `.10.5.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

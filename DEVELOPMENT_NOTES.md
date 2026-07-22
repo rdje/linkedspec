@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.3` — foundation closure is proof, not projection):
+  The source map and compiled outcome were deliberately implemented in separate leaves, so parent closeout must
+  prove their interaction rather than add another data owner. The combined suites cover every constructor,
+  privacy, coordinate, entry, failure, cloning, and generated-plan boundary while the source file topology denies
+  host paths/state, execution, trace/sinks, records, and query.
+
+  This boundary leaves normalization explicit. Native Dart diagnostics remain foundation evidence, while
+  `.10.5.2` owns correlation into backend-neutral static records and the deliberate failed-spec diagnostic mapping.
+  Likewise, trace stays a separate opt-in temporal surface: deterministic semantic inspection is the first-line
+  debugging API, filtered trace is the last-mile execution probe, and future typed observations—not trace-text
+  parsing—may derive a new immutable post-execution index.
+
+  Parent proof is focused 12/12, Dart format 73/0 changed, fatal analysis, package 308, primary 66x2, corpus
+  105/105, Unicode 806/9/8/2, semantic 6/20/73 at 3/9 and 2/6, generated source v1/10/80-0-0, selector public
+  admission 59/27/0 with untracked self-proof, and Knowledge Map 673/5,021. Canonical passes Rust semantic
+  admission 79.59s, primary 66x2, and Phase 0 1,031/1,031 in 642s. No production or governance promotion occurs.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.3.0` — pre-staging gates must discover untracked sources):
   The commit workflow validates before staging, while plain `git ls-files` enumerates only index entries. A new
   untracked source file can therefore evade a source scanner during its first canonical run and become visible

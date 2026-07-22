@@ -109,8 +109,15 @@ plus the neutral 128-byte graph fixture, while isolated generated callers remain
 Construction does **not** invoke `LinkedSpecRuntimeEngine`, a generated parser, target actions/lifecycle code,
 trace, a diagnostic-output sink, or a semantic observation sink. It performs no implicit path read. It also does
 not expose normalized static/call records, capabilities, query, or runtime observations; those remain separately
-owned later leaves. `.10.5.1.3` next composes omission-safe foundation proof and closes the parent. Dart therefore
-remains pending in both rollout and native-admission ledgers despite the usable source/outcome foundation.
+owned later leaves.
+
+The source/outcome parent is composition-closed. Its proof covers graph, Unicode privacy, native failure,
+decoded/byte convergence, malformed input/options, supplementary and duplicate coordinates, all four ceilings,
+default/explicit/missing entry selection, caller mutation, detached outputs, and a static denial of path,
+environment, clock/random, execution, trace/sink, record, and query coupling. Complete Dart passes 308 package
+tests, primary 66x2, and corpus 105/105. The closeout also fixed the retired aggregate-selector source scan so a
+new nonignored untracked source cannot evade pre-staging verification. `.10.5.2` next adds normalized static
+projection. Dart remains pending in both rollout and native-admission ledgers until the later exact admission leaf.
 
 ## Current Rust construction and query surface
 
@@ -888,7 +895,8 @@ The dependency order is:
 | `.10.5.1.0` | Dart source/outcome contract and dependency split | complete; behavior-free |
 | `.10.5.1.1` | Dart strict input/private map and source ceiling | complete; dependency-free source map |
 | `.10.5.1.2` | Dart staged compiled-or-failed owner and generated-v2 plan | complete; no target execution |
-| `.10.5.1.3` | Dart composed source/outcome foundation closeout | next after the clean `.2` commit |
+| `.10.5.1.3` | Dart composed source/outcome foundation closeout | complete; privacy/isolation/host-state proof |
+| `.10.5.2` | Dart normalized static graph/privacy/failure/runtime-static projection | next after clean foundation closeout |
 | `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
