@@ -8,19 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Behavior-free Dart static audit `FUTURE-PARITY-BACKLOG.10.5.2.0` is complete from clean foundation commit
-  `1eaa7d2a`. After its clean commit, compiled graph/source/evidence projection `.10.5.2.1` is the next
-  task-tree-first leaf; no production projection work is active while this audit commit is pending.
+- Dart compiled static graph `FUTURE-PARITY-BACKLOG.10.5.2.1` is complete from clean audit commit `7d2bb107`.
+  After its clean commit, privacy/failure/runtime-static/isolation `.10.5.2.2` is the next task-tree-first leaf;
+  no later projection/query/runtime work is active while this graph commit is pending.
 
-The source and outcome suites compose exact constructors, graph/privacy/failure, Unicode coordinates and duplicate
-lookup, ceilings, entries, caller/clone isolation, native diagnostics, and generated-plan identity. Negative
-topology denies paths/host state, execution, trace/sinks, records, and query. Repair child `.1.3.0` keeps new
-untracked retired-selector sources inside pre-staging admission.
+The private immutable graph composes accepted source/map, parsed order/members, typed compiled rules/slots/edges/
+lifecycle, and entry identity. It deep-equals neutral graph records, relations, source evidence, shapes, and entry
+explanation; repeated lifecycle markers retain occurrence-specific payload shapes. The detached oracle seam is
+package-internal and topology denies descriptor/AST serialization, paths, generation/execution, trace/sinks, and
+runtime observation.
 
-Focused composition passes 12/12. Complete Dart passes format 73/0, fatal analysis, package 308, primary 66x2,
-and corpus 105/105. Unicode is 806/9/8/2, generated source is v1/10/80-0-0, and semantic governance remains
-6/20/73 at rollout 3/9 and admission 2/6. Canonical CI passes Rust semantic admission 1/1 in 79.59 seconds,
-primary 66x2, and Phase 0 1,031/1,031 in 642 seconds; Knowledge Map is 673/5,021.
+Focused graph/layering/occurrence proof passes 3/3. Complete Dart passes format 75/0, fatal analysis, package 311,
+primary 66x2, and corpus 105/105. Unicode is 806/9/8/2, generated source is v1/10/80-0-0, and semantic governance
+remains 6/20/73 at rollout 3/9 and admission 2/6. Canonical CI passes Rust semantic admission 1/1 in 80.34 seconds,
+primary 66x2, and Phase 0 1,031/1,031 in 631 seconds; Knowledge Map is 673/5,027.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -52,6 +53,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.1 — add Dart compiled static graph**
+  (DONE in this commit from clean base `7d2bb107`).
+
+  **Result:** `SemanticIndex` privately retains the exact detached graph/source/evidence projection from typed
+  authorities, including occurrence-safe lifecycle shapes and entry explanation. No public projection/query,
+  execution, trace/runtime, rollout, or admission surface changes.
+
+  **Proof:** Focused 3/3; Dart format 75/0, fatal analysis, package 311, primary 66x2, corpus 105/105; Unicode
+  806/9/8/2; semantic 6/20/73 at 3/9 and 2/6; generated v1/10/80-0-0; selector 59/27/0 with untracked self-proof;
+  Knowledge Map 673/5,027; canonical Rust admission 80.34s, primary 66x2, Phase 0 1,031/1,031 in 631s.
+
+  **Next:** after this clean commit, activate `.10.5.2.2` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.0 — split Dart static projection**
   (DONE in this commit from clean base `1eaa7d2a`).
 

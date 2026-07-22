@@ -392,6 +392,11 @@ capability remained 64/0/0 at that boundary. `.5.3`, corpus `.6`, primary CLI `.
 and final admission `.8.4` have since closed; Lua is the fifth exact backend and the current census is 80/0/0.
 
 ## Current Live Tracker
+
+Dart semantic static projection is active. `.10.5.2.1` now owns the exact private compiled graph/source/evidence
+projection with no public query or runtime surface; `.10.5.2.2` next owns privacy, normalized failure,
+runtime-static parity, and isolation before `.10.5.2.3` closes the parent.
+
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and Rust implementation. | All phases 0–9 done. Phase 9 Rust variant operational: .spec parser, compiler, runtime engine, helpers, integration tests. Cargo workspace at rust/. mdBook reframed variant-agnostic across all chapters (`.spec` = universal contract; Perl = reference backend) — `MDBOOK-VARIANT-AGNOSTIC` tree complete (7 leaves). Deferred future parity work is now owned by `FUTURE-PARITY-BACKLOG`. |

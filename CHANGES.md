@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.1 — add Dart compiled static graph
+
+Dart `SemanticIndex` now retains an exact private immutable v1 graph after successful staged compilation. The
+projector composes accepted source and its UTF-16/scalar/UTF-8 map with typed parsed rules, compiled rule/slot/edge/
+lifecycle state, and selected-entry identity. It emits stable percent-escaped ids, canonical records and
+relations, exact source references, family/cursor/repetition facts, duplicate structural slots, direct/indexed
+edges, lifecycle value shapes, and entry decision/explanation evidence without serializing backend AST,
+descriptor, or regex objects.
+
+The package-internal exact-oracle seam returns detached plain data and is omitted from the public umbrella, so no
+query or raw projection accessor is exposed. Repeated same-name lifecycle markers now correlate with compiled
+payloads by authored occurrence rather than aliasing the first payload. Focused graph/layering/occurrence proof
+passes 3/3; complete Dart passes format over 75 files with zero changes, fatal analysis, package 311, primary
+66x2, and corpus 105/105. Canonical CI passes Rust semantic admission 1/1 in 80.34 seconds, primary 66x2, and Phase
+0 1,031/1,031 in 631 seconds. Knowledge Map is 673/5,027; semantic governance remains 6/20/73 at rollout 3/9 and
+admission 2/6.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.0 — split Dart static projection
 
 The Dart static semantic parent is frozen and dependency-split before production changes. Five exact construction

@@ -1,9 +1,36 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../ast/spec_ast.dart' show SpecFile;
+import '../action/action_ast.dart'
+    show
+        ActionArrayLiteralExpr,
+        ActionBlock,
+        ActionBlockValueExpr,
+        ActionBooleanLiteralExpr,
+        ActionCallExpr,
+        ActionExpr,
+        ActionFluentChainExpr,
+        ActionHashLiteralExpr,
+        ActionNumberLiteralExpr,
+        ActionStringLiteralExpr,
+        ActionUndefExpr;
+import '../ast/spec_ast.dart'
+    show
+        ActionEdgeBodyElementKind,
+        BareEdgeBodyElementKind,
+        BlindEdgeBodyElementKind,
+        BodyElement,
+        CodeBlockBodyElementKind,
+        LifecycleMarkerBodyElementKind,
+        RegexBodyElementKind,
+        Rule,
+        RuleMode,
+        SpecFile;
 import '../compiler/compiled_spec.dart'
     show
+        CompiledActionEdge,
+        CompiledBlindEdge,
+        CompiledRule,
         CompiledSpec,
         CompiledSpecException,
         EntryRuleSelectionException,
@@ -20,6 +47,8 @@ import '../source_emitter.dart'
 import '../validation/spec_validator.dart'
     show SpecPortableDiagnostic, SpecValidationException, validateSpec;
 import 'sha256.dart' show sha256Hex;
+
+part 'semantic_static_projection.dart';
 
 const _semanticSnapshotId = 'snapshot:0';
 const _semanticSourceId = 'source:0';
@@ -377,7 +406,16 @@ final class SemanticIndex {
        _sourceDetailCeiling = sourceDetailCeiling,
        _sourceMap = _SemanticSourceMap(scalars),
        _contentDigest = 'sha256:${sha256Hex(sourceBytes)}',
-       _compilationOutcome = compilationOutcome;
+       _compilationOutcome = compilationOutcome {
+    _staticProjection = _buildSemanticStaticProjection(
+      sourceText: _sourceText,
+      sourceMap: _sourceMap,
+      logicalName: _logicalName,
+      contentDigest: _contentDigest,
+      snapshot: snapshot,
+      outcome: _compilationOutcome,
+    );
+  }
 
   /// Capture already decoded Unicode text and copy its canonical UTF-8 form.
   factory SemanticIndex.fromSource(
@@ -455,6 +493,7 @@ final class SemanticIndex {
   final _SemanticSourceMap _sourceMap;
   final String _contentDigest;
   final _SemanticCompilationOutcome _compilationOutcome;
+  late final _SemanticStaticProjection _staticProjection;
 
   /// Return fresh foundation metadata without semantic records or queries.
   SemanticSnapshot get snapshot => SemanticSnapshot(
@@ -828,6 +867,11 @@ final class _SemanticSourceMap {
     return _spanForScalarBoundaries(scalarRange.$1, scalarRange.$2);
   }
 
+  SemanticSourceSpan spanForCodeUnitRange(int start, int end) {
+    final scalarRange = scalarRangeForCodeUnits(start, end);
+    return _spanForScalarBoundaries(scalarRange.$1, scalarRange.$2);
+  }
+
   (int, int) scalarRangeForBytes(int start, int end) {
     if (start < 0 || start > end || end > _byteAtScalar.last) {
       throw SemanticIndexError(
@@ -853,6 +897,31 @@ final class _SemanticSourceMap {
         code: 'semantic_source_boundary_invalid',
         message: 'Source byte range ends inside a UTF-8 scalar',
         fields: {'end_byte': end},
+      );
+    }
+    return (startScalar, endScalar);
+  }
+
+  (int, int) scalarRangeForCodeUnits(int start, int end) {
+    if (start < 0 || start > end || end > _codeUnitAtScalar.last) {
+      throw SemanticIndexError(
+        stage: 'map_source',
+        code: 'semantic_source_range_invalid',
+        message: 'Source code-unit range is outside the captured source',
+        fields: {'start_code_unit': start, 'end_code_unit': end},
+      );
+    }
+    final startScalar = _boundaryIndex(_codeUnitAtScalar, start);
+    final endScalar = _boundaryIndex(_codeUnitAtScalar, end);
+    if (startScalar == null || endScalar == null) {
+      throw SemanticIndexError(
+        stage: 'map_source',
+        code: 'semantic_source_boundary_invalid',
+        message: 'Source code-unit range splits a Unicode scalar',
+        fields: {
+          if (startScalar == null) 'start_code_unit': start,
+          if (endScalar == null) 'end_code_unit': end,
+        },
       );
     }
     return (startScalar, endScalar);

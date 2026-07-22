@@ -55,6 +55,10 @@ admission `.10.4.6` now complete Rust and advance only its rollout/admission row
 restarts caused by immutable closeout text living in the mutable task-index row are now tracked by `.22` for a
 structural marker-home repair rather than another ad hoc restoration.
 
+Dart static projection is now active: `.10.5.2.1` privately retains the exact compiled graph, source evidence,
+value shapes, and entry explanation without exposing query or runtime behavior. Privacy, normalized failure,
+runtime-static parity, and isolation remain next in `.10.5.2.2`, followed by composed closeout `.10.5.2.3`.
+
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an
 ordered AND requires the later of two identical regex slots. Dart, Julia, PUC Lua, and LuaJIT native/generated

@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.1` — correlate typed meaning, then detach it):
+  Dart's static semantic graph is derived once from private typed authorities rather than reconstructed from a
+  descriptor or AST JSON document. Parsed rules establish authored order and source-line membership; compiled
+  rules establish accepted modes, slots, edge targets, payloads, and lifecycle authority; selected-entry state
+  establishes the effective root. The retained source map converts each scanned UTF-16 member range through
+  Unicode-scalar boundaries into exact UTF-8 coordinates, so multibyte labels and excerpts remain exact.
+
+  Projection storage is recursively immutable. A package-internal oracle extension creates fresh detached maps
+  for exact neutral comparison but is absent from the public umbrella; future query code must consume a fresh
+  projection clone rather than expose the owner. The graph slice therefore adds no query, execution, trace, path,
+  sink, or runtime-observation coupling. Privacy and failure normalization remain explicit work in `.10.5.2.2`.
+
+  Lifecycle payload correlation must be positional, not keyed only by marker. A rule may author the same marker
+  more than once, and marker-based `first` lookup aliases later blocks to the first value shape. The projector now
+  consumes typed lifecycle payloads in authored occurrence order, checks marker identity/count in both directions,
+  and retains distinct ids/shapes for repeated markers. Focused proof is 3/3; Dart is format 75/0 changed, fatal
+  analysis, package 311, primary 66x2, corpus 105/105; semantic governance remains 6/20/73 at 3/9 and 2/6;
+  Knowledge Map is 673/5,027; canonical passes Rust admission 80.34s, primary 66x2, and Phase 0 1,031/1,031 in
+  631s.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.0` — static meaning is composed, never serialized from one owner):
   The five Dart construction targets require several authorities. Parsed `SpecFile` owns authored order, line
   ownership, explicit versus omitted slot spelling, and lifecycle/member intent. Typed `CompiledSpec` owns the
