@@ -764,20 +764,20 @@ content migration exists yet.
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
 - Deep semantic introspection plus MCP was contract-frozen under ADRs `0049`/`0050` and
-  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl and Rust are now admitted native implementations.
+  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl, Rust, and Dart are now admitted native implementations.
   `linkedspec-semantic-model-v1` and
   `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 73 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 81 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
   authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
-  Neutral rollout is 3 complete / 6 pending,
-  while native backend admission is 2 complete / 4 pending. MCP will provide only native capabilities/query calls
+  Neutral rollout is 4 complete / 5 pending,
+  while native backend admission is 3 complete / 3 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -870,7 +870,13 @@ content migration exists yet.
   compiled-or-failed snapshot, native diagnostic, entry, and generated-v2 plan values without target execution,
   paths, AST/IR exposure, records, or queries. `.10.5.1.3` composes exact privacy/isolation/host-state proof,
   repairs the retired-selector scanner's untracked-file discovery, and closes the parent without semantic
-  promotion. Static Dart projection `.10.5.2` is next.
+  promotion. Static `.10.5.2`, calls/staging `.10.5.3`, public typed/raw-neutral query `.10.5.4`, and typed runtime
+  observation `.10.5.5` subsequently close the complete Dart adapter. Exact admission `.10.5.6` adds one ordered
+  12-role consumer across strict source, compiled/failed/runtime snapshots, loaded and JSON-reconstructed state,
+  generated-plan/public-helper/standalone-emitted direct and traced execution, native/neutral JSON, all 20 exact
+  digests, bounded query behavior, immutability, and host-leak denial. Eight Dart-specific topology mutations
+  advance only Dart to 6/20/81, rollout 4/9, and native admission 3/6; parent `.10.5` closes and Julia `.10.6` is
+  next after the clean handoff.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

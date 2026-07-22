@@ -1,9 +1,9 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl and Rust have
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl, Rust, and Dart have
 admitted native query surfaces: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
-consumer. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
+consumer per backend. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
 static and call/staged/generated projections; a public immutable typed/raw-neutral query evaluator; and optional
 caller-captured typed runtime observations that derive a separate immutable post-execution index. One exact Rust
 consumer now composes those layers across every governed route.
@@ -11,8 +11,8 @@ Dart now also exposes its complete non-runtime static query surface: immutable p
 `SemanticIndex.capabilities`, typed `query`, and raw-neutral `queryNeutral` share one projection-only evaluator at
 all 19 static response digests and 26 portable malformed-request boundaries. Dart additionally exposes exact typed
 invocation-local runtime capture, immutable observed-index derivation at the twentieth digest, and public
-generated/emitted direct and traced propagation. Runtime-observation composition is closed; exact composed Dart
-backend admission is the active next layer.
+generated/emitted direct and traced propagation. One omission-sensitive Dart consumer now composes all of those
+owners across every governed route and admits the backend without introducing another semantic implementation.
 The distinction matters:
 
 - `linkedspec-semantic-model-v1` fixes what every backend must mean;
@@ -34,10 +34,11 @@ The distinction matters:
   answer surface without exporting Dart's private normalized projection or compiler authorities; and
 - Dart `RuntimeSemanticObservationSink` receives immutable `regex_slot_selected` and `rule_result` facts during
   normal direct/loaded/reconstructed/traced/generated-plan engine execution; and
+- `semantic_introspection_dart_admission_test.dart` composes every required Dart path once; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
-Dart, Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
+The neutral contract is complete. Backend admission is **3 complete / 3 pending**: Perl, Rust, and Dart are
+admitted; Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
 ## Current Dart source, outcome, and private graph foundation
 
@@ -124,10 +125,10 @@ queries are a separate projection-only layer over the completed private snapshot
 The source/outcome parent is composition-closed. Its proof covers graph, Unicode privacy, native failure,
 decoded/byte convergence, malformed input/options, supplementary and duplicate coordinates, all four ceilings,
 default/explicit/missing entry selection, caller mutation, detached outputs, and a static denial of path,
-environment, clock/random, execution, trace/sink, record, and query coupling. Complete Dart passes 308 package
-tests, primary 66x2, and corpus 105/105. The closeout also fixed the retired aggregate-selector source scan so a
-new nonignored untracked source cannot evade pre-staging verification. Dart remains pending in both rollout and
-native-admission ledgers until the later exact admission leaf.
+environment, clock/random, execution, trace/sink, record, and query coupling. At this foundation boundary, complete
+Dart passed 308 package tests, primary 66x2, and corpus 105/105. The closeout also fixed the retired aggregate-
+selector source scan so a new nonignored untracked source cannot evade pre-staging verification. Rollout and native
+admission remained pending there until the later exact `.10.5.6` consumer composed the complete adapter.
 
 The complete private static construction surface is implemented. Every successfully compiled `SemanticIndex` retains
 an immutable v1 graph built from accepted source and its byte/scalar map, parsed authored order/member intent,
@@ -290,9 +291,9 @@ match through both paths, and all 26 portable invalid-request boundaries return 
 Each public call receives only a new detached clone of snapshot/source-reference/record/relation data. Query code
 cannot access accepted source wholesale, parser/compiler objects, function sidecars, AST/ActionIR, compiled regexes,
 generated implementation source, executors, trace state, paths, environment, or host objects. It cannot compile or
-execute the target, enable trace, or invent runtime events. Composition closeout `.10.5.4.4` now closes the query
-parent on committed code. Runtime `execution`/`event` records remain exclusively owned by active-next `.10.5.5`,
-and Dart is not admitted until `.10.5.6`.
+execute the target, enable trace, or invent runtime events. Composition closeout `.10.5.4.4` closes the static query
+parent on committed code. Runtime `execution`/`event` records are supplied only by the separately completed
+`.10.5.5` caller-observation derivation; `.10.5.6` now admits both static and observed query surfaces together.
 
 Behavior-free runtime audit `.10.5.5.0` fixed how Dart would acquire those records; the following slices now
 implement that design. The exact regex-slot authority is the post-match structural-selection call: by then a match
@@ -385,7 +386,8 @@ alter either index. Typed and raw-neutral queries match the twentieth governed r
 Direct, loaded, reconstructed, traced-convenience, and generated-plan engine capture is complete in `.10.5.5.1`;
 immutable derivation and the twentieth digest are complete in `.2`; public generated/emitted direct and traced
 propagation is complete in `.3`; and composition closeout `.4` now proves all layers together on committed code.
-Parent `.10.5.5` is closed without promotion. Rollout and Dart admission remain exclusively active `.10.5.6` work.
+Parent `.10.5.5` closed without promotion. Admission `.10.5.6` subsequently composes that runtime layer with the
+source, static, calls, and query owners and promotes only Dart.
 
 ## Current Rust construction and query surface
 
@@ -1044,15 +1046,15 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 73 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 81 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
 ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
-fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl and Rust runtime/
-admission claims. Internal omission and wrong-value probes prove that documentation guard independently of the 73
+fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl, Rust, and Dart
+runtime/admission claims. Internal omission and wrong-value probes prove that documentation guard independently of the 81
 semantic-contract mutations.
 
 Perl's native evaluator has a separate exact gate:
@@ -1123,6 +1125,21 @@ all 20 canonical digests, privacy/pages/budgets/errors/explain, no-execute immut
 denial. Eight Rust-specific mutations lock path, role order, driver, canonical registration, native status, and
 Rust-only rollout promotion.
 
+Dart admission composes the same owners through one omission-sensitive consumer:
+
+```bash
+cd dart
+dart test test/semantic_introspection_dart_admission_test.dart
+```
+
+Its 12 exact-once roles cover strict UTF-8 byte/decoded-text convergence; compiled graph/calls/privacy and failed
+snapshots; direct, loaded, JSON-reconstructed, generated-plan, public generated-helper, standalone emitted, and
+traced runtime routes; typed native plus neutral JSON; all 20 canonical digests; privacy, pages, budgets, portable
+errors, and explanations; query non-execution and base/response immutability; and denial of host paths, objects,
+AST/ActionIR, or generated implementation source. Eight Dart-specific mutations lock path, role order, driver,
+canonical registration, native status, and Dart-only rollout promotion. The complete Dart gate passes format
+85/0, analyzer, package 336/336, primary 66x2, and corpus 105/105.
+
 The static rule facts also have an authority outside the semantic model. The checker reads
 `linkedspec-rule-local-cursor-v1`, normalizes descriptor `or_default`/`seek` into neutral `or`/`seek`, derives
 entry/repetition from each exact header, and reconciles rule ownership with normalized edge records. Therefore a
@@ -1185,7 +1202,7 @@ The dependency order is:
 | `.10.5.5.3` | Dart generated/emitted/traced observation routes | complete; exact events/outputs/traces/exit/callback identity, unchanged v2/format 2 |
 | `.10.5.5.4` | Dart runtime-observation composition closeout | complete; committed semantic/runtime/public signoff without promotion |
 | `.10.5.5` | Dart typed runtime observation parent | complete |
-| `.10.5.6` | Dart composed semantic admission | active |
+| `.10.5.6` | Dart composed semantic admission | complete; 12 roles, 20 exact queries, Dart-only promotion |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
@@ -1196,7 +1213,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Perl and Rust callers can use the admitted native static and caller-captured runtime query surfaces now. No later
+Perl, Rust, and Dart callers can use the admitted native static and caller-captured runtime query surfaces now. No later
 backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
 backends should continue using their existing descriptor APIs described in
 [Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.

@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.6` — admission composes owners; it does not create another semantic
+  engine): The Dart admission test consumes only the public source/index/query/runtime/generated surfaces that
+  `.10.5.1-.5` already completed. Its ordered role map and completed-role set make omission, invention, duplicate
+  execution, and reordering visible inside Dart, while the neutral checker independently locks the declared path,
+  roles, canonical command, native status, and rollout row.
+
+  Standalone emitted execution belongs in the composed proof, not merely source-string inspection. The consumer
+  therefore creates one offline temporary path-dependency package, runs its emitted direct and traced entrypoints,
+  reconstructs typed observation events from neutral JSON, and reuses the same twentieth-digest derivation as the
+  in-process direct, loaded, reconstructed, generated-plan, and public-helper routes. Query non-interference is
+  separately locked by immutable base snapshots, response mutation isolation, and a source-authority denial scan.
+
+  Eight Dart-specific mutations mirror the admitted Perl/Rust topology boundaries. Moving `admit_backend_early`
+  from Dart to Julia is essential: otherwise the checker would encode the just-completed backend as permanently
+  forbidden. Only Dart advances, reaching 6/20/81, rollout 4/9, and native admission 3/6. Complete Dart passes
+  format 85/0, fatal analysis, package 336/336, primary 66x2, and corpus 105/105. Canonical proof passes Rust
+  admission 1/1 in 83.16 seconds, Dart admission 1/1, primary 66x2, Phase 0 1,031/1,031 in 650 seconds, and the
+  complete gate in 1,716.72 seconds.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.4` — close behavior layers only after committed composition): No new
   implementation seam belongs in the runtime-observation closeout. The 39-test semantic composition proves the
   source/static/call/query layers consume the same immutable observation evidence and twentieth response, while

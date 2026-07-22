@@ -11,15 +11,15 @@ snapshot-local ids/order, value and target shapes, request/response envelopes, d
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
 `python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
-six fixture groups and reports 73 rejected mutations. Static rule facts are independently derived from
+six fixture groups and reports 81 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
 mutations prove response-digest self-consistency cannot hide those facts. Generated artifact identity/family is
 also cross-checked against that contract's generated-source-v2 authority: the calls fixture emits `default`, and
 both illegal and coordinated valid-but-wrong family mutations fail. Every semantic spec name is independently
 derived from its caller-registered fixture logical name after removing `.spec`; the calls snapshot is therefore
-`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 3 complete / 6 pending;
-native backend admission is 2 complete / 4 pending. No parser, compiler, runtime, descriptor, generated-source,
+`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 4 complete / 5 pending;
+native backend admission is 3 complete / 3 pending. No parser, compiler, runtime, descriptor, generated-source,
 CLI, trace, or MCP behavior was added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
 Perl foundation `.10.3.1` implements opaque in-memory construction, strict source normalization/mapping, and
@@ -49,8 +49,13 @@ mutations. Rust composed admission `.10.4.6` adds
 the same 12 exact-once roles compose Rust source normalization, compiled/failed/runtime snapshots, loaded and
 reconstructed execution, generated-plan and source-emitter direct/traced routes, typed and neutral JSON, all 20
 digests, bounded query behavior, immutability, and host-leak denial. Eight Rust-specific topology mutations lock
-its path, roles, driver, canonical registration, native status, and Rust-only rollout promotion. Perl and Rust are
-admitted; Dart, Julia, PUC Lua, and LuaJIT remain pending.
+its path, roles, driver, canonical registration, native status, and Rust-only rollout promotion. Dart composed
+admission `.10.5.6` adds `dart test test/semantic_introspection_dart_admission_test.dart`: the same ordered 12
+exact-once roles cover strict bytes/text, compiled/failed/runtime snapshots, loaded and JSON-reconstructed state,
+generated-plan/public-helper/standalone-emitted direct and traced execution, native/neutral JSON, all 20 digests,
+bounded query behavior, immutability, and host-leak denial. Eight Dart-specific topology mutations lock its path,
+roles, driver, canonical registration, native status, and Dart-only rollout promotion. Perl, Rust, and Dart are
+admitted; Julia, PUC Lua, and LuaJIT remain pending.
 
 Run its structural and ownership gate from the repository root:
 

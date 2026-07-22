@@ -120,7 +120,7 @@ ROLLOUT = [
     ("neutral_contract_and_inventory", "complete", "FUTURE-PARITY-BACKLOG.10.2"),
     ("perl_reference", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
     ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
-    ("dart_parity", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
+    ("dart_parity", "complete", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia_parity", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
     ("recurring_six_runtime", "pending", "FUTURE-PARITY-BACKLOG.10.8"),
@@ -130,7 +130,7 @@ ROLLOUT = [
 ADMISSIONS = [
     ("perl", "perl", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
     ("rust", "rust", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
-    ("dart", "dart", "pending", "FUTURE-PARITY-BACKLOG.10.5"),
+    ("dart", "dart", "complete", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia", "julia", "pending", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua", "puc_lua", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
     ("lua", "luajit", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
@@ -158,8 +158,13 @@ RUST_ADMISSION = {
     "canonical_driver": "tools/run_ci_local.sh",
     "roles": PERL_ADMISSION["roles"].copy(),
 }
+DART_ADMISSION = {
+    "path": "dart/test/semantic_introspection_dart_admission_test.dart",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": PERL_ADMISSION["roles"].copy(),
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 73 rejected mutations, rollout 3 complete / 6 pending, admission 2 complete / 4 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 81 rejected mutations, rollout 4 complete / 5 pending, admission 3 complete / 3 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
@@ -167,8 +172,13 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission",
     "Its 12 exact-once roles compose all 20 digests",
+    "dart test test/semantic_introspection_dart_admission_test.dart",
+    "Its 12 exact-once roles compose every Dart semantic route",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
+    "73 rejected mutations",
+    "rollout 3 complete / 6 pending",
+    "admission 2 complete / 4 pending",
     "65 rejected mutations",
     "rollout 2 complete / 7 pending",
     "admission 1 complete / 5 pending",
@@ -217,7 +227,7 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("73 rejected mutations", "72 rejected mutations", 1)
+    wrong = text.replace("81 rejected mutations", "80 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
@@ -476,13 +486,14 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(all(row["native_api"] == "capabilities_plus_query" for row in contract["target_admissions"]), "native API inventory drifted")
     require(contract["target_admissions"][0]["consumer"] == PERL_ADMISSION, "Perl admission consumer topology drifted")
     require(contract["target_admissions"][1]["consumer"] == RUST_ADMISSION, "Rust admission consumer topology drifted")
-    require(all(row["consumer"] is None for row in contract["target_admissions"][2:]), "backend admitted before its owned leaf")
+    require(contract["target_admissions"][2]["consumer"] == DART_ADMISSION, "Dart admission consumer topology drifted")
+    require(all(row["consumer"] is None for row in contract["target_admissions"][3:]), "backend admitted before its owned leaf")
     for row in contract["rollout"]: require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 73 and len(set(contract["mutations"])) == 73, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 81 and len(set(contract["mutations"])) == 81, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -1005,20 +1016,32 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require(f"require_tracked_file {rust_consumer['path']}" in ci_text, "canonical CI does not require the Rust semantic admission consumer")
     rust_command = "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission"
     require(rust_command in ci_text, "canonical CI does not run the Rust semantic admission consumer")
+
+    dart_consumer = contract["target_admissions"][2]["consumer"]
+    dart_consumer_path = ROOT / dart_consumer["path"]
+    require(dart_consumer_path.is_file(), "Dart semantic admission consumer is missing")
+    dart_consumer_text = dart_consumer_path.read_text(encoding="utf-8")
+    for role in dart_consumer["roles"]:
+        marker = re.compile(rf"^Future<void> role_{re.escape(role)}\(", re.MULTILINE)
+        require(len(marker.findall(dart_consumer_text)) == 1, f"Dart semantic admission role marker drifted: {role}")
+    require(f"require_tracked_file {dart_consumer['path']}" in ci_text, "canonical CI does not require the Dart semantic admission consumer")
+    dart_command = "dart test test/semantic_introspection_dart_admission_test.dart"
+    require(dart_command in ci_text, "canonical CI does not run the Dart semantic admission consumer")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "73 rejected mutations" in readme
-        and "3 complete / 6 pending" in readme
-        and "2 complete / 4 pending" in readme,
+        and "81 rejected mutations" in readme
+        and "4 complete / 5 pending" in readme
+        and "3 complete / 3 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
-        and "2 complete / 4 pending" in book
+        and "3 complete / 3 pending" in book
         and "t/semantic_introspection_perl_admission.t" in book
-        and "semantic_introspection_rust_admission" in book,
+        and "semantic_introspection_rust_admission" in book
+        and "semantic_introspection_dart_admission_test.dart" in book,
         "mdBook semantic introspection page is not synchronized",
     )
     toolbox = TOOLBOX_PATH.read_text(encoding="utf-8")
@@ -1131,7 +1154,15 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_rust_consumer_driver"] = lambda c, m: c["target_admissions"][1]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
     mutations["unpromote_rust_rollout"] = lambda c, m: c["rollout"][2].update({"status": "pending"})
     mutations["omit_rust_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs")
-    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][2].update({"status": "complete"})
+    mutations["unadmit_dart"] = lambda c, m: c["target_admissions"][2].update({"status": "pending"})
+    mutations["omit_dart_consumer_path"] = lambda c, m: c["target_admissions"][2]["consumer"].pop("path")
+    mutations["alter_dart_consumer_path"] = lambda c, m: c["target_admissions"][2]["consumer"].update({"path": "dart/test/missing_semantic_consumer_test.dart"})
+    mutations["omit_dart_consumer_role"] = lambda c, m: c["target_admissions"][2]["consumer"]["roles"].pop()
+    mutations["reorder_dart_consumer_roles"] = lambda c, m: c["target_admissions"][2]["consumer"]["roles"].reverse()
+    mutations["alter_dart_consumer_driver"] = lambda c, m: c["target_admissions"][2]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
+    mutations["unpromote_dart_rollout"] = lambda c, m: c["rollout"][3].update({"status": "pending"})
+    mutations["omit_dart_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("dart/test/semantic_introspection_dart_admission_test.dart")
+    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][3].update({"status": "complete"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)

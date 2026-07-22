@@ -361,7 +361,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 73 rejected mutations, rollout 3 complete / 6 pending, admission 2 complete / 4 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 81 rejected mutations, rollout 4 complete / 5 pending, admission 3 complete / 3 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -434,6 +434,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   traced routes, typed/native-neutral JSON, privacy/pages/budgets/errors/explain, no-execute immutability, and host-
   leak denial. The checker locks the consumer path, ordered roles, canonical driver/registration, and Rust-only
   rollout/admission promotion with eight Rust-specific mutations.
+- **DART COMPOSED ADMISSION:** `dart test test/semantic_introspection_dart_admission_test.dart` from `dart/`
+  verifies `.10.5.6`. Its 12 exact-once roles compose every Dart semantic route: strict byte/text normalization,
+  compiled/failed/runtime snapshots, loaded and JSON-reconstructed state, generated-plan/public-helper/standalone-
+  emitted direct and traced execution, typed/native-neutral JSON, all 20 digests, privacy/pages/budgets/errors/
+  explain, no-execute immutability, and host-leak denial. The checker locks its exact path, ordered roles,
+  canonical driver/registration, and Dart-only rollout/admission promotion with eight Dart-specific mutations.
 
 ---
 

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart runtime-observation parent `.10.5.5` is composition-closed through every
-  execution route without promotion; exact composed admission `.10.5.6` is active)
+- Last updated: `2026-07-22` (exact 12-role Dart semantic admission `.10.5.6` advances only Dart to 6/20/81,
+  rollout 4/9, and native admission 3/6; parent `.10.5` is closed and Julia `.10.6` is next after clean handoff)
 - Owner: repo-local workflow
 
 ## Goal
@@ -7823,7 +7823,7 @@ before implementation.
     clean reproducible artifacts, and complete the per-slice commit workflow.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5`
-  Status: `active`
+  Status: `done` (2026-07-22; exact Dart semantic adapter and composed admission complete)
   Goal: Implement the Dart semantic index adapter and exact native conformance.
   Children: `.10.5.0`, `.10.5.0.1`, `.10.5.0.2`, `.10.5.1`, `.10.5.2`, `.10.5.3`, `.10.5.4`, `.10.5.5`,
     `.10.5.6`
@@ -7838,6 +7838,12 @@ before implementation.
     `git_message_brief.txt` is zero bytes and reproducible target/book/cache artifacts are absent. Knowledge Map
     retrieval and ADR `0051` establish that label alignment is a prerequisite distinct from semantic projection;
     `.10.5` therefore begins with an exact Dart authority/gap audit and dependency-ordered split before behavior.
+    The completed tree now owns strict source/outcome construction, exact static and calls/staged/generated
+    projections, immutable typed/raw-neutral query, typed invocation-local runtime observation, immutable observed-
+    index derivation, every generated/emitted/traced route, and one exact 12-role admission consumer. All 20
+    digests match; eight Dart-specific topology mutations raise governance to 6/20/81, rollout 4/9, and native
+    admission 3/6. Complete Dart passes format 85/0, fatal analysis, package 336/336, primary 66x2, and corpus
+    105/105 without exposing AST/IR/path/host state or adding a parallel semantic implementation.
 
   #### Acceptance Checklist
 
@@ -7849,9 +7855,9 @@ before implementation.
     query, runtime-observation, and admission children before implementing any Dart behavior.
   - [x] **UNICODE LABEL PREREQUISITE** — Apply pinned Unicode 17 `XID_Continue` exact scalar identity to every Dart
     declaration/reference/selector/artifact/diagnostic/trace/generated route without semantic promotion.
-  - [ ] **EXACT SEMANTIC ADAPTER** — Compose idiomatic immutable Dart source/static/call/query/runtime owners and
+  - [x] **EXACT SEMANTIC ADAPTER** — Compose idiomatic immutable Dart source/static/call/query/runtime owners and
     one omission-sensitive consumer that matches all 20 neutral responses without AST/IR/path/host leakage.
-  - [ ] **LOCKSTEP / SIGNOFF** — Pass focused, complete Dart package/corpus/generated/primary and canonical gates;
+  - [x] **LOCKSTEP / SIGNOFF** — Pass focused, complete Dart package/corpus/generated/primary and canonical gates;
     synchronize public/book/task/roadmap/live/memory/KM surfaces, cleanup, commit each child, and close cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0`
@@ -9058,7 +9064,7 @@ before implementation.
       admission owner.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.6`
-  Status: `in_progress` (2026-07-22; follows the clean `.10.5.5.4` runtime-observation closeout commit)
+  Status: `done` (2026-07-22; exact composed Dart admission and parent closeout)
   Goal: Admit the exact Dart semantic implementation and close the Dart parent.
   Depends on: `.10.5.5`
   Acceptance: Add one omission-sensitive Dart consumer covering source/compiled/failed/runtime snapshots, native/
@@ -9066,6 +9072,18 @@ before implementation.
     pages, budgets, errors, explain, no-execute immutability, and stale-host denial. Register it canonically, add
     omission mutations, advance only Dart rollout/admission, pass complete package/primary/corpus/generated and
     canonical gates, synchronize public state, and close `.10.5` cleanly.
+  Verification: Added `dart/test/semantic_introspection_dart_admission_test.dart`, one ordered 12-role exact-once
+    consumer over strict bytes/text, compiled/failed/runtime snapshots, loaded and JSON-reconstructed state,
+    generated-plan/public-helper/standalone-emitted direct and traced execution, typed/native-neutral JSON, all 20
+    response digests, privacy/pages/budgets/errors/explain, query non-execution and immutability, and host/path/IR
+    denial. The pre-promotion consumer failed only on Dart's pending neutral status; after promotion it passes 1/1.
+    Canonical CI now requires and runs it. Eight independent Dart topology mutations raise the checker from 73 to
+    81 rejected mutations, rollout from 3/9 to 4/9, and native admission from 2/6 to 3/6; the early-admission fence
+    moves to Julia. Complete Dart passes format 85/0, fatal analysis, package 336/336, primary 66x2, and corpus
+    105/105. Public guide, mdBook, both roadmaps, task/index, memory, Knowledge Map 680/5,105, and live notes agree;
+    canonical CI passes Rust admission 1/1 in 83.16 seconds, Dart admission 1/1, primary 66x2, Phase 0
+    1,031/1,031 in 650 seconds, and the complete gate in 1,716.72 seconds. Parent `.10.5` closes with no semantic
+    production-code change.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6`
   Status: `pending`
@@ -11355,13 +11373,13 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, and admitted Rust `.10.4` are complete.
-Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native admission 2/6. Dart authority and
-Unicode-label prerequisite `.10.5.0`, source/outcome foundation `.10.5.1`, and private static projection `.10.5.2`
-are composition-closed. All five static targets are exact: graph, privacy at text and identity ceilings, normalized
-failure, and runtime-static absence. Construction is detached and clone-safe, retains native diagnostic evidence,
-and exposes no private projection, execution, trace, observation, rollout, or admission surface; public query now
-operates only on a detached clone of that projection.
+Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, admitted Rust `.10.4`, and admitted
+Dart `.10.5` are complete. Governance is six groups / 20 responses / 81 mutations, rollout 4/9, and native
+admission 3/6. Dart's Unicode-label prerequisite, source/outcome foundation, static and calls/staged/generated
+projections, public typed/raw-neutral query, typed runtime observation, immutable observed-index derivation, and
+generated/emitted/traced routes are composition-closed. Exact admission `.10.5.6` adds no production semantic
+path: one ordered 12-role consumer composes all existing owners, advances only Dart, and closes the parent.
+Julia `.10.6` is the next eligible semantic backend after the clean `.10.5.6` commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -11394,7 +11412,8 @@ helpers plus real isolated emitted libraries. Focused routes pass 2/2, adjacent 
 composition 39/39, and complete Dart 84/0 + 335 + 66x2 + 105/105. Composition-only closeout `.10.5.5.4` now
 recomposes semantic 39/39, adjacent runtime 24/24, complete Dart 84/0 + 335 + 66x2 + 105/105, Unicode 806/9/8/2,
 generated v1/10/80-0-0, and public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0 on committed code. Parent `.10.5.5`
-is closed with rollout 3/9 and native admission 2/6 unchanged; exact composed admission `.10.5.6` is active.
+closed without promotion. Admission `.10.5.6` subsequently composes all 12 declared roles, matches every exact
+response and route, raises only Dart to 6/20/81 at rollout 4/9 and native admission 3/6, and closes `.10.5`.
 
 ### Historical frontier sequence
 
@@ -11835,7 +11854,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.5.2 | `FUTURE-PARITY-BACKLOG.10.5.5.2` | `done` | Validate typed observations into a separate immutable index, add exact execution/event/observed-as topology, and match the twentieth digest. |
 | 74.4.5.3 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `done` | Generated/emitted direct and traced APIs preserve exact observations, outputs, traces, exit omission, and caller callback identity without contract drift. |
 | 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `done` | Composed committed-code runtime-observation signoff closes the parent without semantic promotion. |
-| 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `active` | Compose exact Dart admission, promote only Dart, and close the parent. |
+| 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `done` | One exact 12-role consumer admits Dart at 6/20/81, rollout 4/9, admission 3/6, and closes `.10.5`. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -12510,6 +12529,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.6` | One exact 12-role Dart admission consumer; pre-promotion RED at status only and GREEN 1/1; all 20 digests/routes/privacy/pages/budgets/errors/explain/non-interference/denial boundaries; complete Dart format 85/0, fatal analysis, package 336/336, primary 66x2, corpus 105/105; semantic 6/20/81 at rollout 4/9 and admission 3/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 680/5,105; book/memory/task/four doctrines/diff/cleanup; canonical Rust admission 1/1 in 83.16s, Dart admission 1/1, primary 66x2, Phase 0 1,031/1,031 in 650s, complete gate 1,716.72s. | PASS. Dart is the third admitted native semantic backend, only Dart advances, `.10.5` closes without semantic production-code change, and Julia `.10.6` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.4` | No production/test change; committed semantic 39/39 and adjacent emitter/diagnostic/runtime 24/24; complete Dart format 84/0, fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; Unicode 806/9/8/2; generated v1/10/80-0-0; public 3/3 + 0/19 + 5/6/8/0 + 80/0/0 + 59/27/0; KM 679/5,095; book/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 77.24s, primary 66x2, Phase 0 1,031/1,031 in 621s. | PASS. Runtime observation is composition-closed through every Dart route without production or ledger change; exact admission `.10.5.6` activates. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.3` | Public generated/emitted direct/traced optional sink; channel-specific callback failure passthrough; exact events/twentieth digest/result/diagnostic/trace/exit identities; unchanged v2/format 2; focused 2/2, adjacent 24/24, semantic composition 39/39; complete Dart format 84/0, fatal analysis, package 335, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; KM 679/5,095; mdBook/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 76.72s, primary 66x2, Phase 0 1,031/1,031 in 623s. | PASS. Every Dart generated/emitted observation route now preserves exact caller and pre-existing behavior; composition `.4` activates without semantic-ledger promotion. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.2` | Public immutable observed-index derivation; detached contract/topology/shape validation; exact execution/event/observed-as identities and twentieth digest; malformed/foreign/reordered/already-observed rejection; base/caller/response isolation; focused 4/4 and semantic composition 37/37; complete Dart format 83/0, fatal analysis, package 333, primary 66x2, corpus 105/105; semantic 6/20/73 at rollout 3/9 and admission 2/6; KM 679/5,095; mdBook/memory/task/four doctrines/diff/cleanup; canonical Rust semantic admission 76.84s, primary 66x2, Phase 0 1,031/1,031 in 620s. | PASS. Runtime facts derive only from detached static evidence into a separate immutable snapshot; the base and query authority remain unchanged, generated/emitted propagation stays `.3`, and no semantic ledger advances. |
@@ -12735,6 +12755,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.5.6` | `FUTURE-PARITY-BACKLOG.10.5.6 - admit Dart semantic introspection` | One exact 12-role consumer over existing Dart semantic owners; 20 digests, eight topology mutations, rollout 4/9, admission 3/6, complete Dart 336/105/66x2, canonical Rust admission 83.16s plus Dart admission 1/1 and Phase 0 1,031/650s, complete gate 1,716.72s, KM/book/doctrines, cleanup, and parent closeout without semantic production-code change. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `FUTURE-PARITY-BACKLOG.10.5.5.4 - close Dart runtime observation` | No-code committed composition 39/adjacent 24/complete Dart 335/105/66x2, semantic/Unicode/generated/public, canonical admission 77.24s plus Phase 0 1,031/621s, KM/book/doctrines, cleanup, and parent closure without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `FUTURE-PARITY-BACKLOG.10.5.5.3 - propagate Dart runtime semantics` | Optional public generated/emitted direct/traced sink propagation, exact callback identity and output/trace/exit non-interference, routes 2/adjacent 24/semantic 39/complete Dart 335/105/66x2, canonical admission 76.72s plus Phase 0 1,031/623s, KM/book/doctrines, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.5.5.2` | `FUTURE-PARITY-BACKLOG.10.5.5.2 - derive Dart runtime semantics` | Detached immutable observation derivation, exact twentieth digest/topology/error/isolation proof, focused 4/semantic 37/complete Dart 333/105/66x2, canonical admission 76.84s plus Phase 0 1,031/620s, KM/book/doctrines, and cleanup without semantic promotion. |

@@ -11,14 +11,14 @@ answers:
   - how are semantic query pagination budgets and source privacy tested
   - what task follows FUTURE-PARITY-BACKLOG.10.2
   - how are semantic introspection static rule facts cross-checked
-  - why are there 73 semantic introspection mutations
+  - why are there 81 semantic introspection mutations
   - how is semantic introspection TOOLBOX current state guarded
   - does the semantic toolbox guard change the contract mutation count
 date: 2026-07-21
-status: current corrected neutral contract; Perl and Rust admitted
+status: current corrected neutral contract; Perl, Rust, and Dart admitted
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.6 and Rust .10.4.6 each compose all 20 exact responses through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 73 mutations. Neutral rollout is 3 complete / 6 pending; native admission is 2 complete / 4 pending. Leaf .10.4.0.1 makes the checker require the exact TOOLBOX output plus current runtime/admission claims, deny stale forms, and self-prove omission/wrong-value rejection."
-reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|PERL RUNTIME OBSERVATION|RUST RUNTIME OBSERVATION|PERL COMPOSED ADMISSION|RUST COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.6, Rust .10.4.6, and Dart .10.5.6 each compose all 20 exact responses through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 81 mutations. Neutral rollout is 4 complete / 5 pending; native admission is 3 complete / 3 pending. Leaf .10.4.0.1 makes the checker require exact TOOLBOX output plus current runtime/admission claims, deny stale forms, and self-prove omission/wrong-value rejection."
+reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|RUNTIME OBSERVATION|COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 # Semantic Introspection Neutral Contract
@@ -37,8 +37,8 @@ for rule header family/cursor semantics. It derives entry-marker and repetition 
 reconciles rule ownership with normalized edge records. This closes the gap where model rows and response hashes
 could agree with each other while disagreeing with already-admitted parser semantics.
 
-The filesystem leg also owns the corresponding `TOOLBOX.md` diagnostic entry. It requires the exact 6/20/73,
-rollout 3+6, admission 2+4 output and current Perl/Rust runtime plus 12-role admission claims exactly once, rejects
+The filesystem leg also owns the corresponding `TOOLBOX.md` diagnostic entry. It requires the exact 6/20/81,
+rollout 4+5, admission 3+3 output and current Perl/Rust/Dart runtime plus 12-role admission claims exactly once, rejects
 known stale forms, and runs omitted-claim plus wrong-value probes internally.
 
 The same external contract owns generated-source-v2 identity, format, and the exact ten handler families. The
@@ -60,10 +60,10 @@ all executable.
 The neutral leaf itself deliberately admitted no native backend. Perl now composes opaque construction, exact
 private static and calls/staging/generated projections, public immutable capabilities/query for all 19 static
 canonical cases, and typed caller-captured runtime projection matching the twentieth case across direct/loaded/
-generated routes. Rust matches all 20 responses through one typed/raw-neutral immutable evaluator plus caller-owned
-observations across direct, loaded, reconstructed, generated, source-emitter, and traced routes. One exact 12-role
-consumer admits each backend, so rollout is 3/9 and native admission is 2/6. Dart, Julia, dual-ABI Lua, recurring
-six-runtime proof, thin MCP transport, and public no-drift remain pending.
+generated routes. Rust and Dart match all 20 responses through typed/raw-neutral immutable evaluators plus caller-
+owned observations across direct, loaded, reconstructed, generated, emitted, and traced routes. One exact 12-role
+consumer admits each of Perl, Rust, and Dart, so rollout is 4/9 and native admission is 3/6. Julia, dual-ABI Lua,
+recurring six-runtime proof, thin MCP transport, and public no-drift remain pending.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
 [[semantic-introspection-generated-plan-authority]],

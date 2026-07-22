@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.6 — admit Dart semantic introspection
+
+Dart is now the third admitted native implementation of `linkedspec-semantic-model-v1` and
+`linkedspec-semantic-query-v1`. New `dart/test/semantic_introspection_dart_admission_test.dart` is one
+omission-sensitive 12-role consumer over the existing implementation: strict byte/text normalization;
+compiled/failed/runtime snapshots; direct, loaded, JSON-reconstructed, generated-plan, public generated-helper,
+standalone-emitted, and traced execution; typed/native-neutral JSON; all 20 exact response digests; privacy, pages,
+budgets, portable errors, and explanations; no-execute immutability; and stale host/path/IR denial.
+
+The neutral contract records that exact path, ordered roles, canonical driver, and Dart-only promotion. Canonical
+CI requires and executes the consumer. Eight new mutations independently reject missing/altered path, role,
+driver, registration, status, and rollout boundaries; the early-admission mutation moves to Julia. Governance is
+now 6 fixture groups / 20 exact queries / 81 rejected mutations, rollout 4/9, and native admission 3/6. No semantic
+production implementation changed.
+
+Focused admission is 1/1. Complete Dart passes format 85/0, fatal analysis, package 336/336, primary 66x2, and
+corpus 105/105. Canonical CI passes Rust admission 1/1 in 83.16 seconds, Dart admission 1/1, primary 66x2,
+Phase 0 1,031/1,031 in 650 seconds, and the complete gate in 1,716.72 seconds. Parent `.10.5` closes; Julia
+`.10.6` is next after the clean handoff.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.4 — close Dart runtime observation
 
 The Dart runtime-observation parent is composition-closed on committed code without another production or test

@@ -142,8 +142,8 @@ remain unable to execute.
 
 The safe split is shared executable-label authority, Dart Unicode-label parity, opaque source/outcome foundation,
 static projection, call/staged/generated projection, immutable query, typed runtime observation, and one composed
-admission consumer. Until those leaves pass, semantic governance remains 6 fixture groups / 20 exact queries / 73
-rejected mutations, rollout 3 complete / 6 pending, and native admission 2 complete / 4 pending. See
+admission consumer. All of those leaves now pass. Dart admission advances governance to 6 fixture groups / 20 exact
+queries / 81 rejected mutations, rollout 4 complete / 5 pending, and native admission 3 complete / 3 pending. See
 [[unicode-rule-label-contract]], [[semantic-introspection-neutral-contract]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[dart-compiled-spec-state]],
 [[dart-function-definition-shell-projection]], [[dart-generated-source-v2-rule-local-cursor]],

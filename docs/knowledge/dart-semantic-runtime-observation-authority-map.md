@@ -84,7 +84,8 @@ trace, install a sink, hash a new input, or mutate either index.
 - `.10.5.5.2`: complete validated immutable derivation and exact twentieth response digest.
 - `.10.5.5.3`: complete generated/emitted direct/traced propagation, non-interference, exit omission, and callback identity.
 - `.10.5.5.4`: complete composition/signoff and parent closure without Dart admission promotion.
-- `.10.5.6`: active exact composed admission; only this leaf may promote Dart rollout/admission.
+- `.10.5.6`: complete exact composed admission; its 12-role consumer promotes only Dart to rollout 4/9 and native
+  admission 3/6.
 
 ## Exact neutral anchor
 
