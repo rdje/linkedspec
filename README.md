@@ -833,9 +833,9 @@ content migration exists yet.
   denial. The checker locks eight Rust-specific topology mutations and canonical registration, advancing only Rust
   to rollout 3/9 and native admission 2/6; Dart, Julia, PUC Lua, and LuaJIT remain pending. Dart audit `.10.5.0`
   proves its compiled/ActionIR/staged/generated authorities are reusable, while exact source mapping, normalized
-  projection/query, and typed observation are new adapter layers. It also proves Dart's hardcoded host-`\w`
-  declarations reject `Töp`, action/blind references silently truncate it to `T`, and external invalid labels
-  bypass validation. Shared executable-grammar closure `.10.5.0.1` precedes Dart label parity `.10.5.0.2`;
+  projection/query, and typed observation are new adapter layers. At audit time its hardcoded host-`\w`
+  declarations rejected `Töp`, action/blind references silently truncated it to `T`, and external invalid labels
+  bypassed validation. Shared executable-grammar closure `.10.5.0.1` precedes Dart label parity `.10.5.0.2`;
   semantic foundation through admission then follows as
   `.10.5.1-.10.5.6` without changing the current 6/20/73, 3/9, and 2/6 ledgers during audit. The four checked-in
   `spec_spec_*` inputs were stale identical copies rather than current canonical source, so `.10.5.0.1` also owns
@@ -848,11 +848,12 @@ content migration exists yet.
   distinct fixtures through current `specs/spec.spec` on the complete 5x2 command matrix. That proof exposed and
   repaired Rust `entry_group(N)` returning `""` rather than null for an absent compacted capture. The four backend
   corpus runners remain 105/105; the shared executable-grammar parent is closed before Dart native-label rollout.
-  Dart rollout `.10.5.0.2` is split into five omission-safe leaves. Foundation `.10.5.0.2.0` now generates one
-  exact internal Dart artifact from the same 806 neutral ranges, with binary-search scalar classification,
-  complete-label validation, and a supplementary-safe longest-prefix scanner. It is independently regenerated,
-  endpoint-compared, and fixture-tested but intentionally not yet imported by the native parser or validator;
-  `.10.5.0.2.1` owns that behavior change.
+  Dart rollout `.10.5.0.2` is split into five omission-safe leaves. Foundation `.10.5.0.2.0` generates one exact
+  internal Dart artifact from the same 806 neutral ranges, with binary-search scalar classification, complete-label
+  validation, and a supplementary-safe longest-prefix scanner. Consumption leaf `.10.5.0.2.1` now routes native
+  headers plus action/blind/bare targets through that scanner, prohibits invalid-prefix truncation, and validates
+  parsed, reconstructed, and programmatic declarations/targets with one portable diagnostic. Downstream exact
+  artifact/selector/trace/loader identity remains `.10.5.0.2.2`; no semantic rollout/admission is promoted.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

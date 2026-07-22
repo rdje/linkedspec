@@ -16,11 +16,11 @@ answers:
   - "how many self-hosted grammar sites consume the Unicode rule label class"
   - "which Rust parser routes consume the Unicode rule label contract"
   - "which backends still need Unicode rule label alignment"
-date: 2026-07-21
+date: 2026-07-22
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, generated-data, validation, portability]
-evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/runtime/matching.dart; dart/test/unicode_rule_label_classifier_test.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
-reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/runtime/matching.dart; dart/test/unicode_rule_label_classifier_test.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/unicode_rule_label_routes_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
 ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
@@ -47,14 +47,17 @@ The same generator now writes `dart/lib/src/parser/unicode_rule_label.dart`: one
 binary-search scalar membership, complete-label validation, and longest-prefix scanning. Dart iterates runes but
 must slice UTF-16 strings, so the generated scanner advances two code units for a supplementary scalar and one for
 all other accepted scalars. The checker regenerates the file, independently compares all 806 endpoints, and locks
-the algorithm topology; focused tests exercise every range boundary and neutral fixture. This `.10.5.0.2.0`
-foundation is not imported by Dart's parser/validator until `.10.5.0.2.1`.
+the algorithm topology; focused tests exercise every range boundary and neutral fixture. Dart's native parser now
+uses this scanner for header discovery plus action, blind, and bare targets. Its validator applies the complete
+predicate to every declaration and target, including JSON-reconstructed and programmatic ASTs. Invalid suffixes
+remain whole failures instead of becoming valid prefixes; unrelated identifier grammars keep their own policies.
 
 Dart's bounded self-hosted regex bridge derives that exact label atom from each canonical structural pattern
 rather than owning another label table. It enables Unicode regex mode whenever a pattern contains supplementary
 literal scalars, recognizes the canonical explicit lifecycle alternation and bare-edge structural families, and
-directly executes current `specs/spec.spec` across all label edge forms. This shared grammar bridge does not repair
-Dart's separate hardcoded header/reference scanner or external-AST validation; `.10.5.0.2` still owns those routes.
+directly executes current `specs/spec.spec` across all label edge forms. This shared grammar bridge and the native
+Dart scanner deliberately consume the same generated scalar authority; the next Dart leaf proves exact identity
+through downstream artifacts, selectors, diagnostics, traces, loaders, and command routes.
 
 The Rust parser consumes its generated classifier
 for headers and action, blind, and bare references; validation rechecks declarations and all edge targets so a
@@ -64,7 +67,8 @@ loading, and traces.
 
 This prerequisite removes the Rust semantic privacy fixture's former `Töp` blocker but does not advance semantic
 rollout or claim exhaustive five-backend label membership. Perl already accepts the strict-decoded fixture route.
-Dart, Julia, PUC Lua, and LuaJIT parser alignment is explicitly required by semantic backend leaves
-`FUTURE-PARITY-BACKLOG.10.5-.10.7` before those backends admit the v1 privacy fixture. See
+Dart native parsing/validation is aligned; its downstream route signoff plus Julia, PUC Lua, and LuaJIT parser
+alignment remain explicit prerequisites under `FUTURE-PARITY-BACKLOG.10.5-.10.7` before those backends admit the
+v1 privacy fixture. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[primary-cli-strict-utf8-text-contract]], and [[rust-native-spec-resolution]].

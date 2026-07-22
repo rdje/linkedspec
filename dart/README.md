@@ -53,9 +53,11 @@ python3 tools/check_unicode_rule_label_contract.py
 cd dart && dart test test/unicode_rule_label_classifier_test.dart
 ```
 
-The artifact is an internal frontend primitive. Leaf `.10.5.0.2.0` generates and proves it without changing
-parsing; `.10.5.0.2.1` separately owns replacing host-`\w` header/action/blind/bare scanning and validating labels
-from parsed, deserialized, and programmatic ASTs.
+The artifact is the single native rule-label authority. Leaf `.10.5.0.2.1` routes headers plus action, blind, and
+bare targets through its supplementary-safe prefix scanner and revalidates every declaration/target through its
+complete-label predicate. This applies equally to parsed, `SpecFile.fromJson`, and programmatic ASTs; malformed
+suffixes cannot silently truncate to a valid prefix. Function/helper/lifecycle/fluent/mark identifiers retain
+their separate existing grammars.
 
 ## Generated source
 

@@ -17,10 +17,10 @@ answers:
   - "does Dart compiled state preserve Unicode rule labels"
   - "is specs/spec.spec aligned with Unicode rule labels"
   - "what are the Dart semantic introspection implementation leaves"
-date: 2026-07-21
+date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0 and .10.5.0.2.0; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0 and .10.5.0.2.0-.1; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
 reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
 ---
 
@@ -31,7 +31,7 @@ action/blind edges, lifecycle payloads, typed ActionIR, and the function registr
 the existing generated-v2 ordered `{label, family}` plan. Descriptor JSON is a compatibility projection, not the
 semantic schema, and neither AST JSON nor emitted Dart implementation source may cross the semantic API.
 
-The behavior-free `.10.5.0` probe establishes these exact current boundaries:
+The behavior-free `.10.5.0` probe established these exact audit-time boundaries:
 
 - `graph`, `calls_and_staging`, and `runtime` parse, validate, compile, rebuild through `SpecFile` JSON, and retain
   ordered generated plans; the runtime fixture returns `["A","B"]`;
@@ -45,29 +45,25 @@ The behavior-free `.10.5.0` probe establishes these exact current boundaries:
 
 Once a valid Unicode label is supplied programmatically, current compiled maps, descriptor output, generated plan,
 emitted source, and explicit selector preserve `Töp` exactly. That proves these consumers should compare immutable
-strings, not reclassify them. The generated Dart Unicode 17 classifier/complete validator/prefix scanner now
-exists and is independently locked by `.10.5.0.2.0`, including supplementary-safe UTF-16 slicing. It is
-deliberately not yet imported. The remaining prerequisite is `.10.5.0.2.1` consumption by header/action/blind/bare
-scanners and validation of externally constructed ASTs. Function/helper identifiers, lifecycle markers, fluent
-methods, and mark names are separate grammars and must not be broadened accidentally.
+strings, not reclassify them. The generated Dart Unicode 17 classifier/complete validator/prefix scanner now exists
+and is independently locked, including supplementary-safe UTF-16 slicing. Native header/action/blind/bare parsing
+consumes it, prevents invalid suffix truncation, and validation rejects invalid declarations/targets from parsed,
+JSON-reconstructed, and programmatic ASTs with one portable diagnostic. Function/helper identifiers, lifecycle
+markers, fluent methods, and mark names remain separate grammars. Exact downstream artifact/selector/diagnostic/
+trace/loader proof is the remaining label prerequisite before composed Dart label signoff.
 
 The audit also found a neutral authority conflict outside Dart's hardcoded parser. ADR `0012` makes
 `specs/spec.spec` the first authoritative `.spec` grammar, but its rule-header and edge productions embedded host
 `\w`. Shared leaves `.10.5.0.1.0-.1` now resolve that conflict: one generated literal class is independently
 checked and consumed at all 12 declaration/reference sites, while Dart derives that atom in its bounded structural
-bridge and directly executes current canonical source. This does not change Dart's hardcoded parser/validator;
-the Dart-specific label leaf still follows the shared closure rather than claiming parity from grammar alone.
+bridge and directly executes current canonical source. The native Dart parser/validator now follow that shared
+closure rather than claiming parity from grammar alone.
 
-The apparently green self-hosted corpus does not cover that current authority. All four checked-in
-`rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec` files share stale SHA-256
-`e0a1b63b276c2a896c577192d4b399c88f21539555835018ce8117b91a14b25f`; current `specs/spec.spec` is
-`43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce`. The frozen copies omit the newer
-bare-edge productions and retain broad lifecycle `(\w++)`, whereas canonical source has explicit
-`(I|LS|LE|LX|E|EX|IT)`. `tools/gen_oracle_corpus.pl` promises and implements a verbatim source copy, so the remaining
-defect is missed regeneration/freshness enforcement. Direct Dart execution of current canonical source now passes
-after `.10.5.0.1.1` adds explicit lifecycle and bare-edge structural recognition, but the unchanged stale corpus
-still cannot prove that route. Leaf `.10.5.0.1.2` must regenerate all four inputs, reject future byte/hash drift,
-and compose cross-runtime proof before corpus green counts as current self-hosted grammar evidence.
+The earlier apparently green self-hosted corpus did not cover current authority: all four `spec_spec_*` inputs were
+stale identical copies. Shared closeout `.10.5.0.1.2` regenerated them verbatim from canonical `specs/spec.spec`,
+added byte/hash freshness enforcement, and composed current grammar across Perl, Rust, Dart, Julia, and Lua under
+both command environments. Corpus 105/105 now refers to freshness-locked current source rather than the former
+snapshot.
 
 Exact source evidence is adapter work. Ordinary Dart rule headers/body elements retain one-based lines, while
 `ActionSourceSpan` is local to normalized action text rather than a general source map. Function-definition

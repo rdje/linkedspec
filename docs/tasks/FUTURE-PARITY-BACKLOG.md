@@ -8143,9 +8143,9 @@ before implementation.
 
   #### Acceptance Checklist
 
-  - [ ] **GENERATED CLASSIFIER** — Extend deterministic generation/checking with one Dart range table, binary-search
+  - [x] **GENERATED CLASSIFIER** — Extend deterministic generation/checking with one Dart range table, binary-search
     scalar classifier, complete-label validator, and longest-valid-prefix scanner; never consult host `RegExp \w`.
-  - [ ] **PARSE / VALIDATE ALL ROUTES** — Use the scanner for header/action/blind/bare syntax and the validator for
+  - [x] **PARSE / VALIDATE ALL ROUTES** — Use the scanner for header/action/blind/bare syntax and the validator for
     declarations and every target from parsed, deserialized, or programmatic ASTs; prohibit silent prefix parsing.
   - [ ] **EXACT IDENTITY** — Preserve all positive labels plus precomposed/decomposed/case distinctions through
     validation, compilation, descriptor, generated plan/source/reconstruction, explicit selector, diagnostics,
@@ -8187,12 +8187,32 @@ before implementation.
       clean generated artifacts, and commit before activating `.10.5.0.2.1`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.1`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Route Dart rule headers and action/blind/bare targets through the generated scanner and validator.
     Depends on: `.10.5.0.2.0`
     Acceptance: Replace host-`\\w` rule-label parsing at all declaration/reference sites, reject partial prefixes,
       and validate labels plus targets from parsed, deserialized, and programmatic ASTs at stable parser/validation
       boundaries without changing unrelated identifier grammars.
+    Verification: Generated scanner drives header discovery/body termination plus action/blind/bare targets; one
+      complete-label validator covers declarations and all target AST variants. Focused native/classifier/parser/
+      validator/self-hosted proof passes 33/33 and the dedicated route suite passes 5/5 including exact positive/
+      distinct identity, invalid suffix non-truncation, and reconstructed/programmatic failures. Complete Dart
+      passes format, fatal analysis, package 287, primary 66x2, and corpus 105/105. Unicode 806/9/8/2, semantic
+      6/20/73, Knowledge Map 672/5,000, mdBook, memory/task metadata, four doctrines, and whitespace pass.
+      Canonical CI passes Rust admission in 86.93 seconds, primary 66x2, and Phase 0 1,031/1,031 in 627 seconds.
+
+    #### Acceptance Checklist
+
+    - [x] **ONE GENERATED SCANNER** — Route rule-header parsing/body termination plus action, blind, and bare target
+      parsing through `takeRuleLabelPrefix`; remove every former host-`\\w` rule-label regex.
+    - [x] **WHOLE-TOKEN FAILURE** — Require legal edge continuations and retain malformed edge-looking syntax as
+      raw input so invalid Unicode-label suffixes cannot silently become valid prefix targets.
+    - [x] **EXTERNAL AST TRUST BOUNDARY** — Validate every declaration and action/blind/bare target from parsed,
+      JSON-reconstructed, and programmatic ASTs with one stable portable `invalid_rule_label` diagnostic.
+    - [x] **FOCUSED / COMPLETE DART** — Lock exact positive/distinct identities, declaration/edge forms, invalid
+      suffixes, every target role, and reconstructed/programmatic rejection; pass complete Dart and corpus gates.
+    - [x] **SIGNOFF / HANDOFF** — Synchronize checker, roadmap/live docs, mdBook, Knowledge Map, memory, canonical
+      gate, and generated cleanup; commit from a clean boundary before activating downstream route leaf `.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.2`
     Status: `pending`
@@ -10566,11 +10586,11 @@ Governance is six groups / 20 responses / 73 mutations, rollout 3/9, and native 
 lifecycle/bare structure, all four self-hosted corpus inputs are freshness-locked, physical-line boundaries reject
 label-prefix truncation, and current grammar passes the exact five-backend default+POSIX matrix.
 
-Generated-classifier foundation `FUTURE-PARITY-BACKLOG.10.5.0.2.0` is signoff-complete from clean `d17c1edf`:
-one deterministic internal Dart artifact owns exact scalar classification, complete-label validation, and
-supplementary-safe longest-prefix scanning with independent 806-range and 9/8/2 fixture proof. The precise next
-PNT leaf is pending `.10.5.0.2.1` for parser/validator consumption; activate it only after the `.0` commit leaves
-the repository clean. Downstream exact identity, negative/isolation proof, and composed signoff remain `.2-.4`.
+Generated-classifier foundation `.10.5.0.2.0` and native parser/validator consumption `.10.5.0.2.1` are signoff-
+complete. One generated scanner now owns headers plus action/blind/bare targets, invalid suffixes cannot silently
+truncate, and parsed/deserialized/programmatic labels share portable validation. After the clean `.1` commit, exact
+downstream identity leaf `.10.5.0.2.2` is the next pending frontier; negative/isolation proof and composed signoff
+remain `.3-.4`.
 
 ### Historical frontier sequence
 
@@ -10978,7 +10998,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.1.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` | `done` | Physical-line boundaries reject label-prefix truncation; focused current grammar passes exact 5x2 proof. |
 | 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `in_progress` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.0.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.2.0` | `done` | Generated and independently locked the exact Dart classifier/validator/prefix-scanner primitives. |
-| 74.4.0.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `pending` | Route headers and every rule-target form through the generated Dart primitives. |
+| 74.4.0.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `done` | Native headers/targets and external-AST validation consume the exact generated Dart primitives. |
 | 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `pending` | Prove exact Unicode identity through every Dart artifact, selector, diagnostic, trace, loader, and CLI route. |
 | 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `pending` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
 | 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `pending` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
@@ -11639,9 +11659,9 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking. Semantic design, neutral oracle, Perl admission, Rust audit/toolbox guard, Unicode prerequisite,
-  and Rust foundation/projection/query/runtime leaves `.10.1-.10.4.5` are complete; composed Rust admission
-  `.10.4.6` is next after this clean commit. Root
+- None blocking. Semantic design/neutral, admitted Perl/Rust, shared Unicode grammar closure, and Dart generated-
+  classifier plus native parser/validator leaves are complete. Exact Dart downstream label identity
+  `.10.5.0.2.2` is next after this clean commit. Root
   selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result
   shape remain closed across neutral, all five backends, dual-ABI Lua, recurring composition, and public no-drift.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -11662,6 +11682,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | Generated native header/action/blind/bare scanner; invalid suffix non-truncation; parsed/reconstructed/programmatic validation; focused 33 plus dedicated 5; complete Dart format/analyze/package 287/primary 66x2/corpus 105; Unicode 806/9/8/2; semantic 6/20/73; KM 672/5,000; mdBook/memory/task/four doctrines/diff/cleanup; canonical Rust admission 86.93s, primary 66x2, Phase 0 1,031/1,031 in 627s. | PASS. One generated authority now owns every Dart native rule-label parse/validation surface without changing unrelated identifier grammars or promoting semantic governance; exact downstream route proof `.2` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.5` | Typed sink and exact direct/generated slot/result seams; immutable runtime derivation; focused foundation 6/query 5/observation 7 and twentieth digest; direct/loaded/reconstructed/generated/source-emitter/traced/emitted-module routes; focused new-code Clippy; complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all packages/primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 668/4,949; mdBook/memory/task/four doctrines/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 647s; 3.2 GiB target/12 MiB book/cache cleanup. | PASS. Caller-owned typed execution evidence derives a separate exact runtime index without changing result/cursor/trace/diagnostic behavior or enabling query execution; composed admission remains pending and `.10.4.6` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.4` | Focused query 5/foundation 6 and all 19 static digests plus 26 errors; complete Rust core 193, runtime 147, integration 197, exact 105/full generated manifest/all packages, primary 66x2; focused query Clippy clean; semantic 6/20/65 at 2/9 + 1/6; KM 667/4,937; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 631s; 3.3 GiB target/12 MiB book/28 KiB cache cleanup. | PASS. Rust exposes owned typed and raw-neutral projection-only capabilities/query with exact privacy, traversal, pages, budgets, errors, explain, isolation, and no execution/host/path/IR access; runtime/admission remain pending and `.10.4.5` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.3` | Exact calls 4/all static 9/foundation 6; complete Rust core 193, runtime 147, integration 197, exact 105/full generated manifest/all packages, primary 66x2; normal library Clippy exit 0 with existing warning baseline; semantic 6/20/65 at 2/9 + 1/6; KM 666/4,923; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 619s; 3.0 GiB target/12 MiB book/cache cleanup. | PASS. Typed function/ActionIR/staged/generated authorities project all corrected 22 records / 25 relations with exact preorder, resolution, shapes, Unicode ranges, function-shell isolation, directions, and no host/source leak; query/runtime/admission remain pending and `.10.4.4` follows after the clean commit. |
@@ -11881,6 +11902,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `FUTURE-PARITY-BACKLOG.10.5.0.2.1 - route Dart Unicode labels` | Generated scanner consumption, external-AST validation, focused 33+5, complete Dart 287/105/66x2, canonical admission 86.93s plus Phase 0 1,031/627s, KM/book/doctrines, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.6` | `FUTURE-PARITY-BACKLOG.10.4.6 - admit Rust semantic introspection` | One exact 12-role consumer over existing Rust owners; 20 digests, eight topology mutations, rollout 3/9, admission 2/6, complete Rust/66x2, canonical admission 80.84s plus Phase 0 1,031/651s, KM/book/doctrines, cleanup, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.10.4.5` | `FUTURE-PARITY-BACKLOG.10.4.5 - capture Rust runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across Rust routes, focused 7, complete Rust/105/66x2, canonical 1,031/647s, KM/book/doctrines, and cleanup without admission promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.4` | `FUTURE-PARITY-BACKLOG.10.4.4 - expose Rust semantic query` | Owned typed/raw-neutral projection-only query, all 19 static digests/26 errors, focused 5, complete Rust/105/66x2, canonical 1,031/631s, KM/book/doctrines, and cleanup without execution or promotion. |

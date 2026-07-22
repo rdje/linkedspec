@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.1 — route Dart Unicode labels
+
+Dart's native parser now uses the generated Unicode 17.0.0 `XID_Continue` prefix scanner for rule declarations
+and every action, blind, and bare target. The former host-regex label scanners are gone. Precomposed, decomposed,
+Greek, CJK, supplementary-plane, digit-start, underscore, and continuation-mark labels retain their exact decoded
+identity, while invalid suffixes such as `Top-Rule`, `Top😀`, `Top:`, and `Top/Rule` cannot silently become `Top`.
+
+`validateSpec` now applies the same generated complete-label predicate to every declaration and target before
+duplicate/reference normalization. Parsed, `SpecFile.fromJson`, and programmatically constructed ASTs therefore
+share one portable `invalid_rule_label` / `validate_rule_labels` failure with label, role, line, and owning-rule
+fields. Function/helper/lifecycle/fluent/mark identifier grammars are unchanged.
+
+The Unicode checker locks generated-scanner consumption, removal of each former host-regex label site, validation
+topology, focused route proof, and canonical CI registration. Focused parser/validator/self-hosted coverage passes
+33 tests; the dedicated native route suite passes 5 tests including reconstructed and programmatic invalid state.
+The complete Dart gate passes format, fatal analysis, 287 package tests, primary 66x2, and corpus 105/105.
+Downstream artifact/selector/diagnostic/trace/loader identity remains owned by `.10.5.0.2.2`; semantic governance
+remains 6/20/73 at rollout 3/9 and native admission 2/6. Knowledge Map 672/5,000, mdBook, memory/task metadata,
+all four doctrines, and whitespace pass. Canonical CI passes Rust semantic admission in 86.93 seconds, primary
+66x2, and Phase 0 1,031/1,031 in 627 seconds, exit 0.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.0 — generate Dart Unicode label primitives
 
 The pinned Unicode rule-label generator now emits `dart/lib/src/parser/unicode_rule_label.dart` from the same

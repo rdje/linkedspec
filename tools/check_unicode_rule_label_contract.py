@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.json"
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
 DART_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "unicode_rule_label.dart"
+DART_PARSER_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "spec_parser.dart"
+DART_VALIDATION_PATH = ROOT / "dart" / "lib" / "src" / "validation" / "spec_validator.dart"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
 SELF_HOSTED_CLI_MANIFEST_PATH = (
@@ -35,6 +37,9 @@ DART_SELF_HOSTED_TEST_PATH = (
 )
 DART_CLASSIFIER_TEST_PATH = (
     ROOT / "dart" / "test" / "unicode_rule_label_classifier_test.dart"
+)
+DART_NATIVE_ROUTES_TEST_PATH = (
+    ROOT / "dart" / "test" / "unicode_rule_label_routes_test.dart"
 )
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -83,6 +88,8 @@ def main() -> None:
         CONTRACT_PATH,
         RUST_PATH,
         DART_PATH,
+        DART_PARSER_PATH,
+        DART_VALIDATION_PATH,
         SELF_HOSTED_REGEX_PATH,
         SELF_HOSTED_GRAMMAR_PATH,
         SELF_HOSTED_CLI_MANIFEST_PATH,
@@ -92,6 +99,7 @@ def main() -> None:
         RUST_ENGINE_PATH,
         DART_SELF_HOSTED_TEST_PATH,
         DART_CLASSIFIER_TEST_PATH,
+        DART_NATIVE_ROUTES_TEST_PATH,
         MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
@@ -420,6 +428,47 @@ def main() -> None:
     ):
         if marker not in dart_classifier_test:
             fail(f"Dart classifier proof missing: {marker}")
+    dart_parser = DART_PARSER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "import 'unicode_rule_label.dart';",
+        "_parseRuleHeaderFields",
+        "_parseActionEdgePrefix",
+        "_parseBlindEdgePrefix",
+        "_parseBareEdgePrefix",
+        "takeRuleLabelPrefix",
+        "_startsWithEdgeToken",
+    ):
+        if marker not in dart_parser:
+            fail(f"Dart native label scanner marker missing: {marker}")
+    for stale in (
+        "final _headerPattern = RegExp(r'^(\\w+)",
+        "final _bodyHeaderPattern = RegExp(r'^\\w+",
+        "r'^->[ \\t]*(\\w+",
+        "r'^=>[ \\t]*(\\w+",
+        "r'^(\\w+(?:[ \\t]*\\|",
+    ):
+        if stale in dart_parser:
+            fail(f"stale Dart host-regex label scanner remains: {stale}")
+    dart_validation = DART_VALIDATION_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "import '../parser/unicode_rule_label.dart';",
+        "_checkRuleLabels(spec)",
+        "isRuleLabel(rule.header.label)",
+        "isRuleLabel(target)",
+        "invalid_rule_label",
+        "validate_rule_labels",
+    ):
+        if marker not in dart_validation:
+            fail(f"Dart rule-label validation marker missing: {marker}")
+    dart_native_routes_test = DART_NATIVE_ROUTES_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "scanner parses every declaration and edge form with exact identity",
+        "invalid suffixes never become partial action blind or bare edges",
+        "validator rejects every programmatic declaration and target role",
+        "validator rejects invalid labels reconstructed from AST JSON",
+    ):
+        if marker not in dart_native_routes_test:
+            fail(f"Dart native route proof missing: {marker}")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -432,6 +481,7 @@ def main() -> None:
         "require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart",
         "require_tracked_file dart/lib/src/parser/unicode_rule_label.dart",
         "require_tracked_file dart/test/unicode_rule_label_classifier_test.dart",
+        "require_tracked_file dart/test/unicode_rule_label_routes_test.dart",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

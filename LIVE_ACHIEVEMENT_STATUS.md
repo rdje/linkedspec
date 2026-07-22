@@ -9,9 +9,9 @@ Current execution status for interruption-safe batch workflow recovery.
 
 ## Active Slice
 - Dart-native label rollout `FUTURE-PARITY-BACKLOG.10.5.0.2` is active and split into `.0-.4`. Generated
-  classifier foundation `.10.5.0.2.0` is signoff-complete; `.10.5.0.2.1` is the next pending parser/validator
-  consumption frontier and may activate only after the `.0` commit leaves the repository clean. Downstream route
-  identity, negative/isolation proof, and composed signoff remain `.2-.4`.
+  classifier foundation `.10.5.0.2.0` and native parser/validator consumption `.10.5.0.2.1` are signoff-complete.
+  After the clean `.1` commit, downstream exact artifact/selector/diagnostic/trace/loader identity `.2` is next;
+  negative/isolation proof and composed signoff remain `.3-.4`.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -30,6 +30,19 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.1 — route Dart Unicode labels**
+  (DONE in this commit from clean base `7109780a`).
+
+  **Result:** Native header discovery plus action, blind, and bare targets consume one generated Unicode 17 scanner;
+  invalid suffixes cannot silently truncate. Validation rejects invalid declarations and every target from parsed,
+  JSON-reconstructed, and programmatic ASTs with one portable diagnostic. Unrelated identifier grammars stay fixed.
+
+  **Proof:** Focused native/classifier/parser/validator/self-hosted 33/33; dedicated routes 5/5; complete Dart
+  format/analyze/package 287/primary 66x2/corpus 105; Unicode 806/9/8/2; semantic 6/20/73; KM 672/5,000; mdBook/
+  four doctrines/diff/cleanup; canonical Rust admission 86.93s, primary 66x2, Phase 0 1,031/1,031 in 627s, exit 0.
+
+  **Next:** after this clean commit, activate `.10.5.0.2.2` task-tree-first for exact downstream route identity.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.0.2.0 — generate Dart Unicode label primitives**
   (DONE in this commit from clean base `d17c1edf`).
 

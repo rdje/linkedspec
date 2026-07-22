@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.1` — membership and token termination must share one scanner):
+  Dart's former declaration/action/blind/bare regexes embedded host `\\w`; declarations rejected Unicode while
+  action/blind references could accept only a valid prefix. All four native surfaces now call the generated
+  `takeRuleLabelPrefix`, then parse punctuation/indexes explicitly and require a legal continuation boundary.
+  Header discovery and body termination call the same header parser, avoiding a second recognition grammar.
+
+  Invalid edge-looking source must survive parsing so `validateSpec` can reject it instead of silently dropping a
+  suffix after an earlier body element. That preservation is deliberately narrow: retain a failed first element or
+  a residual `->`/`=>`, but preserve Dart's established treatment of unrelated trailing residue such as `([])`.
+  Broadly turning every residual fragment into `RawBodyElementKind` broke shipped grammar compatibility and is not
+  part of Unicode-label closure.
+
+  Validation is an independent trust boundary. It checks every rule header and action/blind/bare target with
+  `isRuleLabel` before duplicate/reference checks, so parsed, JSON-reconstructed, and programmatic ASTs receive the
+  same `invalid_rule_label` / `validate_rule_labels` diagnostic. The shared `edge_target` role avoids coupling the
+  portable failure to Dart AST variant names. Unrelated identifier regexes remain unchanged for later isolation
+  proof in `.10.5.0.2.3`.
+
+  Focused native/classifier/parser/validator/self-hosted tests pass 33/33, the dedicated route suite passes 5/5,
+  and the complete Dart gate passes format, fatal analysis, package 287, primary 66x2, and corpus 105/105.
+  Knowledge Map is 672/5,000; mdBook and all four doctrines pass. Canonical CI passes semantic 6/20/73, Rust
+  admission in 86.93 seconds, primary 66x2, and Phase 0 1,031/1,031 in 627 seconds, exit 0; semantic rollout and
+  admission remain 3/9 and 2/6.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.0` — generated Unicode data must adapt to the host string model):
   The neutral contract is scalar-based, but Dart strings are UTF-16. Membership therefore iterates `String.runes`
   and binary-searches the exact 806 generated scalar ranges, while prefix scanning separately accumulates one or

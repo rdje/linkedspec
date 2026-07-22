@@ -461,14 +461,13 @@ spans are local to normalized action text, and `LoadedSpec` also carries a host 
 needs a copied accepted-source byte/scalar mapper plus caller logical identity. Immutable source/outcome, static,
 calls/staging/generated, query, runtime observation, and composed admission are frozen as `.10.5.1-.10.5.6`.
 
-The audit also proves why two label prerequisites come first. Dart's host-`\w` header scanner rejects `Töp`, its
-action/blind scanners silently truncate that target to `T`, bare Unicode targets remain raw, and deserialized or
-programmatic `Top-Rule` labels pass validation and compile. Once a valid Unicode label is supplied externally,
-compiled maps, descriptors, generated plans/emitted source, and explicit selectors preserve it exactly. Moreover,
-shared `.10.5.0.1.0-.1` now generate/guard one pinned class, consume it at all 12 first-authoritative
-`specs/spec.spec` label sites, and make Dart directly execute current explicit lifecycle and bare-edge forms.
-Corpus freshness `.10.5.0.1.2` completes that shared closure before generated Dart scanner/validator parity
-`.10.5.0.2`. Neither audit nor either prerequisite may advance semantic rollout/admission.
+The audit also proves why two label prerequisites come first. Shared `.10.5.0.1` now generates/guards one pinned
+class, consumes it at all 12 first-authoritative `specs/spec.spec` label sites, freshness-locks the four corpus
+copies, and proves current grammar across five backends. Dart `.10.5.0.2.0-.1` generates the corresponding native
+classifier/scanner, replaces all host-regex header/action/blind/bare label scans, rejects invalid-prefix
+truncation, and validates parsed plus external AST declarations/targets. Existing compiled maps, descriptors,
+generated plans/emitted source, and explicit selectors already preserve valid Unicode strings exactly; `.2-.4`
+own exhaustive route, negative/isolation, and composed proof. No prerequisite advances semantic rollout/admission.
 
 The complete Dart corpus's 105/105 result is not yet proof of that current self-hosted authority. Its four
 `spec_spec_*` inputs are identical older snapshots: they omit the canonical bare-edge productions and retain broad

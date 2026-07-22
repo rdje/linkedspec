@@ -219,14 +219,13 @@ authority; all four checked-in `spec_spec_*` corpus inputs must remain byte-iden
 
 Perl, Rust, Dart, Julia, and Lua now execute one byte-exact positive/negative/distinct/boundary projection through
 the current canonical self-hosted grammar in both default and POSIX command environments. This proves the shared
-executable grammar, not every backend's separate hardcoded parser: Rust implements the pinned label contract across
-its native headers/references/validation/selectors/artifacts/loaders/traces, while Dart's corresponding native
-scanner/validator rollout remains the next backend-specific lane before Dart can admit the semantic v1 fixture.
-The first Dart-native foundation is now present: one generated internal artifact encodes the same 806 ranges and
-provides binary-search scalar membership, complete-label validation, and a longest-prefix scanner that accounts
-for Dart's UTF-16 width without splitting supplementary scalars. That artifact is independently regenerated and
-fixture-tested but is not yet imported by Dart's hardcoded parser or validator; the next implementation leaf owns
-that behavior change and the later route proofs.
+executable grammar, not every backend's separate native parser. Rust implements the pinned label contract across
+its native headers/references/validation/selectors/artifacts/loaders/traces. Dart now routes its native headers plus
+action, blind, and bare targets through the generated 806-range scanner and applies the same complete-label
+predicate to parsed, reconstructed, and programmatic ASTs. The scanner accounts for Dart's UTF-16 width without
+splitting supplementary scalars, and invalid suffixes cannot silently truncate to a valid prefix. Exact Dart
+artifact/selector/diagnostic/trace/loader route proof remains the next backend-specific leaf before semantic v1
+admission.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.

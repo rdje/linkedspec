@@ -46,7 +46,9 @@ normalization or case mapping. The same run writes an internal Dart range-table 
 scanner at `dart/lib/src/parser/unicode_rule_label.dart`. The scanner iterates Unicode scalars and converts accepted
 supplementary scalars to their two-code-unit Dart substring width, so it never cuts a UTF-16 surrogate pair. The
 checker independently compares every generated endpoint and algorithm marker; focused Dart tests cover all range
-boundaries and neutral fixtures. Native parser/validator consumption remains a separate rollout slice.
+boundaries and neutral fixtures. Dart's native header/action/blind/bare parsers now consume this scanner, and
+validation applies the complete predicate to parsed, reconstructed, and programmatic declarations/targets. Invalid
+suffixes are rejected rather than truncated; unrelated identifier grammars remain separate.
 
 The generator also writes
 `unicode_case/unicode_rule_label_regex_class.txt`: one metadata-bearing UTF-8 literal-range class for the

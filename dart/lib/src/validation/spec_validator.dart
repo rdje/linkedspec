@@ -1,5 +1,6 @@
 import '../ast/spec_ast.dart';
 import '../action/action_contracts.dart';
+import '../parser/unicode_rule_label.dart';
 import '../trace/trace.dart';
 
 final class SpecValidationException implements Exception {
@@ -71,6 +72,7 @@ void validateSpec(
   );
   try {
     _checkAtLeastOneRule(spec);
+    _checkRuleLabels(spec);
     _checkDuplicateRuleLabels(spec);
     _checkDuplicateFunctionNames(spec);
     _checkFunctionRegistry(spec);
@@ -108,6 +110,61 @@ void _checkAtLeastOneRule(SpecFile spec) {
     stage: 'validate_spec',
     message: 'spec does not define any rules',
     fields: const {},
+  );
+}
+
+void _checkRuleLabels(SpecFile spec) {
+  for (final rule in spec.rules) {
+    if (!isRuleLabel(rule.header.label)) {
+      throw _invalidRuleLabelDiagnostic(
+        label: rule.header.label,
+        role: 'declaration',
+        line: rule.header.line,
+      );
+    }
+    for (final element in rule.body) {
+      final targets = switch (element.kind) {
+        ActionEdgeBodyElementKind(:final targets) => [
+          for (final target in targets) target.label,
+        ],
+        BlindEdgeBodyElementKind(:final target) => [target],
+        BareEdgeBodyElementKind(:final targets) => [
+          for (final target in targets) target.label,
+        ],
+        _ => const <String>[],
+      };
+      for (final target in targets) {
+        if (!isRuleLabel(target)) {
+          throw _invalidRuleLabelDiagnostic(
+            label: target,
+            role: 'edge_target',
+            line: element.line,
+            owner: rule.header.label,
+          );
+        }
+      }
+    }
+  }
+}
+
+SpecValidationException _invalidRuleLabelDiagnostic({
+  required String label,
+  required String role,
+  required int line,
+  String? owner,
+}) {
+  return _portableDiagnostic(
+    code: 'invalid_rule_label',
+    stage: 'validate_rule_labels',
+    message:
+        "$role '$label' is not a nonempty Unicode 17.0.0 "
+        'XID_Continue rule label',
+    fields: {
+      'label': label,
+      'line': line,
+      'role': role,
+      if (owner != null) 'rule_label': owner,
+    },
   );
 }
 

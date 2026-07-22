@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../ast/spec_ast.dart';
 import '../trace/trace.dart';
+import 'unicode_rule_label.dart';
 
 final class SpecParseException implements Exception {
   const SpecParseException({required this.line, required this.message});
@@ -170,16 +171,7 @@ final class _BoundedMode {
   final int? max;
 }
 
-final _headerPattern = RegExp(r'^(\w+)[ \t]*(::|:)[ \t]*([^\s/]*)[ \t]*(.*)');
-final _bodyHeaderPattern = RegExp(r'^\w+[ \t]*(::|:)[ \t]*\S*');
 final _regexPattern = RegExp(r'^/([^/\\]*(?:\\.[^/\\]*)*)/');
-final _actionPattern = RegExp(
-  r'^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)',
-);
-final _blindPattern = RegExp(r'^=>[ \t]*(\w+)(?:[ \t]*\[(\d+)\])?');
-final _bareEdgePattern = RegExp(
-  r'^(\w+(?:[ \t]*\|[ \t]*\w+)*)(?:[ \t]*\[(\d+)\])?',
-);
 final _lifecyclePattern = RegExp(r'^(I|LS|LE|LX|E|EX|IT)\b');
 final _splitPattern = RegExp(
   r'^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))',
@@ -207,15 +199,12 @@ _ParsedHeader? _parseRuleHeader(List<String> lines, int index) {
   }
 
   final trimmed = lines[index].trim();
-  final match = _headerPattern.firstMatch(trimmed);
-  if (match == null) {
+  final fields = _parseRuleHeaderFields(trimmed);
+  if (fields == null) {
     return null;
   }
 
-  final label = match[1]!;
-  final colon = match[2]!;
-  final modeRaw = match[3]!;
-  final restRaw = match[4]!;
+  final (:label, :isTop, :modeRaw, :restRaw) = fields;
   final parsedMode = _parseModeSuffixStrict(modeRaw);
   final RuleMode mode;
   final String rest;
@@ -230,12 +219,54 @@ _ParsedHeader? _parseRuleHeader(List<String> lines, int index) {
   return _ParsedHeader(
     header: RuleHeader(
       label: label,
-      isTop: colon == '::',
+      isTop: isTop,
       mode: mode,
       rest: rest,
       line: index + 1,
     ),
     nextIndex: index + 1,
+  );
+}
+
+({String label, bool isTop, String modeRaw, String restRaw})?
+_parseRuleHeaderFields(String input) {
+  final scan = takeRuleLabelPrefix(input);
+  if (scan == null) {
+    return null;
+  }
+  var offset = scan.label.length;
+  offset = _skipHorizontalSpace(input, offset);
+
+  final bool isTop;
+  if (input.startsWith('::', offset)) {
+    isTop = true;
+    offset += 2;
+  } else if (input.startsWith(':', offset)) {
+    isTop = false;
+    offset += 1;
+  } else {
+    return null;
+  }
+  if (input.startsWith(':', offset)) {
+    return null;
+  }
+
+  offset = _skipHorizontalSpace(input, offset);
+  final modeStart = offset;
+  while (offset < input.length) {
+    final codeUnit = input.codeUnitAt(offset);
+    if (_isHorizontalSpace(codeUnit) || codeUnit == _slash) {
+      break;
+    }
+    offset += 1;
+  }
+  final modeRaw = input.substring(modeStart, offset);
+  offset = _skipHorizontalSpace(input, offset);
+  return (
+    label: scan.label,
+    isTop: isTop,
+    modeRaw: modeRaw,
+    restRaw: input.substring(offset),
   );
 }
 
@@ -320,6 +351,15 @@ List<BodyElement>? _parseInlineBody(
       allowBareEdge: elements.isEmpty,
     );
     if (parsed == null) {
+      if (elements.isEmpty || _startsWithEdgeToken(trimmed)) {
+        elements.add(
+          BodyElement(
+            kind: RawBodyElementKind(text: trimmed),
+            source: trimmed,
+            line: lineNumber,
+          ),
+        );
+      }
       break;
     }
     elements.add(parsed.element);
@@ -345,7 +385,7 @@ _CollectedBody _collectBody(List<String> lines, int start) {
       continue;
     }
 
-    if (_bodyHeaderPattern.hasMatch(trimmed)) {
+    if (_parseRuleHeaderFields(trimmed) != null) {
       break;
     }
 
@@ -423,6 +463,15 @@ List<BodyElement> _parseBodyElements(List<String> lines, _LineCursor cursor) {
       allowBareEdge: elements.isEmpty,
     );
     if (parsed == null) {
+      if (elements.isEmpty || _startsWithEdgeToken(trimmed)) {
+        elements.add(
+          BodyElement(
+            kind: RawBodyElementKind(text: trimmed),
+            source: trimmed,
+            line: lineNumber,
+          ),
+        );
+      }
       break;
     }
 
@@ -464,15 +513,10 @@ _ParsedElement? _parseSingleElement(
     );
   }
 
-  final actionMatch = _actionPattern.firstMatch(trimmed);
-  if (actionMatch != null) {
-    final fullMatch = actionMatch[0]!;
-    final targetsText = actionMatch[1]!;
-    final index = int.tryParse(actionMatch[3] ?? '') ?? 0;
-    final targets = [
-      for (final target in targetsText.split('|').map((value) => value.trim()))
-        if (target.isNotEmpty) EdgeTarget(label: target, index: index),
-    ];
+  final actionPrefix = _parseActionEdgePrefix(trimmed);
+  if (actionPrefix != null) {
+    final fullMatch = trimmed.substring(0, actionPrefix.end);
+    final targets = actionPrefix.targets;
     final rest = trimmed.substring(fullMatch.length).trimLeft();
     final savedIndex = cursor.index;
 
@@ -523,10 +567,10 @@ _ParsedElement? _parseSingleElement(
     );
   }
 
-  final blindMatch = _blindPattern.firstMatch(trimmed);
-  if (blindMatch != null) {
-    final fullMatch = blindMatch[0]!;
-    final target = blindMatch[1]!;
+  final blindPrefix = _parseBlindEdgePrefix(trimmed);
+  if (blindPrefix != null) {
+    final fullMatch = trimmed.substring(0, blindPrefix.end);
+    final target = blindPrefix.target;
     final rest = trimmed.substring(fullMatch.length).trimLeft();
     final savedIndex = cursor.index;
     String? code;
@@ -552,7 +596,7 @@ _ParsedElement? _parseSingleElement(
       element: BodyElement(
         kind: BlindEdgeBodyElementKind(
           target: target,
-          index: int.tryParse(blindMatch[2] ?? ''),
+          index: blindPrefix.index,
           code: code,
           fluentChain: fluentChain,
         ),
@@ -704,24 +748,13 @@ _ParsedElement? _parseBareEdge(
   _LineCursor cursor,
   int lineNumber,
 ) {
-  final match = _bareEdgePattern.firstMatch(trimmed);
-  if (match == null) {
+  final prefix = _parseBareEdgePrefix(trimmed);
+  if (prefix == null) {
     return null;
   }
 
-  final fullMatch = match[0]!;
-  final labels = [
-    for (final label in match[1]!.split('|').map((value) => value.trim()))
-      if (label.isNotEmpty) label,
-  ];
-  if (labels.isEmpty) {
-    return null;
-  }
-
-  final index = int.tryParse(match[2] ?? '');
-  final targets = [
-    for (final label in labels) BareEdgeTarget(label: label, index: index),
-  ];
+  final fullMatch = trimmed.substring(0, prefix.end);
+  final targets = prefix.targets;
   final rest = trimmed.substring(fullMatch.length).trimLeft();
   final savedIndex = cursor.index;
 
@@ -776,6 +809,168 @@ _ParsedElement? _parseBareEdge(
 
   return null;
 }
+
+({List<EdgeTarget> targets, int end})? _parseActionEdgePrefix(String input) {
+  if (!input.startsWith('->')) {
+    return null;
+  }
+  var offset = _skipHorizontalSpace(input, 2);
+  final labels = <String>[];
+  while (true) {
+    final target = _takeRuleLabelAt(input, offset);
+    if (target == null) {
+      return null;
+    }
+    labels.add(target.label);
+    offset = target.end;
+
+    final afterSpace = _skipHorizontalSpace(input, offset);
+    if (!input.startsWith('|', afterSpace)) {
+      break;
+    }
+    offset = _skipHorizontalSpace(input, afterSpace + 1);
+    if (_takeRuleLabelAt(input, offset) == null) {
+      return null;
+    }
+  }
+
+  final parsedIndex = _parseIndexAt(input, offset, allowSpace: false);
+  final index = parsedIndex?.index ?? 0;
+  final end = parsedIndex?.end ?? offset;
+  if (!_hasValidEdgeRemainder(input, end)) {
+    return null;
+  }
+  return (
+    targets: [
+      for (final label in labels) EdgeTarget(label: label, index: index),
+    ],
+    end: end,
+  );
+}
+
+({String target, int? index, int end})? _parseBlindEdgePrefix(String input) {
+  if (!input.startsWith('=>')) {
+    return null;
+  }
+  final label = _takeRuleLabelAt(input, _skipHorizontalSpace(input, 2));
+  if (label == null) {
+    return null;
+  }
+  final parsedIndex = _parseIndexAt(input, label.end, allowSpace: true);
+  final end = parsedIndex?.end ?? label.end;
+  if (!_hasValidEdgeRemainder(input, end)) {
+    return null;
+  }
+  return (target: label.label, index: parsedIndex?.index, end: end);
+}
+
+({List<BareEdgeTarget> targets, int end})? _parseBareEdgePrefix(String input) {
+  var offset = 0;
+  final labels = <String>[];
+  while (true) {
+    final target = _takeRuleLabelAt(input, offset);
+    if (target == null) {
+      return null;
+    }
+    labels.add(target.label);
+    offset = target.end;
+
+    final afterSpace = _skipHorizontalSpace(input, offset);
+    if (!input.startsWith('|', afterSpace)) {
+      break;
+    }
+    offset = _skipHorizontalSpace(input, afterSpace + 1);
+    if (_takeRuleLabelAt(input, offset) == null) {
+      return null;
+    }
+  }
+
+  final parsedIndex = _parseIndexAt(input, offset, allowSpace: true);
+  final index = parsedIndex?.index;
+  final end = parsedIndex?.end ?? offset;
+  return (
+    targets: [
+      for (final label in labels) BareEdgeTarget(label: label, index: index),
+    ],
+    end: end,
+  );
+}
+
+({String label, int end})? _takeRuleLabelAt(String input, int offset) {
+  if (offset < 0 || offset > input.length) {
+    return null;
+  }
+  final scan = takeRuleLabelPrefix(input.substring(offset));
+  if (scan == null) {
+    return null;
+  }
+  return (label: scan.label, end: offset + scan.label.length);
+}
+
+({int index, int end})? _parseIndexAt(
+  String input,
+  int offset, {
+  required bool allowSpace,
+}) {
+  var cursor = allowSpace ? _skipHorizontalSpace(input, offset) : offset;
+  if (!input.startsWith('[', cursor)) {
+    return null;
+  }
+  cursor = _skipHorizontalSpace(input, cursor + 1);
+  final digitsStart = cursor;
+  while (cursor < input.length && _isAsciiDigit(input.codeUnitAt(cursor))) {
+    cursor += 1;
+  }
+  if (cursor == digitsStart) {
+    return null;
+  }
+  final index = int.tryParse(input.substring(digitsStart, cursor));
+  if (index == null) {
+    return null;
+  }
+  cursor = _skipHorizontalSpace(input, cursor);
+  if (!input.startsWith(']', cursor)) {
+    return null;
+  }
+  return (index: index, end: cursor + 1);
+}
+
+bool _hasValidEdgeRemainder(String input, int offset) {
+  final remainder = input.substring(offset);
+  if (remainder.isEmpty) {
+    return true;
+  }
+  final beginsWithSpace = _isHorizontalSpace(remainder.codeUnitAt(0));
+  final trimmed = remainder.trimLeft();
+  if (trimmed.isEmpty || trimmed.startsWith('#')) {
+    return true;
+  }
+  return trimmed.startsWith('{') ||
+      trimmed.startsWith('.') ||
+      trimmed.startsWith('->') ||
+      trimmed.startsWith('=>') ||
+      (beginsWithSpace &&
+          (trimmed.startsWith('/') ||
+              _lifecyclePattern.hasMatch(trimmed) ||
+              _splitPattern.hasMatch(trimmed) ||
+              _conditionalPattern.hasMatch(trimmed)));
+}
+
+int _skipHorizontalSpace(String input, int offset) {
+  var cursor = offset;
+  while (cursor < input.length &&
+      _isHorizontalSpace(input.codeUnitAt(cursor))) {
+    cursor += 1;
+  }
+  return cursor;
+}
+
+bool _isHorizontalSpace(int codeUnit) => codeUnit == _space || codeUnit == _tab;
+
+bool _isAsciiDigit(int codeUnit) => codeUnit >= _zero && codeUnit <= _nine;
+
+bool _startsWithEdgeToken(String input) =>
+    input.startsWith('->') || input.startsWith('=>');
 
 _ConsumedBlock? _consumeBlockFromRest(
   List<String> lines,

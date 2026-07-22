@@ -231,14 +231,13 @@ must copy caller source and logical identity and own exact byte/scalar correlati
 typed invocation-local channel distinct from trace and diagnostic output.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
-exact case- and normalization-sensitive identity. Current Dart host-`\w` headers reject `Töp`; action/blind
-references silently truncate it to `T`; bare Unicode references stay raw; and external invalid labels bypass
-validation. Shared `.10.5.0.1.0-.1` now generate and independently guard one portable 806-range class, consume it
-at all 12 label sites in first-authoritative `specs/spec.spec`, and make Dart directly execute current explicit
-lifecycle and bare-edge structural forms. Corpus freshness remains the last shared prerequisite in
-`.10.5.0.1.2`, before Dart classifier/scanner/validator parity
-`.10.5.0.2`; source/static/calls/query/runtime/admission follow as `.10.5.1-.10.5.6`. Julia and Lua later inherit
-the same pinned-label prerequisite before their v1 admissions.
+exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
+class, consumes it at all 12 label sites in first-authoritative `specs/spec.spec`, freshness-locks all four corpus
+copies, and proves current grammar on five backends. Dart `.10.5.0.2.0-.1` generates the matching native scalar
+classifier/prefix scanner, routes headers plus action/blind/bare targets through it, and validates declarations and
+targets from parsed, reconstructed, and programmatic ASTs. Exact downstream route proof and negative/identifier-
+isolation signoff remain `.10.5.0.2.2-.4`; source/static/calls/query/runtime/admission follow as
+`.10.5.1-.10.5.6`. Julia and Lua later inherit the same pinned-label prerequisite before their v1 admissions.
 
 Do not interpret Dart's current 105/105 corpus result as execution proof for today's self-hosted grammar. The four
 `spec_spec_*` inputs are stale identical copies that predate canonical bare-edge productions and the explicit
