@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Dart immutable query parent `.10.5.4` is composition-closed at all 19 static digests
-  and 26 validation boundaries; typed runtime observation `.10.5.5` is next)
+- Last updated: `2026-07-22` (runtime audit `.10.5.5.0` freezes exact Dart capture/derivation/generated-route
+  authority and the `.1-.4` dependency order; typed live capture `.10.5.5.1` is active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -8907,10 +8907,93 @@ before implementation.
   Status: `in_progress` (2026-07-22; task-tree owned for the clean `.10.5.4.4` handoff)
   Goal: Capture typed Dart runtime semantic observations through every execution route.
   Depends on: `.10.5.4`
+  Children: `.10.5.5.0`, `.10.5.5.1`, `.10.5.5.2`, `.10.5.5.3`, `.10.5.5.4`
   Acceptance: Add an optional invocation-local typed sink, separate from trace and diagnostic output, at the
     authoritative post-match regex-slot and successful final-result seams. Derive a new immutable observed index
     and match the twentieth digest across direct, loaded, reconstructed, generated/source-emitter, and traced/
     untraced routes without changing results/cursors/traces/diagnostics or permitting query-side execution.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / SPLIT FIRST** — Reconcile ADR `0049`, admitted Perl/Rust observation owners, Dart runtime,
+    loader, generated-plan/source-emitter, trace/diagnostic, immutable-index, and exact runtime-oracle seams before
+    behavior changes; freeze the dependency-ordered `.0-.4` split.
+  - [ ] **TYPED LIVE CAPTURE** — Add one public immutable event vocabulary and optional invocation-local sink to
+    direct, loaded, and reconstructed execution at the exact post-match slot and successful final-result seams.
+  - [ ] **IMMUTABLE DERIVATION** — Validate caller-retained event topology against static records/relations and
+    derive a separate immutable observed `SemanticIndex` matching the twentieth exact digest.
+  - [ ] **GENERATED / TRACED ROUTES** — Thread the same sink through generated-plan, emitted-source, and traced/
+    untraced adapters while preserving caller exception identity and every pre-existing result/trace/diagnostic.
+  - [ ] **SIGNOFF / HANDOFF** — Compose complete runtime-observation proof, synchronize durable surfaces, clean
+    artifacts, and close `.10.5.5` before admission leaf `.10.5.6`.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.5.0`
+    Status: `done` (2026-07-22)
+    Goal: Freeze the exact Dart runtime-observation authority map and omission-safe implementation split.
+    Depends on: `.10.5.4`
+    Acceptance: Reconcile the exact twentieth neutral response, admitted Perl/Rust event and derivation contracts,
+      Dart's live/loaded/reconstructed/generated/emitted/traced execution topology, authoritative slot/result
+      seams, observer-failure propagation, and immutable projection boundary. Record forbidden trace/diagnostic/
+      query/compiler/host authority; create bounded dependency-ordered implementation and closeout children; change
+      no production behavior, test behavior, public API, rollout, or admission state.
+    Verification: Dart currently has no semantic observation sink. `_traceRegexSlotSelected` is already called
+      after one regex match and structural slot identity are accepted but before match effects, and exposes the
+      executing rule plus every selected target rule/index; the successful public `_parse` wrapper constructs the
+      final `RuntimeParseResult` with the exact Unicode-scalar cursor and selected entry label. These are the only
+      authoritative capture seams. `LoadedCompiledSpec.createEngine()` and reconstructed `CompiledSpec` reuse that
+      engine. Generated-plan and emitted-source functions reuse it too, but their outer adapters translate generic
+      thrown objects into `GeneratedSourceException`; observer failures therefore require an explicit identity-
+      preserving passthrough wrapper analogous to diagnostic-output failures. The sink must remain invocation-
+      local and absent-by-default so no event allocation or input hashing occurs without a caller. The derived
+      index must validate events against detached static rule/slot/selects-regex evidence, derive value shapes only
+      from static projection data, add one execution, ordered events, and `observed_as` relations to a new snapshot,
+      and leave the base index static. Work is ordered as typed live capture `.1`, immutable derivation/twentieth
+      digest `.2`, generated/emitted/traced topology `.3`, and composed closeout `.4`. No production or test code,
+      public API, trace, diagnostic, query, rollout, or admission behavior changed. The unchanged composed Dart
+      semantic suite passes 28/28; the neutral checker remains 6 groups / 20 responses / 73 rejected mutations at
+      rollout 3/9 and admission 2/6. mdBook, memory architecture, Knowledge Map 679/5,095, all four doctrines, task
+      metadata, required marker checks, and diff hygiene pass.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.5.1`
+    Status: `in_progress` (2026-07-22; follows the clean `.10.5.5.0` audit commit)
+    Goal: Add typed Dart runtime semantic events and direct-engine capture.
+    Depends on: `.10.5.5.0`
+    Acceptance: Export an immutable closed event-kind/event/sink API carrying contract id, executing rule, optional
+      target rule/index, Unicode-scalar position, and result-only input identity/status. Thread the optional sink
+      through parse/execute and trace convenience routes plus generated-plan engine entry, emit exact slot events
+      only after accepted structural selection and one successful final entry result, preserve caller exception
+      identity, and prove absent-sink zero capture across direct, loaded, and reconstructed execution without
+      changing results, cursors, traces, diagnostics, or failures.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.5.2`
+    Status: `pending`
+    Goal: Derive an immutable Dart semantic runtime snapshot from typed observations.
+    Depends on: `.10.5.5.1`
+    Acceptance: Add `SemanticIndex.withExecutionObservation(...)` with exact contract/topology validation. Require
+      one final successful result event last; map selected entry/rules/slots through static records and
+      `selects_regex`; derive shapes only from static evidence; add canonical execution/event records and
+      `observed_as` relations to a new immutable snapshot; keep the base static; match the twentieth response digest
+      through typed and raw-neutral queries; reject empty, malformed, duplicate-final, foreign, reordered, and
+      already-observed inputs with exact portable errors and no host/result-value authority.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.5.3`
+    Status: `pending`
+    Goal: Preserve exact Dart runtime observations through every generated and traced route.
+    Depends on: `.10.5.5.2`
+    Acceptance: Add the optional sink to generated-plan and emitted-source public functions, traced and untraced,
+      while preserving observer exception object/stack identity through generated error translation. Prove exact
+      event equality, twentieth digest, result/cursor/trace/diagnostic equality, failure omission of final-result
+      events, and no-sink behavior across direct, loaded, reconstructed, generated-plan, emitted-source, and trace
+      routes without changing generated-source contract/version or semantic rollout/admission ledgers.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.5.4`
+    Status: `pending`
+    Goal: Compose Dart runtime-observation signoff and close the parent.
+    Depends on: `.10.5.5.3`
+    Acceptance: Re-run exact static plus runtime query proof, malformed-observation boundaries, all execution-route
+      topology and non-interference checks, complete Dart package/primary/corpus/generated, semantic/Unicode/public/
+      canonical gates, durable synchronization, and artifact cleanup; close `.10.5.5` without rollout or native
+      admission promotion, leaving `.10.5.6` as the only Dart semantic admission owner.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.6`
   Status: `pending`
@@ -11234,7 +11317,10 @@ dependency order: typed record/source kernel `.1`, traversal/limits `.2`, public
 then composed closeout `.4`. Parent `.10.5.4` is now composition-closed: one immutable typed/raw-neutral evaluator
 over fresh detached projection data matches all 19 static digests and 26 malformed-request boundaries. Explicit
 composition is 28/28, complete Dart is 79/0 + 324 + 66x2 + 105/105, and final canonical proof is Rust admission
-77.48s plus Phase 0 1,031/1,031 in 656s. Typed runtime observation `.10.5.5` is next; rollout and native admission
+77.48s plus Phase 0 1,031/1,031 in 656s. Runtime-observation audit `.10.5.5.0` now freezes the exact post-match
+slot and successful final-result seams, absent-sink/no-query boundaries, generated-wrapper exception-identity
+hazard, and dependency order: typed live capture `.1`, immutable derivation/twentieth digest `.2`, generated/
+emitted/traced topology `.3`, then composed closeout `.4`. `.10.5.5.1` is active; rollout and native admission
 remain absent.
 
 ### Historical frontier sequence
@@ -11670,7 +11756,12 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.4.2 | `FUTURE-PARITY-BACKLOG.10.5.4.2` | `done` | Complete relation traversal, pages, logical budgets/costs, and all 16 successful static digests. |
 | 74.4.4.3 | `FUTURE-PARITY-BACKLOG.10.5.4.3` | `done` | Expose one public typed/raw-neutral evaluator with 19 digests and 26 validation boundaries. |
 | 74.4.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4.4` | `done` | Compose complete query signoff and close the parent before runtime observation. |
-| 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `active` | Capture typed Dart runtime observations and derive an immutable observed index. |
+| 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `active` | Capture typed Dart runtime observations and derive an immutable observed index through an audited `.0-.4` split. |
+| 74.4.5.0 | `FUTURE-PARITY-BACKLOG.10.5.5.0` | `done` | Freeze exact Dart live/generated observation seams, exception-identity hazard, immutable projection boundary, and dependency split without behavior. |
+| 74.4.5.1 | `FUTURE-PARITY-BACKLOG.10.5.5.1` | `active` | Add public typed events plus invocation-local direct/loaded/reconstructed capture with zero absent-sink work. |
+| 74.4.5.2 | `FUTURE-PARITY-BACKLOG.10.5.5.2` | `pending` | Validate typed observations into a separate immutable index and match the twentieth digest. |
+| 74.4.5.3 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `pending` | Propagate exact observation through generated/emitted/traced routes with caller exception identity. |
+| 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `pending` | Compose complete runtime-observation signoff and close the parent before admission. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `pending` | Compose exact Dart admission, promote only Dart, and close the parent. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
@@ -12346,6 +12437,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.5.0` | Read-only admitted Perl/Rust plus Dart runtime/loader/generated/emitted/trace/diagnostic/index and exact runtime-oracle audit; unchanged composed Dart semantic 28/28; semantic 6/20/73 at rollout 3/9 and admission 2/6; KM 679/5,095; mdBook/memory/task/four doctrines/required markers/diff. | PASS. Exact slot/result seams, absent-sink/no-query authority, generated-wrapper callback-identity hazard, immutable derivation boundary, and `.1-.4` dependency order are durable without production/test/API/ledger behavior change; typed capture `.1` follows only after the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | Generated native header/action/blind/bare scanner; invalid suffix non-truncation; parsed/reconstructed/programmatic validation; focused 33 plus dedicated 5; complete Dart format/analyze/package 287/primary 66x2/corpus 105; Unicode 806/9/8/2; semantic 6/20/73; KM 672/5,000; mdBook/memory/task/four doctrines/diff/cleanup; canonical Rust admission 86.93s, primary 66x2, Phase 0 1,031/1,031 in 627s. | PASS. One generated authority now owns every Dart native rule-label parse/validation surface without changing unrelated identifier grammars or promoting semantic governance; exact downstream route proof `.2` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.5` | Typed sink and exact direct/generated slot/result seams; immutable runtime derivation; focused foundation 6/query 5/observation 7 and twentieth digest; direct/loaded/reconstructed/generated/source-emitter/traced/emitted-module routes; focused new-code Clippy; complete Rust core 193/runtime 147/integration 197/exact 105/full manifest/all packages/primary 66x2; semantic 6/20/65 at 2/9 + 1/6; KM 668/4,949; mdBook/memory/task/four doctrines/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 647s; 3.2 GiB target/12 MiB book/cache cleanup. | PASS. Caller-owned typed execution evidence derives a separate exact runtime index without changing result/cursor/trace/diagnostic behavior or enabling query execution; composed admission remains pending and `.10.4.6` follows only after the clean commit. |
 | `2026-07-21` | `FUTURE-PARITY-BACKLOG.10.4.4` | Focused query 5/foundation 6 and all 19 static digests plus 26 errors; complete Rust core 193, runtime 147, integration 197, exact 105/full generated manifest/all packages, primary 66x2; focused query Clippy clean; semantic 6/20/65 at 2/9 + 1/6; KM 667/4,937; mdBook/memory/four doctrines/task/format/diff; canonical primary 66x2 and Phase 0 1,031/1,031 in 631s; 3.3 GiB target/12 MiB book/28 KiB cache cleanup. | PASS. Rust exposes owned typed and raw-neutral projection-only capabilities/query with exact privacy, traversal, pages, budgets, errors, explain, isolation, and no execution/host/path/IR access; runtime/admission remain pending and `.10.4.5` follows only after the clean commit. |
@@ -12566,6 +12658,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.5.5.0` | `FUTURE-PARITY-BACKLOG.10.5.5.0 - map Dart runtime observation` | Exact live/generated capture and immutable derivation authority, callback-identity hazard, `.1-.4` split, unchanged semantic 28 plus 6/20/73, KM/book/doctrines, and no behavior or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `FUTURE-PARITY-BACKLOG.10.5.0.2.1 - route Dart Unicode labels` | Generated scanner consumption, external-AST validation, focused 33+5, complete Dart 287/105/66x2, canonical admission 86.93s plus Phase 0 1,031/627s, KM/book/doctrines, and cleanup without semantic promotion. |
 | `FUTURE-PARITY-BACKLOG.10.4.6` | `FUTURE-PARITY-BACKLOG.10.4.6 - admit Rust semantic introspection` | One exact 12-role consumer over existing Rust owners; 20 digests, eight topology mutations, rollout 3/9, admission 2/6, complete Rust/66x2, canonical admission 80.84s plus Phase 0 1,031/651s, KM/book/doctrines, cleanup, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.10.4.5` | `FUTURE-PARITY-BACKLOG.10.4.5 - capture Rust runtime semantics` | Typed invocation-local slot/result evidence, immutable derived snapshot, exact twentieth digest across Rust routes, focused 7, complete Rust/105/66x2, canonical 1,031/647s, KM/book/doctrines, and cleanup without admission promotion. |

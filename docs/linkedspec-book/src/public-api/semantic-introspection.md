@@ -290,6 +290,26 @@ execute the target, enable trace, or invent runtime events. Composition closeout
 parent on committed code. Runtime `execution`/`event` records remain exclusively owned by active-next `.10.5.5`,
 and Dart is not admitted until `.10.5.6`.
 
+Behavior-free runtime audit `.10.5.5.0` now fixes how Dart will acquire those records. The runtime currently has no
+semantic sink. Its exact regex-slot authority is the existing post-match structural-selection call: by then a
+match exists and ordered slot identity has been checked, while match effects have not yet run. That seam knows the
+executing rule and each selected target rule/index. Its exact final-result authority is the successful public
+entry wrapper after it constructs `RuntimeParseResult`; that seam knows the effective entry rule, final Unicode-
+scalar cursor, exact input text, and successful completion.
+
+The new sink is therefore invocation-local, typed, separate from trace and diagnostic output, and optional. With
+no sink, execution must allocate no observation events and hash no input. A sink callback failure must propagate
+as the caller's exact object and stack. This needs special care in generated-plan and emitted-source adapters:
+those adapters currently translate arbitrary execution failures into `GeneratedSourceException`, so observer
+failures require an explicit private passthrough wrapper analogous to diagnostic-output sink failures.
+
+Captured events do not mutate the static index and do not grant query-side execution. A later
+`withExecutionObservation(...)` call validates caller-retained events against the detached static rule, regex-slot,
+and `selects_regex` graph, derives value shapes only from that graph, and returns a separate immutable snapshot
+containing one execution, ordered events, and `observed_as` relations. Direct, loaded, and reconstructed capture is
+owned by `.10.5.5.1`; immutable derivation and the twentieth digest by `.2`; generated, emitted, and traced route
+identity by `.3`; and composition closeout by `.4`. Rollout and Dart admission remain exclusively `.10.5.6` work.
+
 ## Current Rust construction and query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
@@ -1082,7 +1102,12 @@ The dependency order is:
 | `.10.5.4.3` | Dart public typed/raw-neutral query | complete; exact 19 digests and 26 boundaries |
 | `.10.5.4.4` | Dart composed query closeout | complete; final committed-code composition and gates |
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | complete |
-| `.10.5.5` | Dart typed runtime observation | active next |
+| `.10.5.5.0` | Dart runtime-observation authority map and split | complete; behavior-free exact seam/route plan |
+| `.10.5.5.1` | Dart typed direct/loaded/reconstructed capture | active |
+| `.10.5.5.2` | Dart immutable observed-index derivation | pending |
+| `.10.5.5.3` | Dart generated/emitted/traced observation routes | pending |
+| `.10.5.5.4` | Dart runtime-observation composition closeout | pending |
+| `.10.5.5` | Dart typed runtime observation parent | active |
 | `.10.5.6` | Dart composed semantic admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

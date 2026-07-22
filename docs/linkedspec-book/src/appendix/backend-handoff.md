@@ -243,7 +243,11 @@ static response digests. Traversal/limits `.2` completes canonical directional b
 logical budgets/costs, deterministic prefixes, and all 16 successful static digests. Public `.3` now exports
 `capabilities`, typed `query`, raw-neutral `queryNeutral`, and the immutable protocol types through that same
 projection-only evaluator. All 19 static digests and 26 neutral validation boundaries are exact; closeout `.4`
-now composition-closes the query parent on committed code. Runtime records stay owned by `.10.5.5`.
+now composition-closes the query parent on committed code. Runtime audit `.10.5.5.0` fixes existing post-match
+slot selection and successful final-result construction as the only observation authorities. It also freezes zero
+absent-sink work, exact observer exception passthrough through generated wrappers, immutable derivation only from
+static graph evidence, and the `.1-.4` order. Typed direct/loaded/reconstructed capture `.1` is active; runtime
+records remain unimplemented and admission remains `.10.5.6` work.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

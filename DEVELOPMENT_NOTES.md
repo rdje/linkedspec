@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.5.0` — observe at meaning-bearing seams): Dart's existing trace marker
+  is useful evidence for locating regex selection, but text trace is not the semantic event API. The actual seam is
+  the point that already has a successful match plus checked structural slot identity and has not yet applied match
+  effects. A separate typed callback there can carry executing rule, target rule/index, and Unicode-scalar position
+  without parsing trace text or changing trace policy. The final event belongs after successful public result
+  construction, where effective entry rule, final cursor, exact input, and completion are authoritative.
+
+  The route audit found one propagation trap: generated-plan and emitted-source adapters catch arbitrary objects
+  and normalize them into `GeneratedSourceException`. Simply threading a semantic callback through those APIs
+  would therefore corrupt caller exception identity. `.10.5.5.3` must wrap and rethrow observer failures with their
+  original stack, mirroring the existing diagnostic-output passthrough while keeping the two channels distinct.
+
+  Observation and introspection remain deliberately two phases. Normal execution may emit typed facts to an
+  invocation-local caller sink. A later `SemanticIndex.withExecutionObservation(...)` validates retained facts
+  against static graph evidence and returns a new immutable observed snapshot. Query only evaluates a snapshot; it
+  never runs the parser. The dependency order is capture `.1`, derivation `.2`, full generated/traced topology `.3`,
+  and closeout `.4`.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.4` — close an adapter on composed proof): The query parent closes
   without adding another seam. Re-running the 28-test source/outcome/static/calls/query composition on committed
   code proves that public validation still consumes the exact detached graph built by the earlier layers, rather

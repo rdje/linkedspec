@@ -1,17 +1,15 @@
 # MEMORY — resume pointer (memory layer A; overwrite-only, keep ≤ ~60 lines)
-LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
-`MEMORY_ARCHITECTURE.md`: the bounded pointer to *now*, not a history log.
+LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A pointer to *now*, not history.
 ## How to resume
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
-- Work is tracked under `docs/tasks/` (index: `docs/TASK_TREE.md`); commit per `COMMIT.md`.
-- Check `KNOWLEDGE_MAP.md` before re-deriving facts; use `TOOLBOX.md` first for diagnosis.
-- No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
+- Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
+  `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.4.4` — Dart immutable semantic-query parent closeout.
-- latest_commit: `f1d2b8b1` is the clean public-query base; the current commit owns closeout leaf `.10.5.4.4`.
-- active_work_unit: `.10.5.4.4` is verification- and documentation-complete with no production/test change; commit remains.
-- next_action: from the clean query-parent closeout, implement typed Dart runtime observation `.10.5.5`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.5.0` — Dart runtime-observation authority audit and split.
+- latest_commit: `77562f06` is the clean query-parent closeout base; the current commit will own audit leaf `.10.5.5.0`.
+- active_work_unit: `.10.5.5.0` behavior-free audit/docs/KM are verified; only its clean commit remains.
+- next_action: after the clean audit commit, add typed direct/loaded/reconstructed runtime capture in `.10.5.5.1`.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -43,12 +41,14 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   generated implementation, paths, and runtime/trace/sinks remain absent; `.10.5.3` is composition-closed.
   Query `.10.5.4.1-.3` now publicly exposes immutable `capabilities`, typed `query`, and raw-neutral `queryNeutral`
   through one detached-projection evaluator; all 19 static digests and 26 portable validation boundaries are exact.
-  Parent `.10.5.4` is composition-closed; runtime `execution`/`event` capture begins only in `.10.5.5`.
+  Parent `.10.5.4` is composition-closed. Runtime audit `.10.5.5.0` fixes authoritative post-match slot and
+  successful final-result seams, zero absent-sink work, generated-wrapper observer exception passthrough, immutable
+  derivation from static evidence, and the `.1-.4` dependency split; typed live capture `.1` is active.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
 - current_signoff: typed/raw query 6/6 and composed semantic 28/28; selector concurrency 3/3, executable 0/19,
   retirement 5/6/8/0, public 59/27/0; Dart format 79/0, analysis, package 324, primary 66x2, corpus 105/105;
   semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 77.48s,
-  primary 66x2, and Phase 0 1,031/1,031 in 656s. Knowledge Map is 678/5,083;
+  primary 66x2, and Phase 0 1,031/1,031 in 656s. Knowledge Map is 679/5,095 after the runtime authority card;
   docs/doctrines/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified docs-only `.10.5.4.4` closeout/commit pending; `.23` queued.
+- blockers: none. in_flight_uncommitted: verified `.10.5.5.0` audit commit pending; `.10.5.5.1` follows cleanly; `.23` queued.

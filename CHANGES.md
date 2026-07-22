@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.5.0 — map Dart runtime observation
+
+The behavior-free Dart runtime-observation audit now freezes exact acquisition, projection, and route authority
+before implementation. The existing runtime's post-match structural regex-slot selection is the authoritative
+slot event seam; successful public `RuntimeParseResult` construction is the authoritative final-result seam.
+`LoadedCompiledSpec`, reconstructed compiled values, generated-plan execution, emitted source, and traced helpers
+all reuse that engine topology. Dart currently has no semantic observation sink.
+
+The new public sink must be typed, optional, and invocation-local, separate from trace and diagnostic output. Its
+absence must allocate no event and hash no input. Caller callback failures must retain exact object/stack identity;
+generated/source-emitter wrappers require a deliberate passthrough because they otherwise translate generic
+objects into `GeneratedSourceException`. Immutable derivation must validate events against detached static
+rule/slot/`selects_regex` evidence, derive shapes only from that evidence, return a new observed index, and leave
+the base static. Query remains read-only and cannot execute.
+
+Work is split into typed direct/loaded/reconstructed capture `.1`, immutable derivation and twentieth digest `.2`,
+generated/emitted/traced route completion `.3`, and composed closeout `.4`. No production/test code, public API,
+trace, diagnostic, query, rollout, or admission behavior changes in this audit slice; governance remains 6/20/73
+at rollout 3/9 and native admission 2/6. The unchanged composed Dart semantic suite passes 28/28; mdBook, memory,
+Knowledge Map 679/5,095, task metadata, all four doctrines, required markers, and diff hygiene pass.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.4 — close Dart immutable query
 
 The Dart immutable semantic-query parent is composition-closed without another production or test change. One

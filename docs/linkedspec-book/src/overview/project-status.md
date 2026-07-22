@@ -519,7 +519,9 @@ Three backbone items tracked major structural modernization — all done:
   directional breadth-first relations, canonical pages, logical budgets/costs, and all 16 successful static
   responses. Public `.10.5.4.3` now exports `capabilities`, typed `query`, and raw-neutral `queryNeutral` through
   one evaluator at all 19 static digests and 26 validation boundaries; `.10.5.4.4` composition-closes that parent
-  on committed code. Runtime observation `.10.5.5` is next and is not public yet.
+  on committed code. Behavior-free runtime audit `.10.5.5.0` now freezes the post-match slot and successful final-
+  result seams, absent-sink/no-query boundary, generated-wrapper exception passthrough, immutable derivation, and
+  `.1-.4` dependency order. Typed live capture `.10.5.5.1` is active; runtime observation is not public yet.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
   only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

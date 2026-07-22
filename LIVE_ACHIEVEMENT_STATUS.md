@@ -8,13 +8,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Query closeout `FUTURE-PARITY-BACKLOG.10.5.4.4` is verification-complete from clean public-query commit
-  `f1d2b8b1`; live-doc/book sync and commit remain. After its clean commit, `.10.5.5` owns runtime observation.
+- Runtime-observation audit `FUTURE-PARITY-BACKLOG.10.5.5.0` is behavior-free and task-tree owned from clean
+  query-parent closeout `77562f06`; documentation/KM verification and commit remain. After its clean commit,
+  typed direct/loaded/reconstructed capture `.10.5.5.1` is active.
 
 Parent `.10.5.4` is composition-closed without another production/test change. Public `capabilities`, typed
 `query`, and raw-neutral `queryNeutral` enter one detached-projection evaluator at all 19 static digests and 26
 validation boundaries. Composition is 28/28, Dart is 79/0 + 324 + 66x2 + 105/105, and final canonical is Rust
-admission 77.48s + primary 66x2 + Phase 0 1,031/656s. Runtime observation, rollout, and admission remain absent.
+admission 77.48s + primary 66x2 + Phase 0 1,031/656s. Audit `.10.5.5.0` freezes exact post-match slot and successful
+final-result capture, absent-sink/no-query authority, generated-wrapper callback exception passthrough, immutable
+derivation, and `.1-.4` dependency order. Runtime observation behavior, rollout, and admission remain absent.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -46,6 +49,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.5.0 — map Dart runtime observation**
+
+  **Result:** Existing post-match structural slot selection and successful final-result construction are the only
+  capture authorities. The optional typed sink stays invocation-local and separate from trace/diagnostics; the
+  derived index stays immutable and query-pure. Generated wrappers need exact callback-failure passthrough.
+
+  **Proof:** Read-only source/fixture/admitted-precedent audit; unchanged composed Dart semantic 28/28; semantic
+  contract 6/20/73 at rollout 3/9 and admission 2/6; Knowledge Map 679/5,095; mdBook, memory, task metadata, all four
+  doctrines, required markers, and diff pass. No production/test/API/trace/diagnostic/query/ledger behavior changed.
+
+  **Next:** after the clean commit, implement typed direct/loaded/reconstructed capture `.10.5.5.1`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.4 — close Dart immutable query**
   (DONE in this commit from clean base `f1d2b8b1`).
 
