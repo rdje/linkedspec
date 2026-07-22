@@ -191,6 +191,14 @@ export 'src/runtime/interpreter.dart'
         RuntimeParseResult;
 export 'src/runtime/generated_plan.dart'
     show GeneratedPlanRow, GeneratedRuleFamily;
+export 'src/semantic/semantic_index.dart'
+    show
+        SemanticIndex,
+        SemanticIndexError,
+        SemanticIndexOptions,
+        SemanticSourceDetail,
+        SemanticSourceIdentity,
+        SemanticSourceSpan;
 export 'src/source_emitter.dart'
     show
         GeneratedSourceCode,

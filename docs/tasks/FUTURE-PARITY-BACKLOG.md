@@ -8320,9 +8320,9 @@ before implementation.
 
   #### Acceptance Checklist
 
-  - [ ] **STRICT COPIED INPUT** — Accept copied decoded `String` or strict UTF-8 bytes plus required logical name,
+  - [x] **STRICT COPIED INPUT** — Accept copied decoded `String` or strict UTF-8 bytes plus required logical name,
     source-detail ceiling, and optional exact entry label; reject malformed bytes/options before language parsing.
-  - [ ] **PRIVATE SOURCE MAP** — Retain canonical bytes and exact zero-based half-open byte / one-based line and
+  - [x] **PRIVATE SOURCE MAP** — Retain canonical bytes and exact zero-based half-open byte / one-based line and
     Unicode-scalar-column spans, ordered lookup, excerpts, digest policy, and mid-scalar boundary rejection.
   - [ ] **OPAQUE COMPILED / FAILED AUTHORITY** — Parse, validate, compile, select entry, and retain shared
     generated-plan input once without execution; preserve language failure as clone-safe portable diagnostic state.
@@ -8362,12 +8362,40 @@ before implementation.
       artifacts, and commit before activating implementation child `.10.5.1.1`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.1`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Implement strict copied Dart semantic input policy and the private Unicode source map.
     Depends on: `.10.5.1.0`
     Acceptance: Add idiomatic immutable options/errors and one private canonical byte/scalar map for decoded text or
       strict bytes; enforce logical-name/entry-label/source-ceiling policy and exact identity/span/excerpt/lookup
       disclosure without parsing, execution, path reads, AST/IR exposure, or semantic records.
+    Verification: `SemanticIndex.fromSource` / `fromUtf8` now copy strict scalar text or validated bytes and export
+      immutable typed options, errors, source identity, and spans around one private canonical byte/scalar map.
+      Six focused tests lock standard empty/`abc` SHA-256 vectors plus the 128-byte graph digest, decoded/byte
+      convergence, supplementary and CRLF positions, four duplicate `/a/` occurrences, both mid-scalar boundary
+      failures, range/needle errors, all four ceilings, detached immutable values, caller mutation, invalid bytes/
+      UTF-8/UTF-16/options, exact Unicode selector validation, debug redaction, and source-only non-parsing.
+      A first adjacent run correctly failed four isolated emitted-caller roles because a proposed direct `crypto`
+      dependency was unavailable in their deliberately fresh offline caches. The production package remains
+      dependency-free; package-internal SHA-256 restores all 39 adjacent tests. Complete Dart passes format 72/0,
+      fatal analysis, package 302, primary 66x2, and corpus 105/105. Semantic 6/20/73 at rollout 3/9 and admission
+      2/6, Unicode 806/9/8/2, generated-source 10 families/80-0-0, and Knowledge Map 673/5,013 pass. Canonical CI
+      passes Rust semantic admission 1/1 in 76.39 seconds, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds.
+
+    #### Acceptance Checklist
+
+    - [x] **TYPED SOURCE POLICY** — Export immutable Dart options, source-detail enum, typed errors, source identity,
+      and span values with required caller logical name, typed ceiling, and optional exact Unicode entry label.
+    - [x] **STRICT COPIED INPUT** — Copy decoded Unicode scalar text or validated 0..255 bytes, reject unpaired UTF-16
+      and malformed UTF-8 before language work, retain canonical strict bytes, and compute exact SHA-256 identity.
+    - [x] **PRIVATE UNICODE MAP** — Map zero-based half-open UTF-8 bytes and Unicode-scalar ranges to one-based
+      line/scalar columns; support exact excerpts and ordered duplicate lookup while rejecting mid-scalar bounds.
+    - [x] **CEILING / ISOLATION** — Apply `none`/`identity`/`span`/`text` before values leave, return immutable plain
+      values, copy caller bytes, redact debug identity, and expose no path, source buffer, parser, AST, compiler,
+      descriptor, query, runtime, trace, or diagnostic-sink authority.
+    - [x] **OFFLINE CALLER INTEGRITY** — Keep the production Dart package dependency-free and prove isolated emitted
+      callers can resolve it from a fresh offline package cache while exact SHA-256 source identities remain locked.
+    - [x] **SIGNOFF / HANDOFF** — Pass focused/adjacent/complete Dart plus semantic/canonical/doctrine/docs/KM/diff
+      gates, clean generated artifacts, and commit before activating compiled-or-failed child `.10.5.1.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.1.2`
     Status: `pending`
@@ -10732,8 +10760,9 @@ exact identity through compiled/generated/reconstructed/emitted/selector/diagnos
 Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`, negative rejection plus unrelated-identifier
 isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion signoff `.2.4` closes the Dart
 Unicode-label prerequisite parent from clean `ecdc1ac7`. Semantic foundation parent `.10.5.1` is split into
-`.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete from that boundary. After its clean commit,
-strict copied input/private Unicode source-map implementation `.10.5.1.1` is the next task-tree-first leaf.
+`.0-.3`; behavior-free contract/split leaf `.10.5.1.0` is complete, and strict copied input/private Unicode
+source-map leaf `.10.5.1.1` is signoff-complete from clean `9260c526`. After its clean commit, staged
+compiled-or-failed authority and generated-plan input `.10.5.1.2` is the next task-tree-first leaf.
 
 ### Historical frontier sequence
 
@@ -11147,7 +11176,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `done` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `in_progress` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.1.0 | `FUTURE-PARITY-BACKLOG.10.5.1.0` | `done` | Frozen exact Dart foundation boundary and dependency-order input/map, outcome, and composed closeout children. |
-| 74.4.1.1 | `FUTURE-PARITY-BACKLOG.10.5.1.1` | `pending` | Implement strict copied input policy and the private Unicode source map. |
+| 74.4.1.1 | `FUTURE-PARITY-BACKLOG.10.5.1.1` | `done` | Strict copied input, private Unicode source map, source ceilings, dependency-free digest, and complete signoff pass. |
 | 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `pending` | Add opaque staged compiled-or-failed authority and generated-plan input. |
 | 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `pending` | Compose omission-safe foundation proof and close the parent. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |

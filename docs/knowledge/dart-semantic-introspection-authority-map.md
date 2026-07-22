@@ -21,11 +21,13 @@ answers:
   - "is specs/spec.spec aligned with Unicode rule labels"
   - "what are the Dart semantic introspection implementation leaves"
   - "how is the Dart semantic source foundation split"
+  - "does Dart have a semantic source index"
+  - "how does Dart map semantic UTF-8 byte and Unicode scalar positions"
 date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0, .10.5.0.2.0-.4, and .10.5.1.0-.3; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/parser/user_function_definition_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
-reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart && cd ..; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0, .10.5.0.2.0-.4, and .10.5.1.0-.3; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/sha256.dart; dart/test/semantic_index_source_foundation_test.dart; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/parser/user_function_definition_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
+reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/semantic_index_source_foundation_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart && cd ..; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
 ---
 
 Dart already owns most semantic meaning in typed, reusable layers. Staged parsing produces `SpecFile` rules and
@@ -87,7 +89,14 @@ half-open byte and one-based Unicode-scalar coordinates, and correlate typed own
 `LoadedSpec` retains exact strict-decoded source but also a resolved host path, so it cannot supply semantic identity
 implicitly.
 
-Dart has no semantic index or query evaluator today. Runtime already exposes authoritative internal evidence:
+Dart now has the source-only `SemanticIndex.fromSource` / `SemanticIndex.fromUtf8` foundation. It copies decoded
+Unicode scalar text or validated 0..255 bytes, rejects unpaired UTF-16 and malformed UTF-8 before language work,
+retains canonical strict bytes plus a private byte/scalar boundary map, and exposes only ceiling-checked immutable
+identity, spans, excerpts, and ordered exact lookup. Coordinates are zero-based half-open UTF-8 bytes with one-based
+line and Unicode-scalar columns; mid-scalar byte boundaries are typed errors. `none`/`identity`/`span`/`text` are
+applied before values leave, source text/bytes/map stay private, and debug output omits caller logical identity.
+The foundation deliberately does not parse or compile yet, so Dart still has no compilation snapshot or query
+evaluator. Runtime already exposes authoritative internal evidence:
 `_traceRegexSlotSelected` runs after accepted structural slot selection and the entry wrapper constructs the final
 `RuntimeParseResult`. Text trace and `RuntimeDiagnosticOutputSink` are different products. A later leaf must add an
 optional invocation-local typed semantic sink at those seams and derive a new immutable observed index; query must
@@ -100,4 +109,5 @@ rejected mutations, rollout 3 complete / 6 pending, and native admission 2 compl
 [[unicode-rule-label-contract]], [[semantic-introspection-neutral-contract]],
 [[outward-descriptor-is-not-semantic-wire-model]], [[dart-compiled-spec-state]],
 [[dart-function-definition-shell-projection]], [[dart-generated-source-v2-rule-local-cursor]],
-[[dart-runtime-structured-diagnostics]], and [[dart-native-spec-resolution]].
+[[dart-runtime-structured-diagnostics]], [[dart-native-spec-resolution]], and
+[[dart-offline-generated-callers-require-dependency-free-package]].

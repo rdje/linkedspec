@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.1 — add Dart semantic source map
+
+Dart now exposes the source-only `SemanticIndex` foundation. Callers construct it from copied decoded text or
+strict UTF-8 bytes plus immutable `SemanticIndexOptions`; invalid logical names, entry labels, Unicode, byte
+values, and UTF-8 return typed `SemanticIndexError` values with sorted immutable fields. The index reveals only
+ceiling-governed `SemanticSourceIdentity`, exact byte/scalar `SemanticSourceSpan` values, bounded excerpts, and
+ordered exact-source lookup. It does not parse, compile, execute, query, expose source buffers, or retain paths.
+
+The private source map owns canonical UTF-8, SHA-256 identity, zero-based half-open byte ranges, and one-based
+line/Unicode-scalar columns. It validates both ends of byte ranges against scalar boundaries, treats CR as a
+column scalar and LF as a line transition, preserves supplementary scalars, and returns detached immutable
+results. Focused proof passes 6/6; 39 adjacent tests cover isolated generated callers; the complete Dart gate
+passes format over 72 files, fatal analysis, 302 package tests, primary 66/66 twice, and corpus 105/105.
+
+An initial direct `crypto` dependency exposed a package-distribution invariant: isolated emitted callers resolve
+the path package from a fresh empty package cache with offline resolution. The dependency therefore failed four
+real caller roles despite passing in the development cache. Production remains dependency-free and uses a locked
+internal SHA-256 implementation with standard vectors; the constraint is now a durable Knowledge Map fact.
+Canonical CI passes semantic 6/20/73, Rust admission 1/1 in 76.39 seconds, primary 66x2, and Phase 0 1,031/1,031
+in 622 seconds. Rollout remains 3/9 and native admission 2/6; staged compiled-or-failed authority is next.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.0 — split Dart semantic foundation
 
 The Dart semantic source/outcome parent is frozen and dependency-split before any behavior code. The boundary

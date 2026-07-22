@@ -29,6 +29,59 @@ The distinction matters:
 The neutral contract is complete. Backend admission is **2 complete / 4 pending**: Perl and Rust are admitted;
 Dart, Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
+## Current Dart source foundation
+
+Dart now exposes the first source-only layer of its future opaque semantic index. It accepts decoded scalar text or
+strict UTF-8 bytes, copies the input, requires caller-owned logical identity, and builds the exact private source map
+without parsing or executing the target specification:
+
+```dart
+import 'dart:convert';
+
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final index = SemanticIndex.fromUtf8(
+  utf8.encode('Töp::\n /é/\n'),
+  options: const SemanticIndexOptions(
+    logicalName: 'privacy.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+    entryRule: 'Töp',
+  ),
+);
+
+print(index.sourceIdentity.logicalName); // privacy.spec
+print(index.sourceIdentity.byteLength); // 13
+print(index.sourceIdentity.scalarLength); // 11
+print(index.sourceSpanForBytes(0, 6).toJson());
+// {start_byte: 0, end_byte: 6, start_line: 1, start_column: 1,
+//  end_line: 1, end_column: 6}
+print(index.sourceExcerptForBytes(8, 12)); // /é/
+```
+
+`SemanticIndex.fromSource(...)` is the decoded-text twin. Both constructors reject an empty/control-bearing logical
+name and an invalid optional entry label before language work. `fromUtf8` additionally rejects values outside
+`0..255` and malformed UTF-8; `fromSource` rejects unpaired UTF-16 surrogates rather than silently replacing them.
+Constructor and mapping failures are typed `SemanticIndexError` values with stable `stage`, `code`, `message`, and
+sorted `fields`. No constructor accepts a path or `LoadedSpec`, and neither source bytes nor decoded text can be
+read back wholesale.
+
+The source ceiling is structural. `none` rejects identity, `identity` exposes caller name and exact byte/scalar
+lengths, `span` adds zero-based half-open UTF-8 byte spans plus one-based line and Unicode-scalar columns, and
+`text` adds exact excerpts and `sha256:<lowercase hex>` over canonical bytes. Byte ranges that begin or end inside
+a multibyte scalar are rejected. `locateExact(needle, afterByte: ...)` supports deterministic ordered lookup of
+duplicate authored text without exposing the map itself. Returned identity/span/JSON values are fresh immutable or
+detached plain data, caller byte mutation cannot affect the index, and `toString()` never includes the logical name.
+
+The Dart production package intentionally remains dependency-free. Generated-source tests resolve isolated path
+callers with a fresh empty offline package cache, so a runtime digest dependency would make emitted packages
+unresolvable. The package-internal SHA-256 implementation is checked against the standard empty and `abc` vectors
+plus the neutral 128-byte graph fixture, while isolated generated callers remain green.
+
+This layer does **not** yet expose snapshot state, compilation diagnostics, generated plans, capabilities, query,
+or runtime observations. `.10.5.1.2` composes the staged parser/validator/compiler/entry/plan owners into the same
+opaque type; later leaves add normalized projections and query. Dart therefore remains pending in both rollout and
+native-admission ledgers despite the usable source foundation.
+
 ## Current Rust construction and query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
@@ -803,7 +856,8 @@ The dependency order is:
 | `.10.4.6` | composed Rust semantic admission | complete; 12 roles, 20 exact queries, Rust-only promotion |
 | `.10.5.0` | Dart authority and Unicode-label prerequisite | complete |
 | `.10.5.1.0` | Dart source/outcome contract and dependency split | complete; behavior-free |
-| `.10.5.1.1-.10.5.1.3` | Dart strict input/map, compiled-or-failed owner, composed foundation | pending in dependency order |
+| `.10.5.1.1` | Dart strict input/private map and source ceiling | complete; source-only API |
+| `.10.5.1.2-.10.5.1.3` | Dart compiled-or-failed owner and composed foundation | pending in dependency order |
 | `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

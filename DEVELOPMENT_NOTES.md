@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.1` — exact source mapping crosses three coordinate systems):
+  Dart `String` indexes UTF-16 code units, while the semantic contract exposes UTF-8 byte offsets and Unicode-
+  scalar columns. The private source map therefore validates decoded surrogate structure once and builds aligned
+  byte, scalar, and code-unit boundaries while canonical UTF-8 is copied. Range endpoints must hit those exact
+  boundaries; otherwise a caller could request half of a multibyte scalar or half of a surrogate pair.
+
+  Line/column policy follows the admitted neutral, Perl, and Rust authorities: spans are zero-based half-open in
+  bytes, positions are one-based, LF advances the line and resets the scalar column, and CR consumes one scalar
+  column. Exact lookup searches canonical bytes in stable order, then validates boundaries through the same map.
+  Source detail is projected only after range validation and cannot exceed the construction-time ceiling.
+
+  Mutable caller byte lists, returned JSON maps, error-field maps, and identity metadata all receive detached or
+  unmodifiable storage. Debug output contains only the public type and ceiling, never logical identity or source.
+  Language-invalid text deliberately constructs successfully because parsing and compilation belong to
+  `.10.5.1.2`; this leaf proves source policy without conflating it with language outcome.
+
+  A direct `crypto` dependency passed the focused suite but failed four isolated generated-caller roles. Those
+  tests install the path package into a fresh empty `PUB_CACHE` under `dart pub get --offline`, so dependency
+  availability is part of the package compatibility boundary. The production package remains dependency-free;
+  package-internal SHA-256 is locked by empty/`abc` standard vectors plus the graph fixture digest. Future direct
+  dependencies require an explicit offline-cache contract change or provisioning owner, not an incidental import.
+
+  Final proof is focused 6/6, adjacent 39/39, Dart format 72/0 changed, fatal analysis, package 302, primary 66x2,
+  corpus 105/105, Unicode 806/9/8/2, semantic 6/20/73 at rollout 3/9 and admission 2/6, generated-source
+  v1/10 families/80-0-0, Knowledge Map 673/5,013, all doctrines, mdBook, and canonical Rust admission 76.39s /
+  primary 66x2 / Phase 0 1,031/1,031 in 622s.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.0` — source policy and compilation outcome are separate layers):
   The original Dart foundation acceptance combined strict constructors, Unicode coordinates, compiler outcome,
   entry identity, generated-plan input, privacy ceilings, clone isolation, and composed regression proof. That is

@@ -8,14 +8,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Behavior-free Dart semantic foundation split `FUTURE-PARITY-BACKLOG.10.5.1.0` is complete from clean
-  `ecdc1ac7`. After its clean commit, strict copied input/private Unicode source map `.10.5.1.1` is the next
-  task-tree-first leaf; no implementation leaf is active while this split commit is pending.
+- Strict copied Dart semantic input/private Unicode source map `FUTURE-PARITY-BACKLOG.10.5.1.1` is complete from
+  clean `9260c526`. After its clean commit, staged compiled-or-failed authority `.10.5.1.2` is the next
+  task-tree-first leaf; no later implementation leaf is active while this source-map commit is pending.
 
-The frozen owner constructs only from copied decoded text or strict bytes plus caller logical identity. It composes
-the staged parser, validator/portable diagnostic, compiler, entry selector, and generated-plan builder without
-runtime execution. `LoadedSpec` is excluded because it couples source text to a resolved host path. Children `.1`,
-`.2`, and `.3` separately own input/map, compiled-or-failed authority, and composed foundation closeout.
+`SemanticIndex` now accepts copied decoded text or strict UTF-8 bytes plus caller identity and exposes only typed,
+ceiling-governed source identity, exact byte/scalar spans, excerpts, and ordered exact lookup. Its private map owns
+canonical UTF-8 and SHA-256 without paths, source-buffer exposure, parsing, compilation, execution, records, or
+queries. Invalid inputs and ranges return immutable typed errors. The production package remains dependency-free
+so freshly cached offline emitted callers continue to resolve it.
+
+Focused source proof passes 6/6 and 39 adjacent tests include the fresh-cache generated-caller topology. Complete
+Dart passes format 72/0 changed, fatal analysis, package 302, primary 66x2, and corpus 105/105. Canonical CI passes
+Rust semantic admission 1/1 in 76.39 seconds, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Semantic
+governance remains 6/20/73 at rollout 3/9 and admission 2/6; Knowledge Map is 673/5,013.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -47,6 +53,21 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.1 — add Dart semantic source map**
+  (DONE in this commit from clean base `9260c526`).
+
+  **Result:** Public source-only construction now copies decoded text or strict bytes, validates caller policy,
+  owns exact canonical UTF-8/SHA-256 and byte/scalar coordinates privately, and returns only typed ceiling-bounded
+  identity/span/excerpt/lookup values. It cannot parse, compile, execute, query, reveal source buffers, or retain
+  host paths. A dependency-free SHA-256 owner preserves fresh-cache offline generated callers.
+
+  **Proof:** Focused 6/6; adjacent 39/39; Dart format 72/0 changed, fatal analysis, package 302, primary 66x2,
+  corpus 105/105; Unicode 806/9/8/2; semantic 6/20/73 at 3/9 and 2/6; generated-source v1/10 families/80-0-0;
+  Knowledge Map 673/5,013; canonical Rust admission 76.39s, primary 66x2, Phase 0 1,031/1,031 in 622s; doctrines,
+  mdBook, diff hygiene, and cleanup pass.
+
+  **Next:** after this clean commit, activate `.10.5.1.2` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.0 — split Dart semantic foundation**
   (DONE in this commit from clean base `ecdc1ac7`).
 
