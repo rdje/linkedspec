@@ -29,10 +29,14 @@ answers:
   - "how does Dart retain generated semantic plan input"
   - "does Dart semantic index construction execute target spec"
   - "is the Dart semantic source outcome foundation complete"
+  - "which authorities own the Dart semantic static projection"
+  - "how many exact Dart static construction targets exist"
+  - "how is the Dart static semantic projection split"
+  - "how must Dart normalize the failed semantic fixture"
 date: 2026-07-22
 status: current
 tags: [dart, semantic-introspection, unicode, rule-labels, source-map, diagnostics, runtime, generated-source]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0, .10.5.0.2.0-.4, and .10.5.1.0-.3; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/sha256.dart; dart/test/semantic_index_source_foundation_test.dart; dart/test/semantic_index_compilation_foundation_test.dart; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/parser/user_function_definition_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0, .10.5.0.2.0-.4, .10.5.1.0-.3, and .10.5.2.0; docs/decisions/0012-staged-linked-parsing-architecture.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; specs/spec.spec; tools/gen_oracle_corpus.pl; rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/sha256.dart; dart/test/semantic_index_source_foundation_test.dart; dart/test/semantic_index_compilation_foundation_test.dart; perl/LinkedSpec/SemanticStaticProjection.pm; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/parser/user_function_definition_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action; dart/lib/src/parser/staged_parser_registry.dart; dart/lib/src/io/spec_loader.dart; dart/lib/src/source_emitter.dart; dart/lib/src/runtime/interpreter.dart
 reverify: "shasum -a 256 specs/spec.spec rust/linkedspec-runtime/tests/corpus/spec_spec_*/input.spec; python3 tools/check_semantic_introspection_contract.py; python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart && cd ..; bash tools/run_dart_local.sh; rg -n '\\\\w|isRuleLabel|takeRuleLabelPrefix|RuleHeader.fromJson|EdgeTarget.fromJson|BareEdgeTarget.fromJson|traceRegexSlotSelected|compiledRuleOrder|buildGeneratedRulePlan|sourceText' specs/spec.spec dart/lib/src -g '*.dart' -g '*.spec'"
 ---
 
@@ -128,3 +132,22 @@ strict copied inputs, byte/scalar mapping and ceilings, graph/privacy/failure ou
 clone/caller isolation, and negative host-state/execution/trace/query topology. Complete Dart remains 308 package,
 primary 66x2, and corpus 105/105; rollout/admission deliberately remain 3/9 and 2/6. Static normalized projection
 begins independently at `.10.5.2` rather than being inferred from foundation closure.
+
+Behavior-free leaf `.10.5.2.0` freezes the static projection boundary across five exact construction variants:
+graph, privacy at `text`, privacy at `identity`, failed compilation, and runtime without execution/event records.
+The projection must compose parsed authored order/member intent, typed compiled order/mode/slot/edge/lifecycle
+authority, selected-entry identity, accepted source plus exact UTF-8/scalar mapping, and the native portable
+diagnostic. It must not serialize `SpecFile.toJson()`, `CompiledSpec.toJson()`, descriptor state, ActionIR, compiled
+regexes, generated Dart source, object identity, or paths.
+
+Source correlation groups parsed body elements by authored line and scans the complete trimmed member, converting
+Dart UTF-16 code-unit boundaries through the retained scalar/UTF-8 map exactly once. Neutral ids percent-escape
+strict UTF-8 bytes. Duplicate authored slots stay distinct; parent matchers attached to cross-rule edges are not
+invented as target slots; self-indexed matchers remain structural slots. The foundation's exact native
+`bare_edge_target_undefined` / `normalize_edges` diagnostic is deliberately normalized only here to
+`unknown_rule_reference` / `compile`, neutral ids/fields, and the ordered dependency decision/explanation.
+
+Implementation is dependency-ordered: `.10.5.2.1` owns compiled graph records/relations/source/evidence,
+`.10.5.2.2` owns both privacy ceilings, normalized failure, runtime-static, clone isolation, and host-leak denial,
+and `.10.5.2.3` owns composed signoff and parent closure. Query, execution observations, trace, and semantic
+rollout/admission remain later leaves.

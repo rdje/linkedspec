@@ -8,9 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Composed Dart semantic foundation closeout `FUTURE-PARITY-BACKLOG.10.5.1.3` is signoff-complete from clean
-  scanner-repair commit `1529ca81`. After its clean commit, static normalized projection `.10.5.2` is the next
-  task-tree-first leaf; no projection work is active while this closeout commit is pending.
+- Behavior-free Dart static audit `FUTURE-PARITY-BACKLOG.10.5.2.0` is complete from clean foundation commit
+  `1eaa7d2a`. After its clean commit, compiled graph/source/evidence projection `.10.5.2.1` is the next
+  task-tree-first leaf; no production projection work is active while this audit commit is pending.
 
 The source and outcome suites compose exact constructors, graph/privacy/failure, Unicode coordinates and duplicate
 lookup, ceilings, entries, caller/clone isolation, native diagnostics, and generated-plan identity. Negative
@@ -52,6 +52,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.2.0 — split Dart static projection**
+  (DONE in this commit from clean base `1eaa7d2a`).
+
+  **Result:** Five exact construction targets and their parsed/compiled/source/diagnostic authorities are frozen.
+  Implementation is dependency-ordered through compiled graph `.1`, remaining exact targets/isolation `.2`, and
+  closeout `.3`; production, query, trace/runtime, rollout, and admission are unchanged.
+
+  **Proof:** Foundation 12/12; semantic 6/20/73 at 3/9 and 2/6; Knowledge Map 673/5,025, mdBook, all four
+  doctrines, memory architecture, and diff hygiene pass.
+
+  **Next:** after this clean commit, activate `.10.5.2.1` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.1.3 — close Dart semantic foundation**
   (DONE in this commit from clean base `1529ca81`).
 

@@ -8511,13 +8511,79 @@ before implementation.
         to `.10.5.1.3` without promoting semantic rollout/admission or changing production behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.2`
-  Status: `pending`
+  Status: `in_progress` (2026-07-22; activated from clean `1eaa7d2a`)
   Goal: Project exact Dart static graph, privacy, failure, and runtime-static semantics.
   Depends on: `.10.5.1`
   Acceptance: Correlate immutable source evidence with typed `CompiledSpec` entry/family/cursor/repetition/slot/
     edge/lifecycle authority and normalize the existing failed-spec diagnostic deliberately. Retain clone-safe
     plain v1 data that deep-equals graph, both privacy ceilings, failed, and runtime-static targets without exposing
     query, AST JSON, descriptor layout, compiled regexes, host paths, or execution.
+  Children: `.10.5.2.0`, `.10.5.2.1`, `.10.5.2.2`, `.10.5.2.3`
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / SPLIT FIRST** — Re-read the neutral static targets, ADR boundary, admitted Perl/Rust static
+    projections, and exact private Dart source/compiler authorities; split the work before production if one leaf
+    cannot remain omission-safe. The dependency-ordered `.10.5.2.0-.3` children now own audit, compiled graph,
+    remaining exact targets, and composed closeout respectively.
+  - [ ] **NORMALIZED STATIC MODEL** — Add detached immutable v1 records/relations/shapes/evidence for entry, rule
+    family/cursor/repetition, authored slots, action/blind/bare edges, lifecycle, source identity/spans, and the
+    deliberate backend-neutral failed-spec diagnostic.
+  - [ ] **EXACT FIVE TARGETS** — Deep-equal graph, privacy text, privacy identity, failed, and runtime-static neutral
+    targets with stable ids/order/absence semantics and no descriptor or AST/IR serialization dependency.
+  - [ ] **PRIVACY / ISOLATION** — Apply construction-time source ceilings before projection, return fresh clone-safe
+    plain values, and prove caller/result mutation cannot alter retained source/compiler authority.
+  - [ ] **NONEXECUTION / LAYERING** — Expose no query yet and invoke no target/generated execution, path IO,
+    environment/time/random capture, trace, diagnostic sink, or runtime semantic observer.
+  - [ ] **SIGNOFF / HANDOFF** — Pass focused and complete Dart, semantic/Unicode/generated/public/canonical gates,
+    synchronize roadmap/live docs/mdBook/Knowledge Map, clean artifacts, and commit before `.10.5.3`.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.2.0`
+    Status: `done` (2026-07-22)
+    Goal: Freeze the exact Dart static-projection authority map and omission-safe implementation split.
+    Depends on: `.10.5.1`
+    Acceptance: Reconcile all five neutral construction targets with ADR `0049`, the admitted Perl/Rust private
+      projections, and Dart's accepted source, parsed, compiled, entry, plan, and portable-diagnostic authorities.
+      Record exact normalization, source-correlation, privacy, canonical-order, and forbidden-input boundaries;
+      create bounded dependency-ordered implementation/closeout children; change no production behavior,
+      semantic rollout, backend admission, query, trace, or runtime surface.
+    Verification: Five exact construction variants are reconciled: graph, privacy at text, privacy at identity,
+      failed compilation, and runtime-static. Parsed `SpecFile` owns authored order/member intent; typed
+      `CompiledSpec` owns compiled order, mode, structural slot, resolved edge, action-shape, and lifecycle facts;
+      selected-entry identity owns the effective root; accepted source plus its UTF-8/scalar map owns ranges; and
+      native `SpecPortableDiagnostic` owns failure input. The projection must correlate grouped body lines without
+      serializing AST/descriptor JSON and deliberately normalize `bare_edge_target_undefined` / `normalize_edges`
+      only at the static layer. Implementation is split into compiled graph `.1`, privacy/failure/runtime-static
+      plus isolation `.2`, and composed closeout `.3`. Foundation 12/12, semantic 6/20/73 at unchanged rollout 3/9
+      and admission 2/6, Knowledge Map 673/5,025, mdBook, all four doctrines, memory architecture, and diff hygiene
+      pass. No production behavior, query, trace/runtime, rollout, or admission changes.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.2.1`
+    Status: `pending` (next after clean `.10.5.2.0` commit)
+    Goal: Project the exact Dart compiled static graph through detached v1 data.
+    Depends on: `.10.5.2.0`
+    Acceptance: Add private immutable source references, records, relations, closed shapes, stable UTF-8 ids, and
+      canonical ordering from accepted source plus typed parsed/compiled/entry authorities. Deep-equal the graph
+      target including entry evidence, duplicate authored regex slots, indexed edges, lifecycle, spans, shapes,
+      and source identity without descriptor/AST serialization, query, execution, trace, paths, or host state.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.2.2`
+    Status: `pending`
+    Goal: Complete Dart privacy, failed-compilation, runtime-static, and isolation projection parity.
+    Depends on: `.10.5.2.1`
+    Acceptance: Deep-equal privacy at text and identity construction ceilings, deliberately normalize Dart's
+      `bare_edge_target_undefined` / `normalize_edges` failure to the neutral diagnostic/decision/explanation, and
+      deep-equal the runtime fixture with execution/event records absent. Prove fresh clone-safe plain results,
+      construction-ceiling integrity, stable absence semantics, and denial of AST/IR, descriptor, regex object,
+      generated implementation, path, executor, trace, diagnostic-sink, and runtime-observer leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.5.2.3`
+    Status: `pending`
+    Goal: Compose static-projection signoff and close the Dart static parent.
+    Depends on: `.10.5.2.2`
+    Acceptance: Re-run the exact five-target/isolation proof plus complete Dart package, primary/corpus/generated,
+      semantic/Unicode/public/canonical gates; synchronize roadmap/live docs/mdBook/Knowledge Map, clean generated
+      artifacts, and close `.10.5.2` without promoting rollout/admission or exposing query/runtime behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.3`
   Status: `pending`
@@ -11279,7 +11345,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.1.2 | `FUTURE-PARITY-BACKLOG.10.5.1.2` | `done` | Opaque staged compiled-or-failed authority, exact native diagnostics, entry identity, and shared generated-v2 plan pass canonical signoff. |
 | 74.4.1.3 | `FUTURE-PARITY-BACKLOG.10.5.1.3` | `done` | Compose omission-safe foundation proof and close the parent after its scanner-repair child. |
 | 74.4.1.3.0 | `FUTURE-PARITY-BACKLOG.10.5.1.3.0` | `done` | Discover nonignored untracked selector sources, self-prove rejection, and consume the canonical invalid fixture. |
-| 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
+| 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `active` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
+| 74.4.2.0 | `FUTURE-PARITY-BACKLOG.10.5.2.0` | `done` | Freeze the exact Dart static authority map and dependency-ordered split without behavior. |
+| 74.4.2.1 | `FUTURE-PARITY-BACKLOG.10.5.2.1` | `pending` | Project detached compiled graph records, relations, sources, shapes, and entry evidence. |
+| 74.4.2.2 | `FUTURE-PARITY-BACKLOG.10.5.2.2` | `pending` | Complete privacy, normalized failure, runtime-static, and clone/host-leak parity. |
+| 74.4.2.3 | `FUTURE-PARITY-BACKLOG.10.5.2.3` | `pending` | Compose all Dart static signoff, synchronize durable state, and close the parent. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |
 | 74.4.4 | `FUTURE-PARITY-BACKLOG.10.5.4` | `pending` | Expose immutable typed/raw-neutral Dart semantic query. |
 | 74.4.5 | `FUTURE-PARITY-BACKLOG.10.5.5` | `pending` | Capture typed Dart runtime observations and derive an immutable observed index. |

@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.2.0 — split Dart static projection
+
+The Dart static semantic parent is frozen and dependency-split before production changes. Five exact construction
+targets are owned explicitly: graph, Unicode privacy at text and identity ceilings, failed compilation, and the
+runtime fixture's static half. The former "four targets" checklist label was corrected without changing the
+neutral model.
+
+The authority map composes accepted source plus its byte/scalar map, parsed authored rules/body members, typed
+`CompiledSpec` order/mode/slot/edge/lifecycle state, selected-entry identity, and the native portable diagnostic.
+It forbids descriptor/AST JSON, compiled regexes, generated implementation source, paths, execution, trace, sinks,
+and query. Implementation is ordered as compiled graph `.10.5.2.1`, remaining privacy/failure/runtime-static and
+isolation `.10.5.2.2`, then composed signoff `.10.5.2.3`.
+
+This audit changes no production behavior, semantic rollout, or native admission. Foundation proof remains 12/12;
+semantic governance remains 6/20/73 at rollout 3/9 and admission 2/6.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.1.3 — close Dart semantic foundation
 
 The Dart semantic source/outcome parent is composition-closed without another production change. Its two focused

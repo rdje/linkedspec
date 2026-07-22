@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.2.0` — static meaning is composed, never serialized from one owner):
+  The five Dart construction targets require several authorities. Parsed `SpecFile` owns authored order, line
+  ownership, explicit versus omitted slot spelling, and lifecycle/member intent. Typed `CompiledSpec` owns the
+  accepted compiled order, selected family/cursor/repetition state, structural regex slots, resolved action/blind
+  topology, action payloads, and lifecycle payloads. The retained entry selection owns the effective root. The
+  accepted source plus the existing UTF-8/scalar map owns exact headers, member ranges, excerpts, and digests.
+  Native portable diagnostics own failures until one explicit projection normalizes them.
+
+  No descriptor or `toJson()` output is a semantic authority: both expose backend layout. Source correlation will
+  group parsed body elements by their one-based authored line, scan the complete trimmed member range, and convert
+  Dart UTF-16 code-unit boundaries through the existing scalar/UTF-8 map exactly once. Authored regex records omit
+  parent matchers attached to cross-rule edges, retain duplicate structural slots, and retain self-indexed slots.
+  Stable ids percent-escape strict UTF-8 bytes; record and relation order use the closed neutral kind ranks.
+
+  Dart's `bare_edge_target_undefined` / `normalize_edges` with `rule_label` and `target` is retained unchanged by
+  the foundation, then deliberately projected as `unknown_rule_reference` / `compile` with neutral rule ids,
+  decision, explanation, and missing-target source evidence. Privacy ceilings remain construction facts on the
+  snapshot while the complete private source references stay available for later structural query redaction; no
+  projection accessor, query, execution, trace, path, or runtime observation belongs to this leaf.
+
+  The safe implementation order is compiled graph `.10.5.2.1`, privacy/failure/runtime-static plus isolation
+  `.10.5.2.2`, and composed closeout `.10.5.2.3`. This behavior-free split leaves semantic governance at 6/20/73,
+  rollout 3/9, and native admission 2/6.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.1.3` — foundation closure is proof, not projection):
   The source map and compiled outcome were deliberately implemented in separate leaves, so parent closeout must
   prove their interaction rather than add another data owner. The combined suites cover every constructor,

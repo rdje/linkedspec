@@ -119,6 +119,19 @@ tests, primary 66x2, and corpus 105/105. The closeout also fixed the retired agg
 new nonignored untracked source cannot evade pre-staging verification. `.10.5.2` next adds normalized static
 projection. Dart remains pending in both rollout and native-admission ledgers until the later exact admission leaf.
 
+The static-projection boundary is now frozen before implementation. It has five exact construction targets: graph,
+Unicode privacy at `text`, the same privacy source at an `identity` ceiling, failed compilation, and the runtime
+fixture with execution/event records deliberately absent. Dart will compose these answers from accepted source and
+its byte/scalar map, parsed authored order/member intent, typed compiled rule/slot/edge/lifecycle state, selected
+entry identity, and native portable diagnostics. It will not serialize AST JSON, descriptor JSON, compiled regexes,
+generated implementation source, paths, or trace.
+
+Implementation proceeds in three bounded steps: compiled graph/source/evidence, then privacy plus deliberate
+failed-diagnostic normalization plus runtime-static/isolation, then composed signoff. Dart's native
+`bare_edge_target_undefined` / `normalize_edges` remains unchanged at the foundation and becomes the neutral
+`unknown_rule_reference` / `compile` diagnostic only in the private projection. Capabilities/query, typed runtime
+observations, and backend admission remain later work.
+
 ## Current Rust construction and query surface
 
 Rust callers can construct the immutable source/outcome layer from decoded text or strict UTF-8 bytes:
@@ -896,7 +909,10 @@ The dependency order is:
 | `.10.5.1.1` | Dart strict input/private map and source ceiling | complete; dependency-free source map |
 | `.10.5.1.2` | Dart staged compiled-or-failed owner and generated-v2 plan | complete; no target execution |
 | `.10.5.1.3` | Dart composed source/outcome foundation closeout | complete; privacy/isolation/host-state proof |
-| `.10.5.2` | Dart normalized static graph/privacy/failure/runtime-static projection | next after clean foundation closeout |
+| `.10.5.2.0` | Dart exact static authority map and dependency split | complete; behavior-free |
+| `.10.5.2.1` | Dart compiled graph/source/evidence projection | next after clean audit commit |
+| `.10.5.2.2` | Dart privacy/failure/runtime-static and isolation parity | pending |
+| `.10.5.2.3` | Dart composed static signoff and parent closure | pending |
 | `.10.5.2-.10.5.6` | Dart projections, query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
