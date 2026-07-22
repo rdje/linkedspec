@@ -17,11 +17,12 @@ answers:
   - "which Rust parser routes consume the Unicode rule label contract"
   - "which Dart downstream routes preserve exact Unicode rule label identity"
   - "does Dart Unicode rule label expansion broaden other identifier grammars"
+  - "is Dart native Unicode rule-label alignment closed"
   - "which backends still need Unicode rule label alignment"
 date: 2026-07-22
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, generated-data, validation, portability]
-evidence: docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/runtime/matching.dart; dart/test/unicode_rule_label_classifier_test.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; dart/lib/src/parser/unicode_rule_label.dart; dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/runtime/matching.dart; dart/test/unicode_rule_label_classifier_test.dart; dart/test/unicode_rule_label_routes_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/test/unicode_rule_label_negative_isolation_test.dart; dart/test/self_hosted_unicode_rule_label_test.dart; rust/linkedspec-core/src/unicode_rule_label.rs; rust/linkedspec-core/src/parser.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-core/tests/unicode_rule_label_contract.rs; rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
 reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/unicode_rule_label_routes_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
@@ -78,8 +79,9 @@ loading, and traces.
 
 This prerequisite removes the Rust semantic privacy fixture's former `Töp` blocker but does not advance semantic
 rollout or claim exhaustive five-backend label membership. Perl already accepts the strict-decoded fixture route.
-Dart native parsing/validation, positive/distinct downstream identity, and negative/identifier isolation are
-aligned; composed Dart signoff plus Julia, PUC Lua, and LuaJIT parser alignment remain explicit prerequisites under
-`FUTURE-PARITY-BACKLOG.10.5-.10.7` before those backends admit the v1 privacy fixture. See
+Dart native parsing/validation, positive/distinct downstream identity, negative/identifier isolation, and composed
+signoff are aligned and closed without semantic promotion. Julia, PUC Lua, and LuaJIT parser alignment remain
+explicit prerequisites under `FUTURE-PARITY-BACKLOG.10.6-.10.7` before those backends admit the v1 privacy
+fixture. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[primary-cli-strict-utf8-text-contract]], and [[rust-native-spec-resolution]].

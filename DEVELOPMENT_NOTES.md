@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.4` — prerequisite composition is not semantic admission):
+  The Dart label rollout deliberately ends with a no-production composition leaf. Individual classifier, native
+  routing, identity, and negative/isolation proofs were omission-safe, but parent closure still needed one run that
+  exercised their complete package/primary/corpus topology together and independently re-ran canonical CI.
+
+  The composed proof passes Dart format 69/0 changed, fatal analysis, package 296, primary 66x2, corpus 105/105,
+  Unicode 806/9/8/2, semantic 6/20/73, generated-source ten-family/80-0-0, all doctrines, Rust admission 77.74s,
+  canonical primary 66x2, and Phase 0 1,031/1,031 in 622s. No adapter, query, semantic record, observation sink, or
+  ledger status changed.
+
+  Parent `.10.5.0.2` can therefore close while `.10.5` remains active. The next clean-boundary leaf `.10.5.1`
+  owns copied strict source bytes/text, logical identity, byte/scalar coordinates, and compiled-or-failed outcome;
+  it must not infer that semantic ownership from label parity.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.0.2.3` — label membership must not leak into adjacent identifiers):
   Exhaustive negative proof belongs at both source-token and external-AST boundaries. Source syntax cannot always
   treat the neutral fixture as one token: `Top:` is declaration `Top` plus punctuation, and `Top\nRule` is two

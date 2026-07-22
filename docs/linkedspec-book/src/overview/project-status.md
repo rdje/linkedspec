@@ -525,8 +525,9 @@ Three backbone items tracked major structural modernization — all done:
   the native classifier/scanner; `.10.5.0.2.2` proves all positive/distinct identities through compiled,
   generated, reconstructed, emitted, selector, diagnostic, trace, loader, and command routes. `.10.5.0.2.3`
   exhausts all eight negative fixtures across external AST/source/no-prefix/primary routes and locks unrelated
-  identifier grammars. Composed `.4` alone remains before semantic source/static/calls/query/runtime/admission
-  `.10.5.1-.10.5.6`. Neither audit nor prerequisites promote a ledger.
+  identifier grammars. Composed `.4` passes complete Dart and canonical signoff and closes the prerequisite at
+  unchanged semantic rollout 3/9 and admission 2/6. Source/static/calls/query/runtime/admission remain separate
+  `.10.5.1-.10.5.6` work. Neither audit nor prerequisites promote a ledger.
   Governance follow-up `.22` separately tracks a stable home for immutable cross-contract status markers.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use

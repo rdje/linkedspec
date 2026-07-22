@@ -7847,7 +7847,7 @@ before implementation.
     generated/diagnostic/runtime/trace/load authorities plus ADR `0051` before source archaeology or behavior.
   - [x] **SPLIT BEFORE CODE** — Freeze bounded dependency-ordered Unicode-label, semantic construction/projection,
     query, runtime-observation, and admission children before implementing any Dart behavior.
-  - [ ] **UNICODE LABEL PREREQUISITE** — Apply pinned Unicode 17 `XID_Continue` exact scalar identity to every Dart
+  - [x] **UNICODE LABEL PREREQUISITE** — Apply pinned Unicode 17 `XID_Continue` exact scalar identity to every Dart
     declaration/reference/selector/artifact/diagnostic/trace/generated route without semantic promotion.
   - [ ] **EXACT SEMANTIC ADAPTER** — Compose idiomatic immutable Dart source/static/call/query/runtime owners and
     one omission-sensitive consumer that matches all 20 neutral responses without AST/IR/path/host leakage.
@@ -8131,7 +8131,7 @@ before implementation.
         and canonical gates, synchronize all durable/public layers, clean artifacts, and close `.2` plus `.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2`
-  Status: `in_progress` (2026-07-22)
+  Status: `done` (2026-07-22)
   Goal: Implement exact pinned Unicode rule-label identity across every Dart route.
   Depends on: `.10.5.0.1`
   Acceptance: Generate one Dart Unicode 17 `XID_Continue` classifier from the neutral contract and consume it for
@@ -8140,6 +8140,14 @@ before implementation.
     emitted source, diagnostics, traces, strict loaders, and primary routes. Reject invalid labels and partial
     prefixes deterministically without broadening function/helper/lifecycle/fluent/mark identifiers or promoting
     semantic introspection.
+  Verification: Children `.0-.4` generate and independently lock the exact 806-range Dart classifier/scanner,
+    route every native and external-AST declaration/action/blind/bare label, preserve all 9 positive labels and 2
+    distinct pairs across every compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command
+    identity route, and reject all 8 negatives without broadening adjacent identifier grammars. Final composed
+    signoff passes Dart format on 69 files with no change, fatal analysis, package 296, primary 66x2, corpus
+    105/105, Unicode 806/9/8/2, semantic 6/20/73, generated-source 10-family/80-0-0, all four doctrines, canonical
+    Rust admission 1/1 in 77.74 seconds, canonical primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Semantic
+    rollout/admission remain exactly 3/9 and 2/6; no production behavior changes in composed closeout `.4`.
 
   #### Acceptance Checklist
 
@@ -8152,7 +8160,7 @@ before implementation.
     trace, loaded source, and primary command routes.
   - [x] **NEGATIVE / GRAMMAR ISOLATION** — Reject every negative fixture at a stable parser/validation boundary and
     prove unrelated function/helper/lifecycle/fluent/mark identifier grammars are unchanged.
-  - [ ] **NO FALSE PROMOTION / SIGNOFF** — Complete Dart, Unicode/semantic checker, canonical, mdBook/KM/docs, and
+  - [x] **NO FALSE PROMOTION / SIGNOFF** — Complete Dart, Unicode/semantic checker, canonical, mdBook/KM/docs, and
     cleanup pass while semantic rollout/admission remain 3/9 and 2/6.
 
   Children:
@@ -8274,11 +8282,30 @@ before implementation.
       Knowledge Map, clean generated artifacts, and commit before activating composed signoff leaf `.2.4`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.5.0.2.4`
-    Status: `pending`
+    Status: `done` (2026-07-22)
     Goal: Compose Dart Unicode-label signoff and close the prerequisite parent without semantic promotion.
     Depends on: `.10.5.0.2.3`
     Acceptance: Pass complete Dart, Unicode and semantic checkers, primary/corpus/generated/canonical gates, update
       public and durable docs plus cleanup evidence, keep semantic rollout/admission at 3/9 and 2/6, and close `.2`.
+    Verification: Composed complete Dart passes format on 69 files with no change, fatal analysis, package 296,
+      primary 66x2, and corpus 105/105. Unicode-label 806/9/8/2, semantic-introspection 6/20/73 at unchanged rollout
+      3/9 and admission 2/6, generated-source v1/10 families/80-0-0, all four doctrines, and Knowledge Map
+      672/5,006 pass.
+      Canonical independently passes Rust semantic admission 1/1 in 77.74 seconds, primary 66x2, and Phase 0
+      1,031/1,031 in 622 seconds. Parent `.10.5.0.2` closes without production or semantic-ledger change.
+
+    #### Acceptance Checklist
+
+    - [x] **COMPLETE DART** — Re-run Dart format, fatal analysis, all package tests, primary 66x2, and corpus
+      105/105 over the composed generated classifier, native routes, identity routes, and negative/isolation proof.
+    - [x] **CONTRACT COMPOSITION** — Pass the Unicode-label and semantic-introspection checkers with exact
+      806/9/8/2 and 6/20/73 evidence, plus required tracked-file and generated-source topology.
+    - [x] **CANONICAL SIGNOFF** — Pass all doctrines and canonical local CI, including Rust semantic admission,
+      primary 66x2, and Phase 0 1,031/1,031.
+    - [x] **NO FALSE PROMOTION** — Keep semantic rollout/admission at 3/9 and 2/6; do not claim Julia, PUC Lua,
+      LuaJIT, recurring, MCP, or public semantic admission from the Dart label prerequisite.
+    - [x] **PARENT CLOSEOUT / HANDOFF** — Close `.10.5.0.2`, synchronize roadmap/live docs/mdBook/Knowledge Map,
+      clean generated artifacts, and commit before activating semantic source-map leaf `.10.5.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.5.1`
   Status: `pending`
@@ -10634,8 +10661,9 @@ label-prefix truncation, and current grammar passes the exact five-backend defau
 Generated-classifier foundation `.10.5.0.2.0`, native parser/validator consumption `.10.5.0.2.1`, and exact
 downstream identity proof `.10.5.0.2.2` are signoff-complete. All 9 positive labels and 2 distinct pairs retain
 exact identity through compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes.
-Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`. Negative rejection and unrelated-identifier
-isolation `.2.3` is signoff-complete; after its clean commit, composed signoff `.2.4` is next.
+Exact-identity leaf `.10.5.0.2.2` is complete from clean `8e5c4a70`, negative rejection plus unrelated-identifier
+isolation `.2.3` is complete from clean `28ce295d`, and composed no-promotion signoff `.2.4` closes the Dart
+Unicode-label prerequisite parent. After the clean `.2.4` commit, semantic source-map foundation `.10.5.1` is next.
 
 ### Historical frontier sequence
 
@@ -11041,12 +11069,12 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.0.1.2 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2` | `done` | Regenerated/freshness-locked the self-hosted corpus and composed exact current-grammar cross-runtime proof. |
 | 74.4.0.1.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.0` | `done` | Canonical four-input freshness and the Perl sparse-AND live/generated repair pass all affected and canonical gates. |
 | 74.4.0.1.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.1.2.1` | `done` | Physical-line boundaries reject label-prefix truncation; focused current grammar passes exact 5x2 proof. |
-| 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `in_progress` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
+| 74.4.0.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2` | `done` | Generate and consume exact Dart Unicode-label parsing/validation across every identity route. |
 | 74.4.0.2.0 | `FUTURE-PARITY-BACKLOG.10.5.0.2.0` | `done` | Generated and independently locked the exact Dart classifier/validator/prefix-scanner primitives. |
 | 74.4.0.2.1 | `FUTURE-PARITY-BACKLOG.10.5.0.2.1` | `done` | Native headers/targets and external-AST validation consume the exact generated Dart primitives. |
 | 74.4.0.2.2 | `FUTURE-PARITY-BACKLOG.10.5.0.2.2` | `done` | Every positive/distinct Unicode identity survives Dart artifacts, selectors, diagnostics, traces, loaders, and CLI routes. |
 | 74.4.0.2.3 | `FUTURE-PARITY-BACKLOG.10.5.0.2.3` | `done` | Lock every invalid-label rejection and unrelated identifier-grammar isolation. |
-| 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `pending` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
+| 74.4.0.2.4 | `FUTURE-PARITY-BACKLOG.10.5.0.2.4` | `done` | Compose complete Dart signoff, retain semantic ledgers, and close the prerequisite parent. |
 | 74.4.1 | `FUTURE-PARITY-BACKLOG.10.5.1` | `pending` | Add opaque strict source mapping and compiled-or-failed Dart semantic foundation. |
 | 74.4.2 | `FUTURE-PARITY-BACKLOG.10.5.2` | `pending` | Project exact Dart graph/privacy/failure/runtime-static semantics. |
 | 74.4.3 | `FUTURE-PARITY-BACKLOG.10.5.3` | `pending` | Project exact Dart calls/bindings/staged/generated provenance. |

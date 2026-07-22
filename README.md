@@ -861,7 +861,9 @@ content migration exists yet.
   declaration/action/blind/bare role, locks no-prefix and primary failures, and proves function/parameter, helper,
   lifecycle, fluent, and mark grammars retain their narrower existing spellings. Colon remains declaration
   punctuation and newline remains a token separator; neither is reclassified as label content. No semantic
-  rollout/admission is promoted.
+  rollout/admission is promoted. Composed `.10.5.0.2.4` re-runs complete Dart, Unicode/semantic/generated-source,
+  doctrine, primary, and canonical gates and closes the five-leaf Dart label prerequisite at unchanged semantic
+  rollout 3/9 and admission 2/6. Opaque Dart semantic source/outcome work starts separately at `.10.5.1`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

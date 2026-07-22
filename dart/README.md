@@ -66,6 +66,8 @@ action/blind/bare target role from programmatic and reconstructed ASTs, source t
 primary compilation. Rule-label expansion does not change ASCII/current-policy function names and parameters,
 ActionIR helper or fluent names, lifecycle markers, or named-mark variables. Source punctuation remains
 structural: `Top:` can be a `Top` declaration, and `Top\nRule` is two tokens, while neither string is one label.
+The composed prerequisite is closed after complete Dart 296, primary 66x2, corpus 105/105, neutral contract, and
+canonical signoff; that closure does not admit Dart semantic introspection, whose source foundation begins later.
 
 ## Generated source
 

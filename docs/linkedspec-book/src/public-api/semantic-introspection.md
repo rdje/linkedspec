@@ -471,8 +471,9 @@ proves that claim for all nine positive fixtures and both distinct pairs across 
 an isolated emitted package, selectors, diagnostics, traces, strict loading, and primary commands. Leaves `.3-.4`
 then split negative/isolation from composed signoff. Leaf `.3` now rejects all eight invalid fixtures across every
 external-AST declaration/target role, source/no-prefix boundaries, and primary compilation while proving unrelated
-function/parameter/helper/lifecycle/fluent/mark spellings remain unchanged. Only composed `.4` remains. No
-prerequisite advances semantic rollout/admission.
+function/parameter/helper/lifecycle/fluent/mark spellings remain unchanged. Composed `.4` closes the Dart label
+prerequisite after complete Dart and canonical proof. It does not advance semantic rollout/admission; the opaque
+source/outcome foundation begins independently at `.10.5.1`.
 
 The complete Dart corpus's 105/105 result now includes four byte-fresh `spec_spec_*` inputs copied from current
 `specs/spec.spec`. Shared closeout `.10.5.0.1.2` added exact hash/byte enforcement and composed the current grammar

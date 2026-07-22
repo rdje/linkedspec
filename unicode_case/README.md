@@ -57,7 +57,9 @@ strict loading, and primary inline/file commands. This is transport/identity pro
 unrelated-identifier isolation suite drives all eight invalid labels through every external-AST declaration/target
 role, source/no-prefix boundaries, and primary compilation. It also locks the existing function/parameter,
 helper, lifecycle, fluent, and named-mark identifier grammars so the Unicode label class cannot leak into them.
-Colon and newline retain their structural delimiter roles rather than becoming label characters.
+Colon and newline retain their structural delimiter roles rather than becoming label characters. Composed Dart
+signoff closes the native label prerequisite with complete package/primary/corpus and canonical proof while
+leaving semantic rollout/admission at 3/9 and 2/6.
 
 The generator also writes
 `unicode_case/unicode_rule_label_regex_class.txt`: one metadata-bearing UTF-8 literal-range class for the

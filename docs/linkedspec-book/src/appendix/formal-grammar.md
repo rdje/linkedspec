@@ -199,7 +199,8 @@ and primary commands. These layers preserve the decoded label as an immutable st
 case-fold it. All eight negative neutral labels fail the complete-label predicate for programmatic and reconstructed
 declarations plus action/blind/bare targets. Function names/parameters, helper callees, lifecycle markers, fluent
 methods, and named-mark variables keep their existing narrower grammars; Unicode rule-label membership does not
-authorize a spelling on those surfaces.
+authorize a spelling on those surfaces. Complete Dart/package/primary/corpus and canonical composition close this
+native label prerequisite without admitting the separate semantic-introspection adapter.
 
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid

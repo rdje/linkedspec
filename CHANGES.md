@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.4 — close Dart Unicode label prerequisite
+
+The five-leaf Dart Unicode-label prerequisite is composition-closed without another production change. The final
+leaf re-runs the entire Dart surface over the generated 806-range classifier, native parser/validator routes, exact
+positive/distinct identity routes, and exhaustive negative/identifier-isolation routes. Format checks 69 files
+with no change, fatal analysis passes, all 296 package tests pass, both primary environments pass 66/66, and the
+current corpus passes 105/105.
+
+Neutral Unicode proof remains 806 ranges / 9 positive / 8 negative / 2 distinct pairs. Semantic governance remains
+six fixture groups / 20 exact responses / 73 rejected mutations, rollout 3/9, and native admission 2/6; generated-
+source v1 remains ten families with capability census 80/0/0. Canonical CI independently passes Rust semantic
+admission 1/1 in 77.74 seconds, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds.
+
+Parent `.10.5.0.2` is now closed, public and durable documentation records the boundary, and opaque Dart semantic
+source/outcome foundation `.10.5.1` is next only after this clean commit. This closeout does not admit Dart, Julia,
+PUC Lua, LuaJIT, recurring proof, MCP, or the public semantic surface.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.0.2.3 — isolate Dart Unicode label grammar
 
 Dart now has exhaustive executable proof for every negative Unicode rule-label fixture without changing production
