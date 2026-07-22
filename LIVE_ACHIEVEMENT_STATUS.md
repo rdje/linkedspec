@@ -8,13 +8,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Query authority/split `FUTURE-PARITY-BACKLOG.10.5.4.0` is verification-complete from clean calls-parent commit
-  `fda7f0b7`; live-doc/book sync and commit remain. It adds no production/test/public behavior. After its clean
-  commit, `.10.5.4.1` owns the package-private typed record/source query kernel.
+- Typed query kernel `FUTURE-PARITY-BACKLOG.10.5.4.1` is verification-complete from clean audit commit `2d8b6228`;
+  live-doc/book sync and commit remain. After its clean commit, `.10.5.4.2` owns relations/pages/logical limits.
 
-The audit freezes 19 non-runtime response digests, 26 neutral validation boundaries, one fresh detached-projection
-input, and four dependency-ordered implementation/closeout children. Neutral governance remains 6/20/73 at 3/9
-and 2/6; the unchanged Dart source/outcome/static/calls composition passes 22/22; Knowledge Map is 675/5,062.
+Immutable typed values plus package-private capabilities/list/get/explain/source privacy match nine full response
+digests. Focused is 4/4, composed semantic is 26/26, Dart is 79/0 + 322 + 66x2 + 105/105, and canonical is Rust
+admission 76.58s + primary 66x2 + Phase 0 1,031/632s. Public query/runtime/rollout/admission remain absent.
 
 The generated self-hosted class is 5 lines / 5,991 UTF-8 bytes and encodes all 806 Unicode 17 ranges. Independent
 regeneration, metadata/byte/delimiter checks, 9 positive / 8 negative / 2 distinct fixtures, deliberate version
@@ -46,6 +45,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending. Its public checker 
 recurring proof remains the six-runtime plus selected primary/support authority.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.1 — add Dart semantic record query kernel**
+  (DONE in this commit from clean base `2d8b6228`).
+
+  **Result:** Immutable typed values and a detached-projection-only capabilities/list/get/explain/privacy kernel
+  match nine exact response digests while remaining package-private.
+
+  **Proof:** Focused 4/4, composed semantic 26/26; Dart 79/0, analysis, package 322, primary 66x2, corpus 105/105;
+  semantic 6/20/73, Unicode 806/9/8/2, generated v1/10/80-0-0, public 59/27/0; canonical Rust admission 76.58s,
+  primary 66x2, Phase 0 1,031/1,031 in 632s; Knowledge Map 676/5,069.
+
+  **Next:** after this clean commit, implement relation traversal/pages/budgets `.10.5.4.2`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.5.4.0 — split Dart semantic query**
   (DONE in this commit from clean base `fda7f0b7`).
 

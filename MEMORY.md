@@ -8,10 +8,10 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
 - No change without an owning task-tree leaf; run `scripts/check_memory_architecture.sh` before commit.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.4.0` — freeze Dart query authorities and implementation split.
-- latest_commit: `fda7f0b7` is the clean calls-parent base; the current commit owns behavior-free query audit `.0`.
-- active_work_unit: `.10.5.4.0` is audit-, verification-, and documentation-complete; commit remains.
-- next_action: from the clean query-audit commit, add the package-private typed record/source kernel `.10.5.4.1`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.5.4.1` — exact Dart typed record/source semantic query kernel.
+- latest_commit: `2d8b6228` is the clean query-audit base; the current commit owns typed kernel leaf `.10.5.4.1`.
+- active_work_unit: `.10.5.4.1` is implementation-, verification-, and documentation-complete; commit remains.
+- next_action: from the clean typed-kernel commit, add relation traversal and logical limits `.10.5.4.2`.
 - current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
   a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
   exact ids/order/shapes/source policies/pages/budgets/errors, and 73 rejected mutations. Static/generated facts
@@ -43,13 +43,13 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   22 records/25 relations: typed functions/helpers/calls/bindings plus distinct native staged payload/job/result
   records and one validated selected generated-v2 handler-plan record. Target/emitted execution, body/AST/IR,
   generated implementation, paths, runtime/trace/sinks, public records, and query remain absent. Parent `.10.5.3`
-  is composition-closed. Query audit `.10.5.4.0` freezes fresh detached projection clones as the only evaluator
-  input and splits typed record/source `.1`, traversal/limits `.2`, public typed/raw-neutral `.3`, and closeout `.4`.
+  is composition-closed. Query `.10.5.4.1` adds immutable typed values and package-private capabilities/list/get/
+  explain/source-redaction over fresh detached clones; nine static digests are exact. Traversal/limits `.2` is next.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: closeout composition 22/22; exact calls 4/4; selector concurrency 3/3, executable
-  0/19, retirement 5/6/8/0, public 59/27/0; Dart format 77/0, analysis, package 318, primary 66x2, corpus 105/105;
-  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 77.64s,
-  primary 66x2, and Phase 0 1,031/1,031 in 624s. Knowledge Map is 675/5,062; mdBook/doctrines/memory/diff/cleanup pass.
+- current_signoff: typed query 4/4 and composed semantic 26/26; selector concurrency 3/3, executable 0/19,
+  retirement 5/6/8/0, public 59/27/0; Dart format 79/0, analysis, package 322, primary 66x2, corpus 105/105;
+  semantic 6/20/73 at 3/9+2/6; Unicode 806/9/8/2; generated v1/10/80-0-0. Canonical passes Rust admission 76.58s,
+  primary 66x2, and Phase 0 1,031/1,031 in 632s. Knowledge Map is 676/5,069; docs/doctrines/cleanup pass.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This file is layer A of
   offline verification may stack a writable depot before the installed read-only package depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified behavior-free `.10.5.4.0` query split docs/gates/commit pending; `.23` queued.
+- blockers: none. in_flight_uncommitted: verified `.10.5.4.1` typed query kernel docs/gates/commit pending; `.23` queued.

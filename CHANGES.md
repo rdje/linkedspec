@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.1 — add Dart semantic record query kernel
+
+Dart now has immutable typed semantic-query operations, directions, pages, budgets, source policies, requests,
+source references, records, relations, diagnostics, page state, costs, and responses. The package-private kernel
+receives only a fresh `_staticProjection.detachedJson()` value and implements capabilities, list, get, explain,
+source none/identity/span/text/digest projection, structural fact redaction, ceiling rejection, and exact owned
+clone semantics. It cannot access accepted source/compiler state, staged sidecars, AST/ActionIR, executors, trace,
+paths, or generated implementation source.
+
+Nine full neutral response digests match exactly: capabilities, graph list/get/explain, call symbols/shapes, failed
+diagnostic, privacy none/text+digest, and source-ceiling rejection. Focused proof passes 4/4 and the composed Dart
+semantic suite passes 26/26. The incomplete relations branch is fenced to `.10.5.4.2`, and no query type or method
+is exported through the public umbrella before raw-neutral completion `.10.5.4.3`.
+
+Complete Dart passes format 79/0, fatal analysis, package 322, primary 66x2, and corpus 105/105. Semantic remains
+6/20/73 at rollout 3/9 and native admission 2/6; Unicode is 806/9/8/2; generated source is v1/10/80-0-0; public
+proof is concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and surface 59/27/0. Canonical CI
+passes Rust semantic admission 1/1 in 76.58 seconds, primary 66x2, and Phase 0 1,031/1,031 in 632 seconds. No runtime
+observation, raw-neutral validation, public query, rollout, or admission state changed. Knowledge Map is 676 facts /
+5,069 question keys.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.4.0 — split Dart semantic query
 
 The behavior-free query audit reconciles the neutral 19 static response digests and 26 malformed-request

@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.1` — make immutability and privacy structural): The Dart query value
+  model owns all aggregate inputs and outputs. Constructors copy lists/maps into unmodifiable values, while
+  `toJson()` returns fresh detached data. This lets native callers retain typed values without sharing evaluator
+  state and lets later neutral/MCP transport encode the same envelope without learning Dart object layout.
+
+  Source privacy is applied while projecting each record/relation, not by string-scanning a completed response.
+  `none` removes the source reference; `identity` adds only logical identity; `span` adds coordinates; `text` adds
+  excerpt and may add the content digest. Regex patterns, diagnostic messages, and explanation summaries become
+  null below text with exact redaction paths. Construction ceiling rejection happens before record selection.
+
+  The package-internal extension passes a fresh `_SemanticStaticProjection.detachedJson()` value into the kernel.
+  That function signature is the authority fence: source/parser/compiler fields and execution/trace seams are not
+  parameters. Nine full digests now lock capabilities/list/get/explain/privacy/error behavior. Relation traversal,
+  pages, and logical budgets remain an explicit throwing fence for `.10.5.4.2`; public export and raw-neutral
+  validation remain `.10.5.4.3` so incomplete behavior cannot ship accidentally.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.4.0` — query detached meaning, never compiler authority): The Dart
   query evaluator needs only four normalized values already retained by `_SemanticStaticProjection`: snapshot,
   source references, canonical records, and canonical relations. Passing a fresh detached clone to the evaluator

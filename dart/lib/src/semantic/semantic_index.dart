@@ -59,6 +59,7 @@ import 'sha256.dart' show sha256Hex;
 
 part 'semantic_static_projection.dart';
 part 'semantic_call_projection.dart';
+part 'semantic_query.dart';
 
 const _semanticSnapshotId = 'snapshot:0';
 const _semanticSourceId = 'source:0';

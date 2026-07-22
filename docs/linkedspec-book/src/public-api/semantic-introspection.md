@@ -206,10 +206,16 @@ regexes, generated implementation source, executors, trace state, paths, or host
 non-runtime response digests plus 26 malformed-request boundaries. Typed Dart requests and raw-neutral JSON will
 enter one evaluator; the neutral seam exists to represent invalid shapes that a typed request cannot contain.
 
-The implementation order is typed record/source and source-redaction kernel `.10.5.4.1`, relation traversal/pages/
-budgets `.2`, public typed plus raw-neutral completion `.3`, then composed closeout `.4`. The incomplete kernel
-stays package-private. Runtime `execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not
-admitted until `.10.5.6`.
+Typed record/source kernel `.10.5.4.1` is now implemented behind a package-private extension. Immutable typed
+operations, directions, pages, budgets, source policies, requests, records, relations, diagnostics, page state,
+costs, and responses own their aggregate values; every JSON projection is a fresh detached clone. Capabilities,
+list, get, explain, source detail/ceiling, structural redaction, and portable record errors match nine complete
+neutral response digests. The evaluator receives only detached normalized projection data, so it cannot compile,
+execute, inspect host objects, or acquire paths or trace state.
+
+Relation traversal/pages/budgets `.10.5.4.2` are next, followed by public typed plus raw-neutral completion `.3`
+and composed closeout `.4`. Until `.3`, no query type or method appears in the public Dart umbrella. Runtime
+`execution`/`event` records remain exclusively owned by `.10.5.5`, and Dart is not admitted until `.10.5.6`.
 
 ## Current Rust construction and query surface
 
@@ -998,8 +1004,8 @@ The dependency order is:
 | `.10.5.3.2` | Dart staged/generated exact completion | complete; private 22/25 target deep-equals neutral oracle |
 | `.10.5.3.3` | Dart calls composition closeout | complete; 22/22 final-code composition, no production change |
 | `.10.5.4.0` | Dart query authority map and dependency split | complete; behavior-free 19-digest/26-boundary plan |
-| `.10.5.4.1` | Dart typed record/source query kernel | active next; package-private until completion |
-| `.10.5.4.2` | Dart relations/pages/budgets/costs | pending |
+| `.10.5.4.1` | Dart typed record/source query kernel | complete; package-private, immutable, nine exact static digests |
+| `.10.5.4.2` | Dart relations/pages/budgets/costs | active next |
 | `.10.5.4.3` | Dart public typed/raw-neutral query | pending; exact 19 digests and 26 boundaries |
 | `.10.5.4.4` | Dart composed query closeout | pending |
 | `.10.5.4` | Dart immutable typed/raw-neutral query parent | active |
