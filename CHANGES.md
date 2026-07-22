@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.1 — add Dart typed call projection
+
+Dart's private semantic projector now deep-equals the neutral 18-record / 16-relation non-staged calls core.
+It composes ordered `UserFunctionRegistry` entries, typed function-body and compiled-edge ActionIR, resolved
+contracts, the immutable source map, and existing static ids into function/helper/call/binding records plus exact
+relations, decisions, explanations, conservative shapes, and call-driven rule/edge shapes.
+
+Functions and rules merge by authored byte position even though `CompiledSpec.definitionOrder` omits function
+shells. Calls are correlated occurrence-safely in outer-before-inner order inside bounded authored source rather
+than treating normalized ActionIR offsets as physical coordinates. An interleaved `trim("é")` fixture locks exact
+UTF-8 byte and Unicode-scalar evidence while proving function shells cannot leak edges into adjacent rules.
+
+The staged body AST is reparsed and exact-compared only as an internal typed-consistency check. Projection results
+are fresh detached plain data, the package-internal testing seam is absent from the public umbrella, and recursive
+proof denies AST/ActionIR, descriptor, regex, path, executor, trace, sink, or observer leakage. Staged payload/job/
+result and generated-artifact records remain exclusively owned by `.10.5.3.2`; no query or runtime behavior ships.
+
+Focused proof passes 3/3. Complete Dart passes format 77/0, fatal analysis, package 317, primary 66x2, and corpus
+105/105. Semantic remains 6/20/73 at rollout 3/9 and admission 2/6; Unicode is 806/9/8/2; generated source remains
+v1/10/80-0-0; public proof remains concurrency 3/3, executable 0/19, retirement 5/6/8/0, capability 80/0/0, and
+surface 59/27/0. Canonical CI passes Rust semantic admission 1/1 in 77.26 seconds, primary 66x2, and Phase 0
+1,031/1,031 in 627 seconds. The slice also restores the known repeated-action task-index/handoff anchors displaced
+by the prior active-row rewrite; structural decoupling remains owned by `.22`. Knowledge Map is 674/5,048.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.5.3.0 — split Dart calls projection
 
 The Dart calls/staging/generated semantic parent is authority-mapped and dependency-split before production

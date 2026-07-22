@@ -788,6 +788,17 @@ _SemanticStaticProjection _buildCompiledStaticProjection({
       );
     }
   }
+  _extendSemanticCallProjection(
+    sourceText: sourceText,
+    sourceMap: sourceMap,
+    logicalName: logicalName,
+    contentDigest: contentDigest,
+    parsed: parsed,
+    compiled: compiled,
+    sourceRefs: sourceRefs,
+    records: records,
+    relations: relations,
+  );
   _canonicalizeSemanticProjection(records, relations);
   return _SemanticStaticProjection(
     snapshot: snapshot,

@@ -141,18 +141,39 @@ six exact construction/isolation cases plus complete Dart/public/canonical gates
 semantic rollout or native-admission promotion. Calls/bindings/staged/generated provenance is next in `.10.5.3`;
 capabilities/query, typed runtime observations, and backend admission remain later work.
 
-The Dart calls-projection authority audit is complete. The neutral target has 22 records and 25 relations, sourced
-from several typed owners: the ordered user-function registry, staged function-body payload/job/result sidecars,
-compiled edge ActionIR and contract resolution, the existing static rule/edge identities, selected entry, and the
-retained generated-v2 plan. `CompiledSpec.definitionOrder` lists rules but not function shells, and function
-`sourceSpan`/`bodySpan` values are line-only. Exact authored order therefore locates the shell occurrence enclosing
-the staged payload's decoded-scalar body span, then merges that position with rule positions.
+The Dart calls-projection typed core is now exact. The complete neutral target has 22 records and 25 relations;
+`.10.5.3.1` deep-equals the 18-record / 16-relation subset left after deliberately excluding the three staged
+artifacts, one generated artifact, and every relation touching them. The private projector emits functions,
+helpers, calls, bindings, reads/writes, resolution evidence, decisions, explanations, and conservative shapes from
+the ordered user-function registry, typed function/edge ActionIR, resolved contracts, existing static ids, and the
+immutable source map.
 
-ActionIR spans are local to normalized body or edge code, not physical-source coordinates. Projection must walk
-typed calls in outer-before-inner preorder while matching each occurrence inside the already bounded authored
-shell or edge source. This preserves exact Unicode byte/scalar evidence and interleaved function-shell isolation
-without exposing AST JSON. Core function/helper/call/binding projection, staged/generated completion, and composed
-signoff are separate `.10.5.3.1-.3` leaves; Dart still exposes no semantic query or runtime observation surface.
+`CompiledSpec.definitionOrder` lists rules but not function shells, and function `sourceSpan`/`bodySpan` values are
+line-only. Exact authored order therefore locates the shell occurrence enclosing the staged payload's decoded-
+scalar body span, then merges its byte start with rule positions. ActionIR spans are local to normalized body or
+edge code, not physical-source coordinates, so projection walks typed calls in outer-before-inner order while
+matching occurrences inside the already bounded authored shell or edge source.
+
+For example, this interleaving keeps definition order `Top`, `normalize`, `Done`; the function body is not mistaken
+for part of either rule, and `trim("é")` receives the correct unequal UTF-8 byte width and Unicode-scalar width:
+
+```text
+Top::
+ /x/ -> Done { return(normalize(match_text())) }
+
+fn normalize(value) { return(trim("é")) }
+
+Done:
+ /x/
+```
+
+User-function registry resolution precedes helper fallback. Shape inference is intentionally bounded to typed
+literals, current bindings, registered return signatures, and the three governed fixture helpers; uncertainty is
+preserved rather than guessed. Results are fresh JSON-compatible clones, and the package-internal exact-oracle
+extension is absent from the public Dart umbrella. AST/ActionIR, descriptors, compiled regexes, generated source,
+paths, executors, trace, diagnostic sinks, and runtime observers remain private. `.10.5.3.2` adds only staged and
+generated provenance to reach 22/25, and `.10.5.3.3` composes closeout; Dart still exposes no semantic query or
+runtime observation surface.
 
 ## Current Rust construction and query surface
 
@@ -937,7 +958,8 @@ The dependency order is:
 | `.10.5.2.3` | Dart composed static signoff and parent closure | complete; focused 6/6 plus full gates |
 | `.10.5.2` | Dart private static projection parent | complete; all five construction targets exact |
 | `.10.5.3.0` | Dart calls/staging/generated authority map and split | complete; behavior-free exact 22/25 plan |
-| `.10.5.3.1-.3` | Dart typed calls, staged/generated completion, and closeout | pending; typed core next |
+| `.10.5.3.1` | Dart typed functions/helpers/calls/bindings core | complete; exact private 18/16 non-staged subset |
+| `.10.5.3.2-.3` | Dart staged/generated completion and closeout | pending; exact 22/25 completion next |
 | `.10.5.4-.10.5.6` | Dart query, observation, and admission | pending |
 | `.10.6` | Julia parity | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |

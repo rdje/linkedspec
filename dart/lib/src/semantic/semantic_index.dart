@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import '../action/action_ast.dart'
     show
         ActionArrayLiteralExpr,
+        ActionAssignScalarExpr,
         ActionBlock,
         ActionBlockValueExpr,
         ActionBooleanLiteralExpr,
@@ -13,7 +14,12 @@ import '../action/action_ast.dart'
         ActionHashLiteralExpr,
         ActionNumberLiteralExpr,
         ActionStringLiteralExpr,
-        ActionUndefExpr;
+        ActionUndefExpr,
+        ActionVariableExpr;
+import '../action/action_parser.dart' show parseActionBlock;
+import '../action/action_contracts.dart' show resolveActionBlockContracts;
+import '../action/function_registry.dart'
+    show UserFunctionEntry, UserFunctionRegistry;
 import '../ast/spec_ast.dart'
     show
         ActionEdgeBodyElementKind,
@@ -29,6 +35,7 @@ import '../ast/spec_ast.dart'
 import '../compiler/compiled_spec.dart'
     show
         CompiledActionEdge,
+        CompiledActionPayload,
         CompiledBlindEdge,
         CompiledRule,
         CompiledSpec,
@@ -49,6 +56,7 @@ import '../validation/spec_validator.dart'
 import 'sha256.dart' show sha256Hex;
 
 part 'semantic_static_projection.dart';
+part 'semantic_call_projection.dart';
 
 const _semanticSnapshotId = 'snapshot:0';
 const _semanticSourceId = 'source:0';

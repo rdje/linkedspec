@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.1` — correlate typed meaning inside a bounded authored owner):
+  Dart's typed ActionIR is the authority for call structure, arguments, resolution inputs, and value flow, but its
+  local spans are not physical source coordinates. The projector therefore walks typed calls in outer-before-inner
+  order and advances an occurrence cursor through the already bounded function shell or edge source. This keeps
+  duplicate/nested call spelling distinct without trusting AST JSON or adding normalized offsets to authored text.
+
+  Function shells require a second merge. `CompiledSpec.definitionOrder` omits them and registry spans are line-
+  only, so the staged body scalar range identifies the exact enclosing shell occurrence; its byte start can then
+  merge with rule starts. Masking those shell ranges before rule-member scans prevents an interleaved function from
+  becoming a false rule edge. The exact Unicode test demonstrates both invariants with `trim("é")`: UTF-8 byte
+  length differs from scalar-column width while `Top`, `normalize`, and `Done` retain authored order.
+
+  Shape inference stays deliberately conservative: typed literals, current bindings, registered function return
+  signatures, and the governed fixture helper contracts only. User-function registry resolution precedes helper
+  fallback, binding occurrences receive stable ids, and call-driven edge/rule shape changes derive from those
+  results. The exact 18-record/16-relation non-staged subset deep-equals the neutral model; `.10.5.3.2` adds only
+  staged/generated provenance to reach 22/25.
+
+  Canonical signoff also caught a known continuity defect before commit: the prior task-index rewrite had again
+  displaced the immutable repeated-action marker and its overwrite-only-memory handoff anchor. The durable hazard
+  card and `.22` supplied the root cause and bounded response: restore the true anchors without weakening the
+  checker or pivoting a dirty tree; leave structural decoupling to `.22`.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.5.3.0` — typed meaning and authored location have different owners):
   Dart already retains every semantic ingredient needed for the 22-record / 25-relation calls target, but no
   single owner has the complete truth. `UserFunctionRegistry` owns function order/signatures and exact source;
