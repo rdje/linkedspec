@@ -5,9 +5,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.2.0` — behavior-free Julia source/outcome boundary freeze.
-- latest_commit: `70565d04` closes Julia Unicode and is the clean base for source/outcome plan `.10.6.2.0`.
-- active_work_unit: `.10.6.2.0` is the docs-only verified candidate awaiting commit; `.10.6.2.1` follows cleanly.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.2.1` — strict opaque Julia semantic source-map foundation.
+- latest_commit: `daa04c26` is the clean base; verified `.10.6.2.1` is the current commit candidate.
+- active_work_unit: `.10.6.2.1` awaits its clean commit; `.10.6.2.2` activates only afterward.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -31,12 +31,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   snapshot at the twentieth digest; `.3` propagates public generated/emitted direct/traced capture with exact
   callback identity/non-interference and v2/format 2. `.4` closes `.10.5.5`. Admission `.10.5.6` now composes all
   owners in one exact 12-role consumer, matches every digest/route, advances only Dart, and closes parent `.10.5`.
-- current_julia_semantic_map: `.10.6.2.0` freezes future `semantic_index` over copied valid text/strict bytes,
-  logical identity, four ceilings, canonical byte/scalar map, SHA-256, and typed detached source/outcome values.
-  Probes prove malformed `String` failures vary, byte vectors lack a parser method, `LoadedSpec` retains paths,
-  compiled order omits the preceding function, and compiled/descriptor JSON aliases live `CompiledSpec` vectors.
-  `Bool <: Integer` requires an explicit numeric fence. One staged parse/validate/compile/select/plan pass retains
-  native failures and merged authored order privately without target execution, descriptor/path/query exposure.
+- current_julia_semantic_map: `.10.6.2.1` now exports opaque source-only `semantic_index` over copied valid
+  text/strict bytes, logical identity, four ceilings, tuple byte/scalar map, SHA-256, typed immutable source values,
+  exact identity/span/excerpt/occurrence accessors, detached JSON, redacted display, and explicit Bool fences. It
+  has no parser/compiler/path/record/query/execution route. `.2` will retain native failures, merged authored order,
+  entry, and generated plan privately; compiled/descriptor JSON cannot be used because both alias live vectors.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -48,13 +47,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
 - current_julia_split: `.10.6.2.1` source; `.2` outcome; `.3` closeout; `.10.6.3-.7` static through admission.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.2.0` changes docs/task/KM/book/Toolbox only. Julia 7,542/primary/105; Unicode 806/9/8/2;
-  semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,161;
-  mdBook/memory/four doctrines/diff; canonical Rust 1/1 in 78.27s + Dart 1/1 + primary 66x2 + Phase 0
-  1,031/629s; exact 1.28-GB cleanup preserving Pgen. No production/test/fixture/contract/API/format/ledger change.
+- current_signoff: `.2.1` passes focused 135, Julia 7,677/primary/105, 5x2x66, ten Unicode legs, all no-drift, KM
+  682/5,166, book/doctrines, canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and 1.56-GB cleanup.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.2.0` fully verified/synchronized/cleaned candidate awaiting commit.
+- blockers: none. in_flight_uncommitted: verified `.10.6.2.1` code/tests/docs await final fast checks, cleanup, and commit.

@@ -132,6 +132,13 @@ record/query/runtime/MCP behavior or governance change in planning. The frozen p
 7,542/primary/105 and every Unicode/semantic/capability/generated/public no-drift gate, Knowledge Map 682/5,161,
 mdBook/doctrines, canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/629s, and exact 1.28-GB cleanup;
 `.10.6.2.1` follows only after its clean commit.
+Source-only `.10.6.2.1` is a complete verified candidate from clean `daa04c26` and implements the exported opaque
+index and strict copied
+text/byte constructors, four ceilings, canonical immutable byte/scalar map, SHA-256 identity, typed detached
+identity/span/error values, and exact byte/scalar/excerpt/occurrence accessors without invoking the parser. Its 135
+focused assertions, Julia 7,677/primary/105, primary 5x2x66, all ten Unicode legs, no-drift ledgers, Knowledge Map
+682/5,166, book/doctrines, canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.56-GB
+cleanup pass. Outcome `.10.6.2.2` remains dependency-blocked until the clean source commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

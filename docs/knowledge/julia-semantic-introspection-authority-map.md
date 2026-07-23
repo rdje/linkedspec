@@ -23,6 +23,11 @@ answers:
   - "must Julia semantic raw query validation reject Bool as an integer"
   - "what are the Julia semantic introspection implementation leaves"
   - "what Julia semantic source and outcome API is frozen"
+  - "does Julia now implement semantic_index source construction"
+  - "which Julia semantic source accessors are public"
+  - "does Julia source-only semantic_index invoke the parser"
+  - "how does Julia semantic_index reject malformed UTF-8 before parsing"
+  - "what are the Julia SemanticSourceDetail enum values"
   - "does Julia compiled state JSON alias CompiledSpec"
   - "does Julia descriptor JSON alias CompiledSpec"
   - "can Julia semantic construction use descriptor JSON safely"
@@ -35,14 +40,14 @@ answers:
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
-reverify: "python3 tools/check_semantic_introspection_contract.py; rg -n 'semantic_index|semantic_query|SemanticIndex|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia; s=read(\"capability_conformance/semantic_introspection/calls_and_staging.spec\",String); x=parse_spec_with_staged_user_function_definitions(s); validate_spec(x); c=compile_spec(x;validate_source=false); println(c.definition_order); println([e.definition.name for e in c.function_registry.entries]); println([(r.label,r.family) for r in build_generated_rule_plan(c)]); d=to_descriptor_json(c); d[\"meta\"][\"compiled_rule_order\"][1]=\"mutated\"; println(c.compiled_rule_order)'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0-.10.6.2.1; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/test/semantic_index_source_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\")'; rg -n 'semantic_index|semantic_query|SemanticIndex|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
 ---
 
-Julia has no semantic-index implementation or partial public semantic vocabulary yet. Its exported API contains no
-`semantic_index`, `SemanticIndex`, `semantic_query`, `SemanticQuery`, capabilities type, or typed runtime semantic
-observation. The adapter must therefore be a new opaque native owner rather than a renamed descriptor or a query
-wrapper over public dictionaries.
+Julia now has the source-only semantic-index owner from `.10.6.2.1`, but still has no compiled outcome, semantic
+records, `semantic_query`, `SemanticQuery`, capabilities type, or typed runtime semantic observation. The exported
+`semantic_index` is an opaque native owner rather than a renamed descriptor or a query wrapper over public
+dictionaries.
 
 The reusable meaning is already present, but distributed across typed layers:
 
@@ -102,6 +107,21 @@ one `none`/`identity`/`span`/`text` `SemanticSourceDetail`, and an optional exac
 source values use zero-based half-open UTF-8 bytes and one-based line/Unicode-scalar columns; SHA-256 covers the
 canonical bytes and is disclosable only at `text`. Exact source identity/span/excerpt/occurrence accessors must apply
 the ceiling before returning a detached value and reject Boolean range arguments explicitly.
+
+Source leaf `.10.6.2.1` implements that exact half in `julia/src/semantic/SemanticIndex.jl`. The public enum values
+are `SemanticSourceNoneDetail`, `SemanticSourceIdentityDetail`, `SemanticSourceSpanDetail`, and
+`SemanticSourceTextDetail`; accessors are `source_identity`, `source_span_for_bytes`,
+`source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact`. The module includes this owner before
+the parser, its implementation contains no parser/compiler reference, and the 135-assertion source suite constructs
+deliberately invalid grammar successfully. Thus the source foundation does not invoke language parsing. Four malformed strings/byte
+shapes reject at `decode_source`, caller byte mutation cannot change retained text, private boundary vectors become
+tuples, the opaque owner suppresses normal property access, display is identity-redacted, and outward structs plus
+fresh JSON projections cannot alias private state.
+
+Committed-source signoff for this leaf is focused 135 and Julia 7,677/primary/105, shared primary 5x2x66, all ten
+self-hosted Unicode legs, unchanged Unicode 806/9/8/2 and semantic 6/20/81 at rollout 4/9 plus admission 3/6,
+Knowledge Map 682/5,166, and canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s. Compiled outcome
+state remains dependency-owned by `.10.6.2.2` and is not implied by the source-only API.
 
 The outcome half follows only after that source owner is stable. It calls the staged user-function-aware parser,
 validator, compiler with duplicate validation disabled, entry selector, and shared generated-v2 plan builder once.

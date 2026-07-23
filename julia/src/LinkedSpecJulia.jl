@@ -1,5 +1,7 @@
 module LinkedSpecJulia
 
+import SHA
+
 export backend_name,
     backend_status,
     cli_entrypoint,
@@ -199,6 +201,16 @@ export backend_name,
     SpecPortableDiagnostic,
     SpecValidationException,
     SpecFile,
+    SemanticIndex,
+    SemanticIndexError,
+    SemanticIndexOptions,
+    SemanticSourceDetail,
+    SemanticSourceNoneDetail,
+    SemanticSourceIdentityDetail,
+    SemanticSourceSpanDetail,
+    SemanticSourceTextDetail,
+    SemanticSourceIdentity,
+    SemanticSourceSpan,
     SpecLoadOptions,
     SpecPipelineCode,
     SpecPipelineException,
@@ -317,6 +329,12 @@ export backend_name,
     rule_family,
     resolve_spec,
     resolve_user_function_call,
+    semantic_index,
+    source_identity,
+    source_span_for_bytes,
+    source_span_for_scalars,
+    source_excerpt_for_bytes,
+    locate_exact,
     runtime_match,
     runtime_execute,
     runtime_execute_with_trace,
@@ -378,6 +396,7 @@ include("trace/Trace.jl")
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("spec/UnicodeRuleLabel.jl")
+include("semantic/SemanticIndex.jl")
 include("action/ActionAst.jl")
 include("action/ActionParser.jl")
 include("action/FunctionRegistry.jl")

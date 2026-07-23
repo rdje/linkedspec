@@ -48,6 +48,54 @@ accepted explicit-repetition hit, preserves lifecycle whole-rule returns and
 scalar pipe, and retains generated-source v2. The exact recurring proof is
 `tools/check_repeated_action_result_five_backend.sh`.
 
+## Source-only semantic index
+
+Julia now exposes the first semantic-introspection foundation layer. `semantic_index` accepts either copied valid
+`AbstractString` input or copied strict `AbstractVector{UInt8}` input; it does not accept a path and does not call
+the LinkedSpec parser in this source-only stage. The required caller policy is a nonempty control-free logical
+name, one source-detail ceiling, and an optional exact Unicode-17 rule selector:
+
+```julia
+using LinkedSpecJulia
+
+index = semantic_index(
+    "A😀\r\né\u0301Z";
+    logical_name = "example.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+    entry_rule = "Top",
+)
+
+identity = source_identity(index)
+@assert identity.source_id == "source:0"
+@assert identity.byte_length == 12
+@assert identity.scalar_length == 7
+@assert startswith(identity.content_digest, "sha256:")
+
+emoji = source_span_for_bytes(index, 1, 5)
+@assert emoji == SemanticSourceSpan(1, 5, 1, 2, 1, 3)
+@assert source_excerpt_for_bytes(index, 1, 5) == "😀"
+@assert locate_exact(index, "é\u0301") == SemanticSourceSpan(7, 11, 2, 1, 2, 3)
+```
+
+The public ceilings are `SemanticSourceNoneDetail`, `SemanticSourceIdentityDetail`,
+`SemanticSourceSpanDetail`, and `SemanticSourceTextDetail`. Identity is caller-owned and never inferred from a
+host path. Content SHA-256 is disclosed only at `text`; spans require `span`; excerpts require `text`. Byte ranges
+are zero-based, half-open, and must land on strict UTF-8 scalar boundaries. Line and Unicode-scalar columns are
+one-based; `\r\n` advances to the next line only at `\n`, and combining characters each occupy one scalar column.
+`source_span_for_scalars` uses zero-based half-open scalar ranges. `locate_exact` finds the first exact occurrence
+at or after an exact `after_byte` boundary.
+
+`SemanticIndexError` reports stable `stage`, `code`, `message`, and immutable sorted field pairs. Malformed Julia
+strings and malformed bytes reject before character iteration; invalid options reject before source handling;
+mid-scalar, out-of-range, non-integer, and Boolean coordinates reject as typed source-map failures. The index's
+normal display omits the logical name, source text, digest, selector, and private map. Returned structs are
+immutable, and each `to_json` call creates detached mutable JSON state. Compilation outcomes, records, query, and
+runtime observation are intentionally absent until their dependency-ordered semantic leaves land.
+
+The source-only contract is verified by 135 focused assertions and complete Julia 7,677 package assertions,
+primary process conformance, corpus 105/105, the shared five-backend 5x2x66 primary matrix, and all ten self-hosted
+Unicode manifest legs. Compiled-or-failed semantic outcomes remain the next separate dependency leaf.
+
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement
 was 1/2, descriptors carried global mode, and generated source was v1/format 1. Normalization `.1`, intrinsic normal

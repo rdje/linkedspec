@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.1` — make the first Julia semantic owner genuinely source-only):
+  `julia/src/semantic/SemanticIndex.jl` is included before the language parser and contains no parser/compiler
+  reference. Construction validates/copies options and either valid `AbstractString` or strict
+  `AbstractVector{UInt8}` input, then builds only SHA-256 plus byte/line/scalar-column boundaries. A deliberately
+  invalid grammar constructs successfully, while four malformed string/byte shapes fail at `decode_source`.
+  This keeps `.10.6.2.2` free to add compiled-or-failed outcomes without retroactively redefining decode privacy.
+
+  Julia's ordinary immutable struct does not make contained vectors immutable. The private map therefore converts
+  every boundary vector to a tuple after construction, the index suppresses ordinary property access and its public
+  constructor, and normal display prints only `source:0`, ceiling, and `source_only=true`. Returned identity/span/
+  error structs contain immutable values; every `to_json` call allocates a fresh map. Caller byte views are copied,
+  and logical name/entry selector are copied only after validity checks, so malformed strings are never iterated.
+
+  Byte access is exact rather than forgiving: zero-based half-open endpoints must both be scalar boundaries;
+  scalar ranges are likewise half-open; line/column boundaries are one-based and count Unicode scalars, including
+  carriage returns and combining marks, while newline alone advances the line. All coordinate entrypoints accept
+  general integers only to produce stable typed failures, then explicitly reject `Bool` before `Int` conversion.
+  The four ceiling values are host-distinct from `SemanticSourceIdentity`/`SemanticSourceSpan` by their `Detail`
+  suffixes, avoiding Julia global-name collisions without changing the neutral `none`/`identity`/`span`/`text`
+  vocabulary.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.0` — Julia projections must detach before they become semantic
   authority): Direct probes found a sharper boundary than ordinary mutable-container caution. Both
   `to_json(compiled)["definition_order"]` and descriptor `meta.compiled_rule_order` expose the exact live vectors;

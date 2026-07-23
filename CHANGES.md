@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.1 — add Julia semantic source map
+
+Added Julia's first public semantic-introspection owner as a deliberately source-only opaque `SemanticIndex`.
+`semantic_index` copies either valid `AbstractString` input or strict `AbstractVector{UInt8}` input, validates a
+nonempty control-free caller logical name and optional exact Unicode-17 rule selector, builds one private immutable
+UTF-8 byte/line/Unicode-scalar boundary map, and records SHA-256 over the canonical bytes. Four explicit ceilings
+govern typed detached identity, byte/scalar spans, exact excerpts, and ordered occurrence lookup; content digest is
+disclosed only at `text`. The module is included before Julia's language parser and contains no parser/compiler,
+path, descriptor, record/query, trace, observer, or execution route.
+
+The new 135-assertion suite locks ASCII and multibyte text, supplementary scalars, combining marks, CRLF, EOF,
+duplicate occurrences, decoded/byte/subview copying, exact digest, all ceilings, malformed Julia text and four
+malformed UTF-8 byte shapes, invalid options/selectors/ranges/needles, mid-scalar boundaries, overflowing/noninteger/
+Boolean coordinates, opaque construction/property/display privacy, and detached JSON mutation. Deliberately invalid
+grammar constructs successfully, proving language parsing is absent. The SHA stdlib is now a direct Julia package
+dependency; Pkg's own manifest writer synchronized project hash `7f888597c389b695114f2f74c96c786fd06e5168`, and
+the manifest is current.
+
+Focused 135 and complete Julia 7,677 package assertions, primary conformance, corpus 105/105, the full five-backend
+matrix at 5x2x66, and all ten Unicode-manifest legs pass. Unicode remains 806/9/8/2; semantic governance remains
+6/20/81 at rollout 4/9 and admission 3/6; capability/generated/public remain 80/0/0, v1/10/80-0-0, and 59/27/0.
+Knowledge Map 682/5,166, mdBook, memory architecture, all four doctrines, and diff hygiene pass. Canonical local CI
+passes Rust admission 1/1 in 78.39 seconds, Dart admission 1/1, primary 66/66 in both environments, and Phase 0
+1,031/1,031 in 630 seconds. Cleanup removes the regenerated 12-MB book, 826-MB Rust deps, 595-MB incremental state,
+130-MB temporary Julia compiled cache, and 28-KB Python cache—about 1.56 GB—while preserving Pgen artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.0 — freeze Julia semantic foundation
 
 Froze Julia's behavior-free semantic source/outcome contract before implementation. Toolbox-first probes establish

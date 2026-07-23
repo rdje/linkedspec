@@ -920,17 +920,59 @@ passes Rust admission 1/1 in 78.46 seconds, Dart 1/1, primary 66x2, and Phase 0 
 cleanup reclaims about 1.57 GB while preserving Pgen. Parent `.10.6.1` closes and behavior-free `.10.6.2.0`
 follows after the clean commit. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
 
-### Frozen Julia source/outcome boundary
+### Julia source foundation and frozen outcome boundary
 
-Planning leaf `.10.6.2.0` is complete without implementing this API. It freezes the first Julia surface as
-`semantic_index(source, options)`, with a keyword convenience form, over copied valid `AbstractString` or strict
-`AbstractVector{UInt8}` input. `SemanticIndexOptions` requires a nonempty control-free caller logical name, one
-`SemanticSourceDetail` ceiling (`none`, `identity`, `span`, or `text`), and an optional exact Unicode-17 rule
-selector. `SemanticIndexError`, `SemanticSourceIdentity`, and `SemanticSourceSpan` are typed public values. Exact
-source accessors will map zero-based half-open UTF-8 bytes to one-based line and Unicode-scalar columns, return
-excerpts and ordered exact occurrences only when the ceiling permits, and expose a canonical-byte SHA-256 digest
-only at `text`. Numeric inputs must reject `Bool` explicitly before accepting `Integer` because Julia makes
-`Bool <: Integer`.
+Planning leaf `.10.6.2.0` froze the boundary; source-only leaf `.10.6.2.1` now implements its first public half.
+`semantic_index(source, options)`, plus the keyword convenience form, accepts copied valid `AbstractString` or
+strict `AbstractVector{UInt8}` input. `SemanticIndexOptions` requires a nonempty control-free caller logical name,
+one `SemanticSourceDetail` ceiling, and an optional exact Unicode-17 rule selector. The exported ceiling values are
+`SemanticSourceNoneDetail`, `SemanticSourceIdentityDetail`, `SemanticSourceSpanDetail`, and
+`SemanticSourceTextDetail`.
+
+```julia
+using LinkedSpecJulia
+
+index = semantic_index(
+    "A😀\r\né\u0301Z";
+    logical_name = "example.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+    entry_rule = "Top",
+)
+
+identity = source_identity(index)
+@assert identity.byte_length == 12
+@assert identity.scalar_length == 7
+@assert startswith(identity.content_digest, "sha256:")
+
+@assert source_span_for_bytes(index, 1, 5) ==
+    SemanticSourceSpan(1, 5, 1, 2, 1, 3)
+@assert source_span_for_scalars(index, 1, 2) ==
+    SemanticSourceSpan(1, 5, 1, 2, 1, 3)
+@assert source_excerpt_for_bytes(index, 1, 5) == "😀"
+@assert locate_exact(index, "é\u0301") ==
+    SemanticSourceSpan(7, 11, 2, 1, 2, 3)
+```
+
+`SemanticIndexError`, `SemanticSourceIdentity`, and `SemanticSourceSpan` are typed public values. Source accessors
+map zero-based half-open UTF-8 bytes to one-based line and Unicode-scalar columns, return excerpts and ordered exact
+occurrences only when the ceiling permits, and disclose canonical-byte SHA-256 only at `text`. Numeric inputs
+reject `Bool` explicitly before accepting `Integer` because Julia makes `Bool <: Integer`. `\r\n` changes line at
+the newline; carriage return and combining characters each advance one scalar column.
+
+This layer is deliberately source-only. It validates options, copies and strictly validates input, hashes it, and
+builds the private immutable boundary tables without calling a LinkedSpec parser. Deliberately malformed grammar
+therefore still constructs an index, while malformed Julia strings or UTF-8 bytes reject at `decode_source` before
+character iteration. The opaque constructor and normal display expose no source buffer, private map, path, logical
+name, digest, or selector. Public structs are immutable; every `to_json` result is a detached fresh map.
+
+Source signoff passes 135 focused assertions and complete Julia 7,677 package assertions plus primary process and
+corpus 105/105. The shared primary matrix passes 5 backends x 2 environments x 66 cases, and the self-hosted Unicode
+manifest passes all ten 1/1 legs. Unicode stays 806/9/8/2; semantic governance stays 6 groups / 20 queries / 81
+mutations at rollout 4/9 and native admission 3/6; capability/generated/public stay 80/0/0, v1/10/80-0-0, and
+59/27/0. Knowledge Map 682/5,166, mdBook, memory, doctrines, and canonical CI pass; canonical proof includes Rust
+admission 1/1 in 78.39 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds. Exact safe cleanup
+reclaims about 1.56 GB while preserving Pgen artifacts. Compiled outcome construction remains exclusively the next
+dependency leaf.
 
 The second half will expose detached `SemanticSnapshot`, `SemanticCompilationAuthority`,
 `SemanticCompilationDiagnostic`, `SemanticEntrySelection`, and `SemanticGeneratedPlanInput` values without
@@ -940,7 +982,8 @@ implementation source. This detachment is a correctness requirement: the audit p
 Mutating either returned JSON array changes `CompiledSpec`; neither JSON projection can be used as the semantic
 foundation.
 
-Construction will run the existing staged user-function-aware parser, validator, compiler, entry selector, and
+Outcome leaf `.10.6.2.2` will extend construction through the existing staged user-function-aware parser,
+validator, compiler, entry selector, and
 shared generated-v2 plan builder exactly once. The calls fixture proves why authored order needs an adapter:
 function `normalize` is first in source, but compiled definition order contains only rules `Top` and `Done`.
 `failed.spec` retains its native `bare_edge_target_undefined` / `normalize_edges` diagnostic with `Top` and
@@ -963,7 +1006,8 @@ Implementation is omission-safe and dependency ordered:
 3. `.10.6.2.3` recomposes both suites, complete Julia and canonical gates, no-drift ledgers, cleanup, and parent
    closure before static projection begins.
 
-Until `.10.6.2.1-.2` land, these names describe the frozen contract, not callable Julia API.
+The source names above are callable now. Until `.10.6.2.2` lands, the outcome names describe the frozen contract,
+not callable Julia API.
 The planning proof leaves Julia 7,542/primary/105 and all Unicode/semantic/capability/generated/public ledgers
 unchanged. Knowledge Map 682/5,161, mdBook/doctrines, canonical Rust admission 1/1 in 78.27 seconds, Dart 1/1,
 primary 66x2, Phase 0 1,031/1,031 in 629 seconds, and exact 1.28-GB generated cleanup all pass.
@@ -1338,7 +1382,8 @@ The dependency order is:
 | `.10.6.1.3` | Julia exhaustive negative rejection and unrelated-grammar isolation | complete; 1,946 new assertions, focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, canonical signoff, and cleanup without production change |
 | `.10.6.1.4` | Julia composed Unicode-label closeout | complete; committed focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, no-drift, canonical signoff, and cleanup without promotion |
 | `.10.6.2.0` | Julia source/outcome contract and dependency split | complete; behavior-free exact API/privacy/no-execution boundary, canonical proof, and cleanup |
-| `.10.6.2.1-.10.6.2.3` | Julia strict source map, compiled outcome, and foundation closeout | pending |
+| `.10.6.2.1` | Julia strict copied input and private source map | complete; 135 focused, Julia 7,677/primary/105, 5x2x66 plus ten Unicode legs, canonical signoff, and cleanup |
+| `.10.6.2.2-.10.6.2.3` | Julia compiled outcome and foundation closeout | pending |
 | `.10.6.3-.10.6.7` | Julia static projection through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

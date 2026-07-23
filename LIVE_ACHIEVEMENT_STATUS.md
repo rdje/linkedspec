@@ -8,26 +8,34 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Behavior-free Julia semantic source/outcome plan `FUTURE-PARITY-BACKLOG.10.6.2.0` is a complete verified
-  candidate from clean Unicode closeout `70565d04`. Toolbox-first probes freeze strict copied string/byte input,
-  four source ceilings, logical identity, exact byte/scalar coordinates, detached typed values, native failure
-  outcomes, merged function/rule authored order, selection and generated-plan authority, fatal-exception handling,
-  and no-path/no-execution boundaries. Existing compiled JSON and descriptor projections alias live vectors, so
-  neither can provide foundation authority or cloning.
+- Julia source-only semantic foundation `FUTURE-PARITY-BACKLOG.10.6.2.1` is a complete verified commit candidate
+  from clean plan commit `daa04c26`. The new opaque `SemanticIndex` copies valid text or strict bytes, validates
+  logical identity and the optional Unicode-17 selector, builds private immutable byte/line/scalar boundaries and
+  SHA-256, and exposes only ceiling-checked detached source values/accessors. It has no parser/compiler/path/query/
+  execution route. Compiled outcome `.10.6.2.2` remains blocked until the clean commit.
 
-The slice changes documentation/task/Knowledge Map/Toolbox/book material only. Complete Julia remains
-7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at rollout 4/9 and admission 3/6; capability/generated/
-public 80/0/0 + v1/10/80-0-0 + 59/27/0. Knowledge Map 682/5,161, mdBook, memory, all four doctrines, and diff
-hygiene pass. Canonical local CI passes Rust semantic admission 1/1 in 78.27s, Dart admission 1/1, primary 66x2,
-and Phase 0 1,031/629s. Exact 1.28-GB generated cleanup preserves Pgen. Only the clean commit remains before
-source-only implementation `.10.6.2.1` may activate.
+Focused 135, Julia 7,677/primary/105, primary 5x2x66, all ten Unicode legs, exact no-drift ledgers, Knowledge Map
+682/5,166, mdBook/memory/four doctrines/diff, canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0
+1,031/630s, and exact 1.56-GB safe cleanup pass. Only final fast rechecks and the per-slice commit remain.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.1 — add Julia semantic source map**
+  (DONE candidate from clean base `daa04c26`; awaiting this commit).
+
+  **Result:** Julia now owns strict copied text/bytes, an opaque immutable canonical source map, SHA-256, four
+  ceilings, typed detached errors/values, and exact byte/scalar/excerpt/occurrence accessors without parsing.
+
+  **Proof:** Focused 135; Julia 7,677/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode
+  806/9/8/2 and semantic 6/20/81 at 4/9 + 3/6; KM 682/5,166; canonical Rust 78.39s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/630s; exact 1.56-GB cleanup preserving Pgen.
+
+  **Next:** after the clean commit, implement only the private compiled-or-failed outcome in `.10.6.2.2`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.0 — freeze Julia semantic foundation**
-  (DONE candidate from clean base `70565d04`; awaiting this commit).
+  (DONE at clean commit `daa04c26` from base `70565d04`).
 
   **Result:** The exact Julia native source/outcome surface, privacy/no-execution boundary, detached-value rule,
   and `.1-.3` dependency split are frozen without behavior or semantic-ledger change.
@@ -36,7 +44,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,161; canonical Rust 78.27s + Dart
   1/1 + primary 66x2 + Phase 0 1,031/629s; exact 1.28-GB cleanup preserving Pgen.
 
-  **Next:** after the clean commit, implement only strict copied input and the private source map in `.10.6.2.1`.
+  **Next:** implemented and verified in `.10.6.2.1`; compiled outcomes remain `.10.6.2.2`.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.4 — close Julia Unicode labels**
   (DONE in this commit from clean base `0ce5505f`).

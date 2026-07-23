@@ -917,6 +917,14 @@ content migration exists yet.
   closeout `.3`; records/query/runtime/MCP and semantic promotion remain later work. Unchanged Julia
   7,542/primary/105, all no-drift contracts, Knowledge Map 682/5,161, mdBook/doctrines, canonical Rust 78.27s +
   Dart 1/1 + primary 66x2 + Phase 0 1,031/629s, and exact 1.28-GB cleanup close the plan proof.
+  Source-only `.10.6.2.1` now exports the opaque `SemanticIndex`, required typed options/errors/source values,
+  four ceiling values, and exact identity/byte-span/scalar-span/excerpt/occurrence accessors. It copies valid text
+  or strict bytes before building immutable boundary tables and SHA-256 identity; malformed text, options,
+  selectors, ranges, mid-scalar offsets, and Boolean coordinates fail with typed errors before language parsing.
+  Focused 135, complete Julia 7,677/primary/105, primary 5x2x66, and all ten Unicode-manifest legs pass. Every
+  no-drift ledger stays fixed; Knowledge Map 682/5,166, book/doctrines, canonical Rust 78.39s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/630s, and exact 1.56-GB cleanup complete the source proof. Compiled outcomes remain
+  exclusively `.10.6.2.2` and follow only after the clean source commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

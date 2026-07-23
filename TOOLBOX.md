@@ -72,6 +72,7 @@ check, not proof that the cited commands were run.
 | "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
 | "Did the neutral semantic introspection schema/query answers drift?" | [§4.9 semantic introspection contract](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Did Perl semantic-index source normalization, projections, privacy, paging, budgets, or queries drift?" | [§4.9 Perl semantic tests](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
+| "Did Julia semantic-index strict input, source coordinates, ceilings, or privacy drift?" | [§4.9 Julia source foundation](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -480,6 +481,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   compiled-or-failed outcome and generated-v2 plan `.10.6.2.2`, then composed no-path/no-target-execution signoff
   `.10.6.2.3`. Fence `Bool` before any `Integer` acceptance. See
   [[julia-semantic-introspection-authority-map]].
+- **JULIA SOURCE FOUNDATION:** `.10.6.2.1` implements only copied valid `AbstractString` / strict
+  `AbstractVector{UInt8}` input, the private canonical byte/scalar map, SHA-256 identity, four ceilings, typed
+  errors/values, exact span/excerpt/occurrence accessors, and redacted opaque display. Run:
+  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e
+  'using LinkedSpecJulia,Test; include("julia/test/semantic_index_source_foundation_test.jl")'`. Its 135 assertions
+  cover ASCII, supplementary/combining text, CRLF/EOF, duplicates, caller mutation, malformed strings/bytes,
+  invalid names/selectors/ceilings/ranges/needles, mid-scalar coordinates, explicit `Bool` rejection, ceiling
+  denial, detached JSON, constructor opacity, and display/privacy. Deliberately invalid grammar must still construct:
+  this leaf contains no parser/compiler call. Use `source_identity`, `source_span_for_bytes`,
+  `source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact`; do not inspect private fields or infer
+  filesystem identity. Compiled outcomes remain solely `.10.6.2.2`.
 
 ---
 
