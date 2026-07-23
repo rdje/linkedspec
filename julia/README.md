@@ -126,7 +126,10 @@ admission in 80.84 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/
 record construction has since reached exact private 22/25 parity. Its six semantic suites pass 530 assertions;
 complete Julia passes 8,072 package assertions, primary process conformance, and corpus 105/105. The shared
 5x2x66 primary matrix, all ten Unicode legs, unchanged governance, and canonical Rust 76.95s + Dart 1/1 + primary
-66x2 + Phase 0 1,031/622s pass. Query and runtime observation remain later work.
+66x2 + Phase 0 1,031/622s pass. No-change closeout `.10.6.4.3` recomposes the six committed semantic suites at
+focused 530 and passes the same complete Julia/matrix/Unicode/governance boundary plus canonical Rust 77.68s,
+Dart 1/1, primary 66x2, and Phase 0 1,031/622s. The private calls/staging/generated parent is composition-closed;
+query and runtime observation remain later work.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement

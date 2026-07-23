@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Julia typed core `.10.6.4.1` committed cleanly at `9ec3f034`; exact staged/
-  generated completion `.10.6.4.2` is a verified candidate and no-change closeout `.3` follows after commit)
+- Last updated: `2026-07-23` (Julia exact private calls/staging/generated parent `.10.6.4` is composition-closed;
+  no-change closeout `.10.6.4.3` is a complete verified candidate from clean implementation commit `cc229cc5`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9904,8 +9904,8 @@ before implementation.
       hand off `.10.6.4.0`, commit, clear the brief, and verify a clean tree before activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.4`
-  Status: `active` (2026-07-22; exact private typed core `.10.6.4.1` is cleanly committed at `9ec3f034` and
-    staged/generated completion `.10.6.4.2` is a complete verified candidate; no-change closeout `.3` follows)
+  Status: `done` (2026-07-23; exact private typed core `.1`, staged/generated completion `.2`, and committed-proof
+    composition closeout `.3` pass through the verified closeout candidate from clean `cc229cc5`)
   Goal: Project exact Julia functions, helpers, calls, bindings, staged provenance, and generated plan.
   Children: `.10.6.4.0`, `.10.6.4.1`, `.10.6.4.2`, `.10.6.4.3`
   Depends on: `.10.6.3`
@@ -10094,7 +10094,7 @@ before implementation.
     `FUTURE-PARITY-BACKLOG.10.6.4.1 - add Julia typed call core`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.4.2`
-    Status: `done` (2026-07-22; complete exact private 22/25 candidate verified from clean `9ec3f034`)
+    Status: `done` (2026-07-22; complete exact private 22/25 committed cleanly at `cc229cc5`)
     Goal: Complete Julia staged payload/job/result and generated-plan semantic provenance.
     Depends on: `.10.6.4.1`
     Acceptance: Add distinct staged artifact records/relations from typed sidecars and one selected generated-v2
@@ -10152,11 +10152,52 @@ before implementation.
     `FUTURE-PARITY-BACKLOG.10.6.4.2 - complete Julia call provenance`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.4.3`
-    Status: `pending`
+    Status: `done` (2026-07-23; complete verified no-change closeout candidate from clean `cc229cc5`)
     Goal: Compose and close exact Julia calls/staging/generated projection.
     Depends on: `.10.6.4.2`
     Acceptance: Re-run exact target, Unicode/interleaved-function/source-evidence, resolution/shape, isolation,
       complete Julia/canonical/docs/KM/cleanup proof; close `.10.6.4` without public query or promotion.
+    Verification plan: Change no production, test, fixture, contract, public API, or generated format. Recompose the
+      six committed Julia semantic source/outcome/static/core/staged suites as one exact 530-assertion topology;
+      reconfirm the complete 22/25/10 calls target, Unicode/duplicate/regex-safe source correlation, resolution/
+      signatures/shapes, staged sidecar and selected-plan rejection, recursive immutability, detached/plain copies,
+      private omission, and host/path/no-execution fences. Then run complete Julia/primary/105, both five-backend
+      primary matrices, all ten Unicode legs, every no-drift ledger, canonical local CI, mdBook, Knowledge Map,
+      memory/task/doctrines/diff, exact safe cleanup, close parent `.10.6.4`, and commit before `.10.6.5.0`.
+
+    #### Acceptance Checklist
+
+    - [x] **COMMITTED RECOMPOSITION** — Run the six committed Julia semantic suites together at exact focused 530;
+      do not add replacement projection code or tests in this closeout.
+    - [x] **EXACT COMPLETE TARGET** — Reconfirm all 22 records / 25 relations / 10 source references, staged and
+      generated ids/facts/directions, authored order/source, resolution, signatures, shapes, and decisions.
+    - [x] **ISOLATION / PUBLIC FENCE** — Reconfirm sidecar/plan corruption rejection, recursive freeze, detached
+      plain copies, private API omission, and path/AST/IR/compiler/emitter/executor/trace/sink/observer denial.
+    - [x] **NO REGRESSION / NO PROMOTION** — Pass complete Julia/primary/105, both matrices, ten Unicode legs, and
+      all Unicode/semantic/capability/generated/public ledgers without API, format, rollout, or admission change.
+    - [x] **LOCKSTEP / PARENT CLOSURE** — Pass canonical/docs/KM/memory/task/doctrines/diff/cleanup, close `.10.6.4`,
+      hand off query audit `.10.6.5.0`, commit, clear the brief, and verify clean before activation.
+
+    #### Verification Result (2026-07-23)
+
+    PASS from clean staged/generated implementation commit `cc229cc5`. The six already-committed Julia semantic
+    suites compose at exact focused 530 without a replacement projector, test, fixture, contract, public API, or
+    generated-format change. The composition reconfirms exact 22 records / 25 relations / 10 source references;
+    Unicode/interleaved authored order and source correlation; nested/duplicate/regex-safe call identity;
+    user-before-helper resolution, fixed/rest signatures, conservative shapes, and binding/decision directions;
+    all staged payload/job/result and selected-plan provenance; sidecar/plan rejection; recursive freeze, detached
+    plain copies, private omission, and host/path/AST/IR/emitter/executor/trace/sink/observer denial.
+
+    Complete Julia passes 8,072 package assertions, primary process conformance, and corpus 105/105. The complete
+    five-backend primary matrix passes 5 x 2 x 66 and all ten Unicode-manifest legs pass. Governance remains exact
+    at Unicode 806/9/8/2, semantic 6/20/81 with rollout 4/9 and native admission 3/6, capability 80/0/0, generated
+    v1/10/80-0-0, and public 59/27/0. Canonical local CI passes every doctrine and portable contract, Rust semantic
+    admission 1/1 in 77.68 seconds, Dart admission 1/1, reference primary 66/66 twice, and Phase 0 1,031/1,031 in
+    622 seconds. mdBook, Knowledge Map 686/5,265, memory/task metadata, markers, diff hygiene, and exact
+    1,504,516-KiB safe generated-artifact cleanup pass while preserving all 517 Pgen issue artifacts. Parent
+    `.10.6.4` is composition-closed without public query, runtime observation, generated-format, rollout, or
+    native-admission movement. Query
+    authority audit `.10.6.5.0` is the next dependency-eligible leaf after the closeout commit is clean.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.5`
   Status: `pending`
@@ -12604,11 +12645,14 @@ including Unicode-safe authored order/source, nested-call
 identity, user/helper resolution, signatures, conservative shapes, binding relations, recursive freeze, detached
 copies, and private/host/no-execution fences. New 79/focused 468, Julia 8,010/primary/105, primary 5x2x66, ten
 Unicode legs, unchanged ledgers, and canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass.
-Staged/generated `.10.6.4.2` is now a complete verified candidate from that clean implementation commit. Native
+Staged/generated `.10.6.4.2` is committed cleanly at `cc229cc5` from that implementation commit. Native
 sidecars and the retained selected generated-v2 row add exactly +4/+9 to reach full private 22/25/10 parity;
 new 62/focused 530, Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, and canonical
-Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. No-change closeout `.10.6.4.3` follows only
-after the staged/generated commit is clean.
+Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. No-change closeout `.10.6.4.3` now recomposes
+those six committed semantic suites at focused 530, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode
+legs, unchanged ledgers, and canonical Rust 77.68s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s without
+replacement code or promotion. Parent `.10.6.4` is composition-closed; query audit `.10.6.5.0` follows only after
+the closeout commit is clean.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -13101,11 +13145,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.3.1 | `FUTURE-PARITY-BACKLOG.10.6.3.1` | `done` | Private recursively immutable Julia graph/source/evidence projection deep-equals exact 12-record/14-relation neutral graph. |
 | 74.5.3.2 | `FUTURE-PARITY-BACKLOG.10.6.3.2` | `done` | Exact privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle/clone/host-isolation proof passes without promotion. |
 | 74.5.3.3 | `FUTURE-PARITY-BACKLOG.10.6.3.3` | `done` | Committed focused 389 plus complete matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.3` without replacement code or promotion. |
-| 74.5.4 | `FUTURE-PARITY-BACKLOG.10.6.4` | `active` | Project exact private Julia functions/calls/bindings/staged/generated meaning without query, observation, or promotion. |
+| 74.5.4 | `FUTURE-PARITY-BACKLOG.10.6.4` | `done` | Exact private Julia functions/calls/bindings/staged/generated meaning is composition-closed without query, observation, or promotion. |
 | 74.5.4.0 | `FUTURE-PARITY-BACKLOG.10.6.4.0` | `done` | Exact 22/25 authorities, source correlation, resolution/shapes, privacy/host fences, and `.1-.3` proof split are frozen and verified before code. |
 | 74.5.4.1 | `FUTURE-PARITY-BACKLOG.10.6.4.1` | `done` | Exact private 18/16 typed function/helper/call/binding projection is committed cleanly at `9ec3f034`. |
-| 74.5.4.2 | `FUTURE-PARITY-BACKLOG.10.6.4.2` | `done` | Exact private 22/25 staged payload/job/result and selected generated-plan provenance is complete and verified from `9ec3f034`. |
-| 74.5.4.3 | `FUTURE-PARITY-BACKLOG.10.6.4.3` | `pending` | Recompose and close exact Julia calls/staging/generated projection without promotion. |
+| 74.5.4.2 | `FUTURE-PARITY-BACKLOG.10.6.4.2` | `done` | Exact private 22/25 staged payload/job/result and selected generated-plan provenance is committed cleanly at `cc229cc5`. |
+| 74.5.4.3 | `FUTURE-PARITY-BACKLOG.10.6.4.3` | `done` | Committed focused 530 plus complete matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.4` without replacement code or promotion. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -13781,6 +13825,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.4.3` | Six committed Julia semantic suites at focused 530; exact 22/25/10 calls/staging/generated target; authored Unicode/source/call/resolution/signature/shape/provenance directions; sidecar/plan rejection; immutable/detached/private/host/no-execution fences; Julia 8,072/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 686/5,265/memory/task/four doctrines/diff; canonical Rust 77.68s, Dart 1/1, primary 66x2, Phase 0 1,031/622s; exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts. | PASS. Committed private Julia call provenance composes without replacement production/test code, public query, runtime observation, format, rollout, or admission movement; parent `.10.6.4` closes and `.10.6.5.0` becomes next after the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.4.2` | Native staged payload/job/body-result correlation; retained generated-v2 contract/format/logical identity/full-order/unique-selection validation; exact full 22 records / 25 relations / 10 source refs; all nine staged/generated provenance ids and directions; corrupt sidecar/plan rejection; immutable/detached/private/host/no-execution fences; new 62/focused 530; Julia 8,072/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 686/5,265/memory/task/four doctrines/diff; canonical Rust 76.95s, Dart 1/1, primary 66x2, Phase 0 1,031/622s; exact 1,504,508-KiB safe cleanup preserving 517 Pgen artifacts. | PASS. Julia privately retains complete staged/generated call provenance without native sidecar/body-AST/generated-implementation leakage, public query, target execution, observation, format, rollout, or admission movement; `.10.6.4.3` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.4.1` | Private typed registry/function/edge Action-AST projection; exact non-staged 18 records / 16 relations / 10 source refs; staged-result equality/contracts; authored order; nested duplicate and regex-literal-safe source identity; user-before-helper resolution; fixed/rest signatures; conservative shapes; binding/decision/explanation relations; immutable/detached/private/host/no-execution fences; new 79/focused 468; Julia 8,010/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 685/5,252/memory/task/four doctrines/diff; canonical Rust 77.41s, Dart 1/1, primary 66x2, Phase 0 1,031/622s; exact 1,618,660-KiB safe cleanup preserving 517 Pgen artifacts. | PASS. Julia privately retains the exact typed call/binding core without staged/generated records, public query, target execution, observation, format, rollout, or admission movement; `.10.6.4.2` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.4.0` | Behavior-free exact 22-record/25-relation authority and `.1-.3` split; typed registry/Action AST/contracts, staged equality/normalization, source correlation including interleaved Unicode, conservative shapes, selected generated plan, privacy/host/no-execution fences; committed focused 389; Julia 7,931/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 684/5,231/memory/task/four doctrines/diff; canonical Rust 77.84s, Dart 1/1, primary 66x2, Phase 0 1,031/625s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. Every calls/staging/generated authority, normalization, omission, and dependency is frozen before code; no production/test/fixture/API/query/format/trace/observation/ledger behavior changes, and typed core `.10.6.4.1` waits for the clean plan commit. |
@@ -14024,6 +14069,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.4.3` | `FUTURE-PARITY-BACKLOG.10.6.4.3 - close Julia call projection` | No-change committed focused 530, Julia 8,072/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM/doctrines, canonical Rust 77.68s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, and exact 1,504,516-KiB cleanup; closes `.10.6.4` before query audit. |
 | `FUTURE-PARITY-BACKLOG.10.6.4.2` | `FUTURE-PARITY-BACKLOG.10.6.4.2 - complete Julia call provenance` | Exact private staged payload/job/result plus selected generated-v2 handler-plan provenance at full 22/25; new 62/focused 530, Julia 8,072/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no promotion before closeout `.3`. |
 | `FUTURE-PARITY-BACKLOG.10.6.4.1` | `FUTURE-PARITY-BACKLOG.10.6.4.1 - add Julia typed call core` | Exact private non-staged 18/16 functions/helpers/calls/binding/decision/explanations, Unicode/regex-safe source correlation, fixed/rest signatures, conservative shapes, isolation; new 79/focused 468, Julia 8,010/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM/doctrines, canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, and safe cleanup before staged/generated `.2`. |
 | `FUTURE-PARITY-BACKLOG.10.6.4.0` | `FUTURE-PARITY-BACKLOG.10.6.4.0 - freeze Julia call projection` | Behavior-free exact 22/25 authority/source/resolution/shape/staging/generated/privacy plan; focused 389, Julia 7,931/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM 684/5,231/doctrines, canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s, and exact 1.56-GB cleanup before typed core implementation. |
@@ -14245,6 +14291,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-23`: `.10.6.4.3` recomposes the six committed Julia semantic suites at focused 530 and closes the exact
+  private calls/staging/generated parent without replacement production or test code. Complete 22/25/10 equality,
+  Unicode/source/call/resolution/signature/shape/provenance semantics, sidecar/plan rejection, immutable detached
+  copies, private omission, and host/no-execution fences remain exact. Julia 8,072/primary/105, primary 5x2x66,
+  ten Unicode legs, unchanged ledgers, mdBook/KM/doctrines, canonical Rust 77.68s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/622s, and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass. Parent `.10.6.4` is
+  closed without public query, observation, format, rollout, or admission movement; query audit `.10.6.5.0`
+  follows after commit.
 
 - `2026-07-22`: `.10.6.4.2` completes Julia's exact private calls/staging/generated target at 22 records / 25
   relations / 10 source references. Native payload and typed parse-job fields are correlated to their accepted

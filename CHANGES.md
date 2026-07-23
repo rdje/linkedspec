@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.4.3 — close Julia call projection
+
+Composition-closed Julia's exact private functions/calls/bindings/staging/generated semantic parent without adding
+production code, replacement tests, fixtures, contracts, public API, or generated-format behavior. The six
+committed semantic suites pass together at focused 530 and reconfirm the complete 22-record / 25-relation / ten-
+source-reference target, including Unicode-safe authored correlation, nested and duplicate call identity,
+user-before-helper resolution, fixed/rest signatures, conservative shapes, staged provenance directions,
+selected-plan validation, sidecar/plan rejection, recursive freeze, detached copies, private omission, and all
+host/path/AST/IR/emitter/executor/trace/sink/observer fences.
+
+Complete Julia remains 8,072 package assertions plus primary process conformance and corpus 105/105. Full primary
+passes 5 backends x 2 environments x 66 cases and all ten Unicode-manifest legs pass. Governance remains Unicode
+806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated v1/10/80-0-0, and
+public 59/27/0. Canonical CI passes all doctrines and portable contracts, Rust semantic admission 1/1 in 77.68
+seconds, Dart 1/1, primary 66/66 twice, and Phase 0 1,031/1,031 in 622 seconds. No public query, runtime observation,
+format, rollout, or native admission moves. Parent `.10.6.4` is closed; query audit `.10.6.5.0` follows only after
+this closeout commit is clean. Canonical mdBook, Knowledge Map 686/5,265, and exact 1,504,516-KiB safe cleanup pass
+while preserving all 517 Pgen issue artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.2 — complete Julia call provenance
 
 Completed Julia's private calls/staging/generated projection at exact neutral 22-record / 25-relation parity.

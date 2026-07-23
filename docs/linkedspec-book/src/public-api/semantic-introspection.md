@@ -1246,7 +1246,25 @@ suites pass 530; complete Julia passes 8,072 package assertions, primary process
 Full primary passes 5x2x66, all ten Unicode legs pass, governance stays 806/9/8/2, 6/20/81 at 4/9 + 3/6,
 80/0/0, v1/10/80-0-0, and 59/27/0, and canonical CI passes Rust semantic admission in 76.95 seconds, Dart 1/1,
 reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Public query, runtime observation, rollout, and
-native admission remain later leaves; `.10.6.4.3` owns committed no-change recomposition.
+native admission remain later leaves.
+
+### Julia private calls composition closeout
+
+Leaf `.10.6.4.3` adds no projector, replacement test, fixture, contract, public API, or generated-format behavior.
+It reruns the six committed source, outcome, graph, remaining-static, typed-call, and staged/generated suites in one
+process at exact focused 530. This composition reconfirms all 22 records, 25 relations, and ten source references,
+including Unicode-safe authored order and locations, nested and duplicate call identity, regex-contained text
+isolation, user-before-helper resolution, fixed/rest signatures, conservative shapes, binding/decision/staging
+directions, selected-plan authority, corrupt sidecar/plan rejection, recursive freeze, detached copies, private
+omission, and the complete host/path/AST/IR/emitter/executor/trace/sink/observer denial boundary.
+
+Complete Julia remains 8,072 package assertions plus primary process conformance and corpus 105/105. The full
+five-backend primary matrix passes 5x2x66 and all ten Unicode-manifest legs pass. Governance remains 806/9/8/2,
+6/20/81 at rollout 4/9 and native admission 3/6, 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical CI passes every
+doctrine and portable contract, Rust semantic admission 1/1 in 77.68 seconds, Dart admission 1/1, reference primary
+66x2, and Phase 0 1,031/1,031 in 622 seconds. Parent `.10.6.4` is therefore composition-closed without promoting
+Julia. Immutable public query begins with behavior-free authority audit `.10.6.5.0`; runtime observation and exact
+native admission remain `.10.6.6-.7`.
 
 ## Exact v1 record model
 
@@ -1627,8 +1645,8 @@ The dependency order is:
 | `.10.6.3.3` | Julia composed private static closeout | complete; committed focused 389 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | complete behavior-free plan; exact 22/25 and `.1-.3` ownership frozen |
 | `.10.6.4.1` | Julia typed function/helper/call/binding core | complete; exact private non-staged 18/16, new 79/focused 468, no promotion |
-| `.10.6.4.2` | Julia staged/generated calls completion | complete verified candidate; exact private full 22/25, new 62/focused 530, no promotion |
-| `.10.6.4.3` | Julia calls/staging/generated composition closeout | pending after clean `.2` commit |
+| `.10.6.4.2` | Julia staged/generated calls completion | complete; exact private full 22/25, new 62/focused 530, no promotion |
+| `.10.6.4.3` | Julia calls/staging/generated composition closeout | complete; committed focused 530 plus full gates, no replacement code or promotion |
 | `.10.6.5-.7` | Julia query, runtime observation, and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

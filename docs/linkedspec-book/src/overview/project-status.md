@@ -567,7 +567,10 @@ Three backbone items tracked major structural modernization — all done:
   unique selected row, and emits only the selected handler-plan family. Native sidecars, body AST, generated
   implementation, paths, execution, trace, and sinks remain private. New 62/focused 530, Julia
   8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 76.95s + Dart 1/1 + primary
-  66x2 + Phase 0 1,031/622s pass. Closeout `.3` follows without replacement code.
+  66x2 + Phase 0 1,031/622s pass. Closeout `.3` now recomposes all six committed semantic suites at focused 530,
+  Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 77.68s + Dart 1/1 +
+  primary 66x2 + Phase 0 1,031/622s without replacement code. Parent `.10.6.4` is composition-closed without
+  public query, observation, format, rollout, or admission movement; query audit `.10.6.5.0` follows after commit.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

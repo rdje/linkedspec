@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.4.3` — close composition by rerunning owners, not duplicating them):
+  Julia's call-projection parent closes by composing the six committed source, outcome, graph, remaining-static,
+  typed-call, and staged/generated suites at focused 530. A second projector or replacement proof would create a
+  competing source of truth, so this leaf changes no production/test/fixture/contract/API/format behavior.
+
+  The composition reconfirms exact 22/25/10 equality and its negative boundary in one process: Unicode-safe
+  authored order/source, nested/duplicate/regex-contained occurrence handling, user/helper resolution,
+  fixed/rest signatures, shape propagation, binding and staging directions, retained-plan selection, corrupt
+  sidecar/plan rejection, immutable detached values, private omission, and host/path/AST/IR/no-execution denial.
+  This proves that the staged completion did not weaken the previously committed foundation/static/core seams.
+
+  Complete Julia remains 8,072/primary/105; primary is 5x2x66; all ten Unicode legs and every governance ledger
+  remain exact. Canonical CI passes Rust semantic admission in 77.68 seconds, Dart 1/1, reference primary 66x2,
+  and Phase 0 1,031/622s. Parent `.10.6.4` is therefore closed privately. Public immutable query remains owned by
+  `.10.6.5`, runtime observation by `.10.6.6`, and exact Julia admission by `.10.6.7`. Canonical book, Knowledge
+  Map 686/5,265, and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.2` — provenance is validated authority, not copied compiler state):
   Julia's staged function sidecars contain more host-specific structure than the neutral semantic model permits.
   The private projector therefore validates native payload and typed job fields against the accepted definition,

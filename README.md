@@ -985,8 +985,11 @@ content migration exists yet.
   provenance is preserved while native payload/job/body-AST values and generated implementation text remain
   private. New 62/focused 530 and Julia 8,072/primary/105 pass with 5x2x66, ten Unicode legs, unchanged ledgers,
   and canonical Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. No public query, execution,
-  observation, format, rollout, or admission moved; no-change closeout `.10.6.4.3` follows after the clean commit.
-  mdBook/KM 685/5,252 and exact 1,618,660-KiB cleanup preserving 517 Pgen artifacts pass.
+  observation, format, rollout, or admission moved. No-change closeout `.10.6.4.3` now recomposes the six committed
+  semantic suites at focused 530, Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and
+  canonical Rust 77.68s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. Parent `.10.6.4` is composition-closed
+  without replacement code or promotion; behavior-free query audit `.10.6.5.0` follows after the closeout commit.
+  mdBook/KM 686/5,265 and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

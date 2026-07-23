@@ -564,7 +564,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   neutral staged roles, then validates the retained plan and emits only its selected handler family. It does not
   rebuild the plan, emit source, or expose sidecar/body-AST values. New 62/focused 530, Julia
   8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 76.95s + Dart 1/1 + primary
-  66x2 + Phase 0 1,031/622s pass. `.10.6.4.3` owns no-change recomposition; do not add a second call projector. See
+  66x2 + Phase 0 1,031/622s pass. No-change `.10.6.4.3` recomposes those same six suites at focused 530 and passes
+  Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 77.68s + Dart 1/1 +
+  primary 66x2 + Phase 0 1,031/622s. Parent `.10.6.4` is closed: do not add a second call projector. Query audit
+  `.10.6.5.0` is the next owner. See
   [[julia-semantic-static-projection-plan]].
 
 ---

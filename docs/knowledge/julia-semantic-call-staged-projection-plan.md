@@ -18,10 +18,10 @@ answers:
   - "which Julia generated plan is semantic authority"
   - "may Julia semantic call construction execute target or generated code"
   - "does the Julia calls plan add a public semantic query"
-date: 2026-07-22
-status: current typed core and staged/generated completion exact; no-change closeout pending
+date: 2026-07-23
+status: current exact private projection; composition parent closed without promotion
 tags: [julia, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.4.0-.10.6.4.2; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.4.0-.10.6.4.3; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'; rg -n '_semantic_call_add_staged_artifacts|_semantic_call_validate_staged_authority|_semantic_call_add_generated_plan' julia/src/semantic/SemanticCallProjection.jl julia/test/semantic_index_call_staged_test.jl"
 ---
 
@@ -136,6 +136,12 @@ admission in 77.84 seconds, Dart admission 1/1, reference primary 66x2, and Phas
 mdBook and Knowledge Map 684/5,231 pass. Exact safe cleanup reclaims about 1.56 GB while preserving 517 Pgen issue
 artifacts. No production, test, fixture, public API, query, generated format, trace, observation, or ledger behavior
 changes; `.10.6.4.1` becomes eligible only after the plan commit is clean.
+
+Composition closeout `.10.6.4.3` now reruns all six committed semantic suites at focused 530 and the complete Julia,
+5x2x66 primary, ten-leg Unicode, governance, and canonical gates. Canonical Rust semantic admission passes in
+77.68 seconds, Dart is 1/1, reference primary is 66x2, and Phase 0 is 1,031/622s. Parent `.10.6.4` is closed without
+a second projector, replacement test, public query, runtime observation, format change, rollout, or admission.
+Behavior-free query authority audit `.10.6.5.0` is the next dependency-eligible owner after the clean commit.
 
 See [[julia-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-staged-artifact-schema]], [[semantic-introspection-generated-plan-authority]],

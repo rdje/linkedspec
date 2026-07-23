@@ -12,8 +12,8 @@ answers:
   - "does Julia semantic generated provenance emit or execute Julia source"
   - "which Julia test proves exact staged and generated semantic parity"
   - "what is the next Julia semantic task after staged generated projection"
-date: 2026-07-22
-status: current exact private projection; no-change composition closeout pending
+date: 2026-07-23
+status: current exact private projection; composition parent closed without promotion
 tags: [julia, semantic-introspection, staged-parsing, generated-source, provenance, privacy]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.4.2; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_call_staged_test.jl; capability_conformance/semantic_introspection_model.json snapshot calls
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test,JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'"
@@ -39,7 +39,12 @@ corrupted native sidecars and plan contract/identity/order/selection drift, and 
 tuple-backed retention, private-surface omission, host/path denial, and no execution. Six-suite composition is 530;
 complete Julia is 8,072/primary/105; full primary 5x2x66, ten Unicode legs, unchanged governance, and canonical
 Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. No public query, runtime observation, rollout, or
-native admission moves. `.10.6.4.3` is the next dependency-eligible no-change composition leaf after commit.
+native admission moves.
+
+Closeout `.10.6.4.3` now recomposes those six committed suites at focused 530 and passes complete Julia
+8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, and canonical Rust 77.68s + Dart 1/1 +
+primary 66x2 + Phase 0 1,031/622s. Parent `.10.6.4` is composition-closed without replacement code or promotion;
+query authority audit `.10.6.5.0` is next after the clean closeout commit.
 
 See [[julia-semantic-call-core-projection]], [[julia-semantic-call-staged-projection-plan]],
 [[semantic-introspection-staged-artifact-schema]], and [[semantic-introspection-generated-plan-authority]].
