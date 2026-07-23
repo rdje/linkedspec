@@ -539,8 +539,19 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   five-target recomposition and parent closeout. That closeout now passes the same committed four-suite focused
   389, complete Julia 7,931/primary/105, both full matrices, unchanged no-drift ledgers, and canonical Rust 80.89s
   + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s without production/test replacement. Parent `.10.6.3` is closed;
-  use behavior-free `.10.6.4.0` next to map calls/staging/generated authorities before changing projection code.
-  See [[julia-semantic-static-projection-plan]].
+  behavior-free `.10.6.4.0` now maps calls/staging/generated authorities before projection code. Retrieve
+  [[julia-semantic-call-staged-projection-plan]], then probe `_semantic_authored_definition_order`, the compiled
+  function registry, `parse_action_block` plus `resolve_action_block_contracts`, compiled edge `action_ast`, staged
+  body payload/job/result, and `generated_plan_input`. Expect exact 22 records / 25 relations: static base 6/6,
+  typed core 18/16, and staged/generated completion +4/+9. `definition_order` is rule-only; merge exact authored
+  function/rule starts. `ActionSourceSpan` is normalized-action-local scalar space; use typed outer-before-inner
+  traversal plus a bounded occurrence-safe raw-source scanner, never direct offset addition. Require reparsed typed
+  function body JSON to equal retained staged `body_ast`, resolve users before the three neutral helpers, infer
+  shapes conservatively, deliberately normalize native sidecar fields to ADR `0050`, and select only the retained
+  entry plan row. `.10.6.4.1` owns private typed core, `.2` staged/generated completion, and `.3` no-change closeout.
+  Plan signoff is focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, KM 684/5,231,
+  canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s, and exact 1.56-GB cleanup preserving 517
+  Pgen artifacts. See [[julia-semantic-static-projection-plan]].
 
 ---
 

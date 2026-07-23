@@ -8,17 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia private static composition closeout `FUTURE-PARITY-BACKLOG.10.6.3.3` is a complete verified candidate
-  from clean remaining-target commit `556e5ae2`. It recomposes the committed four-suite/five-target topology,
-  closes parent `.10.6.3` without promotion, and hands off to behavior-free calls/staging/generated plan
-  `.10.6.4.0` only after this closeout commit is clean; no replacement production/test code was added.
+- Julia calls/staging/generated authority plan `FUTURE-PARITY-BACKLOG.10.6.4.0` is a complete verified candidate
+  from clean private-static closeout `4a580295`. Commit this behavior-free 22/25 plan, clear the brief, verify a
+  clean tree, then activate typed-core implementation `.10.6.4.1` task-tree-first.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.0 — freeze Julia call projection**
+  (DONE candidate from clean base `4a580295`; commit pending final durable-layer checks).
+
+  **Result:** Exact Julia authorities and the dependency split are frozen before code. The committed static base is
+  6/6, typed functions/helpers/calls/bindings complete 18/16, and three staged artifacts plus the selected generated
+  plan complete 22/25. Registry definitions, typed function/edge Action AST plus contracts, staged-result equality,
+  copied source correlation, and retained generated-v2 plan own meaning without target execution or trace. Compiled
+  rule-only order merges exact function positions; local scalar spans use bounded occurrence-safe raw-source
+  scanning; user functions resolve before three governed helpers; shapes and staged normalization remain exact.
+
+  **Proof:** Focused 389; Julia 7,931/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode
+  806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0;
+  mdBook/KM 684/5,231/four doctrines/diff; canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/625s; exact 1.56-GB cleanup preserving all 517 Pgen artifacts. No behavior or promotion changed.
+
+  **Next:** after this plan commit is clean, activate typed function/helper/call/binding core `.10.6.4.1`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.3 — close Julia static projection**
-  (DONE candidate from clean base `556e5ae2`; commit pending final durable-layer checks).
+  (DONE at clean commit `4a580295` from base `556e5ae2`).
 
   **Result:** The four already-committed Julia semantic suites compose as one exact private static surface. All
   five construction targets, source ceilings/evidence/order, lifecycle identity, fallback, clone/immutability,
@@ -31,8 +47,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   diff at Knowledge Map 683/5,210 and exact 1.56-GB cleanup complete the final lockstep proof while preserving 517
   Pgen artifacts.
 
-  **Next:** after this closeout commit is clean, activate behavior-free calls/staging/generated authority plan
-  `.10.6.4.0` task-tree-first.
+  **Next:** behavior-free calls/staging/generated authority plan `.10.6.4.0` is active task-tree-first.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.2 — complete Julia static targets**
   (DONE at clean commit `556e5ae2` from base `197538f7`).

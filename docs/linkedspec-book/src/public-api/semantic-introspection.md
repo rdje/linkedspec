@@ -1135,7 +1135,54 @@ matrix passes 5 backends x 2 environments x 66 cases and all ten Unicode-manifes
 remain 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI passes Rust semantic admission in 80.89 seconds,
 Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 653 seconds. Parent `.10.6.3` is therefore
 composition-closed with no public query, runtime observation, or semantic promotion. Behavior-free authority plan
-`.10.6.4.0` next separates typed calls/bindings core from staged/generated completion before projection changes.
+`.10.6.4.0` now separates typed calls/bindings core from staged/generated completion before projection changes.
+
+### Julia calls, staging, and generated authority plan
+
+Behavior-free leaf `.10.6.4.0` fixes the exact private calls target before implementation. The neutral
+`calls_and_staging` snapshot has 22 records and 25 relations. Julia's existing static projection supplies six
+records and six relations. Typed functions, helpers, calls, bindings, their decisions, and explanations complete
+an 18/16 non-staged core; three staged artifacts and one selected generated-plan artifact add four records and
+nine relations.
+
+The adapter composes existing authorities rather than inventing a second semantic engine:
+
+- the accepted source map supplies canonical UTF-8 byte and Unicode-scalar evidence;
+- the function registry supplies exact definitions, parameters, signatures, shell/body text, and staged sidecars;
+- `parse_action_block` supplies a typed function-body Action AST whose JSON must equal the retained staged
+  `body_ast`, and action contracts validate it;
+- compiled edge Action AST supplies assignment, nested calls, return, and binding behavior; and
+- retained generated-v2 plan input supplies contract, format, logical identity, ordered families, and selected row.
+
+`CompiledSpec.definition_order` contains rules only. Exact neutral definition order therefore merges functions and
+rules by authored source start. `ActionSourceSpan` is also local Unicode-scalar space over normalized action text,
+not a global byte range. The projector walks typed calls outer-before-inner and correlates them through a balanced,
+occurrence-safe scan bounded to the exact raw function shell or action edge. A staged global body range selects the
+unique enclosing function shell. All nine distinct neutral source ranges already reproduce exactly, and an
+interleaved `é` probe proves multibyte byte widths do not corrupt scalar columns or member identity.
+
+Resolution checks an exact registered user function before the deliberately narrow neutral helper table. The
+calls fixture uses only `trim`, `match_text`, and `return`. Shape inference is a conservative fixed point over typed
+literals, current bindings, registered returns, and those governed helper contracts; unsupported meaning remains
+`unknown`. Fixed-arity definitions derive a signature from parameters when native v1 has none, while a future
+variadic native signature maps its rest/min/max values without inventing a bounded maximum.
+
+Native Julia staging fields are not copied into the neutral schema. The three distinct payload, parse-job, and
+result records use ADR `0050` roles and directions; body source, job maps, serialized AST, and typed ActionIR stay
+private. Generated provenance validates the retained plan against compiled rule order and selects only the unique
+entry row (`default` for this fixture). It never emits or executes generated Julia source.
+
+Implementation is dependency-ordered: `.10.6.4.1` adds the private typed 18/16 core;
+`.10.6.4.2` completes staged/generated 22/25; `.10.6.4.3` recomposes committed proof without replacement code.
+The existing underscore-only proof seam remains private. Public query, runtime observation, trace-derived facts,
+semantic rollout, and native admission remain later leaves.
+
+Plan verification passes the four committed semantic suites at focused 389, complete Julia at 7,931 package
+assertions plus primary and corpus 105/105, the full five-backend/two-environment 66-case matrix, and all ten
+Unicode-manifest legs. Every governance ledger remains unchanged. Knowledge Map 684/5,231, mdBook, all four
+doctrines, canonical Rust admission 77.84 seconds, Dart admission 1/1, reference primary 66x2, Phase 0
+1,031/1,031 in 625 seconds, and exact 1.56-GB safe cleanup preserving 517 Pgen artifacts pass. Typed core
+implementation becomes eligible only after this behavior-free plan is committed cleanly.
 
 ## Exact v1 record model
 
@@ -1514,8 +1561,9 @@ The dependency order is:
 | `.10.6.3.1` | Julia compiled graph/source/evidence projection | complete; private exact 12/14/7 graph, no public query |
 | `.10.6.3.2` | Julia privacy/failure/runtime-static and isolation | complete; exact 4/3 + 4/3 + 6/4 + 7/8 targets, no promotion |
 | `.10.6.3.3` | Julia composed private static closeout | complete; committed focused 389 plus full matrices/canonical proof, no replacement code or promotion |
-| `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | next after the clean `.10.6.3.3` commit |
-| `.10.6.4.1-.10.6.7` | Julia calls projection through exact admission | pending |
+| `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | complete behavior-free plan; exact 22/25 and `.1-.3` ownership frozen |
+| `.10.6.4.1-.3` | Julia private calls projection implementation and closeout | pending after clean `.0` commit |
+| `.10.6.5-.7` | Julia query, runtime observation, and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

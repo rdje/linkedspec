@@ -548,7 +548,13 @@ Three backbone items tracked major structural modernization — all done:
   All five private static targets now compose under no-change closeout `.10.6.3.3`: committed focused 389,
   complete Julia 7,931/primary/105, 5x2x66, all ten Unicode legs, unchanged ledgers, and canonical Rust 80.89s +
   Dart 1/1 + primary 66x2 + Phase 0 1,031/653s pass without replacement code. Parent `.10.6.3` is closed without
-  promotion; behavior-free calls/staging/generated plan `.10.6.4.0` is next after the clean closeout commit.
+  promotion. Behavior-free calls/staging/generated `.10.6.4.0` now freezes exact 22 records / 25 relations:
+  existing static base 6/6, typed core 18/16, staged/generated completion +4/+9. It maps registry definitions,
+  typed function/edge Action AST plus contracts, copied source correlation, staged sidecars, and retained selected
+  generated-v2 plan without execution or trace. Implementation is split as private core `.1`, completion `.2`,
+  and no-change closeout `.3`; query/runtime/admission remain `.5-.7` and no promotion occurs in planning. Plan
+  signoff passes focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, KM 684/5,231,
+  and canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

@@ -963,7 +963,16 @@ content migration exists yet.
   recomposes the committed four-suite topology at focused 389, complete Julia 7,931/primary/105, 5x2x66, ten
   Unicode legs, unchanged ledgers, and canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s.
   Parent `.10.6.3` is composition-closed without replacement code; behavior-free calls/staging/generated plan
-  `.10.6.4.0` follows only after the closeout commit is clean.
+  `.10.6.4.0` is now frozen from that clean boundary. Its exact target is 22 records / 25 relations: the existing
+  static base is 6/6, typed functions/helpers/calls/bindings complete 18/16, and staged payload/job/result plus the
+  selected generated plan add four records / nine relations. Julia authority is the typed function registry,
+  reparsed function-body Action AST checked against the staged JSON result, compiled edge Action AST/contracts,
+  copied source map, and retained generated-v2 plan—not trace or target execution. Rule-only compiled order is
+  merged with function shell positions; normalized local scalar spans map through occurrence-safe raw-source
+  scanning. Implementation is split as private core `.10.6.4.1`, staged/generated completion `.2`, and no-change
+  closeout `.3`, before query/runtime/admission `.10.6.5-.7`. Plan signoff passes focused 389, Julia
+  7,931/primary/105, primary 5x2x66, all ten Unicode legs, unchanged ledgers, Knowledge Map 684/5,231, and
+  canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s without behavior or promotion.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

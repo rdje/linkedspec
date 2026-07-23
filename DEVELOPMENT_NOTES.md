@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.0` — typed meaning and staged integrity are separate authorities):
+  Julia's function registry retains staged `body_ast` as a JSON-compatible map, not a typed `ActionBlock`. The
+  calls adapter must parse the already-retained body payload into typed ActionIR, require its JSON form to equal
+  that staged result, resolve contracts, and project from the typed tree. This keeps the staged value as an
+  integrity witness without treating serialized AST layout as the semantic wire model or executing caller code.
+
+  Exact source evidence also cannot be derived by adding `ActionSourceSpan` offsets to an edge start. Those spans
+  count Unicode scalars in normalized action text, while raw authored members retain indentation. Typed preorder
+  must instead drive an occurrence-safe balanced scanner inside each exact shell/edge range. The function body's
+  staged global scalar range selects the unique enclosing shell. Direct ASCII and interleaved `é` probes reproduce
+  all nine neutral ranges and prove the existing byte/scalar map owns the only global coordinate conversion.
+
+  The exact dependency split follows the data boundary: `.10.6.4.1` extends the private static owner with typed
+  functions, three helpers, one binding, and four calls at 18/16; `.2` adds three deliberately normalized staged
+  roles plus the retained selected-entry generated plan to 22/25; `.3` only recomposes committed proof. Resolution
+  is exact user function before governed helper fallback, shapes are conservative fixed-point facts, and neither
+  trace nor generated execution is an authority. Public query and runtime observations remain later parents.
+
+  The behavior-free proof passes committed focused 389, complete Julia 7,931/primary/105, full primary 5x2x66,
+  all ten Unicode legs, unchanged governance ledgers, mdBook, and Knowledge Map 684/5,231. Canonical CI passes Rust
+  admission in 77.84 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/625s. Exact safe cleanup reclaims about
+  1.56 GB while preserving 517 Pgen artifacts; no implementation, test, fixture, API, query, format, observation,
+  or ledger behavior changed.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.3` — composition closeout validates ownership, not more behavior):
   A private semantic parent is not closed merely because each target passed once in its implementation leaf. Its
   committed source, outcome, graph, privacy, failure, runtime-static, and isolation proofs must coexist under the

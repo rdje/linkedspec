@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.0 — freeze Julia call projection
+
+Froze Julia's behavior-free functions/helpers/calls/bindings/staging/generated authority map before projector or
+test changes. The neutral `calls` target is exactly 22 records / 25 relations. Julia's existing private static
+base contributes 6/6; the typed non-staged core is exactly 18/16; three staged artifacts plus the selected
+generated handler plan add four records and nine relations.
+
+Toolbox probes prove that the typed function registry, reparsed function-body `ActionBlock` checked against the
+retained staged JSON result, compiled edge Action AST, resolved contracts, accepted source map, staged sidecars,
+and retained generated-v2 plan provide every required authority without target execution or trace. Complete
+definition order must merge authored source positions because `CompiledSpec.definition_order` is rule-only.
+Action spans are Unicode-scalar offsets local to normalized action text, so exact evidence requires bounded,
+occurrence-safe raw-source scanning driven by typed outer-before-inner traversal; all nine distinct neutral ranges
+already reproduce exactly, including an interleaved multibyte function shell.
+
+The plan fixes user-function-before-helper resolution, a deliberately narrow three-helper semantic table,
+conservative fixed-point shapes, fixed/variadic signature normalization, deliberate ADR `0050` mapping of native
+payload/job/result fields, and selected-entry-only generated provenance. Implementation is dependency-ordered as
+private typed core `.10.6.4.1`, staged/generated completion `.2`, and no-change composition closeout `.3`. No
+production/test/fixture/API/query/trace/observation/generated-format or governance state changes in this leaf.
+
+Verification passes committed focused 389, complete Julia 7,931/primary/105, full primary 5x2x66, all ten Unicode
+manifest legs, and unchanged Unicode/semantic/capability/generated/public ledgers. Canonical CI passes all four
+doctrines, Rust semantic admission in 77.84 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 625 seconds.
+mdBook, Knowledge Map 684/5,231, memory/task metadata, markers, and diff hygiene pass. Exact cleanup removes the
+12-MB book, 826-MB Rust dependencies, 596-MB incremental state, 131-MB Julia compiled cache, and Python bytecode—
+about 1.56 GB—while preserving all 517 Pgen artifacts. Typed core `.10.6.4.1` follows only after this commit is clean.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.3 — close Julia static projection
 
 Closed Julia's private static semantic parent by recomposing the four committed source, outcome, graph, and
