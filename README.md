@@ -908,7 +908,15 @@ content migration exists yet.
   all ten Unicode-manifest legs, Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated
   v1/10/80-0-0, and public 59/27/0 pass without any production/test/fixture/API/format/ledger change. Canonical Rust
   78.46s, Dart 1/1, primary 66x2, Phase 0 1,031/630s, and exact 1.57-GB cleanup pass. Parent `.10.6.1` is closed;
-  behavior-free Julia source/outcome planning `.10.6.2.0` follows the clean closeout commit.
+  behavior-free Julia source/outcome planning `.10.6.2.0` follows the clean closeout commit. That plan is now
+  frozen without behavior: `semantic_index` will copy valid text/strict bytes behind four source ceilings, then
+  retain one detached staged compiled-or-failed outcome. Exact probes prove malformed `String` failures are not a
+  safe decode boundary, `LoadedSpec` owns host paths, compiled/descriptor JSON aliases live order vectors, compiled
+  rule order omits the preceding function shell, `Bool <: Integer`, and parse/validate/compile/select/plan does not
+  execute a throwing target action. Implementation is ordered as source map `.10.6.2.1`, outcome `.2`, and composed
+  closeout `.3`; records/query/runtime/MCP and semantic promotion remain later work. Unchanged Julia
+  7,542/primary/105, all no-drift contracts, Knowledge Map 682/5,161, mdBook/doctrines, canonical Rust 78.27s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/629s, and exact 1.28-GB cleanup close the plan proof.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

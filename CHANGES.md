@@ -1,5 +1,37 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.0 — freeze Julia semantic foundation
+
+Froze Julia's behavior-free semantic source/outcome contract before implementation. Toolbox-first probes establish
+the exact native boundaries: valid graph text is 128 UTF-8 bytes/scalars, byte vectors have no parser method, and
+four invalid Julia strings fail inconsistently unless strict validity is checked before parser character iteration.
+The staged calls fixture retains function `normalize` before rules `Top`/`Done`, while compiled definition order
+contains only the rules, requiring an independently merged authored order. Portable validation and missing-entry
+diagnostics retain their expected phases and fields; generated-v2 planning yields exactly `Top/default` and
+`Done/default`; `LoadedSpec` retains host paths and therefore cannot supply semantic identity.
+
+Most importantly, mutating existing compiled JSON or descriptor-order arrays mutates live `CompiledSpec` vectors.
+Neither projection can be the semantic foundation authority or its clone. A target action that throws if invoked
+still parses, validates, compiles, selects, and plans, proving foundation construction need not execute caller
+target code. Julia's `Bool <: Integer` relationship also requires an explicit Boolean fence at numeric selectors.
+
+The frozen native surface is `semantic_index(source, options)` plus keyword convenience over copied valid strings
+or strict UTF-8 bytes. It defines typed options/errors/source values, logical caller identity, `none`/`identity`/
+`span`/`text` ceilings, SHA-256 disclosure only at `text`, zero-based half-open UTF-8 byte ranges, and one-based
+line/Unicode-scalar columns. Later detached compiled-or-failed outcomes retain staged authority, merged authored
+order, selected entry, and generated-plan input privately while exposing no descriptor, AST/IR, host path, source
+buffer, compiler object, query, records, or runtime observation. Leaves `.10.6.2.1-.3` now own source-only
+construction, compiled outcomes, and composed closeout in dependency order.
+
+This slice changes documentation, task metadata, the Knowledge Map, Toolbox guidance, and mdBook only—no
+production code, tests, fixtures, neutral contract, public behavior, generated format, or semantic ledger. Complete
+Julia remains 7,542 package assertions plus primary and corpus 105/105. Unicode remains 806/9/8/2; semantic
+governance 6/20/81 at rollout 4/9 and admission 3/6; capability 80/0/0; generated source v1/10/80-0-0; public
+surface 59/27/0. Knowledge Map 682/5,161, mdBook, memory architecture, doctrines, and diff hygiene pass. Canonical
+local CI passes Rust admission 1/1 in 78.27 seconds, Dart admission 1/1, primary 66/66 under default and POSIX, and
+Phase 0 1,031/1,031 in 629 seconds. Cleanup removes the regenerated 12-MB book, 826-MB dependency output, 441-MB
+incremental output, and 28-KB Python cache—about 1.28 GB—while preserving `rgx/pgen-issues/artifacts`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.4 — close Julia Unicode labels
 
 Composed the four committed Julia Unicode suites without changing production code, tests, fixtures, the neutral

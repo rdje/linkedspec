@@ -469,6 +469,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   code or tests. It passes canonical Rust/Dart/primary/Phase 0, closes `.10.6.1`, and hands off only to behavior-free
   source/outcome plan `.10.6.2.0`. Use a writable depot first; never infer membership, identity, or adjacent-grammar
   behavior from host PCRE2 examples.
+- **JULIA SOURCE/OUTCOME PREFLIGHT:** `.10.6.2.0` freezes the behavior-free foundation boundary before code.
+  Probe `parse_spec_with_staged_user_function_definitions`, `validate_spec`, `compile_spec(...;
+  validate_source=false)`, `resolve_entry_rule`, and `build_generated_rule_plan` directly on the neutral graph,
+  calls, privacy, failed, and runtime sources. Reject malformed Julia `String` and byte input before those owners:
+  invalid strings otherwise fail inconsistently as `InvalidCharError`, `SpecParseException`, or staged parser
+  failure. Do not use `SpecLoader` for identity; it retains resolved host paths. Do not use compiled-state or
+  descriptor JSON as a clone: both expose live order vectors, and mutating the returned projection mutates
+  `CompiledSpec`. The frozen implementation order is source-only copied UTF-8/map/ceilings `.10.6.2.1`, one staged
+  compiled-or-failed outcome and generated-v2 plan `.10.6.2.2`, then composed no-path/no-target-execution signoff
+  `.10.6.2.3`. Fence `Bool` before any `Integer` acceptance. See
+  [[julia-semantic-introspection-authority-map]].
 
 ---
 

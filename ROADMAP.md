@@ -122,7 +122,16 @@ exact 1.57-GB cleanup pass without production or semantic promotion. Closeout `.
 four-suite topology at focused 3,831, complete Julia 7,542/primary/105, 5x2x66, all ten manifest legs, and unchanged
 Unicode/semantic/capability/generated/public ledgers without production/test/API/format change. Canonical Rust
 78.46s/Dart 1/1/primary 66x2/Phase 0 1,031/630s and exact 1.57-GB cleanup pass. Parent `.10.6.1` closes;
-behavior-free source/outcome plan `.10.6.2.0` follows the clean commit.
+behavior-free source/outcome plan `.10.6.2.0` follows the clean commit. That plan now freezes Julia's exact
+`semantic_index` text/strict-byte input, logical identity, four ceilings, canonical byte/scalar map, typed source
+errors/values, detached compiled-or-failed outcome, merged function/rule order, entry, and generated-v2 plan
+boundary. Probes show invalid `String` failures vary by byte shape, `LoadedSpec` retains paths, compiled and
+descriptor JSON alias live order vectors, and `Bool` is an `Integer`; none may leak into the public foundation.
+Source-only `.10.6.2.1`, outcome `.2`, and composed closeout `.3` are dependency-ordered before code, with no
+record/query/runtime/MCP behavior or governance change in planning. The frozen plan passes unchanged Julia
+7,542/primary/105 and every Unicode/semantic/capability/generated/public no-drift gate, Knowledge Map 682/5,161,
+mdBook/doctrines, canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/629s, and exact 1.28-GB cleanup;
+`.10.6.2.1` follows only after its clean commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

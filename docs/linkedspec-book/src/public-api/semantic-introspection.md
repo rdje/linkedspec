@@ -852,8 +852,10 @@ Julia needs its own private canonical source map. Ordinary spec spans retain lin
 positions; action spans are scalar offsets local to normalized action text. Compiled `definition_order` contains
 rules but not staged function shells, so neutral authored order must merge both authorities. The constructor must
 also explicitly reject malformed text as well as malformed bytes: Julia can represent invalid UTF-8 inside a
-`String`, and current direct parsing reports a language parse error rather than an encoding-boundary error. Only a
-caller logical name may enter semantic identity; resolved loader paths remain private.
+`String`. Four malformed byte shapes currently fail inconsistently as `InvalidCharError`, `SpecParseException`, or
+staged `UserFunctionDefinitionParserException`, while byte vectors have no parser method. The future constructor
+must reject both forms at a strict encoding boundary before parsing. Only a caller logical name may enter semantic
+identity; resolved loader paths remain private.
 
 Runtime observations will use a separate optional typed sink at the accepted-slot and successful final-result
 seams. Existing `julia_runtime:regex_slot_selected` trace text is diagnostic evidence, not a typed semantic event,
@@ -917,6 +919,54 @@ public ledgers remain unchanged; the closeout adds no production/test/fixture/AP
 passes Rust admission 1/1 in 78.46 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds; exact
 cleanup reclaims about 1.57 GB while preserving Pgen. Parent `.10.6.1` closes and behavior-free `.10.6.2.0`
 follows after the clean commit. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
+
+### Frozen Julia source/outcome boundary
+
+Planning leaf `.10.6.2.0` is complete without implementing this API. It freezes the first Julia surface as
+`semantic_index(source, options)`, with a keyword convenience form, over copied valid `AbstractString` or strict
+`AbstractVector{UInt8}` input. `SemanticIndexOptions` requires a nonempty control-free caller logical name, one
+`SemanticSourceDetail` ceiling (`none`, `identity`, `span`, or `text`), and an optional exact Unicode-17 rule
+selector. `SemanticIndexError`, `SemanticSourceIdentity`, and `SemanticSourceSpan` are typed public values. Exact
+source accessors will map zero-based half-open UTF-8 bytes to one-based line and Unicode-scalar columns, return
+excerpts and ordered exact occurrences only when the ceiling permits, and expose a canonical-byte SHA-256 digest
+only at `text`. Numeric inputs must reject `Bool` explicitly before accepting `Integer` because Julia makes
+`Bool <: Integer`.
+
+The second half will expose detached `SemanticSnapshot`, `SemanticCompilationAuthority`,
+`SemanticCompilationDiagnostic`, `SemanticEntrySelection`, and `SemanticGeneratedPlanInput` values without
+publishing the retained source map, `SpecFile`, `CompiledSpec`, ActionIR, descriptor, path, or generated
+implementation source. This detachment is a correctness requirement: the audit proved that both
+`to_json(compiled)["definition_order"]` and descriptor `meta.compiled_rule_order` alias the live compiler vectors.
+Mutating either returned JSON array changes `CompiledSpec`; neither JSON projection can be used as the semantic
+foundation.
+
+Construction will run the existing staged user-function-aware parser, validator, compiler, entry selector, and
+shared generated-v2 plan builder exactly once. The calls fixture proves why authored order needs an adapter:
+function `normalize` is first in source, but compiled definition order contains only rules `Top` and `Done`.
+`failed.spec` retains its native `bare_edge_target_undefined` / `normalize_edges` diagnostic with `Top` and
+`Missing`; an unknown selector retains `entry_rule_not_found` / `select_entry_rule`. Fatal process exceptions
+rethrow, while ordinary parse/validation/compile/selection/plan failures become failed-compilation outcomes.
+
+There is no source-path constructor and `SpecLoader` is not an identity owner. The staged frontend may use its
+declared trusted parser specifications as compiler infrastructure, but construction never invokes the caller's
+target parser, action, lifecycle, generated execution, trace, diagnostic-output sink, or semantic observer. A
+probe whose target action unconditionally throws still parses, validates, compiles, selects, and produces a plan,
+which directly verifies that boundary. Query, static records, runtime observation, MCP, rollout, and admission stay
+outside this foundation.
+
+Implementation is omission-safe and dependency ordered:
+
+1. `.10.6.2.1` adds only copied strict input, SHA-256 identity, private byte/scalar mapping, ceilings, typed source
+   errors/values, exact source accessors, detachment, and source-only proof.
+2. `.10.6.2.2` adds one private staged compiled-or-failed outcome, merged function/rule order, entry identity,
+   generated-v2 plan input, detached outcome accessors, and negative target-execution/path/descriptor topology.
+3. `.10.6.2.3` recomposes both suites, complete Julia and canonical gates, no-drift ledgers, cleanup, and parent
+   closure before static projection begins.
+
+Until `.10.6.2.1-.2` land, these names describe the frozen contract, not callable Julia API.
+The planning proof leaves Julia 7,542/primary/105 and all Unicode/semantic/capability/generated/public ledgers
+unchanged. Knowledge Map 682/5,161, mdBook/doctrines, canonical Rust admission 1/1 in 78.27 seconds, Dart 1/1,
+primary 66x2, Phase 0 1,031/1,031 in 629 seconds, and exact 1.28-GB generated cleanup all pass.
 
 ## Exact v1 record model
 
@@ -1287,7 +1337,9 @@ The dependency order is:
 | `.10.6.1.2` | Julia exact positive/distinct downstream identity | complete; 130 new assertions, focused 1,885, Julia 5,596/primary/105, 5x2x66, and ten-leg manifest without production change |
 | `.10.6.1.3` | Julia exhaustive negative rejection and unrelated-grammar isolation | complete; 1,946 new assertions, focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, canonical signoff, and cleanup without production change |
 | `.10.6.1.4` | Julia composed Unicode-label closeout | complete; committed focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, no-drift, canonical signoff, and cleanup without promotion |
-| `.10.6.2-.10.6.7` | Julia semantic source/outcome through exact admission | pending |
+| `.10.6.2.0` | Julia source/outcome contract and dependency split | complete; behavior-free exact API/privacy/no-execution boundary, canonical proof, and cleanup |
+| `.10.6.2.1-.10.6.2.3` | Julia strict source map, compiled outcome, and foundation closeout | pending |
+| `.10.6.3-.10.6.7` | Julia static projection through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

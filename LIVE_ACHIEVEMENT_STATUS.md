@@ -8,37 +8,36 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia Unicode composition closeout `FUTURE-PARITY-BACKLOG.10.6.1.4` is active task-tree-first from clean
-  negative/isolation commit `0ce5505f`. The committed four-suite focused 3,831, complete Julia 7,542/primary/105,
-  full 5x2x66, ten 1/1 Unicode-manifest legs, and all no-drift contracts are green without code/test/fixture/API/
-  format/ledger change. Durable synchronization, canonical Rust 78.46s + Dart 1/1 + primary 66x2 + Phase 0
-  1,031/630s, and exact 1.57-GB cleanup are complete. Only the clean commit remains before behavior-free
-  source/outcome plan `.10.6.2.0` activates.
+- Behavior-free Julia semantic source/outcome plan `FUTURE-PARITY-BACKLOG.10.6.2.0` is a complete verified
+  candidate from clean Unicode closeout `70565d04`. Toolbox-first probes freeze strict copied string/byte input,
+  four source ceilings, logical identity, exact byte/scalar coordinates, detached typed values, native failure
+  outcomes, merged function/rule authored order, selection and generated-plan authority, fatal-exception handling,
+  and no-path/no-execution boundaries. Existing compiled JSON and descriptor projections alias live vectors, so
+  neither can provide foundation authority or cloning.
 
-The preflight reproduced exactly 5,175 required Unicode 17 `XID_Continue` scalars missing from host PCRE2 `\w`
-and 923 forbidden extras, plus native 8/9 positive parsing, forbidden `²`, `Top:::` truncation, and direct/JSON-
-reconstructed four-role validator bypasses. Those measured failures are now closed at the parser/validator core.
-
-`.10.6.1.1` adds one generated internal
-`julia/src/spec/UnicodeRuleLabel.jl` from the unchanged 806-range neutral contract, independently byte/endpoint
-checks it, includes it before the parser, replaces exactly five host-regex label sites with scalar-safe complete
-scanners, preserves malformed arrows as raw syntax, rejects third-colon prefixes, and validates declarations plus
-all three target kinds with one portable diagnostic. It leaves all unrelated identifier patterns untouched.
-
-Identity `.2` derives ten unique labels from all nine positives/two distinct pairs and proves every
-artifact/execution/loader/command route with 130 new assertions. Exact compiled maps/order/JSON, descriptor,
-generated plan, reconstruction, fresh emitted host, strict path privacy, every selector, portable diagnostics,
-native/generated traces, and inline/file primary commands are green. Negative/isolation `.3` now consumes all eight
-negatives across source, four programmatic/reconstructed roles, selectors, loaders, primary commands, and artifact
-denial. Its adjacent-grammar proof locks function/parameter, ActionParser, lifecycle, mark, regex, and bounded-mode
-boundaries. New 1,946/focused 3,831, Julia 7,542/primary/105, full 5x2x66, all ten manifest legs, Unicode 806/9/8/2,
-semantic 6/20/81 at 4/9 + 3/6, and capability/generated/public no-drift are green with no production change.
-Closeout `.4` owns complete Julia/canonical composition after this leaf commits cleanly.
+The slice changes documentation/task/Knowledge Map/Toolbox/book material only. Complete Julia remains
+7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at rollout 4/9 and admission 3/6; capability/generated/
+public 80/0/0 + v1/10/80-0-0 + 59/27/0. Knowledge Map 682/5,161, mdBook, memory, all four doctrines, and diff
+hygiene pass. Canonical local CI passes Rust semantic admission 1/1 in 78.27s, Dart admission 1/1, primary 66x2,
+and Phase 0 1,031/629s. Exact 1.28-GB generated cleanup preserves Pgen. Only the clean commit remains before
+source-only implementation `.10.6.2.1` may activate.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.0 — freeze Julia semantic foundation**
+  (DONE candidate from clean base `70565d04`; awaiting this commit).
+
+  **Result:** The exact Julia native source/outcome surface, privacy/no-execution boundary, detached-value rule,
+  and `.1-.3` dependency split are frozen without behavior or semantic-ledger change.
+
+  **Proof:** Julia 7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6;
+  capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,161; canonical Rust 78.27s + Dart
+  1/1 + primary 66x2 + Phase 0 1,031/629s; exact 1.28-GB cleanup preserving Pgen.
+
+  **Next:** after the clean commit, implement only strict copied input and the private source map in `.10.6.2.1`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.4 — close Julia Unicode labels**
   (DONE in this commit from clean base `0ce5505f`).
 

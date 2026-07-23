@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.0` — Julia projections must detach before they become semantic
+  authority): Direct probes found a sharper boundary than ordinary mutable-container caution. Both
+  `to_json(compiled)["definition_order"]` and descriptor `meta.compiled_rule_order` expose the exact live vectors;
+  mutating either returned array mutates `CompiledSpec`. The foundation therefore cannot clone or normalize from
+  those JSON surfaces. It must retain typed parser/compiler owners privately and construct every public source,
+  snapshot, diagnostic, entry, and plan value into new detached storage. Julia reflection remains a host escape
+  hatch, not the documented semantic schema; normal display must redact logical identity and private state.
+
+  Strict decoding is likewise a pre-parser owner. Julia accepts malformed byte sequences inside `String`; four
+  probes all report `isvalid == false` but fail later as different `InvalidCharError`, `SpecParseException`, or
+  staged parser outcomes. Byte vectors have no direct parser method. `semantic_index` must copy valid
+  `AbstractString` or strict `AbstractVector{UInt8}` input, validate before character iteration, and build one
+  canonical UTF-8 byte/Unicode-scalar map. Its four ceilings, caller logical identity, SHA-256, exact span/excerpt/
+  occurrence accessors, and explicit `Bool` fence belong to `.10.6.2.1` before any language outcome exists.
+
+  `.10.6.2.2` then composes the staged parser, validator, compiler, selector, and shared plan exactly once. Function
+  `normalize` precedes `Top`/`Done` in authored calls source but is absent from `CompiledSpec.definition_order`, so
+  the adapter must merge typed function/rule authorities by source position. `LoadedSpec` is excluded because it
+  retains requested and resolved paths. A caller target action that unconditionally throws still reaches compiled
+  selection and plan construction, demonstrating that compiler infrastructure may run its declared trusted staged
+  parser specs without executing the caller target. Fatal process exceptions rethrow; ordinary language failures
+  remain detached failed-compilation values. `.10.6.2.3` alone owns composed closure.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.4` — a prerequisite closes only when its committed proof composes):
   The core classifier, positive identity, and negative/isolation leaves already established their own boundaries,
   but Julia semantic construction must depend on one parent-level proof that those committed suites coexist with
