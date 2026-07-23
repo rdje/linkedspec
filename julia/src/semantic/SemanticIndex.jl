@@ -139,6 +139,7 @@ struct _SemanticIndexConstructionToken end
 const _SEMANTIC_INDEX_CONSTRUCTION_TOKEN = _SemanticIndexConstructionToken()
 
 abstract type _AbstractSemanticCompilationOutcome end
+abstract type _AbstractSemanticStaticProjection end
 
 """Opaque copied semantic source and compilation authority. Use exported accessors."""
 struct SemanticIndex
@@ -149,6 +150,7 @@ struct SemanticIndex
     _content_digest::String
     _entry_rule::Union{Nothing,String}
     _compilation_outcome::_AbstractSemanticCompilationOutcome
+    _static_projection::_AbstractSemanticStaticProjection
 
     function SemanticIndex(
         ::_SemanticIndexConstructionToken,
@@ -159,6 +161,7 @@ struct SemanticIndex
         content_digest,
         entry_rule,
         compilation_outcome,
+        static_projection,
     )
         return new(
             source_text,
@@ -168,6 +171,7 @@ struct SemanticIndex
             content_digest,
             entry_rule,
             compilation_outcome,
+            static_projection,
         )
     end
 end
@@ -329,15 +333,30 @@ end
 
 function _build_semantic_index(source_text, source_bytes, options)
     compilation_outcome = _build_semantic_compilation_outcome(source_text, options)
+    source_map = _SemanticSourceMap(source_text)
+    content_digest = "sha256:$(bytes2hex(SHA.sha256(source_bytes)))"
+    snapshot = _semantic_snapshot(
+        compilation_outcome,
+        options.source_detail_ceiling,
+    )
+    static_projection = _build_semantic_static_projection(
+        source_text,
+        source_map,
+        String(options.logical_name),
+        content_digest,
+        snapshot,
+        compilation_outcome,
+    )
     return SemanticIndex(
         _SEMANTIC_INDEX_CONSTRUCTION_TOKEN,
         source_text,
-        _SemanticSourceMap(source_text),
+        source_map,
         String(options.logical_name),
         options.source_detail_ceiling,
-        "sha256:$(bytes2hex(SHA.sha256(source_bytes)))",
+        content_digest,
         options.entry_rule === nothing ? nothing : String(options.entry_rule),
         compilation_outcome,
+        static_projection,
     )
 end
 

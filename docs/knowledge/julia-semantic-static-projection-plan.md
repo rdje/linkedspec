@@ -12,11 +12,16 @@ answers:
   - "which Julia task implements the compiled static graph"
   - "which Julia task owns privacy failure runtime-static and isolation"
   - "does Julia static projection expose query trace or runtime observations"
+  - "does Julia now implement the private semantic graph projection"
+  - "how many Julia semantic graph records relations and source references are retained"
+  - "how does Julia exclude compiled parent matchers from semantic regex slots"
+  - "is Julia semantic static graph storage recursively immutable"
+  - "does Julia expose a public semantic graph accessor"
 date: 2026-07-22
-status: current verified behavior-free implementation plan; production projection remains pending
+status: current; graph/source/evidence implementation complete, remaining static targets pending
 tags: [julia, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0; capability_conformance/semantic_introspection_model.json; Julia probes over graph/privacy/failed/runtime fixtures; admitted Perl/Rust/Dart static projectors; ADR 0049"
-reverify: "python3 tools/check_semantic_introspection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-semantic-static-plan-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\")'"
+evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.1; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
+reverify: "python3 tools/check_semantic_introspection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-semantic-static-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\")'"
 ---
 
 # Julia Semantic Static Projection Plan
@@ -90,6 +95,27 @@ semantic, capability, generated, and public ledgers remain 806/9/8/2, 6/20/81 at
 v1/10/80-0-0, and 59/27/0. Knowledge Map 683/5,188, mdBook, four doctrines, canonical Rust admission 78.75s,
 Dart 1/1, reference primary 66x2, Phase 0 1,031/632s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts
 pass. Graph implementation `.10.6.3.1` follows only after the clean plan commit.
+
+## Graph implementation
+
+Leaf `.10.6.3.1` now implements the graph/source/evidence subset. `SemanticIndex` retains a private
+`_SemanticStaticProjection` built from the same source map and single compilation outcome; construction does not
+parse twice or execute caller code. Recursive `_SemanticStaticObject` / `_SemanticStaticArray` wrappers store
+tuple-backed immutable data. `_semantic_static_projection_for_testing` is underscore-only, unexported, and returns
+a fresh detached dictionary/array tree for exact-oracle proof; there is still no public graph or query accessor.
+
+The complete graph deep-equals neutral v1 after materializing its seven source references: 12 records and 14
+relations. Two Child duplicate slots remain distinct; Top's two compiler-inserted parent matchers create no Top
+slot records; typed Top edges select the Child slots; lifecycle, entry decision, two explanations, and evidence
+are exact. Default/And/Single/Pipe remain neutral non-repetition even when native Julia reports Default repetition.
+All ids use uppercase percent-escaped UTF-8 and all rows use canonical kind/order ranks.
+
+New proof is 70 assertions; focused source/outcome/graph composition is 290 and complete Julia is
+7,832/primary/105. The full 5x2x66 primary matrix and ten Unicode legs pass. Unicode/semantic/capability/generated/
+public ledgers remain 806/9/8/2, 6/20/81 at 4/9 + 3/6, 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical Rust
+admission passes in 78.38 seconds, Dart admission is 1/1, primary is 66x2, and Phase 0 is 1,031/1,031 in 641
+seconds. Privacy/failure/runtime-static/isolation remain `.10.6.3.2`; graph implementation alone does not promote
+Julia.
 
 See [[julia-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-static-rule-authority]], [[perl-semantic-static-projection]],

@@ -5,17 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.0` — verified Julia static authority/target/normalization plan candidate.
-- latest_commit: `121d7998` is the clean base; `.10.6.3.0` is verified and awaiting its commit.
-- active_work_unit: `.10.6.3.0` lockstep staging/commit only; `.10.6.3.1` must wait for the clean commit.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.1` — Julia private exact static graph/source/evidence.
+- latest_commit: `99795ddf` is the clean base; `.10.6.3.1` is a fully verified commit candidate from it.
+- active_work_unit: commit `.10.6.3.1` cleanly, then activate privacy/failure/runtime-static/isolation `.10.6.3.2`.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
   neutral rollout is 4/9 and native admission 3/6.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
   case-/normalization-sensitive identity and strict UTF-8. One generated 5,991-byte class pins all 806 ranges;
-  `specs/spec.spec` consumes it at
-  all 12 label sites and owns physical-line header/action/blind tokens; all five backends pass default+POSIX.
+  `specs/spec.spec` consumes all 12 label sites with physical-line tokens; all five backends pass default+POSIX.
   Dart's generated classifier owns headers, targets, and AST validation. All 9 positives and 2 distinct pairs preserve exact identity through
   compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes. All 8 negative labels
   fail every external-AST role; source/primary/no-prefix and unrelated identifier grammars are isolation-locked.
@@ -38,6 +37,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   because both alias live vectors. Construction performs no caller target/generated/runtime/trace/sink/observer work.
   Static plan `.10.6.3.0` freezes graph 12/14, privacy 4/3+4/3, failed 6/4, runtime-static 7/8, exact authored/
   compiled/source correlation, Default/parent-matcher normalization, privacy fences, and `.1-.3` ownership.
+  Graph `.10.6.3.1` privately retains immutable 12/14/7 data; correlation, copies, order, omission, and denial are exact.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -47,14 +47,14 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   eight negatives across source, programmatic/reconstructed declaration/action/blind/bare roles, selectors,
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
-- current_julia_split: `.10.6.2` closed; `.10.6.3.0` plan verified; graph `.10.6.3.1` next after clean commit; `.10.6.3-.7` static through admission.
+- current_julia_split: `.10.6.2` closed; `.10.6.3.0` clean at `99795ddf`; graph `.10.6.3.1` verified; `.3.2` next, then `.10.6.4-.7`.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.3.0` changes no production/test/fixture/API/format/query/observation/ledger state and passes
-  direct five-target/14-source probes, focused 220, Julia 7,762/primary/105, 5x2x66, ten Unicode legs, all no-drift,
-  KM 683/5,188, canonical Rust 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and 1.56-GB cleanup preserving Pgen.
+- current_signoff: `.3.1` passes exact graph 12/14/7, new 70/focused 290, Julia 7,832/primary/105, 5x2x66,
+  ten Unicode legs, unchanged ledgers, book/KM 683/5,196/doctrines, canonical Rust 78.38s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/641s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.3.0` is fully verified/documented; stage, commit, clear brief, verify clean.
+- blockers: none. in_flight_uncommitted: `.10.6.3.1` implementation/tests/docs are verified; finish KM/book/cleanup and commit.

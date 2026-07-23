@@ -521,7 +521,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   without a public projection/query, execution, trace, observation, generated-format, rollout, or admission change.
   Plan signoff passes focused 220, Julia 7,762/primary/105, 5x2x66, ten Unicode legs, KM 683/5,188, book/
   doctrines, canonical Rust 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup.
-  Activate graph `.10.6.3.1` only after the plan commit is clean.
+  Graph `.10.6.3.1` now implements that private boundary. Run
+  `include("julia/test/semantic_index_static_graph_test.jl")` with the two foundation suites for 70 new / 290
+  focused assertions. The test seam `_semantic_static_projection_for_testing(index)` is deliberately private and
+  returns a fresh detached dictionary/array tree; public callers must not depend on it. Exact proof is 12 records,
+  14 relations, seven materialized source references, two distinct Child regex slots, zero Top slots despite its
+  two compiled parent matchers, and neutral non-repeating Default. Complete signoff is Julia 7,832/primary/105,
+  5x2x66, ten Unicode legs, unchanged semantic ledgers, canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/641s. Use `.10.6.3.2`, not ad-hoc graph edits, for privacy/failure/runtime-static/isolation follow-up.
   See [[julia-semantic-static-projection-plan]].
 
 ---

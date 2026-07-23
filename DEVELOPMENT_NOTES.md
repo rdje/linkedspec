@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.1` — static meaning is a private immutable composition): Julia's
+  graph projector cannot enumerate `CompiledRule.regex_patterns`: cross-rule action lowering inserts parent
+  matchers there, so graph Top contains two compiled `a` patterns that are not authored Top slots. The reliable
+  algorithm scans each complete authored member, groups parsed fragments by line, retains ordinary/self-indexed
+  structural occurrences, and then correlates typed compiler edges/lifecycles. This preserves duplicate Child
+  slots and exact multiline source spelling while excluding compiler-only matchers.
+
+  Neutral projection also cannot reuse Julia's native repetition predicate unchanged. Native Default has minimum
+  zero and reports repetition, while semantic model v1 treats Default, And, Single, and Pipe as non-repeating with
+  null bounds. `_build_semantic_static_projection` owns this explicit translation together with uppercase UTF-8
+  percent ids, canonical kind ordering, typed action value shapes, exact source/evidence relations, and selected-
+  entry explanations.
+
+  `SemanticIndex` retains the result as recursively immutable object/array wrappers. Only the underscore-prefixed
+  test seam materializes fresh dictionaries/arrays, so caller mutation cannot alias stored compiler-derived facts.
+  The projection is intentionally not exported or publicly accessible: later query work applies source ceilings
+  over detached records, while `.10.6.3.2` still owns privacy/failure/runtime-static/isolation completion.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.0` — static meaning requires authored/compiled correlation):
   Julia's opaque source/outcome owner already retains every input needed for neutral static projection, but no one
   input is sufficient. Parsed rules own authored member intent and line occurrence; typed compiled rules own

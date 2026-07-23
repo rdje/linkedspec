@@ -157,9 +157,12 @@ end
 """Return fresh foundation metadata without exposing semantic records."""
 function semantic_snapshot(index::SemanticIndex)
     outcome = _semantic_compilation_outcome(index)
+    return _semantic_snapshot(outcome, getfield(index, :_source_detail_ceiling))
+end
+
+function _semantic_snapshot(outcome::_SemanticCompilationOutcome, ceiling::SemanticSourceDetail)
     state = outcome.compiled === nothing ?
             SemanticFailedCompilationSnapshotState : SemanticCompiledSnapshotState
-    ceiling = getfield(index, :_source_detail_ceiling)
     return SemanticSnapshot(
         _SEMANTIC_SNAPSHOT_ID,
         state,

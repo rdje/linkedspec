@@ -49,11 +49,14 @@ answers:
   - "why does Julia semantic static projection need neutral repetition normalization"
   - "why can Julia compiled regex patterns not directly become semantic regex slots"
   - "which Julia static semantic projection leaves own graph privacy failure and runtime-static proof"
+  - "does Julia semantic_index now retain the exact private static graph"
+  - "how does Julia semantic graph projection correlate authored and compiled regex slots"
+  - "is the Julia semantic graph projection public"
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, and .10.6.3.0; docs/knowledge/julia-semantic-static-projection-plan.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, and .10.6.3.0-.10.6.3.1; docs/knowledge/julia-semantic-static-projection-plan.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
 ---
 
 Julia now has the source and compiled-or-failed semantic-index foundation from `.10.6.2.1-.2`, but still has no
@@ -196,6 +199,16 @@ Plan signoff passes direct five-target/14-source-reference probes, focused 220, 
 Rust 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup preserving 517 Pgen
 artifacts. No production/test/fixture/API/format/query/observation/ledger behavior changes; graph `.10.6.3.1`
 waits for the clean plan commit.
+
+Graph `.10.6.3.1` now retains the exact private compiled graph behind `SemanticIndex` as recursively immutable
+plain semantic objects/arrays. Its full-member scanner correlates authored slots with typed compiled owners,
+excludes cross-rule parent matchers, preserves duplicate and self-indexed occurrences, translates native Default
+repetition to neutral non-repetition, and materializes canonical ids/order/source evidence. The exact target is 12
+records / 14 relations / seven source references. An unexported underscore-only test seam returns fresh detached
+data; no public graph/query accessor, path, host AST/IR/compiler/regex, second parse, target execution, trace,
+observer, or generated-format change exists. New 70/focused 290 and Julia 7,832/primary/105 pass together with
+5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0
+1,031/641s. Privacy/failure/runtime-static/isolation remain `.10.6.3.2`, so Julia is still not promoted.
 
 Implementation is dependency-ordered under `.10.6`: Unicode rule-label closure; source-only copied input/map
 `.10.6.2.1`; staged compiled-or-failed authority `.10.6.2.2`; composed foundation closeout `.10.6.2.3`; static

@@ -946,7 +946,14 @@ content migration exists yet.
   privacy/host fences before code. Focused 220, Julia 7,762/primary/105, full primary 5x2x66, ten Unicode legs,
   unchanged no-drift ledgers, Knowledge Map 683/5,188, mdBook/doctrines, canonical Rust 78.75s + Dart 1/1 +
   primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts pass. Compiled graph/
-  source/evidence `.10.6.3.1` follows only after the clean plan commit.
+  source/evidence `.10.6.3.1` now retains one recursively immutable private projection behind the opaque index.
+  Complete authored-member scanning and typed compiler correlation deep-equal the exact graph at 12 records / 14
+  relations / seven source references, exclude cross-rule parent matchers, retain duplicate/self-indexed slots,
+  normalize Default/And/Single/Pipe repetition, and preserve canonical ids/order. The underscore-only test seam
+  returns fresh detached data; no public accessor/query, host/path state, second parse, target execution, generated-
+  format change, rollout, or admission is added. New 70/focused 290, Julia 7,832/primary/105, 5x2x66, ten Unicode
+  legs, unchanged ledgers, canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s pass. Privacy,
+  normalized failure, runtime-static absence, and isolation remain `.10.6.3.2` after the clean graph commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

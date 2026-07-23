@@ -532,8 +532,15 @@ Three backbone items tracked major structural modernization — all done:
   semantic 39/39, adjacent runtime 24/24, complete Dart, and neutral/public proof without promotion. Exact composed
   Dart admission `.10.5.6` is complete through one 12-role consumer. Julia's Unicode prerequisite `.10.6.1` and
   opaque strict source/compiled-or-failed foundation `.10.6.2` are now composition-closed at focused 220 and Julia
-  7,762/primary/105 without records, query, runtime observation, target execution, or semantic promotion; static
-  authority planning `.10.6.3.0` follows the clean closeout commit.
+  7,762/primary/105 without query, runtime observation, target execution, or semantic promotion. Static planning
+  `.10.6.3.0` freezes all five private targets; graph implementation `.10.6.3.1` now retains one recursively
+  immutable projection behind the opaque index and deep-equals the exact compiled graph at 12 records, 14
+  relations, and seven source references. It scans complete authored members, correlates typed compiled edges and
+  lifecycles, excludes compiler-inserted cross-rule parent matchers, retains duplicate/self-indexed slots,
+  normalizes Default/And/Single/Pipe repetition, and returns only fresh detached data through a private test seam.
+  New 70/focused 290 and Julia 7,832/primary/105 pass without a public projection/query accessor, path or host
+  object, second parse, target execution, format change, rollout, or admission movement. Privacy, normalized
+  failure, runtime-static absence, and isolation remain `.10.6.3.2`.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
