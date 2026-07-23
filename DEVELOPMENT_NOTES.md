@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.2` — preserve native diagnosis, normalize only the semantic view):
+  Julia's failed semantic foundation must remain useful for backend diagnosis. Replacing
+  `bare_edge_target_undefined` / `normalize_edges` with the neutral code at construction would erase the real
+  validator boundary. `_build_failed_semantic_static_projection` therefore consumes that detached native value
+  without mutating it and emits portable `unknown_rule_reference` / `compile` only into the private static record,
+  together with parsed-rule order, complete target-member source evidence, decision, explanation, and relations.
+  Parse, validation, selection, and other ordinary failures use the same nonempty fallback but keep native fields.
+
+  Privacy and runtime-static did not require a second projector. The existing compiled construction already
+  applies its source ceiling before materialization and never executes the target. Exact-oracle tests prove both
+  privacy targets at 4/3, runtime-static at 7/8 with no execution/event/`observed_as` state, and two self-indexed
+  regex slots without redundant self `dispatches_to`. This is a useful design boundary: static semantic meaning
+  is derived solely from copied source plus parsed/compiled/diagnostic authority, never from a trace transcript.
+
+  Repeated lifecycle markers require occurrence identity even when their marker name and owner match. The scanner
+  and compiled payload correlation retain `E:0` and `E:1` separately with authored order, different return shapes,
+  exact line evidence, and separate containment. Fresh materializations cannot alias tuple-backed retained data;
+  JSON/plain-value, public-omission, host-path, loader/emitter/executor/observer, environment/time/random scans close
+  the remaining isolation boundary. New 99/focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, and
+  canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/697s pass without semantic promotion.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.1` — static meaning is a private immutable composition): Julia's
   graph projector cannot enumerate `CompiledRule.regex_patterns`: cross-rule action lowering inserts parent
   matchers there, so graph Top contains two compiled `a` patterns that are not authored Top slots. The reliable
@@ -16,7 +37,8 @@
   `SemanticIndex` retains the result as recursively immutable object/array wrappers. Only the underscore-prefixed
   test seam materializes fresh dictionaries/arrays, so caller mutation cannot alias stored compiler-derived facts.
   The projection is intentionally not exported or publicly accessible: later query work applies source ceilings
-  over detached records, while `.10.6.3.2` still owns privacy/failure/runtime-static/isolation completion.
+  over detached records. `.10.6.3.2` now closes privacy/failure/runtime-static/isolation; `.10.6.3.3` owns only
+  committed five-target recomposition and parent closeout.
 
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.0` — static meaning requires authored/compiled correlation):
   Julia's opaque source/outcome owner already retains every input needed for neutral static projection, but no one

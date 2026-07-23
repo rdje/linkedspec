@@ -8,17 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia compiled graph/source/evidence `FUTURE-PARITY-BACKLOG.10.6.3.1` is a complete verified commit candidate
-  from clean plan commit `99795ddf`. It owns only the private exact 12-record/14-relation graph target and its
-  immutable correlated source/evidence authority. Privacy/failure/runtime-static/isolation `.10.6.3.2` follows
-  only after this graph leaf is committed cleanly; public query and runtime observation remain later.
+- Julia privacy/failure/runtime-static/isolation `FUTURE-PARITY-BACKLOG.10.6.3.2` is a complete verified candidate
+  from clean graph commit `197538f7`. Exact privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clone/occurrence/host
+  denial, complete gates, docs, and cleanup pass. Commit this leaf cleanly before activating composition `.3.3`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.2 — complete Julia static targets**
+  (DONE candidate from clean base `197538f7`; awaiting this commit).
+
+  **Result:** Julia's opaque index now privately retains all five exact static construction targets across
+  `.3.1-.2`. Both privacy ceilings, projection-only neutral failure normalization over an unchanged native
+  diagnostic, runtime-static absence, repeated-lifecycle occurrence identity, detached copies, tuple immutability,
+  generic failure fallback, private omission, and host denial are exact. No public query/accessor, execution,
+  observation, generated-format change, rollout movement, or native admission is added.
+
+  **Proof:** New 99/focused 389; privacy text 4/3, privacy identity 4/3, failed 6/4, runtime-static 7/8; Julia
+  7,931/primary/105; stable 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2 and semantic 6/20/81 at
+  4/9 + 3/6; mdBook/KM 683/5,207/four doctrines/diff; canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/697s; exact 1.56-GB cleanup preserving all 517 Pgen artifacts.
+
+  **Next:** no-change five-target composition `.10.6.3.3` follows only after this commit is clean.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.1 — add Julia static graph**
-  (DONE candidate from clean base `99795ddf`; awaiting this commit).
+  (DONE at clean commit `197538f7` from base `99795ddf`).
 
   **Result:** Julia's opaque semantic index now privately retains one recursively immutable exact graph projection
   built from copied source/map plus the existing typed compilation outcome. Complete-member correlation excludes
@@ -31,7 +46,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   doctrines/diff at KM 683/5,196; canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s; exact
   1.56-GB cleanup preserving all 517 Pgen artifacts.
 
-  **Next:** after the clean commit, activate privacy/failure/runtime-static/isolation `.10.6.3.2` task-tree-first.
+  **Next:** privacy/failure/runtime-static/isolation `.10.6.3.2` completed above after this graph commit.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.0 — freeze Julia static projection**
   (DONE at clean commit `99795ddf` from base `121d7998`).

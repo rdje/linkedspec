@@ -528,7 +528,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   14 relations, seven materialized source references, two distinct Child regex slots, zero Top slots despite its
   two compiled parent matchers, and neutral non-repeating Default. Complete signoff is Julia 7,832/primary/105,
   5x2x66, ten Unicode legs, unchanged semantic ledgers, canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0
-  1,031/641s. Use `.10.6.3.2`, not ad-hoc graph edits, for privacy/failure/runtime-static/isolation follow-up.
+  1,031/641s. Remaining-target leaf `.10.6.3.2` is now exact. Run
+  `include("julia/test/semantic_index_static_remaining_test.jl")` with the three earlier suites for 99 new / 389
+  focused assertions. It deep-equals privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8;
+  proves native failure preservation under projection-only neutral normalization, repeated-lifecycle occurrence
+  ids/order/shapes/source, no execution/events, generic parse/entry fallback, detached copies, tuple immutability,
+  plain JSON, private surface omission, and host/path/loader/emitter/executor/trace/sink/observer denial. Complete
+  signoff is Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged semantic ledgers, canonical Rust 78.27s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/697s. Use no-change `.10.6.3.3`, not replacement projector tests, for
+  five-target recomposition and parent closeout.
   See [[julia-semantic-static-projection-plan]].
 
 ---

@@ -17,11 +17,17 @@ answers:
   - "how does Julia exclude compiled parent matchers from semantic regex slots"
   - "is Julia semantic static graph storage recursively immutable"
   - "does Julia expose a public semantic graph accessor"
+  - "does Julia now implement both semantic privacy construction ceilings"
+  - "does Julia preserve its native failed diagnostic while projecting the neutral failure"
+  - "does Julia semantic index construction create runtime execution or event records"
+  - "how does Julia distinguish repeated semantic lifecycle occurrences"
+  - "are Julia semantic static projection copies detached from retained storage"
+  - "which Julia task recomposes and closes all five static targets"
 date: 2026-07-22
-status: current; graph/source/evidence implementation complete, remaining static targets pending
+status: current; all five private construction targets implemented, composed closeout pending
 tags: [julia, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.1; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
-reverify: "python3 tools/check_semantic_introspection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-semantic-static-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\")'"
+evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.2; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
+reverify: "python3 tools/check_semantic_introspection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-semantic-static-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'"
 ---
 
 # Julia Semantic Static Projection Plan
@@ -114,8 +120,36 @@ New proof is 70 assertions; focused source/outcome/graph composition is 290 and 
 7,832/primary/105. The full 5x2x66 primary matrix and ten Unicode legs pass. Unicode/semantic/capability/generated/
 public ledgers remain 806/9/8/2, 6/20/81 at 4/9 + 3/6, 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical Rust
 admission passes in 78.38 seconds, Dart admission is 1/1, primary is 66x2, and Phase 0 is 1,031/1,031 in 641
-seconds. Privacy/failure/runtime-static/isolation remain `.10.6.3.2`; graph implementation alone does not promote
-Julia.
+seconds. Privacy/failure/runtime-static/isolation were assigned to `.10.6.3.2` and are completed below; graph
+implementation alone did not promote Julia.
+
+## Remaining-target implementation
+
+Leaf `.10.6.3.2` completes both privacy targets, failed construction, runtime-static absence, and isolation. The
+compiled projector already applies construction ceilings and creates no runtime observations. Exact proof now
+deep-equals `privacy` at text 4/3, `privacy_limited` at identity 4/3, and the runtime fixture's static half at 7/8.
+The identity ceiling suppresses digest/text while preserving logical identity; runtime-static retains two
+self-indexed regex slots and `selects_regex` relations but no execution/event record, `observed_as`, or redundant
+self dispatch.
+
+Failed construction now uses retained parsed rules, complete authored-member scans, source mapping, and the
+detached native diagnostic rather than returning an empty projection. The foundation stays
+`bare_edge_target_undefined` / `normalize_edges`; only the private static record becomes
+`unknown_rule_reference` / `compile`, with portable rule ids, target evidence, dependency decision, explanation,
+`diagnoses`, and `explained_by`. Other ordinary failures retain native code/stage/message/fields and include the
+available parsed rules; parse failure yields three records and missing-entry failure yields four.
+
+Repeated lifecycle markers remain occurrence-specific (`E:0`, `E:1`) with independent order, return shape, source
+line, and containment. Every materialized projection is a fresh plain JSON copy; retained arrays/objects remain
+tuple-backed and reject mutation. Proof also denies public export, paths and path-like host values, AST/ActionIR,
+descriptor/compiler/regex owners, loaders, generated/emitted execution, trace, sinks, observers, environment,
+clocks, and randomness.
+
+New proof is 99 assertions; source/outcome/graph/remaining focus is 389 and complete Julia is
+7,931/primary/105. The full 5x2x66 primary matrix and ten Unicode legs pass. All neutral/public ledgers remain
+unchanged. Canonical Rust admission passes in 78.27 seconds, Dart admission is 1/1, primary is 66x2, and Phase 0
+is 1,031/1,031 in 697 seconds. All five targets now exist across `.10.6.3.1-.2`; no-change `.10.6.3.3` owns their
+recomposition and parent closure, and Julia remains unpromoted.
 
 See [[julia-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-static-rule-authority]], [[perl-semantic-static-projection]],

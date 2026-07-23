@@ -118,7 +118,15 @@ function _build_semantic_static_projection(
             outcome.entry,
         )
     end
-    return _semantic_static_projection(snapshot, Dict{String,Any}(), Any[], Any[])
+    return _build_failed_semantic_static_projection(
+        source_text,
+        source_map,
+        logical_name,
+        content_digest,
+        snapshot,
+        outcome.parsed,
+        outcome.diagnostic,
+    )
 end
 
 function _build_compiled_semantic_static_projection(
@@ -397,6 +405,239 @@ function _build_compiled_semantic_static_projection(
 
     _semantic_static_canonicalize!(records, relations)
     return _semantic_static_projection(snapshot, source_refs, records, relations)
+end
+
+function _build_failed_semantic_static_projection(
+    source_text::String,
+    source_map::_SemanticSourceMap,
+    logical_name::String,
+    content_digest::String,
+    snapshot::SemanticSnapshot,
+    parsed::Union{Nothing,SpecFile},
+    diagnostic::Union{Nothing,SemanticCompilationDiagnostic},
+)
+    rules = parsed === nothing ? Rule[] : parsed.rules
+    scans = parsed === nothing ? () : _semantic_static_scan_rules(source_text, parsed)
+    scans_by_label = Dict(scan.label => scan for scan in scans)
+    normalized = _semantic_static_normalize_failure(diagnostic)
+    failed_label = normalized.rule_label
+    if failed_label === nothing && !isempty(rules)
+        failed_label = rules[1].header.label
+    end
+    failed_rule_id = failed_label === nothing ? nothing : _semantic_static_rule_id(failed_label)
+    failed_scan = failed_label === nothing ? nothing : get(scans_by_label, failed_label, nothing)
+    source_refs = Dict{String,Any}()
+    records = Dict{String,Any}[]
+    relations = Dict{String,Any}[]
+
+    push!(records, _semantic_static_record(
+        id = _SEMANTIC_SPEC_ID,
+        kind = "spec",
+        name = _semantic_static_spec_name(logical_name),
+        owner_id = nothing,
+        order = 0,
+        source = nothing,
+        facts = Dict{String,Any}(
+            "definition_order" => [
+                _semantic_static_rule_id(rule.header.label) for rule in rules
+            ],
+            "compiled_rule_order" => Any[],
+            "entry_rule_id" => nothing,
+            "entry_selection_basis" => nothing,
+        ),
+    ))
+    push!(records, _semantic_static_source_record())
+
+    for (rule_offset, rule) in enumerate(rules)
+        rule_order = rule_offset - 1
+        rule_id = _semantic_static_rule_id(rule.header.label)
+        scan = get(scans_by_label, rule.header.label, nothing)
+        source = scan === nothing ? nothing : _semantic_static_register_source!(
+            source_refs,
+            rule_id,
+            scan.header,
+            source_text,
+            source_map,
+            logical_name,
+            content_digest,
+        )
+        repetition = _semantic_static_neutral_repetition(rule.header.mode)
+        rep_minimum, rep_maximum = _semantic_static_neutral_bounds(rule.header.mode)
+        push!(records, _semantic_static_record(
+            id = rule_id,
+            kind = "rule",
+            name = rule.header.label,
+            owner_id = _SEMANTIC_SPEC_ID,
+            order = rule_order,
+            source = source,
+            facts = Dict{String,Any}(
+                "family" => is_and(rule.header.mode) ? "and" : "or",
+                "cursor_policy" => is_and(rule.header.mode) ? "contiguous" : "seek",
+                "is_entry_marker" => rule.header.is_top,
+                "is_repetition" => repetition,
+                "rep_min" => rep_minimum,
+                "rep_max" => rep_maximum,
+                "edge_ownership" => _semantic_static_scan_edge_ownership(scan),
+                "value_shape" => _semantic_static_value_shape("unknown"),
+            ),
+        ))
+    end
+
+    diagnostic_id = "diagnostic:compile:0"
+    diagnostic_member = if normalized.target === nothing || failed_scan === nothing
+        nothing
+    else
+        _semantic_static_member_for_target(failed_scan, normalized.target)
+    end
+    diagnostic_source = diagnostic_member === nothing ? nothing :
+                        _semantic_static_register_source!(
+        source_refs,
+        diagnostic_id,
+        diagnostic_member.range,
+        source_text,
+        source_map,
+        logical_name,
+        content_digest,
+    )
+    push!(records, _semantic_static_record(
+        id = diagnostic_id,
+        kind = "diagnostic",
+        name = normalized.code,
+        owner_id = _SEMANTIC_SPEC_ID,
+        order = 0,
+        source = diagnostic_source,
+        facts = Dict{String,Any}(
+            "code" => normalized.code,
+            "stage" => normalized.stage,
+            "severity" => "error",
+            "message" => normalized.message,
+            "fields" => normalized.fields,
+        ),
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "contains",
+        from_id = _SEMANTIC_SPEC_ID,
+        to_id = _SEMANTIC_SOURCE_ID,
+        order = 0,
+        source = nothing,
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "contains",
+        from_id = _SEMANTIC_SPEC_ID,
+        to_id = diagnostic_id,
+        order = 1,
+        source = diagnostic_source,
+    ))
+
+    if normalized.code == "unknown_rule_reference" &&
+       failed_label !== nothing && failed_rule_id !== nothing && normalized.target !== nothing
+        target = normalized.target
+        decision_id = "decision:compile:$failed_rule_id"
+        explanation_id = "explanation:$decision_id:0"
+        push!(records, _semantic_static_record(
+            id = decision_id,
+            kind = "decision",
+            name = "compile rule $failed_label",
+            owner_id = failed_rule_id,
+            order = 0,
+            source = diagnostic_source,
+            facts = Dict{String,Any}(
+                "decision_kind" => "dependency_resolution",
+                "outcome" => diagnostic_id,
+            ),
+        ))
+        push!(records, _semantic_static_record(
+            id = explanation_id,
+            kind = "explanation_step",
+            name = nothing,
+            owner_id = decision_id,
+            order = 0,
+            source = diagnostic_source,
+            facts = Dict{String,Any}(
+                "rule_code" => "dependency_target_missing",
+                "summary" => "The authored dependency $target has no declared rule.",
+                "input_ids" => Any[failed_rule_id],
+                "output_fact" => Dict{String,Any}(
+                    "record_id" => decision_id,
+                    "path" => "/facts/outcome",
+                    "value" => diagnostic_id,
+                ),
+            ),
+        ))
+        push!(relations, _semantic_static_relation(
+            kind = "diagnoses",
+            from_id = diagnostic_id,
+            to_id = failed_rule_id,
+            order = 0,
+            source = diagnostic_source,
+        ))
+        push!(relations, _semantic_static_relation(
+            kind = "explained_by",
+            from_id = decision_id,
+            to_id = explanation_id,
+            order = 0,
+            source = diagnostic_source,
+            evidence_ids = Any[diagnostic_id],
+        ))
+    end
+
+    _semantic_static_canonicalize!(records, relations)
+    return _semantic_static_projection(snapshot, source_refs, records, relations)
+end
+
+function _semantic_static_normalize_failure(
+    diagnostic::Union{Nothing,SemanticCompilationDiagnostic},
+)
+    actual = diagnostic === nothing ? SemanticCompilationDiagnostic(
+        code = "semantic_index_compilation_failed",
+        stage = "compile_source",
+        message = "Spec compilation failed.",
+    ) : diagnostic
+    fields = _semantic_json_value(actual.fields)
+    rule_label = get(fields, "rule_label", nothing)
+    target = get(fields, "target", get(fields, "target_rule", nothing))
+    rule_label = rule_label isa AbstractString ? String(rule_label) : nothing
+    target = target isa AbstractString ? String(target) : nothing
+    if actual.code in ("bare_edge_target_undefined", "regex_slot_identity_invalid") &&
+       rule_label !== nothing && target !== nothing
+        return (
+            code = "unknown_rule_reference",
+            stage = "compile",
+            message = "Rule $rule_label references unknown rule $target.",
+            fields = Dict{String,Any}(
+                "rule_id" => _semantic_static_rule_id(rule_label),
+                "missing_rule_id" => _semantic_static_rule_id(target),
+            ),
+            rule_label = rule_label,
+            target = target,
+        )
+    end
+    return (
+        code = actual.code,
+        stage = actual.stage,
+        message = actual.message,
+        fields = fields,
+        rule_label = rule_label,
+        target = target,
+    )
+end
+
+function _semantic_static_scan_edge_ownership(
+    scan::Union{Nothing,_SemanticStaticScannedRule},
+)
+    scan === nothing && return "none"
+    edges = Tuple(edge for member in scan.members for edge in member.edges)
+    return _semantic_static_edge_ownership(edges)
+end
+
+function _semantic_static_member_for_target(
+    scan::_SemanticStaticScannedRule,
+    target::String,
+)
+    for member in scan.members
+        any(edge -> edge.target == target, member.edges) && return member
+    end
+    return nothing
 end
 
 function _semantic_static_project_edges(

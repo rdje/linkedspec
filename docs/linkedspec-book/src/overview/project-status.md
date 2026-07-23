@@ -539,8 +539,13 @@ Three backbone items tracked major structural modernization — all done:
   lifecycles, excludes compiler-inserted cross-rule parent matchers, retains duplicate/self-indexed slots,
   normalizes Default/And/Single/Pipe repetition, and returns only fresh detached data through a private test seam.
   New 70/focused 290 and Julia 7,832/primary/105 pass without a public projection/query accessor, path or host
-  object, second parse, target execution, format change, rollout, or admission movement. Privacy, normalized
-  failure, runtime-static absence, and isolation remain `.10.6.3.2`.
+  object, second parse, target execution, format change, rollout, or admission movement. Remaining-target leaf
+  `.10.6.3.2` now deep-equals privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8. It keeps
+  Julia's native failure unchanged beneath projection-only portable normalization and proves repeated-lifecycle
+  occurrence identity, no execution/events, generic failure fallback, fresh detached copies, tuple immutability,
+  private omission, and host denial. New 99/focused 389 and Julia 7,931/primary/105 pass with 5x2x66, all ten
+  Unicode legs, unchanged ledgers, and canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/697s.
+  All five private static targets now exist; no-change composition `.10.6.3.3` is next without promotion.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

@@ -953,7 +953,14 @@ content migration exists yet.
   returns fresh detached data; no public accessor/query, host/path state, second parse, target execution, generated-
   format change, rollout, or admission is added. New 70/focused 290, Julia 7,832/primary/105, 5x2x66, ten Unicode
   legs, unchanged ledgers, canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s pass. Privacy,
-  normalized failure, runtime-static absence, and isolation remain `.10.6.3.2` after the clean graph commit.
+  `.10.6.3.2` now completes both privacy ceilings, normalized failed projection, runtime-static absence, repeated-
+  lifecycle occurrence identity, clone immutability, generic failure fallback, and host isolation. The exact
+  private targets are graph 12/14, privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8.
+  Julia's foundation still reports native `bare_edge_target_undefined` / `normalize_edges`; only the projection
+  emits the neutral unknown-rule decision/explanation. New 99/focused 389 and Julia 7,931/primary/105 pass with
+  stable 5x2x66, all ten Unicode legs, and unchanged semantic ledgers. No public query/accessor, execution,
+  observation, generated-format change, rollout, or admission is introduced; no-change closeout `.10.6.3.3`
+  follows after the clean `.3.2` commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

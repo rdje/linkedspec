@@ -5,31 +5,23 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.1` — Julia private exact static graph/source/evidence.
-- latest_commit: `99795ddf` is the clean base; `.10.6.3.1` is a fully verified commit candidate from it.
-- active_work_unit: commit `.10.6.3.1` cleanly, then activate privacy/failure/runtime-static/isolation `.10.6.3.2`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.2` — verified Julia remaining private static targets.
+- latest_commit: `197538f7` is the clean `.10.6.3.1` base; `.10.6.3.2` is the verified commit candidate.
+- active_work_unit: commit `.10.6.3.2` cleanly, then activate no-change composition `.10.6.3.3`.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
   neutral rollout is 4/9 and native admission 3/6.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
-  case-/normalization-sensitive identity and strict UTF-8. One generated 5,991-byte class pins all 806 ranges;
-  `specs/spec.spec` consumes all 12 label sites with physical-line tokens; all five backends pass default+POSIX.
-  Dart's generated classifier owns headers, targets, and AST validation. All 9 positives and 2 distinct pairs preserve exact identity through
-  compiled/generated/reconstructed/emitted/selector/diagnostic/trace/loader/command routes. All 8 negative labels
-  fail every external-AST role; source/primary/no-prefix and unrelated identifier grammars are isolation-locked.
+  identity and strict UTF-8. One generated class pins 806 ranges across all 12 grammar sites and five backends.
+  All 9 positives/2 distinct pairs preserve identity through every route; all 8 negatives fail every trust role;
+  source/primary/no-prefix and unrelated identifier grammars are isolation-locked.
 - current_dart_semantic_map: public `SemanticIndex` copies text/strict UTF-8 and privately owns canonical bytes,
-  exact coordinates, typed AST, and compiled authority while exposing only ceiling-bounded immutable values.
-  All five static targets and 22-call/25-relation graph are exact; body/AST/IR, implementation, paths, and execution
-  remain absent from the index; `.10.5.3` is composition-closed.
-  Query `.10.5.4.1-.3` now publicly exposes immutable `capabilities`, typed `query`, and raw-neutral `queryNeutral`
-  through one detached-projection evaluator; all 19 static digests and 26 portable validation boundaries are exact.
-  Runtime `.10.5.5.1-.2` exports immutable typed slot/result events plus an optional invocation-local sink across
-  direct/loaded/reconstructed/traced/generated-plan engine routes, with zero absent-sink event/hash work and exact
-  result/cursor/trace/diagnostic/failure identity. `withExecutionObservation` returns a separate topology-validated
-  snapshot at the twentieth digest; `.3` propagates public generated/emitted direct/traced capture with exact
-  callback identity/non-interference and v2/format 2. `.4` closes `.10.5.5`. Admission `.10.5.6` now composes all
-  owners in one exact 12-role consumer, matches every digest/route, advances only Dart, and closes parent `.10.5`.
+  exact coordinates and typed compiled authority. All five static and 22/25 call targets are exact without host IR,
+  paths, or execution. Public immutable typed/raw-neutral query matches 19 digests and 26 validation boundaries.
+  Optional typed observation spans every direct/loaded/reconstructed/traced/generated/emitted route with exact
+  callback/result/cursor/trace/diagnostic/failure identity, no absent-sink work, and twentieth-digest derivation.
+  One exact 12-role consumer admits only Dart and closes `.10.5`.
 - current_julia_semantic_map: `.10.6.2.1-.2` now export one opaque `semantic_index` over strict copied text/bytes,
   exact source mapping, and one staged compiled-or-failed outcome. Detached snapshot/authority/diagnostic/entry/
   generated-plan values expose no path, source, AST/IR, compiler/descriptor object, execution, record, or query.
@@ -37,7 +29,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   because both alias live vectors. Construction performs no caller target/generated/runtime/trace/sink/observer work.
   Static plan `.10.6.3.0` freezes graph 12/14, privacy 4/3+4/3, failed 6/4, runtime-static 7/8, exact authored/
   compiled/source correlation, Default/parent-matcher normalization, privacy fences, and `.1-.3` ownership.
-  Graph `.10.6.3.1` privately retains immutable 12/14/7 data; correlation, copies, order, omission, and denial are exact.
+  Graph `.10.6.3.1` privately retains immutable 12/14/7 data. `.10.6.3.2` completes privacy text 4/3, privacy
+  identity 4/3, failed 6/4, and runtime-static 7/8; native failure stays exact beneath projection-only neutral
+  mapping. Lifecycle occurrences, no execution/events, copies/tuples, fallback, private omission, and host denial pass.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -47,14 +41,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   eight negatives across source, programmatic/reconstructed declaration/action/blind/bare roles, selectors,
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
-- current_julia_split: `.10.6.2` closed; `.10.6.3.0` clean at `99795ddf`; graph `.10.6.3.1` verified; `.3.2` next, then `.10.6.4-.7`.
+- current_julia_split: `.10.6.2` closed; `.10.6.3.1` clean at `197538f7`; `.3.2` verified, then `.3.3` and `.10.6.4-.7`.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.3.1` passes exact graph 12/14/7, new 70/focused 290, Julia 7,832/primary/105, 5x2x66,
-  ten Unicode legs, unchanged ledgers, book/KM 683/5,196/doctrines, canonical Rust 78.38s + Dart 1/1 + primary
-  66x2 + Phase 0 1,031/641s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
+- current_signoff: `.3.2` passes exact 4/3 + 4/3 + 6/4 + 7/8, new 99/focused 389, Julia 7,931/primary/105,
+  5x2x66, ten Unicode legs, unchanged ledgers, book/KM 683/5,207/doctrines, canonical Rust 78.27s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/697s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.3.1` implementation/tests/docs are verified; finish KM/book/cleanup and commit.
+- blockers: none. in_flight_uncommitted: `.10.6.3.2` implementation/tests/docs are verified; regenerate KM,
+  run final doctrine/diff checks, commit, clear brief, then activate `.3.3` only from the clean commit.

@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.2 — complete Julia static targets
+
+Completed Julia's remaining private static semantic construction targets. The already-compiled projection now
+deep-equals the Unicode privacy fixture at both `text` and `identity` ceilings (4 records / 3 relations each) and
+the runtime fixture's observation-free static half (7/8). Construction retains no execution/event records,
+`observed_as` relations, redundant self dispatch, target execution, trace-derived facts, or runtime observer state.
+
+Failed construction now builds a detached static projection from the retained parsed rule/source and native
+diagnostic authorities. The foundation remains exactly Julia-native at `bare_edge_target_undefined` /
+`normalize_edges`; only the private semantic projection maps that case to portable `unknown_rule_reference` /
+`compile`, exact rule ids/fields/message, dependency decision, explanation, `diagnoses`, `explained_by`, and
+target-member source evidence. Generic parse, validation, compile, entry-selection, and generated-plan failures
+retain their native detached diagnostic with the available parsed rules instead of producing an empty projection.
+
+The new 99-assertion suite deep-equals privacy 4/3 + 4/3, failed 6/4, and runtime-static 7/8. It additionally locks
+two repeated lifecycle occurrences with distinct ids/order/value shapes/source, fresh detached copies, tuple-backed
+retained immutability, plain JSON values, source-ceiling behavior, parse/missing-entry fallback, private seam
+omission, and host/path/AST/IR/compiler/loader/emitter/executor/trace/sink/observer/environment/time/random denial.
+No public accessor, query, trace, runtime observation, generated-format change, rollout movement, or native
+admission is added.
+
+Focused source/outcome/graph/remaining composition passes 389; complete Julia passes 7,931 package assertions,
+primary process conformance, and corpus 105/105. The full primary matrix passes 5x2x66 and all ten Unicode-manifest
+legs pass. Unicode remains 806/9/8/2; semantic governance remains 6/20/81 at rollout 4/9 and native admission 3/6;
+capability/generated/public remain 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI passes all four doctrines,
+Rust semantic admission 1/1 in 78.27 seconds, Dart 1/1, primary 66/66 twice, and Phase 0 1,031/1,031 in 697
+seconds. mdBook, Knowledge Map 683/5,207, memory/task metadata, diff hygiene, and exact 1.56-GB safe cleanup pass while all
+517 Pgen issue artifacts remain preserved. No-change composition `.10.6.3.3` is next after this commit is clean.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.1 — add Julia static graph
 
 Added Julia's exact private compiled semantic graph behind the existing opaque `SemanticIndex`. Construction now

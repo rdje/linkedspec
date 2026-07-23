@@ -1085,6 +1085,42 @@ doctrines, canonical Rust admission 78.75 seconds, Dart admission 1/1, reference
 1,031/1,031 in 632 seconds, and exact 1.56-GB generated cleanup pass. `.10.6.3.1` is eligible only after this
 behavior-free plan is committed cleanly.
 
+### Julia private static projection implementation
+
+Leaves `.10.6.3.1-.2` now implement all five construction targets behind the opaque Julia `SemanticIndex`:
+
+| Target | Records | Relations | Exact boundary |
+|---|---:|---:|---|
+| graph | 12 | 14 | compiled graph, seven private source references |
+| privacy | 4 | 3 | `text` ceiling, digest and excerpts available |
+| privacy limited | 4 | 3 | `identity` ceiling, digest and source text unavailable |
+| failed | 6 | 4 | portable failure projection over an unchanged native diagnostic |
+| runtime static | 7 | 8 | compiled meaning only; no execution, events, or observations |
+
+The failure boundary is deliberately two-layered. Julia's foundation still reports
+`bare_edge_target_undefined` at stage `normalize_edges` with `rule_label=Top` and `target=Missing`. The private
+static projection alone emits `unknown_rule_reference` at stage `compile`, portable rule ids, the dependency
+decision and explanation, `diagnoses`/`explained_by` relations, and exact source evidence for `Missing`. Other
+ordinary parse, validation, compile, entry-selection, and plan failures retain their native detached diagnostic;
+the projector includes whatever parsed rules are available instead of returning an empty semantic snapshot.
+
+Runtime-static construction never executes the target. Its target contains two self-indexed slots and their
+`selects_regex` relations, but no execution/event records, `observed_as` relation, or redundant self
+`dispatches_to`. Repeated lifecycle markers are occurrence-specific: two authored `E` members become distinct
+`E:0` and `E:1` ids with independent order, value shape, source line, and containment relation.
+
+Every test materialization is a fresh plain JSON tree, while retained object/array values remain tuple-backed and
+recursively immutable. Tests deny path-like host values and forbid source text/bytes owners, AST/ActionIR,
+descriptor/compiler/regex objects, loaders, emitted/generated execution, trace, diagnostic sinks, runtime
+observers, environment reads, clocks, and randomness. The underscore-only proof seam is not exported; there is
+still no public semantic query or projection accessor, and no rollout or native-admission movement.
+
+Exact proof adds 99 assertions and composes with source 135, outcome 85, and graph 70 at focused 389. Complete
+Julia passes 7,931 package assertions, primary process conformance, and corpus 105/105. The five-backend matrix is
+5x2x66 and all ten Unicode-manifest legs pass. Canonical local CI passes Rust semantic admission in 78.27 seconds,
+Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 697 seconds. No-change `.10.6.3.3` next recomposes
+these committed targets and closes the private static parent.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1458,7 +1494,11 @@ The dependency order is:
 | `.10.6.2.1` | Julia strict copied input and private source map | complete; 135 focused, Julia 7,677/primary/105, 5x2x66 plus ten Unicode legs, canonical signoff, and cleanup |
 | `.10.6.2.2` | Julia compiled-or-failed outcome foundation | complete; 85 new/focused 220, Julia 7,762/primary/105, 5x2x66 plus ten Unicode legs, exact detached authority/diagnostic/entry/plan, canonical/cleanup, no execution or promotion |
 | `.10.6.2.3` | Julia source/outcome foundation closeout | complete; committed focused 220, Julia 7,762/primary/105, matrices/no-drift/canonical signoff, and parent closure without production change |
-| `.10.6.3-.10.6.7` | Julia static projection through exact admission | pending |
+| `.10.6.3.0` | Julia static authority map and dependency split | complete; five targets, normalization, privacy, and host fences frozen |
+| `.10.6.3.1` | Julia compiled graph/source/evidence projection | complete; private exact 12/14/7 graph, no public query |
+| `.10.6.3.2` | Julia privacy/failure/runtime-static and isolation | complete; exact 4/3 + 4/3 + 6/4 + 7/8 targets, no promotion |
+| `.10.6.3.3` | Julia composed private static closeout | pending; recomposition only |
+| `.10.6.4-.10.6.7` | Julia calls projection through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
