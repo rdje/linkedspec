@@ -8,16 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia typed function/helper/call/binding core `FUTURE-PARITY-BACKLOG.10.6.4.1` is a complete verified candidate
-  from clean plan commit `3ee4b908`. Durable docs, KM 685/5,252, mdBook, and exact 1,618,660-KiB cleanup pass;
-  commit the private 18/16 core, clear the brief, verify clean, then activate `.10.6.4.2` task-tree-first.
+- Julia staged/generated call provenance `FUTURE-PARITY-BACKLOG.10.6.4.2` is a complete verified candidate from
+  clean typed-core commit `9ec3f034`. Commit exact private 22/25 parity, clear the brief, verify clean, then
+  activate no-change composition closeout `.10.6.4.3` task-tree-first.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.2 — complete Julia call provenance**
+  (DONE candidate from clean base `9ec3f034`; commit pending final fast checks).
+
+  **Result:** Julia's existing private call projector now validates native payload/job/body-result correlation and
+  the retained generated-v2 contract/identity/full-order/selected-row authority, then retains three distinct
+  neutral staged roles plus one selected handler-plan artifact. Exact full equality is 22 records / 25 relations /
+  10 source references. Native sidecars, body AST, generated implementation, paths, execution, trace, and sinks
+  remain private; corrupt sidecar and plan authority rejects before retention.
+
+  **Proof:** New 62/focused 530; Julia 8,072/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode
+  806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0;
+  canonical doctrines + Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. mdBook/KM 686/5,265 and
+  exact 1,504,508-KiB safe cleanup preserving all 517 Pgen artifacts pass. No public query, runtime observation,
+  format, rollout, or admission movement.
+
+  **Next:** after this implementation commit is clean, activate no-change calls composition `.10.6.4.3`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.1 — add Julia typed call core**
-  (DONE candidate from clean base `3ee4b908`; commit pending final durable-layer checks).
+  (DONE at clean commit `9ec3f034` from base `3ee4b908`).
 
   **Result:** The opaque Julia semantic owner now privately retains exact typed functions, the governed
   `trim`/`match_text`/`return` helpers, calls, binding, user-resolution decision/explanations, signatures, and
@@ -31,7 +48,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   observation, generated-format, rollout, or admission movement. mdBook/KM 685/5,252 and exact 1,618,660-KiB
   safe cleanup preserving all 517 Pgen artifacts pass.
 
-  **Next:** after this implementation commit is clean, activate staged/generated completion `.10.6.4.2`.
+  **Next:** staged/generated completion `.10.6.4.2` is the completed candidate above.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.0 — freeze Julia call projection**
   (DONE at clean commit `3ee4b908` from base `4a580295`).

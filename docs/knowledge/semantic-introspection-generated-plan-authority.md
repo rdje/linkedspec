@@ -9,7 +9,7 @@ answers:
   - can semantic model and response hashes hide generated plan family drift
   - which task corrected the semantic generated plan oracle
 date: 2026-07-21
-status: current corrected neutral authority boundary; private Perl projector consumes shared owner
+status: current corrected neutral authority boundary; private Perl, Rust, Dart, and Julia projectors consume retained owners
 tags: [semantic-introspection, generated-source, handler-family, oracle, mutations, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.3.3.0 compared exact LinkedSpec::Get(return_descriptor) selected_handler_variant and independently loaded emit_generated_source metadata with linkedspec-rule-local-cursor-v1 generated_source_v2 before adapter implementation. The calls fixture selects _default and emits default; and_acode is absent from the ten-family v2 vocabulary. FUTURE-PARITY-BACKLOG.10.3.3.1.1 moves handler-variant classification and contract identity behind LinkedSpec::GeneratedSource owners shared by Compiler and the private semantic projector."
 reverify: "python3 tools/check_semantic_introspection_contract.py && perl -Iperl -MLinkedSpec -e 'print q{use TOOLBOX emit_generated_source metadata probe for calls_and_staging.spec}'"
@@ -33,6 +33,12 @@ The private Perl calls/staging projector now consumes this correction without du
 `SemanticCallProjection` delegate to it. This refactor preserves emitted behavior and keeps implementation source
 outside the semantic record. The later Perl query leaf exposes that record through the public immutable evaluator;
 runtime observation is now supplied separately by `.10.3.5`. Rollout and backend admission remain pending.
+
+Rust and Dart retain the same exact family through their typed generated-plan authorities. Julia `.10.6.4.2`
+validates `GENERATED_SOURCE_CONTRACT`, `GENERATED_SOURCE_FORMAT`, caller logical identity, complete compiled label
+order, and one selected entry row directly on its retained `SemanticGeneratedPlanInput`; it emits only the selected
+`default` family. It does not rerun the plan builder or source emitter, so the semantic model cannot silently
+reclassify the plan or acquire generated implementation text.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-introspection-static-rule-authority]],
 [[perl-semantic-introspection-authority-map]], [[perl-generated-source-contract-v2]].

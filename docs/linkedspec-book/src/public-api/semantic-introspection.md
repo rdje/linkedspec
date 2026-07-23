@@ -1220,8 +1220,33 @@ exposed. The new suite passes 79 assertions and the five Julia semantic suites p
 Unicode-manifest legs pass; governance stays 806/9/8/2, 6/20/81 at 4/9 + 3/6, 80/0/0, v1/10/80-0-0, and
 59/27/0. Canonical CI passes Rust semantic admission in 77.41 seconds, Dart 1/1, reference primary 66x2, and Phase
 0 1,031/1,031 in 622 seconds. mdBook and Knowledge Map 685/5,252 pass; exact safe cleanup removes 1,618,660 KiB
-while preserving all 517 Pgen artifacts. Staged/generated completion `.10.6.4.2` is next only after this commit is
-clean.
+while preserving all 517 Pgen artifacts.
+
+### Julia private staged and generated completion
+
+Leaf `.10.6.4.2` extends that same retained owner to the complete 22-record / 25-relation target. For every
+accepted function, the projector requires native payload and typed parse-job fields to agree with the function
+definition, authored body, exact staged span, parameter/signature form, parser/top-rule intent, stitch policy,
+failure policy, and nonempty typed body result. Only after that correlation succeeds does it emit distinct neutral
+payload, parse-job, and result records. Their three `contains` relations plus exact `consumes`, `produces`, two
+`lowered_from`, and `staged_by` directions preserve provenance without exposing the native payload map, parse-job
+object, serialized body AST, or typed ActionIR.
+
+Generated provenance uses the retained `SemanticGeneratedPlanInput`; it does not rebuild a plan. Contract id,
+format version, caller logical identity, complete ordered compiled-label coverage, and exactly one selected entry
+row must agree. The projection emits only one neutral handler-plan record with the retained selected family
+(`default` for this fixture) and one `generated_as` relation. No Julia source emission, generated implementation
+text, module loading, or generated execution occurs.
+
+The complete projection deep-equals the neutral calls snapshot at 22/25 with ten source references. Corrupted
+payload/job fields and mismatched plan contract, logical identity, label order, or selected row reject through the
+typed semantic correlation error. Fresh materialization, tuple-backed retention, plain JSON, host/path denial, and
+absence of public staged/generated accessors remain exact. The new suite passes 62 assertions; all six semantic
+suites pass 530; complete Julia passes 8,072 package assertions, primary process conformance, and corpus 105/105.
+Full primary passes 5x2x66, all ten Unicode legs pass, governance stays 806/9/8/2, 6/20/81 at 4/9 + 3/6,
+80/0/0, v1/10/80-0-0, and 59/27/0, and canonical CI passes Rust semantic admission in 76.95 seconds, Dart 1/1,
+reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Public query, runtime observation, rollout, and
+native admission remain later leaves; `.10.6.4.3` owns committed no-change recomposition.
 
 ## Exact v1 record model
 
@@ -1601,8 +1626,9 @@ The dependency order is:
 | `.10.6.3.2` | Julia privacy/failure/runtime-static and isolation | complete; exact 4/3 + 4/3 + 6/4 + 7/8 targets, no promotion |
 | `.10.6.3.3` | Julia composed private static closeout | complete; committed focused 389 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | complete behavior-free plan; exact 22/25 and `.1-.3` ownership frozen |
-| `.10.6.4.1` | Julia typed function/helper/call/binding core | complete verified candidate; exact private non-staged 18/16, new 79/focused 468, no promotion |
-| `.10.6.4.2-.3` | Julia staged/generated calls completion and closeout | pending after clean `.1` commit |
+| `.10.6.4.1` | Julia typed function/helper/call/binding core | complete; exact private non-staged 18/16, new 79/focused 468, no promotion |
+| `.10.6.4.2` | Julia staged/generated calls completion | complete verified candidate; exact private full 22/25, new 62/focused 530, no promotion |
+| `.10.6.4.3` | Julia calls/staging/generated composition closeout | pending after clean `.2` commit |
 | `.10.6.5-.7` | Julia query, runtime observation, and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.2 — complete Julia call provenance
+
+Completed Julia's private calls/staging/generated projection at exact neutral 22-record / 25-relation parity.
+`SemanticCallProjection.jl` now validates each accepted function's native staged payload and typed parse job against
+its definition, body text, exact span, parameter/signature form, parser/top-rule intent, stitch and failure policy,
+and retained typed body result before emitting three distinct neutral payload, parse-job, and result records. The
+three owner-containment relations and exact consumes, produces, lowered-from, and staged-by directions preserve the
+full provenance chain without copying native sidecar maps, serialized body AST, or typed ActionIR into the model.
+
+The same private owner consumes the retained generated-v2 plan rather than reconstructing it. Contract id, format,
+caller logical identity, complete compiled label order, and a unique selected entry row must agree; only the
+selected handler family is projected as one neutral handler-plan artifact and `generated_as` relation. The owner
+does not call the plan builder, source emitter, generated loader/executor, runtime, trace, diagnostic sink, or
+observer. Correlation failures remain typed `semantic_call_correlation_failed` errors.
+
+The new 62-assertion suite deep-equals the complete neutral snapshot, locks all record/relation ids and facts,
+rejects corrupted payload/job state plus plan contract/identity/order/selection drift, and proves detached/plain
+materialization, tuple-backed retention, private-surface omission, host/path denial, and no execution. All six Julia
+semantic suites pass 530 assertions; complete Julia passes 8,072 package assertions, primary process conformance,
+and corpus 105/105. Full primary passes 5x2x66; all ten Unicode-manifest legs pass; governance remains Unicode
+806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated v1/10/80-0-0, and
+public 59/27/0. Canonical CI passes all doctrines, Rust semantic admission 1/1 in 76.95 seconds, Dart 1/1, primary
+66x2, and Phase 0 1,031/1,031 in 622 seconds. No public query, runtime observation, generated format, rollout, or
+native admission changes. Canonical mdBook, Knowledge Map 686/5,265, and exact 1,504,508-KiB safe cleanup pass
+while preserving all 517 Pgen artifacts; no-change composition closeout `.10.6.4.3` follows after the clean commit.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.1 — add Julia typed call core
 
 Implemented Julia's private typed function/helper/call/binding semantic projection and composed it into the

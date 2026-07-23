@@ -561,7 +561,13 @@ Three backbone items tracked major structural modernization — all done:
   host/no-execution fences. Quote/regex-aware bounded scanning maps typed preorder to exact Unicode-safe source.
   New 79/focused 468, Julia 8,010/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust
   77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. mdBook/KM 685/5,252 and exact 1,618,660-KiB
-  cleanup preserving 517 Pgen artifacts pass. Staged/generated `.2` remains next after clean commit.
+  cleanup preserving 517 Pgen artifacts pass. Staged/generated `.10.6.4.2` now completes the same private graph at
+  exact 22/25. It validates native function payload/job/body-result correlation, emits three deliberately neutral
+  staged records with all directed provenance, validates the retained generated-v2 contract/identity/full order/
+  unique selected row, and emits only the selected handler-plan family. Native sidecars, body AST, generated
+  implementation, paths, execution, trace, and sinks remain private. New 62/focused 530, Julia
+  8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 76.95s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/622s pass. Closeout `.3` follows without replacement code.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

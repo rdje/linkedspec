@@ -116,6 +116,7 @@ function _build_semantic_static_projection(
             outcome.parsed,
             outcome.compiled,
             outcome.entry,
+            outcome.generated_plan,
         )
     end
     return _build_failed_semantic_static_projection(
@@ -138,6 +139,7 @@ function _build_compiled_semantic_static_projection(
     parsed::SpecFile,
     compiled::CompiledSpec,
     entry::Union{Nothing,SemanticEntrySelection},
+    generated_plan::Union{Nothing,SemanticGeneratedPlanInput},
 )
     scans = _semantic_static_scan_rules(source_text, parsed)
     scans_by_label = Dict(scan.label => scan for scan in scans)
@@ -410,6 +412,8 @@ function _build_compiled_semantic_static_projection(
         content_digest = content_digest,
         scans_by_label = scans_by_label,
         compiled = compiled,
+        entry_selection = entry,
+        generated_plan = generated_plan,
         source_refs = source_refs,
         records = records,
         relations = relations,

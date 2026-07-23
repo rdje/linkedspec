@@ -19,10 +19,10 @@ answers:
   - "may Julia semantic call construction execute target or generated code"
   - "does the Julia calls plan add a public semantic query"
 date: 2026-07-22
-status: current typed core complete; staged and generated completion pending
+status: current typed core and staged/generated completion exact; no-change closeout pending
 tags: [julia, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.4.0-.10.6.4.1; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_call_core_test.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-core-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\")'; rg -n '_semantic_call_extend_core|semantic_call_records|semantic_call_relations|resolve_action_block_contracts|semantic_call_regex_start' julia/src/semantic/SemanticCallProjection.jl julia/test/semantic_index_call_core_test.jl"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.4.0-.10.6.4.2; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'; rg -n '_semantic_call_add_staged_artifacts|_semantic_call_validate_staged_authority|_semantic_call_add_generated_plan' julia/src/semantic/SemanticCallProjection.jl julia/test/semantic_index_call_staged_test.jl"
 ---
 
 Behavior-free leaf `.10.6.4.0` freezes an additive private projection over Julia's already-closed static semantic
@@ -98,6 +98,21 @@ no replacement implementation or test. The extension stays behind the existing u
 public record accessor/query, runtime observation, trace dependency, rollout movement, or native admission belongs
 to `.10.6.4`.
 
+Completion leaf `.10.6.4.2` now implements the second step in that same owner. It requires the native payload map
+and typed `StagedParseJob` to agree with the accepted function name, body, exact source span, parent path,
+parameters or variadic signature, parser/top-rule request, result-field stitch, failure policy, and retained body
+AST. Only then does it emit the three fixed neutral records and their exact eight staged relations. Native payload,
+job, and body-AST values never become semantic facts.
+
+The retained generated plan must match `GENERATED_SOURCE_CONTRACT`, `GENERATED_SOURCE_FORMAT`, caller logical
+identity, complete compiled label order, and exactly one selected entry row. Projection retains only that row's
+family and one `generated_as` relation. The plan builder, emitter, generated loader/executor, runtime, and trace are
+not invoked. Exact complete equality is 22 records / 25 relations / ten source references; corrupt sidecars and
+plan contract/identity/order/selection reject before retention. New proof is 62 assertions, six-suite composition
+is 530, and complete Julia is 8,072/primary/105. Full 5x2x66 primary, ten Unicode legs, unchanged ledgers, and
+canonical Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. `.10.6.4.3` is the next no-change
+composition owner.
+
 Typed-core leaf `.10.6.4.1` now implements the first step in `SemanticCallProjection.jl`. The existing private
 static extension invokes it before canonicalization and freeze, so the retained semantic graph remains one
 immutable owner. The projector merges authored function/rule order, reparses each retained function body as typed
@@ -112,7 +127,8 @@ conservative fixed point derives binding/call shapes without inventing unsupport
 assertions, five-suite composition is 468, and complete Julia is 8,010/primary/105. Full 5x2x66 primary, all ten
 Unicode legs, unchanged governance ledgers, canonical local CI, mdBook/KM 685/5,252, and exact 1,618,660-KiB
 cleanup preserving 517 Pgen artifacts pass. No staged/generated artifact, public query/accessor, execution
-observation, trace dependency, or admission movement is part of the core leaf; `.10.6.4.2` remains next.
+observation, trace dependency, or admission movement is part of the core leaf; the separate completion above
+preserves that boundary.
 
 Plan signoff passes committed focused 389, complete Julia 7,931/primary/105, full primary 5x2x66, all ten Unicode
 manifest legs, and every unchanged governance ledger. Canonical local CI passes all four doctrines, Rust semantic

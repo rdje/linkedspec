@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.2` — provenance is validated authority, not copied compiler state):
+  Julia's staged function sidecars contain more host-specific structure than the neutral semantic model permits.
+  The private projector therefore validates native payload and typed job fields against the accepted definition,
+  exact body/span/signature, parse intent, stitch/failure policy, and retained typed body result, then emits only
+  the fixed ADR `0050` payload/job/result facts. This preserves correlation strength without making native maps,
+  serialized body AST, or ActionIR part of the portable wire contract.
+
+  Generated provenance follows the same rule. The retained `SemanticGeneratedPlanInput` is already the compiler's
+  authority, so the projector checks its contract, format, caller identity, complete label order, and unique
+  selected entry row. Rebuilding the plan inside introspection would create a second classifier and could hide
+  drift; invoking emission would improperly mix implementation text with semantic provenance. Only the selected
+  `default` family leaves the owner as a neutral handler-plan fact.
+
+  Exact full-snapshot equality is the closure test: the committed 18/16 typed core gains exactly four records and
+  nine relations to become 22/25. Corrupted native sidecars and retained-plan identity/order/selection fail before
+  projection; detached/plain/tuple-backed and no-path/no-execution fences remain exact. New focused proof is 62 and
+  all six semantic suites are 530. Complete Julia is 8,072/primary/105; full primary is 5x2x66; all ten Unicode
+  legs, unchanged governance, and canonical Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass.
+  Canonical book, Knowledge Map 686/5,265, and exact 1,504,508-KiB cleanup preserving 517 Pgen artifacts pass.
+  Public query, runtime observation, rollout, and admission remain separate later owners.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.1` — typed traversal owns meaning; raw scanning owns only location):
   The private Julia projector never interprets raw source to decide which calls exist. Accepted typed function and
   edge Action AST plus resolved contracts own call identity, nesting, arity, resolution, and shape. A bounded raw

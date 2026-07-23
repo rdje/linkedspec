@@ -557,8 +557,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   lifecycle immutability, and public/host/no-execution fences. The source scanner is location-only and must remain
   driven by typed preorder. New 79/focused 468, Julia 8,010/primary/105, 5x2x66, ten Unicode legs, unchanged
   ledgers, canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, mdBook/KM 685/5,252, and exact
-  1,618,660-KiB cleanup preserving 517 Pgen artifacts pass. `.10.6.4.2` must extend this owner only with staged/
-  generated provenance; do not add a second call projector. See
+  1,618,660-KiB cleanup preserving 517 Pgen artifacts pass. `.10.6.4.2` now extends only this owner. Use
+  `julia/test/semantic_index_call_staged_test.jl` to probe exact full 22/25 equality, native sidecar correlation,
+  generated-v2 contract/identity/order/selection rejection, detached lifecycle, and implementation/source/AST/
+  execution/trace denial. The projector validates native payload and typed parse-job fields before emitting three
+  neutral staged roles, then validates the retained plan and emits only its selected handler family. It does not
+  rebuild the plan, emit source, or expose sidecar/body-AST values. New 62/focused 530, Julia
+  8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 76.95s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/622s pass. `.10.6.4.3` owns no-change recomposition; do not add a second call projector. See
   [[julia-semantic-static-projection-plan]].
 
 ---

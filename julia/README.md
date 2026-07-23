@@ -105,16 +105,28 @@ failure. Successful outcomes expose only detached entry identity and generated p
 
 Construction never invokes the caller's target parser, action or lifecycle code, generated execution, runtime,
 trace, diagnostic-output sink, or semantic observer. `semantic_snapshot(index).has_execution` is therefore always
-false at this layer. Records, semantic query, and runtime observation remain dependency-ordered later work.
-Returned structs are immutable, and each `to_json` call creates detached mutable JSON state.
+false at this layer. Returned public structs are immutable, and each `to_json` call creates detached mutable JSON
+state.
+
+The owner now also retains the complete private static and call provenance graph; it is deliberately not yet a
+public records/query API. The calls target is exact at 22 records / 25 relations: a typed 18/16 core for functions,
+helpers, calls, bindings, resolution, and shapes, plus three distinct staged payload/job/result records and one
+selected generated handler-plan record with nine directed provenance relations. Typed native sidecars must match
+their function owner before neutral staging facts are retained. The generated-v2 input must match the caller
+logical identity, complete compiled label order, and unique selected entry row; the owner never emits or executes
+generated source. Native payload/job/body-AST state, implementation text, paths, compiler objects, and mutable
+containers do not cross the private projection boundary. Public semantic query and runtime observation remain
+dependency-ordered later work.
 
 The source/outcome parent is composition-closed without additional production or replacement test code. Its two
 committed suites pass 135 + 85 = 220 focused assertions; complete Julia passes 7,762 package assertions, primary
 process conformance, and corpus 105/105; the shared five-backend 5x2x66 primary matrix and all ten self-hosted
 Unicode manifest legs pass. All no-drift ledgers remain unchanged. The closeout canonical gate passes Rust semantic
 admission in 80.84 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds. Static semantic
-records, query, and runtime observation remain later work beginning with behavior-free plan `.10.6.3.0`. Exact safe
-cleanup reclaims about 1.56 GB while preserving all 517 Pgen issue artifacts.
+record construction has since reached exact private 22/25 parity. Its six semantic suites pass 530 assertions;
+complete Julia passes 8,072 package assertions, primary process conformance, and corpus 105/105. The shared
+5x2x66 primary matrix, all ten Unicode legs, unchanged governance, and canonical Rust 76.95s + Dart 1/1 + primary
+66x2 + Phase 0 1,031/622s pass. Query and runtime observation remain later work.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement

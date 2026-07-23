@@ -1,4 +1,4 @@
-# FUTURE-PARITY-BACKLOG.10.6.4.1 — private typed function/call projection.
+# FUTURE-PARITY-BACKLOG.10.6.4.1-.2 — private typed calls and provenance.
 
 struct _SemanticCallDefinition
     id::String
@@ -77,6 +77,8 @@ function _semantic_call_extend_core!(;
     content_digest::String,
     scans_by_label::Dict{String,_SemanticStaticScannedRule},
     compiled::CompiledSpec,
+    entry_selection::Union{Nothing,SemanticEntrySelection},
+    generated_plan::Union{Nothing,SemanticGeneratedPlanInput},
     source_refs::Dict{String,Any},
     records::Vector{Dict{String,Any}},
     relations::Vector{Dict{String,Any}},
@@ -105,7 +107,7 @@ function _semantic_call_extend_core!(;
             index,
             nothing,
         ))
-        _semantic_call_add_function!(
+        function_source = _semantic_call_add_function!(
             source_text = source_text,
             source_map = source_map,
             logical_name = logical_name,
@@ -118,6 +120,13 @@ function _semantic_call_extend_core!(;
             declaration_order = length(compiled.compiled_rule_order) + index - 1,
             range = range,
             return_shape = function_shapes[entry.definition.name],
+        )
+        _semantic_call_add_staged_artifacts!(
+            entry = entry,
+            function_id = function_id,
+            function_source = function_source,
+            records = records,
+            relations = relations,
         )
     end
     for label in compiled.compiled_rule_order
@@ -217,6 +226,14 @@ function _semantic_call_extend_core!(;
         end
     end
     _semantic_call_apply_edge_shapes!(builder)
+    _semantic_call_add_generated_plan!(
+        logical_name = logical_name,
+        compiled = compiled,
+        entry_selection = entry_selection,
+        generated_plan = generated_plan,
+        records = records,
+        relations = relations,
+    )
     return nothing
 end
 
@@ -267,6 +284,210 @@ function _semantic_call_add_function!(;
         to_id = function_id,
         order = declaration_order,
         source = source,
+    ))
+    return source
+end
+
+function _semantic_call_add_staged_artifacts!(;
+    entry::UserFunctionEntry,
+    function_id::String,
+    function_source::String,
+    records::Vector{Dict{String,Any}},
+    relations::Vector{Dict{String,Any}},
+)
+    _semantic_call_validate_staged_authority(entry)
+    definition = entry.definition
+    rows = (
+        ("payload", "action_source", "string"),
+        ("parse_job", "action_program", "unknown"),
+        ("result", "action_program", "unknown"),
+    )
+    ids = Dict{String,String}()
+    for (offset, row) in enumerate(rows)
+        order = offset - 1
+        artifact_kind, node_kind, shape_kind = row
+        id = "staged:$artifact_kind:$function_id:$order"
+        ids[artifact_kind] = id
+        name_suffix = artifact_kind == "parse_job" ? "parse job" : artifact_kind
+        push!(records, _semantic_static_record(
+            id = id,
+            kind = "staged_artifact",
+            name = "$(definition.name) body $name_suffix",
+            owner_id = function_id,
+            order = order,
+            source = function_source,
+            facts = Dict{String,Any}(
+                "artifact_kind" => artifact_kind,
+                "payload_kind" => "function_body",
+                "node_kind" => node_kind,
+                "parent_path" => Any[function_id],
+                "parser_spec_id" => "linkedspec-action-v1",
+                "top_rule" => "FunctionBody",
+                "result_policy" => "typed_action_program",
+                "failure_policy" => "compile_diagnostic",
+                "status" => "succeeded",
+                "value_shape" => _semantic_static_value_shape(shape_kind),
+            ),
+        ))
+        push!(relations, _semantic_static_relation(
+            kind = "contains",
+            from_id = function_id,
+            to_id = id,
+            order = order,
+            source = function_source,
+        ))
+    end
+
+    push!(relations, _semantic_static_relation(
+        kind = "lowered_from",
+        from_id = ids["payload"],
+        to_id = _SEMANTIC_SOURCE_ID,
+        order = 0,
+        source = function_source,
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "consumes",
+        from_id = ids["parse_job"],
+        to_id = ids["payload"],
+        order = 0,
+        source = function_source,
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "produces",
+        from_id = ids["parse_job"],
+        to_id = ids["result"],
+        order = 0,
+        source = function_source,
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "lowered_from",
+        from_id = ids["result"],
+        to_id = ids["payload"],
+        order = 0,
+        source = function_source,
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "staged_by",
+        from_id = ids["result"],
+        to_id = ids["parse_job"],
+        order = 0,
+        source = function_source,
+    ))
+    return nothing
+end
+
+function _semantic_call_validate_staged_authority(entry::UserFunctionEntry)
+    definition = entry.definition
+    payload = definition.body_payload
+    job = definition.body_parse_job
+    expected_path = Any["functions", string(entry.index), "body_source"]
+    if !(payload isa AbstractDict) || job === nothing
+        throw(_semantic_call_correlation_error(
+            "Compiled function has no staged payload/job authority",
+            definition.name,
+        ))
+    end
+    if get(payload, "kind", nothing) != "staged_payload" ||
+       get(payload, "node_kind", nothing) != "function_definition" ||
+       get(payload, "payload_kind", nothing) != "function_body" ||
+       !_semantic_call_plain_equal(get(payload, "parent_ast_path", nothing), expected_path) ||
+       get(payload, "function_name", nothing) != definition.name ||
+       get(payload, "text", nothing) != definition.body_source ||
+       !_semantic_call_plain_equal(get(payload, "source_span", nothing), to_json(job.source_span)) ||
+       job.node_kind != "function_definition" ||
+       job.payload_kind != "function_body" ||
+       !_semantic_call_plain_equal(job.parent_ast_path, expected_path) ||
+       isempty(job.job_id) ||
+       job.function_name != definition.name ||
+       job.text != definition.body_source ||
+       job.parser_spec_id != "actionir-body.spec" ||
+       job.top_rule != "action_block" ||
+       job.result_policy != "replace_field" ||
+       job.result_field != "body_ast" ||
+       job.failure_policy != "fail" ||
+       job.diagnostic_owner != "function_body" ||
+       definition.body_ast === nothing
+        throw(_semantic_call_correlation_error(
+            "Native staged function metadata does not match its typed owner",
+            definition.name,
+        ))
+    end
+
+    signature = definition.signature
+    signature_matches = if signature === nothing
+        !haskey(payload, "signature") &&
+        _semantic_call_plain_equal(get(payload, "params", nothing), definition.params) &&
+        get(payload, "arity", nothing) == definition.arity &&
+        job.signature === nothing &&
+        job.params == definition.params &&
+        job.arity == definition.arity
+    else
+        !haskey(payload, "params") &&
+        !haskey(payload, "arity") &&
+        _semantic_call_plain_equal(get(payload, "signature", nothing), to_json(signature)) &&
+        job.signature == signature &&
+        job.params === nothing &&
+        job.arity === nothing
+    end
+    signature_matches || throw(_semantic_call_correlation_error(
+        "Native staged function signature does not match its typed owner",
+        definition.name,
+    ))
+    return nothing
+end
+
+function _semantic_call_add_generated_plan!(;
+    logical_name::String,
+    compiled::CompiledSpec,
+    entry_selection::Union{Nothing,SemanticEntrySelection},
+    generated_plan::Union{Nothing,SemanticGeneratedPlanInput},
+    records::Vector{Dict{String,Any}},
+    relations::Vector{Dict{String,Any}},
+)
+    if entry_selection === nothing || generated_plan === nothing
+        throw(_semantic_call_correlation_error(
+            "Compiled call projection has no entry/generated-plan authority",
+            _SEMANTIC_SPEC_ID,
+        ))
+    end
+    labels = String[row.label for row in generated_plan.rows]
+    if generated_plan.contract_id != GENERATED_SOURCE_CONTRACT ||
+       generated_plan.format_version != GENERATED_SOURCE_FORMAT ||
+       generated_plan.source_identity != logical_name ||
+       labels != compiled.compiled_rule_order
+        throw(_semantic_call_correlation_error(
+            "Retained generated plan does not match compiled semantic authority",
+            _SEMANTIC_SPEC_ID,
+        ))
+    end
+    selected = [row for row in generated_plan.rows if row.label == entry_selection.label]
+    length(selected) == 1 || throw(_semantic_call_correlation_error(
+        "Generated plan has no unique selected entry row",
+        entry_selection.label;
+        fields = Dict{String,Any}("selected_rows" => length(selected)),
+    ))
+
+    id = "generated:handler_plan:0"
+    push!(records, _semantic_static_record(
+        id = id,
+        kind = "generated_artifact",
+        name = "handler plan",
+        owner_id = _SEMANTIC_SPEC_ID,
+        order = 0,
+        source = nothing,
+        facts = Dict{String,Any}(
+            "artifact_kind" => "handler_plan",
+            "contract_id" => generated_plan.contract_id,
+            "format_version" => generated_plan.format_version,
+            "plan_family" => only(selected).family,
+        ),
+    ))
+    push!(relations, _semantic_static_relation(
+        kind = "generated_as",
+        from_id = _SEMANTIC_SPEC_ID,
+        to_id = id,
+        order = 0,
+        source = nothing,
     ))
     return nothing
 end

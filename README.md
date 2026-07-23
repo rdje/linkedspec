@@ -979,7 +979,13 @@ content migration exists yet.
   quote/regex-aware scanner maps typed preorder to exact authored UTF-8 byte and Unicode-scalar evidence; raw source
   never decides meaning. New 79/focused 468 and Julia 8,010/primary/105 pass with 5x2x66, ten Unicode legs,
   unchanged ledgers, and canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. Staged/generated
-  completion remains `.10.6.4.2`; no public query, execution, observation, format, rollout, or admission moved.
+  completion `.10.6.4.2` now extends the same private owner to the complete exact 22/25 target. Three distinct
+  payload/job/result records come from validated native sidecars, and one handler-plan record comes from the
+  retained generated-v2 contract, logical identity, complete rule order, and unique selected row. Exact directed
+  provenance is preserved while native payload/job/body-AST values and generated implementation text remain
+  private. New 62/focused 530 and Julia 8,072/primary/105 pass with 5x2x66, ten Unicode legs, unchanged ledgers,
+  and canonical Rust 76.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. No public query, execution,
+  observation, format, rollout, or admission moved; no-change closeout `.10.6.4.3` follows after the clean commit.
   mdBook/KM 685/5,252 and exact 1,618,660-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.

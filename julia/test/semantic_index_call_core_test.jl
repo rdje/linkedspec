@@ -48,6 +48,20 @@ function _semantic_call_core_expected()
     return result
 end
 
+function _semantic_call_core_subset(projection::Dict{String,Any})
+    result = JSON3.read(JSON3.write(projection), Dict{String,Any})
+    result["records"] = [
+        record for record in result["records"] if
+        !(record["kind"] in ("staged_artifact", "generated_artifact"))
+    ]
+    retained = Set(record["id"] for record in result["records"])
+    result["relations"] = [
+        relation for relation in result["relations"] if
+        relation["from_id"] in retained && relation["to_id"] in retained
+    ]
+    return result
+end
+
 function _semantic_call_core_materialize(projection::Dict{String,Any})
     result = JSON3.read(JSON3.write(projection), Dict{String,Any})
     source_refs = pop!(result, "source_refs")
@@ -102,16 +116,19 @@ end
         projection = LinkedSpecJulia._semantic_static_projection_for_testing(
             _semantic_call_core_index(),
         )
-        actual = _semantic_call_core_materialize(projection)
+        core = _semantic_call_core_subset(projection)
+        actual = _semantic_call_core_materialize(core)
         wanted = _semantic_call_core_materialize(_semantic_call_core_expected())
 
-        @test length(projection["records"]) == 18
-        @test length(projection["relations"]) == 16
-        @test length(projection["source_refs"]) == 10
+        @test length(core["records"]) == 18
+        @test length(core["relations"]) == 16
+        @test length(core["source_refs"]) == 10
+        @test length(projection["records"]) - length(core["records"]) == 4
+        @test length(projection["relations"]) - length(core["relations"]) == 9
         @test actual == wanted
         @test !any(
             record["kind"] in ("staged_artifact", "generated_artifact") for
-            record in projection["records"]
+            record in core["records"]
         )
         @test !any(
             relation["kind"] in (
@@ -120,7 +137,7 @@ end
                 "lowered_from",
                 "staged_by",
                 "generated_as",
-            ) for relation in projection["relations"]
+            ) for relation in core["relations"]
         )
 
         spec = _semantic_call_core_record(projection, "spec:0")
@@ -384,8 +401,6 @@ Done:
             "ENV[",
             "time_ns(",
             "rand(",
-            "staged_artifact",
-            "generated_artifact",
         )
             @test !occursin(forbidden, implementation)
         end

@@ -19,7 +19,7 @@ answers:
   - "does the Julia typed call core include staged artifacts"
   - "is the Julia typed call core public"
   - "does Julia typed call projection execute target code"
-  - "what is the next Julia semantic call task"
+  - "what Julia semantic call task followed the typed core"
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, actionir, calls, bindings, source-correlation, privacy]
@@ -56,8 +56,9 @@ The private proof seam returns fresh detached JSON-compatible values while the o
 opaque. New proof is 79 assertions and the five-suite source/outcome/static/call composition is 468. Complete Julia
 is 8,010/primary/105; primary 5x2x66, all ten Unicode legs, unchanged governance ledgers, and canonical local CI
 pass. mdBook/KM 685/5,252 and exact 1,618,660-KiB cleanup preserving 517 Pgen artifacts pass. No public semantic
-record/query accessor or backend admission exists yet. `.10.6.4.2` extends this same owner with normalized staged
-artifacts and the selected generated plan to the complete 22-record / 25-relation target.
+record/query accessor or backend admission exists yet. `.10.6.4.2` now extends this same owner with normalized
+staged artifacts and the selected generated plan to the complete 22-record / 25-relation target; `.10.6.4.3` is
+the next no-change composition task.
 
 See [[julia-semantic-call-staged-projection-plan]], [[julia-semantic-introspection-authority-map]],
 [[semantic-introspection-staged-artifact-schema]], and [[semantic-introspection-neutral-contract]].
