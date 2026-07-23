@@ -457,8 +457,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   scanners own punctuation/remainders, malformed arrows stay raw, third-colon prefixes reject, and validation
   covers parsed/programmatic/reconstructed declarations and every target kind with `invalid_rule_label` /
   `validate_rule_labels`. Run the two focused Julia test files through `include`, then `tools/run_julia_local.sh`.
-  `.2` still owns all 9 positive/2 distinct downstream identities, `.3` all 8 negatives plus unrelated grammar
-  isolation, and `.4` composition. Use a writable depot first; never infer membership from host PCRE2 examples.
+  Exact identity `.10.6.1.2` is now owned by `julia/test/unicode_rule_label_identity_routes_test.jl`: it derives
+  ten unique labels from all 9 positives/2 distinct pairs and checks AST/compiled/JSON/descriptor/plan,
+  reconstructed/direct/generated/emitted/loaded execution, selectors, diagnostics, trace, and inline/file primary
+  routes. Run it with the classifier/native-route tests for focused 1,885; complete Julia is 5,596/primary/105.
+  `.3` still owns all 8 negatives plus unrelated-grammar isolation and `.4` composition. Use a writable depot
+  first; never infer membership or identity from host PCRE2 examples.
 
 ---
 

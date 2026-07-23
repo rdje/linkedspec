@@ -1,6 +1,6 @@
 ---
 id: julia-unicode-rule-label-preflight
-title: Julia rule labels use the generated pinned Unicode 17 classifier at parser and validator boundaries
+title: Julia rule labels retain exact pinned Unicode 17 identity through parser and downstream routes
 answers:
   - "does Julia fully support the Unicode rule-label contract"
   - "does Julia use pinned Unicode 17 XID Continue for rule labels"
@@ -21,11 +21,14 @@ answers:
   - "how will Julia reject rule-label prefix truncation"
   - "how does Julia validate rule labels now"
   - "where is the Julia Unicode rule-label classifier generated"
+  - "does Julia preserve exact Unicode rule labels through generated and emitted parsers"
+  - "do Julia Unicode rule-label selectors diagnostics and traces preserve exact identity"
+  - "does Julia leak resolved spec paths through compiled Unicode rule-label artifacts"
 date: 2026-07-22
 status: current
 tags: [julia, unicode, rule-labels, parser, validation, generated-source, semantic-introspection]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.1; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl
-reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\")'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.2; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl
+reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\")'"
 ---
 
 Julia now implements the parser/validator core of ADR `0051` with one generated pinned-data authority. Before
@@ -72,15 +75,21 @@ nonempty-spec check in both traced and untraced paths. It validates every declar
 target and returns portable `invalid_rule_label` / `validate_rule_labels` evidence. Regex, lifecycle, split/mark,
 conditional, fluent, bounded-mode, function-shell, and ActionParser identifier patterns stay independently owned.
 
-Focused proof passes 1,755 assertions, and complete Julia passes 5,466 package assertions, primary process
-conformance, and corpus 105/105. The five-backend default/POSIX primary matrix passes 5x2x66, as does the
-self-hosted Unicode manifest on all ten legs. This proves the generated classifier plus native parser/validator
-core, not the entire Julia Unicode subtree. Staged canonical proof also passes Rust semantic admission 1/1 in
-79.93 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 663 seconds.
+Core focused proof passes 1,755 assertions, and exact-identity `.10.6.1.2` adds 130 assertions derived from every
+positive fixture and both distinct pairs. Those ten unique labels retain exact authored/compiled order and map
+keys, JSON and descriptor identity, generated-plan rows, JSON-reconstructed execution, direct/generated selectors,
+deterministic emitted-payload reconstruction, fresh offline emitted-host execution, strict loaded source without
+resolved-path leakage, portable missing-selector diagnostics, native/generated trace identity, and inline/file
+primary command behavior. Focused composition is 1,885, complete Julia is 5,596 package assertions plus primary
+process conformance and corpus 105/105, and the five-backend default/POSIX primary matrix passes 5x2x66 plus the
+self-hosted Unicode manifest on all ten legs. No production code, neutral contract, public API, generated format,
+or semantic governance changes in `.2`. Canonical proof passes Rust semantic admission 1/1 in 80.21 seconds,
+Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds; exact generated cleanup reclaims about
+1.57 GB while preserving Pgen artifacts.
 
-The remaining dependency order is exact: `.2` drives the ten unique identities represented by all nine positives and both distinct pairs through AST,
+The remaining dependency order is exact: completed `.2` drives the ten unique identities represented by all nine positives and both distinct pairs through AST,
 compiled maps/order/JSON, descriptor, generated plan/direct execution, reconstructed state, independently emitted
-host, selectors, diagnostics, traces, strict loader, and inline/file primary commands; `.3` drives all eight
+host, selectors, diagnostics, traces, strict loader, and inline/file primary commands; `.3` next drives all eight
 negatives through four declaration/target roles from both programmatic and reconstructed ASTs, whole-token and
 no-prefix source/primary failures, newline behavior, and unrelated identifier isolation; `.4` composes complete
 Julia/canonical proof and closes without semantic promotion. Julia semantic construction and the `Töp` privacy

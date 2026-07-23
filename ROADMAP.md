@@ -108,9 +108,13 @@ declaration/target validator roles, exact 9/8/2 downstream/isolation proof, and 
 implementation `.10.6.1.1` now deterministically emits and independently checks all 806 ranges, replaces every
 native label-bearing host regex with scalar-safe scanners, rejects prefix truncation/third colons, preserves
 malformed arrows as raw syntax, and validates parsed/programmatic/reconstructed declarations plus all target
-kinds. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass; exact identity `.2`
-is next after canonical Rust admission 79.93s, Dart 1/1, primary 66x2, and Phase 0 1,031/663s all pass and the
-clean implementation commit lands, without semantic promotion.
+kinds. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass. Exact identity
+`.10.6.1.2` then proves the ten unique labels represented by all nine positives and both distinct pairs through
+authored/compiled/generated/reconstructed/emitted/loaded state, selectors, diagnostics, traces, and inline/file
+primary commands. Its 130 new assertions compose to focused 1,885 and complete Julia 5,596/primary/105; 5x2x66
+and the ten-leg manifest plus canonical Rust 80.21s/Dart 1/1/primary 66x2/Phase 0 1,031/645s pass without
+production or semantic promotion. Exact cleanup reclaims 1.57 GB; negative/isolation `.3` follows after the clean
+identity commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

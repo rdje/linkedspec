@@ -57,6 +57,9 @@ JULIA_CLASSIFIER_TEST_PATH = (
 JULIA_NATIVE_ROUTES_TEST_PATH = (
     ROOT / "julia" / "test" / "unicode_rule_label_routes_test.jl"
 )
+JULIA_IDENTITY_ROUTES_TEST_PATH = (
+    ROOT / "julia" / "test" / "unicode_rule_label_identity_routes_test.jl"
+)
 JULIA_TEST_DRIVER_PATH = ROOT / "julia" / "test" / "runtests.jl"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -125,6 +128,7 @@ def main() -> None:
         DART_NEGATIVE_ISOLATION_TEST_PATH,
         JULIA_CLASSIFIER_TEST_PATH,
         JULIA_NATIVE_ROUTES_TEST_PATH,
+        JULIA_IDENTITY_ROUTES_TEST_PATH,
         JULIA_TEST_DRIVER_PATH,
         MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
@@ -613,10 +617,28 @@ def main() -> None:
     ):
         if marker not in julia_native_routes_test:
             fail(f"Julia native route proof missing: {marker}")
+    julia_identity_routes_test = JULIA_IDENTITY_ROUTES_TEST_PATH.read_text(
+        encoding="utf-8"
+    )
+    for marker in (
+        "every positive and distinct label survives compiled artifacts",
+        "emitted source reconstructs and executes every exact label",
+        "strict loading and primary commands preserve every exact label",
+        "selectors diagnostics and traces retain exact Unicode identity",
+        'JULIA_UNICODE_RULE_LABEL_CONTRACT["positive_fixtures"]',
+        'JULIA_UNICODE_RULE_LABEL_CONTRACT["distinct_fixtures"]',
+        "emit_julia_source_v2",
+        "load_and_compile_spec",
+        "run_cli",
+        "execute_generated_parser_with_trace_v2",
+    ):
+        if marker not in julia_identity_routes_test:
+            fail(f"Julia exact-identity route proof missing: {marker}")
     julia_test_driver = JULIA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
     for marker in (
         'include("unicode_rule_label_classifier_test.jl")',
         'include("unicode_rule_label_routes_test.jl")',
+        'include("unicode_rule_label_identity_routes_test.jl")',
     ):
         if marker not in julia_test_driver:
             fail(f"Julia test registration missing: {marker}")
@@ -638,6 +660,7 @@ def main() -> None:
         "require_tracked_file julia/src/spec/UnicodeRuleLabel.jl",
         "require_tracked_file julia/test/unicode_rule_label_classifier_test.jl",
         "require_tracked_file julia/test/unicode_rule_label_routes_test.jl",
+        "require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

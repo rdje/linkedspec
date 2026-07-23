@@ -888,10 +888,16 @@ The generated helpers are internal module bindings, not exports or a new public 
 
 The remaining proof is deliberately staged. `.10.6.1.1` owns generation plus parser/validator routing and passes
 1,755 focused assertions, complete Julia 5,466/primary/105, the 5x2x66 primary matrix, the ten-leg Unicode manifest,
-and canonical Rust admission 79.93s plus Dart 1/1, primary 66x2, and Phase 0 1,031/663s. `.2` owns
-all nine positive fixtures and both exact-distinct pairs across compiled, descriptor, generated, reconstructed,
-emitted, selector, diagnostic, trace, loader, and command routes; `.3` owns all eight negatives across source and
-external-AST roles plus unrelated identifier isolation; `.4` owns composed Julia/canonical signoff. Function,
+and canonical Rust admission 79.93s plus Dart 1/1, primary 66x2, and Phase 0 1,031/663s. Exact-identity leaf `.2`
+derives ten unique scalar sequences from all nine positive fixtures and both exact-distinct pairs. Its 130
+assertions prove exact authored/compiled order and keys, compiled JSON, descriptor metadata, generated plans,
+JSON reconstruction, direct and generated execution, deterministic emitted-payload reconstruction, a fresh
+offline emitted host, strict source loading without resolved-path leakage, every explicit selector, exact portable
+missing-selector diagnostics, native/generated traces, and inline plus UTF-8 file primary commands. Focused
+composition is 1,885; complete Julia is 5,596/primary/105; 5x2x66 and the ten-leg Unicode manifest pass. No
+production API, generated format, or semantic-governance state changes. Canonical proof passes Rust admission
+1/1 in 80.21 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds. `.3` owns all eight negatives across
+source and external-AST roles plus unrelated identifier isolation; `.4` owns composed Julia/canonical signoff. Function,
 parameter, helper/action, lifecycle, split/mark, conditional, fluent, regex, and mode grammars remain separate and
 must not inherit the rule-label class. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
 
@@ -1261,7 +1267,8 @@ The dependency order is:
 | `.10.6.0` | Julia authority and Unicode preflight | complete; behavior-free map and dependency split |
 | `.10.6.1.0` | Julia Unicode classifier/route plan | complete; exact behavior-free generator, parser, validator, fixture, isolation, and gate split |
 | `.10.6.1.1` | Julia generated classifier plus parser/validator routing | complete; focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical signoff |
-| `.10.6.1.2-.10.6.7` | Julia exact Unicode identity through semantic admission | pending |
+| `.10.6.1.2` | Julia exact positive/distinct downstream identity | complete; 130 new assertions, focused 1,885, Julia 5,596/primary/105, 5x2x66, and ten-leg manifest without production change |
+| `.10.6.1.3-.10.6.7` | Julia negative/isolation Unicode proof through semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

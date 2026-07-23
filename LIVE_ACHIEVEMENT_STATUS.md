@@ -8,9 +8,9 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia Unicode route implementation `FUTURE-PARITY-BACKLOG.10.6.1.1` is complete task-tree-first from clean plan
-  commit `dfcc1ca7`; final durable synchronization and the clean per-slice commit are in assembly. Exact downstream
-  identity `.10.6.1.2` cannot activate until that clean boundary.
+- Julia exact downstream identity `FUTURE-PARITY-BACKLOG.10.6.1.2` is complete task-tree-first from clean core
+  commit `732eb1e1`; the verified candidate, durable synchronization, and generated-cache cleanup are complete.
+  Only the clean per-slice commit remains before negative/isolation `.10.6.1.3` activates.
 
 The preflight reproduced exactly 5,175 required Unicode 17 `XID_Continue` scalars missing from host PCRE2 `\w`
 and 923 forbidden extras, plus native 8/9 positive parsing, forbidden `²`, `Top:::` truncation, and direct/JSON-
@@ -22,19 +22,35 @@ checks it, includes it before the parser, replaces exactly five host-regex label
 scanners, preserves malformed arrows as raw syntax, rejects third-colon prefixes, and validates declarations plus
 all three target kinds with one portable diagnostic. It leaves all unrelated identifier patterns untouched.
 
-Identity `.2` owns all nine positives/two distinct pairs through every artifact/execution/loader/command route;
+Identity `.2` now derives ten unique labels from all nine positives/two distinct pairs and proves every
+artifact/execution/loader/command route with 130 new assertions. Exact compiled maps/order/JSON, descriptor,
+generated plan, reconstruction, fresh emitted host, strict path privacy, every selector, portable diagnostics,
+native/generated traces, and inline/file primary commands are green. It changes no production behavior.
 negative/isolation `.3` owns all eight negatives across four programmatic/reconstructed roles plus source/primary
 and adjacent grammars; closeout `.4` owns complete Julia/canonical composition. Semantic governance remains
-6/20/81 at rollout 4/9 and native admission 3/6. Focused 1,755, complete Julia 5,466/primary/105, the full
+6/20/81 at rollout 4/9 and native admission 3/6. Focused 1,885, complete Julia 5,596/primary/105, the full
 five-backend 5x2x66 primary matrix, and the Unicode manifest on all ten legs are green. The exact commit candidate
-passes canonical Rust semantic admission 1/1 in 79.93s, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031
-in 663s. Exact post-signoff cleanup reclaims about 1.43 GB from the rendered book, Rust dependency/incremental
-outputs, and Python bytecode while preserving `rgx/pgen-issues/artifacts`.
+passes canonical Rust admission 80.21s, Dart 1/1, primary 66x2, and Phase 0 1,031/645s. Exact cleanup removes the
+12-MB rendered book, 826-MB Rust deps, 727-MB incremental state, and 28-KB Python cache—about 1.57 GB—while
+preserving `rgx/pgen-issues/artifacts`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.2 — prove Julia Unicode identity**
+  (DONE in this commit from clean base `732eb1e1`).
+
+  **Result:** Ten unique labels derived from every positive fixture and both distinct pairs preserve exact scalar
+  identity through AST, compiled/generated/reconstructed/fresh-emitted/loaded state, path privacy, selectors,
+  diagnostics, traces, and inline/file primary commands. No production/API/format/semantic ledger changes.
+
+  **Proof:** New 130/focused 1,885; Julia 5,596/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6;
+  primary 5x2x66 plus ten-leg manifest; KM 682/5,147; mdBook/memory/four doctrines/diff; canonical Rust admission
+  80.21s, Dart 1/1, primary 66x2, Phase 0 1,031/645s; exact 1.57-GB generated cleanup preserving Pgen.
+
+  **Next:** after the clean commit, prove exhaustive negative rejection and adjacent-grammar isolation in `.3`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.1 — route Julia Unicode labels**
   (DONE in this commit from clean base `dfcc1ca7`).
 

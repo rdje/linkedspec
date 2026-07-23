@@ -889,8 +889,14 @@ content migration exists yet.
   parsed/programmatic/reconstructed declarations and targets with portable diagnostics. Focused proof is 1,755;
   complete Julia is 5,466 package assertions, primary conformance, and corpus 105/105; the five-backend primary
   matrix is 5x2x66 plus the Unicode manifest. Canonical proof passes Rust semantic admission 1/1 in 79.93s, Dart
-  admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 663s. Exact downstream identity `.2` follows after the
-  clean core commit; semantic governance remains unchanged.
+  admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 663s. Exact downstream identity `.10.6.1.2` now derives
+  ten unique labels from all nine positive fixtures and both distinct pairs and proves exact authored order, maps,
+  JSON, descriptor, generated plan, reconstructed and freshly emitted execution, strict loading, selectors,
+  portable diagnostics, traces, and inline/file primary commands. The new proof adds 130 assertions (focused
+  composition 1,885; complete Julia 5,596/primary/105) and passes 5x2x66 plus the ten-leg Unicode manifest without
+  production or semantic-governance changes. Canonical proof passes Rust admission 80.21s, Dart 1/1, primary 66x2,
+  and Phase 0 1,031/645s; exact generated cleanup reclaims 1.57 GB. Negative and unrelated-grammar isolation `.3`
+  follows after the clean identity commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

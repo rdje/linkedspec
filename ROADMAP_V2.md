@@ -434,9 +434,13 @@ behavior, response digest, rollout, or admission state changes in the audit. Pla
 generated internal 806-range classifier/scanner, five parser and four validator roles, exact identity/negative/
 isolation suites, and `.1-.4` gates. Implementation `.10.6.1.1` now emits/checks all 806 ranges, routes complete
 headers and action/blind/bare targets without prefix truncation, and validates parsed/external AST labels with one
-portable diagnostic. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass;
-canonical Rust admission 79.93s, Dart 1/1, primary 66x2, and Phase 0 1,031/663s pass. Identity `.2` follows after
-the clean core commit, and semantic governance remains unchanged.
+portable diagnostic. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass.
+Identity `.10.6.1.2` now derives ten unique labels from all nine positives and both distinct pairs and proves exact
+identity through AST, compiled/generated/reconstructed/emitted/loaded routes, selectors, diagnostics, traces, and
+inline/file commands. It adds 130 assertions (focused 1,885; Julia 5,596/primary/105), passes 5x2x66 plus the
+ten-leg manifest plus canonical Rust 80.21s/Dart 1/1/primary 66x2/Phase 0 1,031/645s, and changes no production or
+semantic governance. Exact cleanup reclaims 1.57 GB; negative/isolation `.3` is next after the clean identity
+commit.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

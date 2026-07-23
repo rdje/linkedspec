@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.2` — scalar membership and downstream identity need independent
+  proof): A correct Unicode classifier does not by itself prove that keys, serialization, selectors, diagnostics,
+  traces, or generated hosts preserve the same scalar sequence. The identity suite therefore derives its ten
+  unique labels directly from all nine positives and both distinct pairs, creates one distinguishable rule per
+  label, and checks order, maps, JSON, descriptor, plan, reconstruction, and both native/generated execution.
+  Case and normalization pairs are selected independently; no host folding or normalization oracle is trusted.
+
+  Emitted-source proof is strongest when it crosses a process boundary. The suite decodes the deterministic hex
+  payload, recompiles it in process, then launches a fresh offline Julia project with compiled modules disabled,
+  validates the emitted plan, and runs every explicit selector. Logical source identity is asserted separately
+  from the strict loader's resolved path: compiled JSON and descriptor must not expose that host path.
+
+  Diagnostic and trace checks compare structured exact fields, not merely success. Missing native/generated
+  selectors preserve the Unicode label in `top_rule`, `entry_rule`, `rule_label`, handler/source identity, and
+  detail; selected traces retain requested/effective/top-rule and logical source identity. The result is 130 new
+  assertions, focused 1,885, Julia 5,596/primary/105, 5x2x66, and the ten-leg manifest with no production or
+  semantic-ledger change. Canonical proof adds Rust admission 80.21s, Dart 1/1, primary 66x2, and Phase 0
+  1,031/1,031 in 645s. Removing only the rendered book, Rust deps/incremental, and Python bytecode reclaims about
+  1.57 GB while preserving Pgen artifacts. Exhaustive negative and adjacent-grammar isolation remains
+  independently owned by `.3`.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.1` — separate scalar membership, punctuation scanning, and AST trust):
   The correct replacement for Julia's five label-bearing host `\w` patterns is not another property regex. The
   generated artifact owns only pinned Unicode 17 scalar membership and complete/prefix label classification.

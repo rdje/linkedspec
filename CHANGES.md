@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.2 — prove Julia Unicode identity
+
+Added one omission-sensitive Julia route suite that derives ten unique rule labels from all nine positive Unicode
+fixtures and both exact-distinct pairs. Every authored label now has explicit proof through parsed AST order,
+compiled definition/order/maps, compiled JSON, descriptor metadata and keys, generated-plan rows, JSON
+reconstruction, default and explicit native/generated execution, and case/normalization-sensitive independent
+lookup. The test consumes the neutral fixtures directly rather than maintaining a second label list.
+
+Deterministic emitted source is decoded and recompiled, then loaded in a fresh offline Julia process whose emitted
+module validates its plan and executes every selector. Strict loading retains exact UTF-8 source/order while
+compiled JSON and descriptor stay free of the resolved host path. Inline primary commands execute all ten labels;
+the supplementary label also executes from a UTF-8 spec file. Native/generated missing-selector diagnostics and
+decision/parse traces retain exact requested, effective, top-rule, rule-label, and logical-source identity.
+
+The new suite passes 130 assertions; classifier/native-route/identity composition passes 1,885. Complete Julia
+passes 5,596 package assertions, primary process conformance, and corpus 105/105. Unicode remains 806/9/8/2,
+semantic governance remains 6/20/81 at rollout 4/9 and admission 3/6, capability remains 80/0/0, generated source
+remains v1/10/80-0-0, and the primary matrix passes 5x2x66 plus the ten-leg self-hosted Unicode manifest. This
+slice changes no production code, neutral contract, public API, generated format, path policy, or semantic ledger;
+negative rejection and adjacent-grammar isolation remain owned by `.10.6.1.3`.
+
+The staged canonical candidate passes Rust semantic admission 1/1 in 80.21 seconds, Dart admission 1/1, primary
+66/66 under default and POSIX, and Phase 0 1,031/1,031 in 645 seconds. Knowledge Map 682/5,147, mdBook, memory,
+task metadata, all four doctrines, and diff hygiene pass. Post-signoff cleanup removes exactly the regenerated
+12-MB book, 826-MB Rust dependency output, 727-MB incremental output, and 28-KB Python cache—about 1.57 GB—while
+preserving tracked source and `rgx/pgen-issues/artifacts`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.1 — route Julia Unicode labels
 
 Julia rule-label parsing and validation now use the repository's pinned Unicode 17 `XID_Continue` contract instead
