@@ -138,7 +138,9 @@ struct _SemanticIndexConstructionToken end
 
 const _SEMANTIC_INDEX_CONSTRUCTION_TOKEN = _SemanticIndexConstructionToken()
 
-"""Opaque copied semantic source authority. Use the exported source accessors."""
+abstract type _AbstractSemanticCompilationOutcome end
+
+"""Opaque copied semantic source and compilation authority. Use exported accessors."""
 struct SemanticIndex
     _source_text::String
     _source_map::_SemanticSourceMap
@@ -146,6 +148,7 @@ struct SemanticIndex
     _source_detail_ceiling::SemanticSourceDetail
     _content_digest::String
     _entry_rule::Union{Nothing,String}
+    _compilation_outcome::_AbstractSemanticCompilationOutcome
 
     function SemanticIndex(
         ::_SemanticIndexConstructionToken,
@@ -155,6 +158,7 @@ struct SemanticIndex
         source_detail_ceiling,
         content_digest,
         entry_rule,
+        compilation_outcome,
     )
         return new(
             source_text,
@@ -163,19 +167,23 @@ struct SemanticIndex
             source_detail_ceiling,
             content_digest,
             entry_rule,
+            compilation_outcome,
         )
     end
 end
 
 function Base.show(io::IO, index::SemanticIndex)
     ceiling = _semantic_source_detail_name(getfield(index, :_source_detail_ceiling))
+    state = _semantic_index_snapshot_state_name(index)
     print(
         io,
         "SemanticIndex(source_id=\"",
         _SEMANTIC_SOURCE_ID,
+        "\", snapshot_state=\"",
+        state,
         "\", source_detail_ceiling=\"",
         ceiling,
-        "\", source_only=true)",
+        "\", has_execution=false)",
     )
 end
 
@@ -184,23 +192,22 @@ Base.propertynames(::SemanticIndex, private::Bool = false) =
 
 function Base.getproperty(::SemanticIndex, name::Symbol)
     throw(ArgumentError(
-        "SemanticIndex is opaque; use source_identity, source_span_for_bytes, " *
-        "source_span_for_scalars, source_excerpt_for_bytes, or locate_exact",
+        "SemanticIndex is opaque; use the exported semantic accessors",
     ))
 end
 
-"""Construct one source-only index from copied valid text."""
+"""Construct one compiled-or-failed index from copied valid text."""
 function semantic_index(source::AbstractString, options::SemanticIndexOptions)
     validated_options = _validate_semantic_index_options(options)
     source_text, source_bytes = _copy_semantic_text(source)
-    return _build_source_only_semantic_index(source_text, source_bytes, validated_options)
+    return _build_semantic_index(source_text, source_bytes, validated_options)
 end
 
-"""Construct one source-only index from copied strict UTF-8 bytes."""
+"""Construct one compiled-or-failed index from copied strict UTF-8 bytes."""
 function semantic_index(source::AbstractVector{UInt8}, options::SemanticIndexOptions)
     validated_options = _validate_semantic_index_options(options)
     source_text, source_bytes = _copy_semantic_utf8(source)
-    return _build_source_only_semantic_index(source_text, source_bytes, validated_options)
+    return _build_semantic_index(source_text, source_bytes, validated_options)
 end
 
 """Keyword convenience for `semantic_index(source, SemanticIndexOptions(...))`."""
@@ -320,7 +327,8 @@ function to_json(span::SemanticSourceSpan)
     )
 end
 
-function _build_source_only_semantic_index(source_text, source_bytes, options)
+function _build_semantic_index(source_text, source_bytes, options)
+    compilation_outcome = _build_semantic_compilation_outcome(source_text, options)
     return SemanticIndex(
         _SEMANTIC_INDEX_CONSTRUCTION_TOKEN,
         source_text,
@@ -329,6 +337,7 @@ function _build_source_only_semantic_index(source_text, source_bytes, options)
         options.source_detail_ceiling,
         "sha256:$(bytes2hex(SHA.sha256(source_bytes)))",
         options.entry_rule === nothing ? nothing : String(options.entry_rule),
+        compilation_outcome,
     )
 end
 

@@ -8,20 +8,34 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia source-only semantic foundation `FUTURE-PARITY-BACKLOG.10.6.2.1` is a complete verified commit candidate
-  from clean plan commit `daa04c26`. The new opaque `SemanticIndex` copies valid text or strict bytes, validates
-  logical identity and the optional Unicode-17 selector, builds private immutable byte/line/scalar boundaries and
-  SHA-256, and exposes only ceiling-checked detached source values/accessors. It has no parser/compiler/path/query/
-  execution route. Compiled outcome `.10.6.2.2` remains blocked until the clean commit.
+- Julia compiled-outcome foundation `FUTURE-PARITY-BACKLOG.10.6.2.2` is the active verified candidate from clean
+  source commit `c41ac952`. The same opaque `SemanticIndex` now retains one staged compiled-or-failed authority,
+  native diagnostics, merged authored function/rule order, selected entry, and generated-v2 plan privately.
+  Snapshot, authority, diagnostic, entry, plan, and JSON values are detached; no loader/path, target/generated
+  execution, runtime, trace/sink/observer, descriptor, records, or query enters construction.
 
-Focused 135, Julia 7,677/primary/105, primary 5x2x66, all ten Unicode legs, exact no-drift ledgers, Knowledge Map
-682/5,166, mdBook/memory/four doctrines/diff, canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0
-1,031/630s, and exact 1.56-GB safe cleanup pass. Only final fast rechecks and the per-slice commit remain.
+New 85/focused 220, Julia 7,762/primary/105, stable primary 5x2x66, all ten Unicode legs, exact no-drift ledgers,
+Knowledge Map 682/5,172, mdBook, canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact
+1.56-GB cleanup preserving all 517 Pgen artifacts pass. Only final fast checks and the per-slice commit remain;
+composed closeout `.10.6.2.3` stays blocked until that clean commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.2 — add Julia semantic outcomes**
+  (DONE candidate from clean base `c41ac952`; awaiting this commit).
+
+  **Result:** Julia's opaque source owner now retains one exact staged compiled-or-failed authority, merged authored
+  function/rule order, native failures, entry identity, and generated-v2 plan privately while returning only
+  detached snapshot/authority/diagnostic/entry/plan values. No caller execution, path, host IR, records, or query.
+
+  **Proof:** New 85/focused 220; Julia 7,762/primary/105; stable primary 5x2x66 plus ten Unicode legs; unchanged
+  Unicode 806/9/8/2 and semantic 6/20/81 at 4/9 + 3/6; KM 682/5,172; canonical Rust 82.82s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/643s; exact 1.56-GB cleanup preserving all 517 Pgen artifacts.
+
+  **Next:** after the clean commit, compose source/outcome signoff without production change in `.10.6.2.3`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.1 — add Julia semantic source map**
   (DONE candidate from clean base `daa04c26`; awaiting this commit).
 

@@ -32,6 +32,7 @@ include("unicode_rule_label_routes_test.jl")
 include("unicode_rule_label_identity_routes_test.jl")
 include("unicode_rule_label_negative_isolation_test.jl")
 include("semantic_index_source_foundation_test.jl")
+include("semantic_index_compilation_foundation_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(

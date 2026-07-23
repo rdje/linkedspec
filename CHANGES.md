@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.2 — add Julia semantic outcomes
+
+Completed Julia's public semantic source/outcome foundation. After the strict copied-text/bytes boundary,
+`semantic_index` now runs exactly one staged user-function-aware parse, validation, compile-without-duplicate-
+validation, entry selection, and shared generated-source-v2 planning pass. Its opaque private outcome retains typed
+parsed and compiled authorities plus merged authored function/rule order. Public `semantic_snapshot`,
+`compilation_authority`, `compilation_diagnostic`, `entry_selection`, and `generated_plan_input` accessors return
+only immutable detached values; JSON projections are fresh plain data and cannot alias compiler state.
+
+Successful construction reports compiled state, exact entry basis, and contract-v2/format-2 label/family plan rows
+using caller logical identity. Ordinary parse, validation, compile, selection, and plan failures remain useful
+failed-compilation snapshots with deterministic authority flags and native portable diagnostics where available.
+Only fatal interrupt, memory-exhaustion, and stack-overflow exceptions rethrow. The calls fixture locks complete
+authored order `normalize`, `Top`, `Done`; the failed fixture preserves `bare_edge_target_undefined` /
+`normalize_edges` with exact fields. Construction invokes no loader/path, caller target runtime, generated
+execution, trace, diagnostic sink, observer, descriptor, records, or query, and reports no execution.
+
+The new suite adds 85 assertions; focused source/outcome composition passes 220 and complete Julia passes 7,762
+package assertions plus primary process and corpus 105/105. The five-backend primary matrix remains 5x2x66 and all
+ten Unicode-manifest legs pass. Unicode stays 806/9/8/2; semantic governance stays 6/20/81 at rollout 4/9 and
+admission 3/6; capability/generated/public stay 80/0/0, v1/10/80-0-0, and 59/27/0. No record/query/runtime API,
+neutral fixture, generated format, or semantic promotion changes.
+
+Knowledge Map 682/5,172, mdBook, memory architecture, all four doctrines, and diff hygiene pass. Canonical local CI
+passes Rust semantic admission 1/1 in 82.82 seconds, Dart admission 1/1, primary 66/66 twice, and Phase 0
+1,031/1,031 in 643 seconds. Cleanup removes the regenerated 12-MB book, 826-MB Rust dependencies, 595-MB
+incremental state, 130-MB temporary Julia compiled cache, and 28-KB Python cache—about 1.56 GB—while preserving all
+517 Pgen issue artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.1 — add Julia semantic source map
 
 Added Julia's first public semantic-introspection owner as a deliberately source-only opaque `SemanticIndex`.

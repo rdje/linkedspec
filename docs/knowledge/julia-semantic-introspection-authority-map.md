@@ -1,6 +1,6 @@
 ---
 id: julia-semantic-introspection-authority-map
-title: Julia semantic introspection must compose typed native authorities behind a new opaque source map
+title: Julia semantic introspection composes typed source and compilation authorities behind one opaque index
 answers:
   - "which Julia authorities can build the semantic index"
   - "does Julia already expose semantic_index or semantic_query"
@@ -26,6 +26,12 @@ answers:
   - "does Julia now implement semantic_index source construction"
   - "which Julia semantic source accessors are public"
   - "does Julia source-only semantic_index invoke the parser"
+  - "does Julia semantic_index now retain a compiled-or-failed outcome"
+  - "which Julia semantic compilation outcome accessors are public"
+  - "what does Julia semantic_snapshot expose"
+  - "how does Julia semantic_index report parse validation compile and entry failures"
+  - "does Julia generated_plan_input expose compiled or emitted host state"
+  - "does Julia semantic outcome construction execute caller target code"
   - "how does Julia semantic_index reject malformed UTF-8 before parsing"
   - "what are the Julia SemanticSourceDetail enum values"
   - "does Julia compiled state JSON alias CompiledSpec"
@@ -40,13 +46,13 @@ answers:
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0-.10.6.2.1; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/test/semantic_index_source_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\")'; rg -n 'semantic_index|semantic_query|SemanticIndex|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0-.10.6.2.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
 ---
 
-Julia now has the source-only semantic-index owner from `.10.6.2.1`, but still has no compiled outcome, semantic
-records, `semantic_query`, `SemanticQuery`, capabilities type, or typed runtime semantic observation. The exported
-`semantic_index` is an opaque native owner rather than a renamed descriptor or a query wrapper over public
+Julia now has the source and compiled-or-failed semantic-index foundation from `.10.6.2.1-.2`, but still has no
+semantic records, `semantic_query`, `SemanticQuery`, capabilities type, or typed runtime semantic observation. The
+exported `semantic_index` is an opaque native owner rather than a renamed descriptor or a query wrapper over public
 dictionaries.
 
 The reusable meaning is already present, but distributed across typed layers:
@@ -118,13 +124,12 @@ shapes reject at `decode_source`, caller byte mutation cannot change retained te
 tuples, the opaque owner suppresses normal property access, display is identity-redacted, and outward structs plus
 fresh JSON projections cannot alias private state.
 
-Committed-source signoff for this leaf is focused 135 and Julia 7,677/primary/105, shared primary 5x2x66, all ten
+Committed-source signoff for `.10.6.2.1` is focused 135 and Julia 7,677/primary/105, shared primary 5x2x66, all ten
 self-hosted Unicode legs, unchanged Unicode 806/9/8/2 and semantic 6/20/81 at rollout 4/9 plus admission 3/6,
-Knowledge Map 682/5,166, and canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s. Compiled outcome
-state remains dependency-owned by `.10.6.2.2` and is not implied by the source-only API.
+Knowledge Map 682/5,166, and canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s.
 
-The outcome half follows only after that source owner is stable. It calls the staged user-function-aware parser,
-validator, compiler with duplicate validation disabled, entry selector, and shared generated-v2 plan builder once.
+Outcome leaf `.10.6.2.2` extends that stable owner. It calls the staged user-function-aware parser, validator,
+compiler with duplicate validation disabled, entry selector, and shared generated-v2 plan builder once.
 It merges functions and rules by authored source position because `CompiledSpec.definition_order` contains only
 rules (`Top`, `Done`) while the calls fixture function `normalize` precedes them. Native portable failure stays
 exact: `failed.spec` is `bare_edge_target_undefined` / `normalize_edges` with `rule_label=Top`, `target=Missing`;
@@ -132,11 +137,26 @@ missing selection is `entry_rule_not_found` / `select_entry_rule`. Fatal process
 parse/validation/compile/selection/plan failures become detached failed-compilation outcomes. Generated plan rows
 for the calls fixture are `Top/default`, `Done/default` and use caller logical identity rather than a path.
 
+The public accessors are `semantic_snapshot`, `compilation_authority`, `compilation_diagnostic`, `entry_selection`,
+and `generated_plan_input`. A snapshot reports stable id, compiled/failed state, source ceiling and digest
+availability, with `has_execution=false`. Authority reports only parsed/validated/compiled presence. Diagnostics,
+entry selection, and plan contract/version/logical identity/label-family rows are immutable detached values; they
+never expose the private parser/compiler owners or emitted implementation. The `none` ceiling denies generated plan
+identity.
+
 Construction has no path input and never calls `SpecLoader`, a target runtime engine, generated execution, trace,
 diagnostic output, or semantic observation. The existing staged frontend may compile/execute its declared trusted
 function-shell/body parser specifications as compiler infrastructure; that is distinct from executing the caller's
 target spec. A target action containing an unconditional host error still parses, validates, compiles, selects, and
 plans successfully during the probe. Public semantic records/query remain absent until later leaves.
+
+Outcome proof adds 85 assertions: source/outcome focus is 220 and complete Julia is 7,762/primary/105. Native
+`failed.spec`, parse fallback, empty-rule validation, missing selector, compile/plan fallback classification, fatal
+exception identity, text/byte convergence, detached JSON, and forbidden host-key/source topology are exact. The
+neutral semantic ledger remains 6/20/81 at rollout 4/9 and admission 3/6 because foundation ownership alone is not
+backend admission. Stable primary 5x2x66, ten Unicode legs, Knowledge Map 682/5,172, canonical Rust 82.82s + Dart
+1/1 + primary 66x2 + Phase 0 1,031/643s, and exact 1.56-GB cleanup preserving all 517 Pgen artifacts close the
+outcome leaf.
 
 Implementation is dependency-ordered under `.10.6`: Unicode rule-label closure; source-only copied input/map
 `.10.6.2.1`; staged compiled-or-failed authority `.10.6.2.2`; composed foundation closeout `.10.6.2.3`; static

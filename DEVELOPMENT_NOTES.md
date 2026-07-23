@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.2` — retain typed authority, never clone compiler projections):
+  Julia's semantic constructor now performs one staged parse, one validation, one compile with duplicate validation
+  disabled, one entry selection, and one shared generated-v2 plan pass after the strict copied-source boundary.
+  The opaque outcome stores typed `SpecFile` and `CompiledSpec` authorities privately. Public snapshot, authority,
+  diagnostic, entry, and plan values are rebuilt into immutable structs and tuples; their JSON forms are fresh
+  recursively detached maps. This avoids the already-proved aliasing in compiled and descriptor JSON order arrays.
+
+  Failed construction is still a useful semantic snapshot. Ordinary parse, validation, compile, selection, and
+  plan failures become `failed_compilation` state with deterministic stage-completion bits and either the native
+  portable diagnostic or a typed fallback. Only `InterruptException`, `OutOfMemoryError`, and `StackOverflowError`
+  escape. Selection and plan failures deliberately withhold compiled authority from the outward presence view,
+  so no partially accepted executable object can be mistaken for a completed semantic foundation.
+
+  `CompiledSpec.definition_order` cannot recover complete authorship because it omits staged function shells. The
+  private adapter therefore merges functions and rules by their typed source line, with a stable function-before-
+  rule/name tie break. The neutral calls fixture locks `normalize`, `Top`, `Done`, while the public foundation
+  exposes only selected entry identity and generated label/family rows. Construction calls no loader, path route,
+  target runtime, generated execution, trace, diagnostic sink, observer, descriptor, records, or query; snapshot
+  execution is always false until a later explicit observation layer.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.1` — make the first Julia semantic owner genuinely source-only):
   `julia/src/semantic/SemanticIndex.jl` is included before the language parser and contains no parser/compiler
   reference. Construction validates/copies options and either valid `AbstractString` or strict
@@ -9,9 +29,11 @@
 
   Julia's ordinary immutable struct does not make contained vectors immutable. The private map therefore converts
   every boundary vector to a tuple after construction, the index suppresses ordinary property access and its public
-  constructor, and normal display prints only `source:0`, ceiling, and `source_only=true`. Returned identity/span/
-  error structs contain immutable values; every `to_json` call allocates a fresh map. Caller byte views are copied,
-  and logical name/entry selector are copied only after validity checks, so malformed strings are never iterated.
+  constructor, and that leaf's display printed only `source:0`, ceiling, and `source_only=true` (outcome `.2`
+  subsequently replaced the last marker with redacted snapshot state and `has_execution=false`). Returned identity/
+  span/error structs contain immutable values; every `to_json` call allocates a fresh map. Caller byte views are
+  copied, and logical name/entry selector are copied only after validity checks, so malformed strings are never
+  iterated.
 
   Byte access is exact rather than forgiving: zero-based half-open endpoints must both be scalar boundaries;
   scalar ranges are likewise half-open; line/column boundaries are one-based and count Unicode scalars, including

@@ -48,33 +48,39 @@ accepted explicit-repetition hit, preserves lifecycle whole-rule returns and
 scalar pipe, and retains generated-source v2. The exact recurring proof is
 `tools/check_repeated_action_result_five_backend.sh`.
 
-## Source-only semantic index
+## Semantic source and compilation foundation
 
-Julia now exposes the first semantic-introspection foundation layer. `semantic_index` accepts either copied valid
-`AbstractString` input or copied strict `AbstractVector{UInt8}` input; it does not accept a path and does not call
-the LinkedSpec parser in this source-only stage. The required caller policy is a nonempty control-free logical
-name, one source-detail ceiling, and an optional exact Unicode-17 rule selector:
+Julia now exposes the complete semantic-introspection foundation owner. `semantic_index` accepts either copied
+valid `AbstractString` input or copied strict `AbstractVector{UInt8}` input, builds the exact source map, and then
+retains one staged compiled-or-failed outcome. It does not accept or infer a path. The required caller policy is a
+nonempty control-free logical name, one source-detail ceiling, and an optional exact Unicode-17 rule selector:
 
 ```julia
 using LinkedSpecJulia
 
 index = semantic_index(
-    "A😀\r\né\u0301Z";
+    "Top::\n /x/\n";
     logical_name = "example.spec",
     source_detail_ceiling = SemanticSourceTextDetail,
-    entry_rule = "Top",
 )
 
 identity = source_identity(index)
 @assert identity.source_id == "source:0"
-@assert identity.byte_length == 12
-@assert identity.scalar_length == 7
+@assert identity.byte_length == 11
+@assert identity.scalar_length == 11
 @assert startswith(identity.content_digest, "sha256:")
 
-emoji = source_span_for_bytes(index, 1, 5)
-@assert emoji == SemanticSourceSpan(1, 5, 1, 2, 1, 3)
-@assert source_excerpt_for_bytes(index, 1, 5) == "😀"
-@assert locate_exact(index, "é\u0301") == SemanticSourceSpan(7, 11, 2, 1, 2, 3)
+snapshot = semantic_snapshot(index)
+@assert snapshot.state == SemanticCompiledSnapshotState
+@assert snapshot.has_execution == false
+@assert compilation_authority(index) == SemanticCompilationAuthority(true, true, true)
+@assert compilation_diagnostic(index) === nothing
+@assert entry_selection(index) == SemanticEntrySelection("Top", "first_authored_marker")
+@assert generated_plan_input(index).rows ==
+    (SemanticGeneratedPlanRow("Top", "default"),)
+
+@assert source_excerpt_for_bytes(index, 0, 5) == "Top::"
+@assert locate_exact(index, "/x/") == SemanticSourceSpan(7, 10, 2, 2, 2, 5)
 ```
 
 The public ceilings are `SemanticSourceNoneDetail`, `SemanticSourceIdentityDetail`,
@@ -88,13 +94,25 @@ at or after an exact `after_byte` boundary.
 `SemanticIndexError` reports stable `stage`, `code`, `message`, and immutable sorted field pairs. Malformed Julia
 strings and malformed bytes reject before character iteration; invalid options reject before source handling;
 mid-scalar, out-of-range, non-integer, and Boolean coordinates reject as typed source-map failures. The index's
-normal display omits the logical name, source text, digest, selector, and private map. Returned structs are
-immutable, and each `to_json` call creates detached mutable JSON state. Compilation outcomes, records, query, and
-runtime observation are intentionally absent until their dependency-ordered semantic leaves land.
+normal display omits the logical name, source text, digest, selector, private map, and compiler objects.
 
-The source-only contract is verified by 135 focused assertions and complete Julia 7,677 package assertions,
-primary process conformance, corpus 105/105, the shared five-backend 5x2x66 primary matrix, and all ten self-hosted
-Unicode manifest legs. Compiled-or-failed semantic outcomes remain the next separate dependency leaf.
+After strict source construction, the owner invokes the staged user-function-aware parser, validator, compiler,
+entry selector, and shared generated-source-v2 plan builder exactly once. A language failure does not discard the
+source owner: `semantic_snapshot(index).state` becomes `SemanticFailedCompilationSnapshotState`,
+`compilation_authority` reports which stages succeeded, and `compilation_diagnostic` returns a detached portable
+failure. Successful outcomes expose only detached entry identity and generated plan input. The private `SpecFile`,
+`CompiledSpec`, merged authored function/rule order, and source map never cross the API.
+
+Construction never invokes the caller's target parser, action or lifecycle code, generated execution, runtime,
+trace, diagnostic-output sink, or semantic observer. `semantic_snapshot(index).has_execution` is therefore always
+false at this layer. Records, semantic query, and runtime observation remain dependency-ordered later work.
+Returned structs are immutable, and each `to_json` call creates detached mutable JSON state.
+
+The source and outcome contracts are verified by 220 focused assertions and complete Julia 7,762 package
+assertions, primary process conformance, corpus 105/105, the shared five-backend 5x2x66 primary matrix, and all ten
+self-hosted Unicode manifest legs. All no-drift ledgers remain unchanged; canonical local CI passes Rust semantic
+admission in 82.82 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 643 seconds. Exact safe
+cleanup reclaims about 1.56 GB while preserving all 517 Pgen issue artifacts.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,
 engines carried global seek, bare rule labels remained raw, parent/child agreement was 5/8, structural agreement

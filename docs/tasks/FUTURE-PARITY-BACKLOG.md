@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Julia Unicode closeout `.10.6.1.4` composes the committed five-leaf prerequisite,
-  closes `.10.6.1` without semantic promotion, and hands off only to behavior-free `.10.6.2.0`)
+- Last updated: `2026-07-22` (Julia outcome `.10.6.2.2` completes one opaque staged compiled-or-failed authority
+  with detached public values and no execution or semantic promotion; composed closeout `.10.6.2.3` follows)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9573,7 +9573,7 @@ before implementation.
       mdBook, memory, doctrines, canonical CI, and exact safe artifact cleanup before the clean commit.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.2.2`
-    Status: `pending`
+    Status: `done` (2026-07-22; staged compiled-or-failed Julia outcome implemented and fully verified)
     Goal: Retain opaque staged compiled-or-failed Julia authority and exact generated-plan input.
     Depends on: `.10.6.2.1`
     Acceptance: Parse staged function shells, validate, compile, merge authored function/rule order, select entry,
@@ -9585,6 +9585,49 @@ before implementation.
       and rule definitions by authored source position, detach every outward value, and mechanically deny descriptor/
       JSON aliases, loader/path IO, target/generated execution, trace and diagnostic sinks, runtime observation,
       static records, and query. Rethrow only `InterruptException`, `OutOfMemoryError`, and `StackOverflowError`.
+    Verification: `julia/src/semantic/SemanticCompilationOutcome.jl` extends the same opaque owner after strict
+      source construction. It performs exactly one staged user-function-aware parse, validation, compile with
+      duplicate validation disabled, entry resolution, and shared generated-v2 plan pass. Typed `SpecFile`,
+      `CompiledSpec`, and merged function/rule authored order remain private. Public snapshot, authority,
+      diagnostic, entry, plan-row, plan-input, and JSON values are immutable or freshly detached. Ordinary language
+      failures retain deterministic failed-compilation state; only interrupt, memory exhaustion, and stack overflow
+      rethrow. Source topology proves there is no loader/path, target/generated execution, runtime, trace,
+      diagnostic/observation sink, descriptor, record, or query coupling.
+
+      The new suite passes 85 assertions: graph snapshot/authority/entry/plan identity, equality/hash/JSON and
+      mutation detachment; source-ceiling denial; explicit/marker/default entry bases; exact calls authored order
+      `normalize`, `Top`, `Done`; native failed diagnostic; parse/validation/selector and compile/plan fallbacks;
+      fatal classification; text/byte convergence; runtime-static no-execution; plain public JSON; forbidden host
+      keys; and one-call/omission source shape. Focused source/outcome composition is 220. Complete Julia passes
+      7,762 package assertions, primary process conformance, and corpus 105/105. The stable primary matrix passes
+      5 backends x 2 environments x 66 cases and all ten self-hosted Unicode-manifest legs pass 1/1. One discarded
+      matrix attempt had two Julia POSIX silence failures because a package docstring was edited while the matrix
+      was live, triggering precompile banners on stderr; the exact root cause was reproduced, the final tree was
+      warmed, and the complete stable rerun passed without semantic or trace drift.
+
+      No-drift remains exact: Unicode 806/9/8/2; semantic 6 groups / 20 queries / 81 mutations at rollout 4/9 and
+      native admission 3/6; capability 80/0/0; generated source v1 / 10 families / 80-0-0; public aggregate-selector
+      surface 59 files / 27 classified history / 0 current examples. Knowledge Map 682/5,172, mdBook, memory, task
+      metadata, all four doctrines, and diff hygiene pass. Canonical local CI passes Rust semantic admission 1/1 in
+      82.82 seconds, Dart admission 1/1, primary 66/66 twice, and Phase 0 1,031/1,031 in 643 seconds. Exact cleanup
+      removes the regenerated 12-MB book, 826-MB Rust deps, 595-MB incremental state, 130-MB temporary Julia
+      compiled cache, and 28-KB Python cache—about 1.56 GB—while preserving all 517 Pgen issue artifacts.
+    Commit: `FUTURE-PARITY-BACKLOG.10.6.2.2 - add Julia semantic outcomes`
+
+    #### Acceptance Checklist
+
+    - [x] **REPRODUCE / ISSUE** — Use neutral graph/calls/privacy/failed/runtime fixtures and the frozen Julia
+      authority probes to reproduce the absence of a compiled-or-failed semantic outcome after source ownership.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — Prove complete authored order spans typed function and rule owners while
+      compiled/descriptor JSON aliases live state, so a new detached adapter must own the outcome after strict input.
+    - [x] **FIX** — Retain one staged parse/validate/compile/select/plan result privately and expose only immutable
+      snapshot, authority, diagnostic, entry, and generated-plan values with deterministic fatal/failure policy.
+    - [x] **ADDRESSED (verified)** — Pass all 85 new and 220 composed assertions, including exact native failures,
+      authored order, ceiling/privacy, caller detachment, fatal classification, and omission-safe source topology.
+    - [x] **NO REGRESSION** — Pass Julia 7,762/primary/105, stable 5x2x66, ten Unicode legs, exact no-drift ledgers,
+      and canonical Rust/Dart/primary/Phase 0 without semantic promotion or generated-format change.
+    - [x] **LOCKSTEP** — Synchronize Knowledge Map, roadmap/task/live docs, Julia README, Toolbox, mdBook, memory,
+      doctrines, canonical proof, and exact safe cleanup before the clean commit.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.2.3`
     Status: `pending`
@@ -12092,7 +12135,11 @@ a complete verified candidate from that base: opaque text/byte construction, pri
 four ceilings, typed detached values/errors, and exact accessors pass focused 135, Julia 7,677/primary/105, primary
 5x2x66, all ten Unicode-manifest legs, every no-drift checker, Knowledge Map 682/5,166, mdBook/doctrines, canonical
 Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.56-GB cleanup. Compiled outcome `.10.6.2.2`
-waits for this clean commit.
+is a complete verified candidate from clean commit `c41ac952`: one staged parse/validation/compile/select/plan
+owner, merged authored definition order, and detached compiled-or-failed values pass new 85/focused 220, complete
+Julia 7,762/primary/105, primary 5x2x66, all ten Unicode legs, exact no-drift, Knowledge Map 682/5,172, mdBook,
+canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact 1.56-GB cleanup preserving 517
+Pgen artifacts. Only final fast checks and the clean commit remain; `.10.6.2.3` follows that commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -12578,6 +12625,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.2 | `FUTURE-PARITY-BACKLOG.10.6.2` | `active` | Add Julia's opaque strict source map and compiled-or-failed semantic foundation without query or execution. |
 | 74.5.2.0 | `FUTURE-PARITY-BACKLOG.10.6.2.0` | `done` | Exact Julia input/source-map/outcome API, descriptor-alias/privacy/no-execution boundary, and `.1-.3` split are frozen before code. |
 | 74.5.2.1 | `FUTURE-PARITY-BACKLOG.10.6.2.1` | `done` | Opaque strict copied Julia text/bytes, private canonical byte/scalar map, SHA-256, four ceilings, typed values/errors, exact accessors, and 135/7,677 proof complete. |
+| 74.5.2.2 | `FUTURE-PARITY-BACKLOG.10.6.2.2` | `done` | One opaque staged compiled-or-failed authority, merged authorship, detached outcome API, focused 220 / Julia 7,762, complete matrix/canonical proof, and safe cleanup pass without execution or promotion. |
+| 74.5.2.3 | `FUTURE-PARITY-BACKLOG.10.6.2.3` | `pending` | Compose the committed Julia source/outcome foundation and close `.10.6.2` without another production change. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -13252,6 +13301,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.2.2` | One staged parse/validate/compile/select/generated-plan owner; private typed compiler authority and merged authored order; detached snapshot/authority/diagnostic/entry/plan; native/fallback/fatal failures; no loader/path/target/generated/runtime/trace/sink/observer/descriptor/record/query topology; 85 new/focused 220 and Julia 7,762/primary/105; stable primary 5x2x66 plus ten 1/1 Unicode legs; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,172; mdBook/memory/task/four doctrines/diff; canonical Rust 1/1 in 82.82s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 643s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. Julia now owns an opaque compiled-or-failed semantic outcome with exact detached foundation values and no execution, record/query surface, generated-format change, or semantic promotion; closeout `.10.6.2.3` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.2.1` | Opaque pre-parser Julia source owner; strict copied text/bytes; private tuple byte/line/scalar map; SHA-256; four ceilings; typed detached values/errors; exact spans/excerpts/occurrences; malformed/caller-mutation/privacy/Bool/no-parser proof; 135 focused and Julia 7,677/primary/105; primary 5x2x66 plus ten 1/1 Unicode legs; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,166; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 78.39s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 630s; exact 1.56-GB generated cleanup preserving Pgen. | PASS. Julia has a strict opaque source-only semantic authority with no parser/compiler/path/query/execution coupling; rollout/admission stay unchanged, and compiled outcome `.10.6.2.2` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.2.0` | Neutral/admitted authority retrieval; Julia valid/malformed text and absent byte method; staged function/rule order; validation/selection failure; loaded-path ownership; generated-plan rows; live JSON/descriptor aliasing; Bool numeric fence; target no-execution; frozen source/outcome API and `.1-.3` split; unchanged Julia 7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,161; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 78.27s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 629s; exact 1.28-GB generated cleanup preserving Pgen. | PASS. Julia's source/outcome boundary is dependency-complete before implementation; no production/test/fixture/contract/API/format/ledger behavior changes, and strict copied input/source map `.10.6.2.1` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.4` | No code/test/fixture/contract/API/format/ledger change; independent generated 806/9/8/2; committed four-suite focused 3,831; complete Julia 7,542/primary/105; primary 5x2x66 plus ten 1/1 manifest legs; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,151; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 78.46s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 630s; exact 1.57-GB generated cleanup preserving Pgen. | PASS. The five-leaf Julia Unicode prerequisite composes and closes without semantic promotion; behavior-free source/outcome plan `.10.6.2.0` waits for the clean commit. |
@@ -13486,6 +13536,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.2.2` | `FUTURE-PARITY-BACKLOG.10.6.2.2 - add Julia semantic outcomes` | One opaque staged compiled-or-failed authority, private merged authorship, detached outcome values, native/fatal/privacy/no-execution proof, 85 new/focused 220, Julia 7,762/primary/105, stable 5x2x66 plus ten Unicode legs, unchanged ledgers, KM/book/doctrines, canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact 1.56-GB cleanup before composed closeout. |
 | `FUTURE-PARITY-BACKLOG.10.6.2.1` | `FUTURE-PARITY-BACKLOG.10.6.2.1 - add Julia semantic source map` | Opaque strict copied text/bytes, private tuple byte/scalar map, SHA-256, four ceilings, typed values/errors, exact accessors, focused 135, Julia 7,677/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, KM/book/doctrines, canonical Rust 78.39s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.56-GB cleanup before compiled outcomes. |
 | `FUTURE-PARITY-BACKLOG.10.6.2.0` | `FUTURE-PARITY-BACKLOG.10.6.2.0 - freeze Julia semantic foundation` | Behavior-free exact text/byte/source-map/ceiling/outcome surface; native failure/order/path/alias/numeric/no-execution probes; `.1-.3` split; unchanged Julia and semantic ledgers; KM/book/doctrines; canonical Rust admission 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/629s; and exact 1.28-GB cleanup before source implementation. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.4` | `FUTURE-PARITY-BACKLOG.10.6.1.4 - close Julia Unicode labels` | No-change composition of focused 3,831, Julia 7,542/105/primary, 5x2x66 plus ten-leg manifest, unchanged semantic/capability/generated/public ledgers, KM/book/doctrines, canonical Rust admission 78.46s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.57-GB cleanup; closes `.10.6.1` and hands off `.10.6.2.0`. |
@@ -13698,6 +13749,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-22`: `.10.6.2.2` completes Julia's compiled-or-failed semantic foundation. One exact staged parse,
+  validation, compile, entry selection, and generated-v2 plan remains behind the opaque source owner with typed
+  compiler authority and merged function/rule authorship private. Detached snapshot, authority, native diagnostic,
+  entry, plan, and JSON values expose no path, AST/IR, compiler/descriptor object, target/generated execution,
+  runtime, trace/sink/observer, records, or query. New 85/focused 220, Julia 7,762/primary/105, stable primary
+  5x2x66, all ten Unicode legs, exact no-drift ledgers, KM 682/5,172, book/memory/doctrines, canonical Rust 82.82s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts pass.
+  Semantic rollout/admission and generated format are unchanged; composed closeout `.10.6.2.3` follows the commit.
 
 - `2026-07-22`: `.10.6.2.1` adds Julia's opaque source-only semantic authority. Copied valid text or strict bytes
   feed one private immutable byte/line/scalar boundary map and SHA-256; four ceilings govern typed detached identity,

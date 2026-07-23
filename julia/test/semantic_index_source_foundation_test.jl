@@ -30,7 +30,7 @@ end
     @test isempty(propertynames(text_index))
     @test_throws ArgumentError text_index._source_text
     @test repr(text_index) ==
-          "SemanticIndex(source_id=\"source:0\", source_detail_ceiling=\"text\", source_only=true)"
+          "SemanticIndex(source_id=\"source:0\", snapshot_state=\"failed_compilation\", source_detail_ceiling=\"text\", has_execution=false)"
     @test !occursin("unicode-source.spec", repr(text_index))
     @test !occursin(unicode_source, repr(text_index))
     @test !occursin("57e1b234", repr(text_index))

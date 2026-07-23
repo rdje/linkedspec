@@ -492,6 +492,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   this leaf contains no parser/compiler call. Use `source_identity`, `source_span_for_bytes`,
   `source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact`; do not inspect private fields or infer
   filesystem identity. Compiled outcomes remain solely `.10.6.2.2`.
+- **JULIA COMPILATION FOUNDATION:** `.10.6.2.2` extends that same opaque owner after strict source construction.
+  `semantic_snapshot`, `compilation_authority`, `compilation_diagnostic`, `entry_selection`, and
+  `generated_plan_input` expose immutable detached state only. Construction performs exactly one staged
+  user-function-aware parse, validation, `compile_spec(...; validate_source=false)`, entry resolution, and shared
+  generated-v2 plan pass; it merges typed function/rule authorship privately because compiled rule order omits
+  functions. Ordinary language failures become `failed_compilation` snapshots with exact native diagnostics;
+  interrupt/OOM/stack-overflow remain fatal. Run both semantic-index test files together for 220 assertions. The
+  production/test source scans must continue to deny `SpecLoader`, path IO, target/generated execution, runtime,
+  trace, diagnostic/observation sinks, descriptor projection, records, and query. See
+  [[julia-semantic-introspection-authority-map]].
 
 ---
 

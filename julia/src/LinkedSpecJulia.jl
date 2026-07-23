@@ -211,6 +211,15 @@ export backend_name,
     SemanticSourceTextDetail,
     SemanticSourceIdentity,
     SemanticSourceSpan,
+    SemanticSnapshotState,
+    SemanticCompiledSnapshotState,
+    SemanticFailedCompilationSnapshotState,
+    SemanticSnapshot,
+    SemanticCompilationAuthority,
+    SemanticCompilationDiagnostic,
+    SemanticEntrySelection,
+    SemanticGeneratedPlanRow,
+    SemanticGeneratedPlanInput,
     SpecLoadOptions,
     SpecPipelineCode,
     SpecPipelineException,
@@ -335,6 +344,11 @@ export backend_name,
     source_span_for_scalars,
     source_excerpt_for_bytes,
     locate_exact,
+    semantic_snapshot,
+    compilation_authority,
+    compilation_diagnostic,
+    entry_selection,
+    generated_plan_input,
     runtime_match,
     runtime_execute,
     runtime_execute_with_trace,
@@ -411,6 +425,7 @@ include("runtime/UnicodeCaseMapping.jl")
 include("runtime/Interpreter.jl")
 include("source/SourceEmitter.jl")
 include("parser/UserFunctionDefinitionParser.jl")
+include("semantic/SemanticCompilationOutcome.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

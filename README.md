@@ -925,6 +925,15 @@ content migration exists yet.
   no-drift ledger stays fixed; Knowledge Map 682/5,166, book/doctrines, canonical Rust 78.39s + Dart 1/1 + primary
   66x2 + Phase 0 1,031/630s, and exact 1.56-GB cleanup complete the source proof. Compiled outcomes remain
   exclusively `.10.6.2.2` and follow only after the clean source commit.
+  Outcome `.10.6.2.2` now completes that foundation: the opaque owner retains one exact staged parse/validate/
+  compile/select/generated-plan result and merged authored function/rule order, while public snapshot, authority,
+  diagnostic, entry, and plan accessors return immutable detached values only. Ordinary language failures become
+  deterministic failed snapshots; fatal process exceptions rethrow. Construction uses no loader/path, caller
+  target runtime, generated execution, trace/sink/observer, descriptor, records, or query, and always reports no
+  execution. New 85/focused 220 and complete Julia 7,762/primary/105 pass without changing Unicode 806/9/8/2,
+  semantic 6/20/81 at 4/9 + 3/6, capability/generated/public ledgers, generated format, or semantic promotion.
+  Stable 5x2x66 and all ten Unicode legs pass; canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/643s and exact 1.56-GB cleanup preserving all 517 Pgen artifacts complete the outcome proof.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
