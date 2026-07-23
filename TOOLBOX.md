@@ -508,6 +508,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   composition passes Julia 7,762/primary/105 and canonical Rust 80.84s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/630s. Parent `.10.6.2` is closed without records, query, runtime observation, target execution, or semantic
   promotion; `.10.6.3.0` owns the next behavior-free static-projection plan.
+- **JULIA STATIC-PROJECTION PREFLIGHT:** `.10.6.3.0` freezes five private targets before projector code: graph
+  12 records / 14 relations, privacy `text` 4/3, privacy `identity` 4/3, failed 6/4, and runtime-static 7/8 with
+  execution/event state removed. Probe the retained source/outcome owner and typed parsed/compiled state directly;
+  all 14 neutral graph/privacy/failed/runtime source references already match Julia's byte/scalar map. Normalize
+  Julia `Default` away from its native repetition flag because neutral v1 treats `Default`/`And`/`Single`/`Pipe`
+  as non-repeating. Do not enumerate `CompiledRule.regex_patterns`: it contains parent matchers attached to cross-
+  rule edges. Scan complete authored members, retain ordinary or self-indexed structural slots, and correlate them
+  to typed compiled edges/lifecycle payloads. Keep native `bare_edge_target_undefined` / `normalize_edges` on the
+  foundation; projection alone emits neutral `unknown_rule_reference` / `compile` decision/explanation evidence.
+  Implementation is exact graph `.10.6.3.1`, privacy/failure/runtime-static/isolation `.2`, then composition `.3`,
+  without a public projection/query, execution, trace, observation, generated-format, rollout, or admission change.
+  Plan signoff passes focused 220, Julia 7,762/primary/105, 5x2x66, ten Unicode legs, KM 683/5,188, book/
+  doctrines, canonical Rust 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup.
+  Activate graph `.10.6.3.1` only after the plan commit is clean.
+  See [[julia-semantic-static-projection-plan]].
 
 ---
 

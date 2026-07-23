@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.0` — static meaning requires authored/compiled correlation):
+  Julia's opaque source/outcome owner already retains every input needed for neutral static projection, but no one
+  input is sufficient. Parsed rules own authored member intent and line occurrence; typed compiled rules own
+  accepted topology and Action AST payload meaning; selected-entry and diagnostic values own their own decisions;
+  copied source/map owns exact ranges. A projector must correlate those owners rather than serialize an AST,
+  compiled object, descriptor, or one of their JSON views.
+
+  Two direct probes found the adapter-specific traps. Julia's `RuleMode("Default")` reports repetition with minimum
+  zero, whereas neutral v1 deliberately treats `Default`, `And`, `Single`, and `Pipe` as non-repeating with null
+  bounds. Also, a compiled rule's regex vector contains parent matchers attached to cross-rule edges. Graph Top
+  therefore retains two compiled `a` patterns even though the neutral slot records belong only to Child. Complete
+  authored-member scanning must retain ordinary structural slots and self-indexed matchers while excluding cross-
+  rule parent matchers. Short parsed fragments cannot provide the complete source evidence by themselves.
+
+  The existing Julia source map deep-checks all 14 neutral graph/privacy/failed/runtime references exactly. The
+  five frozen static targets are graph 12 records / 14 relations, privacy text 4/3, privacy identity 4/3, failed
+  6/4, and runtime-static 7/8 after execution/event filtering. Native failure remains
+  `bare_edge_target_undefined` / `normalize_edges`; only projection normalizes it to the portable unknown-rule
+  diagnostic/decision/explanation. Failed authored order must use parsed rules because validation exits before the
+  foundation's merged authored-definition tuple is built.
+
+  Implementation is graph/source/evidence `.10.6.3.1`, privacy/failure/runtime-static plus clone/repeated-
+  lifecycle/host isolation `.10.6.3.2`, then composed closeout `.10.6.3.3`. No public projection accessor, query,
+  execution, trace, runtime observation, generated-format change, rollout, or native admission belongs to the plan.
+
+  Signoff proves the unchanged boundary through focused 220, complete Julia 7,762/primary/105, 5x2x66, ten
+  Unicode legs, all no-drift ledgers, Knowledge Map 683/5,188, mdBook/doctrines, canonical Rust 78.75s + Dart 1/1
+  + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup preserving all 517 Pgen artifacts. Only compiled
+  graph/source/evidence `.10.6.3.1` becomes eligible after the clean plan commit.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.3` — close parents by recomposing their committed proof topology):
   The source-only and compiled-outcome leaves already prove different authorities, but neither leaf alone proves
   that their committed implementations coexist with every adjacent Julia owner and shared governance route. The

@@ -147,6 +147,20 @@ focused 220, complete Julia 7,762/primary/105, both matrices, all no-drift ledge
 Dart 1/1 + primary 66x2 + Phase 0 1,031/630s without production/test/fixture/API/format change. Knowledge Map
 682/5,174, mdBook/doctrines, and exact 1.56-GB cleanup pass. Parent `.10.6.2` is closed; behavior-free static
 authority planning `.10.6.3.0` follows the clean closeout commit.
+That static plan now freezes graph 12 records / 14 relations, privacy `text` 4/3, privacy `identity` 4/3, failed
+6/4, and runtime-static 7/8 before behavior. The authority composition is copied source/map plus parsed authored
+members, typed compiled rules/edges/lifecycle payloads, detached entry identity, and the native diagnostic. Julia's
+native `Default` repetition flag must normalize to neutral non-repetition, and compiled parent matchers attached to
+cross-rule edges must not become structural regex-slot records; complete authored member scanning plus compiled
+correlation owns both boundaries. The current source map already matches all 14 neutral source references exactly.
+Native `bare_edge_target_undefined` / `normalize_edges` stays on the foundation while projection alone emits the
+neutral unknown-rule decision/explanation. Work is dependency-ordered as graph/source/evidence `.10.6.3.1`, both
+privacy ceilings plus failure/runtime-static/isolation `.2`, and composed closeout `.3`, with no public query,
+runtime observation, format change, rollout, or admission movement in planning.
+The completed plan passes focused 220, Julia 7,762/primary/105, stable 5x2x66, all ten Unicode-manifest legs,
+unchanged Unicode/semantic/capability/generated/public ledgers, Knowledge Map 683/5,188, mdBook/doctrines,
+canonical Rust admission 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup
+preserving 517 Pgen artifacts. Graph implementation `.10.6.3.1` follows only after the clean plan commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

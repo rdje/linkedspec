@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.0 — freeze Julia static projection
+
+Froze Julia's exact private static-projection boundary before production or test changes. The five construction
+targets are graph 12 records / 14 relations, Unicode privacy at `text` 4/3, the same fixture at `identity` 4/3,
+failed compilation 6/4, and the runtime fixture's static half 7/8 after execution/event removal. The authority map
+composes accepted source/map, parsed authored members, typed compiled state, selected entry, and the native
+diagnostic; descriptor/compiled JSON, AST serialization, and host objects remain forbidden.
+
+Toolbox probes expose two required Julia normalizations. Native `Default` mode is repetition with minimum zero,
+while neutral v1 treats `Default`, `And`, `Single`, and `Pipe` as non-repeating with null bounds. Compiled regex
+vectors also include parent matchers attached to cross-rule edges, so the projector must scan complete authored
+members and retain only ordinary structural or self-indexed slots before correlating typed edges. Julia's existing
+source map already reproduces all 14 neutral source references exactly, including Unicode byte/scalar coordinates,
+excerpts, and digests.
+
+The native failed fixture remains `bare_edge_target_undefined` / `normalize_edges`; only projection maps it to the
+neutral unknown-rule diagnostic, decision, explanation, relations, and evidence. Implementation is ordered as
+compiled graph/source/evidence `.10.6.3.1`, privacy/failure/runtime-static/isolation `.2`, and composition `.3`.
+This plan changes no production behavior, public API, query, trace, runtime observation, fixture, generated format,
+semantic rollout, or native admission.
+
+Verification passes direct five-target/14-source-reference probes, focused source/outcome 220, complete Julia
+7,762/primary/105, the full 5x2x66 primary matrix, and all ten Unicode-manifest legs. Unicode remains 806/9/8/2;
+semantic governance remains 6/20/81 at rollout 4/9 and native admission 3/6; capability/generated/public remain
+80/0/0, v1/10/80-0-0, and 59/27/0. Knowledge Map 683/5,188, mdBook, memory, all four doctrines, and diff hygiene
+pass. Canonical local CI passes Rust admission 1/1 in 78.75 seconds, Dart 1/1, primary 66x2, and Phase 0
+1,031/1,031 in 632 seconds. Exact cleanup removes the 12-MB book, 826-MB Rust dependencies, 596-MB incremental
+state, 130-MB Julia compiled cache, and Python bytecode—about 1.56 GB—while preserving all 517 Pgen artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.3 — close Julia semantic foundation
 
 Composition-closed Julia's opaque semantic source/outcome parent without changing production code, tests,

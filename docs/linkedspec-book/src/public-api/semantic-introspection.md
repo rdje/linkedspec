@@ -1016,6 +1016,75 @@ Implementation is omission-safe and dependency ordered:
 3. `.10.6.2.3` recomposed both suites, complete Julia and canonical gates, no-drift ledgers, cleanup, and parent
    closure before static projection begins.
 
+### Julia private static projection plan
+
+Behavior-free audit `.10.6.3.0` fixes the next boundary before projector code. Julia will build the same five
+private static targets already proven by Perl, Rust, and Dart:
+
+| Construction target | Snapshot boundary | Records | Relations |
+|---|---|---:|---:|
+| graph | compiled, `text`, no execution | 12 | 14 |
+| Unicode privacy | compiled, `text`, no execution | 4 | 3 |
+| Unicode privacy limited | compiled, `identity`, no execution | 4 | 3 |
+| failed compilation | failed, `span`, no execution | 6 | 4 |
+| runtime fixture before observation | compiled, `text`, no execution | 7 | 8 |
+
+The runtime-static target is derived by removing the execution record, three event records, and every relation
+touching them from the runtime oracle, then setting `has_execution` to false. Building an index therefore cannot
+silently run the target or turn trace output into events.
+
+The static model is composed from several native owners. Copied accepted source, caller logical identity, SHA-256,
+and the private source map own source references. Parsed rules and grouped body elements own authored order,
+complete member spelling, explicit target-index spelling, entry markers, and lifecycle occurrences. Typed
+`CompiledSpec` / `CompiledRule` own accepted compiled order, modes, structural slots, resolved action/blind edges,
+payload presence, typed Action AST return shapes, and lifecycle payload identity. The existing detached entry value
+owns the selected root and basis. The existing native diagnostic owns failure evidence before normalization.
+
+The current source foundation already reproduces every one of the 14 neutral graph/privacy/failed/runtime source
+references exactly: zero-based half-open UTF-8 bytes, one-based Unicode-scalar columns, excerpts, and digests all
+agree. The projector still has to scan complete authored members because Julia's parsed element fragments are
+intentionally smaller. For example, this one physical member becomes separate parsed regex and edge fragments:
+
+```text
+ /a/ -> Child[0] { return("first") }
+```
+
+Its final edge evidence spans the complete member, not only `-> Child[0]`. Multiline action blocks use the same
+balanced-member boundary, and repeated lifecycle markers correlate to compiled payloads by authored occurrence.
+
+Two normalization traps are explicit. First, Julia's native `is_repetition(Default)` is true with minimum zero,
+while semantic v1 intentionally treats `Default`, `And`, `Single`, and `Pipe` as non-repeating with null bounds.
+Second, `CompiledRule.regex_patterns` includes a parent matcher attached to a cross-rule edge. In the graph fixture,
+Top therefore has two compiled `a` patterns, but the semantic target contains only Child's two structural regex
+slots. A matcher is retained as a slot when it is an ordinary structural slot or a self-indexed matcher; the
+runtime fixture's `Top[0]` and `Top[1]` matchers remain slots. Duplicate patterns never merge.
+
+Failure normalization also remains one-way. The opaque foundation keeps Julia's native
+`bare_edge_target_undefined` / `normalize_edges` diagnostic and its `rule_label=Top`, `target=Missing` fields. The
+private projector alone emits `unknown_rule_reference` / `compile`, neutral rule ids and message, one dependency-
+resolution decision, one ordered explanation, a `diagnoses` relation, and an `explained_by` relation citing
+`diagnostic:compile:0`. Validation fails before the foundation builds its merged authored-definition tuple, so the
+failed rule row is recovered from the retained parsed rule rather than an empty compiled-order view.
+
+Stable ids percent-escape strict UTF-8 bytes with uppercase hexadecimal and use the closed record/relation kind
+ranks. Internal storage must be recursively immutable and every oracle or later query copy fresh and detached.
+This layer adds no public projection accessor: later query code applies `none`/`identity`/`span`/`text` beneath the
+construction ceiling. Paths, parser/compiler objects, AST/ActionIR values, regex objects, descriptor state,
+generated implementation source, executors, trace, diagnostic sinks, and runtime observers remain inaccessible.
+
+Implementation is dependency-ordered: `.10.6.3.1` owns the exact compiled graph/source/evidence target;
+`.10.6.3.2` owns both privacy ceilings, failed normalization, runtime-static absence, repeated-lifecycle safety,
+clone isolation, and host-leak denial; `.10.6.3.3` recomposes all five targets and closes the private static parent.
+The plan itself changes no production API, query, trace, runtime observation, generated format, semantic rollout,
+or native admission.
+
+Plan verification passes the existing source/outcome suites at 220 assertions, complete Julia at 7,762 package
+assertions plus primary and corpus 105/105, the full five-backend/two-environment 66-case matrix, and all ten
+Unicode-manifest legs. The neutral and public ledgers remain unchanged. Knowledge Map 683/5,188, mdBook, all four
+doctrines, canonical Rust admission 78.75 seconds, Dart admission 1/1, reference primary 66x2, Phase 0
+1,031/1,031 in 632 seconds, and exact 1.56-GB generated cleanup pass. `.10.6.3.1` is eligible only after this
+behavior-free plan is committed cleanly.
+
 ## Exact v1 record model
 
 Every record has exactly:

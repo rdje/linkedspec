@@ -940,6 +940,13 @@ content migration exists yet.
   1/1, primary 66x2, and Phase 0 1,031/630s pass; Knowledge Map 682/5,174 and exact 1.56-GB safe cleanup pass too.
   Parent `.10.6.2` is composition-closed; behavior-free static authority planning `.10.6.3.0` is the next Julia
   semantic leaf after the clean closeout commit.
+  That plan is now complete and verified. It freezes graph 12/14, privacy text 4/3, privacy identity 4/3, failed
+  6/4, and runtime-static 7/8; composes copied source/map, parsed authored members, typed compiled state, entry
+  identity, and native diagnostics; and records Default-mode and cross-rule parent-matcher normalization plus
+  privacy/host fences before code. Focused 220, Julia 7,762/primary/105, full primary 5x2x66, ten Unicode legs,
+  unchanged no-drift ledgers, Knowledge Map 683/5,188, mdBook/doctrines, canonical Rust 78.75s + Dart 1/1 +
+  primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts pass. Compiled graph/
+  source/evidence `.10.6.3.1` follows only after the clean plan commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
