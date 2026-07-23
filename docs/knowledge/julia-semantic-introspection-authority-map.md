@@ -43,10 +43,12 @@ answers:
   - "does Julia semantic foundation construction execute target actions"
   - "does Julia semantic foundation construction use SpecLoader"
   - "how is Julia semantic authored definition order merged"
+  - "is the Julia semantic source and compilation foundation composition closed"
+  - "what is the next Julia semantic introspection task after source outcome closeout"
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0-.10.6.2.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0 and .10.6.2.0-.10.6.2.3; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
 ---
 
@@ -157,6 +159,13 @@ neutral semantic ledger remains 6/20/81 at rollout 4/9 and admission 3/6 because
 backend admission. Stable primary 5x2x66, ten Unicode legs, Knowledge Map 682/5,172, canonical Rust 82.82s + Dart
 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact 1.56-GB cleanup preserving all 517 Pgen artifacts close the
 outcome leaf.
+
+Closeout `.10.6.2.3` reruns the exact committed source 135 plus outcome 85 suites as one 220-assertion composition,
+then the complete Julia gate, stable 5x2x66 primary matrix, all ten Unicode legs, and every no-drift contract. It
+adds no production or replacement test code. Canonical Rust semantic admission 1/1 in 80.84 seconds, Dart 1/1,
+primary 66x2, and Phase 0 1,031/1,031 in 630 seconds pass. Parent `.10.6.2` is therefore composition-closed without
+promoting Julia; Knowledge Map 682/5,174 and exact 1.56-GB cleanup preserving all 517 Pgen artifacts pass.
+Behavior-free static authority planning `.10.6.3.0` is the next dependency-eligible leaf.
 
 Implementation is dependency-ordered under `.10.6`: Unicode rule-label closure; source-only copied input/map
 `.10.6.2.1`; staged compiled-or-failed authority `.10.6.2.2`; composed foundation closeout `.10.6.2.3`; static

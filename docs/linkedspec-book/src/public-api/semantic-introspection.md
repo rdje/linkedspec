@@ -842,11 +842,12 @@ no longer applies.
 
 ## Julia authority map and prerequisite
 
-Julia semantic introspection is planned, not yet a public API. Audit `.10.6.0` finds no `SemanticIndex`,
-capabilities, query, or typed observation surface to call today. The future adapter will compose existing typed
-authorities: staged rules and function shells, `CompiledSpec`, typed action nodes/contracts and function registry,
-portable diagnostics, selected entry/generated-v2 plan, accepted runtime regex slots, and final parse results.
-The outward descriptor remains a separate compatibility projection rather than a semantic wire schema.
+Julia now exposes the opaque source and compiled-or-failed foundation through `SemanticIndex` and
+`semantic_index`; it does not yet expose semantic records, capabilities, query, or typed runtime observation. Audit
+`.10.6.0` mapped the typed authorities later consumed by the foundation and the remaining projection work: staged
+rules and function shells, `CompiledSpec`, typed action nodes/contracts and function registry, portable diagnostics,
+selected entry/generated-v2 plan, accepted runtime regex slots, and final parse results. The outward descriptor
+remains a separate compatibility projection rather than a semantic wire schema.
 
 Julia needs its own private canonical source map. Ordinary spec spans retain lines only; staged spans use scalar
 positions; action spans are scalar offsets local to normalized action text. Compiled `definition_order` contains
@@ -995,23 +996,24 @@ probe whose target action unconditionally throws still parses, validates, compil
 which directly verifies that boundary. Query, static records, runtime observation, MCP, rollout, and admission stay
 outside this foundation.
 
-Outcome signoff adds 85 assertions to the 135 source assertions: focused composition is 220, and complete Julia is
-7,762 package assertions plus primary process and corpus 105/105. The shared primary matrix remains 5 backends x 2
-environments x 66 cases and the self-hosted Unicode manifest remains ten 1/1 legs. Unicode stays 806/9/8/2;
-semantic governance stays 6 groups / 20 queries / 81 mutations at rollout 4/9 and native admission 3/6;
-capability/generated/public stay 80/0/0, v1/10/80-0-0, and 59/27/0. This leaf adds no record/query/runtime surface
-and causes no semantic promotion. Knowledge Map 682/5,172, mdBook, memory, doctrines, and canonical CI pass;
-canonical proof includes Rust semantic admission 1/1 in 82.82 seconds, Dart 1/1, primary 66x2, and Phase 0
-1,031/1,031 in 643 seconds. Exact safe cleanup reclaims about 1.56 GB while preserving all 517 Pgen issue
-artifacts.
+Outcome implementation adds 85 assertions to the 135 source assertions. Closeout `.10.6.2.3` then recomposes those
+exact committed suites at focused 220 without production or replacement test code; complete Julia is 7,762 package
+assertions plus primary process and corpus 105/105. The shared primary matrix remains 5 backends x 2 environments x
+66 cases and the self-hosted Unicode manifest remains ten 1/1 legs. Unicode stays 806/9/8/2; semantic governance
+stays 6 groups / 20 queries / 81 mutations at rollout 4/9 and native admission 3/6; capability/generated/public
+stay 80/0/0, v1/10/80-0-0, and 59/27/0. The parent adds no record/query/runtime surface and causes no semantic
+promotion. The closeout canonical proof includes Rust semantic admission 1/1 in 80.84 seconds, Dart 1/1, primary
+66x2, and Phase 0 1,031/1,031 in 630 seconds. Parent `.10.6.2` is composition-closed; static authority planning
+`.10.6.3.0` follows after the clean commit. Knowledge Map 682/5,174 and exact 1.56-GB safe cleanup pass while all
+517 Pgen issue artifacts remain preserved.
 
 Implementation is omission-safe and dependency ordered:
 
 1. `.10.6.2.1` added copied strict input, SHA-256 identity, private byte/scalar mapping, ceilings, typed source
    errors/values, exact source accessors, detachment, and source-only proof.
-2. `.10.6.2.2` adds one private staged compiled-or-failed outcome, merged function/rule order, entry identity,
+2. `.10.6.2.2` added one private staged compiled-or-failed outcome, merged function/rule order, entry identity,
    generated-v2 plan input, detached outcome accessors, and negative target-execution/path/descriptor topology.
-3. `.10.6.2.3` recomposes both suites, complete Julia and canonical gates, no-drift ledgers, cleanup, and parent
+3. `.10.6.2.3` recomposed both suites, complete Julia and canonical gates, no-drift ledgers, cleanup, and parent
    closure before static projection begins.
 
 ## Exact v1 record model
@@ -1386,7 +1388,7 @@ The dependency order is:
 | `.10.6.2.0` | Julia source/outcome contract and dependency split | complete; behavior-free exact API/privacy/no-execution boundary, canonical proof, and cleanup |
 | `.10.6.2.1` | Julia strict copied input and private source map | complete; 135 focused, Julia 7,677/primary/105, 5x2x66 plus ten Unicode legs, canonical signoff, and cleanup |
 | `.10.6.2.2` | Julia compiled-or-failed outcome foundation | complete; 85 new/focused 220, Julia 7,762/primary/105, 5x2x66 plus ten Unicode legs, exact detached authority/diagnostic/entry/plan, canonical/cleanup, no execution or promotion |
-| `.10.6.2.3` | Julia source/outcome foundation closeout | pending |
+| `.10.6.2.3` | Julia source/outcome foundation closeout | complete; committed focused 220, Julia 7,762/primary/105, matrices/no-drift/canonical signoff, and parent closure without production change |
 | `.10.6.3-.10.6.7` | Julia static projection through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.3 — close Julia semantic foundation
+
+Composition-closed Julia's opaque semantic source/outcome parent without changing production code, tests,
+fixtures, the public API, generated format, neutral contracts, or semantic rollout. The exact committed source
+suite passes 135/135 beside the committed outcome suite at 85/85 (focused 220). Complete Julia passes 7,762
+package assertions, primary process conformance, and corpus 105/105; the stable primary matrix passes 5 backends x
+2 environments x 66 cases, and all ten Unicode-manifest legs pass 1/1.
+
+Unicode remains 806/9/8/2; semantic governance remains 6 groups / 20 queries / 81 mutations at rollout 4/9 and
+native admission 3/6; capability/generated/public remain 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI
+passes all four doctrines, Rust semantic admission 1/1 in 80.84 seconds, Dart admission 1/1, primary 66/66 under
+default and POSIX, and Phase 0 1,031/1,031 in 630 seconds. Parent `.10.6.2` is closed with the detached path-free,
+target-execution-free, record/query-free boundary intact; behavior-free static plan `.10.6.3.0` is next after the
+clean commit. Knowledge Map 682/5,174 and mdBook pass. Exact cleanup removes the regenerated 12-MB book, 826-MB
+Rust dependencies, 595-MB incremental state, 130-MB Julia compiled cache, and Python bytecode—about 1.56 GB—while
+preserving all 517 Pgen issue artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.2.2 — add Julia semantic outcomes
 
 Completed Julia's public semantic source/outcome foundation. After the strict copied-text/bytes boundary,

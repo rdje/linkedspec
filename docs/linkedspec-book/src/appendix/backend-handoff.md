@@ -220,8 +220,9 @@ MCP is later handle-only transport and cannot compile, read paths, derive facts,
 Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` now each provide strict in-memory compiled-or-failed
 construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated projection, all 19 static
 queries, typed caller-captured runtime observation for the twentieth answer, and one omission-sensitive 12-role
-admission consumer. Both queries remain unable to execute. The checker is exact at six fixture groups, 20 query
-digests, and 73 rejected mutations; rollout is 3/9 and native admission 2/6.
+admission consumer. Both queries remain unable to execute. Dart now has the same complete semantic stack and one
+exact 12-role admission consumer. The checker is exact at six fixture groups, 20 query digests, and 81 rejected
+mutations; rollout is 4/9 and native admission 3/6.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the
@@ -248,7 +249,7 @@ slot selection and successful final-result construction as the only observation 
 absent-sink work, exact observer exception passthrough through generated wrappers, immutable derivation only from
 static graph evidence, and the `.1-.4` order. Typed direct-engine capture `.1`, immutable topology-validated
 runtime projection `.2`, and generated/emitted direct/traced propagation `.3` are complete; composition closeout
-`.4` now closes the parent on committed code without promotion, and exact admission `.10.5.6` is active.
+`.4` closes the parent on committed code without promotion, and exact admission `.10.5.6` is complete.
 
 Capture `.10.5.5.1` now exports the v1 contract, immutable slot/result event values, and optional synchronous sink.
 Direct, loaded, reconstructed, traced convenience, and validated generated-plan engine routes emit exact Unicode-
@@ -259,8 +260,16 @@ error translation. Observed/unobserved results and diagnostics agree, routed tra
 omits the final result, and generated-source v2/format 2 is unchanged. Derivation `.10.5.5.2` validates retained
 events against detached static rule/slot/selection
 topology, creates a separate immutable canonical execution/event/`observed_as` snapshot, preserves the base, and
-matches the twentieth digest through typed and raw-neutral query. Generated/emitted propagation `.3` is complete;
-composition closeout `.4` is complete and admission remains exclusively active `.10.5.6` work.
+matches the twentieth digest through typed and raw-neutral query. Generated/emitted propagation `.3`, composition
+closeout `.4`, and exact 12-role admission `.10.5.6` are complete.
+
+Julia now has its pinned Unicode-17 prerequisite plus a composition-closed opaque source and compiled-or-failed
+foundation. `semantic_index` copies valid text or strict UTF-8 bytes, owns exact byte/scalar coordinates and four
+source ceilings, retains staged compiler authority privately, and returns detached snapshot/diagnostic/entry/
+generated-plan values without paths, target execution, records, or query. The committed source 135 plus outcome
+85 assertions compose at focused 220; complete Julia is 7,762/primary/105. Static records, calls, query, runtime
+observation, and admission remain dependency-ordered `.10.6.3-.7` work, so Julia does not yet advance the 4/9
+rollout or 3/6 native-admission ledger.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
@@ -272,9 +281,9 @@ identity through compiled maps/order, descriptors, generated plans, reconstructi
 selectors, diagnostics, traces, strict loaders, and primary commands. Negative/identifier isolation and composed
 signoff split into `.10.5.0.2.3-.4`: `.3` now exhausts all eight invalid labels across external AST, source,
 no-prefix, and primary routes and locks the narrower function/helper/lifecycle/fluent/mark grammars. Composed `.4`
-passes complete Dart and canonical signoff and closes the prerequisite without advancing semantic rollout 3/9 or
-admission 2/6. Source/static/calls/query/runtime/admission proceed separately as `.10.5.1-.10.5.6`; Julia and Lua
-later inherit the same pinned-label prerequisite before their v1 admissions.
+passes complete Dart and canonical signoff and closes the prerequisite without advancing the then-current semantic
+ledger. Source/static/calls/query/runtime/admission subsequently complete through `.10.5.6`; Julia has since
+inherited and closed the same pinned-label prerequisite plus its source/outcome foundation, while Lua remains later.
 
 Dart's current 105/105 corpus result includes four byte-identical current `specs/spec.spec` inputs. Shared
 `.10.5.0.1.2` regenerated them verbatim, enforces byte/hash freshness, and composes current-grammar execution across

@@ -8,21 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia compiled-outcome foundation `FUTURE-PARITY-BACKLOG.10.6.2.2` is the active verified candidate from clean
-  source commit `c41ac952`. The same opaque `SemanticIndex` now retains one staged compiled-or-failed authority,
-  native diagnostics, merged authored function/rule order, selected entry, and generated-v2 plan privately.
-  Snapshot, authority, diagnostic, entry, plan, and JSON values are detached; no loader/path, target/generated
-  execution, runtime, trace/sink/observer, descriptor, records, or query enters construction.
+- Julia source/outcome closeout `FUTURE-PARITY-BACKLOG.10.6.2.3` is a complete verified commit candidate from clean
+  `7c480c45`. It adds no production code or replacement tests. Committed source 135 + outcome 85 = focused 220;
+  Julia 7,762/primary/105, stable 5x2x66, all ten Unicode legs, exact no-drift, and canonical Rust 80.84s + Dart
+  1/1 + primary 66x2 + Phase 0 1,031/630s pass. Parent `.10.6.2` closes without semantic promotion.
 
-New 85/focused 220, Julia 7,762/primary/105, stable primary 5x2x66, all ten Unicode legs, exact no-drift ledgers,
-Knowledge Map 682/5,172, mdBook, canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0 1,031/643s, and exact
-1.56-GB cleanup preserving all 517 Pgen artifacts pass. Only final fast checks and the per-slice commit remain;
-composed closeout `.10.6.2.3` stays blocked until that clean commit.
+After the clean closeout commit, behavior-free static authority planning `.10.6.3.0` is the sole next eligible
+Julia semantic leaf.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.3 — close Julia semantic foundation**
+  (DONE candidate from clean base `7c480c45`; awaiting this commit).
+
+  **Result:** The committed Julia strict source map and compiled-or-failed outcome compose without production,
+  test, fixture, API, format, or semantic-ledger change; parent `.10.6.2` closes with no records/query/execution.
+
+  **Proof:** Focused 220, Julia 7,762/primary/105, stable 5x2x66, ten Unicode legs, unchanged Unicode 806/9/8/2
+  and semantic 6/20/81 at 4/9 + 3/6, canonical Rust 80.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and
+  KM 682/5,174 plus exact 1.56-GB cleanup preserving all 517 Pgen artifacts.
+
+  **Next:** after the clean commit, activate only behavior-free static authority plan `.10.6.3.0`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.2.2 — add Julia semantic outcomes**
   (DONE candidate from clean base `c41ac952`; awaiting this commit).
 

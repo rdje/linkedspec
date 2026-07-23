@@ -505,7 +505,7 @@ Three backbone items tracked major structural modernization — all done:
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
   runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
-  73 mutations. ADR `0050` separates staged payload/job/result records from generated artifacts, and descriptors
+  81 mutations. ADR `0050` separates staged payload/job/result records from generated artifacts, and descriptors
   remain reusable input rather than the wire model. Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` each ship
   opaque strict in-memory construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated
   projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
@@ -530,10 +530,13 @@ Three backbone items tracked major structural modernization — all done:
   bytes, exit omission, and caller callback identity through public helpers and isolated emitted libraries without
   changing v2/format 2. Composition closeout `.10.5.5.4` now closes the runtime-observation parent on committed
   semantic 39/39, adjacent runtime 24/24, complete Dart, and neutral/public proof without promotion. Exact composed
-  Dart admission `.10.5.6` is active.
+  Dart admission `.10.5.6` is complete through one 12-role consumer. Julia's Unicode prerequisite `.10.6.1` and
+  opaque strict source/compiled-or-failed foundation `.10.6.2` are now composition-closed at focused 220 and Julia
+  7,762/primary/105 without records, query, runtime observation, target execution, or semantic promotion; static
+  authority planning `.10.6.3.0` follows the clean closeout commit.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
-  Rollout is 3 complete / 6 pending and native admission 2 complete / 4 pending;
-  only Perl and Rust are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
+  Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
+  Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,
@@ -548,8 +551,8 @@ Three backbone items tracked major structural modernization — all done:
   generated, reconstructed, emitted, selector, diagnostic, trace, loader, and command routes. `.10.5.0.2.3`
   exhausts all eight negative fixtures across external AST/source/no-prefix/primary routes and locks unrelated
   identifier grammars. Composed `.4` passes complete Dart and canonical signoff and closes the prerequisite at
-  unchanged semantic rollout 3/9 and admission 2/6. Source/static/calls/query/runtime/admission remain separate
-  `.10.5.1-.10.5.6` work. Neither audit nor prerequisites promote a ledger.
+  unchanged then-current semantic rollout 3/9 and admission 2/6. Source/static/calls/query/runtime/admission
+  subsequently complete through `.10.5.6`; the prerequisite itself did not promote a ledger.
   Governance follow-up `.22` separately tracks a stable home for immutable cross-contract status markers.
 - **Callable codeblock design** - ADR 0031 and completed `.11.1` supersede the narrow abstraction chosen by the
   closed `SPEC-FORMAT-TERSE.14` MVP. Callable literals use `{|args| body }` (`{|| body }` for zero params), may use

@@ -108,10 +108,12 @@ trace, diagnostic-output sink, or semantic observer. `semantic_snapshot(index).h
 false at this layer. Records, semantic query, and runtime observation remain dependency-ordered later work.
 Returned structs are immutable, and each `to_json` call creates detached mutable JSON state.
 
-The source and outcome contracts are verified by 220 focused assertions and complete Julia 7,762 package
-assertions, primary process conformance, corpus 105/105, the shared five-backend 5x2x66 primary matrix, and all ten
-self-hosted Unicode manifest legs. All no-drift ledgers remain unchanged; canonical local CI passes Rust semantic
-admission in 82.82 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 643 seconds. Exact safe
+The source/outcome parent is composition-closed without additional production or replacement test code. Its two
+committed suites pass 135 + 85 = 220 focused assertions; complete Julia passes 7,762 package assertions, primary
+process conformance, and corpus 105/105; the shared five-backend 5x2x66 primary matrix and all ten self-hosted
+Unicode manifest legs pass. All no-drift ledgers remain unchanged. The closeout canonical gate passes Rust semantic
+admission in 80.84 seconds, Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds. Static semantic
+records, query, and runtime observation remain later work beginning with behavior-free plan `.10.6.3.0`. Exact safe
 cleanup reclaims about 1.56 GB while preserving all 517 Pgen issue artifacts.
 
 Behavior-free Julia preflight `.9.1.6.0` mapped the exact starting boundary: compact `|` was misclassified as AND,

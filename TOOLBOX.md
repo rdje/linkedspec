@@ -72,7 +72,7 @@ check, not proof that the cited commands were run.
 | "Did Unicode casing data/fixtures/backend tables drift?" | [§4.5 Unicode casing contract](#45-toolscheck_unicode_case_contractpy--pinned-unicode-casing-proof) |
 | "Did the neutral semantic introspection schema/query answers drift?" | [§4.9 semantic introspection contract](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Did Perl semantic-index source normalization, projections, privacy, paging, budgets, or queries drift?" | [§4.9 Perl semantic tests](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
-| "Did Julia semantic-index strict input, source coordinates, ceilings, or privacy drift?" | [§4.9 Julia source foundation](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
+| "Did Julia semantic-index source/outcome construction, coordinates, ceilings, privacy, or no-execution drift?" | [§4.9 Julia foundation](#49-toolscheck_semantic_introspection_contractpy--neutral-modelquery-oracle) |
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
@@ -502,6 +502,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   production/test source scans must continue to deny `SpecLoader`, path IO, target/generated execution, runtime,
   trace, diagnostic/observation sinks, descriptor projection, records, and query. See
   [[julia-semantic-introspection-authority-map]].
+- **JULIA FOUNDATION CLOSEOUT:** `.10.6.2.3` adds no production or replacement test code. Re-run the two commands
+  above as one 220-assertion composition, then `bash tools/run_julia_local.sh`, the 5x2x66 primary matrix, all ten
+  Unicode-manifest legs, and the Unicode/semantic/capability/generated/public no-drift checks. The committed
+  composition passes Julia 7,762/primary/105 and canonical Rust 80.84s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/630s. Parent `.10.6.2` is closed without records, query, runtime observation, target execution, or semantic
+  promotion; `.10.6.3.0` owns the next behavior-free static-projection plan.
 
 ---
 

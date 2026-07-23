@@ -934,6 +934,12 @@ content migration exists yet.
   semantic 6/20/81 at 4/9 + 3/6, capability/generated/public ledgers, generated format, or semantic promotion.
   Stable 5x2x66 and all ten Unicode legs pass; canonical Rust 82.82s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/643s and exact 1.56-GB cleanup preserving all 517 Pgen artifacts complete the outcome proof.
+  Composed closeout `.10.6.2.3` reruns the committed 135 source and 85 outcome assertions together at focused 220,
+  complete Julia 7,762/primary/105, stable 5x2x66, all ten Unicode legs, and every no-drift contract without adding
+  production code, tests, fixtures, API, format, or semantic-ledger state. Canonical Rust admission 80.84s, Dart
+  1/1, primary 66x2, and Phase 0 1,031/630s pass; Knowledge Map 682/5,174 and exact 1.56-GB safe cleanup pass too.
+  Parent `.10.6.2` is composition-closed; behavior-free static authority planning `.10.6.3.0` is the next Julia
+  semantic leaf after the clean closeout commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

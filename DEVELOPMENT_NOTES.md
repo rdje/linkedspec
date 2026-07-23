@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.3` — close parents by recomposing their committed proof topology):
+  The source-only and compiled-outcome leaves already prove different authorities, but neither leaf alone proves
+  that their committed implementations coexist with every adjacent Julia owner and shared governance route. The
+  parent closeout therefore adds no replacement test or behavior. It runs the two existing suites together, then
+  the complete Julia package/primary/corpus gate, both five-backend matrices, every no-drift checker, and canonical
+  local CI.
+
+  The composition is also a promotion fence. Strict source mapping and a compiled-or-failed snapshot are necessary
+  foundation state, not neutral semantic records, queries, runtime observations, or backend admission. Closing the
+  parent must therefore leave the 20 response digests, 81 mutations, rollout 4/9, native admission 3/6, generated
+  format, and public surface unchanged. Static projection begins only in behavior-free plan `.10.6.3.0` after the
+  closeout commit is clean.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.2.2` — retain typed authority, never clone compiler projections):
   Julia's semantic constructor now performs one staged parse, one validation, one compile with duplicate validation
   disabled, one entry selection, and one shared generated-v2 plan pass after the strict copied-source boundary.
