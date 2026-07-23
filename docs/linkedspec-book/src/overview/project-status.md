@@ -570,7 +570,14 @@ Three backbone items tracked major structural modernization — all done:
   66x2 + Phase 0 1,031/622s pass. Closeout `.3` now recomposes all six committed semantic suites at focused 530,
   Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 77.68s + Dart 1/1 +
   primary 66x2 + Phase 0 1,031/622s without replacement code. Parent `.10.6.4` is composition-closed without
-  public query, observation, format, rollout, or admission movement; query audit `.10.6.5.0` follows after commit.
+  public query, observation, format, rollout, or admission movement. Behavior-free query audit `.10.6.5.0` now
+  freezes one fresh detached private projection as the evaluator's sole authority, all 19 static hashes and 26
+  malformed raw-neutral boundaries, exact immutable typed/raw-neutral vocabulary, Julia's explicit `Bool` versus
+  `Integer` validation fence, and private record/source `.1` / traversal-limit `.2` / public completion `.3` /
+  no-change closeout `.4`. Runtime events remain `.10.6.6`; the audit changes no behavior or promotion.
+  Full audit proof passes neutral 6/20/81, focused Julia 530 plus detached 22/25/10, Julia 8,072/primary/105,
+  primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust/Dart admission + primary 66x2 + Phase 0
+  1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

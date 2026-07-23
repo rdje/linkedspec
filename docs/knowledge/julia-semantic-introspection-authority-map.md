@@ -70,10 +70,13 @@ answers:
   - "does Julia now retain complete private staged and generated call provenance"
   - "how does Julia validate native staged sidecars before semantic projection"
   - "how does Julia validate the retained generated plan before semantic projection"
+  - "what authority may Julia semantic query consume"
+  - "what Julia semantic query types and public functions are frozen"
+  - "how is Julia semantic query split across implementation leaves"
 date: 2026-07-23
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, and .10.6.4.0-.10.6.4.3; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/knowledge/julia-semantic-call-core-projection.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, .10.6.4.0-.10.6.4.3, and .10.6.5.0; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/knowledge/julia-semantic-call-core-projection.md; docs/knowledge/julia-semantic-query-authority-map.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'; rg -n 'semantic_index|_semantic_call_add_staged_artifacts|_semantic_call_validate_staged_authority|_semantic_call_add_generated_plan|semantic_query|SemanticQuery|regex_slot_selected|diagnostic_output_sink' julia/src"
 ---
 
@@ -260,6 +263,28 @@ paths, execution, and trace remain absent. New 62/focused 530 and Julia 8,072/pr
 `.10.6.4.3` now recomposes all six committed semantic suites at focused 530 and the complete matrix/Unicode/
 governance/canonical boundary; canonical Rust is 77.68s, Dart 1/1, primary 66x2, and Phase 0 1,031/622s. Parent
 `.10.6.4` is composition-closed without promotion; query authority audit `.10.6.5.0` is next after commit.
+
+Behavior-free query audit `.10.6.5.0` now freezes the next boundary. The existing recursively tuple-backed
+`_SemanticStaticProjection` is the sole evaluator authority, and every call must consume a fresh detached
+materialization. It cannot receive retained source/map, source above the construction ceiling, parser/compiler,
+staged sidecars, AST/ActionIR, regex, generated implementation, executor, runtime observation, trace, diagnostic
+sink, path, environment, time, randomness, or another host object. A direct calls-target probe confirms 22/25/10,
+fresh nested mutation isolation, retained immutable type, and complete public query omission.
+
+Julia must match all 19 non-runtime response hashes and all 26 raw-neutral malformed boundaries before exposure.
+Its closed vocabulary mirrors the admitted Rust/Dart types, uses copied tuples and recursively immutable facts,
+and returns fresh JSON projections. Public `semantic_capabilities(index)`, typed
+`semantic_query(index, request::SemanticQuery)`, and raw `semantic_query_neutral(index, request)` appear together
+only after completion. The raw validator tests `Bool` before `Integer` because `true isa Integer`; it also requires
+an actual Boolean for the digest flag. Implementation is private record/source/list/get/explain `.10.6.5.1`,
+private traversal/pages/budgets/costs plus all static hashes `.2`, complete public typed/raw-neutral surface and all
+boundaries `.3`, and no-change composition `.4`. Runtime events remain `.10.6.6`. See
+[[julia-semantic-query-authority-map]].
+
+The behavior-free audit passes neutral 6/20/81, admitted Perl/Rust/Dart focused query suites, Julia focused 530
+plus the detached 22/25/10 probe, Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers,
+canonical Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact
+1,812,240-KiB cleanup preserving 517 Pgen artifacts. No query API or ledger is promoted.
 
 No-change leaf `.10.6.3.3` recomposes the committed four-suite topology at focused 389 without production/test
 replacement. Complete Julia remains 7,931/primary/105, primary is 5x2x66, all ten Unicode legs pass, every ledger

@@ -8,16 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia no-change calls/staging/generated closeout `FUTURE-PARITY-BACKLOG.10.6.4.3` is a complete verified
-  candidate from clean implementation commit `cc229cc5`. Synchronize/clean/commit the parent closure, clear the
-  brief, verify clean, then activate query authority audit `.10.6.5.0` task-tree-first.
+- Julia behavior-free semantic-query authority audit `FUTURE-PARITY-BACKLOG.10.6.5.0` is a fully verified commit
+  candidate from clean calls/staging/generated closeout `61aa48bb`. Exact detached authority, 20-request/19-static-
+  hash/26-boundary policy, immutable API vocabulary, and private `.1-.4` implementation order are frozen; only
+  final lockstep synchronization, artifact cleanup, and the plan commit remain before `.10.6.5.1` activation.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.0 — freeze Julia semantic query authority**
+  (fully verified commit candidate from clean base `61aa48bb`).
+
+  **Result:** One fresh detached materialization of Julia's existing private projection is the only query evaluator
+  authority. All 20 requests, 19 static hashes, 26 malformed boundaries, exact immutable typed/raw-neutral values,
+  source/privacy/order/page/filtered-BFS/budget/cost/error/explain policy, Julia Boolean/numeric fence, host denial,
+  and omission-safe private `.1` / traversal `.2` / public `.3` / closeout `.4` order are frozen before code.
+
+  **Proof:** Neutral 6/20/81 at 4/9 + 3/6; admitted query Perl 9, Rust 5/5, Dart 6/6; Julia focused 530 plus exact
+  detached 22/25/10 probe; Julia 8,072/primary/105; primary 5x2x66; ten Unicode legs; unchanged Unicode/capability/
+  generated/public ledgers; canonical doctrines/contracts + Rust 1/1 + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/655s. No production/test/fixture/API/format/observation/rollout/admission behavior moves. Book/KM
+  687/5,277 and exact 1,812,240-KiB cleanup preserving all 517 Pgen artifacts pass.
+
+  **Next:** private Julia record/source query kernel `.10.6.5.1` waits for this clean plan commit.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.4.3 — close Julia call projection**
-  (DONE candidate from clean implementation commit `cc229cc5`; closeout commit pending).
+  (DONE at clean commit `61aa48bb` from implementation commit `cc229cc5`).
 
   **Result:** The six committed Julia semantic suites compose at focused 530 and reconfirm exact private 22/25/10
   call/staging/generated parity without replacement code or tests. Authored Unicode/source identity, nested and
@@ -30,7 +47,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   rollout, or admission movement; parent `.10.6.4` is closed. Book/KM 686/5,265 and exact 1,504,516-KiB cleanup
   preserving all 517 Pgen artifacts pass.
 
-  **Next:** after the clean closeout commit, activate behavior-free query authority audit `.10.6.5.0`.
+  **Next:** behavior-free query authority audit `.10.6.5.0` is the active slice above.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.2 — complete Julia call provenance**
   (DONE at clean commit `cc229cc5` from base `9ec3f034`).

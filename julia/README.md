@@ -118,6 +118,24 @@ generated source. Native payload/job/body-AST state, implementation text, paths,
 containers do not cross the private projection boundary. Public semantic query and runtime observation remain
 dependency-ordered later work.
 
+Behavior-free query planning is now complete, but the API below is deliberately not implemented yet. Query must
+read only one fresh detached materialization of that private projection; it cannot reach the retained source/map,
+compiler, staged sidecars, AST/ActionIR, regex, generated implementation, execution, observation, trace, path, or
+host state. The completed surface will expose `semantic_capabilities(index)`,
+`semantic_query(index, request::SemanticQuery)`, and `semantic_query_neutral(index, request)` together. Typed and
+raw-neutral calls will enter one evaluator and return immutable typed values with fresh `to_json` dictionaries.
+
+Julia will match the 19 non-runtime canonical response hashes and all 26 malformed-request boundaries. Numeric
+validation must reject `Bool` before `Integer` because `true isa Integer`; the digest flag must require an actual
+`Bool`. Implementation is intentionally split as private record/source/list/get/explain, then private directional
+traversal/pages/budgets/costs, then complete public exposure, then no-change composition. The twentieth runtime
+response remains a separate observation task.
+
+The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
+22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical
+Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB
+cleanup preserving all 517 Pgen artifacts. No query symbol is public at this boundary.
+
 The source/outcome parent is composition-closed without additional production or replacement test code. Its two
 committed suites pass 135 + 85 = 220 focused assertions; complete Julia passes 7,762 package assertions, primary
 process conformance, and corpus 105/105; the shared five-backend 5x2x66 primary matrix and all ten self-hosted

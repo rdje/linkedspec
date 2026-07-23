@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.0` — query is a constrained view, not new semantic authority):
+  Julia's recursively frozen `_SemanticStaticProjection` already owns every fact needed for the 19 static neutral
+  query responses. The query evaluator must therefore receive one fresh detached materialization and nothing else.
+  Giving it `SemanticIndex` internals would make source, compiler, sidecar, generated, execution, trace, path, or
+  host state accidentally reachable and would create a second semantic authority.
+
+  The raw-neutral seam is necessary even though a typed request exists: malformed arrays, missing/extra fields,
+  wrong scalar types, and unsupported wire values cannot all inhabit `SemanticQuery`. Julia adds an extra trap:
+  `true isa Integer`, so every page/budget numeric validator must reject `Bool` before accepting `Integer`, while
+  `include_content_digest` must accept only `Bool`. Both typed and raw paths enter the same evaluator and return
+  one immutable typed envelope; fresh `to_json` projections provide transport dictionaries without exposing
+  mutable state inside public values.
+
+  Omission safety determines the split. `.1` owns private immutable values and record/source/list/get/explain;
+  `.2` completes directional filtered BFS, canonical pages, budgets, logical costs, and all 19 static hashes;
+  `.3` alone exports capabilities, typed query, and raw-neutral validation after every 26-boundary response is
+  exact; `.4` recomposes committed proof. Runtime events stay separate in `.10.6.6`. This planning leaf changes no
+  production/test/fixture/API/format/observation/rollout/admission behavior.
+
+  The full signoff passes: neutral 6/20/81 at rollout 4/9 and admission 3/6; admitted Perl/Rust/Dart focused query
+  suites; Julia focused 530 plus detached 22/25/10; Julia 8,072/primary/105; primary 5x2x66; ten Unicode legs; and
+  unchanged Unicode/capability/generated/public ledgers. Canonical CI passes all doctrines/contracts, Rust and Dart
+  admission, primary 66x2, and Phase 0 1,031/655s. Book, Knowledge Map 687/5,277, memory/task/diff hygiene, and exact
+  1,812,240-KiB safe cleanup preserving 517 Pgen artifacts also pass. `.10.6.5.1` may begin only after this plan
+  lands cleanly.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.4.3` — close composition by rerunning owners, not duplicating them):
   Julia's call-projection parent closes by composing the six committed source, outcome, graph, remaining-static,
   typed-call, and staged/generated suites at focused 530. A second projector or replacement proof would create a

@@ -1266,6 +1266,74 @@ doctrine and portable contract, Rust semantic admission 1/1 in 77.68 seconds, Da
 Julia. Immutable public query begins with behavior-free authority audit `.10.6.5.0`; runtime observation and exact
 native admission remain `.10.6.6-.7`.
 
+### Julia immutable query authority plan
+
+Behavior-free leaf `.10.6.5.0` freezes the API boundary before query code. Julia's existing
+`_SemanticStaticProjection` is the sole evaluator authority. It contains the snapshot plus recursively tuple-backed
+source references, records, and relations. Each call must receive one fresh detached materialization; it cannot
+receive the retained decoded source/map, source above the construction ceiling, parser/compiler, staged sidecars,
+AST/ActionIR, compiled regexes, generated implementation, loader/emitter/executor, runtime observation, trace or
+diagnostic sink, path, environment, clock, randomness, or another host object.
+
+The completed audit is fully verified without changing behavior: neutral governance remains 6 fixture groups / 20
+responses / 81 rejected mutations at rollout 4/9 and native admission 3/6; focused Julia proof is 530 plus a fresh
+detached 22-record / 25-relation / 10-source-reference probe. Complete Julia 8,072/primary/105, primary 5x2x66,
+all ten Unicode legs, unchanged ledgers, canonical Rust/Dart admission + reference primary 66x2 + Phase 0
+1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts pass.
+
+The query parent owns 19 static response hashes. The twentieth `runtime_events` hash needs caller-captured
+post-execution authority and stays in `.10.6.6`. Raw-neutral validation must reproduce all 26 portable malformed-
+request envelopes. Julia needs a deliberate numeric fence: page and budget fields test `Bool` before `Integer`
+because `true isa Integer`, while `include_content_digest` accepts only an actual `Bool`.
+
+The frozen immutable vocabulary is `SemanticQueryOperation`, `SemanticQueryDirection`, `SemanticQueryPage`,
+`SemanticQueryBudget`, `SemanticQuerySource`, `SemanticQuery`, `SemanticQuerySourceReference`,
+`SemanticQueryRecord`, `SemanticQueryRelation`, `SemanticQueryDiagnostic`, `SemanticQueryPageState`,
+`SemanticQueryCost`, and `SemanticQueryResponse`. It reuses `SemanticSourceDetail`, `SemanticSourceSpan`, and
+`SemanticSnapshot`. Collections are copied tuples; variable-shape facts and diagnostic fields are recursively
+immutable; every `to_json` call returns a fresh `Dict`/`Vector` tree.
+
+These public calls are planned together and are **not implemented at the `.10.6.5.0` boundary**:
+
+```julia
+# Planned surface after FUTURE-PARITY-BACKLOG.10.6.5.3:
+capabilities = semantic_capabilities(index)
+
+rules = semantic_query(
+    index,
+    SemanticQuery(
+        operation = SemanticQueryListOperation,
+        record_kinds = ("rule",),
+        page = SemanticQueryPage(limit = 20),
+        source = SemanticQuerySource(detail = SemanticSourceSpanDetail),
+    ),
+)
+
+neutral = semantic_query_neutral(index, Dict(
+    "contract" => "linkedspec-semantic-query-v1",
+    "operation" => "get",
+    "subjects" => [rules.records[1].id],
+    "record_kinds" => [],
+    "relation_kinds" => [],
+    "direction" => "outgoing",
+    "page" => Dict("after_id" => nothing, "limit" => 100),
+    "budget" => Dict("max_records" => 1000, "max_relations" => 2000, "max_depth" => 4),
+    "source" => Dict("detail" => "none", "include_content_digest" => false),
+))
+```
+
+Typed `semantic_query` is the ordinary embedding path. `semantic_query_neutral` is the transport-facing path where
+wrong container/scalar shapes must produce portable response diagnostics rather than Julia dispatch or constructor
+errors. Both enter the same evaluator and return the same typed response envelope. `semantic_capabilities` is the
+canonical capabilities request, not a separate information source.
+
+Implementation is omission-safe: `.10.6.5.1` adds private immutable values and capabilities/list/get/explain plus
+source redaction; `.2` adds filtered directional breadth-first traversal, canonical pages/cursors, logical budgets/
+costs, deterministic prefixes, and all 19 static hashes; `.3` exports the complete typed/raw-neutral surface and
+locks all 26 boundaries, clone isolation, non-interference, privacy, and host denial; `.4` recomposes committed
+proof without a replacement evaluator. Planning itself changes no production code, test, fixture, contract,
+public API, generated format, runtime observation, rollout, or admission.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1647,7 +1715,9 @@ The dependency order is:
 | `.10.6.4.1` | Julia typed function/helper/call/binding core | complete; exact private non-staged 18/16, new 79/focused 468, no promotion |
 | `.10.6.4.2` | Julia staged/generated calls completion | complete; exact private full 22/25, new 62/focused 530, no promotion |
 | `.10.6.4.3` | Julia calls/staging/generated composition closeout | complete; committed focused 530 plus full gates, no replacement code or promotion |
-| `.10.6.5-.7` | Julia query, runtime observation, and exact admission | pending |
+| `.10.6.5.0` | Julia query authority map and dependency split | complete and fully verified behavior-free plan; detached authority, 19 hashes, 26 boundaries, and `.1-.4` frozen |
+| `.10.6.5.1-.4` | Julia immutable typed/raw-neutral query implementation and closeout | pending |
+| `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

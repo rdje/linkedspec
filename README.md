@@ -988,7 +988,16 @@ content migration exists yet.
   observation, format, rollout, or admission moved. No-change closeout `.10.6.4.3` now recomposes the six committed
   semantic suites at focused 530, Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and
   canonical Rust 77.68s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. Parent `.10.6.4` is composition-closed
-  without replacement code or promotion; behavior-free query audit `.10.6.5.0` follows after the closeout commit.
+  without replacement code or promotion. Behavior-free query audit `.10.6.5.0` now freezes the exact next
+  boundary: one fresh detached private projection is the evaluator's only authority; 19 static response hashes and
+  26 malformed raw-neutral boundaries are required; Julia `Bool` must be rejected before `Integer`; and public
+  `semantic_capabilities`, typed `semantic_query`, and raw `semantic_query_neutral` appear together only after the
+  private evaluator is complete. Work is split as record/source/list/get/explain `.1`, traversal/pages/budgets/
+  costs `.2`, public completion `.3`, and no-change closeout `.4`. Runtime events remain `.10.6.6`; the audit
+  changes no production/test/fixture/API/format/observation/rollout/admission behavior. Full signoff passes at
+  neutral 6/20/81, focused Julia 530 plus detached 22/25/10, Julia 8,072/primary/105, primary 5x2x66, ten Unicode
+  legs, unchanged ledgers, canonical Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277,
+  doctrines, and exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts.
   mdBook/KM 686/5,265 and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.

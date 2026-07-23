@@ -567,8 +567,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   66x2 + Phase 0 1,031/622s pass. No-change `.10.6.4.3` recomposes those same six suites at focused 530 and passes
   Julia 8,072/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 77.68s + Dart 1/1 +
   primary 66x2 + Phase 0 1,031/622s. Parent `.10.6.4` is closed: do not add a second call projector. Query audit
-  `.10.6.5.0` is the next owner. See
-  [[julia-semantic-static-projection-plan]].
+  `.10.6.5.0` is now frozen. Retrieve [[julia-semantic-query-authority-map]] before query work. The evaluator may
+  consume only one fresh `_semantic_static_projection_for_testing`-equivalent materialization, never the retained
+  index/compiler/source/host owners. Recheck the 19 static contract hashes with
+  `tools/check_semantic_introspection_contract.py`; use admitted Perl/Rust/Dart query suites as the executable
+  boundary reference; require all 26 raw-neutral errors; and test `Bool` before `Integer` in Julia. `.10.6.5.1`
+  owns the private record/source kernel, `.2` traversal/pages/budgets/costs, `.3` complete public typed/raw-neutral
+  exposure, and `.4` no-change closeout. Runtime events remain `.10.6.6`. See
+  [[julia-semantic-static-projection-plan]]. Audit signoff is neutral 6/20/81, focused Julia 530 plus detached
+  22/25/10, Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust/Dart
+  admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB cleanup
+  preserving 517 Pgen artifacts.
 
 ---
 

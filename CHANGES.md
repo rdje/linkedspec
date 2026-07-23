@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.0 — freeze Julia semantic query authority
+
+Froze Julia's behavior-free immutable semantic-query authority and dependency split before implementation. The
+only permitted evaluator input is one fresh detached materialization of the existing private static projection;
+retained source/map, source above the construction ceiling, parser/compiler/staged/AST/IR/regex/generated
+implementation, execution, observation, trace, diagnostic sink, path, environment, time, randomness, and other
+host state remain outside the query boundary.
+
+The plan reconciles all 20 neutral requests, the 19 static response hashes owned by query, and all 26 malformed
+raw-neutral boundaries. It freezes immutable Julia request/response types, tuple-backed recursive detachment, exact
+source/privacy/order/page/traversal/budget/cost/error/explain policy, and the explicit `Bool`-before-`Integer`
+validator fence required by Julia's type hierarchy. Public `semantic_capabilities`, typed `semantic_query`, and
+raw `semantic_query_neutral` appear together only after the private evaluator is complete.
+
+Implementation is dependency-ordered as private record/source/list/get/explain `.10.6.5.1`, private relation
+traversal/pages/budgets/costs and all 19 static hashes `.2`, complete public typed/raw-neutral exposure and all 26
+boundaries `.3`, then no-change composition `.4`. Runtime events remain `.10.6.6`. This audit changes no
+production code, tests, fixture, contract, public API, generated format, runtime observation, rollout, or native
+admission; focused and complete verification results are recorded in its owning task-tree.
+
+Verification passes at neutral 6/20/81 with rollout 4/9 and admission 3/6, focused admitted Perl 9 + Rust 5/5 +
+Dart 6/6, Julia focused 530 plus detached 22/25/10, Julia 8,072/primary/105, primary 5x2x66, all ten Unicode legs,
+and unchanged Unicode/capability/generated/public ledgers. Canonical CI passes every doctrine and portable contract,
+Rust and Dart semantic admission, reference primary 66x2, and Phase 0 1,031/1,031 in 655 seconds. mdBook, Knowledge
+Map 687/5,277, memory/task/diff hygiene, and exact 1,812,240-KiB safe cleanup pass while preserving all 517 Pgen
+issue artifacts.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.4.3 — close Julia call projection
 
 Composition-closed Julia's exact private functions/calls/bindings/staging/generated semantic parent without adding
