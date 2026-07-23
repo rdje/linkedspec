@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.1` — typed traversal owns meaning; raw scanning owns only location):
+  The private Julia projector never interprets raw source to decide which calls exist. Accepted typed function and
+  edge Action AST plus resolved contracts own call identity, nesting, arity, resolution, and shape. A bounded raw
+  scanner is used only to correlate that typed preorder to exact authored ranges. This separation keeps normalized
+  local Action spans and raw indentation from drifting while preventing source-looking text from becoming meaning.
+
+  Source correlation must understand every lexical container that can contain parentheses and identifier-looking
+  text. The first implementation skipped quoted strings; signoff review added typed regex-literal awareness to both
+  site discovery and balanced-parenthesis matching. The regression places `trim(fake())` inside `/.../i` before a
+  real `trim(value)` and proves the real call retains its exact source. Regex-start recognition mirrors the Action
+  parser's delimiter context, so division/symbol callee syntax is not reclassified as a regex.
+
+  The exact neutral split remains useful: `.4.1` reaches 18/16 with function/helper/call/binding meaning while
+  omitting every staged/generated role; `.4.2` can now add only the three normalized staged records, selected
+  generated plan, and nine provenance relations. This makes accidental staging leakage visible as an exact-count
+  failure. Retained projection values remain recursively frozen; the underscore-only test materializer returns a
+  fresh detached copy and does not promote records or query publicly.
+
+  New focused proof is 79 and the five-suite semantic composition is 468. Complete Julia is 8,010 package
+  assertions plus primary/105; full primary is 5x2x66 and Unicode is ten 1/1 legs. Unchanged governance and
+  canonical Rust admission 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass without execution,
+  observation, format, rollout, or admission movement. mdBook plus Knowledge Map 685/5,252 pass, and exact safe
+  cleanup removes 1,618,660 KiB while preserving the 517 Pgen artifacts.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.4.0` — typed meaning and staged integrity are separate authorities):
   Julia's function registry retains staged `body_ast` as a JSON-compatible map, not a typed `ActionBlock`. The
   calls adapter must parse the already-retained body payload into typed ActionIR, require its JSON form to equal

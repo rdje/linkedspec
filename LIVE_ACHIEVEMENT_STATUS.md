@@ -8,16 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia calls/staging/generated authority plan `FUTURE-PARITY-BACKLOG.10.6.4.0` is a complete verified candidate
-  from clean private-static closeout `4a580295`. Commit this behavior-free 22/25 plan, clear the brief, verify a
-  clean tree, then activate typed-core implementation `.10.6.4.1` task-tree-first.
+- Julia typed function/helper/call/binding core `FUTURE-PARITY-BACKLOG.10.6.4.1` is a complete verified candidate
+  from clean plan commit `3ee4b908`. Durable docs, KM 685/5,252, mdBook, and exact 1,618,660-KiB cleanup pass;
+  commit the private 18/16 core, clear the brief, verify clean, then activate `.10.6.4.2` task-tree-first.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.1 — add Julia typed call core**
+  (DONE candidate from clean base `3ee4b908`; commit pending final durable-layer checks).
+
+  **Result:** The opaque Julia semantic owner now privately retains exact typed functions, the governed
+  `trim`/`match_text`/`return` helpers, calls, binding, user-resolution decision/explanations, signatures, and
+  conservative shapes. It deep-equals the neutral non-staged target at 18 records / 16 relations. Typed function/
+  edge Action AST owns meaning; bounded quote/regex-aware authored scanning supplies only exact Unicode-safe source
+  identity. Staged/generated roles remain absent and exclusively owned by `.10.6.4.2`.
+
+  **Proof:** New 79/focused 468; Julia 8,010/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode
+  806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0;
+  canonical doctrines + Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. No public query, execution,
+  observation, generated-format, rollout, or admission movement. mdBook/KM 685/5,252 and exact 1,618,660-KiB
+  safe cleanup preserving all 517 Pgen artifacts pass.
+
+  **Next:** after this implementation commit is clean, activate staged/generated completion `.10.6.4.2`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.4.0 — freeze Julia call projection**
-  (DONE candidate from clean base `4a580295`; commit pending final durable-layer checks).
+  (DONE at clean commit `3ee4b908` from base `4a580295`).
 
   **Result:** Exact Julia authorities and the dependency split are frozen before code. The committed static base is
   6/6, typed functions/helpers/calls/bindings complete 18/16, and three staged artifacts plus the selected generated
@@ -31,7 +48,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   mdBook/KM 684/5,231/four doctrines/diff; canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/625s; exact 1.56-GB cleanup preserving all 517 Pgen artifacts. No behavior or promotion changed.
 
-  **Next:** after this plan commit is clean, activate typed function/helper/call/binding core `.10.6.4.1`.
+  **Next:** typed function/helper/call/binding core `.10.6.4.1` is active task-tree-first from this clean commit.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.3 — close Julia static projection**
   (DONE at clean commit `4a580295` from base `556e5ae2`).

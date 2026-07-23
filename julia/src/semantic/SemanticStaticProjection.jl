@@ -403,6 +403,18 @@ function _build_compiled_semantic_static_projection(
         )
     end
 
+    _semantic_call_extend_core!(
+        source_text = source_text,
+        source_map = source_map,
+        logical_name = logical_name,
+        content_digest = content_digest,
+        scans_by_label = scans_by_label,
+        compiled = compiled,
+        source_refs = source_refs,
+        records = records,
+        relations = relations,
+    )
+
     _semantic_static_canonicalize!(records, relations)
     return _semantic_static_projection(snapshot, source_refs, records, relations)
 end

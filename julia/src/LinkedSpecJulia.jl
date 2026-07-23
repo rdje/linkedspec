@@ -427,6 +427,7 @@ include("source/SourceEmitter.jl")
 include("parser/UserFunctionDefinitionParser.jl")
 include("semantic/SemanticCompilationOutcome.jl")
 include("semantic/SemanticStaticProjection.jl")
+include("semantic/SemanticCallProjection.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

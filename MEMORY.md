@@ -5,9 +5,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.4.0` — verified behavior-free Julia calls/staging/generated plan candidate.
-- latest_commit: `4a580295` cleanly commits `.10.6.3.3`; it is the base for the `.10.6.4.0` plan candidate.
-- active_work_unit: commit `.10.6.4.0`, then activate typed function/helper/call/binding core `.10.6.4.1`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.4.1` — verified private Julia typed call core candidate.
+- latest_commit: `3ee4b908` cleanly commits `.10.6.4.0`; it is the base for the `.10.6.4.1` candidate.
+- active_work_unit: finish durable checks and commit exact private 18/16 `.10.6.4.1`; then activate `.10.6.4.2`.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -43,15 +43,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   eight negatives across source, programmatic/reconstructed declaration/action/blind/bare roles, selectors,
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
-- current_julia_split: `.10.6.2-.3` closed; `.10.6.4.0` verified candidate, then implementation `.4.1-.3` and `.10.6.5-.7`.
+- current_julia_split: `.10.6.2-.3` closed; `.10.6.4.0` committed; `.4.1` verified candidate, then `.4.2-.3` and `.10.6.5-.7`.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: behavior-free `.4.0` passes focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs,
-  unchanged ledgers, book/KM 684/5,231/doctrines, canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0
-  1,031/625s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
+- current_signoff: typed core `.4.1` passes new 79/focused 468, Julia 8,010/primary/105, 5x2x66, ten Unicode legs,
+  unchanged ledgers/doctrines, canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, mdBook/KM
+  685/5,252, and exact 1,618,660-KiB cleanup preserving 517 Pgen artifacts; commit remains.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.4.0` exact behavior-free plan/docs/KM verified and cleanup complete;
-  commit it, clear the brief, verify clean, then activate `.10.6.4.1` only from the clean plan commit.
+- blockers: none. in_flight_uncommitted: `.10.6.4.1` exact private typed 18/16 production/tests/docs from clean
+  `3ee4b908` are verified; run final fast checks, commit, clear brief, verify clean, then activate `.4.2`.

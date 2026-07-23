@@ -973,6 +973,14 @@ content migration exists yet.
   closeout `.3`, before query/runtime/admission `.10.6.5-.7`. Plan signoff passes focused 389, Julia
   7,931/primary/105, primary 5x2x66, all ten Unicode legs, unchanged ledgers, Knowledge Map 684/5,231, and
   canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s without behavior or promotion.
+  Typed core `.10.6.4.1` now implements the exact private non-staged 18/16 subset behind the opaque index. It
+  projects accepted functions, three governed helpers, nested calls, one binding, resolution decisions, fixed/rest
+  signatures, and conservative shapes from typed registry/function-body/edge Action AST plus contracts. A bounded
+  quote/regex-aware scanner maps typed preorder to exact authored UTF-8 byte and Unicode-scalar evidence; raw source
+  never decides meaning. New 79/focused 468 and Julia 8,010/primary/105 pass with 5x2x66, ten Unicode legs,
+  unchanged ledgers, and canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s. Staged/generated
+  completion remains `.10.6.4.2`; no public query, execution, observation, format, rollout, or admission moved.
+  mdBook/KM 685/5,252 and exact 1,618,660-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

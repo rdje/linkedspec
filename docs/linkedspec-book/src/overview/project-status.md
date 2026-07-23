@@ -555,6 +555,13 @@ Three backbone items tracked major structural modernization — all done:
   and no-change closeout `.3`; query/runtime/admission remain `.5-.7` and no promotion occurs in planning. Plan
   signoff passes focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, KM 684/5,231,
   and canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s.
+  Typed core `.10.6.4.1` now privately implements exact non-staged 18/16 from accepted typed registry/function/
+  edge Action AST and contracts. It locks authored order/source, nested calls, user-before-helper resolution,
+  fixed/rest signatures, conservative shapes, binding/decision relations, recursive freeze, detached copies, and
+  host/no-execution fences. Quote/regex-aware bounded scanning maps typed preorder to exact Unicode-safe source.
+  New 79/focused 468, Julia 8,010/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust
+  77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s pass. mdBook/KM 685/5,252 and exact 1,618,660-KiB
+  cleanup preserving 517 Pgen artifacts pass. Staged/generated `.2` remains next after clean commit.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

@@ -551,7 +551,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   entry plan row. `.10.6.4.1` owns private typed core, `.2` staged/generated completion, and `.3` no-change closeout.
   Plan signoff is focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, KM 684/5,231,
   canonical Rust 77.84s + Dart 1/1 + primary 66x2 + Phase 0 1,031/625s, and exact 1.56-GB cleanup preserving 517
-  Pgen artifacts. See [[julia-semantic-static-projection-plan]].
+  Pgen artifacts. Typed core `.10.6.4.1` now lives in `julia/src/semantic/SemanticCallProjection.jl` and composes
+  before `_semantic_static_canonicalize!`/freeze. Use `julia/test/semantic_index_call_core_test.jl` to probe exact
+  18/16 equality, authored/Unicode source, nested occurrence identity, regex-literal isolation, signatures, shapes,
+  lifecycle immutability, and public/host/no-execution fences. The source scanner is location-only and must remain
+  driven by typed preorder. New 79/focused 468, Julia 8,010/primary/105, 5x2x66, ten Unicode legs, unchanged
+  ledgers, canonical Rust 77.41s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, mdBook/KM 685/5,252, and exact
+  1,618,660-KiB cleanup preserving 517 Pgen artifacts pass. `.10.6.4.2` must extend this owner only with staged/
+  generated provenance; do not add a second call projector. See
+  [[julia-semantic-static-projection-plan]].
 
 ---
 

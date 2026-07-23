@@ -64,11 +64,14 @@ answers:
   - "is Julia staged function body_ast typed ActionBlock authority"
   - "how must Julia correlate ActionSourceSpan calls to authored source"
   - "what is the Julia calls staging generated implementation split"
+  - "does Julia now retain the private typed call core"
+  - "how many Julia typed call core records and relations exist"
+  - "does Julia typed call scanning ignore strings and regex literals"
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, and .10.6.4.0; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, and .10.6.4.0-.10.6.4.1; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/knowledge/julia-semantic-call-core-projection.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/test/semantic_index_call_core_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-core-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|semantic_call_records|semantic_call_relations|_semantic_call_extend_core|semantic_query|SemanticQuery|regex_slot_selected|diagnostic_output_sink' julia/src"
 ---
 
 Julia now has the source and compiled-or-failed semantic-index foundation from `.10.6.2.1-.2` plus all five
@@ -237,6 +240,16 @@ tuple-backed, and source ceilings, public omission, path/host/AST/IR/compiler/lo
 observer/environment/time/random denial are locked. New 99/focused 389 and Julia 7,931/primary/105 pass with
 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0
 1,031/697s. All five private targets now exist.
+
+Typed call-core leaf `.10.6.4.1` now extends that same retained private graph before canonicalization and freeze.
+`SemanticCallProjection.jl` materializes the exact non-staged 18 records / 16 relations from typed compiled,
+function-registry, ActionIR, contract, and source-map authorities. It reparses retained function-body payloads and
+requires exact staged-AST equality, resolves typed contracts, scans only bounded authored owner text, skips escaped
+strings and context-valid regex literals, and assigns outer-before-inner owner-local call ids plus global authored
+order. User functions resolve before the governed `trim`/`match_text`/`return` helpers; signatures, binding
+read/write, and conservative fixed-point shapes are retained without executing target code. The proof seam stays
+underscore-only and detached. Staged/generated completion remains `.10.6.4.2`; no public records/query, runtime
+observation, trace dependency, rollout, or admission change exists yet.
 
 No-change leaf `.10.6.3.3` recomposes the committed four-suite topology at focused 389 without production/test
 replacement. Complete Julia remains 7,931/primary/105, primary is 5x2x66, all ten Unicode legs pass, every ledger

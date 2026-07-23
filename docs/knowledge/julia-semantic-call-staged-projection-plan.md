@@ -19,10 +19,10 @@ answers:
   - "may Julia semantic call construction execute target or generated code"
   - "does the Julia calls plan add a public semantic query"
 date: 2026-07-22
-status: current behavior-free plan complete; implementation pending
+status: current typed core complete; staged and generated completion pending
 tags: [julia, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.4.0; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-plan-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'; rg -n 'FunctionDefinition|body_source|body_ast|body_parse_job|definition_order|ActionBlock|ActionSourceSpan|resolve_action_block_contracts|SemanticGeneratedPlanInput' julia/src"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.4.0-.10.6.4.1; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/test/semantic_index_call_core_test.jl; julia/src/spec/Ast.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/compiler/CompiledSpec.jl; julia/src/source/SourceEmitter.jl; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md; docs/knowledge/perl-semantic-call-staged-projection.md; docs/knowledge/rust-semantic-call-staged-projection.md; docs/knowledge/dart-semantic-introspection-authority-map.md
+reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-core-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\")'; rg -n '_semantic_call_extend_core|semantic_call_records|semantic_call_relations|resolve_action_block_contracts|semantic_call_regex_start' julia/src/semantic/SemanticCallProjection.jl julia/test/semantic_index_call_core_test.jl"
 ---
 
 Behavior-free leaf `.10.6.4.0` freezes an additive private projection over Julia's already-closed static semantic
@@ -97,6 +97,22 @@ plan to exact 22/25. `.10.6.4.3` recomposes the committed foundation/static/call
 no replacement implementation or test. The extension stays behind the existing underscore-only proof seam; no
 public record accessor/query, runtime observation, trace dependency, rollout movement, or native admission belongs
 to `.10.6.4`.
+
+Typed-core leaf `.10.6.4.1` now implements the first step in `SemanticCallProjection.jl`. The existing private
+static extension invokes it before canonicalization and freeze, so the retained semantic graph remains one
+immutable owner. The projector merges authored function/rule order, reparses each retained function body as typed
+ActionIR and requires exact JSON equality with the staged `body_ast`, resolves contracts, correlates typed calls
+through a bounded occurrence-safe source scanner, then materializes function/helper/call/binding records and
+relations. The scanner recognizes escaped strings and context-valid regex literals, so call-shaped text inside
+either cannot consume a typed call's occurrence. The exact non-staged target is 18 records / 16 relations.
+
+Call traversal is outer-before-inner with owner-local ids and global authored order. Resolution is user function
+before the narrow `trim`/`match_text`/`return` helper table; signatures cover fixed and variadic shapes; a
+conservative fixed point derives binding/call shapes without inventing unsupported types. New proof is 79
+assertions, five-suite composition is 468, and complete Julia is 8,010/primary/105. Full 5x2x66 primary, all ten
+Unicode legs, unchanged governance ledgers, canonical local CI, mdBook/KM 685/5,252, and exact 1,618,660-KiB
+cleanup preserving 517 Pgen artifacts pass. No staged/generated artifact, public query/accessor, execution
+observation, trace dependency, or admission movement is part of the core leaf; `.10.6.4.2` remains next.
 
 Plan signoff passes committed focused 389, complete Julia 7,931/primary/105, full primary 5x2x66, all ten Unicode
 manifest legs, and every unchanged governance ledger. Canonical local CI passes all four doctrines, Rust semantic

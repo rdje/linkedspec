@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.1 — add Julia typed call core
+
+Implemented Julia's private typed function/helper/call/binding semantic projection and composed it into the
+already-compiled static owner before canonicalization and recursive freeze. The `calls_and_staging` fixture now
+deep-equals the exact non-staged neutral subset at 18 records / 16 relations: one function, three governed helpers,
+one binding, four calls, one resolution decision, and two explanation steps extend the existing 6/6 static base.
+All staged/generated records and relations remain deliberately owned by `.10.6.4.2`.
+
+The projector consumes accepted registry definitions, reparses only the retained function-body payload into typed
+`ActionBlock`, requires equality with the staged JSON result, resolves contracts, and walks compiled edge Action
+AST. It merges function/rule order by exact authored starts, assigns outer-before-inner local call ids plus global
+call order, resolves registered users before helper fallback, normalizes fixed/variadic signatures, and derives
+conservative binding/edge/rule shapes through a bounded fixed point. Exact source evidence uses the copied UTF-8/
+Unicode-scalar map and an occurrence-safe raw-source scanner bounded to each function body or action owner; quoted
+strings and regex literals are skipped so call-shaped text cannot steal a typed call's authored occurrence.
+
+The new 79-assertion suite locks exact equality/counts/order/relations/shapes, interleaved Unicode byte-versus-
+scalar evidence, nested duplicate occurrence identity, regex-literal isolation, variadic rest shape, detached
+copies, tuple-backed retained immutability, plain JSON, private/public/host denial, and absence of target execution,
+trace, staged, or generated authority. The five semantic suites pass 468 assertions; complete Julia passes 8,010
+package assertions, primary process conformance, and corpus 105/105. Full primary passes 5x2x66 and all ten Unicode
+manifest legs pass. Governance remains Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0,
+generated v1/10/80-0-0, and public 59/27/0. Canonical CI passes all doctrines, Rust semantic admission 1/1 in
+77.41 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. No public semantic query, runtime
+observation, target execution, generated format, rollout, or admission changes in this leaf. The mdBook and
+Knowledge Map 685/5,252 pass; exact safe cleanup removes 1,618,660 KiB while preserving all 517 Pgen artifacts.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.4.0 — freeze Julia call projection
 
 Froze Julia's behavior-free functions/helpers/calls/bindings/staging/generated authority map before projector or

@@ -1184,6 +1184,45 @@ doctrines, canonical Rust admission 77.84 seconds, Dart admission 1/1, reference
 1,031/1,031 in 625 seconds, and exact 1.56-GB safe cleanup preserving 517 Pgen artifacts pass. Typed core
 implementation becomes eligible only after this behavior-free plan is committed cleanly.
 
+### Julia private typed call core
+
+Leaf `.10.6.4.1` now implements the exact non-staged 18-record / 16-relation subset behind Julia's opaque
+`SemanticIndex`. It extends the existing 6/6 static base with one function, three governed helpers, one action
+binding, four function-form calls, one user-call resolution decision, and two explanation steps. The entire
+materialized target deep-equals the neutral snapshot after staged and generated records/relations are filtered out;
+those four future records and nine relations remain exclusively owned by `.10.6.4.2`.
+
+Meaning comes only from accepted typed authorities. The projector reparses the already-retained function body into
+an `ActionBlock`, proves its JSON form equals the staged `body_ast`, resolves contracts against the function
+registry, and traverses that typed block plus compiled edge Action AST. It does not parse the `.spec` again, execute
+the target, invoke an emitter, inspect a descriptor, or derive facts from trace. The existing static owner invokes
+the call extension before canonical ordering and recursive freeze.
+
+Traversal is deterministic. Functions and rules merge by exact authored source start. Within each owner, an outer
+call is emitted before calls in its arguments; ids use owner-local order while the record `order` field is global.
+An exact registered user function resolves before governed helper fallback. Only `trim`, `match_text`, and `return`
+are helper authorities for this target. The emitted signature supports both native v1 fixed parameters and a future
+rest parameter with unbounded maximum arity. Function return, call argument/return, binding value, edge value, and
+rule value shapes use a conservative fixed point; unsupported expressions remain `unknown`.
+
+Raw authored text owns location, not meaning. A bounded scanner correlates typed preorder to occurrences inside
+the exact function body or action member. It ignores escaped quoted strings and ActionIR regex literals while
+balancing call parentheses. This matters because `/trim(fake())/i` before a real `trim(value)` must not steal the
+typed call's source reference. The copied source map then emits zero-based UTF-8 byte spans and one-based line/
+Unicode-scalar columns. Interleaved `é`, duplicate nested calls, and regex-contained call-looking text retain exact,
+distinct evidence.
+
+The retained projection stays recursively immutable and host-free; the underscore-only proof materializer returns
+fresh detached plain JSON. No public call accessor, records API, query, runtime observation, path, compiler AST/IR,
+registry, source-map object, execution callback, trace, diagnostic sink, environment, time, or random state is
+exposed. The new suite passes 79 assertions and the five Julia semantic suites pass 468. Complete Julia passes
+8,010 package assertions, primary process conformance, and corpus 105/105. Full primary passes 5x2x66; all ten
+Unicode-manifest legs pass; governance stays 806/9/8/2, 6/20/81 at 4/9 + 3/6, 80/0/0, v1/10/80-0-0, and
+59/27/0. Canonical CI passes Rust semantic admission in 77.41 seconds, Dart 1/1, reference primary 66x2, and Phase
+0 1,031/1,031 in 622 seconds. mdBook and Knowledge Map 685/5,252 pass; exact safe cleanup removes 1,618,660 KiB
+while preserving all 517 Pgen artifacts. Staged/generated completion `.10.6.4.2` is next only after this commit is
+clean.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1562,7 +1601,8 @@ The dependency order is:
 | `.10.6.3.2` | Julia privacy/failure/runtime-static and isolation | complete; exact 4/3 + 4/3 + 6/4 + 7/8 targets, no promotion |
 | `.10.6.3.3` | Julia composed private static closeout | complete; committed focused 389 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | complete behavior-free plan; exact 22/25 and `.1-.3` ownership frozen |
-| `.10.6.4.1-.3` | Julia private calls projection implementation and closeout | pending after clean `.0` commit |
+| `.10.6.4.1` | Julia typed function/helper/call/binding core | complete verified candidate; exact private non-staged 18/16, new 79/focused 468, no promotion |
+| `.10.6.4.2-.3` | Julia staged/generated calls completion and closeout | pending after clean `.1` commit |
 | `.10.6.5-.7` | Julia query, runtime observation, and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
