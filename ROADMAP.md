@@ -113,8 +113,12 @@ kinds. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode 
 authored/compiled/generated/reconstructed/emitted/loaded state, selectors, diagnostics, traces, and inline/file
 primary commands. Its 130 new assertions compose to focused 1,885 and complete Julia 5,596/primary/105; 5x2x66
 and the ten-leg manifest plus canonical Rust 80.21s/Dart 1/1/primary 66x2/Phase 0 1,031/645s pass without
-production or semantic promotion. Exact cleanup reclaims 1.57 GB; negative/isolation `.3` follows after the clean
-identity commit.
+production or semantic promotion. Exact cleanup reclaims 1.57 GB. Negative/isolation `.10.6.1.3` then consumes all
+eight neutral negatives across source, programmatic/reconstructed declaration/action/blind/bare trust, selector,
+loader, primary, and pre-artifact routes while locking adjacent function/parameter/action/lifecycle/mark/regex/mode
+grammars. Its 1,946 new assertions compose to focused 3,831 and complete Julia 7,542/primary/105; 5x2x66, all ten
+Unicode-manifest legs, no-drift contracts, canonical Rust 79.56s/Dart 1/1/primary 66x2/Phase 0 1,031/645s, and
+exact 1.57-GB cleanup pass without production or semantic promotion. Closeout `.4` follows the clean commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

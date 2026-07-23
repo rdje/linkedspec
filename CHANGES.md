@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.3 — isolate Julia Unicode labels
+
+Added one omission-sensitive Julia suite that derives all eight negative rule-label fixtures directly from the
+neutral contract. Declaration, action, blind, and bare labels are exercised through both programmatic and JSON-
+reconstructed ASTs; every invalid label returns the exact portable `invalid_rule_label` diagnostic before
+validation, compilation, descriptor, generated-plan, or emitted-source construction can succeed. Complete-token
+source, no-prefix `$Top`, newline boundaries, and invalid arrow/bare syntax deny prefix/suffix recovery.
+
+Native and generated explicit selectors preserve each invalid scalar sequence in exact missing-entry fields.
+Strict loading retains its existing typed request/resolved-path attribution while diagnostic detail stays path-
+free; inline and file primary commands emit only the portable compilation heading and no stdout. Independent
+isolation locks function/parameter ASCII names, ActionParser's existing ASCII-first host-word continuation,
+assignments, lifecycle markers, named marks, arbitrary regex contents, and bounded modes. This measured boundary
+required no production repair: `Töp` remains an ActionParser helper/variable/fluent/assignment identifier, while
+middle-dot and supplementary-first spellings remain raw on that separate grammar.
+
+The new suite passes 1,946 assertions: external trust/artifact 1,609, source/no-prefix/newline 131, selector/
+loader/primary 136, and unrelated grammar 70. Classifier/native-route/identity/negative composition passes 3,831;
+complete Julia passes 7,542 package assertions, primary process conformance, and corpus 105/105. The primary matrix
+passes 5x2x66 and the self-hosted Unicode manifest passes all ten 1/1 legs. Unicode remains 806/9/8/2, semantic
+governance 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated source v1/10/80-0-0, and public
+surface 59/27/0. The slice changes tests, recurring registration, and synchronized documentation only; it changes
+no production code, neutral contract, public API, generated format, path policy, or semantic ledger.
+
+The staged canonical candidate passes Rust semantic admission 1/1 in 79.56 seconds, Dart admission 1/1, primary
+66/66 under default and POSIX, and Phase 0 1,031/1,031 in 645 seconds. Knowledge Map 682/5,150, mdBook, memory,
+task metadata, all four doctrines, and diff hygiene pass. Post-signoff cleanup removes exactly the regenerated
+12-MB book, 826-MB Rust dependency output, 727-MB incremental output, and 28-KB Python cache—about 1.57 GB—while
+preserving tracked source and `rgx/pgen-issues/artifacts`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.2 — prove Julia Unicode identity
 
 Added one omission-sensitive Julia route suite that derives ten unique rule labels from all nine positive Unicode

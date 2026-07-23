@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.3` — negative membership and adjacent grammar isolation must be
+  proved independently): Consuming every neutral negative fixture across only source parsing would miss two trust
+  bypasses: callers can construct or reconstruct ASTs directly, and successful validation can then feed several
+  artifact builders. The negative matrix therefore crosses four label roles, two trust routes, and five artifact
+  attempts while comparing the exact portable diagnostic. Selector rejection is a different boundary again: an
+  invalid label is still a valid explicit lookup key and must survive unchanged in a deterministic missing-entry
+  result instead of being normalized, truncated, or revalidated as authored syntax.
+
+  Strict loading intentionally retains existing typed resolved-path attribution because that belongs to the loader
+  API; privacy is enforced at the diagnostic-detail, compiled/generated artifact, and primary-projection layers.
+  Source probing also confirmed two historical syntax facts rather than production defects: whitespace-only arrow
+  targets are trimmed to the arrow token, and bare `Top:` is parsed as a second valid physical header.
+
+  Rule-label membership must not silently become a universal identifier policy. Julia function and parameter names
+  remain ASCII. ActionParser retains its current ASCII-first host-word continuation, so `Töp` remains accepted for
+  helpers, variables, fluent methods, and assignments, while `A·B` and supplementary-first spellings remain raw.
+  Lifecycle, mark, regex, and bounded-mode tokens retain their own grammars. The 1,946-assertion suite plus focused
+  3,831 and complete Julia 7,542/primary/105 establishes that isolation without any production change.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.2` — scalar membership and downstream identity need independent
   proof): A correct Unicode classifier does not by itself prove that keys, serialization, selectors, diagnostics,
   traces, or generated hosts preserve the same scalar sequence. The identity suite therefore derives its ten

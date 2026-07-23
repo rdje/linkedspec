@@ -439,8 +439,13 @@ Identity `.10.6.1.2` now derives ten unique labels from all nine positives and b
 identity through AST, compiled/generated/reconstructed/emitted/loaded routes, selectors, diagnostics, traces, and
 inline/file commands. It adds 130 assertions (focused 1,885; Julia 5,596/primary/105), passes 5x2x66 plus the
 ten-leg manifest plus canonical Rust 80.21s/Dart 1/1/primary 66x2/Phase 0 1,031/645s, and changes no production or
-semantic governance. Exact cleanup reclaims 1.57 GB; negative/isolation `.3` is next after the clean identity
-commit.
+semantic governance. Exact cleanup reclaims 1.57 GB. Negative/isolation `.10.6.1.3` now rejects all eight neutral
+negatives across complete source tokens, programmatic/reconstructed declaration/action/blind/bare trust, native/
+generated selectors, strict loading, primary commands, and every artifact boundary. Independent function,
+parameter, ActionParser, lifecycle, mark, regex, and mode grammars do not inherit the rule-label class. Its 1,946
+new assertions compose to focused 3,831 and Julia 7,542/primary/105; 5x2x66, ten Unicode-manifest legs, and
+no-drift contracts plus canonical Rust 79.56s/Dart 1/1/primary 66x2/Phase 0 1,031/645s and exact 1.57-GB cleanup
+pass without production or governance change. Composed `.4` follows the clean commit.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

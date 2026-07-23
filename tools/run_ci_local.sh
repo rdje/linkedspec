@@ -133,6 +133,7 @@ require_tracked_file julia/src/spec/UnicodeRuleLabel.jl
 require_tracked_file julia/test/unicode_rule_label_classifier_test.jl
 require_tracked_file julia/test/unicode_rule_label_routes_test.jl
 require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl
+require_tracked_file julia/test/unicode_rule_label_negative_isolation_test.jl
 require_tracked_file julia/test/repeated_action_result_contract_test.jl
 require_tracked_file lua/test/repeated_action_result_contract_test.lua
 require_tracked_file dart/test/duplicate_regex_slot_identity_contract_test.dart

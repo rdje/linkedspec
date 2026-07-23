@@ -895,8 +895,16 @@ content migration exists yet.
   portable diagnostics, traces, and inline/file primary commands. The new proof adds 130 assertions (focused
   composition 1,885; complete Julia 5,596/primary/105) and passes 5x2x66 plus the ten-leg Unicode manifest without
   production or semantic-governance changes. Canonical proof passes Rust admission 80.21s, Dart 1/1, primary 66x2,
-  and Phase 0 1,031/645s; exact generated cleanup reclaims 1.57 GB. Negative and unrelated-grammar isolation `.3`
-  follows after the clean identity commit.
+  and Phase 0 1,031/645s; exact generated cleanup reclaims 1.57 GB. Negative and unrelated-grammar isolation
+  `.10.6.1.3` now derives all eight negatives from the neutral fixtures and rejects every declaration/action/blind/
+  bare programmatic and reconstructed AST before validation or artifact construction. Complete-token source,
+  no-prefix/newline, native/generated selector, strict-loader, and path-redacted primary failures preserve exact
+  identity; function/parameter, ActionParser helper/variable/fluent/assignment, lifecycle, mark, regex, and mode
+  grammars retain their independent boundaries. The new suite passes 1,946 assertions (focused composition 3,831;
+  complete Julia 7,542/primary/105), 5x2x66 plus the ten-leg Unicode manifest, and all no-drift contracts without
+  production, public-API, format, or semantic-governance change. Canonical Rust admission 79.56s, Dart 1/1,
+  primary 66x2, Phase 0 1,031/645s, and exact 1.57-GB cleanup pass. Composed closeout `.10.6.1.4` follows the clean
+  negative/isolation commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -24,11 +24,14 @@ answers:
   - "does Julia preserve exact Unicode rule labels through generated and emitted parsers"
   - "do Julia Unicode rule-label selectors diagnostics and traces preserve exact identity"
   - "does Julia leak resolved spec paths through compiled Unicode rule-label artifacts"
+  - "does Julia reject every invalid Unicode rule label before artifact construction"
+  - "do Julia rule labels change function helper lifecycle mark regex or mode identifiers"
+  - "why does Julia ActionParser accept Töp but reject middle dot identifiers"
 date: 2026-07-22
 status: current
 tags: [julia, unicode, rule-labels, parser, validation, generated-source, semantic-introspection]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.2; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl
-reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\")'"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.3; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl; julia/test/unicode_rule_label_negative_isolation_test.jl
+reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\"); include(\"julia/test/unicode_rule_label_negative_isolation_test.jl\")'"
 ---
 
 Julia now implements the parser/validator core of ADR `0051` with one generated pinned-data authority. Before
@@ -87,11 +90,27 @@ or semantic governance changes in `.2`. Canonical proof passes Rust semantic adm
 Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds; exact generated cleanup reclaims about
 1.57 GB while preserving Pgen artifacts.
 
-The remaining dependency order is exact: completed `.2` drives the ten unique identities represented by all nine positives and both distinct pairs through AST,
-compiled maps/order/JSON, descriptor, generated plan/direct execution, reconstructed state, independently emitted
-host, selectors, diagnostics, traces, strict loader, and inline/file primary commands; `.3` next drives all eight
-negatives through four declaration/target roles from both programmatic and reconstructed ASTs, whole-token and
-no-prefix source/primary failures, newline behavior, and unrelated identifier isolation; `.4` composes complete
-Julia/canonical proof and closes without semantic promotion. Julia semantic construction and the `Töp` privacy
-fixture remain unadmitted until that full route closure; this Unicode work does not move semantic rollout or
-native admission.
+Negative/isolation `.10.6.1.3` consumes all eight neutral negatives without copying their labels. Its external
+trust matrix crosses declaration/action/blind/bare roles, programmatic and JSON-reconstructed ASTs, and validation,
+compilation, descriptor, generated-plan, and emitted-source attempts. All 1,609 assertions return exact portable
+`invalid_rule_label` evidence before an artifact can exist. Complete-token/no-prefix/newline proof adds 131;
+native/generated selector, strict-loader, and path-redacted primary proof adds 136; unrelated-grammar isolation
+adds 70. The 1,946 new assertions compose with classifier/native/identity proof to focused 3,831, while complete
+Julia is 7,542/primary/105. Full 5x2x66 and every Unicode-manifest leg pass without production change.
+
+Canonical proof passes Rust semantic admission 1/1 in 79.56 seconds, Dart admission 1/1, primary 66x2, and Phase 0
+1,031/1,031 in 645 seconds. Knowledge Map 682/5,150, mdBook, memory, task metadata, all four doctrines, and diff
+hygiene pass. Exact cleanup removes the 12-MB rendered book, 826-MB Rust deps, 727-MB incremental state, and 28-KB
+Python cache—about 1.57 GB—while preserving `rgx/pgen-issues/artifacts`.
+
+The adjacent-grammar result is intentionally not a new universal identifier policy. Function and parameter names
+stay ASCII. ActionParser retains its existing ASCII-first host-word continuation: `Töp` remains a helper, variable,
+fluent method, and assignment identifier, whereas `A·B` and a supplementary-first spelling remain raw. Lifecycle
+markers, named marks, regex contents, and bounded-mode tokens keep their separate existing grammars. Strict loader
+exceptions retain typed request/resolved-path fields, but detail remains path-free and primary output remains
+redacted; no compiled or generated artifact contains the host path.
+
+The remaining dependency order is exact: completed `.2` owns positive/distinct downstream identity and completed
+`.3` owns exhaustive negative rejection plus adjacent-grammar isolation. `.4` composes complete Julia/canonical
+proof and closes without semantic promotion. Julia semantic construction and the `Töp` privacy fixture remain
+unadmitted until that full route closure; this Unicode work does not move semantic rollout or native admission.

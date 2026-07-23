@@ -896,10 +896,23 @@ offline emitted host, strict source loading without resolved-path leakage, every
 missing-selector diagnostics, native/generated traces, and inline plus UTF-8 file primary commands. Focused
 composition is 1,885; complete Julia is 5,596/primary/105; 5x2x66 and the ten-leg Unicode manifest pass. No
 production API, generated format, or semantic-governance state changes. Canonical proof passes Rust admission
-1/1 in 80.21 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds. `.3` owns all eight negatives across
-source and external-AST roles plus unrelated identifier isolation; `.4` owns composed Julia/canonical signoff. Function,
-parameter, helper/action, lifecycle, split/mark, conditional, fluent, regex, and mode grammars remain separate and
-must not inherit the rule-label class. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
+1/1 in 80.21 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds.
+
+Negative/isolation `.10.6.1.3` consumes all eight negative fixtures directly. For declaration, action, blind, and
+bare roles, both programmatic and JSON-reconstructed ASTs return the exact portable `invalid_rule_label` diagnostic
+before validation, compilation, descriptor, generated plan, or emitted source can succeed. Complete physical
+source tokens cannot recover a valid prefix; newline remains only a token boundary. Native/generated selectors
+preserve the exact invalid scalar sequence as a missing entry, strict loaders keep existing typed path attribution
+inside the loader while the detail is path-free, and primary commands emit only the portable compilation heading.
+Function/parameter ASCII validation and the existing ActionParser ASCII-first host-word continuation remain
+separate: `Töp` continues to be an action helper/variable/fluent/assignment identifier, while `A·B` and a
+supplementary-first identifier remain raw there. Lifecycle, mark, regex, and bounded-mode grammars are unchanged.
+The suite passes 1,946 assertions; focused composition is 3,831 and complete Julia is 7,542/primary/105. The
+5x2x66 matrix, all ten Unicode-manifest legs, and Unicode/semantic/capability/generated/public no-drift contracts
+pass without production, API, format, or semantic-governance change. Canonical proof passes Rust admission 1/1 in
+79.56 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds; exact cleanup reclaims about 1.57 GB
+while preserving Pgen. `.4` owns composed closeout. Semantic governance stays 6/20/81 at rollout 4/9 and
+admission 3/6.
 
 ## Exact v1 record model
 
@@ -1268,7 +1281,8 @@ The dependency order is:
 | `.10.6.1.0` | Julia Unicode classifier/route plan | complete; exact behavior-free generator, parser, validator, fixture, isolation, and gate split |
 | `.10.6.1.1` | Julia generated classifier plus parser/validator routing | complete; focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical signoff |
 | `.10.6.1.2` | Julia exact positive/distinct downstream identity | complete; 130 new assertions, focused 1,885, Julia 5,596/primary/105, 5x2x66, and ten-leg manifest without production change |
-| `.10.6.1.3-.10.6.7` | Julia negative/isolation Unicode proof through semantic admission | pending |
+| `.10.6.1.3` | Julia exhaustive negative rejection and unrelated-grammar isolation | complete; 1,946 new assertions, focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, canonical signoff, and cleanup without production change |
+| `.10.6.1.4-.10.6.7` | Julia Unicode closeout through semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

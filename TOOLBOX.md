@@ -460,9 +460,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Exact identity `.10.6.1.2` is now owned by `julia/test/unicode_rule_label_identity_routes_test.jl`: it derives
   ten unique labels from all 9 positives/2 distinct pairs and checks AST/compiled/JSON/descriptor/plan,
   reconstructed/direct/generated/emitted/loaded execution, selectors, diagnostics, trace, and inline/file primary
-  routes. Run it with the classifier/native-route tests for focused 1,885; complete Julia is 5,596/primary/105.
-  `.3` still owns all 8 negatives plus unrelated-grammar isolation and `.4` composition. Use a writable depot
-  first; never infer membership or identity from host PCRE2 examples.
+  routes. Negative/isolation `.10.6.1.3` is owned by
+  `julia/test/unicode_rule_label_negative_isolation_test.jl`: it consumes all 8 negatives across source, both AST
+  trust routes, all four label roles, selectors, loaders, primary commands, and artifact denial, then locks
+  function/parameter/ActionParser/lifecycle/mark/regex/mode isolation. Run all four Unicode test files for focused
+  3,831; complete Julia is 7,542/primary/105. `.4` owns only composed closeout. Use a writable depot first; never
+  infer membership, identity, or adjacent-grammar behavior from host PCRE2 examples.
 
 ---
 

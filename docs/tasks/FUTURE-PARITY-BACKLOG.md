@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Julia Unicode core `.10.6.1.1` implements the generated 806-range classifier,
-  all five parser routes, four-role validation, focused/complete/matrix proof, and recurring enforcement)
+- Last updated: `2026-07-22` (Julia Unicode negative/isolation `.10.6.1.3` rejects all eight negatives through every
+  source/trust/selector/loader/primary/artifact route and locks adjacent grammars without production change)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9326,12 +9326,68 @@ before implementation.
       remove generated caches, and commit cleanly before activating negative/isolation `.10.6.1.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.3`
-    Status: `pending`
+    Status: `done` (2026-07-22; exhaustive Julia negative/isolation proof from clean `1ee7c0e6`)
     Goal: Close Julia invalid-label and unrelated-identifier isolation.
     Depends on: `.10.6.1.2`
     Acceptance: Reject all eight negative fixtures at source/no-prefix, parsed, programmatic, reconstructed, action,
       blind, bare, artifact, selector, loader, and primary boundaries; prove the classifier does not widen/narrow
       function, parameter, helper, lifecycle, fluent, mark, regex, or action-language identifiers.
+    Verification plan: Add one omission-sensitive `unicode_rule_label_negative_isolation_test.jl` registered by the
+      Julia package driver, Unicode checker, and canonical tracked-input gate. Consume all eight unchanged negative
+      fixtures directly. For declaration/action/blind/bare AST roles, validate both programmatic and JSON-
+      reconstructed specimens against exact `invalid_rule_label` portable fields before compilation, descriptor,
+      generated-plan, or emitted-source artifacts can be built. Drive every negative label as an explicit native
+      and generated selector against a valid compiled spec and require exact missing-entry identity without
+      truncation, folding, normalization, or fallback.
+
+      Source proof must reject invalid declaration headers as complete physical tokens, retain invalid arrow/bare
+      lines as raw syntax instead of recovering prefixes or suffixes, treat embedded newline only as a physical
+      boundary, and exercise no-prefix `$Top`. Strict loading and primary commands must fail deterministically for
+      every invalid declaration without path/host leakage or stdout. Isolation must prove the generated rule-label
+      classifier does not change the current ASCII function/parameter boundary, ActionParser helper/variable/fluent
+      identifiers, lifecycle markers, named-mark arguments, regex contents, bounded-mode tokens, or adjacent action
+      syntax. Strict loader proof may retain its existing typed resolved-path attribution internally, but compiled/
+      generated artifacts must never exist and the primary projection must expose no path or host detail. This leaf
+      changes tests/checker/CI/docs only unless a measured route violates the frozen boundary; it
+      does not own production repair, positive identity, neutral contract changes, semantic promotion, or composed
+      closeout `.10.6.1.4`.
+    Verification: The new test consumes all eight neutral negative fixtures without copying their labels. Its
+      external-trust/artifact set passes 1,609 assertions: declaration/action/blind/bare roles from programmatic and
+      JSON-reconstructed ASTs each return the exact portable `invalid_rule_label` diagnostic before validation,
+      compilation, descriptor, generated-plan, or emitted-source construction can succeed. Source/no-prefix/newline
+      proof passes 131 assertions over complete invalid headers, raw action/blind/bare lines, trimmed empty targets,
+      the historical `Top:` physical-header interpretation, `$Top` suffix denial, and the valid `Top\nRule`
+      two-token split.
+
+      Selector/loader/primary proof passes 136 assertions. Native and generated explicit selection retain each
+      invalid scalar sequence in exact missing-entry fields without fallback; strict file loading reports its typed
+      parse stage/code/request/resolved path while detail stays path-free; inline and file primary commands return
+      only the portable compilation heading with empty stdout. Unrelated-grammar isolation passes 70 assertions:
+      function/parameter ASCII validation, ActionParser's existing ASCII-first host-word helper/variable/fluent
+      boundary, assignments, lifecycle markers, action and split named marks, arbitrary regex contents, and bounded
+      modes remain independently exact. No production repair is required. The new suite totals 1,946 assertions;
+      classifier/native-route/identity/negative composition is 3,831. Complete Julia passes 7,542 package
+      assertions, primary process conformance, and corpus 105/105; the Unicode checker remains 806/9/8/2. Full
+      primary proof passes 5 backends x 2 environments x 66 cases plus every Unicode-manifest leg at 1/1.
+      Semantic/capability/generated/public no-drift stays 6/20/81 at 4/9 + 3/6, 80/0/0, v1/10/80-0-0, and
+      59/27/0. Knowledge Map 682/5,150, mdBook, memory, task metadata, all four doctrines, and diff hygiene pass.
+      The staged canonical gate passes Rust admission 1/1 in 79.56 seconds, Dart admission 1/1, primary 66/66 in
+      both environments, and Phase 0 1,031/1,031 in 645 seconds. Exact cleanup removes the regenerated 12-MB book,
+      826-MB Rust deps, 727-MB incremental state, and 28-KB Python cache—about 1.57 GB—while preserving Pgen.
+
+    #### Acceptance Checklist
+
+    - [x] **NEGATIVE MATRIX / AST TRUST** — Consume all eight negatives across declaration/action/blind/bare
+      programmatic and reconstructed roles with exact portable failure before artifact construction.
+    - [x] **SOURCE / NO-PREFIX / NEWLINE** — Reject complete invalid headers, preserve invalid edge/bare raw syntax,
+      deny suffix recovery, and prove newline is only a physical token boundary.
+    - [x] **SELECTOR / LOADER / PRIMARY** — Preserve each exact invalid scalar sequence in native/generated
+      selector failures, loader-owned path attribution, and path-redacted deterministic primary failures.
+    - [x] **UNRELATED GRAMMAR ISOLATION** — Lock function, parameter, helper/variable/fluent, lifecycle, mark,
+      regex, bounded-mode, and action-language identifier behavior independently from rule labels.
+    - [x] **RECURRING / COMPLETE / CLEAN COMMIT** — Register omission-sensitive proof; pass focused/complete Julia,
+      Unicode/semantic/public/matrix/canonical gates as warranted, synchronize durable docs, clean generated caches,
+      and commit before activating closeout `.10.6.1.4`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.4`
     Status: `pending`
@@ -11859,8 +11915,10 @@ neutral ledgers. `.10.6.1.0` is complete at clean commit `dfcc1ca7`; `.10.6.1.1`
 Phase 0 1,031/663s. Exact downstream identity `.10.6.1.2` is complete from clean `732eb1e1`: its 130 new
 assertions, focused 1,885, complete Julia 5,596/primary/105, 5x2x66, ten-leg manifest, no-drift checks, canonical
 Rust admission 80.21s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s, and exact 1.57-GB cache cleanup pass without
-production or governance change. Negative/isolation `.10.6.1.3` is the sole next eligible leaf after the clean
-commit; closeout `.4` remains dependency-blocked.
+production or governance change. Negative/isolation `.10.6.1.3` is complete from clean `1ee7c0e6`: its 1,946 new/
+focused 3,831, complete Julia 7,542/primary/105, 5x2x66, ten manifest legs, no-drift checks, Knowledge Map
+682/5,150, canonical Rust 79.56s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s, and exact 1.57-GB cleanup pass
+without production or governance change. Closeout `.10.6.1.4` is the sole next eligible leaf after the clean commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -12341,6 +12399,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `done` | Exact generated Julia classifier/scanner, five parser routes, validator roles, fixture/isolation suites, and gates are frozen without behavior. |
 | 74.5.1.1 | `FUTURE-PARITY-BACKLOG.10.6.1.1` | `done` | Generated 806-range classifier plus all five parser and four validator roles pass focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical proof without promotion. |
 | 74.5.1.2 | `FUTURE-PARITY-BACKLOG.10.6.1.2` | `done` | Ten unique positive/distinct labels pass 130 exact downstream route assertions, Julia 5,596/primary/105, 5x2x66, ten-leg manifest, and canonical proof without production change. |
+| 74.5.1.3 | `FUTURE-PARITY-BACKLOG.10.6.1.3` | `done` | All eight negatives reject across Julia trust/source/selector/loader/primary/artifact routes; adjacent grammars remain exact with no production change. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -13015,6 +13074,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.3` | All 8 neutral negatives across complete source/no-prefix/newline, declaration/action/blind/bare x programmatic/reconstructed trust, validation/compile/descriptor/plan/emitted artifact denial, native/generated selectors, strict loaders, path-redacted primary, and function/parameter/ActionParser/lifecycle/mark/regex/mode isolation; 1,946 new/focused 3,831; complete Julia 7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; primary 5x2x66 plus ten 1/1 manifest legs; KM 682/5,150; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 79.56s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 645s; exact 1.57-GB generated cleanup preserving Pgen. | PASS. Every invalid Julia label fails before artifacts, selectors preserve exact missing identity, adjacent grammars do not inherit the label class, no production/API/format/ledger change, and closeout `.10.6.1.4` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.2` | Ten unique labels derived from 9 positives + 2 distinct pairs; exact AST/compiled/maps/JSON/descriptor/plan/reconstruction, direct/generated/fresh-emitted/loaded/path-private/selectors/diagnostics/traces/inline-file-primary routes; 130 new and focused 1,885; complete Julia 5,596/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; primary 5x2x66 plus ten-leg manifest; KM 682/5,147; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 80.21s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 645s; exact 1.57-GB generated-cache cleanup preserving Pgen artifacts. | PASS. Every positive/distinct Julia label retains exact scalar identity and logical source privacy through every downstream route; no production/API/format/ledger change, and negative/isolation `.10.6.1.3` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.1` | Generated 806-range Julia classifier and independent regeneration/endpoint/source locks; all five parser routes; declaration/action/blind/bare validator trust boundary; 1,755 focused assertions; complete Julia 5,466/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; generated/capability/public 80/0/0 + 59/27/0; full primary 5x2x66 plus ten-leg Unicode manifest; KM 682/5,144; mdBook/memory/task/four doctrines/diff; staged canonical Rust admission 1/1 in 79.93s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 663s; exact generated-cache cleanup preserving Pgen artifacts. | PASS. Julia parser/validator rule-label membership now comes only from pinned Unicode 17 data; malformed/prefix and external-AST bypasses close at the core boundary, no public API or semantic ledger moves, and exact downstream identity `.10.6.1.2` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.0` | Exact Julia Unicode 17 versus PCRE2 census (5,175 missing / 923 extra), source 8/9 plus `A·B`/`²`/`Top:::` boundaries, and 2 labels x 4 AST roles x 2 trust-route artifact probes; frozen generator/classifier/parser/validator/test/gate plan; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; KM 682/5,142; book/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 77.35s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 641s; exact 1.14-GB generated book/Rust/Python cleanup. | PASS. Every Julia Unicode implementation and proof seam is dependency-owned by `.1-.4`; no production/generated/test/fixture/contract behavior or semantic ledger changes, and `.10.6.1.1` waits for the clean commit. |
@@ -13245,6 +13305,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.1.3` | `FUTURE-PARITY-BACKLOG.10.6.1.3 - isolate Julia Unicode labels` | Eight exact negatives across every source/trust/selector/loader/primary/artifact route; adjacent grammar isolation; 1,946 new/focused 3,831; Julia 7,542/105/primary; 5x2x66 plus ten-leg manifest; KM/book/doctrines; canonical Rust admission 79.56s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s; and exact 1.57-GB cleanup without production/API/format/semantic-ledger change. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.2` | `FUTURE-PARITY-BACKLOG.10.6.1.2 - prove Julia Unicode identity` | Ten exact positive/distinct downstream identities; 130 new/focused 1,885; Julia 5,596/105/primary; 5x2x66 plus ten-leg manifest; KM/book/doctrines; canonical Rust admission 80.21s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s; and exact 1.57-GB cleanup without production/API/format/semantic-ledger change. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.1` | `FUTURE-PARITY-BACKLOG.10.6.1.1 - route Julia Unicode labels` | Internal generated 806-range classifier, five complete-token parser routes, four-role external-AST validation, focused 1,755, complete Julia 5,466/105/primary, 5x2x66 plus ten-leg manifest, KM/book/doctrines, canonical Rust admission 79.93s + Dart 1/1 + primary 66x2 + Phase 0 1,031/663s, and exact cache cleanup without public API or semantic-ledger movement. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `FUTURE-PARITY-BACKLOG.10.6.1.0 - freeze Julia Unicode label routes` | Behavior-free exact generated classifier/scanner, five parser routes, four-role validation, 9/8/2 identity/isolation and `.1-.4` gate plan; exact census/bypass probes, semantic/Unicode/KM/book/doctrines, canonical Rust 77.35s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s, and 1.14-GB cleanup without behavior or ledger movement. |
@@ -13453,6 +13514,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-22`: `.10.6.1.3` consumes all eight neutral negative fixtures across complete source tokens, four
+  declaration/target roles, both programmatic and reconstructed AST trust routes, validation and every artifact
+  builder, native/generated selectors, strict loading, and path-redacted primary commands. It independently locks
+  function/parameter, ActionParser helper/variable/fluent/assignment, lifecycle, mark, regex, and bounded-mode
+  boundaries. New 1,946/focused 3,831, Julia 7,542/primary/105, Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6,
+  capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0, primary 5x2x66, and all ten manifest legs pass.
+  Knowledge Map 682/5,150, book/memory/doctrines, canonical Rust 79.56s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/645s, and exact 1.57-GB generated cleanup pass. No production/API/format/ledger change; `.10.6.1.4`
+  follows after the clean commit.
 
 - `2026-07-22`: `.10.6.1.2` derives ten unique labels from all nine positive fixtures and both exact-distinct pairs
   and proves their exact scalar sequences through AST, compiled order/maps/JSON, descriptor, generated plan,
