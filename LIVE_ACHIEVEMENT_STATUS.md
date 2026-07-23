@@ -8,16 +8,34 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia privacy/failure/runtime-static/isolation `FUTURE-PARITY-BACKLOG.10.6.3.2` is a complete verified candidate
-  from clean graph commit `197538f7`. Exact privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clone/occurrence/host
-  denial, complete gates, docs, and cleanup pass. Commit this leaf cleanly before activating composition `.3.3`.
+- Julia private static composition closeout `FUTURE-PARITY-BACKLOG.10.6.3.3` is a complete verified candidate
+  from clean remaining-target commit `556e5ae2`. It recomposes the committed four-suite/five-target topology,
+  closes parent `.10.6.3` without promotion, and hands off to behavior-free calls/staging/generated plan
+  `.10.6.4.0` only after this closeout commit is clean; no replacement production/test code was added.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.3 — close Julia static projection**
+  (DONE candidate from clean base `556e5ae2`; commit pending final durable-layer checks).
+
+  **Result:** The four already-committed Julia semantic suites compose as one exact private static surface. All
+  five construction targets, source ceilings/evidence/order, lifecycle identity, fallback, clone/immutability,
+  public omission, and host denial remain exact. Parent `.10.6.3` closes without production/test replacement,
+  public query/accessor, runtime observation, generated-format change, rollout movement, or native admission.
+
+  **Proof:** Focused 389; graph 12/14/7, privacy text 4/3, privacy identity 4/3, failed 6/4, runtime-static 7/8;
+  Julia 7,931/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2 and semantic
+  6/20/81 at 4/9 + 3/6; canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s; book/KM/doctrines/
+  diff at Knowledge Map 683/5,210 and exact 1.56-GB cleanup complete the final lockstep proof while preserving 517
+  Pgen artifacts.
+
+  **Next:** after this closeout commit is clean, activate behavior-free calls/staging/generated authority plan
+  `.10.6.4.0` task-tree-first.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.2 — complete Julia static targets**
-  (DONE candidate from clean base `197538f7`; awaiting this commit).
+  (DONE at clean commit `556e5ae2` from base `197538f7`).
 
   **Result:** Julia's opaque index now privately retains all five exact static construction targets across
   `.3.1-.2`. Both privacy ceilings, projection-only neutral failure normalization over an unchanged native
@@ -30,7 +48,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   4/9 + 3/6; mdBook/KM 683/5,207/four doctrines/diff; canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/697s; exact 1.56-GB cleanup preserving all 517 Pgen artifacts.
 
-  **Next:** no-change five-target composition `.10.6.3.3` follows only after this commit is clean.
+  **Next:** no-change five-target composition `.10.6.3.3` completed above from this clean commit.
 
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.3.1 — add Julia static graph**
   (DONE at clean commit `197538f7` from base `99795ddf`).

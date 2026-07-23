@@ -959,8 +959,11 @@ content migration exists yet.
   Julia's foundation still reports native `bare_edge_target_undefined` / `normalize_edges`; only the projection
   emits the neutral unknown-rule decision/explanation. New 99/focused 389 and Julia 7,931/primary/105 pass with
   stable 5x2x66, all ten Unicode legs, and unchanged semantic ledgers. No public query/accessor, execution,
-  observation, generated-format change, rollout, or admission is introduced; no-change closeout `.10.6.3.3`
-  follows after the clean `.3.2` commit.
+  observation, generated-format change, rollout, or admission is introduced. No-change closeout `.10.6.3.3` now
+  recomposes the committed four-suite topology at focused 389, complete Julia 7,931/primary/105, 5x2x66, ten
+  Unicode legs, unchanged ledgers, and canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s.
+  Parent `.10.6.3` is composition-closed without replacement code; behavior-free calls/staging/generated plan
+  `.10.6.4.0` follows only after the closeout commit is clean.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

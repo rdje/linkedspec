@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.3` — composition closeout validates ownership, not more behavior):
+  A private semantic parent is not closed merely because each target passed once in its implementation leaf. Its
+  committed source, outcome, graph, privacy, failure, runtime-static, and isolation proofs must coexist under the
+  complete backend and cross-backend gates. The closeout therefore runs the four existing suites together at
+  focused 389 and adds no replacement projector code or tests; duplicating the proof would create a second owner
+  that could drift from the implementation topology it is meant to validate.
+
+  The composition reconfirms all five target counts and the important negative boundary: no public record/query
+  accessor, runtime observation, generated-format movement, host authority, rollout change, or native admission.
+  Complete Julia 7,931/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance ledgers, and canonical
+  Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s pass. This closes `.10.6.3`; calls, bindings, staged
+  provenance, and generated-plan meaning remain separately owned by behavior-free plan `.10.6.4.0` after commit.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.3.2` — preserve native diagnosis, normalize only the semantic view):
   Julia's failed semantic foundation must remain useful for backend diagnosis. Replacing
   `bare_edge_target_undefined` / `normalize_edges` with the neutral code at construction would erase the real

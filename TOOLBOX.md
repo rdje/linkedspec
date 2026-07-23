@@ -536,7 +536,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   plain JSON, private surface omission, and host/path/loader/emitter/executor/trace/sink/observer denial. Complete
   signoff is Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged semantic ledgers, canonical Rust 78.27s +
   Dart 1/1 + primary 66x2 + Phase 0 1,031/697s. Use no-change `.10.6.3.3`, not replacement projector tests, for
-  five-target recomposition and parent closeout.
+  five-target recomposition and parent closeout. That closeout now passes the same committed four-suite focused
+  389, complete Julia 7,931/primary/105, both full matrices, unchanged no-drift ledgers, and canonical Rust 80.89s
+  + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s without production/test replacement. Parent `.10.6.3` is closed;
+  use behavior-free `.10.6.4.0` next to map calls/staging/generated authorities before changing projection code.
   See [[julia-semantic-static-projection-plan]].
 
 ---

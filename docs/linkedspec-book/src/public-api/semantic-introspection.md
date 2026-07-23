@@ -1118,8 +1118,24 @@ still no public semantic query or projection accessor, and no rollout or native-
 Exact proof adds 99 assertions and composes with source 135, outcome 85, and graph 70 at focused 389. Complete
 Julia passes 7,931 package assertions, primary process conformance, and corpus 105/105. The five-backend matrix is
 5x2x66 and all ten Unicode-manifest legs pass. Canonical local CI passes Rust semantic admission in 78.27 seconds,
-Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 697 seconds. No-change `.10.6.3.3` next recomposes
-these committed targets and closes the private static parent.
+Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 697 seconds. No-change `.10.6.3.3`, documented below,
+recomposes these committed targets and closes the private static parent.
+
+### Julia private static projection closeout
+
+Leaf `.10.6.3.3` adds no production code, replacement test, fixture, API, or generated-format change. It runs the
+four committed source 135, outcome 85, graph 70, and remaining-target 99 suites together at focused 389. That
+composition reconfirms graph 12/14/7, both privacy targets at 4/3, failed 6/4, runtime-static 7/8, exact source
+ceilings/evidence/order, projection-only failure normalization, lifecycle occurrence identity, detached/immutable
+copies, generic failure fallback, private omission, and host denial as one surface.
+
+Complete Julia passes 7,931 package assertions, primary process conformance, and corpus 105/105. The full primary
+matrix passes 5 backends x 2 environments x 66 cases and all ten Unicode-manifest legs pass. Unicode remains
+806/9/8/2; semantic governance remains 6/20/81 at rollout 4/9 and native admission 3/6; capability/generated/public
+remain 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI passes Rust semantic admission in 80.89 seconds,
+Dart admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 653 seconds. Parent `.10.6.3` is therefore
+composition-closed with no public query, runtime observation, or semantic promotion. Behavior-free authority plan
+`.10.6.4.0` next separates typed calls/bindings core from staged/generated completion before projection changes.
 
 ## Exact v1 record model
 
@@ -1497,8 +1513,9 @@ The dependency order is:
 | `.10.6.3.0` | Julia static authority map and dependency split | complete; five targets, normalization, privacy, and host fences frozen |
 | `.10.6.3.1` | Julia compiled graph/source/evidence projection | complete; private exact 12/14/7 graph, no public query |
 | `.10.6.3.2` | Julia privacy/failure/runtime-static and isolation | complete; exact 4/3 + 4/3 + 6/4 + 7/8 targets, no promotion |
-| `.10.6.3.3` | Julia composed private static closeout | pending; recomposition only |
-| `.10.6.4-.10.6.7` | Julia calls projection through exact admission | pending |
+| `.10.6.3.3` | Julia composed private static closeout | complete; committed focused 389 plus full matrices/canonical proof, no replacement code or promotion |
+| `.10.6.4.0` | Julia calls/staging/generated authority map and dependency split | next after the clean `.10.6.3.3` commit |
+| `.10.6.4.1-.10.6.7` | Julia calls projection through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

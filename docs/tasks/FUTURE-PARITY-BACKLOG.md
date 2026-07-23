@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Julia privacy/failure/runtime-static/isolation `.10.6.3.2` completed and verified
-  from clean graph commit `197538f7`; composed private static closeout `.10.6.3.3` follows after this commit)
+- Last updated: `2026-07-22` (Julia private static parent `.10.6.3` composition-closed through verified no-change
+  leaf `.10.6.3.3`; calls/staging/generated plan `.10.6.4.0` is next only after the closeout commit is clean)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9676,7 +9676,7 @@ before implementation.
       Knowledge Map, memory, doctrines, exact safe cleanup, and the clean handoff to `.10.6.3.0`.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.3`
-  Status: `active` (2026-07-22; all five targets implemented through `.3.2`; composed closeout `.3.3` next)
+  Status: `done` (2026-07-22; all five private static targets composition-closed through `.3.3` without promotion)
   Goal: Project exact private Julia static semantic graph, privacy, failure, and runtime-static state.
   Children: `.10.6.3.0`, `.10.6.3.1`, `.10.6.3.2`, `.10.6.3.3`
   Depends on: `.10.6.2`
@@ -9865,11 +9865,43 @@ before implementation.
       doctrines, remove only safe generated artifacts, preserve 517 Pgen artifacts, and commit before `.3.3`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.3.3`
-    Status: `pending`
+    Status: `done` (2026-07-22; verified no-change composition candidate from clean `.3.2` commit `556e5ae2`)
     Goal: Compose and close exact Julia private static projection.
     Depends on: `.10.6.3.2`
     Acceptance: Re-run all five targets and topology/isolation proof with complete Julia/neutral/canonical/docs/KM/
       cleanup gates; close `.10.6.3` without public query, runtime observation, or ledger promotion.
+    Verification plan: Re-run the four committed source/outcome/graph/remaining suites together and prove exact
+      graph 12/14/7, privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle/clone/fallback/host isolation,
+      and public omission without replacement production or test code. Then run complete Julia package/primary/105,
+      five-backend primary and Unicode matrices, every no-drift ledger, canonical local CI, mdBook, Knowledge Map,
+      memory/task/doctrines/diff, and exact safe cleanup. Close parent `.10.6.3`, record `.10.6.4.0` as the next
+      dependency-eligible behavior-free calls/staging plan, and commit before activation.
+    Implementation: No production, test, fixture, contract, API, or generated-format file changes. The closeout
+      deliberately recomposes the four committed source/outcome/graph/remaining suites and their complete gates
+      rather than creating a second projector or replacement proof topology.
+    Verification: PASS. The four committed suites compose at focused 389 and reconfirm graph 12/14/7, privacy
+      text 4/3, privacy identity 4/3, failed 6/4, runtime-static 7/8, occurrence identity, detached/immutable copies,
+      fallback, public omission, and host denial. Complete Julia passes 7,931 package assertions, primary process
+      conformance, and corpus 105/105; the primary matrix passes 5 backends x 2 environments x 66 cases and all
+      ten Unicode-manifest legs pass. Unicode stays 806/9/8/2; semantic stays 6/20/81 at rollout 4/9 and admission
+      3/6; capability/generated/public stay 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI passes Rust
+      semantic admission in 80.89 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 653 seconds.
+      mdBook, Knowledge Map 683/5,210, memory/task/doctrines/diff hygiene, and exact 1.56-GB safe cleanup preserving
+      517 Pgen artifacts complete the proof; no query, runtime observation, rollout, or admission is promoted.
+    Commit: `FUTURE-PARITY-BACKLOG.10.6.3.3 - close Julia static projection`
+
+    #### Acceptance Checklist
+
+    - [x] **COMMITTED RECOMPOSITION** — Run the exact four committed Julia semantic suites together at focused 389;
+      do not add replacement projector code or tests in this closeout.
+    - [x] **ALL FIVE TARGETS** — Reconfirm graph 12/14/7, privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, exact
+      source ceilings/evidence/order, projection-only failure normalization, and observation-free construction.
+    - [x] **ISOLATION / PUBLIC FENCE** — Reconfirm lifecycle occurrence identity, detached copies, tuple immutability,
+      generic failure fallback, private seam omission, and host/path/AST/IR/compiler/execution denial.
+    - [x] **NO REGRESSION / NO PROMOTION** — Pass complete Julia/105/primary, both five-backend matrices, and all
+      Unicode/semantic/capability/generated/public no-drift ledgers without API, format, rollout, or admission change.
+    - [x] **LOCKSTEP / PARENT CLOSURE** — Pass canonical/docs/KM/memory/doctrines/diff/cleanup, close `.10.6.3`,
+      hand off `.10.6.4.0`, commit, clear the brief, and verify a clean tree before activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.4`
   Status: `pending`
@@ -12341,11 +12373,15 @@ change. Compiled graph/source/evidence `.10.6.3.1` now passes new 70/focused 290
 Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s from clean plan commit `99795ddf`. Private immutable
 storage, detached copies, authored/compiled correlation, Default normalization, and parent-matcher exclusion are
 exact without a public accessor, query, execution, format change, or promotion. Remaining privacy/failure/runtime-
-static and host-isolation targets are now complete in `.10.6.3.2`. Its exact privacy 4/3 + 4/3, failed 6/4,
+static and host-isolation targets are now complete in `.10.6.3.2` at clean commit `556e5ae2`. Its exact privacy 4/3 + 4/3, failed 6/4,
 runtime-static 7/8, repeated-lifecycle identity, detached-copy/tuple immutability, generic failure fallback, and host
 denial proof pass new 99/focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode legs, unchanged ledgers, and
 canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/697s. No public query, observation, format, rollout,
-or admission moves. Composed no-change static closeout `.10.6.3.3` follows only after this commit is clean.
+or admission moves. Composed no-change closeout `.10.6.3.3` now reruns the committed four-suite topology at
+focused 389, complete Julia 7,931/primary/105, 5x2x66, all ten Unicode legs, unchanged ledgers, and canonical Rust
+80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s without replacement production/test code. Parent `.10.6.3`
+is a verified closure candidate from clean base `556e5ae2`; behavior-free calls/staging/generated plan `.10.6.4.0`
+is next only after the closeout commit is clean.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -12833,11 +12869,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.2.1 | `FUTURE-PARITY-BACKLOG.10.6.2.1` | `done` | Opaque strict copied Julia text/bytes, private canonical byte/scalar map, SHA-256, four ceilings, typed values/errors, exact accessors, and 135/7,677 proof complete. |
 | 74.5.2.2 | `FUTURE-PARITY-BACKLOG.10.6.2.2` | `done` | One opaque staged compiled-or-failed authority, merged authorship, detached outcome API, focused 220 / Julia 7,762, complete matrix/canonical proof, and safe cleanup pass without execution or promotion. |
 | 74.5.2.3 | `FUTURE-PARITY-BACKLOG.10.6.2.3` | `done` | Committed focused 220, Julia 7,762/primary/105, 5x2x66, ten Unicode legs, no-drift, canonical, and cleanup close `.10.6.2` without production change. |
-| 74.5.3 | `FUTURE-PARITY-BACKLOG.10.6.3` | `active` | Project Julia's exact private static graph/privacy/failure/runtime-static targets without query, observation, or promotion. |
+| 74.5.3 | `FUTURE-PARITY-BACKLOG.10.6.3` | `done` | Julia's five exact private static targets composition-close without query, observation, or promotion. |
 | 74.5.3.0 | `FUTURE-PARITY-BACKLOG.10.6.3.0` | `done` | Exact five-target Julia static authorities, normalization, source correlation, privacy/host fences, and `.1-.3` proof split are frozen and verified before code. |
 | 74.5.3.1 | `FUTURE-PARITY-BACKLOG.10.6.3.1` | `done` | Private recursively immutable Julia graph/source/evidence projection deep-equals exact 12-record/14-relation neutral graph. |
 | 74.5.3.2 | `FUTURE-PARITY-BACKLOG.10.6.3.2` | `done` | Exact privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle/clone/host-isolation proof passes without promotion. |
-| 74.5.3.3 | `FUTURE-PARITY-BACKLOG.10.6.3.3` | `pending` | Recompose all five static targets and close `.10.6.3` without public query or promotion. |
+| 74.5.3.3 | `FUTURE-PARITY-BACKLOG.10.6.3.3` | `done` | Committed focused 389 plus complete matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.3` without replacement code or promotion. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -13490,9 +13526,9 @@ Read-only evidence recorded on 2026-07-10:
 ## Open Questions
 
 - None blocking. Semantic design/neutral, admitted Perl/Rust/Dart, shared Unicode grammar closure, Julia Unicode
-  and source/outcome foundations, exact Julia static planning, private compiled graph/source/evidence, and exact
-  privacy/failure/runtime-static/isolation targets are complete. No-change composition `.10.6.3.3` is next after
-  this clean commit.
+  and source/outcome foundations, and Julia's five-target private static projection are composition-closed through
+  verified no-change leaf `.10.6.3.3` from clean base `556e5ae2`. Behavior-free calls/staging/generated authority
+  plan `.10.6.4.0` is next only after this closeout commit is clean.
   Root selection, rule-local cursor, duplicate regex-slot identity, and repeated-action result
   shape remain closed across neutral, all five backends, dual-ABI Lua, recurring composition, and public no-drift.
 - Non-blocking documentation-test finding from `.5.1.3` signoff: the canonical `mdbook build` passes, but the
@@ -13513,6 +13549,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.3.3` | No production/test/fixture/contract/API/format change; committed four-suite focused 389; exact graph 12/14/7, privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8 and isolation; complete Julia 7,931/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 683/5,210/memory/task/four doctrines/diff; canonical Rust 80.89s, Dart 1/1, primary 66x2, Phase 0 1,031/653s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. The committed five-target topology composes as one private surface, parent `.10.6.3` closes without replacement proof code or semantic promotion, and `.10.6.4.0` is next only after the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.3.2` | Exact privacy text 4/3 + identity 4/3, failed 6/4, runtime-static 7/8; native diagnostic preservation plus neutral unknown-rule projection; repeated-lifecycle occurrence ids/order/shapes/sources; detached copies, tuple immutability, plain JSON, parse/entry fallback, private/public/host denial; new 99/focused 389; Julia 7,931/primary/105; 5x2x66 plus ten Unicode legs; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 683/5,207; mdBook/memory/task/four doctrines/diff; canonical Rust 78.27s, Dart 1/1, primary 66x2, Phase 0 1,031/697s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. All five private construction targets now exist across `.3.1-.2`; failure normalization is projection-only, runtime construction remains observation-free, storage/copies are isolated, no host authority leaks, and composition `.3.3` waits for this clean commit without API/query/format/ledger promotion. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.3.1` | Private recursively immutable static projection; exact 12 records / 14 relations / 7 source references; authored-member scanner, typed compiled correlation, parent-matcher exclusion, neutral Default normalization, stable ids/order, detached-copy/internal-immutability/public-omission/host-denial proof; new 70 and focused 290; complete Julia 7,832/primary/105; full primary 5x2x66 plus ten 1/1 Unicode legs; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 683/5,196; mdBook/memory/task/four doctrines/diff; canonical Rust 1/1 in 78.38s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 641s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. Julia now privately retains the exact compiled graph/source/evidence target without another parse, target execution, public query/accessor, host/path leak, generated-format change, rollout movement, or native admission; remaining targets stay `.10.6.3.2`. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.3.0` | No production/test/fixture/API/format/query/trace/observation/ledger change; exact five static targets and 14 source references; focused source/outcome 220; complete Julia 7,762/primary/105; full primary 5x2x66 plus ten 1/1 Unicode legs; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 683/5,188; mdBook/memory/task/four doctrines/diff; canonical Rust 1/1 in 78.75s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 632s; exact 1.56-GB cleanup preserving 517 Pgen artifacts. | PASS. The Julia static construction boundary, native-to-neutral normalization, privacy/host fences, and `.1-.3` dependency split are exact before implementation; graph `.10.6.3.1` waits for the clean commit. |
@@ -13752,6 +13789,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.3.3` | `FUTURE-PARITY-BACKLOG.10.6.3.3 - close Julia static projection` | No-change committed focused 389, Julia 7,931/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM 683/5,210/doctrines, canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s, and exact 1.56-GB cleanup; closes `.10.6.3` before calls/staging planning. |
 | `FUTURE-PARITY-BACKLOG.10.6.3.2` | `FUTURE-PARITY-BACKLOG.10.6.3.2 - complete Julia static targets` | Privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle/clone/fallback/host isolation; new 99/focused 389, Julia 7,931/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM/doctrines, canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/697s, and exact safe cleanup before composed closeout. |
 | `FUTURE-PARITY-BACKLOG.10.6.3.1` | `FUTURE-PARITY-BACKLOG.10.6.3.1 - add Julia static graph` | Private immutable exact graph/source/evidence projection; new 70/focused 290, Julia 7,832/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM/doctrines, canonical Rust 78.38s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s, and exact safe cleanup before remaining static targets. |
 | `FUTURE-PARITY-BACKLOG.10.6.3.0` | `FUTURE-PARITY-BACKLOG.10.6.3.0 - freeze Julia static projection` | Behavior-free exact five-target/static-authority/source-correlation/normalization/privacy plan; focused 220, Julia 7,762/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, KM 683/5,188, book/doctrines, canonical Rust 78.75s + Dart 1/1 + primary 66x2 + Phase 0 1,031/632s, and exact 1.56-GB cleanup before graph implementation. |

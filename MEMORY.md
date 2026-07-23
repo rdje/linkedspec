@@ -5,9 +5,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.2` — verified Julia remaining private static targets.
-- latest_commit: `197538f7` is the clean `.10.6.3.1` base; `.10.6.3.2` is the verified commit candidate.
-- active_work_unit: commit `.10.6.3.2` cleanly, then activate no-change composition `.10.6.3.3`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.3.3` — verified no-change Julia static parent closeout candidate.
+- latest_commit: `556e5ae2` cleanly commits `.10.6.3.2`; it is the base for the `.3.3` closeout candidate.
+- active_work_unit: commit `.10.6.3.3`, then activate behavior-free calls/staging/generated plan `.10.6.4.0`.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -31,7 +31,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   compiled/source correlation, Default/parent-matcher normalization, privacy fences, and `.1-.3` ownership.
   Graph `.10.6.3.1` privately retains immutable 12/14/7 data. `.10.6.3.2` completes privacy text 4/3, privacy
   identity 4/3, failed 6/4, and runtime-static 7/8; native failure stays exact beneath projection-only neutral
-  mapping. Lifecycle occurrences, no execution/events, copies/tuples, fallback, private omission, and host denial pass.
+  mapping. `.3.3` recomposes focused 389 and closes the parent without replacement code or semantic promotion.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -41,15 +41,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   eight negatives across source, programmatic/reconstructed declaration/action/blind/bare roles, selectors,
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
-- current_julia_split: `.10.6.2` closed; `.10.6.3.1` clean at `197538f7`; `.3.2` verified, then `.3.3` and `.10.6.4-.7`.
+- current_julia_split: `.10.6.2` closed; `.10.6.3` verified closed through `.3.3`; then `.10.6.4-.7`.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.3.2` passes exact 4/3 + 4/3 + 6/4 + 7/8, new 99/focused 389, Julia 7,931/primary/105,
-  5x2x66, ten Unicode legs, unchanged ledgers, book/KM 683/5,207/doctrines, canonical Rust 78.27s + Dart 1/1 + primary
-  66x2 + Phase 0 1,031/697s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
+- current_signoff: no-change `.3.3` passes committed focused 389, Julia 7,931/primary/105, 5x2x66, ten Unicode
+  legs, unchanged ledgers, book/KM 683/5,210/doctrines, canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/653s, and exact 1.56-GB cleanup preserving 517 Pgen artifacts.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.3.2` implementation/tests/docs are verified; regenerate KM,
-  run final doctrine/diff checks, commit, clear brief, then activate `.3.3` only from the clean commit.
+- blockers: none. in_flight_uncommitted: `.10.6.3.3` verified no-change closeout docs/KM/cleanup and commit; do not
+  activate `.10.6.4.0` until the closeout tree is clean.

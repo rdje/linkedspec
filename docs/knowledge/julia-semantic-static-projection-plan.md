@@ -23,10 +23,11 @@ answers:
   - "how does Julia distinguish repeated semantic lifecycle occurrences"
   - "are Julia semantic static projection copies detached from retained storage"
   - "which Julia task recomposes and closes all five static targets"
+  - "is the Julia private static semantic projection parent composition closed"
 date: 2026-07-22
-status: current; all five private construction targets implemented, composed closeout pending
+status: current; all five private construction targets implemented and composition closed
 tags: [julia, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.2; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
+evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.3; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
 reverify: "python3 tools/check_semantic_introspection_contract.py && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-semantic-static-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'"
 ---
 
@@ -150,6 +151,19 @@ New proof is 99 assertions; source/outcome/graph/remaining focus is 389 and comp
 unchanged. Canonical Rust admission passes in 78.27 seconds, Dart admission is 1/1, primary is 66x2, and Phase 0
 is 1,031/1,031 in 697 seconds. All five targets now exist across `.10.6.3.1-.2`; no-change `.10.6.3.3` owns their
 recomposition and parent closure, and Julia remains unpromoted.
+
+## Composed closeout
+
+No-change leaf `.10.6.3.3` reruns the four committed source 135, outcome 85, graph 70, and remaining-target 99
+suites together at focused 389. It adds no production code, replacement test, fixture, API, or format change. The
+composition reconfirms all five exact targets plus occurrence identity, detached/immutable copies, generic failure
+fallback, private omission, and host denial under complete Julia, cross-backend, and canonical gates.
+
+Complete Julia remains 7,931/primary/105; primary passes 5x2x66 and all ten Unicode legs pass. Every neutral/public
+ledger remains unchanged. Canonical Rust semantic admission passes in 80.89 seconds, Dart is 1/1, primary is 66x2,
+and Phase 0 is 1,031/1,031 in 653 seconds. Parent `.10.6.3` is composition-closed without query, observation,
+rollout, or admission promotion. Behavior-free calls/staging/generated authority plan `.10.6.4.0` is the next
+dependency-eligible leaf only after the closeout commit is clean.
 
 See [[julia-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-static-rule-authority]], [[perl-semantic-static-projection]],

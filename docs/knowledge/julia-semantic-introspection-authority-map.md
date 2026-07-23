@@ -57,10 +57,12 @@ answers:
   - "does Julia runtime-static construction contain semantic observations"
   - "how are repeated Julia lifecycle markers identified in the static projection"
   - "which Julia semantic static projection task is next"
+  - "is Julia private static semantic projection composition closed"
+  - "what Julia semantic introspection task follows static projection closeout"
 date: 2026-07-22
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, and .10.6.3.0-.10.6.3.2; docs/knowledge/julia-semantic-static-projection-plan.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, and .10.6.3.0-.10.6.3.3; docs/knowledge/julia-semantic-static-projection-plan.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'; rg -n 'semantic_index|semantic_snapshot|compilation_authority|compilation_diagnostic|entry_selection|generated_plan_input|semantic_query|SemanticQuery|definition_order|ActionSourceSpan|regex_slot_selected|diagnostic_output_sink|to_descriptor_json' julia/src"
 ---
 
@@ -229,7 +231,13 @@ with exact order, return shape, source, and containment. Every proof copy is fre
 tuple-backed, and source ceilings, public omission, path/host/AST/IR/compiler/loader/emitter/executor/trace/sink/
 observer/environment/time/random denial are locked. New 99/focused 389 and Julia 7,931/primary/105 pass with
 5x2x66, ten Unicode legs, unchanged ledgers, and canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0
-1,031/697s. All five private targets now exist; no-change composition `.10.6.3.3` is next, with no promotion.
+1,031/697s. All five private targets now exist.
+
+No-change leaf `.10.6.3.3` recomposes the committed four-suite topology at focused 389 without production/test
+replacement. Complete Julia remains 7,931/primary/105, primary is 5x2x66, all ten Unicode legs pass, every ledger
+is unchanged, and canonical Rust 80.89s + Dart 1/1 + primary 66x2 + Phase 0 1,031/653s pass. This closes private
+static parent `.10.6.3` without public query, runtime observation, or promotion. Calls, bindings, staged provenance,
+and generated-plan meaning are next owned by behavior-free authority/split leaf `.10.6.4.0` after the clean commit.
 
 Implementation is dependency-ordered under `.10.6`: Unicode rule-label closure; source-only copied input/map
 `.10.6.2.1`; staged compiled-or-failed authority `.10.6.2.2`; composed foundation closeout `.10.6.2.3`; static

@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.3 — close Julia static projection
+
+Closed Julia's private static semantic parent by recomposing the four committed source, outcome, graph, and
+remaining-target suites. This leaf intentionally adds no production code, replacement test, fixture, contract,
+public API, or generated-format change: the existing proof topology passes together at focused 389 and confirms
+graph 12 records / 14 relations / seven source references, privacy `text` 4/3, privacy `identity` 4/3, failed 6/4,
+and runtime-static 7/8.
+
+The composed proof keeps native-to-neutral failure normalization projection-only, construction free of execution
+and event state, repeated lifecycle occurrences distinct, retained values recursively immutable, materializations
+detached, generic failure fallback nonempty, the proof seam private, and path/AST/IR/compiler/runtime host
+authority absent. Julia still exposes neither semantic records/query nor runtime observation at this boundary.
+
+Complete Julia passes 7,931 package assertions, primary process conformance, and corpus 105/105. The full primary
+matrix passes 5 backends x 2 environments x 66 cases and all ten Unicode-manifest legs pass. Unicode stays
+806/9/8/2; semantic governance stays 6 groups / 20 responses / 81 mutations at rollout 4/9 and native admission
+3/6; capability/generated/public stay 80/0/0, v1/10/80-0-0, and 59/27/0. Canonical local CI passes all four
+doctrines, Rust semantic admission in 80.89 seconds, Dart 1/1, primary 66/66 twice, and Phase 0 1,031/1,031 in 653
+seconds. mdBook, Knowledge Map 683/5,210, memory/task metadata, diff hygiene, and exact 1.56-GB safe artifact
+cleanup complete the closeout while preserving all 517 Pgen issue artifacts. Behavior-free calls/staging/generated
+authority plan `.10.6.4.0` is next only after this commit is clean.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.3.2 — complete Julia static targets
 
 Completed Julia's remaining private static semantic construction targets. The already-compiled projection now

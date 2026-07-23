@@ -545,7 +545,10 @@ Three backbone items tracked major structural modernization — all done:
   occurrence identity, no execution/events, generic failure fallback, fresh detached copies, tuple immutability,
   private omission, and host denial. New 99/focused 389 and Julia 7,931/primary/105 pass with 5x2x66, all ten
   Unicode legs, unchanged ledgers, and canonical Rust 78.27s + Dart 1/1 + primary 66x2 + Phase 0 1,031/697s.
-  All five private static targets now exist; no-change composition `.10.6.3.3` is next without promotion.
+  All five private static targets now compose under no-change closeout `.10.6.3.3`: committed focused 389,
+  complete Julia 7,931/primary/105, 5x2x66, all ten Unicode legs, unchanged ledgers, and canonical Rust 80.89s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/653s pass without replacement code. Parent `.10.6.3` is closed without
+  promotion; behavior-free calls/staging/generated plan `.10.6.4.0` is next after the clean closeout commit.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
