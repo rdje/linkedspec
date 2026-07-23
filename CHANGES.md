@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.4 — close Julia Unicode labels
+
+Composed the four committed Julia Unicode suites without changing production code, tests, fixtures, the neutral
+contract, public API, generated format, or semantic ledgers. The independent checker regenerates and compares all
+806 pinned Unicode 17 ranges and retains the exact 9-positive / 8-negative / 2-distinct fixture topology. Focused
+composition passes 3,831 assertions: classifier endpoints/fixtures/prefix boundaries, all five parser routes, four
+validator roles, exact positive/distinct downstream identity, exhaustive negative rejection, and unrelated-
+identifier isolation.
+
+Complete Julia passes 7,542 package assertions, primary process conformance, and corpus 105/105. The full primary
+matrix passes 5 backends x 2 environments x 66 cases and the self-hosted Unicode manifest passes all ten legs at
+1/1. No-drift remains Unicode 806/9/8/2, semantic 6 groups / 20 queries / 81 mutations at rollout 4/9 and admission
+3/6, capability 80/0/0, generated source v1/10/80-0-0, and public aggregate-selector surface 59/27/0. Canonical,
+durable, and cleanup evidence complete the same no-promotion boundary: Knowledge Map 682/5,151, mdBook, memory,
+task metadata, all four doctrines, and diff hygiene pass. The staged canonical gate passes Rust semantic admission
+1/1 in 78.46 seconds, Dart admission 1/1, primary 66/66 under default and POSIX, and Phase 0 1,031/1,031 in 630
+seconds. Exact cleanup removes the regenerated 12-MB book, 826-MB Rust dependency output, 727-MB incremental
+output, and 28-KB Python cache—about 1.57 GB—while preserving `rgx/pgen-issues/artifacts`. Parent `.10.6.1`
+closes; behavior-free `.10.6.2.0` follows the clean commit.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.3 — isolate Julia Unicode labels
 
 Added one omission-sensitive Julia suite that derives all eight negative rule-label fixtures directly from the

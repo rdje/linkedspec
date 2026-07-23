@@ -464,8 +464,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `julia/test/unicode_rule_label_negative_isolation_test.jl`: it consumes all 8 negatives across source, both AST
   trust routes, all four label roles, selectors, loaders, primary commands, and artifact denial, then locks
   function/parameter/ActionParser/lifecycle/mark/regex/mode isolation. Run all four Unicode test files for focused
-  3,831; complete Julia is 7,542/primary/105. `.4` owns only composed closeout. Use a writable depot first; never
-  infer membership, identity, or adjacent-grammar behavior from host PCRE2 examples.
+  3,831; complete Julia is 7,542/primary/105. Closeout `.10.6.1.4` reruns those committed suites, the complete Julia
+  gate, 5x2x66 plus all ten manifest legs, and Unicode/semantic/capability/generated/public no-drift without adding
+  code or tests. It passes canonical Rust/Dart/primary/Phase 0, closes `.10.6.1`, and hands off only to behavior-free
+  source/outcome plan `.10.6.2.0`. Use a writable depot first; never infer membership, identity, or adjacent-grammar
+  behavior from host PCRE2 examples.
 
 ---
 

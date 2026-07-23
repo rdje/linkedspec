@@ -8,10 +8,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia negative rejection and unrelated-grammar isolation `FUTURE-PARITY-BACKLOG.10.6.1.3` is active task-tree-
-  first from clean exact-identity commit `1ee7c0e6`. Focused/complete Julia, full 5x2x66, the ten-leg Unicode
-  manifest, no-drift contracts, durable synchronization, canonical signoff, and exact generated-cache cleanup are
-  complete. Only the clean per-slice commit remains before closeout `.10.6.1.4` activation.
+- Julia Unicode composition closeout `FUTURE-PARITY-BACKLOG.10.6.1.4` is active task-tree-first from clean
+  negative/isolation commit `0ce5505f`. The committed four-suite focused 3,831, complete Julia 7,542/primary/105,
+  full 5x2x66, ten 1/1 Unicode-manifest legs, and all no-drift contracts are green without code/test/fixture/API/
+  format/ledger change. Durable synchronization, canonical Rust 78.46s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/630s, and exact 1.57-GB cleanup are complete. Only the clean commit remains before behavior-free
+  source/outcome plan `.10.6.2.0` activates.
 
 The preflight reproduced exactly 5,175 required Unicode 17 `XID_Continue` scalars missing from host PCRE2 `\w`
 and 923 forbidden extras, plus native 8/9 positive parsing, forbidden `²`, `Top:::` truncation, and direct/JSON-
@@ -37,6 +39,18 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.4 — close Julia Unicode labels**
+  (DONE in this commit from clean base `0ce5505f`).
+
+  **Result:** The committed five-leaf Julia Unicode prerequisite composes and parent `.10.6.1` closes without
+  production/test/fixture/contract/API/format changes or semantic promotion.
+
+  **Proof:** Focused 3,831; Julia 7,542/primary/105; primary 5x2x66 plus ten 1/1 manifest legs; Unicode 806/9/8/2;
+  semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,151;
+  canonical Rust 78.46s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s; exact 1.57-GB cleanup preserving Pgen.
+
+  **Next:** after the clean commit, freeze Julia's behavior-free semantic source/outcome boundary in `.10.6.2.0`.
+
 - 2026-07-22: **FUTURE-PARITY-BACKLOG.10.6.1.3 — isolate Julia Unicode labels**
   (DONE in this commit from clean base `1ee7c0e6`).
 

@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.4` — a prerequisite closes only when its committed proof composes):
+  The core classifier, positive identity, and negative/isolation leaves already established their own boundaries,
+  but Julia semantic construction must depend on one parent-level proof that those committed suites coexist with
+  the complete backend and all cross-backend ledgers. The closeout therefore adds no replacement test or behavior;
+  it reruns the exact four-suite topology, complete Julia, both full and Unicode-specific ten-leg matrices, and
+  every no-drift contract before closing `.10.6.1`.
+
+  This composition is also a promotion fence. Unicode rule-label readiness is a prerequisite for Julia semantic
+  privacy fixtures, not Julia semantic admission itself. The closeout must leave all 20 query digests, 81 mutations,
+  rollout 4/9, native admission 3/6, capability 80/0/0, generated format, and public surface unchanged. The resulting
+  handoff is narrowly to behavior-free source/outcome plan `.10.6.2.0`, not directly to semantic implementation.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.3` — negative membership and adjacent grammar isolation must be
   proved independently): Consuming every neutral negative fixture across only source parsing would miss two trust
   bypasses: callers can construct or reconstruct ASTs directly, and successful validation can then feed several

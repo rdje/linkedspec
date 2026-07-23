@@ -903,8 +903,12 @@ content migration exists yet.
   grammars retain their independent boundaries. The new suite passes 1,946 assertions (focused composition 3,831;
   complete Julia 7,542/primary/105), 5x2x66 plus the ten-leg Unicode manifest, and all no-drift contracts without
   production, public-API, format, or semantic-governance change. Canonical Rust admission 79.56s, Dart 1/1,
-  primary 66x2, Phase 0 1,031/645s, and exact 1.57-GB cleanup pass. Composed closeout `.10.6.1.4` follows the clean
-  negative/isolation commit.
+  primary 66x2, Phase 0 1,031/645s, and exact 1.57-GB cleanup pass. Composed closeout `.10.6.1.4` now reruns the
+  committed generated/focused/complete/matrix/no-drift topology: focused 3,831, Julia 7,542/primary/105, 5x2x66,
+  all ten Unicode-manifest legs, Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated
+  v1/10/80-0-0, and public 59/27/0 pass without any production/test/fixture/API/format/ledger change. Canonical Rust
+  78.46s, Dart 1/1, primary 66x2, Phase 0 1,031/630s, and exact 1.57-GB cleanup pass. Parent `.10.6.1` is closed;
+  behavior-free Julia source/outcome planning `.10.6.2.0` follows the clean closeout commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -911,8 +911,12 @@ The suite passes 1,946 assertions; focused composition is 3,831 and complete Jul
 5x2x66 matrix, all ten Unicode-manifest legs, and Unicode/semantic/capability/generated/public no-drift contracts
 pass without production, API, format, or semantic-governance change. Canonical proof passes Rust admission 1/1 in
 79.56 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 645 seconds; exact cleanup reclaims about 1.57 GB
-while preserving Pgen. `.4` owns composed closeout. Semantic governance stays 6/20/81 at rollout 4/9 and
-admission 3/6.
+while preserving Pgen. Closeout `.10.6.1.4` reruns the committed four-suite proof at focused 3,831, complete Julia
+7,542/primary/105, 5x2x66, and all ten Unicode-manifest legs. Unicode, semantic, capability, generated-source, and
+public ledgers remain unchanged; the closeout adds no production/test/fixture/API/format state. Canonical proof
+passes Rust admission 1/1 in 78.46 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds; exact
+cleanup reclaims about 1.57 GB while preserving Pgen. Parent `.10.6.1` closes and behavior-free `.10.6.2.0`
+follows after the clean commit. Semantic governance stays 6/20/81 at rollout 4/9 and admission 3/6.
 
 ## Exact v1 record model
 
@@ -1282,7 +1286,8 @@ The dependency order is:
 | `.10.6.1.1` | Julia generated classifier plus parser/validator routing | complete; focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical signoff |
 | `.10.6.1.2` | Julia exact positive/distinct downstream identity | complete; 130 new assertions, focused 1,885, Julia 5,596/primary/105, 5x2x66, and ten-leg manifest without production change |
 | `.10.6.1.3` | Julia exhaustive negative rejection and unrelated-grammar isolation | complete; 1,946 new assertions, focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, canonical signoff, and cleanup without production change |
-| `.10.6.1.4-.10.6.7` | Julia Unicode closeout through semantic admission | pending |
+| `.10.6.1.4` | Julia composed Unicode-label closeout | complete; committed focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, no-drift, canonical signoff, and cleanup without promotion |
+| `.10.6.2-.10.6.7` | Julia semantic source/outcome through exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

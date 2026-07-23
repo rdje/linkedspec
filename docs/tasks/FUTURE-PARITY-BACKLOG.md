@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-22` (Julia Unicode negative/isolation `.10.6.1.3` rejects all eight negatives through every
-  source/trust/selector/loader/primary/artifact route and locks adjacent grammars without production change)
+- Last updated: `2026-07-22` (Julia Unicode closeout `.10.6.1.4` composes the committed five-leaf prerequisite,
+  closes `.10.6.1` without semantic promotion, and hands off only to behavior-free `.10.6.2.0`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9130,7 +9130,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.10.6.0 - map Julia semantic authorities`
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.1`
-  Status: `active`
+  Status: `done` (2026-07-22; composed Julia Unicode prerequisite closed without semantic promotion)
   Goal: Align every Julia rule-label route with pinned Unicode 17 `XID_Continue` before semantic construction.
   Children: `.10.6.1.0`, `.10.6.1.1`, `.10.6.1.2`, `.10.6.1.3`, `.10.6.1.4`
   Depends on: `.10.6.0`
@@ -9146,11 +9146,11 @@ before implementation.
     the generated artifact, parser/validator ownership, route suites, isolation suites, and gate order in `.0`.
   - [x] **GENERATE / ROUTE** — Emit one deterministic internal Julia classifier/scanner from the existing neutral
     ranges and consume it at all five parser sites plus the authoritative declaration/target validator boundary.
-  - [ ] **EXACT IDENTITY** — Prove all nine positive fixtures and both distinct pairs through every parsed,
+  - [x] **EXACT IDENTITY** — Prove all nine positive fixtures and both distinct pairs through every parsed,
     compiled, reconstructed, generated, emitted, selector, diagnostic, trace, loader, and primary route.
-  - [ ] **NEGATIVE / ISOLATION** — Reject all eight negatives without prefix recovery or external-AST bypass and
+  - [x] **NEGATIVE / ISOLATION** — Reject all eight negatives without prefix recovery or external-AST bypass and
     prove function/parameter/helper/action/lifecycle/split/conditional/fluent/mark/regex grammars are unchanged.
-  - [ ] **COMPOSE / NO PROMOTION** — Pass complete Julia and canonical gates, close `.10.6.1`, and keep semantic
+  - [x] **COMPOSE / NO PROMOTION** — Pass complete Julia and canonical gates, close `.10.6.1`, and keep semantic
     governance exactly 6/20/81 at rollout 4/9 and native admission 3/6 before handing off to `.10.6.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.0`
@@ -9390,12 +9390,47 @@ before implementation.
       and commit before activating closeout `.10.6.1.4`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.1.4`
-    Status: `pending`
+    Status: `done` (2026-07-22; no-change composed signoff from clean `0ce5505f`)
     Goal: Compose complete Julia Unicode-label signoff without semantic promotion.
     Depends on: `.10.6.1.3`
     Acceptance: Re-run generated artifact, focused identity/isolation, complete Julia package/primary/corpus,
       Unicode/semantic/generated/public/canonical gates, durable synchronization, and cleanup; close `.10.6.1`
       while keeping Julia semantic rollout/admission pending and handing off only to `.10.6.2`.
+    Verification plan: Make no production, test, fixture, neutral-contract, API, generated-format, or semantic-ledger
+      change. Re-run the independent Unicode generator/checker; compose classifier endpoints/fixtures, all five
+      native parser routes, exact positive/distinct identity, exhaustive negative rejection, and adjacent-grammar
+      isolation through all four committed Julia Unicode suites. Re-run complete Julia package/primary/corpus,
+      five-backend default/POSIX primary and Unicode-manifest matrices, and Unicode/semantic/capability/generated/
+      public no-drift checks. Stage only closeout documentation before the canonical local gate so tracked-input and
+      doctrine enforcement see the final committed test topology. Synchronize parent/child status, roadmaps, book,
+      Toolbox, Knowledge Map, live docs, and bounded memory; remove only regenerated caches, commit cleanly, then
+      hand off to behavior-free Julia semantic source/outcome planning `.10.6.2.0`.
+    Verification: The independent generated checker passes all 806 ranges, 9 positives, 8 negatives, and 2 exact-
+      distinct pairs. The four committed Julia suites compose exactly 3,831 assertions: 1,619 range endpoints,
+      23 fixtures, 32 prefix/scalar boundaries, 81 native parser/validator routes, 130 positive/distinct downstream
+      identities, and 1,946 exhaustive negative/isolation assertions. Complete Julia passes 7,542 package
+      assertions, primary process conformance, and corpus 105/105. The primary matrix passes 5 backends x 2
+      environments x 66 cases; the self-hosted Unicode manifest passes all ten legs at 1/1.
+
+      No-drift remains exact: Unicode 806/9/8/2; semantic 6 groups / 20 queries / 81 mutations at rollout 4/9 and
+      native admission 3/6; capability 80/0/0; generated source v1 / 10 families / 80-0-0; public aggregate-selector
+      surface 59 files / 27 classified history / 0 current examples. No production, test, fixture, neutral contract,
+      public API, generated format, or semantic ledger changes in this closeout. Knowledge Map 682/5,151, mdBook,
+      memory, task metadata, all four doctrines, and diff hygiene pass. The staged canonical gate passes Rust
+      semantic admission 1/1 in 78.46 seconds, Dart admission 1/1, primary 66/66 in both environments, and Phase 0
+      1,031/1,031 in 630 seconds. Exact cleanup removes the regenerated 12-MB book, 826-MB Rust deps, 727-MB
+      incremental state, and 28-KB Python cache—about 1.57 GB—while preserving Pgen.
+
+    #### Acceptance Checklist
+
+    - [x] **GENERATED / FOCUSED COMPOSITION** — Regenerate/compare all 806 ranges and pass classifier/routes/
+      identity/negative-isolation composition from the committed four-suite topology.
+    - [x] **COMPLETE JULIA / MATRICES** — Pass complete Julia package/primary/105 plus 5x2x66 and all ten Unicode-
+      manifest legs without production repair.
+    - [x] **NO-DRIFT / NO PROMOTION** — Keep Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0,
+      generated v1/10/80-0-0, public 59/27/0, and all production/API/format/ledger state unchanged.
+    - [x] **CANONICAL / DURABLE CLOSEOUT** — Pass canonical Rust/Dart/primary/Phase 0, synchronize every durable
+      layer, close `.10.6.1`, clean generated caches, commit, and make `.10.6.2.0` the sole next eligible leaf.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.2`
   Status: `pending`
@@ -11918,7 +11953,11 @@ Rust admission 80.21s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s, and exact 
 production or governance change. Negative/isolation `.10.6.1.3` is complete from clean `1ee7c0e6`: its 1,946 new/
 focused 3,831, complete Julia 7,542/primary/105, 5x2x66, ten manifest legs, no-drift checks, Knowledge Map
 682/5,150, canonical Rust 79.56s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s, and exact 1.57-GB cleanup pass
-without production or governance change. Closeout `.10.6.1.4` is the sole next eligible leaf after the clean commit.
+without production or governance change. Closeout `.10.6.1.4` is complete from clean `0ce5505f`: committed focused
+3,831, Julia 7,542/primary/105, 5x2x66, ten manifest legs, no-drift ledgers, Knowledge Map 682/5,151, canonical
+Rust 78.46s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.57-GB cleanup pass without any code/test/
+fixture/API/format/ledger change. Parent `.10.6.1` is closed; `.10.6.2.0` is the sole next eligible leaf after the
+clean closeout commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -12395,11 +12434,12 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `done` | Composed committed-code runtime-observation signoff closes the parent without semantic promotion. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `done` | One exact 12-role consumer admits Dart at 6/20/81, rollout 4/9, admission 3/6, and closes `.10.5`. |
 | 74.5.0 | `FUTURE-PARITY-BACKLOG.10.6.0` | `done` | Exact Julia semantic/Unicode authority map and `.10.6.1-.7` split close without behavior or governance change. |
-| 74.5.1 | `FUTURE-PARITY-BACKLOG.10.6.1` | `active` | Align every Julia rule-label route to pinned Unicode 17 without semantic promotion. |
+| 74.5.1 | `FUTURE-PARITY-BACKLOG.10.6.1` | `done` | Julia rule-label parsing, validation, identity, invalid rejection, isolation, and composed signoff align to pinned Unicode 17 without semantic promotion. |
 | 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `done` | Exact generated Julia classifier/scanner, five parser routes, validator roles, fixture/isolation suites, and gates are frozen without behavior. |
 | 74.5.1.1 | `FUTURE-PARITY-BACKLOG.10.6.1.1` | `done` | Generated 806-range classifier plus all five parser and four validator roles pass focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical proof without promotion. |
 | 74.5.1.2 | `FUTURE-PARITY-BACKLOG.10.6.1.2` | `done` | Ten unique positive/distinct labels pass 130 exact downstream route assertions, Julia 5,596/primary/105, 5x2x66, ten-leg manifest, and canonical proof without production change. |
 | 74.5.1.3 | `FUTURE-PARITY-BACKLOG.10.6.1.3` | `done` | All eight negatives reject across Julia trust/source/selector/loader/primary/artifact routes; adjacent grammars remain exact with no production change. |
+| 74.5.1.4 | `FUTURE-PARITY-BACKLOG.10.6.1.4` | `done` | Committed focused 3,831, Julia 7,542/primary/105, 5x2x66, ten-leg manifest, no-drift, canonical, and cleanup close `.10.6.1` without promotion. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -13074,6 +13114,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.4` | No code/test/fixture/contract/API/format/ledger change; independent generated 806/9/8/2; committed four-suite focused 3,831; complete Julia 7,542/primary/105; primary 5x2x66 plus ten 1/1 manifest legs; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; KM 682/5,151; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 78.46s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 630s; exact 1.57-GB generated cleanup preserving Pgen. | PASS. The five-leaf Julia Unicode prerequisite composes and closes without semantic promotion; behavior-free source/outcome plan `.10.6.2.0` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.3` | All 8 neutral negatives across complete source/no-prefix/newline, declaration/action/blind/bare x programmatic/reconstructed trust, validation/compile/descriptor/plan/emitted artifact denial, native/generated selectors, strict loaders, path-redacted primary, and function/parameter/ActionParser/lifecycle/mark/regex/mode isolation; 1,946 new/focused 3,831; complete Julia 7,542/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; primary 5x2x66 plus ten 1/1 manifest legs; KM 682/5,150; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 79.56s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 645s; exact 1.57-GB generated cleanup preserving Pgen. | PASS. Every invalid Julia label fails before artifacts, selectors preserve exact missing identity, adjacent grammars do not inherit the label class, no production/API/format/ledger change, and closeout `.10.6.1.4` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.2` | Ten unique labels derived from 9 positives + 2 distinct pairs; exact AST/compiled/maps/JSON/descriptor/plan/reconstruction, direct/generated/fresh-emitted/loaded/path-private/selectors/diagnostics/traces/inline-file-primary routes; 130 new and focused 1,885; complete Julia 5,596/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; primary 5x2x66 plus ten-leg manifest; KM 682/5,147; mdBook/memory/task/four doctrines/diff; canonical Rust admission 1/1 in 80.21s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 645s; exact 1.57-GB generated-cache cleanup preserving Pgen artifacts. | PASS. Every positive/distinct Julia label retains exact scalar identity and logical source privacy through every downstream route; no production/API/format/ledger change, and negative/isolation `.10.6.1.3` waits for the clean commit. |
 | `2026-07-22` | `FUTURE-PARITY-BACKLOG.10.6.1.1` | Generated 806-range Julia classifier and independent regeneration/endpoint/source locks; all five parser routes; declaration/action/blind/bare validator trust boundary; 1,755 focused assertions; complete Julia 5,466/primary/105; Unicode 806/9/8/2; semantic 6/20/81 at 4/9 + 3/6; generated/capability/public 80/0/0 + 59/27/0; full primary 5x2x66 plus ten-leg Unicode manifest; KM 682/5,144; mdBook/memory/task/four doctrines/diff; staged canonical Rust admission 1/1 in 79.93s, Dart 1/1, primary 66x2, Phase 0 1,031/1,031 in 663s; exact generated-cache cleanup preserving Pgen artifacts. | PASS. Julia parser/validator rule-label membership now comes only from pinned Unicode 17 data; malformed/prefix and external-AST bypasses close at the core boundary, no public API or semantic ledger moves, and exact downstream identity `.10.6.1.2` waits for the clean commit. |
@@ -13305,6 +13346,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.1.4` | `FUTURE-PARITY-BACKLOG.10.6.1.4 - close Julia Unicode labels` | No-change composition of focused 3,831, Julia 7,542/105/primary, 5x2x66 plus ten-leg manifest, unchanged semantic/capability/generated/public ledgers, KM/book/doctrines, canonical Rust admission 78.46s + Dart 1/1 + primary 66x2 + Phase 0 1,031/630s, and exact 1.57-GB cleanup; closes `.10.6.1` and hands off `.10.6.2.0`. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.3` | `FUTURE-PARITY-BACKLOG.10.6.1.3 - isolate Julia Unicode labels` | Eight exact negatives across every source/trust/selector/loader/primary/artifact route; adjacent grammar isolation; 1,946 new/focused 3,831; Julia 7,542/105/primary; 5x2x66 plus ten-leg manifest; KM/book/doctrines; canonical Rust admission 79.56s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s; and exact 1.57-GB cleanup without production/API/format/semantic-ledger change. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.2` | `FUTURE-PARITY-BACKLOG.10.6.1.2 - prove Julia Unicode identity` | Ten exact positive/distinct downstream identities; 130 new/focused 1,885; Julia 5,596/105/primary; 5x2x66 plus ten-leg manifest; KM/book/doctrines; canonical Rust admission 80.21s + Dart 1/1 + primary 66x2 + Phase 0 1,031/645s; and exact 1.57-GB cleanup without production/API/format/semantic-ledger change. |
 | `FUTURE-PARITY-BACKLOG.10.6.1.1` | `FUTURE-PARITY-BACKLOG.10.6.1.1 - route Julia Unicode labels` | Internal generated 806-range classifier, five complete-token parser routes, four-role external-AST validation, focused 1,755, complete Julia 5,466/105/primary, 5x2x66 plus ten-leg manifest, KM/book/doctrines, canonical Rust admission 79.93s + Dart 1/1 + primary 66x2 + Phase 0 1,031/663s, and exact cache cleanup without public API or semantic-ledger movement. |
@@ -13514,6 +13556,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-22`: `.10.6.1.4` composes the committed Julia Unicode topology without code, test, fixture, contract,
+  API, format, or ledger changes. Independent Unicode 806/9/8/2, focused 3,831, Julia 7,542/primary/105, primary
+  5x2x66, all ten manifest legs, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 +
+  v1/10/80-0-0 + 59/27/0, KM 682/5,151, book/memory/doctrines, canonical Rust 78.46s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/630s, and exact 1.57-GB cleanup pass. Parent `.10.6.1` closes without semantic promotion;
+  behavior-free source/outcome plan `.10.6.2.0` follows after the clean commit.
 
 - `2026-07-22`: `.10.6.1.3` consumes all eight neutral negative fixtures across complete source tokens, four
   declaration/target roles, both programmatic and reconstructed AST trust routes, validation and every artifact

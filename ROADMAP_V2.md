@@ -445,7 +445,11 @@ generated selectors, strict loading, primary commands, and every artifact bounda
 parameter, ActionParser, lifecycle, mark, regex, and mode grammars do not inherit the rule-label class. Its 1,946
 new assertions compose to focused 3,831 and Julia 7,542/primary/105; 5x2x66, ten Unicode-manifest legs, and
 no-drift contracts plus canonical Rust 79.56s/Dart 1/1/primary 66x2/Phase 0 1,031/645s and exact 1.57-GB cleanup
-pass without production or governance change. Composed `.4` follows the clean commit.
+pass without production or governance change. Composed `.10.6.1.4` now reruns the committed four-suite topology at
+focused 3,831, Julia 7,542/primary/105, 5x2x66, all ten manifest legs, and unchanged Unicode/semantic/capability/
+generated/public ledgers without production/test/API/format change. Canonical Rust 78.46s/Dart 1/1/primary 66x2/
+Phase 0 1,031/630s and exact 1.57-GB cleanup pass. Parent `.10.6.1` closes; source/outcome plan `.10.6.2.0`
+follows the clean commit.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

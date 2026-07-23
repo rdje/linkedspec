@@ -27,10 +27,11 @@ answers:
   - "does Julia reject every invalid Unicode rule label before artifact construction"
   - "do Julia rule labels change function helper lifecycle mark regex or mode identifiers"
   - "why does Julia ActionParser accept Töp but reject middle dot identifiers"
+  - "is the Julia Unicode rule-label prerequisite composition closed"
 date: 2026-07-22
 status: current
 tags: [julia, unicode, rule-labels, parser, validation, generated-source, semantic-introspection]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.3; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl; julia/test/unicode_rule_label_negative_isolation_test.jl
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.4; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl; julia/test/unicode_rule_label_negative_isolation_test.jl
 reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\"); include(\"julia/test/unicode_rule_label_negative_isolation_test.jl\")'"
 ---
 
@@ -102,6 +103,16 @@ Canonical proof passes Rust semantic admission 1/1 in 79.56 seconds, Dart admiss
 1,031/1,031 in 645 seconds. Knowledge Map 682/5,150, mdBook, memory, task metadata, all four doctrines, and diff
 hygiene pass. Exact cleanup removes the 12-MB rendered book, 826-MB Rust deps, 727-MB incremental state, and 28-KB
 Python cache—about 1.57 GB—while preserving `rgx/pgen-issues/artifacts`.
+
+Composition closeout `.10.6.1.4` adds no code or replacement test. It reruns the committed generated classifier,
+native routes/validator, positive identity, and negative/isolation suites at focused 3,831; complete Julia remains
+7,542/primary/105. The full primary matrix passes 5x2x66 and the current-grammar Unicode manifest passes all ten
+legs at 1/1. Unicode stays 806/9/8/2, semantic governance 6/20/81 at rollout 4/9 and admission 3/6, capability
+80/0/0, generated source v1/10/80-0-0, and public surface 59/27/0. Canonical proof passes Rust admission 1/1 in
+78.46 seconds, Dart 1/1, primary 66x2, and Phase 0 1,031/1,031 in 630 seconds. Knowledge Map 682/5,151, mdBook,
+memory, task metadata, all four doctrines, and diff hygiene pass; exact cleanup reclaims about 1.57 GB while
+preserving Pgen. Parent `.10.6.1` is composition-closed. The only dependency-ready successor is behavior-free
+source/outcome plan `.10.6.2.0` after the clean closeout commit.
 
 The adjacent-grammar result is intentionally not a new universal identifier policy. Function and parameter names
 stay ASCII. ActionParser retains its existing ASCII-first host-word continuation: `Töp` remains a helper, variable,
