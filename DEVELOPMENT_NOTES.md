@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.1` — separate scalar membership, punctuation scanning, and AST trust):
+  The correct replacement for Julia's five label-bearing host `\w` patterns is not another property regex. The
+  generated artifact owns only pinned Unicode 17 scalar membership and complete/prefix label classification.
+  Parser helpers own string boundaries, header colons/mode fields, edge indices, delimiters, and legal remainders.
+  The validator owns the trust boundary for programmatic and reconstructed ASTs. Keeping those responsibilities
+  separate closes host-table drift, prefix truncation, and parser-bypass failures without widening unrelated names.
+
+  Julia strings require valid character indices rather than byte arithmetic or scalar ordinals. The generated
+  scanner therefore iterates with `eachindex` and advances with `nextind`; focused tests retain the exact remainder
+  after supplementary-plane labels. Parser helpers likewise slice only at established string boundaries. The
+  implementation deliberately preserves Julia's existing index grammar rather than adopting another backend's
+  whitespace spellings.
+
+  Header scanning rejects an otherwise valid label followed by a third colon. Edge scanning accepts only the
+  established action/blind/bare remainder forms; a line that begins like an arrow but fails that grammar remains a
+  raw body element, preserving the normal syntax diagnostic instead of disappearing. Validation checks labels
+  before duplicate and target resolution, so one portable membership error owns external-AST bypasses consistently
+  in traced and untraced compilation.
+
+  The generated module remains internal and changes neither the neutral 806-range contract nor Julia's public API.
+  Focused proof is 1,755 assertions; complete Julia is 5,466 plus primary process conformance and corpus 105/105;
+  the five-backend primary matrix is 5x2x66 plus the Unicode manifest on all ten legs. Identity `.2`, negative and
+  adjacent-grammar isolation `.3`, and composed no-promotion closeout `.4` remain independent owners. Staged
+  canonical proof passes Rust admission 79.93s, Dart 1/1, primary 66x2, and Phase 0 1,031/663s; removing only the
+  regenerated book/deps/incremental/Python caches reclaims about 1.43 GB and leaves the Pgen corpus intact.
+
 - 2026-07-22 (`FUTURE-PARITY-BACKLOG.10.6.1.0` — a Unicode classifier is insufficient unless token boundaries
   and external-AST trust are co-owned): Julia's problem has three independent layers. Host PCRE2 membership is
   wrong in both directions (5,175 missing / 923 extra); parser prefix capture turns some malformed spellings into

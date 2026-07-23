@@ -62,17 +62,237 @@ struct _ScanResult
     depth::Int
 end
 
-const _HEADER_PATTERN = r"^(\w+)[ \t]*(::|:)[ \t]*([^\s/]*)[ \t]*(.*)"
-const _BODY_HEADER_PATTERN = r"^\w+[ \t]*(::|:)[ \t]*\S*"
 const _REGEX_PATTERN = r"^/([^/\\]*(?:\\.[^/\\]*)*)/"
-const _ACTION_PATTERN = r"^->[ \t]*(\w+(?:[ \t]*\|[ \t]*\w+)*)((?:\[(\d+)\])?)"
-const _BLIND_PATTERN = r"^=>[ \t]*(\w+)(?:[ \t]*\[(\d+)\])?"
-const _BARE_EDGE_PATTERN = r"^(\w+(?:[ \t]*\|[ \t]*\w+)*)(?:[ \t]*\[(\d+)\])?"
 const _LIFECYCLE_PATTERN = r"^(I|LS|LE|LX|E|EX|IT)\b"
 const _SPLIT_PATTERN = r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))"
 const _CONDITIONAL_PATTERN = r"^-\?[ \t]+\w+"
 const _FLUENT_PATTERN = r"^\.[ \t]*\w+"
 const _BOUNDED_MODE_PATTERN = r"^(AND|OR)\{(\d*)(?:,(\d*))?\}$"
+
+function _starts_with_at(text::String, prefix::AbstractString, offset::Int)
+    return 1 <= offset <= ncodeunits(text) && startswith(SubString(text, offset), prefix)
+end
+
+function _skip_horizontal_space(text::String, offset::Int)
+    cursor = offset
+    while cursor <= ncodeunits(text)
+        unit = codeunit(text, cursor)
+        if unit != 0x20 && unit != 0x09
+            break
+        end
+        cursor += 1
+    end
+    return cursor
+end
+
+function _substring_before(text::String, stop::Int)
+    if stop <= firstindex(text)
+        return ""
+    end
+    return String(SubString(text, firstindex(text), prevind(text, stop)))
+end
+
+function _substring_between(text::String, start::Int, stop::Int)
+    if start >= stop
+        return ""
+    end
+    return String(SubString(text, start, prevind(text, stop)))
+end
+
+function _substring_from(text::String, start::Int)
+    return start > ncodeunits(text) ? "" : String(SubString(text, start))
+end
+
+function _take_rule_label_at(input::AbstractString, offset::Int)
+    text = String(input)
+    if offset < firstindex(text) || offset > ncodeunits(text)
+        return nothing
+    end
+    scan = take_rule_label_prefix(SubString(text, offset))
+    if scan === nothing
+        return nothing
+    end
+    return (; label = scan.label, end_offset = offset + ncodeunits(scan.label))
+end
+
+function _parse_rule_header_fields(input::AbstractString)
+    text = String(input)
+    scan = take_rule_label_prefix(text)
+    if scan === nothing
+        return nothing
+    end
+
+    offset = _skip_horizontal_space(text, firstindex(text) + ncodeunits(scan.label))
+    is_top = false
+    if _starts_with_at(text, "::", offset)
+        is_top = true
+        offset += 2
+    elseif _starts_with_at(text, ":", offset)
+        offset += 1
+    else
+        return nothing
+    end
+    if _starts_with_at(text, ":", offset)
+        return nothing
+    end
+
+    offset = _skip_horizontal_space(text, offset)
+    mode_start = offset
+    while offset <= ncodeunits(text)
+        unit = codeunit(text, offset)
+        if unit == 0x20 || unit == 0x09 || unit == 0x2F
+            break
+        end
+        offset = nextind(text, offset)
+    end
+    mode_raw = _substring_between(text, mode_start, offset)
+    offset = _skip_horizontal_space(text, offset)
+    return (;
+        label = scan.label,
+        is_top,
+        mode_raw,
+        rest_raw = _substring_from(text, offset),
+    )
+end
+
+function _parse_index_at(input::AbstractString, offset::Int; allow_space::Bool)
+    text = String(input)
+    cursor = allow_space ? _skip_horizontal_space(text, offset) : offset
+    if !_starts_with_at(text, "[", cursor)
+        return nothing
+    end
+    cursor += 1
+    digits_start = cursor
+    while cursor <= ncodeunits(text)
+        unit = codeunit(text, cursor)
+        if unit < 0x30 || unit > 0x39
+            break
+        end
+        cursor += 1
+    end
+    if cursor == digits_start || !_starts_with_at(text, "]", cursor)
+        return nothing
+    end
+    index = tryparse(Int, _substring_between(text, digits_start, cursor))
+    if index === nothing
+        return nothing
+    end
+    return (; index, end_offset = cursor + 1)
+end
+
+function _has_valid_edge_remainder(input::AbstractString, offset::Int)
+    text = String(input)
+    if offset > ncodeunits(text)
+        return true
+    end
+    begins_with_space = codeunit(text, offset) in (0x20, 0x09)
+    trimmed_offset = _skip_horizontal_space(text, offset)
+    trimmed = _substring_from(text, trimmed_offset)
+    if isempty(trimmed) || startswith(trimmed, "#")
+        return true
+    end
+    if startswith(trimmed, "{") || startswith(trimmed, ".") ||
+            startswith(trimmed, "->") || startswith(trimmed, "=>")
+        return true
+    end
+    return begins_with_space && (
+        startswith(trimmed, "/") ||
+        match(_LIFECYCLE_PATTERN, trimmed) !== nothing ||
+        match(_SPLIT_PATTERN, trimmed) !== nothing ||
+        match(_CONDITIONAL_PATTERN, trimmed) !== nothing
+    )
+end
+
+function _parse_action_edge_prefix(input::AbstractString)
+    text = String(input)
+    if !startswith(text, "->")
+        return nothing
+    end
+    offset = _skip_horizontal_space(text, 3)
+    labels = String[]
+    while true
+        target = _take_rule_label_at(text, offset)
+        if target === nothing
+            return nothing
+        end
+        push!(labels, target.label)
+        offset = target.end_offset
+
+        after_space = _skip_horizontal_space(text, offset)
+        if !_starts_with_at(text, "|", after_space)
+            break
+        end
+        offset = _skip_horizontal_space(text, after_space + 1)
+        if _take_rule_label_at(text, offset) === nothing
+            return nothing
+        end
+    end
+
+    parsed_index = _parse_index_at(text, offset; allow_space = false)
+    index = parsed_index === nothing ? 0 : parsed_index.index
+    end_offset = parsed_index === nothing ? offset : parsed_index.end_offset
+    if !_has_valid_edge_remainder(text, end_offset)
+        return nothing
+    end
+    return (;
+        targets = [EdgeTarget(label = label, index = index) for label in labels],
+        end_offset,
+    )
+end
+
+function _parse_blind_edge_prefix(input::AbstractString)
+    text = String(input)
+    if !startswith(text, "=>")
+        return nothing
+    end
+    target = _take_rule_label_at(text, _skip_horizontal_space(text, 3))
+    if target === nothing
+        return nothing
+    end
+    parsed_index = _parse_index_at(text, target.end_offset; allow_space = true)
+    end_offset = parsed_index === nothing ? target.end_offset : parsed_index.end_offset
+    if !_has_valid_edge_remainder(text, end_offset)
+        return nothing
+    end
+    return (;
+        target = target.label,
+        index = parsed_index === nothing ? nothing : parsed_index.index,
+        end_offset,
+    )
+end
+
+function _parse_bare_edge_prefix(input::AbstractString)
+    text = String(input)
+    offset = firstindex(text)
+    labels = String[]
+    while true
+        target = _take_rule_label_at(text, offset)
+        if target === nothing
+            return nothing
+        end
+        push!(labels, target.label)
+        offset = target.end_offset
+
+        after_space = _skip_horizontal_space(text, offset)
+        if !_starts_with_at(text, "|", after_space)
+            break
+        end
+        offset = _skip_horizontal_space(text, after_space + 1)
+        if _take_rule_label_at(text, offset) === nothing
+            return nothing
+        end
+    end
+
+    parsed_index = _parse_index_at(text, offset; allow_space = true)
+    index = parsed_index === nothing ? nothing : parsed_index.index
+    end_offset = parsed_index === nothing ? offset : parsed_index.end_offset
+    return (;
+        targets = [BareEdgeTarget(label = label, index = index) for label in labels],
+        end_offset,
+    )
+end
+
+_starts_with_edge_token(input::AbstractString) = startswith(input, "->") || startswith(input, "=>")
 
 function parse_spec(
     source::AbstractString;
@@ -175,15 +395,14 @@ function _parse_rule_header(lines, index::Int)
     end
 
     trimmed = strip(lines[index])
-    match_result = match(_HEADER_PATTERN, trimmed)
-    if match_result === nothing
+    fields = _parse_rule_header_fields(trimmed)
+    if fields === nothing
         return nothing
     end
 
-    label = match_result.captures[1]
-    colon = match_result.captures[2]
-    mode_raw = match_result.captures[3]
-    rest_raw = match_result.captures[4]
+    label = fields.label
+    mode_raw = fields.mode_raw
+    rest_raw = fields.rest_raw
     parsed_mode = _parse_mode_suffix_strict(mode_raw)
 
     if parsed_mode === nothing
@@ -194,7 +413,7 @@ function _parse_rule_header(lines, index::Int)
         mode = parsed_mode
     end
 
-    return _ParsedHeader(RuleHeader(label, colon == "::", mode, rest, index), index + 1)
+    return _ParsedHeader(RuleHeader(label, fields.is_top, mode, rest, index), index + 1)
 end
 
 function _parse_mode_suffix_strict(raw::AbstractString)
@@ -282,6 +501,9 @@ function _parse_inline_body(rest::AbstractString, line_number::Int, lines, curso
             allow_bare_edge = isempty(elements),
         )
         if parsed === nothing
+            if isempty(elements) || _starts_with_edge_token(trimmed)
+                push!(elements, BodyElement(RawBodyElementKind(trimmed), trimmed, line_number))
+            end
             break
         end
         push!(elements, parsed.element)
@@ -307,7 +529,7 @@ function _collect_body(lines, start::Int)
             continue
         end
 
-        if occursin(_BODY_HEADER_PATTERN, trimmed)
+        if _parse_rule_header_fields(trimmed) !== nothing
             break
         end
 
@@ -373,6 +595,9 @@ function _parse_body_elements(lines, cursor::_LineCursor)
             allow_bare_edge = isempty(elements),
         )
         if parsed === nothing
+            if isempty(elements) || _starts_with_edge_token(trimmed)
+                push!(elements, BodyElement(RawBodyElementKind(trimmed), trimmed, line_number))
+            end
             break
         end
 
@@ -410,12 +635,10 @@ function _parse_single_element(
         )
     end
 
-    action_match = match(_ACTION_PATTERN, trimmed)
-    if action_match !== nothing
-        full_match = action_match.match
-        targets_text = action_match.captures[1]
-        index = something(tryparse(Int, something(action_match.captures[3], "")), 0)
-        targets = [EdgeTarget(label = strip(target), index = index) for target in split(targets_text, '|') if !isempty(strip(target))]
+    action_prefix = _parse_action_edge_prefix(trimmed)
+    if action_prefix !== nothing
+        full_match = _substring_before(String(trimmed), action_prefix.end_offset)
+        targets = action_prefix.targets
         rest = lstrip(_drop_prefix(trimmed, full_match))
         saved_index = cursor.index
 
@@ -448,12 +671,11 @@ function _parse_single_element(
         )
     end
 
-    blind_match = match(_BLIND_PATTERN, trimmed)
-    if blind_match !== nothing
-        full_match = blind_match.match
-        target = blind_match.captures[1]
-        index_text = blind_match.captures[2]
-        index = index_text === nothing ? nothing : tryparse(Int, index_text)
+    blind_prefix = _parse_blind_edge_prefix(trimmed)
+    if blind_prefix !== nothing
+        full_match = _substring_before(String(trimmed), blind_prefix.end_offset)
+        target = blind_prefix.target
+        index = blind_prefix.index
         rest = lstrip(_drop_prefix(trimmed, full_match))
         saved_index = cursor.index
 
@@ -582,23 +804,13 @@ function _parse_single_element(
 end
 
 function _parse_bare_edge(trimmed::AbstractString, lines, cursor::_LineCursor, line_number::Int)
-    bare_match = match(_BARE_EDGE_PATTERN, trimmed)
-    if bare_match === nothing
+    bare_prefix = _parse_bare_edge_prefix(trimmed)
+    if bare_prefix === nothing
         return nothing
     end
 
-    full_match = bare_match.match
-    labels = [
-        strip(label) for label in split(bare_match.captures[1], '|')
-        if !isempty(strip(label))
-    ]
-    if isempty(labels)
-        return nothing
-    end
-
-    index_text = bare_match.captures[2]
-    index = index_text === nothing ? nothing : tryparse(Int, index_text)
-    targets = [BareEdgeTarget(label = label, index = index) for label in labels]
+    full_match = _substring_before(String(trimmed), bare_prefix.end_offset)
+    targets = bare_prefix.targets
     rest = lstrip(_drop_prefix(trimmed, full_match))
     saved_index = cursor.index
 

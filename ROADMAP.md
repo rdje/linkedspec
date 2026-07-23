@@ -103,9 +103,14 @@ truncates `Top:::` to `Top`, and lets programmatic/reconstructed action/blind/ba
 into artifacts. Julia work is therefore dependency-ordered as Unicode closure `.10.6.1`, opaque source/outcome
 `.2`, private static `.3`, calls/staging/generated `.4`, immutable typed/raw query `.5`, typed runtime observation
 `.6`, and one exact 12-role admission `.7`. The audit changes no Julia behavior or semantic governance state.
-Planning `.10.6.1.0` now fixes one generated internal 806-range classifier/scanner, all five parser routes, the
-four declaration/target validator roles, exact 9/8/2 downstream/isolation proof, and `.1-.4` gate order; it is
-behavior-free, and implementation `.10.6.1.1` follows only after its clean commit.
+Planning `.10.6.1.0` fixes one generated internal 806-range classifier/scanner, all five parser routes, the four
+declaration/target validator roles, exact 9/8/2 downstream/isolation proof, and `.1-.4` gate order. Core
+implementation `.10.6.1.1` now deterministically emits and independently checks all 806 ranges, replaces every
+native label-bearing host regex with scalar-safe scanners, rejects prefix truncation/third colons, preserves
+malformed arrows as raw syntax, and validates parsed/programmatic/reconstructed declarations plus all target
+kinds. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass; exact identity `.2`
+is next after canonical Rust admission 79.93s, Dart 1/1, primary 66x2, and Phase 0 1,031/663s all pass and the
+clean implementation commit lands, without semantic promotion.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

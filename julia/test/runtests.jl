@@ -27,6 +27,8 @@ include("uniform_binding_contract_test.jl")
 include("punctuation_light_zero_arg_contract_test.jl")
 include("complete_named_mark_contract_test.jl")
 include("diagnostic_output_contract_test.jl")
+include("unicode_rule_label_classifier_test.jl")
+include("unicode_rule_label_routes_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(

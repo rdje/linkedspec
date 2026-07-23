@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.1 — route Julia Unicode labels
+
+Julia rule-label parsing and validation now use the repository's pinned Unicode 17 `XID_Continue` contract instead
+of five host PCRE2 `\w` routes. The existing neutral generator emits one deterministic internal
+`julia/src/spec/UnicodeRuleLabel.jl` with exact contract/version/hash/range-count metadata, all 806 merged ranges,
+half-open binary-search membership, complete-label validation, and a supplementary-safe prefix scanner. The Julia
+module includes it before the parser without adding a public export; the independent checker regenerates and
+byte-compares the artifact, extracts all endpoints, denies stale host-regex sites, and locks test/CI registration.
+
+Header and body-boundary parsing share complete label/colon/mode scanning with explicit third-colon rejection.
+Action, blind, and bare scanners consume complete pinned labels while retaining established index and remainder
+syntax. Malformed arrows remain raw elements so ordinary syntax validation reports them instead of silently
+discarding a partial edge. `_check_rule_labels` now guards parsed, programmatic, and JSON-reconstructed declarations
+plus all three target roles immediately after nonempty-spec validation, using portable `invalid_rule_label` /
+`validate_rule_labels` diagnostics before duplicate, structure, or target resolution.
+
+Focused proof passes 1,755 classifier and native-route assertions; complete Julia passes 5,466 package assertions,
+primary process conformance, and corpus 105/105. Unicode remains 806/9/8/2, semantic governance remains 6/20/81
+at rollout 4/9 and native admission 3/6, and the five-backend default/POSIX matrix passes 5x2x66 plus the self-hosted
+Unicode manifest on all ten legs. Exact downstream identity, exhaustive negative/isolation, and composed closeout
+remain dependency-owned by `.10.6.1.2-.4`; this core slice does not promote semantic governance.
+
+Staged canonical local CI passes Rust semantic admission 1/1 in 79.93 seconds, Dart admission 1/1, primary 66/66
+under both default and POSIX, and Phase 0 1,031/1,031 in 663 seconds. Knowledge Map 682/5,144, mdBook, memory,
+task metadata, all four doctrines, and diff hygiene pass. Post-signoff cleanup removes exactly the regenerated
+12-MB book, 824-MB Rust dependency output, 590-MB incremental output, and 28-KB Python cache—about 1.43 GB—while
+preserving tracked source and `rgx/pgen-issues/artifacts`.
+
 ## 2026-07-22 — FUTURE-PARITY-BACKLOG.10.6.1.0 — freeze Julia Unicode label routes
 
 Completed the behavior-free implementation plan for Julia's pinned Unicode 17 rule-label prerequisite. An

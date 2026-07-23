@@ -377,6 +377,7 @@ const PARITY_STATUS = "runtime-corpus-primary-cli"
 include("trace/Trace.jl")
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
+include("spec/UnicodeRuleLabel.jl")
 include("action/ActionAst.jl")
 include("action/ActionParser.jl")
 include("action/FunctionRegistry.jl")

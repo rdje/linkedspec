@@ -863,8 +863,9 @@ exception identity through generated execution's broad error translation. Return
 deep detachment because immutable Julia structs may still contain mutable vectors and dictionaries; raw-neutral
 numeric validation must reject booleans even though `Bool` is an `Integer` subtype in Julia.
 
-ADR `0051` alignment is the first prerequisite. Julia's five declaration/reference patterns currently use host
-PCRE2 `\w` backed by Unicode 16.0.0, not the pinned Unicode 17.0.0 `XID_Continue` table. Exhaustive comparison finds
+ADR `0051` alignment is the first prerequisite. Before `.10.6.1.1`, Julia's five declaration/reference patterns
+used host PCRE2 `\w` backed by Unicode 16.0.0, not the pinned Unicode 17.0.0 `XID_Continue` table. Exhaustive
+comparison found
 5,175 required scalars missing and 923 forbidden scalars accepted. Required `A·B` is rejected, forbidden `²` is
 accepted, `Top:::` truncates to valid prefix `Top`, and programmatic or reconstructed action/blind/bare targets can
 bypass membership validation into compiled and generated artifacts. Leaves `.10.6.1.0-.4` therefore generate and
@@ -872,15 +873,22 @@ route one pinned classifier, prove exact positive/distinct identity and negative
 close without semantic promotion. Source/outcome, static graph, calls/staging/generated, query, runtime observation,
 and one exact 12-role admission then follow as `.10.6.2-.7`.
 
-Planning leaf `.10.6.1.0` is now complete without behavior changes. It fixes the generated target as internal
+Planning leaf `.10.6.1.0` is complete without behavior changes. It fixes the generated target as internal
 `julia/src/spec/UnicodeRuleLabel.jl`, derived from the existing 806 neutral ranges and independently regenerated,
 byte-compared, and endpoint-checked. The artifact supplies binary-search scalar membership, complete-label
-validation, and a Julia-character-index-safe prefix scanner. The parser will replace only its five label-bearing
-host-regex patterns, including body-header detection and complete action/blind/bare target parsing; malformed
-suffixes and third colons cannot become valid prefixes. Both validator paths will check declarations and all three
-target kinds with one portable `invalid_rule_label` diagnostic before structural checks.
+validation, and a Julia-character-index-safe prefix scanner.
 
-The remaining proof is deliberately staged. `.10.6.1.1` owns generation plus parser/validator routing; `.2` owns
+Implementation `.10.6.1.1` now consumes that artifact before `Parser.jl`. The five label-bearing host-regex
+patterns are removed; one byte-boundary-safe scanner family handles complete headers, body termination,
+action/blind/bare target groups, existing optional-index spellings, and allowed remainders. Invalid suffixes and
+third colons cannot become valid prefixes, and malformed arrow starts remain raw syntax for the existing validator
+rather than disappearing. Both traced and untraced validation check declarations and all three target kinds before
+duplicate/structure/target checks, returning portable `invalid_rule_label` / `validate_rule_labels` evidence.
+The generated helpers are internal module bindings, not exports or a new public API.
+
+The remaining proof is deliberately staged. `.10.6.1.1` owns generation plus parser/validator routing and passes
+1,755 focused assertions, complete Julia 5,466/primary/105, the 5x2x66 primary matrix, the ten-leg Unicode manifest,
+and canonical Rust admission 79.93s plus Dart 1/1, primary 66x2, and Phase 0 1,031/663s. `.2` owns
 all nine positive fixtures and both exact-distinct pairs across compiled, descriptor, generated, reconstructed,
 emitted, selector, diagnostic, trace, loader, and command routes; `.3` owns all eight negatives across source and
 external-AST roles plus unrelated identifier isolation; `.4` owns composed Julia/canonical signoff. Function,
@@ -1252,7 +1260,8 @@ The dependency order is:
 | `.10.5.6` | Dart composed semantic admission | complete; 12 roles, 20 exact queries, Dart-only promotion |
 | `.10.6.0` | Julia authority and Unicode preflight | complete; behavior-free map and dependency split |
 | `.10.6.1.0` | Julia Unicode classifier/route plan | complete; exact behavior-free generator, parser, validator, fixture, isolation, and gate split |
-| `.10.6.1.1-.10.6.7` | Julia Unicode implementation through exact semantic admission | pending |
+| `.10.6.1.1` | Julia generated classifier plus parser/validator routing | complete; focused 1,755, Julia 5,466/primary/105, 5x2x66, ten-leg manifest, and canonical signoff |
+| `.10.6.1.2-.10.6.7` | Julia exact Unicode identity through semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

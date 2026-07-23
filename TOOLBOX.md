@@ -450,14 +450,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   current Unicode 16 tables miss 5,175 required Unicode 17 `XID_Continue` scalars, admit 923 forbidden scalars,
   reject required `A·B`, accept forbidden `²`, and permit external-AST target bypass. See
   [[julia-semantic-introspection-authority-map]] and [[julia-unicode-rule-label-preflight]].
-- **JULIA UNICODE IMPLEMENTATION PLAN:** behavior-free `.10.6.1.0` freezes the generated target as internal
-  `julia/src/spec/UnicodeRuleLabel.jl`, produced by the existing neutral generator and independently checked for
-  all 806 endpoints, metadata, binary-search classification, complete validation, and `nextind`-safe prefix scan.
-  `.1` replaces only Julia's five label-bearing parser patterns and validates declaration/action/blind/bare AST
-  roles; `.2` proves all 9 positive/2 distinct identities through artifacts/execution/loader/CLI; `.3` owns all 8
-  negatives and unrelated grammar isolation; `.4` composes no-promotion signoff. Use a writable depot first when
-  probing locally: `LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$JULIA_DEPOT_PATH` with
-  `tools/run_julia_local.sh`; do not infer rule-label membership from host PCRE2 or from familiar examples.
+- **JULIA UNICODE CORE:** `.10.6.1.1` implements the behavior-free `.0` plan. Internal generated
+  `julia/src/spec/UnicodeRuleLabel.jl` carries all 806 pinned endpoints, metadata, binary-search classification,
+  complete validation, and a `nextind`-safe prefix scan; the independent Unicode checker regenerates and
+  byte/endpoint-compares it. Julia's five label-bearing host regexes are gone. Shared header/action/blind/bare
+  scanners own punctuation/remainders, malformed arrows stay raw, third-colon prefixes reject, and validation
+  covers parsed/programmatic/reconstructed declarations and every target kind with `invalid_rule_label` /
+  `validate_rule_labels`. Run the two focused Julia test files through `include`, then `tools/run_julia_local.sh`.
+  `.2` still owns all 9 positive/2 distinct downstream identities, `.3` all 8 negatives plus unrelated grammar
+  isolation, and `.4` composition. Use a writable depot first; never infer membership from host PCRE2 examples.
 
 ---
 

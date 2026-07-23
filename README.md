@@ -882,10 +882,15 @@ content migration exists yet.
   required scalars are absent, 923 forbidden scalars are accepted, and parser-prefix/external-AST validation
   bypasses reach artifacts. Julia work is now dependency-ordered as Unicode closure `.10.6.1`, source/outcome
   `.2`, static `.3`, calls/staging/generated `.4`, query `.5`, runtime observation `.6`, and exact admission `.7`;
-  audit `.0` changes no behavior or governance state. Unicode planning `.10.6.1.0` now freezes the internal
-  generated 806-range Julia classifier/scanner, five parser replacements, four-role validator pass, exact
-  positive/distinct/negative/isolation suites, and focused-to-canonical gate order without behavior. Generator/
-  parser/validator implementation `.10.6.1.1` is next after the clean plan commit.
+  audit `.0` changes no behavior or governance state. Unicode planning `.10.6.1.0` freezes the internal generated
+  806-range classifier/scanner, five parser replacements, four-role validator pass, exact suites, and gate order.
+  Implementation `.10.6.1.1` now generates and independently checks `UnicodeRuleLabel.jl`, routes headers plus
+  action/blind/bare targets without prefix truncation, preserves malformed arrows as raw syntax, and validates
+  parsed/programmatic/reconstructed declarations and targets with portable diagnostics. Focused proof is 1,755;
+  complete Julia is 5,466 package assertions, primary conformance, and corpus 105/105; the five-backend primary
+  matrix is 5x2x66 plus the Unicode manifest. Canonical proof passes Rust semantic admission 1/1 in 79.93s, Dart
+  admission 1/1, primary 66x2, and Phase 0 1,031/1,031 in 663s. Exact downstream identity `.2` follows after the
+  clean core commit; semantic governance remains unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

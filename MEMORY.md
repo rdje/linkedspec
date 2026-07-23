@@ -5,16 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track work under `docs/tasks/`/`docs/TASK_TREE.md`; commit per `COMMIT.md`; check `KNOWLEDGE_MAP.md` and use
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.1.0` — exact behavior-free Julia Unicode implementation plan.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.6.1.0 - freeze Julia Unicode label routes` is assembled from clean `7bdb181f`.
-- active_work_unit: `.10.6.1.0` is fully planned and verified; final guards and commit are in flight.
-- next_action: commit `.10.6.1.0` cleanly, then activate only `.10.6.1.1` to generate and route the classifier.
-- current_semantic_introspection: `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` are executable as
-  a neutral oracle: six fixture groups, six immutable policy/runtime snapshots, 20 digest-locked query responses,
-  exact ids/order/shapes/source policies/pages/budgets/errors, and 81 rejected mutations. Static/generated facts
-  cross-check admitted authority; spec names derive from caller logical identity. Coordinated model/hash drift
-  fails. Perl, Rust, and Dart each have one exact 12-role consumer; neutral rollout is 4 complete / 5 pending and
-  native backend admission is 3 complete / 3 pending.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.1.1` — generated Julia Unicode parser/validator core.
+- latest_commit: `dfcc1ca7` is the clean base; `.10.6.1.1` clean commit is the sole remaining workflow action.
+- active_work_unit: `.10.6.1.1` final commit assembly; exact identity `.10.6.1.2` activates only after clean handoff.
+- current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
+  20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
+  cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
+  neutral rollout is 4/9 and native admission 3/6.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
   case-/normalization-sensitive identity and strict UTF-8. One generated 5,991-byte literal class now pins all 806
   ranges for self-hosted consumption and is independently byte/fixture checked. `specs/spec.spec` now consumes it at
@@ -43,18 +40,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   result seams. Future construction needs a private canonical byte/scalar map, merged rule/function authored order,
   explicit invalid-`String`/byte rejection, logical-name-only identity, detached collections, a `Bool` numeric fence,
   typed observation separate from trace, and callback identity passthrough across generated/emitted routes.
-- current_julia_unicode_preflight: Julia 1.12.6 PCRE2 10.47 uses Unicode 16 `\w`; versus pinned Unicode 17
-  `XID_Continue`, 5,175 required scalars are missed and 923 forbidden accepted. `A·B` rejects, `²` compiles,
-  `Top:::` truncates, and external-AST declarations/action/blind/bare targets bypass artifacts. `.10.6.1.0` freezes
-  one generated internal classifier, five parser routes, four validator roles, exact 9/8/2 identity/isolation, gates.
+- current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
+  extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
+  classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
+  Focused 1,755, Julia 5,466/primary/105, 5x2x66, and the ten-leg Unicode manifest pass. Exact downstream identity
+  `.2`, exhaustive negative/isolation `.3`, and composed no-promotion closeout `.4` remain pending.
 - current_julia_split: `.10.6.1` Unicode; `.2` source/outcome; `.3` static; `.4` calls/staging/generated; `.5`
   typed/raw query; `.6` typed runtime observation; `.7` exact 12-role admission. Audit changes no behavior/ledger.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: `.1.0` probes reproduce 5,175/923, 8/9, `²`, `Top:::`, and 2x4x2 trust routes; Unicode 806/9/8/2, semantic 6/20/81 at 4/9+3/6, KM 682/5,142, book/doctrines, and canonical Rust 77.35s + Dart 1/1 + primary 66x2 + Phase 0 1,031/641s pass; exact generated cleanup reclaims about 1.14 GB.
+- current_signoff: `.1.1` passes focused 1,755, Julia 5,466/primary/105, primary 5x2x66, ten-leg Unicode manifest,
+  Unicode 806/9/8/2, semantic 6/20/81 at 4/9+3/6, KM 682/5,144, canonical Rust 79.93s + Dart 1/1 + primary 66x2
+  + Phase 0 1,031/663s, and exact 1.43-GB generated cleanup preserving Pgen.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
-- environment: always use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30 minutes for canonical CI. Julia
-  offline verification may stack a writable depot before the installed read-only package depot.
+- environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.1.0` final guards and commit assembly only.
+- blockers: none. in_flight_uncommitted: `.10.6.1.1` final synchronized clean commit only.

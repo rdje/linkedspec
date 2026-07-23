@@ -430,9 +430,13 @@ boundary is not pinned Unicode 17 `XID_Continue`: 5,175 required scalars are abs
 accepted, required `A·B` fails, forbidden `²` compiles, `Top:::` truncates, and external AST targets bypass label
 validation into artifacts. Julia is now dependency-split into Unicode closure `.10.6.1`, source/outcome `.2`,
 static `.3`, calls/staging/generated `.4`, query `.5`, runtime observation `.6`, and exact admission `.7`. No Julia
-behavior, response digest, rollout, or admission state changes in the audit. Planning `.10.6.1.0` now freezes the
+behavior, response digest, rollout, or admission state changes in the audit. Planning `.10.6.1.0` freezes the
 generated internal 806-range classifier/scanner, five parser and four validator roles, exact identity/negative/
-isolation suites, and `.1-.4` gates without behavior; implementation `.10.6.1.1` is the next clean-base leaf.
+isolation suites, and `.1-.4` gates. Implementation `.10.6.1.1` now emits/checks all 806 ranges, routes complete
+headers and action/blind/bare targets without prefix truncation, and validates parsed/external AST labels with one
+portable diagnostic. Focused 1,755, complete Julia 5,466/primary/105, 5x2x66, and the Unicode manifest pass;
+canonical Rust admission 79.93s, Dart 1/1, primary 66x2, and Phase 0 1,031/663s pass. Identity `.2` follows after
+the clean core commit, and semantic governance remains unchanged.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

@@ -18,6 +18,10 @@ RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
 DART_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "unicode_rule_label.dart"
 DART_PARSER_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "spec_parser.dart"
 DART_VALIDATION_PATH = ROOT / "dart" / "lib" / "src" / "validation" / "spec_validator.dart"
+JULIA_PATH = ROOT / "julia" / "src" / "spec" / "UnicodeRuleLabel.jl"
+JULIA_MODULE_PATH = ROOT / "julia" / "src" / "LinkedSpecJulia.jl"
+JULIA_PARSER_PATH = ROOT / "julia" / "src" / "spec" / "Parser.jl"
+JULIA_VALIDATION_PATH = ROOT / "julia" / "src" / "spec" / "Validator.jl"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
 SELF_HOSTED_CLI_MANIFEST_PATH = (
@@ -47,6 +51,13 @@ DART_IDENTITY_ROUTES_TEST_PATH = (
 DART_NEGATIVE_ISOLATION_TEST_PATH = (
     ROOT / "dart" / "test" / "unicode_rule_label_negative_isolation_test.dart"
 )
+JULIA_CLASSIFIER_TEST_PATH = (
+    ROOT / "julia" / "test" / "unicode_rule_label_classifier_test.jl"
+)
+JULIA_NATIVE_ROUTES_TEST_PATH = (
+    ROOT / "julia" / "test" / "unicode_rule_label_routes_test.jl"
+)
+JULIA_TEST_DRIVER_PATH = ROOT / "julia" / "test" / "runtests.jl"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 SELF_HOSTED_CORPUS_CASES = (
@@ -96,6 +107,10 @@ def main() -> None:
         DART_PATH,
         DART_PARSER_PATH,
         DART_VALIDATION_PATH,
+        JULIA_PATH,
+        JULIA_MODULE_PATH,
+        JULIA_PARSER_PATH,
+        JULIA_VALIDATION_PATH,
         SELF_HOSTED_REGEX_PATH,
         SELF_HOSTED_GRAMMAR_PATH,
         SELF_HOSTED_CLI_MANIFEST_PATH,
@@ -108,6 +123,9 @@ def main() -> None:
         DART_NATIVE_ROUTES_TEST_PATH,
         DART_IDENTITY_ROUTES_TEST_PATH,
         DART_NEGATIVE_ISOLATION_TEST_PATH,
+        JULIA_CLASSIFIER_TEST_PATH,
+        JULIA_NATIVE_ROUTES_TEST_PATH,
+        JULIA_TEST_DRIVER_PATH,
         MATRIX_DRIVER_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
@@ -117,6 +135,7 @@ def main() -> None:
         generated_contract = Path(temp) / "contract.json"
         generated_rust = Path(temp) / "unicode_rule_label.rs"
         generated_dart = Path(temp) / "unicode_rule_label.dart"
+        generated_julia = Path(temp) / "UnicodeRuleLabel.jl"
         generated_self_hosted_regex = Path(temp) / "unicode_rule_label_regex_class.txt"
         subprocess.run(
             [
@@ -130,6 +149,8 @@ def main() -> None:
                 str(generated_self_hosted_regex),
                 "--dart-output",
                 str(generated_dart),
+                "--julia-output",
+                str(generated_julia),
             ],
             cwd=ROOT,
             check=True,
@@ -140,6 +161,8 @@ def main() -> None:
             fail("Rust classifier differs from deterministic regeneration")
         if generated_dart.read_bytes() != DART_PATH.read_bytes():
             fail("Dart classifier differs from deterministic regeneration")
+        if generated_julia.read_bytes() != JULIA_PATH.read_bytes():
+            fail("Julia classifier differs from deterministic regeneration")
         if generated_self_hosted_regex.read_bytes() != SELF_HOSTED_REGEX_PATH.read_bytes():
             fail("self-hosted regex class differs from deterministic regeneration")
 
@@ -209,6 +232,28 @@ def main() -> None:
     ):
         if marker not in dart_text:
             fail(f"Dart classifier/scanner topology marker missing: {marker}")
+
+    julia_text = JULIA_PATH.read_text(encoding="utf-8")
+    julia_ranges = [
+        (int(start, 16), int(end, 16))
+        for start, end in re.findall(
+            r"\(0x([0-9A-F]{4,6}), 0x([0-9A-F]{4,6})\)",
+            julia_text,
+        )
+    ]
+    if julia_ranges != ranges:
+        fail("Julia range table does not independently encode the contract ranges")
+    for marker in (
+        f"const UNICODE_RULE_LABEL_RANGE_COUNT = {len(ranges)}",
+        "while low < high",
+        "function is_rule_label_codepoint(codepoint::Integer)",
+        "function is_rule_label(label::AbstractString)",
+        "function take_rule_label_prefix(input::AbstractString)",
+        "for index in eachindex(text)",
+        "end_index = nextind(text, index)",
+    ):
+        if marker not in julia_text:
+            fail(f"Julia classifier/scanner topology marker missing: {marker}")
     for unsafe in ("\\", "/", "[", "]", "^", "-", "\n", "\r", "\0"):
         if contains(ranges, ord(unsafe)):
             fail(f"self-hosted literal regex class requires escaping for {unsafe!r}")
@@ -513,6 +558,68 @@ def main() -> None:
     ):
         if marker not in dart_negative_isolation_test:
             fail(f"Dart negative/isolation proof missing: {marker}")
+
+    julia_module = JULIA_MODULE_PATH.read_text(encoding="utf-8")
+    if 'include("spec/UnicodeRuleLabel.jl")' not in julia_module:
+        fail("Julia module does not include the generated label classifier")
+    if julia_module.index('include("spec/UnicodeRuleLabel.jl")') > julia_module.index(
+        'include("spec/Parser.jl")'
+    ):
+        fail("Julia label classifier must be included before the parser")
+    julia_parser = JULIA_PARSER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "_parse_rule_header_fields",
+        "_parse_action_edge_prefix",
+        "_parse_blind_edge_prefix",
+        "_parse_bare_edge_prefix",
+        "take_rule_label_prefix",
+        "_starts_with_edge_token",
+    ):
+        if marker not in julia_parser:
+            fail(f"Julia native label scanner marker missing: {marker}")
+    for stale in (
+        'const _HEADER_PATTERN = r"^(\\w+)',
+        'const _BODY_HEADER_PATTERN = r"^\\w+',
+        'const _ACTION_PATTERN = r"^->[ \\t]*(\\w+',
+        'const _BLIND_PATTERN = r"^=>[ \\t]*(\\w+',
+        'const _BARE_EDGE_PATTERN = r"^(\\w+',
+    ):
+        if stale in julia_parser:
+            fail(f"stale Julia host-regex label scanner remains: {stale}")
+    julia_validation = JULIA_VALIDATION_PATH.read_text(encoding="utf-8")
+    for marker in (
+        '_trace_validation_check!(trace, "rule_labels")',
+        "_check_rule_labels(spec)",
+        "is_rule_label(label)",
+        'code = "invalid_rule_label"',
+        'stage = "validate_rule_labels"',
+    ):
+        if marker not in julia_validation:
+            fail(f"Julia rule-label validation marker missing: {marker}")
+    julia_classifier_test = JULIA_CLASSIFIER_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "generated metadata and all range boundaries match the contract",
+        "complete-label validation matches every neutral fixture",
+        "longest-prefix scanning preserves scalar and Julia string boundaries",
+    ):
+        if marker not in julia_classifier_test:
+            fail(f"Julia classifier proof missing: {marker}")
+    julia_native_routes_test = JULIA_NATIVE_ROUTES_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "scanner parses every declaration and edge form with exact identity",
+        "invalid suffixes never become partial action blind or bare edges",
+        "validator rejects every programmatic declaration and target role",
+        "validator rejects invalid labels reconstructed from AST JSON",
+    ):
+        if marker not in julia_native_routes_test:
+            fail(f"Julia native route proof missing: {marker}")
+    julia_test_driver = JULIA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        'include("unicode_rule_label_classifier_test.jl")',
+        'include("unicode_rule_label_routes_test.jl")',
+    ):
+        if marker not in julia_test_driver:
+            fail(f"Julia test registration missing: {marker}")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -528,6 +635,9 @@ def main() -> None:
         "require_tracked_file dart/test/unicode_rule_label_routes_test.dart",
         "require_tracked_file dart/test/unicode_rule_label_identity_routes_test.dart",
         "require_tracked_file dart/test/unicode_rule_label_negative_isolation_test.dart",
+        "require_tracked_file julia/src/spec/UnicodeRuleLabel.jl",
+        "require_tracked_file julia/test/unicode_rule_label_classifier_test.jl",
+        "require_tracked_file julia/test/unicode_rule_label_routes_test.jl",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

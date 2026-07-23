@@ -64,6 +64,9 @@ function validate_spec(
         _trace_validation_check!(trace, "at_least_one_rule") do
             _check_at_least_one_rule(spec)
         end
+        _trace_validation_check!(trace, "rule_labels") do
+            _check_rule_labels(spec)
+        end
         _trace_validation_check!(trace, "duplicate_rule_labels") do
             _check_duplicate_rule_labels(spec)
         end
@@ -113,6 +116,7 @@ end
 
 function _validate_spec(spec::SpecFile, strict_syntax::Bool)
     _check_at_least_one_rule(spec)
+    _check_rule_labels(spec)
     _check_duplicate_rule_labels(spec)
     _check_duplicate_function_names(spec)
     _check_function_registry(spec)
@@ -160,6 +164,73 @@ function _check_at_least_one_rule(spec::SpecFile)
         message = "spec does not define any rules",
     )
     throw(SpecValidationException(diagnostic.message; diagnostic = diagnostic))
+end
+
+function _check_rule_labels(spec::SpecFile)
+    for rule in spec.rules
+        _require_rule_label(
+            rule.header.label;
+            role = "declaration",
+            line = rule.header.line,
+        )
+        for element in rule.body
+            kind = element.kind
+            if kind isa ActionEdgeBodyElementKind
+                for target in kind.targets
+                    _require_rule_label(
+                        target.label;
+                        role = "edge_target",
+                        line = element.line,
+                        owner = rule.header.label,
+                    )
+                end
+            elseif kind isa BlindEdgeBodyElementKind
+                _require_rule_label(
+                    kind.target;
+                    role = "edge_target",
+                    line = element.line,
+                    owner = rule.header.label,
+                )
+            elseif kind isa BareEdgeBodyElementKind
+                for target in kind.targets
+                    _require_rule_label(
+                        target.label;
+                        role = "edge_target",
+                        line = element.line,
+                        owner = rule.header.label,
+                    )
+                end
+            end
+        end
+    end
+    return nothing
+end
+
+function _require_rule_label(
+    label::AbstractString;
+    role::AbstractString,
+    line::Int,
+    owner::Union{Nothing,AbstractString} = nothing,
+)
+    if is_rule_label(label)
+        return nothing
+    end
+
+    fields = Dict{String,Any}(
+        "label" => String(label),
+        "line" => line,
+        "role" => String(role),
+    )
+    if owner !== nothing
+        fields["rule_label"] = String(owner)
+    end
+    message = "$(role) '$label' is not a nonempty Unicode 17.0.0 XID_Continue rule label"
+    throw(_portable_validation_exception(
+        code = "invalid_rule_label",
+        stage = "validate_rule_labels",
+        message = message,
+        fields = fields,
+    ))
 end
 
 function _check_duplicate_rule_labels(spec::SpecFile)
