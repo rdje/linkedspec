@@ -583,7 +583,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   630, nine exact hashes, one materialization call, recursive immutability, fresh JSON clones, source privacy,
   private omission, and no forbidden authority. `_semantic_static_projection_materialize` is the production-private
   clone seam; do not pass `SemanticIndex` internals to `_semantic_query_kernel_evaluate`. Relations, cursor/page,
-  budgets/cost prefixes, and ten remaining hashes stay `.2`; public typed/raw-neutral entry points stay `.3`.
+  At that historical boundary, budgets/cost prefixes and ten remaining hashes stayed `.2`; public typed/raw-neutral
+  entry points stayed `.3`.
   Complete `.1` signoff is Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
   Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact
   1,613,088-KiB cleanup preserving 517 Pgen artifacts.
@@ -593,10 +594,20 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `_semantic_query_traverse_relations` performs filter-constrained outgoing/incoming/both BFS with relation and
   visited-frontier deduplication before canonical-order projection. Relation-budget diagnostics precede depth when
   both bind; explain reserves one record unit for its decision. All 19 static hashes are exact, costs are logical,
-  and the evaluator still receives one detached projection only. Raw malformed boundaries and every public query
-  export remain `.3`; runtime events remain `.10.6.6`. Complete signoff is Julia 8,290/primary/105, primary
+  and the evaluator still receives one detached projection only. At that historical boundary, raw malformed
+  boundaries and every public query export remained `.3`; runtime events remain `.10.6.6`. Complete signoff is
+  Julia 8,290/primary/105, primary
   5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts.
+  Public completion `.10.6.5.3` is now implemented; retrieve [[julia-semantic-query-public-api]] before changing
+  it. Run `julia/test/semantic_index_query_public_test.jl` after the eight earlier semantic suites to prove new
+  315/focused 1,063, all 19 typed/raw hashes, all 26 malformed envelopes, direct `JSON3.Object` transport, clone/
+  input/interleaving isolation, public exports, one detached materialization, and privacy/non-execution/host denial.
+  Both public entries use the same raw validator/evaluator; do not add a parallel typed semantic kernel. Runtime
+  events remain `.10.6.6`, and query closeout `.10.6.5.4` must recompose committed proof without replacement code.
+  Complete `.3` signoff is Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
+  Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, book/KM 690/5,307, doctrines, and exact
+  1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches.
 
 ---
 

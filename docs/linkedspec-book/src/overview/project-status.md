@@ -592,10 +592,19 @@ Three backbone items tracked major structural modernization — all done:
   over that same detached evaluator. It deduplicates relation ids and visited frontier records, restores canonical
   output order, gives relation ceilings diagnostic precedence over depth, and reserves an explain decision's record
   budget unit. The remaining ten and therefore all 19 static hashes pass at new 118/focused 748 and complete Julia
-  8,290/primary/105. Query values and functions remain unexported; raw validation/public exposure stay `.3`, and
-  runtime events stay `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s +
+  8,290/primary/105. At that historical boundary, query values/functions and raw validation/public exposure stayed
+  `.3`; runtime events stay `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s +
   Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup
   preserving 517 Pgen artifacts pass.
+  Public completion `.10.6.5.3` now exports the immutable query vocabulary plus `semantic_capabilities`, typed
+  `semantic_query`, and raw-neutral `semantic_query_neutral`. Both paths share one exact validator/evaluator and
+  one detached materialization. They match all 19 static hashes, while the raw path accepts dictionaries or direct
+  `JSON3.Object` input and locks all 26 malformed envelopes including Julia Boolean/numeric separation. New
+  315/focused 1,063 and complete Julia 8,605/primary/105 pass with clone/privacy/non-execution/host-denial proof.
+  Runtime observation remains `.10.6.6`, rollout/admission stay unchanged, and no-change closeout `.10.6.5.4` is
+  next after the clean commit. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307, doctrines, and exact 1,613,820-KiB cleanup preserving all 517
+  Pgen artifacts pass.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

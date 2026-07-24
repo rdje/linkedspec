@@ -194,7 +194,7 @@ end
         @test getfield(index, :_static_projection) isa LinkedSpecJulia._SemanticStaticProjection
     end
 
-    @testset "omission-safe private boundary" begin
+    @testset "typed boundaries and private kernel seam" begin
         graph = _semantic_query_kernel_index("graph")
         relations = LinkedSpecJulia.SemanticQuery(
             LinkedSpecJulia.SemanticQueryRelationsOperation;
@@ -229,10 +229,10 @@ end
             :semantic_capabilities,
             :semantic_query,
             :semantic_query_neutral,
-            :_semantic_query_kernel,
         )
-            @test !(name in public_names)
+            @test name in public_names
         end
+        @test !(:_semantic_query_kernel in public_names)
     end
 
     @testset "detached-projection-only implementation" begin

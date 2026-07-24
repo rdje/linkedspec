@@ -1017,7 +1017,15 @@ content migration exists yet.
   validation remain `.3`; runtime events remain `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged
   ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines,
   and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts pass.
-  mdBook/KM 686/5,265 and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
+  Public completion `.10.6.5.3` now exports the complete immutable query vocabulary plus
+  `semantic_capabilities`, typed `semantic_query`, and raw-neutral `semantic_query_neutral`. Both entry points use
+  one validator/evaluator and one fresh detached projection per request. Typed and raw paths match all 19 static
+  response hashes; the raw path accepts dictionaries or direct `JSON3.Object` input and locks all 26 portable
+  malformed envelopes, including explicit `Bool`-before-`Integer` numeric rejection. New 315/focused 1,063 and
+  complete Julia 8,605/primary/105 pass with clone/privacy/non-execution/host-denial proof. Runtime events remain
+  `.10.6.6`, and semantic rollout/admission remain 4/9 and 3/6 until their owned leaves. Full primary 5x2x66, ten
+  Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307, all
+  doctrines, and exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

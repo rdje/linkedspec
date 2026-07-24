@@ -1293,10 +1293,9 @@ The frozen immutable vocabulary is `SemanticQueryOperation`, `SemanticQueryDirec
 `SemanticSnapshot`. Collections are copied tuples; variable-shape facts and diagnostic fields are recursively
 immutable; every `to_json` call returns a fresh `Dict`/`Vector` tree.
 
-These public calls are planned together and are **not implemented at the `.10.6.5.0` boundary**:
+These public calls were planned together at `.10.6.5.0` and are now implemented by `.10.6.5.3`:
 
 ```julia
-# Planned surface after FUTURE-PARITY-BACKLOG.10.6.5.3:
 capabilities = semantic_capabilities(index)
 
 rules = semantic_query(
@@ -1359,8 +1358,8 @@ detached plain-data clone to the evaluator. Retained source text/maps/outcomes, 
 AST/IR, regex, generated implementation, execution, observation, trace/sinks, paths, environment, time, randomness,
 and other host state remain unreachable. The new suite passes 100 assertions and all seven Julia semantic suites
 pass 630; complete Julia passes 8,172/primary/105, primary passes 5x2x66, and all ten Unicode legs pass. Governance
-remains 6/20/81 at rollout 4/9 and native admission 3/6. `semantic_capabilities`, `semantic_query`,
-`semantic_query_neutral`, and the query types remain unexported until `.10.6.5.3` completes traversal and raw
+remains 6/20/81 at rollout 4/9 and native admission 3/6. At that historical boundary, `semantic_capabilities`,
+`semantic_query`, `semantic_query_neutral`, and the query types remained unexported pending `.10.6.5.3` raw
 validation. Canonical signoff passes Rust admission 1/1 in 80.95 seconds, Dart 1/1, reference primary 66x2, Phase
 0 1,031/1,031 in 662 seconds, book/KM 688/5,287, all four doctrines, and exact 1,613,088-KiB cleanup preserving
 517 Pgen artifacts.
@@ -1389,10 +1388,37 @@ Costs describe returned model work, not host resources: records returned, relati
 BFS layer. Rejected requests report zero cost. The evaluator still consumes exactly one detached projection clone
 and has no route to source/compiler/staged/AST/IR/generated/runtime/trace/path/host authority. New proof is 118,
 all eight semantic suites compose at 748, and complete Julia reaches 8,290 package assertions plus primary process
-conformance and corpus 105/105. Query values and names remain unexported until `.10.6.5.3` adds all 26 raw-neutral
-validation boundaries and exposes the complete typed/raw surface; runtime events remain `.10.6.6`. Full primary
+conformance and corpus 105/105. At that historical boundary, query values and names remained unexported pending
+`.10.6.5.3` and its 26 raw-neutral validation boundaries; runtime events remain `.10.6.6`. Full primary
 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0
 1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts pass.
+
+### Julia public typed and raw-neutral query
+
+Leaf `.10.6.5.3` exports the complete frozen query vocabulary and the three public calls together. There is no
+second transport evaluator: `semantic_query` converts the immutable typed request into the neutral shape consumed
+by `semantic_query_neutral`, and both enter one validator/evaluator. Each request materializes exactly one fresh
+detached static projection; its detached snapshot also supplies rejected envelopes before valid requests enter the
+kernel. `semantic_capabilities(index)` is the canonical capabilities request through that same seam.
+
+The raw-neutral input may be an ordinary `Dict` or a direct `JSON3.Object`. It must have exactly the v1 top-level,
+page, budget, and source keys. Wrong contracts, containers, fields, enum values, subject/filter types and
+duplicates, kind ranks/order, direction, cursor, page/budget values, source policy, digest type/detail policy,
+operation combinations, subjects, cursors, and explanation targets produce the exact portable rejected response.
+Julia rejects `Bool` before `Integer` for all numeric fields. Invalid requests return no records, relations,
+diagnostics beyond the one portable boundary diagnostic, explanation steps, or logical costs.
+
+All 19 non-runtime canonical responses have identical hashes through typed and raw-neutral paths. The new public
+suite covers those 38 responses and all 26 malformed boundaries, then locks fresh response and request clones,
+interleaving isolation, source privacy and ceilings, every public export, callback non-invocation, construction and
+query non-execution, exactly one materialization seam, and denial of retained source/compiler/parser/AST/IR/
+generated/runtime/trace/environment/time/random authority. It passes 315 assertions; all nine semantic suites
+compose at 1,063, and complete Julia reaches 8,605 package assertions plus primary process conformance and corpus
+105/105. The twentieth runtime-events response remains `.10.6.6`, and this leaf does not promote the shared
+semantic rollout or native-admission ledgers. No-change closeout `.10.6.5.4` is next after the clean commit.
+Full primary 5x2x66, ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s,
+mdBook/KM 690/5,307, all four doctrines, and exact 1,613,820-KiB cleanup preserving Julia package/registry caches
+and all 517 Pgen artifacts pass.
 
 ## Exact v1 record model
 
@@ -1778,7 +1804,8 @@ The dependency order is:
 | `.10.6.5.0` | Julia query authority map and dependency split | complete and fully verified behavior-free plan; detached authority, 19 hashes, 26 boundaries, and `.1-.4` frozen |
 | `.10.6.5.1` | Julia private immutable non-traversal query kernel | complete; nine exact hashes, new 100/focused 630, no exports |
 | `.10.6.5.2` | Julia private relations/pages/budgets/costs | complete; all 19 static hashes, new 118/focused 748, full signoff, no exports |
-| `.10.6.5.3-.4` | Julia public typed/raw-neutral query and closeout | pending |
+| `.10.6.5.3` | Julia public typed/raw-neutral query | complete; 19 typed/raw hashes, 26 malformed boundaries, new 315/focused 1,063, no runtime or ledger promotion |
+| `.10.6.5.4` | Julia immutable query composition closeout | pending |
 | `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

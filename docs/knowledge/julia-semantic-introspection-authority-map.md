@@ -286,12 +286,12 @@ plus the detached 22/25/10 probe, Julia 8,072/primary/105, primary 5x2x66, ten U
 canonical Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact
 1,812,240-KiB cleanup preserving 517 Pgen artifacts. No query API or ledger is promoted.
 
-Private kernel `.10.6.5.1` and traversal completion `.10.6.5.2` now implement the full static evaluator behind the
-opaque index. All 19 non-runtime hashes are exact across immutable capabilities/list/get/explain/source behavior,
-canonical after-id pages, outgoing/incoming/both filter-constrained BFS, record/relation/depth budgets,
-deterministic prefixes, and logical costs. Evaluation still receives exactly one detached projection and exports
-no query type or function. Raw-neutral validation and public exposure remain `.10.6.5.3`; runtime events remain
-`.10.6.6`. See [[julia-semantic-query-kernel]] and [[julia-semantic-query-traversal]].
+Private kernel `.10.6.5.1` and traversal completion `.10.6.5.2` implement the full static evaluator behind the
+opaque index. Public `.10.6.5.3` now exports its immutable types plus capabilities, typed query, and raw-neutral
+query through one validator/evaluator. All 19 non-runtime hashes are exact through both paths, and all 26 malformed
+boundaries are exact with clone/privacy/non-execution/host denial. Evaluation still receives exactly one detached
+projection; runtime events remain `.10.6.6`. See [[julia-semantic-query-kernel]],
+[[julia-semantic-query-traversal]], and [[julia-semantic-query-public-api]].
 
 No-change leaf `.10.6.3.3` recomposes the committed four-suite topology at focused 389 without production/test
 replacement. Complete Julia remains 7,931/primary/105, primary is 5x2x66, all ten Unicode legs pass, every ledger

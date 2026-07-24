@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.3 — expose Julia semantic query
+
+Exposed Julia's complete immutable static semantic-query API without widening its authority. The package now
+exports the frozen query vocabulary plus `semantic_capabilities`, typed `semantic_query`, and raw-neutral
+`semantic_query_neutral`. Both request forms pass through the same validator/evaluator and consume exactly one
+fresh detached materialization of the private semantic projection per request.
+
+The raw-neutral entry accepts ordinary Julia dictionaries and direct `JSON3.Object` transport values, requires
+the exact v1 request shape, and reproduces all 26 portable malformed-request envelopes. Numeric page/budget
+validation rejects `Bool` before `Integer`; invalid requests return zero streams and zero logical costs. All 19
+non-runtime response hashes match through both typed and raw-neutral entry points. Focused proof also locks fresh
+response/input clones, deterministic interleaving, source ceilings and privacy, public exports, construction/query
+non-execution, callback non-invocation, one projection materialization, and denial of source/compiler/AST/IR/
+generated/runtime/trace/environment/time/random host authority. Runtime observations remain `.10.6.6`; semantic
+rollout and native-admission ledgers do not move in this leaf.
+
+Verification passes at new 315/focused 1,063, complete Julia 8,605/primary/105, full primary 5x2x66, ten Unicode
+legs, unchanged governance, canonical Rust semantic admission 79.96s + Dart 1/1 + primary 66x2 + Phase 0
+1,031/634s, mdBook, Knowledge Map 690/5,307, all four doctrines, and exact 1,613,820-KiB safe cleanup while
+preserving Julia package/registry caches and all 517 Pgen evidence artifacts.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.2 — complete Julia private semantic query traversal
 
 Completed Julia's private static semantic-query evaluator without exposing a partial public surface. The existing

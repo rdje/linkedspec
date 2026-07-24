@@ -8,8 +8,22 @@ const _SEMANTIC_QUERY_DEPTH_BUDGET_DEFAULT = 4
 const _SEMANTIC_QUERY_RECORD_BUDGET_MAX = 10_000
 const _SEMANTIC_QUERY_RELATION_BUDGET_MAX = 20_000
 const _SEMANTIC_QUERY_DEPTH_BUDGET_MAX = 8
+const _SEMANTIC_QUERY_REQUEST_FIELDS = (
+    "contract",
+    "operation",
+    "subjects",
+    "record_kinds",
+    "relation_kinds",
+    "direction",
+    "page",
+    "budget",
+    "source",
+)
+const _SEMANTIC_QUERY_PAGE_FIELDS = ("after_id", "limit")
+const _SEMANTIC_QUERY_BUDGET_FIELDS = ("max_records", "max_relations", "max_depth")
+const _SEMANTIC_QUERY_SOURCE_FIELDS = ("detail", "include_content_digest")
 
-"""One immutable semantic-query-v1 operation; private until the complete evaluator lands."""
+"""One immutable semantic-query-v1 operation."""
 @enum SemanticQueryOperation begin
     SemanticQueryCapabilitiesOperation = 0
     SemanticQueryListOperation = 1
@@ -18,7 +32,7 @@ const _SEMANTIC_QUERY_DEPTH_BUDGET_MAX = 8
     SemanticQueryExplainOperation = 4
 end
 
-"""One immutable relation direction; private until the complete evaluator lands."""
+"""One immutable relation direction."""
 @enum SemanticQueryDirection begin
     SemanticQueryOutgoingDirection = 0
     SemanticQueryIncomingDirection = 1
@@ -37,6 +51,14 @@ const _SEMANTIC_QUERY_DIRECTION_NAMES = Dict(
     SemanticQueryOutgoingDirection => "outgoing",
     SemanticQueryIncomingDirection => "incoming",
     SemanticQueryBothDirection => "both",
+)
+
+const _SEMANTIC_QUERY_OPERATIONS = Dict(
+    name => operation for (operation, name) in _SEMANTIC_QUERY_OPERATION_NAMES
+)
+
+const _SEMANTIC_QUERY_DIRECTIONS = Dict(
+    name => direction for (direction, name) in _SEMANTIC_QUERY_DIRECTION_NAMES
 )
 
 struct _SemanticQueryObject
@@ -577,9 +599,189 @@ function to_json(response::SemanticQueryResponse)
     )
 end
 
-"""Private projection-only evaluator; public query names remain absent until completion."""
+"""Return the canonical semantic-query-v1 capabilities response."""
+function semantic_capabilities(index::SemanticIndex)
+    return semantic_query(
+        index,
+        SemanticQuery(SemanticQueryCapabilitiesOperation),
+    )
+end
+
+"""Evaluate one immutable typed semantic-query-v1 request."""
+function semantic_query(index::SemanticIndex, request::SemanticQuery)
+    return _semantic_query_public_evaluate(index, to_json(request))
+end
+
+"""Validate and evaluate one raw JSON-like semantic-query-v1 request."""
+function semantic_query_neutral(index::SemanticIndex, request)
+    return _semantic_query_public_evaluate(index, request)
+end
+
+function _semantic_query_public_evaluate(index::SemanticIndex, request)
+    projection = _semantic_query_projection(index)
+    snapshot = _semantic_query_snapshot(projection["snapshot"])
+    validated = _semantic_query_validate_neutral(snapshot, request)
+    validated isa SemanticQueryResponse && return validated
+    return _semantic_query_kernel_evaluate(projection, validated)
+end
+
+function _semantic_query_validate_neutral(snapshot::SemanticSnapshot, value)
+    if !(value isa AbstractDict)
+        return _semantic_query_neutral_rejected_response(
+            snapshot,
+            value,
+            _semantic_query_diagnostic(
+                "semantic_query_invalid";
+                reason = "request_not_object",
+            ),
+        )
+    end
+
+    contract = get(value, "contract", nothing)
+    if !(contract isa AbstractString) || contract != _SEMANTIC_QUERY_ID
+        return _semantic_query_neutral_rejected_response(
+            snapshot,
+            value,
+            _semantic_query_diagnostic(
+                "semantic_query_contract_unsupported";
+                requested = _semantic_query_neutral_plain_value(contract),
+            ),
+        )
+    end
+    _semantic_query_has_exact_keys(value, _SEMANTIC_QUERY_REQUEST_FIELDS) ||
+        return _semantic_query_neutral_invalid(snapshot, value, "request_fields")
+
+    page = _semantic_query_exact_object(get(value, "page", nothing), _SEMANTIC_QUERY_PAGE_FIELDS)
+    page === nothing && return _semantic_query_neutral_invalid(snapshot, value, "page_fields")
+    budget = _semantic_query_exact_object(
+        get(value, "budget", nothing),
+        _SEMANTIC_QUERY_BUDGET_FIELDS,
+    )
+    budget === nothing && return _semantic_query_neutral_invalid(snapshot, value, "budget_fields")
+    source = _semantic_query_exact_object(
+        get(value, "source", nothing),
+        _SEMANTIC_QUERY_SOURCE_FIELDS,
+    )
+    source === nothing && return _semantic_query_neutral_invalid(snapshot, value, "source_fields")
+
+    operation_value = get(value, "operation", nothing)
+    operation = operation_value isa AbstractString ?
+                get(_SEMANTIC_QUERY_OPERATIONS, String(operation_value), nothing) : nothing
+    operation === nothing && return _semantic_query_neutral_invalid(snapshot, value, "operation")
+
+    subjects = _semantic_query_neutral_string_tuple(get(value, "subjects", nothing))
+    subjects === nothing && return _semantic_query_neutral_invalid(snapshot, value, "subjects_type")
+    record_kinds = _semantic_query_neutral_string_tuple(get(value, "record_kinds", nothing))
+    record_kinds === nothing &&
+        return _semantic_query_neutral_invalid(snapshot, value, "record_kinds_type")
+    relation_kinds = _semantic_query_neutral_string_tuple(
+        get(value, "relation_kinds", nothing),
+    )
+    relation_kinds === nothing &&
+        return _semantic_query_neutral_invalid(snapshot, value, "relation_kinds_type")
+
+    for (name, items) in (
+        ("subjects", subjects),
+        ("record_kinds", record_kinds),
+        ("relation_kinds", relation_kinds),
+    )
+        length(Set(items)) == length(items) ||
+            return _semantic_query_neutral_invalid(snapshot, value, "$(name)_duplicate")
+    end
+    all(kind -> kind in _SEMANTIC_STATIC_RECORD_KINDS, record_kinds) ||
+        return _semantic_query_neutral_invalid(snapshot, value, "record_kind")
+    all(kind -> kind in _SEMANTIC_STATIC_RELATION_KINDS, relation_kinds) ||
+        return _semantic_query_neutral_invalid(snapshot, value, "relation_kind")
+    _semantic_query_rank_ordered(record_kinds, _SEMANTIC_STATIC_RECORD_KINDS) ||
+        return _semantic_query_neutral_invalid(snapshot, value, "record_kind_order")
+    _semantic_query_rank_ordered(relation_kinds, _SEMANTIC_STATIC_RELATION_KINDS) ||
+        return _semantic_query_neutral_invalid(snapshot, value, "relation_kind_order")
+
+    direction_value = get(value, "direction", nothing)
+    direction = direction_value isa AbstractString ?
+                get(_SEMANTIC_QUERY_DIRECTIONS, String(direction_value), nothing) : nothing
+    direction === nothing && return _semantic_query_neutral_invalid(snapshot, value, "direction")
+
+    raw_after_id = get(page, "after_id", nothing)
+    after_id = if raw_after_id === nothing
+        nothing
+    elseif raw_after_id isa AbstractString && !_semantic_query_looks_numeric(raw_after_id)
+        String(raw_after_id)
+    else
+        return _semantic_query_neutral_invalid(snapshot, value, "after_id")
+    end
+    page_limit = _semantic_query_neutral_integer(
+        get(page, "limit", nothing),
+        1,
+        _SEMANTIC_QUERY_PAGE_MAX,
+    )
+    page_limit === nothing &&
+        return _semantic_query_neutral_invalid(snapshot, value, "page_limit")
+    max_records = _semantic_query_neutral_integer(
+        get(budget, "max_records", nothing),
+        1,
+        _SEMANTIC_QUERY_RECORD_BUDGET_MAX,
+    )
+    max_records === nothing &&
+        return _semantic_query_neutral_invalid(snapshot, value, "max_records")
+    max_relations = _semantic_query_neutral_integer(
+        get(budget, "max_relations", nothing),
+        1,
+        _SEMANTIC_QUERY_RELATION_BUDGET_MAX,
+    )
+    max_relations === nothing &&
+        return _semantic_query_neutral_invalid(snapshot, value, "max_relations")
+    max_depth = _semantic_query_neutral_integer(
+        get(budget, "max_depth", nothing),
+        0,
+        _SEMANTIC_QUERY_DEPTH_BUDGET_MAX,
+    )
+    max_depth === nothing && return _semantic_query_neutral_invalid(snapshot, value, "max_depth")
+
+    source_detail_value = get(source, "detail", nothing)
+    source_detail = if source_detail_value == "none"
+        SemanticSourceNoneDetail
+    elseif source_detail_value == "identity"
+        SemanticSourceIdentityDetail
+    elseif source_detail_value == "span"
+        SemanticSourceSpanDetail
+    elseif source_detail_value == "text"
+        SemanticSourceTextDetail
+    else
+        nothing
+    end
+    include_content_digest = get(source, "include_content_digest", nothing)
+    if source_detail === nothing || !(include_content_digest isa Bool)
+        return _semantic_query_neutral_invalid(snapshot, value, "source_policy")
+    end
+
+    return SemanticQuery(
+        operation;
+        contract = String(contract),
+        subjects = subjects,
+        record_kinds = record_kinds,
+        relation_kinds = relation_kinds,
+        direction = direction,
+        page = SemanticQueryPage(after_id = after_id, limit = page_limit),
+        budget = SemanticQueryBudget(
+            max_records = max_records,
+            max_relations = max_relations,
+            max_depth = max_depth,
+        ),
+        source = SemanticQuerySource(
+            detail = source_detail,
+            include_content_digest = include_content_digest,
+        ),
+    )
+end
+
+function _semantic_query_projection(index::SemanticIndex)
+    return _semantic_static_projection_materialize(index)
+end
+
+"""Private projection-only evaluator retained as the focused kernel seam."""
 function _semantic_query_kernel(index::SemanticIndex, request::SemanticQuery)
-    projection = _semantic_static_projection_materialize(index)
+    projection = _semantic_query_projection(index)
     return _semantic_query_kernel_evaluate(projection, request)
 end
 
@@ -1186,6 +1388,106 @@ function _semantic_query_rejected_response(
     )
 end
 
+function _semantic_query_neutral_invalid(
+    snapshot::SemanticSnapshot,
+    request,
+    reason::String,
+)
+    return _semantic_query_neutral_rejected_response(
+        snapshot,
+        request,
+        _semantic_query_diagnostic("semantic_query_invalid"; reason = reason),
+    )
+end
+
+function _semantic_query_neutral_rejected_response(
+    snapshot::SemanticSnapshot,
+    request,
+    diagnostic::SemanticQueryDiagnostic,
+)
+    return SemanticQueryResponse(
+        _SEMANTIC_QUERY_ID,
+        _SEMANTIC_MODEL_ID,
+        false,
+        snapshot,
+        (),
+        (),
+        SemanticQueryPageState(
+            _semantic_query_neutral_after_id(request),
+            nothing,
+            true,
+        ),
+        SemanticQueryCost(0, 0, 0),
+        (diagnostic,),
+    )
+end
+
+function _semantic_query_neutral_after_id(request)
+    request isa AbstractDict || return nothing
+    page = get(request, "page", nothing)
+    page isa AbstractDict || return nothing
+    return _semantic_query_neutral_frozen_value(get(page, "after_id", nothing))
+end
+
+function _semantic_query_neutral_frozen_value(value)
+    return try
+        _semantic_query_freeze(value)
+    catch error
+        error isa ArgumentError || rethrow()
+        nothing
+    end
+end
+
+function _semantic_query_neutral_plain_value(value)
+    return _semantic_query_thaw(_semantic_query_neutral_frozen_value(value))
+end
+
+function _semantic_query_has_exact_keys(value::AbstractDict, fields)
+    return length(value) == length(fields) && all(
+        key -> (key isa AbstractString || key isa Symbol) && String(key) in fields,
+        keys(value),
+    )
+end
+
+function _semantic_query_exact_object(value, fields)
+    value isa AbstractDict || return nothing
+    return _semantic_query_has_exact_keys(value, fields) ? value : nothing
+end
+
+function _semantic_query_neutral_string_tuple(value)
+    value isa AbstractVector || return nothing
+    all(item -> item isa AbstractString, value) || return nothing
+    return Tuple(String(item) for item in value)
+end
+
+function _semantic_query_rank_ordered(values, ranks)
+    for index in 2:length(values)
+        left = findfirst(==(values[index - 1]), ranks)
+        right = findfirst(==(values[index]), ranks)
+        left <= right || return false
+    end
+    return true
+end
+
+function _semantic_query_looks_numeric(value::AbstractString)
+    stripped = strip(String(value))
+    return !isempty(stripped) && tryparse(Float64, stripped) !== nothing
+end
+
+function _semantic_query_neutral_integer(value, minimum::Int, maximum::Int)
+    value isa Bool && return nothing
+    value isa Integer || return nothing
+    converted = try
+        Int(value)
+    catch error
+        if error isa InexactError || error isa OverflowError
+            return nothing
+        end
+        rethrow()
+    end
+    return minimum <= converted <= maximum ? converted : nothing
+end
+
 function _semantic_query_span(value)
     if !(value isa AbstractDict)
         throw(AssertionError("Semantic query source span must be an object"))
@@ -1251,7 +1553,7 @@ end
 function _semantic_query_freeze(value::AbstractDict)
     pairs = Pair{String,Any}[]
     for (key, item) in value
-        key isa AbstractString || throw(ArgumentError(
+        (key isa AbstractString || key isa Symbol) || throw(ArgumentError(
             "Semantic query object keys must be text",
         ))
         push!(pairs, String(key) => _semantic_query_freeze(item))

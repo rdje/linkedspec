@@ -190,7 +190,7 @@ end
                 _semantic_query_kernel_has_no_mutable_container(relation.evidence_ids),
             first.relations,
         )
-        @test !(:semantic_query in names(LinkedSpecJulia))
-        @test !(:semantic_query_neutral in names(LinkedSpecJulia))
+        @test :semantic_query in names(LinkedSpecJulia)
+        @test :semantic_query_neutral in names(LinkedSpecJulia)
     end
 end

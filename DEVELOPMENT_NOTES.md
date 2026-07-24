@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.3` — one raw validator can serve typed and transport callers):
+  Julia does not need separate typed and JSON evaluators. `semantic_query` serializes the immutable typed request
+  into the same neutral validator used by `semantic_query_neutral`; only after exact shape/scalar/policy validation
+  does that path materialize one detached static projection and enter the existing evaluator. This makes the 26
+  malformed boundaries portable by construction while preserving native immutable response types. `JSON3.Object`
+  exposes symbol keys through Julia iteration, so key normalization accepts `String` or `Symbol` keys without
+  widening the wire contract. Numeric helpers reject `Bool` before `Integer`, avoiding Julia's `Bool <: Integer`
+  trap. Response and request cloning, interleaving, privacy, and non-execution tests prove that the new public seam
+  is a view over already-retained static semantics, not a second semantic owner. The twentieth runtime response
+  and ledger promotion remain dependency-ordered to `.10.6.6-.7`.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.2` — traversal can remain a pure view over canonical detached data):
   Julia's complete static query evaluator needs no new compiler, graph, or runtime authority. The existing canonical
   relation stream is sufficient for filter-constrained outgoing/incoming/both breadth-first search. Each layer

@@ -118,18 +118,46 @@ generated source. Native payload/job/body-AST state, implementation text, paths,
 containers do not cross the private projection boundary. Public semantic query and runtime observation remain
 dependency-ordered later work.
 
-Behavior-free query planning and the complete private static evaluator are now complete, but the public API below is
-deliberately not implemented yet. Query reads only one fresh detached materialization of the private projection;
-it cannot reach retained source/map, compiler, staged sidecars, AST/ActionIR, regex, generated implementation,
-execution, observation, trace, path, or host state. The completed surface will expose `semantic_capabilities(index)`,
-`semantic_query(index, request::SemanticQuery)`, and `semantic_query_neutral(index, request)` together. Typed and
-raw-neutral calls will enter one evaluator and return immutable typed values with fresh `to_json` dictionaries.
+Julia now exposes the complete immutable static query surface. Query reads only one fresh detached materialization
+of the private projection; it cannot reach retained source/map, compiler, staged sidecars, AST/ActionIR, regex,
+generated implementation, execution, observation, trace, path, or host state. Use
+`semantic_capabilities(index)`, `semantic_query(index, request::SemanticQuery)`, or
+`semantic_query_neutral(index, request)`. Typed and raw-neutral calls enter the same validator/evaluator and return
+immutable typed values whose `to_json` conversion creates fresh dictionaries and arrays.
 
-Julia will match the 19 non-runtime canonical response hashes and all 26 malformed-request boundaries. Numeric
-validation must reject `Bool` before `Integer` because `true isa Integer`; the digest flag must require an actual
-`Bool`. Implementation is intentionally split as private record/source/list/get/explain, then private directional
-traversal/pages/budgets/costs, then complete public exposure, then no-change composition. The twentieth runtime
-response remains a separate observation task.
+```julia
+capabilities = semantic_capabilities(index)
+
+rules = semantic_query(
+    index,
+    SemanticQuery(
+        operation = SemanticQueryListOperation,
+        record_kinds = ("rule",),
+        page = SemanticQueryPage(limit = 20),
+        source = SemanticQuerySource(detail = SemanticSourceSpanDetail),
+    ),
+)
+
+raw = semantic_query_neutral(index, Dict(
+    "contract" => "linkedspec-semantic-query-v1",
+    "operation" => "get",
+    "subjects" => [rules.records[1].id],
+    "record_kinds" => [],
+    "relation_kinds" => [],
+    "direction" => "outgoing",
+    "page" => Dict("after_id" => nothing, "limit" => 100),
+    "budget" => Dict("max_records" => 1000, "max_relations" => 2000, "max_depth" => 4),
+    "source" => Dict("detail" => "none", "include_content_digest" => false),
+))
+```
+
+Julia matches all 19 non-runtime canonical response hashes through both entry points and all 26 malformed-request
+boundaries through the raw-neutral path. Direct `JSON3.Object` values are valid transport inputs. Wrong
+containers, keys, scalar/enumeration values, duplicate filters, cursors, ranks, ranges, source policies, and
+operation combinations become portable rejected response envelopes rather than dispatch failures. Numeric
+validation rejects `Bool` before `Integer` because `true isa Integer`; the digest flag accepts only an actual
+`Bool`. Rejected requests return empty streams and zero logical costs. The twentieth runtime response remains a
+separate observation task.
 
 Private `.10.6.5.1` defines the complete frozen vocabulary and evaluates capabilities, list, get, explain, source
 privacy/digest/ceiling, and portable diagnostics at nine exact static response hashes. Separate tuple-backed object
@@ -139,10 +167,11 @@ incoming/both filter-constrained breadth-first relations, record/relation/depth 
 prefixes, and logical costs. Relation ids and visited frontier records are deduplicated before canonical output
 order is restored; explain reserves one record budget unit for its decision. The evaluator still invokes
 `_semantic_static_projection_materialize` exactly once. All 19 static hashes now match at new 118/focused 748 and
-complete Julia 8,290/primary/105. Raw malformed-request validation and every public export remain `.10.6.5.3`;
-runtime events remain `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s +
-Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup
-preserving 517 Pgen artifacts pass.
+complete Julia 8,290/primary/105. Public `.10.6.5.3` now adds the shared exact raw validator and exports the typed/
+raw surface together. Its new 315 assertions bring focused semantic composition to 1,063 and complete Julia to
+8,605 while keeping runtime events in `.10.6.6` and semantic rollout/admission unchanged. Full primary 5x2x66,
+ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307,
+doctrines, and exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

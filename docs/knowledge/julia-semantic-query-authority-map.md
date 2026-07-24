@@ -12,7 +12,7 @@ answers:
   - "when may Julia expose its public semantic query API"
   - "does Julia semantic query include runtime events"
 date: 2026-07-23
-status: current authority and implementation plan; private static evaluator complete, public leaves pending
+status: current authority and implementation plan; public static evaluator complete, closeout and runtime pending
 tags: [julia, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.0-.10.6.5.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; dart/lib/src/semantic/semantic_query.dart
 reverify: "python3 tools/check_semantic_introspection_contract.py && PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query && (cd dart && dart test test/semantic_index_query_kernel_test.dart) && rg -n 'semantic_query|SemanticQuery|semantic_capabilities' julia/src"
@@ -32,7 +32,7 @@ Leaves `.10.6.5.1-.3` must therefore match the other 19 static hashes exactly an
 raw-neutral boundaries as Perl, Rust, and Dart. Runtime `execution`/`event` records and the twentieth hash belong to
 `.10.6.6`; rollout and native admission remain later `.10.6.7` work.
 
-The planned immutable vocabulary is `SemanticQueryOperation`, `SemanticQueryDirection`, `SemanticQueryPage`,
+The implemented immutable vocabulary is `SemanticQueryOperation`, `SemanticQueryDirection`, `SemanticQueryPage`,
 `SemanticQueryBudget`, `SemanticQuerySource`, `SemanticQuery`, `SemanticQuerySourceReference`,
 `SemanticQueryRecord`, `SemanticQueryRelation`, `SemanticQueryDiagnostic`, `SemanticQueryPageState`,
 `SemanticQueryCost`, and `SemanticQueryResponse`, reusing `SemanticSourceDetail`, `SemanticSourceSpan`, and
@@ -42,7 +42,7 @@ Operation values are `SemanticQueryCapabilitiesOperation`, `SemanticQueryListOpe
 `SemanticQueryGetOperation`, `SemanticQueryRelationsOperation`, and `SemanticQueryExplainOperation`; direction
 values are `SemanticQueryOutgoingDirection`, `SemanticQueryIncomingDirection`, and `SemanticQueryBothDirection`.
 
-The complete public surface appears only after the private evaluator is complete:
+The complete public surface now appears after the private evaluator was completed:
 
 - `semantic_capabilities(index)` evaluates the canonical capabilities request;
 - `semantic_query(index, request::SemanticQuery)` is the typed native path; and
@@ -81,10 +81,12 @@ ledger. Canonical local CI passes doctrines/contracts, Rust and Dart semantic ad
 capabilities/list/get/explain/source behavior for nine static hashes. Traversal completion `.10.6.5.2` adds exact
 filtered directional BFS, canonical pages, logical budgets/costs, deterministic prefixes, and the other ten static
 hashes. The complete private evaluator therefore matches all 19 static responses, consumes one fresh detached
-materialization per request, and exports no query symbol. Complete public typed/raw-neutral exposure remains `.3`.
-See [[julia-semantic-query-kernel]] and [[julia-semantic-query-traversal]] for the implemented boundary and proof.
+materialization per request. Public `.10.6.5.3` now exports every query type and the three calls together, routes
+typed and raw input through one exact validator/evaluator, matches all 19 hashes through both paths, and locks all
+26 malformed boundaries plus clone/privacy/non-execution/host denial. See [[julia-semantic-query-kernel]],
+[[julia-semantic-query-traversal]], and [[julia-semantic-query-public-api]] for the implemented boundary and proof.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[julia-semantic-introspection-authority-map]],
 [[julia-semantic-call-staged-projection-plan]], [[perl-semantic-query-evaluator]],
-[[rust-semantic-query-evaluator]], [[dart-semantic-query-authority-map]], [[julia-semantic-query-kernel]], and
-[[julia-semantic-query-traversal]].
+[[rust-semantic-query-evaluator]], [[dart-semantic-query-authority-map]], [[julia-semantic-query-kernel]],
+[[julia-semantic-query-traversal]], and [[julia-semantic-query-public-api]].

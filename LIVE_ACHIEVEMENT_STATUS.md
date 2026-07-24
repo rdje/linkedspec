@@ -8,20 +8,36 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia private semantic-query traversal `FUTURE-PARITY-BACKLOG.10.6.5.2` is implemented from clean kernel commit
-  `b70e37fc`. Exact outgoing/incoming/both filtered BFS, canonical after-id pages, record/relation/depth budgets,
-  deterministic prefixes, and logical costs match the remaining ten and therefore all 19 static hashes. New
-  118/focused 748 and complete Julia 8,290/primary/105 pass; primary 5x2x66, all ten Unicode legs, unchanged
-  ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines,
-  and exact 1,613,224-KiB cleanup also pass. Public query names/raw validation remain `.3`; only final commit remains
-  before `.10.6.5.3` activation.
+- Julia public semantic-query completion `FUTURE-PARITY-BACKLOG.10.6.5.3` is active from clean traversal commit
+  `f6f76f4c`. The frozen immutable types, capabilities, typed query, and raw-neutral query are exported through one
+  validator/evaluator and one detached projection. All 19 typed/raw hashes, all 26 malformed boundaries, direct
+  `JSON3.Object` transport, clone/input/interleaving isolation, privacy, public exports, non-execution, and host
+  denial pass at new 315/focused 1,063 and complete Julia 8,605/primary/105. Primary 5x2x66, all ten Unicode legs,
+  unchanged ledgers, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307,
+  doctrines, and exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts pass. Only the per-slice commit remains
+  before no-change closeout `.10.6.5.4`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.3 — expose Julia semantic query**
+  (fully verified commit candidate from clean traversal commit `f6f76f4c`).
+
+  **Result:** Julia now exports the complete immutable query vocabulary plus capabilities, typed query, and
+  raw-neutral query through one validator/evaluator and one fresh detached projection per request. All 19 static
+  hashes match through both paths; all 26 malformed boundaries are exact. Runtime events and ledger promotion stay
+  in their dependency-ordered owners.
+
+  **Proof:** New 315/focused 1,063 and Julia 8,605/primary/105 pass with direct `JSON3.Object`, clone/input/
+  interleaving isolation, privacy, public exports, non-execution, callback, and host-denial proof. Primary 5x2x66,
+  ten Unicode legs, unchanged semantic 6/20/81 at 4/9 + 3/6 and adjacent ledgers, canonical Rust 79.96s + Dart 1/1
+  + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307, doctrines, memory/diff hygiene, and exact
+  1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass. `.4` waits for the
+  clean `.3` commit.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.2 — complete Julia private semantic query traversal**
-  (fully verified implementation candidate from clean kernel commit `b70e37fc`).
+  (DONE at clean commit `f6f76f4c` from kernel commit `b70e37fc`).
 
   **Result:** The private evaluator now pages filtered primary streams and traverses canonical relations with exact
   direction, breadth-first depth, deduplication, budgets, deterministic incomplete prefixes, and logical costs. All

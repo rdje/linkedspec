@@ -298,7 +298,7 @@ end
         "source_text",
     ])
     @test isempty(reduce(union, (_semantic_outcome_keys(value) for value in public_json)) ∩ forbidden_keys)
-    @test !isdefined(LinkedSpecJulia, :semantic_query)
+    @test isdefined(LinkedSpecJulia, :semantic_query)
     @test !isdefined(LinkedSpecJulia, :semantic_records)
 
     implementation = read(
