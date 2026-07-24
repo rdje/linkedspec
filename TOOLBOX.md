@@ -578,6 +578,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   22/25/10, Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust/Dart
   admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB cleanup
   preserving 517 Pgen artifacts.
+  Private `.10.6.5.1` is now implemented; retrieve [[julia-semantic-query-kernel]] before changing it. Run
+  `julia/test/semantic_index_query_kernel_test.jl` with the six earlier semantic suites to prove new 100/focused
+  630, nine exact hashes, one materialization call, recursive immutability, fresh JSON clones, source privacy,
+  private omission, and no forbidden authority. `_semantic_static_projection_materialize` is the production-private
+  clone seam; do not pass `SemanticIndex` internals to `_semantic_query_kernel_evaluate`. Relations, cursor/page,
+  budgets/cost prefixes, and ten remaining hashes stay `.2`; public typed/raw-neutral entry points stay `.3`.
+  Complete `.1` signoff is Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
+  Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact
+  1,613,088-KiB cleanup preserving 517 Pgen artifacts.
 
 ---
 

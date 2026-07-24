@@ -6,8 +6,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `TOOLBOX.md` first; require an owning task-tree leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.5.0` — Julia query authority/split audit fully verified.
-- latest_commit: `61aa48bb` commits verified no-change Julia calls/staging/generated parent closure.
-- active_work_unit: synchronize, clean artifacts, and commit query audit `FUTURE-PARITY-BACKLOG.10.6.5.0`.
+- latest_commit: `58c67035` commits verified Julia semantic-query authority and implementation split.
+- active_work_unit: finish docs/KM/canonical/cleanup and commit `FUTURE-PARITY-BACKLOG.10.6.5.1`.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -37,7 +37,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   private 22/25/10; `.4.3` closes composition. Query audit `.10.6.5.0` freezes one fresh detached projection as
   sole evaluator authority, 19 static hashes, 26 malformed boundaries, immutable typed/raw-neutral vocabulary,
   explicit `Bool`/`Integer` validation, and private kernel `.1` / traversal `.2` / public `.3` / closeout `.4`.
-  Runtime events remain `.10.6.6`; no query API or semantic promotion exists yet.
+  Private `.1` matches nine hashes with tuple-backed values and one fresh projection per request; no query name is
+  exported. Traversal/pages/budgets/costs remain `.2`, public exposure `.3`, and runtime events `.10.6.6`.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -47,14 +48,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   eight negatives across source, programmatic/reconstructed declaration/action/blind/bare roles, selectors,
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
-- current_julia_split: `.10.6.2-.4` are committed closed; query plan `.10.6.5.0` is a verified commit candidate; implementation/runtime/admission `.10.6.5.1-.7` remain.
+- current_julia_split: `.10.6.2-.4` and query plan `.10.6.5.0` are committed; private kernel `.10.6.5.1` is a verified candidate; traversal/public/runtime/admission `.10.6.5.2-.7` remain.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: oracle 6/20/81, query Perl 9/Rust 5/Dart 6, Julia focused 530 + detached 22/25/10, Julia
-  8,072/primary/105, primary 5x2x66 + ten Unicode legs, unchanged ledgers, book/KM 687/5,277, canonical Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, and 1,812,240-KiB cleanup pass; commit remains.
+- current_signoff: oracle 6/20/81 at 4/9 + 3/6; Julia 100/630, 8,172/primary/105, 5x2x66 + ten Unicode legs;
+  unchanged ledgers, book/KM 688/5,287, canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, doctrines, and 1,613,088-KiB cleanup pass; commit remains.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.6.5.0` task/live/book/KM plan from clean `61aa48bb`; finish
-  lockstep checks, commit, clear brief, and verify clean before `.10.6.5.1`.
+- blockers: none. in_flight_uncommitted: verified `.10.6.5.1` from `58c67035`; sync/commit before `.2`.

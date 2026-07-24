@@ -118,10 +118,10 @@ generated source. Native payload/job/body-AST state, implementation text, paths,
 containers do not cross the private projection boundary. Public semantic query and runtime observation remain
 dependency-ordered later work.
 
-Behavior-free query planning is now complete, but the API below is deliberately not implemented yet. Query must
-read only one fresh detached materialization of that private projection; it cannot reach the retained source/map,
-compiler, staged sidecars, AST/ActionIR, regex, generated implementation, execution, observation, trace, path, or
-host state. The completed surface will expose `semantic_capabilities(index)`,
+Behavior-free query planning and the private non-traversal kernel are now complete, but the public API below is
+deliberately not implemented yet. Query reads only one fresh detached materialization of the private projection;
+it cannot reach retained source/map, compiler, staged sidecars, AST/ActionIR, regex, generated implementation,
+execution, observation, trace, path, or host state. The completed surface will expose `semantic_capabilities(index)`,
 `semantic_query(index, request::SemanticQuery)`, and `semantic_query_neutral(index, request)` together. Typed and
 raw-neutral calls will enter one evaluator and return immutable typed values with fresh `to_json` dictionaries.
 
@@ -130,6 +130,16 @@ validation must reject `Bool` before `Integer` because `true isa Integer`; the d
 `Bool`. Implementation is intentionally split as private record/source/list/get/explain, then private directional
 traversal/pages/budgets/costs, then complete public exposure, then no-change composition. The twentieth runtime
 response remains a separate observation task.
+
+Current private `.10.6.5.1` defines the complete frozen vocabulary and evaluates capabilities, list, get, explain,
+source privacy/digest/ceiling, and portable diagnostics at nine exact static response hashes. Separate tuple-backed
+object and array wrappers preserve recursive immutability without losing empty JSON shape; each `to_json` call
+returns a new mutable tree. The private evaluator invokes `_semantic_static_projection_materialize` exactly once.
+Cursor/non-default pages, budgets, relation traversal, deterministic prefixes, costs, and the other ten static
+hashes remain `.10.6.5.2`; raw malformed-request validation and every public export remain `.10.6.5.3`.
+Kernel signoff passes new 100/focused 630, complete Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs,
+unchanged governance, canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287,
+doctrines, and exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

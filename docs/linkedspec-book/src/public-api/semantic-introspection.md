@@ -1334,6 +1334,36 @@ locks all 26 boundaries, clone isolation, non-interference, privacy, and host de
 proof without a replacement evaluator. Planning itself changes no production code, test, fixture, contract,
 public API, generated format, runtime observation, rollout, or admission.
 
+### Julia private immutable query kernel
+
+Leaf `.10.6.5.1` now implements the first dependency-safe portion while keeping every planned public name absent.
+`SemanticQuery.jl` contains the complete frozen request/response vocabulary plus the private
+`_semantic_query_kernel`. It matches nine full response digests: capabilities, graph rule listing, duplicate-regex
+text detail, entry explanation, call symbols/shapes, failed diagnostics, privacy with no source, privacy with text
+and digest, and forbidden source detail.
+
+The kernel owns only non-traversal default-page/default-budget behavior. It preserves canonical record order,
+decision-before-step explanations with their `explained_by` relations, exact logical costs, source-ceiling errors,
+structural redactions below text detail, and digests only at requested text detail. Cursor and non-default page,
+record/relation/depth budgets, directional breadth-first traversal, deterministic incomplete prefixes, and the
+remaining ten static digests are still `.10.6.5.2` work.
+
+All values are immutable structs with copied tuples. Variable facts and diagnostic fields use distinct private
+tuple-backed object and array wrappers, so empty JSON objects and arrays remain different without retaining mutable
+containers. Every `to_json` conversion returns a fresh `Dict`/`Vector` tree. Page and budget construction rejects
+`Bool` before accepting `Integer`, preserving the portable boundary despite Julia's subtype relationship.
+
+Each evaluation invokes `_semantic_static_projection_materialize(index)` exactly once and passes only that fresh
+detached plain-data clone to the evaluator. Retained source text/maps/outcomes, parser/compiler/staged owners,
+AST/IR, regex, generated implementation, execution, observation, trace/sinks, paths, environment, time, randomness,
+and other host state remain unreachable. The new suite passes 100 assertions and all seven Julia semantic suites
+pass 630; complete Julia passes 8,172/primary/105, primary passes 5x2x66, and all ten Unicode legs pass. Governance
+remains 6/20/81 at rollout 4/9 and native admission 3/6. `semantic_capabilities`, `semantic_query`,
+`semantic_query_neutral`, and the query types remain unexported until `.10.6.5.3` completes traversal and raw
+validation. Canonical signoff passes Rust admission 1/1 in 80.95 seconds, Dart 1/1, reference primary 66x2, Phase
+0 1,031/1,031 in 662 seconds, book/KM 688/5,287, all four doctrines, and exact 1,613,088-KiB cleanup preserving
+517 Pgen artifacts.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1716,7 +1746,8 @@ The dependency order is:
 | `.10.6.4.2` | Julia staged/generated calls completion | complete; exact private full 22/25, new 62/focused 530, no promotion |
 | `.10.6.4.3` | Julia calls/staging/generated composition closeout | complete; committed focused 530 plus full gates, no replacement code or promotion |
 | `.10.6.5.0` | Julia query authority map and dependency split | complete and fully verified behavior-free plan; detached authority, 19 hashes, 26 boundaries, and `.1-.4` frozen |
-| `.10.6.5.1-.4` | Julia immutable typed/raw-neutral query implementation and closeout | pending |
+| `.10.6.5.1` | Julia private immutable non-traversal query kernel | fully verified commit candidate; nine exact hashes, new 100/focused 630, no exports |
+| `.10.6.5.2-.4` | Julia traversal/limits, public typed/raw-neutral query, and closeout | pending |
 | `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

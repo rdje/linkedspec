@@ -8,17 +8,34 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia behavior-free semantic-query authority audit `FUTURE-PARITY-BACKLOG.10.6.5.0` is a fully verified commit
-  candidate from clean calls/staging/generated closeout `61aa48bb`. Exact detached authority, 20-request/19-static-
-  hash/26-boundary policy, immutable API vocabulary, and private `.1-.4` implementation order are frozen; only
-  final lockstep synchronization, artifact cleanup, and the plan commit remain before `.10.6.5.1` activation.
+- Julia private semantic-query kernel `FUTURE-PARITY-BACKLOG.10.6.5.1` is implemented from clean authority-plan
+  commit `58c67035`. Immutable request/response values and detached-projection-only capabilities/list/get/explain/
+  source behavior match nine exact static hashes at new 100/focused 630; complete Julia 8,172/primary/105,
+  primary 5x2x66, ten Unicode legs, unchanged governance, canonical Rust 80.95s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact 1,613,088-KiB cleanup pass. Public names remain
+  absent; only final synchronization and the per-slice commit remain before `.10.6.5.2` activation.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.1 — add Julia private semantic query kernel**
+  (fully verified implementation candidate from clean plan commit `58c67035`).
+
+  **Result:** Julia now owns recursively immutable query values and a private evaluator for capabilities, list,
+  get, explain, source privacy/digest/ceiling, diagnostics, canonical order, and default page/cost behavior. Nine
+  complete response hashes are exact. Each request consumes exactly one fresh detached static projection; retained
+  source/compiler/staged/AST/IR/generated/runtime/trace/path/host state is unreachable. No public query name exists.
+
+  **Proof:** New 100/focused 630; Julia 8,172/primary/105; primary 5x2x66; ten Unicode legs; unchanged semantic
+  6/20/81 at 4/9 + 3/6, Unicode 806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0;
+  canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s; book/KM 688/5,287 and exact
+  1,613,088-KiB cleanup preserving 517 Pgen artifacts plus Julia package/registry caches.
+
+  **Next:** relation traversal/pages/budgets/costs `.10.6.5.2` waits for the clean `.1` commit.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.0 — freeze Julia semantic query authority**
-  (fully verified commit candidate from clean base `61aa48bb`).
+  (DONE at clean commit `58c67035` from base `61aa48bb`).
 
   **Result:** One fresh detached materialization of Julia's existing private projection is the only query evaluator
   authority. All 20 requests, 19 static hashes, 26 malformed boundaries, exact immutable typed/raw-neutral values,
@@ -31,7 +48,7 @@ Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof
   1,031/655s. No production/test/fixture/API/format/observation/rollout/admission behavior moves. Book/KM
   687/5,277 and exact 1,812,240-KiB cleanup preserving all 517 Pgen artifacts pass.
 
-  **Next:** private Julia record/source query kernel `.10.6.5.1` waits for this clean plan commit.
+  **Next:** private Julia record/source query kernel `.10.6.5.1` is the candidate above.
 
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.4.3 — close Julia call projection**
   (DONE at clean commit `61aa48bb` from implementation commit `cc229cc5`).

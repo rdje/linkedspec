@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.1 — add Julia private semantic query kernel
+
+Implemented Julia's private immutable non-traversal semantic-query kernel without exposing a partial public API.
+`SemanticQuery.jl` defines the complete frozen request/response vocabulary, tuple-backed recursive object/array
+values, structural equality/hash behavior, and fresh detached JSON serialization. The package exports none of the
+planned query types or calls yet; typed/raw-neutral public exposure remains `.10.6.5.3`.
+
+The evaluator consumes exactly one fresh detached materialization of the already-retained static projection and
+matches nine exact portable response hashes across capabilities, list, get, explain, diagnostics, privacy,
+content-digest, and source-ceiling cases. It preserves canonical record order, decision-first explanations, default
+page/logical-cost envelopes, structural redaction, digest-at-text-only policy, and explicit Julia `Bool` versus
+`Integer` validation. It never receives retained source/compiler/staged/AST/IR/generated/runtime/trace/path/host
+authority. Cursor/non-default pages, budgets, relation traversal, incomplete prefixes, and the other ten static
+hashes remain `.10.6.5.2`; raw validation and all 26 malformed boundaries remain `.3`.
+
+New focused proof passes 100 assertions and the seven-suite Julia semantic composition passes 630. Complete Julia
+passes 8,172 package assertions plus primary process conformance and corpus 105/105; primary passes 5x2x66 and all
+ten Unicode-manifest legs. Governance remains exact at semantic 6/20/81 with rollout 4/9 and admission 3/6,
+Unicode 806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0. Final canonical/docs/KM/cleanup
+signoff passes all four doctrines, Rust admission 1/1 in 80.95 seconds, Dart 1/1, reference primary 66x2, and
+Phase 0 1,031/1,031 in 662 seconds. mdBook, Knowledge Map 688/5,287, memory/task/diff hygiene, and exact
+1,613,088-KiB generated-artifact cleanup pass while preserving all 517 Pgen issue artifacts and Julia package/
+registry caches.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.0 — freeze Julia semantic query authority
 
 Froze Julia's behavior-free immutable semantic-query authority and dependency split before implementation. The

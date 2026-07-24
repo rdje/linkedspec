@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.1` — private query values can be complete before public query is
+  complete): Julia now retains the full frozen request/response vocabulary while evaluating only the nine
+  non-traversal cases owned by this leaf. Keeping every type and `_semantic_query_kernel` unexported lets `.2` add
+  traversal/pages/budgets behind the same value model, then `.3` publish typed and raw-neutral entry points
+  together. This avoids a public intermediate surface whose supported operations or validation semantics would
+  change one commit later.
+
+  Recursive immutability needs distinct object and array representations. Tuples alone cannot distinguish an
+  empty JSON object from an empty JSON array, so `_SemanticQueryObject` and `_SemanticQueryArray` wrap sorted or
+  ordered tuples separately. Retained response values contain no mutable `Dict`/`Vector`; every `to_json` call
+  thaws a new tree. The constructor fence tests `Bool` before `Integer`, because Julia otherwise accepts `true` as
+  a numeric page or budget value.
+
+  Query authority remains deliberately narrower than index authority. `_semantic_static_projection_materialize`
+  returns one fresh plain-data clone and is called exactly once per evaluation; the earlier test seam delegates to
+  it. The evaluator has no route to retained source/map/outcome, compiler/staged state, AST/IR, regex, generated
+  implementation, execution, observation, trace/sinks, paths, environment, clock, randomness, or another host
+  object. Exact nine-hash proof covers capabilities/list/get/explain, source redaction/digest/ceiling, diagnostics,
+  order, default page/cost, immutability, clone isolation, private omission, and no-execution source scans.
+
+  New proof is 100 and the seven semantic suites compose at 630. Complete Julia is 8,172/primary/105; primary is
+  5x2x66; all ten Unicode legs and unchanged governance ledgers pass. Traversal, paging, budgets, logical costs,
+  deterministic prefixes, and the remaining ten static hashes stay `.10.6.5.2`; raw validation/public exposure
+  stays `.3`; runtime events stay `.10.6.6`. Canonical signoff passes Rust 80.95s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/662s, mdBook/KM 688/5,287 and all four doctrines pass, and exact 1,613,088-KiB cleanup preserves
+  517 Pgen artifacts plus Julia package/registry caches.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.0` — query is a constrained view, not new semantic authority):
   Julia's recursively frozen `_SemanticStaticProjection` already owns every fact needed for the 19 static neutral
   query responses. The query evaluator must therefore receive one fresh detached materialization and nothing else.

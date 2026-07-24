@@ -578,6 +578,14 @@ Three backbone items tracked major structural modernization — all done:
   Full audit proof passes neutral 6/20/81, focused Julia 530 plus detached 22/25/10, Julia 8,072/primary/105,
   primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust/Dart admission + primary 66x2 + Phase 0
   1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts.
+  Private kernel `.10.6.5.1` now defines the complete immutable query vocabulary and evaluates nine exact static
+  capabilities/list/get/explain/source cases behind an unexported seam. It consumes exactly one fresh detached
+  projection clone and cannot reach retained source/compiler/staged/AST/IR/generated/runtime/trace/path/host state.
+  Tuple-backed object/array values remain recursively immutable and every JSON conversion is fresh. New
+  100/focused 630, Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs, and unchanged governance pass.
+  Traversal/pages/budgets/costs and ten remaining static hashes stay `.2`; raw validation and public exposure stay
+  `.3`. Canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and
+  exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts pass.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

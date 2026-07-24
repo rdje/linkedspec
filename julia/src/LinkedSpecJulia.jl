@@ -428,6 +428,7 @@ include("parser/UserFunctionDefinitionParser.jl")
 include("semantic/SemanticCompilationOutcome.jl")
 include("semantic/SemanticStaticProjection.jl")
 include("semantic/SemanticCallProjection.jl")
+include("semantic/SemanticQuery.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

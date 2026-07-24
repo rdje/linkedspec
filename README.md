@@ -998,6 +998,15 @@ content migration exists yet.
   neutral 6/20/81, focused Julia 530 plus detached 22/25/10, Julia 8,072/primary/105, primary 5x2x66, ten Unicode
   legs, unchanged ledgers, canonical Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277,
   doctrines, and exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts.
+  Private kernel `.10.6.5.1` now defines the complete immutable query vocabulary and matches nine exact static
+  capabilities/list/get/explain/source hashes behind an unexported evaluator. Each request consumes exactly one
+  fresh detached projection materialization; source/compiler/staged/AST/IR/generated/runtime/trace/path/host state
+  remains unreachable. Tuple-backed object/array values preserve recursive immutability and JSON shape while every
+  `to_json` call returns a fresh mutable tree. New 100/focused 630, Julia 8,172/primary/105, primary 5x2x66, ten
+  Unicode legs, and unchanged governance pass. Public query names remain absent; traversal/pages/budgets/costs and
+  the other ten static hashes remain `.2`, with raw validation and complete public exposure in `.3`. Canonical
+  Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact
+  1,613,088-KiB cleanup preserving 517 Pgen artifacts pass.
   mdBook/KM 686/5,265 and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.

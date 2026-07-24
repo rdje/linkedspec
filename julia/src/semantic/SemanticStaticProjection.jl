@@ -1467,8 +1467,7 @@ end
 _semantic_static_thaw(value::AbstractString) = String(value)
 _semantic_static_thaw(value) = value
 
-"""Private exact-oracle seam; deliberately omitted from the exported/public API."""
-function _semantic_static_projection_for_testing(index::SemanticIndex)
+function _semantic_static_projection_materialize(index::SemanticIndex)
     projection = getfield(index, :_static_projection)
     if !(projection isa _SemanticStaticProjection)
         throw(AssertionError("SemanticIndex static projection has an invalid internal type"))
@@ -1480,3 +1479,7 @@ function _semantic_static_projection_for_testing(index::SemanticIndex)
         "relations" => _semantic_static_thaw(projection.relations),
     )
 end
+
+"""Private exact-oracle seam; deliberately omitted from the exported/public API."""
+_semantic_static_projection_for_testing(index::SemanticIndex) =
+    _semantic_static_projection_materialize(index)
