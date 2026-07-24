@@ -615,6 +615,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   compose without runtime observation or promotion. Parent `.10.6.5` is closed; retrieve and plan runtime authority
   only in `.10.6.6.0` after the clean closeout commit. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/635s, book/KM 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
+  Runtime audit `.10.6.6.0` is now frozen in [[julia-semantic-runtime-observation-authority-map]]. Before changing
+  Julia capture, use the canonical `runtime.spec`/`runtime.input` through direct, loaded, JSON-reconstructed,
+  generated-plan, traced, and fresh emitted routes. The accepted-slot seam is immediately before
+  `_accept_runtime_regex_match!`; position comes from `one_match.codeunit_end`, not the still-old context cursor.
+  The final seam is immediately after `RuntimeParseResult` construction. Do not parse
+  `julia_runtime:regex_slot_selected` trace text into semantic events or reuse diagnostic output. Check the optional
+  sink before allocating and before hashing input; preserve callback identity through the generated broad catch;
+  derive the observed index only from detached rule/edge/slot/`selects_regex` evidence. `.1` owns typed direct
+  capture, `.2` derivation/twentieth digest, `.3` generated/emitted propagation, and `.4` no-change closeout.
 
 ---
 

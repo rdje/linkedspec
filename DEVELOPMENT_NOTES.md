@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.0` — semantic observation is distinct from operational trace):
+  Julia's existing slot-selection trace marks are useful debugging evidence but cannot be promoted into the typed
+  semantic API: they are string topics, have no final-result companion, and belong to an independently configured
+  channel. A dedicated optional invocation-local sink lets trace, diagnostics, and semantic observation coexist
+  without coupling or redundancy.
+
+  The accepted-slot seam precedes `_accept_runtime_regex_match!`, so `context.cursor_codeunit` is deliberately
+  still the old cursor. Correct Unicode-scalar position therefore comes from `one_match.codeunit_end`. The final
+  event follows construction of the normally returned `RuntimeParseResult`. All public and generated routes
+  converge on those two seams, but generated execution's broad exception translation requires a narrow callback-
+  failure identity marker/pass-through so caller objects are not reclassified.
+
+  No-sink performance is a structural fence: test the sink before constructing an event and before hashing the
+  full input. Derivation is separate and consumes only detached static topology; static edge/rule facts own value
+  shape, never host result values. It produces a new immutable observed snapshot and leaves query projection-only.
+  This supports the exact twentieth digest without creating a second compiler, runtime, trace, or query owner.
+
+  Focused 1,063, Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust
+  78.71s + Dart 1/1 + reference primary 66x2 + Phase 0 1,031/679s, book/KM 691/5,321, doctrines, and exact
+  1,597,636-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass. Implementation is
+  ordered as typed capture `.1`, derivation `.2`, generated/emitted propagation `.3`, and closeout `.4`.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.4` — close a public query by recomposing its committed owners):
   Julia's query parent needs no second evaluator or closeout-only test. Retrieving the authority, kernel,
   traversal, and public-API fact cards and running the nine committed suites together is the strongest closure

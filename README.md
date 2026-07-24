@@ -1033,6 +1033,18 @@ content migration exists yet.
   Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307, doctrines, and exact
   1,613,872-KiB cleanup preserving 517 Pgen artifacts pass. Parent `.10.6.5` is composition-closed; `.10.6.6.0`
   owns the next runtime-observation authority plan.
+  Behavior-free runtime audit `.10.6.6.0` now freezes that plan. Julia has no semantic observation sink yet;
+  existing `julia_runtime:regex_slot_selected` trace strings are not typed semantic authority and there is no
+  final-result trace topic. Slot capture belongs after match/ordered identity acceptance and before effects, with
+  scalar position computed from `one_match.codeunit_end` rather than the still-old context cursor. Final capture
+  belongs immediately after `RuntimeParseResult` construction. Direct, loaded, reconstructed, generated-plan,
+  emitted, and traced routes converge on those seams. The optional sink must allocate/hash nothing when absent,
+  preserve exact caller callback identity through generated broad-error translation, and remain separate from
+  trace and diagnostic output. Immutable derivation consumes only detached static rule/edge/`selects_regex`
+  evidence, never host result values, and adds a new execution snapshot at the twentieth digest while leaving the
+  base static. Work is dependency-ordered as typed direct capture `.1`, derivation `.2`, generated/emitted
+  propagation `.3`, and no-change closeout `.4`; the audit itself changes no production/test/API/format/runtime/
+  rollout/admission behavior.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

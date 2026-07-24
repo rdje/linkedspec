@@ -610,6 +610,12 @@ Three backbone items tracked major structural modernization — all done:
   without production/replacement-test/API/format/runtime/promotion change. Runtime authority planning begins in
   `.10.6.6.0` only after the closeout commit is clean. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0
   1,031/635s, book/KM 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
+  Behavior-free runtime audit `.10.6.6.0` now freezes Julia's exact accepted-slot and successful-result capture
+  seams, the still-old pre-effect context-cursor hazard, separate trace/diagnostic authority, no-sink allocation/
+  hashing fence, generated broad-catch callback-identity pass-through, detached static derivation, twentieth digest,
+  and `.1-.4` dependency order. Direct, loaded, reconstructed, generated-plan, fresh emitted, and traced probes
+  converge on the same runtime seams. The audit changes no production/test/API/format/runtime behavior or semantic
+  rollout/admission; typed direct capture `.10.6.6.1` follows only after its clean commit.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.0 — freeze Julia runtime observation
+
+Froze Julia's complete runtime semantic-observation authority before implementation. The existing
+`julia_runtime:regex_slot_selected` string trace is operational evidence rather than typed semantic authority, and
+trace has no final-result topic. Direct high-trace proof returns `Any["A", "B"]`, scalar cursor 2, and exactly two
+slot marks. Direct, loaded, normalized JSON-reconstructed, generated-plan direct/traced, and fresh emitted direct/
+traced routes converge. Accepted-slot capture belongs after match and ordered identity but before effects, using
+`one_match.codeunit_end` because the context cursor is still old. Final capture follows successful
+`RuntimeParseResult` construction. The optional invocation-local sink is checked before event allocation and input
+hashing, while generated broad-error translation preserves exact semantic callback failure identity.
+
+Detached derivation validates typed events only against immutable static rule/edge/slot/`selects_regex` topology,
+derives shapes from static facts rather than host values, leaves the base static, and targets the exact twentieth
+digest for canonical `ab\n`. The dependency order is typed direct capture `.1`, immutable derivation `.2`,
+generated/emitted propagation `.3`, then no-change closeout `.4`.
+
+The nine committed semantic suites pass exact focused 1,063; complete Julia remains 8,605/primary/105. Primary
+5x2x66, all ten Unicode legs, and unchanged Unicode/semantic/capability/generated/language/public ledgers pass.
+Canonical CI passes four doctrines, Rust semantic admission in 78.71 seconds, Dart 1/1, reference primary 66x2,
+and Phase 0 1,031/1,031 in 679 seconds. mdBook, Knowledge Map 691/5,321, bounded memory, task/diff hygiene pass.
+Exact 1,597,636-KiB safe cleanup removes only generated Rust dependencies/incremental state, Julia compiled/log
+caches, rendered book, and Python bytecode while preserving Julia package/registry caches and all 517 Pgen
+evidence artifacts. No production code, test, fixture, contract, API, format, runtime, rollout, or admission
+behavior changes; `.10.6.6.1` begins only after this plan commit is clean.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.4 — close Julia semantic query
 
 Composition-closed Julia's immutable static semantic-query parent without adding production code, replacement

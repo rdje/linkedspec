@@ -263,13 +263,20 @@ topology, creates a separate immutable canonical execution/event/`observed_as` s
 matches the twentieth digest through typed and raw-neutral query. Generated/emitted propagation `.3`, composition
 closeout `.4`, and exact 12-role admission `.10.5.6` are complete.
 
-Julia now has its pinned Unicode-17 prerequisite plus a composition-closed opaque source and compiled-or-failed
-foundation. `semantic_index` copies valid text or strict UTF-8 bytes, owns exact byte/scalar coordinates and four
-source ceilings, retains staged compiler authority privately, and returns detached snapshot/diagnostic/entry/
-generated-plan values without paths, target execution, records, or query. The committed source 135 plus outcome
-85 assertions compose at focused 220; complete Julia is 7,762/primary/105. Static records, calls, query, runtime
-observation, and admission remain dependency-ordered `.10.6.3-.7` work, so Julia does not yet advance the 4/9
-rollout or 3/6 native-admission ledger.
+Julia now has its pinned Unicode-17 prerequisite, composition-closed opaque source/compiled-or-failed foundation,
+all five private static targets, calls/staging/generated provenance, and complete immutable typed/raw-neutral
+query. `semantic_index` copies valid text or strict UTF-8 bytes, owns exact byte/scalar coordinates and four source
+ceilings, retains compiler authority privately, and queries exactly one fresh detached projection. All 19 static
+response hashes and 26 malformed-request boundaries are exact at focused 1,063 and complete Julia
+8,605/primary/105.
+
+Behavior-free `.10.6.6.0` freezes the remaining runtime-observation topology. Slot capture belongs after accepted
+match/ordered identity and before effects, using the match end rather than the still-old context cursor; final
+capture belongs after `RuntimeParseResult` construction. Direct, loaded, reconstructed, generated-plan, emitted,
+and traced routes converge there. Trace/diagnostics remain separate; absent sink means no event allocation or input
+hash; generated broad catches need exact callback-identity passthrough; immutable derivation uses only detached
+static topology and shapes. Typed capture `.1`, derivation `.2`, generated/emitted propagation `.3`, and closeout
+`.4` precede admission `.7`, so Julia still does not advance the 4/9 rollout or 3/6 native-admission ledger.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

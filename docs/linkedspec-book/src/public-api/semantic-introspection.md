@@ -1437,6 +1437,60 @@ plan begins at `.10.6.6.0` only after this closeout commit is clean. Canonical R
 66x2 + Phase 0 1,031/635s, mdBook/KM 690/5,307, doctrines, and exact 1,613,872-KiB safe cleanup preserving 517
 Pgen artifacts and Julia package/registry caches pass.
 
+### Julia runtime-observation authority plan
+
+Behavior-free leaf `.10.6.6.0` freezes the Julia observation boundary before any runtime or API change. Julia does
+not yet expose a semantic observation sink. The existing high-level
+`julia_runtime:regex_slot_selected` trace mark is useful operational evidence, but it is a string event rather than
+the versioned typed semantic contract, and trace has no final-result topic. Diagnostic output is a third,
+independent optional channel.
+
+The exact slot seam is already shared by ordinary and generated-plan execution. A match must exist and ordered
+slot identity must succeed; capture then occurs before `_accept_runtime_regex_match!` changes cursor, registers, or
+action state. This ordering has an important Julia detail: the context cursor is still the old cursor, so the
+semantic position must convert `one_match.codeunit_end` with `codeunit_offset_to_char_offset`. The final event is
+captured only after `runtime_parse` constructs one normally returned `RuntimeParseResult`, using its resolved entry
+label and `cursor_char_offset`.
+
+The planned typed contract is `linkedspec-semantic-execution-observation-v1` with closed
+`regex_slot_selected` and `rule_result` event kinds. Slot events carry executing rule, target rule, zero-based
+authored slot index, and scalar position. Result events carry the entry rule, final scalar position, exact full-
+input SHA-256 identity, and `succeeded`; host result values are deliberately absent. The optional invocation-local
+synchronous sink must be checked before event allocation and before final input hashing. A callback failure must
+escape as the exact caller object.
+
+All routes converge on the same runtime seams:
+
+- direct `runtime_parse` and `runtime_execute`;
+- their traced convenience forms;
+- `LoadedCompiledSpec` through `create_engine`;
+- normalized JSON reconstruction through a new `LinkedSpecRuntimeEngine`;
+- validated generated-plan direct/traced helpers; and
+- fresh emitted module `execute` / `execute_with_trace` wrappers.
+
+Generated helpers currently translate broad execution failures to `GeneratedSourceException`. They therefore
+need an invocation-local semantic callback-failure marker/pass-through before generic translation; it must preserve
+only genuine callback failures and never reclassify an unrelated parser failure. Result values, cursors, trace
+bytes/events, diagnostic events, failure behavior, and generated-source v2/format 2 remain unchanged.
+
+Observed-index derivation is separate from capture. It validates the typed contract and field combinations,
+nonnegative positions, selected entry, exactly one successful final event last, and every executing-rule edge to
+target-slot `selects_regex` relation. It obtains slot source/value shape from the static edge and result source/
+shape from the selected static rule, never from host values or runtime/compiler objects. The returned index owns a
+new `has_execution=true` projection with canonical execution/event records and `observed_as` relations; the base
+stays static and immutable. Query remains projection-only and cannot execute, install a sink, enable trace, or hash
+new input.
+
+The exact canonical input is `ab\n`, including the newline. Its input identity is
+`input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece`; the two slot events occur at
+scalar positions 1 and 2, and the final event at 2. The `runtime_events` response must retain digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+
+Implementation is dependency-ordered: typed engine capture `.10.6.6.1`, immutable derivation and twentieth digest
+`.2`, generated/emitted direct/traced propagation plus non-interference `.3`, and no-change composition `.4`.
+Planning `.0` changes no production code, tests, fixtures, contract, API, generated format, runtime behavior,
+rollout, or native admission.
+
 ## Exact v1 record model
 
 Every record has exactly:

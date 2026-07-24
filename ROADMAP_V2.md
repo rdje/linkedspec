@@ -521,6 +521,14 @@ complete Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, and unchange
 or promotion. Parent `.10.6.5` is composition-closed; runtime authority planning `.10.6.6.0` follows only after
 the closeout commit is clean. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM
 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
+Behavior-free runtime-observation audit `.10.6.6.0` now freezes exact Julia authority before code. Existing trace
+slot strings and diagnostic output are not semantic events. Accepted slot capture uses the matched end offset
+before effects; successful final capture uses `RuntimeParseResult.cursor_char_offset`. Direct, loaded,
+reconstructed, generated-plan, fresh emitted, and traced routes converge on those seams, while generated broad
+error translation requires semantic callback-identity passthrough. The absent sink allocates no event and hashes
+no input. Detached derivation validates static rule/edge/slot topology and shapes, returns a new observed index at
+the twentieth digest, and leaves query execution-free. Work is split as typed direct capture `.1`, derivation `.2`,
+generated/emitted propagation `.3`, and no-change closeout `.4`; `.0` changes no behavior or promotion.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

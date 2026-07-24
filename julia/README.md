@@ -178,6 +178,23 @@ test/API/format/runtime behavior or promotion and closes parent `.10.6.5`. Runti
 separate `.10.6.6` workstream. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM
 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
 
+Behavior-free `.10.6.6.0` freezes the runtime-observation authority before implementation. The existing high-level
+`julia_runtime:regex_slot_selected` trace mark is useful for debugging but is not a typed semantic event, and no
+final-result trace topic exists. Slot capture must occur after match and ordered identity acceptance but before
+match effects; because the context cursor is still old at that point, its Unicode-scalar position comes from
+`one_match.codeunit_end`. The final event belongs immediately after successful `RuntimeParseResult` construction
+and reuses `cursor_char_offset` while hashing the exact full input only when a sink is installed.
+
+The same optional invocation-local sink must flow through `runtime_parse`/`runtime_execute`, traced convenience
+calls, loaded and JSON-reconstructed engines, validated generated-plan calls, and fresh emitted direct/traced
+modules. Generated execution needs a semantic-specific callback-failure pass-through before its broad
+`GeneratedSourceException` translation. Derivation validates typed events only against the base index's detached
+static rule, edge, regex-slot, and `selects_regex` evidence, obtains value shapes from those facts rather than host
+values, returns a new `has_execution=true` index, and leaves the base static. `.1` owns typed direct capture, `.2`
+owns immutable derivation and the twentieth digest, `.3` owns generated/emitted propagation and non-interference,
+and `.4` owns no-change closeout. `.10.6.6.0` changes no production, test, fixture, contract, API, format, runtime,
+rollout, or admission behavior.
+
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical
 Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB

@@ -45,6 +45,7 @@ answers:
   - "how is Julia semantic authored definition order merged"
   - "is the Julia semantic source and compilation foundation composition closed"
   - "what is the next Julia semantic introspection task after source outcome closeout"
+  - "what is the Julia runtime semantic observation authority plan"
   - "what are the exact Julia static semantic projection targets"
   - "why does Julia semantic static projection need neutral repetition normalization"
   - "why can Julia compiled regex patterns not directly become semantic regex slots"
@@ -76,14 +77,15 @@ answers:
 date: 2026-07-23
 status: current
 tags: [julia, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, .10.6.4.0-.10.6.4.3, and .10.6.5.0-.10.6.5.2; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/knowledge/julia-semantic-call-core-projection.md; docs/knowledge/julia-semantic-query-authority-map.md; docs/knowledge/julia-semantic-query-kernel.md; docs/knowledge/julia-semantic-query-traversal.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.0, .10.6.2.0-.10.6.2.3, .10.6.3.0-.10.6.3.3, .10.6.4.0-.10.6.4.3, .10.6.5.0-.10.6.5.4, and .10.6.6.0; docs/knowledge/julia-semantic-static-projection-plan.md; docs/knowledge/julia-semantic-call-staged-projection-plan.md; docs/knowledge/julia-semantic-call-core-projection.md; docs/knowledge/julia-semantic-query-authority-map.md; docs/knowledge/julia-semantic-query-kernel.md; docs/knowledge/julia-semantic-query-traversal.md; docs/knowledge/julia-semantic-runtime-observation-authority-map.md; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_source_foundation_test.jl; julia/test/semantic_index_compilation_foundation_test.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; julia/test/semantic_index_call_core_test.jl; julia/test/semantic_index_call_staged_test.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/src/parser/StagedParserRegistry.jl; julia/src/parser/UserFunctionDefinitionParser.jl; julia/src/compiler/CompiledSpec.jl; julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/src/action/ActionContracts.jl; julia/src/action/FunctionRegistry.jl; julia/src/io/SpecLoader.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl
 reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'; rg -n 'semantic_index|_semantic_call_add_staged_artifacts|_semantic_call_validate_staged_authority|_semantic_call_add_generated_plan|semantic_query|SemanticQuery|regex_slot_selected|diagnostic_output_sink' julia/src"
 ---
 
-Julia now has the source and compiled-or-failed semantic-index foundation from `.10.6.2.1-.2` plus all five
-private static construction targets from `.10.6.3.1-.2`, but still has no public records, `semantic_query`,
-`SemanticQuery`, capabilities type, or typed runtime semantic observation. The exported `semantic_index` remains
-an opaque native owner rather than a renamed descriptor or a query wrapper over public dictionaries.
+Julia now has the source and compiled-or-failed semantic-index foundation from `.10.6.2.1-.2`, all five private
+static construction targets from `.10.6.3.1-.2`, complete calls/staging/generated provenance from `.10.6.4`, and
+the public immutable typed/raw-neutral query surface from `.10.6.5`. It still has no typed runtime semantic
+observation at the `.10.6.6.0` audit boundary. The exported `semantic_index` remains an opaque native owner rather
+than a renamed descriptor or a query wrapper over public dictionaries.
 
 The reusable meaning is already present, but distributed across typed layers:
 
@@ -116,13 +118,16 @@ file bytes but also retains requested/resolved host paths and origin; it cannot 
 merge authored rule and function authorities. The outward descriptor likewise contains a Julia-native projection;
 it is compatibility state, not the portable record/relation schema.
 
-Runtime observation must be a separate optional invocation-local typed sink. Existing high trace emits the string
-topic `julia_runtime:regex_slot_selected`, but trace detail is not typed semantic evidence and there is no final
-result trace topic. Capture belongs directly at the accepted-slot seam and only after successful final
-`RuntimeParseResult` construction. Direct, loaded, reconstructed, generated-plan, emitted, and traced routes must
-forward the same sink without changing result/cursor/trace/diagnostic behavior. Generated execution currently
-translates broad failures to `GeneratedSourceException`; a semantic-channel-specific wrapper/pass-through must
-preserve the caller callback's exact exception object and stack, independently of the existing diagnostic sink.
+Behavior-free runtime audit `.10.6.6.0` freezes observation as a separate optional invocation-local typed sink.
+Existing high trace emits the string topic `julia_runtime:regex_slot_selected`, but trace detail is not typed
+semantic evidence and there is no final result trace topic. Capture belongs directly at the accepted-slot seam and
+only after successful final `RuntimeParseResult` construction. The slot event's scalar position must derive from
+`one_match.codeunit_end`, because the context cursor is deliberately not mutated until the following accept call;
+the final event reuses `RuntimeParseResult.cursor_char_offset`. Direct, loaded, reconstructed, generated-plan,
+emitted, and traced routes converge on these seams. Generated execution currently translates broad failures to
+`GeneratedSourceException`; an invocation-local semantic callback failure marker/pass-through must rethrow the
+exact caller object before generic translation, independently of the diagnostic sink. With no semantic sink, no
+event is allocated and no input is hashed. See [[julia-semantic-runtime-observation-authority-map]].
 
 Public semantic values also require deliberate detachment. Julia structs are immutable bindings but can contain
 mutable `Vector` and `Dict` members, so returned capabilities, records, relations, pages, explanations, and errors

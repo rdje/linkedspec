@@ -8,19 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia immutable semantic-query no-change closeout `FUTURE-PARITY-BACKLOG.10.6.5.4` is a fully verified commit
-  candidate from clean public-query commit `1b303cef`. The nine committed semantic suites recompose at exact
-  focused 1,063; complete Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, and every unchanged ledger
-  pass without production or replacement-test changes. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase
-  0 1,031/635s, book/KM/doctrines, and exact 1,613,872-KiB cleanup pass. The commit finishes parent `.10.6.5`
-  before runtime-observation planning `.10.6.6.0`.
+- Julia runtime-observation authority plan `FUTURE-PARITY-BACKLOG.10.6.6.0` is complete and verified from clean
+  immutable-query closeout `5ad8a165`. Exact seams/routes, matched-end scalar policy, trace/diagnostic separation,
+  absent-sink fence, generated callback identity, immutable derivation, twentieth digest, and `.1-.4` order are
+  frozen. Typed direct capture `.10.6.6.1` waits for this plan's clean commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.0 — freeze Julia runtime observation**
+  (DONE from clean immutable-query closeout `5ad8a165`; this leaf's commit is the durable handoff boundary).
+
+  **Result:** Julia's complete typed runtime-observation authority is frozen before behavior. Accepted-slot capture
+  uses matched-end scalar position before effects; final capture follows successful result construction. Every
+  direct/loaded/reconstructed/generated/emitted/traced route converges; trace and diagnostics stay independent;
+  absent sink does no event/hash work; generated callback failures preserve caller identity; detached derivation
+  uses only static facts and targets the exact twentieth digest. No production/test/API/format/runtime or ledger
+  behavior changes.
+
+  **Proof:** Focused 1,063, Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, and unchanged Unicode/
+  semantic/capability/generated/language/public ledgers pass. Canonical Rust 78.71s + Dart 1/1 + primary 66x2 +
+  Phase 0 1,031/679s, book/KM 691/5,321, doctrines, memory/diff hygiene, and exact 1,597,636-KiB cleanup pass while
+  preserving 517 Pgen artifacts and Julia package/registry caches. `.10.6.6.1` waits for the clean plan commit.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.5.4 — close Julia semantic query**
-  (fully verified commit candidate from public-query commit `1b303cef`).
+  (DONE at clean commit `5ad8a165` from public-query commit `1b303cef`).
 
   **Result:** The nine committed Julia semantic suites compose at focused 1,063 and close the immutable static
   query parent without production code, replacement tests, fixtures, contracts, API/format behavior, runtime
