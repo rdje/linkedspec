@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.4` — closeout should prove composition, not add a second owner): The
+  typed capture, detached derivation, and emitted-route leaves already own every runtime-observation mechanism.
+  The closeout therefore retrieved their four fact cards and recomposed the twelve committed suites in dependency
+  order. Exact focused 1,337 proves the callback, event, topology, digest, omission, route, and non-interference
+  boundaries together without a closeout-only helper or replacement test.
+
+  The result confirms that trace support and semantic observation coexist because they are independent channels
+  sharing only the runtime invocation boundary: observation stays typed/caller-owned, trace stays operational,
+  and neither becomes the other's authority. Generated wrappers remain transparent adapters and emitted identity
+  stays v2/format 2 with the minimal `{label, family}` plan. The semantic ledgers intentionally remain rollout
+  4/9 and native admission 3/6; only exact 12-role consumer leaf `.10.6.7` may promote Julia.
+
+  Complete Julia 8,879/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 77.95s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/627s, mdBook/KM 694/5,348, doctrines, and exact
+  1,736,920-KiB cleanup pass while preserving Julia package/registry caches and 517 Pgen artifacts.
+  Parent `.10.6.6` is closed; `.10.6.7` remains pending and inactive while awaiting director instruction.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.3` — emitted observation should be a transparent adapter): The
   generated-plan helpers already owned semantic callback identity and shared runtime capture. Fresh emitted Julia
   modules therefore need only an additive optional keyword on `execute` and `execute_with_trace`, forwarded to

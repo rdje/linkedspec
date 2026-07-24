@@ -1662,6 +1662,13 @@ Rust semantic admission 1/1 in 79.78 seconds, Dart 1/1, reference primary 66x2, 
 seconds. Knowledge Map is 694 facts / 5,348 question keys; exact 1,749,080-KiB cleanup preserves Julia package/
 registry caches and all 517 Pgen evidence artifacts.
 
+No-change closeout `.10.6.6.4` retrieves the four committed Julia runtime-observation fact cards and recomposes
+all twelve owner suites at exact focused 1,337. This confirms the typed event sequence, malformed/topology
+rejection, twentieth typed/raw digest, callback identity, final-result omission, every native/generated/emitted
+route, absent-sink fence, and result/diagnostic/trace non-interference together without replacement code or tests.
+Parent `.10.6.6` is closed with generated-source v2/format 2, rollout 4/9, and native admission 3/6 unchanged.
+Exact Julia admission remains pending in `.10.6.7`.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -2051,7 +2058,7 @@ The dependency order is:
 | `.10.6.6.1` | Julia typed native runtime observation capture | complete; immutable events/sink, new 66/focused 1,129 |
 | `.10.6.6.2` | Julia immutable observed-index derivation | complete; strict topology and exact twentieth digest, new 157/focused 1,286 |
 | `.10.6.6.3` | Julia generated/emitted observation propagation | complete; direct/traced/isolated routes, new 51/focused 1,337, v2/format 2 unchanged |
-| `.10.6.6.4` | Julia runtime-observation composition closeout | pending |
+| `.10.6.6.4` | Julia runtime-observation composition closeout | complete; committed focused 1,337 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.7` | Julia exact composed semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

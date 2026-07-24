@@ -1064,7 +1064,10 @@ content migration exists yet.
   at new 51/focused 1,337 and complete Julia 8,879/primary/105. Emitted source remains deterministic v2/format 2
   with the unchanged `{label, family}` plan. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.78s + Dart
   1/1 + primary 66x2 + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup
-  preserving 517 Pgen artifacts pass. Rollout and admission remain 4/9 and 3/6.
+  preserving 517 Pgen artifacts pass. No-change closeout `.10.6.6.4` now recomposes all twelve committed semantic
+  suites at focused 1,337 plus complete Julia/matrix/Unicode/canonical proof and closes parent `.10.6.6` without
+  production/replacement-test/API/format/runtime or promotion change. Rollout and admission remain 4/9 and 3/6;
+  exact admission `.10.6.7` remains pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

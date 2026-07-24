@@ -632,7 +632,9 @@ Three backbone items tracked major structural modernization — all done:
   complete Julia 8,879/primary/105. Generated source remains deterministic v2/format 2 with the unchanged
   `{label, family}` plan. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.78s + Dart 1/1 + primary 66x2
   + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup preserving 517 Pgen
-  artifacts pass; rollout/admission stay 4/9 and 3/6.
+  artifacts pass. No-change `.10.6.6.4` now recomposes the twelve committed owners at focused 1,337 plus complete
+  Julia/matrix/Unicode/canonical proof and closes `.10.6.6` without production/replacement-test/API/format/runtime
+  or promotion change; rollout/admission stay 4/9 and 3/6, and exact admission `.10.6.7` remains pending.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

@@ -644,6 +644,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   for exact new 51/focused 1,337. It covers public generated helpers, fresh emitted direct/traced wrappers, and an
   isolated host; locks canonical events/twentieth digest, callback identity, exit omission, result/diagnostic/trace
   equality, deterministic source, and unchanged generated-source v2/format 2. Complete Julia is 8,879/primary/105.
+  No-change `.10.6.6.4` is now complete: retrieve all four runtime-observation cards, then run the complete twelve-
+  suite owner order for exact focused 1,337. Parent `.10.6.6` is composition-closed without replacement code,
+  format/runtime change, or ledger promotion. `.10.6.7` remains the pending exact admission owner.
 
 ---
 

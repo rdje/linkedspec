@@ -4,8 +4,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.6.3` — Julia emitted/generated observation propagation fully verified.
-- latest_commit: `a5bdd0e6` is the clean derivation base; verified propagation `.10.6.6.3` awaits its durable commit.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.6.4` — Julia runtime-observation parent composition-closed.
+- latest_commit: `bea0afe0` is the clean propagation base; verified no-change closeout `.10.6.6.4` awaits commit.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -40,7 +40,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   privacy/non-execution/host denial. `.4` closes `.10.6.5`; `.10.6.6.0` freezes runtime authority. `.10.6.6.1`
   exports immutable slot/result events and capture across shared native routes with exact Unicode positions/input
   SHA, absent-sink zero work, callback identity, and result/trace/diagnostic isolation. `.2` exports strict detached
-  derivation and matches the twentieth typed/raw digest. `.3` adds fresh emitted direct/traced sink forwarding with exact helper/module/isolated-host events/digest/callback/non-interference proof and unchanged v2/format 2.
+  derivation and matches the twentieth typed/raw digest. `.3` adds exact fresh emitted route proof. `.4` recomposes all twelve committed owners at focused 1,337 and closes `.10.6.6` without replacement behavior or promotion.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -57,4 +57,4 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.6.6.3` code/tests/docs ready for commit; `.4` waits for clean.
+- blockers: none. in_flight_uncommitted: verified `.10.6.6.4` docs/KM closeout awaits commit; afterward pause for director instruction with `.10.6.7` pending and inactive.

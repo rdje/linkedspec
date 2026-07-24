@@ -10,7 +10,7 @@ answers:
   - "does Julia generated semantic observation change parser results or trace bytes"
   - "does Julia emitted exit produce a final semantic result event"
 date: 2026-07-23
-status: current generated-plan and fresh-emitted direct/traced propagation; composition closeout pending
+status: current generated-plan and fresh-emitted direct/traced propagation; parent composition closed
 tags: [julia, semantic-introspection, runtime, observation, generated-source, trace, diagnostics]
 evidence: julia/src/source/SourceEmitter.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.3
 last_verified: 2026-07-23
@@ -50,6 +50,11 @@ Full signoff passes primary 5x2x66, all ten Unicode-manifest legs, unchanged Uni
 language/public ledgers, and canonical CI with Rust semantic admission 1/1 in 79.78 seconds, Dart 1/1, reference
 primary 66x2, and Phase 0 1,031/1,031 in 637 seconds. mdBook and Knowledge Map 694/5,348 pass; exact
 1,749,080-KiB cleanup preserves Julia package/registry caches and all 517 Pgen artifacts.
+
+No-change closeout `.10.6.6.4` later retrieved this fact with the capture, derivation, and authority cards and
+recomposed all twelve committed semantic suites at focused 1,337. Parent `.10.6.6` is closed without changing
+generated source, runtime behavior, rollout 4/9, or native admission 3/6; exact Julia admission remains pending in
+`.10.6.7`.
 
 Related facts: [[julia-semantic-runtime-observation-direct-capture]],
 [[julia-semantic-runtime-observation-derivation]], [[julia-semantic-runtime-observation-authority-map]],

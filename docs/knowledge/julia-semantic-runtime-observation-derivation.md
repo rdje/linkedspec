@@ -14,7 +14,7 @@ answers:
   - "what is the Julia runtime_events response digest"
   - "can Julia query an observed runtime snapshot"
 date: 2026-07-23
-status: current immutable observed-index derivation; generated/emitted public propagation remains pending
+status: current immutable observed-index derivation; generated/emitted propagation and parent composition complete
 tags: [julia, semantic-introspection, runtime, observation, query, immutability, topology]
 evidence: julia/src/semantic/SemanticRuntimeProjection.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticIndex.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_projection_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.2
 last_verified: 2026-07-23
@@ -54,8 +54,10 @@ Canonical `ab\n` yields two selected-slot events at scalar positions 1 and 2 plu
 eleven semantic suites compose at 1,286 and complete Julia reaches 8,828 package assertions plus primary process
 conformance and corpus 105/105.
 
-Fresh emitted module/public generated propagation remains `.10.6.6.3`. The derivation leaf does not change
-generated-source v2/format 2, semantic rollout 4/9, or native admission 3/6.
+Fresh emitted module/public generated propagation is complete in `.10.6.6.3`, and no-change `.10.6.6.4`
+recomposes all twelve committed owners at focused 1,337 and closes the parent. Neither leaf changes this
+derivation authority, generated-source v2/format 2, semantic rollout 4/9, or native admission 3/6. Exact Julia
+admission remains pending in `.10.6.7`.
 
 Related facts: [[julia-semantic-runtime-observation-authority-map]],
 [[julia-semantic-runtime-observation-direct-capture]], [[julia-semantic-query-public-api]],

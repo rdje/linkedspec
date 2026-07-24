@@ -12,7 +12,7 @@ answers:
   - "do fresh emitted Julia parser wrappers accept semantic_observation_sink"
   - "does Julia runtime observation derive a semantic index yet"
 date: 2026-07-23
-status: current typed capture through native, validated generated-plan, and fresh emitted wrappers; derivation complete
+status: current typed capture through native, validated generated-plan, and fresh emitted wrappers; parent composition closed
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.6.1 and .10.6.6.3
 last_verified: 2026-07-23
@@ -58,6 +58,10 @@ conformance and corpus 105/105.
 Full signoff also passes primary 5x2x66, all ten Unicode-manifest legs, unchanged Unicode/semantic/capability/
 generated/language/public ledgers, and canonical CI with Rust semantic admission 1/1 in 82.37 seconds, Dart 1/1,
 reference primary 66x2, and Phase 0 1,031/1,031 in 662 seconds.
+
+No-change composition `.10.6.6.4` subsequently recomposed all twelve committed semantic owners at focused 1,337
+and closed parent `.10.6.6` without changing this capture API, runtime behavior, generated format, rollout 4/9,
+or native admission 3/6. Exact Julia admission remains pending in `.10.6.7`.
 
 Related facts: [[julia-semantic-runtime-observation-authority-map]], [[julia-semantic-query-public-api]],
 [[julia-semantic-runtime-observation-generated-routes]], [[julia-semantic-runtime-observation-derivation]],

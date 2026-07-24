@@ -303,6 +303,12 @@ must treat observer propagation as a runtime adapter, not a serialized plan fiel
 primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 79.78s + Dart 1/1 + primary 66x2 + Phase 0
 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup preserving 517 Pgen artifacts pass.
 
+No-change closeout `.10.6.6.4` is now complete. It retrieves the four committed runtime-observation authorities
+and recomposes all twelve Julia semantic suites at focused 1,337, then repeats complete Julia 8,879/primary/105,
+primary 5x2x66, ten Unicode legs, unchanged ledgers, and canonical proof. Parent `.10.6.6` closes without a new
+implementation owner, generated-format/runtime change, or promotion. Keep `.10.6.7` pending until one exact
+12-role Julia admission consumer owns the 4/9 and 3/6 ledger movement.
+
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
 class, consumes it at all 12 label sites in first-authoritative `specs/spec.spec`, freshness-locks all four corpus

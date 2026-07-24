@@ -8,16 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia emitted/generated runtime-observation propagation `FUTURE-PARITY-BACKLOG.10.6.6.3` is complete and fully
-  verified from clean derivation commit `a5bdd0e6`; its durable commit is the current action. No-change composition
-  `.10.6.6.4` must not activate until that commit leaves the repository clean.
+- No slice is active. Julia runtime-observation parent `.10.6.6` is composition-closed; exact Julia admission
+  `.10.6.7` remains pending and is deliberately not activated while awaiting director instruction.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.4 — close Julia runtime observation**
+  (DONE from clean propagation commit `bea0afe0`; exact admission `.10.6.7` remains pending).
+
+  **Result:** The four committed runtime-observation facts and all twelve Julia semantic owner suites recompose
+  unchanged at focused 1,337. Canonical events, strict malformed/topology rejection, twentieth typed/raw digest,
+  callback identity, exit omission, every native/generated/emitted route, absent-sink behavior, non-interference,
+  and generated-source v2/format 2 remain exact. No production code, replacement test, fixture, contract, API,
+  runtime, format, rollout, or admission changed; parent `.10.6.6` is closed.
+
+  **Proof:** Julia remains 8,879/primary/105. Primary 5x2x66, ten Unicode legs, Unicode
+  1563/1581/158/464/12 and 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated
+  v1/10/80-0-0, language 246/105+1/122, and public 59/27/0 pass. Canonical Rust 77.95s + Dart 1/1 + primary
+  66x2 + Phase 0 1,031/627s, book/KM 694/5,348, doctrines, memory/diff hygiene, and exact
+  1,736,920-KiB cleanup pass while preserving 517 Pgen artifacts and Julia package/registry caches.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.3 — propagate Julia runtime observation**
-  (DONE and fully verified from clean derivation commit `a5bdd0e6`; awaiting this leaf's durable commit).
+  (DONE at clean commit `bea0afe0` from derivation commit `a5bdd0e6`).
 
   **Result:** Fresh emitted Julia `execute` / `execute_with_trace` wrappers now accept and forward the committed
   optional semantic sink. Public helpers, a freshly included module, and an isolated host preserve canonical

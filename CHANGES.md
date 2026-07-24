@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.4 — close Julia runtime observation
+
+Composition-closed Julia's runtime-observation parent without adding production code, replacement tests,
+fixtures, contracts, API/format/runtime behavior, semantic rollout, or native admission. The four committed
+authority/capture/derivation/generated-route fact cards and clean `.10.6.6.1-.3` topology were retrieved first.
+All twelve committed Julia semantic suites then recomposed at exact focused
+`135+85+70+99+79+62+100+118+315+66+157+51=1,337`, reconfirming canonical typed events, strict malformed and
+topology rejection, immutable observed projection, twentieth typed/raw digest, callback identity, exit omission,
+direct/loaded/reconstructed/generated-plan/public-helper/fresh-emitted/traced/isolated routes, absent-sink
+behavior, result/diagnostic/trace non-interference, and unchanged generated-source v2/format 2.
+
+Complete Julia remains 8,879 package assertions plus primary process conformance and corpus 105/105. Full primary
+passes five backends x two environments x 66 cases; all ten Unicode-manifest legs pass 1/1. Governance remains
+Unicode 17.0.0 at 1563/1581/158/464/12 and 806/9/8/2, semantic 6/20/81 with rollout 4/9 and admission 3/6,
+capability 80/0/0, generated v1/10/80-0-0, language 246/105+1/122, and public 59/27/0. Canonical CI passes all
+four doctrines, Rust semantic admission 1/1 in 77.95 seconds, Dart 1/1, reference primary 66x2, and Phase 0
+1,031/1,031 in 627 seconds. mdBook and Knowledge Map 694/5,348 pass. Exact 1,736,920-KiB safe cleanup
+preserves Julia package/registry caches and all 517 Pgen artifacts. Parent `.10.6.6` is closed; exact composed
+admission `.10.6.7` remains pending and was not activated.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.3 — propagate Julia runtime observation
 
 Fresh Julia generated-source modules now expose the existing optional `semantic_observation_sink` keyword on both

@@ -7359,7 +7359,7 @@ _Julia privately implements exact semantic relation traversal pages budgets and 
 _Julia runtime semantics must be captured at typed accepted-slot and successful-result seams_
 
 - **answers:** does Julia already have a semantic runtime observation sink | where must Julia capture regex slot semantic events | where must Julia capture final semantic result events | which Julia cursor owns semantic observation positions | should Julia semantic observations reuse trace output | should Julia semantic observations reuse diagnostic output | what happens when no Julia semantic observation sink is installed | how must Julia semantic observer callback failures propagate | why do Julia generated wrappers need semantic observer failure passthrough | which Julia execution routes reuse the runtime observation seams | how must Julia derive an observed semantic index | can Julia semantic query execute the parser | what is the Julia semantic runtime observation implementation split
-- **date:** 2026-07-23 · **status:** current authority plan; typed capture, immutable derivation, and generated/emitted propagation implemented
+- **date:** 2026-07-23 · **status:** current authority; typed capture, immutable derivation, generated/emitted propagation, and parent composition complete
 - **evidence:** `julia/src/runtime/Interpreter.jl; julia/src/runtime/Matching.jl; julia/src/io/SpecLoader.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticQuery.jl; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.0`
 - **source:** [`docs/knowledge/julia-semantic-runtime-observation-authority-map.md`](docs/knowledge/julia-semantic-runtime-observation-authority-map.md)
 
@@ -7367,7 +7367,7 @@ _Julia runtime semantics must be captured at typed accepted-slot and successful-
 _Julia derives immutable observed semantic snapshots only from typed events and detached static topology_
 
 - **answers:** how do I derive a Julia observed SemanticIndex | what does Julia with_execution_observation do | how does Julia validate runtime semantic observation events | does Julia with_execution_observation execute or compile | does Julia with_execution_observation hash the input | how does Julia validate selecting rule and regex slot topology | where do Julia observed event source and value shape come from | does Julia observed-index derivation mutate the base index | what records and relations does Julia observed-index derivation add | what is the Julia runtime_events response digest | can Julia query an observed runtime snapshot
-- **date:** 2026-07-23 · **status:** current immutable observed-index derivation; generated/emitted public propagation remains pending
+- **date:** 2026-07-23 · **status:** current immutable observed-index derivation; generated/emitted propagation and parent composition complete
 - **evidence:** `julia/src/semantic/SemanticRuntimeProjection.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticIndex.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_projection_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.2`
 - **source:** [`docs/knowledge/julia-semantic-runtime-observation-derivation.md`](docs/knowledge/julia-semantic-runtime-observation-derivation.md)
 
@@ -7375,7 +7375,7 @@ _Julia derives immutable observed semantic snapshots only from typed events and 
 _Julia exposes typed invocation-local runtime semantic observations at the shared native engine seams_
 
 - **answers:** how do I capture Julia runtime semantic observations | what fields are in a Julia RuntimeSemanticObservationEvent | which Julia runtime routes accept semantic_observation_sink | does Julia semantic observation work with trace and diagnostics | what positions do Julia regex slot observation events report | does Julia hash input when no semantic observation sink is installed | does Julia preserve semantic observation callback exception identity | do fresh emitted Julia parser wrappers accept semantic_observation_sink | does Julia runtime observation derive a semantic index yet
-- **date:** 2026-07-23 · **status:** current typed capture through native, validated generated-plan, and fresh emitted wrappers; derivation complete
+- **date:** 2026-07-23 · **status:** current typed capture through native, validated generated-plan, and fresh emitted wrappers; parent composition closed
 - **evidence:** `julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.6.1 and .10.6.6.3`
 - **source:** [`docs/knowledge/julia-semantic-runtime-observation-direct-capture.md`](docs/knowledge/julia-semantic-runtime-observation-direct-capture.md)
 
@@ -7383,7 +7383,7 @@ _Julia exposes typed invocation-local runtime semantic observations at the share
 _Julia emitted parser modules forward typed runtime semantic observations without changing generated-source format_
 
 - **answers:** do fresh emitted Julia parser wrappers accept semantic_observation_sink | how do I capture semantic observations from an emitted Julia parser | does Julia emitted semantic observation work with trace and diagnostics | do Julia emitted semantic observer callback failures preserve identity | does Julia semantic observation change generated-source format | does Julia generated semantic observation change parser results or trace bytes | does Julia emitted exit produce a final semantic result event
-- **date:** 2026-07-23 · **status:** current generated-plan and fresh-emitted direct/traced propagation; composition closeout pending
+- **date:** 2026-07-23 · **status:** current generated-plan and fresh-emitted direct/traced propagation; parent composition closed
 - **evidence:** `julia/src/source/SourceEmitter.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.3`
 - **source:** [`docs/knowledge/julia-semantic-runtime-observation-generated-routes.md`](docs/knowledge/julia-semantic-runtime-observation-generated-routes.md)
 

@@ -16,7 +16,7 @@ answers:
   - "can Julia semantic query execute the parser"
   - "what is the Julia semantic runtime observation implementation split"
 date: 2026-07-23
-status: current authority plan; typed capture, immutable derivation, and generated/emitted propagation implemented
+status: current authority; typed capture, immutable derivation, generated/emitted propagation, and parent composition complete
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/Interpreter.jl; julia/src/runtime/Matching.jl; julia/src/io/SpecLoader.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticQuery.jl; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.0
 last_verified: 2026-07-23
@@ -98,14 +98,15 @@ install a sink, enable trace, hash new input, or mutate either index.
 - `.10.6.6.3`: public generated helpers and fresh emitted direct/traced propagation, callback-failure passthrough,
   failure omission, and result/cursor/trace/diagnostic non-interference with unchanged v2/format 2.
 - `.10.6.6.4`: no-change composition/signoff and parent closure without Julia rollout or native-admission
-promotion.
+  promotion; complete at focused 1,337 with `.10.6.6` closed.
 
 Typed direct/native and validated generated-plan capture implements `.1`, strict immutable observed-index
 derivation implements `.2`, and fresh emitted direct/traced public propagation implements `.3` without changing
 generated-source v2/format 2. Retrieve [[julia-semantic-runtime-observation-direct-capture]] for capture,
 [[julia-semantic-runtime-observation-derivation]] for validation/topology/query, and
 [[julia-semantic-runtime-observation-generated-routes]] for wrapper and isolated-host behavior. No-change
-composition remains `.4`.
+Composition `.4` is complete and closes `.10.6.6`; exact 12-role admission remains the separate pending
+`.10.6.7` owner.
 
 ## Exact neutral anchor
 
