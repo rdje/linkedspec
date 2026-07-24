@@ -12,9 +12,9 @@ answers:
   - "can Julia semantic query compile execute trace read paths or invoke callbacks"
   - "is Julia runtime semantic observation implemented"
 date: 2026-07-23
-status: current exact public typed/raw-neutral static query API; runtime observation and admission pending
+status: current exact public typed/raw-neutral static query API; query parent composition closed, runtime observation and admission pending
 tags: [julia, semantic-introspection, query, capabilities, validation, immutability, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.5.3; julia/src/semantic/SemanticQuery.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_query_public_test.jl; julia/test/runtests.jl; capability_conformance/semantic_introspection_contract.json
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.3-.10.6.5.4; julia/src/semantic/SemanticQuery.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_query_public_test.jl; julia/test/runtests.jl; capability_conformance/semantic_introspection_contract.json
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-query-public-depot:/private/var/folders/4h/29gg6nrx2pj9wfjkzc460hlr0000gn/T/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\"); include(\"julia/test/semantic_index_query_kernel_test.jl\"); include(\"julia/test/semantic_index_query_traversal_test.jl\"); include(\"julia/test/semantic_index_query_public_test.jl\")'; python3 tools/check_semantic_introspection_contract.py"
 ---
 
@@ -54,6 +54,14 @@ at semantic 6/20/81 with rollout 4/9 and admission 3/6 plus Unicode 806/9/8/2, c
 v1/10/80-0-0, and public 59/27/0. Canonical CI passes Rust semantic admission in 79.96 seconds, Dart 1/1, primary
 66x2, and Phase 0 1,031/1,031 in 634 seconds. mdBook, Knowledge Map 690/5,307, all four doctrines, and exact
 1,613,820-KiB cleanup preserving Julia package/registry caches and all 517 Pgen artifacts pass.
+
+No-change `.10.6.5.4` retrieves this card and the authority/kernel/traversal cards, then recomposes all nine
+committed semantic suites at exact focused 1,063. Complete Julia remains 8,605/primary/105; primary 5x2x66, ten
+Unicode legs, and every unchanged ledger pass without production code, replacement tests, fixtures, contract/API/
+format behavior, runtime observation, rollout, or admission. Parent `.10.6.5` is composition-closed; the twentieth
+runtime-events response remains `.10.6.6`, beginning with separate authority plan `.10.6.6.0` after the clean
+closeout commit. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307,
+doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
 
 Related facts: [[julia-semantic-query-authority-map]], [[julia-semantic-query-kernel]],
 [[julia-semantic-query-traversal]], [[julia-semantic-introspection-authority-map]],

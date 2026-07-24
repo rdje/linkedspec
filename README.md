@@ -1026,6 +1026,13 @@ content migration exists yet.
   `.10.6.6`, and semantic rollout/admission remain 4/9 and 3/6 until their owned leaves. Full primary 5x2x66, ten
   Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307, all
   doctrines, and exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts pass.
+  No-change closeout `.10.6.5.4` now retrieves the four committed query fact cards and recomposes all nine semantic
+  suites at exact focused 1,063. Complete Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, every
+  unchanged ledger, canonical/docs/KM/doctrine proof, and measured safe cleanup pass without production code,
+  replacement tests, fixtures, contract/API/format behavior, runtime observation, rollout, or admission change.
+  Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307, doctrines, and exact
+  1,613,872-KiB cleanup preserving 517 Pgen artifacts pass. Parent `.10.6.5` is composition-closed; `.10.6.6.0`
+  owns the next runtime-observation authority plan.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

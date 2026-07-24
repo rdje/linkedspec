@@ -12,9 +12,9 @@ answers:
   - "when may Julia expose its public semantic query API"
   - "does Julia semantic query include runtime events"
 date: 2026-07-23
-status: current authority and implementation plan; public static evaluator complete, closeout and runtime pending
+status: current authority; immutable static query composition closed, runtime observation pending
 tags: [julia, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.0-.10.6.5.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; dart/lib/src/semantic/semantic_query.dart
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.0-.10.6.5.4; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; julia/test/semantic_index_query_public_test.jl; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; dart/lib/src/semantic/semantic_query.dart
 reverify: "python3 tools/check_semantic_introspection_contract.py && PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query && (cd dart && dart test test/semantic_index_query_kernel_test.dart) && rg -n 'semantic_query|SemanticQuery|semantic_capabilities' julia/src"
 ---
 
@@ -85,6 +85,11 @@ materialization per request. Public `.10.6.5.3` now exports every query type and
 typed and raw input through one exact validator/evaluator, matches all 19 hashes through both paths, and locks all
 26 malformed boundaries plus clone/privacy/non-execution/host denial. See [[julia-semantic-query-kernel]],
 [[julia-semantic-query-traversal]], and [[julia-semantic-query-public-api]] for the implemented boundary and proof.
+No-change `.10.6.5.4` retrieves those committed authorities and recomposes the nine owner suites at exact focused
+1,063 with complete Julia 8,605/primary/105, primary 5x2x66, all ten Unicode legs, and unchanged ledgers. It adds no
+production/replacement-test/API/format/runtime/promotion behavior and composition-closes parent `.10.6.5` before
+runtime-observation planning `.10.6.6.0`. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s,
+book/KM 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[julia-semantic-introspection-authority-map]],
 [[julia-semantic-call-staged-projection-plan]], [[perl-semantic-query-evaluator]],

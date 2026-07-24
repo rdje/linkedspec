@@ -602,9 +602,14 @@ Three backbone items tracked major structural modernization — all done:
   `JSON3.Object` input and locks all 26 malformed envelopes including Julia Boolean/numeric separation. New
   315/focused 1,063 and complete Julia 8,605/primary/105 pass with clone/privacy/non-execution/host-denial proof.
   Runtime observation remains `.10.6.6`, rollout/admission stay unchanged, and no-change closeout `.10.6.5.4` is
-  next after the clean commit. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary
+  dependency-ordered after the clean public commit. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary
   66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307, doctrines, and exact 1,613,820-KiB cleanup preserving all 517
   Pgen artifacts pass.
+  No-change `.10.6.5.4` now recomposes all nine committed semantic suites at focused 1,063, reruns complete Julia
+  8,605/primary/105, primary 5x2x66, all ten Unicode legs, and every unchanged ledger, and closes parent `.10.6.5`
+  without production/replacement-test/API/format/runtime/promotion change. Runtime authority planning begins in
+  `.10.6.6.0` only after the closeout commit is clean. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/635s, book/KM 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

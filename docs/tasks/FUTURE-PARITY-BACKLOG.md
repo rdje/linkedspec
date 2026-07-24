@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-23` (Julia public typed/raw semantic query `.10.6.5.3` is a fully verified commit
-  candidate from clean traversal commit `f6f76f4c`; commit before no-change closeout `.4`)
+- Last updated: `2026-07-23` (Julia immutable semantic-query no-change closeout `.10.6.5.4` fully verified from
+  clean public-query commit `1b303cef`; commit before runtime plan `.10.6.6.0`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10200,7 +10200,8 @@ before implementation.
     authority audit `.10.6.5.0` is the next dependency-eligible leaf after the closeout commit is clean.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.5`
-  Status: `active` (2026-07-23; behavior-free authority/split audit `.0` active from clean call closeout `61aa48bb`)
+  Status: `done` (2026-07-23; immutable static query composition closed by fully verified `.4` from clean public
+    commit `1b303cef`)
   Goal: Expose immutable typed and raw-neutral Julia semantic capabilities/query.
   Children: `.10.6.5.0`, `.10.6.5.1`, `.10.6.5.2`, `.10.6.5.3`, `.10.6.5.4`
   Depends on: `.10.6.4`
@@ -10570,12 +10571,47 @@ before implementation.
     is promoted. `.10.6.5.4` may activate only after this commit is clean.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.5.4`
-    Status: `pending`
+    Status: `done` (2026-07-23; fully verified commit candidate from clean public-query commit `1b303cef`)
     Goal: Compose and close Julia immutable semantic query.
     Depends on: `.10.6.5.3`
     Acceptance: Re-run foundation/static/calls/query composition, exact digests/errors/pages/budgets/explain,
       mutation/immutability/no-execute proof, complete Julia/canonical/docs/KM/cleanup; close `.10.6.5` without
       runtime observations or ledger promotion.
+    Verification plan: Retrieve the committed Julia query authority/kernel/traversal/public cards and inspect the
+      clean `.1-.3` topology before any non-task edit. Add no replacement production or test owner. Recompose all
+      nine committed semantic suites at exact focused 1,063, rerun complete Julia/primary/105, the full five-backend
+      primary matrix in both environments, all ten Unicode legs, every no-drift ledger, and canonical local CI.
+      Reconfirm 19 typed/raw hashes, 26 malformed boundaries, one detached materialization seam, clone/privacy/
+      no-execution/host denial, package exports, and absence of runtime observation or ledger movement. Then sync
+      task/live/roadmap/mdBook/Knowledge Map/memory, build the book, enforce all doctrines, clean only measured safe
+      artifacts while preserving Julia package/registry caches and 517 Pgen artifacts, and commit before `.10.6.6.0`.
+
+    #### Acceptance Checklist
+
+    - [x] **RETRIEVE / RECOMPOSE** — Read the four committed query fact cards and recompose all nine semantic suites
+      at exact 1,063 without production or replacement-test changes.
+    - [x] **COMPLETE JULIA** — Pass complete Julia package tests, primary process conformance, and corpus 105/105.
+    - [x] **PORTABLE MATRICES** — Pass full primary 5x2x66, all ten Unicode legs, and every exact no-drift ledger.
+    - [x] **AUTHORITY / OMISSION** — Reconfirm 19 typed/raw hashes, 26 boundaries, one detached materialization,
+      exports, clone/privacy/non-execution/host denial, and no runtime-observation or ledger movement.
+    - [x] **CANONICAL / LOCKSTEP** — Pass canonical CI, mdBook/KM/memory/task/four doctrines/diff, exact safe
+      cleanup, close parent `.10.6.5`, and commit before runtime-observation planning `.10.6.6.0`.
+
+    Completion evidence: The four committed query cards and clean `.1-.3` topology were retrieved before any
+    non-task edit. The nine committed semantic suites recompose at exact 135 + 85 + 70 + 99 + 79 + 62 + 100 +
+    118 + 315 = 1,063. A first standalone include passed source 135 and outcome 85 before the harness alone lacked
+    the package driver's `REPO_ROOT`; supplying that driver binding yielded the exact unchanged composition and
+    required no repository edit. Complete Julia passes 8,605 package assertions, primary process conformance, and
+    corpus 105/105. Full primary passes five backends x two environments x 66 cases; all ten Unicode legs pass 1/1.
+    All 19 typed/raw hashes, 26 malformed boundaries, one detached materialization, exports, clone/input/
+    interleaving isolation, privacy/source ceilings, and construction/query non-execution plus callback/host denial
+    remain exact. Governance remains Unicode 806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6,
+    capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0. Canonical CI passes every doctrine/contract,
+    Rust semantic admission in 79.55 seconds, Dart 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 635
+    seconds. mdBook, Knowledge Map 690/5,307, bounded memory, task/marker/diff hygiene, and exact 1,613,872-KiB
+    safe cleanup pass while preserving all 517 Pgen evidence artifacts and Julia package/registry caches. No
+    production code, test, fixture, contract, public API, generated format, runtime observation, rollout, or native
+    admission changes. Parent `.10.6.5` is closed; `.10.6.6.0` waits for the clean closeout commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.6`
   Status: `pending`
@@ -13481,12 +13517,12 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.4.1 | `FUTURE-PARITY-BACKLOG.10.6.4.1` | `done` | Exact private 18/16 typed function/helper/call/binding projection is committed cleanly at `9ec3f034`. |
 | 74.5.4.2 | `FUTURE-PARITY-BACKLOG.10.6.4.2` | `done` | Exact private 22/25 staged payload/job/result and selected generated-plan provenance is committed cleanly at `cc229cc5`. |
 | 74.5.4.3 | `FUTURE-PARITY-BACKLOG.10.6.4.3` | `done` | Committed focused 530 plus complete matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.4` without replacement code or promotion. |
-| 74.5.5 | `FUTURE-PARITY-BACKLOG.10.6.5` | `active` | Expose exact immutable typed/raw-neutral Julia semantic query over detached projection only. |
+| 74.5.5 | `FUTURE-PARITY-BACKLOG.10.6.5` | `done` | Exact immutable typed/raw-neutral Julia semantic query is composition-closed over detached projection only. |
 | 74.5.5.0 | `FUTURE-PARITY-BACKLOG.10.6.5.0` | `done` | Exact 20-request/19-digest/26-boundary authority, policy, host-denial, and `.1-.4` implementation split are frozen and fully verified without behavior change. |
 | 74.5.5.1 | `FUTURE-PARITY-BACKLOG.10.6.5.1` | `done` | Private immutable Julia record/source kernel matches nine exact static hashes at new 100/focused 630 with full gates/docs/KM/cleanup and no exports. |
 | 74.5.5.2 | `FUTURE-PARITY-BACKLOG.10.6.5.2` | `done` | Exact Julia relation traversal, pages, budgets, costs, deterministic prefixes, and all 19 static hashes pass without exports. |
 | 74.5.5.3 | `FUTURE-PARITY-BACKLOG.10.6.5.3` | `done` | Exact public Julia typed/raw query matches 19 hashes and 26 malformed boundaries through one detached evaluator without runtime or promotion. |
-| 74.5.5.4 | `FUTURE-PARITY-BACKLOG.10.6.5.4` | `pending` | Recompose committed Julia query proof and close the parent without replacement code. |
+| 74.5.5.4 | `FUTURE-PARITY-BACKLOG.10.6.5.4` | `done` | Committed focused 1,063 plus complete matrices/no-drift/canonical/docs/KM/cleanup close the query parent without replacement code or promotion. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -14162,6 +14198,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.4` | Four query cards and clean `.1-.3` topology; nine committed suites at exact 135+85+70+99+79+62+100+118+315=1,063; all 19 typed/raw hashes, 26 malformed boundaries, one detached materialization, clone/input/interleaving/privacy/source-ceiling/export/non-execution/callback/host denial; Julia 8,605/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 690/5,307/memory/task/four doctrines/diff; canonical Rust 79.55s, Dart 1/1, primary 66x2, Phase 0 1,031/635s; exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Committed Julia query proof composes without production/replacement-test/fixture/contract/API/format/runtime/rollout/admission change; parent `.10.6.5` closes before runtime plan `.10.6.6.0`. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.3` | Public immutable query types/capabilities/typed/raw-neutral entries through one validator/evaluator and one detached projection; all 19 typed/raw hashes; all 26 malformed boundaries; `Bool`/`Integer`; direct `JSON3.Object`; clone/input/interleaving/privacy/source-ceiling/public-export/non-execution/callback/host denial; new 315/focused 1,063; Julia 8,605/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 690/5,307/memory/task/four doctrines/diff; canonical Rust 79.96s, Dart 1/1, primary 66x2, Phase 0 1,031/634s; exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia exposes the complete static query API without a second semantic owner, runtime observation, format change, rollout, or native admission; no-change closeout `.4` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.2` | Exact private outgoing/incoming/both filter-constrained BFS, relation/frontier deduplication, canonical pages/cursors, record/relation/depth budgets and precedence, deterministic prefixes, logical costs, typed errors, all 19 static hashes, recursive freeze/fresh JSON/private omission/one detached authority/no host access; new 118/focused 748; Julia 8,290/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 689/5,298/memory/task/four doctrines/diff; canonical Rust 82.53s, Dart 1/1, primary 66x2, Phase 0 1,031/647s; exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia privately owns the complete static evaluator without public exports or new semantic authority; raw/public completion `.3` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.1` | Complete private immutable query vocabulary; nine exact capabilities/list/get/explain/source hashes; default page/cost, diagnostics, source redaction/digest/ceiling, canonical order; recursive freeze/fresh JSON/private omission; exactly one detached materialization; deferred traversal/page/budget rejection; no source/compiler/runtime/trace/path/host access; new 100/focused 630; Julia 8,172/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 688/5,287/memory/task/four doctrines/diff; canonical Rust 80.95s, Dart 1/1, primary 66x2, Phase 0 1,031/662s; exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia privately owns the exact non-traversal query kernel without a public partial surface or new semantic authority; traversal/limits `.2` waits for the clean commit. |
@@ -14410,6 +14447,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.5.4` | `FUTURE-PARITY-BACKLOG.10.6.5.4 - close Julia semantic query` | No-change nine-suite focused 1,063, Julia 8,605/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.5` without replacement code, runtime observation, or promotion. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.3` | `FUTURE-PARITY-BACKLOG.10.6.5.3 - expose Julia semantic query` | Complete public immutable typed/raw-neutral surface at 19 hashes/26 malformed boundaries; new 315/focused 1,063, Julia 8,605/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no runtime or promotion before closeout `.4`. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.2` | `FUTURE-PARITY-BACKLOG.10.6.5.2 - complete Julia query traversal` | Exact private relations/pages/budgets/costs complete all 19 static hashes; new 118/focused 748, Julia 8,290/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no public query before raw/public completion `.3`. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.1` | `FUTURE-PARITY-BACKLOG.10.6.5.1 - add Julia query kernel` | Complete private immutable values and detached-projection-only capabilities/list/get/explain/source behavior at nine exact hashes; new 100/focused 630, Julia 8,172/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no public query before traversal `.2`. |
@@ -14636,6 +14674,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-23`: `.10.6.5.4` retrieves the four committed Julia query cards and recomposes all nine owner suites at
+  exact focused 1,063. Complete Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, all 19 typed/raw hashes,
+  26 malformed boundaries, one detached materialization, clone/privacy/source-ceiling/export/non-execution/
+  callback/host denial, and every unchanged ledger pass. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase
+  0 1,031/635s, mdBook/KM 690/5,307/doctrines, and exact 1,613,872-KiB safe cleanup preserving 517 Pgen artifacts
+  and Julia package/registry caches pass. No production/replacement-test/fixture/contract/API/format/runtime/
+  rollout/admission behavior changes; parent `.10.6.5` closes and runtime plan `.10.6.6.0` follows only after the
+  clean commit.
 
 - `2026-07-23`: `.10.6.5.3` exports Julia's complete immutable static semantic-query surface. Public capabilities,
   typed query, and raw-neutral query share one validator/evaluator and exactly one detached projection. All 19

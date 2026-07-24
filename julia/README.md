@@ -172,6 +172,11 @@ raw surface together. Its new 315 assertions bring focused semantic composition 
 8,605 while keeping runtime events in `.10.6.6` and semantic rollout/admission unchanged. Full primary 5x2x66,
 ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, mdBook/KM 690/5,307,
 doctrines, and exact 1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass.
+No-change closeout `.10.6.5.4` recomposes those nine committed suites at focused 1,063 and reruns complete Julia
+8,605/primary/105, primary 5x2x66, ten Unicode legs, and every unchanged ledger. It adds no production/replacement
+test/API/format/runtime behavior or promotion and closes parent `.10.6.5`. Runtime-event authority remains the
+separate `.10.6.6` workstream. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM
+690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

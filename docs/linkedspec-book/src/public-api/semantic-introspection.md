@@ -1415,10 +1415,27 @@ query non-execution, exactly one materialization seam, and denial of retained so
 generated/runtime/trace/environment/time/random authority. It passes 315 assertions; all nine semantic suites
 compose at 1,063, and complete Julia reaches 8,605 package assertions plus primary process conformance and corpus
 105/105. The twentieth runtime-events response remains `.10.6.6`, and this leaf does not promote the shared
-semantic rollout or native-admission ledgers. No-change closeout `.10.6.5.4` is next after the clean commit.
+semantic rollout or native-admission ledgers. At this historical `.3` boundary, no-change closeout `.10.6.5.4`
+was next after the clean commit.
 Full primary 5x2x66, ten Unicode legs, canonical Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s,
 mdBook/KM 690/5,307, all four doctrines, and exact 1,613,820-KiB cleanup preserving Julia package/registry caches
 and all 517 Pgen artifacts pass.
+
+### Julia immutable query composition closeout
+
+Leaf `.10.6.5.4` retrieves the committed authority, kernel, traversal, and public-API facts, then recomposes the
+nine committed semantic suites at exact focused 1,063. It adds no second evaluator, replacement test, fixture,
+contract, public API, generated format, runtime observation, rollout, or admission. The composition reconfirms all
+19 typed/raw static hashes, all 26 malformed envelopes, direct transport validation, one detached materialization,
+clone/privacy/source-ceiling/export behavior, and construction/query non-execution plus callback and host denial.
+
+Complete Julia remains 8,605 package assertions plus primary process conformance and corpus 105/105. Full primary
+remains 5x2x66, all ten Unicode legs pass, and the Unicode, semantic, capability, generated-source, and public
+ledgers remain unchanged. Parent `.10.6.5` is therefore composition-closed. The twentieth runtime-events response
+still requires caller-captured post-execution authority and remains exclusively owned by `.10.6.6`; its authority
+plan begins at `.10.6.6.0` only after this closeout commit is clean. Canonical Rust 79.55s + Dart 1/1 + primary
+66x2 + Phase 0 1,031/635s, mdBook/KM 690/5,307, doctrines, and exact 1,613,872-KiB safe cleanup preserving 517
+Pgen artifacts and Julia package/registry caches pass.
 
 ## Exact v1 record model
 
@@ -1805,7 +1822,7 @@ The dependency order is:
 | `.10.6.5.1` | Julia private immutable non-traversal query kernel | complete; nine exact hashes, new 100/focused 630, no exports |
 | `.10.6.5.2` | Julia private relations/pages/budgets/costs | complete; all 19 static hashes, new 118/focused 748, full signoff, no exports |
 | `.10.6.5.3` | Julia public typed/raw-neutral query | complete; 19 typed/raw hashes, 26 malformed boundaries, new 315/focused 1,063, no runtime or ledger promotion |
-| `.10.6.5.4` | Julia immutable query composition closeout | pending |
+| `.10.6.5.4` | Julia immutable query composition closeout | complete; committed focused 1,063 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

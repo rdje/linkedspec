@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.4` — close a public query by recomposing its committed owners):
+  Julia's query parent needs no second evaluator or closeout-only test. Retrieving the authority, kernel,
+  traversal, and public-API fact cards and running the nine committed suites together is the strongest closure
+  proof: it exercises source/outcome, static/call projection, kernel/traversal, raw validation, exports, isolation,
+  and denial through their actual owners. The exact composition remains 1,063, complete Julia remains
+  8,605/primary/105, primary remains 5x2x66, and all ten Unicode legs pass.
+
+  A direct-include composition must reproduce the package test driver's environment. The first probe passed the
+  135-assertion source and 85-assertion outcome suites, then stopped only because the standalone harness had not
+  defined `REPO_ROOT`; providing that driver binding yielded the exact nine-suite pass. This was a harness setup
+  correction, not a product or committed-test failure, and required no repository change.
+
+  Query closure reconfirms all 19 typed/raw static hashes, 26 malformed envelopes, one detached materialization,
+  clone/privacy/source ceilings, public exports, and no execution/callback/host authority. Governance stays
+  Unicode 806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated
+  v1/10/80-0-0, and public 59/27/0. The twentieth runtime-events response remains separately owned by `.10.6.6`;
+  canonical Rust 79.55s + Dart 1/1 + reference primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307, doctrines,
+  and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass.
+  `.10.6.6.0` may plan runtime authority only after this no-change closeout is committed cleanly.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.3` — one raw validator can serve typed and transport callers):
   Julia does not need separate typed and JSON evaluators. `semantic_query` serializes the immutable typed request
   into the same neutral validator used by `semantic_query_neutral`; only after exact shape/scalar/policy validation

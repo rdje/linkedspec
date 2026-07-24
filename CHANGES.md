@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.4 — close Julia semantic query
+
+Composition-closed Julia's immutable static semantic-query parent without adding production code, replacement
+tests, fixtures, contracts, public API, generated-format behavior, runtime observation, rollout, or admission.
+The four committed query fact cards and the clean `.10.6.5.1-.3` topology were retrieved first. All nine committed
+semantic suites then recomposed at exact focused 1,063, reconfirming all 19 typed/raw static response hashes, all
+26 malformed boundaries, the single detached materialization seam, clone/privacy/source-ceiling/export behavior,
+and construction/query non-execution plus callback and host-authority denial. One initial direct-include proof run
+reached the committed source/outcome suites before the standalone harness lacked `REPO_ROOT`; supplying the test
+driver's repository-root binding made the exact unchanged nine-suite composition pass.
+
+Complete Julia remains 8,605 package assertions plus primary process conformance and corpus 105/105. Full primary
+remains five backends x two environments x 66 cases; every one of the ten Unicode-manifest legs passes 1/1.
+Governance remains exact at Unicode 806/9/8/2, semantic 6/20/81 with rollout 4/9 and native admission 3/6,
+capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0. Canonical CI, mdBook, Knowledge Map, memory/task/
+doctrine/diff hygiene pass with Rust semantic admission in 79.55 seconds, Dart 1/1, reference primary 66x2, Phase
+0 1,031/1,031 in 635 seconds, and book/KM 690/5,307. Exact 1,613,872-KiB safe cleanup removes only generated
+Rust dependency/incremental outputs, Julia compiled/log caches, Python bytecode, and the temporary rendered book
+while preserving all 517 Pgen evidence artifacts and Julia package/registry caches. Parent `.10.6.5` is closed;
+runtime-observation planning begins separately at `.10.6.6.0` only after this commit is clean.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.3 — expose Julia semantic query
 
 Exposed Julia's complete immutable static semantic-query API without widening its authority. The package now

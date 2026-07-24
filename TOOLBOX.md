@@ -604,10 +604,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   315/focused 1,063, all 19 typed/raw hashes, all 26 malformed envelopes, direct `JSON3.Object` transport, clone/
   input/interleaving isolation, public exports, one detached materialization, and privacy/non-execution/host denial.
   Both public entries use the same raw validator/evaluator; do not add a parallel typed semantic kernel. Runtime
-  events remain `.10.6.6`, and query closeout `.10.6.5.4` must recompose committed proof without replacement code.
+  events remain `.10.6.6`; query closeout `.10.6.5.4` was required to recompose committed proof without replacement
+  code.
   Complete `.3` signoff is Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
   Rust 79.96s + Dart 1/1 + primary 66x2 + Phase 0 1,031/634s, book/KM 690/5,307, doctrines, and exact
   1,613,820-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches.
+  Closeout `.10.6.5.4` is complete: retrieve all four query cards, then run the nine committed semantic suites in
+  their package-driver environment to reproduce exact focused 1,063. Do not add a closeout-only evaluator or
+  replacement suite. Complete Julia 8,605/primary/105, primary 5x2x66, ten Unicode legs, and all unchanged ledgers
+  compose without runtime observation or promotion. Parent `.10.6.5` is closed; retrieve and plan runtime authority
+  only in `.10.6.6.0` after the clean closeout commit. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/635s, book/KM 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
 
 ---
 
