@@ -291,8 +291,17 @@ exact typed events and the base index's detached static rule/edge/slot/`selects_
 and shape facts from that projection, and returns a fresh `has_execution=true` index while leaving the base static.
 It matches the twentieth typed/raw-neutral digest at new 157/focused 1,286 and complete Julia 8,828/primary/105.
 Malformed, foreign, reordered, duplicate-final, wrong-entry, and unsupported-slot observations reject through the
-portable invalid-observation boundary. Generated/emitted public propagation and its callback/non-interference
-proof remain `.3`; no ledger or generated-format state moves in `.2`.
+portable invalid-observation boundary. No ledger or generated-format state moves in `.2`.
+
+Generated/emitted propagation `.10.6.6.3` is now complete. Fresh Julia module `execute` and `execute_with_trace`
+wrappers accept the same optional `semantic_observation_sink` and forward it to the validated generated-plan
+helpers. Public-helper, freshly included, and isolated-host proof locks canonical events/twentieth digest, exact
+callback object identity, exit final-result omission, and result/diagnostic/trace non-interference. The route suite
+adds 51 assertions; all twelve semantic suites compose at 1,337 and complete Julia reaches 8,879/primary/105.
+Generated-source identity remains v2/format 2 with the unchanged `{label, family}` plan. Backend implementations
+must treat observer propagation as a runtime adapter, not a serialized plan field or a second event owner. Full
+primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 79.78s + Dart 1/1 + primary 66x2 + Phase 0
+1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup preserving 517 Pgen artifacts pass.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

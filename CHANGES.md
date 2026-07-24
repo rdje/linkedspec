@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.3 — propagate Julia runtime observation
+
+Fresh Julia generated-source modules now expose the existing optional `semantic_observation_sink` keyword on both
+`execute` and `execute_with_trace`. Each wrapper forwards the same caller callback to the already-validated
+generated-plan helper, so typed capture remains owned by the shared accepted-slot/successful-result runtime seams
+and observed-index derivation remains owned by `with_execution_observation`.
+
+The new 51-assertion route suite covers public generated helpers, a freshly included emitted module, and a
+separate isolated Julia host. Direct and traced calls emit the canonical typed events and reproduce the exact
+twentieth query digest; sink installation leaves result values, diagnostic events, and trace bytes unchanged.
+Callback exceptions preserve exact caller object identity, and immediate exit emits its accepted slot without a
+final successful result. An initial focused harness called a freshly included method in the old Julia world age;
+using `Base.invokelatest` for only that in-process dynamic-module test corrected the harness without product
+change.
+
+Emitted source stays deterministic at `linkedspec-generated-source-v2` / format 2, and its plan stays exact
+`{label, family}` rows with no observation payload or cursor-policy field. All twelve semantic suites compose at
+1,337. Complete Julia passes 8,879 package assertions plus primary process conformance and corpus 105/105.
+Primary 5x2x66, all ten Unicode-manifest legs, and unchanged Unicode/semantic/capability/generated/language/public
+ledgers pass. Canonical CI passes all four doctrines, Rust semantic admission 1/1 in 79.78 seconds, Dart 1/1,
+reference primary 66x2, and Phase 0 1,031/1,031 in 637 seconds. mdBook and Knowledge Map 694/5,348 pass. Exact
+1,749,080-KiB safe cleanup preserves Julia package/registry caches and all 517 Pgen artifacts. Semantic rollout/
+admission remain 4/9 and 3/6; no-change composition remains `.10.6.6.4`.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.2 — derive Julia runtime snapshot
 
 Added Julia's immutable observed-index derivation. `LinkedSpecJulia` now exports

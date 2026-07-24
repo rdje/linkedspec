@@ -4,8 +4,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.6.2` — immutable Julia observed runtime snapshot fully verified.
-- latest_commit: `efd0474c` commits typed Julia capture; derivation `.10.6.6.2` is complete awaiting this commit.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.6.3` — Julia emitted/generated observation propagation fully verified.
+- latest_commit: `a5bdd0e6` is the clean derivation base; verified propagation `.10.6.6.3` awaits its durable commit.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -40,7 +40,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   privacy/non-execution/host denial. `.4` closes `.10.6.5`; `.10.6.6.0` freezes runtime authority. `.10.6.6.1`
   exports immutable slot/result events and capture across shared native routes with exact Unicode positions/input
   SHA, absent-sink zero work, callback identity, and result/trace/diagnostic isolation. `.2` exports strict detached
-  derivation, matches the twentieth typed/raw digest, and leaves fresh emitted public propagation in `.3`.
+  derivation and matches the twentieth typed/raw digest. `.3` adds fresh emitted direct/traced sink forwarding with exact helper/module/isolated-host events/digest/callback/non-interference proof and unchanged v2/format 2.
 - current_julia_unicode_core: preflight measured PCRE2 Unicode-16 drift at 5,175 required misses / 923 forbidden
   extras plus `A·B`, `²`, `Top:::`, and external-AST bypasses. `.10.6.1.1` now generates the internal 806-range
   classifier, replaces all five rule-label parser routes, and validates declaration/action/blind/bare AST roles.
@@ -51,10 +51,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   loading, primary, and artifact routes while locking adjacent identifier grammars. New 1,946/focused 3,831,
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: new 157/focused 1,286; Julia 8,828/primary/105; primary 5x2x66 + ten Unicode legs; unchanged ledgers; canonical Rust 81.49s + Dart 1/1 + primary 66x2 + Phase 0 1,031/648s; book/KM 693/5,341; cleanup 1,738,560 KiB.
+- current_signoff: new 51/focused 1,337; Julia 8,879/primary/105; primary 5x2x66 + ten Unicode legs; unchanged ledgers; canonical Rust 79.78s + Dart 1/1 + primary 66x2 + Phase 0 1,031/637s; book/KM 694/5,348; cleanup 1,749,080 KiB.
 - latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: `.10.6.6.2` complete and fully verified from clean `efd0474c`; commit next.
+- blockers: none. in_flight_uncommitted: verified `.10.6.6.3` code/tests/docs ready for commit; `.4` waits for clean.

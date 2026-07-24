@@ -272,8 +272,35 @@ The returned projection is fresh and recursively immutable. It adds one `executi
 caller event vector or a later JSON response cannot change either index. The canonical `ab\n` response matches
 digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` through both typed and raw-neutral
 query. New proof passes 157 assertions; all eleven semantic suites compose at 1,286 and complete Julia reaches
-8,828/primary/105. Fresh emitted wrapper propagation remains `.3`, and semantic rollout/admission stay 4/9 and
-3/6.
+8,828/primary/105.
+
+Generated/emitted propagation `.10.6.6.3` now makes the same optional sink available on fresh module wrappers:
+
+```julia
+events = RuntimeSemanticObservationEvent[]
+value = LinkedSpecGeneratedParser.execute(
+    "ab\n";
+    semantic_observation_sink = event -> push!(events, event),
+)
+
+trace_io = IOBuffer()
+traced_value = LinkedSpecGeneratedParser.execute_with_trace(
+    "ab\n",
+    trace_config_enabled(LinkedSpecTraceDebug);
+    stdout_io = trace_io,
+    semantic_observation_sink = event -> push!(events, event),
+)
+```
+
+`execute` and `execute_with_trace` forward directly to the existing generated-plan helpers. Capture and callback-
+failure identity therefore stay at the shared runtime owner; the emitted module neither creates events nor derives
+an index. Sink installation preserves results, diagnostics, and trace bytes, while immediate exit omits the final
+success event. The wrappers are additive runtime API: deterministic emitted source remains
+`linkedspec-generated-source-v2` / format 2 with the unchanged `{label, family}` plan. New route proof passes 51
+assertions; all twelve semantic suites compose at 1,337 and complete Julia reaches 8,879/primary/105. Semantic
+rollout/admission stay 4/9 and 3/6. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust
+79.78s + Dart 1/1 + primary 66x2 + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact
+1,749,080-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches pass.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

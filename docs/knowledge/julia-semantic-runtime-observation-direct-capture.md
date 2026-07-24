@@ -12,9 +12,9 @@ answers:
   - "do fresh emitted Julia parser wrappers accept semantic_observation_sink"
   - "does Julia runtime observation derive a semantic index yet"
 date: 2026-07-23
-status: current typed direct/native and validated generated-plan capture; derivation is complete; fresh emitted wrappers pending
+status: current typed capture through native, validated generated-plan, and fresh emitted wrappers; derivation complete
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.1
+evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.6.1 and .10.6.6.3
 last_verified: 2026-07-23
 reverify:
   - "JULIA_DEPOT_PATH=/private/var/folders/4h/29gg6nrx2pj9wfjkzc460hlr0000gn/T/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_runtime_observation_test.jl\")'"
@@ -42,11 +42,12 @@ helpers return before event allocation, scalar conversion, or input hashing; foc
 zero. A sink exception is marked only at the callback boundary and rethrown as the exact caller object through
 both native and generated-plan broad catches.
 
-The capture leaf deliberately stops at the validated generated-plan helpers. Fresh emitted module `execute` and
-`execute_with_trace` wrappers do not accept the sink until `.10.6.6.3`; changing their generated public signature
-or source format earlier would violate that owner. The separate `.10.6.6.2` derivation is now complete: pass the
-retained typed events to `with_execution_observation` to obtain a new validated observed `SemanticIndex`. Retrieve
-[[julia-semantic-runtime-observation-derivation]] for its topology, immutability, and twentieth-digest contract.
+Fresh emitted module `execute` and `execute_with_trace` wrappers now accept and forward the same sink under
+`.10.6.6.3`; this is an additive public wrapper keyword and does not change generated-source v2/format 2 or the
+minimal generated plan. The separate `.10.6.6.2` derivation accepts retained typed events through
+`with_execution_observation` and returns a new validated observed `SemanticIndex`. Retrieve
+[[julia-semantic-runtime-observation-generated-routes]] for emitted/isolated-host behavior and
+[[julia-semantic-runtime-observation-derivation]] for topology, immutability, and the twentieth digest.
 
 The canonical `ab\n` execution emits `Top[0]` at position 1, `Top[1]` at position 2, and final `Top` success at
 position 2 with identity
@@ -59,4 +60,5 @@ generated/language/public ledgers, and canonical CI with Rust semantic admission
 reference primary 66x2, and Phase 0 1,031/1,031 in 662 seconds.
 
 Related facts: [[julia-semantic-runtime-observation-authority-map]], [[julia-semantic-query-public-api]],
-[[julia-semantic-runtime-observation-derivation]], [[semantic-introspection-neutral-contract]].
+[[julia-semantic-runtime-observation-generated-routes]], [[julia-semantic-runtime-observation-derivation]],
+[[semantic-introspection-neutral-contract]].

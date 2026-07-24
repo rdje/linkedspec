@@ -1057,8 +1057,14 @@ content migration exists yet.
   and `observed_as` evidence in a new `has_execution=true` snapshot, and leaves the base static. Typed and raw-
   neutral query match the twentieth digest; malformed, foreign, reordered, duplicate-final, wrong-entry, and
   unsupported-slot observations reject without compiling, executing, tracing, installing a sink, hashing new
-  input, or reading host/path state. New 157/focused 1,286 and complete Julia 8,828/primary/105 pass. Fresh emitted
-  public wrapper propagation remains `.3`; rollout and admission remain 4/9 and 3/6.
+  input, or reading host/path state. New 157/focused 1,286 and complete Julia 8,828/primary/105 pass. Generated/
+  emitted propagation `.10.6.6.3` now adds the same optional sink to fresh module `execute` and
+  `execute_with_trace` wrappers. Public generated helpers, a freshly included module, and an isolated host preserve
+  canonical events/twentieth digest, exact callback identity, exit omission, results, diagnostics, and trace bytes
+  at new 51/focused 1,337 and complete Julia 8,879/primary/105. Emitted source remains deterministic v2/format 2
+  with the unchanged `{label, family}` plan. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.78s + Dart
+  1/1 + primary 66x2 + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup
+  preserving 517 Pgen artifacts pass. Rollout and admission remain 4/9 and 3/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

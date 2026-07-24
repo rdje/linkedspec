@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.3` — emitted observation should be a transparent adapter): The
+  generated-plan helpers already owned semantic callback identity and shared runtime capture. Fresh emitted Julia
+  modules therefore need only an additive optional keyword on `execute` and `execute_with_trace`, forwarded to
+  those helpers. They must not allocate events, derive an index, serialize observation state, or create a second
+  broad-catch policy.
+
+  Route proof needs both fresh-source and separate-process boundaries. The in-process module locks deterministic
+  bytes, direct/traced results, diagnostics, trace bytes, events/digest, and callback identity; the isolated host
+  proves those properties do not depend on the package test world's bindings. Julia 1.12 requires
+  `Base.invokelatest` when a test immediately invokes methods from a dynamically included module. The first
+  focused attempt exposed only that harness world-age boundary; applying `invokelatest` at the dynamic test calls
+  made all 51 assertions pass without a production change.
+
+  Generated-source identity remains v2/format 2 and the plan remains `{label, family}`. The sink is runtime-only,
+  so it changes neither persisted payload nor format. Immediate exit proves final-success omission, while an
+  observer throw proves the existing semantic-specific pass-through preserves the exact object before generic
+  generated-error translation. New 51/focused 1,337 and complete Julia 8,879/primary/105 pass; rollout/admission
+  remain 4/9 and 3/6 pending their separate owners. Primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
+  Rust 79.78s + Dart 1/1 + primary 66x2 + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact
+  1,749,080-KiB cleanup pass while preserving Julia package/registry caches and 517 Pgen artifacts.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.2` — runtime evidence becomes semantics only through static
   validation): A typed event sequence is not trusted merely because it was produced by the runtime. Julia's public
   `with_execution_observation` validates the versioned field topology, selected entry, final-result closure, stable

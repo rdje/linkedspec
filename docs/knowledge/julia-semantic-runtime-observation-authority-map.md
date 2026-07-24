@@ -16,7 +16,7 @@ answers:
   - "can Julia semantic query execute the parser"
   - "what is the Julia semantic runtime observation implementation split"
 date: 2026-07-23
-status: current authority plan; typed direct capture and immutable derivation implemented by linked facts
+status: current authority plan; typed capture, immutable derivation, and generated/emitted propagation implemented
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/Interpreter.jl; julia/src/runtime/Matching.jl; julia/src/io/SpecLoader.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticQuery.jl; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.0
 last_verified: 2026-07-23
@@ -100,10 +100,12 @@ install a sink, enable trace, hash new input, or mutate either index.
 - `.10.6.6.4`: no-change composition/signoff and parent closure without Julia rollout or native-admission
 promotion.
 
-Typed direct/native and validated generated-plan capture now implements `.1`, and strict immutable observed-index
-derivation implements `.2`. Retrieve [[julia-semantic-runtime-observation-direct-capture]] for capture and
-[[julia-semantic-runtime-observation-derivation]] for validation/topology/query. Fresh emitted propagation remains
-the exact `.3` boundary.
+Typed direct/native and validated generated-plan capture implements `.1`, strict immutable observed-index
+derivation implements `.2`, and fresh emitted direct/traced public propagation implements `.3` without changing
+generated-source v2/format 2. Retrieve [[julia-semantic-runtime-observation-direct-capture]] for capture,
+[[julia-semantic-runtime-observation-derivation]] for validation/topology/query, and
+[[julia-semantic-runtime-observation-generated-routes]] for wrapper and isolated-host behavior. No-change
+composition remains `.4`.
 
 ## Exact neutral anchor
 

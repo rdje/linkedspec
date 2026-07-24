@@ -687,6 +687,7 @@ function execute(
     input::AbstractString;
     top_rule = nothing,
     diagnostic_output_sink = nothing,
+    semantic_observation_sink = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_v2(
         _COMPILED_SPEC,
@@ -695,6 +696,7 @@ function execute(
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
         top_rule = top_rule,
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 end
@@ -705,6 +707,7 @@ function execute_with_trace(
     top_rule = nothing,
     stdout_io::IO = stdout,
     diagnostic_output_sink = nothing,
+    semantic_observation_sink = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_with_trace_v2(
         _COMPILED_SPEC,
@@ -715,6 +718,7 @@ function execute_with_trace(
         top_rule = top_rule,
         stdout_io = stdout_io,
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
     )
 end

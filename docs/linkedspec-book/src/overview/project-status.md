@@ -626,8 +626,13 @@ Three backbone items tracked major structural modernization — all done:
   against detached static rule/edge/slot evidence, and creates a fresh `has_execution=true` snapshot with canonical
   execution/event/`observed_as` records. Typed/raw-neutral query matches the twentieth digest; malformed and
   unsupported topology rejects without execution or host authority. New 157/focused 1,286 and complete Julia
-  8,828/primary/105 pass. Fresh emitted public propagation `.3` remains pending, so rollout/admission stay 4/9 and
-  3/6.
+  8,828/primary/105 pass. Generated/emitted propagation `.10.6.6.3` now adds that same sink to fresh direct/traced
+  wrappers. Public helpers, a freshly included module, and an isolated host preserve canonical events/twentieth
+  digest, exact callback identity, exit omission, results, diagnostics, and trace bytes at new 51/focused 1,337 and
+  complete Julia 8,879/primary/105. Generated source remains deterministic v2/format 2 with the unchanged
+  `{label, family}` plan. Full primary 5x2x66, ten Unicode legs, canonical Rust 79.78s + Dart 1/1 + primary 66x2
+  + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup preserving 517 Pgen
+  artifacts pass; rollout/admission stay 4/9 and 3/6.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

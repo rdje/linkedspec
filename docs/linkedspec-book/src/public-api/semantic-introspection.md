@@ -1615,6 +1615,53 @@ primary process conformance and corpus 105/105. Full primary 5x2x66, all ten Uni
 governance, and canonical Rust 81.49s + Dart 1/1 + reference primary 66x2 + Phase 0 1,031/648s pass. Fresh emitted
 module/public generated propagation remains `.10.6.6.3`; rollout 4/9 and native admission 3/6 do not move here.
 
+### Julia generated and emitted observation routes
+
+Leaf `.10.6.6.3` propagates the already-existing sink through fresh generated-source modules. Both public wrappers
+accept the optional keyword:
+
+```julia
+events = RuntimeSemanticObservationEvent[]
+value = LinkedSpecGeneratedParser.execute(
+    "ab\n";
+    semantic_observation_sink = event -> push!(events, event),
+)
+
+trace_output = IOBuffer()
+traced_value = LinkedSpecGeneratedParser.execute_with_trace(
+    "ab\n",
+    trace_config_enabled(LinkedSpecTraceDebug);
+    stdout_io = trace_output,
+    semantic_observation_sink = event -> push!(events, event),
+)
+```
+
+`execute` forwards to `execute_generated_parser_v2`, and `execute_with_trace` forwards to
+`execute_generated_parser_with_trace_v2`. Event creation still belongs only to the shared runtime seams described
+above; emitted code does not implement a second observer or derive a semantic index. This keeps direct, loaded,
+reconstructed, generated-plan, fresh-emitted, and traced entry points on one event contract.
+
+The route proof compares each observed call with its no-sink baseline. Results and diagnostic events remain equal;
+traced output remains byte-identical. Direct and traced routes emit `Top[0]` at position 1, `Top[1]` at position 2,
+and final `Top` success at position 2. Passing either event sequence to `with_execution_observation` retains the
+twentieth typed/raw-neutral digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+
+Observer failures keep exact caller object identity through public helpers, fresh modules, and an isolated Julia
+host. The generated-plan helper's semantic-specific failure marker rethrows that object before generic generated-
+source error translation. Immediate exit emits its accepted regex slot but never invents a final successful result.
+
+This is an additive runtime keyword, not a generated-format revision. Emitted source stays deterministic at
+`linkedspec-generated-source-v2` / format 2; its serialized plan remains exact `{label, family}` rows and contains
+no observation state. The new route suite passes 51 assertions, all twelve Julia semantic suites compose at 1,337,
+and complete Julia reaches 8,879 package assertions plus primary process conformance and corpus 105/105. Rollout
+remains 4/9 and native admission remains 3/6 until separate composition/admission owners move them.
+
+Full signoff passes primary 5x2x66, all ten Unicode-manifest legs, unchanged governance, and canonical CI with
+Rust semantic admission 1/1 in 79.78 seconds, Dart 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 637
+seconds. Knowledge Map is 694 facts / 5,348 question keys; exact 1,749,080-KiB cleanup preserves Julia package/
+registry caches and all 517 Pgen evidence artifacts.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -2003,7 +2050,8 @@ The dependency order is:
 | `.10.6.5.4` | Julia immutable query composition closeout | complete; committed focused 1,063 plus full matrices/canonical proof, no replacement code or promotion |
 | `.10.6.6.1` | Julia typed native runtime observation capture | complete; immutable events/sink, new 66/focused 1,129 |
 | `.10.6.6.2` | Julia immutable observed-index derivation | complete; strict topology and exact twentieth digest, new 157/focused 1,286 |
-| `.10.6.6.3-.4` | Julia generated observation propagation and closeout | pending |
+| `.10.6.6.3` | Julia generated/emitted observation propagation | complete; direct/traced/isolated routes, new 51/focused 1,337, v2/format 2 unchanged |
+| `.10.6.6.4` | Julia runtime-observation composition closeout | pending |
 | `.10.6.7` | Julia exact composed semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

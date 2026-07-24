@@ -18,6 +18,7 @@ tags: [julia, generated-source, cursor, rule-family, reconstruction, diagnostics
 evidence: "FUTURE-PARITY-BACKLOG.9.1.6.4 advances Julia emission to linkedspec-generated-source-v2 / format 2. The plan remains exact ordered label/family rows with no cursor field. Validation derives five seek and five consume policies and now classifies compact Pipe as OR. Emitted modules validate contract before normalized ASCII-hex payload reconstruction; v1 wins over a corrupt payload with validate_generated_plan/generated_source_contract_version_mismatch plus exact expected_contract/actual_contract and regenerate-from-.spec guidance. Current v2 direct/traced/fresh-loaded roles replace the private forced-seek v1 engine. Focused source-emitter proof is 65/65, complete Julia is 3,133 pass plus the frozen help mismatch, corpus is 105/105, primary is 32/65x2, and neutral governance remains 67 files / 4 complete + 4 pending / 39 mutations."
 evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes high-level global cursor options without changing the v2 plan or execution. Complete Julia is 3,187, primary is 65/65 twice, corpus is 105/105, and neutral governance is 66/4+4/39."
 evidence_update_2026_07_18_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 composes emitted v2 plus generated direct/trace roles exactly once. Complete Julia reaches 3,291 assertions and neutral governance reaches 67/5+3/44."
+evidence_update_2026_07_23_semantic_observation: "FUTURE-PARITY-BACKLOG.10.6.6.3 adds the optional semantic_observation_sink keyword to emitted direct/traced wrappers without changing linkedspec-generated-source-v2, format 2, or the exact label/family plan."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && perl tools/check_generated_source_contract.pl && python3 tools/check_rule_local_cursor_contract.py && python3 tools/check_logical_helper_contract.py"
 ---
 
@@ -26,7 +27,9 @@ reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /op
 Julia now emits `linkedspec-generated-source-v2` / format 2 through
 `emit_julia_source_v2(compiled, source_identity)`. The unversioned `emit_julia_source(compiled)` adapter emits the
 same current format with `<inline>` identity. Generated modules expose metadata, plan, validation, direct
-execution, traced execution, and optional invocation-local `top_rule` without a global cursor option.
+execution, traced execution, optional invocation-local `top_rule`, and optional invocation-local
+`semantic_observation_sink` without a global cursor option. The observation keyword forwards to shared runtime
+capture and does not enter serialized generated state.
 
 The ordered generated plan deliberately contains only `label` and `family`. After exact contract, row-count,
 label, known-family, and expected-family validation, execution derives policy as follows:
@@ -55,5 +58,6 @@ Related: [[julia-generated-source-scaffold]], [[julia-generated-source-family-pl
 [[julia-rule-local-cursor-execution]], [[julia-global-cursor-option-removal]],
 [[julia-rule-local-cursor-admission]],
 [[julia-root-rule-selection-routes]],
+[[julia-semantic-runtime-observation-generated-routes]],
 [[dart-generated-source-v2-rule-local-cursor]], [[rust-generated-source-v2-rule-local-cursor]], and
 [[perl-generated-source-contract-v2]].
