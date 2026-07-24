@@ -1,5 +1,37 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.2 — complete Julia private semantic query traversal
+
+Completed Julia's private static semantic-query evaluator without exposing a partial public surface. The existing
+detached-projection-only kernel now implements outgoing, incoming, and both-direction filter-constrained breadth-
+first relation traversal, canonical after-id paging, record/relation/depth ceilings, deterministic incomplete
+prefixes, and exact logical costs. It matches the remaining ten and therefore all 19 non-runtime canonical response
+hashes. Raw malformed-request validation and public typed/raw-neutral entry points remain `.10.6.5.3`; runtime
+events remain `.10.6.6`.
+
+Paging addresses only the already-filtered primary stream. Page and budget ceilings select the smaller prefix;
+ordinary page truncation produces a cursor without a diagnostic, while budget truncation forces
+`complete=false` and emits the portable budget warning. Explain reserves one record budget unit for its mandatory
+decision and pages only explanation steps. Relation traversal deduplicates relation ids across layers and visited
+record ids across frontiers, records first logical depth, then restores canonical source order. Relation ceilings
+take diagnostic precedence over depth when both constrain one request.
+
+The evaluator continues to consume exactly one fresh detached static projection and cannot reach retained source/
+compiler/staged/AST/IR/generated/runtime/trace/path/host authority. Responses remain recursively immutable and
+every JSON conversion is fresh. New proof passes 118 assertions; the earlier 100-assertion kernel suite remains
+stable; all eight semantic suites compose at 748. Complete Julia passes 8,290 package assertions plus primary
+process conformance and corpus 105/105. All 19 static hashes, private omission, clone isolation, deterministic
+directions/pages/budgets/costs, and unchanged governance ledgers pass.
+
+The full primary matrix passes five backends x two environments x 66 cases and all ten Unicode-manifest legs pass
+1/1. Governance remains exact at semantic 6/20/81 with rollout 4/9 and admission 3/6, Unicode 806/9/8/2,
+capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0. The mdBook, Knowledge Map 689/5,298, bounded
+memory, and diff hygiene pass. Canonical local CI passes all four doctrines and portable contracts, Rust semantic
+admission 1/1 in 82.53 seconds, Dart 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 647 seconds. Exact
+1,613,224-KiB cleanup removes only generated Rust dependency/incremental trees, Julia compiled/log caches, Python
+bytecode, and the rendered temporary book while preserving all 517 Pgen issue artifacts and Julia package/registry
+caches.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.5.1 — add Julia private semantic query kernel
 
 Implemented Julia's private immutable non-traversal semantic-query kernel without exposing a partial public API.

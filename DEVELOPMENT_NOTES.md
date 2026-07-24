@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.2` — traversal can remain a pure view over canonical detached data):
+  Julia's complete static query evaluator needs no new compiler, graph, or runtime authority. The existing canonical
+  relation stream is sufficient for filter-constrained outgoing/incoming/both breadth-first search. Each layer
+  deduplicates relation ids, the next frontier removes visited record ids, first relation depth is retained, and
+  final output is projected back through canonical source order. This keeps traversal strategy independent of
+  retained index internals and makes every prefix reproducible.
+
+  Paging is defined over an operation's filtered primary stream, not over the unfiltered model. An after-id cursor
+  must name a primary item, and the selected count is the minimum of remaining items, page limit, and applicable
+  logical budget. Page-only truncation is not a budget warning. Budget truncation forces `complete=false`; relation
+  budget takes diagnostic precedence over a simultaneous depth limit. Explain always spends one record unit on its
+  decision, pages only its steps, and emits relations only to returned steps.
+
+  Logical costs deliberately report returned model work rather than allocations, time, compiler visits, or host
+  counters. The private evaluator still obtains exactly one fresh detached projection, all response values remain
+  recursively immutable, and JSON materialization remains fresh. The remaining ten and therefore all 19 static
+  hashes pass at new 118/focused 748; complete Julia reaches 8,290/primary/105. Public typed/raw-neutral exposure
+  and 26 malformed boundaries remain `.10.6.5.3`; runtime observations remain `.10.6.6`.
+
+  Full primary remains 5x2x66 and all ten Unicode-manifest legs pass. Unchanged governance remains Unicode
+  806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated v1/10/80-0-0, and
+  public 59/27/0. Canonical CI passes Rust semantic admission in 82.53 seconds, Dart 1/1, reference primary 66x2,
+  and Phase 0 1,031/647s. The book, Knowledge Map 689/5,298, memory architecture, and diff hygiene pass. Exact
+  1,613,224-KiB cleanup preserves all 517 Pgen artifacts and the Julia package/registry caches.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.5.1` — private query values can be complete before public query is
   complete): Julia now retains the full frozen request/response vocabulary while evaluating only the nine
   non-traversal cases owned by this leaf. Keeping every type and `_semantic_query_kernel` unexported lets `.2` add

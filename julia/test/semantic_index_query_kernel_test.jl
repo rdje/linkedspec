@@ -208,9 +208,9 @@ end
             LinkedSpecJulia.SemanticQueryListOperation;
             budget = LinkedSpecJulia.SemanticQueryBudget(max_records = 2),
         )
-        @test_throws ArgumentError LinkedSpecJulia._semantic_query_kernel(graph, relations)
-        @test_throws ArgumentError LinkedSpecJulia._semantic_query_kernel(graph, paged)
-        @test_throws ArgumentError LinkedSpecJulia._semantic_query_kernel(graph, budgeted)
+        @test LinkedSpecJulia._semantic_query_kernel(graph, relations).ok
+        @test LinkedSpecJulia._semantic_query_kernel(graph, paged).page.next_after_id !== nothing
+        @test !LinkedSpecJulia._semantic_query_kernel(graph, budgeted).page.complete
         @test_throws ArgumentError LinkedSpecJulia.SemanticQueryPage(limit = true)
         @test_throws MethodError LinkedSpecJulia.SemanticQueryPage(nothing, true)
         @test_throws ArgumentError LinkedSpecJulia.SemanticQueryBudget(max_records = true)

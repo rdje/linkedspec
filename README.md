@@ -1003,10 +1003,20 @@ content migration exists yet.
   fresh detached projection materialization; source/compiler/staged/AST/IR/generated/runtime/trace/path/host state
   remains unreachable. Tuple-backed object/array values preserve recursive immutability and JSON shape while every
   `to_json` call returns a fresh mutable tree. New 100/focused 630, Julia 8,172/primary/105, primary 5x2x66, ten
-  Unicode legs, and unchanged governance pass. Public query names remain absent; traversal/pages/budgets/costs and
-  the other ten static hashes remain `.2`, with raw validation and complete public exposure in `.3`. Canonical
+  Unicode legs, and unchanged governance pass. At the `.1` boundary, public query names remained absent and
+  traversal/pages/budgets/costs plus the other ten static hashes were assigned to `.2`, with raw validation and
+  complete public exposure in `.3`. Canonical
   Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact
   1,613,088-KiB cleanup preserving 517 Pgen artifacts pass.
+  Private completion `.10.6.5.2` now adds outgoing/incoming/both filter-constrained breadth-first relations,
+  canonical after-id pages, record/relation/depth budgets, deterministic incomplete prefixes, and exact logical
+  costs behind that same evaluator. Relation ids and visited frontier records are deduplicated; canonical source
+  order is restored after traversal; relation ceilings take diagnostic precedence over depth ceilings. Explain
+  reserves one record budget unit for its decision and pages only its steps. The remaining ten and therefore all 19
+  static hashes are exact at new 118/focused 748 and complete Julia 8,290/primary/105. Public query names and raw
+  validation remain `.3`; runtime events remain `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged
+  ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines,
+  and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts pass.
   mdBook/KM 686/5,265 and exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.

@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-23` (Julia private immutable record/source query kernel `.10.6.5.1` is a fully verified
-  commit candidate from clean query-authority commit `58c67035`; nine exact static hashes, complete gates/docs/KM,
-  and exact cleanup pass before traversal `.10.6.5.2`)
+- Last updated: `2026-07-23` (Julia private relation traversal, pagination, budgets, and logical costs
+  `.10.6.5.2` are fully verified from clean kernel commit `b70e37fc`; commit before public completion `.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10439,12 +10438,86 @@ before implementation.
     stay `.10.6.5.3`. `.10.6.5.2` may activate only after this commit is clean.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.5.2`
-    Status: `pending`
+    Status: `done candidate` (2026-07-23; fully verified from clean private-kernel commit `b70e37fc`)
     Goal: Add exact Julia relation traversal, pagination, budgets, and logical costs.
     Depends on: `.10.6.5.1`
     Acceptance: Implement deterministic filtered directional breadth-first traversal, canonical after-id pages,
       record/relation/depth ceilings, deterministic truncation/prefixes, and exact cost accounting; match all
       successful static digests without touching compiler/runtime authority.
+    Verification plan: Retrieve the committed Julia query authority/kernel cards and executable neutral evaluator
+      before code. Inventory the ten static hashes not owned by `.1`, exact after-id primary ordering, directional
+      filter-constrained BFS, relation/frontier deduplication, record/relation/depth budget precedence, deterministic
+      incomplete prefixes, next-cursor behavior, logical record/relation/depth costs, and invalid typed ownership
+      boundaries that remain public/raw `.3`. Extend only the existing private evaluator over its single detached
+      projection clone; export nothing and do not widen source/compiler/runtime/trace/path/host authority. Add exact
+      focused success/truncation/order/filter/direction/cursor/budget/cost/clone/non-execution proof so all 19 static
+      hashes match. Then run all committed semantic suites, complete Julia/primary/105, both five-backend primary
+      matrices, ten Unicode legs, every no-drift ledger, canonical CI, mdBook/KM/memory/task/doctrines/diff, exact
+      safe cleanup, and commit before public completion `.10.6.5.3`.
+
+    #### Acceptance Checklist
+
+    - [x] **RETRIEVE / FREEZE** — Reuse the neutral/admitted traversal algorithms and assign the remaining ten
+      static requests, exact primary orders, pages, budgets, costs, diagnostics, and typed `.3` boundaries.
+    - [x] **PAGING / COSTS** — Implement canonical after-id pages and logical cost accounting for list/get/explain
+      and relation responses without host resource counters or secondary authority.
+    - [x] **RELATION BFS** — Implement exact outgoing/incoming/both filter-constrained breadth-first traversal with
+      relation-id and frontier-record-id deduplication plus canonical output order.
+    - [x] **BUDGET PREFIXES** — Enforce record/relation/depth ceilings with exact precedence, deterministic incomplete
+      prefixes, next cursor, and portable budget diagnostics.
+    - [x] **NINETEEN-HASH PROOF** — Match all 19 non-runtime response hashes and lock order/filter/direction/page/
+      budget/cost/clone/privacy/private/no-execution behavior while retaining `.3` raw/public ownership.
+    - [x] **LOCKSTEP / COMMIT** — Pass focused/complete Julia, both primary matrices, ten Unicode legs, all no-drift
+      ledgers, canonical CI, mdBook/KM/memory/task/doctrines/diff, exact safe cleanup, and commit before `.3`.
+
+    #### Implementation Evidence (2026-07-23)
+
+    The existing private evaluator now pages every primary stream through one `_semantic_query_page_stream` owner.
+    After-id lookup occurs only within the filtered record/relation/explanation-step stream; page limit and the
+    applicable logical budget select the deterministic prefix, `next_after_id` names the last returned primary
+    item only when incomplete, and an unknown cursor returns the exact portable error. Capabilities/list/get count
+    returned records, relations count returned relations plus the deepest returned BFS layer, and explain reserves
+    one record budget unit for the decision before paging its steps and deriving only selected `explained_by` rows.
+
+    `_semantic_query_traverse_relations` performs filter-constrained outgoing/incoming/both breadth-first traversal
+    over the already-canonical detached relation stream. It deduplicates relation ids across layers, removes visited
+    frontier record ids before the next layer, then projects selected relations back in canonical source order.
+    A remaining matching layer beyond `max_depth` produces the deterministic `max_depth` prefix; relation budget
+    takes diagnostic precedence over depth when both constrain a request. Record and relation budget prefixes keep
+    `ok=true`, force `complete=false`, and carry the exact warning fields/costs without consulting host resources.
+
+    Private typed validation now returns exact unsupported-contract and invalid-operation-combination envelopes,
+    while the 26 raw container/scalar/field/rank boundaries remain exclusively `.10.6.5.3`. Unknown relation/get
+    subjects, invalid primary cursors, capability filters, digest-without-text, and source ceilings also return
+    portable immutable responses. Public query names remain absent and `_semantic_query_kernel` still materializes
+    exactly one detached projection before evaluation.
+
+    New `semantic_index_query_traversal_test.jl` passes 118 assertions. It locks the remaining ten full SHA-256
+    response hashes, recomposes all 19 non-runtime hashes, exact canonical relations/directions/depth, pages/cursors,
+    record/relation/depth budget prefixes, typed diagnostic fields, decision-reserved explain budgets, recursively
+    immutable relations, fresh JSON mutation isolation, and private omission. The earlier kernel suite remains
+    100; all eight Julia semantic suites pass 748.
+
+    #### Verification Result (2026-07-23)
+
+    PASS. The new traversal suite passes 118 and all eight Julia semantic suites compose at 748. All 19 static
+    SHA-256 responses, outgoing/incoming/both directions, canonical filtered order, relation/frontier deduplication,
+    after-id and page-boundary behavior, record/relation/depth budget prefixes and precedence, logical costs,
+    exact typed errors, recursive immutability, fresh JSON isolation, one detached materialization, private omission,
+    and no source/compiler/runtime/trace/path/host authority are exact. Complete Julia passes 8,290 package
+    assertions, primary process conformance, and corpus 105/105.
+
+    Full primary passes 5 backends x 2 environments x 66 cases and all ten Unicode-manifest legs pass 1/1.
+    Governance remains exact at Unicode 806/9/8/2, semantic 6/20/81 with rollout 4/9 and native admission 3/6,
+    capability 80/0/0, generated v1/10/80-0-0, and public 59/27/0. Canonical local CI passes all four doctrines and
+    portable contracts, Rust semantic admission 1/1 in 82.53 seconds, Dart admission 1/1, reference primary 66/66
+    twice, and Phase 0 1,031/1,031 in 647 seconds. mdBook, Knowledge Map 689/5,298, bounded memory, task metadata,
+    marker/diff hygiene, and exact 1,613,224-KiB safe cleanup pass while preserving all 517 Pgen issue artifacts and
+    Julia package/registry caches.
+
+    Julia therefore has one complete private static query evaluator at all 19 non-runtime hashes. Planned query
+    names remain unexported; raw-neutral validation, all 26 malformed boundaries, and public typed/raw entry points
+    stay `.10.6.5.3`. Runtime events stay `.10.6.6`. `.10.6.5.3` may activate only after this commit is clean.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.5.3`
     Status: `pending`
@@ -13369,7 +13442,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.5 | `FUTURE-PARITY-BACKLOG.10.6.5` | `active` | Expose exact immutable typed/raw-neutral Julia semantic query over detached projection only. |
 | 74.5.5.0 | `FUTURE-PARITY-BACKLOG.10.6.5.0` | `done` | Exact 20-request/19-digest/26-boundary authority, policy, host-denial, and `.1-.4` implementation split are frozen and fully verified without behavior change. |
 | 74.5.5.1 | `FUTURE-PARITY-BACKLOG.10.6.5.1` | `done` | Private immutable Julia record/source kernel matches nine exact static hashes at new 100/focused 630 with full gates/docs/KM/cleanup and no exports. |
-| 74.5.5.2 | `FUTURE-PARITY-BACKLOG.10.6.5.2` | `pending` | Add exact Julia relation traversal, pages, budgets, and logical costs. |
+| 74.5.5.2 | `FUTURE-PARITY-BACKLOG.10.6.5.2` | `done` | Exact Julia relation traversal, pages, budgets, costs, deterministic prefixes, and all 19 static hashes pass without exports. |
 | 74.5.5.3 | `FUTURE-PARITY-BACKLOG.10.6.5.3` | `pending` | Export exact Julia construction, capabilities, typed query, and raw-neutral validation. |
 | 74.5.5.4 | `FUTURE-PARITY-BACKLOG.10.6.5.4` | `pending` | Recompose committed Julia query proof and close the parent without replacement code. |
 
@@ -14047,6 +14120,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.2` | Exact private outgoing/incoming/both filter-constrained BFS, relation/frontier deduplication, canonical pages/cursors, record/relation/depth budgets and precedence, deterministic prefixes, logical costs, typed errors, all 19 static hashes, recursive freeze/fresh JSON/private omission/one detached authority/no host access; new 118/focused 748; Julia 8,290/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 689/5,298/memory/task/four doctrines/diff; canonical Rust 82.53s, Dart 1/1, primary 66x2, Phase 0 1,031/647s; exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia privately owns the complete static evaluator without public exports or new semantic authority; raw/public completion `.3` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.1` | Complete private immutable query vocabulary; nine exact capabilities/list/get/explain/source hashes; default page/cost, diagnostics, source redaction/digest/ceiling, canonical order; recursive freeze/fresh JSON/private omission; exactly one detached materialization; deferred traversal/page/budget rejection; no source/compiler/runtime/trace/path/host access; new 100/focused 630; Julia 8,172/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 688/5,287/memory/task/four doctrines/diff; canonical Rust 80.95s, Dart 1/1, primary 66x2, Phase 0 1,031/662s; exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia privately owns the exact non-traversal query kernel without a public partial surface or new semantic authority; traversal/limits `.2` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.0` | Behavior-free retrieval/audit of 20 requests, 19 static hashes, 26 malformed boundaries, exact immutable typed/raw-neutral vocabulary, detached-projection-only authority, source/privacy/order/page/traversal/budget/cost/error/explain policy, Julia `Bool <: Integer` fence, host/no-execution denial, and `.1-.4` split; neutral 6/20/81 at 4/9 + 3/6; focused admitted Perl 9 + Rust 5/5 + Dart 6/6; Julia focused 530 plus detached 22/25/10 probe; Julia 8,072/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/capability/generated/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 687/5,277/memory/task/four doctrines/diff; canonical Rust 1/1, Dart 1/1, primary 66x2, Phase 0 1,031/655s; exact 1,812,240-KiB cleanup preserving 517 Pgen artifacts. | PASS. The complete query contract and omission-safe dependency order are frozen before implementation without production/test/fixture/API/format/observation/rollout/admission change; private kernel `.10.6.5.1` waits for the clean plan commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.4.3` | Six committed Julia semantic suites at focused 530; exact 22/25/10 calls/staging/generated target; authored Unicode/source/call/resolution/signature/shape/provenance directions; sidecar/plan rejection; immutable/detached/private/host/no-execution fences; Julia 8,072/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode 806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability/generated/public 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 686/5,265/memory/task/four doctrines/diff; canonical Rust 77.68s, Dart 1/1, primary 66x2, Phase 0 1,031/622s; exact 1,504,516-KiB cleanup preserving 517 Pgen artifacts. | PASS. Committed private Julia call provenance composes without replacement production/test code, public query, runtime observation, format, rollout, or admission movement; parent `.10.6.4` closes and `.10.6.5.0` becomes next after the clean commit. |
@@ -14293,6 +14367,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.5.2` | `FUTURE-PARITY-BACKLOG.10.6.5.2 - complete Julia query traversal` | Exact private relations/pages/budgets/costs complete all 19 static hashes; new 118/focused 748, Julia 8,290/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no public query before raw/public completion `.3`. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.1` | `FUTURE-PARITY-BACKLOG.10.6.5.1 - add Julia query kernel` | Complete private immutable values and detached-projection-only capabilities/list/get/explain/source behavior at nine exact hashes; new 100/focused 630, Julia 8,172/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup, no public query before traversal `.2`. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.0` | `FUTURE-PARITY-BACKLOG.10.6.5.0 - freeze Julia semantic query` | Behavior-free exact 20-request/19-hash/26-boundary authority, detached-only policy, immutable API vocabulary, Julia Boolean/numeric fence, and `.1-.4` split; full focused/matrix/no-drift/canonical/docs/KM/cleanup proof before private kernel implementation. |
 | `FUTURE-PARITY-BACKLOG.10.6.4.3` | `FUTURE-PARITY-BACKLOG.10.6.4.3 - close Julia call projection` | No-change committed focused 530, Julia 8,072/primary/105, 5x2x66 plus ten Unicode legs, unchanged ledgers, book/KM/doctrines, canonical Rust 77.68s + Dart 1/1 + primary 66x2 + Phase 0 1,031/622s, and exact 1,504,516-KiB cleanup; closes `.10.6.4` before query audit. |
@@ -14517,6 +14592,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-23`: `.10.6.5.2` completes Julia's private static semantic-query evaluator at all 19 non-runtime
+  response hashes. Canonical after-id pages operate on filtered primary streams; outgoing/incoming/both relation
+  BFS deduplicates relation ids and visited frontier records before restoring canonical order; record/relation/depth
+  budgets yield deterministic incomplete prefixes with exact precedence and logical costs. Explain reserves its
+  decision record. One detached projection remains the only authority and no query name is exported. New
+  118/focused 748, Julia 8,290/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, mdBook/KM
+  689/5,298/doctrines, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, and exact
+  1,613,224-KiB cleanup preserving 517 Pgen artifacts pass. Raw validation/public exposure `.3` follows only after
+  the clean commit; runtime events remain `.10.6.6`.
 
 - `2026-07-23`: `.10.6.5.1` implements Julia's private immutable capabilities/list/get/explain/source query kernel
   at nine exact response hashes. Distinct tuple-backed object/array values preserve recursive JSON shape and every

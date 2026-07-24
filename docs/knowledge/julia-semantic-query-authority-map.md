@@ -12,9 +12,9 @@ answers:
   - "when may Julia expose its public semantic query API"
   - "does Julia semantic query include runtime events"
 date: 2026-07-23
-status: current authority and implementation plan; private non-traversal kernel complete, later leaves pending
+status: current authority and implementation plan; private static evaluator complete, public leaves pending
 tags: [julia, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.5.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; dart/lib/src/semantic/semantic_query.dart
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.0-.10.6.5.2; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticQuery.jl; julia/test/semantic_index_query_kernel_test.jl; julia/test/semantic_index_query_traversal_test.jl; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; dart/lib/src/semantic/semantic_query.dart
 reverify: "python3 tools/check_semantic_introspection_contract.py && PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query && (cd dart && dart test test/semantic_index_query_kernel_test.dart) && rg -n 'semantic_query|SemanticQuery|semantic_capabilities' julia/src"
 ---
 
@@ -78,10 +78,13 @@ The completed audit passes neutral 6/20/81 at rollout 4/9 and native admission 3
 ledger. Canonical local CI passes doctrines/contracts, Rust and Dart semantic admission, primary 66x2, and Phase 0
 1,031/1,031 in 655 seconds. mdBook, Knowledge Map 687/5,277, and exact 1,812,240-KiB artifact cleanup preserving
 517 Pgen issue artifacts pass. Private kernel `.10.6.5.1` then lands immutable tuple-backed values plus exact
-capabilities/list/get/explain/source behavior for nine static hashes. It consumes one fresh detached materialization
-per request and exports no query symbol; traversal/limits remain `.2` and complete public typed/raw-neutral exposure
-remains `.3`. See [[julia-semantic-query-kernel]] for the implemented boundary and proof.
+capabilities/list/get/explain/source behavior for nine static hashes. Traversal completion `.10.6.5.2` adds exact
+filtered directional BFS, canonical pages, logical budgets/costs, deterministic prefixes, and the other ten static
+hashes. The complete private evaluator therefore matches all 19 static responses, consumes one fresh detached
+materialization per request, and exports no query symbol. Complete public typed/raw-neutral exposure remains `.3`.
+See [[julia-semantic-query-kernel]] and [[julia-semantic-query-traversal]] for the implemented boundary and proof.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[julia-semantic-introspection-authority-map]],
 [[julia-semantic-call-staged-projection-plan]], [[perl-semantic-query-evaluator]],
-[[rust-semantic-query-evaluator]], [[dart-semantic-query-authority-map]], [[julia-semantic-query-kernel]].
+[[rust-semantic-query-evaluator]], [[dart-semantic-query-authority-map]], [[julia-semantic-query-kernel]], and
+[[julia-semantic-query-traversal]].

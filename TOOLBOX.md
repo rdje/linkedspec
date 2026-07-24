@@ -587,6 +587,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Complete `.1` signoff is Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
   Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and exact
   1,613,088-KiB cleanup preserving 517 Pgen artifacts.
+  Private traversal `.10.6.5.2` is now implemented; retrieve [[julia-semantic-query-traversal]] before changing it.
+  Run `julia/test/semantic_index_query_traversal_test.jl` after the seven earlier suites for new 118/focused 748.
+  `_semantic_query_page_stream` addresses the filtered primary stream and selects the page/budget minimum;
+  `_semantic_query_traverse_relations` performs filter-constrained outgoing/incoming/both BFS with relation and
+  visited-frontier deduplication before canonical-order projection. Relation-budget diagnostics precede depth when
+  both bind; explain reserves one record unit for its decision. All 19 static hashes are exact, costs are logical,
+  and the evaluator still receives one detached projection only. Raw malformed boundaries and every public query
+  export remain `.3`; runtime events remain `.10.6.6`. Complete signoff is Julia 8,290/primary/105, primary
+  5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts.
 
 ---
 

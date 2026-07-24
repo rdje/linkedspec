@@ -311,6 +311,18 @@ struct SemanticQueryResponse
     diagnostics::Tuple
 end
 
+struct _SemanticQueryPageResult
+    selected::Tuple
+    page::SemanticQueryPageState
+    limited_by_budget::Bool
+end
+
+struct _SemanticQueryTraversal
+    relations::Tuple
+    depth_by_id::Dict{String,Int}
+    depth_limited::Bool
+end
+
 Base.:(==)(left::SemanticQueryPage, right::SemanticQueryPage) =
     left.after_id == right.after_id && left.limit == right.limit
 Base.:(==)(left::SemanticQueryBudget, right::SemanticQueryBudget) =
@@ -565,7 +577,7 @@ function to_json(response::SemanticQueryResponse)
     )
 end
 
-"""Private non-traversal evaluator; public query names remain absent until completion."""
+"""Private projection-only evaluator; public query names remain absent until completion."""
 function _semantic_query_kernel(index::SemanticIndex, request::SemanticQuery)
     projection = _semantic_static_projection_materialize(index)
     return _semantic_query_kernel_evaluate(projection, request)
@@ -575,10 +587,9 @@ function _semantic_query_kernel_evaluate(
     projection::Dict{String,Any},
     request::SemanticQuery,
 )
-    _semantic_query_assert_kernel_request(request)
     snapshot = _semantic_query_snapshot(projection["snapshot"])
-    ceiling_error = _semantic_query_source_ceiling_error(snapshot, request)
-    ceiling_error === nothing || return ceiling_error
+    request_error = _semantic_query_kernel_request_error(snapshot, request)
+    request_error === nothing || return request_error
 
     records = projection["records"]
     relations = projection["relations"]
@@ -588,7 +599,8 @@ function _semantic_query_kernel_evaluate(
     record_by_id = Dict{String,Dict{String,Any}}(
         String(record["id"]) => record for record in records
     )
-    if request.operation == SemanticQueryGetOperation &&
+    if (request.operation == SemanticQueryGetOperation ||
+        request.operation == SemanticQueryRelationsOperation) &&
        any(subject -> !haskey(record_by_id, subject), request.subjects)
         return _semantic_query_rejected_response(
             snapshot,
@@ -605,32 +617,90 @@ function _semantic_query_kernel_evaluate(
     record_cost = 0
     relation_cost = 0
     depth_reached = 0
+    page = SemanticQueryPageState(request.page.after_id, nothing, true)
+    budget_reason = nothing
 
     if request.operation == SemanticQueryCapabilitiesOperation
-        push!(selected_records, _semantic_query_capabilities_record(snapshot))
-        record_cost = 1
+        paged = _semantic_query_page_stream(
+            [_semantic_query_capabilities_record(snapshot)],
+            request,
+            request.budget.max_records,
+            record -> record.id,
+        )
+        paged === nothing && return _semantic_query_invalid_after_id(snapshot, request)
+        append!(selected_records, paged.selected)
+        page = paged.page
+        record_cost = length(selected_records)
+        paged.limited_by_budget && (budget_reason = "max_records")
     elseif request.operation == SemanticQueryListOperation
         wanted = Set(request.record_kinds)
-        for record in records
-            if isempty(wanted) || record["kind"] in wanted
-                push!(
-                    selected_records,
-                    _semantic_query_project_record(record, projection, request.source),
-                )
-            end
-        end
+        candidates = Any[
+            record for record in records if isempty(wanted) || record["kind"] in wanted
+        ]
+        paged = _semantic_query_page_stream(
+            candidates,
+            request,
+            request.budget.max_records,
+            record -> String(record["id"]),
+        )
+        paged === nothing && return _semantic_query_invalid_after_id(snapshot, request)
+        append!(
+            selected_records,
+            (
+                _semantic_query_project_record(record, projection, request.source) for
+                record in paged.selected
+            ),
+        )
+        page = paged.page
         record_cost = length(selected_records)
+        paged.limited_by_budget && (budget_reason = "max_records")
     elseif request.operation == SemanticQueryGetOperation
         wanted = Set(request.subjects)
-        for record in records
-            if record["id"] in wanted
-                push!(
-                    selected_records,
-                    _semantic_query_project_record(record, projection, request.source),
-                )
-            end
-        end
+        candidates = Any[record for record in records if record["id"] in wanted]
+        paged = _semantic_query_page_stream(
+            candidates,
+            request,
+            request.budget.max_records,
+            record -> String(record["id"]),
+        )
+        paged === nothing && return _semantic_query_invalid_after_id(snapshot, request)
+        append!(
+            selected_records,
+            (
+                _semantic_query_project_record(record, projection, request.source) for
+                record in paged.selected
+            ),
+        )
+        page = paged.page
         record_cost = length(selected_records)
+        paged.limited_by_budget && (budget_reason = "max_records")
+    elseif request.operation == SemanticQueryRelationsOperation
+        traversal = _semantic_query_traverse_relations(relations, request)
+        paged = _semantic_query_page_stream(
+            traversal.relations,
+            request,
+            request.budget.max_relations,
+            relation -> String(relation["id"]),
+        )
+        paged === nothing && return _semantic_query_invalid_after_id(snapshot, request)
+        append!(
+            selected_relations,
+            (
+                _semantic_query_project_relation(relation, projection, request.source) for
+                relation in paged.selected
+            ),
+        )
+        page = paged.page
+        relation_cost = length(selected_relations)
+        for relation in paged.selected
+            relation_depth = traversal.depth_by_id[String(relation["id"])]
+            depth_reached = max(depth_reached, relation_depth)
+        end
+        if paged.limited_by_budget
+            budget_reason = "max_relations"
+        elseif traversal.depth_limited
+            budget_reason = "max_depth"
+        end
     elseif request.operation == SemanticQueryExplainOperation
         decision = _semantic_query_explain_decision(records, record_by_id, only(request.subjects))
         if decision === nothing
@@ -648,6 +718,13 @@ function _semantic_query_kernel_evaluate(
             record for record in records if
             record["kind"] == "explanation_step" && record["owner_id"] == decision_id
         ]
+        paged = _semantic_query_page_stream(
+            steps,
+            request,
+            request.budget.max_records - 1,
+            record -> String(record["id"]),
+        )
+        paged === nothing && return _semantic_query_invalid_after_id(snapshot, request)
         push!(
             selected_records,
             _semantic_query_project_record(decision, projection, request.source),
@@ -656,10 +733,10 @@ function _semantic_query_kernel_evaluate(
             selected_records,
             (
                 _semantic_query_project_record(step, projection, request.source) for
-                step in steps
+                step in paged.selected
             ),
         )
-        step_ids = Set(String(step["id"]) for step in steps)
+        step_ids = Set(String(step["id"]) for step in paged.selected)
         for relation in relations
             if relation["kind"] == "explained_by" &&
                relation["from_id"] == decision_id &&
@@ -670,13 +747,23 @@ function _semantic_query_kernel_evaluate(
                 )
             end
         end
+        page = paged.page
         record_cost = length(selected_records)
         relation_cost = length(selected_relations)
-        depth_reached = isempty(steps) ? 0 : 1
-    else
-        throw(ArgumentError(
-            "Relation traversal is owned by FUTURE-PARITY-BACKLOG.10.6.5.2",
-        ))
+        depth_reached = isempty(paged.selected) ? 0 : 1
+        paged.limited_by_budget && (budget_reason = "max_records")
+    end
+
+    diagnostics = SemanticQueryDiagnostic[]
+    if budget_reason !== nothing
+        page = SemanticQueryPageState(page.after_id, page.next_after_id, false)
+        push!(
+            diagnostics,
+            _semantic_query_diagnostic(
+                "semantic_query_budget_exceeded";
+                reason = budget_reason,
+            ),
+        )
     end
 
     return SemanticQueryResponse(
@@ -686,50 +773,181 @@ function _semantic_query_kernel_evaluate(
         snapshot,
         Tuple(selected_records),
         Tuple(selected_relations),
-        SemanticQueryPageState(request.page.after_id, nothing, true),
+        page,
         SemanticQueryCost(record_cost, relation_cost, depth_reached),
-        (),
+        Tuple(diagnostics),
     )
 end
 
-function _semantic_query_assert_kernel_request(request::SemanticQuery)
-    request.contract == _SEMANTIC_QUERY_ID || throw(ArgumentError(
-        "Raw contract rejection is owned by FUTURE-PARITY-BACKLOG.10.6.5.3",
-    ))
-    if request.page.after_id !== nothing || request.page.limit != _SEMANTIC_QUERY_PAGE_DEFAULT
-        throw(ArgumentError(
-            "Semantic query cursor and page limits are owned by FUTURE-PARITY-BACKLOG.10.6.5.2",
-        ))
-    end
-    if request.budget != SemanticQueryBudget()
-        throw(ArgumentError(
-            "Semantic query budgets are owned by FUTURE-PARITY-BACKLOG.10.6.5.2",
-        ))
-    end
-    if request.operation == SemanticQueryRelationsOperation
-        throw(ArgumentError(
-            "Relation traversal is owned by FUTURE-PARITY-BACKLOG.10.6.5.2",
-        ))
-    elseif request.operation == SemanticQueryCapabilitiesOperation ||
-           request.operation == SemanticQueryListOperation
-        isempty(request.subjects) || throw(ArgumentError(
-            "Raw operation-combination rejection is owned by FUTURE-PARITY-BACKLOG.10.6.5.3",
-        ))
-    elseif request.operation == SemanticQueryGetOperation
-        isempty(request.subjects) && throw(ArgumentError(
-            "Raw operation-combination rejection is owned by FUTURE-PARITY-BACKLOG.10.6.5.3",
-        ))
-    elseif request.operation == SemanticQueryExplainOperation
-        length(request.subjects) == 1 || throw(ArgumentError(
-            "Raw operation-combination rejection is owned by FUTURE-PARITY-BACKLOG.10.6.5.3",
-        ))
+function _semantic_query_kernel_request_error(
+    snapshot::SemanticSnapshot,
+    request::SemanticQuery,
+)
+    if request.contract != _SEMANTIC_QUERY_ID
+        return _semantic_query_rejected_response(
+            snapshot,
+            request,
+            _semantic_query_diagnostic(
+                "semantic_query_contract_unsupported";
+                requested = request.contract,
+            ),
+        )
     end
     if request.source.include_content_digest && request.source.detail != SemanticSourceTextDetail
-        throw(ArgumentError(
-            "Raw digest/detail rejection is owned by FUTURE-PARITY-BACKLOG.10.6.5.3",
-        ))
+        return _semantic_query_rejected_response(
+            snapshot,
+            request,
+            _semantic_query_diagnostic(
+                "semantic_query_invalid";
+                reason = "digest_requires_text",
+            ),
+        )
+    end
+    ceiling_error = _semantic_query_source_ceiling_error(snapshot, request)
+    ceiling_error === nothing || return ceiling_error
+
+    valid_combination = if request.operation == SemanticQueryCapabilitiesOperation ||
+                           request.operation == SemanticQueryListOperation
+        isempty(request.subjects) && isempty(request.relation_kinds)
+    elseif request.operation == SemanticQueryGetOperation
+        !isempty(request.subjects) &&
+        isempty(request.record_kinds) &&
+        isempty(request.relation_kinds)
+    elseif request.operation == SemanticQueryRelationsOperation
+        !isempty(request.subjects) && isempty(request.record_kinds)
+    else
+        length(request.subjects) == 1 &&
+        isempty(request.record_kinds) &&
+        isempty(request.relation_kinds)
+    end
+    if !valid_combination
+        return _semantic_query_rejected_response(
+            snapshot,
+            request,
+            _semantic_query_diagnostic(
+                "semantic_query_invalid";
+                reason = "operation_combination",
+            ),
+        )
+    end
+    if request.operation == SemanticQueryCapabilitiesOperation &&
+       !isempty(request.record_kinds)
+        return _semantic_query_rejected_response(
+            snapshot,
+            request,
+            _semantic_query_diagnostic(
+                "semantic_query_invalid";
+                reason = "capability_filter",
+            ),
+        )
     end
     return nothing
+end
+
+function _semantic_query_page_stream(items, request::SemanticQuery, budget_limit::Int, id)
+    start = 1
+    if request.page.after_id !== nothing
+        cursor = findfirst(item -> id(item) == request.page.after_id, items)
+        cursor === nothing && return nothing
+        start = cursor + 1
+    end
+    remaining = start > length(items) ? Any[] : Any[items[index] for index in start:length(items)]
+    limited_by_budget = length(remaining) > budget_limit
+    selected_count = min(length(remaining), min(request.page.limit, budget_limit))
+    selected = selected_count == 0 ? () : Tuple(remaining[1:selected_count])
+    complete = selected_count == length(remaining) && !limited_by_budget
+    next_after_id = !isempty(selected) && !complete ? String(id(last(selected))) : nothing
+    return _SemanticQueryPageResult(
+        selected,
+        SemanticQueryPageState(request.page.after_id, next_after_id, complete),
+        limited_by_budget,
+    )
+end
+
+function _semantic_query_traverse_relations(relations, request::SemanticQuery)
+    wanted_kinds = Set(request.relation_kinds)
+    frontier = Set(request.subjects)
+    visited = copy(frontier)
+    depth_by_id = Dict{String,Int}()
+
+    for depth in 1:request.budget.max_depth
+        layer = _semantic_query_relation_layer(
+            relations,
+            frontier,
+            wanted_kinds,
+            request.direction,
+            Set(keys(depth_by_id)),
+        )
+        isempty(layer) && break
+        next_frontier = Set{String}()
+        for relation in layer
+            relation_id = String(relation["id"])
+            from_id = String(relation["from_id"])
+            to_id = String(relation["to_id"])
+            depth_by_id[relation_id] = depth
+            if (request.direction == SemanticQueryOutgoingDirection ||
+                request.direction == SemanticQueryBothDirection) && from_id in frontier
+                push!(next_frontier, to_id)
+            end
+            if (request.direction == SemanticQueryIncomingDirection ||
+                request.direction == SemanticQueryBothDirection) && to_id in frontier
+                push!(next_frontier, from_id)
+            end
+        end
+        setdiff!(next_frontier, visited)
+        union!(visited, next_frontier)
+        frontier = next_frontier
+        isempty(frontier) && break
+    end
+
+    depth_limited = !isempty(frontier) && !isempty(_semantic_query_relation_layer(
+        relations,
+        frontier,
+        wanted_kinds,
+        request.direction,
+        Set(keys(depth_by_id)),
+    ))
+    selected = Tuple(
+        relation for relation in relations if haskey(depth_by_id, String(relation["id"]))
+    )
+    return _SemanticQueryTraversal(selected, depth_by_id, depth_limited)
+end
+
+function _semantic_query_relation_layer(
+    relations,
+    frontier,
+    wanted_kinds,
+    direction::SemanticQueryDirection,
+    selected_ids,
+)
+    return Any[
+        relation for relation in relations if begin
+            id = String(relation["id"])
+            kind = String(relation["kind"])
+            from_id = String(relation["from_id"])
+            to_id = String(relation["to_id"])
+            kind_matches = isempty(wanted_kinds) || kind in wanted_kinds
+            outgoing = (direction == SemanticQueryOutgoingDirection ||
+                        direction == SemanticQueryBothDirection) && from_id in frontier
+            incoming = (direction == SemanticQueryIncomingDirection ||
+                        direction == SemanticQueryBothDirection) && to_id in frontier
+            kind_matches && (outgoing || incoming) && !(id in selected_ids)
+        end
+    ]
+end
+
+function _semantic_query_invalid_after_id(
+    snapshot::SemanticSnapshot,
+    request::SemanticQuery,
+)
+    return _semantic_query_rejected_response(
+        snapshot,
+        request,
+        _semantic_query_diagnostic(
+            "semantic_query_invalid";
+            reason = "after_id_not_in_primary_stream",
+        ),
+    )
 end
 
 function _semantic_query_snapshot(value)

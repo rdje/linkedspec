@@ -118,7 +118,7 @@ generated source. Native payload/job/body-AST state, implementation text, paths,
 containers do not cross the private projection boundary. Public semantic query and runtime observation remain
 dependency-ordered later work.
 
-Behavior-free query planning and the private non-traversal kernel are now complete, but the public API below is
+Behavior-free query planning and the complete private static evaluator are now complete, but the public API below is
 deliberately not implemented yet. Query reads only one fresh detached materialization of the private projection;
 it cannot reach retained source/map, compiler, staged sidecars, AST/ActionIR, regex, generated implementation,
 execution, observation, trace, path, or host state. The completed surface will expose `semantic_capabilities(index)`,
@@ -131,15 +131,18 @@ validation must reject `Bool` before `Integer` because `true isa Integer`; the d
 traversal/pages/budgets/costs, then complete public exposure, then no-change composition. The twentieth runtime
 response remains a separate observation task.
 
-Current private `.10.6.5.1` defines the complete frozen vocabulary and evaluates capabilities, list, get, explain,
-source privacy/digest/ceiling, and portable diagnostics at nine exact static response hashes. Separate tuple-backed
-object and array wrappers preserve recursive immutability without losing empty JSON shape; each `to_json` call
-returns a new mutable tree. The private evaluator invokes `_semantic_static_projection_materialize` exactly once.
-Cursor/non-default pages, budgets, relation traversal, deterministic prefixes, costs, and the other ten static
-hashes remain `.10.6.5.2`; raw malformed-request validation and every public export remain `.10.6.5.3`.
-Kernel signoff passes new 100/focused 630, complete Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs,
-unchanged governance, canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287,
-doctrines, and exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts.
+Private `.10.6.5.1` defines the complete frozen vocabulary and evaluates capabilities, list, get, explain, source
+privacy/digest/ceiling, and portable diagnostics at nine exact static response hashes. Separate tuple-backed object
+and array wrappers preserve recursive immutability without losing empty JSON shape; each `to_json` call returns a
+new mutable tree. Private `.10.6.5.2` extends that same evaluator with canonical after-id pages, exact outgoing/
+incoming/both filter-constrained breadth-first relations, record/relation/depth budgets, deterministic incomplete
+prefixes, and logical costs. Relation ids and visited frontier records are deduplicated before canonical output
+order is restored; explain reserves one record budget unit for its decision. The evaluator still invokes
+`_semantic_static_projection_materialize` exactly once. All 19 static hashes now match at new 118/focused 748 and
+complete Julia 8,290/primary/105. Raw malformed-request validation and every public export remain `.10.6.5.3`;
+runtime events remain `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s +
+Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup
+preserving 517 Pgen artifacts pass.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

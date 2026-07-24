@@ -1342,11 +1342,12 @@ Leaf `.10.6.5.1` now implements the first dependency-safe portion while keeping 
 text detail, entry explanation, call symbols/shapes, failed diagnostics, privacy with no source, privacy with text
 and digest, and forbidden source detail.
 
-The kernel owns only non-traversal default-page/default-budget behavior. It preserves canonical record order,
-decision-before-step explanations with their `explained_by` relations, exact logical costs, source-ceiling errors,
+At the `.10.6.5.1` boundary, the kernel owned only non-traversal default-page/default-budget behavior. It preserves
+canonical record order, decision-before-step explanations with their `explained_by` relations, exact logical costs,
+source-ceiling errors,
 structural redactions below text detail, and digests only at requested text detail. Cursor and non-default page,
 record/relation/depth budgets, directional breadth-first traversal, deterministic incomplete prefixes, and the
-remaining ten static digests are still `.10.6.5.2` work.
+remaining ten static digests were assigned to `.10.6.5.2`.
 
 All values are immutable structs with copied tuples. Variable facts and diagnostic fields use distinct private
 tuple-backed object and array wrappers, so empty JSON objects and arrays remain different without retaining mutable
@@ -1363,6 +1364,35 @@ remains 6/20/81 at rollout 4/9 and native admission 3/6. `semantic_capabilities`
 validation. Canonical signoff passes Rust admission 1/1 in 80.95 seconds, Dart 1/1, reference primary 66x2, Phase
 0 1,031/1,031 in 662 seconds, book/KM 688/5,287, all four doctrines, and exact 1,613,088-KiB cleanup preserving
 517 Pgen artifacts.
+
+### Julia private traversal, paging, budgets, and costs
+
+Leaf `.10.6.5.2` completes the private static evaluator without exporting a partial query API. The same
+`_semantic_query_kernel` now matches all 19 non-runtime response hashes. Its ten completion cases cover reverse
+graph dispatch, staged and generated provenance, after-id and page boundaries, record/relation/depth limits,
+unsupported contracts, and invalid operation combinations.
+
+Paging always starts from the filtered primary stream: records for list/get/capabilities, relations selected by
+traversal, or explanation steps after the mandatory decision. `after_id` must occur in that stream. The selected
+prefix is bounded by both page size and the applicable logical budget. Page-only truncation carries a next cursor
+without a warning. Budget truncation carries the same deterministic cursor, forces `complete=false`, and returns
+`semantic_query_budget_exceeded`. Explain reserves one record budget unit for its decision and derives
+`explained_by` relations only for returned steps.
+
+Relation traversal is filter-constrained breadth-first search in outgoing, incoming, or both directions. Relation
+ids are selected only once across layers; visited record ids are removed from each next frontier; first logical
+depth is retained; and selected relations are finally restored to canonical source order. A remaining matching
+layer beyond `max_depth` produces the exact depth-limited prefix. When relation and depth ceilings both constrain a
+query, `max_relations` is the reported limit.
+
+Costs describe returned model work, not host resources: records returned, relations returned, and deepest returned
+BFS layer. Rejected requests report zero cost. The evaluator still consumes exactly one detached projection clone
+and has no route to source/compiler/staged/AST/IR/generated/runtime/trace/path/host authority. New proof is 118,
+all eight semantic suites compose at 748, and complete Julia reaches 8,290 package assertions plus primary process
+conformance and corpus 105/105. Query values and names remain unexported until `.10.6.5.3` adds all 26 raw-neutral
+validation boundaries and exposes the complete typed/raw surface; runtime events remain `.10.6.6`. Full primary
+5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s + Dart 1/1 + primary 66x2 + Phase 0
+1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup preserving 517 Pgen artifacts pass.
 
 ## Exact v1 record model
 
@@ -1746,8 +1776,9 @@ The dependency order is:
 | `.10.6.4.2` | Julia staged/generated calls completion | complete; exact private full 22/25, new 62/focused 530, no promotion |
 | `.10.6.4.3` | Julia calls/staging/generated composition closeout | complete; committed focused 530 plus full gates, no replacement code or promotion |
 | `.10.6.5.0` | Julia query authority map and dependency split | complete and fully verified behavior-free plan; detached authority, 19 hashes, 26 boundaries, and `.1-.4` frozen |
-| `.10.6.5.1` | Julia private immutable non-traversal query kernel | fully verified commit candidate; nine exact hashes, new 100/focused 630, no exports |
-| `.10.6.5.2-.4` | Julia traversal/limits, public typed/raw-neutral query, and closeout | pending |
+| `.10.6.5.1` | Julia private immutable non-traversal query kernel | complete; nine exact hashes, new 100/focused 630, no exports |
+| `.10.6.5.2` | Julia private relations/pages/budgets/costs | complete; all 19 static hashes, new 118/focused 748, full signoff, no exports |
+| `.10.6.5.3-.4` | Julia public typed/raw-neutral query and closeout | pending |
 | `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |

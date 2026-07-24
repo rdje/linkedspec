@@ -583,9 +583,19 @@ Three backbone items tracked major structural modernization — all done:
   projection clone and cannot reach retained source/compiler/staged/AST/IR/generated/runtime/trace/path/host state.
   Tuple-backed object/array values remain recursively immutable and every JSON conversion is fresh. New
   100/focused 630, Julia 8,172/primary/105, primary 5x2x66, ten Unicode legs, and unchanged governance pass.
-  Traversal/pages/budgets/costs and ten remaining static hashes stay `.2`; raw validation and public exposure stay
-  `.3`. Canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 688/5,287, doctrines, and
+  At the `.1` boundary, traversal/pages/budgets/costs and ten remaining static hashes were assigned to `.2`; raw
+  validation and public exposure stayed `.3`. Canonical Rust 80.95s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/662s, book/KM 688/5,287, doctrines, and
   exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts pass.
+  Private completion `.10.6.5.2` now adds exact outgoing/incoming/both filter-constrained breadth-first relations,
+  canonical after-id pages, record/relation/depth budgets, deterministic incomplete prefixes, and logical costs
+  over that same detached evaluator. It deduplicates relation ids and visited frontier records, restores canonical
+  output order, gives relation ceilings diagnostic precedence over depth, and reserves an explain decision's record
+  budget unit. The remaining ten and therefore all 19 static hashes pass at new 118/focused 748 and complete Julia
+  8,290/primary/105. Query values and functions remain unexported; raw validation/public exposure stay `.3`, and
+  runtime events stay `.10.6.6`. Full primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.53s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/647s, book/KM 689/5,298, doctrines, and exact 1,613,224-KiB cleanup
+  preserving 517 Pgen artifacts pass.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
