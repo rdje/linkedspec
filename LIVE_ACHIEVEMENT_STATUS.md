@@ -8,15 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia runtime-observation authority plan `FUTURE-PARITY-BACKLOG.10.6.6.0` is complete and verified from clean
-  immutable-query closeout `5ad8a165`. Exact seams/routes, matched-end scalar policy, trace/diagnostic separation,
-  absent-sink fence, generated callback identity, immutable derivation, twentieth digest, and `.1-.4` order are
-  frozen. Typed direct capture `.10.6.6.1` waits for this plan's clean commit.
+- Julia typed runtime-observation capture `FUTURE-PARITY-BACKLOG.10.6.6.1` is complete and verified from clean
+  plan commit `c590c435`, awaiting its durable commit. Immutable observed-index derivation `.10.6.6.2` may activate
+  only after that clean boundary; emitted/generated public propagation remains separately owned by `.3`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.1 — add Julia runtime observation**
+  (DONE and fully verified from clean behavior-free plan commit `c590c435`; awaiting this leaf's durable commit).
+
+  **Result:** Julia now exports the immutable typed v1 slot/result event contract and accepts one invocation-local
+  semantic sink across direct, execute, traced, loaded, reconstructed, and generated-plan-engine routes. Accepted
+  slots carry exact matched-end Unicode-scalar positions; one normal final result carries exact UTF-8 input identity.
+  Absent sink does no allocation/hash work, callback errors preserve exact caller identity, and result/cursor/trace/
+  diagnostic/failure behavior is unchanged. Derivation and emitted public propagation remain `.2` and `.3`.
+
+  **Proof:** New 66/focused 1,129 and Julia 8,671/primary/105 pass. Primary 5x2x66, all ten Unicode legs, Unicode
+  806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated v1/10/80-0-0, language
+  246/105+1/122, and public 59/27/0 remain exact. Canonical Rust 82.37s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/662s, book/KM 692/5,330, doctrines, memory/diff hygiene, and exact 1,892,380-KiB cleanup pass while
+  preserving 517 Pgen artifacts and Julia package/registry caches.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.0 — freeze Julia runtime observation**
   (DONE from clean immutable-query closeout `5ad8a165`; this leaf's commit is the durable handoff boundary).
 

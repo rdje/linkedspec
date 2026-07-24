@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.1 — add Julia runtime observation
+
+Added Julia's typed invocation-local runtime semantic-observation API. `LinkedSpecJulia` now exports the v1
+contract, closed slot/result event-kind vocabulary, immutable `RuntimeSemanticObservationEvent`, sink alias, stable
+kind names, and detached JSON projection. `runtime_parse`, `runtime_execute`, both traced conveniences, and the
+validated generated-plan direct/traced helpers accept `semantic_observation_sink`; loaded and reconstructed
+engines reuse the same seam.
+
+Accepted slots emit synchronously after ordered identity succeeds and before effects, with Unicode-scalar position
+derived from the accepted match end. One successful parse emits its final rule-result after
+`RuntimeParseResult` construction with exact UTF-8 input SHA-256; failure and immediate exit omit that final event.
+No host result value enters the event. Sink absence returns before event allocation, scalar conversion, or input
+hashing, and warmed focused checks measure zero allocation at both helpers. Trace and diagnostic-output channels,
+result/cursor values, and ordinary failures remain independent and unchanged. Callback errors escape as the exact
+caller object through native, traced, and generated-plan broad-catch routes.
+
+The new suite passes 66 assertions and all ten committed semantic suites compose at 1,129. Complete Julia passes
+8,671 package assertions plus primary process conformance and corpus 105/105. Fresh emitted module wrappers and
+generated public signatures remain unchanged for `.10.6.6.3`; immutable observed-index derivation and the
+twentieth query digest remain `.10.6.6.2`. Semantic rollout/admission therefore stay 4/9 and 3/6.
+
+Primary 5x2x66, all ten Unicode-manifest legs, and unchanged Unicode/capability/generated/language/public ledgers
+pass. Canonical CI passes all four doctrines, Rust semantic admission 1/1 in 82.37 seconds, Dart 1/1, reference
+primary 66x2, and Phase 0 1,031/1,031 in 662 seconds. mdBook and Knowledge Map 692/5,330 pass. Exact
+1,892,380-KiB cleanup preserves Julia package/registry caches and all 517 Pgen artifacts.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.0 — freeze Julia runtime observation
 
 Froze Julia's complete runtime semantic-observation authority before implementation. The existing

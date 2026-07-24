@@ -181,6 +181,12 @@ export backend_name,
     RuntimeDiagnostic,
     RuntimeDiagnosticOutputEvent,
     RuntimeDiagnosticOutputSink,
+    RUNTIME_SEMANTIC_OBSERVATION_CONTRACT,
+    RuntimeSemanticObservationEventKind,
+    RuntimeSemanticRegexSlotSelected,
+    RuntimeSemanticRuleResult,
+    RuntimeSemanticObservationEvent,
+    RuntimeSemanticObservationSink,
     RuntimeExitNow,
     RuntimeInterpreterException,
     OrderedRegexSlotIdentityException,
@@ -378,6 +384,7 @@ export backend_name,
     runtime_execute_with_trace,
     runtime_parse,
     runtime_parse_with_trace,
+    runtime_semantic_observation_event_kind_name,
     run_cli,
     run_corpus_runner,
     consume_match,
@@ -446,6 +453,7 @@ include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
 include("runtime/UnicodeCaseMapping.jl")
+include("runtime/SemanticObservation.jl")
 include("runtime/Interpreter.jl")
 include("source/SourceEmitter.jl")
 include("parser/UserFunctionDefinitionParser.jl")

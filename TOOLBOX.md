@@ -624,6 +624,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   sink before allocating and before hashing input; preserve callback identity through the generated broad catch;
   derive the observed index only from detached rule/edge/slot/`selects_regex` evidence. `.1` owns typed direct
   capture, `.2` derivation/twentieth digest, `.3` generated/emitted propagation, and `.4` no-change closeout.
+  Typed capture `.1` is now implemented; retrieve [[julia-semantic-runtime-observation-direct-capture]]. Run
+  `julia/test/semantic_index_runtime_observation_test.jl` after the nine earlier semantic suites for exact new 66/
+  focused 1,129. The sink is public on runtime parse/execute, traced convenience, and validated generated-plan
+  direct/traced helpers; loaded/reconstructed engines reuse those seams. Keep emitted wrapper propagation in `.3`
+  and observed-index derivation in `.2`. Complete Julia is 8,671/primary/105 at this boundary.
 
 ---
 

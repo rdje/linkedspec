@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.1` — semantic capture belongs at shared typed runtime seams):
+  Julia can add semantic observation without changing the parser result or turning trace text into semantic data.
+  A closed immutable event is delivered synchronously from the two already-authoritative engine seams: accepted
+  regex identity before effects and successful `RuntimeParseResult` after construction. Using the match's code-unit
+  end for the former, then converting against the exact input, avoids recording the deliberately stale context
+  cursor and preserves Unicode-scalar coordinates.
+
+  Omission and callback identity need explicit structure rather than convention. Both emission helpers return
+  before allocation/conversion/hash work when the sink is absent. When present, one invocation-local marker is
+  shared with validated generated-plan execution; only an exception caught at the semantic callback boundary sets
+  it, and both broad catches compare the exact object before rethrowing. This avoids both generic generated-error
+  translation and false classification of an unrelated parser failure.
+
+  The sink threads through direct, execute, traced, loaded, reconstructed, and validated generated-plan routes.
+  Fresh emitted module wrappers stay untouched because `.3` owns their public propagation and format-stability
+  proof; `.2` separately owns strict event/topology validation and immutable observed-index derivation. New 66/
+  focused 1,129 and complete Julia 8,671/primary/105 pass, including exact event JSON, Unicode positions, no-sink
+  zero allocation, failure omission, callback identity, and trace/diagnostic/result non-interference.
+
+  Primary 5x2x66, all ten Unicode legs, unchanged Unicode/semantic/capability/generated/language/public ledgers,
+  canonical Rust 82.37s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, mdBook, Knowledge Map 692/5,330,
+  doctrines, and exact 1,892,380-KiB cleanup pass while preserving Julia package/registry caches and 517 Pgen
+  artifacts.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.0` — semantic observation is distinct from operational trace):
   Julia's existing slot-selection trace marks are useful debugging evidence but cannot be promoted into the typed
   semantic API: they are string topics, have no final-result companion, and belong to an independently configured

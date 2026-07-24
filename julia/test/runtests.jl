@@ -40,6 +40,7 @@ include("semantic_index_call_staged_test.jl")
 include("semantic_index_query_kernel_test.jl")
 include("semantic_index_query_traversal_test.jl")
 include("semantic_index_query_public_test.jl")
+include("semantic_index_runtime_observation_test.jl")
 
 @testset "Generated Unicode 17 casing and runtime paths" begin
     contract = JSON3.read(

@@ -195,6 +195,44 @@ owns immutable derivation and the twentieth digest, `.3` owns generated/emitted 
 and `.4` owns no-change closeout. `.10.6.6.0` changes no production, test, fixture, contract, API, format, runtime,
 rollout, or admission behavior.
 
+Typed direct capture `.10.6.6.1` now exports and implements the native portion of that plan. Capture events with
+an ordinary Julia callback:
+
+```julia
+using LinkedSpecJulia
+
+source = "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n"
+spec = parse_spec(source)
+validate_spec(spec)
+compiled = compile_spec(spec)
+events = RuntimeSemanticObservationEvent[]
+result = runtime_parse(
+    LinkedSpecRuntimeEngine(compiled),
+    "ab\n";
+    semantic_observation_sink = event -> push!(events, event),
+)
+
+@assert result.value == Any["A", "B"]
+@assert [runtime_semantic_observation_event_kind_name(event.event_kind) for event in events] ==
+    ["regex_slot_selected", "regex_slot_selected", "rule_result"]
+@assert [event.position for event in events] == [1, 2, 2]
+@assert events[end].status == "succeeded"
+```
+
+Each event uses contract `linkedspec-semantic-execution-observation-v1` and immutable fields `contract_id`,
+`event_kind`, `rule_label`, nullable `target_rule`/`regex_index`, Unicode-scalar `position`, nullable
+`input_identity`, and nullable `status`. The final identity is `input:sha256:` plus the lowercase SHA-256 of the
+exact UTF-8 input bytes; host result values are never exposed. `to_json(event)` returns a fresh dictionary with all
+eight fields.
+
+The same keyword is available on `runtime_execute`, both traced conveniences, and validated generated-plan direct/
+traced helpers. Loaded and normalized reconstructed engines need no adapter. Trace, diagnostics, and semantic
+events may all be enabled together and remain byte/value independent. No sink means no event allocation, scalar
+conversion, or input hash; callback exceptions preserve the exact caller object. Immediate exit or a thrown parse
+has no final result event. Fresh emitted module wrapper signatures intentionally remain unchanged for `.3`, while
+event validation/observed-index derivation and the twentieth query digest remain `.2`. New proof passes 66/
+focused 1,129 and complete Julia 8,671/primary/105 without moving rollout 4/9 or native admission 3/6.
+
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical
 Rust/Dart admission + primary 66x2 + Phase 0 1,031/655s, book/KM 687/5,277, doctrines, and exact 1,812,240-KiB

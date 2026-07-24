@@ -269,6 +269,7 @@ function execute_generated_parser_v2(
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
 )
     families = validate_generated_rule_plan_v2(
@@ -277,6 +278,8 @@ function execute_generated_parser_v2(
         source_identity;
         actual_contract = actual_contract,
     )
+    semantic_observation_failure = semantic_observation_sink === nothing ?
+        nothing : _RuntimeSemanticObservationFailure()
     try
         return runtime_parse(
             LinkedSpecRuntimeEngine(compiled),
@@ -286,10 +289,17 @@ function execute_generated_parser_v2(
             diagnostic_output_sink = _generated_diagnostic_output_sink(
                 diagnostic_output_sink,
             ),
+            semantic_observation_sink = semantic_observation_sink,
             _generated_families = families,
             _generated_source_identity = source_identity,
+            _semantic_observation_failure = semantic_observation_failure,
         ).value
     catch error
+        if semantic_observation_failure !== nothing &&
+                semantic_observation_failure.raised &&
+                semantic_observation_failure.error === error
+            rethrow()
+        end
         error isa GeneratedSourceException && rethrow()
         error isa _GeneratedDiagnosticOutputSinkFailure && throw(error.error)
         error isa RuntimeExitNow && rethrow()
@@ -318,6 +328,7 @@ function execute_generated_parser_with_trace_v2(
     top_rule = nothing,
     stdout_io::IO = stdout,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
 )
     return execute_generated_parser_v2(
@@ -328,6 +339,7 @@ function execute_generated_parser_with_trace_v2(
         top_rule = top_rule,
         trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io),
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
         actual_contract = actual_contract,
     )
 end

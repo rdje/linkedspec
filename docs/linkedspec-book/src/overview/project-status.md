@@ -616,6 +616,14 @@ Three backbone items tracked major structural modernization — all done:
   and `.1-.4` dependency order. Direct, loaded, reconstructed, generated-plan, fresh emitted, and traced probes
   converge on the same runtime seams. The audit changes no production/test/API/format/runtime behavior or semantic
   rollout/admission; typed direct capture `.10.6.6.1` follows only after its clean commit.
+  Typed direct capture `.10.6.6.1` now exports immutable v1 regex-slot/final-result events and threads an optional
+  invocation-local sink through runtime parse/execute, traced convenience, loaded/reconstructed engines, and
+  validated generated-plan direct/traced helpers. Accepted-slot positions use the matched end converted to a
+  Unicode-scalar offset; final success uses the completed result cursor and exact UTF-8 input SHA-256. With no
+  sink, capture allocates and hashes nothing; callback failures retain exact identity, failure/exit omit final results, and result/
+  cursor/trace/diagnostic values remain unchanged. New 66/focused 1,129 and complete Julia 8,671/primary/105 pass.
+  Immutable derivation `.2` and fresh emitted public propagation `.3` remain pending, so rollout/admission stay
+  4/9 and 3/6.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

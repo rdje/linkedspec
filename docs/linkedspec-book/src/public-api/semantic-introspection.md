@@ -843,8 +843,9 @@ no longer applies.
 ## Julia authority map and prerequisite
 
 Julia now exposes the opaque source and compiled-or-failed foundation through `SemanticIndex` and
-`semantic_index`; it does not yet expose semantic records, capabilities, query, or typed runtime observation. Audit
-`.10.6.0` mapped the typed authorities later consumed by the foundation and the remaining projection work: staged
+`semantic_index`, complete immutable static capabilities/query, and typed native runtime observation. The static
+record projection remains deliberately private, and observed-index derivation is not yet public. Audit `.10.6.0`
+mapped the typed authorities later consumed by the foundation and remaining projection work: staged
 rules and function shells, `CompiledSpec`, typed action nodes/contracts and function registry, portable diagnostics,
 selected entry/generated-v2 plan, accepted runtime regex slots, and final parse results. The outward descriptor
 remains a separate compatibility projection rather than a semantic wire schema.
@@ -1439,8 +1440,8 @@ Pgen artifacts and Julia package/registry caches pass.
 
 ### Julia runtime-observation authority plan
 
-Behavior-free leaf `.10.6.6.0` freezes the Julia observation boundary before any runtime or API change. Julia does
-not yet expose a semantic observation sink. The existing high-level
+Behavior-free leaf `.10.6.6.0` froze the Julia observation boundary before any runtime or API change. At that audit
+boundary Julia did not expose a semantic observation sink. The existing high-level
 `julia_runtime:regex_slot_selected` trace mark is useful operational evidence, but it is a string event rather than
 the versioned typed semantic contract, and trace has no final-result topic. Diagnostic output is a third,
 independent optional channel.
@@ -1490,6 +1491,71 @@ Implementation is dependency-ordered: typed engine capture `.10.6.6.1`, immutabl
 `.2`, generated/emitted direct/traced propagation plus non-interference `.3`, and no-change composition `.4`.
 Planning `.0` changes no production code, tests, fixtures, contract, API, generated format, runtime behavior,
 rollout, or native admission.
+
+### Julia typed native runtime observation capture
+
+Leaf `.10.6.6.1` now implements the typed engine-capture layer. `LinkedSpecJulia` exports
+`RUNTIME_SEMANTIC_OBSERVATION_CONTRACT`, the closed `RuntimeSemanticObservationEventKind` values
+`RuntimeSemanticRegexSlotSelected` and `RuntimeSemanticRuleResult`, immutable
+`RuntimeSemanticObservationEvent`, the callback alias `RuntimeSemanticObservationSink`, and
+`runtime_semantic_observation_event_kind_name`.
+
+Pass the optional sink directly to a runtime call:
+
+```julia
+using LinkedSpecJulia
+
+source = "Top::OR{2}\n /a/ -> Top[0] { return(\"A\") }\n /b/ -> Top[1] { return(\"B\") }\n"
+spec = parse_spec(source)
+validate_spec(spec)
+engine = LinkedSpecRuntimeEngine(compile_spec(spec))
+
+events = RuntimeSemanticObservationEvent[]
+result = runtime_parse(
+    engine,
+    "ab\n";
+    semantic_observation_sink = event -> push!(events, event),
+)
+
+@assert result.value == Any["A", "B"]
+@assert [event.position for event in events] == [1, 2, 2]
+@assert [runtime_semantic_observation_event_kind_name(event.event_kind) for event in events] ==
+    ["regex_slot_selected", "regex_slot_selected", "rule_result"]
+```
+
+Every event carries the eight closed fields `contract_id`, `event_kind`, `rule_label`, `target_rule`,
+`regex_index`, `position`, `input_identity`, and `status`. Slot events identify the executing rule, accepted target,
+zero-based authored slot, and post-match Unicode-scalar position; their result-only fields are `nothing`. The final
+event identifies the selected entry, final scalar position, `succeeded` status, and exact
+`input:sha256:<lowercase UTF-8 digest>`; its target/index fields are `nothing`. Host parser result values are not
+part of the event. `to_json(event)` returns a fresh dictionary and renders stable wire kind names.
+
+For canonical `ab\n`, the two slots are `Top[0]` at position 1 and `Top[1]` at position 2. Final `Top` succeeds at
+position 2 with identity
+`input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece`.
+
+The same keyword is supported by `runtime_execute`, `runtime_parse_with_trace`, `runtime_execute_with_trace`,
+`execute_generated_parser_v2`, and `execute_generated_parser_with_trace_v2`. Loaded compiled specs and normalized
+JSON-reconstructed specs build the same engine and need no special adapter. Events are synchronous and ordered:
+each accepted slot arrives after ordered identity validation and before effects, then one final success arrives
+after `RuntimeParseResult` construction. A throw or immediate exit has no final event.
+
+Semantic observation, operational trace, and diagnostic output may coexist in one invocation. They are separate
+channels: installing the semantic sink does not change result/cursor values, trace bytes/events, diagnostic events,
+or native failure behavior. A sink exception unwinds as the exact caller object through ordinary, traced, and
+validated generated-plan calls. When no sink is present, both emission helpers return before allocating an event;
+the slot path also avoids scalar conversion and the final path avoids SHA-256. Warmed focused checks measure zero
+allocation at those omission helpers.
+
+This leaf intentionally does not widen fresh emitted module `execute` / `execute_with_trace` signatures. Public
+generated/emitted propagation and isolated-host non-interference remain `.10.6.6.3`, preserving generated-source
+v2/format 2 here. The event constructor also deliberately does not validate cross-field/topology combinations:
+`.10.6.6.2` owns strict validation against detached static rule/edge/slot evidence, immutable observed-index
+derivation, and the twentieth query digest. Thus `.1` adds capture without moving semantic rollout 4/9 or native
+admission 3/6.
+
+The focused capture suite adds 66 assertions, all ten Julia semantic suites compose at 1,129, and the complete
+Julia package reaches 8,671 assertions plus primary process conformance and corpus 105/105.
 
 ## Exact v1 record model
 

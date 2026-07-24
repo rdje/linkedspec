@@ -278,6 +278,14 @@ hash; generated broad catches need exact callback-identity passthrough; immutabl
 static topology and shapes. Typed capture `.1`, derivation `.2`, generated/emitted propagation `.3`, and closeout
 `.4` precede admission `.7`, so Julia still does not advance the 4/9 rollout or 3/6 native-admission ledger.
 
+Typed engine capture `.10.6.6.1` is now complete. Julia exports the immutable v1 slot/result event vocabulary and
+supports `semantic_observation_sink` on native parse/execute, traced convenience, loaded/reconstructed engines,
+and validated generated-plan direct/traced helpers. Exact Unicode-scalar positions, final UTF-8 input identity,
+zero absent-sink allocation/hash work, synchronous exact callback failure identity, failure omission, and result/
+trace/diagnostic non-interference pass at new 66/focused 1,129 and complete Julia 8,671/primary/105. Backend work
+must keep observed-index derivation in `.2` and fresh emitted public wrapper propagation in `.3`; generated-source
+v2/format 2 and the 4/9 rollout / 3/6 admission ledgers do not move in `.1`.
+
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range
 class, consumes it at all 12 label sites in first-authoritative `specs/spec.spec`, freshness-locks all four corpus

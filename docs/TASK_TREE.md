@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Julia runtime-observation authority plan `.10.6.6.0` is complete and verified from clean `5ad8a165`; typed direct capture `.10.6.6.1` waits for the plan's clean commit. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Julia typed runtime-observation capture `.10.6.6.1` is complete and verified from clean plan commit `c590c435`; immutable derivation `.10.6.6.2` waits for `.1`'s clean commit and emitted propagation remains `.3`. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `INTER-MATCH-GAP-CAPTURE` | `proposed` / direction ratified; awaiting explicit activation | `.spec language evolution / lossless segmentation and source preservation` | `.0` is done: ADR `0045` fixes automatic action-edge gaps, target ownership, accepted future `@capture_gaps`, spacing-insensitive `name=/regex/` → `Rule[name]` slots, and the existing Perl/Lua/Rust/Dart/Julia marker divergence without behavior change. Cursor rollout prerequisite is satisfied at 8 complete / 0 pending; `.1-.7` still require explicit activation. | [docs/tasks/INTER-MATCH-GAP-CAPTURE.md](docs/tasks/INTER-MATCH-GAP-CAPTURE.md) |
 | `LUA-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Lua third)` | `.8.4` admits Lua as the fifth exact backend: 16 capabilities, 80/0/0, 177/177 on PUC Lua and LuaJIT, primary 61x2, corpus 105/105, and shared matrix 5x2x61. No Lua frontier remains. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `STRUCTURED-TEXT-FORMAT-PROGRAM` | `proposed` / parity prerequisite satisfied | `Post-current-backend-parity format coverage and evidence-driven .spec evolution` | `.0` ratifies the exact 91-row program; backlog `.18.1` adds the authoring invariant, `.18.2` adds correlated compile/runtime trace plus exact emission-only rule filters, and `.18.3` links a separate optional native-acceleration horizon. Five-backend parity is complete; readiness `.1` is pending and not active. | [docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md](docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md) |
@@ -229,13 +229,14 @@ runtime/promotion change. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phas
 690/5,307, doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry
 caches pass. Parent `.10.6.5` is closed; `.10.6.6.0` may activate only after the closeout commit is clean.
 
-Index note 2026-07-23: behavior-free Julia runtime-observation plan `.10.6.6.0` is complete and verified. Exact
-accepted-slot/result seams, direct/loaded/reconstructed/generated/emitted/traced topology, matched-end scalar
-policy, separate trace/diagnostic authority, absent-sink fence, generated callback-identity pass-through, detached
-static derivation, twentieth digest, and `.1-.4` split are frozen. Focused 1,063, Julia 8,605/primary/105, primary
-5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 78.71s + Dart 1/1 + primary 66x2 + Phase 0
-1,031/679s, book/KM 691/5,321, doctrines, and exact 1,597,636-KiB cleanup preserving 517 Pgen artifacts and Julia
-package/registry caches pass without behavior or promotion. `.10.6.6.1` waits for the plan's clean commit.
+Index note 2026-07-23: clean commit `c590c435` lands the behavior-free Julia runtime-observation plan. Typed direct
+capture `.10.6.6.1` is complete and verified from it: immutable slot/result events and invocation-local sink cover
+direct/execute/traced/loaded/reconstructed/generated-plan-engine routes with exact Unicode-scalar positions, final
+UTF-8 input identity, absent-sink zero work, callback identity, and result/trace/diagnostic isolation. New 66/
+focused 1,129, Julia 8,671/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 82.37s
++ Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 692/5,330, doctrines, and exact 1,892,380-KiB cleanup
+preserving 517 Pgen artifacts and Julia package/registry caches pass. Immutable derivation `.10.6.6.2` waits for
+the clean `.1` commit; emitted propagation remains separate `.3` ownership.
 
 Index note 2026-07-09: `FUTURE-PARITY-BACKLOG.0` created the active future-backlog tree for
 the seven deferred/future lanes surfaced after `SPEC-LANG-REFERENCE.8`. ADR `0021` adopts

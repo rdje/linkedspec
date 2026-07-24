@@ -16,7 +16,7 @@ answers:
   - "can Julia semantic query execute the parser"
   - "what is the Julia semantic runtime observation implementation split"
 date: 2026-07-23
-status: current behavior-free authority audit; typed capture is next after the clean plan commit
+status: current authority plan; typed direct capture implemented by the linked capture fact
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/Interpreter.jl; julia/src/runtime/Matching.jl; julia/src/io/SpecLoader.jl; julia/src/source/SourceEmitter.jl; julia/src/trace/Trace.jl; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/src/semantic/SemanticQuery.jl; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.0
 last_verified: 2026-07-23
@@ -33,7 +33,7 @@ reverify:
 
 ## Current boundary
 
-Julia has no semantic runtime-observation sink at the `.10.6.6.0` audit boundary. `_RuntimeExecutionContext`
+Julia had no semantic runtime-observation sink at the `.10.6.6.0` audit boundary. `_RuntimeExecutionContext`
 contains the input, code-unit cursor, trace emitter, diagnostic-output sink, and generated-plan metadata, but no
 typed semantic channel. Existing high trace emits the string topic `julia_runtime:regex_slot_selected`; it has no
 typed payload and no final-result topic. Trace text and diagnostic output are therefore optional observability
@@ -98,7 +98,10 @@ install a sink, enable trace, hash new input, or mutate either index.
 - `.10.6.6.3`: public generated helpers and fresh emitted direct/traced propagation, callback-failure passthrough,
   failure omission, and result/cursor/trace/diagnostic non-interference with unchanged v2/format 2.
 - `.10.6.6.4`: no-change composition/signoff and parent closure without Julia rollout or native-admission
-  promotion.
+promotion.
+
+Typed direct/native and validated generated-plan capture now implements the `.1` portion of this map; retrieve
+[[julia-semantic-runtime-observation-direct-capture]] for the current API and exact remaining `.2-.3` boundary.
 
 ## Exact neutral anchor
 

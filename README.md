@@ -1033,7 +1033,8 @@ content migration exists yet.
   Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307, doctrines, and exact
   1,613,872-KiB cleanup preserving 517 Pgen artifacts pass. Parent `.10.6.5` is composition-closed; `.10.6.6.0`
   owns the next runtime-observation authority plan.
-  Behavior-free runtime audit `.10.6.6.0` now freezes that plan. Julia has no semantic observation sink yet;
+  Behavior-free runtime audit `.10.6.6.0` froze the pre-implementation boundary, where Julia had no semantic
+  observation sink;
   existing `julia_runtime:regex_slot_selected` trace strings are not typed semantic authority and there is no
   final-result trace topic. Slot capture belongs after match/ordered identity acceptance and before effects, with
   scalar position computed from `one_match.codeunit_end` rather than the still-old context cursor. Final capture
@@ -1045,6 +1046,14 @@ content migration exists yet.
   base static. Work is dependency-ordered as typed direct capture `.1`, derivation `.2`, generated/emitted
   propagation `.3`, and no-change closeout `.4`; the audit itself changes no production/test/API/format/runtime/
   rollout/admission behavior.
+  Typed native capture `.10.6.6.1` now implements that first boundary. Julia exports the immutable v1 slot/result
+  event vocabulary and accepts `semantic_observation_sink` on runtime parse/execute, traced convenience, and
+  validated generated-plan direct/traced calls; loaded and reconstructed engines share the same runtime seam.
+  Accepted events use exact Unicode-scalar matched-end/final positions, final success hashes the exact UTF-8 input,
+  absent sinks allocate/hash nothing, callback failures retain exact caller identity, and result/cursor/trace/
+  diagnostic behavior is unchanged. New 66/focused 1,129 and complete Julia 8,671/primary/105 pass. Immutable
+  derivation/twentieth digest remain `.2`; fresh emitted public wrapper propagation remains `.3`; rollout and
+  admission remain 4/9 and 3/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -128,6 +128,14 @@ struct _RuntimeDiagnosticOutputSinkFailure <: Exception
     error::Any
 end
 
+mutable struct _RuntimeSemanticObservationFailure
+    raised::Bool
+    error::Any
+end
+
+_RuntimeSemanticObservationFailure() =
+    _RuntimeSemanticObservationFailure(false, nothing)
+
 struct RuntimeLifecycleEvent
     rule_label::String
     lifecycle::String
@@ -256,6 +264,8 @@ mutable struct _RuntimeExecutionContext
     top_rule::String
     trace::Union{Nothing,LinkedSpecTraceEmitter}
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink}
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink}
+    semantic_observation_failure::Union{Nothing,_RuntimeSemanticObservationFailure}
     generated_families::Union{Nothing,Dict{String,String}}
     generated_source_identity::Union{Nothing,String}
 end
@@ -266,6 +276,8 @@ function _RuntimeExecutionContext(
     trace::Union{Nothing,LinkedSpecTraceEmitter},
     ;
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
+    semantic_observation_failure::Union{Nothing,_RuntimeSemanticObservationFailure} = nothing,
     generated_families = nothing,
     generated_source_identity = nothing,
 )
@@ -288,6 +300,8 @@ function _RuntimeExecutionContext(
         String(top_rule),
         trace,
         diagnostic_output_sink,
+        semantic_observation_sink,
+        semantic_observation_failure,
         generated_families === nothing ?
             nothing : Dict{String,String}(generated_families),
         generated_source_identity === nothing ?
@@ -429,8 +443,10 @@ function runtime_parse(
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     _generated_families = nothing,
     _generated_source_identity = nothing,
+    _semantic_observation_failure::Union{Nothing,_RuntimeSemanticObservationFailure} = nothing,
 )
     selection = try
         resolve_entry_rule(engine.compiled_spec, top_rule)
@@ -455,11 +471,20 @@ function runtime_parse(
     end
     label = selection.rule.label
     _trace_entry_rule_selection_success!(trace, top_rule, selection)
+    semantic_observation_failure = if semantic_observation_sink === nothing
+        nothing
+    elseif _semantic_observation_failure === nothing
+        _RuntimeSemanticObservationFailure()
+    else
+        _semantic_observation_failure
+    end
     context = _RuntimeExecutionContext(
         input,
         label,
         trace;
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
+        semantic_observation_failure = semantic_observation_failure,
         generated_families = _generated_families,
         generated_source_identity = _generated_source_identity,
     )
@@ -482,11 +507,17 @@ function runtime_parse(
             codeunit_offset_to_char_offset(context.input, context.cursor_codeunit),
             RuntimeLifecycleEvent[context.lifecycle_events...],
         )
+        _emit_runtime_semantic_rule_result!(context, label, parse_result.cursor_char_offset)
         trace_exit_details =
             "matched=$(parse_result.matched) cursor=$(parse_result.cursor_codeunit)"
         return parse_result
     catch error
-        if error isa _RuntimeDiagnosticOutputSinkFailure
+        if semantic_observation_failure !== nothing &&
+                semantic_observation_failure.raised &&
+                semantic_observation_failure.error === error
+            trace_exit_details = "error=semantic_observation_sink"
+            rethrow()
+        elseif error isa _RuntimeDiagnosticOutputSinkFailure
             trace_exit_details = "error=diagnostic_output_sink"
             throw(error.error)
         elseif error isa RuntimeExitNow
@@ -558,12 +589,14 @@ runtime_execute(
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
 ) = runtime_parse(
     engine,
     input;
     top_rule = top_rule,
     trace = trace,
     diagnostic_output_sink = diagnostic_output_sink,
+    semantic_observation_sink = semantic_observation_sink,
 )
 
 function runtime_parse_with_trace(
@@ -573,6 +606,7 @@ function runtime_parse_with_trace(
     top_rule = nothing,
     stdout_io::IO = stdout,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
 )
     trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io)
     return runtime_parse(
@@ -581,6 +615,7 @@ function runtime_parse_with_trace(
         top_rule = top_rule,
         trace = trace,
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
     )
 end
 
@@ -591,6 +626,7 @@ function runtime_execute_with_trace(
     top_rule = nothing,
     stdout_io::IO = stdout,
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
+    semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
 )
     return runtime_parse_with_trace(
         engine,
@@ -599,6 +635,7 @@ function runtime_execute_with_trace(
         top_rule = top_rule,
         stdout_io = stdout_io,
         diagnostic_output_sink = diagnostic_output_sink,
+        semantic_observation_sink = semantic_observation_sink,
     )
 end
 
@@ -1157,12 +1194,13 @@ function _execute_runtime_regex_once!(
                 actual_target_rule = actual_target,
                 actual_regex_index = actual_regex_index,
             )
-            _trace_runtime_regex_slot_selected!(
+            _record_runtime_regex_slot_selected!(
                 context,
                 rule.label,
                 "ordered_required",
                 expected_target,
                 expected_regex_index,
+                one_match.codeunit_end,
             )
             _accept_runtime_regex_match!(
                 engine,
@@ -1208,12 +1246,13 @@ function _execute_runtime_regex_once!(
     target_rule, regex_index =
         _runtime_regex_slot_identity(rule, one_match.alternative_index)
     selection_role = rule.mode_metadata.is_and ? "ordered_required" : "choice"
-    _trace_runtime_regex_slot_selected!(
+    _record_runtime_regex_slot_selected!(
         context,
         rule.label,
         selection_role,
         target_rule,
         regex_index,
+        one_match.codeunit_end,
     )
 
     _accept_runtime_regex_match!(
@@ -1277,13 +1316,21 @@ function _runtime_regex_slot_identity(rule::CompiledRule, alternative_index::Int
     return (rule.label, alternative_index)
 end
 
-function _trace_runtime_regex_slot_selected!(
+function _record_runtime_regex_slot_selected!(
     context::_RuntimeExecutionContext,
     rule_label::AbstractString,
     selection_role::AbstractString,
     target_rule::AbstractString,
     regex_index::Int,
+    position_codeunit::Int,
 )
+    _emit_runtime_semantic_regex_slot_selected!(
+        context,
+        rule_label,
+        target_rule,
+        regex_index,
+        position_codeunit,
+    )
     _emit_runtime_trace_event!(
         context,
         LinkedSpecTraceMark,
@@ -1291,6 +1338,57 @@ function _trace_runtime_regex_slot_selected!(
         "rule_label=$rule_label selection_role=$selection_role target_rule=$target_rule regex_index=$regex_index",
         LinkedSpecTraceHigh,
     )
+    return nothing
+end
+
+function _emit_runtime_semantic_regex_slot_selected!(
+    context::_RuntimeExecutionContext,
+    rule_label::AbstractString,
+    target_rule::AbstractString,
+    regex_index::Int,
+    position_codeunit::Int,
+)
+    context.semantic_observation_sink === nothing && return nothing
+    position = codeunit_offset_to_char_offset(context.input, position_codeunit)
+    event = _runtime_semantic_regex_slot_selected_event(
+        rule_label,
+        target_rule,
+        regex_index,
+        position,
+    )
+    return _invoke_runtime_semantic_observation_sink!(context, event)
+end
+
+function _emit_runtime_semantic_rule_result!(
+    context::_RuntimeExecutionContext,
+    rule_label::AbstractString,
+    position::Int,
+)
+    context.semantic_observation_sink === nothing && return nothing
+    event = _runtime_semantic_rule_result_event(
+        rule_label,
+        position,
+        context.input,
+    )
+    return _invoke_runtime_semantic_observation_sink!(context, event)
+end
+
+function _invoke_runtime_semantic_observation_sink!(
+    context::_RuntimeExecutionContext,
+    event::RuntimeSemanticObservationEvent,
+)
+    sink = context.semantic_observation_sink
+    sink === nothing && return nothing
+    try
+        sink(event)
+    catch error
+        failure = context.semantic_observation_failure
+        if failure !== nothing
+            failure.raised = true
+            failure.error = error
+        end
+        rethrow()
+    end
     return nothing
 end
 
