@@ -283,8 +283,16 @@ supports `semantic_observation_sink` on native parse/execute, traced convenience
 and validated generated-plan direct/traced helpers. Exact Unicode-scalar positions, final UTF-8 input identity,
 zero absent-sink allocation/hash work, synchronous exact callback failure identity, failure omission, and result/
 trace/diagnostic non-interference pass at new 66/focused 1,129 and complete Julia 8,671/primary/105. Backend work
-must keep observed-index derivation in `.2` and fresh emitted public wrapper propagation in `.3`; generated-source
-v2/format 2 and the 4/9 rollout / 3/6 admission ledgers do not move in `.1`.
+must keep fresh emitted public wrapper propagation in `.3`; generated-source v2/format 2 and the 4/9 rollout / 3/6
+admission ledgers do not move in `.1`.
+
+Immutable observed-index derivation `.10.6.6.2` is now complete. Public `with_execution_observation` validates only
+exact typed events and the base index's detached static rule/edge/slot/`selects_regex` evidence, derives all source
+and shape facts from that projection, and returns a fresh `has_execution=true` index while leaving the base static.
+It matches the twentieth typed/raw-neutral digest at new 157/focused 1,286 and complete Julia 8,828/primary/105.
+Malformed, foreign, reordered, duplicate-final, wrong-entry, and unsupported-slot observations reject through the
+portable invalid-observation boundary. Generated/emitted public propagation and its callback/non-interference
+proof remain `.3`; no ledger or generated-format state moves in `.2`.
 
 Two language prerequisites precede that adapter. ADR `0051` pins labels to Unicode 17.0.0 `XID_Continue` with
 exact case- and normalization-sensitive identity. Shared `.10.5.0.1` generates and guards one portable 806-range

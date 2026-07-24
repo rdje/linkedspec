@@ -156,8 +156,21 @@ end
 
 """Return fresh foundation metadata without exposing semantic records."""
 function semantic_snapshot(index::SemanticIndex)
-    outcome = _semantic_compilation_outcome(index)
-    return _semantic_snapshot(outcome, getfield(index, :_source_detail_ceiling))
+    projection = getfield(index, :_static_projection)
+    if projection isa _SemanticStaticProjection
+        snapshot = projection.snapshot
+        return SemanticSnapshot(
+            String(snapshot.id),
+            snapshot.state,
+            snapshot.has_execution,
+            snapshot.source_detail_ceiling,
+            snapshot.content_digest_available,
+        )
+    end
+    return _semantic_snapshot(
+        _semantic_compilation_outcome(index),
+        getfield(index, :_source_detail_ceiling),
+    )
 end
 
 function _semantic_snapshot(outcome::_SemanticCompilationOutcome, ceiling::SemanticSourceDetail)

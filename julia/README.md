@@ -230,8 +230,50 @@ traced helpers. Loaded and normalized reconstructed engines need no adapter. Tra
 events may all be enabled together and remain byte/value independent. No sink means no event allocation, scalar
 conversion, or input hash; callback exceptions preserve the exact caller object. Immediate exit or a thrown parse
 has no final result event. Fresh emitted module wrapper signatures intentionally remain unchanged for `.3`, while
-event validation/observed-index derivation and the twentieth query digest remain `.2`. New proof passes 66/
+event validation/observed-index derivation and the twentieth query digest were separately owned by `.2`. New proof passes 66/
 focused 1,129 and complete Julia 8,671/primary/105 without moving rollout 4/9 or native admission 3/6.
+
+Immutable derivation `.10.6.6.2` is now public through `with_execution_observation(index, events)`. It accepts only
+a compiled static `SemanticIndex` and an `AbstractVector` containing exact `RuntimeSemanticObservationEvent`
+values. It validates the closed v1 field combinations, nonnegative positions/indices, exactly one successful final
+event last, selected entry, lowercase SHA-256 input identity, and every selecting-rule edge to target-slot
+`selects_regex` relation. Sources and value shapes come only from the detached static projection; the function
+does not parse, compile, execute, trace, install a sink, hash input, or read paths/host state.
+
+```julia
+index = semantic_index(
+    source;
+    logical_name = "runtime.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+)
+observed = with_execution_observation(index, events)
+
+@assert !semantic_snapshot(index).has_execution
+@assert semantic_snapshot(observed).has_execution
+
+response = semantic_query(
+    observed,
+    SemanticQuery(
+        operation = SemanticQueryListOperation,
+        record_kinds = ("execution", "event"),
+        source = SemanticQuerySource(detail = SemanticSourceIdentityDetail),
+    ),
+)
+@assert [record.id for record in response.records] == [
+    "execution:0",
+    "event:execution:0:0",
+    "event:execution:0:1",
+    "event:execution:0:2",
+]
+```
+
+The returned projection is fresh and recursively immutable. It adds one `execution:0`, ordered event records, and
+`observed_as` relations whose evidence points back to the selected static regex slots or final rule. Mutating the
+caller event vector or a later JSON response cannot change either index. The canonical `ab\n` response matches
+digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` through both typed and raw-neutral
+query. New proof passes 157 assertions; all eleven semantic suites compose at 1,286 and complete Julia reaches
+8,828/primary/105. Fresh emitted wrapper propagation remains `.3`, and semantic rollout/admission stay 4/9 and
+3/6.
 
 The planning signoff passes neutral 6/20/81, focused admitted query consumers, Julia focused 530 plus detached
 22/25/10, complete Julia 8,072/primary/105, primary 5x2x66, ten Unicode legs, unchanged governance, canonical

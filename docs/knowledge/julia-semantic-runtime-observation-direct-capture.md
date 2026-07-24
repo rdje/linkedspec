@@ -12,7 +12,7 @@ answers:
   - "do fresh emitted Julia parser wrappers accept semantic_observation_sink"
   - "does Julia runtime observation derive a semantic index yet"
 date: 2026-07-23
-status: current typed direct/native and validated generated-plan capture; derivation and fresh emitted wrappers pending
+status: current typed direct/native and validated generated-plan capture; derivation is complete; fresh emitted wrappers pending
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.1
 last_verified: 2026-07-23
@@ -42,11 +42,11 @@ helpers return before event allocation, scalar conversion, or input hashing; foc
 zero. A sink exception is marked only at the callback boundary and rethrown as the exact caller object through
 both native and generated-plan broad catches.
 
-The current leaf deliberately stops at the validated generated-plan helpers. Fresh emitted module `execute` and
+The capture leaf deliberately stops at the validated generated-plan helpers. Fresh emitted module `execute` and
 `execute_with_trace` wrappers do not accept the sink until `.10.6.6.3`; changing their generated public signature
-or source format earlier would violate that owner. Likewise, these events do not yet create an observed
-`SemanticIndex`; topology validation, immutable derivation, and the twentieth query digest belong to
-`.10.6.6.2`.
+or source format earlier would violate that owner. The separate `.10.6.6.2` derivation is now complete: pass the
+retained typed events to `with_execution_observation` to obtain a new validated observed `SemanticIndex`. Retrieve
+[[julia-semantic-runtime-observation-derivation]] for its topology, immutability, and twentieth-digest contract.
 
 The canonical `ab\n` execution emits `Top[0]` at position 1, `Top[1]` at position 2, and final `Top` success at
 position 2 with identity
@@ -59,4 +59,4 @@ generated/language/public ledgers, and canonical CI with Rust semantic admission
 reference primary 66x2, and Phase 0 1,031/1,031 in 662 seconds.
 
 Related facts: [[julia-semantic-runtime-observation-authority-map]], [[julia-semantic-query-public-api]],
-[[semantic-introspection-neutral-contract]].
+[[julia-semantic-runtime-observation-derivation]], [[semantic-introspection-neutral-contract]].

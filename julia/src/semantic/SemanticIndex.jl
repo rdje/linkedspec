@@ -178,7 +178,8 @@ end
 
 function Base.show(io::IO, index::SemanticIndex)
     ceiling = _semantic_source_detail_name(getfield(index, :_source_detail_ceiling))
-    state = _semantic_index_snapshot_state_name(index)
+    snapshot = semantic_snapshot(index)
+    state = _semantic_snapshot_state_name(snapshot.state)
     print(
         io,
         "SemanticIndex(source_id=\"",
@@ -187,7 +188,9 @@ function Base.show(io::IO, index::SemanticIndex)
         state,
         "\", source_detail_ceiling=\"",
         ceiling,
-        "\", has_execution=false)",
+        "\", has_execution=",
+        snapshot.has_execution,
+        ")",
     )
 end
 

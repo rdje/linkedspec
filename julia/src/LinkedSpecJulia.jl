@@ -369,6 +369,7 @@ export backend_name,
     semantic_capabilities,
     semantic_query,
     semantic_query_neutral,
+    with_execution_observation,
     source_identity,
     source_span_for_bytes,
     source_span_for_scalars,
@@ -460,6 +461,7 @@ include("parser/UserFunctionDefinitionParser.jl")
 include("semantic/SemanticCompilationOutcome.jl")
 include("semantic/SemanticStaticProjection.jl")
 include("semantic/SemanticCallProjection.jl")
+include("semantic/SemanticRuntimeProjection.jl")
 include("semantic/SemanticQuery.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")

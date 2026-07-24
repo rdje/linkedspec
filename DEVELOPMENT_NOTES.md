@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.2` — runtime evidence becomes semantics only through static
+  validation): A typed event sequence is not trusted merely because it was produced by the runtime. Julia's public
+  `with_execution_observation` validates the versioned field topology, selected entry, final-result closure, stable
+  input identity, and each selecting-rule/target-slot relation against the index's already-frozen static graph.
+  This prevents foreign or caller-constructed events from inventing semantic topology.
+
+  Shapes and source provenance remain static facts. Slot observations inherit source from the retained regex slot
+  and value shape from the selecting edge; final observation inherits both from the selected entry rule. The
+  derivation therefore needs no host result value, parser/compiler owner, runtime context, trace, diagnostic or
+  semantic sink, path, environment, or input hashing authority. It validates the caller-retained identity instead
+  of silently recomputing a new one.
+
+  Immutability requires a new frozen projection, not a flag on the base. The derived index adds canonical
+  execution/event records and `observed_as` evidence, while the original snapshot remains static. Copying the event
+  vector before validation plus thaw/canonicalize/refreeze of only detached projection data makes later caller
+  vector or JSON-response mutation irrelevant. `semantic_snapshot` and opaque display now read the retained
+  projection snapshot so the derived `has_execution=true` state is visible without exposing records directly.
+
+  New 157/focused 1,286 and complete Julia 8,828/primary/105 pass, including 24 malformed-sequence boundaries,
+  unrelated-edge rejection, already-observed/failed bases, exact record/relation evidence, typed/raw-neutral
+  twentieth digest, clone isolation, and source-scanned denial of execution/host authority. Primary 5x2x66, all ten
+  Unicode legs, unchanged ledgers, and canonical Rust 81.49s + Dart 1/1 + primary 66x2 + Phase 0 1,031/648s pass.
+  Emitted/generated public propagation remains `.3`; no semantic ledger advances in this leaf.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.1` — semantic capture belongs at shared typed runtime seams):
   Julia can add semantic observation without changing the parser result or turning trace text into semantic data.
   A closed immutable event is delivered synchronously from the two already-authoritative engine seams: accepted

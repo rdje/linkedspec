@@ -1557,6 +1557,64 @@ admission 3/6.
 The focused capture suite adds 66 assertions, all ten Julia semantic suites compose at 1,129, and the complete
 Julia package reaches 8,671 assertions plus primary process conformance and corpus 105/105.
 
+### Julia immutable observed runtime projection
+
+Leaf `.10.6.6.2` now exposes `with_execution_observation(index, events)`. Capture and derivation remain separate:
+the runtime produces immutable typed evidence, while this function validates a caller-retained sequence and builds
+one new semantic snapshot. It accepts only an `AbstractVector` of exact `RuntimeSemanticObservationEvent` values
+and a compiled static base index that has no prior execution.
+
+Validation is deliberately strict. Every event must use the v1 contract and its kind's closed nullable-field
+topology; positions and slot indices are nonnegative; exactly one `rule_result` occurs last with `succeeded`, the
+selected entry rule, and a lowercase 64-hex `input:sha256:` identity. Every slot event must name an existing target
+slot and an executing rule whose retained edge has the corresponding `selects_regex` relation. Empty, foreign,
+reordered, duplicate-final, failed, malformed, wrong-entry, unrelated-edge, and already-observed inputs reject as
+`SemanticIndexError(stage="execution_observation", code="semantic_index_invalid_observation")`.
+
+Derivation reads only the recursively immutable static projection. Slot source and value shape come from the
+selected static slot/edge; final source and result shape come from the selected static rule. No host result value,
+parser, compiler, runtime context, trace, diagnostic sink, semantic sink, path, environment, or new input hash is
+available to the derivation. The caller's already-recorded input identity is validated but never recomputed.
+
+The result owns a freshly frozen projection with `has_execution=true`. It adds canonical `execution:0`, ordered
+`event:execution:0:N` records, and `observed_as` relations whose evidence ids point to each selected regex slot or
+the final rule. The base remains `has_execution=false`; later mutation of the caller event vector or a serialized
+query response cannot change either index.
+
+```julia
+base = semantic_index(
+    source;
+    logical_name = "runtime.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+)
+observed = with_execution_observation(base, events)
+
+@assert !semantic_snapshot(base).has_execution
+@assert semantic_snapshot(observed).has_execution
+
+response = semantic_query(
+    observed,
+    SemanticQuery(
+        operation = SemanticQueryListOperation,
+        record_kinds = ("execution", "event"),
+        source = SemanticQuerySource(detail = SemanticSourceIdentityDetail),
+    ),
+)
+@assert [record.id for record in response.records] == [
+    "execution:0",
+    "event:execution:0:0",
+    "event:execution:0:1",
+    "event:execution:0:2",
+]
+```
+
+For canonical `ab\n`, typed and raw-neutral query produce the exact twentieth response digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. The new derivation suite passes 157
+assertions; all eleven semantic suites compose at 1,286 and complete Julia reaches 8,828 package assertions plus
+primary process conformance and corpus 105/105. Full primary 5x2x66, all ten Unicode-manifest legs, unchanged
+governance, and canonical Rust 81.49s + Dart 1/1 + reference primary 66x2 + Phase 0 1,031/648s pass. Fresh emitted
+module/public generated propagation remains `.10.6.6.3`; rollout 4/9 and native admission 3/6 do not move here.
+
 ## Exact v1 record model
 
 Every record has exactly:
@@ -1943,7 +2001,10 @@ The dependency order is:
 | `.10.6.5.2` | Julia private relations/pages/budgets/costs | complete; all 19 static hashes, new 118/focused 748, full signoff, no exports |
 | `.10.6.5.3` | Julia public typed/raw-neutral query | complete; 19 typed/raw hashes, 26 malformed boundaries, new 315/focused 1,063, no runtime or ledger promotion |
 | `.10.6.5.4` | Julia immutable query composition closeout | complete; committed focused 1,063 plus full matrices/canonical proof, no replacement code or promotion |
-| `.10.6.6-.7` | Julia runtime observation and exact admission | pending |
+| `.10.6.6.1` | Julia typed native runtime observation capture | complete; immutable events/sink, new 66/focused 1,129 |
+| `.10.6.6.2` | Julia immutable observed-index derivation | complete; strict topology and exact twentieth digest, new 157/focused 1,286 |
+| `.10.6.6.3-.4` | Julia generated observation propagation and closeout | pending |
+| `.10.6.7` | Julia exact composed semantic admission | pending |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

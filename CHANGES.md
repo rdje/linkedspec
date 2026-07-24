@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.2 — derive Julia runtime snapshot
+
+Added Julia's immutable observed-index derivation. `LinkedSpecJulia` now exports
+`with_execution_observation(index, observation)`, which accepts an opaque compiled static `SemanticIndex` and an
+exact vector of typed v1 runtime events. It validates closed field topology, nonnegative positions and indices,
+exactly one successful final result last, selected entry, lowercase SHA-256 input identity, and every executing-
+rule edge to target-slot `selects_regex` relation.
+
+Derivation consumes only the base's recursively immutable static projection. Slot sources and value shapes come
+from retained slot/edge evidence, while final source/result shape comes from the selected static rule. It does not
+parse, compile, execute, trace, install a sink, hash new input, read paths, or consult runtime/compiler/host state.
+The returned index has a freshly frozen `has_execution=true` projection with canonical `execution:0`, ordered
+event records, and `observed_as` relations; the base, caller event vector, and later serialized responses remain
+mutually isolated.
+
+Typed and raw-neutral query match the exact twentieth digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. The new suite passes 157 assertions and
+all eleven semantic suites compose at 1,286. Complete Julia passes 8,828 package assertions plus primary process
+conformance and corpus 105/105. Primary 5x2x66, all ten Unicode-manifest legs, and unchanged Unicode/semantic/
+capability/generated/language/public ledgers pass. Canonical CI passes all four doctrines, Rust semantic admission
+1/1 in 81.49 seconds, Dart 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds. Fresh emitted/
+generated public propagation remains `.10.6.6.3`; semantic rollout/admission remain 4/9 and 3/6.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.1 — add Julia runtime observation
 
 Added Julia's typed invocation-local runtime semantic-observation API. `LinkedSpecJulia` now exports the v1

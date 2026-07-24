@@ -622,8 +622,12 @@ Three backbone items tracked major structural modernization — all done:
   Unicode-scalar offset; final success uses the completed result cursor and exact UTF-8 input SHA-256. With no
   sink, capture allocates and hashes nothing; callback failures retain exact identity, failure/exit omit final results, and result/
   cursor/trace/diagnostic values remain unchanged. New 66/focused 1,129 and complete Julia 8,671/primary/105 pass.
-  Immutable derivation `.2` and fresh emitted public propagation `.3` remain pending, so rollout/admission stay
-  4/9 and 3/6.
+  Immutable derivation `.10.6.6.2` now exports `with_execution_observation`, validates the typed sequence solely
+  against detached static rule/edge/slot evidence, and creates a fresh `has_execution=true` snapshot with canonical
+  execution/event/`observed_as` records. Typed/raw-neutral query matches the twentieth digest; malformed and
+  unsupported topology rejects without execution or host authority. New 157/focused 1,286 and complete Julia
+  8,828/primary/105 pass. Fresh emitted public propagation `.3` remains pending, so rollout/admission stay 4/9 and
+  3/6.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR.
   Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
   Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.

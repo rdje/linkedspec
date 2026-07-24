@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-23` (Julia typed direct runtime-observation capture `.10.6.6.1` complete and verified from
-  clean plan commit `c590c435`; immutable derivation `.10.6.6.2` waits for this leaf's clean commit)
+- Last updated: `2026-07-23` (immutable Julia runtime-observation derivation `.10.6.6.2` is complete and fully
+  verified from clean typed-capture commit `efd0474c`; emitted/generated public propagation `.3` waits for commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10614,7 +10614,7 @@ before implementation.
     admission changes. Parent `.10.6.5` is closed; `.10.6.6.0` waits for the clean closeout commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.6`
-  Status: `active` (2026-07-23; typed direct capture `.1` complete and verified; derivation `.2` waits for clean)
+  Status: `active` (2026-07-23; typed capture `.1` and immutable derivation `.2` complete; propagation `.3` next)
   Goal: Capture typed Julia runtime semantic observations through every execution route.
   Children: `.10.6.6.0`, `.10.6.6.1`, `.10.6.6.2`, `.10.6.6.3`, `.10.6.6.4`
   Depends on: `.10.6.5`
@@ -10740,12 +10740,62 @@ before implementation.
     twentieth digest remain `.10.6.6.2`. No generated-source v2/format 2 or semantic-ledger state changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.6.2`
-    Status: `pending`
+    Status: `done` (2026-07-23; complete and fully verified from clean typed-capture commit `efd0474c`)
     Goal: Derive an immutable Julia semantic runtime snapshot from typed observations.
     Depends on: `.10.6.6.1`
     Acceptance: Validate event contracts/topology solely against detached static records/relations, require one
       final success, derive shapes from static facts, create canonical execution/event/`observed_as` records in a
       new snapshot, keep the base static, and match the twentieth typed/raw-neutral response digest.
+    Verification plan: Add one public `with_execution_observation` derivation over an opaque base `SemanticIndex`
+      and caller-retained `RuntimeSemanticObservationEvent` sequence. Reject a base that already has execution,
+      non-events, foreign contracts, invalid nullable-field combinations, negative positions/indices, empty/
+      reordered/duplicate-final sequences, wrong entry/input identity, and executing-rule/target/index selections
+      unsupported by the base edge plus `selects_regex` topology. Consume only a fresh recursively immutable static
+      projection; derive slot source/value shape from its selected edge and final source/result shape from its entry
+      rule, never from host results/compiler/runtime/trace/diagnostic/path state. Clone the base into a new snapshot,
+      add canonical `execution:0`, ordered event records, and `observed_as` relations, set `has_execution=true`, and
+      prove base/derived/caller-event/query-response isolation. Match the exact twentieth typed and raw-neutral
+      `runtime_events` digest, then run all eleven semantic suites, complete Julia/primary/corpus, primary 5x2x66,
+      ten Unicode legs, no-drift ledgers, canonical CI, mdBook/KM/memory/task/doctrines/diff, measured safe cleanup,
+      and commit before emitted/generated public propagation `.10.6.6.3`.
+
+    #### Acceptance Checklist
+
+    - [x] **STRICT INPUT** — Accept only the opaque static base and exact typed v1 events; validate closed field
+      topology, nonnegative scalars, one successful final event last, selected entry, and stable input identity.
+    - [x] **STATIC TOPOLOGY** — Map every slot only through detached executing-rule edge plus `selects_regex`
+      evidence and derive all source/value/result shapes from existing immutable static records.
+    - [x] **IMMUTABLE DERIVATION** — Return a fresh snapshot with canonical execution/event/`observed_as` records
+      and `has_execution=true`; keep the base, caller events, and later query responses mutually isolated.
+    - [x] **TWENTIETH DIGEST / NO EXECUTION** — Match typed/raw-neutral `runtime_events` digest
+      `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` without compiling, executing, tracing,
+      installing a sink, hashing new input, reading paths/host state, or changing rollout/admission.
+    - [x] **LOCKSTEP / COMMIT** — Pass focused/complete/matrix/no-drift/canonical/book/KM/memory/task/doctrines/diff,
+      exact safe cleanup, and commit before emitted/generated public propagation `.10.6.6.3`.
+
+    Completion evidence: `LinkedSpecJulia` exports `with_execution_observation`, which accepts only an opaque
+    compiled static base plus an exact vector of typed v1 events. It rejects 24 malformed/foreign/reordered/
+    duplicate-final field sequences, failed/already-observed bases, wrong final entry, missing static slots, and an
+    executing rule without the selected slot relation through the portable `execution_observation` /
+    `semantic_index_invalid_observation` boundary. Slot source/shape derive from retained slot/edge facts and final
+    source/shape from the selected entry rule; the implementation has no parser/compiler/runtime/trace/sink/hash/
+    environment/file authority.
+
+    A fresh recursively frozen projection adds canonical `execution:0`, three ordered event records, and exact
+    `observed_as` relations/evidence while the base remains static. Caller event-vector and serialized-response
+    mutation cannot change either index. Typed/raw-neutral `runtime_events` match exact twentieth digest
+    `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. New proof passes 157 assertions; all
+    eleven semantic suites compose at 1,286. Complete Julia passes 8,828 package assertions, primary process
+    conformance, and corpus 105/105. Primary 5x2x66 and all ten Unicode-manifest legs pass. Governance remains
+    Unicode 806/9/8/2, semantic 6/20/81 at rollout 4/9 and admission 3/6, capability 80/0/0, generated
+    v1/10/80-0-0, language 246/105+1/122, and public 59/27/0.
+
+    Canonical CI passes all four doctrines/contracts, Rust semantic admission 1/1 in 81.49 seconds, Dart 1/1,
+    reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds. mdBook, Knowledge Map 693/5,341, bounded
+    memory, task/marker/diff hygiene pass. Exact 1,738,560-KiB cleanup removes only generated Rust dependency/
+    incremental outputs, rendered book, Python bytecode, and dedicated Julia compiled/log caches while preserving
+    Julia package/registry caches and all 517 Pgen artifacts. Emitted/generated public propagation remains `.3`;
+    no generated format, semantic rollout, or native-admission state changes.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.6.6.3`
     Status: `pending`
@@ -13125,8 +13175,11 @@ direct/execute/traced/loaded/reconstructed/generated-plan-engine routes, matched
 final UTF-8 input identity, absent-sink zero work, exact callback identity, and result/trace/diagnostic isolation
 pass new 66/focused 1,129, Julia 8,671/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical
 Rust 82.37s + Dart 1/1 + primary 66x2 + Phase 0 1,031/662s, book/KM 692/5,330, doctrines, and exact
-1,892,380-KiB cleanup. Immutable derivation `.10.6.6.2` waits for `.1`'s clean commit; emitted/generated public
-propagation `.3` remains separately owned.
+1,892,380-KiB cleanup. Clean typed-capture commit `efd0474c` activated immutable derivation `.10.6.6.2`
+task-tree-first. That derivation is now complete and fully verified: strict typed/static topology, isolated
+`has_execution=true` snapshot, exact twentieth digest, new 157/focused 1,286, Julia 8,828/primary/105, full
+matrices/no-drift/canonical/docs/KM, and exact 1,738,560-KiB cleanup pass. Emitted/generated public propagation
+`.3` waits for the clean `.2` commit.
 
 Closeout `.10.5.2.3` composes focused 6/6, Dart format 75/0, fatal analysis, package 314, primary 66x2, corpus
 105/105, Unicode 806/9/8/2, semantic 6/20/73, generated v1/10/80-0-0, and public 59/27/0. Canonical CI on the final
@@ -13633,7 +13686,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.6 | `FUTURE-PARITY-BACKLOG.10.6.6` | `active` | Capture exact typed Julia runtime semantic observations across every route without coupling query, trace, or diagnostics. |
 | 74.5.6.0 | `FUTURE-PARITY-BACKLOG.10.6.6.0` | `done` | Exact Julia observation seams, route topology, exception/no-sink policy, detached derivation, and `.1-.4` split are frozen without behavior. |
 | 74.5.6.1 | `FUTURE-PARITY-BACKLOG.10.6.6.1` | `done` | Immutable typed slot/result events and optional direct/execute/traced/loaded/reconstructed/generated-plan-engine capture pass full signoff. |
-| 74.5.6.2 | `FUTURE-PARITY-BACKLOG.10.6.6.2` | `pending` | Derive and query the twentieth immutable runtime snapshot from validated typed observations. |
+| 74.5.6.2 | `FUTURE-PARITY-BACKLOG.10.6.6.2` | `done` | Strict typed/static validation derives an isolated observed snapshot and matches the twentieth typed/raw digest. |
 | 74.5.6.3 | `FUTURE-PARITY-BACKLOG.10.6.6.3` | `pending` | Preserve exact observations through generated, fresh-emitted, and traced public routes. |
 | 74.5.6.4 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `pending` | Recompose committed Julia runtime-observation proof and close the parent without replacement behavior. |
 
@@ -14311,6 +14364,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.2` | Public strict `with_execution_observation`; closed event fields and 24 malformed/foreign/reordered/duplicate-final boundaries; failed/already-observed/wrong-entry/missing-slot/unrelated-edge rejection; detached static source/shape authority; canonical execution/event/`observed_as` records and evidence; base/event/response isolation; exact typed/raw twentieth digest; source-scanned parser/compiler/runtime/trace/sink/hash/path/host denial; new 157/focused 1,286; Julia 8,828/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 693/5,341/memory/task/four doctrines/diff; canonical Rust 81.49s, Dart 1/1, primary 66x2, Phase 0 1,031/648s; exact 1,738,560-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia derives the exact immutable runtime snapshot without execution or host-authority widening; emitted/generated public propagation `.3` waits for the clean commit and ledgers remain unchanged. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.1` | Immutable v1 contract/closed event kind/eight-field event/sink/JSON; direct/execute/traced/loaded/reconstructed/generated-plan-engine capture; accepted-slot and final-result order; canonical 1/2/2 and multibyte `é🙂` scalar positions; exact UTF-8 SHA; absent-sink zero allocation/hash; exact callback identity including generated diagnostic-wrapper collision; result/cursor/trace/diagnostic/failure non-interference; new 66/focused 1,129; Julia 8,671/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 692/5,330/memory/task/four doctrines/diff; canonical Rust 82.37s, Dart 1/1, primary 66x2, Phase 0 1,031/662s; exact 1,892,380-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia exposes typed native runtime capture without coupling query, trace, or diagnostics; immutable derivation `.2` waits for the clean commit and emitted-wrapper propagation remains `.3`. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.0` | Retrieved neutral/admitted/Julia authorities; direct high-trace and direct/loaded/reconstructed/generated-plan/traced/fresh-emitted route probes; exact accepted-slot/result seams, matched-end scalar positions, trace/diagnostic separation, absent-sink fence, generated callback-identity policy, detached static derivation, canonical input SHA and twentieth digest; nine committed suites at exact 1,063; Julia 8,605/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 691/5,321/memory/task/four doctrines/diff; canonical Rust 78.71s, Dart 1/1, primary 66x2, Phase 0 1,031/679s; exact 1,597,636-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Complete behavior-free runtime-observation authority and omission-safe `.1-.4` split are frozen without production/test/fixture/contract/API/format/runtime/rollout/admission change; typed direct capture `.1` waits for the clean plan commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.5.4` | Four query cards and clean `.1-.3` topology; nine committed suites at exact 135+85+70+99+79+62+100+118+315=1,063; all 19 typed/raw hashes, 26 malformed boundaries, one detached materialization, clone/input/interleaving/privacy/source-ceiling/export/non-execution/callback/host denial; Julia 8,605/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 59/27/0; mdBook/KM 690/5,307/memory/task/four doctrines/diff; canonical Rust 79.55s, Dart 1/1, primary 66x2, Phase 0 1,031/635s; exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Committed Julia query proof composes without production/replacement-test/fixture/contract/API/format/runtime/rollout/admission change; parent `.10.6.5` closes before runtime plan `.10.6.6.0`. |
@@ -14562,6 +14616,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.6.2` | `FUTURE-PARITY-BACKLOG.10.6.6.2 - derive Julia runtime snapshot` | Strict detached topology validation, isolated observed projection, and exact twentieth digest; new 157/focused 1,286, Julia 8,828/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup before propagation `.3`. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.1` | `FUTURE-PARITY-BACKLOG.10.6.6.1 - add Julia runtime observation` | Immutable typed slot/result capture across native shared routes; new 66/focused 1,129, Julia 8,671/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup before derivation `.2`. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.0` | `FUTURE-PARITY-BACKLOG.10.6.6.0 - freeze Julia runtime observation` | Behavior-free exact seams/routes/no-sink/callback/derivation/twentieth-digest authority and `.1-.4` split; focused/full matrices/no-drift/canonical/docs/KM/cleanup before typed direct capture. |
 | `FUTURE-PARITY-BACKLOG.10.6.5.4` | `FUTURE-PARITY-BACKLOG.10.6.5.4 - close Julia semantic query` | No-change nine-suite focused 1,063, Julia 8,605/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.5` without replacement code, runtime observation, or promotion. |
@@ -14791,6 +14846,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-23`: `.10.6.6.2` exports strict `with_execution_observation`, validates exact typed v1 sequences against
+  detached static rule/edge/slot topology, and derives a fresh canonical `has_execution=true` projection while
+  leaving base/events/responses isolated. Typed/raw query matches the twentieth digest; 24 malformed boundaries,
+  topology/entry/base failures, and parser/compiler/runtime/trace/sink/hash/path/host denial pass. New 157/focused
+  1,286, Julia 8,828/primary/105, primary 5x2x66, ten Unicode legs, unchanged ledgers, canonical Rust 81.49s +
+  Dart 1/1 + primary 66x2 + Phase 0 1,031/648s, mdBook/KM 693/5,341/doctrines, and exact 1,738,560-KiB cleanup
+  preserving 517 Pgen artifacts and Julia package/registry caches pass. Emitted/generated propagation `.3` waits
+  for the clean commit; rollout/admission remain 4/9 and 3/6.
 
 - `2026-07-23`: `.10.6.6.1` adds Julia's immutable typed v1 slot/result event API and invocation-local sink at the
   shared native runtime seams. Direct, execute, traced, loaded, reconstructed, and generated-plan-engine routes

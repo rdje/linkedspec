@@ -1052,8 +1052,13 @@ content migration exists yet.
   Accepted events use exact Unicode-scalar matched-end/final positions, final success hashes the exact UTF-8 input,
   absent sinks allocate/hash nothing, callback failures retain exact caller identity, and result/cursor/trace/
   diagnostic behavior is unchanged. New 66/focused 1,129 and complete Julia 8,671/primary/105 pass. Immutable
-  derivation/twentieth digest remain `.2`; fresh emitted public wrapper propagation remains `.3`; rollout and
-  admission remain 4/9 and 3/6.
+  derivation `.10.6.6.2` is now complete as well: public `with_execution_observation(index, events)` validates the
+  exact typed sequence against detached static rule/edge/slot topology, derives canonical execution/event records
+  and `observed_as` evidence in a new `has_execution=true` snapshot, and leaves the base static. Typed and raw-
+  neutral query match the twentieth digest; malformed, foreign, reordered, duplicate-final, wrong-entry, and
+  unsupported-slot observations reject without compiling, executing, tracing, installing a sink, hashing new
+  input, or reading host/path state. New 157/focused 1,286 and complete Julia 8,828/primary/105 pass. Fresh emitted
+  public wrapper propagation remains `.3`; rollout and admission remain 4/9 and 3/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

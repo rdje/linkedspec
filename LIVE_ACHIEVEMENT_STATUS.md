@@ -8,14 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Julia typed runtime-observation capture `FUTURE-PARITY-BACKLOG.10.6.6.1` is complete and verified from clean
-  plan commit `c590c435`, awaiting its durable commit. Immutable observed-index derivation `.10.6.6.2` may activate
-  only after that clean boundary; emitted/generated public propagation remains separately owned by `.3`.
+- Immutable Julia runtime-observation derivation `FUTURE-PARITY-BACKLOG.10.6.6.2` is complete and fully verified
+  from clean typed-capture commit `efd0474c`; it awaits this leaf's durable commit. Emitted/generated public
+  propagation `.10.6.6.3` may activate only after the tree is clean.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.2 — derive Julia runtime snapshot**
+  (DONE and fully verified from clean typed-capture commit `efd0474c`; awaiting this leaf's durable commit).
+
+  **Result:** Julia now exports strict `with_execution_observation`. It validates exact typed v1 event fields,
+  final closure/entry/input identity, and each selecting-rule edge to target slot against detached static evidence;
+  it then returns a fresh canonical `has_execution=true` projection while leaving the base, caller events, and
+  serialized responses isolated. Typed/raw-neutral query matches the twentieth digest without parser/compiler/
+  runtime/trace/sink/hash/path/host authority. Emitted/generated public propagation remains `.3`.
+
+  **Proof:** New 157/focused 1,286 and Julia 8,828/primary/105 pass. Primary 5x2x66, all ten Unicode legs, Unicode
+  806/9/8/2, semantic 6/20/81 at 4/9 + 3/6, capability 80/0/0, generated v1/10/80-0-0, language
+  246/105+1/122, and public 59/27/0 remain exact. Canonical Rust 81.49s + Dart 1/1 + primary 66x2 + Phase 0
+  1,031/648s, book/KM 693/5,341, doctrines, memory/diff hygiene, and exact 1,738,560-KiB cleanup pass while
+  preserving 517 Pgen artifacts and Julia package/registry caches.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.1 — add Julia runtime observation**
   (DONE and fully verified from clean behavior-free plan commit `c590c435`; awaiting this leaf's durable commit).
 

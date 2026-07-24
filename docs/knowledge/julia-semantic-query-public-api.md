@@ -12,7 +12,7 @@ answers:
   - "can Julia semantic query compile execute trace read paths or invoke callbacks"
   - "is Julia runtime semantic observation implemented"
 date: 2026-07-23
-status: current exact public typed/raw-neutral static query API; query parent composition closed, runtime observation and admission pending
+status: current exact public typed/raw-neutral query API; static parent and observed runtime derivation complete, admission pending
 tags: [julia, semantic-introspection, query, capabilities, validation, immutability, privacy]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.5.3-.10.6.5.4; julia/src/semantic/SemanticQuery.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_query_public_test.jl; julia/test/runtests.jl; capability_conformance/semantic_introspection_contract.json
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-query-public-depot:/private/var/folders/4h/29gg6nrx2pj9wfjkzc460hlr0000gn/T/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, Test, JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\"); include(\"julia/test/semantic_index_query_kernel_test.jl\"); include(\"julia/test/semantic_index_query_traversal_test.jl\"); include(\"julia/test/semantic_index_query_public_test.jl\")'; python3 tools/check_semantic_introspection_contract.py"
@@ -62,6 +62,12 @@ format behavior, runtime observation, rollout, or admission. Parent `.10.6.5` is
 runtime-events response remains `.10.6.6`, beginning with separate authority plan `.10.6.6.0` after the clean
 closeout commit. Canonical Rust 79.55s + Dart 1/1 + primary 66x2 + Phase 0 1,031/635s, book/KM 690/5,307,
 doctrines, and exact 1,613,872-KiB cleanup preserving 517 Pgen artifacts pass.
+
+Runtime capture `.10.6.6.1` and derivation `.10.6.6.2` now make the twentieth response available without widening
+query authority. `with_execution_observation` builds a new frozen projection from typed events plus static
+rule/edge/slot evidence; the same typed/raw-neutral query paths then return the canonical runtime-events response.
+Query itself still cannot execute, trace, install a sink, hash input, or inspect runtime/compiler/host state. See
+[[julia-semantic-runtime-observation-derivation]].
 
 Related facts: [[julia-semantic-query-authority-map]], [[julia-semantic-query-kernel]],
 [[julia-semantic-query-traversal]], [[julia-semantic-introspection-authority-map]],

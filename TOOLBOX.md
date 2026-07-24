@@ -629,6 +629,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   focused 1,129. The sink is public on runtime parse/execute, traced convenience, and validated generated-plan
   direct/traced helpers; loaded/reconstructed engines reuse those seams. Keep emitted wrapper propagation in `.3`
   and observed-index derivation in `.2`. Complete Julia is 8,671/primary/105 at this boundary.
+  Derivation `.10.6.6.2` is now implemented; retrieve [[julia-semantic-runtime-observation-derivation]]. Run
+  `julia/test/semantic_index_runtime_projection_test.jl` after the ten earlier semantic suites for exact new 157/
+  focused 1,286. `with_execution_observation` accepts only exact typed events, checks closed fields/final-result/
+  input identity and detached rule-edge-slot topology, and returns a fresh observed index. The canonical typed/raw
+  `runtime_events` response matches digest
+  `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`; malformed/topology cases reject with
+  `semantic_index_invalid_observation`. Source-scan proof denies parsing, compilation, execution, trace, sink,
+  hashing, environment, and file IO. Complete Julia is 8,828/primary/105; keep fresh emitted wrapper propagation
+  and generated-route callback/non-interference proof in `.3`.
 
 ---
 
