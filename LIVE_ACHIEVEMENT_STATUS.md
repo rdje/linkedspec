@@ -8,8 +8,11 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No slice is active. Julia runtime-observation parent `.10.6.6` is composition-closed; exact Julia admission
-  `.10.6.7` remains pending and is deliberately not activated while awaiting director instruction.
+- `FUTURE-PARITY-BACKLOG.10.6.7` is active from clean commit `48b7d96d`. The planning boundary owns one ordered
+  twelve-role Julia semantic consumer, every committed runtime route, all twenty typed/raw-neutral digests,
+  privacy/paging/budget/error/explain/non-interference/host denial, canonical topology plus eight mutations,
+  Julia-only promotion, public lockstep, and `.10.6` closeout. No implementation has changed yet. The planning
+  boundary passes memory architecture, all four doctrines, Knowledge Map, mdBook, neutral 6/20/81, and diff checks.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.

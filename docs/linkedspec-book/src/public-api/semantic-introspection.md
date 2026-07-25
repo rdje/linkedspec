@@ -1667,7 +1667,8 @@ all twelve owner suites at exact focused 1,337. This confirms the typed event se
 rejection, twentieth typed/raw digest, callback identity, final-result omission, every native/generated/emitted
 route, absent-sink fence, and result/diagnostic/trace non-interference together without replacement code or tests.
 Parent `.10.6.6` is closed with generated-source v2/format 2, rollout 4/9, and native admission 3/6 unchanged.
-Exact Julia admission remains pending in `.10.6.7`.
+Director instruction activates exact Julia admission in `.10.6.7` from clean `48b7d96d`. Its ordered consumer,
+canonical topology mutations, complete gates, and public lockstep must pass before those governance values move.
 
 ## Exact v1 record model
 
@@ -2059,7 +2060,7 @@ The dependency order is:
 | `.10.6.6.2` | Julia immutable observed-index derivation | complete; strict topology and exact twentieth digest, new 157/focused 1,286 |
 | `.10.6.6.3` | Julia generated/emitted observation propagation | complete; direct/traced/isolated routes, new 51/focused 1,337, v2/format 2 unchanged |
 | `.10.6.6.4` | Julia runtime-observation composition closeout | complete; committed focused 1,337 plus full matrices/canonical proof, no replacement code or promotion |
-| `.10.6.7` | Julia exact composed semantic admission | pending |
+| `.10.6.7` | Julia exact composed semantic admission | active; ordered 12-role consumer and Julia-only promotion |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

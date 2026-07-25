@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.6.7` — admission must compose, not reimplement): Julia already has the
+  complete semantic source/outcome, static/call projection, typed and raw-neutral query, runtime observation,
+  generated-plan helper, emitted wrapper, and isolated-host mechanisms. Its admission consumer must therefore be
+  a strict orchestration test over those owners, mirroring the twelve admitted Perl/Rust/Dart roles and adding no
+  new semantic evaluator or runtime route.
+
+  The Dart consumer is the closest topology precedent because it covers loaded and JSON-reconstructed compiled
+  state, generated-plan and public-helper execution, fresh standalone emitted direct/traced calls, and typed/native-
+  neutral equality. Julia's existing route suite supplies the corresponding package and isolated-process seams.
+  The neutral checker must independently lock the Julia path, exact role markers/order, canonical driver command,
+  required tracked file, rollout/admission rows, and eight omission mutations. No Lua, recurring, MCP, or public
+  row may advance in this leaf.
+
 - 2026-07-23 (`FUTURE-PARITY-BACKLOG.10.6.6.4` — closeout should prove composition, not add a second owner): The
   typed capture, detached derivation, and emitted-route leaves already own every runtime-observation mechanism.
   The closeout therefore retrieved their four fact cards and recomposed the twelve committed suites in dependency

@@ -646,7 +646,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   equality, deterministic source, and unchanged generated-source v2/format 2. Complete Julia is 8,879/primary/105.
   No-change `.10.6.6.4` is now complete: retrieve all four runtime-observation cards, then run the complete twelve-
   suite owner order for exact focused 1,337. Parent `.10.6.6` is composition-closed without replacement code,
-  format/runtime change, or ledger promotion. `.10.6.7` remains the pending exact admission owner.
+  format/runtime change, or ledger promotion. `.10.6.7` is the active exact admission owner from clean `48b7d96d`.
 
 ---
 

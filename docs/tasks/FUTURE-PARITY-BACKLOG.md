@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-23` (Julia runtime-observation parent `.10.6.6` composition-closed from clean propagation
-  commit `bea0afe0`; exact composed admission `.10.6.7` remains pending and is not active)
+- Last updated: `2026-07-25` (director instruction activates exact composed Julia admission `.10.6.7`
+  task-tree-first from clean runtime-observation closeout commit `48b7d96d`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10893,7 +10893,7 @@ before implementation.
     `.10.6.7` stays pending awaiting director instruction.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.7`
-  Status: `pending`
+  Status: `active` (2026-07-25; planning and omission-sensitive consumer admission)
   Goal: Admit the exact Julia semantic implementation and close `.10.6`.
   Depends on: `.10.6.6`
   Acceptance: Add one omission-sensitive ordered 12-role Julia consumer over strict text/bytes, compiled/failed/
@@ -10902,6 +10902,45 @@ before implementation.
     and stale host/path/IR denial. Register it canonically, add independent Julia topology mutations, advance only
     Julia rollout/admission, pass complete Julia/primary/corpus/generated/canonical gates, synchronize all public
     state, and close `.10.6` cleanly before Lua `.10.7`.
+  Verification plan: Add one additive `julia/test/semantic_introspection_julia_admission_test.jl` consumer that
+    composes the already-committed source, compilation, static, call, query, observation, generated-plan, public-
+    helper, fresh-emitted, and isolated-host owners without adding a second semantic implementation. Require the
+    same ordered twelve roles as Perl/Rust/Dart exactly once. Exercise direct, loaded, JSON-reconstructed,
+    generated-plan, public generated-helper, freshly included emitted direct/traced, standalone isolated emitted,
+    and native traced routes against the exact event sequence and twentieth digest. Match all twenty typed and
+    neutral response digests, mutate detached request/response values without authority changes, verify privacy/
+    paging/budget/error/explanation outcomes, scan the query owner for forbidden execution/compile/trace/path
+    authority, and deny host paths, Julia type names, AST/ActionIR, observation types, generated implementation
+    source, object displays, and pointer-like leakage in portable JSON. Register the file in `julia/test/runtests.jl`,
+    `tools/run_ci_local.sh`, the contract's canonical file inventory, and the neutral checker. Promote only the
+    Julia admission and `julia_parity` rollout rows. Add eight Julia-specific topology mutations matching the
+    admitted Dart boundary, then pass focused admission, all twelve semantic suites plus admission, complete Julia
+    package/primary/corpus, neutral/capability/generated/language/public ledgers, canonical CI, mdBook/Knowledge
+    Map/memory/task/doctrines/diff, and safe artifact cleanup before closing `.10.6.7` and parent `.10.6`.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / PRECONDITION** — Retrieve the committed Julia semantic facts and all three admitted consumer
+    topologies; confirm clean `48b7d96d`, exact 20 digests, 81 mutations, rollout 4/9, and admission 3/6.
+  - [ ] **ORDERED CONSUMER** — One Julia file declares and executes the exact twelve roles once, with no alternate
+    semantic model/query/runtime owner.
+  - [ ] **SNAPSHOTS / QUERIES** — Strict text/bytes, compiled/failed/runtime snapshots, typed/raw-neutral identity,
+    all twenty hashes, privacy/pages/budgets/errors/explain, immutability, and no-execution behavior are exact.
+  - [ ] **RUNTIME ROUTES** — Direct, loaded, reconstructed, generated-plan, public-helper, freshly emitted direct/
+    traced, standalone isolated emitted, and native traced routes preserve results, events, and the twentieth hash.
+  - [ ] **HOST DENIAL** — Portable answers and the detached evaluator expose no host path, Julia type/layout,
+    source AST/ActionIR, runtime observation object, generated implementation source, trace, or pointer identity.
+  - [ ] **TOPOLOGY / PROMOTION** — Canonical registration and eight independent Julia omission mutations pass;
+    only Julia rollout/admission advances, leaving Lua, recurring, MCP, and public rows pending.
+  - [ ] **LOCKSTEP / CLOSE** — Complete focused/backend/matrix/ledger/canonical/docs/KM/doctrine/diff/cleanup proof
+    passes; synchronize public state, close `.10.6.7` and `.10.6`, and commit cleanly before Lua `.10.7`.
+
+  Planning evidence: From clean `48b7d96d`, startup review covered both roadmaps, the code/import and active Julia
+  semantic owner chain, all 46 mdBook pages, ADRs `0049`/`0050`/`0051`, Knowledge Map authorities, `TOOLBOX.md`,
+  all three admitted consumers, the neutral checker/contract, Julia registration, and the exact pending leaf.
+  The behavior-free activation passes memory architecture, all four doctrine checks, Knowledge Map derivation,
+  mdBook build, diff hygiene, and the neutral semantic checker at 6 groups / 20 responses / 81 mutations /
+  rollout 4/9 / admission 3/6. Implementation remains the next action after this planning commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
   Status: `pending`
@@ -13763,12 +13802,13 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.5.2 | `FUTURE-PARITY-BACKLOG.10.6.5.2` | `done` | Exact Julia relation traversal, pages, budgets, costs, deterministic prefixes, and all 19 static hashes pass without exports. |
 | 74.5.5.3 | `FUTURE-PARITY-BACKLOG.10.6.5.3` | `done` | Exact public Julia typed/raw query matches 19 hashes and 26 malformed boundaries through one detached evaluator without runtime or promotion. |
 | 74.5.5.4 | `FUTURE-PARITY-BACKLOG.10.6.5.4` | `done` | Committed focused 1,063 plus complete matrices/no-drift/canonical/docs/KM/cleanup close the query parent without replacement code or promotion. |
-| 74.5.6 | `FUTURE-PARITY-BACKLOG.10.6.6` | `active` | Capture exact typed Julia runtime semantic observations across every route without coupling query, trace, or diagnostics. |
+| 74.5.6 | `FUTURE-PARITY-BACKLOG.10.6.6` | `done` | Capture exact typed Julia runtime semantic observations across every route without coupling query, trace, or diagnostics. |
 | 74.5.6.0 | `FUTURE-PARITY-BACKLOG.10.6.6.0` | `done` | Exact Julia observation seams, route topology, exception/no-sink policy, detached derivation, and `.1-.4` split are frozen without behavior. |
 | 74.5.6.1 | `FUTURE-PARITY-BACKLOG.10.6.6.1` | `done` | Immutable typed slot/result events and optional direct/execute/traced/loaded/reconstructed/generated-plan-engine capture pass full signoff. |
 | 74.5.6.2 | `FUTURE-PARITY-BACKLOG.10.6.6.2` | `done` | Strict typed/static validation derives an isolated observed snapshot and matches the twentieth typed/raw digest. |
 | 74.5.6.3 | `FUTURE-PARITY-BACKLOG.10.6.6.3` | `done` | Fresh generated/emitted direct/traced/isolated routes preserve exact observations, callback identity, non-interference, and v2/format 2. |
 | 74.5.6.4 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `done` | Committed Julia runtime-observation proof recomposes at focused 1,337 and closes the parent without replacement behavior or promotion. |
+| 74.5.7 | `FUTURE-PARITY-BACKLOG.10.6.7` | `active` | Admit the exact ordered 12-role Julia semantic consumer, advance only Julia governance, and close `.10.6`. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 

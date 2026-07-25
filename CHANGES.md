@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.6.7 — activate exact Julia semantic admission
+
+Activated the final Julia semantic-introspection leaf from clean commit `48b7d96d` after reading the complete
+roadmap, code/import and active semantic owner chain, all 46 mdBook pages, relevant decisions, Knowledge Map facts,
+toolbox guidance, and the admitted Perl/Rust/Dart consumer topologies. The task tree now freezes one additive,
+ordered twelve-role Julia consumer; exact direct/loaded/reconstructed/generated/public-helper/emitted/traced route
+coverage; all twenty typed/raw-neutral digests; privacy, paging, budget, error, explanation, immutability, and host-
+denial checks; canonical registration; eight independent Julia topology mutations; Julia-only governance
+promotion; and `.10.6` closeout.
+
+This planning slice changes no parser, compiler, runtime, query, generated format, fixture, neutral contract, or
+governance value. Current semantic state remains six groups, twenty responses, 81 rejected mutations, rollout
+4/9, and native admission 3/6 until the implementation and signoff checklist passes. Memory architecture, all
+four doctrine checks, Knowledge Map derivation, mdBook build, neutral semantic checker, and diff hygiene pass.
+
 ## 2026-07-23 — FUTURE-PARITY-BACKLOG.10.6.6.4 — close Julia runtime observation
 
 Composition-closed Julia's runtime-observation parent without adding production code, replacement tests,

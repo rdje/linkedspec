@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
 - latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.6.6.4` — Julia runtime-observation parent composition-closed.
-- latest_commit: `bea0afe0` is the clean propagation base; verified no-change closeout `.10.6.6.4` awaits commit.
+- latest_commit: `48b7d96d` closes Julia runtime observation; `.10.6.7` is the active task-tree-first planning slice.
 - current_semantic_introspection: the executable neutral model/query oracle owns 6 groups, 6 immutable snapshots,
   20 digest-locked responses, exact policy/paging/budget/error behavior, and 81 mutations. Static/generated facts
   cross-check admitted authority and caller logical identity. Perl/Rust/Dart each have one exact 12-role consumer;
@@ -52,9 +52,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   Julia 7,542/primary/105, 5x2x66, and all ten manifest legs pass; `.4` composes and closes `.10.6.1` unchanged.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its closed next owner was `FUTURE-PARITY-BACKLOG.10.1`.
 - current_signoff: new 51/focused 1,337; Julia 8,879/primary/105; primary 5x2x66 + ten Unicode legs; unchanged ledgers; canonical Rust 79.78s + Dart 1/1 + primary 66x2 + Phase 0 1,031/637s; book/KM 694/5,348; cleanup 1,749,080 KiB.
-- latest_bootstrap_read: 2026-07-22 — README, both roadmaps, memory/bootstrap/commit/task doctrines, complete codebase architecture, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and exact Rust semantic authorities read.
+- latest_bootstrap_read: 2026-07-25 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and admitted consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
 - push_policy: do not push mid-PNT unless explicitly instructed or the documented 300-commit threshold is reached.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
-- blockers: none. in_flight_uncommitted: verified `.10.6.6.4` docs/KM closeout awaits commit; afterward pause for director instruction with `.10.6.7` pending and inactive.
+- blockers: none. in_flight_uncommitted: `.10.6.7` planning/activation awaits its local commit; next add the exact ordered Julia admission consumer without pushing before 300 commits.

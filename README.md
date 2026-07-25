@@ -1067,7 +1067,8 @@ content migration exists yet.
   preserving 517 Pgen artifacts pass. No-change closeout `.10.6.6.4` now recomposes all twelve committed semantic
   suites at focused 1,337 plus complete Julia/matrix/Unicode/canonical proof and closes parent `.10.6.6` without
   production/replacement-test/API/format/runtime or promotion change. Rollout and admission remain 4/9 and 3/6;
-  exact admission `.10.6.7` remains pending.
+  director instruction has activated exact admission `.10.6.7`; governance remains unchanged until its ordered
+  consumer, topology mutations, complete gates, and public lockstep pass.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
