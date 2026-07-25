@@ -1728,10 +1728,17 @@ edge parsing, delimiter/remainder behavior, raw preservation, third-colon reject
 reconstructed diagnostics at 179 assertions. Both suites and the complete `1..177` package pass unchanged on PUC
 Lua and LuaJIT; PUC primary remains 66x2 and corpus validation/execution remains 105/105.
 
+Exact downstream identity is now complete too. A single suite derives ten unique byte strings from all nine
+positive fixtures and both distinct pairs and preserves them through parsed/reconstructed AST, compiled order and
+maps, native JSON, descriptors, generated plans, strict loading, direct generated execution, in-process and fresh-
+process emitted modules, entry selectors, native/generated diagnostics, native/generated trace, and every label
+through both inline and file primary commands. The normalization-sensitive pair stays two independent keys/rules;
+portable compiled and descriptor artifacts deny loader paths plus Lua table/userdata identity. The suite passes
+359 assertions unchanged on PUC Lua and LuaJIT without changing production source or generated-source format.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
-Unicode `.10.7.1.2` next proves exact positive/distinct identity through compiled state, descriptors, generated
-plans/modules, selectors, diagnostics, traces, strict loading, execution, and primary commands; `.3` owns every
-negative/trust route and adjacent-grammar isolation; `.4` recomposes and closes the prerequisite. Opaque strict
+Unicode `.10.7.1.3` next owns every negative/trust route and adjacent-grammar isolation; `.4` recomposes and closes
+the prerequisite. Opaque strict
 source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
 query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
 remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,

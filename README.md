@@ -1087,8 +1087,12 @@ content migration exists yet.
   routes headers plus action/blind/bare targets through its strict UTF-8 scanner, rejects partial suffixes and a
   third colon, and validates programmatic/reconstructed AST labels before structural checks. Focused classifier
   1,706 and native-route 179 assertions pass unchanged on PUC Lua and LuaJIT; the complete dual-ABI Lua gate stays
-  `1..177`. No public classifier API, generated-source format, semantic response, rollout, or admission row moves.
-  Exact positive/distinct artifact and runtime identity `.10.7.1.2` is next.
+  `1..177`. Exact identity `.10.7.1.2` now proves ten unique positive/distinct labels through AST, compiled JSON,
+  descriptors, generated plans, loading, direct/generated/emitted/fresh-process execution, selectors, diagnostics,
+  trace, and inline/file primary commands at 359 assertions per ABI. Normalization-sensitive labels remain separate,
+  and portable artifacts expose neither loader paths nor host table identities. No public classifier API,
+  generated-source format, semantic response, rollout, or admission row moves. Exhaustive negative/trust-route and
+  adjacent-grammar isolation `.10.7.1.3` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

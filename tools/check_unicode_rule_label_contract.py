@@ -74,6 +74,9 @@ LUA_CLASSIFIER_TEST_PATH = (
 LUA_NATIVE_ROUTES_TEST_PATH = (
     ROOT / "lua" / "test" / "unicode_rule_label_routes_test.lua"
 )
+LUA_IDENTITY_ROUTES_TEST_PATH = (
+    ROOT / "lua" / "test" / "unicode_rule_label_identity_routes_test.lua"
+)
 LUA_TEST_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -151,6 +154,7 @@ def main() -> None:
         JULIA_TEST_DRIVER_PATH,
         LUA_CLASSIFIER_TEST_PATH,
         LUA_NATIVE_ROUTES_TEST_PATH,
+        LUA_IDENTITY_ROUTES_TEST_PATH,
         LUA_TEST_DRIVER_PATH,
         MATRIX_DRIVER_PATH,
         CI_PATH,
@@ -797,10 +801,25 @@ def main() -> None:
     ):
         if marker not in lua_native_routes_test:
             fail(f"Lua native route proof missing: {marker}")
+    lua_identity_routes_test = LUA_IDENTITY_ROUTES_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "every positive and distinct label survives compiled artifacts",
+        "emitted source reconstructs and executes every exact label",
+        "fresh emitted host status",
+        "strict loading and both primary source forms preserve every exact label",
+        "selectors, diagnostics, and traces retain exact Unicode identity",
+        'check_equal(#labels, 10, "unique positive and distinct label count")',
+        'fixture.left ~= fixture.right',
+        '"--inline-spec", source',
+        '"--spec-file", spec_path',
+    ):
+        if marker not in lua_identity_routes_test:
+            fail(f"Lua exact identity proof missing: {marker}")
     lua_test_driver = LUA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
     for marker in (
         "lua/test/unicode_rule_label_classifier_test.lua",
         "lua/test/unicode_rule_label_routes_test.lua",
+        "lua/test/unicode_rule_label_identity_routes_test.lua",
     ):
         if lua_test_driver.count(marker) != 2:
             fail(f"Lua dual-ABI test registration missing or duplicated: {marker}")
@@ -828,6 +847,7 @@ def main() -> None:
         "require_tracked_file lua/src/linkedspec/unicode_rule_label.lua",
         "require_tracked_file lua/test/unicode_rule_label_classifier_test.lua",
         "require_tracked_file lua/test/unicode_rule_label_routes_test.lua",
+        "require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

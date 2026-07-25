@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.2 — prove Lua Unicode label identity
+
+Added one exact downstream-identity suite that runs unchanged on PUC Lua and LuaJIT. It derives ten unique byte
+strings from all nine positive fixtures and both normalization/case-sensitive distinct pairs, then proves their
+identity through parsed and JSON-reconstructed ASTs; compiled order, maps, native JSON, and rule resolution;
+descriptors; generated plans; loaded/reconstructed/direct-generated runtimes; in-process and fresh-process emitted
+modules; strict loaders; selectors; diagnostics; traces; and inline/file primary commands. The two distinct pairs
+remain separate labels and separate rules at every keyed boundary.
+
+Portable compiled, descriptor, emitted, and loaded artifacts deny host path, Lua table, and userdata identity.
+Fresh emitted execution uses the selected ABI in an isolated process, so PUC Lua cannot accidentally validate a
+LuaJIT-only route or vice versa. The Unicode checker locks the ten-label topology, distinct-pair inequalities,
+route markers, inline/file coverage, tracked-file registration, and exactly one execution per ABI.
+
+All 359 assertions pass on each ABI. Complete Lua remains `1..177` per ABI plus PUC primary 66x2 and corpus
+105/105. The Unicode/semantic/capability/generated/language/public ledgers remain exact at 806/9/8/2,
+6/20/89 at 5/9 + 4/6, 80/0/0, v1/10/80-0-0, 246/105+1/122, and 59/27/0. No production source, neutral
+fixture/contract, generated-source format, public API, semantic response, rollout, or admission row changes. Full
+primary passes 5x2x66 and every Unicode-manifest leg passes 1/1. mdBook, Knowledge Map 698/5,404,
+memory/task/four doctrines, and diff hygiene pass. Canonical CI passes Rust admission 1/1 in 84.56s, Dart 1/1,
+Julia 416/416 in 30.0s, reference primary 66x2, and Phase 0 1,031/1,031 in 649s. Exact 1,518,360-KiB cleanup
+removes only regenerable Rust dependency/incremental state, rendered book, Dart tool state, Python bytecode, and
+the disposable Julia depot. Negative/trust-route and adjacent-grammar isolation `.10.7.1.3` follows the clean
+commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.1 — implement Lua Unicode label routes
 
 Added the generated private Lua form of the pinned Unicode 17 rule-label contract. The neutral generator now

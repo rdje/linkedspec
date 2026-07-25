@@ -16,10 +16,10 @@ answers:
   - "how are Lua Unicode rule-label tests registered on both ABIs"
   - "what is the Lua Unicode rule-label implementation dependency order"
 date: 2026-07-25
-status: native classifier/parser/validator implemented; identity and isolation proof remain; owned through FUTURE-PARITY-BACKLOG.10.7.1.1
+status: native classifier/parser/validator and exact identity implemented; negative/isolation proof remains; owned through FUTURE-PARITY-BACKLOG.10.7.1.2
 tags: [lua, luajit, unicode, rule-labels, parser, validation, generation, testing]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.1.1 generates and independently byte-compares lua/src/linkedspec/unicode_rule_label.lua, extracts all 806 ranges, and source-locks strict UTF-8 plus parser/validator/runner/CI topology. The classifier suite passes 1706 assertions and the native route suite passes 179 assertions unchanged on PUC Lua and LuaJIT; the complete dual-ABI Lua gate remains 1..177 on each ABI plus PUC primary 66x2 and corpus 105."
-reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua"
+evidence: "FUTURE-PARITY-BACKLOG.10.7.1.2 adds one 359-assertion suite run unchanged on PUC Lua and LuaJIT. Ten unique labels from all 9 positive and 2 distinct fixtures retain exact AST/compiled/JSON/descriptor/plan/loaded/generated/emitted/fresh-process/selector/diagnostic/trace/inline-file-primary identity; normalization-sensitive labels remain distinct and portable artifacts deny loader paths plus table/userdata identity. Complete Lua remains 1..177 on each ABI plus PUC primary 66x2 and corpus 105; full primary 5x2x66, ten Unicode legs, canonical Rust 84.56s/Dart 1/1/Julia 416 in 30.0s/reference 66x2/Phase 0 1031 in 649s, and 1,518,360-KiB cleanup pass."
+reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels|fresh emitted host status' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua lua/test/unicode_rule_label_identity_routes_test.lua"
 ---
 
 # Lua Unicode rule-label implementation
@@ -66,3 +66,10 @@ with the exact portable diagnostic. Root `linkedspec` still exports no classifie
 reader remains unchanged for non-label identifiers. Exact downstream identity remains `.2`, the exhaustive
 negative/isolation matrix remains `.3`, and no semantic rollout or admission row moves before those proofs and
 composition `.4` close the prerequisite.
+
+Exact identity `.10.7.1.2` is now complete without a production change. One suite derives ten unique byte strings
+from every positive/distinct fixture and proves exact order/key/value identity across AST, compiled/native JSON,
+descriptor, generated plan, strict loader, reconstructed/direct/generated/in-process emitted/fresh emitted runtime,
+selector, diagnostic, trace, and both primary source forms. The normalization-sensitive pair remains two separate
+rules; portable artifacts exclude loader paths and Lua table/userdata identities. All 359 assertions pass unchanged
+on PUC Lua and LuaJIT. Negative trust routes and adjacent grammar isolation remain `.3`; recomposition remains `.4`.

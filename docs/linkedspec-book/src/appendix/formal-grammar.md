@@ -211,6 +211,14 @@ header. The generated ranges remain private, root `linkedspec` exports no classi
 word scanner continues to own unrelated identifiers. Classifier and native-route suites run unchanged on both Lua
 ABIs; later proof owns exact identity through every compiled/runtime artifact and exhaustive adjacent isolation.
 
+Exact artifact and runtime identity is now proved as well. Ten unique byte strings derived from all nine positive
+fixtures and both distinct pairs remain exact through parsed and reconstructed ASTs, compiled order/maps/JSON,
+descriptors, generated plans, strict loading, native and generated execution, in-process and fresh emitted modules,
+selectors, portable diagnostics, native/generated trace, and inline/file primary commands. The precomposed and
+decomposed labels remain separate keys and rules; loader paths and host table identities do not enter portable
+artifacts. One 359-assertion suite runs unchanged on PUC Lua and LuaJIT. Exhaustive negative trust routes and
+unrelated-identifier isolation remain the next separately owned proof.
+
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
 prefix such as `Top-Rule::`, `Top Rule::`, or `$Top::`, and an extra colon such as `Top:::` is not part of a valid
@@ -244,8 +252,8 @@ contract through every identity and isolation route. Lua now routes native heade
 targets through the generated 806-range scanner and applies the same complete-label predicate to parsed,
 reconstructed, and programmatic ASTs. Its scanner preserves one-based UTF-8 byte boundaries under PUC Lua and
 LuaJIT, including supplementary scalars, and invalid suffixes cannot silently truncate to a valid prefix. Exact
-Lua artifact/runtime identity and exhaustive negative/isolation proof remain separately owned before semantic v1
-admission.
+Lua exact artifact/runtime identity is complete; exhaustive negative/trust-route and adjacent-grammar isolation
+remains separately owned before semantic v1 admission.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as
   the entry rule.

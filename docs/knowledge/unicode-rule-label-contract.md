@@ -18,12 +18,15 @@ answers:
   - "which Dart downstream routes preserve exact Unicode rule label identity"
   - "does Dart Unicode rule label expansion broaden other identifier grammars"
   - "is Dart native Unicode rule-label alignment closed"
+  - "where is the Lua Unicode rule label classifier generated"
+  - "which Lua downstream routes preserve exact Unicode rule label identity"
+  - "is Lua positive Unicode rule-label identity aligned on PUC Lua and LuaJIT"
   - "which backends still need Unicode rule label alignment"
 date: 2026-07-25
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, julia, lua, generated-data, validation, portability]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; docs/knowledge/lua-unicode-rule-label-preflight.md
-reverify: "python3 tools/check_unicode_rule_label_contract.py; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/unicode_rule_label_routes_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1.2; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; lua/src/linkedspec/unicode_rule_label.lua; lua/test/unicode_rule_label_identity_routes_test.lua; docs/knowledge/lua-unicode-rule-label-implementation-plan.md
+reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/unicode_rule_label_routes_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
 ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
@@ -77,12 +80,22 @@ deserialized or programmatically constructed AST cannot bypass the policy. Focus
 membership, all syntax routes, exact compiled/descriptor/generated/emitted identities, explicit selectors, strict
 loading, and traces.
 
+The same neutral generator writes `lua/src/linkedspec/unicode_rule_label.lua` as a private Lua-5.1-compatible
+classifier. Strict UTF-8 decoding, binary-search membership, complete labels, and one-based byte-prefix scanning
+run unchanged on PUC Lua and LuaJIT. Exactly five header/action/blind/bare parser roles consume it, and the first
+AST validator pass rechecks declarations plus all three target kinds. The identity suite derives ten unique labels
+from all positive/distinct fixtures and compares exact bytes through parsed/reconstructed AST, compiled JSON and
+maps/order, descriptors, generated plans, loaded/reconstructed/direct-generated runtimes, emitted modules in
+process and under a fresh selected-ABI host, strict loaders, selectors, diagnostics, traces, and inline/file
+primary commands. Normalization-sensitive labels remain different rules; portable artifacts deny paths and Lua
+table/userdata identity. All 359 assertions pass unchanged on both ABIs.
+
 This prerequisite removes the semantic privacy fixture's former `Töp` blocker without independently advancing
 semantic rollout. Perl accepts the strict-decoded fixture route. Rust, Dart, and Julia native parsing/validation,
 positive/distinct downstream identity, negative/identifier isolation, and composed signoff are aligned and closed.
-PUC Lua and LuaJIT remain the only pending parser/validator prerequisite under
-`FUTURE-PARITY-BACKLOG.10.7.1`: their current ASCII scanner accepts only 3/9 positive fixtures and their external
-AST routes lack complete-label validation. See
+PUC Lua and LuaJIT now align the generated classifier, parser/validator trust boundary, and exact positive/distinct
+downstream identity. Exhaustive negative/trust-route rejection and adjacent-identifier isolation remain owned by
+`.10.7.1.3`; composed prerequisite closeout remains `.10.7.1.4`. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[julia-unicode-rule-label-preflight]], [[lua-unicode-rule-label-preflight]],
 [[primary-cli-strict-utf8-text-contract]], and [[rust-native-spec-resolution]].

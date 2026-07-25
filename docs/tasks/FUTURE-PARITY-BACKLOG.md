@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-25` (Lua Unicode classifier/parser/validator implementation `.10.7.1.1` is complete;
-  exact positive/distinct identity `.10.7.1.2` is next at unchanged rollout 5/9 and admission 4/6)
+- Last updated: `2026-07-25` (Lua Unicode exact positive/distinct identity `.10.7.1.2` is complete;
+  negative/trust-route and adjacent-grammar isolation `.10.7.1.3` is next at unchanged rollout 5/9 and admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10967,7 +10967,7 @@ before implementation.
   `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
-  Status: `active` (2026-07-25; native Unicode implementation `.10.7.1.1` done; exact identity `.10.7.1.2` next)
+  Status: `active` (2026-07-25; Unicode exact identity `.10.7.1.2` done; negative/isolation `.10.7.1.3` next)
   Goal: Implement the Lua semantic index adapter with exact PUC Lua/LuaJIT identity.
   Children: `.10.7.0`, `.10.7.1`, `.10.7.2`, `.10.7.3`, `.10.7.4`, `.10.7.5`, `.10.7.6`, `.10.7.7`
   Depends on: `.10.6`
@@ -11026,7 +11026,7 @@ before implementation.
   admission row changes; `.10.7.1.0` waits for this clean audit commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7.1`
-  Status: `active` (2026-07-25; classifier/parser/validator implementation `.1` done; exact identity `.2` next)
+  Status: `active` (2026-07-25; exact positive/distinct identity `.2` done; negative/isolation `.3` next)
   Goal: Align every Lua rule-label route with pinned Unicode 17 `XID_Continue` on PUC Lua and LuaJIT.
   Children: `.10.7.1.0`, `.10.7.1.1`, `.10.7.1.2`, `.10.7.1.3`, `.10.7.1.4`
   Depends on: `.10.7.0`
@@ -11174,15 +11174,34 @@ before implementation.
       generated-source format, semantic response, rollout, or admission row changes; exact positive/distinct
       identity `.10.7.1.2` follows.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.1.2`
-    Status: `active` (2026-07-25; next after clean `.10.7.1.1` implementation commit)
+    Status: `done` (2026-07-25; exact dual-ABI artifact/runtime identity fully verified)
     Goal: Prove all positive/distinct labels retain exact identity through every Lua artifact and runtime route.
     Depends on: `.10.7.1.1`
     Acceptance: Run the ten unique positive/distinct scalar sequences through parsed/reconstructed AST, compiled
       order/maps/JSON, descriptor, generated plan, direct/generated/fresh-emitted execution, selectors, diagnostics,
       trace, strict loading, and inline/file primary commands under both ABIs with no normalization, folding, path,
       or host-table identity leakage.
+
+    Completion evidence: `lua/test/unicode_rule_label_identity_routes_test.lua` derives exactly ten unique byte
+      strings from all 9 positive and both distinct-fixture pairs, constructs one executable spec, and preserves
+      exact order/key identity through parsed and JSON-reconstructed ASTs, compiled definition/order/maps/native
+      JSON, descriptor, and generated plan. Every label resolves and returns itself through reconstructed native,
+      direct generated-plan, strict loaded, in-process emitted, fresh-process emitted, and both inline/file primary
+      routes. Emitted effective-spec hex reconstructs the same labels; the isolated child runs under the selected
+      PUC Lua or LuaJIT ABI with inherited native adapter paths and empty stderr. Normalization-sensitive labels
+      remain separate rules; selector traces retain requested/effective bytes; native and generated missing-rule
+      diagnostics retain Unicode identity; generated routed trace retains the selected label and Unicode source
+      identity. Compiled/descriptor/loaded JSON denies path, table, and userdata identity leakage. The exact same
+      suite passes 359 assertions per ABI; complete Lua remains `1..177` per ABI plus PUC primary 66x2 and corpus
+      105/105. The Unicode checker locks the suite, ten-label/distinct/route topology, dual-ABI runner order, and
+      canonical registration. Full primary 5x2x66, all ten Unicode legs, unchanged six no-drift ledgers, mdBook,
+      Knowledge Map 698/5,404, memory/task/four doctrines, and diff hygiene pass. Canonical CI passes Rust admission
+      1/1 in 84.56s, Dart 1/1, Julia 416/416 in 30.0s, reference primary 66x2, and Phase 0 1,031/1,031 in 649s.
+      Exact 1,518,360-KiB cleanup removes only regenerable artifacts. No production source, neutral fixture/
+      contract, generated-source format, public API, semantic response, rollout, or admission row changes;
+      negative/trust-route isolation `.10.7.1.3` follows.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.1.3`
-    Status: `pending`
+    Status: `active` (2026-07-25; next after clean `.10.7.1.2` identity commit)
     Goal: Reject every negative and trust-route bypass while isolating all unrelated Lua identifier grammars.
     Depends on: `.10.7.1.2`
     Acceptance: Reject all eight neutral negatives as whole tokens across source declaration/action/blind/bare,
@@ -14217,8 +14236,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.1 | `FUTURE-PARITY-BACKLOG.10.7.1` | `active` | Align every Lua rule-label route with pinned Unicode 17 `XID_Continue` on both ABIs. |
 | 74.6.1.0 | `FUTURE-PARITY-BACKLOG.10.7.1.0` | `done` | Exact dual-ABI classifier/parser/validator/diagnostic/identity/isolation plan and `.1-.4` proof split are frozen without behavior. |
 | 74.6.1.1 | `FUTURE-PARITY-BACKLOG.10.7.1.1` | `done` | Generated private classifier, five parser roles, first-boundary validator, portable diagnostics, and dual-ABI native proof pass. |
-| 74.6.1.2 | `FUTURE-PARITY-BACKLOG.10.7.1.2` | `active` | Prove exact positive/distinct identity through all Lua artifacts and runtime routes. |
-| 74.6.1.3 | `FUTURE-PARITY-BACKLOG.10.7.1.3` | `pending` | Reject all negative and external-AST bypass labels while isolating adjacent identifier grammars. |
+| 74.6.1.2 | `FUTURE-PARITY-BACKLOG.10.7.1.2` | `done` | Ten unique positive/distinct labels pass 359 exact artifact/runtime/primary assertions unchanged on both Lua ABIs. |
+| 74.6.1.3 | `FUTURE-PARITY-BACKLOG.10.7.1.3` | `active` | Reject all negative and external-AST bypass labels while isolating adjacent identifier grammars. |
 | 74.6.1.4 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `pending` | Recompose and close the committed dual-ABI Unicode prerequisite without semantic promotion. |
 | 74.6.2 | `FUTURE-PARITY-BACKLOG.10.7.2` | `pending` | Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner. |
 | 74.6.2.0 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `pending` | Freeze the constructor, privacy, error, no-path, and foundation dependency split. |
@@ -14923,6 +14942,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.2` | Exactly ten unique labels from all 9 positive/2 distinct fixtures; parsed/reconstructed AST, compiled order/maps/JSON, descriptor, plan, reconstructed/direct generated/loaded/in-process emitted/fresh emitted execution, selectors, native/generated diagnostics, native/generated trace, and all-label inline/file primary routes; normalization-sensitive separation; path/table/userdata denial; 359 assertions on PUC Lua and LuaJIT; complete Lua `1..177` on both ABIs, PUC primary 66x2, corpus 105/105; Unicode checker and runner/CI registration locks; primary 5x2x66 plus ten Unicode legs; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 698/5,404/memory/task/four doctrines/diff; canonical Rust 1/1 in 84.56s, Dart 1/1, Julia 416/416 in 30.0s, reference primary 66x2, Phase 0 1,031/1,031 in 649s; exact 1,518,360-KiB cleanup. | PASS. Exact Unicode bytes survive every owned Lua artifact/runtime route without production, neutral contract, generated-format, public-API, semantic, rollout, or admission change; negative/trust-route isolation `.10.7.1.3` waits for the clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.1` | Deterministic generated Lua-5.1 classifier with 806 independently extracted ranges; strict UTF-8/binary-search/full-label/byte-prefix topology; exactly five parser roles; whole-edge boundary and third-colon rejection; first-boundary declaration/action/blind/bare validator with exact portable diagnostics; no root API or adjacent generic word-reader widening; classifier 1,706 and native routes 179 on PUC Lua plus LuaJIT; complete Lua `1..177` on both ABIs, PUC primary 66x2, corpus 105/105; checker/runner/CI registration locks; primary 5x2x66 plus ten Unicode legs; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 698/5,401/memory/task/four doctrines/diff; canonical Rust 1/1 in 82.47s, Dart 1/1, Julia 416/416 in 29.8s, reference primary 66x2, Phase 0 1,031/1,031 in 652s; exact 1,520,396-KiB cleanup. | PASS. Native Lua rule-label parsing and AST validation now derive only from pinned Unicode 17 data; neutral contract/generated format/semantic governance remain unchanged, and exact identity `.10.7.1.2` waits for the clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.0` | Exact byte-identical PUC Lua/LuaJIT probe: 63/149,221 required scalars, 149,158 missing, 3/9 positives, `Top:::` label `Top` plus rest `: /x/`, and 24/24 declaration/action/blind/bare programmatic/reconstructed bypass combinations per ABI; generated 806-range Lua-5.1 classifier, five parser routes, four-role validator, portable diagnostic, identity/isolation owners, and `.1-.4` gate split frozen; unchanged Lua package `1..177`x2 plus PUC primary 66x2/corpus 105; semantic 6/20/89 at 5/9 + 4/6; Unicode 806/9/8/2; capability/generated/language/public 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; primary 5x2x66 plus ten Unicode legs; mdBook/KM 698/5,401/memory/task/four doctrines/diff; canonical Rust 1/1 in 77.47s, Dart 1/1, Julia 416/416 in 27.2s, reference primary 66x2, Phase 0 1,031/1,031 in 647s, and complete Lua `1..177` on both ABIs plus PUC primary 66x2/corpus 105; exact 1,645,032-KiB cleanup. | PASS. The implementation routes, diagnostics, compatibility constraints, proof ownership, and gate order are omission-complete without production/generated/test/fixture/contract/result/format/rollout/admission change; `.10.7.1.1` waits for the clean planning commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.0` | Complete Lua semantic/Unicode/compiled/ActionIR/staged/generated/loader/trace/runtime/JSON authority inspection; exact 63/149,221 and 149,158-missing scalar census, 3/9 source positives, `Top:::` boundary, and four external-AST trust-role bypasses; unchanged focused/package `1..177`x2 plus PUC primary 66x2/corpus 105; semantic 6/20/89 at 5/9 + 4/6; Unicode 806/9/8/2; capability/generated/language/public 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; primary 5x2x66 plus ten Unicode legs; mdBook/KM 697/5,388/memory/task/four doctrines/diff; canonical Rust 1/1 in 77.58s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, Phase 0 1,031/1,031 in 613s; exact 1,555,508-KiB cleanup. | PASS. The behavior-free dual-ABI boundary and omission-safe `.1-.7` split are complete without production/test/fixture/contract/response/format/rollout/admission change; Unicode plan `.10.7.1.0` waits for the clean commit. |
@@ -15181,6 +15201,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.1.2` | `FUTURE-PARITY-BACKLOG.10.7.1.2 - prove Lua Unicode label identity` | Exact ten-label dual-ABI artifact/runtime/selector/diagnostic/trace/loader/primary identity proof and `.10.7.1.3` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.1` | `FUTURE-PARITY-BACKLOG.10.7.1.1 - implement Lua Unicode label routes` | Generated private classifier, five parser roles, first-boundary validator, dual-ABI classifier/native-route proof, registrations, and `.10.7.1.2` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.0` | `FUTURE-PARITY-BACKLOG.10.7.1.0 - freeze Lua Unicode label routes` | Behavior-free generated classifier/five parser roles/four-role validator/diagnostic/identity/isolation plan, exact dual-ABI probes, full matrices/no-drift/canonical/docs/KM/cleanup proof, and `.10.7.1.1` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.0` | `FUTURE-PARITY-BACKLOG.10.7.0 - map Lua semantic authorities` | Behavior-free exact shared authority/Unicode/trust-route audit, `.1-.7` split, full dual-ABI/matrix/no-drift/canonical/docs/KM/cleanup proof, and `.10.7.1.0` handoff. |
@@ -15418,6 +15439,18 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-25`: Exact identity `.10.7.1.2` adds one 359-assertion suite run unchanged on PUC Lua and LuaJIT.
+  Ten unique byte strings from all 9 positive/2 distinct fixtures retain exact parsed/reconstructed AST, compiled
+  order/map/JSON, descriptor, plan, loaded, direct-generated, in-process/fresh-emitted, selector, diagnostic,
+  trace, and all-label inline/file primary identity. The normalization-sensitive pair remains two rules; loader
+  paths and host table/userdata identity stay out of portable artifacts. Complete Lua remains `1..177` per ABI,
+  PUC primary 66x2, and corpus 105/105. The Unicode checker and canonical tracked-file gate lock suite topology
+  and dual-ABI registration. Primary 5x2x66, ten Unicode legs, every no-drift ledger, book/KM 698/5,404,
+  memory/task/four doctrines/diff, canonical Rust 84.56s + Dart 1/1 + Julia 416/30.0s + reference primary 66x2 +
+  Phase 0 1,031/649s, and exact 1,518,360-KiB cleanup pass. No production, neutral contract, format, API, semantic,
+  rollout, or admission change; negative/trust-route and adjacent-grammar isolation `.10.7.1.3` follows the clean
+  identity commit.
 
 - `2026-07-25`: Unicode implementation `.10.7.1.1` adds the deterministic private 806-range Lua-5.1 classifier,
   strict UTF-8 scalar/full-label/prefix operations, exactly five parser routes, whole-edge and third-colon guards,

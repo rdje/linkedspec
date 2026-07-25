@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.2` — identity proof must cross a fresh selected-ABI process): An
+  in-process emitted-module test proves serialization and reconstruction, but it can still inherit the host that
+  loaded the test suite. Lua's shared source tree supports two runtime envelopes, so exact portability also needs a
+  fresh child launched through the runner-selected `LINKEDSPEC_LUA_TEST_RUNTIME`, with only the intended package
+  paths inherited. The same 359-assertion suite now exercises both PUC Lua and LuaJIT this way and requires empty
+  child stderr.
+
+  Exact Unicode identity is more than successful lookup. The proof compares the original UTF-8 byte strings at
+  every order/map/descriptor/plan/loader/runtime/selector/diagnostic/trace/primary boundary, requires the
+  normalization-sensitive pairs to occupy different keys and different rule objects, and scans portable artifacts
+  for forbidden paths plus table/userdata identity. That combination catches normalization, lossy JSON, aliasing,
+  host leakage, and ABI substitution independently. Existing production routes already met the contract, so this
+  leaf adds proof and gate topology without a second identity owner or a production change.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.1` — prefix scanning needs a whole-edge boundary): A generated
   `XID_Continue` prefix scanner must intentionally stop before punctuation, but an edge parser cannot treat every
   such stop as a valid token boundary. Without a second boundary check, `-> Top-Rule` or `=> Top😀` would silently
