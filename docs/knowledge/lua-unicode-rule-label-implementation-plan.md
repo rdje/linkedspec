@@ -16,9 +16,9 @@ answers:
   - "how are Lua Unicode rule-label tests registered on both ABIs"
   - "what is the Lua Unicode rule-label implementation dependency order"
 date: 2026-07-25
-status: classifier/routes, exact identity, body-fluent repair, and exhaustive negative/isolation complete; recomposition active at FUTURE-PARITY-BACKLOG.10.7.1.4
+status: composition-closed through FUTURE-PARITY-BACKLOG.10.7.1.4; source/outcome planning .10.7.2.0 is next
 tags: [lua, luajit, unicode, rule-labels, parser, validation, generation, testing]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.1.3.2 derives all eight neutral negatives and proves source, four-role/two-trust-path validation, artifact, loaded/generated/emitted/fresh runtime, selector, diagnostic, trace, loader, primary, host-denial, and adjacent-grammar isolation with 1542 assertions on PUC Lua and LuaJIT. Complete Lua passes 1706 classifier, 179 routes, 359 identity, 166 body-fluent, and 1..177 package assertions per ABI plus PUC primary 66x2/corpus 105. Primary 5x2x66, every Unicode leg, and canonical Rust 82.39s/Dart 1/1/Julia 416 in 28.5s/reference 66x2/Phase 0 1031 in 654s pass; semantic governance remains 6/20/89 at 5/9 + 4/6."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.1.4 recomposes every committed owner unchanged: per ABI classifier 1706, routes 179, identity 359, body-fluent 166, negative/isolation 1542, and package 1..177; PUC primary 66x2/corpus 105; primary 5x2x66; Rust Unicode 5+3, Dart 28, Julia 3831; canonical Rust 81.21s/Dart 1/1/Julia 416 in 28.8s/reference 66x2/Phase 0 1031. Parent .10.7.1 closes without production, contract, format, API, semantic, rollout, or admission movement; governance remains 6/20/89 at 5/9 + 4/6."
 reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels|fresh emitted host status|adjacent grammar' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua lua/test/unicode_rule_label_identity_routes_test.lua lua/test/unicode_rule_label_negative_isolation_test.lua"
 ---
 
@@ -86,6 +86,7 @@ seven measured suffix classes become exact raw tails and validation failures; va
 empty/dollar/no-prefix and newline controls, comments, lifecycle, regex, and action continuations remain intact at
 166 assertions per ABI. Exhaustive `.3.2` now derives all eight neutral negatives and proves every four-role/two-
 trust-path validation, artifact, loaded/generated/emitted/fresh runtime, selector, diagnostic, trace, loader,
-primary, host-denial, and adjacent-grammar boundary at 1,542 assertions per ABI. Parent `.3` is closed; `.4` owns
-only no-change recomposition. See [[lua-body-fluent-suffix-loss]] and
+primary, host-denial, and adjacent-grammar boundary at 1,542 assertions per ABI. Parent `.3` is closed; `.4` now
+recomposes every committed owner unchanged and closes `.10.7.1`. Source/outcome planning `.10.7.2.0` follows. See
+[[lua-body-fluent-suffix-loss]] and
 [[lua-unicode-rule-label-negative-isolation]].

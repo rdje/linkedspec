@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.4` — composition closeout is an ownership proof): A no-change leaf
+  is not a ceremonial rerun. It proves that the generated classifier, parser/validator routes, exact-identity
+  routes, whole-token repair, and exhaustive negative/isolation suite remain independently committed authorities
+  that compose without a replacement owner. Re-running each focused count on both ABIs before the complete Lua,
+  cross-backend primary, Unicode, ledger, and canonical gates makes omission or accidental substitution visible.
+
+  The prerequisite can therefore close without advancing semantic rollout. Unicode label acceptance is now a
+  stable native boundary; semantic source retention, mapping, hashing, compiled-or-failed outcomes, projections,
+  queries, and runtime observations remain separate downstream authorities. The next leaf plans only the opaque
+  source/outcome constructor and privacy/error/no-path split, starting from this clean composition boundary.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.2` — negative proof must cross authority boundaries, not merely
   enumerate spellings): The neutral eight-label fixture is only the input vocabulary. Exhaustive rejection requires
   the Cartesian product of four label roles and both external-AST trust paths, followed by evidence that compiled,

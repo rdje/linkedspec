@@ -99,7 +99,8 @@ fluent adapter that discarded a same-line suffix after an ASCII method prefix; `
 remainder and proves exact rejection plus control/valid-route preservation at 166 assertions per ABI. `.3.2`
 derives all eight neutral negatives and proves source, four-role/two-trust-path, artifact, loaded/generated/emitted/
 fresh runtime, selector, diagnostic, trace, loader, primary, host-denial, and adjacent-grammar boundaries at 1,542
-assertions per ABI. Parent `.3` is closed; composed prerequisite closeout remains `.10.7.1.4`. See
+assertions per ABI. Parent `.3` is closed; `.10.7.1.4` recomposes every committed owner unchanged and closes the
+Lua prerequisite. Source/outcome planning `.10.7.2.0` follows. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[julia-unicode-rule-label-preflight]], [[lua-unicode-rule-label-preflight]],
 [[lua-body-fluent-suffix-loss]], [[lua-unicode-rule-label-negative-isolation]],

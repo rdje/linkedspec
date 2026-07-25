@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.4 — close Lua Unicode label parity
+
+Recomposed the complete committed Lua Unicode prerequisite from clean proof commit `f21b6943` without adding a
+replacement implementation, test, fixture, contract, API, or generated format. The generated classifier and five
+parser routes, authoritative AST validation, ten-label exact identity, repaired body-fluent whole-token boundary,
+and exhaustive negative/trust/artifact/runtime/adjacent proof remain the only owners.
+
+PUC Lua and LuaJIT each pass classifier 1,706, routes 179, identity 359, body-fluent 166, negative/isolation 1,542,
+and complete package `1..177`; PUC primary 66x2 and corpus 105/105 pass. The full primary matrix passes 5x2x66.
+Rust Unicode passes 5+3, Dart passes 28, and Julia passes 3,831 assertions. Semantic/Unicode/capability/generated/
+language/public ledgers remain 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0, 246/105+1/122, and
+59/27/0.
+
+Canonical CI passes Rust admission 1/1 in 81.21s, Dart 1/1, Julia 416/416 in 28.8s, reference primary 66x2,
+Phase 0 1,031/1,031, and final exit 0. mdBook, Knowledge Map 700/5,418, memory/task/four doctrines, and diff hygiene
+pass. Exact 1,737,156-KiB cleanup removes only regenerable Rust dependency/incremental state, Dart tool state,
+Python bytecode, and the disposable Julia depot. Parent `.10.7.1` closes without semantic promotion; behavior-free
+source/outcome planning `.10.7.2.0` follows the clean composition commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.2 — prove Lua negative label isolation
 
 Added one exhaustive Lua suite that derives all eight invalid labels from the neutral contract rather than copying

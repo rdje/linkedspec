@@ -49,7 +49,8 @@ immediately after the nonempty-spec check. Positive/distinct identity is complet
 adjacent-grammar proof is complete under `.10.7.1.3.0-.2`; its audit separately found the pre-existing body-
 fluent suffix-loss defect, `.3.1` repairs it by propagating the already returned remainder without widening fluent
 methods, and `.3.2` proves all eight negative labels through every source/trust/artifact/runtime/primary route plus
-adjacent grammars at 1,542 assertions per ABI. Semantic construction now waits only for `.4` recomposition.
+adjacent grammars at 1,542 assertions per ABI. `.4` now recomposes the prerequisite unchanged; semantic construction
+continues with behavior-free source/outcome planning `.10.7.2.0`.
 Related facts:
 [[unicode-rule-label-contract]], [[lua-body-fluent-suffix-loss]],
 [[lua-unicode-rule-label-negative-isolation]],

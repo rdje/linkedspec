@@ -1746,7 +1746,7 @@ runtime, and adjacent-grammar route before `.3` closes. That proof is now comple
 reject across four roles, two AST trust paths, artifact and loaded/generated/emitted/fresh runtime routes,
 selectors, diagnostics, traces, strict loaders, primary commands, and every adjacent grammar at 1,542 assertions
 per ABI. Parent `.3` is closed without production, format, API, semantic, rollout, or admission movement. `.4` is
-active and only recomposes the prerequisite. Opaque strict
+complete and recomposes every committed owner unchanged, closing the Unicode prerequisite. Opaque strict
 source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
 query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
 remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,

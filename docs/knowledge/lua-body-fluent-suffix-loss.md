@@ -34,5 +34,6 @@ returned by `parse_fluent_chain`. The normal body loop materializes an unrecogni
 complete malformed line remains visible and validation fails. The ASCII fluent-method grammar is unchanged.
 Focused proof also locks `_method9`, chained calls, comments, and recognized lifecycle/regex/action continuations.
 `.10.7.1.3.2` now proves the repaired boundary inside the exhaustive negative/trust/artifact/runtime and adjacent-
-grammar suite: 1,542 assertions pass unchanged on both ABIs. No-change `.10.7.1.4` owns prerequisite recomposition.
+grammar suite: 1,542 assertions pass unchanged on both ABIs. No-change `.10.7.1.4` recomposes the prerequisite and
+closes `.10.7.1`; source/outcome planning `.10.7.2.0` follows.
 See [[lua-unicode-rule-label-negative-isolation]].

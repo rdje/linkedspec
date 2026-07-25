@@ -8,14 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Lua exhaustive negative/isolation proof `.10.7.1.3.2` is fully verified;
-  no-change Unicode prerequisite recomposition `.10.7.1.4` is the single next task-tree-first PNT leaf after the
-  clean proof commit.
+- None between committed leaves. Lua Unicode prerequisite `.10.7.1` is composition-closed through `.1.4`;
+  behavior-free source/outcome planning `.10.7.2.0` is the single next task-tree-first PNT leaf after the clean
+  closeout commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.4 — close Lua Unicode label parity**
+  (no-change dual-ABI recomposition; closes `.10.7.1` with this commit).
+
+  **Result:** Every committed classifier/route/identity/body-fluent/negative owner recomposes unchanged from clean
+  `f21b6943`; no replacement production, generated, test, fixture, contract, API, format, semantic, rollout, or
+  admission state is added. Source/outcome planning `.10.7.2.0` becomes active.
+
+  **Proof:** Per ABI classifier 1,706/routes 179/identity 359/body 166/negative 1,542/package `1..177`; PUC primary
+  66x2/corpus 105; primary 5x2x66; Rust Unicode 5+3, Dart 28, Julia 3,831; six exact ledgers; canonical Rust 81.21s
+  + Dart 1/1 + Julia 416/28.8s + reference primary 66x2 + Phase 0 1,031/final exit 0; book/KM 700/5,418,
+  memory/task/four doctrines/diff, and exact 1,737,156-KiB safe cleanup pass.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.2 — prove Lua negative label isolation**
   (exhaustive dual-ABI trust/artifact/runtime/adjacent proof; closes `.10.7.1.3` with this commit).
 

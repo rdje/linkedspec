@@ -255,8 +255,10 @@ It remains malformed as a complete target rather than becoming target `Top` plus
 is a real token boundary: `Top` and a following `Rule` are handled as separate source tokens. Function names,
 parameters/rest parameters, ActionIR variables/calls/helpers, fluent methods, lifecycle words, split/mark
 variables, conditionals, bounded mode, loader names, and regex syntax keep their own narrower grammars. The same
-1,542 assertions pass unchanged on PUC Lua and LuaJIT, closing negative/isolation `.10.7.1.3`; `.10.7.1.4` owns
-only no-change recomposition of the committed Unicode prerequisite.
+1,542 assertions pass unchanged on PUC Lua and LuaJIT, closing negative/isolation `.10.7.1.3`. No-change
+recomposition `.10.7.1.4` reruns every committed owner, complete Lua, the cross-backend primary matrix, all Unicode
+legs, and canonical CI without adding a replacement implementation or test. The Lua Unicode prerequisite is now
+composition-closed; semantic source/outcome planning follows separately.
 
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
