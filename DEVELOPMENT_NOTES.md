@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.0` — strict decoding must precede trusted staging): Lua strings are
+  immutable byte sequences, so one argument can represent both accepted source text and its canonical bytes.
+  That simplicity does not make decoding optional. The current staged function parser executes its trusted bundled
+  grammar before the ordinary spec parser; malformed caller bytes are consequently wrapped as a staged-parser
+  failure. A semantic constructor must run the existing strict UTF-8 decoder first and produce a typed constructor
+  error before any language owner can reinterpret the failure.
+
+  Lua's weak-key technique is also the right privacy boundary, not only an implementation convenience. An empty
+  protected handle makes accepted source, maps, compiler objects, paths, metatable identity, and mutable fields
+  structurally unavailable while allowing idiomatic colon methods. The same pattern can back immutable result
+  records, returning a fresh detached copy only for nested diagnostic fields and plan rows. This avoids treating
+  descriptor/native JSON tables as safe merely because they are serializable.
+
+  The dependency split follows observable authority: `.1` can prove strict input, mapping, hashing, ceilings, and
+  redaction without importing a parser; `.2` can then spend the stable source owner exactly once across staged
+  parse, validation, compile, selection, and plan construction. Recognized native language errors become retained
+  outcomes, while unknown control/invariant errors keep exact identity. This keeps constructor policy, language
+  failure, and later cross-backend diagnostic normalization from collapsing into one ambiguous catch-all.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.4` — composition closeout is an ownership proof): A no-change leaf
   is not a ceremonial rerun. It proves that the generated classifier, parser/validator routes, exact-identity
   routes, whole-token repair, and exhaustive negative/isolation suite remain independently committed authorities

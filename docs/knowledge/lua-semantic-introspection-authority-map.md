@@ -20,7 +20,7 @@ answers:
   - "what Lua 5.1 and Lua 5.4 compatibility risks affect semantic introspection"
   - "what are the Lua semantic introspection implementation leaves"
 date: 2026-07-25
-status: current behavior-free pre-implementation authority map
+status: current authority map; source/outcome plan frozen through FUTURE-PARITY-BACKLOG.10.7.2.0
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories lua/src/linkedspec spec_parser/spec_validator/spec_ast/compiled_spec/staged_parser_registry/action_ast/action_parser/action_contracts/user_function_registry/spec_loader/source_emitter/interpreter/matching/json/trace/init authorities. No semantic module/API or typed observation sink exists. Exact implementation is split into Unicode .1, source/outcome .2, static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
@@ -69,4 +69,5 @@ source/outcome `.2`; private static `.3`; calls/staging/generated `.4`; immutabl
 typed runtime observation `.6`; and one byte-identical ordered dual-ABI admission consumer `.7`. The audit changes
 no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
-[[lua-generated-source-v2-rule-local-cursor]], and [[lua-generated-source-fresh-process-isolation]].
+[[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
+[[lua-semantic-source-outcome-plan]].

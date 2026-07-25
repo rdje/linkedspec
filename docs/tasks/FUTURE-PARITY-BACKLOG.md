@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-25` (Lua Unicode prerequisite `.10.7.1` is composition-closed through `.1.4`; behavior-
-  free source/outcome planning `.10.7.2.0` is active, at unchanged rollout 5/9 and admission 4/6)
+- Last updated: `2026-07-25` (Lua source/outcome planning `.10.7.2.0` freezes the exact constructor/privacy/error/
+  no-path split and passes complete signoff; strict source implementation `.10.7.2.1` is active at unchanged
+  rollout 5/9 and admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10967,7 +10968,8 @@ before implementation.
   `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
-  Status: `active` (2026-07-25; Unicode prerequisite `.10.7.1` closed; source/outcome plan `.10.7.2.0` next)
+  Status: `active` (2026-07-25; Unicode prerequisite `.10.7.1` and source/outcome plan `.10.7.2.0` closed; strict
+    source implementation `.10.7.2.1` active)
   Goal: Implement the Lua semantic index adapter with exact PUC Lua/LuaJIT identity.
   Children: `.10.7.0`, `.10.7.1`, `.10.7.2`, `.10.7.3`, `.10.7.4`, `.10.7.5`, `.10.7.6`, `.10.7.7`
   Depends on: `.10.6`
@@ -11335,7 +11337,8 @@ before implementation.
       behavior-free source/outcome plan `.10.7.2.0` follows from the clean composition commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7.2`
-  Status: `active` (2026-07-25; behavior-free constructor/privacy/source/outcome plan `.0` next)
+  Status: `active` (2026-07-25; behavior-free constructor/privacy/source/outcome plan `.0` complete; strict source
+    implementation `.1` next)
   Goal: Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner.
   Children: `.10.7.2.0`, `.10.7.2.1`, `.10.7.2.2`, `.10.7.2.3`
   Depends on: `.10.7.1`
@@ -11344,13 +11347,98 @@ before implementation.
     path reads, and composition-close identical PUC Lua/LuaJIT behavior before static projection.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.0`
-    Status: `active` (2026-07-25; next after clean Unicode composition closeout)
+    Status: `done` (2026-07-25; behavior-free source/outcome constructor and dependency split frozen)
     Goal: Freeze the Lua source/outcome constructor, privacy, error, no-path, and dependency split before code.
     Depends on: `.10.7.1.4`
+    Acceptance: Retrieve the neutral contract, ADR `0049`, admitted source/outcome precedents, and Lua authority
+      map before inspecting native seams; use Toolbox-first probes on PUC Lua and LuaJIT; freeze one exact public
+      constructor, typed error/value boundary, strict source-map policy, staged compiled-or-failed outcome, path/
+      execution/privacy denial, and `.1-.3` dependency order without changing production or test behavior.
+    Verification: Knowledge Map retrieval fixed ADR `0049`, the neutral source/privacy contract, and the admitted
+      Perl/Rust/Dart/Julia foundations as the authorities before native inspection. One byte-identical disposable
+      probe then ran the existing staged parser, validator, compiler, entry selector, and generated-plan owner on
+      PUC Lua 5.4 and LuaJIT 2.1. Both report graph bytes 128, rules `Top,Child`, entry
+      `Top/first_authored_marker`, and plan `Top/and_acode_seq,Child/rep_acode`; Unicode privacy bytes 13 and
+      `Töp/default`; and calls bytes 135 with function `normalize`, rules `Top,Done`, and two `default` rows.
+      `failed.spec` retains native `bare_edge_target_undefined` / `normalize_edges`; explicit `Missing` retains
+      `entry_rule_not_found` / `select_entry_rule`. A body containing `fail("target must not run")` still parses,
+      validates, compiles, selects, and plans as `Top/default`, proving this pipeline does not execute caller target
+      code. Current malformed byte `0xff` instead reaches the trusted staged grammar and emerges as a wrapped
+      `UserFunctionDefinitionParserException` at input byte 8 on both ABIs, proving semantic construction must
+      reject strict UTF-8 before any language stage.
+
+      Freeze the Lua surface as `linkedspec.semantic_index(source, options)`, where the source is one immutable Lua
+      string and the copied option map has exactly required strict-UTF-8 `logical_name`, required string
+      `source_detail_ceiling` (`none`, `identity`, `span`, or `text`), and optional exact Unicode-17 `entry_rule`.
+      The constructor has no path/loaded-state form. It returns one opaque empty-table handle whose state is held
+      in weak-key package-private storage, whose metatable is protected, whose writes fail, whose iteration reveals
+      nothing, and whose stable redacted string never includes logical identity, source, path, host type, or table
+      address. Constructor/map failures are immutable `SemanticIndexError` values with exact `stage`, `code`,
+      `message`, and detached sorted `fields`; `semantic_index_invalid_source`, `semantic_index_invalid_utf8`,
+      `semantic_index_invalid_option`, `semantic_source_detail_forbidden`, `semantic_source_range_invalid`,
+      `semantic_source_boundary_invalid`, and `semantic_source_needle_invalid` reuse the admitted foundation
+      vocabulary. Recognized language failures become detached failed-compilation outcomes; unrecognized control/
+      invariant errors rethrow unchanged rather than being laundered as user diagnostics.
+
+      Source child `.10.7.2.1` owns only strict input/options, package-private Lua-5.1-compatible arithmetic
+      SHA-256, canonical bytes, scalar boundary vectors, and `source_identity`, `source_span_for_bytes`,
+      `source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact` methods. Public ranges are zero-
+      based half-open UTF-8 bytes/scalars with one-based line/Unicode-scalar columns; LF advances line, CR remains
+      an ordinary scalar; mid-scalar byte boundaries fail. `none` denies identity, `identity` permits only caller
+      name and lengths, `span` adds mapping/lookup, and `text` adds excerpts plus `sha256:` over exact bytes.
+      Returned values are opaque immutable records or fresh detached JSON-compatible copies; source/map/hash
+      implementation and accepted bytes/text never leave.
+
+      Outcome child `.10.7.2.2` then invokes `parse_spec_with_staged_user_function_definitions`, `validate_spec`,
+      `compile_spec(..., {validate_source=false})`, `resolve_entry_rule`, and `build_generated_rule_plan` once. It
+      privately retains the staged `SpecFile`, compiled authority, merged function/rule authored order, selection,
+      and plan. Public methods return only detached snapshot, `{parsed,validated,compiled}` presence, diagnostic,
+      `{label,basis}`, and generated-v2 `{contract_id,format_version,source_identity,rows}` values; `none` denies
+      plan identity. It preserves exact native validation/selection diagnostics and deterministic parse/compile/
+      plan fallbacks without invoking `SpecLoader`, a target parser/action/lifecycle, generated execution, trace,
+      diagnostic output, or semantic observation. Trusted bundled staged-parser execution remains compiler
+      infrastructure, not caller target execution. `.10.7.2.3` owns committed dual-ABI recomposition and parent
+      closure without static records/query, runtime observation, format change, or semantic promotion.
+
+      This leaf changes task/live/book/Knowledge Map material only. It adds no Lua module, API, test, fixture,
+      contract, response, or ledger behavior. Semantic governance remains 6 groups / 20 responses / 89 mutations
+      at rollout 5/9 and native admission 4/6. Strict source implementation `.10.7.2.1` becomes eligible only after
+      this planning leaf is fully gated and committed cleanly.
+
+      Complete signoff passes unchanged: Lua classifier/routes/identity/body/negative are
+      1,706/179/359/166/1,542 per ABI, complete package is `1..177` on both ABIs, and PUC primary 66x2 plus corpus
+      105 pass; the primary matrix is 5x2x66 and the Unicode matrix is 5x2x1. Rust Unicode is 5+3, Dart's four
+      focused Unicode suites are 17 tests, and Julia is 3,831 assertions. Semantic/Unicode/capability/generated/
+      language/public governance remains 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0,
+      246/105+1/122, and 59/27/0. Canonical CI passes Rust admission 1/1 in 82.65s, Dart 1/1, Julia 416/416 in
+      30.3s, reference primary 66x2, Phase 0 1,031/1,031 in 660s, and final exit 0. mdBook, Knowledge Map
+      701/5,432, memory/task/four doctrines, and diff hygiene pass. Conservative cleanup removes only 96,264 KiB
+      of this task's rendered book and disposable Julia depots; reusable Rust and Dart caches remain on the 4-TB
+      SSD.
+    Commit: `FUTURE-PARITY-BACKLOG.10.7.2.0 - freeze Lua semantic source outcome`
+
+    #### Acceptance Checklist
+
+    - [x] **RETRIEVE / PRECEDENTS** — Read the Knowledge Map authority card, neutral source/privacy contract, ADR
+      `0049`, and admitted Perl/Rust/Dart/Julia foundations before native inspection or design.
+    - [x] **TOOLBOX-FIRST DUAL-ABI MEASUREMENT** — Probe exact source sizes, authored/compiled order, entry/plan,
+      native validation/selection failures, malformed UTF-8, and target no-execution through existing Lua owners on
+      both PUC Lua and LuaJIT.
+    - [x] **FREEZE API / PRIVACY / ERRORS** — Record the exact constructor/options/method/value vocabulary, weak-key
+      opaque storage, ceilings, coordinates, portable SHA-256, detached outputs, failure topology, and no-path/
+      no-execution boundary.
+    - [x] **FREEZE DEPENDENCY ORDER** — Keep strict copied source/map/hash `.1`, staged outcome `.2`, and committed
+      composition/parent closeout `.3` separate; static projection, query, observation, and admission remain later.
+    - [x] **NO-DRIFT / DURABLE COMMIT** — Pass unchanged dual-ABI Lua, primary/Unicode/ledger/canonical gates,
+      synchronize every durable layer, safely clean generated artifacts, and commit before activating `.1`.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.1`
-    Status: `pending`
+    Status: `active` (2026-07-25; task-tree owned after the fully gated `.10.7.2.0` planning commit)
     Goal: Implement strict copied source identity, portable SHA-256, and exact private byte/scalar coordinates.
     Depends on: `.10.7.2.0`
+    Acceptance: Add `lua/src/linkedspec/semantic_index.lua` behind the frozen root constructor. Keep this leaf
+      source-only: validate/copy source and options, build private strict byte/scalar maps and arithmetic SHA-256,
+      enforce all four ceilings, return opaque immutable/detached source values, and prove both ABIs without parser,
+      compiler, loader, execution, trace, diagnostic-sink, query, or observation coupling.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.2`
     Status: `pending`
     Goal: Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan.
@@ -14359,8 +14447,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.1.3.2 | `FUTURE-PARITY-BACKLOG.10.7.1.3.2` | `done` | All eight negatives, trust/artifact/runtime routes, and adjacent grammars pass 1,542 assertions on each ABI; `.3` is closed. |
 | 74.6.1.4 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `done` | All committed Unicode owners recompose unchanged; `.10.7.1` closes without semantic promotion. |
 | 74.6.2 | `FUTURE-PARITY-BACKLOG.10.7.2` | `active` | Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner. |
-| 74.6.2.0 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `active` | Freeze the constructor, privacy, error, no-path, and foundation dependency split. |
-| 74.6.2.1 | `FUTURE-PARITY-BACKLOG.10.7.2.1` | `pending` | Add copied source identity, portable SHA-256, and private exact byte/scalar coordinates. |
+| 74.6.2.0 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `done` | Exact weak-key constructor, privacy/error/no-path/no-execution boundary and `.1-.3` dependency split are frozen before code. |
+| 74.6.2.1 | `FUTURE-PARITY-BACKLOG.10.7.2.1` | `active` | Add copied source identity, portable SHA-256, and private exact byte/scalar coordinates. |
 | 74.6.2.2 | `FUTURE-PARITY-BACKLOG.10.7.2.2` | `pending` | Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan. |
 | 74.6.2.3 | `FUTURE-PARITY-BACKLOG.10.7.2.3` | `pending` | Recompose and close the source/outcome foundation without query or promotion. |
 | 74.6.3 | `FUTURE-PARITY-BACKLOG.10.7.3` | `pending` | Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities. |
@@ -15061,6 +15149,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.2.0` | Retrieved ADR `0049`, neutral source/privacy, four admitted foundations, and the Lua authority map; byte-identical PUC Lua/LuaJIT probes fix graph/privacy/calls at 128/13/135 bytes, ordered rules/functions/entry/plan, native failed/missing-selection diagnostics, malformed-UTF-8 predecode, and target no-execution; exact weak-key constructor/source-map/SHA-256/outcome/no-path split; unchanged Lua classifier/routes/identity/body/negative 1,706/179/359/166/1,542 per ABI plus package `1..177`x2, PUC primary 66x2/corpus 105; primary 5x2x66; Unicode matrix 5x2x1, Rust 5+3, Dart 17, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 82.65s, Dart 1/1, Julia 416/416 in 30.3s, reference primary 66x2, Phase 0 1,031/1,031 in 660s, final exit 0; mdBook/KM 701/5,432/memory/task/four doctrines/diff; conservative 96,264-KiB scratch cleanup with reusable caches retained. | PASS. The complete behavior-free source/outcome boundary and `.1-.3` dependency order are frozen without production/test/fixture/contract/API/response/format/rollout/admission change; strict source `.10.7.2.1` is active after this clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.4` | Clean composition from `f21b6943`; no replacement source/test/fixture/contract/format owner; Lua classifier 1,706/routes 179/identity 359/body 166/negative 1,542/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Rust Unicode 5+3, Dart 28, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 81.21s, Dart 1/1, Julia 416/416 in 28.8s, reference primary 66x2, Phase 0 1,031/1,031, final exit 0; mdBook/KM 700/5,418/memory/task/four doctrines/diff; exact 1,737,156-KiB cleanup. | PASS. The committed dual-ABI Unicode prerequisite recomposes without behavior or semantic promotion; parent `.10.7.1` closes and behavior-free source/outcome plan `.10.7.2.0` becomes active. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.3.2` | One contract-derived eight-negative suite across source declaration/action/blind/bare, programmatic/reconstructed trust paths, exact validation JSON, compiled/descriptor/plan, loaded/generated/emitted/fresh hosts, selectors, diagnostics, traces, strict loaders, inline/file primary, and function/parameter/rest/ActionIR/helper/fluent/lifecycle/split/conditional/mode/name/regex isolation; 1,542 assertions per ABI; complete Lua classifier 1,706/routes 179/identity 359/body 166/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Rust 5+3, Dart 28, Julia 3,831 Unicode assertions; unchanged semantic 6/20/89 at 5/9 + 4/6 and five other ledgers; canonical Rust 1/1 in 82.39s, Dart 1/1, Julia 416/416 in 28.5s, reference primary 66x2, Phase 0 1,031/1,031 in 654s; mdBook/KM/memory/task/four doctrines/diff; exact 1,747,748-KiB cleanup. | PASS. Every negative and bypass rejects before portable artifact/runtime use, adjacent grammars remain isolated, the repaired body-fluent whole-token boundary stays exact, parent `.3` closes, and `.4` becomes active without behavior or semantic promotion. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.3.1` | One-line body-adapter propagation of existing `fluent.remainder`; seven exact precomposed/middle-dot/hyphen/space/emoji/colon/slash raw tails; source/call/raw/line and validation type/message/JSON identity; empty/dollar/no-prefix/newline controls; `_method9`, chained calls/arguments, comments, lifecycle, regex, action-edge, and child-regex preservation; 166 assertions on PUC Lua and LuaJIT; checker topology/fixture/valid-route/registration/tracked-file locks; complete Lua classifier 1,706/routes 179/identity 359/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66 plus ten Unicode legs; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 78.47s, Dart 1/1, Julia 416/416 in 27.5s, reference primary 66x2, Phase 0 1,031/1,031 in 615s; mdBook/KM 699/5,410/memory/task/four doctrines/diff; exact 1,520,604-KiB cleanup. | PASS. Malformed body-fluent suffixes stay visible and fail through the existing raw validator while valid routes and the ASCII identifier boundary remain unchanged; exhaustive `.3.2` follows the clean repair commit without semantic promotion. |
@@ -15324,6 +15413,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.2.0` | `FUTURE-PARITY-BACKLOG.10.7.2.0 - freeze Lua semantic source outcome` | Behavior-free opaque constructor/source-map/outcome/no-path plan, identical dual-ABI probes, complete signoff, and strict source `.10.7.2.1` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `FUTURE-PARITY-BACKLOG.10.7.1.4 - close Lua Unicode label parity` | No-change dual-ABI recomposition, full signoff, `.10.7.1` closeout, and `.10.7.2.0` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.3.2` | `FUTURE-PARITY-BACKLOG.10.7.1.3.2 - prove Lua negative label isolation` | Exact 1,542-assertion dual-ABI negative/trust/artifact/runtime/adjacent proof, recurring locks, full signoff, parent `.3` close, and `.4` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.3.1` | `FUTURE-PARITY-BACKLOG.10.7.1.3.1 - preserve Lua body-fluent remainders` | One-line remainder propagation, exact 166-assertion dual-ABI rejection/control/valid-route proof, recurring registration locks, full signoff, and `.3.2` handoff. |

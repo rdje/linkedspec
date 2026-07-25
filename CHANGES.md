@@ -1,5 +1,41 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.0 — freeze Lua semantic source outcome
+
+Frozen the behavior-free PUC Lua/LuaJIT source/outcome foundation before implementation. Knowledge Map retrieval
+fixed ADR `0049`, the neutral source/privacy model, and admitted Perl/Rust/Dart/Julia foundations as precedents.
+The Lua API will be one `linkedspec.semantic_index(source, options)` constructor over a strict source string plus
+required caller logical name and `none`/`identity`/`span`/`text` ceiling, with an optional exact Unicode entry
+selector. There is no path or loaded-state constructor.
+
+The index and returned native values use protected empty tables with weak-key private state, rejected mutation,
+empty iteration, detached nested data, and identity-redacted string forms. `.10.7.2.1` owns only strict source/
+options, exact zero-based half-open byte/scalar mapping, one-based line/scalar columns, source ceilings/accessors,
+and dependency-free Lua-5.1-compatible SHA-256. `.10.7.2.2` then owns one staged parse/validate/compile/select/plan
+pass and detached compiled-or-failed snapshot, authority, diagnostic, entry, and generated-v2 plan values. `.3`
+recomposes both committed owners without projection, query, observation, or promotion.
+
+Toolbox-first disposable probes run byte-identically on PUC Lua 5.4 and LuaJIT 2.1. Graph is 128 bytes with
+`Top,Child`, `Top/first_authored_marker`, and plan `Top/and_acode_seq,Child/rep_acode`; privacy is 13 bytes with
+`Töp/default`; calls is 135 bytes with function `normalize`, rules `Top,Done`, and two `default` rows. Native
+`failed.spec` remains `bare_edge_target_undefined` / `normalize_edges`; missing selection remains
+`entry_rule_not_found` / `select_entry_rule`. Malformed byte `0xff` currently reaches trusted staging and is
+wrapped, so the semantic constructor must reject it first at `decode_source`. A target `fail("target must not
+run")` body compiles and plans without executing.
+
+This leaf changes only task/live/book/Knowledge Map material. It adds no Lua production module, public API, test,
+fixture, response, generated format, or semantic ledger movement. Strict source implementation `.10.7.2.1`
+follows only after complete no-drift/canonical verification and the clean planning commit.
+
+Complete no-drift proof passes unchanged: dual-ABI Lua classifier/routes/identity/body/negative
+1,706/179/359/166/1,542 and package `1..177`, PUC primary 66x2/corpus 105, primary 5x2x66, Unicode matrix 5x2x1,
+Rust Unicode 5+3, Dart focused Unicode 17, and Julia Unicode 3,831. The six governance checks remain exact,
+including semantic 6/20/89 at rollout 5/9 and admission 4/6. Canonical CI passes Rust admission 1/1 in 82.65s,
+Dart 1/1, Julia 416/416 in 30.3s, reference primary 66x2, Phase 0 1,031/1,031 in 660s, and final exit 0. mdBook,
+Knowledge Map 701/5,432, memory/task/four doctrines, and diff hygiene pass. Per the 4-TB SSD policy, cleanup is
+conservative: only 96,264 KiB of rendered-book, Python bytecode, and disposable Julia scratch state is removed; reusable build caches
+remain.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.4 — close Lua Unicode label parity
 
 Recomposed the complete committed Lua Unicode prerequisite from clean proof commit `f21b6943` without adding a

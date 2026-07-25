@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Lua Unicode prerequisite `.10.7.1` is composition-closed through `.1.4`;
-  behavior-free source/outcome planning `.10.7.2.0` is the single next task-tree-first PNT leaf after the clean
-  closeout commit.
+- `FUTURE-PARITY-BACKLOG.10.7.2.1` — implement strict copied Lua source identity, portable SHA-256, and exact
+  private byte/scalar coordinates behind the committed opaque constructor plan. No implementation is in flight at
+  this clean handoff boundary.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.0 — freeze Lua semantic source outcome**
+  (behavior-free constructor/privacy/error/no-path/no-execution plan and `.1-.3` split).
+
+  **Result:** One opaque `linkedspec.semantic_index(source, options)` surface, strict source ceilings/coordinates,
+  package-private portable SHA-256, weak-key privacy, typed constructor/map errors, staged compiled-or-failed
+  outcome, exact native diagnostic/entry/generated-plan values, no path constructor, and no caller target execution
+  are frozen before code. `.1` owns source only, `.2` owns staged outcome, and `.3` owns recomposition. No production
+  module, API, test, fixture, response, format, rollout, or admission row changes in this planning slice.
+
+  **Proof:** Identical PUC Lua/LuaJIT probes lock graph 128 / privacy 13 / calls 135 bytes, authored/compiled order,
+  native failure and missing-selection diagnostics, generated families, malformed UTF-8 predecode need, and target
+  no-execution. Dual-ABI Lua focused/package/primary/corpus, primary 5x2x66, Unicode 5x2x1, all six ledgers, and
+  canonical Rust 1/1 in 82.65s + Dart 1/1 + Julia 416/416 in 30.3s + reference primary 66x2 + Phase 0 1,031 in
+  660s pass. Book/KM 701/5,432, memory/task/four doctrines/diff, and conservative 96,264-KiB scratch cleanup pass;
+  reusable caches remain on the 4-TB SSD.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.4 — close Lua Unicode label parity**
   (no-change dual-ABI recomposition; closes `.10.7.1` with this commit).
 

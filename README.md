@@ -1105,9 +1105,13 @@ content migration exists yet.
   1,031/654s, and exact 1,747,748-KiB cleanup pass. Parent `.3` is closed; no-change recomposition `.10.7.1.4` is
   now complete too: every committed owner passes unchanged, including complete Lua, primary 5x2x66, all ten
   Unicode legs, every ledger, canonical Rust 81.21s + Dart 1/1 + Julia 416/28.8s + reference primary 66x2 + Phase
-  0 1,031, and exact 1,737,156-KiB cleanup. `.10.7.1` is composition-closed; behavior-free source/outcome plan
-  `.10.7.2.0` is next. The separate ASCII fluent-method grammar, public API, formats, rollout, and admission remain
-  unchanged.
+  0 1,031, and exact 1,737,156-KiB cleanup. `.10.7.1` is composition-closed. Behavior-free source/outcome plan
+  `.10.7.2.0` now freezes `linkedspec.semantic_index(source, options)`, weak-key opaque state, strict source
+  ceilings/coordinates, dependency-free SHA-256, typed constructor/map errors, staged compiled-or-failed outcomes,
+  exact native diagnostics/entry/generated-plan authority, no path constructor, and no target execution. Identical
+  PUC Lua/LuaJIT probes lock graph/privacy/calls/failure/malformed-source boundaries before code. Strict source-only
+  implementation `.10.7.2.1` is active after the clean planning commit. The separate ASCII fluent-method grammar, public
+  query, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

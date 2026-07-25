@@ -1736,6 +1736,40 @@ through both inline and file primary commands. The normalization-sensitive pair 
 portable compiled and descriptor artifacts deny loader paths plus Lua table/userdata identity. The suite passes
 359 assertions unchanged on PUC Lua and LuaJIT without changing production source or generated-source format.
 
+Behavior-free source/outcome planning is now complete too; the API described here is frozen but not implemented
+until `.10.7.2.1-.2`. Lua will expose one `linkedspec.semantic_index(source, options)` constructor. `source` is a
+Lua string containing strict UTF-8 bytes, and `options` has exactly required `logical_name`, required
+`source_detail_ceiling` (`none`, `identity`, `span`, or `text`), and optional exact Unicode-17 `entry_rule`. There
+is deliberately no path or loaded-state constructor. The returned index is an empty opaque table backed by
+package-private weak-key storage; its metatable is protected, writes fail, iteration reveals no state, and its
+stable string form omits caller identity, source, paths, host types, and table addresses.
+
+Source leaf `.10.7.2.1` will reject malformed UTF-8 before any staged grammar runs, retain canonical bytes and a
+private scalar-boundary map, and compute `sha256:` identity with dependency-free Lua-5.1-compatible arithmetic.
+It will use zero-based half-open byte/scalar ranges and one-based line/Unicode-scalar columns. `none` denies source
+identity; `identity` permits the caller name and byte/scalar lengths; `span` adds mapping and exact ordered lookup;
+and `text` adds excerpts plus the digest. Planned methods are `source_identity`, `source_span_for_bytes`,
+`source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact`. Returned source values are immutable
+opaque records or fresh detached copies; accepted source and map state are never returned wholesale.
+
+Outcome leaf `.10.7.2.2` will run the existing staged user-function-aware parser, validator, compiler with duplicate
+validation disabled, entry selector, and generated-v2 plan builder once. It will retain those native authorities
+privately and expose only detached snapshot, parsed/validated/compiled presence, diagnostic, entry `{label,basis}`,
+and generated plan `{contract_id,format_version,source_identity,rows}` values. Recognized language failures become
+`failed_compilation` outcomes; constructor/map policy failures remain immutable `SemanticIndexError` values with
+stable stage/code/message/fields. The `none` ceiling also denies generated-plan identity.
+
+Direct PUC Lua and LuaJIT probes agree on the frozen inputs: graph is 128 bytes with entry
+`Top/first_authored_marker` and plan `Top/and_acode_seq,Child/rep_acode`; privacy is 13 bytes with `Töp/default`;
+calls is 135 bytes with function `normalize`, rules `Top,Done`, and two `default` rows. `failed.spec` retains native
+`bare_edge_target_undefined` / `normalize_edges`; a missing selector retains `entry_rule_not_found` /
+`select_entry_rule`. Malformed byte `0xff` currently reaches trusted staging and becomes a wrapped parser error,
+which is why strict semantic decoding must precede language work. A target body that calls
+`fail("target must not run")` still parses, validates, compiles, selects, and plans successfully, proving the
+foundation need not invoke caller target actions or lifecycle code. Trusted bundled staged-parser execution remains
+compiler infrastructure. This planning leaf adds no Lua module, test, runtime behavior, query surface, response,
+format, rollout, or admission state.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
