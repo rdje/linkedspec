@@ -16,7 +16,7 @@ answers:
   - "where will the generated Lua Unicode rule-label classifier live"
   - "must the Lua Unicode classifier work on PUC Lua and LuaJIT"
 date: 2026-07-25
-status: historical pre-implementation measurement; classifier/parser/validator and positive identity superseded by FUTURE-PARITY-BACKLOG.10.7.1.1-.2
+status: historical pre-implementation measurement; all classifier/parser/validator, identity, and negative/isolation gaps are superseded by FUTURE-PARITY-BACKLOG.10.7.1.1-.3
 tags: [lua, luajit, unicode, rule-labels, parser, validation, semantic-introspection]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.0 proves spec_parser.lua uses ASCII is_word_byte/read_word plus [%w_] header/body scans, while spec_validator.lua has no complete rule-label predicate. FUTURE-PARITY-BACKLOG.10.7.1.0 reruns one byte-identical disposable probe on separately built PUC Lua and LuaJIT adapters. Each reports 149,221 required scalars, 63 admitted, 149,158 missing, and 3/9 source positives. Source Top::: /x/ parses a Top header with rest ': /x/' before validation rejects raw syntax. Required A·B, forbidden Top-Rule, and forbidden Top+emoji pass all four declaration/action/blind/bare roles through both programmatic and SpecFile JSON-reconstructed validation/compilation: 24/24 combinations per ABI, with valid unindexed blind shapes."
 reverify: "python3 tools/check_unicode_rule_label_contract.py; rg -n 'is_word_byte|read_word|check_at_least_one_rule|check_duplicate_rule_labels|check_edge_targets' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua; bash tools/run_lua_local.sh"
@@ -46,10 +46,11 @@ Leaves `.10.7.1.1-.2` subsequently generated the internal Lua-5.1-compatible UTF
 search classifier, complete-label predicate, and byte-offset prefix scanner from the pinned neutral owner. They
 replaced only the five label-bearing declaration/body/action/blind/bare routes and added validator coverage
 immediately after the nonempty-spec check. Positive/distinct identity is complete. Negative/trust-route and
-adjacent-grammar proof now continues under `.10.7.1.3.0-.2`; its audit separately found the pre-existing body-
-fluent suffix-loss defect, and `.3.1` repairs it by propagating the already returned remainder without widening
-fluent methods. Exhaustive `.3.2` remains active. Semantic construction still waits for `.3` proof and `.4`
-recomposition.
+adjacent-grammar proof is complete under `.10.7.1.3.0-.2`; its audit separately found the pre-existing body-
+fluent suffix-loss defect, `.3.1` repairs it by propagating the already returned remainder without widening fluent
+methods, and `.3.2` proves all eight negative labels through every source/trust/artifact/runtime/primary route plus
+adjacent grammars at 1,542 assertions per ABI. Semantic construction now waits only for `.4` recomposition.
 Related facts:
 [[unicode-rule-label-contract]], [[lua-body-fluent-suffix-loss]],
+[[lua-unicode-rule-label-negative-isolation]],
 [[lua-semantic-introspection-authority-map]], and [[lua-unicode-rule-label-implementation-plan]].

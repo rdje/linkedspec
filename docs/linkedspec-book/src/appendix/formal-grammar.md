@@ -235,8 +235,28 @@ then reports `rule 'Root': unrecognized body syntax at line 2: öp()`. The same 
 hyphen, space, emoji, colon, or slash suffixes after `.Top`. Valid ASCII `_method9`, multiple dotted calls,
 empty/dollar/no-prefix and newline controls, comments, and recognized same-line lifecycle, regex, and action-edge
 continuations keep their prior grammar. One 166-assertion suite proves those rejection and preservation boundaries
-unchanged on PUC Lua and LuaJIT. The subsequent exhaustive proof still owns every negative trust and adjacent-
-identifier route.
+unchanged on PUC Lua and LuaJIT.
+
+The exhaustive proof is now complete. It reads all eight invalid labels from the neutral contract and applies them
+to declaration, action, blind, and bare roles through both programmatic and JSON-reconstructed ASTs. Every case
+fails with the exact portable `invalid_rule_label` diagnostic before compile, descriptor, or generated-plan
+construction. Source parsing, loaded/reconstructed/generated execution, in-process and fresh emitted modules,
+selectors, diagnostics, traces, strict loaders, and inline/file primary commands preserve the same rejection.
+Portable evidence contains no resolved path, Lua table address, or userdata spelling.
+
+For example, neither a valid prefix nor a transport boundary rescues this invalid edge:
+
+```spec
+Root::
+ /x/ -> Top-Rule
+```
+
+It remains malformed as a complete target rather than becoming target `Top` plus a suffix. By contrast, a newline
+is a real token boundary: `Top` and a following `Rule` are handled as separate source tokens. Function names,
+parameters/rest parameters, ActionIR variables/calls/helpers, fluent methods, lifecycle words, split/mark
+variables, conditionals, bounded mode, loader names, and regex syntax keep their own narrower grammars. The same
+1,542 assertions pass unchanged on PUC Lua and LuaJIT, closing negative/isolation `.10.7.1.3`; `.10.7.1.4` owns
+only no-change recomposition of the committed Unicode prerequisite.
 
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid

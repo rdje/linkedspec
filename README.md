@@ -1097,8 +1097,13 @@ content migration exists yet.
   remainder, so all seven measured non-ASCII/punctuation suffixes remain exact raw tails and fail validation.
   Empty/dollar/no-prefix and newline controls also retain prior raw ownership. Valid `_method9`, chained methods,
   comments, and lifecycle/regex/action continuations remain intact at 166 assertions on both PUC Lua and LuaJIT.
-  Exhaustive negative/trust/isolation proof `.3.2` is next; the separate
-  ASCII fluent-method grammar remains unchanged.
+  Exhaustive `.3.2` now derives all eight neutral negatives and proves exact rejection across source and both AST
+  trust paths, artifacts, generated/emitted/fresh runtimes, selectors, diagnostics, traces, loaders, and inline/file
+  primary commands while isolating every adjacent identifier grammar. The same 1,542 assertions pass per ABI;
+  complete Lua stays `1..177`x2 with classifier 1,706/routes 179/identity 359/body 166. Primary 5x2x66, all Unicode
+  legs, unchanged ledgers, canonical Rust 82.39s + Dart 1/1 + Julia 416/28.5s + reference primary 66x2 + Phase 0
+  1,031/654s, and exact 1,747,748-KiB cleanup pass. Parent `.3` is closed; no-change recomposition `.10.7.1.4` is
+  next. The separate ASCII fluent-method grammar, public API, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

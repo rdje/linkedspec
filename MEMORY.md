@@ -4,8 +4,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.1.3.1` — exact Lua body-fluent remainder repair.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.1.3.1 - preserve Lua body-fluent remainders` (this closeout commit).
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.1.3.2` — exhaustive Lua negative-label isolation proof.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.1.3.2 - prove Lua negative label isolation` (this closeout commit).
 - current_semantic_introspection: the neutral model/query oracle owns 6 groups, 6 immutable snapshots, 20 digest-
   locked responses, exact policy/paging/budget/error behavior, and 89 rejected mutations. Perl/Rust/Dart/Julia
   each have one ordered exact 12-role consumer; rollout is 5/9 and native admission 4/6. Lua dual-ABI is next.
@@ -16,28 +16,28 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   plan/public-helper, fresh-emitted, isolated-emitted, native-traced, and generated-traced routes. Its twelve roles
   prove all 20 hashes, privacy/pages/budgets/errors/explain, detached request/response isolation, no-execution, and
   host/path/type/AST/ActionIR/observation/generated-source denial. Focused 416/416 and all semantic 1,753 pass.
-- current_lua_unicode_plan: `.10.7.1.1-.2` complete generated classifier/routes and ten-label exact identity at 359
-  assertions per ABI. `.10.7.1.3.0` isolates a pre-existing body-fluent suffix-loss defect; `.3.1` repairs only the
-  adapter by forwarding `parse_fluent_chain`'s existing remainder. Seven measured suffixes now become exact raw
-  validation failures while no-prefix/newline controls and valid ASCII method/body routes remain intact at 166
-  assertions per ABI. `.3.2` is active for exhaustive negative/trust/artifact/runtime and adjacent-grammar proof.
+- current_lua_unicode_plan: `.10.7.1.1-.3` complete the generated classifier/routes, ten-label exact identity,
+  body-fluent whole-token repair, and exhaustive negative/isolation proof. All eight negatives reject across four
+  roles, two trust paths, artifact/runtime/selector/diagnostic/trace/loader/primary routes, and adjacent grammars at
+  1,542 assertions per ABI. `.10.7.1.4` is active for no-change prerequisite recomposition.
 - current_rule_label_contract: ADR `0051` pins nonempty Unicode 17 `XID_Continue` at every position with exact
   identity and strict UTF-8. One generated class pins 806 ranges across all 12 grammar sites and five backends.
   All 9 positives/2 distinct pairs preserve identity through every route; all 8 negatives fail every trust role.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54; its
   checker-owned closed next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- current_signoff: Lua classifier/routes/identity/body 1,706/179/359/166 per ABI; complete Lua 1..177x2 and PUC
+- current_signoff: Lua classifier/routes/identity/body/negative 1,706/179/359/166/1,542 per ABI; complete Lua
+  1..177x2 and PUC
   primary 66x2/corpus 105; primary 5x2x66 + ten Unicode legs; semantic 6/20/89 at 5/9 + 4/6;
   Unicode 806/9/8/2; capability/generated/language/public 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0;
-  KM 699/5,410; mdBook; canonical Rust 78.47s + Dart 1/1 + Julia 416/27.5s + reference primary 66x2 + Phase 0
-  1,031/615s; cleanup 1,520,604 KiB.
+  KM 700/5,418; mdBook; canonical Rust 82.39s + Dart 1/1 + Julia 416/28.5s + reference primary 66x2 + Phase 0
+  1,031/654s; cleanup 1,747,748 KiB.
 - latest_bootstrap_read: 2026-07-25 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 8/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 9/300 after this commit; never push per commit.
 - storage: GitHub projects are on the 4-TB SSD under `/Volumes/SSD/Documents/github`; retain required safe cleanup.
 - environment: use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical; stack a writable Julia depot.
 - deferred: generated parser+stimuli `.8.1`; inter-match gap/named-slot `.1-.7`; inspector `.13.1`; authoring
   `.14`/`.15`; marker repair `.22`; book drift `.23`; parenthesis-free conditions; lexical capture if justified.
 - blockers: none. in_flight_uncommitted: none after this closeout commit. next_action: from the clean boundary,
-  prove exhaustive negative/trust/artifact/runtime and adjacent-grammar isolation in `.10.7.1.3.2`; do not push.
+  recompose and close the dual-ABI Unicode prerequisite in `.10.7.1.4`; do not push.

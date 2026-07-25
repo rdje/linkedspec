@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Lua body-fluent remainder repair `.10.7.1.3.1` is fully verified; exhaustive
-  negative/trust/artifact/runtime and adjacent-grammar proof `.10.7.1.3.2` is the single next task-tree-first PNT
-  leaf after the clean repair commit.
+- None between committed leaves. Lua exhaustive negative/isolation proof `.10.7.1.3.2` is fully verified;
+  no-change Unicode prerequisite recomposition `.10.7.1.4` is the single next task-tree-first PNT leaf after the
+  clean proof commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.2 — prove Lua negative label isolation**
+  (exhaustive dual-ABI trust/artifact/runtime/adjacent proof; closes `.10.7.1.3` with this commit).
+
+  **Result:** One suite derives all eight neutral negatives and rejects declaration/action/blind/bare source and
+  both external-AST trust paths with exact validation JSON. Compiled/descriptor/plan, loaded/generated/emitted/
+  fresh hosts, selectors, diagnostics, traces, strict loaders, primary commands, path/host denial, and every
+  adjacent grammar remain exact. No production, contract, format, API, semantic, rollout, or admission state moves.
+
+  **Proof:** The same 1,542 assertions pass per ABI. Complete Lua passes classifier 1,706/routes 179/identity 359/
+  body 166/package `1..177`x2 plus PUC primary 66x2/corpus 105. Primary 5x2x66, all Unicode legs, six ledgers,
+  canonical Rust 82.39s + Dart 1/1 + Julia 416/28.5s + reference primary 66x2 + Phase 0 1,031/654s, book/KM
+  700/5,418, memory/task/four doctrines/diff, and exact 1,747,748-KiB safe cleanup pass. No-change `.1.4` follows.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.1 — preserve Lua body-fluent remainders**
   (one-seam parser repair and exact dual-ABI preservation proof; closes with this commit).
 

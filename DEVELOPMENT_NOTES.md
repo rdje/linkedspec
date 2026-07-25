@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.2` — negative proof must cross authority boundaries, not merely
+  enumerate spellings): The neutral eight-label fixture is only the input vocabulary. Exhaustive rejection requires
+  the Cartesian product of four label roles and both external-AST trust paths, followed by evidence that compiled,
+  descriptor, plan, loading, generated/emitted/fresh-host, selector, diagnostic, trace, loader, and primary routes
+  cannot revive or launder an invalid identity. The Lua suite derives fixture values directly and checks the exact
+  portable diagnostic at the first authoritative boundary, so fixture drift or validator reordering cannot hide.
+
+  Adjacent-grammar isolation is a separate obligation. A rule-label scanner may be correct while a generic word,
+  fluent, lifecycle, conditional, mode, loader-name, or regex parser has widened accidentally—or, as `.3.0` found,
+  while an adapter discards a subordinate parser's remainder. Positive controls for each owner and exact malformed
+  controls for no-prefix/newline/body-fluent routes make those boundaries independently observable. Running one
+  byte-identical suite under both PUC Lua and LuaJIT additionally proves that Lua-5.1 compatibility is behavioral,
+  not just syntactic.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.1` — preserve subordinate-parser output instead of rescanning): The
   body-fluent adapter already had the complete structured result from `parse_fluent_chain`: ordered calls and an
   unconsumed remainder. Its defect came from reconstructing only a source prefix and replacing the remainder with

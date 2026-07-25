@@ -25,7 +25,7 @@ answers:
 date: 2026-07-25
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, julia, lua, generated-data, validation, portability]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1.2; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; lua/src/linkedspec/unicode_rule_label.lua; lua/test/unicode_rule_label_identity_routes_test.lua; docs/knowledge/lua-unicode-rule-label-implementation-plan.md
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1.3; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; lua/src/linkedspec/unicode_rule_label.lua; lua/test/unicode_rule_label_identity_routes_test.lua; lua/test/unicode_rule_label_negative_isolation_test.lua; docs/knowledge/lua-unicode-rule-label-implementation-plan.md
 reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; cd dart && dart test test/unicode_rule_label_classifier_test.dart test/unicode_rule_label_routes_test.dart test/unicode_rule_label_identity_routes_test.dart test/unicode_rule_label_negative_isolation_test.dart test/self_hosted_unicode_rule_label_test.dart test/runtime_matching_test.dart && cd ..; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; CARGO_TARGET_DIR=/private/tmp/linkedspec-unicode-label-reverify cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
@@ -93,13 +93,15 @@ table/userdata identity. All 359 assertions pass unchanged on both ABIs.
 This prerequisite removes the semantic privacy fixture's former `Töp` blocker without independently advancing
 semantic rollout. Perl accepts the strict-decoded fixture route. Rust, Dart, and Julia native parsing/validation,
 positive/distinct downstream identity, negative/identifier isolation, and composed signoff are aligned and closed.
-PUC Lua and LuaJIT now align the generated classifier, parser/validator trust boundary, and exact positive/distinct
-downstream identity. Exhaustive negative/trust-route rejection and adjacent-identifier isolation are split under
-`.10.7.1.3.0-.2`: the behavior-free audit found a pre-existing body-fluent adapter that discarded a same-line
-suffix after an ASCII method prefix. `.3.1` now propagates that existing remainder and proves exact rejection plus
-control/valid-route preservation at 166 assertions per ABI; `.3.2` owns the exhaustive proof and parent closeout.
-Composed prerequisite closeout remains `.10.7.1.4`. See
+PUC Lua and LuaJIT now align the generated classifier, parser/validator trust boundary, exact positive/distinct
+downstream identity, and exhaustive negative/isolation proof. The `.10.7.1.3.0` audit found a pre-existing body-
+fluent adapter that discarded a same-line suffix after an ASCII method prefix; `.3.1` propagates that existing
+remainder and proves exact rejection plus control/valid-route preservation at 166 assertions per ABI. `.3.2`
+derives all eight neutral negatives and proves source, four-role/two-trust-path, artifact, loaded/generated/emitted/
+fresh runtime, selector, diagnostic, trace, loader, primary, host-denial, and adjacent-grammar boundaries at 1,542
+assertions per ABI. Parent `.3` is closed; composed prerequisite closeout remains `.10.7.1.4`. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[julia-unicode-rule-label-preflight]], [[lua-unicode-rule-label-preflight]],
-[[lua-body-fluent-suffix-loss]], [[primary-cli-strict-utf8-text-contract]], and
+[[lua-body-fluent-suffix-loss]], [[lua-unicode-rule-label-negative-isolation]],
+[[primary-cli-strict-utf8-text-contract]], and
 [[rust-native-spec-resolution]].

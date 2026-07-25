@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.2 — prove Lua negative label isolation
+
+Added one exhaustive Lua suite that derives all eight invalid labels from the neutral contract rather than copying
+fixture values. It proves declaration, action, blind, and bare source behavior plus programmatic and JSON-
+reconstructed AST validation with exact portable error JSON. Compiled, descriptor, generated-plan, loaded,
+generated, emitted, fresh-host, selector, diagnostic, trace, strict-loader, and inline/file primary paths all
+reject before an invalid identity can become usable or leak host/path state.
+
+Independent controls keep function names, parameters and rest parameters, ActionIR variables/calls/helpers, fluent
+methods, lifecycle words, split/mark variables, conditionals, bounded mode, loader names, and regex syntax on their
+existing grammars. Whole-token, no-prefix, newline, malformed body-fluent, lifecycle, and mode cases retain exact
+source ownership. The suite runs unchanged on PUC Lua and LuaJIT and passes 1,542 assertions per ABI. The contract
+checker locks all eight fixture derivations, four roles, two trust paths, five artifact operations, host routes,
+isolation markers, runner order, and canonical tracked-file registration.
+
+Complete Lua remains `1..177` per ABI with classifier 1,706, routes 179, identity 359, body-fluent 166, PUC primary
+66x2, and corpus 105/105. Primary 5x2x66, Rust Unicode 5+3, Dart Unicode 28, Julia Unicode 3,831, and all six
+governance ledgers pass. Canonical CI passes Rust admission 1/1 in 82.39s, Dart 1/1, Julia 416/416 in 28.5s,
+reference primary 66x2, and Phase 0 1,031/1,031 in 654s. No production source, neutral fixture/contract, generated
+format, public API, semantic response, rollout, or admission row changes. mdBook, Knowledge Map, memory/task/four
+doctrines, and diff hygiene pass. Exact 1,747,748-KiB cleanup removes only regenerable Rust dependency/incremental
+state, Dart tool state, Python bytecode, and the disposable Julia depot. Parent `.10.7.1.3` closes; no-change
+recomposition `.10.7.1.4` follows the clean proof commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.1 — preserve Lua body-fluent remainders
 
 Replaced the body-fluent adapter's hardcoded empty remainder with the unconsumed remainder already returned by

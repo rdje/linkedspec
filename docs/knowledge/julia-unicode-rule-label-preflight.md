@@ -32,7 +32,7 @@ date: 2026-07-22
 status: current
 tags: [julia, unicode, rule-labels, parser, validation, generated-source, semantic-introspection]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.1.0-.4; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; julia/src/spec/UnicodeRuleLabel.jl; julia/src/spec/Parser.jl; julia/src/spec/Validator.jl; julia/test/unicode_rule_label_classifier_test.jl; julia/test/unicode_rule_label_routes_test.jl; julia/test/unicode_rule_label_identity_routes_test.jl; julia/test/unicode_rule_label_negative_isolation_test.jl
-reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\"); include(\"julia/test/unicode_rule_label_negative_isolation_test.jl\")'"
+reverify: "python3 tools/check_unicode_rule_label_contract.py; /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test; using LinkedSpecJulia; using JSON3; const REPO_ROOT = pwd(); include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\"); include(\"julia/test/unicode_rule_label_negative_isolation_test.jl\")'"
 ---
 
 Julia now implements the parser/validator core of ADR `0051` with one generated pinned-data authority. Before

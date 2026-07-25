@@ -1742,8 +1742,11 @@ Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluen
 unconsumed remainder. Narrow `.3.1` now propagates that existing remainder, so seven measured suffix classes become
 exact raw validation failures while no-prefix/newline controls, valid ASCII methods, and recognized body
 continuations remain intact at 166 assertions per ABI. Exhaustive `.3.2` proves every negative, trust, artifact/
-runtime, and adjacent-grammar route before `.3` closes. `.4` then recomposes the prerequisite.
-Opaque strict
+runtime, and adjacent-grammar route before `.3` closes. That proof is now complete: all eight neutral negatives
+reject across four roles, two AST trust paths, artifact and loaded/generated/emitted/fresh runtime routes,
+selectors, diagnostics, traces, strict loaders, primary commands, and every adjacent grammar at 1,542 assertions
+per ABI. Parent `.3` is closed without production, format, API, semantic, rollout, or admission movement. `.4` is
+active and only recomposes the prerequisite. Opaque strict
 source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
 query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
 remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,

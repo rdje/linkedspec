@@ -78,6 +78,9 @@ LUA_IDENTITY_ROUTES_TEST_PATH = (
     ROOT / "lua" / "test" / "unicode_rule_label_identity_routes_test.lua"
 )
 LUA_BODY_FLUENT_TEST_PATH = ROOT / "lua" / "test" / "body_fluent_whole_token_test.lua"
+LUA_NEGATIVE_ISOLATION_TEST_PATH = (
+    ROOT / "lua" / "test" / "unicode_rule_label_negative_isolation_test.lua"
+)
 LUA_TEST_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -156,6 +159,8 @@ def main() -> None:
         LUA_CLASSIFIER_TEST_PATH,
         LUA_NATIVE_ROUTES_TEST_PATH,
         LUA_IDENTITY_ROUTES_TEST_PATH,
+        LUA_BODY_FLUENT_TEST_PATH,
+        LUA_NEGATIVE_ISOLATION_TEST_PATH,
         LUA_TEST_DRIVER_PATH,
         MATRIX_DRIVER_PATH,
         CI_PATH,
@@ -847,12 +852,37 @@ def main() -> None:
     ):
         if marker not in lua_body_fluent_test:
             fail(f"Lua body-fluent whole-token proof missing: {marker}")
+    lua_negative_isolation_test = LUA_NEGATIVE_ISOLATION_TEST_PATH.read_text(
+        encoding="utf-8"
+    )
+    for marker in (
+        "every negative label fails every external AST trust and artifact route",
+        "source no-prefix and newline routes reject complete invalid tokens",
+        "selectors diagnostics and traces preserve every exact invalid identity",
+        "emitted fresh-host selectors loaders and primary commands preserve rejection",
+        "unrelated identifier grammars retain their existing boundaries",
+        "contract.negative_fixtures",
+        "reconstruct(route.spec)",
+        "emit_lua_source_v2",
+        "fresh emitted negative host status",
+        "load_and_compile_spec",
+        "run_primary_cli",
+        "parse_action_expression",
+        '"valid_variadic"',
+        '"@mark(Töp)"',
+        '"-? Töp"',
+        '"Top::OR{2,Töp}\\n /x/\\n"',
+        '"Grammaire_é"',
+    ):
+        if marker not in lua_negative_isolation_test:
+            fail(f"Lua negative/isolation proof missing: {marker}")
     lua_test_driver = LUA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
     for marker in (
         "lua/test/unicode_rule_label_classifier_test.lua",
         "lua/test/unicode_rule_label_routes_test.lua",
         "lua/test/unicode_rule_label_identity_routes_test.lua",
         "lua/test/body_fluent_whole_token_test.lua",
+        "lua/test/unicode_rule_label_negative_isolation_test.lua",
     ):
         if lua_test_driver.count(marker) != 2:
             fail(f"Lua dual-ABI test registration missing or duplicated: {marker}")
@@ -882,6 +912,7 @@ def main() -> None:
         "require_tracked_file lua/test/unicode_rule_label_routes_test.lua",
         "require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua",
         "require_tracked_file lua/test/body_fluent_whole_token_test.lua",
+        "require_tracked_file lua/test/unicode_rule_label_negative_isolation_test.lua",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",
