@@ -1685,58 +1685,59 @@ local CI also passes all doctrine/contract gates, Rust semantic admission 1/1 in
 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The closeout removes only 1,632,888 KiB of
 regenerable build/depot artifacts and preserves source plus reusable package caches.
 
-## Current Lua authority and Unicode preflight
+## Current Lua authority and Unicode foundation
 
-PUC Lua and LuaJIT remain pending, and completed behavior-free audit `.10.7.0` fixes their implementation boundary
-before semantic code. The shared Lua source already has strict UTF-8 parsing, typed source and ActionIR ASTs, staged
-function payload/job/result sidecars, ordered compiled state, portable diagnostics, generated-source v2, loaded
+PUC Lua and LuaJIT remain pending for semantic introspection, and completed behavior-free audit `.10.7.0` fixes
+their implementation boundary before semantic code. The shared Lua source already has strict UTF-8 parsing, typed
+source and ActionIR ASTs, staged function payload/job/result sidecars, ordered compiled state, portable diagnostics,
+generated-source v2, loaded
 and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
 JSON. It does not yet expose a semantic index, exact source map, package SHA-256, private normalized projection,
 query evaluator, or typed semantic observation sink.
 
-The Unicode prerequisite is measurable. Lua's rule-label scanner accepts only the 63 ASCII word scalars, so it
-passes 3/9 neutral positive labels and omits 149,158 scalars required by pinned Unicode 17 `XID_Continue`. In
-particular, the accepted privacy fixture cannot yet be parsed:
+The first Unicode implementation leaf is now complete. Generator
+`unicode_case/generate_unicode_rule_label_contract.py` emits private
+`lua/src/linkedspec/unicode_rule_label.lua` from the pinned Unicode 17 contract: exact metadata, all 806 range
+pairs, strict Lua-5.1-compatible UTF-8 decoding, binary-search scalar membership, complete-label validation, and
+longest-prefix scanning from one-based byte positions. The module requires no `utf8` library, bitwise syntax,
+integer subtype, optional dependency, locale class, or table iteration order, and root `linkedspec` exports none of
+its classifier surface.
+
+The accepted privacy fixture now parses and validates on both Lua ABIs:
 
 ```lua
 local linkedspec = require("linkedspec")
-local ok = pcall(linkedspec.parse_spec, "Töp:\n /é/\n")
-assert(ok == false) -- current pre-.10.7.1 boundary
+local spec = linkedspec.parse_spec("Töp:\n /é/\n")
+assert(spec.rules[1].header.label == "Töp")
+assert(linkedspec.validate_spec(spec) == nil)
 ```
 
-Validation is a separate gap: programmatic and JSON-reconstructed declarations plus action, blind, and bare
-targets can carry required Unicode or forbidden hyphen/emoji labels into compiled artifacts because no complete
-label predicate runs after AST construction. Exact dual-ABI probes confirm 24/24 bypass combinations per ABI for
-required `A·B`, forbidden `Top-Rule`, and forbidden `Top😀` across those four roles and two trust routes. They also
-confirm that `Top::: /x/` currently becomes label `Top` plus retained header remainder `: /x/` before raw-syntax
-validation. These are documented pre-implementation boundaries, not accepted behavior.
+Exactly five parser roles now use that generated authority: headers, header-looking body termination, action
+targets, the blind target, and bare targets. Header parsing recognizes exactly `:`/`::` and rejects a third colon;
+action/blind whole-edge remainder guards and bare-edge remainder policy prevent forbidden suffixes from becoming a
+valid prefix plus ignored tail. The generic ASCII word reader remains unchanged for fluent methods, lifecycle and
+keyword boundaries, and all other non-label identifiers.
 
-Behavior-free plan `.10.7.1.0` fixes the implementation shape. Generator
-`unicode_case/generate_unicode_rule_label_contract.py` will emit internal
-`lua/src/linkedspec/unicode_rule_label.lua`: 806 private endpoint pairs, a strict UTF-8 decoder, binary-search
-membership, complete-label validation, and longest-prefix scanning written entirely in Lua-5.1-compatible syntax.
-Exactly five label roles in `lua/src/linkedspec/spec_parser.lua` will use that scanner: headers, header-looking body
-lines, action targets, blind targets, and bare targets. The existing ASCII word reader stays authoritative for
-unrelated fluent, lifecycle, function, helper, and other identifier grammars.
+One validator pass immediately after the nonempty-rule check covers declarations and every action/blind/bare
+target, including programmatic and reconstructed ASTs. It uses portable code `invalid_rule_label`, stage
+`validate_rule_labels`, and the exact rejected label, line, and `declaration`/`edge_target` role; targets also carry
+their owning `rule_label`. This closes the former external-AST bypass before duplicate, raw, structural, and target
+resolution. The classifier suite checks all 1,612 range endpoints, every 9/8/2 neutral fixture, supplementary byte
+boundaries, and strict malformed UTF-8 at 1,706 assertions. The native route suite checks exact declaration and
+edge parsing, delimiter/remainder behavior, raw preservation, third-colon rejection, and programmatic plus JSON-
+reconstructed diagnostics at 179 assertions. Both suites and the complete `1..177` package pass unchanged on PUC
+Lua and LuaJIT; PUC primary remains 66x2 and corpus validation/execution remains 105/105.
 
-One validator pass immediately after the nonempty-rule check will cover declarations and every action/blind/bare
-target, including programmatic and reconstructed ASTs. It will use portable code `invalid_rule_label`, stage
-`validate_rule_labels`, and include the rejected label, line, and role. Invalid suffixes remain one malformed raw
-edge or body line rather than being accepted by prefix, and a third header colon is rejected explicitly. The
-classifier remains package-internal; no public Lua API is added.
-
-The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks:
-opaque strict source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/
-raw-neutral query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer run
-on both PUC Lua and LuaJIT at `.7`. Public values must be detached and canonical; metatable names, `table: 0x...`
-identity, paths, regex userdata, AST/ActionIR, callbacks, and trace objects can never enter portable responses.
-The audit changes no production behavior, fixture, response digest, rollout, or admission row. Its proof includes
-unchanged package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs,
-semantic 6/20/89 at 5/9 + 4/6, every no-drift ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe
-cleanup. Planning `.10.7.1.0` changes none of those current results or ledgers. Generated classifier, parser,
-validator, and native-route implementation `.10.7.1.1` is next; later `.2` proves positive/distinct identity, `.3`
-owns negative/trust-route and adjacent-grammar isolation, and `.4` recomposes the prerequisite before semantic
-construction begins.
+The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
+Unicode `.10.7.1.2` next proves exact positive/distinct identity through compiled state, descriptors, generated
+plans/modules, selectors, diagnostics, traces, strict loading, execution, and primary commands; `.3` owns every
+negative/trust route and adjacent-grammar isolation; `.4` recomposes and closes the prerequisite. Opaque strict
+source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
+query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
+remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,
+regex userdata, AST/ActionIR, callbacks, and trace objects can never enter portable responses. Unicode behavior
+changes only the Lua native label boundary: the neutral contract, generated-source format, semantic six groups /
+20 responses / 89 mutations, rollout 5/9, and native admission 4/6 remain unchanged.
 
 ## Exact v1 record model
 

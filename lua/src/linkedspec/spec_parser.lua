@@ -2,6 +2,9 @@ local ast = require("linkedspec.spec_ast")
 local json = require("linkedspec.json")
 local trace = require("linkedspec.trace")
 local trace_support = require("linkedspec.trace_support")
+local unicode_rule_label = require("linkedspec.unicode_rule_label")
+
+local take_rule_label_prefix = unicode_rule_label.take_rule_label_prefix
 
 local M = {}
 
@@ -65,6 +68,15 @@ local function skip_spaces(text, position)
   return position
 end
 
+local function skip_horizontal_spaces(text, position)
+  while position <= #text do
+    local byte = text:byte(position)
+    if byte ~= 0x20 and byte ~= 0x09 then break end
+    position = position + 1
+  end
+  return position
+end
+
 local function read_word(text, position)
   local start = position
   while is_word_byte(text:byte(position)) do
@@ -74,6 +86,10 @@ local function read_word(text, position)
     return nil, start
   end
   return text:sub(start, position - 1), position
+end
+
+local function read_rule_label(text, position)
+  return take_rule_label_prefix(text, position)
 end
 
 local function parse_bounded_mode(raw)
@@ -157,15 +173,47 @@ local function skip_blanks_and_comments(lines, index)
   return index
 end
 
+local function parse_header_fields(text)
+  local label, position = read_rule_label(text, 1)
+  if not label then return nil end
+  position = skip_horizontal_spaces(text, position)
+
+  local is_top
+  if text:sub(position, position + 1) == "::" then
+    is_top = true
+    position = position + 2
+  elseif text:sub(position, position) == ":" then
+    is_top = false
+    position = position + 1
+  else
+    return nil
+  end
+  if text:sub(position, position) == ":" then return nil end
+
+  position = skip_horizontal_spaces(text, position)
+  local mode_start = position
+  while position <= #text do
+    local byte = text:byte(position)
+    if byte == 0x20 or byte == 0x09 or byte == 0x2F then break end
+    position = position + 1
+  end
+  local mode_raw = text:sub(mode_start, position - 1)
+  position = skip_horizontal_spaces(text, position)
+  return {
+    label = label,
+    is_top = is_top,
+    mode_raw = mode_raw,
+    rest_raw = text:sub(position),
+  }
+end
+
 local function parse_header(lines, index)
-  if index > #lines then
-    return nil
-  end
-  local text = trim(lines[index])
-  local label, colon, mode_raw, rest_raw = text:match("^([%w_]+)[ \t]*(::?)[ \t]*([^%s/]*)[ \t]*(.*)$")
-  if not label then
-    return nil
-  end
+  if index > #lines then return nil end
+  local fields = parse_header_fields(trim(lines[index]))
+  if not fields then return nil end
+  local label = fields.label
+  local mode_raw = fields.mode_raw
+  local rest_raw = fields.rest_raw
   local mode = parse_mode(mode_raw)
   local rest
   if mode == nil then
@@ -177,7 +225,7 @@ local function parse_header(lines, index)
   return {
     header = ast.rule_header({
       label = label,
-      is_top = colon == "::",
+      is_top = fields.is_top,
       mode = mode,
       rest = rest,
       line = index,
@@ -187,7 +235,7 @@ local function parse_header(lines, index)
 end
 
 local function looks_like_header(text)
-  return trim(text):match("^[%w_]+[ \t]*::?") ~= nil
+  return parse_header_fields(trim(text)) ~= nil
 end
 
 local function scan_quoted(text, position, quote)
@@ -497,6 +545,44 @@ local function parse_regex_element(text, line_number)
   }
 end
 
+local function starts_lifecycle_remainder(text)
+  local markers = { "LS", "LE", "LX", "EX", "IT", "I", "E" }
+  for _, marker in ipairs(markers) do
+    if text:sub(1, #marker) == marker and not is_word_byte(text:byte(#marker + 1)) then
+      return true
+    end
+  end
+  return false
+end
+
+local function starts_split_remainder(text)
+  return text:match("^@[ \t]*capture_slice") ~= nil or
+    text:match("^@[ \t]*capture_from_here") ~= nil or
+    text:match("^@[ \t]*move_pos") ~= nil or
+    text:match("^@[ \t]*mark[ \t]*%([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*%)") ~= nil
+end
+
+local function starts_conditional_remainder(text)
+  return text:match("^%-%?[ \t]+[%w_]+") ~= nil
+end
+
+local function has_valid_edge_remainder(text, position)
+  if position > #text then return true end
+  local begins_with_space = text:byte(position) == 0x20 or text:byte(position) == 0x09
+  local remainder = text:sub(skip_horizontal_spaces(text, position))
+  if remainder == "" or remainder:sub(1, 1) == "#" then return true end
+  if remainder:sub(1, 1) == "{" or remainder:sub(1, 1) == "." or
+      remainder:sub(1, 2) == "->" or remainder:sub(1, 2) == "=>" then
+    return true
+  end
+  return begins_with_space and (
+    remainder:sub(1, 1) == "/" or
+    starts_lifecycle_remainder(remainder) or
+    starts_split_remainder(remainder) or
+    starts_conditional_remainder(remainder)
+  )
+end
+
 local function parse_action_prefix(text)
   if text:sub(1, 2) ~= "->" then
     return nil
@@ -504,7 +590,7 @@ local function parse_action_prefix(text)
   local position = skip_spaces(text, 3)
   local labels = {}
   local label
-  label, position = read_word(text, position)
+  label, position = read_rule_label(text, position)
   if not label then
     return nil
   end
@@ -517,12 +603,13 @@ local function parse_action_prefix(text)
       break
     end
     position = skip_spaces(text, position + 1)
-    label, position = read_word(text, position)
+    label, position = read_rule_label(text, position)
     if not label then
       return nil
     end
     labels[#labels + 1] = label
   end
+  local label_end = position
   position = skip_spaces(text, position)
   local target_index = 0
   if text:sub(position, position) == "[" then
@@ -536,7 +623,10 @@ local function parse_action_prefix(text)
     end
     target_index = tonumber(digits)
     position = closing + 1
+  else
+    position = label_end
   end
+  if not has_valid_edge_remainder(text, position) then return nil end
   local targets = {}
   for index, target_label in ipairs(labels) do
     targets[index] = ast.edge_target({ label = target_label, index = target_index })
@@ -552,7 +642,7 @@ local function parse_bare_prefix(text)
   local position = 1
   local labels = {}
   local label
-  label, position = read_word(text, position)
+  label, position = read_rule_label(text, position)
   if not label then return nil end
   labels[#labels + 1] = label
   while true do
@@ -563,7 +653,7 @@ local function parse_bare_prefix(text)
       break
     end
     position = skip_spaces(text, position + 1)
-    label, position = read_word(text, position)
+    label, position = read_rule_label(text, position)
     if not label then return nil end
     labels[#labels + 1] = label
   end
@@ -686,8 +776,9 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
   if text:sub(1, 2) == "=>" then
     local position = skip_spaces(text, 3)
     local target
-    target, position = read_word(text, position)
+    target, position = read_rule_label(text, position)
     if target then
+      local label_end = position
       position = skip_spaces(text, position)
       local target_index = nil
       if text:sub(position, position) == "[" then
@@ -697,7 +788,10 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
         if not digits:match("^%d+$") then return nil end
         target_index = tonumber(digits)
         position = closing + 1
+      else
+        position = label_end
       end
+      if not has_valid_edge_remainder(text, position) then return nil end
       local full_match = trim(text:sub(1, position - 1))
       local rest = ltrim(text:sub(position))
       local saved_index = cursor.index

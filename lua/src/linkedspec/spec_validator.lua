@@ -3,6 +3,9 @@ local ast = require("linkedspec.spec_ast")
 local json = require("linkedspec.json")
 local trace = require("linkedspec.trace")
 local trace_support = require("linkedspec.trace_support")
+local unicode_rule_label = require("linkedspec.unicode_rule_label")
+
+local is_rule_label = unicode_rule_label.is_rule_label
 
 local M = {}
 
@@ -95,6 +98,39 @@ end
 local function check_at_least_one_rule(spec)
   if #spec.rules == 0 then
     validation_fail("spec does not define any rules", "no_rules_defined", "validate_spec")
+  end
+end
+
+local function require_rule_label(label, role, line, owner)
+  if is_rule_label(label) then return end
+  local fields = json.harray({ label = label, line = line, role = role })
+  if owner ~= nil then fields.rule_label = owner end
+  validation_fail(
+    role .. " '" .. label .. "' is not a nonempty Unicode 17.0.0 XID_Continue rule label",
+    "invalid_rule_label",
+    "validate_rule_labels",
+    fields
+  )
+end
+
+local function check_rule_labels(spec)
+  for _, rule in ipairs(spec.rules) do
+    require_rule_label(rule.header.label, "declaration", rule.header.line)
+    for _, element in ipairs(rule.body) do
+      local kind = element.kind
+      local node_type = ast.node_type(kind)
+      if node_type == "ActionEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do
+          require_rule_label(target.label, "edge_target", element.line, rule.header.label)
+        end
+      elseif node_type == "BlindEdgeBodyElementKind" then
+        require_rule_label(kind.target, "edge_target", element.line, rule.header.label)
+      elseif node_type == "BareEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do
+          require_rule_label(target.label, "edge_target", element.line, rule.header.label)
+        end
+      end
+    end
   end
 end
 
@@ -521,6 +557,7 @@ function M.validate_spec(spec, options)
       " strict=" .. (options.strict_syntax and "1" or "0"),
     function()
       check_at_least_one_rule(spec)
+      check_rule_labels(spec)
       check_duplicate_rule_labels(spec)
       check_duplicate_function_names(spec)
       check_function_registry(spec)

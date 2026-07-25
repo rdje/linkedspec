@@ -16,13 +16,13 @@ answers:
   - "how are Lua Unicode rule-label tests registered on both ABIs"
   - "what is the Lua Unicode rule-label implementation dependency order"
 date: 2026-07-25
-status: frozen behavior-free implementation plan; owned by FUTURE-PARITY-BACKLOG.10.7.1.0
+status: native classifier/parser/validator implemented; identity and isolation proof remain; owned through FUTURE-PARITY-BACKLOG.10.7.1.1
 tags: [lua, luajit, unicode, rule-labels, parser, validation, generation, testing]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.1.0 reruns one byte-identical disposable probe on separately built PUC Lua and LuaJIT adapters: both reproduce 63/149221 admitted required scalars, 3/9 source positives, Top::: partial parsing, and 24/24 declaration/action/blind/bare programmatic/reconstructed compilation bypasses. Source inspection maps parse_header, looks_like_header, action, blind, and bare as the only rule-label parser roles; generic read_word remains an ASCII authority for unrelated identifiers."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.1.1 generates and independently byte-compares lua/src/linkedspec/unicode_rule_label.lua, extracts all 806 ranges, and source-locks strict UTF-8 plus parser/validator/runner/CI topology. The classifier suite passes 1706 assertions and the native route suite passes 179 assertions unchanged on PUC Lua and LuaJIT; the complete dual-ABI Lua gate remains 1..177 on each ABI plus PUC primary 66x2 and corpus 105."
 reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua"
 ---
 
-# Lua Unicode rule-label implementation plan
+# Lua Unicode rule-label implementation
 
 The generated internal artifact is `lua/src/linkedspec/unicode_rule_label.lua`, emitted by
 `unicode_case/generate_unicode_rule_label_contract.py --lua-output` from the unchanged Unicode 17 neutral owner.
@@ -55,3 +55,14 @@ closes the parent. Each Lua test file is run unchanged under PUC Lua and LuaJIT 
 the Unicode checker and canonical CI independently lock artifact and registration topology. Related facts:
 [[lua-unicode-rule-label-preflight]], [[unicode-rule-label-contract]], and
 [[lua-semantic-introspection-authority-map]].
+
+Implementation `.10.7.1.1` now realizes the first stage exactly as planned. The generated module is byte-identical
+under regeneration, all 1,612 range endpoints and every 9/8/2 neutral fixture are classifier-checked, malformed
+UTF-8 is rejected without host-library help, and prefix positions stay one-based UTF-8 byte offsets. Headers and
+header-looking body termination share one field scanner; action, blind, and bare targets use the same generated
+prefix authority with whole-edge remainder guards. `Top:::` is no longer a partial header, and malformed target
+suffixes remain raw. The first validator pass rejects programmatic and reconstructed declaration/target labels
+with the exact portable diagnostic. Root `linkedspec` still exports no classifier API, and the generic ASCII word
+reader remains unchanged for non-label identifiers. Exact downstream identity remains `.2`, the exhaustive
+negative/isolation matrix remains `.3`, and no semantic rollout or admission row moves before those proofs and
+composition `.4` close the prerequisite.

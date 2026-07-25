@@ -1081,10 +1081,14 @@ content migration exists yet.
   LuaJIT admission `.7`. This audit changes no Lua behavior or semantic governance. It closes with unchanged
   package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs, every
   neutral ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe cleanup. Behavior-free planning
-  `.10.7.1.0` now freezes one generated Lua-5.1-compatible 806-range classifier, exactly five parser routes, one
+  `.10.7.1.0` freezes one generated Lua-5.1-compatible 806-range classifier, exactly five parser routes, one
   four-role post-AST validator, shared diagnostics, identity/negative/isolation proof owners, and `.1-.4` gate
-  order without changing behavior or governance. Generated classifier and native-route implementation
-  `.10.7.1.1` is next.
+  order. Implementation `.10.7.1.1` now generates and independently byte-compares that private classifier,
+  routes headers plus action/blind/bare targets through its strict UTF-8 scanner, rejects partial suffixes and a
+  third colon, and validates programmatic/reconstructed AST labels before structural checks. Focused classifier
+  1,706 and native-route 179 assertions pass unchanged on PUC Lua and LuaJIT; the complete dual-ABI Lua gate stays
+  `1..177`. No public classifier API, generated-source format, semantic response, rollout, or admission row moves.
+  Exact positive/distinct artifact and runtime identity `.10.7.1.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

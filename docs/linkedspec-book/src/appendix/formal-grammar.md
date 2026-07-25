@@ -202,6 +202,15 @@ methods, and named-mark variables keep their existing narrower grammars; Unicode
 authorize a spelling on those surfaces. Complete Dart/package/primary/corpus and canonical composition close this
 native label prerequisite without admitting the separate semantic-introspection adapter.
 
+The shared PUC Lua/LuaJIT native frontend now consumes its own generated Lua-5.1-compatible form of the same 806
+ranges. One strict byte decoder and prefix scanner owns declaration headers, header-looking body termination, and
+action, blind, and bare targets; one validator then checks declarations and all three target kinds before raw,
+structural, or target-resolution checks. Invalid complete labels report portable `invalid_rule_label` at
+`validate_rule_labels`, invalid edge suffixes remain raw rather than truncating, and `Top:::` is rejected as a
+header. The generated ranges remain private, root `linkedspec` exports no classifier API, and the generic ASCII
+word scanner continues to own unrelated identifiers. Classifier and native-route suites run unchanged on both Lua
+ABIs; later proof owns exact identity through every compiled/runtime artifact and exhaustive adjacent isolation.
+
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
 prefix such as `Top-Rule::`, `Top Rule::`, or `$Top::`, and an extra colon such as `Top:::` is not part of a valid
@@ -230,11 +239,12 @@ authority; all four checked-in `spec_spec_*` corpus inputs must remain byte-iden
 Perl, Rust, Dart, Julia, and Lua now execute one byte-exact positive/negative/distinct/boundary projection through
 the current canonical self-hosted grammar in both default and POSIX command environments. This proves the shared
 executable grammar, not every backend's separate native parser. Rust implements the pinned label contract across
-its native headers/references/validation/selectors/artifacts/loaders/traces. Dart now routes its native headers plus
-action, blind, and bare targets through the generated 806-range scanner and applies the same complete-label
-predicate to parsed, reconstructed, and programmatic ASTs. The scanner accounts for Dart's UTF-16 width without
-splitting supplementary scalars, and invalid suffixes cannot silently truncate to a valid prefix. Exact Dart
-artifact/selector/diagnostic/trace/loader route proof remains the next backend-specific leaf before semantic v1
+its native headers/references/validation/selectors/artifacts/loaders/traces. Dart and Julia complete the same native
+contract through every identity and isolation route. Lua now routes native headers plus action, blind, and bare
+targets through the generated 806-range scanner and applies the same complete-label predicate to parsed,
+reconstructed, and programmatic ASTs. Its scanner preserves one-based UTF-8 byte boundaries under PUC Lua and
+LuaJIT, including supplementary scalars, and invalid suffixes cannot silently truncate to a valid prefix. Exact
+Lua artifact/runtime identity and exhaustive negative/isolation proof remain separately owned before semantic v1
 admission.
 
 - **Single colon** (`rule_name:`): an ordinary rule — it may appear anywhere in the file and may be selected as

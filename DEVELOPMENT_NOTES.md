@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.1` — prefix scanning needs a whole-edge boundary): A generated
+  `XID_Continue` prefix scanner must intentionally stop before punctuation, but an edge parser cannot treat every
+  such stop as a valid token boundary. Without a second boundary check, `-> Top-Rule` or `=> Top😀` would silently
+  become a valid `Top` target plus trailing syntax. Lua now checks the unconsumed action/blind remainder against
+  only established next-element carriers: end/comment, block, fluent continuation, another edge, or a whitespace-
+  separated regex/lifecycle/split/conditional element. Bare edges already require their complete remainder to be
+  end/comment/block/fluent. This keeps malformed edges raw while preserving compact valid compositions.
+
+  Header scanning has the parallel punctuation risk. One shared field scanner now serves both header construction
+  and body termination, recognizes exactly one or two colons, and rejects a third. That prevents `Top:::` from
+  becoming declaration `Top` with a retained colon tail. The generated classifier remains only a membership and
+  prefix authority; token-boundary grammar stays with the parser.
+
+  Parser correctness still does not secure external ASTs. The validator checks labels before duplicate/raw/
+  structural/target resolution so a malformed label cannot be masked by an unrelated downstream error. Declaration
+  and edge-target roles share the same portable code/stage/message; an edge additionally records its owning rule.
+  This exact ordering is source-locked by the neutral checker and exercised through both programmatic and JSON-
+  reconstructed ASTs. The classifier is internal, its 806 ranges are closure-private, and the generic ASCII word
+  reader stays untouched, isolating unrelated Lua identifier grammars for the exhaustive `.3` proof.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.0` — isolate rule labels from generic Lua identifiers): Lua's current
   `is_word_byte`/`read_word` machinery serves more than rule labels, so broad Unicode widening would silently
   change fluent methods, lifecycle words, function/action/helper identifiers, and keyword boundaries. The plan

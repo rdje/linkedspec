@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.1 — implement Lua Unicode label routes
+
+Added the generated private Lua form of the pinned Unicode 17 rule-label contract. The neutral generator now
+emits `lua/src/linkedspec/unicode_rule_label.lua` with exact metadata, 806 maximally merged range pairs, strict
+Lua-5.1-compatible UTF-8 decoding, binary-search scalar membership, complete-label validation, and one-based byte-
+prefix scanning. The contract checker independently regenerates and byte-compares that artifact, extracts every
+endpoint, locks decoder/search/privacy topology, rejects stale label scanners, and requires focused/runner/CI
+registration. Root `linkedspec` exports no classifier API.
+
+Lua headers and header-looking body termination now share one generated-prefix field scanner with exact `:`/`::`
+recognition and explicit third-colon rejection. Action, blind, and bare target routes use the same dedicated label
+reader; action/blind whole-edge boundary guards and existing bare remainder rules keep invalid suffixes whole and
+raw instead of accepting a valid prefix. Generic ASCII `read_word` remains unchanged for fluent methods and other
+non-label identifiers. One authoritative validator pass immediately after the nonempty-rule check validates every
+declaration and action/blind/bare target, including programmatic and JSON-reconstructed ASTs, with portable
+`invalid_rule_label` / `validate_rule_labels` diagnostics and target owner fields.
+
+The classifier suite passes 1,706 assertions and the native-route suite passes 179 assertions unchanged on PUC
+Lua and LuaJIT. The complete Lua gate remains `1..177` on both ABIs plus PUC primary 66x2 and corpus 105/105.
+Full primary passes 5x2x66 and all ten Unicode-manifest legs pass. Semantic/Unicode/capability/generated/language/
+public ledgers remain exact at 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0, 246/105+1/122, and
+59/27/0. mdBook, Knowledge Map 698/5,401, memory/task/four doctrines, and diff hygiene pass. Canonical CI passes
+Rust admission 1/1 in 82.47s, Dart 1/1, Julia 416/416 in 29.8s, reference primary 66x2, and Phase 0 1,031/1,031
+in 652s. Exact 1,520,396-KiB cleanup removes only regenerable Rust dependency/incremental state, rendered book,
+Dart tool state, Python bytecode, and the disposable Julia depot. Neutral contract data, generated-source format,
+public API, semantic responses, rollout, and admission remain unchanged. Exact positive/distinct artifact and
+runtime identity `.10.7.1.2` follows the clean commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.0 — freeze Lua Unicode label routes
 
 Frozen the behavior-free implementation plan for exact Unicode 17 rule labels on the shared PUC Lua/LuaJIT

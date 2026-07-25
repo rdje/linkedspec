@@ -22,6 +22,10 @@ JULIA_PATH = ROOT / "julia" / "src" / "spec" / "UnicodeRuleLabel.jl"
 JULIA_MODULE_PATH = ROOT / "julia" / "src" / "LinkedSpecJulia.jl"
 JULIA_PARSER_PATH = ROOT / "julia" / "src" / "spec" / "Parser.jl"
 JULIA_VALIDATION_PATH = ROOT / "julia" / "src" / "spec" / "Validator.jl"
+LUA_PATH = ROOT / "lua" / "src" / "linkedspec" / "unicode_rule_label.lua"
+LUA_INIT_PATH = ROOT / "lua" / "src" / "linkedspec" / "init.lua"
+LUA_PARSER_PATH = ROOT / "lua" / "src" / "linkedspec" / "spec_parser.lua"
+LUA_VALIDATION_PATH = ROOT / "lua" / "src" / "linkedspec" / "spec_validator.lua"
 SELF_HOSTED_REGEX_PATH = ROOT / "unicode_case" / "unicode_rule_label_regex_class.txt"
 SELF_HOSTED_GRAMMAR_PATH = ROOT / "specs" / "spec.spec"
 SELF_HOSTED_CLI_MANIFEST_PATH = (
@@ -64,6 +68,13 @@ JULIA_NEGATIVE_ISOLATION_TEST_PATH = (
     ROOT / "julia" / "test" / "unicode_rule_label_negative_isolation_test.jl"
 )
 JULIA_TEST_DRIVER_PATH = ROOT / "julia" / "test" / "runtests.jl"
+LUA_CLASSIFIER_TEST_PATH = (
+    ROOT / "lua" / "test" / "unicode_rule_label_classifier_test.lua"
+)
+LUA_NATIVE_ROUTES_TEST_PATH = (
+    ROOT / "lua" / "test" / "unicode_rule_label_routes_test.lua"
+)
+LUA_TEST_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 SELF_HOSTED_CORPUS_CASES = (
@@ -117,6 +128,10 @@ def main() -> None:
         JULIA_MODULE_PATH,
         JULIA_PARSER_PATH,
         JULIA_VALIDATION_PATH,
+        LUA_PATH,
+        LUA_INIT_PATH,
+        LUA_PARSER_PATH,
+        LUA_VALIDATION_PATH,
         SELF_HOSTED_REGEX_PATH,
         SELF_HOSTED_GRAMMAR_PATH,
         SELF_HOSTED_CLI_MANIFEST_PATH,
@@ -134,7 +149,11 @@ def main() -> None:
         JULIA_IDENTITY_ROUTES_TEST_PATH,
         JULIA_NEGATIVE_ISOLATION_TEST_PATH,
         JULIA_TEST_DRIVER_PATH,
+        LUA_CLASSIFIER_TEST_PATH,
+        LUA_NATIVE_ROUTES_TEST_PATH,
+        LUA_TEST_DRIVER_PATH,
         MATRIX_DRIVER_PATH,
+        CI_PATH,
         *(CORPUS_ROOT / case / "input.spec" for case in SELF_HOSTED_CORPUS_CASES),
     ):
         if not path.is_file():
@@ -144,6 +163,7 @@ def main() -> None:
         generated_rust = Path(temp) / "unicode_rule_label.rs"
         generated_dart = Path(temp) / "unicode_rule_label.dart"
         generated_julia = Path(temp) / "UnicodeRuleLabel.jl"
+        generated_lua = Path(temp) / "unicode_rule_label.lua"
         generated_self_hosted_regex = Path(temp) / "unicode_rule_label_regex_class.txt"
         subprocess.run(
             [
@@ -159,6 +179,8 @@ def main() -> None:
                 str(generated_dart),
                 "--julia-output",
                 str(generated_julia),
+                "--lua-output",
+                str(generated_lua),
             ],
             cwd=ROOT,
             check=True,
@@ -171,6 +193,8 @@ def main() -> None:
             fail("Dart classifier differs from deterministic regeneration")
         if generated_julia.read_bytes() != JULIA_PATH.read_bytes():
             fail("Julia classifier differs from deterministic regeneration")
+        if generated_lua.read_bytes() != LUA_PATH.read_bytes():
+            fail("Lua classifier differs from deterministic regeneration")
         if generated_self_hosted_regex.read_bytes() != SELF_HOSTED_REGEX_PATH.read_bytes():
             fail("self-hosted regex class differs from deterministic regeneration")
 
@@ -262,6 +286,42 @@ def main() -> None:
     ):
         if marker not in julia_text:
             fail(f"Julia classifier/scanner topology marker missing: {marker}")
+
+    lua_text = LUA_PATH.read_text(encoding="utf-8")
+    lua_ranges = [
+        (int(start, 16), int(end, 16))
+        for start, end in re.findall(
+            r"\{ 0x([0-9A-F]{4,6}), 0x([0-9A-F]{4,6}) \},",
+            lua_text,
+        )
+    ]
+    if lua_ranges != ranges:
+        fail("Lua range table does not independently encode the contract ranges")
+    for marker in (
+        f"M.RANGE_COUNT = {len(ranges)}",
+        "local function decode_utf8_scalar(text, position)",
+        "byte_1 >= 0xC2 and byte_1 <= 0xDF",
+        "byte_1 == 0xE0 and byte_2 < 0xA0",
+        "byte_1 == 0xED and byte_2 > 0x9F",
+        "byte_1 == 0xF0 and byte_2 < 0x90",
+        "byte_1 == 0xF4 and byte_2 > 0x8F",
+        "while low <= high do",
+        "function M.is_rule_label_codepoint(codepoint)",
+        "function M.is_rule_label(label)",
+        "function M.take_rule_label_prefix(text, position)",
+    ):
+        if marker not in lua_text:
+            fail(f"Lua classifier/scanner topology marker missing: {marker}")
+    for forbidden in (
+        'require("utf8")',
+        "require('utf8')",
+        "bit32.",
+        "bit.",
+        "pairs(XID_CONTINUE_RANGES)",
+        "M.XID_CONTINUE_RANGES",
+    ):
+        if forbidden in lua_text:
+            fail(f"Lua classifier portability/privacy boundary drifted: {forbidden}")
     for unsafe in ("\\", "/", "[", "]", "^", "-", "\n", "\r", "\0"):
         if contains(ranges, ord(unsafe)):
             fail(f"self-hosted literal regex class requires escaping for {unsafe!r}")
@@ -664,6 +724,87 @@ def main() -> None:
     ):
         if marker not in julia_test_driver:
             fail(f"Julia test registration missing: {marker}")
+
+    lua_init = LUA_INIT_PATH.read_text(encoding="utf-8")
+    if "unicode_rule_label" in lua_init:
+        fail("Lua root module must not export the internal rule-label classifier")
+    lua_parser = LUA_PARSER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        'local unicode_rule_label = require("linkedspec.unicode_rule_label")',
+        "local take_rule_label_prefix = unicode_rule_label.take_rule_label_prefix",
+        "local function read_rule_label(text, position)",
+        "local function parse_header_fields(text)",
+        "return parse_header_fields(trim(text)) ~= nil",
+        "if text:sub(position, position) == \":\" then return nil end",
+        "local function has_valid_edge_remainder(text, position)",
+    ):
+        if marker not in lua_parser:
+            fail(f"Lua native label scanner marker missing: {marker}")
+    if lua_parser.count("read_rule_label(text, position)") != 6:
+        fail("Lua rule-label reader must own exactly the five edge scanner sites")
+    if lua_parser.count("has_valid_edge_remainder(text, position)") != 3:
+        fail("Lua whole-edge boundary guard must cover exactly action and blind routes")
+    for stale in (
+        'text:match("^([%w_]+)[ \\t]*(::?)',
+        "label, position = read_word(text, position)",
+        "target, position = read_word(text, position)",
+    ):
+        if stale in lua_parser:
+            fail(f"stale Lua host-pattern label scanner remains: {stale}")
+    if "local function read_word(text, position)" not in lua_parser:
+        fail("Lua generic ASCII word reader was removed instead of isolated from labels")
+
+    lua_validation = LUA_VALIDATION_PATH.read_text(encoding="utf-8")
+    for marker in (
+        'local unicode_rule_label = require("linkedspec.unicode_rule_label")',
+        "local is_rule_label = unicode_rule_label.is_rule_label",
+        "local function check_rule_labels(spec)",
+        'require_rule_label(rule.header.label, "declaration", rule.header.line)',
+        'require_rule_label(target.label, "edge_target", element.line, rule.header.label)',
+        'require_rule_label(kind.target, "edge_target", element.line, rule.header.label)',
+        '"invalid_rule_label"',
+        '"validate_rule_labels"',
+    ):
+        if marker not in lua_validation:
+            fail(f"Lua rule-label validation marker missing: {marker}")
+    validation_order = (
+        "check_at_least_one_rule(spec)\n"
+        "      check_rule_labels(spec)\n"
+        "      check_duplicate_rule_labels(spec)"
+    )
+    if validation_order not in lua_validation:
+        fail("Lua rule-label validation does not run at the authoritative first boundary")
+
+    lua_classifier_test = LUA_CLASSIFIER_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "generated metadata and all range boundaries match the contract",
+        "complete-label validation matches every neutral fixture",
+        "longest-prefix scanning preserves scalar and byte boundaries",
+        "string.char(0xC0, 0xAF)",
+        "string.char(0xED, 0xA0, 0x80)",
+        "string.char(0xF4, 0x90, 0x80, 0x80)",
+    ):
+        if marker not in lua_classifier_test:
+            fail(f"Lua classifier proof missing: {marker}")
+    lua_native_routes_test = LUA_NATIVE_ROUTES_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "scanner parses every declaration and edge form with exact identity",
+        "invalid suffixes never become partial action blind or bare edges",
+        "validator rejects every programmatic declaration and target role",
+        "validator rejects invalid labels reconstructed from AST JSON",
+        "Top:::",
+        'node_type(parsed.rules[1].body[1].kind), "RawBodyElementKind"',
+    ):
+        if marker not in lua_native_routes_test:
+            fail(f"Lua native route proof missing: {marker}")
+    lua_test_driver = LUA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "lua/test/unicode_rule_label_classifier_test.lua",
+        "lua/test/unicode_rule_label_routes_test.lua",
+    ):
+        if lua_test_driver.count(marker) != 2:
+            fail(f"Lua dual-ABI test registration missing or duplicated: {marker}")
+
     ci_text = CI_PATH.read_text(encoding="utf-8")
     for marker in (
         "require_tracked_file capability_conformance/unicode_rule_label_contract.json",
@@ -684,6 +825,9 @@ def main() -> None:
         "require_tracked_file julia/test/unicode_rule_label_routes_test.jl",
         "require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl",
         "require_tracked_file julia/test/unicode_rule_label_negative_isolation_test.jl",
+        "require_tracked_file lua/src/linkedspec/unicode_rule_label.lua",
+        "require_tracked_file lua/test/unicode_rule_label_classifier_test.lua",
+        "require_tracked_file lua/test/unicode_rule_label_routes_test.lua",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",
