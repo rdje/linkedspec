@@ -924,7 +924,7 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
         source = text:match("^%.[ \t]*[%w_]+"),
         line = line_number,
       }),
-      remainder = "",
+      remainder = fluent.remainder,
       advanced = false,
     }
   end

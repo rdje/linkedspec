@@ -77,6 +77,7 @@ LUA_NATIVE_ROUTES_TEST_PATH = (
 LUA_IDENTITY_ROUTES_TEST_PATH = (
     ROOT / "lua" / "test" / "unicode_rule_label_identity_routes_test.lua"
 )
+LUA_BODY_FLUENT_TEST_PATH = ROOT / "lua" / "test" / "body_fluent_whole_token_test.lua"
 LUA_TEST_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 MATRIX_DRIVER_PATH = ROOT / "tools" / "run_primary_cli_matrix.sh"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
@@ -757,6 +758,15 @@ def main() -> None:
             fail(f"stale Lua host-pattern label scanner remains: {stale}")
     if "local function read_word(text, position)" not in lua_parser:
         fail("Lua generic ASCII word reader was removed instead of isolated from labels")
+    body_fluent_source = 'source = text:match("^%.[ \\t]*[%w_]+")'
+    body_fluent_position = lua_parser.find(body_fluent_source)
+    if body_fluent_position < 0:
+        fail("Lua body-fluent adapter source boundary is missing")
+    body_fluent_adapter = lua_parser[body_fluent_position : body_fluent_position + 220]
+    if "remainder = fluent.remainder" not in body_fluent_adapter:
+        fail("Lua body-fluent adapter must propagate its parsed remainder")
+    if 'remainder = ""' in body_fluent_adapter:
+        fail("Lua body-fluent adapter must not discard its parsed remainder")
 
     lua_validation = LUA_VALIDATION_PATH.read_text(encoding="utf-8")
     for marker in (
@@ -815,11 +825,34 @@ def main() -> None:
     ):
         if marker not in lua_identity_routes_test:
             fail(f"Lua exact identity proof missing: {marker}")
+    lua_body_fluent_test = LUA_BODY_FLUENT_TEST_PATH.read_text(encoding="utf-8")
+    for marker in (
+        "malformed same-line suffixes remain visible as raw validation failures",
+        "no-prefix and newline controls retain their established raw ownership",
+        "valid ASCII methods and recognized body continuations retain their existing grammar",
+        'source = ".Töp()"',
+        'source = ".A·B()"',
+        'source = ".Top-Rule()"',
+        'source = ".Top Rule()"',
+        'source = ".Top😀()"',
+        'source = ".Top:Rule()"',
+        'source = ".Top/Rule()"',
+        'source = ".()"',
+        'source = ".$Top()"',
+        '"Root::\\n .Top\\n Rule()\\n"',
+        '"_method9"',
+        '"LifecycleMarkerBodyElementKind"',
+        '"RegexBodyElementKind"',
+        '"ActionEdgeBodyElementKind"',
+    ):
+        if marker not in lua_body_fluent_test:
+            fail(f"Lua body-fluent whole-token proof missing: {marker}")
     lua_test_driver = LUA_TEST_DRIVER_PATH.read_text(encoding="utf-8")
     for marker in (
         "lua/test/unicode_rule_label_classifier_test.lua",
         "lua/test/unicode_rule_label_routes_test.lua",
         "lua/test/unicode_rule_label_identity_routes_test.lua",
+        "lua/test/body_fluent_whole_token_test.lua",
     ):
         if lua_test_driver.count(marker) != 2:
             fail(f"Lua dual-ABI test registration missing or duplicated: {marker}")
@@ -848,6 +881,7 @@ def main() -> None:
         "require_tracked_file lua/test/unicode_rule_label_classifier_test.lua",
         "require_tracked_file lua/test/unicode_rule_label_routes_test.lua",
         "require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua",
+        "require_tracked_file lua/test/body_fluent_whole_token_test.lua",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
         "python3 tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",

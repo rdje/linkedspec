@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.1 — preserve Lua body-fluent remainders
+
+Replaced the body-fluent adapter's hardcoded empty remainder with the unconsumed remainder already returned by
+`parse_fluent_chain`. Malformed same-line suffixes can no longer disappear behind a valid ASCII method prefix:
+`.Töp()` retains raw tail `öp()`, `.A·B()` retains `·B()`, and the measured hyphen/space/emoji/colon/slash variants
+retain their exact tails. The normal body loop materializes those tails as raw elements, and validation reports the
+complete unrecognized syntax. Fluent method classification remains ASCII-only; the rule-label classifier and all
+other parser roles are unchanged.
+
+Added one 166-assertion suite that runs unchanged on PUC Lua and LuaJIT. It proves exact fluent prefix/call identity,
+raw suffix identity and line ownership, validation type/message/JSON identity, valid `_method9`, multiple calls and
+arguments, comments, and same-line lifecycle/regex/action continuations plus child regex structure. The Unicode
+checker locks the adapter topology, every fixture and valid-route marker, exactly two runner registrations, and the
+canonical tracked-file registration.
+
+Focused 166/166 passes on both ABIs. Complete Lua remains `1..177` per ABI plus classifier 1,706, native routes 179,
+identity 359, PUC primary 66x2, and corpus 105/105. It also locks empty/dollar/no-prefix and newline controls. Full
+primary 5x2x66 and all ten Unicode legs pass. Semantic/Unicode/capability/generated/language/public ledgers remain
+exact at 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0, 246/105+1/122, and 59/27/0. Canonical CI passes
+Rust admission 1/1 in 78.47s, Dart 1/1, Julia 416/416 in 27.5s, reference primary 66x2, and Phase 0 1,031/1,031
+in 615s. No neutral fixture, generated format, public API, semantic response, rollout, or admission row changes;
+mdBook, Knowledge Map 699/5,410, memory/task/four doctrines, and diff hygiene pass. Exact 1,520,604-KiB cleanup
+removes only regenerable Rust dependency/incremental state, rendered book, Dart tool state, Python bytecode, and
+the disposable Julia depot. Exhaustive negative/trust/isolation proof `.10.7.1.3.2` follows the clean repair commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.0 — freeze Lua negative isolation repair
 
 Frozen a behavior-free repair and proof plan after the negative/isolation audit exposed one pre-existing Lua body-

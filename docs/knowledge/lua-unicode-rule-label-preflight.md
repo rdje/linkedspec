@@ -47,7 +47,9 @@ search classifier, complete-label predicate, and byte-offset prefix scanner from
 replaced only the five label-bearing declaration/body/action/blind/bare routes and added validator coverage
 immediately after the nonempty-spec check. Positive/distinct identity is complete. Negative/trust-route and
 adjacent-grammar proof now continues under `.10.7.1.3.0-.2`; its audit separately found the pre-existing body-
-fluent suffix-loss defect owned by `.3.1`. Semantic construction still waits for `.3` proof and `.4` recomposition.
+fluent suffix-loss defect, and `.3.1` repairs it by propagating the already returned remainder without widening
+fluent methods. Exhaustive `.3.2` remains active. Semantic construction still waits for `.3` proof and `.4`
+recomposition.
 Related facts:
 [[unicode-rule-label-contract]], [[lua-body-fluent-suffix-loss]],
 [[lua-semantic-introspection-authority-map]], and [[lua-unicode-rule-label-implementation-plan]].

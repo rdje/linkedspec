@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.1` — preserve subordinate-parser output instead of rescanning): The
+  body-fluent adapter already had the complete structured result from `parse_fluent_chain`: ordered calls and an
+  unconsumed remainder. Its defect came from reconstructing only a source prefix and replacing the remainder with
+  an empty string. The repair is deliberately one assignment—forward `fluent.remainder` into the established body
+  loop. That loop already owns comments, subsequent typed elements, raw fallback, and validation line attribution.
+
+  This composition is safer than adding Unicode awareness to fluent methods or inventing a second suffix check.
+  Unsupported suffixes become exact raw elements and fail through the existing validator; recognized lifecycle,
+  regex, and action-edge tails continue as typed elements; comments terminate cleanly; `_method9` and chained ASCII
+  calls remain unchanged. The focused suite and Unicode checker lock both halves, so a future edit cannot regain
+  prefix laundering or turn the repair into a broader identifier policy.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.0` — parser adapters must propagate subordinate remainders): A
   narrow token scanner is safe only if its caller preserves the text it did not consume. Lua's body-fluent parser
   already returns both `calls` and `remainder`, but `parse_single_element` rebuilt the source from an ASCII-prefix

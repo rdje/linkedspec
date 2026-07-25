@@ -1091,11 +1091,14 @@ content migration exists yet.
   descriptors, generated plans, loading, direct/generated/emitted/fresh-process execution, selectors, diagnostics,
   trace, and inline/file primary commands at 359 assertions per ABI. Normalization-sensitive labels remain separate,
   and portable artifacts expose neither loader paths nor host table identities. No public classifier API,
-  generated-source format, semantic response, rollout, or admission row moves. Completed audit `.10.7.1.3.0` freezes the
-  exhaustive negative/isolation matrix and one pre-existing body-fluent defect: `.Töp()` and `.A·B()` validate as
-  ASCII-prefix methods `T` and `A` because the body adapter discards `parse_fluent_chain`'s remainder. The result is
-  byte-identical on PUC Lua and LuaJIT. Active narrow whole-token repair `.3.1` precedes exhaustive dual-ABI proof `.3.2`;
-  neither may widen the separate ASCII fluent-method grammar.
+  generated-source format, semantic response, rollout, or admission row moves. Completed audit `.10.7.1.3.0`
+  identified one pre-existing body-fluent defect: `.Töp()` and `.A·B()` validated as ASCII-prefix methods `T` and
+  `A` because the body adapter discarded `parse_fluent_chain`'s remainder. Narrow repair `.3.1` now propagates that
+  remainder, so all seven measured non-ASCII/punctuation suffixes remain exact raw tails and fail validation.
+  Empty/dollar/no-prefix and newline controls also retain prior raw ownership. Valid `_method9`, chained methods,
+  comments, and lifecycle/regex/action continuations remain intact at 166 assertions on both PUC Lua and LuaJIT.
+  Exhaustive negative/trust/isolation proof `.3.2` is next; the separate
+  ASCII fluent-method grammar remains unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

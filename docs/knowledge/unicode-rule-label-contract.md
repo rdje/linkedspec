@@ -95,9 +95,10 @@ semantic rollout. Perl accepts the strict-decoded fixture route. Rust, Dart, and
 positive/distinct downstream identity, negative/identifier isolation, and composed signoff are aligned and closed.
 PUC Lua and LuaJIT now align the generated classifier, parser/validator trust boundary, and exact positive/distinct
 downstream identity. Exhaustive negative/trust-route rejection and adjacent-identifier isolation are split under
-`.10.7.1.3.0-.2`: the behavior-free audit found a pre-existing body-fluent adapter that discards a same-line suffix
-after an ASCII method prefix; `.3.1` owns only remainder propagation, and `.3.2` owns the exhaustive proof and
-parent closeout. Composed prerequisite closeout remains `.10.7.1.4`. See
+`.10.7.1.3.0-.2`: the behavior-free audit found a pre-existing body-fluent adapter that discarded a same-line
+suffix after an ASCII method prefix. `.3.1` now propagates that existing remainder and proves exact rejection plus
+control/valid-route preservation at 166 assertions per ABI; `.3.2` owns the exhaustive proof and parent closeout.
+Composed prerequisite closeout remains `.10.7.1.4`. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[julia-unicode-rule-label-preflight]], [[lua-unicode-rule-label-preflight]],
 [[lua-body-fluent-suffix-loss]], [[primary-cli-strict-utf8-text-contract]], and

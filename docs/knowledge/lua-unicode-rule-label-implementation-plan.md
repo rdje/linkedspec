@@ -16,9 +16,9 @@ answers:
   - "how are Lua Unicode rule-label tests registered on both ABIs"
   - "what is the Lua Unicode rule-label implementation dependency order"
 date: 2026-07-25
-status: native classifier/parser/validator and exact identity implemented; negative/isolation repair active at FUTURE-PARITY-BACKLOG.10.7.1.3.1
+status: native classifier/routes, exact identity, and body-fluent remainder repair implemented; exhaustive negative/isolation active at FUTURE-PARITY-BACKLOG.10.7.1.3.2
 tags: [lua, luajit, unicode, rule-labels, parser, validation, generation, testing]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.1.3.0 freezes the exact byte-identical PUC Lua/LuaJIT body-fluent suffix-loss cause, controls, narrow remainder-propagation repair, and exhaustive proof split without behavior. Unchanged Lua passes 1706 classifier, 179 routes, 359 identity, and 1..177 package assertions on each ABI plus PUC primary 66x2/corpus 105. Full primary 5x2x66, ten Unicode legs, canonical Rust 80.39s/Dart 1/1/Julia 416 in 28.5s/reference 66x2/Phase 0 1031 in 658s, KM 699/5410, and 1,533,624-KiB cleanup pass."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.1.3.1 forwards only the body adapter's existing fluent.remainder and proves exact raw-tail rejection plus control/valid-route preservation with 166 assertions on PUC Lua and LuaJIT. Complete Lua passes 1706 classifier, 179 routes, 359 identity, and 1..177 package assertions on each ABI plus PUC primary 66x2/corpus 105. Full primary 5x2x66, ten Unicode legs, canonical Rust 78.47s/Dart 1/1/Julia 416 in 27.5s/reference 66x2/Phase 0 1031 in 615s, KM 699/5410, and 1,520,604-KiB cleanup pass; semantic governance remains 6/20/89 at 5/9 + 4/6."
 reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels|fresh emitted host status' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua lua/test/unicode_rule_label_identity_routes_test.lua"
 ---
 
@@ -81,6 +81,9 @@ method scanner, but `parse_single_element` discards the unconsumed remainder ret
 Consequently `.Töp()` validates as method `T`, `.A·B()` as method `A`, and hyphen/space/emoji/colon/slash suffixes
 after `.Top` validate only as method `Top`, byte-identically on PUC Lua and LuaJIT. Empty, dollar-prefixed, newline,
 and conditional controls retain their malformed syntax and fail, isolating the defect to a same-line body-fluent
-adapter boundary. Repair `.3.1` must propagate the existing remainder without widening method identifiers;
-exhaustive `.3.2` then proves every negative/trust/artifact/runtime route and every adjacent grammar. See
+adapter boundary. Repair `.3.1` now propagates the existing remainder without widening method identifiers. All
+seven measured suffix classes become exact raw tails and validation failures; valid `_method9`, chained methods,
+empty/dollar/no-prefix and newline controls, comments, lifecycle, regex, and action continuations remain intact at
+166 assertions per ABI. Exhaustive `.3.2` now proves every negative/trust/artifact/runtime route and every
+adjacent grammar. See
 [[lua-body-fluent-suffix-loss]].

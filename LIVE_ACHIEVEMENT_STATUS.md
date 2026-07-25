@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Lua negative/isolation audit `.10.7.1.3.0` is fully verified; narrow body-fluent
-  remainder propagation `.10.7.1.3.1` is the single next task-tree-first PNT leaf after the clean planning commit,
-  before exhaustive dual-ABI proof `.3.2`.
+- None between committed leaves. Lua body-fluent remainder repair `.10.7.1.3.1` is fully verified; exhaustive
+  negative/trust/artifact/runtime and adjacent-grammar proof `.10.7.1.3.2` is the single next task-tree-first PNT
+  leaf after the clean repair commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.1 — preserve Lua body-fluent remainders**
+  (one-seam parser repair and exact dual-ABI preservation proof; closes with this commit).
+
+  **Result:** The Lua body adapter now forwards `parse_fluent_chain`'s existing remainder. Seven same-line suffix
+  classes become exact raw elements and deterministic validation failures instead of disappearing behind an ASCII
+  fluent prefix. The ASCII fluent-method grammar and Unicode rule-label classifier remain unchanged. Exact source,
+  call, raw-tail, line, validation, and JSON identity is locked alongside no-prefix/newline controls and valid
+  ASCII method, comment, lifecycle, regex, action-edge, and child-regex routes.
+
+  **Proof:** The same 166 assertions pass on PUC Lua and LuaJIT. Complete Lua passes classifier 1,706, routes 179,
+  identity 359, package `1..177` per ABI, PUC primary 66x2, and corpus 105/105. Primary 5x2x66, all ten Unicode
+  legs, semantic/Unicode/capability/generated/language/public no-drift, and canonical Rust 1/1 in 78.47s + Dart
+  1/1 + Julia 416/416 in 27.5s + reference primary 66x2 + Phase 0 1,031/1,031 in 615s pass. Semantic governance
+  remains 6/20/89 at rollout 5/9 and admission 4/6. Book/KM 699/5,410, memory/task/four doctrines/diff, and exact
+  1,520,604-KiB cleanup pass. Exhaustive `.3.2` follows the clean repair commit.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.0 — freeze Lua negative isolation repair**
   (behavior-free exact defect/control audit and implementation/proof split; closes with this commit).
 

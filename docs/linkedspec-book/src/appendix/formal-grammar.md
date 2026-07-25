@@ -218,10 +218,25 @@ selectors, portable diagnostics, native/generated trace, and inline/file primary
 decomposed labels remain separate keys and rules; loader paths and host table identities do not enter portable
 artifacts. One 359-assertion suite runs unchanged on PUC Lua and LuaJIT. Exhaustive negative trust routes and
 unrelated-identifier isolation remain separately owned. Their behavior-free audit found one older body-fluent
-whole-token defect outside the Unicode classifier: `.Töp()` validates as ASCII method `T`, and `.A·B()` as method
-`A`, because the body adapter discards the suffix already returned by its fluent parser. PUC Lua and LuaJIT agree
-byte-for-byte. A narrow repair will propagate that remainder and reject the complete malformed line without making
-fluent method names Unicode-aware; the subsequent exhaustive proof covers all negative and adjacent routes.
+whole-token defect outside the Unicode classifier: `.Töp()` validated as ASCII method `T`, and `.A·B()` as method
+`A`, because the body adapter discarded the suffix already returned by its fluent parser. PUC Lua and LuaJIT
+agreed byte-for-byte. The adapter now propagates that remainder. An unrecognized suffix becomes a raw body element,
+so validation rejects the complete malformed line without making fluent method names Unicode-aware.
+
+For example, this source is invalid on both Lua ABIs:
+
+```spec
+Root::
+ .Töp()
+```
+
+The parser retains the established ASCII fluent prefix `.T` and also retains the exact raw tail `öp()`; validation
+then reports `rule 'Root': unrecognized body syntax at line 2: öp()`. The same rule applies to `.A·B()` and to
+hyphen, space, emoji, colon, or slash suffixes after `.Top`. Valid ASCII `_method9`, multiple dotted calls,
+empty/dollar/no-prefix and newline controls, comments, and recognized same-line lifecycle, regex, and action-edge
+continuations keep their prior grammar. One 166-assertion suite proves those rejection and preservation boundaries
+unchanged on PUC Lua and LuaJIT. The subsequent exhaustive proof still owns every negative trust and adjacent-
+identifier route.
 
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
