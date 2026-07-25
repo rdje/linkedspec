@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.0 — freeze Lua Unicode label routes
+
+Frozen the behavior-free implementation plan for exact Unicode 17 rule labels on the shared PUC Lua/LuaJIT
+backend. A byte-identical disposable probe on both ABIs reconfirms 63/149,221 admitted required scalars, 3/9
+positive fixtures, and the `Top:::` boundary as parsed label `Top` plus header remainder `: /x/`. Required `A·B`
+and forbidden `Top-Rule`/`Top😀` each bypass current declaration, action, blind, and bare validation through both
+programmatic and JSON-reconstructed ASTs: all 24 structurally valid combinations pass per ABI.
+
+The plan assigns one generated internal `lua/src/linkedspec/unicode_rule_label.lua` artifact to the existing
+Unicode contract generator. It uses only Lua-5.1-compatible arithmetic, byte access, tables, and control flow to
+strictly decode UTF-8, binary-search 806 private range pairs, validate complete nonempty labels, and scan a longest
+valid prefix. Exactly five label roles move to it: headers, header-looking body lines, action targets, blind
+targets, and bare targets. The generic ASCII word scanner remains unchanged for adjacent identifier grammars.
+One validator pass after the nonempty-rule check covers declarations and all three target kinds, including
+programmatic/reconstructed ASTs, with shared `invalid_rule_label` / `validate_rule_labels` diagnostics.
+
+Implementation ownership is split cleanly: `.10.7.1.1` owns generator/checker/parser/validator plus classifier and
+native-route tests; `.2` owns exact positive/distinct identity across artifacts and runtime routes; `.3` owns all
+negative, trust-route, whole-token, and adjacent-grammar isolation; `.4` recomposes and closes the prerequisite.
+Unchanged Lua package `1..177` passes on both ABIs, PUC primary 66x2/corpus 105 pass, full primary passes 5x2x66,
+and all ten Unicode-manifest legs pass. Semantic governance remains six groups / 20 responses / 89 mutations at
+rollout 5/9 and native admission 4/6. This leaf changes no production file, generated artifact, test, fixture,
+contract, runtime result, response digest, format, rollout, or admission row. Knowledge Map 698/5,401, mdBook,
+memory/task/four doctrines, and diff hygiene pass. Canonical CI passes Rust admission 1/1 in 77.47s, Dart 1/1,
+Julia 416/416 in 27.2s, reference primary 66x2, Phase 0 1,031/1,031 in 647s, and the complete Lua gate on both
+ABIs. Exact 1,645,032-KiB cleanup removes only regenerable Rust dependency/incremental state, rendered book, Dart
+tool state, Python bytecode, and the disposable Julia depot. `.10.7.1.1` follows the clean planning commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.0 — map Lua semantic authorities
 
 Mapped the shared PUC Lua/LuaJIT semantic-introspection boundary without changing behavior. Existing strict UTF-8

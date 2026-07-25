@@ -18,7 +18,7 @@ answers:
 date: 2026-07-25
 status: current pre-implementation gap; owned by FUTURE-PARITY-BACKLOG.10.7.1
 tags: [lua, luajit, unicode, rule-labels, parser, validation, semantic-introspection]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 proves spec_parser.lua uses ASCII is_word_byte/read_word plus [%w_] header/body scans, while spec_validator.lua has no complete rule-label predicate. The neutral 806 ranges contain 149,221 scalars; Lua admits only the 63 required ASCII word scalars and therefore omits 149,158. Source parsing passes 3/9 positives and rejects Töp, decomposed Latin, Greek, CJK, middle dot, and supplementary labels. Top::: parses a Top header with rest ':' before validation rejects raw syntax. Programmatic and SpecFile JSON-reconstructed declaration/action/blind/bare labels accept required Unicode and forbidden hyphen/emoji forms through validation and compilation when the blind target uses its valid unindexed shape."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 proves spec_parser.lua uses ASCII is_word_byte/read_word plus [%w_] header/body scans, while spec_validator.lua has no complete rule-label predicate. FUTURE-PARITY-BACKLOG.10.7.1.0 reruns one byte-identical disposable probe on separately built PUC Lua and LuaJIT adapters. Each reports 149,221 required scalars, 63 admitted, 149,158 missing, and 3/9 source positives. Source Top::: /x/ parses a Top header with rest ': /x/' before validation rejects raw syntax. Required A·B, forbidden Top-Rule, and forbidden Top+emoji pass all four declaration/action/blind/bare roles through both programmatic and SpecFile JSON-reconstructed validation/compilation: 24/24 combinations per ABI, with valid unindexed blind shapes."
 reverify: "python3 tools/check_unicode_rule_label_contract.py; rg -n 'is_word_byte|read_word|check_at_least_one_rule|check_duplicate_rule_labels|check_edge_targets' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua; bash tools/run_lua_local.sh"
 ---
 
@@ -31,15 +31,16 @@ positives inside its admitted alphabet. The contract contains 149,221 required s
 149,158 missing.
 
 The neutral source probe passes only `Top`, `9_rule`, and `_` from the nine positive fixtures. It rejects required
-precomposed `Töp`, decomposed `Töp`, Greek, CJK, `A·B`, and the supplementary label. `Top:::` is partially parsed
-as label `Top` with `:` retained as header rest; validation later rejects the raw body, but the complete invalid
-label token is not rejected by a dedicated label boundary.
+precomposed `Töp`, decomposed `Töp`, Greek, CJK, `A·B`, and the supplementary label. `Top::: /x/` is partially
+parsed as label `Top` with `: /x/` retained as header rest; validation later rejects the raw body, but the complete
+invalid label token is not rejected by a dedicated label boundary.
 
 `validate_spec` checks nonempty specs, duplicates, functions, raw syntax, edge structure/targets, and regexes but
 never validates complete rule-label membership. Typed programmatic and `SpecFile` JSON-reconstructed ASTs can
-therefore carry `Töp`, `A·B`, forbidden `Top-Rule`, or forbidden `Top😀` through declaration, action, blind, and
-bare roles into compiled state. Blind targets pass when constructed in their valid unindexed form; an index is a
-separate existing `blind_call_index_forbidden` error and is not label evidence.
+therefore carry required `A·B`, forbidden `Top-Rule`, or forbidden `Top😀` through declaration, action, blind, and
+bare roles into compiled state. The `.10.7.1.0` rerun covers three labels x four roles x two trust paths and passes
+24/24 on each ABI. Blind targets pass when constructed in their valid unindexed form; an index is a separate
+existing `blind_call_index_forbidden` error and is not label evidence.
 
 Leaf `.10.7.1` must generate one internal Lua-5.1-compatible UTF-8 decoder, 806-range binary-search classifier,
 complete-label predicate, and byte-offset prefix scanner from the pinned neutral owner. It must replace only the
@@ -47,5 +48,5 @@ five label-bearing declaration/body/action/blind/bare routes and add validator c
 nonempty-spec check. Function/parameter/helper/fluent/lifecycle/conditional/mark identifiers retain their separate
 grammars. Exact positive/distinct artifact identity, all negative and prefix cases, external-AST denial, and every
 loaded/generated/emitted/selector/diagnostic/trace/primary route must pass unchanged on PUC Lua and LuaJIT before
-semantic construction begins. Related facts: [[unicode-rule-label-contract]] and
-[[lua-semantic-introspection-authority-map]].
+semantic construction begins. Related facts: [[unicode-rule-label-contract]],
+[[lua-semantic-introspection-authority-map]], and [[lua-unicode-rule-label-implementation-plan]].

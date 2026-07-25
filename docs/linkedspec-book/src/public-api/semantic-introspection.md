@@ -1706,9 +1706,24 @@ assert(ok == false) -- current pre-.10.7.1 boundary
 
 Validation is a separate gap: programmatic and JSON-reconstructed declarations plus action, blind, and bare
 targets can carry required Unicode or forbidden hyphen/emoji labels into compiled artifacts because no complete
-label predicate runs after AST construction. Unicode leaf `.10.7.1` must add one generated UTF-8 classifier that
-uses syntax shared by Lua 5.1/LuaJIT and PUC Lua, preserve exact identity through every artifact/runtime route,
-and close negative and adjacent-grammar isolation before semantic construction.
+label predicate runs after AST construction. Exact dual-ABI probes confirm 24/24 bypass combinations per ABI for
+required `A·B`, forbidden `Top-Rule`, and forbidden `Top😀` across those four roles and two trust routes. They also
+confirm that `Top::: /x/` currently becomes label `Top` plus retained header remainder `: /x/` before raw-syntax
+validation. These are documented pre-implementation boundaries, not accepted behavior.
+
+Behavior-free plan `.10.7.1.0` fixes the implementation shape. Generator
+`unicode_case/generate_unicode_rule_label_contract.py` will emit internal
+`lua/src/linkedspec/unicode_rule_label.lua`: 806 private endpoint pairs, a strict UTF-8 decoder, binary-search
+membership, complete-label validation, and longest-prefix scanning written entirely in Lua-5.1-compatible syntax.
+Exactly five label roles in `lua/src/linkedspec/spec_parser.lua` will use that scanner: headers, header-looking body
+lines, action targets, blind targets, and bare targets. The existing ASCII word reader stays authoritative for
+unrelated fluent, lifecycle, function, helper, and other identifier grammars.
+
+One validator pass immediately after the nonempty-rule check will cover declarations and every action/blind/bare
+target, including programmatic and reconstructed ASTs. It will use portable code `invalid_rule_label`, stage
+`validate_rule_labels`, and include the rejected label, line, and role. Invalid suffixes remain one malformed raw
+edge or body line rather than being accepted by prefix, and a third header colon is rejected explicitly. The
+classifier remains package-internal; no public Lua API is added.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks:
 opaque strict source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/
@@ -1718,7 +1733,10 @@ identity, paths, regex userdata, AST/ActionIR, callbacks, and trace objects can 
 The audit changes no production behavior, fixture, response digest, rollout, or admission row. Its proof includes
 unchanged package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs,
 semantic 6/20/89 at 5/9 + 4/6, every no-drift ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe
-cleanup. Unicode planning `.10.7.1.0` is the next task-tree-first leaf after the clean audit commit.
+cleanup. Planning `.10.7.1.0` changes none of those current results or ledgers. Generated classifier, parser,
+validator, and native-route implementation `.10.7.1.1` is next; later `.2` proves positive/distinct identity, `.3`
+owns negative/trust-route and adjacent-grammar isolation, and `.4` recomposes the prerequisite before semantic
+construction begins.
 
 ## Exact v1 record model
 

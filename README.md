@@ -1080,8 +1080,11 @@ content migration exists yet.
   by source/outcome `.2`, static `.3`, calls `.4`, query `.5`, observation `.6`, and one byte-identical PUC Lua/
   LuaJIT admission `.7`. This audit changes no Lua behavior or semantic governance. It closes with unchanged
   package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs, every
-  neutral ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe cleanup; `.10.7.1.0` is the next
-  task-tree-first planning leaf.
+  neutral ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe cleanup. Behavior-free planning
+  `.10.7.1.0` now freezes one generated Lua-5.1-compatible 806-range classifier, exactly five parser routes, one
+  four-role post-AST validator, shared diagnostics, identity/negative/isolation proof owners, and `.1-.4` gate
+  order without changing behavior or governance. Generated classifier and native-route implementation
+  `.10.7.1.1` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.0` — isolate rule labels from generic Lua identifiers): Lua's current
+  `is_word_byte`/`read_word` machinery serves more than rule labels, so broad Unicode widening would silently
+  change fluent methods, lifecycle words, function/action/helper identifiers, and keyword boundaries. The plan
+  instead gives rule labels one generated package-private scanner and routes exactly five parser roles through it:
+  headers, header-looking body lines, action targets, blind targets, and bare targets. Whole-token boundary checks
+  prevent a valid Unicode prefix from laundering a forbidden suffix; malformed edges/body lines remain raw, and
+  a third header colon is rejected explicitly.
+
+  The classifier must run byte-identically on LuaJIT's Lua 5.1 surface and installed PUC Lua. Its generated module
+  therefore uses `string.byte`, arithmetic, `math.floor`, numeric endpoint tables, and deterministic binary search;
+  it cannot depend on the 5.3 `utf8` library, bitwise syntax, integer subtypes, locales, optional modules, or table
+  iteration order. The 806-range table remains closure-private and no root API export is added. Independent
+  regeneration and source-marker checks protect both data identity and compatibility structure.
+
+  Parser correctness alone cannot close the trust boundary. Current programmatic and reconstructed ASTs admit
+  24/24 tested declaration/action/blind/bare combinations per ABI for required `A·B` and forbidden hyphen/emoji
+  labels when their relationships are otherwise valid. One authoritative validator pass therefore runs after
+  `check_at_least_one_rule` and before duplicate/raw/structural/target resolution. Its shared portable diagnostic
+  is `invalid_rule_label` at stage `validate_rule_labels`; a target additionally records its owning rule label.
+  Classifier/native routes, positive identity, negative/isolation, and no-change recomposition remain separate
+  `.1-.4` leaves so each committed proof has one omission-sensitive owner.
+
+  Cross-backend commands that allocate caches need their normal host dependencies plus a writable task depot.
+  A replacement-only Julia depot cannot resolve existing JSON3 state; stack the disposable writable depot before
+  the existing user and installation depots. With that explicit stack, the full 5x2x66 matrix and the ten-leg
+  Unicode manifest pass. This is verification environment composition, not a product or source-code dependency.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.0` — dual ABI must shape the semantic design before code): Lua's
   existing backend is one shared source tree but two language/runtime envelopes. New semantic code must parse on
   LuaJIT's Lua 5.1 surface and the installed PUC Lua, so it cannot use 5.3 bitwise syntax, the 5.3 `utf8` library,

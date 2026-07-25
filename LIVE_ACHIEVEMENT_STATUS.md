@@ -8,13 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Behavior-free PUC Lua/LuaJIT audit `.10.7.0` is fully verified; Unicode
-  implementation planning `.10.7.1.0` is the single next task-tree-first PNT leaf after the clean audit commit.
+- None between committed leaves. Behavior-free Unicode classifier/parser/validator plan `.10.7.1.0` is fully
+  verified; generated classifier and native-route implementation `.10.7.1.1` is the single next task-tree-first
+  PNT leaf after the clean planning commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.0 — freeze Lua Unicode label routes**
+  (behavior-free plan from clean audit commit `a1accafb`; closes with this commit).
+
+  **Result:** One internal generated 806-range classifier, Lua-5.1-compatible strict UTF-8 decoding, exactly five
+  parser routes, one four-role post-AST validator, shared diagnostics, whole-token malformed preservation, and
+  `.1-.4` classifier/identity/isolation/recomposition ownership are frozen without changing production, tests,
+  fixtures, contracts, results, formats, rollout, or admission.
+
+  **Proof:** Exact PUC Lua/LuaJIT probes agree on 63/149,221 admitted scalars, 3/9 positives, `Top:::` label/rest,
+  and 24/24 structurally valid AST bypass combinations per ABI. Unchanged dual-ABI Lua `1..177`, PUC primary
+  66x2/corpus 105, full primary 5x2x66, all ten Unicode legs, semantic 6/20/89 at 5/9 + 4/6, Unicode 806/9/8/2,
+  capability/generated/language/public 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0, book/KM 698/5,401,
+  memory/task/four doctrines/diff, and canonical Rust 77.47s + Dart 1/1 + Julia 416/27.2s + reference primary
+  66x2 + Phase 0 1,031/647s + dual-ABI Lua pass. Exact 1,645,032-KiB cleanup removes only regenerable artifacts.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.0 — map Lua semantic authorities**
   (DONE from clean Julia closeout `d0c10557`; closed by this commit).
 
