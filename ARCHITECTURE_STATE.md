@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-25`
+- `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
+  Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
+  JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's
+  ASCII rule-label scanner accepts only 3/9 positives and 63/149,221 required scalars, while external AST
+  declarations and action/blind/bare targets bypass membership. The exact dependency split is Unicode `.1`,
+  source/outcome `.2`, static `.3`, calls `.4`, query `.5`, observation `.6`, and byte-identical dual-ABI admission
+  `.7`. Unchanged dual-ABI package `1..177`, PUC primary 66x2/corpus 105, full primary 5x2x66, ten Unicode legs,
+  every no-drift ledger, book/KM 697/5,388, doctrines, canonical Rust 77.58s + Dart 1/1 + Julia 416/27.2s +
+  reference 66x2 + Phase 0 1,031/613s, and exact 1,555,508-KiB cleanup pass. Semantic state stays 6/20/89 at
+  rollout 5/9 and admission 4/6; Unicode plan `.10.7.1.0` is next after the clean audit commit.
 - `2026-07-25` Julia semantic-admission refresh: `FUTURE-PARITY-BACKLOG.10.6.7` adds no second semantic owner.
   One ordered twelve-role consumer composes Julia's committed strict source/outcome, exact static/call/staged/
   generated projections, typed/raw-neutral query, caller-owned runtime observation, loaded and JSON-reconstructed

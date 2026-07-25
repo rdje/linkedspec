@@ -8,19 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.6.7` is closed by this commit from planning commit `20c5b2bb`. One ordered twelve-role Julia semantic
-  consumer now composes every committed owner and route, all twenty typed/raw-neutral digests, privacy/paging/
-  budget/error/explain/non-interference/host denial, and exact runtime evidence. Package and canonical registration
-  plus eight independent topology mutations advance only Julia to semantic 6/20/89 at rollout 5/9 and native
-  admission 4/6. Focused 416/416, thirteen semantic suites at 1,753, and complete Julia 9,295/primary/105 pass.
-  Primary 5x2x66, ten Unicode legs, every ledger, book/KM 695/5,358, canonical Rust 78.60s + Dart 1/1 + Julia
-  416/27.6s + reference 66x2 + Phase 0 1,031/636s, and exact 1,632,888-KiB cleanup pass. No work remains in flight;
-  the next PNT slice is a behavior-free task-tree audit/split for PUC Lua/LuaJIT `.10.7` from this clean closeout.
+- None between committed leaves. Behavior-free PUC Lua/LuaJIT audit `.10.7.0` is fully verified; Unicode
+  implementation planning `.10.7.1.0` is the single next task-tree-first PNT leaf after the clean audit commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.0 — map Lua semantic authorities**
+  (DONE from clean Julia closeout `d0c10557`; closed by this commit).
+
+  **Result:** Reusable strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/JSON authorities
+  and missing source-map/SHA/static/query/typed-observation seams are exact. Unicode parsing is 3/9 with 149,158
+  required scalars missing; programmatic/reconstructed label membership is unenforced. Work is dependency-split
+  through `.10.7.1-.7`; semantic governance remains 6/20/89 at 5/9 + 4/6.
+
+  **Proof:** Every focused Lua suite and package `1..177` pass on PUC Lua and LuaJIT; PUC primary 66x2 and corpus
+  105/105 pass. Full primary is 5x2x66 and all ten Unicode legs pass. Semantic/Unicode/capability/generated/
+  language/public ledgers remain exact at 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0,
+  246/105+1/122, and 59/27/0. Book/KM 697/5,388, memory/task/four doctrines/diff pass. Canonical passes Rust
+  1/1 in 77.58s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, and Phase 0 1,031/1,031 in 613s. Exact
+  1,555,508-KiB cleanup removes only regenerable artifacts. `.10.7.1.0` is next after the clean commit.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.6.7 — admit Julia semantic introspection**
   (DONE and fully verified from planning commit `20c5b2bb`; closed by this commit).
 

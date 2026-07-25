@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.0 — map Lua semantic authorities
+
+Mapped the shared PUC Lua/LuaJIT semantic-introspection boundary without changing behavior. Existing strict UTF-8
+parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/JSON owners can be composed, but Lua currently
+has no semantic API, exact source map, package SHA-256 implementation, normalized static/call projection, query
+evaluator, or typed runtime-observation sink. Loaded state retains host paths; compiled/descriptor JSON exposes
+native table/metatable state; ActionIR spans are local character offsets; generated execution broadly translates
+callback failures. The plan therefore requires copied source authority, private weak-key/opaque state, detached
+canonical values, Lua-5.1/5.4-compatible arithmetic, typed observation seams, and exact callback passthrough.
+
+The Unicode prerequisite is exact. The ASCII label scanner admits only the 63 required ASCII word scalars from
+149,221 pinned Unicode 17 `XID_Continue` scalars, omitting 149,158. Source parsing passes 3/9 positive fixtures and
+rejects `Töp`, decomposed Latin, Greek, CJK, middle dot, and supplementary labels. `Top:::` is partially parsed as
+`Top` plus header rest before raw-syntax validation. Programmatic and JSON-reconstructed declaration/action/blind/
+bare roles accept required Unicode and forbidden hyphen/emoji labels through compilation because validation has no
+complete label predicate. The canonical Unicode card and ADR `0051` now correctly record Rust/Dart/Julia complete
+and Lua dual-ABI pending.
+
+Task `.10.7` is split into Unicode `.1`, source/outcome `.2`, private static `.3`, calls/staging/generated `.4`,
+immutable typed/raw-neutral query `.5`, typed runtime observation `.6`, and one byte-identical dual-ABI admission
+consumer `.7`, with dependency leaves for each stage. The unchanged Lua gate passes every focused suite and package
+`1..177` on both ABIs; PUC Lua primary 66x2 and corpus 105/105 pass. Semantic governance remains six groups / 20
+responses / 89 mutations at rollout 5/9 and native admission 4/6. Full primary 5x2x66, all ten Unicode legs,
+Unicode/capability/generated/language/public ledgers, mdBook, Knowledge Map 697/5,388, memory/task/four doctrines,
+and diff hygiene pass. Canonical CI passes Rust admission in 77.58s, Dart 1/1, Julia 416/416 in 27.2s, reference
+primary 66x2, and Phase 0 1,031/1,031 in 613s. Exact 1,555,508-KiB cleanup removes only regenerable build/tool/
+book/task-depot artifacts. `.10.7.0` closes without behavior or promotion; Unicode plan `.10.7.1.0` is next.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.6.7 — admit Julia semantic introspection
 
 Added Julia's one composed semantic-introspection admission consumer. Its ordered twelve exact-once roles exercise

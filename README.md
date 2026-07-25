@@ -1072,6 +1072,16 @@ content migration exists yet.
   neutral JSON, all twenty digests, bounded-query behavior, non-execution immutability, and host/path/IR denial.
   Eight Julia topology mutations raise governance to 6/20/89, rollout 5/9, and native admission 4/6 without a
   production, fixture, model, query, runtime, or generated-format change; PUC Lua and LuaJIT remain pending.
+  Behavior-free Lua preflight `.10.7.0` now maps the complete dual-ABI implementation before code. Lua has reusable
+  strict parser/AST/compiled/ActionIR/staged/generated/loader/trace/runtime/JSON authorities, but no semantic API,
+  exact source map, package SHA-256, private static projection, query evaluator, or typed observation sink. Its
+  ASCII label scanner accepts only 3/9 Unicode-label positives and omits 149,158 required scalars; external ASTs
+  bypass declaration/action/blind/bare membership. Unicode `.10.7.1` is therefore the first prerequisite, followed
+  by source/outcome `.2`, static `.3`, calls `.4`, query `.5`, observation `.6`, and one byte-identical PUC Lua/
+  LuaJIT admission `.7`. This audit changes no Lua behavior or semantic governance. It closes with unchanged
+  package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs, every
+  neutral ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe cleanup; `.10.7.1.0` is the next
+  task-tree-first planning leaf.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

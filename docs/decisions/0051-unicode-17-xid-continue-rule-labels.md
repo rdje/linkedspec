@@ -1,7 +1,7 @@
 # 0051 - Rule labels use pinned Unicode 17 XID_Continue scalars
 
 - Date: 2026-07-21
-- Status: accepted; Rust implemented
+- Status: accepted; Rust, Dart, and Julia implemented; PUC Lua/LuaJIT pending
 - Tags: architecture, grammar, unicode, identifiers, rust, validation, generated-data, portability, parity
 
 ## Context
@@ -47,12 +47,16 @@ The director selected Unicode expansion rather than revising the admitted v1 fix
 - Canonically equivalent spellings may coexist as distinct labels. This is deliberate and avoids invisible source
   rewriting; authors who want normalized identity must spell labels consistently.
 - Unicode upgrades are explicit contract changes with regenerated ranges and reviewed fixture deltas.
-- Other backend scanners must consume or prove this exact universal policy before a future recurring label-syntax
-  admission can claim exhaustive cross-backend membership parity.
+- PUC Lua and LuaJIT remain the only backend scanners that must consume this exact universal policy before a future
+  recurring label-syntax admission can claim exhaustive cross-backend membership parity. Their implementation is
+  owned by `FUTURE-PARITY-BACKLOG.10.7.1`.
 
 ## Links
 
 - Task owner: `FUTURE-PARITY-BACKLOG.10.4.0.2`
+- Dart implementation owner: `FUTURE-PARITY-BACKLOG.10.5.0.2`
+- Julia implementation owner: `FUTURE-PARITY-BACKLOG.10.6.1`
+- Lua implementation owner: `FUTURE-PARITY-BACKLOG.10.7.1`
 - Accepted semantic model: ADR `0049`
 - Pinned Unicode inputs and no-normalization precedent: ADR `0027`
 - Strict UTF-8 boundaries: ADRs `0025` and `0026`

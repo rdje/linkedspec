@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.0` — dual ABI must shape the semantic design before code): Lua's
+  existing backend is one shared source tree but two language/runtime envelopes. New semantic code must parse on
+  LuaJIT's Lua 5.1 surface and the installed PUC Lua, so it cannot use 5.3 bitwise syntax, the 5.3 `utf8` library,
+  integer-only assumptions, table iteration order, or an optional digest module. Source mapping, the generated
+  Unicode classifier, SHA-256, integer validation, canonical JSON, and every test consumer must execute unchanged
+  under both ABIs. The admitted values remain inside neutral safe-integer bounds.
+
+  Lua's native authorities are rich but not portable by themselves. `CompiledSpec` clones `SpecFile` and retains
+  ordered rules, ActionIR, registry, dependencies, diagnostics, and generated-v2 input, while function shells and
+  staged jobs remain separate from rule-only `definition_order`. Header/body spans are line/fragments and ActionIR
+  spans are character-local, so a private accepted-source map must correlate them to neutral UTF-8 byte/scalar
+  coordinates. `LoadedCompiledSpec` retains a resolved path and descriptors expose native metatables; neither is a
+  semantic schema or constructor authority. Existing trace weak-key storage is the usable opacity precedent, but
+  every public aggregate still needs a fresh canonical detached copy and a safe display.
+
+  Runtime observation cannot be reconstructed from trace text. The accepted-slot seam already validates exact
+  target/slot identity before `trace_regex_slot_selected`, and final success exists only after top-level
+  `RuntimeParseResult` construction. A separate optional typed sink belongs at those two seams, must allocate/hash
+  nothing when absent, and must preserve exact caller error identity. Generated execution currently maps broad
+  failures to generated-source diagnostics, so callback failure needs its own private pass-through marker before
+  generic translation. The same route must work in loaded, reconstructed, generated-plan, emitted, traced, and
+  fresh PUC Lua/LuaJIT processes without changing generated-source v2.
+
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.0` — rule-label validation is a separate trust boundary): The current
+  parser's ASCII `is_word_byte`/`read_word` and `[%w_]` header scans accept only 3/9 neutral positives and 63 of
+  149,221 required scalars. That source gap is distinct from the validator gap: programmatic and reconstructed
+  declaration/action/blind/bare labels bypass membership entirely and compile when their structural relationships
+  are valid. Blind probes must omit a regex index; using index zero measures the unrelated existing
+  `blind_call_index_forbidden` boundary and gives a false negative for label bypass. Unicode `.10.7.1` therefore
+  needs both a generated scalar-safe parser and an authoritative post-AST validator before any semantic fixture.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.6.7` — admission is an omission-sensitive consumer boundary): Julia's
   admission is one orchestration test with the same twelve ordered roles as Perl, Rust, and Dart. It
   deliberately calls the committed source/outcome, static/call, query, runtime-observation, generated-plan,

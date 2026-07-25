@@ -1685,6 +1685,41 @@ local CI also passes all doctrine/contract gates, Rust semantic admission 1/1 in
 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The closeout removes only 1,632,888 KiB of
 regenerable build/depot artifacts and preserves source plus reusable package caches.
 
+## Current Lua authority and Unicode preflight
+
+PUC Lua and LuaJIT remain pending, and completed behavior-free audit `.10.7.0` fixes their implementation boundary
+before semantic code. The shared Lua source already has strict UTF-8 parsing, typed source and ActionIR ASTs, staged
+function payload/job/result sidecars, ordered compiled state, portable diagnostics, generated-source v2, loaded
+and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
+JSON. It does not yet expose a semantic index, exact source map, package SHA-256, private normalized projection,
+query evaluator, or typed semantic observation sink.
+
+The Unicode prerequisite is measurable. Lua's rule-label scanner accepts only the 63 ASCII word scalars, so it
+passes 3/9 neutral positive labels and omits 149,158 scalars required by pinned Unicode 17 `XID_Continue`. In
+particular, the accepted privacy fixture cannot yet be parsed:
+
+```lua
+local linkedspec = require("linkedspec")
+local ok = pcall(linkedspec.parse_spec, "Töp:\n /é/\n")
+assert(ok == false) -- current pre-.10.7.1 boundary
+```
+
+Validation is a separate gap: programmatic and JSON-reconstructed declarations plus action, blind, and bare
+targets can carry required Unicode or forbidden hyphen/emoji labels into compiled artifacts because no complete
+label predicate runs after AST construction. Unicode leaf `.10.7.1` must add one generated UTF-8 classifier that
+uses syntax shared by Lua 5.1/LuaJIT and PUC Lua, preserve exact identity through every artifact/runtime route,
+and close negative and adjacent-grammar isolation before semantic construction.
+
+The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks:
+opaque strict source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/
+raw-neutral query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer run
+on both PUC Lua and LuaJIT at `.7`. Public values must be detached and canonical; metatable names, `table: 0x...`
+identity, paths, regex userdata, AST/ActionIR, callbacks, and trace objects can never enter portable responses.
+The audit changes no production behavior, fixture, response digest, rollout, or admission row. Its proof includes
+unchanged package `1..177` on both ABIs, PUC primary 66x2/corpus 105, full primary 5x2x66, all ten Unicode legs,
+semantic 6/20/89 at 5/9 + 4/6, every no-drift ledger, mdBook/Knowledge Map/doctrines, canonical CI, and exact safe
+cleanup. Unicode planning `.10.7.1.0` is the next task-tree-first leaf after the clean audit commit.
+
 ## Exact v1 record model
 
 Every record has exactly:

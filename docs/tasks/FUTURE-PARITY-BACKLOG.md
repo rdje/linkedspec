@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-25` (exact Julia semantic admission `.10.6.7` and parent `.10.6` close at
-  rollout 5/9 and native admission 4/6; PUC Lua/LuaJIT `.10.7` is the next task-tree-first frontier)
+- Last updated: `2026-07-25` (behavior-free PUC Lua/LuaJIT semantic authority and Unicode preflight `.10.7.0`
+  is complete; Unicode implementation planning `.10.7.1.0` is next at unchanged rollout 5/9 and admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10967,8 +10967,9 @@ before implementation.
   `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
-  Status: `pending`
+  Status: `active` (2026-07-25; behavior-free authority/Unicode preflight `.10.7.0` done; Unicode plan `.10.7.1.0` next)
   Goal: Implement the Lua semantic index adapter with exact PUC Lua/LuaJIT identity.
+  Children: `.10.7.0`, `.10.7.1`, `.10.7.2`, `.10.7.3`, `.10.7.4`, `.10.7.5`, `.10.7.6`, `.10.7.7`
   Depends on: `.10.6`
   Acceptance: Project the same model from Lua compiled/action/provenance/diagnostic/generated authorities through
     idiomatic Lua objects plus neutral JSON; use one byte-identical consumer on both ABIs; prove every reference
@@ -10976,6 +10977,229 @@ before implementation.
     generated gate, and canonical gate without metatables or Lua object identity entering portable records. Before
     the `Töp` privacy fixture can be admitted, align every shared PUC Lua/LuaJIT rule declaration/reference/artifact/
     selector route with ADR `0051`'s pinned Unicode 17 `XID_Continue` and exact identity contract.
+
+  #### Acceptance Checklist
+
+  - [x] **AUDIT / SPLIT** — Map every reusable Lua authority and missing semantic seam, reproduce the exact Unicode
+    prerequisite and trust-route bypasses, and freeze an omission-safe `.1-.7` dependency order before behavior.
+  - [ ] **UNICODE PREREQUISITE** — Align declaration/action/blind/bare parsing and validation to one generated
+    Unicode 17 classifier on PUC Lua and LuaJIT without widening unrelated identifiers or promoting semantics.
+  - [ ] **SOURCE / STATIC / CALLS** — Construct one opaque strict source/outcome owner, then exact private static
+    and calls/staged/generated projections from retained native authority without exposing host tables/metatables.
+  - [ ] **QUERY / OBSERVATION** — Expose one immutable typed/raw-neutral evaluator and caller-owned typed runtime
+    observations with exact pages, budgets, privacy, errors, explanations, and all twenty response hashes.
+  - [ ] **DUAL-ABI ADMISSION** — Run one byte-identical ordered consumer on PUC Lua and LuaJIT, lock both admission
+    rows and canonical topology, advance only Lua, synchronize public state, and close `.10.7` cleanly.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.0`
+  Status: `done` (2026-07-25; behavior-free authority/Unicode audit and dependency split verified)
+  Goal: Map Lua semantic and Unicode-label authorities, prove the exact pre-implementation boundary on both ABIs,
+    and split all implementation into omission-safe leaves before behavior code.
+  Depends on: `.10.6.7`
+  Acceptance: Retrieve canonical semantic, Unicode-label, Lua compiled/ActionIR/staged/generated/loader/trace/
+    diagnostic/JSON/dual-ABI facts through the Knowledge Map and Toolbox before source inspection; measure all
+    rule-label parser and external-AST routes against ADR `0051`; inventory strict source, mapping, compiled/
+    failed outcome, static/call/provenance/query/runtime/generated/emitted/trace authorities and gaps; record Lua
+    5.1/5.4 compatibility, table/metatable privacy, deterministic JSON, digest, numeric, callback-identity, path,
+    and non-interference risks; create complete `.1-.7` children; synchronize task/index/memory/roadmaps/mdBook/
+    Knowledge Map; change no Lua production/test behavior, fixture, contract, response, rollout, or admission row.
+  Verification plan: Prove the current parser accepts only the three ASCII positive fixtures and omits 149,158
+    required Unicode 17 scalars; verify parsed malformed boundaries plus programmatic/JSON-reconstructed declaration,
+    action, blind, and bare trust routes; inspect all native authorities and exact generated/trace/runtime seams;
+    run unchanged `tools/run_lua_local.sh` on both ABIs, semantic/Unicode/no-drift ledgers, primary matrix, mdBook,
+    Knowledge Map, doctrines, canonical CI, diff hygiene, and safe cleanup before closing this behavior-free leaf.
+
+  Completion evidence: Knowledge Map and Toolbox retrieval precede inspection of the complete shared Lua owner
+  chain. Exact probes establish no semantic API, source map, package SHA-256, private projection/query, or typed
+  observation sink; rule-only compiled definition order, local-character ActionIR spans, loader path retention,
+  native metatable/table exposure, trace/non-observation separation, generated callback translation, and the exact
+  accepted-slot/final-result seams are recorded. Unicode census proves 63/149,221 required scalars, 149,158
+  missing, 3/9 source positives, partial `Top:::` parsing, and declaration/action/blind/bare programmatic plus JSON-
+  reconstructed membership bypasses. Work is dependency-complete through `.10.7.1-.7` and two new fact cards.
+  Unchanged focused suites and package `1..177` pass on PUC Lua and LuaJIT; PUC primary 66x2 and corpus 105/105
+  pass. Semantic 6/20/89 at 5/9 + 4/6, Unicode 806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, language
+  246/105+1/122, public 59/27/0, full primary 5x2x66, and all ten Unicode legs pass. Knowledge Map 697/5,388,
+  mdBook, memory, task metadata, all four doctrines, and diff hygiene pass. Canonical CI passes Rust admission 1/1
+  in 77.58s, Dart 1/1, Julia 416/416 in 27.2s, reference primary 66x2, and Phase 0 1,031/1,031 in 613s. Exact
+  1,555,508-KiB cleanup removes only regenerated Rust deps/incrementals, rendered book, Python bytecode, Dart tool
+  state, and task Julia depots. No Lua production/test behavior, fixture, contract, response, format, rollout, or
+  admission row changes; `.10.7.1.0` waits for this clean audit commit.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.1`
+  Status: `pending`
+  Goal: Align every Lua rule-label route with pinned Unicode 17 `XID_Continue` on PUC Lua and LuaJIT.
+  Children: `.10.7.1.0`, `.10.7.1.1`, `.10.7.1.2`, `.10.7.1.3`, `.10.7.1.4`
+  Depends on: `.10.7.0`
+  Acceptance: Generate one Lua-5.1-compatible UTF-8 classifier/scanner from the neutral 806 ranges; route headers,
+    body boundaries, action/blind/bare targets, and authoritative validation through it; preserve every positive/
+    distinct identity through native/loaded/reconstructed/descriptor/generated/emitted/selector/diagnostic/trace/
+    primary routes; reject all negatives and prefix/bypass cases without semantic promotion.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.1.0`
+    Status: `pending`
+    Goal: Freeze the generated dual-ABI classifier, parser/validator routing, identity, isolation, and gate split.
+    Depends on: `.10.7.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.1.1`
+    Status: `pending`
+    Goal: Generate and route one pinned Lua rule-label classifier through parser and validator authorities.
+    Depends on: `.10.7.1.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.1.2`
+    Status: `pending`
+    Goal: Prove all positive/distinct labels retain exact identity through every Lua artifact and runtime route.
+    Depends on: `.10.7.1.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.1.3`
+    Status: `pending`
+    Goal: Reject every negative and trust-route bypass while isolating all unrelated Lua identifier grammars.
+    Depends on: `.10.7.1.2`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.1.4`
+    Status: `pending`
+    Goal: Recompose the committed dual-ABI Unicode prerequisite and close `.10.7.1` without semantic promotion.
+    Depends on: `.10.7.1.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.2`
+  Status: `pending`
+  Goal: Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner.
+  Children: `.10.7.2.0`, `.10.7.2.1`, `.10.7.2.2`, `.10.7.2.3`
+  Depends on: `.10.7.1`
+  Acceptance: Freeze the public constructor/privacy/error boundary, retain copied strict bytes plus exact byte/
+    scalar mapping and package-internal portable SHA-256, stage one compiled-or-failed outcome without execution or
+    path reads, and composition-close identical PUC Lua/LuaJIT behavior before static projection.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.2.0`
+    Status: `pending`
+    Goal: Freeze the Lua source/outcome constructor, privacy, error, no-path, and dependency split before code.
+    Depends on: `.10.7.1.4`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.2.1`
+    Status: `pending`
+    Goal: Implement strict copied source identity, portable SHA-256, and exact private byte/scalar coordinates.
+    Depends on: `.10.7.2.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.2.2`
+    Status: `pending`
+    Goal: Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan.
+    Depends on: `.10.7.2.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.2.3`
+    Status: `pending`
+    Goal: Recompose committed source/outcome proof and close `.10.7.2` without projection or promotion.
+    Depends on: `.10.7.2.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.3`
+  Status: `pending`
+  Goal: Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities.
+  Children: `.10.7.3.0`, `.10.7.3.1`, `.10.7.3.2`, `.10.7.3.3`
+  Depends on: `.10.7.2`
+  Acceptance: Map authority first; build the exact graph target; then close privacy/failure/runtime-static,
+    repeated-lifecycle, detached-copy, metatable/host/path, and no-execution isolation on both ABIs without exports.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.3.0`
+    Status: `pending`
+    Goal: Freeze exact Lua static targets, source correlation, normalization, privacy, and ownership before code.
+    Depends on: `.10.7.2.3`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.3.1`
+    Status: `pending`
+    Goal: Project the exact compiled graph/source/evidence target behind the opaque semantic index.
+    Depends on: `.10.7.3.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2`
+    Status: `pending`
+    Goal: Complete privacy, failed/runtime-static, repeated-lifecycle, clone, and host-leak isolation targets.
+    Depends on: `.10.7.3.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.3.3`
+    Status: `pending`
+    Goal: Recompose all committed private static targets and close `.10.7.3` without public query.
+    Depends on: `.10.7.3.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.4`
+  Status: `pending`
+  Goal: Complete private Lua functions/helpers/calls/bindings plus staged/generated semantic provenance.
+  Children: `.10.7.4.0`, `.10.7.4.1`, `.10.7.4.2`, `.10.7.4.3`
+  Depends on: `.10.7.3`
+  Acceptance: Freeze authority/correlation first; project the exact non-staged typed core; add truthful staged
+    payload/job/result and selected generated-v2 artifact evidence; composition-close 22/25 without public query.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.4.0`
+    Status: `pending`
+    Goal: Freeze Lua calls/staging/generated authorities, source correlation, and exact 22/25 ownership split.
+    Depends on: `.10.7.3.3`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.4.1`
+    Status: `pending`
+    Goal: Project typed functions/helpers/calls/bindings and the exact non-staged 18/16 target.
+    Depends on: `.10.7.4.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.4.2`
+    Status: `pending`
+    Goal: Complete staged payload/job/result plus selected generated-plan provenance at exact 22/25.
+    Depends on: `.10.7.4.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.4.3`
+    Status: `pending`
+    Goal: Recompose the committed calls/staging/generated target and close `.10.7.4` without exports.
+    Depends on: `.10.7.4.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.5`
+  Status: `pending`
+  Goal: Expose one immutable Lua typed/raw-neutral semantic query evaluator over detached private projection data.
+  Children: `.10.7.5.0`, `.10.7.5.1`, `.10.7.5.2`, `.10.7.5.3`, `.10.7.5.4`
+  Depends on: `.10.7.4`
+  Acceptance: Audit authority; implement immutable values plus non-traversal kernel; add relation traversal/pages/
+    budgets/costs; expose typed/raw-neutral public calls only when all 19 static hashes and 26 malformed boundaries
+    match identically on both ABIs; composition-close with no runtime observation or promotion.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.5.0`
+    Status: `pending`
+    Goal: Freeze detached projection authority, public vocabulary, 19 hashes, 26 boundaries, and dependency order.
+    Depends on: `.10.7.4.3`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.5.1`
+    Status: `pending`
+    Goal: Implement private immutable protocol values plus capabilities/list/get/explain and source policy.
+    Depends on: `.10.7.5.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.5.2`
+    Status: `pending`
+    Goal: Add exact relation traversal, paging, budgets, costs, prefixes, warnings, and portable errors.
+    Depends on: `.10.7.5.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.5.3`
+    Status: `pending`
+    Goal: Expose typed and raw-neutral public Lua query calls together at all 19 static hashes/26 boundaries.
+    Depends on: `.10.7.5.2`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.5.4`
+    Status: `pending`
+    Goal: Recompose the immutable query surface and close `.10.7.5` without runtime or ledger promotion.
+    Depends on: `.10.7.5.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.6`
+  Status: `pending`
+  Goal: Add caller-owned typed Lua runtime observation and exact immutable post-execution projection.
+  Children: `.10.7.6.0`, `.10.7.6.1`, `.10.7.6.2`, `.10.7.6.3`, `.10.7.6.4`
+  Depends on: `.10.7.5`
+  Acceptance: Audit exact regex-selection/final-result seams and callback propagation first; add typed invocation-
+    local capture; derive a separate observed index and twentieth hash; propagate through loaded/generated/emitted/
+    traced and fresh dual-ABI hosts while preserving callback identity and generated-source v2; composition-close.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.6.0`
+    Status: `pending`
+    Goal: Freeze typed observation vocabulary, emission points, callback identity, routes, and dependency order.
+    Depends on: `.10.7.5.4`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.6.1`
+    Status: `pending`
+    Goal: Add optional invocation-local typed regex-selection/final-result capture to direct and loaded execution.
+    Depends on: `.10.7.6.0`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.6.2`
+    Status: `pending`
+    Goal: Validate detached typed events into an immutable observed index and exact twentieth response digest.
+    Depends on: `.10.7.6.1`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.6.3`
+    Status: `pending`
+    Goal: Propagate observation through generated helpers/emitted modules/tracing and isolated dual-ABI hosts.
+    Depends on: `.10.7.6.2`
+  - ID: `FUTURE-PARITY-BACKLOG.10.7.6.4`
+    Status: `pending`
+    Goal: Recompose every committed observation owner/route and close `.10.7.6` without format or promotion.
+    Depends on: `.10.7.6.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.7.7`
+  Status: `pending`
+  Goal: Admit the exact byte-identical Lua semantic implementation on PUC Lua and LuaJIT and close `.10.7`.
+  Depends on: `.10.7.6`
+  Acceptance: Add one ordered twelve-role consumer that runs unchanged on both ABIs over all snapshots, exact
+    queries, policy/isolation/denial cases, and native/loaded/reconstructed/generated/emitted/traced routes; lock
+    both admission rows, identical consumer topology, canonical registration, and Lua-only rollout promotion;
+    pass complete dual-ABI/package/primary/corpus/generated/canonical/public proof and close the parent cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.8`
   Status: `pending`
@@ -13243,10 +13467,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-07-25):** Julia admission `.10.6.7` and parent `.10.6` are fully verified and close
-with one ordered twelve-role consumer at focused 416/416, semantic 1,753, complete Julia 9,295/primary/105,
-semantic governance 6/20/89, rollout 5/9, and native admission 4/6. PUC Lua/LuaJIT `.10.7` is the next pending
-roadmap leaf from this clean Julia closeout and must begin with a behavior-free authority audit/dependency split.
+**Authoritative frontier (2026-07-25):** Behavior-free PUC Lua/LuaJIT audit `.10.7.0` is fully verified and closes
+from Julia admission `d0c10557`. It maps reusable strict parser/AST, compiled/ActionIR/staged/generated/loader/
+trace/runtime/JSON authorities; proves missing semantic/source-map/SHA/query/typed-observation owners; measures
+3/9 positive labels, 149,158 missing required Unicode scalars, and external-AST declaration/action/blind/bare
+bypasses; and freezes dependency order `.10.7.1-.7` without behavior or promotion. Unicode implementation planning
+`.10.7.1.0` is the single next PNT leaf after the clean audit commit. Governance remains 6/20/89 at 5/9 + 4/6.
 
 ### Superseded frontier snapshots
 
@@ -13844,6 +14070,42 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.6.3 | `FUTURE-PARITY-BACKLOG.10.6.6.3` | `done` | Fresh generated/emitted direct/traced/isolated routes preserve exact observations, callback identity, non-interference, and v2/format 2. |
 | 74.5.6.4 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `done` | Committed Julia runtime-observation proof recomposes at focused 1,337 and closes the parent without replacement behavior or promotion. |
 | 74.5.7 | `FUTURE-PARITY-BACKLOG.10.6.7` | `done` | One exact ordered 12-role Julia consumer passes 416/416, advances only Julia to 5/9 + 4/6, and closes `.10.6`. |
+| 74.6 | `FUTURE-PARITY-BACKLOG.10.7` | `active` | Build one exact semantic adapter shared byte-for-byte by PUC Lua and LuaJIT after the Unicode prerequisite. |
+| 74.6.0 | `FUTURE-PARITY-BACKLOG.10.7.0` | `done` | Behavior-free authority/Unicode preflight maps every reusable owner, exact gap, risk, and `.1-.7` dependency with full dual-ABI/canonical proof. |
+| 74.6.1 | `FUTURE-PARITY-BACKLOG.10.7.1` | `pending` | Align every Lua rule-label route with pinned Unicode 17 `XID_Continue` on both ABIs. |
+| 74.6.1.0 | `FUTURE-PARITY-BACKLOG.10.7.1.0` | `pending` | Freeze the generated dual-ABI classifier, parser/validator routes, identity, isolation, and proof split. |
+| 74.6.1.1 | `FUTURE-PARITY-BACKLOG.10.7.1.1` | `pending` | Generate and route one pinned classifier through all Lua parser and validator authorities. |
+| 74.6.1.2 | `FUTURE-PARITY-BACKLOG.10.7.1.2` | `pending` | Prove exact positive/distinct identity through all Lua artifacts and runtime routes. |
+| 74.6.1.3 | `FUTURE-PARITY-BACKLOG.10.7.1.3` | `pending` | Reject all negative and external-AST bypass labels while isolating adjacent identifier grammars. |
+| 74.6.1.4 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `pending` | Recompose and close the committed dual-ABI Unicode prerequisite without semantic promotion. |
+| 74.6.2 | `FUTURE-PARITY-BACKLOG.10.7.2` | `pending` | Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner. |
+| 74.6.2.0 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `pending` | Freeze the constructor, privacy, error, no-path, and foundation dependency split. |
+| 74.6.2.1 | `FUTURE-PARITY-BACKLOG.10.7.2.1` | `pending` | Add copied source identity, portable SHA-256, and private exact byte/scalar coordinates. |
+| 74.6.2.2 | `FUTURE-PARITY-BACKLOG.10.7.2.2` | `pending` | Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan. |
+| 74.6.2.3 | `FUTURE-PARITY-BACKLOG.10.7.2.3` | `pending` | Recompose and close the source/outcome foundation without query or promotion. |
+| 74.6.3 | `FUTURE-PARITY-BACKLOG.10.7.3` | `pending` | Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities. |
+| 74.6.3.0 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `pending` | Freeze exact static targets, source correlation, normalization, privacy, and ownership. |
+| 74.6.3.1 | `FUTURE-PARITY-BACKLOG.10.7.3.1` | `pending` | Project the exact compiled graph/source/evidence target behind the opaque index. |
+| 74.6.3.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2` | `pending` | Complete privacy, failed/runtime-static, lifecycle, clone, and host-leak isolation. |
+| 74.6.3.3 | `FUTURE-PARITY-BACKLOG.10.7.3.3` | `pending` | Recompose and close all committed static targets without public query. |
+| 74.6.4 | `FUTURE-PARITY-BACKLOG.10.7.4` | `pending` | Complete private functions/helpers/calls/bindings plus staged/generated provenance. |
+| 74.6.4.0 | `FUTURE-PARITY-BACKLOG.10.7.4.0` | `pending` | Freeze calls/staging/generated authorities, source correlation, and exact 22/25 ownership. |
+| 74.6.4.1 | `FUTURE-PARITY-BACKLOG.10.7.4.1` | `pending` | Project typed non-staged functions/helpers/calls/bindings at exact 18/16. |
+| 74.6.4.2 | `FUTURE-PARITY-BACKLOG.10.7.4.2` | `pending` | Complete staged payload/job/result and selected generated-plan provenance at 22/25. |
+| 74.6.4.3 | `FUTURE-PARITY-BACKLOG.10.7.4.3` | `pending` | Recompose and close committed call/staging/generated targets without exports. |
+| 74.6.5 | `FUTURE-PARITY-BACKLOG.10.7.5` | `pending` | Expose one immutable typed/raw-neutral query evaluator over detached private projection data. |
+| 74.6.5.0 | `FUTURE-PARITY-BACKLOG.10.7.5.0` | `pending` | Freeze public vocabulary, 19 hashes, 26 malformed boundaries, and query dependency order. |
+| 74.6.5.1 | `FUTURE-PARITY-BACKLOG.10.7.5.1` | `pending` | Add immutable values plus capabilities/list/get/explain and exact source policy. |
+| 74.6.5.2 | `FUTURE-PARITY-BACKLOG.10.7.5.2` | `pending` | Add exact relations, paging, budgets, costs, prefixes, warnings, and portable errors. |
+| 74.6.5.3 | `FUTURE-PARITY-BACKLOG.10.7.5.3` | `pending` | Expose typed/raw-neutral calls at all 19 static hashes and 26 malformed boundaries. |
+| 74.6.5.4 | `FUTURE-PARITY-BACKLOG.10.7.5.4` | `pending` | Recompose and close the immutable query surface without runtime or promotion. |
+| 74.6.6 | `FUTURE-PARITY-BACKLOG.10.7.6` | `pending` | Add caller-owned typed runtime observation and exact immutable post-execution projection. |
+| 74.6.6.0 | `FUTURE-PARITY-BACKLOG.10.7.6.0` | `pending` | Freeze observation vocabulary, emission seams, callback identity, routes, and dependency order. |
+| 74.6.6.1 | `FUTURE-PARITY-BACKLOG.10.7.6.1` | `pending` | Add optional invocation-local typed slot/result capture to direct and loaded execution. |
+| 74.6.6.2 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `pending` | Validate detached events into an observed index and exact twentieth response digest. |
+| 74.6.6.3 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `pending` | Propagate observations through generated/emitted/traced and isolated dual-ABI hosts. |
+| 74.6.6.4 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `pending` | Recompose and close all observation owners/routes without format or promotion. |
+| 74.6.7 | `FUTURE-PARITY-BACKLOG.10.7.7` | `pending` | Admit one byte-identical ordered Lua consumer on both ABIs and close `.10.7`. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -14519,6 +14781,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.0` | Complete Lua semantic/Unicode/compiled/ActionIR/staged/generated/loader/trace/runtime/JSON authority inspection; exact 63/149,221 and 149,158-missing scalar census, 3/9 source positives, `Top:::` boundary, and four external-AST trust-role bypasses; unchanged focused/package `1..177`x2 plus PUC primary 66x2/corpus 105; semantic 6/20/89 at 5/9 + 4/6; Unicode 806/9/8/2; capability/generated/language/public 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; primary 5x2x66 plus ten Unicode legs; mdBook/KM 697/5,388/memory/task/four doctrines/diff; canonical Rust 1/1 in 77.58s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, Phase 0 1,031/1,031 in 613s; exact 1,555,508-KiB cleanup. | PASS. The behavior-free dual-ABI boundary and omission-safe `.1-.7` split are complete without production/test/fixture/contract/response/format/rollout/admission change; Unicode plan `.10.7.1.0` waits for the clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.6.7` | One exact ordered twelve-role Julia consumer; strict text/bytes, compiled/failed/runtime snapshots, all direct/loaded/reconstructed/generated/public-helper/emitted/traced/isolated routes, typed/raw-neutral identity, twenty digests, privacy/pages/budgets/errors/explain, request/response isolation, no-execution and host/path/type/AST/ActionIR/observation/generated-source denial; focused 416, semantic 1,753, Julia 9,295/primary/105; semantic 6/20/89 at 5/9 + 4/6; primary 5x2x66 plus ten Unicode legs; Unicode/capability/generated/language/public exact; mdBook/KM 695/5,358/memory/task/four doctrines/diff; canonical Rust 78.60s, Dart 1/1, Julia 416/27.6s, primary 66x2, Phase 0 1,031/636s; exact 1,632,888-KiB cleanup. | PASS. Only Julia advances; `.10.6.7` and parent `.10.6` close without a second semantic owner or format change, and Lua `.10.7` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.4` | Four fact cards and clean `.1-.3` topology; twelve committed suites at exact 135+85+70+99+79+62+100+118+315+66+157+51=1,337; exact runtime events, malformed/topology rejection, twentieth typed/raw digest, callback identity, exit omission, direct/loaded/reconstructed/generated-plan/public-helper/fresh-emitted/traced/isolated routes, no-sink behavior, non-interference, and unchanged v2/format 2; Julia 8,879/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 1563/1581/158/464/12 + 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 694/5,348/memory/task/four doctrines/diff; canonical Rust 77.95s, Dart 1/1, primary 66x2, Phase 0 1,031/627s; exact 1,736,920-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Committed Julia runtime observation composes unchanged; parent `.10.6.6` closes without production/replacement-test/fixture/contract/API/format/runtime/rollout/admission change, and exact admission `.10.6.7` remains pending. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.3` | Additive emitted direct/traced `semantic_observation_sink` forwarding through committed generated-plan helpers; deterministic source and unchanged v2/format 2 `{label, family}` plan; public-helper/fresh-module/isolated-host exact events and twentieth digest; callback object identity; exit final omission; result/diagnostic/trace equality; initial dynamic-module world-age harness correction; new 51/focused 1,337; Julia 8,879/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 694/5,348/memory/task/four doctrines/diff; canonical Rust 79.78s, Dart 1/1, primary 66x2, Phase 0 1,031/637s; exact 1,749,080-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia generated/emitted observation is a transparent public adapter over shared runtime capture; generated format and semantic ledgers remain unchanged, and closeout `.4` waits for the clean commit. |
@@ -14774,6 +15037,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.0` | `FUTURE-PARITY-BACKLOG.10.7.0 - map Lua semantic authorities` | Behavior-free exact shared authority/Unicode/trust-route audit, `.1-.7` split, full dual-ABI/matrix/no-drift/canonical/docs/KM/cleanup proof, and `.10.7.1.0` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.6.7` | `FUTURE-PARITY-BACKLOG.10.6.7 - admit Julia semantic introspection` | Ordered 12-role consumer, 416/1,753/9,295 proof, 89 mutations at 5/9 + 4/6, full matrices/no-drift/canonical/docs/KM/cleanup, and parent `.10.6` closure before Lua. |
 | `FUTURE-PARITY-BACKLOG.10.6.7` | `20c5b2bb` / `FUTURE-PARITY-BACKLOG.10.6.7 - activate Julia semantic admission` | Behavior-free task-tree-first activation and omission-sensitive implementation/gate plan from clean `48b7d96d`. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `FUTURE-PARITY-BACKLOG.10.6.6.4 - close Julia runtime observation` | No-change twelve-suite focused 1,337, Julia 8,879/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.6`; `.10.6.7` remains pending. |
@@ -15008,6 +15272,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-25`: Behavior-free dual-ABI Lua audit `.10.7.0` maps reusable strict parser/AST, compiled/ActionIR/
+  staged/generated/loader/trace/runtime/JSON authorities and the missing source-map/SHA/static/query/typed-
+  observation seams. Exact Unicode preflight proves 63/149,221 admitted required scalars, 149,158 missing, 3/9
+  source positives, partial `Top:::` parsing, and declaration/action/blind/bare external-AST validation bypasses.
+  `.10.7.1-.7` now own Unicode, source/outcome, static, calls/staging/generated, query, observation, and exact
+  admission. Unchanged Lua `1..177` passes on both ABIs plus PUC primary 66x2/corpus 105; all neutral ledgers,
+  5x2x66, ten Unicode legs, book/KM 697/5,388, doctrines, canonical Rust 77.58s + Dart 1/1 + Julia 416/27.2s +
+  primary 66x2 + Phase 0 1,031/613s, and exact 1,555,508-KiB cleanup pass. No behavior or promotion changes;
+  `.10.7.1.0` follows the clean audit commit.
 
 - `2026-07-25`: `.10.6.7` adds one exact ordered twelve-role Julia semantic admission consumer over committed
   owners and every native/loaded/reconstructed/generated/emitted/traced route. Focused 416, semantic 1,753,
