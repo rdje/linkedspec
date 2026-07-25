@@ -94,8 +94,11 @@ This prerequisite removes the semantic privacy fixture's former `Töp` blocker w
 semantic rollout. Perl accepts the strict-decoded fixture route. Rust, Dart, and Julia native parsing/validation,
 positive/distinct downstream identity, negative/identifier isolation, and composed signoff are aligned and closed.
 PUC Lua and LuaJIT now align the generated classifier, parser/validator trust boundary, and exact positive/distinct
-downstream identity. Exhaustive negative/trust-route rejection and adjacent-identifier isolation remain owned by
-`.10.7.1.3`; composed prerequisite closeout remains `.10.7.1.4`. See
+downstream identity. Exhaustive negative/trust-route rejection and adjacent-identifier isolation are split under
+`.10.7.1.3.0-.2`: the behavior-free audit found a pre-existing body-fluent adapter that discards a same-line suffix
+after an ASCII method prefix; `.3.1` owns only remainder propagation, and `.3.2` owns the exhaustive proof and
+parent closeout. Composed prerequisite closeout remains `.10.7.1.4`. See
 [[rust-semantic-introspection-authority-map]], [[unicode-17-case-contract-data]],
 [[julia-unicode-rule-label-preflight]], [[lua-unicode-rule-label-preflight]],
-[[primary-cli-strict-utf8-text-contract]], and [[rust-native-spec-resolution]].
+[[lua-body-fluent-suffix-loss]], [[primary-cli-strict-utf8-text-contract]], and
+[[rust-native-spec-resolution]].

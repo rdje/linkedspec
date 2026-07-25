@@ -1737,8 +1737,11 @@ portable compiled and descriptor artifacts deny loader paths plus Lua table/user
 359 assertions unchanged on PUC Lua and LuaJIT without changing production source or generated-source format.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
-Unicode `.10.7.1.3` next owns every negative/trust route and adjacent-grammar isolation; `.4` recomposes and closes
-the prerequisite. Opaque strict
+Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
+`.Töp()` and `.A·B()` validate as ASCII-prefix methods because the body adapter discards the fluent parser's
+unconsumed remainder. Narrow `.3.1` repairs only whole-token preservation; exhaustive `.3.2` proves every negative,
+trust, artifact/runtime, and adjacent-grammar route before `.3` closes. `.4` then recomposes the prerequisite.
+Opaque strict
 source/outcome `.2`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
 query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
 remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,

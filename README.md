@@ -1091,8 +1091,11 @@ content migration exists yet.
   descriptors, generated plans, loading, direct/generated/emitted/fresh-process execution, selectors, diagnostics,
   trace, and inline/file primary commands at 359 assertions per ABI. Normalization-sensitive labels remain separate,
   and portable artifacts expose neither loader paths nor host table identities. No public classifier API,
-  generated-source format, semantic response, rollout, or admission row moves. Exhaustive negative/trust-route and
-  adjacent-grammar isolation `.10.7.1.3` is next.
+  generated-source format, semantic response, rollout, or admission row moves. Completed audit `.10.7.1.3.0` freezes the
+  exhaustive negative/isolation matrix and one pre-existing body-fluent defect: `.Töp()` and `.A·B()` validate as
+  ASCII-prefix methods `T` and `A` because the body adapter discards `parse_fluent_chain`'s remainder. The result is
+  byte-identical on PUC Lua and LuaJIT. Active narrow whole-token repair `.3.1` precedes exhaustive dual-ABI proof `.3.2`;
+  neither may widen the separate ASCII fluent-method grammar.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

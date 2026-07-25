@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- None between committed leaves. Lua Unicode exact positive/distinct identity `.10.7.1.2` is fully verified;
-  negative/trust-route and adjacent-grammar isolation `.10.7.1.3` is the single next task-tree-first PNT leaf after
-  the clean identity commit.
+- None between committed leaves. Lua negative/isolation audit `.10.7.1.3.0` is fully verified; narrow body-fluent
+  remainder propagation `.10.7.1.3.1` is the single next task-tree-first PNT leaf after the clean planning commit,
+  before exhaustive dual-ABI proof `.3.2`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.3.0 — freeze Lua negative isolation repair**
+  (behavior-free exact defect/control audit and implementation/proof split; closes with this commit).
+
+  **Result:** Direct PUC Lua/LuaJIT probes prove one pre-existing body-fluent adapter drops every same-line suffix
+  after a valid ASCII method prefix. `.Töp()`/`.A·B()` validate as methods `T`/`A`; hyphen/space/emoji/colon/slash
+  suffixes after `.Top` validate as method `Top`. Empty, dollar, newline, conditional, and bounded-mode controls
+  retain failure. `.3.1` owns only propagation of the remainder already returned by `parse_fluent_chain`; `.3.2`
+  owns exhaustive negative/trust/artifact/runtime and adjacent-grammar proof. No behavior file changes.
+
+  **Proof:** Unchanged Lua classifier 1,706, routes 179, identity 359, package `1..177` per ABI, PUC primary 66x2,
+  and corpus 105/105 pass. Primary passes 5x2x66 and all ten Unicode legs pass. Semantic/Unicode/capability/
+  generated/language/public remain 6/20/89 at 5/9 + 4/6, 806/9/8/2, 80/0/0, v1/10/80-0-0,
+  246/105+1/122, and 59/27/0. Book/KM 699/5,410, memory/task/four doctrines/diff, and canonical Rust 80.39s +
+  Dart 1/1 + Julia 416/28.5s + reference primary 66x2 + Phase 0 1,031/658s pass. Exact 1,533,624-KiB cleanup
+  removes only regenerable artifacts. Narrow repair `.3.1` follows the clean planning commit.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.1.2 — prove Lua Unicode label identity**
   (exact downstream identity proof; closes with this commit).
 

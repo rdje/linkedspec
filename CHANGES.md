@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.3.0 — freeze Lua negative isolation repair
+
+Frozen a behavior-free repair and proof plan after the negative/isolation audit exposed one pre-existing Lua body-
+fluent parser defect. `parse_fluent_chain` correctly returns parsed calls plus its unconsumed remainder, but the
+body-element adapter records only an ASCII method prefix and hardcodes the remainder to empty. `.Töp()` therefore
+validates as method `T`, `.A·B()` as method `A`, and hyphen/space/emoji/colon/slash suffixes after `.Top` as method
+`Top`, with byte-identical results on PUC Lua and LuaJIT. Empty, dollar-prefixed, newline-separated, conditional,
+and bounded-mode controls retain malformed text and fail, isolating the loss to a same-line body-fluent suffix
+after a valid ASCII prefix.
+
+Task `.10.7.1.3` is now omission-safely split. `.3.1` owns only propagation of the already returned remainder so
+the complete malformed fluent remains visible to validation; it may not widen the ASCII method grammar or alter
+valid `_method9`. `.3.2` owns all eight negative fixtures through source, external-AST, artifact, selector,
+diagnostic, trace, loader, emitted/fresh-host, and primary routes plus adjacent function/parameter/rest/helper/
+fluent/lifecycle/split/conditional/mode/name/regex grammars on both ABIs. The new Knowledge Map card preserves the
+exact cause, reproduction, controls, repair owner, and reverify route.
+
+This planning leaf changes no parser, validator, runtime, test, fixture, neutral contract, generated format,
+public API, semantic response, rollout, or admission state. The unchanged complete Lua gate passes `1..177` on
+both ABIs with classifier 1,706, native routes 179, identity 359, PUC primary 66x2, and corpus 105/105. All six
+no-drift ledgers remain exact at semantic 6/20/89 at 5/9 + 4/6, Unicode 806/9/8/2, capability 80/0/0,
+generated v1/10/80-0-0, language 246/105+1/122, and public 59/27/0.
+
+Full primary passes 5x2x66 and every Unicode-manifest leg passes 1/1. mdBook, Knowledge Map 699/5,410,
+memory/task/four doctrines, and diff hygiene pass. Canonical CI passes Rust admission 1/1 in 80.39s, Dart 1/1,
+Julia 416/416 in 28.5s, reference primary 66x2, and Phase 0 1,031/1,031 in 658s. Exact 1,533,624-KiB cleanup
+removes only regenerable Rust dependency/incremental state, rendered book, Dart tool state, Python bytecode, and
+the disposable Julia depot. Narrow remainder propagation `.10.7.1.3.1` follows the clean planning commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.1.2 — prove Lua Unicode label identity
 
 Added one exact downstream-identity suite that runs unchanged on PUC Lua and LuaJIT. It derives ten unique byte

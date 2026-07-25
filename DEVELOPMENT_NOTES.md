@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.3.0` — parser adapters must propagate subordinate remainders): A
+  narrow token scanner is safe only if its caller preserves the text it did not consume. Lua's body-fluent parser
+  already returns both `calls` and `remainder`, but `parse_single_element` rebuilt the source from an ASCII-prefix
+  pattern and hardcoded the remainder to empty. That adapter erased every same-line suffix following a valid ASCII
+  method prefix, converting `.Töp()` into valid `.T` and five punctuation/spacing variants into valid `.Top`.
+
+  The repair boundary is therefore not Unicode widening. The established fluent method grammar stays ASCII, while
+  the adapter propagates the subordinate parser's existing remainder so the main body loop materializes it as raw
+  syntax and validation rejects the complete malformed construct. Empty/dollar/no-prefix and newline controls,
+  plus conditional and bounded-mode routes, demonstrate that the general raw-tail machinery already works. This
+  makes `.3.1` a one-seam repair and leaves exhaustive rule-label negatives and unrelated grammar isolation to
+  `.3.2`.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.1.2` — identity proof must cross a fresh selected-ABI process): An
   in-process emitted-module test proves serialization and reconstruction, but it can still inherit the host that
   loaded the test suite. Lua's shared source tree supports two runtime envelopes, so exact portability also needs a

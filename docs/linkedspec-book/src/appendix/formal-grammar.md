@@ -217,7 +217,11 @@ descriptors, generated plans, strict loading, native and generated execution, in
 selectors, portable diagnostics, native/generated trace, and inline/file primary commands. The precomposed and
 decomposed labels remain separate keys and rules; loader paths and host table identities do not enter portable
 artifacts. One 359-assertion suite runs unchanged on PUC Lua and LuaJIT. Exhaustive negative trust routes and
-unrelated-identifier isolation remain the next separately owned proof.
+unrelated-identifier isolation remain separately owned. Their behavior-free audit found one older body-fluent
+whole-token defect outside the Unicode classifier: `.Töp()` validates as ASCII method `T`, and `.A·B()` as method
+`A`, because the body adapter discards the suffix already returned by its fluent parser. PUC Lua and LuaJIT agree
+byte-for-byte. A narrow repair will propagate that remainder and reject the complete malformed line without making
+fluent method names Unicode-aware; the subsequent exhaustive proof covers all negative and adjacent routes.
 
 The self-hosted structural tokens also own exact physical-line boundaries. A rule header begins only at the start
 of a physical line after optional horizontal whitespace; the scanner cannot recover a valid suffix from an invalid
