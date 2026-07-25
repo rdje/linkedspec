@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-25` (director instruction activates exact composed Julia admission `.10.6.7`
-  task-tree-first from clean runtime-observation closeout commit `48b7d96d`)
+- Last updated: `2026-07-25` (exact Julia semantic admission `.10.6.7` and parent `.10.6` close at
+  rollout 5/9 and native admission 4/6; PUC Lua/LuaJIT `.10.7` is the next task-tree-first frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -9086,7 +9086,7 @@ before implementation.
     production-code change.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6`
-  Status: `active`
+  Status: `done` (2026-07-25; exact Julia semantic adapter and ordered native admission closed)
   Goal: Implement the Julia semantic index adapter and exact native conformance.
   Children: `.10.6.0`, `.10.6.1`, `.10.6.2`, `.10.6.3`, `.10.6.4`, `.10.6.5`, `.10.6.6`, `.10.6.7`
   Depends on: `.10.5`
@@ -9096,6 +9096,14 @@ before implementation.
     canonical gate without exposing Julia dictionaries or type layout as semantic schema. Before the `Töp` privacy
     fixture can be admitted, align every Julia rule declaration/reference/artifact/selector route with ADR `0051`'s
     pinned Unicode 17 `XID_Continue` and exact identity contract.
+  Verification: Leaves `.0-.7` align Julia rule labels to pinned Unicode 17, construct one strict opaque semantic
+    source/outcome, project exact static/call/staged/generated facts, expose immutable typed/raw-neutral query,
+    capture and derive typed runtime observations across every route, and admit the result through one ordered
+    twelve-role consumer. Final proof is 416/416 admission, 1,753 semantic, complete Julia 9,295/primary/105,
+    primary 5x2x66 plus ten Unicode legs, semantic 6/20/89 at 5/9 + 4/6, every unchanged no-drift ledger, canonical
+    Rust 78.60s + Dart 1/1 + Julia 416/416 in 27.6s + reference primary 66x2 + Phase 0 1,031/636s, mdBook/KM
+    695/5,358, doctrines, diff hygiene, and exact 1,632,888-KiB safe cleanup. No second semantic implementation,
+    generated-format change, or Lua/recurring/MCP/public promotion is introduced.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.0`
   Status: `done` (2026-07-22; behavior-free Julia semantic/Unicode authority map and dependency split)
@@ -10893,7 +10901,7 @@ before implementation.
     `.10.6.7` stays pending awaiting director instruction.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.6.7`
-  Status: `active` (2026-07-25; planning and omission-sensitive consumer admission)
+  Status: `done` (2026-07-25; exact ordered Julia consumer admitted and parent closed)
   Goal: Admit the exact Julia semantic implementation and close `.10.6`.
   Depends on: `.10.6.6`
   Acceptance: Add one omission-sensitive ordered 12-role Julia consumer over strict text/bytes, compiled/failed/
@@ -10922,17 +10930,17 @@ before implementation.
 
   - [x] **RETRIEVE / PRECONDITION** — Retrieve the committed Julia semantic facts and all three admitted consumer
     topologies; confirm clean `48b7d96d`, exact 20 digests, 81 mutations, rollout 4/9, and admission 3/6.
-  - [ ] **ORDERED CONSUMER** — One Julia file declares and executes the exact twelve roles once, with no alternate
+  - [x] **ORDERED CONSUMER** — One Julia file declares and executes the exact twelve roles once, with no alternate
     semantic model/query/runtime owner.
-  - [ ] **SNAPSHOTS / QUERIES** — Strict text/bytes, compiled/failed/runtime snapshots, typed/raw-neutral identity,
+  - [x] **SNAPSHOTS / QUERIES** — Strict text/bytes, compiled/failed/runtime snapshots, typed/raw-neutral identity,
     all twenty hashes, privacy/pages/budgets/errors/explain, immutability, and no-execution behavior are exact.
-  - [ ] **RUNTIME ROUTES** — Direct, loaded, reconstructed, generated-plan, public-helper, freshly emitted direct/
+  - [x] **RUNTIME ROUTES** — Direct, loaded, reconstructed, generated-plan, public-helper, freshly emitted direct/
     traced, standalone isolated emitted, and native traced routes preserve results, events, and the twentieth hash.
-  - [ ] **HOST DENIAL** — Portable answers and the detached evaluator expose no host path, Julia type/layout,
+  - [x] **HOST DENIAL** — Portable answers and the detached evaluator expose no host path, Julia type/layout,
     source AST/ActionIR, runtime observation object, generated implementation source, trace, or pointer identity.
-  - [ ] **TOPOLOGY / PROMOTION** — Canonical registration and eight independent Julia omission mutations pass;
+  - [x] **TOPOLOGY / PROMOTION** — Canonical registration and eight independent Julia omission mutations pass;
     only Julia rollout/admission advances, leaving Lua, recurring, MCP, and public rows pending.
-  - [ ] **LOCKSTEP / CLOSE** — Complete focused/backend/matrix/ledger/canonical/docs/KM/doctrine/diff/cleanup proof
+  - [x] **LOCKSTEP / CLOSE** — Complete focused/backend/matrix/ledger/canonical/docs/KM/doctrine/diff/cleanup proof
     passes; synchronize public state, close `.10.6.7` and `.10.6`, and commit cleanly before Lua `.10.7`.
 
   Planning evidence: From clean `48b7d96d`, startup review covered both roadmaps, the code/import and active Julia
@@ -10941,6 +10949,22 @@ before implementation.
   The behavior-free activation passes memory architecture, all four doctrine checks, Knowledge Map derivation,
   mdBook build, diff hygiene, and the neutral semantic checker at 6 groups / 20 responses / 81 mutations /
   rollout 4/9 / admission 3/6. Implementation remains the next action after this planning commit.
+
+  Completion evidence: Planning commit `20c5b2bb` is the clean task-tree boundary. The additive
+  `julia/test/semantic_introspection_julia_admission_test.jl` consumer declares and executes the exact twelve roles
+  once while reusing only committed semantic owners. It covers every required snapshot, query, privacy/budget/
+  paging/error/explain/non-interference/host-denial boundary and every direct/loaded/reconstructed/generated/
+  emitted/traced/isolated runtime route. Focused admission passes 416/416; all thirteen Julia semantic suites pass
+  1,753; complete Julia passes 9,295 package assertions plus primary process conformance and corpus 105/105. The
+  neutral checker rejects 89 mutations and advances only Julia to rollout 5/9 and native admission 4/6. Primary
+  passes 5x2x66 and all ten Unicode legs pass 1/1. Unicode 1563/1581/158/464/12 and 806/9/8/2, capability
+  80/0/0, generated v1/10/80-0-0, language 246/105+1/122, public 59/27/0, Knowledge Map 695/5,358, and mdBook
+  all pass. Canonical CI passes all four doctrines/contracts, Rust admission 1/1 in 78.60s, Dart 1/1, Julia
+  416/416 in 27.6s, reference primary 66x2, and Phase 0 1,031/1,031 in 636s. Its first run correctly caught a
+  compressed-memory omission of the closed repeated-action `FUTURE-PARITY-BACKLOG.10.1` handoff marker; exact
+  restoration passes the focused 8/10/8+0/54 checker and the complete restart. Exact 1,632,888-KiB cleanup removes
+  only generated Rust deps/incrementals, rendered book, Python bytecode, Dart tool state, and the task Julia depot.
+  `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
   Status: `pending`
@@ -13219,6 +13243,16 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
+**Authoritative frontier (2026-07-25):** Julia admission `.10.6.7` and parent `.10.6` are fully verified and close
+with one ordered twelve-role consumer at focused 416/416, semantic 1,753, complete Julia 9,295/primary/105,
+semantic governance 6/20/89, rollout 5/9, and native admission 4/6. PUC Lua/LuaJIT `.10.7` is the next pending
+roadmap leaf from this clean Julia closeout and must begin with a behavior-free authority audit/dependency split.
+
+### Superseded frontier snapshots
+
+The chronological frontier narrative below is retained as durable execution history. Its intermediate “current”
+statements are superseded by the authoritative frontier above.
+
 Semantic-introspection design/neutral `.10.1-.10.2`, admitted Perl `.10.3`, admitted Rust `.10.4`, and admitted
 Dart `.10.5` are complete. Governance is six groups / 20 responses / 81 mutations, rollout 4/9, and native
 admission 3/6. Behavior-free Julia audit `.10.6.0` maps the reusable staged/compiled/action/diagnostic/generated/
@@ -13774,6 +13808,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.4.5.3 | `FUTURE-PARITY-BACKLOG.10.5.5.3` | `done` | Generated/emitted direct and traced APIs preserve exact observations, outputs, traces, exit omission, and caller callback identity without contract drift. |
 | 74.4.5.4 | `FUTURE-PARITY-BACKLOG.10.5.5.4` | `done` | Composed committed-code runtime-observation signoff closes the parent without semantic promotion. |
 | 74.4.6 | `FUTURE-PARITY-BACKLOG.10.5.6` | `done` | One exact 12-role consumer admits Dart at 6/20/81, rollout 4/9, admission 3/6, and closes `.10.5`. |
+| 74.5 | `FUTURE-PARITY-BACKLOG.10.6` | `done` | Julia Unicode/source/static/call/query/runtime/admission leaves close at exact semantic 6/20/89, rollout 5/9, and native admission 4/6. |
 | 74.5.0 | `FUTURE-PARITY-BACKLOG.10.6.0` | `done` | Exact Julia semantic/Unicode authority map and `.10.6.1-.7` split close without behavior or governance change. |
 | 74.5.1 | `FUTURE-PARITY-BACKLOG.10.6.1` | `done` | Julia rule-label parsing, validation, identity, invalid rejection, isolation, and composed signoff align to pinned Unicode 17 without semantic promotion. |
 | 74.5.1.0 | `FUTURE-PARITY-BACKLOG.10.6.1.0` | `done` | Exact generated Julia classifier/scanner, five parser routes, validator roles, fixture/isolation suites, and gates are frozen without behavior. |
@@ -13808,7 +13843,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.5.6.2 | `FUTURE-PARITY-BACKLOG.10.6.6.2` | `done` | Strict typed/static validation derives an isolated observed snapshot and matches the twentieth typed/raw digest. |
 | 74.5.6.3 | `FUTURE-PARITY-BACKLOG.10.6.6.3` | `done` | Fresh generated/emitted direct/traced/isolated routes preserve exact observations, callback identity, non-interference, and v2/format 2. |
 | 74.5.6.4 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `done` | Committed Julia runtime-observation proof recomposes at focused 1,337 and closes the parent without replacement behavior or promotion. |
-| 74.5.7 | `FUTURE-PARITY-BACKLOG.10.6.7` | `active` | Admit the exact ordered 12-role Julia semantic consumer, advance only Julia governance, and close `.10.6`. |
+| 74.5.7 | `FUTURE-PARITY-BACKLOG.10.6.7` | `done` | One exact ordered 12-role Julia consumer passes 416/416, advances only Julia to 5/9 + 4/6, and closes `.10.6`. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -14484,6 +14519,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.6.7` | One exact ordered twelve-role Julia consumer; strict text/bytes, compiled/failed/runtime snapshots, all direct/loaded/reconstructed/generated/public-helper/emitted/traced/isolated routes, typed/raw-neutral identity, twenty digests, privacy/pages/budgets/errors/explain, request/response isolation, no-execution and host/path/type/AST/ActionIR/observation/generated-source denial; focused 416, semantic 1,753, Julia 9,295/primary/105; semantic 6/20/89 at 5/9 + 4/6; primary 5x2x66 plus ten Unicode legs; Unicode/capability/generated/language/public exact; mdBook/KM 695/5,358/memory/task/four doctrines/diff; canonical Rust 78.60s, Dart 1/1, Julia 416/27.6s, primary 66x2, Phase 0 1,031/636s; exact 1,632,888-KiB cleanup. | PASS. Only Julia advances; `.10.6.7` and parent `.10.6` close without a second semantic owner or format change, and Lua `.10.7` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.4` | Four fact cards and clean `.1-.3` topology; twelve committed suites at exact 135+85+70+99+79+62+100+118+315+66+157+51=1,337; exact runtime events, malformed/topology rejection, twentieth typed/raw digest, callback identity, exit omission, direct/loaded/reconstructed/generated-plan/public-helper/fresh-emitted/traced/isolated routes, no-sink behavior, non-interference, and unchanged v2/format 2; Julia 8,879/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 1563/1581/158/464/12 + 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 694/5,348/memory/task/four doctrines/diff; canonical Rust 77.95s, Dart 1/1, primary 66x2, Phase 0 1,031/627s; exact 1,736,920-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Committed Julia runtime observation composes unchanged; parent `.10.6.6` closes without production/replacement-test/fixture/contract/API/format/runtime/rollout/admission change, and exact admission `.10.6.7` remains pending. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.3` | Additive emitted direct/traced `semantic_observation_sink` forwarding through committed generated-plan helpers; deterministic source and unchanged v2/format 2 `{label, family}` plan; public-helper/fresh-module/isolated-host exact events and twentieth digest; callback object identity; exit final omission; result/diagnostic/trace equality; initial dynamic-module world-age harness correction; new 51/focused 1,337; Julia 8,879/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 694/5,348/memory/task/four doctrines/diff; canonical Rust 79.78s, Dart 1/1, primary 66x2, Phase 0 1,031/637s; exact 1,749,080-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia generated/emitted observation is a transparent public adapter over shared runtime capture; generated format and semantic ledgers remain unchanged, and closeout `.4` waits for the clean commit. |
 | `2026-07-23` | `FUTURE-PARITY-BACKLOG.10.6.6.2` | Public strict `with_execution_observation`; closed event fields and 24 malformed/foreign/reordered/duplicate-final boundaries; failed/already-observed/wrong-entry/missing-slot/unrelated-edge rejection; detached static source/shape authority; canonical execution/event/`observed_as` records and evidence; base/event/response isolation; exact typed/raw twentieth digest; source-scanned parser/compiler/runtime/trace/sink/hash/path/host denial; new 157/focused 1,286; Julia 8,828/primary/105; primary 5x2x66 plus ten Unicode legs; unchanged Unicode/semantic/capability/generated/language/public 806/9/8/2 + 6/20/81 at 4/9 + 3/6 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; mdBook/KM 693/5,341/memory/task/four doctrines/diff; canonical Rust 81.49s, Dart 1/1, primary 66x2, Phase 0 1,031/648s; exact 1,738,560-KiB cleanup preserving 517 Pgen artifacts and Julia package/registry caches. | PASS. Julia derives the exact immutable runtime snapshot without execution or host-authority widening; emitted/generated public propagation `.3` waits for the clean commit and ledgers remain unchanged. |
@@ -14738,6 +14774,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.6.7` | `FUTURE-PARITY-BACKLOG.10.6.7 - admit Julia semantic introspection` | Ordered 12-role consumer, 416/1,753/9,295 proof, 89 mutations at 5/9 + 4/6, full matrices/no-drift/canonical/docs/KM/cleanup, and parent `.10.6` closure before Lua. |
+| `FUTURE-PARITY-BACKLOG.10.6.7` | `20c5b2bb` / `FUTURE-PARITY-BACKLOG.10.6.7 - activate Julia semantic admission` | Behavior-free task-tree-first activation and omission-sensitive implementation/gate plan from clean `48b7d96d`. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.4` | `FUTURE-PARITY-BACKLOG.10.6.6.4 - close Julia runtime observation` | No-change twelve-suite focused 1,337, Julia 8,879/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup close `.10.6.6`; `.10.6.7` remains pending. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.3` | `FUTURE-PARITY-BACKLOG.10.6.6.3 - propagate Julia runtime observation` | Fresh generated/emitted direct/traced sink propagation with exact events/digest/callback/non-interference proof; new 51/focused 1,337, Julia 8,879/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup before closeout `.4`. |
 | `FUTURE-PARITY-BACKLOG.10.6.6.2` | `FUTURE-PARITY-BACKLOG.10.6.6.2 - derive Julia runtime snapshot` | Strict detached topology validation, isolated observed projection, and exact twentieth digest; new 157/focused 1,286, Julia 8,828/primary/105, full matrices/no-drift/canonical/docs/KM/cleanup before propagation `.3`. |
@@ -14970,6 +15008,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-25`: `.10.6.7` adds one exact ordered twelve-role Julia semantic admission consumer over committed
+  owners and every native/loaded/reconstructed/generated/emitted/traced route. Focused 416, semantic 1,753,
+  complete Julia 9,295/primary/105, semantic 6/20/89 at rollout 5/9 and admission 4/6, 5x2x66 plus ten Unicode
+  legs, every no-drift ledger, book/KM 695/5,358, and canonical Rust 78.60s + Dart 1/1 + Julia 416/27.6s + primary
+  66x2 + Phase 0 1,031/636s pass. Canonical first caught and the complete restart verifies restoration of the
+  checker-owned repeated-action next-owner marker. Exact 1,632,888-KiB cleanup passes. Only Julia advances;
+  `.10.6.7` and parent `.10.6` close before pending Lua `.10.7`.
 
 - `2026-07-23`: `.10.6.6.4` retrieves the four committed Julia runtime-observation facts and recomposes all twelve
   owner suites at exact focused 1,337 without production/replacement-test/fixture/contract/API/format/runtime or

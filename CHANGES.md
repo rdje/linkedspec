@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.6.7 — admit Julia semantic introspection
+
+Added Julia's one composed semantic-introspection admission consumer. Its ordered twelve exact-once roles exercise
+strict source text/bytes; compiled, failed, and observed runtime snapshots; direct, loaded, JSON-reconstructed,
+generated-plan, public-helper, freshly emitted direct/traced, isolated emitted, native traced, and generated traced
+routes; typed/native-neutral JSON; all twenty response digests; privacy, paging, budgets, errors, explanation,
+request/response isolation, no-execution behavior, and portable host/path/type/AST/ActionIR/observation/generated-
+source denial. The consumer reuses the committed semantic owners and adds no parser, compiler, query, runtime,
+fixture, model, or generated-format implementation.
+
+Julia package registration and canonical CI now require and run that consumer. The neutral contract records its
+exact path, driver, and role order; eight independent omission/topology mutations advance the checker from 81 to
+89 rejected mutations. Only Julia advances: rollout is now 5 complete / 4 pending and native admission is 4
+complete / 2 pending. The focused consumer passes 416/416, all thirteen Julia semantic suites compose at 1,753,
+and complete Julia passes 9,295 package assertions plus primary process conformance and corpus 105/105. Full
+primary passes 5x2x66 and all ten Unicode legs pass. Every Unicode/capability/generated/language/public ledger,
+mdBook, and Knowledge Map 695/5,358 passes. Canonical CI passes Rust admission in 78.60s, Dart 1/1, Julia 416/416
+in 27.6s, reference primary 66x2, and Phase 0 1,031/1,031 in 636s. Its first run caught a compressed-memory
+omission of the closed repeated-action next-owner marker; restoring the exact checker-owned text passes focused
+8/10/8+0/54 and the complete restart. Exact 1,632,888-KiB safe cleanup removes only regenerated build/tool caches.
+`.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.6.7 — activate exact Julia semantic admission
 
 Activated the final Julia semantic-introspection leaf from clean commit `48b7d96d` after reading the complete

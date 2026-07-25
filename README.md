@@ -764,20 +764,20 @@ content migration exists yet.
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
 - Deep semantic introspection plus MCP was contract-frozen under ADRs `0049`/`0050` and
-  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl, Rust, and Dart are now admitted native implementations.
+  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl, Rust, Dart, and Julia are now admitted native implementations.
   `linkedspec-semantic-model-v1` and
   `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 81 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 89 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
   authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
-  Neutral rollout is 4 complete / 5 pending,
-  while native backend admission is 3 complete / 3 pending. MCP will provide only native capabilities/query calls
+  Neutral rollout is 5 complete / 4 pending,
+  while native backend admission is 4 complete / 2 pending. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -1066,9 +1066,12 @@ content migration exists yet.
   1/1 + primary 66x2 + Phase 0 1,031/637s, book/KM 694/5,348, doctrines, and exact 1,749,080-KiB cleanup
   preserving 517 Pgen artifacts pass. No-change closeout `.10.6.6.4` now recomposes all twelve committed semantic
   suites at focused 1,337 plus complete Julia/matrix/Unicode/canonical proof and closes parent `.10.6.6` without
-  production/replacement-test/API/format/runtime or promotion change. Rollout and admission remain 4/9 and 3/6;
-  director instruction has activated exact admission `.10.6.7`; governance remains unchanged until its ordered
-  consumer, topology mutations, complete gates, and public lockstep pass.
+  production/replacement-test/API/format/runtime or promotion change. Exact admission `.10.6.7` now adds one
+  ordered twelve-role Julia consumer over strict text/bytes, compiled/failed/runtime snapshots, loaded and JSON-
+  reconstructed state, generated-plan/public-helper/fresh and isolated emitted direct/traced routes, typed/raw-
+  neutral JSON, all twenty digests, bounded-query behavior, non-execution immutability, and host/path/IR denial.
+  Eight Julia topology mutations raise governance to 6/20/89, rollout 5/9, and native admission 4/6 without a
+  production, fixture, model, query, runtime, or generated-format change; PUC Lua and LuaJIT remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

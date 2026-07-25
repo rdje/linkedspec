@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.6.7` — admission is an omission-sensitive consumer boundary): Julia's
+  admission is one orchestration test with the same twelve ordered roles as Perl, Rust, and Dart. It
+  deliberately calls the committed source/outcome, static/call, query, runtime-observation, generated-plan,
+  emitted-wrapper, loader, and reconstruction owners. This keeps admission capable of detecting missing routes
+  without creating another model, evaluator, observation format, or runtime authority.
+
+  The consumer proves more than response equality. It reconstructs strict fixture bytes, compares typed and raw-
+  neutral responses across all twenty digest locks, mutates detached requests and responses, scans the query owner
+  for compile/execute/trace/path authority, and rejects host paths, Julia type names, AST/ActionIR, typed runtime
+  observations, generated implementation source, and pointer-like displays in portable JSON. Runtime proof spans
+  direct, loaded, JSON-reconstructed, generated helper, fresh emitted direct/traced, isolated emitted direct/
+  traced, native traced, and generated traced calls with one exact event sequence and twentieth digest.
+
+  Canonical registration is independently omission-sensitive: the contract fixes the consumer path, driver, and
+  role order; the checker verifies the package include, required tracked file, Julia SDK requirement, and exact CI
+  command; eight Julia-only mutations each fail. Focused 416/416, thirteen semantic suites at 1,753, and complete
+  Julia 9,295/primary/105 pass. Governance is now 6 groups / 20 responses / 89 mutations at rollout 5/9 and native
+  admission 4/6; Lua, recurring, MCP, and public rows remain pending.
+
+  Full signoff adds 5x2x66 plus ten Unicode legs, every no-drift ledger, mdBook/KM 695/5,358, and canonical Rust
+  78.60s + Dart 1/1 + Julia 416/416 in 27.6s + reference 66x2 + Phase 0 1,031/636s. Compressing `MEMORY.md`
+  initially removed the checker-owned repeated-action next-owner marker even though that contract was unrelated to
+  Julia. Canonical stopped exactly there; restoring `FUTURE-PARITY-BACKLOG.10.1` made focused 8/10/8+0/54 and the
+  complete restart pass. This reinforces that bounded memory may summarize prose but must retain every executable
+  continuity marker. Exact cleanup reclaims 1,632,888 KiB of generated Rust, book, Python, Dart, and Julia state.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.6.7` — admission must compose, not reimplement): Julia already has the
   complete semantic source/outcome, static/call projection, typed and raw-neutral query, runtime observation,
   generated-plan helper, emitted wrapper, and isolated-host mechanisms. Its admission consumer must therefore be

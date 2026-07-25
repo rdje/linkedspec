@@ -379,7 +379,31 @@
         ]
       }
     },
-    {"backend": "julia", "runtime": "julia", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.6", "native_api": "capabilities_plus_query", "consumer": null},
+    {
+      "backend": "julia",
+      "runtime": "julia",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.6",
+      "native_api": "capabilities_plus_query",
+      "consumer": {
+        "path": "julia/test/semantic_introspection_julia_admission_test.jl",
+        "canonical_driver": "tools/run_ci_local.sh",
+        "roles": [
+          "source_normalization",
+          "compiled_snapshots",
+          "failed_snapshot",
+          "runtime_direct",
+          "runtime_loaded",
+          "runtime_generated",
+          "runtime_traced",
+          "native_and_neutral_json",
+          "exact_twenty_queries",
+          "privacy_page_budget_error_explain",
+          "query_non_interference",
+          "stale_host_leak_denial"
+        ]
+      }
+    },
     {"backend": "lua", "runtime": "puc_lua", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7", "native_api": "capabilities_plus_query", "consumer": null},
     {"backend": "lua", "runtime": "luajit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7", "native_api": "capabilities_plus_query", "consumer": null}
   ],
@@ -388,7 +412,7 @@
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.3"},
     {"capability": "rust_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.4"},
     {"capability": "dart_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.5"},
-    {"capability": "julia_parity", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
+    {"capability": "julia_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
     {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
     {"capability": "recurring_six_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
     {"capability": "thin_mcp_transport", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.9"},
@@ -404,7 +428,8 @@
       "tools/check_semantic_introspection_contract.py",
       "t/semantic_introspection_perl_admission.t",
       "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
-      "dart/test/semantic_introspection_dart_admission_test.dart"
+      "dart/test/semantic_introspection_dart_admission_test.dart",
+      "julia/test/semantic_introspection_julia_admission_test.jl"
     ],
     "backend_consumers": "not_admitted_before_owned_rollout_leaf",
     "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"
@@ -430,7 +455,9 @@
     "alter_rust_consumer_driver", "unpromote_rust_rollout", "omit_rust_canonical_registration",
     "unadmit_dart", "omit_dart_consumer_path", "alter_dart_consumer_path", "omit_dart_consumer_role",
     "reorder_dart_consumer_roles", "alter_dart_consumer_driver", "unpromote_dart_rollout",
-    "omit_dart_canonical_registration",
+    "omit_dart_canonical_registration", "unadmit_julia", "omit_julia_consumer_path",
+    "alter_julia_consumer_path", "omit_julia_consumer_role", "reorder_julia_consumer_roles",
+    "alter_julia_consumer_driver", "unpromote_julia_rollout", "omit_julia_canonical_registration",
     "admit_backend_early", "omit_runtime", "omit_luajit",
     "omit_mcp_rollout", "move_semantics_into_mcp",
     "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration"

@@ -70,6 +70,7 @@ require_command perl
 require_command prove
 require_command python3
 require_command dart
+require_command julia
 
 log "running the general doctrine enforcer (DOCTRINE_ENFORCEMENT.md §5/§7 — E4 backstop): the registry driver runs every registered check (memory-architecture, Knowledge Map, ...)"
 bash "$REPO_ROOT/scripts/check_doctrines.sh"
@@ -114,6 +115,7 @@ require_tracked_file unicode_case/self_hosted_cli/manifest.json
 require_tracked_file t/semantic_introspection_perl_admission.t
 require_tracked_file rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
 require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
+require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
 require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
 require_tracked_file t/sparse_and_action_slots_perl_regression.t
@@ -344,6 +346,9 @@ log "running composed Dart semantic-introspection admission consumer"
  cd "$REPO_ROOT/dart"
  dart test test/semantic_introspection_dart_admission_test.dart
 )
+
+log "running composed Julia semantic-introspection admission consumer"
+julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl
 
 log "checking backend-neutral duplicate regex-slot identity contract"
 python3 tools/check_duplicate_regex_slot_identity_contract.py

@@ -362,7 +362,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 81 rejected mutations, rollout 4 complete / 5 pending, admission 3 complete / 3 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 89 rejected mutations, rollout 5 complete / 4 pending, admission 4 complete / 2 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -570,7 +570,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `.10.6.5.0` is now frozen. Retrieve [[julia-semantic-query-authority-map]] before query work. The evaluator may
   consume only one fresh `_semantic_static_projection_for_testing`-equivalent materialization, never the retained
   index/compiler/source/host owners. Recheck the 19 static contract hashes with
-  `tools/check_semantic_introspection_contract.py`; use admitted Perl/Rust/Dart query suites as the executable
+  `tools/check_semantic_introspection_contract.py`; use admitted Perl/Rust/Dart/Julia query suites as the executable
   boundary reference; require all 26 raw-neutral errors; and test `Bool` before `Integer` in Julia. `.10.6.5.1`
   owns the private record/source kernel, `.2` traversal/pages/budgets/costs, `.3` complete public typed/raw-neutral
   exposure, and `.4` no-change closeout. Runtime events remain `.10.6.6`. See
@@ -646,7 +646,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   equality, deterministic source, and unchanged generated-source v2/format 2. Complete Julia is 8,879/primary/105.
   No-change `.10.6.6.4` is now complete: retrieve all four runtime-observation cards, then run the complete twelve-
   suite owner order for exact focused 1,337. Parent `.10.6.6` is composition-closed without replacement code,
-  format/runtime change, or ledger promotion. `.10.6.7` is the active exact admission owner from clean `48b7d96d`.
+  format/runtime change, or ledger promotion. Exact admission `.10.6.7` runs
+  `julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl`.
+  Its 12 exact-once roles compose every Julia semantic route, all 20 digests, source/query privacy and
+  non-interference, fresh plus isolated emitted modules, and host-leak denial. Eight independent topology
+  mutations advance only Julia to rollout 5/9 and admission 4/6.
 
 ---
 

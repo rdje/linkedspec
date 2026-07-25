@@ -4,7 +4,18 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-21`
+- Last refreshed: `2026-07-25`
+- `2026-07-25` Julia semantic-admission refresh: `FUTURE-PARITY-BACKLOG.10.6.7` adds no second semantic owner.
+  One ordered twelve-role consumer composes Julia's committed strict source/outcome, exact static/call/staged/
+  generated projections, typed/raw-neutral query, caller-owned runtime observation, loaded and JSON-reconstructed
+  compilation, generated-plan/public-helper, fresh-emitted, isolated-emitted, and native/generated traced routes.
+  All twenty response hashes, privacy/pages/budgets/errors/explain behavior, request/response isolation, no-execute
+  query behavior, and host/path/type/AST/ActionIR/observation/generated-source denial pass at focused 416/416.
+  Eight independent Julia topology mutations raise the neutral checker to 89 rejected mutations and advance only
+  Julia to rollout 5/9 and native admission 4/6. Complete proof is focused 416, semantic 1,753, Julia
+  9,295/primary/105, 5x2x66 plus ten Unicode legs, canonical Rust 78.60s + Dart 1/1 + Julia 416/27.6s + reference
+  66x2 + Phase 0 1,031/636s, and exact 1,632,888-KiB cleanup. Parent `.10.6` closes; PUC Lua/LuaJIT, recurring,
+  MCP, and public rows remain pending.
 - `2026-07-20` semantic-introspection neutral-contract refresh: ADRs `0049`/`0050` and
   `FUTURE-PARITY-BACKLOG.10.2` make
   `linkedspec-semantic-model-v1` and `linkedspec-semantic-query-v1` before behavior. One immutable native

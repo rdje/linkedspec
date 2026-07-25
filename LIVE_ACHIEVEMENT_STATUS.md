@@ -8,16 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.6.7` is active from clean commit `48b7d96d`. The planning boundary owns one ordered
-  twelve-role Julia semantic consumer, every committed runtime route, all twenty typed/raw-neutral digests,
-  privacy/paging/budget/error/explain/non-interference/host denial, canonical topology plus eight mutations,
-  Julia-only promotion, public lockstep, and `.10.6` closeout. No implementation has changed yet. The planning
-  boundary passes memory architecture, all four doctrines, Knowledge Map, mdBook, neutral 6/20/81, and diff checks.
+- `FUTURE-PARITY-BACKLOG.10.6.7` is closed by this commit from planning commit `20c5b2bb`. One ordered twelve-role Julia semantic
+  consumer now composes every committed owner and route, all twenty typed/raw-neutral digests, privacy/paging/
+  budget/error/explain/non-interference/host denial, and exact runtime evidence. Package and canonical registration
+  plus eight independent topology mutations advance only Julia to semantic 6/20/89 at rollout 5/9 and native
+  admission 4/6. Focused 416/416, thirteen semantic suites at 1,753, and complete Julia 9,295/primary/105 pass.
+  Primary 5x2x66, ten Unicode legs, every ledger, book/KM 695/5,358, canonical Rust 78.60s + Dart 1/1 + Julia
+  416/27.6s + reference 66x2 + Phase 0 1,031/636s, and exact 1,632,888-KiB cleanup pass. No work remains in flight;
+  the next PNT slice is a behavior-free task-tree audit/split for PUC Lua/LuaJIT `.10.7` from this clean closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.6.7 — admit Julia semantic introspection**
+  (DONE and fully verified from planning commit `20c5b2bb`; closed by this commit).
+
+  **Result:** One ordered twelve-role consumer composes every committed Julia semantic owner without a second
+  implementation. It proves all snapshots, routes, twenty digests, policies, immutability, no-execution, and host-
+  denial boundaries at focused 416/416 and advances only Julia to semantic 6/20/89 at 5/9 + 4/6. Parent `.10.6`
+  is closed; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
+
+  **Proof:** Thirteen semantic suites 1,753; Julia 9,295/primary/105; primary 5x2x66; ten Unicode legs; Unicode
+  806/9/8/2; capability 80/0/0; generated v1/10/80-0-0; language 246/105+1/122; public 59/27/0; KM 695/5,358;
+  canonical Rust 78.60s + Dart 1/1 + Julia 416/27.6s + primary 66x2 + Phase 0 1,031/636s; exact
+  1,632,888-KiB cleanup.
+
 - 2026-07-23: **FUTURE-PARITY-BACKLOG.10.6.6.4 — close Julia runtime observation**
   (DONE from clean propagation commit `bea0afe0`; exact admission `.10.6.7` remains pending).
 

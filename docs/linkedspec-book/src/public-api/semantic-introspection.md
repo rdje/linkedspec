@@ -1,6 +1,6 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl, Rust, and Dart have
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl, Rust, Dart, and Julia have
 admitted native query surfaces: opaque construction, exact static plus call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
 consumer per backend. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
@@ -35,10 +35,13 @@ The distinction matters:
 - Dart `RuntimeSemanticObservationSink` receives immutable `regex_slot_selected` and `rule_result` facts during
   normal direct/loaded/reconstructed/traced/generated-plan engine execution; and
 - `semantic_introspection_dart_admission_test.dart` composes every required Dart path once; and
+- Julia `semantic_capabilities`, `semantic_query`, and `semantic_query_neutral` expose the same immutable answers;
+  typed caller observations derive the exact runtime snapshot across native, generated, and emitted routes; and
+- `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission is **3 complete / 3 pending**: Perl, Rust, and Dart are
-admitted; Julia, PUC Lua, and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
+The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
+admitted; PUC Lua and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
 
 ## Current Dart source, outcome, and private graph foundation
 
@@ -1666,9 +1669,21 @@ No-change closeout `.10.6.6.4` retrieves the four committed Julia runtime-observ
 all twelve owner suites at exact focused 1,337. This confirms the typed event sequence, malformed/topology
 rejection, twentieth typed/raw digest, callback identity, final-result omission, every native/generated/emitted
 route, absent-sink fence, and result/diagnostic/trace non-interference together without replacement code or tests.
-Parent `.10.6.6` is closed with generated-source v2/format 2, rollout 4/9, and native admission 3/6 unchanged.
-Director instruction activates exact Julia admission in `.10.6.7` from clean `48b7d96d`. Its ordered consumer,
-canonical topology mutations, complete gates, and public lockstep must pass before those governance values move.
+Parent `.10.6.6` is closed with generated-source v2/format 2. Exact admission `.10.6.7` adds one ordered twelve-
+role consumer at `julia/test/semantic_introspection_julia_admission_test.jl`; it composes strict text/bytes,
+compiled/failed/runtime snapshots, loaded and JSON-reconstructed compilation, native/generated/public-helper/
+fresh-emitted/standalone-emitted direct and traced routes, typed/raw-neutral JSON, all twenty digests, bounded-query
+behavior, non-execution immutability, and host/path/IR denial. Eight independent topology mutations lock the
+consumer, driver, registration, Julia status, and Julia-only rollout. Governance is now 89 mutations, rollout
+5/9, and native admission 4/6; PUC Lua and LuaJIT remain the next backend targets.
+
+Final Julia admission proof passes 416/416 consumer assertions, all thirteen semantic suites at 1,753, and the
+complete Julia package at 9,295 assertions plus primary-process conformance and corpus 105/105. The full primary
+matrix remains 5x2x66, all ten Unicode-manifest legs pass, and the neutral checker reports 6 groups, 20 exact
+queries, 89 mutations, rollout 5 complete / 4 pending, and native admission 4 complete / 2 pending. Canonical
+local CI also passes all doctrine/contract gates, Rust semantic admission 1/1 in 78.60 seconds, Dart admission
+1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The closeout removes only 1,632,888 KiB of
+regenerable build/depot artifacts and preserves source plus reusable package caches.
 
 ## Exact v1 record model
 
@@ -1876,15 +1891,16 @@ python3 tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 81 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 89 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
 ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
-fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl, Rust, and Dart
-runtime/admission claims. Internal omission and wrong-value probes prove that documentation guard independently of the 81
+fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl, Rust, Dart, and
+Julia runtime/admission claims. Internal omission and wrong-value probes prove that documentation guard
+independently of the 89
 semantic-contract mutations.
 
 Perl's native evaluator has a separate exact gate:
@@ -2060,7 +2076,7 @@ The dependency order is:
 | `.10.6.6.2` | Julia immutable observed-index derivation | complete; strict topology and exact twentieth digest, new 157/focused 1,286 |
 | `.10.6.6.3` | Julia generated/emitted observation propagation | complete; direct/traced/isolated routes, new 51/focused 1,337, v2/format 2 unchanged |
 | `.10.6.6.4` | Julia runtime-observation composition closeout | complete; committed focused 1,337 plus full matrices/canonical proof, no replacement code or promotion |
-| `.10.6.7` | Julia exact composed semantic admission | active; ordered 12-role consumer and Julia-only promotion |
+| `.10.6.7` | Julia exact composed semantic admission | complete; ordered 12-role consumer, 89 mutations, rollout 5/9, admission 4/6 |
 | `.10.7` | PUC Lua and LuaJIT identity | pending |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
@@ -2070,7 +2086,7 @@ The future MCP server has only capabilities and query tools over a caller-regist
 cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
 raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
 
-Perl, Rust, and Dart callers can use the admitted native static and caller-captured runtime query surfaces now. No later
-backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
+Perl, Rust, Dart, and Julia callers can use the admitted native static and caller-captured runtime query surfaces
+now. No later backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
 backends should continue using their existing descriptor APIs described in
 [Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.
