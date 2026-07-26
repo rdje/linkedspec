@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.4 — root Julia depots and scratch on SSD
+
+Added `tools/run_julia_project_data.sh` as the supported self-rooted boundary for targeted Julia commands and
+`tools/test_julia_project_data_storage.sh` as the recurring Julia storage oracle. The oracle freezes all 17 tracked
+`mktempdir()`/`tempdir()` owners; proves managed temp, the writable depot, and every package file share the
+repository filesystem; rejects package symlinks and explicit external depot entries; requires the five external
+Manifest package trees plus the General registry; loads JSON3 offline from the first depot; and exercises generated
+v2 source, trace output, cleanup, and absence of disposable machine-path usage metadata. `julia/test/runtests.jl`
+independently requires Julia's `tempdir()` to equal routed `TMPDIR`.
+
+Removed the duplicate operating-system-temp/developer-home fallback from the complete and primary Julia gates,
+defaulted package operations offline, and made the complete gate invoke the storage oracle. Canonical CI now
+requires and syntax-checks the targeted wrapper, storage oracle, and primary checker. Eight Julia-consuming cross-
+backend checkers now self-route too, so the outside-cwd proof expands from 19 to 30 process boundaries. All 88 existing current Julia Knowledge Map cards were migrated to
+the targeted wrapper, complete gate, or self-rooted primary checker; no current Julia reverify command names a
+concrete interpreter, developer depot, or OS-temporary Julia depot.
+
+Atomically promoted the 103,356-KiB source-bearing same-SSD Julia depot into the canonical retained root. Its five
+external package trees contain 146 files / 710,665 bytes with canonical hash
+`6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1`. Both exact old internal-volume depots were
+copied to root-relative retained migration storage and independently count/byte/hash verified: 346 directories /
+256 files / 133,963,036 bytes / `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8`, and 24 directories /
+15 files / 4,284,303 bytes / `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`.
+After complete offline package/primary/105-fixture use, both old sources and the exact former-checkout stanza in the
+shared developer usage log were deleted. Ambiguous shared depot data remains untouched and unused.
+
+Julia's package manager generates `manifest_usage.toml` with absolute checkout and managed-run paths. Supported
+package commands now remove that disposable GC index after execution while retaining package sources, registry,
+and compiled cache. Bash syntax, standalone/reused storage proof, complete package and affected semantic suites,
+primary process conformance, corpus 105/105, 30-boundary outside-cwd routing, and zero-run cleanup pass. Doctrines,
+Knowledge Map (714 facts / 5,627 question keys), task/memory/live docs, mdBook, and whitespace pass. Canonical
+records Rust semantic admission 1/1 in 77.66 seconds, Dart 1/1, Julia 416/416 in 27.1 seconds, primary 66x2, and
+Phase 0 1,031/1,031 in 625 seconds. Push cadence advances to 30/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.3 — root Dart workspaces on SSD
 
 Added `tools/test_dart_project_data_storage.sh` as the recurring Dart storage oracle and made the complete Dart

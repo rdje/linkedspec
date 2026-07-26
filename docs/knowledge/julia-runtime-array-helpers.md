@@ -16,7 +16,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.3 adds copied array pipelines and originally locks statement-only end mutations. Later FUTURE-PARITY-BACKLOG.12.1.5 supersedes that result boundary under linkedspec-uniform-binding-v1: named/scalar-held array-end mutations return independent updated arrays and may feed receiver continuations. Current native/generated uniform-binding tests cover the adopted behavior."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.

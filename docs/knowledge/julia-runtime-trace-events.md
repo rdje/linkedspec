@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, trace, observability, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.5.3 instruments julia/src/runtime/Interpreter.jl and extends the trace testset in julia/test/runtests.jl from 29 to 43 assertions. Full Pkg.test() passes with 631 assertions and package/CLI status runtime-trace-events."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'julia_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary)' julia/src/runtime/Interpreter.jl julia/test/runtests.jl"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'julia_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary)' julia/src/runtime/Interpreter.jl julia/test/runtests.jl"
 ---
 
 `JULIA-BACKEND-PARITY.4.5.3` instruments the existing Julia runtime path behind

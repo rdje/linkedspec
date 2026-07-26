@@ -16,7 +16,7 @@ tags: [julia, cli, arguments, resolution, io, parity, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.1 reads raw bytes, requires isvalid UTF-8, and proves exact shared help/loading behavior."
 evidence_update_2026_07_11_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.4 delegates named/file source loading and compilation to the public 14/9/4 native API and removes the recursive repository fallback; 61x2 canonical CLI remains exact."
 evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes --parse-mode from accepted options and help. The exact retired spelling returns usage exit 2 with targeted structural guidance before invalid source or a missing input file; --top-rule remains accepted. Shared primary is 65/65 twice."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh"
+reverify: "bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh"
 ---
 
 `JULIA-BACKEND-PARITY.7.3.2.2` replaces Julia's rollout-era primary

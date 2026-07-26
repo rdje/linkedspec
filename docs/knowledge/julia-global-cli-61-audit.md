@@ -12,7 +12,7 @@ date: 2026-07-15
 status: current
 tags: [julia, cli, utf8, trace, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.0 runs the unchanged suite against Julia, measures 13/61, and splits shared help/UTF-8/errors, canonical trace, and the recurring four-backend driver before code."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot perl tools/run_cli_conformance.pl --display-command linkedspec_julia -- /opt/homebrew/bin/julia --project={{REPO_ROOT}}/julia --startup-file=no --history-file=no {{REPO_ROOT}}/julia/bin/linkedspec_julia.jl"
+reverify: "bash tools/check_julia_primary_cli.sh"
 ---
 
 At the `.1.5.4.0` audit, warmed Julia passes 13/61 unchanged cases: all 11 ordinary native execution/direct-result

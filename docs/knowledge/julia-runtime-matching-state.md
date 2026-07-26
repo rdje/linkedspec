@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, regex, match-state, PCRE, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.1 adds julia/src/runtime/Matching.jl and exports LinkedSpecParseMode, RuntimeRegexAlternative, RuntimeRegexAlternation, RuntimeRegexMatch, RuntimeMatchRegisters, RuntimeLineColumn, match/offset/register helpers, and JSON projection. julia/test/runtests.jl verifies seek/consume behavior, stable alternative identity, compiled-rule patterns, full/compact/named captures, multibyte character offsets, line/column positions, entry/local register separation, cursor and capture anchors, zero-width/progress detection, immutable updates, and boundary/input guards. Direct Julia 1.12 native Regex probes accept (?P<name>), (?<name>), POSIX classes, inline/scoped flags, possessive quantifiers, and (?R) recursion without a dialect rewrite."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 ## Fact

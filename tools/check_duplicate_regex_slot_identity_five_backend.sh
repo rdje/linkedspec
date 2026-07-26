@@ -3,12 +3,14 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_duplicate_regex_slot_identity_five_backend.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
-JULIA_READ_DEPOTS=${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-}}
+JULIA_READ_DEPOTS=${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}
 
 log() {
  printf '[duplicate-regex-slot-five] %s\n' "$*"
@@ -28,7 +30,7 @@ for command in python3 perl prove "$CARGO_CMD" "$DART_CMD" "$JULIA_CMD" "$LUA_CM
 done
 
 cd "$REPO_ROOT"
-TASK_ARTIFACT_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-duplicate-slot.XXXXXX")
+TASK_ARTIFACT_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-duplicate-slot.XXXXXX")
 RUST_TARGET_ROOT="$TASK_ARTIFACT_ROOT/rust-target"
 LUA_NATIVE_ROOT="$TASK_ARTIFACT_ROOT/lua-native"
 JULIA_WRITE_DEPOT="$TASK_ARTIFACT_ROOT/julia-depot"
@@ -37,10 +39,6 @@ cleanup() {
  rm -rf "$TASK_ARTIFACT_ROOT"
 }
 trap cleanup EXIT
-if [[ -z "$JULIA_READ_DEPOTS" ]]; then
- JULIA_READ_DEPOTS=$("$JULIA_CMD" --startup-file=no --history-file=no \
-  -e 'print(join(Base.DEPOT_PATH, ":"))')
-fi
 export JULIA_DEPOT_PATH="$JULIA_WRITE_DEPOT:$JULIA_READ_DEPOTS"
 export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"
 

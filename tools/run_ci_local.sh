@@ -83,6 +83,7 @@ require_tracked_file tools/run_ci_local.sh
 require_tracked_file tools/run_rust_local.sh
 require_tracked_file tools/run_dart_local.sh
 require_tracked_file tools/run_julia_local.sh
+require_tracked_file tools/run_julia_project_data.sh
 require_tracked_file tools/run_lua_local.sh
 require_tracked_file tools/run_primary_cli_matrix.sh
 require_tracked_file tools/run_cargo_local.sh
@@ -90,6 +91,8 @@ require_tracked_file tools/build_lua_native.sh
 require_tracked_file tools/test_perl_project_data_storage.sh
 require_tracked_file tools/test_rust_project_data_storage.sh
 require_tracked_file tools/test_dart_project_data_storage.sh
+require_tracked_file tools/test_julia_project_data_storage.sh
+require_tracked_file tools/check_julia_primary_cli.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file tools/check_callable_codeblock_contract.py
 require_tracked_file tools/check_callable_signature_contract.py
@@ -267,14 +270,15 @@ audit_no_machine_specific_absolute_paths
 
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
- tools/run_julia_local.sh tools/run_lua_local.sh tools/run_primary_cli_matrix.sh tools/build_lua_native.sh \
+ tools/run_julia_local.sh tools/run_julia_project_data.sh tools/run_lua_local.sh tools/run_primary_cli_matrix.sh \
+ tools/build_lua_native.sh tools/check_julia_primary_cli.sh \
  tools/run_cargo_local.sh tools/test_perl_project_data_storage.sh tools/test_rust_project_data_storage.sh \
- tools/test_dart_project_data_storage.sh \
+ tools/test_dart_project_data_storage.sh tools/test_julia_project_data_storage.sh \
  tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
- tools/check_duplicate_regex_slot_identity_five_backend.sh \
+ tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_repeated_action_result_five_backend.sh \
  tools/check_root_rule_selection_five_backend.sh \
  tools/check_rule_local_cursor_five_backend.sh \
- tools/check_punctuation_light_five_backend.sh
+ tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
 perl -c tools/run_cli_conformance.pl

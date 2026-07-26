@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, actionir, functions, staged-parsing, registry, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl and registry-aware ActionIR contracts. JULIA-BACKEND-PARITY.5.1 adds deterministic staged function-body dispatch and immutable body_ast stitching through julia/src/parser/StagedParserRegistry.jl. JULIA-BACKEND-PARITY.5.2 executes exact-arity registry matches before helper fallback."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 ## Fact

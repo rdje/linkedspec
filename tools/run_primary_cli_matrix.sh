@@ -10,8 +10,7 @@ CARGO_CMD="${LINKEDSPEC_CARGO_CMD:-cargo}"
 DART_CMD="${LINKEDSPEC_DART_CMD:-dart}"
 JULIA_CMD="${LINKEDSPEC_JULIA_CMD:-julia}"
 LUA_CMD="${LINKEDSPEC_LUA_CMD:-lua}"
-DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
-JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}"
+JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}"
 
 log() {
  printf '[cli-matrix] %s\n' "$*"

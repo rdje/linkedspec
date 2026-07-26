@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.4` — package source, runtime systems, and usage metadata are different
+  depot classes): A Julia `compiled/` tree is not a dependency cache by itself. The old gate could precompile into
+  a writable temporary depot but still needed package source from the developer home; a trailing empty depot entry
+  adds Julia-managed system depots, not the user depot. The supported first entry therefore retains all five
+  external Manifest package trees plus the General registry on the repository filesystem. Only Julia's interpreter-
+  managed system depots remain necessary read-only external inputs. The storage oracle proves JSON3 resolves from
+  the first entry offline and rejects any explicit second external depot.
+
+  Julia's package manager also writes `manifest_usage.toml` into the writable depot. The file is neither package
+  source nor compiled cache: it is a garbage-collection usage index containing absolute checkout and temporary
+  Manifest paths. Keeping it would preserve stale machine identity after relocation. The targeted wrapper now
+  removes this exact disposable metadata after a supported package command, including failure, while retaining the
+  source-bearing cache. The recurring oracle requires the canonical depot not to retain the file.
+
+  Migration authority remains narrower than discovery. The two dedicated old depots were exact LinkedSpec owners,
+  so they were copied, matched by directory/file/byte/hash inventory, exercised through the canonical offline/full
+  gate, and deleted. One former-checkout stanza inside the shared developer usage log was equally attributable and
+  removed exactly. The developer depot's package trees and unrelated log stanzas are ambiguous multi-project data;
+  they remain untouched even though supported workflows no longer read them.
+
+  Durable commands are storage boundaries too. Rewriting 88 existing current Julia Knowledge Map cards to one targeted
+  wrapper, the complete gate, or the self-rooted primary checker prevents copied historical command fragments from
+  reintroducing OS-temp or developer-home depots. A runtime assertion that `tempdir()` equals routed `TMPDIR`, plus
+  a shell oracle over all 17 allocator owners and actual filesystem devices, proves behavior rather than trusting
+  environment spelling alone. The same audit found eight directly invocable Julia-consuming cross-backend
+  checkers that relied on a caller to initialize storage; self-routing each checker and forcing command preflight
+  before work expands the hostile outside-cwd process proof to 30 boundaries.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.3` — compare cache semantics before deleting exact metadata): Equal
   package file counts and bytes are not sufficient cache-identity proof. The shared and warmed Dart caches had the
   same package inventory but different aggregate hashes because 47 registry-index JSON files carried different

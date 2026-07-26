@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, diagnostics, trace, runtime, task-tree, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.5.4 closes runtime diagnostics/trace. JULIA-BACKEND-PARITY.7.3.2.1 later closes the remaining source parser, validation, compiler, function-shell, and staged-dispatch trace coverage through the same emitter/sinks with 868 assertions and 99/99 green."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'JULIA-BACKEND-PARITY\.4\.5\.4|JULIA-BACKEND-PARITY\.7\.3\.2\.1|runtime-trace-events|RuntimeDiagnostic|LinkedSpecTrace' docs/tasks/JULIA-BACKEND-PARITY.md docs/TASK_TREE.md julia/README.md julia/src docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md MEMORY.md ROADMAP_V2.md"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'JULIA-BACKEND-PARITY\.4\.5\.4|JULIA-BACKEND-PARITY\.7\.3\.2\.1|runtime-trace-events|RuntimeDiagnostic|LinkedSpecTrace' docs/tasks/JULIA-BACKEND-PARITY.md docs/TASK_TREE.md julia/README.md julia/src docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md MEMORY.md ROADMAP_V2.md"
 ---
 
 `JULIA-BACKEND-PARITY.4.5.4` closes the Julia diagnostics/trace no-drift

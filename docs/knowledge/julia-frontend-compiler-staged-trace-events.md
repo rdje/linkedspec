@@ -14,7 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, trace, parser, validation, compiler, staged-parsing, function-shell, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.1 moves Trace.jl before frontend owners and adds one optional caller-owned LinkedSpecTraceEmitter across parse_spec, validate_spec, compile_spec, function-shell parsing/projection, and staged dispatch. Twenty-eight focused assertions, the 868-assertion suite, CLI smokes, and 99/99 corpus gate pass."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'julia_(frontend|compiler|staged):|trace::Union\\{Nothing,LinkedSpecTraceEmitter\\}' julia/src julia/test/runtests.jl"
+reverify: "bash tools/run_julia_local.sh && rg -n 'julia_(frontend|compiler|staged):|trace::Union\\{Nothing,LinkedSpecTraceEmitter\\}' julia/src julia/test/runtests.jl"
 ---
 
 `JULIA-BACKEND-PARITY.7.3.2.1` extends Julia's existing trace mechanism rather

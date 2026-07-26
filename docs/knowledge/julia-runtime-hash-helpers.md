@@ -15,7 +15,7 @@ date: 2026-07-13
 status: current
 tags: [julia, runtime, helpers, hash, receiver-chains, mutation, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.4 extends julia/src/runtime/Interpreter.jl with copied hash helper and receiver dispatch, typed statement-only set_key mutation, base/overlay-aware merge_hash evaluation, direct hash-index assignment integration, and explicit flat/flat_hash constructor splicing. One end-to-end case in julia/test/runtests.jl proves views, pure transformations, source immutability, direct mutation, bare base/overlay merge behavior, explicit splicing, and ordinary nested-map preservation. FUTURE-PARITY-BACKLOG.12.1 later made bare typed bindings canonical and rejected exact aggregate selectors."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case terse_2_3_4_deep_pure_helper_composition"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case terse_2_3_4_deep_pure_helper_composition"
 ---
 
 Julia hash helper execution lives in `julia/src/runtime/Interpreter.jl`.

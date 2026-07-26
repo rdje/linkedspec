@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, capture, source-boundaries, corpus, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.4.1 adds anonymous capture execution in julia/src/runtime/Interpreter.jl over RuntimeMatchRegisters.capture_start_codeunit. Three Unicode/location/mutation runtime assertions plus six corpus assertions bring full Pkg.test() to 766. hlink_curly_brace, hlink_bracket_body, and hlink_mixed_bracket_brace pass; ebnf_logging_annotation advances from unsupported start_capture_slice to the same structural output mismatch class as ebnf_expression_rules; the full shipped-smoke window is 13/31."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
 Julia's runtime executes the complete direct anonymous capture-boundary family over the existing rule-local

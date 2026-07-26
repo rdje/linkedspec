@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, helpers, values, no-drift, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.6 audits the 567-assertion Julia runtime suite, runtime-value-control-tree package status, mdBook helper catalog and backend status/handoff, live docs, and Julia helper/value fact cards. Julia already implements the final checked no-autovivification nested-write contract from .4.3.1, so no runtime correction is required. The closeout marks stale parent .3 and .4.3 containers done, removes redundant line-ending semicolons from central helper-catalog .spec examples, and advances the frontier to .4.4 cursor controls."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/linkedspec_julia.jl status && mdbook build docs/linkedspec-book"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/linkedspec_julia.jl status && bash tools/run_mdbook_local.sh"
 ---
 
 `JULIA-BACKEND-PARITY.4.3.6` closes the scoped Julia helper/value runtime

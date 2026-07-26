@@ -657,12 +657,11 @@ network plugin reads both its executable and design input from `conf/network.con
 caller-owned; and no audited owner retains developer-home, private-volume, `/vobs`, or `/dsync` defaults. Explicit
 external paths such as the stable `/usr/bin/csplit` tool remain legal under the boundary above.
 
-The 12 audited Julia Knowledge Map reverify commands are portable as well. They select `julia` through `PATH`,
-keep `--project=julia` and test paths relative to the repository root, and store no expanded machine location.
-Their current caller-temporary/runtime-depot composition is frozen migration debt under
-`PROJECT-DATA-SSD-ROOTING.2.4`; new commands use a repository-local writable depot followed by runtime system
-depots. Direct semantic-query commands define `REPO_ROOT=pwd()` because their included shared fixtures require
-that root-relative harness context.
+The initial 12 audited Julia Knowledge Map reverify commands became path-portable under `.1.3`. Storage migration
+`PROJECT-DATA-SSD-ROOTING.2.4` now routes all 88 existing current Julia cards through a self-rooted targeted wrapper, the
+complete gate, or the self-rooted primary checker. Those boundaries derive managed scratch and the retained
+source-bearing depot from the current checkout and add only Julia-managed system depots. No current Julia reverify
+command stores a concrete interpreter, developer depot, or operating-system-temp Julia depot.
 
 Static enforcement is registered as the `REPO-ROOT-PATHS` doctrine. Run it directly with:
 
@@ -897,7 +896,51 @@ the current and absent former checkout deleted with their empty hash shards. Sha
 The shared package payload is ambiguous multi-project data, so it remains untouched and supported workflows no
 longer consult it. Canonical signoff with the default Dart cache passes Rust admission 1/1 in 77.57 seconds, Dart
 admission 1/1, Julia 416/416 in 27.1 seconds, primary 66/66 twice, and Phase 0 1,031/1,031 in 624 seconds.
-Julia/Lua/tool migration remains `.2.4-.2.6`.
+
+### Julia depot, temporary workspaces, generated output, and traces
+
+Julia migration `.2.4` adds one targeted self-rooted command boundary:
+
+```console
+$ bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3'
+```
+
+The wrapper derives the current checkout from its own file, enters managed scratch, defaults package operations to
+offline mode, and uses the retained repository depot followed only by Julia-managed system depots. It deliberately
+does not consult the developer-home depot. The canonical first depot contains the five external package trees
+locked by `julia/Manifest.toml`—JSON3, Parsers, PrecompileTools, Preferences, and StructTypes—plus the General
+registry. Their exact source payload is 146 files / 710,665 bytes with canonical hash
+`6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1`.
+
+The recurring process oracle is:
+
+```console
+$ bash tools/test_julia_project_data_storage.sh
+```
+
+It freezes all 17 tracked `mktempdir()`/`tempdir()` owners, checks filesystem-device identity for the managed run,
+`TMPDIR`, writable depot, and every package file, rejects package symlinks and an explicit external depot entry,
+and proves JSON3 loads from the first depot. Its Julia probe requires `tempdir()` to equal routed `TMPDIR`, writes
+generated v2 source and a trace beneath `mktempdir()`, and leaves no completed `jl_*` workspace.
+`julia/test/runtests.jl` independently locks the same temp-root contract. The complete
+`tools/run_julia_local.sh` gate invokes the oracle between package tests and primary/corpus proof.
+
+The warmed source-bearing depot moved atomically from its noncanonical same-SSD location into the canonical cache.
+The two exact old internal-volume depots were copied into repository-relative retained migration storage and
+independently verified before deletion. The larger copy contains 346 directories / 256 files / 133,963,036 bytes
+with hash `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8`; the query copy contains 24 directories /
+15 files / 4,284,303 bytes with hash `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`.
+Only after offline loading and the complete package/primary/105-fixture gate passed were both exact old sources
+deleted. The exact former-checkout stanza in the shared developer usage log was also deleted; ambiguous shared
+depot content remains untouched and unused.
+
+Julia's package manager creates a `manifest_usage.toml` index containing absolute checkout and managed-run paths.
+That file is disposable package-GC metadata, not a dependency cache, so supported package wrappers remove it after
+the child command while retaining package sources, registry, and compiled cache. This prevents a move from leaving
+stale checkout identity in retained project data. All 88 existing current Julia Knowledge Map reverify cards now use the
+targeted wrapper, complete gate, or self-rooted primary checker. The workflow-routing oracle covers 30 boundaries,
+including all eight Julia-consuming cross-backend checkers.
+Lua/tool migration remains `.2.5-.2.6`.
 
 ## CI input areas
 

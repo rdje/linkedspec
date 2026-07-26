@@ -349,6 +349,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/test_dart_project_data_storage.sh`. `tools/run_dart_local.sh` invokes the oracle after the
   complete package-test proof and reuses that result.
 
+### 4.3.5 Julia targeted commands and SSD-local storage oracle
+
+- **WHAT:** `tools/run_julia_project_data.sh` executes one Julia command with repository-derived managed temp and
+  retained depot storage; `tools/test_julia_project_data_storage.sh` locks all 17 tracked temporary owners, the
+  five external Manifest package trees, actual filesystem devices, offline source resolution, generated v2 source,
+  trace output, cleanup, and absence of disposable machine-path usage metadata.
+- **WHEN:** use the targeted wrapper for every Julia command that bypasses `tools/run_julia_local.sh`; run the oracle
+  when changing Julia temp allocation, depot/package behavior, generated output, traces, or Julia gate routing.
+- **HOW:** `bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3'` and
+  `bash tools/test_julia_project_data_storage.sh`. The complete Julia gate invokes and reuses the oracle.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -367,7 +378,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
   foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
   `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
-  environment, lifecycle, and 19-entrypoint outside-cwd proofs. Build the book through
+  environment, lifecycle, and 30-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports
@@ -561,7 +572,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **JULIA SOURCE FOUNDATION:** `.10.6.2.1` implements only copied valid `AbstractString` / strict
   `AbstractVector{UInt8}` input, the private canonical byte/scalar map, SHA-256 identity, four ceilings, typed
   errors/values, exact span/excerpt/occurrence accessors, and redacted opaque display. Run:
-  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e
+  `bash tools/run_julia_project_data.sh --project=julia -e
   'using LinkedSpecJulia,Test; include("julia/test/semantic_index_source_foundation_test.jl")'`. Its 135 assertions
   cover ASCII, supplementary/combining text, CRLF/EOF, duplicates, caller mutation, malformed strings/bytes,
   invalid names/selectors/ceilings/ranges/needles, mid-scalar coordinates, explicit `Bool` rejection, ceiling

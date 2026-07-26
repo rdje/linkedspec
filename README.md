@@ -259,7 +259,10 @@ generated projects, traces, and copied-binary relocation on repository storage. 
 verified 47-package cache into the canonical retained root, proves all 18 Dart temporary owners plus generated and
 trace paths, and deletes the two exact shared checkout records after successful offline/full-gate use. Shared package
 payload remains untouched when ownership is ambiguous; LinkedSpec instead populates repository-local caches and
-stops consulting the shared copy. Julia `.2.4` is the active migration frontier.
+stops consulting the shared copy. Julia `.2.4` makes the retained source-bearing five-package depot canonical,
+proves all 17 Julia temporary owners plus generated/trace paths, migrates 88 current durable commands, and deletes
+both exact old depots plus the exact former-checkout shared-log stanza after complete offline use. Julia's shared
+developer depot remains untouched and unused; Lua `.2.5` is the active migration frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -330,7 +333,24 @@ build output remains below `rust/target`. The oracle locks all 17 Rust temporary
 generated child projects and traces, and runs a real copied primary binary from managed scratch while checking
 filesystem device identity. Exact Rust-prefixed residue in the old temporary roots is zero, so no unambiguous old
 Rust datum was deleted. The ambiguous shared developer Cargo cache remains untouched and supported workflows no
-longer consult it. Dart/Julia/Lua/tool migration remains `.2.3-.2.6`-owned.
+longer consult it. Dart and Julia migration are complete; Lua/tool migration remains `.2.5-.2.6`-owned.
+
+Julia migration `.2.4` adds a targeted command boundary and a recurring storage oracle:
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3'
+bash tools/test_julia_project_data_storage.sh
+```
+
+The repository-local depot contains the five external package trees locked by `julia/Manifest.toml` plus the
+General registry and resolves them offline. The oracle locks all 17 tracked `mktempdir()`/`tempdir()` owners,
+checks actual filesystem identity for managed scratch, the writable depot, and every package file, then exercises
+generated v2 source and traces. The complete `tools/run_julia_local.sh` gate includes this proof, primary process
+conformance, and all 105 corpus fixtures. Supported package commands remove Julia's disposable manifest-usage log
+because it records machine-specific runtime paths; package sources, registry, and compiled cache remain retained.
+The two exact old internal-volume depots and one exact former-checkout shared usage record were deleted only after
+copy/count/byte/hash verification and successful full-gate use. The ambiguous shared developer depot remains
+untouched and is no longer consulted.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

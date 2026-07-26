@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, diagnostics, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.5.1 adds exported RuntimeDiagnostic, RuntimeInterpreterException.diagnostic, optional LinkedSpecRuntimeEngine spec_name/spec_path fields, context top-rule identity, direct rule-lookup diagnostics, and fallback-preserving rule/parse wrapping. Seven focused assertions and the full 588-assertion Julia suite prove neutral JSON fields, successful-output preservation, child-rule attribution, and unchanged textual errors."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia runtime structured diagnostics live in

@@ -14,7 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, user-functions, actionir, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.5.2 establishes exact execution; FUTURE-PARITY-BACKLOG.4.3.2 extends the same registry-first frame to typed v2 fixed-prefix/rest signatures and passes 55 neutral assertions plus the complete Julia gate."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia's runtime checks `CompiledSpec.function_registry` inside `_evaluate_runtime_call!(...)` before ordinary

@@ -13,7 +13,7 @@ date: 2026-07-18
 status: accepted and verified; Julia admitted at 5 complete / 3 pending
 tags: [julia, cursor, admission, parity, topology, mutation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.6.6 adds one contract-declared Julia consumer whose 15 exact roles run once in neutral order: native default, native AND, normalized, loaded, descriptor v1, emitted v2, generated direct, generated trace, mixed parent-child, recursion, ordered landmarks, anchored choice, static option removal, primary command, and portable diagnostics. The checker locks every role, the tracked consumer, package driver, canonical optional registration, rollout row, and five new omission mutations. Focused composition passes 104 assertions; the complete package reaches 3,291; ten real-process families, shared primary 65/65 twice, and corpus 105/105 pass. Governance reaches 67 migration files, 5 complete / 3 pending, and 44 rejected mutations. Only julia_backend advances; Lua, recurring admission, and public no-drift remain pending."
-reverify: "JULIA_PKG_OFFLINE=true JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh && python3 tools/check_rule_local_cursor_contract.py"
+reverify: "JULIA_PKG_OFFLINE=true bash tools/run_julia_local.sh && python3 tools/check_rule_local_cursor_contract.py"
 ---
 
 `julia/test/rule_local_cursor_contract_test.jl` is the single omission-sensitive

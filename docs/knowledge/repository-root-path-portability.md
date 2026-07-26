@@ -26,7 +26,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. ADR 0052 freezes the boundary."
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. PROJECT-DATA-SSD-ROOTING.2.4 migrates 88 existing current Julia reverify cards to self-rooted repository-storage wrappers and removes disposable package-manager usage metadata containing runtime absolute paths. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. ADR 0052 freezes the boundary."
 reverify: "bash scripts/check_repo_root_path_portability.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -66,13 +66,14 @@ EasyTk leaves Tcl/Tkx package discovery to caller configuration, and `network.pl
 `dc_load_cmd` plus `ddc` fields. Stable external `/usr/bin/csplit` remains explicit OS/tool data. The derived
 `KNOWLEDGE_MAP.md` is not a separate source; `.1.3` normalizes the 12 fact cards and regenerates it.
 
-The `.1.3` commands now select `julia` through `PATH`, retain root-relative `--project=julia` and test operands,
-and prepend caller-writable `${TMPDIR:-/tmp}` depots to the default depots reported by Julia at runtime. The
-explicit runtime composition matters: a trailing empty `JULIA_DEPOT_PATH` entry expands to Julia's system depots,
-not the user package depot, so the first attempted rewrite lost installed packages and tried to fetch the General
-registry while offline. The corrected commands persist no expanded home/session path. Three direct semantic-query
-commands also define `REPO_ROOT=pwd()` before including shared tests because those fixtures consume that harness
-constant; this is an explicit repo-root invocation contract, not baked-in checkout identity.
+The `.1.3` commands originally selected `julia` through `PATH` and retained root-relative project/test operands.
+Storage migration `.2.4` now routes all 88 existing current Julia reverify cards through
+`tools/run_julia_project_data.sh`, `tools/run_julia_local.sh`, or the self-rooted primary checker. The wrappers
+derive managed temporary and retained depot roots from their own checkout, resolve packages offline from the
+repository cache, and admit only Julia-managed system depots after the writable first entry. A trailing empty
+depot entry still means system depots, not the developer-home depot. Julia's disposable manifest-usage index is
+removed after supported package commands because it records runtime absolute paths; package sources, registry,
+and compiled cache remain retained.
 
 `REPO-ROOT-PATH-PORTABILITY.2.1` makes the rule mechanical through
 `scripts/check_repo_root_path_portability.sh`, registered once as `REPO-ROOT-PATHS`. The read-only checker derives
@@ -91,4 +92,5 @@ valid. Ignored caches are regenerated after a move, and debug symbols may retain
 is that none of those values becomes an implicit or durable repository root.
 
 Related facts: [[native-spec-resolution-contract]], [[native-spec-resolution-policy-drift]],
-[[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[rust-project-data-ssd-storage]], [[lua-toolchain-package-policy]].
+[[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[rust-project-data-ssd-storage]],
+[[julia-project-data-ssd-storage]], [[lua-toolchain-package-policy]].

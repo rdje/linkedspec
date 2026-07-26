@@ -16,7 +16,7 @@ date: 2026-07-23
 status: current exact private projection; composition parent closed without promotion
 tags: [julia, semantic-introspection, staged-parsing, generated-source, provenance, privacy]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.4.2; julia/src/semantic/SemanticCallProjection.jl; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_call_staged_test.jl; capability_conformance/semantic_introspection_model.json snapshot calls
-reverify: "python3 tools/check_semantic_introspection_contract.py; JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-call-staged-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia,Test,JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'"
+reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia,Test,JSON3; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'"
 ---
 
 Julia leaf `.10.6.4.2` completes the private calls projection at the exact neutral 22-record / 25-relation target.

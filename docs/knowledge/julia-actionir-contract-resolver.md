@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, actionir, contracts, helper-surface, validation, backend]
 evidence: "JULIA-BACKEND-PARITY.3.2 adds julia/src/action/ActionContracts.jl and focused tests in julia/test/runtests.jl. The resolver entrypoints walk typed ActionIR calls, receiver methods, structural assignments, structured controls, nested arguments, block values, shapes, and access expressions, recording current canonical helper/control contracts. Non-current helper-looking calls produce unknown_helper, and raw fallback nodes produce raw_perl diagnostics. julia/src/spec/Validator.jl now shares is_known_action_ir_call_name(...) so user functions collide with active built-in helper/control names. JULIA-BACKEND-PARITY.3.3 adds optional UserFunctionRegistry input so exact-arity user calls classify before helper fallback while wrong-arity registered calls diagnose as user_function_arity_mismatch."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 ## Fact

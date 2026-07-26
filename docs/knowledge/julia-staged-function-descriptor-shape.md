@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, descriptor, staged-parsing, user-functions, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.5.3 adds a 20-assertion testset in julia/test/runtests.jl. It builds two functions from neutral spec-returned function_definition nodes, dispatches and stitches their body jobs, compiles the spec, asserts parsed/registry/descriptor shape, and executes the same compiled state. Full Pkg.test() passes with 691 assertions."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia's staged function descriptor proof lives in `julia/test/runtests.jl` under

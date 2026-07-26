@@ -19,7 +19,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.6.3 removes root meta.parse_mode and projec
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 leaves descriptor v1 unchanged while advancing emitted source to v2/format 2 from the same normalized family facts."
 evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 leaves descriptor v1 unchanged while removing every high-level engine/loader/corpus/primary override that could conflict with its projected rule facts."
 evidence_update_2026_07_18_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 composes descriptor v1 once in the exact Julia 15-role consumer and advances only julia_backend."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); const DESCRIPTOR_CONTRACT=JSON3.read(read(joinpath(REPO_ROOT, \"capability_conformance\", \"outward_descriptor_contract.json\"), String), Dict{String,Any}); include(\"julia/test/rule_local_cursor_descriptor_test.jl\")' && python3 tools/check_rule_local_cursor_contract.py"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); const DESCRIPTOR_CONTRACT=JSON3.read(read(joinpath(REPO_ROOT, \"capability_conformance\", \"outward_descriptor_contract.json\"), String), Dict{String,Any}); include(\"julia/test/rule_local_cursor_descriptor_test.jl\")' && python3 tools/check_rule_local_cursor_contract.py"
 ---
 
 ## Fact

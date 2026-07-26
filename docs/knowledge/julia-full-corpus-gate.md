@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, parity, cli, manifest, regression, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.3 adds the complete-corpus regression and unbounded runner execution. JULIA-BACKEND-PARITY.7.3.2.4 re-runs the focused gate: corpus reports 99/0 and the suite passes with 1,017 assertions."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute"
 ---
 
 `JULIA-BACKEND-PARITY.6.3` is the aggregate interpreter-first Julia corpus gate. The permanent test calls

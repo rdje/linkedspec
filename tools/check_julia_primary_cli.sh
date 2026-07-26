@@ -3,9 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_julia_primary_cli.sh" "$@"
 JULIA_CMD="${LINKEDSPEC_JULIA_CMD:-julia}"
-DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
-JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}"
+JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}"
 PRIMARY_CLI="$REPO_ROOT/julia/bin/linkedspec_julia.jl"
 
 case "$(uname -s)" in
@@ -23,9 +24,11 @@ command -v rg >/dev/null 2>&1 || fail "required command not found: rg"
 [[ -n "$WRITABLE_JULIA_DEPOT" ]] || fail "first Julia depot entry must not be empty"
 
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
+export JULIA_PKG_OFFLINE="${JULIA_PKG_OFFLINE:-true}"
 mkdir -p "$WRITABLE_JULIA_DEPOT"
+cd "$REPO_ROOT"
 
-TEMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-julia-primary.XXXXXX")
+TEMP_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-julia-primary.XXXXXX")
 cleanup() {
  rm -rf "$TEMP_ROOT"
 }

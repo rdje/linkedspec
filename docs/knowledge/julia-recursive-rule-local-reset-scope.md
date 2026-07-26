@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, recursion, rule-scope, stores, corpus, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.4.3 proves recursive aggregate reset scope through a first-write snapshot map per rule invocation. FUTURE-PARITY-BACKLOG.12.1.7.2 migrates recursive fixtures to bare I assignments and extends that scope to direct initializer assignment; an otherwise absent binding named for a compiled rule reads as its empty implicit array accumulator. Permanent uniform-binding tests, the complete package gate, and all 105 corpus cases pass."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case top_rule_body_recursion_sexpr --case top_rule_lx_recursion_nested --case top_rule_lx_recursion_sequence"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case top_rule_body_recursion_sexpr --case top_rule_lx_recursion_nested --case top_rule_lx_recursion_sequence"
 ---
 
 Julia already isolated entry/local match registers for every rule call, but its scalar, array, and hash stores were

@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, regex, flags, helpers, corpus, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.4.2.3 adds _runtime_compile_helper_regex in julia/src/runtime/Interpreter.jl. It retains imsx, ignores execution-only g and Perl compile-once o, and returns failure for unknown flags or invalid patterns. matches(...) and regex split(...) share it. Focused igo/go/q coverage and the permanent portmap corpus regression pass; portmap_constant returns exact expected output, full Pkg.test() passes with 772 assertions, and shipped smoke is 18/31."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case portmap_constant"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case portmap_constant"
 ---
 
 Julia helper regex literals use one strict compilation seam:

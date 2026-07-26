@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, helpers, mutation, regex, corpus, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.4.5.2 adds statement-context four-argument substr(...) and regex_subst(...) mutation for bare scalar targets before pure helper fallback. Regex/string patterns reuse strict helper compilation: imsx compile, g replaces globally, o is a compatibility no-op, unknown flags/patterns fail with rule attribution, and $n placeholders expand per match. The focused quote-removal case uses the variant-agnostic single-quoted pattern '\"|\\s'. Numeric substr(value,start,width) remains pure even as a discarded standalone statement. Six focused assertions lock global, first-only, case-insensitive, capture-replacement, and pure-slice behavior. ebnf_expression_rules, ebnf_logging_annotation, simenv_multiline_value, lib_reader_sattribute, and lib_reader_cattribute all pass exact oracle output. Full Pkg.test() passes with 808 assertions, shipped smoke is 30/31, and status is runtime-corpus-statement-mutation."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia spends statement context and arity to disambiguate the overloaded helper name:

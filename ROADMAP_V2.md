@@ -26,8 +26,11 @@ bytes plus canonical hash, exercised, and deleted. Rust `.2.2` adds a complete 1
 proves all 17 temp owners, generated projects, traces, and a copied binary stay on repository storage; no exact old
 Rust temp residue exists. Dart `.2.3` adds the complete 47-package offline cache and proves all 18 temporary owners
 plus generated and trace paths on repository storage; after successful offline/full-gate use, its two exact shared
-checkout records were deleted while ambiguous shared package payload remained untouched. Active `.2.4` owns Julia
-depot/precompile/temp/generated migration. Migration remains copy/verify/use/delete; ambiguous shared caches are
+checkout records were deleted while ambiguous shared package payload remained untouched. Julia `.2.4` adds a
+complete five-package offline depot and 17-owner temp/generated/trace oracle, migrates 88 current durable commands,
+and deletes both exact old depots plus the former-checkout shared-log stanza after full-gate use. The shared
+developer depot remains untouched and unused; only Julia-managed system depots remain necessary external reads.
+Active `.2.5` owns Lua native builds and workspaces. Migration remains copy/verify/use/delete; ambiguous shared caches are
 not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
@@ -37,8 +40,9 @@ literals, 0 symlinks, 25/27 self-rooted shell/hook files plus 2 root-independent
 Julia/Lua named-spec probes. Rust `.1.1` replaces the exact production RED with current-executable then cwd marker
 discovery; its copied-binary moved-root reproduction and complete signoff are green. The eight frozen legacy
 config/source owners `.1.2` are complete with relative project defaults, PATH-selected tools, and configured
-network command/input ownership. The 12 Julia fact-card commands `.1.3` are also complete with PATH-selected Julia,
-root-relative operands, and runtime-composed caller-writable depots. Ordered remediation `.1.1-.1.3` is complete;
+network command/input ownership. The initial 12 Julia fact-card commands `.1.3` are path-portable; storage leaf
+`PROJECT-DATA-SSD-ROOTING.2.4` now routes all 88 current Julia reverify cards through self-rooted managed wrappers
+and removes disposable usage metadata containing runtime absolute paths. Ordered remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` now scans tracked parent text, self-tests 14 reject/accept classes, and locks all five
 primary runtime anchors through E3/E4. Closeout `.2.2` is paused behind `PROJECT-DATA-SSD-ROOTING.5`. Explicit
 caller paths and OS/tool data remain valid; project-owned temporary/cache state must use the repository filesystem.

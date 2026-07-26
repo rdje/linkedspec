@@ -16,7 +16,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, runtime, diagnostics, trace, user-functions, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs, .6.2.5 adds function shells, and .6.3 permanently runs 99/99. .7.3.2.5 retains 99/99 with 1,017 assertions at runtime-corpus-primary-cli."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 `execute_corpus_fixtures(path; parse_mode, spec_parser, trace_config)` first calls

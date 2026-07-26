@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, parity, regression, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.2 runs julia/bin/corpus_runner.jl with --offset 0 --limit 40 and records 40 passed / 0 failed. julia/test/runtests.jl permanently locks the window with six assertions; full Pkg.test() passes with 751 assertions and package status runtime-corpus-starter."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 40"
+reverify: "bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 40"
 ---
 
 Julia passes manifest offsets 0 through 39 unchanged. The bounded runner starts at

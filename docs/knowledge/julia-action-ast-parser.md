@@ -14,7 +14,7 @@ date: 2026-07-13
 status: current
 tags: [julia, actionir, parser, backend]
 evidence: "julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md. FUTURE-PARITY-BACKLOG.16.5 adds exact statement-context bare next and final-only bare receiver normalization, with equal typed ASTs and unchanged exclusions proved by julia/test/punctuation_light_zero_arg_contract_test.jl."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")'"
 ---
 
 ## Fact

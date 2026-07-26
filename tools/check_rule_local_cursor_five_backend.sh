@@ -3,12 +3,13 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_rule_local_cursor_five_backend.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
-DEFAULT_JULIA_WRITE_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
 
 log() {
  printf '[rule-local-cursor-five] %s\n' "$*"
@@ -27,23 +28,13 @@ for command in python3 perl prove "$CARGO_CMD" "$DART_CMD" "$JULIA_CMD" "$LUA_CM
  require_command "$command"
 done
 
-if [[ -n ${LINKEDSPEC_JULIA_DEPOT_PATH:-} ]]; then
- JULIA_DEPOT=$LINKEDSPEC_JULIA_DEPOT_PATH
-elif [[ -n ${JULIA_DEPOT_PATH:-} ]]; then
- JULIA_DEPOT=$JULIA_DEPOT_PATH
-else
- JULIA_BASE_DEPOT=$(
-  "$JULIA_CMD" --startup-file=no --history-file=no \
-   -e 'print(join(Base.DEPOT_PATH, ":"))'
- )
- JULIA_DEPOT="$DEFAULT_JULIA_WRITE_DEPOT:$JULIA_BASE_DEPOT"
-fi
+JULIA_DEPOT=${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}
 
 cd "$REPO_ROOT"
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
 JULIA_WRITE_DEPOT=${JULIA_DEPOT_PATH%%:*}
 mkdir -p "$JULIA_WRITE_DEPOT"
-LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-rule-local-cursor.XXXXXX")
+LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-rule-local-cursor.XXXXXX")
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 
 log "checking the neutral schema, policy, admission topology, inventory, rollout, and drift mutations"

@@ -8,15 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.4` — from the clean Dart migration commit, root Julia depots, precompile state, test
-  scratch, generated outputs, and exact shared metadata on the repository filesystem; verify each retained SSD
-  copy, delete each exact old Julia-owned source, and pass the complete Julia gates.
+- `PROJECT-DATA-SSD-ROOTING.2.5` — from the clean Julia migration commit, root Lua native builds, tests, CLI
+  matrices, generated artifacts, and temporary workspaces on the repository filesystem; migrate and verify any
+  retained Lua-owned data, delete its exact old copy, and pass both PUC Lua and LuaJIT gates.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.4 — root Julia depots and scratch on SSD**
+  (17-owner depot/temp/generated/trace proof, 88 existing current reverify cards migrated, two exact old depots
+  plus the former-checkout usage-log record deleted, full Julia and canonical gates; closes with this commit).
+
+  **Result:** The source-bearing same-SSD depot was promoted into canonical retained storage and supplies all five
+  external Manifest packages offline. Their 146 files / 710,665 bytes have canonical hash
+  `6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1`. Both exact old depots were copied into
+  root-relative retained migration storage, independently count/byte/hash verified, used through the full gate,
+  and deleted with the exact former-checkout shared-log stanza. Ambiguous shared depot data remains untouched and
+  unused. Supported package commands remove only disposable machine-path usage metadata after execution.
+
+  **Proof:** Bash syntax, standalone/reused storage, 17 exact owners, package/semantic suites, primary conformance,
+  corpus 105/105, 30-boundary outside-cwd routing, doctrines, Knowledge Map 714/5,627, task/memory, mdBook,
+  whitespace, and zero managed runs pass. Canonical passes Rust semantic admission 1/1 in 77.66s, Dart 1/1, Julia
+  416/416 in 27.1s, primary 66x2, and Phase 0 1,031/1,031 in 625s. Push is 30/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.3 — root Dart workspaces on SSD**
   (47-package offline cache, exact 18-owner generated/trace proof, two exact shared records deleted, full Dart gate;
   closes with this commit).

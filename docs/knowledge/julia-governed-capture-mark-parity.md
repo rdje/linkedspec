@@ -15,7 +15,7 @@ date: 2026-07-10
 status: current
 tags: [julia, capture, marks, blind-call, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 plus FUTURE-PARITY-BACKLOG.17.3; exact governed, implicit-result, rule-local-mark, multibyte-projection, and complete seven-helper locks in julia/test/runtests.jl and julia/test/complete_named_mark_contract_test.jl; tools/run_julia_local.sh plus the shared CLI runner pass 1,414 package assertions, 61x2 CLI, and 105/105 corpus."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh"
+reverify: "bash tools/run_julia_local.sh"
 ---
 
 # Julia Governed Capture / Mark Parity

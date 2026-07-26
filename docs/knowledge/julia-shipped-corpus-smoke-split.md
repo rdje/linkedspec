@@ -15,7 +15,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, shipped-specs, parser-smoke, helpers, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.4.0 runs julia/bin/corpus_runner.jl with --offset 68 --limit 31 and records 10 passed / 21 failed. The owned mechanism leaves close every residual. JULIA-BACKEND-PARITY.6.2.4.6 adds one permanent complete-window test locking manifest count 99, result count 31, stable tclite/lib_reader endpoints, 31 passes, zero failures, and exact outputs. Full Julia tests pass with 816 assertions and status runtime-corpus-shipped."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+reverify: "bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
 `JULIA-BACKEND-PARITY.6.2.4.0` is a planning split, not a runtime fix. The complete shipped-spec/parser-smoke

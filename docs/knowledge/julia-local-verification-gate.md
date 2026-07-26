@@ -8,12 +8,14 @@ answers:
   - does Julia local CI require a Julia SDK by default
   - how do I select the Julia executable for LinkedSpec checks
   - how do I select the Julia depot for LinkedSpec checks
+  - how do I run one targeted Julia command with repository local storage
+  - does the Julia gate retain absolute manifest usage paths
   - what does JULIA-BACKEND-PARITY.6.4 prove
 date: 2026-07-15
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; FUTURE-PARITY-BACKLOG.1.5.4.2 proves its 1,019 assertions, nine canonical primary process families, and 99/99 corpus after trace convergence."
-reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; FUTURE-PARITY-BACKLOG.1.5.4.2 proves its 1,019 assertions, nine canonical primary process families, and 99/99 corpus after trace convergence. PROJECT-DATA-SSD-ROOTING.2.4 adds tools/run_julia_project_data.sh plus the 17-owner storage oracle, defaults package operations offline, removes the duplicate operating-system-temp/developer-home depot fallback, and expands the complete gate to package tests, storage proof, primary conformance, and 105/105 corpus."
+reverify: "bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
 Use the focused Julia gate when changing the Julia backend or its parity documentation:
@@ -22,29 +24,30 @@ Use the focused Julia gate when changing the Julia backend or its parity documen
 bash tools/run_julia_local.sh
 ```
 
-The script runs Julia `Pkg.test()`, the complete `tools/check_julia_primary_cli.sh` process checker, corpus-runner
-help, and complete 99-fixture execution. It runs from the repository root and uses the committed Julia project/
-manifest.
+The script runs Julia `Pkg.test()`, the complete storage oracle, the
+`tools/check_julia_primary_cli.sh` process checker, corpus-runner help, and all 105 corpus fixtures. It derives the
+repository root from its own location and uses the committed Julia project/manifest.
 
-Host installations may select an executable and writable depot:
+Use the same storage boundary for one targeted Julia command:
 
-```bash
-LINKEDSPEC_JULIA_CMD=/path/to/julia \
-LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot \
-bash tools/run_julia_local.sh
+```console
+$ bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia'
 ```
 
-Without an explicit depot override, the script respects `JULIA_DEPOT_PATH`; otherwise it uses a temp-root
-`linkedspec-julia-depot` outside the repository. Generated precompile output is therefore kept out of the worktree.
+The default writable depot is the ignored repository-relative retained cache. Its five locked external package
+trees and General registry resolve offline; the trailing empty depot entry adds only Julia-managed system depots.
+Supported wrappers remove Julia's disposable `manifest_usage.toml` after package commands so the retained cache
+does not preserve absolute checkout or managed-run paths. A caller may select another Julia executable; a storage
+override is accepted only when the common initializer proves that it shares the repository filesystem.
 
-The canonical shared local CI remains core-only unless explicitly opted in:
+Canonical local CI keeps the complete Julia gate behind its existing explicit SDK opt-in:
 
-```bash
-LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
+```console
+$ LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
-That boundary keeps ordinary core verification available on machines without Julia. A Julia-capable checkout has
-one explicit opt-in that composes the focused gate without duplicating its commands.
+This keeps the core gate usable where Julia is unavailable while ensuring Julia-capable signoff composes the
+complete storage/package/primary/corpus boundary without duplicating commands.
 
 For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` explicitly warms the Julia project and
 combines it with Perl, Rust, Dart, and Lua in both environments. `.1.5.4.3` closes the original recurring 4x2x61

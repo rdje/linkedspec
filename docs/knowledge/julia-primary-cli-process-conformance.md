@@ -17,7 +17,7 @@ evidence: "JULIA-BACKEND-PARITY.7.3.2.5 adds nine real-process families; FUTURE-
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 retains the nine process families while the current Julia gate reaches 1,036 package assertions and 105/105 exact corpus fixtures."
 evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 adds a tenth real-process family that proves retired --parse-mode fails at usage exit 2 before invalid source/missing input, while the former function case runs intrinsically. The complete package is 3,187, shared primary is 65x2, and corpus is 105/105."
 evidence_update_2026_07_18_cursor_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 retains all ten real-process families while the exact composed consumer advances the package to 3,291 assertions. Both Julia drivers now create only the first writable entry of a stacked depot path."
-reverify: "JULIA_PKG_OFFLINE=true LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/check_julia_primary_cli.sh && JULIA_PKG_OFFLINE=true LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia bash tools/run_julia_local.sh"
+reverify: "bash tools/run_julia_local.sh"
 ---
 
 `tools/check_julia_primary_cli.sh` is the standalone Julia primary-process

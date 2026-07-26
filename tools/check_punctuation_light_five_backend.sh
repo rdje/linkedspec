@@ -3,6 +3,8 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_punctuation_light_five_backend.sh" "$@"
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
@@ -47,8 +49,7 @@ log "checking Dart typed, emitted-state, native, and generated behavior"
 )
 
 log "checking Julia typed, emitted-state, native, and generated behavior"
-JULIA_DEPOT_PATH=${JULIA_DEPOT_PATH:-/private/tmp/linkedspec-julia-depot} \
- "$JULIA_CMD" --project=julia --startup-file=no --history-file=no -e '
+"$JULIA_CMD" --project=julia --startup-file=no --history-file=no -e '
 using LinkedSpecJulia, JSON3, Test
 const REPO_ROOT = pwd()
 include("julia/test/punctuation_light_zero_arg_contract_test.jl")

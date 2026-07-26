@@ -19,7 +19,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.6.4 advances Julia emission to linkedspec-g
 evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes high-level global cursor options without changing the v2 plan or execution. Complete Julia is 3,187, primary is 65/65 twice, corpus is 105/105, and neutral governance is 66/4+4/39."
 evidence_update_2026_07_18_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 composes emitted v2 plus generated direct/trace roles exactly once. Complete Julia reaches 3,291 assertions and neutral governance reaches 67/5+3/44."
 evidence_update_2026_07_23_semantic_observation: "FUTURE-PARITY-BACKLOG.10.6.6.3 adds the optional semantic_observation_sink keyword to emitted direct/traced wrappers without changing linkedspec-generated-source-v2, format 2, or the exact label/family plan."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && perl tools/check_generated_source_contract.pl && python3 tools/check_rule_local_cursor_contract.py && python3 tools/check_logical_helper_contract.py"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && perl tools/check_generated_source_contract.pl && python3 tools/check_rule_local_cursor_contract.py && python3 tools/check_logical_helper_contract.py"
 ---
 
 ## Fact

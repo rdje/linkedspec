@@ -6,8 +6,7 @@ REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/run_julia_local.sh" "$@"
 JULIA_CMD="${LINKEDSPEC_JULIA_CMD:-julia}"
-DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
-JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}"
+JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}"
 
 case "$(uname -s)" in
  MINGW*|MSYS*|CYGWIN*) WRITABLE_JULIA_DEPOT="${JULIA_DEPOT%%;*}" ;;
@@ -27,12 +26,16 @@ command -v "$JULIA_CMD" >/dev/null 2>&1 || fail "required command not found: $JU
 [[ -n "$WRITABLE_JULIA_DEPOT" ]] || fail "first Julia depot entry must not be empty"
 
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
+export JULIA_PKG_OFFLINE="${JULIA_PKG_OFFLINE:-true}"
 mkdir -p "$WRITABLE_JULIA_DEPOT"
 cd "$REPO_ROOT"
 
 log "using Julia depot: $JULIA_DEPOT_PATH"
 log "running Julia package tests"
-"$JULIA_CMD" --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'
+bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.test()'
+
+log "proving Julia project data stays in repository storage"
+bash tools/test_julia_project_data_storage.sh --reuse-complete-julia-gate
 
 log "checking Julia CLIs"
 LINKEDSPEC_JULIA_CMD="$JULIA_CMD" \

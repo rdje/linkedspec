@@ -14,7 +14,7 @@ date: 2026-07-11
 status: current
 tags: [julia, resolution, files, utf8, diagnostics, native-api, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.4 exports the Julia spec loader with typed requests/options/results/stages/codes/exceptions, consumes all 14 name + 9 resolution + 4 text cases in test/spec_loader_test.jl, composes full staged parse/validate/compile and execution, delegates primary CLI named/file selection without recursive fallback, and passes 1,110 package assertions, 61x2 CLI, and 105 corpus fixtures."
-reverify: "perl tools/check_native_spec_resolution_contract.pl && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'import Pkg; Pkg.test()' && LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh"
+reverify: "perl tools/check_native_spec_resolution_contract.pl && bash tools/run_julia_local.sh"
 ---
 
 `LinkedSpecJulia` exports Julia's public file-oriented API. `named_spec_request(...)` selects a portable logical

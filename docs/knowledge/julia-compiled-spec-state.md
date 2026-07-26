@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, compiler, compiled-state, descriptor, dependency-regex, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.3.4 adds julia/src/compiler/CompiledSpec.jl and exports compile_spec plus CompiledSpec, CompiledRule, CompiledRuleModeMetadata, CompiledDependencyRegexState, CompiledDependencyRegexEntry, CompiledDescriptorState, compiled_rule(...), action_payloads(...), and to_descriptor_json(...). JULIA-BACKEND-PARITY.5.3 adds an executable 20-assertion proof that spec-returned function order, normalized staged payload/jobs, stitched body_ast, descriptor function metadata, and runtime output survive through the compiled state. Existing tests cover ordered rule state, dependency-regex derivation, lifecycle/action payloads, registry-aware contracts, validation reuse, and diagnostics."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 ## Fact

@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, cli, selection, reporting, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.1 adds named/bounded selection/reporting and .6.3 enables full/offset-only runner execution. .7.3.2.5 retains 99/99 with 1,017 assertions at runtime-corpus-primary-cli."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 `execute_corpus_fixtures(...)` validates the complete manifest first, then selects either ordered `case_names` or

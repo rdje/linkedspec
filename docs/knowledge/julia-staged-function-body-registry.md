@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, staged-parsing, parser-registry, parse-jobs, user-functions, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.5.1 adds julia/src/parser/StagedParserRegistry.jl, exports the staged registry APIs, and adds 31 focused assertions in julia/test/runtests.jl. Full Pkg.test() passes with 662 assertions and package/CLI status runtime-staged-registry."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'StagedParserRegistry|ACTION_IR_BODY_|execute_staged_parse_jobs|dispatch_function_body_parse_jobs|body_ast' julia/src/parser/StagedParserRegistry.jl julia/test/runtests.jl"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'StagedParserRegistry|ACTION_IR_BODY_|execute_staged_parse_jobs|dispatch_function_body_parse_jobs|body_ast' julia/src/parser/StagedParserRegistry.jl julia/test/runtests.jl"
 ---
 
 Julia's minimal staged parser registry lives in

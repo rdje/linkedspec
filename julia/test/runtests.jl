@@ -9,6 +9,12 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
     Dict{String,Any},
 )
 
+@testset "System temporary root follows routed project storage" begin
+    configured = get(ENV, "TMPDIR", nothing)
+    @test configured !== nothing
+    @test realpath(tempdir()) == realpath(configured)
+end
+
 include("root_rule_selection_core_test.jl")
 include("spec_loader_test.jl")
 include("source_emitter_test.jl")

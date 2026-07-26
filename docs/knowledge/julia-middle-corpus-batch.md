@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, corpus, parity, regression, functions, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.3 runs offsets/limits 40/17, 58/2, and 62/6 for 25 passed / 0 failed without source or fixture changes. julia/test/runtests.jl permanently locks the three windows and exact function routes with six assertions; full Pkg.test() passes with 757 assertions and package status runtime-corpus-middle."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia passes the 25 non-function manifest fixtures surrounding offsets 40 through 67 unchanged. Bounded runner

@@ -15,7 +15,7 @@ tags: [julia, semantic-introspection, runtime, observation, generated-source, tr
 evidence: julia/src/source/SourceEmitter.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.3
 last_verified: 2026-07-26
 reverify:
-  - "JULIA_DEPOT_PATH=\"${TMPDIR:-/tmp}/linkedspec-julia-depot:$(julia --startup-file=no --history-file=no -e 'print(join(Base.DEPOT_PATH, \":\"))')\" julia --project=julia -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_query_kernel_test.jl\"); include(\"julia/test/semantic_index_runtime_observation_test.jl\"); include(\"julia/test/semantic_index_runtime_projection_test.jl\"); include(\"julia/test/semantic_index_runtime_observation_routes_test.jl\")'"
+  - "bash tools/run_julia_project_data.sh --project=julia -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_query_kernel_test.jl\"); include(\"julia/test/semantic_index_runtime_observation_test.jl\"); include(\"julia/test/semantic_index_runtime_projection_test.jl\"); include(\"julia/test/semantic_index_runtime_observation_routes_test.jl\")'"
   - "rg -n 'semantic_observation_sink' julia/src/source/SourceEmitter.jl julia/test/semantic_index_runtime_observation_routes_test.jl"
 ---
 

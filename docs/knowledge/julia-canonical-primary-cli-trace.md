@@ -14,7 +14,7 @@ status: current
 tags: [julia, cli, trace, canonical, utf8, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.4.2 adds an adapter-local ADR 0024 recorder; 1,019 package assertions, nine process families, 99/99 corpus, and 61/61 default/POSIX shared cases pass."
 evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes the global parse_mode field from the canonical request record. Source/input/top-rule and every routing byte remain stable; shared primary advances to 65/65 in both environments."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot PERL5LIB= perl tools/run_cli_conformance.pl --display-command linkedspec_julia -- /opt/homebrew/bin/julia --project={{REPO_ROOT}}/julia --startup-file=no --history-file=no {{REPO_ROOT}}/julia/bin/linkedspec_julia.jl"
+reverify: "bash tools/run_julia_local.sh"
 ---
 
 `run_cli(...)` constructs `_PrimaryCliCanonicalTrace` before request preparation and emits ADR `0024`'s

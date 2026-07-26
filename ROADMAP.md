@@ -33,8 +33,12 @@ complete: a 195-package offline Cargo cache plus exact 17-owner generated/trace/
 project data stays on repository storage; zero exact old Rust temp residue exists and the shared cache remains
 untouched and unused. Dart `.2.3` is complete: the 47-package cache resolves offline, all 18 temporary owners plus
 generated/trace paths stay on repository storage, and the two exact shared checkout records were deleted after
-successful use while ambiguous shared package payload remains untouched. Active `.2.4` owns Julia depots,
-precompile state, temporary/generated data, and exact metadata migration. The path-portability closeout
+successful use while ambiguous shared package payload remains untouched. Julia `.2.4` is complete: the
+source-bearing five-package depot resolves offline, all 17 temporary owners plus generated/trace paths stay on the
+repository filesystem, 88 existing current reverify cards use managed self-rooted wrappers, and both exact old depots plus
+the former-checkout shared-log stanza were deleted after verified full-gate use. The shared developer depot remains
+untouched and unused; only Julia-managed system depots remain necessary read-only external inputs. Active `.2.5`
+owns Lua native builds and workspaces. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 
@@ -47,9 +51,10 @@ and Lua named-spec commands pass from outside the checkout. Rust runtime discove
 primary CLI now searches current-executable then cwd ancestry for the bundled-spec marker, and the copied-binary
 relocation reproduction is green instead of using compile-time `CARGO_MANIFEST_DIR`. The eight exact legacy
 config/source owners `.1.2` are also complete: project defaults are relative, tools use `PATH`, and the legacy
-network plugin consumes its existing configured command/input fields. All 12 Julia Knowledge Map commands `.1.3`
-are now portable: Julia is selected through `PATH`, repository operands are relative, and writable temporary
-depots compose runtime defaults without storing expanded machine paths. Remediation `.1.1-.1.3` is complete;
+network plugin consumes its existing configured command/input fields. The initial 12 Julia Knowledge Map commands
+were made path-portable in `.1.3`; storage leaf `PROJECT-DATA-SSD-ROOTING.2.4` now moves all 88 current Julia
+reverify cards onto self-rooted managed wrappers and removes disposable usage metadata containing runtime absolute
+paths. Remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` is complete with one read-only tracked-text scan, 14 classifier self-tests, and all five
 primary runtime-anchor locks. Closeout `.2.2` remains pending behind `PROJECT-DATA-SSD-ROOTING.5`. Caller-owned
 absolute input paths, URLs, and external OS/tool paths remain legal when explicit; project-owned scratch and

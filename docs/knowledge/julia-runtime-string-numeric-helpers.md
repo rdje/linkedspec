@@ -14,7 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, helpers, string, numeric, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.2 extends julia/src/runtime/Interpreter.jl with a canonical pure-helper dispatcher, internal regex pattern/flag values, lazy coalescing, current string/scalar transforms/predicates and str_* comparisons, numeric arithmetic/unary/reducer/comparison helpers, word and symbol aliases, JSON-number normalization, failure-to-nothing boundaries, and compatible fluent-chain evaluation. Two focused end-to-end cases in julia/test/runtests.jl and the full 556-assertion Pkg.test() run prove string and numeric function/receiver behavior."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia string/scalar and numeric helper execution lives in

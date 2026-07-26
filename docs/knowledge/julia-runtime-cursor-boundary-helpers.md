@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, cursor, boundary-lookahead, helpers, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.4 extends julia/src/runtime/Interpreter.jl with an explicit cursor stack, centralized live/register cursor updates, direct match/entry anchor rewinds, character-based cursor/input helpers, overflow-safe input slicing, and earliest usable named-rule boundary capture. Fourteen focused assertions in julia/test/runtests.jl and the full 581-assertion Pkg.test() run prove consume-mode continuation, multibyte public offsets, preserved match/store state, non-consumption, EOF fallback, and unresolved-rule no-op behavior."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia runtime cursor-control and cursor/input helper execution lives in

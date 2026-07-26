@@ -14,7 +14,7 @@ date: 2026-07-13
 status: current
 tags: [julia, runtime, helpers, values, captures, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.1 extends julia/src/runtime/Interpreter.jl with scalar, array, and hash stores; copied bare reads; structural literals, assignments, indexed/nested reads, and final no-autovivification nested writes; plus entry/match named maps, existence, length, character-position, and line-column helpers. Focused end-to-end cases prove JSON-safe shapes, variable-held aggregates, successful updated-root writes, unchanged roots after path failures, bare capture names, multibyte offsets, and named capture maps. FUTURE-PARITY-BACKLOG.12.1 later replaced the public typed-wrapper snapshot model with uniform bare bindings and hard-rejected exact aggregate selectors."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia core runtime value execution lives in `julia/src/runtime/Interpreter.jl`.

@@ -16,7 +16,7 @@ status: current
 tags: [julia, cli, diagnostics, trace, routing, exit-status, parity, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.3.2.4 adds native phase/trace controls; FUTURE-PARITY-BACKLOG.1.5.4.1 narrows primary stderr to one phase heading while native structured exceptions remain available."
 evidence_update_2026_07_18_cursor_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 removes parse_mode from canonical request trace and returns the retired --parse-mode migration message as usage exit 2 before operational phases."
-reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_print_primary_cli_runtime_error|_load_primary_cli_request_input|_primary_cli_fatal_error|_trace_emoji_prefix|Primary CLI failures and trace routing' julia/src julia/test/runtests.jl"
+reverify: "bash tools/run_julia_local.sh && rg -n '_print_primary_cli_runtime_error|_load_primary_cli_request_input|_primary_cli_fatal_error|_trace_emoji_prefix|Primary CLI failures and trace routing' julia/src julia/test/runtests.jl"
 ---
 
 Julia's primary CLI reports operational failure with one stable heading:

@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.2.3` Dart storage/cache migration, exact metadata deletion, and signoff complete; `.2.4` active)
+- Last updated: `2026-07-26` (`.2.4` Julia depot/scratch migration, exact old-data deletion, and signoff complete; `.2.5` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -315,7 +315,7 @@ accessing the shared copy, and remove only records or directories provably owned
     verification pass; this commit lands at 29/300, the brief is cleared, the tree is clean, and no push occurs.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.4`
-  Status: `active`
+  Status: `done` (2026-07-26; Julia depot, scratch, durable commands, metadata hygiene, and exact deletion complete)
   Goal: Root Julia depots, package precompile state, test scratch, and generated outputs on SSD storage.
   Depends on: `.2.3`
   Acceptance: Replace operating-system-temp and developer-home depot composition with the repo-derived retained
@@ -324,8 +324,44 @@ accessing the shared copy, and remove only records or directories provably owned
     pass complete Julia and affected semantic gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / INVENTORY** — Froze 17 tracked Julia `mktempdir`/`tempdir` owners, one empty canonical depot,
+    one 103,356-KiB same-SSD source-bearing depot, two exact old internal-volume depots, one exact former-checkout
+    stanza in a shared usage log, five external Manifest packages, 88 current Julia reverify cards, and eight
+    directly invocable Julia-consuming cross-backend checkers requiring managed routing.
+  - [x] **ROOT CAUSE / POLICY** — Julia follows routed `TMPDIR`; a trailing empty `JULIA_DEPOT_PATH` entry expands
+    to Julia-managed system depots, not the developer-home depot. Compiled cache alone cannot resolve JSON3 source.
+    Therefore the first writable depot must retain package source/registry/precompile state on the repository
+    filesystem; only interpreter-managed system depots remain strictly necessary read-only external dependencies.
+  - [x] **FIX / RECURRING ORACLE** — Added self-rooted `tools/run_julia_project_data.sh` and a complete-gate storage
+    oracle locking 17 owners, actual run/temp/depot/package devices, five exact package trees, no symlinks, offline
+    JSON3 loading, `tempdir()` routing, generated v2 source, trace output, cleanup, and absence of machine-path
+    usage metadata. Local/primary gates now require the initialized depot, default offline, and have no second
+    operating-system-temp or developer-home fallback. Eight cross-backend checkers now self-route before runtime,
+    and the already-routed primary matrix no longer carries a duplicate fallback; canonical tracks/syntax-checks
+    the new boundaries.
+  - [x] **DURABLE COMMAND MIGRATION** — Migrated 88 existing current Julia fact cards; with the new storage card,
+    89 current reverify commands now use the targeted wrapper, complete gate, or self-rooted primary checker. No
+    current Julia reverify command names a developer depot, concrete Julia executable, or OS-temp depot.
+  - [x] **COPY / VERIFY / USE / DELETE** — Atomically promoted the warm source-bearing SSD depot into canonical
+    retained cache. Copied both exact old depots to root-relative retained migration storage and verified the larger
+    at 346 directories / 256 files / 133,963,036 bytes / hash
+    `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8` and the query depot at 24 directories /
+    15 files / 4,284,303 bytes / hash `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`.
+    After full offline use, deleted both exact old sources and the one former-checkout shared-log stanza. The shared
+    developer depot remains untouched and unused; old exact residue is zero.
+  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash syntax, standalone/reused storage proof, complete Julia package
+    suite and affected semantic tests, primary process checker, corpus 105/105, and zero-run cleanup pass. The
+    30-boundary hostile outside-cwd routing proof also passes with every process reaching its selected runtime
+    preflight before work, and completed runs leave no residue.
+  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and canonical pass.
+    Canonical records Rust semantic admission 1/1 in 77.66s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2,
+    and Phase 0 1,031/1,031 in 625s. This commit lands at 30/300; the brief is cleared, the tree is clean, and no
+    push occurs.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2.5`
-  Status: `pending`
+  Status: `active`
   Goal: Root Lua native builds, tests, CLI matrices, and generated artifacts on SSD storage.
   Depends on: `.2.4`
   Acceptance: Remove all hard-coded operating-system temporary roots from executable Lua harnesses; use safely
@@ -408,7 +444,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.4` | `active` | From the clean `.2.3` commit, root Julia depots/precompile/test/generated state, normalize durable commands, migrate exact retained data, and delete exact old Julia-owned sources. |
+| `PROJECT-DATA-SSD-ROOTING.2.5` | `active` | From the clean `.2.4` commit, root Lua native builds, tests, primary/corpus matrices, and generated workspaces on repository storage; migrate/delete any exact old Lua-owned data. |
 
 ## Decisions
 
@@ -431,7 +467,7 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Nineteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Thirty standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
   delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
@@ -448,6 +484,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable run-lifecycle fact: `docs/knowledge/project-data-run-lifecycle.md`
 - Durable Rust storage fact: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Durable Dart storage fact: `docs/knowledge/dart-project-data-ssd-storage.md`
+- Durable Julia storage fact: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -481,6 +518,11 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.3` | exact shared Dart metadata deletion | PASS: current and absent-former checkout records classified exactly after canonical offline/full-gate use; two records plus empty hash shards deleted; shared active-root residue zero; shared package payload untouched |
 | 2026-07-26 | `.2.3` | standalone storage oracle; 19-boundary routing; complete Dart gate | PASS: 18 exact owners, 47 locked packages/hashes offline, focused 17, format/analyzer, package 337, primary 66x2, corpus 105/105, zero managed runs |
 | 2026-07-26 | `.2.3` | canonical default-Dart-cache signoff with same-SSD warmed Julia override | PASS: Rust 1/1 in 77.57s, Dart 1/1 from canonical 47-package cache, Julia 416/416 in 27.1s, primary 66x2, Phase 0 1,031/1,031 in 624s; zero managed runs |
+| 2026-07-26 | `.2.4` | Julia package inventory, durable-command migration, standalone/reused storage oracle | PASS: 17 owners; 5 package trees / 146 files / 710,665 bytes / hash `6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1`; 88 existing cards migrated / 89 current managed commands; temp/generated/trace/depot paths on repository device; usage metadata absent |
+| 2026-07-26 | `.2.4` | exact Julia depot copy/verify/use/delete and shared metadata cleanup | PASS: 346 directories / 256 files / 133,963,036 bytes and 24 directories / 15 files / 4,284,303 bytes copied and hash-matched; canonical offline full gate used; both old sources plus exact former-checkout shared-log stanza deleted; ambiguous shared depot untouched |
+| 2026-07-26 | `.2.4` | complete `tools/run_julia_local.sh` | PASS: package and affected semantic suites, 17-owner storage oracle, primary CLI conformance, corpus 105/105, and zero completed-run residue |
+| 2026-07-26 | `.2.4` | 30-boundary outside-cwd routing with hostile temp/cache roots | PASS: targeted Julia wrapper/oracle/primary, primary matrix, and all eight Julia-consuming cross-backend checkers self-route and reach their configured runtime preflight before work; zero completed-run residue |
+| 2026-07-26 | `.2.4` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 714 facts/5,627 question keys; Rust semantic admission 1/1 in 77.66s; Dart 1/1; Julia 416/416 in 27.1s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
 
 ## Commit Log
 
@@ -492,7 +534,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.1.3` | `18c64726` — `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
 | `.2.1` | `269b3fbf` — `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
 | `.2.2` | `59c15453` — `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
-| `.2.3` | `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` (this commit) | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
+| `.2.3` | `a8a73aa9` — `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
+| `.2.4` | `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` (this commit) | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
 
 ## Changelog
 
@@ -523,3 +566,9 @@ accessing the shared copy, and remove only records or directories provably owned
   root, all 18 temporary owners plus generated/trace paths are executable under managed SSD storage, and full Dart
   package/primary/corpus proof passes offline. The two exact shared checkout records were deleted after use; shared
   package payload remains untouched and unused. `.2.4` becomes the clean Julia storage migration frontier.
+- `2026-07-26`: Completed `.2.4`; the source-bearing five-package Julia depot is canonical, all 17 temporary
+  owners plus generated/trace paths are executable under managed SSD storage, 85 durable command cards use the
+  self-rooted boundary, and machine-path usage metadata is disposable. Both exact old depots and the former-
+  checkout shared-log stanza were deleted after count/byte/hash and full offline-use proof; ambiguous shared depot
+  data remains untouched and unused. Thirty-boundary routing and canonical signoff pass; `.2.5` becomes the clean
+  Lua storage migration frontier after commit.

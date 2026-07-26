@@ -33,13 +33,14 @@ checkout. Dart's ignored/untracked `dart/.dart_tool` is the same class of rebuil
 are safe cleanup targets when disk space matters.
 
 Julia places compiled/precompile output under the active depot's `compiled/` directory rather than under a Rust-
-style project target. The repo's dedicated test depot uses `/private/tmp/linkedspec-julia-depot/compiled`; ordinary
-user-depot precompiles use `~/.julia/compiled`. Both directories are regenerable and may be removed when disk space
-matters and no Julia job is running.
+style project target. Supported LinkedSpec workflows use the ignored repository-relative retained Julia depot;
+its compiled cache is regenerable and may be removed when no Julia job is running. The package sources and registry
+are retained so offline operation continues without a developer-home cache.
 
-Do not broaden that permission to the whole depot. Preserve `packages/`, `registries/`, `environments/`, `logs/`,
+Do not broaden that permission to the whole depot. Preserve `packages/`, `registries/`, `environments/`,
 `scratchspaces/`, `artifacts/`, and any source or project manifests unless a separately owned audit proves a
-specific target safe.
+specific target safe. The generated Julia `manifest_usage.toml` is one proven exception: supported wrappers remove
+it because it is disposable garbage-collection metadata containing runtime absolute paths.
 
 For logs under `/private/tmp`, require provenance and liveness evidence before deletion: inspect the header to tie
 the file to a completed repo generation command and confirm no process has it open. Do not blanket-delete

@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.5.2 adds native trace controls/sinks; .7.3.2.1 spans the native pipeline. FUTURE-PARITY-BACKLOG.1.5.4.2 adds a separate canonical primary recorder while native APIs remain unchanged."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia trace controls live in `julia/src/trace/Trace.jl` and are exported from

@@ -14,7 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, interpreter, dispatch, lifecycle, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.2 adds julia/src/runtime/Interpreter.jl and exports LinkedSpecRuntimeEngine, runtime_parse(...), runtime_execute(...), RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. julia/test/runtests.jl verifies default repetition, action-edge and blind-call child dispatch, explicit call/returns, passive terminals, AND/OR modes, bounded repetition, zero-progress cutoff, lifecycle order/events, retv, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime error boundaries. JULIA-BACKEND-PARITY.4.3.0 subsequently splits helper/value families, .4.3.1 adds the core scalar/array/hash store model plus captures, and .4.3.2 adds canonical string/scalar/numeric function and receiver dispatch over the same interpreter."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 ## Fact

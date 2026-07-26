@@ -3,13 +3,14 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
-DEFAULT_JULIA_DEPOT="${TMPDIR:-/tmp}/linkedspec-julia-depot"
-JULIA_DEPOT=${LINKEDSPEC_JULIA_DEPOT_PATH:-${JULIA_DEPOT_PATH:-$DEFAULT_JULIA_DEPOT}}
+JULIA_DEPOT=${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}
 
 log() {
  printf '[diagnostic-output-five] %s\n' "$*"
@@ -30,7 +31,9 @@ done
 
 cd "$REPO_ROOT"
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
-mkdir -p "$JULIA_DEPOT_PATH"
+JULIA_WRITE_DEPOT=${JULIA_DEPOT_PATH%%:*}
+[[ -n "$JULIA_WRITE_DEPOT" ]] || fail 'first Julia depot entry must not be empty'
+mkdir -p "$JULIA_WRITE_DEPOT"
 LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-diagnostic-output.XXXXXX")
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 

@@ -1542,11 +1542,10 @@ ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so 
 capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid
 scheduling and does not weaken the 105/105 interpreter correctness gate; it does keep the full-parity claim open.
 
-`JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
-`/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
-current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
-can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
-`~/.julia`. The Julia package now depends on `JSON3` for manifest and expected-JSON parsing. Global
+`JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. `Pkg` and `Test` use the source-bearing repository depot
+through `tools/run_julia_project_data.sh`; supported commands no longer write precompile artifacts into an
+operating-system temporary root or developer-home depot. The Julia package depends on `JSON3` for manifest and
+expected-JSON parsing. Global
 `JuliaFormatter` and `JET` packages are not installed today, so formatter/linter commands are optional until a
 scaffold or verification leaf commits them as dev dependencies.
 

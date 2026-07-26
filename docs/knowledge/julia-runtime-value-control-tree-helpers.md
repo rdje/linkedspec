@@ -18,7 +18,7 @@ date: 2026-07-10
 status: current
 tags: [julia, runtime, blocks, controls, tree-traversal, callbacks, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.4.3.5 extends julia/src/runtime/Interpreter.jl with separate rule/value block flow, attached and marker controls, lazy inline branches, deterministic while guards, helper/receiver with-blocks, scoped binding snapshots, and hash/array walk/map/reduce receiver callbacks. Eight focused assertions in julia/test/runtests.jl and the full 567-assertion Pkg.test() run prove local/rule return boundaries, branch behavior, binding restoration, traversal order/shapes, unsupported trailing-block and arity fences, non-aggregate lazy failure, and persistent caller-side effects."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 Julia value/control/callback execution lives in

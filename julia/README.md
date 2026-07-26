@@ -357,9 +357,9 @@ Run the complete repo-owned Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It runs package tests, the ten-family primary process checker in `tools/check_julia_primary_cli.sh`, corpus-
-runner help, and the full 105-fixture corpus. The shared
-core gate includes it only when explicitly requested:
+It runs package tests, the storage oracle, the ten-family primary process checker in
+`tools/check_julia_primary_cli.sh`, corpus-runner help, and the full 105-fixture corpus. Include it explicitly in
+canonical local CI when a Julia SDK is available:
 
 ```bash
 LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
@@ -370,43 +370,40 @@ standalone corpus command to verify 105/105. Cursor topology is admitted; root t
 The focused route suite is:
 
 ```bash
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
-  julia --project=julia -e \
+bash tools/run_julia_project_data.sh --project=julia -e \
   'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/root_rule_selection_routes_test.jl")'
 ```
 
 It passes 57 assertions, including a fresh isolated generated module.
 
-Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
-`LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot or ordered depot list. Without a depot
-override, the script respects `JULIA_DEPOT_PATH` or uses a platform temp directory outside the repository. For a
-stacked path, both repository drivers create only the first entry (`:` separator on POSIX, `;` on Windows-like
-shells); that first entry must be nonempty and writable.
+Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable. A storage override is accepted only after
+the common initializer proves it shares the repository filesystem. Without one, the ignored repository-relative
+retained depot is the writable first entry, followed only by Julia-managed system depots. Both repository drivers
+create only the first entry (`:` separator on POSIX, `;` on Windows-like shells); that first entry must be nonempty
+and writable.
 The focused gate prints the resolved depot. Under disk pressure, remove only that depot's regenerable `compiled/`
 subdirectory after confirming no Julia process is using it; preserve packages, registries, environments, and
 artifacts.
 
-A temporary depot containing only regenerated `compiled/` cache entries does not contain package source. For a
-direct offline command after such cleanup, put the writable temporary depot first and the existing package depot
-second:
+A depot containing only regenerated `compiled/` cache entries does not contain package source. The canonical
+repository depot therefore retains all five external Manifest package trees plus the General registry. Use the
+targeted wrapper for a direct offline package command:
 
 ```bash
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
-  julia --project=julia -e 'import Pkg; Pkg.test()'
+bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.test()'
 ```
 
-The first entry owns new cache writes; the second supplies already-installed package sources. Do not use a lone
-compiled-only depot and do not delete the source-bearing package depot as cache cleanup. Add
-`JULIA_PKG_OFFLINE=true` when the installed depot already contains every dependency and network access must not be
-attempted.
+The first entry owns package source and new cache writes; the trailing system depots supply interpreter resources,
+not project packages. Do not delete the source-bearing package depot as cache cleanup. The wrapper defaults
+`JULIA_PKG_OFFLINE=true`.
 
 Direct commands from the repository root:
 
 ```bash
-julia --project=julia -e 'import Pkg; Pkg.instantiate()'
-julia --project=julia -e 'import Pkg; Pkg.test()'
-julia --project=julia julia/bin/linkedspec_julia.jl --help
-julia --project=julia julia/bin/linkedspec_julia.jl \
+bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.instantiate()'
+bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.test()'
+bash tools/run_julia_project_data.sh --project=julia julia/bin/linkedspec_julia.jl --help
+bash tools/run_julia_project_data.sh --project=julia julia/bin/linkedspec_julia.jl \
   --inline-spec $'Top::\n /x/\n E { return(hash("b", 2, "a", 1)) }\n' \
   --input x
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
@@ -457,18 +454,18 @@ Run `bash tools/check_logical_helper_five_backend.sh` from the repository root f
 six-runtime, selected-primary, and support-ledger proof. Canonical local CI exposes the same all-toolchain leg as
 `LINKEDSPEC_RUN_LOGICAL_MATRIX=1 bash tools/run_ci_local.sh`.
 
-Under managed harnesses where the default Julia depot is not writable, prefix commands with a writable depot:
+For a targeted command under any harness, use the managed wrapper:
 
 ```bash
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia -e 'import Pkg; Pkg.test()'
+bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.test()'
 ```
 
 Optional formatter/linter commands are intentionally not part of the scaffold gate until the corresponding tools
 are added as dev dependencies or installed locally:
 
 ```bash
-julia --project=julia -e 'using JuliaFormatter; format("julia")'
-julia --project=julia -e 'using JET; JET.test_package("LinkedSpecJulia")'
+bash tools/run_julia_project_data.sh --project=julia -e 'using JuliaFormatter; format("julia")'
+bash tools/run_julia_project_data.sh --project=julia -e 'using JET; JET.test_package("LinkedSpecJulia")'
 ```
 
 ## Native Spec Resolution and Loading

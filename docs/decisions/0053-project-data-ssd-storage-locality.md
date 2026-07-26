@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; common lifecycle plus Perl, Rust, and Dart migrations implemented; Julia/Lua/tool migrations pending
+- Status: accepted; common lifecycle plus Perl, Rust, Dart, and Julia migrations implemented; Lua/tool migrations pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -99,6 +99,18 @@ boundary for storage locality.
   successful offline/full-gate use, the two exact current/former checkout `active_roots` records and their empty
   hash shards were deleted from the shared off-SSD cache. Its ambiguous multi-project package payload remains
   untouched and supported workflows no longer consult it.
+- Julia migration adds a targeted self-rooted command wrapper and a recurring 17-owner storage oracle. The
+  repository depot retains the five external package trees locked by `julia/Manifest.toml` plus the General
+  registry, resolves offline, and owns package source/precompile writes while Julia-managed system depots remain
+  strictly required read-only runtime dependencies. Managed `tempdir()`/`mktempdir()` data, generated v2 source,
+  traces, and every package file share the repository filesystem.
+- Both exact old Julia depots were copied into root-relative retained migration storage, independently verified by
+  directory/file/byte/hash identity, and deleted from the internal temporary filesystem after the canonical
+  offline/full gate passed. The exact former-checkout stanza in the shared developer usage log was deleted;
+  ambiguous shared depot data remains untouched and supported workflows no longer consult it.
+- Eighty-eight existing current Julia reverify cards now use managed self-rooted boundaries. Supported package commands
+  remove the disposable depot `manifest_usage.toml`, which otherwise retains runtime absolute checkout and
+  managed-run paths; package sources, registry, and compiled cache remain retained.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -111,5 +123,6 @@ boundary for storage locality.
 - Managed-run lifecycle: `docs/knowledge/project-data-run-lifecycle.md`
 - Rust storage: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Dart storage: `docs/knowledge/dart-project-data-ssd-storage.md`
+- Julia storage: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

@@ -12,7 +12,7 @@ date: 2026-07-12
 status: current
 tags: [julia, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.5 centralizes Julia bare typed assignment and kind-checked array/harray mutation in julia/src/runtime/Interpreter.jl. Native/generated proof covers the future fixture, seven neutral cases, collection rebinding, mutation continuation, static precedence, and wrong-kind fields. FUTURE-PARITY-BACKLOG.12.1.8.4 now rejects exact selectors across complete native/generated compiled state and deletes their runtime dispatch; focused proof passes 59/59 and the complete gate passes 1,339 assertions, CLI 61x2, and 105 corpus."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/uniform_binding_contract_test.jl\")' && LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh"
+reverify: "bash tools/run_julia_local.sh"
 ---
 
 # Julia uniform binding runtime

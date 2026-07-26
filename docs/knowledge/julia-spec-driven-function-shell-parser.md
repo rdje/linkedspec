@@ -14,7 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, parser, corpus, user-functions, staged-parsing, in-memory, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.5 adds source-driven parser execution and a permanent regression; .6.3 includes it in 99/99. .7.3.2.1 traces it and .7.3.2.2 re-proves it in the current 920-assertion/99-fixture gate."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
 The routed Julia corpus fixtures originally failed on line 1 because the default corpus path sent complete source

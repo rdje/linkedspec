@@ -37,6 +37,7 @@ routed_entrypoints=(
  tools/run_rust_local.sh
  tools/run_dart_local.sh
  tools/run_julia_local.sh
+ tools/run_julia_project_data.sh
  tools/run_lua_local.sh
  tools/run_primary_cli_matrix.sh
  tools/run_cargo_local.sh
@@ -44,6 +45,16 @@ routed_entrypoints=(
  tools/test_perl_project_data_storage.sh
  tools/test_rust_project_data_storage.sh
  tools/test_dart_project_data_storage.sh
+ tools/test_julia_project_data_storage.sh
+ tools/check_julia_primary_cli.sh
+ tools/check_diagnostic_output_five_backend.sh
+ tools/check_duplicate_regex_slot_identity_five_backend.sh
+ tools/check_logical_helper_five_backend.sh
+ tools/check_punctuation_light_five_backend.sh
+ tools/check_repeated_action_result_five_backend.sh
+ tools/check_root_rule_selection_five_backend.sh
+ tools/check_rule_local_cursor_five_backend.sh
+ tools/check_scalar_numeric_six_runtime.sh
 )
 
 for relative in "${routed_entrypoints[@]}"; do
@@ -154,6 +165,28 @@ run_routed_case rust-storage failure "$REPO_ROOT/tools/test_rust_project_data_st
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case dart-storage failure "$REPO_ROOT/tools/test_dart_project_data_storage.sh" \
  LINKEDSPEC_DART_CMD=linkedspec-routing-test-missing-dart
+run_routed_case julia-storage failure "$REPO_ROOT/tools/test_julia_project_data_storage.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case julia-project-data failure "$REPO_ROOT/tools/run_julia_project_data.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case julia-primary failure "$REPO_ROOT/tools/check_julia_primary_cli.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case diagnostic-five failure "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case duplicate-five failure "$REPO_ROOT/tools/check_duplicate_regex_slot_identity_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case logical-five failure "$REPO_ROOT/tools/check_logical_helper_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case punctuation-five failure "$REPO_ROOT/tools/check_punctuation_light_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case repeated-five failure "$REPO_ROOT/tools/check_repeated_action_result_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case root-five failure "$REPO_ROOT/tools/check_root_rule_selection_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case cursor-five failure "$REPO_ROOT/tools/check_rule_local_cursor_five_backend.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case scalar-six failure "$REPO_ROOT/tools/check_scalar_numeric_six_runtime.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case rust failure "$REPO_ROOT/tools/run_rust_local.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case dart failure "$REPO_ROOT/tools/run_dart_local.sh" \
