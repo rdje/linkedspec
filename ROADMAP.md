@@ -10,6 +10,17 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+Project-data storage locality is the critical active architecture lane (ADR `0053`, task tree
+`PROJECT-DATA-SSD-ROOTING`). Every project-owned build product, generated output, cache, package depot, log,
+trace, and temporary workspace must reside on the repository filesystem; durable paths remain root-relative and
+runtime storage roots derive from the current checkout. Cross-volume reads are forbidden by default and retained
+only for explicit caller inputs or documented, strictly required external tools and operating-system resources.
+Behavior-free audit `.0` finds 67 retained temporary directories/135,756 KiB, two exact Dart checkout records,
+one LinkedSpec stanza in a shared Julia log, 100 tracked temporary-allocation owners, and 24 executable files with
+off-repository defaults. Migration follows copy/verify/use/delete without deleting ambiguous shared caches.
+Implementation `.1.1` follows the clean planning commit; the path-portability closeout is paused behind this
+storage-locality tree so it can prove both relocation and same-filesystem project IO together.
+
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
 `REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool
 roots must be derived from their current executable/module/script rather than a developer checkout or build
@@ -23,8 +34,9 @@ network plugin consumes its existing configured command/input fields. All 12 Jul
 are now portable: Julia is selected through `PATH`, repository operands are relative, and writable temporary
 depots compose runtime defaults without storing expanded machine paths. Remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` is complete with one read-only tracked-text scan, 14 classifier self-tests, and all five
-primary runtime-anchor locks. Active `.2.2` owns the copied-binary relocation oracle/final closeout. Caller-owned absolute input paths,
-temporary paths, URLs, and external OS/tool paths remain legal and may not be misclassified as repository identity.
+primary runtime-anchor locks. Closeout `.2.2` remains pending behind `PROJECT-DATA-SSD-ROOTING.5`. Caller-owned
+absolute input paths, URLs, and external OS/tool paths remain legal when explicit; project-owned scratch and
+caches may not default to their filesystem.
 
 Semantic-introspection neutral contract (2026-07-20): ADRs `0049`/`0050` and
 `FUTURE-PARITY-BACKLOG.10.2` make

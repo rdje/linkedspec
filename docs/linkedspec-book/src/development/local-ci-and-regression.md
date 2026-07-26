@@ -458,10 +458,19 @@ assertions, route proof passes 57, composed cursor admission passes 104, and the
 The library executor and corpus CLI support named or bounded subsets. For example:
 
 ```bash
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia \
+mkdir -p rust/target/project-data/tmp rust/target/project-data/cache/julia-depot
+TMPDIR="$PWD/rust/target/project-data/tmp" \
+JULIA_DEPOT_PATH="$PWD/rust/target/project-data/cache/julia-depot:" \
+  julia --project=julia -e 'using Pkg; Pkg.instantiate()'
+TMPDIR="$PWD/rust/target/project-data/tmp" \
+JULIA_DEPOT_PATH="$PWD/rust/target/project-data/cache/julia-depot:" \
   julia --project=julia julia/bin/corpus_runner.jl \
   --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
 ```
+
+The root-relative directories above are the manual bridge while `PROJECT-DATA-SSD-ROOTING.1` lands the standard
+initializer. The trailing empty Julia depot entry selects only Julia's runtime system depots after the writable
+repository-local depot; it deliberately does not consult a developer-home package depot.
 
 Validation-only loading remains the default. Adding `--execute` without selectors runs the complete validated
 manifest and passes 105/105; `--case`, `--offset`, and `--limit` remain available for diagnostics. The permanent
@@ -546,33 +555,18 @@ local execution = linkedspec.execute_corpus_fixtures(corpus_root, {
 assert(linkedspec.corpus_execution_passed(execution))
 ```
 
-### Cleaning generated build caches
+### Retaining repository-local caches
 
-Julia's generated precompile output lives in depot `compiled/` directories, not in a project-local Rust-style
-target directory. When disk space is tight and no Cargo, mdBook, or Julia job is running, these are rebuildable
-cleanup targets:
+The repository is on a high-capacity SSD, so reusable build and package caches are retained by default. Do not
+routinely delete `rust/target`, the repository-local Julia depot, Dart packages, or similar warmed state. A
+specific disposable per-run scratch directory may be removed only after proving that no process uses it and that
+it contains no retained diagnostic evidence.
 
-```bash
-rm -rf rust/target
-rm -rf docs/linkedspec-book/book
-rm -rf /private/tmp/linkedspec-julia-depot/compiled
-rm -rf ~/.julia/compiled
-```
-
-Remove only Julia's `compiled/` cache, never the whole depot. Preserve `packages/`, `registries/`, `environments/`,
-`logs/`, `scratchspaces/`, `artifacts/`, project manifests, source, and fixture data.
-`tools/run_julia_local.sh` prints its resolved depot path; apply the same `compiled/`-only rule there when the
-configured/default depot differs from the examples above.
-
-A compiled-only temporary depot cannot resolve packages by itself. For direct offline commands after cache
-cleanup, layer the writable temporary depot before an existing source-bearing depot, for example
-`JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia`. New compiled output stays in the first entry;
-installed package source is read from the second. A trailing empty entry expands Julia's system depots, not the
-user package depot, so it does not replace that explicit second path.
-
-Large generation logs under `/private/tmp` need a stricter check: inspect the file header to prove it came from a
-completed LinkedSpec/RGX run and confirm no process still has it open before deleting that exact file. Never
-blanket-delete `/private/tmp`; it may contain agent state, application IPC, or another project's active test data.
+Existing project-owned data outside the repository filesystem is migration input, not a supported cache location.
+Move it by copy/verify/use/delete: identify exact ownership, copy retained bytes into a root-derived SSD location,
+verify counts/sizes/hashes where material, exercise the workflow there, and delete only the exact old source.
+Never blanket-delete an operating-system temporary directory or a shared developer cache; they may contain agent
+state, application IPC, or another project's data.
 
 The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymous capture, logical/output helper,
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each
@@ -658,11 +652,11 @@ caller-owned; and no audited owner retains developer-home, private-volume, `/vob
 external paths such as the stable `/usr/bin/csplit` tool remain legal under the boundary above.
 
 The 12 audited Julia Knowledge Map reverify commands are portable as well. They select `julia` through `PATH`,
-keep `--project=julia` and test paths relative to the repository root, and prepend a caller-writable
-`${TMPDIR:-/tmp}` depot to Julia's runtime default depot list. Do not replace that explicit composition with a
-trailing empty depot entry: Julia expands the empty entry to system depots but omits the user package depot, which
-can turn an offline reverify into an attempted registry download. Direct semantic-query commands define
-`REPO_ROOT=pwd()` because their included shared fixtures require that root-relative harness context.
+keep `--project=julia` and test paths relative to the repository root, and store no expanded machine location.
+Their current caller-temporary/runtime-depot composition is frozen migration debt under
+`PROJECT-DATA-SSD-ROOTING.2.4`; new commands use a repository-local writable depot followed by runtime system
+depots. Direct semantic-query commands define `REPO_ROOT=pwd()` because their included shared fixtures require
+that root-relative harness context.
 
 Static enforcement is registered as the `REPO-ROOT-PATHS` doctrine. Run it directly with:
 
@@ -682,6 +676,34 @@ Ignored build/package caches may contain tool-generated absolute metadata and sh
 Compiled debug information may also record source locations, so searching binary strings is not a relocation
 oracle. The recurring proof executes a freshly copied command beneath a synthetic moved root and requires it to
 load that root's unique spec.
+
+## Project data locality and same-volume storage
+
+Repository relocation also defines the storage volume. All project-owned generated output, build state, package
+cache/depot content, logs, traces, runtime-created fixtures, and temporary workspaces must remain on the same
+filesystem as the current checkout. Persisted names are root-relative; supported entrypoints derive absolute
+scratch and cache roots only at runtime. They do not default to the operating-system temporary directory or a
+developer-home cache.
+
+Cross-volume access is denied by default. The narrow exceptions are explicit caller-authorized inputs and
+documented strictly required external executables, system libraries, devices, credentials, or operating-system
+services. Those dependencies are not project storage and should be read-only where possible. ADR `0053` and task
+tree `PROJECT-DATA-SSD-ROOTING` define the complete contract.
+
+The behavior-free planning audit found 65 retained CLI workspaces and two Julia depots outside the repository
+filesystem (67 directories/135,756 KiB), two exact Dart checkout metadata records, one LinkedSpec stanza inside a
+shared Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. No migration
+has occurred in planning `.0`. Each implementation leaf must copy or move its exact data, verify count/bytes/hash
+where material, exercise the SSD replacement, and then delete the exact old source. Ambiguous shared global caches
+are never deleted wholesale; supported workflows populate repository-local caches and stop reading the shared
+copy. Until initializer `.1.1` lands, direct commands must explicitly set temporary and cache locations beneath
+the current repository, as in the Julia example above.
+
+Planning `.0` is behavior-free but was signed off with temporary, Cargo, Dart, and Julia cache variables rooted
+beneath the repository. The complete canonical gate passes Rust semantic admission 1/1 in 82.41 seconds, Dart
+1/1, Julia 416/416 in 29.7 seconds, both 66-case Perl primary environments, and Phase 0 1,031/1,031 in 657
+seconds. This proves the current gate can run from manually selected same-volume project state before the standard
+initializer is implemented; it does not claim the defaults are migrated yet.
 
 ## CI input areas
 

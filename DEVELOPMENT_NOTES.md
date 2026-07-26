@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.0` — repository filesystem is project-data authority): ADR `0053`
+  narrows the relocation contract for project-owned state. Generated output, builds, caches, depots, logs, traces,
+  runtime fixtures, and scratch must use roots derived from the current checkout and share its filesystem. An
+  inherited temp/cache variable is accepted only if its resolved destination is on that filesystem. Explicit
+  caller inputs and strictly necessary external tool/OS resources are bounded exceptions, not storage defaults.
+  Existing exact project data uses copy/verify/use/delete; shared ambiguous caches are populated locally and then
+  excluded without wholesale deletion. The behavior-free audit freezes 67 retained temporary directories/
+  135,756 KiB, two Dart active-root records, one shared-log stanza, 100 tracked allocation owners, and 24
+  executable off-repository defaults. `.1.1` owns the common initializer before any family migration.
+
 - 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.2.1` — classify concrete path identity, not path-shaped syntax): A
   relocation checker must distinguish a real persisted identity from tests and prose that describe one. Requiring
   a concrete username, volume, or session segment plus a path boundary rejects concrete Unix-home,

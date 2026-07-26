@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-26` (structural doctrine `.2.1` done; relocated-process oracle `.2.2` active)
+- Last updated: `2026-07-26` (structural doctrine `.2.1` done; `.2.2` paused behind SSD storage migration)
 - Owner: repo-local workflow
 
 ## Goal
@@ -195,7 +195,7 @@ root because the root may move for many reasons and relocation must not affect t
     `.2.2` is the next clean frontier.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.2.2`
-  Status: `active`
+  Status: `pending` (resume after `PROJECT-DATA-SSD-ROOTING.5`)
   Goal: Close the invariant with a recurring relocated-checkout process oracle.
   Depends on: `.2.1`
   Acceptance: Add one Rust integration test that copies the freshly built primary executable beneath a synthetic
@@ -210,7 +210,7 @@ root because the root may move for many reasons and relocation must not affect t
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.2.2` | `active` | From the clean `.2.1` commit, add the recurring relocated-binary oracle, repeat the four outside-cwd anchors, and close the tree. |
+| `REPO-ROOT-PATH-PORTABILITY.2.2` | `pending` | Resume after `PROJECT-DATA-SSD-ROOTING.5`; combine the recurring relocated-binary oracle with the new repo-filesystem storage environment. |
 
 ## Decisions
 
@@ -222,6 +222,8 @@ root because the root may move for many reasons and relocation must not affect t
 - The audit must not misclassify unrelated external OS/tool/temp paths as repository-path violations.
 - ADR `0052` is the durable contract. Caller-supplied exact paths stay legal data; they never become an implicit
   project root or durable checkout identity.
+- Director-ordered `PROJECT-DATA-SSD-ROOTING` takes clean-pivot precedence before `.2.2`: relocation process proof
+  must exercise the final repo-filesystem storage environment rather than freeze superseded OS-temp defaults.
 - `rgx` is a gitlink with its own repository and task/commit boundary. The parent checker verifies only the tracked
   parent tree; changing the submodule requires a separately owned submodule task and commit.
 
@@ -313,7 +315,7 @@ root because the root may move for many reasons and relocation must not affect t
 | `.1.1` | `80cc3383` — `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` | Rust runtime-anchor repair; copied-binary RED is green. |
 | `.1.2` | `507fc72e` — `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
 | `.1.3` | `6648d3bf` — `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths` | Twelve Julia fact-card commands now use runtime-composed portable roots and depots. |
-| `.2.1` | `REPO-ROOT-PATH-PORTABILITY.2.1 - gate repository path portability` (this commit) | One read-only doctrine scans tracked parent text and locks all five runtime anchors. |
+| `.2.1` | `6edf5c8a` — `REPO-ROOT-PATH-PORTABILITY.2.1 - gate repository path portability` | One read-only doctrine scans tracked parent text and locks all five runtime anchors. |
 
 ## Changelog
 

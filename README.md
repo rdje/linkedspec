@@ -216,8 +216,9 @@ The checkout may be moved, renamed, copied, or restored on another volume withou
 Every persisted reference to repository-owned content is relative to the repository root. Runtime code that needs
 an absolute path derives the current root from its executing script/module/executable or accepts an explicit
 caller root; a developer home, mount point, concrete checkout, or compile-time build directory is never project
-identity. Explicit caller paths, temporary directories, URLs, and external OS/tool paths remain valid data, but
-they may not be used to infer or persist the checkout. ADR `0052` is the durable contract and
+identity. Explicit caller paths, URLs, and external OS/tool paths remain valid data, but they may not be used to
+infer or persist the checkout. Project-owned temporary data has the stricter same-filesystem rule below. ADR
+`0052` is the durable relocation contract and
 `docs/tasks/REPO-ROOT-PATH-PORTABILITY.md` owns the audited remediation/enforcement rollout.
 
 The Rust primary command follows the same contract at runtime: it searches current-executable ancestry before cwd
@@ -229,12 +230,31 @@ resolved through the caller's `PATH`, and external design inputs remain explicit
 legacy config/source owners no longer contain developer-home, private-volume, `/vobs`, or `/dsync` defaults.
 
 Durable Julia verification commands are portable too. All 12 audited Knowledge Map commands select `julia` through
-`PATH`, keep project and test operands relative to this repository root, and build writable depot stacks from
-caller `TMPDIR` plus Julia's runtime defaults. No expanded developer home or private session directory is stored.
+`PATH`, keep project and test operands relative to this repository root, and store no expanded developer home or
+private session path. Their current caller-temporary/runtime-depot composition is frozen migration debt under the
+storage-locality lane below.
 Remediation `.1` is complete. Structural enforcement `.2.1` registers `REPO-ROOT-PATHS`: a read-only tracked-text
 scan with 14 mutation/acceptance self-tests plus fixed runtime-anchor locks for the Perl, Rust, Dart, Julia, and
 Lua primary commands. The existing doctrine driver runs it from pre-commit and canonical local CI. Recurring
-relocated-process proof `.2.2` is the active portability leaf.
+relocated-process proof `.2.2` is paused until the storage-locality tree closes.
+
+## Project data locality and same-volume storage
+
+All LinkedSpec-owned data—including generated outputs, build artifacts, reusable caches, package depots, logs,
+runtime test fixtures, and temporary workspaces—belongs on the filesystem that contains the current repository.
+Persisted paths remain repository-root-relative; supported tools will compute absolute scratch/cache paths from
+the current checkout and will not default to an operating-system temporary directory or developer-home cache.
+Cross-volume access is limited to explicit caller inputs and documented, strictly necessary external executables,
+system libraries, devices, credentials, or operating-system services.
+
+ADR `0053` and `docs/tasks/PROJECT-DATA-SSD-ROOTING.md` own the migration. Planning audit `.0` found 67 retained
+temporary directories totalling 135,756 KiB, two Dart checkout metadata records, one LinkedSpec stanza in a shared
+Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Each exact retained
+source will be copied, count/byte/hash verified where material, exercised from its SSD destination, and deleted in
+the same implementation leaf. Shared caches are never deleted wholesale when ownership is ambiguous; LinkedSpec
+will instead populate repository-local caches and stop consulting the shared copy. Implementation `.1.1` is the
+next clean-commit frontier; until that initializer lands, direct ad-hoc commands must explicitly select temporary
+and cache locations beneath the current repository.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

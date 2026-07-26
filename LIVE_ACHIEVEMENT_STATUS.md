@@ -8,13 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.2.2` — from the clean structural-doctrine commit, add the recurring relocated-binary
-  oracle, repeat the four already-correct outside-cwd primary anchors, and close the portability tree.
+- `PROJECT-DATA-SSD-ROOTING.1.1` — from the clean behavior-free `.0` commit, define ignored root-relative scratch
+  and reusable-cache roots, a relocatable shell environment initializer, same-filesystem validation, and focused
+  tests. `REPO-ROOT-PATH-PORTABILITY.2.2` is paused until SSD-local project IO can join its relocation oracle.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.0 — freeze SSD storage migration**
+  (behavior-free architecture decision, exact inventory, and migration split; closes with this commit).
+
+  **Result:** ADR `0053` makes the repository filesystem authoritative for project-owned artifacts, caches,
+  depots, logs, traces, generated outputs, runtime fixtures, and scratch. The audit freezes 67 retained temporary
+  directories/135,756 KiB, two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocation
+  owners, 24 executable off-repository defaults, and the exact necessary external-tool boundary. Migration is
+  copy/verify/use/delete; ambiguous shared caches are never deleted wholesale.
+
+  **Proof:** Planning, ADR, Knowledge Map, roadmap, README, mdBook, task, live-doc, and memory synchronization only;
+  no runtime, test, or old-data behavior changes. Five doctrines, 40-line memory, Knowledge Map 707/5,528,
+  mdBook, task metadata, and whitespace pass. Canonical verification uses SSD-local temporary, Cargo, Dart, and
+  Julia caches and passes Rust 1/1 in 82.41s, Dart 1/1, Julia 416/416 in 29.7s, Perl primary 66x2, and Phase 0
+  1,031/1,031 in 657s. Push counter is 23/300; no push.
+
 - 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.2.1 — gate repository path portability**
   (read-only structural doctrine and self-test; closes with this commit).
 

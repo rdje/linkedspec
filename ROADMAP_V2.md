@@ -8,6 +8,14 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+Critical project-data locality lane: ADR `0053` plus `PROJECT-DATA-SSD-ROOTING` require every project-owned
+artifact, cache, package depot, log, and temporary workspace to live on the repository filesystem. Runtime roots
+derive from the current checkout; cross-volume reads are limited to explicit caller paths and documented strictly
+necessary external tool/OS dependencies. Planning `.0` freezes 67 retained temporary directories/135,756 KiB,
+two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocation owners, and 24 executable
+off-repository defaults. `.1.1` is next after the clean planning commit. Migration is copy/verify/use/delete;
+ambiguous shared caches are not deleted wholesale.
+
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current
 script/module/executable or an explicit caller root. Completed audit `.0` is behavior-free: 0 tracked checkout
@@ -18,8 +26,8 @@ config/source owners `.1.2` are complete with relative project defaults, PATH-se
 network command/input ownership. The 12 Julia fact-card commands `.1.3` are also complete with PATH-selected Julia,
 root-relative operands, and runtime-composed caller-writable depots. Ordered remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` now scans tracked parent text, self-tests 14 reject/accept classes, and locks all five
-primary runtime anchors through E3/E4. Active `.2.2` owns recurring copied-binary relocation proof/closeout. Explicit caller
-paths and OS/tool/temp data remain valid; they are not checkout identity.
+primary runtime anchors through E3/E4. Closeout `.2.2` is paused behind `PROJECT-DATA-SSD-ROOTING.5`. Explicit
+caller paths and OS/tool data remain valid; project-owned temporary/cache state must use the repository filesystem.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.
 `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is one immutable native index of normalized

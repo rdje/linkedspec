@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.0 — freeze SSD storage migration
+
+Adopted ADR `0053`: all LinkedSpec-owned artifacts, caches, package depots, logs, traces, generated output, and
+temporary workspaces must live on the filesystem containing the current repository. Persisted paths remain
+root-relative and runtime absolute storage paths derive from the current checkout. Cross-volume reads are denied
+by default except for explicit caller inputs and documented, strictly necessary external executables, system
+libraries, devices, credentials, or operating-system services. The reusable project-neutral policy is preserved
+under “Project Data Locality and Same-Volume Storage Policy” in the owning task tree.
+
+The behavior-free census found 65 retained CLI workspaces plus two Julia depots (67 directories/135,756 KiB), two
+exact Dart checkout records, and one LinkedSpec stanza in a shared Julia usage log. Across 1,936 tracked parent
+files, 100 files allocate through temporary APIs/defaults, 24 executable files contain off-repository storage
+defaults, and 97 Knowledge Map cards retain 107 old temporary/home-depot lines. Shared off-SSD Cargo, Dart, and
+Julia caches measure 845 MB, 78 MB, and 13 MB; they are ambiguous global state and will not be deleted wholesale.
+
+Migration is split across initializer/lifecycle, six backend/tool families, exact residue reconciliation,
+structural/process enforcement, and final signoff. Every exact retained source follows copy/verify/use/delete and
+is removed in the same leaf that proves its SSD replacement; disposable data is deleted only after exact owner
+proof. No supported runtime, test, cache-default, or old-data behavior changes in `.0`.
+`REPO-ROOT-PATH-PORTABILITY.2.2` is paused
+until this tree closes, and `.1.1` becomes the next clean-commit frontier. Push cadence advances to 23/300 with no
+push.
+
+Five doctrines, 40-line memory, Knowledge Map 707 facts/5,528 questions, mdBook, task metadata, and whitespace
+pass. Canonical verification explicitly roots temporary, Cargo, Dart, and Julia cache state on the SSD and passes
+Rust semantic admission 1/1 in 82.41 seconds, Dart 1/1, Julia 416/416 in 29.7 seconds, Perl primary 66x2, and
+Phase 0 1,031/1,031 in 657 seconds. A first sandboxed Julia warm-up lacked registry access; the approved retry
+installed the locked manifest directly into the SSD-local depot, after which the complete rerun passed. No old
+internal-volume source was read, mutated, or deleted by the successful canonical run.
+
 ## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.2.1 — gate repository path portability
 
 Added the `REPO-ROOT-PATHS` structural doctrine. The new executable
