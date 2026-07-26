@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; common lifecycle plus Perl and Rust migrations implemented; Dart/Julia/Lua/tool migrations pending
+- Status: accepted; common lifecycle plus Perl, Rust, and Dart migrations implemented; Julia/Lua/tool migrations pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -91,6 +91,14 @@ boundary for storage locality.
 - The exact Rust-prefixed residue census is zero in the inherited OS temporary roots. Therefore no unambiguous old
   Rust-owned source existed to delete; the shared developer Cargo cache remains untouched because it is ambiguous
   multi-project data, and supported workflows no longer consult it.
+- Dart migration adds a recurring 18-owner storage oracle to the complete Dart gate. The repository cache covers
+  all 47 locked hosted packages offline; generated-source callers, traces, `Directory.systemTemp`, `TMPDIR`, and
+  `PUB_CACHE` remain on the repository device. Package payload identity is 5,903 files / 63,744,165 bytes with
+  hash `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`.
+- The warmed Dart cache moved atomically from its old same-SSD target-era location, which no longer exists. After
+  successful offline/full-gate use, the two exact current/former checkout `active_roots` records and their empty
+  hash shards were deleted from the shared off-SSD cache. Its ambiguous multi-project package payload remains
+  untouched and supported workflows no longer consult it.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -102,5 +110,6 @@ boundary for storage locality.
 - Repository relocation: `docs/decisions/0052-repository-root-path-portability.md`
 - Managed-run lifecycle: `docs/knowledge/project-data-run-lifecycle.md`
 - Rust storage: `docs/knowledge/rust-project-data-ssd-storage.md`
+- Dart storage: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

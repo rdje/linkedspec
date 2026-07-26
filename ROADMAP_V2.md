@@ -24,8 +24,11 @@ Perl `.2.1` adds the routed standalone primary matrix and a recurring 24-owner `
 oracle. Its 65 exact old CLI workspaces were copied to the root-relative SSD cache, verified at 17 files/1,590
 bytes plus canonical hash, exercised, and deleted. Rust `.2.2` adds a complete 195-package offline Cargo cache and
 proves all 17 temp owners, generated projects, traces, and a copied binary stay on repository storage; no exact old
-Rust temp residue exists. Active `.2.3` owns Dart project-data/cache migration. Migration remains
-copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
+Rust temp residue exists. Dart `.2.3` adds the complete 47-package offline cache and proves all 18 temporary owners
+plus generated and trace paths on repository storage; after successful offline/full-gate use, its two exact shared
+checkout records were deleted while ambiguous shared package payload remained untouched. Active `.2.4` owns Julia
+depot/precompile/temp/generated migration. Migration remains copy/verify/use/delete; ambiguous shared caches are
+not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

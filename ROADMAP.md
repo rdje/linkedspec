@@ -31,7 +31,10 @@ focused 24-owner `File::Temp`/trace/CLI oracle enter managed SSD storage, and 65
 copied to the root-relative retained cache, count/byte/hash verified, exercised, and deleted. Rust `.2.2` is
 complete: a 195-package offline Cargo cache plus exact 17-owner generated/trace/copied-binary oracle prove Rust
 project data stays on repository storage; zero exact old Rust temp residue exists and the shared cache remains
-untouched and unused. Active `.2.3` owns Dart package/test/generated data and exact metadata migration. The path-portability closeout
+untouched and unused. Dart `.2.3` is complete: the 47-package cache resolves offline, all 18 temporary owners plus
+generated/trace paths stay on repository storage, and the two exact shared checkout records were deleted after
+successful use while ambiguous shared package payload remains untouched. Active `.2.4` owns Julia depots,
+precompile state, temporary/generated data, and exact metadata migration. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 

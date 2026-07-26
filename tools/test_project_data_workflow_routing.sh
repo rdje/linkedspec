@@ -43,6 +43,7 @@ routed_entrypoints=(
  tools/run_mdbook_local.sh
  tools/test_perl_project_data_storage.sh
  tools/test_rust_project_data_storage.sh
+ tools/test_dart_project_data_storage.sh
 )
 
 for relative in "${routed_entrypoints[@]}"; do
@@ -151,6 +152,8 @@ run_routed_case cargo failure "$REPO_ROOT/tools/run_cargo_local.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case rust-storage failure "$REPO_ROOT/tools/test_rust_project_data_storage.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
+run_routed_case dart-storage failure "$REPO_ROOT/tools/test_dart_project_data_storage.sh" \
+ LINKEDSPEC_DART_CMD=linkedspec-routing-test-missing-dart
 run_routed_case rust failure "$REPO_ROOT/tools/run_rust_local.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case dart failure "$REPO_ROOT/tools/run_dart_local.sh" \

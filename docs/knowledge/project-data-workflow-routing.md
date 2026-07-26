@@ -14,21 +14,21 @@ answers:
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, workflow, hook, ci, mdbook, backend, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.2 initially routes tools/project_data_env.sh at 14 self-rooted hook, doctrine, Knowledge Map, canonical Perl, backend, and mdBook boundaries. PROJECT-DATA-SSD-ROOTING.2.1 adds the primary matrix and Perl storage oracle; .2.2 adds the targeted Cargo wrapper and Rust storage oracle, bringing the recurring proof to 18 boundaries. The portable Knowledge Map bundle consumes generic KM_ENV_INITIALIZER and KM_RUN_INITIALIZER configured in root .knowledge_map.conf. tools/test_project_data_workflow_routing.sh rejects missing or late initialization, launches lightweight workflows and backend preflights from another filesystem with hostile inherited roots, proves all selected directories use the repository device, and requires no completed-run residue."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.2 initially routes tools/project_data_env.sh at 14 self-rooted boundaries. PROJECT-DATA-SSD-ROOTING.2.1 adds the primary matrix and Perl storage oracle; .2.2 adds the targeted Cargo wrapper and Rust storage oracle; .2.3 adds the Dart storage oracle, bringing recurring proof to 19 boundaries. The portable Knowledge Map bundle consumes generic KM_ENV_INITIALIZER and KM_RUN_INITIALIZER configured in root .knowledge_map.conf. tools/test_project_data_workflow_routing.sh rejects missing/late initialization, launches lightweight workflows and backend preflights from another filesystem with hostile inherited roots, proves all selected directories use the repository device, and requires no completed-run residue."
 reverify: "bash -n tools/test_project_data_workflow_routing.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/run_mdbook_local.sh && bash scripts/check_doctrines.sh"
 ---
 
 The standard storage-routing boundary consists of `.githooks/pre-commit`, the doctrine driver and registered checks,
 both Knowledge Map scripts, `tools/run_ci_local.sh` (the canonical Perl/reference gate),
 `tools/run_{rust,dart,julia,lua}_local.sh`, `tools/run_primary_cli_matrix.sh`, `tools/run_cargo_local.sh`, the Perl
-and Rust storage oracles, and `tools/run_mdbook_local.sh`. Each derives its current checkout and
+plus Rust and Dart storage oracles, and `tools/run_mdbook_local.sh`. Each derives its current checkout and
 routes `tools/project_data_env.sh` and enters one managed run before any language runtime or project-data allocator
 can start. The portable Knowledge Map scripts use generic `KM_ENV_INITIALIZER` plus `KM_RUN_INITIALIZER`;
 LinkedSpec's root `.knowledge_map.conf` supplies the repo-relative helper and its run function without coupling the
 bundle to this project. The mdBook's
 supported command is therefore `bash tools/run_mdbook_local.sh`, not a bare `mdbook build`.
 
-The focused workflow oracle checks 18 source-before-runtime boundaries. From an available other-filesystem cwd, it
+The focused workflow oracle checks 19 source-before-runtime boundaries. From an available other-filesystem cwd, it
 supplies hostile external temp/cache variables and a unique same-filesystem project-data root, executes the
 lightweight doctrine/Knowledge Map/mdBook flows, and reaches each backend runner's post-initialization preflight.
 Every created scratch/cache/tool directory is checked against the repository device, backend preflights must reach
@@ -36,4 +36,4 @@ their configured runtime check, and every completed managed run must be gone. Di
 responsible for explicitly sourcing the initializer; `.2.1-.2.6` still own backend/tool default and old-data migration.
 
 Related facts: [[project-data-env-initializer]], [[project-data-run-lifecycle]],
-[[project-data-ssd-storage-locality]], [[rust-project-data-ssd-storage]].
+[[project-data-ssd-storage-locality]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]].

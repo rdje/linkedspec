@@ -8,15 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.3` — from the clean Rust migration commit, root Dart package cache, test workspaces,
-  generated outputs, and exact checkout metadata on the repository filesystem; verify each retained SSD copy,
-  delete each exact old Dart-owned source, and pass the complete Dart gates.
+- `PROJECT-DATA-SSD-ROOTING.2.4` — from the clean Dart migration commit, root Julia depots, precompile state, test
+  scratch, generated outputs, and exact shared metadata on the repository filesystem; verify each retained SSD
+  copy, delete each exact old Julia-owned source, and pass the complete Julia gates.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.3 — root Dart workspaces on SSD**
+  (47-package offline cache, exact 18-owner generated/trace proof, two exact shared records deleted, full Dart gate;
+  closes with this commit).
+
+  **Result:** The warmed SSD cache moved atomically into the canonical repository-relative Dart root. Package
+  payload identity is 5,903 files / 63,744,165 bytes / hash
+  `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; 47 volatile-index records match after
+  removing only `_fetchedAt`. All 18 temporary owners, generated callers, and traces use managed SSD storage.
+  After verified offline/full-gate use, the two exact shared current/former checkout records and their empty shards
+  were deleted. Ambiguous shared package payload remains untouched and unused.
+
+  **Proof:** Standalone/reused storage oracles, all 47 locked packages/hashes offline, 17 focused trace/generated
+  tests, 19-boundary outside-cwd routing, format/analyzer, package 337, primary 66x2, corpus 105/105, doctrines,
+  Knowledge Map, task/memory, mdBook, and zero managed runs pass. Canonical with the default Dart cache passes Rust
+  1/1 in 77.57s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2, and Phase 0 1,031/1,031 in 624s. Push is 29/300
+  with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.2 — root Rust workspaces on SSD**
   (195-package offline Cargo cache, exact 17-owner generated/trace/relocation proof, full Rust gate; closes with
   this commit).

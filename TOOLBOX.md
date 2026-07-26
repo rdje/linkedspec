@@ -339,6 +339,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/test_rust_project_data_storage.sh`. `tools/run_rust_local.sh` invokes the oracle after the
   complete package/build proof and reuses those expensive results.
 
+### 4.3.4 `tools/test_dart_project_data_storage.sh` — Dart SSD-local storage oracle
+
+- **WHAT:** lock the exact 18 tracked Dart temporary owners; verify managed temp/pub/generated/trace paths share
+  the repository device; require all 47 hosted lockfile packages and hashes offline; and exercise representative
+  native trace, emitted-source caller, and trace-control paths.
+- **WHEN:** changing Dart temporary allocation, package resolution, generated-source callers, traces, `PUB_CACHE`,
+  or the Dart local gate.
+- **HOW:** `bash tools/test_dart_project_data_storage.sh`. `tools/run_dart_local.sh` invokes the oracle after the
+  complete package-test proof and reuses that result.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -357,7 +367,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
   foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
   `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
-  environment, lifecycle, and 18-entrypoint outside-cwd proofs. Build the book through
+  environment, lifecycle, and 19-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports

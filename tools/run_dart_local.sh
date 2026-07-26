@@ -29,6 +29,9 @@ log "running Dart analyzer"
 log "running Dart tests"
 "$DART_CMD" test
 
+log "proving Dart project data stays in managed repository storage"
+bash "$REPO_ROOT/tools/test_dart_project_data_storage.sh" --reuse-complete-dart-gate
+
 log "checking Dart CLIs"
 "$DART_CMD" run bin/linkedspec_dart.dart --help >/dev/null
 "$DART_CMD" run bin/corpus_runner.dart --help >/dev/null

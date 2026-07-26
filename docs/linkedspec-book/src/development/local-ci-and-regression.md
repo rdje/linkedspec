@@ -411,10 +411,12 @@ The Dart backend has its own focused local gate:
 bash tools/run_dart_local.sh
 ```
 
-It runs Dart formatting, analyzer checks, all 151 Dart tests, shared primary-CLI help,
-a bounded corpus-runner smoke, all 61 primary cases in default and POSIX environments, and the full 105-fixture
-corpus execution. The separate corpus runner remains the 105-fixture owner. `FUTURE-PARITY-BACKLOG.1.5.3.4`
-closes this recurring gate and Dart primary-command no-drift. The canonical local
+It runs Dart formatting, strict analyzer checks, all 337 Dart package tests, a repository-filesystem storage oracle,
+shared primary-CLI help, a bounded corpus-runner smoke, all 66 primary cases in default and POSIX environments,
+and the full 105-fixture corpus execution. The storage oracle locks all 18 temporary owners and all 47 hosted
+lockfile packages offline; the separate corpus runner remains the 105-fixture owner.
+`FUTURE-PARITY-BACKLOG.1.5.3.4` closes the recurring backend gate and Dart primary-command no-drift, while
+`PROJECT-DATA-SSD-ROOTING.2.3` adds the storage proof. The canonical local
 gate does not require a Dart SDK by default. When a checkout has
 Dart installed and you want one command to include both gates, run:
 
@@ -867,7 +869,35 @@ Repository-local `TMPDIR` is below the real checkout. Consequently, a synthetic 
 external to repository ancestry. The topology-only unit now injects a repository-marker predicate over relative
 synthetic paths; the copied-binary storage oracle remains the real filesystem proof. Complete `.2.2` Rust signoff
 passes runtime 149, the 105-fixture corpus, the 105-case generated classifier, integration 197, semantic admission,
-the storage oracle, and primary 66/66 in both environments. Dart/Julia/Lua/tool migration remains `.2.3-.2.6`.
+the storage oracle, and primary 66/66 in both environments.
+
+### Dart package cache, tests, generated callers, and traces
+
+Dart migration `.2.3` adds a focused process oracle:
+
+```bash
+bash tools/test_dart_project_data_storage.sh
+```
+
+The oracle self-roots and enters managed repository storage. It proves the active run, `TMPDIR`, and `PUB_CACHE`
+share the repository device; locks the exact 18 tracked `Directory.systemTemp` owners; requires all 47 hosted
+packages and hashes in `dart/pubspec.lock`; resolves them offline; and exercises native pipeline traces, an emitted
+source caller package, and trace-control paths. `native_pipeline_trace_test.dart` independently requires Dart's
+resolved `Directory.systemTemp` to equal routed `TMPDIR`. The complete `tools/run_dart_local.sh` gate invokes the
+same oracle after its 337 package tests and continues through primary 66/66 twice and corpus 105/105.
+
+The repository-relative Dart cache contains 5,903 package payload files / 63,744,165 bytes with hash
+`039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`. Its 47 pub index files differ from the
+shared cache only in volatile `_fetchedAt`; canonical JSON with that field removed has matching hash
+`21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`. The warmed SSD cache moved atomically from
+its noncanonical target-era root into `/.linkedspec-data/cache/dart-pub/`, leaving no duplicate source.
+
+Only after successful offline resolution and full-gate use were the two exact shared `active_roots` records for
+the current and absent former checkout deleted with their empty hash shards. Shared active-root residue is zero.
+The shared package payload is ambiguous multi-project data, so it remains untouched and supported workflows no
+longer consult it. Canonical signoff with the default Dart cache passes Rust admission 1/1 in 77.57 seconds, Dart
+admission 1/1, Julia 416/416 in 27.1 seconds, primary 66/66 twice, and Phase 0 1,031/1,031 in 624 seconds.
+Julia/Lua/tool migration remains `.2.4-.2.6`.
 
 ## CI input areas
 

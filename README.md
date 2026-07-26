@@ -254,9 +254,12 @@ defaults. Rust `.2.2` corrected one missed imported `env::temp_dir()` use, so th
 the Rust family count is 17. Perl leaf `.2.1`
 has now migrated all 65 exact CLI workspace directories into root-relative retained SSD cache, verified 17 files/
 1,590 bytes plus canonical inventory hash, exercised the copied source/input fixture, and deleted the old internal-
-volume set. Later family leaves apply the same copy/verify/use/delete rule. Shared caches are never deleted wholesale
-when ownership is ambiguous; LinkedSpec instead populates repository-local caches and stops consulting the shared
-copy.
+volume set. Rust `.2.2` supplies a complete 195-package offline Cargo cache and proves all 17 Rust temporary owners,
+generated projects, traces, and copied-binary relocation on repository storage. Dart `.2.3` atomically moves the
+verified 47-package cache into the canonical retained root, proves all 18 Dart temporary owners plus generated and
+trace paths, and deletes the two exact shared checkout records after successful offline/full-gate use. Shared package
+payload remains untouched when ownership is ambiguous; LinkedSpec instead populates repository-local caches and
+stops consulting the shared copy. Julia `.2.4` is the active migration frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -1247,8 +1250,10 @@ content migration exists yet.
   free `.10.7.3.2.0` reconciles full private source authority with ADR-0049 query-boundary redaction; remaining
   privacy/failure/runtime-static/isolation `.10.7.3.2.1` is active. Public query, formats, rollout, and
   admission remain unchanged.
-- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
-  Dart tests, CLI help, and the 105-fixture corpus execution.
+- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
+  package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
+  environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
+  standalone 18-owner/47-package offline storage oracle.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
   packages, repository-filesystem Cargo/temp/generated/trace/relocation storage proof, and both shared primary-
   command environments. Use `bash tools/run_cargo_local.sh ...` for targeted Cargo work. Its root-selection

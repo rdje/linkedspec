@@ -11,6 +11,15 @@ Top::
 ''';
 
 void main() {
+  test('system temporary root follows routed project storage', () {
+    final configured = Platform.environment['TMPDIR'];
+    expect(configured, isNotNull);
+    expect(
+      Directory.systemTemp.resolveSymbolicLinksSync(),
+      Directory(configured!).resolveSymbolicLinksSync(),
+    );
+  });
+
   test('one routed emitter spans native loading compilation and runtime', () {
     final scratch = Directory.systemTemp.createTempSync(
       'linkedspec-dart-native-pipeline-trace-',

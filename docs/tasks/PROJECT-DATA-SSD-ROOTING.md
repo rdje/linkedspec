@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.2.2` Rust storage/cache migration and signoff complete; `.2.3` active)
+- Last updated: `2026-07-26` (`.2.3` Dart storage/cache migration, exact metadata deletion, and signoff complete; `.2.4` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -277,7 +277,7 @@ accessing the shared copy, and remove only records or directories provably owned
     verification pass; this commit lands at 28/300, the brief is cleared, the tree is clean, and no push occurs.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.3`
-  Status: `active`
+  Status: `done` (2026-07-26; Dart cache, 18 temporary owners, generated/trace paths, and full gate proven on SSD)
   Goal: Root Dart package cache, test workspaces, and generated outputs on SSD storage.
   Depends on: `.2.2`
   Acceptance: Configure a repo-derived package cache and temporary root, preserve package resolution and primary
@@ -285,8 +285,37 @@ accessing the shared copy, and remove only records or directories provably owned
     package/corpus/CLI gates from inside and outside the checkout; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Canonical execution with the default repo-local Dart cache passes Rust then fails
+    to locate package `test` offline, while a warmed noncanonical SSD cache passes. Read-only census finds 18
+    tracked `Directory.systemTemp` owners, an empty canonical Dart cache, a 79,480-KiB warmed SSD cache, a
+    79,484-KiB shared off-SSD cache, and exactly two shared `active_roots` records naming the current and absent
+    former checkout.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Common routing exports repo-device `TMPDIR` and `PUB_CACHE`, but Dart has no
+    executable storage oracle or targeted pub wrapper. The complete package cache was stranded below an earlier
+    ignored target-era storage root, the canonical cache was never populated, and Dart's shared cache retained
+    checkout-identity metadata. Package payload counts/bytes match; only fetched-at index metadata differs.
+  - [x] **FIX** — `tools/test_dart_project_data_storage.sh` locks all 18 temporary owners, validates actual repository-device
+    temp/pub/generated/trace paths, proves offline package resolution, and runs inside the complete Dart gate.
+    `native_pipeline_trace_test.dart` directly proves `Directory.systemTemp` equals routed `TMPDIR`, while the
+    shell oracle checks run/temp/cache device identity, exact package configuration, cleanup, and focused trace/
+    generated-source execution. `tools/run_dart_local.sh` invokes the oracle after its complete package tests.
+  - [x] **CACHE / MIGRATION / DELETE** — Atomically moved the 79,480-KiB warmed SSD package cache into canonical
+    ignored `/.linkedspec-data/cache/dart-pub/`; the old target-era cache path is absent. Shared and SSD caches
+    match at 5,903 payload files / 63,744,165 bytes / hash
+    `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; their 47 index files match after removing
+    only `_fetchedAt`, normalized hash `21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`.
+    Offline use and the full gate pass before the two exact current/former shared `active_roots` records and their
+    empty hash shards are deleted. Shared active-root residue is zero; ambiguous package payload remains untouched.
+  - [x] **FOCUSED REGRESSION** — Standalone/reused Dart storage, 47-package offline pub, 17 focused trace/generated
+    tests, complete format/analyzer/337-test package gate, primary 66x2, corpus 105/105, 19-boundary outside-cwd
+    routing, and cleanup proofs pass with zero managed runs.
+  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and warranted canonical
+    verification pass; this commit lands at 29/300, the brief is cleared, the tree is clean, and no push occurs.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Root Julia depots, package precompile state, test scratch, and generated outputs on SSD storage.
   Depends on: `.2.3`
   Acceptance: Replace operating-system-temp and developer-home depot composition with the repo-derived retained
@@ -379,7 +408,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.3` | `active` | From the clean `.2.2` commit, root Dart package/test/generated data, migrate exact retained state, delete exact old Dart-owned sources, and pass Dart gates. |
+| `PROJECT-DATA-SSD-ROOTING.2.4` | `active` | From the clean `.2.3` commit, root Julia depots/precompile/test/generated state, normalize durable commands, migrate exact retained data, and delete exact old Julia-owned sources. |
 
 ## Decisions
 
@@ -402,7 +431,7 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Eighteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Nineteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
   delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
@@ -418,6 +447,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable workflow-routing fact: `docs/knowledge/project-data-workflow-routing.md`
 - Durable run-lifecycle fact: `docs/knowledge/project-data-run-lifecycle.md`
 - Durable Rust storage fact: `docs/knowledge/rust-project-data-ssd-storage.md`
+- Durable Dart storage fact: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -447,6 +477,10 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.2` | standalone Rust storage oracle; 18-boundary outside-cwd routing; repository-path doctrine | PASS: 17 exact owners, generated child project, traces, actual copied binary, same-device outputs, offline Cargo resolution, zero old Rust temp residue, zero managed runs |
 | 2026-07-26 | `.2.2` | complete `tools/run_rust_local.sh` | PASS: core and runtime packages; runtime 149; corpus 105; generated classifier 105; integration 197; semantic admission; storage oracle; primary 66x2 |
 | 2026-07-26 | `.2.2` | canonical default-cache attempt, then same-filesystem warmed Dart/Julia override | First attempt passed Rust 1/1 in 77.61s then exposed the still-empty `.2.3`-owned Dart cache and cleaned its run; rerun PASS: Rust 1/1 in 77.85s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2, Phase 0 1,031/1,031 in 624s; zero runs |
+| 2026-07-26 | `.2.3` | Dart cache payload/index comparison and atomic SSD move | PASS: 5,903 payload files / 63,744,165 bytes / hash `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; 47 normalized index files / hash `21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`; old warmed path absent |
+| 2026-07-26 | `.2.3` | exact shared Dart metadata deletion | PASS: current and absent-former checkout records classified exactly after canonical offline/full-gate use; two records plus empty hash shards deleted; shared active-root residue zero; shared package payload untouched |
+| 2026-07-26 | `.2.3` | standalone storage oracle; 19-boundary routing; complete Dart gate | PASS: 18 exact owners, 47 locked packages/hashes offline, focused 17, format/analyzer, package 337, primary 66x2, corpus 105/105, zero managed runs |
+| 2026-07-26 | `.2.3` | canonical default-Dart-cache signoff with same-SSD warmed Julia override | PASS: Rust 1/1 in 77.57s, Dart 1/1 from canonical 47-package cache, Julia 416/416 in 27.1s, primary 66x2, Phase 0 1,031/1,031 in 624s; zero managed runs |
 
 ## Commit Log
 
@@ -457,7 +491,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.1.2` | `671592ef` — `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
 | `.1.3` | `18c64726` — `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
 | `.2.1` | `269b3fbf` — `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
-| `.2.2` | `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` (this commit) | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
+| `.2.2` | `59c15453` — `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
+| `.2.3` | `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` (this commit) | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
 
 ## Changelog
 
@@ -484,3 +519,7 @@ accessing the shared copy, and remove only records or directories provably owned
   offline, the exact 17-owner Rust storage oracle proves generated projects, traces, and real copied-binary
   relocation remain on the repository filesystem, and no exact old Rust temp residue exists. The shared developer
   cache remains untouched and unused. `.2.3` becomes the clean Dart storage migration frontier after commit.
+- `2026-07-26`: Completed `.2.3`; the verified 47-package Dart cache moved atomically into the canonical retained
+  root, all 18 temporary owners plus generated/trace paths are executable under managed SSD storage, and full Dart
+  package/primary/corpus proof passes offline. The two exact shared checkout records were deleted after use; shared
+  package payload remains untouched and unused. `.2.4` becomes the clean Julia storage migration frontier.

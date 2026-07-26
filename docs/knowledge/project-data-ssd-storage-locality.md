@@ -22,10 +22,14 @@ answers:
   - has Rust project data been migrated to the SSD
   - how many Rust temporary allocation owners exist
   - is the LinkedSpec Cargo cache complete offline
+  - has Dart project data been migrated to the SSD
+  - how many Dart temporary allocation owners exist
+  - is the LinkedSpec Dart package cache complete offline
+  - were old Dart checkout cache records deleted
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, ssd, cache, temporary-data, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; PROJECT-DATA-SSD-ROOTING.2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates, verifies, exercises, and deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
+evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; .2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates/verifies/uses/deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. Dart .2.3 atomically moves the complete 47-package cache into its canonical root, proves all 18 owners plus generated/traced use, and deletes the two exact shared active-root records after use. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
 reverify: "git status --short && git ls-files -- . ':(exclude)rgx' | wc -l && rg --no-config -l 'File::Temp|tempdir\\(|tempfile\\(|TemporaryDirectory|NamedTemporaryFile|mktempdir\\(|Directory\\.systemTemp|std::env::temp_dir|tempfile::tempdir|mktemp -d' t tools julia lua dart rust knowledge-map .githooks | wc -l"
 ---
 
@@ -38,8 +42,9 @@ The planning census found a real live mismatch. Sixty-five CLI workspaces and tw
 internal per-user temporary filesystem, occupying 135,756 KiB. The CLI workspaces contained 17 small fixture/trace
 files totalling 1,590 bytes; the depots accounted for essentially all retained size. Perl leaf `.2.1` copied those
 65 exact directories into repository-relative retained cache, verified directory/file/byte identity plus canonical
-hash, exercised a copied source/input fixture, and deleted the internal-volume sources. Two global Dart active-root
-records and a former LinkedSpec stanza in a shared Julia log remain separately owned by later migration leaves.
+hash, exercised a copied source/input fixture, and deleted the internal-volume sources. The two global Dart
+active-root records have since been deleted by `.2.3`; a former LinkedSpec stanza in a shared Julia log remains
+separately owned by `.2.4`.
 
 Tracked allocation is broader. The planning scan reported 100 files, including Rust 16; the Rust migration found
 one imported `env::temp_dir()` spelling that the original fully-qualified pattern missed. The corrected initial
@@ -66,8 +71,15 @@ target roots, generated child projects, traces, and a real copied-binary run. Th
 195 locked registry packages and resolves offline. No exact retained Rust-prefixed workspace exists in the old
 temporary roots, so nothing ambiguous was deleted; the shared developer Cargo cache remains untouched and unused.
 
+Dart now has equivalent ongoing protection. `tools/test_dart_project_data_storage.sh` locks all 18 tracked
+`Directory.systemTemp` owners, repository-device managed temp/cache/generated/trace paths, all 47 hosted lockfile
+packages and hashes, and offline resolution. The complete cache moved atomically from its old same-SSD target-era
+location. Only after offline/full-gate use were the two exact shared current/former checkout `active_roots`
+records and their empty shards deleted; residue is zero. Ambiguous shared package payload remains untouched and
+unused by supported workflows.
+
 Cross-volume reads are denied by default. The narrow exception is an explicit caller path or a strictly required
 externally managed executable, system library, device, credential, or OS service. Those are dependencies, not
 project storage, and their exact supported surface is documented and gated. Related facts:
-[[perl-project-data-ssd-storage]], [[rust-project-data-ssd-storage]], [[repository-root-path-portability]], [[rust-local-verification-gate]],
+[[perl-project-data-ssd-storage]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]], [[repository-root-path-portability]], [[rust-local-verification-gate]],
 [[lua-toolchain-package-policy]].

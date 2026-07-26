@@ -18,7 +18,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, cache, temporary-data, environment, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.1 adds ignored /.linkedspec-data with disposable scratch and retained cache children. Sourcing tools/project_data_env.sh derives the checkout from BASH_SOURCE, checks GNU/BSD stat device identity before and after creation, preserves only same-filesystem overrides, and exports temp, Cargo, Dart, and Julia roots. PROJECT-DATA-SSD-ROOTING.1.3 adds LINKEDSPEC_RUNS_ROOT plus the managed-run handoff. PROJECT-DATA-SSD-ROOTING.2.2 populates the default Cargo home with all 195 locked registry packages and adds tools/run_cargo_local.sh for targeted commands. tools/test_project_data_env.sh proves defaults, same-volume overrides, hostile cross-volume replacement, and cleanup."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.1 adds ignored /.linkedspec-data with disposable scratch and retained cache children. Sourcing tools/project_data_env.sh derives the checkout from BASH_SOURCE, checks device identity, preserves only same-filesystem overrides, and exports temp, Cargo, Dart, and Julia roots. .1.3 adds LINKEDSPEC_RUNS_ROOT. PROJECT-DATA-SSD-ROOTING.2.2 populates Cargo for 195 locked packages; .2.3 populates Dart for 47 locked packages and proves Directory.systemTemp follows routed TMPDIR. tools/test_project_data_env.sh proves defaults, same-volume overrides, hostile cross-volume replacement, and cleanup."
 reverify: "bash -n tools/project_data_env.sh tools/test_project_data_env.sh && bash tools/test_project_data_env.sh && git check-ignore .linkedspec-data/probe"
 ---
 
@@ -39,4 +39,4 @@ directory have the same device identity as the repository. An external or invali
 corresponding repo-derived default without creating anything at the rejected destination. The focused test discovers
 an available other-filesystem directory read-only, launches from it, supplies hostile values for every storage
 variable, and proves all final project-owned destinations remain on the repository filesystem. Related facts:
-[[project-data-run-lifecycle]], [[project-data-ssd-storage-locality]], [[rust-project-data-ssd-storage]], [[repository-root-path-portability]].
+[[project-data-run-lifecycle]], [[project-data-ssd-storage-locality]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]], [[repository-root-path-portability]].

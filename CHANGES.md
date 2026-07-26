@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.3 — root Dart workspaces on SSD
+
+Added `tools/test_dart_project_data_storage.sh` as the recurring Dart storage oracle and made the complete Dart
+gate invoke it after package tests. The oracle locks all 18 tracked `Directory.systemTemp` owners, proves the
+managed run/temporary/package/generated/trace paths share the repository filesystem, requires every one of the 47
+hosted lockfile packages and hashes, resolves packages offline, and exercises 17 focused native-trace,
+generated-caller, and trace-control tests. `native_pipeline_trace_test.dart` independently requires the resolved
+system temporary root to equal routed `TMPDIR`. Canonical CI tracks and syntax-checks the new oracle, while the
+outside-cwd routing proof expands from 18 to 19 process boundaries.
+
+Atomically moved the complete warmed SSD Dart cache from its old ignored target-era location into canonical
+`/.linkedspec-data/cache/dart-pub/`; the old source no longer exists. Shared and SSD package payload identity is
+5,903 files / 63,744,165 bytes / hash
+`039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`. Their 47 package-index files differ only
+in volatile `_fetchedAt`; removing that field yields matching canonical JSON hash
+`21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`. After successful canonical offline use
+and the full Dart gate, the two exact shared current/former checkout `active_roots` records and their empty hash
+shards were deleted. Shared active-root residue is zero. Ambiguous multi-project package payload remains untouched
+and supported workflows no longer consult it.
+
+Bash syntax, Dart formatting/strict analysis, the standalone and integrated storage oracles, 337 package tests,
+primary 66/66 in both environments, corpus 105/105, 19-boundary outside-cwd routing, and zero-run cleanup pass.
+Doctrines, Knowledge Map, task/memory/live docs, mdBook, whitespace, and the warranted canonical gate pass.
+Canonical with the default Dart cache records Rust 1/1 in 77.57 seconds, Dart 1/1, Julia 416/416 in 27.1 seconds,
+primary 66x2, and Phase 0 1,031/1,031 in 624 seconds. Push cadence advances to 29/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.2 — root Rust workspaces on SSD
 
 Added `tools/run_cargo_local.sh` as the supported self-rooted, managed boundary for targeted Cargo commands and

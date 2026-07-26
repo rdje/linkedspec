@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.3` — compare cache semantics before deleting exact metadata): Equal
+  package file counts and bytes are not sufficient cache-identity proof. The shared and warmed Dart caches had the
+  same package inventory but different aggregate hashes because 47 registry-index JSON files carried different
+  `_fetchedAt` timestamps. Separating exact immutable package payload (5,903 files / 63,744,165 bytes / one hash)
+  from normalized volatile index metadata (remove only `_fetchedAt`, then one matching hash) proved semantic
+  equivalence without pretending generated timestamps were payload drift.
+
+  Because the complete warmed cache already lived on the repository filesystem, an atomic same-volume move into
+  the canonical root was both safer and cheaper than copying or fetching. The old target-era source disappeared
+  immediately, canonical offline resolution passed, and the retained cache remains reusable. By contrast, the
+  off-SSD shared package payload is ambiguous multi-project state, so matching it did not create deletion
+  authority. Only the two exact current/former LinkedSpec `active_roots` records were owner-proven; those records
+  and their empty hash shards were deleted only after canonical offline and full-gate use.
+
+  Environment variables alone do not prove a language runtime follows them. The shell oracle checks actual device
+  identity for the active run, `TMPDIR`, and `PUB_CACHE`, while a Dart test directly requires
+  `Directory.systemTemp` to equal the routed `TMPDIR`. The same oracle locks all 18 allocator owners, every one of
+  the 47 lockfile packages/hashes, package-config roots, generated caller workspaces, traces, and completed-run
+  cleanup. Full Dart proof is format/analyzer, 337 package tests, primary 66x2, and corpus 105/105.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.2` — dependency caches and filesystem topology require executable
   proof): A populated build target is not a reusable dependency cache. The SSD already held several gigabytes of
   Rust target output, but the new Cargo home held only lock/tag metadata; `cargo fetch --locked --offline` failed at
