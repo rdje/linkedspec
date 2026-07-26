@@ -224,6 +224,10 @@ The Rust primary command follows the same contract at runtime: it searches curre
 ancestry for the bundled-spec marker and falls back to cwd only when neither anchor belongs to a checkout. Thus a
 binary copied beneath a moved repository selects that repository rather than its compile-time source checkout.
 
+Legacy configuration follows the same boundary. Repository-owned defaults are root-relative, executable names are
+resolved through the caller's `PATH`, and external design inputs remain explicit configuration. The audited eight
+legacy config/source owners no longer contain developer-home, private-volume, `/vobs`, or `/dsync` defaults.
+
 ## Documentation Layers
 - `docs/linkedspec-book/`
   - Public-facing book for the world outside the repo.

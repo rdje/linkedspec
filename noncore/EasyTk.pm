@@ -18,7 +18,7 @@ my ($guifile, $topwidget) = splice @_, 0, 2;
  my %crail;
  $crail{config} = tkconfread();
 
- Tkx::lappend("auto_path", "/home/qdjeric/install/lib/Tix8.4.2");
+ # Tix is discovered through the caller-configured Tcl/Tkx package path.
  Tkx::package_require("Tix");
 
  my $gui_data   = TkGui::Get($guifile);

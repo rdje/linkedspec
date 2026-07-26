@@ -15,8 +15,6 @@ tixnotebook nb_tixnotebook (popup popup)
   )
 
   (frame toplevel (pack fill:both) (conf bg:orange width:200 height:300) (tkpopupmenu popup))
-  ;(call   /home/rdje/conf/tcflow/txw)
-  ;(call   /home/rdje/conf/tcflow/txw)
   )  (.topa label:tooooooooooopa)
 
   (tixlistnotebook nb (.hlist selectbackground:blue1 selectforeground:white)
@@ -24,9 +22,6 @@ tixnotebook nb_tixnotebook (popup popup)
    (call   tcflow/txw) 
    (call   tcflow/tcflow)
    ;(call   tcflow/panedw)
-   ;(call   /home/rdje/conf/tcflow/panedw) 
-   ;(call   /home/rdje/conf/tcflow/tcflow)
-   ;(call   /home/rdje/conf/tcflow/txw) 
    (call   quit)
   ) (.nb  label:tixlistnotebook)
 } 

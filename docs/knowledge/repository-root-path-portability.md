@@ -12,12 +12,14 @@ answers:
   - which LinkedSpec primary command failed the relocation audit
   - how does the Rust primary command discover a relocated repository
   - does executable or cwd repository discovery win in Rust
+  - do legacy LinkedSpec configs contain developer home or private mount defaults
+  - how do legacy LinkedSpec configs select external tools and design inputs
   - what did REPO ROOT PATH PORTABILITY 0 discover
-date: 2026-07-25
+date: 2026-07-26
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. ADR 0052 freezes the boundary."
-reverify: "git grep -n -I -F \"$(git rev-parse --show-toplevel)\" -- . ':(exclude)rgx' || true; git ls-files -s | awk '$1 == \"120000\" {print $4}'; rg -n 'CARGO_MANIFEST_DIR|current_exe|_findRepositoryRoot|_primary_cli_repo_root|FindBin|debug.getinfo' bin/linkedspec rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl lua/bin/linkedspec-lua"
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. REPO-ROOT-PATH-PORTABILITY.1.2 removes developer-home/private-mount values from all eight frozen legacy config/source owners: project defaults are relative, tools use PATH, EasyTk package discovery is caller-owned, and network.plg consumes its configured command/input fields. ADR 0052 freezes the boundary."
+reverify: "git grep -n -I -F \"$(git rev-parse --show-toplevel)\" -- . ':(exclude)rgx' || true; git ls-files -s | awk '$1 == \"120000\" {print $4}'; ! rg -n '(/Users/|/home/|/Volumes/|/private/|/vobs(/|$)|/dsync/|[A-Za-z]:\\\\Users\\\\)' conf/fv_check.conf conf/lighttpd.conf conf/network.conf conf/pcsally_mem.conf conf/tkgui.tk noncore/EasyTk.pm noncore/plugin/network.plg perl/env.conf; rg -n 'CARGO_MANIFEST_DIR|current_exe|_findRepositoryRoot|_primary_cli_repo_root|FindBin|debug.getinfo' bin/linkedspec rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl lua/bin/linkedspec-lua"
 ---
 
 ADR `0052` makes checkout relocation a correctness property. Checked-in references to repository-owned files are
@@ -42,9 +44,12 @@ original copied-binary reproduction now exits 0 with exact `"relocated-root"`. `
 oracle.
 
 The same audit found 12 Julia fact-card commands plus four legacy source/config files containing 42 developer-home
-or private-session lines; four legacy config/plugin files contain six `/vobs/` mount values, and one contains a
-`/dsync/` workspace. The derived `KNOWLEDGE_MAP.md` is not a separate source. `.1.2` repairs the exact legacy
-owners; `.1.3` normalizes the fact cards and regenerates the map.
+or private-session lines; four legacy config/plugin files contained six `/vobs/` mount values, and one contained a
+`/dsync/` workspace. `REPO-ROOT-PATH-PORTABILITY.1.2` removes those values from all eight frozen legacy owners.
+Project defaults are relative to the caller-selected root, `perl`/`mktemp`/`enscript`/CGI interpreters use `PATH`,
+EasyTk leaves Tcl/Tkx package discovery to caller configuration, and `network.plg` consumes the existing
+`dc_load_cmd` plus `ddc` fields. Stable external `/usr/bin/csplit` remains explicit OS/tool data. The derived
+`KNOWLEDGE_MAP.md` is not a separate source; `.1.3` normalizes the 12 fact cards and regenerates it.
 
 This doctrine does not ban filesystem absolutes as a data type. Explicit caller paths, neutral path-contract
 fixtures such as `C:/Demo`, redaction-test needles, URLs, `/tmp` scratch, and external `/usr` or `/opt` tools remain

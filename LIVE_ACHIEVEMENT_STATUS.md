@@ -8,13 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.1.2` — from the clean Rust-runtime repair commit, inspect and repair only the eight
-  frozen legacy machine-bound source/config path owners without widening into caller path or OS/tool fixtures.
+- `REPO-ROOT-PATH-PORTABILITY.1.3` — from the clean legacy-path cleanup commit, normalize only the 12 frozen Julia
+  Knowledge Map reverify commands without widening into generated map output or valid caller/OS/tool paths.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.1.2 — remove machine-bound legacy paths**
+  (eight-owner legacy configuration/source repair; closes with this commit).
+
+  **Result:** All eight frozen owners now avoid developer-home, private-volume, `/vobs`, and `/dsync` defaults.
+  Project operands are relative to the caller-selected root; tools use `PATH`; EasyTk leaves Tcl/Tkx package
+  discovery to caller configuration; and `network.plg` consumes `dc_load_cmd` plus `ddc` from its existing config.
+  Stable `/usr/bin/csplit` and valid caller/temp/URL/OS data remain unchanged.
+
+  **Proof:** Exact machine-bound scan is empty; 15 portable-config assertions pass; pplugin returns its expected
+  hash registry with the configured `network` body; five Lispish configs parse; and three relevant Perl syntax
+  checks pass. mdBook, Knowledge Map 706/5,506, 40-line memory, whitespace, and all four doctrines pass. Canonical
+  CI passes Rust semantic 1/1 in 79.39s, Dart 1/1, Julia 416/416 in 28.1s, Perl primary 66x2, and Phase 0
+  1,031/1,031 in 637s. Reusable SSD caches remain; only explicit task scratch/generated book output is cleaned.
+  Push counter is 20/300; no push.
+
 - 2026-07-25: **REPO-ROOT-PATH-PORTABILITY.1.1 — derive Rust checkout at runtime**
   (production runtime root repair; closes with this commit).
 

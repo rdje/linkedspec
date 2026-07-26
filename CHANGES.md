@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.1.2 — remove machine-bound legacy paths
+
+Removed developer-home, private-volume, `/vobs`, and `/dsync` values from the eight exact legacy config/source
+owners frozen by the audit. Repository-owned defaults now resolve relative to the caller-selected design or
+repository root. `perl`, `mktemp`, `enscript`, and lighttpd CGI interpreters are selected through `PATH`; EasyTk
+uses the caller-configured Tcl/Tkx package path; and the legacy network plugin builds its command from the existing
+`dc_load_cmd` and `ddc` fields instead of embedding one private netlist path. Explicit caller/temporary/URL paths
+and stable external `/usr/bin/csplit` remain unchanged.
+
+Focused verification finds zero machine-bound matches across all eight owners and passes 15 exact portable-config
+assertions. The shipped pplugin parser returns the expected hash registry with the repaired `network` body; the
+five multi-form Lispish configs parse through the current parser; and `PPlugin.pm`, `HTTP/FileAccess.pm`, plus
+EasyTk with stubs for its unavailable external GUI packages pass syntax checks. No core parser/runtime behavior or
+cross-backend semantic ledger changes.
+
+The mdBook, Knowledge Map 706 facts/5,506 questions, 40-line memory architecture, all four doctrines, and
+whitespace checks pass. Canonical CI passes Rust semantic admission 1/1 in 79.39 seconds, Dart 1/1, Julia 416/416
+in 28.1 seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 637 seconds. Reusable SSD caches remain; only the
+explicit EasyTk stub and generated mdBook output are removed. Push cadence advances to 20/300; no push occurs.
+
 ## 2026-07-25 — REPO-ROOT-PATH-PORTABILITY.1.1 — derive Rust checkout at runtime
 
 Removed the Rust primary command's compile-time checkout identity. `primary_cli::run` now searches upward from the

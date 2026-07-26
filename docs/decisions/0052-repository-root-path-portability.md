@@ -53,8 +53,9 @@ Those values do not identify repository-owned content and must not be conflated 
 - Moving or renaming a checkout cannot make LinkedSpec use the previous checkout's repository-owned files.
 - Rust primary-command discovery is runtime-rooted as of `REPO-ROOT-PATH-PORTABILITY.1.1`; a copied executable
   beneath a synthetic moved checkout loads that checkout's unique adjacent spec from an outside cwd.
-- Audited legacy developer-home/private-mount values and machine-specific Knowledge Map commands are repaired in
-  separate leaves so production discovery, legacy configuration, and durable documentation remain reviewable.
+- Audited legacy developer-home/private-mount values are removed as of `REPO-ROOT-PATH-PORTABILITY.1.2`: project
+  defaults are relative, tools are selected through `PATH`, and external design inputs use existing configuration
+  fields. Machine-specific Knowledge Map commands remain separately owned by `.1.3`.
 - The checker must be false-positive-safe: rejecting an explicit caller path or `/usr/bin/env` would weaken native
   path contracts rather than improve checkout portability.
 - New checkout-path doctrine work is not complete until both the static tree and a relocated process reproduce.

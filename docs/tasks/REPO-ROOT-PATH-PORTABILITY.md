@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-25` (Rust runtime repair `.1.1` done; legacy path cleanup `.1.2` active)
+- Last updated: `2026-07-26` (legacy path cleanup `.1.2` done; durable Julia command cleanup `.1.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -96,7 +96,7 @@ root because the root may move for many reasons and relocation must not affect t
     generated map, four doctrines, cleanup, commit/brief/clean-tree, 19/300 counter, and no-push state are aligned.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.1.2`
-  Status: `active`
+  Status: `done` (2026-07-26; all eight frozen owners are machine-independent)
   Goal: Remove live developer-home and private-mount values from tracked legacy code/configuration.
   Depends on: `.1.1`
   Acceptance: Repair only the audited live/config owners: `conf/fv_check.conf`, `conf/lighttpd.conf`,
@@ -107,8 +107,25 @@ root because the root may move for many reasons and relocation must not affect t
     gates; update docs/KM/live state; commit, clear the brief, verify clean, and do not push.
   Commit: `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Exact tracked-file scans confirmed the eight frozen owners contained developer-home,
+    private-mount, or private-workspace defaults and comments that could not survive relocation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — The legacy configs persisted one developer's project/tool locations instead
+    of using their existing configuration fields, repo-root-relative operands, or caller-selected `PATH`.
+  - [x] **FIX** — Project inputs/defaults are relative to the caller-selected root, tools use `PATH`, EasyTk leaves
+    Tcl/Tkx package discovery to caller configuration, and `network.plg` consumes `dc_load_cmd` plus `ddc` from
+    `conf/network.conf`; only the eight frozen owners changed.
+  - [x] **ADDRESSED (verified)** — The exact machine-bound scan is empty; 15 portable-config assertions pass;
+    pplugin returns the expected hash registry with the configured network command; all five Lispish configs parse;
+    and `PPlugin.pm`, `HTTP/FileAccess.pm`, and stubbed-external `EasyTk.pm` syntax pass.
+  - [x] **NO REGRESSION** — Stable `/usr/bin/csplit`, temporary/URL/OS paths, caller exact paths, and neutral path
+    fixtures remain untouched; the canonical gate and complete documentation/doctrine checks pass.
+  - [x] **LOCKSTEP** — ADR, Knowledge Map, README, roadmaps, mdBook, task/live/memory/change/development records,
+    commit/brief/clean-tree state, 20/300 counter, and no-push state are aligned; `.1.3` is the next clean frontier.
+
 - ID: `REPO-ROOT-PATH-PORTABILITY.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Make durable Knowledge Map verification commands machine-independent.
   Depends on: `.1.2`
   Acceptance: Normalize the 12 audited Julia fact-card commands so they select `julia` through `PATH`, use
@@ -155,7 +172,7 @@ root because the root may move for many reasons and relocation must not affect t
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.1.2` | `active` | From the clean `.1.1` commit, inspect and repair only the eight frozen legacy source/config path owners. |
+| `REPO-ROOT-PATH-PORTABILITY.1.3` | `active` | From the clean `.1.2` commit, normalize only the 12 frozen Julia Knowledge Map reverify commands. |
 
 ## Decisions
 
@@ -236,13 +253,17 @@ root because the root may move for many reasons and relocation must not affect t
 | 2026-07-25 | `.1.1` | `bash tools/run_rust_local.sh` | PASS; core/runtime unit, integration, corpus, emitted-source, semantic admission, and CLI 66x2 |
 | 2026-07-25 | `.1.1` | mdBook; Knowledge Map; memory architecture; doctrine driver | PASS; KM 706 facts / 5,504 questions; all four doctrines PASS |
 | 2026-07-25 | `.1.1` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 81.72s, Dart 1/1, Julia 416/416 in 29.3s, Perl primary 66x2, Phase 0 1,031/1,031 in 640s |
+| 2026-07-26 | `.1.2` | exact eight-owner scan; 15 assertions; pplugin hash/body; five wrapped Lispish parses; three Perl syntax checks | PASS; 0 machine-bound matches and every configured/relative/PATH contract exact |
+| 2026-07-26 | `.1.2` | mdBook; Knowledge Map; memory architecture; doctrine driver; whitespace | PASS; KM 706 facts / 5,506 questions; all four doctrines PASS |
+| 2026-07-26 | `.1.2` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 79.39s, Dart 1/1, Julia 416/416 in 28.1s, Perl primary 66x2, Phase 0 1,031/1,031 in 637s |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.0` | `9f3e59c2` — `REPO-ROOT-PATH-PORTABILITY.0 - freeze relocation invariant` | Behavior-free ADR/audit/split; no repair or checker behavior. |
-| `.1.1` | `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` (this commit) | Rust runtime-anchor repair; copied-binary RED is green. |
+| `.1.1` | `80cc3383` — `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` | Rust runtime-anchor repair; copied-binary RED is green. |
+| `.1.2` | `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` (this commit) | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
 
 ## Changelog
 
@@ -252,3 +273,5 @@ root because the root may move for many reasons and relocation must not affect t
   recurring relocation oracle are frozen. `.1.1` is active from the clean audit commit.
 - `2026-07-25`: Completed `.1.1`; Rust primary discovery is runtime-rooted, the exact relocation reproduction is
   green, and full Rust/canonical signoff passes. `.1.2` is active from this clean commit.
+- `2026-07-26`: Completed `.1.2`; the eight frozen legacy owners contain no developer-home/private-mount values,
+  focused parser/syntax/config proof and the canonical gate pass, and `.1.3` becomes the clean frontier.

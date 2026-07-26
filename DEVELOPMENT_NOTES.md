@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.1.2` — portable legacy configuration preserves ownership boundaries):
+  Removing a machine path does not mean inventing a new global root. Repository-owned defaults become relative to
+  the documented caller-selected root; external executables become `PATH` tokens; and external design inputs stay
+  in the configuration fields that already own them. The legacy network plugin was the clearest case: replacing
+  its hard-coded command line with `dc_load_cmd` plus `ddc` from `conf/network.conf` restores the existing control
+  plane instead of adding another path-discovery mechanism.
+
+  Verify the consumer shape, not an assumed generic shape. `pplugin.spec` intentionally returns a hash registry of
+  names to source bodies. A first focused probe incorrectly demanded a nonempty array and failed even though the
+  parser had returned the correct `network` entry. Consulting the shipped spec and current phase-zero smoke lock,
+  then dumping the result, localized the verifier error. The corrected proof requires the hash entry and the exact
+  configured command/input text. Five multi-form legacy configs are checked by wrapping their complete text in one
+  Lispish list so one current shipped-parser call validates the complete multi-form file.
+
 - 2026-07-25 (`REPO-ROOT-PATH-PORTABILITY.1.1` — executable ancestry must outrank ambient cwd): A relocatable
   primary command has two legitimate runtime anchors. A binary physically bundled beneath a checkout should load
   that checkout's specs; a separately installed binary may need the checkout containing its cwd. Searching current
