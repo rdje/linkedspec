@@ -10,7 +10,7 @@ date: 2026-07-10
 status: confirmed
 tags: [julia, runtime, match-state, positions, zero-width, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3. Julia stores entry/local registers as Union{Nothing,RuntimeRegexMatch}, so absence is already distinct from a present zero-width match at offset zero. Helper projection maps absence to null capture/length/start/end values, empty group/map containers, numeric match_has=0, and 1-based line/column defaults. Entry/local named-presence helpers return numeric 1/0. A zero-width regression proves a present match at offset zero still returns empty capture text, length/start/end 0, and match_has=1. The governed exact position fixture, 1,022 package assertions, both 61-case CLI environments, and unchanged 99-case corpus pass."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
+reverify: "JULIA_DEPOT_PATH=\"${TMPDIR:-/tmp}/linkedspec-julia-depot:$(julia --startup-file=no --history-file=no -e 'print(join(Base.DEPOT_PATH, \":\"))')\" julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
 # Julia Match Absence Uses Register Nullability

@@ -15,9 +15,9 @@ date: 2026-07-23
 status: current typed capture through native, validated generated-plan, and fresh emitted wrappers; parent composition closed
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.6.1 and .10.6.6.3
-last_verified: 2026-07-23
+last_verified: 2026-07-26
 reverify:
-  - "JULIA_DEPOT_PATH=/private/var/folders/4h/29gg6nrx2pj9wfjkzc460hlr0000gn/T/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_runtime_observation_test.jl\")'"
+  - "JULIA_DEPOT_PATH=\"${TMPDIR:-/tmp}/linkedspec-julia-depot:$(julia --startup-file=no --history-file=no -e 'print(join(Base.DEPOT_PATH, \":\"))')\" julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_runtime_observation_test.jl\")'"
   - "rg -n 'semantic_observation_sink|_record_runtime_regex_slot_selected|_emit_runtime_semantic_rule_result' julia/src/runtime/Interpreter.jl julia/src/source/SourceEmitter.jl"
 ---
 

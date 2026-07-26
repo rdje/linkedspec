@@ -8,13 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.1.3` — from the clean legacy-path cleanup commit, normalize only the 12 frozen Julia
-  Knowledge Map reverify commands without widening into generated map output or valid caller/OS/tool paths.
+- `REPO-ROOT-PATH-PORTABILITY.2.1` — from the clean durable-command repair commit, add the frozen structural
+  repository-path portability doctrine and mutation-sensitive self-tests without widening into process-oracle `.2.2`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.1.3 — normalize durable reverify paths**
+  (12-card Julia durable-command repair; closes with this commit).
+
+  **Result:** All 12 audited commands select `julia` through `PATH`, use repository-root-relative project/test
+  operands, and layer caller-writable temporary depots over Julia's runtime defaults without persisting an expanded
+  home/session path. Three direct semantic-query commands now define their shared `REPO_ROOT` harness constant.
+
+  **Proof:** Exact scan is empty; the complete Julia local gate passes; one direct 12-suite semantic bundle passes
+  1,337 assertions; and semantic/cursor/root governance remains 6/20/89, 8/0/60, and 7/0/54. mdBook, Knowledge
+  Map 706/5,509, 41-line memory, whitespace, and all four doctrines pass. Canonical CI passes Rust semantic 1/1
+  in 79.65s, Dart 1/1, Julia 416/416 in 29.5s, Perl primary 66x2, and Phase 0 1,031/1,031 in 647s. Reusable SSD
+  caches remain; only generated book/bytecode output is removed. Push counter is 21/300; no push.
+
 - 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.1.2 — remove machine-bound legacy paths**
   (eight-owner legacy configuration/source repair; closes with this commit).
 

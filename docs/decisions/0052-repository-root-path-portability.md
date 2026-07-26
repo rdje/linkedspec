@@ -1,7 +1,7 @@
 # ADR 0052: Repository-owned paths are relocation-safe
 
 - Date: 2026-07-25
-- Status: accepted; remediation and enforcement in progress
+- Status: accepted; remediation complete, enforcement in progress
 - Tags: architecture, paths, repository-root, relocation, portability, doctrine, tooling, cli
 
 ## Context
@@ -55,7 +55,9 @@ Those values do not identify repository-owned content and must not be conflated 
   beneath a synthetic moved checkout loads that checkout's unique adjacent spec from an outside cwd.
 - Audited legacy developer-home/private-mount values are removed as of `REPO-ROOT-PATH-PORTABILITY.1.2`: project
   defaults are relative, tools are selected through `PATH`, and external design inputs use existing configuration
-  fields. Machine-specific Knowledge Map commands remain separately owned by `.1.3`.
+  fields. The 12 durable Julia Knowledge Map commands are machine-independent as of `.1.3`: Julia is selected
+  through `PATH`, repository operands stay relative, and writable depots compose runtime defaults without storing
+  an expanded developer home or private session directory.
 - The checker must be false-positive-safe: rejecting an explicit caller path or `/usr/bin/env` would weaken native
   path contracts rather than improve checkout portability.
 - New checkout-path doctrine work is not complete until both the static tree and a relocated process reproduce.

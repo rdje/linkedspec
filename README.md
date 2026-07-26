@@ -228,6 +228,11 @@ Legacy configuration follows the same boundary. Repository-owned defaults are ro
 resolved through the caller's `PATH`, and external design inputs remain explicit configuration. The audited eight
 legacy config/source owners no longer contain developer-home, private-volume, `/vobs`, or `/dsync` defaults.
 
+Durable Julia verification commands are portable too. All 12 audited Knowledge Map commands select `julia` through
+`PATH`, keep project and test operands relative to this repository root, and build writable depot stacks from
+caller `TMPDIR` plus Julia's runtime defaults. No expanded developer home or private session directory is stored.
+Remediation `.1` is complete; structural enforcement `.2.1` is the active portability leaf.
+
 ## Documentation Layers
 - `docs/linkedspec-book/`
   - Public-facing book for the world outside the repo.

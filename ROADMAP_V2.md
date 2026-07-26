@@ -15,8 +15,9 @@ literals, 0 symlinks, 25/27 self-rooted shell/hook files plus 2 root-independent
 Julia/Lua named-spec probes. Rust `.1.1` replaces the exact production RED with current-executable then cwd marker
 discovery; its copied-binary moved-root reproduction and complete signoff are green. The eight frozen legacy
 config/source owners `.1.2` are complete with relative project defaults, PATH-selected tools, and configured
-network command/input ownership. Ordered work is completed `.1.1-.1.2`, active `.1.3` 12 Julia fact-card commands,
-`.2.1` structural doctrine, and `.2.2` recurring copied-binary relocation proof/closeout. Explicit caller
+network command/input ownership. The 12 Julia fact-card commands `.1.3` are also complete with PATH-selected Julia,
+root-relative operands, and runtime-composed caller-writable depots. Ordered remediation `.1.1-.1.3` is complete;
+active `.2.1` structural doctrine precedes `.2.2` recurring copied-binary relocation proof/closeout. Explicit caller
 paths and OS/tool/temp data remain valid; they are not checkout identity.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.

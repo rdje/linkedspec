@@ -657,6 +657,13 @@ network plugin reads both its executable and design input from `conf/network.con
 caller-owned; and no audited owner retains developer-home, private-volume, `/vobs`, or `/dsync` defaults. Explicit
 external paths such as the stable `/usr/bin/csplit` tool remain legal under the boundary above.
 
+The 12 audited Julia Knowledge Map reverify commands are portable as well. They select `julia` through `PATH`,
+keep `--project=julia` and test paths relative to the repository root, and prepend a caller-writable
+`${TMPDIR:-/tmp}` depot to Julia's runtime default depot list. Do not replace that explicit composition with a
+trailing empty depot entry: Julia expands the empty entry to system depots but omits the user package depot, which
+can turn an offline reverify into an attempted registry download. Direct semantic-query commands define
+`REPO_ROOT=pwd()` because their included shared fixtures require that root-relative harness context.
+
 Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
 Compiled debug information may also record source locations, so searching binary strings is not a relocation
 oracle. The recurring proof executes a freshly copied command beneath a synthetic moved root and requires it to

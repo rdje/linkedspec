@@ -19,9 +19,10 @@ and Lua named-spec commands pass from outside the checkout. Rust runtime discove
 primary CLI now searches current-executable then cwd ancestry for the bundled-spec marker, and the copied-binary
 relocation reproduction is green instead of using compile-time `CARGO_MANIFEST_DIR`. The eight exact legacy
 config/source owners `.1.2` are also complete: project defaults are relative, tools use `PATH`, and the legacy
-network plugin consumes its existing configured command/input fields. Dependency order is now completed Rust
-`.1.1`, completed legacy cleanup `.1.2`, active 12-command Julia Knowledge Map cleanup `.1.3`, structural doctrine
-`.2.1`, and copied-binary relocation oracle/final closeout `.2.2`. Caller-owned absolute input paths,
+network plugin consumes its existing configured command/input fields. All 12 Julia Knowledge Map commands `.1.3`
+are now portable: Julia is selected through `PATH`, repository operands are relative, and writable temporary
+depots compose runtime defaults without storing expanded machine paths. Remediation `.1.1-.1.3` is complete;
+active structural doctrine `.2.1` precedes copied-binary relocation oracle/final closeout `.2.2`. Caller-owned absolute input paths,
 temporary paths, URLs, and external OS/tool paths remain legal and may not be misclassified as repository identity.
 
 Semantic-introspection neutral contract (2026-07-20): ADRs `0049`/`0050` and

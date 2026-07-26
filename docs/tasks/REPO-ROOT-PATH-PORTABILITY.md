@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-26` (legacy path cleanup `.1.2` done; durable Julia command cleanup `.1.3` active)
+- Last updated: `2026-07-26` (durable Julia command cleanup `.1.3` done; structural doctrine `.2.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -60,7 +60,7 @@ root because the root may move for many reasons and relocation must not affect t
     Knowledge Map, memory/task/four doctrines, canonical CI, cleanup, and diff; commit cleanly without pushing.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.1`
-  Status: `active`
+  Status: `done` (2026-07-26; all admitted machine-coupled project paths are repaired)
   Goal: Replace every admitted checkout-specific or machine-coupled project path with portable resolution.
   Depends on: `.0`
   Children: `.1.1`, `.1.2`, `.1.3`
@@ -125,7 +125,7 @@ root because the root may move for many reasons and relocation must not affect t
     commit/brief/clean-tree state, 20/300 counter, and no-push state are aligned; `.1.3` is the next clean frontier.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.1.3`
-  Status: `active`
+  Status: `done` (2026-07-26; all 12 durable Julia commands are machine-independent)
   Goal: Make durable Knowledge Map verification commands machine-independent.
   Depends on: `.1.2`
   Acceptance: Normalize the 12 audited Julia fact-card commands so they select `julia` through `PATH`, use
@@ -135,14 +135,31 @@ root because the root may move for many reasons and relocation must not affect t
     clear the brief, verify clean, and do not push.
   Commit: `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths`
 
+  #### Acceptance Checklist
+
+  - [x] **EXACT OWNERSHIP** — Changed only the 12 audited Julia fact-card commands plus their mechanically derived
+    `KNOWLEDGE_MAP.md`; valid caller paths, OS/tool paths, and unrelated fact cards remain unchanged.
+  - [x] **PORTABLE COMMANDS** — Every command selects `julia` through `PATH`, uses root-relative `--project=julia`
+    and test paths, and places its writable depot below caller `TMPDIR` (or the external `/tmp` fallback).
+  - [x] **COMPLETE DEPOT STACK** — Commands append Julia's runtime `Base.DEPOT_PATH` explicitly. A trailing empty
+    depot entry was rejected because Julia expands it to system depots only, omitting the user package depot and
+    forcing an offline registry download; no concrete expanded path is persisted.
+  - [x] **DIRECT HARNESS CONTEXT** — The three semantic-query commands define root-relative `REPO_ROOT=pwd()`
+    before including tests whose shared fixtures require that harness constant.
+  - [x] **ADDRESSED / NO REGRESSION** — Exact scan finds zero former Julia binary, developer-home, or private-
+    session paths. The complete Julia local gate, 1,337-assertion direct semantic bundle, semantic/cursor/root
+    contract checks, Knowledge Map, mdBook, doctrines, and canonical gate pass.
+  - [x] **LOCKSTEP** — ADR, Knowledge Map, README, roadmaps, mdBook, task/live/memory/change/development records,
+    commit/brief/clean-tree state, 21/300 counter, and no-push state align; `.2.1` is the next clean frontier.
+
 - ID: `REPO-ROOT-PATH-PORTABILITY.2`
-  Status: `pending`
+  Status: `active`
   Goal: Mechanically prevent checkout-specific repository paths from returning.
   Depends on: `.1.3`
   Children: `.2.1`, `.2.2`
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Add the fast structural repository-path portability doctrine.
   Depends on: `.1.3`
   Acceptance: Add one deterministic, read-only `scripts/check_repo_root_path_portability.sh` which derives its own
@@ -172,7 +189,7 @@ root because the root may move for many reasons and relocation must not affect t
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.1.3` | `active` | From the clean `.1.2` commit, normalize only the 12 frozen Julia Knowledge Map reverify commands. |
+| `REPO-ROOT-PATH-PORTABILITY.2.1` | `active` | From the clean `.1.3` commit, add the frozen structural portability doctrine and mutation-sensitive self-tests. |
 
 ## Decisions
 
@@ -215,6 +232,9 @@ root because the root may move for many reasons and relocation must not affect t
   the current executable first, then from cwd, for `specs/user_function_definition.spec`, and falls back to cwd
   when neither anchor belongs to a checkout. Executable precedence keeps a bundled command attached to its own
   moved tree; cwd discovery still supports a separately installed command invoked within a checkout.
+- `.1.3` makes all 12 durable Julia reverify commands machine-independent. Each selects `julia` from `PATH`, keeps
+  project/test operands relative to the repository root, and composes writable temporary depot storage with the
+  runtime default depot list without persisting any expanded machine path.
 - Sixteen source files contain 42 developer-home/private-session command or configuration lines: 12 Julia
   Knowledge Map fact cards plus `conf/lighttpd.conf`, `conf/tkgui.tk`, `noncore/EasyTk.pm`, and `perl/env.conf`.
   `KNOWLEDGE_MAP.md` repeats these mechanically and is not a separate repair owner. Four legacy config/plugin files
@@ -256,6 +276,10 @@ root because the root may move for many reasons and relocation must not affect t
 | 2026-07-26 | `.1.2` | exact eight-owner scan; 15 assertions; pplugin hash/body; five wrapped Lispish parses; three Perl syntax checks | PASS; 0 machine-bound matches and every configured/relative/PATH contract exact |
 | 2026-07-26 | `.1.2` | mdBook; Knowledge Map; memory architecture; doctrine driver; whitespace | PASS; KM 706 facts / 5,506 questions; all four doctrines PASS |
 | 2026-07-26 | `.1.2` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 79.39s, Dart 1/1, Julia 416/416 in 28.1s, Perl primary 66x2, Phase 0 1,031/1,031 in 637s |
+| 2026-07-26 | `.1.3` | exact 12-card machine-path scan; generated Knowledge Map | PASS; 0 former binary/home/private-session matches; KM 706 facts / 5,509 questions |
+| 2026-07-26 | `.1.3` | full Julia local gate; direct 12-suite semantic bundle; semantic/cursor/root governance | PASS; package/primary/corpus complete; direct 1,337 assertions; semantic 6/20/89, cursor 8/0/60, root 7/0/54 |
+| 2026-07-26 | `.1.3` | mdBook; Knowledge Map; memory architecture; doctrine driver; whitespace | PASS; all four doctrines PASS |
+| 2026-07-26 | `.1.3` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 79.65s, Dart 1/1, Julia 416/416 in 29.5s, Perl primary 66x2, Phase 0 1,031/1,031 in 647s |
 
 ## Commit Log
 
@@ -263,7 +287,8 @@ root because the root may move for many reasons and relocation must not affect t
 | --- | --- | --- |
 | `.0` | `9f3e59c2` — `REPO-ROOT-PATH-PORTABILITY.0 - freeze relocation invariant` | Behavior-free ADR/audit/split; no repair or checker behavior. |
 | `.1.1` | `80cc3383` — `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` | Rust runtime-anchor repair; copied-binary RED is green. |
-| `.1.2` | `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` (this commit) | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
+| `.1.2` | `507fc72e` — `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
+| `.1.3` | `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths` (this commit) | Twelve Julia fact-card commands now use runtime-composed portable roots and depots. |
 
 ## Changelog
 
@@ -275,3 +300,5 @@ root because the root may move for many reasons and relocation must not affect t
   green, and full Rust/canonical signoff passes. `.1.2` is active from this clean commit.
 - `2026-07-26`: Completed `.1.2`; the eight frozen legacy owners contain no developer-home/private-mount values,
   focused parser/syntax/config proof and the canonical gate pass, and `.1.3` becomes the clean frontier.
+- `2026-07-26`: Completed `.1.3`; all 12 Julia fact-card commands are machine-independent, their complete grouped
+  proof passes, the derived map is synchronized, remediation `.1` closes, and `.2.1` becomes the clean frontier.

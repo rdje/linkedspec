@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.1.3 — normalize durable reverify paths
+
+Normalized the 12 exact Julia Knowledge Map commands frozen by the relocation audit. Every command now selects
+`julia` through caller `PATH`, uses root-relative `--project=julia` and test operands, and places its writable depot
+below caller `${TMPDIR:-/tmp}`. Julia's runtime `Base.DEPOT_PATH` is composed dynamically, so installed packages
+remain discoverable without persisting a developer home or private macOS session directory. The three direct
+semantic-query commands now define `REPO_ROOT=pwd()` before including shared fixtures that require it. The derived
+`KNOWLEDGE_MAP.md` was regenerated from the cards rather than edited by hand.
+
+Focused proof finds zero historical Julia binary, developer-home, private-session, or private-temporary depot
+paths in the exact 12 owners. The complete Julia local gate passes package, primary, and corpus execution. One
+direct semantic bundle passes all 12 affected suites and 1,337 assertions; semantic governance remains exact at
+6 groups / 20 answers / 89 mutations, cursor at 8 complete / 0 pending / 60 mutations, and root at 7/0/54. No
+runtime, parser, fixture, API, generated format, rollout, admission, or cross-backend behavior changes.
+
+The mdBook, Knowledge Map 706 facts/5,509 questions, 41-line memory architecture, all four doctrines, and
+whitespace pass. Canonical CI passes Rust semantic admission 1/1 in 79.65 seconds, Dart 1/1, Julia 416/416 in
+29.5 seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 647 seconds. Reusable SSD caches remain; only generated
+mdBook/bytecode output is removed. Push cadence advances to 21/300; no push occurs.
+
 ## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.1.2 — remove machine-bound legacy paths
 
 Removed developer-home, private-volume, `/vobs`, and `/dsync` values from the eight exact legacy config/source

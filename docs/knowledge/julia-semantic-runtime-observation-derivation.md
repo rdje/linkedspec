@@ -17,9 +17,9 @@ date: 2026-07-23
 status: current immutable observed-index derivation; generated/emitted propagation and parent composition complete
 tags: [julia, semantic-introspection, runtime, observation, query, immutability, topology]
 evidence: julia/src/semantic/SemanticRuntimeProjection.jl; julia/src/semantic/SemanticCompilationOutcome.jl; julia/src/semantic/SemanticIndex.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_projection_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.2
-last_verified: 2026-07-23
+last_verified: 2026-07-26
 reverify:
-  - "JULIA_DEPOT_PATH=/private/var/folders/4h/29gg6nrx2pj9wfjkzc460hlr0000gn/T/linkedspec-julia-depot:/Users/richarddje/.julia /opt/homebrew/bin/julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_runtime_observation_test.jl\"); include(\"julia/test/semantic_index_runtime_projection_test.jl\")'"
+  - "JULIA_DEPOT_PATH=\"${TMPDIR:-/tmp}/linkedspec-julia-depot:$(julia --startup-file=no --history-file=no -e 'print(join(Base.DEPOT_PATH, \":\"))')\" julia --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/semantic_index_runtime_observation_test.jl\"); include(\"julia/test/semantic_index_runtime_projection_test.jl\")'"
   - "rg -n 'with_execution_observation|_build_semantic_runtime_projection|observed_as|semantic_index_invalid_observation' julia/src/semantic/SemanticRuntimeProjection.jl julia/test/semantic_index_runtime_projection_test.jl"
 ---
 

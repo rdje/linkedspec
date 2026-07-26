@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.1.3` — a writable Julia depot must preserve package discovery): A
+  portable verifier cannot persist one developer's Julia binary, home depot, or private macOS session directory.
+  Selecting `julia` through `PATH`, keeping `--project=julia` and tests root-relative, and putting the writable
+  layer below caller `${TMPDIR:-/tmp}` removes those identities. The writable layer still has to compose Julia's
+  runtime `Base.DEPOT_PATH`; a trailing empty `JULIA_DEPOT_PATH` entry expands only to system depots, omits the
+  user package depot, and caused an offline attempt to download the General registry. Runtime composition reuses
+  installed packages without checking any expanded machine path into the repository.
+
+  A durable reverify command is a complete test harness, not merely an interpreter invocation. The three semantic-
+  query commands included static fixture files that consume `REPO_ROOT`, but the historical commands did not
+  define it. Their direct grouped proof reached source and compilation suites, then failed at the static graph
+  include with `UndefVarError: REPO_ROOT not defined`. Defining `const REPO_ROOT=pwd()` repaired the verifier and
+  preserves the documented run-from-repository-root contract. The resulting 12-suite bundle passes 1,337
+  assertions; this was a command defect, not a Julia implementation regression.
+
 - 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.1.2` — portable legacy configuration preserves ownership boundaries):
   Removing a machine path does not mean inventing a new global root. Repository-owned defaults become relative to
   the documented caller-selected root; external executables become `PATH` tokens; and external design inputs stay
