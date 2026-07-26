@@ -210,6 +210,16 @@ LinkedSpec is a progressive extraction parser DSL for fast parser prototyping wi
 
 This `README.md` is the **single entry point** to the project.
 
+## Repository relocation invariant
+
+The checkout may be moved, renamed, copied, or restored on another volume without changing project behavior.
+Every persisted reference to repository-owned content is relative to the repository root. Runtime code that needs
+an absolute path derives the current root from its executing script/module/executable or accepts an explicit
+caller root; a developer home, mount point, concrete checkout, or compile-time build directory is never project
+identity. Explicit caller paths, temporary directories, URLs, and external OS/tool paths remain valid data, but
+they may not be used to infer or persist the checkout. ADR `0052` is the durable contract and
+`docs/tasks/REPO-ROOT-PATH-PORTABILITY.md` owns the audited remediation/enforcement rollout.
+
 ## Documentation Layers
 - `docs/linkedspec-book/`
   - Public-facing book for the world outside the repo.

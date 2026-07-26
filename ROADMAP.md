@@ -10,6 +10,18 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
+`REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool
+roots must be derived from their current executable/module/script rather than a developer checkout or build
+directory. Completed behavior-free audit `.0` finds zero tracked current/former checkout literals and zero tracked
+symlinks; 25/27 shell/hook files self-root while two generic hooks access no repository content. Perl, Dart, Julia,
+and Lua named-spec
+commands pass from outside the checkout. Rust alone reproduces a relocation defect because the shipped primary CLI
+uses compile-time `CARGO_MANIFEST_DIR`. Dependency order is frozen: Rust runtime discovery `.1.1`, eight exact
+legacy config/source owners `.1.2`, 12 Julia Knowledge Map commands `.1.3`, structural doctrine `.2.1`, and copied-
+binary relocation oracle/final closeout `.2.2`; Rust repair `.1.1` is active. Caller-owned absolute input paths,
+temporary paths, URLs, and external OS/tool paths remain legal and may not be misclassified as repository identity.
+
 Semantic-introspection neutral contract (2026-07-20): ADRs `0049`/`0050` and
 `FUTURE-PARITY-BACKLOG.10.2` make
 `linkedspec-semantic-model-v1` plus `linkedspec-semantic-query-v1` before implementation. One immutable native

@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-25 — REPO-ROOT-PATH-PORTABILITY.0 — freeze relocation invariant
+
+Adopted ADR `0052`: moving, renaming, copying, or restoring the checkout must not change LinkedSpec behavior.
+Persisted references to repository-owned content are repo-root-relative; runtime absolute paths are derived only
+from the current script/module/executable or an explicit caller root. Explicit caller paths, temporary paths, URLs,
+and external OS/tool paths remain valid data but cannot become checkout identity. README, both roadmaps, the
+mdBook, task index/tree, decision index, Knowledge Map, and live continuity now share that exact boundary.
+
+The behavior-free audit found zero tracked literals of the current SSD checkout or former `Documents/github`
+shape, zero tracked symlinks, and 25/27 shell/hook files deriving their root; the remaining two use no repository
+content. Perl, Dart, Julia, and Lua named-Lispish commands pass from `/private/tmp`. One production defect was
+reproduced: a copied Rust primary binary beneath a synthetic moved root exits 1 because
+`rust/linkedspec-runtime/src/primary_cli.rs` uses compile-time `CARGO_MANIFEST_DIR` and searches the original build
+checkout. The exact fix is isolated in `.1.1`.
+
+The remaining machine-bound census is split rather than repaired here: eight exact legacy code/config owners in
+`.1.2`, 12 Julia Knowledge Map command cards in `.1.3`, a self-testing structural doctrine in `.2.1`, and a
+recurring copied-binary process oracle/final closeout in `.2.2`. No production, test, fixture, config, or checker
+behavior changed in `.0`.
+
+Verification passes mdBook, Knowledge Map 706 facts/5,502 questions, memory architecture, and all four existing
+doctrines. Canonical CI passes Rust semantic admission 1/1 in 80.16 seconds, Dart 1/1, Julia 416/416 in 28.3
+seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 653 seconds. Reusable 4-TB SSD caches remain; only explicit
+audit scratch is removed after its evidence is durable. Push cadence advances to 18/300; no push occurs.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.2.0 — reconcile Lua semantic source ceiling
 
 Corrected a behavior-free contract mismatch before implementing the remaining Lua semantic static targets. ADR

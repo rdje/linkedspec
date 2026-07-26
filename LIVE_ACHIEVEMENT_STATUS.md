@@ -8,13 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.2.1` — from the clean ceiling-boundary correction, implement exact privacy text/
-  identity, failed, runtime-static, repeated-lifecycle, clone, and host/no-execution isolation targets.
+- `REPO-ROOT-PATH-PORTABILITY.1.1` — from the clean relocation-audit commit, replace only the Rust primary CLI's
+  compile-time checkout discovery with current cwd/executable anchor search and turn the copied-binary RED green.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **REPO-ROOT-PATH-PORTABILITY.0 — freeze relocation invariant**
+  (critical behavior-free ADR/audit/split; closes with this commit).
+
+  **Result:** ADR `0052` now guarantees repository relocation: persisted repository-content paths are root-relative,
+  and runtime roots come only from the current script/module/executable or an explicit caller root. The audit found
+  0 tracked current/former checkout literals, 0 symlinks, and 25/27 self-rooted shell/hook files plus 2 root-
+  independent wrappers. Perl/Dart/Julia/Lua named-Lispish commands succeed from `/private/tmp`. A copied Rust
+  binary beneath a synthetic moved root reproduces exit 1 because `primary_cli::run` bakes compile-time
+  `CARGO_MANIFEST_DIR`. Exact Rust/config/KM/doctrine/oracle work is dependency-split across `.1.1-.2.2`; no
+  production, test, fixture, config, or checker behavior changes in `.0`.
+
+  **Proof:** mdBook, Knowledge Map 706/5,502, memory architecture, and four doctrines pass. Canonical CI passes
+  Rust semantic 1/1 in 80.16s, Dart 1/1, Julia 416/416 in 28.3s, Perl primary 66x2, and Phase 0 1,031/1,031 in
+  653s. Reusable SSD caches remain; only explicit audit scratch is cleaned. Push counter is 18/300; no push.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.2.0 — reconcile Lua semantic source ceiling**
   (behavior-free private-retention/outward-redaction boundary correction; closes with this commit).
 

@@ -62,6 +62,7 @@ changed* lives in git (layer D), not here.
 | [0049](0049-versioned-semantic-introspection-model-and-thin-mcp.md) | Semantic introspection uses one versioned native model and a thin MCP transport | 2026-07-20 | accepted; neutral oracle corrected/cross-gated; Perl and Rust admitted | architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity |
 | [0050](0050-semantic-introspection-staged-artifact-records.md) | Semantic introspection names staged payloads, jobs, and results explicitly | 2026-07-20 | accepted correction; neutral contract executable; backend rollout pending | architecture, introspection, semantic-api, staged-parsing, provenance, schema, portability, parity |
 | [0051](0051-unicode-17-xid-continue-rule-labels.md) | Rule labels use pinned Unicode 17 XID_Continue scalars | 2026-07-21 | accepted; Rust implemented | architecture, grammar, unicode, identifiers, rust, validation, generated-data, portability, parity |
+| [0052](0052-repository-root-path-portability.md) | Repository-owned paths are relocation-safe | 2026-07-25 | accepted; remediation and enforcement in progress | architecture, paths, repository-root, relocation, portability, doctrine, tooling, cli |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

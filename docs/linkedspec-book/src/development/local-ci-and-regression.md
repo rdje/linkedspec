@@ -627,6 +627,33 @@ perl -c -Iperl t/phase0_regression.t
 prove -v -Iperl t/phase0_regression.t
 ```
 
+## Repository relocation and path discipline
+
+The repository root is deliberately movable. You may rename the checkout, copy it to another volume, or restore it
+under another user without rewriting a project path. Persisted references to repository-owned content therefore
+use paths relative to the repository root. A script, module, or executable that needs an absolute path computes it
+from its own current location (or from an explicit caller root) and keeps that absolute value only at runtime.
+
+This rule is narrower and stronger than banning absolute paths as a data type. These remain valid:
+
+- an explicit caller request such as `/tmp/input.spec` or `C:/Demo`;
+- a caller-owned temporary directory;
+- an external interpreter or tool under `/usr` or `/opt`;
+- a URL or a test needle that proves private paths do not escape.
+
+None of those values may become an implicit repository root. In particular, a compiled-in build directory is not
+a valid locator for shipped specs: after moving a binary, it would silently search the old checkout. ADR `0052`
+defines this contract. `REPO-ROOT-PATH-PORTABILITY` is landing it in dependency order: runtime repair, exact legacy
+path cleanup, durable-command cleanup, a fast structural doctrine, then a recurring copied-binary relocation
+oracle. The 2026-07-25 audit found no tracked current/former checkout literal and no tracked symlink. Perl, Dart,
+Julia, and Lua already pass named-spec process probes from outside the checkout; Rust's primary command is the one
+confirmed pre-remediation exception because it uses its compile-time Cargo manifest directory.
+
+Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
+Compiled debug information may also record source locations, so searching binary strings is not a relocation
+oracle. The recurring proof executes a freshly copied command beneath a synthetic moved root and requires it to
+load that root's unique spec.
+
 ## CI input areas
 
 The local gate treats these as CI inputs:

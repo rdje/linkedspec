@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`REPO-ROOT-PATH-PORTABILITY.0` — relocation is about identity, not banning absolute path values):
+  ADR `0052` separates three concepts that path scans often conflate. A checked-in reference to repository-owned
+  content is durable identity and must be root-relative. An absolute path computed from the current executable,
+  module, or script is ephemeral runtime state and is safe. An explicit caller path, temporary directory, URL, or
+  external OS/tool location is input/environment data and remains legal. A checker that rejects the latter would
+  break the native exact-path contract rather than protect relocation.
+
+  The reliable audit is behavioral. Binary strings cannot prove relocation because compiler debug information may
+  legitimately retain source locations. Rust exposed the real defect through a copied-binary experiment: place the
+  built primary command below a synthetic moved root with a unique adjacent named spec, launch it from outside both
+  trees, and observe `parser compilation failed`. Source inspection then located the mechanism exactly at
+  `env!("CARGO_MANIFEST_DIR")` in `primary_cli::run`; the binary searches the compile-time checkout. Perl/Dart/
+  Julia/Lua process probes from an outside cwd succeed because their runtime anchors are current file locations.
+
+  Freeze the boundary before repair. `.1.1` changes only Rust root discovery; `.1.2` handles the eight audited
+  legacy config/source owners; `.1.3` normalizes 12 durable Julia reverify commands; `.2.1` installs the fast
+  mutation-sensitive doctrine; `.2.2` adds the recurring copied-binary oracle. This order prevents a broad path
+  cleanup from hiding the causal runtime bug and gives every false-positive class an explicit owner.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.2.0` — source ceilings are an outward projection policy): The
   neutral `privacy_limited` construction oracle carries complete private source references even though its
   snapshot ceiling is `identity`. That is deliberate. ADR `0049` says limits apply before records leave the
