@@ -10,11 +10,13 @@ answers:
   - are usr opt and tmp paths repository path violations
   - do ignored build caches have to be free of absolute paths
   - which LinkedSpec primary command failed the relocation audit
+  - how does the Rust primary command discover a relocated repository
+  - does executable or cwd repository discovery win in Rust
   - what did REPO ROOT PATH PORTABILITY 0 discover
 date: 2026-07-25
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 audited tracked text, modes, 27 shell/hook files, five primary commands, and outside-cwd process behavior. It found zero current/former checkout literals and zero tracked symlinks; Perl/Dart/Julia/Lua named-Lispish probes pass from /private/tmp, while a copied Rust binary under a synthetic moved tree exits 1 because rust/linkedspec-runtime/src/primary_cli.rs uses compile-time CARGO_MANIFEST_DIR. ADR 0052 freezes the boundary."
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. ADR 0052 freezes the boundary."
 reverify: "git grep -n -I -F \"$(git rev-parse --show-toplevel)\" -- . ':(exclude)rgx' || true; git ls-files -s | awk '$1 == \"120000\" {print $4}'; rg -n 'CARGO_MANIFEST_DIR|current_exe|_findRepositoryRoot|_primary_cli_repo_root|FindBin|debug.getinfo' bin/linkedspec rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl lua/bin/linkedspec-lua"
 ---
 
@@ -29,11 +31,15 @@ Perl uses `FindBin`, Dart ascends from cwd and `Platform.script`, Julia joins fr
 `debug.getinfo`. Named-Lispish commands launched outside the checkout returned exact
 `["hello",["world"]]` on all four.
 
-Rust is the confirmed exception. `rust/linkedspec-runtime/src/primary_cli.rs` constructs the repository root from
+Rust was the confirmed exception. `rust/linkedspec-runtime/src/primary_cli.rs` constructed the repository root from
 `env!("CARGO_MANIFEST_DIR")`. Copying the built executable beneath a synthetic moved tree, adding a unique adjacent
 named spec, and launching from outside both trees reproduced exit 1 with `parser compilation failed`: the binary
-looked back into its compile-time checkout. `REPO-ROOT-PATH-PORTABILITY.1.1` owns runtime-anchor repair, and `.2.2`
-owns the recurring copied-binary oracle.
+looked back into its compile-time checkout. `REPO-ROOT-PATH-PORTABILITY.1.1` replaced that mechanism: `run` now
+searches upward from the current executable for the checked-in `specs/user_function_definition.spec` marker, then
+searches cwd ancestry, then deterministically falls back to cwd. Executable precedence keeps a bundled command
+attached to its own relocated tree; cwd ancestry supports an installed command invoked within a checkout. The
+original copied-binary reproduction now exits 0 with exact `"relocated-root"`. `.2.2` owns the recurring process
+oracle.
 
 The same audit found 12 Julia fact-card commands plus four legacy source/config files containing 42 developer-home
 or private-session lines; four legacy config/plugin files contain six `/vobs/` mount values, and one contains a

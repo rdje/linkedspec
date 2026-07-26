@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-25` (audit `.0` complete; Rust runtime repair `.1.1` is next)
+- Last updated: `2026-07-25` (Rust runtime repair `.1.1` done; legacy path cleanup `.1.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -66,7 +66,7 @@ root because the root may move for many reasons and relocation must not affect t
   Children: `.1.1`, `.1.2`, `.1.3`
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Remove the Rust primary CLI's compile-time checkout identity.
   Depends on: `.0`
   Acceptance: Replace `env!("CARGO_MANIFEST_DIR")` repository discovery in the shipped Rust primary command
@@ -77,8 +77,26 @@ root because the root may move for many reasons and relocation must not affect t
     gates; commit, clear the brief, verify clean, and do not push.
   Commit: `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — The `.0` copied-binary probe placed the current Rust command beneath a synthetic
+    moved root with a unique adjacent spec, launched from outside, and reproduced exit 1
+    `parser compilation failed` instead of the moved-root value.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `TOOLBOX.md`-guided source inspection localized the failure to
+    `rust/linkedspec-runtime/src/primary_cli.rs::run`: production `env!("CARGO_MANIFEST_DIR")` preserved the
+    compiler's checkout and bypassed both runtime anchors.
+  - [x] **FIX** — `primary_cli::run` now searches current-executable ancestry first, then cwd ancestry, using the
+    bundled user-function spec as the marker and cwd as the no-marker fallback; no production compile-time root
+    identity remains.
+  - [x] **ADDRESSED (verified)** — The exact copied-binary probe now exits 0 with `"relocated-root"`; focused unit
+    coverage locks executable/cwd/fallback anchors, and all seven primary-CLI unit tests pass.
+  - [x] **NO REGRESSION** — `run_with_context` and native exact/suffix/specs precedence remain unchanged; Rust local
+    passes core/runtime/integration/corpus/generated/semantic suites plus CLI 66x2, and canonical CI is green.
+  - [x] **LOCKSTEP** — ADR, Knowledge Map, README, roadmaps, mdBook, task/live/memory/change/development records,
+    generated map, four doctrines, cleanup, commit/brief/clean-tree, 19/300 counter, and no-push state are aligned.
+
 - ID: `REPO-ROOT-PATH-PORTABILITY.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Remove live developer-home and private-mount values from tracked legacy code/configuration.
   Depends on: `.1.1`
   Acceptance: Repair only the audited live/config owners: `conf/fv_check.conf`, `conf/lighttpd.conf`,
@@ -137,7 +155,7 @@ root because the root may move for many reasons and relocation must not affect t
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.1.1` | `active` | From the clean `.0` commit, replace only Rust compile-time checkout discovery and prove the copied-binary RED becomes green. |
+| `REPO-ROOT-PATH-PORTABILITY.1.2` | `active` | From the clean `.1.1` commit, inspect and repair only the eight frozen legacy source/config path owners. |
 
 ## Decisions
 
@@ -176,6 +194,10 @@ root because the root may move for many reasons and relocation must not affect t
   `linkedspec: parser compilation failed`; it searched the original build checkout. Other production Rust source
   has no such root lookup: the second `CARGO_MANIFEST_DIR` under `rust/*/src` is test-only compiler code, while
   integration-test occurrences legitimately address test fixtures.
+- `.1.1` repairs that defect without changing caller-controlled `run_with_context`: `run` now searches upward from
+  the current executable first, then from cwd, for `specs/user_function_definition.spec`, and falls back to cwd
+  when neither anchor belongs to a checkout. Executable precedence keeps a bundled command attached to its own
+  moved tree; cwd discovery still supports a separately installed command invoked within a checkout.
 - Sixteen source files contain 42 developer-home/private-session command or configuration lines: 12 Julia
   Knowledge Map fact cards plus `conf/lighttpd.conf`, `conf/tkgui.tk`, `noncore/EasyTk.pm`, and `perl/env.conf`.
   `KNOWLEDGE_MAP.md` repeats these mechanically and is not a separate repair owner. Four legacy config/plugin files
@@ -209,12 +231,18 @@ root because the root may move for many reasons and relocation must not affect t
 | 2026-07-25 | `.0` | tracked host/private-mount source census excluding derived map and `rgx` gitlink | 42 home/private-session lines in 16 files; 6 `/vobs/` in 4; 1 `/dsync/` in 1 |
 | 2026-07-25 | `.0` | mdBook; Knowledge Map; memory architecture; doctrine driver | PASS; KM 706 facts / 5,502 questions; all four doctrines PASS |
 | 2026-07-25 | `.0` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 80.16s, Dart 1/1, Julia 416/416 in 28.3s, Perl primary 66x2, Phase 0 1,031/1,031 in 653s |
+| 2026-07-25 | `.1.1` | `cargo fmt --check`; `primary_cli::tests`; Rust CLI conformance default + POSIX | PASS; 7/7 unit tests and 66/66 twice |
+| 2026-07-25 | `.1.1` | copied current Rust binary below synthetic moved root, unique adjacent spec, outside cwd | GREEN: exit 0, exact `"relocated-root"` |
+| 2026-07-25 | `.1.1` | `bash tools/run_rust_local.sh` | PASS; core/runtime unit, integration, corpus, emitted-source, semantic admission, and CLI 66x2 |
+| 2026-07-25 | `.1.1` | mdBook; Knowledge Map; memory architecture; doctrine driver | PASS; KM 706 facts / 5,504 questions; all four doctrines PASS |
+| 2026-07-25 | `.1.1` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 81.72s, Dart 1/1, Julia 416/416 in 29.3s, Perl primary 66x2, Phase 0 1,031/1,031 in 640s |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `.0` | `REPO-ROOT-PATH-PORTABILITY.0 - freeze relocation invariant` (this commit) | Behavior-free ADR/audit/split; no repair or checker behavior. |
+| `.0` | `9f3e59c2` — `REPO-ROOT-PATH-PORTABILITY.0 - freeze relocation invariant` | Behavior-free ADR/audit/split; no repair or checker behavior. |
+| `.1.1` | `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` (this commit) | Rust runtime-anchor repair; copied-binary RED is green. |
 
 ## Changelog
 
@@ -222,3 +250,5 @@ root because the root may move for many reasons and relocation must not affect t
   `.0` precedes any remediation or doctrine change.
 - `2026-07-25`: Completed `.0`; ADR `0052`, exact inventories, three repair leaves, structural doctrine, and
   recurring relocation oracle are frozen. `.1.1` is active from the clean audit commit.
+- `2026-07-25`: Completed `.1.1`; Rust primary discovery is runtime-rooted, the exact relocation reproduction is
+  green, and full Rust/canonical signoff passes. `.1.2` is active from this clean commit.

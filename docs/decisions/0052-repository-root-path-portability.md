@@ -15,8 +15,10 @@ The project already required repo-root-relative references in live Markdown and 
 their root from their own file. That policy did not cover all tracked source/configuration or shipped runtime
 discovery. The 2026-07-25 audit found no checked-in literal of the current or former checkout and found that the
 Perl, Dart, Julia, and Lua primary commands locate bundled content from runtime anchors. It also reproduced one
-production defect: the Rust primary command uses `env!("CARGO_MANIFEST_DIR")`, so a copied binary searches the
-checkout where it was compiled rather than the repository beside the relocated executable.
+production defect: the Rust primary command used a compile-time Cargo manifest directory, so a copied binary
+searched the checkout where it was compiled rather than the repository beside the relocated executable. Leaf
+`.1.1` removed that build identity: the command now discovers a marked checkout from current executable ancestry
+first, then cwd ancestry, with cwd as a deterministic no-marker fallback.
 
 Absolute filesystem strings also have legitimate roles. A caller may explicitly request `/tmp/input.spec` or
 `C:/Demo`, a test may prove path redaction, and an external interpreter or tool may live under `/usr` or `/opt`.
@@ -49,8 +51,8 @@ Those values do not identify repository-owned content and must not be conflated 
 ## Consequences
 
 - Moving or renaming a checkout cannot make LinkedSpec use the previous checkout's repository-owned files.
-- Rust primary-command discovery must be repaired before the doctrine is enabled; the exact work is owned by
-  `REPO-ROOT-PATH-PORTABILITY.1.1`.
+- Rust primary-command discovery is runtime-rooted as of `REPO-ROOT-PATH-PORTABILITY.1.1`; a copied executable
+  beneath a synthetic moved checkout loads that checkout's unique adjacent spec from an outside cwd.
 - Audited legacy developer-home/private-mount values and machine-specific Knowledge Map commands are repaired in
   separate leaves so production discovery, legacy configuration, and durable documentation remain reviewable.
 - The checker must be false-positive-safe: rejecting an explicit caller path or `/usr/bin/env` would weaken native

@@ -646,8 +646,10 @@ a valid locator for shipped specs: after moving a binary, it would silently sear
 defines this contract. `REPO-ROOT-PATH-PORTABILITY` is landing it in dependency order: runtime repair, exact legacy
 path cleanup, durable-command cleanup, a fast structural doctrine, then a recurring copied-binary relocation
 oracle. The 2026-07-25 audit found no tracked current/former checkout literal and no tracked symlink. Perl, Dart,
-Julia, and Lua already pass named-spec process probes from outside the checkout; Rust's primary command is the one
-confirmed pre-remediation exception because it uses its compile-time Cargo manifest directory.
+Julia, and Lua pass named-spec process probes from outside the checkout. Rust's repaired primary command searches
+current-executable ancestry before cwd ancestry for `specs/user_function_definition.spec`, then falls back to cwd
+when neither anchor is a checkout. A binary copied beneath a synthetic moved root therefore loads that root's
+unique adjacent spec instead of the compile-time source checkout.
 
 Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
 Compiled debug information may also record source locations, so searching binary strings is not a relocation

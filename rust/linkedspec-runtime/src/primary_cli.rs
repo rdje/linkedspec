@@ -20,6 +20,7 @@ use std::path::{Path, PathBuf};
 const DISPLAY_COMMAND: &str = "linkedspec-rust";
 const HELP_TEMPLATE: &str = include_str!("../../../cli_conformance/cases/help/stdout.txt");
 const REMOVED_PARSE_MODE_MESSAGE: &str = "--parse-mode has been removed; cursor policy is derived from each rule (OR/default=seek, AND=consume)";
+const REPOSITORY_MARKER: &str = "specs/user_function_definition.spec";
 
 /// Exact primary-command process result before it is written to OS channels.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -375,12 +376,35 @@ fn phase_failure(
     CommandOutput::operational_failure_with_stdout(message, trace.take_stdout())
 }
 
-/// Run with the real process working directory and the repository root derived
-/// from this crate's build location.
+/// Run with the real process working directory and a repository root discovered
+/// from the current executable or working-directory ancestry.
 pub fn run(arguments: Vec<OsString>) -> CommandOutput {
     let cwd = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
-    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let executable = std::env::current_exe().ok();
+    let repo_root = resolve_repository_root(&cwd, executable.as_deref());
     run_with_context(arguments, &cwd, &repo_root)
+}
+
+fn resolve_repository_root(cwd: &Path, executable: Option<&Path>) -> PathBuf {
+    executable
+        .and_then(Path::parent)
+        .and_then(find_repository_root)
+        .or_else(|| find_repository_root(cwd))
+        .unwrap_or_else(|| cwd.to_path_buf())
+}
+
+fn find_repository_root(anchor: &Path) -> Option<PathBuf> {
+    let mut directory = anchor;
+    loop {
+        if directory.join(REPOSITORY_MARKER).is_file() {
+            return Some(directory.to_path_buf());
+        }
+        let parent = directory.parent()?;
+        if parent == directory {
+            return None;
+        }
+        directory = parent;
+    }
 }
 
 fn decode_arguments(arguments: Vec<OsString>) -> Result<Vec<String>, &'static str> {
@@ -618,6 +642,59 @@ mod tests {
 
     fn strings(arguments: &[&str]) -> Vec<OsString> {
         arguments.iter().map(OsString::from).collect()
+    }
+
+    fn repository_root_scratch(label: &str) -> PathBuf {
+        std::env::temp_dir().join(format!(
+            "linkedspec-rust-repository-root-{label}-{}",
+            std::process::id()
+        ))
+    }
+
+    fn add_repository_marker(root: &Path) {
+        fs::create_dir_all(root.join("specs")).unwrap();
+        fs::write(root.join(REPOSITORY_MARKER), "Top::\n /x/\n").unwrap();
+    }
+
+    #[test]
+    fn repository_root_discovery_prefers_executable_then_cwd_then_fallback() {
+        let scratch = repository_root_scratch("precedence");
+        if scratch.exists() {
+            fs::remove_dir_all(&scratch).unwrap();
+        }
+
+        let executable_root = scratch.join("executable-repository");
+        let executable = executable_root.join("rust/target/debug/linkedspec-rust");
+        add_repository_marker(&executable_root);
+        fs::create_dir_all(executable.parent().unwrap()).unwrap();
+
+        let cwd_root = scratch.join("cwd-repository");
+        let nested_cwd = cwd_root.join("nested/work");
+        add_repository_marker(&cwd_root);
+        fs::create_dir_all(&nested_cwd).unwrap();
+
+        assert_eq!(
+            resolve_repository_root(&nested_cwd, Some(&executable)),
+            executable_root,
+            "the command's own relocated repository wins over ambient cwd"
+        );
+
+        let external_executable = scratch.join("installed/bin/linkedspec-rust");
+        assert_eq!(
+            resolve_repository_root(&nested_cwd, Some(&external_executable)),
+            cwd_root,
+            "cwd ancestry supplies a repository when an installed executable has none"
+        );
+
+        let outside = scratch.join("outside");
+        fs::create_dir_all(&outside).unwrap();
+        assert_eq!(
+            resolve_repository_root(&outside, Some(&external_executable)),
+            outside,
+            "absence of either marker falls back deterministically to cwd"
+        );
+
+        fs::remove_dir_all(&scratch).unwrap();
     }
 
     #[test]

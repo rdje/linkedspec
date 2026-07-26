@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`REPO-ROOT-PATH-PORTABILITY.1.1` — executable ancestry must outrank ambient cwd): A relocatable
+  primary command has two legitimate runtime anchors. A binary physically bundled beneath a checkout should load
+  that checkout's specs; a separately installed binary may need the checkout containing its cwd. Searching current
+  executable ancestry first preserves bundle identity and prevents an ambient cwd under another checkout from
+  redirecting the command. Searching cwd second preserves the installed-command case. When neither contains the
+  checked-in bundled-spec marker, exact cwd fallback keeps the existing deterministic loose-file behavior.
+
+  Keep discovery outside `run_with_context`. That explicit seam already owns native exact-path, cwd-suffix, and
+  bundled-`specs/` precedence and is heavily exercised by conformance cases. Changing only `run` removes build
+  identity without conflating checkout discovery with caller spec resolution. The behavioral oracle is decisive:
+  the same copied-binary moved-tree command changed from exit 1 `parser compilation failed` to exit 0 exact
+  `"relocated-root"`; scanning compiled strings would remain invalid because debug metadata may name build sources.
+
 - 2026-07-25 (`REPO-ROOT-PATH-PORTABILITY.0` — relocation is about identity, not banning absolute path values):
   ADR `0052` separates three concepts that path scans often conflate. A checked-in reference to repository-owned
   content is durable identity and must be root-relative. An absolute path computed from the current executable,

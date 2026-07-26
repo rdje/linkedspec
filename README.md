@@ -220,6 +220,10 @@ identity. Explicit caller paths, temporary directories, URLs, and external OS/to
 they may not be used to infer or persist the checkout. ADR `0052` is the durable contract and
 `docs/tasks/REPO-ROOT-PATH-PORTABILITY.md` owns the audited remediation/enforcement rollout.
 
+The Rust primary command follows the same contract at runtime: it searches current-executable ancestry before cwd
+ancestry for the bundled-spec marker and falls back to cwd only when neither anchor belongs to a checkout. Thus a
+binary copied beneath a moved repository selects that repository rather than its compile-time source checkout.
+
 ## Documentation Layers
 - `docs/linkedspec-book/`
   - Public-facing book for the world outside the repo.

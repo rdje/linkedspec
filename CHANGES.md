@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-25 — REPO-ROOT-PATH-PORTABILITY.1.1 — derive Rust checkout at runtime
+
+Removed the Rust primary command's compile-time checkout identity. `primary_cli::run` now searches upward from the
+current executable for the checked-in bundled-spec marker, then searches current-working-directory ancestry, and
+uses cwd as the deterministic fallback when neither anchor belongs to a checkout. Executable precedence means a
+binary bundled below a relocated repository stays attached to that repository even when launched from a different
+checkout; cwd discovery still lets a separately installed command operate within a checkout.
+
+The explicit `run_with_context` seam and native exact/suffix/`specs/` resolution precedence are unchanged. Focused
+unit coverage locks executable, cwd, cross-checkout precedence, and no-marker fallback. The exact process that
+failed in `.0`—a copied binary beneath a synthetic moved root with only that root's unique adjacent spec, launched
+from outside—now exits 0 with exact `"relocated-root"`. All seven primary-CLI unit tests and Rust CLI conformance
+66x2 pass. The complete Rust local gate also passes core/runtime packages, corpus/integration, generated-source,
+semantic-admission, native resolution, and repeated CLI 66x2 proof. Canonical and documentation gates complete
+cleanly before this leaf commits.
+
+Final verification passes mdBook, Knowledge Map 706 facts/5,504 questions, memory architecture, and all four
+doctrines. Canonical CI passes Rust semantic admission 1/1 in 81.72 seconds, Dart 1/1, Julia 416/416 in 29.3
+seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 640 seconds. Reusable SSD caches remain; only the explicit
+relocation scratch and generated Python bytecode are removed. Push cadence advances to 19/300; no push occurs.
+
 ## 2026-07-25 — REPO-ROOT-PATH-PORTABILITY.0 — freeze relocation invariant
 
 Adopted ADR `0052`: moving, renaming, copying, or restoring the checkout must not change LinkedSpec behavior.

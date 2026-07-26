@@ -12,10 +12,11 @@ Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current
 script/module/executable or an explicit caller root. Completed audit `.0` is behavior-free: 0 tracked checkout
 literals, 0 symlinks, 25/27 self-rooted shell/hook files plus 2 root-independent wrappers, and green outside-cwd Perl/Dart/
-Julia/Lua named-spec probes. One production RED is exact: Rust primary CLI bakes `CARGO_MANIFEST_DIR`. Ordered work
-is `.1.1` Rust runtime repair, `.1.2` eight legacy machine-bound config/source owners, `.1.3` 12 Julia fact-card
-commands, `.2.1` structural doctrine, and `.2.2` recurring copied-binary relocation proof/closeout; `.1.1` is
-active. Explicit caller paths and OS/tool/temp data remain valid; they are not checkout identity.
+Julia/Lua named-spec probes. Rust `.1.1` replaces the exact production RED with current-executable then cwd marker
+discovery; its copied-binary moved-root reproduction and complete signoff are green. Ordered work is completed
+`.1.1`, active `.1.2` eight legacy machine-bound config/source owners, `.1.3` 12 Julia fact-card
+commands, `.2.1` structural doctrine, and `.2.2` recurring copied-binary relocation proof/closeout. Explicit caller
+paths and OS/tool/temp data remain valid; they are not checkout identity.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.
 `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is one immutable native index of normalized

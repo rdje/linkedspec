@@ -8,13 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.1.1` — from the clean relocation-audit commit, replace only the Rust primary CLI's
-  compile-time checkout discovery with current cwd/executable anchor search and turn the copied-binary RED green.
+- `REPO-ROOT-PATH-PORTABILITY.1.2` — from the clean Rust-runtime repair commit, inspect and repair only the eight
+  frozen legacy machine-bound source/config path owners without widening into caller path or OS/tool fixtures.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **REPO-ROOT-PATH-PORTABILITY.1.1 — derive Rust checkout at runtime**
+  (production runtime root repair; closes with this commit).
+
+  **Result:** Rust `primary_cli::run` no longer bakes the build checkout through `CARGO_MANIFEST_DIR`. It searches
+  current-executable ancestry first, then cwd ancestry, for the checked-in bundled-spec marker and uses cwd as the
+  no-marker fallback. Explicit `run_with_context` and native exact/suffix/`specs/` precedence remain unchanged.
+  The exact copied-binary synthetic moved-root reproduction changes from exit 1 to exit 0 with
+  `"relocated-root"`; focused primary-CLI unit tests pass 7/7 and CLI conformance passes 66x2.
+
+  **Proof:** The complete Rust local gate passes. mdBook, Knowledge Map 706/5,504, memory architecture, and four
+  doctrines pass. Canonical CI passes Rust semantic 1/1 in 81.72s, Dart 1/1, Julia 416/416 in 29.3s, Perl primary
+  66x2, and Phase 0 1,031/1,031 in 640s. Only explicit task scratch/bytecode is cleaned; reusable SSD caches remain.
+  Push counter is 19/300; no push.
+
 - 2026-07-25: **REPO-ROOT-PATH-PORTABILITY.0 — freeze relocation invariant**
   (critical behavior-free ADR/audit/split; closes with this commit).
 
