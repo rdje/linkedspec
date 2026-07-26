@@ -277,8 +277,28 @@ inherited temp/cache roots. Use the mdBook wrapper instead of a bare build:
 bash tools/run_mdbook_local.sh
 ```
 
-Direct low-level commands that bypass those entrypoints must still source the helper explicitly. Lifecycle policy
-remains `.1.3`-owned, and backend-specific hard-coded workspace/default migration remains `.2.1-.2.6`-owned.
+Lifecycle `.1.3` now wraps each supported boundary in one collision-safe run beneath
+`/.linkedspec-data/scratch/runs/<checkout-id>/`. Successful scratch and failed scratch under the default policy are
+deleted without touching `cache/`; retain a diagnostically useful failure only for an explicit invocation:
+
+```bash
+LINKEDSPEC_FAILED_RUN_POLICY=retain bash tools/run_ci_local.sh
+```
+
+The checkout id is a path-free token stored below `/.linkedspec-data/`, so concurrent invocations receive distinct
+run directories and ordinary recovery scans only the current checkout namespace. Interrupted-run recovery is
+deliberate and ownership-checked:
+
+```bash
+bash tools/project_data_run.sh --list          # report live, retained-failed, and abandoned owned runs
+bash tools/project_data_run.sh --recover       # remove dead abandoned runs; retain live and failed runs
+bash tools/project_data_run.sh --purge-failed  # explicitly remove dead retained failures
+```
+
+A low-level foreground command can request the same lifecycle with
+`bash tools/project_data_run.sh COMMAND [ARG ...]`; it must not return while descendants still consume its scratch.
+Commands that only need the common environment may still source `tools/project_data_env.sh` explicitly.
+Backend-specific hard-coded workspace/default migration remains `.2.1-.2.6`-owned.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

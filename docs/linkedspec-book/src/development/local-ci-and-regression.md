@@ -713,7 +713,7 @@ source tools/project_data_env.sh
 It derives the physical checkout from its own file, creates the ignored repository-relative
 `/.linkedspec-data/scratch/` and `/.linkedspec-data/cache/` roots, and exports all standard temporary variables,
 Cargo home/target, Dart package cache, and Julia depot variables. Reusable dependencies remain beneath `cache/`;
-per-run lifecycle and cleanup policy remains owned by `.1.3`.
+managed runs live beneath `scratch/runs/`.
 
 Caller overrides are not trusted by spelling. The helper resolves their existing or nearest existing directory,
 compares GNU/BSD device identity with the repository, creates the directory only after that comparison, and checks
@@ -734,8 +734,8 @@ in 30.2 seconds, reference CLI 66/66 in both option environments, and Phase 0 1,
 Routing leaf `.1.2` makes the pre-commit hook, each doctrine boundary, both Knowledge Map scripts, the canonical
 Perl gate, Rust/Dart/Julia/Lua local runners, and the mdBook wrapper source the helper immediately after self-root
 discovery. The portable Knowledge Map scripts resolve it through generic `KM_ENV_INITIALIZER`, configured as a
-repo-relative path in `.knowledge_map.conf`, so the reusable bundle stays project-agnostic. Build this book through
-the routed wrapper:
+repo-relative path in `.knowledge_map.conf`, and enter lifecycle through generic `KM_RUN_INITIALIZER`, so the
+reusable bundle stays project-agnostic. Build this book through the routed wrapper:
 
 ```bash
 bash tools/run_mdbook_local.sh
@@ -745,12 +745,62 @@ bash tools/run_mdbook_local.sh
 lightweight workflows plus backend preflights from another filesystem with hostile inherited temp/cache variables.
 Every selected project-data directory is created on the repository device. The complete canonical gate is also run
 from that outside cwd for signoff. Direct lower-level commands still require an explicit
-`source tools/project_data_env.sh`; lifecycle behavior remains `.1.3`-owned and backend-specific hard-coded
-workspace/default migration remains `.2.1-.2.6`-owned.
+`source tools/project_data_env.sh`; backend-specific hard-coded workspace/default migration remains
+`.2.1-.2.6`-owned.
 
 Complete `.1.2` signoff starts the canonical gate from the other filesystem while retaining validated SSD-local
 caches. Rust semantic admission passes 1/1 in 77.50 seconds, Dart 1/1, Julia 416/416 in 27.1 seconds, reference CLI
 66/66 in both option environments, and Phase 0 1,031/1,031 in 662 seconds.
+
+Lifecycle leaf `.1.3` gives each top-level supported invocation one private directory below
+`/.linkedspec-data/scratch/runs/<checkout-id>/`. The checkout id is a random, path-free token stored below the
+ignored project-data root, so it follows a moved checkout without persisting its old pathname. Each run directory
+is created with `mktemp`, carries a non-symlink marker containing exact checkout/run identity plus wrapper and
+foreground-child PIDs, requested failure policy, and exports its private `tmp/` child through `TMPDIR`, `TMP`, and
+`TEMP`. Nested supported scripts reuse that run instead of creating overlapping lifecycle owners. Binding policy in
+the marker ensures a crash after recording a default-delete failure still leaves abandoned/recoverable scratch,
+not a false explicitly retained failure.
+
+Success removes the exact validated run directory. Failure also removes it by default; diagnostic retention is an
+explicit per-invocation policy:
+
+```bash
+LINKEDSPEC_FAILED_RUN_POLICY=retain bash tools/run_ci_local.sh
+```
+
+The retained `/.linkedspec-data/cache/` hierarchy is outside the run directory and is never touched by this
+cleanup. A direct low-level foreground command can use the same contract:
+
+```bash
+bash tools/project_data_run.sh perl -Iperl -c t/phase0_regression.t
+```
+
+An untrappable interruption can leave an active marker. Recovery is intentionally separate from ordinary startup:
+
+```bash
+bash tools/project_data_run.sh --list
+bash tools/project_data_run.sh --recover
+bash tools/project_data_run.sh --purge-failed
+```
+
+Listing classifies current-checkout runs as live, explicitly failed, or abandoned. Recovery deletes only abandoned
+runs whose recorded wrapper and foreground child are both dead. It retains live and explicit failed runs;
+`--purge-failed` is the explicit, separately guarded deletion for dead diagnostic failures. Invalid markers and
+another checkout's namespace are not deletion candidates. A wrapped foreground command must not return while any
+descendant still consumes its scratch.
+
+`tools/test_project_data_lifecycle.sh` proves successful and default-failure cleanup, retained-cache survival,
+explicit failure retention and purge, two simultaneous distinct live runs, live-child protection, dead
+interruption recovery, invalid-marker refusal, non-executable shell entrypoint support, and checkout isolation.
+`tools/test_project_data_workflow_routing.sh` additionally locks all 14 environment-plus-run boundaries and requires
+no managed run leaf after each completed outside-cwd workflow.
+
+Complete `.1.3` signoff from the other-filesystem cwd passes Rust semantic admission 1/1 in 82.78 seconds, Dart
+1/1, Julia 416/416 in 30.1 seconds, both 66-case Perl primary environments, and Phase 0 1,031/1,031 in 639
+seconds. The wrapper then reports zero managed runs. A preceding attempt against the valid but not-yet-populated new
+Cargo cache failed at its sandbox-blocked registry refresh and also left zero managed runs; the complete restart
+used the existing repository-relative retained cache with Cargo offline. Cache population/migration remains a
+later backend-owned leaf, separate from this lifecycle contract.
 
 ## CI input areas
 

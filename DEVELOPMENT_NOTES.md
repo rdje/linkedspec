@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.3` — own lifetime outside the child workflow): Sourcing environment
+  variables can establish *where* data lives but cannot safely establish *how long* it lives. Installing an EXIT
+  trap from a sourced helper is not composable: the Knowledge Map checker and Lua runner already own later traps,
+  and a portable embedded bundle must not name LinkedSpec cleanup functions. A foreground wrapper is the stable
+  ownership boundary. It creates one run, launches the original shell script through Bash (some supported runners
+  intentionally lack executable bits), waits for the foreground child, then applies policy after all nested routed
+  scripts have reused the same exported run.
+
+  Deletion authority is narrower than path prefix. A random root-relative checkout identity selects one namespace;
+  `mktemp` supplies collision safety; a non-symlink marker binds exact checkout id, directory name/token, state,
+  failure policy, wrapper PID, child PID, and status. Binding policy matters in the tiny interval after a failed
+  child is recorded but before default cleanup: an interruption there remains abandoned, not falsely retained.
+  Normal cleanup removes only its own validated leaf. Recovery scans only that
+  checkout namespace, refuses namespace symlinks, malformed markers, and live owners, removes dead abandoned runs
+  separately from an explicit retained-failure purge, and never treats the retained cache hierarchy as scratch. A
+  foreground command must not return while descendants still consume its run; this makes the recorded child-
+  liveness boundary honest.
+
+  The portable Knowledge Map bundle extends its existing generic environment hook with generic
+  `KM_RUN_INITIALIZER`; LinkedSpec config supplies the function, while a copied bundle remains project-agnostic.
+  The focused lifecycle oracle locks cleanup, explicit retention, cache survival, non-executable handoff, two-way
+  concurrency, live/dead recovery, malformed ownership, and foreign checkout isolation. The strengthened routing
+  oracle also proves all 14 boundaries enter a run after environment initialization and leave no completed leaf.
+
+  Full canonical signoff starts outside the checkout and passes Rust 1/1 in 82.78 seconds, Dart 1/1, Julia 416/416
+  in 30.1 seconds, primary 66x2, and Phase 0 1,031/1,031 in 639 seconds. The first attempt used the valid but empty
+  new Cargo cache; its blocked registry refresh produced a real nonzero workflow and zero leftover managed runs.
+  Reusing the existing repository-relative warmed cache with Cargo offline then proves the complete path without
+  network. This separates cache *location/lifecycle* (`.1`) from cache population/migration (`.2.2`).
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.2` — initialize at the self-rooted process boundary): Environment
   locality is reliable only when the supported entrypoint establishes it before the first project-data allocator or
   language runtime. Routing at the hook/gate/generator/backend wrapper boundary covers descendants without mixing

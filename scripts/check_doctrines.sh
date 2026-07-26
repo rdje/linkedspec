@@ -29,6 +29,7 @@
 set -uo pipefail   # deliberately NOT `-e`: run ALL checks, collect every result, then report.
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/tools/project_data_env.sh" || exit 1
+linkedspec_project_data_enter_run "$ROOT/scripts/check_doctrines.sh" "$@"
 cd "$ROOT"
 
 # Each entry: "ID|what it proves|relative/path/to/check.sh"

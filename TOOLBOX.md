@@ -78,7 +78,7 @@ check, not proof that the cited commands were run.
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
-| "Where should this workflow put temporary/package/build data?" | [§4.4.1 project-data environment](#441-toolsproject_data_envsh--repo-filesystem-project-state) |
+| "Where should this workflow put temporary/package/build data, and how do I recover a run?" | [§4.4.1 project-data environment](#441-toolsproject_data_envsh--repo-filesystem-project-state) + [§4.4.2 run lifecycle](#442-toolsproject_data_runsh--per-run-scratch-lifecycle) |
 
 ---
 
@@ -318,18 +318,35 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 
 - **WHAT:** a sourceable environment initializer that derives the current checkout, creates ignored disposable
-  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, and exports temp, Cargo, Dart, and
-  Julia storage variables.
+  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart, and Julia
+  storage variables, and hands standard entrypoints to the managed-run wrapper.
 - **WHEN:** before a direct development, generation, test, or package command can create project-owned state.
   Standard hook/doctrine/Knowledge Map/canonical/backend runners source it automatically; source it manually only
   for lower-level commands that bypass those routed boundaries.
 - **HOW:** `source tools/project_data_env.sh`. Same-filesystem caller overrides are preserved; another-filesystem
-  override is replaced after device validation. Run `bash tools/test_project_data_env.sh` for the focused hostile-
-  override proof and `bash tools/test_project_data_workflow_routing.sh` for the 14-entrypoint outside-cwd routing
-  proof. Build the book through `bash tools/run_mdbook_local.sh`.
+  override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
+  foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
+  `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
+  environment, lifecycle, and 14-entrypoint outside-cwd proofs. Build the book through
+  `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports
   must affect the caller shell.
+
+### 4.4.2 `tools/project_data_run.sh` — per-run scratch lifecycle
+
+- **WHAT:** a foreground wrapper that creates one checkout-namespaced `mktemp` run directory, redirects standard
+  temporary variables into it, retains reusable caches, and validates an ownership marker before exact cleanup.
+- **WHEN:** automatically at every standard hook/doctrine/Knowledge Map/canonical/backend/book boundary, or
+  manually around a direct command. Success and default failure delete scratch. Set
+  `LINKEDSPEC_FAILED_RUN_POLICY=retain` only when a failed run should survive for diagnosis.
+- **HOW:** `bash tools/project_data_run.sh --list` reports owned leftovers; `--recover` removes only dead abandoned
+  runs; `--purge-failed` explicitly removes dead retained failures. Live wrapper/foreground-child PIDs, invalid
+  markers, and other checkout namespaces are never deleted. A foreground command must not return before its
+  descendants finish using the run directory.
+- **PROOF:** `bash tools/test_project_data_lifecycle.sh` covers success/default-failure cleanup, cache retention,
+  explicit failure retention/purge, concurrent unique runs, live-child recovery denial, interrupted recovery,
+  invalid-marker refusal, non-executable shell entrypoints, and checkout isolation.
 
 ### 4.5 `tools/check_unicode_case_contract.py` — pinned Unicode casing proof
 

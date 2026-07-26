@@ -40,6 +40,7 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  unset LINKEDSPEC_REPO_ROOT LINKEDSPEC_PROJECT_DATA_ROOT LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT
+ unset LINKEDSPEC_RUNS_ROOT
  cd -- "$TEST_ROOT"
  # shellcheck source=project_data_env.sh
  source "$HELPER"
@@ -48,6 +49,7 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  assert_equal "$LINKEDSPEC_PROJECT_DATA_ROOT" "$REPO_ROOT/.linkedspec-data" 'project-data root'
  assert_equal "$LINKEDSPEC_SCRATCH_ROOT" "$REPO_ROOT/.linkedspec-data/scratch" 'scratch root'
  assert_equal "$LINKEDSPEC_CACHE_ROOT" "$REPO_ROOT/.linkedspec-data/cache" 'cache root'
+ assert_equal "$LINKEDSPEC_RUNS_ROOT" "$LINKEDSPEC_SCRATCH_ROOT/runs" 'managed-runs root'
  assert_equal "$TMPDIR" "$LINKEDSPEC_SCRATCH_ROOT/tmp" 'TMPDIR default'
  assert_equal "$TMP" "$TMPDIR" 'TMP default'
  assert_equal "$TEMP" "$TMPDIR" 'TEMP default'
@@ -59,6 +61,7 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
 
  repo_device=$(device_id "$REPO_ROOT")
  for path in "$LINKEDSPEC_PROJECT_DATA_ROOT" "$LINKEDSPEC_SCRATCH_ROOT" "$LINKEDSPEC_CACHE_ROOT" \
+  "$LINKEDSPEC_RUNS_ROOT" \
   "$TMPDIR" "$CARGO_HOME" "$CARGO_TARGET_DIR" "$PUB_CACHE" "${JULIA_DEPOT_PATH%:}"; do
   [[ -d "$path" ]] || fail "initializer did not create $path"
   assert_equal "$(device_id "$path")" "$repo_device" "filesystem for $path"
@@ -69,7 +72,7 @@ same_volume_root="$TEST_ROOT/same-volume"
 mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,julia-two}
 (
  export LINKEDSPEC_PROJECT_DATA_ROOT="$same_volume_root/custom-data"
- unset LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT
+ unset LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT LINKEDSPEC_RUNS_ROOT
  unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  # shellcheck source=project_data_env.sh

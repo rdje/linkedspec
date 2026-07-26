@@ -21,8 +21,9 @@ git config core.hooksPath .githooks             # if not already set
 
 The only per-project knobs (env, or a repo-root `.knowledge_map.conf`):
 `KM_SCAN_DIRS` (default `docs/knowledge docs/decisions`), `KM_OUTPUT`
-(default `KNOWLEDGE_MAP.md`), `KM_TITLE`, and optional `KM_ENV_INITIALIZER` (a sourceable repository-root-relative
-or absolute shell path that a host project can use to establish its environment before either command allocates).
+(default `KNOWLEDGE_MAP.md`), `KM_TITLE`, optional `KM_ENV_INITIALIZER` (a sourceable repository-root-relative or
+absolute shell path that a host project can use to establish its environment before either command allocates), and
+optional `KM_RUN_INITIALIZER` (a function or command established by that environment to enter a managed run).
 
 ## What's in the bundle
 

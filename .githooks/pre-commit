@@ -9,6 +9,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
 source "$ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$ROOT/.githooks/pre-commit" "$@"
 cd "$ROOT"
 
 # Knowledge Map is DERIVED — regenerate + stage (so it is always in sync at zero agent cost) BEFORE

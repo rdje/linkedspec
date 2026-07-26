@@ -8,14 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.1.3` — from the clean routed-workflow commit, define collision-safe scratch lifecycle,
-  retained cache policy, successful/failed-run cleanup, concurrency isolation, and interrupted-run recovery.
+- `PROJECT-DATA-SSD-ROOTING.2.1` — from the clean managed-lifecycle commit, root Perl tests, CLI workspaces, traces,
+  logs, and retained fixtures on the repository filesystem; verify each SSD replacement, delete its exact old copy,
+  and preserve inert path-value fixtures.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.3 — harden storage lifecycle**
+  (checkout-namespaced managed runs, exact cleanup/retention, concurrency isolation, and guarded recovery; closes
+  with this commit).
+
+  **Result:** All 14 supported boundaries enter one collision-safe foreground run after environment initialization;
+  nested routes reuse it. Success and default failure remove exact validated scratch, explicit policy retains a
+  diagnostic failure, cache survives, and list/recover/purge-failed distinguish live, abandoned, and failed state.
+  Ownership checks refuse malformed markers and foreign checkout namespaces.
+
+  **Proof:** Bash syntax plus initializer, lifecycle, and strengthened workflow-routing oracles pass. The lifecycle
+  proof covers cache survival, non-executable runners, two simultaneous run leaves, live-child recovery denial,
+  abandoned/default-delete recovery, explicit failure purge, TERM cleanup, malformed markers, and checkout
+  isolation. Five doctrines, routed mdBook, Knowledge Map 710/5,560, task metadata, 47-line memory, generic bundle
+  portability, and whitespace pass. Outside-cwd/offline canonical passes Rust 1/1 in 82.78s, Dart 1/1, Julia
+  416/416 in 30.1s, primary 66x2, and Phase 0 1,031/1,031 in 639s, then `--list` reports zero runs. A prior real
+  failed attempt against the valid but empty new Cargo cache also left zero runs. Push is 26/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.2 — route standard workflows to SSD storage**
   (14 self-rooted hook/gate/generator/book/backend boundaries; closes with this commit).
 

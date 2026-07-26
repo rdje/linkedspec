@@ -6,6 +6,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$ROOT/scripts/check_repo_root_path_portability.sh" "$@"
 cd "$ROOT"
 
 mapfile -d '' tracked_files < <(git ls-files -z -- . ':(exclude)rgx')

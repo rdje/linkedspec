@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.3 — harden storage lifecycle
+
+Added `tools/project_data_run.sh` as the common foreground lifecycle owner for all 14 routed workflow boundaries.
+Each top-level invocation gets one `mktemp` directory below
+`/.linkedspec-data/scratch/runs/<checkout-id>/`; nested routed scripts reuse it. The path-free random checkout id is
+stored below the ignored project-data root, and every run marker records exact checkout/run identity, state, wrapper
+PID, foreground-child PID, and exit status. The helper exports `LINKEDSPEC_RUNS_ROOT` and hands shell entrypoints to
+the wrapper through Bash, preserving supported non-executable runner scripts. Markers also bind the requested
+failure policy, so a crash-window remnant from default deletion remains recoverable rather than looking retained.
+
+Successful runs delete only their exact validated scratch leaf. Failed runs also delete by default;
+`LINKEDSPEC_FAILED_RUN_POLICY=retain` is the explicit diagnostic-retention policy. Reusable `cache/` state remains
+outside lifecycle deletion. `--list` classifies owned leftovers, `--recover` removes only dead abandoned runs, and
+`--purge-failed` separately removes dead retained failures. Live wrapper/child PIDs, malformed markers, and other
+checkout namespaces are retained. The Knowledge Map bundle remains generic through optional `KM_RUN_INITIALIZER`.
+
+`tools/test_project_data_lifecycle.sh` proves success/default-failure cleanup, retained-cache survival, explicit
+retention/recovery/purge, two concurrent unique live runs, live-child protection, abandoned recovery, invalid-
+marker and namespace-symlink refusal, non-executable shell handoff, and checkout isolation. The strengthened
+14-entrypoint oracle requires
+environment-then-run ordering, reaches each missing-runtime preflight, and rejects completed-run residue. Focused
+syntax and all three storage oracles pass. Five doctrines, 47-line memory, task metadata, routed mdBook, generic
+Knowledge Map portability, 710 facts/5,560 question keys, and whitespace pass. Canonical signoff from the other-
+filesystem cwd with retained SSD caches passes Rust 1/1 in 82.78 seconds, Dart 1/1, Julia 416/416 in 30.1 seconds,
+Perl primary 66x2, and Phase 0 1,031/1,031 in 639 seconds; the full successful run leaves zero managed leaves.
+
+The first canonical attempt reached the new default Cargo cache, which is valid and SSD-local but not yet
+populated; sandbox DNS blocked its registry refresh. That real failed workflow exited at Rust admission and the
+default policy removed its managed run completely. The clean restart used the existing repository-relative warmed
+cache at `rust/target/project-data-ssd-rooting/cache/` with Cargo offline and completed without network.
+
+No backend-owned hard-coded workspace is migrated and no old off-volume data is mutated or deleted in this common
+lifecycle leaf. Those exact moves remain `.2.1-.2.6`-owned. Push cadence advances to 26/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.2 — route standard workflows to SSD storage
 
 The pre-commit hook, doctrine driver and five registered checks, both Knowledge Map scripts, canonical Perl/reference

@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; initializer and standard workflow routing implemented, migration pending
+- Status: accepted; initializer, workflow routing, and managed-run lifecycle implemented; migration pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -54,6 +54,9 @@ boundary for storage locality.
 8. A structural doctrine and representative process oracle enforce storage locality. The process proof uses
    hostile inherited temporary/cache variables, verifies the actual filesystem of project IO, and admits only the
    frozen necessary external-access classes.
+9. Standard top-level invocations own one checkout-namespaced collision-safe run directory. Success removes exact
+   scratch; failure retains it only through explicit policy. Recovery validates path-free checkout/run ownership,
+   refuses live or malformed candidates, and separates abandoned-run cleanup from retained-failure deletion.
 
 ## Consequences
 
@@ -69,6 +72,9 @@ boundary for storage locality.
   identity before and after creating a caller override.
 - The pre-commit hook, doctrine and Knowledge Map scripts, canonical Perl gate, Rust/Dart/Julia/Lua local gates,
   and mdBook wrapper source that helper at their self-rooted boundary. Direct lower-level commands remain explicit.
+- Those boundaries then enter `tools/project_data_run.sh`: nested routed scripts reuse one foreground run,
+  successful/default-failed scratch is deleted, retained `cache/` survives, and explicit recovery never scans
+  another checkout namespace or removes a live wrapper/child.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -78,5 +84,6 @@ boundary for storage locality.
 
 - Task tree: `docs/tasks/PROJECT-DATA-SSD-ROOTING.md`
 - Repository relocation: `docs/decisions/0052-repository-root-path-portability.md`
+- Managed-run lifecycle: `docs/knowledge/project-data-run-lifecycle.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.1.2` workflow routing implemented and verified; `.1.3` lifecycle active)
+- Last updated: `2026-07-26` (`.1.3` managed-run lifecycle implemented and verified; `.2.1` Perl migration active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -98,7 +98,7 @@ accessing the shared copy, and remove only records or directories provably owned
     cache-default, or old-data behavior changes before `.1.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1`
-  Status: `active`
+  Status: `done` (2026-07-26; environment, routing, and managed-run lifecycle complete)
   Goal: Establish one relocatable SSD-backed project storage contract.
   Depends on: `.0`
   Children: `.1.1`, `.1.2`, `.1.3`
@@ -166,7 +166,7 @@ accessing the shared copy, and remove only records or directories provably owned
     routed standard workflow boundary and preserve `.1.3` lifecycle plus `.2.1-.2.6` migration ownership.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1.3`
-  Status: `active`
+  Status: `done` (2026-07-26; managed-run cleanup, retention, concurrency, and recovery implemented)
   Goal: Define cleanup, retention, concurrency, and interrupted-run behavior for repo-local storage.
   Depends on: `.1.2`
   Acceptance: Separate reusable caches from per-run scratch; use collision-safe run directories; clean successful
@@ -174,14 +174,37 @@ accessing the shared copy, and remove only records or directories provably owned
     checkout or concurrent process from deleting another's data; document recovery; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — `.1.2` routes all standard commands to one shared `scratch/tmp` root but supplies no
+    invocation owner, success/failure policy, collision-proof run namespace, or guarded crash recovery; concurrent
+    commands cannot safely delete that shared root.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `tools/project_data_env.sh` establishes filesystem locality, not lifetime.
+    Each routed shell file starts independently, nested scripts re-source the helper, and existing EXIT traps make
+    trap injection an unsafe generic ownership mechanism.
+  - [x] **FIX** — Add `tools/project_data_run.sh`, one persisted path-free checkout id, `mktemp` run leaves with
+    exact ownership/liveness markers, one foreground wrapper reused by nested routed commands, default deletion,
+    explicit failed-run retention, and separate list/recover/purge-failed operations. Extend the generic Knowledge
+    Map integration through `KM_RUN_INITIALIZER` without coupling its portable bundle to LinkedSpec.
+  - [x] **ADDRESSED (verified)** — `bash tools/test_project_data_lifecycle.sh` proves success/default-failure cleanup,
+    retained-cache survival, explicit failure retention/purge, non-executable shell handoff, two concurrent unique
+    live runs, live-child recovery refusal, dead interruption recovery, malformed-marker/namespace-symlink refusal,
+    and foreign-checkout isolation. The 14-entrypoint oracle requires environment then managed-run ordering/no residue.
+  - [x] **NO REGRESSION** — Bash syntax, initializer/lifecycle/routing oracles, generic Knowledge Map portability,
+    routed doctrines/Knowledge Map/mdBook, task/47-line memory, `git diff --check`, and complete canonical pass.
+    Canonical is Rust 1/1 82.78s, Dart 1/1, Julia 416/416 30.1s, primary 66x2, Phase 0 1,031/1,031 639s; zero runs
+    remain after both a real default-policy failure and the successful full gate.
+  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, dedicated Knowledge card, roadmaps, task/live/memory docs define
+    exact cleanup/recovery commands and keep `.2.1-.2.6` as the backend/tool migration owners.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2`
-  Status: `pending`
+  Status: `active`
   Goal: Remove every supported workflow's internal-volume project write.
   Depends on: `.1`
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Root Perl tests, CLI conformance, corpus generation, traces, and diagnostic logs on SSD storage.
   Depends on: `.1.3`
   Acceptance: Cover `File::Temp`, explicit trace/log files, and tool subprocess workspaces while retaining inert
@@ -302,7 +325,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.1.3` | `active` | From the clean `.1.2` commit, define collision-safe scratch/cache lifecycle, cleanup, concurrency, and interrupted-run recovery. |
+| `PROJECT-DATA-SSD-ROOTING.2.1` | `active` | From the clean `.1.3` commit, root Perl tests, CLI workspaces, traces, logs, and retained fixtures; verify each SSD replacement and delete its exact old copy. |
 
 ## Decisions
 
@@ -327,6 +350,9 @@ accessing the shared copy, and remove only records or directories provably owned
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
 - Fourteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
+- Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
+  delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
+  recovery skips live/invalid/foreign candidates and separates abandoned from retained-failure deletion.
 - The push cadence remains 300 commits. No leaf in this tree pushes independently.
 
 ## Links
@@ -336,6 +362,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable storage-locality fact: `docs/knowledge/project-data-ssd-storage-locality.md`
 - Durable initializer fact: `docs/knowledge/project-data-env-initializer.md`
 - Durable workflow-routing fact: `docs/knowledge/project-data-workflow-routing.md`
+- Durable run-lifecycle fact: `docs/knowledge/project-data-run-lifecycle.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -354,6 +381,10 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.1.2` | Bash syntax; initializer oracle; 14-entrypoint workflow oracle from other filesystem; routed mdBook | PASS; hostile external variables replaced; every created project-data root on repository device |
 | 2026-07-26 | `.1.2` | Knowledge Map; five doctrines; task metadata; memory; whitespace | PASS; Knowledge Map 709 facts/5,548 question keys; memory 45 lines |
 | 2026-07-26 | `.1.2` | canonical gate launched from other-filesystem cwd with retained SSD caches | PASS: Rust 1/1 in 77.50s; Dart 1/1; Julia 416/416 in 27.1s; Perl primary 66x2; Phase 0 1,031/1,031 in 662s |
+| 2026-07-26 | `.1.3` | Bash syntax; initializer, lifecycle, and strengthened 14-entrypoint routing oracles | PASS: exact cleanup/retention/cache/concurrency/recovery/checkout isolation; every completed routed run leaves no managed run leaf |
+| 2026-07-26 | `.1.3` | generic Knowledge Map override; five doctrines; routed mdBook; task/memory/whitespace | PASS: Knowledge Map 710 facts/5,560 question keys; memory 47 lines; portable bundle stays project-agnostic |
+| 2026-07-26 | `.1.3` | first outside-cwd canonical attempt with valid but unpopulated new Cargo cache | Expected environmental failure: sandbox DNS blocks registry refresh at Rust admission; default failure policy cleans the exact run and `--list` reports zero |
+| 2026-07-26 | `.1.3` | outside-cwd canonical with retained repository-relative warm caches and Cargo offline | PASS: Rust 1/1 in 82.78s; Dart 1/1; Julia 416/416 in 30.1s; Perl primary 66x2; Phase 0 1,031/1,031 in 639s; zero completed-run residue |
 
 ## Commit Log
 
@@ -361,7 +392,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | --- | --- | --- |
 | `.0` | `74138903` — `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration` | Ownership, exact inventory, migration safety, and implementation order only. |
 | `.1.1` | `e33ed191` — `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
-| `.1.2` | `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` (this commit) | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
+| `.1.2` | `671592ef` — `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
+| `.1.3` | `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` (this commit) | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
 
 ## Changelog
 
@@ -376,3 +408,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - `2026-07-26`: Completed `.1.2`; 14 supported workflow boundaries self-initialize the environment, the routed
   mdBook wrapper and outside-cwd oracle pass, and complete canonical proof is green. `.1.3` becomes the clean
   lifecycle/concurrency frontier after commit.
+- `2026-07-26`: Completed `.1.3`; standard boundaries reuse checkout-namespaced collision-safe scratch, exact
+  success/default-failure cleanup preserves caches, failed retention is explicit, interrupted recovery is
+  liveness/marker guarded, and concurrency/checkout isolation is executable. `.2.1` becomes the clean Perl
+  migration/deletion frontier after commit.

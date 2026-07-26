@@ -24,6 +24,7 @@ ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || pwd)"
 : "${KM_OUTPUT:=KNOWLEDGE_MAP.md}"
 : "${KM_TITLE:=Knowledge Map}"
 : "${KM_ENV_INITIALIZER:=}"
+: "${KM_RUN_INITIALIZER:=}"
 
 if [ -n "$KM_ENV_INITIALIZER" ]; then
   case "$KM_ENV_INITIALIZER" in
@@ -39,6 +40,14 @@ if [ -n "$KM_ENV_INITIALIZER" ]; then
 fi
 
 if [ "${1:-}" = "--print-map-path" ]; then printf '%s\n' "$KM_OUTPUT"; exit 0; fi
+
+if [ -n "$KM_RUN_INITIALIZER" ]; then
+  command -v "$KM_RUN_INITIALIZER" >/dev/null 2>&1 || {
+    printf 'knowledge-map: run initializer not found: %s\n' "$KM_RUN_INITIALIZER" >&2
+    exit 1
+  }
+  "$KM_RUN_INITIALIZER" "$SCRIPT_DIR/gen_knowledge_map.sh" "$@"
+fi
 
 cd "$ROOT"
 TAB="$(printf '\t')"

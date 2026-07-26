@@ -10,26 +10,29 @@ answers:
   - how should I build the mdBook with repository local storage
   - can standard workflows run outside the repository cwd with hostile temp variables
   - how is standard workflow storage routing tested
+  - do standard LinkedSpec workflows use managed per run scratch
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, workflow, hook, ci, mdbook, backend, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.2 routes tools/project_data_env.sh at 14 self-rooted hook, doctrine, Knowledge Map, canonical Perl, backend, and mdBook boundaries. The portable Knowledge Map bundle consumes it through the generic KM_ENV_INITIALIZER configured in root .knowledge_map.conf. tools/test_project_data_workflow_routing.sh rejects missing or late initialization and launches lightweight workflows plus four backend preflights from another filesystem with hostile inherited roots, proving all selected project-data directories use the repository device."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.2 routes tools/project_data_env.sh at 14 self-rooted hook, doctrine, Knowledge Map, canonical Perl, backend, and mdBook boundaries. The portable Knowledge Map bundle consumes it through generic KM_ENV_INITIALIZER configured in root .knowledge_map.conf. PROJECT-DATA-SSD-ROOTING.1.3 adds generic KM_RUN_INITIALIZER and the common managed-run handoff. tools/test_project_data_workflow_routing.sh rejects missing or late environment/run initialization, launches lightweight workflows plus four backend preflights from another filesystem with hostile inherited roots, proves all selected directories use the repository device, and requires no completed-run scratch residue."
 reverify: "bash -n tools/test_project_data_workflow_routing.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/run_mdbook_local.sh && bash scripts/check_doctrines.sh"
 ---
 
 The standard storage-routing boundary consists of `.githooks/pre-commit`, the doctrine driver and registered checks,
 both Knowledge Map scripts, `tools/run_ci_local.sh` (the canonical Perl/reference gate),
 `tools/run_{rust,dart,julia,lua}_local.sh`, and `tools/run_mdbook_local.sh`. Each derives its current checkout and
-routes `tools/project_data_env.sh` before any language runtime or project-data allocator can start. The portable
-Knowledge Map scripts use generic `KM_ENV_INITIALIZER`; LinkedSpec's root `.knowledge_map.conf` supplies the
-repo-relative helper without coupling the bundle to this project. The mdBook's
+routes `tools/project_data_env.sh` and enters one managed run before any language runtime or project-data allocator
+can start. The portable Knowledge Map scripts use generic `KM_ENV_INITIALIZER` plus `KM_RUN_INITIALIZER`;
+LinkedSpec's root `.knowledge_map.conf` supplies the repo-relative helper and its run function without coupling the
+bundle to this project. The mdBook's
 supported command is therefore `bash tools/run_mdbook_local.sh`, not a bare `mdbook build`.
 
 The focused workflow oracle checks 14 source-before-runtime boundaries. From an available other-filesystem cwd, it
 supplies hostile external temp/cache variables and a unique same-filesystem project-data root, executes the
 lightweight doctrine/Knowledge Map/mdBook flows, and reaches each backend runner's post-initialization preflight.
-Every created scratch/cache/tool directory is checked against the repository device. Complete canonical signoff is
-also launched from that outside cwd. Direct low-level commands remain responsible for explicitly sourcing the
-initializer; `.1.3` still owns lifecycle policy and `.2.1-.2.6` still own backend/tool default and old-data migration.
+Every created scratch/cache/tool directory is checked against the repository device, backend preflights must reach
+their configured runtime check, and every completed managed run must be gone. Direct low-level commands remain
+responsible for explicitly sourcing the initializer; `.2.1-.2.6` still own backend/tool default and old-data migration.
 
-Related facts: [[project-data-env-initializer]], [[project-data-ssd-storage-locality]].
+Related facts: [[project-data-env-initializer]], [[project-data-run-lifecycle]],
+[[project-data-ssd-storage-locality]].

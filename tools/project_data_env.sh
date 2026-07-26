@@ -150,6 +150,9 @@ _linkedspec_storage_select_dir LINKEDSPEC_SCRATCH_ROOT \
 _linkedspec_storage_select_dir LINKEDSPEC_CACHE_ROOT \
  "$LINKEDSPEC_PROJECT_DATA_ROOT/cache" || return 1
 
+LINKEDSPEC_RUNS_ROOT=$(_linkedspec_storage_prepare_dir "$LINKEDSPEC_SCRATCH_ROOT/runs") || return 1
+export LINKEDSPEC_RUNS_ROOT
+
 _linkedspec_storage_select_dir TMPDIR "$LINKEDSPEC_SCRATCH_ROOT/tmp" || return 1
 _linkedspec_storage_select_dir TMP "$TMPDIR" || return 1
 _linkedspec_storage_select_dir TEMP "$TMPDIR" || return 1
@@ -157,6 +160,52 @@ _linkedspec_storage_select_dir CARGO_HOME "$LINKEDSPEC_CACHE_ROOT/cargo-home" ||
 _linkedspec_storage_select_dir CARGO_TARGET_DIR "$_linkedspec_storage_repo_root/rust/target" || return 1
 _linkedspec_storage_select_dir PUB_CACHE "$LINKEDSPEC_CACHE_ROOT/dart-pub" || return 1
 _linkedspec_storage_select_julia_depots "$LINKEDSPEC_CACHE_ROOT/julia-depot" || return 1
+
+linkedspec_project_data_enter_run() {
+ local command=${1:-}
+ local active_dir=''
+ local marker_token=''
+ local marker_checkout_id=''
+ local marker_state=''
+ local marker_wrapper_pid='0'
+ local key
+ local value
+
+ [[ -n "$command" ]] || {
+  printf '%s\n' 'project-data: a command is required to enter a managed run' >&2
+  return 64
+ }
+
+ if [[ "${LINKEDSPEC_RUN_ACTIVE:-}" == 1 && -n "${LINKEDSPEC_RUN_DIR:-}" &&
+       -n "${LINKEDSPEC_RUN_TOKEN:-}" && -d "$LINKEDSPEC_RUN_DIR" &&
+       ! -L "$LINKEDSPEC_RUN_DIR" ]]; then
+  active_dir=$(cd -P -- "$LINKEDSPEC_RUN_DIR" && pwd -P) || active_dir=''
+  case "$active_dir/" in
+   "$LINKEDSPEC_RUNS_ROOT/"*)
+    if [[ -f "$active_dir/.linkedspec-run" && ! -L "$active_dir/.linkedspec-run" ]]; then
+     while IFS='=' read -r key value; do
+      case "$key" in
+       checkout_id) marker_checkout_id=$value ;;
+       run_token) marker_token=$value ;;
+       state) marker_state=$value ;;
+       wrapper_pid) marker_wrapper_pid=$value ;;
+      esac
+     done <"$active_dir/.linkedspec-run"
+     if [[ -n "${LINKEDSPEC_CHECKOUT_ID:-}" && "$marker_checkout_id" == "$LINKEDSPEC_CHECKOUT_ID" &&
+           "$marker_token" == "$LINKEDSPEC_RUN_TOKEN" && "$marker_state" =~ ^(starting|active)$ &&
+           "$marker_wrapper_pid" =~ ^[1-9][0-9]*$ ]] && kill -0 "$marker_wrapper_pid" 2>/dev/null; then
+      return 0
+     fi
+    fi
+    ;;
+  esac
+ fi
+
+ unset LINKEDSPEC_RUN_ACTIVE LINKEDSPEC_RUN_DIR LINKEDSPEC_RUN_TOKEN LINKEDSPEC_CHECKOUT_ID
+ LINKEDSPEC_RUN_LABEL=$(basename -- "$command")
+ export LINKEDSPEC_RUN_LABEL
+ exec "$LINKEDSPEC_REPO_ROOT/tools/project_data_run.sh" "${BASH:-bash}" "$@"
+}
 
 unset _linkedspec_storage_script_dir _linkedspec_storage_repo_root _linkedspec_storage_repo_device
 unset -f _linkedspec_storage_device _linkedspec_storage_absolute

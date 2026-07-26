@@ -16,7 +16,9 @@ two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocat
 off-repository defaults. `.1.1` now implements ignored `/.linkedspec-data/{scratch,cache}`, current-file root
 discovery, same-device override validation, standard temp/Cargo/Dart/Julia exports, and hostile outside-cwd proof.
 `.1.2` now routes hook/doctrine/Knowledge Map, canonical Perl, four backend, and mdBook entrypoints through the
-initializer, with a 14-entrypoint outside-cwd oracle. Active `.1.3` owns lifecycle/concurrency. Migration is
+initializer, with a 14-entrypoint outside-cwd oracle. `.1.3` now wraps those boundaries in checkout-namespaced,
+collision-safe runs with exact cleanup, explicit failure retention, cache preservation, and guarded recovery.
+Active `.2.1` owns Perl project-data migration and exact old-data deletion. Migration is
 copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted

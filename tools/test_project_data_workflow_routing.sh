@@ -47,6 +47,10 @@ for relative in "${routed_entrypoints[@]}"; do
  source_line=$(rg -n -m1 '^[[:space:]]*(source|\.) .*(_km_env_initializer|project_data_env\.sh)' "$path" |
   cut -d: -f1)
  [[ -n "$source_line" ]] || fail "entrypoint does not route the project-data initializer: $relative"
+ run_line=$(rg -n -m1 '^[[:space:]]*(linkedspec_project_data_enter_run|"\$KM_RUN_INITIALIZER")' "$path" |
+  cut -d: -f1)
+ [[ -n "$run_line" ]] || fail "entrypoint does not enter managed run scratch: $relative"
+ (( run_line > source_line )) || fail "entrypoint enters managed run scratch before environment routing: $relative"
 
  if awk -v last="$source_line" '
    NR >= last { exit }
@@ -97,8 +101,19 @@ run_routed_case() {
  set -e
 
  case "$expectation" in
-  success) [[ "$status" -eq 0 ]] || fail "$name failed unexpectedly; see $output" ;;
-  failure) [[ "$status" -ne 0 ]] || fail "$name unexpectedly reached its full workflow" ;;
+  success)
+   if [[ "$status" -ne 0 ]]; then
+    sed -n '1,200p' "$output" >&2
+    fail "$name failed unexpectedly; captured output shown above"
+   fi
+   ;;
+  failure)
+   [[ "$status" -ne 0 ]] || fail "$name unexpectedly reached its full workflow"
+   if ! rg -q 'linkedspec-routing-test-missing-' "$output"; then
+    sed -n '1,200p' "$output" >&2
+    fail "$name did not reach its configured missing-runtime preflight; captured output shown above"
+   fi
+   ;;
   *) fail "unknown expectation for $name: $expectation" ;;
  esac
 
@@ -106,6 +121,7 @@ run_routed_case() {
   "$case_root" \
   "$case_root/scratch" \
   "$case_root/scratch/tmp" \
+  "$case_root/scratch/runs" \
   "$case_root/cache" \
   "$case_root/cache/cargo-home" \
   "$case_root/cache/dart-pub" \
@@ -113,6 +129,11 @@ run_routed_case() {
   [[ -d "$path" ]] || fail "$name did not create routed directory: $path"
   [[ "$(device_id "$path")" == "$repo_device" ]] || fail "$name routed outside repository filesystem: $path"
  done
+
+ shopt -s nullglob
+ remaining_runs=("$case_root/scratch/runs"/*/*)
+ shopt -u nullglob
+ (( ${#remaining_runs[@]} == 0 )) || fail "$name left managed run scratch after completion"
 }
 
 run_routed_case memory success "$REPO_ROOT/scripts/check_memory_architecture.sh"

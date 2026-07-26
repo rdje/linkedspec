@@ -63,7 +63,7 @@ changed* lives in git (layer D), not here.
 | [0050](0050-semantic-introspection-staged-artifact-records.md) | Semantic introspection names staged payloads, jobs, and results explicitly | 2026-07-20 | accepted correction; neutral contract executable; backend rollout pending | architecture, introspection, semantic-api, staged-parsing, provenance, schema, portability, parity |
 | [0051](0051-unicode-17-xid-continue-rule-labels.md) | Rule labels use pinned Unicode 17 XID_Continue scalars | 2026-07-21 | accepted; Rust implemented | architecture, grammar, unicode, identifiers, rust, validation, generated-data, portability, parity |
 | [0052](0052-repository-root-path-portability.md) | Repository-owned paths are relocation-safe | 2026-07-25 | accepted; remediation and enforcement in progress | architecture, paths, repository-root, relocation, portability, doctrine, tooling, cli |
-| [0053](0053-project-data-ssd-storage-locality.md) | Project-owned data stays on the repository filesystem | 2026-07-26 | accepted; initializer and standard workflow routing implemented, migration pending | architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling |
+| [0053](0053-project-data-ssd-storage-locality.md) | Project-owned data stays on the repository filesystem | 2026-07-26 | accepted; initializer, workflow routing, and managed-run lifecycle implemented; migration pending | architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

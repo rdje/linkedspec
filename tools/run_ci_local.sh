@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/run_ci_local.sh" "$@"
 
 cd "$REPO_ROOT"
 
