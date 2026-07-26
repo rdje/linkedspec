@@ -18,12 +18,14 @@ answers:
   - "how does Lua store a recursively immutable semantic graph in both Lua ABIs"
   - "does Lua expose a public semantic graph accessor"
   - "what command verifies the Lua private semantic graph"
+  - "does Lua identity-ceiling construction delete private source details"
+  - "where must Lua apply semantic source ceiling redaction"
   - "which Lua task owns privacy failure runtime-static and isolation"
   - "does Lua static projection expose query trace or runtime observations"
 date: 2026-07-25
-status: current; private graph/source/evidence target implemented, remaining static targets pending
+status: current; private graph and source-ceiling reconciliation complete, remaining static targets active
 tags: [lua, luajit, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.1; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
+evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.2.0; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors and query source projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
 ---
 
@@ -96,9 +98,17 @@ No root export or public query accessor is added by static implementation. Paths
 loaders, executors, trace, diagnostic sinks, runtime observers, environment, clocks, and randomness cannot cross
 the boundary.
 
+The construction ceiling does not delete private source authority. ADR `0049` requires limits and redaction before
+records leave the native API, and the exact `privacy_limited` construction oracle therefore retains full private
+source references while snapshotting `identity` plus `content_digest_available=false`. The later query evaluator
+must reject requests above that ceiling and materialize only identity fields for an allowed identity request. This
+is the same split already implemented by Perl, Rust, Dart, and Julia; the package-private exact-oracle seam is not
+a public source path. See [[semantic-source-ceiling-boundary]].
+
 Implementation order is fixed. `.10.7.3.1` owns the private immutable graph/source/evidence projector and exact
-12/14 graph equality. `.10.7.3.2` owns both privacy ceilings, failed and runtime-static targets, repeated lifecycle
-identity, detached copies, and host/no-execution denial. `.10.7.3.3` recomposes all five committed targets and
+12/14 graph equality. Behavior-free `.10.7.3.2.0` reconciles the source-ceiling boundary; `.10.7.3.2.1` owns both
+privacy ceilings, failed and runtime-static targets, repeated lifecycle identity, detached copies, and host/no-
+execution denial. `.10.7.3.3` recomposes all five committed targets and
 closes the parent without a replacement implementation or public query. Calls/staging/generated detail remains
 `.10.7.4`; query `.10.7.5`; runtime observation `.10.7.6`; and dual-ABI admission `.10.7.7`.
 

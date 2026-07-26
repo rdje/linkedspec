@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.2.0 — reconcile Lua semantic source ceiling
+
+Corrected a behavior-free contract mismatch before implementing the remaining Lua semantic static targets. ADR
+`0049`, the neutral `privacy_limited` construction oracle, and the admitted Perl/Rust/Dart/Julia owners all use
+the same boundary: static construction retains complete source authority privately, the immutable snapshot fixes
+the caller's source-detail ceiling and digest policy, and the query layer rejects elevation then structurally
+projects the permitted `none`, `identity`, `span`, or `text` fields before a record leaves the native API.
+
+The owning task split, roadmaps, live docs, mdBook, Toolbox, and Knowledge Map now state that boundary explicitly.
+This avoids inventing a Lua-only destructive-retention rule that could not deep-equal the neutral oracle. No
+production module, test, fixture, API, record, query, observation, generated format, rollout, or admission behavior
+changed. Remaining privacy/failure/runtime-static/isolation implementation is separately owned by `.10.7.3.2.1`.
+
+Focused proof passes Perl static/query 14/14, Rust static 9/9 plus query 5/5, Dart static/query 12/12, and Julia
+static 99/99 plus query 100/100. All six ledgers remain exact. Canonical CI passes all four doctrines, Rust
+semantic admission 1/1 in 80.52 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, reference primary 66x2, and
+Phase 0 1,031/1,031 in 647 seconds; total gate time is 1,715.49 seconds. mdBook, Knowledge Map 705/5,493,
+memory/task metadata, and diff hygiene pass. Reusable SSD caches remain; only explicit task scratch is cleaned.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.1 — implement Lua semantic static graph
 
 Added one package-private Lua static projector behind the existing opaque semantic index. It consumes the retained

@@ -1964,6 +1964,15 @@ This leaf intentionally implements only the compiled graph/source/evidence targe
 failed and runtime-static targets, repeated-lifecycle stress, and the remaining isolation proof stay in
 `.10.7.3.2`; public query remains later `.10.7.5` work.
 
+One privacy boundary is easy to misread. The construction ceiling is snapshot policy, not destructive trimming of
+the private source authority. The exact identity-ceiling construction oracle retains complete private source
+references so the same immutable projection can later serve any permitted detail. Before a record leaves the
+native API, the query layer checks the snapshot ceiling and structurally projects `none`, `identity`, `span`, or
+`text`; an excessive request fails instead of being silently downgraded. Thus an identity-ceiling index privately
+knows exact source ranges but can publicly return only source id and caller-registered logical name. The internal
+exact-oracle seam is not exported. Behavior-free correction `.10.7.3.2.0` aligned the Lua task wording with ADR
+`0049`, the neutral `privacy_limited` oracle, and all four admitted backend query projectors before `.3.2.1` code.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
@@ -2382,7 +2391,8 @@ The dependency order is:
 | `.10.7.2.3` | Lua source/outcome foundation closeout | complete; committed 378+122 per ABI plus full signoff, no replacement code or promotion |
 | `.10.7.3.0` | Lua static-authority map and dependency split | complete; five exact targets, occurrence/source normalization, privacy, and host fences frozen |
 | `.10.7.3.1` | Lua compiled graph/source/evidence projection | implemented; private exact 12/14/7 graph on both ABIs, no public query |
-| `.10.7.3.2` | Lua remaining static targets and isolation | next; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8 |
+| `.10.7.3.2.0` | Lua source-ceiling boundary reconciliation | complete; full private authority, outward query redaction, no behavior change |
+| `.10.7.3.2.1` | Lua remaining static targets and isolation | active; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8 |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

@@ -8,13 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.2` — from the clean graph commit, complete only privacy text/identity, failed,
-  runtime-static, repeated-lifecycle, clone, and host/no-execution isolation behind the opaque Lua index.
+- `FUTURE-PARITY-BACKLOG.10.7.3.2.1` — from the clean ceiling-boundary correction, implement exact privacy text/
+  identity, failed, runtime-static, repeated-lifecycle, clone, and host/no-execution isolation targets.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.2.0 — reconcile Lua semantic source ceiling**
+  (behavior-free private-retention/outward-redaction boundary correction; closes with this commit).
+
+  **Result:** ADR `0049`, the private neutral `privacy_limited` oracle, and all four admitted backends agree:
+  construction retains complete source authority privately, the snapshot fixes the allowed ceiling/digest policy,
+  and query validation rejects elevation before structurally redacting records at the native API boundary. Task,
+  roadmap, mdBook, Toolbox, and Knowledge Map guidance now preserve that settled split. No production, test,
+  fixture, API, record, query, observation, generated-format, rollout, or admission behavior changes.
+
+  **Proof:** Focused Perl static/query passes 14/14; Rust static/query passes 9/9 + 5/5; Dart passes 12/12; Julia
+  passes 99/99 + 100/100. All six ledgers remain exact at semantic 6/20/89, rollout 5/9, admission 4/6, Unicode
+  806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, language 246/105+1/122, and public 59/27/0. Canonical
+  passes four doctrines, Rust 1/1 in 80.52s, Dart 1/1, Julia 416/416 in 29.9s, reference primary 66x2, and Phase 0
+  1,031/1,031 in 647s; total 1,715.49s. mdBook, Knowledge Map 705/5,493, memory/task/diff pass. Reusable SSD
+  caches remain; only explicit task scratch is cleaned. Remaining-target implementation `.10.7.3.2.1` follows.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.1 — implement Lua semantic static graph**
   (exact private immutable graph/source/evidence target; closes with this commit).
 

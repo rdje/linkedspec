@@ -688,6 +688,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   lifecycle occurrence identity, canonical ids/order, detached clone behavior, root-public omission, and host/
   execution dependency denial. Retrieve [[lua-semantic-static-projection-plan]] for the retained-authority and
   frozen-handle design. Do not invoke the test without the gate's `LUA_PATH`/native `LUA_CPATH` setup.
+- **SEMANTIC SOURCE CEILING BOUNDARY:** retrieve [[semantic-source-ceiling-boundary]] before changing private
+  source retention. ADR `0049` applies ceilings when query records leave the native API: the private projection
+  retains complete authoritative refs, the snapshot fixes ceiling/digest policy, and the query source projector
+  returns only permitted fields or rejects elevation. The neutral `privacy_limited` construction oracle therefore
+  contains full private refs even though outward identity requests receive no span, excerpt, or digest.
 
 ---
 

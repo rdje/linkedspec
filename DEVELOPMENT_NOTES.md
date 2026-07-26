@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.2.0` — source ceilings are an outward projection policy): The
+  neutral `privacy_limited` construction oracle carries complete private source references even though its
+  snapshot ceiling is `identity`. That is deliberate. ADR `0049` says limits apply before records leave the
+  native API, and every admitted backend retains full source authority privately before its query projector
+  emits only the requested permitted subset. Conflating construction retention with public response redaction
+  would make the exact private oracle impossible and prevent one immutable graph from serving several allowed
+  detail requests.
+
+  The snapshot is the enforcement policy: `source_detail_ceiling` bounds query detail and
+  `content_digest_available` bounds digest requests. Query validation rejects elevation; record/relation
+  projection maps source keys to null, identity, span, or text. A package-private exact-oracle seam may inspect
+  complete authority for backend conformance, but no root API, index property, debug string, or public query may
+  use it to bypass the ceiling. This boundary is now a dedicated Knowledge Map fact so future backend work does
+  not “repair” intentional private retention into a cross-backend contract violation.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.1` — Lua recursive immutability needs empty handles): A populated
   table with `__newindex` is not immutable: Lua invokes that metamethod only when the assigned key is absent, so a
   caller can replace any existing record field directly. The private static projector instead returns empty
