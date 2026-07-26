@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.1.2` — from the clean initializer commit, source the repo-derived environment in hooks,
-  canonical CI, Knowledge Map/mdBook flows, and standard backend runners, then prove outside-cwd execution selects
-  the current repository filesystem. `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
+- `PROJECT-DATA-SSD-ROOTING.1.3` — from the clean routed-workflow commit, define collision-safe scratch lifecycle,
+  retained cache policy, successful/failed-run cleanup, concurrency isolation, and interrupted-run recovery.
+  `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.2 — route standard workflows to SSD storage**
+  (14 self-rooted hook/gate/generator/book/backend boundaries; closes with this commit).
+
+  **Result:** The hook, doctrine and Knowledge Map scripts, canonical Perl gate, four backend local gates, and new
+  mdBook wrapper source the common initializer before any runtime/allocation boundary. Direct low-level commands,
+  `.1.3` lifecycle, and `.2.1-.2.6` backend/tool migrations remain explicit separate owners.
+
+  **Proof:** Bash syntax plus initializer and workflow oracles pass. The workflow oracle launches lightweight and
+  backend-preflight processes from the other filesystem with hostile values and verifies all created roots share
+  the repository device. Routed mdBook, five doctrines, Knowledge Map 709/5,548, task metadata, 45-line memory, and
+  whitespace pass. Full canonical from that outside cwd passes Rust 1/1 in 77.50s, Dart 1/1, Julia 416/416 in
+  27.1s, primary 66x2, and Phase 0 1,031/1,031 in 662s. Bytecode is removed; push is 25/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.1 — define repo-local storage roots**
   (sourceable environment initializer and focused same-filesystem enforcement; closes with this commit).
 

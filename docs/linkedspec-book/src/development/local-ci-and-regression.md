@@ -731,8 +731,26 @@ Leaf `.1.1` signoff passes that focused proof, all five doctrines, and the compl
 warmed caches on the repository filesystem: Rust semantic admission 1/1 in 83.33 seconds, Dart 1/1, Julia 416/416
 in 30.2 seconds, reference CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in 652 seconds.
 
-Standard hooks, gates, and backend runners do not source the helper automatically until routing leaf `.1.2`; source
-it manually for direct commands in the meantime.
+Routing leaf `.1.2` makes the pre-commit hook, each doctrine boundary, both Knowledge Map scripts, the canonical
+Perl gate, Rust/Dart/Julia/Lua local runners, and the mdBook wrapper source the helper immediately after self-root
+discovery. The portable Knowledge Map scripts resolve it through generic `KM_ENV_INITIALIZER`, configured as a
+repo-relative path in `.knowledge_map.conf`, so the reusable bundle stays project-agnostic. Build this book through
+the routed wrapper:
+
+```bash
+bash tools/run_mdbook_local.sh
+```
+
+`tools/test_project_data_workflow_routing.sh` checks all 14 source-before-runtime boundaries and launches the
+lightweight workflows plus backend preflights from another filesystem with hostile inherited temp/cache variables.
+Every selected project-data directory is created on the repository device. The complete canonical gate is also run
+from that outside cwd for signoff. Direct lower-level commands still require an explicit
+`source tools/project_data_env.sh`; lifecycle behavior remains `.1.3`-owned and backend-specific hard-coded
+workspace/default migration remains `.2.1-.2.6`-owned.
+
+Complete `.1.2` signoff starts the canonical gate from the other filesystem while retaining validated SSD-local
+caches. Rust semantic admission passes 1/1 in 77.50 seconds, Dart 1/1, Julia 416/416 in 27.1 seconds, reference CLI
+66/66 in both option environments, and Phase 0 1,031/1,031 in 662 seconds.
 
 ## CI input areas
 

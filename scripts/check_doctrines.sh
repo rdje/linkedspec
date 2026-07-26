@@ -27,7 +27,9 @@
 # human-readable mirror is DOCTRINE_ENFORCEMENT.md §10 (kept in lockstep). A meta-check asserts
 # every registered enforcer exists + is executable, so a registry entry cannot be a dangling promise.
 set -uo pipefail   # deliberately NOT `-e`: run ALL checks, collect every result, then report.
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"; cd "$ROOT"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/tools/project_data_env.sh" || exit 1
+cd "$ROOT"
 
 # Each entry: "ID|what it proves|relative/path/to/check.sh"
 # Add a doctrine here AND a row in DOCTRINE_ENFORCEMENT.md §10.

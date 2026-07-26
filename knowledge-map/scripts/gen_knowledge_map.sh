@@ -23,6 +23,20 @@ ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || pwd)"
 : "${KM_SCAN_DIRS:=docs/knowledge docs/decisions}"
 : "${KM_OUTPUT:=KNOWLEDGE_MAP.md}"
 : "${KM_TITLE:=Knowledge Map}"
+: "${KM_ENV_INITIALIZER:=}"
+
+if [ -n "$KM_ENV_INITIALIZER" ]; then
+  case "$KM_ENV_INITIALIZER" in
+    /*) _km_env_initializer=$KM_ENV_INITIALIZER ;;
+    *) _km_env_initializer="$ROOT/$KM_ENV_INITIALIZER" ;;
+  esac
+  [ -f "$_km_env_initializer" ] || {
+    printf 'knowledge-map: environment initializer not found: %s\n' "$KM_ENV_INITIALIZER" >&2
+    exit 1
+  }
+  source "$_km_env_initializer"
+  unset _km_env_initializer
+fi
 
 if [ "${1:-}" = "--print-map-path" ]; then printf '%s\n' "$KM_OUTPUT"; exit 0; fi
 

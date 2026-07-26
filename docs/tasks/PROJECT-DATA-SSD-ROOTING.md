@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.1.1` initializer implemented and verified; `.1.2` workflow routing active)
+- Last updated: `2026-07-26` (`.1.2` workflow routing implemented and verified; `.1.3` lifecycle active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -135,7 +135,7 @@ accessing the shared copy, and remove only records or directories provably owned
     synchronized. Standard hooks/runners remain unchanged until their owning `.1.2` leaf.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1.2`
-  Status: `active`
+  Status: `done` (2026-07-26; 14 standard workflow boundaries route repo-filesystem project data)
   Goal: Route commit hooks, doctrine scripts, canonical CI, and standard backend runners through the initializer.
   Depends on: `.1.1`
   Acceptance: Source the helper before any command can allocate temporary or cache data; cover local CI, pre-commit,
@@ -144,8 +144,29 @@ accessing the shared copy, and remove only records or directories provably owned
     pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — An exact entrypoint scan shows the hook, doctrine/Knowledge Map scripts, canonical
+    gate, mdBook command, and four backend runners do not initialize the storage environment themselves; hostile
+    inherited temp/cache values therefore remain active unless every caller remembers a manual pre-step.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `.1.1` deliberately introduced only the sourceable mechanism. Supported
+    workflow boundaries still start child tools directly, and no routed mdBook wrapper exists; Julia computes its
+    old fallback before common initialization while Lua's explicit workspace remains separately `.2.5`-owned.
+  - [x] **FIX** — Route `tools/project_data_env.sh` immediately after self-root discovery in every standard shell
+    entrypoint, add a generic `KM_ENV_INITIALIZER` bundle hook plus repo config, a routed mdBook wrapper, and one
+    focused static/dynamic outside-cwd workflow oracle.
+  - [x] **ADDRESSED (verified)** — The workflow oracle rejects missing/late routes, launches Rust/Dart/Julia/Lua
+    preflights plus doctrine/Knowledge Map/mdBook from another filesystem with hostile inherited variables, and
+    proves every selected root uses the repository device; full canonical independently passes from that cwd.
+  - [x] **NO REGRESSION** — Bash syntax, the `.1.1` initializer oracle, the new workflow oracle, direct routed
+    doctrine/Knowledge Map/mdBook checks, `bash scripts/check_doctrines.sh`, `git diff --check`, and the complete
+    canonical gate pass; canonical is Rust 1/1 77.50s, Dart 1/1, Julia 416/416 27.1s, primary 66x2, Phase 0
+    1,031/1,031 662s.
+  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, Knowledge Map, roadmaps, task/live/memory docs describe the
+    routed standard workflow boundary and preserve `.1.3` lifecycle plus `.2.1-.2.6` migration ownership.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Define cleanup, retention, concurrency, and interrupted-run behavior for repo-local storage.
   Depends on: `.1.2`
   Acceptance: Separate reusable caches from per-run scratch; use collision-safe run directories; clean successful
@@ -281,7 +302,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.1.2` | `active` | From the clean `.1.1` commit, source the initializer in hooks, canonical CI, Knowledge Map/mdBook flows, and standard backend runners; prove outside-cwd selection. |
+| `PROJECT-DATA-SSD-ROOTING.1.3` | `active` | From the clean `.1.2` commit, define collision-safe scratch/cache lifecycle, cleanup, concurrency, and interrupted-run recovery. |
 
 ## Decisions
 
@@ -304,6 +325,8 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
+- Fourteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+  runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - The push cadence remains 300 commits. No leaf in this tree pushes independently.
 
 ## Links
@@ -312,6 +335,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Repository relocation decision: `docs/decisions/0052-repository-root-path-portability.md`
 - Durable storage-locality fact: `docs/knowledge/project-data-ssd-storage-locality.md`
 - Durable initializer fact: `docs/knowledge/project-data-env-initializer.md`
+- Durable workflow-routing fact: `docs/knowledge/project-data-workflow-routing.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -327,13 +351,17 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.1.1` | `bash -n tools/project_data_env.sh tools/test_project_data_env.sh`; focused shell test | PASS; ignored default roots, same-volume preservation, hostile cross-volume replacement, outside-cwd discovery, and exact cleanup |
 | 2026-07-26 | `.1.1` | five doctrines; memory; Knowledge Map; task metadata; mdBook; whitespace | PASS; memory 44 lines; Knowledge Map 708 facts/5,540 question keys |
 | 2026-07-26 | `.1.1` | canonical gate sourced through initializer with warmed same-filesystem SSD caches | PASS: Rust 1/1 in 83.33s; Dart 1/1; Julia 416/416 in 30.2s; Perl primary 66x2; Phase 0 1,031/1,031 in 652s |
+| 2026-07-26 | `.1.2` | Bash syntax; initializer oracle; 14-entrypoint workflow oracle from other filesystem; routed mdBook | PASS; hostile external variables replaced; every created project-data root on repository device |
+| 2026-07-26 | `.1.2` | Knowledge Map; five doctrines; task metadata; memory; whitespace | PASS; Knowledge Map 709 facts/5,548 question keys; memory 45 lines |
+| 2026-07-26 | `.1.2` | canonical gate launched from other-filesystem cwd with retained SSD caches | PASS: Rust 1/1 in 77.50s; Dart 1/1; Julia 416/416 in 27.1s; Perl primary 66x2; Phase 0 1,031/1,031 in 662s |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.0` | `74138903` — `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration` | Ownership, exact inventory, migration safety, and implementation order only. |
-| `.1.1` | `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` (this commit) | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
+| `.1.1` | `e33ed191` — `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
+| `.1.2` | `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` (this commit) | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
 
 ## Changelog
 
@@ -345,3 +373,6 @@ accessing the shared copy, and remove only records or directories provably owned
 - `2026-07-26`: Completed `.1.1`; the ignored project-data hierarchy, sourceable environment initializer,
   pre/post-create filesystem checks, temp/Cargo/Dart/Julia exports, same-volume override policy, and focused shell
   proof are implemented. `.1.2` becomes the clean workflow-routing frontier after commit.
+- `2026-07-26`: Completed `.1.2`; 14 supported workflow boundaries self-initialize the environment, the routed
+  mdBook wrapper and outside-cwd oracle pass, and complete canonical proof is green. `.1.3` becomes the clean
+  lifecycle/concurrency frontier after commit.

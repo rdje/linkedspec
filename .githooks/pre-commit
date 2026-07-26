@@ -6,7 +6,10 @@
 # breach. Adding a doctrine = write scripts/check_<id>.sh + one registry line in the driver.
 # Activate once per clone: git config core.hooksPath .githooks
 set -euo pipefail
-ROOT="$(git rev-parse --show-toplevel)"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+source "$ROOT/tools/project_data_env.sh"
+cd "$ROOT"
 
 # Knowledge Map is DERIVED — regenerate + stage (so it is always in sync at zero agent cost) BEFORE
 # the driver's check_knowledge_map verifies sync. The regenerate-and-stage step makes drift

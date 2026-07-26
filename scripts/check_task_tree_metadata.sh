@@ -6,6 +6,7 @@
 # done/completed/exhausted must not still advertise a live Current Frontier row.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/tools/project_data_env.sh"
 cd "$ROOT"
 
 perl - <<'PERL' docs/tasks/*.md

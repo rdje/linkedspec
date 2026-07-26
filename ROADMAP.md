@@ -20,8 +20,10 @@ one LinkedSpec stanza in a shared Julia log, 100 tracked temporary-allocation ow
 off-repository defaults. Migration follows copy/verify/use/delete without deleting ambiguous shared caches.
 Initializer `.1.1` is complete: ignored `/.linkedspec-data/{scratch,cache}`, runtime root discovery, pre/post-create
 device validation, same-filesystem caller overrides, standard temp/Cargo/Dart/Julia exports, and hostile outside-
-cwd shell proof are green. Active `.1.2` routes hooks, canonical CI, generators, mdBook, and backend runners through
-that helper. The path-portability closeout is paused behind this storage-locality tree so it can prove both
+cwd shell proof are green. Routing `.1.2` is complete: hook/doctrine/Knowledge Map, canonical Perl, four backend,
+and mdBook entrypoints self-initialize before child tools; a 14-entrypoint oracle proves source ordering and hostile
+outside-cwd selection. Active `.1.3` now owns scratch/cache lifecycle and concurrency. The path-portability closeout
+is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree

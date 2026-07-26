@@ -312,18 +312,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
-  `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`.
+  `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`. The gate self-roots and
+  initializes repository-filesystem project data before any language/tool child starts.
 
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 
 - **WHAT:** a sourceable environment initializer that derives the current checkout, creates ignored disposable
   `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, and exports temp, Cargo, Dart, and
   Julia storage variables.
-- **WHEN:** before a direct development, generation, test, or package command can create project-owned state. Until
-  routing leaf `PROJECT-DATA-SSD-ROOTING.1.2` lands, source it manually even for a tool listed elsewhere here.
+- **WHEN:** before a direct development, generation, test, or package command can create project-owned state.
+  Standard hook/doctrine/Knowledge Map/canonical/backend runners source it automatically; source it manually only
+  for lower-level commands that bypass those routed boundaries.
 - **HOW:** `source tools/project_data_env.sh`. Same-filesystem caller overrides are preserved; another-filesystem
   override is replaced after device validation. Run `bash tools/test_project_data_env.sh` for the focused hostile-
-  override and outside-cwd proof.
+  override proof and `bash tools/test_project_data_workflow_routing.sh` for the 14-entrypoint outside-cwd routing
+  proof. Build the book through `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports
   must affect the caller shell.

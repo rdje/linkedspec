@@ -15,8 +15,9 @@ necessary external tool/OS dependencies. Planning `.0` freezes 67 retained tempo
 two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocation owners, and 24 executable
 off-repository defaults. `.1.1` now implements ignored `/.linkedspec-data/{scratch,cache}`, current-file root
 discovery, same-device override validation, standard temp/Cargo/Dart/Julia exports, and hostile outside-cwd proof.
-Active `.1.2` routes supported workflows through the initializer. Migration is copy/verify/use/delete; ambiguous
-shared caches are not deleted wholesale.
+`.1.2` now routes hook/doctrine/Knowledge Map, canonical Perl, four backend, and mdBook entrypoints through the
+initializer, with a 14-entrypoint outside-cwd oracle. Active `.1.3` owns lifecycle/concurrency. Migration is
+copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

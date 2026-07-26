@@ -7,6 +7,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT_DIR/tools/project_data_env.sh"
 cd "${ROOT_DIR}"
 
 # ── Knobs (everything else is project-neutral) ──────────────────────────────

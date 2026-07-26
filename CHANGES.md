@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.2 — route standard workflows to SSD storage
+
+The pre-commit hook, doctrine driver and five registered checks, both Knowledge Map scripts, canonical Perl/reference
+gate, Rust/Dart/Julia/Lua local gates, and new `tools/run_mdbook_local.sh` now route
+`tools/project_data_env.sh` immediately after discovering their current checkout. The hook now self-roots from its
+own file rather than caller cwd. The project-agnostic Knowledge Map bundle uses generic `KM_ENV_INITIALIZER`, set
+repo-relatively by `.knowledge_map.conf`, rather than embedding a LinkedSpec dependency. Direct low-level commands
+remain explicitly caller-initialized; lifecycle stays
+owned by `.1.3`, and backend/tool hard-coded default plus old-data migration stays owned by `.2.1-.2.6`.
+
+`tools/test_project_data_workflow_routing.sh` locks 14 route sites, rejects any allocator/runtime before the source
+boundary, and dynamically launches doctrine, Knowledge Map, mdBook, and four backend preflights from the other
+filesystem with hostile inherited temp/cache values. Every unique project-data hierarchy is created on the
+repository device. The complete canonical gate is independently launched from that outside cwd with retained
+same-filesystem caches and passes Rust semantic admission 1/1 in 77.50 seconds, Dart 1/1, Julia 416/416 in 27.1
+seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 662 seconds.
+
+Bash syntax, initializer and workflow oracles, routed mdBook, five doctrines, 709-fact/5,548-question Knowledge
+Map, task metadata, 45-line memory, and whitespace pass. Generated Python bytecode is removed exactly; retained SSD caches
+remain. No old off-volume source is read, mutated, or deleted in this routing leaf. Push cadence advances to 25/300;
+no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.1 — define repo-local storage roots
 
 Added ignored repository-relative `/.linkedspec-data/` with separate disposable `scratch/` and retained `cache/`

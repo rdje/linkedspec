@@ -5,6 +5,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/tools/project_data_env.sh"
 cd "$ROOT"
 
 mapfile -d '' tracked_files < <(git ls-files -z -- . ':(exclude)rgx')

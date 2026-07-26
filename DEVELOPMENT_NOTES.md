@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.2` — initialize at the self-rooted process boundary): Environment
+  locality is reliable only when the supported entrypoint establishes it before the first project-data allocator or
+  language runtime. Routing at the hook/gate/generator/backend wrapper boundary covers descendants without mixing
+  backend-internal migration into the common environment leaf. Re-sourcing is intentionally idempotent: nested
+  doctrine and Knowledge Map calls preserve already validated same-filesystem roots.
+
+  The focused oracle combines source-order inspection with real outside-cwd process starts. Unique same-volume
+  project roots make successful initialization observable without a test-only production flag; deliberately
+  missing backend commands stop each expensive runner immediately after initialization. The full canonical gate is
+  then the real Perl/reference consumer proof from that outside cwd. It passes Rust 1/1 in 77.50 seconds, Dart 1/1,
+  Julia 416/416 in 27.1 seconds, primary 66x2, and Phase 0 1,031/1,031 in 662 seconds.
+
+  A bare `mdbook build` cannot mutate its parent shell, so `tools/run_mdbook_local.sh` is the supported routed book
+  boundary. Direct low-level commands still source the initializer manually. Lua's explicit private-temp native
+  workspace is visible but remains `.2.5`-owned; routing does not falsely claim that migration is complete.
+
+  The Knowledge Map remains a portable project-agnostic bundle. Its generator/checker therefore expose generic
+  optional `KM_ENV_INITIALIZER` integration rather than naming LinkedSpec internally; root `.knowledge_map.conf`
+  supplies the repo-relative `tools/project_data_env.sh` value only for this project. This preserves standalone
+  bundle adoption while making both LinkedSpec commands self-initialize.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.1` — validate the destination, not the environment spelling): An
   inherited cache/temp variable is only a request. The initializer turns relative requests into caller-cwd
   absolute candidates, walks to the nearest existing ancestor without creating anything, compares that directory's

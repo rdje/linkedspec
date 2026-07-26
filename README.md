@@ -266,8 +266,19 @@ and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache, and Ju
 override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
 filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
 The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. The
-helper works when sourced from outside the checkout, but standard hooks and runners do not source it automatically
-until routing leaf `.1.2` lands.
+helper works when sourced from outside the checkout.
+
+Routing `.1.2` makes the pre-commit hook, doctrine and Knowledge Map scripts, canonical Perl gate, Rust/Dart/Julia/
+Lua local gates, and `tools/run_mdbook_local.sh` initialize that environment themselves before starting a runtime or
+allocator. These supported commands can therefore be launched from outside the checkout and safely replace hostile
+inherited temp/cache roots. Use the mdBook wrapper instead of a bare build:
+
+```bash
+bash tools/run_mdbook_local.sh
+```
+
+Direct low-level commands that bypass those entrypoints must still source the helper explicitly. Lifecycle policy
+remains `.1.3`-owned, and backend-specific hard-coded workspace/default migration remains `.2.1-.2.6`-owned.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`
