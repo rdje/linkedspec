@@ -692,11 +692,11 @@ tree `PROJECT-DATA-SSD-ROOTING` define the complete contract.
 
 The behavior-free planning audit found 65 retained CLI workspaces and two Julia depots outside the repository
 filesystem (67 directories/135,756 KiB), two exact Dart checkout metadata records, one LinkedSpec stanza inside a
-shared Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. No migration
-has occurred in planning `.0`. Each implementation leaf must copy or move its exact data, verify count/bytes/hash
-where material, exercise the SSD replacement, and then delete the exact old source. Ambiguous shared global caches
-are never deleted wholesale; supported workflows populate repository-local caches and stop reading the shared
-copy.
+shared Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Planning `.0`
+changed no data. Perl leaf `.2.1` has since migrated the 65 exact CLI workspaces; later family leaves retain the
+same requirement to verify count/bytes/hash where material, exercise the SSD replacement, and then delete the exact
+old source. Ambiguous shared global caches are never deleted wholesale; supported workflows populate repository-
+local caches and stop reading the shared copy.
 
 Planning `.0` is behavior-free but was signed off with temporary, Cargo, Dart, and Julia cache variables rooted
 beneath the repository. The complete canonical gate passes Rust semantic admission 1/1 in 82.41 seconds, Dart
@@ -741,12 +741,12 @@ reusable bundle stays project-agnostic. Build this book through the routed wrapp
 bash tools/run_mdbook_local.sh
 ```
 
-`tools/test_project_data_workflow_routing.sh` checks all 14 source-before-runtime boundaries and launches the
+`tools/test_project_data_workflow_routing.sh` checks every source-before-runtime boundary and launches the
 lightweight workflows plus backend preflights from another filesystem with hostile inherited temp/cache variables.
 Every selected project-data directory is created on the repository device. The complete canonical gate is also run
 from that outside cwd for signoff. Direct lower-level commands still require an explicit
-`source tools/project_data_env.sh`; backend-specific hard-coded workspace/default migration remains
-`.2.1-.2.6`-owned.
+`source tools/project_data_env.sh`; backend-specific hard-coded workspace/default migration remains independently
+owned by `.2.1-.2.6`.
 
 Complete `.1.2` signoff starts the canonical gate from the other filesystem while retaining validated SSD-local
 caches. Rust semantic admission passes 1/1 in 77.50 seconds, Dart 1/1, Julia 416/416 in 27.1 seconds, reference CLI
@@ -792,7 +792,7 @@ descendant still consumes its scratch.
 `tools/test_project_data_lifecycle.sh` proves successful and default-failure cleanup, retained-cache survival,
 explicit failure retention and purge, two simultaneous distinct live runs, live-child protection, dead
 interruption recovery, invalid-marker refusal, non-executable shell entrypoint support, and checkout isolation.
-`tools/test_project_data_workflow_routing.sh` additionally locks all 14 environment-plus-run boundaries and requires
+`tools/test_project_data_workflow_routing.sh` additionally locks every environment-plus-run boundary and requires
 no managed run leaf after each completed outside-cwd workflow.
 
 Complete `.1.3` signoff from the other-filesystem cwd passes Rust semantic admission 1/1 in 82.78 seconds, Dart
@@ -801,6 +801,35 @@ seconds. The wrapper then reports zero managed runs. A preceding attempt against
 Cargo cache failed at its sandbox-blocked registry refresh and also left zero managed runs; the complete restart
 used the existing repository-relative retained cache with Cargo offline. Cache population/migration remains a
 later backend-owned leaf, separate from this lifecycle contract.
+
+### Perl temporary data, traces, and CLI workspaces
+
+Perl migration `.2.1` extends the routed set with the standalone five-backend primary matrix and adds a focused
+process oracle:
+
+```bash
+bash tools/test_perl_project_data_storage.sh
+```
+
+The oracle may be launched from any working directory. It enters one managed run, checks that both its run and
+`TMPDIR` share the repository device, then exercises the same allocation shapes used by the 24 tracked Perl
+owners: default and named `File::Temp` directories/files, explicit `TMPDIR => 1`, a routed LinkedSpec trace file,
+and a real `tools/run_cli_conformance.pl` subprocess workspace. The CLI child verifies its actual cwd is the
+current run's `tmp/linkedspec-cli-*` directory, writes an expected trace artifact, and exits through normal
+workspace cleanup. The proof also locks the two oracle-capture tempfiles and preserves inert `/tmp` values used by
+semantic privacy tests. `tools/run_ci_local.sh` runs this oracle before its two 66-case primary legs.
+
+The pre-migration internal temporary root held 65 exact directories created by the CLI runner's manifest-owned
+workspace template. They were copied to repository-relative
+`/.linkedspec-data/cache/migrated/perl-cli-workspaces/`. Source and destination both measured 65 directories,
+17 files, and 1,590 bytes and produced canonical inventory SHA-256
+`2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`. The copied nested source/input fixture
+then produced its exact expected JSON through the Perl primary command. Only after those checks were all 65 old
+directories deleted; the internal CLI-workspace census is now zero and the verified SSD copy remains recoverable.
+
+Complete `.2.1` signoff passes the expanded outside-cwd routing oracle, focused runner/trace suites, both primary
+environments at 66/66, and canonical Rust semantic admission 1/1 in 77.61 seconds, Dart 1/1, Julia 416/416 in 27.2
+seconds, and Phase 0 1,031/1,031 in 625 seconds. Rust/Dart/Julia/Lua/tool storage migrations remain `.2.2-.2.6`.
 
 ## CI input areas
 

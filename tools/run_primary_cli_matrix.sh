@@ -3,6 +3,9 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
+source "$REPO_ROOT/tools/project_data_env.sh"
+linkedspec_project_data_enter_run "$REPO_ROOT/tools/run_primary_cli_matrix.sh" "$@"
+
 CARGO_CMD="${LINKEDSPEC_CARGO_CMD:-cargo}"
 DART_CMD="${LINKEDSPEC_DART_CMD:-dart}"
 JULIA_CMD="${LINKEDSPEC_JULIA_CMD:-julia}"

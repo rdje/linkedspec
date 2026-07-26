@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.1 — root Perl workspaces on SSD
+
+Routed `tools/run_primary_cli_matrix.sh` through the common environment and managed-run lifecycle before its first
+runtime or allocator. Added `tools/test_perl_project_data_storage.sh` and made the canonical gate run it. The new
+outside-cwd oracle inventories all 24 tracked Perl `File::Temp` owners, exercises default/named directory and file
+allocations, writes and reads an actual routed LinkedSpec trace, and launches a real neutral CLI child whose cwd
+must be inside the active run's SSD `tmp/` directory. It requires completed CLI scratch to disappear and locks the
+existing inert `/tmp` privacy/path fixtures as values rather than writers.
+
+Expanded the workflow-routing proof from 14 to 16 boundaries by adding the standalone primary matrix and Perl
+storage oracle. Hostile other-filesystem temp/cache values are replaced before either can allocate, both work from
+outside the checkout, failed primary preflight reaches the configured missing runtime, and completed runs leave no
+managed scratch. Oracle generator stdout/stderr capture retains its two explicit initialized-`TMPDIR` allocations.
+
+Migrated the exact 65 old `linkedspec-cli-*` directories from the internal operating-system temporary root into
+ignored repository-relative `/.linkedspec-data/cache/migrated/perl-cli-workspaces/`. Every source name matched a
+current manifest case plus the runner's six-character suffix and the set contained no symlinks. Source and SSD
+destination each measured 65 directories, 17 files, and 1,590 bytes with canonical inventory SHA-256
+`2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`. The copied nested source/input fixture
+produced exact expected JSON through the Perl primary command; only then were all 65 old sources deleted. Old
+residue is zero and the verified SSD copy remains recoverable.
+
+Bash syntax, the outside-cwd Perl oracle, expanded routing proof, focused runner/trace suites, both standalone
+66-case Perl option environments, five doctrines, Knowledge Map, mdBook, task/memory checks, and whitespace pass.
+Canonical offline signoff with warmed same-filesystem caches passes Rust 1/1 in 77.61 seconds, Dart 1/1, Julia
+416/416 in 27.2 seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 625 seconds. An initial attempt against the
+valid but empty default Cargo cache failed only at sandbox-blocked registry refresh and cleaned its managed run;
+the successful gate and final list also leave zero runs. Push cadence advances to 27/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.3 — harden storage lifecycle
 
 Added `tools/project_data_run.sh` as the common foreground lifecycle owner for all 14 routed workflow boundaries.

@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; initializer, workflow routing, and managed-run lifecycle implemented; migration pending
+- Status: accepted; common lifecycle and Perl migration implemented; Rust/Dart/Julia/Lua/tool migrations pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -75,6 +75,12 @@ boundary for storage locality.
 - Those boundaries then enter `tools/project_data_run.sh`: nested routed scripts reuse one foreground run,
   successful/default-failed scratch is deleted, retained `cache/` survives, and explicit recovery never scans
   another checkout namespace or removes a live wrapper/child.
+- Perl migration routes the standalone five-backend primary matrix too. A recurring oracle proves all 24 tracked
+  Perl temporary-allocation owners still resolve through managed `TMPDIR`, explicit trace logs share the repository
+  device, real CLI subprocess workspaces clean up, and inert path/privacy values remain data rather than writers.
+- The 65 exact old CLI workspace directories were copied into repository-relative retained cache, verified as 17
+  files/1,590 bytes with a canonical inventory hash, exercised through a copied nested source/input fixture, and
+  deleted from the internal temporary filesystem. The verified SSD copy remains available; the old census is zero.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any

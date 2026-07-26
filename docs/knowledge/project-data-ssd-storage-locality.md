@@ -17,10 +17,12 @@ answers:
   - which LinkedSpec global cache records identify the checkout
   - does LinkedSpec move shared global caches wholesale
   - what did PROJECT DATA SSD ROOTING 0 discover
+  - has Perl project data been migrated to the SSD
+  - do old LinkedSpec CLI workspaces remain on the internal temporary filesystem
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, ssd, cache, temporary-data, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. A tracked census finds 100 temporary-allocation files: Perl 24, Rust 16, Dart 18, Julia 17, Lua 13, Python 3, shell 12 with cross-family overlap; 24 executable files contain explicit off-repository defaults; 97 fact cards contain 107 old temporary/home-depot command lines. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
+evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. A tracked census finds 100 temporary-allocation files: Perl 24, Rust 16, Dart 18, Julia 17, Lua 13, Python 3, shell 12 with cross-family overlap; 24 executable files contain explicit off-repository defaults; 97 fact cards contain 107 old temporary/home-depot command lines. PROJECT-DATA-SSD-ROOTING.2.1 migrates, verifies, exercises, and deletes the 65 old Perl CLI directories while a recurring oracle roots all 24 Perl owners. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
 reverify: "git status --short && git ls-files -- . ':(exclude)rgx' | wc -l && rg --no-config -l 'File::Temp|tempdir\\(|tempfile\\(|TemporaryDirectory|NamedTemporaryFile|mktempdir\\(|Directory\\.systemTemp|std::env::temp_dir|tempfile::tempdir|mktemp -d' t tools julia lua dart rust knowledge-map .githooks | wc -l"
 ---
 
@@ -30,10 +32,11 @@ child process allocates. An inherited temp/cache destination on another filesyst
 convenient override.
 
 The planning census found a real live mismatch. Sixty-five CLI workspaces and two Julia depots remained on the
-internal per-user temporary filesystem, occupying 135,756 KiB. The CLI workspaces contain 17 small fixture/trace
-files totalling 1,590 bytes; the depots account for essentially all retained size. Two global Dart active-root
-records point at current/former LinkedSpec checkouts. A shared Julia usage log has one former LinkedSpec manifest
-stanza alongside another project's data, so only the LinkedSpec stanza is an eligible deletion target.
+internal per-user temporary filesystem, occupying 135,756 KiB. The CLI workspaces contained 17 small fixture/trace
+files totalling 1,590 bytes; the depots accounted for essentially all retained size. Perl leaf `.2.1` copied those
+65 exact directories into repository-relative retained cache, verified directory/file/byte identity plus canonical
+hash, exercised a copied source/input fixture, and deleted the internal-volume sources. Two global Dart active-root
+records and a former LinkedSpec stanza in a shared Julia log remain separately owned by later migration leaves.
 
 Tracked allocation is broader: 100 files use default temp APIs or explicit temp roots. Family counts are Perl 24,
 Rust 16, Dart 18, Julia 17, Lua 13, Python three, and shell 12; multi-language harnesses overlap. Twenty-four
@@ -47,7 +50,13 @@ metadata, depots, scratch, and logs follow copy/verify/use/delete: verify counts
 workflow against the SSD copy, then delete the old source in the same task leaf. Final closeout independently proves
 the off-SSD project census empty.
 
+Perl now has an ongoing executable guard, not only migration history. `tools/test_perl_project_data_storage.sh`
+enters managed scratch, exercises default and explicit `File::Temp`, a real LinkedSpec trace file, and the neutral
+CLI runner's child cwd, checks repository device identity, requires completed workspace cleanup, inventories all 24
+tracked Perl owners, and preserves inert `/tmp` privacy fixtures. The standalone primary matrix is routed too.
+
 Cross-volume reads are denied by default. The narrow exception is an explicit caller path or a strictly required
 externally managed executable, system library, device, credential, or OS service. Those are dependencies, not
 project storage, and their exact supported surface is documented and gated. Related facts:
-[[repository-root-path-portability]], [[rust-local-verification-gate]], [[lua-toolchain-package-policy]].
+[[perl-project-data-ssd-storage]], [[repository-root-path-portability]], [[rust-local-verification-gate]],
+[[lua-toolchain-package-policy]].

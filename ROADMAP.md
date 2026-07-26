@@ -21,11 +21,13 @@ off-repository defaults. Migration follows copy/verify/use/delete without deleti
 Initializer `.1.1` is complete: ignored `/.linkedspec-data/{scratch,cache}`, runtime root discovery, pre/post-create
 device validation, same-filesystem caller overrides, standard temp/Cargo/Dart/Julia exports, and hostile outside-
 cwd shell proof are green. Routing `.1.2` is complete: hook/doctrine/Knowledge Map, canonical Perl, four backend,
-and mdBook entrypoints self-initialize before child tools; a 14-entrypoint oracle proves source ordering and hostile
+and mdBook entrypoints self-initialize before child tools; the routing oracle proves source ordering and hostile
 outside-cwd selection. Lifecycle `.1.3` is complete: checkout-namespaced collision-safe runs, exact success/default-
 failure cleanup, explicit diagnostic retention, retained caches, guarded interruption recovery, and concurrency/
-checkout isolation are executable and documented. Active `.2.1` now owns Perl workspace/log/trace migration and
-exact old-data deletion. The path-portability closeout
+checkout isolation are executable and documented. Perl `.2.1` is complete: the standalone primary matrix plus a
+focused 24-owner `File::Temp`/trace/CLI oracle enter managed SSD storage, and 65 exact old CLI workspaces were
+copied to the root-relative retained cache, count/byte/hash verified, exercised, and deleted. Active `.2.2` owns
+Rust build/package/test/generated/relocation data and reusable cache migration. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 

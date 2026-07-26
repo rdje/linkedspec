@@ -12,8 +12,8 @@ answers:
 date: 2026-07-15
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; .1.5.4.3 runs it unchanged across Perl/Rust/Dart/Julia at 4x2x61; LUA-BACKEND-PARITY.7.2 extends the same matrix to Lua at 5x2x61."
-reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && bash tools/run_primary_cli_matrix.sh"
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; backend parity extends it unchanged across five backends. PROJECT-DATA-SSD-ROOTING.2.1 routes the standalone matrix through managed repository storage and adds an actual-workspace SSD oracle."
+reverify: "perl -c tools/run_cli_conformance.pl && bash tools/test_perl_project_data_storage.sh && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && bash tools/run_primary_cli_matrix.sh"
 ---
 
 `cli_conformance/manifest.json` is the single backend-neutral primary-command
@@ -23,22 +23,24 @@ after `--`; cases contain only shared arguments, files, and expected behavior.
 For Perl:
 
 ```bash
+source tools/project_data_env.sh
 PERL5LIB= perl tools/run_cli_conformance.pl \
   --display-command 'perl bin/linkedspec' \
   -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
 ```
 
 For Rust, `tools/run_rust_local.sh` builds the command and invokes this same runner in default and POSIX option
-environments. Perl, Rust, Dart, and Julia pass all 61 unchanged cases in both environments. `.1.5.4.3` now owns
-the original warmed recurring four-command invocation of this unchanged contract; Lua `.7.2` extends that matrix
-to five commands and 5x2x61 without changing the manifest or runner.
+environments. All five backends consume the same current 66-case manifest. The routed
+`tools/run_primary_cli_matrix.sh` owns the warmed five-command invocation in both option environments without
+changing the manifest or runner.
 
 Schema version 1 validates unique safe ids/paths, known keys, checked-in input
 and expected files, argument arrays, channel definitions, generated-file
 expectations, and exit statuses. Each case gets a canonical private workspace;
 input files are copied as raw bytes. The runner drains stdout/stderr concurrently
 as separate raw byte streams, then compares both channels, exit status, and any
-expected workspace files exactly. A mismatch reports its first byte offset,
+expected workspace files exactly. Perl's storage oracle additionally verifies the actual child cwd is below the
+current managed SSD run and that successful workspace cleanup leaves no directory. A mismatch reports its first byte offset,
 lengths, and escaped excerpts.
 
 Explicit placeholders are `{{COMMAND}}`, `{{REPO_ROOT}}`, `{{WORKSPACE}}`, and

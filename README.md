@@ -249,10 +249,12 @@ system libraries, devices, credentials, or operating-system services.
 
 ADR `0053` and `docs/tasks/PROJECT-DATA-SSD-ROOTING.md` own the migration. Planning audit `.0` found 67 retained
 temporary directories totalling 135,756 KiB, two Dart checkout metadata records, one LinkedSpec stanza in a shared
-Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Each exact retained
-source will be copied, count/byte/hash verified where material, exercised from its SSD destination, and deleted in
-the same implementation leaf. Shared caches are never deleted wholesale when ownership is ambiguous; LinkedSpec
-will instead populate repository-local caches and stop consulting the shared copy.
+Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Perl leaf `.2.1`
+has now migrated all 65 exact CLI workspace directories into root-relative retained SSD cache, verified 17 files/
+1,590 bytes plus canonical inventory hash, exercised the copied source/input fixture, and deleted the old internal-
+volume set. Later family leaves apply the same copy/verify/use/delete rule. Shared caches are never deleted wholesale
+when ownership is ambiguous; LinkedSpec instead populates repository-local caches and stops consulting the shared
+copy.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -298,7 +300,19 @@ bash tools/project_data_run.sh --purge-failed  # explicitly remove dead retained
 A low-level foreground command can request the same lifecycle with
 `bash tools/project_data_run.sh COMMAND [ARG ...]`; it must not return while descendants still consume its scratch.
 Commands that only need the common environment may still source `tools/project_data_env.sh` explicitly.
-Backend-specific hard-coded workspace/default migration remains `.2.1-.2.6`-owned.
+
+Perl migration `.2.1` routes `tools/run_primary_cli_matrix.sh` through that lifecycle and adds the recurring
+storage proof:
+
+```bash
+bash tools/test_perl_project_data_storage.sh
+```
+
+The proof runs from outside the checkout, inventories all 24 tracked Perl temporary-allocation owners, exercises
+default and named `File::Temp` paths, writes and reads an explicit LinkedSpec trace, and launches a real CLI fixture
+subprocess. Every observed project path shares the repository device, the CLI workspace is cleaned, and inert
+`/tmp` privacy/path fixtures remain unchanged. The canonical gate runs this proof automatically. Rust/Dart/Julia/
+Lua/tool hard-coded workspace and cache migration remains `.2.2-.2.6`-owned.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

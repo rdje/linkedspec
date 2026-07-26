@@ -8,15 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.1` — from the clean managed-lifecycle commit, root Perl tests, CLI workspaces, traces,
-  logs, and retained fixtures on the repository filesystem; verify each SSD replacement, delete its exact old copy,
-  and preserve inert path-value fixtures.
+- `PROJECT-DATA-SSD-ROOTING.2.2` — from the clean Perl migration commit, root Rust build, Cargo package, test,
+  generated-source, and relocated-oracle data on the repository filesystem; populate reusable SSD caches, verify
+  migrated retained data, and delete each exact old Rust-owned copy.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.1 — root Perl workspaces on SSD**
+  (24-owner allocator/trace/CLI proof, routed standalone matrix, exact 65-directory migration/deletion; closes with
+  this commit).
+
+  **Result:** Default/named Perl `File::Temp`, explicit trace files, neutral CLI child workspaces, and the standalone
+  five-backend primary matrix all enter managed repository storage. Sixty-five exact old CLI directories were
+  copied into root-relative retained SSD cache, matched at 17 files/1,590 bytes and canonical inventory hash,
+  exercised through a copied nested fixture, then deleted. Old residue is zero; inert path-value fixtures remain.
+
+  **Proof:** Bash syntax, outside-cwd Perl storage and expanded 16-boundary routing oracles, focused runner/trace,
+  primary 66x2, doctrines, Knowledge Map, task/memory, mdBook, and whitespace pass. Canonical offline signoff passes
+  Rust 1/1 in 77.61s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, and Phase 0 1,031/1,031 in 625s. Zero managed
+  runs remain. Push is 27/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.3 — harden storage lifecycle**
   (checkout-namespaced managed runs, exact cleanup/retention, concurrency isolation, and guarded recovery; closes
   with this commit).

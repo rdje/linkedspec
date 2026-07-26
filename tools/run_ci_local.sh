@@ -43,7 +43,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case lua/src/linkedspec/semantic_index.lua lua/src/linkedspec/semantic_compilation_outcome.lua lua/src/linkedspec/semantic_static_projection.lua lua/test/semantic_index_source_foundation_test.lua lua/test/semantic_index_compilation_foundation_test.lua lua/test/semantic_index_static_graph_test.lua tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_semantic_introspection_contract.py tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/check_unicode_rule_label_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance unicode_case lua/src/linkedspec/semantic_index.lua lua/src/linkedspec/semantic_compilation_outcome.lua lua/src/linkedspec/semantic_static_projection.lua lua/test/semantic_index_source_foundation_test.lua lua/test/semantic_index_compilation_foundation_test.lua lua/test/semantic_index_static_graph_test.lua tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_semantic_introspection_contract.py tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/check_unicode_rule_label_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl tools/test_perl_project_data_storage.sh specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -86,6 +86,7 @@ require_tracked_file tools/run_julia_local.sh
 require_tracked_file tools/run_lua_local.sh
 require_tracked_file tools/run_primary_cli_matrix.sh
 require_tracked_file tools/build_lua_native.sh
+require_tracked_file tools/test_perl_project_data_storage.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file tools/check_callable_codeblock_contract.py
 require_tracked_file tools/check_callable_signature_contract.py
@@ -264,6 +265,7 @@ audit_no_machine_specific_absolute_paths
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/run_julia_local.sh tools/run_lua_local.sh tools/run_primary_cli_matrix.sh tools/build_lua_native.sh \
+ tools/test_perl_project_data_storage.sh \
  tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
  tools/check_duplicate_regex_slot_identity_five_backend.sh \
  tools/check_root_rule_selection_five_backend.sh \
@@ -457,6 +459,9 @@ prove -Iperl t/actionir_ast_parser.t
 
 log "running primary CLI runner and focused trace suites"
 PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/trace_cli.t
+
+log "proving Perl project data stays in managed repository storage"
+bash "$REPO_ROOT/tools/test_perl_project_data_storage.sh"
 
 log "running primary CLI conformance (default option environment)"
 PERL5LIB= perl tools/run_cli_conformance.pl \

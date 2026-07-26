@@ -292,7 +292,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   (`spec.spec`-generated) parser ([[bootstrapspec-vs-spec-spec-dual-path]]); `gen_oracle_corpus.pl`
   regenerates the frozen oracle fixtures used for cross-variant parity ([[rust-perl-output-oracle]]).
 - **WHEN:** self-host divergence; Perl↔Rust parity work ([[cross-variant-output-parity]]).
-- **HOW:** `perl -Iperl tools/cross_check_spec_parsers.pl` · `perl -Iperl tools/gen_oracle_corpus.pl`.
+- **HOW:** source `tools/project_data_env.sh`, then run `perl -Iperl tools/cross_check_spec_parsers.pl` or
+  `perl -Iperl tools/gen_oracle_corpus.pl`. The latter's two subprocess-capture tempfiles explicitly select the
+  initialized `TMPDIR`.
 
 ### 4.3 `tools/run_cli_conformance.pl` — backend-neutral primary CLI byte contract
 - **WHAT:** execute any backend command array against `cli_conformance/manifest.json` in isolated per-case
@@ -301,13 +303,23 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing a primary CLI, its help/errors/trace behavior, or the shared cross-backend command contract.
 - **HOW:**
   ```bash
+  source tools/project_data_env.sh
   PERL5LIB= perl tools/run_cli_conformance.pl \
     --display-command 'perl bin/linkedspec' \
     -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
   ```
-  Use `--case ID` before `--` for focused execution. The current baseline contains two exact help, 20 strict
-  usage, seven success, four operational failure, and 20 canonical trace cases. Perl passes 53/53; `.1.5.1.6`
-  is active for the surfaced UTF-8 process boundary before pending Rust `.1.5.2` consumes this manifest.
+  Use `--case ID` before `--` for focused execution. The current baseline has 66 cases and the canonical gate runs
+  Perl in both default and POSIX option environments. For the complete routed five-backend matrix, use
+  `bash tools/run_primary_cli_matrix.sh`; it initializes and enters managed project storage itself.
+
+### 4.3.1 `tools/test_perl_project_data_storage.sh` — Perl SSD-local storage oracle
+
+- **WHAT:** inventory the 24 tracked Perl temporary-allocation owners and execute default/named `File::Temp`,
+  explicit trace-file, and real CLI subprocess-workspace paths inside one managed run.
+- **WHEN:** changing Perl tests, trace/log destinations, the neutral CLI runner, oracle capture, primary-matrix
+  routing, or project-data lifecycle.
+- **HOW:** `bash tools/test_perl_project_data_storage.sh`. It self-roots, works outside the checkout, checks actual
+  filesystem device identity, locks inert path-value fixtures, and requires completed CLI scratch to disappear.
 
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX

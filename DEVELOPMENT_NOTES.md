@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.1` — hash the exact ownership set, not its shared parent): A migration
+  proof is only as exact as its inventory root. The first read-only comparison accidentally asked the canonical
+  hash helper to traverse the whole operating-system temporary root; unrelated data made that scope invalid even
+  though the 65-directory copy itself had completed. No deletion occurred. The corrected proof canonicalized only
+  manifest-owned `linkedspec-cli-*` names relative to each source/destination root and included empty directories,
+  relative file names, byte counts, and per-file hashes. That produced equal 65-directory/17-file/1,590-byte
+  inventories and one stable aggregate hash before use/delete. Shared parents must never be inputs to an exact-
+  owner deletion proof.
+
+  Environment routing is sufficient for Perl's allocator family because real probes confirm both implicit and
+  explicit `File::Temp` forms consult initialized `TMPDIR`; duplicating root discovery into 24 tests would create a
+  second policy owner. The durable guard instead executes those allocation shapes once inside the same managed-run
+  boundary used by the canonical gate, then separately verifies explicit trace output and an actual CLI child cwd.
+  The standalone primary matrix was the one missing top-level boundary and now self-routes. Inert `/tmp` strings in
+  semantic privacy tests remain deliberately unchanged because they cause no IO.
+
+  The interrupted parallel primary probe also validated lifecycle composition: two killed runners left only two
+  marked run leaves, not 65 scattered workspaces; `--recover` removed the dead exact leaves and the sequential
+  66x2 rerun passed. Complete canonical signoff passes Rust 77.61s, Dart, Julia 416/416 in 27.2s, primary 66x2,
+  and Phase 0 1,031/1,031 in 625s.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.3` — own lifetime outside the child workflow): Sourcing environment
   variables can establish *where* data lives but cannot safely establish *how long* it lives. Installing an EXIT
   trap from a sourced helper is not composable: the Knowledge Map checker and Lua runner already own later traps,

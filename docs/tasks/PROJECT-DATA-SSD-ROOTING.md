@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.1.3` managed-run lifecycle implemented and verified; `.2.1` Perl migration active)
+- Last updated: `2026-07-26` (`.2.1` Perl storage migration, exact old-data deletion, and signoff complete; `.2.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -204,7 +204,7 @@ accessing the shared copy, and remove only records or directories provably owned
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.1`
-  Status: `active`
+  Status: `done` (2026-07-26; Perl allocators/traces/CLI workspaces rooted, 65 old workspaces migrated and deleted)
   Goal: Root Perl tests, CLI conformance, corpus generation, traces, and diagnostic logs on SSD storage.
   Depends on: `.1.3`
   Acceptance: Cover `File::Temp`, explicit trace/log files, and tool subprocess workspaces while retaining inert
@@ -212,8 +212,32 @@ accessing the shared copy, and remove only records or directories provably owned
     pass focused Perl suites and both primary CLI matrices; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — The frozen owner census identifies 24 tracked Perl `File::Temp` users, while the
+    internal operating-system temporary root still held 65 `linkedspec-cli-*` workspaces with 17 files/1,590
+    bytes. `tools/run_primary_cli_matrix.sh` was also the remaining primary-matrix boundary without self-routing.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Perl `File::Temp` and the CLI/oracle capture owners correctly honor
+    initialized `TMPDIR`, but no Perl-specific executable oracle locked that invariant and the standalone five-
+    backend primary matrix could allocate before initialization. The 65 directories were interruption remnants
+    from the exact `tools/run_cli_conformance.pl` workspace template, not inert path fixtures or shared cache data.
+  - [x] **FIX** — The standalone primary matrix now enters the common managed run before any runtime or allocator.
+    New `tools/test_perl_project_data_storage.sh` proves default/named `File::Temp`, explicit trace output, and a
+    real CLI subprocess workspace share the repository device, clean up exactly, retain the 24-owner inventory,
+    and preserve inert `/tmp` privacy/path values. The canonical Perl gate runs the oracle on every invocation.
+  - [x] **COPY / VERIFY / USE / DELETE** — Copied all 65 exact manifest-owned directories to ignored root-relative
+    `/.linkedspec-data/cache/migrated/perl-cli-workspaces/`; both sides matched 65 directories, 17 files, 1,590
+    bytes, and canonical inventory SHA-256 `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`.
+    The copied nested-spec/input fixture executed with exact expected JSON before all 65 old directories were
+    deleted; the old census is zero and the verified SSD copy remains recoverable.
+  - [x] **FOCUSED REGRESSION** — Bash syntax, outside-cwd Perl storage proof, expanded workflow routing, focused
+    runner/trace suites, and both 66-case Perl primary environments pass; completed managed-run census is zero.
+  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and complete canonical
+    Perl gate pass. Canonical records Rust 1/1 in 77.61s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, and
+    Phase 0 1,031/1,031 in 625s. This commit lands at 27/300; the brief is cleared and no push occurs.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Root Rust build, Cargo package, test, generated-source, and relocated-oracle data on SSD storage.
   Depends on: `.2.1`
   Acceptance: Configure project-local Cargo cache/build roots through runtime-derived environment, retain the
@@ -325,7 +349,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.1` | `active` | From the clean `.1.3` commit, root Perl tests, CLI workspaces, traces, logs, and retained fixtures; verify each SSD replacement and delete its exact old copy. |
+| `PROJECT-DATA-SSD-ROOTING.2.2` | `active` | From the clean `.2.1` commit, root Rust build/package/test/generated/relocation data, populate reusable SSD caches, and verify/delete every exact Rust-owned old source. |
 
 ## Decisions
 
@@ -385,6 +409,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.1.3` | generic Knowledge Map override; five doctrines; routed mdBook; task/memory/whitespace | PASS: Knowledge Map 710 facts/5,560 question keys; memory 47 lines; portable bundle stays project-agnostic |
 | 2026-07-26 | `.1.3` | first outside-cwd canonical attempt with valid but unpopulated new Cargo cache | Expected environmental failure: sandbox DNS blocks registry refresh at Rust admission; default failure policy cleans the exact run and `--list` reports zero |
 | 2026-07-26 | `.1.3` | outside-cwd canonical with retained repository-relative warm caches and Cargo offline | PASS: Rust 1/1 in 82.78s; Dart 1/1; Julia 416/416 in 30.1s; Perl primary 66x2; Phase 0 1,031/1,031 in 639s; zero completed-run residue |
+| 2026-07-26 | `.2.1` | Bash syntax; outside-cwd Perl storage oracle; expanded 16-entrypoint routing oracle; focused runner/trace; primary default/POSIX | PASS: 24 `File::Temp` owners, explicit trace, CLI subprocess workspace, inert fixtures, zero completed residue, focused 9 tests, primary 66x2 |
+| 2026-07-26 | `.2.1` | exact CLI workspace copy/verify/use/delete | PASS: 65 directories, 17 files, 1,590 bytes, canonical hash `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`; copied fixture executed; old census zero; SSD copy retained |
+| 2026-07-26 | `.2.1` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Rust 1/1 in 77.61s; Dart 1/1; Julia 416/416 in 27.2s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
 
 ## Commit Log
 
@@ -393,7 +420,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.0` | `74138903` — `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration` | Ownership, exact inventory, migration safety, and implementation order only. |
 | `.1.1` | `e33ed191` — `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
 | `.1.2` | `671592ef` — `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
-| `.1.3` | `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` (this commit) | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
+| `.1.3` | `18c64726` — `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
+| `.2.1` | `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` (this commit) | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
 
 ## Changelog
 
@@ -412,3 +440,7 @@ accessing the shared copy, and remove only records or directories provably owned
   success/default-failure cleanup preserves caches, failed retention is explicit, interrupted recovery is
   liveness/marker guarded, and concurrency/checkout isolation is executable. `.2.1` becomes the clean Perl
   migration/deletion frontier after commit.
+- `2026-07-26`: Completed `.2.1`; all 24 Perl temporary-allocation owners, explicit trace output, CLI workspaces,
+  and the standalone primary matrix are executable under managed SSD storage. The 65 exact old CLI directories
+  were copied, count/byte/hash verified, exercised, and deleted; inert path fixtures remain. `.2.2` becomes the
+  clean Rust storage/cache migration frontier after commit.
