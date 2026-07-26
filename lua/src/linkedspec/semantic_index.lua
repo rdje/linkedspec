@@ -28,6 +28,7 @@ local INDEX_METHODS = {}
 local VALUE_METHODS = {}
 local ERROR_METHODS = {}
 local outcome_builder
+local static_projector
 local fail
 
 local function empty_pairs()
@@ -626,6 +627,25 @@ local function build_compilation_outcome(source, options)
   return outcome_builder.build(source, options)
 end
 
+local function load_static_projector()
+  if static_projector == nil then
+    static_projector = require("linkedspec.semantic_static_projection")
+  end
+  return static_projector
+end
+
+local function build_static_projection(source, source_map, options, content_digest, outcome)
+  return load_static_projector().build({
+    source = source,
+    source_map = source_map,
+    logical_name = options.logical_name,
+    source_detail_ceiling = options.source_detail_ceiling,
+    content_digest = content_digest,
+    outcome = outcome,
+    fail = fail,
+  })
+end
+
 local function source_integer(value, coordinate)
   if type(value) ~= "number" or value ~= value or value == math.huge or value == -math.huge or
       value ~= math.floor(value) then
@@ -696,6 +716,13 @@ function M.create(source, options)
   local source_map = build_source_map(source)
   local content_digest = "sha256:" .. sha256_hex(source)
   local outcome = build_compilation_outcome(source, copied_options)
+  local static_projection = build_static_projection(
+    source,
+    source_map,
+    copied_options,
+    content_digest,
+    outcome
+  )
   local result = setmetatable({}, INDEX_MT)
   INDEX_STATE[result] = {
     source = source,
@@ -705,6 +732,7 @@ function M.create(source, options)
     entry_rule = copied_options.entry_rule,
     content_digest = content_digest,
     outcome = outcome,
+    static_projection = static_projection,
   }
   return result
 end
@@ -827,6 +855,13 @@ function INDEX_METHODS.locate_exact(value, needle, after_byte)
   local start_byte = start_position - 1
   local end_byte = start_byte + #needle
   return INDEX_METHODS.source_span_for_bytes(value, start_byte, end_byte)
+end
+
+-- Package-internal exact-oracle seam. The root linkedspec module deliberately
+-- exports neither this function nor any static record/query accessor.
+function M._static_projection_for_testing(value)
+  local state = index_state(value)
+  return load_static_projector().materialize(state.static_projection, fail)
 end
 
 return M

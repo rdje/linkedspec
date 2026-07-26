@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.1` — Lua recursive immutability needs empty handles): A populated
+  table with `__newindex` is not immutable: Lua invokes that metamethod only when the assigned key is absent, so a
+  caller can replace any existing record field directly. The private static projector instead returns empty
+  protected handles and stores every node in a weak-key state table visible only to the module. Materialization
+  recursively reads that private state into fresh JSON-shaped arrays and objects. This gives the opaque index one
+  retained immutable projection while preventing both field discovery and alias mutation on PUC Lua and LuaJIT.
+
+  Static source correlation must remain upstream of topology emission. Grouping body elements by authored line
+  recovers the complete member, the retained UTF-8 map fixes its global range, and only then do parsed occurrence
+  order plus compiled edges/payloads decide slot, target, and lifecycle identity. Canonical sorting happens after
+  record/relation construction. This ordering preserves same-pattern duplicates, filters only cross-rule parent
+  matchers, retains self-indexed slots, and keeps stable ids independent of Lua table iteration order.
+
+  The graph proof intentionally uses a package-module test seam rather than a root export. It deep-compares all
+  12 records, 14 relations, and seven source references and then mutates a returned clone to prove later clones
+  are detached. Dependency and source scans separately deny parser/compiler re-entry, loaders, executors, trace,
+  sinks, observers, paths, ambient state, and host object serialization. The remaining privacy/failure/runtime-
+  static and lifecycle stress targets stay in `.10.7.3.2` rather than enlarging this slice.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.0` — source occurrence is a composed authority): Lua's parser keeps
   useful authored fragments, and ActionIR keeps precise local offsets, but neither is a neutral source map. One
   physical member such as `/a/ -> Child[0] { return("first") }` becomes multiple body elements with the same line,

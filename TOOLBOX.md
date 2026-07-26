@@ -681,6 +681,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   lifecycle payloads by occurrence, normalize native `Default` repetition and native failure only inside the
   projector, and deny paths/metatables/AST/ActionIR/compiled regex/runtime state. `.10.7.3.1` owns only private
   graph/source/evidence; `.2` owns the remaining targets/isolation; `.3` owns no-change recomposition.
+- **LUA STATIC GRAPH:** `bash tools/run_lua_local.sh` builds disposable native adapters, configures module paths,
+  and runs `lua/test/semantic_index_static_graph_test.lua` on both PUC Lua and LuaJIT. The registered test deep-
+  compares the private `.10.7.3.1` graph against the neutral oracle at exactly 12 records, 14 relations, and seven
+  source references. It also locks complete-line correlation, duplicate/self/parent matcher classification,
+  lifecycle occurrence identity, canonical ids/order, detached clone behavior, root-public omission, and host/
+  execution dependency denial. Retrieve [[lua-semantic-static-projection-plan]] for the retained-authority and
+  frozen-handle design. Do not invoke the test without the gate's `LUA_PATH`/native `LUA_CPATH` setup.
 
 ---
 

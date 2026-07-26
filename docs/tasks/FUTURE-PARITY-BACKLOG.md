@@ -11558,7 +11558,7 @@ before implementation.
       cleanup, and diff hygiene; commit the closeout, clear the message brief, verify clean, and do not push.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7.3`
-  Status: `active` (2026-07-25; behavior-free authority audit `.0` closed and private graph `.1` active)
+  Status: `active` (2026-07-25; private graph `.1` implemented and remaining targets `.2` active)
   Goal: Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities.
   Children: `.10.7.3.0`, `.10.7.3.1`, `.10.7.3.2`, `.10.7.3.3`
   Depends on: `.10.7.2`
@@ -11618,7 +11618,7 @@ before implementation.
       all six ledgers, canonical CI, mdBook, Knowledge Map, memory/task/four doctrines, cleanup, and diff hygiene;
       commit the audit, clear the message brief, verify clean, and do not push.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.3.1`
-    Status: `active` (2026-07-25; begins only after the clean behavior-free audit commit)
+    Status: `done` (2026-07-25; exact immutable dual-ABI graph verified from clean audit commit `58702b78`)
     Goal: Project the exact compiled graph/source/evidence target behind the opaque semantic index.
     Depends on: `.10.7.3.0`
     Acceptance: Start from the clean `.10.7.3.0` audit commit. Add one package-private projector retained by the
@@ -11638,24 +11638,85 @@ before implementation.
       cleanup, and diff hygiene; commit, clear the message brief, verify clean, and do not push before cadence 300.
     Commit: `FUTURE-PARITY-BACKLOG.10.7.3.1 - implement Lua semantic static graph`
 
+    Implementation: Added one package-private `semantic_static_projection` owner built once behind the existing
+      opaque index from its retained source map, parsed/compiled authorities, and selected entry. It groups body
+      elements by authored line, scans complete members, maps exact UTF-8 ranges through the retained source map,
+      and canonically emits stable uppercase-percent ids, records, relations, evidence, and source keys without a
+      second parser/compiler/selector/planner/executor. Cross-rule parent matchers are excluded from slots;
+      self-indexed slots and same-pattern duplicates remain occurrence-specific. Lifecycle payload correlation is
+      sequential, return shapes are conservatively inferred from typed ActionIR, and native `Default` normalizes
+      only inside the projection. Empty protected handles backed by private weak-key state provide recursive
+      immutability on both ABIs; the package-module-only test materializer returns a fresh JSON-shaped clone and
+      neither the root module nor index exposes graph/query access.
+
+    Verification: **PASS 2026-07-25.** The new exact graph suite passes 64 assertions on PUC Lua and LuaJIT and
+      deep-equals all 12 records, 14 relations, and seven source references. Source 379, outcome 122, graph 64,
+      Unicode classifier/routes/identity/body/negative 1,706/179/359/166/1,542, all remaining focused suites, and
+      package `1..177` pass per ABI; PUC primary 66x2 and corpus 105 also pass. The full primary matrix passes
+      5x2x66 in 1,619.89 seconds and Unicode passes 5x2x1 in 55.20 seconds. Semantic remains 6/20/89 at rollout
+      5/9 and admission 4/6; Unicode, capability, generated, language, and public ledgers remain 806/9/8/2,
+      80/0/0, v1/10/80-0-0, 246/105+1/122, and 59/27/0. Canonical local CI passes all four doctrines, Rust
+      admission 1/1 in 78.25 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, reference primary 66x2, and Phase 0
+      1,031/1,031 in 627 seconds; total gate time is 1,662.05 seconds. mdBook, Knowledge Map 704/5,483, memory/task/
+      doctrines/diff hygiene pass. Reusable SSD caches remain; only explicit disposable task scratch is removed.
+
     #### Acceptance Checklist
 
-    - [ ] **CLEAN RETAINED-AUTHORITY BASE** — Start from the clean `.10.7.3.0` commit and reuse the existing opaque
+    - [x] **CLEAN RETAINED-AUTHORITY BASE** — Start from the clean `.10.7.3.0` commit and reuse the existing opaque
       source/outcome index; do not add another parser, compiler, selector, planner, executor, or public constructor.
-    - [ ] **EXACT GRAPH 12/14** — Deep-equal all 12 graph records and 14 relations, including rule order, duplicate
+    - [x] **EXACT GRAPH 12/14** — Deep-equal all 12 graph records and 14 relations, including rule order, duplicate
       Child slot occurrence ids, Top dispatch/selection, entry evidence, lifecycle identity, and conservative shape.
-    - [ ] **EXACT SOURCE / IDS** — Group complete authored lines, correlate occurrences deterministically, and
+    - [x] **EXACT SOURCE / IDS** — Group complete authored lines, correlate occurrences deterministically, and
       reproduce all seven graph source references plus strict UTF-8 uppercase-percent-escaped stable ids.
-    - [ ] **PRIVATE IMMUTABLE OWNER** — Retain one recursively immutable private projection and return only fresh
+    - [x] **PRIVATE IMMUTABLE OWNER** — Retain one recursively immutable private projection and return only fresh
       detached plain-JSON clones through an unexported test seam; add no root export or query surface.
-    - [ ] **HOST / EXECUTION DENIAL** — Prove no paths, metatable identity, AST/ActionIR objects, compiled regexes,
+    - [x] **HOST / EXECUTION DENIAL** — Prove no paths, metatable identity, AST/ActionIR objects, compiled regexes,
       descriptors, generated implementation, runtime execution, trace/sinks/observers, or ambient host state leak.
-    - [ ] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
+    - [x] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
       canonical CI, mdBook/KM/memory/task/doctrines/cleanup/diff; commit, clear the brief, verify clean, and do not push.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2`
-    Status: `pending`
+    Status: `active` (2026-07-25; fully specified and begins only after the clean `.10.7.3.1` commit)
     Goal: Complete privacy, failed/runtime-static, repeated-lifecycle, clone, and host-leak isolation targets.
     Depends on: `.10.7.3.1`
+    Acceptance: Begin only from the clean committed `.10.7.3.1` graph owner. Extend that one private projector,
+      without a parallel projection or another parse/validate/compile/select/plan/execute pass, to deep-equal the
+      remaining four construction targets: privacy `text` 4 records/3 relations, privacy `identity` 4/3, failed
+      compilation 6/4, and runtime-static 7/8 with `has_execution=false`. Enforce the construction ceiling before
+      source leaves are retained: text may include excerpt/digest, identity may include only logical identity, and
+      neither may be recoverable through another field or test seam. For the admitted failed fixture, preserve the
+      existing native `bare_edge_target_undefined` / `normalize_edges` foundation diagnostic unchanged while only
+      the private static projection maps it to portable `unknown_rule_reference` / `compile`, authored rule ids,
+      dependency decision/explanation, `diagnoses`, `explained_by`, and exact target-member evidence. Other native
+      failures must use an explicitly tested parsed-rule/generic fallback rather than fabricated compiled facts.
+
+      Prove that runtime-static construction creates no execution/event records or `observed_as` relations and
+      never runs target actions, lifecycle blocks, generated plans, or emitted code. Correlate repeated lifecycle
+      payloads by authored occurrence so two `E` blocks remain `E:0` and `E:1` with distinct order, source, and
+      ActionIR-derived shapes. Prove fresh detached plain-JSON materialization, recursively immutable retained
+      handles, parse/missing-entry fallback, both privacy ceilings, root-public/test-seam omission, and denial of
+      paths, metatable/table identity, AST/ActionIR, compiled regexes, descriptors, generated implementation,
+      loaders, executors, trace, sinks, observers, environment, clocks, and randomness. Add one focused exact
+      remaining-target/isolation suite registered once per ABI after the graph suite. Pass focused source/outcome/
+      graph/remaining proof on PUC Lua and LuaJIT, complete Lua, primary/Unicode matrices, all six unchanged
+      ledgers, canonical CI, mdBook, Knowledge Map, memory/task/four doctrines, cleanup, and diff hygiene; add no
+      root static/query accessor, runtime observation, generated-format, rollout, or admission movement; commit,
+      clear the brief, verify clean, and do not push before cadence 300.
+    Commit: `FUTURE-PARITY-BACKLOG.10.7.3.2 - complete Lua semantic static targets`
+
+    #### Acceptance Checklist
+
+    - [ ] **CLEAN SINGLE-OWNER BASE** — Start from clean committed `.10.7.3.1`; extend its retained projector only,
+      without a second language pipeline, replacement graph, public accessor, query, observation, or format owner.
+    - [ ] **EXACT REMAINING TARGETS** — Deep-equal privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-
+      static 7/8 with exact snapshots, records, relations, source evidence, order, and omission semantics.
+    - [ ] **FAILURE / CEILING NORMALIZATION** — Preserve the native Lua foundation diagnostic while privately
+      projecting only portable failure facts; enforce text/identity ceilings before any source detail is retained.
+    - [ ] **NO EXECUTION / LIFECYCLE IDENTITY** — Prove no execution/event/observed state and retain repeated
+      lifecycle occurrences as distinct `E:0`/`E:1` ids with exact order, source, and conservative value shapes.
+    - [ ] **IMMUTABILITY / HOST DENIAL** — Prove fresh detached JSON copies, frozen retained handles, fallback and
+      public omission, and no path/metatable/AST/IR/regex/descriptor/loader/executor/trace/sink/observer/host state.
+    - [ ] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
+      canonical CI, mdBook/KM/memory/task/doctrines/cleanup/diff; commit, clear the brief, verify clean, and do not push.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.3.3`
     Status: `pending`
     Goal: Recompose all committed private static targets and close `.10.7.3` without public query.
@@ -14643,8 +14704,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.2.3 | `FUTURE-PARITY-BACKLOG.10.7.2.3` | `done` | Committed source 378 plus outcome 122 proof recomposes on both ABIs and closes the parent without replacement code or promotion. |
 | 74.6.3 | `FUTURE-PARITY-BACKLOG.10.7.3` | `active` | Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities. |
 | 74.6.3.0 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `done` | Exact five targets, authority/source correlation, normalization, privacy, host fences, and `.1-.3` split are frozen without behavior change. |
-| 74.6.3.1 | `FUTURE-PARITY-BACKLOG.10.7.3.1` | `active` | Project the exact private immutable 12-record/14-relation graph/source/evidence target behind the opaque index. |
-| 74.6.3.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2` | `pending` | Complete privacy, failed/runtime-static, lifecycle, clone, and host-leak isolation. |
+| 74.6.3.1 | `FUTURE-PARITY-BACKLOG.10.7.3.1` | `done` | Exact private immutable 12-record/14-relation/seven-source-reference graph passes on both Lua ABIs. |
+| 74.6.3.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2` | `active` | Complete privacy, failed/runtime-static, lifecycle, clone, and host-leak isolation. |
 | 74.6.3.3 | `FUTURE-PARITY-BACKLOG.10.7.3.3` | `pending` | Recompose and close all committed static targets without public query. |
 | 74.6.4 | `FUTURE-PARITY-BACKLOG.10.7.4` | `pending` | Complete private functions/helpers/calls/bindings plus staged/generated provenance. |
 | 74.6.4.0 | `FUTURE-PARITY-BACKLOG.10.7.4.0` | `pending` | Freeze calls/staging/generated authorities, source correlation, and exact 22/25 ownership. |
@@ -15339,6 +15400,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.3.1` | Clean audit base `58702b78`; private immutable graph 12 records/14 relations/7 source references; new exact 64 x PUC Lua/LuaJIT; source/outcome/graph 379+122+64 then all Lua suites and package `1..177`x2; PUC primary 66x2/corpus 105; primary 5x2x66 in 1,619.89s; Unicode 5x2x1 in 55.20s; unchanged semantic 6/20/89 at 5/9 + 4/6 and Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical four doctrines, Rust 1/1 in 78.25s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, Phase 0 1,031/1,031 in 627s, total 1,662.05s; mdBook/KM 704/5,483/memory/task/diff; reusable SSD caches retained and only explicit disposable scratch cleaned. | PASS. One package-private frozen owner projects the exact graph from retained authorities without a second language pipeline, execution, public accessor/query, host/path leak, format change, rollout movement, or admission; remaining static/isolation `.10.7.3.2` follows only after the clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.3.0` | Clean behavior-free base `c8929767`; exact graph 12/14 + privacy text 4/3 + privacy identity 4/3 + failed 6/4 + runtime-static 7/8 and all 14 unique source references; byte-identical PUC Lua/LuaJIT audit SHA-256 `244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55`; complete Lua source 378 + outcome 122 + package `1..177`x2; primary 5x2x66 in 1,620.78s; Unicode 5x2x1 in 54.37s; Rust 5+3, Dart 28, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, Phase 0 1,031/1,031 in 631s, total 1,665.56s; mdBook/KM 704/5,478/memory/task/four doctrines/diff; reusable SSD caches retained and only explicit disposable scratch cleaned. | PASS. Exact Lua static authority/source/normalization/privacy ownership and the `.1-.3` implementation order are frozen without production/test/fixture/API/record/query/observation/format/rollout/admission change; private graph `.10.7.3.1` follows the clean audit commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.2.3` | Clean no-change composition from `c8501d3a`; no production/replacement test/fixture/API/record/query/observation/format owner; committed source 378 + outcome 122 per ABI; complete Lua classifier/routes/identity/body/negative/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 5x2x1, Rust 5+3, Dart 17, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 78.10s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, Phase 0 1,031/1,031 in 629s; mdBook/KM 703/5,463/memory/task/four doctrines/diff; reusable SSD caches retained and only disposable task depots/probes cleaned. | PASS. The committed strict-source and staged-outcome owners recompose unchanged; parent `.10.7.2` closes without target execution or semantic promotion and behavior-free static audit `.10.7.3.0` follows the clean closeout commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.2.2` | One lazy staged parse/validate/compile-without-revalidation/select/generated-plan owner; private typed authority and merged function/rule order; detached opaque snapshot/presence/diagnostic/entry/plan values; exact native validation/selection diagnostics plus deterministic recognized fallbacks and unchanged unknown-error identity; source 378/outcome 122 per ABI; complete Lua classifier/routes/identity/body/negative/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 5x2x1, Rust 5+3, Dart 17, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 78.05s, Dart 1/1, Julia 416/416 in 27.2s, reference primary 66x2, Phase 0 1,031/1,031 in 628s; mdBook/KM 703/5,463/memory/task/four doctrines/diff; reusable SSD caches retained and only disposable task depots/probes cleaned. | PASS. Lua now owns one exact compiled-or-failed semantic outcome behind the strict source owner without caller path, target/generated execution, records/query/observation, format, rollout, or admission movement; no-change `.10.7.2.3` follows the clean outcome commit. |
@@ -15607,6 +15669,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.3.1` | `FUTURE-PARITY-BACKLOG.10.7.3.1 - implement Lua semantic static graph` | Private immutable exact graph/source/evidence owner; new 64x2, complete Lua, 5x2x66 plus Unicode, unchanged ledgers, book/KM/doctrines, canonical Rust 78.25s + Dart 1/1 + Julia 416/27.3s + primary 66x2 + Phase 0 1,031/627s, and clean handoff to remaining static targets. |
 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `FUTURE-PARITY-BACKLOG.10.7.3.0 - freeze Lua semantic static projection` | Behavior-free exact five-target authority/source/normalization/privacy plan, byte-identical dual-ABI probe, complete signoff, and private graph `.10.7.3.1` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.2.3` | `FUTURE-PARITY-BACKLOG.10.7.2.3 - close Lua semantic foundation` | No-change committed 378+122 dual-ABI recomposition, parent `.10.7.2` closure, complete signoff, and behavior-free static audit `.10.7.3.0` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.2.2` | `FUTURE-PARITY-BACKLOG.10.7.2.2 - implement Lua semantic outcomes` | One staged compiled-or-failed owner, private merged authorship, detached snapshot/authority/diagnostic/entry/plan, dual-ABI proof, complete signoff, and no-change `.10.7.2.3` handoff. |
@@ -15854,6 +15917,17 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-25`: Static graph leaf `.10.7.3.1` starts from clean audit commit `58702b78` and adds one package-
+  private recursively immutable projector retained by the opaque Lua semantic index. It consumes the retained
+  source/map, parsed/compiled authorities, and entry selection once; complete authored-line scans plus compiled
+  occurrence correlation produce exact stable ids, source evidence, records, and relations without another
+  language pass or target execution. The graph deep-equals 12 records, 14 relations, and seven source references
+  on PUC Lua and LuaJIT; duplicates, self/parent matchers, lifecycle identity/shapes, `Default` normalization,
+  detached copies, public omission, and host/execution denial are locked. New 64x2, complete Lua, primary 5x2x66
+  in 1,619.89s, Unicode 5x2x1 in 55.20s, all six unchanged ledgers, canonical CI in 1,662.05s with Phase 0
+  1,031/1,031 in 627s, and mdBook/KM 704/5,483/memory/task/doctrines/diff pass. Reusable SSD caches remain; only
+  explicit disposable scratch is cleaned. Remaining static/isolation `.10.7.3.2` follows the clean graph commit.
 
 - `2026-07-25`: Behavior-free static audit `.10.7.3.0` starts from clean foundation commit `c8929767`, maps all
   five exact targets and 14 unique source references, and freezes parsed/compiled/entry/source/diagnostic authority,

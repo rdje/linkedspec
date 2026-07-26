@@ -8,13 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.1` — implement only the private immutable 12-record/14-relation graph/source/
-  evidence projection from retained authorities after the clean behavior-free audit commit.
+- `FUTURE-PARITY-BACKLOG.10.7.3.2` — from the clean graph commit, complete only privacy text/identity, failed,
+  runtime-static, repeated-lifecycle, clone, and host/no-execution isolation behind the opaque Lua index.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.1 — implement Lua semantic static graph**
+  (exact private immutable graph/source/evidence target; closes with this commit).
+
+  **Result:** One package-private projector consumes the retained source/map, parsed/compiled authorities, and
+  selected entry once and retains exact graph 12 records/14 relations/seven source references behind the opaque
+  index. Complete authored-line scans, compiled occurrence correlation, duplicate/self/parent matcher handling,
+  lifecycle ids and conservative ActionIR shapes, uppercase UTF-8 percent ids, `Default` normalization, and
+  canonical order match the neutral oracle. Empty protected handles plus private weak-key state make retention
+  recursively immutable; materializations are fresh JSON clones. Root access/query, execution, host objects,
+  paths, AST/ActionIR, compiled regexes, descriptors, trace, sinks, observers, and ambient state remain absent.
+
+  **Proof:** New exact graph 64 plus source 379 and outcome 122 pass on PUC Lua and LuaJIT before the complete
+  `1..177` package suites; PUC primary 66x2/corpus 105 also pass. Primary 5x2x66 passes in 1,619.89s and Unicode
+  5x2x1 in 55.20s. All six ledgers remain exact at semantic 6/20/89, rollout 5/9, admission 4/6, Unicode
+  806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, language 246/105+1/122, and public 59/27/0. Canonical
+  passes four doctrines, Rust 1/1 in 78.25s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, and Phase 0
+  1,031/1,031 in 627s; total 1,662.05s. mdBook, Knowledge Map 704/5,483, memory/task/diff hygiene pass. Remaining
+  static/isolation `.10.7.3.2` follows only after this clean commit; reusable SSD caches remain.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.0 — freeze Lua semantic static projection**
   (behavior-free five-target authority/source/normalization plan; closes with this commit).
 

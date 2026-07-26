@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.1 — implement Lua semantic static graph
+
+Added one package-private Lua static projector behind the existing opaque semantic index. It consumes the retained
+strict source map, parsed/compiled authorities, and selected entry exactly once; it never reparses, recompiles,
+reselects, replans, or executes. Complete authored-member scanning plus compiled occurrence correlation emits the
+neutral graph target at exactly 12 records, 14 relations, and seven source references, including duplicate Child
+slots, Top dispatch/selection, entry evidence, lifecycle occurrence identity, conservative ActionIR shapes,
+uppercase UTF-8 percent ids, neutral `Default` repetition, and canonical ordering.
+
+Retained projection nodes are recursively immutable empty protected handles backed by private weak-key state. The
+package-module-only exact test seam materializes a fresh plain-JSON clone; mutation cannot reach retained state,
+and the root module and index expose no static graph or query accessor. Dependency/host scans deny a second
+language pipeline, loaders, executors, generated execution, trace, sinks, observers, paths, ambient state,
+AST/ActionIR values, and compiled regex objects. The new 64-assertion exact suite runs on PUC Lua and LuaJIT in
+the complete Lua gate; the canonical tracked-input audit now locks the implementation and all three source/
+outcome/graph owner suites. Privacy, failed, runtime-static, repeated-lifecycle stress, and remaining isolation
+stay exclusively `.10.7.3.2`; semantic rollout and admission do not move.
+
+Complete verification passes source 379, outcome 122, graph 64, every remaining focused suite, and package
+`1..177` on each Lua ABI, plus PUC primary 66x2 and corpus 105. The primary five-backend matrix passes 5x2x66 in
+1,619.89 seconds and the Unicode matrix passes 5x2x1 in 55.20 seconds. All six governance ledgers remain exact.
+Canonical CI passes four doctrines, Rust semantic admission 1/1 in 78.25 seconds, Dart 1/1, Julia 416/416 in 27.3
+seconds, reference primary 66x2, and Phase 0 1,031/1,031 in 627 seconds; total gate time is 1,662.05 seconds.
+mdBook, Knowledge Map 704/5,483, memory/task metadata, and diff hygiene pass. Reusable SSD caches remain; only
+explicit disposable task scratch is cleaned.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.0 — freeze Lua semantic static projection
 
 Frozen the behavior-free PUC Lua/LuaJIT static-projection boundary before implementation. The neutral graph

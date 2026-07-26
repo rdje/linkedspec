@@ -1933,6 +1933,37 @@ executors, trace, diagnostic sinks, observers, environment, clocks, and randomne
 `.10.7.3.1` owns only graph/source/evidence; `.10.7.3.2` owns privacy, failure, runtime-static, repeated lifecycle,
 detachment, and host denial; `.10.7.3.3` recomposes all five targets before public query work begins.
 
+#### Lua private graph implementation
+
+The graph subset is now implemented behind the opaque index. Construction calls one package-private projector
+after the existing source and compilation outcome are fixed. It consumes those retained authorities directly;
+there is no second parse, validation, compilation, entry selection, generated-plan build, or target execution.
+Its complete-line scanner correlates authored members before consulting typed compiled topology, so the resulting
+projection exactly contains 12 records, 14 relations, and seven source references on both PUC Lua and LuaJIT.
+
+The exact graph includes two distinct `Child` regex-slot occurrences even though both use `/a/`, two `Top` edges
+that dispatch to `Child` and select slots 0 and 1, canonical entry evidence, and occurrence-addressed lifecycle
+records with conservatively inferred value shapes. Cross-rule parent matchers remain absent from target slots,
+self-indexed slots remain structural, native `Default` mode normalizes to non-repetition, ids use uppercase UTF-8
+percent escaping, and all records and relations are canonically ordered.
+
+Lua's table semantics require a less obvious immutability boundary: `__newindex` does not intercept replacement
+of an existing key. The projector therefore stores recursive state privately behind empty protected handles,
+rather than presenting populated read-only tables. Its package-module-only test materializer returns a newly
+allocated JSON-shaped clone each time. Mutating that clone cannot affect later results, and neither the root
+module nor the opaque index exports a graph or query accessor. Exact proof is registered in the complete Lua gate:
+
+```bash
+bash tools/run_lua_local.sh
+```
+
+The wrapper deliberately supplies both the source-module path and a freshly built ABI-matched native PCRE2
+adapter; invoking the focused file directly from an unconfigured shell is not a valid verification command.
+
+This leaf intentionally implements only the compiled graph/source/evidence target. The two privacy ceilings,
+failed and runtime-static targets, repeated-lifecycle stress, and the remaining isolation proof stay in
+`.10.7.3.2`; public query remains later `.10.7.5` work.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
@@ -2350,7 +2381,8 @@ The dependency order is:
 | `.10.7.2.2` | Lua compiled-or-failed outcome foundation | complete; focused 122 per ABI, detached authority/diagnostic/entry/plan, no execution or promotion |
 | `.10.7.2.3` | Lua source/outcome foundation closeout | complete; committed 378+122 per ABI plus full signoff, no replacement code or promotion |
 | `.10.7.3.0` | Lua static-authority map and dependency split | complete; five exact targets, occurrence/source normalization, privacy, and host fences frozen |
-| `.10.7.3.1` | Lua compiled graph/source/evidence projection | next; private exact 12/14 graph, no public query |
+| `.10.7.3.1` | Lua compiled graph/source/evidence projection | implemented; private exact 12/14/7 graph on both ABIs, no public query |
+| `.10.7.3.2` | Lua remaining static targets and isolation | next; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8 |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

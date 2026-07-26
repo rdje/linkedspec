@@ -1123,7 +1123,9 @@ content migration exists yet.
   static 7/8 with no execution. Lua must group complete authored lines, correlate compiled edges/lifecycles by
   occurrence, exclude cross-rule parent matchers from target slots, preserve self-indexed slots, normalize native
   `Default` repetition and failure only in projection, and expose no host/path/AST/ActionIR/regex state. Graph
-  implementation `.10.7.3.1` follows the clean audit commit; public query, formats, rollout, and admission remain
+  implementation `.10.7.3.1` now privately retains the exact 12-record/14-relation/seven-source-reference target
+  on both ABIs, using protected empty handles for recursive immutability and fresh detached test clones. Remaining
+  privacy/failure/runtime-static/isolation `.10.7.3.2` follows; public query, formats, rollout, and admission remain
   unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.

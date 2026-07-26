@@ -13,13 +13,18 @@ answers:
   - "how must Lua distinguish repeated semantic lifecycle occurrences"
   - "how must Lua infer semantic return value shapes"
   - "which Lua task implements the compiled static graph"
+  - "does Lua now implement the private semantic graph projection"
+  - "how many Lua semantic graph records relations and source references are retained"
+  - "how does Lua store a recursively immutable semantic graph in both Lua ABIs"
+  - "does Lua expose a public semantic graph accessor"
+  - "what command verifies the Lua private semantic graph"
   - "which Lua task owns privacy failure runtime-static and isolation"
   - "does Lua static projection expose query trace or runtime observations"
 date: 2026-07-25
-status: current behavior-free implementation plan; projection code not yet implemented
+status: current; private graph/source/evidence target implemented, remaining static targets pending
 tags: [lua, luajit, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
-reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'definition_order|compiled_rule_order|rules_by_label|lifecycle_action_payloads|compiled_regex_patterns|child_regex_index|has_parent_regex' lua/src/linkedspec/compiled_spec.lua"
+evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.1; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
+reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
 ---
 
 # Lua Semantic Static Projection Plan
@@ -104,6 +109,21 @@ summaries, including exact target/source-reference and repeated-lifecycle facts,
 Complete signoff passes Lua source 378 + outcome 122 and package `1..177` on both ABIs, primary 5x2x66, Unicode
 5x2x1, Rust 5+3, Dart 28, Julia 3,831, all six no-drift ledgers, and canonical local CI with Phase 0
 1,031/1,031. Knowledge Map 704/5,478, mdBook, memory/task/four doctrines, cleanup, and diff hygiene pass.
+
+Leaf `.10.7.3.1` now implements the graph/source/evidence subset in
+`lua/src/linkedspec/semantic_static_projection.lua`. The opaque semantic index builds it once from the retained
+source map, parsed and compiled owners, and selected entry, then keeps only a package-private frozen handle. Lua
+tables cannot be made recursively immutable merely by attaching `__newindex`, because writes to existing keys
+bypass that metamethod. The projector therefore stores every frozen node in private weak-key state behind an
+empty protected handle; the sole package-module test materializer recursively emits a new JSON-shaped clone.
+Neither the root `linkedspec` module nor an index value exposes that seam.
+
+The exact graph proof deep-compares 12 records, 14 relations, and seven source references on PUC Lua and LuaJIT.
+It locks authored order, uppercase UTF-8 percent ids, duplicate Child slots, Top dispatch/selection, entry
+evidence, lifecycle occurrence identity and ActionIR-derived shapes, Default normalization, canonical ordering,
+detached clones, public omission, and forbidden host/execution dependencies. The complete dual-ABI Lua gate runs
+this proof before all prior suites. Privacy ceilings, failed projection, runtime-static omission, repeated
+lifecycle stress, and the broader isolation matrix remain exclusively `.10.7.3.2`.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-compilation-foundation]],
 [[lua-semantic-source-outcome-plan]], [[semantic-introspection-neutral-contract]],
