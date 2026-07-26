@@ -1110,8 +1110,11 @@ content migration exists yet.
   ceilings/coordinates, dependency-free SHA-256, typed constructor/map errors, staged compiled-or-failed outcomes,
   exact native diagnostics/entry/generated-plan authority, no path constructor, and no target execution. Identical
   PUC Lua/LuaJIT probes lock graph/privacy/calls/failure/malformed-source boundaries before code. Strict source-only
-  implementation `.10.7.2.1` is active after the clean planning commit. The separate ASCII fluent-method grammar, public
-  query, formats, rollout, and admission remain unchanged.
+  `.10.7.2.1` now implements the root constructor with copied strict UTF-8, closed options, package-private
+  arithmetic SHA-256, exact byte/scalar maps, all four ceilings, opaque detached source values, typed map errors,
+  and no parser/compiler/path/execution coupling. Its 377 assertions pass identically on both ABIs. Staged
+  compiled-or-failed outcome `.10.7.2.2` is active after the clean source commit; the separate ASCII fluent-method
+  grammar, public query, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

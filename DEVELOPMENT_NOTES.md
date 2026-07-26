@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.1` — source privacy needs one owner, not one hidden field): Lua
+  strings already provide immutable byte identity, but ordinary tables do not provide immutable or private
+  records. The semantic source layer therefore keeps the accepted string, option copy, boundary tables, and digest
+  only in weak-key package state. Empty protected handles expose colon methods through `__index`; identity, span,
+  and error fields are virtual, while `to_json()` creates fresh JSON objects. This prevents aliasing and accidental
+  field discovery without introducing userdata or ABI-specific machinery.
+
+  One boundary table serves both byte and Unicode-scalar coordinates. Every scalar end records its zero-based byte
+  boundary plus the following one-based line/column; byte lookups succeed only at recorded boundaries, and scalar
+  spans index the same arrays directly. LF updates the following coordinate, whereas CR increments the column.
+  This makes half-open empty/end spans natural and avoids rescanning or host UTF-8 libraries on either ABI.
+
+  Portable SHA-256 is intentionally local to the source authority. Arithmetic nibble lookup tables implement AND/
+  XOR, 32-bit modular addition, shifts, and rotations with syntax accepted by Lua 5.1; no optional `bit` module or
+  executable becomes a semantic dependency. Standard empty/`abc`, padding-edge 55/56/64, multi-block 128/1,000,
+  and fixture digests pass identically on PUC Lua and LuaJIT. Direct-module dependency scans and live file/env/
+  clock traps independently prove that source construction cannot import or invoke parser, compiler, loader,
+  runtime, trace, diagnostics, or caller target code.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.0` — strict decoding must precede trusted staging): Lua strings are
   immutable byte sequences, so one argument can represent both accepted source text and its canonical bytes.
   That simplicity does not make decoding optional. The current staged function parser executes its trusted bundled

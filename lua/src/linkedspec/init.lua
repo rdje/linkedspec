@@ -1,5 +1,6 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
+local semantic_index = require("linkedspec.semantic_index")
 local spec_loader = require("linkedspec.spec_loader")
 local spec_ast = require("linkedspec.spec_ast")
 local spec_parser = require("linkedspec.spec_parser")
@@ -67,6 +68,7 @@ function M.backend_status()
 end
 
 M.json = json
+M.semantic_index = semantic_index.create
 M.primary_cli = primary_cli
 M.primary_cli_help = primary_cli.help
 M.run_primary_cli = primary_cli.run

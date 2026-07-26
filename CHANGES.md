@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.1 — implement Lua semantic source map
+
+Added the parser-free Lua semantic source foundation behind the root
+`linkedspec.semantic_index(source, options)` constructor. The constructor accepts exactly one strict-UTF-8 Lua
+string and a plain copied option table with required non-control `logical_name`, required
+`none`/`identity`/`span`/`text` ceiling, and optional exact Unicode-17 `entry_rule`. Unknown keys, malformed text,
+invalid selectors, and non-plain options fail as immutable `SemanticIndexError` values before language work.
+
+The index, identity, span, and error values are protected empty-table handles backed by package-private weak-key
+state. Ordinary writes and metatable replacement fail, iteration reveals nothing, stable strings redact caller
+identity/source/paths/host identity, and nested JSON/error fields are freshly detached. The source owner retains
+exact bytes plus private scalar boundary tables, maps zero-based half-open byte/scalar ranges to one-based
+Unicode-scalar line/columns with LF-only line advance, rejects mid-scalar boundaries, and exposes only the five
+frozen identity/span/excerpt/lookup methods permitted by the selected ceiling.
+
+SHA-256 is implemented with Lua-5.1-compatible arithmetic and package-local nibble tables, without bitwise syntax,
+optional libraries, external executables, paths, environment, or clocks. Empty, `abc`, 55/56/64/128/1,000-byte,
+privacy, and multibyte vectors match standard digests on both PUC Lua and LuaJIT. The registered focused suite
+passes 377 assertions on each ABI; complete Lua, primary 5x2x66, Unicode 5x2x1 plus Rust 5+3 / Dart 17 / Julia
+3,831, and all six governance ledgers pass. Canonical CI passes Rust admission 1/1 in 78.08s, Dart 1/1, Julia
+416/416 in 27.4s, reference primary 66x2, and Phase 0 1,031/1,031 in 631s. Semantic governance remains 6/20/89
+at rollout 5/9 and native admission 4/6; staged compiled-or-failed outcome `.10.7.2.2` follows the clean commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.0 — freeze Lua semantic source outcome
 
 Frozen the behavior-free PUC Lua/LuaJIT source/outcome foundation before implementation. Knowledge Map retrieval

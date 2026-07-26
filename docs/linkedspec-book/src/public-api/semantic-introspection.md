@@ -1692,8 +1692,9 @@ their implementation boundary before semantic code. The shared Lua source alread
 source and ActionIR ASTs, staged function payload/job/result sidecars, ordered compiled state, portable diagnostics,
 generated-source v2, loaded
 and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
-JSON. It does not yet expose a semantic index, exact source map, package SHA-256, private normalized projection,
-query evaluator, or typed semantic observation sink.
+JSON. It now exposes the source-only semantic index and exact private source map/SHA-256 described below. It does
+not yet retain a compiled-or-failed semantic outcome, private normalized projection, query evaluator, or typed
+semantic observation sink.
 
 The first Unicode implementation leaf is now complete. Generator
 `unicode_case/generate_unicode_rule_label_contract.py` emits private
@@ -1736,21 +1737,60 @@ through both inline and file primary commands. The normalization-sensitive pair 
 portable compiled and descriptor artifacts deny loader paths plus Lua table/userdata identity. The suite passes
 359 assertions unchanged on PUC Lua and LuaJIT without changing production source or generated-source format.
 
-Behavior-free source/outcome planning is now complete too; the API described here is frozen but not implemented
-until `.10.7.2.1-.2`. Lua will expose one `linkedspec.semantic_index(source, options)` constructor. `source` is a
-Lua string containing strict UTF-8 bytes, and `options` has exactly required `logical_name`, required
+Behavior-free source/outcome planning is complete, and source leaf `.10.7.2.1` now implements the first half of
+that API. Lua exposes one `linkedspec.semantic_index(source, options)` constructor. `source` is a Lua string
+containing strict UTF-8 bytes, and `options` has exactly required `logical_name`, required
 `source_detail_ceiling` (`none`, `identity`, `span`, or `text`), and optional exact Unicode-17 `entry_rule`. There
 is deliberately no path or loaded-state constructor. The returned index is an empty opaque table backed by
 package-private weak-key storage; its metatable is protected, writes fail, iteration reveals no state, and its
 stable string form omits caller identity, source, paths, host types, and table addresses.
 
-Source leaf `.10.7.2.1` will reject malformed UTF-8 before any staged grammar runs, retain canonical bytes and a
-private scalar-boundary map, and compute `sha256:` identity with dependency-free Lua-5.1-compatible arithmetic.
-It will use zero-based half-open byte/scalar ranges and one-based line/Unicode-scalar columns. `none` denies source
+The source owner rejects malformed UTF-8 before any staged grammar runs, retains canonical bytes and a private
+scalar-boundary map, and computes `sha256:` identity with dependency-free Lua-5.1-compatible arithmetic. It uses
+zero-based half-open byte/scalar ranges and one-based line/Unicode-scalar columns. LF advances the line and resets
+the column; CR is an ordinary scalar. Mid-scalar byte boundaries are typed failures. `none` denies source
 identity; `identity` permits the caller name and byte/scalar lengths; `span` adds mapping and exact ordered lookup;
-and `text` adds excerpts plus the digest. Planned methods are `source_identity`, `source_span_for_bytes`,
+and `text` adds excerpts plus the digest. Implemented methods are `source_identity`, `source_span_for_bytes`,
 `source_span_for_scalars`, `source_excerpt_for_bytes`, and `locate_exact`. Returned source values are immutable
 opaque records or fresh detached copies; accepted source and map state are never returned wholesale.
+
+```lua
+local linkedspec = require("linkedspec")
+
+local source = "Töp::\n /é/\n"
+local index = linkedspec.semantic_index(source, {
+  logical_name = "privacy.spec",
+  source_detail_ceiling = "text",
+  entry_rule = "Töp",
+})
+
+local identity = index:source_identity()
+assert(identity.source_id == "source:0")
+assert(identity.logical_name == "privacy.spec")
+assert(identity.byte_length == 13)
+assert(identity.scalar_length == 11)
+assert(identity.content_digest ==
+  "sha256:8fe5f40cc6e9f5ce438a605f4965e04a78c34f392e13761e66d042730469f8de")
+
+local header = index:source_span_for_bytes(0, 6)
+assert(header.start_line == 1 and header.start_column == 1)
+assert(header.end_line == 1 and header.end_column == 6)
+assert(index:source_excerpt_for_bytes(8, 12) == "/é/")
+
+local ok, err = pcall(function()
+  return index:source_span_for_bytes(2, 3) -- starts inside ö
+end)
+assert(not ok)
+assert(err.stage == "map_source")
+assert(err.code == "semantic_source_boundary_invalid")
+```
+
+`source_identity()` includes the digest only at the `text` ceiling; its detached `to_json()` form uses JSON `null`
+for a withheld digest. Each span also has `to_json()`. Constructor and map failures are opaque immutable
+`SemanticIndexError` values with stable `stage`, `code`, `message`, detached sorted `fields`, and `to_json()`.
+Calling an accessor above its ceiling fails with `semantic_source_detail_forbidden` rather than returning partial
+data. The optional `entry_rule` is validated and retained now, but selection and compilation remain owned by the
+next outcome leaf.
 
 Outcome leaf `.10.7.2.2` will run the existing staged user-function-aware parser, validator, compiler with duplicate
 validation disabled, entry selector, and generated-v2 plan builder once. It will retain those native authorities
@@ -1767,8 +1807,11 @@ calls is 135 bytes with function `normalize`, rules `Top,Done`, and two `default
 which is why strict semantic decoding must precede language work. A target body that calls
 `fail("target must not run")` still parses, validates, compiles, selects, and plans successfully, proving the
 foundation need not invoke caller target actions or lifecycle code. Trusted bundled staged-parser execution remains
-compiler infrastructure. This planning leaf adds no Lua module, test, runtime behavior, query surface, response,
-format, rollout, or admission state.
+compiler infrastructure. The source implementation adds no parsing, compilation, generated planning, target
+execution, query surface, semantic response, format, rollout, or admission state. Its focused suite passes 377
+assertions identically on PUC Lua and LuaJIT, including SHA-256 padding boundaries, exact Unicode coordinates,
+all ceilings and typed failures, detached values, redaction, dependency scans, and live path/environment/clock/
+target traps.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:

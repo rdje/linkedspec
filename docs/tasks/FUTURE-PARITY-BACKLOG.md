@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-25` (Lua source/outcome planning `.10.7.2.0` freezes the exact constructor/privacy/error/
-  no-path split and passes complete signoff; strict source implementation `.10.7.2.1` is active at unchanged
-  rollout 5/9 and admission 4/6)
+- Last updated: `2026-07-25` (Lua strict source `.10.7.2.1` implements the opaque constructor/map/SHA-256/error
+  owner and passes complete dual-ABI signoff; staged outcome `.10.7.2.2` is active at unchanged rollout 5/9 and
+  admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10968,8 +10968,8 @@ before implementation.
   `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
-  Status: `active` (2026-07-25; Unicode prerequisite `.10.7.1` and source/outcome plan `.10.7.2.0` closed; strict
-    source implementation `.10.7.2.1` active)
+  Status: `active` (2026-07-25; Unicode prerequisite `.10.7.1`, source/outcome plan `.10.7.2.0`, and strict source
+    implementation `.10.7.2.1` closed; staged outcome `.10.7.2.2` active)
   Goal: Implement the Lua semantic index adapter with exact PUC Lua/LuaJIT identity.
   Children: `.10.7.0`, `.10.7.1`, `.10.7.2`, `.10.7.3`, `.10.7.4`, `.10.7.5`, `.10.7.6`, `.10.7.7`
   Depends on: `.10.6`
@@ -11432,15 +11432,42 @@ before implementation.
     - [x] **NO-DRIFT / DURABLE COMMIT** — Pass unchanged dual-ABI Lua, primary/Unicode/ledger/canonical gates,
       synchronize every durable layer, safely clean generated artifacts, and commit before activating `.1`.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.1`
-    Status: `active` (2026-07-25; task-tree owned after the fully gated `.10.7.2.0` planning commit)
+    Status: `done` (2026-07-25; strict parser-free source owner committed after complete dual-ABI signoff)
     Goal: Implement strict copied source identity, portable SHA-256, and exact private byte/scalar coordinates.
     Depends on: `.10.7.2.0`
     Acceptance: Add `lua/src/linkedspec/semantic_index.lua` behind the frozen root constructor. Keep this leaf
       source-only: validate/copy source and options, build private strict byte/scalar maps and arithmetic SHA-256,
       enforce all four ceilings, return opaque immutable/detached source values, and prove both ABIs without parser,
       compiler, loader, execution, trace, diagnostic-sink, query, or observation coupling.
+    Verification: Complete. `lua/src/linkedspec/semantic_index.lua` imports only `linkedspec.json` and the
+      generated Unicode-17 rule-label classifier. One root `linkedspec.semantic_index(source, options)` export and
+      one registered focused suite are the only integration changes. The suite passes 377 assertions identically
+      on PUC Lua and LuaJIT, including empty/`abc`/55/56/64/128/1,000-byte SHA-256 vectors; copied options;
+      graph/privacy/supplementary/combining/CR-LF/empty-end coordinates; ordered duplicate lookup; all four
+      ceilings; exact typed source/option/range/boundary/needle failures; protected empty weak-key handles;
+      detached JSON/fields; redacted strings; dependency/source scans; and no file/environment/clock/target use.
+      Complete Lua, primary 5x2x66, Unicode 5x2x1 plus Rust 5+3 / Dart 17 / Julia 3,831, all six ledgers, canonical
+      CI, mdBook, Knowledge Map, memory/task/doctrines, and diff hygiene pass. Semantic governance remains 6/20/89
+      at rollout 5/9 and admission 4/6; staged outcome `.2` follows only after this clean commit.
+    Commit: `FUTURE-PARITY-BACKLOG.10.7.2.1 - implement Lua semantic source map`
+
+    #### Acceptance Checklist
+
+    - [x] **STRICT SOURCE / OPTIONS** — Accept exactly one Lua source string and a copied plain option table with
+      required strict `logical_name`, exact four-value ceiling, optional Unicode-17 `entry_rule`, and stable typed
+      pre-language failures.
+    - [x] **PRIVATE MAP / SHA-256** — Retain exact bytes only in weak-key private state; map zero-based half-open
+      bytes/scalars to one-based scalar line/columns with LF-only line advance; compute standard SHA-256 using only
+      Lua-5.1-compatible arithmetic and package-local tables.
+    - [x] **OPAQUE SOURCE VALUES** — Expose only the five frozen source methods, protected empty immutable handles,
+      detached JSON/error fields, ceiling-filtered identity/span/text, and identity-redacted stable strings.
+    - [x] **DUAL-ABI / ISOLATION** — Pass the same 377 assertions and complete Lua gate on PUC Lua and LuaJIT;
+      source-scan and live dependency traps deny parser/compiler/loader/execution/trace/path/host coupling.
+    - [x] **NO-DRIFT / DURABLE COMMIT** — Pass primary/Unicode/semantic/ledger/canonical gates, synchronize every
+      durable layer and the mdBook, clean only unmistakable scratch artifacts, commit, and verify a clean boundary
+      before activating staged outcome `.10.7.2.2`.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.2`
-    Status: `pending`
+    Status: `active` (2026-07-25; eligible after the clean strict-source commit)
     Goal: Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan.
     Depends on: `.10.7.2.1`
   - ID: `FUTURE-PARITY-BACKLOG.10.7.2.3`
@@ -13833,11 +13860,11 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-07-25):** Lua Unicode prerequisite `.10.7.1` is composition-closed through `.1.4`.
-The generated classifier/routes, exact identity, repaired body-fluent whole-token boundary, and exhaustive negative/
-isolation owners recompose unchanged on both ABIs; complete Lua remains `1..177` per ABI plus PUC primary 66x2 and
-corpus 105. Behavior-free source/outcome constructor/privacy/dependency planning `.10.7.2.0` is the single next PNT
-leaf after the clean closeout commit. Semantic 6/20/89 remains at rollout 5/9 and native admission 4/6.
+**Authoritative frontier (2026-07-25):** Lua Unicode prerequisite `.10.7.1`, behavior-free source/outcome plan
+`.10.7.2.0`, and strict source owner `.10.7.2.1` are complete. The root constructor now owns strict copied UTF-8,
+portable SHA-256, exact private byte/scalar coordinates, four ceilings, opaque source values, and typed map errors
+without parser/compiler/path/execution coupling on either ABI. Staged compiled-or-failed outcome `.10.7.2.2` is the
+single next PNT leaf after the clean source commit. Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -14448,8 +14475,8 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.1.4 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `done` | All committed Unicode owners recompose unchanged; `.10.7.1` closes without semantic promotion. |
 | 74.6.2 | `FUTURE-PARITY-BACKLOG.10.7.2` | `active` | Implement one opaque strict Lua semantic source map and compiled-or-failed outcome owner. |
 | 74.6.2.0 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `done` | Exact weak-key constructor, privacy/error/no-path/no-execution boundary and `.1-.3` dependency split are frozen before code. |
-| 74.6.2.1 | `FUTURE-PARITY-BACKLOG.10.7.2.1` | `active` | Add copied source identity, portable SHA-256, and private exact byte/scalar coordinates. |
-| 74.6.2.2 | `FUTURE-PARITY-BACKLOG.10.7.2.2` | `pending` | Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan. |
+| 74.6.2.1 | `FUTURE-PARITY-BACKLOG.10.7.2.1` | `done` | Strict copied source identity, portable SHA-256, exact private byte/scalar coordinates, four ceilings, typed map errors, and dual-ABI isolation are complete. |
+| 74.6.2.2 | `FUTURE-PARITY-BACKLOG.10.7.2.2` | `active` | Retain one detached compiled-or-failed outcome, entry decision, diagnostic, and generated-v2 plan. |
 | 74.6.2.3 | `FUTURE-PARITY-BACKLOG.10.7.2.3` | `pending` | Recompose and close the source/outcome foundation without query or promotion. |
 | 74.6.3 | `FUTURE-PARITY-BACKLOG.10.7.3` | `pending` | Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities. |
 | 74.6.3.0 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `pending` | Freeze exact static targets, source correlation, normalization, privacy, and ownership. |
@@ -15149,6 +15176,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.2.1` | One parser-free weak-key source owner; root constructor; strict copied UTF-8/closed options/Unicode-17 selector; exact zero-based byte/scalar and one-based LF-only line/column maps; arithmetic Lua-5.1 SHA-256 with empty/`abc`/55/56/64/128/1,000-byte vectors; four ceilings; five opaque/detached source methods; typed option/UTF-8/range/boundary/needle/detail errors; dependency scans plus live path/environment/clock/target traps; 377 assertions per ABI; complete Lua classifier/routes/identity/body/negative plus package `1..177`x2 and PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 5x2x1, Rust 5+3, Dart 17, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 78.08s, Dart 1/1, Julia 416/416 in 27.4s, reference primary 66x2, Phase 0 1,031/1,031 in 631s; mdBook/KM 702/5,450/memory/task/four doctrines/diff; conservative 57,724-KiB task-depot/rendered-book/bytecode cleanup with reusable SSD caches retained. | PASS. Lua now owns exact strict source identity/mapping behind one opaque root constructor without parser/compiler/path/execution coupling, format change, response, rollout, or admission movement; staged compiled-or-failed outcome `.10.7.2.2` follows the clean source commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.2.0` | Retrieved ADR `0049`, neutral source/privacy, four admitted foundations, and the Lua authority map; byte-identical PUC Lua/LuaJIT probes fix graph/privacy/calls at 128/13/135 bytes, ordered rules/functions/entry/plan, native failed/missing-selection diagnostics, malformed-UTF-8 predecode, and target no-execution; exact weak-key constructor/source-map/SHA-256/outcome/no-path split; unchanged Lua classifier/routes/identity/body/negative 1,706/179/359/166/1,542 per ABI plus package `1..177`x2, PUC primary 66x2/corpus 105; primary 5x2x66; Unicode matrix 5x2x1, Rust 5+3, Dart 17, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 82.65s, Dart 1/1, Julia 416/416 in 30.3s, reference primary 66x2, Phase 0 1,031/1,031 in 660s, final exit 0; mdBook/KM 701/5,432/memory/task/four doctrines/diff; conservative 96,264-KiB scratch cleanup with reusable caches retained. | PASS. The complete behavior-free source/outcome boundary and `.1-.3` dependency order are frozen without production/test/fixture/contract/API/response/format/rollout/admission change; strict source `.10.7.2.1` is active after this clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.4` | Clean composition from `f21b6943`; no replacement source/test/fixture/contract/format owner; Lua classifier 1,706/routes 179/identity 359/body 166/negative 1,542/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Rust Unicode 5+3, Dart 28, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 81.21s, Dart 1/1, Julia 416/416 in 28.8s, reference primary 66x2, Phase 0 1,031/1,031, final exit 0; mdBook/KM 700/5,418/memory/task/four doctrines/diff; exact 1,737,156-KiB cleanup. | PASS. The committed dual-ABI Unicode prerequisite recomposes without behavior or semantic promotion; parent `.10.7.1` closes and behavior-free source/outcome plan `.10.7.2.0` becomes active. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.1.3.2` | One contract-derived eight-negative suite across source declaration/action/blind/bare, programmatic/reconstructed trust paths, exact validation JSON, compiled/descriptor/plan, loaded/generated/emitted/fresh hosts, selectors, diagnostics, traces, strict loaders, inline/file primary, and function/parameter/rest/ActionIR/helper/fluent/lifecycle/split/conditional/mode/name/regex isolation; 1,542 assertions per ABI; complete Lua classifier 1,706/routes 179/identity 359/body 166/package `1..177`x2 plus PUC primary 66x2/corpus 105; primary 5x2x66; Rust 5+3, Dart 28, Julia 3,831 Unicode assertions; unchanged semantic 6/20/89 at 5/9 + 4/6 and five other ledgers; canonical Rust 1/1 in 82.39s, Dart 1/1, Julia 416/416 in 28.5s, reference primary 66x2, Phase 0 1,031/1,031 in 654s; mdBook/KM/memory/task/four doctrines/diff; exact 1,747,748-KiB cleanup. | PASS. Every negative and bypass rejects before portable artifact/runtime use, adjacent grammars remain isolated, the repaired body-fluent whole-token boundary stays exact, parent `.3` closes, and `.4` becomes active without behavior or semantic promotion. |
@@ -15413,6 +15441,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.2.1` | `FUTURE-PARITY-BACKLOG.10.7.2.1 - implement Lua semantic source map` | Strict opaque source owner, portable SHA-256, exact private coordinates, typed ceiling/map failures, dual-ABI proof, complete signoff, and staged outcome `.10.7.2.2` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.2.0` | `FUTURE-PARITY-BACKLOG.10.7.2.0 - freeze Lua semantic source outcome` | Behavior-free opaque constructor/source-map/outcome/no-path plan, identical dual-ABI probes, complete signoff, and strict source `.10.7.2.1` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.4` | `FUTURE-PARITY-BACKLOG.10.7.1.4 - close Lua Unicode label parity` | No-change dual-ABI recomposition, full signoff, `.10.7.1` closeout, and `.10.7.2.0` handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.1.3.2` | `FUTURE-PARITY-BACKLOG.10.7.1.3.2 - prove Lua negative label isolation` | Exact 1,542-assertion dual-ABI negative/trust/artifact/runtime/adjacent proof, recurring locks, full signoff, parent `.3` close, and `.4` handoff. |
@@ -15656,6 +15685,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-25`: Source leaf `.10.7.2.1` adds one parser-free weak-key Lua source owner and root
+  `linkedspec.semantic_index(source, options)` export. Strict copied UTF-8, closed plain options, Unicode-17 entry
+  validation, exact zero-based byte/scalar and one-based LF-only line/column boundaries, Lua-5.1 arithmetic
+  SHA-256, four ceilings, five opaque/detached source methods, typed errors, and path/environment/clock/target
+  isolation pass 377 assertions on both PUC Lua and LuaJIT. Complete Lua, primary 5x2x66, all ten Unicode legs,
+  six unchanged ledgers, canonical Rust 78.08s + Dart 1/1 + Julia 416/27.4s + reference primary 66x2 + Phase 0
+  1,031/631s, mdBook/KM 702/5,450, memory/task/four doctrines/diff, and conservative 57,724-KiB task-scratch
+  cleanup pass. Reusable SSD caches remain. No parser/compiler/runtime/trace/query/response/format/rollout/
+  admission behavior moves; staged compiled-or-failed outcome `.10.7.2.2` follows the clean source commit.
 
 - `2026-07-25`: No-change recomposition `.10.7.1.4` starts from clean proof commit `f21b6943` and reruns every
   committed Unicode owner without adding replacement production, generated, test, fixture, contract, API, or

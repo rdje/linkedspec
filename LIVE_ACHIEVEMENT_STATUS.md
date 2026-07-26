@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.2.1` — implement strict copied Lua source identity, portable SHA-256, and exact
-  private byte/scalar coordinates behind the committed opaque constructor plan. No implementation is in flight at
-  this clean handoff boundary.
+- `FUTURE-PARITY-BACKLOG.10.7.2.2` — retain one staged compiled-or-failed Lua semantic outcome, entry decision,
+  native diagnostic, and generated-v2 plan behind the committed source owner. No outcome implementation is in
+  flight at this clean handoff boundary.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.1 — implement Lua semantic source map**
+  (strict parser-free source identity, mapping, privacy, and typed failure owner).
+
+  **Result:** Root `linkedspec.semantic_index(source, options)` now accepts one copied strict-UTF-8 Lua string and
+  one closed plain option table. Weak-key package state retains exact bytes, scalar boundaries, copied logical
+  identity/ceiling/selector, and arithmetic SHA-256. Five ceiling-governed methods expose only opaque immutable
+  identity/span values or detached JSON; typed errors fence options, UTF-8, ranges, mid-scalar boundaries, needles,
+  and forbidden detail. Direct dependency scans and live traps prove no parser/compiler/loader/path/environment/
+  clock/trace/target coupling. Outcome construction remains exclusively `.10.7.2.2`.
+
+  **Proof:** The same 377 assertions pass on PUC Lua and LuaJIT, including standard SHA padding boundaries and
+  Unicode/CR-LF maps. Complete Lua, primary 5x2x66, Unicode 5x2x1 plus Rust 5+3 / Dart 17 / Julia 3,831, and all
+  six ledgers pass. Canonical CI passes Rust 78.08s, Dart 1/1, Julia 416/27.4s, reference primary 66x2, and Phase 0
+  1,031/631s. mdBook, Knowledge Map 702/5,450, memory/task/four doctrines, and diff hygiene pass; reusable caches
+  remain on the 4-TB SSD and only explicit task scratch is cleaned.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.0 — freeze Lua semantic source outcome**
   (behavior-free constructor/privacy/error/no-path/no-execution plan and `.1-.3` split).
 

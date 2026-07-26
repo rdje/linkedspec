@@ -138,6 +138,8 @@ require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl
 require_tracked_file julia/test/unicode_rule_label_negative_isolation_test.jl
 require_tracked_file julia/test/repeated_action_result_contract_test.jl
 require_tracked_file lua/src/linkedspec/unicode_rule_label.lua
+require_tracked_file lua/src/linkedspec/semantic_index.lua
+require_tracked_file lua/test/semantic_index_source_foundation_test.lua
 require_tracked_file lua/test/unicode_rule_label_classifier_test.lua
 require_tracked_file lua/test/unicode_rule_label_routes_test.lua
 require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua
