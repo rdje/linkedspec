@@ -4,6 +4,7 @@
 *.swp
 .DS_Store
 git_message_brief.txt
+/.linkedspec-data/
 
 # Local agent state
 .claude/projects/

@@ -18,8 +18,11 @@ only for explicit caller inputs or documented, strictly required external tools 
 Behavior-free audit `.0` finds 67 retained temporary directories/135,756 KiB, two exact Dart checkout records,
 one LinkedSpec stanza in a shared Julia log, 100 tracked temporary-allocation owners, and 24 executable files with
 off-repository defaults. Migration follows copy/verify/use/delete without deleting ambiguous shared caches.
-Implementation `.1.1` follows the clean planning commit; the path-portability closeout is paused behind this
-storage-locality tree so it can prove both relocation and same-filesystem project IO together.
+Initializer `.1.1` is complete: ignored `/.linkedspec-data/{scratch,cache}`, runtime root discovery, pre/post-create
+device validation, same-filesystem caller overrides, standard temp/Cargo/Dart/Julia exports, and hostile outside-
+cwd shell proof are green. Active `.1.2` routes hooks, canonical CI, generators, mdBook, and backend runners through
+that helper. The path-portability closeout is paused behind this storage-locality tree so it can prove both
+relocation and same-filesystem project IO together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
 `REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool

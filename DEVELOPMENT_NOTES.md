@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.1.1` — validate the destination, not the environment spelling): An
+  inherited cache/temp variable is only a request. The initializer turns relative requests into caller-cwd
+  absolute candidates, walks to the nearest existing ancestor without creating anything, compares that directory's
+  device with the physical repository, creates only after a match, then verifies the final resolved directory
+  again. This accepts legitimate same-filesystem overrides and rejects symlink/mount/cross-volume destinations
+  without persisting or special-casing the SSD mount. Root defaults derive solely from `BASH_SOURCE`.
+
+  One ignored `/.linkedspec-data/` authority avoids coupling reusable multi-language caches to `rust/target` while
+  keeping Cargo build output at its established project-local target. Julia's trailing empty depot entry is a
+  deliberate system-depot exception, not a home-cache fallback. Sourcing rather than executing is part of the API:
+  a subprocess cannot update its parent environment. Routing every supported entrypoint remains isolated in `.1.2`.
+
+  Signoff sources the initializer with warmed same-filesystem SSD cache overrides and passes Rust semantic 1/1 in
+  83.33 seconds, Dart 1/1, Julia 416/416 in 30.2 seconds, primary CLI 66x2, and Phase 0 1,031/1,031 in 652 seconds.
+  This establishes the environment contract without yet changing standard workflow entrypoints or old data.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.0` — repository filesystem is project-data authority): ADR `0053`
   narrows the relocation contract for project-owned state. Generated output, builds, caches, depots, logs, traces,
   runtime fixtures, and scratch must use roots derived from the current checkout and share its filesystem. An

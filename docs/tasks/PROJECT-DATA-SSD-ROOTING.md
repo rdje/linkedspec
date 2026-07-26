@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (director mandate received; inventory and migration contract `.0` active)
+- Last updated: `2026-07-26` (`.1.1` initializer implemented and verified; `.1.2` workflow routing active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -98,13 +98,13 @@ accessing the shared copy, and remove only records or directories provably owned
     cache-default, or old-data behavior changes before `.1.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1`
-  Status: `pending`
+  Status: `active`
   Goal: Establish one relocatable SSD-backed project storage contract.
   Depends on: `.0`
   Children: `.1.1`, `.1.2`, `.1.3`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1.1`
-  Status: `active`
+  Status: `done` (2026-07-26; repo-derived storage roots and same-filesystem override validation implemented)
   Goal: Define root-relative scratch and reusable-cache directories plus one shell environment initializer.
   Depends on: `.0`
   Acceptance: Choose ignored root-relative directories for ephemeral scratch and retained caches; derive absolute
@@ -114,8 +114,28 @@ accessing the shared copy, and remove only records or directories provably owned
     commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — `.0` filesystem census plus `stat` proves inherited OS temp is on another device;
+    the frozen tracked inventory names temp/Cargo/Dart/Julia defaults that would keep writing there.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — No common pre-command environment owner existed. Standard runtime variables
+    inherited caller/OS values, while `tools/run_julia_local.sh:7` and related runners explicitly fell back to
+    external temp; `bash tools/test_project_data_env.sh` supplies the same hostile variables as an executable oracle.
+  - [x] **FIX** — `tools/project_data_env.sh` derives `BASH_SOURCE` checkout identity, creates ignored
+    `/.linkedspec-data/{scratch,cache}`, checks GNU/BSD device identity before and after creation, preserves only
+    same-filesystem overrides, and exports LinkedSpec/temp/Cargo/Dart/Julia roots without a mount literal.
+  - [x] **ADDRESSED (verified)** — `bash tools/test_project_data_env.sh` passes default creation/ignore/device checks,
+    same-volume custom and per-tool overrides, outside-cwd hostile cross-volume replacement, execute-vs-source
+    rejection, cleanup, and machine-path source scans.
+  - [x] **NO REGRESSION** — `bash -n tools/project_data_env.sh tools/test_project_data_env.sh`, the focused shell
+    proof, `bash scripts/check_doctrines.sh`, `mdbook build docs/linkedspec-book`, and `git diff --check` pass.
+    The canonical gate passes Rust 1/1 in 83.33s, Dart 1/1, Julia 416/416 in 30.2s, primary 66x2, and Phase 0
+    1,031/1,031 in 652s. Existing workflows are not behaviorally routed until `.1.2`.
+  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, dedicated Knowledge card, roadmaps, task/live/memory docs are
+    synchronized. Standard hooks/runners remain unchanged until their owning `.1.2` leaf.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Route commit hooks, doctrine scripts, canonical CI, and standard backend runners through the initializer.
   Depends on: `.1.1`
   Acceptance: Source the helper before any command can allocate temporary or cache data; cover local CI, pre-commit,
@@ -261,7 +281,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.1.1` | `active` | From the clean `.0` commit, define ignored root-relative scratch/cache roots, a relocatable environment initializer, same-filesystem validation, and focused tests. |
+| `PROJECT-DATA-SSD-ROOTING.1.2` | `active` | From the clean `.1.1` commit, source the initializer in hooks, canonical CI, Knowledge Map/mdBook flows, and standard backend runners; prove outside-cwd selection. |
 
 ## Decisions
 
@@ -279,6 +299,11 @@ accessing the shared copy, and remove only records or directories provably owned
 - Each exact old LinkedSpec-owned source is deleted in the same leaf that verifies its SSD replacement; deletion is
   not deferred to final closeout. `.3` is an independent reconciliation and empty-residue proof.
 - Reusable caches are retained on the SSD; successful per-run scratch is disposable.
+- The default root is `/.linkedspec-data/`: disposable `scratch/`, retained `cache/`, Cargo target at
+  `rust/target`, and runtime-derived absolute exports. The leading slash here means repository-root-relative, not
+  filesystem-root-absolute.
+- Caller overrides are preserved only after the helper proves their resolved directory shares the repository
+  device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
 - The push cadence remains 300 commits. No leaf in this tree pushes independently.
 
 ## Links
@@ -286,6 +311,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Architecture decision: `docs/decisions/0053-project-data-ssd-storage-locality.md`
 - Repository relocation decision: `docs/decisions/0052-repository-root-path-portability.md`
 - Durable storage-locality fact: `docs/knowledge/project-data-ssd-storage-locality.md`
+- Durable initializer fact: `docs/knowledge/project-data-env-initializer.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -298,12 +324,16 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.0` | cache/tool filesystem census | shared Cargo 845 MB, Dart 78 MB, Julia 13 MB off SSD; Rust target 2.9 GB and Dart tool state 31 MB on SSD; 11 baseline external tool entrypoints on internal filesystem |
 | 2026-07-26 | `.0` | five doctrines; memory; Knowledge Map; task metadata; mdBook; whitespace | PASS; memory 40 lines; Knowledge Map 707 facts/5,528 question keys |
 | 2026-07-26 | `.0` | canonical gate with SSD-local temp/Cargo/Dart/Julia caches | PASS: Rust 1/1 in 82.41s; Dart 1/1; Julia 416/416 in 29.7s; Perl primary 66x2; Phase 0 1,031/1,031 in 657s |
+| 2026-07-26 | `.1.1` | `bash -n tools/project_data_env.sh tools/test_project_data_env.sh`; focused shell test | PASS; ignored default roots, same-volume preservation, hostile cross-volume replacement, outside-cwd discovery, and exact cleanup |
+| 2026-07-26 | `.1.1` | five doctrines; memory; Knowledge Map; task metadata; mdBook; whitespace | PASS; memory 44 lines; Knowledge Map 708 facts/5,540 question keys |
+| 2026-07-26 | `.1.1` | canonical gate sourced through initializer with warmed same-filesystem SSD caches | PASS: Rust 1/1 in 83.33s; Dart 1/1; Julia 416/416 in 30.2s; Perl primary 66x2; Phase 0 1,031/1,031 in 652s |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `.0` | `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration` (this commit) | Ownership, exact inventory, migration safety, and implementation order only. |
+| `.0` | `74138903` — `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration` | Ownership, exact inventory, migration safety, and implementation order only. |
+| `.1.1` | `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` (this commit) | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
 
 ## Changelog
 
@@ -312,3 +342,6 @@ accessing the shared copy, and remove only records or directories provably owned
 - `2026-07-26`: Completed `.0` planning: ADR `0053`, exact live/tracked/cache/tool inventories, necessary-only
   cross-volume reads, immediate verified source deletion, and the `.1-.5` migration/enforcement order are frozen.
   `.1.1` becomes the clean implementation frontier after commit.
+- `2026-07-26`: Completed `.1.1`; the ignored project-data hierarchy, sourceable environment initializer,
+  pre/post-create filesystem checks, temp/Cargo/Dart/Julia exports, same-volume override policy, and focused shell
+  proof are implemented. `.1.2` becomes the clean workflow-routing frontier after commit.

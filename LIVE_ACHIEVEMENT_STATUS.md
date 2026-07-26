@@ -8,14 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.1.1` — from the clean behavior-free `.0` commit, define ignored root-relative scratch
-  and reusable-cache roots, a relocatable shell environment initializer, same-filesystem validation, and focused
-  tests. `REPO-ROOT-PATH-PORTABILITY.2.2` is paused until SSD-local project IO can join its relocation oracle.
+- `PROJECT-DATA-SSD-ROOTING.1.2` — from the clean initializer commit, source the repo-derived environment in hooks,
+  canonical CI, Knowledge Map/mdBook flows, and standard backend runners, then prove outside-cwd execution selects
+  the current repository filesystem. `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.1.1 — define repo-local storage roots**
+  (sourceable environment initializer and focused same-filesystem enforcement; closes with this commit).
+
+  **Result:** Ignored `/.linkedspec-data/{scratch,cache}` separates disposable and retained state.
+  `tools/project_data_env.sh` derives the checkout from its own file, validates device identity before and after
+  directory creation, preserves only same-filesystem overrides, and exports LinkedSpec, temp, Cargo, Dart, and
+  Julia roots. Julia uses the local writable depot plus runtime system depots, never a developer-home depot.
+
+  **Proof:** Bash syntax and `tools/test_project_data_env.sh` pass default/ignore/device creation, same-volume
+  custom and per-tool overrides, hostile other-filesystem values from outside cwd, source-only use, machine-path
+  absence, and cleanup. Five doctrines, 44-line memory, Knowledge Map 708/5,540, mdBook, task metadata, and
+  whitespace pass. Canonical verification sources the initializer with warmed same-filesystem SSD caches and
+  passes Rust 1/1 in 83.33s, Dart 1/1, Julia 416/416 in 30.2s, Perl primary 66x2, and Phase 0 1,031/1,031 in 652s.
+  Generated Python bytecode is removed exactly; no old off-volume data changes. Push counter is 24/300; no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.0 — freeze SSD storage migration**
   (behavior-free architecture decision, exact inventory, and migration split; closes with this commit).
 

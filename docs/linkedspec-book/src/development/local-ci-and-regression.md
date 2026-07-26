@@ -696,14 +696,43 @@ shared Julia log, 100 tracked temporary-allocation owners, and 24 executable off
 has occurred in planning `.0`. Each implementation leaf must copy or move its exact data, verify count/bytes/hash
 where material, exercise the SSD replacement, and then delete the exact old source. Ambiguous shared global caches
 are never deleted wholesale; supported workflows populate repository-local caches and stop reading the shared
-copy. Until initializer `.1.1` lands, direct commands must explicitly set temporary and cache locations beneath
-the current repository, as in the Julia example above.
+copy.
 
 Planning `.0` is behavior-free but was signed off with temporary, Cargo, Dart, and Julia cache variables rooted
 beneath the repository. The complete canonical gate passes Rust semantic admission 1/1 in 82.41 seconds, Dart
 1/1, Julia 416/416 in 29.7 seconds, both 66-case Perl primary environments, and Phase 0 1,031/1,031 in 657
 seconds. This proves the current gate can run from manually selected same-volume project state before the standard
 initializer is implemented; it does not claim the defaults are migrated yet.
+
+Initializer `.1.1` is now implemented. From the repository root, source it before any direct tool invocation:
+
+```bash
+source tools/project_data_env.sh
+```
+
+It derives the physical checkout from its own file, creates the ignored repository-relative
+`/.linkedspec-data/scratch/` and `/.linkedspec-data/cache/` roots, and exports all standard temporary variables,
+Cargo home/target, Dart package cache, and Julia depot variables. Reusable dependencies remain beneath `cache/`;
+per-run lifecycle and cleanup policy remains owned by `.1.3`.
+
+Caller overrides are not trusted by spelling. The helper resolves their existing or nearest existing directory,
+compares GNU/BSD device identity with the repository, creates the directory only after that comparison, and checks
+the final destination again. A same-filesystem override is preserved; an invalid or cross-filesystem override is
+replaced with the repo-derived default without writing there. Julia defaults to one writable local depot followed
+by Julia's runtime system depots, deliberately omitting the developer-home depot. The focused shell test proves
+default creation/ignore state, same-volume overrides, hostile cross-volume values from outside caller cwd, source-
+only use, and exact test cleanup:
+
+```bash
+bash tools/test_project_data_env.sh
+```
+
+Leaf `.1.1` signoff passes that focused proof, all five doctrines, and the complete canonical gate while retaining
+warmed caches on the repository filesystem: Rust semantic admission 1/1 in 83.33 seconds, Dart 1/1, Julia 416/416
+in 30.2 seconds, reference CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in 652 seconds.
+
+Standard hooks, gates, and backend runners do not source the helper automatically until routing leaf `.1.2`; source
+it manually for direct commands in the meantime.
 
 ## CI input areas
 

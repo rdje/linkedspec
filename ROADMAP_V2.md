@@ -13,8 +13,10 @@ artifact, cache, package depot, log, and temporary workspace to live on the repo
 derive from the current checkout; cross-volume reads are limited to explicit caller paths and documented strictly
 necessary external tool/OS dependencies. Planning `.0` freezes 67 retained temporary directories/135,756 KiB,
 two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocation owners, and 24 executable
-off-repository defaults. `.1.1` is next after the clean planning commit. Migration is copy/verify/use/delete;
-ambiguous shared caches are not deleted wholesale.
+off-repository defaults. `.1.1` now implements ignored `/.linkedspec-data/{scratch,cache}`, current-file root
+discovery, same-device override validation, standard temp/Cargo/Dart/Julia exports, and hostile outside-cwd proof.
+Active `.1.2` routes supported workflows through the initializer. Migration is copy/verify/use/delete; ambiguous
+shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

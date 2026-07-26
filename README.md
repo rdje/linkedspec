@@ -252,9 +252,22 @@ temporary directories totalling 135,756 KiB, two Dart checkout metadata records,
 Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Each exact retained
 source will be copied, count/byte/hash verified where material, exercised from its SSD destination, and deleted in
 the same implementation leaf. Shared caches are never deleted wholesale when ownership is ambiguous; LinkedSpec
-will instead populate repository-local caches and stop consulting the shared copy. Implementation `.1.1` is the
-next clean-commit frontier; until that initializer lands, direct ad-hoc commands must explicitly select temporary
-and cache locations beneath the current repository.
+will instead populate repository-local caches and stop consulting the shared copy.
+
+Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
+command:
+
+```bash
+source tools/project_data_env.sh
+```
+
+It derives the physical checkout from its own file, creates disposable `scratch/` and retained `cache/` children,
+and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache, and Julia depot variables. A caller
+override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
+filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
+The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. The
+helper works when sourced from outside the checkout, but standard hooks and runners do not source it automatically
+until routing leaf `.1.2` lands.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

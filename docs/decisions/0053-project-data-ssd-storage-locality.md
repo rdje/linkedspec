@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; implementation and migration pending
+- Status: accepted; initializer implemented, workflow routing and migration pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -64,6 +64,9 @@ boundary for storage locality.
   caches.
 - Direct low-level commands that bypass supported entrypoints must first initialize the repo-local environment or
   explicitly supply equivalent repo-filesystem roots.
+- The implemented default hierarchy is repository-relative `/.linkedspec-data/`, split into disposable `scratch/`
+  and retained `cache/`. `tools/project_data_env.sh` derives its absolute value at runtime and validates device
+  identity before and after creating a caller override.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any

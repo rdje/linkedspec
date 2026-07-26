@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.1.1 — define repo-local storage roots
+
+Added ignored repository-relative `/.linkedspec-data/` with separate disposable `scratch/` and retained `cache/`
+children. The sourceable `tools/project_data_env.sh` derives the physical checkout from its own current file,
+never caller cwd or a persisted mount. It exports LinkedSpec root variables plus `TMPDIR`/`TMP`/`TEMP`,
+`CARGO_HOME`, `CARGO_TARGET_DIR`, `PUB_CACHE`, `JULIA_DEPOT_PATH`, and
+`LINKEDSPEC_JULIA_DEPOT_PATH`. Cargo target output remains at `rust/target`; Cargo home, Dart packages, and Julia
+packages/precompile state default below the retained cache root. Julia composes the writable local depot with
+runtime system depots while omitting the developer-home depot.
+
+Every explicit override is resolved against caller cwd only as caller input, checked through GNU/BSD `stat`
+device identity at its nearest existing ancestor, created only after matching the repository filesystem, and
+checked again at the final directory. Same-filesystem overrides are preserved; invalid or cross-filesystem values
+are replaced with root-derived defaults without writing at the rejected destination. The helper refuses direct
+execution because its exports must modify the caller shell.
+
+`tools/test_project_data_env.sh` proves ignore state and default directory creation, same-volume custom and
+per-tool overrides, another-filesystem replacement from outside the checkout cwd, all final device identities,
+source-only use, absence of persisted machine paths, and exact cleanup. Standard hooks/runners intentionally remain
+unchanged until `.1.2`. Documentation, ADR, a dedicated Knowledge card, task/live/memory, and both roadmaps now
+share the exact mechanism. Push cadence advances to 24/300; no push.
+
+Focused Bash syntax and hostile-override proof, five doctrines, 44-line memory, Knowledge Map 708 facts/5,540
+question keys, mdBook, task metadata, and whitespace pass. The canonical gate sources the initializer while
+preserving the warmed same-filesystem SSD cache overrides and passes Rust semantic admission 1/1 in 83.33 seconds,
+Dart 1/1, Julia 416/416 in 30.2 seconds, Perl primary 66x2, and Phase 0 1,031/1,031 in 652 seconds. The run creates
+no tracked residue; its generated Python bytecode is removed exactly. No old off-volume project data is read,
+mutated, or deleted by this leaf.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.0 — freeze SSD storage migration
 
 Adopted ADR `0053`: all LinkedSpec-owned artifacts, caches, package depots, logs, traces, generated output, and
