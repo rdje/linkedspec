@@ -1112,9 +1112,13 @@ content migration exists yet.
   PUC Lua/LuaJIT probes lock graph/privacy/calls/failure/malformed-source boundaries before code. Strict source-only
   `.10.7.2.1` now implements the root constructor with copied strict UTF-8, closed options, package-private
   arithmetic SHA-256, exact byte/scalar maps, all four ceilings, opaque detached source values, typed map errors,
-  and no parser/compiler/path/execution coupling. Its 377 assertions pass identically on both ABIs. Staged
-  compiled-or-failed outcome `.10.7.2.2` is active after the clean source commit; the separate ASCII fluent-method
-  grammar, public query, formats, rollout, and admission remain unchanged.
+  and source-before-language ordering. Its current 378 assertions pass identically on both ABIs. Staged outcome
+  `.10.7.2.2` now retains exactly one parse/validate/compile/select/plan result plus private merged authored order;
+  five opaque detached values expose only snapshot/presence/diagnostic/entry/generated-v2 plan facts. Native
+  validation/selection errors remain exact, recognized fallbacks are deterministic, and unrecognized errors
+  retain identity. Its 122 assertions pass per ABI without caller path or target/generated execution. No-change
+  closeout `.10.7.2.3` is next; the separate ASCII fluent-method grammar, public query, formats, rollout, and
+  admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

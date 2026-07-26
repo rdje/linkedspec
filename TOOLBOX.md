@@ -652,6 +652,22 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   non-interference, fresh plus isolated emitted modules, and host-leak denial. Eight independent topology
   mutations advance only Julia to rollout 5/9 and admission 4/6.
 
+- **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
+  private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque
+  detached source/error values. Importing `linkedspec.semantic_index` remains parser-free; constructing an index
+  now validates/maps/hashes first and then lazily loads the outcome owner. Run both focused suites with the same
+  native adapter environment used by `tools/run_lua_local.sh`; the source suite passes 378 assertions on both PUC
+  Lua and LuaJIT. Do not infer path identity or inspect weak-key state. See [[lua-semantic-source-foundation]].
+- **LUA COMPILATION FOUNDATION:** `.10.7.2.2` performs exactly one staged user-function-aware parse, validation,
+  `compile_spec(..., {validate_source=false})`, entry selection, and generated-v2 plan build behind that owner.
+  Use `semantic_snapshot`, `compilation_authority`, `compilation_diagnostic`, `entry_selection`, and
+  `generated_plan_input`; public values are protected empty handles with detached JSON/fields/rows. Native
+  validation and selection diagnostics remain exact, recognized parser/compiler/plan failures use stable
+  fallbacks, and unrecognized exceptions retain identity. Run
+  `bash tools/run_lua_local.sh`; its registered outcome suite passes 122 assertions per ABI and proves no caller
+  path, target/generated execution, runtime, trace, diagnostic sink, query, observation, descriptor, or host-state
+  exposure. See [[lua-semantic-compilation-foundation]].
+
 ---
 
 ## 5. Gates & retrieval

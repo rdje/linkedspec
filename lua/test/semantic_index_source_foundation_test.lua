@@ -49,9 +49,10 @@ local module_source = read_file("lua/src/linkedspec/semantic_index.lua")
 local required = {}
 for name in module_source:gmatch('require%(%"([^%"]+)%"%)') do required[#required + 1] = name end
 table.sort(required)
-check_equal(#required, 2, "source module dependency count")
+check_equal(#required, 3, "source module dependency count")
 check_equal(required[1], "linkedspec.json", "source module JSON dependency")
-check_equal(required[2], "linkedspec.unicode_rule_label", "source module Unicode dependency")
+check_equal(required[2], "linkedspec.semantic_compilation_outcome", "source module lazy outcome dependency")
+check_equal(required[3], "linkedspec.unicode_rule_label", "source module Unicode dependency")
 for _, token in ipairs({
   "io.",
   "os.",
@@ -392,7 +393,8 @@ check_equal(tostring(start_boundary),
 
 local index_string = tostring(graph_index)
 check_equal(index_string,
-  "SemanticIndex(source_id=\"source:0\", source_detail_ceiling=\"text\")",
+  "SemanticIndex(source_id=\"source:0\", snapshot_state=\"compiled\", " ..
+    "source_detail_ceiling=\"text\", has_execution=false)",
   "index string stable")
 for _, forbidden in ipairs({ "graph.spec", "Top::AND", "/tmp", "table:", "userdata:" }) do
   check_equal(index_string:find(forbidden, 1, true), nil, "index string redacts " .. forbidden)

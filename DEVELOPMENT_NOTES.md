@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.2` — failure ownership must follow typed stage authority): A broad
+  `pcall` is not by itself a safe compiled-or-failed boundary. Each stage now recognizes only its own typed native
+  errors. Exact validation and entry-selection diagnostics survive unchanged; parser, compiler, and plan owners
+  that lack the portable tuple receive deterministic stage-specific fallbacks. Anything outside those recognized
+  families is rethrown with exact identity, so invariant failures, control signals, and test sentinels cannot be
+  disguised as user-language diagnostics.
+
+  The outcome remains part of the original weak-key index rather than a parallel public graph. One pipeline pass
+  retains typed authority and merged authored function/rule order privately, while five protected empty handles
+  reveal only snapshot state, three presence bits, a detached diagnostic, entry identity, or generated-v2 plan.
+  This keeps later static projection free to normalize from authorities without making ASTs, compiled objects,
+  definition order, paths, or Lua table identity into an accidental wire contract.
+
+  Source policy still runs first. The semantic-index module itself imports only JSON and the Unicode classifier;
+  construction validates/maps/hashes strict bytes before lazily loading the outcome module. Trusted bundled staged-
+  grammar execution is compiler infrastructure, whereas caller path loading, emitted/generated execution, target
+  actions, lifecycle code, trace, diagnostic sinks, query, and runtime observation stay structurally absent.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.1` — source privacy needs one owner, not one hidden field): Lua
   strings already provide immutable byte identity, but ordinary tables do not provide immutable or private
   records. The semantic source layer therefore keeps the accepted string, option copy, boundary tables, and digest

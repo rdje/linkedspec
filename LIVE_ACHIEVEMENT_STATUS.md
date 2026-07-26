@@ -8,14 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.2.2` — retain one staged compiled-or-failed Lua semantic outcome, entry decision,
-  native diagnostic, and generated-v2 plan behind the committed source owner. No outcome implementation is in
-  flight at this clean handoff boundary.
+- `FUTURE-PARITY-BACKLOG.10.7.2.3` — recompose the committed strict-source and staged-outcome owners unchanged,
+  then close the Lua semantic foundation parent without static projection, query, observation, or promotion. It
+  becomes eligible only after the clean `.10.7.2.2` outcome commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.2 — implement Lua semantic outcomes**
+  (one staged compiled-or-failed authority plus detached foundation values).
+
+  **Result:** After strict source policy, the existing staged parser, validator, compiler without duplicate
+  validation, entry selector, and generated-v2 plan builder run exactly once. Weak-key private state retains typed
+  parsed/compiled authorities plus merged function/rule order. Five protected values reveal only snapshot state,
+  three presence bits, a detached native-or-fallback diagnostic, entry identity, or detached plan. Unrecognized
+  errors rethrow unchanged. Caller paths, target/generated execution, runtime, trace/sinks, descriptors, records,
+  query, observation, and host identity remain absent.
+
+  **Proof:** Source 378 plus outcome 122 assertions pass identically on PUC Lua and LuaJIT. Complete dual-ABI Lua,
+  primary 5x2x66, Unicode 5x2x1 with Rust 5+3 / Dart 17 / Julia 3,831, all six unchanged ledgers, mdBook, and
+  Knowledge Map 703/5,463 pass. Canonical CI passes Rust 1/1 in 78.05s, Dart 1/1, Julia 416/416 in 27.2s,
+  reference primary 66x2, and Phase 0 1,031/1,031 in 628s. Generated source remains v2/format 2; semantic
+  governance remains 6/20/89 at rollout 5/9 and admission 4/6. Reusable caches remain on the 4-TB SSD; only
+  disposable task depots/probes are cleaned.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.1 — implement Lua semantic source map**
   (strict parser-free source identity, mapping, privacy, and typed failure owner).
 

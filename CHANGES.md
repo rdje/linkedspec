@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.2 — implement Lua semantic outcomes
+
+Extended the committed Lua semantic source owner with one package-private staged compiled-or-failed outcome. After
+strict source/options, mapping, and digest construction, it lazily invokes the existing staged user-function-aware
+parser, native validator, compiler with duplicate validation disabled, entry selector, and shared generated-v2
+plan builder exactly once. Parsed/compiled authority, merged authored function/rule order, entry, and plan remain
+only in weak-key private state; caller paths, target/generated execution, runtime, trace, diagnostic sinks, query,
+observation, descriptors, and host identity remain absent.
+
+The opaque index now exposes detached immutable `semantic_snapshot`, `compilation_authority`,
+`compilation_diagnostic`, `entry_selection`, and `generated_plan_input` values. Native validation and selection
+diagnostics preserve exact portable fields. Recognized parser, non-portable validation, compiler, and plan failures
+use deterministic stage-specific fallbacks; unrecognized thrown values are rethrown unchanged. Snapshot state is
+compiled-or-failed with `has_execution=false`, plan identity requires at least the `identity` source ceiling, and
+all nested diagnostic/plan data is freshly detached.
+
+The registered 122-assertion outcome suite passes unchanged on PUC Lua and LuaJIT alongside the updated
+378-assertion source suite and the complete dual-ABI Lua gate. Graph, explicit/default/markerless/staged sources,
+native and fallback failures, missing selection, authored order, opacity/detachment, source scans, unknown-error
+identity, and target no-execution are covered. Semantic governance remains 6/20/89 at rollout 5/9 and native
+admission 4/6; generated source remains v2/format 2. Primary 5x2x66, Unicode 5x2x1, all six ledgers, mdBook,
+Knowledge Map 703/5,463, and canonical Rust 1/1 in 78.05s + Dart 1/1 + Julia 416/416 in 27.2s + reference primary
+66x2 + Phase 0 1,031/1,031 in 628s pass. No-change foundation closeout `.10.7.2.3` follows only after the clean
+outcome commit.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.1 — implement Lua semantic source map
 
 Added the parser-free Lua semantic source foundation behind the root

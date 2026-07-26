@@ -1,6 +1,6 @@
 ---
 id: lua-semantic-source-outcome-plan
-title: Lua semantic source is implemented and compiled outcome remains frozen behind one opaque dual-ABI owner
+title: Lua semantic source and compiled outcome are implemented behind one opaque dual-ABI owner
 answers:
   - "what is the planned Lua semantic_index constructor"
   - "what Lua semantic index options are required"
@@ -17,16 +17,17 @@ answers:
   - "does Lua semantic source outcome construction accept a path"
   - "what is the Lua semantic source outcome implementation split"
 date: 2026-07-25
-status: current plan with source implemented; FUTURE-PARITY-BACKLOG.10.7.2.2 staged outcome is active
+status: implemented through FUTURE-PARITY-BACKLOG.10.7.2.2; no-change foundation closeout .10.7.2.3 follows
 tags: [lua, luajit, semantic-introspection, source-map, sha256, diagnostics, privacy, no-execution]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.2.0 freezes .1 source, .2 outcome, and .3 closeout ownership; .10.7.2.1 now implements the parser-free source owner at 377 assertions on each ABI while outcome construction remains .2."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.2.0 freezes .1 source, .2 outcome, and .3 closeout ownership; .10.7.2.1 implements strict source ownership at 378 assertions per ABI and .10.7.2.2 implements one staged outcome at 122 assertions per ABI."
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'FUTURE-PARITY-BACKLOG.10.7.2|semantic_index|source_detail_ceiling|semantic_source_' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md lua/src lua/test"
 ---
 
 # Lua semantic source/outcome plan
 
-Behavior-free leaf `FUTURE-PARITY-BACKLOG.10.7.2.0` froze one Lua source/outcome foundation before code, and
-source leaf `.10.7.2.1` now implements its parser-free half. The public constructor is
+Behavior-free leaf `FUTURE-PARITY-BACKLOG.10.7.2.0` froze one Lua source/outcome foundation before code. Source
+leaf `.10.7.2.1` implements the strict source half, and outcome leaf `.10.7.2.2` implements the staged half behind
+that same owner. The public constructor is
 `linkedspec.semantic_index(source, options)`. `source` is one immutable Lua string;
 the copied option map has exactly required strict-UTF-8 `logical_name`, required string
 `source_detail_ceiling` (`none`, `identity`, `span`, or `text`), and optional exact Unicode-17 `entry_rule`.
@@ -56,12 +57,13 @@ These failures occur before a snapshot exists. Recognized parse, validation, com
 failures instead produce a detached `failed_compilation` outcome; an unrecognized control/invariant error rethrows
 unchanged rather than being disguised as a user diagnostic.
 
-Outcome child `.10.7.2.2` calls the existing staged user-function-aware parser, validator, compiler with duplicate
+Implemented outcome child `.10.7.2.2` calls the existing staged user-function-aware parser, validator, compiler with duplicate
 validation disabled, entry selector, and shared generated-v2 plan builder once. It privately retains staged
 `SpecFile`, compiled authority, merged function/rule authored order, selection, and plan. Public methods expose
 only a snapshot, parsed/validated/compiled presence bits, detached diagnostic, entry `{label,basis}`, and generated
 plan `{contract_id,format_version,source_identity,rows}`; `none` denies plan identity. Native validation and entry
-diagnostics stay exact at this foundation. Static projection later owns cross-backend normalization.
+diagnostics stay exact at this foundation. Recognized parser/compiler/plan failures use deterministic fallbacks,
+while unrecognized exceptions rethrow unchanged. Static projection later owns cross-backend normalization.
 
 PUC Lua 5.4 and LuaJIT 2.1 probes agree: graph is 128 bytes with rules `Top,Child`, entry
 `Top/first_authored_marker`, and plan `Top/and_acode_seq,Child/rep_acode`; privacy is 13 bytes with `Töp/default`;

@@ -3,7 +3,7 @@ id: lua-semantic-introspection-authority-map
 title: Lua semantic introspection must compose existing dual-ABI authorities behind one opaque index
 answers:
   - "which Lua authorities can build the semantic index"
-  - "does Lua already expose semantic_index or semantic_query"
+  - "does Lua expose semantic_index or semantic_query"
   - "does Lua compiled definition order include function shells"
   - "where do Lua semantic source spans come from"
   - "are Lua ActionIR spans global source offsets"
@@ -20,17 +20,18 @@ answers:
   - "what Lua 5.1 and Lua 5.4 compatibility risks affect semantic introspection"
   - "what are the Lua semantic introspection implementation leaves"
 date: 2026-07-25
-status: current authority map; source/outcome plan frozen through FUTURE-PARITY-BACKLOG.10.7.2.0
+status: current authority map; source and compiled-outcome foundation implemented through FUTURE-PARITY-BACKLOG.10.7.2.2
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories lua/src/linkedspec spec_parser/spec_validator/spec_ast/compiled_spec/staged_parser_registry/action_ast/action_parser/action_contracts/user_function_registry/spec_loader/source_emitter/interpreter/matching/json/trace/init authorities. No semantic module/API or typed observation sink exists. Exact implementation is split into Unicode .1, source/outcome .2, static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2.1-.2 now expose one opaque semantic_index source/outcome foundation while semantic records/query and typed observation remain absent. Exact implementation continues through static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
 # Lua semantic-introspection authority map
 
-Lua has no semantic-introspection production module or public `semantic_index`, `semantic_capabilities`,
-`semantic_query`, `semantic_query_neutral`, or observation API at the `.10.7.0` audit boundary. The reusable
-meaning is present but distributed across the existing shared PUC Lua/LuaJIT implementation:
+Lua had no semantic-introspection production module at the `.10.7.0` audit boundary. It now exposes public
+`semantic_index(source, options)` with strict source mapping plus detached compiled-or-failed foundation values.
+It still exposes no `semantic_capabilities`, `semantic_query`, `semantic_query_neutral`, record projection, or
+observation API. The remaining reusable meaning is distributed across the shared PUC Lua/LuaJIT implementation:
 
 - strict `parse_spec` input, `SpecFile`, function shells, staged payload/job/result sidecars, and body-element
   source lines own authored structure;
@@ -44,10 +45,10 @@ meaning is present but distributed across the existing shared PUC Lua/LuaJIT imp
 No existing span is the neutral source model. Rule headers and body elements carry lines and authored fragments,
 function shells carry source-character spans, and ActionIR spans are Unicode-character offsets local to their
 normalized action text. `CompiledSpec.definition_order` lists rules while functions remain in separate registry/
-staged state. The adapter therefore needs one copied strict UTF-8 source map with canonical byte/scalar coordinates
-and merged authored definition order. Lua has no package SHA-256 implementation today; `.10.7.2` must add a
-package-internal deterministic implementation that uses syntax and arithmetic available to both Lua 5.1/LuaJIT
-and the installed PUC Lua, without an external executable or optional module.
+staged state. The adapter now owns one copied strict UTF-8 source map with canonical byte/scalar coordinates, a
+private merged authored definition order, and a package-internal deterministic SHA-256 implementation using syntax
+and arithmetic available to both Lua 5.1/LuaJIT and the installed PUC Lua, without an external executable or
+optional module.
 
 Loaded state retains decoded source plus resolved host paths, so it cannot own semantic construction or logical
 identity. Descriptors and compiled JSON expose Lua-native tables/metatables and are compatibility projections, not
@@ -70,4 +71,4 @@ typed runtime observation `.6`; and one byte-identical ordered dual-ABI admissio
 no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
-[[lua-semantic-source-outcome-plan]].
+[[lua-semantic-source-outcome-plan]], and [[lua-semantic-compilation-foundation]].

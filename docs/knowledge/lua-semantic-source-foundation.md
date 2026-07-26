@@ -1,6 +1,6 @@
 ---
 id: lua-semantic-source-foundation
-title: Lua semantic source identity and coordinates are owned by one parser-free weak-key index
+title: Lua semantic source identity and coordinates precede a lazily loaded outcome in one weak-key index
 answers:
   - "how do I construct a Lua semantic source index"
   - "is linkedspec.semantic_index implemented in Lua"
@@ -21,9 +21,9 @@ answers:
   - "what tests prove the Lua semantic source foundation"
   - "what remains after the Lua semantic source foundation"
 date: 2026-07-25
-status: current implementation; FUTURE-PARITY-BACKLOG.10.7.2.1 complete and .10.7.2.2 staged outcome active
+status: current implementation; FUTURE-PARITY-BACKLOG.10.7.2.1 and .10.7.2.2 complete
 tags: [lua, luajit, semantic-introspection, source-map, sha256, utf8, privacy, no-execution]
-evidence: "lua/src/linkedspec/semantic_index.lua and lua/test/semantic_index_source_foundation_test.lua; 377 assertions pass byte-identically on PUC Lua and LuaJIT, complete Lua and cross-backend gates pass, and semantic governance remains 6/20/89 at 5/9 rollout plus 4/6 admission."
+evidence: "lua/src/linkedspec/semantic_index.lua and lua/test/semantic_index_source_foundation_test.lua; 378 assertions pass byte-identically on PUC Lua and LuaJIT, strict decode/map/hash precede lazy outcome loading, and semantic governance remains 6/20/89 at 5/9 rollout plus 4/6 admission."
 reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_source_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_source_foundation_test.lua; bash tools/run_lua_local.sh; python3 tools/check_semantic_introspection_contract.py"
 ---
 
@@ -61,12 +61,13 @@ Policy failures are immutable `SemanticIndexError` handles with stable `stage`, 
 `fields`, and `to_json()`. The source leaf owns `semantic_index_invalid_source`,
 `semantic_index_invalid_utf8`, `semantic_index_invalid_option`, `semantic_source_detail_forbidden`,
 `semantic_source_range_invalid`, `semantic_source_boundary_invalid`, and `semantic_source_needle_invalid`.
-Direct-module scans and live traps prove construction imports only JSON plus the Unicode classifier and does not
-load or call the parser, validator, compiler, loader, emitter, runtime, trace, diagnostics, host path APIs, or
-target actions.
+Direct-module scans prove importing `linkedspec.semantic_index` itself loads only JSON plus the Unicode classifier.
+Construction validates and maps source before it lazily loads the outcome owner; that owner may call the staged
+parser, validator, compiler, selector, and generated-plan builder, but it does not load caller paths, execute
+target/generated code, or create runtime, trace, diagnostic-sink, query, or observation state.
 
-The focused suite passes 377 assertions on each ABI. Outcome leaf `.10.7.2.2` is next: it alone may stage, parse,
-validate, compile, select an entry, and build a generated-v2 plan once, retaining either one compiled or one failed
-outcome. Static records, query, runtime observation, rollout, and admission remain later leaves. See
+The focused source suite passes 378 assertions on each ABI. Outcome leaf `.10.7.2.2` now stages, parses, validates,
+compiles, selects an entry, and builds a generated-v2 plan once, retaining either one compiled or one recognized-
+failed outcome. Static records, query, runtime observation, rollout, and admission remain later leaves. See
 [[lua-semantic-source-outcome-plan]], [[lua-semantic-introspection-authority-map]], and
-[[semantic-introspection-neutral-contract]].
+[[lua-semantic-compilation-foundation]], and [[semantic-introspection-neutral-contract]].

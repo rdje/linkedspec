@@ -1,8 +1,6 @@
--- Opaque strict-source foundation for Lua semantic introspection.
---
--- This module deliberately owns source policy only. Language parsing,
--- compilation, generated planning, execution, tracing, and path loading are
--- added by later task-tree leaves.
+-- Opaque strict-source and compiled-or-failed foundation for Lua semantic
+-- introspection. Static projection, query, execution observation, tracing,
+-- caller path loading, and generated-source execution remain later owners.
 
 local json = require("linkedspec.json")
 local unicode_rule_label = require("linkedspec.unicode_rule_label")
@@ -10,6 +8,7 @@ local unicode_rule_label = require("linkedspec.unicode_rule_label")
 local M = {}
 
 local SOURCE_ID = "source:0"
+local SNAPSHOT_ID = "snapshot:0"
 local UINT32 = 4294967296
 local UINT32_MASK = UINT32 - 1
 local HEX_DIGITS = "0123456789abcdef"
@@ -28,6 +27,8 @@ local ERROR_STATE = setmetatable({}, { __mode = "k" })
 local INDEX_METHODS = {}
 local VALUE_METHODS = {}
 local ERROR_METHODS = {}
+local outcome_builder
+local fail
 
 local function empty_pairs()
   return function() return nil end, nil, nil
@@ -37,11 +38,38 @@ local function immutable_newindex()
   error("Semantic index values are immutable", 0)
 end
 
+local function copy_json_value(value, active)
+  local value_type = type(value)
+  if value == nil or value_type == "boolean" or value_type == "number" or value_type == "string" then
+    return value
+  end
+  if value_type ~= "table" then
+    fail("validate_index", "semantic_index_invalid_source", "Semantic index value is not portable")
+  end
+  active = active or {}
+  if active[value] then
+    fail("validate_index", "semantic_index_invalid_source", "Semantic index value contains a cycle")
+  end
+  active[value] = true
+  local result = json.kind(value) == "array" and json.array() or json.harray()
+  for key, item in next, value do result[key] = copy_json_value(item, active) end
+  active[value] = nil
+  return result
+end
+
 local function copy_plain_fields(field_pairs)
   local result = json.harray()
   for index = 1, #field_pairs do
     local pair = field_pairs[index]
-    result[pair[1]] = pair[2]
+    result[pair[1]] = copy_json_value(pair[2])
+  end
+  return result
+end
+
+local function copy_plan_rows(rows)
+  local result = json.array()
+  for index, row in ipairs(rows) do
+    result[index] = json.harray({ label = row.label, family = row.family })
   end
   return result
 end
@@ -90,7 +118,7 @@ local function semantic_error(stage, code, message, fields)
   return result
 end
 
-local function fail(stage, code, message, fields)
+fail = function(stage, code, message, fields)
   error(semantic_error(stage, code, message, fields), 0)
 end
 
@@ -112,6 +140,12 @@ local function value_index(value, key)
   if method ~= nil then return method end
   local state = VALUE_STATE[value]
   if state == nil then return nil end
+  if state.kind == "SemanticCompilationDiagnostic" and key == "fields" then
+    return copy_plain_fields(state.fields.field_pairs)
+  end
+  if state.kind == "SemanticGeneratedPlanInput" and key == "rows" then
+    return copy_plan_rows(state.fields.rows)
+  end
   return state.fields[key]
 end
 
@@ -146,15 +180,47 @@ function VALUE_METHODS.to_json(value)
       scalar_length = fields.scalar_length,
       content_digest = fields.content_digest == nil and json.null or fields.content_digest,
     })
+  elseif state.kind == "SemanticSourceSpan" then
+    return json.harray({
+      start_byte = fields.start_byte,
+      end_byte = fields.end_byte,
+      start_line = fields.start_line,
+      start_column = fields.start_column,
+      end_line = fields.end_line,
+      end_column = fields.end_column,
+    })
+  elseif state.kind == "SemanticSnapshot" then
+    return json.harray({
+      id = fields.id,
+      state = fields.state,
+      has_execution = fields.has_execution,
+      source_detail_ceiling = fields.source_detail_ceiling,
+      content_digest_available = fields.content_digest_available,
+    })
+  elseif state.kind == "SemanticCompilationAuthority" then
+    return json.harray({
+      parsed = fields.parsed,
+      validated = fields.validated,
+      compiled = fields.compiled,
+    })
+  elseif state.kind == "SemanticCompilationDiagnostic" then
+    return json.harray({
+      code = fields.code,
+      stage = fields.stage,
+      message = fields.message,
+      fields = copy_plain_fields(fields.field_pairs),
+    })
+  elseif state.kind == "SemanticEntrySelection" then
+    return json.harray({ label = fields.label, basis = fields.basis })
+  elseif state.kind == "SemanticGeneratedPlanInput" then
+    return json.harray({
+      contract_id = fields.contract_id,
+      format_version = fields.format_version,
+      source_identity = fields.source_identity,
+      rows = copy_plan_rows(fields.rows),
+    })
   end
-  return json.harray({
-    start_byte = fields.start_byte,
-    end_byte = fields.end_byte,
-    start_line = fields.start_line,
-    start_column = fields.start_column,
-    end_line = fields.end_line,
-    end_column = fields.end_column,
-  })
+  fail("validate_index", "semantic_index_invalid_source", "Unknown semantic index value kind")
 end
 
 local function index_index(value, key)
@@ -170,8 +236,11 @@ local INDEX_MT = {
   __tostring = function(value)
     local state = INDEX_STATE[value]
     if state == nil then return "SemanticIndex" end
+    local snapshot_state = state.outcome.compiled == nil and "failed_compilation" or "compiled"
     return "SemanticIndex(source_id=\"" .. SOURCE_ID ..
-      "\", source_detail_ceiling=\"" .. state.source_detail_ceiling .. "\")"
+      "\", snapshot_state=\"" .. snapshot_state ..
+      "\", source_detail_ceiling=\"" .. state.source_detail_ceiling ..
+      "\", has_execution=false)"
   end,
 }
 
@@ -550,6 +619,13 @@ local function require_detail(state, required)
   )
 end
 
+local function build_compilation_outcome(source, options)
+  if outcome_builder == nil then
+    outcome_builder = require("linkedspec.semantic_compilation_outcome")
+  end
+  return outcome_builder.build(source, options)
+end
+
 local function source_integer(value, coordinate)
   if type(value) ~= "number" or value ~= value or value == math.huge or value == -math.huge or
       value ~= math.floor(value) then
@@ -618,6 +694,8 @@ function M.create(source, options)
   end
   local copied_options = validate_options(options)
   local source_map = build_source_map(source)
+  local content_digest = "sha256:" .. sha256_hex(source)
+  local outcome = build_compilation_outcome(source, copied_options)
   local result = setmetatable({}, INDEX_MT)
   INDEX_STATE[result] = {
     source = source,
@@ -625,9 +703,63 @@ function M.create(source, options)
     logical_name = copied_options.logical_name,
     source_detail_ceiling = copied_options.source_detail_ceiling,
     entry_rule = copied_options.entry_rule,
-    content_digest = "sha256:" .. sha256_hex(source),
+    content_digest = content_digest,
+    outcome = outcome,
   }
   return result
+end
+
+function INDEX_METHODS.semantic_snapshot(value)
+  local state = index_state(value)
+  return semantic_value("SemanticSnapshot", {
+    id = SNAPSHOT_ID,
+    state = state.outcome.compiled == nil and "failed_compilation" or "compiled",
+    has_execution = false,
+    source_detail_ceiling = state.source_detail_ceiling,
+    content_digest_available = state.source_detail_ceiling == "text",
+  })
+end
+
+function INDEX_METHODS.compilation_authority(value)
+  local outcome = index_state(value).outcome
+  return semantic_value("SemanticCompilationAuthority", {
+    parsed = outcome.parsed ~= nil,
+    validated = outcome.validated,
+    compiled = outcome.compiled ~= nil,
+  })
+end
+
+function INDEX_METHODS.compilation_diagnostic(value)
+  local diagnostic = index_state(value).outcome.diagnostic
+  if diagnostic == nil then return nil end
+  return semantic_value("SemanticCompilationDiagnostic", {
+    code = diagnostic.code,
+    stage = diagnostic.stage,
+    message = diagnostic.message,
+    field_pairs = normalized_field_pairs(diagnostic.fields),
+  })
+end
+
+function INDEX_METHODS.entry_selection(value)
+  local entry = index_state(value).outcome.entry
+  if entry == nil then return nil end
+  return semantic_value("SemanticEntrySelection", {
+    label = entry.label,
+    basis = entry.basis,
+  })
+end
+
+function INDEX_METHODS.generated_plan_input(value)
+  local state = index_state(value)
+  require_detail(state, "identity")
+  local plan = state.outcome.generated_plan
+  if plan == nil then return nil end
+  return semantic_value("SemanticGeneratedPlanInput", {
+    contract_id = plan.contract_id,
+    format_version = plan.format_version,
+    source_identity = plan.source_identity,
+    rows = plan.rows,
+  })
 end
 
 function INDEX_METHODS.source_identity(value)

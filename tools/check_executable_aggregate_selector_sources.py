@@ -104,6 +104,10 @@ def classified_compatibility(path: str, line: str) -> bool:
         return True
     if path == "lua/test/run.lua" and "selector-rejection fixture" in line:
         return True
+    if path == "lua/test/semantic_index_compilation_foundation_test.lua" and (
+        "selector-rejection fixture" in line
+    ):
+        return True
     return False
 
 
