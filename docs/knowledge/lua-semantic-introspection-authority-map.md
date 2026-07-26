@@ -19,8 +19,10 @@ answers:
   - "how can Lua semantic values be opaque and immutable"
   - "what Lua 5.1 and Lua 5.4 compatibility risks affect semantic introspection"
   - "what are the Lua semantic introspection implementation leaves"
+  - "where is the Lua semantic static projection plan"
+  - "how must Lua correlate semantic static source occurrences"
 date: 2026-07-25
-status: current authority map; source/outcome foundation composition-closed through FUTURE-PARITY-BACKLOG.10.7.2.3
+status: current authority map; source/outcome foundation composition-closed and static projection plan frozen
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2.1-.3 now composition-close one opaque semantic_index source/outcome foundation while semantic records/query and typed observation remain absent. Exact implementation continues through static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
@@ -71,4 +73,8 @@ typed runtime observation `.6`; and one byte-identical ordered dual-ABI admissio
 no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
-[[lua-semantic-source-outcome-plan]], and [[lua-semantic-compilation-foundation]].
+[[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]], and
+[[lua-semantic-static-projection-plan]]. Static planning fixes five exact targets and the parsed-line plus compiled-
+occurrence correlation rule before projector code: local ActionIR offsets and short body-element fragments are not
+neutral source coordinates, compiler parent matchers are not automatically target regex slots, repeated lifecycle
+markers need occurrence ids, and Lua-native `Default` repetition must normalize to neutral non-repetition.

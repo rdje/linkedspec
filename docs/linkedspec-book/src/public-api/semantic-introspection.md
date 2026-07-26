@@ -1876,6 +1876,63 @@ ledger, and canonical gates. This composition closes the opaque source/outcome p
 behavior-free static-authority audit `.10.7.3.0`; callers must not infer a static record or query surface from the
 foundation values.
 
+### Frozen Lua private static-projection boundary
+
+Behavior-free audit `.10.7.3.0` fixes the exact static construction inputs before projector code. The private
+targets match the neutral oracle:
+
+| Target | Construction state | Records | Relations |
+|---|---|---:|---:|
+| graph | compiled, `text` ceiling | 12 | 14 |
+| privacy | compiled, `text` ceiling | 4 | 3 |
+| privacy limited | compiled, `identity` ceiling | 4 | 3 |
+| failed | failed compilation, `span` ceiling | 6 | 4 |
+| runtime static half | compiled, `text` ceiling, no execution | 7 | 8 |
+
+The runtime-static row removes the execution record, all three event records, and every `observed_as` relation.
+Constructing a static index must never run target actions, lifecycle blocks, emitted source, or generated plans.
+
+Lua does not have one host object that can be serialized as this model. The future projector composes copied
+source and its private map, parsed authored members, retained compiled rules/edges/lifecycle payloads, selected
+entry identity, and the native compilation diagnostic. Each authority contributes only the fact it owns. In
+particular, a source line such as:
+
+```text
+ /a/ -> Child[0] { return("first") }
+```
+
+becomes several Lua body elements. Their short `source` fragments are not the complete neutral source reference,
+and ActionIR spans are offsets inside normalized action text rather than global source coordinates. The projector
+must group elements by authored line, scan the complete trimmed member, and then use the retained source map for
+exact UTF-8 byte/scalar spans, excerpts, and digests. This reproduces all 14 unique source references across graph,
+privacy, failed, and runtime-static fixtures. Rule ids use uppercase percent-escaped UTF-8, so `Töp` becomes
+`rule:T%C3%B6p`.
+
+Compiled regex arrays also require semantic classification. The graph fixture's Top rule contains two same-line
+parent matchers used to dispatch to Child, but those matchers are not Top regex-slot records. Child's two authored
+`/a/` occurrences remain distinct slots 0 and 1 despite equal pattern text, and Top's edges select those Child
+slots. The runtime-static fixture's two self-indexed matchers are structural slots and therefore remain, with
+`selects_regex` but no redundant self `dispatches_to` relation.
+
+Repeated lifecycle markers are occurrence identities, not a marker-keyed map. Two authored `E` blocks correlate
+sequentially to two compiled payloads and become `...:E:0` and `...:E:1`, preserving order, source, and separately
+inferred return shape. Shape inference is conservative and reads typed ActionIR literals only; it never samples
+host runtime values. Lua's native `Default` mode reports repetition with minimum zero, but neutral v1 treats
+`Default`, `And`, `Single`, and `Pipe` as non-repeating with null bounds.
+
+Failure normalization is projection-only. The retained native diagnostic remains
+`bare_edge_target_undefined` / `normalize_edges`; the private neutral target maps that one case to
+`unknown_rule_reference` / `compile`, portable rule ids, and the dependency-resolution decision/explanation.
+Native foundation accessors continue returning the native diagnostic unchanged.
+
+The intended private implementation shape is one recursively immutable projection retained by the existing
+opaque index, plus an unexported test materializer that returns a fresh plain-JSON clone. It reparses and recompiles
+nothing. No root static/query accessor is added in `.10.7.3.1-.2`, and paths, metatable/table identity,
+`SpecFile`, `CompiledSpec`, AST/ActionIR, compiled regex objects, descriptors, generated implementation, loaders,
+executors, trace, diagnostic sinks, observers, environment, clocks, and randomness cannot enter portable data.
+`.10.7.3.1` owns only graph/source/evidence; `.10.7.3.2` owns privacy, failure, runtime-static, repeated lifecycle,
+detachment, and host denial; `.10.7.3.3` recomposes all five targets before public query work begins.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
@@ -2292,7 +2349,8 @@ The dependency order is:
 | `.10.7.2.1` | Lua strict copied input and private source map | complete; focused 378 per ABI, portable SHA-256 and exact coordinates |
 | `.10.7.2.2` | Lua compiled-or-failed outcome foundation | complete; focused 122 per ABI, detached authority/diagnostic/entry/plan, no execution or promotion |
 | `.10.7.2.3` | Lua source/outcome foundation closeout | complete; committed 378+122 per ABI plus full signoff, no replacement code or promotion |
-| `.10.7.3.0` | Lua static-authority map and dependency split | next; behavior-free audit before projection code |
+| `.10.7.3.0` | Lua static-authority map and dependency split | complete; five exact targets, occurrence/source normalization, privacy, and host fences frozen |
+| `.10.7.3.1` | Lua compiled graph/source/evidence projection | next; private exact 12/14 graph, no public query |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

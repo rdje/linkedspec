@@ -8,14 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.0` — behavior-free audit of exact Lua static targets, source correlation,
-  normalization, privacy, and ownership before projector code. It becomes eligible only after the clean
-  `.10.7.2.3` foundation-closeout commit.
+- `FUTURE-PARITY-BACKLOG.10.7.3.1` — implement only the private immutable 12-record/14-relation graph/source/
+  evidence projection from retained authorities after the clean behavior-free audit commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.3.0 — freeze Lua semantic static projection**
+  (behavior-free five-target authority/source/normalization plan; closes with this commit).
+
+  **Result:** PUC Lua and LuaJIT probes freeze graph 12/14, privacy text 4/3, privacy identity 4/3, failed 6/4,
+  and runtime-static 7/8 with no execution. Complete authored-line scans plus parsed/compiled occurrence
+  correlation own source identity; cross-rule parent matchers are excluded, self-indexed matchers remain slots,
+  duplicate slots and lifecycle markers remain occurrence-specific, and native `Default`/failure facts normalize
+  only in private projection. The future owner is immutable/detached and denies paths, metatables, AST/ActionIR,
+  compiled regexes, descriptors, generated implementation, execution, trace, sinks, observers, and host state.
+
+  **Proof:** Both ABIs emit the same audit-summary SHA-256
+  `244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55`. Complete Lua passes source/outcome
+  378+122 and package `1..177` twice; primary 5x2x66 and Unicode 5x2x1 pass; Rust Unicode 5+3, Dart 28, Julia
+  3,831, and all six ledgers remain exact. Canonical CI passes Rust 1/1 in 77.99s, Dart 1/1, Julia 416/416 in
+  27.3s, reference primary 66x2, and Phase 0 1,031/1,031 in 631s; total gate time is 1,665.56s. mdBook, Knowledge
+  Map 704/5,478, memory/task/four doctrines, cleanup, and diff hygiene pass. No production/test/fixture/API/record/
+  query/observation/format/rollout/admission behavior changes. Private graph/source/evidence implementation
+  `.10.7.3.1` follows the clean commit.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.3 — close Lua semantic foundation**
   (no-change dual-ABI recomposition; closes `.10.7.2` with this commit).
 

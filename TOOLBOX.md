@@ -673,6 +673,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Rust 5+3, Dart 17, Julia 3,831, all six no-drift ledgers, and canonical local CI. The parent closes only when
   those committed owners compose without records/query, runtime observation, target execution, format movement,
   or promotion. Retrieve the three Lua foundation cards before behavior-free static audit `.10.7.3.0`.
+- **LUA STATIC-PROJECTION PREFLIGHT:** retrieve [[lua-semantic-static-projection-plan]] before projector work.
+  `.10.7.3.0` freezes graph 12/14, privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8 with
+  `has_execution=false`. Use retained parsed/compiled/entry/diagnostic state, but scan complete authored lines for
+  source references: `BodyElement.source` fragments and action-local ActionIR offsets are not global source
+  coordinates. Exclude cross-rule parent matchers from target slots, retain self-indexed slots, correlate repeated
+  lifecycle payloads by occurrence, normalize native `Default` repetition and native failure only inside the
+  projector, and deny paths/metatables/AST/ActionIR/compiled regex/runtime state. `.10.7.3.1` owns only private
+  graph/source/evidence; `.2` owns the remaining targets/isolation; `.3` owns no-change recomposition.
 
 ---
 

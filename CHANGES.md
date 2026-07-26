@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.3.0 — freeze Lua semantic static projection
+
+Frozen the behavior-free PUC Lua/LuaJIT static-projection boundary before implementation. The neutral graph
+12/14, privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8 targets are exact. A disposable
+owner probe inspected every target plus all 14 unique source references and repeated lifecycle occurrences; PUC
+Lua 5.4 and LuaJIT 2.1 emitted byte-identical summaries with SHA-256
+`244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55`.
+
+The plan assigns authored identity/source spelling to parsed rules and complete grouped body lines, accepted
+topology and typed return shapes to retained compiled rules/edges/lifecycle payloads, root evidence to retained
+entry selection, and failure input to the retained native diagnostic. It excludes cross-rule parent matchers from
+target slots, retains self-indexed matchers, preserves duplicate slots and lifecycle markers by occurrence,
+normalizes native `Default` repetition and the failed diagnostic only inside projection, and denies host paths,
+metatables, AST/ActionIR, compiled regexes, descriptors, generated implementation, execution, trace, and sinks.
+
+This slice changes only task/live/book/Knowledge Map material: no production module, replacement test, fixture,
+API, record/query, observation, format, rollout, or admission behavior. `.10.7.3.1` owns private immutable graph/
+source/evidence projection; `.10.7.3.2` owns privacy/failure/runtime-static/isolation; `.10.7.3.3` owns no-change
+recomposition. Complete Lua passes source/outcome 378+122 and package `1..177` on both ABIs, primary 5x2x66 and
+Unicode 5x2x1 pass, Rust Unicode 5+3, Dart 28, Julia 3,831, and all six no-drift ledgers remain exact.
+Canonical CI passes Rust semantic admission 1/1 in 77.99 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds,
+reference primary 66x2, and Phase 0 1,031/1,031 in 631 seconds; total gate time is 1,665.56 seconds. mdBook,
+Knowledge Map 704/5,478, memory/task/four doctrines, cleanup, and diff hygiene pass. Reusable caches remain on the
+4-TB SSD; only explicit disposable task scratch is cleaned.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.3 — close Lua semantic foundation
 
 Composition-closed the Lua semantic source/outcome parent from clean implementation commit `c8501d3a`. This leaf

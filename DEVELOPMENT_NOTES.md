@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.3.0` — source occurrence is a composed authority): Lua's parser keeps
+  useful authored fragments, and ActionIR keeps precise local offsets, but neither is a neutral source map. One
+  physical member such as `/a/ -> Child[0] { return("first") }` becomes multiple body elements with the same line,
+  while ActionIR offsets restart inside normalized code. Static projection must therefore group parsed elements by
+  authored line, scan the complete trimmed member, and map that byte range through the already retained strict
+  source owner. This is the only route that reproduces exact edge, slot, lifecycle, diagnostic, and Unicode source
+  references without reparsing or treating host IR layout as portable.
+
+  Compiled regex presence is likewise not semantic slot ownership. Same-line cross-rule parent matchers exist to
+  validate and dispatch an edge but belong to no source rule slot record; self-indexed matchers do remain
+  structural slots because the rule selects them. Pattern equality never collapses distinct authored occurrences.
+  Lifecycle payloads use the parallel rule: correlate sequentially and identify by marker plus occurrence index,
+  so repeated `E` blocks retain independent source and shape.
+
+  Normalization belongs after native authority retention. Lua's `Default` mode remains natively repeating with
+  minimum zero, and failed construction continues to report `bare_edge_target_undefined` / `normalize_edges`.
+  The private projector alone maps Default to neutral non-repetition and that diagnostic to the neutral unknown-
+  rule record. This keeps native APIs truthful while permitting byte-identical v1 answers across backends.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.3` — closeout proves composition, not more surface): The source and
   outcome owners were independently committed because source policy must precede language work and language
   failures have a separate typed boundary. Their parent can close only by rerunning those exact committed suites
