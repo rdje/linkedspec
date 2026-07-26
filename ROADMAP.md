@@ -16,8 +16,10 @@ trace, and temporary workspace must reside on the repository filesystem; durable
 runtime storage roots derive from the current checkout. Cross-volume reads are forbidden by default and retained
 only for explicit caller inputs or documented, strictly required external tools and operating-system resources.
 Behavior-free audit `.0` finds 67 retained temporary directories/135,756 KiB, two exact Dart checkout records,
-one LinkedSpec stanza in a shared Julia log, 100 tracked temporary-allocation owners, and 24 executable files with
-off-repository defaults. Migration follows copy/verify/use/delete without deleting ambiguous shared caches.
+one LinkedSpec stanza in a shared Julia log, an initially reported 100 tracked temporary-allocation owners, and 24
+executable files with off-repository defaults. Rust `.2.2` corrects the missed imported `env::temp_dir()` spelling:
+the initial unique total is 101 and the Rust family count is 17. Migration follows copy/verify/use/delete without
+deleting ambiguous shared caches.
 Initializer `.1.1` is complete: ignored `/.linkedspec-data/{scratch,cache}`, runtime root discovery, pre/post-create
 device validation, same-filesystem caller overrides, standard temp/Cargo/Dart/Julia exports, and hostile outside-
 cwd shell proof are green. Routing `.1.2` is complete: hook/doctrine/Knowledge Map, canonical Perl, four backend,
@@ -26,8 +28,10 @@ outside-cwd selection. Lifecycle `.1.3` is complete: checkout-namespaced collisi
 failure cleanup, explicit diagnostic retention, retained caches, guarded interruption recovery, and concurrency/
 checkout isolation are executable and documented. Perl `.2.1` is complete: the standalone primary matrix plus a
 focused 24-owner `File::Temp`/trace/CLI oracle enter managed SSD storage, and 65 exact old CLI workspaces were
-copied to the root-relative retained cache, count/byte/hash verified, exercised, and deleted. Active `.2.2` owns
-Rust build/package/test/generated/relocation data and reusable cache migration. The path-portability closeout
+copied to the root-relative retained cache, count/byte/hash verified, exercised, and deleted. Rust `.2.2` is
+complete: a 195-package offline Cargo cache plus exact 17-owner generated/trace/copied-binary oracle prove Rust
+project data stays on repository storage; zero exact old Rust temp residue exists and the shared cache remains
+untouched and unused. Active `.2.3` owns Dart package/test/generated data and exact metadata migration. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 

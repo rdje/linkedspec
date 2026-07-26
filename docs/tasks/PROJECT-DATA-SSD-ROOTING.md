@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.2.1` Perl storage migration, exact old-data deletion, and signoff complete; `.2.2` active)
+- Last updated: `2026-07-26` (`.2.2` Rust storage/cache migration and signoff complete; `.2.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -237,7 +237,7 @@ accessing the shared copy, and remove only records or directories provably owned
     Phase 0 1,031/1,031 in 625s. This commit lands at 27/300; the brief is cleared and no push occurs.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.2`
-  Status: `active`
+  Status: `done` (2026-07-26; Rust Cargo cache, 17 temporary owners, relocation, and full local gate proven on SSD)
   Goal: Root Rust build, Cargo package, test, generated-source, and relocated-oracle data on SSD storage.
   Depends on: `.2.1`
   Acceptance: Configure project-local Cargo cache/build roots through runtime-derived environment, retain the
@@ -246,8 +246,38 @@ accessing the shared copy, and remove only records or directories provably owned
     Rust-owned copy in this leaf; pass Rust local gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — The default SSD-local Cargo home initially held only two lock/tag files and a clean
+    `cargo fetch --locked --offline` failed at `serde_json`, proving that the 3.6-GiB SSD-local `rust/target` masked
+    a missing reusable dependency cache. The internal temporary roots hold no retained Rust-prefixed workspace.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Common workflow routing initializes `TMPDIR`, `CARGO_HOME`, and
+    `CARGO_TARGET_DIR`, but no Rust-specific executable oracle proves Cargo cache completeness, all integration
+    scratch owners, generated child projects, traces, and copied-binary relocation. The frozen `Rust 16` count also
+    missed `rust/linkedspec-core/src/trace.rs` because that unit-test helper imports `env` and calls
+    `env::temp_dir()` rather than spelling `std::env::temp_dir()`; the corrected tracked owner count is 17. The
+    first routed proof also exposed a synthetic relocation test whose supposed external executable lived beneath
+    `std::env::temp_dir()`; after SSD rooting that path is correctly inside the real checkout, so ancestor discovery
+    found the real repository. Repository discovery needed a filesystem-predicate seam for topology-only testing.
+  - [x] **FIX** — `tools/run_cargo_local.sh` provides a self-rooted managed wrapper for targeted Cargo work.
+    `tools/test_rust_project_data_storage.sh` validates repository-device Cargo/temp/target roots, locks all 17
+    allocator owners including both `temp_dir` spellings, exercises traces and a generated child project, and runs
+    a copied primary binary from managed scratch without an off-volume write. The full Rust gate invokes it.
+  - [x] **CACHE / MIGRATION / DELETE** — The ignored repo-relative Cargo home now covers all 195 locked registry
+    packages: 195 compressed entries, 195 unpacked source directories, 12,741 files, 371,604 KiB, and canonical
+    compressed-cache hash `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`.
+    Locked offline fetch and build pass without consulting the shared developer cache. Exact Rust-prefixed residue
+    across the inherited OS temporary roots is zero, so there was no unambiguous old Rust-owned source to delete;
+    the ambiguous shared Cargo cache remains untouched and is no longer a supported-workflow input.
+  - [x] **FOCUSED REGRESSION** — Standalone and full-gate Rust storage proofs, offline dependency resolution,
+    generated-source compilation, trace creation, copied-binary relocation, the complete Rust gate, the expanded
+    18-boundary outside-cwd routing oracle, the repository-path doctrine, and cleanup proofs pass with zero
+    completed managed runs.
+  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and warranted canonical
+    verification pass; this commit lands at 28/300, the brief is cleared, the tree is clean, and no push occurs.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Root Dart package cache, test workspaces, and generated outputs on SSD storage.
   Depends on: `.2.2`
   Acceptance: Configure a repo-derived package cache and temporary root, preserve package resolution and primary
@@ -349,7 +379,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.2` | `active` | From the clean `.2.1` commit, root Rust build/package/test/generated/relocation data, populate reusable SSD caches, and verify/delete every exact Rust-owned old source. |
+| `PROJECT-DATA-SSD-ROOTING.2.3` | `active` | From the clean `.2.2` commit, root Dart package/test/generated data, migrate exact retained state, delete exact old Dart-owned sources, and pass Dart gates. |
 
 ## Decisions
 
@@ -372,7 +402,7 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Fourteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Eighteen standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
   delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
@@ -387,6 +417,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable initializer fact: `docs/knowledge/project-data-env-initializer.md`
 - Durable workflow-routing fact: `docs/knowledge/project-data-workflow-routing.md`
 - Durable run-lifecycle fact: `docs/knowledge/project-data-run-lifecycle.md`
+- Durable Rust storage fact: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -412,6 +443,10 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.1` | Bash syntax; outside-cwd Perl storage oracle; expanded 16-entrypoint routing oracle; focused runner/trace; primary default/POSIX | PASS: 24 `File::Temp` owners, explicit trace, CLI subprocess workspace, inert fixtures, zero completed residue, focused 9 tests, primary 66x2 |
 | 2026-07-26 | `.2.1` | exact CLI workspace copy/verify/use/delete | PASS: 65 directories, 17 files, 1,590 bytes, canonical hash `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`; copied fixture executed; old census zero; SSD copy retained |
 | 2026-07-26 | `.2.1` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Rust 1/1 in 77.61s; Dart 1/1; Julia 416/416 in 27.2s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
+| 2026-07-26 | `.2.2` | repo-relative Cargo cache inventory and locked offline fetch | PASS: 195/195 compressed packages and source directories; 12,741 files / 371,604 KiB; canonical compressed-cache hash `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399` |
+| 2026-07-26 | `.2.2` | standalone Rust storage oracle; 18-boundary outside-cwd routing; repository-path doctrine | PASS: 17 exact owners, generated child project, traces, actual copied binary, same-device outputs, offline Cargo resolution, zero old Rust temp residue, zero managed runs |
+| 2026-07-26 | `.2.2` | complete `tools/run_rust_local.sh` | PASS: core and runtime packages; runtime 149; corpus 105; generated classifier 105; integration 197; semantic admission; storage oracle; primary 66x2 |
+| 2026-07-26 | `.2.2` | canonical default-cache attempt, then same-filesystem warmed Dart/Julia override | First attempt passed Rust 1/1 in 77.61s then exposed the still-empty `.2.3`-owned Dart cache and cleaned its run; rerun PASS: Rust 1/1 in 77.85s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2, Phase 0 1,031/1,031 in 624s; zero runs |
 
 ## Commit Log
 
@@ -421,7 +456,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.1.1` | `e33ed191` — `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots` | Sourceable root derivation, same-filesystem validation, complete standard exports, and focused hostile-override proof. |
 | `.1.2` | `671592ef` — `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage` | Fourteen routed boundaries, mdBook wrapper, hostile outside-cwd oracle, and full canonical proof. |
 | `.1.3` | `18c64726` — `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle` | Managed foreground runs, exact lifecycle policy, guarded recovery, concurrency/checkout isolation, and focused oracle. |
-| `.2.1` | `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` (this commit) | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
+| `.2.1` | `269b3fbf` — `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
+| `.2.2` | `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` (this commit) | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
 
 ## Changelog
 
@@ -444,3 +480,7 @@ accessing the shared copy, and remove only records or directories provably owned
   and the standalone primary matrix are executable under managed SSD storage. The 65 exact old CLI directories
   were copied, count/byte/hash verified, exercised, and deleted; inert path fixtures remain. `.2.2` becomes the
   clean Rust storage/cache migration frontier after commit.
+- `2026-07-26`: Completed `.2.2`; the retained Cargo home now resolves all 195 locked registry dependencies
+  offline, the exact 17-owner Rust storage oracle proves generated projects, traces, and real copied-binary
+  relocation remain on the repository filesystem, and no exact old Rust temp residue exists. The shared developer
+  cache remains untouched and unused. `.2.3` becomes the clean Dart storage migration frontier after commit.

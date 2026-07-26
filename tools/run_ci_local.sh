@@ -85,8 +85,10 @@ require_tracked_file tools/run_dart_local.sh
 require_tracked_file tools/run_julia_local.sh
 require_tracked_file tools/run_lua_local.sh
 require_tracked_file tools/run_primary_cli_matrix.sh
+require_tracked_file tools/run_cargo_local.sh
 require_tracked_file tools/build_lua_native.sh
 require_tracked_file tools/test_perl_project_data_storage.sh
+require_tracked_file tools/test_rust_project_data_storage.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file tools/check_callable_codeblock_contract.py
 require_tracked_file tools/check_callable_signature_contract.py
@@ -265,7 +267,7 @@ audit_no_machine_specific_absolute_paths
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/run_julia_local.sh tools/run_lua_local.sh tools/run_primary_cli_matrix.sh tools/build_lua_native.sh \
- tools/test_perl_project_data_storage.sh \
+ tools/run_cargo_local.sh tools/test_perl_project_data_storage.sh tools/test_rust_project_data_storage.sh \
  tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
  tools/check_duplicate_regex_slot_identity_five_backend.sh \
  tools/check_root_rule_selection_five_backend.sh \

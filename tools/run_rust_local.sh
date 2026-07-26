@@ -33,6 +33,9 @@ log "running Rust runtime package tests"
 log "building Rust primary command"
 "$CARGO_CMD" build --manifest-path rust/Cargo.toml -p linkedspec-runtime --bin linkedspec-rust
 
+log "proving Rust project data stays in managed repository storage"
+bash "$REPO_ROOT/tools/test_rust_project_data_storage.sh" --reuse-complete-rust-gate
+
 TARGET_DIR="${CARGO_TARGET_DIR:-$REPO_ROOT/rust/target}"
 if [[ "$TARGET_DIR" != /* ]]; then
  TARGET_DIR="$REPO_ROOT/$TARGET_DIR"

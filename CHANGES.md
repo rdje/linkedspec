@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.2 — root Rust workspaces on SSD
+
+Added `tools/run_cargo_local.sh` as the supported self-rooted, managed boundary for targeted Cargo commands and
+`tools/test_rust_project_data_storage.sh` as the recurring Rust storage oracle. The oracle checks actual
+filesystem-device identity for the managed run, Rust temporary root, Cargo home, and target; locks all 17 tracked
+Rust temporary owners; exercises core/runtime traces and a generated child Cargo project; and copies the built
+primary command into managed scratch for a real inline-spec/trace relocation run. `tools/run_rust_local.sh` now
+runs that oracle after its complete package/build proof, while the outside-cwd workflow oracle expands from 16 to
+18 routed boundaries.
+
+Populated the ignored repository-relative Cargo home with all 195 locked registry packages: 195 compressed cache
+files, 195 unpacked source directories, 12,741 files, and 371,604 KiB. The canonical compressed-cache hash is
+`a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`; locked offline fetch and build pass. The
+shared developer Cargo cache was neither copied wholesale nor deleted because it is ambiguous multi-project data,
+and supported workflows no longer consult it. An exact read-only census found zero retained Rust-prefixed
+workspace in the inherited OS temporary roots, so there was no unambiguous old Rust-owned source to delete.
+
+Corrected the planning Rust temporary-owner count from 16 to 17: the original fully-qualified scan missed the core
+trace test's imported `env::temp_dir()` spelling, making the corrected initial unique total 101. SSD-local
+`TMPDIR` also exposed a topology-test defect: its supposed external executable was below the actual checkout.
+Repository discovery now has an injected marker-predicate seam for synthetic unit topology, while the shell oracle
+keeps the real copied-binary filesystem proof.
+
+Bash syntax, standalone/reused Rust storage proofs, locked offline resolution, the 18-boundary outside-cwd routing
+oracle, repository-path doctrine, cleanup census, and the complete Rust gate pass. The full gate records runtime
+149, corpus 105, generated classifier 105, integration 197, semantic admission, and primary 66x2. The first
+canonical attempt passed Rust in 77.61 seconds, then correctly exposed the still-empty `.2.3`-owned default Dart
+cache and cleaned its run. A same-filesystem warmed Dart/Julia-cache override rerun passes Rust 1/1 in 77.85
+seconds, Dart 1/1, Julia 416/416 in 27.1 seconds, primary 66x2, and Phase 0 1,031/1,031 in 624 seconds. Live docs,
+mdBook, task tree, ADR, and Knowledge Map are synchronized. Push cadence advances to 28/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.1 — root Perl workspaces on SSD
 
 Routed `tools/run_primary_cli_matrix.sh` through the common environment and managed-run lifecycle before its first

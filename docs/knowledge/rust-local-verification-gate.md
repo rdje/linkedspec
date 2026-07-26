@@ -12,18 +12,20 @@ answers:
   - how do I select the Cargo executable for LinkedSpec checks
   - how do I select the Rust target directory for LinkedSpec checks
   - does Rust pass primary CLI conformance with POSIXLY_CORRECT
-  - does the Rust local gate pass all 65 primary cases
+  - does the Rust local gate pass all 66 primary cases
+  - does the Rust local gate prove project data stays on repository storage
   - what did FUTURE-PARITY-BACKLOG 1.5.2.4 implement
 date: 2026-07-18
 status: current
 tags: [rust, cli, ci, conformance, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.4.1 adds unfiltered cargo test -p linkedspec-core immediately before cargo test -p linkedspec-runtime. FUTURE-PARITY-BACKLOG.9.1.4.6 historically passes the then-current 63-case cursor boundary twice. Rust preflight .9.1.1.2.2.0 then measured 64/65 after the shared root-selection manifest expanded to 65. Leaves .2.1-.3 converge markerless validation, every execution route, and topology admission. The complete gate now passes core 193+4+5+8, runtime 137, oracle 105, generated classifier 105, integration 197, the 15-role root-selection consumer, adjacent suites, and primary 65/65 with POSIXLY_CORRECT unset and set."
-reverify: "bash -n tools/run_rust_local.sh && sed -n '1,90p' tools/run_rust_local.sh && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime && rg -n 'LINKEDSPEC_RUN_RUST|run_rust_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
+evidence: "FUTURE-PARITY-BACKLOG.9.1.4.1 adds unfiltered core immediately before runtime package tests. PROJECT-DATA-SSD-ROOTING.2.2 routes the gate through repository-local temp/Cargo/target roots and adds a recurring Rust storage oracle. The complete gate now passes runtime 149, oracle 105, generated classifier 105, integration 197, adjacent suites, and primary 66/66 with POSIXLY_CORRECT unset and set; the storage oracle locks 17 temp owners, all 195 Cargo.lock registry packages offline, generated workspaces, traces, and copied-binary relocation."
+reverify: "bash -n tools/run_rust_local.sh tools/run_cargo_local.sh tools/test_rust_project_data_storage.sh && bash tools/run_rust_local.sh && bash tools/run_cargo_local.sh fetch --manifest-path rust/Cargo.toml --locked --offline && rg -n 'LINKEDSPEC_RUN_RUST|run_rust_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
 Run `bash tools/run_rust_local.sh` from the repository root. It checks workspace formatting, runs the complete
-`linkedspec-core` and `linkedspec-runtime` packages, builds `linkedspec-rust`, then runs the current primary-command
-manifest with `POSIXLY_CORRECT` unset and set. The runtime proof includes 137 unit tests, the
+`linkedspec-core` and `linkedspec-runtime` packages, builds `linkedspec-rust`, proves Rust project-data storage,
+then runs the current primary-command manifest with `POSIXLY_CORRECT` unset and set. The runtime proof includes
+149 unit tests, the
 105-fixture interpreter oracle, 197 integration tests, the exhaustive 105-case generated-source classifier, and
 the emitted/trace/contract suites.
 
@@ -34,15 +36,17 @@ its current proof is 193 unit tests, four descriptor integration tests, five con
 and eight type integration tests. A
 runtime dependency build alone never substitutes for those tests.
 
-`LINKEDSPEC_CARGO_CMD` selects the Cargo executable. `CARGO_TARGET_DIR` selects the build directory and is also
-used to locate the built primary binary. The script defaults to `cargo` and `rust/target`.
+`LINKEDSPEC_CARGO_CMD` selects the Cargo executable. Repository-local `CARGO_TARGET_DIR` selects the build directory
+and is also used to locate the built primary binary. For a targeted command use `bash tools/run_cargo_local.sh ...`;
+it self-roots and enters managed storage. The recurring storage oracle proves all 17 tracked temporary owners,
+the complete 195-package offline Cargo cache, generated projects, traces, and copied-binary relocation.
 
 The canonical `tools/run_ci_local.sh` remains toolchain-independent by default and includes this focused Rust gate
 only when `LINKEDSPEC_RUN_RUST=1` is set, matching the explicit Dart/Julia opt-in model. `.1.5.2.4` also proves the
 historical gate introduction. Rule-local cursor slice `.9.1.4.6` removes the retired flag and request-trace field;
 the gate passed that then-current 63-case manifest in both environments. Root-selection admission has since
-expanded the shared reference to 65. Preflight `.9.1.1.2.2.0` measured the historical 64/65 boundary; Rust
-core/routes/admission leaves `.9.1.1.2.2.1-.3` now converge the gate to 65/65 twice and add the topology-checked
+expanded the shared reference to 65 and the current manifest is 66. Preflight `.9.1.1.2.2.0` measured the
+historical 64/65 boundary; Rust core/routes/admission leaves now converge the gate to 66/66 twice and retain the topology-checked
 15-role root-selection consumer. The complete optional gate is green.
 
 For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` builds Rust and combines this command
@@ -51,4 +55,4 @@ extends the same matrix to 5x2x61.
 
 Related facts: [[neutral-cli-fixture-runner]], [[rust-canonical-primary-cli-trace]],
 [[hosted-ci-disabled-run-local-gate]], [[dart-local-verification-gate]],
-[[julia-local-verification-gate]], [[primary-cli-four-backend-matrix]].
+[[julia-local-verification-gate]], [[primary-cli-four-backend-matrix]], [[rust-project-data-ssd-storage]].

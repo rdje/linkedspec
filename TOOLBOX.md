@@ -321,6 +321,24 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/test_perl_project_data_storage.sh`. It self-roots, works outside the checkout, checks actual
   filesystem device identity, locks inert path-value fixtures, and requires completed CLI scratch to disappear.
 
+### 4.3.2 `tools/run_cargo_local.sh` — targeted Cargo inside repository storage
+
+- **WHAT:** self-root, initialize project-data roots, enter one managed run, and execute the supplied Cargo
+  arguments with repository-local `CARGO_HOME`, `CARGO_TARGET_DIR`, and temporary storage.
+- **WHEN:** every targeted Rust fetch/build/test/check command that bypasses the complete Rust gate.
+- **HOW:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core`. A locked offline
+  dependency proof is `bash tools/run_cargo_local.sh fetch --manifest-path rust/Cargo.toml --locked --offline`.
+
+### 4.3.3 `tools/test_rust_project_data_storage.sh` — Rust SSD-local storage oracle
+
+- **WHAT:** lock the exact 17 tracked Rust temporary owners; verify temp/Cargo/target roots share the repository
+  device; require all 195 locked registry packages offline; exercise traces, generated child Cargo workspaces, and
+  actual copied-binary relocation.
+- **WHEN:** changing Rust temp allocation, generated-source compilation, traces, Cargo caching, target selection,
+  repository discovery, or the Rust local gate.
+- **HOW:** `bash tools/test_rust_project_data_storage.sh`. `tools/run_rust_local.sh` invokes the oracle after the
+  complete package/build proof and reuses those expensive results.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -339,7 +357,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
   foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
   `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
-  environment, lifecycle, and 14-entrypoint outside-cwd proofs. Build the book through
+  environment, lifecycle, and 18-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports

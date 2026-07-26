@@ -249,7 +249,9 @@ system libraries, devices, credentials, or operating-system services.
 
 ADR `0053` and `docs/tasks/PROJECT-DATA-SSD-ROOTING.md` own the migration. Planning audit `.0` found 67 retained
 temporary directories totalling 135,756 KiB, two Dart checkout metadata records, one LinkedSpec stanza in a shared
-Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Perl leaf `.2.1`
+Julia log, an initially reported 100 tracked temporary-allocation owners, and 24 executable off-repository
+defaults. Rust `.2.2` corrected one missed imported `env::temp_dir()` use, so the initial unique count is 101 and
+the Rust family count is 17. Perl leaf `.2.1`
 has now migrated all 65 exact CLI workspace directories into root-relative retained SSD cache, verified 17 files/
 1,590 bytes plus canonical inventory hash, exercised the copied source/input fixture, and deleted the old internal-
 volume set. Later family leaves apply the same copy/verify/use/delete rule. Shared caches are never deleted wholesale
@@ -311,8 +313,21 @@ bash tools/test_perl_project_data_storage.sh
 The proof runs from outside the checkout, inventories all 24 tracked Perl temporary-allocation owners, exercises
 default and named `File::Temp` paths, writes and reads an explicit LinkedSpec trace, and launches a real CLI fixture
 subprocess. Every observed project path shares the repository device, the CLI workspace is cleaned, and inert
-`/tmp` privacy/path fixtures remain unchanged. The canonical gate runs this proof automatically. Rust/Dart/Julia/
-Lua/tool hard-coded workspace and cache migration remains `.2.2-.2.6`-owned.
+`/tmp` privacy/path fixtures remain unchanged. The canonical gate runs this proof automatically.
+
+Rust migration `.2.2` adds a safe targeted Cargo boundary and a recurring storage oracle:
+
+```bash
+bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core
+bash tools/test_rust_project_data_storage.sh
+```
+
+The repository-local Cargo home covers all 195 registry packages in `rust/Cargo.lock` and resolves them offline;
+build output remains below `rust/target`. The oracle locks all 17 Rust temporary-allocation owners, exercises
+generated child projects and traces, and runs a real copied primary binary from managed scratch while checking
+filesystem device identity. Exact Rust-prefixed residue in the old temporary roots is zero, so no unambiguous old
+Rust datum was deleted. The ambiguous shared developer Cargo cache remains untouched and supported workflows no
+longer consult it. Dart/Julia/Lua/tool migration remains `.2.3-.2.6`-owned.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`
@@ -1235,7 +1250,9 @@ content migration exists yet.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime
-  packages, and both shared primary-command environments. Its root-selection admission is green at 65/65 twice;
+  packages, repository-filesystem Cargo/temp/generated/trace/relocation storage proof, and both shared primary-
+  command environments. Use `bash tools/run_cargo_local.sh ...` for targeted Cargo work. Its root-selection
+  admission is green at 66/66 twice;
   the neutral contract declares one 15-role composed Rust consumer and the checker locks that consumer, canonical
   registration, exact primary cases, rollout, and omission mutations. Dart and Julia admission have the same
   exact 15-role topology and package-wide driver proof. Lua is admitted by one shared consumer source run on PUC

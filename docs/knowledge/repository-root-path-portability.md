@@ -22,10 +22,11 @@ answers:
   - which primary commands does the repository path doctrine lock
   - which absolute paths does the repository path doctrine allow
   - what did REPO ROOT PATH PORTABILITY 0 discover
+  - why can repository local TMPDIR not model an external executable
 date: 2026-07-26
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. REPO-ROOT-PATH-PORTABILITY.1.2 removes developer-home/private-mount values from all eight frozen legacy config/source owners: project defaults are relative, tools use PATH, EasyTk package discovery is caller-owned, and network.plg consumes its configured command/input fields. REPO-ROOT-PATH-PORTABILITY.1.3 normalizes all 12 Julia reverify commands to PATH-selected Julia, root-relative operands, and runtime-composed caller-writable depots. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine: tracked parent text is scanned, 14 reject/accept classifier cases self-test, compile-time Rust primary discovery is forbidden, and Perl/Rust/Dart/Julia/Lua runtime anchors are locked. ADR 0052 freezes the boundary."
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. ADR 0052 freezes the boundary."
 reverify: "bash scripts/check_repo_root_path_portability.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -49,6 +50,13 @@ searches cwd ancestry, then deterministically falls back to cwd. Executable prec
 attached to its own relocated tree; cwd ancestry supports an installed command invoked within a checkout. The
 original copied-binary reproduction now exits 0 with exact `"relocated-root"`. `.2.2` owns the recurring process
 oracle.
+
+SSD-local temporary routing makes filesystem ancestry semantically important. A test executable created beneath
+repository-local `TMPDIR` is beneath the real checkout, so discovery correctly reaches the real bundled-spec
+marker; calling that path external was a test-model defect. The topology-only unit now supplies a marker predicate
+over relative synthetic paths. `tools/test_rust_project_data_storage.sh` remains the independent filesystem proof:
+it copies the built primary into managed scratch, invokes it from a nested cwd, creates a trace, and verifies all
+outputs stay on the repository device.
 
 The same audit found 12 Julia fact-card commands plus four legacy source/config files containing 42 developer-home
 or private-session lines; four legacy config/plugin files contained six `/vobs/` mount values, and one contained a
@@ -78,9 +86,9 @@ script ascent, Julia `@__DIR__`, and Lua `debug.getinfo` anchors. The doctrine d
 existing pre-commit hook and local CI registration.
 
 This doctrine does not ban filesystem absolutes as a data type. Explicit caller paths, neutral path-contract
-fixtures such as `C:/Demo`, redaction-test needles, URLs, `/tmp` scratch, and external `/usr` or `/opt` tools remain
+fixtures such as `C:/Demo`, redaction-test needles, URLs, caller-owned `/tmp` path values, and external `/usr` or `/opt` tools remain
 valid. Ignored caches are regenerated after a move, and debug symbols may retain source locations. The invariant
 is that none of those values becomes an implicit or durable repository root.
 
 Related facts: [[native-spec-resolution-contract]], [[native-spec-resolution-policy-drift]],
-[[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[lua-toolchain-package-policy]].
+[[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[rust-project-data-ssd-storage]], [[lua-toolchain-package-policy]].

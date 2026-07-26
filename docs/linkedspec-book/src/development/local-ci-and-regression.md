@@ -366,8 +366,12 @@ bash tools/run_rust_local.sh
 After gate hardening `.9.1.4.1`, it checks formatting, runs the complete `linkedspec-core` package, runs the
 complete `linkedspec-runtime` package (including the 105-fixture interpreter oracle, exhaustive generated
 classifier, and native trace controls), builds `linkedspec-rust`, then runs every current primary-command fixture
-with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
-`LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
+with `POSIXLY_CORRECT` unset and set. It also invokes the Rust storage oracle described below. Override Cargo with
+`LINKEDSPEC_CARGO_CMD`; for targeted Cargo work use the self-rooted managed wrapper, for example:
+
+```bash
+bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core
+```
 
 Core runs first because dependency compilation never executes a dependency crate's own tests. Normalization
 `.9.1.4.2` raises current proof to 189 unit + 3 descriptor + 5 contract-driven family/edge integration + 8 type
@@ -692,7 +696,9 @@ tree `PROJECT-DATA-SSD-ROOTING` define the complete contract.
 
 The behavior-free planning audit found 65 retained CLI workspaces and two Julia depots outside the repository
 filesystem (67 directories/135,756 KiB), two exact Dart checkout metadata records, one LinkedSpec stanza inside a
-shared Julia log, 100 tracked temporary-allocation owners, and 24 executable off-repository defaults. Planning `.0`
+shared Julia log, an initially reported 100 tracked temporary-allocation owners, and 24 executable off-repository
+defaults. Rust `.2.2` corrected one missed imported `env::temp_dir()` use, so the initial unique total is 101 and
+the Rust family count is 17. Planning `.0`
 changed no data. Perl leaf `.2.1` has since migrated the 65 exact CLI workspaces; later family leaves retain the
 same requirement to verify count/bytes/hash where material, exercise the SSD replacement, and then delete the exact
 old source. Ambiguous shared global caches are never deleted wholesale; supported workflows populate repository-
@@ -829,7 +835,39 @@ directories deleted; the internal CLI-workspace census is now zero and the verif
 
 Complete `.2.1` signoff passes the expanded outside-cwd routing oracle, focused runner/trace suites, both primary
 environments at 66/66, and canonical Rust semantic admission 1/1 in 77.61 seconds, Dart 1/1, Julia 416/416 in 27.2
-seconds, and Phase 0 1,031/1,031 in 625 seconds. Rust/Dart/Julia/Lua/tool storage migrations remain `.2.2-.2.6`.
+seconds, and Phase 0 1,031/1,031 in 625 seconds.
+
+### Rust Cargo cache, tests, generated projects, and relocation
+
+Rust migration `.2.2` adds a focused process oracle:
+
+```bash
+bash tools/test_rust_project_data_storage.sh
+```
+
+The oracle self-roots and enters managed repository storage. It proves `TMPDIR`, `CARGO_HOME`, and
+`CARGO_TARGET_DIR` share the repository device, locks the exact 17 tracked Rust temporary-allocation owners, and
+exercises representative core trace, runtime trace-control, generated child-Cargo-project, and repository-topology
+paths. It then copies the built primary command into managed scratch, invokes it from a nested cwd with an inline
+spec, creates a trace, and verifies both output and trace without an off-volume project write. The complete
+`tools/run_rust_local.sh` gate invokes the same oracle after its package/build proof.
+
+The repository-relative Cargo home covers every registry package in `rust/Cargo.lock`: 195 compressed entries,
+195 unpacked source directories, 12,741 files, and 371,604 KiB. Its canonical compressed-cache inventory hash is
+`a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`; locked offline fetch and build pass. The
+shared developer Cargo cache is ambiguous multi-project state, so it was neither copied wholesale nor deleted;
+supported LinkedSpec workflows no longer consult it.
+
+The planning census reported 16 Rust temporary owners because it recognized fully qualified
+`std::env::temp_dir()` but missed an imported `env::temp_dir()` in the core trace tests. The corrected count is 17
+and the recurring oracle matches both spellings. Exact Rust-prefixed residue in the inherited per-user temporary
+root and `/private/tmp` is zero, so there was no unambiguous old Rust-owned source to delete.
+
+Repository-local `TMPDIR` is below the real checkout. Consequently, a synthetic executable placed there is not
+external to repository ancestry. The topology-only unit now injects a repository-marker predicate over relative
+synthetic paths; the copied-binary storage oracle remains the real filesystem proof. Complete `.2.2` Rust signoff
+passes runtime 149, the 105-fixture corpus, the 105-case generated classifier, integration 197, semantic admission,
+the storage oracle, and primary 66/66 in both environments. Dart/Julia/Lua/tool migration remains `.2.3-.2.6`.
 
 ## CI input areas
 

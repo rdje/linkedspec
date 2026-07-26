@@ -8,15 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.2` — from the clean Perl migration commit, root Rust build, Cargo package, test,
-  generated-source, and relocated-oracle data on the repository filesystem; populate reusable SSD caches, verify
-  migrated retained data, and delete each exact old Rust-owned copy.
+- `PROJECT-DATA-SSD-ROOTING.2.3` — from the clean Rust migration commit, root Dart package cache, test workspaces,
+  generated outputs, and exact checkout metadata on the repository filesystem; verify each retained SSD copy,
+  delete each exact old Dart-owned source, and pass the complete Dart gates.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.2 — root Rust workspaces on SSD**
+  (195-package offline Cargo cache, exact 17-owner generated/trace/relocation proof, full Rust gate; closes with
+  this commit).
+
+  **Result:** Targeted Cargo and the complete Rust gate self-root into managed repository storage. The retained
+  Cargo home covers 195/195 locked registry packages, 12,741 files / 371,604 KiB, with canonical compressed-cache
+  hash `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`. The storage oracle locks 17 temporary
+  owners, generated child projects, traces, and a real copied-binary run. Exact old Rust temp residue is zero; the
+  ambiguous shared cache remains untouched and unused.
+
+  **Proof:** Standalone/reused storage oracles, locked offline Cargo, 18-boundary outside-cwd routing,
+  repository-path doctrine, and cleanup pass. The complete Rust gate passes runtime 149, corpus 105, generated
+  classifier 105, integration 197, semantic admission, and primary 66x2. Canonical with existing same-SSD warmed
+  Dart/Julia caches passes Rust 1/1 in 77.85s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2, and Phase 0
+  1,031/1,031 in 624s; the preceding expected empty-Dart-cache failure cleaned its run. Push is 28/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.1 — root Perl workspaces on SSD**
   (24-owner allocator/trace/CLI proof, routed standalone matrix, exact 65-directory migration/deletion; closes with
   this commit).

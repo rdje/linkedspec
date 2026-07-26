@@ -120,9 +120,11 @@ require_literal bin/linkedspec 'use lib "$FindBin::Bin/../perl";' 'Perl script-r
 
 require_literal rust/linkedspec-runtime/src/primary_cli.rs 'std::env::current_exe().ok()' \
   'Rust current-executable anchor'
-require_literal rust/linkedspec-runtime/src/primary_cli.rs '.and_then(find_repository_root)' \
+require_literal rust/linkedspec-runtime/src/primary_cli.rs \
+  '.and_then(|directory| find_repository_root_with(directory, is_repository_root))' \
   'Rust executable-ancestry discovery'
-require_literal rust/linkedspec-runtime/src/primary_cli.rs '.or_else(|| find_repository_root(cwd))' \
+require_literal rust/linkedspec-runtime/src/primary_cli.rs \
+  '.or_else(|| find_repository_root_with(cwd, is_repository_root))' \
   'Rust cwd-ancestry fallback'
 require_literal rust/linkedspec-runtime/src/primary_cli.rs \
   'const REPOSITORY_MARKER: &str = "specs/user_function_definition.spec";' \

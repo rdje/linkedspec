@@ -12,16 +12,20 @@ Critical project-data locality lane: ADR `0053` plus `PROJECT-DATA-SSD-ROOTING` 
 artifact, cache, package depot, log, and temporary workspace to live on the repository filesystem. Runtime roots
 derive from the current checkout; cross-volume reads are limited to explicit caller paths and documented strictly
 necessary external tool/OS dependencies. Planning `.0` freezes 67 retained temporary directories/135,756 KiB,
-two Dart checkout records, one shared-log LinkedSpec stanza, 100 tracked allocation owners, and 24 executable
-off-repository defaults. `.1.1` now implements ignored `/.linkedspec-data/{scratch,cache}`, current-file root
+two Dart checkout records, one shared-log LinkedSpec stanza, an initially reported 100 tracked allocation owners,
+and 24 executable off-repository defaults. Rust `.2.2` corrects the initial total to 101 and Rust to 17 after
+recognizing an imported `env::temp_dir()` spelling. `.1.1` now implements ignored
+`/.linkedspec-data/{scratch,cache}`, current-file root
 discovery, same-device override validation, standard temp/Cargo/Dart/Julia exports, and hostile outside-cwd proof.
 `.1.2` now routes hook/doctrine/Knowledge Map, canonical Perl, four backend, and mdBook entrypoints through the
 initializer, with an outside-cwd oracle. `.1.3` now wraps those boundaries in checkout-namespaced,
 collision-safe runs with exact cleanup, explicit failure retention, cache preservation, and guarded recovery.
 Perl `.2.1` adds the routed standalone primary matrix and a recurring 24-owner `File::Temp`/trace/CLI storage
 oracle. Its 65 exact old CLI workspaces were copied to the root-relative SSD cache, verified at 17 files/1,590
-bytes plus canonical hash, exercised, and deleted. Active `.2.2` owns Rust project data and reusable cache
-migration. Migration remains copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
+bytes plus canonical hash, exercised, and deleted. Rust `.2.2` adds a complete 195-package offline Cargo cache and
+proves all 17 temp owners, generated projects, traces, and a copied binary stay on repository storage; no exact old
+Rust temp residue exists. Active `.2.3` owns Dart project-data/cache migration. Migration remains
+copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

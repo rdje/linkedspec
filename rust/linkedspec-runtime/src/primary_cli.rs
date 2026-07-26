@@ -386,17 +386,33 @@ pub fn run(arguments: Vec<OsString>) -> CommandOutput {
 }
 
 fn resolve_repository_root(cwd: &Path, executable: Option<&Path>) -> PathBuf {
+    resolve_repository_root_with(cwd, executable, &|directory| {
+        directory.join(REPOSITORY_MARKER).is_file()
+    })
+}
+
+fn resolve_repository_root_with<F>(
+    cwd: &Path,
+    executable: Option<&Path>,
+    is_repository_root: &F,
+) -> PathBuf
+where
+    F: Fn(&Path) -> bool,
+{
     executable
         .and_then(Path::parent)
-        .and_then(find_repository_root)
-        .or_else(|| find_repository_root(cwd))
+        .and_then(|directory| find_repository_root_with(directory, is_repository_root))
+        .or_else(|| find_repository_root_with(cwd, is_repository_root))
         .unwrap_or_else(|| cwd.to_path_buf())
 }
 
-fn find_repository_root(anchor: &Path) -> Option<PathBuf> {
+fn find_repository_root_with<F>(anchor: &Path, is_repository_root: &F) -> Option<PathBuf>
+where
+    F: Fn(&Path) -> bool,
+{
     let mut directory = anchor;
     loop {
-        if directory.join(REPOSITORY_MARKER).is_file() {
+        if is_repository_root(directory) {
             return Some(directory.to_path_buf());
         }
         let parent = directory.parent()?;
@@ -644,57 +660,39 @@ mod tests {
         arguments.iter().map(OsString::from).collect()
     }
 
-    fn repository_root_scratch(label: &str) -> PathBuf {
-        std::env::temp_dir().join(format!(
-            "linkedspec-rust-repository-root-{label}-{}",
-            std::process::id()
-        ))
-    }
-
-    fn add_repository_marker(root: &Path) {
-        fs::create_dir_all(root.join("specs")).unwrap();
-        fs::write(root.join(REPOSITORY_MARKER), "Top::\n /x/\n").unwrap();
-    }
-
     #[test]
     fn repository_root_discovery_prefers_executable_then_cwd_then_fallback() {
-        let scratch = repository_root_scratch("precedence");
-        if scratch.exists() {
-            fs::remove_dir_all(&scratch).unwrap();
-        }
-
-        let executable_root = scratch.join("executable-repository");
+        let executable_root = PathBuf::from("synthetic/executable-repository");
         let executable = executable_root.join("rust/target/debug/linkedspec-rust");
-        add_repository_marker(&executable_root);
-        fs::create_dir_all(executable.parent().unwrap()).unwrap();
-
-        let cwd_root = scratch.join("cwd-repository");
+        let cwd_root = PathBuf::from("synthetic/cwd-repository");
         let nested_cwd = cwd_root.join("nested/work");
-        add_repository_marker(&cwd_root);
-        fs::create_dir_all(&nested_cwd).unwrap();
+        let is_repository_root = |directory: &Path| {
+            directory == executable_root.as_path() || directory == cwd_root.as_path()
+        };
 
         assert_eq!(
-            resolve_repository_root(&nested_cwd, Some(&executable)),
+            resolve_repository_root_with(&nested_cwd, Some(&executable), &is_repository_root),
             executable_root,
             "the command's own relocated repository wins over ambient cwd"
         );
 
-        let external_executable = scratch.join("installed/bin/linkedspec-rust");
+        let external_executable = PathBuf::from("synthetic/installed/bin/linkedspec-rust");
         assert_eq!(
-            resolve_repository_root(&nested_cwd, Some(&external_executable)),
+            resolve_repository_root_with(
+                &nested_cwd,
+                Some(&external_executable),
+                &is_repository_root,
+            ),
             cwd_root,
             "cwd ancestry supplies a repository when an installed executable has none"
         );
 
-        let outside = scratch.join("outside");
-        fs::create_dir_all(&outside).unwrap();
+        let outside = PathBuf::from("synthetic/outside");
         assert_eq!(
-            resolve_repository_root(&outside, Some(&external_executable)),
+            resolve_repository_root_with(&outside, Some(&external_executable), &is_repository_root),
             outside,
             "absence of either marker falls back deterministically to cwd"
         );
-
-        fs::remove_dir_all(&scratch).unwrap();
     }
 
     #[test]

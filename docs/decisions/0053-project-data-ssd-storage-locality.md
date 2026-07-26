@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; common lifecycle and Perl migration implemented; Rust/Dart/Julia/Lua/tool migrations pending
+- Status: accepted; common lifecycle plus Perl and Rust migrations implemented; Dart/Julia/Lua/tool migrations pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -13,8 +13,10 @@ CLI workspaces plus two Julia depots occupy 135,756 KiB on the internal temporar
 active-root records identify the current and former LinkedSpec checkouts, and one shared Julia usage log retains a
 former LinkedSpec manifest entry.
 
-The tracked mechanism is broader than those current residues. One hundred files allocate through default temporary
-APIs or explicit temporary roots. By language/tool family, the ownership census reaches 24 Perl, 16 Rust, 18 Dart,
+The tracked mechanism is broader than those current residues. The planning scan reported 100 files allocating
+through default temporary APIs or explicit temporary roots. Rust migration later found that the pattern missed an
+imported `env::temp_dir()` spelling; the corrected initial unique total is 101. By language/tool family, the
+corrected ownership census reaches 24 Perl, 17 Rust, 18 Dart,
 17 Julia, 13 Lua, three Python, and 12 shell files, with some multi-language harnesses counted in more than one
 family. Twenty-four executable files contain explicit off-repository storage defaults. Ninety-seven Knowledge Map
 fact cards still contain 107 old temporary/home-depot command lines. Inert redaction and path-value fixtures are a
@@ -81,6 +83,14 @@ boundary for storage locality.
 - The 65 exact old CLI workspace directories were copied into repository-relative retained cache, verified as 17
   files/1,590 bytes with a canonical inventory hash, exercised through a copied nested source/input fixture, and
   deleted from the internal temporary filesystem. The verified SSD copy remains available; the old census is zero.
+- Rust migration adds a self-rooted targeted Cargo wrapper and a recurring storage oracle. The repo-local Cargo
+  home covers all 195 locked registry packages offline (195 compressed entries, 195 source directories, 12,741
+  files, 371,604 KiB; canonical compressed-cache hash
+  `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`). All 17 tracked Rust temporary owners,
+  generated projects, traces, and a real copied-binary run stay on the repository device.
+- The exact Rust-prefixed residue census is zero in the inherited OS temporary roots. Therefore no unambiguous old
+  Rust-owned source existed to delete; the shared developer Cargo cache remains untouched because it is ambiguous
+  multi-project data, and supported workflows no longer consult it.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -91,5 +101,6 @@ boundary for storage locality.
 - Task tree: `docs/tasks/PROJECT-DATA-SSD-ROOTING.md`
 - Repository relocation: `docs/decisions/0052-repository-root-path-portability.md`
 - Managed-run lifecycle: `docs/knowledge/project-data-run-lifecycle.md`
+- Rust storage: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

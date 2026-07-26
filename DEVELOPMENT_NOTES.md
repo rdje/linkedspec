@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.2` — dependency caches and filesystem topology require executable
+  proof): A populated build target is not a reusable dependency cache. The SSD already held several gigabytes of
+  Rust target output, but the new Cargo home held only lock/tag metadata; `cargo fetch --locked --offline` failed at
+  `serde_json`. Populating from the exact lock graph, then requiring all 195 registry records and offline fetch,
+  prevents target artifacts from masking a missing clean-build cache. The retained cache is 12,741 files /
+  371,604 KiB with a canonical compressed-entry hash; the ambiguous shared developer cache remains untouched and
+  is removed from supported-workflow inputs.
+
+  Inventory patterns must recognize imported allocator names as well as fully qualified syntax. The planning scan
+  counted 16 Rust owners because it matched `std::env::temp_dir()` but missed the core trace test's
+  `env::temp_dir()`. The exact recurring inventory now recognizes both spellings plus `tempfile::tempdir()` and
+  locks 17 owners; the corrected initial cross-family unique total is 101. A changing runtime census is separate:
+  the exact old Rust-prefixed temporary residue is currently zero, so deletion would have been unjustified.
+
+  Repository-local temporary storage changes path ancestry. The first focused proof created a supposed external
+  executable under `std::env::temp_dir()`; once `TMPDIR` is below the checkout, the resolver correctly finds the
+  actual repository marker above it. Topology-only unit tests therefore inject a marker predicate over relative
+  synthetic paths. Real filesystem behavior remains independently proven by copying the built command into
+  managed scratch, invoking it from a nested cwd, writing a trace, and checking device identity. Complete Rust
+  signoff passes runtime 149, corpus/generated 105 each, integration 197, semantic admission, and primary 66x2.
+
+  Canonical default-cache execution is also a useful migration boundary, not a reason to cross task ownership.
+  It passed Rust admission and then failed only because the repo-local Dart cache is still empty; fetching was
+  unavailable in the sandbox. That cache belongs to `.2.3`, so `.2.2` did not populate or reclassify it. The failed
+  run cleaned exactly. Rerunning with the already-existing repository-filesystem warmed Dart and Julia caches
+  passed canonical Rust 77.85s, Dart, Julia 416/416 in 27.1s, primary 66x2, and Phase 0 1,031/1,031 in 624s.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.1` — hash the exact ownership set, not its shared parent): A migration
   proof is only as exact as its inventory root. The first read-only comparison accidentally asked the canonical
   hash helper to traverse the whole operating-system temporary root; unrelated data made that scope invalid even

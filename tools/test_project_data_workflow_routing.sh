@@ -39,8 +39,10 @@ routed_entrypoints=(
  tools/run_julia_local.sh
  tools/run_lua_local.sh
  tools/run_primary_cli_matrix.sh
+ tools/run_cargo_local.sh
  tools/run_mdbook_local.sh
  tools/test_perl_project_data_storage.sh
+ tools/test_rust_project_data_storage.sh
 )
 
 for relative in "${routed_entrypoints[@]}"; do
@@ -144,6 +146,10 @@ run_routed_case knowledge-map success "$REPO_ROOT/knowledge-map/scripts/check_kn
 run_routed_case mdbook success "$REPO_ROOT/tools/run_mdbook_local.sh"
 run_routed_case perl-storage success "$REPO_ROOT/tools/test_perl_project_data_storage.sh"
 run_routed_case primary-matrix failure "$REPO_ROOT/tools/run_primary_cli_matrix.sh" \
+ LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
+run_routed_case cargo failure "$REPO_ROOT/tools/run_cargo_local.sh" \
+ LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
+run_routed_case rust-storage failure "$REPO_ROOT/tools/test_rust_project_data_storage.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case rust failure "$REPO_ROOT/tools/run_rust_local.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
