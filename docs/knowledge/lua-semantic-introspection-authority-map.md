@@ -20,9 +20,9 @@ answers:
   - "what Lua 5.1 and Lua 5.4 compatibility risks affect semantic introspection"
   - "what are the Lua semantic introspection implementation leaves"
 date: 2026-07-25
-status: current authority map; source and compiled-outcome foundation implemented through FUTURE-PARITY-BACKLOG.10.7.2.2
+status: current authority map; source/outcome foundation composition-closed through FUTURE-PARITY-BACKLOG.10.7.2.3
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2.1-.2 now expose one opaque semantic_index source/outcome foundation while semantic records/query and typed observation remain absent. Exact implementation continues through static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2.1-.3 now composition-close one opaque semantic_index source/outcome foundation while semantic records/query and typed observation remain absent. Exact implementation continues through static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
 reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 

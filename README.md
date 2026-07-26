@@ -1117,8 +1117,9 @@ content migration exists yet.
   five opaque detached values expose only snapshot/presence/diagnostic/entry/generated-v2 plan facts. Native
   validation/selection errors remain exact, recognized fallbacks are deterministic, and unrecognized errors
   retain identity. Its 122 assertions pass per ABI without caller path or target/generated execution. No-change
-  closeout `.10.7.2.3` is next; the separate ASCII fluent-method grammar, public query, formats, rollout, and
-  admission remain unchanged.
+  `.10.7.2.3` now recomposes the committed 378+122 proof on both ABIs and closes the source/outcome parent without
+  replacement code. Behavior-free static-authority audit `.10.7.3.0` is next; the separate ASCII fluent-method
+  grammar, public query, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, both complete core and runtime

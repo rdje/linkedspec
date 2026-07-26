@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.3 — close Lua semantic foundation
+
+Composition-closed the Lua semantic source/outcome parent from clean implementation commit `c8501d3a`. This leaf
+adds no production module, replacement test, fixture, public API, semantic record/query, runtime observation,
+generated format, rollout, or admission owner. It reuses the registered source then outcome suites as the exact
+ownership proof: 378+122 assertions pass unchanged on both PUC Lua and LuaJIT before every remaining Lua suite.
+
+The complete dual-ABI Lua gate, PUC primary 66x2/corpus 105, primary 5x2x66, Unicode 5x2x1, Rust 5+3, Dart 17,
+Julia 3,831, and all six governance ledgers pass without drift. The parent closes with generated source still
+v2/format 2 and semantic governance still 6/20/89 at rollout 5/9 plus admission 4/6. Behavior-free static-authority
+audit `.10.7.3.0` is the only next Lua leaf after the clean closeout commit. mdBook and Knowledge Map 703/5,463
+pass; canonical CI passes Rust 1/1 in 78.10s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, and Phase
+0 1,031/1,031 in 629s.
+
 ## 2026-07-25 — FUTURE-PARITY-BACKLOG.10.7.2.2 — implement Lua semantic outcomes
 
 Extended the committed Lua semantic source owner with one package-private staged compiled-or-failed outcome. After

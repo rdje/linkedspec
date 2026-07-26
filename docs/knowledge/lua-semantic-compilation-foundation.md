@@ -16,9 +16,9 @@ answers:
   - "does Lua semantic construction rethrow unknown errors"
   - "what tests prove the Lua compiled-or-failed foundation"
 date: 2026-07-25
-status: current implementation; FUTURE-PARITY-BACKLOG.10.7.2.2 complete and .10.7.2.3 closeout next
+status: current implementation; FUTURE-PARITY-BACKLOG.10.7.2.3 composition-closed and .10.7.3.0 audit next
 tags: [lua, luajit, semantic-introspection, compilation, diagnostics, generated-source, privacy, no-execution]
-evidence: "lua/src/linkedspec/semantic_compilation_outcome.lua, lua/src/linkedspec/semantic_index.lua, and lua/test/semantic_index_compilation_foundation_test.lua; 122 assertions pass identically on PUC Lua and LuaJIT after the 378-assertion source owner."
+evidence: "lua/src/linkedspec/semantic_compilation_outcome.lua, lua/src/linkedspec/semantic_index.lua, and lua/test/semantic_index_compilation_foundation_test.lua; 122 assertions pass identically on PUC Lua and LuaJIT after the 378-assertion source owner, and .10.7.2.3 recomposes both unchanged."
 reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_compilation_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_local.sh; python3 tools/check_semantic_introspection_contract.py"
 ---
 
@@ -49,5 +49,6 @@ The 122-assertion suite covers graph, explicit/default entry, markerless source,
 parse/empty/missing-selection cases, validation/compile/plan fallbacks, unrecognized sentinel identity, generated
 plan detachment, opacity, source scans, and a target body that would fail if executed. It passes unchanged on PUC
 Lua and LuaJIT. Static projection, record/query APIs, runtime observation, generated-format changes, rollout, and
-admission remain later leaves. See [[lua-semantic-source-foundation]], [[lua-semantic-source-outcome-plan]],
+admission remain later leaves. No-change `.10.7.2.3` recomposes this suite after the source suite on both ABIs and
+closes the foundation parent without replacement code. See [[lua-semantic-source-foundation]], [[lua-semantic-source-outcome-plan]],
 [[lua-semantic-introspection-authority-map]], and [[semantic-introspection-neutral-contract]].

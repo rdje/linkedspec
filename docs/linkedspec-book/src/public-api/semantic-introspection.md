@@ -1869,6 +1869,13 @@ identically on PUC Lua and LuaJIT. Together they cover SHA-256 padding, Unicode 
 graph/explicit/default/markerless/staged cases, native and fallback failures, entry/plan identity, detachment,
 opacity, unrecognized-error identity, dependency scans, and target no-execution.
 
+No-change closeout `.10.7.2.3` starts from committed outcome `c8501d3a` and adds no replacement production module,
+test, fixture, API, semantic record/query, runtime observation, or generated format. It reruns the source then
+outcome suites unchanged for exact 378+122 assertions on both ABIs, followed by the complete Lua, cross-backend,
+ledger, and canonical gates. This composition closes the opaque source/outcome parent. The next Lua work is the
+behavior-free static-authority audit `.10.7.3.0`; callers must not infer a static record or query surface from the
+foundation values.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
@@ -1880,7 +1887,7 @@ reject across four roles, two AST trust paths, artifact and loaded/generated/emi
 selectors, diagnostics, traces, strict loaders, primary commands, and every adjacent grammar at 1,542 assertions
 per ABI. Parent `.3` is closed without production, format, API, semantic, rollout, or admission movement. `.4` is
 complete and recomposes every committed owner unchanged, closing the Unicode prerequisite. The opaque source and
-outcome owners are implemented; no-change foundation closeout `.10.7.2.3`, private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
+outcome parent is composition-closed; private static projection `.3`, calls/staging/generated `.4`, immutable typed/raw-neutral
 query `.5`, caller-owned typed runtime observation `.6`, and one byte-identical ordered consumer at `.7` then
 remain. Public semantic values must be detached and canonical; metatable names, `table: 0x...` identity, paths,
 regex userdata, AST/ActionIR, callbacks, and trace objects can never enter portable responses. Unicode behavior
@@ -2284,7 +2291,8 @@ The dependency order is:
 | `.10.7.2.0` | Lua source/outcome contract and dependency split | complete; behavior-free opaque API/privacy/no-path/no-execution boundary |
 | `.10.7.2.1` | Lua strict copied input and private source map | complete; focused 378 per ABI, portable SHA-256 and exact coordinates |
 | `.10.7.2.2` | Lua compiled-or-failed outcome foundation | complete; focused 122 per ABI, detached authority/diagnostic/entry/plan, no execution or promotion |
-| `.10.7.2.3` | Lua source/outcome foundation closeout | next; committed-owner recomposition without replacement code |
+| `.10.7.2.3` | Lua source/outcome foundation closeout | complete; committed 378+122 per ABI plus full signoff, no replacement code or promotion |
+| `.10.7.3.0` | Lua static-authority map and dependency split | next; behavior-free audit before projection code |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

@@ -8,14 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.2.3` — recompose the committed strict-source and staged-outcome owners unchanged,
-  then close the Lua semantic foundation parent without static projection, query, observation, or promotion. It
-  becomes eligible only after the clean `.10.7.2.2` outcome commit.
+- `FUTURE-PARITY-BACKLOG.10.7.3.0` — behavior-free audit of exact Lua static targets, source correlation,
+  normalization, privacy, and ownership before projector code. It becomes eligible only after the clean
+  `.10.7.2.3` foundation-closeout commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.3 — close Lua semantic foundation**
+  (no-change dual-ABI recomposition; closes `.10.7.2` with this commit).
+
+  **Result:** Starting from clean implementation commit `c8501d3a`, the closeout adds no production, replacement
+  test, fixture, API, record/query, observation, format, rollout, or admission owner. The committed source and
+  outcome suites recompose in their intended order on both Lua ABIs, closing the opaque foundation parent while
+  leaving all normalized projection authority to `.10.7.3`.
+
+  **Proof:** Source 378 plus outcome 122 pass unchanged on PUC Lua and LuaJIT, followed by the complete dual-ABI
+  Lua gate, PUC primary 66x2/corpus 105, primary 5x2x66, Unicode 5x2x1, Rust 5+3, Dart 17, Julia 3,831, and all six
+  ledgers. Generated source remains v2/format 2 and semantic governance remains 6/20/89 at rollout 5/9 plus
+  admission 4/6. Canonical CI passes Rust 1/1 in 78.10s, Dart 1/1, Julia 416/416 in 27.3s, reference primary
+  66x2, and Phase 0 1,031/1,031 in 629s; mdBook, Knowledge Map 703/5,463, memory/task/four doctrines, and diff
+  hygiene pass. Reusable SSD caches remain and only disposable task depots/probes are cleaned.
+
 - 2026-07-25: **FUTURE-PARITY-BACKLOG.10.7.2.2 — implement Lua semantic outcomes**
   (one staged compiled-or-failed authority plus detached foundation values).
 

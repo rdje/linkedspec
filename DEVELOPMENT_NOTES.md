@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.3` — closeout proves composition, not more surface): The source and
+  outcome owners were independently committed because source policy must precede language work and language
+  failures have a separate typed boundary. Their parent can close only by rerunning those exact committed suites
+  in order on both Lua ABIs. A replacement “integration” suite or a new convenience API would weaken the proof by
+  introducing a third authority rather than demonstrating that the two intended owners compose.
+
+  The closeout is also a projection fence. A strict source map and a compiled-or-failed outcome are necessary
+  inputs to semantic introspection, but they are not normalized records, relations, or query answers. Keeping this
+  leaf behavior-free prevents public callers from treating presence bits, native diagnostic fields, or generated-
+  plan rows as the future neutral v1 graph. `.10.7.3.0` must audit the retained parsed/compiled authorities and
+  exact neutral targets before any static projector is added.
+
 - 2026-07-25 (`FUTURE-PARITY-BACKLOG.10.7.2.2` — failure ownership must follow typed stage authority): A broad
   `pcall` is not by itself a safe compiled-or-failed boundary. Each stage now recognizes only its own typed native
   errors. Exact validation and entry-selection diagnostics survive unchanged; parser, compiler, and plan owners

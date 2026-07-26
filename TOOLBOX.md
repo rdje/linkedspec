@@ -667,6 +667,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `bash tools/run_lua_local.sh`; its registered outcome suite passes 122 assertions per ABI and proves no caller
   path, target/generated execution, runtime, trace, diagnostic sink, query, observation, descriptor, or host-state
   exposure. See [[lua-semantic-compilation-foundation]].
+- **LUA FOUNDATION CLOSEOUT:** `.10.7.2.3` adds no production or replacement test owner. Starting from committed
+  outcome `c8501d3a`, run `bash tools/run_lua_local.sh` and confirm the registered source then outcome suites report
+  exact 378+122 on PUC Lua and LuaJIT before the remaining package proof. Then run primary 5x2x66, Unicode 5x2x1,
+  Rust 5+3, Dart 17, Julia 3,831, all six no-drift ledgers, and canonical local CI. The parent closes only when
+  those committed owners compose without records/query, runtime observation, target execution, format movement,
+  or promotion. Retrieve the three Lua foundation cards before behavior-free static audit `.10.7.3.0`.
 
 ---
 
