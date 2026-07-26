@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.2.1 — gate repository path portability
+
+Added the `REPO-ROOT-PATHS` structural doctrine. The new executable
+`scripts/check_repo_root_path_portability.sh` derives the checkout from its own location, scans only tracked
+parent-repository text, excludes the `rgx` gitlink, skips binary content, and never inspects ignored/generated
+caches. It rejects the current checkout identity, concrete Unix/macOS/Windows developer roots, macOS private
+volume/session roots, legacy private workspaces, and compile-time `CARGO_MANIFEST_DIR` discovery in the shipped
+Rust primary command. One driver registry entry and one matching `DOCTRINE_ENFORCEMENT.md` row supply the existing
+pre-commit/local-CI E3/E4 integration; `TASK-ACCEPTANCE` also recognizes the direct checker command as a valid
+tool-evidence signature.
+
+The always-run self-test exercises seven rejected mutations and seven legal controls. Relative paths, repository
+URLs, `/usr`/`/opt` tools, caller `/tmp`, `C:/Demo`, and bare path-denial needles remain legal. Separate fixed-
+literal checks retain all five runtime anchor families: Perl `FindBin`, Rust current-executable then cwd marker
+discovery, Dart cwd plus script ascent, Julia `@__DIR__`, and Lua `debug.getinfo`. Direct and full five-doctrine
+execution pass without changing parser, runtime, fixture, API, generated format, rollout, or admission behavior.
+
+The mdBook, Knowledge Map 706 facts/5,513 questions, 43-line memory architecture, and whitespace pass. Canonical
+CI passes Rust semantic admission 1/1 in 80.26 seconds, Dart 1/1, Julia 416/416 in 28.6 seconds, Perl primary
+66x2, and Phase 0 1,031/1,031 in 657 seconds. Reusable SSD caches remain; only generated book/bytecode output is
+removed. Push cadence advances to 22/300; no push occurs.
+
 ## 2026-07-26 — REPO-ROOT-PATH-PORTABILITY.1.3 — normalize durable reverify paths
 
 Normalized the 12 exact Julia Knowledge Map commands frozen by the relocation audit. Every command now selects

@@ -17,7 +17,8 @@ discovery; its copied-binary moved-root reproduction and complete signoff are gr
 config/source owners `.1.2` are complete with relative project defaults, PATH-selected tools, and configured
 network command/input ownership. The 12 Julia fact-card commands `.1.3` are also complete with PATH-selected Julia,
 root-relative operands, and runtime-composed caller-writable depots. Ordered remediation `.1.1-.1.3` is complete;
-active `.2.1` structural doctrine precedes `.2.2` recurring copied-binary relocation proof/closeout. Explicit caller
+structural doctrine `.2.1` now scans tracked parent text, self-tests 14 reject/accept classes, and locks all five
+primary runtime anchors through E3/E4. Active `.2.2` owns recurring copied-binary relocation proof/closeout. Explicit caller
 paths and OS/tool/temp data remain valid; they are not checkout identity.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.

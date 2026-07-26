@@ -36,6 +36,7 @@ DOCTRINES=(
   "KNOWLEDGE-MAP|the derived Knowledge Map is in sync with its fact sources|knowledge-map/scripts/check_knowledge_map.sh"
   "TASK-TREE-METADATA|completed task trees do not advertise live Current Frontier rows|scripts/check_task_tree_metadata.sh"
   "TASK-ACCEPTANCE|staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence|scripts/check_diagnosis_evidence.sh"
+  "REPO-ROOT-PATHS|tracked repository paths and all five primary-command roots are relocation-safe|scripts/check_repo_root_path_portability.sh"
 )
 
 fail=0

@@ -8,13 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.2.1` — from the clean durable-command repair commit, add the frozen structural
-  repository-path portability doctrine and mutation-sensitive self-tests without widening into process-oracle `.2.2`.
+- `REPO-ROOT-PATH-PORTABILITY.2.2` — from the clean structural-doctrine commit, add the recurring relocated-binary
+  oracle, repeat the four already-correct outside-cwd primary anchors, and close the portability tree.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.2.1 — gate repository path portability**
+  (read-only structural doctrine and self-test; closes with this commit).
+
+  **Result:** `REPO-ROOT-PATHS` scans tracked parent text while excluding the `rgx` gitlink and ignored/generated
+  caches. It rejects current/developer/private-session identity and compile-time Rust primary discovery. Its 14
+  classifier cases preserve relative, URL, tool, caller-temp, and neutral fixture data. Fixed locks retain all five
+  primary runtime-anchor families; one registry row supplies both pre-commit and local-CI enforcement.
+
+  **Proof:** Direct, staged self-scan, and full five-doctrine execution pass; mdBook, Knowledge Map 706/5,513,
+  43-line memory, and whitespace pass. Canonical CI passes Rust semantic 1/1 in 80.26s, Dart 1/1, Julia 416/416
+  in 28.6s, Perl primary 66x2, and Phase 0 1,031/1,031 in 657s. Reusable SSD caches remain; only generated
+  book/bytecode output is removed. Push counter is 22/300; no push.
+
 - 2026-07-26: **REPO-ROOT-PATH-PORTABILITY.1.3 — normalize durable reverify paths**
   (12-card Julia durable-command repair; closes with this commit).
 

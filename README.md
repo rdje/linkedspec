@@ -231,7 +231,10 @@ legacy config/source owners no longer contain developer-home, private-volume, `/
 Durable Julia verification commands are portable too. All 12 audited Knowledge Map commands select `julia` through
 `PATH`, keep project and test operands relative to this repository root, and build writable depot stacks from
 caller `TMPDIR` plus Julia's runtime defaults. No expanded developer home or private session directory is stored.
-Remediation `.1` is complete; structural enforcement `.2.1` is the active portability leaf.
+Remediation `.1` is complete. Structural enforcement `.2.1` registers `REPO-ROOT-PATHS`: a read-only tracked-text
+scan with 14 mutation/acceptance self-tests plus fixed runtime-anchor locks for the Perl, Rust, Dart, Julia, and
+Lua primary commands. The existing doctrine driver runs it from pre-commit and canonical local CI. Recurring
+relocated-process proof `.2.2` is the active portability leaf.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-26` (durable Julia command cleanup `.1.3` done; structural doctrine `.2.1` active)
+- Last updated: `2026-07-26` (structural doctrine `.2.1` done; relocated-process oracle `.2.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -159,7 +159,7 @@ root because the root may move for many reasons and relocation must not affect t
   Children: `.2.1`, `.2.2`
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.2.1`
-  Status: `active`
+  Status: `done` (2026-07-26; tracked paths and five runtime anchors are mechanically gated)
   Goal: Add the fast structural repository-path portability doctrine.
   Depends on: `.1.3`
   Acceptance: Add one deterministic, read-only `scripts/check_repo_root_path_portability.sh` which derives its own
@@ -173,8 +173,29 @@ root because the root may move for many reasons and relocation must not affect t
     commit, clear the brief, verify clean, and do not push.
   Commit: `REPO-ROOT-PATH-PORTABILITY.2.1 - gate repository path portability`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — ADR `0052` and the `.0` audit proved the relocation rule was prose-only after
+    remediation: no registered structural check rejected a newly staged checkout identity or anchor regression.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `scripts/check_doctrines.sh` had four registered doctrines and no path
+    classifier; `rust/linkedspec-runtime/src/primary_cli.rs` plus the four other primary entrypoints had correct
+    runtime anchors, but the registry did not mechanically retain them.
+  - [x] **FIX** — Added one executable, read-only `scripts/check_repo_root_path_portability.sh`, one
+    `REPO-ROOT-PATHS` driver entry, and one matching `DOCTRINE_ENFORCEMENT.md` row. It derives its own root, scans
+    tracked parent text only, locks Perl/Rust/Dart/Julia/Lua anchors, and is recognized by the staged tool-evidence
+    signature gate.
+  - [x] **ADDRESSED (verified)** — `bash scripts/check_repo_root_path_portability.sh` passes its always-run seven
+    rejection plus seven legal self-tests, finds tracked parent text clean, rejects compile-time Rust primary root
+    discovery, and finds all five anchor families exact.
+  - [x] **NO REGRESSION** — `bash -n`, the staged checker self-scan, all five registered doctrines, mdBook,
+    Knowledge Map, memory/whitespace, and canonical `bash tools/run_ci_local.sh` pass; legal URLs, `/usr`/`/opt`,
+    caller `/tmp`, relative operands, `C:/Demo`, and path-denial needles stay accepted.
+  - [x] **LOCKSTEP** — ADR, Toolbox, Knowledge Map, README, roadmaps, mdBook, task/live/memory/change/development
+    records, registry/documentation rows, commit/brief/clean-tree state, 22/300 counter, and no-push state align;
+    `.2.2` is the next clean frontier.
+
 - ID: `REPO-ROOT-PATH-PORTABILITY.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Close the invariant with a recurring relocated-checkout process oracle.
   Depends on: `.2.1`
   Acceptance: Add one Rust integration test that copies the freshly built primary executable beneath a synthetic
@@ -189,7 +210,7 @@ root because the root may move for many reasons and relocation must not affect t
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.2.1` | `active` | From the clean `.1.3` commit, add the frozen structural portability doctrine and mutation-sensitive self-tests. |
+| `REPO-ROOT-PATH-PORTABILITY.2.2` | `active` | From the clean `.2.1` commit, add the recurring relocated-binary oracle, repeat the four outside-cwd anchors, and close the tree. |
 
 ## Decisions
 
@@ -280,6 +301,9 @@ root because the root may move for many reasons and relocation must not affect t
 | 2026-07-26 | `.1.3` | full Julia local gate; direct 12-suite semantic bundle; semantic/cursor/root governance | PASS; package/primary/corpus complete; direct 1,337 assertions; semantic 6/20/89, cursor 8/0/60, root 7/0/54 |
 | 2026-07-26 | `.1.3` | mdBook; Knowledge Map; memory architecture; doctrine driver; whitespace | PASS; all four doctrines PASS |
 | 2026-07-26 | `.1.3` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 79.65s, Dart 1/1, Julia 416/416 in 29.5s, Perl primary 66x2, Phase 0 1,031/1,031 in 647s |
+| 2026-07-26 | `.2.1` | `bash -n scripts/check_repo_root_path_portability.sh`; direct checker; staged checker self-scan | PASS; 14 reject/accept classifier cases, clean tracked parent text, all five primary anchor families exact |
+| 2026-07-26 | `.2.1` | `bash scripts/check_doctrines.sh`; mdBook; Knowledge Map; memory; whitespace | PASS; all five registered doctrines; KM 706/5,513; 43-line memory; aligned documentation |
+| 2026-07-26 | `.2.1` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 80.26s, Dart 1/1, Julia 416/416 in 28.6s, Perl primary 66x2, Phase 0 1,031/1,031 in 657s |
 
 ## Commit Log
 
@@ -288,7 +312,8 @@ root because the root may move for many reasons and relocation must not affect t
 | `.0` | `9f3e59c2` — `REPO-ROOT-PATH-PORTABILITY.0 - freeze relocation invariant` | Behavior-free ADR/audit/split; no repair or checker behavior. |
 | `.1.1` | `80cc3383` — `REPO-ROOT-PATH-PORTABILITY.1.1 - derive Rust checkout at runtime` | Rust runtime-anchor repair; copied-binary RED is green. |
 | `.1.2` | `507fc72e` — `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
-| `.1.3` | `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths` (this commit) | Twelve Julia fact-card commands now use runtime-composed portable roots and depots. |
+| `.1.3` | `6648d3bf` — `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths` | Twelve Julia fact-card commands now use runtime-composed portable roots and depots. |
+| `.2.1` | `REPO-ROOT-PATH-PORTABILITY.2.1 - gate repository path portability` (this commit) | One read-only doctrine scans tracked parent text and locks all five runtime anchors. |
 
 ## Changelog
 
@@ -302,3 +327,5 @@ root because the root may move for many reasons and relocation must not affect t
   focused parser/syntax/config proof and the canonical gate pass, and `.1.3` becomes the clean frontier.
 - `2026-07-26`: Completed `.1.3`; all 12 Julia fact-card commands are machine-independent, their complete grouped
   proof passes, the derived map is synchronized, remediation `.1` closes, and `.2.1` becomes the clean frontier.
+- `2026-07-26`: Completed `.2.1`; `REPO-ROOT-PATHS` is registered once through E3/E4, its 14-case classifier and
+  five primary anchor families pass, and `.2.2` becomes the clean frontier.

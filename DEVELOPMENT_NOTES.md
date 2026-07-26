@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.2.1` — classify concrete path identity, not path-shaped syntax): A
+  relocation checker must distinguish a real persisted identity from tests and prose that describe one. Requiring
+  a concrete username, volume, or session segment plus a path boundary rejects concrete Unix-home,
+  macOS-volume, and Windows drive-qualified user-home values while accepting the bare denial needles used by
+  semantic privacy tests. The established Markdown leak oracle also rejects placeholder user-home syntax, so
+  durable prose names those path classes without spelling a machine-local path.
+  The same boundary naturally accepts repository URLs because a URL path is preceded by its hostname, while
+  current-root identity is still rejected by an exact dynamically derived root match. `/usr`, `/opt`, `/tmp`, and
+  `C:/Demo` are not forbidden patterns at all because ADR `0052` classifies them as explicit tool/caller/fixture
+  data. Seven negative plus seven positive cases run inside every checker invocation, so weakening either side
+  breaks the doctrine itself.
+
+  Inventory tracked inputs instead of inventing cache exclusions. `git ls-files` gives the durable parent tree;
+  explicitly excluding the `rgx` gitlink and skipping binary bytes leaves ignored build/package caches outside the
+  scan by construction. Runtime-root retention is a separate fixed structural proof: check the exact Perl, Rust,
+  Dart, Julia, and Lua anchor snippets rather than assuming absence of bad strings proves presence of good root
+  discovery. Compile-time `CARGO_MANIFEST_DIR` rejection is deliberately scoped to the shipped Rust primary source,
+  preserving legitimate integration-test fixture discovery.
+
 - 2026-07-26 (`REPO-ROOT-PATH-PORTABILITY.1.3` — a writable Julia depot must preserve package discovery): A
   portable verifier cannot persist one developer's Julia binary, home depot, or private macOS session directory.
   Selecting `julia` through `PATH`, keeping `--project=julia` and tests root-relative, and putting the writable

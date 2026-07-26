@@ -1,7 +1,7 @@
 # ADR 0052: Repository-owned paths are relocation-safe
 
 - Date: 2026-07-25
-- Status: accepted; remediation complete, enforcement in progress
+- Status: accepted; remediation/static enforcement complete, recurring process proof pending
 - Tags: architecture, paths, repository-root, relocation, portability, doctrine, tooling, cli
 
 ## Context
@@ -60,6 +60,9 @@ Those values do not identify repository-owned content and must not be conflated 
   an expanded developer home or private session directory.
 - The checker must be false-positive-safe: rejecting an explicit caller path or `/usr/bin/env` would weaken native
   path contracts rather than improve checkout portability.
+- Structural enforcement is active as of `REPO-ROOT-PATH-PORTABILITY.2.1`. `REPO-ROOT-PATHS` scans tracked parent-
+  repository text, self-tests seven rejection and seven legal classes, rejects compile-time Rust primary discovery,
+  and locks the Perl/Rust/Dart/Julia/Lua runtime anchors through the existing E3/E4 doctrine driver.
 - New checkout-path doctrine work is not complete until both the static tree and a relocated process reproduce.
 
 ## Links

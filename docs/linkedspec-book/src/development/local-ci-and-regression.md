@@ -664,6 +664,20 @@ trailing empty depot entry: Julia expands the empty entry to system depots but o
 can turn an offline reverify into an attempted registry download. Direct semantic-query commands define
 `REPO_ROOT=pwd()` because their included shared fixtures require that root-relative harness context.
 
+Static enforcement is registered as the `REPO-ROOT-PATHS` doctrine. Run it directly with:
+
+```bash
+bash scripts/check_repo_root_path_portability.sh
+```
+
+The checker reads only tracked parent-repository text, excluding the `rgx` gitlink and ignored/generated caches.
+Its built-in 14-case self-test proves rejection of current checkout, Unix/macOS/Windows developer roots, macOS
+private volume/session roots, and compile-time Rust primary discovery while preserving relative paths, URLs,
+`/usr`/`/opt` tools, caller `/tmp`, and neutral `C:/Demo`/path-denial fixtures. It also requires the five primary
+commands to retain their runtime anchors: Perl `FindBin`, Rust executable-then-cwd marker discovery, Dart cwd plus
+script ascent, Julia `@__DIR__`, and Lua `debug.getinfo`. The normal doctrine driver runs this checker from both
+pre-commit and canonical local CI.
+
 Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
 Compiled debug information may also record source locations, so searching binary strings is not a relocation
 oracle. The recurring proof executes a freshly copied command beneath a synthetic moved root and requires it to

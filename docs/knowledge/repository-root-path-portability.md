@@ -17,12 +17,16 @@ answers:
   - how should portable Julia reverify commands compose depot paths
   - does a trailing empty JULIA DEPOT PATH include the user depot
   - why do direct Julia semantic query tests define REPO ROOT
+  - how is repository root path portability mechanically enforced
+  - what does the REPO ROOT PATHS doctrine scan
+  - which primary commands does the repository path doctrine lock
+  - which absolute paths does the repository path doctrine allow
   - what did REPO ROOT PATH PORTABILITY 0 discover
 date: 2026-07-26
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. REPO-ROOT-PATH-PORTABILITY.1.2 removes developer-home/private-mount values from all eight frozen legacy config/source owners: project defaults are relative, tools use PATH, EasyTk package discovery is caller-owned, and network.plg consumes its configured command/input fields. REPO-ROOT-PATH-PORTABILITY.1.3 normalizes all 12 Julia reverify commands to PATH-selected Julia, root-relative operands, and runtime-composed caller-writable depots. ADR 0052 freezes the boundary."
-reverify: "git grep -n -I -F \"$(git rev-parse --show-toplevel)\" -- . ':(exclude)rgx' || true; git ls-files -s | awk '$1 == \"120000\" {print $4}'; ! rg -n '(/Users/|/home/|/Volumes/|/private/|/vobs(/|$)|/dsync/|[A-Za-z]:\\\\Users\\\\)' conf/fv_check.conf conf/lighttpd.conf conf/network.conf conf/pcsally_mem.conf conf/tkgui.tk noncore/EasyTk.pm noncore/plugin/network.plg perl/env.conf; ! rg -n '(/opt/homebrew/bin/julia|/Users/|/private/var/folders|/private/tmp/linkedspec-julia)' docs/knowledge/julia-{global-cursor-option-removal,marker-switch-chain-selection,nullable-match-state-preserves-absence,root-rule-selection-admission,rule-local-cursor-execution,rule-local-cursor-preflight,semantic-query-kernel,semantic-query-public-api,semantic-query-traversal,semantic-runtime-observation-derivation,semantic-runtime-observation-direct-capture,semantic-runtime-observation-generated-routes}.md; rg -n 'CARGO_MANIFEST_DIR|current_exe|_findRepositoryRoot|_primary_cli_repo_root|FindBin|debug.getinfo' bin/linkedspec rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl lua/bin/linkedspec-lua"
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the same moved-tree process exits 0 with exact relocated-root. REPO-ROOT-PATH-PORTABILITY.1.2 removes developer-home/private-mount values from all eight frozen legacy config/source owners: project defaults are relative, tools use PATH, EasyTk package discovery is caller-owned, and network.plg consumes its configured command/input fields. REPO-ROOT-PATH-PORTABILITY.1.3 normalizes all 12 Julia reverify commands to PATH-selected Julia, root-relative operands, and runtime-composed caller-writable depots. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine: tracked parent text is scanned, 14 reject/accept classifier cases self-test, compile-time Rust primary discovery is forbidden, and Perl/Rust/Dart/Julia/Lua runtime anchors are locked. ADR 0052 freezes the boundary."
+reverify: "bash scripts/check_repo_root_path_portability.sh && bash scripts/check_doctrines.sh"
 ---
 
 ADR `0052` makes checkout relocation a correctness property. Checked-in references to repository-owned files are
@@ -61,6 +65,17 @@ not the user package depot, so the first attempted rewrite lost installed packag
 registry while offline. The corrected commands persist no expanded home/session path. Three direct semantic-query
 commands also define `REPO_ROOT=pwd()` before including shared tests because those fixtures consume that harness
 constant; this is an explicit repo-root invocation contract, not baked-in checkout identity.
+
+`REPO-ROOT-PATH-PORTABILITY.2.1` makes the rule mechanical through
+`scripts/check_repo_root_path_portability.sh`, registered once as `REPO-ROOT-PATHS`. The read-only checker derives
+its own root, inventories only `git ls-files` parent-repository text, excludes the `rgx` gitlink, skips binaries,
+and therefore ignores generated/package caches by construction. It rejects the current checkout, concrete Unix/
+macOS/Windows developer roots, private session/workspace roots, and `env!("CARGO_MANIFEST_DIR")` specifically in
+the shipped Rust primary command. Its always-run self-test proves seven rejection and seven legal classes. Legal
+data stays legal: relative operands, repository URLs, `/usr`/`/opt` tools, caller `/tmp`, `C:/Demo`, and bare path-
+denial needles. Fixed structural locks retain Perl `FindBin`, Rust executable-then-cwd marker discovery, Dart cwd/
+script ascent, Julia `@__DIR__`, and Lua `debug.getinfo` anchors. The doctrine driver supplies E3/E4 through the
+existing pre-commit hook and local CI registration.
 
 This doctrine does not ban filesystem absolutes as a data type. Explicit caller paths, neutral path-contract
 fixtures such as `C:/Demo`, redaction-test needles, URLs, `/tmp` scratch, and external `/usr` or `/opt` tools remain

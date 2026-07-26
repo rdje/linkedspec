@@ -22,7 +22,8 @@ config/source owners `.1.2` are also complete: project defaults are relative, to
 network plugin consumes its existing configured command/input fields. All 12 Julia Knowledge Map commands `.1.3`
 are now portable: Julia is selected through `PATH`, repository operands are relative, and writable temporary
 depots compose runtime defaults without storing expanded machine paths. Remediation `.1.1-.1.3` is complete;
-active structural doctrine `.2.1` precedes copied-binary relocation oracle/final closeout `.2.2`. Caller-owned absolute input paths,
+structural doctrine `.2.1` is complete with one read-only tracked-text scan, 14 classifier self-tests, and all five
+primary runtime-anchor locks. Active `.2.2` owns the copied-binary relocation oracle/final closeout. Caller-owned absolute input paths,
 temporary paths, URLs, and external OS/tool paths remain legal and may not be misclassified as repository identity.
 
 Semantic-introspection neutral contract (2026-07-20): ADRs `0049`/`0050` and

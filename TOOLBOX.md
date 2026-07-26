@@ -25,7 +25,9 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   driver), invoked by [`.githooks/pre-commit`](.githooks/pre-commit) (E3) + `tools/run_ci_local.sh` (E4).
   For staged code/spec/test/tooling changes, `TASK-ACCEPTANCE`
   ([`scripts/check_diagnosis_evidence.sh`](scripts/check_diagnosis_evidence.sh)) requires the owning
-  task file to carry the checklist below with LinkedSpec-tool evidence signatures.
+  task file to carry the checklist below with LinkedSpec-tool evidence signatures. `REPO-ROOT-PATHS`
+  ([`scripts/check_repo_root_path_portability.sh`](scripts/check_repo_root_path_portability.sh)) independently
+  scans tracked parent-repository text and locks all five primary-command runtime root anchors on every run.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 
