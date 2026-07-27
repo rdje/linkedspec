@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, helpers, string, numeric, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.2 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove string/scalar helpers, explicit str_* lexical comparisons, numeric arithmetic/reducer/comparison helpers, numeric aliases, arithmetic/comparison symbol callees, and string/number receiver chains."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime string/scalar and numeric helper execution lives in

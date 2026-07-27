@@ -2281,7 +2281,7 @@ Dart admission composes the same owners through one omission-sensitive consumer:
 
 ```bash
 cd dart
-dart test test/semantic_introspection_dart_admission_test.dart
+bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart
 ```
 
 Its 12 exact-once roles cover strict UTF-8 byte/decoded-text convergence; compiled graph/calls/privacy and failed

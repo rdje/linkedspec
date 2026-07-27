@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, diagnostics, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.5.1 added RuntimeDiagnostic, RuntimeInterpreterException.diagnostic, optional LinkedSpecRuntimeEngine specName/specPath fields, runtime context rule-stack attribution, and focused runtime diagnostics tests."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'RuntimeDiagnostic|RuntimeInterpreterException\\.diagnostic|DART-BACKEND-PARITY\\.4\\.5\\.1' dart/lib dart/test docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'RuntimeDiagnostic|RuntimeInterpreterException\\.diagnostic|DART-BACKEND-PARITY\\.4\\.5\\.1' dart/lib dart/test docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src"
 ---
 
 Dart runtime structured diagnostics live in `dart/lib/src/runtime/interpreter.dart`.

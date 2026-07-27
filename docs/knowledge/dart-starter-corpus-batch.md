@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, corpus, runtime, parity, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.6.2.2 updates dart/lib/src/runtime/interpreter.dart so returned non-null empty arrays/hashes count as successful rule matches, blind child dispatch uses the child RuleResult.matched bit, and marker-form if/elseif/else/endif action chains execute as grouped branches. dart/test/runtime_interpreter_test.dart locks empty aggregate returns and marker-form branch execution. The bounded shipped-corpus proof `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40` passes."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40 && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40 && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 `DART-BACKEND-PARITY.6.2.2` is the first shipped-corpus expansion proof for

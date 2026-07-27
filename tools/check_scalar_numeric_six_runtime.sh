@@ -7,6 +7,7 @@ source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_scalar_numeric_six_runtime.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
@@ -38,7 +39,7 @@ log "checking Rust"
 log "checking Dart"
 (
  cd dart
- "$DART_CMD" test test/runtime_interpreter_test.dart --name 'matches the neutral scalar numeric contract exactly'
+ "${DART_RUN[@]}" test test/runtime_interpreter_test.dart --name 'matches the neutral scalar numeric contract exactly'
 )
 
 log "checking Julia"

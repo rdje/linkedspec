@@ -14,7 +14,7 @@ date: 2026-07-11
 status: current
 tags: [dart, trace, parser, validation, compiler, function-registry, FUTURE-PARITY-BACKLOG]
 evidence: "dart/lib/src/parser/spec_parser.dart; dart/lib/src/validation/spec_validator.dart; dart/lib/src/compiler/compiled_spec.dart; dart/lib/src/action/function_registry.dart; dart/test/frontend_compiler_trace_test.dart"
-reverify: "cd dart && dart test test/frontend_compiler_trace_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'dart_(frontend|compiler):|LinkedSpecTraceEmitter\\? trace' lib/src/{parser/spec_parser.dart,validation/spec_validator.dart,compiler/compiled_spec.dart,action/function_registry.dart}"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/frontend_compiler_trace_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'dart_(frontend|compiler):|LinkedSpecTraceEmitter\\? trace' lib/src/{parser/spec_parser.dart,validation/spec_validator.dart,compiler/compiled_spec.dart,action/function_registry.dart}"
 ---
 
 `FUTURE-PARITY-BACKLOG.1.6.5.1` extends existing public Dart operations with an

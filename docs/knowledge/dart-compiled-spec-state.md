@@ -12,7 +12,7 @@ status: current through rule-local cursor descriptor v1
 tags: [dart, compiler, compiled-state, descriptor, dependency-regex, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.3.4 adds dart/lib/src/compiler/compiled_spec.dart and exports compileSpec plus CompiledSpec, CompiledRule, CompiledDependencyRegexState, and CompiledDescriptorState. DART-BACKEND-PARITY.5.3 expands test/compiled_spec_test.dart to prove staged function descriptor shape through parsed SpecFile.functions, compiled UserFunctionRegistry bodyParseJobs, descriptor functions records, stitched body_ast, function_order metadata, and runtime output. Existing tests also verify ordered rule state, redefinition metadata when validation is deliberately skipped, dependency-regex derivation, lifecycle/action ActionBlock payloads, registry-aware user-call contracts, source validation reuse, and descriptor-shaped JSON projection."
 evidence_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.5.3 migrates CompiledDescriptorState to the rule_local_cursor_v1 outward variant. Root metadata identifies the cursor contract and every rule derives family, cursor policy, aggregate ownership, and exact ordered semantic edge rows from normalized CompiledRule state; direct, normalized SpecFile-JSON, and loaded projections agree."
-reverify: "cd dart && dart test test/compiled_spec_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart compiled-state construction lives in

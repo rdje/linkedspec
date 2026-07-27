@@ -16,7 +16,7 @@ date: 2026-07-13
 status: current
 tags: [dart, runtime, helpers, values, captures, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values. DART-BACKEND-PARITY.4.3.6 closes helper/value no-drift by aligning Dart nested value-path assignment with the Perl/Rust contract. FUTURE-PARITY-BACKLOG.12.1 later replaced the public typed-wrapper snapshot model with uniform bare bindings and hard-rejected exact aggregate selectors."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime core value and capture helper execution lives in

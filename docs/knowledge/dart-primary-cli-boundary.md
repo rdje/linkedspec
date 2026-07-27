@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [dart, cli, utf8, parser, loading, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.3.1 replaces the corpus primary boundary and reaches 29/61; .2 direct results reach 41/61 and .3 canonical trace reaches 61/61."
-reverify: "cd dart && dart analyze --fatal-infos --fatal-warnings && dart test test/primary_cli_test.dart test/user_function_definition_parser_test.dart && cd .. && bash tools/run_dart_local.sh && rg -n '29/29|FUTURE-PARITY-BACKLOG.1.5.3.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test test/primary_cli_test[.]dart test/user_function_definition_parser_test.dart && cd .. && bash tools/run_dart_local.sh && rg -n '29/29|FUTURE-PARITY-BACKLOG.1.5.3.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `dart/bin/linkedspec_dart.dart` now owns only ADR `0023`'s primary parser interface. Its manual parser accepts the

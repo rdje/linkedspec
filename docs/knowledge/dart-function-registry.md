@@ -10,7 +10,7 @@ date: 2026-07-09
 status: current
 tags: [dart, actionir, functions, staged-parsing, registry, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.3.3/.5.1/.5.2 established exact-arity registry/staged/runtime execution. FUTURE-PARITY-BACKLOG.4.3.1 adds typed v2 signatures, minimum-arity resolution, positional-only diagnostics, and fresh rest binding while preserving fixed v1 behavior."
-reverify: "cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/function_registry_test[.]dart test/action_contracts_test[.]dart test/staged_parser_registry_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart's user-function registry lives in

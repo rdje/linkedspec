@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.4.2` — contain processes to discover hidden state before granting
+  exceptions): Environment variables and tracked-text scans can prove intended destinations but cannot show every
+  access performed by a tool before it honors those variables. `fs_usage` and `dtruss` require root on the current
+  macOS host; a `sandbox-exec` profile provides the narrower recurring authority in an ordinary terminal. Deny all
+  writes outside a relocated managed checkout, deny developer-home and OS-temp data reads, then add only the exact
+  caller input. A successful command with a denied diagnostic is still a failed storage proof.
+
+  This exposed two mechanisms that static routing had missed. Dartdev consults
+  `HOME/.dart-tool/dart-flutter-telemetry.config` before several subcommands honor `PUB_CACHE`, so package-cache
+  routing alone cannot claim developer-home independence. A self-rooted wrapper now gives only Dart a repository-
+  local child HOME; maintained bare Dart command surfaces are rejected, while the internal CLI's normal usage label
+  remains inert test data. Separately, Apple's `/usr/bin/cc` is a stateful tool-selection shim: it tried to refresh
+  `xcrun_db-*` beneath per-user OS temp even though native output was local. Calling the active developer `clang`
+  with its SDK explicitly removes that write while preserving necessary read-only toolchain dependencies.
+
+  Relocation and mutation sensitivity make the proof stronger than a single clean run. The oracle starts from an
+  outside-filesystem cwd with hostile values, requires every backend/tool family, writes observable local traces or
+  bytecode, and rejects an external output, shared-cache read, symlink escape, or omitted tool probe. This does not
+  claim that operating-system and external-tool reads disappear; it proves project-data namespaces and all process
+  writes are contained while the frozen system/tool/caller exceptions stay explicit.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.4.1` — storage policy needs sink context, not absolute-path censorship): A
   bare absolute path is insufficient evidence of project storage. It may be an explicit caller input, an inert
   privacy/path fixture, a hostile location used to prove rejection, or a strictly necessary external executable or

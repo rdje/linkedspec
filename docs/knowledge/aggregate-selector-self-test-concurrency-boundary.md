@@ -11,7 +11,7 @@ date: 2026-07-22
 status: current
 tags: [ci, concurrency, aggregate-selectors, untracked-files, dart, scanner]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.2.3.0; tools/check_executable_aggregate_selector_sources.py; tools/check_public_aggregate_selector_surface.py; tools/run_dart_local.sh
-reverify: "bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py; cd dart && dart format --output=none --set-exit-if-changed ."
+reverify: "bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py; cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed ."
 ---
 
 The executable aggregate-selector scanner creates a positive untracked Dart source to prove that its

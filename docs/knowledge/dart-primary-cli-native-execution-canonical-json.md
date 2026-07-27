@@ -11,7 +11,7 @@ date: 2026-07-10
 status: current
 tags: [dart, cli, runtime, json, unicode, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.3.2 composes compiled requests through LinkedSpecRuntimeEngine and historically reaches 41/61; .1.5.3.3 adds canonical trace and reaches 61/61. Rule-local cursor .9.1.5.5 later removes global mode while retaining top-rule selection/direct values and reaches 63/63 twice."
-reverify: "cd dart && dart test test/primary_cli_test.dart && cd .. && perl tools/run_cli_conformance.pl --display-command 'dart run bin/linkedspec_dart.dart' --case success_file_source_file_input_nested_json --case success_explicit_top_rule --case success_input_file_unicode_bom_newlines -- dart --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/primary_cli_test.dart && cd .. && perl tools/run_cli_conformance.pl --display-command 'bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart' --case success_file_source_file_input_nested_json --case success_explicit_top_rule --case success_input_file_unicode_bom_newlines -- bash {{REPO_ROOT}}/tools/run_dart_project_data.sh --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
 ---
 
 After strict source compilation and deferred input loading, the Dart primary adapter constructs

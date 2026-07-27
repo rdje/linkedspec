@@ -13,7 +13,7 @@ date: 2026-07-11
 status: current
 tags: [dart, trace, function-shell, staged-parsing, runtime, FUTURE-PARITY-BACKLOG]
 evidence: "dart/lib/src/parser/user_function_definition_parser.dart; dart/lib/src/parser/user_function_definition_shell.dart; dart/lib/src/parser/staged_parser_registry.dart; dart/test/function_staged_trace_test.dart"
-reverify: "cd dart && dart test test/function_staged_trace_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'dart_(frontend:function|staged):|LinkedSpecTraceEmitter\\? trace' lib/src/parser/{user_function_definition_parser.dart,user_function_definition_shell.dart,staged_parser_registry.dart}"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/function_staged_trace_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'dart_(frontend:function|staged):|LinkedSpecTraceEmitter\\? trace' lib/src/parser/{user_function_definition_parser.dart,user_function_definition_shell.dart,staged_parser_registry.dart}"
 ---
 
 `FUTURE-PARITY-BACKLOG.1.6.5.2` extends the existing optional caller-owned

@@ -931,7 +931,7 @@ def validate_dart_admission(
     )
     backend_text = backend_path.read_text(encoding="utf-8")
     require(
-        '"$DART_CMD" test' in backend_text,
+        '"${DART_RUN[@]}" test' in backend_text,
         "Dart backend driver omits the package containing admission",
     )
 

@@ -46,9 +46,11 @@ double-checked recovery/purge liveness, conservative reuse/indeterminate retenti
 proof. Final residue leaf `.3.2` independently proves both runtime-derived old temporary roots and bounded shared
 Dart/Julia metadata are empty before and after all six storage oracles. It has zero deletion targets, retains the
 verified Perl/Julia copies, and closes migration parent `.3`. Structural `.4.1` registers the read-only `PROJECT-
-DATA-STORAGE` doctrine, scans current tracked storage/command surfaces with 22 rejected/accepted cases, roots the
-remaining Toolbox diagnostic commands, and passes six-doctrine plus 36-boundary routing and six storage oracles.
-Process-level opened-path proof `.4.2` is next.
+DATA-STORAGE` doctrine across current tracked storage/command surfaces. Process `.4.2` extends the boundary to 28
+rejected/accepted cases and 38 routed entrypoints, gives Dart a repository-local child HOME, and kernel-contains a
+relocated checkout running real Perl/Rust/Dart/Julia/Lua/tool probes from an outside-filesystem cwd. Mutations reject
+external writes, shared-cache reads, symlink escapes, incomplete probes, denied-access diagnostics, and Apple
+`xcrun_db-` writes. Parent `.4` is complete; final closeout `.5` is next.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

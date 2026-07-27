@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, regex, match-state, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.1 adds dart/lib/src/runtime/matching.dart and exports RuntimeRegexAlternation, RuntimeRegexMatch, RuntimeMatchRegisters, LinkedSpecParseMode, and offset helpers. test/runtime_matching_test.dart verifies seek/consume behavior, compiled-rule regex-list input, stable alternative identity, captures, named captures, char-offset projection over code-unit spans, entry/local separation, cursor state, and zero-progress detection."
-reverify: "cd dart && dart test test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_matching_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime matching lives in `dart/lib/src/runtime/matching.dart`.

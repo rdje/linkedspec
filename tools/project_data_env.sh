@@ -159,6 +159,8 @@ _linkedspec_storage_select_dir TEMP "$TMPDIR" || return 1
 _linkedspec_storage_select_dir CARGO_HOME "$LINKEDSPEC_CACHE_ROOT/cargo-home" || return 1
 _linkedspec_storage_select_dir CARGO_TARGET_DIR "$_linkedspec_storage_repo_root/rust/target" || return 1
 _linkedspec_storage_select_dir PUB_CACHE "$LINKEDSPEC_CACHE_ROOT/dart-pub" || return 1
+_linkedspec_storage_select_dir LINKEDSPEC_DART_HOME \
+ "$LINKEDSPEC_CACHE_ROOT/dart-home" || return 1
 _linkedspec_storage_select_julia_depots "$LINKEDSPEC_CACHE_ROOT/julia-depot" || return 1
 _linkedspec_storage_select_dir PYTHONPYCACHEPREFIX \
  "$LINKEDSPEC_CACHE_ROOT/python-pycache" || return 1

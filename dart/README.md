@@ -25,19 +25,19 @@ now passes too.
 Run from this directory:
 
 ```sh
-dart pub get
-dart format --set-exit-if-changed .
-dart analyze --fatal-infos --fatal-warnings
-dart test
-dart run bin/linkedspec_dart.dart --help
-dart run bin/linkedspec_dart.dart --spec Lispish --input '(hello world)'
-dart run bin/corpus_runner.dart --help
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+bash ../tools/run_dart_project_data.sh pub get
+bash ../tools/run_dart_project_data.sh format --set-exit-if-changed .
+bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings
+bash ../tools/run_dart_project_data.sh test
+bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --help
+bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --spec Lispish --input '(hello world)'
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --help
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 bash ../tools/run_dart_local.sh
 ```
 
@@ -50,7 +50,7 @@ scanner that keeps supplementary UTF-16 pairs intact. Regenerate and check it fr
 ```sh
 python3 unicode_case/generate_unicode_rule_label_contract.py
 bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
-cd dart && dart test test/unicode_rule_label_classifier_test.dart
+cd dart && bash ../tools/run_dart_project_data.sh test test/unicode_rule_label_classifier_test.dart
 ```
 
 The artifact is the single native rule-label authority. Leaf `.10.5.0.2.1` routes headers plus action, blind, and

@@ -7,6 +7,7 @@ source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
@@ -50,7 +51,7 @@ log "checking Rust native and generated consumers"
 log "checking Dart native and generated consumers"
 (
  cd dart
- "$DART_CMD" test test/diagnostic_output_contract_test.dart
+ "${DART_RUN[@]}" test test/diagnostic_output_contract_test.dart
 )
 
 log "checking Julia native and generated consumers"

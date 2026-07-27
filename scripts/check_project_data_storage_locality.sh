@@ -18,18 +18,18 @@ my $current_root = $ENV{PROJECT_DATA_POLICY_ROOT}
     // die "project-data-storage-locality: repository root is unavailable\n";
 
 sub governed_line {
-    my ($path, $line) = @_;
+    my ($path, $line, $knowledge_reverify_item) = @_;
 
     return 1 if $path eq 'README.md' || $path eq 'TOOLBOX.md';
     return 1 if $path =~ m{^docs/linkedspec-book/src/.*[.]md$};
-    return $line =~ /^reverify:/ if $path =~ m{^docs/knowledge/.*[.]md$};
+    return $line =~ /^reverify:/ || $knowledge_reverify_item if $path =~ m{^docs/knowledge/.*[.]md$};
     return 1 if $path =~ m{^(?:[.]githooks|bin|cli_conformance|conf|dart|julia|knowledge-map|lua|perl|rust|scripts|specs|t|tools)/};
     return 0;
 }
 
 sub classify_violation {
-    my ($path, $line) = @_;
-    return unless governed_line($path, $line);
+    my ($path, $line, $knowledge_reverify_item) = @_;
+    return unless governed_line($path, $line, $knowledge_reverify_item);
 
     # These declarations are the checker's mutation-sensitive fixture corpus;
     # expect_rejected/expect_accepted pass their reconstructed values back
@@ -59,6 +59,13 @@ sub classify_violation {
         (?:tmp|temp|cache|depot|target|build|output|artifact|workspace|log|trace|tap|socket)
         (?:_[A-Za-z0-9]+)*
     }ix;
+
+    # This one tracked oracle deliberately injects hostile inherited roots into
+    # a kernel-contained child. No other current surface receives this exception.
+    return
+        if $path eq 'tools/test_project_data_process_locality.sh'
+            && $line =~ /^\s*(?:CARGO_HOME|PUB_CACHE|LINKEDSPEC_JULIA_DEPOT_PATH)=/
+            && $line =~ /\$(?:home_root|hostile_path)/;
 
     return 'off-repository storage environment assignment'
         if $line =~ /\b$storage_variable\s*=\s*[^#\n]*$unsafe/;
@@ -91,6 +98,19 @@ sub classify_violation {
     return 'off-repository active config destination'
         if $line =~ /^\s*(?!#)(?=[^#\n]*(?:cache[-_.]?dir|temp[-_.]?dir|socket|log[-_.]?file|trace[-_.]?file|output[-_.]?dir))[^#\n]*$unsafe/i;
 
+    my $dart_command_surface = $path =~ /[.]sh$/
+        || $path eq 'dart/README.md'
+        || $path eq 'README.md'
+        || $path eq 'TOOLBOX.md'
+        || $path =~ m{^docs/linkedspec-book/src/.*[.]md$}
+        || $path =~ m{^docs/knowledge/.*[.]md$};
+    return
+        if $dart_command_surface
+            && $line =~ /^\s*DART_DISPLAY_COMMAND=(?:'dart[ ]run bin\/linkedspec_dart[.]dart'|"dart[ ]run bin\/linkedspec_dart[.]dart")\s*;?\s*$/;
+    return 'bare Dart command bypasses repository-local Dart home'
+        if $dart_command_surface
+            && $line =~ /(?<![A-Za-z0-9_.\x5d])dart\s+(?:pub|format|analyze|test|run)\b/;
+
     if ($line =~ /\$\{($storage_variable):-([^}]*)\}/) {
         my $fallback = $2;
         return if $fallback eq '';
@@ -102,14 +122,14 @@ sub classify_violation {
 }
 
 sub expect_rejected {
-    my ($name, $path, $line) = @_;
-    return if defined classify_violation($path, $line);
+    my ($name, $path, $line, $knowledge_reverify_item) = @_;
+    return if defined classify_violation($path, $line, $knowledge_reverify_item);
     die "project-data-storage-locality: self-test failed to reject $name\n";
 }
 
 sub expect_accepted {
-    my ($name, $path, $line) = @_;
-    my $reason = classify_violation($path, $line);
+    my ($name, $path, $line, $knowledge_reverify_item) = @_;
+    my $reason = classify_violation($path, $line, $knowledge_reverify_item);
     return unless defined $reason;
     die "project-data-storage-locality: self-test rejected legal $name as $reason\n";
 }
@@ -126,6 +146,8 @@ expect_rejected('absolute Windows build destination', 'tools/example.ps1', 'buil
 expect_rejected('persisted current checkout', 'tools/example.sh', 'CARGO_HOME="' . $current_root . '/cache"');
 expect_rejected('temporary allocator template', 'tools/example.sh', 'mktemp -d ' . $slash . 'tmp/example.XXXXXX');
 expect_rejected('active cache config', 'conf/example.conf', 'cache-dir = "' . $slash . 'tmp/cache"');
+expect_rejected('bare Dart command', 'dart/README.md', 'dart test');
+expect_rejected('bare Dart list reverify', 'docs/knowledge/example.md', '  - "dart test test/example.dart"', 1);
 
 expect_accepted('repository-derived temp', 'tools/example.sh', 'TMPDIR="$LINKEDSPEC_SCRATCH_ROOT/tmp"');
 expect_accepted('repository-derived Cargo fallback', 'tools/example.sh', 'CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$REPO_ROOT/rust/target}"');
@@ -135,9 +157,13 @@ expect_accepted('inert logical path', 't/example.t', 'logical_name = "' . $slash
 expect_accepted('external executable', 'TOOLBOX.md', $slash . 'opt/homebrew/bin/julia --version');
 expect_accepted('system library', 'README.md', $slash . 'usr/lib/libpcre2.dylib');
 expect_accepted('hostile-root read', 'tools/test_example.sh', 'for candidate in ' . $slash . 'private/tmp ' . $slash . 'tmp "$HOME"');
+expect_accepted('contained hostile cache injection', 'tools/test_project_data_process_locality.sh', 'CARGO_HOME="$home_root' . $slash . '.cargo"');
 expect_accepted('commented legacy config', 'conf/example.conf', '# cache-dir = "' . $slash . 'tmp/cache"');
 expect_accepted('historical fact evidence', 'docs/knowledge/example.md', 'evidence: "old cache was ' . $slash . 'tmp/cache"');
 expect_accepted('caller Windows path', 'README.md', 'linkedspec C:/Demo/input.spec');
+expect_accepted('routed Dart command', 'dart/README.md', 'bash ../tools/run_dart_project_data.sh test');
+expect_accepted('routed Dart list reverify', 'docs/knowledge/example.md', '  - "bash ../tools/run_dart_project_data.sh test test/example.dart"', 1);
+expect_accepted('inert Dart usage label', 'tools/example.sh', "DART_DISPLAY_COMMAND='dart run bin/linkedspec_dart.dart'");
 
 my @violations;
 my %governed_files;
@@ -153,12 +179,23 @@ for my $path (@ARGV) {
     next if !defined($content) || index($content, "\0") >= 0;
 
     my $line_number = 0;
+    my $knowledge_reverify_list = 0;
     for my $line (split /\n/, $content, -1) {
         ++$line_number;
-        next unless governed_line($path, $line);
+        my $knowledge_reverify_item = 0;
+        if ($path =~ m{^docs/knowledge/.*[.]md$}) {
+            if ($line =~ /^reverify:\s*$/) {
+                $knowledge_reverify_list = 1;
+            } elsif ($knowledge_reverify_list && $line =~ /^\s{2}-\s+/) {
+                $knowledge_reverify_item = 1;
+            } elsif ($knowledge_reverify_list) {
+                $knowledge_reverify_list = 0;
+            }
+        }
+        next unless governed_line($path, $line, $knowledge_reverify_item);
         $governed_files{$path} = 1;
         ++$governed_lines;
-        my $reason = classify_violation($path, $line);
+        my $reason = classify_violation($path, $line, $knowledge_reverify_item);
         push @violations, "$path:$line_number: $reason: $line" if defined $reason;
     }
 }
@@ -170,6 +207,6 @@ if (@violations) {
     exit 1;
 }
 
-printf "project-data-storage-locality: OK (%d governed files; %d lines; 22 classifier cases)\n",
+printf "project-data-storage-locality: OK (%d governed files; %d lines; 28 classifier cases)\n",
     scalar(keys %governed_files), $governed_lines;
 PERL

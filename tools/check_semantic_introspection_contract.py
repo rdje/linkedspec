@@ -177,7 +177,7 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission",
     "Its 12 exact-once roles compose all 20 digests",
-    "dart test test/semantic_introspection_dart_admission_test.dart",
+    "bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart",
     "Its 12 exact-once roles compose every Dart semantic route",
     "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl",
     "Its 12 exact-once roles compose every Julia semantic route",
@@ -1036,7 +1036,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         marker = re.compile(rf"^Future<void> role_{re.escape(role)}\(", re.MULTILINE)
         require(len(marker.findall(dart_consumer_text)) == 1, f"Dart semantic admission role marker drifted: {role}")
     require(f"require_tracked_file {dart_consumer['path']}" in ci_text, "canonical CI does not require the Dart semantic admission consumer")
-    dart_command = "dart test test/semantic_introspection_dart_admission_test.dart"
+    dart_command = "bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart"
     require(dart_command in ci_text, "canonical CI does not run the Dart semantic admission consumer")
 
     julia_consumer = contract["target_admissions"][3]["consumer"]

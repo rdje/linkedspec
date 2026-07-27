@@ -12,7 +12,7 @@ date: 2026-07-18
 status: current; Perl, Rust, Dart, Julia, and Lua use cursor v1
 tags: [descriptor, public-api, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.2.3 adds capability_conformance/outward_descriptor_contract.json and focused consumers. All variants expose the same four top-level keys, model/order/count identities, and exact function record. FUTURE-PARITY-BACKLOG.9.1.3.3 adds explicit metadata variants; .9.1.4.4 migrates Rust, .9.1.5.3 migrates Dart, .9.1.6.3 migrates Julia, and .9.1.7.3 migrates Lua on both ABIs to rule_local_cursor_v1 with cursor_contract and no parse_mode."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && dart test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t"
 ---
 
 # Outward Compiled Descriptor Four-Backend Contract

@@ -13,7 +13,7 @@ date: 2026-07-11
 status: current
 tags: [regex, lookbehind, spec.spec, dart, lua, PCRE2, ECMAScript, portability]
 evidence: "specs/spec.spec line 109 uses the one-character fixed-width negative lookbehind (?<!\\). LUA-BACKEND-PARITY.4.3.1 adds positive and negative lookbehind assertions to the shared native matcher test, which tools/run_lua_local.sh runs through separately compiled PUC Lua and LuaJIT PCRE2 modules. The installed Dart VM executes the real manifest case with `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case spec_spec_minimal_rule`: 1 passed, 0 failed. Dart's official RegExp API states Dart regex syntax/semantics follow ECMAScript. Rust imports rgx_core::Regex in parser/validation/runtime; RUST-FUNCTIONAL-PARITY records RGX as the adopted active engine with PCRE2-level features. Director clarification 2026-07-11 characterizes RGX as approximately 98% PCRE2 compatible."
-reverify: "bash tools/run_lua_local.sh && (cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case spec_spec_minimal_rule)"
+reverify: "bash tools/run_lua_local.sh && (cd dart && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case spec_spec_minimal_rule)"
 ---
 
 ## Fact

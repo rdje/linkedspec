@@ -15,7 +15,7 @@ date: 2026-07-10
 status: current
 tags: [dart, capture, marks, blind-call, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 plus FUTURE-PARITY-BACKLOG.17.2; exact governed, implicit-result, rule-local-mark, multibyte-projection, and complete seven-helper locks in dart/test/runtime_interpreter_test.dart and dart/test/complete_named_mark_contract_test.dart; tools/run_dart_local.sh passes formatting, fatal analysis, 214 tests, 61x2 CLI, and 105/105 corpus."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart -n 'capture fixture exactly|implicit AND blind-call|named marks rule-local|multibyte mark positions' test/complete_named_mark_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart -n 'capture fixture exactly|implicit AND blind-call|named marks rule-local|multibyte mark positions' test/complete_named_mark_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 # Dart Governed Capture / Mark Parity

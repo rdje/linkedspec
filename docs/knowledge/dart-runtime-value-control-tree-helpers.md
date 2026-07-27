@@ -19,7 +19,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, helpers, controls, tree-traversal, callbacks, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.5 extends dart/lib/src/action/action_parser.dart, dart/lib/src/runtime/interpreter.dart, test/action_ast_parser_test.dart, and test/runtime_interpreter_test.dart. Focused tests prove branch-continuation statement splitting, expression-valued blocks, block-local return, attached and inline controls, helper/receiver with trailing blocks, hash and array tree traversal callbacks, non-aggregate receiver behavior, and scoped binding restoration. DART-BACKEND-PARITY.6.2.2 adds grouped marker-form if/elseif/else/endif execution in action and value blocks."
-reverify: "cd dart && dart test test/action_ast_parser_test.dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/action_ast_parser_test.dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime helper/control execution lives in

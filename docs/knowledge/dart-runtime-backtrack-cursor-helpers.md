@@ -13,7 +13,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, cursor, helpers, BACKTRACK-SURFACE-RUST-ALIGNMENT, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.4 first landed Dart cursor/input helper execution. BACKTRACK-SURFACE-RUST-ALIGNMENT.1 replaces the ambiguous public backtrack surface with explicit cursor controls in dart/lib/src/action/action_contracts.dart, dart/lib/src/runtime/interpreter.dart, and test/runtime_interpreter_test.dart. Focused tests prove save_cursor()/restore_cursor() stack semantics, rewind_match_start()/rewind_entry_start() anchor rewinds, consume mode from a rewound cursor, and char-based cursor/input helper values. Old BACKTRACK/IBACKTRACK and lowercase backtrack(label)/ibacktrack(label) are not current API."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test[.]dart test/runtime_matching_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime cursor-control and cursor/input helper execution lives in

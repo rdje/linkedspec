@@ -15,7 +15,7 @@ date: 2026-07-13
 status: current
 tags: [dart, runtime, helpers, hash, receiver-chains, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.4 extends dart/lib/src/runtime/interpreter.dart, test/runtime_interpreter_test.dart, and test/action_contracts_test.dart. Focused tests prove hash receiver chains, key/value views, sorted key/value arrays, key predicates, merge/drop/pick/rename/set helpers, direct hash-index assignment values, statement/value set_key boundaries, bare base/overlay merge behavior, flat_hash, and explicit flat-style hash splicing inside hash(...). FUTURE-PARITY-BACKLOG.12.1 later made bare typed bindings canonical and rejected exact aggregate selectors."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case terse_2_3_4_deep_pure_helper_composition"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh test test/action_contracts_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case terse_2_3_4_deep_pure_helper_composition"
 ---
 
 Dart runtime hash helper execution lives in

@@ -13,7 +13,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.3 adds array pipelines and originally locks statement-only end mutations. Later FUTURE-PARITY-BACKLOG.12.1.4 supersedes that result boundary under linkedspec-uniform-binding-v1: array-end mutations return independent updated arrays and may feed receiver continuations. Current focused uniform-binding tests cover the adopted behavior."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh test test/action_contracts_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime array helper execution lives in

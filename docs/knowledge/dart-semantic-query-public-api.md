@@ -13,7 +13,7 @@ date: 2026-07-22
 status: current exact public typed/raw-neutral static and observed-query API; Dart is admitted
 tags: [dart, semantic-introspection, query, capabilities, validation, immutability, privacy]
 evidence: dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_query.dart; dart/lib/linkedspec_dart.dart; dart/test/semantic_index_query_kernel_test.dart; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.3
-reverify: "cd dart && dart test test/semantic_index_query_kernel_test.dart test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_index_query_kernel_test[.]dart test/semantic_index_source_foundation_test[.]dart test/semantic_index_compilation_foundation_test[.]dart test/semantic_index_static_graph_test[.]dart test/semantic_index_call_projection_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 # Dart Semantic Query Public API

@@ -7,6 +7,7 @@ source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_repeated_action_result_five_backend.sh" "$@"
 CARGO_CMD=${LINKEDSPEC_CARGO_CMD:-cargo}
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
@@ -55,7 +56,7 @@ log "checking the Rust exact 15-role admission consumer"
 log "checking the Dart exact 15-role admission consumer"
 (
  cd dart
- "$DART_CMD" test test/repeated_action_result_contract_test.dart
+ "${DART_RUN[@]}" test test/repeated_action_result_contract_test.dart
 )
 
 log "checking the Julia exact 15-role admission consumer"

@@ -7,18 +7,18 @@ answers:
   - how does Dart run the corpus from the CLI
   - what did DART-BACKEND-PARITY.7.4 implement
   - does corpus_runner still exist after the Dart CLI
-date: 2026-07-09
+date: 2026-07-27
 status: current
 tags: [dart, cli, corpus, runtime, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.7.4 created the historical corpus-oriented primary command; FUTURE-PARITY-BACKLOG.1.5.3.1 replaces that boundary with the shared parser interface and leaves dart/bin/corpus_runner.dart as the separate corpus owner."
-reverify: "cd dart && dart run bin/linkedspec_dart.dart --help && dart run bin/corpus_runner.dart --help && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 && cd .. && bash tools/run_dart_local.sh"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --help && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --help && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 && cd .. && bash tools/run_dart_local.sh"
 ---
 
 The Dart primary backend CLI is:
 
 ```sh
 cd dart
-dart run bin/linkedspec_dart.dart --help
+bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --help
 ```
 
 It exposes the exact shared parser-oriented options and rejects corpus subcommands.
@@ -37,4 +37,4 @@ The earlier `DART-BACKEND-PARITY.7.4` corpus-primary arrangement is historical;
 Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]],
 [[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-mechanism-audit]],
 [[dart-primary-cli-boundary]], [[dart-primary-cli-native-execution-canonical-json]],
-[[dart-canonical-primary-cli-trace]], [[dart-primary-cli-closeout]].
+[[dart-canonical-primary-cli-trace]], [[dart-primary-cli-closeout]], [[project-data-process-locality-proof]].

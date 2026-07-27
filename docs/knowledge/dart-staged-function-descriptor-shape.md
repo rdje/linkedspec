@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, descriptor, staged-parsing, user-functions, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.5.3 establishes staged descriptor preservation. FUTURE-PARITY-BACKLOG.4.3.1 adds the exact fixed-v1/variadic-v2 record union and proves typed signatures through descriptor, normalized emitted state, generated-plan execution, and reconstruction."
-reverify: "cd dart && dart test test/compiled_spec_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart's staged function descriptor-shape proof lives in

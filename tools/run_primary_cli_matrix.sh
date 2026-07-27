@@ -8,6 +8,8 @@ linkedspec_project_data_enter_run "$REPO_ROOT/tools/run_primary_cli_matrix.sh" "
 
 CARGO_CMD="${LINKEDSPEC_CARGO_CMD:-cargo}"
 DART_CMD="${LINKEDSPEC_DART_CMD:-dart}"
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
+DART_DISPLAY_COMMAND='dart run bin/linkedspec_dart.dart'
 JULIA_CMD="${LINKEDSPEC_JULIA_CMD:-julia}"
 LUA_CMD="${LINKEDSPEC_LUA_CMD:-lua}"
 JULIA_DEPOT="${LINKEDSPEC_JULIA_DEPOT_PATH:?project-data initializer did not set the Julia depot}"
@@ -78,13 +80,13 @@ if [[ ! -f "$DART_PACKAGE_CONFIG" ]]; then
  log "resolving Dart packages"
  (
   cd "$REPO_ROOT/dart"
-  "$DART_CMD" pub get
+  "${DART_RUN[@]}" pub get
  )
 fi
 [[ -f "$DART_PACKAGE_CONFIG" ]] || fail "Dart package configuration was not created"
 
 log "warming Dart primary command"
-"$DART_CMD" --packages="$DART_PACKAGE_CONFIG" \
+"${DART_RUN[@]}" --packages="$DART_PACKAGE_CONFIG" \
  "$REPO_ROOT/dart/bin/linkedspec_dart.dart" --help >/dev/null
 
 log "warming Julia project in $JULIA_DEPOT_PATH"
@@ -111,8 +113,9 @@ run_contract() {
 run_contract Perl 'perl bin/linkedspec' \
  perl -I'{{REPO_ROOT}}/perl' '{{REPO_ROOT}}/bin/linkedspec'
 run_contract Rust linkedspec-rust "$RUST_COMMAND"
-run_contract Dart 'dart run bin/linkedspec_dart.dart' \
- "$DART_CMD" --packages='{{REPO_ROOT}}/dart/.dart_tool/package_config.json' \
+run_contract Dart "$DART_DISPLAY_COMMAND" \
+ bash '{{REPO_ROOT}}/tools/run_dart_project_data.sh' \
+ --packages='{{REPO_ROOT}}/dart/.dart_tool/package_config.json' \
  '{{REPO_ROOT}}/dart/bin/linkedspec_dart.dart'
 run_contract Julia linkedspec_julia \
  "$JULIA_CMD" --project='{{REPO_ROOT}}/julia' --startup-file=no --history-file=no \

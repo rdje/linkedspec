@@ -12,10 +12,12 @@ answers:
   - were old Lua temporary workspaces deleted
   - does LinkedSpec need cross volume Lua toolchain reads
   - how are spaces in Lua temporary paths tested
-date: 2026-07-26
+  - why does the macOS Lua native builder invoke clang directly
+  - does the Apple cc shim write xcrun metadata outside the repository
+date: 2026-07-27
 status: current
 tags: [lua, native, storage, filesystem, ssd, temporary-data, generated-source, trace, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.5 adds tools/run_lua_project_data.sh and tools/test_lua_project_data_storage.sh, makes tools/build_lua_native.sh self-rooted and same-filesystem guarded, and routes all 13 tracked Lua-family allocation owners through managed TMPDIR. The oracle builds the two native modules for PUC Lua and LuaJIT in a path containing a space, checks actual filesystem devices and non-symlink module identity, runs native parsing, writes generated v2 source and trace output, rejects an other-filesystem builder destination before creation, and cleans its owned state. The exact initial and final old-root linkedspec-lua-* censuses are zero."
+evidence: "PROJECT-DATA-SSD-ROOTING.2.5 adds tools/run_lua_project_data.sh and tools/test_lua_project_data_storage.sh, makes tools/build_lua_native.sh self-rooted and same-filesystem guarded, and routes all 13 tracked Lua-family allocation owners through managed TMPDIR. The oracle builds the two native modules for PUC Lua and LuaJIT in a path containing a space, checks actual filesystem devices and non-symlink module identity, runs native parsing, writes generated v2 source and trace output, rejects an other-filesystem builder destination before creation, and cleans its owned state. The exact initial and final old-root linkedspec-lua-* censuses are zero. Process proof .4.2 caught the Apple /usr/bin/cc shim attempting an xcrun_db temporary write; the Darwin default now invokes the active developer clang with the active macOS SDK explicitly, and the final contained build has no denied or xcrun_db diagnostic."
 reverify: "bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh"
 ---
 
@@ -49,6 +51,13 @@ library, and operating-system libraries remain strictly necessary read-only tool
 storage. One composite Knowledge Map command that still allocates Python/Rust scratch is deliberately owned by
 `PROJECT-DATA-SSD-ROOTING.2.6`, not by the Lua allocator leaf.
 
+On macOS, `/usr/bin/cc` is a stateful Apple tool-selection shim rather than the final compiler. The process oracle
+observed it attempting to refresh `xcrun_db-*` beneath the per-user operating-system temporary root even though the
+native output itself was correctly routed. When the caller keeps the default `cc`, `tools/build_lua_native.sh` now
+uses `xcode-select -p` to locate the active developer tree, invokes its real `clang`, and supplies the active SDK by
+`-isysroot`. An explicit `LINKEDSPEC_CC_CMD` remains caller-owned. This removes the hidden external write while
+retaining necessary read-only compiler, SDK, header, library, and `pkg-config` access.
+
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-workflow-routing]],
 [[repository-root-path-portability]], [[lua-toolchain-package-policy]], [[lua-local-verification-gate]],
-[[lua-generated-source-fresh-process-isolation]].
+[[lua-generated-source-fresh-process-isolation]], [[project-data-process-locality-proof]].

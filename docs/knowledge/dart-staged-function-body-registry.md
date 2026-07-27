@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, staged-parsing, parser-registry, parse-jobs, user-functions, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.5.1 adds dart/lib/src/parser/staged_parser_registry.dart, exports the staged registry APIs from dart/lib/linkedspec_dart.dart, and adds test/staged_parser_registry_test.dart. Focused tests cover stable queue order, deterministic actionir-body.spec resolution, cache-key/compiled-parser record shape, body_ast stitching, wrapper parsing with staged function bodies, unsupported parser diagnostics, and stitching contract drift."
-reverify: "cd dart && dart test test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/staged_parser_registry_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart's minimal staged parser registry lives in

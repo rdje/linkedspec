@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, ast, parser, json, staged-parsing]
 evidence: "DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and dart/test/spec_ast_test.dart; the tests round-trip SpecFile, FunctionDefinition, SourceSpan, StagedParseJob, RuleMode, body elements, edges, and fluent calls through JSON. DART-BACKEND-PARITY.2.2 adds parseSpec(...) as the first producer of these rule AST types. DART-BACKEND-PARITY.2.4 extends StagedParseJob to preserve function-body sidecar metadata from specs/user_function_definition.spec."
-reverify: "cd dart && dart test test/spec_ast_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/spec_ast_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart source-level AST/data types live in `dart/lib/src/ast/spec_ast.dart`.

@@ -227,7 +227,7 @@ the admitted backend consumers with:
 bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
-(cd dart && dart test test/repeated_action_result_contract_test.dart)
+(cd dart && bash ../tools/run_dart_project_data.sh test test/repeated_action_result_contract_test.dart)
 julia --project=julia --compiled-modules=no julia/test/repeated_action_result_contract_test.jl
 bash tools/run_lua_local.sh
 bash tools/check_repeated_action_result_five_backend.sh
@@ -714,7 +714,7 @@ source tools/project_data_env.sh
 
 It derives the physical checkout from its own file, creates the ignored repository-relative
 `/.linkedspec-data/scratch/` and `/.linkedspec-data/cache/` roots, and exports all standard temporary variables,
-Cargo home/target, Dart package cache, and Julia depot variables. Reusable dependencies remain beneath `cache/`;
+Cargo home/target, Dart package cache/home, and Julia depot variables. Reusable dependencies remain beneath `cache/`;
 managed runs live beneath `scratch/runs/`.
 
 Caller overrides are not trusted by spelling. The helper resolves their existing or nearest existing directory,
@@ -883,6 +883,18 @@ Dart migration `.2.3` adds a focused process oracle:
 ```bash
 bash tools/test_dart_project_data_storage.sh
 ```
+
+Targeted Dart commands use the same storage boundary:
+
+```bash
+(cd dart && bash ../tools/run_dart_project_data.sh test)
+```
+
+`PUB_CACHE` controls hosted packages but not every Dartdev read. Process containment later showed Dartdev consulting
+`HOME/.dart-tool/dart-flutter-telemetry.config` before several subcommands honored the package cache. The targeted
+wrapper therefore gives only the Dart child a repository-local HOME at
+`/.linkedspec-data/cache/dart-home/`; all maintained Dart package/format/analyze/test/run surfaces use it. The
+public CLI still reports its established native Dart invocation syntax.
 
 The oracle self-roots and enters managed repository storage. It proves the active run, `TMPDIR`, and `PUB_CACHE`
 share the repository device; locks the exact 18 tracked `Directory.systemTemp` owners; requires all 47 hosted
@@ -1061,10 +1073,42 @@ The checker reads tracked current code, configuration, tests, tools, root guidan
 executable `reverify:` line of each Knowledge fact. It rejects concrete operating-system-temporary, developer-home,
 unrooted cache/depot/build/output, and unsupported external storage defaults. Explicit caller inputs, inert path or
 privacy fixtures, necessary external executables and libraries, and external roots read only by rejection tests
-remain legal. Twenty-two embedded reject/accept cases run with every check. The doctrine is one registry entry, so
-the existing pre-commit and local-CI driver enforce it automatically; hostile outside-cwd routing now covers 36
+remain legal. Twenty-eight embedded reject/accept cases run with every check, including bare maintained Dart-command
+rejection, scalar/list-form Knowledge reverification commands, the exact inert CLI usage label, and the process
+oracle's narrowly scoped contained hostile-cache injection. The doctrine is one registry entry, so the existing pre-commit and
+local-CI driver enforce it automatically; hostile outside-cwd routing now covers 38
 entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
 directory instead of an operating-system temporary path.
+
+### Relocated process containment
+
+Structural proof is composed with a real process-level oracle:
+
+```bash
+bash tools/test_project_data_process_locality.sh
+```
+
+On macOS the oracle uses `sandbox-exec`, selected because `fs_usage` and `dtruss` require root on the current host.
+It archives a collision-safe checkout view below managed repository scratch, clone-copies the retained Dart/Julia
+caches and built Rust primary, and starts from the runtime-derived system temporary root on another filesystem with
+hostile temp, Cargo, Dart, Julia, and Python cache variables. The kernel profile denies writes outside the relocated
+checkout except `/dev/null`, denies developer-home and both OS-temporary data reads, and admits one exact read-only
+caller input.
+
+The driver requires the exact `caller-input dart julia lua perl rust tool` probe set. Each primary backend writes a
+nonempty trace beneath the relocated root, and the Python checker creates bytecode beneath the routed cache. Kept
+mutation checks reject an old-volume write, a shared Cargo-cache read, a symlink escape, and an omitted tool probe;
+any denied-access or `xcrun_db-` diagnostic fails the successful driver. The initial run exposed both Dart's hidden
+HOME telemetry read and Apple's `/usr/bin/cc` shim attempting a per-user-temp `xcrun_db-*` refresh. The Dart wrapper
+above removes the first. On macOS `tools/build_lua_native.sh` removes the second by invoking the active developer
+tree's real `clang` with the active SDK instead of the stateful shim; required compiler, SDK, header, library, and
+interpreter reads remain the frozen read-only external dependency class.
+
+Final enforcement signoff passes all six family storage oracles, eight affected parity drivers, the 28-case
+structural doctrine, 38 routed boundaries, Knowledge Map 721 facts / 5,713 question keys, mdBook, memory, all six
+doctrines, and zero managed runs. The complete canonical gate passes Rust semantic admission 1/1 in 78.09 seconds,
+Dart 1/1, Julia 416/416 in 27.2 seconds, both 66-case primary environments, the nested relocated containment
+proof, and Phase 0 1,031/1,031 in 620 seconds.
 
 ## CI input areas
 
@@ -1089,7 +1133,7 @@ That rule is deliberate. A local untracked file in `specs/`, `perl/`, or a corpu
 The aggregate-selector source scanner also creates one positive untracked `.dart` probe to prove that its git
 inventory cannot miss a new file. That probe is a serialized transaction: an advisory lock covers creation,
 discovery, rejection, cleanup, and the final repository scan. It lives at repository root, so the scanner sees it
-but `dart format .` does not enumerate a disappearing package test. The public admission check runs three
+but the routed Dart formatter does not enumerate a disappearing package test. The public admission check runs three
 staggered scanner processes and requires all to pass with no leftover root or legacy `dart/test` probes.
 
 ## Why the regression discipline is important

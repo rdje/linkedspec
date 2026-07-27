@@ -13,7 +13,7 @@ date: 2026-07-11
 status: current
 tags: [dart, resolution, files, utf8, diagnostics, native-api, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.3 exports the Dart spec loader with typed requests/options/results/exceptions, consumes all 14 name + 9 resolution + 4 text cases in test/spec_loader_test.dart, composes full staged parse/validate/compile and execution, delegates primary CLI named/file selection, and passes format/analyze, 165 tests, 61x2 CLI, and 105 corpus fixtures."
-reverify: "perl tools/check_native_spec_resolution_contract.pl && (cd dart && dart test test/spec_loader_test.dart) && bash tools/run_dart_local.sh"
+reverify: "perl tools/check_native_spec_resolution_contract.pl && (cd dart && bash ../tools/run_dart_project_data.sh test test/spec_loader_test.dart) && bash tools/run_dart_local.sh"
 ---
 
 `package:linkedspec_dart/linkedspec_dart.dart` exports Dart's public file-oriented API. `SpecRequest.named(...)`

@@ -8,14 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.4.2` — add process-level opened-path proof that representative hostile, outside-cwd,
-  and relocated workflows keep project-owned IO on the repository filesystem and admit only frozen necessary reads.
-  `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
+- `PROJECT-DATA-SSD-ROOTING.5` — after the clean `.4.2` commit, freeze the final closeout acceptance matrix and
+  prove implementation, existing-data residue, structural/process enforcement, documentation, and roadmap
+  agreement. `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind this storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **PROJECT-DATA-SSD-ROOTING.4.2 — prove SSD-local project writes**
+  (relocated six-family kernel containment, targeted Dart HOME, direct macOS clang, 28 structural cases,
+  38 routed boundaries, complete canonical signoff).
+
+  **Result:** Added a recurring macOS process oracle that clone-copies a collision-safe checkout beneath managed
+  SSD scratch, starts from an outside-filesystem cwd with hostile temp/cache variables, and denies every write
+  outside the relocated root plus developer-home and OS-temp data reads except one exact caller input. Real Perl,
+  Rust, Dart, Julia, Lua, and Python-tool probes write local traces/bytecode. External output, shared Cargo-cache
+  read, symlink escape, omitted probe family, denied access, or an `xcrun_db-` diagnostic fails deterministically.
+  The first contained run exposed Dartdev's hidden telemetry read and Apple's `cc` shim write; a targeted Dart
+  wrapper supplies repository-local HOME, and the macOS Lua builder invokes active clang plus SDK directly.
+
+  **Proof:** The process oracle, 28-case structural checker, 38 routed boundaries, all six storage oracles, and
+  eight affected multi-backend parity drivers pass. Knowledge Map 721/5,713, mdBook, six doctrines, 60-line
+  memory, whitespace, and zero managed runs pass. Canonical passes Rust semantic admission 1/1 in 78.09 seconds,
+  Dart 1/1, Julia 416/416 in 27.2 seconds, primary 66/66 twice, nested containment, and Phase 0 1,031/1,031 in
+  620 seconds. Enforcement parent `.4` closes; `.5` is next; cadence advances to 37/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.4.1 — gate project storage locality**
   (current-command structural scan, 22 classifier cases, six-doctrine registry, 36-boundary routing).
 

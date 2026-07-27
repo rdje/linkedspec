@@ -13,7 +13,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, interpreter, dispatch, lifecycle, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.2 adds dart/lib/src/runtime/interpreter.dart and exports LinkedSpecRuntimeEngine, RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. test/runtime_interpreter_test.dart covers regex repetition, action-edge fluent .push, blind AND/OR dispatch, bounded repetition, zero-progress cutoff, and lifecycle order."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart runtime rule execution lives in `dart/lib/src/runtime/interpreter.dart`.

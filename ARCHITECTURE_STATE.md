@@ -4,7 +4,19 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-26`
+- Last refreshed: `2026-07-27`
+- `2026-07-27` repository-storage process refresh: `PROJECT-DATA-SSD-ROOTING.4.2` completes the enforcement parent.
+  The structural `PROJECT-DATA-STORAGE` doctrine now has 28 mutation-sensitive cases and 38 outside-cwd routed
+  boundaries. `tools/test_project_data_process_locality.sh` creates a collision-safe relocated checkout view under
+  managed SSD scratch and uses macOS kernel containment from an outside-filesystem cwd with hostile temp/cache
+  inputs. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes write local traces/bytecode; external writes,
+  developer-cache reads, symlink escapes, missing probe families, denied accesses, and `xcrun_db-` writes fail.
+  The first contained run found Dartdev reading telemetry config beneath developer HOME and Apple's `cc` shim
+  writing tool-selection cache beneath per-user OS temp. A targeted Dart wrapper now gives only Dart a repository-
+  local HOME, while the macOS Lua native builder invokes active clang plus SDK directly. All eight affected parity
+  drivers and all six storage oracles pass. Canonical passes Rust semantic admission 1/1 in 78.09 seconds, Dart
+  1/1, Julia 416/416 in 27.2 seconds, primary 66/66 in both environments, the nested process proof, and Phase 0
+  1,031/1,031 in 620 seconds; Knowledge Map 721/5,713, mdBook, six doctrines, memory, and zero runs also pass.
 - `2026-07-26` repository-storage refresh: ADR `0053` now has complete common, Perl, Rust, Dart, Julia, Lua, and
   tool migrations through `PROJECT-DATA-SSD-ROOTING.2.6`. The runtime-derived `/.linkedspec-data/` hierarchy owns
   managed scratch and retained Cargo/Dart/Julia/Python caches; all maintained Python checkers use one root-relative
@@ -22,10 +34,10 @@ This document is the current high-level technical reading of the project shape. 
   forwarding, conservative live/reused/indeterminate retention, and exact normal/orphan recovery proofs. Final
   residue `.3.2` independently proves zero old-root or bounded shared-metadata match before and after all six
   storage oracles, with zero deletion targets and intact retained Perl/Julia copies. Parent `.3` is complete;
-  structural `.4.1` registers `PROJECT-DATA-STORAGE` as the sixth doctrine. Its read-only 22-case classifier
-  governs current tracked storage defaults and documented commands while preserving caller/inert/tool/system
-  paths; remaining Toolbox diagnostics now use repository scratch. Direct, registry, 36-boundary hostile routing,
-  and all six storage oracles pass. Process IO `.4.2` is active, and relocation closeout remains behind storage `.5`.
+  structural `.4.1` registers `PROJECT-DATA-STORAGE` as the sixth doctrine. Its original read-only 22-case
+  classifier governs current tracked storage defaults and documented commands while preserving caller/inert/tool/
+  system paths; `.4.2` supplies the later process extension summarized above. Relocation closeout remains behind
+  storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

@@ -13,17 +13,20 @@ answers:
   - were old Dart active root records deleted
   - does Dart Directory systemTemp follow the managed repository temporary root
   - do Dart generated source workspaces and traces stay on the SSD
-date: 2026-07-26
+  - where does Dart telemetry configuration live during LinkedSpec workflows
+  - does supported Dart execution read the developer home
+date: 2026-07-27
 status: current
 tags: [dart, pub, storage, filesystem, ssd, cache, temporary-data, generated-source, trace, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.3 adds tools/test_dart_project_data_storage.sh and invokes it from tools/run_dart_local.sh. The oracle locks 18 tracked Directory.systemTemp owners, verifies TMPDIR/PUB_CACHE and the managed run share the repository device, resolves all 47 hosted pubspec.lock packages and hashes offline, and exercises trace/generated-source paths. The canonical cache contains 5,903 payload files / 63,744,165 bytes with hash 039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e; 47 package-index JSON files match the shared cache after removing only _fetchedAt, normalized hash 21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b. Full proof passes 337 package tests, primary 66x2, corpus 105/105. After use, the two exact current/former shared active-root records are deleted and residue is zero; ambiguous shared package payload remains untouched and unused."
-reverify: "bash tools/test_dart_project_data_storage.sh && bash tools/run_dart_local.sh && bash tools/project_data_run.sh dart pub get -C dart --offline"
+evidence: "PROJECT-DATA-SSD-ROOTING.2.3 adds tools/test_dart_project_data_storage.sh and invokes it from tools/run_dart_local.sh. The oracle locks 18 tracked Directory.systemTemp owners, verifies TMPDIR/PUB_CACHE and the managed run share the repository device, resolves all 47 hosted pubspec.lock packages and hashes offline, and exercises trace/generated-source paths. The canonical cache contains 5,903 payload files / 63,744,165 bytes with hash 039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e; 47 package-index JSON files match the shared cache after removing only _fetchedAt, normalized hash 21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b. Full proof passes 337 package tests, primary 66x2, corpus 105/105. After use, the two exact current/former shared active-root records are deleted and residue is zero; ambiguous shared package payload remains untouched and unused. Process proof .4.2 exposes Dartdev's pre-command HOME telemetry read and adds tools/run_dart_project_data.sh plus LINKEDSPEC_DART_HOME, so every maintained Dart command uses the repository-local Dart home without changing CLI behavior."
+reverify: "bash tools/test_dart_project_data_storage.sh && bash tools/run_dart_local.sh && bash tools/run_dart_project_data.sh pub get -C dart --offline"
 ---
 
 LinkedSpec's supported Dart workflows use the ignored repository-relative
-`/.linkedspec-data/cache/dart-pub/` cache and managed per-run temporary storage. The complete
-`tools/run_dart_local.sh` gate invokes `tools/test_dart_project_data_storage.sh`; a direct low-level offline
-resolution can use `bash tools/project_data_run.sh dart pub get -C dart --offline`.
+`/.linkedspec-data/cache/dart-pub/` cache, `/.linkedspec-data/cache/dart-home/` command metadata, and managed per-run
+temporary storage. The complete `tools/run_dart_local.sh` gate invokes `tools/test_dart_project_data_storage.sh`;
+a targeted command uses `bash tools/run_dart_project_data.sh ...`, which initializes storage and gives only the
+Dart child the repository-local home before executing the selected Dart SDK command.
 
 The canonical cache covers all 47 hosted packages and hashes in `dart/pubspec.lock`. Package payload identity is
 5,903 files / 63,744,165 bytes with canonical hash
@@ -43,5 +46,11 @@ cache, so no duplicate source remains. Only after offline and full-gate use were
 active-root residue is zero. The shared package payload is ambiguous multi-project data and remains untouched;
 supported workflows no longer consult it.
 
+The process-level oracle discovered why `PUB_CACHE` alone was insufficient: Dartdev reads its telemetry
+configuration beneath `HOME/.dart-tool` before several subcommands honor the package cache. The wrapper prevents
+that implicit developer-home read. All maintained gates, multi-backend matrices, documentation commands, and
+Knowledge Map Dart reverification commands use this wrapper; the storage doctrine rejects a bare maintained Dart
+`pub`, formatter, analyzer, test, or run command while preserving the CLI's established user-facing usage label.
+
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-workflow-routing]],
-[[project-data-env-initializer]], [[dart-local-verification-gate]].
+[[project-data-env-initializer]], [[project-data-process-locality-proof]], [[dart-local-verification-gate]].

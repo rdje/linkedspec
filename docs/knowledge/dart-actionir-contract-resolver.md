@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, actionir, contracts, helper-surface, validation, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart and test/action_contracts_test.dart. The resolver entrypoints walk typed ActionIR calls, receiver methods, structural assignments, structured controls, nested arguments, block values, shapes, and access expressions, recording current canonical helper/control contracts. Non-current helper-looking calls produce unknown_helper. spec_validator.dart now shares isKnownActionIrCallName(...) so user functions collide with active built-in helper/control names. DART-BACKEND-PARITY.3.3 adds optional UserFunctionRegistry input to the resolver entrypoints so exact-arity user calls classify before helper fallback, while wrong-arity registered calls diagnose as user_function_arity_mismatch. Focused Dart tests and analyzer pass."
-reverify: "cd dart && dart test test/action_contracts_test.dart test/action_ast_parser_test.dart test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings && cd .. && ! rg -n 'retired|replacement map|non-current helper spelling table' dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/action_contracts_test[.]dart test/action_ast_parser_test[.]dart test/spec_parser_test[.]dart test/spec_validator_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && cd .. && ! rg -n 'retired|replacement map|non-current helper spelling table' dart"
 ---
 
 Dart ActionIR contract resolution lives in

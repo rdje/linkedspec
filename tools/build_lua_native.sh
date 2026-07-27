@@ -54,8 +54,17 @@ done
 [[ "$(device_id "$output_ancestor")" == "$(device_id "$REPO_ROOT")" ]] ||
  fail "native output must use the repository filesystem: $output"
 
-command -v cc >/dev/null 2>&1 || {
- printf 'build_lua_native: cc is required\n' >&2
+CC_CMD=${LINKEDSPEC_CC_CMD:-cc}
+compiler_platform_flags=()
+if [[ "$(uname -s)" == Darwin && "$CC_CMD" == cc ]]; then
+ developer_dir=$(xcode-select -p 2>/dev/null) || fail 'cannot resolve the active Apple developer directory'
+ [[ -x "$developer_dir/usr/bin/clang" ]] || fail 'the active Apple clang executable is unavailable'
+ [[ -d "$developer_dir/SDKs/MacOSX.sdk" ]] || fail 'the active macOS SDK is unavailable'
+ CC_CMD="$developer_dir/usr/bin/clang"
+ compiler_platform_flags=(-isysroot "$developer_dir/SDKs/MacOSX.sdk")
+fi
+command -v "$CC_CMD" >/dev/null 2>&1 || {
+ printf 'build_lua_native: compiler is required: %s\n' "$CC_CMD" >&2
  exit 1
 }
 command -v pkg-config >/dev/null 2>&1 || {
@@ -81,7 +90,7 @@ if [ "$(uname -s)" = Darwin ]; then
 fi
 
 # shellcheck disable=SC2046
-cc -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
+"$CC_CMD" "${compiler_platform_flags[@]}" -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
  $(pkg-config --cflags "$lua_pkg" libpcre2-8) \
  "${link_flags[@]}" \
  "$REPO_ROOT/lua/native/regex_pcre2.c" \
@@ -89,7 +98,7 @@ cc -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
  -o "$output/linkedspec_regex_pcre2.so"
 
 # shellcheck disable=SC2046
-cc -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
+"$CC_CMD" "${compiler_platform_flags[@]}" -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
  $(pkg-config --cflags "$lua_pkg") \
  "${link_flags[@]}" \
  "$REPO_ROOT/lua/native/filesystem_native.c" \

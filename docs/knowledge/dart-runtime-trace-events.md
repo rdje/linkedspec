@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, trace, runtime, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.5.3 instruments dart/lib/src/runtime/interpreter.dart and extends dart/test/trace_test.dart."
-reverify: "cd dart && dart test test/trace_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'dart_runtime:(rule|regex_match|child_dispatch|lifecycle_block|cursor_control|source_boundary|recursion_guard)' lib/src/runtime/interpreter.dart test/trace_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/trace_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'dart_runtime:(rule|regex_match|child_dispatch|lifecycle_block|cursor_control|source_boundary|recursion_guard)' lib/src/runtime/interpreter[.]dart test/trace_test.dart"
 ---
 
 `DART-BACKEND-PARITY.4.5.3` adds Dart runtime interpreter trace events behind

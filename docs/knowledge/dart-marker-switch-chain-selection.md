@@ -10,7 +10,7 @@ date: 2026-07-10
 status: confirmed
 tags: [dart, runtime, control-flow, switch, markers, nesting, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2. Dart parsed marker-form switch/case/default/endcase/endswitch into typed nodes but did not claim the sibling statement range, so case/default nodes were skipped while every ordinary branch assignment executed. Action and value blocks now select one nesting-aware range: evaluate the subject once, execute only the first matching case or otherwise default, and ignore nested switch boundaries while scanning the outer chain. Existing i/elif normalization is unchanged. The governed fixture returns [\"elif\",\"case-b\"]. Formatting, fatal analysis, all 155 package tests, both 61-case CLI environments, and unchanged 99-case corpus pass."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart -n 'matches the governed marker-control fixture exactly' && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart -n 'matches the governed marker-control fixture exactly' && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 # Dart Marker Switch Chain Selection

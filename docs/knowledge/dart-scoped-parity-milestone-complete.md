@@ -7,7 +7,7 @@ answers:
   - "what comes after Dart backend parity"
   - "is Julia unblocked after Dart"
   - "does Dart still have an active task-tree frontier"
-date: 2026-07-09
+date: 2026-07-27
 status: current
 tags: [dart, backend, parity, corpus, FUTURE-PARITY-BACKLOG, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.7.5 closes the scoped Dart tree at 99/99 interpreter execution plus backend-local corpus CLI. ADR 0023 later distinguishes that milestone from complete public parity; FUTURE-PARITY-BACKLOG.1.5.3/.1.6/.3 own Dart's primary CLI, capability, and generated-source gaps."
@@ -22,7 +22,7 @@ The accepted claim is:
 - Dart executes the current runtime interpreter, staged user-function body flow,
   diagnostics/trace controls, and manifest-backed corpus runner.
 - `tools/run_dart_local.sh` is the focused Dart gate.
-- `dart run bin/corpus_runner.dart --corpus <path> --execute` is the separate
+- `bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus <path> --execute` from `dart/` is the separate
   Dart corpus command; the later global `.1.5.3.1` primary boundary rejects corpus options.
 - The checked-in 99-fixture corpus passes through Dart execute mode.
 

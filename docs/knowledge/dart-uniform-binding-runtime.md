@@ -12,7 +12,7 @@ date: 2026-07-12
 status: current
 tags: [dart, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.4 centralizes Dart bare typed reads and kind-checked array/harray mutations in dart/lib/src/runtime/interpreter.dart. Native/generated integration proof covers the future fixture, all seven neutral cases, collection rebinding, append, mutation continuation, static precedence, and wrong-kind fields. Temporary wrapper mutations aliased the same current value for migration. FUTURE-PARITY-BACKLOG.12.1.8.3.1 now rejects exact selector calls across complete compiled/generated state and deletes those wrapper runtime branches; `.12.1.8.3.2` closes the complete Dart gate at 205 tests, CLI 61x2, and 105 corpus."
-reverify: "cd dart && dart test test/uniform_binding_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/uniform_binding_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 # Dart uniform binding runtime

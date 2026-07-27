@@ -12,7 +12,7 @@ status: current
 tags: [dart, cli, trace, utf8, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.3.3 adds an adapter-local ADR 0024 trace and passes all 61 unchanged cases in default and POSIX environments; rich LinkedSpecTraceEmitter behavior remains independent."
 evidence_update_2026_07_18_cursor: "FUTURE-PARITY-BACKLOG.9.1.5.5 removes the global parse_mode request field while preserving every unrelated trace byte; the expanded shared matrix passes 63/63 in both environments."
-reverify: "cd dart && dart test test/primary_cli_test.dart && cd .. && perl tools/run_cli_conformance.pl --display-command 'dart run bin/linkedspec_dart.dart' -- dart --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/primary_cli_test.dart && cd .. && perl tools/run_cli_conformance.pl --display-command 'bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart' -- bash {{REPO_ROOT}}/tools/run_dart_project_data.sh --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
 ---
 
 The Dart primary adapter owns a small deterministic trace projection separate from `LinkedSpecTraceEmitter` and

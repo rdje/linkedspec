@@ -42,6 +42,7 @@ fi
 
 DART_CMD="${LINKEDSPEC_DART_CMD:-dart}"
 command -v "$DART_CMD" >/dev/null 2>&1 || fail "required command not found: $DART_CMD"
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
 
 [[ "${LINKEDSPEC_RUN_ACTIVE:-}" == 1 ]] || fail 'focused proof is not inside a managed run'
 [[ -n "${LINKEDSPEC_RUN_DIR:-}" && -d "$LINKEDSPEC_RUN_DIR" ]] ||
@@ -92,7 +93,7 @@ for index in "${!expected_temp_owners[@]}"; do
 done
 
 cd "$REPO_ROOT"
-"$DART_CMD" pub get -C dart --offline
+"${DART_RUN[@]}" pub get -C dart --offline
 locked_hosted_count=$(awk '/^    source: hosted$/ { count++ } END { print count + 0 }' dart/pubspec.lock)
 cached_package_count=$(find "$PUB_CACHE/hosted/pub.dev" -mindepth 1 -maxdepth 1 -type d \
  ! -name '.cache' | wc -l | tr -d ' ')
@@ -113,7 +114,7 @@ configured_cache_count=$(rg -F -c "\"rootUri\": \"$expected_root_uri" "$package_
 if (( ! reuse_complete_gate )); then
  (
   cd "$REPO_ROOT/dart"
-  "$DART_CMD" test test/native_pipeline_trace_test.dart test/source_emitter_test.dart test/trace_test.dart
+  "${DART_RUN[@]}" test test/native_pipeline_trace_test.dart test/source_emitter_test.dart test/trace_test.dart
  )
 fi
 

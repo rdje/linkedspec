@@ -13,7 +13,7 @@ date: 2026-07-17
 status: current
 tags: [dart, logical, truthiness, arity, runtime, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.4 makes runtimeLogicalTruth the Dart helper/control truth seam and validates original ActionCallExpr shape before evaluating operands. dart/test/logical_helper_contract_test.dart consumes linkedspec-logical-helper-v1 across 17 typed rows, values, ordered effects, receivers, lazy controls, four invalid calls, native compiled, normalized reconstruction, generated plan, primary CLI, and an offline compiled standalone emitted package. Format/analyze, 245 tests, CLI 62x2, and corpus 105/105 pass; rollout is 3 complete / 5 pending."
-reverify: "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py && (cd dart && dart test test/logical_helper_contract_test.dart test/diagnostic_output_contract_test.dart && dart analyze --fatal-infos --fatal-warnings) && rg -n 'runtimeLogicalTruth|_validateLogicalHelperArity|helper_arity_mismatch' dart/lib/src/runtime/interpreter.dart dart/test/logical_helper_contract_test.dart"
+reverify: "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py && (cd dart && bash ../tools/run_dart_project_data.sh test test/logical_helper_contract_test[.]dart test/diagnostic_output_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings) && rg -n 'runtimeLogicalTruth|_validateLogicalHelperArity|helper_arity_mismatch' dart/lib/src/runtime/interpreter.dart dart/test/logical_helper_contract_test.dart"
 ---
 
 `runtimeLogicalTruth` is Dart's one typed logical boundary. Null, false, numeric zero including negative zero, the

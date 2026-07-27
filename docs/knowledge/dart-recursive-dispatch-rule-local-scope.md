@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, compiler, recursion, corpus, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.6.2.4.3 ports the Rust/Perl action-edge dependency model and scopes explicit aggregate resets per rule invocation. FUTURE-PARITY-BACKLOG.12.1.7.2 migrates the recursive fixtures to bare I assignments and extends the same first-write scope to direct initializer assignment; an otherwise absent binding named for a compiled rule reads as its empty implicit array accumulator. Permanent native/generated uniform-binding tests and the complete 105-case corpus pass."
-reverify: "cd dart && dart test test/compiled_spec_test.dart test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test[.]dart test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true"
 ---
 
 This fact is the Dart analogue of the Rust fixes recorded under

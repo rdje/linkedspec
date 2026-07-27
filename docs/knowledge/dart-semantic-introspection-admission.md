@@ -16,7 +16,7 @@ date: 2026-07-22
 status: current composed Dart admission
 tags: [dart, semantic-introspection, admission, conformance, mutations, rollout, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.5.6 adds dart/test/semantic_introspection_dart_admission_test.dart, one exact 12-role consumer over strict byte/text normalization, compiled/failed/runtime snapshots, loaded and JSON-reconstructed execution, generated-plan/public-helper/standalone-emitted direct/traced routes, typed/native-neutral JSON, all 20 query digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak denial. The neutral checker locks path/role/driver/registration/admission topology with eight Dart-specific mutations, rejects 81 mutations total, advances only Dart to rollout 4/9 and native admission 3/6, and leaves Julia, PUC Lua, and LuaJIT pending. Complete Dart passes format 85/0, analyzer, package 336/336, primary 66x2, and corpus 105/105."
-reverify: "cd dart && dart test test/semantic_introspection_dart_admission_test.dart && cd .. && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart && cd .. && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Dart Semantic Introspection Admission

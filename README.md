@@ -277,9 +277,14 @@ residue proof `.3.2` independently confirms both runtime-derived old temporary r
 shared metadata surfaces are empty before and after all six storage oracles. It finds zero deletion targets, leaves
 shared data untouched, and reconfirms the retained Perl/Julia copies. Existing-data migration `.3` is complete;
 structural leaf `.4.1` now registers the `PROJECT-DATA-STORAGE` doctrine. Its read-only checker scans tracked
-code/config/test/tool and current command-guidance surfaces, runs 22 reject/accept cases, preserves explicit caller/
-inert/tool/system paths, and rejects off-repository storage defaults. All six doctrines, 36-boundary outside-cwd
-routing, and the six storage oracles pass. Process-level opened-path proof `.4.2` is the next clean frontier.
+code/config/test/tool and current command-guidance surfaces, runs 28 reject/accept cases, preserves explicit caller/
+inert/tool/system paths, and rejects off-repository storage defaults plus bare maintained Dart command surfaces.
+Process leaf `.4.2` adds 38-boundary routing and a kernel-contained relocated checkout proof for real Perl, Rust,
+Dart, Julia, Lua, and Python-tool work from an outside-filesystem cwd with hostile inherited roots. Its retained
+REDs reject external writes, shared-cache reads, symlink escapes, and incomplete probe sets. The first contained run
+also exposed Dart's implicit developer-HOME telemetry read and Apple's `cc` shim temporary write; the repository-
+local Dart wrapper and direct Apple-clang native build remove both. All six doctrines, all six storage oracles, the
+eight affected parity drivers, and the process oracle pass. Enforcement parent `.4` is complete.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -289,8 +294,8 @@ source tools/project_data_env.sh
 ```
 
 It derives the physical checkout from its own file, creates disposable `scratch/` and retained `cache/` children,
-and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache, Julia depot, and Python bytecode-cache
-variables. A caller
+and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache and Dart home, Julia depot, and Python
+bytecode-cache variables. A caller
 override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
 filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
 The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. The
@@ -310,6 +315,23 @@ Use the targeted Python wrapper for any maintained checker command:
 ```bash
 bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py
 ```
+
+Use the targeted Dart wrapper for package, format, analysis, test, run, or direct snapshot execution. It preserves
+the Dart CLI's normal arguments while isolating command metadata beneath retained repository cache:
+
+```bash
+(cd dart && bash ../tools/run_dart_project_data.sh test)
+```
+
+The recurring process-level containment proof is:
+
+```bash
+bash tools/test_project_data_process_locality.sh
+```
+
+On macOS it requires `sandbox-exec`; unlike `fs_usage`/`dtruss`, it does not require root in an ordinary local
+terminal. It permits necessary system/tool reads and one exact caller input, but kernel-denies project writes
+outside the relocated checkout and data reads from developer-home or OS-temporary roots.
 
 The Knowledge Map validator and mdBook wrapper inspect caller-selected outputs before any directory or file is
 created and check the realized output afterward. Same-filesystem runtime overrides remain available; another-
@@ -894,7 +916,8 @@ content migration exists yet.
   fixed versus open-bound helper/method arities. Perl consumes the unchanged fixture through
   `prove -Iperl t/variadic_user_function_contract.t`; Rust consumes it through
   `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract`.
-  Dart consumes it through `dart test test/variadic_user_function_contract_test.dart`; Julia consumes it through
+  Dart consumes it through `bash ../tools/run_dart_project_data.sh test test/variadic_user_function_contract_test.dart`
+  from `dart/`; Julia consumes it through
   the 55 assertions in `julia/test/variadic_user_function_contract_test.jl`. Lua native parity is routed to
   `LUA-BACKEND-PARITY.5.1`, descriptor admission to `.5.3`, and generated preservation/execution to `.8.1-.4`.
 - Run `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock

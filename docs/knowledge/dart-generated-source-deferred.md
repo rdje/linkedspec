@@ -15,7 +15,7 @@ date: 2026-07-13
 status: current
 tags: [dart, codegen, source-emitter, corpus, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.7.2 deferred codegen; FUTURE-PARITY-BACKLOG.3.3 later closes deterministic source, family routing, isolation, and admission. FUTURE-PARITY-BACKLOG.9.1.5.4 advances current emission to v2/format 2 with family-derived rule-local cursor semantics and exact v1 rejection before payload decoding. FUTURE-PARITY-BACKLOG.4.3.1 carries typed variadic signatures through normalized emitted Base64 state, generated-plan execution, and reconstruction. FUTURE-PARITY-BACKLOG.16.4 proves punctuation-light typed AST equivalence plus exact native, generated-plan, emitted-state reconstruction, and CLI results."
-reverify: "cd dart && dart test test/source_emitter_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.9\\.1\\.5\\.4|emitDartSourceV2|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/source_emitter_test[.]dart test/punctuation_light_zero_arg_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.9\\.1\\.5\\.4|emitDartSourceV2|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter[.]dart test/source_emitter_test.dart"
 ---
 
 Generated Dart source now exists as a public scaffold. It was not required for

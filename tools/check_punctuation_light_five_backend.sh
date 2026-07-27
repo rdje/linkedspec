@@ -6,6 +6,7 @@ REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_punctuation_light_five_backend.sh" "$@"
 DART_CMD=${LINKEDSPEC_DART_CMD:-dart}
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
 JULIA_CMD=${LINKEDSPEC_JULIA_CMD:-julia}
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
@@ -45,7 +46,7 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime \
 log "checking Dart typed, emitted-state, native, and generated behavior"
 (
  cd dart
- "$DART_CMD" test test/punctuation_light_zero_arg_contract_test.dart
+ "${DART_RUN[@]}" test test/punctuation_light_zero_arg_contract_test.dart
 )
 
 log "checking Julia typed, emitted-state, native, and generated behavior"

@@ -2048,10 +2048,10 @@ LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
 Direct Dart commands live under `dart/`:
 
 ```bash
-dart test
-dart run bin/linkedspec_dart.dart --help
-dart run bin/linkedspec_dart.dart --spec Lispish --input '(hello world)'
-dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+bash ../tools/run_dart_project_data.sh test
+bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --help
+bash ../tools/run_dart_project_data.sh run bin/linkedspec_dart.dart --spec Lispish --input '(hello world)'
+bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
 Current Dart parity is interpreter-first and corpus-green. `DART-BACKEND-PARITY.7.2`

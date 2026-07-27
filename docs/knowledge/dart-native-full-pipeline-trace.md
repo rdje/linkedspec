@@ -12,7 +12,7 @@ date: 2026-07-11
 status: current
 tags: [dart, trace, native-api, loader, parser, compiler, runtime, FUTURE-PARITY-BACKLOG]
 evidence: "dart/lib/src/io/spec_loader.dart; dart/test/native_pipeline_trace_test.dart; capability_conformance/manifest.json"
-reverify: "cd dart && dart test test/native_pipeline_trace_test.dart && dart analyze --fatal-infos --fatal-warnings && cd .. && perl tools/check_capability_conformance.pl"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/native_pipeline_trace_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && cd .. && perl tools/check_capability_conformance.pl"
 ---
 
 `FUTURE-PARITY-BACKLOG.1.6.5.3` adds optional `trace:` injection to Dart's public

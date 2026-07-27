@@ -964,7 +964,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
     if f"require_tracked_file {dart_admission['consumer_path']}" not in dart_canonical_text:
         fail("canonical driver omits the Dart backend admission consumer")
     dart_backend_text = dart_backend_path.read_text(encoding="utf-8")
-    if '"$DART_CMD" test' not in dart_backend_text:
+    if '"${DART_RUN[@]}" test' not in dart_backend_text:
         fail("Dart backend driver omits the test suite containing cursor admission")
     backend_invocation = f'bash "$REPO_ROOT/{dart_admission["backend_driver"]}"'
     if backend_invocation not in dart_canonical_text:

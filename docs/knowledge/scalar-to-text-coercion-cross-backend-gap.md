@@ -11,7 +11,7 @@ date: 2026-07-12
 status: current
 tags: [scalar, string, coercion, cat, perl, rust, dart, julia, lua, parity]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.3 adds capability_conformance/scalar_text_contract.json and executes its portable spec fixture on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Strings remain unchanged; booleans spell 1/0; finite numbers use stable decimal text with -0.0 -> 0 and 1.0 -> 1; any null, array, or harray fragment makes cat return null. Codeblock is normatively non-text, while portable explicit final-codeblock call syntax remains separately owned by FUTURE-PARITY-BACKLOG.11.1 rather than being faked here. Perl generated lowering, Rust RuntimeValue::to_scalar_text, Dart _scalarString, Julia _runtime_scalar_string, and Lua scalar_string implement the same boundary. Retired concat remains rejected."
-reverify: "PERL5LIB= prove -Iperl t/scalar_text_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime lua_backend_parity_4_3_2_1_3_scalar_text_contract && cd dart && dart test test/scalar_text_contract_test.dart && cd .. && bash tools/run_lua_local.sh"
+reverify: "PERL5LIB= prove -Iperl t/scalar_text_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime lua_backend_parity_4_3_2_1_3_scalar_text_contract && cd dart && bash ../tools/run_dart_project_data.sh test test/scalar_text_contract_test.dart && cd .. && bash tools/run_lua_local.sh"
 ---
 
 ## Fact

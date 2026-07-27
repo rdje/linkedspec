@@ -394,8 +394,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 
 - **WHAT:** a sourceable environment initializer that derives the current checkout, creates ignored disposable
-  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart, Julia, and
-  Python bytecode storage variables, provides a same-filesystem output validator, and hands standard entrypoints
+  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart package/home,
+  Julia, and Python bytecode storage variables, provides a same-filesystem output validator, and hands standard entrypoints
   to the managed-run wrapper.
 - **WHEN:** before a direct development, generation, test, or package command can create project-owned state.
   Standard hook/doctrine/Knowledge Map/canonical/backend runners source it automatically; source it manually only
@@ -553,7 +553,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   traced routes, typed/native-neutral JSON, privacy/pages/budgets/errors/explain, no-execute immutability, and host-
   leak denial. The checker locks the consumer path, ordered roles, canonical driver/registration, and Rust-only
   rollout/admission promotion with eight Rust-specific mutations.
-- **DART COMPOSED ADMISSION:** `dart test test/semantic_introspection_dart_admission_test.dart` from `dart/`
+- **DART COMPOSED ADMISSION:** `bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart` from `dart/`
   verifies `.10.5.6`. Its 12 exact-once roles compose every Dart semantic route: strict byte/text normalization,
   compiled/failed/runtime snapshots, loaded and JSON-reconstructed state, generated-plan/public-helper/standalone-
   emitted direct and traced execution, typed/native-neutral JSON, all 20 digests, privacy/pages/budgets/errors/
@@ -849,8 +849,14 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   `bash scripts/check_diagnosis_evidence.sh` (staged task-acceptance evidence gate).
 - `bash scripts/check_project_data_storage_locality.sh` directly runs the `PROJECT-DATA-STORAGE` structural
   doctrine. It scans current code/config/test/tool and command-guidance surfaces, including Knowledge `reverify:`
-  lines, with 22 embedded reject/accept cases. It rejects off-repository project-storage defaults but preserves
-  caller inputs, inert path/privacy fixtures, rejection-test reads, and necessary external tool/system paths.
+  lines, including list-form reverification commands, with 28 embedded reject/accept cases. It rejects off-
+  repository project-storage defaults and bare maintained Dart command surfaces but preserves caller inputs, inert
+  path/privacy fixtures, rejection-test reads, necessary external tool/system paths, and the exact inert Dart CLI
+  usage label.
+- `bash tools/test_project_data_process_locality.sh` runs the macOS relocated-process oracle. It kernel-denies
+  writes outside a managed checkout view and developer-home/OS-temp data reads except one exact caller input, then
+  requires real Perl/Rust/Dart/Julia/Lua/tool traces or bytecode. Kept REDs cover external writes, shared-cache
+  reads, symlink escapes, and incomplete probe sets; denied-access or `xcrun_db-` diagnostics fail the run.
 
 ---
 

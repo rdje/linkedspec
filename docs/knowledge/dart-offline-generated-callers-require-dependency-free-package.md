@@ -6,15 +6,16 @@ answers:
   - "why must the Dart production package remain dependency-free"
   - "why did a Dart generated caller fail pub get after semantic source mapping"
   - "how is the Dart semantic source digest computed"
-date: 2026-07-22
+date: 2026-07-27
 status: current
 tags: [dart, semantic-introspection, generated-source, offline, dependencies, sha256]
 evidence: dart/lib/src/semantic/sha256.dart; dart/lib/src/semantic/semantic_index.dart; dart/test/semantic_index_source_foundation_test.dart; dart/test/source_emitter_test.dart; dart/test/unicode_rule_label_identity_routes_test.dart; dart/pubspec.yaml; FUTURE-PARITY-BACKLOG.10.5.1.1
-reverify: "cd dart && dart test test/semantic_index_source_foundation_test.dart test/source_emitter_test.dart test/unicode_rule_label_identity_routes_test.dart && cd .. && ! rg -n '^dependencies:' dart/pubspec.yaml"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_index_source_foundation_test[.]dart test/source_emitter_test[.]dart test/unicode_rule_label_identity_routes_test.dart && cd .. && ! rg -n '^dependencies:' dart/pubspec.yaml"
 ---
 
 Dart's generated-source and Unicode-label identity suites create isolated caller packages, point each caller at
-the checkout through a path dependency, set `PUB_CACHE` to a fresh empty directory, and run `dart pub get --offline`.
+the checkout through a path dependency, set `PUB_CACHE` to a fresh empty directory, and run the targeted Dart
+wrapper's offline package resolution.
 That proves an emitted caller can consume the shipped production package without relying on the developer's global
 cache. A new direct `crypto` dependency made all four isolated caller roles fail resolution even though the main
 checkout already had `crypto` transitively through test tooling.

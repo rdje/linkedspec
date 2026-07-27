@@ -15,7 +15,7 @@ status: fully verified and canonically admitted
 tags: [dart, cursor, contract, admission, topology, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.5.6 adds dart/test/rule_local_cursor_contract_test.dart as one contract-declared 15-role consumer. It executes native default/AND, normalized JSON, loaded spec, descriptor v1, emitted/generated v2 direct/trace, mixed parent-child, recursion, both structural replacements, static option removal, primary retirement, and all eight portable diagnostics. The neutral checker requires one marker per role, the complete Dart test command, canonical tracked input, and optional backend registration; five new mutations cover the Dart topology and rollout. The registered Dart driver passes 271 package tests, primary 65x2, and corpus 105/105. Neutral governance reaches 67 files, 4 complete / 4 pending, and 39 mutations."
 evidence_update_2026_07_18_signoff: "Knowledge Map passes at 613 facts / 4,432 question keys. Memory, task metadata, all four doctrines, mdBook, JSON, shell, and whitespace pass. Canonical local CI repeats Perl root consumers 7+5, Perl cursor admission 288, reference primary 65x2, and Phase 0 1,031/1,031 in 613 seconds before exit 0."
-reverify: "(cd dart && dart test test/rule_local_cursor_contract_test.dart); bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; bash tools/run_dart_local.sh"
+reverify: "(cd dart && bash ../tools/run_dart_project_data.sh test test/rule_local_cursor_contract_test.dart); bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; bash tools/run_dart_local.sh"
 ---
 
 The Dart cursor rollout is admitted by one omission-sensitive consumer at

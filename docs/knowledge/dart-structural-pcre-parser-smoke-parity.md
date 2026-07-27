@@ -17,7 +17,7 @@ date: 2026-07-09
 status: current
 tags: [dart, regex, parser-smoke, action-edge, ebnf, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. FUTURE-PARITY-BACKLOG.10.5.0.1.1 derives the generated rule-label atom from canonical structural patterns, enables Unicode mode for supplementary literals, recognizes explicit lifecycle plus bare-edge block/fluent forms, and executes current specs/spec.spec directly while retaining stale-corpus compatibility. Focused tests pass 93, the Dart package passes 279, CLI passes 66x2, and the unchanged corpus passes 105/105."
-reverify: "cd dart && dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_matching_test[.]dart test/runtime_interpreter_test[.]dart test/corpus_manifest_test.dart && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
 `DART-BACKEND-PARITY.6.2.4.6` is not a general PCRE engine replacement.

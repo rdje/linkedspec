@@ -14,7 +14,7 @@ date: 2026-07-09
 status: current
 tags: [dart, runtime, user-functions, actionir, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.5.2 establishes registry-first exact calls, eager args, local stores, results, discard, and recursion diagnostics. FUTURE-PARITY-BACKLOG.4.3.1 extends the same path with v2 minimum arity, positional-only calls, and fresh typed rest lists; six neutral contract tests and the complete Dart gate pass."
-reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart user-function runtime execution lives in

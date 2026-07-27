@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; migration, final residue proof, and structural enforcement complete; process proof in progress
+- Status: accepted; migration, final residue proof, and structural/process enforcement complete
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -95,6 +95,10 @@ boundary for storage locality.
   all 47 locked hosted packages offline; generated-source callers, traces, `Directory.systemTemp`, `TMPDIR`, and
   `PUB_CACHE` remain on the repository device. Package payload identity is 5,903 files / 63,744,165 bytes with
   hash `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`.
+- Process containment found Dartdev reading telemetry configuration beneath developer `HOME` before several
+  subcommands honored `PUB_CACHE`. Supported Dart execution now goes through `tools/run_dart_project_data.sh`,
+  which gives only Dart a same-device `LINKEDSPEC_DART_HOME` below retained repository cache. Maintained bare Dart
+  command surfaces are structurally rejected; parser/CLI behavior and the public usage label are unchanged.
 - The warmed Dart cache moved atomically from its old same-SSD target-era location, which no longer exists. After
   successful offline/full-gate use, the two exact current/former checkout `active_roots` records and their empty
   hash shards were deleted from the shared off-SSD cache. Its ambiguous multi-project package payload remains
@@ -120,6 +124,10 @@ boundary for storage locality.
   Lua-owned payload existed to migrate or delete. PUC Lua/LuaJIT, `cc`, `pkg-config`, Lua/PCRE2 development files,
   and operating-system libraries remain necessary read-only external toolchain inputs. Supported workflows create
   no LuaRocks or global-module state.
+- The first contained Lua native build caught Apple's `/usr/bin/cc` shim attempting an `xcrun_db-*` write beneath
+  the per-user OS temporary root. On macOS the default builder now resolves the active developer tree and invokes
+  its real `clang` with the active SDK. This keeps compiler/SDK/header/library reads as the documented necessary
+  exception while eliminating the hidden tool-selection cache write.
 - Tool migration adds a targeted repository-relative Python wrapper, retained `PYTHONPYCACHEPREFIX`, and explicit
   same-device temporary roots for both Unicode generators. Knowledge Map's portable host hook validates configured
   output before use and after writing; mdBook resolves and validates its default, environment, and command-line
@@ -148,9 +156,15 @@ boundary for storage locality.
   ambiguous shared data untouched. Retained Perl and Julia copies still match their frozen count/byte boundaries.
 - Structural enforcement registers `scripts/check_project_data_storage_locality.sh` exactly once as `PROJECT-DATA-
   STORAGE`. It scans tracked current code/config/test/tool and command-guidance surfaces, including Knowledge
-  `reverify:` lines, and runs 22 rejected/accepted classifier cases. It distinguishes off-repository project
+  scalar/list-form `reverify:` commands, and runs 28 rejected/accepted classifier cases. It distinguishes off-repository project
   storage defaults from caller inputs, inert path/privacy fixtures, rejection-probe reads, and necessary external
-  tools/libraries. The driver, hook/local-CI wiring, 36-boundary routing, and all six storage oracles pass.
+  tools/libraries. The driver, hook/local-CI wiring, 38-boundary routing, and all six storage oracles pass.
+- Process enforcement uses macOS `sandbox-exec` because `fs_usage` and `dtruss` require root on the current host.
+  It runs a collision-safe relocated checkout view from an outside-filesystem cwd under hostile temp/cache values;
+  the kernel denies writes outside that checkout and developer-home/OS-temp data reads except one exact caller
+  input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes must all emit local traces or bytecode. Retained
+  mutations reject an external write, shared-cache read, symlink escape, and incomplete probe set, while any denied
+  access or `xcrun_db-` attempt makes the otherwise successful driver fail.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -166,5 +180,6 @@ boundary for storage locality.
 - Julia storage: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Lua storage: `docs/knowledge/lua-project-data-ssd-storage.md`
 - Tool storage: `docs/knowledge/tool-project-data-ssd-storage.md`
+- Process locality: `docs/knowledge/project-data-process-locality-proof.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.4.1` structural doctrine complete; process proof `.4.2` active)
+- Last updated: `2026-07-27` (`.4.2` process proof and enforcement parent `.4` complete; `.5` next after clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -556,7 +556,7 @@ accessing the shared copy, and remove only records or directories provably owned
     commit at 35/300, clear the brief, remain clean, and do not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4`
-  Status: `active`
+  Status: `done` (2026-07-27; structural and relocated process enforcement complete)
   Goal: Mechanically prevent unsupported cross-volume reads and all off-repo-filesystem project writes.
   Depends on: `.3`
   Children: `.4.1`, `.4.2`
@@ -596,7 +596,7 @@ accessing the shared copy, and remove only records or directories provably owned
     affected storage oracle. Commit at 36/300, clear the brief, and do not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4.2`
-  Status: `active`
+  Status: `done` (2026-07-27; relocated six-family process containment is mutation-sensitive and canonical)
   Goal: Add process proof that representative workflows keep project IO on the repo filesystem.
   Depends on: `.4.1`
   Acceptance: Run representative Perl/Rust/Dart/Julia/Lua/tool probes with hostile external temp/cache variables;
@@ -604,6 +604,33 @@ accessing the shared copy, and remove only records or directories provably owned
     beneath the dynamic repo root and share its filesystem; allow only the frozen necessary system/tool/caller
     accesses; prove outside-cwd and relocated-checkout execution; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.4.2 - prove SSD-local project writes`
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.4.1` commit `ae3b64f2` at 36/300 with a zero-byte brief
+    and zero managed runs; froze this checklist before process-oracle code; no push occurred.
+  - [x] **TRACE AUTHORITY / RED** — `fs_usage` and `dtruss` require root on the current macOS host; the narrower
+    non-root normal-terminal authority is `sandbox-exec`. The committed oracle kernel-denies external writes and
+    selected implicit project-data reads, and keeps deterministic old-volume-write/shared-cache REDs.
+  - [x] **OWNERSHIP / NECESSITY MODEL** — The oracle resolves project paths and filesystem identity, freezes
+    external interpreters to system/tool roots, denies developer HOME plus both OS temp roots for data reads, and
+    admits only one exact existing read-only caller input. System/runtime reads remain necessary, not project data.
+  - [x] **REPRESENTATIVE FIVE-BACKEND + TOOL PROOF** — The relocated driver requires the exact `caller-input dart
+    julia lua perl rust tool` set. Five primary commands write nonempty local traces; the Python checker writes local
+    bytecode. Hidden Dart HOME telemetry and Apple `cc`-shim `xcrun_db-*` writes were found and removed rather than
+    admitted; all eight affected multi-backend parity drivers pass.
+  - [x] **OUTSIDE-CWD / RELOCATED PROOF** — A collision-safe checkout view beneath managed SSD scratch receives
+    clone-copied Dart/Julia caches and the built Rust primary, then runs from the runtime-derived system-temp cwd on
+    another filesystem with hostile inherited temp/cache values. Root discovery replaces every hostile destination,
+    project outputs share the relocated root/device, and managed cleanup removes the view.
+  - [x] **MUTATION-SENSITIVE REGRESSION** — Retained mutations reject an old-volume output before creation, an
+    implicit shared Cargo-cache read, a symlink escape, and a missing tool-family probe. The exact caller input and
+    required external executables remain accepted; any denied-access or `xcrun_db-` diagnostic fails the driver.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronized process/storage/Dart/Lua/doctrine/routing facts, ADR/roadmaps/task/
+    live/memory/public book. Process oracle, 28-case structure, 38 routing, all six storage oracles, eight affected
+    parity drivers, Knowledge Map 721/5,713, six doctrines, mdBook, memory, and whitespace pass. Canonical passes
+    Rust semantic admission 1/1 in 78.09s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, nested process proof, and
+    Phase 0 1,031/1,031 in 620s. Commit at 37/300, clear the brief, and do not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.5`
   Status: `pending`
@@ -619,7 +646,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.4.2` | `active` | Add process-level opened-path proof for representative hostile, outside-cwd, and relocated workflows. |
+| `PROJECT-DATA-SSD-ROOTING.5` | `pending` | After the clean `.4.2` commit, freeze `.5` closeout acceptance and run the complete final matrix/census. |
 
 ## Decisions
 

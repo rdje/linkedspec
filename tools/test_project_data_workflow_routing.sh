@@ -37,6 +37,7 @@ routed_entrypoints=(
  tools/run_ci_local.sh
  tools/run_rust_local.sh
  tools/run_dart_local.sh
+ tools/run_dart_project_data.sh
  tools/run_julia_local.sh
  tools/run_julia_project_data.sh
  tools/run_lua_local.sh
@@ -51,6 +52,7 @@ routed_entrypoints=(
  tools/test_julia_project_data_storage.sh
  tools/test_lua_project_data_storage.sh
  tools/test_tool_project_data_storage.sh
+ tools/test_project_data_process_locality.sh
  tools/build_lua_native.sh
  tools/check_julia_primary_cli.sh
  tools/check_diagnostic_output_five_backend.sh
@@ -147,6 +149,7 @@ run_routed_case() {
   "$case_root/cache" \
   "$case_root/cache/cargo-home" \
   "$case_root/cache/dart-pub" \
+  "$case_root/cache/dart-home" \
   "$case_root/cache/julia-depot" \
   "$case_root/cache/python-pycache"; do
   [[ -d "$path" ]] || fail "$name did not create routed directory: $path"
@@ -172,6 +175,8 @@ run_routed_case cargo failure "$REPO_ROOT/tools/run_cargo_local.sh" \
 run_routed_case rust-storage failure "$REPO_ROOT/tools/test_rust_project_data_storage.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case dart-storage failure "$REPO_ROOT/tools/test_dart_project_data_storage.sh" \
+ LINKEDSPEC_DART_CMD=linkedspec-routing-test-missing-dart
+run_routed_case dart-project-data failure "$REPO_ROOT/tools/run_dart_project_data.sh" \
  LINKEDSPEC_DART_CMD=linkedspec-routing-test-missing-dart
 run_routed_case julia-storage failure "$REPO_ROOT/tools/test_julia_project_data_storage.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia

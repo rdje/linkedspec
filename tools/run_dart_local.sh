@@ -6,6 +6,8 @@ REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 source "$REPO_ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$REPO_ROOT/tools/run_dart_local.sh" "$@"
 DART_CMD="${LINKEDSPEC_DART_CMD:-dart}"
+DART_RUN=(bash "$REPO_ROOT/tools/run_dart_project_data.sh")
+DART_DISPLAY_COMMAND='dart run bin/linkedspec_dart.dart'
 
 log() {
  printf '[dart-ci] %s\n' "$*"
@@ -21,28 +23,28 @@ command -v "$DART_CMD" >/dev/null 2>&1 || fail "required command not found: $DAR
 cd "$REPO_ROOT/dart"
 
 log "running Dart format"
-"$DART_CMD" format --set-exit-if-changed .
+"${DART_RUN[@]}" format --set-exit-if-changed .
 
 log "running Dart analyzer"
-"$DART_CMD" analyze --fatal-infos --fatal-warnings
+"${DART_RUN[@]}" analyze --fatal-infos --fatal-warnings
 
 log "running Dart tests"
-"$DART_CMD" test
+"${DART_RUN[@]}" test
 
 log "proving Dart project data stays in managed repository storage"
 bash "$REPO_ROOT/tools/test_dart_project_data_storage.sh" --reuse-complete-dart-gate
 
 log "checking Dart CLIs"
-"$DART_CMD" run bin/linkedspec_dart.dart --help >/dev/null
-"$DART_CMD" run bin/corpus_runner.dart --help >/dev/null
-"$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 >/dev/null
+"${DART_RUN[@]}" run bin/linkedspec_dart.dart --help >/dev/null
+"${DART_RUN[@]}" run bin/corpus_runner.dart --help >/dev/null
+"${DART_RUN[@]}" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 >/dev/null
 
 log "running shared primary CLI contract (default environment)"
 (
  cd "$REPO_ROOT"
  env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
-  --display-command 'dart run bin/linkedspec_dart.dart' -- \
-  "$DART_CMD" --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
+  --display-command "$DART_DISPLAY_COMMAND" -- \
+  bash '{{REPO_ROOT}}/tools/run_dart_project_data.sh' --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
   '{{REPO_ROOT}}/dart/bin/linkedspec_dart.dart'
 )
 
@@ -50,12 +52,12 @@ log "running shared primary CLI contract (POSIX environment)"
 (
  cd "$REPO_ROOT"
  env POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
-  --display-command 'dart run bin/linkedspec_dart.dart' -- \
-  "$DART_CMD" --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
+  --display-command "$DART_DISPLAY_COMMAND" -- \
+  bash '{{REPO_ROOT}}/tools/run_dart_project_data.sh' --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
   '{{REPO_ROOT}}/dart/bin/linkedspec_dart.dart'
 )
 
 log "running full Dart corpus gate"
-"$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+"${DART_RUN[@]}" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 
 log "Dart local gate passed"

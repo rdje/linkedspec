@@ -14,7 +14,7 @@ date: 2026-07-16
 status: current
 tags: [Dart, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.1.4 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. FUTURE-PARITY-BACKLOG.5.1.7 threads the optional sink through generated helpers and emitted direct/traced entrypoints. diagnostic_output_contract_test.dart consumes native and generated linkedspec-diagnostic-output-v1 scenarios and proves exact events, values, trace separation, caller-object identity, and typed exit."
-reverify: "cd dart && dart test test/diagnostic_output_contract_test.dart test/runtime_interpreter_test.dart test/trace_test.dart && cd .. && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnosticOutputSink' dart/lib dart/test/diagnostic_output_contract_test.dart"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/diagnostic_output_contract_test[.]dart test/runtime_interpreter_test[.]dart test/trace_test.dart && cd .. && rg -n 'RuntimeDiagnosticOutput(Event|Sink)|RuntimeExitNow|diagnosticOutputSink' dart/lib dart/test/diagnostic_output_contract_test.dart"
 ---
 
 Dart callers install a sink for one native invocation:

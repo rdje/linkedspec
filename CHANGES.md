@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.4.2 — prove SSD-local project writes
+
+Added `tools/test_project_data_process_locality.sh` as the recurring macOS process-level complement to the
+structural storage doctrine. It creates a collision-safe relocated checkout view beneath managed SSD scratch,
+starts from an outside-filesystem cwd with hostile temp/cache variables, and uses kernel sandboxing to deny writes
+outside the relocated checkout and data reads from developer HOME plus both OS temporary roots except one exact
+read-only caller input. The exact `caller-input dart julia lua perl rust tool` set performs real primary commands,
+writes five nonempty traces plus Python bytecode, resolves every project path beneath the relocated root and on its
+filesystem, and freezes the necessary external interpreter/system/tool roots.
+
+The oracle keeps deterministic failures for an old-volume write, an implicit shared Cargo-cache read, a symlink
+escape, and an incomplete probe set. Any denied-access or Apple `xcrun_db-` diagnostic fails an otherwise successful
+driver. Root-only `fs_usage`/`dtruss` were rejected as the recurring authority; `sandbox-exec` works without root in
+an ordinary local terminal. The first contained driver exposed two previously hidden accesses rather than admitting
+them: Dartdev read its telemetry configuration beneath developer HOME, and Apple's `/usr/bin/cc` shim attempted a
+per-user-temp `xcrun_db-*` refresh.
+
+Added `tools/run_dart_project_data.sh` and same-device `LINKEDSPEC_DART_HOME`; all maintained Dart package, format,
+analysis, test, run, direct-snapshot, local-gate, matrix, documentation, and Knowledge Map commands now use that
+boundary. Parser behavior and the established user-facing Dart CLI usage label remain unchanged. On macOS the Lua
+native builder now invokes the active developer tree's real `clang` with the active SDK instead of the stateful
+`cc` shim. Structural enforcement adds bare maintained Dart-command rejection plus an exact inert usage-label
+exception, then covers scalar/list-form Knowledge reverification and the contained hostile-cache injection,
+reaching 28 cases and 38 routed
+boundaries. All eight affected multi-backend parity drivers and the
+relocated process oracle pass. All six storage oracles, Knowledge Map 721/5,713, mdBook, six doctrines, memory,
+whitespace, and zero managed runs pass. Canonical passes Rust semantic admission 1/1 in 78.09 seconds, Dart 1/1,
+Julia 416/416 in 27.2 seconds, primary 66/66 in both environments, the nested containment proof, and Phase 0
+1,031/1,031 in 620 seconds. Enforcement parent `.4` closes, final closeout `.5` is next, cadence advances to
+37/300, and no push occurs.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.4.1 — gate project storage locality
 
 Added `scripts/check_project_data_storage_locality.sh` as the registered `PROJECT-DATA-STORAGE` doctrine. The

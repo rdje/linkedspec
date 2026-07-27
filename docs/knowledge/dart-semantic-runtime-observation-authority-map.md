@@ -14,18 +14,18 @@ answers:
   - "how does Dart derive an observed semantic index"
   - "can Dart semantic query execute the parser"
   - "what is the Dart semantic runtime observation implementation split"
-date: 2026-07-22
+date: 2026-07-27
 status: composition-closed typed capture, immutable derivation, and every public generated/emitted/traced route
 tags: [dart, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: dart/lib/src/runtime/semantic_observation.dart; dart/lib/src/runtime/interpreter.dart; dart/lib/src/semantic/semantic_runtime_projection.dart; dart/lib/src/source_emitter.dart; dart/lib/src/io/spec_loader.dart; dart/test/semantic_index_runtime_observation_test.dart; dart/test/semantic_index_runtime_projection_test.dart; dart/test/semantic_index_runtime_observation_routes_test.dart; capability_conformance/semantic_introspection_model.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.5.0-.4
-last_verified: 2026-07-22
+last_verified: 2026-07-27
 reverify:
   - "rg -n 'RuntimeDiagnosticOutputSink|_recordRegexSlotSelected|RuntimeParseResult|executeGeneratedWithPlan|semanticObservationSink' dart/lib/src/runtime/interpreter.dart"
   - "rg -n '_Generated(DiagnosticOutput|SemanticObservation)SinkFailure|executeGeneratedParserV2|executeGeneratedParserWithTraceV2|semanticObservationSink|Object\\? execute\\(' dart/lib/src/source_emitter.dart"
   - "sed -n '134,150p' dart/lib/src/io/spec_loader.dart"
   - "sed -n '143,178p' capability_conformance/semantic_introspection_model.json"
   - "sed -n '236,248p' capability_conformance/semantic_introspection_contract.json"
-  - "cd dart && dart test test/semantic_index_runtime_observation_test.dart test/semantic_index_runtime_projection_test.dart test/semantic_index_runtime_observation_routes_test.dart test/semantic_index_query_kernel_test.dart"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_index_runtime_observation_test.dart test/semantic_index_runtime_projection_test.dart test/semantic_index_runtime_observation_routes_test.dart test/semantic_index_query_kernel_test.dart"
   - "sed -n '1,140p' rust/linkedspec-runtime/src/semantic_observation.rs"
 ---
 

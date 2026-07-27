@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, regex, corpus, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.6.2.4.1 adds compileRuntimeRegex(...) in dart/lib/src/runtime/matching.dart and routes helper regex compilation through it from interpreter.dart. The bridge normalizes POSIX character classes, inline i/m/s flag groups, scoped flag groups by lowering them to non-capturing groups plus Dart RegExp flags, possessive quantifier markers, lower-bound {,n} quantifiers, and Python-style named captures before Dart RegExp compilation. Focused runtime matching and interpreter tests lock the behavior. The final shipped-smoke window still had FormatExceptions only for deeper PCRE structural constructs such as \\K, (?&name), and (?(DEFINE)...), routed to DART-BACKEND-PARITY.6.2.4.6. That later leaf closes those exact shipped structural forms with bounded matchers, not a broad regex engine replacement."
-reverify: "cd dart && dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_matching_test[.]dart test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
 The bridge is deliberately a dialect normalizer, not a replacement regex engine.

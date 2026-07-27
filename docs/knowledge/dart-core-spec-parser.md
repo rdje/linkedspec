@@ -14,7 +14,7 @@ date: 2026-07-09
 status: current
 tags: [dart, parser, ast, corpus, shipped-specs]
 evidence: "DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and dart/test/spec_parser_test.dart. Tests cover focused Rust-compatible parser seams, all checked-in specs/*.spec files, and corpus input.spec files that do not start with top-level fn definitions. DART-BACKEND-PARITY.2.3 adds validateSpec(...) as the next source-AST validation layer. DART-BACKEND-PARITY.2.4 keeps parseSpec(...) rule-only while adding a separate spec-returned function-definition projection path."
-reverify: "cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/spec_parser_test[.]dart test/spec_validator_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart `parseSpec(...)` lives in `dart/lib/src/parser/spec_parser.dart` and is

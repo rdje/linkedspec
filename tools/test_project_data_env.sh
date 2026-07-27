@@ -37,7 +37,7 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  fail 'repository-local project-data root is not ignored'
 
 (
- unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE
+ unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE LINKEDSPEC_DART_HOME
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  unset LINKEDSPEC_REPO_ROOT LINKEDSPEC_PROJECT_DATA_ROOT LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT
  unset LINKEDSPEC_RUNS_ROOT
@@ -56,13 +56,15 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  assert_equal "$CARGO_HOME" "$LINKEDSPEC_CACHE_ROOT/cargo-home" 'Cargo cache default'
  assert_equal "$CARGO_TARGET_DIR" "$REPO_ROOT/rust/target" 'Cargo target default'
  assert_equal "$PUB_CACHE" "$LINKEDSPEC_CACHE_ROOT/dart-pub" 'Dart package-cache default'
+ assert_equal "$LINKEDSPEC_DART_HOME" "$LINKEDSPEC_CACHE_ROOT/dart-home" 'Dart home default'
  assert_equal "$JULIA_DEPOT_PATH" "$LINKEDSPEC_CACHE_ROOT/julia-depot:" 'Julia depot default'
  assert_equal "$LINKEDSPEC_JULIA_DEPOT_PATH" "$JULIA_DEPOT_PATH" 'LinkedSpec Julia depot mirror'
 
  repo_device=$(device_id "$REPO_ROOT")
  for path in "$LINKEDSPEC_PROJECT_DATA_ROOT" "$LINKEDSPEC_SCRATCH_ROOT" "$LINKEDSPEC_CACHE_ROOT" \
   "$LINKEDSPEC_RUNS_ROOT" \
-  "$TMPDIR" "$CARGO_HOME" "$CARGO_TARGET_DIR" "$PUB_CACHE" "${JULIA_DEPOT_PATH%:}"; do
+  "$TMPDIR" "$CARGO_HOME" "$CARGO_TARGET_DIR" "$PUB_CACHE" "$LINKEDSPEC_DART_HOME" \
+  "${JULIA_DEPOT_PATH%:}"; do
   [[ -d "$path" ]] || fail "initializer did not create $path"
   assert_equal "$(device_id "$path")" "$repo_device" "filesystem for $path"
  done
@@ -73,7 +75,7 @@ mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,
 (
  export LINKEDSPEC_PROJECT_DATA_ROOT="$same_volume_root/custom-data"
  unset LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT LINKEDSPEC_RUNS_ROOT
- unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE
+ unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE LINKEDSPEC_DART_HOME
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  # shellcheck source=project_data_env.sh
  source "$HELPER"
@@ -93,6 +95,7 @@ mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,
  export CARGO_HOME="$same_volume_root/cargo-home"
  export CARGO_TARGET_DIR="$same_volume_root/cargo-target"
  export PUB_CACHE="$same_volume_root/dart-pub"
+ export LINKEDSPEC_DART_HOME="$same_volume_root/dart-home"
  export JULIA_DEPOT_PATH="$same_volume_root/julia-one:$same_volume_root/julia-two:"
  unset LINKEDSPEC_JULIA_DEPOT_PATH
  # shellcheck source=project_data_env.sh
@@ -102,6 +105,7 @@ mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,
  assert_equal "$CARGO_HOME" "$same_volume_root/cargo-home" 'same-volume Cargo override'
  assert_equal "$CARGO_TARGET_DIR" "$same_volume_root/cargo-target" 'same-volume target override'
  assert_equal "$PUB_CACHE" "$same_volume_root/dart-pub" 'same-volume Dart override'
+ assert_equal "$LINKEDSPEC_DART_HOME" "$same_volume_root/dart-home" 'same-volume Dart-home override'
  assert_equal "$JULIA_DEPOT_PATH" \
   "$same_volume_root/julia-one:$same_volume_root/julia-two:" 'same-volume Julia override'
 )
@@ -125,6 +129,7 @@ if [[ -n "$external_root" ]]; then
   export CARGO_HOME="$external_root"
   export CARGO_TARGET_DIR="$external_root"
   export PUB_CACHE="$external_root"
+  export LINKEDSPEC_DART_HOME="$external_root"
   export JULIA_DEPOT_PATH="$external_root:"
   export LINKEDSPEC_PROJECT_DATA_ROOT="$external_root"
   export LINKEDSPEC_SCRATCH_ROOT="$external_root"
@@ -137,6 +142,7 @@ if [[ -n "$external_root" ]]; then
   assert_equal "$LINKEDSPEC_PROJECT_DATA_ROOT" "$REPO_ROOT/.linkedspec-data" \
    'cross-volume project-data override replacement'
   for path in "$TMPDIR" "$TMP" "$TEMP" "$CARGO_HOME" "$CARGO_TARGET_DIR" "$PUB_CACHE" \
+   "$LINKEDSPEC_DART_HOME" \
    "${JULIA_DEPOT_PATH%:}"; do
    assert_equal "$(device_id "$path")" "$repo_device" "cross-volume replacement for $path"
   done

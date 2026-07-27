@@ -961,7 +961,7 @@ def validate_filesystem_contract() -> None:
     )
     dart_driver_text = (ROOT / DART_ADMISSION["canonical_driver"]).read_text(encoding="utf-8")
     require(
-        '"$DART_CMD" test' in dart_driver_text,
+        '"${DART_RUN[@]}" test' in dart_driver_text,
         "Dart canonical driver omits the Dart consumer suite",
     )
     julia_consumer_text = (ROOT / JULIA_ADMISSION["consumer"]).read_text(encoding="utf-8")

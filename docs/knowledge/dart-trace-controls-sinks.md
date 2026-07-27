@@ -12,7 +12,7 @@ date: 2026-07-09
 status: current
 tags: [dart, trace, runtime, diagnostics, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.5.2 added dart/lib/src/trace/trace.dart, public trace exports, LinkedSpecRuntimeEngine trace parameters and parseWithTrace/executeWithTrace, and test/trace_test.dart."
-reverify: "cd dart && dart test test/trace_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'LinkedSpecTraceConfig|LinkedSpecTraceEmitter|parseWithTrace|executeWithTrace|DART-BACKEND-PARITY\\.4\\.5\\.2' dart/lib dart/test docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src/public-api/trace-api.md"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/trace_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && rg -n 'LinkedSpecTraceConfig|LinkedSpecTraceEmitter|parseWithTrace|executeWithTrace|DART-BACKEND-PARITY\\.4\\.5\\.2' dart/lib dart/test docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src/public-api/trace-api.md"
 ---
 
 Dart trace controls live in `dart/lib/src/trace/trace.dart` and are exported

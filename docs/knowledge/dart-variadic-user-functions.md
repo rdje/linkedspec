@@ -13,7 +13,7 @@ date: 2026-07-12
 status: current
 tags: [dart, functions, variadic, rest-parameter, descriptor, staged-parsing, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.3.1 updates Dart AST/staged projection, validation, registry/action resolution, runtime, descriptors, and normalized emitted state. Six tests in variadic_user_function_contract_test.dart consume the unchanged neutral fixture; tools/run_dart_local.sh passes 190 package tests, 61x2 CLI, and 105 corpus."
-reverify: "cd dart && dart test test/variadic_user_function_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/variadic_user_function_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart accepts `fn name(fixed, ...rest) { ... }` through the shared spec-defined shell. A typed

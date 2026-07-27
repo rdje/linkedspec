@@ -538,7 +538,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require(dart_task_status is not None, "Dart task is neither active nor complete")
     require("**RETRIEVE / INVENTORY DART SEAMS**" in task_text and "**COLLECT ACTION ITERATION VALUES**" in task_text, "Dart task acceptance checklist drifted")
     dart_driver_text = (ROOT / contract["admissions"]["dart"]["canonical_driver"]).read_text(encoding="utf-8")
-    require('"$DART_CMD" test' in dart_driver_text, "Dart canonical driver registration drifted")
+    require('"${DART_RUN[@]}" test' in dart_driver_text, "Dart canonical driver registration drifted")
     dart_ast_text = (ROOT / "dart/lib/src/ast/spec_ast.dart").read_text(encoding="utf-8")
     require("name == 'Or' ||" in dart_ast_text and "'Plus' || 'Or' || 'OrPlus'" in dart_ast_text, "Dart bare-OR repetition metadata seam drifted")
     dart_emitter_text = (ROOT / "dart/lib/src/source_emitter.dart").read_text(encoding="utf-8")

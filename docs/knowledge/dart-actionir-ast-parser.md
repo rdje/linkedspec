@@ -15,7 +15,7 @@ date: 2026-07-13
 status: current
 tags: [dart, actionir, ast, parser, text-to-ast]
 evidence: "DART-BACKEND-PARITY.3.1 adds dart/lib/src/action/action_ast.dart, dart/lib/src/action/action_parser.dart, and test/action_ast_parser_test.dart. The parser entrypoints parseActionBlock/parseActionStatement/parseActionExpression cover calls, positional and keyword args, literals, variables, indexed/nested access, array/hash literals, scalar/array/hash/nested assignments, block values, attached controls, receiver chains, trailing block args, value-drop statements, and structural raw_perl fallback. FUTURE-PARITY-BACKLOG.16.4 adds exact statement-context bare next and final-only bare receiver normalization, with equal typed ASTs and unchanged exclusions proved by punctuation_light_zero_arg_contract_test.dart."
-reverify: "cd dart && dart test test/action_ast_parser_test.dart test/punctuation_light_zero_arg_contract_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/action_ast_parser_test[.]dart test/punctuation_light_zero_arg_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart helper/action text now has a typed ActionIR parser seam:

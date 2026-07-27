@@ -13,7 +13,7 @@ date: 2026-07-09
 status: current
 tags: [dart, validation, parser, ast, strict-syntax]
 evidence: "DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and dart/test/spec_validator_test.dart. Tests cover focused validation failures, strictSyntax unused-rule rejection, all checked-in specs/*.spec in non-strict mode, and rule-only corpus input.spec files."
-reverify: "cd dart && dart test test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings"
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/spec_validator_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 Dart `validateSpec(...)` lives in `dart/lib/src/validation/spec_validator.dart`
