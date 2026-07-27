@@ -47,7 +47,10 @@ local function command_succeeded(command)
 end
 
 local function with_temp_directory(operation)
-  local handle = assert(io.popen("mktemp -d /private/tmp/linkedspec-lua-repeated-result.XXXXXX", "r"))
+  local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
+  assert(temp_root ~= "", "TMPDIR must not be empty")
+  local template = temp_root:gsub("/+$", "") .. "/linkedspec-lua-repeated-result.XXXXXX"
+  local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
   local root = assert(handle:read("*l"))
   assert(handle:close())
   local ok, value = pcall(operation, root)

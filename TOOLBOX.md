@@ -360,6 +360,18 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3'` and
   `bash tools/test_julia_project_data_storage.sh`. The complete Julia gate invokes and reuses the oracle.
 
+### 4.3.6 Lua targeted commands and SSD-local storage oracle
+
+- **WHAT:** `tools/run_lua_project_data.sh` builds disposable native modules and runs one PUC Lua or LuaJIT command
+  under repository-derived managed scratch; `tools/test_lua_project_data_storage.sh` locks all 13 Lua-family
+  allocation owners, both ABI module pairs, actual device identity, generated v2 source, trace output, hostile
+  other-filesystem builder rejection, quoted-path handling, and cleanup.
+- **WHEN:** use the targeted wrapper for a Lua command that bypasses `tools/run_lua_local.sh`; run the oracle when
+  changing Lua temp allocation, native builds, generated-source workspaces, traces, or Lua gate routing.
+- **HOW:** `bash tools/run_lua_project_data.sh puc -e 'local l = require("linkedspec"); print(l.backend_name())'`,
+  `bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_test.lua`, and
+  `bash tools/test_lua_project_data_storage.sh`. The complete Lua gate invokes the oracle and reuses its ABI builds.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -378,7 +390,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
   foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
   `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
-  environment, lifecycle, and 30-entrypoint outside-cwd proofs. Build the book through
+  environment, lifecycle, and 33-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
   home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports

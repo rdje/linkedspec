@@ -30,10 +30,13 @@ answers:
   - how many Julia temporary allocation owners exist
   - is the LinkedSpec Julia package depot complete offline
   - were old Julia temporary depots and checkout metadata deleted
+  - has Lua project data been migrated to the SSD
+  - how many Lua temporary allocation owners exist
+  - were old Lua temporary workspaces deleted
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, ssd, cache, temporary-data, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; .2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates/verifies/uses/deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. Dart .2.3 atomically moves the complete 47-package cache into its canonical root, proves all 18 owners plus generated/traced use, and deletes the two exact shared active-root records after use. Julia .2.4 supplies a complete five-package source-bearing depot, proves all 17 temporary owners plus generated/trace use, migrates and deletes both exact old depots, deletes the exact former-checkout shared-log stanza, and moves 88 existing current reverify cards onto managed wrappers. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
+evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; .2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates/verifies/uses/deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. Dart .2.3 atomically moves the complete 47-package cache into its canonical root, proves all 18 owners plus generated/traced use, and deletes the two exact shared active-root records after use. Julia .2.4 supplies a complete five-package source-bearing depot, proves all 17 temporary owners plus generated/trace use, migrates and deletes both exact old depots, deletes the exact former-checkout shared-log stanza, and moves 88 existing current reverify cards onto managed wrappers. Lua .2.5 proves all 13 allocation owners, both ABI-specific native module pairs, generated v2 output, and traces stay on repository storage; it rejects cross-volume native output before creation and finds zero exact old Lua workspace residue. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration."
 reverify: "git status --short && git ls-files -- . ':(exclude)rgx' | wc -l && rg --no-config -l 'File::Temp|tempdir\\(|tempfile\\(|TemporaryDirectory|NamedTemporaryFile|mktempdir\\(|Directory\\.systemTemp|std::env::temp_dir|tempfile::tempdir|mktemp -d' t tools julia lua dart rust knowledge-map .githooks | wc -l"
 ---
 
@@ -90,9 +93,16 @@ and cleanup. Both exact old depots were copied and verified on SSD storage befor
 exact former-checkout shared-log stanza is gone. The shared developer depot remains untouched and unused. Only
 Julia-managed system depots remain as strictly required external read-only runtime dependencies.
 
+Lua now has equivalent ongoing protection. `tools/run_lua_project_data.sh` builds an isolated two-module native
+set for the selected PUC Lua or LuaJIT ABI below managed scratch. `tools/test_lua_project_data_storage.sh` locks all
+13 allocation owners, actual module/generated/trace devices, non-symlink identity, quoting through a path with a
+space, native parsing, and pre-create rejection of an other-filesystem builder destination. Both exact old-root
+`linkedspec-lua-*` censuses are zero, so no old Lua payload existed to copy or delete. Required interpreters,
+compiler, headers, and libraries remain strictly necessary read-only external inputs.
+
 Cross-volume reads are denied by default. The narrow exception is an explicit caller path or a strictly required
 externally managed executable, system library, device, credential, or OS service. Those are dependencies, not
 project storage, and their exact supported surface is documented and gated. Related facts:
 [[perl-project-data-ssd-storage]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]],
 [[julia-project-data-ssd-storage]], [[repository-root-path-portability]], [[rust-local-verification-gate]],
-[[lua-toolchain-package-policy]].
+[[lua-project-data-ssd-storage]], [[lua-toolchain-package-policy]].

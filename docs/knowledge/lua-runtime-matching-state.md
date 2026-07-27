@@ -15,8 +15,8 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, runtime, regex, PCRE2, match-state, native-extension, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.4.1 adds lua/native/regex_pcre2.c, tools/build_lua_native.sh, lua/src/linkedspec/matching.lua, disposable dual-ABI gate builds, and five focused matching tests. The gate passes 60/60 on PUC Lua and LuaJIT and leaves no /private/tmp/linkedspec-lua-native.* tree."
-reverify: "bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print"
+evidence: "LUA-BACKEND-PARITY.4.1 adds lua/native/regex_pcre2.c, tools/build_lua_native.sh, lua/src/linkedspec/matching.lua, disposable dual-ABI gate builds, and five focused matching tests. PROJECT-DATA-SSD-ROOTING.2.5 makes the builder, complete gate, and targeted wrapper self-rooted; both ABI module pairs build below managed repository TMPDIR, the builder rejects another-filesystem output before creation, and the storage oracle proves cleanup."
+reverify: "bash tools/run_lua_local.sh && bash tools/test_lua_project_data_storage.sh"
 ---
 
 ## Fact
@@ -30,10 +30,11 @@ The shared PUC Lua/LuaJIT gate also locks positive and fixed-width negative
 lookbehind, including the one-character form used by `spec.spec`.
 
 `tools/build_lua_native.sh` compiles the same binding separately for PUC Lua and
-LuaJIT. `tools/run_lua_local.sh` writes both modules below one unique owned
-`/private/tmp/linkedspec-lua-native.*` root, selects the matching `LUA_CPATH`,
-and removes the root on every exit. Matching is in-process; no shell matcher,
-LuaRocks tree, checked binary, or global install exists.
+LuaJIT. `tools/run_lua_local.sh` writes both module pairs below one unique managed
+repository temporary root, selects the matching `LUA_CPATH`, and removes the root
+on every exit. `tools/run_lua_project_data.sh` supplies the same contract for one
+targeted ABI command. Matching is in-process; no shell matcher, LuaRocks tree,
+checked binary, or global install exists.
 
 `compile_runtime_regex_alternation(...)` accepts pattern lists or a
 `CompiledRule`. Seek chooses the earliest match and breaks equal-position ties
@@ -48,7 +49,7 @@ zero progress. Absence is `nil`; a real zero-width `[0, 0)` match is a present
 typed record. Invalid patterns, UTF-8 input, character-boundary offsets, modes,
 and foreign-input match records are typed failures.
 
-Related facts: [[lua-toolchain-package-policy]], [[spec-regex-feature-contract]],
+Related facts: [[lua-project-data-ssd-storage]], [[lua-toolchain-package-policy]], [[spec-regex-feature-contract]],
 [[lua-compiled-spec-state]], [[julia-runtime-matching-state]],
 [[dart-runtime-matching-state]], [[rust-entry-match-separation]],
 [[rust-match-presence-is-not-an-offset-sentinel]].

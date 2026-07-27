@@ -21,10 +21,11 @@ fail() {
 command -v "$LUA_CMD" >/dev/null 2>&1 || fail "required primary runtime not found: $LUA_CMD"
 command -v perl >/dev/null 2>&1 || fail "required command not found: perl"
 
-native_root=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
+native_root=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-lua-native.XXXXXX")
 trap 'rm -rf "$native_root"' EXIT
 primary_native="$native_root/puc"
 secondary_native="$native_root/luajit"
+export LINKEDSPEC_LUA_NATIVE_PUC_DIR="$primary_native"
 
 log "building disposable PUC Lua PCRE2 adapter"
 bash "$REPO_ROOT/tools/build_lua_native.sh" puc "$primary_native"
@@ -137,8 +138,12 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
   "$LUAJIT_CMD" lua/test/repeated_action_result_contract_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/run.lua
+ export LINKEDSPEC_LUA_NATIVE_LUAJIT_DIR="$secondary_native"
 else
  log "LuaJIT compatibility runtime not installed; secondary leg skipped"
 fi
+
+log "proving Lua project data stays in repository storage"
+bash tools/test_lua_project_data_storage.sh --reuse-complete-lua-gate
 
 log "Lua local gate passed"

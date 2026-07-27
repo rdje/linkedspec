@@ -60,7 +60,10 @@ end
 local function make_temp_directory(prefix)
   prefix = prefix or "linkedspec-lua-corpus"
   if not prefix:match("^[a-z0-9-]+$") then fail("invalid temporary-directory prefix") end
-  local handle = assert(io.popen("mktemp -d /private/tmp/" .. prefix .. ".XXXXXX", "r"))
+  local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
+  if temp_root == "" then fail("TMPDIR must not be empty") end
+  local template = temp_root:gsub("/+$", "") .. "/" .. prefix .. ".XXXXXX"
+  local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
   local root = assert(handle:read("*l"))
   assert(handle:close())
   return root
@@ -150,15 +153,18 @@ local function write_fixture(root, name, options)
 end
 
 local function run_corpus_runner(args)
-  local output = assert(io.tmpfile())
-  local error_output = assert(io.tmpfile())
-  local status = corpus_runner.run(args, output, error_output)
-  output:seek("set", 0)
-  error_output:seek("set", 0)
-  local output_text = assert(output:read("*a"))
-  local error_text = assert(error_output:read("*a"))
-  output:close()
-  error_output:close()
+  local status, output_text, error_text
+  with_temp_directory(function(root)
+    local output = assert(io.open(root .. "/stdout", "w+b"))
+    local error_output = assert(io.open(root .. "/stderr", "w+b"))
+    status = corpus_runner.run(args, output, error_output)
+    assert(output:seek("set", 0))
+    assert(error_output:seek("set", 0))
+    output_text = assert(output:read("*a"))
+    error_text = assert(error_output:read("*a"))
+    assert(output:close())
+    assert(error_output:close())
+  end, "linkedspec-lua-corpus-stream")
   return status, output_text, error_text
 end
 
@@ -1025,9 +1031,11 @@ test("corpus runner validates by default and rejects manifest drift", function()
 end)
 
 test("corpus manifest rejects format names duplicates and count drift", function()
-  assert_error_contains(function()
-    linkedspec.load_corpus_fixtures("/private/tmp/linkedspec-lua-corpus-does-not-exist")
-  end, "corpus directory missing", "missing corpus root")
+  with_temp_directory(function(root)
+    assert_error_contains(function()
+      linkedspec.load_corpus_fixtures(root .. "/does-not-exist")
+    end, "corpus directory missing", "missing corpus root")
+  end)
   with_temp_directory(function(root)
     write_manifest(root, { "alpha" }, { format = 2 })
     write_fixture(root, "alpha")

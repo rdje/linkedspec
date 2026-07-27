@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.5` — environment routing does not supersede writer-specific
+  authority): Exporting `TMPDIR` is necessary but cannot relocate a hard-coded filename template or C's anonymous
+  `tmpfile()` allocation. Every Lua owner now derives named paths from routed `TMPDIR`, including the formerly
+  anonymous runner files. Native output is a second authority surface because callers may select it directly;
+  the builder checks the nearest existing ancestor against the repository device before `mkdir`, then validates
+  the realized directory, preventing a rejected cross-volume path from being created at all.
+
+  Lua's two supported runtimes require separate native products even when they share source: PUC Lua and LuaJIT
+  have distinct ABI/module-loading expectations. A targeted wrapper therefore builds one isolated two-module set
+  per invocation, while the complete gate builds both once and exports the matching module directories to each
+  suite. The recurring oracle deliberately uses a managed path containing a space and rejects symlinks, so quoting
+  and canonical device checks are exercised rather than inferred from shell spelling.
+
+  The old-data policy still applies when the correct inventory is empty. Both frozen operating-system temporary
+  roots had zero exact `linkedspec-lua-*` directories before and after complete/canonical execution; this is an
+  affirmative no-residue result, not permission to delete an ambiguous parent. External interpreters, compiler,
+  package metadata, ABI/PCRE2 headers and libraries, and OS libraries are strictly necessary read-only inputs and
+  remain outside project storage. Five Lua-owned durable commands moved to supported self-rooted boundaries; the
+  one remaining composite command stays `.2.6`-owned because its writer is Python/Rust, not Lua.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.4` — package source, runtime systems, and usage metadata are different
   depot classes): A Julia `compiled/` tree is not a dependency cache by itself. The old gate could precompile into
   a writable temporary depot but still needed package source from the developer home; a trailing empty depot entry

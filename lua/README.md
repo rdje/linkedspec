@@ -481,27 +481,28 @@ Run the local gate from the repository root:
 bash tools/run_lua_local.sh
 ```
 
-The gate builds separate PUC Lua and LuaJIT PCRE2 modules into one disposable
-`/private/tmp/linkedspec-lua-native.*` directory and removes it on exit. To load
-the native module or either repository command manually for PUC Lua, build into
-caller-owned storage, retain it for the whole shell session, and provide both
-module paths:
+The gate builds separate PUC Lua and LuaJIT PCRE2/filesystem modules below one
+managed repository temporary root and removes them on exit. To load the native
+modules or run a focused repository command, use the targeted wrapper; it owns
+the selected ABI's native directory and module paths for the child:
 
 ```bash
-native_dir=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
-trap 'rm -rf "$native_dir"' EXIT
-bash tools/build_lua_native.sh puc "$native_dir"
-export LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;"
-export LUA_CPATH="$native_dir/?.so;;"
-lua -e 'local linkedspec = require("linkedspec"); print(linkedspec.backend_name())'
+bash tools/run_lua_project_data.sh puc \
+  -e 'local linkedspec = require("linkedspec"); print(linkedspec.backend_name())'
+bash tools/run_lua_project_data.sh luajit \
+  lua/test/rule_local_cursor_descriptor_test.lua
+bash tools/test_lua_project_data_storage.sh
 ```
 
 The backend has no LuaRocks or global Lua package dependency. Runtime matching
 requires a C compiler, `pkg-config`, PCRE2 headers/library, and Lua development
 headers for the selected ABI. There is not yet a LuaRocks or system-wide
 installation flow: the tracked commands are executable checkout entrypoints,
-they locate `lua/src` themselves, and they consume the caller-built modules
-through `LUA_CPATH`. The shell `trap` above removes those modules on exit.
+they locate `lua/src` themselves, and the wrapper supplies its disposable
+`LUA_CPATH`. The native builder rejects an output on another filesystem before
+creating it. Direct low-level embedding must first source `tools/project_data_env.sh`
+and build into a repository-filesystem directory; no project-owned state may
+default to an operating-system temporary directory or developer home.
 
 The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
 positionals:

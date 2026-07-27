@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.2.4` Julia depot/scratch migration, exact old-data deletion, and signoff complete; `.2.5` active)
+- Last updated: `2026-07-26` (`.2.5` Lua dual-ABI workspace migration and signoff complete; `.2.6` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -361,7 +361,7 @@ accessing the shared copy, and remove only records or directories provably owned
     push occurs.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.5`
-  Status: `active`
+  Status: `done` (2026-07-26; both Lua ABIs, 13 allocation owners, generated/trace data, and exact residue proven)
   Goal: Root Lua native builds, tests, CLI matrices, and generated artifacts on SSD storage.
   Depends on: `.2.4`
   Acceptance: Remove all hard-coded operating-system temporary roots from executable Lua harnesses; use safely
@@ -369,8 +369,36 @@ accessing the shared copy, and remove only records or directories provably owned
     leaf; pass PUC Lua and LuaJIT package/corpus/primary gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / INVENTORY** — Froze 13 executable Lua-family allocation owners, every hard-coded
+    operating-system-temporary template/default, anonymous `io.tmpfile()` use, the direct native-build boundary,
+    five Lua-specific durable verification commands, and both exact old-root `linkedspec-lua-*` censuses.
+  - [x] **ROOT CAUSE / POLICY** — Routed `TMPDIR` governs standard Lua file paths but cannot rewrite hard-coded
+    templates or govern C `tmpfile()`. Named managed files replace anonymous storage, and caller-selected native
+    output is rejected against the repository device before directory creation. PUC Lua, LuaJIT, the C compiler,
+    `pkg-config`, ABI/PCRE2 headers and libraries, and OS libraries remain necessary read-only external inputs.
+  - [x] **FIX / RECURRING ORACLE** — Added self-rooted `tools/run_lua_project_data.sh` and
+    `tools/test_lua_project_data_storage.sh`; made the native builder self-rooted and pre/post-create guarded; and
+    routed both complete ABIs, all 13 owners, generated-source hosts, traces, and corpus capture streams through
+    managed repository scratch. The oracle uses a path containing a space, builds and executes two native modules
+    per ABI, rejects symlinks/device drift and hostile cross-volume output before creation, and proves cleanup.
+  - [x] **DURABLE COMMAND MIGRATION** — Replaced all five Lua-owned current Knowledge Map commands that named the
+    old temporary root or hand-built native adapters. The sole remaining composite command is explicitly `.2.6`-
+    owned because its non-Lua Python/Rust allocator is the writer requiring migration.
+  - [x] **COPY / VERIFY / USE / DELETE** — Both exact frozen old temporary roots contained zero retained
+    `linkedspec-lua-*` directories before implementation and after the complete/canonical gates, so no Lua payload
+    existed to copy or delete. Unrelated temporary data and installed toolchain resources were untouched.
+  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash syntax, standalone/reused storage proof, 33-boundary hostile
+    outside-cwd routing, both complete 177/177 PUC Lua and LuaJIT suites, primary 66x2, corpus 105/105, diagnostic,
+    logical-helper, root-selection, and cursor/identity/result checks pass with zero managed-run residue.
+  - [x] **SIGNOFF / CLEAN PIVOT** — ADR/roadmaps/task/live/memory/Knowledge Map/mdBook are synchronized; doctrines,
+    whitespace, and canonical pass. Canonical records Rust semantic admission 1/1 in 77.68s, Dart 1/1, Julia
+    416/416 in 27.4s, primary 66x2, and Phase 0 1,031/1,031 in 626s. This commit lands at 31/300; the brief is
+    cleared, the tree is clean, and no push occurs.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.2.6`
-  Status: `pending`
+  Status: `active`
   Goal: Root Python, shell, mdBook, Knowledge Map, conformance, and miscellaneous tool artifacts on SSD storage.
   Depends on: `.2.5`
   Acceptance: Cover Python `tempfile`, shell `mktemp`, explicit log/TAP/oracle outputs, generated book paths, and
@@ -444,7 +472,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.5` | `active` | From the clean `.2.4` commit, root Lua native builds, tests, primary/corpus matrices, and generated workspaces on repository storage; migrate/delete any exact old Lua-owned data. |
+| `PROJECT-DATA-SSD-ROOTING.2.6` | `active` | From the clean `.2.5` commit, inventory and root Python, shell, mdBook, Knowledge Map, conformance, and remaining tool artifacts on repository storage; migrate/delete exact old tool-owned data. |
 
 ## Decisions
 
@@ -467,7 +495,7 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Thirty standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Thirty-three standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
   delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
@@ -485,6 +513,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable Rust storage fact: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Durable Dart storage fact: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Durable Julia storage fact: `docs/knowledge/julia-project-data-ssd-storage.md`
+- Durable Lua storage fact: `docs/knowledge/lua-project-data-ssd-storage.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -523,6 +552,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.4` | complete `tools/run_julia_local.sh` | PASS: package and affected semantic suites, 17-owner storage oracle, primary CLI conformance, corpus 105/105, and zero completed-run residue |
 | 2026-07-26 | `.2.4` | 30-boundary outside-cwd routing with hostile temp/cache roots | PASS: targeted Julia wrapper/oracle/primary, primary matrix, and all eight Julia-consuming cross-backend checkers self-route and reach their configured runtime preflight before work; zero completed-run residue |
 | 2026-07-26 | `.2.4` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 714 facts/5,627 question keys; Rust semantic admission 1/1 in 77.66s; Dart 1/1; Julia 416/416 in 27.1s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
+| 2026-07-26 | `.2.5` | Lua inventory, standalone/reused storage oracle, and exact old-root census | PASS: 13 owners; both two-module ABI sets build below a path containing a space; actual devices/non-symlinks/native parse/generated v2/trace/pre-create hostile-output rejection/cleanup proven; both initial and final old-root `linkedspec-lua-*` censuses zero |
+| 2026-07-26 | `.2.5` | complete Lua gate and 33-boundary hostile outside-cwd routing | PASS: PUC Lua 177/177; LuaJIT 177/177; primary 66x2; corpus 105/105; diagnostic/logical/root/cursor/identity/result consumers pass; every selected process reaches runtime preflight after routing; zero managed runs |
+| 2026-07-26 | `.2.5` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 715 facts/5,640 question keys; Rust semantic admission 1/1 in 77.68s; Dart 1/1; Julia 416/416 in 27.4s; primary 66x2; Phase 0 1,031/1,031 in 626s; zero managed runs |
 
 ## Commit Log
 
@@ -535,7 +567,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.1` | `269b3fbf` — `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD` | Perl storage oracle, routed primary matrix, exact 65-directory copy/verify/use/delete, and canonical proof. |
 | `.2.2` | `59c15453` — `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
 | `.2.3` | `a8a73aa9` — `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
-| `.2.4` | `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` (this commit) | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
+| `.2.4` | `ee1bb0c3` — `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
+| `.2.5` | `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` (this commit) | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
 
 ## Changelog
 
@@ -567,8 +600,13 @@ accessing the shared copy, and remove only records or directories provably owned
   package/primary/corpus proof passes offline. The two exact shared checkout records were deleted after use; shared
   package payload remains untouched and unused. `.2.4` becomes the clean Julia storage migration frontier.
 - `2026-07-26`: Completed `.2.4`; the source-bearing five-package Julia depot is canonical, all 17 temporary
-  owners plus generated/trace paths are executable under managed SSD storage, 85 durable command cards use the
+  owners plus generated/trace paths are executable under managed SSD storage, 88 durable command cards use the
   self-rooted boundary, and machine-path usage metadata is disposable. Both exact old depots and the former-
   checkout shared-log stanza were deleted after count/byte/hash and full offline-use proof; ambiguous shared depot
   data remains untouched and unused. Thirty-boundary routing and canonical signoff pass; `.2.5` becomes the clean
   Lua storage migration frontier after commit.
+- `2026-07-26`: Completed `.2.5`; both PUC Lua and LuaJIT build isolated native modules below managed repository
+  scratch, all 13 allocation owners plus generated/trace/corpus paths are routed, five durable commands use the
+  supported wrapper/gate, and the exact old Lua workspace census remains zero. The 33-boundary routing proof,
+  both 177/177 backend suites, primary 66x2, corpus 105/105, affected cross-backend checks, and canonical signoff
+  pass; `.2.6` becomes the clean Python/shell/book/Knowledge Map/conformance/tool storage frontier after commit.

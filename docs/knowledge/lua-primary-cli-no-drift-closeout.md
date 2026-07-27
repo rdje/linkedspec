@@ -29,13 +29,12 @@ process cases under both default and POSIX option environments on PUC Lua,
 The closeout's canonical local CI also passes the reference CLI 61/61 in both
 option environments and Phase 0 1031/1031 in 608 seconds.
 
-Repository checkout use requires the two native PCRE2/filesystem modules. Build
-them into caller-owned temporary storage, keep that directory alive for the
-whole shell session, export `LUA_CPATH` to its `?.so` files, and use an EXIT trap
-for cleanup. Exporting the documented `LUA_PATH` also enables direct
-`require("linkedspec")`; the tracked primary and corpus executables locate
-`lua/src` themselves. No native module, Lua package, or command is installed
-globally, and LuaRocks is not a dependency.
+Repository checkout use requires the two native PCRE2/filesystem modules. Run a
+targeted command through `tools/run_lua_project_data.sh puc ...` (or `luajit`):
+the wrapper builds below managed repository scratch, supplies `LUA_PATH` and
+`LUA_CPATH` to the child, and cleans on exit. The tracked primary and corpus
+executables locate `lua/src` themselves. No native module, Lua package, or
+command is installed globally, and LuaRocks is not a dependency.
 
 The primary command remains parser-oriented. The unchanged manifest proves
 that `status` and `corpus` are rejected positionals; validation and full
@@ -47,7 +46,7 @@ Contract-sourced 8/105 admission `.8.3` is also closed, and final
 census/handoff `.8.4` closes the Lua tree at five-backend 80/0/0.
 
 Related facts: [[lua-primary-cli-adapter]],
-[[lua-primary-cli-recurring-admission]], [[lua-native-backend-scaffold]],
+[[lua-primary-cli-recurring-admission]], [[lua-native-backend-scaffold]], [[lua-project-data-ssd-storage]],
 [[lua-toolchain-package-policy]], [[lua-full-corpus-gate]],
 [[lua-backend-full-parity-plan]], [[lua-generated-source-scaffold-split]],
 [[lua-generated-source-emitter-core]], [[lua-generated-source-fresh-process-isolation]],

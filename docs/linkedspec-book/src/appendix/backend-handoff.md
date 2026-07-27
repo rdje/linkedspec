@@ -760,14 +760,16 @@ From the repository root, run the complete checkout-local proof with:
 bash tools/run_lua_local.sh
 ```
 
-For direct embedding, primary-command, and corpus examples, first build the
-PUC native PCRE2/filesystem adapters into caller-owned temporary storage and
-export `LUA_PATH` plus `LUA_CPATH` for the entire shell session. The complete,
-copyable setup and cleanup sequence is in
+For direct embedding, primary-command, and corpus examples, use
+`tools/run_lua_project_data.sh puc ...` or its `luajit` leg. The wrapper builds
+the ABI-specific PCRE2/filesystem adapters below managed repository scratch,
+supplies `LUA_PATH` plus `LUA_CPATH` to the child, and cleans on exit. The complete,
+copyable command sequence is in
 [Native Spec Loading](../public-api/native-spec-loading.md#lua-primary-parser-command).
 There is no LuaRocks or system-wide installation dependency; the tracked
 checkout commands are executable, and native modules are never installed
-globally.
+globally. `tools/test_lua_project_data_storage.sh` is the recurring same-filesystem
+proof for all 13 Lua allocation owners and both ABIs.
 
 The primary command has no corpus/status subcommands or backend-only options;
 the developer corpus runner remains separate. Planning `.8.1.0` corrects the original
@@ -792,8 +794,9 @@ The foundation policy uses `lua/src/linkedspec/`, a dependency-free
 `LUA_PATH` and never write global package locations. No JSON package is
 required: corpus IO now uses a small pure-Lua codec with explicit null,
 array, and harray identity plus canonical object ordering. LPeg remains outside
-the scaffold dependency set. Any future LuaRocks tree must be caller-owned
-under temporary storage and recursively removed. At the historical foundation
+the scaffold dependency set. Any future LuaRocks cache must use a root-derived
+repository cache and any disposable work must remain below managed `TMPDIR`.
+At the historical foundation
 boundary, `require("linkedspec")` returned exact backend/status/entrypoint
 identity, the still-unimplemented primary scaffold intentionally exited `2`,
 and the developer corpus command only validated the 105-fixture manifest. That
@@ -1363,8 +1366,10 @@ was evaluated and rejected for this role: it constructs PEG patterns but does
 not parse LinkedSpec's governed PCRE syntax. No `rex_*` module is installed.
 `tools/build_lua_native.sh` compiles the binding separately against the PUC Lua
 and LuaJIT ABIs. `tools/run_lua_local.sh` places both builds under one unique
-caller-owned `/private/tmp/linkedspec-lua-native.*` tree and removes the tree on
-every exit, so no binary/cache enters the repository or global Lua paths.
+managed repository temporary tree and removes the tree on every exit, so no
+binary/cache enters tracked or global Lua paths. The builder validates the
+output filesystem before creation and after resolution; the targeted
+`tools/run_lua_project_data.sh` wrapper supplies the same boundary for one ABI.
 Matching remains in-process; it never shells out to `pcre2grep` or Perl.
 
 Given a compiled rule, matching is direct:

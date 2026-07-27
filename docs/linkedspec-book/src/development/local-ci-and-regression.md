@@ -940,7 +940,42 @@ the child command while retaining package sources, registry, and compiled cache.
 stale checkout identity in retained project data. All 88 existing current Julia Knowledge Map reverify cards now use the
 targeted wrapper, complete gate, or self-rooted primary checker. The workflow-routing oracle covers 30 boundaries,
 including all eight Julia-consuming cross-backend checkers.
-Lua/tool migration remains `.2.5-.2.6`.
+
+### Lua native modules, temporary workspaces, generated output, and traces
+
+Lua migration `.2.5` adds a targeted self-rooted wrapper for either ABI:
+
+```console
+$ bash tools/run_lua_project_data.sh puc -e 'local l = require("linkedspec"); print(l.backend_name())'
+$ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_test.lua
+```
+
+The wrapper enters managed repository scratch, creates a unique native directory, builds the selected ABI's PCRE2
+and filesystem modules, supplies repository `LUA_PATH` and the disposable `LUA_CPATH` to the child, and cleans the
+native tree on exit. `tools/build_lua_native.sh` is also self-rooted: it compares the nearest existing output
+ancestor with the repository device before creation and validates the resolved directory afterward. A caller-
+selected output on another filesystem is rejected without creating the requested path.
+
+The recurring process oracle is:
+
+```console
+$ bash tools/test_lua_project_data_storage.sh
+```
+
+It freezes the exact 13 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
+hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both two-module ABI sets
+below a managed path containing a space. It checks actual filesystem identity and non-symlink module files, runs a
+real native parse, writes generated-source v2 and trace output, rejects an other-filesystem builder destination,
+and proves exact cleanup. The complete `tools/run_lua_local.sh` gate reuses its two ABI builds and runs the oracle
+after both 177-test suites, primary 66/66 twice, and corpus 105/105. Three new self-rooted boundaries raise the
+hostile outside-cwd routing proof from 30 to 33.
+
+Both initial old-root censuses contained zero exact `linkedspec-lua-*` directories, and the complete proof leaves
+them at zero. There was therefore no retained Lua payload to copy or delete. The installed Lua interpreters,
+compiler, `pkg-config`, ABI/PCRE2 headers and library, and operating-system libraries are strictly necessary read-
+only toolchain inputs, not project storage. One composite Knowledge Map command whose remaining scratch belongs to
+Python/Rust is explicitly deferred to tool-family `.2.6`; all five Lua-owned stale commands now use managed
+boundaries. Tool migration remains `.2.6`.
 
 ## CI input areas
 

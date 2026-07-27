@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; common lifecycle plus Perl, Rust, Dart, and Julia migrations implemented; Lua/tool migrations pending
+- Status: accepted; common lifecycle plus Perl, Rust, Dart, Julia, and Lua migrations implemented; tool migration pending
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -111,6 +111,15 @@ boundary for storage locality.
 - Eighty-eight existing current Julia reverify cards now use managed self-rooted boundaries. Supported package commands
   remove the disposable depot `manifest_usage.toml`, which otherwise retains runtime absolute checkout and
   managed-run paths; package sources, registry, and compiled cache remain retained.
+- Lua migration adds a self-rooted targeted PUC Lua/LuaJIT wrapper and a recurring 13-owner storage oracle. The
+  complete gate and guarded builder place each ABI's PCRE2/filesystem native modules, every test workspace,
+  generated v2 source, trace, CLI capture, and corpus capture below managed repository `TMPDIR`. The builder checks
+  the nearest existing output ancestor before creation and the resolved directory afterward, so an explicit
+  another-filesystem destination is rejected without writing there.
+- The exact initial and final old-root census contains zero retained `linkedspec-lua-*` directories, so no exact
+  Lua-owned payload existed to migrate or delete. PUC Lua/LuaJIT, `cc`, `pkg-config`, Lua/PCRE2 development files,
+  and operating-system libraries remain necessary read-only external toolchain inputs. Supported workflows create
+  no LuaRocks or global-module state.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -124,5 +133,6 @@ boundary for storage locality.
 - Rust storage: `docs/knowledge/rust-project-data-ssd-storage.md`
 - Dart storage: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Julia storage: `docs/knowledge/julia-project-data-ssd-storage.md`
+- Lua storage: `docs/knowledge/lua-project-data-ssd-storage.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

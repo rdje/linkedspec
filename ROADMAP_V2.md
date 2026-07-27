@@ -30,8 +30,10 @@ checkout records were deleted while ambiguous shared package payload remained un
 complete five-package offline depot and 17-owner temp/generated/trace oracle, migrates 88 current durable commands,
 and deletes both exact old depots plus the former-checkout shared-log stanza after full-gate use. The shared
 developer depot remains untouched and unused; only Julia-managed system depots remain necessary external reads.
-Active `.2.5` owns Lua native builds and workspaces. Migration remains copy/verify/use/delete; ambiguous shared caches are
-not deleted wholesale.
+Lua `.2.5` roots all 13 allocation owners, both ABI native-module pairs, generated output, traces, primary 66x2,
+and corpus 105/105 on repository storage. Its guarded builder rejects other-filesystem output before creation; exact
+old Lua workspace residue was zero. Active `.2.6` owns Python, shell, book, Knowledge Map, conformance, and other
+tool artifacts. Migration remains copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

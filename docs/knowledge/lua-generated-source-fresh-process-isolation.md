@@ -11,8 +11,8 @@ answers:
 date: 2026-07-19
 status: current for generated-source v2
 tags: [lua, generated-source, isolation, subprocess, cleanup, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.8.1.2 adds one recurring test in lua/test/run.lua and passes the selected ABI runtime through LINKEDSPEC_LUA_TEST_RUNTIME from tools/run_lua_local.sh. The test writes a valid generated module, a payload-corrupt variant, and a host runner under a unique /private/tmp/linkedspec-lua-generated.* root. Fresh env-launched PUC Lua and LuaJIT processes use the exact gate LUA_PATH/LUA_CPATH, emit exact JSON on stdout, and leave stderr empty. The valid host locks Unicode identity/result, metadata, direct/traced values, native trace, and missing-rule attribution; the corrupt host locks compile_or_load_generated_source/generated_source_compile_failed plus identity. Normal and injected-failure paths both require the caller-owned root to be absent. PUC Lua and LuaJIT pass 173/173; canonical Phase 0 is 1031/1031 in 607 seconds."
-reverify: "bash tools/run_lua_local.sh; find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-generated*' -print; rg -n 'LINKEDSPEC_LUA_TEST_RUNTIME|generated Lua source loads and fails|compile_or_load_generated_source' tools/run_lua_local.sh lua/test/run.lua"
+evidence: "LUA-BACKEND-PARITY.8.1.2 adds one recurring test in lua/test/run.lua and passes the selected ABI runtime through LINKEDSPEC_LUA_TEST_RUNTIME from tools/run_lua_local.sh. PROJECT-DATA-SSD-ROOTING.2.5 routes its valid generated module, payload-corrupt variant, host runner, stdout, and stderr through one unique directory below managed repository TMPDIR. Fresh PUC Lua and LuaJIT children use the exact gate LUA_PATH/LUA_CPATH; normal and injected-failure paths both require the owned root to be absent. The storage oracle independently locks generated v2 and trace device identity."
+reverify: "bash tools/run_lua_local.sh && bash tools/test_lua_project_data_storage.sh && rg -n 'LINKEDSPEC_LUA_TEST_RUNTIME|generated Lua source loads and fails|compile_or_load_generated_source' tools/run_lua_local.sh lua/test/run.lua"
 ---
 
 `tools/run_lua_local.sh` passes the exact runtime selected for each ABI into
@@ -20,7 +20,7 @@ the native test suite. The generated-source host test therefore launches PUC
 Lua for the primary leg and LuaJIT for the compatibility leg instead of
 rediscovering a possibly different executable from `PATH`.
 
-Each invocation creates one unique caller-owned root containing a valid
+Each invocation creates one unique managed repository temporary root containing a valid
 generated module, a variant whose embedded JSON payload is invalid, and a
 small host runner. The child is launched with explicit `LUA_PATH` and
 `LUA_CPATH`, so it imports the checkout source and the same disposable native
@@ -50,5 +50,5 @@ fresh-host boundary and raises both ABIs to 177/177; census `.8.4` is now closed
 Related facts: [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-emitter-core]],
 [[lua-generated-source-scaffold-split]], [[generated-source-contract-v1]],
 [[lua-generated-source-family-plan]], [[lua-generated-source-accepted-subset]],
-[[lua-five-backend-capability-admission]],
+[[lua-five-backend-capability-admission]], [[lua-project-data-ssd-storage]],
 [[lua-toolchain-package-policy]].

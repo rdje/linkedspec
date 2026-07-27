@@ -8,15 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.5` — from the clean Julia migration commit, root Lua native builds, tests, CLI
-  matrices, generated artifacts, and temporary workspaces on the repository filesystem; migrate and verify any
-  retained Lua-owned data, delete its exact old copy, and pass both PUC Lua and LuaJIT gates.
+- `PROJECT-DATA-SSD-ROOTING.2.6` — from the clean Lua migration commit, inventory and root Python, shell, mdBook,
+  Knowledge Map, conformance, and remaining tool artifacts on the repository filesystem; migrate and verify any
+  retained tool-owned data, delete its exact old copy, and pass focused tool/book gates.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.5 — root Lua workspaces on SSD**
+  (13-owner dual-ABI native/temp/generated/trace proof, five durable commands migrated, exact old residue zero,
+  complete Lua and canonical gates; closes with this commit).
+
+  **Result:** Both PUC Lua and LuaJIT now build their two ABI-specific native modules below managed repository
+  scratch. All 13 allocation owners use routed `TMPDIR`; generated v2 output, traces, corpus streams, and named
+  replacements for anonymous `io.tmpfile()` remain on the repository filesystem. The guarded native builder
+  rejects an other-filesystem output before creation. Exact old `linkedspec-lua-*` residue was zero before and
+  after the migration, so there was no payload to copy or delete; necessary external toolchain inputs remain
+  read-only.
+
+  **Proof:** Bash syntax, standalone/reused storage, a path containing a space, both 177/177 ABI suites, primary
+  66x2, corpus 105/105, affected cross-backend checks, 33-boundary outside-cwd routing, doctrines, Knowledge Map
+  715/5,640, task/memory, mdBook, whitespace, exact residue, and zero managed runs pass. Canonical passes Rust
+  semantic admission 1/1 in 77.68s, Dart 1/1, Julia 416/416 in 27.4s, primary 66x2, and Phase 0 1,031/1,031 in
+  626s. Push is 31/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.4 — root Julia depots and scratch on SSD**
   (17-owner depot/temp/generated/trace proof, 88 existing current reverify cards migrated, two exact old depots
   plus the former-checkout usage-log record deleted, full Julia and canonical gates; closes with this commit).

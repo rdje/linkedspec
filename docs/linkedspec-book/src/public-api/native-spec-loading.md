@@ -143,23 +143,19 @@ and typed JSON APIs documented above. It accepts exactly ADR `0023`'s source/inp
 no subcommands or positional arguments:
 
 ```bash
-# Run from the repository root. Keep this caller-owned native directory alive
-# for every module, primary-command, and corpus command in the shell.
-native_dir=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
-trap 'rm -rf "$native_dir"' EXIT
-bash tools/build_lua_native.sh puc "$native_dir"
-export LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;"
-export LUA_CPATH="$native_dir/?.so;;"
-
-lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
-lua/bin/linkedspec-lua \
+# The self-rooted wrapper builds the selected ABI below managed repository
+# scratch, supplies LUA_PATH/LUA_CPATH to the child, and cleans on exit.
+bash tools/run_lua_project_data.sh puc \
+  lua/bin/linkedspec-lua --spec Lispish --input '(hello world)'
+bash tools/run_lua_project_data.sh puc lua/bin/linkedspec-lua \
   --spec-file demo.spec --input-file demo.txt --top-rule Top
 ```
 
 The checkout commands are tracked executables and locate `lua/src` themselves;
-`LUA_PATH` also enables direct `require("linkedspec")` embedding. Native PCRE2
-and filesystem modules are not installed globally, so every command needs the
-caller-built `LUA_CPATH` above. There is no LuaRocks installation dependency.
+the targeted wrapper also enables direct `require("linkedspec")` embedding.
+Native PCRE2 and filesystem modules are not installed globally, so every direct
+command needs the wrapper-owned `LUA_CPATH`. The guarded builder rejects output
+on another filesystem before creating it. There is no LuaRocks installation dependency.
 Cursor policy is derived from each entered rule family. The retired `--parse-mode`
 flag is absent from help and returns its targeted usage migration error if supplied.
 

@@ -37,8 +37,11 @@ successful use while ambiguous shared package payload remains untouched. Julia `
 source-bearing five-package depot resolves offline, all 17 temporary owners plus generated/trace paths stay on the
 repository filesystem, 88 existing current reverify cards use managed self-rooted wrappers, and both exact old depots plus
 the former-checkout shared-log stanza were deleted after verified full-gate use. The shared developer depot remains
-untouched and unused; only Julia-managed system depots remain necessary read-only external inputs. Active `.2.5`
-owns Lua native builds and workspaces. The path-portability closeout
+untouched and unused; only Julia-managed system depots remain necessary read-only external inputs. Lua `.2.5` is
+complete: all 13 allocation owners, dual-ABI native builds, generated output, traces, complete ABI suites, primary
+66x2, and corpus 105/105 stay on repository storage. The guarded builder rejects another-filesystem output before
+creation; exact old Lua workspace residue was zero, so no payload required migration or deletion. Active `.2.6`
+owns Python, shell, mdBook, Knowledge Map, conformance, and miscellaneous tool artifacts. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 

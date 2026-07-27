@@ -34,7 +34,7 @@ export JULIA_DEPOT_PATH="$JULIA_DEPOT"
 JULIA_WRITE_DEPOT=${JULIA_DEPOT_PATH%%:*}
 [[ -n "$JULIA_WRITE_DEPOT" ]] || fail 'first Julia depot entry must not be empty'
 mkdir -p "$JULIA_WRITE_DEPOT"
-LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-diagnostic-output.XXXXXX")
+LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-diagnostic-output.XXXXXX")
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 
 log "checking the neutral schema, semantic model, topology, and drift mutations"

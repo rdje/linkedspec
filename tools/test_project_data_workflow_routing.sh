@@ -39,6 +39,7 @@ routed_entrypoints=(
  tools/run_julia_local.sh
  tools/run_julia_project_data.sh
  tools/run_lua_local.sh
+ tools/run_lua_project_data.sh
  tools/run_primary_cli_matrix.sh
  tools/run_cargo_local.sh
  tools/run_mdbook_local.sh
@@ -46,6 +47,8 @@ routed_entrypoints=(
  tools/test_rust_project_data_storage.sh
  tools/test_dart_project_data_storage.sh
  tools/test_julia_project_data_storage.sh
+ tools/test_lua_project_data_storage.sh
+ tools/build_lua_native.sh
  tools/check_julia_primary_cli.sh
  tools/check_diagnostic_output_five_backend.sh
  tools/check_duplicate_regex_slot_identity_five_backend.sh
@@ -169,6 +172,8 @@ run_routed_case julia-storage failure "$REPO_ROOT/tools/test_julia_project_data_
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case julia-project-data failure "$REPO_ROOT/tools/run_julia_project_data.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case lua-project-data failure "$REPO_ROOT/tools/run_lua_project_data.sh" \
+ LINKEDSPEC_LUA_CMD=linkedspec-routing-test-missing-lua
 run_routed_case julia-primary failure "$REPO_ROOT/tools/check_julia_primary_cli.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case diagnostic-five failure "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh" \
@@ -194,6 +199,8 @@ run_routed_case dart failure "$REPO_ROOT/tools/run_dart_local.sh" \
 run_routed_case julia failure "$REPO_ROOT/tools/run_julia_local.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case lua failure "$REPO_ROOT/tools/run_lua_local.sh" \
+ LINKEDSPEC_LUA_CMD=linkedspec-routing-test-missing-lua
+run_routed_case lua-storage failure "$REPO_ROOT/tools/test_lua_project_data_storage.sh" \
  LINKEDSPEC_LUA_CMD=linkedspec-routing-test-missing-lua
 
 printf '%s\n' '[project-data-routing-test] PASS: standard workflows initialize repo-filesystem storage from outside cwd'

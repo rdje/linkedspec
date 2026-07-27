@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.5 — root Lua workspaces on SSD
+
+Added `tools/run_lua_project_data.sh` as the supported targeted PUC Lua/LuaJIT boundary and
+`tools/test_lua_project_data_storage.sh` as the recurring dual-ABI storage oracle. The wrapper creates a unique
+native directory below managed `TMPDIR`, builds the selected ABI's PCRE2 and filesystem modules, supplies
+repository source/module paths, executes the child from the repository root, and removes its owned native output.
+The oracle freezes all 13 executable Lua-family allocation owners and builds both two-module ABI sets below a path
+containing a space; it checks actual devices and non-symlink module identity, performs native parsing, writes
+generated v2 source and trace output, rejects an other-filesystem native destination before creation, and proves
+exact cleanup.
+
+Replaced hard-coded operating-system-temporary templates throughout the Lua test family with routed `TMPDIR` and
+replaced anonymous `io.tmpfile()` storage with named managed files. `tools/build_lua_native.sh` now self-roots and
+checks the nearest existing output ancestor before creating directories, then checks the resolved output device.
+The complete Lua gate exports isolated native module paths for both ABIs and runs the storage oracle. Four directly
+invocable Lua-consuming cross-backend checkers now self-route; recurring outside-cwd proof therefore covers 33
+boundaries. Five current Lua Knowledge Map commands now use the supported wrapper or complete gate. One composite
+Python/Rust allocator remains explicitly owned by `.2.6`.
+
+The exact initial and final censuses found zero retained `linkedspec-lua-*` directories in both frozen old
+temporary roots, so no Lua-owned payload existed to copy or delete. PUC Lua, LuaJIT, the C compiler, `pkg-config`,
+ABI/PCRE2 headers and libraries, and OS libraries remain strictly necessary read-only toolchain inputs. Bash
+syntax, standalone/reused storage, PUC Lua 177/177, LuaJIT 177/177, primary 66x2, corpus 105/105, affected
+diagnostic/logical/root/cursor/identity/result checks, 33-boundary routing, and zero-run cleanup pass. Doctrines,
+Knowledge Map (715 facts / 5,640 question keys), task/memory/live docs, mdBook, and whitespace pass. Canonical
+records Rust semantic admission 1/1 in 77.68 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, primary 66x2, and
+Phase 0 1,031/1,031 in 626 seconds. Push cadence advances to 31/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.4 — root Julia depots and scratch on SSD
 
 Added `tools/run_julia_project_data.sh` as the supported self-rooted boundary for targeted Julia commands and

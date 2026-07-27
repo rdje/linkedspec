@@ -262,7 +262,9 @@ payload remains untouched when ownership is ambiguous; LinkedSpec instead popula
 stops consulting the shared copy. Julia `.2.4` makes the retained source-bearing five-package depot canonical,
 proves all 17 Julia temporary owners plus generated/trace paths, migrates 88 current durable commands, and deletes
 both exact old depots plus the exact former-checkout shared-log stanza after complete offline use. Julia's shared
-developer depot remains untouched and unused; Lua `.2.5` is the active migration frontier.
+developer depot remains untouched and unused. Lua `.2.5` roots all 13 allocation owners, dual-ABI native modules,
+generated source, and traces on repository storage; its exact old-workspace census is zero. Tool-family `.2.6` is
+the active migration frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -333,7 +335,7 @@ build output remains below `rust/target`. The oracle locks all 17 Rust temporary
 generated child projects and traces, and runs a real copied primary binary from managed scratch while checking
 filesystem device identity. Exact Rust-prefixed residue in the old temporary roots is zero, so no unambiguous old
 Rust datum was deleted. The ambiguous shared developer Cargo cache remains untouched and supported workflows no
-longer consult it. Dart and Julia migration are complete; Lua/tool migration remains `.2.5-.2.6`-owned.
+longer consult it. Dart, Julia, and Lua migration are complete; tool migration remains `.2.6`-owned.
 
 Julia migration `.2.4` adds a targeted command boundary and a recurring storage oracle:
 
@@ -351,6 +353,24 @@ because it records machine-specific runtime paths; package sources, registry, an
 The two exact old internal-volume depots and one exact former-checkout shared usage record were deleted only after
 copy/count/byte/hash verification and successful full-gate use. The ambiguous shared developer depot remains
 untouched and is no longer consulted.
+
+Lua migration `.2.5` adds a targeted dual-ABI command boundary and a recurring storage oracle:
+
+```bash
+bash tools/run_lua_project_data.sh puc -e 'local l = require("linkedspec"); print(l.backend_name())'
+bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_test.lua
+bash tools/test_lua_project_data_storage.sh
+```
+
+The wrapper builds the selected ABI's two native adapters below managed `TMPDIR`, supplies repository module paths
+to the child, and removes its disposable tree. The guarded native builder validates the nearest existing output
+ancestor before creation and the resolved directory afterward, rejecting another-filesystem destination without
+creating it. The oracle locks all 13 Lua-family allocation owners, builds both ABIs in a path containing a space,
+checks actual device and non-symlink module identity, performs a native parse, writes generated v2 source and a
+trace, and proves cleanup. `tools/run_lua_local.sh` integrates the same proof with both 177-test ABI suites, primary
+66x2, and corpus 105/105. Exact initial and final `linkedspec-lua-*` residue in both old temporary roots is zero,
+so there was no retained Lua payload to migrate or delete. Installed interpreters, compiler, package discovery,
+headers, PCRE2, and operating-system libraries remain necessary read-only external toolchain inputs.
 
 ## Documentation Layers
 - `docs/linkedspec-book/`

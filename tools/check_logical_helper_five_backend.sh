@@ -33,7 +33,7 @@ cd "$REPO_ROOT"
 export JULIA_DEPOT_PATH="$JULIA_DEPOT"
 JULIA_WRITE_DEPOT=${JULIA_DEPOT_PATH%%:*}
 mkdir -p "$JULIA_WRITE_DEPOT"
-LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/linkedspec-logical-helper.XXXXXX")
+LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPDIR}/linkedspec-logical-helper.XXXXXX")
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 
 log "checking the neutral schema, semantic model, topology, and drift mutations"
