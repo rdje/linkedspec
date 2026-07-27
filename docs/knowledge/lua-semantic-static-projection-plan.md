@@ -26,8 +26,10 @@ answers:
   - "does Lua preserve its native diagnostic after portable failure normalization"
   - "what command verifies all Lua private semantic static targets"
   - "does Lua static projection expose query trace or runtime observations"
+  - "is Lua remaining static target canonical closeout complete"
+  - "what is the next Lua semantic task after static target closeout"
 date: 2026-07-27
-status: current; all five private construction targets implemented, final canonical closeout pending
+status: current; all five private construction targets implemented and remaining-target canonical closeout complete
 tags: [lua, luajit, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.2.0; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors and query source projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
@@ -150,8 +152,12 @@ The registered 122-assertion suite proves both ABIs, distinct repeated `E:0`/`E:
 clones, frozen retained handles, parse/missing-entry fallbacks, public opacity, and no target/generated execution or
 host dependency. Together with source 379, outcome 122, and graph 64, it passes complete PUC Lua and LuaJIT gates,
 primary 660/660, Unicode 10/10, and every unchanged governance ledger. Run `bash tools/run_lua_local.sh` for the
-complete dual-ABI proof. Final canonical closeout remains `.10.7.3.2.1.2` after the separately owned process-oracle
-correction; no semantic query, observation, format, rollout, or admission moved in the implementation child.
+complete dual-ABI proof. Clean-dependency closeout `.10.7.3.2.1.2` starts from implementation `3f878ad2` and
+process-oracle correction `e7ae984d`. Canonical passes all six doctrines, Rust admission 1/1 in 78.09 seconds,
+Dart admission 1/1, Julia admission 416/416 in 27.4 seconds, corrected six-family containment, moved-root
+execution, primary 66/66 twice, and Phase 0 1,031/1,031 in 637 seconds. This closes `.10.7.3.2.1` and
+`.10.7.3.2` without semantic query, observation, format, rollout, or admission movement. No-change committed-owner
+recomposition `.10.7.3.3` is next.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-compilation-foundation]],
 [[lua-semantic-source-outcome-plan]], [[semantic-introspection-neutral-contract]],

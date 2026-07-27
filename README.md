@@ -1374,9 +1374,11 @@ content migration exists yet.
   `Default` repetition and failure only in projection, and expose no host/path/AST/ActionIR/regex state. Graph
   implementation `.10.7.3.1` now privately retains the exact 12-record/14-relation/seven-source-reference target
   on both ABIs, using protected empty handles for recursive immutability and fresh detached test clones. Behavior-
-  free `.10.7.3.2.0` reconciles full private source authority with ADR-0049 query-boundary redaction; remaining
-  privacy/failure/runtime-static/isolation `.10.7.3.2.1` is active. Public query, formats, rollout, and
-  admission remain unchanged.
+  free `.10.7.3.2.0` reconciles full private source authority with ADR-0049 query-boundary redaction. Remaining
+  privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, repeated-lifecycle, clone, fallback, and host isolation are
+  implemented and clean-dependency canonical closeout passes through Phase 0 1,031/1,031 in 637 seconds, closing
+  `.10.7.3.2`. Committed-owner recomposition `.10.7.3.3` is next; public query, formats, rollout, and admission
+  remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

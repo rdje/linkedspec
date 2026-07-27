@@ -8,14 +8,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — resume final Lua static-target canonical closeout after the clean
-  `PROJECT-DATA-SSD-ROOTING.6` correction commit; rerun canonical from both committed dependencies, synchronize the
-  semantic parent, commit, clear the brief, and continue PNT without pushing before 300.
+- `FUTURE-PARITY-BACKLOG.10.7.3.3` — after the clean `.10.7.3.2.1.2` commit, recompose all committed Lua private
+  static targets without replacement production/test owners or public query; close `.10.7.3`, commit, clear the
+  brief, and continue PNT without pushing before 300.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.3.2.1.2 — close Lua semantic static targets**
+  (no-change composition from clean implementation and process-oracle correction commits).
+
+  **Result:** The existing private graph 12/14, privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-
+  static 7/8 owners now close as `.10.7.3.2`. Repeated lifecycle identity, clone/freeze, fallback, public opacity,
+  and host/no-execution boundaries remain exact on PUC Lua and LuaJIT. No query, observation, format, rollout, or
+  admission moves; `.10.7.3.3` is the next committed-owner recomposition leaf.
+
+  **Proof:** From clean `3f878ad2` plus `e7ae984d`, canonical passes all six doctrines, semantic 6/20/89 at 5/9 +
+  4/6, Rust 1/1 in 78.09s, Dart 1/1, Julia 416/416 in 27.4s, corrected process containment, moved-root execution,
+  primary 66x2, and Phase 0 1,031/1,031 in 637s. Cadence advances to 42/300 with no push.
+
 - 2026-07-27: **PROJECT-DATA-SSD-ROOTING.6 — correct process host-temp discovery**
   (pre-routing runtime authority, mutation-sensitive resolver, complete local canonical rebuild).
 

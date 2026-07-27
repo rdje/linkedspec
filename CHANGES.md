@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.2.1.2 — close Lua semantic static targets
+
+Closed the Lua remaining-static implementation from two clean dependency commits: implementation `3f878ad2` and
+process-oracle correction `e7ae984d`. This child adds no production, test, fixture, API, query, observation, or
+generated-format behavior. The existing private projector remains the sole owner of exact graph 12/14, privacy
+text 4/3, privacy identity 4/3, failed 6/4, and runtime-static 7/8 construction, including repeated lifecycle
+identity, detached immutable state, fallbacks, and host/no-execution denial on both Lua ABIs.
+
+Complete local canonical CI passes all six doctrines, the unchanged semantic 6/20/89 contract at rollout 5/9 and
+admission 4/6, all Perl semantic owners, Rust admission 1/1 in 78.09 seconds, Dart 1/1, Julia 416/416 in 27.4
+seconds, corrected relocated six-family process containment, moved-root execution, primary CLI 66/66 in default
+and POSIX environments, and Phase 0 1,031/1,031 in 637 seconds. This closes `.10.7.3.2.1` and `.10.7.3.2` without
+semantic promotion. Committed-owner recomposition `.10.7.3.3` is next; cadence advances to 42/300 with no push.
+
 ## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.6 — correct process host-temp discovery
 
 Corrected the relocated process oracle's host-temp authority without changing project storage destinations. The

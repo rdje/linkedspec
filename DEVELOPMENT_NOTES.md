@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — close semantic behavior only after its independent gate
+  dependency is committed): The Lua static implementation was already exact on both ABIs, but its first canonical
+  run exposed an unrelated process-oracle defect. Splitting at a clean implementation child preserved semantic
+  reviewability; correcting storage in its own task preserved architecture ownership. A final no-change canonical
+  child from both commit hashes then proved the two changes compose and allowed the semantic parents to close.
+
+  This three-boundary pattern distinguishes feature correctness, infrastructure correctness, and their composition
+  without duplicating production code or weakening the gate. The closeout does not advance semantic rollout or
+  admission: private exact construction is complete, while public query and twelve-role admission remain later
+  Lua owners. Status language must preserve that difference so “static targets complete” is never mistaken for
+  “Lua semantic introspection publicly admitted.”
+
 - 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.6` — capture host authority before changing the environment that discovers
   it): A locality oracle cannot reliably rediscover its pre-routing host namespace after the common initializer has
   replaced `TMPDIR`. On this macOS host, `getconf DARWIN_USER_TEMP_DIR` observes that override and can return managed

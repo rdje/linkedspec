@@ -1998,8 +1998,13 @@ The focused 122-assertion suite runs after the graph proof on both PUC Lua and L
 bash tools/run_lua_local.sh
 ```
 
-This completes the implementation portion of `.10.7.3.2.1`; final canonical closeout remains a separate child so
-an unrelated local process-oracle correction cannot be hidden inside the semantic implementation.
+This completes the implementation portion of `.10.7.3.2.1`. Its separate clean-dependency closeout starts from
+implementation `3f878ad2` and process-oracle correction `e7ae984d`; canonical passes all six doctrines, Rust
+semantic admission 1/1 in 78.09 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, corrected process containment,
+moved-root execution, primary 66/66 in both option environments, and Phase 0 1,031/1,031 in 637 seconds. Thus
+`.10.7.3.2.1` and `.10.7.3.2` are complete. No replacement implementation or test owner, public query, runtime
+observation, generated format, rollout, or native admission was added; `.10.7.3.3` next recomposes the committed
+five-target owners.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2420,7 +2425,8 @@ The dependency order is:
 | `.10.7.3.0` | Lua static-authority map and dependency split | complete; five exact targets, occurrence/source normalization, privacy, and host fences frozen |
 | `.10.7.3.1` | Lua compiled graph/source/evidence projection | implemented; private exact 12/14/7 graph on both ABIs, no public query |
 | `.10.7.3.2.0` | Lua source-ceiling boundary reconciliation | complete; full private authority, outward query redaction, no behavior change |
-| `.10.7.3.2.1` | Lua remaining static targets and isolation | active; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8 |
+| `.10.7.3.2.1` | Lua remaining static targets and isolation | complete; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clean canonical closeout |
+| `.10.7.3.3` | Lua committed static-owner recomposition | next; close all five private targets without public query or replacement code |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

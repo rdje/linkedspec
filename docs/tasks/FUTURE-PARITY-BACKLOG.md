@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-27` (remaining Lua static implementation child `.10.7.3.2.1.1` is complete; final canonical
-  closeout `.10.7.3.2.1.2` waits on separately owned process-oracle correction with rollout 5/9 and admission 4/6)
+- Last updated: `2026-07-27` (remaining Lua static parent `.10.7.3.2` is complete after clean canonical closeout;
+  committed-owner recomposition `.10.7.3.3` is next with rollout 5/9 and admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -11674,7 +11674,7 @@ before implementation.
     - [x] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
       canonical CI, mdBook/KM/memory/task/doctrines/cleanup/diff; commit, clear the brief, verify clean, and do not push.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2`
-    Status: `active` (2026-07-25; ceiling-boundary reconciliation `.0` done, implementation `.1` active)
+    Status: `done` (2026-07-27; corrected ceiling plus all five private static targets compose and canonical is green)
     Goal: Complete privacy, failed/runtime-static, repeated-lifecycle, clone, and host-leak isolation targets.
     Children: `.10.7.3.2.0`, `.10.7.3.2.1`
     Depends on: `.10.7.3.1`
@@ -11705,18 +11705,18 @@ before implementation.
       clear the brief, verify clean, and do not push before cadence 300.
     #### Acceptance Checklist
 
-    - [ ] **CLEAN SINGLE-OWNER BASE** — Start from clean committed `.10.7.3.1`; extend its retained projector only,
+    - [x] **CLEAN SINGLE-OWNER BASE** — Start from clean committed `.10.7.3.1`; extend its retained projector only,
       without a second language pipeline, replacement graph, public accessor, query, observation, or format owner.
-    - [ ] **EXACT REMAINING TARGETS** — Deep-equal privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-
+    - [x] **EXACT REMAINING TARGETS** — Deep-equal privacy text 4/3, privacy identity 4/3, failed 6/4, and runtime-
       static 7/8 with exact snapshots, records, relations, source evidence, order, and omission semantics.
-    - [ ] **FAILURE / CEILING NORMALIZATION** — Preserve the native Lua foundation diagnostic while privately
+    - [x] **FAILURE / CEILING NORMALIZATION** — Preserve the native Lua foundation diagnostic while privately
       projecting only portable failure facts; retain full private source authority, snapshot the construction
       ceiling, and leave outward redaction exclusively to the later query boundary required by ADR 0049.
-    - [ ] **NO EXECUTION / LIFECYCLE IDENTITY** — Prove no execution/event/observed state and retain repeated
+    - [x] **NO EXECUTION / LIFECYCLE IDENTITY** — Prove no execution/event/observed state and retain repeated
       lifecycle occurrences as distinct `E:0`/`E:1` ids with exact order, source, and conservative value shapes.
-    - [ ] **IMMUTABILITY / HOST DENIAL** — Prove fresh detached JSON copies, frozen retained handles, fallback and
+    - [x] **IMMUTABILITY / HOST DENIAL** — Prove fresh detached JSON copies, frozen retained handles, fallback and
       public omission, and no path/metatable/AST/IR/regex/descriptor/loader/executor/trace/sink/observer/host state.
-    - [ ] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
+    - [x] **COMPLETE PROOF / COMMIT** — Pass both ABIs, complete Lua, primary/Unicode matrices, six ledgers,
       canonical CI, mdBook/KM/memory/task/doctrines/cleanup/diff; commit, clear the brief, verify clean, and do not push.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2.0`
@@ -11761,7 +11761,7 @@ before implementation.
         canonical/doctrine/diff gates, commit, clear the brief, verify clean, and do not push.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2.1`
-      Status: `active` (2026-07-27; implementation child `.1` complete, final canonical closeout child `.2` pending)
+      Status: `done` (2026-07-27; implementation child `.1` and clean canonical closeout child `.2` complete)
       Goal: Implement the four remaining private static targets and exact isolation proof under the reconciled ceiling.
       Children: `.10.7.3.2.1.1`, `.10.7.3.2.1.2`
       Depends on: `.10.7.3.2.0`
@@ -11776,7 +11776,7 @@ before implementation.
         rule case. Existing compiled construction already deep-equaled both privacy ceilings and runtime-static;
         the suite now locks those targets plus repeated lifecycle occurrence identity, fallbacks, detached clones,
         public omission, and host/no-execution denial without adding a query, observer, format, or second pipeline.
-      Verification in progress: Focused source 379, outcome 122, graph 64, and remaining 122 pass on PUC Lua and
+      Verification: Focused source 379, outcome 122, graph 64, and remaining 122 pass on PUC Lua and
         LuaJIT. The complete dual-ABI Lua gate passes package `1..177`, primary 66x2, corpus 105, and SSD storage.
         Full primary parity passes 660/660; Unicode self-hosted passes 10/10; all six no-drift ledgers remain exact.
         Canonical initially stopped at `TASK-ACCEPTANCE` because the staged governed drivers correctly required
@@ -11786,7 +11786,11 @@ before implementation.
         so `getconf` reports that project path and the oracle mistakes it for the host temporary root. Direct
         reproduction proves the semantic implementation is not involved. Child `.1` lands the independently
         complete implementation at a clean boundary; `PROJECT-DATA-SSD-ROOTING.6` will correct the oracle before
-        child `.2` reruns canonical and performs final closeout.
+        child `.2` reruns canonical and performs final closeout. Correction `e7ae984d` is clean, and the subsequent
+        no-change canonical run passes all six doctrines, Rust semantic admission 1/1 in 78.09 seconds, Dart 1/1,
+        Julia 416/416 in 27.4 seconds, the corrected process containment plus moved-root oracle, primary 66/66
+        twice, and Phase 0 1,031/1,031 in 637 seconds. The implementation and parent now close without semantic
+        contract, query, observation, format, rollout, or admission movement.
       Commit: `FUTURE-PARITY-BACKLOG.10.7.3.2.1 - complete Lua semantic static targets`
 
       - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1`
@@ -11807,12 +11811,20 @@ before implementation.
         Commit: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 - implement Lua semantic static targets`
 
       - ID: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2`
-        Status: `pending`
+        Status: `done` (2026-07-27; clean dependency composition and complete canonical proof pass)
         Goal: Rerun canonical after the process-oracle correction and close the remaining-target implementation.
         Depends on: `.10.7.3.2.1.1`, `PROJECT-DATA-SSD-ROOTING.6`
         Acceptance: Start only after both dependency commits are clean; rerun canonical CI and all final doctrine/
           book/Knowledge Map/memory/task/diff checks; synchronize the exact final proof; close `.10.7.3.2.1` and
           parent `.10.7.3.2`; commit, clear the brief, verify clean, and do not push before cadence 300.
+        Verification: Started with implementation `3f878ad2` and process-oracle correction `e7ae984d` committed and
+          a clean tree. Canonical passes all six doctrines; semantic contract 6/20/89 at rollout 5/9 and admission
+          4/6; Perl semantic foundation/static/calls/query/runtime/admission; Rust admission 1/1 in 78.09 seconds;
+          Dart admission 1/1; Julia admission 416/416 in 27.4 seconds; every intervening neutral/Perl contract;
+          project-data and tool storage; corrected relocated six-family containment; moved-root execution; primary
+          CLI 66/66 in default and POSIX environments; and Phase 0 1,031/1,031 in 637 seconds. No implementation,
+          test, fixture, query, observation, generated format, rollout, or admission behavior changes in this child.
+        Commit: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2 - close Lua semantic static targets`
   - ID: `FUTURE-PARITY-BACKLOG.10.7.3.3`
     Status: `pending`
     Goal: Recompose all committed private static targets and close `.10.7.3` without public query.
@@ -14183,10 +14195,9 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 coordinates, four ceilings, one retained compiled-or-failed authority, native/fallback diagnostic, entry, and
 generated-v2 plan without caller path or target execution on either ABI. Behavior-free static-authority audit
 `.10.7.3.0` froze the exact five targets and authority/source/normalization boundary. Private graph `.10.7.3.1`
-and all four remaining targets in implementation child `.10.7.3.2.1.1` are complete. Final canonical closeout
-`.10.7.3.2.1.2` depends on clean correction `PROJECT-DATA-SSD-ROOTING.6` for the independently reproduced host-
-temporary discovery defect in the process-locality oracle. Semantic 6/20/89 remains at rollout 5/9 and admission
-4/6.
+and all four remaining targets in implementation child `.10.7.3.2.1.1` are complete. Process-oracle correction
+`PROJECT-DATA-SSD-ROOTING.6` and final canonical closeout `.10.7.3.2.1.2` are complete, closing `.10.7.3.2`.
+Committed-owner recomposition `.10.7.3.3` is next. Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -14803,11 +14814,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.3 | `FUTURE-PARITY-BACKLOG.10.7.3` | `active` | Project exact private static graph/source/evidence/diagnostic facts from retained Lua authorities. |
 | 74.6.3.0 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `done` | Exact five targets, authority/source correlation, normalization, privacy, host fences, and `.1-.3` split are frozen without behavior change. |
 | 74.6.3.1 | `FUTURE-PARITY-BACKLOG.10.7.3.1` | `done` | Exact private immutable 12-record/14-relation/seven-source-reference graph passes on both Lua ABIs. |
-| 74.6.3.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2` | `active` | Complete privacy, failed/runtime-static, lifecycle, clone, and host-leak isolation. |
+| 74.6.3.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2` | `done` | Privacy, failed/runtime-static, lifecycle, clone, host isolation, and clean canonical closeout are complete. |
 | 74.6.3.2.0 | `FUTURE-PARITY-BACKLOG.10.7.3.2.0` | `done` | Private full-source retention and ADR-0049 outward ceiling redaction are reconciled without behavior change. |
-| 74.6.3.2.1 | `FUTURE-PARITY-BACKLOG.10.7.3.2.1` | `active` | Remaining-target implementation is complete; final canonical closeout waits on the separate process-oracle correction. |
+| 74.6.3.2.1 | `FUTURE-PARITY-BACKLOG.10.7.3.2.1` | `done` | Remaining-target implementation and final clean-dependency canonical closeout are complete. |
 | 74.6.3.2.1.1 | `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1` | `done` | Exact privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle, clone, fallback, and host denial pass on both ABIs. |
-| 74.6.3.2.1.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` | `pending` | Rerun canonical after the task-owned process-oracle correction and close `.10.7.3.2`. |
+| 74.6.3.2.1.2 | `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` | `done` | Clean canonical passes through Phase 0 1,031/1,031 in 637 seconds and closes `.10.7.3.2`. |
 | 74.6.3.3 | `FUTURE-PARITY-BACKLOG.10.7.3.3` | `pending` | Recompose and close all committed static targets without public query. |
 | 74.6.4 | `FUTURE-PARITY-BACKLOG.10.7.4` | `pending` | Complete private functions/helpers/calls/bindings plus staged/generated provenance. |
 | 74.6.4.0 | `FUTURE-PARITY-BACKLOG.10.7.4.0` | `pending` | Freeze calls/staging/generated authorities, source correlation, and exact 22/25 ownership. |
@@ -15502,6 +15513,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-27` | `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` | Clean dependencies `3f878ad2` + `e7ae984d`; no production/test/fixture/API/query/observation/format change; complete canonical six doctrines; semantic 6/20/89 at rollout 5/9 + admission 4/6; Perl semantic owners; Rust 1/1 in 78.09s; Dart 1/1; Julia 416/416 in 27.4s; corrected six-family process containment; moved-root proof; primary 66/66 default + 66/66 POSIX; Phase 0 1,031/1,031 in 637s; final mdBook/KM/memory/task/doctrines/diff/zero-run proof. | PASS. The committed graph plus privacy text/identity, failed 6/4, runtime-static 7/8, repeated lifecycle, clone, fallback, and host-denial owners compose under the corrected local gate; `.10.7.3.2.1` and `.10.7.3.2` close without rollout/admission movement, and `.10.7.3.3` is next. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.3.2.0` | Exact ADR-0049/private-oracle/four-backend source-ceiling audit; Perl static/query 14/14, Rust static 9/9 + query 5/5, Dart static/query 12/12, Julia static 99/99 + query 100/100; no production/test/fixture/API/record/query/observation/format/ledger behavior change; unchanged semantic 6/20/89 at 5/9 + 4/6 and Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical four doctrines, Rust 1/1 in 80.52s, Dart 1/1, Julia 416/416 in 29.9s, reference primary 66x2, Phase 0 1,031/1,031 in 647s, total 1,715.49s; mdBook/KM 705/5,493/memory/task/diff; reusable SSD caches retained and only explicit task scratch cleaned. | PASS. The settled architecture retains full source authority inside the immutable static projection, snapshots the allowed ceiling/digest policy, and redacts structurally only at the outward native query boundary; implementation `.10.7.3.2.1` follows the clean correction commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.3.1` | Clean audit base `58702b78`; private immutable graph 12 records/14 relations/7 source references; new exact 64 x PUC Lua/LuaJIT; source/outcome/graph 379+122+64 then all Lua suites and package `1..177`x2; PUC primary 66x2/corpus 105; primary 5x2x66 in 1,619.89s; Unicode 5x2x1 in 55.20s; unchanged semantic 6/20/89 at 5/9 + 4/6 and Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical four doctrines, Rust 1/1 in 78.25s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, Phase 0 1,031/1,031 in 627s, total 1,662.05s; mdBook/KM 704/5,483/memory/task/diff; reusable SSD caches retained and only explicit disposable scratch cleaned. | PASS. One package-private frozen owner projects the exact graph from retained authorities without a second language pipeline, execution, public accessor/query, host/path leak, format change, rollout movement, or admission; remaining static/isolation `.10.7.3.2` follows only after the clean commit. |
 | `2026-07-25` | `FUTURE-PARITY-BACKLOG.10.7.3.0` | Clean behavior-free base `c8929767`; exact graph 12/14 + privacy text 4/3 + privacy identity 4/3 + failed 6/4 + runtime-static 7/8 and all 14 unique source references; byte-identical PUC Lua/LuaJIT audit SHA-256 `244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55`; complete Lua source 378 + outcome 122 + package `1..177`x2; primary 5x2x66 in 1,620.78s; Unicode 5x2x1 in 54.37s; Rust 5+3, Dart 28, Julia 3,831; semantic 6/20/89 at 5/9 + 4/6; Unicode/capability/generated/language/public 806/9/8/2 + 80/0/0 + v1/10/80-0-0 + 246/105+1/122 + 59/27/0; canonical Rust 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.3s, reference primary 66x2, Phase 0 1,031/1,031 in 631s, total 1,665.56s; mdBook/KM 704/5,478/memory/task/four doctrines/diff; reusable SSD caches retained and only explicit disposable scratch cleaned. | PASS. Exact Lua static authority/source/normalization/privacy ownership and the `.1-.3` implementation order are frozen without production/test/fixture/API/record/query/observation/format/rollout/admission change; private graph `.10.7.3.1` follows the clean audit commit. |
@@ -15772,6 +15784,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` | `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2 - close Lua semantic static targets` | No-change clean-dependency canonical composition: six doctrines, semantic owners, Rust 78.09s, Dart 1/1, Julia 416/27.4s, process/moved-root proof, primary 66x2, Phase 0 1,031/637s; closes `.10.7.3.2` and hands off `.10.7.3.3`. |
 | `FUTURE-PARITY-BACKLOG.10.7.3.2.0` | `FUTURE-PARITY-BACKLOG.10.7.3.2.0 - reconcile Lua semantic source ceiling` | Behavior-free ADR-0049/private-oracle/four-backend boundary correction; exact focused proofs, unchanged six ledgers, book/KM/doctrines, canonical Rust 80.52s + Dart 1/1 + Julia 416/29.9s + primary 66x2 + Phase 0 1,031/647s, and clean handoff to remaining static implementation. |
 | `FUTURE-PARITY-BACKLOG.10.7.3.1` | `FUTURE-PARITY-BACKLOG.10.7.3.1 - implement Lua semantic static graph` | Private immutable exact graph/source/evidence owner; new 64x2, complete Lua, 5x2x66 plus Unicode, unchanged ledgers, book/KM/doctrines, canonical Rust 78.25s + Dart 1/1 + Julia 416/27.3s + primary 66x2 + Phase 0 1,031/627s, and clean handoff to remaining static targets. |
 | `FUTURE-PARITY-BACKLOG.10.7.3.0` | `FUTURE-PARITY-BACKLOG.10.7.3.0 - freeze Lua semantic static projection` | Behavior-free exact five-target authority/source/normalization/privacy plan, byte-identical dual-ABI probe, complete signoff, and private graph `.10.7.3.1` handoff. |
@@ -16021,6 +16034,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-27`: No-change closeout `.10.7.3.2.1.2` starts from clean implementation `3f878ad2` and process-
+  oracle correction `e7ae984d`. Canonical passes all six doctrines, unchanged semantic 6/20/89 at rollout 5/9
+  and admission 4/6, every semantic/backend owner, corrected six-family containment, moved-root execution, primary
+  66x2, and Phase 0 1,031/1,031 in 637 seconds. The committed exact privacy 4/3 + 4/3, failed 6/4, runtime-static
+  7/8, repeated-lifecycle, clone/fallback/host isolation therefore composes without replacement code, public query,
+  observation, format, rollout, or admission movement. `.10.7.3.2.1` and `.10.7.3.2` close; no-change committed-
+  owner recomposition `.10.7.3.3` follows after the clean commit.
 
 - `2026-07-25`: Behavior-free correction `.10.7.3.2.0` root-causes a foundational mismatch in the planned Lua
   identity-ceiling wording. ADR 0049, the private `privacy_limited` oracle, and Perl/Rust/Dart/Julia agree that

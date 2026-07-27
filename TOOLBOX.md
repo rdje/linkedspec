@@ -812,7 +812,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   coordinates. Exclude cross-rule parent matchers from target slots, retain self-indexed slots, correlate repeated
   lifecycle payloads by occurrence, normalize native `Default` repetition and native failure only inside the
   projector, and deny paths/metatables/AST/ActionIR/compiled regex/runtime state. `.10.7.3.1` owns only private
-  graph/source/evidence; `.2` owns the remaining targets/isolation; `.3` owns no-change recomposition.
+  graph/source/evidence; `.2` now owns the completed remaining targets/isolation plus clean canonical closeout;
+  `.3` owns the next no-change committed-owner recomposition.
 - **LUA STATIC GRAPH:** `bash tools/run_lua_local.sh` builds disposable native adapters, configures module paths,
   and runs `lua/test/semantic_index_static_graph_test.lua` on both PUC Lua and LuaJIT. The registered test deep-
   compares the private `.10.7.3.1` graph against the neutral oracle at exactly 12 records, 14 relations, and seven
@@ -820,6 +821,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   lifecycle occurrence identity, canonical ids/order, detached clone behavior, root-public omission, and host/
   execution dependency denial. Retrieve [[lua-semantic-static-projection-plan]] for the retained-authority and
   frozen-handle design. Do not invoke the test without the gate's `LUA_PATH`/native `LUA_CPATH` setup.
+- **LUA STATIC TARGET CLOSEOUT:** `.10.7.3.2.1.2` adds no replacement implementation or test owner. Starting from
+  clean implementation `3f878ad2` and process-oracle correction `e7ae984d`, run `bash tools/run_ci_local.sh` and
+  require six doctrines, semantic owners, corrected containment, moved-root proof, primary 66x2, and Phase 0
+  1,031/1,031. The closeout passed with Rust admission 78.09 seconds, Julia admission 27.4 seconds, and Phase 0
+  637 seconds. Retrieve [[lua-semantic-static-projection-plan]] before no-change recomposition `.10.7.3.3`.
 - **SEMANTIC SOURCE CEILING BOUNDARY:** retrieve [[semantic-source-ceiling-boundary]] before changing private
   source retention. ADR `0049` applies ceilings when query records leave the native API: the private projection
   retains complete authoritative refs, the snapshot fixes ceiling/digest policy, and the query source projector
