@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.6 — correct process host-temp discovery
+
+Corrected the relocated process oracle's host-temp authority without changing project storage destinations. The
+common environment initializer now captures inherited `TMPDIR` once before SSD routing and exports a capture marker;
+nested sources preserve the original runtime value after project `TMPDIR` moves beneath managed scratch. The
+process oracle no longer calls `getconf DARWIN_USER_TEMP_DIR` after routing, because on this host that query can
+echo the routed project path and falsely classify correct storage as the host temporary root.
+
+The resolver requires a captured, nonempty, existing, nonsymlink directory on a different filesystem from the
+repository. Embedded mutations reject missing and repository-device authority. Focused tests lock unset,
+same-device, hostile other-device, and nested-source capture while every project destination remains repository-
+local. The captured absolute value is invocation-only, is never persisted, and is used only to deny host-temp data
+reads inside the kernel containment profile—not as a project output location.
+
+Environment, lifecycle, 39-route, repository-path, all six storage, structural, and relocated process oracles pass;
+the storage doctrine scans 1,659 files / 367,755 lines and passes 28 cases. Complete canonical local CI passes all
+six doctrines, semantic/backend owners, primary CLI 66/66 in default and POSIX environments, relocated containment,
+moved-root proof, and Phase 0 1,031/1,031 in 626 seconds. Documentation and durable knowledge are synchronized,
+the storage tree recloses at 41/300, and no push occurs.
+
 ## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 — implement Lua semantic static targets
 
 Extended the one existing package-private Lua semantic projector to construct failed-compilation projections from

@@ -307,6 +307,11 @@ remain exact, all six canonical roots share the repository device, and canonical
 self-rooted process oracle to the routing inventory, so the current outside-cwd storage-routing boundary is 39
 entrypoints.
 
+Post-closeout correction `.6` fixes only host-temp discovery in that process oracle. A post-routing macOS
+`getconf` query could echo managed project `TMPDIR`; pre-routing runtime capture plus missing/same-device mutations
+now make the authority exact. Focused storage proof and complete canonical Phase 0 1,031/1,031 pass, so the tree is
+closed at 41/300 without a push.
+
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
 
@@ -316,7 +321,9 @@ source tools/project_data_env.sh
 
 It derives the physical checkout from its own file, creates disposable `scratch/` and retained `cache/` children,
 and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache and Dart home, Julia depot, and Python
-bytecode-cache variables. A caller
+bytecode-cache variables. Before routing `TMPDIR`, it preserves the inherited value once as runtime-only host
+authority for the containment oracle; nested supported entrypoints keep that first value. Project output never
+uses the captured host root, and no concrete host path is persisted. A caller
 override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
 filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
 The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. In
@@ -355,7 +362,9 @@ bash tools/test_project_data_process_locality.sh
 
 On macOS it requires `sandbox-exec`; unlike `fs_usage`/`dtruss`, it does not require root in an ordinary local
 terminal. It permits necessary system/tool reads and one exact caller input, but kernel-denies project writes
-outside the relocated checkout and data reads from developer-home or OS-temporary roots.
+outside the relocated checkout and data reads from developer-home or OS-temporary roots. The oracle consumes only
+the pre-routing captured host-temp authority, requires it to exist on another filesystem, and rejects missing or
+repository-device substitutions; it never rediscovers that root after `TMPDIR` has been routed to project scratch.
 
 The Knowledge Map validator and mdBook wrapper inspect caller-selected outputs before any directory or file is
 created and check the realized output afterward. Same-filesystem runtime overrides remain available; another-

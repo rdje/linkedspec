@@ -5,8 +5,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1` — remaining private Lua static targets implemented.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 - implement Lua semantic static targets` (this commit).
+- latest_completed_leaf: `PROJECT-DATA-SSD-ROOTING.6` — process host-temp discovery corrected; storage tree closed.
+- latest_commit: `PROJECT-DATA-SSD-ROOTING.6 - correct process host-temp discovery` (this commit).
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -15,9 +15,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_storage_inventory: `.5` fresh pre/post-proof censuses find zero LinkedSpec owner in both old temp roots,
   bounded Dart/Julia metadata, or named obsolete paths, so delete zero external paths. Retained Perl 65/17/1,590
   and Julia 346/256/133,963,036 plus 24/15/4,284,303 remain exact; six canonical roots are same-device.
-- current_storage_initializer: source `tools/project_data_env.sh`; it derives its own checkout and creates ignored
-  `/.linkedspec-data/{scratch,cache}`. It preserves only same-device overrides and exports LinkedSpec roots,
-  managed runs, temp, Cargo, Dart package/home, and local-plus-system Julia depots (no developer home).
+- current_storage_initializer: source `tools/project_data_env.sh`; it derives its checkout, creates ignored
+  `/.linkedspec-data/{scratch,cache}`, preserves only same-device destinations, and exports all managed roots.
+  Inherited host `TMPDIR` is captured once before routing as runtime-only process-oracle authority, never output.
 - current_storage_routing: 39 hook/doctrine/KM/canonical/backend/book/matrix/storage/path boundaries self-root and
   enter one run; targeted Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
 - current_storage_lifecycle: marker v2 binds each command/descendants to one dedicated process group, waits for
@@ -47,14 +47,14 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_signoff: Lua source/outcome/graph/remaining 379/122/64/122 and package 177 pass per ABI; PUC primary 66x2/
-  corpus 105; primary 660/660, Unicode 10/10, six ledgers exact. Canonical reached the process oracle after Rust/Dart/Julia.
+  corpus 105; primary 660/660, Unicode 10/10, six ledgers exact. Corrected canonical passes primary 66x2,
+  containment/moved-root proof, and Phase 0 1,031/1,031 in 626s; focused storage/path/doctrine proof is green.
 - latest_bootstrap_read: 2026-07-27 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 40/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 41/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: process oracle resolves `DARWIN_USER_TEMP_DIR` after SSD `TMPDIR` routing and mistakes project scratch
-  for host temp. no in-flight work after commit. next: fix `PROJECT-DATA-SSD-ROOTING.6`, return to `.10.7.3.2.1.2`; no push.
+- blockers: none. next: semantic closeout `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2`; no in-flight work or push.

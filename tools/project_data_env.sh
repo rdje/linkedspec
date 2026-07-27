@@ -8,6 +8,14 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
  exit 64
 fi
 
+# Preserve the caller's pre-routing temporary root as runtime-only host authority. Nested
+# managed-run sources must not overwrite it after TMPDIR has moved beneath repository scratch.
+if [[ "${LINKEDSPEC_HOST_TMPDIR_CAPTURED:-}" != 1 ]]; then
+ LINKEDSPEC_HOST_TMPDIR=${TMPDIR-}
+ LINKEDSPEC_HOST_TMPDIR_CAPTURED=1
+ export LINKEDSPEC_HOST_TMPDIR LINKEDSPEC_HOST_TMPDIR_CAPTURED
+fi
+
 _linkedspec_storage_script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P) || return 1
 _linkedspec_storage_repo_root=$(cd -- "$_linkedspec_storage_script_dir/.." && pwd -P) || return 1
 

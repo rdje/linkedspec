@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.6` — capture host authority before changing the environment that discovers
+  it): A locality oracle cannot reliably rediscover its pre-routing host namespace after the common initializer has
+  replaced `TMPDIR`. On this macOS host, `getconf DARWIN_USER_TEMP_DIR` observes that override and can return managed
+  project scratch. The resulting same-device failure is a false assertion against correct SSD routing, not evidence
+  that a backend or dependency needs remote or off-volume state.
+
+  Preserve the inherited value once at the outer process boundary, carry it through nested managed entrypoints,
+  and validate its role at the consumer: capture marker present, directory existing and nonsymbolic, device distinct
+  from the repository. Mutations for missing and same-device authority prevent the oracle from silently weakening.
+  The absolute value remains runtime-only and authorizes no project write; it exists solely to construct a denied-
+  read boundary around host temporary data. This keeps durable paths root-relative while allowing relocation proof
+  to reason about the machine it is currently running on.
+
 - 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.2.1.1` — failed static semantics can be built from parsed authority
   without inventing compiled facts): A failed compilation has no `CompiledSpec`, but it still has enough truthful
   retained state for a portable static result. Parsed rules own authored order, family/cursor policy, source ranges,

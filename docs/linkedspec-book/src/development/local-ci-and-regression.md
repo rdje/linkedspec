@@ -734,6 +734,11 @@ It derives the physical checkout from its own file, creates the ignored reposito
 Cargo home/target, Dart package cache/home, and Julia depot variables. Reusable dependencies remain beneath `cache/`;
 managed runs live beneath `scratch/runs/`.
 
+Before replacing `TMPDIR`, the initializer captures its inherited value once as invocation-local host authority.
+Nested managed entrypoints preserve that first value after project scratch routing. This value is never used for
+project output and is never persisted; the relocated containment oracle uses it only to identify and deny the
+actual per-user host temporary namespace.
+
 Caller overrides are not trusted by spelling. The helper resolves their existing or nearest existing directory,
 compares GNU/BSD device identity with the repository, creates the directory only after that comparison, and checks
 the final destination again. A same-filesystem override is preserved; an invalid or cross-filesystem override is
@@ -1121,6 +1126,14 @@ above removes the first. On macOS `tools/build_lua_native.sh` removes the second
 tree's real `clang` with the active SDK instead of the stateful shim; required compiler, SDK, header, library, and
 interpreter reads remain the frozen read-only external dependency class.
 
+Correction `.6` closes a later false RED in that oracle. Calling `getconf DARWIN_USER_TEMP_DIR` after the common
+initializer had replaced `TMPDIR` could return managed project scratch, so the oracle misclassified correct SSD
+routing as a same-filesystem host-temp failure. It now consumes only the pre-routing runtime capture described
+above and requires a capture marker, an existing nonsymlink directory, and another filesystem device. Embedded
+mutations reject missing and repository-device substitutions. Environment, lifecycle, routing, all six storage
+oracles, structural/path doctrines, relocated containment, both 66-case primary CLI runs, and Phase 0 1,031/1,031
+in 626 seconds pass locally. No machine-specific host path is persisted and no project destination changes.
+
 Final enforcement signoff passes all six family storage oracles, eight affected parity drivers, the 28-case
 structural doctrine, the historical `.4.2` inventory of 38 routed boundaries, Knowledge Map 721 facts / 5,713
 question keys, mdBook, memory, all six
@@ -1167,6 +1180,10 @@ corpus boundaries as applicable. Final canonical CI passes all six doctrines, Ru
 80.02 seconds, Dart 1/1, Julia 416/416 in 28.3 seconds, Perl primary 66/66 twice, relocated process containment,
 and Phase 0 1,031/1,031 in 638 seconds. This closes ADR `0053` storage migration and makes repository-relocation
 closeout the next architecture action.
+
+Post-closeout correction `.6` leaves that migration result unchanged. It fixes only the process oracle's
+pre-routing host-temp authority as described above, passes the complete local gate through Phase 0 1,031/1,031 in
+626 seconds, and recloses the storage tree at cadence 41/300 without a push.
 
 ## CI input areas
 

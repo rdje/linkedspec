@@ -41,6 +41,7 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  unset LINKEDSPEC_REPO_ROOT LINKEDSPEC_PROJECT_DATA_ROOT LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT
  unset LINKEDSPEC_RUNS_ROOT
+ unset LINKEDSPEC_HOST_TMPDIR LINKEDSPEC_HOST_TMPDIR_CAPTURED
  cd -- "$TEST_ROOT"
  # shellcheck source=project_data_env.sh
  source "$HELPER"
@@ -50,6 +51,8 @@ git -C "$REPO_ROOT" check-ignore -q .linkedspec-data/probe || \
  assert_equal "$LINKEDSPEC_SCRATCH_ROOT" "$REPO_ROOT/.linkedspec-data/scratch" 'scratch root'
  assert_equal "$LINKEDSPEC_CACHE_ROOT" "$REPO_ROOT/.linkedspec-data/cache" 'cache root'
  assert_equal "$LINKEDSPEC_RUNS_ROOT" "$LINKEDSPEC_SCRATCH_ROOT/runs" 'managed-runs root'
+ assert_equal "$LINKEDSPEC_HOST_TMPDIR_CAPTURED" 1 'host temporary capture marker'
+ assert_equal "$LINKEDSPEC_HOST_TMPDIR" '' 'unset pre-routing host temporary root'
  assert_equal "$TMPDIR" "$LINKEDSPEC_SCRATCH_ROOT/tmp" 'TMPDIR default'
  assert_equal "$TMP" "$TMPDIR" 'TMP default'
  assert_equal "$TEMP" "$TMPDIR" 'TEMP default'
@@ -75,6 +78,7 @@ mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,
 (
  export LINKEDSPEC_PROJECT_DATA_ROOT="$same_volume_root/custom-data"
  unset LINKEDSPEC_SCRATCH_ROOT LINKEDSPEC_CACHE_ROOT LINKEDSPEC_RUNS_ROOT
+ unset LINKEDSPEC_HOST_TMPDIR LINKEDSPEC_HOST_TMPDIR_CAPTURED
  unset TMPDIR TMP TEMP CARGO_HOME CARGO_TARGET_DIR PUB_CACHE LINKEDSPEC_DART_HOME
  unset JULIA_DEPOT_PATH LINKEDSPEC_JULIA_DEPOT_PATH
  # shellcheck source=project_data_env.sh
@@ -98,10 +102,15 @@ mkdir -p -- "$same_volume_root"/{tmp,cargo-home,cargo-target,dart-pub,julia-one,
  export LINKEDSPEC_DART_HOME="$same_volume_root/dart-home"
  export JULIA_DEPOT_PATH="$same_volume_root/julia-one:$same_volume_root/julia-two:"
  unset LINKEDSPEC_JULIA_DEPOT_PATH
+ unset LINKEDSPEC_HOST_TMPDIR LINKEDSPEC_HOST_TMPDIR_CAPTURED
  # shellcheck source=project_data_env.sh
  source "$HELPER"
 
  assert_equal "$TMPDIR" "$same_volume_root/tmp" 'same-volume TMPDIR override'
+ assert_equal "$LINKEDSPEC_HOST_TMPDIR" "$same_volume_root/tmp" 'pre-routing same-volume TMPDIR capture'
+ captured_host_tmp=$LINKEDSPEC_HOST_TMPDIR
+ source "$HELPER"
+ assert_equal "$LINKEDSPEC_HOST_TMPDIR" "$captured_host_tmp" 'nested source preserves host TMPDIR capture'
  assert_equal "$CARGO_HOME" "$same_volume_root/cargo-home" 'same-volume Cargo override'
  assert_equal "$CARGO_TARGET_DIR" "$same_volume_root/cargo-target" 'same-volume target override'
  assert_equal "$PUB_CACHE" "$same_volume_root/dart-pub" 'same-volume Dart override'
@@ -135,12 +144,15 @@ if [[ -n "$external_root" ]]; then
   export LINKEDSPEC_SCRATCH_ROOT="$external_root"
   export LINKEDSPEC_CACHE_ROOT="$external_root"
   unset LINKEDSPEC_JULIA_DEPOT_PATH
+  unset LINKEDSPEC_HOST_TMPDIR LINKEDSPEC_HOST_TMPDIR_CAPTURED
   # shellcheck source=project_data_env.sh
   source "$HELPER"
 
   assert_equal "$LINKEDSPEC_REPO_ROOT" "$REPO_ROOT" 'outside-cwd repository discovery'
   assert_equal "$LINKEDSPEC_PROJECT_DATA_ROOT" "$REPO_ROOT/.linkedspec-data" \
    'cross-volume project-data override replacement'
+  assert_equal "$LINKEDSPEC_HOST_TMPDIR" "$external_root" \
+   'cross-volume pre-routing host temporary capture'
   for path in "$TMPDIR" "$TMP" "$TEMP" "$CARGO_HOME" "$CARGO_TARGET_DIR" "$PUB_CACHE" \
    "$LINKEDSPEC_DART_HOME" \
    "${JULIA_DEPOT_PATH%:}"; do

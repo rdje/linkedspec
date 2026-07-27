@@ -408,8 +408,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 - **WHAT:** a sourceable environment initializer that derives the current checkout, creates ignored disposable
   `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart package/home,
-  Julia, and Python bytecode storage variables, provides a same-filesystem output validator, and hands standard entrypoints
-  to the managed-run wrapper.
+  Julia, and Python bytecode storage variables, captures inherited `TMPDIR` once as runtime-only host authority,
+  provides a same-filesystem output validator, and hands standard entrypoints to the managed-run wrapper.
 - **WHEN:** before a direct development, generation, test, or package command can create project-owned state.
   Standard hook/doctrine/Knowledge Map/canonical/backend runners source it automatically; source it manually only
   for lower-level commands that bypass those routed boundaries.
@@ -420,8 +420,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   environment, lifecycle, and routed-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
-  home/target, Dart package-cache, Julia depot, and Python bytecode-cache exports. The helper refuses direct execution because exports
-  must affect the caller shell.
+  home/target, Dart package-cache, Julia depot, and Python bytecode-cache exports. `LINKEDSPEC_HOST_TMPDIR` plus its
+  capture marker preserve pre-routing host authority for nested containment proof only; project writers must not
+  use that value. The helper refuses direct execution because exports must affect the caller shell.
 
 ### 4.4.2 `tools/project_data_run.sh` — per-run scratch lifecycle
 
@@ -869,7 +870,9 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
 - `bash tools/test_project_data_process_locality.sh` runs the macOS relocated-process oracle. It kernel-denies
   writes outside a managed checkout view and developer-home/OS-temp data reads except one exact caller input, then
   requires real Perl/Rust/Dart/Julia/Lua/tool traces or bytecode. Kept REDs cover external writes, shared-cache
-  reads, symlink escapes, and incomplete probe sets; denied-access or `xcrun_db-` diagnostics fail the run.
+  reads, symlink escapes, incomplete probe sets, and missing/repository-device pre-routing host-temp authority;
+  denied-access or `xcrun_db-` diagnostics fail the run. The oracle never calls `getconf` after project `TMPDIR`
+  routing because that can report managed scratch instead of the host namespace.
 - `bash tools/test_repo_root_process_portability.sh` runs the checkout-identity complement. It requires a freshly
   copied Rust primary to select its synthetic moved repository over a conflicting ambient cwd and repeats exact
   named-spec execution for Perl/Dart/Julia/Lua from a same-SSD cwd outside the checkout. All generated state remains

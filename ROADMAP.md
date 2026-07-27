@@ -63,7 +63,11 @@ is complete. Final closeout `.5` passes all backend local gates, primary 660/660
 diagnostic/logical/root/cursor/duplicate/repeated/punctuation matrix, six-runtime scalar numeric 55/55, canonical
 Phase 0 1,031/1,031, and a fresh zero old-volume residue census with exact retained inventories. The storage tree
 is complete. Path-portability closeout `.2.2` subsequently composes relocation and same-filesystem project I/O and
-raises the current routed-entrypoint inventory from the historical closeout count of 38 to 39.
+raises the current routed-entrypoint inventory from the historical closeout count of 38 to 39. Post-closeout
+correction `.6` fixes one oracle-only discovery error: the initializer captures inherited host `TMPDIR` before SSD
+routing, nested sources preserve it, and process containment rejects missing or repository-device authority instead
+of calling `getconf` after routing. Focused storage proof and complete canonical Phase 0 1,031/1,031 pass; the tree
+is closed again at 41/300 without push.
 
 Repository-root path portability is a completed critical architecture lane (ADR `0052`, task tree
 `REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool

@@ -52,7 +52,10 @@ relocated checkout running real Perl/Rust/Dart/Julia/Lua/tool probes from an out
 external writes, shared-cache reads, symlink escapes, incomplete probes, denied-access diagnostics, and Apple
 `xcrun_db-` writes. Parent `.4` is complete. Final `.5` passes every backend local gate, primary 660/660, Unicode
 10/10, every maintained focused parity matrix, six-runtime scalar numeric 55/55, canonical Phase 0 1,031/1,031,
-and a fresh zero-residue pre/post census with exact retained-copy and same-device proof. The tree is complete.
+and a fresh zero-residue pre/post census with exact retained-copy and same-device proof. Post-closeout `.6` repairs
+one process-oracle-only discovery error: inherited host `TMPDIR` is captured before SSD routing, preserved across
+nested sources, and required to be an existing other-filesystem root; missing or repository-device substitutions
+fail. Focused storage proof and canonical Phase 0 1,031/1,031 pass, so the tree is complete at 41/300 without push.
 
 Completed critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

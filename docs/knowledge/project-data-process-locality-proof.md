@@ -14,10 +14,13 @@ answers:
   - why does LinkedSpec give Dart a repository local home
   - why does the Lua native builder call Apple clang directly
   - does xcrun write temporary compiler metadata outside the repository
+  - why must the process oracle capture host temp before routing TMPDIR
+  - why does getconf return project scratch after TMPDIR routing
+  - how does the process oracle reject false host temporary authority
 date: 2026-07-27
 status: current
 tags: [architecture, storage, filesystem, process, sandbox, relocation, dart, lua, toolchain, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.4.2 adds tools/test_project_data_process_locality.sh and registers it in canonical local CI. On macOS it creates a collision-safe checkout view below managed repository scratch, starts from an outside-filesystem cwd with hostile TMPDIR/TMP/TEMP/Cargo/Dart/Julia/Python cache roots, and uses sandbox-exec to deny all writes outside the relocated checkout plus /dev/null and to deny data reads from developer HOME and both OS temporary roots except one exact read-only caller input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes create nonempty traces or bytecode beneath the relocated root; the probe-set guard requires all six families. Deterministic mutations reject an old-volume write, a shared Cargo-cache read, a symlink escape, and a missing tool probe. fs_usage and dtruss require root on this host; sandbox-exec supplies non-root kernel containment in a normal local terminal. The first contained run exposed Dart's pre-command HOME telemetry read and Apple's cc shim xcrun_db temporary write. tools/run_dart_project_data.sh now gives only Dart a same-device repository-local HOME, all maintained Dart command surfaces use it, and the Lua builder invokes the active Apple clang plus SDK directly instead of the stateful cc shim. The final oracle passes with no denied-access or xcrun_db diagnostic."
+evidence: "PROJECT-DATA-SSD-ROOTING.4.2 adds tools/test_project_data_process_locality.sh and registers it in canonical local CI. On macOS it creates a collision-safe checkout view below managed repository scratch, starts from an outside-filesystem cwd with hostile TMPDIR/TMP/TEMP/Cargo/Dart/Julia/Python cache roots, and uses sandbox-exec to deny all writes outside the relocated checkout plus /dev/null and to deny data reads from developer HOME and both OS temporary roots except one exact read-only caller input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes create nonempty traces or bytecode beneath the relocated root; the probe-set guard requires all six families. Deterministic mutations reject an old-volume write, a shared Cargo-cache read, a symlink escape, and a missing tool probe. fs_usage and dtruss require root on this host; sandbox-exec supplies non-root kernel containment in a normal local terminal. The first contained run exposed Dart's pre-command HOME telemetry read and Apple's cc shim xcrun_db temporary write. tools/run_dart_project_data.sh now gives only Dart a same-device repository-local HOME, all maintained Dart command surfaces use it, and the Lua builder invokes the active Apple clang plus SDK directly instead of the stateful cc shim. Correction PROJECT-DATA-SSD-ROOTING.6 proves post-routing getconf DARWIN_USER_TEMP_DIR can echo routed project TMPDIR, preserves inherited TMPDIR before routing, and makes the oracle reject missing or repository-device host authority. Complete canonical local CI then passes through process containment and Phase 0 1,031/1,031."
 reverify: "bash -n tools/test_project_data_process_locality.sh tools/run_dart_project_data.sh tools/build_lua_native.sh && bash tools/test_project_data_process_locality.sh && bash scripts/check_project_data_storage_locality.sh"
 ---
 
@@ -26,6 +29,14 @@ reverify: "bash -n tools/test_project_data_process_locality.sh tools/run_dart_pr
 managed repository scratch root, overlays the current oracle/helper sources for pre-commit verification, clone-
 copies the retained Dart and Julia caches plus the built Rust primary, and invokes that relocated tree while the
 working directory is the runtime-derived system temporary root on another filesystem.
+
+The per-user host temporary root must be identified before the common initializer replaces `TMPDIR`. On this host,
+asking `getconf DARWIN_USER_TEMP_DIR` afterward can return the already-routed project scratch path, causing the
+oracle to condemn correct SSD routing as if it were external host storage. The initializer therefore preserves the
+inherited value once as invocation-local runtime authority. The oracle requires the capture marker, a nonempty
+existing nonsymlink directory, and a device different from the repository; embedded mutations prove missing and
+repository-device substitutions fail. That authority is read only to construct containment denials. It is neither
+a project-data destination nor a persisted machine path.
 
 The macOS sandbox profile permits normal operating-system and external-tool reads, but it makes the storage
 boundary kernel-enforced: writes are denied outside the relocated checkout except `/dev/null`. Data reads from the

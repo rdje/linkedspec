@@ -16,10 +16,12 @@ answers:
   - does the LinkedSpec Julia depot consult the developer home depot
   - how is the project data environment tested
   - where is the LinkedSpec managed runs root
+  - how is the host temporary root preserved before project storage routing
+  - does LinkedSpec persist the host temporary path
 date: 2026-07-27
 status: current
 tags: [architecture, storage, filesystem, cache, temporary-data, environment, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.1 adds ignored /.linkedspec-data with disposable scratch and retained cache children. Sourcing tools/project_data_env.sh derives the checkout from BASH_SOURCE, checks device identity, preserves only same-filesystem overrides, and exports temp, Cargo, Dart, and Julia roots. .1.3 adds LINKEDSPEC_RUNS_ROOT. PROJECT-DATA-SSD-ROOTING.2.2 populates Cargo for 195 locked packages; .2.3 populates Dart for 47 locked packages and proves Directory.systemTemp follows routed TMPDIR. Process proof .4.2 adds same-device LINKEDSPEC_DART_HOME below retained cache after a contained Dart run exposed a telemetry-config read from developer HOME. tools/test_project_data_env.sh proves defaults, same-volume overrides, hostile cross-volume replacement, and cleanup."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.1 adds ignored /.linkedspec-data with disposable scratch and retained cache children. Sourcing tools/project_data_env.sh derives the checkout from BASH_SOURCE, checks device identity, preserves only same-filesystem overrides, and exports temp, Cargo, Dart, and Julia roots. .1.3 adds LINKEDSPEC_RUNS_ROOT. PROJECT-DATA-SSD-ROOTING.2.2 populates Cargo for 195 locked packages; .2.3 populates Dart for 47 locked packages and proves Directory.systemTemp follows routed TMPDIR. Process proof .4.2 adds same-device LINKEDSPEC_DART_HOME below retained cache after a contained Dart run exposed a telemetry-config read from developer HOME. Correction .6 captures inherited TMPDIR once before project routing as invocation-local LINKEDSPEC_HOST_TMPDIR authority; nested sources preserve it, project output never uses it, and no concrete path is persisted. tools/test_project_data_env.sh proves unset/default capture, same-volume overrides, hostile cross-volume replacement, nested preservation, and cleanup."
 reverify: "bash -n tools/project_data_env.sh tools/test_project_data_env.sh && bash tools/test_project_data_env.sh && git check-ignore .linkedspec-data/probe"
 ---
 
@@ -29,7 +31,13 @@ repository-root-relative hierarchy `/.linkedspec-data/`. `scratch/` owns disposa
 dependencies. The leading slash in those descriptions means relative to the repository root, not to the filesystem
 root; the tracked helper stores no checkout or volume literal.
 
-The helper exports `LINKEDSPEC_REPO_ROOT`, `LINKEDSPEC_PROJECT_DATA_ROOT`, `LINKEDSPEC_SCRATCH_ROOT`,
+Before changing any destination, the helper captures inherited `TMPDIR` once in `LINKEDSPEC_HOST_TMPDIR` and marks
+that runtime authority with `LINKEDSPEC_HOST_TMPDIR_CAPTURED`. Nested managed entrypoints preserve the first value
+after `TMPDIR` has moved beneath project scratch. This absolute value exists only in the invocation environment so
+the containment oracle can identify and deny the actual host namespace; no tracked or retained file stores it, and
+no project output may use it.
+
+The helper also exports `LINKEDSPEC_REPO_ROOT`, `LINKEDSPEC_PROJECT_DATA_ROOT`, `LINKEDSPEC_SCRATCH_ROOT`,
 `LINKEDSPEC_CACHE_ROOT`, `LINKEDSPEC_RUNS_ROOT`, `TMPDIR`, `TMP`, `TEMP`, `CARGO_HOME`, `CARGO_TARGET_DIR`, `PUB_CACHE`,
 `LINKEDSPEC_DART_HOME`, `JULIA_DEPOT_PATH`, and `LINKEDSPEC_JULIA_DEPOT_PATH`. Cargo target output remains under
 `rust/target`; Cargo home, Dart packages, Dart command metadata, and Julia packages/precompile state live below the

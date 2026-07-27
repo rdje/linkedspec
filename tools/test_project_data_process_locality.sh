@@ -28,6 +28,20 @@ real_dir() {
  (cd -P -- "$1" && pwd -P)
 }
 
+resolve_host_user_tmp() {
+ local candidate=${LINKEDSPEC_HOST_TMPDIR:-}
+ local resolved
+
+ [[ "${LINKEDSPEC_HOST_TMPDIR_CAPTURED:-}" == 1 ]] ||
+  fail 'pre-routing host temporary authority was not captured'
+ [[ -n "$candidate" && -d "$candidate" && ! -L "$candidate" ]] ||
+  fail 'pre-routing host temporary root is missing or symbolic'
+ resolved=$(real_dir "$candidate")
+ [[ "$(device_id "$resolved")" != "$(device_id "$REPO_ROOT")" ]] ||
+  fail 'pre-routing host temporary root unexpectedly shares the repository filesystem'
+ printf '%s\n' "$resolved"
+}
+
 require_repo_path() {
  local label=$1
  local path=$2
@@ -165,15 +179,19 @@ done
 
 slash=/
 system_tmp=$(real_dir "${slash}tmp")
-user_tmp=$(getconf DARWIN_USER_TEMP_DIR 2>/dev/null || true)
-[[ -n "$user_tmp" && -d "$user_tmp" ]] || fail 'cannot resolve the per-user operating-system temporary root'
-user_tmp=$(real_dir "$user_tmp")
 home_root=$(real_dir "${HOME:?HOME is required to classify developer-owned data}")
 repo_device=$(device_id "$REPO_ROOT")
 [[ "$(device_id "$system_tmp")" != "$repo_device" ]] ||
  fail 'system temporary root is not an available other-filesystem cwd'
-[[ "$(device_id "$user_tmp")" != "$repo_device" ]] ||
- fail 'per-user temporary root unexpectedly shares the repository filesystem'
+
+if (LINKEDSPEC_HOST_TMPDIR_CAPTURED=1 LINKEDSPEC_HOST_TMPDIR= resolve_host_user_tmp) >/dev/null 2>&1; then
+ fail 'host temporary resolver accepted missing pre-routing authority'
+fi
+if (LINKEDSPEC_HOST_TMPDIR_CAPTURED=1 LINKEDSPEC_HOST_TMPDIR="$REPO_ROOT" \
+ resolve_host_user_tmp) >/dev/null 2>&1; then
+ fail 'host temporary resolver accepted repository-filesystem authority'
+fi
+user_tmp=$(resolve_host_user_tmp)
 
 caller_input=''
 for candidate in "$home_root/.gitconfig" "$home_root/.zshrc" "$home_root/.bash_profile"; do

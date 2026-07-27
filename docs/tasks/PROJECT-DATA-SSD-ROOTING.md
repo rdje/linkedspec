@@ -5,7 +5,7 @@
 - Status: `completed`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-27` (`.5` closeout complete; tree closed at 38/300 without push)
+- Last updated: `2026-07-27` (`.6` corrects host-temp discovery and recloses the tree at 41/300 without push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -56,6 +56,8 @@ accessing the shared copy, and remove only records or directories provably owned
 5. `.4` adds mutation-sensitive structural/process enforcement for SSD locality and repository relocation.
 6. `.5` runs the complete backend/canonical matrix, proves the internal-volume census empty, documents the public
    workflow, and closes the tree.
+7. `.6` corrects the process oracle's host-temp discovery without changing SSD routing or admitting project data
+   outside the repository filesystem.
 
 ## Activities and Leaves
 
@@ -675,11 +677,45 @@ accessing the shared copy, and remove only records or directories provably owned
     carry the exact final results. This tree closes; `REPO-ROOT-PATH-PORTABILITY.2.2` is the next clean-pivot action;
     this commit lands at 38/300, the brief is cleared, the tree and runs are clean, and no push occurs.
 
+- ID: `PROJECT-DATA-SSD-ROOTING.6`
+  Status: `done` (2026-07-27; exact post-routing host-temp discovery RED corrected and canonical green)
+  Goal: Make the relocated process oracle identify host temporary storage independently of routed project scratch.
+  Depends on: `.5`, `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1`
+  Acceptance: Preserve the pre-routing inherited operating-system temporary root through the common initializer as
+    invocation-local runtime state; do not persist it or use it for project output. Make the process oracle consume
+    only that preserved host root, reject absent/same-device authority, and continue denying host-temp reads and all
+    off-repository writes. Add focused mutation-sensitive environment/oracle proof; pass all storage/routing/path/
+    doctrine checks and the complete canonical local gate; synchronize the task/index, ADR-aligned Knowledge fact,
+    live docs, memory, roadmaps, and mdBook; close the tree; commit, clear the brief, verify clean, and do not push.
+  Commit: `PROJECT-DATA-SSD-ROOTING.6 - correct process host-temp discovery`
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began only after semantic implementation child `.10.7.3.2.1.1` committed
+    cleanly at `3f878ad2`, cadence 40/300, with zero-byte brief, zero managed runs, and no push; this leaf exists
+    before initializer or oracle code changes.
+  - [x] **EXACT RED / ROOT CAUSE** — Direct process-oracle execution fails because its post-initialization
+    `getconf DARWIN_USER_TEMP_DIR` inherits SSD-routed `TMPDIR` and returns managed project scratch. Explicit
+    `getconf` under an SSD override reproduces the same path; removing temp variables leaves no resolvable
+    authority in this execution environment. The semantic implementation and backend rebuilds are uninvolved.
+  - [x] **PRE-ROUTING HOST AUTHORITY** — The common initializer captures inherited `TMPDIR` once behind an exported
+    marker before selecting any repository root. Default, same-volume, hostile cross-volume, and nested-source
+    tests prove capture/preservation while all project temp/cache destinations remain on the repository filesystem.
+  - [x] **ORACLE / MUTATION PROOF** — The process oracle requires an existing, non-symbolic, other-filesystem host
+    root and no longer calls post-routing `getconf`; embedded mutations reject missing and repository-device roots.
+    Real relocated containment passes all six families under macOS `sandbox-exec`, retaining system/per-user temp
+    denials, hostile external variables, exact caller exception, and zero off-repository project write.
+  - [x] **COMPLETE LOCAL REBUILD** — Environment, lifecycle, 39-route, repository-path, all six storage, structural,
+    and relocated process oracles pass. The full local gate passes all doctrines and semantic/backend owners,
+    primary 66/66 twice, and Phase 0 1,031/1,031 in 626 seconds; final documentation gates are green.
+  - [x] **LOCKSTEP / CLEAN CLOSE** — Record the exact correction and necessary read-only host-path role without
+    persisting a concrete path; close `.6`, commit at 41/300, clear the brief, leave zero runs, and do not push.
+
 ## Current Frontier
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| — | — | Tree complete; resume `REPO-ROOT-PATH-PORTABILITY.2.2` only after the clean `.5` commit. |
+| — | — | Tree complete; resume semantic closeout `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` after the clean `.6` commit. |
 
 ## Decisions
 
@@ -706,6 +742,9 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
+- The initializer captures inherited pre-routing `TMPDIR` once as invocation-local host authority before replacing
+  project destinations. Nested managed entrypoints preserve that value. It is never a project output location or
+  durable path; the process oracle alone uses it to deny the actual other-filesystem host temporary namespace.
 - Thirty-eight standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Structural storage enforcement governs current executable/configuration owners and maintained commands, while
@@ -804,6 +843,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-27 | `.5` | fresh post-proof runtime-derived census and retained destination inventory | PASS: both off-repository temp roots zero; shared Dart/Julia metadata zero; named obsolete roots absent; zero deletion targets; retained Perl 65/17/1,590 and Julia 346/256/133,963,036 plus 24/15/4,284,303; six canonical roots share repository device; canonical Julia usage metadata absent; zero runs |
 | 2026-07-27 | `.5` | complete canonical local CI | PASS: all six doctrines; Rust semantic admission 1/1 in 80.02s; Dart 1/1; Julia 416/416 in 28.3s; Perl primary 66/66 default plus 66/66 POSIX; relocated process containment; Phase 0 1,031/1,031 in 638s; local CI gate passed |
 | 2026-07-27 | `.5` | final Knowledge Map, mdBook, doctrines, memory, task metadata, whitespace, and zero-run closeout | PASS: Knowledge Map 722 facts/5,724 question keys; public book rendered to validated repository storage; all six doctrines and current-document gates pass; zero managed runs |
+| 2026-07-27 | `.6` | exact host-temp RED plus environment/process mutations | PASS: post-routing `getconf` reproduced managed scratch; one-time pre-routing capture preserves unset/same-device/other-device and nested cases; missing and repository-device authority are rejected |
+| 2026-07-27 | `.6` | lifecycle, 39-route, repository-path, six storage, structural, and relocated process proof | PASS: process oracle contains exact Perl/Rust/Dart/Julia/Lua/tool set; 1,659 files / 367,755 lines / 28 storage cases; all six doctrines pass; zero off-repository project write |
+| 2026-07-27 | `.6` | complete canonical local CI | PASS: all six doctrines; semantic owners including Rust/Dart/Julia/Lua; Perl primary 66/66 default plus 66/66 POSIX; relocated containment and moved-root proof; Phase 0 1,031/1,031 in 626s; local CI gate passed |
 
 ## Commit Log
 
@@ -825,6 +867,7 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.4.1` | `ae3b64f2` — `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality` | Structural storage doctrine, 22 classifier cases, nine current-command remediations, six-doctrine registry, and 36-boundary routing. |
 | `.4.2` | `8e341068` — `PROJECT-DATA-SSD-ROOTING.4.2 - prove SSD-local project writes` | Relocated six-family kernel containment, targeted Dart HOME, direct macOS clang, 28 structural cases, 38 routes, and canonical proof. |
 | `.5` | `PROJECT-DATA-SSD-ROOTING.5 - close SSD storage migration` (this commit) | Fresh zero residue, every backend gate, complete maintained parity, canonical/public proof, and tree closeout. |
+| `.6` | `PROJECT-DATA-SSD-ROOTING.6 - correct process host-temp discovery` (this commit) | Pre-routing runtime host authority, mutation-sensitive resolver, focused storage proof, and complete canonical rebuild. |
 
 ## Changelog
 
@@ -898,3 +941,8 @@ accessing the shared copy, and remove only records or directories provably owned
   same-device canonical roots stay exact, every backend gate and maintained variant matrix passes, and canonical/
   public signoff is green. The storage migration tree closes at 38/300 without push;
   `REPO-ROOT-PATH-PORTABILITY.2.2` is the next action after this clean commit.
+- `2026-07-27`: Completed `.6`; the initializer now preserves inherited pre-routing host temp authority before
+  SSD routing and nested sources keep it unchanged. The process oracle consumes only that runtime value, rejects
+  missing or repository-device substitutions, and no longer asks `getconf` to rediscover authority after routing.
+  Focused environment/process/storage proof and complete canonical local CI pass; the tree recloses at 41/300
+  without push and semantic closeout `.10.7.3.2.1.2` resumes after the clean commit.

@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — final Lua static-target canonical closeout is pending after clean
-  implementation child `.1`; first correct the independently reproduced process-locality host-temp oracle under
-  `PROJECT-DATA-SSD-ROOTING.6`, then return from its clean commit.
+- `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — resume final Lua static-target canonical closeout after the clean
+  `PROJECT-DATA-SSD-ROOTING.6` correction commit; rerun canonical from both committed dependencies, synchronize the
+  semantic parent, commit, clear the brief, and continue PNT without pushing before 300.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **PROJECT-DATA-SSD-ROOTING.6 — correct process host-temp discovery**
+  (pre-routing runtime authority, mutation-sensitive resolver, complete local canonical rebuild).
+
+  **Result:** The initializer captures inherited `TMPDIR` once before SSD routing and nested sources preserve that
+  invocation-only value. The process oracle no longer asks post-routing `getconf` to rediscover the host root; it
+  requires captured, existing, nonsymlink, other-device authority and rejects missing/repository-device mutations.
+  Project output remains wholly repository-local, and no concrete machine path is persisted.
+
+  **Proof:** Environment, lifecycle, 39-route, path, all six storage, structural, and relocated process oracles
+  pass; the storage doctrine covers 1,659 files / 367,755 lines / 28 cases. Canonical passes all six doctrines,
+  semantic/backend owners, primary 66/66 default plus 66/66 POSIX, both relocated proofs, and Phase 0 1,031/1,031
+  in 626 seconds. The storage tree recloses; cadence advances to 41/300 with no push.
+
 - 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 — implement Lua semantic static targets**
   (four remaining private targets, exact dual-ABI isolation, and clean split from an unrelated gate correction).
 
