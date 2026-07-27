@@ -461,22 +461,17 @@ request-trace mismatches; the independent runner passes 65/65 twice. The neutral
 assertions, route proof passes 57, composed cursor admission passes 104, and the standalone complete corpus remains
 105/105. Cursor rollout is admitted for Julia; root rollout still requires its separate `.4.3` topology consumer.
 
-The library executor and corpus CLI support named or bounded subsets. For example:
+The library executor and corpus CLI support named or bounded subsets. Use the self-rooted storage wrapper so both
+package/depot state and temporary output stay on the repository filesystem:
 
 ```bash
-mkdir -p rust/target/project-data/tmp rust/target/project-data/cache/julia-depot
-TMPDIR="$PWD/rust/target/project-data/tmp" \
-JULIA_DEPOT_PATH="$PWD/rust/target/project-data/cache/julia-depot:" \
-  julia --project=julia -e 'using Pkg; Pkg.instantiate()'
-TMPDIR="$PWD/rust/target/project-data/tmp" \
-JULIA_DEPOT_PATH="$PWD/rust/target/project-data/cache/julia-depot:" \
-  julia --project=julia julia/bin/corpus_runner.jl \
+bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.instantiate()'
+bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl \
   --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
 ```
 
-The root-relative directories above are the manual bridge while `PROJECT-DATA-SSD-ROOTING.1` lands the standard
-initializer. The trailing empty Julia depot entry selects only Julia's runtime system depots after the writable
-repository-local depot; it deliberately does not consult a developer-home package depot.
+The wrapper derives its writable repository-local depot and managed scratch from the current checkout. It appends
+only Julia's runtime system depots and deliberately does not consult a developer-home package depot.
 
 Validation-only loading remains the default. Adding `--execute` without selectors runs the complete validated
 manifest and passes 105/105; `--case`, `--offset`, and `--limit` remain available for diagnostics. The permanent
@@ -796,6 +791,12 @@ runs whose recorded wrapper and foreground child are both dead. It retains live 
 another checkout's namespace are not deletion candidates. A wrapped foreground command must not return while any
 descendant still consumes its scratch.
 
+There is one known marker-version-1 limitation while `PROJECT-DATA-SSD-ROOTING.3.1.2` is pending: wrapper and
+foreground-child PIDs do not prove that every descendant is dead. A deterministic reconciliation probe launched a
+descendant whose cwd remained inside managed `tmp/`, let the direct child return, and observed the run deleted
+while the descendant was still live. Do not use `--recover` or `--purge-failed` when an interrupted compiler/test
+descendant may still exist; `.3.1.2` owns portable whole-run process liveness and group signal forwarding.
+
 `tools/test_project_data_lifecycle.sh` proves successful and default-failure cleanup, retained-cache survival,
 explicit failure retention and purge, two simultaneous distinct live runs, live-child protection, dead
 interruption recovery, invalid-marker refusal, non-executable shell entrypoint support, and checkout isolation.
@@ -1025,8 +1026,16 @@ tool oracle brings the outside-cwd routed-entrypoint proof from 33 to 35 boundar
 Final `.2.6` signoff passes every affected Python contract, environment/lifecycle/tool storage oracles, all 35
 routed boundaries, actual book generation, Knowledge Map 716 facts / 5,653 question keys, five doctrines, and zero
 managed runs. Canonical local CI passes Rust semantic admission 1/1 in 77.49 seconds, Dart 1/1, Julia 416/416 in
-27.0 seconds, both 66-case primary environments, and Phase 0 1,031/1,031 in 624 seconds. Migration record
-reconciliation `.3.1` is the next clean frontier.
+27.0 seconds, both 66-case primary environments, and Phase 0 1,031/1,031 in 624 seconds.
+
+Reconciliation `.3.1.1` then checked every frozen source/destination/deletion record. It found one missed exact
+same-SSD owner: root-relative `rust/target/project-data-ssd-rooting/`, containing a duplicate 12,741-file Cargo
+cache and 13 disposable scratch files. The cache matched the canonical root in file count/bytes and had a
+byte-identical registry tree; locked offline fetch passed before deletion. The exact 12,754-file/2,376-directory
+old root was deleted, and locked fetch plus all six backend/tool storage oracles pass afterward. Both frozen old
+temporary roots and the shared Dart/Julia metadata scans have zero LinkedSpec matches. Ambiguous multi-project
+caches remain untouched and unused. Descendant-liveness remediation `.3.1.2` is the next clean frontier before the
+final residue proof.
 
 ## CI input areas
 

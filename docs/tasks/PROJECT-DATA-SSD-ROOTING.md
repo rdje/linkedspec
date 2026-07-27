@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.2.5` Lua dual-ABI workspace migration and signoff complete; `.2.6` active)
+- Last updated: `2026-07-26` (`.3.1.1` reconciliation complete; descendant-liveness remediation `.3.1.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -447,13 +447,67 @@ accessing the shared copy, and remove only records or directories provably owned
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1`
   Status: `active`
+  Goal: Reconcile every frozen source and close the descendant-liveness risk exposed by the verification run.
+  Depends on: `.2.6`
+  Children: `.3.1.1`, `.3.1.2`
+
+- ID: `PROJECT-DATA-SSD-ROOTING.3.1.1`
+  Status: `done` (2026-07-26; complete migration ledger, missed target-era root deletion, and descendant-risk split)
   Goal: Reconcile every frozen source against its verified SSD destination and deletion record.
   Depends on: `.2.6`
   Acceptance: Re-run the frozen census; prove every exact LinkedSpec-owned source was moved, byte/count/hash checked
     where material, exercised from its SSD destination, and then deleted in its owning `.2` leaf; resolve any missed
     exact owner immediately; never move or delete a shared global cache wholesale; record every source/destination/
     deletion class without persisting a concrete mount path; commit cleanly without pushing.
-  Commit: `PROJECT-DATA-SSD-ROOTING.3.1 - reconcile SSD migration records`
+  Commit: `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records`
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.2.6` commit `2c485819` at 32/300 with no push; froze this
+    reconciliation checklist before changing any audit record or implementation.
+  - [x] **FROZEN-SOURCE LEDGER** — Recovered the complete `.0` census and reconciled every exact project-owned source
+    class to one owning `.2` leaf, its repository-derived destination or disposable classification, and its
+    recorded count/byte/hash evidence where material.
+  - [x] **DESTINATION USE / DELETION LEDGER** — Proved every retained destination was exercised before exact-source
+    deletion; disposable sources and shared metadata were owner-classified; ambiguous shared caches remain
+    untouched and unused. The missed target-era root was deleted only after canonical cache comparison/use.
+  - [x] **INDEPENDENT RE-CENSUS** — Re-ran every frozen exact old-root and shared-metadata census without broad
+    deletion or concrete mount paths in durable records. All are zero; the one missed exact same-SSD owner was
+    resolved immediately, and `.3.2` inherits a reproducible empty-residue boundary after `.3.1.2`.
+  - [x] **SSD DESTINATION HEALTH** — Re-ran the repository-storage initializer/lifecycle and all six backend/tool
+    storage oracles needed to show retained caches, fixtures, depots, and writer destinations remain usable on the
+    repository filesystem with no managed-run residue.
+  - [x] **LOCKSTEP / CLEAN SIGNOFF** — Recorded the reconciled ledger and descendant RED in the task tree,
+    ADR/Knowledge layer, roadmaps, live docs, Toolbox, README, and mdBook; memory, Knowledge Map 718/5,675, all five
+    doctrines, book, whitespace, exact census, and relevant regression gates pass. This commit lands at 33/300,
+    clears the brief, remains clean, and does not push.
+
+  #### Reconciled Migration Ledger
+
+  | Frozen or discovered source class | Retained destination or disposition | Verification before source deletion | Independent `.3.1.1` result |
+  | --- | --- | --- | --- |
+  | 65 exact Perl CLI workspace directories in the inherited temporary root | `/.linkedspec-data/cache/migrated/perl-cli-workspaces/` | 65 directories, 17 files, 1,590 bytes, canonical hash `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`, copied nested fixture executed | Destination remains 65/17/1,590; both frozen old-root `linkedspec-*` censuses are zero; Perl 24-owner oracle passes |
+  | Shared developer Cargo cache | Left untouched as ambiguous multi-project data; supported workflows use `/.linkedspec-data/cache/cargo-home/` | Canonical root covers 195 compressed packages and 195 sources / 12,741 files; locked offline fetch and Rust gate passed | Shared data remains untouched and unused; canonical locked fetch and 17-owner oracle pass |
+  | Missed exact target-era `rust/target/project-data-ssd-rooting/` root | Canonical Cargo cache retained; 13 scratch files disposable | Audit found 12,754 files / 2,376 directories / 371,656 KiB. Its 12,741-file Cargo cache and canonical cache each held 348,574,405 bytes; registry trees were byte-identical and only volatile root-local `.global-cache` content differed; canonical locked fetch passed | Exact old root deleted after no-process proof; it is absent; canonical locked fetch and complete Rust storage oracle pass afterward. Reusable payload remains recoverable from canonical cache; old scratch/identity is intentionally unrecoverable |
+  | Warmed Dart target-era cache | Atomically moved to `/.linkedspec-data/cache/dart-pub/` | 5,903 payload files / 63,744,165 bytes / hash `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; offline/full gate passed | Old target-era root remains absent; canonical 47-package/18-owner oracle passes |
+  | Two exact shared Dart checkout records and empty shards | Exact metadata deleted; ambiguous shared package payload untouched | Deleted only after canonical offline/full-gate use | Shared active-root scan has zero LinkedSpec match; shared payload remains untouched and unused |
+  | Two exact old Julia depots | `/.linkedspec-data/cache/migrated/julia-depots/` plus canonical source-bearing depot | 346 directories / 256 files / 133,963,036 bytes / hash `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8`; 24 directories / 15 files / 4,284,303 bytes / hash `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`; offline/full gate passed | Both retained copies still match directory/file/byte counts; exact old roots are absent; five-package/17-owner oracle passes |
+  | Exact former-checkout Julia usage-log stanza | Exact stanza deleted; ambiguous shared depot/log data untouched | Ownership classified before deletion; canonical package use passed | Shared usage-log scan has zero LinkedSpec match; shared depot remains untouched and unused |
+  | Lua old-root `linkedspec-lua-*` class | No retained payload existed | Initial and post-gate exact censuses zero | Both frozen old-root censuses remain zero; dual-ABI 13-owner oracle passes |
+  | Disposable tool audit list and accidental inventory | Exact files deleted after ownership/content classification | Audit list 88 lines / 4,646 bytes / SHA-256 `1d6cd0b5a6661dfc2e71eb43d0ff9ee64b32147735c9ec7b43767c7d4a350dce`; both exact paths absent | Both paths and all old-root `linkedspec-*` entries remain absent; three-Python/12-shell/19-entrypoint tool oracle passes |
+
+- ID: `PROJECT-DATA-SSD-ROOTING.3.1.2`
+  Status: `active`
+  Goal: Make managed-run cleanup and recovery respect live descendants after wrapper/direct-child interruption.
+  Depends on: `.3.1.1`
+  Acceptance: Retain the exact deterministic RED where a direct child exits after launching a descendant whose cwd
+    remains inside managed scratch while the current wrapper deletes that run; bind each run to a portable process-
+    group or equivalently complete descendant-liveness authority; forward interruption to the complete owned group;
+    prevent normal cleanup, `--recover`, and `--purge-failed` from deleting scratch while any owned descendant is
+    live; handle PID/process-group reuse safely; add focused success/failure/signal/orphan/grandchild/concurrency
+    tests on the supported host families; update the lifecycle fact and public recovery guidance; pass routing,
+    storage, doctrine, book, and warranted canonical gates; commit cleanly without pushing.
+  Commit: `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.2`
   Status: `pending`
@@ -504,7 +558,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.3.1` | `active` | From the clean `.2.6` commit, reconcile every frozen source, SSD destination, verification result, and exact deletion record; resolve any mismatch before closeout. |
+| `PROJECT-DATA-SSD-ROOTING.3.1.2` | `active` | From clean `.3.1.1`, replace marker-v1 direct-child-only liveness with portable whole-run descendant authority before final residue cleanup. |
 
 ## Decisions
 
@@ -522,6 +576,10 @@ accessing the shared copy, and remove only records or directories provably owned
 - Each exact old LinkedSpec-owned source is deleted in the same leaf that verifies its SSD replacement; deletion is
   not deferred to final closeout. `.3` is an independent reconciliation and empty-residue proof.
 - Reusable caches are retained on the SSD; successful per-run scratch is disposable.
+- Reconciliation includes superseded same-SSD staging roots, not only the original off-volume census. Retain the
+  canonical reusable cache, but delete an exact obsolete duplicate after identity/use proof.
+- Wrapper/direct-child PID death is not descendant-liveness proof. Final residue deletion waits for `.3.1.2` to
+  give normal cleanup and recovery portable whole-run process authority.
 - The default root is `/.linkedspec-data/`: disposable `scratch/`, retained `cache/`, Cargo target at
   `rust/target`, and runtime-derived absolute exports. The leading slash here means repository-root-relative, not
   filesystem-root-absolute.
@@ -547,6 +605,8 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable Julia storage fact: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Durable Lua storage fact: `docs/knowledge/lua-project-data-ssd-storage.md`
 - Durable tool storage fact: `docs/knowledge/tool-project-data-ssd-storage.md`
+- Durable migration reconciliation fact: `docs/knowledge/project-data-migration-reconciliation.md`
+- Durable descendant-liveness gap fact: `docs/knowledge/project-data-descendant-liveness-gap.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -591,6 +651,11 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.6` | inventory, Python/tool storage oracle, affected Python contracts, 35-boundary outside-cwd routing | PASS: exact 3 Python temp / 12 shell allocator / 19 Python entrypoint inventories; real bytecode/map/book/CLI/TAP/oracle storage; external and symlink outputs rejected before creation; zero managed runs |
 | 2026-07-26 | `.2.6` | current command/guidance migration and exact old-root deletion | PASS: 177 current Python-wrapper references across 151 documents; three old-volume reverify commands, stale Lua fallback, generic KM example, and bare current mdBook commands removed; exact 88-line/4,646-byte audit list deleted after classification; both old roots zero |
 | 2026-07-26 | `.2.6` | Knowledge Map; doctrines; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 716 facts/5,653 question keys; Rust semantic admission 1/1 in 77.49s; Dart 1/1; Julia 416/416 in 27.0s; primary 66x2; Phase 0 1,031/1,031 in 624s; zero managed runs |
+| 2026-07-26 | `.3.1.1` | frozen source/destination/deletion ledger and independent residue census | PASS: Perl retained 65 directories/17 files/1,590 bytes; Julia retained 346/256/133,963,036 and 24/15/4,284,303; both old temp roots and shared Dart/Julia metadata have zero LinkedSpec match; every named old path absent |
+| 2026-07-26 | `.3.1.1` | missed target-era root compare/use/delete/reuse | PASS: 12,754 files/2,376 directories/371,656 KiB; old/canonical Cargo each 12,741 files/348,574,405 bytes with byte-identical registries; locked fetch before deletion; exact root absent; locked fetch and Rust oracle pass after; no process/run residue |
+| 2026-07-26 | `.3.1.1` | environment/lifecycle plus six backend/tool destination-health oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool 3 Python/12 shell/19 entrypoints; zero managed runs and bounded logs removed |
+| 2026-07-26 | `.3.1.1` | descendant-liveness root-cause RED and split | RED retained: real interrupted compiler descendant outlived recorded PIDs; deterministic probe returned `descendant_live=yes`, `run_present=no`; `.3.1.2` owns portable process-group/equivalent remediation before `.3.2` |
+| 2026-07-26 | `.3.1.1` | Knowledge Map; five doctrines; memory; task metadata; mdBook; whitespace | PASS: Knowledge Map 718 facts/5,675 question keys; memory 58 lines; public/current docs aligned; no canonical rerun warranted for audit/docs plus verified ignored-cache deletion |
 
 ## Commit Log
 
@@ -605,7 +670,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.3` | `a8a73aa9` — `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
 | `.2.4` | `ee1bb0c3` — `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
 | `.2.5` | `7942a5b4` — `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
-| `.2.6` | `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` (this commit) | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
+| `.2.6` | `2c485819` — `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
+| `.3.1.1` | `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` (this commit) | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
 
 ## Changelog
 
@@ -653,3 +719,7 @@ accessing the shared copy, and remove only records or directories provably owned
   creation; current commands use supported wrappers. The one exact disposable old audit list was classified and
   deleted, both frozen old roots are zero, 35-boundary/focused/canonical proof passes, and `.3.1` becomes the clean
   source/destination/deletion reconciliation frontier after commit.
+- `2026-07-26`: Split `.3.1` after reconciliation found a lifecycle risk independent of migration records.
+  Completed `.3.1.1`: every frozen source is reconciled, all off-repository exact records are absent, one missed
+  same-SSD target-era root is verified/deleted, and all destination oracles pass. The deterministic live-descendant
+  deletion RED is durable; `.3.1.2` becomes the clean process-liveness remediation frontier before `.3.2`.

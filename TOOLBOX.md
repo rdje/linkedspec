@@ -419,11 +419,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `LINKEDSPEC_FAILED_RUN_POLICY=retain` only when a failed run should survive for diagnosis.
 - **HOW:** `bash tools/project_data_run.sh --list` reports owned leftovers; `--recover` removes only dead abandoned
   runs; `--purge-failed` explicitly removes dead retained failures. Live wrapper/foreground-child PIDs, invalid
-  markers, and other checkout namespaces are never deleted. A foreground command must not return before its
-  descendants finish using the run directory.
+  markers, and other checkout namespaces are never deleted. Marker version 1 does not yet own descendant
+  liveness: until `PROJECT-DATA-SSD-ROOTING.3.1.2` lands, a foreground command must not return before descendants
+  finish using the run directory, and recovery must not run when an untracked descendant may still be live.
 - **PROOF:** `bash tools/test_project_data_lifecycle.sh` covers success/default-failure cleanup, cache retention,
   explicit failure retention/purge, concurrent unique runs, live-child recovery denial, interrupted recovery,
-  invalid-marker refusal, non-executable shell entrypoints, and checkout isolation.
+  invalid-marker refusal, non-executable shell entrypoints, and checkout isolation. The durable descendant RED is
+  recorded in `docs/knowledge/project-data-descendant-liveness-gap.md` and owned by `.3.1.2`.
 
 ### 4.5 `tools/check_unicode_case_contract.py` — pinned Unicode casing proof
 

@@ -45,8 +45,12 @@ is complete: all three Python temporary owners, 12 shell allocators, and 19 Pyth
 bytecode, Knowledge Map, mdBook, conformance, TAP, and oracle output are repository-local; 177 current command
 references use the supported Python boundary; and hostile external/symlink output is rejected before creation.
 The sole exact disposable old audit list was classified and deleted, and both frozen old-root censuses are zero.
-Active `.3.1` now reconciles every frozen source/destination/deletion record. The path-portability closeout
-is paused behind this storage-locality tree so it can prove both
+Reconciliation `.3.1.1` confirms every frozen off-repository source/metadata record is absent and every retained
+destination remains usable. It also finds and deletes one missed exact same-SSD target-era root after proving its
+12,741-file Cargo cache matches the canonical root and locked offline use succeeds; all six storage oracles pass
+after deletion. Verification exposes a separate marker-v1 descendant-liveness RED, so `.3.1` is split and
+`.3.1.2` now owns portable whole-run process authority before final residue proof `.3.2`. The path-portability
+closeout is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree

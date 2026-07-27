@@ -267,7 +267,12 @@ generated source, and traces on repository storage; its exact old-workspace cens
 now implemented: it routes all maintained Python checker commands and bytecode, both Python regeneration
 workspaces, Knowledge Map output, mdBook destinations, conformance/TAP/oracle writers, and shell allocators through
 validated repository-filesystem storage. Its recurring oracle rejects hostile output paths before creation.
-Migration reconciliation `.3.1` is the next clean frontier.
+Reconciliation `.3.1.1` independently confirms all frozen off-repository sources and shared metadata are absent,
+but found one missed exact same-SSD target-era root at `rust/target/project-data-ssd-rooting/`. Its 12,741-file
+Cargo cache matched the canonical cache in file count/bytes and had a byte-identical registry tree; after locked
+offline use, the exact 12,754-file/2,376-directory old root was deleted. Locked fetch and all six backend/tool
+storage oracles pass afterward. Ambiguous multi-project caches remain untouched and unused. Descendant-liveness
+remediation `.3.1.2` is the next clean frontier before final residue closeout.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -323,7 +328,10 @@ bash tools/project_data_run.sh --purge-failed  # explicitly remove dead retained
 
 A low-level foreground command can request the same lifecycle with
 `bash tools/project_data_run.sh COMMAND [ARG ...]`; it must not return while descendants still consume its scratch.
-Commands that only need the common environment may still source `tools/project_data_env.sh` explicitly.
+Commands that only need the common environment may still source `tools/project_data_env.sh` explicitly. Marker
+version 1 currently records only wrapper and direct-child PIDs: until `.3.1.2` lands, do not run recovery when an
+interrupted compiler/test descendant may still be live. The exact RED and remediation owner are recorded in
+`docs/knowledge/project-data-descendant-liveness-gap.md`.
 
 Perl migration `.2.1` routes `tools/run_primary_cli_matrix.sh` through that lifecycle and adds the recurring
 storage proof:

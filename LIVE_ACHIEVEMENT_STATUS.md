@@ -8,14 +8,32 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.3.1` — from the clean tool migration commit, reconcile every frozen source, SSD
-  destination, verification result, and exact deletion record; resolve any mismatch before the final residue leaf.
+- `PROJECT-DATA-SSD-ROOTING.3.1.2` — from the clean reconciliation commit, replace marker-v1 direct-child-only
+  liveness with portable whole-run descendant authority before any final residue cleanup.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.1.1 — reconcile SSD migration records**
+  (complete source/destination/deletion ledger, missed target-era root retired, six storage oracles green,
+  descendant-liveness RED split before code; closes with this commit).
+
+  **Result:** Fresh inventory preserves all 65 Perl workspace directories / 17 files / 1,590 bytes and both Julia
+  depot copies at 346/256/133,963,036 and 24/15/4,284,303. Both frozen old temporary roots and shared Dart/Julia
+  metadata scans have zero LinkedSpec matches. One missed exact same-SSD root,
+  `rust/target/project-data-ssd-rooting/`, held a duplicate 12,741-file Cargo cache plus 13 disposable files. Its
+  registry matched canonical byte-for-byte and locked offline fetch passed; the exact 12,754-file/2,376-directory
+  root was deleted, then locked fetch and the full Rust oracle passed again. Ambiguous shared caches remain
+  untouched and unused.
+
+  **Finding / proof:** Environment/lifecycle plus Perl, Rust, Dart, Julia, Lua, and tool storage oracles pass with
+  zero managed runs. A deterministic probe separately proves marker version 1 can delete a run while an untracked
+  descendant remains live (`descendant_live=yes`, `run_present=no`). `.3.1.2` owns the fix before `.3.2` residue
+  cleanup. Knowledge Map, doctrines, mdBook, memory, task metadata, and whitespace pass. Push advances to 33/300;
+  no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.6 — root tool artifacts on SSD**
   (3 Python temp owners, 12 shell allocators, 19 checker entrypoints, validated Knowledge Map/mdBook/TAP/oracle
   output, 177 current wrapper references, exact disposable old residue deleted, complete canonical gate).

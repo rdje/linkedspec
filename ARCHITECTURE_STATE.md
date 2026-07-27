@@ -14,7 +14,11 @@ This document is the current high-level technical reading of the project shape. 
   bytecode/map/book/CLI/TAP/oracle output device identity, symlink/cross-volume rejection before creation, 35
   outside-cwd boundaries, and zero old-root tool residue after exact deletion of one disposable audit list.
   Canonical passes Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in 27.0s, primary 66x2, and Phase 0 1,031/1,031 in
-  624s. Migration record reconciliation `.3.1` is next; relocation closeout remains paused behind storage `.5`.
+  624s. Reconciliation `.3.1.1` now confirms all frozen off-repository records absent and all retained destinations
+  usable; it also deletes the missed exact `rust/target/project-data-ssd-rooting/` target-era root after canonical
+  cache identity and locked-offline proof. All six storage oracles pass afterward. A deterministic RED proves
+  marker version 1 can delete scratch while a descendant outlives its recorded wrapper/direct-child PIDs;
+  remediation `.3.1.2` is next before residue `.3.2`, and relocation closeout remains paused behind storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

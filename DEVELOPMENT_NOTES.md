@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.1.1` — reconciliation must include migration-created staging roots and
+  descendant ownership): The frozen off-volume census was fully reconciled, but checking only those original
+  sources would have missed a repository-local target-era root created while the new storage hierarchy was being
+  populated. `rust/target/project-data-ssd-rooting/` was exact project-owned state: its Cargo registry was
+  byte-identical to canonical storage, its complete cache matched 12,741 files / 348,574,405 bytes, and its 13
+  additional files were disposable scratch. Locked canonical fetch before deletion and the complete Rust oracle
+  afterward made exact deletion safe. Reconciliation should therefore cover original off-volume sources *and*
+  superseded same-volume staging roots; high-capacity SSD policy retains useful canonical caches, not obsolete
+  duplicate identities.
+
+  Shared-state non-authority remains unchanged. Zero LinkedSpec matches in the developer Dart/Julia metadata and
+  zero exact temporary roots establish absence, but do not authorize deleting ambiguous shared package payload.
+  Every backend/tool destination oracle passes after old-root deletion, and the Perl/Julia retained migration
+  copies still match their recorded counts and bytes.
+
+  The deliberately interrupted verifier exposed a distinct process-ownership defect. Marker version 1 binds only
+  wrapper and direct child. A compiler descendant can survive both; an initial `rm -rf` happened to lose a write
+  race with `Directory not empty`, but timing is not a guard. The deterministic RED is stronger: a direct child
+  launches a background descendant with cwd in managed `tmp/`, returns success, and the wrapper deletes the run
+  while `kill -0` proves the descendant remains live. Signals also target only the direct child. `.3.1.2` must use
+  a portable owned process group or equivalently complete descendant authority, account for PID/group reuse, and
+  gate normal cleanup plus both recovery modes before final residue deletion.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.6` — environment routing is incomplete without direct-output
   validation): Standard `TMPDIR` routing already covered shell allocators, conformance workspaces, TAP capture, and
   oracle subprocess files, but four distinct seams could bypass it: Python's inherited default temp selection,

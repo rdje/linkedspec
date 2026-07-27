@@ -36,8 +36,12 @@ old Lua workspace residue was zero. Tool leaf `.2.6` is complete across Python, 
 conformance, and other tool artifacts: it freezes three Python temporary owners, 12 shell allocators, and 19 Python
 checker entrypoints; routes bytecode/map/book/conformance/TAP/oracle output; validates external/symlink rejection;
 migrates 177 current command references; and deletes the sole exact disposable old audit list. Both frozen old
-roots are zero. Active `.3.1` reconciles all frozen migration/deletion records. Migration remains
-copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
+roots are zero. Parent `.3.1` is split by reconciliation evidence; migration remains copy/verify/use/delete and
+ambiguous shared caches are not deleted wholesale. Reconciliation `.3.1.1` confirms every
+frozen off-repository record absent, retires one missed exact same-SSD target-era root after canonical cache and
+locked-offline proof, and reruns all six storage oracles. It also establishes the marker-v1 descendant-liveness
+RED: a live descendant can outlast recorded wrapper/direct-child PIDs while its run is deleted. Remediation
+`.3.1.2` is the next frontier before final residue leaf `.3.2`.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.1.1 — reconcile SSD migration records
+
+Reconciled every frozen `.0` source against its `.2.1-.2.6` destination, verification, use, and deletion record.
+Fresh inventory preserves all 65 retained Perl workspace directories / 17 files / 1,590 bytes and both retained
+Julia depot copies at 346 directories / 256 files / 133,963,036 bytes and 24 directories / 15 files / 4,284,303
+bytes. Both frozen operating-system temporary roots contain zero `linkedspec-*` entry; the shared Dart active-root
+and Julia usage-log scans contain zero LinkedSpec match; every previously named exact old path is absent. Ambiguous
+shared Cargo/Dart/Julia caches remain untouched and unused.
+
+The independent audit found one missed exact project-owned source on the repository filesystem:
+`rust/target/project-data-ssd-rooting/`. It contained a duplicate 12,741-file Cargo cache and 13 disposable scratch
+files, 12,754 files / 2,376 directories / 371,656 KiB total. The old and canonical Cargo roots each had 12,741
+files / 348,574,405 bytes; registry trees compared byte-for-byte, while only volatile root-local `.global-cache`
+content differed. Locked offline fetch passed from the canonical root and no process used the old root. The exact
+old root was then deleted; it is absent, and another locked fetch plus the complete 17-owner Rust storage oracle
+pass. Reusable package content remains recoverable from canonical cache; the old identity and scratch are
+intentionally gone.
+
+Verification also exposed a separate lifecycle defect and split it before code. An interrupted Rust oracle left a
+compiler descendant after both recorded PIDs died; recovery raced its writes and refused the first deletion. A
+deterministic repository-local probe then let a direct child launch a descendant whose cwd stayed in managed
+`tmp/` and return: the wrapper deleted the run while the probe reported `descendant_live=yes` and `run_present=no`.
+Marker version 1 tracks/signals only wrapper/direct-child PIDs. New leaf `.3.1.2` owns portable whole-run liveness,
+group signal forwarding, and RED-to-green proof before `.3.2` residue cleanup.
+
+Common environment/lifecycle checks and all six Perl/Rust/Dart/Julia/Lua/tool storage oracles pass with no managed
+run or audit-log residue. Knowledge Map, task/ADR/roadmap/live/public-book synchronization, memory architecture,
+five doctrines, mdBook, and whitespace pass. Push cadence advances to 33/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.6 — root tool artifacts on SSD
 
 Added `tools/run_python_project_data.sh` as the supported root-relative Python checker boundary and
