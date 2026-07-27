@@ -14,7 +14,7 @@ date: 2026-07-12
 status: accepted-design
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
 evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.11.3.3.2 consume literal, invocation, and contextual-final-block behavior while backend parity remains future."
-reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The accepted callable codeblock literal is:

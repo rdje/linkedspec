@@ -784,7 +784,7 @@ removed `parse_mode` option on a migrated backend; author or inspect the rule st
 ADR `0044` replaces the former global option during `.9.1.3-.9` rollout. The
 target is already executable, before backend changes, in
 `capability_conformance/rule_local_cursor_contract.json`; run
-`python3 tools/check_rule_local_cursor_contract.py` from the repository root.
+`bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py` from the repository root.
 The authored family becomes the only cursor authority:
 
 | Rule family | Derived cursor policy |

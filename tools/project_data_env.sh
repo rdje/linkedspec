@@ -160,6 +160,71 @@ _linkedspec_storage_select_dir CARGO_HOME "$LINKEDSPEC_CACHE_ROOT/cargo-home" ||
 _linkedspec_storage_select_dir CARGO_TARGET_DIR "$_linkedspec_storage_repo_root/rust/target" || return 1
 _linkedspec_storage_select_dir PUB_CACHE "$LINKEDSPEC_CACHE_ROOT/dart-pub" || return 1
 _linkedspec_storage_select_julia_depots "$LINKEDSPEC_CACHE_ROOT/julia-depot" || return 1
+_linkedspec_storage_select_dir PYTHONPYCACHEPREFIX \
+ "$LINKEDSPEC_CACHE_ROOT/python-pycache" || return 1
+
+linkedspec_project_data_validate_output_path() {
+ local candidate=${1:-}
+ local label=${2:-project output}
+ local absolute
+ local probe
+ local resolved
+ local device
+ local repo_device
+
+ [[ -n "$candidate" ]] || {
+  printf 'project-data: %s path is empty\n' "$label" >&2
+  return 64
+ }
+
+ case "$candidate" in
+ /*) absolute=$candidate ;;
+  *) absolute="$PWD/$candidate" ;;
+ esac
+
+ probe=$absolute
+ while [[ "$probe" != / ]]; do
+  [[ ! -L "$probe" ]] || {
+   printf 'project-data: %s must not contain a symlink: %s\n' "$label" "$probe" >&2
+   return 1
+  }
+  probe=$(dirname -- "$probe") || return 1
+ done
+
+ if [[ -e "$absolute" ]]; then
+  if [[ -d "$absolute" ]]; then
+   resolved=$(cd -P -- "$absolute" && pwd -P) || return 1
+  else
+   probe=$(cd -P -- "$(dirname -- "$absolute")" && pwd -P) || return 1
+   resolved="$probe/$(basename -- "$absolute")"
+  fi
+ else
+  probe=$(dirname -- "$absolute") || return 1
+  while [[ ! -d "$probe" ]]; do
+   [[ ! -e "$probe" && ! -L "$probe" ]] || {
+    printf 'project-data: %s has a non-directory ancestor: %s\n' "$label" "$probe" >&2
+    return 1
+   }
+   [[ "$(dirname -- "$probe")" != "$probe" ]] || return 1
+   probe=$(dirname -- "$probe") || return 1
+  done
+  resolved=$(cd -P -- "$probe" && pwd -P) || return 1
+ fi
+
+ if ! device=$(stat -c '%d' -- "$resolved" 2>/dev/null); then
+  device=$(stat -f '%d' "$resolved" 2>/dev/null) || {
+   printf 'project-data: cannot determine filesystem device for %s\n' "$resolved" >&2
+   return 1
+  }
+ fi
+ if ! repo_device=$(stat -c '%d' -- "$LINKEDSPEC_REPO_ROOT" 2>/dev/null); then
+  repo_device=$(stat -f '%d' "$LINKEDSPEC_REPO_ROOT" 2>/dev/null) || return 1
+ fi
+ [[ "$device" == "$repo_device" ]] || {
+  printf 'project-data: %s is outside the repository filesystem: %s\n' "$label" "$candidate" >&2
+  return 1
+ }
+}
 
 linkedspec_project_data_enter_run() {
  local command=${1:-}

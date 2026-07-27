@@ -14,7 +14,7 @@ date: 2026-07-25
 status: current contract clarification; behavior unchanged
 tags: [semantic-introspection, privacy, source-map, query, static-projection, lua, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0049 section 5; capability_conformance/semantic_introspection_model.json privacy_limited; Perl/Rust/Dart/Julia private static projectors and semantic query source projectors; FUTURE-PARITY-BACKLOG.10.7.3.2.0"
-reverify: "python3 tools/check_semantic_introspection_contract.py; rg -n 'project_source|_project_source|_semantic_query_project_source|_projectSemanticQuerySource|register_source|_registerSemanticSource' perl/LinkedSpec/SemanticQuery.pm rust/linkedspec-runtime/src/semantic_index dart/lib/src/semantic julia/src/semantic"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n 'project_source|_project_source|_semantic_query_project_source|_projectSemanticQuerySource|register_source|_registerSemanticSource' perl/LinkedSpec/SemanticQuery.pm rust/linkedspec-runtime/src/semantic_index dart/lib/src/semantic julia/src/semantic"
 ---
 
 # Semantic Source Ceiling Boundary

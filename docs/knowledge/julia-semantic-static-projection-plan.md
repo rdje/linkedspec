@@ -28,7 +28,7 @@ date: 2026-07-22
 status: current; all five private construction targets implemented and composition closed
 tags: [julia, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.10.6.3.0-.3; capability_conformance/semantic_introspection_model.json; julia/src/semantic/SemanticStaticProjection.jl; julia/test/semantic_index_static_graph_test.jl; julia/test/semantic_index_static_remaining_test.jl; admitted Perl/Rust/Dart static projectors; ADR 0049"
-reverify: "python3 tools/check_semantic_introspection_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'"
 ---
 
 # Julia Semantic Static Projection Plan

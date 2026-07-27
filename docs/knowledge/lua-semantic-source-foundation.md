@@ -24,7 +24,7 @@ date: 2026-07-25
 status: current implementation; .10.7.2 composition-closed, .10.7.3.0 audit closed, and .10.7.3.1 graph next
 tags: [lua, luajit, semantic-introspection, source-map, sha256, utf8, privacy, no-execution]
 evidence: "lua/src/linkedspec/semantic_index.lua and lua/test/semantic_index_source_foundation_test.lua; 378 assertions pass byte-identically on PUC Lua and LuaJIT before the 122-assertion outcome suite, .10.7.2.3 recomposes both unchanged, and semantic governance remains 6/20/89 at 5/9 rollout plus 4/6 admission."
-reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_source_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_source_foundation_test.lua; bash tools/run_lua_local.sh; python3 tools/check_semantic_introspection_contract.py"
+reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_source_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_source_foundation_test.lua; bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Lua semantic source foundation

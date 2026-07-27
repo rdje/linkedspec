@@ -12,7 +12,7 @@ date: 2026-07-22
 status: confirmed
 tags: [self-hosted, grammar, unicode, labels, boundaries, corpus, five-backend]
 evidence: "FUTURE-PARITY-BACKLOG.10.5.0.1.2.1: LinkedSpec::Get against canonical specs/spec.spec reproduced invalid header suffix/prefix nodes and five Top truncations each for bare action/blind targets. rule_header now begins with (?m:^[ \\t]* and rejects an extra colon after the header; action_bare and blind_bare own complete physical lines with start plus (?=\\r?$) end boundaries. unicode_case/self_hosted_cli/manifest.json composes all 9 positive, 8 negative, 2 distinct fixtures, three no-prefix surfaces, and newline splitting into one exact canonical-grammar compile; tools/run_primary_cli_matrix.sh --manifest passes Perl/Rust/Dart/Julia/Lua in default and POSIX environments. The Unicode checker locks grammar topology, fixture coverage, exact output, alternate-manifest routing, and byte equality of all four spec_spec_* inputs at canonical SHA-256 ce409f572887d102543d995e197666df668e47963f572a3a376622249e57fa7c."
-reverify: "python3 tools/check_unicode_rule_label_contract.py && bash tools/run_primary_cli_matrix.sh --manifest unicode_case/self_hosted_cli/manifest.json"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py && bash tools/run_primary_cli_matrix.sh --manifest unicode_case/self_hosted_cli/manifest.json"
 ---
 
 # Self-hosted rule-label physical boundaries

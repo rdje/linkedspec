@@ -24,7 +24,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.5.2 adds a 101-assertion route consumer
 evidence_update_2026_07_19_signoff: "Root governance remains 5/7+39 and KM is 625/4,561. Canonical local CI exits 0 after reference root consumers 7+5, cursor admission 288, primary 65x2, and Phase 0 1,031/1,031 in 643 seconds. Generated book, Python cache, and both disposable ABI-native trees are removed before the clean route commit."
 evidence_update_2026_07_19_generated_v2: "Cursor leaf .9.1.7.4 advances new emitted modules and migrated route consumers to linkedspec-generated-source-v2/format 2 without widening the plan or changing the invocation-local selector. V2 derives cursor and structure from family and rejects stale v1 before payload reconstruction."
 evidence_update_2026_07_19_admission: "Cursor `.9.1.7` and root admission `.9.1.1.2.5.3` are complete. One exact shared-source 15-role consumer passes 139/139 on PUC Lua and LuaJIT, package 177/177x2, primary 65/65x4, corpus 105/105x2, and root governance 6/1/44. Follow [[lua-root-rule-selection-admission]]."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_root_rule_selection_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py"
 ---
 
 # Lua root-selection routes

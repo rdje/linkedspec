@@ -20,7 +20,7 @@ date: 2026-07-25
 status: composition-closed through .10.7.2.3; static audit .10.7.3.0 closed and private graph .10.7.3.1 follows
 tags: [lua, luajit, semantic-introspection, source-map, sha256, diagnostics, privacy, no-execution]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.2.0 freezes .1 source, .2 outcome, and .3 closeout ownership; .10.7.2.1 implements strict source ownership at 378 assertions per ABI, .10.7.2.2 implements one staged outcome at 122 per ABI, and .10.7.2.3 recomposes them unchanged."
-reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'FUTURE-PARITY-BACKLOG.10.7.2|semantic_index|source_detail_ceiling|semantic_source_' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md lua/src lua/test"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'FUTURE-PARITY-BACKLOG.10.7.2|semantic_index|source_detail_ceiling|semantic_source_' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md lua/src lua/test"
 ---
 
 # Lua semantic source/outcome plan

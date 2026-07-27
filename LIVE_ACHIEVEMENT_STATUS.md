@@ -8,15 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.2.6` — from the clean Lua migration commit, inventory and root Python, shell, mdBook,
-  Knowledge Map, conformance, and remaining tool artifacts on the repository filesystem; migrate and verify any
-  retained tool-owned data, delete its exact old copy, and pass focused tool/book gates.
+- `PROJECT-DATA-SSD-ROOTING.3.1` — from the clean tool migration commit, reconcile every frozen source, SSD
+  destination, verification result, and exact deletion record; resolve any mismatch before the final residue leaf.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.6 — root tool artifacts on SSD**
+  (3 Python temp owners, 12 shell allocators, 19 checker entrypoints, validated Knowledge Map/mdBook/TAP/oracle
+  output, 177 current wrapper references, exact disposable old residue deleted, complete canonical gate).
+
+  **Result:** `tools/run_python_project_data.sh` owns maintained checker commands and retained bytecode;
+  both Unicode generators validate managed scratch. Knowledge Map's portable host hook validates configured output
+  before use and after generation, while the mdBook wrapper validates default/environment/CLI destinations before
+  launch and the realized directory afterward. The tool oracle proves real bytecode/map/book/CLI/TAP/oracle output
+  shares the repository device and rejects cross-volume or symlink destinations before creation. The sole exact
+  old artifact was an 88-line/4,646-byte disposable Julia audit list; classification preceded exact deletion, and
+  both frozen old roots now contain zero exact tool residue.
+
+  **Proof:** Bash/Python syntax, every affected Python contract, environment/lifecycle/tool oracles, 35-boundary
+  outside-cwd routing, actual mdBook, Knowledge Map 716/5,653, all five doctrines, whitespace, exact old-root and
+  zero-run censuses pass. Canonical passes Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in 27.0s, primary 66x2,
+  and Phase 0 1,031/1,031 in 624s. Push advances to 32/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.2.5 — root Lua workspaces on SSD**
   (13-owner dual-ABI native/temp/generated/trace proof, five durable commands migrated, exact old residue zero,
   complete Lua and canonical gates; closes with this commit).

@@ -12,7 +12,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, codeblock, parameter-kinds, actionir, staged-parsing, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.4.1 passes metadata preservation at 142/142; .5.1.4.2 executes callbacks at 146/146; .5.3.1 emits exact outward final-codeblock-v3 records while the complete Lua suite remains 153/153 on both ABIs."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
 Lua consumes the codeblock-definition record emitted by `specs/user_function_definition.spec`. The shell

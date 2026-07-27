@@ -13,7 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, capture, marks, compiler, runtime, timing, unicode, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.7.4 adds CompiledRuleSlotEvent records in lua/src/linkedspec/compiled_spec.lua and post-action/pre-LE execution in lua/src/linkedspec/interpreter.lua. lua/test/run.lua locks all three anonymous spellings, two named marks, same-slot versus later-slot timing, Unicode positions, native and serialized-source execution, typed malformed authored/manual AST markers, and the exact checked-in EBNF logging_annotation @move_pos line. tools/run_lua_local.sh passes 121/121 on PUC Lua and LuaJIT; canonical CI passes capability 64/0/0, coverage 246/105+1/122, selector admission 57/27/0, CLI 61x2, and Phase 0 1..1031 in 633 seconds."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_public_aggregate_selector_surface.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 # Lua Rule-Slot Marker Execution

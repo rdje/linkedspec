@@ -14,7 +14,7 @@ date: 2026-07-22
 status: current composition-closed public typed/raw-neutral static query authority
 tags: [dart, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.4.0; capability_conformance/semantic_introspection_contract.json; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_static_projection.dart; dart/lib/src/semantic/semantic_call_projection.dart; perl/LinkedSpec/SemanticQuery.pm; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs
-reverify: "python3 tools/check_semantic_introspection_contract.py && cd dart && dart test test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && cd dart && dart test test/semantic_index_source_foundation_test.dart test/semantic_index_compilation_foundation_test.dart test/semantic_index_static_graph_test.dart test/semantic_index_call_projection_test.dart"
 ---
 
 # Dart Semantic Query Authority Map

@@ -14,7 +14,7 @@ date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, mutation, diagnostics, compatibility, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.1 adopts capability_conformance/uniform_binding_contract.json and tools/check_uniform_binding_contract.py. The independent checker validates 11 migration mappings, seven binding/mutation execution cases, six exact invalid-selector cases, eight valid constructor/literal classifications, and deterministic future fixture source/results. FUTURE-PARITY-BACKLOG.12.1.8.1 makes the six invalid cases compile-time failures on Perl while preserving the eight retained classes."
-reverify: "python3 tools/check_uniform_binding_contract.py"
+reverify: "bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py"
 ---
 
 # Uniform binding contract v1

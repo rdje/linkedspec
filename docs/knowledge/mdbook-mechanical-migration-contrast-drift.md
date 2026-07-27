@@ -10,7 +10,7 @@ date: 2026-07-21
 status: current defect; repair and semantic no-drift guard pending under FUTURE-PARITY-BACKLOG.23
 tags: [mdbook, documentation, migration, aggregate-selector, no-drift, defect]
 evidence: git commit ac217f6c; docs/linkedspec-book/src; tools/check_public_aggregate_selector_surface.py; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .23
-reverify: "git show --stat --oneline ac217f6c; rg -n 'items.*items|rows.*rows|result.*result' docs/linkedspec-book/src; python3 tools/check_public_aggregate_selector_surface.py"
+reverify: "git show --stat --oneline ac217f6c; rg -n 'items.*items|rows.*rows|result.*result' docs/linkedspec-book/src; bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 Full-book startup review found migration prose whose old and new forms are now identical, including statements

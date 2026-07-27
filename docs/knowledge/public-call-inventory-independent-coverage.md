@@ -12,7 +12,7 @@ date: 2026-07-15
 status: current
 tags: [actionir, inventory, coverage, parity, marks, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.5 admits the exact seven complete named-mark helpers into equal 246-name Dart/Julia/Lua inventories. tools/check_language_capability_coverage.pl combines 105 corpus sources with complete_named_mark_contract.json, independently derives 131 identifier-shaped Perl contracts, subtracts nine classified compatibility/legacy/internal contracts, and requires the remaining 122 in every inventory. A simultaneous clear_mark deletion from all three inventories is reported by the exact-family and independent-public checks."
-reverify: "perl tools/check_language_capability_coverage.pl --report && python3 tools/check_complete_named_mark_contract.py"
+reverify: "perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py"
 ---
 
 # Independent Public-Call Inventory Coverage

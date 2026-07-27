@@ -16,7 +16,7 @@ date: 2026-07-21
 status: current composed Rust admission
 tags: [rust, semantic-introspection, admission, conformance, mutations, rollout, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.4.6 adds rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs, one exact 12-role consumer over strict byte/text normalization, compiled/failed/runtime snapshots, loaded and reconstructed execution, generated-plan and source-emitter direct/traced routes, typed/native-neutral JSON, all 20 query digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak denial. The neutral checker locks path/role/driver/registration/admission topology with eight Rust-specific mutations, rejects 73 mutations total, advances only Rust to rollout 3/9 and native admission 2/6, and leaves Dart, Julia, PUC Lua, and LuaJIT pending."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission && python3 tools/check_semantic_introspection_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Rust Semantic Introspection Admission

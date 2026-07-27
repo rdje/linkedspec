@@ -18,7 +18,7 @@ status: current
 tags: [julia, runtime, logical, truthiness, arity, generated-source, primary-cli, corpus, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.5 preserves Julia's _runtime_truthy helper/control seam and eager once-only left-to-right pure-helper evaluation, then adds direct pre-effect arity for one-plus and/or and exact-one not. The exact 177-assertion neutral consumer covers 17 typed truth rows, values, effects, receiver/lazy controls, four invalid calls, native, normalized, generated-plan, primary, and independently compiled emitted modules. Full package proof passes 1,671 assertions, primary and shared CLI conformance, and corpus 105/105; canonical local CI passes Phase 0 1..1031/607s plus the optional complete Julia gate. Generated/primary .5.2.7, recurring admission .5.2.8, and public no-drift .5.2.9 have since closed the shared ledger at 8 complete / 0 pending."
 evidence_prior_2026_07_10: "JULIA-BACKEND-PARITY.6.2.4.2.1 first added eager and/or/not through _runtime_truthy with legacy empty false/false/true results. Four portmap/tablegrep fixtures passed; the remaining portmap_constant failure was separately root-caused to unsupported Regex flag o and later repaired."
-reverify: "bash tools/run_julia_local.sh && python3 tools/check_logical_helper_contract.py"
+reverify: "bash tools/run_julia_local.sh && bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py"
 ---
 
 Julia executes `and`, `or`, and `not` as ordinary eager boolean value helpers. `_runtime_truthy` is the single

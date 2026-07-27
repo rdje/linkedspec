@@ -26,7 +26,7 @@ reverify:
   - "sed -n '120,155p' julia/src/io/SpecLoader.jl"
   - "sed -n '143,178p' capability_conformance/semantic_introspection_model.json"
   - "sed -n '236,248p' capability_conformance/semantic_introspection_contract.json"
-  - "python3 tools/check_semantic_introspection_contract.py"
+  - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Julia semantic runtime observation authority map

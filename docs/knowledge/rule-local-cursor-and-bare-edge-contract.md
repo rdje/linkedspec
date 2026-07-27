@@ -15,7 +15,7 @@ date: 2026-07-20
 status: accepted and public-admitted; rollout 8 complete / 0 pending
 tags: [dsl, grammar, cursor, parse-mode, and-rule, or-rule, edges, descriptor, generated-source, parity]
 evidence: "ADR 0044 and FUTURE-PARITY-BACKLOG.9.1.1.1 ratify intrinsic AND=consume and OR/default=seek, mode-sensitive bare edge normalization, explicit cross-family edges, removal diagnostics, per-rule descriptor facts, and generated-source v2 family derivation. FUTURE-PARITY-BACKLOG.9.1.2 makes that target executable over 36 family spellings, 18 edge cases, and eight parent/child cases. Perl `.9.1.3`, Rust `.9.1.4`, Dart `.9.1.5`, Julia `.9.1.6`, dual-ABI Lua `.9.1.7`, recurring composition `.9.1.8`, and public no-drift `.9.1.9` are admitted. The public contract locks README/guide/API/backend/roadmap/task/architecture/mdBook/ADR/Knowledge Map markers and exact stale-current denials. Rollout is 8 complete / 0 pending; inventory is 75 files; the checker rejects 60 mutations."
-reverify: "python3 tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
+reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src"
 ---
 
 ADR `0044` fixes the implemented contract:

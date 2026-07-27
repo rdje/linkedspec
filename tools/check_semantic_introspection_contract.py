@@ -1006,7 +1006,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     ci_text = (ROOT / contract["canonical_ci"]["driver"]).read_text(encoding="utf-8")
     for path in contract["canonical_ci"]["required_tracked_files"]:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
-    require("python3 tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
+    require("bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
     perl_consumer = contract["target_admissions"][0]["consumer"]
     perl_consumer_path = ROOT / perl_consumer["path"]
     require(perl_consumer_path.is_file(), "Perl semantic admission consumer is missing")

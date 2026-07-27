@@ -12,7 +12,7 @@ date: 2026-07-12
 status: current
 tags: [unicode, casing, perl, rust, generation, actionir, runtime, parity]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.2.2 extends unicode_case/generate_unicode_case_contract.py and tools/check_unicode_case_contract.py with byte-compared perl/LinkedSpec/UnicodeCaseMapping.pm and rust/linkedspec-runtime/src/unicode_case_mapping.rs. Perl ActionIR owners and generated-source preamble load the module; scalar and array lowering call it. Rust engine scalar and both array seams call its module. Twelve fixtures pass direct/helper/receiver/array paths; Perl focused 52 and phase0 1..1030 pass; the full Rust runtime package passes; authoritative local CI passes CLI 61x2 and phase0 1..1030. Source audit finds no lc/uc in Perl ActionIR and no to_lowercase/to_uppercase in Rust runtime casing paths."
-reverify: "python3 tools/check_unicode_case_contract.py && prove -q -Iperl t/unicode_case_mapping.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_case_mapping"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py && prove -q -Iperl t/unicode_case_mapping.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_case_mapping"
 ---
 
 ## Fact

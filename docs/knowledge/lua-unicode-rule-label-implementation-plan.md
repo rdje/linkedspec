@@ -19,7 +19,7 @@ date: 2026-07-25
 status: composition-closed through FUTURE-PARITY-BACKLOG.10.7.1.4; source/outcome planning .10.7.2.0 is next
 tags: [lua, luajit, unicode, rule-labels, parser, validation, generation, testing]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.1.4 recomposes every committed owner unchanged: per ABI classifier 1706, routes 179, identity 359, body-fluent 166, negative/isolation 1542, and package 1..177; PUC primary 66x2/corpus 105; primary 5x2x66; Rust Unicode 5+3, Dart 28, Julia 3831; canonical Rust 81.21s/Dart 1/1/Julia 416 in 28.8s/reference 66x2/Phase 0 1031. Parent .10.7.1 closes without production, contract, format, API, semantic, rollout, or admission movement; governance remains 6/20/89 at 5/9 + 4/6."
-reverify: "python3 tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels|fresh emitted host status|adjacent grammar' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua lua/test/unicode_rule_label_identity_routes_test.lua lua/test/unicode_rule_label_negative_isolation_test.lua"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; rg -n 'parse_header|looks_like_header|parse_action_prefix|parse_bare_prefix|read_word|check_at_least_one_rule|check_rule_labels|fresh emitted host status|adjacent grammar' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua lua/test/unicode_rule_label_identity_routes_test.lua lua/test/unicode_rule_label_negative_isolation_test.lua"
 ---
 
 # Lua Unicode rule-label implementation

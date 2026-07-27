@@ -10,7 +10,7 @@ date: 2026-07-12
 status: current
 tags: [unicode, casing, lua, parity, generation]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.2.4 generates lua/src/linkedspec/unicode_case_mapping.lua. Twelve neutral fixtures pass direct/helper/receiver/array paths on PUC Lua and LuaJIT (71/71 each), completing the already-green Perl/Rust/Dart/Julia generated-table rollout."
-reverify: "python3 tools/check_unicode_case_contract.py && bash tools/run_lua_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py && bash tools/run_lua_local.sh"
 ---
 
 ## Fact

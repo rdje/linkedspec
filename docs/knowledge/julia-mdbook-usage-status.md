@@ -15,7 +15,7 @@ status: current
 tags: [julia, mdbook, documentation, parity, embedding, limitations, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; FUTURE-PARITY-BACKLOG.1.5.4.2 documents canonical trace, 1,019 assertions, and 61/61 default/POSIX CLI identity."
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 closes exhaustive language proof at 239 names and raises Julia's current package/corpus proof to 1,036 assertions and 105/105 exact outputs."
-reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book"
+reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && bash tools/run_mdbook_local.sh"
 ---
 
 The mdBook presents Julia as a native in-memory LinkedSpec backend, not as a command-line clone or an unfinished

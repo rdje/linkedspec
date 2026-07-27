@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -97,6 +98,34 @@ def fail(message: str) -> None:
     raise SystemExit(f"unicode-rule-label-contract: ERROR: {message}")
 
 
+def managed_temp_root() -> Path:
+    default = ROOT / ".linkedspec-data" / "scratch" / "tmp"
+    initialized_root = os.environ.get("LINKEDSPEC_REPO_ROOT")
+    if initialized_root and Path(initialized_root).resolve() != ROOT:
+        fail(f"project-data initializer belongs to another checkout: {initialized_root}")
+    candidate = Path(os.environ.get("TMPDIR", str(default))) if initialized_root else default
+    if not candidate.is_absolute():
+        candidate = Path.cwd() / candidate
+    component = Path(candidate.anchor)
+    for part in candidate.parts[1:]:
+        component /= part
+        if component.is_symlink():
+            fail(f"temporary root contains a symlink: {component}")
+    ancestor = candidate
+    while not ancestor.exists() and not ancestor.is_symlink():
+        if ancestor.parent == ancestor:
+            fail(f"cannot resolve temporary root {candidate}")
+        ancestor = ancestor.parent
+    if ancestor.is_symlink() or not ancestor.is_dir():
+        fail(f"temporary root has a symlink or non-directory ancestor: {ancestor}")
+    if ancestor.resolve().stat().st_dev != ROOT.stat().st_dev:
+        fail(f"temporary root is outside the repository filesystem: {candidate}")
+    candidate.mkdir(parents=True, exist_ok=True)
+    if candidate.is_symlink() or candidate.resolve().stat().st_dev != ROOT.stat().st_dev:
+        fail(f"temporary root is not safe repository-filesystem storage: {candidate}")
+    return candidate.resolve()
+
+
 def contains(ranges: list[tuple[int, int]], codepoint: int) -> bool:
     low, high = 0, len(ranges)
     while low < high:
@@ -168,7 +197,9 @@ def main() -> None:
     ):
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
-    with tempfile.TemporaryDirectory(prefix="linkedspec-unicode-label-") as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="linkedspec-unicode-label-", dir=managed_temp_root()
+    ) as temp:
         generated_contract = Path(temp) / "contract.json"
         generated_rust = Path(temp) / "unicode_rule_label.rs"
         generated_dart = Path(temp) / "unicode_rule_label.dart"
@@ -914,7 +945,7 @@ def main() -> None:
         "require_tracked_file lua/test/body_fluent_whole_token_test.lua",
         "require_tracked_file lua/test/unicode_rule_label_negative_isolation_test.lua",
         "require_tracked_file unicode_case/self_hosted_cli/manifest.json",
-        "python3 tools/check_unicode_rule_label_contract.py",
+        "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py",
         "bash \"$REPO_ROOT/tools/run_primary_cli_matrix.sh\" --manifest unicode_case/self_hosted_cli/manifest.json",
     ):
         if marker not in ci_text:

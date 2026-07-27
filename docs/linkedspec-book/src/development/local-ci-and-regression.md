@@ -187,7 +187,7 @@ runtime behavior.
 ADR `0047` now supplies that neutral boundary. Run:
 
 ```bash
-python3 tools/check_duplicate_regex_slot_identity_contract.py
+bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py
 ```
 
 The checker independently evaluates five exact ordered/choice/repeated/control/cross-target fixtures, requires
@@ -224,7 +224,7 @@ ADR `0048` has a separate executable boundary for repeated action results. Run i
 the admitted backend consumers with:
 
 ```bash
-python3 tools/check_repeated_action_result_contract.py
+bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test repeated_action_result_contract
 (cd dart && dart test test/repeated_action_result_contract_test.dart)
@@ -975,7 +975,58 @@ them at zero. There was therefore no retained Lua payload to copy or delete. The
 compiler, `pkg-config`, ABI/PCRE2 headers and library, and operating-system libraries are strictly necessary read-
 only toolchain inputs, not project storage. One composite Knowledge Map command whose remaining scratch belongs to
 Python/Rust is explicitly deferred to tool-family `.2.6`; all five Lua-owned stale commands now use managed
-boundaries. Tool migration remains `.2.6`.
+boundaries.
+
+### Python, Knowledge Map, mdBook, and tool-generated output
+
+Tool migration `.2.6` adds one targeted Python boundary:
+
+```console
+$ bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py
+```
+
+The wrapper accepts only a repository-root-relative, nonsymlink Python script, initializes managed scratch, and
+stores imported bytecode below retained `/.linkedspec-data/cache/python-pycache/`. Both Unicode contract checkers
+also select an explicit verified managed temporary root, so invoking either checker directly cannot fall back to
+an operating-system temporary filesystem. Maintained documentation and canonical CI use the wrapper.
+
+Knowledge Map integration now configures the portable bundle's optional `KM_OUTPUT_VALIDATOR`. Generation checks
+the nearest existing output ancestor before directory creation and validates the realized map after writing;
+checking also rejects a configured map on another filesystem. The portable bundle keeps this hook empty by
+default. LinkedSpec supplies it through the repo-relative `.knowledge_map.conf` initializer without persisting a
+checkout path.
+
+Build the public book only through:
+
+```console
+$ bash tools/run_mdbook_local.sh
+```
+
+The wrapper resolves the default `book.toml` destination, `MDBOOK_BUILD__BUILD_DIR`, and every `-d`/`--dest-dir`
+argument relative to the book root when needed. It rejects another-filesystem or symlink output before launching
+mdBook and verifies the created directory afterward. This preserves caller-selectable same-SSD output while
+preventing project HTML from leaking onto another volume.
+
+The recurring proof is:
+
+```console
+$ bash tools/test_tool_project_data_storage.sh
+```
+
+It freezes three Python temporary owners, 12 shell allocator owners, and 19 Python checker entrypoints. It creates
+real retained bytecode, Knowledge Map, fake-mdBook HTML, CLI workspace, and TAP artifacts on the repository device;
+locks both oracle subprocess captures to initialized `TMPDIR`; proves hostile Python, Knowledge Map, and mdBook
+destinations are rejected without creation; and works through the outside-cwd routing oracle. The only deliberate
+cross-volume reads are bounded device/absence checks needed to prove rejection. An initial exact census found one
+disposable 88-line Julia audit list in the old temporary root; after content/provenance classification, that exact
+file was deleted and both frozen old roots returned zero LinkedSpec tool residue. Adding the Python wrapper and
+tool oracle brings the outside-cwd routed-entrypoint proof from 33 to 35 boundaries.
+
+Final `.2.6` signoff passes every affected Python contract, environment/lifecycle/tool storage oracles, all 35
+routed boundaries, actual book generation, Knowledge Map 716 facts / 5,653 question keys, five doctrines, and zero
+managed runs. Canonical local CI passes Rust semantic admission 1/1 in 77.49 seconds, Dart 1/1, Julia 416/416 in
+27.0 seconds, both 66-case primary environments, and Phase 0 1,031/1,031 in 624 seconds. Migration record
+reconciliation `.3.1` is the next clean frontier.
 
 ## CI input areas
 
@@ -1106,12 +1157,12 @@ Use the documentation gate:
 
 ```bash
 git diff --check
-mdbook build docs/linkedspec-book
+bash tools/run_mdbook_local.sh
 ```
 
 `git diff --check` catches whitespace problems that should not enter the repo.
 
-`mdbook build docs/linkedspec-book` proves the public book still builds.
+`bash tools/run_mdbook_local.sh` proves the public book still builds.
 
 If a documentation slice touches examples that depend on behavior, inspect the relevant source or tests as needed. If a documentation slice changes commands, public API examples, or documented behavior, run the relevant code/test gate too.
 
@@ -1152,7 +1203,7 @@ Use this compact rule:
 ```text
 docs-only change:
   git diff --check
-  mdbook build docs/linkedspec-book
+  bash tools/run_mdbook_local.sh
 
 code/spec/runtime change:
   bash tools/run_ci_local.sh

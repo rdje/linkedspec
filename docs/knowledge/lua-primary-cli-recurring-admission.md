@@ -25,7 +25,7 @@ same focused gate keeps the full 169-test PUC Lua and LuaJIT suites plus
 complete 105/105 developer-corpus execution.
 
 `tools/run_primary_cli_matrix.sh` now accepts `LINKEDSPEC_LUA_CMD`, builds
-only the primary PUC Lua native adapters under `${TMPDIR:-/tmp}`, exports
+only the primary PUC Lua native adapters under the active managed repository scratch root, exports
 their path only to the Lua command through `env LUA_CPATH=...`, and removes
 the temporary tree on every exit. Perl, Rust, Dart, Julia, and Lua consume
 one unchanged manifest under default and POSIX environments: 5 backends x 2

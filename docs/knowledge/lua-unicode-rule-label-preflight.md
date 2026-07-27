@@ -19,7 +19,7 @@ date: 2026-07-25
 status: historical pre-implementation measurement; all classifier/parser/validator, identity, and negative/isolation gaps are superseded by FUTURE-PARITY-BACKLOG.10.7.1.1-.3
 tags: [lua, luajit, unicode, rule-labels, parser, validation, semantic-introspection]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.0 proves spec_parser.lua uses ASCII is_word_byte/read_word plus [%w_] header/body scans, while spec_validator.lua has no complete rule-label predicate. FUTURE-PARITY-BACKLOG.10.7.1.0 reruns one byte-identical disposable probe on separately built PUC Lua and LuaJIT adapters. Each reports 149,221 required scalars, 63 admitted, 149,158 missing, and 3/9 source positives. Source Top::: /x/ parses a Top header with rest ': /x/' before validation rejects raw syntax. Required A·B, forbidden Top-Rule, and forbidden Top+emoji pass all four declaration/action/blind/bare roles through both programmatic and SpecFile JSON-reconstructed validation/compilation: 24/24 combinations per ABI, with valid unindexed blind shapes."
-reverify: "python3 tools/check_unicode_rule_label_contract.py; rg -n 'is_word_byte|read_word|check_at_least_one_rule|check_duplicate_rule_labels|check_edge_targets' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua; bash tools/run_lua_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; rg -n 'is_word_byte|read_word|check_at_least_one_rule|check_duplicate_rule_labels|check_edge_targets' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua; bash tools/run_lua_local.sh"
 ---
 
 # Lua Unicode rule-label preflight

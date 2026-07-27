@@ -22,7 +22,7 @@ evidence: "FUTURE-PARITY-BACKLOG.9.1.6.0 reads ADR 0044, the neutral/admitted au
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.6.4 supersedes the measured generated v1 boundary with current v2/format 2 family-derived execution and contract-before-payload validation. Public option removal and admission remain .9.1.6.5-.6."
 evidence_update_2026_07_18_option_removal: "FUTURE-PARITY-BACKLOG.9.1.6.5 supersedes the measured public/global seam: engine, loaded-engine, corpus, help, execution, and request trace carry no override; legacy API/CLI spellings fail with the targeted diagnostic. At that slice, composed admission alone remained .9.1.6.6."
 evidence_update_2026_07_18_admission: "FUTURE-PARITY-BACKLOG.9.1.6.6 supersedes the final staged boundary with one exact 15-role Julia consumer. Neutral governance is now 67 files / 5 complete + 3 pending / 44 mutations."
-reverify: "python3 tools/check_rule_local_cursor_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_option_removal_test.jl\")'"
+reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_option_removal_test.jl\")'"
 ---
 
 # Julia rule-local cursor preflight

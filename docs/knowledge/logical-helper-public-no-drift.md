@@ -11,7 +11,7 @@ date: 2026-07-17
 status: current
 tags: [logical, documentation, no-drift, truthiness, generated-source, ci, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.2.9 adds public_contract to linkedspec-logical-helper-v1. Twenty ordered authoritative documents require exact semantic, backend/generated, recurring, status, and Knowledge Map markers; 13 stale-current claims are forbidden. The offline checker rejects 26 total mutations, including public document, marker, stale-claim, and final-admission drift. Rollout is 8 complete / 0 pending and parent .5.2 is closed."
-reverify: "python3 tools/check_logical_helper_contract.py && bash knowledge-map/scripts/check_knowledge_map.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py && bash knowledge-map/scripts/check_knowledge_map.sh"
 ---
 
 The logical-helper public contract is checked from the same neutral JSON as semantics and recurring admission.

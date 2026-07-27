@@ -19,7 +19,7 @@ evidence_update_2026_07_15_structured_format_page: "The discovered public invent
 evidence_update_2026_07_15_native_loading_page: "The discovered public inventory is now 58 files after LUA-BACKEND-PARITY.5.2.1 added the native spec loading API page. Classified/current counts remain 27/0."
 evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.10.2 adds the semantic-introspection mdBook page. The public no-drift checker reviews it and advances the exact discovered inventory to 59 files while classified/current selector counts stay 27/0."
 evidence_update_2026_07_22_untracked_discovery: "FUTURE-PARITY-BACKLOG.10.5.1.3.0 found that a new untracked Dart semantic test could embed a retired selector without appearing in the pre-staging git-ls-files scan. tools/check_executable_aggregate_selector_sources.py now enumerates cached plus nonignored untracked files and self-proves discovery/rejection with a temporary untracked source whose cleanup is guaranteed. The semantic compile-failure test loads the canonical neutral invalid case instead of duplicating retired executable source."
-reverify: "python3 tools/check_public_aggregate_selector_surface.py"
+reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 # Aggregate-selector retirement no-drift

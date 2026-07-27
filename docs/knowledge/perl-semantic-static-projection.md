@@ -13,7 +13,7 @@ date: 2026-07-21
 status: current private static foundation; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, records, relations, source-map, diagnostics, immutability]
 evidence: perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_static_projection.t; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.2.1; FUTURE-PARITY-BACKLOG.10.3.3.1.1
-reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t && python3 tools/check_semantic_introspection_contract.py
+reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 ---
 
 `LinkedSpec::semantic_index(...)` now retains a private clone-safe static projection. The descriptor owns compiled

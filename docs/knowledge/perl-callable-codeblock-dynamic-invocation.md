@@ -14,7 +14,7 @@ date: 2026-07-12
 status: current
 tags: [perl, actionir, codeblock, callable, dynamic-scope, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.3.2 adds LinkedSpec::CodeblockRuntime, scalar working-slot dependency projection, bound-call and VALUE_DROP lowering, exact neutral fixture execution, standalone generated-source proof, static helper/user-function precedence, and typed arity/keyword/not-callable/recursion failures."
-reverify: "PERL5LIB= prove -v -Iperl t/callable_codeblock_literal_contract.t && python3 tools/check_callable_codeblock_contract.py"
+reverify: "PERL5LIB= prove -v -Iperl t/callable_codeblock_literal_contract.t && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
 # Perl Callable Codeblock Dynamic Invocation

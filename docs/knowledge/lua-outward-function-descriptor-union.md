@@ -13,7 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, perl, descriptors, callable-signature, codeblock, parameter-kinds, staged-parsing, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.3.1 extends outward_descriptor_contract.json with the checked three-variant union, makes Lua emit all variants, and aligns Perl's existing final-codeblock outward version. PUC Lua and LuaJIT pass 153/153; focused Perl callable tests pass 76."
-reverify: "python3 tools/check_callable_signature_contract.py && python3 tools/check_callable_codeblock_contract.py && PERL5LIB= prove -Iperl t/variadic_user_function_contract.t t/callable_codeblock_literal_contract.t && bash tools/run_lua_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && PERL5LIB= prove -Iperl t/variadic_user_function_contract.t t/callable_codeblock_literal_contract.t && bash tools/run_lua_local.sh"
 ---
 
 `capability_conformance/outward_descriptor_contract.json:function_record_variants` is the executable source of

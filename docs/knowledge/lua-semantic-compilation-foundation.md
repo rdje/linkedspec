@@ -19,7 +19,7 @@ date: 2026-07-25
 status: current implementation; .10.7.2 composition-closed, .10.7.3.0 audit closed, and .10.7.3.1 graph next
 tags: [lua, luajit, semantic-introspection, compilation, diagnostics, generated-source, privacy, no-execution]
 evidence: "lua/src/linkedspec/semantic_compilation_outcome.lua, lua/src/linkedspec/semantic_index.lua, and lua/test/semantic_index_compilation_foundation_test.lua; 122 assertions pass identically on PUC Lua and LuaJIT after the 378-assertion source owner, and .10.7.2.3 recomposes both unchanged."
-reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_compilation_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_local.sh; python3 tools/check_semantic_introspection_contract.py"
+reverify: "LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_compilation_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Lua semantic compilation foundation

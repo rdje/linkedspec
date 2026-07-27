@@ -16,7 +16,7 @@ date: 2026-07-12
 status: current
 tags: [functions, arity, variadic, rest-parameter, descriptor, staged-parsing, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.1, ADR 0030, and capability_conformance/callable_signature_contract.json adopt linkedspec-callable-signature-v1. The independent checker validates three definitions, nine call cases, seven invalid signatures, versioned descriptor roles, and a deterministic .spec fixture. .4.2-.3 implement it on Perl/Rust/Dart/Julia; .4.4 routes Lua to LUA-BACKEND-PARITY.5.1/.5.3/.8."
-reverify: "python3 tools/check_callable_signature_contract.py && rg -n 'variadic|rest_param|min_arity|max_arity|\.\.\.' docs/decisions/0030-variadic-callable-signature-contract.md capability_conformance/callable_signature_contract.json docs/tasks/FUTURE-PARITY-BACKLOG.md"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && rg -n 'variadic|rest_param|min_arity|max_arity|\.\.\.' docs/decisions/0030-variadic-callable-signature-contract.md capability_conformance/callable_signature_contract.json docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The adopted definition form is:

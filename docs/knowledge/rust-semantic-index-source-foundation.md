@@ -14,7 +14,7 @@ date: 2026-07-21
 status: current
 tags: [rust, semantic-introspection, source-map, utf8, diagnostics, generated-source, privacy]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_foundation.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.1
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; python3 tools/check_semantic_introspection_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` is the opaque Rust source/outcome foundation. Construct it

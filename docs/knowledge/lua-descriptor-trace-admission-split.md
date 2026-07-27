@@ -13,7 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, descriptors, callable-signature, codeblock, trace, capability-census, task-tree, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.3.0 audits the contracts/fences/trace APIs/census history; .5.3.0.1/ADR 0041 adopt descriptor v3 and completion-time census admission; .5.3.1 implements the exact three-variant union; .5.3.2 completes one-emitter trace at 155/155; .5.3.3 closes no-drift without census change."
-reverify: "python3 tools/check_callable_signature_contract.py && python3 tools/check_callable_codeblock_contract.py && bash tools/run_lua_local.sh && perl tools/check_capability_conformance.pl && rg -n 'function_record_variants|options.trace|Lua remains outside|expand the capability census' lua capability_conformance README.md docs/tasks/LUA-BACKEND-PARITY.md"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_local.sh && perl tools/check_capability_conformance.pl && rg -n 'function_record_variants|options.trace|Lua remains outside|expand the capability census' lua capability_conformance README.md docs/tasks/LUA-BACKEND-PARITY.md"
 ---
 
 `LUA-BACKEND-PARITY.5.3.0` found two backend-neutral policy dependencies. The director accepted both recommended

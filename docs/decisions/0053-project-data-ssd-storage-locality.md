@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; common lifecycle plus Perl, Rust, Dart, Julia, and Lua migrations implemented; tool migration pending
+- Status: accepted; common lifecycle plus Perl, Rust, Dart, Julia, Lua, and tool migrations implemented
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -120,6 +120,15 @@ boundary for storage locality.
   Lua-owned payload existed to migrate or delete. PUC Lua/LuaJIT, `cc`, `pkg-config`, Lua/PCRE2 development files,
   and operating-system libraries remain necessary read-only external toolchain inputs. Supported workflows create
   no LuaRocks or global-module state.
+- Tool migration adds a targeted repository-relative Python wrapper, retained `PYTHONPYCACHEPREFIX`, and explicit
+  same-device temporary roots for both Unicode generators. Knowledge Map's portable host hook validates configured
+  output before use and after writing; mdBook resolves and validates its default, environment, and command-line
+  destinations before launch and checks the realized directory afterward.
+- The recurring tool oracle freezes three Python temporary owners, 12 shell allocator owners, and 19 Python checker
+  entrypoints. It exercises bytecode, generated maps/books, CLI workspaces, TAP, and oracle capture storage on the
+  repository device and proves hostile output roots are rejected before creation. The only initial exact old-tool
+  residue was one disposable 88-line/4,646-byte Julia audit list; ownership classification preceded exact deletion,
+  and the follow-up census of both frozen old roots is zero.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -134,5 +143,6 @@ boundary for storage locality.
 - Dart storage: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Julia storage: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Lua storage: `docs/knowledge/lua-project-data-ssd-storage.md`
+- Tool storage: `docs/knowledge/tool-project-data-ssd-storage.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

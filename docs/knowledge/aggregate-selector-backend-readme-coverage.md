@@ -14,7 +14,7 @@ evidence_update_2026_07_12_lua_array_closeout: "The 56-file inventory remains ex
 evidence_update_2026_07_15_structured_format_page: "FUTURE-PARITY-BACKLOG.18.0 added architecture/structured-format-program.md to the discovered mdBook surface. LUA-BACKEND-PARITY.4.3.7.4's first canonical gate measured the stale exact count; the checker now asserts 57 public files, 27 classified removed/history references, and zero current examples."
 evidence_update_2026_07_15_native_loading_page: "LUA-BACKEND-PARITY.5.2.1 added public-api/native-spec-loading.md. The exact discovered inventory is now 58 files; classified/current selector counts remain 27/0."
 evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.10.2 added public-api/semantic-introspection.md. The public selector checker reviewed the new chapter, advances the exact inventory to 59 files, and keeps classified/current selector counts at 27/0."
-reverify: "python3 tools/check_public_aggregate_selector_surface.py"
+reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 The `.12.1.9` public checker was correct for every file it enumerated, but its inventory was incomplete: it fixed

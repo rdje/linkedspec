@@ -13,7 +13,7 @@ date: 2026-07-20
 status: confirmed; Dart admitted by FUTURE-PARITY-BACKLOG.9.1.8.1.4
 tags: [dart, regex, slot-identity, and, repetition, generated-source, trace, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "RuntimeRegexAlternation.matchAlternative matches the required authored regex and constructs RuntimeRegexMatch with that alternative's original index; AND/repeated execution uses it while OR/default retains full-alternation earliest-start/first-authored choice. Compiled action edges map parent slots to structural target_rule/regex_index identities. Compiler, runtime, descriptor, source emitter, and generated-plan validation reject malformed slots with regex_slot_identity_invalid/validate_compiled_rule. Runtime/generated trace emits dart_runtime:regex_slot_selected. Descriptors and emitted source publish linkedspec-duplicate-regex-slot-identity-v1. Generated v2 embeds normalized SpecFile JSON and keeps exact {label,family} plans. The contract-declared 15-role consumer passes all five fixtures plus loaded/reconstructed, descriptor, emitted/generated, native/generated trace, primary, and diagnostic routes; the complete Dart gate passes 272 tests, primary 65x2, and corpus 105/105."
-reverify: "bash tools/run_dart_local.sh && python3 tools/check_duplicate_regex_slot_identity_contract.py"
+reverify: "bash tools/run_dart_local.sh && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 ---
 
 Dart keeps required-slot and choice matching as separate operations. The

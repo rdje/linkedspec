@@ -13,7 +13,7 @@ date: 2026-07-21
 status: current private static foundation consumed through admitted public static/runtime query
 tags: [rust, semantic-introspection, records, relations, source-map, diagnostics, privacy, immutability]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.2
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; python3 tools/check_semantic_introspection_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` now builds and retains a private static projection after its

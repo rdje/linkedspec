@@ -19,7 +19,7 @@ date: 2026-07-21
 status: current admitted native static/runtime query evaluator
 tags: [rust, semantic-introspection, query, privacy, pagination, budgets, immutability, json]
 evidence: rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs; FUTURE-PARITY-BACKLOG.10.4.4
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query; python3 tools/check_semantic_introspection_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` exposes `capabilities()`,

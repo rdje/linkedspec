@@ -43,7 +43,7 @@ export JULIA_DEPOT_PATH="$JULIA_WRITE_DEPOT:$JULIA_READ_DEPOTS"
 export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"
 
 log "checking the neutral schema, model, topology, public state, closure, and drift mutations"
-python3 tools/check_duplicate_regex_slot_identity_contract.py
+bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py
 
 log "checking the Perl exact 12-role admission consumer"
 PERL5LIB= prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t

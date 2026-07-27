@@ -10,7 +10,7 @@
 # Usage:
 #   gen_knowledge_map.sh                  # write the map to the configured output path
 #   gen_knowledge_map.sh --print-map-path # print the resolved output path, then exit
-#   KM_OUTPUT=/tmp/x gen_knowledge_map.sh # override the output path (env wins)
+#   KM_OUTPUT=build/knowledge-map.md gen_knowledge_map.sh # override the output path (env wins)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -25,6 +25,7 @@ ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || pwd)"
 : "${KM_TITLE:=Knowledge Map}"
 : "${KM_ENV_INITIALIZER:=}"
 : "${KM_RUN_INITIALIZER:=}"
+: "${KM_OUTPUT_VALIDATOR:=}"
 
 if [ -n "$KM_ENV_INITIALIZER" ]; then
   case "$KM_ENV_INITIALIZER" in
@@ -51,6 +52,15 @@ fi
 
 cd "$ROOT"
 TAB="$(printf '\t')"
+
+validate_output() {
+  [ -n "$KM_OUTPUT_VALIDATOR" ] || return 0
+  command -v "$KM_OUTPUT_VALIDATOR" >/dev/null 2>&1 || {
+    printf 'knowledge-map: output validator not found: %s\n' "$KM_OUTPUT_VALIDATOR" >&2
+    return 1
+  }
+  "$KM_OUTPUT_VALIDATOR" "$1" "Knowledge Map output"
+}
 
 # --- one awk pass per fact file: parse the YAML front-matter subset, emit TSV rows ---
 # A file participates ONLY if its front-matter has a non-empty `answers:` list.
@@ -103,7 +113,10 @@ rows="$(
 nfacts="$(printf '%s\n' "$rows" | grep -c "^F$TAB" || true)"; nfacts="${nfacts:-0}"
 nq="$(printf '%s\n' "$rows" | grep -c "^Q$TAB" || true)"; nq="${nq:-0}"
 
-mkdir -p "$(dirname "$KM_OUTPUT")" 2>/dev/null || true
+validate_output "$KM_OUTPUT"
+output_dir=$(dirname "$KM_OUTPUT")
+mkdir -p "$output_dir"
+validate_output "$output_dir"
 {
   printf '# %s\n\n' "$KM_TITLE"
   printf '> **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.\n'
@@ -132,5 +145,7 @@ mkdir -p "$(dirname "$KM_OUTPUT")" 2>/dev/null || true
     printf "- **source:** [`%s`](%s)\n", $9, $9
   }'
 } > "$KM_OUTPUT"
+
+validate_output "$KM_OUTPUT"
 
 printf 'knowledge-map: wrote %s (%s facts, %s question keys)\n' "$KM_OUTPUT" "$nfacts" "$nq" >&2

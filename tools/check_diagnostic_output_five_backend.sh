@@ -38,7 +38,7 @@ LUA_NATIVE_ROOT=$(mktemp -d "${TMPDIR:?project-data initializer did not set TMPD
 trap 'rm -rf "$LUA_NATIVE_ROOT"' EXIT
 
 log "checking the neutral schema, semantic model, topology, and drift mutations"
-python3 tools/check_diagnostic_output_contract.py
+bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py
 
 log "checking Perl native and generated consumers"
 PERL5LIB= prove -Iperl t/diagnostic_output_perl_contract.t

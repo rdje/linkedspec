@@ -15,7 +15,7 @@ date: 2026-07-18
 status: verified normalization; normal live policy migrated by FUTURE-PARITY-BACKLOG.9.1.4.3
 tags: [rust, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "Rust core classifies compact `|` as authored OR and `&` as authored AND, retains complete-line/header-rest bare targets as `BareEdge`, validates all neutral edge diagnostics with stable code/stage/fields, and lowers family-derived ownership into typed acode/bcode tables. FUTURE-PARITY-BACKLOG.9.1.4.3 spends that normalized family in normal live/loaded/ordinary-reconstructed execution; .9.1.4.4 projects it through descriptor v1; .9.1.4.5 derives generated-source-v2 policy from its minimal neutral family plan and removes the bounded legacy artifact adapter. Contract-driven core tests consume all 36 family and 18 edge cases plus six ownership sets; runtime execution tests consume all 36 family rows, eight parent/child mechanisms, and two structural replacements."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; python3 tools/check_rule_local_cursor_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 Rust syntax/representation normalization is current at four exact seams:

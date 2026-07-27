@@ -15,7 +15,7 @@ date: 2026-07-12
 status: current
 tags: [perl, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
 evidence: "FUTURE-PARITY-BACKLOG.11.3.3.2 adds LinkedSpec::CallableContract, typed final metadata, generic receiver parsing, metadata-governed normalization, typed validation, and live/standalone generated execution. Closeout .11.3.4 verifies byte-equivalent attached/parenthesized lowering, zero raw/fallback/compatibility/unresolved telemetry, no parser allowlist/captured environment/stored coderef, 100 focused tests, capability 60/0/0, CLI 61x2, and Phase 0 1..1030."
-reverify: "PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t && python3 tools/check_callable_codeblock_contract.py"
+reverify: "PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
 # Perl Generic Final-Codeblock Normalization

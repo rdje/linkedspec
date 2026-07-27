@@ -264,7 +264,10 @@ proves all 17 Julia temporary owners plus generated/trace paths, migrates 88 cur
 both exact old depots plus the exact former-checkout shared-log stanza after complete offline use. Julia's shared
 developer depot remains untouched and unused. Lua `.2.5` roots all 13 allocation owners, dual-ABI native modules,
 generated source, and traces on repository storage; its exact old-workspace census is zero. Tool-family `.2.6` is
-the active migration frontier.
+now implemented: it routes all maintained Python checker commands and bytecode, both Python regeneration
+workspaces, Knowledge Map output, mdBook destinations, conformance/TAP/oracle writers, and shell allocators through
+validated repository-filesystem storage. Its recurring oracle rejects hostile output paths before creation.
+Migration reconciliation `.3.1` is the next clean frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
@@ -274,7 +277,8 @@ source tools/project_data_env.sh
 ```
 
 It derives the physical checkout from its own file, creates disposable `scratch/` and retained `cache/` children,
-and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache, and Julia depot variables. A caller
+and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache, Julia depot, and Python bytecode-cache
+variables. A caller
 override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
 filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
 The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. The
@@ -288,6 +292,16 @@ inherited temp/cache roots. Use the mdBook wrapper instead of a bare build:
 ```bash
 bash tools/run_mdbook_local.sh
 ```
+
+Use the targeted Python wrapper for any maintained checker command:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py
+```
+
+The Knowledge Map validator and mdBook wrapper inspect caller-selected outputs before any directory or file is
+created and check the realized output afterward. Same-filesystem runtime overrides remain available; another-
+filesystem destination is rejected without creating it.
 
 Lifecycle `.1.3` now wraps each supported boundary in one collision-safe run beneath
 `/.linkedspec-data/scratch/runs/<checkout-id>/`. Successful scratch and failed scratch under the default policy are
@@ -842,7 +856,7 @@ content migration exists yet.
   the neutral logical contract through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT native/generated consumers,
   the exact eager five-command projection, and generated-source/capability/corpus ledgers. The same leg is
   available from local CI with `LINKEDSPEC_RUN_LOGICAL_MATRIX=1`.
-- Run `python3 tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
+- Run `bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py` to validate the exact seven-helper named-mark contract,
   its Unicode/rule-local fixture, and mutation sensitivity. Perl and Rust consume the unchanged fixture through
   live plus generated execution; Dart and Julia consume it through native/generated/CLI routes; and Lua consumes
   it through native plus serialized `SpecFile` reconstruction on PUC Lua and LuaJIT. The seven names are admitted
@@ -852,12 +866,12 @@ content migration exists yet.
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
   portable facade; Rust, Dart, and Julia package tests do likewise. Exact `.1.6.4` admission is closed.
-- Run `python3 tools/check_scalar_numeric_contract.py` to validate the versioned strict scalar numeric helper
+- Run `bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py` to validate the versioned strict scalar numeric helper
   contract: finite decimal inputs, exact/variadic arities, invalid-to-null behavior, numeric comparison truth,
   half-away rounding, clamp/division fences, and signed integer modulo. Perl, Rust, Dart, Julia, PUC Lua, and
   LuaJIT consume all 55 cases through strict numeric adapters. Run `bash tools/check_scalar_numeric_six_runtime.sh`
   for the composed exact six-runtime admission proof.
-- Run `python3 tools/check_callable_signature_contract.py` to validate the adopted variadic callable contract:
+- Run `bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py` to validate the adopted variadic callable contract:
   version-1 fixed functions remain exact; version-2 `fn name(fixed, ...rest) { ... }` signatures bind extras as a
   fresh typed array, accept zero extras, reject keyword/overload/host-splat behavior, and retain purpose-specific
   fixed versus open-bound helper/method arities. Perl consumes the unchanged fixture through
@@ -866,21 +880,21 @@ content migration exists yet.
   Dart consumes it through `dart test test/variadic_user_function_contract_test.dart`; Julia consumes it through
   the 55 assertions in `julia/test/variadic_user_function_contract_test.jl`. Lua native parity is routed to
   `LUA-BACKEND-PARITY.5.1`, descriptor admission to `.5.3`, and generated preservation/execution to `.8.1-.4`.
-- Run `python3 tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock
+- Run `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py` to validate the adopted future callable-codeblock
   contract: exact `{|fixed, ...rest| body }` parsing, harray/eager-block disambiguation, deferred typed AST data,
   dynamic caller context, copied/restored params, results, precedence, diagnostics, contextual final blocks, and
   deterministic fixture source/results. Perl literal construction/preservation, dynamic variable invocation, and
   metadata-governed attached/parenthesized helper/user-function/receiver normalization pass the contract-focused
   suite; final-only `name: codeblock` and its no-drift closeout are current on Perl. Cross-backend parity remains
   future-owned after the prioritized `.12.1` selector retirement.
-- Run `python3 tools/check_uniform_binding_contract.py` to validate the adopted future selector-free binding
+- Run `bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py` to validate the adopted future selector-free binding
   contract: one observable scalar/array/harray/codeblock value per identifier, bare typed reads and mutations,
   post-assignment `set` results, static-rule `push` precedence, pure versus mutable `split`, typed wrong-kind and
   removed-selector diagnostics, exact migration spellings, and constructor classification. The checker covers 11
   migrations, seven execution cases, six invalid selectors, eight retained constructors, and deterministic future
   fixture source/results. Perl, Rust, Dart, Julia, and Lua execute the replacement contract; every tracked `.spec`
   file and executable embedded source is now selector-free. Run
-  `python3 tools/check_uniform_binding_mutation_result_surface.py` to lock the current array-end result rule:
+  `bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py` to lock the current array-end result rule:
   push/pop end methods return independent updated arrays, pop discards the removed element, and compatible
   continuations consume the update.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name

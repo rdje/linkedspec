@@ -4,7 +4,17 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-25`
+- Last refreshed: `2026-07-26`
+- `2026-07-26` repository-storage refresh: ADR `0053` now has complete common, Perl, Rust, Dart, Julia, Lua, and
+  tool migrations through `PROJECT-DATA-SSD-ROOTING.2.6`. The runtime-derived `/.linkedspec-data/` hierarchy owns
+  managed scratch and retained Cargo/Dart/Julia/Python caches; all maintained Python checkers use one root-relative
+  wrapper, both Unicode regenerators validate explicit scratch, Knowledge Map supplies a generic host output
+  validator, and mdBook validates default/environment/CLI destinations before and after build. The recurring tool
+  oracle freezes three Python temporary owners, 12 shell allocator owners, and 19 checker entrypoints; it proves
+  bytecode/map/book/CLI/TAP/oracle output device identity, symlink/cross-volume rejection before creation, 35
+  outside-cwd boundaries, and zero old-root tool residue after exact deletion of one disposable audit list.
+  Canonical passes Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in 27.0s, primary 66x2, and Phase 0 1,031/1,031 in
+  624s. Migration record reconciliation `.3.1` is next; relocation closeout remains paused behind storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

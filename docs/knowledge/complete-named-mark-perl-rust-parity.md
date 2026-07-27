@@ -13,7 +13,7 @@ date: 2026-07-13
 status: current
 tags: [actionir, capture, marks, perl, rust, generated-source, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.1 adds linkedspec-complete-named-mark-v1 and its exact Unicode parent/child fixture. Perl live/generated execution and Rust native/serialized/emitted-plan/generated execution return the same value. The fixture proves four entry/local writers, line/column reads, clear/existence, symbolic bare names, absent undef, and same-name parent/child isolation."
-reverify: "python3 tools/check_complete_named_mark_contract.py && prove -Iperl t/complete_named_mark_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract"
+reverify: "bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py && prove -Iperl t/complete_named_mark_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract"
 ---
 
 # Complete named-mark Perl/Rust parity

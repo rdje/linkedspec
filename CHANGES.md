@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.6 — root tool artifacts on SSD
+
+Added `tools/run_python_project_data.sh` as the supported root-relative Python checker boundary and
+`tools/test_tool_project_data_storage.sh` as the recurring cross-tool storage oracle. The common initializer now
+retains imported Python bytecode below `/.linkedspec-data/cache/python-pycache/`; both Unicode regeneration
+checkers explicitly validate managed scratch even when invoked directly. Canonical CI and maintained command
+surfaces use the wrapper. The oracle freezes three Python temporary-allocation files, 12 actual shell allocator
+files, and 19 Python checker entrypoints; it exercises real bytecode, Knowledge Map, mdBook HTML, CLI workspace,
+TAP, and oracle capture paths, rejects cross-volume and symlink destinations before creation, and proves cleanup.
+
+Extended the portable Knowledge Map bundle with optional `KM_OUTPUT_VALIDATOR`, configured generically from the
+repo-relative initializer. The checker validates configured map storage, while generation validates before
+directory/file creation and after writing. `tools/run_mdbook_local.sh` now resolves default `book.toml`,
+`MDBOOK_BUILD__BUILD_DIR`, and `-d`/`--dest-dir` output, rejects another-filesystem/symlink paths before starting
+mdBook, and validates the realized directory afterward. All maintained bare Python-checker and mdBook commands
+were migrated: 177 Python-wrapper references now appear across 151 current documents. Three off-volume reverify
+commands, the stale Lua fallback statement, and the generic off-volume Knowledge Map example were removed.
+
+The exact pre-fix old-root census found one unreferenced 88-line/4,646-byte Julia knowledge-card audit list.
+Metadata, content, SHA-256, and repository-reference checks proved it was disposable; the exact file was deleted,
+and both frozen old roots now contain zero exact tool residue. The accidental initial off-volume inventory file was
+also deleted immediately and proved absent. Bash/Python syntax, all affected contracts, initializer/lifecycle/tool
+oracles, 35-boundary outside-cwd routing, mdBook, Knowledge Map 716/5,653, five doctrines, whitespace, and zero-run
+census pass. Canonical records Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in 27.0s, primary 66x2, and Phase 0
+1,031/1,031 in 624s. Push cadence advances to 32/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.2.5 — root Lua workspaces on SSD
 
 Added `tools/run_lua_project_data.sh` as the supported targeted PUC Lua/LuaJIT boundary and

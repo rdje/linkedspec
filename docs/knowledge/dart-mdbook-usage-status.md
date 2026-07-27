@@ -12,7 +12,7 @@ status: current
 tags: [dart, mdbook, corpus, parity, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.7.1 documents the 99/99 interpreter-first boundary; .7.2 defers generated source; .7.4 adds the backend-local corpus CLI; .7.5 closes the scoped milestone. ADR 0023 later distinguishes that milestone from complete CLI/capability parity, now owned globally by FUTURE-PARITY-BACKLOG.1.5/.1.6/.3."
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 raises the current mandatory interpreter corpus to 105/105 and closes exhaustive language-surface proof at 239 names; the historical DART-BACKEND-PARITY milestone remains 99/99."
-reverify: "rg -n 'Dart Backend Commands|tools/run_dart_local|LINKEDSPEC_RUN_DART|source-emitter|corpus-green|linkedspec_dart\\.dart corpus|DART-BACKEND-PARITY\\.7\\.5|ADR 0023|scoped' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/public-api/trace-api.md && mdbook build docs/linkedspec-book"
+reverify: "rg -n 'Dart Backend Commands|tools/run_dart_local|LINKEDSPEC_RUN_DART|source-emitter|corpus-green|linkedspec_dart\\.dart corpus|DART-BACKEND-PARITY\\.7\\.5|ADR 0023|scoped' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/public-api/trace-api.md && bash tools/run_mdbook_local.sh"
 ---
 
 The mdBook documents Dart backend usage in the backend handoff appendix, with

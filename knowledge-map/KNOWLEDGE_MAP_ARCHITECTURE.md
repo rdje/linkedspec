@@ -153,7 +153,9 @@ Two portable scripts (POSIX shell + awk; work on BSD/macOS and GNU/Linux):
 
 Config precedence (`scripts/knowledge_map.conf`, all `:=` assignments): **environment >
 repo-root `.knowledge_map.conf` > bundle default**. Knobs: `KM_SCAN_DIRS`, `KM_OUTPUT`,
-`KM_TITLE`.
+`KM_TITLE`, `KM_ENV_INITIALIZER`, `KM_RUN_INITIALIZER`, and `KM_OUTPUT_VALIDATOR`. A host that constrains generated
+storage can have its initializer provide the validator; both scripts validate the configured map before use, and
+the generator validates it again after writing. The portable default remains empty and imposes no host policy.
 
 ---
 

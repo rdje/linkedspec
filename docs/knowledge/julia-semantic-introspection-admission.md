@@ -16,7 +16,7 @@ date: 2026-07-25
 status: current composed Julia admission
 tags: [julia, semantic-introspection, admission, conformance, mutations, rollout, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.6.7 adds julia/test/semantic_introspection_julia_admission_test.jl, one exact ordered 12-role consumer over strict byte/text normalization, compiled/failed/runtime snapshots, loaded and JSON-reconstructed execution, generated-plan/public-helper/fresh plus standalone emitted direct/traced routes, typed/native-neutral JSON, all 20 query digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak denial. The neutral checker locks path/role/driver/registration/admission topology with eight Julia-specific mutations, rejects 89 mutations total, advances only Julia to rollout 5/9 and native admission 4/6, and leaves PUC Lua and LuaJIT pending. Focused consumer proof passes 416/416."
-reverify: "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl && python3 tools/check_semantic_introspection_contract.py"
+reverify: "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Julia Semantic Introspection Admission

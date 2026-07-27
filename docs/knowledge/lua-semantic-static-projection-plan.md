@@ -26,7 +26,7 @@ date: 2026-07-25
 status: current; private graph and source-ceiling reconciliation complete, remaining static targets active
 tags: [lua, luajit, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.2.0; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors and query source projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
-reverify: "python3 tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
 ---
 
 # Lua Semantic Static Projection Plan

@@ -16,7 +16,7 @@ status: current
 supersedes: perl-generated-source-contract-v1
 tags: [perl, generated-source, cursor, public-api, trace, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.3.4 advances Compiler/GeneratedSource emission to linkedspec-generated-source-v2 format 2, removes SpecEntry's second legacy caller-mode handler, keeps exact label/family plan rows, derives five seek plus five consume policies, and rejects explicit or legacy-caller v1 reconstruction with validate_generated_plan/generated_source_contract_version_mismatch plus expected_contract/actual_contract and .spec regeneration. FUTURE-PARITY-BACKLOG.9.1.3.5 removes the transitional emitter option: parse_mode/parseMode reject at prepare_options with parse_mode_override_removed and normalized option_name while preserving source_identity."
-reverify: "PERL5LIB= prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_descriptor.t; python3 tools/check_rule_local_cursor_contract.py; perl -Iperl -c perl/LinkedSpec/GeneratedSource.pm; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/SpecEntry.pm"
+reverify: "PERL5LIB= prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_descriptor.t; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; perl -Iperl -c perl/LinkedSpec/GeneratedSource.pm; perl -Iperl -c perl/LinkedSpec/Compiler.pm; perl -Iperl -c perl/LinkedSpec/SpecEntry.pm"
 ---
 
 # Perl Generated-Source v2

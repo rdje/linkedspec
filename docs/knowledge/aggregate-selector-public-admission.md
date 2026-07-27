@@ -11,7 +11,7 @@ status: current
 tags: [language, bindings, retirement, documentation, capability, no-drift]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.9 adds tools/check_public_aggregate_selector_surface.py and registers it in canonical local CI. The checker scans 47 root/capability/mdBook public files, requires every exact selector-shaped mention to carry explicit removed/rejected/migrated historical context, forbids stale future/remaining-backend status, requires current bare set/push/copy examples, removes future.uniform_binding_selector_retirement from capability_conformance/manifest.json, and composes the five-backend runtime/source checker plus the 60/0/0 capability checker. On 2026-07-12 it classifies 31 removed/history references, reports zero current public examples, and passes canonical CLI 61x2 plus Phase 0 1031/1031 in 626 seconds."
 evidence_update_2026_07_12_lua_array_closeout: "LUA-BACKEND-PARITY.4.3.4.6 reworded four formal-grammar array end-mutation comments from `named working array (statement)` to explicit updated-snapshot semantics. The public check's code-block recognizer had counted each prose fragment `array (statement)` as an exact selector shape, so the corrected inventory is 27 genuine removed/history references, not 31. The expected count and capability guide now lock 27; all 27 retain explicit negative context and current examples remain zero."
-reverify: "python3 tools/check_public_aggregate_selector_surface.py"
+reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 # Aggregate-selector public admission

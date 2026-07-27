@@ -11,7 +11,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, variadic, callable-signature, staged-parsing, registry, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.3.1 preserves exact v1/v2 state; .5.1.3.2 executes rest arrays; .5.3.1 emits exact outward v2 descriptors. The complete PUC Lua and LuaJIT suites pass 153/153 and the neutral signature checker passes 3 definitions, 9 calls, and 7 invalid definitions."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py"
 ---
 
 Lua preserves the exact callable-signature union without prematurely claiming complete variadic execution.

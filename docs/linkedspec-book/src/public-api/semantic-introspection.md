@@ -2193,7 +2193,7 @@ tools/check_semantic_introspection_contract.py
 Run:
 
 ```bash
-python3 tools/check_semantic_introspection_contract.py
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed

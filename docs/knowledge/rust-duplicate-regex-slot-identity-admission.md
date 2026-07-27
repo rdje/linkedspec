@@ -13,7 +13,7 @@ date: 2026-07-20
 status: confirmed; Rust admitted by FUTURE-PARITY-BACKLOG.9.1.8.1.3
 tags: [rust, regex, slot-identity, and, repetition, generated-source, trace, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "CompiledAlternation retains the already-compiled individual Regex values beside its combined choice matcher. Engine and GeneratedPlanExecutor call consume_slot_match/seek_slot_match for known AND sequence steps, while OR/default choice keeps combined earliest-start/first-authored behavior. Both routes assert structural target/index identity, emit regex_slot_selected, and preserve captures. Compilation, ordinary reconstructed execution, emitted-source validation, and generated-plan decoding reject malformed action slots with regex_slot_identity_invalid/validate_compiled_rule. Rust descriptors and emitted source publish linkedspec-duplicate-regex-slot-identity-v1; generated v2 plans remain exactly {label,family}. The contract-declared 15-role consumer passes all five fixtures plus loaded/reconstructed, descriptor, emitted/generated, native/generated trace, primary, and diagnostic routes."
-reverify: "CARGO_TARGET_DIR=/tmp/linkedspec-rust-duplicate-slot-target cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test duplicate_regex_slot_identity_contract && python3 tools/check_duplicate_regex_slot_identity_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test duplicate_regex_slot_identity_contract && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 ---
 
 Rust keeps two matching mechanisms because ordered execution and choice answer

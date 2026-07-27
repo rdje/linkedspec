@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -24,6 +25,34 @@ TASK_PATH = ROOT / "docs" / "tasks" / "LUA-BACKEND-PARITY.md"
 
 def fail(message: str) -> None:
     raise SystemExit(f"unicode-case-contract: ERROR: {message}")
+
+
+def managed_temp_root() -> Path:
+    default = ROOT / ".linkedspec-data" / "scratch" / "tmp"
+    initialized_root = os.environ.get("LINKEDSPEC_REPO_ROOT")
+    if initialized_root and Path(initialized_root).resolve() != ROOT:
+        fail(f"project-data initializer belongs to another checkout: {initialized_root}")
+    candidate = Path(os.environ.get("TMPDIR", str(default))) if initialized_root else default
+    if not candidate.is_absolute():
+        candidate = Path.cwd() / candidate
+    component = Path(candidate.anchor)
+    for part in candidate.parts[1:]:
+        component /= part
+        if component.is_symlink():
+            fail(f"temporary root contains a symlink: {component}")
+    ancestor = candidate
+    while not ancestor.exists() and not ancestor.is_symlink():
+        if ancestor.parent == ancestor:
+            fail(f"cannot resolve temporary root {candidate}")
+        ancestor = ancestor.parent
+    if ancestor.is_symlink() or not ancestor.is_dir():
+        fail(f"temporary root has a symlink or non-directory ancestor: {ancestor}")
+    if ancestor.resolve().stat().st_dev != ROOT.stat().st_dev:
+        fail(f"temporary root is outside the repository filesystem: {candidate}")
+    candidate.mkdir(parents=True, exist_ok=True)
+    if candidate.is_symlink() or candidate.resolve().stat().st_dev != ROOT.stat().st_dev:
+        fail(f"temporary root is not safe repository-filesystem storage: {candidate}")
+    return candidate.resolve()
 
 
 def require_scalar(codepoint: int, where: str) -> None:
@@ -118,7 +147,9 @@ def convert(
 def main() -> None:
     if not CONTRACT_PATH.is_file():
         fail(f"missing {CONTRACT_PATH.relative_to(ROOT)}")
-    with tempfile.TemporaryDirectory(prefix="linkedspec-unicode-case-") as directory:
+    with tempfile.TemporaryDirectory(
+        prefix="linkedspec-unicode-case-", dir=managed_temp_root()
+    ) as directory:
         regenerated = Path(directory) / "unicode_case_contract.json"
         regenerated_perl = Path(directory) / "UnicodeCaseMapping.pm"
         regenerated_rust = Path(directory) / "unicode_case_mapping.rs"

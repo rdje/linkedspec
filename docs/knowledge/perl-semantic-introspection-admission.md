@@ -16,7 +16,7 @@ date: 2026-07-21
 status: current Perl reference admission
 tags: [perl, semantic-introspection, admission, conformance, mutations, rollout, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.3.6 adds t/semantic_introspection_perl_admission.t, one exact 12-role consumer over source normalization, compiled/failed/runtime snapshots, direct/loaded/generated/traced observations, native/neutral JSON, all 20 query digests, privacy/page/budget/error/explain behavior, no-execute immutability, and host-leak denial. The checker locks path/role/driver/registration/admission topology, rejects 65 mutations, advances rollout to 2/9 and native admission to 1/6, and leaves every later backend pending. Canonical signoff passes primary 66x2 and Phase 0 1,031/1,031 in 633 seconds."
-reverify: "PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t && python3 tools/check_semantic_introspection_contract.py"
+reverify: "PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 # Perl Semantic Introspection Admission

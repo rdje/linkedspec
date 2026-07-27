@@ -43,7 +43,7 @@ export JULIA_DEPOT_PATH="$JULIA_WRITE_DEPOT:$JULIA_READ_DEPOTS"
 export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"
 
 log "checking the neutral schema, model, recurring topology, and drift mutations"
-python3 tools/check_repeated_action_result_contract.py
+bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py
 
 log "checking the Perl exact ten-role admission consumer"
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t

@@ -11,7 +11,7 @@ date: 2026-07-18
 status: current
 tags: [task-tree, doctrine, capability-conformance, public-no-drift, logical-helper, canonical-ci]
 evidence: "During FUTURE-PARITY-BACKLOG.9.1.1.2.2.2, generated-source changes activated `tools/check_logical_helper_contract.py`. It found that required text `Logical helper parent .5.2 is closed at 8/0` was absent from `docs/TASK_TREE.md`. Git `-S` history showed the marker had originally lived only in the mutable `FUTURE-PARITY-BACKLOG` current-frontier table cell and was removed by later legitimate PNT frontier rewrites. The repair adds `Canonical Closed-Capability Markers` outside the mutable table. No logical-helper behavior or contract changed."
-reverify: "python3 tools/check_logical_helper_contract.py && rg -n 'Canonical Closed-Capability Markers|Logical helper parent' docs/TASK_TREE.md"
+reverify: "bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py && rg -n 'Canonical Closed-Capability Markers|Logical helper parent' docs/TASK_TREE.md"
 ---
 
 The active-tree table is overwrite-style live state: its current-frontier cells are expected to change after every

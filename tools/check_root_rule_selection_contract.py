@@ -715,7 +715,7 @@ def validate_filesystem_contract() -> None:
             "require_tracked_file capability_conformance/root_rule_selection_contract.json",
             "require_tracked_file t/root_rule_selection_perl_core.t",
             "require_tracked_file t/root_rule_selection_perl_routes.t",
-            "python3 tools/check_root_rule_selection_contract.py",
+            "bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py",
             "prove -Iperl t/root_rule_selection_perl_core.t",
             "prove -Iperl t/root_rule_selection_perl_routes.t",
             "require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs",

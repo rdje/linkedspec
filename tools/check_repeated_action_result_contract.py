@@ -656,7 +656,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         "require_tracked_file julia/test/repeated_action_result_contract_test.jl",
         "require_tracked_file lua/test/repeated_action_result_contract_test.lua",
         "require_tracked_file tools/check_repeated_action_result_five_backend.sh",
-        "python3 tools/check_repeated_action_result_contract.py",
+        "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py",
         "perl -c -Iperl t/repeated_action_result_perl_contract.t",
         "PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t",
     ]

@@ -931,7 +931,7 @@ def validate_filesystem_contract() -> None:
         "canonical CI omits Lua consumer tracked input",
     )
     require(
-        "python3 tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
+        "bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py" in ci_text,
         "canonical CI omits neutral checker execution",
     )
     require(

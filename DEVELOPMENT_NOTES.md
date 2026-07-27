@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.6` — environment routing is incomplete without direct-output
+  validation): Standard `TMPDIR` routing already covered shell allocators, conformance workspaces, TAP capture, and
+  oracle subprocess files, but four distinct seams could bypass it: Python's inherited default temp selection,
+  interpreter bytecode, caller-supplied `KM_OUTPUT`, and mdBook destination overrides. The supported Python wrapper
+  now centralizes root-relative script execution and retained bytecode. The two direct `TemporaryDirectory` owners
+  independently validate a managed same-device root so a bare invocation still cannot write externally.
+
+  Knowledge Map remains portable by using an optional host-supplied validator rather than importing LinkedSpec
+  policy into the bundle. LinkedSpec's repo-relative initializer provides that function. mdBook is different: its
+  effective destination can come from config, environment, or multiple CLI spellings, so the wrapper resolves each
+  candidate relative to the book root, rejects cross-device/symlink ancestry before launching the child, and
+  checks the realized directory afterward. The recurring oracle uses a fake mdBook only to observe preflight
+  ordering; a real book build independently passes.
+
+  Writer counts and actual outputs are complementary evidence. The oracle freezes three Python tempfile owners,
+  12 real shell allocator owners, and 19 checker entrypoints, then creates bytecode/map/book/CLI/TAP artifacts and
+  locks the oracle's two initialized captures. Its only cross-volume operations are bounded device and exact-path
+  absence reads needed to prove rejected paths were never created. The initial census exposed one missed derived
+  Julia audit list; content and reference classification justified deleting that exact file, not scanning or
+  purging its shared parent. Both old-root censuses are zero after canonical use.
+
+  Maintained command text is part of the storage boundary. Migrating 177 references across 151 current documents
+  prevents a copied fact-card or book command from silently bypassing retained bytecode/scratch policy. Historical
+  task/change evidence, inert path fixtures, and the nested `rgx` project's records remain untouched. With `.2.6`
+  complete, `.3.1` should reconcile the frozen migration ledger; it must not reinterpret ambiguous shared caches as
+  deletable merely because supported LinkedSpec workflows no longer read them.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.2.5` — environment routing does not supersede writer-specific
   authority): Exporting `TMPDIR` is necessary but cannot relocate a hard-coded filename template or C's anonymous
   `tmpfile()` allocation. Every Lua owner now derives named paths from routed `TMPDIR`, including the formerly

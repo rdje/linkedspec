@@ -11,7 +11,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, variadic, rest-parameter, runtime, isolation, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.3.2 passes 139/139 on PUC Lua and LuaJIT. The unchanged linkedspec-callable-signature-v1 fixture passes exactly; supplemental proof covers eager order, empty/nonempty freshness, nested array/harray/null/boolean/codeblock identity, receiver chains, minimum arity, and keyword rejection."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py"
 ---
 
 Lua executes native variadic-v2 user functions through the same staged ActionIR body runtime used by fixed-v1

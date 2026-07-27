@@ -96,7 +96,7 @@ contract independently of how its entry rule is chosen.
 `capability_conformance/root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) is the executable
 target. It fixes eight successful
 selection cases, three failures, three strict-graph cases, route projections, the five-backend audit, and the exact
-seven-leg rollout. `python3 tools/check_root_rule_selection_contract.py` independently evaluates the model and
+seven-leg rollout. `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py` independently evaluates the model and
 rejects semantic, topology, documentation, and rollout drift.
 
 The neutral leg changes no backend behavior. Implementation proceeds Perl, Rust, Dart, Julia, Lua/LuaJIT, then

@@ -12,7 +12,7 @@ date: 2026-07-12
 status: current
 tags: [codeblock, callable-signature, parameters, functions, helpers, receiver-methods]
 evidence: "Director clarification 2026-07-12; ADR 0032; FUTURE-PARITY-BACKLOG.11.3.3.1; capability_conformance/callable_codeblock_contract.json; tools/check_callable_codeblock_contract.py"
-reverify: "python3 tools/check_callable_codeblock_contract.py && rg -n 'name: codeblock|callback_signature_owner|codeblock_declaration_has_no_argument_list' docs/decisions/0032-final-codeblock-parameter-declaration.md capability_conformance/callable_codeblock_contract.json tools/check_callable_codeblock_contract.py"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'name: codeblock|callback_signature_owner|codeblock_declaration_has_no_argument_list' docs/decisions/0032-final-codeblock-parameter-declaration.md capability_conformance/callable_codeblock_contract.json tools/check_callable_codeblock_contract.py"
 ---
 
 A callable declares only the final parameter's value kind:

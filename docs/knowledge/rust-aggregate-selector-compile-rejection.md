@@ -13,7 +13,7 @@ date: 2026-07-12
 status: current
 tags: [rust, actionir, compiler, generated-source, bindings, retirement, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.2 adds recursive typed-AST detection in linkedspec-core/src/expr.rs and whole-CompiledSpec validation in compiler.rs. Normal compilation, traced compilation, generated-source emission, v1 decode, and legacy generated adapters reject exact selectors. Selector-specific runtime read/target/assignment/receiver dispatch is deleted. The focused uniform-binding suite passes 15/15, covering six neutral invalid cases, dead code, edge fluent arguments, unused functions, generated payloads, and eight retained constructor/literal classes. Complete core tests pass 185+3+8; runtime integration passes 197/197; all 105 interpreted cases and the final post-rename 105-case generated classifier (329.32 seconds), full Rust package and CLI 61x2, and canonical local CI pass. The recurring source scan is zero-positive/13 classified rejection sites."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test uniform_binding_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test generated_source_full_manifest_classifier && python3 tools/check_executable_aggregate_selector_sources.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test uniform_binding_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test generated_source_full_manifest_classifier && bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
 ---
 
 # Rust aggregate-selector compile rejection

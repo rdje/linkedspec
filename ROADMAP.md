@@ -40,8 +40,12 @@ the former-checkout shared-log stanza were deleted after verified full-gate use.
 untouched and unused; only Julia-managed system depots remain necessary read-only external inputs. Lua `.2.5` is
 complete: all 13 allocation owners, dual-ABI native builds, generated output, traces, complete ABI suites, primary
 66x2, and corpus 105/105 stay on repository storage. The guarded builder rejects another-filesystem output before
-creation; exact old Lua workspace residue was zero, so no payload required migration or deletion. Active `.2.6`
-owns Python, shell, mdBook, Knowledge Map, conformance, and miscellaneous tool artifacts. The path-portability closeout
+creation; exact old Lua workspace residue was zero, so no payload required migration or deletion. Tool leaf `.2.6`
+is complete: all three Python temporary owners, 12 shell allocators, and 19 Python checker entrypoints are frozen;
+bytecode, Knowledge Map, mdBook, conformance, TAP, and oracle output are repository-local; 177 current command
+references use the supported Python boundary; and hostile external/symlink output is rejected before creation.
+The sole exact disposable old audit list was classified and deleted, and both frozen old-root censuses are zero.
+Active `.3.1` now reconciles every frozen source/destination/deletion record. The path-portability closeout
 is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 

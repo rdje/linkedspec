@@ -49,7 +49,7 @@ scanner that keeps supplementary UTF-16 pairs intact. Regenerate and check it fr
 
 ```sh
 python3 unicode_case/generate_unicode_rule_label_contract.py
-python3 tools/check_unicode_rule_label_contract.py
+bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
 cd dart && dart test test/unicode_rule_label_classifier_test.dart
 ```
 

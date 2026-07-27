@@ -16,7 +16,7 @@ date: 2026-07-21
 status: current admitted native query evaluator; runtime projection remains separately derived
 tags: [perl, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: perl/LinkedSpec/SemanticQuery.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_query.t; FUTURE-PARITY-BACKLOG.10.3.4
-reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && python3 tools/check_semantic_introspection_contract.py
+reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_query.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 ---
 
 `LinkedSpec::semantic_index(...)` now returns an opaque object with public `$index->capabilities` and

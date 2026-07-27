@@ -19,7 +19,7 @@ status: verified and composed-admitted across both Lua ABIs
 tags: [lua, luajit, runtime, cursor, rule-family, trace, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.7.2 derives family/cursor/sequence-choice once at every ordinary execute_rule entry. Live, loaded-default, normalized SpecFile JSON, recursive, and traced routes pass 110 neutral assertions per ABI over all 36 families, eight parent-child mechanisms, and two structural replacements after identical 44/110 RED failures. Six focused consumers pass 1,046 assertions per ABI. Generated v1 retains historical seek plus its validated legacy handler-family interpretation, and explicit outer policy remains accepted until their .4/.5 owners. Package is 176/177 per ABI with only staged help, primary remains 32/65x4, corpus is 105/105x2, and neutral governance is 68 files / 5 complete + 3 pending / 44 mutations after registering the new execution consumer."
 evidence_update_2026_07_19_admission: "Generated v2 and public option removal close the staged seams. Admission .9.1.7.6 composes normal execution exactly once in one 15-role consumer on PUC Lua and LuaJIT; focused composition passes 119/119 per ABI and governance is 69/6+2/49."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_execution_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_execution_test.lua && python3 tools/check_rule_local_cursor_contract.py"
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_execution_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_execution_test.lua && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 ## Fact

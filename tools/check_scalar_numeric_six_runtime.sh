@@ -27,7 +27,7 @@ done
 cd "$REPO_ROOT"
 
 log "checking neutral contract"
-python3 tools/check_scalar_numeric_contract.py
+bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py
 
 log "checking Perl reference"
 PERL5LIB= prove -Iperl t/scalar_numeric_contract.t

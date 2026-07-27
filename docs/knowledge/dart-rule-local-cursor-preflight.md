@@ -20,7 +20,7 @@ evidence: "Read-only family/edge/parent-child/artifact probes plus the actual lo
 evidence_update_2026_07_18_descriptor: "FUTURE-PARITY-BACKLOG.9.1.5.3 replaces the preflight descriptor boundary with cursor v1. Root parse_mode is gone; every rule publishes derived family/policy/ownership/resolved edges; direct, normalized SpecFile-JSON, and loaded projections agree. Generated v1 and public/CLI options remain staged for .4-.5."
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.5.4 replaces the preflight generated boundary with linkedspec-generated-source-v2 / format 2. Exact label/family rows reconstruct each rule's cursor/composition policy; compact Pipe is OR; v1 is rejected before lazy payload decoding. Public/CLI options remain staged for .5."
 evidence_update_2026_07_18_public_removal: "FUTURE-PARITY-BACKLOG.9.1.5.5 removes every caller-owned Dart global cursor override and the primary request field, returns exact retired-flag guidance, and passes 260 package tests, 63x2 primary, and 105/105 corpus. Neutral inventory is 66/3-of-5/34."
-reverify: "python3 tools/check_rule_local_cursor_contract.py; bash tools/run_dart_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; bash tools/run_dart_local.sh"
 ---
 
 The governed token inventory has eleven Dart paths:

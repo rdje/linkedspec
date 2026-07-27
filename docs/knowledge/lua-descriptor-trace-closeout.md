@@ -11,7 +11,7 @@ date: 2026-07-15
 status: current
 tags: [lua, descriptors, trace, no-drift, capability-census, task-tree, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.3.3 inventories exact API/status/test/contract/book/KM agreement at 155/155 on PUC Lua and LuaJIT, closes parents .5.3/.5 without source or manifest change, preserves the four-backend 64/0/0 census until .8.4, activates corpus .6.1, and passes canonical CLI 61x2 plus Phase 0 1..1031 in 611 seconds."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_signature_contract.py && python3 tools/check_callable_codeblock_contract.py && perl tools/check_capability_conformance.pl && perl tools/check_native_spec_resolution_contract.pl && perl tools/check_language_capability_coverage.pl"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && perl tools/check_capability_conformance.pl && perl tools/check_native_spec_resolution_contract.pl && perl tools/check_language_capability_coverage.pl"
 ---
 
 `LUA-BACKEND-PARITY.5.3.3` closes the descriptor/full-pipeline-trace implementation boundary. Exact public exports

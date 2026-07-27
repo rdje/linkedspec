@@ -12,7 +12,7 @@ date: 2026-07-21
 status: current corrected neutral authority boundary; private Perl, Rust, Dart, and Julia projectors consume retained owners
 tags: [semantic-introspection, generated-source, handler-family, oracle, mutations, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.3.3.0 compared exact LinkedSpec::Get(return_descriptor) selected_handler_variant and independently loaded emit_generated_source metadata with linkedspec-rule-local-cursor-v1 generated_source_v2 before adapter implementation. The calls fixture selects _default and emits default; and_acode is absent from the ten-family v2 vocabulary. FUTURE-PARITY-BACKLOG.10.3.3.1.1 moves handler-variant classification and contract identity behind LinkedSpec::GeneratedSource owners shared by Compiler and the private semantic projector."
-reverify: "python3 tools/check_semantic_introspection_contract.py && perl -Iperl -MLinkedSpec -e 'print q{use TOOLBOX emit_generated_source metadata probe for calls_and_staging.spec}'"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && perl -Iperl -MLinkedSpec -e 'print q{use TOOLBOX emit_generated_source metadata probe for calls_and_staging.spec}'"
 ---
 
 # Semantic Introspection Generated-Plan Authority

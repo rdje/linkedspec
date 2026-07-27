@@ -12,7 +12,7 @@ date: 2026-07-21
 status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
 evidence: docs/TASK_TREE.md; MEMORY.md; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.2, .10.3.0, .10.3.2.0, .10.4.0.1, .10.4.1, .10.5.2.3, and .10.5.3.1
-reverify: "python3 tools/check_repeated_action_result_contract.py; rg -n 'repeated-action recurring/public no-drift is closed' docs/TASK_TREE.md capability_conformance/repeated_action_result_contract.json"
+reverify: "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'repeated-action recurring/public no-drift is closed' docs/TASK_TREE.md capability_conformance/repeated_action_result_contract.json"
 ---
 
 The repeated-action public no-drift contract currently requires the exact sentence

@@ -33,7 +33,7 @@ require_command "$LUAJIT_CMD"
 cd "$REPO_ROOT"
 
 log "checking the neutral syntax and exclusion contract"
-python3 tools/check_punctuation_light_zero_arg_contract.py
+bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py
 
 log "checking Perl typed, native, and generated behavior"
 PERL5LIB= prove -Iperl t/punctuation_light_zero_arg_contract.t

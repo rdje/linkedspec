@@ -15,7 +15,7 @@ status: implemented, fully verified, and admitted
 tags: [dart, cursor, parse-mode, native-api, cli, trace, corpus, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.5.5 removes caller-global policy from LinkedSpecRuntimeEngine, LoadedCompiledSpec.createEngine, executeCorpusFixtures, the staged function parser, and primary execution. The primary command omits the help/request-trace field and returns exact usage exit 2 migration guidance for --parse-mode. LinkedSpecParseMode remains only as the low-level seek/consume matcher primitive and rule-derived internal policy type. Focused affected suites pass 120/120; the Dart local gate passes 260 package tests, exact primary 63/63 in default and POSIX environments, and corpus 105/105. Neutral inventory contracts from 68 to 66 files with 3/5 rollout and all 34 mutations effective. Knowledge Map is 594/4,235; canonical CI passes Perl cursor admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 627 seconds."
 evidence_update_2026_07_18_admission: "FUTURE-PARITY-BACKLOG.9.1.5.6 admits the removal role inside the exact 15-role Dart topology. Current proof is package 271, primary 65x2, corpus 105/105, and neutral 67 files / 4 complete / 4 pending / 39 mutations."
-reverify: "bash tools/run_dart_local.sh; python3 tools/check_rule_local_cursor_contract.py; rg -n --hidden --glob '!dart/.dart_tool/**' 'parseMode|parse_mode|parse-mode|ParseMode' dart/lib dart/test"
+reverify: "bash tools/run_dart_local.sh; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n --hidden --glob '!dart/.dart_tool/**' 'parseMode|parse_mode|parse-mode|ParseMode' dart/lib dart/test"
 ---
 
 Dart native execution no longer accepts a parser-wide cursor choice. Construct

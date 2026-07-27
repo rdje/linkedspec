@@ -12,7 +12,7 @@ date: 2026-07-21
 status: current corrected neutral authority boundary
 tags: [semantic-introspection, identity, logical-name, oracle, mutations, privacy]
 evidence: "FUTURE-PARITY-BACKLOG.10.3.3.1.0 full calls RED compared the private source-derived projection with the neutral 22/25 target. The caller identity calls_and_staging.spec produces spec name calls_and_staging, while the neutral model alone shortened it to calls. The model is corrected and the checker now derives every spec name from source_fixtures.logical_name, rejecting direct and coordinated wrong-model/hash drift."
-reverify: "python3 tools/check_semantic_introspection_contract.py && jq '.snapshots[] | {id, spec: (.records[] | select(.kind == \"spec\") | .name)}' capability_conformance/semantic_introspection_model.json"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && jq '.snapshots[] | {id, spec: (.records[] | select(.kind == \"spec\") | .name)}' capability_conformance/semantic_introspection_model.json"
 ---
 
 # Semantic Introspection Spec-Name Authority

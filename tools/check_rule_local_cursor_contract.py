@@ -1064,7 +1064,7 @@ def validate_contract(contract: dict[str, Any], *, check_inventory: bool = True)
         fail("recurring gate driver is not executable")
     recurring_driver_text = recurring_driver_path.read_text(encoding="utf-8")
     required_driver_markers = [
-        "python3 tools/check_rule_local_cursor_contract.py",
+        "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py",
         "prove -Iperl t/rule_local_cursor_perl_contract.t",
         "--test rule_local_cursor_contract",
         "test test/rule_local_cursor_contract_test.dart",

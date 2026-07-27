@@ -14,7 +14,7 @@ date: 2026-07-25
 status: current and composition-closed by FUTURE-PARITY-BACKLOG.10.7.1.4
 tags: [lua, luajit, unicode, rule-labels, validation, isolation, portability, testing]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.1.3.2 adds lua/test/unicode_rule_label_negative_isolation_test.lua. It derives all eight neutral negatives and proves four roles x two AST trust paths x five artifact operations plus source, loaded/generated/emitted/fresh-host, selector, diagnostic, trace, strict-loader, primary, host-denial, and adjacent-grammar boundaries. The same 1542 assertions pass on PUC Lua and LuaJIT; tools/check_unicode_rule_label_contract.py locks the topology and tools/run_lua_local.sh plus tools/run_ci_local.sh lock registration."
-reverify: "python3 tools/check_unicode_rule_label_contract.py; LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' lua lua/test/unicode_rule_label_negative_isolation_test.lua; LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' luajit lua/test/unicode_rule_label_negative_isolation_test.lua"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' lua lua/test/unicode_rule_label_negative_isolation_test.lua; LUA_PATH='lua/src/?.lua;lua/src/?/init.lua;;' luajit lua/test/unicode_rule_label_negative_isolation_test.lua"
 ---
 
 All eight negative labels come from `capability_conformance/unicode_rule_label_contract.json`; the Lua proof does

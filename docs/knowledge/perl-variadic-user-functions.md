@@ -13,7 +13,7 @@ date: 2026-07-12
 status: current
 tags: [perl, functions, variadic, rest-parameter, descriptor, staged-parsing, generated-source, length, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.2.1 updates specs/spec.spec, specs/user_function_definition.spec, perl/LinkedSpec/UserFunctionRegistry.pm, and perl/LinkedSpec/ActionIR/MethodLowering.pm. t/variadic_user_function_contract.t consumes the unchanged neutral contract with 66 assertions; canonical CI passes 61x2 CLI and Phase 0 1..1030 in 710 seconds."
-reverify: "PERL5LIB= prove -Iperl t/variadic_user_function_contract.t && python3 tools/check_callable_signature_contract.py"
+reverify: "PERL5LIB= prove -Iperl t/variadic_user_function_contract.t && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py"
 ---
 
 The Perl reference accepts `fn name(fixed, ...rest) { ... }`. The spec-owned definition shell emits a version-2

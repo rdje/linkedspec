@@ -85,8 +85,11 @@ Examples:
 Build the book with:
 
 ```bash
-mdbook build docs/linkedspec-book
+bash tools/run_mdbook_local.sh
 ```
+
+The wrapper derives the checkout at runtime, keeps default/generated output on the repository filesystem, and
+rejects an external `MDBOOK_BUILD__BUILD_DIR` or `-d`/`--dest-dir` before mdBook starts.
 
 The source files live under:
 
@@ -154,7 +157,7 @@ For documentation-only book work, run:
 
 ```bash
 git diff --check
-mdbook build docs/linkedspec-book
+bash tools/run_mdbook_local.sh
 ```
 
 For implementation work, run the relevant code/spec tests. The full shared gate is:

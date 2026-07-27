@@ -15,7 +15,7 @@ date: 2026-07-12
 status: current
 tags: [unicode, casing, generation, contract, fixtures, ci, portability]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.2.1 adds deterministic gzip-preserved official Unicode 17.0.0 UnicodeData.txt, SpecialCasing.txt, DerivedCoreProperties.txt, and license inputs with exact uncompressed SHA-256 values; unicode_case/generate_unicode_case_contract.py; capability_conformance/unicode_case_contract.json; tools/check_unicode_case_contract.py; and the tools/run_ci_local.sh contract step. The generated contract has 1,563 lower and 1,581 upper mappings, 158 Cased and 464 Case_Ignorable merged ranges, one Final_Sigma rule, data digest 5c17653094c49a3bd69222f6e8bde5de5ebd445a121453ccb156ea540a5e3bae, and 12 fixtures. `.4.3.2.1.2.2` extends generation and byte comparison to Perl/Rust backend modules. The checker regenerates byte-identically and independently executes all fixtures offline."
-reverify: "python3 tools/check_unicode_case_contract.py && bash tools/run_ci_local.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py && bash tools/run_ci_local.sh"
 ---
 
 ## Fact

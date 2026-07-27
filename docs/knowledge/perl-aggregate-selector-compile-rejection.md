@@ -13,7 +13,7 @@ date: 2026-07-12
 status: current
 tags: [perl, actionir, compiler, bindings, compatibility, retirement, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.1 adds canonical AST validation in perl/LinkedSpec/ActionIR/RewritePipeline.pm and user-function registry validation in perl/LinkedSpec/UserFunctionRegistry.pm. All six neutral invalid-selector cases fail direct lowering, live compilation, and generated-source emission with exact portable fields; dead code and unused function bodies fail too. Eight retained constructor/literal classes execute. Focused proof passes 41 tests and standalone Phase 0 passes 1..1031."
-reverify: "prove -Iperl t/uniform_binding_contract.t t/trace_emit_context_bridge.t t/trace_actionir_method_lowering.t t/actionir_ast_parser.t && python3 tools/check_executable_aggregate_selector_sources.py"
+reverify: "prove -Iperl t/uniform_binding_contract.t t/trace_emit_context_bridge.t t/trace_actionir_method_lowering.t t/actionir_ast_parser.t && bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
 ---
 
 # Perl aggregate-selector compile rejection

@@ -32,8 +32,12 @@ and deletes both exact old depots plus the former-checkout shared-log stanza aft
 developer depot remains untouched and unused; only Julia-managed system depots remain necessary external reads.
 Lua `.2.5` roots all 13 allocation owners, both ABI native-module pairs, generated output, traces, primary 66x2,
 and corpus 105/105 on repository storage. Its guarded builder rejects other-filesystem output before creation; exact
-old Lua workspace residue was zero. Active `.2.6` owns Python, shell, book, Knowledge Map, conformance, and other
-tool artifacts. Migration remains copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
+old Lua workspace residue was zero. Tool leaf `.2.6` is complete across Python, shell, book, Knowledge Map,
+conformance, and other tool artifacts: it freezes three Python temporary owners, 12 shell allocators, and 19 Python
+checker entrypoints; routes bytecode/map/book/conformance/TAP/oracle output; validates external/symlink rejection;
+migrates 177 current command references; and deletes the sole exact disposable old audit list. Both frozen old
+roots are zero. Active `.3.1` reconciles all frozen migration/deletion records. Migration remains
+copy/verify/use/delete; ambiguous shared caches are not deleted wholesale.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

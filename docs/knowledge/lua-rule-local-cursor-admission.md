@@ -16,7 +16,7 @@ date: 2026-07-19
 status: implemented, composed-admitted, and signoff complete
 tags: [lua, luajit, cursor, contract, admission, topology, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.7.6 adds lua/test/rule_local_cursor_contract_test.lua as one contract-declared 15-role consumer. The exact same source runs on PUC Lua and LuaJIT and executes native default/AND, normalized AST, loaded spec, descriptor v1, emitted/generated v2 direct/trace, mixed parent-child, recursion, both structural replacements, static/dynamic option removal, primary retirement, and all eight portable diagnostics. The neutral checker requires one marker per role, both backend-driver invocations, canonical tracked input, optional backend registration, Lua rollout state, and five new omission mutations. Exact pre-contract RED is 3/3 per ABI and green is 119/119 per ABI. The complete dual-ABI driver passes package 177/177 per ABI; primary is 65/65 in all four ABI/default-POSIX legs and corpus is 105/105 per ABI. Governance reaches 69 migration files, 6 complete / 2 pending, and 49 rejected mutations; only lua_dual_abi advances. KM 632/4,642, mdBook/four doctrines, and canonical root 7+5, cursor 288, primary 65x2, and Phase 0 1,031/1,031 in 647 seconds pass."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_rule_local_cursor_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 `lua/test/rule_local_cursor_contract_test.lua` is the single omission-sensitive

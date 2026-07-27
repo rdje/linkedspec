@@ -17,7 +17,7 @@ date: 2026-07-21
 status: current private compiled projection exposed through admitted exact public static/runtime query
 tags: [rust, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.3
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; python3 tools/check_semantic_introspection_contract.py; perl tools/check_generated_source_contract.pl"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; perl tools/check_generated_source_contract.pl"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` now retains the corrected calls snapshot's complete private

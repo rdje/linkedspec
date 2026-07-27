@@ -372,6 +372,19 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_test.lua`, and
   `bash tools/test_lua_project_data_storage.sh`. The complete Lua gate invokes the oracle and reuses its ABI builds.
 
+### 4.3.7 Python/tool output and SSD-local storage oracle
+
+- **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
+  retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
+  12 shell allocator owners, and 19 Python checker entrypoints while exercising Python bytecode, Unicode-generator
+  scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
+- **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
+  Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,
+  TAP, or oracle generation.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py` and
+  `bash tools/test_tool_project_data_storage.sh`. Hostile another-filesystem destinations are read only to prove
+  rejection, never created; same-filesystem outputs are checked before and after writing.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -381,8 +394,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 
 - **WHAT:** a sourceable environment initializer that derives the current checkout, creates ignored disposable
-  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart, and Julia
-  storage variables, and hands standard entrypoints to the managed-run wrapper.
+  `/.linkedspec-data/scratch/` and retained `/.linkedspec-data/cache/` roots, exports temp, Cargo, Dart, Julia, and
+  Python bytecode storage variables, provides a same-filesystem output validator, and hands standard entrypoints
+  to the managed-run wrapper.
 - **WHEN:** before a direct development, generation, test, or package command can create project-owned state.
   Standard hook/doctrine/Knowledge Map/canonical/backend runners source it automatically; source it manually only
   for lower-level commands that bypass those routed boundaries.
@@ -390,10 +404,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   override is replaced after device validation. Use `bash tools/project_data_run.sh COMMAND [ARG ...]` for a direct
   foreground command with managed scratch. Run `bash tools/test_project_data_env.sh`,
   `bash tools/test_project_data_lifecycle.sh`, and `bash tools/test_project_data_workflow_routing.sh` for the focused
-  environment, lifecycle, and 33-entrypoint outside-cwd proofs. Build the book through
+  environment, lifecycle, and routed-entrypoint outside-cwd proofs. Build the book through
   `bash tools/run_mdbook_local.sh`.
 - **OUTPUT:** no normal stdout. The current shell receives `LINKEDSPEC_*` roots, `TMPDIR`/`TMP`/`TEMP`, Cargo
-  home/target, Dart package-cache, and Julia depot exports. The helper refuses direct execution because exports
+  home/target, Dart package-cache, Julia depot, and Python bytecode-cache exports. The helper refuses direct execution because exports
   must affect the caller shell.
 
 ### 4.4.2 `tools/project_data_run.sh` — per-run scratch lifecycle
@@ -418,7 +432,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   schema/counts/order/scalars/digest, and independently executes expansions, combining output, supplementary
   characters, `Final_Sigma`, and no-normalization fixtures.
 - **WHEN:** changing `lowercase`/`uppercase`, Unicode data, generated backend tables, or diagnosing a casing mismatch.
-- **HOW:** `python3 tools/check_unicode_case_contract.py`. Regenerate deliberately with
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py`. Regenerate deliberately with
   `python3 unicode_case/generate_unicode_case_contract.py`; ordinary verification is offline.
 - **OUTPUT:** `unicode-case-contract: OK (Unicode 17.0.0; 1563 lower; 1581 upper; 158/464 property ranges; 12 fixtures)`.
 
@@ -428,7 +442,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   and deterministically regenerates the backend-neutral `.spec` fixture and expected result object.
 - **WHEN:** changing numeric input coercion, helper arity, invalid/null behavior, comparisons, rounding, min/max,
   clamp/division fences, or signed modulo in any backend.
-- **HOW:** `python3 tools/check_scalar_numeric_contract.py`.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py`.
 - **OUTPUT:** `scalar-numeric-contract: OK (55 cases; 18 canonical helpers)`.
 
 ### 4.7 `tools/check_scalar_numeric_six_runtime.sh` — exact six-runtime numeric admission
@@ -448,7 +462,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   helpers and effective receiver arity, and the deterministic future `.spec` fixture.
 - **WHEN:** changing function-definition syntax, staged function metadata, call resolution, rest-array binding,
   user-function diagnostics, descriptor projection, or fixed/variadic helper and method signatures.
-- **HOW:** `python3 tools/check_callable_signature_contract.py`.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py`.
 - **OUTPUT:** `callable-signature-contract: OK (3 definitions; 9 calls; 7 invalid definitions)`.
 - **PERL ADAPTER:** `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` consumes the same fixture through
   the spec-owned shell, staged/outward records, generated source, eager/fresh binding, diagnostics, and execution.
@@ -461,7 +475,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   budgets, and the handle-only MCP boundary; backend-native semantics remain owned by each admitted consumer.
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
-- **HOW:** `python3 tools/check_semantic_introspection_contract.py`.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`.
 - **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 89 rejected mutations, rollout 5 complete / 4 pending, admission 4 complete / 2 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2

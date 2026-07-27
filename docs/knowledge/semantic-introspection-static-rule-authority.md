@@ -13,7 +13,7 @@ date: 2026-07-21
 status: current corrected neutral authority boundary
 tags: [semantic-introspection, rule-family, cursor, edge-ownership, oracle, mutations, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.3.2.0 compared exact LinkedSpec::Get(return_descriptor, runtime_ctx_ref) results with linkedspec-rule-local-cursor-v1 before adapter behavior. It corrected every default-rule snapshot from and/contiguous to neutral or/seek, changed compiled no-edge rules from blind to none, retained action for the failed default-family bare edge, and added three coordinated model-plus-hash mutations."
-reverify: "python3 tools/check_semantic_introspection_contract.py && jq '.static_rule_authority' capability_conformance/semantic_introspection_contract.json && jq '.snapshots[] | {id, rules: [.records[] | select(.kind == \"rule\") | {name, facts: {family: .facts.family, cursor_policy: .facts.cursor_policy, edge_ownership: .facts.edge_ownership}}]}' capability_conformance/semantic_introspection_model.json"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && jq '.static_rule_authority' capability_conformance/semantic_introspection_contract.json && jq '.snapshots[] | {id, rules: [.records[] | select(.kind == \"rule\") | {name, facts: {family: .facts.family, cursor_policy: .facts.cursor_policy, edge_ownership: .facts.edge_ownership}}]}' capability_conformance/semantic_introspection_model.json"
 ---
 
 # Semantic Introspection Static Rule Authority

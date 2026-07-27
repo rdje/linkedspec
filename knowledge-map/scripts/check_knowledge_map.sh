@@ -19,6 +19,7 @@ ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || pwd)"
 : "${KM_OUTPUT:=KNOWLEDGE_MAP.md}"
 : "${KM_ENV_INITIALIZER:=}"
 : "${KM_RUN_INITIALIZER:=}"
+: "${KM_OUTPUT_VALIDATOR:=}"
 
 if [ -n "$KM_ENV_INITIALIZER" ]; then
   case "$KM_ENV_INITIALIZER" in
@@ -45,6 +46,14 @@ cd "$ROOT"
 fail=0
 note() { printf 'knowledge-map: %s\n' "$1" >&2; fail=1; }
 warn() { printf 'knowledge-map: WARNING: %s\n' "$1" >&2; }
+
+if [ -n "$KM_OUTPUT_VALIDATOR" ]; then
+  command -v "$KM_OUTPUT_VALIDATOR" >/dev/null 2>&1 || {
+    printf 'knowledge-map: output validator not found: %s\n' "$KM_OUTPUT_VALIDATOR" >&2
+    exit 1
+  }
+  "$KM_OUTPUT_VALIDATOR" "$KM_OUTPUT" "Knowledge Map output"
+fi
 
 ids_file=""; tmpmap=""
 cleanup() { [ -n "$ids_file" ] && rm -f "$ids_file"; [ -n "$tmpmap" ] && rm -f "$tmpmap"; }

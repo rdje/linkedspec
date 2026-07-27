@@ -22,7 +22,7 @@ They are redistributed under the Unicode Data Files and Software License in
 
 ```bash
 python3 unicode_case/generate_unicode_case_contract.py
-python3 tools/check_unicode_case_contract.py
+bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py
 ```
 
 The generator verifies every source hash and the two version-bearing headers before parsing. It combines simple
@@ -38,7 +38,7 @@ position, and writes the neutral contract plus the Rust classifier:
 
 ```bash
 python3 unicode_case/generate_unicode_rule_label_contract.py
-python3 tools/check_unicode_rule_label_contract.py
+bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
 ```
 
 Label identity remains the exact case- and normalization-sensitive scalar sequence; this generator performs no

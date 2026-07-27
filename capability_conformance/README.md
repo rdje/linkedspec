@@ -10,7 +10,7 @@ admitted backends. It complements, rather than replaces, the executable 105-fixt
 snapshot-local ids/order, value and target shapes, request/response envelopes, deterministic directional
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
-`python3 tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
+`bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
 six fixture groups and reports 89 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
@@ -94,7 +94,7 @@ serialization convention cannot silently become public API. Final-codeblock-v3 a
 promote the separately future generic callable-codeblock capability.
 
 `rule_local_cursor_contract.json` makes ADR `0044` executable before behavior rollout. Run
-`python3 tools/check_rule_local_cursor_contract.py` to validate 36 exact rule-family spellings, 18 bare/explicit/
+`bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py` to validate 36 exact rule-family spellings, 18 bare/explicit/
 indexed/grouped/block/fluent/reserved edge cases, six post-normalization ownership sets, eight parent/child call
 mechanisms, both structural replacements for retired global cross-combinations, exact API/CLI removal diagnostics,
 per-rule descriptor metadata, generated-source v2 family derivation, and the dependency-ordered migration ledger.
@@ -127,7 +127,7 @@ its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
-backends admit it. Run `python3 tools/check_root_rule_selection_contract.py` to validate explicit selector > first
+backends admit it. Run `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py` to validate explicit selector > first
 authored `::` > first authored `:` precedence, eight successful selections, three structural/selector failures,
 three strict-unused graph cases, authored `is_top` identity, native/loaded/reconstructed/generated/emitted/trace/
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
@@ -173,7 +173,7 @@ ties toward the first authored slot. Five exact fixtures cover same-rule ordered
 duplicates, a non-duplicate repeated control, and cross-target duplicates. The contract also fixes two portable
 invariants, descriptor and trace identity, unchanged generated-source v2/format 2, the six-runtime mechanism
 inventory, migration paths, and the seven-leg rollout. Run
-`python3 tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
+`bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py`; it independently evaluates the selection model
 and reports 59 rejected mutations spanning semantic, fixture, diagnostic, artifact, inventory, rollout,
 recurring, public, closure, admission, and CI drift.
 mutations. Perl `.2` is composed-admitted through 12 exact roles. Rust `.3` is composed-admitted through 15 exact
@@ -196,7 +196,7 @@ executable across all admitted backends. It fixes eight exact mode rows for `*`,
 returns, zero/below-minimum bounds, lifecycle authority, duplicate pipe, and blind bare-OR classification. Run:
 
 ```bash
-python3 tools/check_repeated_action_result_contract.py
+bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 bash tools/check_repeated_action_result_five_backend.sh
 ```
@@ -262,7 +262,7 @@ once-only left-to-right effects, diagnostic scalar rendering, call/item grouping
 empty/wrong-kind behavior, Unicode order, structural-result neutrality, quiet execution, synchronous caller sink
 failure, immediate `exit_now`, generated propagation, and the quiet ADR `0024` primary-CLI projection. Validate
 the 11 rendering rows, five invalid arities, six semantic scenarios, and the exact rollout ledger
-offline with `python3 tools/check_diagnostic_output_contract.py`. The checker independently evaluates the model and
+offline with `bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py`. The checker independently evaluates the model and
 rejects 20 representative semantic, topology, public-document, and admission drift mutations. All five native
 legs, generated/primary propagation, recurring admission, and public no-drift are complete: 8 complete / 0 pending.
 The public contract additionally requires 16 current documentation surfaces and rejects nine exact stale
@@ -275,7 +275,7 @@ schema, topology, syntax, and tracked inputs on every ordinary run.
 `scalar_numeric_contract.json` fixes strict scalar numeric helper inputs, arities, invalid-to-null results, numeric
 comparison truth, half-away rounding, min/max/clamp, division, and signed integer modulo. Its deterministic case
 list also renders one backend-neutral `.spec` fixture. Validate schema, independent evaluator results, and rendered
-source offline with `python3 tools/check_scalar_numeric_contract.py`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+source offline with `bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
 consume the unchanged 55 cases; `bash tools/check_scalar_numeric_six_runtime.sh` is the composed admission proof.
 
 `logical_helper_contract.json` adopts ADR `0043`'s backend-neutral `and`/`or`/`not` value contract without
@@ -287,7 +287,7 @@ numbers, nonempty strings (including `"0"` and `"false"`), nonempty aggregates, 
 Testing a codeblock does not invoke it. The codeblock row is model/backend-unit evidence only until the separately
 owned first-class literal program lands; this contract does not activate `{|...| ... }` syntax.
 
-Run `python3 tools/check_logical_helper_contract.py` to validate 17 truthiness rows, ten helper cases, three eager
+Run `bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py` to validate 17 truthiness rows, ten helper cases, three eager
 effect scenarios, receiver and lazy-control contrast, four pre-effect arity failures, deterministic embedded
 fixtures, exact projection obligations, and 26 semantic/topology/public drift mutations. Perl consumes the neutral
 artifact through typed ActionIR/runtime proof; Rust uses
@@ -308,7 +308,7 @@ cross-backend admission early. It selects `fn name(fixed, ...rest) { ... }`, kee
 defines version-2 signature objects whose outward placement is sourced from the descriptor union, binds extras as one fresh typed array, rejects keyword/overload/host-splat
 semantics, and locks representative purpose-specific helper/method arities. Validate its schema, definitions,
 bindings, diagnostics, and deterministically rendered future `.spec` fixture with
-`python3 tools/check_callable_signature_contract.py`. Perl, Rust, Dart, Julia, and Lua consume the unchanged
+`bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py`. Perl, Rust, Dart, Julia, and Lua consume the unchanged
 source/result/record contract through native and generated execution. Lua's exact signature/runtime and outward
 descriptor variants close under `.5.1/.5.3.1`, while emitted variadic execution closes under `.8.2` and final
 five-backend admission under `.8.4`.
@@ -320,7 +320,7 @@ Ordinary `{ statements }` remains an eager block value, while empty and top-leve
 literals. The contract also fixes diagnostics, exact final-only `name: codeblock`, eight contextual helper/
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
-`python3 tools/check_callable_codeblock_contract.py`. Backend admission remains future until the owned rollout
+`bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. Backend admission remains future until the owned rollout
 leaves supply generic final-block and cross-backend evidence. Perl now consumes the literal and invocation subset
 through `prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert canonical generated data,
 assignment/copying, user-function preservation, dynamic caller execution, temporary fixed/rest restoration,
@@ -336,7 +336,7 @@ every governed backend inventory: entry/local start/end writers, line/column rea
 contract requires symbolic bare mark names, rule-label isolation, character-based public positions and locations,
 and undef/zero behavior for absent reads and existence checks. Its exact Unicode parent/child fixture also proves
 that a child cannot overwrite an identically named parent mark. Validate the schema, independent location model,
-fixture rendering, and three drift mutations with `python3 tools/check_complete_named_mark_contract.py`. Perl
+fixture rendering, and three drift mutations with `bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py`. Perl
 consumes the unchanged fixture through `prove -Iperl t/complete_named_mark_contract.t`, including live and
 standalone generated execution. Rust consumes it through
 `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test complete_named_mark_contract`, including
@@ -356,7 +356,7 @@ into a general parenthesis-free call language. It locks six standalone bare zero
 final receiver segments, exact normalized AST equivalence with parenthesized forms, ordinary-identifier retention,
 condition/helper/intermediate-receiver/trailing-block exclusions, existing method-contract resolution, and one
 deterministically rendered portable `.spec` fixture. Validate the 6 standalone, 4 receiver, 6 invalid, and fixture
-cases offline with `python3 tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes the contract through
+cases offline with `bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py`. Perl consumes the contract through
 `prove -Iperl t/punctuation_light_zero_arg_contract.t`, covering typed AST equivalence, final-only receiver
 parsing, unchanged exclusions and method resolution, canonical `next` lowering, and live plus standalone
 generated execution. Rust consumes the same syntax/AST cases through
@@ -386,7 +386,7 @@ pure. Exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` calls are removed and rejec
 `aggregate_selector_removed`, even when a one-element constructor was intended (`[IDENTIFIER]` is the replacement).
 Zero/multi/quoted/computed constructor calls remain separately valid under version 1. Validate 11 migrations,
 seven execution cases, six invalid selectors, eight constructor classifications, and deterministic future source/
-results offline with `python3 tools/check_uniform_binding_contract.py`. Perl `.12.1.2`, Rust `.12.1.3`, Dart
+results offline with `bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py`. Perl `.12.1.2`, Rust `.12.1.3`, Dart
 `.12.1.4`, Julia `.12.1.5`, and Lua `.12.1.6` execute the contract. All tracked file-backed and embedded sources
 are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5`
 hard-reject the removed exact selectors before execution. Cross-variant `.12.1.8.6` locks their shared contract,
@@ -395,7 +395,7 @@ Follow-up `.12.1.10` extends its recurring public checker to all immediate compo
 locked at 27 genuine classified removed/history references and zero current examples, including explicit bare-binding
 anchors in the Rust, Dart, Julia, and Lua READMEs.
 Closed follow-up `.12.1.11` reconciles older statement-only array-end result prose and Perl value-position lowering
-with the already-admitted updated-value contract. `python3 tools/check_uniform_binding_mutation_result_surface.py`
+with the already-admitted updated-value contract. `bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py`
 gates the public book/backend summaries, current backend fact anchors, and explicitly classified historical cards.
 
 `generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes

@@ -38,7 +38,7 @@ evidence_update_2026_07_19_recurring_admission: "Recurring cursor admission .9.1
 evidence_update_2026_07_20_julia_duplicate_slot: "Julia duplicate-slot admission .9.1.8.1.5 adds a parse-mode-aware contract consumer. The cursor inventory deliberately classifies that proof under the existing Julia backend owner, advancing only the file count from 72 to 73; rollout remains 7 complete / 1 pending and mutations remain 56."
 evidence_update_2026_07_20_duplicate_public_closeout: "Duplicate-slot public closeout .9.1.8.1.7 makes its contract and checker name the parse-mode mdBook chapter. Both paths are classified under pending cursor public owner .9.1.9, advancing only the inventory from 73 to 75 files; rollout remains 7 complete / 1 pending and mutations remain 56."
 evidence_update_2026_07_20_cursor_public_no_drift: "Public no-drift .9.1.9 locks current documentation markers and exact stale-current denials, advances only public_no_drift, and closes the cursor ledger at 75 migration files / 8 complete + 0 pending / 60 mutations."
-reverify: "python3 tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
+reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
 `capability_conformance/rule_local_cursor_contract.json` is the executable

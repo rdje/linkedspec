@@ -198,7 +198,7 @@ accessing the shared copy, and remove only records or directories provably owned
     exact cleanup/recovery commands and keep `.2.1-.2.6` as the backend/tool migration owners.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2`
-  Status: `active`
+  Status: `done` (2026-07-26; every Perl/Rust/Dart/Julia/Lua/tool migration child is complete)
   Goal: Remove every supported workflow's internal-volume project write.
   Depends on: `.1`
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
@@ -398,7 +398,7 @@ accessing the shared copy, and remove only records or directories provably owned
     cleared, the tree is clean, and no push occurs.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.6`
-  Status: `active`
+  Status: `done` (2026-07-26; Python, shell, Knowledge Map, mdBook, conformance, TAP, and oracle output rooted)
   Goal: Root Python, shell, mdBook, Knowledge Map, conformance, and miscellaneous tool artifacts on SSD storage.
   Depends on: `.2.5`
   Acceptance: Cover Python `tempfile`, shell `mktemp`, explicit log/TAP/oracle outputs, generated book paths, and
@@ -407,14 +407,46 @@ accessing the shared copy, and remove only records or directories provably owned
     without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD`
 
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / INVENTORY** — Froze the three Python temporary-allocation files, 12 actual shell `mktemp`
+    owners,
+    all 19 Python checker entrypoints and their bytecode behavior, Knowledge Map configured/temporary output,
+    mdBook generated output and destination overrides, conformance/TAP/oracle writers, three current off-volume
+    reverify commands, one stale Lua temporary-fallback statement, and exact old tool-prefix residue. Recorded the
+    accidental `/tmp/linkedspec_2_6_inventory.txt` diagnostic, its immediate exact deletion, and absence proof.
+  - [x] **ROOT CAUSE / POLICY** — Proved standard shell allocators were already routed after initialization while
+    direct Python `tempfile`, inherited `KM_OUTPUT`, mdBook destination overrides, and Python bytecode could bypass
+    that boundary. Preserved explicit caller inputs and inert privacy examples while denying project-owned output on an
+    external filesystem even when a caller requests it.
+  - [x] **FIX / RECURRING ORACLE** — Added `tools/run_python_project_data.sh`, retained Python bytecode, explicit
+    validated Unicode-generator scratch, generic Knowledge Map output validation, mdBook destination validation,
+    and `tools/test_tool_project_data_storage.sh`. The oracle locks all three/12/19 owner sets, real devices and
+    nonsymlink paths, rejected external/symlink destinations before creation, generated map/book/TAP/bytecode plus
+    conformance/oracle paths, cleanup, and outside-cwd use.
+  - [x] **DURABLE COMMAND / GUIDANCE MIGRATION** — All 177 maintained command references across 151 current
+    documents use the supported Python boundary; current mdBook commands use its wrapper; all three off-volume
+    reverify commands, the stale Lua fallback, and generic off-volume Knowledge Map example are removed. Historical
+    task/change evidence, inert fixtures, and nested-project records remain classified rather than rewritten.
+  - [x] **COPY / VERIFY / USE / DELETE** — The accidental `/tmp/linkedspec_2_6_inventory.txt` was deleted
+    immediately and proved absent. The pre-fix census found only the disposable 88-line/4,646-byte Julia audit
+    list; metadata, content, hash, and repository-reference checks proved ownership, the exact file was deleted,
+    and both frozen old-root censuses are zero. No retained tool payload required copy/hash migration.
+  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash/Python syntax, initializer/lifecycle, 35-boundary routing, storage
+    oracle, every affected Python contract, Knowledge Map 716/5,653, actual mdBook, conformance/TAP/oracle checks,
+    doctrines, whitespace, and zero-run proof pass. Canonical passes Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in
+    27.0s, primary 66x2, and Phase 0 1,031/1,031 in 624s.
+  - [x] **SIGNOFF / CLEAN PIVOT** — ADR/roadmaps/task/live/memory/Knowledge Map/mdBook are synchronized; this commit
+    lands at 32/300, clears the brief, leaves a clean exact old-data/run census, and does not push.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.3`
-  Status: `pending`
+  Status: `active`
   Goal: Close the exact existing-data migration with a complete residue audit.
   Depends on: `.2`
   Children: `.3.1`, `.3.2`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Reconcile every frozen source against its verified SSD destination and deletion record.
   Depends on: `.2.6`
   Acceptance: Re-run the frozen census; prove every exact LinkedSpec-owned source was moved, byte/count/hash checked
@@ -472,7 +504,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.2.6` | `active` | From the clean `.2.5` commit, inventory and root Python, shell, mdBook, Knowledge Map, conformance, and remaining tool artifacts on repository storage; migrate/delete exact old tool-owned data. |
+| `PROJECT-DATA-SSD-ROOTING.3.1` | `active` | From the clean `.2.6` commit, reconcile every frozen source, SSD destination, verification result, and exact deletion record; resolve any mismatch before closeout. |
 
 ## Decisions
 
@@ -514,6 +546,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable Dart storage fact: `docs/knowledge/dart-project-data-ssd-storage.md`
 - Durable Julia storage fact: `docs/knowledge/julia-project-data-ssd-storage.md`
 - Durable Lua storage fact: `docs/knowledge/lua-project-data-ssd-storage.md`
+- Durable tool storage fact: `docs/knowledge/tool-project-data-ssd-storage.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -555,6 +588,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.2.5` | Lua inventory, standalone/reused storage oracle, and exact old-root census | PASS: 13 owners; both two-module ABI sets build below a path containing a space; actual devices/non-symlinks/native parse/generated v2/trace/pre-create hostile-output rejection/cleanup proven; both initial and final old-root `linkedspec-lua-*` censuses zero |
 | 2026-07-26 | `.2.5` | complete Lua gate and 33-boundary hostile outside-cwd routing | PASS: PUC Lua 177/177; LuaJIT 177/177; primary 66x2; corpus 105/105; diagnostic/logical/root/cursor/identity/result consumers pass; every selected process reaches runtime preflight after routing; zero managed runs |
 | 2026-07-26 | `.2.5` | doctrines; Knowledge Map; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 715 facts/5,640 question keys; Rust semantic admission 1/1 in 77.68s; Dart 1/1; Julia 416/416 in 27.4s; primary 66x2; Phase 0 1,031/1,031 in 626s; zero managed runs |
+| 2026-07-26 | `.2.6` | inventory, Python/tool storage oracle, affected Python contracts, 35-boundary outside-cwd routing | PASS: exact 3 Python temp / 12 shell allocator / 19 Python entrypoint inventories; real bytecode/map/book/CLI/TAP/oracle storage; external and symlink outputs rejected before creation; zero managed runs |
+| 2026-07-26 | `.2.6` | current command/guidance migration and exact old-root deletion | PASS: 177 current Python-wrapper references across 151 documents; three old-volume reverify commands, stale Lua fallback, generic KM example, and bare current mdBook commands removed; exact 88-line/4,646-byte audit list deleted after classification; both old roots zero |
+| 2026-07-26 | `.2.6` | Knowledge Map; doctrines; task/memory; mdBook; whitespace; complete canonical | PASS: Knowledge Map 716 facts/5,653 question keys; Rust semantic admission 1/1 in 77.49s; Dart 1/1; Julia 416/416 in 27.0s; primary 66x2; Phase 0 1,031/1,031 in 624s; zero managed runs |
 
 ## Commit Log
 
@@ -568,7 +604,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.2` | `59c15453` — `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD` | Complete repo-local Cargo cache, 17-owner storage oracle, generated/trace/relocation proof, and full Rust gate. |
 | `.2.3` | `a8a73aa9` — `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD` | Canonical 47-package cache, 18-owner storage oracle, exact shared metadata deletion, and full Dart gate. |
 | `.2.4` | `ee1bb0c3` — `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
-| `.2.5` | `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` (this commit) | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
+| `.2.5` | `7942a5b4` — `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
+| `.2.6` | `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` (this commit) | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
 
 ## Changelog
 
@@ -610,3 +647,9 @@ accessing the shared copy, and remove only records or directories provably owned
   supported wrapper/gate, and the exact old Lua workspace census remains zero. The 33-boundary routing proof,
   both 177/177 backend suites, primary 66x2, corpus 105/105, affected cross-backend checks, and canonical signoff
   pass; `.2.6` becomes the clean Python/shell/book/Knowledge Map/conformance/tool storage frontier after commit.
+- `2026-07-26`: Completed `.2.6`; all three Python temp owners, 12 shell allocator owners, and 19 Python checker
+  entrypoints are frozen behind managed repository storage. Python bytecode, Knowledge Map, mdBook, conformance,
+  TAP, and oracle output are same-device validated; hostile external/symlink destinations are rejected before
+  creation; current commands use supported wrappers. The one exact disposable old audit list was classified and
+  deleted, both frozen old roots are zero, 35-boundary/focused/canonical proof passes, and `.3.1` becomes the clean
+  source/destination/deletion reconciliation frontier after commit.

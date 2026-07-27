@@ -13,7 +13,7 @@ date: 2026-07-20
 status: confirmed historical audit; override removal and public no-drift complete across all backends
 tags: [dsl, runtime, cursor, parse-mode, and-rule, or-rule, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.0 traced parser construction, compiled state, engines, primary commands, descriptors, generated execution, tests, and public docs across Perl/Rust/Dart/Julia/Lua. Exact primary probes over `Top::AND /x/` plus input `prefix x` return `hit` by default on Perl/Dart/Julia/Lua but null on Rust; explicit seek returns hit and explicit consume returns null on all five. Perl toolbox output proves the selected global mode was baked into every generated LinkedRE call. Rust compiler.rs derived Consume for AND and Seek otherwise, but ExecutionOptions could globally overwrite every compiled rule. The shared 62-case CLI matrix did not contain default-AND-leading-junk coverage. ADR 0044 adopts the recommendation; Perl .9.1.3 and Rust .9.1.4.2-.6 now implement intrinsic family policy and override removal."
-reverify: "rg -n 'FUTURE-PARITY-BACKLOG.9.1.0|Top::AND|ExecutionOptions::with_parse_mode|default parity defect' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md; python3 tools/check_rule_local_cursor_contract.py"
+reverify: "rg -n 'FUTURE-PARITY-BACKLOG.9.1.0|Top::AND|ExecutionOptions::with_parse_mode|default parity defect' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 ## Confirmed architecture at the audit boundary

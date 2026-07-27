@@ -18,7 +18,7 @@ date: 2026-07-21
 status: current corrected neutral contract; Perl, Rust, and Dart admitted
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.6, Rust .10.4.6, and Dart .10.5.6 each compose all 20 exact responses through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 81 mutations. Neutral rollout is 4 complete / 5 pending; native admission is 3 complete / 3 pending. Leaf .10.4.0.1 makes the checker require exact TOOLBOX output plus current runtime/admission claims, deny stale forms, and self-prove omission/wrong-value rejection."
-reverify: "python3 tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|RUNTIME OBSERVATION|COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|RUNTIME OBSERVATION|COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 # Semantic Introspection Neutral Contract

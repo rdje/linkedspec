@@ -13,7 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, codeblock, dynamic-scope, diagnostics, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.4.2 passes 146/146 on PUC Lua and LuaJIT. Focused tests prove both contextual spellings, current-frame reads/writes, outer restoration, result chaining, static helper/function precedence, and typed missing/harray/arity/recursion failures."
-reverify: "bash tools/run_lua_local.sh && python3 tools/check_callable_codeblock_contract.py"
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
 Lua normalizes attached `apply(value) { ... }` and parenthesized `apply(value, { ... })` blocks before ordinary

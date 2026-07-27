@@ -17,7 +17,7 @@ status: superseded by rust-root-rule-selection-routes
 supersedes: rust-root-rule-selection-preflight
 tags: [rust, root-rule, top-rule, markerless, validation, descriptor, diagnostics, strict-syntax, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 adds `CompiledSpec::resolve_entry_rule`, the single ordered resolver over source-ordered `CompiledRule` rows. Explicit selection wins, then the first authored `is_top`, then row zero; empty state returns `no_rules_defined`/`validate_spec`, and an unknown explicit label returns `entry_rule_not_found`/`select_entry_rule` before user code. Validation now accepts one-or-more-rule markerless sources. The parser deliberately returns an empty/comment-only AST so structural validation, not parsing, owns the portable zero-rule stage; non-rule garbage remains a parse error. Native legacy/default and value/explicit execution use the resolver and effective-entry accumulator semantics. Descriptor metadata publishes `entry_rule_contract = linkedspec-root-rule-selection-v1` while definition order and every authored `is_top` bit remain immutable. Strict-unused stays authored-edge-only. `rust-root-rule-selection-routes` supersedes the former pending-route statement after `.2.2`; rollout admission remains `.2.3`."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test root_rule_selection_core --test runtime_diagnostics && python3 tools/check_root_rule_selection_contract.py"
+reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test root_rule_selection_core --test runtime_diagnostics && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py"
 ---
 
 # Rust core root-rule selection

@@ -16,7 +16,7 @@ date: 2026-07-21
 status: current private compiled projection; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/GeneratedSource.pm; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.3.1.1
-reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t && python3 tools/check_semantic_introspection_contract.py && perl tools/check_generated_source_contract.pl
+reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && perl tools/check_generated_source_contract.pl
 ---
 
 `LinkedSpec::semantic_index(...)` now retains the corrected calls snapshot's complete private compiled projection.

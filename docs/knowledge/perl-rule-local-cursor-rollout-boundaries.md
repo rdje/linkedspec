@@ -21,7 +21,7 @@ date: 2026-07-18
 status: confirmed and admitted Perl live, descriptor-v1, generated-source-v2, API/CLI, and composed projection
 tags: [perl, dsl, cursor, parse-mode, bare-edge, generated-source, cli, rollout, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.3.1 implements normalization; .2 makes live/loaded handlers intrinsic; .3 projects descriptor v1; .4 emits generated-source v2; and .5 removes the API/CLI override while preserving 63x2. Admission .6 declares and executes 14 exact live default/AND, descriptor, emitted, generated direct/trace, loaded, mixed, recursive, structural, removal, primary, and diagnostic roles. The checker verifies every marker plus canonical registration, observes all eight portable codes, rejects 29 mutations, and advances only perl_reference for a 2/6 rollout. Inventory was 72 at Perl admission, grew to 74 at Rust execution, and is 73 after Rust descriptor migration retires token-free descriptor.rs."
-reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; python3 tools/check_rule_local_cursor_contract.py"
+reverify: "prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 The Perl rollout has six distinct implementation boundaries:
