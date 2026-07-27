@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.4.0` — staged syntax evidence must be converted back to typed compiler
+  authority before semantic projection): Lua's retained function `body_ast` looks like ActionIR JSON but is a plain
+  staged table with no typed `node_type`. Treating it as semantic authority would make a sidecar serialization the
+  schema and bypass registry-aware contract resolution. The safe seam is to reparse only retained exact
+  `body_source`, require its typed ActionIR JSON to equal the staged table, resolve against the accepted registry,
+  and project from that typed result. This remains compiler-side construction, not a second `.spec` parse or target
+  execution.
+
+  Source ownership differs by action owner. Function-body offsets are local decoded-scalar positions inside a
+  payload whose staged job retains its global scalar range. Compiled edge offsets are local to normalized code with
+  indentation removed, so arithmetic rebasing is wrong. Typed outer-before-inner traversal plus a bounded scanner
+  over the exact authored edge preserves occurrence identity while protecting quoted strings, regex literals,
+  comments, and nested delimiters. The existing source map then remains the only byte/scalar/line/column converter.
+
+  Generated semantic provenance likewise consumes retained immutable `SemanticGeneratedPlanInput`, validates all
+  rows against compiled order, and selects the unique entry row. Calling the emitter or inferring a family would
+  create a second authority and risk executing or exposing implementation state. These distinctions justify the
+  exact typed-core `.1` then staged/generated `.2` split inside the existing private projector.
+
 - 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.3` — a composition closeout should exercise committed owners, not
   create a second proof topology): Once source, compilation outcome, graph, and remaining static targets each have
   exact independent tests, parent closure is itself a no-change task. Re-running the four suites in their registered

@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.4.0 — freeze Lua call projection
+
+Completed the behavior-free authority audit for Lua functions, helpers, calls, bindings, staged function-body
+artifacts, and selected generated-plan provenance. The neutral `calls_and_staging` target is frozen as the existing
+6-record/6-relation static base, exact 18/16 typed core, and four-record/nine-relation completion to 22/25. All 22
+record roles, 25 relation directions, and nine distinct source ranges are enumerated before projector code.
+
+The plan uses retained merged authored definitions rather than rule-only compiled order; accepted registry state;
+reparsed typed function-body ActionIR only after exact equality to the staged JSON-compatible `body_ast`; compiled
+edge ActionIR/contracts; the existing strict UTF-8 source map; and retained immutable generated-v2 plan input.
+Edge-local normalized offsets are not global source offsets, so typed traversal drives bounded occurrence-safe
+correlation over exact authored members. Registered functions resolve before the narrow helper table, signatures
+preserve fixed/rest bounds, and conservative shapes never use target execution, trace text, descriptors, or sample
+values.
+
+Implementation remains in the existing private static projector: `.10.7.4.1` owns typed core 18/16,
+`.10.7.4.2` owns staged/generated completion to 22/25, and `.10.7.4.3` is no-change recomposition. No production,
+test, fixture, API, semantic query, observation, generated format, rollout, or native-admission behavior changes in
+this audit. The unchanged source/outcome/graph/remaining baseline passes at 379/122/64/122 on each Lua ABI.
+
+Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105, and repository-local storage proof.
+The primary matrix passes 5x2x66, the Unicode manifest passes 10/10, and all six governance ledgers remain exact.
+mdBook and Knowledge Map 724/5,766 pass. Canonical local CI passes all six doctrines, Rust admission 1/1 in 78.85
+seconds, Dart 1/1, Julia 416/416 in 28.4 seconds, relocated containment, moved-root execution, reference primary
+66x2, and Phase 0 1,031/1,031 in 647 seconds. Zero managed runs remain; reusable SSD caches are retained. Typed
+core `.10.7.4.1` is next after this 44th local batch commit, with no push.
+
 ## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.3 — close Lua static projection
 
 Closed Lua private static projection by recomposing only its committed owners from clean base `2a6f24c4`. No

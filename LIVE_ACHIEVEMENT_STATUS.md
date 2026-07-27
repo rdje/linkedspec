@@ -8,14 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.4.0` — after the clean `.10.7.3.3` commit, perform the behavior-free Lua
-  calls/staging/generated authority, source-correlation, host-fence, exact 22/25 ownership, and dependency-split
-  audit before implementation; continue PNT without pushing before 300.
+- `FUTURE-PARITY-BACKLOG.10.7.4.1` — after the clean behavior-free `.10.7.4.0` commit, extend the existing private
+  Lua projector with typed functions/helpers/calls/bindings, merged authored order, exact source correlation,
+  conservative shapes, and the exact non-staged 18/16 target on both ABIs; continue PNT without pushing before 300.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.4.0 — freeze Lua call projection**
+  (behavior-free authority/source/privacy audit from clean static closeout `700e8fdb`).
+
+  **Result:** The exact target is frozen as static 6/6 -> typed 18/16 -> staged/generated 22/25. Merged authored
+  definitions, accepted registry state, reparsed typed function ActionIR after staged JSON equality, compiled edge
+  ActionIR/contracts, strict source map, and retained generated-v2 input own construction. Nine exact ranges,
+  occurrence-safe Unicode correlation, function-before-helper resolution, conservative shapes, deliberate staging,
+  privacy/host denial, no execution, and `.1-.3` dependency order are fixed without behavior or ledger movement.
+
+  **Proof:** Lua source/outcome/graph/remaining 379/122/64/122 and package `1..177` pass per ABI; PUC primary
+  66x2/corpus 105, primary 5x2x66, Unicode 10/10, and six ledgers pass. mdBook/KM 724/5,766 and canonical six
+  doctrines, Rust 1/1 in 78.85s, Dart 1/1, Julia 416/416 in 28.4s, containment/moved-root proof, reference primary
+  66x2, and Phase 0 1,031/1,031 in 647s pass. Cadence advances to 44/300 with no push; typed core `.1` is next.
+
 - 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.3.3 — close Lua static projection**
   (no-change recomposition of the four committed private static suites from clean `2a6f24c4`).
 

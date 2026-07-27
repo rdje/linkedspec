@@ -2024,6 +2024,61 @@ leaf, `.10.7.4.0`, is a behavior-free authority audit for functions, helpers, ca
 generated-plan provenance, source correlation, and the exact 22-record/25-relation target. Public queries remain
 later `.10.7.5` work.
 
+#### Lua calls, staging, and generated authority plan
+
+Behavior-free `.10.7.4.0` freezes that target before projector code. The neutral `calls_and_staging` snapshot is
+exactly 22 records / 25 relations. The committed Lua static foundation supplies 6/6; typed functions, helpers,
+calls, bindings, decision, and explanation produce the exact non-staged 18/16 core; three staged artifacts and one
+selected generated artifact add four records and nine relations. The staged/generated relations are three
+function `contains`, five directed staging-chain edges, and one spec `generated_as` edge.
+
+Lua's retained authorities require three important distinctions:
+
+- `semantic_compilation_outcome.authored_definitions` already merges functions and rules by source position, while
+  `CompiledSpec.definition_order` and `compiled_rule_order` deliberately remain rule-only. The projected spec
+  definition order must use and source-validate the merged authority.
+- A function's retained `body_ast` is a plain staged JSON-compatible table, not typed ActionIR. The projector may
+  reparse only the already-retained exact `body_source`, require exact JSON equality to the staged result, resolve
+  contracts through the accepted registry, and then project from typed ActionIR. This is an integrity check, not a
+  second `.spec` parse or target execution.
+- Edge ActionIR spans are local to normalized action code with authored indentation removed. Adding those offsets
+  to the edge start is wrong: the neutral `normalize` call would become 61..84 instead of 78..101. Typed
+  outer-before-inner traversal therefore drives a bounded occurrence scanner over the authored edge, with strings,
+  regex literals, comments, and nested delimiters protected. Function-body spans instead map from the staged job's
+  retained global decoded-scalar body range through the existing source map after equality proof.
+
+All nine distinct neutral source ranges reproduce exactly, including shared-but-differently-keyed binding and
+normalize-call evidence. An interleaved `é` probe proves the same source map remains the sole conversion authority:
+its function body is scalar 68..87 but byte 69..89. Function-surface `return` is syntax, so only nested `trim` is a
+call; edge-surface `return` is the governed helper. Deterministic order is merged authored definitions, statement
+order, then outer call before nested arguments.
+
+Exact registered user functions resolve before the narrow `trim`, `match_text`, and `return` helper table.
+Signatures retain fixed or native variadic minimum/rest/unbounded-maximum facts. Conservative fixed-point shape
+inference uses typed literals, parameter and binding state, registered return shapes, and helper contracts;
+unsupported calls or cycles remain `unknown`.
+
+Native `function_definition` / `function_body` staging is deliberately mapped to neutral payload, parse-job, and
+result roles. A result becomes `succeeded` only after typed equality and contract proof. The retained immutable
+generated-v2 input then validates contract, format, caller logical identity, complete `Top/default`, `Done/default`
+order, and the unique selected entry row. The projector does not invoke the plan builder or emitter, infer a
+family, execute native/generated code, or retain generated Lua implementation text.
+
+Implementation remains in the existing private static projector. `.10.7.4.1` owns typed core 18/16 and a focused
+dual-ABI core suite; `.10.7.4.2` owns staged/generated completion to 22/25 and corruption/no-execution proof;
+`.10.7.4.3` is a no-change committed-owner closeout. The outward fence excludes caller paths, host/metatable
+identity, source and sidecar maps, AST/ActionIR, compiled regex, descriptors, implementation source, loaders,
+executors, sinks, trace/observation state, environment, clock, and randomness. No public query, observation API,
+generated format, rollout, or native admission moves in this plan. The unchanged source/outcome/graph/remaining
+baseline is 379/122/64/122 assertions on each Lua ABI.
+
+Plan signoff preserves that baseline under complete package `1..177` per ABI, PUC primary 66x2, corpus 105, and
+repository-local storage proof. Primary 5x2x66, Unicode 10/10, all six unchanged ledgers, mdBook, and Knowledge Map
+724/5,766 pass. Canonical CI passes six doctrines, Rust semantic admission 1/1 in 78.85 seconds, Dart 1/1, Julia
+416/416 in 28.4 seconds, relocated containment, moved-root execution, reference primary 66x2, and Phase 0
+1,031/1,031 in 647 seconds. Thus typed core `.10.7.4.1` is eligible only after this behavior-free audit commits
+cleanly.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's
@@ -2445,7 +2500,7 @@ The dependency order is:
 | `.10.7.3.2.0` | Lua source-ceiling boundary reconciliation | complete; full private authority, outward query redaction, no behavior change |
 | `.10.7.3.2.1` | Lua remaining static targets and isolation | complete; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clean canonical closeout |
 | `.10.7.3.3` | Lua committed static-owner recomposition | complete; dual-ABI four-suite composition and full signoff close `.10.7.3` without public query or replacement code |
-| `.10.7.4.0` | Lua calls/staging/generated authority audit | next; freeze source correlation, host fences, exact 22/25 ownership, and implementation split before code |
+| `.10.7.4.0` | Lua calls/staging/generated authority audit | complete plan; exact 6/6 -> 18/16 -> 22/25 split, typed/staged/generated authorities, source/host/privacy/no-execution fences frozen before code |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

@@ -4,6 +4,14 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
+Lua semantic introspection is currently private and additive. Unicode labels, opaque source/outcome, and all five
+static projection targets are composition-closed on PUC Lua and LuaJIT. Behavior-free audit `.10.7.4.0` now fixes
+the calls/staging/generated contract before code: committed static 6 records / 6 relations, typed non-staged core
+18/16, and full staged/generated target 22/25. It also fixes merged authored order, staged JSON equality before
+typed function ActionIR authority, occurrence-safe Unicode call correlation, registered-function-before-helper
+resolution, retained generated-v2 plan authority, and strict no-execution/privacy fences. Typed core `.10.7.4.1`
+is next; public query, runtime observation, rollout, and native admission remain later work.
+
 ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable
 neutral contract covers eight mode cases and ten special cases. Its ten-role Perl and

@@ -21,10 +21,13 @@ answers:
   - "what are the Lua semantic introspection implementation leaves"
   - "where is the Lua semantic static projection plan"
   - "how must Lua correlate semantic static source occurrences"
-date: 2026-07-25
-status: current authority map; source/outcome foundation composition-closed and static projection plan frozen
+  - "where is the Lua semantic calls staging and generated projection plan"
+  - "is Lua staged function body_ast typed ActionIR authority"
+  - "which Lua generated plan owns semantic provenance"
+date: 2026-07-27
+status: current authority map; static foundation composition-closed and calls staging generated plan frozen
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2.1-.3 now composition-close one opaque semantic_index source/outcome foundation while semantic records/query and typed observation remain absent. Exact implementation continues through static .3, calls/staging/generated .4, query .5, runtime observation .6, and byte-identical dual-ABI admission .7."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. Behavior-free .10.7.4.0 freezes exact calls/staging/generated authority before implementation."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
@@ -69,12 +72,19 @@ exact caller error before generic translation, independently of diagnostic and t
 
 Implementation is dependency-ordered under `FUTURE-PARITY-BACKLOG.10.7`: Unicode prerequisite `.1`; opaque
 source/outcome `.2`; private static `.3`; calls/staging/generated `.4`; immutable typed/raw-neutral query `.5`;
-typed runtime observation `.6`; and one byte-identical ordered dual-ABI admission consumer `.7`. The audit changes
-no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
+typed runtime observation `.6`; and one byte-identical ordered dual-ABI admission consumer `.7`. The calls audit
+freezes the exact neutral 22-record/25-relation target as the committed 6/6 static base, an 18/16 typed core, and a
+four-record/nine-relation staged/generated completion. Merged `authored_definitions`, accepted registry state,
+reparsed typed function-body ActionIR after staged JSON equality, compiled edge ActionIR/contracts, the strict
+source map, and retained immutable generated-v2 plan are the authorities. Staged `body_ast` is an integrity witness,
+not typed authority; local edge ActionIR offsets cannot be added to authored member starts; registered functions
+resolve before the narrow helper table; and construction may not execute target or generated code. The audit
+changes no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
-[[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]], and
-[[lua-semantic-static-projection-plan]]. Static planning fixes five exact targets and the parsed-line plus compiled-
-occurrence correlation rule before projector code: local ActionIR offsets and short body-element fragments are not
-neutral source coordinates, compiler parent matchers are not automatically target regex slots, repeated lifecycle
-markers need occurrence ids, and Lua-native `Default` repetition must normalize to neutral non-repetition.
+[[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]],
+[[lua-semantic-static-projection-plan]], and [[lua-semantic-call-staged-projection-plan]]. Static planning fixes
+five exact targets and the parsed-line plus compiled-occurrence correlation rule before projector code: local
+ActionIR offsets and short body-element fragments are not neutral source coordinates, compiler parent matchers are
+not automatically target regex slots, repeated lifecycle markers need occurrence ids, and Lua-native `Default`
+repetition must normalize to neutral non-repetition.

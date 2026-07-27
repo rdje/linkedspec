@@ -5,6 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-27`
+- `2026-07-27` Lua semantic calls authority audit: behavior-free `FUTURE-PARITY-BACKLOG.10.7.4.0` freezes the
+  neutral `calls_and_staging` target as committed static 6/6, typed non-staged core 18/16, and staged/generated
+  completion 22/25. Existing merged `authored_definitions`, accepted registry state, reparsed typed function-body
+  ActionIR only after exact staged JSON equality, compiled edge ActionIR/contracts, strict source map, and retained
+  immutable generated-v2 input own construction. Edge-local normalized spans require bounded authored occurrence
+  correlation; an interleaved multibyte probe keeps scalar and byte authority distinct. Function resolution
+  precedes the narrow helper table, shapes remain conservative, native staging normalizes deliberately, and target/
+  generated execution plus host/private implementation state are denied. Implementation stays in the current
+  package-private projector as exact typed `.1`, staged/generated `.2`, and no-change closeout `.3`; no public
+  query, observation, format, rollout, or admission changes in the audit. Unchanged Lua 379/122/64/122 and package
+  177 pass per ABI; primary 5x2x66, Unicode 10/10, six ledgers, mdBook/KM 724/5,766, and canonical Rust 78.85s +
+  Dart 1/1 + Julia 416/28.4s + reference primary 66x2 + Phase 0 1,031/647s complete signoff. Typed core `.1` is
+  the clean next owner.
 - `2026-07-27` repository-relocation closeout: `REPO-ROOT-PATH-PORTABILITY.2.2` completes ADR `0052`. A new Rust
   integration test copies the freshly built primary into a synthetic moved repository, proves executable ancestry
   outranks a conflicting ambient repository by exact named-spec output, and turns missing moved-root topology into
