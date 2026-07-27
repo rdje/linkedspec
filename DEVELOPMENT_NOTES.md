@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.5` — close storage with independent composition, not accumulated claims):
+  Per-family migration and enforcement proofs are necessary but do not establish final system state by themselves.
+  Closeout must compose a fresh old-root census, retained-copy inventory, same-device destination check, every
+  backend gate, every maintained variant matrix, process containment, and canonical CI in one leaf. The post-proof
+  census is what distinguishes a historical cleanup from a supported workflow that silently recreated old data.
+
+  “Offline dependency resolution” names network behavior, not a storage location. Julia resolves all five locked
+  package trees without network access from the repository-local writable depot on the SSD; only the installed
+  interpreter and Julia-managed read-only system depots remain external host-toolchain dependencies. Documentation
+  must state both dimensions so “offline” cannot be misread as permission for an off-volume cache.
+
+
 - 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.4.2` — contain processes to discover hidden state before granting
   exceptions): Environment variables and tracked-text scans can prove intended destinations but cannot show every
   access performed by a tool before it honors those variables. `fs_usage` and `dtruss` require root on the current

@@ -286,6 +286,15 @@ also exposed Dart's implicit developer-HOME telemetry read and Apple's `cc` shim
 local Dart wrapper and direct Apple-clang native build remove both. All six doctrines, all six storage oracles, the
 eight affected parity drivers, and the process oracle pass. Enforcement parent `.4` is complete.
 
+Final closeout `.5` reruns every backend local gate and the complete maintained variant-parity surface from the
+repository-local stores. Primary CLI parity is 660/660 across five backends, two option environments, and 66
+cases; the self-hosted Unicode manifest is 10/10; diagnostic, logical, root, cursor, duplicate-slot,
+repeated-action, punctuation-light, and six-runtime 55-case scalar/numeric matrices all pass. A fresh pre/post
+proof again finds zero LinkedSpec candidate in either off-repository operating-system temporary root, zero shared
+Dart/Julia checkout metadata, and every named obsolete root absent. The retained Perl/Julia migration inventories
+remain exact, all six canonical roots share the repository device, and canonical CI passes Phase 0 1,031/1,031.
+`PROJECT-DATA-SSD-ROOTING` is therefore complete; repository-relocation closeout is the next architecture action.
+
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:
 
@@ -298,8 +307,11 @@ and exports `TMPDIR`/`TMP`/`TEMP`, Cargo home/target, Dart package cache and Dar
 bytecode-cache variables. A caller
 override is preserved only when GNU/BSD filesystem-device checks prove its resolved directory is on the repository
 filesystem; otherwise the corresponding repo-derived default replaces it without writing to the rejected path.
-The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. The
-helper works when sourced from outside the checkout.
+The Julia default includes the writable local depot plus runtime system depots, not a developer-home depot. In
+this project, “offline Julia resolution” means the five locked package source trees and writable package state are
+resolved without network access from `/.linkedspec-data/cache/julia-depot/` on the repository filesystem. The
+externally installed Julia executable and its read-only system depots remain strictly necessary host-toolchain
+dependencies, not project data. The helper works when sourced from outside the checkout.
 
 Routing `.1.2` makes the pre-commit hook, doctrine and Knowledge Map scripts, canonical Perl gate, Rust/Dart/Julia/
 Lua local gates, and `tools/run_mdbook_local.sh` initialize that environment themselves before starting a runtime or

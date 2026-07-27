@@ -165,6 +165,13 @@ boundary for storage locality.
   input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes must all emit local traces or bytecode. Retained
   mutations reject an external write, shared-cache read, symlink escape, and incomplete probe set, while any denied
   access or `xcrun_db-` attempt makes the otherwise successful driver fail.
+- Final closeout reruns all backend local gates and the complete maintained supported-variant surface. Primary CLI
+  behavior is 660/660 across five backends and two option environments; the Unicode self-hosted manifest is 10/10;
+  diagnostic, logical, root, cursor, duplicate-slot, repeated-action, punctuation-light, and six-runtime
+  scalar/numeric matrices pass. A fresh post-proof census again finds zero old-volume candidate or shared
+  Dart/Julia identity, every named obsolete root absent, exact retained Perl/Julia inventories, six same-device
+  canonical roots, no Julia usage metadata, and zero managed runs. Canonical local CI passes Phase 0 1,031/1,031.
+  Migration, residue retirement, structural/process enforcement, and closeout are complete.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
@@ -181,5 +188,6 @@ boundary for storage locality.
 - Lua storage: `docs/knowledge/lua-project-data-ssd-storage.md`
 - Tool storage: `docs/knowledge/tool-project-data-ssd-storage.md`
 - Process locality: `docs/knowledge/project-data-process-locality-proof.md`
+- Final closeout: `docs/knowledge/project-data-ssd-storage-closeout.md`
 - Local verification: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - Doctrine registry: `DOCTRINE_ENFORCEMENT.md`

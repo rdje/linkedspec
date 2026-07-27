@@ -8,7 +8,7 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Critical project-data locality lane: ADR `0053` plus `PROJECT-DATA-SSD-ROOTING` require every project-owned
+Completed critical project-data locality lane: ADR `0053` plus `PROJECT-DATA-SSD-ROOTING` require every project-owned
 artifact, cache, package depot, log, and temporary workspace to live on the repository filesystem. Runtime roots
 derive from the current checkout; cross-volume reads are limited to explicit caller paths and documented strictly
 necessary external tool/OS dependencies. Planning `.0` freezes 67 retained temporary directories/135,756 KiB,
@@ -50,7 +50,9 @@ DATA-STORAGE` doctrine across current tracked storage/command surfaces. Process 
 rejected/accepted cases and 38 routed entrypoints, gives Dart a repository-local child HOME, and kernel-contains a
 relocated checkout running real Perl/Rust/Dart/Julia/Lua/tool probes from an outside-filesystem cwd. Mutations reject
 external writes, shared-cache reads, symlink escapes, incomplete probes, denied-access diagnostics, and Apple
-`xcrun_db-` writes. Parent `.4` is complete; final closeout `.5` is next.
+`xcrun_db-` writes. Parent `.4` is complete. Final `.5` passes every backend local gate, primary 660/660, Unicode
+10/10, every maintained focused parity matrix, six-runtime scalar numeric 55/55, canonical Phase 0 1,031/1,031,
+and a fresh zero-residue pre/post census with exact retained-copy and same-device proof. The tree is complete.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current
@@ -63,7 +65,7 @@ network command/input ownership. The initial 12 Julia fact-card commands `.1.3` 
 `PROJECT-DATA-SSD-ROOTING.2.4` now routes all 88 current Julia reverify cards through self-rooted managed wrappers
 and removes disposable usage metadata containing runtime absolute paths. Ordered remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` now scans tracked parent text, self-tests 14 reject/accept classes, and locks all five
-primary runtime anchors through E3/E4. Closeout `.2.2` is paused behind `PROJECT-DATA-SSD-ROOTING.5`. Explicit
+primary runtime anchors through E3/E4. Closeout `.2.2` is next after completed `PROJECT-DATA-SSD-ROOTING.5`. Explicit
 caller paths and OS/tool data remain valid; project-owned temporary/cache state must use the repository filesystem.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.

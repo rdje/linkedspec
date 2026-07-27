@@ -10,7 +10,7 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Project-data storage locality is the critical active architecture lane (ADR `0053`, task tree
+Project-data storage locality is a completed critical architecture lane (ADR `0053`, task tree
 `PROJECT-DATA-SSD-ROOTING`). Every project-owned build product, generated output, cache, package depot, log,
 trace, and temporary workspace must reside on the repository filesystem; durable paths remain root-relative and
 runtime storage roots derive from the current checkout. Cross-volume reads are forbidden by default and retained
@@ -59,9 +59,11 @@ code/config/test/tool and command-guidance surfaces. Process leaf `.4.2` extends
 38 hostile-routed boundaries, repository-local Dart HOME, and a kernel-contained relocated checkout proof for real
 Perl/Rust/Dart/Julia/Lua/tool I/O. External-write, shared-cache-read, symlink-escape, incomplete-probe, denied-access,
 and Apple `xcrun_db-` mutations fail; all six storage oracles and eight affected parity drivers pass. Parent `.4`
-is complete and closeout `.5` is next.
-The path-portability closeout is paused behind this storage-locality tree so it can prove both
-relocation and same-filesystem project IO together.
+is complete. Final closeout `.5` passes all backend local gates, primary 660/660, Unicode 10/10, every maintained
+diagnostic/logical/root/cursor/duplicate/repeated/punctuation matrix, six-runtime scalar numeric 55/55, canonical
+Phase 0 1,031/1,031, and a fresh zero old-volume residue census with exact retained inventories. The storage tree
+is complete. Path-portability closeout `.2.2` is the next clean-pivot action so relocation and same-filesystem
+project IO are proved together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
 `REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool
@@ -77,7 +79,7 @@ were made path-portable in `.1.3`; storage leaf `PROJECT-DATA-SSD-ROOTING.2.4` n
 reverify cards onto self-rooted managed wrappers and removes disposable usage metadata containing runtime absolute
 paths. Remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` is complete with one read-only tracked-text scan, 14 classifier self-tests, and all five
-primary runtime-anchor locks. Closeout `.2.2` remains pending behind `PROJECT-DATA-SSD-ROOTING.5`. Caller-owned
+primary runtime-anchor locks. Closeout `.2.2` is next after the completed `PROJECT-DATA-SSD-ROOTING.5`. Caller-owned
 absolute input paths, URLs, and external OS/tool paths remain legal when explicit; project-owned scratch and
 caches may not default to their filesystem.
 

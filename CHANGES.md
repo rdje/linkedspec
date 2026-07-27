@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.5 — close SSD storage migration
+
+Closed the repository-filesystem storage migration after a fresh full-system proof. Both runtime-derived
+off-repository operating-system temporary roots contain zero bounded LinkedSpec candidate; shared Dart active-root
+and Julia usage metadata contain zero LinkedSpec file; all named obsolete paths are absent. No old data had
+reappeared, so closeout had zero deletion targets and left unrelated shared caches untouched. Retained migration
+copies remain exact at Perl 65 directories / 17 files / 1,590 bytes and Julia 346/256/133,963,036 plus
+24/15/4,284,303. Cargo, Dart package/home, Julia writable depot, Python bytecode, and Rust target roots all share
+the repository device; canonical Julia usage metadata is absent; zero managed runs remain.
+
+Every backend local gate passes: Rust core 193/runtime 149/corpus and generated classifier 105 each/integration
+197/semantic 1; Dart format/analyze/337/corpus 105; Julia 9,297/corpus 105; and PUC Lua plus LuaJIT 177 each with
+storage proof. The complete parity run passes primary 660/660, Unicode self-hosted 10/10, all maintained
+diagnostic/logical/root/cursor/duplicate/repeated/punctuation boundaries, and scalar numeric 55/55 across six
+runtimes. Canonical local CI passes Rust 1/1 in 80.02 seconds, Dart 1/1, Julia 416/416 in 28.3 seconds, primary
+66/66 twice, relocated containment, and Phase 0 1,031/1,031 in 638 seconds. ADR, roadmaps, task/live docs,
+Knowledge Map, and mdBook now describe the completed state. Cadence advances to 38/300; no push occurs.
+
 ## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.4.2 — prove SSD-local project writes
 
 Added `tools/test_project_data_process_locality.sh` as the recurring macOS process-level complement to the

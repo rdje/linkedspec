@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-27`
+- `2026-07-27` repository-storage closeout: `PROJECT-DATA-SSD-ROOTING.5` completes ADR `0053` migration,
+  reconciliation, and recurring enforcement. Fresh pre/post censuses find zero LinkedSpec candidate in either
+  off-repository OS temporary root, zero shared Dart/Julia identity, every obsolete path absent, exact retained
+  Perl/Julia inventories, six same-device canonical roots, and zero managed runs. Complete backend gates pass;
+  primary CLI parity is 660/660, Unicode self-hosted parity is 10/10, every maintained focused five-backend matrix
+  passes, and scalar/numeric parity is 55/55 across six runtimes. Canonical passes Rust semantic admission 1/1 in
+  80.02s, Dart 1/1, Julia 416/416 in 28.3s, primary 66x2, relocated containment, and Phase 0 1,031/1,031 in 638s.
+  `REPO-ROOT-PATH-PORTABILITY.2.2` is the next clean-pivot architecture action.
 - `2026-07-27` repository-storage process refresh: `PROJECT-DATA-SSD-ROOTING.4.2` completes the enforcement parent.
   The structural `PROJECT-DATA-STORAGE` doctrine now has 28 mutation-sensitive cases and 38 outside-cwd routed
   boundaries. `tools/test_project_data_process_locality.sh` creates a collision-safe relocated checkout view under

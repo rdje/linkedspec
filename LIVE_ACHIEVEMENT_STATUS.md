@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.5` — after the clean `.4.2` commit, freeze the final closeout acceptance matrix and
-  prove implementation, existing-data residue, structural/process enforcement, documentation, and roadmap
-  agreement. `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind this storage closeout.
+- `REPO-ROOT-PATH-PORTABILITY.2.2` — activate only after the clean `PROJECT-DATA-SSD-ROOTING.5` closeout commit;
+  compose checkout relocation with the completed repository-filesystem storage environment.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **PROJECT-DATA-SSD-ROOTING.5 — close SSD storage migration**
+  (fresh zero-residue census, every backend gate, complete variant parity, canonical and public closeout).
+
+  **Result:** Both off-repository OS temporary roots, shared Dart/Julia identity metadata, and every named obsolete
+  path remain empty after the complete proof; there are zero deletion targets. Retained Perl and Julia migration
+  inventories are exact, all six canonical roots share the repository device, Julia's disposable usage metadata is
+  absent, and zero managed runs remain. The ADR `0053` tree is complete.
+
+  **Proof:** Rust, Dart, Julia, PUC Lua, and LuaJIT complete local gates pass. Primary parity is 660/660, Unicode
+  self-hosted parity 10/10, all maintained diagnostic/logical/root/cursor/duplicate/repeated/punctuation matrices
+  pass, and scalar numeric is 55/55 across six runtimes. Canonical passes Rust 1/1 in 80.02s, Dart 1/1, Julia
+  416/416 in 28.3s, primary 66x2, relocated containment, and Phase 0 1,031/1,031 in 638s. Cadence advances to
+  38/300 with no push; path-portability `.2.2` is next after the clean commit.
+
 - 2026-07-27: **PROJECT-DATA-SSD-ROOTING.4.2 — prove SSD-local project writes**
   (relocated six-family kernel containment, targeted Dart HOME, direct macOS clang, 28 structural cases,
   38 routed boundaries, complete canonical signoff).

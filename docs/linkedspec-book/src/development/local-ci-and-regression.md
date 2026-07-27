@@ -1110,6 +1110,46 @@ doctrines, and zero managed runs. The complete canonical gate passes Rust semant
 Dart 1/1, Julia 416/416 in 27.2 seconds, both 66-case primary environments, the nested relocated containment
 proof, and Phase 0 1,031/1,031 in 620 seconds.
 
+### Final storage closeout
+
+Closeout leaf `PROJECT-DATA-SSD-ROOTING.5` independently recomposes the complete contract instead of treating the
+per-family results above as sufficient. A fresh census before and after all backend and parity work resolves the
+system and per-user OS temporary roots at runtime. Both are on another filesystem and both contain zero bounded
+LinkedSpec-identifying top-level entry. The shared Dart active-root and Julia manifest-usage surfaces contain zero
+LinkedSpec file; `rust/target/project-data-ssd-rooting/`, the old `/private/tmp` Julia depot, and the old temporary
+audit list are absent. No exact owner reappeared, so closeout deletes zero external path and leaves ambiguous shared
+caches untouched.
+
+The retained migration copies remain exact: Perl is 65 directories / 17 files / 1,590 bytes; Julia is
+346 directories / 256 files / 133,963,036 bytes plus 24 directories / 15 files / 4,284,303 bytes. Cargo home, Dart
+package cache, Dart child home, Julia writable depot, Python bytecode cache, and Rust target all have the same
+filesystem device as the current repository. The canonical Julia depot retains no `manifest_usage.toml`, and the
+managed-run census is zero.
+
+Julia “offline resolution” is specifically network-free dependency resolution from the repository-relative
+`/.linkedspec-data/cache/julia-depot/` writable depot. All five locked external package source trees live there on
+the repository filesystem. The Julia executable and Julia-managed read-only system depots are externally installed
+host-toolchain resources; they are strictly necessary reads, not LinkedSpec package or project-data stores.
+
+The complete backend proof passes Rust core 193, runtime 149, corpus 105, generated classifier 105, integration
+197, semantic admission 1/1, storage, and primary 66x2; Dart format/analyze, 337 tests, storage, primary 66x2, and
+corpus 105; Julia 9,297 assertions, storage, primary process proof, and corpus 105; and PUC Lua plus LuaJIT 177
+tests each, storage, PUC primary 66x2, and corpus 105. The maintained variant matrix then passes:
+
+- primary CLI: 660/660 across five backends, default/POSIX environments, and 66 cases;
+- self-hosted Unicode manifest: 10/10 across the same ten backend/environment legs;
+- diagnostic and logical selected primary cases: 10/10 each;
+- root-rule selection: 60/60; rule-local cursor: 50/50;
+- duplicate-slot and repeated-action selected primary cases: 10/10 each;
+- punctuation-light: complete across all five backends and both Lua ABIs;
+- scalar/numeric: 55/55 across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+
+Each focused matrix also passes its maintained native, generated, descriptor or trace, capability, support, and
+corpus boundaries as applicable. Final canonical CI passes all six doctrines, Rust semantic admission 1/1 in
+80.02 seconds, Dart 1/1, Julia 416/416 in 28.3 seconds, Perl primary 66/66 twice, relocated process containment,
+and Phase 0 1,031/1,031 in 638 seconds. This closes ADR `0053` storage migration and makes repository-relocation
+closeout the next architecture action.
+
 ## CI input areas
 
 The local gate treats these as CI inputs:

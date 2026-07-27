@@ -2,10 +2,10 @@
 
 ## Metadata
 
-- Status: `active`
+- Status: `completed`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-27` (`.4.2` process proof and enforcement parent `.4` complete; `.5` next after clean commit)
+- Last updated: `2026-07-27` (`.5` closeout complete; tree closed at 38/300 without push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -633,7 +633,7 @@ accessing the shared copy, and remove only records or directories provably owned
     Phase 0 1,031/1,031 in 620s. Commit at 37/300, clear the brief, and do not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.5`
-  Status: `pending`
+  Status: `done` (2026-07-27; complete backend/parity/census/canonical/public closeout)
   Goal: Close the migration with complete documentation, census, and regression proof.
   Depends on: `.4`
   Acceptance: Run all backend local gates, five-backend matrices, mdBook, Knowledge Map, doctrines, and canonical
@@ -642,11 +642,44 @@ accessing the shared copy, and remove only records or directories provably owned
     `REPO-ROOT-PATH-PORTABILITY.2.2`; commit, clear the brief, verify clean, and do not push.
   Commit: `PROJECT-DATA-SSD-ROOTING.5 - close SSD storage migration`
 
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.4.2` commit `8e341068`, empty commit brief, zero managed
+    runs, and 37/300 local commits with no push; froze this checklist before any closeout census or documentation
+    change.
+  - [x] **FRESH PRE/POST RESIDUE CENSUS** — Runtime-derived pre- and post-proof censuses confirm both off-repository
+    operating-system temporary roots contain zero bounded LinkedSpec candidate, shared Dart active-root and Julia
+    usage metadata contain zero LinkedSpec file, every named obsolete root is absent, and there are zero deletion
+    targets. Unrelated/shared data remains untouched. Retained Perl 65/17/1,590 and Julia
+    346/256/133,963,036 plus 24/15/4,284,303 inventories stay exact; six canonical roots share the repository
+    device; canonical Julia usage metadata is absent; zero runs remain.
+  - [x] **RETAINED DESTINATION / ENFORCEMENT HEALTH** — Frozen retained Perl/Julia inventories and all six canonical
+    roots remain exact/same-device. Environment, marker-v2 lifecycle, 38 routes, Perl 24, Rust 17/195, Dart 18/47,
+    Julia 17/5, Lua 13/dual-ABI, tool writers, 28 structural cases, relocated six-family kernel containment, its
+    four negative controls, and zero-run cleanup pass.
+  - [x] **ALL BACKEND LOCAL GATES** — Complete Rust passes core 193, runtime 149, corpus/generated 105 each,
+    integration 197, semantic admission 1/1 in 78.12s, storage, and primary 66x2. Dart passes format/analyze, 337,
+    storage, primary 66x2, and corpus 105. Julia passes 9,297, storage, primary process proof, and corpus 105.
+    PUC Lua and LuaJIT each pass 177 plus storage; PUC primary 66x2 and corpus 105 pass; zero runs remain.
+  - [x] **COMPLETE VARIANT-PARITY MATRIX** — Both five-backend primary manifests pass: the complete 66-case
+    default/POSIX matrix is 660/660 and the Unicode self-hosted manifest is 10/10. All seven maintained
+    diagnostic/logical/root/cursor/duplicate-slot/repeated-action/punctuation matrices pass their native,
+    generated, public, capability, and corpus boundaries; their selected primary cases are respectively
+    10/10, 10/10, 60/60, 50/50, 10/10, 10/10, and the complete maintained punctuation boundary. The six-runtime
+    scalar-numeric matrix is 55/55.
+  - [x] **CANONICAL / PUBLIC GATES** — Canonical passes all six doctrines, Rust semantic 1/1 in 80.02s, Dart 1/1,
+    Julia 416/416 in 28.3s, primary 66x2, relocated containment, and Phase 0 1,031/1,031 in 638s. mdBook and
+    Knowledge Map 722/5,724 pass; final doctrines, memory, whitespace, task metadata, and current-document no-drift
+    pass after complete backend/matrix proof.
+  - [x] **LOCKSTEP / CLEAN CLOSE** — ADR/roadmaps/task/live/change/development/memory/Knowledge facts and public book
+    carry the exact final results. This tree closes; `REPO-ROOT-PATH-PORTABILITY.2.2` is the next clean-pivot action;
+    this commit lands at 38/300, the brief is cleared, the tree and runs are clean, and no push occurs.
+
 ## Current Frontier
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.5` | `pending` | After the clean `.4.2` commit, freeze `.5` closeout acceptance and run the complete final matrix/census. |
+| — | — | Tree complete; resume `REPO-ROOT-PATH-PORTABILITY.2.2` only after the clean `.5` commit. |
 
 ## Decisions
 
@@ -673,7 +706,7 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Thirty-six standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Thirty-eight standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Structural storage enforcement governs current executable/configuration owners and maintained commands, while
   cumulative history remains evidence rather than an executable default. Sink/default context—not a bare absolute
@@ -761,6 +794,16 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.4.1` | six-doctrine registry and hostile outside-cwd workflow routing | PASS: `PROJECT-DATA-STORAGE` registered exactly once through the E3/E4 driver; all six doctrines pass; 36 standard routes initialize repository storage |
 | 2026-07-26 | `.4.1` | all six backend/tool storage oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, and tool writers; zero managed runs |
 | 2026-07-26 | `.4.1` | Knowledge Map; memory; six doctrines; mdBook; whitespace | PASS: Knowledge Map 720 facts/5,695 question keys; memory 60 lines; no canonical rerun warranted for structural-checker/current-guidance scope after complete `.3.1.2` canonical plus every affected storage oracle |
+| 2026-07-27 | `.4.2` | relocated six-family kernel containment and deterministic negative controls | PASS: exact caller-input/Dart/Julia/Lua/Perl/Rust/tool set writes five traces plus Python bytecode below the relocated root; external write, shared Cargo read, symlink escape, missing family, denied diagnostic, and `xcrun_db-` controls reject |
+| 2026-07-27 | `.4.2` | structural/routing/storage/affected-parity proof | PASS: 28 classifier cases; 38 routes; all six storage oracles; eight affected multi-backend drivers; zero managed runs |
+| 2026-07-27 | `.4.2` | Knowledge Map; memory; six doctrines; mdBook; whitespace; complete canonical | PASS: Knowledge Map 721/5,713; Rust 1/1 in 78.09s; Dart 1/1; Julia 416/416 in 27.2s; primary 66x2; nested containment; Phase 0 1,031/1,031 in 620s |
+| 2026-07-27 | `.5` | fresh pre-proof runtime-derived census and retained destination inventory | PASS: both off-repository temp roots zero; shared Dart/Julia metadata zero; named obsolete roots absent; zero deletion targets; retained Perl 65/17/1,590 and Julia 346/256/133,963,036 plus 24/15/4,284,303; six canonical roots share repository device; zero runs |
+| 2026-07-27 | `.5` | environment/lifecycle/routing, six storage oracles, structural and relocated process enforcement | PASS: marker-v2 lifecycle; 38 routes; Perl 24, Rust 17/195, Dart 18/47, Julia 17/5, Lua 13/dual ABI, tool writers; 28 cases; exact six-family contained process set plus four REDs; zero runs |
+| 2026-07-27 | `.5` | complete Rust/Dart/Julia/dual-ABI Lua local gates | PASS: Rust core 193/runtime 149/corpus 105/classifier 105/integration 197/semantic 1 in 78.12s/primary 66x2; Dart 337/primary 66x2/corpus 105; Julia 9,297/primary process/corpus 105; PUC Lua and LuaJIT 177 each, PUC primary 66x2/corpus 105; all storage legs and zero runs pass |
+| 2026-07-27 | `.5` | complete maintained supported-variant parity matrix | PASS: primary default/POSIX 660/660; Unicode self-hosted 10/10; diagnostic 10/10; logical 10/10; root 60/60; cursor 50/50; duplicate 10/10; repeated 10/10; punctuation complete across five backends and both Lua ABIs; scalar numeric 55/55 across six runtimes; every native/generated/public/capability/corpus boundary passes |
+| 2026-07-27 | `.5` | fresh post-proof runtime-derived census and retained destination inventory | PASS: both off-repository temp roots zero; shared Dart/Julia metadata zero; named obsolete roots absent; zero deletion targets; retained Perl 65/17/1,590 and Julia 346/256/133,963,036 plus 24/15/4,284,303; six canonical roots share repository device; canonical Julia usage metadata absent; zero runs |
+| 2026-07-27 | `.5` | complete canonical local CI | PASS: all six doctrines; Rust semantic admission 1/1 in 80.02s; Dart 1/1; Julia 416/416 in 28.3s; Perl primary 66/66 default plus 66/66 POSIX; relocated process containment; Phase 0 1,031/1,031 in 638s; local CI gate passed |
+| 2026-07-27 | `.5` | final Knowledge Map, mdBook, doctrines, memory, task metadata, whitespace, and zero-run closeout | PASS: Knowledge Map 722 facts/5,724 question keys; public book rendered to validated repository storage; all six doctrines and current-document gates pass; zero managed runs |
 
 ## Commit Log
 
@@ -779,7 +822,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.3.1.1` | `7efd48b6` — `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
 | `.3.1.2` | `f471d5f3` — `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants` | Marker-v2 process-group lifecycle, normal/orphan descendant safety, group signals, conservative recovery, and canonical proof. |
 | `.3.2` | `5f603104` — `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data` | Independent zero residue, zero deletions, exact retained-copy inventory, six destination oracles, and post-use zero proof. |
-| `.4.1` | `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality` (this commit) | Structural storage doctrine, 22 classifier cases, nine current-command remediations, six-doctrine registry, and 36-boundary routing. |
+| `.4.1` | `ae3b64f2` — `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality` | Structural storage doctrine, 22 classifier cases, nine current-command remediations, six-doctrine registry, and 36-boundary routing. |
+| `.4.2` | `8e341068` — `PROJECT-DATA-SSD-ROOTING.4.2 - prove SSD-local project writes` | Relocated six-family kernel containment, targeted Dart HOME, direct macOS clang, 28 structural cases, 38 routes, and canonical proof. |
+| `.5` | `PROJECT-DATA-SSD-ROOTING.5 - close SSD storage migration` (this commit) | Fresh zero residue, every backend gate, complete maintained parity, canonical/public proof, and tree closeout. |
 
 ## Changelog
 
@@ -845,3 +890,11 @@ accessing the shared copy, and remove only records or directories provably owned
   executable/configuration owners and maintained commands with 22 mutation-sensitive classifier cases. Nine unsafe
   Toolbox diagnostic paths moved to repository-derived scratch. All six doctrines, 36-boundary outside-cwd routing,
   and every backend/tool storage oracle pass with zero runs; process proof `.4.2` becomes the clean frontier.
+- `2026-07-27`: Completed `.4.2`; a relocated six-family macOS kernel-containment oracle rejects external writes,
+  shared-cache reads, symlink escapes, missing probes, and denied diagnostics. Dart uses a repository-local child
+  HOME; Lua native builds bypass the stateful Apple `cc` shim. Twenty-eight structural cases, 38 routed boundaries,
+  all storage oracles, eight affected parity drivers, and canonical pass; final closeout `.5` becomes active.
+- `2026-07-27`: Completed `.5`; fresh pre/post censuses remain zero, retained migration inventories and all six
+  same-device canonical roots stay exact, every backend gate and maintained variant matrix passes, and canonical/
+  public signoff is green. The storage migration tree closes at 38/300 without push;
+  `REPO-ROOT-PATH-PORTABILITY.2.2` is the next action after this clean commit.
