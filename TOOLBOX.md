@@ -413,19 +413,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.4.2 `tools/project_data_run.sh` — per-run scratch lifecycle
 
 - **WHAT:** a foreground wrapper that creates one checkout-namespaced `mktemp` run directory, redirects standard
-  temporary variables into it, retains reusable caches, and validates an ownership marker before exact cleanup.
+  temporary variables into it, runs the command and descendants in a dedicated process group, retains reusable
+  caches, and validates a marker-v2 ownership record before exact cleanup.
 - **WHEN:** automatically at every standard hook/doctrine/Knowledge Map/canonical/backend/book boundary, or
   manually around a direct command. Success and default failure delete scratch. Set
   `LINKEDSPEC_FAILED_RUN_POLICY=retain` only when a failed run should survive for diagnosis.
 - **HOW:** `bash tools/project_data_run.sh --list` reports owned leftovers; `--recover` removes only dead abandoned
-  runs; `--purge-failed` explicitly removes dead retained failures. Live wrapper/foreground-child PIDs, invalid
-  markers, and other checkout namespaces are never deleted. Marker version 1 does not yet own descendant
-  liveness: until `PROJECT-DATA-SSD-ROOTING.3.1.2` lands, a foreground command must not return before descendants
-  finish using the run directory, and recovery must not run when an untracked descendant may still be live.
+  runs; `--purge-failed` explicitly removes dead retained failures. The wrapper waits for its process group to
+  drain and forwards HUP/INT/TERM to that complete group. Recovery and purge refuse a live or possibly reused
+  group and recheck immediately before removal. Legacy/invalid/group-mismatched markers, indeterminate `starting`
+  markers, symbolic links, and other checkout namespaces are never deleted automatically.
 - **PROOF:** `bash tools/test_project_data_lifecycle.sh` covers success/default-failure cleanup, cache retention,
-  explicit failure retention/purge, concurrent unique runs, live-child recovery denial, interrupted recovery,
-  invalid-marker refusal, non-executable shell entrypoints, and checkout isolation. The durable descendant RED is
-  recorded in `docs/knowledge/project-data-descendant-liveness-gap.md` and owned by `.3.1.2`.
+  explicit failure retention/purge, concurrent unique runs, background-descendant drain, direct-child plus
+  descendant signal forwarding, abrupt wrapper/direct-child loss, live-group recovery denial, drained-group
+  recovery, marker-version/group rejection, indeterminate-start refusal, non-executable shell entrypoints, and
+  checkout isolation. The durable RED-to-green record is `docs/knowledge/project-data-descendant-liveness-gap.md`.
 
 ### 4.5 `tools/check_unicode_case_contract.py` — pinned Unicode casing proof
 

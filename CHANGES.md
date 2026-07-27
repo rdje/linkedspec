@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.1.2 — guard managed-run descendants
+
+Closed the marker-version-1 descendant-liveness defect found during reconciliation. `tools/project_data_run.sh`
+now launches each top-level managed command as the leader of a dedicated process group, records that exact group
+in marker version 2, waits for the complete group to drain before success/default-failure cleanup, and forwards
+HUP, INT, and TERM group-wide while preserving the wrapper's signal exit status. Nested routed entrypoints still
+reuse the existing run.
+
+Recovery and retained-failure purge now treat wrapper, direct-child, and process-group liveness as ownership.
+They re-read the marker and repeat liveness immediately before exact removal. A live or reused PID/group retains
+scratch conservatively. Legacy, malformed, token-invalid, group-mismatched, symbolic-link, and foreign-checkout
+candidates cannot authorize deletion. A valid `starting` marker interrupted before group identity publication is
+classified indeterminate and retained by both automated cleanup modes.
+
+The lifecycle oracle is mutation-sensitive across the original normal-return case and the harder orphan case. It
+proves a wrapper waits while a background descendant owns managed `tmp`, TERM reaches both direct child and
+descendant, abrupt wrapper/direct-child death leaves the orphan group protected from recovery, and exact recovery
+occurs only after group drain. Environment and 35-boundary routing pass; all six Perl/Rust/Dart/Julia/Lua/tool
+storage oracles pass with zero managed runs. Knowledge Map remains 718 facts/5,675 question keys, mdBook and all
+doctrines pass, and canonical passes Rust 1/1 in 77.46s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2, and Phase
+0 1,031/1,031 in 625s. The first canonical attempt exposed the already-tracked bounded-memory handoff hazard; the
+required `FUTURE-PARITY-BACKLOG.10.1` marker was restored per its durable fact and the complete restart passed.
+Push cadence advances to 34/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.1.1 — reconcile SSD migration records
 
 Reconciled every frozen `.0` source against its `.2.1-.2.6` destination, verification, use, and deletion record.

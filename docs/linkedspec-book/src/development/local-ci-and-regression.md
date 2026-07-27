@@ -757,11 +757,11 @@ caches. Rust semantic admission passes 1/1 in 77.50 seconds, Dart 1/1, Julia 416
 Lifecycle leaf `.1.3` gives each top-level supported invocation one private directory below
 `/.linkedspec-data/scratch/runs/<checkout-id>/`. The checkout id is a random, path-free token stored below the
 ignored project-data root, so it follows a moved checkout without persisting its old pathname. Each run directory
-is created with `mktemp`, carries a non-symlink marker containing exact checkout/run identity plus wrapper and
-foreground-child PIDs, requested failure policy, and exports its private `tmp/` child through `TMPDIR`, `TMP`, and
-`TEMP`. Nested supported scripts reuse that run instead of creating overlapping lifecycle owners. Binding policy in
-the marker ensures a crash after recording a default-delete failure still leaves abandoned/recoverable scratch,
-not a false explicitly retained failure.
+is created with `mktemp`, carries a non-symlink version-2 marker containing exact checkout/run identity plus
+wrapper, foreground-child, dedicated process-group identity, and requested failure policy, and exports its private
+`tmp/` child through `TMPDIR`, `TMP`, and `TEMP`. Nested supported scripts reuse that run instead of creating
+overlapping lifecycle owners. Binding policy in the marker ensures a crash after recording a default-delete
+failure still leaves abandoned/recoverable scratch, not a false explicitly retained failure.
 
 Success removes the exact validated run directory. Failure also removes it by default; diagnostic retention is an
 explicit per-invocation policy:
@@ -785,21 +785,26 @@ bash tools/project_data_run.sh --recover
 bash tools/project_data_run.sh --purge-failed
 ```
 
-Listing classifies current-checkout runs as live, explicitly failed, or abandoned. Recovery deletes only abandoned
-runs whose recorded wrapper and foreground child are both dead. It retains live and explicit failed runs;
-`--purge-failed` is the explicit, separately guarded deletion for dead diagnostic failures. Invalid markers and
-another checkout's namespace are not deletion candidates. A wrapped foreground command must not return while any
-descendant still consumes its scratch.
+Marker version 2 starts the foreground command in a dedicated process group. Descendants inherit that group unless
+they deliberately escape it; supported workflows do not detach. The wrapper waits for the whole group to drain
+before success/default-failure cleanup and forwards HUP, INT, and TERM to the group. Listing classifies
+current-checkout runs as live, explicitly failed, abandoned, or indeterminate. Recovery deletes only abandoned
+runs after wrapper, child, and group liveness have been checked again immediately before removal. It retains live
+and explicit failed runs; `--purge-failed` is the explicit, separately guarded deletion for dead diagnostic
+failures. A live or reused group id is retained conservatively. Legacy, malformed, group-mismatched, interrupted
+`starting`, symbolic-link, and other-checkout candidates never authorize automated deletion.
 
-There is one known marker-version-1 limitation while `PROJECT-DATA-SSD-ROOTING.3.1.2` is pending: wrapper and
-foreground-child PIDs do not prove that every descendant is dead. A deterministic reconciliation probe launched a
+This closes the marker-version-1 limitation found during reconciliation. The deterministic RED launched a
 descendant whose cwd remained inside managed `tmp/`, let the direct child return, and observed the run deleted
-while the descendant was still live. Do not use `--recover` or `--purge-failed` when an interrupted compiler/test
-descendant may still exist; `.3.1.2` owns portable whole-run process liveness and group signal forwarding.
+while the descendant remained live. The green proof now covers both normal background descendants and abrupt
+wrapper/direct-child loss: recovery retains the run while the orphan group lives and removes it only after the
+group drains.
 
 `tools/test_project_data_lifecycle.sh` proves successful and default-failure cleanup, retained-cache survival,
-explicit failure retention and purge, two simultaneous distinct live runs, live-child protection, dead
-interruption recovery, invalid-marker refusal, non-executable shell entrypoint support, and checkout isolation.
+explicit failure retention and purge, two simultaneous distinct live runs, background-descendant drain,
+group-wide signal forwarding, abrupt wrapper/direct-child loss, live-orphan-group protection, drained-group
+recovery, legacy/mismatched/indeterminate-marker refusal, non-executable shell entrypoint support, and checkout
+isolation.
 `tools/test_project_data_workflow_routing.sh` additionally locks every environment-plus-run boundary and requires
 no managed run leaf after each completed outside-cwd workflow.
 

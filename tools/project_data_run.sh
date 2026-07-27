@@ -17,10 +17,11 @@ usage: tools/project_data_run.sh COMMAND [ARG ...]
        tools/project_data_run.sh --recover
        tools/project_data_run.sh --purge-failed
 
-Run COMMAND inside collision-safe repository-filesystem scratch. Successful runs and failed runs under the
-default delete policy are removed. Set LINKEDSPEC_FAILED_RUN_POLICY=retain to keep a failed run for diagnosis.
---list reports owned leftovers, --recover removes abandoned interrupted runs after liveness checks, and
---purge-failed explicitly removes retained failed runs after the same checks.
+Run COMMAND and its descendants as one process group inside collision-safe repository-filesystem scratch.
+Successful runs and failed runs under the default delete policy are removed after the group drains. Set
+LINKEDSPEC_FAILED_RUN_POLICY=retain to keep a failed run for diagnosis. --list reports owned leftovers,
+--recover removes abandoned interrupted runs after liveness checks, and --purge-failed explicitly removes
+retained failed runs after the same checks. Ambiguous or invalid ownership metadata is never deleted.
 EOF
 }
 
@@ -35,6 +36,11 @@ relative_display() {
 pid_is_live() {
  local pid=${1:-0}
  [[ "$pid" =~ ^[1-9][0-9]*$ ]] && kill -0 "$pid" 2>/dev/null
+}
+
+process_group_is_live() {
+ local process_group_id=${1:-0}
+ [[ "$process_group_id" =~ ^[1-9][0-9]*$ ]] && kill -0 -- "-$process_group_id" 2>/dev/null
 }
 
 checkout_id_dir="$REPO_ROOT/.linkedspec-data"
@@ -76,6 +82,7 @@ marker_read() {
  marker_failure_policy=''
  marker_wrapper_pid='0'
  marker_child_pid='0'
+ marker_process_group_id='0'
  marker_exit_status=''
 
  [[ -f "$marker" && ! -L "$marker" ]] || return 1
@@ -89,20 +96,39 @@ marker_read() {
    failure_policy) marker_failure_policy=$value ;;
    wrapper_pid) marker_wrapper_pid=$value ;;
    child_pid) marker_child_pid=$value ;;
+   process_group_id) marker_process_group_id=$value ;;
    exit_status) marker_exit_status=$value ;;
   esac
  done <"$marker"
 
- [[ "$marker_version" == 1 && "$marker_checkout_id" == "$checkout_id" &&
+ [[ "$marker_version" == 2 && "$marker_checkout_id" == "$checkout_id" &&
     "$marker_run_name" =~ ^[A-Za-z0-9._-]+$ && "$marker_run_token" =~ ^[A-Za-z0-9._-]+$ &&
     "$marker_run_token" == "${marker_run_name##*.}" &&
     "$marker_state" =~ ^(starting|active|failed|succeeded)$ &&
     "$marker_failure_policy" =~ ^(delete|retain)$ &&
-    "$marker_wrapper_pid" =~ ^[0-9]+$ && "$marker_child_pid" =~ ^[0-9]+$ ]]
+    "$marker_wrapper_pid" =~ ^[1-9][0-9]*$ && "$marker_child_pid" =~ ^[0-9]+$ &&
+    "$marker_process_group_id" =~ ^[0-9]+$ ]] || return 1
+
+ if [[ "$marker_state" == starting ]]; then
+  [[ "$marker_child_pid" == 0 && "$marker_process_group_id" == 0 ]]
+ else
+  [[ "$marker_child_pid" =~ ^[1-9][0-9]*$ &&
+     "$marker_process_group_id" == "$marker_child_pid" ]]
+ fi
+}
+
+marker_has_live_owner() {
+ local ignored_wrapper_pid=${1:-0}
+
+ if [[ "$marker_wrapper_pid" != "$ignored_wrapper_pid" ]] && pid_is_live "$marker_wrapper_pid"; then
+  return 0
+ fi
+ pid_is_live "$marker_child_pid" || process_group_is_live "$marker_process_group_id"
 }
 
 safe_remove_owned_run() {
  local run_dir=$1
+ local ignored_wrapper_pid=${2:-0}
  local expected_name
  expected_name=$(basename -- "$run_dir")
 
@@ -110,6 +136,8 @@ safe_remove_owned_run() {
  [[ "$(dirname -- "$run_dir")" == "$checkout_runs" ]] || return 1
  marker_read "$run_dir/.linkedspec-run" || return 1
  [[ "$marker_run_name" == "$expected_name" && "$marker_run_token" == "${expected_name##*.}" ]] || return 1
+ [[ "$marker_state" != starting ]] || return 1
+ ! marker_has_live_owner "$ignored_wrapper_pid" || return 1
  rm -rf -- "$run_dir"
 }
 
@@ -136,7 +164,9 @@ scan_runs() {
    continue
   fi
 
-  if pid_is_live "$marker_wrapper_pid" || pid_is_live "$marker_child_pid"; then
+  if [[ "$marker_state" == starting ]]; then
+   classification=indeterminate
+  elif marker_has_live_owner; then
    classification=live
   elif [[ "$marker_state" == failed && "$marker_failure_policy" == retain ]]; then
    classification=failed
@@ -146,9 +176,9 @@ scan_runs() {
 
   case "$action:$classification" in
    list:*)
-    printf 'project-data-run: %s state=%s wrapper_pid=%s child_pid=%s path=%s\n' \
+    printf 'project-data-run: %s state=%s wrapper_pid=%s child_pid=%s process_group_id=%s path=%s\n' \
      "$classification" "$marker_state" "$marker_wrapper_pid" "$marker_child_pid" \
-     "$(relative_display "$run_dir")"
+     "$marker_process_group_id" "$(relative_display "$run_dir")"
     ;;
    recover:abandoned|purge-failed:failed)
     if safe_remove_owned_run "$run_dir"; then
@@ -159,7 +189,7 @@ scan_runs() {
      skipped=$((skipped + 1))
     fi
     ;;
-   recover:failed|purge-failed:abandoned|recover:live|purge-failed:live)
+   recover:failed|purge-failed:abandoned|recover:live|purge-failed:live|recover:indeterminate|purge-failed:indeterminate)
     printf 'project-data-run: retained %s run: %s\n' "$classification" "$(relative_display "$run_dir")"
     ;;
   esac
@@ -219,11 +249,12 @@ chmod 700 "$run_dir" "$run_tmp"
 write_marker() {
  local state=$1
  local child_pid=$2
- local exit_status=${3:-}
+ local process_group_id=$3
+ local exit_status=${4:-}
  local marker_tmp="$run_dir/.linkedspec-run.tmp.$$"
 
  {
-  printf 'version=1\n'
+  printf 'version=2\n'
   printf 'checkout_id=%s\n' "$checkout_id"
   printf 'run_name=%s\n' "$run_name"
   printf 'run_token=%s\n' "$run_token"
@@ -231,13 +262,14 @@ write_marker() {
   printf 'failure_policy=%s\n' "$failed_policy"
   printf 'wrapper_pid=%s\n' "$$"
   printf 'child_pid=%s\n' "$child_pid"
+  printf 'process_group_id=%s\n' "$process_group_id"
   printf 'exit_status=%s\n' "$exit_status"
  } >"$marker_tmp"
  chmod 600 "$marker_tmp"
  mv -f -- "$marker_tmp" "$marker"
 }
 
-write_marker starting 0
+write_marker starting 0 0
 
 LINKEDSPEC_RUN_ACTIVE=1
 LINKEDSPEC_RUN_DIR=$run_dir
@@ -249,12 +281,22 @@ TEMP=$run_tmp
 export LINKEDSPEC_RUN_ACTIVE LINKEDSPEC_RUN_DIR LINKEDSPEC_RUN_TOKEN LINKEDSPEC_CHECKOUT_ID TMPDIR TMP TEMP
 
 child_pid=0
+child_process_group_id=0
+child_group_active=0
+received_signal=''
+signal_forward_pending=0
 received_status=0
 forward_signal() {
  local signal=$1
  local status=$2
+ received_signal=$signal
+ signal_forward_pending=1
  received_status=$status
- if [[ "$child_pid" =~ ^[1-9][0-9]*$ ]] && pid_is_live "$child_pid"; then
+ if (( child_group_active == 1 )) && process_group_is_live "$child_process_group_id"; then
+  if kill -"$signal" -- "-$child_process_group_id" 2>/dev/null; then
+   signal_forward_pending=0
+  fi
+ elif [[ "$child_pid" =~ ^[1-9][0-9]*$ ]] && pid_is_live "$child_pid"; then
   kill -"$signal" "$child_pid" 2>/dev/null || true
  fi
 }
@@ -263,9 +305,18 @@ trap 'forward_signal INT 130' INT
 trap 'forward_signal TERM 143' TERM
 
 set +e
+set -m
 "$command_path" "$@" &
 child_pid=$!
-write_marker active "$child_pid"
+child_process_group_id=$child_pid
+child_group_active=1
+set +m
+write_marker active "$child_pid" "$child_process_group_id"
+if (( signal_forward_pending == 1 )) && process_group_is_live "$child_process_group_id"; then
+ if kill -"$received_signal" -- "-$child_process_group_id" 2>/dev/null; then
+  signal_forward_pending=0
+ fi
+fi
 wait "$child_pid"
 status=$?
 if (( received_status != 0 )); then
@@ -273,23 +324,29 @@ if (( received_status != 0 )); then
   wait "$child_pid"
   status=$?
  done
+fi
+while process_group_is_live "$child_process_group_id"; do
+ sleep 0.02
+done
+child_group_active=0
+if (( received_status != 0 )); then
  status=$received_status
 fi
 set -e
 trap - HUP INT TERM
 
 if (( status == 0 )); then
- write_marker succeeded "$child_pid" 0
- if ! safe_remove_owned_run "$run_dir"; then
+ write_marker succeeded "$child_pid" "$child_process_group_id" 0
+ if ! safe_remove_owned_run "$run_dir" "$$"; then
   printf 'project-data-run: ERROR: successful scratch cleanup failed: %s\n' "$(relative_display "$run_dir")" >&2
   exit 74
  fi
 elif [[ "$failed_policy" == retain ]]; then
- write_marker failed "$child_pid" "$status"
+ write_marker failed "$child_pid" "$child_process_group_id" "$status"
  printf 'project-data-run: retained failed run (explicit policy): %s\n' "$(relative_display "$run_dir")" >&2
 else
- write_marker failed "$child_pid" "$status"
- if ! safe_remove_owned_run "$run_dir"; then
+ write_marker failed "$child_pid" "$child_process_group_id" "$status"
+ if ! safe_remove_owned_run "$run_dir" "$$"; then
   printf 'project-data-run: ERROR: failed-run scratch cleanup failed: %s\n' "$(relative_display "$run_dir")" >&2
   exit 74
  fi

@@ -17,8 +17,10 @@ This document is the current high-level technical reading of the project shape. 
   624s. Reconciliation `.3.1.1` now confirms all frozen off-repository records absent and all retained destinations
   usable; it also deletes the missed exact `rust/target/project-data-ssd-rooting/` target-era root after canonical
   cache identity and locked-offline proof. All six storage oracles pass afterward. A deterministic RED proves
-  marker version 1 can delete scratch while a descendant outlives its recorded wrapper/direct-child PIDs;
-  remediation `.3.1.2` is next before residue `.3.2`, and relocation closeout remains paused behind storage `.5`.
+  marker version 1 can delete scratch while a descendant outlives its recorded wrapper/direct-child PIDs.
+  Remediation `.3.1.2` closes it with dedicated marker-v2 process groups, group-drain cleanup, group-wide signal
+  forwarding, conservative live/reused/indeterminate retention, and exact normal/orphan recovery proofs. Residue
+  `.3.2` is next, and relocation closeout remains paused behind storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

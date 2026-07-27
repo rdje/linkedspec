@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.1.2` — scratch ownership must name a kernel-enforced whole-run unit):
+  Wrapper and direct-child PIDs cannot represent descendants after either process exits. The portable authority on
+  the supported POSIX hosts is a dedicated child-led process group: Bash monitor mode assigns the foreground job a
+  PGID equal to its child PID, descendants inherit it, negative-PGID liveness observes remaining members, and
+  negative-PGID signals reach the complete group. Normal cleanup must wait for group drain; interrupted recovery
+  must recheck that group immediately before exact deletion.
+
+  Conservative ambiguity is intentional. PID/PGID reuse may retain stale scratch but must never authorize unsafe
+  deletion. Marker v2 therefore requires positive wrapper identity and exact child-PID/group-leader equality after
+  startup; v1, mismatched, and malformed markers are invalid. A wrapper can be killed between spawning the group
+  and atomically publishing its identity, so a dead `starting` marker is indeterminate and neither recovery nor
+  retained-failure purge removes it automatically. A signal arriving during group setup is remembered and replayed
+  once group authority is published.
+
+  The decisive oracle kills wrapper and direct child while a descendant keeps its cwd in managed `tmp`. Recovery
+  retains the run while the recorded negative PGID is live and removes it only after release and group drain. A
+  separate trappable case proves TERM reaches child and descendant, and the original direct-child-success case now
+  keeps scratch until its background descendant exits. All six storage oracles and canonical confirm this stronger
+  lifecycle does not change supported backend/tool results.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.1.1` — reconciliation must include migration-created staging roots and
   descendant ownership): The frozen off-volume census was fully reconciled, but checking only those original
   sources would have missed a repository-local target-era root created while the new storage hierarchy was being

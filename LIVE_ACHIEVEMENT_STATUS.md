@@ -8,14 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.3.1.2` — from the clean reconciliation commit, replace marker-v1 direct-child-only
-  liveness with portable whole-run descendant authority before any final residue cleanup.
+- `PROJECT-DATA-SSD-ROOTING.3.2` — independently prove the exact off-repository LinkedSpec residue census is empty,
+  delete only any newly proven exact owner, and re-prove retained repository-filesystem copies remain usable.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.1.2 — guard managed-run descendants**
+  (marker-v2 process-group authority, normal/orphan descendant safety, conservative recovery, complete signoff).
+
+  **Result:** Every managed foreground command now leads one dedicated process group. The wrapper records the
+  group in marker version 2, waits until it drains before normal cleanup, and forwards HUP/INT/TERM to the complete
+  group. Recovery and retained-failure purge repeat liveness checks immediately before exact removal. Live or
+  reused group ids retain conservatively; legacy, malformed, mismatched-group, and interrupted `starting` markers
+  never authorize automated deletion.
+
+  **Proof:** The focused oracle closes the original `descendant_live=yes` / `run_present=no` RED, proves abrupt
+  wrapper/direct-child loss retains scratch while an orphan group lives, removes it only after drain, and proves
+  direct-child plus descendant TERM delivery. Environment, 35-boundary routing, all six storage oracles, Knowledge
+  Map 718/5,675, mdBook, doctrines, whitespace, and canonical pass: Rust 1/1 in 77.46s, Dart 1/1, Julia 416/416 in
+  27.1s, primary 66x2, Phase 0 1,031/1,031 in 625s, zero managed runs. Push advances to 34/300; no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.1.1 — reconcile SSD migration records**
   (complete source/destination/deletion ledger, missed target-era root retired, six storage oracles green,
   descendant-liveness RED split before code; closes with this commit).

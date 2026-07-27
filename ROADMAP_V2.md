@@ -41,7 +41,9 @@ ambiguous shared caches are not deleted wholesale. Reconciliation `.3.1.1` confi
 frozen off-repository record absent, retires one missed exact same-SSD target-era root after canonical cache and
 locked-offline proof, and reruns all six storage oracles. It also establishes the marker-v1 descendant-liveness
 RED: a live descendant can outlast recorded wrapper/direct-child PIDs while its run is deleted. Remediation
-`.3.1.2` is the next frontier before final residue leaf `.3.2`.
+`.3.1.2` closes that RED with a dedicated marker-v2 process group, whole-group drain and signal forwarding,
+double-checked recovery/purge liveness, conservative reuse/indeterminate retention, and normal/orphan descendant
+proof. Final residue leaf `.3.2` is the next frontier.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

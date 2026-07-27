@@ -15,9 +15,9 @@ answers:
   - does managed run recovery prove all descendants are dead
   - may I recover an interrupted run while a grandchild is live
 date: 2026-07-26
-status: observed
+status: current
 tags: [architecture, storage, filesystem, scratch, lifecycle, concurrency, recovery, cache, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.3 adds tools/project_data_run.sh around all 14 standard workflow boundaries. A persisted root-relative random checkout identity namespaces mktemp-created run directories; ownership markers bind exact identity, failure policy, and wrapper/foreground-child liveness. Success and default failure delete only the exact validated run, LINKEDSPEC_FAILED_RUN_POLICY=retain explicitly keeps failures, --recover removes only dead abandoned runs, and --purge-failed removes only dead retained failures. tools/test_project_data_lifecycle.sh proves cleanup, cache retention, explicit failure retention, concurrency isolation, live-child protection, invalid-marker and namespace-symlink rejection, and checkout namespace isolation. PROJECT-DATA-SSD-ROOTING.3.1.1 establishes a remaining boundary: marker version 1 does not track descendants. A deterministic probe observes descendant_live=yes and run_present=no after the direct child launches a descendant with cwd in managed tmp and returns. PROJECT-DATA-SSD-ROOTING.3.1.2 owns remediation."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.3 adds tools/project_data_run.sh around all standard workflow boundaries. PROJECT-DATA-SSD-ROOTING.3.1.2 upgrades ownership to marker version 2: each top-level command is the leader of one dedicated process group, normal cleanup waits for the group to drain, signals target the group, and recovery/purge repeat wrapper/child/group liveness checks immediately before exact removal. Live or reused group ids retain scratch conservatively; legacy, malformed, mismatched-group, indeterminate starting, symlink, and foreign-checkout candidates cannot authorize automated deletion. tools/test_project_data_lifecycle.sh proves cleanup/cache/retention/concurrency, background descendants, group-wide signals, abrupt wrapper/direct-child loss, live-orphan-group recovery refusal, post-drain recovery, and marker rejection."
 reverify: "bash -n tools/project_data_env.sh tools/project_data_run.sh tools/test_project_data_lifecycle.sh && bash tools/test_project_data_lifecycle.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/project_data_run.sh --list && rg -n 'PROJECT-DATA-SSD-ROOTING\\.3\\.1\\.2' docs/tasks/PROJECT-DATA-SSD-ROOTING.md"
 ---
 
@@ -30,19 +30,17 @@ recovery in one checkout namespace from scanning another. Concurrent invocations
 Successful scratch is deleted. Failed scratch is also deleted by default; set
 `LINKEDSPEC_FAILED_RUN_POLICY=retain` on an invocation only when its diagnostic state is worth preserving. Retained
 package/dependency state beneath `/.linkedspec-data/cache/` is never part of run cleanup. Every run carries a
-non-symlink ownership marker with its checkout id, exact run name/token, state, failure policy, wrapper PID, child
-PID, and exit status. Cleanup and recovery refuse an invalid marker and remove one validated leaf, never a broad
+non-symlink version-2 ownership marker with its checkout id, exact run name/token, state, failure policy, wrapper
+PID, child PID, process-group id, and exit status. The child must be the exact positive group leader for every
+post-start state. Cleanup and recovery refuse an invalid marker and remove one validated leaf, never a broad
 scratch root. A dead default-delete failure is abandoned/recoverable; only a marker that binds explicit `retain`
 policy is classified as a diagnostic failure.
 
-Abrupt termination can leave an `active` marker. `bash tools/project_data_run.sh --list` reports owned live,
-failed, and abandoned runs. `--recover` removes an abandoned run only when neither its wrapper nor foreground child
-is live; it retains explicit failures. `--purge-failed` is the separate explicit deletion for dead retained
-failures.
-
-Known gap: marker version 1 does not prove descendant liveness. A direct child can launch a background descendant
-whose cwd remains inside managed scratch, return, and cause normal cleanup to delete the run while that descendant
-is still live. Abrupt wrapper/direct-child loss can create the same recovery hazard. Until
-`PROJECT-DATA-SSD-ROOTING.3.1.2` lands, a foreground command must not return while descendants consume scratch, and
-operators must not use recovery when untracked descendants may still exist. Related facts:
+The top-level command leads a dedicated process group inherited by its descendants. Normal success/default-failure
+cleanup waits until that whole group drains; HUP, INT, and TERM are forwarded to it. Abrupt termination can leave
+an `active` marker. `bash tools/project_data_run.sh --list` reports owned live, failed, abandoned, and indeterminate
+runs. `--recover` removes an abandoned run only after wrapper, child, and group liveness are checked again at the
+deletion boundary; it retains explicit failures. `--purge-failed` is the separate explicit deletion for dead
+retained failures. A live or reused PID/group is a conservative retain. Legacy, malformed, mismatched-group, and
+interrupted `starting` markers never authorize automated deletion. Related facts:
 [[project-data-env-initializer]], [[project-data-workflow-routing]], [[project-data-ssd-storage-locality]].

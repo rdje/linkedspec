@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.3.1.1` reconciliation complete; descendant-liveness remediation `.3.1.2` active)
+- Last updated: `2026-07-26` (`.3.1` reconciliation/remediation complete; final residue proof `.3.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -446,7 +446,7 @@ accessing the shared copy, and remove only records or directories provably owned
   Children: `.3.1`, `.3.2`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1`
-  Status: `active`
+  Status: `done` (2026-07-26; source reconciliation and descendant-liveness remediation complete)
   Goal: Reconcile every frozen source and close the descendant-liveness risk exposed by the verification run.
   Depends on: `.2.6`
   Children: `.3.1.1`, `.3.1.2`
@@ -497,7 +497,7 @@ accessing the shared copy, and remove only records or directories provably owned
   | Disposable tool audit list and accidental inventory | Exact files deleted after ownership/content classification | Audit list 88 lines / 4,646 bytes / SHA-256 `1d6cd0b5a6661dfc2e71eb43d0ff9ee64b32147735c9ec7b43767c7d4a350dce`; both exact paths absent | Both paths and all old-root `linkedspec-*` entries remain absent; three-Python/12-shell/19-entrypoint tool oracle passes |
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1.2`
-  Status: `active`
+  Status: `done` (2026-07-26; marker-v2 process-group lifecycle and recovery proof complete)
   Goal: Make managed-run cleanup and recovery respect live descendants after wrapper/direct-child interruption.
   Depends on: `.3.1.1`
   Acceptance: Retain the exact deterministic RED where a direct child exits after launching a descendant whose cwd
@@ -509,8 +509,26 @@ accessing the shared copy, and remove only records or directories provably owned
     storage, doctrine, book, and warranted canonical gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants`
 
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / RED FIRST** — Began from clean `.3.1.1` commit `7efd48b6` at 33/300 with no push; retained the
+    exact `descendant_live=yes` / `run_present=no` reproduction before lifecycle implementation changes.
+  - [x] **WHOLE-RUN AUTHORITY** — Launch the managed foreground command in one portable dedicated process group,
+    persist validated marker-v2 group identity, and preserve nested routed-run reuse without machine paths.
+  - [x] **CLEANUP / RECOVERY SAFETY** — Wait for the owned group to drain before ordinary success/default-failure
+    cleanup; require group death again immediately before recovery/purge deletion; treat a live or reused group id
+    conservatively as nondeletable; reject legacy/invalid markers rather than guessing.
+  - [x] **SIGNAL COMPLETENESS** — Forward HUP/INT/TERM to the complete owned group, preserve established exit status,
+    and prove direct child plus descendant stop before exact scratch removal.
+  - [x] **MUTATION-SENSITIVE PROOF** — Extended `tools/test_project_data_lifecycle.sh` with background-descendant wait,
+    abrupt wrapper/direct-child loss, live-group recovery refusal, group drain/recovery, signal forwarding,
+    marker-version/group-field rejection, concurrency, cache, namespace, and zero-residue checks.
+  - [x] **LOCKSTEP / SIGNOFF** — Updated lifecycle/SSD Knowledge facts, ADR/README/Toolbox/mdBook, roadmaps, task/live/
+    memory docs; Bash syntax, focused lifecycle/routing/environment, six storage oracles, all five doctrines,
+    Knowledge Map, book, whitespace, and canonical gates pass; this commit lands at 34/300 and does not push.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Prove no exact LinkedSpec-owned residue remains outside the repository filesystem.
   Depends on: `.3.1`
   Acceptance: Delete any final exact disposable or byte-verified migrated LinkedSpec path immediately; leave
@@ -558,7 +576,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.3.1.2` | `active` | From clean `.3.1.1`, replace marker-v1 direct-child-only liveness with portable whole-run descendant authority before final residue cleanup. |
+| `PROJECT-DATA-SSD-ROOTING.3.2` | `active` | Independently re-census exact off-repository LinkedSpec residue, delete only proven exact owners, and prove retained SSD copies remain usable. |
 
 ## Decisions
 
@@ -578,18 +596,19 @@ accessing the shared copy, and remove only records or directories provably owned
 - Reusable caches are retained on the SSD; successful per-run scratch is disposable.
 - Reconciliation includes superseded same-SSD staging roots, not only the original off-volume census. Retain the
   canonical reusable cache, but delete an exact obsolete duplicate after identity/use proof.
-- Wrapper/direct-child PID death is not descendant-liveness proof. Final residue deletion waits for `.3.1.2` to
-  give normal cleanup and recovery portable whole-run process authority.
+- Wrapper/direct-child PID death is not descendant-liveness proof. Marker v2 now gives normal cleanup and recovery
+  dedicated whole-run process-group authority, with live/reused/indeterminate states retained conservatively.
 - The default root is `/.linkedspec-data/`: disposable `scratch/`, retained `cache/`, Cargo target at
   `rust/target`, and runtime-derived absolute exports. The leading slash here means repository-root-relative, not
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Thirty-three standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Thirty-five standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
-  delete only their validated run leaf; retained failures require explicit policy; cache is outside cleanup;
-  recovery skips live/invalid/foreign candidates and separates abandoned from retained-failure deletion.
+  delete only their validated run leaf after the marker-v2 process group drains; retained failures require explicit
+  policy; cache is outside cleanup; recovery skips live/reused/indeterminate/invalid/foreign candidates and
+  separates abandoned from retained-failure deletion.
 - The push cadence remains 300 commits. No leaf in this tree pushes independently.
 
 ## Links
@@ -656,6 +675,9 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.3.1.1` | environment/lifecycle plus six backend/tool destination-health oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool 3 Python/12 shell/19 entrypoints; zero managed runs and bounded logs removed |
 | 2026-07-26 | `.3.1.1` | descendant-liveness root-cause RED and split | RED retained: real interrupted compiler descendant outlived recorded PIDs; deterministic probe returned `descendant_live=yes`, `run_present=no`; `.3.1.2` owns portable process-group/equivalent remediation before `.3.2` |
 | 2026-07-26 | `.3.1.1` | Knowledge Map; five doctrines; memory; task metadata; mdBook; whitespace | PASS: Knowledge Map 718 facts/5,675 question keys; memory 58 lines; public/current docs aligned; no canonical rerun warranted for audit/docs plus verified ignored-cache deletion |
+| 2026-07-26 | `.3.1.2` | Bash syntax; lifecycle/environment/35-boundary routing oracles | PASS: marker v2, normal descendant drain, group-wide TERM, abrupt wrapper/direct-child loss, live orphan-group retention, post-drain recovery, legacy/mismatch/indeterminate refusal; all standard workflows route; zero managed runs |
+| 2026-07-26 | `.3.1.2` | all six backend/tool storage oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool Python/shell/KM/book/TAP/oracle writers; zero managed runs |
+| 2026-07-26 | `.3.1.2` | Knowledge Map; memory; doctrines; mdBook; whitespace; complete canonical | PASS: Knowledge Map 718 facts/5,675 question keys; Rust 1/1 in 77.46s; Dart 1/1; Julia 416/416 in 27.1s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
 
 ## Commit Log
 
@@ -671,7 +693,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.4` | `ee1bb0c3` — `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD` | Source-bearing offline depot, 17-owner oracle, 88-card command migration, usage-log hygiene, exact old-data deletion, and full Julia gate. |
 | `.2.5` | `7942a5b4` — `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
 | `.2.6` | `2c485819` — `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
-| `.3.1.1` | `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` (this commit) | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
+| `.3.1.1` | `7efd48b6` — `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
+| `.3.1.2` | `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants` (this commit) | Marker-v2 process-group lifecycle, normal/orphan descendant safety, group signals, conservative recovery, and canonical proof. |
 
 ## Changelog
 
@@ -723,3 +746,8 @@ accessing the shared copy, and remove only records or directories provably owned
   Completed `.3.1.1`: every frozen source is reconciled, all off-repository exact records are absent, one missed
   same-SSD target-era root is verified/deleted, and all destination oracles pass. The deterministic live-descendant
   deletion RED is durable; `.3.1.2` becomes the clean process-liveness remediation frontier before `.3.2`.
+- `2026-07-26`: Completed `.3.1.2`; marker version 2 launches the managed command as a dedicated process-group
+  leader, waits for group drain, and forwards HUP/INT/TERM group-wide. Recovery/purge double-check live ownership;
+  reused groups and interrupted starting state retain conservatively; legacy/malformed/mismatched markers cannot
+  authorize deletion. Normal and abrupt-orphan descendant proofs, all six storage oracles, and canonical pass;
+  `.3.1` closes and `.3.2` becomes the clean final-residue frontier after commit.

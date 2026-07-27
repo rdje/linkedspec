@@ -321,17 +321,19 @@ run directories and ordinary recovery scans only the current checkout namespace.
 deliberate and ownership-checked:
 
 ```bash
-bash tools/project_data_run.sh --list          # report live, retained-failed, and abandoned owned runs
+bash tools/project_data_run.sh --list          # report live, retained-failed, abandoned, and indeterminate runs
 bash tools/project_data_run.sh --recover       # remove dead abandoned runs; retain live and failed runs
 bash tools/project_data_run.sh --purge-failed  # explicitly remove dead retained failures
 ```
 
 A low-level foreground command can request the same lifecycle with
-`bash tools/project_data_run.sh COMMAND [ARG ...]`; it must not return while descendants still consume its scratch.
-Commands that only need the common environment may still source `tools/project_data_env.sh` explicitly. Marker
-version 1 currently records only wrapper and direct-child PIDs: until `.3.1.2` lands, do not run recovery when an
-interrupted compiler/test descendant may still be live. The exact RED and remediation owner are recorded in
-`docs/knowledge/project-data-descendant-liveness-gap.md`.
+`bash tools/project_data_run.sh COMMAND [ARG ...]`. Marker version 2 launches the command and all descendants in a
+dedicated process group, records the group identity, waits for the group to drain before normal cleanup, and
+forwards HUP/INT/TERM to the group. Recovery and retained-failure purge repeat the group-liveness check immediately
+before deletion. A live or reused group id is retained conservatively; legacy, malformed, mismatched, and
+interrupted `starting` markers never authorize automated deletion. Commands that only need the common environment
+may still source `tools/project_data_env.sh` explicitly. The original direct-child-only RED and its closure are
+recorded in `docs/knowledge/project-data-descendant-liveness-gap.md`.
 
 Perl migration `.2.1` routes `tools/run_primary_cli_matrix.sh` through that lifecycle and adds the recurring
 storage proof:

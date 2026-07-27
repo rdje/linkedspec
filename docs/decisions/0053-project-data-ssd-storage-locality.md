@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; backend/tool migration and source reconciliation complete; descendant-liveness remediation pending
+- Status: accepted; backend/tool migration, source reconciliation, and descendant-liveness remediation complete
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -135,11 +135,13 @@ boundary for storage locality.
   offline fetch succeeded from the canonical root before deletion. The exact 12,754-file/2,376-directory old root
   was deleted; locked fetch and the full Rust storage oracle pass afterward. All frozen off-repository exact paths
   and shared-metadata matches are now absent, while ambiguous shared caches remain untouched and unused.
-- That reconciliation run also proved marker-version-1 liveness is incomplete after abrupt interruption. A
-  descendant can outlive both recorded wrapper/direct-child PIDs; an exact RED kept its cwd inside managed scratch,
-  let the direct child return, and observed `descendant_live=yes` after the wrapper had deleted the run.
-  `PROJECT-DATA-SSD-ROOTING.3.1.2` owns process-group or equivalent descendant authority before final residue
-  cleanup. Until it lands, dead wrapper/direct-child PIDs alone are not sufficient recovery deletion proof.
+- That reconciliation run also proved marker-version-1 liveness was incomplete after abrupt interruption. A
+  descendant could outlive both recorded wrapper/direct-child PIDs; an exact RED kept its cwd inside managed
+  scratch, let the direct child return, and observed `descendant_live=yes` after the wrapper had deleted the run.
+  `PROJECT-DATA-SSD-ROOTING.3.1.2` closes the gap with one dedicated child-led process group and marker version 2.
+  Normal cleanup waits for group drain, HUP/INT/TERM target the group, and recovery/purge repeat group liveness
+  immediately before deletion. Live or reused groups are retained conservatively; legacy, mismatched, malformed,
+  and interrupted `starting` markers cannot authorize automated deletion.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any
