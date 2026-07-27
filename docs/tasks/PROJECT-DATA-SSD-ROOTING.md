@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.3.1` reconciliation/remediation complete; final residue proof `.3.2` active)
+- Last updated: `2026-07-26` (`.3` migration/residue closeout complete; structural doctrine `.4.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -440,7 +440,7 @@ accessing the shared copy, and remove only records or directories provably owned
     lands at 32/300, clears the brief, leaves a clean exact old-data/run census, and does not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3`
-  Status: `active`
+  Status: `done` (2026-07-26; reconciliation, descendant remediation, and empty final residue proof complete)
   Goal: Close the exact existing-data migration with a complete residue audit.
   Depends on: `.2`
   Children: `.3.1`, `.3.2`
@@ -528,7 +528,7 @@ accessing the shared copy, and remove only records or directories provably owned
     Knowledge Map, book, whitespace, and canonical gates pass; this commit lands at 34/300 and does not push.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.2`
-  Status: `active`
+  Status: `done` (2026-07-26; independent pre/post-use off-repository residue census is zero)
   Goal: Prove no exact LinkedSpec-owned residue remains outside the repository filesystem.
   Depends on: `.3.1`
   Acceptance: Delete any final exact disposable or byte-verified migrated LinkedSpec path immediately; leave
@@ -536,14 +536,33 @@ accessing the shared copy, and remove only records or directories provably owned
     copies remain usable; report deletion targets, verification, and recoverability; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data`
 
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.3.1.2` commit `f471d5f3` at 34/300 with zero managed runs,
+    froze this checklist before census/document changes, and did not push.
+  - [x] **INDEPENDENT ROOT CENSUS** — Resolved the inherited system and per-user temporary roots at runtime, proved
+    their filesystem relation to the current repository, and independently enumerated exact LinkedSpec-prefixed
+    entries without persisting a machine-local mount or checkout path.
+  - [x] **EXACT METADATA / OLD-IDENTITY CENSUS** — Rechecked only the bounded shared Dart active-root and Julia usage-
+    log metadata surfaces for current/former LinkedSpec identity; proved every named disposable/off-repository and
+    superseded same-SSD exact path absent; do not scan-delete or mutate ambiguous shared package payload.
+  - [x] **DELETE-OR-ZERO DISPOSITION** — Pre-use and post-use censuses both found zero candidate: `.3.2` has zero
+    deletion targets, removes no external path, and leaves all unrelated/shared data untouched.
+  - [x] **RETAINED SSD HEALTH** — Recounted the retained Perl and Julia migration copies against their frozen directory/
+    file/byte boundaries, exercised their canonical storage paths through the relevant oracles, and proved all six
+    backend/tool destinations plus lifecycle leave zero managed-run residue.
+  - [x] **LOCKSTEP / CLEAN SIGNOFF** — Added the final-residue Knowledge fact and synchronized ADR/roadmaps/task/live/
+    memory/public book; pass census, storage, Knowledge Map, five doctrines, mdBook, memory, and whitespace gates;
+    commit at 35/300, clear the brief, remain clean, and do not push.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.4`
-  Status: `pending`
+  Status: `active`
   Goal: Mechanically prevent unsupported cross-volume reads and all off-repo-filesystem project writes.
   Depends on: `.3`
   Children: `.4.1`, `.4.2`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Add a fast structural doctrine for project storage locality.
   Depends on: `.3.2`
   Acceptance: Scan tracked executable/config/documented command owners for forbidden internal-temp, developer-home,
@@ -576,7 +595,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.3.2` | `active` | Independently re-census exact off-repository LinkedSpec residue, delete only proven exact owners, and prove retained SSD copies remain usable. |
+| `PROJECT-DATA-SSD-ROOTING.4.1` | `active` | Add the structural doctrine that rejects off-repository project storage and unsupported cross-volume defaults. |
 
 ## Decisions
 
@@ -626,6 +645,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable tool storage fact: `docs/knowledge/tool-project-data-ssd-storage.md`
 - Durable migration reconciliation fact: `docs/knowledge/project-data-migration-reconciliation.md`
 - Durable descendant-liveness gap fact: `docs/knowledge/project-data-descendant-liveness-gap.md`
+- Durable final residue fact: `docs/knowledge/project-data-final-residue-proof.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -678,6 +698,10 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.3.1.2` | Bash syntax; lifecycle/environment/35-boundary routing oracles | PASS: marker v2, normal descendant drain, group-wide TERM, abrupt wrapper/direct-child loss, live orphan-group retention, post-drain recovery, legacy/mismatch/indeterminate refusal; all standard workflows route; zero managed runs |
 | 2026-07-26 | `.3.1.2` | all six backend/tool storage oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool Python/shell/KM/book/TAP/oracle writers; zero managed runs |
 | 2026-07-26 | `.3.1.2` | Knowledge Map; memory; doctrines; mdBook; whitespace; complete canonical | PASS: Knowledge Map 718 facts/5,675 question keys; Rust 1/1 in 77.46s; Dart 1/1; Julia 416/416 in 27.1s; primary 66x2; Phase 0 1,031/1,031 in 625s; zero managed runs |
+| 2026-07-26 | `.3.2` | pre/post-use runtime-derived old-root and bounded shared-metadata census | PASS: two off-repository temp roots each zero LinkedSpec candidates; Dart active-root and Julia usage metadata zero LinkedSpec files; superseded same-SSD identity absent; zero deletion targets; no shared/unrelated mutation |
+| 2026-07-26 | `.3.2` | retained migration and canonical destination inventory | PASS: Perl 65 directories/17 files/1,590 bytes; Julia 346/256/133,963,036 and 24/15/4,284,303; canonical Cargo/Dart/Julia/Python/Rust roots share repository device |
+| 2026-07-26 | `.3.2` | all six backend/tool storage oracles and post-use cleanup | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool writers; post-use old-root/metadata census remains zero; zero managed runs; captured log removed |
+| 2026-07-26 | `.3.2` | Knowledge Map; memory; five doctrines; mdBook; whitespace | PASS: Knowledge Map 719 facts/5,683 question keys; memory 60 lines; all five doctrines; public book; diff whitespace; zero managed runs |
 
 ## Commit Log
 
@@ -694,7 +718,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.5` | `7942a5b4` — `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD` | Dual-ABI native isolation, 13-owner storage oracle, five-command migration, exact zero old residue, and full Lua/canonical gates. |
 | `.2.6` | `2c485819` — `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
 | `.3.1.1` | `7efd48b6` — `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
-| `.3.1.2` | `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants` (this commit) | Marker-v2 process-group lifecycle, normal/orphan descendant safety, group signals, conservative recovery, and canonical proof. |
+| `.3.1.2` | `f471d5f3` — `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants` | Marker-v2 process-group lifecycle, normal/orphan descendant safety, group signals, conservative recovery, and canonical proof. |
+| `.3.2` | `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data` (this commit) | Independent zero residue, zero deletions, exact retained-copy inventory, six destination oracles, and post-use zero proof. |
 
 ## Changelog
 
@@ -751,3 +776,8 @@ accessing the shared copy, and remove only records or directories provably owned
   reused groups and interrupted starting state retain conservatively; legacy/malformed/mismatched markers cannot
   authorize deletion. Normal and abrupt-orphan descendant proofs, all six storage oracles, and canonical pass;
   `.3.1` closes and `.3.2` becomes the clean final-residue frontier after commit.
+- `2026-07-26`: Completed `.3.2`; fresh pre/post-use censuses find zero LinkedSpec-identifying entry in either
+  runtime-derived old temporary root and zero LinkedSpec file in bounded shared Dart/Julia metadata. No deletion
+  target exists, so no external/shared path was changed. Retained Perl/Julia copies match frozen counts/bytes,
+  every canonical root shares the repository filesystem, and all six storage oracles pass with zero runs. Parent
+  `.3` closes; structural doctrine `.4.1` becomes the clean frontier after commit.

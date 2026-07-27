@@ -8,14 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.3.2` — independently prove the exact off-repository LinkedSpec residue census is empty,
-  delete only any newly proven exact owner, and re-prove retained repository-filesystem copies remain usable.
+- `PROJECT-DATA-SSD-ROOTING.4.1` — add a fast structural doctrine that rejects off-repository project-storage
+  defaults and unsupported cross-volume reads while preserving explicit caller and necessary external inputs.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.2 — retire internal-volume project data**
+  (independent pre/post-use zero residue, zero deletion targets, retained-copy health, complete six-oracle proof).
+
+  **Result:** A fresh audit resolved both inherited temporary roots at runtime and independently checked their
+  bounded LinkedSpec-identifying namespaces, the shared Dart active-root records, the Julia usage log, and the
+  superseded same-SSD target identity. Every pre-use and post-use result is zero. There was no exact old owner to
+  remove, so this slice deleted zero external paths and left ambiguous shared package data untouched.
+
+  **Proof:** Retained Perl inventory remains 65 directories / 17 files / 1,590 bytes. The Julia migration copies
+  remain 346 directories / 256 files / 133,963,036 bytes and 24 directories / 15 files / 4,284,303 bytes. Canonical
+  Cargo, Dart, Julia, Python, and Rust roots share the repository device; all six storage oracles pass; zero
+  managed runs remain. Knowledge Map 719/5,683, mdBook, five doctrines, 60-line memory, and whitespace pass. Parent
+  `.3` closes, `.4.1` becomes active, and push cadence advances to 35/300 with no push.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.1.2 — guard managed-run descendants**
   (marker-v2 process-group authority, normal/orphan descendant safety, conservative recovery, complete signoff).
 

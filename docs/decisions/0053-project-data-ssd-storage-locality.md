@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; backend/tool migration, source reconciliation, and descendant-liveness remediation complete
+- Status: accepted; migration and final residue proof complete; structural/process enforcement in progress
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -142,6 +142,10 @@ boundary for storage locality.
   Normal cleanup waits for group drain, HUP/INT/TERM target the group, and recovery/purge repeat group liveness
   immediately before deletion. Live or reused groups are retained conservatively; legacy, mismatched, malformed,
   and interrupted `starting` markers cannot authorize automated deletion.
+- Final residue proof independently resolves both inherited temporary roots at runtime and checks them before and
+  after all six storage oracles. Both roots, the bounded shared Dart/Julia metadata surfaces, and the superseded
+  same-SSD target identity are empty. No candidate exists, so the final leaf deletes zero external paths and leaves
+  ambiguous shared data untouched. Retained Perl and Julia copies still match their frozen count/byte boundaries.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any

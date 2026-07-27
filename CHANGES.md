@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.2 — retire internal-volume project data
+
+Closed existing-data migration with a fresh audit rather than relying on earlier deletion records. The census
+resolved both inherited operating-system temporary roots at runtime, proved each is outside the repository
+filesystem, and checked the bounded LinkedSpec-identifying namespace before and after real destination use. It
+also rechecked the exact shared Dart active-root and Julia usage-log metadata surfaces and the superseded same-SSD
+target identity. Every result is zero.
+
+There was consequently no old-data target to remove: this leaf deletes zero external paths and leaves ambiguous
+shared package payload untouched. Retained copies independently remain at Perl 65 directories / 17 files / 1,590
+bytes and Julia 346 directories / 256 files / 133,963,036 bytes plus 24 directories / 15 files / 4,284,303 bytes.
+Canonical Cargo, Dart, Julia, Python, and Rust roots share the repository filesystem.
+
+All six Perl/Rust/Dart/Julia/Lua/tool storage oracles pass and leave zero managed runs. Knowledge Map 719/5,683,
+mdBook, five doctrines, 60-line memory, and whitespace gates pass. Parent `.3` closes, structural enforcement
+`.4.1` becomes active, and push cadence advances to 35/300; no push.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.1.2 — guard managed-run descendants
 
 Closed the marker-version-1 descendant-liveness defect found during reconciliation. `tools/project_data_run.sh`

@@ -43,7 +43,9 @@ locked-offline proof, and reruns all six storage oracles. It also establishes th
 RED: a live descendant can outlast recorded wrapper/direct-child PIDs while its run is deleted. Remediation
 `.3.1.2` closes that RED with a dedicated marker-v2 process group, whole-group drain and signal forwarding,
 double-checked recovery/purge liveness, conservative reuse/indeterminate retention, and normal/orphan descendant
-proof. Final residue leaf `.3.2` is the next frontier.
+proof. Final residue leaf `.3.2` independently proves both runtime-derived old temporary roots and bounded shared
+Dart/Julia metadata are empty before and after all six storage oracles. It has zero deletion targets, retains the
+verified Perl/Julia copies, and closes migration parent `.3`. Structural storage doctrine `.4.1` is next.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

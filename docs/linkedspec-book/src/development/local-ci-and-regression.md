@@ -1039,8 +1039,17 @@ cache and 13 disposable scratch files. The cache matched the canonical root in f
 byte-identical registry tree; locked offline fetch passed before deletion. The exact 12,754-file/2,376-directory
 old root was deleted, and locked fetch plus all six backend/tool storage oracles pass afterward. Both frozen old
 temporary roots and the shared Dart/Julia metadata scans have zero LinkedSpec matches. Ambiguous multi-project
-caches remain untouched and unused. Descendant-liveness remediation `.3.1.2` is the next clean frontier before the
-final residue proof.
+caches remain untouched and unused. Descendant-liveness remediation `.3.1.2` binds each managed command and all
+descendants to one marker-v2 process group before the final residue proof.
+
+The separately committed final audit `.3.2` does not infer cleanliness from those migration records. It resolves
+both inherited temporary roots at runtime and checks their bounded LinkedSpec-identifying namespaces before real
+destination use. It then runs the Perl, Rust, Dart, Julia, Lua, and tool storage oracles and repeats the old-root,
+shared Dart active-root, shared Julia usage-log, superseded target-identity, and managed-run censuses. Every pre-
+and post-use result is zero, so there is no deletion target: no external or shared path is changed. Retained copies
+still match Perl 65 directories / 17 files / 1,590 bytes and Julia 346 directories / 256 files / 133,963,036 bytes
+plus 24 directories / 15 files / 4,284,303 bytes. The final audit therefore closes existing-data migration while
+preserving ambiguous multi-project caches exactly as found.
 
 ## CI input areas
 

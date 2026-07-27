@@ -37,9 +37,12 @@ identity is intentionally gone; all reusable package content remains recoverable
 Fresh count/byte inventory also confirms the retained migration copies still match their recorded material
 boundaries: Perl 65 directories / 17 files / 1,590 bytes; Julia 346 directories / 256 files / 133,963,036 bytes and
 24 directories / 15 files / 4,284,303 bytes. The six Perl/Rust/Dart/Julia/Lua/tool storage oracles and common
-environment/lifecycle proofs pass with no managed-run residue. `PROJECT-DATA-SSD-ROOTING.3.2` remains responsible
-for the separately committed final off-repository residue proof after the descendant-liveness remediation.
+environment/lifecycle proofs pass with no managed-run residue. `PROJECT-DATA-SSD-ROOTING.3.2` owns the separately
+committed final off-repository residue proof after the descendant-liveness remediation. That leaf is now complete:
+its fresh pre/post-use censuses are zero, it has zero deletion targets, and the retained copies still match these
+boundaries.
 
 Related facts: [[project-data-ssd-storage-locality]], [[perl-project-data-ssd-storage]],
 [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]], [[julia-project-data-ssd-storage]],
-[[lua-project-data-ssd-storage]], [[tool-project-data-ssd-storage]], [[project-data-descendant-liveness-gap]].
+[[lua-project-data-ssd-storage]], [[tool-project-data-ssd-storage]], [[project-data-descendant-liveness-gap]],
+[[project-data-final-residue-proof]].

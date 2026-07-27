@@ -272,7 +272,11 @@ but found one missed exact same-SSD target-era root at `rust/target/project-data
 Cargo cache matched the canonical cache in file count/bytes and had a byte-identical registry tree; after locked
 offline use, the exact 12,754-file/2,376-directory old root was deleted. Locked fetch and all six backend/tool
 storage oracles pass afterward. Ambiguous multi-project caches remain untouched and unused. Descendant-liveness
-remediation `.3.1.2` is the next clean frontier before final residue closeout.
+remediation `.3.1.2` now binds every managed command and its descendants to a marker-v2 process group. Final
+residue proof `.3.2` independently confirms both runtime-derived old temporary roots and the bounded Dart/Julia
+shared metadata surfaces are empty before and after all six storage oracles. It finds zero deletion targets, leaves
+shared data untouched, and reconfirms the retained Perl/Julia copies. Existing-data migration `.3` is complete;
+structural storage doctrine `.4.1` is the next clean frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:

@@ -19,8 +19,10 @@ This document is the current high-level technical reading of the project shape. 
   cache identity and locked-offline proof. All six storage oracles pass afterward. A deterministic RED proves
   marker version 1 can delete scratch while a descendant outlives its recorded wrapper/direct-child PIDs.
   Remediation `.3.1.2` closes it with dedicated marker-v2 process groups, group-drain cleanup, group-wide signal
-  forwarding, conservative live/reused/indeterminate retention, and exact normal/orphan recovery proofs. Residue
-  `.3.2` is next, and relocation closeout remains paused behind storage `.5`.
+  forwarding, conservative live/reused/indeterminate retention, and exact normal/orphan recovery proofs. Final
+  residue `.3.2` independently proves zero old-root or bounded shared-metadata match before and after all six
+  storage oracles, with zero deletion targets and intact retained Perl/Julia copies. Parent `.3` is complete;
+  structural doctrine `.4.1` is active, and relocation closeout remains paused behind storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

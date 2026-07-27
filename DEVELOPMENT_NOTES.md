@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.2` — a zero deletion count is a positive audited result): Final migration
+  closeout must not trust earlier leaf narratives as its only evidence. Resolve the old temporary roots from the
+  runtime environment, bound the namespace to exact project identifiers, measure before use, exercise every
+  supported storage family, and measure again. That ordering distinguishes “nothing remained” from “a supported
+  workflow silently recreated it.” Both old roots and the bounded Dart/Julia metadata surfaces stayed empty.
+
+  No candidate means no deletion authority. This leaf removed zero external paths and did not traverse or mutate
+  ambiguous shared package payload. It separately recounted the retained Perl and Julia copies at their frozen
+  directory/file/byte boundaries, confirmed canonical roots share the repository device, and ran all six storage
+  oracles with zero managed-run residue. Final migration proof therefore closes on evidence without manufacturing
+  cleanup work; structural prevention belongs to the next clean leaf `.4.1`.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.1.2` — scratch ownership must name a kernel-enforced whole-run unit):
   Wrapper and direct-child PIDs cannot represent descendants after either process exits. The portable authority on
   the supported POSIX hosts is a dedicated child-led process group: Bash monitor mode assigns the foreground job a

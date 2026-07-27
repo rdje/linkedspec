@@ -51,8 +51,11 @@ destination remains usable. It also finds and deletes one missed exact same-SSD 
 after deletion. Verification exposes a separate marker-v1 descendant-liveness RED, so `.3.1` is split.
 Remediation `.3.1.2` now launches every managed command as a dedicated marker-v2 process group, waits for group
 drain, forwards signals group-wide, retains live/reused/indeterminate authority conservatively, and proves normal
-plus orphan descendant safety. Final residue proof `.3.2` is next. The path-portability closeout is paused behind
-this storage-locality tree so it can prove both
+plus orphan descendant safety. Final residue proof `.3.2` independently finds zero exact owner in either runtime-
+derived old temporary root or the bounded Dart/Julia metadata surfaces before and after all six storage oracles.
+There are zero deletion targets; retained Perl/Julia inventories still match, shared data is untouched, and parent
+`.3` is complete. Structural storage doctrine `.4.1` is next. The path-portability closeout is paused behind this
+storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
