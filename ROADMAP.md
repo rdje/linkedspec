@@ -62,10 +62,10 @@ and Apple `xcrun_db-` mutations fail; all six storage oracles and eight affected
 is complete. Final closeout `.5` passes all backend local gates, primary 660/660, Unicode 10/10, every maintained
 diagnostic/logical/root/cursor/duplicate/repeated/punctuation matrix, six-runtime scalar numeric 55/55, canonical
 Phase 0 1,031/1,031, and a fresh zero old-volume residue census with exact retained inventories. The storage tree
-is complete. Path-portability closeout `.2.2` is the next clean-pivot action so relocation and same-filesystem
-project IO are proved together.
+is complete. Path-portability closeout `.2.2` subsequently composes relocation and same-filesystem project I/O and
+raises the current routed-entrypoint inventory from the historical closeout count of 38 to 39.
 
-Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree
+Repository-root path portability is a completed critical architecture lane (ADR `0052`, task tree
 `REPO-ROOT-PATH-PORTABILITY`). Persisted repository-owned paths must be root-relative, and shipped runtime/tool
 roots must be derived from their current executable/module/script rather than a developer checkout or build
 directory. Completed behavior-free audit `.0` finds zero tracked current/former checkout literals and zero tracked
@@ -77,11 +77,14 @@ config/source owners `.1.2` are also complete: project defaults are relative, to
 network plugin consumes its existing configured command/input fields. The initial 12 Julia Knowledge Map commands
 were made path-portable in `.1.3`; storage leaf `PROJECT-DATA-SSD-ROOTING.2.4` now moves all 88 current Julia
 reverify cards onto self-rooted managed wrappers and removes disposable usage metadata containing runtime absolute
-paths. Remediation `.1.1-.1.3` is complete;
-structural doctrine `.2.1` is complete with one read-only tracked-text scan, 14 classifier self-tests, and all five
-primary runtime-anchor locks. Closeout `.2.2` is next after the completed `PROJECT-DATA-SSD-ROOTING.5`. Caller-owned
-absolute input paths, URLs, and external OS/tool paths remain legal when explicit; project-owned scratch and
-caches may not default to their filesystem.
+paths. Remediation `.1.1-.1.3` is complete; structural doctrine `.2.1` is complete with one read-only tracked-text
+scan, 14 classifier self-tests, and all five primary runtime-anchor locks. Closeout `.2.2` is complete: one Rust
+integration test copies the freshly built primary beneath a synthetic moved repository, distinguishes it from a
+conflicting ambient repository by exact named-spec output, and proves marker removal fails. One self-rooted shell
+oracle repeats named-spec execution for Perl, Dart, Julia, and Lua from a same-SSD cwd outside the checkout, enters
+managed repository storage, and runs once in canonical CI. The tree is complete at 39 routed entrypoints.
+Caller-owned absolute input paths, URLs, and external OS/tool paths remain legal when explicit; project-owned
+scratch and caches may not default to their filesystem.
 
 Semantic-introspection neutral contract (2026-07-20): ADRs `0049`/`0050` and
 `FUTURE-PARITY-BACKLOG.10.2` make

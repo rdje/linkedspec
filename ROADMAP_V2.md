@@ -54,7 +54,7 @@ external writes, shared-cache reads, symlink escapes, incomplete probes, denied-
 10/10, every maintained focused parity matrix, six-runtime scalar numeric 55/55, canonical Phase 0 1,031/1,031,
 and a fresh zero-residue pre/post census with exact retained-copy and same-device proof. The tree is complete.
 
-Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
+Completed critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current
 script/module/executable or an explicit caller root. Completed audit `.0` is behavior-free: 0 tracked checkout
 literals, 0 symlinks, 25/27 self-rooted shell/hook files plus 2 root-independent wrappers, and green outside-cwd Perl/Dart/
@@ -65,8 +65,12 @@ network command/input ownership. The initial 12 Julia fact-card commands `.1.3` 
 `PROJECT-DATA-SSD-ROOTING.2.4` now routes all 88 current Julia reverify cards through self-rooted managed wrappers
 and removes disposable usage metadata containing runtime absolute paths. Ordered remediation `.1.1-.1.3` is complete;
 structural doctrine `.2.1` now scans tracked parent text, self-tests 14 reject/accept classes, and locks all five
-primary runtime anchors through E3/E4. Closeout `.2.2` is next after completed `PROJECT-DATA-SSD-ROOTING.5`. Explicit
-caller paths and OS/tool data remain valid; project-owned temporary/cache state must use the repository filesystem.
+primary runtime anchors through E3/E4. Closeout `.2.2` is complete: its Rust integration test makes a freshly
+copied primary choose a synthetic moved repository over a conflicting ambient cwd and fail when the moved marker
+is removed. The composed self-rooted oracle repeats exact named-spec execution for Perl, Dart, Julia, and Lua from
+a same-SSD cwd outside the checkout, is canonical-CI registered, and raises current routing to 39 entrypoints.
+The relocation tree is complete. Explicit caller paths and OS/tool data remain valid; project-owned temporary/cache
+state must use the repository filesystem.
 
 Semantic-introspection neutral leaf `.10.2` makes ADRs `0049`/`0050` executable before backend behavior.
 `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` is one immutable native index of normalized

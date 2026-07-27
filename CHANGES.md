@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-27 — REPO-ROOT-PATH-PORTABILITY.2.2 — prove relocated checkout execution
+
+Closed ADR `0052` with a recurring behavioral complement to the existing structural doctrine. Added
+`rust/linkedspec-runtime/tests/repository_root_relocation.rs`: it copies the freshly built Rust primary beneath a
+synthetic moved repository in managed scratch, creates a conflicting ambient repository with the same unique spec
+name but a different result, launches from the ambient cwd, and requires exact `"relocated-root"` output. Removing
+the moved marker then requires exit 1 and exact `linkedspec: parser compilation failed`, making incomplete topology
+and wrong-root selection deterministic failures without changing production root discovery.
+
+Added `tools/test_repo_root_process_portability.sh` as the self-rooted composed boundary. From a same-filesystem cwd
+outside the checkout it runs the Rust integration test and exact named-`Lispish` primary commands for Perl, Dart,
+Julia, and Lua. All output, Cargo work, and Lua native modules remain below managed repository storage. The oracle
+is the 39th hostile outside-cwd routed entrypoint and canonical local CI invokes it once after the broader
+six-family kernel containment proof. ADR, roadmaps, task/index, Toolbox, Knowledge facts/map, README, architecture,
+live/memory records, and the public mdBook now describe the completed relocation invariant.
+
+Focused relocation, 39-route storage, both structural checks, and process containment pass. Fresh local rebuilds
+pass for Rust (core 193, runtime 149, integration 197, corpus/classifier 105 each, semantic admission 1/1 in 80.77
+seconds, storage, and primary 66x2), Dart (format/analyze/337 tests/storage/primary/corpus), Julia (complete package,
+semantic 416/416, storage/primary/corpus), and both PUC Lua and LuaJIT (177 tests each plus storage). Complete
+variant proof passes primary 660/660, Unicode self-hosted 10/10, diagnostic/logical/root/cursor/duplicate/repeated/
+punctuation matrices, and scalar numeric 55/55 across six runtimes. Canonical passes all six doctrines, Rust
+semantic 1/1 in 80.60 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds, primary 66/66 twice, both relocated process
+oracles, and Phase 0 1,031/1,031 in 653 seconds. The tree closes at cadence 39/300; no push occurs, and the paused
+Lua semantic frontier resumes next.
+
 ## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.5 — close SSD storage migration
 
 Closed the repository-filesystem storage migration after a fresh full-system proof. Both runtime-derived

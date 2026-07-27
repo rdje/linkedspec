@@ -1,7 +1,7 @@
 # ADR 0052: Repository-owned paths are relocation-safe
 
 - Date: 2026-07-25
-- Status: accepted; remediation/static enforcement complete, recurring process proof pending
+- Status: accepted; remediation, structural enforcement, and recurring process proof complete
 - Tags: architecture, paths, repository-root, relocation, portability, doctrine, tooling, cli
 
 ## Context
@@ -63,7 +63,13 @@ Those values do not identify repository-owned content and must not be conflated 
 - Structural enforcement is active as of `REPO-ROOT-PATH-PORTABILITY.2.1`. `REPO-ROOT-PATHS` scans tracked parent-
   repository text, self-tests seven rejection and seven legal classes, rejects compile-time Rust primary discovery,
   and locks the Perl/Rust/Dart/Julia/Lua runtime anchors through the existing E3/E4 doctrine driver.
-- New checkout-path doctrine work is not complete until both the static tree and a relocated process reproduce.
+- Recurring process enforcement is active as of `REPO-ROOT-PATH-PORTABILITY.2.2`. The Rust integration test copies
+  the freshly built primary into a synthetic moved repository, distinguishes executable-root selection from a
+  conflicting ambient repository by exact named-spec output, and requires failure after removing the moved marker.
+  `tools/test_repo_root_process_portability.sh` composes it with exact outside-cwd named-spec execution for Perl,
+  Dart, Julia, and Lua from the repository filesystem, and canonical local CI invokes that oracle once.
+- Checkout-path doctrine work is complete only when the tracked structural scan and relocated process reproduce
+  compose; both are now recurring gates.
 
 ## Links
 

@@ -640,7 +640,7 @@ None of those values may become an implicit repository root. In particular, a co
 a valid locator for shipped specs: after moving a binary, it would silently search the old checkout. ADR `0052`
 defines this contract. `REPO-ROOT-PATH-PORTABILITY` is landing it in dependency order: runtime repair, exact legacy
 path cleanup, durable-command cleanup, a fast structural doctrine, then a recurring copied-binary relocation
-oracle. The 2026-07-25 audit found no tracked current/former checkout literal and no tracked symlink. Perl, Dart,
+oracle. That rollout is now complete. The 2026-07-25 audit found no tracked current/former checkout literal and no tracked symlink. Perl, Dart,
 Julia, and Lua pass named-spec process probes from outside the checkout. Rust's repaired primary command searches
 current-executable ancestry before cwd ancestry for `specs/user_function_definition.spec`, then falls back to cwd
 when neither anchor is a checkout. A binary copied beneath a synthetic moved root therefore loads that root's
@@ -674,8 +674,25 @@ pre-commit and canonical local CI.
 
 Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
 Compiled debug information may also record source locations, so searching binary strings is not a relocation
-oracle. The recurring proof executes a freshly copied command beneath a synthetic moved root and requires it to
-load that root's unique spec.
+oracle. Run the recurring process proof with:
+
+```bash
+bash tools/test_repo_root_process_portability.sh
+```
+
+The Rust integration owner copies the freshly built primary beneath a synthetic moved repository. A conflicting
+ambient repository returns a different sentinel, so exact `"relocated-root"` output proves executable ancestry
+wins rather than merely proving that some named spec resolved. Removing the moved repository marker then requires
+exit 1 and exact compile-failure output. The same self-rooted oracle repeats Perl, Dart, Julia, and Lua named
+`Lispish` execution from a same-SSD cwd outside the checkout and requires exact `["hello",["world"]]` output.
+All generated state and native Lua modules remain below its managed repository-storage run. Canonical local CI
+invokes this composed boundary once; the path tree is complete at 39 routed entrypoints.
+
+Canonical backend flags decide which optional legs the orchestrator schedules; a skipped optional leg does not
+mean that backend cannot be built locally. Relocation closeout directly reran the complete Rust, Dart, Julia, PUC
+Lua, and LuaJIT gates. It also passed the five-backend primary matrix at 660/660, self-hosted Unicode at 10/10,
+all maintained diagnostic/logical/root/cursor/duplicate/repeated/punctuation matrices, and scalar numeric at 55/55
+across six runtimes. This full local proof complements, rather than replaces, the canonical composition gate.
 
 ## Project data locality and same-volume storage
 
@@ -1076,8 +1093,8 @@ privacy fixtures, necessary external executables and libraries, and external roo
 remain legal. Twenty-eight embedded reject/accept cases run with every check, including bare maintained Dart-command
 rejection, scalar/list-form Knowledge reverification commands, the exact inert CLI usage label, and the process
 oracle's narrowly scoped contained hostile-cache injection. The doctrine is one registry entry, so the existing pre-commit and
-local-CI driver enforce it automatically; hostile outside-cwd routing now covers 38
-entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
+local-CI driver enforce it automatically; after the relocation closeout registered its composed oracle, hostile
+outside-cwd routing covers 39 entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
 directory instead of an operating-system temporary path.
 
 ### Relocated process containment
@@ -1105,7 +1122,8 @@ tree's real `clang` with the active SDK instead of the stateful shim; required c
 interpreter reads remain the frozen read-only external dependency class.
 
 Final enforcement signoff passes all six family storage oracles, eight affected parity drivers, the 28-case
-structural doctrine, 38 routed boundaries, Knowledge Map 721 facts / 5,713 question keys, mdBook, memory, all six
+structural doctrine, the historical `.4.2` inventory of 38 routed boundaries, Knowledge Map 721 facts / 5,713
+question keys, mdBook, memory, all six
 doctrines, and zero managed runs. The complete canonical gate passes Rust semantic admission 1/1 in 78.09 seconds,
 Dart 1/1, Julia 416/416 in 27.2 seconds, both 66-case primary environments, the nested relocated containment
 proof, and Phase 0 1,031/1,031 in 620 seconds.

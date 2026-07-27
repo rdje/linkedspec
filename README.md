@@ -236,7 +236,17 @@ storage-locality lane below.
 Remediation `.1` is complete. Structural enforcement `.2.1` registers `REPO-ROOT-PATHS`: a read-only tracked-text
 scan with 14 mutation/acceptance self-tests plus fixed runtime-anchor locks for the Perl, Rust, Dart, Julia, and
 Lua primary commands. The existing doctrine driver runs it from pre-commit and canonical local CI. Recurring
-relocated-process proof `.2.2` is paused until the storage-locality tree closes.
+process proof `.2.2` is complete: a Rust integration test copies the freshly built primary below a synthetic moved
+repository, makes that repository and a conflicting ambient cwd return distinct named-spec values, and requires
+the executable-adjacent value. Removing the moved root marker then fails deterministically. The composed process
+oracle repeats exact outside-cwd named-spec execution for Perl, Dart, Julia, and Lua from the repository filesystem,
+and canonical local CI runs the proof. The relocation task tree is complete.
+
+Run the complete recurring relocation proof from any working directory:
+
+```bash
+bash tools/test_repo_root_process_portability.sh
+```
 
 ## Project data locality and same-volume storage
 
@@ -293,7 +303,9 @@ repeated-action, punctuation-light, and six-runtime 55-case scalar/numeric matri
 proof again finds zero LinkedSpec candidate in either off-repository operating-system temporary root, zero shared
 Dart/Julia checkout metadata, and every named obsolete root absent. The retained Perl/Julia migration inventories
 remain exact, all six canonical roots share the repository device, and canonical CI passes Phase 0 1,031/1,031.
-`PROJECT-DATA-SSD-ROOTING` is therefore complete; repository-relocation closeout is the next architecture action.
+`PROJECT-DATA-SSD-ROOTING` is therefore complete. The subsequent relocation closeout is complete too and adds its
+self-rooted process oracle to the routing inventory, so the current outside-cwd storage-routing boundary is 39
+entrypoints.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:

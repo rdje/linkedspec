@@ -385,6 +385,19 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `bash tools/test_tool_project_data_storage.sh`. Hostile another-filesystem destinations are read only to prove
   rejection, never created; same-filesystem outputs are checked before and after writing.
 
+### 4.3.8 `tools/test_repo_root_process_portability.sh` — recurring moved-checkout oracle
+
+- **WHAT:** compose the structural path doctrine, a Rust copied-primary integration test, and exact named-spec
+  primary execution for Perl, Dart, Julia, and Lua. The Rust test creates distinct moved and ambient repositories,
+  requires the executable-adjacent sentinel result, then removes the moved marker and requires exact failure.
+- **WHEN:** changing repository-root discovery, primary entrypoint anchoring, bundled named-spec resolution,
+  project-data routing, or canonical CI topology.
+- **HOW:** `bash tools/test_repo_root_process_portability.sh`. It self-roots, enters managed repository storage,
+  chooses a same-filesystem cwd outside the checkout, uses the supported Dart/storage environments, builds Lua
+  native modules below managed scratch, and requires exact output from all five runtime families. Canonical local
+  CI invokes this composed boundary once; `rust/linkedspec-runtime/tests/repository_root_relocation.rs` is the Rust
+  integration owner.
+
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
   environments + regression, E4);
@@ -857,6 +870,10 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   writes outside a managed checkout view and developer-home/OS-temp data reads except one exact caller input, then
   requires real Perl/Rust/Dart/Julia/Lua/tool traces or bytecode. Kept REDs cover external writes, shared-cache
   reads, symlink escapes, and incomplete probe sets; denied-access or `xcrun_db-` diagnostics fail the run.
+- `bash tools/test_repo_root_process_portability.sh` runs the checkout-identity complement. It requires a freshly
+  copied Rust primary to select its synthetic moved repository over a conflicting ambient cwd and repeats exact
+  named-spec execution for Perl/Dart/Julia/Lua from a same-SSD cwd outside the checkout. All generated state remains
+  beneath the managed repository-storage run.
 
 ---
 

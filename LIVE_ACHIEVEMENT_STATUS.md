@@ -8,13 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `REPO-ROOT-PATH-PORTABILITY.2.2` — activate only after the clean `PROJECT-DATA-SSD-ROOTING.5` closeout commit;
-  compose checkout relocation with the completed repository-filesystem storage environment.
+- `FUTURE-PARITY-BACKLOG.10.7.3.2.1` — resume the paused Lua semantic static-target implementation only after the
+  clean `REPO-ROOT-PATH-PORTABILITY.2.2` closeout commit; no semantic state changed during storage/relocation work.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **REPO-ROOT-PATH-PORTABILITY.2.2 — prove relocated checkout execution**
+  (Rust competing-root integration, five-runtime outside-cwd oracle, 39-entry routing, complete canonical signoff).
+
+  **Result:** Added one Rust integration owner that copies the freshly built primary beneath a synthetic moved
+  repository. A conflicting ambient repository exposes wrong precedence by returning a distinct sentinel; exact
+  `"relocated-root"` proves executable ancestry wins. Removing the moved marker yields exact compile failure. One
+  self-rooted shell oracle composes this with exact named-spec Perl, Dart, Julia, and Lua execution from a same-SSD
+  cwd outside the checkout. Generated state stays in managed repository storage, canonical invokes the proof once,
+  routing reaches 39 entrypoints, and ADR `0052` plus its task tree are complete.
+
+  **Proof:** Focused relocation, 39-route storage, both structural doctrines, and six-family containment pass.
+  Fresh complete Rust, Dart, Julia, PUC Lua, and LuaJIT local gates pass; the full primary matrix is 660/660,
+  Unicode self-hosted is 10/10, every maintained diagnostic/logical/root/cursor/duplicate/repeated/punctuation
+  matrix passes, and scalar numeric is 55/55 across six runtimes. Canonical passes all six doctrines, Rust 1/1 in
+  80.60s, Dart 1/1, Julia 416/416 in 28.5s, primary 66x2, both relocated process oracles, and Phase 0 1,031/1,031
+  in 653s. Knowledge Map is 723/5,736; cadence advances to 39/300 with no push; the paused Lua semantic frontier
+  resumes next.
+
 - 2026-07-27: **PROJECT-DATA-SSD-ROOTING.5 — close SSD storage migration**
   (fresh zero-residue census, every backend gate, complete variant parity, canonical and public closeout).
 

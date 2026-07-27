@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-27`
+- `2026-07-27` repository-relocation closeout: `REPO-ROOT-PATH-PORTABILITY.2.2` completes ADR `0052`. A new Rust
+  integration test copies the freshly built primary into a synthetic moved repository, proves executable ancestry
+  outranks a conflicting ambient repository by exact named-spec output, and turns missing moved-root topology into
+  a deterministic failure. `tools/test_repo_root_process_portability.sh` composes that proof with exact Perl,
+  Dart, Julia, and Lua named-spec commands from a same-SSD cwd outside the checkout. It self-routes all generated
+  state below managed repository storage, raises hostile outside-cwd routing to 39 entrypoints, and runs once in
+  canonical CI. Structural `REPO-ROOT-PATHS` remains the fast E3/E4 guard; the process oracle is its recurring
+  runtime complement. Fresh complete Rust, Dart, Julia, PUC Lua, and LuaJIT local gates pass alongside primary
+  660/660, Unicode self-hosted 10/10, every maintained focused parity matrix, and scalar numeric 55/55 across six
+  runtimes. The relocation tree is complete and the paused semantic frontier resumes next.
 - `2026-07-27` repository-storage closeout: `PROJECT-DATA-SSD-ROOTING.5` completes ADR `0053` migration,
   reconciliation, and recurring enforcement. Fresh pre/post censuses find zero LinkedSpec candidate in either
   off-repository OS temporary root, zero shared Dart/Julia identity, every obsolete path absent, exact retained
@@ -12,7 +22,7 @@ This document is the current high-level technical reading of the project shape. 
   primary CLI parity is 660/660, Unicode self-hosted parity is 10/10, every maintained focused five-backend matrix
   passes, and scalar/numeric parity is 55/55 across six runtimes. Canonical passes Rust semantic admission 1/1 in
   80.02s, Dart 1/1, Julia 416/416 in 28.3s, primary 66x2, relocated containment, and Phase 0 1,031/1,031 in 638s.
-  `REPO-ROOT-PATH-PORTABILITY.2.2` is the next clean-pivot architecture action.
+  `REPO-ROOT-PATH-PORTABILITY.2.2` follows from that clean storage boundary and is summarized above.
 - `2026-07-27` repository-storage process refresh: `PROJECT-DATA-SSD-ROOTING.4.2` completes the enforcement parent.
   The structural `PROJECT-DATA-STORAGE` doctrine now has 28 mutation-sensitive cases and 38 outside-cwd routed
   boundaries. `tools/test_project_data_process_locality.sh` creates a collision-safe relocated checkout view under

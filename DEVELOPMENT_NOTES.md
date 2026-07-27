@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`REPO-ROOT-PATH-PORTABILITY.2.2` — relocation proof needs competing roots, not merely a copied
+  executable): A copied executable can appear relocated while still sitting below the real checkout; upward marker
+  discovery then correctly reaches the original repository and the test proves nothing about external ancestry.
+  The behavioral oracle must create a complete synthetic moved repository with a uniquely named spec. Giving an
+  ambient cwd repository the same spec name but a different value makes precedence observable: exact moved output
+  proves executable ancestry won, while removing the moved marker proves incomplete topology cannot silently pass.
+
+  Root selection and project-data locality are orthogonal but must compose. The recurring shell boundary therefore
+  chooses the checkout's parent as its outside cwd only after checking same-device identity, enters one managed
+  storage run, and keeps Cargo/native-module state below that run. Perl `FindBin`, Dart script ascent, Julia
+  `@__DIR__`, and Lua `debug.getinfo` need no second implementation owner; exact named-spec process output is their
+  behavioral lock. Canonical invokes this composition once after the stronger six-family kernel I/O containment
+  oracle, avoiding duplicate production or gate ownership.
+
+  Canonical feature flags are scheduling controls, not backend-build limitations. A canonical run may report an
+  optional backend leg as skipped because its environment variable is unset even when the backend is fully
+  available locally. Relocation closeout therefore supplements canonical orchestration with fresh complete Rust,
+  Dart, Julia, PUC Lua, and LuaJIT gates plus the full maintained cross-backend matrix set. This distinguishes
+  “canonical composition is green” from the stronger, director-requested claim that every local implementation was
+  actually rebuilt and exercised in the same closeout.
+
 - 2026-07-27 (`PROJECT-DATA-SSD-ROOTING.5` — close storage with independent composition, not accumulated claims):
   Per-family migration and enforcement proofs are necessary but do not establish final system state by themselves.
   Closeout must compose a fresh old-root census, retained-copy inventory, same-device destination check, every

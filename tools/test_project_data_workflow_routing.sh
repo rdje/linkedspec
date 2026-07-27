@@ -53,6 +53,7 @@ routed_entrypoints=(
  tools/test_lua_project_data_storage.sh
  tools/test_tool_project_data_storage.sh
  tools/test_project_data_process_locality.sh
+ tools/test_repo_root_process_portability.sh
  tools/build_lua_native.sh
  tools/check_julia_primary_cli.sh
  tools/check_diagnostic_output_five_backend.sh
@@ -168,6 +169,8 @@ run_routed_case knowledge-map success "$REPO_ROOT/knowledge-map/scripts/check_kn
 run_routed_case mdbook success "$REPO_ROOT/tools/run_mdbook_local.sh"
 run_routed_case perl-storage success "$REPO_ROOT/tools/test_perl_project_data_storage.sh"
 run_routed_case tool-storage success "$REPO_ROOT/tools/test_tool_project_data_storage.sh"
+run_routed_case repo-root-process failure "$REPO_ROOT/tools/test_repo_root_process_portability.sh" \
+ LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case primary-matrix failure "$REPO_ROOT/tools/run_primary_cli_matrix.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo
 run_routed_case cargo failure "$REPO_ROOT/tools/run_cargo_local.sh" \

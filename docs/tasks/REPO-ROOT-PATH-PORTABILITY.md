@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `REPO-ROOT-PATH-PORTABILITY`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Repository architecture / checkout relocation invariance`
 - Created: `2026-07-25`
-- Last updated: `2026-07-26` (structural doctrine `.2.1` done; `.2.2` paused behind SSD storage migration)
+- Last updated: `2026-07-27` (tree complete; recurring structural and moved-process enforcement green)
 - Owner: repo-local workflow
 
 ## Goal
@@ -29,7 +29,7 @@ root because the root may move for many reasons and relocation must not affect t
 ## Task Tree
 
 - ID: `REPO-ROOT-PATH-PORTABILITY`
-  Status: `active`
+  Status: `done` (2026-07-27; remediation plus structural/process enforcement complete)
   Goal: Make repository relocation an explicit, mechanically enforced architecture invariant.
   Children: `.0`, `.1`, `.2`
 
@@ -153,7 +153,7 @@ root because the root may move for many reasons and relocation must not affect t
     commit/brief/clean-tree state, 21/300 counter, and no-push state align; `.2.1` is the next clean frontier.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.2`
-  Status: `active`
+  Status: `done` (2026-07-27; both structural and recurring process gates complete)
   Goal: Mechanically prevent checkout-specific repository paths from returning.
   Depends on: `.1.3`
   Children: `.2.1`, `.2.2`
@@ -195,7 +195,7 @@ root because the root may move for many reasons and relocation must not affect t
     `.2.2` is the next clean frontier.
 
 - ID: `REPO-ROOT-PATH-PORTABILITY.2.2`
-  Status: `pending` (resume after `PROJECT-DATA-SSD-ROOTING.5`)
+  Status: `done` (2026-07-27; moved-root behavior and all five runtime anchors recur in canonical CI)
   Goal: Close the invariant with a recurring relocated-checkout process oracle.
   Depends on: `.2.1`
   Acceptance: Add one Rust integration test that copies the freshly built primary executable beneath a synthetic
@@ -206,11 +206,36 @@ root because the root may move for many reasons and relocation must not affect t
     the brief, verify clean, and do not push.
   Commit: `REPO-ROOT-PATH-PORTABILITY.2.2 - prove relocated checkout execution`
 
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `PROJECT-DATA-SSD-ROOTING.5` commit `0319e698`, empty
+    commit brief, zero managed runs, and 38/300 local commits with no push; activated this leaf before changing any
+    relocation implementation, test, or public documentation.
+  - [x] **CURRENT PROOF INVENTORY / RED** — Existing Knowledge/Toolbox authority shows `.1.1` made the exact
+    copied-binary/named-spec reproduction green only as a manual run. The Rust storage oracle copies below the real
+    checkout and uses an inline spec, while `.4.2` relocates a checkout but also uses inline specs. Structural RED
+    confirms no integration owner or canonical invocation exists; the synthetic storage path's ancestry reaches
+    the real marker. Production root discovery stays unchanged; this leaf owns only recurring composition.
+  - [x] **RECURRING RUST RELOCATION ORACLE** — Copy the freshly built primary executable beneath a synthetic moved
+    repository containing only its own unique named spec and required root marker, launch from outside it under the
+    final repository-filesystem storage environment, and require exact successful output from that moved tree.
+    Make wrong-root selection and incomplete moved-root topology deterministic failures; keep all generated state
+    on the repository filesystem and clean it exactly.
+  - [x] **FOUR EXISTING RUNTIME ANCHORS** — Retain the structural Perl `FindBin`, Dart script/cwd ascent, Julia
+    `@__DIR__`, and Lua `debug.getinfo` locks; repeat their outside-cwd named-primary smoke proof through supported
+    storage wrappers with exact output and no project data on the caller filesystem.
+  - [x] **RECURRING / CANONICAL GATES** — Register the smallest recurring process boundary in the established
+    doctrine/local-CI topology without duplicate execution; pass focused mutation-sensitive proof, all six
+    doctrines, Knowledge Map, mdBook, complete canonical CI, whitespace, memory, task metadata, and zero runs.
+  - [x] **LOCKSTEP / CLEAN CLOSE** — Synchronize ADR/roadmaps/task/live/change/development/memory/Knowledge facts and
+    public book with exact results; close this tree, resume the recorded semantic frontier, commit at 39/300, clear
+    the brief, verify a clean tree, and do not push.
+
 ## Current Frontier
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `REPO-ROOT-PATH-PORTABILITY.2.2` | `pending` | Resume after `PROJECT-DATA-SSD-ROOTING.5`; combine the recurring relocated-binary oracle with the new repo-filesystem storage environment. |
+| — | — | Tree complete; resume `FUTURE-PARITY-BACKLOG.10.7.3.2.1` only after the clean `.2.2` commit. |
 
 ## Decisions
 
@@ -222,8 +247,12 @@ root because the root may move for many reasons and relocation must not affect t
 - The audit must not misclassify unrelated external OS/tool/temp paths as repository-path violations.
 - ADR `0052` is the durable contract. Caller-supplied exact paths stay legal data; they never become an implicit
   project root or durable checkout identity.
-- Director-ordered `PROJECT-DATA-SSD-ROOTING` takes clean-pivot precedence before `.2.2`: relocation process proof
-  must exercise the final repo-filesystem storage environment rather than freeze superseded OS-temp defaults.
+- Director-ordered `PROJECT-DATA-SSD-ROOTING` took clean-pivot precedence before `.2.2`; commit `0319e698` closes
+  it, so relocation process proof now exercises the final repo-filesystem storage environment rather than
+  superseded OS-temp defaults.
+- The recurring closeout composes existing production behavior rather than adding a second root-discovery owner:
+  Rust owns moved-root selection in one integration test; one self-rooted shell boundary repeats the other four
+  runtime anchors and is invoked exactly once by canonical CI.
 - `rgx` is a gitlink with its own repository and task/commit boundary. The parent checker verifies only the tracked
   parent tree; changing the submodule requires a separately owned submodule task and commit.
 
@@ -306,6 +335,11 @@ root because the root may move for many reasons and relocation must not affect t
 | 2026-07-26 | `.2.1` | `bash -n scripts/check_repo_root_path_portability.sh`; direct checker; staged checker self-scan | PASS; 14 reject/accept classifier cases, clean tracked parent text, all five primary anchor families exact |
 | 2026-07-26 | `.2.1` | `bash scripts/check_doctrines.sh`; mdBook; Knowledge Map; memory; whitespace | PASS; all five registered doctrines; KM 706/5,513; 43-line memory; aligned documentation |
 | 2026-07-26 | `.2.1` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS; Rust semantic 1/1 in 80.26s, Dart 1/1, Julia 416/416 in 28.6s, Perl primary 66x2, Phase 0 1,031/1,031 in 657s |
+| 2026-07-27 | `.2.2` | Knowledge/Toolbox proof inventory; integration/canonical owner absence; storage-oracle ancestry probe; structural doctrine; zero runs | RED: `.1.1` named-spec relocation is manual-only; existing copied binary is below the real checkout and both current process oracles use inline specs; no recurring named-spec moved-root owner exists; 14/5 structural checker remains green |
+| 2026-07-27 | `.2.2` | focused composed oracle; workflow routing; structural path/storage checks; six-family process containment | PASS: moved Rust exact output plus marker-removal failure; Perl/Dart/Julia/Lua exact outside-cwd output; 39 routes; 1,655 files / 366,911 lines; zero containment denial |
+| 2026-07-27 | `.2.2` | complete `bash tools/run_rust_local.sh` | PASS: core 193, runtime 149, integration 197, corpus/classifier 105 each, semantic 1/1 in 80.77s, storage, primary 66x2; relocation integration included |
+| 2026-07-27 | `.2.2` | canonical `env PERL5LIB= bash tools/run_ci_local.sh` | PASS: all six doctrines; Rust semantic 1/1 in 80.60s, Dart 1/1, Julia 416/416 in 28.5s, primary 66x2, both relocated process oracles, Phase 0 1,031/1,031 in 653s |
+| 2026-07-27 | `.2.2` | fresh complete Dart, Julia, PUC Lua/LuaJIT local gates; primary and Unicode matrices; all maintained focused parity matrices | PASS: Dart format/analyze/337, Julia complete package + semantic 416/416, both Lua ABIs 177 each; primary 660/660; Unicode 10/10; diagnostic/logical/root/cursor/duplicate/repeated/punctuation green; scalar numeric 55/55 across six runtimes |
 
 ## Commit Log
 
@@ -316,6 +350,7 @@ root because the root may move for many reasons and relocation must not affect t
 | `.1.2` | `507fc72e` — `REPO-ROOT-PATH-PORTABILITY.1.2 - remove machine-bound legacy paths` | Eight frozen config/source owners now use relative roots, existing fields, or PATH tools. |
 | `.1.3` | `6648d3bf` — `REPO-ROOT-PATH-PORTABILITY.1.3 - normalize durable reverify paths` | Twelve Julia fact-card commands now use runtime-composed portable roots and depots. |
 | `.2.1` | `6edf5c8a` — `REPO-ROOT-PATH-PORTABILITY.2.1 - gate repository path portability` | One read-only doctrine scans tracked parent text and locks all five runtime anchors. |
+| `.2.2` | `(this commit)` — `REPO-ROOT-PATH-PORTABILITY.2.2 - prove relocated checkout execution` | Rust moved-root integration plus five-runtime recurring process composition closes the tree. |
 
 ## Changelog
 
@@ -331,3 +366,7 @@ root because the root may move for many reasons and relocation must not affect t
   proof passes, the derived map is synchronized, remediation `.1` closes, and `.2.1` becomes the clean frontier.
 - `2026-07-26`: Completed `.2.1`; `REPO-ROOT-PATHS` is registered once through E3/E4, its 14-case classifier and
   five primary anchor families pass, and `.2.2` becomes the clean frontier.
+- `2026-07-27`: Completed `.2.2`; a Rust moved-root integration test and one SSD-routed five-runtime process oracle
+  recur in canonical CI, routing is 39 entrypoints, the complete Rust/canonical gates pass, and the relocation tree
+  closes without production root-discovery changes. The paused Lua semantic frontier resumes after this clean
+  commit.

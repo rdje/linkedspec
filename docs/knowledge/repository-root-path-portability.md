@@ -23,11 +23,14 @@ answers:
   - which absolute paths does the repository path doctrine allow
   - what did REPO ROOT PATH PORTABILITY 0 discover
   - why can repository local TMPDIR not model an external executable
-date: 2026-07-26
+  - which recurring oracle proves a copied LinkedSpec binary uses its moved repository
+  - how is executable root precedence proved against an ambient repository
+  - do all five LinkedSpec primary runtimes resolve named specs outside the checkout
+date: 2026-07-27
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. PROJECT-DATA-SSD-ROOTING.2.4 migrates 88 existing current Julia reverify cards to self-rooted repository-storage wrappers and removes disposable package-manager usage metadata containing runtime absolute paths. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. ADR 0052 freezes the boundary."
-reverify: "bash scripts/check_repo_root_path_portability.sh && bash scripts/check_doctrines.sh"
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. PROJECT-DATA-SSD-ROOTING.2.4 migrates 88 existing current Julia reverify cards to self-rooted repository-storage wrappers and removes disposable package-manager usage metadata containing runtime absolute paths. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. REPO-ROOT-PATH-PORTABILITY.2.2 adds a Rust integration owner that distinguishes a synthetic moved repository from a conflicting ambient repository by exact named-spec output, requires exact failure after marker removal, composes Perl/Dart/Julia/Lua outside-cwd named-spec proof in one self-rooted oracle, raises routing to 39 entrypoints, and registers the process proof once in canonical local CI. ADR 0052 is fully implemented."
+reverify: "bash scripts/check_repo_root_path_portability.sh && bash tools/test_repo_root_process_portability.sh && bash scripts/check_doctrines.sh"
 ---
 
 ADR `0052` makes checkout relocation a correctness property. Checked-in references to repository-owned files are
@@ -48,8 +51,15 @@ looked back into its compile-time checkout. `REPO-ROOT-PATH-PORTABILITY.1.1` rep
 searches upward from the current executable for the checked-in `specs/user_function_definition.spec` marker, then
 searches cwd ancestry, then deterministically falls back to cwd. Executable precedence keeps a bundled command
 attached to its own relocated tree; cwd ancestry supports an installed command invoked within a checkout. The
-original copied-binary reproduction now exits 0 with exact `"relocated-root"`. `.2.2` owns the recurring process
-oracle.
+original copied-binary reproduction now exits 0 with exact `"relocated-root"`.
+
+`REPO-ROOT-PATH-PORTABILITY.2.2` makes that process proof recurring and mutation-sensitive. The Rust integration
+test copies the freshly built primary beneath a synthetic moved repository and gives a conflicting ambient cwd a
+different sentinel. Exact `"relocated-root"` output proves executable-root precedence; removing the moved marker
+then requires exit 1 and exact compile-failure output. `tools/test_repo_root_process_portability.sh` composes that
+integration owner with exact Perl, Dart, Julia, and Lua named-`Lispish` execution from a same-SSD cwd outside the
+checkout. It initializes managed repository storage, keeps generated Lua/Cargo state below that run, is the 39th
+routed entrypoint, and runs once in canonical local CI.
 
 SSD-local temporary routing makes filesystem ancestry semantically important. A test executable created beneath
 repository-local `TMPDIR` is beneath the real checkout, so discovery correctly reaches the real bundled-spec
@@ -93,4 +103,5 @@ is that none of those values becomes an implicit or durable repository root.
 
 Related facts: [[native-spec-resolution-contract]], [[native-spec-resolution-policy-drift]],
 [[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[rust-project-data-ssd-storage]],
-[[julia-project-data-ssd-storage]], [[lua-toolchain-package-policy]].
+[[julia-project-data-ssd-storage]], [[lua-toolchain-package-policy]],
+[[repository-root-relocation-process-proof]].
