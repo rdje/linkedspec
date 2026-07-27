@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.4.1 — gate project storage locality
+
+Added `scripts/check_project_data_storage_locality.sh` as the registered `PROJECT-DATA-STORAGE` doctrine. The
+self-rooted read-only checker governs tracked runtime/test/tool/configuration owners, README and Toolbox guidance,
+all mdBook chapters, and executable `reverify:` commands in Knowledge facts. It rejects operating-system-temp,
+developer-home, unrooted cache/depot/build/output, persisted checkout, and unsupported cross-volume storage
+defaults. Twenty-two embedded cases prove those rejections and acceptance of explicit caller inputs, inert path
+fixtures, rejection probes, root-relative operands, repository-derived storage, and necessary external tool or
+system-library reads.
+
+The initial direct RED found exactly nine current Toolbox artifact destinations under operating-system temp.
+Toolbox diagnostics now create one collision-safe directory below initialized repository scratch and route TAP,
+failure-set, and focused-harness captures through it. Historical task/ADR/fact evidence remains searchable but is
+not misclassified as a current command; Knowledge governance is deliberately limited to its executable `reverify:`
+surface. The existing `REPO-ROOT-PATHS` doctrine remains the complementary authority for all persisted machine
+identity, whether or not the occurrence is a storage sink.
+
+The final checker covers 1,651 files / 366,343 lines and passes all 22 cases. It is registered exactly once through
+the six-doctrine E3/E4 driver; hostile outside-cwd routing now covers 36 standard boundaries. All six Perl/Rust/
+Dart/Julia/Lua/tool storage oracles pass with zero managed runs. Knowledge Map, mdBook, memory, doctrines, and
+whitespace gates pass. No canonical rerun is warranted after the complete `.3.1.2` canonical because this leaf
+changes a structural checker/current guidance and reruns every affected storage oracle. Process proof `.4.2`
+becomes active, push cadence advances to 36/300, and no push occurs.
+
 ## 2026-07-26 — PROJECT-DATA-SSD-ROOTING.3.2 — retire internal-volume project data
 
 Closed existing-data migration with a fresh audit rather than relying on earlier deletion records. The census

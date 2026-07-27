@@ -54,8 +54,11 @@ drain, forwards signals group-wide, retains live/reused/indeterminate authority 
 plus orphan descendant safety. Final residue proof `.3.2` independently finds zero exact owner in either runtime-
 derived old temporary root or the bounded Dart/Julia metadata surfaces before and after all six storage oracles.
 There are zero deletion targets; retained Perl/Julia inventories still match, shared data is untouched, and parent
-`.3` is complete. Structural storage doctrine `.4.1` is next. The path-portability closeout is paused behind this
-storage-locality tree so it can prove both
+`.3` is complete. Structural leaf `.4.1` now registers the `PROJECT-DATA-STORAGE` doctrine across tracked current
+code/config/test/tool and command-guidance surfaces with 22 rejected/accepted classifier cases. It preserves
+caller/inert/tool/system paths, migrates remaining Toolbox diagnostics to repository scratch, and passes the six-
+doctrine registry, 36-boundary hostile routing, and all six storage oracles. Process-level IO proof `.4.2` is next.
+The path-portability closeout is paused behind this storage-locality tree so it can prove both
 relocation and same-filesystem project IO together.
 
 Repository-root path portability is a critical active architecture lane (ADR `0052`, task tree

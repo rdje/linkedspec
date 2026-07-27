@@ -5,7 +5,7 @@
 - Status: `active`
 - Roadmap lane: `Repository architecture / project-data storage locality`
 - Created: `2026-07-26`
-- Last updated: `2026-07-26` (`.3` migration/residue closeout complete; structural doctrine `.4.1` active)
+- Last updated: `2026-07-26` (`.4.1` structural doctrine complete; process proof `.4.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -562,7 +562,7 @@ accessing the shared copy, and remove only records or directories provably owned
   Children: `.4.1`, `.4.2`
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4.1`
-  Status: `active`
+  Status: `done` (2026-07-26; structural storage-locality doctrine registered and mutation-sensitive)
   Goal: Add a fast structural doctrine for project storage locality.
   Depends on: `.3.2`
   Acceptance: Scan tracked executable/config/documented command owners for forbidden internal-temp, developer-home,
@@ -571,8 +571,32 @@ accessing the shared copy, and remove only records or directories provably owned
     accepted class; register exactly once in doctrine enforcement; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality`
 
+  #### Acceptance Checklist
+
+  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.3.2` commit `5f603104` at 35/300 with a zero-byte brief and
+    zero managed runs; froze this checklist before enforcement-code changes; no push occurred.
+  - [x] **STRUCTURAL OWNER INVENTORY** — Derived the tracked executable/config/documented-command surface and
+    classified current storage spellings. The direct RED found exactly nine unsafe Toolbox artifact destinations;
+    inert fixtures, historical evidence, explicit caller inputs, and necessary tool/system paths remain distinct.
+  - [x] **EXACT POLICY CHECK** — Added `scripts/check_project_data_storage_locality.sh`, a self-rooted fast checker
+    over tracked code/test/tool/configuration owners, current README/Toolbox/mdBook commands, and Knowledge
+    `reverify:` lines. It rejects OS-temp, developer-home, unrooted storage, and concrete checkout defaults while
+    accepting repository-derived storage and the frozen explicit necessity classes.
+  - [x] **MUTATION-SENSITIVE SELF-TESTS** — Twenty-two embedded reject/accept cases cover every forbidden class,
+    persisted checkout identity, caller-owned absolute inputs, inert fixtures, necessary executable/library reads,
+    rejection probes, root-relative paths, and runtime-derived storage. The composed `REPO-ROOT-PATHS` doctrine
+    continues to reject every persisted current/former machine identity outside this storage-specific sink model.
+  - [x] **E3/E4 REGISTRY** — Registered `PROJECT-DATA-STORAGE` exactly once in `scripts/check_doctrines.sh`; the
+    existing pre-commit and local-CI paths consume that one driver. Enforcement/Toolbox guidance documents the
+    doctrine, and hostile outside-cwd routing now proves 36 standard entrypoints.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronized doctrine/storage/routing facts, ADR/roadmaps/task/live/memory/public
+    book. The checker reports 1,651 governed files / 366,343 lines / 22 cases; all six storage oracles, 36-boundary
+    routing, six doctrines, Knowledge Map, mdBook, memory, whitespace, and zero-run gates pass. No canonical rerun
+    is warranted after `.3.1.2`: this leaf changes only a structural checker/current guidance and reruns every
+    affected storage oracle. Commit at 36/300, clear the brief, and do not push.
+
 - ID: `PROJECT-DATA-SSD-ROOTING.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add process proof that representative workflows keep project IO on the repo filesystem.
   Depends on: `.4.1`
   Acceptance: Run representative Perl/Rust/Dart/Julia/Lua/tool probes with hostile external temp/cache variables;
@@ -595,7 +619,7 @@ accessing the shared copy, and remove only records or directories provably owned
 
 | Leaf | Status | Next action |
 | --- | --- | --- |
-| `PROJECT-DATA-SSD-ROOTING.4.1` | `active` | Add the structural doctrine that rejects off-repository project storage and unsupported cross-volume defaults. |
+| `PROJECT-DATA-SSD-ROOTING.4.2` | `active` | Add process-level opened-path proof for representative hostile, outside-cwd, and relocated workflows. |
 
 ## Decisions
 
@@ -622,8 +646,11 @@ accessing the shared copy, and remove only records or directories provably owned
   filesystem-root-absolute.
 - Caller overrides are preserved only after the helper proves their resolved directory shares the repository
   device. Julia's trailing empty depot entry admits Julia-managed system depots but omits the developer-home depot.
-- Thirty-five standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
+- Thirty-six standard hook/doctrine/Knowledge Map/canonical/book/backend boundaries route the initializer before a
   runtime or allocator; the Knowledge Map indirection stays portable, direct commands explicit, and migration `.2`.
+- Structural storage enforcement governs current executable/configuration owners and maintained commands, while
+  cumulative history remains evidence rather than an executable default. Sink/default context—not a bare absolute
+  path value—distinguishes forbidden storage from caller input, an inert fixture, or a necessary external read.
 - Standard top-level boundaries then share one checkout-namespaced foreground run. Success and default failure
   delete only their validated run leaf after the marker-v2 process group drains; retained failures require explicit
   policy; cache is outside cleanup; recovery skips live/reused/indeterminate/invalid/foreign candidates and
@@ -646,6 +673,7 @@ accessing the shared copy, and remove only records or directories provably owned
 - Durable migration reconciliation fact: `docs/knowledge/project-data-migration-reconciliation.md`
 - Durable descendant-liveness gap fact: `docs/knowledge/project-data-descendant-liveness-gap.md`
 - Durable final residue fact: `docs/knowledge/project-data-final-residue-proof.md`
+- Durable structural doctrine fact: `docs/knowledge/project-data-storage-locality-doctrine.md`
 - Public local-verification guide: `docs/linkedspec-book/src/development/local-ci-and-regression.md`
 
 ## Verification Log
@@ -702,6 +730,10 @@ accessing the shared copy, and remove only records or directories provably owned
 | 2026-07-26 | `.3.2` | retained migration and canonical destination inventory | PASS: Perl 65 directories/17 files/1,590 bytes; Julia 346/256/133,963,036 and 24/15/4,284,303; canonical Cargo/Dart/Julia/Python/Rust roots share repository device |
 | 2026-07-26 | `.3.2` | all six backend/tool storage oracles and post-use cleanup | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, tool writers; post-use old-root/metadata census remains zero; zero managed runs; captured log removed |
 | 2026-07-26 | `.3.2` | Knowledge Map; memory; five doctrines; mdBook; whitespace | PASS: Knowledge Map 719 facts/5,683 question keys; memory 60 lines; all five doctrines; public book; diff whitespace; zero managed runs |
+| 2026-07-26 | `.4.1` | structural inventory and direct RED-to-green storage checker | PASS: nine unsafe Toolbox artifact paths migrated; final checker governs 1,651 tracked files / 366,343 lines and passes 22 rejected/accepted classifier cases |
+| 2026-07-26 | `.4.1` | six-doctrine registry and hostile outside-cwd workflow routing | PASS: `PROJECT-DATA-STORAGE` registered exactly once through the E3/E4 driver; all six doctrines pass; 36 standard routes initialize repository storage |
+| 2026-07-26 | `.4.1` | all six backend/tool storage oracles | PASS: Perl 24, Rust 17/195 packages, Dart 18/47 packages, Julia 17/5 package trees, Lua 13/dual ABI, and tool writers; zero managed runs |
+| 2026-07-26 | `.4.1` | Knowledge Map; memory; six doctrines; mdBook; whitespace | PASS: Knowledge Map 720 facts/5,695 question keys; memory 60 lines; no canonical rerun warranted for structural-checker/current-guidance scope after complete `.3.1.2` canonical plus every affected storage oracle |
 
 ## Commit Log
 
@@ -719,7 +751,8 @@ accessing the shared copy, and remove only records or directories provably owned
 | `.2.6` | `2c485819` — `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD` | Python/tool wrapper and oracle, 35 routed boundaries, validated KM/mdBook/TAP/oracle output, exact old residue deletion, and canonical proof. |
 | `.3.1.1` | `7efd48b6` — `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records` | Complete ledger, missed target-era root deletion, all storage oracles, and descendant-liveness RED split. |
 | `.3.1.2` | `f471d5f3` — `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants` | Marker-v2 process-group lifecycle, normal/orphan descendant safety, group signals, conservative recovery, and canonical proof. |
-| `.3.2` | `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data` (this commit) | Independent zero residue, zero deletions, exact retained-copy inventory, six destination oracles, and post-use zero proof. |
+| `.3.2` | `5f603104` — `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data` | Independent zero residue, zero deletions, exact retained-copy inventory, six destination oracles, and post-use zero proof. |
+| `.4.1` | `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality` (this commit) | Structural storage doctrine, 22 classifier cases, nine current-command remediations, six-doctrine registry, and 36-boundary routing. |
 
 ## Changelog
 
@@ -781,3 +814,7 @@ accessing the shared copy, and remove only records or directories provably owned
   target exists, so no external/shared path was changed. Retained Perl/Julia copies match frozen counts/bytes,
   every canonical root shares the repository filesystem, and all six storage oracles pass with zero runs. Parent
   `.3` closes; structural doctrine `.4.1` becomes the clean frontier after commit.
+- `2026-07-26`: Completed `.4.1`; `PROJECT-DATA-STORAGE` now rejects off-repository storage defaults across current
+  executable/configuration owners and maintained commands with 22 mutation-sensitive classifier cases. Nine unsafe
+  Toolbox diagnostic paths moved to repository-derived scratch. All six doctrines, 36-boundary outside-cwd routing,
+  and every backend/tool storage oracle pass with zero runs; process proof `.4.2` becomes the clean frontier.

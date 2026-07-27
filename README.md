@@ -276,7 +276,10 @@ remediation `.3.1.2` now binds every managed command and its descendants to a ma
 residue proof `.3.2` independently confirms both runtime-derived old temporary roots and the bounded Dart/Julia
 shared metadata surfaces are empty before and after all six storage oracles. It finds zero deletion targets, leaves
 shared data untouched, and reconfirms the retained Perl/Julia copies. Existing-data migration `.3` is complete;
-structural storage doctrine `.4.1` is the next clean frontier.
+structural leaf `.4.1` now registers the `PROJECT-DATA-STORAGE` doctrine. Its read-only checker scans tracked
+code/config/test/tool and current command-guidance surfaces, runs 22 reject/accept cases, preserves explicit caller/
+inert/tool/system paths, and rejects off-repository storage defaults. All six doctrines, 36-boundary outside-cwd
+routing, and the six storage oracles pass. Process-level opened-path proof `.4.2` is the next clean frontier.
 
 Initializer `.1.1` now defines the ignored root-relative `/.linkedspec-data/` hierarchy. Source it before a direct
 command:

@@ -45,7 +45,10 @@ RED: a live descendant can outlast recorded wrapper/direct-child PIDs while its 
 double-checked recovery/purge liveness, conservative reuse/indeterminate retention, and normal/orphan descendant
 proof. Final residue leaf `.3.2` independently proves both runtime-derived old temporary roots and bounded shared
 Dart/Julia metadata are empty before and after all six storage oracles. It has zero deletion targets, retains the
-verified Perl/Julia copies, and closes migration parent `.3`. Structural storage doctrine `.4.1` is next.
+verified Perl/Julia copies, and closes migration parent `.3`. Structural `.4.1` registers the read-only `PROJECT-
+DATA-STORAGE` doctrine, scans current tracked storage/command surfaces with 22 rejected/accepted cases, roots the
+remaining Toolbox diagnostic commands, and passes six-doctrine plus 36-boundary routing and six storage oracles.
+Process-level opened-path proof `.4.2` is next.
 
 Critical repository-relocation lane: ADR `0052` plus `REPO-ROOT-PATH-PORTABILITY` require every persisted
 repository-content path to be root-relative and every runtime checkout root to be discovered from the current

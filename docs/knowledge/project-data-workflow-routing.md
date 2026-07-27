@@ -14,7 +14,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [architecture, storage, filesystem, workflow, hook, ci, mdbook, backend, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.1.2 initially routes tools/project_data_env.sh at 14 self-rooted boundaries. PROJECT-DATA-SSD-ROOTING.2.1 adds the primary matrix and Perl storage oracle; .2.2 adds the targeted Cargo wrapper and Rust storage oracle; .2.3 adds the Dart storage oracle; .2.4 adds the targeted Julia wrapper, Julia storage oracle, primary checker, and eight Julia-consuming cross-backend checkers; .2.5 adds the targeted Lua wrapper, Lua storage oracle, and native builder; .2.6 adds the targeted Python wrapper and cross-tool storage oracle, bringing recurring proof to 35 boundaries. The portable Knowledge Map bundle consumes generic KM_ENV_INITIALIZER, KM_RUN_INITIALIZER, and KM_OUTPUT_VALIDATOR configured in root .knowledge_map.conf. tools/test_project_data_workflow_routing.sh rejects missing/late initialization, launches lightweight workflows and backend preflights from another filesystem with hostile inherited roots, proves all selected directories use the repository device, and requires no completed-run residue."
+evidence: "PROJECT-DATA-SSD-ROOTING.1.2 initially routes tools/project_data_env.sh at 14 self-rooted boundaries. PROJECT-DATA-SSD-ROOTING.2.1 adds the primary matrix and Perl storage oracle; .2.2 adds the targeted Cargo wrapper and Rust storage oracle; .2.3 adds the Dart storage oracle; .2.4 adds the targeted Julia wrapper, Julia storage oracle, primary checker, and eight Julia-consuming cross-backend checkers; .2.5 adds the targeted Lua wrapper, Lua storage oracle, and native builder; .2.6 adds the targeted Python wrapper and cross-tool storage oracle, bringing recurring proof to 35 boundaries. PROJECT-DATA-SSD-ROOTING.4.1 adds the structural storage-locality checker as boundary 36. The portable Knowledge Map bundle consumes generic KM_ENV_INITIALIZER, KM_RUN_INITIALIZER, and KM_OUTPUT_VALIDATOR configured in root .knowledge_map.conf. tools/test_project_data_workflow_routing.sh rejects missing/late initialization, launches lightweight workflows and backend preflights from another filesystem with hostile inherited roots, proves all selected directories use the repository device, and requires no completed-run residue."
 reverify: "bash -n tools/test_project_data_workflow_routing.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/run_mdbook_local.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -29,7 +29,8 @@ LinkedSpec's root `.knowledge_map.conf` supplies the repo-relative helper and it
 bundle to this project. The mdBook's
 supported command is therefore `bash tools/run_mdbook_local.sh`, not a bare `mdbook build`.
 
-The focused workflow oracle checks 33 source-before-runtime boundaries. From an available other-filesystem cwd, it
+The focused workflow oracle checks 36 source-before-runtime boundaries, including the structural storage-locality
+doctrine added by `.4.1`. From an available other-filesystem cwd, it
 supplies hostile external temp/cache variables and a unique same-filesystem project-data root, executes the
 lightweight doctrine/Knowledge Map/mdBook flows, and reaches each backend runner's post-initialization preflight.
 Every created scratch/cache/tool directory is checked against the repository device, backend preflights must reach
@@ -37,5 +38,5 @@ their configured runtime check, and every completed managed run must be gone. Di
 responsible for explicitly sourcing the initializer; `.2.1-.2.6` still own backend/tool default and old-data migration.
 
 Related facts: [[project-data-env-initializer]], [[project-data-run-lifecycle]],
-[[project-data-ssd-storage-locality]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]],
+[[project-data-ssd-storage-locality]], [[project-data-storage-locality-doctrine]], [[rust-project-data-ssd-storage]], [[dart-project-data-ssd-storage]],
 [[julia-project-data-ssd-storage]], [[lua-project-data-ssd-storage]].

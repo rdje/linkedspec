@@ -238,6 +238,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 | `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows |
 | `TASK-ACCEPTANCE` | evidence | `scripts/check_diagnosis_evidence.sh` | staged governed code/spec/test/tooling changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence signatures |
 | `REPO-ROOT-PATHS` | structural | `scripts/check_repo_root_path_portability.sh` | tracked parent-repository text contains no checkout/developer/private-session identity, Rust primary discovery is runtime-rooted, and all five primary commands retain their dynamic anchors |
+| `PROJECT-DATA-STORAGE` | structural | `scripts/check_project_data_storage_locality.sh` | tracked project-storage defaults and current documented output commands stay repository-filesystem rooted while explicit caller/inert/tool/system paths remain legal |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
 regression suite `t/phase0_regression.t` (the cross-variant baseline + the all-spec ActionIR-ready

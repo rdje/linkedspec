@@ -22,7 +22,10 @@ This document is the current high-level technical reading of the project shape. 
   forwarding, conservative live/reused/indeterminate retention, and exact normal/orphan recovery proofs. Final
   residue `.3.2` independently proves zero old-root or bounded shared-metadata match before and after all six
   storage oracles, with zero deletion targets and intact retained Perl/Julia copies. Parent `.3` is complete;
-  structural doctrine `.4.1` is active, and relocation closeout remains paused behind storage `.5`.
+  structural `.4.1` registers `PROJECT-DATA-STORAGE` as the sixth doctrine. Its read-only 22-case classifier
+  governs current tracked storage defaults and documented commands while preserving caller/inert/tool/system
+  paths; remaining Toolbox diagnostics now use repository scratch. Direct, registry, 36-boundary hostile routing,
+  and all six storage oracles pass. Process IO `.4.2` is active, and relocation closeout remains behind storage `.5`.
 - `2026-07-25` Lua semantic preflight: behavior-free `FUTURE-PARITY-BACKLOG.10.7.0` maps the single shared PUC
   Lua/LuaJIT implementation before code. Strict parser/AST, compiled/ActionIR/staged/generated/loader/trace/runtime/
   JSON authorities exist; semantic index/source-map/SHA-256/static/query/typed-observation owners do not. Lua's

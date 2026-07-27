@@ -33,8 +33,9 @@ and 24 directories / 15 files / 4,284,303 bytes. They and the canonical retained
 caches plus Rust target share the repository filesystem. The Perl, Rust, Dart, Julia, Lua, and tool storage
 oracles all pass, and their complete run leaves zero managed scratch.
 
-This closes existing-data migration parent `.3`. Structural prevention `.4.1` follows: it will turn the accepted
-storage policy into a recurring doctrine before process-level IO proof `.4.2`.
+This closes existing-data migration parent `.3`. Structural prevention `.4.1` now turns the accepted storage
+policy into a recurring doctrine; process-level opened-path proof `.4.2` follows.
 
 Related facts: [[project-data-migration-reconciliation]], [[project-data-ssd-storage-locality]],
-[[project-data-run-lifecycle]], [[perl-project-data-ssd-storage]], [[julia-project-data-ssd-storage]].
+[[project-data-storage-locality-doctrine]], [[project-data-run-lifecycle]], [[perl-project-data-ssd-storage]],
+[[julia-project-data-ssd-storage]].

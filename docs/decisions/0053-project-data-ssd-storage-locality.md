@@ -1,7 +1,7 @@
 # ADR 0053: Project-owned data stays on the repository filesystem
 
 - Date: 2026-07-26
-- Status: accepted; migration and final residue proof complete; structural/process enforcement in progress
+- Status: accepted; migration, final residue proof, and structural enforcement complete; process proof in progress
 - Tags: architecture, storage, filesystem, ssd, caches, temporary-data, portability, doctrine, tooling
 
 ## Context
@@ -146,6 +146,11 @@ boundary for storage locality.
   after all six storage oracles. Both roots, the bounded shared Dart/Julia metadata surfaces, and the superseded
   same-SSD target identity are empty. No candidate exists, so the final leaf deletes zero external paths and leaves
   ambiguous shared data untouched. Retained Perl and Julia copies still match their frozen count/byte boundaries.
+- Structural enforcement registers `scripts/check_project_data_storage_locality.sh` exactly once as `PROJECT-DATA-
+  STORAGE`. It scans tracked current code/config/test/tool and command-guidance surfaces, including Knowledge
+  `reverify:` lines, and runs 22 rejected/accepted classifier cases. It distinguishes off-repository project
+  storage defaults from caller inputs, inert path/privacy fixtures, rejection-probe reads, and necessary external
+  tools/libraries. The driver, hook/local-CI wiring, 36-boundary routing, and all six storage oracles pass.
 - External compiler/interpreter and system-library reads remain visible necessary dependencies, not hidden storage
   defaults. Installing caller-selected toolchains on the SSD can reduce that exception surface later.
 - ADR `0052` remains authoritative for repository identity and explicit caller paths; ADR `0053` supersedes any

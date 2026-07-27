@@ -31,6 +31,7 @@ routed_entrypoints=(
  scripts/check_task_tree_metadata.sh
  scripts/check_diagnosis_evidence.sh
  scripts/check_repo_root_path_portability.sh
+ scripts/check_project_data_storage_locality.sh
  knowledge-map/scripts/gen_knowledge_map.sh
  knowledge-map/scripts/check_knowledge_map.sh
  tools/run_ci_local.sh

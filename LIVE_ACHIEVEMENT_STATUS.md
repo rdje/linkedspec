@@ -8,14 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `PROJECT-DATA-SSD-ROOTING.4.1` — add a fast structural doctrine that rejects off-repository project-storage
-  defaults and unsupported cross-volume reads while preserving explicit caller and necessary external inputs.
+- `PROJECT-DATA-SSD-ROOTING.4.2` — add process-level opened-path proof that representative hostile, outside-cwd,
+  and relocated workflows keep project-owned IO on the repository filesystem and admit only frozen necessary reads.
   `REPO-ROOT-PATH-PORTABILITY.2.2` remains paused behind storage closeout.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-26: **PROJECT-DATA-SSD-ROOTING.4.1 — gate project storage locality**
+  (current-command structural scan, 22 classifier cases, six-doctrine registry, 36-boundary routing).
+
+  **Result:** Added the self-rooted `PROJECT-DATA-STORAGE` doctrine over tracked executable/test/tool/configuration
+  owners, README/Toolbox/mdBook commands, and Knowledge fact `reverify:` lines. It rejects OS-temp, developer-home,
+  unrooted storage, concrete checkout, and unsupported cross-volume defaults while preserving explicit caller
+  inputs, inert fixtures, rejection probes, repository-derived roots, and necessary external tools/libraries.
+
+  **Proof:** The initial RED identified nine unsafe Toolbox diagnostic destinations; all now use one checkout-
+  derived scratch directory. The final checker covers 1,651 files / 366,343 lines and passes 22 mutation-sensitive
+  reject/accept cases. All six doctrines, 36-boundary hostile outside-cwd routing, every Perl/Rust/Dart/Julia/Lua/
+  tool storage oracle, Knowledge Map, mdBook, memory, whitespace, and zero-run gates pass. Push cadence advances to
+  36/300 with no push; `.4.2` becomes active.
+
 - 2026-07-26: **PROJECT-DATA-SSD-ROOTING.3.2 — retire internal-volume project data**
   (independent pre/post-use zero residue, zero deletion targets, retained-copy health, complete six-oracle proof).
 

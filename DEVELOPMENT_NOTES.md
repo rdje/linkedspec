@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.4.1` — storage policy needs sink context, not absolute-path censorship): A
+  bare absolute path is insufficient evidence of project storage. It may be an explicit caller input, an inert
+  privacy/path fixture, a hostile location used to prove rejection, or a strictly necessary external executable or
+  system library. The structural checker therefore classifies storage assignments, allocator defaults, output
+  destinations, active configuration, and maintained command verbs. Its 22 embedded cases lock both rejected and
+  accepted sides; the broader repository-path doctrine independently rejects persisted machine identity anywhere.
+
+  Current executable guidance and cumulative history also require different authority. README, Toolbox, and the
+  public book are governed as maintained commands, while Knowledge facts contribute only their executable
+  `reverify:` lines; task logs, ADR rationale, changelogs, and fact evidence may legitimately preserve old-path
+  proof. This boundary avoided erasing audit history while the direct RED still found nine unsafe Toolbox
+  diagnostic destinations and moved all of them to checkout-derived scratch. Structural proof now recurs through
+  the existing six-doctrine E3/E4 driver and 36-boundary hostile outside-cwd routing.
+
 - 2026-07-26 (`PROJECT-DATA-SSD-ROOTING.3.2` — a zero deletion count is a positive audited result): Final migration
   closeout must not trust earlier leaf narratives as its only evidence. Resolve the old temporary roots from the
   runtime environment, bound the namespace to exact project identifiers, measure before use, exercise every

@@ -816,14 +816,23 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ## 5. Gates & retrieval
 
+Manual diagnostic captures must use repository-derived scratch. In the shell that will run §§5.1/6.1/6.2, create
+one bounded workspace and let the shell remove it when the session ends:
+
+```bash
+source tools/project_data_env.sh
+diagnostic_root=$(mktemp -d "${LINKEDSPEC_SCRATCH_ROOT:?project-data initializer did not set scratch}/manual-verification.XXXXXX")
+trap 'rm -rf -- "$diagnostic_root"' EXIT
+```
+
 ### 5.1 The phase0 regression gate (`t/phase0_regression.t`)
 - **WHAT:** the canonical regression contract + cross-variant baseline.
 - **HOW:**
   ```bash
-  perl -Iperl t/phase0_regression.t > /tmp/phase0.tap 2>&1; echo "EXIT=$?"
-  grep -cE '^ok [0-9]+ ' /tmp/phase0.tap                    # top-level passes
-  grep -nE '^not ok [0-9]+ ' /tmp/phase0.tap                # failures (with names)
-  grep -E '^(ok|not ok) [0-9]+ ' /tmp/phase0.tap | tail -1  # the REACH — trust comm only if past your targets
+  perl -Iperl t/phase0_regression.t > "$diagnostic_root/phase0.tap" 2>&1; echo "EXIT=$?"
+  grep -cE '^ok [0-9]+ ' "$diagnostic_root/phase0.tap"                    # top-level passes
+  grep -nE '^not ok [0-9]+ ' "$diagnostic_root/phase0.tap"                # failures (with names)
+  grep -E '^(ok|not ok) [0-9]+ ' "$diagnostic_root/phase0.tap" | tail -1  # the REACH — trust comm only if past your targets
   ```
 - **⚠️ REACH FIRST:** a subtest that `die`s aborts the run; external CPU load can SIGALRM-kill it. A
   truncated TAP makes unreached subtests look "cleared" — read the reach before trusting any count/`comm`.
@@ -838,6 +847,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - `bash scripts/check_doctrines.sh` (driver — runs every registered check) ·
   `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh` ·
   `bash scripts/check_diagnosis_evidence.sh` (staged task-acceptance evidence gate).
+- `bash scripts/check_project_data_storage_locality.sh` directly runs the `PROJECT-DATA-STORAGE` structural
+  doctrine. It scans current code/config/test/tool and command-guidance surfaces, including Knowledge `reverify:`
+  lines, with 22 embedded reject/accept cases. It rejects off-repository project-storage defaults but preserves
+  caller inputs, inert path/privacy fixtures, rejection-test reads, and necessary external tool/system paths.
 
 ---
 
@@ -847,15 +860,16 @@ These are not LinkedSpec-specific code, but they are how LinkedSpec issues get p
 
 ### 6.1 `comm` failing-set diff (the NO-REGRESSION proof)
 ```bash
-grep -E '^not ok ' before.tap | sed -E 's/^not ok [0-9]+ - //' | sort > /tmp/b
-grep -E '^not ok ' after.tap  | sed -E 's/^not ok [0-9]+ - //' | sort > /tmp/a
-comm -23 /tmp/b /tmp/a   # cleared (must equal your targets)
-comm -13 /tmp/b /tmp/a   # NEW failures (must be empty)
+grep -E '^not ok ' before.tap | sed -E 's/^not ok [0-9]+ - //' | sort > "$diagnostic_root/before.failures"
+grep -E '^not ok ' after.tap  | sed -E 's/^not ok [0-9]+ - //' | sort > "$diagnostic_root/after.failures"
+comm -23 "$diagnostic_root/before.failures" "$diagnostic_root/after.failures"   # cleared = targets
+comm -13 "$diagnostic_root/before.failures" "$diagnostic_root/after.failures"   # NEW = empty
 ```
 
 ### 6.2 Focused `Test::More` subtest harness (load-independent)
 Extract specific brace-balanced `subtest '…' => sub { … }` blocks from `t/phase0_regression.t` into
-`/tmp/focused.t` (+ `use Test::More; … done_testing;`), run `perl -Iperl /tmp/focused.t`. Verifies late
+`$diagnostic_root/focused.t` (+ `use Test::More; … done_testing;`), then run
+`perl -Iperl "$diagnostic_root/focused.t"`. Verifies late
 subtests when the full run is starved/killed/blocked behind an earlier failure.
 
 ### 6.3 fork+SIGKILL hard-timeout census (`alarm()` cannot kill a regex)

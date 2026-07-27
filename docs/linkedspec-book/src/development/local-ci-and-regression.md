@@ -1051,6 +1051,21 @@ still match Perl 65 directories / 17 files / 1,590 bytes and Julia 346 directori
 plus 24 directories / 15 files / 4,284,303 bytes. The final audit therefore closes existing-data migration while
 preserving ambiguous multi-project caches exactly as found.
 
+Structural enforcement follows through the registered `PROJECT-DATA-STORAGE` doctrine:
+
+```console
+$ bash scripts/check_project_data_storage_locality.sh
+```
+
+The checker reads tracked current code, configuration, tests, tools, root guidance, every book chapter, and the
+executable `reverify:` line of each Knowledge fact. It rejects concrete operating-system-temporary, developer-home,
+unrooted cache/depot/build/output, and unsupported external storage defaults. Explicit caller inputs, inert path or
+privacy fixtures, necessary external executables and libraries, and external roots read only by rejection tests
+remain legal. Twenty-two embedded reject/accept cases run with every check. The doctrine is one registry entry, so
+the existing pre-commit and local-CI driver enforce it automatically; hostile outside-cwd routing now covers 36
+entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
+directory instead of an operating-system temporary path.
+
 ## CI input areas
 
 The local gate treats these as CI inputs:
