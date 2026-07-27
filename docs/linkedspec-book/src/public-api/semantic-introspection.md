@@ -2003,8 +2003,26 @@ implementation `3f878ad2` and process-oracle correction `e7ae984d`; canonical pa
 semantic admission 1/1 in 78.09 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, corrected process containment,
 moved-root execution, primary 66/66 in both option environments, and Phase 0 1,031/1,031 in 637 seconds. Thus
 `.10.7.3.2.1` and `.10.7.3.2` are complete. No replacement implementation or test owner, public query, runtime
-observation, generated format, rollout, or native admission was added; `.10.7.3.3` next recomposes the committed
-five-target owners.
+observation, generated format, rollout, or native admission was added; `.10.7.3.3` separately recomposes the
+committed five-target owners below.
+
+#### Lua private static projection closeout
+
+The no-change `.10.7.3.3` closeout starts from clean commit `2a6f24c4` and adds no second projector, replacement
+test suite, public accessor, query, observation, or generated format. Instead, the complete Lua gate runs the four
+committed source, outcome, graph, and remaining suites together at 379, 122, 64, and 122 assertions on PUC Lua and
+LuaJIT. Their composition re-establishes graph 12/14/7, both 4/3 privacy targets, failed 6/4, runtime-static 7/8,
+repeated occurrence identity, detached immutable clones, fallbacks, public omission, and host/no-execution denial.
+
+The surrounding local proof passes package `1..177` on each ABI, PUC primary 66x2, corpus 105/105, the complete
+five-backend primary 5x2x66 matrix, all ten Unicode-manifest legs, and all six no-drift ledgers. Canonical CI passes
+six doctrines, Rust semantic admission 1/1 in 78.12 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, corrected
+process containment, moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 649 seconds.
+
+This closes private static parent `.10.7.3` without moving semantic rollout 5/9 or native admission 4/6. The next
+leaf, `.10.7.4.0`, is a behavior-free authority audit for functions, helpers, calls, bindings, staged payloads,
+generated-plan provenance, source correlation, and the exact 22-record/25-relation target. Public queries remain
+later `.10.7.5` work.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2426,7 +2444,8 @@ The dependency order is:
 | `.10.7.3.1` | Lua compiled graph/source/evidence projection | implemented; private exact 12/14/7 graph on both ABIs, no public query |
 | `.10.7.3.2.0` | Lua source-ceiling boundary reconciliation | complete; full private authority, outward query redaction, no behavior change |
 | `.10.7.3.2.1` | Lua remaining static targets and isolation | complete; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clean canonical closeout |
-| `.10.7.3.3` | Lua committed static-owner recomposition | next; close all five private targets without public query or replacement code |
+| `.10.7.3.3` | Lua committed static-owner recomposition | complete; dual-ABI four-suite composition and full signoff close `.10.7.3` without public query or replacement code |
+| `.10.7.4.0` | Lua calls/staging/generated authority audit | next; freeze source correlation, host fences, exact 22/25 ownership, and implementation split before code |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.3` — a composition closeout should exercise committed owners, not
+  create a second proof topology): Once source, compilation outcome, graph, and remaining static targets each have
+  exact independent tests, parent closure is itself a no-change task. Re-running the four suites in their registered
+  package order proves they share one constructor, retained authority, lifecycle identity, privacy boundary, and
+  isolation model. A new “all static” test would instead duplicate expectations and could drift independently.
+
+  The complete dual-ABI backend gate, five-backend primary and Unicode matrices, six ledgers, and canonical gate
+  supply the composition evidence outside the focused suites. Passing them without production/test replacement or
+  ledger movement establishes a clean boundary: private static construction is complete, while functions/calls,
+  public query, runtime observation, generated formats, rollout, and native admission remain owned by later leaves.
+
 - 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — close semantic behavior only after its independent gate
   dependency is committed): The Lua static implementation was already exact on both ABIs, but its first canonical
   run exposed an unrelated process-oracle defect. Splitting at a clean implementation child preserved semantic

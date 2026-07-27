@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.3 — close Lua static projection
+
+Closed Lua private static projection by recomposing only its committed owners from clean base `2a6f24c4`. No
+production, test, fixture, contract, API, semantic-query, runtime-observation, generated-format, rollout, or
+admission file changed. Source 379, outcome 122, graph 64, and remaining 122 assertions pass on PUC Lua and LuaJIT,
+reconfirming graph 12/14/7, privacy text and identity 4/3 each, failed 6/4, runtime-static 7/8, occurrence identity,
+detached immutable clones, fallbacks, public omission, and host/no-execution denial. Package `1..177` passes per
+ABI; PUC primary 66x2 and corpus 105/105 pass.
+
+The five-backend primary matrix passes 5x2x66 and all ten Unicode-manifest legs pass. Semantic, Unicode,
+capability, generated-source, language-coverage, and public no-drift ledgers retain their exact counts. Canonical
+local CI passes all six doctrines, Rust admission 1/1 in 78.12 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds,
+corrected process containment, moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 649
+seconds. Parent `.10.7.3` is composition-closed without semantic promotion; behavior-free calls/staging/generated
+authority audit `.10.7.4.0` is next. Cadence advances to 43/300 with no push.
+
 ## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.2.1.2 — close Lua semantic static targets
 
 Closed the Lua remaining-static implementation from two clean dependency commits: implementation `3f878ad2` and
@@ -12,7 +28,8 @@ Complete local canonical CI passes all six doctrines, the unchanged semantic 6/2
 admission 4/6, all Perl semantic owners, Rust admission 1/1 in 78.09 seconds, Dart 1/1, Julia 416/416 in 27.4
 seconds, corrected relocated six-family process containment, moved-root execution, primary CLI 66/66 in default
 and POSIX environments, and Phase 0 1,031/1,031 in 637 seconds. This closes `.10.7.3.2.1` and `.10.7.3.2` without
-semantic promotion. Committed-owner recomposition `.10.7.3.3` is next; cadence advances to 42/300 with no push.
+semantic promotion. Committed-owner recomposition `.10.7.3.3` was next at that boundary; cadence advanced to
+42/300 with no push.
 
 ## 2026-07-27 — PROJECT-DATA-SSD-ROOTING.6 — correct process host-temp discovery
 

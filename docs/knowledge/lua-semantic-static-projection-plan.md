@@ -157,7 +157,13 @@ process-oracle correction `e7ae984d`. Canonical passes all six doctrines, Rust a
 Dart admission 1/1, Julia admission 416/416 in 27.4 seconds, corrected six-family containment, moved-root
 execution, primary 66/66 twice, and Phase 0 1,031/1,031 in 637 seconds. This closes `.10.7.3.2.1` and
 `.10.7.3.2` without semantic query, observation, format, rollout, or admission movement. No-change committed-owner
-recomposition `.10.7.3.3` is next.
+recomposition `.10.7.3.3` now starts from clean `2a6f24c4` and reruns the four committed suites unchanged at
+379/122/64/122 assertions on both ABIs. Package `1..177` per ABI, PUC primary 66x2/corpus 105, primary 5x2x66,
+Unicode 10/10, and all six ledgers pass. Canonical passes six doctrines, Rust admission 78.12 seconds, Dart 1/1,
+Julia 416/416 in 27.4 seconds, corrected containment, moved-root proof, reference primary 66x2, and Phase 0
+1,031/1,031 in 649 seconds. The exact five-target topology, isolation, and public fence therefore compose without
+replacement code or semantic promotion. Parent `.10.7.3` is closed; behavior-free calls/staging/generated
+authority audit `.10.7.4.0` is next.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-compilation-foundation]],
 [[lua-semantic-source-outcome-plan]], [[semantic-introspection-neutral-contract]],

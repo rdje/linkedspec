@@ -1377,8 +1377,10 @@ content migration exists yet.
   free `.10.7.3.2.0` reconciles full private source authority with ADR-0049 query-boundary redaction. Remaining
   privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, repeated-lifecycle, clone, fallback, and host isolation are
   implemented and clean-dependency canonical closeout passes through Phase 0 1,031/1,031 in 637 seconds, closing
-  `.10.7.3.2`. Committed-owner recomposition `.10.7.3.3` is next; public query, formats, rollout, and admission
-  remain unchanged.
+  `.10.7.3.2`. No-change `.10.7.3.3` recomposes the committed 379/122/64/122 suites on both ABIs, passes complete
+  Lua, both five-backend matrices, six ledgers, and canonical Phase 0 1,031/1,031 in 649 seconds, and closes parent
+  `.10.7.3` without semantic promotion. Behavior-free calls/staging/generated audit `.10.7.4.0` is next; public
+  query, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
