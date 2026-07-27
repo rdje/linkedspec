@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 — implement Lua semantic static targets
+
+Extended the one existing package-private Lua semantic projector to construct failed-compilation projections from
+the retained parsed rules and native diagnostic. The admitted missing-rule fixture now privately normalizes to
+portable `unknown_rule_reference` / `compile` records, dependency decision/explanation, exact source evidence, and
+6 records / 4 relations while the public foundation still reports its unchanged native
+`bare_edge_target_undefined` / `normalize_edges` diagnostic. Compiled projections continue to provide exact privacy
+text 4/3, privacy identity 4/3, and runtime-static 7/8 targets without a second parse, compile, query, observer, or
+execution path.
+
+Added `lua/test/semantic_index_static_remaining_test.lua`, registered once per PUC Lua and LuaJIT after the graph
+suite. Its 122 assertions deep-compare all four targets and lock repeated `E:0`/`E:1` lifecycle identity, exact
+source and shape correlation, parse/missing-entry fallbacks, fresh detached JSON clones, recursive retained
+immutability, root/index opacity, and path/host/execution dependency denial. Canonical tracked-input and path audits
+now govern the suite.
+
+Focused source 379, outcome 122, graph 64, and remaining 122 pass on both ABIs; complete Lua passes package
+`1..177` per ABI, PUC primary 66x2, corpus 105, and SSD storage. Primary parity passes 660/660, Unicode self-hosted
+passes 10/10, and all six governance ledgers remain unchanged. The canonical run passed doctrines, tracked-input
+and path audits, semantic owners, Rust admission, Dart, Julia, and preceding checks before exposing an unrelated
+existing process-oracle defect: it resolves `DARWIN_USER_TEMP_DIR` after SSD `TMPDIR` routing and therefore
+misclassifies managed project scratch as the host temporary root. The implementation lands cleanly as child `.1`;
+storage correction `PROJECT-DATA-SSD-ROOTING.6` and final canonical closeout child `.2` are separately owned.
+
 ## 2026-07-27 — REPO-ROOT-PATH-PORTABILITY.2.2 — prove relocated checkout execution
 
 Closed ADR `0052` with a recurring behavioral complement to the existing structural doctrine. Added

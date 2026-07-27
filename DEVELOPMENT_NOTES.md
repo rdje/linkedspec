@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.3.2.1.1` — failed static semantics can be built from parsed authority
+  without inventing compiled facts): A failed compilation has no `CompiledSpec`, but it still has enough truthful
+  retained state for a portable static result. Parsed rules own authored order, family/cursor policy, source ranges,
+  and edge spelling; the native diagnostic owns the failure. The private projector combines only those authorities,
+  leaves compiled rule order and selected entry empty, and adds dependency decision/explanation records only for
+  the specifically recognized missing-target diagnostic. Generic failures remain generic and never fabricate
+  compiled topology. This preserves the native Lua error contract while matching the neutral 6/4 target.
+
+  Construction and publication remain different security boundaries. Both text- and identity-ceiling indexes keep
+  exact private source authority so later permitted queries can project it consistently; the immutable snapshot
+  records the ceiling, while the future public query must redact before records escape. Lua's protected empty-handle
+  storage plus fresh plain-data materialization proves caller mutation cannot alter retained state. Repeated
+  lifecycle identity is likewise occurrence-based: sequential authored/compiled correlation is required to keep
+  two same-marker blocks as distinct `E:0` and `E:1` records.
+
+  A full local gate can expose infrastructure drift after the feature under test is already independently green.
+  Here the process-locality oracle queried `DARWIN_USER_TEMP_DIR` only after the common initializer had replaced
+  `TMPDIR` with managed SSD scratch; current `getconf` therefore echoed that project path and the test condemned its
+  own routing. Rebuilding every backend remains local and valid, but rebuilding cannot repair a false assertion.
+  The safe workflow is to commit the completed semantic implementation as a child slice, open a clean task-owned
+  storage correction, then rerun canonical and close the parent—never bundle the unrelated oracle repair into the
+  semantic diff.
+
 - 2026-07-27 (`REPO-ROOT-PATH-PORTABILITY.2.2` — relocation proof needs competing roots, not merely a copied
   executable): A copied executable can appear relocated while still sitting below the real checkout; upward marker
   discovery then correctly reaches the original repository and the test proves nothing about external ancestry.

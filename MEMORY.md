@@ -5,8 +5,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `REPO-ROOT-PATH-PORTABILITY.2.2` — recurring moved-checkout process proof closes ADR 0052.
-- latest_commit: `REPO-ROOT-PATH-PORTABILITY.2.2 - prove relocated checkout execution` (this commit).
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1` — remaining private Lua static targets implemented.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 - implement Lua semantic static targets` (this commit).
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -40,21 +40,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: resume `FUTURE-PARITY-BACKLOG.10.7.3.2.1` from clean semantic commit `99a3df5b`; no
-  semantic state changed during storage/relocation. Neutral is 6/20/89, rollout 5/9, admission 4/6.
+- current_semantic_frontier: child `.10.7.3.2.1.1` completes exact privacy 4/3 + 4/3, failed 6/4, runtime-static
+  7/8, lifecycle/fallback/clone/host isolation on both Lua ABIs. Final canonical closeout `.10.7.3.2.1.2` follows
+  the clean `PROJECT-DATA-SSD-ROOTING.6` process-oracle correction. Neutral stays 6/20/89 at 5/9 + 4/6.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: focused path/39-route/structural/containment and fresh complete Rust/Dart/Julia/PUC Lua/LuaJIT
-  pass; variants primary 660/660, Unicode 10/10, all focused matrices, scalar 55/55. Canonical: Rust 1/1 in 80.60s,
-  Dart 1/1, Julia 416/416 in 28.5s, primary 66x2, both relocation proofs, Phase 0 1,031/1,031 in 653s; KM 723/5,736.
+- current_signoff: Lua source/outcome/graph/remaining 379/122/64/122 and package 177 pass per ABI; PUC primary 66x2/
+  corpus 105; primary 660/660, Unicode 10/10, six ledgers exact. Canonical reached the process oracle after Rust/Dart/Julia.
 - latest_bootstrap_read: 2026-07-27 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 39/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 40/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. in_flight_uncommitted: none after commit. next_action: resume semantic
-  `FUTURE-PARITY-BACKLOG.10.7.3.2.1` only from the clean path closeout commit; do not push.
+- blockers: process oracle resolves `DARWIN_USER_TEMP_DIR` after SSD `TMPDIR` routing and mistakes project scratch
+  for host temp. no in-flight work after commit. next: fix `PROJECT-DATA-SSD-ROOTING.6`, return to `.10.7.3.2.1.2`; no push.

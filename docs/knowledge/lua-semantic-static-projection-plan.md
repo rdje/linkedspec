@@ -21,9 +21,13 @@ answers:
   - "does Lua identity-ceiling construction delete private source details"
   - "where must Lua apply semantic source ceiling redaction"
   - "which Lua task owns privacy failure runtime-static and isolation"
+  - "does Lua now implement all four remaining private semantic static targets"
+  - "how does Lua build a semantic projection when compilation fails"
+  - "does Lua preserve its native diagnostic after portable failure normalization"
+  - "what command verifies all Lua private semantic static targets"
   - "does Lua static projection expose query trace or runtime observations"
-date: 2026-07-25
-status: current; private graph and source-ceiling reconciliation complete, remaining static targets active
+date: 2026-07-27
+status: current; all five private construction targets implemented, final canonical closeout pending
 tags: [lua, luajit, semantic-introspection, static-projection, source-map, diagnostics, privacy, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.3.0-.2.0; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_static_graph_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_parser.lua; admitted Perl/Rust/Dart/Julia static projectors and query source projectors; ADR 0049; byte-identical PUC Lua/LuaJIT owner probes with summary SHA-256 244da3c31c9845faa7240608522b13c394f0077245f98b36b91fc6cdb6ea6e55"
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh"
@@ -134,6 +138,20 @@ evidence, lifecycle occurrence identity and ActionIR-derived shapes, Default nor
 detached clones, public omission, and forbidden host/execution dependencies. The complete dual-ABI Lua gate runs
 this proof before all prior suites. Privacy ceilings, failed projection, runtime-static omission, repeated
 lifecycle stress, and the broader isolation matrix remain exclusively `.10.7.3.2`.
+
+Implementation child `.10.7.3.2.1.1` now completes those remaining targets in the same projector. Compiled outcomes
+deep-equal privacy text 4/3, privacy identity 4/3, and runtime-static 7/8 with `has_execution=false`. Failed
+outcomes use retained parsed rules for authored/source facts and the retained native diagnostic for error facts;
+only the admitted missing-target diagnostic is normalized privately to `unknown_rule_reference` / `compile` with
+its exact dependency decision, explanation, target-member evidence, and 6/4 topology. The foundation diagnostic
+remains `bare_edge_target_undefined` / `normalize_edges`, and generic fallbacks never invent compiled facts.
+
+The registered 122-assertion suite proves both ABIs, distinct repeated `E:0`/`E:1` occurrences, fresh detached
+clones, frozen retained handles, parse/missing-entry fallbacks, public opacity, and no target/generated execution or
+host dependency. Together with source 379, outcome 122, and graph 64, it passes complete PUC Lua and LuaJIT gates,
+primary 660/660, Unicode 10/10, and every unchanged governance ledger. Run `bash tools/run_lua_local.sh` for the
+complete dual-ABI proof. Final canonical closeout remains `.10.7.3.2.1.2` after the separately owned process-oracle
+correction; no semantic query, observation, format, rollout, or admission moved in the implementation child.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-compilation-foundation]],
 [[lua-semantic-source-outcome-plan]], [[semantic-introspection-neutral-contract]],

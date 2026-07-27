@@ -1973,6 +1973,34 @@ knows exact source ranges but can publicly return only source id and caller-regi
 exact-oracle seam is not exported. Behavior-free correction `.10.7.3.2.0` aligned the Lua task wording with ADR
 `0049`, the neutral `privacy_limited` oracle, and all four admitted backend query projectors before `.3.2.1` code.
 
+#### Lua remaining private static targets
+
+The same projector now builds all four remaining construction targets. Compiled indexes exactly retain privacy
+text at 4 records / 3 relations, privacy identity at 4/3, and the static half of the runtime fixture at 7/8 with
+`has_execution=false`. The runtime-static projection contains no execution or event record and no `observed_as`
+relation; construction does not invoke target actions, lifecycle blocks, a generated plan, or emitted code.
+
+Failed compilation uses only facts that survive failure. Parsed rules provide authored order, source, rule
+identity, and policy; the retained native diagnostic provides the error. For the admitted missing-rule fixture,
+the private projection maps native `bare_edge_target_undefined` / `normalize_edges` to portable
+`unknown_rule_reference` / `compile`, then emits the exact dependency decision, explanation, target-member source,
+and 6 records / 4 relations. The native foundation diagnostic remains unchanged. Unrecognized failures take a
+generic or parsed-rule fallback and never invent compiled-rule order, a selected entry, or compiled topology.
+
+Repeated lifecycle members are verified by authored occurrence rather than marker name: two `E` blocks remain
+distinct `E:0` and `E:1` records with separate order, source, and conservative ActionIR-derived shapes. Every
+materialization is a detached plain-data clone of recursively immutable retained state. Neither the opaque index nor
+the root module gains a static or query accessor, and dependency scans deny paths, host table identity, parser/
+compiler objects, regex userdata, loaders, executors, trace, sinks, observers, environment, time, and randomness.
+The focused 122-assertion suite runs after the graph proof on both PUC Lua and LuaJIT through:
+
+```bash
+bash tools/run_lua_local.sh
+```
+
+This completes the implementation portion of `.10.7.3.2.1`; final canonical closeout remains a separate child so
+an unrelated local process-oracle correction cannot be hidden inside the semantic implementation.
+
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
 `.Töp()` and `.A·B()` validated as ASCII-prefix methods because the body adapter discarded the fluent parser's

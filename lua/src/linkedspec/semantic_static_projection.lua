@@ -974,9 +974,214 @@ local function build_compiled(context)
   }), context.fail)
 end
 
+local function scan_edge_ownership(scan)
+  if scan == nil then return "none" end
+  local edges = {}
+  for _, member in ipairs(scan.members) do
+    for _, edge in ipairs(member.edges) do edges[#edges + 1] = edge end
+  end
+  return edge_ownership(edges)
+end
+
+local function member_for_target(scan, target)
+  if scan == nil then return nil end
+  for _, member in ipairs(scan.members) do
+    for _, edge in ipairs(member.edges) do
+      if edge.target == target then return member end
+    end
+  end
+  return nil
+end
+
+local function normalize_failure(diagnostic)
+  local actual = diagnostic or {
+    code = "semantic_index_compilation_failed",
+    stage = "compile_source",
+    message = "Spec compilation failed.",
+    fields = json.harray(),
+  }
+  local fields = actual.fields or json.harray()
+  local rule_label = type(fields.rule_label) == "string" and fields.rule_label or nil
+  local target = fields.target
+  if type(target) ~= "string" then target = fields.target_rule end
+  if type(target) ~= "string" then target = nil end
+  if (actual.code == "bare_edge_target_undefined" or
+      actual.code == "regex_slot_identity_invalid") and
+      rule_label ~= nil and target ~= nil then
+    return {
+      code = "unknown_rule_reference",
+      stage = "compile",
+      message = "Rule " .. rule_label .. " references unknown rule " .. target .. ".",
+      fields = json.harray({
+        rule_id = rule_id(rule_label),
+        missing_rule_id = rule_id(target),
+      }),
+      rule_label = rule_label,
+      target = target,
+    }
+  end
+  return {
+    code = actual.code,
+    stage = actual.stage,
+    message = actual.message,
+    fields = fields,
+    rule_label = rule_label,
+    target = target,
+  }
+end
+
+local function build_failed(context)
+  local parsed = context.outcome.parsed
+  local rules = parsed and parsed.rules or {}
+  local scans = parsed and scan_rules(context.source, parsed, context.fail) or {}
+  local scans_by_label = {}
+  for _, scan in ipairs(scans) do scans_by_label[scan.label] = scan end
+
+  local normalized = normalize_failure(context.outcome.diagnostic)
+  local failed_label = normalized.rule_label
+  if failed_label == nil and rules[1] ~= nil then failed_label = rules[1].header.label end
+  local failed_rule_id = failed_label and rule_id(failed_label) or nil
+  local failed_scan = failed_label and scans_by_label[failed_label] or nil
+  local source_refs = json.harray()
+  local records = json.array()
+  local relations = json.array()
+  local definition_order = json.array()
+  for index, rule in ipairs(rules) do definition_order[index] = rule_id(rule.header.label) end
+
+  records[#records + 1] = record(
+    SPEC_ID,
+    "spec",
+    spec_name(context.logical_name),
+    nil,
+    0,
+    nil,
+    json.harray({
+      definition_order = definition_order,
+      compiled_rule_order = json.array(),
+      entry_rule_id = json.null,
+      entry_selection_basis = json.null,
+    })
+  )
+  records[#records + 1] = source_record()
+
+  for rule_offset, rule in ipairs(rules) do
+    local rule_order = rule_offset - 1
+    local id = rule_id(rule.header.label)
+    local scan = scans_by_label[rule.header.label]
+    local source = scan and register_source(source_refs, id, scan.header, context) or nil
+    local repetition = neutral_repetition(rule.header.mode)
+    local rep_min, rep_max = neutral_bounds(rule.header.mode)
+    records[#records + 1] = record(
+      id,
+      "rule",
+      rule.header.label,
+      SPEC_ID,
+      rule_order,
+      source,
+      json.harray({
+        family = spec_ast.rule_mode_is_and(rule.header.mode) and "and" or "or",
+        cursor_policy = spec_ast.rule_mode_is_and(rule.header.mode) and "contiguous" or "seek",
+        is_entry_marker = rule.header.is_top,
+        is_repetition = repetition,
+        rep_min = portable(rep_min),
+        rep_max = portable(rep_max),
+        edge_ownership = scan_edge_ownership(scan),
+        value_shape = value_shape("unknown"),
+      })
+    )
+  end
+
+  local diagnostic_id = "diagnostic:compile:0"
+  local diagnostic_member = member_for_target(failed_scan, normalized.target)
+  local diagnostic_source = diagnostic_member and register_source(
+    source_refs, diagnostic_id, diagnostic_member.range, context
+  ) or nil
+  records[#records + 1] = record(
+    diagnostic_id,
+    "diagnostic",
+    normalized.code,
+    SPEC_ID,
+    0,
+    diagnostic_source,
+    json.harray({
+      code = normalized.code,
+      stage = normalized.stage,
+      severity = "error",
+      message = normalized.message,
+      fields = normalized.fields,
+    })
+  )
+  relations[#relations + 1] = relation("contains", SPEC_ID, SOURCE_ID, 0, nil)
+  relations[#relations + 1] = relation(
+    "contains", SPEC_ID, diagnostic_id, 1, diagnostic_source
+  )
+
+  if normalized.code == "unknown_rule_reference" and failed_label ~= nil and
+      failed_rule_id ~= nil and normalized.target ~= nil then
+    local decision_id = "decision:compile:" .. failed_rule_id
+    local explanation_id = "explanation:" .. decision_id .. ":0"
+    records[#records + 1] = record(
+      decision_id,
+      "decision",
+      "compile rule " .. failed_label,
+      failed_rule_id,
+      0,
+      diagnostic_source,
+      json.harray({
+        decision_kind = "dependency_resolution",
+        outcome = diagnostic_id,
+      })
+    )
+    records[#records + 1] = record(
+      explanation_id,
+      "explanation_step",
+      nil,
+      decision_id,
+      0,
+      diagnostic_source,
+      json.harray({
+        rule_code = "dependency_target_missing",
+        summary = "The authored dependency " .. normalized.target .. " has no declared rule.",
+        input_ids = json.array({ failed_rule_id }),
+        output_fact = json.harray({
+          record_id = decision_id,
+          path = "/facts/outcome",
+          value = diagnostic_id,
+        }),
+      })
+    )
+    relations[#relations + 1] = relation(
+      "diagnoses", diagnostic_id, failed_rule_id, 0, diagnostic_source
+    )
+    relations[#relations + 1] = relation(
+      "explained_by",
+      decision_id,
+      explanation_id,
+      0,
+      diagnostic_source,
+      json.array({ diagnostic_id })
+    )
+  end
+
+  canonicalize(records, relations)
+  local snapshot = json.harray({
+    id = "snapshot:0",
+    state = "failed_compilation",
+    has_execution = false,
+    source_detail_ceiling = context.source_detail_ceiling,
+    content_digest_available = context.source_detail_ceiling == "text",
+  })
+  return freeze(json.harray({
+    snapshot = snapshot,
+    source_refs = source_refs,
+    records = records,
+    relations = relations,
+  }), context.fail)
+end
+
 function M.build(options)
-  if options.outcome.compiled == nil then return nil end
-  return build_compiled(options)
+  if options.outcome.compiled ~= nil then return build_compiled(options) end
+  return build_failed(options)
 end
 
 function M.materialize(projection, fail)

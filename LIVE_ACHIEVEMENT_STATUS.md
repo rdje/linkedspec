@@ -8,13 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.3.2.1` — resume the paused Lua semantic static-target implementation only after the
-  clean `REPO-ROOT-PATH-PORTABILITY.2.2` closeout commit; no semantic state changed during storage/relocation work.
+- `FUTURE-PARITY-BACKLOG.10.7.3.2.1.2` — final Lua static-target canonical closeout is pending after clean
+  implementation child `.1`; first correct the independently reproduced process-locality host-temp oracle under
+  `PROJECT-DATA-SSD-ROOTING.6`, then return from its clean commit.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.3.2.1.1 — implement Lua semantic static targets**
+  (four remaining private targets, exact dual-ABI isolation, and clean split from an unrelated gate correction).
+
+  **Result:** The one existing private projector now builds failed projections from retained parsed/native-
+  diagnostic authority while preserving the public native diagnostic unchanged. Privacy text 4/3, privacy
+  identity 4/3, failed 6/4, and runtime-static 7/8 deep-equal the neutral targets. A registered 122-assertion suite
+  per ABI locks repeated `E:0`/`E:1` identity, fallbacks, detached/frozen state, opacity, and host/no-execution
+  denial without adding query, observer, format, rollout, admission, or a second language pipeline.
+
+  **Proof:** Source 379, outcome 122, graph 64, remaining 122, complete package `1..177`, and SSD storage pass on
+  PUC Lua and LuaJIT; PUC primary 66x2 and corpus 105 pass. Primary parity is 660/660, Unicode self-hosted 10/10,
+  and all six ledgers remain exact. Canonical passed doctrines, governed-input/path audits, semantic owners, Rust,
+  Dart, Julia, and preceding checks before the process oracle exposed its independent post-routing host-temp
+  discovery defect. That correction is task-owned separately; cadence advances to 40/300 with no push.
+
 - 2026-07-27: **REPO-ROOT-PATH-PORTABILITY.2.2 — prove relocated checkout execution**
   (Rust competing-root integration, five-runtime outside-cwd oracle, 39-entry routing, complete canonical signoff).
 
