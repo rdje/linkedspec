@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-28` (typed Lua native runtime-observation capture `.10.7.6.1` is complete; immutable
-  observed-index derivation `.10.7.6.2` follows only after the clean implementation commit)
+- Last updated: `2026-07-28` (immutable Lua observed-index derivation `.10.7.6.2` is complete from clean native-
+  capture commit `cffc524d`; generated/emitted propagation `.10.7.6.3` follows only after its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12635,9 +12635,51 @@ before implementation.
     Rust artifacts are retained. Generated/emitted propagation and observed-index derivation remain fenced;
     `.10.7.6.2` follows only after this leaf's clean commit.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.6.2`
-    Status: `pending`
+    Status: `done` (2026-07-28; complete verified implementation from clean native-capture commit `cffc524d`)
     Goal: Validate detached typed events into an immutable observed index and exact twentieth response digest.
     Depends on: `.10.7.6.1`
+    Acceptance: Add one index method `with_execution_observation(events)` that accepts only a dense sequence of
+      exact protected Lua event handles, validates closed contract/kind/nullability/numeric/input/final-event and
+      static-topology invariants before projection, and returns a new protected semantic index with
+      `has_execution=true`. Derive canonical execution/event records and one `observed_as` relation per event from
+      exactly one fresh detached static projection plus existing protected event JSON; preserve the base index at
+      `has_execution=false`, recursively detach caller/event/JSON state, and expose the twentieth `runtime_events`
+      query digest identically through typed and raw-neutral public paths. Derivation must not parse, validate,
+      compile, execute, install a sink, enable trace/diagnostics, hash input, inspect host result values, read a
+      path/environment, or reach retained source/compiler/staged/generated/runtime authorities. Leave generated/
+      emitted observation propagation, generated-source v2/format 2, rollout, admission, and all ledgers unchanged.
+    Verification plan: Add focused dual-ABI tests for canonical three-event derivation, exact protected base/derived
+      topology and twentieth typed/raw digest, base/event/request/JSON mutation isolation, repeat/interleaved
+      derivation, source/value-shape ownership, and malformed sequences covering non-table/sparse/foreign/forged/
+      wrong-contract/kind/nullability/negative-or-noninteger positions and indices/input/final/order/topology cases.
+      Install traps proving one static materialization and zero parser/compiler/runtime/sink/trace/hash/path/host
+      work; prove failed-compilation and already-observed bases reject. Re-run all semantic suites plus the new
+      derivation owner on PUC Lua/LuaJIT, complete Lua/primary/corpus/storage, primary 5x2x66, Unicode 10/10, all six
+      no-drift ledgers, canonical CI, mdBook/KM/memory/task/doctrines/diff/storage, exact cleanup, and commit before
+      `.10.7.6.3`.
+
+    #### Acceptance Checklist
+
+    - [x] **STRICT DETACHED VALIDATION** — Accept only dense exact protected event sequences with closed portable
+      field/order/final/input rules and compiled static topology; reject every malformed/foreign/forged boundary.
+    - [x] **IMMUTABLE DERIVATION** — One fresh static projection yields a new protected observed index with exact
+      execution/event records and `observed_as` relations while base, events, projections, and repeats stay isolated.
+    - [x] **TWENTIETH QUERY / PUBLIC PARITY** — Typed and raw-neutral `runtime_events` answers match the governed
+      twentieth digest and preserve every existing static digest, page/cost/error, and public topology contract.
+    - [x] **ZERO AUTHORITY / SCOPE FENCE** — Derivation cannot parse/compile/execute/hash/read paths/install sinks or
+      inspect host results; generated/emitted propagation remains absent for `.3`, with format/governance unchanged.
+    - [x] **LOCKSTEP / COMMIT** — Pass focused/complete Lua, both primary matrices, six ledgers, canonical CI,
+      mdBook/KM/live docs/doctrines/diff/storage/cleanup; commit and verify clean before activating `.3`.
+
+    Verification: **PASS 2026-07-28.** One fresh detached static projection plus exact protected event JSON now
+    derives a separate recursively frozen observed index without parser/compiler/runtime/hash/path/host authority.
+    The new owner passes 269 assertions and all nine semantic suites pass 1,884 per ABI. Complete Lua passes
+    package `1..177` on PUC Lua/LuaJIT, PUC primary 66x2, corpus 105/105, and storage 14. Primary 5x2x66,
+    Unicode 10/10, and all six unchanged ledgers pass. Canonical CI passes six doctrines, Rust 1/1 in 80.89s,
+    Dart 1/1, Julia 416/416 in 28.6s, containment/moved-root, reference 66x2, and Phase 0 1,031/1,031 in 654s.
+    mdBook, Knowledge Map 732/5,863, memory/task/doctrines/diff/syntax/storage, and exact cleanup pass; cleanup
+    removes only the 13,028-KiB rendered book and one proven-empty managed-run directory, leaves no Lua adapter,
+    and retains 246 reusable Rust artifacts. Generated/emitted propagation remains fenced for `.10.7.6.3`.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.6.3`
     Status: `pending`
     Goal: Propagate observation through generated helpers/emitted modules/tracing and isolated dual-ABI hosts.
@@ -14946,8 +14988,9 @@ commit `65cb13da` and composition-closes parent `.10.7.5`. Behavior-free runtime
 `.10.7.6.0` is fully verified from clean closeout commit `abe75fe4`; it freezes accepted match-end and normally
 returned result seams, no-sink/callback policy, every dual-ABI route, detached static-only derivation, and exact
 twentieth digest. Typed direct capture `.10.7.6.1` is fully verified at focused 1,614 per ABI and complete
-cross-backend gates; immutable observed-index derivation `.10.7.6.2` follows only after its clean commit. Semantic
-6/20/89 remains at rollout 5/9 and admission 4/6.
+cross-backend gates. Immutable observed-index derivation `.10.7.6.2` is fully verified at focused 1,884 per ABI
+and complete gates; generated/emitted propagation `.10.7.6.3` follows only after its clean commit.
+Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -15584,7 +15627,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.6 | `FUTURE-PARITY-BACKLOG.10.7.6` | `active` | Add caller-owned typed runtime observation and exact immutable post-execution projection. |
 | 74.6.6.0 | `FUTURE-PARITY-BACKLOG.10.7.6.0` | `done` | Exact observation vocabulary, seams, callback identity, routes, derivation policy, and dependency order are frozen without behavior change. |
 | 74.6.6.1 | `FUTURE-PARITY-BACKLOG.10.7.6.1` | `done` | Protected optional slot/result capture, shared digest, exact callback identity, and direct/loaded/reconstructed/traced proof pass both ABIs at focused 1,614. |
-| 74.6.6.2 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `pending` | Validate detached events into an observed index and exact twentieth response digest. |
+| 74.6.6.2 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `done` | Strict detached event/topology validation derives an immutable observed index and exact twentieth digest at focused 1,884 per ABI. |
 | 74.6.6.3 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `pending` | Propagate observations through generated/emitted/traced and isolated dual-ABI hosts. |
 | 74.6.6.4 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `pending` | Recompose and close all observation owners/routes without format or promotion. |
 | 74.6.7 | `FUTURE-PARITY-BACKLOG.10.7.7` | `pending` | Admit one byte-identical ordered Lua consumer on both ABIs and close `.10.7`. |
@@ -16263,6 +16306,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.2` | Clean base `cffc524d`; exact protected events plus one detached static projection; strict contract/kind/nullability/UTF-8/numeric/input/final/topology validation; immutable execution/event/observed-as projection; twentieth digest; mutation/interleaving/one-materialization/zero-authority/generated fences; derivation 269 plus nine-suite focused 1,884 per ABI; complete Lua 177x2, PUC primary 66x2/corpus 105/14-owner storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 80.89s, Dart 1/1, Julia 416/416 in 28.6s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 654s; mdBook/KM 732/5,863/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Native observations derive a separate exact immutable index on both ABIs without execution, generated/emitted propagation, format, rollout, admission, or ledger movement; generated propagation `.10.7.6.3` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.1` | Clean base `59c91cd9`; protected exact eight-field events; accepted Unicode-scalar match-end and normally returned result seams; no-sink zero work; exact arbitrary callback identity after trace cleanup; direct/loaded/reconstructed/execute/traced routes; generated/derivation fences; native 121 and seven existing suites 1,493 = focused 1,614 per ABI; complete Lua 177x2, PUC primary 66x2/corpus 105/14-owner storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 77.88s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 621s; mdBook/KM 731/5,851/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Native caller-owned capture is exact and private on both ABIs without generated/emitted propagation, observed-index derivation, format, rollout, admission, or ledger movement; immutable derivation `.10.7.6.2` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.0` | Clean base `abe75fe4`; all dual-ABI direct/loaded/reconstructed/generated/emitted/traced routes and exact match/result seams; Unicode byte 3/scalar 2; no production/test/fixture/contract/API/format/runtime/ledger change; Lua semantic 1,492 per ABI, diagnostics 119 per ABI, package 177x2, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 624s; mdBook/KM 730/5,838/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Exact typed vocabulary, accepted match-end/final-result seams, no-sink/callback identity, shared digest, route/carrier topology, static-only derivation, twentieth digest, and `.1-.4` order are frozen; typed direct capture `.10.7.6.1` follows the clean audit commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.4` | Clean committed base `65cb13da`; no production/test/fixture/contract/API/observation/format/ledger replacement; seven committed suites exact 1,492 per ABI with 19 typed/raw hashes and 26 malformed boundaries; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 622s; mdBook/KM 729/5,824/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The committed immutable public static query owners recompose without replacement behavior or promotion; parent `.10.7.5` closes and behavior-free runtime-observation audit `.10.7.6.0` follows the clean commit. |
@@ -16546,6 +16590,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.6.2` | `FUTURE-PARITY-BACKLOG.10.7.6.2 - derive Lua observed indexes` | Strict detached validation, immutable observed topology, exact twentieth digest, zero-authority proof, complete dual-ABI/cross-backend signoff, and clean handoff to generated propagation `.10.7.6.3`. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.1` | `FUTURE-PARITY-BACKLOG.10.7.6.1 - add Lua native observation` | Shared digest, protected exact events, native invocation-local routes/callback identity, complete dual-ABI/cross-backend signoff, and clean handoff to immutable derivation `.10.7.6.2`. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.0` | `FUTURE-PARITY-BACKLOG.10.7.6.0 - freeze Lua runtime observation` | Behavior-free exact seam/route/callback/derivation plan, complete dual-ABI and cross-backend signoff, and clean handoff to typed direct capture `.10.7.6.1`. |
 | `FUTURE-PARITY-BACKLOG.10.7.5.4` | `FUTURE-PARITY-BACKLOG.10.7.5.4 - close Lua static query` | No-change seven-suite recomposition at focused 1,492 per ABI, complete signoff, parent `.10.7.5` closure, and clean handoff to observation audit `.10.7.6.0`. |
@@ -16808,6 +16853,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Immutable observed-index derivation `.10.7.6.2` adds
+  `index:with_execution_observation(events)` over exact protected handles plus one detached static projection.
+  Closed contract/kind/nullability/UTF-8/numeric/input/final/static-topology validation yields canonical frozen
+  execution/event/`observed_as` data and the exact twentieth typed/raw digest without parse/compile/execute/hash/
+  path/host authority. New 269 and nine-suite focused 1,884 pass per ABI. Complete Lua 177x2/primary 66x2/corpus
+  105/storage 14, primary 5x2x66, Unicode 10/10, six ledgers, canonical Rust 80.89s + Dart 1/1 + Julia 416/28.6s
+  + containment/moved-root + reference 66x2 + Phase 0 1,031/654s, mdBook/KM 732/5,863, and exact 13,028-KiB
+  plus empty-run cleanup pass. Generated/emitted propagation remains fenced; `.10.7.6.3` follows only after the
+  clean commit.
 
 - `2026-07-28`: Typed native observation `.10.7.6.1` adds one shared arithmetic SHA-256 owner, protected exact
   slot/final event handles, public guard/detached JSON projection, and an invocation-local synchronous sink to

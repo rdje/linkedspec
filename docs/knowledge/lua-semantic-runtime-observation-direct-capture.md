@@ -14,7 +14,7 @@ answers:
   - "does Lua semantic observation work through generated parsers"
   - "does Lua semantic observation hash input when no sink exists"
 date: 2026-07-28
-status: current native direct capture; observed-index derivation and generated propagation remain pending
+status: current native direct capture; observed-index derivation is current and generated propagation remains pending
 tags: [lua, luajit, semantic-introspection, runtime, observation, immutability, callback, trace, diagnostics]
 evidence: lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/init.lua; lua/test/semantic_index_runtime_observation_native_test.lua; FUTURE-PARITY-BACKLOG.10.7.6.1
 reverify:
@@ -65,6 +65,7 @@ reference primary 66x2, and Phase 0 1,031/1,031 in 621 seconds. Knowledge Map is
 cleanup removes only the 208-KiB leaf-owned adapter scratch, 13,000-KiB rendered book, and one empty run directory;
 no Lua adapter remains and 246 reusable Rust artifacts are retained.
 
-Related facts: [[lua-semantic-runtime-observation-authority-map]], [[lua-semantic-query-public-api]],
+Related facts: [[lua-semantic-runtime-observation-authority-map]],
+[[lua-semantic-runtime-observation-derivation]], [[lua-semantic-query-public-api]],
 [[lua-runtime-trace-events]], [[lua-diagnostic-output-events]], [[lua-project-data-ssd-storage]],
 [[julia-semantic-runtime-observation-direct-capture]], and [[rust-semantic-runtime-observation]].

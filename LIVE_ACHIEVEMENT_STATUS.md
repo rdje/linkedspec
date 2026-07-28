@@ -8,13 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.6.2` — after the clean typed native-capture commit, validate caller-retained exact
-  event handles into a new immutable observed index and lock the twentieth runtime-events digest without execution.
+- No behavior leaf is active at this durable handoff. `FUTURE-PARITY-BACKLOG.10.7.6.3` is the next eligible leaf
+  after the clean `.10.7.6.2` commit; it will propagate observations through generated/emitted/traced routes.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.2 — derive immutable Lua observed indexes**
+  (strict detached derivation from clean native-capture commit `cffc524d`).
+
+  **Result:** `index:with_execution_observation(events)` validates dense exact protected event handles against one
+  detached static projection and returns a separate recursively frozen observed index. Exact execution/event/
+  `observed_as` topology and the twentieth typed/raw digest are available without parse, compile, execution, hash,
+  path, environment, sink, trace, diagnostic, generated, or host-result authority. Base/events/responses/repeats
+  stay isolated; generated/emitted propagation, format, rollout, admission, and all ledgers remain unchanged.
+
+  **Proof:** New 269 plus nine-suite focused 1,884 pass per ABI. Complete Lua passes package 177/177 per ABI, PUC
+  primary 66x2, corpus 105/105, and 14-owner storage; primary passes 5x2x66; Unicode 10/10 and all six ledgers pass.
+  Canonical passes six doctrines, Rust 1/1 in 80.89s, Dart 1/1, Julia 416/416 in 28.6s, containment, moved-root,
+  reference 66x2, and Phase 0 1,031/1,031 in 654s. mdBook, Knowledge Map 732/5,863, memory/task/doctrines/diff/
+  syntax/storage, and exact 13,028-KiB plus empty-run cleanup pass; no Lua adapter remains and 246 reusable Rust
+  artifacts are retained. Cadence advances to 55/300 with no push; generated propagation `.10.7.6.3` is next.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.1 — add Lua native observation**
   (typed invocation-local capture from clean behavior-free audit commit `59c91cd9`).
 

@@ -1,6 +1,6 @@
 -- Opaque strict-source, compiled-or-failed, static-projection, and immutable
--- static-query foundation for Lua semantic introspection. Execution
--- observation derivation remains a later owner.
+-- static-query and immutable observed-runtime foundation for Lua semantic
+-- introspection. Generated observation propagation remains a later owner.
 
 local json = require("linkedspec.json")
 local sha256 = require("linkedspec.sha256")
@@ -25,6 +25,7 @@ local INDEX_METHODS = {}
 local VALUE_METHODS = {}
 local ERROR_METHODS = {}
 local outcome_builder
+local runtime_projector
 local static_projector
 local semantic_query
 local fail
@@ -239,7 +240,7 @@ local INDEX_MT = {
     return "SemanticIndex(source_id=\"" .. SOURCE_ID ..
       "\", snapshot_state=\"" .. snapshot_state ..
       "\", source_detail_ceiling=\"" .. state.source_detail_ceiling ..
-      "\", has_execution=false)"
+      "\", has_execution=" .. tostring(state.has_execution) .. ")"
   end,
 }
 
@@ -462,6 +463,13 @@ local function load_semantic_query()
   return semantic_query
 end
 
+local function load_runtime_projector()
+  if runtime_projector == nil then
+    runtime_projector = require("linkedspec.semantic_runtime_projection")
+  end
+  return runtime_projector
+end
+
 local function build_static_projection(source, source_map, options, content_digest, outcome)
   return load_static_projector().build({
     source = source,
@@ -561,6 +569,7 @@ function M.create(source, options)
     content_digest = content_digest,
     outcome = outcome,
     static_projection = static_projection,
+    has_execution = false,
   }
   return result
 end
@@ -570,7 +579,7 @@ function INDEX_METHODS.semantic_snapshot(value)
   return semantic_value("SemanticSnapshot", {
     id = SNAPSHOT_ID,
     state = state.outcome.compiled == nil and "failed_compilation" or "compiled",
-    has_execution = false,
+    has_execution = state.has_execution,
     source_detail_ceiling = state.source_detail_ceiling,
     content_digest_available = state.source_detail_ceiling == "text",
   })
@@ -687,6 +696,25 @@ end
 
 local function materialize_static_projection(state)
   return load_static_projector().materialize(state.static_projection, fail)
+end
+
+function INDEX_METHODS.with_execution_observation(value, events)
+  local state = index_state(value)
+  local projection = materialize_static_projection(state)
+  local derived_projection = load_runtime_projector().derive(projection, events, fail)
+  local result = setmetatable({}, INDEX_MT)
+  INDEX_STATE[result] = {
+    source = state.source,
+    source_map = state.source_map,
+    logical_name = state.logical_name,
+    source_detail_ceiling = state.source_detail_ceiling,
+    entry_rule = state.entry_rule,
+    content_digest = state.content_digest,
+    outcome = state.outcome,
+    static_projection = derived_projection,
+    has_execution = true,
+  }
+  return result
 end
 
 function INDEX_METHODS.capabilities(value)

@@ -1,5 +1,37 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.2 — derive immutable Lua observed indexes
+
+Added `index:with_execution_observation(events)` on both PUC Lua and LuaJIT. The method accepts only a dense
+sequence of exact protected runtime-observation handles, materializes the compiled static projection once, and
+validates the closed event contract, kinds, nullable fields, UTF-8 labels, portable positions/indices, exact
+lowercase input identity, one successful final selected-entry result, and every executing-rule/target-slot edge.
+Malformed, foreign, reordered, failed-base, already-observed, missing-slot, wrong-entry, and unrelated-topology
+inputs return protected `semantic_index_invalid_observation` errors at stage `execution_observation`.
+
+The derived index is a new protected value. It preserves the base, adds canonical `execution:0`, ordered event
+records, and one `observed_as` relation per event, sets `has_execution=true`, and reuses the static owner's
+canonical recursive freeze. Slot source/evidence comes from the selected regex slot and value shape from its
+selecting edge; final source/shape/evidence comes from the selected entry rule. Caller event, detached JSON,
+response, and projection mutations cannot alter either index. Derivation cannot parse, compile, execute, hash,
+install a sink, enable trace/diagnostics, read paths/environment, inspect host results, or reach retained compiler,
+staged, generated, or runtime authorities.
+
+Typed and raw-neutral query paths now expose the exact twentieth `runtime_events` response digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. New derivation proof passes 269 assertions
+per ABI; all nine semantic suites total 1,884 assertions per ABI. The complete Lua gate passes package `1..177`
+per ABI, PUC primary 66x2, corpus 105/105, and 14-owner repository-storage proof. Generated/emitted observation
+remains fenced for `.10.7.6.3`; generated-source v2/format 2, semantic rollout, native admission, and all governance
+ledgers remain unchanged.
+
+Complete signoff passes the five-backend primary matrix at 5x2x66, all ten Unicode-manifest legs, and unchanged
+semantic 6/20/89, capability 80/0/0, generated 10/80/0/0, language 246/105+1/122, and public 59/27/0 ledgers.
+Canonical CI passes six doctrines, Rust admission 1/1 in 80.89 seconds, Dart 1/1, Julia 416/416 in 28.6 seconds,
+containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 654 seconds. mdBook, Knowledge
+Map 732/5,863, memory/task/doctrines/diff/syntax/storage, and exact cleanup pass. Cleanup removes only the
+13,028-KiB rendered book and one proven-empty managed-run directory; no Lua adapter remains and all 246 reusable
+Rust artifacts are retained. Generated/emitted propagation `.10.7.6.3` follows only after the clean commit.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.1 — add Lua typed native runtime observation
 
 Added the optional invocation-local `semantic_observation_sink` to Lua native parse/execute entrypoints. Direct,

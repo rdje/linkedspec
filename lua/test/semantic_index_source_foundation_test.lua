@@ -49,13 +49,14 @@ local module_source = read_file("lua/src/linkedspec/semantic_index.lua")
 local required = {}
 for name in module_source:gmatch('require%(%"([^%"]+)%"%)') do required[#required + 1] = name end
 table.sort(required)
-check_equal(#required, 6, "source module dependency count")
+check_equal(#required, 7, "source module dependency count")
 check_equal(required[1], "linkedspec.json", "source module JSON dependency")
 check_equal(required[2], "linkedspec.semantic_compilation_outcome", "source module lazy outcome dependency")
 check_equal(required[3], "linkedspec.semantic_query", "source module lazy query dependency")
-check_equal(required[4], "linkedspec.semantic_static_projection", "source module lazy static dependency")
-check_equal(required[5], "linkedspec.sha256", "source module SHA-256 dependency")
-check_equal(required[6], "linkedspec.unicode_rule_label", "source module Unicode dependency")
+check_equal(required[4], "linkedspec.semantic_runtime_projection", "source module lazy runtime dependency")
+check_equal(required[5], "linkedspec.semantic_static_projection", "source module lazy static dependency")
+check_equal(required[6], "linkedspec.sha256", "source module SHA-256 dependency")
+check_equal(required[7], "linkedspec.unicode_rule_label", "source module Unicode dependency")
 for _, token in ipairs({
   "io.",
   "os.",

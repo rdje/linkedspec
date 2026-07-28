@@ -102,9 +102,32 @@ Entry/execution/`exit_now` failures omit the final event. The final identity is 
 SHA-256 of the exact input bytes. A failing callback stops delivery and its exact Lua error value is rethrown after
 trace cleanup. With no sink, event construction, slot scalar conversion, and input hashing are skipped.
 
-This native leaf covers direct, loaded, normalized-AST reconstructed, execute aliases, and traced convenience
+This native capture covers direct, loaded, normalized-AST reconstructed, execute aliases, and traced convenience
 routes on PUC Lua and LuaJIT. Generated-plan and emitted-module observation is deliberately unavailable until its
-dedicated propagation leaf; static `index:with_execution_observation(...)` derivation is also not public yet.
+dedicated propagation leaf. A completed native event sequence can now derive a separate observed semantic index:
+
+```lua
+local static_index = linkedspec.semantic_index(source, {
+  logical_name = "runtime.spec",
+  source_detail_ceiling = "text",
+})
+local observed_index = static_index:with_execution_observation(events)
+
+assert(static_index:semantic_snapshot().has_execution == false)
+assert(observed_index:semantic_snapshot().has_execution == true)
+
+local response = observed_index:query(linkedspec.semantic_query_request("list", {
+  record_kinds = { "execution", "event" },
+}))
+assert(#response.records == 4)
+```
+
+Derivation accepts only a dense sequence of exact protected event handles. It validates the closed event schema,
+one successful final entry result, stable lowercase input identity, and every selecting-rule/target-slot edge in
+the retained static topology. It materializes that topology once, adds canonical execution/event records and
+`observed_as` relations, then recursively freezes a new index. It never parses, compiles, executes, hashes input,
+installs a sink, reads a path, or mutates the static index. Invalid observations raise a protected semantic-index
+error with stage `execution_observation` and code `semantic_index_invalid_observation`.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches

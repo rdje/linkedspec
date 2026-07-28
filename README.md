@@ -1416,7 +1416,15 @@ content migration exists yet.
   static-only derivation, twentieth digest, and omission-safe `.1-.4` order without changing behavior or
   governance. Audit signoff passes Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66, Unicode 10/10,
   all six ledgers, canonical CI through Phase 0 1,031/1,031 in 624 seconds, mdBook, and Knowledge Map 730/5,838.
-  Typed direct capture `.10.7.6.1` follows the clean audit commit.
+  Typed direct capture `.10.7.6.1` now adds protected exact events and invocation-local sinks across all native
+  routes at new 121/focused 1,614 assertions per ABI. Immutable derivation `.10.7.6.2` now adds
+  `index:with_execution_observation(events)`: one detached static materialization plus strict event/topology
+  validation yields a recursively frozen observed index without parse/compile/execute/hash/path/host authority.
+  Typed and raw-neutral queries retain the exact twentieth `runtime_events` digest; new derivation proof is 269
+  and all nine semantic suites total 1,884 assertions per ABI. Generated/emitted propagation remains fenced for
+  `.10.7.6.3`; generated-source format, semantic rollout, native admission, and all ledgers remain unchanged.
+  Full signoff passes primary 5x2x66, Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in
+  654 seconds, mdBook, and Knowledge Map 732/5,863.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

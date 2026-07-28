@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.2` — observed-index derivation is a static-topology operation, and
+  malformed-event seams must not normalize evidence): Runtime capture and semantic derivation should remain
+  separate. Lua's derivation receives exactly one detached static projection and protected event JSON; it resolves
+  selecting rules, target slots, edge-owned value shapes, sources, and evidence entirely from that projection.
+  The existing static owner then canonicalizes and recursively freezes the augmented tree. The query evaluator is
+  unchanged and continues to see projection data only. This prevents a convenient derivation API from acquiring
+  parser, compiler, executor, sink, trace, digest, path, result-value, or retained host-object authority.
+
+  A private malformed-event constructor is useful only if it preserves the malformed value. Using Lua's
+  `fields.contract_id or DEFAULT` in the common constructor silently converted missing and Boolean-false contract
+  probes into valid evidence. Production slot/result constructors now request the default explicitly, while the
+  test seam preserves nil/false/foreign values for boundary validation. The broader rule is that defaults belong
+  at trusted construction sites, not in a lower-level carrier used to test closed schemas.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.1` — Lua observer failures need private identity carriers, and the
   interpreter chunk has no spare top-level locals): Lua callbacks may throw any value, including `nil`, a table,
   or an existing `RuntimeInterpreterException`. Wrapping the callback with ordinary `pcall` is insufficient if

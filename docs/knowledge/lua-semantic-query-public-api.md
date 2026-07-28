@@ -13,7 +13,7 @@ answers:
   - "can Lua semantic query compile execute trace access paths or invoke callbacks"
   - "does Lua semantic query include runtime observations"
 date: 2026-07-28
-status: current composition-closed public static API; runtime observation and backend admission pending
+status: current public static API plus derived runtime answers; generated observation and backend admission pending
 tags: [lua, luajit, semantic-introspection, query, capabilities, public-api, validation, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.3; lua/src/linkedspec/init.lua; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_query.lua; lua/test/semantic_index_query_kernel_test.lua; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n 'semantic_query_request|is_semantic_query_(request|response)|semantic_query_to_json|INDEX_METHODS.(capabilities|query|query_neutral)' lua/src/linkedspec lua/test"
@@ -54,7 +54,8 @@ response.
 The query module imports only `linkedspec.json`. It cannot access retained source/maps/outcomes, compiler or staged
 sidecars, AST/ActionIR, compiled regexes, generated implementation, emitter, loader, executor, runtime observation,
 trace/diagnostic sinks, paths, environment, time, randomness, callbacks, or host identity. Hostile callback and
-metatable probes remain uninvoked. Runtime events intentionally remain `.10.7.6` authority.
+metatable probes remain uninvoked. Event capture and observed-index derivation remain separate `.10.7.6` owners;
+query sees only the resulting immutable projection.
 
 The focused suite proves all 19 complete static response hashes through both typed and raw-neutral public paths,
 all 26 governed malformed boundaries, portable numeric edge cases, exact public topology, recursive detachment,
@@ -62,6 +63,11 @@ one materialization, and authority denial at 571 assertions per ABI. The seven s
 assertions per ABI: source 380, outcome 122, graph 64, remaining static 122, call core 136, staged/generated 97,
 and query 571. Complete Lua also passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and the
 repository-volume storage proof.
+
+Leaf `.10.7.6.2` now derives a separate `has_execution=true` index from protected native events and one detached
+static projection. The existing typed and raw-neutral query paths consume that projection without new execution
+authority and match the exact twentieth `runtime_events` digest. The nine semantic suites now total 1,884
+assertions per ABI; generated/emitted observation remains pending in `.10.7.6.3`.
 
 No-change leaf `.10.7.5.4` reruns those seven committed suites from clean public commit `65cb13da` and closes the
 immutable query parent without a replacement production/test/API owner. Complete dual-ABI Lua, primary 5x2x66,
@@ -71,6 +77,7 @@ remains solely `.10.7.6` work.
 
 Related facts: [[lua-semantic-query-authority-map]], [[lua-semantic-query-kernel]],
 [[lua-semantic-query-traversal]], [[lua-semantic-introspection-authority-map]],
+[[lua-semantic-runtime-observation-derivation]],
 [[semantic-introspection-neutral-contract]], [[perl-semantic-query-evaluator]],
 [[rust-semantic-query-evaluator]], [[dart-semantic-query-public-api]], and
 [[julia-semantic-query-public-api]].

@@ -363,7 +363,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.3.6 Lua targeted commands and SSD-local storage oracle
 
 - **WHAT:** `tools/run_lua_project_data.sh` builds disposable native modules and runs one PUC Lua or LuaJIT command
-  under repository-derived managed scratch; `tools/test_lua_project_data_storage.sh` locks all 13 Lua-family
+  under repository-derived managed scratch; `tools/test_lua_project_data_storage.sh` locks all 14 Lua-family
   allocation owners, both ABI module pairs, actual device identity, generated v2 source, trace output, hostile
   other-filesystem builder rejection, quoted-path handling, and cleanup.
 - **WHEN:** use the targeted wrapper for a Lua command that bypasses `tools/run_lua_local.sh`; run the oracle when
@@ -854,12 +854,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_static_remaining_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_core_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_staged_generated_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_query_kernel_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_runtime_observation_native_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_runtime_projection_test.lua
   done
   ```
 
-  The current baseline is source/outcome/graph/remaining/core/staged 379/122/64/122/136/97 on each ABI. Do not
-  invoke native Lua tests without the wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local
-  managed storage.
+  The current baseline is source/outcome/graph/remaining/core/staged/query/native-observation/runtime-projection
+  382/122/64/122/136/97/571/121/269, or 1,884 assertions on each ABI. Do not invoke native Lua tests without the
+  wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local managed storage.
 - **LUA IMMUTABLE-QUERY PREFLIGHT:** retrieve [[lua-semantic-query-authority-map]] before query work. Behavior-free
   `.10.7.5.0` freezes exactly one fresh detached private projection per request, 19 complete static response hashes,
   26 malformed raw-neutral labels, and the public spellings
@@ -889,12 +892,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   diagnostic output. Keep `semantic_observation_sink` invocation-local, return before allocation/scalar conversion/
   SHA when absent, reuse the package-internal portable digest authority, and preserve exact arbitrary callback
   values through separate native and generated semantic carriers. Direct/loaded/reconstructed/generated-plan/
-  emitted/traced PUC Lua and LuaJIT routes must remain result/cursor/trace/diagnostic equivalent. Derivation accepts
-  only typed events and one fresh detached static projection, then targets exact `runtime_events` digest
-  `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` without execution. Audit baseline:
+  emitted/traced PUC Lua and LuaJIT routes must remain result/cursor/trace/diagnostic equivalent. The implemented
+  derivation accepts only typed events and one fresh detached static projection, validates exact static topology,
+  freezes a new index, and retains `runtime_events` digest
+  `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` without execution. Reverify through:
 
   ```bash
   bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+  bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_projection_test.lua
+  bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_projection_test.lua
   bash tools/run_lua_local.sh
   ```
 

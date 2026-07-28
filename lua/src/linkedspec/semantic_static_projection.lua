@@ -2380,6 +2380,19 @@ function M.materialize(projection, fail)
   return thaw(projection)
 end
 
+-- Package-private finalizer for projections derived from one detached static
+-- materialization. Runtime derivation owns validation and new records; this
+-- static owner remains the single authority for canonical ordering and the
+-- recursively immutable projection representation.
+function M._freeze_derived_projection(projection, fail)
+  if type(projection) ~= "table" or type(projection.records) ~= "table" or
+      type(projection.relations) ~= "table" then
+    correlation_fail(fail, "Derived semantic projection is malformed", "projection")
+  end
+  canonicalize(projection.records, projection.relations)
+  return freeze(projection, fail)
+end
+
 -- Package-private corruption probes used by the exact staged/generated suite.
 function M._validate_staged_authority_for_testing(entry, fail)
   validate_staged_authority(entry, { fail = fail })

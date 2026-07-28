@@ -19,9 +19,9 @@ answers:
   - "why are Lua semantic observation imports function local"
   - "how many top level locals can the Lua interpreter chunk use"
 date: 2026-07-28
-status: native typed capture implemented; derivation, generated propagation, and composition remain planned
+status: native typed capture and immutable derivation implemented; generated propagation and composition remain planned
 tags: [lua, luajit, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.1
+evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; lua/test/semantic_index_runtime_projection_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.2
 last_verified: 2026-07-28
 reverify:
   - "rg -n 'trace_regex_slot_selected|accept_match|RuntimeParseResult|diagnostic_output_sink_failure|runtime_parse' lua/src/linkedspec/interpreter.lua"
@@ -30,6 +30,8 @@ reverify:
   - "rg -n 'semantic_observation|RuntimeSemanticObservation|with_execution_observation' lua/src lua/test"
   - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_observation_native_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_observation_native_test.lua"
+  - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_projection_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_projection_test.lua"
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
   - "bash tools/run_lua_local.sh"
 ---
@@ -46,7 +48,8 @@ optional products, not normalized semantic evidence.
 
 Leaf `.10.7.6.1` now implements the native typed channel described below. Direct, loaded, normalized-AST
 reconstructed, execute-alias, and traced convenience routes are current. Generated-plan and emitted propagation
-remain deliberately fenced until `.10.7.6.3`, and observed-index derivation remains absent until `.10.7.6.2`.
+remain deliberately fenced until `.10.7.6.3`; leaf `.10.7.6.2` now implements the detached observed-index
+derivation described below.
 
 The exact selected-slot call sites are after a regex match exists and any ordered target/index invariant succeeds,
 but before `accept_match(...)` changes cursor, registers, actions, rule-slot events, or lifecycle state. At that
@@ -102,7 +105,7 @@ slot-scalar work fence without merging semantic ownership into trace or diagnost
 
 ## Required immutable derivation boundary
 
-Leaf `.10.7.6.2` must add `index:with_execution_observation(events)`. It accepts a dense caller-retained sequence
+Leaf `.10.7.6.2` adds `index:with_execution_observation(events)`. It accepts a dense caller-retained sequence
 of exact protected event handles, validates contract/kind/nullability, nonnegative portable positions and indices,
 a compiled base with `has_execution=false`, stable lowercase input identity, and exactly one succeeded final event
 last whose rule is the selected entry. Each slot must map from its executing static rule through one owned edge

@@ -38,10 +38,10 @@ local SINK_FAILURE_MT = {
   __tostring = function() return "RuntimeSemanticObservationSinkFailure" end,
 }
 
-local function event(fields)
+local function event(fields, use_default_contract)
   local result = setmetatable({}, EVENT_MT)
   EVENT_STATE[result] = {
-    contract_id = M.CONTRACT_ID,
+    contract_id = use_default_contract and M.CONTRACT_ID or fields.contract_id,
     event_kind = fields.event_kind,
     rule_label = fields.rule_label,
     target_rule = fields.target_rule,
@@ -53,6 +53,13 @@ local function event(fields)
   return result
 end
 
+-- Package-private malformed-event constructor for derivation boundary tests.
+-- The root module deliberately does not export this seam.
+function M._event_for_testing(fields)
+  if type(fields) ~= "table" then error("event fields must be a table", 0) end
+  return event(fields, false)
+end
+
 function M.regex_slot_selected(rule_label, target_rule, regex_index, position)
   return event({
     event_kind = M.REGEX_SLOT_SELECTED,
@@ -60,7 +67,7 @@ function M.regex_slot_selected(rule_label, target_rule, regex_index, position)
     target_rule = target_rule,
     regex_index = regex_index,
     position = position,
-  })
+  }, true)
 end
 
 function M.rule_result(rule_label, position, input)
@@ -70,7 +77,7 @@ function M.rule_result(rule_label, position, input)
     position = position,
     input_identity = "input:sha256:" .. sha256.hex(input),
     status = "succeeded",
-  })
+  }, true)
 end
 
 function M.is_event(value)

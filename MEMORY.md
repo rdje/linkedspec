@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.6.1`; latest commit `(this commit)` adds Lua native observation.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.6.2`; latest commit `(this commit)` derives Lua observed indexes.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -39,22 +39,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: Lua typed native capture `.10.7.6.1` is complete from clean `59c91cd9`: shared SHA,
-  protected events/projection, native routes, callback identity, no-sink fences, and generated rejection commit
-  here. Immutable observed-index derivation `.10.7.6.2` is next after a verified clean handoff.
+- current_semantic_frontier: Lua immutable observed-index derivation `.10.7.6.2` is complete from clean `cffc524d`:
+  strict protected-event/static-topology validation, frozen runtime projection, twentieth typed/raw digest, one
+  materialization, zero authority, and generated fence. Generated/emitted propagation `.10.7.6.3` is next.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: `.1` focused semantic 1,493 + observation 121 = 1,614 per ABI, complete Lua package 177x2, PUC
-  primary 66x2/corpus 105, 14-owner storage, primary 5x2x66, Unicode 10/10, and six ledgers pass. Canonical passes
-  Rust 1/77.88s, Dart 1, Julia 416/27.3s, containment/moved-root, reference 66x2, Phase 0 1,031/621s; book/KM
-  731/5,851/live-doc/task/doctrine/diff/storage and exact 13,208-KiB plus empty-run cleanup pass.
+- current_signoff: `.2` new 269/focused 1,884 per ABI, complete Lua package 177x2, PUC primary 66x2/corpus 105,
+  14-owner storage, primary 5x2x66, Unicode 10/10, and six ledgers pass. Canonical passes Rust 1/80.89s, Dart 1,
+  Julia 416/28.6s, containment/moved-root, reference 66x2, Phase 0 1,031/654s; book/KM 732/5,863/live-doc/task/
+  doctrine/diff/storage and exact 13,028-KiB plus empty-run cleanup pass.
 - latest_bootstrap_read: 2026-07-28 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 54/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 55/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: verify the `.10.7.6.1` commit is clean, activate `.10.7.6.2`, and implement derivation; no push.
+- blockers: none. next: verify clean, activate `.10.7.6.3`, and propagate generated/emitted/traced observation; no push.

@@ -42,8 +42,9 @@ The distinction matters:
   failed foundation identically on PUC Lua/LuaJIT; four root query helpers plus index `capabilities`, typed `query`,
   and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries; an
   optional native invocation-local sink now delivers protected typed slot/final observations on direct, loaded,
-  reconstructed, execute-alias, and traced routes, while immutable derivation, generated propagation, and backend
-  admission remain later Lua leaves; and
+  reconstructed, execute-alias, and traced routes; `index:with_execution_observation(events)` validates those
+  handles into the twentieth exact immutable answer, while generated propagation and backend admission remain
+  later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -2428,9 +2429,8 @@ uses the common Lua 5.1 surface and no external executable or optional digest mo
 Direct engines, `LoadedCompiledSpec:create_engine()`, normalized-AST reconstruction, execute aliases, and traced
 convenience calls all reuse this one native seam. Generated-plan helpers currently reject the sink before runtime
 selection and emitted modules contain no observation adapter; `.10.7.6.3` owns the separate generated callback
-carrier and propagation. Likewise, `index:with_execution_observation(...)` and the twentieth `runtime_events`
-query remain absent until `.10.7.6.2`. Generated-source v2/format 2, results, trace, diagnostics, query digests,
-rollout 5/9, and native admission 4/6 are unchanged.
+carrier and propagation. Immutable observed-index derivation is described below. Generated-source v2/format 2,
+results, trace, diagnostics, rollout 5/9, and native admission 4/6 are unchanged.
 
 The focused native suite passes 121 assertions per ABI. The seven existing semantic suites now total 1,493 per
 ABI because source-foundation proof also checks the shared SHA-256 dependency. Complete Lua passes package
@@ -2438,6 +2438,60 @@ ABI because source-foundation proof also checks the shared SHA-256 dependency. C
 Complete signoff also passes primary 5x2x66, Unicode 10/10, every unchanged no-drift ledger, and canonical CI with
 Rust admission 1/1 in 77.88 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment/moved-root proof,
 reference primary 66x2, and Phase 0 1,031/1,031 in 621 seconds. Knowledge Map is 731 facts / 5,851 question keys.
+
+#### Lua immutable observed-index derivation
+
+Leaf `.10.7.6.2` adds one method to the opaque index:
+
+```lua
+local base = linkedspec.semantic_index(source, {
+  logical_name = "runtime.spec",
+  source_detail_ceiling = "text",
+})
+
+local observed = base:with_execution_observation(events)
+assert(base:semantic_snapshot().has_execution == false)
+assert(observed:semantic_snapshot().has_execution == true)
+
+local runtime_records = observed:query(linkedspec.semantic_query_request("list", {
+  record_kinds = { "execution", "event" },
+  source = { detail = "text", include_content_digest = true },
+}))
+assert(#runtime_records.records == 4)
+assert(runtime_records.records[1].id == "execution:0")
+assert(runtime_records.records[2].id == "event:execution:0:0")
+```
+
+Capture and derivation have deliberately separate authority. `with_execution_observation` accepts only a dense
+caller-retained sequence of the exact protected event handles described above. It rejects plain JSON lookalikes,
+host-metatable sequences, gaps and nonpositive keys, unknown contracts or kinds, invalid UTF-8 labels, nonfinite,
+fractional, or negative positions/indices, wrong nullable fields, unstable input identities, duplicate/reordered
+results, failed or already-observed bases, and any event that cannot be proven against the static graph. There must
+be exactly one succeeded final result, it must be last, and its rule must be the selected entry rule.
+
+For each slot event, the executing rule must own an edge whose `selects_regex` relation reaches the named target
+rule and zero-based authored slot. The event record receives source from that slot, value shape from the selecting
+edge, and slot id as relation evidence. The final event receives source and result shape from the selected static
+rule and uses that rule as evidence. The new projection adds canonical `execution:0`, ordered
+`event:execution:0:N` records, and one `observed_as` relation per event, then sets `has_execution=true`.
+
+The method materializes the base projection exactly once and recursively freezes the derived projection through
+the existing static owner. It does not parse, validate or compile source; execute a parser; enable trace or
+diagnostics; install a sink; hash input; read a path or environment; inspect a host result; or retain caller-owned
+tables. The base remains static. Mutating the original event sequence, a detached event JSON object, a response,
+or the private test materialization cannot change either index, and repeated/interleaved derivations remain
+byte-identical.
+
+For canonical `runtime.spec` over `ab\n`, typed `query` and raw-neutral `query_neutral` both retain the exact
+`runtime_events` response digest
+`36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. The derivation suite passes 269
+assertions on each Lua ABI; the nine semantic suites total 1,884 assertions per ABI. Generated-plan and emitted
+observation remain fenced for `.10.7.6.3`; this leaf does not change generated-source v2/format 2, semantic
+rollout, native admission, or any governance ledger.
+
+Complete signoff passes Lua package `1..177` on both ABIs, PUC primary 66x2, corpus 105/105, storage 14, primary
+5x2x66, Unicode 10/10, all six unchanged ledgers, and canonical CI through Phase 0 1,031/1,031 in 654 seconds.
+The mdBook build and Knowledge Map 732/5,863 also pass.
 
 #### Lua private immutable query kernel (historical dependency boundary)
 
@@ -2961,6 +3015,7 @@ The dependency order is:
 | `.10.7.5.4` | Lua immutable static-query composition closeout | complete; committed focused 1,492 plus full signoff closes `.10.7.5` without replacement code or promotion |
 | `.10.7.6.0` | Lua runtime-observation authority audit | complete behavior-free plan; exact seams/routes/no-sink/callback/derivation/twentieth-digest policy frozen |
 | `.10.7.6.1` | Lua typed native runtime observation capture | implemented; protected events, exact native routes/callback identity, new 121/focused 1,614 per ABI, generated and derivation fenced |
+| `.10.7.6.2` | Lua immutable observed-index derivation | implemented; strict detached topology validation, exact twentieth digest, new 269/focused 1,884 per ABI, generated propagation fenced |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
