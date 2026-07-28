@@ -1,5 +1,15 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.7` — one consumer must express two ABI admissions): PUC Lua and LuaJIT
+  share the same Lua source implementation, so semantic admission must not create ABI-specific tests or alternate
+  projections. One Lua-5.1-compatible consumer file declares the established twelve roles once; the backend driver
+  runs those exact bytes under both interpreters, and both contract rows point to the same consumer topology.
+
+  The dual-row contract adds one extra status boundary compared with a single-runtime backend. Nine mutations are
+  therefore required: two independent admission rollbacks plus the seven established path/role/driver/rollout/
+  registration mutations. This proves both ABI rows without inventing a second semantic owner or mistaking one
+  passing runtime for dual-ABI admission.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.4` — runtime-observation closeout composes owners; admission must not
   leak backward): The ten committed suites already partition Lua semantic authority correctly across source,
   outcome, static projection, calls/staging, query, native observation, detached derivation, and generated/emitted

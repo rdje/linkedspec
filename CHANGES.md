@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.7 — activate exact Lua semantic admission
+
+Activated the final Lua semantic-introspection leaf task-tree-first from clean runtime-observation closeout commit
+`17348041`. Retrieval covered the four admitted consumer fact cards and sources, the complete committed Lua
+semantic/runtime authority chain, the neutral contract/checker, Toolbox guidance, and both canonical drivers. The
+frozen implementation is one additive Lua-5.1-compatible twelve-role consumer run unchanged on PUC Lua and
+LuaJIT, with strict source normalization, every compiled/failed/runtime snapshot, every native/loaded/
+reconstructed/generated/emitted/traced/isolated route, all twenty exact typed/raw-neutral digests, policy and
+isolation fences, host denial, identical dual-row topology, and Lua-only promotion.
+
+Nine future mutations separately lock both ABI admission statuses and the shared consumer path, role order,
+driver, rollout, and canonical registration. This planning slice changes no production/test behavior, fixture,
+contract value, query response, generated format, rollout, or admission row: the baseline remains 6 groups / 20
+responses / 89 rejected mutations at rollout 5/9 and admission 4/6. Memory architecture, all six doctrines,
+Knowledge Map 734/5,883, mdBook, neutral semantic checker, and diff hygiene pass. Exact cleanup removes only the
+13,060-KiB generated book plus one proven-empty managed-run directory; implementation follows only after this clean
+activation commit.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.4 — close Lua runtime observation
 
 No-change closeout starts from clean generated-route commit `04ab4fec` and adds no production module, replacement

@@ -1436,8 +1436,10 @@ content migration exists yet.
   Complete Lua, primary 5x2x66, Unicode 10/10, and every unchanged ledger pass; canonical CI passes Rust admission
   1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment, moved-root proof, reference primary
   66x2, and Phase 0 1,031/1,031 in 656 seconds. Generated-source v2/format 2, semantic rollout 5/9, and native
-  admission 4/6 remain fixed; exact ordered PUC Lua/LuaJIT admission is the next leaf `.10.7.7` after a clean
-  closeout commit.
+  admission 4/6 remain fixed. Exact ordered PUC Lua/LuaJIT admission `.10.7.7` is now active task-tree-first from
+  clean `17348041`: one Lua-5.1-compatible twelve-role consumer will run unchanged on both ABIs, both rows must
+  share its exact topology, nine mutations will lock that topology, and only Lua rollout/admission may advance.
+  The activation changes no implementation or governance value; baseline remains 6/20/89 at 5/9 + 4/6.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

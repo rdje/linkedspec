@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.6.4`; latest commit `(this commit)` closes Lua runtime observation.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.6.4`; latest commit `(this commit)` activates Lua admission `.10.7.7`.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -39,22 +39,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: Lua runtime observation `.10.7.6` is composition-closed through no-change `.4` from
-  clean `04ab4fec`: ten committed owners recompose at focused 1,964 per ABI without format or promotion. Exact
-  ordered dual-ABI admission `.10.7.7` is next only after the clean closeout commit.
+- current_semantic_frontier: `.10.7.7` is active task-tree-first from clean `17348041`: one exact twelve-role Lua
+  consumer will run unchanged on both ABIs, bind both rows to identical topology, add nine omission mutations, and
+  advance only Lua rollout/admission after all committed semantic owners pass.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: `.4` unchanged focused 1,964 per ABI, complete Lua package 177x2, PUC primary 66x2/corpus 105,
-  15-owner storage, primary 5x2x66, Unicode 10/10, and all ledgers pass. Canonical passes Rust 1/81.52s, Dart 1,
-  Julia 416/29.0s, containment/moved-root, reference 66x2, and Phase 0 1,031/656s; book/KM 733/5,874/live-doc/task/
-  doctrine/diff/storage and exact 13,052-KiB plus empty-run cleanup pass.
+- current_signoff: activation baseline passes semantic 6/20/89 at rollout 5/9 + admission 4/6, memory, six
+  doctrines, KM 734/5,883, mdBook, diff, and exact 13,060-KiB plus empty-run cleanup. No behavior/governance value
+  changes; `.6.4` remains the latest complete runtime proof at focused 1,964 per ABI plus full canonical signoff.
 - latest_bootstrap_read: 2026-07-28 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 57/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 58/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: verify clean, activate `.10.7.7`, freeze/add the exact ordered dual-ABI admission consumer; no push.
+- blockers: none. next: verify the clean activation commit, then add the exact ordered dual-ABI admission consumer; no push.

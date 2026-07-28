@@ -8,9 +8,12 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No behavior leaf is active at this durable handoff. `FUTURE-PARITY-BACKLOG.10.7.7` is the next eligible leaf
-  after the clean `.10.7.6.4` commit; it will add the exact ordered consumer shared by PUC Lua and LuaJIT, advance
-  only Lua rollout/admission, and close `.10.7`.
+- `FUTURE-PARITY-BACKLOG.10.7.7` is active task-tree-first from clean commit `17348041`. Its planning boundary
+  owns one Lua-5.1-compatible ordered twelve-role consumer run unchanged on PUC Lua and LuaJIT, all committed
+  snapshot/query/runtime routes, twenty digests, policy/isolation/host denial, identical dual-row topology, nine
+  mutations, Lua-only promotion, and `.10.7` closeout. No implementation or governance value has changed yet.
+  Baseline memory, six doctrines, KM 734/5,883, mdBook, neutral 6/20/89 at 5/9 + 4/6, diff, and exact generated-
+  book/empty-run cleanup pass.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.

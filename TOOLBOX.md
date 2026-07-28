@@ -784,6 +784,18 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   non-interference, fresh plus isolated emitted modules, and host-leak denial. Eight independent topology
   mutations advance only Julia to rollout 5/9 and admission 4/6.
 
+- **LUA COMPOSED ADMISSION PLAN:** `.10.7.7` is active from clean `17348041`. Add only
+  `lua/test/semantic_introspection_lua_admission_test.lua`; it must declare the established twelve ordered roles
+  once in Lua-5.1-compatible source and run unchanged through `tools/run_lua_local.sh` on PUC Lua and LuaJIT. Both
+  admission rows must carry the same consumer path/driver/roles object. The consumer composes strict source and
+  compiled/failed/runtime snapshots; all twenty typed/raw-neutral digests; direct, loaded, reconstructed, public
+  generated-plan, fresh-emitted direct/traced, isolated emitted, native traced, and generated-helper traced routes;
+  privacy/pages/budgets/errors/explain; request/response isolation; query non-execution; and host/path/table/
+  metatable/AST/ActionIR/observation/generated-source/pointer denial. The checker must lock both ABI statuses,
+  exact shared topology, both driver invocations, Lua-only rollout, canonical registration, and nine independent
+  mutations. Until that leaf passes and commits, the exact baseline remains 6 groups / 20 responses / 89
+  mutations, rollout 5/9, and admission 4/6. Retrieve [[lua-semantic-introspection-admission-plan]] before editing.
+
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque
   detached source/error values. Importing `linkedspec.semantic_index` remains parser-free; constructing an index

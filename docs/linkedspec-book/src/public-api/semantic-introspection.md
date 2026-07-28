@@ -2556,6 +2556,26 @@ seconds. Parent `.10.7.6` is therefore composition-closed without changing deter
 v2/format 2, semantic rollout 5/9, or native admission 4/6. The separate ordered dual-ABI admission consumer
 remains `.10.7.7`.
 
+#### Lua dual-ABI admission activation
+
+Leaf `.10.7.7` is active task-tree-first from clean runtime-observation closeout commit `17348041`. Its frozen
+implementation adds one file, `lua/test/semantic_introspection_lua_admission_test.lua`, rather than another
+semantic model, projector, evaluator, observation seam, or runtime route. That Lua-5.1-compatible source declares
+the established twelve roles once and must run byte-for-byte unchanged under both PUC Lua and LuaJIT.
+
+The consumer will compose strict byte/text normalization; compiled graph, calls, privacy, failed, and observed
+runtime snapshots; direct, loaded, normalized-JSON reconstructed, public generated-plan, fresh-emitted direct/
+traced, isolated emitted, native traced, and generated-helper traced execution; typed/native-neutral JSON; all
+twenty exact response digests; privacy, pages, budgets, errors, explanations, request/response isolation, and query
+non-execution; plus denial of paths, Lua host tables/metatables and implementation/type text, AST/ActionIR,
+observation objects, generated implementation source, trace, and pointer-like identity.
+
+Both Lua admission rows must reference one identical consumer object, `tools/run_lua_local.sh` must invoke its
+same path exactly once per ABI, and canonical CI must require it. Nine independent mutations lock the two ABI
+statuses and the shared path, ordered roles, driver, Lua-only rollout, and registration. This activation changes no
+behavior or governance value: the pre-implementation baseline remains six groups, twenty response hashes, and 89
+rejected mutations at rollout 5/9 and native admission 4/6.
+
 #### Lua private immutable query kernel (historical dependency boundary)
 
 Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
@@ -3081,6 +3101,7 @@ The dependency order is:
 | `.10.7.6.2` | Lua immutable observed-index derivation | implemented; strict detached topology validation, exact twentieth digest, new 269/focused 1,884 per ABI, generated propagation fenced |
 | `.10.7.6.3` | Lua generated and emitted runtime observation | implemented; public/fresh-emitted direct/traced plus isolated dual-ABI routes, exact callback identity and marker fences, new 80/focused 1,964 per ABI, unchanged v2/format 2 |
 | `.10.7.6.4` | Lua runtime-observation composition closeout | complete; committed focused 1,964 plus full signoff closes `.10.7.6` without replacement code, format change, or promotion |
+| `.10.7.7` | Lua exact dual-ABI semantic admission | active planning; one shared twelve-role source, identical two-row topology, nine mutations, Lua-only promotion, and parent closeout frozen before implementation |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

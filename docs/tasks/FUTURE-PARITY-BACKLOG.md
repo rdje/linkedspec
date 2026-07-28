@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-28` (no-change runtime-observation composition `.10.7.6.4` and parent `.10.7.6` are fully
-  verified from clean generated-propagation commit `04ab4fec`; exact dual-ABI admission `.10.7.7` follows cleanly)
+- Last updated: `2026-07-28` (exact dual-ABI semantic admission `.10.7.7` activated task-tree-first from clean
+  runtime-observation closeout commit `17348041`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -10967,9 +10967,7 @@ before implementation.
   `.10.6.7` and parent `.10.6` close; PUC Lua/LuaJIT `.10.7` is the next task-tree-first PNT slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7`
-  Status: `active` (2026-07-25; Unicode prerequisite `.10.7.1`, source/outcome plan `.10.7.2.0`, and strict source
-    implementation `.10.7.2.1` plus staged outcome `.10.7.2.2` and closeout `.10.7.2.3` closed; static audit
-    `.10.7.3.0` next)
+  Status: `active` (2026-07-28; `.10.7.1-.6` composition-closed and exact dual-ABI admission `.10.7.7` active)
   Goal: Implement the Lua semantic index adapter with exact PUC Lua/LuaJIT identity.
   Children: `.10.7.0`, `.10.7.1`, `.10.7.2`, `.10.7.3`, `.10.7.4`, `.10.7.5`, `.10.7.6`, `.10.7.7`
   Depends on: `.10.6`
@@ -10986,9 +10984,9 @@ before implementation.
     prerequisite and trust-route bypasses, and freeze an omission-safe `.1-.7` dependency order before behavior.
   - [x] **UNICODE PREREQUISITE** — Align declaration/action/blind/bare parsing and validation to one generated
     Unicode 17 classifier on PUC Lua and LuaJIT without widening unrelated identifiers or promoting semantics.
-  - [ ] **SOURCE / STATIC / CALLS** — Construct one opaque strict source/outcome owner, then exact private static
+  - [x] **SOURCE / STATIC / CALLS** — Construct one opaque strict source/outcome owner, then exact private static
     and calls/staged/generated projections from retained native authority without exposing host tables/metatables.
-  - [ ] **QUERY / OBSERVATION** — Expose one immutable typed/raw-neutral evaluator and caller-owned typed runtime
+  - [x] **QUERY / OBSERVATION** — Expose one immutable typed/raw-neutral evaluator and caller-owned typed runtime
     observations with exact pages, budgets, privacy, errors, explanations, and all twenty response hashes.
   - [ ] **DUAL-ABI ADMISSION** — Run one byte-identical ordered consumer on PUC Lua and LuaJIT, lock both admission
     rows and canonical topology, advance only Lua, synchronize public state, and close `.10.7` cleanly.
@@ -12781,13 +12779,59 @@ before implementation.
       generated-source v2/format 2, rollout, admission, and all ledgers unchanged; `.10.7.7` follows cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.7.7`
-  Status: `pending`
+  Status: `active` (2026-07-28; planning and omission-sensitive dual-ABI consumer admission)
   Goal: Admit the exact byte-identical Lua semantic implementation on PUC Lua and LuaJIT and close `.10.7`.
   Depends on: `.10.7.6`
   Acceptance: Add one ordered twelve-role consumer that runs unchanged on both ABIs over all snapshots, exact
     queries, policy/isolation/denial cases, and native/loaded/reconstructed/generated/emitted/traced routes; lock
     both admission rows, identical consumer topology, canonical registration, and Lua-only rollout promotion;
     pass complete dual-ABI/package/primary/corpus/generated/canonical/public proof and close the parent cleanly.
+  Verification plan: Add one additive `lua/test/semantic_introspection_lua_admission_test.lua` consumer that
+    composes only the committed source, outcome, static, calls/staged/generated, query, native observation,
+    immutable derivation, public generated-helper, fresh-emitted, and isolated-host owners. Declare and execute the
+    same ordered twelve roles as Perl/Rust/Dart/Julia exactly once in one Lua-5.1-compatible source file. Exercise
+    strict byte/text normalization; compiled graph/calls/privacy and failed snapshots; direct, loaded, normalized-
+    JSON-reconstructed, public generated-plan, fresh-emitted direct/traced, isolated emitted, native traced, and
+    generated-helper traced runtime routes; exact typed/native-neutral JSON; every one of the twenty response
+    digests; detached request/response mutation; privacy, pages, budgets, portable errors, explanations, and query
+    non-execution; plus denial of paths, host tables/metatables, Lua implementation/type text, AST/ActionIR,
+    observation objects, generated implementation source, trace, and pointer-like identity. Register the same file
+    exactly once under both PUC Lua and LuaJIT in `tools/run_lua_local.sh`, require it in `tools/run_ci_local.sh`,
+    set both Lua admission rows to the identical consumer object, and promote only `lua_dual_abi`. Extend the
+    neutral checker with exact Lua role markers, both backend-driver invocations, canonical topology, and nine
+    independent Lua mutations: each ABI status, consumer path omission/alteration, role omission/reordering,
+    driver alteration, rollout rollback, and canonical-registration omission. Then pass focused admission on both
+    ABIs, all eleven semantic suites, complete Lua/package/primary/corpus/storage, primary 5x2x66, Unicode 10/10,
+    every governance ledger, canonical CI, mdBook/Knowledge Map/memory/task/doctrines/diff/syntax/storage, and safe
+    exact artifact cleanup before closing `.10.7.7` and parent `.10.7`.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / PRECONDITION** — Retrieve all four admitted semantic-consumer facts, the committed Lua
+    semantic/runtime facts, Toolbox, neutral contract/checker, consumer sources, driver topology, and clean
+    `17348041`; confirm 20 digests, 89 mutations, rollout 5/9, and admission 4/6.
+  - [ ] **ORDERED DUAL-ABI CONSUMER** — One byte-identical Lua file declares and executes the exact twelve roles
+    once on both ABIs without another semantic model, projector, evaluator, observer, or route implementation.
+  - [ ] **SNAPSHOTS / QUERIES** — Strict source normalization, compiled/failed/runtime snapshots, typed/raw-neutral
+    identity, all twenty hashes, privacy/pages/budgets/errors/explain, isolation, and non-execution are exact.
+  - [ ] **RUNTIME ROUTES** — Direct, loaded, reconstructed, generated-plan, fresh-emitted direct/traced, isolated
+    emitted, native traced, and generated-helper traced routes preserve exact results, events, and twentieth hash.
+  - [ ] **HOST DENIAL** — Portable responses and the detached evaluator expose no path, host table/metatable,
+    implementation/type text, AST/ActionIR, observation object, generated source, trace, or pointer identity.
+  - [ ] **TOPOLOGY / PROMOTION** — Both admission rows share one exact consumer; both driver invocations and nine
+    independent mutations pass; only `lua_dual_abi` advances, leaving recurring, MCP, and public rows pending.
+  - [ ] **LOCKSTEP / CLOSE** — Complete focused/backend/matrix/ledger/canonical/docs/KM/doctrine/diff/cleanup proof
+    passes; synchronize public state, close `.10.7.7` and `.10.7`, and commit cleanly before recurring `.10.8`.
+
+  Planning evidence: From clean `17348041`, required startup review remains complete. Knowledge Map retrieval
+    covered all four admitted consumers and the committed Lua semantic/runtime authority chain; `TOOLBOX.md`, ADRs
+    `0049`/`0050`/`0051`, the neutral contract/checker, all four consumer sources, Lua semantic suites, and both
+    canonical drivers establish the exact additive topology above. Baseline semantic proof passes 6 groups / 20
+    responses / 89 rejected mutations / rollout 5/9 / admission 4/6. Memory architecture, all six doctrines,
+    Knowledge Map 734/5,883, mdBook build, and diff hygiene pass. Exact cleanup removes only the 13,060-KiB
+    generated book and one proven-empty managed-run directory. No production/test behavior, fixture, contract
+    value, response digest, generated format, rollout, or admission changes; the clean planning commit must
+    precede implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.8`
   Status: `pending`
@@ -15084,7 +15128,8 @@ and complete gates. Generated/emitted propagation `.10.7.6.3` is fully verified 
 fresh-emitted direct/traced and isolated dual-ABI proof passes new 80/focused 1,964 per ABI plus complete Lua and
 cross-backend signoff. No-change composition `.10.7.6.4` passes unchanged ten-owner focused 1,964 per ABI from
 clean `04ab4fec` plus complete lockstep proof and composition-closes parent `.10.7.6`. Exact ordered dual-ABI
-admission `.10.7.7` follows only after the clean closeout commit.
+admission `.10.7.7` is active task-tree-first from clean closeout commit `17348041`; implementation follows only
+after its clean planning commit.
 Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
@@ -15725,7 +15770,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.6.2 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `done` | Strict detached event/topology validation derives an immutable observed index and exact twentieth digest at focused 1,884 per ABI. |
 | 74.6.6.3 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `done` | Generated/emitted direct/traced and isolated dual-ABI propagation passes new 80/focused 1,964 per ABI plus full signoff with unchanged format/governance. |
 | 74.6.6.4 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `done` | Committed focused 1,964 plus complete signoff closes the observation parent without replacement code, format movement, or promotion. |
-| 74.6.7 | `FUTURE-PARITY-BACKLOG.10.7.7` | `pending` | Admit one byte-identical ordered Lua consumer on both ABIs and close `.10.7`. |
+| 74.6.7 | `FUTURE-PARITY-BACKLOG.10.7.7` | `active` | Admit one byte-identical ordered Lua consumer on both ABIs, advance only Lua governance, and close `.10.7`. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -16687,6 +16732,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.7` | `FUTURE-PARITY-BACKLOG.10.7.7 - activate Lua semantic admission` | Behavior-free shared twelve-role dual-ABI plan, identical two-row topology, nine mutations, Lua-only promotion, full signoff/parent-closeout boundary, and clean implementation handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `FUTURE-PARITY-BACKLOG.10.7.6.4 - close Lua runtime observation` | No-change ten-suite recomposition at focused 1,964 per ABI, complete signoff, parent `.10.7.6` closure, and clean handoff to admission `.10.7.7`. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `FUTURE-PARITY-BACKLOG.10.7.6.3 - propagate Lua runtime semantics` | Generated/emitted direct/traced and isolated dual-ABI propagation, exact callback/marker fences, unchanged v2/format 2, complete signoff, and clean handoff to no-change closeout `.10.7.6.4`. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `FUTURE-PARITY-BACKLOG.10.7.6.2 - derive Lua observed indexes` | Strict detached validation, immutable observed topology, exact twentieth digest, zero-authority proof, complete dual-ABI/cross-backend signoff, and clean handoff to generated propagation `.10.7.6.3`. |
@@ -16952,6 +16998,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Exact Lua semantic admission `.10.7.7` activates task-tree-first from clean `17348041` after
+  retrieving the four admitted consumer facts/sources, committed Lua semantic/runtime chain, neutral contract/
+  checker, Toolbox, and both drivers. One Lua-5.1-compatible twelve-role file will run unchanged on PUC Lua and
+  LuaJIT; both rows share its exact topology, nine mutations lock both statuses plus path/roles/driver/rollout/
+  registration, and only Lua may advance. Baseline 6/20/89 at 5/9 + 4/6 plus memory/six doctrines/KM 734/5,883/
+  mdBook/diff and exact generated-book/empty-run cleanup pass without production/test behavior, fixture, contract-
+  value, response, format, rollout, or admission change.
 
 - `2026-07-28`: No-change runtime-observation closeout `.10.7.6.4` recomposes the ten committed Lua semantic
   owners unchanged at focused 1,964 per ABI from clean `04ab4fec`, including all native/generated/emitted/traced/
