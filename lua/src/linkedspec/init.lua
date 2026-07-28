@@ -1,6 +1,7 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
 local semantic_index = require("linkedspec.semantic_index")
+local semantic_query = require("linkedspec.semantic_query")
 local spec_loader = require("linkedspec.spec_loader")
 local spec_ast = require("linkedspec.spec_ast")
 local spec_parser = require("linkedspec.spec_parser")
@@ -69,6 +70,10 @@ end
 
 M.json = json
 M.semantic_index = semantic_index.create
+M.semantic_query_request = semantic_query.request
+M.is_semantic_query_request = semantic_query.is_request
+M.is_semantic_query_response = semantic_query.is_response
+M.semantic_query_to_json = semantic_query.to_json
 M.primary_cli = primary_cli
 M.primary_cli_help = primary_cli.help
 M.run_primary_cli = primary_cli.run

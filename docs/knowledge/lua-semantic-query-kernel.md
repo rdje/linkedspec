@@ -14,7 +14,7 @@ answers:
   - "where is the Lua private semantic query kernel tested"
   - "does the Lua semantic query kernel behave identically on PUC Lua and LuaJIT"
 date: 2026-07-28
-status: current private value and non-traversal foundation beneath the complete static evaluator
+status: current private value and non-traversal foundation beneath the public static evaluator
 tags: [lua, luajit, semantic-introspection, query, capabilities, privacy, immutability, no-execution]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.1; lua/src/linkedspec/semantic_query.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_query_kernel_test.lua; tools/run_lua_local.sh; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n '_semantic_query_kernel|materialize_static_projection|SemanticQuery(Request|Response)|semantic_index_query_kernel_test' lua/src/linkedspec lua/test tools/run_lua_local.sh"
@@ -22,10 +22,10 @@ reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh to
 
 # Lua Private Semantic Query Kernel
 
-Leaf `.10.7.5.1` implements Lua's immutable semantic-query vocabulary and its first projection-only evaluator in
-`lua/src/linkedspec/semantic_query.lua`. The module is package-private. Root `linkedspec` exports no query
-constructor, guard, serializer, `capabilities`, `query`, or `query_neutral`; semantic-index instances expose none
-of those methods yet. This prevents the non-traversal subset from becoming a partial compatibility surface.
+Leaf `.10.7.5.1` implemented Lua's immutable semantic-query vocabulary and its first projection-only evaluator in
+`lua/src/linkedspec/semantic_query.lua`. At that dependency boundary the module was package-private and root/index
+query names were deliberately absent, preventing the non-traversal subset from becoming a partial compatibility
+surface. Leaf `.10.7.5.3` now exposes the complete public static surface; see [[lua-semantic-query-public-api]].
 
 The kernel matches nine complete neutral response digests on both PUC Lua and LuaJIT: `capabilities`,
 `graph_list_rules`, `graph_duplicate_regex_text`, `graph_explain_entry`, `calls_symbols_and_shapes`,
@@ -50,10 +50,10 @@ AST/ActionIR, compiled regexes, generated implementation, emitter/loader/executo
 diagnostic sinks, paths, environment, time, randomness, callbacks, or host identity; it cannot parse, compile,
 execute, observe, or enable trace.
 
-Leaf `.10.7.5.2` now extends this same evaluator with relations, cursors, non-default page sizes, non-default
+Leaf `.10.7.5.2` extended this same evaluator with relations, cursors, non-default page sizes, non-default
 budgets, portable typed errors, deterministic prefixes, and the other ten static hashes; see
-[[lua-semantic-query-traversal]]. Ambiguous/raw JSON-like validation, all 26 malformed boundaries, and the complete
-public typed/raw-neutral API remain `.10.7.5.3`. Runtime events remain `.10.7.6`.
+[[lua-semantic-query-traversal]]. Leaf `.10.7.5.3` adds explicit raw JSON-kind validation, all 26 malformed
+boundaries, and the complete public typed/raw-neutral API. Runtime events remain `.10.7.6`.
 
 The focused suite passes 159 assertions unchanged on both ABIs. The seven semantic suites compose at 1,080 per
 ABI: source 380, outcome 122, graph 64, remaining static 122, call core 136, staged/generated 97, and query 159.
@@ -62,4 +62,5 @@ storage proof.
 
 Related facts: [[lua-semantic-query-authority-map]], [[lua-semantic-introspection-authority-map]],
 [[lua-semantic-staged-generated-projection]], [[semantic-introspection-neutral-contract]],
-[[semantic-source-ceiling-boundary]], [[lua-semantic-query-traversal]], and [[julia-semantic-query-kernel]].
+[[semantic-source-ceiling-boundary]], [[lua-semantic-query-traversal]],
+[[lua-semantic-query-public-api]], and [[julia-semantic-query-kernel]].

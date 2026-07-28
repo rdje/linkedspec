@@ -28,18 +28,19 @@ answers:
   - "what authority may the Lua semantic query evaluator consume"
   - "how must Lua semantic query represent JSON and integers across both ABIs"
 date: 2026-07-28
-status: current authority map; private 22/25 projection and complete 19-hash static query evaluator implemented
+status: current authority map; private 22/25 projection and public 19-hash static query evaluator implemented
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners. Behavior-free .10.7.5.0 freezes one detached projection-only evaluator, exact Lua vocabulary, 19 static hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and .1-.4 dependency order. .10.7.5.1 implements protected recursive values and the exact private nine-hash non-traversal kernel; .10.7.5.2 completes all 19 static hashes with private traversal/pages/budgets/costs on both ABIs."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners. Behavior-free .10.7.5.0 freezes one detached projection-only evaluator, exact Lua vocabulary, 19 static hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and .1-.4 dependency order. .10.7.5.1 implements protected recursive values and the exact private nine-hash non-traversal kernel; .10.7.5.2 completes all 19 static hashes with private traversal/pages/budgets/costs; .10.7.5.3 exposes the complete public typed/raw-neutral API and validates all 26 malformed boundaries on both ABIs."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
 # Lua semantic-introspection authority map
 
 Lua had no semantic-introspection production module at the `.10.7.0` audit boundary. It now exposes public
-`semantic_index(source, options)` with strict source mapping plus detached compiled-or-failed foundation values.
-It still exposes no `semantic_capabilities`, `semantic_query`, `semantic_query_neutral`, record projection, or
-observation API. The remaining reusable meaning is distributed across the shared PUC Lua/LuaJIT implementation:
+`semantic_index(source, options)` with strict source mapping plus detached compiled-or-failed foundation values,
+four root semantic-query helpers, and index `capabilities`, typed `query`, and raw `query_neutral`. It still exposes
+no public record projection or observation API. The remaining reusable meaning is distributed across the shared
+PUC Lua/LuaJIT implementation:
 
 - strict `parse_spec` input, `SpecFile`, function shells, staged payload/job/result sidecars, and body-element
   source lines own authored structure;
@@ -95,13 +96,13 @@ are ambiguous, and portable integral checks use finite `number` plus `math.floor
 protected recursively frozen state, fresh JSON-kind projections, and one detached materialization while exposing
 no root/index query name. Traversal/limits `.10.7.5.2` now matches the other ten and all 19 static hashes with
 canonical pages, filtered directional BFS, deterministic budget prefixes, logical costs, and portable typed errors.
-The complete public constructor/guards/projection and `capabilities` / typed `query` / raw `query_neutral` methods
-remain absent until `.3` locks all 26 malformed boundaries; `.4` is the no-change closeout. Related facts:
+Public `.10.7.5.3` now locks the complete constructor/guards/projection and `capabilities` / typed `query` / raw
+`query_neutral` methods at all 19 hashes and 26 malformed boundaries; `.4` is the no-change closeout. Related facts:
 [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
 [[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]],
-[[lua-semantic-query-kernel]], [[lua-semantic-query-traversal]],
+[[lua-semantic-query-kernel]], [[lua-semantic-query-traversal]], [[lua-semantic-query-public-api]],
 [[lua-semantic-static-projection-plan]], [[lua-semantic-call-staged-projection-plan]],
 [[lua-semantic-staged-generated-projection]], and [[lua-semantic-query-authority-map]]. Static planning fixes
 five exact targets and the parsed-line plus compiled-occurrence correlation rule before projector code: local

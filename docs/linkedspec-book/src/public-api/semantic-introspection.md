@@ -39,10 +39,9 @@ The distinction matters:
   typed caller observations derive the exact runtime snapshot across native, generated, and emitted routes; and
 - `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - Lua `linkedspec.semantic_index(source, options)` now exposes the strict source map plus detached compiled-or-
-  failed snapshot, presence, diagnostic, entry, and generated-v2 plan foundation identically on PUC Lua/LuaJIT;
-  the exact private static plus calls/staging/generated projection and private nine-hash non-traversal query kernel
-  are complete, while traversal/limits, public query, runtime observation, and backend admission remain later Lua
-  leaves; and
+  failed foundation identically on PUC Lua/LuaJIT; four root query helpers plus index `capabilities`, typed `query`,
+  and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries, while
+  runtime observation and backend admission remain later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -2140,7 +2139,7 @@ is known. PUC Lua alone exposes an integer/float subtype through `math.type`, so
 finite Lua `number`, equality with `math.floor(value)`, and the exact neutral bound on both PUC Lua and LuaJIT.
 Booleans are rejected by type before that check.
 
-The planned public API is deliberately small:
+The public API is deliberately small:
 
 ```lua
 local json = require("linkedspec.json")
@@ -2171,13 +2170,86 @@ focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, and all six le
 Rust 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof, reference primary
 66x2, and Phase 0 1,031/1,031 in 648 seconds.
 
-#### Lua private immutable query kernel
+#### Lua public typed and raw-neutral static query API
 
-Leaf `.10.7.5.1` now implements the first dependency-safe query layer without exposing the planned API.
+Leaf `.10.7.5.3` publishes the complete static query surface together; no earlier subset escaped as a partial API.
+The root exports `semantic_query_request`, `is_semantic_query_request`, `is_semantic_query_response`, and
+`semantic_query_to_json`. Each semantic index owns `capabilities()`, typed `query(request)`, and raw-neutral
+`query_neutral(value)`:
+
+```lua
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local index = linkedspec.semantic_index(
+  "Top::\n /x/ -> Child\n\nChild:\n /y/\n /z/\n",
+  {
+    logical_name = "graph.spec",
+    source_detail_ceiling = "text",
+  }
+)
+
+local request = linkedspec.semantic_query_request("list", {
+  record_kinds = {"rule", "regex_slot"},
+  page = {after_id = "rule:Child", limit = 2},
+  budget = {max_records = 1000, max_relations = 2000, max_depth = 4},
+  source = {detail = "identity", include_content_digest = false},
+})
+local response = index:query(request)
+assert(linkedspec.is_semantic_query_response(response))
+print(json.encode(linkedspec.semantic_query_to_json(response)))
+
+local raw = json.decode([[
+{
+  "contract":"linkedspec-semantic-query-v1",
+  "operation":"list",
+  "subjects":[],
+  "record_kinds":["rule","regex_slot"],
+  "relation_kinds":[],
+  "direction":"outgoing",
+  "page":{"after_id":"rule:Child","limit":2},
+  "budget":{"max_records":1000,"max_relations":2000,"max_depth":4},
+  "source":{"detail":"identity","include_content_digest":false}
+}
+]])
+local neutral_response = index:query_neutral(raw)
+local capabilities = index:capabilities()
+```
+
+Typed construction accepts ordinary option/list tables because their roles are known, copies them immediately,
+and returns a protected request. `query` accepts only that type. The raw entry instead requires exact JSON kinds:
+`json.harray` for every object, `json.array` for sequences, and `json.null` for null. Direct `json.decode` output is
+therefore admissible; a plain `{}` is ambiguous and rejected rather than guessed. Exact fields, kinds, order,
+duplicates, operation combinations, pages, budgets, source policies, subjects, and cursors are validated before a
+typed request exists.
+
+Neutral integer validation is identical on PUC Lua and LuaJIT: a finite `number`, equal to `math.floor(value)`,
+inside the governed range, with Booleans rejected first and no dependence on PUC-only `math.type`. Numeric cursor
+text uses a portable decimal/exponent plus non-finite-word grammar rather than ABI-dependent `tonumber`; `0x10`
+remains an ordinary textual id. The governed malformed matrix returns all 26 exact envelopes with zero logical
+cost where required. Hostile metatables, callbacks, cycles, functions, threads, userdata, and ambiguous tables are
+rejected without being invoked or traversed as host authority.
+
+Both calls enter the same evaluator after exactly one fresh materialization of the private static projection.
+Protocol state is recursively immutable, collection properties and JSON projection are fresh detached trees, and
+mutating a request, response projection, or earlier query cannot affect any later result. The query module imports
+only `linkedspec.json`; retained source/compiler/staged/AST/IR/generated/runtime/trace/path/callback authority is
+unreachable. The suite matches all 19 complete response hashes through both public paths and locks public topology,
+all raw boundaries, immutability, one materialization, non-execution, and host denial at 571 assertions per ABI.
+Together with the six projection suites, focused semantic proof is 1,492 assertions per ABI. Runtime events remain
+caller-owned `.10.7.6` work and native admission remains `.10.7.7`. Complete signoff also passes package
+`1..177` per ABI, PUC primary 66x2, corpus 105/105, 13-owner storage proof, primary 5x2x66, Unicode 10/10, all six
+unchanged ledgers, and canonical Rust 1/1 in 78.05 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment,
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 624 seconds. The mdBook and Knowledge Map
+729/5,824 pass.
+
+#### Lua private immutable query kernel (historical dependency boundary)
+
+Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
 `lua/src/linkedspec/semantic_query.lua` contains protected typed requests and responses plus protected snapshots,
-records, relations, source references, diagnostics, pages, budgets, source policies, page states, and costs. Root
-`linkedspec` still exports no request constructor, query guard, response guard, query serializer, or capabilities
-call; a semantic index still has no `capabilities`, `query`, or `query_neutral` method.
+records, relations, source references, diagnostics, pages, budgets, source policies, page states, and costs. At that
+historical boundary root `linkedspec` exported no request constructor, guards, serializer, or capabilities call,
+and semantic indexes had no query methods. `.10.7.5.3` now exposes the complete surface described above.
 
 The private kernel matches nine complete neutral response digests unchanged on PUC Lua and LuaJIT:
 `capabilities`, `graph_list_rules`, `graph_duplicate_regex_text`, `graph_explain_entry`,
@@ -2205,7 +2277,7 @@ source/maps/outcomes, parser/compiler/staged sidecars, AST/ActionIR, regexes, ge
 loader, executor, runtime observation, trace/sinks, paths, environment, clock, randomness, callbacks, or host
 identity. Querying cannot parse, compile, execute, observe, or enable trace.
 
-#### Lua private traversal, paging, budgets, and costs
+#### Lua private traversal, paging, budgets, and costs (historical dependency boundary)
 
 Leaf `.10.7.5.2` completes that same package-private evaluator at all 19 static response digests. It adds
 relation-kind-filtered outgoing, incoming, and both-direction breadth-first traversal. Every layer scans the
@@ -2216,8 +2288,7 @@ walks a compiler object or backend graph: its only graph is the detached neutral
 One pager serves capabilities, list, get, relations, and explanation steps. `after_id` must name an item in the
 already-filtered primary stream; the next item begins the page. Page limits and budgets both return deterministic
 prefixes, but only a budget boundary emits a warning. For example, this neutral request shape selects the two
-regex-slot records after `rule:Child` (shown here as contract data; the Lua public call remains unavailable until
-`.10.7.5.3`):
+regex-slot records after `rule:Child` (this same shape is now accepted by the public raw call above):
 
 ```json
 {
@@ -2253,11 +2324,11 @@ the decision, pages only its owned explanation steps, and emits only `explained_
 returned. Unsupported contracts, invalid operation combinations, unknown subjects, invalid primary-stream
 cursors, non-explainable subjects, and digest-without-text requests return portable errors with zero logical cost.
 
-The focused query suite now passes 283 assertions on each ABI. Together with source 380, outcome 122, graph 64,
+At the `.10.7.5.2` boundary the focused query suite passed 283 assertions on each ABI. Together with source 380, outcome 122, graph 64,
 remaining static 122, call core 136, and staged/generated 97, the seven semantic suites compose at 1,204 per ABI.
 The complete Lua gate passes package `1..177` on both runtimes, PUC primary 66x2, corpus 105/105, and repository-
 volume storage proof. Ambiguous raw JSON-like inputs, all 26 malformed-request envelopes, and every public root/
-index query name remain `.10.7.5.3` ownership; runtime events remain `.10.7.6`.
+index query name were intentionally deferred together to `.10.7.5.3`; runtime events remain `.10.7.6`.
 Complete signoff also passes the five-backend primary matrix in both environments, all ten Unicode manifest legs,
 the six unchanged governance ledgers, and canonical CI through elevated containment, moved-root execution,
 reference primary 66x2, and Phase 0 1,031/1,031.

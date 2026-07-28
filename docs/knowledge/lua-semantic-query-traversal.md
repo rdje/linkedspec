@@ -15,7 +15,7 @@ answers:
   - "where is Lua semantic query traversal tested"
   - "does Lua semantic query traversal behave identically on PUC Lua and LuaJIT"
 date: 2026-07-28
-status: current complete private static evaluator; raw-neutral validation and public entrypoints pending
+status: current traversal foundation beneath the complete public static evaluator
 tags: [lua, luajit, semantic-introspection, query, traversal, pagination, budgets, costs, no-execution]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.2; lua/src/linkedspec/semantic_query.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_query_kernel_test.lua; tools/run_lua_local.sh; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n 'page_stream|traverse_relations|relation_layer|semantic_query_budget_exceeded|owned static query count' lua/src/linkedspec/semantic_query.lua lua/test/semantic_index_query_kernel_test.lua"
@@ -23,12 +23,12 @@ reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh to
 
 # Lua Private Semantic Query Traversal
 
-Leaf `.10.7.5.2` completes Lua's package-private static semantic-query evaluator without exporting a partial API.
+Leaf `.10.7.5.2` completed Lua's package-private static semantic-query evaluator without exporting a partial API.
 The same evaluator now matches all 19 non-runtime canonical response hashes on PUC Lua and LuaJIT. The ten
 completion cases cover reverse graph dispatch, staged and generated provenance, after-id and boundary pages,
-record/relation/depth limits, unsupported contracts, and invalid operation combinations. Raw JSON-like validation,
-all 26 malformed neutral boundaries, and root/index public entry points remain together in `.10.7.5.3`; the
-twentieth runtime response remains `.10.7.6`.
+record/relation/depth limits, unsupported contracts, and invalid operation combinations. Leaf `.10.7.5.3` now
+adds raw JSON-kind validation, all 26 malformed neutral boundaries, and root/index public entry points together;
+the twentieth runtime response remains `.10.7.6`.
 
 `page_stream` operates only on an operation's already-filtered primary stream. An `after_id` must identify an item
 in that stream and resumes immediately after it. Selection uses the minimum of the remaining stream, requested page
@@ -63,5 +63,6 @@ moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 622 sec
 active Rust incremental caches remain available.
 
 Related facts: [[lua-semantic-query-authority-map]], [[lua-semantic-query-kernel]],
-[[lua-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
+[[lua-semantic-introspection-authority-map]], [[lua-semantic-query-public-api]],
+[[semantic-introspection-neutral-contract]],
 [[julia-semantic-query-traversal]], and [[semantic-source-ceiling-boundary]].

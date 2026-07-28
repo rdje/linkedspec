@@ -14,7 +14,7 @@ answers:
   - "when may Lua expose capabilities query and query_neutral"
   - "does Lua semantic query include runtime events"
 date: 2026-07-28
-status: current authority and dependency plan; complete private static evaluator implemented
+status: current authority plan; complete public static evaluator implemented
 tags: [lua, luajit, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/src/linkedspec/json.lua; docs/knowledge/perl-semantic-query-evaluator.md; docs/knowledge/rust-semantic-query-evaluator.md; docs/knowledge/dart-semantic-query-authority-map.md; docs/knowledge/julia-semantic-query-authority-map.md
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(query|capabilities)|query_neutral|materialize' lua/src/linkedspec lua/test"
@@ -89,7 +89,7 @@ Booleans have type `boolean` on both ABIs and are rejected before numeric checks
 resource counters, and floating display cannot become semantic authority. Canonical JSON emits bounded integral
 values identically on both runtimes.
 
-The exact planned public surface is idiomatic and small:
+The exact public surface is now implemented and remains idiomatic and small:
 
 - `linkedspec.semantic_query_request(operation[, options])` creates one protected typed request;
 - `linkedspec.is_semantic_query_request`, `linkedspec.is_semantic_query_response`, and
@@ -111,18 +111,18 @@ budgets and costs, deterministic incomplete prefixes, and decision-first explana
 `explained_by`. Its four portable diagnostics remain `semantic_query_budget_exceeded`, `semantic_query_invalid`,
 `semantic_query_source_detail_forbidden`, and `semantic_query_contract_unsupported`.
 
-Implementation order is omission-safe:
+Implementation order remains omission-safe:
 
 1. `.10.7.5.1` adds private protected protocol values plus capabilities/list/get/explain and exact source policy
    for nine static hashes. No root or index query name exists yet.
 2. `.10.7.5.2` adds relations, pages, budgets, costs, prefixes, and the remaining ten static hashes while private;
    it is complete at all 19 static hashes on both ABIs.
-3. `.10.7.5.3` exposes the complete constructor/guards/projection and three index methods together, matching all
-   19 typed/raw hashes and 26 raw boundaries with clone/privacy/non-execution/host denial.
+3. `.10.7.5.3` now exposes the complete constructor/guards/projection and three index methods together, matching
+   all 19 typed/raw hashes and 26 raw boundaries with clone/privacy/non-execution/host denial.
 4. `.10.7.5.4` recomposes committed proof without a replacement owner and closes the immutable query parent.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-source-ceiling-boundary]],
 [[lua-semantic-introspection-authority-map]], [[lua-semantic-call-staged-projection-plan]],
-[[lua-semantic-query-kernel]], [[lua-semantic-query-traversal]],
+[[lua-semantic-query-kernel]], [[lua-semantic-query-traversal]], [[lua-semantic-query-public-api]],
 [[perl-semantic-query-evaluator]], [[rust-semantic-query-evaluator]],
 [[dart-semantic-query-authority-map]], and [[julia-semantic-query-authority-map]].

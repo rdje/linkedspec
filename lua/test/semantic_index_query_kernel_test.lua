@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.10.7.5.1-.2 — complete private static query evaluator.
+-- FUTURE-PARITY-BACKLOG.10.7.5.1-.3 — complete public static query evaluator.
 
 local assertions = 0
 local failures = {}
@@ -165,7 +165,7 @@ end
 local function typed_request(value)
   local after_id = value.page.after_id
   if after_id == json.null then after_id = nil end
-  return semantic_query.request(value.operation, {
+  return linkedspec.semantic_query_request(value.operation, {
     contract = value.contract,
     subjects = plain_sequence(value.subjects),
     record_kinds = plain_sequence(value.record_kinds),
@@ -189,6 +189,10 @@ local contract = json.decode(
 )
 local query_cases = {}
 for _, query_case in ipairs(contract.query_cases) do query_cases[query_case.id] = query_case end
+
+local function raw_request(id)
+  return json.decode(json.encode(assert(query_cases[id]).request))
+end
 
 local owned_ids = {
   "capabilities",
@@ -275,11 +279,13 @@ check_equal(#completion_ids, 10, "traversal completion query count")
 for _, id in ipairs(owned_ids) do
   local query_case = assert(query_cases[id])
   local request = typed_request(query_case.request)
-  local response = semantic_index_module._semantic_query_kernel(
-    index_for(query_case.snapshot), request
-  )
+  local index = index_for(query_case.snapshot)
+  local raw = raw_request(id)
+  local raw_before = json.encode(raw)
+  local response = id == "capabilities" and index:capabilities() or index:query(request)
+  local neutral = index:query_neutral(raw)
   local expected = query_case.expected
-  local projected = semantic_query.to_json(response)
+  local projected = linkedspec.semantic_query_to_json(response)
   requests[id] = request
   responses[id] = response
 
@@ -294,7 +300,180 @@ for _, id in ipairs(owned_ids) do
   )
   check_equal(response.page.complete, expected.complete, id .. " page completion")
   check_equal(sha256_hex(json.encode(projected)), expected.response_sha256, id .. " response hash")
+  check_equal(
+    sha256_hex(json.encode(linkedspec.semantic_query_to_json(neutral))),
+    expected.response_sha256,
+    id .. " neutral response hash"
+  )
+  check_equal(json.encode(raw), raw_before, id .. " neutral input unchanged")
+  check(linkedspec.is_semantic_query_response(neutral), id .. " neutral response guard")
 end
+
+local function invalid_raw_cases()
+  local function request() return raw_request("graph_list_rules") end
+  local cases = {
+    { "request_not_object", json.array(), "semantic_query_invalid", "request_not_object" },
+  }
+  local function add(label, value, code, reason)
+    cases[#cases + 1] = { label, value, code or "semantic_query_invalid", reason }
+  end
+
+  local value = request()
+  value.contract = "linkedspec-semantic-query-v0"
+  add("unsupported_contract", value, "semantic_query_contract_unsupported")
+
+  value = request()
+  value.direction = nil
+  add("request_fields", value, nil, "request_fields")
+
+  value = request()
+  value.page.limit = nil
+  add("page_fields", value, nil, "page_fields")
+
+  value = request()
+  value.budget.max_depth = nil
+  add("budget_fields", value, nil, "budget_fields")
+
+  value = request()
+  value.source.detail = nil
+  add("source_fields", value, nil, "source_fields")
+
+  value = request()
+  value.operation = "search"
+  add("operation", value, nil, "operation")
+
+  value = request()
+  value.subjects = "rule:Top"
+  add("subjects_type", value, nil, "subjects_type")
+
+  value = request()
+  value.operation = "get"
+  value.subjects = json.array({ "rule:Top", "rule:Top" })
+  value.record_kinds = json.array()
+  add("subjects_duplicate", value, nil, "subjects_duplicate")
+
+  value = request()
+  value.record_kinds = json.array({ "host_ast" })
+  add("record_kind", value, nil, "record_kind")
+
+  local relation = request()
+  relation.operation = "relations"
+  relation.subjects = json.array({ "rule:Top" })
+  relation.record_kinds = json.array()
+  relation.relation_kinds = json.array({ "host_edge" })
+  add("relation_kind", relation, nil, "relation_kind")
+
+  value = request()
+  value.record_kinds = json.array({ "regex_slot", "rule" })
+  add("record_kind_order", value, nil, "record_kind_order")
+
+  relation = json.decode(json.encode(relation))
+  relation.relation_kinds = json.array({ "contains", "declares" })
+  add("relation_kind_order", relation, nil, "relation_kind_order")
+
+  value = request()
+  value.direction = "sideways"
+  add("direction", value, nil, "direction")
+
+  value = request()
+  value.page.after_id = 7
+  add("after_id", value, nil, "after_id")
+
+  value = request()
+  value.page.limit = 0
+  add("page_limit", value, nil, "page_limit")
+
+  for _, pair in ipairs({
+    { "max_records", 0 },
+    { "max_relations", 0 },
+    { "max_depth", 9 },
+  }) do
+    value = request()
+    value.budget[pair[1]] = pair[2]
+    add(pair[1], value, nil, pair[1])
+  end
+
+  value = request()
+  value.source.detail = "full"
+  add("source_policy", value, nil, "source_policy")
+
+  value = request()
+  value.source.include_content_digest = 0
+  add("numeric_boolean", value, nil, "source_policy")
+
+  value = request()
+  value.source.include_content_digest = true
+  add("digest_requires_text", value, nil, "digest_requires_text")
+
+  value = request()
+  value.subjects = json.array({ "rule:Top" })
+  add("operation_combination", value, nil, "operation_combination")
+
+  value = request()
+  value.operation = "get"
+  value.subjects = json.array({ "rule:Unknown" })
+  value.record_kinds = json.array()
+  add("unknown_subject", value, nil, "unknown_subject")
+
+  value = request()
+  value.page.after_id = "rule:Unknown"
+  add("after_id_not_in_primary_stream", value, nil, "after_id_not_in_primary_stream")
+
+  value = request()
+  value.operation = "explain"
+  value.subjects = json.array({ "rule:Child" })
+  value.record_kinds = json.array()
+  add("not_explainable", value, nil, "not_explainable")
+  return cases
+end
+
+local raw_boundaries = invalid_raw_cases()
+check_equal(#raw_boundaries, 26, "complete raw boundary count")
+local raw_boundary_index = index_for("graph")
+for _, boundary_case in ipairs(raw_boundaries) do
+  local label, raw, code, reason =
+    boundary_case[1], boundary_case[2], boundary_case[3], boundary_case[4]
+  local before = json.encode(raw)
+  local response = raw_boundary_index:query_neutral(raw)
+  check_equal(json.encode(raw), before, label .. " raw input unchanged")
+  check_equal(response.ok, false, label .. " rejected")
+  check_equal(response.diagnostics[1].code, code, label .. " diagnostic")
+  if reason ~= nil then
+    check_equal(response.diagnostics[1].fields.reason, reason, label .. " reason")
+  end
+  check_equal(#response.records, 0, label .. " empty records")
+  check_equal(#response.relations, 0, label .. " empty relations")
+  check_equal(response.cost.records_examined, 0, label .. " zero record cost")
+  check_equal(response.cost.relations_examined, 0, label .. " zero relation cost")
+end
+
+for _, triple in ipairs({
+  { "page", "limit", "page_limit" },
+  { "budget", "max_records", "max_records" },
+  { "budget", "max_relations", "max_relations" },
+  { "budget", "max_depth", "max_depth" },
+}) do
+  local raw = raw_request("graph_list_rules")
+  raw[triple[1]][triple[2]] = true
+  local response = raw_boundary_index:query_neutral(raw)
+  check_equal(response.diagnostics[1].fields.reason, triple[3],
+    triple[3] .. " rejects Boolean numeric input")
+end
+
+for _, numeric_cursor in ipairs({ "7", "  -7.5e+2  ", "NaN", "+Infinity" }) do
+  local raw = raw_request("graph_list_rules")
+  raw.page.after_id = numeric_cursor
+  local response = raw_boundary_index:query_neutral(raw)
+  check_equal(response.diagnostics[1].fields.reason, "after_id",
+    "portable numeric cursor rejected: " .. numeric_cursor)
+end
+local hexadecimal_cursor = raw_request("graph_list_rules")
+hexadecimal_cursor.page.after_id = "0x10"
+check_equal(
+  raw_boundary_index:query_neutral(hexadecimal_cursor).diagnostics[1].fields.reason,
+  "after_id_not_in_primary_stream",
+  "hexadecimal-looking text remains a textual cursor"
+)
 
 local interleaved_index = index_for("graph")
 local repeated_request = typed_request(query_cases.graph_list_rules.request)
@@ -397,6 +576,12 @@ check(semantic_query.is_request(requests.capabilities), "request guard")
 check(not semantic_query.is_request(capabilities), "request guard rejects response")
 check(semantic_query.is_response(capabilities), "response guard")
 check(not semantic_query.is_response(requests.capabilities), "response guard rejects request")
+check(linkedspec.is_semantic_query_request(requests.capabilities), "public request guard")
+check(not linkedspec.is_semantic_query_request(capabilities),
+  "public request guard rejects response")
+check(linkedspec.is_semantic_query_response(capabilities), "public response guard")
+check(not linkedspec.is_semantic_query_response(requests.capabilities),
+  "public response guard rejects request")
 
 local graph = index_for("graph")
 local reverse = responses.graph_reverse_dispatch
@@ -586,15 +771,51 @@ for _, name in ipairs({
   "is_semantic_query_request",
   "is_semantic_query_response",
   "semantic_query_to_json",
-  "semantic_query",
-  "query_neutral",
-  "capabilities",
 }) do
-  check_equal(linkedspec[name], nil, "root omits " .. name)
+  check_equal(type(linkedspec[name]), "function", "root exports " .. name)
 end
-check_equal(graph.capabilities, nil, "index omits capabilities")
-check_equal(graph.query, nil, "index omits query")
-check_equal(graph.query_neutral, nil, "index omits neutral query")
+for _, name in ipairs({ "semantic_query", "query_neutral", "capabilities" }) do
+  check_equal(linkedspec[name], nil, "root omits index-only " .. name)
+end
+check_equal(type(graph.capabilities), "function", "index exports capabilities")
+check_equal(type(graph.query), "function", "index exports query")
+check_equal(type(graph.query_neutral), "function", "index exports neutral query")
+check_equal(pcall(function() graph:query(raw_request("graph_list_rules")) end), false,
+  "typed query rejects raw input")
+
+local callback_called = false
+local callback_raw = raw_request("graph_list_rules")
+callback_raw.operation = function() callback_called = true end
+local callback_response = graph:query_neutral(callback_raw)
+check_equal(callback_called, false, "raw validator does not invoke callback values")
+check_equal(callback_response.diagnostics[1].fields.reason, "operation",
+  "callback value is a portable operation error")
+
+local host_called = false
+local host_root = setmetatable({}, {
+  __index = function() host_called = true end,
+  __pairs = function() host_called = true end,
+})
+local host_response = graph:query_neutral(host_root)
+check_equal(host_called, false, "raw validator does not invoke host metatables")
+check_equal(host_response.diagnostics[1].fields.reason, "request_not_object",
+  "host root is not a neutral object")
+check_equal(graph:query_neutral({}).diagnostics[1].fields.reason, "request_not_object",
+  "plain root table is ambiguous")
+
+local cyclic_raw = raw_request("graph_list_rules")
+cyclic_raw.host_cycle = cyclic_raw
+check_equal(graph:query_neutral(cyclic_raw).diagnostics[1].fields.reason, "request_fields",
+  "cyclic extra field is rejected without traversal")
+
+local isolated_raw = raw_request("graph_list_rules")
+local isolated_raw_response = graph:query_neutral(isolated_raw)
+isolated_raw.record_kinds[1] = "host_ast"
+check_equal(
+  sha256_hex(json.encode(linkedspec.semantic_query_to_json(isolated_raw_response))),
+  query_cases.graph_list_rules.expected.response_sha256,
+  "raw input mutation cannot alter response"
+)
 
 local index_source = read_file("lua/src/linkedspec/semantic_index.lua")
 local kernel_source = assert(index_source:match(
@@ -603,6 +824,13 @@ local kernel_source = assert(index_source:match(
 check_equal(count_plain(kernel_source, "materialize_static_projection"), 1,
   "kernel materializes exactly once")
 check_equal(count_plain(kernel_source, ".evaluate("), 1, "kernel evaluates exactly once")
+local neutral_source = assert(index_source:match(
+  "function INDEX_METHODS%.query_neutral.-\nend"
+))
+check_equal(count_plain(neutral_source, "materialize_static_projection"), 1,
+  "neutral query materializes exactly once")
+check_equal(count_plain(neutral_source, ".evaluate_neutral("), 1,
+  "neutral query validates and evaluates exactly once")
 
 local query_source = read_file("lua/src/linkedspec/semantic_query.lua")
 check_equal(count_plain(query_source, 'require("linkedspec.json")'), 1, "sole query dependency")

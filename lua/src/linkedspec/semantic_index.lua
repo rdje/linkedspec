@@ -1,6 +1,6 @@
--- Opaque strict-source and compiled-or-failed foundation for Lua semantic
--- introspection. Static projection, query, execution observation, tracing,
--- caller path loading, and generated-source execution remain later owners.
+-- Opaque strict-source, compiled-or-failed, static-projection, and immutable
+-- static-query foundation for Lua semantic introspection. Execution
+-- observation remains a later owner.
 
 local json = require("linkedspec.json")
 local unicode_rule_label = require("linkedspec.unicode_rule_label")
@@ -867,8 +867,22 @@ local function materialize_static_projection(state)
   return load_static_projector().materialize(state.static_projection, fail)
 end
 
--- Package-internal immutable query seam. It supplies exactly one fresh static
--- projection clone and no retained index authority to the evaluator.
+function INDEX_METHODS.capabilities(value)
+  return M._semantic_query_kernel(value, load_semantic_query().request("capabilities"))
+end
+
+function INDEX_METHODS.query(value, request)
+  return M._semantic_query_kernel(value, request)
+end
+
+function INDEX_METHODS.query_neutral(value, request)
+  local projection = materialize_static_projection(index_state(value))
+  return load_semantic_query().evaluate_neutral(projection, request)
+end
+
+-- Shared typed immutable query seam. It supplies exactly one fresh static
+-- projection clone and no retained index authority to the evaluator. The
+-- package-private name remains available to the focused kernel proof.
 function M._semantic_query_kernel(value, request)
   local projection = materialize_static_projection(index_state(value))
   return load_semantic_query().evaluate(projection, request)

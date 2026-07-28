@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.3` — raw-neutral Lua input needs explicit data kinds and explicit
+  scalar grammar, not host-table inference): A Lua table cannot prove whether an empty value is an object or array,
+  and `tonumber` is not portable between PUC Lua and LuaJIT: hexadecimal text is numeric on both while non-finite
+  words differ. The public raw boundary therefore admits only the JSON owner's exact harray/array/null identities
+  and uses its own decimal/exponent/non-finite-word classifier for cursor scalar ambiguity. Neutral integral fields
+  remain a separate finite/floor/bound check with Boolean rejection first. Iteration uses `next` and `rawget`, so
+  malformed host values cannot enlist `__index` or `__pairs` callbacks as validation authority.
+
+  Public topology follows authority ownership. Root `linkedspec` exposes only request construction, type guards,
+  and detached serialization; capabilities and queries remain index methods because the opaque index owns the
+  snapshot. Typed and raw inputs converge only after raw validation, then share the one projection-only evaluator.
+  Each path performs exactly one fresh static materialization, recursively protects response state, and returns
+  fresh JSON-kind projections. This makes all 19 hashes and 26 malformed envelopes public together without
+  exposing the private projector or widening query dependencies into source, compiler, generated, execution,
+  observation, trace, path, environment, callback, or host state.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.2` — traversal order and resource limits belong to the neutral model,
   not the Lua host): The query evaluator traverses only the detached canonical relation array. Each breadth-first
   layer filters that array by relation kind and direction, deduplicates selected relation ids, removes visited

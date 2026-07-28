@@ -1,6 +1,5 @@
--- Package-private immutable semantic-query-v1 protocol and complete static
--- evaluator. Public construction and raw-neutral validation are deliberately
--- deferred to the next task-tree leaf.
+-- Immutable semantic-query-v1 protocol, raw-neutral validator, and complete
+-- static evaluator. The evaluator receives only one detached projection.
 
 local json = require("linkedspec.json")
 
@@ -39,6 +38,13 @@ local OPERATIONS = {
 
 local DIRECTIONS = { outgoing = true, incoming = true, both = true }
 local SOURCE_DETAIL_RANK = { none = 0, identity = 1, span = 2, text = 3 }
+local REQUEST_FIELDS = {
+  contract = true, operation = true, subjects = true, record_kinds = true,
+  relation_kinds = true, direction = true, page = true, budget = true, source = true,
+}
+local PAGE_FIELDS = { after_id = true, limit = true }
+local BUDGET_FIELDS = { max_records = true, max_relations = true, max_depth = true }
+local SOURCE_FIELDS = { detail = true, include_content_digest = true }
 local VALUE_STATE = setmetatable({}, { __mode = "k" })
 local REQUEST_STATE = setmetatable({}, { __mode = "k" })
 local FROZEN_NULL = {}
@@ -718,6 +724,258 @@ local function invalid_response(snapshot, request, reason)
   ))
 end
 
+local function exact_object(value, allowed, field_count)
+  if json.kind(value) ~= "harray" then return false end
+  local count = 0
+  for key in next, value do
+    if type(key) ~= "string" or not allowed[key] then return false end
+    count = count + 1
+  end
+  return count == field_count
+end
+
+local function neutral_string_sequence(value)
+  if json.kind(value) ~= "array" then return nil end
+  local count = 0
+  local maximum = 0
+  for key in next, value do
+    if type(key) ~= "number" or key < 1 or key ~= math.floor(key) then return nil end
+    count = count + 1
+    if key > maximum then maximum = key end
+  end
+  if maximum ~= count then return nil end
+  local result = {}
+  for index = 1, count do
+    local item = rawget(value, index)
+    if type(item) ~= "string" then return nil end
+    result[index] = item
+  end
+  return result
+end
+
+local function has_duplicate(values)
+  local seen = {}
+  for _, value in ipairs(values) do
+    if seen[value] then return true end
+    seen[value] = true
+  end
+  return false
+end
+
+local function ranked_sequence_state(values, ordered)
+  local rank = {}
+  for index, value in ipairs(ordered) do rank[value] = index end
+  local previous = 0
+  for _, value in ipairs(values) do
+    local current = rank[value]
+    if current == nil then return "unknown" end
+    if current <= previous then return "order" end
+    previous = current
+  end
+  return "valid"
+end
+
+local function neutral_integer(value, minimum, maximum)
+  if type(value) ~= "number" or not finite_number(value) or value ~= math.floor(value) then
+    return nil
+  end
+  if value < minimum or value > maximum then return nil end
+  return value
+end
+
+local function looks_numeric(value)
+  local stripped = value:match("^%s*(.-)%s*$")
+  if stripped == "" then return false end
+  local lower = stripped:lower()
+  if lower == "nan" or lower == "inf" or lower == "+inf" or lower == "-inf" or
+      lower == "infinity" or lower == "+infinity" or lower == "-infinity" then
+    return true
+  end
+  local exponent_start = stripped:find("[eE]")
+  local mantissa = stripped
+  if exponent_start ~= nil then
+    if stripped:find("[eE]", exponent_start + 1) ~= nil then return false end
+    if stripped:sub(exponent_start + 1):match("^[+-]?[0-9]+$") == nil then return false end
+    mantissa = stripped:sub(1, exponent_start - 1)
+  end
+  return mantissa:match("^[+-]?[0-9]+$") ~= nil or
+    mantissa:match("^[+-]?[0-9]+%.[0-9]*$") ~= nil or
+    mantissa:match("^[+-]?%.[0-9]+$") ~= nil
+end
+
+local function copy_neutral_evidence(value, active)
+  if value == nil or value == json.null then return json.null end
+  local value_type = type(value)
+  if value_type == "string" or value_type == "boolean" then return value end
+  if value_type == "number" then
+    if not finite_number(value) then error("non-finite neutral evidence", 0) end
+    return value
+  end
+  if value_type ~= "table" then error("unsupported neutral evidence", 0) end
+  local kind = json.kind(value)
+  if kind ~= "array" and kind ~= "harray" then error("ambiguous neutral evidence", 0) end
+  active = active or {}
+  if active[value] then error("cyclic neutral evidence", 0) end
+  active[value] = true
+  local result = kind == "array" and json.array() or json.harray()
+  if kind == "array" then
+    local count = 0
+    local maximum = 0
+    for key in next, value do
+      if type(key) ~= "number" or key < 1 or key ~= math.floor(key) then
+        error("invalid neutral evidence array", 0)
+      end
+      count = count + 1
+      if key > maximum then maximum = key end
+    end
+    if maximum ~= count then error("sparse neutral evidence array", 0) end
+    for index = 1, count do
+      result[index] = copy_neutral_evidence(rawget(value, index), active)
+    end
+  else
+    for key, item in next, value do
+      if type(key) ~= "string" then error("invalid neutral evidence object", 0) end
+      result[key] = copy_neutral_evidence(item, active)
+    end
+  end
+  active[value] = nil
+  return result
+end
+
+local function neutral_evidence(value)
+  local ok, copied = pcall(copy_neutral_evidence, value)
+  return ok and copied or json.null
+end
+
+local function neutral_after_id(value)
+  if json.kind(value) ~= "harray" then return nil end
+  local page = rawget(value, "page")
+  if json.kind(page) ~= "harray" then return nil end
+  return neutral_evidence(rawget(page, "after_id"))
+end
+
+local function neutral_rejected_response(snapshot, value, diagnostic)
+  return response_value(
+    snapshot,
+    { after_id = neutral_after_id(value) },
+    false,
+    {},
+    {},
+    { diagnostic }
+  )
+end
+
+local function neutral_invalid(snapshot, value, reason)
+  return neutral_rejected_response(snapshot, value, diagnostic_value(
+    "semantic_query_invalid",
+    json.harray({ reason = reason })
+  ))
+end
+
+local function validate_neutral(snapshot, value)
+  if json.kind(value) ~= "harray" then
+    return neutral_invalid(snapshot, value, "request_not_object")
+  end
+
+  local contract = rawget(value, "contract")
+  if type(contract) ~= "string" or contract ~= QUERY_ID then
+    return neutral_rejected_response(snapshot, value, diagnostic_value(
+      "semantic_query_contract_unsupported",
+      json.harray({
+        requested = neutral_evidence(contract),
+        supported = json.array({ QUERY_ID }),
+      })
+    ))
+  end
+  if not exact_object(value, REQUEST_FIELDS, 9) then
+    return neutral_invalid(snapshot, value, "request_fields")
+  end
+
+  local page = rawget(value, "page")
+  if not exact_object(page, PAGE_FIELDS, 2) then
+    return neutral_invalid(snapshot, value, "page_fields")
+  end
+  local budget = rawget(value, "budget")
+  if not exact_object(budget, BUDGET_FIELDS, 3) then
+    return neutral_invalid(snapshot, value, "budget_fields")
+  end
+  local source = rawget(value, "source")
+  if not exact_object(source, SOURCE_FIELDS, 2) then
+    return neutral_invalid(snapshot, value, "source_fields")
+  end
+
+  local operation = rawget(value, "operation")
+  if type(operation) ~= "string" or not OPERATIONS[operation] then
+    return neutral_invalid(snapshot, value, "operation")
+  end
+  local subjects = neutral_string_sequence(rawget(value, "subjects"))
+  if subjects == nil then return neutral_invalid(snapshot, value, "subjects_type") end
+  local record_kinds = neutral_string_sequence(rawget(value, "record_kinds"))
+  if record_kinds == nil then return neutral_invalid(snapshot, value, "record_kinds_type") end
+  local relation_kinds = neutral_string_sequence(rawget(value, "relation_kinds"))
+  if relation_kinds == nil then return neutral_invalid(snapshot, value, "relation_kinds_type") end
+
+  for _, pair in ipairs({
+    { "subjects", subjects },
+    { "record_kinds", record_kinds },
+    { "relation_kinds", relation_kinds },
+  }) do
+    if has_duplicate(pair[2]) then
+      return neutral_invalid(snapshot, value, pair[1] .. "_duplicate")
+    end
+  end
+  local record_state = ranked_sequence_state(record_kinds, RECORD_KINDS)
+  if record_state == "unknown" then return neutral_invalid(snapshot, value, "record_kind") end
+  local relation_state = ranked_sequence_state(relation_kinds, RELATION_KINDS)
+  if relation_state == "unknown" then return neutral_invalid(snapshot, value, "relation_kind") end
+  if record_state == "order" then return neutral_invalid(snapshot, value, "record_kind_order") end
+  if relation_state == "order" then return neutral_invalid(snapshot, value, "relation_kind_order") end
+
+  local direction = rawget(value, "direction")
+  if type(direction) ~= "string" or not DIRECTIONS[direction] then
+    return neutral_invalid(snapshot, value, "direction")
+  end
+  local raw_after_id = rawget(page, "after_id")
+  local after_id
+  if raw_after_id == json.null then
+    after_id = nil
+  elseif type(raw_after_id) == "string" and not looks_numeric(raw_after_id) then
+    after_id = raw_after_id
+  else
+    return neutral_invalid(snapshot, value, "after_id")
+  end
+  local limit = neutral_integer(rawget(page, "limit"), 1, PAGE_MAX)
+  if limit == nil then return neutral_invalid(snapshot, value, "page_limit") end
+  local max_records = neutral_integer(rawget(budget, "max_records"), 1, RECORD_BUDGET_MAX)
+  if max_records == nil then return neutral_invalid(snapshot, value, "max_records") end
+  local max_relations = neutral_integer(rawget(budget, "max_relations"), 1, RELATION_BUDGET_MAX)
+  if max_relations == nil then return neutral_invalid(snapshot, value, "max_relations") end
+  local max_depth = neutral_integer(rawget(budget, "max_depth"), 0, DEPTH_BUDGET_MAX)
+  if max_depth == nil then return neutral_invalid(snapshot, value, "max_depth") end
+
+  local detail = rawget(source, "detail")
+  local include_digest = rawget(source, "include_content_digest")
+  if type(detail) ~= "string" or SOURCE_DETAIL_RANK[detail] == nil or
+      type(include_digest) ~= "boolean" then
+    return neutral_invalid(snapshot, value, "source_policy")
+  end
+
+  return M.request(operation, {
+    contract = contract,
+    subjects = subjects,
+    record_kinds = record_kinds,
+    relation_kinds = relation_kinds,
+    direction = direction,
+    page = { after_id = after_id, limit = limit },
+    budget = {
+      max_records = max_records,
+      max_relations = max_relations,
+      max_depth = max_depth,
+    },
+    source = { detail = detail, include_content_digest = include_digest },
+  })
+end
+
 local function project_page_records(candidates, projection, request, budget_limit)
   local paged = page_stream(candidates, request, budget_limit)
   if paged == nil then return nil end
@@ -873,6 +1131,12 @@ function M.evaluate(projection, request_value)
       depth_reached = depth_reached,
     }
   )
+end
+
+function M.evaluate_neutral(projection, value)
+  local validated = validate_neutral(projection.snapshot, value)
+  if M.is_response(validated) then return validated end
+  return M.evaluate(projection, validated)
 end
 
 return M

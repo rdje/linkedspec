@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.3 — expose public Lua static semantic queries
+
+Exported the complete Lua static query API together after both private evaluator halves were complete. Root
+`linkedspec` now owns the protected request constructor, request/response guards, and detached JSON projection;
+semantic indexes own `capabilities`, typed `query`, and raw-neutral `query_neutral`. Every call materializes the
+retained private projection exactly once and enters the same immutable evaluator. No public raw projection,
+compiler object, execution authority, observation state, or root alias was added.
+
+The raw entry accepts only explicit `json.harray`, `json.array`, and `json.null` trees, including direct decoder
+output. It validates exact fields and containers, enumerations, canonical ranks, duplicates, pages/budgets, source
+policy, operation combinations, subjects, and cursors without invoking or retaining host tables or callbacks.
+Portable integers reject Booleans and require finite floor-equal bounded numbers on both ABIs. Numeric cursor text
+uses an explicit shared grammar rather than ABI-dependent `tonumber`, so decimal/exponent and non-finite words are
+rejected consistently while hexadecimal-looking text remains an ordinary id.
+
+All 19 complete static response hashes match through both typed and raw-neutral paths on PUC Lua and LuaJIT. The
+focused suite locks the exact 26 malformed boundaries, direct JSON transport, public topology, recursive
+input/output detachment, repeated/interleaved stability, one materialization, hostile-host denial, privacy/source
+ceilings, and non-execution at 571 assertions per ABI. The seven semantic suites total 1,492 per ABI; complete Lua
+passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and 13-owner storage proof. Primary 5x2x66,
+Unicode 10/10, and all six unchanged governance ledgers pass. The mdBook adds copyable typed/raw examples and the
+Knowledge Map now derives 729 facts / 5,824 question keys. Runtime observation, semantic promotion/admission, and
+parent closeout remain `.10.7.6`, `.10.7.7`, and `.10.7.5.4` owners.
+
+Full signoff passes canonical CI with six doctrines, Rust admission 1/1 in 78.05s, Dart 1/1, Julia 416/416 in
+27.3s, elevated containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 624s. Exact
+cleanup removes the 12,936-KiB rendered book and one empty managed-run directory; no Lua adapter remains, and
+active reusable Rust incremental `.bin` caches are retained.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.2 — complete private Lua static query evaluation
 
 Extended the existing package-private evaluator over the same single detached projection with canonical
