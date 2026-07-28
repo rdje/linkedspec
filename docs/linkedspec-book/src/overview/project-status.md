@@ -10,7 +10,12 @@ the calls/staging/generated contract before code: committed static 6 records / 6
 18/16, and full staged/generated target 22/25. It also fixes merged authored order, staged JSON equality before
 typed function ActionIR authority, occurrence-safe Unicode call correlation, registered-function-before-helper
 resolution, retained generated-v2 plan authority, and strict no-execution/privacy fences. Typed core `.10.7.4.1`
-is next; public query, runtime observation, rollout, and native admission remain later work.
+now implements the exact private 18-record/16-relation/10-source-ref subset on both Lua ABIs, including calls,
+helpers, one binding, signatures, conservative shapes, source identity, decision/explanations, recursive freeze,
+and detached host-free materialization. Staged/generated completion `.10.7.4.2` is next; public query, runtime
+observation, rollout, and native admission remain later work. Focused proof is 128 assertions per ABI; canonical
+proof includes Rust admission 1/1 in 77.99 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, containment and
+moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds.
 
 ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable

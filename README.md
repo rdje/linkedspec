@@ -1381,9 +1381,13 @@ content migration exists yet.
   Lua, both five-backend matrices, six ledgers, and canonical Phase 0 1,031/1,031 in 649 seconds, and closes parent
   `.10.7.3` without semantic promotion. Behavior-free calls/staging/generated audit `.10.7.4.0` is complete and
   freezes the exact static 6/6 -> typed 18/16 -> staged/generated 22/25 split, merged authored order, staged JSON
-  equality before typed ActionIR authority, occurrence-safe Unicode source correlation, registry-before-helper resolution,
-  retained generated-v2 plan authority, and strict no-execution/host/privacy fence. Typed core `.10.7.4.1` is next;
-  public query, formats, rollout, and admission remain unchanged.
+  equality before typed ActionIR authority, occurrence-safe Unicode source correlation, registry-before-helper
+  resolution,
+  retained generated-v2 plan authority, and strict no-execution/host/privacy fence. Typed core `.10.7.4.1` now
+  deep-equals the governed non-staged target at 18 records / 16 relations / 10 source refs on both Lua ABIs, with
+  exact calls, helpers, binding, source ranges, signatures, shapes, decision/explanations, recursive freeze, and
+  detachment. Staged/generated completion `.10.7.4.2` is next; public query, formats, rollout, and admission remain
+  unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

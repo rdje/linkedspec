@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.4.1` — typed traversal and authored occurrence ownership are distinct
+  authorities): Lua's typed function and edge ActionIR determines which expressions are semantic calls and their
+  deterministic outer-before-inner order. It cannot by itself determine the neutral authored span because edge
+  ActionIR is normalized and function-body ActionIR is payload-local. The implementation therefore uses typed
+  traversal as the call inventory and a bounded source scanner only as correlation: strings, regexes, comments,
+  and balanced delimiters cannot invent or steal a call, and the scanner must find each typed name in order.
+
+  The same separation keeps staging honest. Retained `body_ast` is checked as JSON evidence, while the reparsed
+  exact retained `body_source` becomes typed authority only after equality and registry-aware contract resolution.
+  Shape inference is similarly compiler-side and conservative: accepted signatures, literals, bindings, registered
+  return shapes, and three neutral helpers may refine `unknown`, but target execution and runtime samples never do.
+  Because the existing projector freezes the whole final tree after extension, adding records before that one seam
+  preserves recursive immutability and detached outward test copies without a second owner.
+
 - 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.4.0` — staged syntax evidence must be converted back to typed compiler
   authority before semantic projection): Lua's retained function `body_ast` looks like ActionIR JSON but is a plain
   staged table with no typed `node_type`. Treating it as semantic authority would make a sidecar serialization the

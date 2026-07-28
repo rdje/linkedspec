@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.4.1 — add Lua typed call core
+
+Extended the existing package-private Lua static semantic projector with the exact governed non-staged
+`calls_and_staging` target: 18 records, 16 relations, and ten private source refs. The projection now adds the
+accepted function, narrow helpers, typed calls, action binding, user-function resolution decision, and two
+explanation steps while updating merged definition order and conservative function/call/binding/edge/rule shapes.
+
+Function bodies are reparsed only from their retained exact staged payload after source/job policy checks; their
+typed ActionIR JSON must equal the retained staged result and contracts must resolve through the accepted registry.
+Compiled edge ActionIR remains the other typed authority. Deterministic outer-before-inner traversal drives a
+bounded authored-source scanner that protects strings, regexes, comments, and nested delimiters, preserving exact
+occurrence identity and the existing Unicode byte/scalar source map. Registered functions resolve before the narrow
+`trim`, `match_text`, and `return` table; fixed and variadic signatures plus conservative fixed-point shapes never
+execute target code or use samples, descriptors, traces, or generated implementation text.
+
+The new focused suite passes 128 assertions on both PUC Lua and LuaJIT, including governed deep equality, all exact
+ids/orders/relations/ranges, reordered multibyte definitions, duplicate nested calls, quoted/regex call-like text,
+variadic rest shape, detachment, JSON portability, host denial, and no staged/generated roles. Complete Lua passes
+package `1..177` per ABI, PUC primary 66x2, corpus 105, and storage proof; primary 5x2x66, Unicode 10/10, and all six
+governance ledgers pass unchanged. The focused test is registered in both Lua legs and canonical tracked-input
+preflight. Canonical CI passes six doctrines, Rust semantic admission 1/1 in 77.99 seconds, Dart 1/1, Julia
+416/416 in 27.4 seconds, containment and moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in
+622 seconds. mdBook, Knowledge Map 724/5,767, memory, task, doctrine, syntax, diff, and zero-run storage checks pass.
+No public API/query, runtime observation, generated format, rollout, or native admission moves; staged/generated
+completion `.10.7.4.2` is next after this 45th local batch commit, with no push.
+
 ## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.4.0 — freeze Lua call projection
 
 Completed the behavior-free authority audit for Lua functions, helpers, calls, bindings, staged function-body

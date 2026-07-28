@@ -5,6 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-27`
+- `2026-07-27` Lua typed semantic-call core: `FUTURE-PARITY-BACKLOG.10.7.4.1` extends the existing private static
+  projector with the exact governed non-staged `calls_and_staging` subset at 18 records, 16 relations, and ten
+  source refs. The owner validates merged authored definitions, exact staged-body source/job/JSON equality before
+  typed function ActionIR, resolved compiled edge ActionIR/contracts, registry-before-helper calls, fixed/rest
+  signatures, conservative fixed-point shapes, one action binding, and one call-resolution decision with two
+  explanations. Typed preorder plus bounded string/regex/comment-aware authored scanning preserves nested and
+  Unicode occurrence identity. The complete extended tree is recursively frozen; only fresh detached, plain,
+  host-free test materializations leave it. Focused proof is 128 assertions per ABI; complete Lua `1..177`, primary
+  5x2x66, Unicode 10/10, and six unchanged ledgers pass. Canonical proof includes Rust 1/1 in 77.99s, Dart 1/1,
+  Julia 416/416 in 27.4s, containment/moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 622s.
+  It adds no public API/query, runtime observation, staged/generated record, generated-format change, rollout, or
+  admission; `.10.7.4.2` is the next owner.
 - `2026-07-27` Lua semantic calls authority audit: behavior-free `FUTURE-PARITY-BACKLOG.10.7.4.0` freezes the
   neutral `calls_and_staging` target as committed static 6/6, typed non-staged core 18/16, and staged/generated
   completion 22/25. Existing merged `authored_definitions`, accepted registry state, reparsed typed function-body

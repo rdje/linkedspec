@@ -1,6 +1,6 @@
 ---
 id: lua-semantic-call-staged-projection-plan
-title: Lua calls staging and generated projection has a typed dual-ABI authority plan
+title: Lua typed semantic call core implements the exact dual-ABI 18/16 projection
 answers:
   - "which Lua authorities own semantic functions helpers calls and bindings"
   - "how many records and relations are in the Lua calls semantic target"
@@ -18,11 +18,12 @@ answers:
   - "which Lua generated plan is semantic authority"
   - "may Lua semantic call construction execute target or generated code"
   - "does the Lua calls plan add a public semantic query"
+  - "where is the Lua typed semantic call core implemented and tested"
 date: 2026-07-27
-status: current behavior-free private projection plan; implementation pending
+status: current private typed core implemented at exact 18 records and 16 relations; staged completion pending
 tags: [lua, luajit, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.4.0; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for abi in lua luajit; do bash tools/run_lua_project_data.sh --abi \"$abi\" lua/test/semantic_index_source_foundation_test.lua; bash tools/run_lua_project_data.sh --abi \"$abi\" lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_project_data.sh --abi \"$abi\" lua/test/semantic_index_static_graph_test.lua; bash tools/run_lua_project_data.sh --abi \"$abi\" lua/test/semantic_index_static_remaining_test.lua; done; rg -n 'authored_definitions|body_ast|SemanticGeneratedPlanInput|compiled_rule_order' lua/src/linkedspec lua/test"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.0-.1; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_core_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/user_function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; done; rg -n 'authored_definitions|body_ast|generated_plan|compiled_rule_order' lua/src/linkedspec lua/test"
 ---
 
 Behavior-free leaf `.10.7.4.0` freezes an additive private projection over Lua's closed static semantic foundation.
@@ -101,7 +102,7 @@ implementation text.
 
 Implementation stays in the existing private `semantic_static_projection.lua` owner and is dependency-ordered:
 
-- `.10.7.4.1` adds typed function/helper/call/binding/decision projection, merged definition order, exact 18/16,
+- `.10.7.4.1` implements typed function/helper/call/binding/decision projection, merged definition order, exact 18/16,
   source and Unicode correlation, function-before-helper resolution, fixed/rest signatures, conservative shapes,
   recursive freeze/detachment, host denial, and focused dual-ABI core proof;
 - `.10.7.4.2` extends the same owner with normalized payload/job/result and selected retained plan, exact 22/25,
@@ -109,17 +110,25 @@ Implementation stays in the existing private `semantic_static_projection.lua` ow
 - `.10.7.4.3` adds no replacement implementation or test. It recomposes the committed source, outcome, static,
   core-call, and staged/generated suites and closes the parent.
 
+The `.1` implementation deep-equals the governed non-staged snapshot at exactly 18 records, 16 relations, and ten
+private source refs. Its global typed preorder is function `trim`, edge `normalize`, nested `match_text`, then edge
+`return`; helper ids remain first-use ordered. The same owner updates function, binding, edge, and rule shapes,
+emits the one user-function resolution decision and two explanation steps, and freezes the complete extended tree
+before the existing materializer returns a fresh detached copy. Focused proof is 128 assertions on both PUC Lua and
+LuaJIT, including reordered Unicode definitions, different byte/scalar widths, duplicate nested occurrences,
+quoted and regex call-like text, variadic rest signatures, and host/privacy denial.
+
 The extension remains behind the existing opaque-index test materializer. It adds no public record accessor/query,
 runtime observation, trace dependency, generated-format change, rollout movement, or native admission. Portable
 output excludes caller paths, host/metatable identity, source/sidecar maps, AST/ActionIR, compiled regex,
 descriptors, implementation source, loaders/executors, sinks, environment, clock, and randomness.
 
-Plan signoff passes the unchanged source/outcome/graph/remaining suites at 379/122/64/122 per ABI, complete Lua
-package `1..177`, PUC primary 66x2, corpus 105, primary 5x2x66, Unicode 10/10, and all six unchanged ledgers.
-mdBook and Knowledge Map 724/5,766 pass. Canonical CI passes six doctrines, Rust admission 1/1 in 78.85 seconds,
-Dart 1/1, Julia 416/416 in 28.4 seconds, relocated containment, moved-root proof, reference primary 66x2, and
-Phase 0 1,031/1,031 in 647 seconds. No production/test/fixture/API/query/format/observation/ledger behavior changes;
-typed core `.10.7.4.1` becomes eligible only after the clean plan commit.
+Implementation proof preserves source/outcome/graph/remaining at 379/122/64/122 per ABI and passes complete Lua
+package `1..177`, PUC primary 66x2, corpus 105, primary 5x2x66, Unicode 10/10, and all six unchanged ledgers. It
+also passes canonical Rust admission 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.4s, containment/moved-root proof,
+reference primary 66x2, and Phase 0 1,031/1,031 in 622s; Knowledge Map generation is 724 facts / 5,767 keys. It adds
+no public API/query, runtime observation, staged/generated role, generated-format change, rollout movement, or
+native admission. Staged/generated completion `.10.7.4.2` is the next owner after the clean `.1` commit.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-source-outcome-plan]],
 [[lua-semantic-static-projection-plan]], [[semantic-introspection-neutral-contract]],

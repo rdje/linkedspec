@@ -25,9 +25,9 @@ answers:
   - "is Lua staged function body_ast typed ActionIR authority"
   - "which Lua generated plan owns semantic provenance"
 date: 2026-07-27
-status: current authority map; static foundation composition-closed and calls staging generated plan frozen
+status: current authority map; static foundation closed and typed call core implemented at exact 18/16
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. Behavior-free .10.7.4.0 freezes exact calls/staging/generated authority before implementation."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority and .10.7.4.1 implements the exact private typed 18/16 core."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
@@ -78,8 +78,11 @@ four-record/nine-relation staged/generated completion. Merged `authored_definiti
 reparsed typed function-body ActionIR after staged JSON equality, compiled edge ActionIR/contracts, the strict
 source map, and retained immutable generated-v2 plan are the authorities. Staged `body_ast` is an integrity witness,
 not typed authority; local edge ActionIR offsets cannot be added to authored member starts; registered functions
-resolve before the narrow helper table; and construction may not execute target or generated code. The audit
-changes no Lua behavior or semantic ledger. Related facts: [[lua-unicode-rule-label-preflight]],
+resolve before the narrow helper table; and construction may not execute target or generated code. `.10.7.4.1`
+now implements that exact typed core in the existing private projector and proves 18 records, 16 relations, ten
+source refs, and 128 focused assertions on each Lua ABI. It changes no public API, query, observation, generated
+format, rollout, admission, or semantic ledger; staged/generated completion remains `.10.7.4.2`. Related facts:
+[[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
 [[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]],

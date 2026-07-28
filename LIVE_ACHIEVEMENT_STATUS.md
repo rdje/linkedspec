@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.4.1` — after the clean behavior-free `.10.7.4.0` commit, extend the existing private
-  Lua projector with typed functions/helpers/calls/bindings, merged authored order, exact source correlation,
-  conservative shapes, and the exact non-staged 18/16 target on both ABIs; continue PNT without pushing before 300.
+- `FUTURE-PARITY-BACKLOG.10.7.4.2` — after the clean typed-core `.10.7.4.1` commit, extend the same private Lua
+  projector with normalized payload/job/result plus selected retained generated-plan provenance, reaching exact
+  22/25 on both ABIs with corruption/privacy/no-execution proof; continue PNT without pushing before 300.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.4.1 — add Lua typed call core**
+  (exact private non-staged projection from clean authority-plan commit `ec6b1608`).
+
+  **Result:** The existing Lua projector now deep-equals the governed non-staged target at 18 records, 16
+  relations, and ten source refs. Retained typed function-body and compiled edge ActionIR, merged authored order,
+  global outer-before-inner call traversal, occurrence-safe Unicode source correlation, function-before-helper
+  resolution, fixed/rest signatures, conservative shapes, one binding, one decision, and two explanations remain
+  recursively frozen and leave only detached host-free copies. No public query, runtime observation, staged/
+  generated role, generated format, rollout, or admission moves.
+
+  **Proof:** Focused 128 assertions pass per ABI; prior Lua source/outcome/graph/remaining 379/122/64/122 and
+  package `1..177` pass per ABI; PUC primary 66x2/corpus 105, primary 5x2x66, Unicode 10/10, and six ledgers pass.
+  Canonical clears six doctrines, Rust 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.4s, containment/moved-root,
+  reference primary 66x2, and Phase 0 1,031/1,031 in 622s. mdBook/KM 724/5,767 and all fast gates pass. Cadence
+  advances to 45/300 with no push; staged/generated completion `.2` is next.
+
 - 2026-07-27: **FUTURE-PARITY-BACKLOG.10.7.4.0 — freeze Lua call projection**
   (behavior-free authority/source/privacy audit from clean static closeout `700e8fdb`).
 

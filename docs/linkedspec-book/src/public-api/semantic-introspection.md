@@ -2064,7 +2064,7 @@ generated-v2 input then validates contract, format, caller logical identity, com
 order, and the unique selected entry row. The projector does not invoke the plan builder or emitter, infer a
 family, execute native/generated code, or retain generated Lua implementation text.
 
-Implementation remains in the existing private static projector. `.10.7.4.1` owns typed core 18/16 and a focused
+Implementation remains in the existing private static projector. `.10.7.4.1` now owns typed core 18/16 and a focused
 dual-ABI core suite; `.10.7.4.2` owns staged/generated completion to 22/25 and corruption/no-execution proof;
 `.10.7.4.3` is a no-change committed-owner closeout. The outward fence excludes caller paths, host/metatable
 identity, source and sidecar maps, AST/ActionIR, compiled regex, descriptors, implementation source, loaders,
@@ -2072,12 +2072,26 @@ executors, sinks, trace/observation state, environment, clock, and randomness. N
 generated format, rollout, or native admission moves in this plan. The unchanged source/outcome/graph/remaining
 baseline is 379/122/64/122 assertions on each Lua ABI.
 
-Plan signoff preserves that baseline under complete package `1..177` per ABI, PUC primary 66x2, corpus 105, and
-repository-local storage proof. Primary 5x2x66, Unicode 10/10, all six unchanged ledgers, mdBook, and Knowledge Map
-724/5,766 pass. Canonical CI passes six doctrines, Rust semantic admission 1/1 in 78.85 seconds, Dart 1/1, Julia
-416/416 in 28.4 seconds, relocated containment, moved-root execution, reference primary 66x2, and Phase 0
-1,031/1,031 in 647 seconds. Thus typed core `.10.7.4.1` is eligible only after this behavior-free audit commits
-cleanly.
+Typed-core `.10.7.4.1` now deep-equals the governed non-staged snapshot at exactly 18 records, 16 relations, and
+ten private source refs. It emits four calls in global typed preorder: function `trim`, edge `normalize`, nested
+`match_text`, then edge `return`. The outer user-function call owns one binding write, a `calls` relation, a
+`resolves_to` relation, one decision, and two exact explanation steps; the final edge return reads the same binding.
+Function, call, binding, edge, and rule shapes converge to `string` without executing the caller.
+
+The focused suite also shows why both authorities are needed. Reordered definitions containing `é` preserve
+authored order and different byte/scalar widths through the existing source map. Nested duplicate calls retain
+outer-before-inner occurrence identity. Quoted and regex call-like text cannot steal a typed call. A native
+variadic signature retains minimum 1, unbounded maximum, `items` rest parameter, and array-of-unknown return shape.
+The full extended tree is recursively frozen before the existing test materializer returns a fresh detached,
+plain, host-free JSON copy.
+
+Focused proof passes 128 assertions on PUC Lua and 128 on LuaJIT while the prior source/outcome/graph/remaining
+counts stay 379/122/64/122 per ABI. Complete Lua passes package `1..177`, PUC primary 66x2, corpus 105, and storage
+proof; primary 5x2x66, Unicode 10/10, and all six governance ledgers remain exact. Canonical proof passes Rust
+admission 1/1 in 77.99 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, containment/moved-root execution,
+reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. No public accessor/query, runtime observation,
+staged/generated role, generated format, rollout, or native admission moves. Completion `.10.7.4.2` is next after
+the clean typed-core commit.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:

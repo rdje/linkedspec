@@ -1,10 +1,14 @@
 -- Package-private immutable static semantic projection.
 --
 -- This module consumes only the source map and the parsed/compiled/entry
--- authorities already retained by semantic_index. It does not parse, compile,
--- select, plan, load, execute, trace, or observe anything.
+-- authorities already retained by semantic_index. It reparses only an exact
+-- retained staged function-body payload to recover typed ActionIR after proving
+-- sidecar equality; it never reparses the .spec, compiles, selects, plans,
+-- emits, loads, executes, traces, or observes anything.
 
 local action_ast = require("linkedspec.action_ast")
+local action_contracts = require("linkedspec.action_contracts")
+local action_parser = require("linkedspec.action_parser")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
 
@@ -12,6 +16,24 @@ local M = {}
 
 local SPEC_ID = "spec:0"
 local SOURCE_ID = "source:0"
+
+local CALL_HELPERS = {
+  trim = {
+    parameters = { { "value", "value" } },
+    effects = {},
+    return_kind = "string",
+  },
+  match_text = {
+    parameters = {},
+    effects = { "reads_runtime_match" },
+    return_kind = "string",
+  },
+  ["return"] = {
+    parameters = { { "value", "value" } },
+    effects = { "returns_owner" },
+    return_kind = "unknown",
+  },
+}
 
 local RECORD_KIND_RANK = {
   capabilities = 1,
@@ -741,6 +763,1005 @@ local function add_entry_explanation(records, relations, selected, source)
   )
 end
 
+local function call_fail(context, message, identity, fields)
+  fields = fields or {}
+  fields.identity = identity
+  context.fail(
+    "project_call_semantics",
+    "semantic_call_correlation_failed",
+    message,
+    fields
+  )
+end
+
+local function plain_equal(left, right, active)
+  local left_kind = json.kind(left)
+  local right_kind = json.kind(right)
+  if left_kind ~= right_kind then return false end
+  if left_kind ~= "array" and left_kind ~= "harray" then return left == right end
+  active = active or {}
+  if active[left] or active[right] then return false end
+  active[left] = true
+  active[right] = true
+  if left_kind == "array" then
+    if #left ~= #right then
+      active[left] = nil
+      active[right] = nil
+      return false
+    end
+    for index = 1, #left do
+      if not plain_equal(left[index], right[index], active) then
+        active[left] = nil
+        active[right] = nil
+        return false
+      end
+    end
+  else
+    local count = 0
+    for key, value in pairs(left) do
+      count = count + 1
+      if right[key] == nil or not plain_equal(value, right[key], active) then
+        active[left] = nil
+        active[right] = nil
+        return false
+      end
+    end
+    local right_count = 0
+    for _ in pairs(right) do right_count = right_count + 1 end
+    if count ~= right_count then
+      active[left] = nil
+      active[right] = nil
+      return false
+    end
+  end
+  active[left] = nil
+  active[right] = nil
+  return true
+end
+
+local function function_id(name)
+  return "function:" .. escape_name(name)
+end
+
+local function function_body_range(entry, context)
+  local definition = entry.definition
+  local job = definition.body_parse_job
+  if spec_ast.node_type(job) ~= "StagedParseJob" then
+    call_fail(context, "Function has no staged body parse-job authority", definition.name)
+  end
+  if job.text ~= definition.body_source or job.function_name ~= definition.name then
+    call_fail(context, "Function staged body metadata does not match its typed owner", definition.name)
+  end
+  if job.result_policy ~= "replace_field" or job.result_field ~= "body_ast" or
+      job.failure_policy ~= "fail" then
+    call_fail(context, "Function staged body policy does not match its accepted owner", definition.name)
+  end
+  local span = job.source_span
+  local start_byte = context.source_map.byte_at_scalar[span.start + 1]
+  local end_byte = context.source_map.byte_at_scalar[span["end"] + 1]
+  if start_byte == nil or end_byte == nil then
+    call_fail(context, "Function staged body span is outside the accepted source", definition.name)
+  end
+  local range = { start = start_byte, stop = end_byte }
+  if source_slice(context.source, range) ~= definition.body_source then
+    call_fail(context, "Staged body span does not match function body source", definition.name)
+  end
+  return range
+end
+
+local function function_range(entry, body, context)
+  local definition = entry.definition
+  if definition.source == "" then
+    call_fail(context, "Function shell source is empty", definition.name)
+  end
+  local candidates = {}
+  local cursor = 1
+  while cursor <= #context.source + 1 do
+    local start_position = context.source:find(definition.source, cursor, true)
+    if start_position == nil then break end
+    local candidate = {
+      start = start_position - 1,
+      stop = start_position - 1 + #definition.source,
+    }
+    if candidate.start <= body.start and body.stop <= candidate.stop then
+      candidates[#candidates + 1] = candidate
+    end
+    cursor = start_position + 1
+  end
+  if #candidates ~= 1 then
+    call_fail(
+      context,
+      "Function shell occurrence is not uniquely owned by its staged body",
+      definition.name,
+      { candidate_count = #candidates }
+    )
+  end
+  return candidates[1]
+end
+
+local function parameter_kind(definition, name)
+  return definition.parameter_kinds and definition.parameter_kinds[name] or "value"
+end
+
+local function call_signature(parameters)
+  local projected = json.array()
+  for index, parameter in ipairs(parameters) do
+    projected[index] = json.harray({
+      name = parameter[1],
+      kind = parameter[2],
+      required = true,
+    })
+  end
+  return json.harray({
+    parameters = projected,
+    arity_min = #parameters,
+    arity_max = #parameters,
+    rest_parameter = json.null,
+    final_codeblock = false,
+  })
+end
+
+local function function_signature(definition)
+  local signature = definition.signature
+  local names = signature and signature.positional_params or definition.params
+  local parameters = json.array()
+  local kinds = json.array()
+  for index, name in ipairs(names) do
+    local kind = signature and "value" or parameter_kind(definition, name)
+    parameters[index] = json.harray({ name = name, kind = kind, required = true })
+    kinds[index] = kind
+  end
+  local final_codeblock = #names > 0 and kinds[#names] == "codeblock"
+  return json.harray({
+    parameters = parameters,
+    arity_min = signature and signature.min_arity or definition.arity,
+    arity_max = signature and portable(signature.max_arity) or definition.arity,
+    rest_parameter = signature and signature.rest_param or json.null,
+    final_codeblock = final_codeblock,
+  }), kinds
+end
+
+local function typed_function_body(entry, registry, context)
+  local definition = entry.definition
+  local ok, block = pcall(action_parser.parse_action_block, definition.body_source)
+  if not ok or action_ast.node_type(block) ~= "ActionBlock" then
+    call_fail(context, "Accepted function body cannot be reconstructed as typed ActionIR", definition.name, {
+      error = tostring(block),
+    })
+  end
+  if definition.body_ast == nil or
+      not plain_equal(definition.body_ast, action_ast.to_json(block)) then
+    call_fail(context, "Staged function body result differs from typed ActionIR", definition.name)
+  end
+  local resolution = action_contracts.resolve_action_block_contracts(
+    block,
+    { function_registry = registry }
+  )
+  if not resolution.ok then
+    call_fail(context, "Typed function body has unresolved contracts", definition.name)
+  end
+  return block
+end
+
+local call_expression_shape
+
+local function function_variables(entry)
+  local definition = entry.definition
+  local signature = definition.signature
+  local names = signature and signature.positional_params or definition.params
+  local variables = {}
+  for _, name in ipairs(names) do
+    local kind = signature and "value" or parameter_kind(definition, name)
+    variables[name] = value_shape(kind == "codeblock" and "codeblock" or "unknown")
+  end
+  if signature ~= nil then
+    variables[signature.rest_param] = array_shape(value_shape("unknown"))
+  end
+  return variables
+end
+
+call_expression_shape = function(expression, variables, function_shapes)
+  if type(expression) ~= "table" then return value_shape("unknown") end
+  local kind = expression.kind
+  if kind == "string" then
+    return value_shape("string")
+  elseif kind == "number" then
+    return value_shape("number")
+  elseif kind == "boolean" then
+    return value_shape("boolean")
+  elseif kind == "undef" then
+    return value_shape("null")
+  elseif kind == "variable" then
+    return variables[expression.name] or value_shape("unknown")
+  elseif kind == "assign_scalar" then
+    return call_expression_shape(expression.value, variables, function_shapes)
+  elseif kind == "array_literal" then
+    local shapes = {}
+    for index, item in ipairs(expression.items or {}) do
+      shapes[index] = call_expression_shape(item, variables, function_shapes)
+    end
+    return array_shape(common_shape(shapes))
+  elseif kind == "hash_literal" then
+    local keys = {}
+    local values = {}
+    for index, item in ipairs(expression.entries or {}) do
+      keys[index] = call_expression_shape(item.key, variables, function_shapes)
+      values[index] = call_expression_shape(item.value, variables, function_shapes)
+    end
+    return harray_shape(common_shape(keys), common_shape(values))
+  elseif kind == "call" then
+    if function_shapes[expression.name] ~= nil then return function_shapes[expression.name] end
+    if expression.name == "return" and expression.args and expression.args[1] then
+      return call_expression_shape(expression.args[1].value, variables, function_shapes)
+    end
+    local helper = CALL_HELPERS[expression.name]
+    return helper and value_shape(helper.return_kind) or value_shape("unknown")
+  end
+  return value_shape("unknown")
+end
+
+local function infer_function_shapes(functions, typed_blocks)
+  local shapes = {}
+  for _, entry in ipairs(functions) do
+    shapes[entry.definition.name] = value_shape("unknown")
+  end
+  for _ = 0, #functions do
+    local changed = false
+    for _, entry in ipairs(functions) do
+      local definition = entry.definition
+      local variables = function_variables(entry)
+      local shape = value_shape("unknown")
+      for _, statement in ipairs(typed_blocks[definition.name].statements) do
+        local expression = statement.expr
+        if expression.kind == "call" and expression.name == "return" then
+          if expression.args and expression.args[1] then
+            shape = call_expression_shape(expression.args[1].value, variables, shapes)
+          end
+          break
+        elseif expression.kind == "assign_scalar" then
+          variables[expression.name] = call_expression_shape(expression.value, variables, shapes)
+        end
+      end
+      if json.encode(shapes[definition.name]) ~= json.encode(shape) then
+        shapes[definition.name] = shape
+        changed = true
+      end
+    end
+    if not changed then break end
+  end
+  return shapes
+end
+
+local function identifier_start(byte)
+  return byte ~= nil and ((byte >= 0x41 and byte <= 0x5A) or
+    (byte >= 0x61 and byte <= 0x7A) or byte == 0x5F)
+end
+
+local function identifier_continue(byte)
+  return identifier_start(byte) or (byte ~= nil and byte >= 0x30 and byte <= 0x39)
+end
+
+local function regex_start(source, index, start, stop)
+  local next_index = index + 1
+  local next_byte = source:byte(next_index + 1)
+  if next_index >= stop or next_byte == 0x28 or is_whitespace(next_byte) then return false end
+  local previous = index - 1
+  while previous >= start and is_whitespace(source:byte(previous + 1)) do previous = previous - 1 end
+  if previous < start then return true end
+  local previous_byte = source:byte(previous + 1)
+  return previous_byte == 0x28 or previous_byte == 0x5B or previous_byte == 0x7B or
+    previous_byte == 0x2C or previous_byte == 0x3D or previous_byte == 0x3A
+end
+
+local function line_comment_start(source, index, stop)
+  local byte = source:byte(index + 1)
+  local next_byte = index + 1 < stop and source:byte(index + 2) or nil
+  return byte == 0x23 or (byte == 0x2D and next_byte == 0x2D) or
+    (byte == 0x2F and next_byte == 0x2F)
+end
+
+local function skip_line_comment(source, index, stop)
+  local newline = source:find("\n", index + 1, true)
+  return newline == nil and stop or math.min(stop, newline)
+end
+
+local function matching_parenthesis(source, open, stop)
+  local depth = 0
+  local quote_byte = nil
+  local in_regex = false
+  local escaped = false
+  local index = open
+  while index < stop do
+    local byte = source:byte(index + 1)
+    if quote_byte ~= nil or in_regex then
+      if escaped then
+        escaped = false
+      elseif byte == 0x5C then
+        escaped = true
+      elseif quote_byte ~= nil and byte == quote_byte then
+        quote_byte = nil
+      elseif in_regex and byte == 0x2F then
+        in_regex = false
+      end
+    elseif line_comment_start(source, index, stop) then
+      index = skip_line_comment(source, index, stop) - 1
+    elseif byte == 0x22 or byte == 0x27 then
+      quote_byte = byte
+    elseif byte == 0x2F and regex_start(source, index, open, stop) then
+      in_regex = true
+    elseif byte == 0x28 then
+      depth = depth + 1
+    elseif byte == 0x29 then
+      depth = depth - 1
+      if depth == 0 then return index + 1 end
+      if depth < 0 then return nil end
+    end
+    index = index + 1
+  end
+  return nil
+end
+
+local function scan_call_sites(source, range, context)
+  local sites = {}
+  local index = range.start
+  local quote_byte = nil
+  local in_regex = false
+  local escaped = false
+  while index < range.stop do
+    local byte = source:byte(index + 1)
+    if quote_byte ~= nil or in_regex then
+      if escaped then
+        escaped = false
+      elseif byte == 0x5C then
+        escaped = true
+      elseif quote_byte ~= nil and byte == quote_byte then
+        quote_byte = nil
+      elseif in_regex and byte == 0x2F then
+        in_regex = false
+      end
+      index = index + 1
+    elseif line_comment_start(source, index, range.stop) then
+      index = skip_line_comment(source, index, range.stop)
+    elseif byte == 0x22 or byte == 0x27 then
+      quote_byte = byte
+      index = index + 1
+    elseif byte == 0x2F and regex_start(source, index, range.start, range.stop) then
+      in_regex = true
+      index = index + 1
+    elseif not identifier_start(byte) then
+      index = index + 1
+    else
+      local name_start = index
+      index = index + 1
+      while index < range.stop and identifier_continue(source:byte(index + 1)) do
+        index = index + 1
+      end
+      local name_stop = index
+      while index < range.stop and is_whitespace(source:byte(index + 1)) do index = index + 1 end
+      if index < range.stop and source:byte(index + 1) == 0x28 then
+        local stop = matching_parenthesis(source, index, range.stop)
+        local name = source:sub(name_start + 1, name_stop)
+        if stop == nil then
+          call_fail(context, "Authored call has no balanced closing parenthesis", name)
+        end
+        sites[#sites + 1] = {
+          name = name,
+          range = { start = name_start, stop = stop },
+        }
+      end
+      index = name_stop
+    end
+  end
+  return { sites = sites, next = 1 }
+end
+
+local function take_call_site(cursor, name, owner_id, context)
+  for index = cursor.next, #cursor.sites do
+    local site = cursor.sites[index]
+    if site.name == name then
+      cursor.next = index + 1
+      return site.range
+    end
+  end
+  call_fail(context, "Typed call has no authored source occurrence", owner_id, {
+    call_name = name,
+  })
+end
+
+local function call_action_owners(scans_by_label, compiled, context)
+  local owners = {}
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local rule = compiled.rules_by_label[label]
+    local scan = scans_by_label[label]
+    if scan == nil then
+      call_fail(context, "Compiled action owner has no authored source scan", label)
+    end
+    local action_index = 1
+    local blind_index = 1
+    local edge_order = 0
+    for _, member in ipairs(scan.members) do
+      for _, edge in ipairs(member.edges) do
+        local payload
+        if edge.ownership == "action" then
+          local compiled_edge = rule.action_edges[action_index]
+          if compiled_edge == nil then
+            call_fail(context, "Authored action owner has no compiled edge", label)
+          end
+          payload = compiled_edge.action_payload
+          action_index = action_index + 1
+        else
+          local compiled_edge = rule.blind_edges[blind_index]
+          if compiled_edge == nil then
+            call_fail(context, "Authored blind owner has no compiled edge", label)
+          end
+          payload = compiled_edge.action_payload
+          blind_index = blind_index + 1
+        end
+        local owner_id = "edge:" .. rule_id(label) .. ":" .. edge_order
+        edge_order = edge_order + 1
+        if payload ~= nil then
+          if payload.contracts == nil or not payload.contracts.ok or
+              action_ast.node_type(payload.action_ast) ~= "ActionBlock" then
+            call_fail(context, "Compiled action owner has unresolved typed contracts", owner_id)
+          end
+          owners[#owners + 1] = {
+            owner_id = owner_id,
+            rule_label = label,
+            block = payload.action_ast,
+            source = member.range,
+          }
+        end
+      end
+    end
+    if action_index - 1 ~= #rule.action_edges or blind_index - 1 ~= #rule.blind_edges then
+      call_fail(context, "Authored and compiled action owner counts differ", label, {
+        authored_action_edges = action_index - 1,
+        compiled_action_edges = #rule.action_edges,
+        authored_blind_edges = blind_index - 1,
+        compiled_blind_edges = #rule.blind_edges,
+      })
+    end
+  end
+  return owners
+end
+
+local function ensure_helper(builder, name, contract)
+  if builder.helper_ids[name] ~= nil then return builder.helper_ids[name] end
+  local id = "helper:" .. escape_name(name)
+  local parameters = {}
+  for index, item in ipairs(contract.parameters) do parameters[index] = item end
+  builder.helper_ids[name] = id
+  builder.records[#builder.records + 1] = record(
+    id,
+    "helper",
+    name,
+    nil,
+    builder.helper_count,
+    nil,
+    json.harray({
+      signature = call_signature(parameters),
+      effects = json.array(contract.effects),
+      return_shape = value_shape(contract.return_kind),
+    })
+  )
+  builder.helper_count = builder.helper_count + 1
+  return id
+end
+
+local function signature_names(definition)
+  local signature = definition.signature
+  local names = {}
+  for index, name in ipairs(signature and signature.positional_params or definition.params) do
+    names[index] = name
+  end
+  if signature ~= nil then names[#names + 1] = "..." .. signature.rest_param end
+  return names
+end
+
+local function shape_kind(shape)
+  return type(shape) == "table" and shape.kind or "unknown"
+end
+
+local function add_function_resolution(builder, call_id, source, entry, argument_shapes, result_shape)
+  local definition = entry.definition
+  local target_id = function_id(definition.name)
+  local decision_id = "decision:call:" .. call_id
+  local exact_id = "explanation:" .. decision_id .. ":0"
+  local signature_id = "explanation:" .. decision_id .. ":1"
+  builder.records[#builder.records + 1] = record(
+    decision_id,
+    "decision",
+    definition.name .. " call resolution",
+    call_id,
+    0,
+    source,
+    json.harray({ decision_kind = "call_resolution", outcome = target_id })
+  )
+  builder.records[#builder.records + 1] = record(
+    exact_id,
+    "explanation_step",
+    nil,
+    decision_id,
+    0,
+    source,
+    json.harray({
+      rule_code = "call_exact_user_function",
+      summary = "The exact user-function name " .. definition.name .. " is registered.",
+      input_ids = json.array({ call_id, target_id }),
+      output_fact = json.harray({
+        record_id = call_id,
+        path = "/facts/resolution_kind",
+        value = "user_function",
+      }),
+    })
+  )
+  local count = #argument_shapes
+  local count_words = count == 1 and "one" or tostring(count)
+  local shape_words = count == 1 and (shape_kind(argument_shapes[1]) .. " argument") or "arguments"
+  builder.records[#builder.records + 1] = record(
+    signature_id,
+    "explanation_step",
+    nil,
+    decision_id,
+    1,
+    source,
+    json.harray({
+      rule_code = "call_signature_accepts",
+      summary = "The " .. count_words .. " supplied " .. shape_words .. " satisfies " ..
+        definition.name .. "(" .. table.concat(signature_names(definition), ", ") .. ").",
+      input_ids = json.array({ call_id, target_id }),
+      output_fact = json.harray({
+        record_id = call_id,
+        path = "/facts/return_shape/kind",
+        value = shape_kind(result_shape),
+      }),
+    })
+  )
+  builder.relations[#builder.relations + 1] = relation(
+    "calls", call_id, target_id, 0, source
+  )
+  builder.relations[#builder.relations + 1] = relation(
+    "resolves_to", call_id, target_id, 0, source, json.array({ decision_id })
+  )
+  builder.relations[#builder.relations + 1] = relation(
+    "explained_by", decision_id, exact_id, 0, source, json.array({ target_id })
+  )
+  builder.relations[#builder.relations + 1] = relation(
+    "explained_by", decision_id, signature_id, 1, source, json.array({ target_id })
+  )
+end
+
+local call_emit_expression
+local call_emit_call
+local call_visit_children
+
+call_visit_children = function(builder, expression, owner_id, cursor, local_order, variables, function_surface)
+  local function visit(value)
+    return call_emit_expression(
+      builder,
+      value,
+      owner_id,
+      cursor,
+      local_order,
+      variables,
+      function_surface
+    )
+  end
+  local function visit_args(arguments)
+    for _, argument in ipairs(arguments or {}) do visit(argument.value) end
+  end
+  local function visit_block(block)
+    for _, statement in ipairs(block and block.statements or {}) do visit(statement.expr) end
+  end
+  local kind = expression.kind
+  if kind == "array_literal" then
+    for _, item in ipairs(expression.items or {}) do visit(item) end
+  elseif kind == "hash_literal" then
+    for _, item in ipairs(expression.entries or {}) do
+      visit(item.key)
+      visit(item.value)
+    end
+  elseif kind == "block_value" or kind == "codeblock_argument" then
+    visit_block(expression.block)
+  elseif kind == "indexed_var" then
+    visit(expression.index)
+  elseif kind == "assign_array_append" then
+    visit(expression.value)
+  elseif kind == "assign_hash_index" then
+    visit(expression.key)
+    visit(expression.value)
+  elseif kind == "assign_nested_access" then
+    for _, segment in ipairs(expression.segments or {}) do
+      if segment.kind == "index" then visit(segment.expr) end
+    end
+    visit(expression.value)
+  elseif kind == "fluent_chain" then
+    visit(expression.receiver)
+    for _, call in ipairs(expression.calls or {}) do visit_args(call.args) end
+  elseif kind == "nested_access" then
+    for _, segment in ipairs(expression.segments or {}) do
+      if segment.kind == "index" then visit(segment.expr) end
+    end
+  elseif kind == "control_switch" then
+    visit(expression.source_expr)
+    visit_args(expression.args)
+    visit_block(expression.body)
+    for _, case_expression in ipairs(expression.cases or {}) do visit(case_expression) end
+    visit(expression.default)
+  elseif type(kind) == "string" and kind:sub(1, 8) == "control_" then
+    visit(expression.condition)
+    visit(expression.match)
+    visit_args(expression.args)
+    visit_block(expression.body)
+  end
+end
+
+call_emit_call = function(builder, expression, owner_id, cursor, local_order, variables, function_surface)
+  local range = take_call_site(cursor, expression.name, owner_id, builder.context)
+  local order = local_order.value
+  local_order.value = order + 1
+  local call_id = "call:" .. owner_id .. ":" .. order
+  local source = register_source(builder.source_refs, call_id, range, builder.context)
+  local argument_shapes = json.array()
+  for index, argument in ipairs(expression.args or {}) do
+    argument_shapes[index] = call_expression_shape(
+      argument.value,
+      variables,
+      builder.function_shapes
+    )
+  end
+  local resolution = builder.registry:resolve_call(expression.name, #(expression.args or {}))
+  local function_entry = resolution and resolution.entry or nil
+  local helper = CALL_HELPERS[expression.name]
+  local resolution_kind = function_entry and "user_function" or (helper and "helper" or "unresolved")
+  local result_shape
+  if function_entry ~= nil then
+    result_shape = builder.function_shapes[expression.name]
+  elseif expression.name == "return" and argument_shapes[1] ~= nil then
+    result_shape = argument_shapes[1]
+  elseif helper ~= nil then
+    result_shape = value_shape(helper.return_kind)
+  else
+    result_shape = value_shape("unknown")
+  end
+  builder.records[#builder.records + 1] = record(
+    call_id,
+    "call",
+    expression.name,
+    owner_id,
+    builder.global_call_order,
+    source,
+    json.harray({
+      call_form = "function",
+      resolution_kind = resolution_kind,
+      argument_shapes = argument_shapes,
+      return_shape = result_shape,
+      target_shape = value_shape(resolution_kind == "unresolved" and "unknown" or resolution_kind),
+    })
+  )
+  builder.global_call_order = builder.global_call_order + 1
+
+  if function_entry ~= nil then
+    add_function_resolution(builder, call_id, source, function_entry, argument_shapes, result_shape)
+  elseif helper ~= nil then
+    local helper_id = ensure_helper(builder, expression.name, helper)
+    builder.relations[#builder.relations + 1] = relation(
+      "resolves_to",
+      call_id,
+      helper_id,
+      0,
+      source,
+      function_surface and json.array({ owner_id }) or json.array()
+    )
+  end
+
+  for _, argument in ipairs(expression.args or {}) do
+    local value = argument.value
+    if type(value) == "table" and value.kind == "variable" then
+      local binding_id = builder.binding_by_owner_name[owner_id .. "\0" .. value.name]
+      if binding_id ~= nil then
+        builder.relations[#builder.relations + 1] = relation(
+          "reads", call_id, binding_id, 0, source
+        )
+      end
+    end
+  end
+  for _, argument in ipairs(expression.args or {}) do
+    call_emit_expression(
+      builder,
+      argument.value,
+      owner_id,
+      cursor,
+      local_order,
+      variables,
+      function_surface
+    )
+  end
+  return { id = call_id, source = source, range = range }
+end
+
+call_emit_expression = function(builder, expression, owner_id, cursor, local_order, variables, function_surface)
+  if type(expression) ~= "table" then return nil end
+  if expression.kind == "assign_scalar" then
+    return call_emit_expression(
+      builder,
+      expression.value,
+      owner_id,
+      cursor,
+      local_order,
+      variables,
+      function_surface
+    )
+  elseif expression.kind == "call" then
+    if function_surface and expression.name == "return" then
+      for _, argument in ipairs(expression.args or {}) do
+        call_emit_expression(
+          builder,
+          argument.value,
+          owner_id,
+          cursor,
+          local_order,
+          variables,
+          function_surface
+        )
+      end
+      return nil
+    end
+    return call_emit_call(
+      builder,
+      expression,
+      owner_id,
+      cursor,
+      local_order,
+      variables,
+      function_surface
+    )
+  end
+  call_visit_children(
+    builder,
+    expression,
+    owner_id,
+    cursor,
+    local_order,
+    variables,
+    function_surface
+  )
+  return nil
+end
+
+local function call_emit_statement(builder, expression, owner_id, cursor, local_order, variables, function_surface)
+  if expression.kind == "assign_scalar" then
+    local shape = call_expression_shape(expression.value, variables, builder.function_shapes)
+    local emitted = call_emit_expression(
+      builder,
+      expression.value,
+      owner_id,
+      cursor,
+      local_order,
+      variables,
+      function_surface
+    )
+    variables[expression.name] = shape
+    local key = owner_id .. "\0" .. expression.name
+    local binding_order = builder.binding_counts[key] or 0
+    builder.binding_counts[key] = binding_order + 1
+    local binding_id = "binding:" .. owner_id .. ":" .. escape_name(expression.name) .. ":" .. binding_order
+    local source = emitted and register_source(
+      builder.source_refs,
+      binding_id,
+      emitted.range,
+      builder.context
+    ) or nil
+    builder.records[#builder.records + 1] = record(
+      binding_id,
+      "binding",
+      expression.name,
+      owner_id,
+      binding_order,
+      source,
+      json.harray({ scope = "action", value_shape = shape, mutable = true })
+    )
+    builder.binding_by_owner_name[key] = binding_id
+    if emitted ~= nil then
+      builder.relations[#builder.relations + 1] = relation(
+        "writes", emitted.id, binding_id, 0, emitted.source
+      )
+    end
+    return
+  end
+  if not function_surface and expression.kind == "call" and expression.name == "return" then
+    builder.edge_value_shapes[owner_id] = call_expression_shape(
+      expression,
+      variables,
+      builder.function_shapes
+    )
+  end
+  call_emit_expression(
+    builder,
+    expression,
+    owner_id,
+    cursor,
+    local_order,
+    variables,
+    function_surface
+  )
+end
+
+local function apply_edge_shapes(builder)
+  local rule_shapes = {}
+  for _, item in ipairs(builder.records) do
+    if item.kind == "edge" and builder.edge_value_shapes[item.id] ~= nil then
+      local shape = builder.edge_value_shapes[item.id]
+      item.facts.value_shape = shape
+      if shape_kind(shape) ~= "unknown" and rule_shapes[item.owner_id] == nil then
+        rule_shapes[item.owner_id] = shape
+      end
+    end
+  end
+  for _, item in ipairs(builder.records) do
+    if item.kind == "rule" and rule_shapes[item.id] ~= nil then
+      item.facts.value_shape = item.facts.is_repetition and
+        array_shape(rule_shapes[item.id]) or rule_shapes[item.id]
+    end
+  end
+end
+
+local function add_function_record(entry, range, function_shapes, source_refs, records, relations, context, rule_count)
+  local definition = entry.definition
+  local id = function_id(definition.name)
+  local source = register_source(source_refs, id, range, context)
+  local signature, parameter_kinds = function_signature(definition)
+  records[#records + 1] = record(
+    id,
+    "function",
+    definition.name,
+    SPEC_ID,
+    entry.index,
+    source,
+    json.harray({
+      signature = signature,
+      parameter_kinds = parameter_kinds,
+      return_shape = function_shapes[definition.name],
+    })
+  )
+  relations[#relations + 1] = relation(
+    "declares", SPEC_ID, id, rule_count + entry.index, source
+  )
+end
+
+local function extend_call_core(context, scans_by_label, source_refs, records, relations)
+  local compiled = context.outcome.compiled
+  local functions = compiled.function_registry.entries
+  if #functions == 0 then return end
+
+  local typed_blocks = {}
+  local body_ranges = {}
+  local function_ranges = {}
+  local functions_by_name = {}
+  for _, entry in ipairs(functions) do
+    local name = entry.definition.name
+    typed_blocks[name] = typed_function_body(entry, compiled.function_registry, context)
+    body_ranges[name] = function_body_range(entry, context)
+    function_ranges[name] = function_range(entry, body_ranges[name], context)
+    functions_by_name[name] = entry
+  end
+  local function_shapes = infer_function_shapes(functions, typed_blocks)
+  for _, entry in ipairs(functions) do
+    add_function_record(
+      entry,
+      function_ranges[entry.definition.name],
+      function_shapes,
+      source_refs,
+      records,
+      relations,
+      context,
+      #compiled.compiled_rule_order
+    )
+  end
+
+  local observed = {}
+  for _, entry in ipairs(functions) do
+    observed[#observed + 1] = {
+      kind = "function",
+      name = entry.definition.name,
+      start = function_ranges[entry.definition.name].start,
+    }
+  end
+  for _, scan in pairs(scans_by_label) do
+    observed[#observed + 1] = {
+      kind = "rule",
+      name = scan.label,
+      start = scan.header.start,
+    }
+  end
+  table.sort(observed, function(left, right)
+    if left.start ~= right.start then return left.start < right.start end
+    if left.kind ~= right.kind then return left.kind == "function" end
+    return left.name < right.name
+  end)
+  local authored = context.outcome.authored_definitions
+  if type(authored) ~= "table" or #authored ~= #observed then
+    call_fail(context, "Merged authored definition authority is incomplete", SPEC_ID)
+  end
+  local definition_order = json.array()
+  for index, item in ipairs(authored) do
+    local actual = observed[index]
+    if item.kind ~= actual.kind or item.name ~= actual.name then
+      call_fail(context, "Merged authored definition order differs from source ownership", SPEC_ID, {
+        definition_index = index - 1,
+      })
+    end
+    definition_order[index] = item.kind == "function" and function_id(item.name) or rule_id(item.name)
+  end
+  for _, item in ipairs(records) do
+    if item.id == SPEC_ID then
+      item.facts.definition_order = definition_order
+      break
+    end
+  end
+
+  local builder = {
+    context = context,
+    source_refs = source_refs,
+    records = records,
+    relations = relations,
+    registry = compiled.function_registry,
+    function_shapes = function_shapes,
+    helper_ids = {},
+    helper_count = 0,
+    binding_by_owner_name = {},
+    binding_counts = {},
+    edge_value_shapes = {},
+    global_call_order = 0,
+  }
+  local owners = call_action_owners(scans_by_label, compiled, context)
+  local owners_by_rule = {}
+  for _, owner in ipairs(owners) do
+    owners_by_rule[owner.rule_label] = owners_by_rule[owner.rule_label] or {}
+    owners_by_rule[owner.rule_label][#owners_by_rule[owner.rule_label] + 1] = owner
+  end
+
+  for _, item in ipairs(authored) do
+    if item.kind == "function" then
+      local entry = functions_by_name[item.name]
+      if entry == nil then call_fail(context, "Authored function has no accepted registry owner", item.name) end
+      local cursor = scan_call_sites(context.source, body_ranges[item.name], context)
+      local local_order = { value = 0 }
+      local variables = function_variables(entry)
+      local owner_id = function_id(item.name)
+      for _, statement in ipairs(typed_blocks[item.name].statements) do
+        call_emit_statement(
+          builder,
+          statement.expr,
+          owner_id,
+          cursor,
+          local_order,
+          variables,
+          true
+        )
+      end
+    else
+      for _, owner in ipairs(owners_by_rule[item.name] or {}) do
+        local cursor = scan_call_sites(context.source, owner.source, context)
+        local local_order = { value = 0 }
+        local variables = {}
+        for _, statement in ipairs(owner.block.statements) do
+          call_emit_statement(
+            builder,
+            statement.expr,
+            owner.owner_id,
+            cursor,
+            local_order,
+            variables,
+            false
+          )
+        end
+      end
+    end
+  end
+  apply_edge_shapes(builder)
+end
+
 local function canonicalize(records, relations)
   table.sort(records, function(left, right)
     local left_rank = RECORD_KIND_RANK[left.kind] or math.huge
@@ -955,6 +1976,7 @@ local function build_compiled(context)
   end
 
   relations[#relations + 1] = relation("contains", SPEC_ID, SOURCE_ID, 0, nil)
+  extend_call_core(context, scans_by_label, source_refs, records, relations)
   if #parsed.functions == 0 and #compiled.compiled_rule_order > 1 and selected ~= nil then
     add_entry_explanation(records, relations, selected, record_sources[rule_id(selected.label)])
   end
