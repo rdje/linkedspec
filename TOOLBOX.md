@@ -840,9 +840,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   source map, and retained immutable generated-v2 plan. Staged `body_ast` is not typed authority; edge-local
   ActionIR spans cannot be added to authored member starts. Correlate typed outer-before-inner calls through a
   bounded scanner, resolve registered functions before the narrow helper table, infer shapes conservatively, and
-  execute neither target nor generated code. `.10.7.4.1` now implements exact typed 18/16 with ten source refs and
-  128 assertions on each ABI; `.2` owns exact 22/25 completion, and `.3` is no-change recomposition. Run the focused
-  owners through repository storage routing:
+  execute neither target nor generated code. `.10.7.4.1` implements exact typed 18/16; `.2` now validates native
+  staged sidecars plus retained generated-plan identity/order/selection and completes exact 22/25/10 without an
+  emitter dependency. `.3` is no-change recomposition. Run the focused owners through repository storage routing:
 
   ```bash
   for runtime in puc luajit; do
@@ -851,12 +851,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_static_graph_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_static_remaining_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_core_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_staged_generated_test.lua
   done
   ```
 
-  The committed baseline is source/outcome/graph/remaining/core 379/122/64/122/128 on each ABI. Do not invoke
-  native Lua tests without the wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local managed
-  storage.
+  The current baseline is source/outcome/graph/remaining/core/staged 379/122/64/122/136/97 on each ABI. Do not
+  invoke native Lua tests without the wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local
+  managed storage.
 - **SEMANTIC SOURCE CEILING BOUNDARY:** retrieve [[semantic-source-ceiling-boundary]] before changing private
   source retention. ADR `0049` applies ceilings when query records leave the native API: the private projection
   retains complete authoritative refs, the snapshot fixes ceiling/digest policy, and the query source projector

@@ -12,10 +12,13 @@ typed function ActionIR authority, occurrence-safe Unicode call correlation, reg
 resolution, retained generated-v2 plan authority, and strict no-execution/privacy fences. Typed core `.10.7.4.1`
 now implements the exact private 18-record/16-relation/10-source-ref subset on both Lua ABIs, including calls,
 helpers, one binding, signatures, conservative shapes, source identity, decision/explanations, recursive freeze,
-and detached host-free materialization. Staged/generated completion `.10.7.4.2` is next; public query, runtime
-observation, rollout, and native admission remain later work. Focused proof is 128 assertions per ABI; canonical
-proof includes Rust admission 1/1 in 77.99 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, containment and
-moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds.
+and detached host-free materialization. Staged/generated `.10.7.4.2` now validates exact native payload/job/result
+state and retained generated-plan contract/format/identity/order/selection, then completes exact private 22/25/10
+on both ABIs without an emitter or execution dependency. Core/full focused proof is 136/97 assertions per ABI;
+complete Lua remains package `1..177`, PUC primary 66x2, corpus 105, and storage proof. No-change `.10.7.4.3` is
+next; public query, runtime observation, rollout, and native admission remain later work. Canonical proof passes
+Rust admission 1/1 in 77.92 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment/moved-root execution,
+reference primary 66x2, and Phase 0 1,031/1,031 in 616 seconds.
 
 ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable

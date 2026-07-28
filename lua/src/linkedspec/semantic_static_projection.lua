@@ -1606,6 +1606,170 @@ local function apply_edge_shapes(builder)
   end
 end
 
+local function string_lists_equal(left, right)
+  if type(left) ~= "table" or type(right) ~= "table" or #left ~= #right then return false end
+  for index = 1, #left do
+    if left[index] ~= right[index] then return false end
+  end
+  return true
+end
+
+local function validate_staged_authority(entry, context)
+  local definition = entry.definition
+  local payload = definition.body_payload
+  local job = definition.body_parse_job
+  local expected_path = { "functions", tostring(entry.index), "body_source" }
+  if type(payload) ~= "table" or spec_ast.node_type(job) ~= "StagedParseJob" or
+      type(definition.body_ast) ~= "table" then
+    call_fail(context, "Compiled function has no complete staged authority", definition.name)
+  end
+
+  local expected_version = definition.signature and definition.signature.version or 1
+  if payload.kind ~= "staged_payload" or payload.version ~= expected_version or
+      payload.node_kind ~= "function_definition" or payload.payload_kind ~= "function_body" or
+      not string_lists_equal(payload.parent_ast_path, expected_path) or
+      payload.function_name ~= definition.name or payload.text ~= definition.body_source or
+      not plain_equal(payload.source_span, spec_ast.to_json(job.source_span)) or
+      job.version ~= expected_version or job.node_kind ~= "function_definition" or
+      job.payload_kind ~= "function_body" or
+      not string_lists_equal(job.parent_ast_path, expected_path) or job.job_id == "" or
+      job.function_name ~= definition.name or job.text ~= definition.body_source or
+      job.parser_spec_id ~= "actionir-body.spec" or job.top_rule ~= "action_block" or
+      job.result_policy ~= "replace_field" or job.result_field ~= "body_ast" or
+      job.failure_policy ~= "fail" or job.diagnostic_owner ~= "function_body" then
+    call_fail(context, "Native staged function metadata does not match its typed owner", definition.name)
+  end
+
+  local signature_matches
+  if definition.signature == nil then
+    signature_matches = payload.signature == nil and job.signature == nil and
+      string_lists_equal(payload.params, definition.params) and
+      string_lists_equal(job.params, definition.params) and
+      payload.arity == definition.arity and job.arity == definition.arity and
+      plain_equal(payload.parameter_kinds, definition.parameter_kinds) and
+      spec_ast.parameter_kinds_equal(job.parameter_kinds, definition.parameter_kinds)
+  else
+    signature_matches = payload.params == nil and payload.arity == nil and
+      payload.parameter_kinds == nil and job.params == nil and job.arity == nil and
+      job.parameter_kinds == nil and
+      plain_equal(payload.signature, spec_ast.to_json(definition.signature)) and
+      spec_ast.callable_signatures_equal(job.signature, definition.signature)
+  end
+  if not signature_matches then
+    call_fail(context, "Native staged function signature does not match its typed owner", definition.name)
+  end
+end
+
+local function add_staged_artifacts(entry, function_source, records, relations, context)
+  validate_staged_authority(entry, context)
+  local definition = entry.definition
+  local owner_id = function_id(definition.name)
+  local rows = {
+    { "payload", "action_source", "string" },
+    { "parse_job", "action_program", "unknown" },
+    { "result", "action_program", "unknown" },
+  }
+  local ids = {}
+  for index, row in ipairs(rows) do
+    local order = index - 1
+    local artifact_kind = row[1]
+    local id = "staged:" .. artifact_kind .. ":" .. owner_id .. ":" .. order
+    ids[artifact_kind] = id
+    records[#records + 1] = record(
+      id,
+      "staged_artifact",
+      definition.name .. " body " .. (artifact_kind == "parse_job" and "parse job" or artifact_kind),
+      owner_id,
+      order,
+      function_source,
+      json.harray({
+        artifact_kind = artifact_kind,
+        payload_kind = "function_body",
+        node_kind = row[2],
+        parent_path = json.array({ owner_id }),
+        parser_spec_id = "linkedspec-action-v1",
+        top_rule = "FunctionBody",
+        result_policy = "typed_action_program",
+        failure_policy = "compile_diagnostic",
+        status = "succeeded",
+        value_shape = value_shape(row[3]),
+      })
+    )
+    relations[#relations + 1] = relation(
+      "contains", owner_id, id, order, function_source
+    )
+  end
+  relations[#relations + 1] = relation(
+    "lowered_from", ids.payload, SOURCE_ID, 0, function_source
+  )
+  relations[#relations + 1] = relation(
+    "consumes", ids.parse_job, ids.payload, 0, function_source
+  )
+  relations[#relations + 1] = relation(
+    "produces", ids.parse_job, ids.result, 0, function_source
+  )
+  relations[#relations + 1] = relation(
+    "lowered_from", ids.result, ids.payload, 0, function_source
+  )
+  relations[#relations + 1] = relation(
+    "staged_by", ids.result, ids.parse_job, 0, function_source
+  )
+end
+
+local function validate_generated_plan(context)
+  local compiled = context.outcome.compiled
+  local selected = context.outcome.entry
+  local plan = context.outcome.generated_plan
+  if selected == nil or type(plan) ~= "table" or type(plan.rows) ~= "table" then
+    call_fail(context, "Compiled call projection has no entry/generated-plan authority", SPEC_ID)
+  end
+  if plan.contract_id ~= "linkedspec-generated-source-v2" or plan.format_version ~= 2 or
+      plan.source_identity ~= context.logical_name or #plan.rows ~= #compiled.compiled_rule_order then
+    call_fail(context, "Retained generated plan does not match compiled semantic authority", SPEC_ID)
+  end
+
+  local selected_row = nil
+  local selected_count = 0
+  for index, label in ipairs(compiled.compiled_rule_order) do
+    local row = plan.rows[index]
+    if type(row) ~= "table" or row.label ~= label or
+        type(row.family) ~= "string" or row.family == "" then
+      call_fail(context, "Retained generated plan does not match compiled semantic authority", SPEC_ID)
+    end
+    if row.label == selected.label then
+      selected_count = selected_count + 1
+      selected_row = row
+    end
+  end
+  if selected_count ~= 1 then
+    call_fail(context, "Generated plan has no unique selected entry row", selected.label, {
+      selected_rows = selected_count,
+    })
+  end
+  return selected_row
+end
+
+local function add_generated_artifact(records, relations, context)
+  local plan = context.outcome.generated_plan
+  local selected_row = validate_generated_plan(context)
+  local id = "generated:handler_plan:0"
+  records[#records + 1] = record(
+    id,
+    "generated_artifact",
+    "handler plan",
+    SPEC_ID,
+    0,
+    nil,
+    json.harray({
+      artifact_kind = "handler_plan",
+      contract_id = plan.contract_id,
+      format_version = plan.format_version,
+      plan_family = selected_row.family,
+    })
+  )
+  relations[#relations + 1] = relation("generated_as", SPEC_ID, id, 0, nil)
+end
+
 local function add_function_record(entry, range, function_shapes, source_refs, records, relations, context, rule_count)
   local definition = entry.definition
   local id = function_id(definition.name)
@@ -1627,6 +1791,7 @@ local function add_function_record(entry, range, function_shapes, source_refs, r
   relations[#relations + 1] = relation(
     "declares", SPEC_ID, id, rule_count + entry.index, source
   )
+  return source
 end
 
 local function extend_call_core(context, scans_by_label, source_refs, records, relations)
@@ -1647,7 +1812,7 @@ local function extend_call_core(context, scans_by_label, source_refs, records, r
   end
   local function_shapes = infer_function_shapes(functions, typed_blocks)
   for _, entry in ipairs(functions) do
-    add_function_record(
+    local function_source = add_function_record(
       entry,
       function_ranges[entry.definition.name],
       function_shapes,
@@ -1657,6 +1822,7 @@ local function extend_call_core(context, scans_by_label, source_refs, records, r
       context,
       #compiled.compiled_rule_order
     )
+    add_staged_artifacts(entry, function_source, records, relations, context)
   end
 
   local observed = {}
@@ -1760,6 +1926,7 @@ local function extend_call_core(context, scans_by_label, source_refs, records, r
     end
   end
   apply_edge_shapes(builder)
+  add_generated_artifact(records, relations, context)
 end
 
 local function canonicalize(records, relations)
@@ -2211,6 +2378,20 @@ function M.materialize(projection, fail)
     correlation_fail(fail, "Semantic index has no valid static projection", "projection")
   end
   return thaw(projection)
+end
+
+-- Package-private corruption probes used by the exact staged/generated suite.
+function M._validate_staged_authority_for_testing(entry, fail)
+  validate_staged_authority(entry, { fail = fail })
+  return true
+end
+
+function M._validate_generated_plan_for_testing(logical_name, compiled, entry, plan, fail)
+  return validate_generated_plan({
+    logical_name = logical_name,
+    outcome = { compiled = compiled, entry = entry, generated_plan = plan },
+    fail = fail,
+  })
 end
 
 return M

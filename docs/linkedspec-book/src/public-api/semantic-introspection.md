@@ -2064,8 +2064,8 @@ generated-v2 input then validates contract, format, caller logical identity, com
 order, and the unique selected entry row. The projector does not invoke the plan builder or emitter, infer a
 family, execute native/generated code, or retain generated Lua implementation text.
 
-Implementation remains in the existing private static projector. `.10.7.4.1` now owns typed core 18/16 and a focused
-dual-ABI core suite; `.10.7.4.2` owns staged/generated completion to 22/25 and corruption/no-execution proof;
+Implementation remains in the existing private static projector. `.10.7.4.1` owns typed core 18/16 and a focused
+dual-ABI core suite; `.10.7.4.2` now completes staged/generated 22/25 with corruption/no-execution proof;
 `.10.7.4.3` is a no-change committed-owner closeout. The outward fence excludes caller paths, host/metatable
 identity, source and sidecar maps, AST/ActionIR, compiled regex, descriptors, implementation source, loaders,
 executors, sinks, trace/observation state, environment, clock, and randomness. No public query, observation API,
@@ -2090,8 +2090,22 @@ counts stay 379/122/64/122 per ABI. Complete Lua passes package `1..177`, PUC pr
 proof; primary 5x2x66, Unicode 10/10, and all six governance ledgers remain exact. Canonical proof passes Rust
 admission 1/1 in 77.99 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, containment/moved-root execution,
 reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. No public accessor/query, runtime observation,
-staged/generated role, generated format, rollout, or native admission moves. Completion `.10.7.4.2` is next after
-the clean typed-core commit.
+staged/generated role, generated format, rollout, or native admission moves.
+
+Staged/generated `.10.7.4.2` completes the same private projection at exactly 22 records, 25 relations, and ten
+source refs. Native payload and typed parse-job version, function/body/path/text/span, fixed/variadic signature,
+parser/top/result/failure/diagnostic policy, and retained result must agree before three neutral staged records are
+emitted. The exact three function `contains` relations and five `consumes` / `produces` / `lowered_from` /
+`staged_by` directions preserve provenance without exporting sidecars, body AST, or ActionIR.
+
+The retained generated-v2 plan must match contract, format, logical source identity, complete compiled rule order,
+and one selected entry row. Only that row's existing family leaves as one handler-plan artifact plus
+`generated_as`. The projector imports no source emitter, rebuilds no plan, emits or loads no source, and invokes no
+target/generated runtime, trace, diagnostic, or observation path. Core/full focused proof is 136/97 assertions per
+ABI; complete Lua remains 379/122/64/122 plus package `1..177`, PUC primary 66x2, corpus 105, and storage proof.
+Canonical proof passes Rust admission 1/1 in 77.92 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds,
+containment/moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616 seconds. No-change
+recomposition `.10.7.4.3` follows the clean implementation commit.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2515,6 +2529,9 @@ The dependency order is:
 | `.10.7.3.2.1` | Lua remaining static targets and isolation | complete; privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, clean canonical closeout |
 | `.10.7.3.3` | Lua committed static-owner recomposition | complete; dual-ABI four-suite composition and full signoff close `.10.7.3` without public query or replacement code |
 | `.10.7.4.0` | Lua calls/staging/generated authority audit | complete plan; exact 6/6 -> 18/16 -> 22/25 split, typed/staged/generated authorities, source/host/privacy/no-execution fences frozen before code |
+| `.10.7.4.1` | Lua typed function/helper/call/binding core | complete; exact private non-staged 18/16/10, focused 136 per ABI, no promotion |
+| `.10.7.4.2` | Lua staged/generated calls completion | complete implementation; exact private full 22/25/10, focused 97 per ABI, no emitter or promotion |
+| `.10.7.4.3` | Lua calls/staging/generated composition closeout | next; committed-owner recomposition with no replacement code or promotion |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

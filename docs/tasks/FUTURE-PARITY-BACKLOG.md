@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-27` (Lua typed call core `.10.7.4.1` is complete at exact private 18/16/10;
-  staged/generated completion `.10.7.4.2` is next with rollout 5/9 and admission 4/6)
+- Last updated: `2026-07-28` (Lua staged/generated completion `.10.7.4.2` is complete at exact private 22/25/10;
+  no-change committed-owner recomposition `.10.7.4.3` is next with rollout 5/9 and admission 4/6)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12052,9 +12052,55 @@ before implementation.
     - [x] **LOCKSTEP / COMMIT** — Focused dual-ABI, complete Lua/matrices/ledgers/canonical/docs/doctrines/storage
       proofs pass; live docs and book agree; commit is clean, brief is zero, `.2` is next, and no push occurs.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.4.2`
-    Status: `pending`
+    Status: `done`
     Goal: Complete staged payload/job/result plus selected generated-plan provenance at exact 22/25.
     Depends on: `.10.7.4.1`
+    Acceptance: From clean typed-core commit `86873ee9`, extend only the existing package-private
+      `lua/src/linkedspec/semantic_static_projection.lua` owner plus focused
+      `lua/test/semantic_index_call_staged_generated_test.lua` and its dual-ABI runner/canonical-input registration.
+      Validate each accepted function's native staged payload and typed `StagedParseJob` against its exact
+      definition, body text/span, parent `functions/<zero-based-index>/body_source` path, fixed or variadic
+      signature, `actionir-body.spec` / `action_block` parser intent, `replace_field/body_ast` result policy,
+      `fail` failure policy, `function_body` diagnostic owner, and retained body result. Project distinct neutral
+      payload, parse-job, and result records with exact contains/consumes/produces/lowered-from/staged-by directions.
+      Validate the retained generated-v2 contract, format, logical source identity, complete compiled rule order,
+      and unique selected entry row; project only its neutral handler family plus `generated_as`. Deep-equal the
+      complete governed target at 22 records / 25 relations / ten source refs. Reject corrupt payload/job fields,
+      missing body result, plan contract/format/identity/order/duplicate-or-missing selection, and unrecognized
+      selected row. Preserve recursive freeze, detached plain JSON, host/path/sidecar/AST/ActionIR/generated-
+      implementation privacy, and zero plan-builder/emitter/loader/executor/runtime/trace/observation use during
+      projection. Add no root export, public record/query surface, generated-format change, semantic ledger move,
+      runtime observation, or native admission. Pass focused PUC Lua/LuaJIT, all committed semantic suites and
+      complete Lua, both matrices, all six unchanged ledgers, canonical CI, mdBook/Knowledge Map/memory/task/
+      doctrines/diff/storage proof, then commit, clear the brief, verify clean, and continue to `.10.7.4.3`.
+    Verification plan: Compare the private materializer byte-for-byte with the complete governed `calls` snapshot;
+      lock all four added records and nine relation ids/directions. Use package-private typed validation seams and
+      retained-authority rebuilds to mutate every native sidecar/plan boundary without replacing the parser,
+      compiler, plan builder, or emitter. Scan the implementation for forbidden execution/generated-source/host
+      dependencies, run all commands through repository-local wrappers, and do not push before cadence 300.
+    Verification: **PASS 2026-07-28.** From clean typed-core commit `86873ee9`, the existing private projector now
+      deep-equals the complete governed target at 22 records / 25 relations / ten source refs. Core and complete
+      focused suites pass 136 and 97 assertions respectively on PUC Lua and LuaJIT; source/outcome/graph/remaining
+      stay 379/122/64/122 per ABI, complete Lua remains package `1..177`, PUC primary is 66x2, corpus is 105,
+      primary parity is 5x2x66, and Unicode parity is 10/10. Semantic/Unicode/capability/generated/language/public
+      ledgers remain exact. Canonical CI passes six doctrines, Rust admission 1/1 in 77.92s, Dart 1/1, Julia
+      416/416 in 27.3s, containment/moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 616s.
+      mdBook, Knowledge Map 725/5,777, memory, task metadata, doctrines, diff, syntax, and storage proof pass. No
+      emitter, plan rebuild, execution, public query, observation, format, rollout, or admission move occurs;
+      no-change recomposition `.10.7.4.3` is the clean next leaf.
+
+    #### Acceptance Checklist
+
+    - [x] **DISTINCT STAGED ROLES** — Validate native payload/job/result authority and emit separate neutral
+      payload, parse-job, and result records with exact facts, owner, source, order, status, and value shapes.
+    - [x] **DIRECTED PROVENANCE** — Add three function contains relations plus exact consumes, produces, two
+      lowered-from, and staged-by directions without exposing native sidecars, body AST, or typed ActionIR.
+    - [x] **SELECTED GENERATED PLAN** — Validate retained generated-v2 contract/format/logical identity/full rule
+      order and unique selected entry family; emit one handler-plan artifact plus `generated_as` only.
+    - [x] **CORRUPTION / PRIVACY / NO EXECUTION** — Reject sidecar/body/plan drift and prove recursive freeze,
+      detached plain host-free data, no implementation/source leakage, and no plan build/emit/load/execute route.
+    - [x] **EXACT 22/25 / LOCKSTEP** — Deep-equal 22 records / 25 relations / ten refs on both ABIs; pass complete
+      Lua, matrices, ledgers, canonical/docs/doctrines/storage, commit cleanly, and hand off `.10.7.4.3` without push.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.4.3`
     Status: `pending`
     Goal: Recompose the committed calls/staging/generated target and close `.10.7.4` without exports.
@@ -14404,9 +14450,10 @@ and all four remaining targets in implementation child `.10.7.3.2.1.1` are compl
 `PROJECT-DATA-SSD-ROOTING.6` and final canonical closeout `.10.7.3.2.1.2` close `.10.7.3.2`; no-change committed-
 owner recomposition `.10.7.3.3` passes every complete gate and closes `.10.7.3`. Behavior-free calls/staging/
 generated authority audit `.10.7.4.0` now freezes exact 6/6 -> 18/16 -> 22/25 ownership and all typed/staged/
-generated/source/privacy authorities without changing behavior. Typed core `.10.7.4.1` now implements the exact
-private 18/16/10 subset on both ABIs with 128 focused assertions each; staged/generated completion `.10.7.4.2` is
-next. Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
+generated/source/privacy authorities without changing behavior. Typed core `.10.7.4.1` implements exact private
+18/16/10, and staged/generated `.10.7.4.2` now completes exact private 22/25/10 on both ABIs with 136 core plus 97
+complete focused assertions each. No-change committed-owner recomposition `.10.7.4.3` is next. Semantic 6/20/89
+remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -15032,7 +15079,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.4 | `FUTURE-PARITY-BACKLOG.10.7.4` | `pending` | Complete private functions/helpers/calls/bindings plus staged/generated provenance. |
 | 74.6.4.0 | `FUTURE-PARITY-BACKLOG.10.7.4.0` | `done` | Exact 6/6 -> 18/16 -> 22/25 authority, source, staging, generated-plan, privacy, and implementation split are frozen without behavior change. |
 | 74.6.4.1 | `FUTURE-PARITY-BACKLOG.10.7.4.1` | `done` | Exact private typed functions/helpers/calls/binding core is 18 records / 16 relations / ten source refs on both ABIs. |
-| 74.6.4.2 | `FUTURE-PARITY-BACKLOG.10.7.4.2` | `pending` | Complete staged payload/job/result and selected generated-plan provenance at 22/25. |
+| 74.6.4.2 | `FUTURE-PARITY-BACKLOG.10.7.4.2` | `done` | Exact private staged payload/job/result plus selected generated-plan provenance completes 22/25/10 on both ABIs. |
 | 74.6.4.3 | `FUTURE-PARITY-BACKLOG.10.7.4.3` | `pending` | Recompose and close committed call/staging/generated targets without exports. |
 | 74.6.5 | `FUTURE-PARITY-BACKLOG.10.7.5` | `pending` | Expose one immutable typed/raw-neutral query evaluator over detached private projection data. |
 | 74.6.5.0 | `FUTURE-PARITY-BACKLOG.10.7.5.0` | `pending` | Freeze public vocabulary, 19 hashes, 26 malformed boundaries, and query dependency order. |
@@ -15722,6 +15769,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.4.2` | Clean base `86873ee9`; exact governed private 22 records/25 relations/ten source refs; focused core/full 136/97 assertions per ABI; retained source/outcome/graph/remaining 379/122/64/122 and package `1..177` per ABI; PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 10/10; unchanged semantic/Unicode/capability/generated/language/public ledgers; canonical six doctrines, Rust 1/1 in 77.92s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 616s; mdBook/KM 725/5,777/memory/task/doctrines/diff/syntax/storage proof. | PASS. Native staged sidecars and retained plan authority yield exact normalized provenance without emitter, plan rebuild, execution, leakage, public API, observation, format, rollout, or admission movement; no-change `.10.7.4.3` follows the clean commit. |
 | `2026-07-27` | `FUTURE-PARITY-BACKLOG.10.7.4.1` | Clean base `ec6b1608`; exact governed private 18 records/16 relations/ten source refs; focused 128 assertions per ABI; retained source/outcome/graph/remaining 379/122/64/122 and package `1..177` per ABI; PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 10/10; unchanged semantic/Unicode/capability/generated/language/public ledgers; canonical six doctrines, Rust 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.4s, containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 622s; mdBook/KM 724/5,767/memory/task/doctrines/diff/syntax/zero-run proof. | PASS. Typed retained-body/edge authority, global call preorder, exact Unicode occurrence identity, registry-before-helper resolution, fixed/rest signatures, conservative shapes, recursive freeze/detachment, privacy, host, and no-execution fences are exact; staged/generated `.10.7.4.2` follows the clean commit. |
 | `2026-07-27` | `FUTURE-PARITY-BACKLOG.10.7.4.0` | Clean base `700e8fdb`; exact 22 records/25 relations, nine source ranges, static 6/6 -> typed 18/16 -> staged/generated 22/25 authority; no production/test/fixture/contract/API/query/observation/format/ledger change; Lua source/outcome/graph/remaining 379/122/64/122 and package `1..177` per ABI; PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 10/10; unchanged semantic/Unicode/capability/generated/language/public ledgers; canonical six doctrines, Rust 1/1 in 78.85s, Dart 1/1, Julia 416/416 in 28.4s, containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 647s; mdBook/KM 724/5,766/memory/task/doctrines/diff/zero-run proof. | PASS. Merged authored, typed/staged, source-correlation, resolution/shape, retained-plan, privacy, host, and no-execution authorities plus `.1-.3` dependency order are frozen; typed core `.10.7.4.1` follows the clean audit commit. |
 | `2026-07-27` | `FUTURE-PARITY-BACKLOG.10.7.3.3` | Clean base `2a6f24c4`; no production/test/fixture/contract/API/query/observation/format/ledger change; committed Lua source/outcome/graph/remaining 379/122/64/122 and package `1..177` per ABI; PUC primary 66x2/corpus 105; primary 5x2x66; Unicode 10/10; unchanged semantic/Unicode/capability/generated/language/public ledgers; canonical six doctrines, Rust 1/1 in 78.12s, Dart 1/1, Julia 416/416 in 27.4s, corrected containment, moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 649s; final mdBook/KM/memory/task/doctrines/diff/zero-run proof. | PASS. The four committed suites recompose exact graph 12/14/7, privacy 4/3 + 4/3, failed 6/4, runtime-static 7/8, lifecycle/clone/fallback/public/host fences without replacement code or semantic promotion; parent `.10.7.3` closes and behavior-free `.10.7.4.0` is next. |
@@ -15996,6 +16044,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.4.2` | `FUTURE-PARITY-BACKLOG.10.7.4.2 - complete Lua call provenance` | Exact private full 22/25/10 staged/generated provenance, core/full 136/97 assertions per ABI, complete signoff, and clean handoff to no-change `.10.7.4.3`. |
 | `FUTURE-PARITY-BACKLOG.10.7.4.1` | `FUTURE-PARITY-BACKLOG.10.7.4.1 - add Lua typed call core` | Exact private 18/16/10 typed call projection, 128 focused assertions per ABI, complete signoff, and clean handoff to staged/generated `.10.7.4.2`. |
 | `FUTURE-PARITY-BACKLOG.10.7.4.0` | `FUTURE-PARITY-BACKLOG.10.7.4.0 - freeze Lua call projection` | Behavior-free exact 6/6 -> 18/16 -> 22/25 authority/source/privacy plan, complete dual-ABI and cross-backend signoff, and clean handoff to typed core `.10.7.4.1`. |
 | `FUTURE-PARITY-BACKLOG.10.7.3.3` | `FUTURE-PARITY-BACKLOG.10.7.3.3 - close Lua static projection` | No-change committed-owner recomposition: dual-ABI 379/122/64/122 plus package 177, both matrices, six ledgers, canonical Rust 78.12s + Dart 1/1 + Julia 416/27.4s + reference primary 66x2 + Phase 0 1,031/649s; closes `.10.7.3` and hands off `.10.7.4.0`. |
@@ -16249,6 +16298,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Staged/generated completion `.10.7.4.2` extends the existing private Lua projector to the exact
+  complete 22 records / 25 relations / ten source refs. Validated native payload/job/result authority yields three
+  normalized staged artifacts and eight exact provenance relations; validated retained generated-v2 contract,
+  format, logical identity, full rule order, and unique selection yield one handler-plan artifact plus
+  `generated_as`. Core/full focused 136/97 pass per ABI; complete Lua 379/122/64/122 plus package 177, primary
+  5x2x66, Unicode 10/10, and six ledgers remain exact. Canonical passes Rust 77.92s, Dart 1/1, Julia 416/27.3s,
+  containment/moved-root proof, reference primary 66x2, and Phase 0 1,031/616s; mdBook/KM 725/5,777 and fast gates
+  pass. No emitter/plan rebuild/execution/API/observation/format/rollout/admission move occurs; no-change `.10.7.4.3`
+  follows the clean commit.
 
 - `2026-07-27`: Typed call core `.10.7.4.1` extends the existing private Lua projector to the exact governed
   non-staged 18 records / 16 relations / ten source refs. Retained typed function-body and edge ActionIR,

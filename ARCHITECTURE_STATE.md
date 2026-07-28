@@ -4,7 +4,16 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-27`
+- Last refreshed: `2026-07-28`
+- `2026-07-28` Lua staged/generated semantic provenance: `FUTURE-PARITY-BACKLOG.10.7.4.2` completes the existing
+  private projector at exact 22 records / 25 relations / ten source refs on PUC Lua and LuaJIT. It validates native
+  payload/job/result version, identity, path, text/span, fixed/variadic signature, parser/top/result/failure intent,
+  then emits only normalized ADR-0050 records and exact directions. Retained generated-v2 contract, format,
+  logical identity, complete compiled order, and unique selected row yield one handler-plan family without an
+  emitter or plan rebuild. Core/full focused proof is 136/97 assertions per ABI; complete Lua remains
+  379/122/64/122 plus package `1..177`, PUC primary 66x2, corpus 105, and storage proof. Canonical proof adds Rust
+  77.92s, Dart 1/1, Julia 416/27.3s, reference primary 66x2, and Phase 0 1,031/616s. It adds no root export, query,
+  observation, generated format, rollout, or admission; no-change `.10.7.4.3` is next.
 - `2026-07-27` Lua typed semantic-call core: `FUTURE-PARITY-BACKLOG.10.7.4.1` extends the existing private static
   projector with the exact governed non-staged `calls_and_staging` subset at 18 records, 16 relations, and ten
   source refs. The owner validates merged authored definitions, exact staged-body source/job/JSON equality before

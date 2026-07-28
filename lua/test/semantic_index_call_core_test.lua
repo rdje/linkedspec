@@ -65,6 +65,27 @@ local function expected_core(model)
   return result
 end
 
+local function core_subset(projection)
+  local result = detached(projection)
+  local records = json.array()
+  local retained = {}
+  for _, item in ipairs(result.records) do
+    if item.kind ~= "staged_artifact" and item.kind ~= "generated_artifact" then
+      records[#records + 1] = item
+      retained[item.id] = true
+    end
+  end
+  local relations = json.array()
+  for _, item in ipairs(result.relations) do
+    if retained[item.from_id] and retained[item.to_id] then
+      relations[#relations + 1] = item
+    end
+  end
+  result.records = records
+  result.relations = relations
+  return result
+end
+
 local function materialize_sources(projection)
   local result = detached(projection)
   local source_refs = result.source_refs
@@ -156,7 +177,8 @@ local fixture_root = "capability_conformance/semantic_introspection/"
 local model = json.decode(read_file("capability_conformance/semantic_introspection_model.json"))
 local source = read_file(fixture_root .. "calls_and_staging.spec")
 local index = call_index(source)
-local projection = semantic_index_module._static_projection_for_testing(index)
+local full_projection = semantic_index_module._static_projection_for_testing(index)
+local projection = core_subset(full_projection)
 local actual = materialize_sources(projection)
 local expected = materialize_sources(expected_core(model))
 

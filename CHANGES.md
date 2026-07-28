@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.4.2 — complete Lua call provenance
+
+Completed the existing package-private Lua calls projector at the exact governed 22-record / 25-relation / ten-
+source-ref target. Three distinct staged artifacts now describe normalized function payload, parse-job, and result
+provenance; three function `contains` relations and five directed staging relations preserve their exact roles.
+One generated handler-plan artifact retains only the already-selected `default` family plus `generated_as`.
+
+Projection validates native payload version/function/body/path/text/span and fixed or variadic signature fields,
+then independently validates the typed parse job's parser, top rule, result, failure, and diagnostic policies and
+requires the retained body result. The typed-core proof already gates that result on exact ActionIR JSON equality
+and resolved contracts. Generated provenance validates the retained v2 contract, format, logical source identity,
+complete compiled order, and unique selected entry row. It imports no source emitter, rebuilds no plan, emits or
+loads no Lua source, and invokes no target/generated runtime, trace, diagnostic, or observation route.
+
+The non-staged subset passes 136 focused assertions and the complete staged/generated projection passes 97 on
+both PUC Lua and LuaJIT. Complete Lua remains source/outcome/graph/remaining 379/122/64/122, package `1..177`, PUC
+primary 66x2, corpus 105, and repository-storage proof. Corruption coverage rejects payload/job/result and retained
+plan contract/format/identity/order/selection drift; fresh detached plain JSON, recursive freeze, host/path and
+sidecar/AST/ActionIR/generated-implementation privacy remain exact. Canonical proof passes all six doctrines, Rust
+1/1 in 77.92s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root execution, reference primary 66x2, and
+Phase 0 1,031/1,031 in 616s. No public API/query, runtime observation, generated format, semantic rollout, or
+native admission moves; no-change recomposition `.10.7.4.3` is next.
+
 ## 2026-07-27 — FUTURE-PARITY-BACKLOG.10.7.4.1 — add Lua typed call core
 
 Extended the existing package-private Lua static semantic projector with the exact governed non-staged

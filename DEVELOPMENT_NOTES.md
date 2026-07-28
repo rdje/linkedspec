@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.4.2` — retained staging and generation are provenance inputs, not
+  executable dependencies): the static projector can complete the neutral staged/generated graph using only the
+  already-retained function payload/job/result and generated plan. It validates native fields against accepted
+  typed owners, then emits deliberately normalized ADR-0050 records. Requiring the source emitter merely to learn
+  constants or rebuild a plan would widen a private projection into generation machinery and make no-execution
+  proof weaker; exact contract/format/order/selection validation on the retained plan is sufficient.
+
+  The ordering matters. Typed-core reconstruction first proves staged body JSON equality and ActionIR contracts;
+  staged records then describe that already-accepted provenance rather than blessing an untyped sidecar. The plan
+  record similarly retains only the selected row's existing family. All four records and nine relations enter
+  before the projector's existing canonicalize/freeze seam, so the same recursive immutability and detached-copy
+  boundary covers static, typed, staged, and generated facts together on both Lua ABIs.
+
 - 2026-07-27 (`FUTURE-PARITY-BACKLOG.10.7.4.1` — typed traversal and authored occurrence ownership are distinct
   authorities): Lua's typed function and edge ActionIR determines which expressions are semantic calls and their
   deterministic outer-before-inner order. It cannot by itself determine the neutral authored span because edge

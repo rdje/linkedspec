@@ -24,10 +24,10 @@ answers:
   - "where is the Lua semantic calls staging and generated projection plan"
   - "is Lua staged function body_ast typed ActionIR authority"
   - "which Lua generated plan owns semantic provenance"
-date: 2026-07-27
-status: current authority map; static foundation closed and typed call core implemented at exact 18/16
+date: 2026-07-28
+status: current authority map; exact private calls/staging/generated projection implemented at 22/25
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority and .10.7.4.1 implements the exact private typed 18/16 core."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, and .10.7.4.2 completes exact private 22/25 provenance."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
@@ -79,14 +79,17 @@ reparsed typed function-body ActionIR after staged JSON equality, compiled edge 
 source map, and retained immutable generated-v2 plan are the authorities. Staged `body_ast` is an integrity witness,
 not typed authority; local edge ActionIR offsets cannot be added to authored member starts; registered functions
 resolve before the narrow helper table; and construction may not execute target or generated code. `.10.7.4.1`
-now implements that exact typed core in the existing private projector and proves 18 records, 16 relations, ten
-source refs, and 128 focused assertions on each Lua ABI. It changes no public API, query, observation, generated
-format, rollout, admission, or semantic ledger; staged/generated completion remains `.10.7.4.2`. Related facts:
+implements that exact typed core in the existing private projector. `.10.7.4.2` now validates native payload/job/
+result state plus retained plan contract/format/identity/order/selection and proves the complete 22 records, 25
+relations, ten source refs, 136 core assertions, and 97 staged/generated assertions on each Lua ABI. It changes no
+public API, query, observation, generated format, rollout, admission, or semantic ledger; no-change recomposition
+remains `.10.7.4.3`. Related facts:
 [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
 [[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]],
-[[lua-semantic-static-projection-plan]], and [[lua-semantic-call-staged-projection-plan]]. Static planning fixes
+[[lua-semantic-static-projection-plan]], [[lua-semantic-call-staged-projection-plan]], and
+[[lua-semantic-staged-generated-projection]]. Static planning fixes
 five exact targets and the parsed-line plus compiled-occurrence correlation rule before projector code: local
 ActionIR offsets and short body-element fragments are not neutral source coordinates, compiler parent matchers are
 not automatically target regex slots, repeated lifecycle markers need occurrence ids, and Lua-native `Default`

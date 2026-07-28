@@ -19,11 +19,11 @@ answers:
   - "may Lua semantic call construction execute target or generated code"
   - "does the Lua calls plan add a public semantic query"
   - "where is the Lua typed semantic call core implemented and tested"
-date: 2026-07-27
-status: current private typed core implemented at exact 18 records and 16 relations; staged completion pending
+date: 2026-07-28
+status: current exact private 22-record and 25-relation projection implemented on both Lua ABIs
 tags: [lua, luajit, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.0-.1; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_core_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/user_function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; done; rg -n 'authored_definitions|body_ast|generated_plan|compiled_rule_order' lua/src/linkedspec lua/test"
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.0-.2; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_core_test.lua; lua/test/semantic_index_call_staged_generated_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/user_function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_staged_generated_test.lua; done; rg -n 'authored_definitions|body_ast|generated_plan|compiled_rule_order' lua/src/linkedspec lua/test"
 ---
 
 Behavior-free leaf `.10.7.4.0` freezes an additive private projection over Lua's closed static semantic foundation.
@@ -123,14 +123,25 @@ runtime observation, trace dependency, generated-format change, rollout movement
 output excludes caller paths, host/metatable identity, source/sidecar maps, AST/ActionIR, compiled regex,
 descriptors, implementation source, loaders/executors, sinks, environment, clock, and randomness.
 
-Implementation proof preserves source/outcome/graph/remaining at 379/122/64/122 per ABI and passes complete Lua
+Typed-core proof preserves source/outcome/graph/remaining at 379/122/64/122 per ABI and passes complete Lua
 package `1..177`, PUC primary 66x2, corpus 105, primary 5x2x66, Unicode 10/10, and all six unchanged ledgers. It
 also passes canonical Rust admission 1/1 in 77.99s, Dart 1/1, Julia 416/416 in 27.4s, containment/moved-root proof,
 reference primary 66x2, and Phase 0 1,031/1,031 in 622s; Knowledge Map generation is 724 facts / 5,767 keys. It adds
 no public API/query, runtime observation, staged/generated role, generated-format change, rollout movement, or
-native admission. Staged/generated completion `.10.7.4.2` is the next owner after the clean `.1` commit.
+native admission.
+
+The `.2` implementation now validates exact native payload version/function/body/path/text/span and fixed or
+variadic signature fields, matching typed parse-job parser/top/result/failure/diagnostic intent, and the retained
+body result before neutralization. It appends distinct payload/job/result records, three function `contains`
+relations, and the exact five staging directions. Retained generated-plan contract/format/logical identity/full
+compiled order/unique selected row yield only one handler-plan record and `generated_as`; the projector imports no
+emitter, rebuilds no plan, and emits or executes no source. Full deep equality is 22 records / 25 relations / ten
+source refs, with 97 focused assertions per ABI; no-change `.10.7.4.3` is next after the clean `.2` commit.
+Canonical proof passes Rust admission 1/1 in 77.92s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root
+execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616s; Knowledge Map is 725/5,777.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-source-outcome-plan]],
 [[lua-semantic-static-projection-plan]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-staged-artifact-schema]], [[semantic-introspection-generated-plan-authority]],
-[[julia-semantic-call-staged-projection-plan]], and [[rust-semantic-call-staged-projection]].
+[[lua-semantic-staged-generated-projection]], [[julia-semantic-call-staged-projection-plan]], and
+[[rust-semantic-call-staged-projection]].
