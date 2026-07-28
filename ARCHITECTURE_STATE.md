@@ -5,6 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-28`
+- `2026-07-28` Lua semantic runtime-observation authority freeze: behavior-free
+  `FUTURE-PARITY-BACKLOG.10.7.6.0` maps the only accepted-slot seam after match/ordered identity and before
+  `accept_match`, where position must come from the accepted match's Unicode-scalar end rather than the old
+  context cursor. The final seam is immediately after a normally returned `RuntimeParseResult`; selection/
+  execution/exit throws omit it. One optional invocation-local protected typed event callback remains distinct
+  from trace and diagnostics, returns before allocation/conversion/hash when absent, and preserves exact thrown
+  Lua value identity through native and generated-specific carriers. Direct/loaded/reconstructed/generated-plan/
+  emitted/traced routes reuse the same seams on PUC Lua and LuaJIT. Detached derivation consumes only a fresh
+  static projection, validates rule/edge/slot/`selects_regex` topology, derives shapes from static records, and
+  targets the twentieth digest without query execution. Implementation is shared digest/direct capture `.1`,
+  immutable derivation `.2`, generated/emitted/isolated propagation `.3`, and no-change closeout `.4`; this audit
+  changes no production/test/fixture/contract/API/runtime/generated format/rollout/admission/ledger behavior.
+  Complete proof passes Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66, Unicode 10/10, all six
+  ledgers, canonical CI through Phase 0 1,031/1,031 in 624 seconds, mdBook, and Knowledge Map 730/5,838; typed
+  direct capture `.10.7.6.1` follows the clean audit commit.
 - `2026-07-28` Lua immutable-query authority freeze: behavior-free
   `FUTURE-PARITY-BACKLOG.10.7.5.0` proves the one fresh detached private projection is sufficient for all 19
   static semantic responses. It freezes exact root/index vocabulary, 26 malformed raw-neutral labels, explicit

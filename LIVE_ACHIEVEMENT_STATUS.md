@@ -8,14 +8,33 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.6.0` — after the clean immutable-query parent closeout, audit and freeze exact typed
-  Lua runtime-observation vocabulary, emission seams, callback identity, route propagation, detached derivation,
-  authority denial, and `.1-.4` dependency order before behavior code.
+- `FUTURE-PARITY-BACKLOG.10.7.6.1` — after the clean behavior-free audit commit, add optional invocation-local
+  protected typed slot/result capture, shared package-internal digest ownership, exact callback-value propagation,
+  and direct/loaded/reconstructed/traced-convenience proof before detached derivation.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.0 — freeze Lua runtime observation authority**
+  (behavior-free route/seam/callback/derivation audit from clean immutable-query closeout `abe75fe4`).
+
+  **Result:** No existing Lua semantic observation API is present. Read-only PUC Lua/LuaJIT probes lock direct,
+  loaded, normalized-AST reconstructed, generated-plan, traced, fresh emitted, and emitted-traced route topology.
+  The plan fixes slot capture after accepted match and ordered identity but before `accept_match`, final capture
+  after successful `RuntimeParseResult`, Unicode-scalar match end, absent-sink early return, exact arbitrary
+  callback-value propagation, shared portable SHA-256, separate native/generated semantic carriers, protected
+  events, detached static-only derivation, twentieth digest, and `.1-.4` order. No production/test/fixture/
+  contract/API/format/runtime/rollout/admission/ledger behavior changes.
+
+  **Proof:** Lua semantic 1,492 and diagnostics 119 pass per ABI; complete Lua passes package 177/177 per ABI,
+  PUC primary 66x2, corpus 105/105, and storage. Primary 5x2x66, Unicode 10/10, and all six ledgers pass. Canonical
+  passes six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.3s, containment, moved-root proof,
+  reference primary 66x2, and Phase 0 1,031/1,031 in 624s. mdBook, Knowledge Map 730/5,838, memory/task/doctrines/
+  diff/syntax/storage, and exact 12,972-KiB book plus empty-run cleanup pass; no Lua adapter remains and 246
+  reusable Rust cache artifacts are retained. Cadence advances to 53/300 with no push; typed direct capture
+  `.10.7.6.1` follows the clean audit commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.4 — close immutable Lua static query**
   (no-change committed-owner recomposition from clean public-query commit `65cb13da`).
 

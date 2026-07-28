@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.0 — freeze Lua runtime observation authority
+
+Completed the behavior-free Lua runtime-observation audit from clean immutable-query closeout `abe75fe4`.
+Read-only PUC Lua and LuaJIT probes lock direct, loaded, normalized-AST reconstructed, generated-plan, traced,
+fresh emitted, and emitted-traced routes at the same `["A","B"]` result; result-bearing native routes finish at
+byte/scalar offset 2 and traced routes emit exactly two existing selected-slot marks. A Unicode probe establishes
+that accepted match end is byte 3 but scalar 2 for `xé`.
+
+The durable authority now fixes slot capture after accepted match and ordered identity but before `accept_match`,
+using the match's scalar end rather than the old context cursor. Final capture follows successful
+`RuntimeParseResult` construction. It also fixes absent-sink early return, exact arbitrary callback-value
+propagation, package-internal reuse of the existing portable SHA-256, separate native/generated semantic carriers,
+protected event vocabulary, detached static-only observed-index derivation, exact input identity and twentieth
+response digest, and the `.1-.4` implementation order. No production, test, fixture, contract, public API,
+generated format, runtime behavior, rollout, admission, or governed ledger changed.
+
+Existing Lua semantic proof passes 1,492 assertions per ABI, diagnostic callback proof 119 per ABI, package
+177/177 per ABI, PUC primary 66x2, corpus 105/105, and storage. Primary 5x2x66, Unicode 10/10, and all six ledgers
+pass unchanged. Canonical CI passes six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.3s,
+containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 624s. mdBook, Knowledge Map
+730/5,838, memory/task/doctrines/diff/syntax/storage, and exact cleanup pass. Cleanup removes only the 12,972-KiB
+rendered book and one proven-empty managed-run directory; no Lua adapter remains and 246 reusable Rust artifacts
+are retained. Typed direct capture `.10.7.6.1` follows the clean audit commit.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.4 — close immutable Lua static query
 
 Recomposed the seven committed Lua semantic owners from clean public-query commit `65cb13da` without adding or

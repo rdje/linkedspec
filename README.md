@@ -1409,7 +1409,14 @@ content migration exists yet.
   promotion. Closeout signoff passes the 5-backend x 2-environment x 66-command primary matrix, Unicode 10/10,
   all six unchanged ledgers, the complete elevated local gate (Rust admission 1/1 in 77.93 s, Dart 1/1, Julia
   416/416 in 27.4 s, containment, moved-root, reference 66x2, and Phase 0 1,031/1,031 in 622 s), the mdBook build,
-  and Knowledge Map 729 facts / 5,824 keys. Behavior-free runtime-observation audit `.10.7.6.0` is next.
+  and Knowledge Map 729 facts / 5,824 keys. Fully verified behavior-free runtime-observation audit `.10.7.6.0`
+  freezes the
+  accepted match-end and normally returned result seams, Unicode-scalar/input identity, no-sink fence, exact
+  callback-value propagation, direct/loaded/reconstructed/generated/emitted/traced dual-ABI topology, detached
+  static-only derivation, twentieth digest, and omission-safe `.1-.4` order without changing behavior or
+  governance. Audit signoff passes Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66, Unicode 10/10,
+  all six ledgers, canonical CI through Phase 0 1,031/1,031 in 624 seconds, mdBook, and Knowledge Map 730/5,838.
+  Typed direct capture `.10.7.6.1` follows the clean audit commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

@@ -129,5 +129,6 @@ behavior-free observation audit `.10.7.6.0` follows.
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-source-ceiling-boundary]],
 [[lua-semantic-introspection-authority-map]], [[lua-semantic-call-staged-projection-plan]],
 [[lua-semantic-query-kernel]], [[lua-semantic-query-traversal]], [[lua-semantic-query-public-api]],
+[[lua-semantic-runtime-observation-authority-map]],
 [[perl-semantic-query-evaluator]], [[rust-semantic-query-evaluator]],
 [[dart-semantic-query-authority-map]], and [[julia-semantic-query-authority-map]].

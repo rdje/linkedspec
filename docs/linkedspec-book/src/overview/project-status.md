@@ -4,29 +4,21 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
-Lua semantic introspection is currently private and additive. Unicode labels, opaque source/outcome, and all five
-static projection targets are composition-closed on PUC Lua and LuaJIT. Behavior-free audit `.10.7.4.0` now fixes
-the calls/staging/generated contract before code: committed static 6 records / 6 relations, typed non-staged core
-18/16, and full staged/generated target 22/25. It also fixes merged authored order, staged JSON equality before
-typed function ActionIR authority, occurrence-safe Unicode call correlation, registered-function-before-helper
-resolution, retained generated-v2 plan authority, and strict no-execution/privacy fences. Typed core `.10.7.4.1`
-now implements the exact private 18-record/16-relation/10-source-ref subset on both Lua ABIs, including calls,
-helpers, one binding, signatures, conservative shapes, source identity, decision/explanations, recursive freeze,
-and detached host-free materialization. Staged/generated `.10.7.4.2` now validates exact native payload/job/result
-state and retained generated-plan contract/format/identity/order/selection, then completes exact private 22/25/10
-on both ABIs without an emitter or execution dependency. Core/full focused proof is 136/97 assertions per ABI;
-complete Lua remains package `1..177`, PUC primary 66x2, corpus 105, and storage proof. No-change `.10.7.4.3`
-recomposes all six committed suites at exact focused 920 per ABI under complete gates and composition-closes parent
-`.10.7.4` without replacement code or promotion. Behavior-free immutable-query authority audit `.10.7.5.0` now
-freezes one detached projection-only evaluator, exact root/index vocabulary, 19 complete static hashes, 26 raw
-boundaries, dual-ABI JSON/numeric policy, query-time source redaction, traversal/pages/budgets/costs, and a private
-`.1` -> private `.2` -> complete public `.3` -> closeout `.4` order. No behavior moves; private immutable non-
-traversal `.10.7.5.1` is next, while runtime observation, rollout, and native admission remain later work. Audit
-proof passes focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, all six ledgers, and canonical Rust
-81.33 seconds + Dart 1/1 + Julia 416/416 in 29.1 seconds + containment/moved-root + reference 66x2 + Phase 0
-1,031/1,031 in 648 seconds. Calls closeout canonical proof
-passes Rust admission 1/1 in 81.19 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment/moved-root
-execution, reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds.
+Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
+source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
+raw `query_neutral` match all 19 static response digests plus 26 malformed-request boundaries. Seven committed
+suites recompose at 1,492 assertions per ABI; complete Lua remains package 177/177, PUC primary 66x2, corpus
+105/105, and repository-volume storage. No-change `.10.7.5.4` closes that parent without replacement behavior or
+promotion.
+
+Behavior-free runtime-observation audit `.10.7.6.0` is complete. It freezes accepted match-end capture before
+`accept_match`, normally returned final-result capture after `RuntimeParseResult`, Unicode-scalar positions, reuse
+of the existing portable SHA-256 authority, no-sink early returns, exact callback-value passthrough, every direct/
+loaded/reconstructed/generated/emitted/traced dual-ABI route, detached static-only observed-index derivation, and
+the twentieth digest. Lua still exposes no semantic observation API at this audit boundary. The neutral oracle
+remains 6 groups / 20 responses / 89 rejected mutations, rollout 5/9, and admission 4/6. Complete signoff passes
+Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66, Unicode 10/10, six ledgers, canonical CI through
+Phase 0 1,031/1,031, mdBook, and Knowledge Map 730/5,838; typed capture `.10.7.6.1` follows the clean audit commit.
 
 ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable

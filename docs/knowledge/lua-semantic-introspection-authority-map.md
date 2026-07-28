@@ -28,7 +28,7 @@ answers:
   - "what authority may the Lua semantic query evaluator consume"
   - "how must Lua semantic query represent JSON and integers across both ABIs"
 date: 2026-07-28
-status: current authority map; private 22/25 projection and public 19-hash static query evaluator implemented
+status: current authority map; public 19-hash static query implemented and runtime-observation authority frozen
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
 evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners. Behavior-free .10.7.5.0 freezes one detached projection-only evaluator, exact Lua vocabulary, 19 static hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and .1-.4 dependency order. .10.7.5.1 implements protected recursive values and the exact private nine-hash non-traversal kernel; .10.7.5.2 completes all 19 static hashes with private traversal/pages/budgets/costs; .10.7.5.3 exposes the complete public typed/raw-neutral API and validates all 26 malformed boundaries on both ABIs."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
@@ -66,13 +66,17 @@ the existing trace layer demonstrates weak-key private storage, while neutral ar
 copying and canonical key order. Portable output must never expose a metatable name, `table: 0x...` identity,
 compiled object, path, regex userdata, AST, ActionIR, callback, or trace emitter.
 
-There is no typed semantic observation sink. The exact accepted-slot seam is `trace_regex_slot_selected` after
-ordered identity validation; trace detail strings are not typed semantic evidence. Final success belongs after the
-top-level `RuntimeParseResult` is built, using its Unicode character cursor offset and input identity. Capture must
-be optional, invocation-local, and allocation-free when absent. Direct, loaded, reconstructed, generated-plan,
-emitted, traced, and fresh PUC Lua/LuaJIT hosts must converge on those seams. Generated execution currently
-translates broad callback failures into `GeneratedSourceException`, so a semantic-callback marker must rethrow the
-exact caller error before generic translation, independently of diagnostic and trace sinks.
+There is no typed semantic observation sink at the `.10.7.6.0` audit boundary. The exact accepted-slot seam is
+`trace_regex_slot_selected` after match and ordered identity validation but before `accept_match`; the old context
+cursor is not authoritative, so the typed event must use the accepted match's Unicode-scalar `char_end()`. Trace
+detail strings are not typed semantic evidence. Final success belongs immediately after the top-level
+`RuntimeParseResult` is built, using its Unicode character cursor offset and exact input identity. Capture must be
+optional, invocation-local, and return before event allocation/scalar conversion/hashing when absent. Direct,
+loaded, reconstructed, generated-plan, emitted, traced, and fresh PUC Lua/LuaJIT hosts converge on those seams.
+Generated execution currently translates broad callback failures into `GeneratedSourceError`, so a semantic-only
+callback carrier must rethrow the exact caller value before generic translation, independently of diagnostic and
+trace sinks. The final digest reuses one package-internal extraction of the existing portable SHA-256 authority.
+Retrieve [[lua-semantic-runtime-observation-authority-map]] before implementing capture or derivation.
 
 Implementation is dependency-ordered under `FUTURE-PARITY-BACKLOG.10.7`: Unicode prerequisite `.1`; opaque
 source/outcome `.2`; private static `.3`; calls/staging/generated `.4`; immutable typed/raw-neutral query `.5`;

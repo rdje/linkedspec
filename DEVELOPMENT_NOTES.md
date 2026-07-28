@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.0` — accepted match end, not the current cursor, owns Lua slot
+  observation): Both action-edge selection paths locate a match and validate the compiled ordered slot identity
+  before calling `accept_match`. At that point the context cursor still names the pre-match position, so a semantic
+  event derived from it would be wrong even though the later parse result is correct. The accepted match already
+  owns the portable boundary: `char_end()` converts its byte end to the required Unicode-scalar offset. Keeping
+  capture before state mutation also ensures rejected identity or callback failure cannot partially accept a hit.
+
+  Observation is an invocation-local semantic side channel, not trace or diagnostics. When absent, emission must
+  return before event allocation, scalar conversion, or hashing. When present, arbitrary Lua callback failures
+  require semantic-only native and generated carriers so the exact thrown value survives trace cleanup and the
+  generated helper's broad error translation. Final identity reuses one package-internal extraction of the
+  existing dual-ABI pure-Lua SHA-256 owner. Observed-index derivation then consumes only protected events and one
+  fresh detached static projection; topology and shapes remain static facts, and query stays execution-free.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.4` — immutable-query closeout owns recomposition, not a second
   implementation): The committed seven-suite boundary is sufficient to composition-close Lua static query at
   focused 1,492 assertions per ABI. Re-running it from clean public commit `65cb13da` proves that the public API,

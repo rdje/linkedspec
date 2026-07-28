@@ -882,6 +882,24 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_staged_generated_test.lua
   done
   ```
+- **LUA RUNTIME-OBSERVATION PREFLIGHT:** retrieve [[lua-semantic-runtime-observation-authority-map]] before
+  changing Lua execution or observed-index projection. The accepted-slot seam is after match and ordered identity
+  but before `accept_match`; use `one:char_end()`, not the still-old `ctx.cursor_byte`. Final observation follows
+  successful `RuntimeParseResult` construction. Do not parse `lua_runtime:regex_slot_selected` text or reuse
+  diagnostic output. Keep `semantic_observation_sink` invocation-local, return before allocation/scalar conversion/
+  SHA when absent, reuse the package-internal portable digest authority, and preserve exact arbitrary callback
+  values through separate native and generated semantic carriers. Direct/loaded/reconstructed/generated-plan/
+  emitted/traced PUC Lua and LuaJIT routes must remain result/cursor/trace/diagnostic equivalent. Derivation accepts
+  only typed events and one fresh detached static projection, then targets exact `runtime_events` digest
+  `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887` without execution. Audit baseline:
+
+  ```bash
+  bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+  bash tools/run_lua_local.sh
+  ```
+
+  The committed implementation order is direct capture `.10.7.6.1`, detached derivation `.2`, generated/emitted/
+  isolated propagation `.3`, and no-change closeout `.4`; admission remains `.10.7.7`.
 - **SEMANTIC SOURCE CEILING BOUNDARY:** retrieve [[semantic-source-ceiling-boundary]] before changing private
   source retention. ADR `0049` applies ceilings when query records leave the native API: the private projection
   retains complete authoritative refs, the snapshot fixes ceiling/digest policy, and the query source projector

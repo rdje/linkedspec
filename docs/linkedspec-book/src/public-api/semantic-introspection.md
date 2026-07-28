@@ -40,8 +40,9 @@ The distinction matters:
 - `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - Lua `linkedspec.semantic_index(source, options)` now exposes the strict source map plus detached compiled-or-
   failed foundation identically on PUC Lua/LuaJIT; four root query helpers plus index `capabilities`, typed `query`,
-  and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries, while
-  runtime observation and backend admission remain later Lua leaves; and
+  and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries; the
+  behavior-free runtime-observation audit now freezes exact capture/derivation/routes before implementation, while
+  the observation API and backend admission remain later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -2260,6 +2261,99 @@ proof, reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Parent `.
 composition-closed. Runtime observation remains absent and belongs to the behavior-free authority/route audit in
 `.10.7.6.0`; native admission remains `.10.7.7`.
 
+#### Frozen Lua runtime-observation authority plan
+
+Leaf `.10.7.6.0` is behavior-free: Lua still exposes no `semantic_observation_sink`, typed semantic event, or
+`with_execution_observation` method. The audit instead freezes the exact authority that `.10.7.6.1-.3` must add
+without deriving semantics from trace text, diagnostic output, or a host result value.
+
+The current interpreter has two authoritative seams:
+
+| Semantic fact | Exact Lua seam | Required position/identity |
+| --- | --- | --- |
+| selected regex slot | after a match and ordered slot identity succeed, before `accept_match(...)` mutates runtime state | `one:char_end()` plus `rule.label` and every target rule/authored zero-based index from `compiled_regex_slot_identities_for(...)` |
+| completed entry result | immediately after a normally returned `RuntimeParseResult` is constructed | selected entry label, `cursor_char_offset`, and SHA-256 of the exact input bytes |
+
+The first distinction is important for Unicode and ordering. At the slot seam `ctx.cursor_byte` is still the old
+cursor. On both PUC Lua and LuaJIT, a direct probe of pattern `é` over `xé` reports byte end 3 but Unicode-scalar
+end 2. A semantic event must use the latter. The existing `lua_runtime:regex_slot_selected` high-trace mark is
+emitted at the same structural decision, but its formatted text is not a typed event and cannot be parsed back
+into semantic authority.
+
+The future protected event vocabulary is fixed by
+`linkedspec-semantic-execution-observation-v1`. Every event has the same fields; inapplicable fields are null in
+its detached JSON projection:
+
+```json
+[
+  {
+    "contract_id": "linkedspec-semantic-execution-observation-v1",
+    "event_kind": "regex_slot_selected",
+    "rule_label": "Top",
+    "target_rule": "Top",
+    "regex_index": 0,
+    "position": 1,
+    "input_identity": null,
+    "status": null
+  },
+  {
+    "contract_id": "linkedspec-semantic-execution-observation-v1",
+    "event_kind": "regex_slot_selected",
+    "rule_label": "Top",
+    "target_rule": "Top",
+    "regex_index": 1,
+    "position": 2,
+    "input_identity": null,
+    "status": null
+  },
+  {
+    "contract_id": "linkedspec-semantic-execution-observation-v1",
+    "event_kind": "rule_result",
+    "rule_label": "Top",
+    "target_rule": null,
+    "regex_index": null,
+    "position": 2,
+    "input_identity": "input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece",
+    "status": "succeeded"
+  }
+]
+```
+
+A normally returned parse is a succeeded invocation even when `matched` is false, so it receives one final
+`rule_result`. Entry-selection and execution throws plus `RuntimeExitNow` do not. A callback failure stops before
+any later event and escapes as the exact Lua value supplied by the caller. Native execution therefore needs a
+semantic-only failure carrier around the callback. Generated helpers need a second semantic-only carrier before
+their broad `GeneratedSourceError` translation, parallel to but distinct from the existing diagnostic-output
+carrier; otherwise a caller-thrown table or an existing runtime/generated error could be misclassified.
+
+No-sink execution must return before semantic event allocation, scalar conversion, or input hashing. Final input
+identity will reuse one package-internal extraction of Lua's existing pure-Lua, Lua-5.1-compatible SHA-256
+authority; it must not shell out, require an optional native digest module, or carry a duplicate implementation.
+Observation remains independent of trace and `diagnostic_sink`, and adding it may not change result values,
+cursors, trace bytes/events, diagnostics, failure behavior, generated-source v2/format 2, or the minimal
+`{label, family}` plan.
+
+Read-only route probes already establish the adapter topology on both Lua ABIs. Direct, loaded, normalized-AST
+reconstructed, generated-plan, generated-plan traced, freshly loaded emitted, and emitted-traced execution all
+return `["A","B"]` for the governed 73-byte `runtime.spec` and three-byte `ab\n` input. Native result envelopes
+finish at byte/scalar offset 2. Direct traced, generated traced, and emitted traced routes each produce exactly two
+existing selected-slot marks. These are topology observations only; there is still no semantic sink at this leaf.
+
+After capture, `index:with_execution_observation(events)` will validate exact typed handles against one fresh
+detached static projection. Each slot must map from its executing rule through an owned edge and `selects_regex`
+relation to the named target slot; the one succeeded selected-entry result must be last. Shapes and source evidence
+come only from static records. The method returns a new immutable snapshot with canonical `execution:0`, ordered
+events, and `observed_as` relations while leaving the base static. It cannot parse, compile, execute, hash new
+input, install a sink, enable trace, read a path, or inspect a host result. The derived `runtime_events` query must
+match digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+
+Implementation remains omission-safe: `.1` adds shared digest ownership plus typed direct/loaded/reconstructed
+capture; `.2` adds strict detached derivation and the twentieth digest; `.3` propagates generated/emitted/traced
+and isolated dual-ABI routes with exact callback identity; `.4` recomposes committed owners without changing
+format, rollout, or admission. At the audit boundary, the unchanged seven semantic suites pass 1,492 assertions
+per ABI, diagnostic callback proof passes 119 per ABI, package proof is 177/177 per ABI, and the neutral oracle
+remains 6 groups / 20 responses / 89 rejected mutations at rollout 5/9 and admission 4/6.
+
 #### Lua private immutable query kernel (historical dependency boundary)
 
 Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
@@ -2778,6 +2872,9 @@ The dependency order is:
 | `.10.7.5.0` | Lua immutable-query authority audit | complete behavior-free plan; one detached authority, exact vocabulary, 19 hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and `.1-.4` order frozen |
 | `.10.7.5.1` | Lua private immutable non-traversal query kernel | implemented; protected recursive protocol values, nine exact hashes, new 159/focused 1,080 per ABI, no public query name |
 | `.10.7.5.2` | Lua private traversal, paging, budgets, and costs | implemented; all 19 static hashes, focused 283/1,204 per ABI, no public exposure |
+| `.10.7.5.3` | Lua public typed/raw-neutral static query | complete; all 19 hashes and 26 malformed boundaries, query 571/focused 1,492 per ABI |
+| `.10.7.5.4` | Lua immutable static-query composition closeout | complete; committed focused 1,492 plus full signoff closes `.10.7.5` without replacement code or promotion |
+| `.10.7.6.0` | Lua runtime-observation authority audit | complete behavior-free plan; exact seams/routes/no-sink/callback/derivation/twentieth-digest policy frozen |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
