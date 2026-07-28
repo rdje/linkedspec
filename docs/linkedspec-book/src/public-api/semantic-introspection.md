@@ -2066,7 +2066,7 @@ family, execute native/generated code, or retain generated Lua implementation te
 
 Implementation remains in the existing private static projector. `.10.7.4.1` owns typed core 18/16 and a focused
 dual-ABI core suite; `.10.7.4.2` now completes staged/generated 22/25 with corruption/no-execution proof;
-`.10.7.4.3` is a no-change committed-owner closeout. The outward fence excludes caller paths, host/metatable
+`.10.7.4.3` is the no-change committed-owner closeout. The outward fence excludes caller paths, host/metatable
 identity, source and sidecar maps, AST/ActionIR, compiled regex, descriptors, implementation source, loaders,
 executors, sinks, trace/observation state, environment, clock, and randomness. No public query, observation API,
 generated format, rollout, or native admission moves in this plan. The unchanged source/outcome/graph/remaining
@@ -2104,8 +2104,14 @@ and one selected entry row. Only that row's existing family leaves as one handle
 target/generated runtime, trace, diagnostic, or observation path. Core/full focused proof is 136/97 assertions per
 ABI; complete Lua remains 379/122/64/122 plus package `1..177`, PUC primary 66x2, corpus 105, and storage proof.
 Canonical proof passes Rust admission 1/1 in 77.92 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds,
-containment/moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616 seconds. No-change
-recomposition `.10.7.4.3` follows the clean implementation commit.
+containment/moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616 seconds.
+
+Composition closeout `.10.7.4.3` reruns the six committed source, outcome, graph, remaining-static, call-core, and
+staged/generated suites unchanged at exact focused 920 assertions on each Lua ABI. Complete Lua, primary 5x2x66,
+Unicode 10/10, all six unchanged ledgers, and canonical Rust 81.19 seconds + Dart 1/1 + Julia 416/416 in 29.0
+seconds + reference primary 66x2 + Phase 0 1,031/1,031 in 648 seconds pass. No production/test/fixture/API/query/
+observation/format/ledger file changes. Parent `.10.7.4` is composition-closed and behavior-free immutable-query
+authority audit `.10.7.5.0` follows.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2531,7 +2537,8 @@ The dependency order is:
 | `.10.7.4.0` | Lua calls/staging/generated authority audit | complete plan; exact 6/6 -> 18/16 -> 22/25 split, typed/staged/generated authorities, source/host/privacy/no-execution fences frozen before code |
 | `.10.7.4.1` | Lua typed function/helper/call/binding core | complete; exact private non-staged 18/16/10, focused 136 per ABI, no promotion |
 | `.10.7.4.2` | Lua staged/generated calls completion | complete implementation; exact private full 22/25/10, focused 97 per ABI, no emitter or promotion |
-| `.10.7.4.3` | Lua calls/staging/generated composition closeout | next; committed-owner recomposition with no replacement code or promotion |
+| `.10.7.4.3` | Lua calls/staging/generated composition closeout | complete; six committed suites recompose at focused 920 per ABI and close `.10.7.4` with no replacement code or promotion |
+| `.10.7.5.0` | Lua immutable-query authority audit | next; freeze detached authority, public vocabulary, 19 static hashes, 26 malformed boundaries, and dependency order without behavior change |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

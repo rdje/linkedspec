@@ -20,9 +20,9 @@ answers:
   - "does the Lua calls plan add a public semantic query"
   - "where is the Lua typed semantic call core implemented and tested"
 date: 2026-07-28
-status: current exact private 22-record and 25-relation projection implemented on both Lua ABIs
+status: composition-closed exact private 22-record and 25-relation projection on both Lua ABIs
 tags: [lua, luajit, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.0-.2; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_core_test.lua; lua/test/semantic_index_call_staged_generated_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/user_function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.0-.3; capability_conformance/semantic_introspection_model.json snapshot calls; docs/decisions/0050-semantic-introspection-staged-artifact-records.md; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_core_test.lua; lua/test/semantic_index_call_staged_generated_test.lua; lua/src/linkedspec/semantic_compilation_outcome.lua; lua/src/linkedspec/spec_parser.lua; lua/src/linkedspec/action_ast.lua; lua/src/linkedspec/action_parser.lua; lua/src/linkedspec/action_contracts.lua; lua/src/linkedspec/user_function_registry.lua; lua/src/linkedspec/staged_parser.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/generated_source.lua; docs/knowledge/semantic-introspection-staged-artifact-schema.md; docs/knowledge/semantic-introspection-generated-plan-authority.md
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_staged_generated_test.lua; done; rg -n 'authored_definitions|body_ast|generated_plan|compiled_rule_order' lua/src/linkedspec lua/test"
 ---
 
@@ -136,9 +136,15 @@ body result before neutralization. It appends distinct payload/job/result record
 relations, and the exact five staging directions. Retained generated-plan contract/format/logical identity/full
 compiled order/unique selected row yield only one handler-plan record and `generated_as`; the projector imports no
 emitter, rebuilds no plan, and emits or executes no source. Full deep equality is 22 records / 25 relations / ten
-source refs, with 97 focused assertions per ABI; no-change `.10.7.4.3` is next after the clean `.2` commit.
+source refs, with 97 focused assertions per ABI.
 Canonical proof passes Rust admission 1/1 in 77.92s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root
 execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616s; Knowledge Map is 725/5,777.
+
+No-change `.10.7.4.3` now recomposes the six committed source/outcome/graph/remaining/core/staged suites at exact
+focused 920 per ABI. Complete Lua, primary 5x2x66, Unicode 10/10, every unchanged ledger, and canonical Rust
+81.19s + Dart 1/1 + Julia 416/29.0s + reference primary 66x2 + Phase 0 1,031/648s pass without a production/test/
+fixture/API/query/observation/format/ledger change. Parent `.10.7.4` is composition-closed; behavior-free immutable-
+query authority audit `.10.7.5.0` follows.
 
 See [[lua-semantic-introspection-authority-map]], [[lua-semantic-source-outcome-plan]],
 [[lua-semantic-static-projection-plan]], [[semantic-introspection-neutral-contract]],

@@ -842,7 +842,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   bounded scanner, resolve registered functions before the narrow helper table, infer shapes conservatively, and
   execute neither target nor generated code. `.10.7.4.1` implements exact typed 18/16; `.2` now validates native
   staged sidecars plus retained generated-plan identity/order/selection and completes exact 22/25/10 without an
-  emitter dependency. `.3` is no-change recomposition. Run the focused owners through repository storage routing:
+  emitter dependency. `.3` now recomposes all six committed owners at exact focused 920 per ABI and closes parent
+  `.10.7.4` without replacement code or promotion; behavior-free query audit `.10.7.5.0` follows. Run the focused
+  owners through repository storage routing:
 
   ```bash
   for runtime in puc luajit; do

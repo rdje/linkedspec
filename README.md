@@ -1388,8 +1388,9 @@ content migration exists yet.
   exact calls, helpers, binding, source ranges, signatures, shapes, decision/explanations, recursive freeze, and
   detachment. Staged/generated `.10.7.4.2` now validates native payload/job/result and retained plan contract/
   format/identity/order/selection, completing exact private 22/25/10 on both ABIs without emitter, execution, or
-  leakage. No-change recomposition `.10.7.4.3` is next; public query, formats, rollout, and admission remain
-  unchanged.
+  leakage. No-change recomposition `.10.7.4.3` now passes all six committed suites at exact focused 920 per ABI
+  and closes parent `.10.7.4` without replacement code or promotion. Behavior-free immutable-query authority audit
+  `.10.7.5.0` is next; public query, formats, rollout, and admission remain unchanged.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

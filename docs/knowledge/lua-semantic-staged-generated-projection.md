@@ -13,9 +13,9 @@ answers:
   - "which Lua test proves exact staged and generated semantic parity"
   - "what is the next Lua semantic task after staged generated projection"
 date: 2026-07-28
-status: current exact private dual-ABI projection; composition closeout pending
+status: current exact private dual-ABI projection; parent composition-closed
 tags: [lua, luajit, semantic-introspection, staged-parsing, generated-source, provenance, privacy]
-evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.4.2; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_staged_generated_test.lua; capability_conformance/semantic_introspection_model.json snapshot calls
+evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.4.2-.3; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_call_staged_generated_test.lua; capability_conformance/semantic_introspection_model.json snapshot calls
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_staged_generated_test.lua; done"
 ---
 
@@ -41,12 +41,16 @@ provenance on each ABI. The complete Lua gate remains source/outcome/graph/remai
 `1..177`, PUC primary 66x2, corpus 105, and repository-storage proof. The staged suite deep-equals all 22/25,
 locks every added id/fact/direction, rejects corrupted native sidecars and retained plan identity/order/selection,
 and proves fresh detached plain JSON, private-surface omission, host/path denial, and no execution. No public query,
-runtime observation, generated-format change, semantic rollout, or native admission moves; no-change recomposition
-`.10.7.4.3` follows the clean implementation commit.
+runtime observation, generated-format change, semantic rollout, or native admission moves.
 
 Canonical proof passes all six doctrines, Rust admission 1/1 in 77.92s, Dart 1/1, Julia 416/416 in 27.3s,
 containment/moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 616s. The Knowledge Map is
 725 facts / 5,777 question keys.
+
+No-change `.10.7.4.3` recomposes the six committed semantic suites at exact focused 920 per ABI and passes complete
+Lua, primary 5x2x66, Unicode 10/10, all six unchanged ledgers, and canonical Rust 81.19s + Dart 1/1 + Julia
+416/29.0s + reference primary 66x2 + Phase 0 1,031/648s. It changes no production/test/fixture/API/query/
+observation/format/ledger file, closes parent `.10.7.4`, and hands off to behavior-free query audit `.10.7.5.0`.
 
 See [[lua-semantic-call-staged-projection-plan]], [[lua-semantic-introspection-authority-map]],
 [[semantic-introspection-staged-artifact-schema]], [[semantic-introspection-generated-plan-authority]], and

@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.4.3 — close Lua call projection
+
+Composition-closed the private Lua calls/staging/generated target by rerunning its six committed source, outcome,
+graph, remaining-static, call-core, and staged/generated suites unchanged. Exact focused proof is 920 assertions on
+PUC Lua and 920 on LuaJIT, preserving complete 22 records / 25 relations / ten source refs plus authored Unicode/
+source/call identity, resolution, fixed/rest signatures, conservative shapes, staged/generated directions,
+corruption rejection, recursive freeze, detached plain values, privacy, and no execution or observation.
+
+Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105, and repository-storage proof. Primary
+parity passes 5x2x66, Unicode parity passes 10/10, and all six governance ledgers remain exact. Canonical CI passes
+all six doctrines, Rust admission 1/1 in 81.19 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment and
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds. This slice changes no production,
+test, fixture, contract, API, query, observation, generated format, rollout, admission, or ledger file. Parent
+`.10.7.4` is closed; behavior-free immutable-query authority audit `.10.7.5.0` is next.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.4.2 — complete Lua call provenance
 
 Completed the existing package-private Lua calls projector at the exact governed 22-record / 25-relation / ten-

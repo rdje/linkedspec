@@ -5,8 +5,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.4.2` — exact private Lua staged/generated provenance complete.
-- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.4.2 - complete Lua call provenance` (this commit).
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.4.3` — private Lua calls/staging parent composition-closed.
+- latest_commit: `FUTURE-PARITY-BACKLOG.10.7.4.3 - close Lua call projection` (this commit).
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -40,21 +40,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: Lua static projection is closed; typed `.10.7.4.1` plus staged/generated `.10.7.4.2`
-  now implement exact private 22/25/10 from retained typed/sidecar/plan authority with freeze/privacy/no execution.
-  No-change committed-owner recomposition `.10.7.4.3` is next; governance stays 6/20/89 at 5/9 + 4/6.
+- current_semantic_frontier: Lua calls/staging/generated `.10.7.4` is composition-closed at exact private 22/25/10
+  after six committed suites recompose at focused 920 per ABI with freeze/privacy/no execution. Behavior-free
+  immutable-query authority/vocabulary/hash/boundary audit `.10.7.5.0` is next; governance stays 6/20/89 at 5/9 + 4/6.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: Lua core/full 136/97 plus source/outcome/graph/remaining 379/122/64/122 and package 177 pass per
-  ABI; PUC primary 66x2/corpus 105; primary 660/660, Unicode 10/10, six ledgers exact. Canonical passes Rust 77.92s,
-  Dart 1/1, Julia 416/27.3s, reference primary 66x2, containment/moved-root, Phase 0 1,031/616s; KM 725/5,777.
+- current_signoff: Lua six-suite focused 920 and package 177 pass per ABI; PUC primary 66x2/corpus 105; primary
+  660/660, Unicode 10/10, six ledgers exact. Canonical passes Rust 81.19s, Dart 1/1, Julia 416/29.0s, reference
+  primary 66x2, containment/moved-root, Phase 0 1,031/648s; Knowledge Map remains 725/5,777.
 - latest_bootstrap_read: 2026-07-27 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 46/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 47/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: recompose and close committed Lua call provenance `.10.7.4.3`; no in-flight work or push.
+- blockers: none. next: audit Lua immutable-query authority/vocabulary/hashes/boundaries `.10.7.5.0`; no push.

@@ -25,9 +25,9 @@ answers:
   - "is Lua staged function body_ast typed ActionIR authority"
   - "which Lua generated plan owns semantic provenance"
 date: 2026-07-28
-status: current authority map; exact private calls/staging/generated projection implemented at 22/25
+status: current authority map; private calls/staging/generated parent composition-closed at 22/25
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, and .10.7.4.2 completes exact private 22/25 provenance."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
@@ -82,8 +82,9 @@ resolve before the narrow helper table; and construction may not execute target 
 implements that exact typed core in the existing private projector. `.10.7.4.2` now validates native payload/job/
 result state plus retained plan contract/format/identity/order/selection and proves the complete 22 records, 25
 relations, ten source refs, 136 core assertions, and 97 staged/generated assertions on each Lua ABI. It changes no
-public API, query, observation, generated format, rollout, admission, or semantic ledger; no-change recomposition
-remains `.10.7.4.3`. Related facts:
+public API, query, observation, generated format, rollout, admission, or semantic ledger. No-change `.10.7.4.3`
+recomposes all six committed suites at focused 920 per ABI and closes parent `.10.7.4`; behavior-free immutable-
+query authority audit `.10.7.5.0` is next. Related facts:
 [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and

@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.4.3` — composition closure must reuse the committed proof topology):
+  Once the source, outcome, graph, remaining-static, call-core, and staged/generated owners are independently exact,
+  the parent closes by rerunning those six suites—not by adding an aggregate test or second projector. Their exact
+  focused sum, 920 assertions per ABI, proves the one constructor and private 22/25/10 target compose while keeping
+  each responsibility reviewable at its committed boundary.
+
+  The broader gates establish the cross-owner fences: complete Lua, both matrices, six unchanged ledgers, and
+  canonical CI all pass without a production, test, fixture, API, query, observation, format, or ledger change.
+  This is the clean semantic handoff from private construction to behavior-free public-query authority planning;
+  it is not public admission and does not justify copying expectations into a new closeout owner.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.4.2` — retained staging and generation are provenance inputs, not
   executable dependencies): the static projector can complete the neutral staged/generated graph using only the
   already-retained function payload/job/result and generated plan. It validates native fields against accepted
