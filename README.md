@@ -1420,11 +1420,17 @@ content migration exists yet.
   routes at new 121/focused 1,614 assertions per ABI. Immutable derivation `.10.7.6.2` now adds
   `index:with_execution_observation(events)`: one detached static materialization plus strict event/topology
   validation yields a recursively frozen observed index without parse/compile/execute/hash/path/host authority.
-  Typed and raw-neutral queries retain the exact twentieth `runtime_events` digest; new derivation proof is 269
-  and all nine semantic suites total 1,884 assertions per ABI. Generated/emitted propagation remains fenced for
-  `.10.7.6.3`; generated-source format, semantic rollout, native admission, and all ledgers remain unchanged.
-  Full signoff passes primary 5x2x66, Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in
-  654 seconds, mdBook, and Knowledge Map 732/5,863.
+  Typed and raw-neutral queries retain the exact twentieth `runtime_events` digest; derivation proof is 269.
+  Generated/emitted propagation `.10.7.6.3` now carries the same invocation-local sink through public generated-
+  plan direct/traced helpers and fresh emitted direct/traced modules, including isolated PUC Lua and LuaJIT hosts.
+  Its generated-only callback carrier preserves arbitrary caller failures outside broad generated-error
+  translation while native slot/result capture, derivation, results, trace, diagnostics, and no-sink work fences
+  remain unchanged. New route proof is 80 and all ten semantic suites total 1,964 assertions per ABI; complete Lua
+  passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and 15-owner same-volume storage. Emitted bytes
+  remain deterministic generated-source v2/format 2 with the minimal `{label, family}` plan and no serialized
+  observation state; semantic rollout, native admission, and all ledgers remain unchanged. Full signoff passes
+  primary 5x2x66, Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in 667 seconds, mdBook,
+  and Knowledge Map 733/5,874.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

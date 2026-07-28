@@ -857,12 +857,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_query_kernel_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_runtime_observation_native_test.lua
     bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_runtime_projection_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_runtime_observation_generated_routes_test.lua
   done
   ```
 
-  The current baseline is source/outcome/graph/remaining/core/staged/query/native-observation/runtime-projection
-  382/122/64/122/136/97/571/121/269, or 1,884 assertions on each ABI. Do not invoke native Lua tests without the
-  wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local managed storage.
+  The current baseline is source/outcome/graph/remaining/core/staged/query/native-observation/runtime-projection/
+  generated-routes 382/122/64/122/136/97/571/121/269/80, or 1,964 assertions on each ABI. Retrieve
+  [[lua-semantic-runtime-observation-generated-routes]] before changing generated observation propagation. Do not
+  invoke native Lua tests without the wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local
+  managed storage.
 - **LUA IMMUTABLE-QUERY PREFLIGHT:** retrieve [[lua-semantic-query-authority-map]] before query work. Behavior-free
   `.10.7.5.0` freezes exactly one fresh detached private projection per request, 19 complete static response hashes,
   26 malformed raw-neutral labels, and the public spellings

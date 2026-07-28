@@ -8,13 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No behavior leaf is active at this durable handoff. `FUTURE-PARITY-BACKLOG.10.7.6.3` is the next eligible leaf
-  after the clean `.10.7.6.2` commit; it will propagate observations through generated/emitted/traced routes.
+- No behavior leaf is active at this durable handoff. `FUTURE-PARITY-BACKLOG.10.7.6.4` is the next eligible leaf
+  after the clean `.10.7.6.3` commit; it will recompose committed observation owners and close parent `.10.7.6`
+  without replacement code, format change, rollout, or admission promotion.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.3 — propagate Lua generated runtime semantics**
+  (generated/emitted route implementation from clean immutable-derivation commit `ca6d635e`).
+
+  **Result:** Public generated direct/traced and fresh emitted direct/traced routes, including repository-local
+  isolated hosts, now carry the same invocation-local semantic sink on PUC Lua and LuaJIT. A separate generated-
+  semantic carrier preserves arbitrary callback identity before broad generated-error translation; exact marker
+  fences prevent accidental propagation. Native capture/derivation, results, trace, diagnostics, no-sink work,
+  failure/exit finals, deterministic v2/format 2 emitted bytes, and minimal plans remain unchanged.
+
+  **Proof:** New 80 plus ten-suite focused 1,964 pass per ABI. Complete Lua passes package 177/177 per ABI, PUC
+  primary 66x2, corpus 105/105, and 15-owner storage; primary passes 5x2x66; Unicode 10/10 and all six ledgers pass.
+  Canonical passes six doctrines, Rust 1/1 in 82.65s, Dart 1/1, Julia 416/416 in 29.5s, containment, moved-root,
+  reference 66x2, and Phase 0 1,031/1,031 in 667s. mdBook, Knowledge Map 733/5,874, memory/task/doctrines/diff/
+  syntax/storage, and exact 13,040-KiB plus empty-run cleanup pass. Cadence advances to 56/300 with no push;
+  no-change composition `.10.7.6.4` follows after the clean commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.2 — derive immutable Lua observed indexes**
   (strict detached derivation from clean native-capture commit `cffc524d`).
 

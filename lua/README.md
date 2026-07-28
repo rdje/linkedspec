@@ -76,7 +76,7 @@ unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
 action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
 governed mark/capture events.
 
-Native semantic observation is a separate invocation-local channel. Pass a function as
+Semantic observation is a separate invocation-local channel. Pass a function as
 `semantic_observation_sink` to `runtime_parse`, `runtime_execute`, or either traced convenience entrypoint:
 
 ```lua
@@ -102,9 +102,33 @@ Entry/execution/`exit_now` failures omit the final event. The final identity is 
 SHA-256 of the exact input bytes. A failing callback stops delivery and its exact Lua error value is rethrown after
 trace cleanup. With no sink, event construction, slot scalar conversion, and input hashing are skipped.
 
-This native capture covers direct, loaded, normalized-AST reconstructed, execute aliases, and traced convenience
-routes on PUC Lua and LuaJIT. Generated-plan and emitted-module observation is deliberately unavailable until its
-dedicated propagation leaf. A completed native event sequence can now derive a separate observed semantic index:
+This capture covers direct, loaded, normalized-AST reconstructed, execute aliases, traced convenience, public
+generated-plan direct/traced, and fresh emitted-module direct/traced routes on PUC Lua and LuaJIT. Generated calls
+use the same options key:
+
+```lua
+local generated_events = {}
+local value = linkedspec.execute_generated_parser_v2(compiled, plan, input, identity, {
+  semantic_observation_sink = function(event)
+    generated_events[#generated_events + 1] = event
+  end,
+})
+
+local emitted = assert((loadstring or load)(emitted_source, "@generated-parser"))()
+local emitted_events = {}
+local emitted_value = emitted.execute(input, {
+  semantic_observation_sink = function(event)
+    emitted_events[#emitted_events + 1] = event
+  end,
+})
+```
+
+The traced generated helper is `execute_generated_parser_with_trace_v2`; emitted modules expose
+`execute_with_trace`. A generated-only private callback carrier preserves exact arbitrary Lua error values outside
+the broad generated-error translator. Emitted source remains deterministic generated-source v2/format 2 with its
+minimal `{label, family}` plan: observation options and events are invocation state and are never serialized.
+
+A completed event sequence from any supported route can derive a separate observed semantic index:
 
 ```lua
 local static_index = linkedspec.semantic_index(source, {

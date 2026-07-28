@@ -14,12 +14,14 @@ answers:
   - "does Lua semantic observation work through generated parsers"
   - "does Lua semantic observation hash input when no sink exists"
 date: 2026-07-28
-status: current native direct capture; observed-index derivation is current and generated propagation remains pending
+status: current native direct capture reused by current observed-index derivation and generated propagation
 tags: [lua, luajit, semantic-introspection, runtime, observation, immutability, callback, trace, diagnostics]
 evidence: lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/init.lua; lua/test/semantic_index_runtime_observation_native_test.lua; FUTURE-PARITY-BACKLOG.10.7.6.1
 reverify:
   - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_observation_native_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_observation_native_test.lua"
+  - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_observation_generated_routes_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_observation_generated_routes_test.lua"
   - "bash tools/run_lua_local.sh"
 ---
 
@@ -28,9 +30,9 @@ reverify:
 Lua native parse/execute calls accept one optional per-invocation `semantic_observation_sink` function. Direct
 engines, loaded engines, normalized-AST reconstructed engines, `runtime_execute`, and both traced convenience
 aliases reuse the same interpreter seam on PUC Lua and LuaJIT. Engines reject the sink as retained configuration.
-Generated-plan and freshly emitted routes deliberately remain unsupported until `.10.7.6.3`; the native runtime
-fences internally marked generated calls before selection so accidental partial propagation cannot precede the
-required generated-only failure carrier.
+Generated-plan and freshly emitted direct/traced routes now reuse this seam through `.10.7.6.3`. The native
+runtime accepts a generated sink only when it is exactly the wrapped callback installed as the private generated
+authorization marker, preserving the earlier fence against accidental or forged partial propagation.
 
 Every event is a protected immutable handle under
 `linkedspec-semantic-execution-observation-v1`. The root package exposes the contract id,
@@ -66,6 +68,7 @@ cleanup removes only the 208-KiB leaf-owned adapter scratch, 13,000-KiB rendered
 no Lua adapter remains and 246 reusable Rust artifacts are retained.
 
 Related facts: [[lua-semantic-runtime-observation-authority-map]],
-[[lua-semantic-runtime-observation-derivation]], [[lua-semantic-query-public-api]],
+[[lua-semantic-runtime-observation-generated-routes]], [[lua-semantic-runtime-observation-derivation]],
+[[lua-semantic-query-public-api]],
 [[lua-runtime-trace-events]], [[lua-diagnostic-output-events]], [[lua-project-data-ssd-storage]],
 [[julia-semantic-runtime-observation-direct-capture]], and [[rust-semantic-runtime-observation]].

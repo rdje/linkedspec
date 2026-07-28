@@ -18,20 +18,24 @@ answers:
   - "which SHA 256 implementation must Lua runtime observation use"
   - "why are Lua semantic observation imports function local"
   - "how many top level locals can the Lua interpreter chunk use"
+  - "how do generated Lua parsers authorize semantic observation sinks"
+  - "does Lua generated semantic observation change emitted source bytes"
 date: 2026-07-28
-status: native typed capture and immutable derivation implemented; generated propagation and composition remain planned
+status: native capture, immutable derivation, and generated/emitted propagation implemented; composition remains planned
 tags: [lua, luajit, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; lua/test/semantic_index_runtime_projection_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.2
+evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; lua/test/semantic_index_runtime_projection_test.lua; lua/test/semantic_index_runtime_observation_generated_routes_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.3
 last_verified: 2026-07-28
 reverify:
   - "rg -n 'trace_regex_slot_selected|accept_match|RuntimeParseResult|diagnostic_output_sink_failure|runtime_parse' lua/src/linkedspec/interpreter.lua"
-  - "rg -n 'GENERATED_DIAGNOSTIC_SINK_FAILURE_MT|execute_generated|function M.execute' lua/src/linkedspec/source_emitter.lua"
+  - "rg -n 'GENERATED_DIAGNOSTIC_SINK_FAILURE_MT|GENERATED_SEMANTIC_SINK_FAILURE_MT|_generated_semantic_observation_sink|execute_generated|function M.execute' lua/src/linkedspec/source_emitter.lua lua/src/linkedspec/interpreter.lua"
   - "rg -n 'byte_offset_to_char_offset|function MatchMethods:char_end' lua/src/linkedspec/matching.lua"
   - "rg -n 'semantic_observation|RuntimeSemanticObservation|with_execution_observation' lua/src lua/test"
   - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_observation_native_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_observation_native_test.lua"
   - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_projection_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_projection_test.lua"
+  - "bash tools/run_lua_project_data.sh puc lua/test/semantic_index_runtime_observation_generated_routes_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/semantic_index_runtime_observation_generated_routes_test.lua"
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
   - "bash tools/run_lua_local.sh"
 ---
@@ -40,16 +44,12 @@ reverify:
 
 ## Current boundary
 
-Lua has no semantic runtime-observation sink at the `.10.7.6.0` audit boundary. The runtime context carries input,
-byte cursor/registers, trace, diagnostic-output callback, generated-plan metadata, and execution stores, but no
-typed semantic channel. The existing high trace topic `lua_runtime:regex_slot_selected` is string observability;
-it has no typed payload and there is no final-result trace topic. Trace text and diagnostic events are therefore
-optional products, not normalized semantic evidence.
-
-Leaf `.10.7.6.1` now implements the native typed channel described below. Direct, loaded, normalized-AST
-reconstructed, execute-alias, and traced convenience routes are current. Generated-plan and emitted propagation
-remain deliberately fenced until `.10.7.6.3`; leaf `.10.7.6.2` now implements the detached observed-index
-derivation described below.
+Lua now has one typed semantic runtime-observation channel on both ABIs. Native direct, loaded, normalized-AST
+reconstructed, execute-alias, and traced convenience routes are implemented by `.10.7.6.1`; detached immutable
+observed-index derivation is implemented by `.10.7.6.2`; public generated-plan direct/traced and freshly emitted
+direct/traced routes, including isolated hosts, are implemented by `.10.7.6.3`. The high trace topic
+`lua_runtime:regex_slot_selected` remains string observability and diagnostic events remain a separate optional
+product. Neither is normalized semantic evidence.
 
 The exact selected-slot call sites are after a regex match exists and any ordered target/index invariant succeeds,
 but before `accept_match(...)` changes cursor, registers, actions, rule-slot events, or lifecycle state. At that
@@ -91,11 +91,8 @@ other or an unrelated runtime failure.
 
 `runtime_parse` is the common native seam. `runtime_execute` aliases it; both traced conveniences clone options
 and delegate to it. `LoadedCompiledSpec:create_engine()` constructs the same runtime engine, and normalized AST
-JSON reconstruction recompiles into that engine. These native routes now carry the sink. Public generated-plan
-direct/traced helpers and freshly loaded emitted modules still have no observation propagation: native runtime
-rejects the sink when internal generated-plan metadata is present. Leaf `.10.7.6.3` must replace that fence with a
-generated-only carrier and exact propagation without changing results, cursors, trace bytes/events, diagnostic
-events, ordinary failures, generated-source v2/format 2, or the minimal `{label, family}` plan.
+JSON reconstruction recompiles into that engine. Public generated-plan helpers and fresh emitted modules now carry
+the same sink through the generated-only authorization and callback carrier described below.
 
 PUC Lua's chunk-wide local-variable limit is a concrete implementation constraint here: `interpreter.lua` was
 already at the 200-local ceiling before this leaf. Adding a module-level observation import or helper made
@@ -103,7 +100,7 @@ already at the 200-local ceiling before this leaf. Adding a module-level observa
 `runtime_parse` and `regex_once`. The closure is created only for an installed sink, preserving the no-sink event/
 slot-scalar work fence without merging semantic ownership into trace or diagnostics.
 
-## Required immutable derivation boundary
+## Implemented immutable derivation boundary
 
 Leaf `.10.7.6.2` adds `index:with_execution_observation(events)`. It accepts a dense caller-retained sequence
 of exact protected event handles, validates contract/kind/nullability, nonnegative portable positions and indices,
@@ -119,6 +116,22 @@ new protected index whose projection sets `has_execution=true`, adds canonical `
 records, and one `observed_as` relation per event. The base remains static and immutable; later sequence/JSON
 mutation cannot change either snapshot. Invalid observation rejects as `semantic_index_invalid_observation` at
 stage `execution_observation`. Query stays projection-only.
+
+## Implemented generated and emitted boundary
+
+Leaf `.10.7.6.3` wraps only a supplied generated semantic sink with `pcall`, raises one protected generated-
+semantic carrier on callback failure, and passes the wrapped function as both the runtime sink and the private
+`_generated_semantic_observation_sink` authorization marker. `runtime_parse` accepts generated observation only
+when those exact function identities match. This replaces the earlier blanket generated fence without letting an
+ordinary caller-provided flag authorize the path. After native cleanup, the generated wrapper unwraps its carrier
+before broad `GeneratedSourceError` translation and restores the exact caller string, table, `nil`, or existing
+runtime error. The diagnostic callback carrier is parallel and cannot be confused with semantic failures.
+
+`execute_generated_parser_v2`, `execute_generated_parser_with_trace_v2`, fresh emitted `execute`, and fresh emitted
+`execute_with_trace` all reuse the native accepted-slot/final-result seams and the same detached derivation. The
+emitted wrappers already forwarded `options`, so their source bytes, generated-source v2/format 2 metadata, and
+minimal `{label, family}` plan remain unchanged. No observation vocabulary, callback, or state is serialized.
+No-sink event/scalar/hash fences and result/cursor/trace/diagnostic behavior remain unchanged.
 
 ## Dependency order
 
@@ -161,9 +174,19 @@ seconds. The mdBook and Knowledge Map 731/5,851 pass. Exact cleanup removes the 
 13,000-KiB rendered book, and one proven-empty run directory; no Lua adapter remains and 246 reusable Rust cache
 artifacts are retained.
 
+The implemented `.10.7.6.2` boundary adds 269 derivation assertions and composes nine semantic owners at 1,884 per
+ABI. The implemented `.10.7.6.3` boundary adds 80 generated-route assertions and composes ten semantic owners at
+1,964 per ABI. Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and the 15-owner
+same-volume storage proof. Cross-backend closeout is recorded by the active task leaf rather than inferred here.
+
+Full `.10.7.6.3` signoff passes primary 5x2x66, Unicode 10/10, all six ledgers, canonical Rust 1/1 in 82.65
+seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, containment/moved-root proof, reference primary 66x2, and Phase 0
+1,031/1,031 in 667 seconds. mdBook and Knowledge Map 733/5,874 pass.
+
 Related facts: [[lua-semantic-introspection-authority-map]], [[lua-semantic-query-authority-map]],
 [[lua-semantic-query-public-api]], [[lua-runtime-matching-state]], [[lua-runtime-rule-interpreter]],
-[[lua-runtime-trace-events]], [[lua-diagnostic-output-events]], [[lua-generated-source-emitter-core]],
+[[lua-runtime-trace-events]], [[lua-diagnostic-output-events]],
+[[lua-semantic-runtime-observation-generated-routes]], [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]], [[julia-semantic-runtime-observation-authority-map]],
 [[dart-semantic-runtime-observation-authority-map]], [[perl-semantic-runtime-observation]],
 [[rust-semantic-runtime-observation]], and [[semantic-introspection-neutral-contract]].

@@ -49,6 +49,7 @@ LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_call_s
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_query_kernel_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_runtime_observation_native_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_runtime_projection_test.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_runtime_observation_generated_routes_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/unicode_rule_label_classifier_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/unicode_rule_label_routes_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/unicode_rule_label_identity_routes_test.lua
@@ -118,6 +119,8 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
   "$LUAJIT_CMD" lua/test/semantic_index_runtime_observation_native_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/semantic_index_runtime_projection_test.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/semantic_index_runtime_observation_generated_routes_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/unicode_rule_label_classifier_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \

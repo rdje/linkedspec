@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.3 — propagate Lua generated runtime observations
+
+Public generated-plan direct/traced helpers and fresh emitted-module direct/traced wrappers now accept the same
+optional invocation-local `semantic_observation_sink` on PUC Lua and LuaJIT. A generated-only private carrier
+wraps the callback before native execution and bypasses broad generated-error translation only for that exact
+wrapped function. Arbitrary callback strings, tables, `nil`, and existing runtime errors therefore retain identity
+after native trace cleanup, while diagnostic callbacks and unrelated generated failures keep their separate paths.
+
+The existing emitted wrappers already forwarded their options table, so emitted bytes remain deterministic
+`linkedspec-generated-source-v2` / format 2 and the plan remains the minimal `{label, family}` projection. No
+semantic option, callback, event vocabulary, or state is serialized. All generated routes reuse the committed
+native accepted-slot/final-result capture and detached observed-index derivation; results, cursors, trace,
+diagnostics, normally-unmatched final delivery, failure/exit omission, reentrancy, and no-sink zero work remain
+unchanged.
+
+The new route owner passes 80 assertions per ABI across public direct/traced, fresh emitted direct/traced, isolated
+hosts, and negative generated-marker fences. All ten semantic owners pass 1,964 assertions per ABI. Complete Lua
+passes package `1..177` on PUC Lua and LuaJIT, PUC primary 66x2, corpus 105/105, and the 15-owner same-volume storage
+oracle. Semantic rollout stays 5/9 and native admission stays 4/6.
+
+Complete signoff passes the five-backend primary matrix at 5x2x66, all ten Unicode-manifest legs, and unchanged
+semantic 6/20/89, capability 80/0/0, generated 10/80/0/0, language 246/105+1/122, and public 59/27/0 ledgers.
+Canonical CI passes six doctrines, Rust admission 1/1 in 82.65 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds,
+containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 667 seconds. mdBook, Knowledge
+Map 733/5,874, memory/task/doctrines/diff/syntax/storage, and exact cleanup pass. Cleanup removes only the
+13,040-KiB rendered book and one proven-empty managed-run directory; no Lua adapter remains, reusable Rust caches
+stay on repository storage, and the 24-hour artifact census retains only governed evidence and active caches.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.2 — derive immutable Lua observed indexes
 
 Added `index:with_execution_observation(events)` on both PUC Lua and LuaJIT. The method accepts only a dense

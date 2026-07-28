@@ -2426,11 +2426,12 @@ not construct a closure or event and does not convert the match end; the final p
 hash input. Source identities and final input identities share one package-internal arithmetic SHA-256 owner that
 uses the common Lua 5.1 surface and no external executable or optional digest module.
 
-Direct engines, `LoadedCompiledSpec:create_engine()`, normalized-AST reconstruction, execute aliases, and traced
-convenience calls all reuse this one native seam. Generated-plan helpers currently reject the sink before runtime
-selection and emitted modules contain no observation adapter; `.10.7.6.3` owns the separate generated callback
-carrier and propagation. Immutable observed-index derivation is described below. Generated-source v2/format 2,
-results, trace, diagnostics, rollout 5/9, and native admission 4/6 are unchanged.
+Direct engines, `LoadedCompiledSpec:create_engine()`, normalized-AST reconstruction, execute aliases, traced
+convenience calls, public generated-plan helpers, and freshly emitted modules all reuse this one native seam.
+Generated execution installs a separate semantic callback carrier before broad generated-error translation, so
+the exact arbitrary caller failure survives without sharing the diagnostic carrier. Immutable observed-index
+derivation is described below. Generated-source v2/format 2, results, trace, diagnostics, rollout 5/9, and native
+admission 4/6 are unchanged.
 
 The focused native suite passes 121 assertions per ABI. The seven existing semantic suites now total 1,493 per
 ABI because source-foundation proof also checks the shared SHA-256 dependency. Complete Lua passes package
@@ -2485,13 +2486,55 @@ byte-identical.
 For canonical `runtime.spec` over `ab\n`, typed `query` and raw-neutral `query_neutral` both retain the exact
 `runtime_events` response digest
 `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. The derivation suite passes 269
-assertions on each Lua ABI; the nine semantic suites total 1,884 assertions per ABI. Generated-plan and emitted
-observation remain fenced for `.10.7.6.3`; this leaf does not change generated-source v2/format 2, semantic
-rollout, native admission, or any governance ledger.
+assertions on each Lua ABI. Generated-plan and emitted observation propagation is described next; derivation itself
+does not change generated-source v2/format 2, semantic rollout, native admission, or any governance ledger.
 
 Complete signoff passes Lua package `1..177` on both ABIs, PUC primary 66x2, corpus 105/105, storage 14, primary
 5x2x66, Unicode 10/10, all six unchanged ledgers, and canonical CI through Phase 0 1,031/1,031 in 654 seconds.
 The mdBook build and Knowledge Map 732/5,863 also pass.
+
+#### Lua generated and emitted observation routes
+
+Public generated-plan helpers accept the same invocation-local sink as native execution:
+
+```lua
+local generated_events = {}
+local value = linkedspec.execute_generated_parser_v2(compiled, plan, input, identity, {
+  semantic_observation_sink = function(event)
+    generated_events[#generated_events + 1] = event
+  end,
+})
+
+local observed = static_index:with_execution_observation(generated_events)
+```
+
+`execute_generated_parser_with_trace_v2` provides the traced public route. Fresh modules returned by
+`emit_lua_source_v2` expose matching `execute(input, options)` and `execute_with_trace(input, config, options)`
+wrappers, so callers pass the same sink without a second event vocabulary or derivation path. Direct, traced,
+fresh-emitted direct/traced, and separate isolated-host proof passes unchanged on both PUC Lua and LuaJIT. Each
+canonical route yields the same two slot events plus final result and therefore the same twentieth response digest.
+
+Generated execution wraps only the supplied semantic callback in a private generated-specific carrier before
+delegating to the native runtime. The runtime accepts a generated sink only when the exact wrapped function is
+also present as its package-private marker. This prevents arbitrary generated metadata or a directly supplied
+sink from bypassing the generated boundary. After native trace cleanup, the wrapper recognizes only its own
+carrier and rethrows the original string, table, `nil`, or existing runtime error; the broad
+`GeneratedSourceError` translator still owns unrelated failures. Diagnostic callbacks use their separate carrier.
+
+The already-option-bearing emitted wrappers needed no emitted-text change. Repeated source bytes remain
+deterministic `linkedspec-generated-source-v2` / format 2, and every plan row still contains exactly `{label,
+family}`. No observation option, event vocabulary, callback, or retained state is serialized. With no sink, the
+existing runtime guard still skips event construction, scalar conversion, and input hashing. Successful results,
+cursors, trace bytes/events, and diagnostic events are unchanged; normal unmatched execution emits its final
+success, while entry/runtime/`exit_now` failures do not.
+
+The route owner passes 80 assertions per ABI. All ten Lua semantic owners compose at 1,964 assertions per ABI;
+complete Lua passes package `1..177` on each ABI, PUC primary 66x2, corpus 105/105, and the 15-owner same-volume
+storage oracle. Semantic rollout remains 5/9 and native admission remains 4/6 pending their separate owners.
+
+Complete signoff passes primary 5x2x66, Unicode 10/10, all six unchanged ledgers, and canonical CI with Rust
+admission 1/1 in 82.65 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, containment/moved-root proof, reference
+primary 66x2, and Phase 0 1,031/1,031 in 667 seconds. The mdBook build and Knowledge Map 733/5,874 also pass.
 
 #### Lua private immutable query kernel (historical dependency boundary)
 
@@ -3016,6 +3059,7 @@ The dependency order is:
 | `.10.7.6.0` | Lua runtime-observation authority audit | complete behavior-free plan; exact seams/routes/no-sink/callback/derivation/twentieth-digest policy frozen |
 | `.10.7.6.1` | Lua typed native runtime observation capture | implemented; protected events, exact native routes/callback identity, new 121/focused 1,614 per ABI, generated and derivation fenced |
 | `.10.7.6.2` | Lua immutable observed-index derivation | implemented; strict detached topology validation, exact twentieth digest, new 269/focused 1,884 per ABI, generated propagation fenced |
+| `.10.7.6.3` | Lua generated and emitted runtime observation | implemented; public/fresh-emitted direct/traced plus isolated dual-ABI routes, exact callback identity and marker fences, new 80/focused 1,964 per ABI, unchanged v2/format 2 |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

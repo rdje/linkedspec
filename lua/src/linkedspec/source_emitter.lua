@@ -69,6 +69,9 @@ local PLAN_ROW_MT = { __generated_source_type = "GeneratedPlanRow" }
 local GENERATED_DIAGNOSTIC_SINK_FAILURE_MT = {
   __tostring = function() return "GeneratedDiagnosticOutputSinkFailure" end,
 }
+local GENERATED_SEMANTIC_SINK_FAILURE_MT = {
+  __tostring = function() return "GeneratedSemanticObservationSinkFailure" end,
+}
 
 local FAMILY_NAMES = {
   "default",
@@ -495,6 +498,17 @@ local function execute_generated(compiled, plan, input, source_identity, options
       end
     end
   end
+  local semantic_sink = runtime_options.semantic_observation_sink
+  if type(semantic_sink) == "function" then
+    local generated_semantic_sink = function(event)
+      local delivered, failure = pcall(semantic_sink, event)
+      if not delivered then
+        raise(setmetatable({ failure = failure }, GENERATED_SEMANTIC_SINK_FAILURE_MT))
+      end
+    end
+    runtime_options.semantic_observation_sink = generated_semantic_sink
+    runtime_options._generated_semantic_observation_sink = generated_semantic_sink
+  end
   runtime_options._generated_families = families
   runtime_options._generated_source_identity = identity
   local operation
@@ -517,6 +531,9 @@ local function execute_generated(compiled, plan, input, source_identity, options
   if ok then return result.value end
   if M.is_generated_source_error(result) then raise(result) end
   if getmetatable(result) == GENERATED_DIAGNOSTIC_SINK_FAILURE_MT then
+    raise(result.failure)
+  end
+  if getmetatable(result) == GENERATED_SEMANTIC_SINK_FAILURE_MT then
     raise(result.failure)
   end
   if interpreter.is_runtime_exit_now(result) then raise(result) end

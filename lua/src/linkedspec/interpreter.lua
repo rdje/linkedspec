@@ -4089,7 +4089,13 @@ function M.runtime_parse(engine, input, options)
   if (options._generated_families == nil) ~= (options._generated_source_identity == nil) then
     fail("internal generated plan and source identity must be provided together")
   end
-  if options.semantic_observation_sink ~= nil and options._generated_families ~= nil then
+  if options._generated_semantic_observation_sink ~= nil and
+      (options._generated_families == nil or
+        options._generated_semantic_observation_sink ~= options.semantic_observation_sink) then
+    fail("internal generated semantic observation carrier is invalid")
+  end
+  if options.semantic_observation_sink ~= nil and options._generated_families ~= nil and
+      options._generated_semantic_observation_sink ~= options.semantic_observation_sink then
     fail("semantic_observation_sink is not available for generated execution")
   end
   local selection_ok, selection = pcall(

@@ -15,7 +15,7 @@ answers:
   - "can Lua query an observed runtime snapshot"
   - "does Lua observed-index derivation work on PUC Lua and LuaJIT"
 date: 2026-07-28
-status: current immutable native observed-index derivation; generated and emitted propagation remain pending
+status: current immutable observed-index derivation shared by native, generated, and emitted routes
 tags: [lua, luajit, semantic-introspection, runtime, observation, query, immutability, topology]
 evidence: lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/test/semantic_index_runtime_projection_test.lua; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.6.2
 last_verified: 2026-07-28
@@ -56,15 +56,17 @@ identical.
 Canonical `runtime.spec` over `ab\n` produces two slot events at scalar positions one and two plus final `Top`
 success at position two. Typed `query` and raw-neutral `query_neutral` both retain exact `runtime_events` digest
 `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`. Focused derivation proof passes 269
-assertions per ABI; all nine Lua semantic suites compose at 1,884 assertions per ABI. Generated-plan and emitted
-observation propagation remain exclusively owned by `.10.7.6.3`; generated-source v2/format 2, rollout 5/9,
-native admission 4/6, and all governance ledgers remain unchanged.
+assertions per ABI; the nine owners at this derivation boundary compose at 1,884 assertions per ABI. Generated-plan
+and emitted observation propagation is now implemented by `.10.7.6.3` and reuses this method unchanged. Its 80
+route assertions bring the ten-owner focused total to 1,964 per ABI without changing generated-source v2/format 2,
+rollout 5/9, native admission 4/6, or any governance ledger.
 
 Complete proof passes Lua package `1..177` on both ABIs, PUC primary 66x2, corpus 105/105, storage 14, primary
 5x2x66, Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in 654 seconds, mdBook, and
 Knowledge Map 732 facts / 5,863 question keys.
 
 Related facts: [[lua-semantic-runtime-observation-authority-map]],
-[[lua-semantic-runtime-observation-direct-capture]], [[lua-semantic-query-public-api]],
+[[lua-semantic-runtime-observation-direct-capture]], [[lua-semantic-runtime-observation-generated-routes]],
+[[lua-semantic-query-public-api]],
 [[semantic-introspection-neutral-contract]], [[julia-semantic-runtime-observation-derivation]], and
 [[rust-semantic-runtime-observation]].

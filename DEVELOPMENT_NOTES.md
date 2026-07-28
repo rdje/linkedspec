@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.3` — existing option forwarding avoids an emitted-format change, but
+  generated callback identity needs its own carrier): Lua's emitted direct/traced wrappers already forward an
+  invocation options table into the public generated helpers. Semantic observation therefore requires no new
+  emitted token, plan field, or format version: the generated helper can wrap the optional sink at runtime and
+  pass that exact wrapped function as both sink and a package-private authorization marker.
+
+  The marker is intentionally the function identity rather than a Boolean generated flag. Native execution
+  accepts a generated sink only when both identities match, so callers cannot use ordinary generated metadata to
+  bypass the generated-only failure boundary. The wrapper's semantic carrier remains separate from the existing
+  diagnostic carrier and is unwrapped before broad `GeneratedSourceError` translation. This preserves arbitrary
+  string/table/`nil`/runtime-error callback identity after native trace cleanup while leaving unrelated generated
+  failures classified exactly as before.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.2` — observed-index derivation is a static-topology operation, and
   malformed-event seams must not normalize evidence): Runtime capture and semantic derivation should remain
   separate. Lua's derivation receives exactly one detached static projection and protected event JSON; it resolves

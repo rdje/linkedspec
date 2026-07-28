@@ -410,7 +410,16 @@ match-end and normally returned result seams, Unicode-scalar/input identity, no-
 ABI execution route, detached static-only derivation, the twentieth digest, and `.1-.4` order without behavior or
 governance movement. Audit signoff passes Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66,
 Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in 624s, mdBook, and Knowledge Map
-730/5,838. Typed direct capture `.10.7.6.1` follows the clean audit commit.
+730/5,838. Typed direct capture `.10.7.6.1` adds protected invocation-local slot/result events across native
+direct/loaded/reconstructed/traced routes; immutable derivation `.10.7.6.2` validates those exact handles against
+one detached static projection and exposes the twentieth typed/raw digest. Generated/emitted propagation
+`.10.7.6.3` now carries the same sink through public generated direct/traced and fresh emitted direct/traced routes,
+including isolated PUC Lua/LuaJIT hosts. Its generated-only callback carrier preserves exact arbitrary failure
+identity and marker fences while deterministic v2/format 2 bytes, minimal plans, native capture/derivation,
+results/trace/diagnostics/no-sink work, rollout, admission, and ledgers stay unchanged. New 80/focused 1,964 pass
+per ABI; complete Lua, primary 5x2x66, Unicode 10/10, six ledgers, canonical Rust 82.65s + Dart 1/1 + Julia
+416/29.5s + containment/moved-root + reference 66x2 + Phase 0 1,031/667s, mdBook, and Knowledge Map 733/5,874
+pass. No-change composition `.10.7.6.4` follows after the clean commit.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

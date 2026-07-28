@@ -513,7 +513,7 @@ end
 do
   local plan = linkedspec.build_generated_rule_plan(canonical_compiled)
   local generated_events = {}
-  local generated_ok, generated_failure = pcall(
+  local generated_ok, generated_value = pcall(
     linkedspec.execute_generated_parser_v2,
     canonical_compiled,
     plan,
@@ -521,16 +521,15 @@ do
     "semantic-introspection/runtime.spec",
     { semantic_observation_sink = collect(generated_events) }
   )
-  check_equal(generated_ok, false, "generated observation remains fenced")
-  check_equal(#generated_events, 0, "generated fence emits no observations")
-  check_equal(linkedspec.is_generated_source_error(generated_failure), true,
-    "generated fence uses existing translation until propagation leaf")
+  check_equal(generated_ok, true, "generated observation propagation is active")
+  check_same_json(generated_value, json.array({ "A", "B" }), "generated observation result")
+  check_same_json(event_json(generated_events), canonical_events, "generated observation events")
 
   local emitter_source = read_file("lua/src/linkedspec/source_emitter.lua")
-  check_equal(emitter_source:find("semantic_observation_sink", 1, true), nil,
-    "generated source owner has no observation propagation")
-  check_equal(emitter_source:find("semantic_observation", 1, true), nil,
-    "generated source owner has no semantic carrier")
+  check(emitter_source:find("semantic_observation_sink", 1, true) ~= nil,
+    "generated source owner propagates observation")
+  check(emitter_source:find("GENERATED_SEMANTIC_SINK_FAILURE_MT", 1, true) ~= nil,
+    "generated source owner has semantic-only failure carrier")
   local emitted = linkedspec.emit_lua_source_v2(canonical_compiled, "semantic-introspection/runtime.spec")
   check_equal(emitted:find("semantic_observation", 1, true), nil,
     "emitted source has no observation adapter")
