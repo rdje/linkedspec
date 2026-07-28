@@ -14,7 +14,7 @@ answers:
   - "where is the Lua private semantic query kernel tested"
   - "does the Lua semantic query kernel behave identically on PUC Lua and LuaJIT"
 date: 2026-07-28
-status: current private non-traversal foundation; traversal limits and public entrypoints pending
+status: current private value and non-traversal foundation beneath the complete static evaluator
 tags: [lua, luajit, semantic-introspection, query, capabilities, privacy, immutability, no-execution]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.1; lua/src/linkedspec/semantic_query.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_query_kernel_test.lua; tools/run_lua_local.sh; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n '_semantic_query_kernel|materialize_static_projection|SemanticQuery(Request|Response)|semantic_index_query_kernel_test' lua/src/linkedspec lua/test tools/run_lua_local.sh"
@@ -50,11 +50,10 @@ AST/ActionIR, compiled regexes, generated implementation, emitter/loader/executo
 diagnostic sinks, paths, environment, time, randomness, callbacks, or host identity; it cannot parse, compile,
 execute, observe, or enable trace.
 
-At this boundary, typed requests may represent all five operations and complete page/budget/source vocabulary,
-but the kernel explicitly defers relations, cursors, non-default page sizes, non-default budgets, portable typed
-errors, deterministic prefixes, and the other ten static hashes to `.10.7.5.2`. Ambiguous/raw JSON-like validation,
-all 26 malformed boundaries, and the complete public typed/raw-neutral API remain `.10.7.5.3`. Runtime events
-remain `.10.7.6`.
+Leaf `.10.7.5.2` now extends this same evaluator with relations, cursors, non-default page sizes, non-default
+budgets, portable typed errors, deterministic prefixes, and the other ten static hashes; see
+[[lua-semantic-query-traversal]]. Ambiguous/raw JSON-like validation, all 26 malformed boundaries, and the complete
+public typed/raw-neutral API remain `.10.7.5.3`. Runtime events remain `.10.7.6`.
 
 The focused suite passes 159 assertions unchanged on both ABIs. The seven semantic suites compose at 1,080 per
 ABI: source 380, outcome 122, graph 64, remaining static 122, call core 136, staged/generated 97, and query 159.
@@ -63,4 +62,4 @@ storage proof.
 
 Related facts: [[lua-semantic-query-authority-map]], [[lua-semantic-introspection-authority-map]],
 [[lua-semantic-staged-generated-projection]], [[semantic-introspection-neutral-contract]],
-[[semantic-source-ceiling-boundary]], and [[julia-semantic-query-kernel]].
+[[semantic-source-ceiling-boundary]], [[lua-semantic-query-traversal]], and [[julia-semantic-query-kernel]].

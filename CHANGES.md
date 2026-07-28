@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.2 — complete private Lua static query evaluation
+
+Extended the existing package-private evaluator over the same single detached projection with canonical
+primary-stream paging, relation-kind-filtered outgoing/incoming/both breadth-first traversal, record/relation/depth
+budgets, deterministic incomplete prefixes, exact logical costs, budget warnings, and portable typed errors.
+Traversal deduplicates relation ids and visited frontier records, records first depth, and restores canonical
+projection order. Page-only boundaries carry a cursor without a diagnostic; relation limits take warning
+precedence over simultaneous depth limits; explain reserves one record unit for its decision.
+
+The ten completion responses and all 19 static neutral hashes match identically on PUC Lua and LuaJIT. The expanded
+focused suite passes 283 assertions per ABI, including two-layer BFS, all five paging users, budget precedence,
+typed error envelopes, decision reservation, recursive relation detachment, public omission, one materialization,
+and forbidden-authority scans. All seven private semantic suites compose at 1,204 per ABI, and complete Lua passes
+package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and 13-owner repository-storage proof. Raw-neutral
+validation, 26 malformed boundaries, every public query name, runtime observation, rollout, and admission remain
+unchanged and explicitly owned by `.10.7.5.3` or later.
+
+Full signoff passes the primary 5x2x66 matrix, ten Unicode legs, all six unchanged governance ledgers, and
+canonical CI with Rust admission 1/1 in 78.18s, Dart 1/1, Julia 416/416 in 27.3s, elevated containment,
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 622s. The mdBook and Knowledge Map
+728/5,814 pass. Exact cleanup removes 208 KiB of slice adapters, the 12,908-KiB rendered book, and one empty
+managed-run directory while retaining active Rust incremental caches.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.1 — add private Lua semantic query kernel
 
 Added package-private protected semantic-query request/response and nested protocol values plus one immutable

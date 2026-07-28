@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-28` (private Lua query kernel `.10.7.5.1` implements protected recursive values and nine
-  exact non-traversal hashes on both ABIs; private traversal/pages/budgets/costs `.10.7.5.2` is next)
+- Last updated: `2026-07-28` (private Lua traversal/pages/budgets/costs `.10.7.5.2` completes all 19 static hashes
+  on both ABIs without public query exposure; raw-neutral/public completion `.10.7.5.3` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12351,9 +12351,54 @@ before implementation.
       208 KiB slice adapters, 12,892 KiB rendered book, and one empty managed-run directory pass. No public query,
       runtime observation, format, rollout, admission, or governance ledger changes; `.10.7.5.2` follows cleanly.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.5.2`
-    Status: `pending`
+    Status: `done` (2026-07-28; implementation from clean private-kernel commit `df9f32e6`)
     Goal: Add exact relation traversal, paging, budgets, costs, prefixes, warnings, and portable errors.
     Depends on: `.10.7.5.1`
+    Acceptance: Extend only the existing package-private evaluator over its single detached materialization;
+      implement canonical primary-stream paging and filtered directional breadth-first relation traversal with
+      record/relation/depth budgets, deterministic incomplete prefixes, exact logical costs and portable warning
+      precedence; match `graph_reverse_dispatch`, `staged_chain`, `generated_provenance`, `pagination_after_id`,
+      `page_boundary`, `budget_prefix`, `relation_budget_prefix`, `relation_depth_zero`, `unsupported_contract`,
+      and `invalid_operation_combination` so all 19 static hashes are exact on PUC Lua and LuaJIT; preserve recursive
+      immutability, fresh copies, request/index isolation, one materialization, privacy/non-execution/host denial,
+      and complete absence of root/index public query names; leave raw-neutral validation and public exposure to
+      `.10.7.5.3`; pass focused/complete Lua and the full lockstep gate before commit.
+
+    #### Acceptance Checklist
+
+    - [x] **TEN-HASH COMPLETION** — Add exactly the ten traversal/page/budget/error cases above and prove the
+      existing nine plus all ten new full canonical SHA-256 responses unchanged on both Lua ABIs.
+    - [x] **CANONICAL PAGES** — Page only the operation's already-filtered primary stream; require `after_id` in
+      that stream, resume immediately after it, distinguish page-only cursors from budget warnings, and page
+      explanation steps while reserving the decision record.
+    - [x] **FILTERED DIRECTIONAL BFS** — Support outgoing/incoming/both relation-kind-filtered traversal in detached
+      canonical order, deduplicate relations and frontier records across layers, record first depth, and restore
+      canonical result order.
+    - [x] **BUDGETS / PREFIXES / COSTS** — Enforce record/relation/depth ceilings with deterministic prefixes,
+      relation-before-depth diagnostic precedence, exact portable details, and logical returned-item/depth costs
+      independent of host time, allocation, compiler work, or runtime counters.
+    - [x] **PRIVATE AUTHORITY FENCE** — Retain one static materialization per request, recursive value immutability,
+      copy/isolation guarantees, source ceilings, no execution/trace/path/host authority, and no public query name;
+      keep raw-neutral structural validation entirely in `.10.7.5.3`.
+    - [x] **LOCKSTEP / COMMIT** — Pass focused and complete dual-ABI Lua, primary and Unicode matrices, all ledgers,
+      canonical CI, mdBook/KM/memory/task/doctrines/diff/syntax/storage, exact cleanup, and commit before `.3`.
+
+    Implementation evidence: `lua/src/linkedspec/semantic_query.lua` extends the one private evaluator with one
+      primary-stream pager, filtered directional BFS, deterministic record/relation/depth prefixes, logical costs,
+      warning precedence, and portable typed errors. The existing independent dual-ABI SHA-256 owner in
+      `lua/test/semantic_index_query_kernel_test.lua` now locks all 19 static hashes plus two-layer/both traversal,
+      all five paging users, relation-over-depth precedence, typed error envelopes, explanation decision
+      reservation, relation detachment, public omission, one materialization, and forbidden authority.
+    Verification: **PASS 2026-07-28.** Query 283 and seven-suite semantic 1,204 pass on each ABI; complete Lua
+      passes package `1..177` on each ABI plus PUC primary 66x2, corpus 105/105, and 13-owner storage proof. The
+      primary matrix passes 5x2x66 and Unicode passes 10/10. Semantic 6/20/89 at rollout 5/9 and admission 4/6,
+      Unicode 806/9/8/2, capability 80/0/0, generated v1/10/80-0-0, language 246/105+1/122, and public 59/27/0
+      remain exact. Canonical CI passes six doctrines, Rust admission 1/1 in 78.18s, Dart 1/1, Julia 416/416 in
+      27.3s, elevated six-family containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in
+      622s. mdBook, Knowledge Map 728/5,814, memory/task/doctrines/diff/syntax/storage, and exact cleanup of 208 KiB
+      adapters, 12,908 KiB rendered book, and one empty managed-run directory pass. Active Rust incremental `.bin`
+      caches are retained. No public query, raw-neutral API, runtime observation, format, rollout, admission, or
+      governance ledger changes; `.10.7.5.3` follows cleanly.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.5.3`
     Status: `pending`
     Goal: Expose typed and raw-neutral public Lua query calls together at all 19 static hashes/26 boundaries.
@@ -14684,8 +14729,9 @@ behavior-free immutable-query authority audit `.10.7.5.0` now freezes one fresh 
 vocabulary, all 19 complete static hashes, 26 malformed raw boundaries, explicit dual-ABI JSON/numeric policy,
 source projection, traversal/pages/budgets/costs, and `.1-.4` order without behavior change. Private immutable
 non-traversal `.10.7.5.1` now matches nine exact hashes with protected recursive values and one detached
-materialization at focused 1,080 per ABI without a public query name. Private traversal/pages/budgets/costs and
-the remaining ten static hashes `.10.7.5.2` are next. Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
+materialization at focused 1,080 per ABI without a public query name. Private traversal/pages/budgets/costs
+`.10.7.5.2` now completes all 19 static hashes at query 283/focused 1,204 per ABI with no public query name.
+Raw-neutral/public completion `.10.7.5.3` is next. Semantic 6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -15316,7 +15362,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.5 | `FUTURE-PARITY-BACKLOG.10.7.5` | `pending` | Expose one immutable typed/raw-neutral query evaluator over detached private projection data. |
 | 74.6.5.0 | `FUTURE-PARITY-BACKLOG.10.7.5.0` | `done` | One detached authority, exact vocabulary, 19 hashes, 26 raw boundaries, dual-ABI policy, and `.1-.4` order are frozen without behavior change. |
 | 74.6.5.1 | `FUTURE-PARITY-BACKLOG.10.7.5.1` | `done` | Protected recursive values and nine exact private non-traversal hashes pass at focused 1,080 per ABI without public query names. |
-| 74.6.5.2 | `FUTURE-PARITY-BACKLOG.10.7.5.2` | `pending` | Add exact relations, paging, budgets, costs, prefixes, warnings, and portable errors. |
+| 74.6.5.2 | `FUTURE-PARITY-BACKLOG.10.7.5.2` | `done` | All 19 private static hashes pass with canonical pages, directional BFS, budgets/prefixes/costs, and typed errors at focused 1,204 per ABI. |
 | 74.6.5.3 | `FUTURE-PARITY-BACKLOG.10.7.5.3` | `pending` | Expose typed/raw-neutral calls at all 19 static hashes and 26 malformed boundaries. |
 | 74.6.5.4 | `FUTURE-PARITY-BACKLOG.10.7.5.4` | `pending` | Recompose and close the immutable query surface without runtime or promotion. |
 | 74.6.6 | `FUTURE-PARITY-BACKLOG.10.7.6` | `pending` | Add caller-owned typed runtime observation and exact immutable post-execution projection. |
@@ -16001,6 +16047,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.2` | Clean base `df9f32e6`; ten completion/all 19 static hashes; canonical pages; outgoing/incoming/both filtered BFS; record/relation/depth prefixes and warning precedence; logical costs; typed errors; query 283 and seven-suite focused 1,204 per ABI; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 78.18s, Dart 1/1, Julia 416/416 in 27.3s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 622s; mdBook/KM 728/5,814/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The static evaluator is complete and private on both ABIs without execution, authority leakage, public/raw API, observation, format, rollout, admission, or ledger movement; raw/public `.10.7.5.3` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.1` | Clean base `d4f9373d`; exact nine non-traversal hashes; protected recursive weak-key values; one detached materialization; source/privacy/ceiling and repeat/interleave isolation; query 159 and seven-suite focused 1,080 per ABI; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 77.96s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 623s; mdBook/KM 727/5,802/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Capabilities/list/get/explain/source policy are exact and private on both ABIs without execution, authority leakage, public API, observation, format, rollout, admission, or ledger movement; traversal/limits `.10.7.5.2` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.0` | Clean base `742ba95e`; exact 20 requests/19 static hashes/26 malformed labels; one detached projection authority; explicit dual-ABI JSON/numeric policy; no production/test/fixture/contract/API/query/observation/format/ledger change; six focused suites exact 920 per ABI; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 81.33s, Dart 1/1, Julia 416/416 in 29.1s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 648s; mdBook/KM 726/5,791/memory/task/doctrines/diff/syntax/storage. | PASS. Exact vocabulary, privacy/evaluator fence, pages/traversal/budgets/costs/errors/explanations, and private `.1` -> private `.2` -> public `.3` -> closeout `.4` order are frozen; `.10.7.5.1` follows the clean audit commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.4.3` | Clean base `67f3d1b5`; no production/test/fixture/contract/API/query/observation/format/ledger change; six committed focused suites exact 920 per ABI and complete private 22/25/10; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage proof; primary 5x2x66; Unicode 10/10; unchanged semantic/Unicode/capability/generated/language/public ledgers; canonical six doctrines, Rust 1/1 in 81.19s, Dart 1/1, Julia 416/416 in 29.0s, containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 648s; mdBook/KM/memory/task/doctrines/diff/syntax/storage proof. | PASS. Committed source/outcome/static/call/staged owners recompose without replacement code or promotion; parent `.10.7.4` closes and behavior-free query audit `.10.7.5.0` follows the clean commit. |
@@ -16279,6 +16326,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.5.2` | `FUTURE-PARITY-BACKLOG.10.7.5.2 - complete private Lua query` | Canonical traversal/pages/budgets/costs, all 19 exact dual-ABI static hashes, complete signoff, and clean handoff to raw/public `.10.7.5.3`. |
 | `FUTURE-PARITY-BACKLOG.10.7.5.1` | `FUTURE-PARITY-BACKLOG.10.7.5.1 - add private Lua query kernel` | Protected recursive values, one detached evaluator, nine exact dual-ABI hashes, complete signoff, and clean handoff to private traversal/limits `.10.7.5.2`. |
 | `FUTURE-PARITY-BACKLOG.10.7.5.0` | `FUTURE-PARITY-BACKLOG.10.7.5.0 - freeze Lua semantic query` | Behavior-free detached authority/vocabulary/hash/boundary/dual-ABI/dependency freeze, complete signoff, and clean handoff to private non-traversal `.10.7.5.1`. |
 | `FUTURE-PARITY-BACKLOG.10.7.4.3` | `FUTURE-PARITY-BACKLOG.10.7.4.3 - close Lua call projection` | No-change six-suite recomposition at focused 920 per ABI, complete signoff, parent `.10.7.4` closure, and clean handoff to query audit `.10.7.5.0`. |
@@ -16536,6 +16584,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Private traversal/limits `.10.7.5.2` completes the one detached Lua static query evaluator with
+  canonical pages, filtered outgoing/incoming/both BFS, record/relation/depth prefixes, logical costs, portable
+  warnings/errors, and all 19 hashes on both ABIs. Query 283/focused 1,204, complete Lua, primary 5x2x66, Unicode
+  10/10, six unchanged ledgers, canonical Rust 78.18s + Dart 1/1 + Julia 416/27.3s + containment/moved-root +
+  reference 66x2 + Phase 0 1,031/622s, mdBook/KM 728/5,814, and exact cleanup pass. Public/raw query names,
+  runtime observation, format, rollout, admission, and ledger movement remain absent; `.10.7.5.3` follows.
 
 - `2026-07-28`: Private immutable non-traversal `.10.7.5.1` adds protected recursive weak-key request/response
   values and one evaluator over exactly one detached static materialization. Nine capabilities/list/get/explain/

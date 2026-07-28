@@ -1,6 +1,6 @@
--- Package-private immutable semantic-query-v1 protocol and non-traversal
--- evaluator. Public construction, raw-neutral validation, traversal, paging,
--- and budget ownership are deliberately deferred to later task-tree leaves.
+-- Package-private immutable semantic-query-v1 protocol and complete static
+-- evaluator. Public construction and raw-neutral validation are deliberately
+-- deferred to the next task-tree leaf.
 
 local json = require("linkedspec.json")
 
@@ -412,21 +412,30 @@ local function snapshot_value(snapshot)
 end
 
 local function diagnostic_value(code, fields)
+  local severity = "error"
   local message
-  if code == "semantic_query_source_detail_forbidden" then
+  if code == "semantic_query_budget_exceeded" then
+    severity = "warning"
+    message = "Semantic query budget was reached; returning the deterministic prefix."
+  elseif code == "semantic_query_contract_unsupported" then
+    message = "Unsupported semantic query contract."
+  elseif code == "semantic_query_source_detail_forbidden" then
     message = "Requested source detail exceeds the index ceiling."
+  elseif code == "semantic_query_invalid" then
+    message = "Invalid semantic query request."
   else
-    error("Semantic query diagnostic belongs to a later task-tree leaf", 0)
+    error("Unknown semantic query diagnostic", 0)
   end
   return protocol_value("SemanticQueryDiagnostic", json.harray({
     code = code,
-    severity = "error",
+    severity = severity,
     message = message,
     fields = fields,
   }))
 end
 
-local function response_value(snapshot, request, ok, records, relations, diagnostics, depth)
+local function response_value(snapshot, request, ok, records, relations, diagnostics, options)
+  options = options or {}
   return protocol_value("SemanticQueryResponse", json.harray({
     contract = QUERY_ID,
     model = MODEL_ID,
@@ -434,10 +443,22 @@ local function response_value(snapshot, request, ok, records, relations, diagnos
     snapshot = snapshot_value(snapshot),
     records = protocol_array(records),
     relations = protocol_array(relations),
-    page = page_value(request.after_id, nil, true),
-    cost = cost_value(#records, #relations, depth or 0),
+    page = page_value(
+      request.after_id,
+      options.next_after_id,
+      options.complete == nil and true or options.complete
+    ),
+    cost = cost_value(
+      options.records_examined or #records,
+      options.relations_examined or #relations,
+      options.depth_reached or 0
+    ),
     diagnostics = protocol_array(diagnostics),
   }))
+end
+
+local function rejected_response(snapshot, request, diagnostic)
+  return response_value(snapshot, request, false, {}, {}, { diagnostic })
 end
 
 local function record_value(record, source, facts, redactions)
@@ -555,36 +576,32 @@ local function capabilities_record(snapshot)
   )
 end
 
-local function deferred(reason)
-  error("Semantic query request belongs to a later task-tree leaf: " .. reason, 0)
-end
-
 local function validate_owned_request(snapshot, request)
-  if request.contract ~= QUERY_ID then deferred("contract") end
+  if request.contract ~= QUERY_ID then
+    return rejected_response(snapshot, request, diagnostic_value(
+      "semantic_query_contract_unsupported",
+      json.harray({
+        requested = request.contract,
+        supported = json.array({ QUERY_ID }),
+      })
+    ))
+  end
   if request.include_content_digest and request.source_detail ~= "text" then
-    deferred("digest_requires_text")
+    return rejected_response(snapshot, request, diagnostic_value(
+      "semantic_query_invalid",
+      json.harray({ reason = "digest_requires_text" })
+    ))
   end
   if SOURCE_DETAIL_RANK[request.source_detail] > SOURCE_DETAIL_RANK[snapshot.source_detail_ceiling] or
       (request.include_content_digest and not snapshot.content_digest_available) then
-    return response_value(
-      snapshot,
-      request,
-      false,
-      {},
-      {},
-      { diagnostic_value("semantic_query_source_detail_forbidden", json.harray({
+    return rejected_response(
+      snapshot, request,
+      diagnostic_value("semantic_query_source_detail_forbidden", json.harray({
         requested = request.source_detail,
         ceiling = snapshot.source_detail_ceiling,
-      })) }
+      }))
     )
   end
-  if request.after_id ~= nil or request.limit ~= PAGE_DEFAULT or
-      request.max_records ~= RECORD_BUDGET_DEFAULT or
-      request.max_relations ~= RELATION_BUDGET_DEFAULT or
-      request.max_depth ~= DEPTH_BUDGET_DEFAULT then
-    deferred("paging_or_budget")
-  end
-  if request.operation == "relations" then deferred("relations") end
 
   local valid = false
   if request.operation == "capabilities" or request.operation == "list" then
@@ -592,14 +609,124 @@ local function validate_owned_request(snapshot, request)
   elseif request.operation == "get" then
     valid = #request.subjects > 0 and #request.record_kinds == 0 and
       #request.relation_kinds == 0
+  elseif request.operation == "relations" then
+    valid = #request.subjects > 0 and #request.record_kinds == 0
   elseif request.operation == "explain" then
     valid = #request.subjects == 1 and #request.record_kinds == 0 and
       #request.relation_kinds == 0
   end
   if not valid or (request.operation == "capabilities" and #request.record_kinds > 0) then
-    deferred("operation_combination")
+    return rejected_response(snapshot, request, diagnostic_value(
+      "semantic_query_invalid",
+      json.harray({
+        reason = request.operation == "capabilities" and #request.record_kinds > 0 and
+          "capability_filter" or "operation_combination",
+      })
+    ))
   end
   return nil
+end
+
+local function page_stream(items, request, budget_limit)
+  local start = 1
+  if request.after_id ~= nil then
+    local cursor
+    for index, item in ipairs(items) do
+      if item.id == request.after_id then
+        cursor = index
+        break
+      end
+    end
+    if cursor == nil then return nil end
+    start = cursor + 1
+  end
+
+  local remaining = #items - start + 1
+  if remaining < 0 then remaining = 0 end
+  local limited_by_budget = remaining > budget_limit
+  local selected_count = math.min(remaining, request.limit, budget_limit)
+  local selected = {}
+  for offset = 0, selected_count - 1 do selected[#selected + 1] = items[start + offset] end
+  local complete = selected_count == remaining and not limited_by_budget
+  local next_after_id
+  if #selected > 0 and not complete then next_after_id = selected[#selected].id end
+  return {
+    selected = selected,
+    next_after_id = next_after_id,
+    complete = complete,
+    limited_by_budget = limited_by_budget,
+  }
+end
+
+local function relation_layer(relations, frontier, wanted_kinds, direction, selected_ids)
+  local result = {}
+  for _, relation in ipairs(relations) do
+    local kind_matches = next(wanted_kinds) == nil or wanted_kinds[relation.kind]
+    local outgoing = (direction == "outgoing" or direction == "both") and
+      frontier[relation.from_id]
+    local incoming = (direction == "incoming" or direction == "both") and
+      frontier[relation.to_id]
+    if kind_matches and (outgoing or incoming) and not selected_ids[relation.id] then
+      result[#result + 1] = relation
+    end
+  end
+  return result
+end
+
+local function traverse_relations(relations, request)
+  local wanted_kinds = {}
+  for _, kind in ipairs(request.relation_kinds) do wanted_kinds[kind] = true end
+  local frontier = {}
+  local visited = {}
+  for _, id in ipairs(request.subjects) do frontier[id], visited[id] = true, true end
+  local depth_by_id = {}
+
+  for depth = 1, request.max_depth do
+    local layer = relation_layer(relations, frontier, wanted_kinds, request.direction, depth_by_id)
+    if #layer == 0 then break end
+    local next_frontier = {}
+    for _, relation in ipairs(layer) do
+      depth_by_id[relation.id] = depth
+      if (request.direction == "outgoing" or request.direction == "both") and
+          frontier[relation.from_id] then
+        next_frontier[relation.to_id] = true
+      end
+      if (request.direction == "incoming" or request.direction == "both") and
+          frontier[relation.to_id] then
+        next_frontier[relation.from_id] = true
+      end
+    end
+    for id in next, visited do next_frontier[id] = nil end
+    for id in next, next_frontier do visited[id] = true end
+    frontier = next_frontier
+    if next(frontier) == nil then break end
+  end
+
+  local depth_limited = next(frontier) ~= nil and
+    #relation_layer(relations, frontier, wanted_kinds, request.direction, depth_by_id) > 0
+  local selected = {}
+  for _, relation in ipairs(relations) do
+    if depth_by_id[relation.id] ~= nil then selected[#selected + 1] = relation end
+  end
+  return { relations = selected, depth_by_id = depth_by_id, depth_limited = depth_limited }
+end
+
+local function invalid_response(snapshot, request, reason)
+  return rejected_response(snapshot, request, diagnostic_value(
+    "semantic_query_invalid",
+    json.harray({ reason = reason })
+  ))
+end
+
+local function project_page_records(candidates, projection, request, budget_limit)
+  local paged = page_stream(candidates, request, budget_limit)
+  if paged == nil then return nil end
+  local records = {}
+  for _, record in ipairs(paged.selected) do
+    records[#records + 1] = project_record(record, projection, request)
+  end
+  paged.projected = records
+  return paged
 end
 
 function M.evaluate(projection, request_value)
@@ -620,31 +747,76 @@ function M.evaluate(projection, request_value)
   local request_error = validate_owned_request(snapshot, request)
   if request_error ~= nil then return request_error end
 
-  local records = {}
-  local relations = {}
+  local record_by_id = {}
+  for _, record in ipairs(projection.records) do record_by_id[record.id] = record end
+  if (request.operation == "get" or request.operation == "relations") then
+    for _, subject in ipairs(request.subjects) do
+      if record_by_id[subject] == nil then return invalid_response(snapshot, request, "unknown_subject") end
+    end
+  end
+
+  local selected_records = {}
+  local selected_relations = {}
+  local page = { next_after_id = nil, complete = true }
+  local record_cost = 0
+  local relation_cost = 0
+  local depth_reached = 0
+  local budget_reason
+
   if request.operation == "capabilities" then
-    records[1] = capabilities_record(snapshot)
+    local paged = page_stream({ capabilities_record(snapshot) }, request, request.max_records)
+    if paged == nil then return invalid_response(snapshot, request, "after_id_not_in_primary_stream") end
+    selected_records = paged.selected
+    page = paged
+    record_cost = #selected_records
+    if paged.limited_by_budget then budget_reason = "max_records" end
   elseif request.operation == "list" then
     local wanted = {}
     for _, kind in ipairs(request.record_kinds) do wanted[kind] = true end
+    local candidates = {}
     for _, record in ipairs(projection.records) do
       if #request.record_kinds == 0 or wanted[record.kind] then
-        records[#records + 1] = project_record(record, projection, request)
+        candidates[#candidates + 1] = record
       end
     end
+    local paged = project_page_records(candidates, projection, request, request.max_records)
+    if paged == nil then return invalid_response(snapshot, request, "after_id_not_in_primary_stream") end
+    selected_records = paged.projected
+    page = paged
+    record_cost = #selected_records
+    if paged.limited_by_budget then budget_reason = "max_records" end
   elseif request.operation == "get" then
     local wanted = {}
     for _, id in ipairs(request.subjects) do wanted[id] = true end
+    local candidates = {}
     for _, record in ipairs(projection.records) do
-      if wanted[record.id] then records[#records + 1] = project_record(record, projection, request) end
+      if wanted[record.id] then candidates[#candidates + 1] = record end
     end
-    if #records ~= #request.subjects then deferred("unknown_subject") end
+    local paged = project_page_records(candidates, projection, request, request.max_records)
+    if paged == nil then return invalid_response(snapshot, request, "after_id_not_in_primary_stream") end
+    selected_records = paged.projected
+    page = paged
+    record_cost = #selected_records
+    if paged.limited_by_budget then budget_reason = "max_records" end
+  elseif request.operation == "relations" then
+    local traversal = traverse_relations(projection.relations, request)
+    local paged = page_stream(traversal.relations, request, request.max_relations)
+    if paged == nil then return invalid_response(snapshot, request, "after_id_not_in_primary_stream") end
+    for _, relation in ipairs(paged.selected) do
+      selected_relations[#selected_relations + 1] = project_relation(relation, projection, request)
+      depth_reached = math.max(depth_reached, traversal.depth_by_id[relation.id])
+    end
+    page = paged
+    relation_cost = #selected_relations
+    if paged.limited_by_budget then
+      budget_reason = "max_relations"
+    elseif traversal.depth_limited then
+      budget_reason = "max_depth"
+    end
   else
     local subject = request.subjects[1]
-    local decision
-    for _, record in ipairs(projection.records) do
-      if record.id == subject and record.kind == "decision" then decision = record end
-    end
+    local decision = record_by_id[subject]
+    if decision ~= nil and decision.kind ~= "decision" then decision = nil end
     if decision == nil then
       local owned = {}
       for _, record in ipairs(projection.records) do
@@ -652,31 +824,54 @@ function M.evaluate(projection, request_value)
       end
       if #owned == 1 then decision = owned[1] end
     end
-    if decision == nil then deferred("not_explainable") end
-    records[1] = project_record(decision, projection, request)
-    local selected_steps = {}
+    if decision == nil then return invalid_response(snapshot, request, "not_explainable") end
+    local steps = {}
     for _, record in ipairs(projection.records) do
       if record.kind == "explanation_step" and record.owner_id == decision.id then
-        records[#records + 1] = project_record(record, projection, request)
-        selected_steps[record.id] = true
+        steps[#steps + 1] = record
       end
     end
+    local paged = project_page_records(steps, projection, request, request.max_records - 1)
+    if paged == nil then return invalid_response(snapshot, request, "after_id_not_in_primary_stream") end
+    selected_records[1] = project_record(decision, projection, request)
+    local selected_steps = {}
+    for _, step in ipairs(paged.selected) do selected_steps[step.id] = true end
+    for _, step in ipairs(paged.projected) do selected_records[#selected_records + 1] = step end
     for _, relation in ipairs(projection.relations) do
       if relation.kind == "explained_by" and relation.from_id == decision.id and
           selected_steps[relation.to_id] then
-        relations[#relations + 1] = project_relation(relation, projection, request)
+        selected_relations[#selected_relations + 1] = project_relation(relation, projection, request)
       end
     end
+    page = paged
+    record_cost = #selected_records
+    relation_cost = #selected_relations
+    depth_reached = #paged.selected > 0 and 1 or 0
+    if paged.limited_by_budget then budget_reason = "max_records" end
   end
 
+  local diagnostics = {}
+  if budget_reason ~= nil then
+    page.complete = false
+    diagnostics[1] = diagnostic_value(
+      "semantic_query_budget_exceeded",
+      json.harray({ limit = budget_reason })
+    )
+  end
   return response_value(
     snapshot,
     request,
     true,
-    records,
-    relations,
-    {},
-    request.operation == "explain" and #records > 1 and 1 or 0
+    selected_records,
+    selected_relations,
+    diagnostics,
+    {
+      next_after_id = page.next_after_id,
+      complete = page.complete,
+      records_examined = record_cost,
+      relations_examined = relation_cost,
+      depth_reached = depth_reached,
+    }
   )
 end
 

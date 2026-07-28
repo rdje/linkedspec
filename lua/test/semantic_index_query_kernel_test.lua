@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.10.7.5.1 — private immutable non-traversal query kernel.
+-- FUTURE-PARITY-BACKLOG.10.7.5.1-.2 — complete private static query evaluator.
 
 local assertions = 0
 local failures = {}
@@ -194,12 +194,35 @@ local owned_ids = {
   "capabilities",
   "graph_list_rules",
   "graph_duplicate_regex_text",
+  "graph_reverse_dispatch",
   "graph_explain_entry",
   "calls_symbols_and_shapes",
+  "staged_chain",
+  "generated_provenance",
   "failed_diagnostic",
   "privacy_none",
   "privacy_text_and_digest",
+  "pagination_after_id",
+  "page_boundary",
+  "budget_prefix",
+  "relation_budget_prefix",
+  "relation_depth_zero",
   "source_ceiling_forbidden",
+  "unsupported_contract",
+  "invalid_operation_combination",
+}
+
+local completion_ids = {
+  "graph_reverse_dispatch",
+  "staged_chain",
+  "generated_provenance",
+  "pagination_after_id",
+  "page_boundary",
+  "budget_prefix",
+  "relation_budget_prefix",
+  "relation_depth_zero",
+  "unsupported_contract",
+  "invalid_operation_combination",
 }
 
 local snapshot_options = {
@@ -246,7 +269,8 @@ local requests = {}
 check_equal(sha256_hex("abc"),
   "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
   "test SHA-256 oracle")
-check_equal(#owned_ids, 9, "owned query count")
+check_equal(#owned_ids, 19, "owned static query count")
+check_equal(#completion_ids, 10, "traversal completion query count")
 
 for _, id in ipairs(owned_ids) do
   local query_case = assert(query_cases[id])
@@ -375,18 +399,175 @@ check(semantic_query.is_response(capabilities), "response guard")
 check(not semantic_query.is_response(requests.capabilities), "response guard rejects request")
 
 local graph = index_for("graph")
-local deferred_requests = {
-  semantic_query.request("relations", { subjects = { "rule:Top" } }),
-  semantic_query.request("list", { page = { limit = 1 } }),
-  semantic_query.request("list", { budget = { max_records = 2 } }),
-  semantic_query.request("list", { subjects = { "rule:Top" } }),
-  semantic_query.request("get", { subjects = { "rule:Missing" } }),
+local reverse = responses.graph_reverse_dispatch
+check_equal(reverse.cost.records_examined, 0, "reverse record cost")
+check_equal(reverse.cost.relations_examined, 2, "reverse relation cost")
+check_equal(reverse.cost.depth_reached, 1, "reverse depth cost")
+check_equal(reverse.page.after_id, nil, "reverse after cursor")
+check_equal(reverse.page.next_after_id, nil, "reverse next cursor")
+
+local both = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("relations", {
+  subjects = { "rule:Child" },
+  relation_kinds = { "dispatches_to" },
+  direction = "both",
+}))
+check_equal(json.encode(ids(both.relations)), json.encode(ids(reverse.relations)),
+  "both traversal matches reverse depth one")
+check_equal(both.cost.relations_examined, 2, "both relation cost")
+check_equal(both.cost.depth_reached, 1, "both depth cost")
+
+check_equal(responses.staged_chain.cost.relations_examined, 2, "staged relation cost")
+check_equal(responses.staged_chain.cost.depth_reached, 1, "staged depth cost")
+check_equal(responses.generated_provenance.cost.relations_examined, 1,
+  "generated relation cost")
+check_equal(responses.generated_provenance.cost.depth_reached, 1, "generated depth cost")
+
+local after_id = responses.pagination_after_id
+check_equal(after_id.page.after_id, "rule:Child", "page after cursor")
+check_equal(after_id.page.next_after_id, nil, "page final cursor")
+check_equal(after_id.cost.records_examined, 2, "page record cost")
+
+local boundary = responses.page_boundary
+check_equal(boundary.page.after_id, nil, "boundary after cursor")
+check_equal(boundary.page.next_after_id, "rule:Top", "boundary next cursor")
+check_equal(boundary.cost.records_examined, 1, "boundary record cost")
+check_equal(#boundary.diagnostics, 0, "page-only boundary has no warning")
+
+local record_budget = responses.budget_prefix
+check_equal(record_budget.page.next_after_id, "source:0", "record budget cursor")
+check_equal(record_budget.cost.records_examined, 2, "record budget cost")
+check_equal(record_budget.diagnostics[1].severity, "warning", "record budget severity")
+check_equal(record_budget.diagnostics[1].fields.limit, "max_records", "record budget limit")
+
+local relation_budget = responses.relation_budget_prefix
+check_equal(
+  relation_budget.page.next_after_id,
+  "relation:contains:rule:Top:edge:rule:Top:1:1",
+  "relation budget cursor"
+)
+check_equal(relation_budget.cost.relations_examined, 2, "relation budget cost")
+check_equal(relation_budget.cost.depth_reached, 1, "relation budget depth")
+check_equal(relation_budget.diagnostics[1].fields.limit, "max_relations",
+  "relation budget limit")
+
+local depth_zero = responses.relation_depth_zero
+check_equal(depth_zero.page.next_after_id, nil, "depth-zero next cursor")
+check_equal(depth_zero.cost.relations_examined, 0, "depth-zero relation cost")
+check_equal(depth_zero.cost.depth_reached, 0, "depth-zero depth cost")
+check_equal(depth_zero.diagnostics[1].fields.limit, "max_depth", "depth-zero limit")
+
+local precedence = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("relations", {
+  subjects = { "rule:Top" },
+  relation_kinds = { "contains" },
+  budget = { max_relations = 1, max_depth = 1 },
+}))
+check_equal(precedence.diagnostics[1].fields.limit, "max_relations",
+  "relation budget precedes depth budget")
+
+local unsupported = responses.unsupported_contract
+check_equal(unsupported.ok, false, "unsupported status")
+check_equal(unsupported.diagnostics[1].fields.requested, "linkedspec-semantic-query-v0",
+  "unsupported requested contract")
+check_equal(unsupported.diagnostics[1].fields.supported[1],
+  "linkedspec-semantic-query-v1", "unsupported supported contract")
+local invalid = responses.invalid_operation_combination
+check_equal(invalid.ok, false, "invalid combination status")
+check_equal(invalid.diagnostics[1].fields.reason, "operation_combination",
+  "invalid combination reason")
+
+local bad_cursor = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("list", {
+  record_kinds = { "rule" },
+  page = { after_id = "rule:Missing" },
+}))
+check_equal(bad_cursor.ok, false, "bad cursor status")
+check_equal(bad_cursor.page.after_id, "rule:Missing", "bad cursor retained")
+check_equal(bad_cursor.diagnostics[1].fields.reason, "after_id_not_in_primary_stream",
+  "bad cursor reason")
+
+local unknown = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("relations", {
+  subjects = { "rule:Missing" },
+}))
+check_equal(unknown.ok, false, "unknown subject status")
+check_equal(unknown.diagnostics[1].fields.reason, "unknown_subject", "unknown subject reason")
+
+local deep = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("relations", {
+  subjects = { "rule:Top" },
+  relation_kinds = { "contains", "dispatches_to", "selects_regex" },
+  budget = { max_depth = 2 },
+}))
+check_equal(#deep.relations, 7, "two-layer traversal prefix")
+check_equal(deep.cost.depth_reached, 2, "two-layer traversal depth")
+check_equal(deep.diagnostics[1].fields.limit, "max_depth", "two-layer depth warning")
+
+local get_page = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("get", {
+  subjects = { "regex:rule:Child:0", "regex:rule:Child:1" },
+  page = { after_id = "regex:rule:Child:0" },
+}))
+check_equal(json.encode(ids(get_page.records)), '["regex:rule:Child:1"]', "get page stream")
+check_equal(get_page.page.complete, true, "get page complete")
+
+local capability_page = semantic_index_module._semantic_query_kernel(
+  graph,
+  semantic_query.request("capabilities", { page = { after_id = "capabilities:0" } })
+)
+check_equal(#capability_page.records, 0, "capabilities after cursor")
+check_equal(capability_page.page.complete, true, "capabilities page complete")
+
+local typed_error_requests = {
+  {
+    semantic_query.request("get", { subjects = { "rule:Missing" } }),
+    "unknown_subject",
+  },
+  {
+    semantic_query.request("explain", { subjects = { "source:0" } }),
+    "not_explainable",
+  },
+  {
+    semantic_query.request("capabilities", { record_kinds = { "rule" } }),
+    "capability_filter",
+  },
+  {
+    semantic_query.request("list", {
+      source = { detail = "identity", include_content_digest = true },
+    }),
+    "digest_requires_text",
+  },
 }
-for index, request in ipairs(deferred_requests) do
-  local ok, message = pcall(semantic_index_module._semantic_query_kernel, graph, request)
-  check_equal(ok, false, "deferred request " .. index)
-  check(tostring(message):find("later task%-tree leaf") ~= nil, "deferred owner " .. index)
+for index, pair in ipairs(typed_error_requests) do
+  local response = semantic_index_module._semantic_query_kernel(graph, pair[1])
+  check_equal(response.ok, false, "typed error status " .. index)
+  check_equal(response.diagnostics[1].fields.reason, pair[2], "typed error reason " .. index)
+  check_equal(response.cost.records_examined, 0, "typed error record cost " .. index)
+  check_equal(response.cost.relations_examined, 0, "typed error relation cost " .. index)
 end
+
+local explain_budget = semantic_index_module._semantic_query_kernel(graph, semantic_query.request("explain", {
+  subjects = { "decision:entry:spec:0" },
+  budget = { max_records = 1 },
+  source = { detail = "span" },
+}))
+check_equal(json.encode(ids(explain_budget.records)), '["decision:entry:spec:0"]',
+  "explain budget reserves decision")
+check_equal(#explain_budget.relations, 0, "explain budget omits step relations")
+check_equal(explain_budget.cost.records_examined, 1, "explain budget record cost")
+check_equal(explain_budget.cost.depth_reached, 0, "explain budget depth cost")
+check_equal(explain_budget.diagnostics[1].fields.limit, "max_records",
+  "explain budget limit")
+
+local mutable_reverse = semantic_query.to_json(reverse)
+mutable_reverse.relations[1].facts.host_private = true
+mutable_reverse.relations[1].evidence_ids[1] = "host-private"
+local fresh_reverse = semantic_index_module._semantic_query_kernel(
+  index_for("graph"), typed_request(query_cases.graph_reverse_dispatch.request)
+)
+check_equal(
+  sha256_hex(json.encode(semantic_query.to_json(fresh_reverse))),
+  query_cases.graph_reverse_dispatch.expected.response_sha256,
+  "relation response remains detached"
+)
+check_equal(fresh_reverse.relations[1].facts.host_private, nil, "relation facts stay private")
+check(fresh_reverse.relations[1].evidence_ids[1] ~= "host-private",
+  "relation evidence stays private")
 
 for index, constructor in ipairs({
   function() semantic_query.request("list", { contract = false }) end,

@@ -1398,7 +1398,13 @@ content migration exists yet.
   protected recursively frozen protocol values, one detached-materialization evaluator, and exact capabilities/
   list/get/explain/source behavior at nine full hashes on both Lua ABIs. Its new 159 assertions compose with the
   six prior semantic suites at 1,080 per ABI; complete Lua remains `1..177` per ABI with PUC primary 66x2, corpus
-  105, and storage proof. No root/index query name exists; private traversal/limits `.10.7.5.2` is next.
+  105, and storage proof. Private traversal/limits `.10.7.5.2` now adds canonical after-id pages, filtered
+  outgoing/incoming/both BFS, record/relation/depth budgets, deterministic prefixes, logical costs, and portable
+  typed errors over the same detached authority. All 19 static hashes pass at query 283/focused 1,204 per ABI;
+  no root/index query name exists, and raw-neutral/public completion `.10.7.5.3` is next. Signoff also passes the
+  5-backend x 2-environment x 66-command primary matrix, Unicode 10/10, all six generated ledgers, the complete
+  elevated local gate (Rust admission 1/1 in 78.18 s, Dart 1/1, Julia 416/416 in 27.3 s, containment, moved-root,
+  reference 66x2, and Phase 0 1,031/1,031 in 622 s), the mdBook build, and Knowledge Map 728 facts / 5,814 keys.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

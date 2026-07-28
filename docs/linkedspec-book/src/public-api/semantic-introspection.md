@@ -2205,18 +2205,62 @@ source/maps/outcomes, parser/compiler/staged sidecars, AST/ActionIR, regexes, ge
 loader, executor, runtime observation, trace/sinks, paths, environment, clock, randomness, callbacks, or host
 identity. Querying cannot parse, compile, execute, observe, or enable trace.
 
-At this private boundary, relation traversal, after-id cursors, non-default page limits, record/relation/depth
-budgets, deterministic incomplete prefixes, and the remaining ten static hashes deliberately reject as `.2`
-ownership. Ambiguous raw JSON-like inputs, all 26 portable malformed-request envelopes, and every public name
-remain `.3` ownership. Runtime events remain `.10.7.6`.
+#### Lua private traversal, paging, budgets, and costs
 
-The focused kernel suite passes 159 assertions on each ABI. Together with source 380, outcome 122, graph 64,
-remaining static 122, call core 136, and staged/generated 97, the seven semantic suites compose at 1,080 per ABI.
+Leaf `.10.7.5.2` completes that same package-private evaluator at all 19 static response digests. It adds
+relation-kind-filtered outgoing, incoming, and both-direction breadth-first traversal. Every layer scans the
+detached canonical relation stream, skips already-selected relation ids, advances only to unvisited frontier
+records, records the first depth of each relation, and finally restores canonical projection order. A query never
+walks a compiler object or backend graph: its only graph is the detached neutral relation array.
+
+One pager serves capabilities, list, get, relations, and explanation steps. `after_id` must name an item in the
+already-filtered primary stream; the next item begins the page. Page limits and budgets both return deterministic
+prefixes, but only a budget boundary emits a warning. For example, this neutral request shape selects the two
+regex-slot records after `rule:Child` (shown here as contract data; the Lua public call remains unavailable until
+`.10.7.5.3`):
+
+```json
+{
+  "operation": "list",
+  "record_kinds": ["rule", "regex_slot"],
+  "page": {"after_id": "rule:Child", "limit": 2},
+  "budget": {"max_records": 1000, "max_relations": 2000, "max_depth": 4}
+}
+```
+
+Its response contains `regex:rule:Child:0` then `regex:rule:Child:1`, reports the original `after_id`, has no
+`next_after_id`, is complete, and costs two examined records. In contrast, a page limit of one over the two-rule
+stream returns `rule:Top`, sets `next_after_id` to `rule:Top`, sets `complete=false`, and has no diagnostic because
+the caller requested a page boundary rather than exhausting a budget.
+
+Budgets count logical returned model items, not time, allocation, I/O, compiler work, or host resource counters.
+A `relations` request from `rule:Top`, filtered to `contains` with `max_relations=2`, returns the first two canonical
+relations, exposes the second relation id as `next_after_id`, reports cost `{records_examined: 0,
+relations_examined: 2, depth_reached: 1}`, and adds:
+
+```json
+{
+  "code": "semantic_query_budget_exceeded",
+  "severity": "warning",
+  "message": "Semantic query budget was reached; returning the deterministic prefix.",
+  "fields": {"limit": "max_relations"}
+}
+```
+
+Record, relation, and depth ceilings use the same deterministic-prefix rule. Relation exhaustion takes diagnostic
+precedence when both relation and depth limits constrain the result. Explain always reserves one record unit for
+the decision, pages only its owned explanation steps, and emits only `explained_by` relations whose steps were
+returned. Unsupported contracts, invalid operation combinations, unknown subjects, invalid primary-stream
+cursors, non-explainable subjects, and digest-without-text requests return portable errors with zero logical cost.
+
+The focused query suite now passes 283 assertions on each ABI. Together with source 380, outcome 122, graph 64,
+remaining static 122, call core 136, and staged/generated 97, the seven semantic suites compose at 1,204 per ABI.
 The complete Lua gate passes package `1..177` on both runtimes, PUC primary 66x2, corpus 105/105, and repository-
-volume storage proof. Private traversal/limits `.10.7.5.2` is the next dependency after the clean kernel commit.
+volume storage proof. Ambiguous raw JSON-like inputs, all 26 malformed-request envelopes, and every public root/
+index query name remain `.10.7.5.3` ownership; runtime events remain `.10.7.6`.
 Complete signoff also passes the five-backend primary matrix in both environments, all ten Unicode manifest legs,
-the six unchanged governance ledgers, and canonical CI through containment, moved-root execution, reference primary
-66x2, and Phase 0 1,031/1,031.
+the six unchanged governance ledgers, and canonical CI through elevated containment, moved-root execution,
+reference primary 66x2, and Phase 0 1,031/1,031.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2645,7 +2689,7 @@ The dependency order is:
 | `.10.7.4.3` | Lua calls/staging/generated composition closeout | complete; six committed suites recompose at focused 920 per ABI and close `.10.7.4` with no replacement code or promotion |
 | `.10.7.5.0` | Lua immutable-query authority audit | complete behavior-free plan; one detached authority, exact vocabulary, 19 hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and `.1-.4` order frozen |
 | `.10.7.5.1` | Lua private immutable non-traversal query kernel | implemented; protected recursive protocol values, nine exact hashes, new 159/focused 1,080 per ABI, no public query name |
-| `.10.7.5.2` | Lua private traversal, paging, budgets, and costs | next; extend the same detached evaluator to all 19 static hashes without public exposure |
+| `.10.7.5.2` | Lua private traversal, paging, budgets, and costs | implemented; all 19 static hashes, focused 283/1,204 per ABI, no public exposure |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.2` — traversal order and resource limits belong to the neutral model,
+  not the Lua host): The query evaluator traverses only the detached canonical relation array. Each breadth-first
+  layer filters that array by relation kind and direction, deduplicates selected relation ids, removes visited
+  records from the next frontier, records first logical depth, then filters the original array by those ids to
+  restore canonical order. This separates graph discovery order from wire order and makes outgoing, incoming, and
+  both-direction results identical on PUC Lua and LuaJIT without relying on hash-table iteration.
+
+  One primary-stream pager is shared by capabilities, list, get, relations, and explanation steps. It validates a
+  cursor only after operation filtering, then applies the smaller of page and logical budget limits. Page-only
+  boundaries expose a continuation without warning; budget boundaries force an incomplete deterministic prefix
+  and portable warning. Explain subtracts its mandatory decision from the record budget before paging steps.
+  Returned record/relation counts and first BFS depth are the only costs—time, allocation, I/O, compiler work, and
+  host counters never become semantic authority. Relation-budget warnings deliberately precede depth warnings.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.1` — Lua query protocol values should expose copies, not their
   storage): Lua has no native immutable record or tuple. The kernel therefore uses protected empty handles with
   weak-key state, recursively copies JSON objects/arrays/null into unexposed frozen nodes, and treats field access
