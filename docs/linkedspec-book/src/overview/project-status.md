@@ -17,8 +17,14 @@ state and retained generated-plan contract/format/identity/order/selection, then
 on both ABIs without an emitter or execution dependency. Core/full focused proof is 136/97 assertions per ABI;
 complete Lua remains package `1..177`, PUC primary 66x2, corpus 105, and storage proof. No-change `.10.7.4.3`
 recomposes all six committed suites at exact focused 920 per ABI under complete gates and composition-closes parent
-`.10.7.4` without replacement code or promotion. Behavior-free immutable-query authority audit `.10.7.5.0` is
-next; public query, runtime observation, rollout, and native admission remain later work. Closeout canonical proof
+`.10.7.4` without replacement code or promotion. Behavior-free immutable-query authority audit `.10.7.5.0` now
+freezes one detached projection-only evaluator, exact root/index vocabulary, 19 complete static hashes, 26 raw
+boundaries, dual-ABI JSON/numeric policy, query-time source redaction, traversal/pages/budgets/costs, and a private
+`.1` -> private `.2` -> complete public `.3` -> closeout `.4` order. No behavior moves; private immutable non-
+traversal `.10.7.5.1` is next, while runtime observation, rollout, and native admission remain later work. Audit
+proof passes focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, all six ledgers, and canonical Rust
+81.33 seconds + Dart 1/1 + Julia 416/416 in 29.1 seconds + containment/moved-root + reference 66x2 + Phase 0
+1,031/1,031 in 648 seconds. Calls closeout canonical proof
 passes Rust admission 1/1 in 81.19 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment/moved-root
 execution, reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds.
 

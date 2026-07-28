@@ -24,10 +24,13 @@ answers:
   - "where is the Lua semantic calls staging and generated projection plan"
   - "is Lua staged function body_ast typed ActionIR authority"
   - "which Lua generated plan owns semantic provenance"
+  - "where is the Lua semantic query authority map"
+  - "what authority may the Lua semantic query evaluator consume"
+  - "how must Lua semantic query represent JSON and integers across both ABIs"
 date: 2026-07-28
-status: current authority map; private calls/staging/generated parent composition-closed at 22/25
+status: current authority map; private 22/25 projection closed and immutable-query authority frozen
 tags: [lua, luajit, semantic-introspection, source-map, diagnostics, runtime, generated-source, privacy]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners."
+evidence: "FUTURE-PARITY-BACKLOG.10.7.0 inventories the Lua authorities; .10.7.2 and .10.7.3 composition-close one opaque semantic_index source/outcome/static foundation while public semantic record/query and typed observation APIs remain absent. .10.7.4.0 freezes calls/staging/generated authority, .10.7.4.1 implements typed 18/16, .10.7.4.2 completes exact private 22/25 provenance, and .10.7.4.3 composition-closes those committed owners. Behavior-free .10.7.5.0 freezes one detached projection-only evaluator, exact Lua vocabulary, 19 static hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and .1-.4 dependency order."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test"
 ---
 
@@ -84,13 +87,19 @@ result state plus retained plan contract/format/identity/order/selection and pro
 relations, ten source refs, 136 core assertions, and 97 staged/generated assertions on each Lua ABI. It changes no
 public API, query, observation, generated format, rollout, admission, or semantic ledger. No-change `.10.7.4.3`
 recomposes all six committed suites at focused 920 per ABI and closes parent `.10.7.4`; behavior-free immutable-
-query authority audit `.10.7.5.0` is next. Related facts:
+query authority audit `.10.7.5.0` now freezes the next boundary without behavior change. Exactly one fresh detached
+materialization of the private projection enters evaluation; no retained source/compiler/staged/generated/runtime/
+trace/host object does. Explicit `json.harray` / `json.array` / `json.null` own raw-neutral identity, plain tables
+are ambiguous, and portable integral checks use finite `number` plus `math.floor` rather than PUC-only
+`math.type`. The complete public constructor/guards/projection and `capabilities` / typed `query` / raw
+`query_neutral` methods appear together only after private non-traversal `.1` and traversal/limits `.2` match all
+19 static hashes; `.3` locks all 26 malformed boundaries and `.4` is the no-change closeout. Related facts:
 [[lua-unicode-rule-label-preflight]],
 [[lua-compiled-spec-state]], [[lua-staged-function-body-registry]], [[lua-native-spec-pipeline]],
 [[lua-generated-source-v2-rule-local-cursor]], [[lua-generated-source-fresh-process-isolation]], and
 [[lua-semantic-source-outcome-plan]], [[lua-semantic-compilation-foundation]],
-[[lua-semantic-static-projection-plan]], [[lua-semantic-call-staged-projection-plan]], and
-[[lua-semantic-staged-generated-projection]]. Static planning fixes
+[[lua-semantic-static-projection-plan]], [[lua-semantic-call-staged-projection-plan]],
+[[lua-semantic-staged-generated-projection]], and [[lua-semantic-query-authority-map]]. Static planning fixes
 five exact targets and the parsed-line plus compiled-occurrence correlation rule before projector code: local
 ActionIR offsets and short body-element fragments are not neutral source coordinates, compiler parent matchers are
 not automatically target regex slots, repeated lifecycle markers need occurrence ids, and Lua-native `Default`

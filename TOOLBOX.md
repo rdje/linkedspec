@@ -860,6 +860,28 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   The current baseline is source/outcome/graph/remaining/core/staged 379/122/64/122/136/97 on each ABI. Do not
   invoke native Lua tests without the wrapper's configured `LUA_PATH`, native `LUA_CPATH`, and repository-local
   managed storage.
+- **LUA IMMUTABLE-QUERY PREFLIGHT:** retrieve [[lua-semantic-query-authority-map]] before query work. Behavior-free
+  `.10.7.5.0` freezes exactly one fresh detached private projection per request, 19 complete static response hashes,
+  26 malformed raw-neutral labels, and the public spellings
+  `semantic_query_request` / `is_semantic_query_request` / `is_semantic_query_response` /
+  `semantic_query_to_json` plus index `capabilities` / typed `query` / raw `query_neutral`. Raw Lua input must retain
+  explicit `json.harray` / `json.array` / `json.null` identity; plain tables are ambiguous. Validate neutral
+  integers as finite `number`, floor-equal, and bounded on both ABIs—never with PUC-only `math.type`. Evaluation
+  receives no source/compiler/sidecar/AST/IR/regex/generated/runtime/trace/path/host authority and performs no
+  parse, compile, execution, or observation. Implement private non-traversal `.1`, private traversal/limits `.2`,
+  expose the complete typed/raw surface only in `.3`, and composition-close in `.4`. Reverify the frozen baseline:
+
+  ```bash
+  bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+  for runtime in puc luajit; do
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_source_foundation_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_compilation_foundation_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_static_graph_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_static_remaining_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_core_test.lua
+    bash tools/run_lua_project_data.sh "$runtime" lua/test/semantic_index_call_staged_generated_test.lua
+  done
+  ```
 - **SEMANTIC SOURCE CEILING BOUNDARY:** retrieve [[semantic-source-ceiling-boundary]] before changing private
   source retention. ADR `0049` applies ceilings when query records leave the native API: the private projection
   retains complete authoritative refs, the snapshot fixes ceiling/digest policy, and the query source projector

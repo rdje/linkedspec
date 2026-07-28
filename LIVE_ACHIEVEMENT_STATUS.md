@@ -8,14 +8,43 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.4.3` — after the clean staged/generated `.10.7.4.2` commit, add no replacement
-  production or test owner; recompose the committed source/outcome/static/core/staged suites under complete gates,
-  close parent `.10.7.4`, and continue PNT without public promotion or pushing before 300.
+- `FUTURE-PARITY-BACKLOG.10.7.5.1` — after the clean behavior-free query-authority audit commit, add private
+  recursively immutable protocol values and the non-traversal capabilities/list/get/explain kernel over exactly
+  one fresh detached projection, matching the first nine static hashes without exposing root/index query names.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.0 — freeze Lua semantic query authority**
+  (behavior-free detached-authority/vocabulary/hash/boundary audit from clean calls closeout `742ba95e`).
+
+  **Result:** One fresh detached private 22/25/10 projection is the sole future evaluator input. Exact root/index
+  vocabulary, 19 complete static hashes, 26 malformed raw-neutral labels, explicit JSON object/array/null identity,
+  portable finite integral-number validation without `math.type`, query-time source redaction, canonical pages,
+  filtered directional BFS, budgets/costs/prefixes, diagnostics/explanations, and the private `.1` -> private `.2`
+  -> complete public `.3` -> closeout `.4` order are frozen. No production/test/fixture/contract/API/query/
+  observation/format/rollout/admission/ledger behavior moves.
+
+  **Proof:** Focused 920 and package `1..177` pass per ABI; PUC primary 66x2/corpus 105, primary 5x2x66, Unicode
+  10/10, and six ledgers remain exact. Canonical clears six doctrines, Rust 1/1 in 81.33s, Dart 1/1, Julia 416/416
+  in 29.1s, elevated containment/moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 648s. mdBook,
+  Knowledge Map 726/5,791, memory/task/doctrines/diff/syntax/storage pass. Cadence advances to 48/300 with no push;
+  private non-traversal `.10.7.5.1` is next.
+
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.4.3 — close Lua call projection**
+  (no-change recomposition of six committed private semantic owners from clean `67f3d1b5`).
+
+  **Result:** Source, outcome, graph, remaining-static, call-core, and staged/generated suites recompose the exact
+  private 22 records / 25 relations / ten source refs at focused 920 assertions per ABI, preserving authored source
+  and call identity, resolution/signatures/shapes, staged/generated provenance, freeze/detachment, privacy,
+  corruption rejection, and no execution. No replacement production/test/fixture/API/query/observation/format/
+  ledger owner is added; parent `.10.7.4` closes.
+
+  **Proof:** Complete Lua `1..177` per ABI, PUC primary 66x2/corpus 105, primary 5x2x66, Unicode 10/10, all six
+  ledgers, and canonical Rust 81.19s + Dart 1/1 + Julia 416/29.0s + containment/moved-root + reference 66x2 +
+  Phase 0 1,031/648s pass. Cadence advances to 47/300 with no push; behavior-free query audit `.10.7.5.0` followed.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.4.2 — complete Lua call provenance**
   (exact private staged/generated completion from clean typed-core commit `86873ee9`).
 

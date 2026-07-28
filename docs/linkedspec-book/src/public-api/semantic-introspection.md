@@ -40,7 +40,8 @@ The distinction matters:
 - `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - Lua `linkedspec.semantic_index(source, options)` now exposes the strict source map plus detached compiled-or-
   failed snapshot, presence, diagnostic, entry, and generated-v2 plan foundation identically on PUC Lua/LuaJIT;
-  static projection, public query, runtime observation, and backend admission remain later Lua leaves; and
+  the exact private static plus calls/staging/generated projection is complete, while public query, runtime
+  observation, and backend admission remain later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -1696,7 +1697,8 @@ source and ActionIR ASTs, staged function payload/job/result sidecars, ordered c
 generated-source v2, loaded
 and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
 JSON. It now exposes the opaque semantic source map/SHA-256 and compiled-or-failed foundation described below. It
-does not yet retain a private normalized projection, query evaluator, or typed semantic observation sink.
+now retains the exact private normalized static plus calls/staging/generated projection. It does not yet expose a
+query evaluator or typed semantic observation sink.
 
 The first Unicode implementation leaf is now complete. Generator
 `unicode_case/generate_unicode_rule_label_contract.py` emits private
@@ -2112,6 +2114,60 @@ Unicode 10/10, all six unchanged ledgers, and canonical Rust 81.19 seconds + Dar
 seconds + reference primary 66x2 + Phase 0 1,031/1,031 in 648 seconds pass. No production/test/fixture/API/query/
 observation/format/ledger file changes. Parent `.10.7.4` is composition-closed and behavior-free immutable-query
 authority audit `.10.7.5.0` follows.
+
+#### Lua immutable-query authority plan
+
+Behavior-free `.10.7.5.0` freezes the outward query boundary before implementation. All 20 neutral requests are
+inventoried; `runtime_events` remains later observation work, while Lua `.10.7.5.1-.3` must reproduce the other 19
+complete response hashes through both typed and raw-neutral entrypoints. Raw validation owns exactly 26 portable
+malformed labels, from non-object requests and unsupported contracts through bad fields, filters, numeric ranks,
+source policies, operation combinations, unknown subjects, invalid cursors, and non-explainable subjects.
+
+One fresh detached materialization of the existing private projection is the complete evaluator authority. It
+contains only snapshot, source refs, records, and relations. The evaluator cannot receive retained source or source
+map above that clone, parsed/compiled/staged sidecars, AST/ActionIR, compiled regexes, generated implementation,
+plan builder, emitter, loader, executor, runtime observations, trace or diagnostic sinks, paths, environment,
+clock, randomness, callbacks, or host identity. Querying is therefore a structural operation: it never parses,
+compiles, executes, observes, enables trace, or mutates an index or request. A nested mutation of one materialized
+tree cannot affect the next request.
+
+Lua's raw-neutral boundary must preserve JSON kind explicitly. `json.harray`, `json.array`, and `json.null`
+distinguish object, array, and null even when containers are empty, and direct decoder output is admissible. A
+plain table is ambiguous raw input; the typed constructor may copy ordinary option/list tables because their role
+is known. PUC Lua alone exposes an integer/float subtype through `math.type`, so neutral integers instead require a
+finite Lua `number`, equality with `math.floor(value)`, and the exact neutral bound on both PUC Lua and LuaJIT.
+Booleans are rejected by type before that check.
+
+The planned public API is deliberately small:
+
+```lua
+local json = require("linkedspec.json")
+local request = linkedspec.semantic_query_request("list", {
+  record_kinds = {"rule"},
+  source = {detail = "identity", include_digest = false},
+})
+
+local capabilities = index:capabilities()
+local response = index:query(request)
+local neutral = index:query_neutral(json.decode(request_json))
+local detached = linkedspec.semantic_query_to_json(response)
+```
+
+The root also exposes `is_semantic_query_request` and `is_semantic_query_response`. Request and response values are
+protected opaque values with recursively immutable stored state; collection properties and JSON projection return
+fresh detached JSON-kind trees. Operations, directions, source levels, record/relation kinds, fields, envelopes,
+and diagnostic codes remain lowercase neutral strings rather than backend enums.
+
+Canonical evaluation applies primary-stream pages, filtered outgoing/incoming/both breadth-first relation
+traversal, relation-id then frontier-record-id deduplication, canonical result order, logical record/relation/depth
+budgets and costs, deterministic incomplete prefixes, query-time source projection/redaction, four portable
+diagnostics, and decision-first explanations. Dependency order prevents partial compatibility: `.10.7.5.1` adds
+private immutable protocol values and non-traversal capabilities/list/get/explain for nine hashes; `.2` adds
+private traversal/pages/budgets/costs for the remaining ten; `.3` exposes all public names together and locks all
+19 typed/raw hashes plus 26 raw boundaries; `.4` is the no-change committed-owner closeout. Audit signoff keeps
+focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, and all six ledgers exact; canonical CI passes
+Rust 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof, reference primary
+66x2, and Phase 0 1,031/1,031 in 648 seconds.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2538,7 +2594,8 @@ The dependency order is:
 | `.10.7.4.1` | Lua typed function/helper/call/binding core | complete; exact private non-staged 18/16/10, focused 136 per ABI, no promotion |
 | `.10.7.4.2` | Lua staged/generated calls completion | complete implementation; exact private full 22/25/10, focused 97 per ABI, no emitter or promotion |
 | `.10.7.4.3` | Lua calls/staging/generated composition closeout | complete; six committed suites recompose at focused 920 per ABI and close `.10.7.4` with no replacement code or promotion |
-| `.10.7.5.0` | Lua immutable-query authority audit | next; freeze detached authority, public vocabulary, 19 static hashes, 26 malformed boundaries, and dependency order without behavior change |
+| `.10.7.5.0` | Lua immutable-query authority audit | complete behavior-free plan; one detached authority, exact vocabulary, 19 hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and `.1-.4` order frozen |
+| `.10.7.5.1` | Lua private immutable non-traversal query kernel | next; protected protocol values plus capabilities/list/get/explain and source policy for nine static hashes, with no public query name |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

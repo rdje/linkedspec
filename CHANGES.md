@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.0 — freeze Lua semantic query authority
+
+Completed the behavior-free Lua immutable-query audit before evaluator code. All 20 governed requests, 19 complete
+static response hashes, 26 malformed raw-neutral boundaries, capabilities, source ceilings, canonical pages,
+directional filtered breadth-first traversal, budgets/costs/prefixes, portable diagnostics, and explanation order
+now have one durable Lua authority map. `runtime_events` remains the later observation-owned twentieth response.
+
+One fresh detached materialization of the closed private 22-record / 25-relation / ten-source-ref projection is the
+sole evaluator input. Query-time projection enforces the outward source ceiling; retained source/compiler/staged
+sidecars/AST/ActionIR/regex/generated implementation/loader/executor/runtime/trace/path/environment/host state is
+denied. PUC Lua and LuaJIT agree on explicit object/array/null kinds and canonical JSON. Portable integers use
+finite `number` plus floor equality and the neutral bound, never PUC-only `math.type`; plain tables remain
+ambiguous raw input.
+
+The public vocabulary is frozen to one typed request constructor, request/response guards, detached JSON
+projection, and index `capabilities`, typed `query`, and raw-neutral `query_neutral`. Private immutable
+non-traversal `.10.7.5.1` precedes private traversal/limits `.2`; only complete `.3` exposes every public name
+together, and `.4` recomposes the committed proof. This audit changes no production, test, fixture, neutral
+contract, public API, semantic response, runtime observation, generated format, rollout, admission, or ledger.
+
+The six existing focused suites remain exact at 920 assertions per ABI and complete Lua passes `1..177` per ABI.
+Primary 5x2x66, Unicode 10/10, and all six governance ledgers are unchanged. Canonical CI passes six doctrines,
+Rust admission 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, relocated process containment and
+moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds. Knowledge Map 726/5,791 and
+the mdBook pass; private non-traversal implementation `.10.7.5.1` is next.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.4.3 — close Lua call projection
 
 Composition-closed the private Lua calls/staging/generated target by rerunning its six committed source, outcome,

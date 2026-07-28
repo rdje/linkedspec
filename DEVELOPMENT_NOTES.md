@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.0` — query authority must cross one explicit JSON-kind boundary):
+  Lua tables do not intrinsically distinguish a JSON object from an array, especially when empty, and PUC Lua's
+  integer subtype is absent from LuaJIT. A portable raw query API therefore accepts only explicit `json.harray`,
+  `json.array`, and `json.null` values (including direct decoder output), while the typed constructor may copy
+  ordinary role-known option/list tables. Numeric ranks validate as finite `number`, floor-equal, and bounded;
+  neither `math.type` nor host integer width may own neutral semantics.
+
+  The existing index already supplies the other necessary isolation boundary. One fresh detached materialization
+  per request contains every permitted record, relation, and private source ref; the evaluator applies outward
+  source redaction from the snapshot and receives nothing else. This is stronger and simpler than holding the
+  compiler or source map inside the query layer: pages, filtered BFS, budgets, costs, errors, and explanations are
+  pure structural operations, and mutating one returned tree cannot influence another request. Public exposure is
+  delayed until both private evaluator halves are complete so no partial query surface can become compatibility.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.4.3` — composition closure must reuse the committed proof topology):
   Once the source, outcome, graph, remaining-static, call-core, and staged/generated owners are independently exact,
   the parent closes by rerunning those six suites—not by adding an aggregate test or second projector. Their exact

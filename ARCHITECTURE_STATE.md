@@ -5,6 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-28`
+- `2026-07-28` Lua immutable-query authority freeze: behavior-free
+  `FUTURE-PARITY-BACKLOG.10.7.5.0` proves the one fresh detached private projection is sufficient for all 19
+  static semantic responses. It freezes exact root/index vocabulary, 26 malformed raw-neutral labels, explicit
+  `json.harray` / `json.array` / `json.null` identity, portable finite integral-number validation without
+  `math.type`, recursively protected protocol state, query-time source redaction, canonical pages, filtered
+  directional breadth-first traversal, budgets/costs/prefixes, and portable diagnostics/explanations. The evaluator
+  receives no retained source/compiler/staged/AST/IR/regex/generated/runtime/trace/path/host authority and never
+  parses, compiles, executes, or observes. Implementation is private non-traversal `.1`, private traversal/limits
+  `.2`, complete public typed/raw boundary `.3`, then no-change closeout `.4`; no production/test/fixture/contract/
+  API/query/observation/format/rollout/admission/ledger behavior moves in the audit. Focused 920 per ABI, complete
+  Lua, primary 5x2x66, Unicode 10/10, all six unchanged ledgers, and canonical Rust 81.33s + Dart 1/1 + Julia
+  416/29.1s + elevated containment/moved-root + reference 66x2 + Phase 0 1,031/648s pass; `.10.7.5.1` is next.
 - `2026-07-28` Lua calls/staging/generated composition closure: no-change
   `FUTURE-PARITY-BACKLOG.10.7.4.3` recomposes the six committed semantic owners at exact focused 920 assertions
   on PUC Lua and LuaJIT, preserving the complete private 22 records / 25 relations / ten source refs and all
