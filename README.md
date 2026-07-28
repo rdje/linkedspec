@@ -1431,6 +1431,13 @@ content migration exists yet.
   observation state; semantic rollout, native admission, and all ledgers remain unchanged. Full signoff passes
   primary 5x2x66, Unicode 10/10, all six ledgers, canonical CI through Phase 0 1,031/1,031 in 667 seconds, mdBook,
   and Knowledge Map 733/5,874.
+  No-change composition `.10.7.6.4` now reruns those same ten committed owners from clean `04ab4fec` at exact
+  focused 1,964 per ABI and composition-closes parent `.10.7.6` without a replacement implementation or test.
+  Complete Lua, primary 5x2x66, Unicode 10/10, and every unchanged ledger pass; canonical CI passes Rust admission
+  1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment, moved-root proof, reference primary
+  66x2, and Phase 0 1,031/1,031 in 656 seconds. Generated-source v2/format 2, semantic rollout 5/9, and native
+  admission 4/6 remain fixed; exact ordered PUC Lua/LuaJIT admission is the next leaf `.10.7.7` after a clean
+  closeout commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

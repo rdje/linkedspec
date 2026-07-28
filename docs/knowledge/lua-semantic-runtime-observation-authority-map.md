@@ -21,9 +21,9 @@ answers:
   - "how do generated Lua parsers authorize semantic observation sinks"
   - "does Lua generated semantic observation change emitted source bytes"
 date: 2026-07-28
-status: native capture, immutable derivation, and generated/emitted propagation implemented; composition remains planned
+status: runtime-observation parent composition-closed; exact dual-ABI admission remains separate
 tags: [lua, luajit, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
-evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; lua/test/semantic_index_runtime_projection_test.lua; lua/test/semantic_index_runtime_observation_generated_routes_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.3
+evidence: lua/src/linkedspec/interpreter.lua; lua/src/linkedspec/semantic_observation.lua; lua/src/linkedspec/semantic_runtime_projection.lua; lua/src/linkedspec/sha256.lua; lua/src/linkedspec/init.lua; lua/src/linkedspec/matching.lua; lua/src/linkedspec/compiled_spec.lua; lua/src/linkedspec/spec_loader.lua; lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/semantic_index.lua; lua/test/semantic_index_runtime_observation_native_test.lua; lua/test/semantic_index_runtime_projection_test.lua; lua/test/semantic_index_runtime_observation_generated_routes_test.lua; capability_conformance/semantic_introspection_model.json; capability_conformance/semantic_introspection_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.7.6.0-.4
 last_verified: 2026-07-28
 reverify:
   - "rg -n 'trace_regex_slot_selected|accept_match|RuntimeParseResult|diagnostic_output_sink_failure|runtime_parse' lua/src/linkedspec/interpreter.lua"
@@ -44,10 +44,11 @@ reverify:
 
 ## Current boundary
 
-Lua now has one typed semantic runtime-observation channel on both ABIs. Native direct, loaded, normalized-AST
+Lua has one composition-closed typed semantic runtime-observation channel on both ABIs. Native direct, loaded, normalized-AST
 reconstructed, execute-alias, and traced convenience routes are implemented by `.10.7.6.1`; detached immutable
 observed-index derivation is implemented by `.10.7.6.2`; public generated-plan direct/traced and freshly emitted
-direct/traced routes, including isolated hosts, are implemented by `.10.7.6.3`. The high trace topic
+direct/traced routes, including isolated hosts, are implemented by `.10.7.6.3`; no-change `.10.7.6.4` recomposes
+those committed owners and closes the parent without replacing them. The high trace topic
 `lua_runtime:regex_slot_selected` remains string observability and diagnostic events remain a separate optional
 product. Neither is normalized semantic evidence.
 
@@ -142,7 +143,8 @@ No-sink event/scalar/hash fences and result/cursor/trace/diagnostic behavior rem
 - `.10.7.6.3`: public generated helpers plus fresh emitted direct/traced and isolated PUC Lua/LuaJIT propagation,
   callback-value passthrough, failure omission, and result/cursor/trace/diagnostic non-interference with unchanged
   generated-source v2/format 2.
-- `.10.7.6.4`: no-change composition/signoff and parent closure without Lua rollout or native-admission promotion.
+- `.10.7.6.4`: completed no-change composition/signoff and parent closure without Lua rollout or native-admission
+  promotion; `.10.7.7` separately owns exact ordered dual-ABI admission.
 
 ## Exact neutral anchor and measured topology
 
@@ -176,12 +178,18 @@ artifacts are retained.
 
 The implemented `.10.7.6.2` boundary adds 269 derivation assertions and composes nine semantic owners at 1,884 per
 ABI. The implemented `.10.7.6.3` boundary adds 80 generated-route assertions and composes ten semantic owners at
-1,964 per ABI. Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and the 15-owner
-same-volume storage proof. Cross-backend closeout is recorded by the active task leaf rather than inferred here.
+1,964 per ABI. No-change `.10.7.6.4` reruns those same ten owners from clean commit `04ab4fec` at exact 1,964 per
+ABI and composition-closes the parent without a new owner. Complete Lua passes package `1..177` per ABI, PUC
+primary 66x2, corpus 105/105, and the 15-owner same-volume storage proof.
 
 Full `.10.7.6.3` signoff passes primary 5x2x66, Unicode 10/10, all six ledgers, canonical Rust 1/1 in 82.65
 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, containment/moved-root proof, reference primary 66x2, and Phase 0
 1,031/1,031 in 667 seconds. mdBook and Knowledge Map 733/5,874 pass.
+
+The no-change `.10.7.6.4` closeout repeats primary 5x2x66, Unicode 10/10, every unchanged ledger, and canonical
+six-doctrine CI with Rust admission 1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment,
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 656 seconds. Deterministic generated-source
+v2/format 2, rollout 5/9, and native admission 4/6 remain fixed.
 
 Related facts: [[lua-semantic-introspection-authority-map]], [[lua-semantic-query-authority-map]],
 [[lua-semantic-query-public-api]], [[lua-runtime-matching-state]], [[lua-runtime-rule-interpreter]],

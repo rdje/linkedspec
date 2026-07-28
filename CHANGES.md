@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.4 — close Lua runtime observation
+
+No-change closeout starts from clean generated-route commit `04ab4fec` and adds no production module, replacement
+test, fixture, contract, API, observation vocabulary, generated format, rollout, admission, or governance owner.
+It reruns the ten committed Lua semantic suites unchanged at
+382 + 122 + 64 + 122 + 136 + 97 + 571 + 121 + 269 + 80 = 1,964 assertions on both PUC Lua and LuaJIT. The same
+owners re-prove native, loaded, reconstructed, generated, emitted, traced, and isolated-host routes; arbitrary
+callback identity; strict detached observed-index derivation; the exact twentieth typed/raw-neutral digest;
+no-sink zero work; result/trace/diagnostic neutrality; immutable isolation; and forbidden authority.
+
+Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and the 15-owner same-volume storage
+oracle. The five-backend primary matrix passes 5x2x66 and all ten Unicode-manifest legs pass. Semantic 6/20/89 at
+rollout 5/9 and admission 4/6, both Unicode ledgers, capability 80/0/0, generated v1/10/80-0-0, language
+246/105+1/122, and public 59/27/0 remain exact.
+
+Canonical CI passes all six doctrines, Rust admission 1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0
+seconds, process containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 656 seconds.
+mdBook and Knowledge Map 733/5,874 pass. Exact cleanup removes only the 13,052-KiB generated book and one
+proven-empty managed-run directory; active repository-local Rust incremental caches are retained. Parent
+`.10.7.6` is composition-closed without changing generated-source v2/format 2 or semantic governance; exact
+ordered dual-ABI admission remains `.10.7.7`.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.6.3 — propagate Lua generated runtime observations
 
 Public generated-plan direct/traced helpers and fresh emitted-module direct/traced wrappers now accept the same

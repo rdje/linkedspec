@@ -1,5 +1,16 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.4` — runtime-observation closeout composes owners; admission must not
+  leak backward): The ten committed suites already partition Lua semantic authority correctly across source,
+  outcome, static projection, calls/staging, query, native observation, detached derivation, and generated/emitted
+  routes. Re-running them unchanged from clean `04ab4fec` at focused 1,964 assertions per ABI is the honest parent
+  proof; a closeout-only adapter or replacement test would obscure ownership rather than strengthen it.
+
+  Composition closure does not imply admission. Generated-source v2/format 2, semantic rollout 5/9, and native
+  admission 4/6 remain fixed here. The next leaf `.10.7.7` must add the one omission-sensitive ordered consumer
+  that proves byte-identical PUC Lua/LuaJIT topology and is the sole owner allowed to advance Lua rollout and
+  admission. Keeping that boundary explicit prevents a broad closeout gate from silently promoting support.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.3` — existing option forwarding avoids an emitted-format change, but
   generated callback identity needs its own carrier): Lua's emitted direct/traced wrappers already forward an
   invocation options table into the public generated helpers. Semantic observation therefore requires no new

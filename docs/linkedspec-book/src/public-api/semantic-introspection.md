@@ -2536,6 +2536,26 @@ Complete signoff passes primary 5x2x66, Unicode 10/10, all six unchanged ledgers
 admission 1/1 in 82.65 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, containment/moved-root proof, reference
 primary 66x2, and Phase 0 1,031/1,031 in 667 seconds. The mdBook build and Knowledge Map 733/5,874 also pass.
 
+#### Lua runtime-observation composition closeout
+
+Leaf `.10.7.6.4` starts from clean generated-route commit `04ab4fec` and adds no replacement production module,
+test, fixture, contract, API, observation vocabulary, generated format, rollout, admission, or governance owner.
+It retrieves and reruns the ten committed source, outcome, graph, remaining-static, call-core, staged/generated,
+public-query, native-observation, observed-index derivation, and generated-route suites at
+382 + 122 + 64 + 122 + 136 + 97 + 571 + 121 + 269 + 80 = 1,964 assertions on each Lua ABI. That recomposition
+again proves native, loaded, reconstructed, generated, emitted, traced, and isolated-host routes; exact arbitrary
+callback identity; strict detached observation validation; the twentieth typed/raw-neutral digest; immutable
+base/derived isolation; no-sink zero work; result/trace/diagnostic neutrality; and compiler/runtime/path/host
+authority denial.
+
+Complete closeout proof passes Lua package `1..177` per ABI, PUC primary 66x2, corpus 105/105, 15-owner storage,
+the five-backend primary 5x2x66 matrix, all ten Unicode-manifest legs, and every unchanged governance ledger.
+Canonical CI passes all six doctrines, Rust admission 1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0
+seconds, elevated process containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 656
+seconds. Parent `.10.7.6` is therefore composition-closed without changing deterministic generated-source
+v2/format 2, semantic rollout 5/9, or native admission 4/6. The separate ordered dual-ABI admission consumer
+remains `.10.7.7`.
+
 #### Lua private immutable query kernel (historical dependency boundary)
 
 Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
@@ -3060,6 +3080,7 @@ The dependency order is:
 | `.10.7.6.1` | Lua typed native runtime observation capture | implemented; protected events, exact native routes/callback identity, new 121/focused 1,614 per ABI, generated and derivation fenced |
 | `.10.7.6.2` | Lua immutable observed-index derivation | implemented; strict detached topology validation, exact twentieth digest, new 269/focused 1,884 per ABI, generated propagation fenced |
 | `.10.7.6.3` | Lua generated and emitted runtime observation | implemented; public/fresh-emitted direct/traced plus isolated dual-ABI routes, exact callback identity and marker fences, new 80/focused 1,964 per ABI, unchanged v2/format 2 |
+| `.10.7.6.4` | Lua runtime-observation composition closeout | complete; committed focused 1,964 plus full signoff closes `.10.7.6` without replacement code, format change, or promotion |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

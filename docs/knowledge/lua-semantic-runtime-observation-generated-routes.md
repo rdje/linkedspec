@@ -12,7 +12,7 @@ answers:
   - "does Lua emitted exit produce a final semantic result event"
   - "does Lua serialize semantic observation state into generated source"
 date: 2026-07-28
-status: current generated-plan and fresh-emitted direct/traced propagation; composition closeout remains pending
+status: current generated-plan and fresh-emitted direct/traced propagation; parent composition closeout complete
 tags: [lua, luajit, semantic-introspection, runtime, observation, generated-source, trace, diagnostics]
 evidence: lua/src/linkedspec/source_emitter.lua; lua/src/linkedspec/interpreter.lua; lua/test/semantic_index_runtime_observation_generated_routes_test.lua; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.6.3
 last_verified: 2026-07-28
@@ -59,6 +59,12 @@ admission 1/1 in 82.65 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, contain
 primary 66x2, and Phase 0 1,031/1,031 in 667 seconds. mdBook and Knowledge Map 733/5,874 pass; exact cleanup removes
 only the 13,040-KiB rendered book and one proven-empty managed-run directory while retaining reusable repository-
 local caches and governed artifact evidence.
+
+No-change closeout `.10.7.6.4` starts from clean commit `04ab4fec`, reruns all ten committed semantic owners at
+1,964 assertions per ABI, and closes parent `.10.7.6` without adding another adapter or moving emitted bytes,
+format, rollout, admission, or governance. Its canonical proof passes Rust admission 1/1 in 81.52 seconds, Dart
+1/1, Julia 416/416 in 29.0 seconds, containment/moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031
+in 656 seconds. Exact ordered dual-ABI admission remains `.10.7.7`.
 
 Related facts: [[lua-semantic-runtime-observation-authority-map]],
 [[lua-semantic-runtime-observation-direct-capture]], [[lua-semantic-runtime-observation-derivation]],
