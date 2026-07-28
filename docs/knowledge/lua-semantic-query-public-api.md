@@ -13,7 +13,7 @@ answers:
   - "can Lua semantic query compile execute trace access paths or invoke callbacks"
   - "does Lua semantic query include runtime observations"
 date: 2026-07-28
-status: current public static API; runtime observation and backend admission pending
+status: current composition-closed public static API; runtime observation and backend admission pending
 tags: [lua, luajit, semantic-introspection, query, capabilities, public-api, validation, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.3; lua/src/linkedspec/init.lua; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_query.lua; lua/test/semantic_index_query_kernel_test.lua; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n 'semantic_query_request|is_semantic_query_(request|response)|semantic_query_to_json|INDEX_METHODS.(capabilities|query|query_neutral)' lua/src/linkedspec lua/test"
@@ -62,6 +62,12 @@ one materialization, and authority denial at 571 assertions per ABI. The seven s
 assertions per ABI: source 380, outcome 122, graph 64, remaining static 122, call core 136, staged/generated 97,
 and query 571. Complete Lua also passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and the
 repository-volume storage proof.
+
+No-change leaf `.10.7.5.4` reruns those seven committed suites from clean public commit `65cb13da` and closes the
+immutable query parent without a replacement production/test/API owner. Complete dual-ABI Lua, primary 5x2x66,
+Unicode 10/10, all six unchanged ledgers, canonical Rust 77.93s + Dart 1/1 + Julia 416/27.4s + containment/
+moved-root + reference 66x2 + Phase 0 1,031/622s, mdBook, Knowledge Map, and exact cleanup pass. Runtime observation
+remains solely `.10.7.6` work.
 
 Related facts: [[lua-semantic-query-authority-map]], [[lua-semantic-query-kernel]],
 [[lua-semantic-query-traversal]], [[lua-semantic-introspection-authority-map]],

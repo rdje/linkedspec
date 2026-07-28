@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.4 — close immutable Lua static query
+
+Recomposed the seven committed Lua semantic owners from clean public-query commit `65cb13da` without adding or
+replacing production code, tests, fixtures, contracts, APIs, runtime observation, generated format, or governance
+ledger ownership. Source 380, outcome 122, graph 64, remaining static 122, call core 136, staged/generated 97, and
+public query 571 remain exact at focused 1,492 assertions on PUC Lua and LuaJIT. All 19 typed/raw static hashes, all
+26 malformed boundaries, public topology, recursive detachment, one materialization, input/interleaving isolation,
+source/privacy ceilings, portable representation policy, non-execution, and forbidden authority recompose from
+the committed owners. Parent `.10.7.5` is composition-closed; behavior-free runtime-observation audit `.10.7.6.0`
+is next.
+
+Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and 13-owner storage proof. The
+primary matrix passes 660/660, Unicode passes 10/10, and all six ledgers remain exact. Canonical CI passes six
+doctrines, Rust admission 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment, moved-root proof,
+reference primary 66x2, and Phase 0 1,031/1,031 in 622s. The mdBook, Knowledge Map 729/5,824, memory/task/doctrine/
+diff/syntax/storage checks, and exact cleanup pass. Cleanup removes the 12,948-KiB rendered book and one proven-
+empty managed-run directory; no Lua adapter remains, while 246 reusable active Rust `.bin`/log cache artifacts are
+retained.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.3 — expose public Lua static semantic queries
 
 Exported the complete Lua static query API together after both private evaluator halves were complete. Root

@@ -8,14 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.5.4` — after the clean public typed/raw-neutral static-query commit, recompose the
-  committed immutable query owners and close `.10.7.5` without replacement code, runtime observation, or semantic
-  rollout/admission movement.
+- `FUTURE-PARITY-BACKLOG.10.7.6.0` — after the clean immutable-query parent closeout, audit and freeze exact typed
+  Lua runtime-observation vocabulary, emission seams, callback identity, route propagation, detached derivation,
+  authority denial, and `.1-.4` dependency order before behavior code.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.4 — close immutable Lua static query**
+  (no-change committed-owner recomposition from clean public-query commit `65cb13da`).
+
+  **Result:** The seven committed source/outcome/static/call/staged/query suites recompose unchanged at exact
+  focused 1,492 per ABI, including all 19 typed/raw static hashes, 26 malformed boundaries, public topology,
+  recursive detachment, one materialization, input/interleaving isolation, source/privacy ceilings, portable
+  representation policy, non-execution, and forbidden authority. No replacement production/test/fixture/contract/
+  API/observation/format/ledger owner is added; parent `.10.7.5` is composition-closed without promotion.
+
+  **Proof:** Complete Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and 13-owner storage
+  proof. Primary 5x2x66, Unicode 10/10, and all six ledgers remain exact. Canonical passes six doctrines, Rust 1/1
+  in 77.93s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment, moved-root proof, reference primary 66x2, and
+  Phase 0 1,031/1,031 in 622s. mdBook, Knowledge Map 729/5,824, memory/task/diff/syntax/storage, and exact cleanup
+  of the 12,948-KiB book and one empty managed-run directory pass; no Lua adapter remains and 246 active Rust
+  cache artifacts are retained. Cadence advances to 52/300 with no push; behavior-free runtime-observation audit
+  `.10.7.6.0` is next.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.3 — expose public Lua static semantic queries**
   (complete typed/raw-neutral public surface from clean private-evaluator commit `643e0771`).
 

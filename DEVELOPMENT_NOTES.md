@@ -1,5 +1,12 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.4` — immutable-query closeout owns recomposition, not a second
+  implementation): The committed seven-suite boundary is sufficient to composition-close Lua static query at
+  focused 1,492 assertions per ABI. Re-running it from clean public commit `65cb13da` proves that the public API,
+  all 19 typed/raw hashes, 26 malformed boundaries, detachment/materialization/privacy/non-execution fences, and
+  dual-ABI representation policy remain owned by `.1-.3`; `.4` adds no replacement code or test. Runtime event
+  capture, observed-index derivation, propagation, and admission therefore remain cleanly isolated in `.10.7.6-.7`.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.3` — raw-neutral Lua input needs explicit data kinds and explicit
   scalar grammar, not host-table inference): A Lua table cannot prove whether an empty value is an object or array,
   and `tonumber` is not portable between PUC Lua and LuaJIT: hexadecimal text is numeric on both while non-finite

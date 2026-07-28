@@ -14,7 +14,7 @@ answers:
   - "when may Lua expose capabilities query and query_neutral"
   - "does Lua semantic query include runtime events"
 date: 2026-07-28
-status: current authority plan; complete public static evaluator implemented
+status: current authority plan; complete public static evaluator composition-closed
 tags: [lua, luajit, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/src/linkedspec/json.lua; docs/knowledge/perl-semantic-query-evaluator.md; docs/knowledge/rust-semantic-query-evaluator.md; docs/knowledge/dart-semantic-query-authority-map.md; docs/knowledge/julia-semantic-query-authority-map.md
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(query|capabilities)|query_neutral|materialize' lua/src/linkedspec lua/test"
@@ -120,6 +120,11 @@ Implementation order remains omission-safe:
 3. `.10.7.5.3` now exposes the complete constructor/guards/projection and three index methods together, matching
    all 19 typed/raw hashes and 26 raw boundaries with clone/privacy/non-execution/host denial.
 4. `.10.7.5.4` recomposes committed proof without a replacement owner and closes the immutable query parent.
+
+That no-change closeout passes from clean public commit `65cb13da` at exact focused 1,492 per ABI plus complete
+Lua, primary 5x2x66, Unicode 10/10, all six unchanged ledgers, canonical admissions/containment/moved-root/
+reference/Phase 0, mdBook, Knowledge Map, and exact cleanup. It adds no runtime observation or promotion;
+behavior-free observation audit `.10.7.6.0` follows.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-source-ceiling-boundary]],
 [[lua-semantic-introspection-authority-map]], [[lua-semantic-call-staged-projection-plan]],

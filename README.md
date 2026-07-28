@@ -1404,11 +1404,12 @@ content migration exists yet.
   helpers plus index `capabilities`, typed `query`, and raw `query_neutral`; both paths share one evaluator and one
   detached materialization. All 19 static hashes match through both paths, all 26 malformed boundaries return
   portable responses, and exact JSON-kind/dual-ABI numeric/clone/host/non-execution proof passes at query 571 and
-  focused 1,492 per ABI. Runtime observation, promotion, and admission remain later owners; no-change `.10.7.5.4`
-  is next. Public-leaf signoff also passes the 5-backend x 2-environment x 66-command primary matrix, Unicode
-  10/10, all six unchanged ledgers, the complete elevated local gate (Rust admission 1/1 in 78.05 s, Dart 1/1,
-  Julia 416/416 in 27.3 s, containment, moved-root, reference 66x2, and Phase 0 1,031/1,031 in 624 s), the mdBook
-  build, and Knowledge Map 729 facts / 5,824 keys.
+  focused 1,492 per ABI. No-change `.10.7.5.4` now recomposes all seven committed suites at that exact boundary
+  and composition-closes the immutable query parent without replacement code, runtime observation, format, or
+  promotion. Closeout signoff passes the 5-backend x 2-environment x 66-command primary matrix, Unicode 10/10,
+  all six unchanged ledgers, the complete elevated local gate (Rust admission 1/1 in 77.93 s, Dart 1/1, Julia
+  416/416 in 27.4 s, containment, moved-root, reference 66x2, and Phase 0 1,031/1,031 in 622 s), the mdBook build,
+  and Knowledge Map 729 facts / 5,824 keys. Behavior-free runtime-observation audit `.10.7.6.0` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

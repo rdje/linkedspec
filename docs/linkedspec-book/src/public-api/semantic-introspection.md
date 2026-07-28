@@ -2165,10 +2165,10 @@ budgets and costs, deterministic incomplete prefixes, query-time source projecti
 diagnostics, and decision-first explanations. Dependency order prevents partial compatibility: `.10.7.5.1` adds
 private immutable protocol values and non-traversal capabilities/list/get/explain for nine hashes; `.2` adds
 private traversal/pages/budgets/costs for the remaining ten; `.3` exposes all public names together and locks all
-19 typed/raw hashes plus 26 raw boundaries; `.4` is the no-change committed-owner closeout. Audit signoff keeps
-focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, and all six ledgers exact; canonical CI passes
-Rust 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof, reference primary
-66x2, and Phase 0 1,031/1,031 in 648 seconds.
+19 typed/raw hashes plus 26 raw boundaries; `.4` is the no-change committed-owner closeout. The original audit
+signoff kept focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, and all six ledgers exact; canonical
+CI passes Rust 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof,
+reference primary 66x2, and Phase 0 1,031/1,031 in 648 seconds.
 
 #### Lua public typed and raw-neutral static query API
 
@@ -2242,6 +2242,23 @@ caller-owned `.10.7.6` work and native admission remains `.10.7.7`. Complete sig
 unchanged ledgers, and canonical Rust 1/1 in 78.05 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment,
 moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 624 seconds. The mdBook and Knowledge Map
 729/5,824 pass.
+
+#### Lua immutable static-query closeout
+
+Leaf `.10.7.5.4` starts from clean public-query commit `65cb13da` and adds no replacement production module,
+test, fixture, contract, API, runtime observation, generated format, or governance owner. It retrieves and reruns
+the seven committed source, outcome, graph, remaining-static, call-core, staged/generated, and public-query suites
+at 380 + 122 + 64 + 122 + 136 + 97 + 571 = 1,492 assertions on each Lua ABI. That recomposition again proves all
+19 typed/raw static hashes, all 26 malformed boundaries, exact public topology, recursive detachment, one
+materialization, input/interleaving isolation, source/privacy ceilings, portable JSON/numeric/cursor behavior,
+non-execution, and compiler/runtime/trace/path/environment/time/random/callback/host denial.
+
+Complete closeout proof passes Lua package `1..177` per ABI, PUC primary 66x2, corpus 105/105, 13-owner storage,
+primary 5x2x66, Unicode 10/10, and all six unchanged governance ledgers. Canonical CI passes six doctrines, Rust
+admission 1/1 in 77.93 seconds, Dart 1/1, Julia 416/416 in 27.4 seconds, elevated process containment, moved-root
+proof, reference primary 66x2, and Phase 0 1,031/1,031 in 622 seconds. Parent `.10.7.5` is therefore
+composition-closed. Runtime observation remains absent and belongs to the behavior-free authority/route audit in
+`.10.7.6.0`; native admission remains `.10.7.7`.
 
 #### Lua private immutable query kernel (historical dependency boundary)
 
