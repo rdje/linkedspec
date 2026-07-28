@@ -8,14 +8,30 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.5.1` — after the clean behavior-free query-authority audit commit, add private
-  recursively immutable protocol values and the non-traversal capabilities/list/get/explain kernel over exactly
-  one fresh detached projection, matching the first nine static hashes without exposing root/index query names.
+- `FUTURE-PARITY-BACKLOG.10.7.5.2` — after the clean private non-traversal query-kernel commit, add exact private
+  relation traversal, canonical paging, budgets, costs, prefixes, warnings, and portable errors over the same
+  detached authority, matching the remaining ten static hashes without exposing root/index query names.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.1 — add private Lua query kernel**
+  (private immutable non-traversal implementation from clean query-authority audit `d4f9373d`).
+
+  **Result:** Protected weak-key protocol values recursively freeze JSON-kind request/response, record, relation,
+  source, diagnostic, page, and cost state while every projection is fresh and detached. The index materializes
+  its retained 22/25/10 static projection exactly once per request; the evaluator matches nine exact capabilities,
+  list, get, explain, and source hashes with monotonic source redaction and no public query name, traversal, runtime
+  observation, format, rollout, admission, or ledger movement.
+
+  **Proof:** Query 159 and seven-suite focused 1,080 pass per ABI; complete Lua passes package `1..177` per ABI,
+  PUC primary 66x2, corpus 105/105, and 13-owner storage proof. Primary 5x2x66, Unicode 10/10, and all six ledgers
+  remain exact. Canonical passes six doctrines, Rust 1/1 in 77.96s, Dart 1/1, Julia 416/416 in 27.4s, elevated
+  containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 623s. mdBook, Knowledge Map
+  727/5,802, memory/task/diff/syntax/storage, and exact cleanup pass. Cadence advances to 49/300 with no push;
+  private traversal/limits `.10.7.5.2` is next.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.5.0 — freeze Lua semantic query authority**
   (behavior-free detached-authority/vocabulary/hash/boundary audit from clean calls closeout `742ba95e`).
 

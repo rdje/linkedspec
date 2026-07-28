@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.1` — Lua query protocol values should expose copies, not their
+  storage): Lua has no native immutable record or tuple. The kernel therefore uses protected empty handles with
+  weak-key state, recursively copies JSON objects/arrays/null into unexposed frozen nodes, and treats field access
+  and neutral serialization as two different projections. Scalar/child-value fields can return immutable handles,
+  collection fields return a fresh JSON-kind container containing immutable children, and `to_json` recursively
+  returns fresh plain JSON kinds. This preserves convenient `response.records[1].facts` access without retaining
+  or leaking a caller-owned table.
+
+  Authority stays one layer lower. `semantic_index` materializes its frozen projection once, then passes only that
+  clone to an evaluator whose sole dependency is `linkedspec.json`. Query-time source redaction is structural and
+  monotonic: retained private excerpts/digests never justify output above the snapshot ceiling. Keeping relation
+  traversal, non-default limits, portable typed errors, raw-neutral validation, and all public names in later
+  leaves lets the first nine exact hashes land without creating a partial public compatibility surface.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.5.0` — query authority must cross one explicit JSON-kind boundary):
   Lua tables do not intrinsically distinguish a JSON object from an array, especially when empty, and PUC Lua's
   integer subtype is absent from LuaJIT. A portable raw query API therefore accepts only explicit `json.harray`,

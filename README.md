@@ -1394,7 +1394,11 @@ content migration exists yet.
   19 complete static response hashes, 26 malformed raw boundaries, explicit JSON object/array/null identity,
   dual-ABI integral-number policy, source redaction, traversal/pages/budgets/costs, and a private `.1` -> private
   `.2` -> complete public `.3` -> closeout `.4` order. It changes no production, test, fixture, API, query,
-  observation, format, rollout, admission, or ledger; private immutable non-traversal kernel `.10.7.5.1` is next.
+  observation, format, rollout, admission, or ledger. Private immutable non-traversal `.10.7.5.1` now adds
+  protected recursively frozen protocol values, one detached-materialization evaluator, and exact capabilities/
+  list/get/explain/source behavior at nine full hashes on both Lua ABIs. Its new 159 assertions compose with the
+  six prior semantic suites at 1,080 per ABI; complete Lua remains `1..177` per ABI with PUC primary 66x2, corpus
+  105, and storage proof. No root/index query name exists; private traversal/limits `.10.7.5.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

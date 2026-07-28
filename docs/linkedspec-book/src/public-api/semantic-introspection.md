@@ -40,8 +40,9 @@ The distinction matters:
 - `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - Lua `linkedspec.semantic_index(source, options)` now exposes the strict source map plus detached compiled-or-
   failed snapshot, presence, diagnostic, entry, and generated-v2 plan foundation identically on PUC Lua/LuaJIT;
-  the exact private static plus calls/staging/generated projection is complete, while public query, runtime
-  observation, and backend admission remain later Lua leaves; and
+  the exact private static plus calls/staging/generated projection and private nine-hash non-traversal query kernel
+  are complete, while traversal/limits, public query, runtime observation, and backend admission remain later Lua
+  leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -1697,8 +1698,9 @@ source and ActionIR ASTs, staged function payload/job/result sidecars, ordered c
 generated-source v2, loaded
 and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
 JSON. It now exposes the opaque semantic source map/SHA-256 and compiled-or-failed foundation described below. It
-now retains the exact private normalized static plus calls/staging/generated projection. It does not yet expose a
-query evaluator or typed semantic observation sink.
+now retains the exact private normalized static plus calls/staging/generated projection and evaluates the first
+nine static query cases behind a package-private immutable kernel. It does not yet expose a public query method or
+typed semantic observation sink.
 
 The first Unicode implementation leaf is now complete. Generator
 `unicode_case/generate_unicode_rule_label_contract.py` emits private
@@ -2144,7 +2146,7 @@ The planned public API is deliberately small:
 local json = require("linkedspec.json")
 local request = linkedspec.semantic_query_request("list", {
   record_kinds = {"rule"},
-  source = {detail = "identity", include_digest = false},
+  source = {detail = "identity", include_content_digest = false},
 })
 
 local capabilities = index:capabilities()
@@ -2168,6 +2170,53 @@ private traversal/pages/budgets/costs for the remaining ten; `.3` exposes all pu
 focused 920 per ABI, complete Lua, primary 5x2x66, Unicode 10/10, and all six ledgers exact; canonical CI passes
 Rust 1/1 in 81.33 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof, reference primary
 66x2, and Phase 0 1,031/1,031 in 648 seconds.
+
+#### Lua private immutable query kernel
+
+Leaf `.10.7.5.1` now implements the first dependency-safe query layer without exposing the planned API.
+`lua/src/linkedspec/semantic_query.lua` contains protected typed requests and responses plus protected snapshots,
+records, relations, source references, diagnostics, pages, budgets, source policies, page states, and costs. Root
+`linkedspec` still exports no request constructor, query guard, response guard, query serializer, or capabilities
+call; a semantic index still has no `capabilities`, `query`, or `query_neutral` method.
+
+The private kernel matches nine complete neutral response digests unchanged on PUC Lua and LuaJIT:
+`capabilities`, `graph_list_rules`, `graph_duplicate_regex_text`, `graph_explain_entry`,
+`calls_symbols_and_shapes`, `failed_diagnostic`, `privacy_none`, `privacy_text_and_digest`, and
+`source_ceiling_forbidden`. It preserves canonical record order, default page and logical-cost envelopes,
+decision-before-explanation-step order, only the selected `explained_by` relations, and the exact source ceiling.
+
+Source detail is projected at query time. `none` returns null source references and replaces source-derived fact
+text with JSON null plus the exact redaction path. `identity` returns caller logical identity without spans.
+`span` adds the retained zero-based byte/one-based Unicode-scalar coordinates. `text` adds the excerpt and returns
+the retained SHA-256 digest only when explicitly requested. A request above the construction ceiling returns
+`semantic_query_source_detail_forbidden`; it is never silently downgraded.
+
+Protocol handles are empty tables with protected metatables and weak-key private state. Stored JSON object, array,
+and null identity is recursively copied into unexposed frozen nodes. The typed constructor accepts ordinary Lua
+option/list tables only because their role is known, copies them immediately, rejects cycles/host tables and
+nonportable numbers, and never relies on PUC-only `math.type`. Collection properties return fresh JSON-kind
+containers, while `to_json` recursively returns a fresh `json.harray` / `json.array` / `json.null` tree. Mutating
+caller inputs, properties, facts, or a serialized response cannot affect a retained value or later query.
+
+`semantic_index` remains the sole authority owner. Its package-private `_semantic_query_kernel` materializes the
+retained frozen static projection exactly once and passes only that detached `snapshot`, `source_refs`, `records`,
+and `relations` tree into the evaluator. The query module imports only `linkedspec.json`; it cannot reach retained
+source/maps/outcomes, parser/compiler/staged sidecars, AST/ActionIR, regexes, generated implementation, emitter,
+loader, executor, runtime observation, trace/sinks, paths, environment, clock, randomness, callbacks, or host
+identity. Querying cannot parse, compile, execute, observe, or enable trace.
+
+At this private boundary, relation traversal, after-id cursors, non-default page limits, record/relation/depth
+budgets, deterministic incomplete prefixes, and the remaining ten static hashes deliberately reject as `.2`
+ownership. Ambiguous raw JSON-like inputs, all 26 portable malformed-request envelopes, and every public name
+remain `.3` ownership. Runtime events remain `.10.7.6`.
+
+The focused kernel suite passes 159 assertions on each ABI. Together with source 380, outcome 122, graph 64,
+remaining static 122, call core 136, and staged/generated 97, the seven semantic suites compose at 1,080 per ABI.
+The complete Lua gate passes package `1..177` on both runtimes, PUC primary 66x2, corpus 105/105, and repository-
+volume storage proof. Private traversal/limits `.10.7.5.2` is the next dependency after the clean kernel commit.
+Complete signoff also passes the five-backend primary matrix in both environments, all ten Unicode manifest legs,
+the six unchanged governance ledgers, and canonical CI through containment, moved-root execution, reference primary
+66x2, and Phase 0 1,031/1,031.
 
 The remaining dependency order mirrors the admitted adapters while respecting Lua's table and dual-ABI risks.
 Unicode negative/isolation audit `.10.7.1.3.0` found one pre-existing body-fluent suffix-loss defect on both ABIs:
@@ -2595,7 +2644,8 @@ The dependency order is:
 | `.10.7.4.2` | Lua staged/generated calls completion | complete implementation; exact private full 22/25/10, focused 97 per ABI, no emitter or promotion |
 | `.10.7.4.3` | Lua calls/staging/generated composition closeout | complete; six committed suites recompose at focused 920 per ABI and close `.10.7.4` with no replacement code or promotion |
 | `.10.7.5.0` | Lua immutable-query authority audit | complete behavior-free plan; one detached authority, exact vocabulary, 19 hashes, 26 raw boundaries, dual-ABI JSON/numeric policy, and `.1-.4` order frozen |
-| `.10.7.5.1` | Lua private immutable non-traversal query kernel | next; protected protocol values plus capabilities/list/get/explain and source policy for nine static hashes, with no public query name |
+| `.10.7.5.1` | Lua private immutable non-traversal query kernel | implemented; protected recursive protocol values, nine exact hashes, new 159/focused 1,080 per ABI, no public query name |
+| `.10.7.5.2` | Lua private traversal, paging, budgets, and costs | next; extend the same detached evaluator to all 19 static hashes without public exposure |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |

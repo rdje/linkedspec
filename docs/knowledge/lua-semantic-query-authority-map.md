@@ -14,10 +14,10 @@ answers:
   - "when may Lua expose capabilities query and query_neutral"
   - "does Lua semantic query include runtime events"
 date: 2026-07-28
-status: current behavior-free authority and dependency plan; implementation pending
+status: current authority and dependency plan; private non-traversal kernel implemented
 tags: [lua, luajit, semantic-introspection, query, capabilities, privacy, pagination, budgets, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.0; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; capability_conformance/semantic_introspection_contract.json; capability_conformance/semantic_introspection_model.json; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_static_projection.lua; lua/src/linkedspec/json.lua; docs/knowledge/perl-semantic-query-evaluator.md; docs/knowledge/rust-semantic-query-evaluator.md; docs/knowledge/dart-semantic-query-authority-map.md; docs/knowledge/julia-semantic-query-authority-map.md
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; for runtime in puc luajit; do bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_source_foundation_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_static_graph_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_static_remaining_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_core_test.lua; bash tools/run_lua_project_data.sh \"$runtime\" lua/test/semantic_index_call_staged_generated_test.lua; done; rg -n 'semantic_(query|capabilities)|query_neutral|materialize' lua/src/linkedspec lua/test"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(query|capabilities)|query_neutral|materialize' lua/src/linkedspec lua/test"
 ---
 
 # Lua Semantic Query Authority Map
@@ -122,5 +122,6 @@ Implementation order is omission-safe:
 
 Related facts: [[semantic-introspection-neutral-contract]], [[semantic-source-ceiling-boundary]],
 [[lua-semantic-introspection-authority-map]], [[lua-semantic-call-staged-projection-plan]],
+[[lua-semantic-query-kernel]],
 [[perl-semantic-query-evaluator]], [[rust-semantic-query-evaluator]],
 [[dart-semantic-query-authority-map]], and [[julia-semantic-query-authority-map]].

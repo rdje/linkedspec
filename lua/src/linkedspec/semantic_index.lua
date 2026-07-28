@@ -29,6 +29,7 @@ local VALUE_METHODS = {}
 local ERROR_METHODS = {}
 local outcome_builder
 local static_projector
+local semantic_query
 local fail
 
 local function empty_pairs()
@@ -634,6 +635,11 @@ local function load_static_projector()
   return static_projector
 end
 
+local function load_semantic_query()
+  if semantic_query == nil then semantic_query = require("linkedspec.semantic_query") end
+  return semantic_query
+end
+
 local function build_static_projection(source, source_map, options, content_digest, outcome)
   return load_static_projector().build({
     source = source,
@@ -857,11 +863,21 @@ function INDEX_METHODS.locate_exact(value, needle, after_byte)
   return INDEX_METHODS.source_span_for_bytes(value, start_byte, end_byte)
 end
 
+local function materialize_static_projection(state)
+  return load_static_projector().materialize(state.static_projection, fail)
+end
+
+-- Package-internal immutable query seam. It supplies exactly one fresh static
+-- projection clone and no retained index authority to the evaluator.
+function M._semantic_query_kernel(value, request)
+  local projection = materialize_static_projection(index_state(value))
+  return load_semantic_query().evaluate(projection, request)
+end
+
 -- Package-internal exact-oracle seam. The root linkedspec module deliberately
 -- exports neither this function nor any static record/query accessor.
 function M._static_projection_for_testing(value)
-  local state = index_state(value)
-  return load_static_projector().materialize(state.static_projection, fail)
+  return materialize_static_projection(index_state(value))
 end
 
 return M

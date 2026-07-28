@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.1 — add private Lua semantic query kernel
+
+Added package-private protected semantic-query request/response and nested protocol values plus one immutable
+non-traversal evaluator. Every request receives exactly one fresh detached static projection containing only the
+snapshot, source references, records, and relations. The evaluator imports only Lua's JSON owner and cannot reach
+retained source/maps/outcomes, parser/compiler/staged state, AST/ActionIR, regexes, generated implementation,
+execution, observation, trace, paths, environment, time, randomness, callbacks, or host identity.
+
+Capabilities, list, get, explain, and source policy now match nine complete neutral response hashes identically on
+PUC Lua and LuaJIT. Canonical order, default page/cost envelopes, decision-first explanation with only
+`explained_by`, none/identity/span/text projection, structural fact redaction, optional text digest, and exact
+source-ceiling rejection are locked. Protected weak-key state recursively freezes JSON kinds; collection access
+and `to_json` return fresh detached JSON-kind trees, so caller input or result mutation cannot affect retained
+values or later queries.
+
+The focused suite passes 159 assertions on each ABI; all seven semantic suites compose at 1,080 per ABI. Complete
+Lua passes package `1..177` per ABI, PUC primary 66x2, corpus 105/105, and repository-storage proof. Root and index
+query names remain absent. Relation traversal, cursors, non-default pages, budgets/cost prefixes, the other ten
+static hashes, raw-neutral validation, 26 malformed boundaries, and public exposure remain `.10.7.5.2-.3`.
+
+Full signoff passes the primary 5x2x66 matrix, ten Unicode legs, all six unchanged governance ledgers, and
+canonical CI with Rust admission 1/1 in 77.96s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment,
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 623s. The mdBook and Knowledge Map
+727/5,802 pass; only exact slice-owned adapters, rendered book, and an empty managed-run directory were removed.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.5.0 — freeze Lua semantic query authority
 
 Completed the behavior-free Lua immutable-query audit before evaluator code. All 20 governed requests, 19 complete
