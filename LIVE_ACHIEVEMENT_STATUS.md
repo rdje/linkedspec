@@ -8,14 +8,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.6.1` — after the clean behavior-free audit commit, add optional invocation-local
-  protected typed slot/result capture, shared package-internal digest ownership, exact callback-value propagation,
-  and direct/loaded/reconstructed/traced-convenience proof before detached derivation.
+- `FUTURE-PARITY-BACKLOG.10.7.6.2` — after the clean typed native-capture commit, validate caller-retained exact
+  event handles into a new immutable observed index and lock the twentieth runtime-events digest without execution.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.1 — add Lua native observation**
+  (typed invocation-local capture from clean behavior-free audit commit `59c91cd9`).
+
+  **Result:** One shared arithmetic SHA-256 owner now serves source and runtime input identity. Protected exact
+  eight-field slot/final events and an invocation-local sink cover direct, loaded, reconstructed, execute-alias,
+  and traced native routes on both ABIs. No-sink zero work, Unicode-scalar match ends, normally unmatched finals,
+  exceptional final omission, exact arbitrary callback identity after trace cleanup, reentrancy, and trace/
+  diagnostic/result independence are exact. Generated/emitted propagation and observed-index derivation remain
+  fenced; format, rollout, admission, and all ledgers remain unchanged.
+
+  **Proof:** New 121 plus existing seven-suite 1,493 = focused 1,614 per ABI. Complete Lua passes package 177/177
+  per ABI, PUC primary 66x2, corpus 105/105, and 14-owner storage; primary passes 5x2x66; Unicode 10/10 and all six
+  ledgers pass. Canonical passes six doctrines, Rust 1/1 in 77.88s, Dart 1/1, Julia 416/416 in 27.3s, containment,
+  moved-root proof, reference 66x2, and Phase 0 1,031/1,031 in 621s. mdBook, Knowledge Map 731/5,851, memory/task/
+  doctrines/diff/syntax/storage, and exact 13,208-KiB plus empty-run cleanup pass; no Lua adapter remains and 246
+  reusable Rust artifacts are retained. Cadence advances to 54/300 with no push; immutable derivation `.10.7.6.2`
+  follows the clean commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.0 — freeze Lua runtime observation authority**
   (behavior-free route/seam/callback/derivation audit from clean immutable-query closeout `abe75fe4`).
 

@@ -74,7 +74,39 @@ in their options table, while the `_with_trace` entrypoints construct one from
 config. Disabled or absent tracing stays quiet, and successful result JSON is
 unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
 action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
-governed mark/capture events. The later minimal staged registry validates and stable-sorts exact function-body jobs,
+governed mark/capture events.
+
+Native semantic observation is a separate invocation-local channel. Pass a function as
+`semantic_observation_sink` to `runtime_parse`, `runtime_execute`, or either traced convenience entrypoint:
+
+```lua
+local events = {}
+local result = linkedspec.runtime_parse(engine, input, {
+  semantic_observation_sink = function(event)
+    assert(linkedspec.is_runtime_semantic_observation_event(event))
+    events[#events + 1] = event
+  end,
+})
+
+assert(linkedspec.RUNTIME_SEMANTIC_OBSERVATION_CONTRACT ==
+  "linkedspec-semantic-execution-observation-v1")
+local first = linkedspec.runtime_semantic_observation_event_to_json(events[1])
+assert(first.event_kind == "regex_slot_selected")
+```
+
+Event handles are protected and immutable. Their exact fields are `contract_id`, `event_kind`, `rule_label`,
+nullable `target_rule`, nullable zero-based `regex_index`, Unicode-scalar `position`, nullable `input_identity`, and
+nullable `status`. One slot event is delivered synchronously for each accepted ordered regex identity before match
+state changes; one `rule_result` event follows every normally constructed parse result, even `matched=false`.
+Entry/execution/`exit_now` failures omit the final event. The final identity is `input:sha256:` plus lowercase
+SHA-256 of the exact input bytes. A failing callback stops delivery and its exact Lua error value is rethrown after
+trace cleanup. With no sink, event construction, slot scalar conversion, and input hashing are skipped.
+
+This native leaf covers direct, loaded, normalized-AST reconstructed, execute aliases, and traced convenience
+routes on PUC Lua and LuaJIT. Generated-plan and emitted-module observation is deliberately unavailable until its
+dedicated propagation leaf; static `index:with_execution_observation(...)` derivation is also not public yet.
+
+The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
 `body_ast`. Fixed-v1 calls require that staged AST, fail closed on source/AST drift, and carry typed function-owned
 arity, keyword, recursion, and staging diagnostics. The following variadic-state slice preserves the exact

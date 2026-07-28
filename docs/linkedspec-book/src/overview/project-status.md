@@ -11,14 +11,18 @@ suites recompose at 1,492 assertions per ABI; complete Lua remains package 177/1
 105/105, and repository-volume storage. No-change `.10.7.5.4` closes that parent without replacement behavior or
 promotion.
 
-Behavior-free runtime-observation audit `.10.7.6.0` is complete. It freezes accepted match-end capture before
-`accept_match`, normally returned final-result capture after `RuntimeParseResult`, Unicode-scalar positions, reuse
-of the existing portable SHA-256 authority, no-sink early returns, exact callback-value passthrough, every direct/
-loaded/reconstructed/generated/emitted/traced dual-ABI route, detached static-only observed-index derivation, and
-the twentieth digest. Lua still exposes no semantic observation API at this audit boundary. The neutral oracle
-remains 6 groups / 20 responses / 89 rejected mutations, rollout 5/9, and admission 4/6. Complete signoff passes
-Lua semantic 1,492 and diagnostics 119 per ABI, primary 5x2x66, Unicode 10/10, six ledgers, canonical CI through
-Phase 0 1,031/1,031, mdBook, and Knowledge Map 730/5,838; typed capture `.10.7.6.1` follows the clean audit commit.
+Behavior-free runtime-observation audit `.10.7.6.0` is complete, and native capture `.10.7.6.1` now exposes an
+optional invocation-local `semantic_observation_sink` on both Lua ABIs. Protected immutable slot events use the
+accepted match's Unicode-scalar end before `accept_match`; one succeeded final event follows every normally built
+result with exact shared-SHA input identity. Direct, loaded, normalized-AST reconstructed, execute-alias, and
+traced convenience routes preserve results, cursors, trace, diagnostics, reentrancy, no-sink work, and exact
+callback failure identity. Focused proof is 1,493 static/query plus 121 observation assertions per ABI; complete
+Lua passes package 177/177, PUC primary 66x2, corpus 105/105, and 14-owner storage. Generated/emitted propagation
+and observed-index derivation remain fenced for `.3` and `.2`, respectively. The neutral oracle remains 6 groups /
+20 responses / 89 rejected mutations, rollout 5/9, and admission 4/6; generated-source v2/format 2 is unchanged.
+Full signoff also passes primary 5x2x66, Unicode 10/10, all six no-drift ledgers, and canonical CI through Rust
+1/1 in 77.88 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment/moved-root proof, reference primary
+66x2, and Phase 0 1,031/1,031 in 621 seconds.
 
 ADR `0048` is now a closed language contract: explicit repetition collects one action-edge value per
 accepted hit, lifecycle returns retain whole-rule authority, and pipe remains scalar choice. The executable

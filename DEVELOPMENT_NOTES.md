@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.1` — Lua observer failures need private identity carriers, and the
+  interpreter chunk has no spare top-level locals): Lua callbacks may throw any value, including `nil`, a table,
+  or an existing `RuntimeInterpreterException`. Wrapping the callback with ordinary `pcall` is insufficient if
+  later runtime catches classify the thrown value. The native observation owner therefore raises a protected
+  weak-state carrier, lets existing rule/parse trace scopes unwind, recognizes only that exact carrier, and
+  rethrows its stored value unchanged. A final-event callback uses the same path after the result is constructed;
+  it has received the event, but the parse does not return.
+
+  PUC Lua rejected the first implementation because `interpreter.lua` was already at the chunk-wide 200-local
+  ceiling. Observation imports and the slot-emission closure consequently live inside `runtime_parse` and
+  `regex_once`, and the closure is constructed only when a sink exists. This is a structural constraint, not a
+  reason to merge semantic events with trace or diagnostics. The no-sink route skips constructor/scalar/hash work,
+  while the package root may still load the protected event vocabulary for its public guard and JSON projector.
+
+  Generated helpers already forward arbitrary options to the native engine. Adding the native sink would therefore
+  have created accidental partial generated support before the required generated-only callback carrier existed.
+  `runtime_parse` rejects the sink when internal generated-plan metadata is present; `.10.7.6.3` exclusively owns
+  replacing that fence with exact generated/emitted propagation after `.2` lands observed-index derivation.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.6.0` — accepted match end, not the current cursor, owns Lua slot
   observation): Both action-edge selection paths locate a match and validate the compiled ordered slot identity
   before calling `accept_match`. At that point the context cursor still names the pre-match position, so a semantic

@@ -16,7 +16,7 @@ date: 2026-07-15
 status: current
 tags: [lua, toolchain, package, tests, json, pcre2, lpeg, cache, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.1.1 locks PUC Lua 5.4/LuaJIT and zero-dependency foundation policy. LUA-BACKEND-PARITY.4.1 rejects LPeg as a PCRE parser and adds lua/native/regex_pcre2.c plus tools/build_lua_native.sh. PROJECT-DATA-SSD-ROOTING.2.5 makes the builder self-rooted, rejects an output on another filesystem before creating it, and routes tools/run_lua_local.sh plus tools/run_lua_project_data.sh through managed repository scratch. Both commands build separate ABI modules, retain LUA_CPATH for the child command, and clean the disposable native tree."
-evidence_update_2026_07_26_project_storage: "The recurring tools/test_lua_project_data_storage.sh oracle proves both ABI module pairs, generated source, traces, all 13 tracked Lua-family allocation owners, safely quoted paths, hostile cross-volume build rejection, and cleanup on the repository filesystem."
+evidence_update_2026_07_28_project_storage: "The recurring tools/test_lua_project_data_storage.sh oracle proves both ABI module pairs, generated source, traces, all 14 tracked Lua-family allocation owners after FUTURE-PARITY-BACKLOG.10.7.6.1 adds the native observation route test, safely quoted paths, hostile cross-volume build rejection, and cleanup on the repository filesystem."
 reverify: "bash tools/run_lua_local.sh && bash tools/test_lua_project_data_storage.sh"
 ---
 

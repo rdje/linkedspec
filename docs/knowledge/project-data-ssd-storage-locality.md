@@ -40,10 +40,11 @@ answers:
   - is project data storage locality structurally enforced
   - is project data storage locality proved at process level
   - is the complete SSD project data migration closed
-date: 2026-07-27
+date: 2026-07-28
 status: current
 tags: [architecture, storage, filesystem, ssd, cache, temporary-data, portability, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; .2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates/verifies/uses/deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. Dart .2.3 atomically moves the complete 47-package cache into its canonical root, proves all 18 owners plus generated/traced use, and deletes the two exact shared active-root records after use. Julia .2.4 supplies a complete five-package source-bearing depot, proves all 17 temporary owners plus generated/trace use, migrates and deletes both exact old depots, deletes the exact former-checkout shared-log stanza, and moves 88 existing current reverify cards onto managed wrappers. Lua .2.5 proves all 13 allocation owners, both ABI-specific native module pairs, generated v2 output, and traces stay on repository storage; it rejects cross-volume native output before creation and finds zero exact old Lua workspace residue. Tool .2.6 completes Python/shell/map/book/TAP/oracle storage. Reconciliation .3.1.1 confirms all frozen off-repository records absent, deletes one missed exact same-SSD target-era root after canonical Cargo identity/use proof, and reruns all six storage oracles. Remediation .3.1.2 closes the discovered marker-v1 descendant gap with marker-v2 process-group authority, group-drain cleanup/signals, conservative automated recovery, and focused normal/orphan proofs. Final proof .3.2 independently finds zero old-root or bounded shared-metadata match before and after all six oracles, deletes zero external paths, and reconfirms the retained Perl/Julia copies. Structural .4.1 registers PROJECT-DATA-STORAGE across current tracked storage/command surfaces. Process proof .4.2 brings it to 28 classifier cases, adds the historical 38-boundary routing inventory, and kernel-contains relocated Perl/Rust/Dart/Julia/Lua/tool probes. The contained REDs reject external writes, shared-cache reads, symlink escapes, and incomplete probe sets; hidden Dart HOME and Apple cc-shim writes are removed. Closeout .5 passes every backend gate, primary 660/660, Unicode 10/10, all maintained focused parity matrices, scalar numeric 55/55, canonical Phase 0 1,031/1,031, and a fresh zero-residue post-proof census. REPO-ROOT-PATH-PORTABILITY.2.2 subsequently registers its SSD-routed relocation oracle as entrypoint 39. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration; its implementation is complete."
+evidence_update_2026_07_28_lua_observation: "FUTURE-PARITY-BACKLOG.10.7.6.1 adds one routed Lua native-observation route test, advancing the live Lua allocation-owner manifest from 13 to 14 and the current tracked unique total from 101 to 102. The updated storage oracle passes both ABI module/generated/trace probes and exact cleanup."
 reverify: "bash scripts/check_project_data_storage_locality.sh && bash scripts/check_doctrines.sh && bash tools/project_data_run.sh --list"
 ---
 
@@ -62,7 +63,8 @@ internal-volume sources plus the exact former-checkout stanza in the shared Juli
 
 Tracked allocation is broader. The planning scan reported 100 files, including Rust 16; the Rust migration found
 one imported `env::temp_dir()` spelling that the original fully-qualified pattern missed. The corrected initial
-unique total is 101 and the Rust count is 17. Other family counts remain Perl 24, Dart 18, Julia 17, Lua 13,
+unique total was 101 and the Rust count is 17. `FUTURE-PARITY-BACKLOG.10.7.6.1` later adds one routed Lua test,
+so the current unique total is 102 and family counts are Perl 24, Dart 18, Julia 17, Lua 14,
 Python three, and shell 12; multi-language harnesses overlap. Twenty-four
 executable files contain explicit off-repository storage defaults. The initial audit found 97 fact cards with 107
 durable old temporary/home-depot command lines; `.2.4` migrates all 88 existing current Julia cards onto supported managed
@@ -110,7 +112,7 @@ Julia-managed system depots remain as strictly required external read-only runti
 
 Lua now has equivalent ongoing protection. `tools/run_lua_project_data.sh` builds an isolated two-module native
 set for the selected PUC Lua or LuaJIT ABI below managed scratch. `tools/test_lua_project_data_storage.sh` locks all
-13 allocation owners, actual module/generated/trace devices, non-symlink identity, quoting through a path with a
+14 allocation owners, actual module/generated/trace devices, non-symlink identity, quoting through a path with a
 space, native parsing, and pre-create rejection of an other-filesystem builder destination. Both exact old-root
 `linkedspec-lua-*` censuses are zero, so no old Lua payload existed to copy or delete. Required interpreters,
 compiler, headers, and libraries remain strictly necessary read-only external inputs.

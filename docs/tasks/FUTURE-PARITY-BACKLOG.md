@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-28` (behavior-free Lua runtime-observation authority and route audit `.10.7.6.0` is fully
-  verified from clean immutable-query closeout commit `abe75fe4`; typed direct capture `.10.7.6.1` follows after
-  the audit commit is clean)
+- Last updated: `2026-07-28` (typed Lua native runtime-observation capture `.10.7.6.1` is complete; immutable
+  observed-index derivation `.10.7.6.2` follows only after the clean implementation commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12584,9 +12583,57 @@ before implementation.
     one proven-empty managed-run directory pass; no Lua adapter remains and 246 reusable Rust cache artifacts are
     retained. Typed direct capture `.10.7.6.1` is the next dependency-eligible leaf after the clean audit commit.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.6.1`
-    Status: `pending`
+    Status: `done` (2026-07-28; implementation from clean authority-audit commit `59c91cd9`)
     Goal: Add optional invocation-local typed regex-selection/final-result capture to direct and loaded execution.
     Depends on: `.10.7.6.0`
+    Acceptance: Extract the existing pure-Lua SHA-256 implementation into one package-internal dual-ABI owner
+      reused by semantic source identity and runtime observation. Add protected immutable semantic event handles,
+      the exact v1 contract/kinds/field topology, public contract/event guard/detached JSON projection, and one
+      optional invocation-local function sink. Emit one event per accepted ordered regex slot from the match's
+      Unicode-scalar end before state mutation and one succeeded final event after a normally constructed parse
+      result, including `matched=false`; omit final events on entry/execution/exit throws. Return before event
+      allocation/scalar conversion/hash when no sink exists, preserve exact arbitrary callback error values after
+      trace cleanup, and keep trace/diagnostic channels independent. Prove direct, loaded, normalized-AST
+      reconstructed, and native traced convenience routes on PUC Lua and LuaJIT without generated-helper/emitted
+      propagation, observed-index derivation, query digest movement, generated format change, rollout, or admission.
+    Verification plan: Add focused dual-ABI tests for exact protected event identity/immutability/detached JSON,
+      canonical `ab\n` three-event sequence and input SHA, Unicode byte/scalar distinction, normally unmatched
+      final result, selector/execution/`RuntimeExitNow` omission, no-sink zero-work traps, callback order/stop/exact
+      scalar/table/error-object identity, diagnostic/trace independence, reentrant/interleaved invocation isolation,
+      direct/loaded/reconstructed/traced result/cursor equivalence, and absence of generated/emitted/derivation
+      names. Re-run the seven semantic suites plus the new owner on both ABIs, complete Lua/primary/corpus/storage,
+      primary 5x2x66, Unicode 10/10, all six no-drift ledgers, canonical CI, mdBook/KM/memory/task/doctrines/diff/
+      syntax/storage, exact safe cleanup, and commit before `.10.7.6.2`.
+
+    #### Acceptance Checklist
+
+    - [x] **SHARED DIGEST / PROTECTED API** — One package-internal Lua-5.1-compatible SHA-256 owner serves both
+      source identity and final events; exact protected event handles expose only guard and detached JSON helpers.
+    - [x] **EXACT NATIVE SEAMS** — Accepted ordered slots emit from `one:char_end()` before `accept_match`; every
+      normally constructed result emits one succeeded final event with exact selected rule/position/input identity.
+    - [x] **NO-SINK / CALLBACK IDENTITY** — Absent sink performs no event work; present sink is synchronous,
+      invocation-local, trace/diagnostic-independent, stops later delivery on failure, and rethrows the exact value.
+    - [x] **DIRECT ROUTE PROOF / SCOPE FENCE** — Direct, loaded, reconstructed, and traced conveniences are exact
+      on both ABIs; generated/emitted propagation and observed-index derivation remain absent for `.2-.3`.
+    - [x] **LOCKSTEP / COMMIT** — Pass focused/complete Lua, both primary matrices, six ledgers, canonical CI,
+      mdBook/KM/live docs/doctrines/diff/storage/cleanup; commit and verify clean before activating `.2`.
+
+    #### Verification Result (2026-07-28)
+
+    PASS from clean authority-audit commit `59c91cd9`. One shared Lua-5.1-compatible arithmetic SHA-256 owner now
+    serves source and runtime input identity. Protected eight-field events, exact slot/final seams, no-sink zero
+    work, exact arbitrary callback-value propagation after trace cleanup, trace/diagnostic/result independence,
+    reentrancy, and direct/loaded/reconstructed/execute/traced routes pass 121 new assertions per ABI. The seven
+    existing semantic suites pass 381 + 122 + 64 + 122 + 136 + 97 + 571 = 1,493 per ABI, for focused 1,614 per
+    ABI. Complete Lua passes package 177/177 per ABI, PUC primary 66x2, corpus 105/105, and 14-owner same-volume
+    storage; the five-backend primary matrix is 5x2x66; Unicode 10/10 and semantic 6/20/89, capability 80/0/0,
+    generated 10/80/0/0, language 246/105+1/122, and public 59/27/0 remain exact. Canonical CI passes six
+    doctrines, Rust admission 1/1 in 77.88s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root proof,
+    reference primary 66x2, and Phase 0 1,031/1,031 in 621s. mdBook, Knowledge Map 731/5,851,
+    memory/task/doctrines/diff/syntax/storage pass. Exact cleanup removes only the 208-KiB leaf-owned Lua adapter
+    scratch, 13,000-KiB rendered book, and one proven-empty run directory; no Lua adapter remains and 246 reusable
+    Rust artifacts are retained. Generated/emitted propagation and observed-index derivation remain fenced;
+    `.10.7.6.2` follows only after this leaf's clean commit.
   - ID: `FUTURE-PARITY-BACKLOG.10.7.6.2`
     Status: `pending`
     Goal: Validate detached typed events into an immutable observed index and exact twentieth response digest.
@@ -14898,8 +14945,9 @@ query 571/focused 1,492 per ABI. No-change committed-owner recomposition `.10.7.
 commit `65cb13da` and composition-closes parent `.10.7.5`. Behavior-free runtime-observation authority audit
 `.10.7.6.0` is fully verified from clean closeout commit `abe75fe4`; it freezes accepted match-end and normally
 returned result seams, no-sink/callback policy, every dual-ABI route, detached static-only derivation, and exact
-twentieth digest. Typed direct capture `.10.7.6.1` follows the clean audit commit. Semantic 6/20/89 remains at
-rollout 5/9 and admission 4/6.
+twentieth digest. Typed direct capture `.10.7.6.1` is fully verified at focused 1,614 per ABI and complete
+cross-backend gates; immutable observed-index derivation `.10.7.6.2` follows only after its clean commit. Semantic
+6/20/89 remains at rollout 5/9 and admission 4/6.
 
 ### Superseded frontier snapshots
 
@@ -15535,7 +15583,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.5.4 | `FUTURE-PARITY-BACKLOG.10.7.5.4` | `done` | Committed focused 1,492 plus complete matrices/no-drift/canonical/docs/KM/cleanup close the query parent without replacement code or promotion. |
 | 74.6.6 | `FUTURE-PARITY-BACKLOG.10.7.6` | `active` | Add caller-owned typed runtime observation and exact immutable post-execution projection. |
 | 74.6.6.0 | `FUTURE-PARITY-BACKLOG.10.7.6.0` | `done` | Exact observation vocabulary, seams, callback identity, routes, derivation policy, and dependency order are frozen without behavior change. |
-| 74.6.6.1 | `FUTURE-PARITY-BACKLOG.10.7.6.1` | `pending` | Add optional invocation-local typed slot/result capture to direct and loaded execution. |
+| 74.6.6.1 | `FUTURE-PARITY-BACKLOG.10.7.6.1` | `done` | Protected optional slot/result capture, shared digest, exact callback identity, and direct/loaded/reconstructed/traced proof pass both ABIs at focused 1,614. |
 | 74.6.6.2 | `FUTURE-PARITY-BACKLOG.10.7.6.2` | `pending` | Validate detached events into an observed index and exact twentieth response digest. |
 | 74.6.6.3 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `pending` | Propagate observations through generated/emitted/traced and isolated dual-ABI hosts. |
 | 74.6.6.4 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `pending` | Recompose and close all observation owners/routes without format or promotion. |
@@ -16215,6 +16263,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.1` | Clean base `59c91cd9`; protected exact eight-field events; accepted Unicode-scalar match-end and normally returned result seams; no-sink zero work; exact arbitrary callback identity after trace cleanup; direct/loaded/reconstructed/execute/traced routes; generated/derivation fences; native 121 and seven existing suites 1,493 = focused 1,614 per ABI; complete Lua 177x2, PUC primary 66x2/corpus 105/14-owner storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 77.88s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 621s; mdBook/KM 731/5,851/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Native caller-owned capture is exact and private on both ABIs without generated/emitted propagation, observed-index derivation, format, rollout, admission, or ledger movement; immutable derivation `.10.7.6.2` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.0` | Clean base `abe75fe4`; all dual-ABI direct/loaded/reconstructed/generated/emitted/traced routes and exact match/result seams; Unicode byte 3/scalar 2; no production/test/fixture/contract/API/format/runtime/ledger change; Lua semantic 1,492 per ABI, diagnostics 119 per ABI, package 177x2, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.3s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 624s; mdBook/KM 730/5,838/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Exact typed vocabulary, accepted match-end/final-result seams, no-sink/callback identity, shared digest, route/carrier topology, static-only derivation, twentieth digest, and `.1-.4` order are frozen; typed direct capture `.10.7.6.1` follows the clean audit commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.4` | Clean committed base `65cb13da`; no production/test/fixture/contract/API/observation/format/ledger replacement; seven committed suites exact 1,492 per ABI with 19 typed/raw hashes and 26 malformed boundaries; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 77.93s, Dart 1/1, Julia 416/416 in 27.4s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 622s; mdBook/KM 729/5,824/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The committed immutable public static query owners recompose without replacement behavior or promotion; parent `.10.7.5` closes and behavior-free runtime-observation audit `.10.7.6.0` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.5.3` | Clean base `643e0771`; exact root/index public topology; all 19 typed/raw static hashes; all 26 malformed raw boundaries; JSON-kind/portable numeric/Boolean/cursor rules; recursive detachment, input/interleaving isolation, one materialization, privacy/source ceilings, non-execution, and host denial; query 571 and seven-suite focused 1,492 per ABI; complete Lua package `1..177` per ABI, PUC primary 66x2/corpus 105/storage; primary 5x2x66; Unicode 10/10; all six ledgers exact; canonical six doctrines, Rust 1/1 in 78.05s, Dart 1/1, Julia 416/416 in 27.3s, elevated containment/moved-root proof, reference primary 66x2, Phase 0 1,031/1,031 in 624s; mdBook/KM 729/5,824/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The complete static typed/raw-neutral API is public and exact on both ABIs without authority leakage, runtime observation, format, rollout, admission, or ledger movement; no-change `.10.7.5.4` follows the clean commit. |
@@ -16497,6 +16546,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.7.6.1` | `FUTURE-PARITY-BACKLOG.10.7.6.1 - add Lua native observation` | Shared digest, protected exact events, native invocation-local routes/callback identity, complete dual-ABI/cross-backend signoff, and clean handoff to immutable derivation `.10.7.6.2`. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.0` | `FUTURE-PARITY-BACKLOG.10.7.6.0 - freeze Lua runtime observation` | Behavior-free exact seam/route/callback/derivation plan, complete dual-ABI and cross-backend signoff, and clean handoff to typed direct capture `.10.7.6.1`. |
 | `FUTURE-PARITY-BACKLOG.10.7.5.4` | `FUTURE-PARITY-BACKLOG.10.7.5.4 - close Lua static query` | No-change seven-suite recomposition at focused 1,492 per ABI, complete signoff, parent `.10.7.5` closure, and clean handoff to observation audit `.10.7.6.0`. |
 | `FUTURE-PARITY-BACKLOG.10.7.5.3` | `FUTURE-PARITY-BACKLOG.10.7.5.3 - expose public Lua query` | Exact protected root/index surface, 19 typed/raw hashes, 26 malformed boundaries, complete signoff, and clean handoff to no-change `.10.7.5.4`. |
@@ -16758,6 +16808,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Typed native observation `.10.7.6.1` adds one shared arithmetic SHA-256 owner, protected exact
+  slot/final event handles, public guard/detached JSON projection, and an invocation-local synchronous sink to
+  direct, loaded, reconstructed, execute-alias, and traced Lua routes. No-sink zero work, Unicode-scalar positions,
+  normally unmatched finals, omitted exceptional finals, exact arbitrary callback identity after trace cleanup,
+  reentrancy, and channel/result independence pass new 121 plus existing 1,493 = focused 1,614 per ABI. Complete
+  Lua 177x2/primary 66x2/corpus 105/storage 14, primary 5x2x66, Unicode 10/10, six ledgers, canonical Rust 77.88s
+  + Dart 1/1 + Julia 416/27.3s + containment/moved-root + reference 66x2 + Phase 0 1,031/621s, mdBook/KM 731/5,851,
+  and exact 13,208-KiB plus empty-run cleanup pass. Generated/derivation remain fenced; `.10.7.6.2` follows only
+  after the clean commit.
 
 - `2026-07-28`: Behavior-free runtime-observation audit `.10.7.6.0` retrieves the neutral/admitted authorities,
   then locks Lua capture after accepted match/ordered identity and before `accept_match`, final capture after a

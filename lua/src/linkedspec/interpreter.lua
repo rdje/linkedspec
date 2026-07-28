@@ -138,6 +138,9 @@ function M.runtime_engine(compiled, options)
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     fail("trace must be a LinkedSpecTraceEmitter")
   end
+  if options.semantic_observation_sink ~= nil then
+    fail("semantic_observation_sink is an invocation-local runtime parse option")
+  end
   return trace_support.run(
     options.trace,
     "lua_runtime:create_engine",
@@ -239,6 +242,7 @@ local function context(
     top_rule,
     compiled_rules,
     diagnostic_sink,
+    semantic_observation_sink,
     trace_emitter,
     generated_families,
     generated_source_identity
@@ -271,6 +275,7 @@ local function context(
     active = {},
     lifecycle_events = {},
     diagnostic_sink = diagnostic_sink,
+    semantic_observation_sink = semantic_observation_sink,
     trace = trace_emitter,
     rule_stack = {},
     accumulator_stack = {},
@@ -3692,6 +3697,26 @@ local function regex_once(
     execution_policy,
     action_iteration_values
   )
+  local emit_semantic_slot
+  if ctx.semantic_observation_sink ~= nil then
+    local observation = require("linkedspec.semantic_observation")
+    emit_semantic_slot = function(one)
+      local position = one:char_end()
+      for _, identity in ipairs(
+        compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)
+      ) do
+        observation.deliver(
+          ctx.semantic_observation_sink,
+          observation.regex_slot_selected(
+            rule.label,
+            identity.target_rule,
+            identity.regex_index,
+            position
+          )
+        )
+      end
+    end
+  end
   local cursor_before = ctx.cursor_byte
   if #rule.regex_patterns == 0 then
     trace_regex_decision(
@@ -3726,6 +3751,7 @@ local function regex_once(
         actual.regex_index
       )
       M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
+      if emit_semantic_slot ~= nil then emit_semantic_slot(one) end
       accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
     end
     return true
@@ -3767,6 +3793,7 @@ local function regex_once(
     one.alternative_index,
     selection_role
   )
+  if emit_semantic_slot ~= nil then emit_semantic_slot(one) end
   accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
   return true
 end
@@ -4038,6 +4065,7 @@ execute_rule = function(engine, label, entry_index, ctx)
 end
 
 function M.runtime_parse(engine, input, options)
+  local observation = require("linkedspec.semantic_observation")
   if M.node_type(engine) ~= "LinkedSpecRuntimeEngine" then fail("runtime_parse expects runtime engine") end
   if type(input) ~= "string" then fail("runtime input must be a string") end
   options = options or {}
@@ -4045,6 +4073,9 @@ function M.runtime_parse(engine, input, options)
   M.reject_removed_runtime_options(options, engine.spec_name, engine.spec_path)
   if options.diagnostic_sink ~= nil and type(options.diagnostic_sink) ~= "function" then
     fail("diagnostic_sink must be a function")
+  end
+  if options.semantic_observation_sink ~= nil and type(options.semantic_observation_sink) ~= "function" then
+    fail("semantic_observation_sink must be a function")
   end
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     fail("trace must be a LinkedSpecTraceEmitter")
@@ -4057,6 +4088,9 @@ function M.runtime_parse(engine, input, options)
   end
   if (options._generated_families == nil) ~= (options._generated_source_identity == nil) then
     fail("internal generated plan and source identity must be provided together")
+  end
+  if options.semantic_observation_sink ~= nil and options._generated_families ~= nil then
+    fail("semantic_observation_sink is not available for generated execution")
   end
   local selection_ok, selection = pcall(
     compiled_spec.resolve_entry_rule,
@@ -4108,6 +4142,7 @@ function M.runtime_parse(engine, input, options)
     top,
     engine.compiled_spec.rules_by_label,
     options.diagnostic_sink,
+    options.semantic_observation_sink,
     options.trace,
     options._generated_families,
     options._generated_source_identity
@@ -4126,7 +4161,8 @@ function M.runtime_parse(engine, input, options)
   local ok, result = pcall(execute_rule, engine, top, 0, ctx)
   if not ok then
     local sink_failed = getmetatable(result) == ERROR_MT.diagnostic_output_sink_failure
-    if not sink_failed and getmetatable(result) == ERROR_MT then
+    local semantic_sink_failed = observation.is_sink_failure(result)
+    if not sink_failed and not semantic_sink_failed and getmetatable(result) == ERROR_MT then
       result = with_runtime_diagnostic(result, runtime_diagnostic(engine, {
         stage = "runtime_execution",
         summary = "Lua runtime interpreter failed",
@@ -4139,6 +4175,8 @@ function M.runtime_parse(engine, input, options)
       local message
       if sink_failed then
         message = "diagnostic_output_sink"
+      elseif semantic_sink_failed then
+        message = "semantic_observation_sink"
       elseif M.is_runtime_interpreter_error(result) or M.is_runtime_exit_now(result) then
         message = result.message
       else
@@ -4147,6 +4185,7 @@ function M.runtime_parse(engine, input, options)
       trace.exit_trace_scope(options.trace, trace_scope, "error=" .. message)
     end
     if sink_failed then error(result.failure, 0) end
+    if semantic_sink_failed then error(observation.sink_failure_value(result), 0) end
     error(result, 0)
   end
   local output = json.array({ copy_value(result.value) })
@@ -4158,6 +4197,22 @@ function M.runtime_parse(engine, input, options)
     cursor_char_offset = matching.byte_offset_to_char_offset(input, ctx.cursor_byte),
     lifecycle_events = ctx.lifecycle_events,
   }, RESULT_MT)
+  if options.semantic_observation_sink ~= nil then
+    local delivered, failure = pcall(
+      observation.deliver,
+      options.semantic_observation_sink,
+      observation.rule_result(top, parse_result.cursor_char_offset, input)
+    )
+    if not delivered then
+      if trace_scope ~= nil then
+        trace.exit_trace_scope(options.trace, trace_scope, "error=semantic_observation_sink")
+      end
+      if observation.is_sink_failure(failure) then
+        error(observation.sink_failure_value(failure), 0)
+      end
+      error(failure, 0)
+    end
+  end
   if trace_scope ~= nil then
     trace.exit_trace_scope(
       options.trace,

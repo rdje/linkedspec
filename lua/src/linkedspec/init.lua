@@ -1,6 +1,7 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
 local semantic_index = require("linkedspec.semantic_index")
+local semantic_observation = require("linkedspec.semantic_observation")
 local semantic_query = require("linkedspec.semantic_query")
 local spec_loader = require("linkedspec.spec_loader")
 local spec_ast = require("linkedspec.spec_ast")
@@ -70,6 +71,9 @@ end
 
 M.json = json
 M.semantic_index = semantic_index.create
+M.RUNTIME_SEMANTIC_OBSERVATION_CONTRACT = semantic_observation.CONTRACT_ID
+M.is_runtime_semantic_observation_event = semantic_observation.is_event
+M.runtime_semantic_observation_event_to_json = semantic_observation.to_json
 M.semantic_query_request = semantic_query.request
 M.is_semantic_query_request = semantic_query.is_request
 M.is_semantic_query_response = semantic_query.is_response

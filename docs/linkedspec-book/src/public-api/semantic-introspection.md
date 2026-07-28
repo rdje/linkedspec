@@ -40,9 +40,10 @@ The distinction matters:
 - `semantic_introspection_julia_admission_test.jl` composes every required Julia path once; and
 - Lua `linkedspec.semantic_index(source, options)` now exposes the strict source map plus detached compiled-or-
   failed foundation identically on PUC Lua/LuaJIT; four root query helpers plus index `capabilities`, typed `query`,
-  and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries; the
-  behavior-free runtime-observation audit now freezes exact capture/derivation/routes before implementation, while
-  the observation API and backend admission remain later Lua leaves; and
+  and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries; an
+  optional native invocation-local sink now delivers protected typed slot/final observations on direct, loaded,
+  reconstructed, execute-alias, and traced routes, while immutable derivation, generated propagation, and backend
+  admission remain later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
@@ -2354,6 +2355,90 @@ format, rollout, or admission. At the audit boundary, the unchanged seven semant
 per ABI, diagnostic callback proof passes 119 per ABI, package proof is 177/177 per ABI, and the neutral oracle
 remains 6 groups / 20 responses / 89 rejected mutations at rollout 5/9 and admission 4/6.
 
+#### Lua native typed runtime-observation capture
+
+Leaf `.10.7.6.1` implements the native portion of that plan on both PUC Lua and LuaJIT. The optional
+`semantic_observation_sink` is a function in the per-invocation options table accepted by `runtime_parse`,
+`runtime_execute`, `runtime_parse_with_trace`, and `runtime_execute_with_trace`. It is deliberately rejected as an
+engine option because an engine is reusable and must not retain caller callbacks.
+
+```lua
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local source = [[
+Top::OR{2}
+ /a/ -> Top[0] { return("A") }
+ /b/ -> Top[1] { return("B") }
+]]
+local compiled = linkedspec.compile_spec(linkedspec.parse_spec(source))
+local engine = linkedspec.runtime_engine(compiled)
+
+local events = {}
+local result = linkedspec.runtime_parse(engine, "ab\n", {
+  semantic_observation_sink = function(event)
+    assert(linkedspec.is_runtime_semantic_observation_event(event))
+    events[#events + 1] = event
+  end,
+})
+
+assert(result.value[1] == "A" and result.value[2] == "B")
+assert(result.cursor_code_unit == 2)
+assert(result.cursor_char_offset == 2)
+assert(linkedspec.RUNTIME_SEMANTIC_OBSERVATION_CONTRACT ==
+  "linkedspec-semantic-execution-observation-v1")
+
+local first = linkedspec.runtime_semantic_observation_event_to_json(events[1])
+assert(first.event_kind == "regex_slot_selected")
+assert(first.rule_label == "Top")
+assert(first.target_rule == "Top")
+assert(first.regex_index == 0)
+assert(first.position == 1)
+assert(first.input_identity == json.null and first.status == json.null)
+
+local final = linkedspec.runtime_semantic_observation_event_to_json(events[3])
+assert(final.event_kind == "rule_result")
+assert(final.position == 2)
+assert(final.input_identity ==
+  "input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece")
+assert(final.status == "succeeded")
+```
+
+The event handle exposes those eight read-only properties but stores no public table fields; its metatable is
+protected, assignment fails, and only the exact handle satisfies the guard. The JSON helper returns a fresh
+detached `json.harray` every time. Mutating that projection cannot change the event, and a deep-equivalent JSON
+object does not become a typed event. Constructors remain package-internal so callers cannot forge runtime
+evidence.
+
+Slot delivery occurs after a match and its compiled ordered identity are accepted but before `accept_match`
+changes runtime state. Position is `one:char_end()`, not the old context cursor. For input `xé`, both ABIs therefore
+report byte cursor 3 but slot/final scalar position 2. Final delivery occurs only after `RuntimeParseResult` exists.
+A normally unmatched result is still a successful invocation and gets one final event; selector failures,
+execution failures, and `RuntimeExitNow` do not. If the callback rejects a slot, no later slot or final event is
+delivered. If it rejects the final event, the callback has seen it but the parse does not return.
+
+Callbacks are synchronous and may throw any Lua value. A private semantic-only carrier survives nested runtime
+catches and trace-scope cleanup, then restores the exact original string, table, `nil`, or existing runtime error
+to the caller. Trace output/events and `diagnostic_sink` events remain byte/value-identical with and without the
+semantic sink, and reentrant parses retain separate event sequences. When no sink is present, the slot path does
+not construct a closure or event and does not convert the match end; the final path does not construct an event or
+hash input. Source identities and final input identities share one package-internal arithmetic SHA-256 owner that
+uses the common Lua 5.1 surface and no external executable or optional digest module.
+
+Direct engines, `LoadedCompiledSpec:create_engine()`, normalized-AST reconstruction, execute aliases, and traced
+convenience calls all reuse this one native seam. Generated-plan helpers currently reject the sink before runtime
+selection and emitted modules contain no observation adapter; `.10.7.6.3` owns the separate generated callback
+carrier and propagation. Likewise, `index:with_execution_observation(...)` and the twentieth `runtime_events`
+query remain absent until `.10.7.6.2`. Generated-source v2/format 2, results, trace, diagnostics, query digests,
+rollout 5/9, and native admission 4/6 are unchanged.
+
+The focused native suite passes 121 assertions per ABI. The seven existing semantic suites now total 1,493 per
+ABI because source-foundation proof also checks the shared SHA-256 dependency. Complete Lua passes package
+`1..177` per ABI, PUC primary 66x2, corpus 105/105, and the 14-owner same-volume storage proof.
+Complete signoff also passes primary 5x2x66, Unicode 10/10, every unchanged no-drift ledger, and canonical CI with
+Rust admission 1/1 in 77.88 seconds, Dart 1/1, Julia 416/416 in 27.3 seconds, containment/moved-root proof,
+reference primary 66x2, and Phase 0 1,031/1,031 in 621 seconds. Knowledge Map is 731 facts / 5,851 question keys.
+
 #### Lua private immutable query kernel (historical dependency boundary)
 
 Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
@@ -2875,6 +2960,7 @@ The dependency order is:
 | `.10.7.5.3` | Lua public typed/raw-neutral static query | complete; all 19 hashes and 26 malformed boundaries, query 571/focused 1,492 per ABI |
 | `.10.7.5.4` | Lua immutable static-query composition closeout | complete; committed focused 1,492 plus full signoff closes `.10.7.5` without replacement code or promotion |
 | `.10.7.6.0` | Lua runtime-observation authority audit | complete behavior-free plan; exact seams/routes/no-sink/callback/derivation/twentieth-digest policy frozen |
+| `.10.7.6.1` | Lua typed native runtime observation capture | implemented; protected events, exact native routes/callback identity, new 121/focused 1,614 per ABI, generated and derivation fenced |
 | `.10.7` | PUC Lua and LuaJIT identity | in progress |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
