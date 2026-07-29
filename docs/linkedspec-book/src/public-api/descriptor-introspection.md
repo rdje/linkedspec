@@ -52,18 +52,18 @@ explanation evidence. Ids and traversal are deterministic within a snapshot; pag
 bounded; source detail is ceiling-controlled as `none`, `identity`, `span`, or `text`, with explicit redactions.
 Optional runtime answers use a caller-captured observation and never cause a query to execute the parser.
 
-Each backend will expose idiomatic native construction/capabilities/query APIs plus the same neutral JSON
-projection. MCP will only forward capabilities and query requests for a caller-registered handle. It will not
-compile a spec, read an implicit path, inspect backend objects, derive facts, or invent explanations. The primary
-CLI gains no v1 command or option.
+Each backend exposes idiomatic native construction/capabilities/query APIs plus the same neutral JSON projection.
+MCP will only forward capabilities and query requests for a caller-registered handle. ADR `0054` requires one
+exact MCP contract with native Perl, Rust, Dart, Julia, and Lua implementations; one Lua source is admitted on PUC
+Lua and LuaJIT. It will not compile a spec, read an implicit path, inspect backend objects, derive facts, or invent
+explanations. The primary CLI gains no v1 command or option. A future aggregator is outside `.10.9` and may only
+route to the native servers.
 
-The neutral schema, fixtures, exact evaluator, and 81-mutation gate are executable under
-`FUTURE-PARITY-BACKLOG.10.2`. Perl, Rust, and Dart are admitted through exact native semantic APIs and composed
-12-role consumers. Julia now has a composition-closed strict source and compiled-or-failed foundation but not yet
-records, query, runtime observation, or admission. `.10.3-.10.10` own backend rollout, recurring proof, thin MCP
-transport, and public closeout. Until a backend's native semantic adapter is admitted, continue using the
-descriptor API documented below. [Semantic Introspection](semantic-introspection.md) documents the exact neutral
-model and current rollout.
+The neutral schema, fixtures, exact evaluator, and 105-mutation gate are executable under
+`FUTURE-PARITY-BACKLOG.10.2`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted through exact native
+semantic APIs and composed 12-role consumers; recurring native rollout is complete. `.10.9.1-.7` own the MCP
+contract, five implementations, and six-runtime admission, while `.10.10` owns public closeout.
+[Semantic Introspection](semantic-introspection.md) documents the exact neutral model and current rollout.
 
 For orientation, the executable neutral contract represents “describe `Top`, with spans but no source text” as:
 

@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.0 — ratify native per-backend MCP topology
+
+Recorded the director-approved MCP architecture before transport code. ADR `0054` defines one exact MCP
+wire/tool/error/lifecycle contract implemented natively in Perl, Rust, Dart, Julia, and Lua. One
+Lua-5.1-compatible implementation must pass independently on PUC Lua and LuaJIT, producing five source
+implementations and six runtime admissions.
+
+Each server is embeddable in the same runtime that owns its caller-registered immutable semantic indexes. It can
+only dispatch capabilities and query to those native objects; it gains no implicit path loading, compilation,
+execution, backend traversal, semantic model/cache, explanation, or policy-ceiling authority. Any later unified
+aggregator is outside `.10.9`, requires separate post-public-closeout task-tree ownership, and may only route.
+
+Split `.10.9` into exact contract `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua `.6`, and recurring
+six-runtime admission `.7`. Updated the roadmaps, architecture state, public mdBook, Knowledge Map, task index, and
+continuity docs without adding MCP behavior or changing semantic governance from 6 groups / 20 responses / 105
+mutations at rollout 7/9 and native admission 6/6.
+
+Focused memory, task metadata, Knowledge Map 738/5,924, six-doctrine, mdBook, semantic, and whitespace checks pass.
+Canonical CI passes Rust semantic admission 1/1 in 81.06 seconds, Dart 1/1, Julia 416/416 in 28.9 seconds, process
+containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 654 seconds. The outer agent
+sandbox denied the first nested macOS `sandbox-exec` proof; an approved direct rerun passed that kernel-enforced
+negative containment test and the full gate. Final cleanup removes only the verified ignored 13,096-KiB rendered book
+and one proven-empty managed-run directory. Push cadence advances to 62/300; no push.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.8 — add recurring semantic proof
 
 Added one repository-routed `tools/check_semantic_introspection_six_runtime.sh` orchestration gate. It creates one

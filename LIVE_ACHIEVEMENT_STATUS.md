@@ -8,13 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.8` is complete from clean planning commit `b1921da0`. Thin MCP transport `.10.9` is
-  the next pending slice and may activate only after the recurring closeout commits cleanly.
+- `FUTURE-PARITY-BACKLOG.10.9.0` is complete and verified from clean recurring commit `75c9ac5`. It records the
+  director-approved one-contract/five-native-implementation/six-runtime architecture before MCP transport code.
+  Exact executable contract `.10.9.1` is the next eligible leaf after this architecture slice commits cleanly.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.0 — ratify native per-backend MCP topology**
+  (behavior-free architecture record from clean recurring commit `75c9ac5`).
+
+  **Result:** ADR `0054` freezes one exact MCP contract; native Perl, Rust, Dart, Julia, and Lua implementations;
+  and independent Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions. The same Lua source serves both ABIs. Each
+  adapter lives beside its registered native index and owns no filesystem, compiler, execution, traversal,
+  semantic-cache, explanation, or ceiling-elevation authority. Any later aggregator is routing-only, outside
+  `.10.9`, and requires separate post-`.10.10` ownership.
+
+  **Proof:** Task/index/roadmaps/ADR/Knowledge Map/architecture/mdBook/live docs agree on the `.10.9.1-.7` split;
+  no MCP implementation or semantic governance value changes. Focused governance, semantic 6/20/105 at 7/9 +
+  6/6, and mdBook checks pass. Canonical CI passes all six doctrines, Rust 1/1 in 81.06s, Dart 1/1, Julia 416/416
+  in 28.9s, process containment, moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 654s.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.8 — add recurring semantic proof**
   (exact six-runtime orchestration from clean planning commit `b1921da0`).
 

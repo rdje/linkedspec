@@ -3149,14 +3149,23 @@ The dependency order is:
 | `.10.7.7` | Lua exact dual-ABI semantic admission | complete; one shared twelve-role source passes 408 assertions per ABI, identical two-row topology and nine mutations advance only Lua to 6/9 rollout and 6/6 admission |
 | `.10.7` | PUC Lua and LuaJIT identity | complete |
 | `.10.8` | recurring six-runtime proof | implemented; exact six-runtime driver, three 5x2 primary cases, support ledgers, canonical opt-in, and seven mutations advance only recurring to 7/9 |
-| `.10.9` | thin MCP transport | pending |
+| `.10.9.0` | one-contract/five-implementation/six-runtime MCP topology | complete; behavior-free architecture record |
+| `.10.9.1` | exact MCP wire/tool/handle/policy/lifecycle contract and shared conformance corpus | pending |
+| `.10.9.2-.10.9.5` | native Perl, Rust, Dart, and Julia MCP implementations | pending |
+| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
+| `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
 
-The future MCP server has only capabilities and query tools over a caller-registered opaque native handle. It
-cannot compile, read a path, traverse backend objects, cache a second semantic model, invent explanations, or
-raise source/budget ceilings. Direct native and MCP responses must be identical after canonical JSON encoding.
+ADR `0054` defines one exact MCP contract rather than one cross-runtime executable. Perl, Rust, Dart, Julia, and
+Lua each implement the server beside the native semantic index it serves; the same Lua-5.1-compatible source must
+pass independently on PUC Lua and LuaJIT. Every implementation exposes only capabilities and query tools over a
+caller-registered opaque native handle. It cannot compile, read a path, traverse backend objects, cache a second
+semantic model, invent explanations, or raise source/budget ceilings. The same conformance corpus must prove
+direct native and MCP responses identical after canonical JSON encoding on all six runtime legs.
 
-Perl, Rust, Dart, and Julia callers can use the admitted native static and caller-captured runtime query surfaces
-now. No later backend may claim semantic-introspection admission until its composed conformance leaf closes. Other
-backends should continue using their existing descriptor APIs described in
-[Descriptor Introspection](descriptor-introspection.md) until their native semantic adapter lands.
+A future aggregator is optional and outside `.10.9`. If separately justified after public closeout, it may offer
+one client endpoint only by routing to these native servers; it cannot own indexes or semantic responses and
+cannot reinterpret transport errors or semantic results.
+
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
+runtime query surfaces now. MCP transport remains pending until `.10.9.1-.7` close.

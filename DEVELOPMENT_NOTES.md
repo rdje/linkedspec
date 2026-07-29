@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.0` — MCP uniformity is contract uniformity, not one cross-runtime
+  process): The opaque handles accepted by MCP denote actual native immutable indexes. A single process cannot
+  directly retain Perl, Rust, Dart, Julia, and Lua objects without embedded runtimes, FFI, or subprocess IPC.
+  Introducing that bridge before the native adapters would enlarge the authority boundary and make a central
+  cache/reconstruction layer too easy to create.
+
+  ADR `0054` therefore requires five native implementations under one exact contract and one shared conformance
+  corpus. The implementation lives in the same runtime as the registered index and calls only native
+  capabilities/query. PUC Lua and LuaJIT share one Lua-5.1-compatible source but remain two independent runtime
+  admissions. A future aggregator is a distinct, post-`.10.10` possibility: it may provide one endpoint by routing
+  only, never by owning indexes or semantic responses. This preserves ADR `0022` native embedding and ADR `0049`
+  thin-transport ownership while accepting the maintenance cost of five protocol implementations; the exact
+  contract and omission-sensitive corpus are the drift control.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.8` — orchestration state is project data too): The recurring driver needs
   one parent artifact root, but its consumers retain their existing ownership boundaries. Rust target output and
   Julia writable depot live under that root; both Lua invocations still cross `run_lua_project_data.sh`, which

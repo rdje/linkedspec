@@ -161,8 +161,11 @@ This document is the current high-level technical reading of the project shape. 
   before an adapter can encode them. Correction `.10.3.3.0` independently checks generated artifacts against the
   admitted v2 family authority: the calls fixture's selected `_default` handler emits `default`, not the stale and
   invalid `and_acode` model value. Correction `.10.3.3.1.0` also derives every `spec.name` from caller logical
-  identity, repairing the calls-only `calls` versus `calls_and_staging` drift. MCP is only registered-handle capabilities/query transport. Neutral rollout is 3 complete / 6
-  pending and backend admission 2 complete / 4 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
+  identity, repairing the calls-only `calls` versus `calls_and_staging` drift. MCP is only registered-handle
+  capabilities/query transport. ADR `0054` fixes one exact contract across five native server implementations and
+  six runtime admissions; one Lua source serves PUC Lua and LuaJIT, and any future aggregator is an optional
+  routing-only post-closeout layer. Neutral rollout is 7 complete / 2 pending
+  and backend admission 6 complete / 0 pending; `.10.3-.10.10` own five backend/six runtime, recurring,
   MCP, and public work. Perl audit `.10.3.0` proves that strict decoded source plus canonical bytes, descriptor,
   typed ActionIR, staged records, structured failures, and generated-v2 plan metadata must be composed. Current
   state originally had no rule/edge/lifecycle source map, generated metadata is not a snapshot, and runtime context/

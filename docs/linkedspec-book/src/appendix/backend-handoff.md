@@ -215,14 +215,13 @@ index for rules, regex slots, edges, lifecycle, calls, shapes, staged/generated 
 runtime observations, and explanations. Snapshot-local ids/order, bounded pages/cost, structural source privacy,
 and exact fixtures are mandatory. Descriptors remain a separate compatibility projection; AST/IR, callables,
 compiled regexes, object identities, implicit paths, and generated implementation source cannot enter responses.
-MCP is later handle-only transport and cannot compile, read paths, derive facts, or own explanations.
+MCP is later handle-only transport and cannot compile, read paths, derive facts, or own explanations. ADR `0054`
+requires one exact contract implemented natively in Perl, Rust, Dart, Julia, and Lua, with the same Lua source
+admitted on both PUC Lua and LuaJIT. Any later one-endpoint aggregator is outside `.10.9` and routing-only.
 
-Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` now each provide strict in-memory compiled-or-failed
-construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated projection, all 19 static
-queries, typed caller-captured runtime observation for the twentieth answer, and one omission-sensitive 12-role
-admission consumer. Both queries remain unable to execute. Dart now has the same complete semantic stack and one
-exact 12-role admission consumer. The checker is exact at six fixture groups, 20 query digests, and 81 rejected
-mutations; rollout is 4/9 and native admission 3/6.
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT now provide the complete native semantic stack and exact twelve-role
+admission. The checker is exact at six fixture groups, 20 query digests, and 105 rejected mutations; recurring
+native rollout is 7/9 and native admission is 6/6. MCP contract/implementation/admission remains `.10.9.1-.7`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

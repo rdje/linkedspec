@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-28` (exact dual-ABI semantic admission `.10.7.7` activated task-tree-first from clean
-  runtime-observation closeout commit `17348041`)
+- Last updated: `2026-07-29` (director-approved native MCP topology `.10.9.0` completed; exact shared contract
+  `.10.9.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12921,14 +12921,126 @@ before implementation.
     complete the closure. Thin MCP `.10.9` is next after the clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
-  Status: `pending`
-  Goal: Implement the thin MCP semantic handle/capabilities/query transport.
+  Status: `active` (2026-07-29; director approved one contract, five native implementations, and six-runtime
+    conformance; architecture record `.10.9.0` is complete and exact contract `.10.9.1` is next)
+  Goal: Implement one thin MCP semantic contract through five native server implementations and six runtime
+    admissions.
+  Children: `.10.9.0`, `.10.9.1`, `.10.9.2`, `.10.9.3`, `.10.9.4`, `.10.9.5`, `.10.9.6`, `.10.9.7`
   Depends on: `.10.8`
   Acceptance: Expose only `linkedspec_semantic_capabilities(handle)` and
     `linkedspec_semantic_query(handle, request)` over caller-registered immutable indexes; call native operations;
     enforce but never elevate deployment source/cost ceilings; perform no implicit file read, compilation, semantic
-    traversal, explanation, or backend-object inspection; prove canonical native/MCP response identity, handle/
-    authorization transport failures, omission-sensitive tool topology, and no new primary CLI behavior.
+    traversal, explanation, or backend-object inspection. One normative wire/tool/error/lifecycle contract governs
+    five native implementations: Perl, Rust, Dart, Julia, and one Lua source admitted unchanged on PUC Lua and
+    LuaJIT. Prove canonical native/MCP response identity, handle/authorization transport failures,
+    omission-sensitive tool topology, six-runtime conformance, and no new primary CLI behavior. A future optional
+    aggregator may only route to these servers and is outside `.10.9`; it may not own indexes, cache semantic
+    responses, or reinterpret requests/results.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.0`
+    Status: `done` (2026-07-29)
+    Goal: Ratify the one-contract/five-implementation/six-runtime MCP topology and freeze the implementation split
+      before transport code.
+    Depends on: `.10.8`
+    Acceptance: Amend the accepted semantic-introspection decision without changing parser/compiler/runtime/native
+      semantic/MCP behavior. Define uniformity as one exact tool, request, response, error, registration,
+      authorization, expiry, transport, and conformance contract rather than one cross-runtime process. Require
+      each native adapter to invoke an already-created immutable index in its owning runtime; forbid FFI/IPC,
+      implicit source/path bootstrap, recompilation, a second semantic cache/model, and backend inspection. Record
+      five source implementations and six runtime admissions, with one Lua implementation shared unchanged by PUC
+      Lua and LuaJIT. Keep any convenience aggregator optional, post-`.10.10`, separately task-tree-owned, and a
+      routing-only layer. Split exact contract `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua `.6`,
+      and recurring six-runtime admission `.7`; synchronize task/index/roadmaps/ADR/Knowledge Map/mdBook/live docs,
+      pass documentation/governance/canonical gates, commit, clear the message brief, verify clean, and do not push.
+
+    #### Acceptance Checklist
+
+    - [x] **CLEAN OWNED BASE** — Prove clean recurring closeout `75c9ac5`, empty message brief, and `.10.9.0`
+      ownership before any non-task-tree change.
+    - [x] **ONE CONTRACT / FIVE IMPLEMENTATIONS** — Freeze exact cross-language contract uniformity and native
+      per-runtime ownership without a cross-runtime semantic process.
+    - [x] **SIX-RUNTIME CONFORMANCE** — Require the same transport corpus and direct-native/MCP canonical response
+      identity on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+    - [x] **PROCESS / AUTHORITY FENCE** — Keep registered indexes in their owning runtime and prohibit implicit
+      source loading, compilation, FFI/IPC semantics, caches, traversal, explanation, or ceiling elevation.
+    - [x] **AGGREGATOR DEFERRAL** — Record that any later one-endpoint aggregator is an optional dumb router,
+      post-public-closeout and separately task-tree-owned, never part of the canonical `.10.9` implementations.
+    - [x] **DEPENDENCY SPLIT / LOCKSTEP** — Freeze `.1-.7`, update every durable projection, pass all required
+      checks, commit the architecture slice, clear the brief, and verify a clean handoff to `.10.9.1`.
+
+    Verification: **PASS 2026-07-29.** Clean base `75c9ac5`, zero-byte message brief, and task-tree-first ownership
+      preceded every durable change. ADR `0054`, the task/index, both roadmaps, architecture state, README,
+      Knowledge Map, mdBook, changelog, development note, live status, and bounded memory agree on one exact
+      contract, five native source implementations, six runtime admissions, same-process registered indexes, and
+      routing-only deferral of any aggregator. No MCP implementation, parser/compiler/runtime, semantic API,
+      generated format, fixture, primary CLI, rollout, or admission behavior changed. Focused proof passes memory
+      architecture, task metadata, Knowledge Map 738 facts / 5,924 question keys, all six doctrines, mdBook,
+      whitespace, and the neutral semantic checker at 6 groups / 20 exact responses / 105 rejected mutations,
+      rollout 7/9, admission 6/6. Canonical local CI passes all doctrines, Rust admission 1/1 in 81.06 seconds,
+      Dart 1/1, Julia 416/416 in 28.9 seconds, process containment, moved-root proof, reference primary 66x2, and
+      Phase 0 1,031/1,031 in 654 seconds. The first nested macOS `sandbox-exec` containment invocation was denied
+      by the outer agent sandbox; the approved direct rerun passed the kernel-enforced negative proof and the full
+      gate. Final cleanup removes only the verified ignored 13,096-KiB rendered book and one proven-empty managed-run
+      directory. Exact shared contract `.10.9.1` follows the clean commit.
+    Commit: `FUTURE-PARITY-BACKLOG.10.9.0 - ratify native MCP topology`
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.1`
+    Status: `pending`
+    Goal: Freeze the executable MCP wire, tool, handle, policy, lifecycle, and conformance contract.
+    Depends on: `.10.9.0`
+    Acceptance: Select and pin the supported MCP protocol/transport boundary; encode exact initialize/tool-list/
+      tool-call schemas, canonical success identity, JSON-RPC versus tool-result failures, opaque handle
+      registration/authorization/expiry, deployment ceiling intersection, stdout/logging discipline, and shutdown.
+      Provide one backend-neutral corpus and omission/mutation checker consumable unchanged by all five
+      implementations; add no backend server yet.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.2`
+    Status: `pending`
+    Goal: Implement and admit the Perl native MCP server against the exact transport contract.
+    Depends on: `.10.9.1`
+    Acceptance: Register opaque handles for existing `LinkedSpec::SemanticIndex` values in the owning Perl process,
+      dispatch only the two governed tools to native capabilities/query, preserve canonical bytes and policy
+      ceilings, and pass the full transport corpus, failures, mutations, and direct/MCP identity without path reads,
+      compilation, execution, trace, semantic caching, or a primary CLI change.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.3`
+    Status: `pending`
+    Goal: Implement and admit the Rust native MCP server against the exact transport contract.
+    Depends on: `.10.9.2`
+    Acceptance: Register opaque handles for existing Rust `SemanticIndex` values in the owning process and pass the
+      same exact contract/corpus/failure/identity boundary without adding semantic ownership or backend leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.4`
+    Status: `pending`
+    Goal: Implement and admit the Dart native MCP server against the exact transport contract.
+    Depends on: `.10.9.3`
+    Acceptance: Register opaque handles for existing Dart `SemanticIndex` values in the owning process and pass the
+      same exact contract/corpus/failure/identity boundary without adding semantic ownership or backend leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.5`
+    Status: `pending`
+    Goal: Implement and admit the Julia native MCP server against the exact transport contract.
+    Depends on: `.10.9.4`
+    Acceptance: Register opaque handles for existing Julia `SemanticIndex` values in the owning process and pass
+      the same exact contract/corpus/failure/identity boundary without adding semantic ownership or backend leakage.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.6`
+    Status: `pending`
+    Goal: Implement one Lua native MCP server and admit its unchanged source on PUC Lua and LuaJIT.
+    Depends on: `.10.9.5`
+    Acceptance: Register opaque handles for existing Lua semantic indexes in the owning process; run one
+      Lua-5.1-compatible implementation unchanged on PUC Lua and LuaJIT; and pass identical contract, corpus,
+      failure, direct/MCP byte-identity, host-leak, and dual-ABI topology proof without a second implementation.
+
+  - ID: `FUTURE-PARITY-BACKLOG.10.9.7`
+    Status: `pending`
+    Goal: Compose recurring six-runtime MCP conformance and close the thin-transport parent.
+    Depends on: `.10.9.6`
+    Acceptance: One repository-routed recurring driver runs the exact contract and each admitted implementation
+      once across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; proves all twenty native/MCP canonical responses,
+      transport/handle/auth/expiry/policy failures, tool-topology omissions, no primary CLI surface, and no semantic
+      model/cache/filesystem/runtime authority; advances only the MCP rollout row and closes `.10.9` after complete
+      lockstep signoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.10`
   Status: `pending`
@@ -15209,8 +15321,10 @@ admission `.10.7.7` is complete from clean planning commit `e5a547ac`: one uncha
 408 assertions on each ABI and all eleven semantic owners pass 2,372 per ABI. Parent `.10.7` is closed.
 Semantic governance is now 6/20/105 at rollout 7/9 and admission 6/6. Recurring composition `.10.8` is complete:
 one repository-routed driver composes the six admitted consumers, three 5x2 primary no-drift cases, and three
-support ledgers without a seventh semantic model or new CLI surface. Thin MCP transport `.10.9` is the next
-pending leaf after the clean commit.
+support ledgers without a seventh semantic model or new CLI surface. Director-approved behavior-free MCP
+architecture leaf `.10.9.0` is complete from clean `75c9ac5`: ADR `0054` freezes one exact contract, five native
+implementations, six runtime admissions, and routing-only deferral of any aggregator. Canonical CI passes through
+Phase 0 1,031/1,031; exact contract `.10.9.1` is the next eligible leaf after the clean architecture commit.
 
 ### Superseded frontier snapshots
 

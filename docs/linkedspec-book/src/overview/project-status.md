@@ -655,9 +655,11 @@ Three backbone items tracked major structural modernization — all done:
   artifacts pass. No-change `.10.6.6.4` now recomposes the twelve committed owners at focused 1,337 plus complete
   Julia/matrix/Unicode/canonical proof and closes `.10.6.6` without production/replacement-test/API/format/runtime
   or promotion change; rollout/admission stay 4/9 and 3/6, and exact admission `.10.6.7` remains pending.
-  Queries cannot compile, execute, enable trace, read paths, or expose host IR.
-  Rollout is 4 complete / 5 pending and native admission 3 complete / 3 pending;
-  Perl, Rust, and Dart are admitted. MCP remains handle-only later transport and owns no semantic or filesystem behavior.
+  Queries cannot compile, execute, enable trace, read paths, or expose host IR. All six native runtime targets are
+  now admitted and recurring proof is complete at rollout 7/9, native admission 6/6, and 105 rejected mutations.
+  ADR `0054` makes pending MCP work one exact contract with native Perl, Rust, Dart, Julia, and Lua server
+  implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. MCP remains handle-only and
+  owns no semantic or filesystem behavior. A future aggregator is outside `.10.9` and may only route.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

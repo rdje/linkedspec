@@ -1443,7 +1443,10 @@ content migration exists yet.
   topology and nine mutations advance only Lua, closing native admission at 6/20/98, rollout 6/9, admission 6/6.
   Recurring `.10.8` then composes all six consumers through one routed driver, passes three primary cases at
   30/30 and three exact support ledgers, adds seven mutations, and advances only recurring. Current governance is
-  6/20/105 at rollout 7/9 and admission 6/6; thin MCP `.10.9` is next.
+  6/20/105 at rollout 7/9 and admission 6/6. ADR `0054` and completed planning leaf `.10.9.0` split thin MCP into
+  one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, and six runtime admissions because the same
+  Lua source must pass on PUC Lua and LuaJIT. Contract implementation `.10.9.1` is next after the clean
+  behavior-free architecture commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

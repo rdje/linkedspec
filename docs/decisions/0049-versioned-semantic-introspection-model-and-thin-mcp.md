@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; neutral oracle corrected; Perl and Rust admitted
+- Status: accepted; amended by ADR 0050; MCP process topology clarified by ADR 0054
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -430,3 +430,4 @@ topology mutations plus canonical registration advance only Rust to rollout 3/9 
 - Staged provenance: ADRs `0012`-`0016`
 - Current outward descriptor contract: `capability_conformance/outward_descriptor_contract.json`
 - Staged-artifact schema correction: ADR `0050`
+- Native per-backend MCP server topology: ADR `0054`
