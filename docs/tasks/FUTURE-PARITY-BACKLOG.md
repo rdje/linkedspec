@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-29` (modern MCP protocol-policy leaf `.10.9.1.0` complete; machine schemas/fixtures
-  `.10.9.1.1` are next after its clean commit)
+- Last updated: `2026-07-29` (machine-readable MCP contract leaf `.10.9.1.1` active from clean protocol-policy
+  commit `b0492488`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12923,7 +12923,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
   Status: `active` (2026-07-29; director approved one contract, five native implementations, and six-runtime
     conformance; architecture `.10.9.0` and modern protocol policy `.10.9.1.0` are complete; machine contract
-    `.10.9.1.1` is next)
+    `.10.9.1.1` is active)
   Goal: Implement one thin MCP semantic contract through five native server implementations and six runtime
     admissions.
   Children: `.10.9.0`, `.10.9.1`, `.10.9.2`, `.10.9.3`, `.10.9.4`, `.10.9.5`, `.10.9.6`, `.10.9.7`
@@ -12986,7 +12986,7 @@ before implementation.
     Commit: `FUTURE-PARITY-BACKLOG.10.9.0 - ratify native MCP topology`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.1`
-    Status: `active` (2026-07-29; protocol policy `.10.9.1.0` complete; machine contract `.10.9.1.1` next)
+    Status: `active` (2026-07-29; machine contract `.10.9.1.1` complete; independent validator `.10.9.1.2` next)
     Goal: Freeze the executable MCP wire, tool, handle, policy, lifecycle, and conformance contract.
     Depends on: `.10.9.0`
     Children: `.10.9.1.0`, `.10.9.1.1`, `.10.9.1.2`, `.10.9.1.3`
@@ -13048,12 +13048,58 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.1.0 - pin modern MCP transport policy`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.1.1`
-      Status: `pending`
+      Status: `done` (2026-07-29)
       Goal: Encode the adopted MCP contract as backend-neutral schemas, fixtures, canonical bytes, and corpus.
       Depends on: `.10.9.1.0`
       Acceptance: Check in exact discovery/tool-list/tool-call/lifecycle envelopes, tool input/output schemas,
         canonical success and failure cases, handle/auth/expiry/policy fixtures, and direct-native/MCP response
         identity bytes without implementing a backend server.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove clean protocol-policy commit `b0492488`, zero-byte message brief, absent
+        generated residue, and `.10.9.1.1` ownership before any contract artifact or supporting-doc change.
+      - [x] **NORMATIVE ARTIFACT TOPOLOGY** — Inventory existing neutral semantic schema/corpus conventions and
+        choose one root-relative, backend-neutral MCP v1 artifact home with explicit manifest/version ownership;
+        do not add a native server, SDK dependency, network dependency, or runtime-specific copy.
+      - [x] **EXACT SCHEMAS** — Encode closed JSON Schema 2020-12 definitions for modern MCP request metadata,
+        JSON-RPC request/response/error envelopes, discovery, fixed tool list/call inputs, semantic success,
+        transport tool errors, cancellation, ids, native identities, and deliberately unsupported topology.
+      - [x] **CANONICAL POSITIVE CORPUS** — Check in deterministic LF-framed canonical bytes for discovery,
+        tools/list, both tool calls, direct/native payload identity, restrictive capability projection, permitted
+        query identity, cancellation, and graceful EOF/lifecycle scenarios across all five server identities.
+      - [x] **NEGATIVE / HANDLE / POLICY CORPUS** — Encode exact parse/request/version/method/schema/tool failures,
+        indistinguishable unknown/expired/revoked/unauthorized handles, policy pre-dispatch denial, sanitization,
+        stdout/logging, registry bounds/cleanup, and no-legacy/no-extra-capability expectations without building the
+        independent validator reserved for `.10.9.1.2`.
+      - [x] **REPRODUCIBLE CANONICAL IDENTITY** — Provide a repository-routed deterministic materialization path,
+        digest/byte manifest, source semantic-response references, and fixture provenance so every backend consumes
+        the same exact files and `.10.9.1.2` can detect any omission or mutation independently.
+      - [x] **LOCKSTEP SIGNOFF** — Update task/index/roadmaps, architecture, Knowledge Map, mdBook examples, and
+        changes/development/live/memory; pass artifact parse/materialization/identity checks, focused governance,
+        canonical CI, exact cleanup, commit/brief/clean workflow, and do not push.
+
+      Verification: **PASS 2026-07-29.** Clean protocol-policy commit `b0492488`, a zero-byte message brief, and
+        this leaf's task-tree ownership preceded every contract artifact. `linkedspec-mcp-transport-v1` now owns one
+        root-relative digest-pinned manifest, one closed JSON Schema 2020-12, four semantic payloads, 35 compact
+        canonical LF frames, ten raw-input cases, ten lifecycle cases, four indistinguishable handle cases, and four
+        policy/dispatch cases across all five native identities. Three admitted native response payloads retain
+        their exact semantic digests and the fourth fixture is the deliberately restricted schema-preserving
+        projection; the largest canonical frame is 14,597 bytes against the 1,048,576-byte limit. The repository-
+        routed materializer independently reloads source JSON with duplicate-key rejection and locks schema-reference
+        closure, topology/counts, payload digests, structured/text mirror identity, handle/policy dispatch, compact
+        LF framing, line limits, generated JSONL freshness, and every artifact/tool SHA-256. It does not claim the
+        independent schema/error/omission semantics reserved for `.10.9.1.2`, and no server, SDK/network dependency,
+        native semantic API, parser/compiler/runtime, primary CLI, response, rollout, or admission behavior changes.
+        Focused proof passes exact materialization, whitespace, mdBook, Knowledge Map 739 facts / 5,943 question
+        keys, task metadata, all six doctrines, semantic governance 6/20/105 at rollout 7/9 and admission 6/6,
+        project-data classification 1,688 files / 376,598 lines / 28 mutations, and the updated tool-locality census
+        at three Python temporary owners / 13 shell allocators / 20 Python tool entrypoints. Canonical CI passes all
+        six doctrines, Perl semantic admission 18, Rust 1/1 in 80.85 seconds, Dart 1/1, Julia 416/416 in 28.8
+        seconds, containment, moved-root proof, primary CLI 66x2, and Phase 0 1,031/1,031 in 648 seconds. Exact
+        generated-artifact cleanup removes only the verified ignored 13,196-KiB rendered book and one proven-empty
+        managed-run directory. Independent validator and omission/mutation corpus `.10.9.1.2` follow the clean commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.1.1 - encode exact MCP machine contract`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.1.2`
       Status: `pending`
@@ -15365,7 +15411,7 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-07-28):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
+**Authoritative frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
 coordinates, four ceilings, one retained compiled-or-failed authority, native/fallback diagnostic, entry, and
 generated-v2 plan without caller path or target execution on either ABI. Behavior-free static-authority audit
@@ -15402,8 +15448,11 @@ support ledgers without a seventh semantic model or new CLI surface. Director-ap
 architecture leaf `.10.9.0` is complete from clean `75c9ac5`: ADR `0054` freezes one exact contract, five native
 implementations, six runtime admissions, and routing-only deferral of any aggregator. Canonical CI passes through
 Phase 0 1,031/1,031. Exact contract parent `.10.9.1` is split before artifacts; behavior-free official-protocol
-audit and decision `.10.9.1.0` is complete from clean architecture commit `9a8761ea`; machine-readable contract
-artifacts `.10.9.1.1` are next after its clean commit.
+audit and decision `.10.9.1.0` is complete from clean architecture commit `9a8761ea`. Machine-readable contract
+artifacts `.10.9.1.1` are complete from clean policy commit `b0492488`: one digest-pinned manifest, closed schema,
+four semantic payloads, 35 canonical frames, ten raw cases, ten lifecycle cases, and a deterministic materializer
+freeze the exact backend-neutral bytes without a server. Independent validator/mutations `.10.9.1.2` are next
+after the clean commit.
 
 ### Superseded frontier snapshots
 
@@ -16720,6 +16769,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.1` | Clean base `b0492488`; exact manifest/schema/four payloads/35 frames/10 raw/10 lifecycle/4 handle/4 policy cases; deterministic duplicate-key/digest/topology/framing/materialization proof; mdBook; KM 739/5,943; task/doctrines/diff; semantic 6/20/105 at 7/9 + 6/6; storage 1,688/376,598/28 and tools 3/13/20; canonical Perl 18, Rust 1/1 80.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, Phase 0 1,031/648s; exact cleanup. | PASS. Exact machine bytes are frozen without a server or independent-validator overclaim; `.10.9.1.2` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.4` | Clean committed base `04ab4fec`; no production/test/fixture/contract/API/observation/format/ledger replacement; ten committed suites exact 1,964 per ABI; native/loaded/reconstructed/generated/emitted/traced/isolated routes, callback identity, strict detached derivation, twentieth digest, no-sink/non-interference/authority fences; complete Lua 177x2, PUC primary 66x2/corpus 105/storage 15; primary 5x2x66; Unicode 10/10; all ledgers exact; canonical six doctrines, Rust 1/1 in 81.52s, Dart 1/1, Julia 416/416 in 29.0s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 656s; mdBook/KM 733/5,874/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The committed runtime-observation owners recompose without replacement behavior, format movement, or promotion; parent `.10.7.6` closes and exact dual-ABI admission `.10.7.7` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.3` | Clean base `ca6d635e`; public generated direct/traced, fresh emitted direct/traced, isolated PUC Lua/LuaJIT hosts; exact three events and twentieth digest; arbitrary callback identity, marker fences, stop/trace cleanup, unmatched/failure/exit finals, reentrancy, no-sink traps, result/trace/diagnostic neutrality; deterministic unchanged v2/format 2 and minimal plan; new 80 plus ten-suite focused 1,964 per ABI; complete Lua 177x2, PUC primary 66x2/corpus 105/15-owner storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 82.65s, Dart 1/1, Julia 416/416 in 29.5s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 667s; mdBook/KM 733/5,874/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Generated and emitted observation is a transparent adapter over the shared native/derivation seams on both ABIs; format, rollout, admission, and all ledgers stay unchanged, and no-change closeout `.10.7.6.4` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.2` | Clean base `cffc524d`; exact protected events plus one detached static projection; strict contract/kind/nullability/UTF-8/numeric/input/final/topology validation; immutable execution/event/observed-as projection; twentieth digest; mutation/interleaving/one-materialization/zero-authority/generated fences; derivation 269 plus nine-suite focused 1,884 per ABI; complete Lua 177x2, PUC primary 66x2/corpus 105/14-owner storage; primary 5x2x66; Unicode 10/10; six ledgers exact; canonical six doctrines, Rust 1/1 in 80.89s, Dart 1/1, Julia 416/416 in 28.6s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 654s; mdBook/KM 732/5,863/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. Native observations derive a separate exact immutable index on both ABIs without execution, generated/emitted propagation, format, rollout, admission, or ledger movement; generated propagation `.10.7.6.3` follows the clean commit. |
@@ -17006,6 +17056,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.1.1` | `FUTURE-PARITY-BACKLOG.10.9.1.1 - encode exact MCP machine contract` | One digest-pinned neutral schema/payload/corpus/canonical-stream contract and deterministic materializer; independent validator `.1.2` follows. |
 | `FUTURE-PARITY-BACKLOG.10.8` | `FUTURE-PARITY-BACKLOG.10.8 - add recurring semantic proof` | Exact six-runtime driver, 105 mutations at 7/9 + 6/6, 30-case primary projection, three support ledgers, 40-entrypoint/13-shell locality governance, canonical proof, and clean handoff to thin MCP `.10.9`. |
 | `FUTURE-PARITY-BACKLOG.10.8` | `FUTURE-PARITY-BACKLOG.10.8 - activate recurring semantic proof` | Behavior-free exact six-runtime driver/primary/support/canonical topology, seven mutations, recurring-only promotion boundary, and clean implementation handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.7` | `FUTURE-PARITY-BACKLOG.10.7.7 - admit Lua semantic introspection` | Exact shared 12-role consumer, 408 assertions per ABI, 98 mutation locks, Lua-only 6/9 + 6/6 promotion, complete signoff, and parent `.10.7` closure. |

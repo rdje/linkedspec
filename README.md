@@ -274,7 +274,7 @@ proves all 17 Julia temporary owners plus generated/trace paths, migrates 88 cur
 both exact old depots plus the exact former-checkout shared-log stanza after complete offline use. Julia's shared
 developer depot remains untouched and unused. Lua `.2.5` roots all 13 allocation owners, dual-ABI native modules,
 generated source, and traces on repository storage; its exact old-workspace census is zero. Tool-family `.2.6` is
-now implemented: it routes all maintained Python checker commands and bytecode, both Python regeneration
+now implemented: it routes all maintained Python tool commands and bytecode, both Python regeneration
 workspaces, Knowledge Map output, mdBook destinations, conformance/TAP/oracle writers, and shell allocators through
 validated repository-filesystem storage. Its recurring oracle rejects hostile output paths before creation.
 Reconciliation `.3.1.1` independently confirms all frozen off-repository sources and shared metadata are absent,
@@ -1031,7 +1031,9 @@ content migration exists yet.
   5x2 primary no-drift cases, and generated/capability/language ledgers. ADR `0055` selects stable modern MCP
   `2026-07-28` over stdio for the pending transport: mandatory `server/discover`, per-request metadata, explicit
   opaque handles, two read-only native capabilities/query tools, no legacy initialization/session/ping, and no
-  compile, path-read, or semantic authority. Machine artifacts and implementations remain `.10.9.1.1-.7`. Perl
+  compile, path-read, or semantic authority. Machine leaf `.10.9.1.1` now pins one neutral manifest, closed JSON
+  Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte cases, ten lifecycle cases, and the
+  deterministic materializer. Independent validation and native implementations remain `.10.9.1.2-.7`. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -1448,8 +1450,9 @@ content migration exists yet.
   30/30 and three exact support ledgers, adds seven mutations, and advances only recurring. Current governance is
   6/20/105 at rollout 7/9 and admission 6/6. ADR `0054` and completed planning leaf `.10.9.0` split thin MCP into
   one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, and six runtime admissions because the same
-  Lua source must pass on PUC Lua and LuaJIT. ADR `0055` and `.10.9.1.0` now freeze modern-only MCP `2026-07-28`
-  stdio lifecycle, method/error/handle/policy/canonical/shutdown rules; machine contract `.10.9.1.1` is next.
+  Lua source must pass on PUC Lua and LuaJIT. ADR `0055` and `.10.9.1.0` freeze modern-only MCP `2026-07-28`
+  stdio lifecycle, method/error/handle/policy/canonical/shutdown rules. Machine contract `.10.9.1.1` now encodes
+  those rules once with digest-locked neutral artifacts; independent checker `.10.9.1.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

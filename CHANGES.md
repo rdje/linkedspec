@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.1 — encode exact MCP machine contract
+
+Added `linkedspec-mcp-transport-v1` as one backend-neutral, root-relative artifact bundle. Its normative manifest
+pins modern MCP `2026-07-28` stdio policy, five native identities, two strict read-only tools, request limits,
+256-bit handle lifecycle, lowering-only deployment policy, exact JSON-RPC/tool errors, authority exclusions,
+canonical JSON, and shutdown. A closed JSON Schema 2020-12 defines the accepted envelopes and the existing neutral
+semantic query request/response surface without adding a backend server or SDK dependency.
+
+Checked in four digest-locked semantic payloads, including three byte-identical admitted native-oracle responses
+and the single schema-preserving restricted-capability projection. The ordered corpus materializes 35 compact LF-
+framed JSON-RPC messages across all five identities, ten raw-byte adversarial inputs, ten lifecycle cases, four
+indistinguishable unavailable-handle states, and four policy/dispatch cases. The generated JSONL's largest frame is
+14,597 bytes against the 1,048,576-byte limit.
+
+Added the repository-routed deterministic materializer. It rejects duplicate source keys, unresolved schema
+references, topology/count drift, native response digest drift, text/structured-content mismatch, handle/policy
+dispatch drift, noncanonical or oversized frames, stale JSONL, and changes to the schema, payload, corpus,
+canonical stream, or materializer hashes. Independent semantic validation and omission/mutation testing remain
+`.10.9.1.2`; no MCP server, native API, parser/compiler/runtime behavior, primary CLI, semantic response, rollout,
+or admission changes in this slice. The new routed Python tool raises the recurring storage census from 19 to 20
+Python entrypoints while temporary owners remain three and shell allocators remain 13.
+
+Focused proof passes deterministic materialization, mdBook, Knowledge Map 739/5,943, task metadata, all six
+doctrines, semantic governance 6/20/105 at rollout 7/9 and admission 6/6, project-data classification at 1,688
+files / 376,598 lines / 28 mutations, and the updated 3/13/20 tool-locality census. Canonical CI passes Perl
+semantic admission 18, Rust 1/1 in 80.85 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment, moved-root
+proof, primary CLI 66x2, and Phase 0 1,031/1,031 in 648 seconds. Exact cleanup removes only the verified ignored
+13,196-KiB rendered book and one proven-empty managed-run directory. Push cadence advances to 64/300; no push.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.0 — pin modern MCP 2026-07-28 stdio policy
 
 Selected the stable final MCP `2026-07-28` revision for LinkedSpec's first transport contract. ADR `0055` defines

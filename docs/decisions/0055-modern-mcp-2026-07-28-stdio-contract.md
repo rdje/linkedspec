@@ -1,7 +1,8 @@
 # ADR 0055: LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio
 
 - Date: 2026-07-29
-- Status: accepted; machine contract and implementations pending under `FUTURE-PARITY-BACKLOG.10.9.1.1-.7`
+- Status: accepted; machine contract encoded under `.10.9.1.1`; independent validation and implementations pending
+  under `FUTURE-PARITY-BACKLOG.10.9.1.2-.7`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context
@@ -221,7 +222,7 @@ may emit one sanitized stderr record.
 
 ### 8. Executable-contract and rollout order
 
-This decision adds no schema fixture, checker, server, native semantic behavior, or CLI behavior. The remaining
+This decision itself added no schema fixture, checker, server, native semantic behavior, or CLI behavior. The
 contract parent is dependency-ordered:
 
 1. `.10.9.1.1` encodes the exact schemas, discovery/tool definitions, canonical bytes, and corpus;
@@ -229,6 +230,13 @@ contract parent is dependency-ordered:
 3. `.10.9.1.3` composes recurring governance and closes the neutral transport contract;
 4. `.10.9.2-.6` implement Perl, Rust, Dart, Julia, and one shared Lua source; and
 5. `.10.9.7` admits Perl/Rust/Dart/Julia/PUC Lua/LuaJIT and closes `.10.9`.
+
+Leaf `.10.9.1.1` now realizes item 1 without a backend server. The normative root is
+`capability_conformance/mcp_semantic_transport_contract.json`; it digest-pins one closed JSON Schema 2020-12,
+four semantic payloads, a 35-frame canonical JSONL stream, ten raw-byte adversarial inputs, ten lifecycle cases,
+and the repository-routed deterministic materializer. Three payloads are exact admitted native-oracle responses;
+the fourth is the sole schema-preserving restricted-capability projection. Independent semantic validation and
+mutation testing remain item 2 rather than being hidden in the materializer.
 
 ## Consequences
 

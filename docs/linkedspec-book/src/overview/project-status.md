@@ -661,8 +661,9 @@ Three backbone items tracked major structural modernization — all done:
   implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. ADR `0055` selects stable
   modern MCP `2026-07-28` over stdio, with per-request metadata, mandatory discovery, explicit handles, two
   read-only tools, and no legacy initialization/session/ping. MCP owns no semantic or filesystem behavior.
-  Machine artifacts and servers remain `.10.9.1.1-.7`; any future aggregator or legacy adapter is separately
-  owned after `.10.10` and may only route/translate transport.
+  Machine leaf `.10.9.1.1` now pins one shared schema/payload/corpus/canonical-frame bundle and deterministic
+  materializer. Independent validation and servers remain `.10.9.1.2-.7`; any future aggregator or legacy adapter
+  is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

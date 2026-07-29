@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.1.0`; `(this commit)` pins modern MCP transport policy.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.1.1`; `(this commit)` encodes the exact MCP machine contract.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -32,29 +32,29 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   interpreter and Julia-managed read-only system depots remain necessary external toolchain inputs.
 - current_storage_lua: `tools/test_lua_project_data_storage.sh` proves 16 owners, both ABI module pairs, quoting,
   native/generated/trace use, hostile-output rejection, cleanup, and zero old residue; macOS invokes clang directly.
-- current_storage_tools: tool oracle freezes 3 Python temp/13 shell allocator/19 checker owners; bytecode/map/book/
+- current_storage_tools: tool oracle freezes 3 Python temp/13 shell allocator/20 tool owners; bytecode/map/book/
   CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
 - current_storage_doctrine: `PROJECT-DATA-STORAGE` governs current tracked storage sinks/defaults and commands;
   28 cases pass. Its process complement locks six required families, hostile inputs, relocation, and kernel denial.
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: `.10.9.1.0` is complete from clean architecture commit `9a8761ea`. ADR `0055` selects
-  modern MCP `2026-07-28` stdio: discovery/per-request metadata, two read-only tools, native opaque handle
-  registration/auth/expiry, lowering-only policy, canonical payload identity, and no legacy session handshake;
-  machine artifacts `.10.9.1.1` are next and native implementations remain `.10.9.2-.7`.
+- current_semantic_frontier: `.10.9.1.1` is complete from clean policy commit `b0492488`. One root-relative
+  digest-pinned manifest, closed schema, four semantic payloads, 35 canonical frames, 10 raw cases, 10 lifecycle
+  cases, and deterministic materializer freeze the exact modern MCP bytes without a server. Independent validation
+  and omissions/mutations `.10.9.1.2` are next; native implementations remain `.10.9.2-.7`.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: `.10.9.1.0` changes no executable artifact, server, semantic/native behavior, digest, rollout,
-  admission, or CLI. Focused memory/task/KM 739/5,939/doctrines/book/diff/semantic 6/20/105 at 7/9 + 6/6 pass.
-  Canonical passes Perl 18, Rust 1/1 81.13s, Dart 1/1, Julia 416/416 29.1s, containment, moved root, primary
-  66x2, and Phase 0 1,031/1,031 649s; exact book/empty-run cleanup passes.
+- current_signoff: `.10.9.1.1` exact materialization, task/KM 739/5,943/doctrines/book/diff/semantic 6/20/105 at
+  7/9 + 6/6, storage 1,688/376,598/28, and tool locality 3/13/20 pass. Canonical passes Perl 18, Rust 1/1 80.85s,
+  Dart 1/1, Julia 416/416 28.8s, containment, moved root, primary 66x2, and Phase 0 1,031/1,031 648s; exact
+  13,196-KiB book plus one empty-run cleanup passes. No server/native semantic/CLI/rollout/admission behavior moves.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 63/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 64/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: activate MCP schemas/fixtures `.10.9.1.1` task-tree-first after clean commit; no push.
+- blockers: none. next: activate independent MCP validator/mutations `.10.9.1.2` task-tree-first after clean commit; no push.

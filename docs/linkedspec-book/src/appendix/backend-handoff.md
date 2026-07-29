@@ -224,8 +224,8 @@ cancellation/error/policy/canonical/shutdown rules. Any later one-endpoint aggre
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT now provide the complete native semantic stack and exact twelve-role
 admission. The checker is exact at six fixture groups, 20 query digests, and 105 rejected mutations; recurring
-native rollout is 7/9 and native admission is 6/6. MCP protocol policy `.10.9.1.0` is complete; machine contract,
-implementation, and admission remain `.10.9.1.1-.7`.
+native rollout is 7/9 and native admission is 6/6. MCP protocol policy `.10.9.1.0` and shared machine artifacts
+`.10.9.1.1` are complete; independent validation, implementation, and admission remain `.10.9.1.2-.7`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

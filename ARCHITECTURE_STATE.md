@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` MCP machine-contract realization: `FUTURE-PARITY-BACKLOG.10.9.1.1` encodes ADR `0055` once at
+  `capability_conformance/mcp_semantic_transport_contract.json`. The digest-pinned neutral bundle contains a closed
+  JSON Schema 2020-12, four semantic payloads (three exact native-oracle responses plus one lowering-only
+  capability projection), 35 canonical LF frames, ten raw-byte adversarial inputs, ten lifecycle cases, all five
+  server identities, four indistinguishable handle states, and four policy cases. A root-derived Python
+  materializer proves schema-reference closure, semantic digest identity, mirrored text/structured content,
+  canonical framing, count/topology invariants, and every artifact hash without an SDK, network dependency, or
+  native server. Independent semantic/mutation validation remains `.10.9.1.2`; server code remains `.10.9.2-.6`.
 - `2026-07-29` modern MCP protocol freeze: behavior-free `FUTURE-PARITY-BACKLOG.10.9.1.0` and ADR `0055` select
   stable final MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. The native servers are modern-only:
   per-request version/capability metadata plus mandatory `server/discover` replace legacy initialization,
@@ -13,8 +21,8 @@ This document is the current high-level technical reading of the project shape. 
   authorization, absolute expiry, and lowering-only source/page/budget policy; handle failures are
   non-enumerating tool errors, while wire/schema/version failures remain JSON-RPC errors. Canonical semantic text
   plus structured content stays direct/native identical; stdout is MCP-only, optional sanitized logs use stderr,
-  and EOF clears the registry and exits. Machine schemas/checker/server code remain `.10.9.1.1-.7`; any legacy
-  adapter or aggregator is separately owned after public closeout.
+  and EOF clears the registry and exits. Machine schemas are now encoded by `.10.9.1.1`; checker/server code
+  remains `.10.9.1.2-.7`. Any legacy adapter or aggregator is separately owned after public closeout.
 - `2026-07-28` Lua semantic runtime-observation authority freeze: behavior-free
   `FUTURE-PARITY-BACKLOG.10.7.6.0` maps the only accepted-slot seam after match/ordered identity and before
   `accept_match`, where position must come from the accepted match's Unicode-scalar end rather than the old

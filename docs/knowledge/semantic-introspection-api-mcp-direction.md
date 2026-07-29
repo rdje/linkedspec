@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP topology/protocol accepted and machine contract pending
+status: native six-runtime rollout admitted; MCP machine contract encoded and implementations pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -22,7 +22,8 @@ evidence_update_2026_07_21_spec_identity_correction: "FUTURE-PARITY-BACKLOG.10.3
 evidence_update_2026_07_21_perl_admission: "FUTURE-PARITY-BACKLOG.10.3.6 composes the implemented Perl surface through one exact 12-role consumer, all 20 response digests, and path/role/driver/registration/admission mutation locks. The checker now rejects 65 mutations; only Perl advances, for rollout 2/9 and native admission 1/6."
 evidence_update_2026_07_29_mcp_topology: "ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0 clarify the transport topology after all native admissions: one exact MCP contract, five native server implementations, and six runtime admissions because one Lua source runs unchanged on PUC Lua and LuaJIT. A future aggregator is outside .10.9 and may only route."
 evidence_update_2026_07_29_mcp_protocol: "ADR 0055 and .10.9.1.0 select stable modern MCP 2026-07-28 over stdio: mandatory server/discover, per-request metadata, explicit handles, two tools, no legacy initialize/session/ping, exact policy/error/canonical/shutdown boundaries, and separately owned future compatibility."
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_07_29_mcp_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes one neutral digest-pinned schema/payload/corpus/canonical-frame bundle and deterministic materializer without adding a native server or changing any native semantic response."
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 Deep semantic introspection is a strong fit for LinkedSpec because the project already constructs and relates
@@ -60,14 +61,18 @@ capabilities, discovery is mandatory, and the two tools consume out-of-band regi
 initialization, protocol sessions, and ping are absent; policy can only lower native ceilings, and successful
 semantic payload bytes remain direct/MCP identical.
 
+Machine leaf `.10.9.1.1` now encodes those rules once in the neutral `linkedspec-mcp-transport-v1` artifact bundle.
+It does not implement a server: the independent validator remains `.10.9.1.2`, contract composition remains
+`.10.9.1.3`, and native implementations remain `.10.9.2-.6` before recurring six-runtime admission `.10.9.7`.
+
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
 misclassified as generated artifacts.
 
 The neutral contract is executable through six fixture groups and 20 exact response digests; its independent
-checker rejects 65 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
-coordinated static-rule/generated-plan/model-hash mutations. The neutral contract and Perl reference are complete;
-five native runtime admissions remain pending.
+checker rejects 105 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
+coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
+admitted, and the recurring six-runtime proof is complete. Only MCP transport and public no-drift remain pending.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

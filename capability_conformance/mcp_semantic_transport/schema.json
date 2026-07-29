@@ -1,0 +1,658 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linkedspec.dev/schema/mcp-semantic-transport-v1.json",
+  "contract_id": "linkedspec-mcp-transport-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.1",
+  "title": "LinkedSpec modern MCP 2026-07-28 stdio contract",
+  "oneOf": [
+    {"$ref": "#/$defs/discoverRequest"},
+    {"$ref": "#/$defs/discoverResponse"},
+    {"$ref": "#/$defs/toolsListRequest"},
+    {"$ref": "#/$defs/toolsListResponse"},
+    {"$ref": "#/$defs/capabilitiesCallRequest"},
+    {"$ref": "#/$defs/semanticQueryCallRequest"},
+    {"$ref": "#/$defs/toolSuccessResponse"},
+    {"$ref": "#/$defs/toolExecutionErrorResponse"},
+    {"$ref": "#/$defs/jsonRpcErrorResponse"},
+    {"$ref": "#/$defs/cancelledNotification"}
+  ],
+  "$defs": {
+    "requestId": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-linkedspec-maxUtf8Bytes": 128
+        },
+        {"type": "integer", "minimum": -9007199254740991, "maximum": 9007199254740991}
+      ]
+    },
+    "icon": {
+      "type": "object",
+      "required": ["src"],
+      "properties": {
+        "mimeType": {"type": "string"},
+        "sizes": {"type": "array", "items": {"type": "string"}},
+        "src": {"type": "string", "format": "uri"},
+        "theme": {"enum": ["dark", "light"]}
+      },
+      "additionalProperties": false
+    },
+    "implementation": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "websiteUrl": {"type": "string", "format": "uri"},
+        "icons": {"type": "array", "items": {"$ref": "#/$defs/icon"}}
+      },
+      "additionalProperties": false
+    },
+    "clientCapabilities": {
+      "type": "object"
+    },
+    "requestMeta": {
+      "type": "object",
+      "required": [
+        "io.modelcontextprotocol/clientCapabilities",
+        "io.modelcontextprotocol/protocolVersion"
+      ],
+      "properties": {
+        "io.modelcontextprotocol/clientCapabilities": {"$ref": "#/$defs/clientCapabilities"},
+        "io.modelcontextprotocol/clientInfo": {"$ref": "#/$defs/implementation"},
+        "io.modelcontextprotocol/protocolVersion": {"const": "2026-07-28"}
+      },
+      "additionalProperties": true
+    },
+    "serverInfo": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "enum": [
+            "linkedspec-semantic-perl",
+            "linkedspec-semantic-rust",
+            "linkedspec-semantic-dart",
+            "linkedspec-semantic-julia",
+            "linkedspec-semantic-lua"
+          ]
+        },
+        "version": {"const": "0.1.0"}
+      },
+      "additionalProperties": false
+    },
+    "resultMeta": {
+      "type": "object",
+      "required": ["io.modelcontextprotocol/serverInfo"],
+      "properties": {
+        "io.modelcontextprotocol/serverInfo": {"$ref": "#/$defs/serverInfo"}
+      },
+      "additionalProperties": false
+    },
+    "discoverRequest": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "method": {"const": "server/discover"},
+        "params": {
+          "type": "object",
+          "required": ["_meta"],
+          "properties": {"_meta": {"$ref": "#/$defs/requestMeta"}},
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "discoverResult": {
+      "type": "object",
+      "required": [
+        "_meta", "cacheScope", "capabilities", "instructions", "resultType", "supportedVersions", "ttlMs"
+      ],
+      "properties": {
+        "_meta": {"$ref": "#/$defs/resultMeta"},
+        "cacheScope": {"const": "public"},
+        "capabilities": {
+          "type": "object",
+          "required": ["tools"],
+          "properties": {
+            "tools": {
+              "type": "object",
+              "required": ["listChanged"],
+              "properties": {"listChanged": {"const": false}},
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "instructions": {"type": "string", "minLength": 1},
+        "resultType": {"const": "complete"},
+        "supportedVersions": {
+          "type": "array",
+          "prefixItems": [{"const": "2026-07-28"}],
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "ttlMs": {"const": 3600000}
+      },
+      "additionalProperties": false
+    },
+    "discoverResponse": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "result"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "result": {"$ref": "#/$defs/discoverResult"}
+      },
+      "additionalProperties": false
+    },
+    "toolsListRequest": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "method": {"const": "tools/list"},
+        "params": {
+          "type": "object",
+          "required": ["_meta"],
+          "properties": {"_meta": {"$ref": "#/$defs/requestMeta"}},
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "toolAnnotations": {
+      "type": "object",
+      "required": ["destructiveHint", "idempotentHint", "openWorldHint", "readOnlyHint"],
+      "properties": {
+        "destructiveHint": {"const": false},
+        "idempotentHint": {"const": true},
+        "openWorldHint": {"const": false},
+        "readOnlyHint": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "toolDefinition": {
+      "type": "object",
+      "required": ["annotations", "description", "inputSchema", "name", "outputSchema", "title"],
+      "properties": {
+        "annotations": {"$ref": "#/$defs/toolAnnotations"},
+        "description": {"type": "string", "minLength": 1},
+        "inputSchema": {"type": "object", "required": ["type"]},
+        "name": {
+          "enum": ["linkedspec_semantic_capabilities", "linkedspec_semantic_query"]
+        },
+        "outputSchema": {"type": "object"},
+        "title": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "toolsListResult": {
+      "type": "object",
+      "required": ["_meta", "cacheScope", "resultType", "tools", "ttlMs"],
+      "properties": {
+        "_meta": {"$ref": "#/$defs/resultMeta"},
+        "cacheScope": {"const": "public"},
+        "resultType": {"const": "complete"},
+        "tools": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "allOf": [
+                {"$ref": "#/$defs/toolDefinition"},
+                {"properties": {"name": {"const": "linkedspec_semantic_capabilities"}}}
+              ]
+            },
+            {
+              "allOf": [
+                {"$ref": "#/$defs/toolDefinition"},
+                {"properties": {"name": {"const": "linkedspec_semantic_query"}}}
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "ttlMs": {"const": 3600000}
+      },
+      "additionalProperties": false
+    },
+    "toolsListResponse": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "result"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "result": {"$ref": "#/$defs/toolsListResult"}
+      },
+      "additionalProperties": false
+    },
+    "handle": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "pageRequest": {
+      "type": "object",
+      "required": ["after_id", "limit"],
+      "properties": {
+        "after_id": {"type": ["string", "null"]},
+        "limit": {"type": "integer", "minimum": 1, "maximum": 1000}
+      },
+      "additionalProperties": false
+    },
+    "budgetRequest": {
+      "type": "object",
+      "required": ["max_depth", "max_records", "max_relations"],
+      "properties": {
+        "max_depth": {"type": "integer", "minimum": 0, "maximum": 8},
+        "max_records": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "max_relations": {"type": "integer", "minimum": 0, "maximum": 20000}
+      },
+      "additionalProperties": false
+    },
+    "sourceRequest": {
+      "type": "object",
+      "required": ["detail", "include_content_digest"],
+      "properties": {
+        "detail": {"enum": ["none", "identity", "span", "text"]},
+        "include_content_digest": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "semanticQueryRequest": {
+      "type": "object",
+      "required": [
+        "budget", "contract", "direction", "operation", "page", "record_kinds", "relation_kinds", "source",
+        "subjects"
+      ],
+      "properties": {
+        "budget": {"$ref": "#/$defs/budgetRequest"},
+        "contract": {"const": "linkedspec-semantic-query-v1"},
+        "direction": {"enum": ["outgoing", "incoming", "both"]},
+        "operation": {"enum": ["capabilities", "list", "get", "relations", "explain"]},
+        "page": {"$ref": "#/$defs/pageRequest"},
+        "record_kinds": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/recordKind"}
+        },
+        "relation_kinds": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/relationKind"}
+        },
+        "source": {"$ref": "#/$defs/sourceRequest"},
+        "subjects": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "capabilitiesArguments": {
+      "type": "object",
+      "required": ["handle"],
+      "properties": {"handle": {"$ref": "#/$defs/handle"}},
+      "additionalProperties": false
+    },
+    "semanticQueryArguments": {
+      "type": "object",
+      "required": ["handle", "request"],
+      "properties": {
+        "handle": {"$ref": "#/$defs/handle"},
+        "request": {"$ref": "#/$defs/semanticQueryRequest"}
+      },
+      "additionalProperties": false
+    },
+    "capabilitiesCallRequest": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "method": {"const": "tools/call"},
+        "params": {
+          "type": "object",
+          "required": ["_meta", "arguments", "name"],
+          "properties": {
+            "_meta": {"$ref": "#/$defs/requestMeta"},
+            "arguments": {"$ref": "#/$defs/capabilitiesArguments"},
+            "name": {"const": "linkedspec_semantic_capabilities"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "semanticQueryCallRequest": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "method": {"const": "tools/call"},
+        "params": {
+          "type": "object",
+          "required": ["_meta", "arguments", "name"],
+          "properties": {
+            "_meta": {"$ref": "#/$defs/requestMeta"},
+            "arguments": {"$ref": "#/$defs/semanticQueryArguments"},
+            "name": {"const": "linkedspec_semantic_query"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "recordKind": {
+      "enum": [
+        "capabilities", "spec", "source", "rule", "regex_slot", "edge", "lifecycle", "function", "helper",
+        "binding", "call", "staged_artifact", "generated_artifact", "diagnostic", "decision", "execution",
+        "event", "explanation_step"
+      ]
+    },
+    "relationKind": {
+      "enum": [
+        "declares", "contains", "depends_on", "dispatches_to", "selects_regex", "calls", "resolves_to", "reads",
+        "writes", "consumes", "produces", "lowered_from", "staged_by", "generated_as", "diagnoses",
+        "observed_as", "explained_by"
+      ]
+    },
+    "span": {
+      "type": "object",
+      "required": ["end_byte", "end_column", "end_line", "start_byte", "start_column", "start_line"],
+      "properties": {
+        "end_byte": {"type": "integer", "minimum": 0},
+        "end_column": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1},
+        "start_byte": {"type": "integer", "minimum": 0},
+        "start_column": {"type": "integer", "minimum": 1},
+        "start_line": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "sourceReference": {
+      "type": "object",
+      "required": ["content_digest", "excerpt", "logical_name", "provenance_ids", "source_id", "span"],
+      "properties": {
+        "content_digest": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+          ]
+        },
+        "excerpt": {"type": ["string", "null"]},
+        "logical_name": {"type": ["string", "null"]},
+        "provenance_ids": {"type": "array", "items": {"type": "string"}},
+        "source_id": {"type": ["string", "null"]},
+        "span": {"oneOf": [{"$ref": "#/$defs/span"}, {"type": "null"}]}
+      },
+      "additionalProperties": false
+    },
+    "signatureParameter": {
+      "type": "object",
+      "required": ["kind", "name", "required"],
+      "properties": {
+        "kind": {"enum": ["value", "codeblock"]},
+        "name": {"type": "string"},
+        "required": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "signature": {
+      "type": "object",
+      "required": ["arity_max", "arity_min", "final_codeblock", "parameters", "rest_parameter"],
+      "properties": {
+        "arity_max": {"type": ["integer", "null"]},
+        "arity_min": {"type": "integer", "minimum": 0},
+        "final_codeblock": {"type": "boolean"},
+        "parameters": {"type": "array", "items": {"$ref": "#/$defs/signatureParameter"}},
+        "rest_parameter": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "shape": {
+      "type": "object",
+      "required": ["element", "key", "kind", "members", "signature", "value"],
+      "properties": {
+        "element": {"oneOf": [{"$ref": "#/$defs/shape"}, {"type": "null"}]},
+        "key": {"oneOf": [{"$ref": "#/$defs/shape"}, {"type": "null"}]},
+        "kind": {
+          "enum": [
+            "unknown", "null", "boolean", "number", "string", "array", "harray", "codeblock", "union",
+            "rule", "regex_slot", "binding", "helper", "user_function", "staged_artifact", "generated_artifact",
+            "diagnostic"
+          ]
+        },
+        "members": {"type": "array", "items": {"$ref": "#/$defs/shape"}},
+        "signature": {"oneOf": [{"$ref": "#/$defs/signature"}, {"type": "null"}]},
+        "value": {"oneOf": [{"$ref": "#/$defs/shape"}, {"type": "null"}]}
+      },
+      "additionalProperties": false
+    },
+    "recordFacts": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "model_ids", "query_ids", "record_kinds", "relation_kinds", "source_detail_ceiling", "page_default",
+          "page_max", "budget_defaults", "budget_maxima", "execution_observation", "features", "definition_order",
+          "compiled_rule_order", "entry_rule_id", "entry_selection_basis", "logical_kind", "origin_kind", "family",
+          "cursor_policy", "is_entry_marker", "is_repetition", "rep_min", "rep_max", "edge_ownership", "value_shape",
+          "authored_index", "pattern", "flags", "combined_owner_ids", "target_shape", "ownership", "source_form",
+          "has_block", "fluent_call_ids", "marker", "whole_rule_return", "signature", "parameter_kinds", "scope",
+          "mutable", "call_form", "resolution_kind", "argument_shapes", "artifact_kind", "payload_kind", "node_kind",
+          "parent_path", "parser_spec_id", "top_rule", "result_policy", "failure_policy", "status", "contract_id",
+          "format_version", "plan_family", "code", "stage", "severity", "message", "fields", "decision_kind",
+          "outcome", "input_identity", "result_shape", "event_kind", "position", "rule_code", "summary", "input_ids",
+          "output_fact"
+        ]
+      }
+    },
+    "semanticRecord": {
+      "type": "object",
+      "required": ["facts", "id", "kind", "name", "order", "owner_id", "redactions", "source"],
+      "properties": {
+        "facts": {"$ref": "#/$defs/recordFacts"},
+        "id": {"type": "string"},
+        "kind": {"$ref": "#/$defs/recordKind"},
+        "name": {"type": ["string", "null"]},
+        "order": {"type": "integer", "minimum": 0},
+        "owner_id": {"type": ["string", "null"]},
+        "redactions": {"type": "array", "items": {"type": "string"}},
+        "source": {"oneOf": [{"$ref": "#/$defs/sourceReference"}, {"type": "null"}]}
+      },
+      "additionalProperties": false
+    },
+    "semanticRelation": {
+      "type": "object",
+      "required": ["evidence_ids", "facts", "from_id", "id", "kind", "order", "source", "to_id"],
+      "properties": {
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "facts": {"type": "object", "maxProperties": 0},
+        "from_id": {"type": "string"},
+        "id": {"type": "string"},
+        "kind": {"$ref": "#/$defs/relationKind"},
+        "order": {"type": "integer", "minimum": 0},
+        "source": {"oneOf": [{"$ref": "#/$defs/sourceReference"}, {"type": "null"}]},
+        "to_id": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "semanticSnapshot": {
+      "type": "object",
+      "required": ["content_digest_available", "has_execution", "id", "source_detail_ceiling", "state"],
+      "properties": {
+        "content_digest_available": {"type": "boolean"},
+        "has_execution": {"type": "boolean"},
+        "id": {"type": "string"},
+        "source_detail_ceiling": {"enum": ["none", "identity", "span", "text"]},
+        "state": {"enum": ["compiled", "failed_compilation"]}
+      },
+      "additionalProperties": false
+    },
+    "pageResponse": {
+      "type": "object",
+      "required": ["after_id", "complete", "next_after_id"],
+      "properties": {
+        "after_id": {"type": ["string", "null"]},
+        "complete": {"type": "boolean"},
+        "next_after_id": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "costResponse": {
+      "type": "object",
+      "required": ["depth_reached", "records_examined", "relations_examined"],
+      "properties": {
+        "depth_reached": {"type": "integer", "minimum": 0},
+        "records_examined": {"type": "integer", "minimum": 0},
+        "relations_examined": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "queryDiagnostic": {
+      "type": "object",
+      "required": ["code", "fields", "message", "severity"],
+      "properties": {
+        "code": {
+          "enum": [
+            "semantic_query_budget_exceeded", "semantic_query_invalid", "semantic_query_source_detail_forbidden",
+            "semantic_query_contract_unsupported"
+          ]
+        },
+        "fields": {"type": "object"},
+        "message": {"type": "string"},
+        "severity": {"enum": ["error", "warning"]}
+      },
+      "additionalProperties": false
+    },
+    "semanticQueryResponse": {
+      "type": "object",
+      "required": ["contract", "cost", "diagnostics", "model", "ok", "page", "records", "relations", "snapshot"],
+      "properties": {
+        "contract": {"const": "linkedspec-semantic-query-v1"},
+        "cost": {"$ref": "#/$defs/costResponse"},
+        "diagnostics": {"type": "array", "items": {"$ref": "#/$defs/queryDiagnostic"}},
+        "model": {"const": "linkedspec-semantic-model-v1"},
+        "ok": {"type": "boolean"},
+        "page": {"$ref": "#/$defs/pageResponse"},
+        "records": {"type": "array", "items": {"$ref": "#/$defs/semanticRecord"}},
+        "relations": {"type": "array", "items": {"$ref": "#/$defs/semanticRelation"}},
+        "snapshot": {"$ref": "#/$defs/semanticSnapshot"}
+      },
+      "additionalProperties": false
+    },
+    "textContent": {
+      "type": "object",
+      "required": ["text", "type"],
+      "properties": {
+        "text": {"type": "string"},
+        "type": {"const": "text"}
+      },
+      "additionalProperties": false
+    },
+    "toolSuccessResult": {
+      "type": "object",
+      "required": ["_meta", "content", "isError", "resultType", "structuredContent"],
+      "properties": {
+        "_meta": {"$ref": "#/$defs/resultMeta"},
+        "content": {
+          "type": "array",
+          "prefixItems": [{"$ref": "#/$defs/textContent"}],
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "isError": {"const": false},
+        "resultType": {"const": "complete"},
+        "structuredContent": {"$ref": "#/$defs/semanticQueryResponse"}
+      },
+      "additionalProperties": false
+    },
+    "toolSuccessResponse": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "result"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "result": {"$ref": "#/$defs/toolSuccessResult"}
+      },
+      "additionalProperties": false
+    },
+    "toolErrorPayload": {
+      "type": "object",
+      "required": ["code", "contract", "message"],
+      "properties": {
+        "code": {"enum": ["linkedspec_mcp_handle_unavailable", "linkedspec_mcp_policy_denied"]},
+        "contract": {"const": "linkedspec-mcp-tool-error-v1"},
+        "message": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "toolExecutionErrorResult": {
+      "type": "object",
+      "required": ["_meta", "content", "isError", "resultType"],
+      "properties": {
+        "_meta": {"$ref": "#/$defs/resultMeta"},
+        "content": {
+          "type": "array",
+          "prefixItems": [{"$ref": "#/$defs/textContent"}],
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "isError": {"const": true},
+        "resultType": {"const": "complete"}
+      },
+      "additionalProperties": false
+    },
+    "toolExecutionErrorResponse": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "result"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"$ref": "#/$defs/requestId"},
+        "result": {"$ref": "#/$defs/toolExecutionErrorResult"}
+      },
+      "additionalProperties": false
+    },
+    "jsonRpcError": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {"enum": [-32700, -32600, -32601, -32602, -32603, -32022]},
+        "data": {},
+        "message": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "jsonRpcErrorResponse": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "error"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "id": {"oneOf": [{"$ref": "#/$defs/requestId"}, {"type": "null"}]},
+        "error": {"$ref": "#/$defs/jsonRpcError"}
+      },
+      "additionalProperties": false
+    },
+    "cancelledNotification": {
+      "type": "object",
+      "required": ["jsonrpc", "method", "params"],
+      "properties": {
+        "jsonrpc": {"const": "2.0"},
+        "method": {"const": "notifications/cancelled"},
+        "params": {
+          "type": "object",
+          "required": ["requestId"],
+          "properties": {
+            "reason": {"type": "string"},
+            "requestId": {"$ref": "#/$defs/requestId"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

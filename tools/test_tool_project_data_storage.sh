@@ -48,11 +48,11 @@ expected_python_temp_owners=(
 [[ "${python_temp_owners[*]}" == "${expected_python_temp_owners[*]}" ]] ||
  fail "Python temporary-owner inventory drifted: ${python_temp_owners[*]}"
 
-mapfile -t python_entrypoints < <(
+mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_entrypoints[@]} == 19 )) ||
- fail "Python checker entrypoint inventory drifted from 19 to ${#python_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 20 )) ||
+ fail "Python tool entrypoint inventory drifted from 20 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(

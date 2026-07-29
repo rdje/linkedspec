@@ -1,0 +1,471 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-mcp-transport-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.1",
+  "illustrative_handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE",
+  "client_meta": {
+    "io.modelcontextprotocol/clientCapabilities": {},
+    "io.modelcontextprotocol/clientInfo": {"name": "linkedspec-contract-client", "version": "1.0.0"},
+    "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+  },
+  "frames": [
+    {
+      "id": "discover_request",
+      "kind": "literal",
+      "frame": {
+        "id": "discover-1",
+        "jsonrpc": "2.0",
+        "method": "server/discover",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/clientInfo": {"name": "linkedspec-contract-client", "version": "1.0.0"},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          }
+        }
+      }
+    },
+    {"id": "discover_response_perl", "kind": "discover_response", "server": "perl", "id_value": "discover-1"},
+    {"id": "discover_response_rust", "kind": "discover_response", "server": "rust", "id_value": "discover-1"},
+    {"id": "discover_response_dart", "kind": "discover_response", "server": "dart", "id_value": "discover-1"},
+    {"id": "discover_response_julia", "kind": "discover_response", "server": "julia", "id_value": "discover-1"},
+    {"id": "discover_response_lua", "kind": "discover_response", "server": "lua", "id_value": "discover-1"},
+    {
+      "id": "tools_list_request",
+      "kind": "literal",
+      "frame": {
+        "id": "tools-1",
+        "jsonrpc": "2.0",
+        "method": "tools/list",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/clientInfo": {"name": "linkedspec-contract-client", "version": "1.0.0"},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          }
+        }
+      }
+    },
+    {"id": "tools_list_response_perl", "kind": "tools_list_response", "server": "perl", "id_value": "tools-1"},
+    {
+      "id": "capabilities_call_request",
+      "kind": "literal",
+      "frame": {
+        "id": 7,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {"handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE"},
+          "name": "linkedspec_semantic_capabilities"
+        }
+      }
+    },
+    {"id": "capabilities_call_response", "kind": "tool_success_response", "server": "perl", "id_value": 7, "payload": "capabilities_default"},
+    {
+      "id": "query_call_request",
+      "kind": "literal",
+      "frame": {
+        "id": 8,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {
+            "handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE",
+            "request": {
+              "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+              "contract": "linkedspec-semantic-query-v1",
+              "direction": "outgoing",
+              "operation": "list",
+              "page": {"after_id": null, "limit": 100},
+              "record_kinds": ["rule"],
+              "relation_kinds": [],
+              "source": {"detail": "identity", "include_content_digest": false},
+              "subjects": []
+            }
+          },
+          "name": "linkedspec_semantic_query"
+        }
+      }
+    },
+    {"id": "query_call_response", "kind": "tool_success_response", "server": "rust", "id_value": 8, "payload": "graph_list_rules"},
+    {
+      "id": "semantic_ok_false_request",
+      "kind": "literal",
+      "frame": {
+        "id": 9,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {
+            "handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE",
+            "request": {
+              "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+              "contract": "linkedspec-semantic-query-v1",
+              "direction": "outgoing",
+              "operation": "list",
+              "page": {"after_id": null, "limit": 100},
+              "record_kinds": [],
+              "relation_kinds": [],
+              "source": {"detail": "none", "include_content_digest": false},
+              "subjects": ["rule:Top"]
+            }
+          },
+          "name": "linkedspec_semantic_query"
+        }
+      }
+    },
+    {"id": "semantic_ok_false_response", "kind": "tool_success_response", "server": "dart", "id_value": 9, "payload": "invalid_operation_combination"},
+    {
+      "id": "restricted_capabilities_request",
+      "kind": "literal",
+      "frame": {
+        "id": 10,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {"handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE"},
+          "name": "linkedspec_semantic_capabilities"
+        }
+      }
+    },
+    {"id": "restricted_capabilities_response", "kind": "tool_success_response", "server": "julia", "id_value": 10, "payload": "capabilities_restricted"},
+    {
+      "id": "handle_unavailable_request",
+      "kind": "literal",
+      "frame": {
+        "id": 11,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {"handle": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+          "name": "linkedspec_semantic_capabilities"
+        }
+      }
+    },
+    {"id": "handle_unavailable_response", "kind": "tool_error_response", "server": "lua", "id_value": 11, "error": "handle_unavailable"},
+    {
+      "id": "policy_denied_request",
+      "kind": "literal",
+      "frame": {
+        "id": 12,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {
+            "handle": "n4xp7T2KqW9vB3cD8mRf1Hs6JyUa0Le5ZiGoXbNCwQE",
+            "request": {
+              "budget": {"max_depth": 2, "max_records": 100, "max_relations": 200},
+              "contract": "linkedspec-semantic-query-v1",
+              "direction": "outgoing",
+              "operation": "list",
+              "page": {"after_id": null, "limit": 100},
+              "record_kinds": ["rule"],
+              "relation_kinds": [],
+              "source": {"detail": "identity", "include_content_digest": false},
+              "subjects": []
+            }
+          },
+          "name": "linkedspec_semantic_query"
+        }
+      }
+    },
+    {"id": "policy_denied_response", "kind": "tool_error_response", "server": "perl", "id_value": 12, "error": "policy_denied"},
+    {
+      "id": "cancelled_notification",
+      "kind": "literal",
+      "frame": {
+        "jsonrpc": "2.0",
+        "method": "notifications/cancelled",
+        "params": {"reason": "client no longer needs result", "requestId": 13}
+      }
+    },
+    {
+      "id": "unsupported_version_request",
+      "kind": "literal",
+      "frame": {
+        "id": 14,
+        "jsonrpc": "2.0",
+        "method": "server/discover",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2025-11-25"
+          }
+        }
+      }
+    },
+    {
+      "id": "unsupported_version_response",
+      "kind": "literal",
+      "frame": {
+        "error": {
+          "code": -32022,
+          "data": {"requested": "2025-11-25", "supported": ["2026-07-28"]},
+          "message": "Unsupported protocol version"
+        },
+        "id": 14,
+        "jsonrpc": "2.0"
+      }
+    },
+    {
+      "id": "missing_metadata_request",
+      "kind": "literal",
+      "frame": {"id": 15, "jsonrpc": "2.0", "method": "tools/list", "params": {}}
+    },
+    {
+      "id": "missing_metadata_response",
+      "kind": "literal",
+      "frame": {"error": {"code": -32602, "message": "Invalid params"}, "id": 15, "jsonrpc": "2.0"}
+    },
+    {
+      "id": "legacy_initialize_request",
+      "kind": "literal",
+      "frame": {"id": 16, "jsonrpc": "2.0", "method": "initialize", "params": {}}
+    },
+    {
+      "id": "legacy_initialize_response",
+      "kind": "literal",
+      "frame": {
+        "error": {
+          "code": -32601,
+          "message": "Method initialize is unavailable; use modern MCP 2026-07-28 server/discover."
+        },
+        "id": 16,
+        "jsonrpc": "2.0"
+      }
+    },
+    {
+      "id": "legacy_initialized_notification",
+      "kind": "literal",
+      "frame": {"jsonrpc": "2.0", "method": "notifications/initialized"}
+    },
+    {
+      "id": "unknown_method_request",
+      "kind": "literal",
+      "frame": {
+        "id": 17,
+        "jsonrpc": "2.0",
+        "method": "resources/list",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          }
+        }
+      }
+    },
+    {
+      "id": "unknown_method_response",
+      "kind": "literal",
+      "frame": {"error": {"code": -32601, "message": "Method not found"}, "id": 17, "jsonrpc": "2.0"}
+    },
+    {
+      "id": "unknown_tool_request",
+      "kind": "literal",
+      "frame": {
+        "id": 18,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {},
+          "name": "linkedspec_unknown"
+        }
+      }
+    },
+    {
+      "id": "unknown_tool_response",
+      "kind": "literal",
+      "frame": {"error": {"code": -32602, "message": "Invalid params"}, "id": 18, "jsonrpc": "2.0"}
+    },
+    {
+      "id": "malformed_arguments_request",
+      "kind": "literal",
+      "frame": {
+        "id": 19,
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          },
+          "arguments": {"handle": "short"},
+          "name": "linkedspec_semantic_capabilities"
+        }
+      }
+    },
+    {
+      "id": "malformed_arguments_response",
+      "kind": "literal",
+      "frame": {"error": {"code": -32602, "message": "Invalid params"}, "id": 19, "jsonrpc": "2.0"}
+    },
+    {
+      "id": "sanitized_internal_error_response",
+      "kind": "literal",
+      "frame": {"error": {"code": -32603, "message": "Internal error"}, "id": 20, "jsonrpc": "2.0"}
+    }
+  ],
+  "canonical_order": [
+    "discover_request",
+    "discover_response_perl",
+    "discover_response_rust",
+    "discover_response_dart",
+    "discover_response_julia",
+    "discover_response_lua",
+    "tools_list_request",
+    "tools_list_response_perl",
+    "capabilities_call_request",
+    "capabilities_call_response",
+    "query_call_request",
+    "query_call_response",
+    "semantic_ok_false_request",
+    "semantic_ok_false_response",
+    "restricted_capabilities_request",
+    "restricted_capabilities_response",
+    "handle_unavailable_request",
+    "handle_unavailable_response",
+    "policy_denied_request",
+    "policy_denied_response",
+    "cancelled_notification",
+    "unsupported_version_request",
+    "unsupported_version_response",
+    "missing_metadata_request",
+    "missing_metadata_response",
+    "legacy_initialize_request",
+    "legacy_initialize_response",
+    "legacy_initialized_notification",
+    "unknown_method_request",
+    "unknown_method_response",
+    "unknown_tool_request",
+    "unknown_tool_response",
+    "malformed_arguments_request",
+    "malformed_arguments_response",
+    "sanitized_internal_error_response"
+  ],
+  "raw_inputs": [
+    {
+      "id": "invalid_utf8",
+      "encoding": "hex",
+      "data": "ff0a",
+      "sha256": "e4688624e5f1ad0629505e6768e3bb36244f2f3e33e751215afa820334a76ed3",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "utf8_bom",
+      "encoding": "hex",
+      "data": "efbbbf7b7d0a",
+      "sha256": "ec2f00596f643c3181e6f3c6bfb64bb07cf8994f019df013681c886bee0d8b6a",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "malformed_json",
+      "encoding": "utf8",
+      "data": "{\n",
+      "sha256": "a6fb08fda1acb957b6116bd37811a1fe41a01611c0631edbf786d6889a27a55c",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "duplicate_key",
+      "encoding": "utf8",
+      "data": "{\"id\":1,\"id\":2,\"jsonrpc\":\"2.0\",\"method\":\"server/discover\",\"params\":{}}\n",
+      "sha256": "8e6d2b5bb5807785810fd88935117d3008c7671063587d4ca218c2071e23e1fc",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "overlong_line",
+      "encoding": "repeat_hex",
+      "byte": "20",
+      "count": 1048577,
+      "suffix": "0a",
+      "sha256": "25fd7c7a3cf905ef80a396beb80796517b9c7bf42819c9784dc6acbe8cac634a",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "json_batch",
+      "encoding": "utf8",
+      "data": "[]\n",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expected": {"code": -32600, "id": null, "message": "Invalid Request"}
+    },
+    {
+      "id": "non_object",
+      "encoding": "utf8",
+      "data": "null\n",
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+      "expected": {"code": -32600, "id": null, "message": "Invalid Request"}
+    },
+    {
+      "id": "invalid_boolean_id",
+      "encoding": "utf8",
+      "data": "{\"id\":true,\"jsonrpc\":\"2.0\",\"method\":\"server/discover\",\"params\":{}}\n",
+      "sha256": "23ac4453d141bc29b06c99ee28286fa94c3954b2f49d36066d0b72edfa54dc60",
+      "expected": {"code": -32600, "id": null, "message": "Invalid Request"}
+    },
+    {
+      "id": "nesting_depth_65",
+      "encoding": "nested_json",
+      "depth": 65,
+      "sha256": "a65b71dc3eb5f0818f1f45efd5a0149834e1fbfa09b81cf6bcbf2f0bd8fe191f",
+      "expected": {"code": -32700, "id": null, "message": "Parse error"}
+    },
+    {
+      "id": "valid_crlf_discovery",
+      "encoding": "utf8",
+      "data": "{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/clientCapabilities\":{},\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\"}}}\r\n",
+      "sha256": "9dadcd46973d505f30c6c09f3253ad975b3191a3b88a72c460b3e25aa9611785",
+      "expected": {"dispatch": "server/discover", "response_delimiter": "LF"}
+    }
+  ],
+  "handle_cases": [
+    {"state": "unknown", "expected_frame": "handle_unavailable_response", "native_dispatch_count": 0},
+    {"state": "expired", "expected_frame": "handle_unavailable_response", "native_dispatch_count": 0},
+    {"state": "revoked", "expected_frame": "handle_unavailable_response", "native_dispatch_count": 0},
+    {"state": "unauthorized", "expected_frame": "handle_unavailable_response", "native_dispatch_count": 0}
+  ],
+  "policy_cases": [
+    {"id": "default_capabilities_identity", "expected_payload": "capabilities_default", "native_dispatch_count": 1},
+    {"id": "restricted_capabilities_projection", "expected_payload": "capabilities_restricted", "native_dispatch_count": 1},
+    {"id": "allowed_query_identity", "expected_payload": "graph_list_rules", "native_dispatch_count": 1},
+    {"id": "above_policy_pre_dispatch_denial", "expected_frame": "policy_denied_response", "native_dispatch_count": 0}
+  ],
+  "lifecycle_cases": [
+    {"id": "ready_at_stream_loop_start", "input": "first_modern_request", "expected": "dispatch_without_handshake"},
+    {"id": "cancel_before_response_emission", "input": "notifications/cancelled", "expected": "stop_and_suppress_response"},
+    {"id": "cancel_unknown_request", "input": "notifications/cancelled", "expected": "ignore_without_response"},
+    {"id": "cancel_after_sync_completion", "input": "notifications/cancelled", "expected": "completed_response_remains_valid"},
+    {"id": "legacy_initialized_notification", "input": "notifications/initialized", "expected": "ignore_without_response"},
+    {"id": "stdout_discipline", "input": "operational_event", "expected": "no_stdout_bytes"},
+    {"id": "stderr_default", "input": "operational_event", "expected": "no_stderr_bytes"},
+    {"id": "registry_capacity", "input": "registration_at_capacity", "expected": "prune_expired_then_refuse_if_still_full"},
+    {"id": "graceful_eof", "input": "stdin_eof", "expected": "stop_clear_release_flush_exit_0"},
+    {"id": "unexpected_io_failure", "input": "stdio_error", "expected": "clear_release_sanitized_optional_stderr_exit_nonzero"}
+  ]
+}

@@ -1,5 +1,18 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Exact MCP machine contract encoded
+
+`FUTURE-PARITY-BACKLOG.10.9.1.1` freezes `linkedspec-mcp-transport-v1` as one root-relative digest-pinned
+manifest, closed JSON Schema 2020-12, four semantic payloads, 35 canonical LF frames, ten raw inputs, ten lifecycle
+cases, four indistinguishable handle cases, four policy cases, and one deterministic repository-routed materializer.
+All five native identities consume the same files. Three admitted native response payloads retain exact semantic
+digests; the fourth is the deliberate restricted-capability projection. No MCP server or SDK/network dependency
+exists yet, and independent semantic validation remains `.10.9.1.2` rather than being conflated with generation.
+
+Signoff: exact materialization, mdBook, Knowledge Map 739/5,943, task/doctrines/diff, semantic 6/20/105 at 7/9 +
+6/6, storage 1,688/376,598/28, and tool locality 3/13/20 pass. Canonical CI passes Perl 18, Rust 1/1 in 80.85s,
+Dart 1/1, Julia 416/416 in 28.8s, containment, moved-root proof, primary CLI 66x2, and Phase 0 1,031/1,031 in 648s.
+
 ## 2026-07-29 — Modern MCP protocol/stdio policy accepted
 
 `FUTURE-PARITY-BACKLOG.10.9.1.0` selects stable MCP `2026-07-28` for the exact pending transport. ADR `0055`
@@ -26,14 +39,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No successor leaf is active across this closeout boundary. `FUTURE-PARITY-BACKLOG.10.9.1.0` is a fully verified
-  completion candidate from clean architecture commit `9a8761ea`; machine schemas/fixtures `.10.9.1.1` become
+- No successor leaf is active across this closeout boundary. `FUTURE-PARITY-BACKLOG.10.9.1.1` is a fully verified
+  completion candidate from clean policy commit `b0492488`; independent validator/mutations `.10.9.1.2` become
   active only after this leaf commits and the repository is proven clean.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.1 — encode exact MCP machine contract**
+  (backend-neutral machine artifacts from clean protocol-policy commit `b0492488`).
+
+  **Result:** One manifest, closed schema, four payloads, 35 canonical frames, ten raw inputs, ten lifecycle cases,
+  four handle cases, four policy cases, and one digest-pinned materializer freeze exact portable bytes across all
+  five identities. The largest frame is 14,597/1,048,576 bytes. No server, SDK/network dependency, native semantic
+  behavior, primary CLI behavior, rollout, or admission changes; independent validation remains `.10.9.1.2`.
+
+  **Proof:** Exact materialization, mdBook, Knowledge Map 739/5,943, task/doctrines/diff, semantic 6/20/105 at
+  7/9 + 6/6, storage 1,688/376,598/28, and tool locality 3/13/20 pass. Canonical passes Perl 18, Rust 1/1 in
+  80.85s, Dart 1/1, Julia 416/416 in 28.8s, containment, moved-root, primary 66x2, and Phase 0 1,031/1,031 in 648s.
+  Exact cleanup removes only the verified 13,196-KiB book and one empty managed-run directory. Cadence advances to
+  64/300 without push; `.10.9.1.2` follows after the clean commit.
+
 - 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.0 — pin modern MCP 2026-07-28 stdio policy**
   (behavior-free official-protocol decision from clean architecture commit `9a8761ea`).
 

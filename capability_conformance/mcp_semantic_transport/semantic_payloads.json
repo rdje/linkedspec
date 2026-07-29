@@ -1,0 +1,291 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-mcp-transport-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.1",
+  "semantic_contract_id": "linkedspec-semantic-introspection-contract-v1",
+  "canonical_json": "linkedspec-canonical-json-v1",
+  "payloads": [
+    {
+      "id": "capabilities_default",
+      "source_query_case": "capabilities",
+      "derivation": "exact_native_response",
+      "request": {
+        "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+        "contract": "linkedspec-semantic-query-v1",
+        "direction": "outgoing",
+        "operation": "capabilities",
+        "page": {"after_id": null, "limit": 100},
+        "record_kinds": [],
+        "relation_kinds": [],
+        "source": {"detail": "none", "include_content_digest": false},
+        "subjects": []
+      },
+      "response": {
+        "contract": "linkedspec-semantic-query-v1",
+        "cost": {"depth_reached": 0, "records_examined": 1, "relations_examined": 0},
+        "diagnostics": [],
+        "model": "linkedspec-semantic-model-v1",
+        "ok": true,
+        "page": {"after_id": null, "complete": true, "next_after_id": null},
+        "records": [
+          {
+            "facts": {
+              "budget_defaults": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+              "budget_maxima": {"max_depth": 8, "max_records": 10000, "max_relations": 20000},
+              "execution_observation": false,
+              "features": [],
+              "model_ids": ["linkedspec-semantic-model-v1"],
+              "page_default": 100,
+              "page_max": 1000,
+              "query_ids": ["linkedspec-semantic-query-v1"],
+              "record_kinds": [
+                "capabilities", "spec", "source", "rule", "regex_slot", "edge", "lifecycle", "function",
+                "helper", "binding", "call", "staged_artifact", "generated_artifact", "diagnostic", "decision",
+                "execution", "event", "explanation_step"
+              ],
+              "relation_kinds": [
+                "declares", "contains", "depends_on", "dispatches_to", "selects_regex", "calls", "resolves_to",
+                "reads", "writes", "consumes", "produces", "lowered_from", "staged_by", "generated_as",
+                "diagnoses", "observed_as", "explained_by"
+              ],
+              "source_detail_ceiling": "text"
+            },
+            "id": "capabilities:0",
+            "kind": "capabilities",
+            "name": "semantic introspection v1",
+            "order": 0,
+            "owner_id": null,
+            "redactions": [],
+            "source": null
+          }
+        ],
+        "relations": [],
+        "snapshot": {
+          "content_digest_available": true,
+          "has_execution": false,
+          "id": "snapshot:0",
+          "source_detail_ceiling": "text",
+          "state": "compiled"
+        }
+      },
+      "response_sha256": "a5f759dc8a5d060a36f86d35d5a86ff8b6745ef87cbe03d2c8b5a3200ddfd141"
+    },
+    {
+      "id": "capabilities_restricted",
+      "source_query_case": null,
+      "derivation": {
+        "source_payload": "capabilities_default",
+        "policy_projection_only": {
+          "source_detail_ceiling": "identity",
+          "content_digest_available": false,
+          "page_default": 50,
+          "page_max": 50,
+          "budget_defaults": {"max_depth": 2, "max_records": 100, "max_relations": 200},
+          "budget_maxima": {"max_depth": 2, "max_records": 100, "max_relations": 200}
+        }
+      },
+      "request": {
+        "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+        "contract": "linkedspec-semantic-query-v1",
+        "direction": "outgoing",
+        "operation": "capabilities",
+        "page": {"after_id": null, "limit": 100},
+        "record_kinds": [],
+        "relation_kinds": [],
+        "source": {"detail": "none", "include_content_digest": false},
+        "subjects": []
+      },
+      "response": {
+        "contract": "linkedspec-semantic-query-v1",
+        "cost": {"depth_reached": 0, "records_examined": 1, "relations_examined": 0},
+        "diagnostics": [],
+        "model": "linkedspec-semantic-model-v1",
+        "ok": true,
+        "page": {"after_id": null, "complete": true, "next_after_id": null},
+        "records": [
+          {
+            "facts": {
+              "budget_defaults": {"max_depth": 2, "max_records": 100, "max_relations": 200},
+              "budget_maxima": {"max_depth": 2, "max_records": 100, "max_relations": 200},
+              "execution_observation": false,
+              "features": [],
+              "model_ids": ["linkedspec-semantic-model-v1"],
+              "page_default": 50,
+              "page_max": 50,
+              "query_ids": ["linkedspec-semantic-query-v1"],
+              "record_kinds": [
+                "capabilities", "spec", "source", "rule", "regex_slot", "edge", "lifecycle", "function",
+                "helper", "binding", "call", "staged_artifact", "generated_artifact", "diagnostic", "decision",
+                "execution", "event", "explanation_step"
+              ],
+              "relation_kinds": [
+                "declares", "contains", "depends_on", "dispatches_to", "selects_regex", "calls", "resolves_to",
+                "reads", "writes", "consumes", "produces", "lowered_from", "staged_by", "generated_as",
+                "diagnoses", "observed_as", "explained_by"
+              ],
+              "source_detail_ceiling": "identity"
+            },
+            "id": "capabilities:0",
+            "kind": "capabilities",
+            "name": "semantic introspection v1",
+            "order": 0,
+            "owner_id": null,
+            "redactions": [],
+            "source": null
+          }
+        ],
+        "relations": [],
+        "snapshot": {
+          "content_digest_available": false,
+          "has_execution": false,
+          "id": "snapshot:0",
+          "source_detail_ceiling": "identity",
+          "state": "compiled"
+        }
+      },
+      "response_sha256": "ade2df6419ad5a7e07ee7acd9fcaf518778b0074204785f78b3e22ba66b54119"
+    },
+    {
+      "id": "graph_list_rules",
+      "source_query_case": "graph_list_rules",
+      "derivation": "exact_native_response",
+      "request": {
+        "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+        "contract": "linkedspec-semantic-query-v1",
+        "direction": "outgoing",
+        "operation": "list",
+        "page": {"after_id": null, "limit": 100},
+        "record_kinds": ["rule"],
+        "relation_kinds": [],
+        "source": {"detail": "identity", "include_content_digest": false},
+        "subjects": []
+      },
+      "response": {
+        "contract": "linkedspec-semantic-query-v1",
+        "cost": {"depth_reached": 0, "records_examined": 2, "relations_examined": 0},
+        "diagnostics": [],
+        "model": "linkedspec-semantic-model-v1",
+        "ok": true,
+        "page": {"after_id": null, "complete": true, "next_after_id": null},
+        "records": [
+          {
+            "facts": {
+              "cursor_policy": "contiguous",
+              "edge_ownership": "action",
+              "family": "and",
+              "is_entry_marker": true,
+              "is_repetition": false,
+              "rep_max": null,
+              "rep_min": null,
+              "value_shape": {
+                "element": {"element": null, "key": null, "kind": "string", "members": [], "signature": null, "value": null},
+                "key": null,
+                "kind": "array",
+                "members": [],
+                "signature": null,
+                "value": null
+              }
+            },
+            "id": "rule:Top",
+            "kind": "rule",
+            "name": "Top",
+            "order": 0,
+            "owner_id": "spec:0",
+            "redactions": [],
+            "source": {
+              "content_digest": null,
+              "excerpt": null,
+              "logical_name": "graph.spec",
+              "provenance_ids": [],
+              "source_id": "source:0",
+              "span": null
+            }
+          },
+          {
+            "facts": {
+              "cursor_policy": "seek",
+              "edge_ownership": "none",
+              "family": "or",
+              "is_entry_marker": false,
+              "is_repetition": true,
+              "rep_max": null,
+              "rep_min": 1,
+              "value_shape": {
+                "element": {"element": null, "key": null, "kind": "unknown", "members": [], "signature": null, "value": null},
+                "key": null,
+                "kind": "array",
+                "members": [],
+                "signature": null,
+                "value": null
+              }
+            },
+            "id": "rule:Child",
+            "kind": "rule",
+            "name": "Child",
+            "order": 1,
+            "owner_id": "spec:0",
+            "redactions": [],
+            "source": {
+              "content_digest": null,
+              "excerpt": null,
+              "logical_name": "graph.spec",
+              "provenance_ids": [],
+              "source_id": "source:0",
+              "span": null
+            }
+          }
+        ],
+        "relations": [],
+        "snapshot": {
+          "content_digest_available": true,
+          "has_execution": false,
+          "id": "snapshot:0",
+          "source_detail_ceiling": "text",
+          "state": "compiled"
+        }
+      },
+      "response_sha256": "b8872b7340d2d6f4aaa409745fe0083bc744a594e09a05ed5b9786446594df0b"
+    },
+    {
+      "id": "invalid_operation_combination",
+      "source_query_case": "invalid_operation_combination",
+      "derivation": "exact_native_response_ok_false",
+      "request": {
+        "budget": {"max_depth": 4, "max_records": 1000, "max_relations": 2000},
+        "contract": "linkedspec-semantic-query-v1",
+        "direction": "outgoing",
+        "operation": "list",
+        "page": {"after_id": null, "limit": 100},
+        "record_kinds": [],
+        "relation_kinds": [],
+        "source": {"detail": "none", "include_content_digest": false},
+        "subjects": ["rule:Top"]
+      },
+      "response": {
+        "contract": "linkedspec-semantic-query-v1",
+        "cost": {"depth_reached": 0, "records_examined": 0, "relations_examined": 0},
+        "diagnostics": [
+          {
+            "code": "semantic_query_invalid",
+            "fields": {"reason": "operation_combination"},
+            "message": "Invalid semantic query request.",
+            "severity": "error"
+          }
+        ],
+        "model": "linkedspec-semantic-model-v1",
+        "ok": false,
+        "page": {"after_id": null, "complete": true, "next_after_id": null},
+        "records": [],
+        "relations": [],
+        "snapshot": {
+          "content_digest_available": true,
+          "has_execution": false,
+          "id": "snapshot:0",
+          "source_detail_ceiling": "text",
+          "state": "compiled"
+        }
+      },
+      "response_sha256": "3010ac5f9a7a2679d4c6e17b2408cda2c3a6d9c0e6a83f9b47ce1973d7ad7aee"
+    }
+  ]
+}

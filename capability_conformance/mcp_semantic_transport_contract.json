@@ -1,0 +1,215 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-mcp-transport-v1",
+  "protocol_version": "2026-07-28",
+  "transport": "stdio",
+  "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.1",
+  "decisions": [
+    "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md",
+    "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md",
+    "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md"
+  ],
+  "official_protocol": {
+    "release": "https://github.com/modelcontextprotocol/modelcontextprotocol/releases/tag/2026-07-28",
+    "schema": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/2026-07-28/schema/2026-07-28/schema.json",
+    "discovery": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover",
+    "stdio": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio",
+    "tools": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+    "caching": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching",
+    "cancellation": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation"
+  },
+  "artifacts": {
+    "schema": "capability_conformance/mcp_semantic_transport/schema.json",
+    "semantic_payloads": "capability_conformance/mcp_semantic_transport/semantic_payloads.json",
+    "corpus": "capability_conformance/mcp_semantic_transport/corpus.json",
+    "canonical_frames": "capability_conformance/mcp_semantic_transport/canonical_frames.jsonl",
+    "materializer": "tools/materialize_mcp_semantic_transport_contract.py"
+  },
+  "artifact_sha256": {
+    "schema": "c312b3e6c3533d17416d638f4e5c3ac299221cf972aeedcfe9bab73a79a42b99",
+    "semantic_payloads": "d942fe3264c2510a722a76d8897713ded74ec179c01a9017c104f63981be3504",
+    "corpus": "345a069c48b27bf2038fa13a30a81d3552ac97c90b4e06c7b29b0bb726479401",
+    "canonical_frames": "3dd66a9aca6db0332687a287921e4f3ebf8684dac1d89f98c5cfd36abc21d517",
+    "materializer": "2997c37d7168cdde4898b6126f3c3226c16bd4ada3cc085277a3d439671afb67"
+  },
+  "semantic_contract": {
+    "path": "capability_conformance/semantic_introspection_contract.json",
+    "model": "capability_conformance/semantic_introspection_model.json",
+    "contract_id": "linkedspec-semantic-introspection-contract-v1",
+    "model_id": "linkedspec-semantic-model-v1",
+    "query_id": "linkedspec-semantic-query-v1"
+  },
+  "server_version": "0.1.0",
+  "server_identities": [
+    {"id": "perl", "name": "linkedspec-semantic-perl", "runtime_admissions": ["perl"]},
+    {"id": "rust", "name": "linkedspec-semantic-rust", "runtime_admissions": ["rust"]},
+    {"id": "dart", "name": "linkedspec-semantic-dart", "runtime_admissions": ["dart"]},
+    {"id": "julia", "name": "linkedspec-semantic-julia", "runtime_admissions": ["julia"]},
+    {"id": "lua", "name": "linkedspec-semantic-lua", "runtime_admissions": ["puc_lua", "luajit"]}
+  ],
+  "instructions": "Use linkedspec_semantic_capabilities first, then call linkedspec_semantic_query with the same authorized handle. Handles are registered by the host and cannot be created by MCP.",
+  "methods": [
+    "server/discover",
+    "tools/list",
+    "tools/call",
+    "notifications/cancelled"
+  ],
+  "cache_policy": {
+    "result_type": "complete",
+    "ttl_ms": 3600000,
+    "scope": "public",
+    "list_changed": false
+  },
+  "tools": [
+    {
+      "name": "linkedspec_semantic_capabilities",
+      "title": "Inspect LinkedSpec semantic capabilities",
+      "description": "Return the effective read-only semantic model, source-detail, paging, and budget capabilities for one caller-registered immutable LinkedSpec semantic index.",
+      "input_schema_def": "capabilitiesArguments",
+      "output_schema_def": "semanticQueryResponse",
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "linkedspec_semantic_query",
+      "title": "Query LinkedSpec semantics",
+      "description": "Run one bounded read-only linkedspec-semantic-query-v1 request against a caller-registered immutable LinkedSpec semantic index.",
+      "input_schema_def": "semanticQueryArguments",
+      "output_schema_def": "semanticQueryResponse",
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      }
+    }
+  ],
+  "request_limits": {
+    "line_bytes_excluding_delimiter": 1048576,
+    "json_nesting_depth": 64,
+    "string_id_utf8_bytes": 128,
+    "integer_id_min": -9007199254740991,
+    "integer_id_max": 9007199254740991,
+    "accepted_delimiters": ["LF", "CRLF"],
+    "emitted_delimiter": "LF",
+    "reject_bom": true,
+    "reject_duplicate_keys": true,
+    "reject_batches": true,
+    "reject_non_object": true
+  },
+  "request_metadata": {
+    "required": [
+      "io.modelcontextprotocol/clientCapabilities",
+      "io.modelcontextprotocol/protocolVersion"
+    ],
+    "optional": ["io.modelcontextprotocol/clientInfo"],
+    "protocol_version": "2026-07-28",
+    "client_info_is_authorization": false,
+    "additional_valid_metadata": "ignored_without_behavior_change"
+  },
+  "handle_registry": {
+    "registration_surface": "native_host_api_only",
+    "entropy_bits": 256,
+    "encoding": "unpadded_base64url",
+    "encoded_characters": 43,
+    "default_lifetime_ms": 900000,
+    "maximum_lifetime_ms": 86400000,
+    "sliding_expiry": false,
+    "default_maximum_live_handles": 1024,
+    "prune_expired_before_capacity_failure": true,
+    "host_may_revoke": true,
+    "clear_and_release_on_shutdown": true,
+    "deterministic_rng_and_clock": "explicit_test_dependencies_only",
+    "authorization_checks": [
+      "authorization_context",
+      "revocation",
+      "monotonic_absolute_expiry",
+      "deployment_policy"
+    ],
+    "indistinguishable_states": ["unknown", "expired", "revoked", "unauthorized"]
+  },
+  "deployment_policy": {
+    "mode": "lowering_only",
+    "components": [
+      "source_detail_ceiling",
+      "page_max",
+      "budget_maxima.max_records",
+      "budget_maxima.max_relations",
+      "budget_maxima.max_depth"
+    ],
+    "effective_maximum": "component_wise_minimum_native_server_registration",
+    "effective_default": "native_default_capped_by_effective_maximum",
+    "capabilities": "native_first_then_schema_preserving_policy_field_projection",
+    "allowed_query": "unchanged_native_dispatch_and_response",
+    "denied_query": "tool_execution_error_before_native_dispatch",
+    "silent_request_lowering": false,
+    "semantic_response_synthesis": false
+  },
+  "tool_execution_errors": [
+    {
+      "id": "handle_unavailable",
+      "code": "linkedspec_mcp_handle_unavailable",
+      "message": "No current authorized semantic index is available for this handle.",
+      "covers": ["unknown", "expired", "revoked", "unauthorized"]
+    },
+    {
+      "id": "policy_denied",
+      "code": "linkedspec_mcp_policy_denied",
+      "message": "The semantic query exceeds the deployment policy for this handle.",
+      "covers": ["source_detail", "content_digest", "page_limit", "record_budget", "relation_budget", "depth_budget"]
+    }
+  ],
+  "json_rpc_errors": [
+    {"code": -32700, "message": "Parse error", "owns": ["invalid_utf8", "malformed_json", "bom", "duplicate_key", "overlong_line"]},
+    {"code": -32600, "message": "Invalid Request", "owns": ["invalid_envelope", "invalid_id", "batch", "non_object"]},
+    {"code": -32601, "message": "Method not found", "owns": ["unknown_method", "unsupported_method"]},
+    {"code": -32602, "message": "Invalid params", "owns": ["metadata", "method_params", "tool_name", "tool_arguments"]},
+    {"code": -32603, "message": "Internal error", "owns": ["sanitized_unexpected_failure"]},
+    {"code": -32022, "message": "Unsupported protocol version", "owns": ["unsupported_protocol_version"]}
+  ],
+  "legacy_diagnostic": {
+    "method": "initialize",
+    "code": -32601,
+    "message": "Method initialize is unavailable; use modern MCP 2026-07-28 server/discover.",
+    "notifications_initialized": "ignore_without_response"
+  },
+  "canonical_json": {
+    "contract": "linkedspec-canonical-json-v1",
+    "utf8": true,
+    "object_keys": "lexicographic",
+    "arrays": "preserved",
+    "ensure_ascii": false,
+    "insignificant_whitespace": false,
+    "non_finite_numbers": false,
+    "semantic_text_trailing_newline": false,
+    "stdio_frame_trailing_lf": true
+  },
+  "authority_fence": {
+    "unsupported_capabilities": [
+      "prompts", "resources", "resource_templates", "completions", "roots", "sampling", "elicitation",
+      "logging_notifications", "progress", "subscriptions", "tasks", "icons", "embedded_resources",
+      "multi_round_trip_input", "extensions"
+    ],
+    "forbidden_authority": [
+      "implicit_path_read", "source_compilation", "parser_execution", "semantic_traversal", "semantic_cache",
+      "explanation_synthesis", "backend_object_inspection", "policy_ceiling_elevation"
+    ],
+    "stdout": "mcp_frames_only",
+    "stderr_default": "silent",
+    "stderr_optional": "sanitized_operational_events_only"
+  },
+  "shutdown": {
+    "signal": "stdin_eof",
+    "accept_new_work": false,
+    "clear_registry": true,
+    "release_indexes": true,
+    "flush_complete_frames": true,
+    "graceful_exit": 0,
+    "unexpected_io_exit": "nonzero_after_same_cleanup",
+    "shutdown_rpc": false
+  }
+}

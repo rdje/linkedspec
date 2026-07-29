@@ -49,10 +49,11 @@ The distinction matters:
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
-Lua, and LuaJIT are admitted. MCP remains later transport work and does not own semantics. Its architecture and
-protocol policy are now accepted; machine schemas, conformance, and server implementations remain pending.
+Lua, and LuaJIT are admitted. MCP does not own semantics and no MCP server is implemented yet. Its architecture,
+protocol policy, and neutral machine contract are now encoded; independent conformance and native servers remain
+pending.
 
-## Accepted modern MCP transport (implementation pending)
+## Accepted modern MCP transport (machine contract encoded; servers pending)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -67,6 +68,38 @@ This decision was made before server code. The official final revision was relea
 the decision. Selecting it now prevents five native implementations from acquiring an obsolete handshake and
 session state machine before LinkedSpec has shipped an MCP surface.
 
+### Normative machine artifacts
+
+Every implementation consumes one root-relative, backend-neutral bundle:
+
+| Artifact | Role |
+|---|---|
+| `capability_conformance/mcp_semantic_transport_contract.json` | Normative manifest: protocol, identities, methods, tools, limits, handles, policy, errors, authority, shutdown, paths, and SHA-256 inventory. |
+| `capability_conformance/mcp_semantic_transport/schema.json` | Closed JSON Schema 2020-12 definitions for the accepted envelopes, requests, results, ids, tools, semantic model, and errors. |
+| `capability_conformance/mcp_semantic_transport/semantic_payloads.json` | Four canonical semantic payloads: three exact admitted native responses and the one allowed restricted-capability projection. |
+| `capability_conformance/mcp_semantic_transport/corpus.json` | Ordered positive, negative, handle, policy, raw-byte, and lifecycle recipes. |
+| `capability_conformance/mcp_semantic_transport/canonical_frames.jsonl` | 35 compact UTF-8 JSON-RPC frames, each followed by exactly one LF. |
+| `tools/materialize_mcp_semantic_transport_contract.py` | Deterministic materializer and byte/digest self-check; not a server or independent mutation checker. |
+
+The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
+four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
+14,597 bytes, well below the 1,048,576-byte inbound limit. Verify the bundle from the repository root:
+
+```bash
+bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
+```
+
+Deliberate regeneration is explicit and reviewable:
+
+```bash
+bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py --write --print-digests
+```
+
+Ordinary verification never rewrites the JSONL. The materializer proves source-key uniqueness, schema-reference
+closure, exact semantic-oracle digests, mirrored text/structured content, handle/policy dispatch boundaries,
+canonical LF framing, size/count invariants, and all artifact hashes. The independently implemented semantic and
+omission/mutation checker remains the next contract leaf, `.10.9.1.2`.
+
 ### Discovery and request metadata
 
 A modern client can discover the server before calling a tool. This is the accepted Perl-server shape; only the
@@ -79,11 +112,11 @@ server name changes for Rust, Dart, Julia, and Lua:
 The response advertises exactly one version and only the static tools capability:
 
 ```json
-{"id":"discover-1","jsonrpc":"2.0","result":{"_meta":{"io.modelcontextprotocol/serverInfo":{"name":"linkedspec-semantic-perl","version":"0.1.0"}},"cacheScope":"public","capabilities":{"tools":{"listChanged":false}},"instructions":"Use the capabilities tool before semantic queries; handles are registered out of band.","resultType":"complete","supportedVersions":["2026-07-28"],"ttlMs":3600000}}
+{"id":"discover-1","jsonrpc":"2.0","result":{"_meta":{"io.modelcontextprotocol/serverInfo":{"name":"linkedspec-semantic-perl","version":"0.1.0"}},"cacheScope":"public","capabilities":{"tools":{"listChanged":false}},"instructions":"Use linkedspec_semantic_capabilities first, then call linkedspec_semantic_query with the same authorized handle. Handles are registered by the host and cannot be created by MCP.","resultType":"complete","supportedVersions":["2026-07-28"],"ttlMs":3600000}}
 ```
 
-The machine contract in `.10.9.1.1` will own the final exact instruction text and complete canonical fixture bytes.
-The required request metadata fields are protocol version and client capabilities. `clientInfo` is optional in the
+The checked-in machine contract owns that exact instruction text and the complete canonical bytes. The required
+request metadata fields are protocol version and client capabilities. `clientInfo` is optional in the
 final stable schema and is never an authorization identity. A different version receives MCP error `-32022` with
 `supported: ["2026-07-28"]`; missing required metadata receives `-32602`.
 
@@ -134,6 +167,12 @@ handles intentionally look identical and return an `isError: true` tool result w
 `linkedspec_mcp_handle_unavailable`. The response never echoes the handle or says which check failed. This gives a
 model an actionable “obtain a current authorized handle” recovery path without creating a handle-enumeration
 oracle.
+
+The canonical unavailable-handle result is identical for unknown, expired, revoked, and unauthorized states:
+
+```json
+{"id":11,"jsonrpc":"2.0","result":{"_meta":{"io.modelcontextprotocol/serverInfo":{"name":"linkedspec-semantic-lua","version":"0.1.0"}},"content":[{"text":"{\"code\":\"linkedspec_mcp_handle_unavailable\",\"contract\":\"linkedspec-mcp-tool-error-v1\",\"message\":\"No current authorized semantic index is available for this handle.\"}","type":"text"}],"isError":true,"resultType":"complete"}}
+```
 
 ### Deployment policy can only lower native authority
 
@@ -3261,7 +3300,8 @@ The dependency order is:
 | `.10.8` | recurring six-runtime proof | implemented; exact six-runtime driver, three 5x2 primary cases, support ledgers, canonical opt-in, and seven mutations advance only recurring to 7/9 |
 | `.10.9.0` | one-contract/five-implementation/six-runtime MCP topology | complete; behavior-free architecture record |
 | `.10.9.1.0` | select the official protocol and exact transport policy | complete; ADR `0055` selects modern MCP `2026-07-28`, stdio, discovery, explicit handles, and no legacy lifecycle |
-| `.10.9.1.1-.3` | encode, independently validate, and compose the exact MCP contract/corpus | pending |
+| `.10.9.1.1` | encode the exact MCP schema/payload/corpus/canonical-byte bundle | complete |
+| `.10.9.1.2-.3` | independently validate/mutate, then compose the exact MCP contract | pending |
 | `.10.9.2-.10.9.5` | native Perl, Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3284,4 +3324,5 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts and implementations remain pending until `.10.9.1.1-.7` close.
+runtime query surfaces now. MCP machine artifacts are encoded; independent validation and native implementations
+remain pending until `.10.9.1.2-.7` close.
