@@ -1,7 +1,8 @@
 # Semantic Introspection
 
-LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl, Rust, Dart, and Julia have
-admitted native query surfaces: opaque construction, exact static plus call/staged/generated projections, public
+LinkedSpec now has an executable, backend-neutral contract for deep semantic introspection. Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT have admitted native query surfaces: opaque construction, exact static plus
+call/staged/generated projections, public
 `capabilities`/`query` answers, optional caller-captured runtime observations, and one exact composed conformance
 consumer per backend. Rust now has an opaque strict-source, exact-coordinate, compiled-or-failed foundation; exact clone-safe
 static and call/staged/generated projections; a public immutable typed/raw-neutral query evaluator; and optional
@@ -2571,9 +2572,9 @@ observation objects, generated implementation source, trace, and pointer-like id
 
 Both Lua admission rows reference one identical consumer object, `tools/run_lua_local.sh` invokes its same path
 exactly once per ABI, and canonical CI requires it. Nine independent mutations lock the two ABI statuses and the
-shared path, ordered roles, driver, Lua-only rollout, and registration. Each ABI passes exactly 408 assertions;
-the executable neutral gate now reports six groups, twenty response hashes, and 98 rejected mutations at rollout
-6/9 and native admission 6/6.
+shared path, ordered roles, driver, Lua-only rollout, and registration. Each ABI passes exactly 408 assertions.
+At the Lua admission boundary, the neutral gate reported six groups, twenty response hashes, and 98 rejected
+mutations at rollout 6/9 and native admission 6/6.
 
 All eleven Lua semantic owners pass 2,372 assertions per ABI. Complete Lua passes package `1..177` under both
 interpreters, PUC primary 66x2, corpus 105/105, and the 16-owner same-volume storage oracle. The five-backend
@@ -2582,13 +2583,13 @@ doctrines, Rust admission 1/1 in 80.10 seconds, Dart 1/1, Julia 416/416 in 28.5 
 moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 663 seconds. Lua parent `.10.7` is closed;
 Knowledge Map 735/5,894 passes, and recurring six-runtime composition remains separately owned by `.10.8`.
 
-#### Recurring six-runtime proof plan
+#### Recurring six-runtime proof
 
-Leaf `.10.8` is active from clean Lua closeout `e335ea8b`. It will add one orchestration driver,
+Leaf `.10.8` adds one completed orchestration driver,
 `tools/check_semantic_introspection_six_runtime.sh`, without adding a seventh semantic consumer or changing any
 backend model, query evaluator, observation seam, generated format, or public API.
 
-One invocation will run the neutral checker followed by the exact admitted twelve-role consumers for Perl, Rust,
+One invocation runs the neutral checker followed by the exact admitted twelve-role consumers for Perl, Rust,
 Dart, Julia, PUC Lua, and LuaJIT. The existing consumers remain responsible for all twenty responses, compiled/
 failed/observed snapshots, native/loaded/reconstructed/generated/emitted/traced/isolated routes, privacy, pages,
 budgets, portable errors, explanations, isolation, non-execution, and host-leak denial.
@@ -2603,12 +2604,23 @@ bash tools/run_primary_cli_matrix.sh \
   --case trace_failure_invoke_route_low
 ```
 
-Generated-source, capability, and language-coverage ledgers complete the proof. Canonical CI will require and
-syntax-check the driver on every run, while `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1` will opt into the expensive
-all-toolchain execution. Seven recurring mutations will lock runtime presence, exact command, primary and support
-inventories, CI switch, driver, and rollout. Only `recurring_six_runtime` may advance; MCP and public no-drift
-remain separate. The behavior-free planning baseline passes at 6 groups / 20 responses / 98 mutations, rollout
-6/9, and admission 6/6; Knowledge Map 736/5,904 and the public book build pass unchanged.
+Generated-source, capability, and language-coverage ledgers complete the proof. Canonical CI requires and
+syntax-checks the driver on every run, while `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1` opts into the expensive
+all-toolchain execution. Seven recurring mutations lock runtime presence, exact command, primary and support
+inventories, CI switch, driver, and rollout. Only `recurring_six_runtime` advances; MCP and public no-drift
+remain separate. The neutral gate reports 6 groups / 20 responses / 105 rejected mutations, rollout
+7 complete / 2 pending, and admission 6 complete / 0 pending.
+
+The direct recurring run passes Perl 18, Rust 1/1 in 79.67 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, and
+the shared Lua consumer at 408 assertions on each ABI. The three primary cases pass all 30 command/environment
+legs. Generated-source remains v2 with ten families and capability state 80/0/0; the capability census remains
+16 capabilities at 80/0/0; language coverage remains 246 current call names, 105 corpus fixtures plus one exact
+named-mark fixture, and 122 independently covered public Perl contracts.
+
+Canonical CI passes all six doctrines, Rust admission 1/1 in 81.08 seconds, Dart 1/1, Julia 416/416 in 29.4
+seconds, repository-contained process IO, moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031
+in 646 seconds. The new command is also governed as the 40th outside-working-directory routed entrypoint and the
+13th shell temporary owner. Thin MCP transport `.10.9` is the next semantic-introspection leaf.
 
 #### Lua private immutable query kernel (historical dependency boundary)
 
@@ -2924,7 +2936,7 @@ bash tools/run_python_project_data.sh tools/check_semantic_introspection_contrac
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 98 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 105 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
@@ -3136,7 +3148,7 @@ The dependency order is:
 | `.10.7.6.4` | Lua runtime-observation composition closeout | complete; committed focused 1,964 plus full signoff closes `.10.7.6` without replacement code, format change, or promotion |
 | `.10.7.7` | Lua exact dual-ABI semantic admission | complete; one shared twelve-role source passes 408 assertions per ABI, identical two-row topology and nine mutations advance only Lua to 6/9 rollout and 6/6 admission |
 | `.10.7` | PUC Lua and LuaJIT identity | complete |
-| `.10.8` | recurring six-runtime proof | active; exact driver/primary/support/canonical/mutation plan frozen before implementation |
+| `.10.8` | recurring six-runtime proof | implemented; exact six-runtime driver, three 5x2 primary cases, support ledgers, canonical opt-in, and seven mutations advance only recurring to 7/9 |
 | `.10.9` | thin MCP transport | pending |
 | `.10.10` | public no-drift and closure | pending |
 

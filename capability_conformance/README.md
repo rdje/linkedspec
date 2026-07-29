@@ -11,20 +11,21 @@ snapshot-local ids/order, value and target shapes, request/response envelopes, d
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
 `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
-six fixture groups and reports 98 rejected mutations. Static rule facts are independently derived from
+six fixture groups and reports 105 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
 mutations prove response-digest self-consistency cannot hide those facts. Generated artifact identity/family is
 also cross-checked against that contract's generated-source-v2 authority: the calls fixture emits `default`, and
 both illegal and coordinated valid-but-wrong family mutations fail. Every semantic spec name is independently
 derived from its caller-registered fixture logical name after removing `.spec`; the calls snapshot is therefore
-`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 6 complete / 3 pending;
+`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 7 complete / 2 pending;
 native backend admission is 6 complete / 0 pending. No parser, compiler, runtime, descriptor, generated-source,
-CLI, trace, or MCP behavior was added by the neutral contract. Recurring leaf `.10.8` is behavior-free planned
-composition: one `tools/check_semantic_introspection_six_runtime.sh` driver will run the six exact admitted
+CLI, trace, or MCP behavior was added by the neutral contract. Recurring leaf `.10.8` adds behavior-free
+composition: one `tools/check_semantic_introspection_six_runtime.sh` driver runs the six exact admitted
 consumers, three existing primary no-drift cases, and generated/capability/language ledgers; canonical execution
-will be opt-in through `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`. Seven recurring mutations will lock that topology and
-only the recurring rollout row may advance. Behavior-free Perl audit `.10.3.0` maps strict source,
+is opt-in through `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`. Seven recurring mutations lock that topology and only the
+recurring rollout row advances. Direct proof passes Perl 18, Rust 1/1, Dart 1/1, Julia 416, Lua 408 per ABI,
+all 30 primary legs, and all three support ledgers. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
 Perl foundation `.10.3.1` implements opaque in-memory construction, strict source normalization/mapping, and
 immutable compiled-or-failed outcomes. Static leaf `.10.3.2.1` adds a private clone-safe projection whose graph,

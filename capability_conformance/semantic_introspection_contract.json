@@ -455,6 +455,71 @@
       }
     }
   ],
+  "recurring_gate": {
+    "driver": "tools/check_semantic_introspection_six_runtime.sh",
+    "consumer_schema": {
+      "fields": ["backend", "runtime", "consumer_path", "command"],
+      "role_policy": "each exact admitted twelve-role consumer runs once; the shared Lua source runs once per ABI"
+    },
+    "consumers": [
+      {
+        "backend": "perl",
+        "runtime": "perl",
+        "consumer_path": "t/semantic_introspection_perl_admission.t",
+        "command": "PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t"
+      },
+      {
+        "backend": "rust",
+        "runtime": "rust",
+        "consumer_path": "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
+        "command": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission"
+      },
+      {
+        "backend": "dart",
+        "runtime": "dart",
+        "consumer_path": "dart/test/semantic_introspection_dart_admission_test.dart",
+        "command": "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart"
+      },
+      {
+        "backend": "julia",
+        "runtime": "julia",
+        "consumer_path": "julia/test/semantic_introspection_julia_admission_test.jl",
+        "command": "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl"
+      },
+      {
+        "backend": "lua",
+        "runtime": "puc_lua",
+        "consumer_path": "lua/test/semantic_introspection_lua_admission_test.lua",
+        "command": "bash tools/run_lua_project_data.sh puc lua/test/semantic_introspection_lua_admission_test.lua"
+      },
+      {
+        "backend": "lua",
+        "runtime": "luajit",
+        "consumer_path": "lua/test/semantic_introspection_lua_admission_test.lua",
+        "command": "bash tools/run_lua_project_data.sh luajit lua/test/semantic_introspection_lua_admission_test.lua"
+      }
+    ],
+    "primary_cli": {
+      "matrix_driver": "tools/run_primary_cli_matrix.sh",
+      "case_ids": [
+        "success_named_source_literal_input",
+        "failure_compile_precedes_input_load",
+        "trace_failure_invoke_route_low"
+      ],
+      "backend_count": 5,
+      "environments": ["default", "posix"],
+      "policy": "semantic introspection v1 adds no primary CLI surface; success, compile failure, and traced invocation failure stay exact"
+    },
+    "support_checks": [
+      "perl tools/check_generated_source_contract.pl",
+      "perl tools/check_capability_conformance.pl",
+      "perl tools/check_language_capability_coverage.pl"
+    ],
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX"
+    }
+  },
   "rollout": [
     {"capability": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.2"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.3"},
@@ -462,7 +527,7 @@
     {"capability": "dart_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.5"},
     {"capability": "julia_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
-    {"capability": "recurring_six_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
+    {"capability": "recurring_six_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
     {"capability": "thin_mcp_transport", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.9"},
     {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.10"}
   ],
@@ -478,7 +543,8 @@
       "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
       "dart/test/semantic_introspection_dart_admission_test.dart",
       "julia/test/semantic_introspection_julia_admission_test.jl",
-      "lua/test/semantic_introspection_lua_admission_test.lua"
+      "lua/test/semantic_introspection_lua_admission_test.lua",
+      "tools/check_semantic_introspection_six_runtime.sh"
     ],
     "backend_consumers": "not_admitted_before_owned_rollout_leaf",
     "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"
@@ -509,7 +575,10 @@
     "alter_julia_consumer_driver", "unpromote_julia_rollout", "omit_julia_canonical_registration",
     "unadmit_lua_puc", "unadmit_luajit", "omit_lua_consumer_path", "alter_lua_consumer_path",
     "omit_lua_consumer_role", "reorder_lua_consumer_roles", "alter_lua_consumer_driver",
-    "unpromote_lua_rollout", "omit_lua_canonical_registration", "advance_recurring_early",
+    "unpromote_lua_rollout", "omit_lua_canonical_registration",
+    "omit_recurring_runtime", "alter_recurring_command", "omit_recurring_primary_case",
+    "omit_recurring_support_check", "alter_recurring_ci_switch", "alter_recurring_driver",
+    "unpromote_recurring_rollout", "advance_mcp_early",
     "omit_runtime", "omit_luajit",
     "omit_mcp_rollout", "move_semantics_into_mcp",
     "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration"

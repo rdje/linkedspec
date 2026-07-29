@@ -376,7 +376,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 - **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
   retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
-  12 shell allocator owners, and 19 Python checker entrypoints while exercising Python bytecode, Unicode-generator
+  13 shell allocator owners, and 19 Python checker entrypoints while exercising Python bytecode, Unicode-generator
   scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
 - **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
   Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,
@@ -494,7 +494,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 98 rejected mutations, rollout 6 complete / 3 pending, admission 6 complete / 0 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 105 rejected mutations, rollout 7 complete / 2 pending, admission 6 complete / 0 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -795,18 +795,22 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   privacy/pages/budgets/errors/explain; request/response isolation; query non-execution; and host/path/table/
   metatable/AST/ActionIR/observation/generated-source/pointer denial. The checker must lock both ABI statuses,
   exact shared topology, both driver invocations, Lua-only rollout, canonical registration, and nine independent
-  mutations. Each ABI passes exactly 408 assertions; the neutral gate advances to 6 groups / 20 responses / 98
-  mutations, rollout 6/9, and admission 6/6. Retrieve [[lua-semantic-introspection-admission]] before editing.
+  mutations. Each ABI passes exactly 408 assertions; at the Lua admission boundary the neutral gate became
+  6 groups / 20 responses / 98 mutations, rollout 6/9, and admission 6/6. Retrieve
+  [[lua-semantic-introspection-admission]] before editing.
 
-- **RECURRING SIX-RUNTIME PLAN:** `.10.8` will add
+- **RECURRING SIX-RUNTIME ADMISSION:** `.10.8` adds
   `tools/check_semantic_introspection_six_runtime.sh`, one repository-routed fail-fast driver that invokes the
-  exact admitted twelve-role consumers for Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT unchanged. It will also run
+  exact admitted twelve-role consumers for Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT unchanged. Run it with
+  `bash tools/check_semantic_introspection_six_runtime.sh`; it also runs
   `tools/run_primary_cli_matrix.sh` for `success_named_source_literal_input`,
   `failure_compile_precedes_input_load`, and `trace_failure_invoke_route_low`, then the generated-source,
-  capability, and language-coverage ledgers. Canonical all-toolchain execution will be opt-in through
-  `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`; ordinary CI will require and syntax-check the driver. Seven recurring
-  mutations lock runtime/command/primary/support/CI/driver/rollout topology, and only recurring may advance.
-  Retrieve [[semantic-introspection-recurring-gate-plan]] before implementation.
+  capability, and language-coverage ledgers. Canonical all-toolchain execution is opt-in through
+  `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`; ordinary CI requires and syntax-checks the driver. Seven recurring
+  mutations lock runtime/command/primary/support/CI/driver/rollout topology, advance only recurring, and replace
+  premature-recurring with premature-MCP denial. The neutral gate is 6/20/105 at rollout 7/9 and admission 6/6.
+  Direct proof passes Perl 18, Rust 1/1, Dart 1/1, Julia 416, Lua 408 per ABI, all 30 primary legs, and all three
+  support ledgers. Retrieve [[semantic-introspection-recurring-gate]] before changing the topology.
 
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque

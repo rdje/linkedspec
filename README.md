@@ -1,6 +1,6 @@
 # LinkedSpec
 
-Current design frontier (2026-07-20): ADR `0044` is implemented and public-admitted across Perl, Rust, Dart,
+Current design frontier (2026-07-28): ADR `0044` is implemented and public-admitted across Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT. Default/OR rules intrinsically seek, AND rules intrinsically consume, child rules own
 their cursor policy, bare declared-rule members normalize by parent family, and the public/global `parse_mode`
 override is removed. Descriptors expose derived per-rule facts and generated-source v2 derives from authored
@@ -1013,20 +1013,22 @@ content migration exists yet.
   generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
   before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
 - Deep semantic introspection plus MCP was contract-frozen under ADRs `0049`/`0050` and
-  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl, Rust, Dart, and Julia are now admitted native implementations.
+  `FUTURE-PARITY-BACKLOG.10.2` before backend behavior; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are now
+  admitted native implementations.
   `linkedspec-semantic-model-v1` and
   `linkedspec-semantic-query-v1` expose immutable,
   deterministic rule/regex/edge/lifecycle/call/provenance/generated/diagnostic/explanation facts from idiomatic
   native APIs, with snapshot-local ids, exact pages/cost, source ceilings/redaction, and optional caller-captured
   runtime observations. Explicit staged payload/job/result records are distinct from generated artifacts. The
   outward descriptor remains a separate compatibility projection. The neutral checker derives 20 exact responses
-  across six fixture groups and rejects 89 mutations in canonical CI. Its static rule facts are cross-checked
+  across six fixture groups and rejects 105 mutations in canonical CI. Its static rule facts are cross-checked
   against `linkedspec-rule-local-cursor-v1`, so coordinated model/response-hash edits cannot revive the corrected
   default-family or no-edge-ownership drift. Generated-plan facts now cross-check the same contract's v2 family
   authority: the calls fixture is exact `default`, and illegal/coordinated wrong-family drift is rejected. Spec
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
-  Neutral rollout is 5 complete / 4 pending,
-  while native backend admission is 4 complete / 2 pending. MCP will provide only native capabilities/query calls
+  Neutral rollout is 7 complete / 2 pending, while native backend admission is 6 complete / 0 pending. Recurring
+  proof runs `tools/check_semantic_introspection_six_runtime.sh`: the six exact admitted consumers, three selected
+  5x2 primary no-drift cases, and generated/capability/language ledgers. MCP will provide only native capabilities/query calls
   over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -1436,10 +1438,12 @@ content migration exists yet.
   Complete Lua, primary 5x2x66, Unicode 10/10, and every unchanged ledger pass; canonical CI passes Rust admission
   1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, containment, moved-root proof, reference primary
   66x2, and Phase 0 1,031/1,031 in 656 seconds. Generated-source v2/format 2, semantic rollout 5/9, and native
-  admission 4/6 remain fixed. Exact ordered PUC Lua/LuaJIT admission `.10.7.7` is now active task-tree-first from
-  clean `17348041`: one Lua-5.1-compatible twelve-role consumer will run unchanged on both ABIs, both rows must
-  share its exact topology, nine mutations will lock that topology, and only Lua rollout/admission may advance.
-  The activation changes no implementation or governance value; baseline remains 6/20/89 at 5/9 + 4/6.
+  admission 4/6 remain fixed. Exact ordered PUC Lua/LuaJIT admission `.10.7.7` now runs one
+  Lua-5.1-compatible twelve-role consumer unchanged on both ABIs at 408 assertions each. Both rows share its exact
+  topology and nine mutations advance only Lua, closing native admission at 6/20/98, rollout 6/9, admission 6/6.
+  Recurring `.10.8` then composes all six consumers through one routed driver, passes three primary cases at
+  30/30 and three exact support ledgers, adds seven mutations, and advances only recurring. Current governance is
+  6/20/105 at rollout 7/9 and admission 6/6; thin MCP `.10.9` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

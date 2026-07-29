@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.8` — orchestration state is project data too): The recurring driver needs
+  one parent artifact root, but its consumers retain their existing ownership boundaries. Rust target output and
+  Julia writable depot live under that root; both Lua invocations still cross `run_lua_project_data.sh`, which
+  builds ABI-specific native modules under routed storage. The driver does not copy implementation authority into
+  an aggregate fixture.
+
+  Adding the command also changes two architectural censuses even though semantic behavior is unchanged. The
+  outside-cwd routing oracle advances from 39 to 40 entrypoints, and the tool-storage allocator inventory advances
+  from 12 to 13 shell owners. Both must move in the same leaf as the new command. A focused canonical-output review
+  also found a stray literal `+` argument in the new machine-path `grep`; removing it makes the audit quiet while
+  preserving exact match rejection. This is why a green exit alone is insufficient signoff evidence.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.8` — recurring semantic proof should own orchestration, not a seventh
   consumer): All six runtime targets already have omission-sensitive twelve-role admissions. The recurring layer
   therefore records exact commands for those consumers and invokes them unchanged; it must not add an aggregate

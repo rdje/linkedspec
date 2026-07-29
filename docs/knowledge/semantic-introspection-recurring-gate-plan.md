@@ -13,9 +13,9 @@ answers:
   - "does recurring semantic proof add a primary CLI option"
   - "what is the semantic recurring proof baseline"
 date: 2026-07-28
-status: current behavior-free plan; implementation follows the clean activation commit
+status: superseded by completed recurring gate
 tags: [semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance, local-ci]
-evidence: "FUTURE-PARITY-BACKLOG.10.8 activates from clean e335ea8b after all six native admissions. It freezes tools/check_semantic_introspection_six_runtime.sh over the exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT twelve-role consumers; three existing 5x2 primary no-drift cases; generated-source, capability, and language-coverage ledgers; LINKEDSPEC_RUN_SEMANTIC_MATRIX canonical opt-in; seven recurring mutations; and recurring-only promotion. Baseline remains 6 groups / 20 responses / 98 mutations at rollout 6/9 and admission 6/6 until implementation."
+evidence: "Historical behavior-free plan from FUTURE-PARITY-BACKLOG.10.8 at clean e335ea8b. Implementation completed from planning commit b1921da0; current topology and proof live in semantic-introspection-recurring-gate."
 last_verified: 2026-07-28
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -24,7 +24,9 @@ reverify:
 
 # Semantic-introspection recurring-gate plan
 
-This leaf adds composition, not another semantic implementation. The driver will invoke the six exact admitted
+This plan is complete and historical. Current recurring-gate authority is
+[[semantic-introspection-recurring-gate]]. The leaf adds composition, not another semantic implementation. The
+driver invokes the six exact admitted
 consumers unchanged and let their twelve roles re-prove all snapshots, twenty responses, native/loaded/
 reconstructed/generated/emitted/traced/isolated routes, runtime observations, privacy, pagination, budgets,
 portable errors, explanations, isolation, query non-execution, and host-leak denial.

@@ -45,7 +45,7 @@ GENERATED_PLAN_AUTHORITY = {
 TOP_LEVEL_FIELDS = {
     "format", "contract_id", "model_id", "query_id", "task_owner", "decisions", "scope", "schema",
     "query_contract", "source_contract", "fixture_groups", "source_fixtures", "snapshots", "query_cases",
-    "static_rule_authority", "generated_plan_authority", "target_admissions", "rollout", "canonical_ci",
+    "static_rule_authority", "generated_plan_authority", "target_admissions", "recurring_gate", "rollout", "canonical_ci",
     "mutations",
 }
 MODEL_FIELDS = {"format", "model", "query", "snapshots"}
@@ -123,7 +123,7 @@ ROLLOUT = [
     ("dart_parity", "complete", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia_parity", "complete", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
-    ("recurring_six_runtime", "pending", "FUTURE-PARITY-BACKLOG.10.8"),
+    ("recurring_six_runtime", "complete", "FUTURE-PARITY-BACKLOG.10.8"),
     ("thin_mcp_transport", "pending", "FUTURE-PARITY-BACKLOG.10.9"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.10.10"),
 ]
@@ -173,8 +173,73 @@ LUA_ADMISSION = {
     "canonical_driver": "tools/run_ci_local.sh",
     "roles": PERL_ADMISSION["roles"].copy(),
 }
+RECURRING_GATE = {
+    "driver": "tools/check_semantic_introspection_six_runtime.sh",
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "consumer_path", "command"],
+        "role_policy": "each exact admitted twelve-role consumer runs once; the shared Lua source runs once per ABI",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "consumer_path": PERL_ADMISSION["path"],
+            "command": "PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t",
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "consumer_path": RUST_ADMISSION["path"],
+            "command": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_introspection_rust_admission",
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "consumer_path": DART_ADMISSION["path"],
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart",
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "consumer_path": JULIA_ADMISSION["path"],
+            "command": "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl",
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "consumer_path": LUA_ADMISSION["path"],
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/semantic_introspection_lua_admission_test.lua",
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "consumer_path": LUA_ADMISSION["path"],
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/semantic_introspection_lua_admission_test.lua",
+        },
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": [
+            "success_named_source_literal_input",
+            "failure_compile_precedes_input_load",
+            "trace_failure_invoke_route_low",
+        ],
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+        "policy": "semantic introspection v1 adds no primary CLI surface; success, compile failure, and traced invocation failure stay exact",
+    },
+    "support_checks": [
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX",
+    },
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 98 rejected mutations, rollout 6 complete / 3 pending, admission 6 complete / 0 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 105 rejected mutations, rollout 7 complete / 2 pending, admission 6 complete / 0 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
@@ -188,8 +253,11 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "Its 12 exact-once roles compose every Julia semantic route",
     "bash tools/run_lua_project_data.sh puc lua/test/semantic_introspection_lua_admission_test.lua",
     "Its 12 exact-once roles compose every Lua semantic route on both admitted ABIs",
+    "bash tools/check_semantic_introspection_six_runtime.sh",
+    "LINKEDSPEC_RUN_SEMANTIC_MATRIX=1",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
+    "98 rejected mutations, rollout 6 complete / 3 pending",
     "89 rejected mutations",
     "rollout 5 complete / 4 pending",
     "admission 4 complete / 2 pending",
@@ -247,7 +315,7 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("98 rejected mutations", "97 rejected mutations", 1)
+    wrong = text.replace("105 rejected mutations", "104 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
@@ -510,12 +578,18 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(contract["target_admissions"][3]["consumer"] == JULIA_ADMISSION, "Julia admission consumer topology drifted")
     require(contract["target_admissions"][4]["consumer"] == LUA_ADMISSION, "PUC Lua admission consumer topology drifted")
     require(contract["target_admissions"][5]["consumer"] == LUA_ADMISSION, "LuaJIT admission consumer topology drifted")
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring six-runtime gate topology drifted")
+    require(
+        [row["consumer_path"] for row in contract["recurring_gate"]["consumers"]]
+        == [row["consumer"]["path"] for row in contract["target_admissions"]],
+        "recurring consumers diverged from admitted consumer paths",
+    )
     for row in contract["rollout"]: require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 98 and len(set(contract["mutations"])) == 98, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua", "tools/check_semantic_introspection_six_runtime.sh"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 105 and len(set(contract["mutations"])) == 105, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -1078,17 +1152,63 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require(lua_driver_text.count(lua_consumer["path"]) == 2, "Lua package driver must register the semantic admission consumer exactly once per ABI")
     require(f'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" {lua_consumer["path"]}' in lua_driver_text, "PUC Lua package driver does not run the semantic admission consumer")
     require(f'"$LUAJIT_CMD" {lua_consumer["path"]}' in lua_driver_text, "LuaJIT package driver does not run the semantic admission consumer")
+
+    recurring = contract["recurring_gate"]
+    recurring_path = ROOT / recurring["driver"]
+    require(recurring_path.is_file(), "semantic recurring driver is missing")
+    require(recurring_path.stat().st_mode & 0o111 != 0, "semantic recurring driver is not executable")
+    recurring_text = recurring_path.read_text(encoding="utf-8")
+    require(
+        'source "$REPO_ROOT/tools/project_data_env.sh"' in recurring_text
+        and 'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_semantic_introspection_six_runtime.sh" "$@"' in recurring_text,
+        "semantic recurring driver is not repository-routed",
+    )
+    require(
+        'export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"' in recurring_text
+        and 'export JULIA_DEPOT_PATH="$JULIA_WRITE_DEPOT:$JULIA_READ_DEPOTS"' in recurring_text
+        and 'trap cleanup EXIT' in recurring_text,
+        "semantic recurring driver does not isolate disposable build/depot state",
+    )
+    expected_path_counts = {
+        PERL_ADMISSION["path"]: 1,
+        JULIA_ADMISSION["path"]: 1,
+        LUA_ADMISSION["path"]: 2,
+    }
+    for path, count in expected_path_counts.items():
+        require(recurring_text.count(path) == count, f"semantic recurring consumer command count drifted: {path}")
+    for marker in [
+        "PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t",
+        "--test semantic_introspection_rust_admission",
+        "bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart",
+        "--compiled-modules=no",
+        "puc lua/test/semantic_introspection_lua_admission_test.lua",
+        "luajit lua/test/semantic_introspection_lua_admission_test.lua",
+    ]:
+        require(recurring_text.count(marker) == 1, f"semantic recurring command marker drifted: {marker}")
+    require(recurring_text.count("bash tools/run_primary_cli_matrix.sh") == 1, "semantic recurring primary driver drifted")
+    for case_id in recurring["primary_cli"]["case_ids"]:
+        require(recurring_text.count(f"--case {case_id}") == 1, f"semantic recurring primary case drifted: {case_id}")
+    for command in recurring["support_checks"]:
+        require(recurring_text.count(command) == 1, f"semantic recurring support check drifted: {command}")
+    require(f"require_tracked_file {recurring['driver']}" in ci_text, "canonical CI does not require the semantic recurring driver")
+    require(recurring["driver"] in ci_text[ci_text.index('log "running syntax checks"'):], "canonical CI does not syntax-check the semantic recurring driver")
+    switch = recurring["local_ci"]["switch"]
+    require(f'if [[ "${{{switch}:-0}}" == "1" ]]; then' in ci_text, "canonical CI semantic recurring switch drifted")
+    require(f'bash "$REPO_ROOT/{recurring["driver"]}"' in ci_text, "canonical CI does not execute the semantic recurring driver")
+
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "98 rejected mutations" in readme
-        and "6 complete / 3 pending" in readme
+        and "105 rejected mutations" in readme
+        and "7 complete / 2 pending" in readme
         and "6 complete / 0 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
+        and "105 rejected mutations" in book
+        and "7 complete / 2 pending" in book
         and "6 complete / 0 pending" in book
         and "t/semantic_introspection_perl_admission.t" in book
         and "semantic_introspection_rust_admission" in book
@@ -1232,7 +1352,14 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_lua_consumer_driver"] = lambda c, m: c["target_admissions"][4]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
     mutations["unpromote_lua_rollout"] = lambda c, m: c["rollout"][5].update({"status": "pending"})
     mutations["omit_lua_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("lua/test/semantic_introspection_lua_admission_test.lua")
-    mutations["advance_recurring_early"] = lambda c, m: c["rollout"][6].update({"status": "complete"})
+    mutations["omit_recurring_runtime"] = lambda c, m: c["recurring_gate"]["consumers"].pop()
+    mutations["alter_recurring_command"] = lambda c, m: c["recurring_gate"]["consumers"][0].update({"command": "tools/missing-consumer"})
+    mutations["omit_recurring_primary_case"] = lambda c, m: c["recurring_gate"]["primary_cli"]["case_ids"].pop()
+    mutations["omit_recurring_support_check"] = lambda c, m: c["recurring_gate"]["support_checks"].pop()
+    mutations["alter_recurring_ci_switch"] = lambda c, m: c["recurring_gate"]["local_ci"].update({"switch": "LINKEDSPEC_RUN_WRONG_MATRIX"})
+    mutations["alter_recurring_driver"] = lambda c, m: c["recurring_gate"].update({"driver": "tools/missing_semantic_driver.sh"})
+    mutations["unpromote_recurring_rollout"] = lambda c, m: c["rollout"][6].update({"status": "pending"})
+    mutations["advance_mcp_early"] = lambda c, m: c["rollout"][7].update({"status": "complete"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)

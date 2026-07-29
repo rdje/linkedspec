@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.7.7`; `e335ea8b` closes Lua `.10.7`; `(this commit)` activates recurring proof `.10.8`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.8`; `(this commit)` closes recurring six-runtime semantic proof.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -17,7 +17,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_storage_initializer: source `tools/project_data_env.sh`; it derives its checkout, creates ignored
   `/.linkedspec-data/{scratch,cache}`, preserves only same-device destinations, and exports all managed roots.
   Inherited host `TMPDIR` is captured once before routing as runtime-only process-oracle authority, never output.
-- current_storage_routing: 39 hook/doctrine/KM/canonical/backend/book/matrix/storage/path boundaries self-root and
+- current_storage_routing: 40 hook/doctrine/KM/canonical/backend/book/matrix/storage/path boundaries self-root and
   enter one run; targeted Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
 - current_storage_lifecycle: marker v2 binds each command/descendants to one dedicated process group, waits for
   drain, signals group-wide, rechecks before deletion, and retains live/reused/invalid/indeterminate authority.
@@ -32,28 +32,29 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   interpreter and Julia-managed read-only system depots remain necessary external toolchain inputs.
 - current_storage_lua: `tools/test_lua_project_data_storage.sh` proves 16 owners, both ABI module pairs, quoting,
   native/generated/trace use, hostile-output rejection, cleanup, and zero old residue; macOS invokes clang directly.
-- current_storage_tools: tool oracle freezes 3 Python temp/12 shell allocator/19 checker owners; bytecode/map/book/
+- current_storage_tools: tool oracle freezes 3 Python temp/13 shell allocator/19 checker owners; bytecode/map/book/
   CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
 - current_storage_doctrine: `PROJECT-DATA-STORAGE` governs current tracked storage sinks/defaults and commands;
   28 cases pass. Its process complement locks six required families, hostile inputs, relocation, and kernel denial.
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: `.10.8` is active task-tree-first from clean `e335ea8b`. Its behavior-free plan
-  freezes one exact six-runtime driver, three 5x2 primary no-drift cases, generated/capability/language ledgers,
-  canonical opt-in, seven recurring mutations, premature-MCP denial, and recurring-only promotion.
+- current_semantic_frontier: `.10.8` is complete from clean plan `b1921da0` at semantic 6/20/105, rollout 7/9,
+  and admission 6/6. One routed driver composes all six admitted consumers, three 5x2 primary no-drift cases,
+  generated/capability/language ledgers, canonical opt-in, seven mutations, and recurring-only promotion. Thin MCP `.10.9` is next after the clean commit.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: behavior-free `.10.8` baseline passes semantic 6/20/98 at rollout 6/9 + admission 6/6, memory,
-  all six doctrines, KM 736/5,904, mdBook, diff, and exact 13,080-KiB book plus empty-run cleanup. Lua admission
-  remains the latest full canonical proof at 408/2,372 per ABI and Phase 0 1,031/663s.
+- current_signoff: `.10.8` recurring driver passes Perl 18, Rust 1/1 in 79.67s, Dart 1/1, Julia 416 in 29.0s,
+  Lua 408 per ABI, primary 30/30, and three exact ledgers. Canonical passes six doctrines, Rust 81.08s, Julia
+  416/29.4s, containment/moved-root, reference 66x2, and Phase 0 1,031/646s; docs/KM 737/5,915 pass; cleanup
+  removes only the verified ignored 13,080-KiB book and one proven-empty managed-run directory.
 - latest_bootstrap_read: 2026-07-28 — README, both roadmaps, memory/bootstrap/commit/task doctrines, code/import
   and active semantic owner chain, all 46 mdBook pages, relevant KM/Toolbox/ADRs, and consumer topologies read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 60/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 61/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: after this clean plan commit, implement and run recurring semantic composition `.10.8`; no push.
+- blockers: none. next: after the clean `.10.8` closeout commit, activate thin MCP transport `.10.9`; no push.

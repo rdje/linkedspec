@@ -68,6 +68,7 @@ expected_shell_temp_owners=(
  tools/check_repeated_action_result_five_backend.sh
  tools/check_root_rule_selection_five_backend.sh
  tools/check_rule_local_cursor_five_backend.sh
+ tools/check_semantic_introspection_six_runtime.sh
  tools/project_data_run.sh
  tools/run_lua_local.sh
  tools/run_lua_project_data.sh

@@ -8,15 +8,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.8` is active task-tree-first from clean Lua closeout `e335ea8b`. Its behavior-free
-  plan owns one exact repository-routed driver over the six admitted twelve-role consumers, three 5x2 primary
-  no-drift cases, generated/capability/language ledgers, canonical opt-in, seven recurring topology mutations,
-  premature-MCP denial, and recurring-only promotion. Implementation follows only after this plan commits cleanly.
+- `FUTURE-PARITY-BACKLOG.10.8` is complete from clean planning commit `b1921da0`. Thin MCP transport `.10.9` is
+  the next pending slice and may activate only after the recurring closeout commits cleanly.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.8 — add recurring semantic proof**
+  (exact six-runtime orchestration from clean planning commit `b1921da0`).
+
+  **Result:** One repository-routed driver composes the neutral checker and all six admitted twelve-role
+  consumers unchanged. Perl passes 18, Rust 1/1 in 79.67s, Dart 1/1, Julia 416 in 29.0s, and Lua 408 per ABI;
+  three primary cases pass all 30 command/environment legs and the generated/capability/language ledgers remain
+  exact. Seven mutations advance only recurring, yielding semantic 6/20/105 at rollout 7/9 and admission 6/6.
+
+  **Proof:** Canonical CI passes all six doctrines, Rust 1/1 in 81.08s, Dart 1/1, Julia 416/416 in 29.4s,
+  containment, moved-root, reference primary 66x2, and Phase 0 1,031/1,031 in 646s. Outside-cwd routing passes at
+  40 entrypoints and tool storage freezes 3 Python / 13 shell / 19 Python-checker owners. mdBook, Knowledge Map
+  737/5,915, memory/task/doctrines/diff/syntax/storage, and cleanup of only the verified ignored 13,080-KiB book
+  plus one proven-empty run directory pass. Cadence advances to 61/300 with no push; thin MCP `.10.9` follows
+  after the clean commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.8 — activate recurring semantic proof**
   (behavior-free exact orchestration plan from clean Lua closeout `e335ea8b`).
 

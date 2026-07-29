@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.8 — add recurring semantic proof
+
+Added one repository-routed `tools/check_semantic_introspection_six_runtime.sh` orchestration gate. It creates one
+same-volume disposable artifact root, runs the neutral semantic checker, and invokes the exact admitted Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT twelve-role consumers unchanged. Direct proof passes Perl 18, Rust 1/1 in
+79.67 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, and 408 assertions on each Lua ABI.
+
+The driver selects three existing primary no-drift cases across five commands and default/POSIX environments;
+all 30 legs pass. Generated-source v2 with ten families and capability state 80/0/0, the 16-capability 80/0/0
+census, and language coverage 246 current names / 105 corpus plus one exact fixture / 122 public Perl contracts
+remain exact. No semantic consumer, model, query evaluator, primary CLI option, generated format, transport, or
+public API changed.
+
+The neutral contract/checker now owns exact recurring topology, canonical opt-in
+`LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`, and seven independent omission/alteration/rollback mutations. Only
+`recurring_six_runtime` advances: governance is six groups / twenty responses / 105 rejected mutations at rollout
+7/9 and native admission 6/6; thin MCP and public no-drift remain pending. Canonical CI requires and syntax-checks
+the driver on every run. The supported-command locality boundary also advances to 40 outside-cwd routed
+entrypoints and the tool oracle to three Python temporary owners / 13 shell allocators / 19 Python checker
+entrypoints.
+
+Canonical CI passes all six doctrines, Rust semantic admission 1/1 in 81.08 seconds, Dart 1/1, Julia 416/416 in
+29.4 seconds, process containment, moved-root execution, reference primary 66x2, and Phase 0 1,031/1,031 in 646
+seconds. Focused review caught and removed one stray `+` filename argument in the new machine-path audit; the
+corrected audit is quiet and still rejects actual absolute-path matches. mdBook, Knowledge Map, memory/task
+lockstep, doctrines, diff/syntax/storage checks, and cleanup of only the verified ignored 13,080-KiB book plus one
+proven-empty managed-run directory complete `.10.8`; thin MCP `.10.9` is next.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.8 — activate recurring semantic proof
 
 Activated recurring six-runtime semantic composition task-tree-first from clean Lua admission commit `e335ea8b`.

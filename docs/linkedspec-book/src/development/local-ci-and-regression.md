@@ -686,7 +686,8 @@ wins rather than merely proving that some named spec resolved. Removing the move
 exit 1 and exact compile-failure output. The same self-rooted oracle repeats Perl, Dart, Julia, and Lua named
 `Lispish` execution from a same-SSD cwd outside the checkout and requires exact `["hello",["world"]]` output.
 All generated state and native Lua modules remain below its managed repository-storage run. Canonical local CI
-invokes this composed boundary once; the path tree is complete at 39 routed entrypoints.
+invokes this composed boundary once; the path tree is complete at 40 routed entrypoints after the recurring
+six-runtime semantic-introspection gate joined the governed boundary.
 
 Canonical backend flags decide which optional legs the orchestrator schedules; a skipped optional leg does not
 mean that backend cannot be built locally. Relocation closeout directly reran the complete Rust, Dart, Julia, PUC
@@ -1053,7 +1054,7 @@ The recurring proof is:
 $ bash tools/test_tool_project_data_storage.sh
 ```
 
-It freezes three Python temporary owners, 12 shell allocator owners, and 19 Python checker entrypoints. It creates
+It freezes three Python temporary owners, 13 shell allocator owners, and 19 Python checker entrypoints. It creates
 real retained bytecode, Knowledge Map, fake-mdBook HTML, CLI workspace, and TAP artifacts on the repository device;
 locks both oracle subprocess captures to initialized `TMPDIR`; proves hostile Python, Knowledge Map, and mdBook
 destinations are rejected without creation; and works through the outside-cwd routing oracle. The only deliberate
@@ -1099,7 +1100,7 @@ remain legal. Twenty-eight embedded reject/accept cases run with every check, in
 rejection, scalar/list-form Knowledge reverification commands, the exact inert CLI usage label, and the process
 oracle's narrowly scoped contained hostile-cache injection. The doctrine is one registry entry, so the existing pre-commit and
 local-CI driver enforce it automatically; after the relocation closeout registered its composed oracle, hostile
-outside-cwd routing covers 39 entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
+outside-cwd routing covers 40 entrypoints. Manual TAP, failing-set, and focused-test examples in `TOOLBOX.md` use a checkout-derived diagnostic
 directory instead of an operating-system temporary path.
 
 ### Relocated process containment
