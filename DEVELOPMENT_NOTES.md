@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.0` — start modern-only instead of implementing two protocol eras):
+  Stable MCP `2026-07-28` was released one day before this decision and replaces connection-scoped initialization
+  with per-request version/capability metadata plus mandatory discovery. LinkedSpec has not shipped MCP yet, and
+  its approved architecture already uses explicit opaque handles. Targeting the final stateless revision directly
+  avoids propagating a removed handshake/session/ping state machine through five native implementations.
+
+  Modern-only is a deliberate first-contract boundary, not an assertion that every current MCP client has already
+  upgraded. Dual-era support would double lifecycle and conformance obligations before the exact native contract
+  exists. Compatibility should be measured after `.10.10`; if justified, a separately owned adapter may translate
+  transport eras without changing tool schemas, semantic payloads, native server ownership, or policy ceilings.
+
+  Two subtle boundaries keep “thin transport” honest. First, handle unavailability is a recoverable tool execution
+  error in the current MCP guidance, but unknown/expired/revoked/unauthorized states remain externally
+  indistinguishable to avoid enumeration. Second, stricter deployment policy may mechanically lower only the
+  capabilities response's policy fields; allowed queries pass unchanged, and above-policy requests fail before
+  native dispatch. The adapter never fabricates or rewrites a semantic query response.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.0` — MCP uniformity is contract uniformity, not one cross-runtime
   process): The opaque handles accepted by MCP denote actual native immutable indexes. A single process cannot
   directly retain Perl, Rust, Dart, Julia, and Lua objects without embedded runtimes, FFI, or subprocess IPC.

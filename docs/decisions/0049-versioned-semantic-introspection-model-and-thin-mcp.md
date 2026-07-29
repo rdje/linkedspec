@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; amended by ADR 0050; MCP process topology clarified by ADR 0054
+- Status: accepted; native six-runtime rollout admitted; amended/clarified by ADRs 0050/0054/0055
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 
 ## Context
@@ -268,7 +268,7 @@ The thin MCP server exposes two tools:
   response.
 
 An embedding registers an opaque handle for an already created index or snapshot. Registration, authorization,
-handle expiry, and missing-handle protocol errors are transport/deployment concerns. The MCP server does not read
+handle expiry, and unavailable-handle tool execution errors are transport/deployment concerns. The MCP server does not read
 an implicit path, compile source, traverse backend objects, reinterpret records, invent explanations, increase a
 source ceiling, or maintain its own semantic cache. Its contract tests compare direct native and MCP response
 bytes after canonical JSON encoding.
@@ -316,9 +316,9 @@ Implementation is split in dependency order under `FUTURE-PARITY-BACKLOG.10`:
 - Runtime introspection remains opt-in and non-interfering because queries consume caller-owned observations after
   execution.
 - MCP becomes broadly useful without becoming a sixth semantic implementation or a hidden filesystem/CLI bridge.
-- Each rollout leaf must keep implemented native layers distinct from still-planned projection/query/observation/
-  admission/MCP layers. Perl and Rust are fully admitted; Dart, Julia, Lua/LuaJIT, recurring proof, MCP, and public
-  no-drift remain staged.
+- Each rollout leaf must keep implemented native layers distinct from still-planned transport/public layers.
+  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT plus recurring native proof are admitted; MCP machine artifacts/
+  implementations and final public no-drift remain staged.
 
 The behavior-free Perl audit in `.10.3.0` fixes the first adapter boundary. `LinkedSpec::Get` consumes decoded
 characters internally; a constructor may accept decoded text or strict UTF-8 bytes, but must normalize both to one
@@ -431,3 +431,4 @@ topology mutations plus canonical registration advance only Rust to rollout 3/9 
 - Current outward descriptor contract: `capability_conformance/outward_descriptor_contract.json`
 - Staged-artifact schema correction: ADR `0050`
 - Native per-backend MCP server topology: ADR `0054`
+- Modern MCP protocol/stdio policy: ADR `0055`

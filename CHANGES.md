@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.0 — pin modern MCP 2026-07-28 stdio policy
+
+Selected the stable final MCP `2026-07-28` revision for LinkedSpec's first transport contract. ADR `0055` defines
+modern-only stdio with per-request version/capability metadata, mandatory `server/discover`, static discovery/tool
+cache hints, the two admitted read-only semantic tools, and no legacy `initialize`/`initialized` session or
+`ping`. Any later legacy adapter is evidence-gated, separately task-tree-owned after public closeout, and cannot
+fork the native tool/semantic contract.
+
+Froze the strict cross-runtime boundary: UTF-8 newline-delimited canonical JSON, bounded unambiguous request ids,
+official JSON-RPC/version errors, tool-result handle/policy errors, 256-bit CSPRNG opaque local registrations,
+authorization/revocation/absolute expiry, lowering-only deployment ceilings, direct/native semantic payload
+identity, cancellation, MCP-only stdout, sanitized opt-in stderr, and EOF registry cleanup. Server identities are
+native per backend; PUC Lua and LuaJIT share one Lua identity and source implementation.
+
+Updated ADRs `0049`/`0054`, decision index, task/frontier, both roadmaps, README, architecture state, Knowledge
+Map, mdBook public/status/handoff material, changes/development/live/memory continuity, and the task index. This
+leaf adds no schema fixture, checker, server, native semantic/API behavior, parser/compiler/runtime behavior,
+primary CLI behavior, rollout, admission, or query digest. Machine schemas/fixtures follow under `.10.9.1.1`.
+
+Focused proof passes memory architecture, task metadata, Knowledge Map 739/5,939, all six doctrines, mdBook,
+diff hygiene, and semantic governance at 6 groups / 20 exact responses / 105 rejected mutations, rollout 7/9,
+admission 6/6. Canonical CI passes all six doctrines, Perl semantic admission 18, Rust 1/1 in 81.13 seconds, Dart
+1/1, Julia 416/416 in 29.1 seconds, process containment, moved-root proof across all five primary anchors, primary
+CLI 66x2, and Phase 0 1,031/1,031 in 649 seconds. Final cleanup removes only the verified ignored 13,168-KiB
+rendered book and one proven-empty managed-run directory. Push cadence advances to 63/300; no push.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.0 — ratify native per-backend MCP topology
 
 Recorded the director-approved MCP architecture before transport code. ADR `0054` defines one exact MCP

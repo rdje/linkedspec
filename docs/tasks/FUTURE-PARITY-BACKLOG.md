@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-29` (director-approved native MCP topology `.10.9.0` completed; exact shared contract
-  `.10.9.1` is next)
+- Last updated: `2026-07-29` (modern MCP protocol-policy leaf `.10.9.1.0` complete; machine schemas/fixtures
+  `.10.9.1.1` are next after its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12922,7 +12922,8 @@ before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
   Status: `active` (2026-07-29; director approved one contract, five native implementations, and six-runtime
-    conformance; architecture record `.10.9.0` is complete and exact contract `.10.9.1` is next)
+    conformance; architecture `.10.9.0` and modern protocol policy `.10.9.1.0` are complete; machine contract
+    `.10.9.1.1` is next)
   Goal: Implement one thin MCP semantic contract through five native server implementations and six runtime
     admissions.
   Children: `.10.9.0`, `.10.9.1`, `.10.9.2`, `.10.9.3`, `.10.9.4`, `.10.9.5`, `.10.9.6`, `.10.9.7`
@@ -12985,14 +12986,90 @@ before implementation.
     Commit: `FUTURE-PARITY-BACKLOG.10.9.0 - ratify native MCP topology`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.1`
-    Status: `pending`
+    Status: `active` (2026-07-29; protocol policy `.10.9.1.0` complete; machine contract `.10.9.1.1` next)
     Goal: Freeze the executable MCP wire, tool, handle, policy, lifecycle, and conformance contract.
     Depends on: `.10.9.0`
-    Acceptance: Select and pin the supported MCP protocol/transport boundary; encode exact initialize/tool-list/
+    Children: `.10.9.1.0`, `.10.9.1.1`, `.10.9.1.2`, `.10.9.1.3`
+    Acceptance: Select and pin the supported MCP protocol/transport boundary; encode exact discovery/tool-list/
       tool-call schemas, canonical success identity, JSON-RPC versus tool-result failures, opaque handle
       registration/authorization/expiry, deployment ceiling intersection, stdout/logging discipline, and shutdown.
       Provide one backend-neutral corpus and omission/mutation checker consumable unchanged by all five
       implementations; add no backend server yet.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.1.0`
+      Status: `done` (2026-07-29)
+      Goal: Audit the current official MCP protocol and freeze LinkedSpec's exact transport policy before fixtures
+        or server code.
+      Depends on: `.10.9.0`
+      Acceptance: Use current official MCP sources to select and pin one protocol version and stdio boundary.
+        Adopt stable modern MCP `2026-07-28` with per-request metadata and mandatory `server/discover`; do not
+        implement the removed `initialize`/`notifications/initialized` handshake, removed `ping`, or dual-era
+        fallback in v1. Define tools/list, tools/call, cancellation, logging/stdout, orderly shutdown, JSON-RPC
+        versus tool-result failure ownership, opaque registered-handle lifecycle, authorization/expiry, deployment
+        ceiling intersection, canonical JSON identity, and deliberately unsupported capabilities. Record the
+        decision, implementation dependencies, official-source evidence, and lockstep public/continuity docs;
+        isolate any later legacy compatibility behind a separately justified post-`.10.10` task-tree. Split
+        machine-readable contract `.1`, independent checker/mutations `.2`, and composed closeout `.3`; add no
+        schema fixture, checker, server, native API, parser/compiler/runtime, primary CLI, or semantic behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove clean architecture commit `9a8761ea`, empty brief, and `.10.9.1.0`
+        ownership before non-task-tree changes.
+      - [x] **OFFICIAL PROTOCOL AUDIT** — Cite current official protocol/schema/lifecycle/transport requirements and
+        distinguish MCP requirements from LinkedSpec's deliberately narrower supported surface.
+      - [x] **EXACT POLICY** — Freeze version negotiation, stdio framing, lifecycle, method/capability topology,
+        canonical encoding, error taxonomy, handle/auth/expiry, ceiling intersection, cancellation, and shutdown.
+      - [x] **AUTHORITY / OMISSION FENCE** — Deny implicit file/compiler/execution/traversal/cache/explanation
+        authority, extra tools/resources/prompts/completions/sampling/roots, stdout logs, and backend-local drift.
+      - [x] **DEPENDENCY SPLIT** — Keep normative machine artifacts in `.1`, independent validation/mutations in
+        `.2`, and no-change composition/parent closeout in `.3`; no backend implementation is hidden here.
+      - [x] **LOCKSTEP SIGNOFF** — Synchronize ADR/index, task/frontier, roadmaps, architecture, Knowledge Map,
+        mdBook, changes/development/live/memory; pass focused plus canonical gates, clean artifacts, commit, clear
+        the brief, verify clean, and do not push.
+
+      Verification: **PASS 2026-07-29.** Clean architecture commit `9a8761ea`, a zero-byte message brief, and this
+        task-tree leaf preceded all non-task changes. Official stable MCP `2026-07-28` release, versioning,
+        discovery, stdio, tools, caching, cancellation, and JSON-RPC sources were audited. ADR `0055` and every
+        durable projection now freeze LinkedSpec's deliberately narrow modern-only stdio profile: mandatory
+        per-request metadata and `server/discover`; two read-only tools; five native identities; registered
+        256-bit opaque handles with authorization, revocation, bounded absolute expiry, and indistinguishable
+        invalid-handle tool errors; lowering-only ceilings; canonical native/MCP payload identity; exact
+        transport/tool error ownership; cancellation; stdout/log discipline; EOF cleanup; and no legacy
+        initialization/session/ping or dual-era fallback. No schema fixture, checker, server, semantic/native API,
+        parser/compiler/runtime, primary CLI, response digest, rollout, or admission behavior changed. Focused
+        proof passes memory architecture, task metadata, Knowledge Map 739 facts / 5,939 question keys, all six
+        doctrines, mdBook, diff hygiene, and semantic governance at 6 groups / 20 exact responses / 105 rejected
+        mutations, rollout 7/9, admission 6/6. Canonical local CI passes all six doctrines, Perl semantic admission
+        18, Rust 1/1 in 81.13 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, project/process containment,
+        moved-root proof across all five primary runtime anchors, primary CLI 66x2, and Phase 0 1,031/1,031 in
+        649 seconds. Final cleanup removes only the verified ignored 13,168-KiB rendered book and one proven-empty
+        managed-run directory. Machine schemas/fixtures `.10.9.1.1` follow only after the clean commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.1.0 - pin modern MCP transport policy`
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.1.1`
+      Status: `pending`
+      Goal: Encode the adopted MCP contract as backend-neutral schemas, fixtures, canonical bytes, and corpus.
+      Depends on: `.10.9.1.0`
+      Acceptance: Check in exact discovery/tool-list/tool-call/lifecycle envelopes, tool input/output schemas,
+        canonical success and failure cases, handle/auth/expiry/policy fixtures, and direct-native/MCP response
+        identity bytes without implementing a backend server.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.1.2`
+      Status: `pending`
+      Goal: Add an independent executable checker and omission-sensitive mutation corpus for the neutral contract.
+      Depends on: `.10.9.1.1`
+      Acceptance: Validate schemas and exact corpus independently; reject version/method/capability/tool/schema/
+        envelope/error/handle/policy/stdout/lifecycle drift; route all project data under the repository and add no
+        backend server.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.1.3`
+      Status: `pending`
+      Goal: Recompose the committed neutral MCP contract owners and close `.10.9.1` for Perl implementation.
+      Depends on: `.10.9.1.2`
+      Acceptance: Run the exact artifacts/checker unchanged, integrate recurring canonical governance, align all
+        public/continuity projections, prove no backend implementation or semantic/CLI behavior, close the parent,
+        and hand off cleanly to `.10.9.2`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.2`
     Status: `pending`
@@ -15324,7 +15401,9 @@ one repository-routed driver composes the six admitted consumers, three 5x2 prim
 support ledgers without a seventh semantic model or new CLI surface. Director-approved behavior-free MCP
 architecture leaf `.10.9.0` is complete from clean `75c9ac5`: ADR `0054` freezes one exact contract, five native
 implementations, six runtime admissions, and routing-only deferral of any aggregator. Canonical CI passes through
-Phase 0 1,031/1,031; exact contract `.10.9.1` is the next eligible leaf after the clean architecture commit.
+Phase 0 1,031/1,031. Exact contract parent `.10.9.1` is split before artifacts; behavior-free official-protocol
+audit and decision `.10.9.1.0` is complete from clean architecture commit `9a8761ea`; machine-readable contract
+artifacts `.10.9.1.1` are next after its clean commit.
 
 ### Superseded frontier snapshots
 

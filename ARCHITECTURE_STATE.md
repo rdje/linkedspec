@@ -4,7 +4,17 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-28`
+- Last refreshed: `2026-07-29`
+- `2026-07-29` modern MCP protocol freeze: behavior-free `FUTURE-PARITY-BACKLOG.10.9.1.0` and ADR `0055` select
+  stable final MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. The native servers are modern-only:
+  per-request version/capability metadata plus mandatory `server/discover` replace legacy initialization,
+  sessions, and ping. The exact surface is discovery, static two-tool list, capabilities/query dispatch, and
+  cancellation. Local host registration binds already-created immutable indexes to 256-bit opaque handles,
+  authorization, absolute expiry, and lowering-only source/page/budget policy; handle failures are
+  non-enumerating tool errors, while wire/schema/version failures remain JSON-RPC errors. Canonical semantic text
+  plus structured content stays direct/native identical; stdout is MCP-only, optional sanitized logs use stderr,
+  and EOF clears the registry and exits. Machine schemas/checker/server code remain `.10.9.1.1-.7`; any legacy
+  adapter or aggregator is separately owned after public closeout.
 - `2026-07-28` Lua semantic runtime-observation authority freeze: behavior-free
   `FUTURE-PARITY-BACKLOG.10.7.6.0` maps the only accepted-slot seam after match/ordered identity and before
   `accept_match`, where position must come from the accepted match's Unicode-scalar end rather than the old

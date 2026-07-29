@@ -12,9 +12,10 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: architecture accepted; executable contract and implementations pending
+status: architecture and modern protocol accepted; machine contract and implementations pending
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
+evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
 reverify: "rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 
@@ -31,5 +32,5 @@ A one-endpoint aggregator is deferred outside `FUTURE-PARITY-BACKLOG.10.9`. If s
 task-tree-owned after public closeout, it can only route requests to the native servers and cannot become a
 semantic owner or cache.
 
-Related facts: [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
+Related facts: [[mcp-2026-07-28-stdio-contract]], [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]].

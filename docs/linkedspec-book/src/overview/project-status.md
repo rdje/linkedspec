@@ -658,8 +658,11 @@ Three backbone items tracked major structural modernization — all done:
   Queries cannot compile, execute, enable trace, read paths, or expose host IR. All six native runtime targets are
   now admitted and recurring proof is complete at rollout 7/9, native admission 6/6, and 105 rejected mutations.
   ADR `0054` makes pending MCP work one exact contract with native Perl, Rust, Dart, Julia, and Lua server
-  implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. MCP remains handle-only and
-  owns no semantic or filesystem behavior. A future aggregator is outside `.10.9` and may only route.
+  implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. ADR `0055` selects stable
+  modern MCP `2026-07-28` over stdio, with per-request metadata, mandatory discovery, explicit handles, two
+  read-only tools, and no legacy initialization/session/ping. MCP owns no semantic or filesystem behavior.
+  Machine artifacts and servers remain `.10.9.1.1-.7`; any future aggregator or legacy adapter is separately
+  owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

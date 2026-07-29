@@ -1,5 +1,23 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Modern MCP protocol/stdio policy accepted
+
+`FUTURE-PARITY-BACKLOG.10.9.1.0` selects stable MCP `2026-07-28` for the exact pending transport. ADR `0055`
+freezes modern-only stdio, mandatory discovery/per-request metadata, exact two-tool topology, native server
+identities, opaque registered-handle authorization/expiry, lowering-only policy, canonical direct/native payload
+identity, JSON-RPC versus tool-error ownership, cancellation, log discipline, and EOF shutdown. Legacy
+initialization/session/ping and dual-era fallback are deliberately absent; any future compatibility adapter is
+separate after `.10.10`.
+
+This is a behavior-free decision slice. No machine contract artifact, checker, server implementation, semantic
+model/query, parser/compiler/runtime, primary CLI, rollout, admission, or response digest changes. Exact
+schemas/fixtures `.10.9.1.1`, independent checker `.1.2`, and composed contract closeout `.1.3` remain ordered
+before native Perl/Rust/Dart/Julia/Lua implementation.
+
+Signoff: focused memory/task/Knowledge Map 739/5,939/six-doctrine/mdBook/diff/semantic checks pass. Canonical CI
+passes Perl semantic admission 18, Rust 1/1 in 81.13s, Dart 1/1, Julia 416/416 in 29.1s, containment, moved-root
+proof, primary CLI 66x2, and Phase 0 1,031/1,031 in 649s. Exact generated-artifact cleanup passes.
+
 Current execution status for interruption-safe batch workflow recovery.
 
 ## Active Batch
@@ -8,14 +26,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.9.0` is complete and verified from clean recurring commit `75c9ac5`. It records the
-  director-approved one-contract/five-native-implementation/six-runtime architecture before MCP transport code.
-  Exact executable contract `.10.9.1` is the next eligible leaf after this architecture slice commits cleanly.
+- No successor leaf is active across this closeout boundary. `FUTURE-PARITY-BACKLOG.10.9.1.0` is a fully verified
+  completion candidate from clean architecture commit `9a8761ea`; machine schemas/fixtures `.10.9.1.1` become
+  active only after this leaf commits and the repository is proven clean.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.0 — pin modern MCP 2026-07-28 stdio policy**
+  (behavior-free official-protocol decision from clean architecture commit `9a8761ea`).
+
+  **Result:** ADR `0055` selects stable modern MCP `2026-07-28` over stdio and freezes mandatory per-request
+  metadata plus `server/discover`, exact two-tool/five-identity topology, bounded opaque registered handles,
+  lowering-only policy, canonical native/MCP payload identity, strict error/cancellation/log/EOF behavior, and no
+  removed initialization/session/ping or dual-era fallback. Machine artifacts remain `.10.9.1.1`.
+
+  **Proof:** Focused memory/task/Knowledge Map 739/5,939/six-doctrine/mdBook/diff/semantic checks pass at semantic
+  6/20/105, rollout 7/9, and admission 6/6. Canonical CI passes Perl semantic 18, Rust 1/1 in 81.13s, Dart 1/1,
+  Julia 416/416 in 29.1s, containment, moved-root proof, primary CLI 66x2, and Phase 0 1,031/1,031 in 649s. Exact
+  cleanup removes only the verified ignored 13,168-KiB book and one proven-empty managed-run directory. Cadence
+  advances to 63/300 without push; `.10.9.1.1` is next after the clean commit.
+
 - 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.0 — ratify native per-backend MCP topology**
   (behavior-free architecture record from clean recurring commit `75c9ac5`).
 

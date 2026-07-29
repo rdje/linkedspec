@@ -217,11 +217,15 @@ and exact fixtures are mandatory. Descriptors remain a separate compatibility pr
 compiled regexes, object identities, implicit paths, and generated implementation source cannot enter responses.
 MCP is later handle-only transport and cannot compile, read paths, derive facts, or own explanations. ADR `0054`
 requires one exact contract implemented natively in Perl, Rust, Dart, Julia, and Lua, with the same Lua source
-admitted on both PUC Lua and LuaJIT. Any later one-endpoint aggregator is outside `.10.9` and routing-only.
+admitted on both PUC Lua and LuaJIT. ADR `0055` pins modern MCP `2026-07-28` over stdio: per-request metadata,
+mandatory `server/discover`, explicit opaque handles, no legacy initialization/session/ping, and exact
+cancellation/error/policy/canonical/shutdown rules. Any later one-endpoint aggregator or legacy adapter is outside
+`.10.9`, separately task-tree-owned, and routing/compatibility-only.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT now provide the complete native semantic stack and exact twelve-role
 admission. The checker is exact at six fixture groups, 20 query digests, and 105 rejected mutations; recurring
-native rollout is 7/9 and native admission is 6/6. MCP contract/implementation/admission remains `.10.9.1-.7`.
+native rollout is 7/9 and native admission is 6/6. MCP protocol policy `.10.9.1.0` is complete; machine contract,
+implementation, and admission remain `.10.9.1.1-.7`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

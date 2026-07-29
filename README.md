@@ -1,6 +1,6 @@
 # LinkedSpec
 
-Current design frontier (2026-07-28): ADR `0044` is implemented and public-admitted across Perl, Rust, Dart,
+Current design frontier (2026-07-29): ADR `0044` is implemented and public-admitted across Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT. Default/OR rules intrinsically seek, AND rules intrinsically consume, child rules own
 their cursor policy, bare declared-rule members normalize by parent family, and the public/global `parse_mode`
 override is removed. Descriptors expose derived per-rule facts and generated-source v2 derives from authored
@@ -1028,8 +1028,11 @@ content migration exists yet.
   names also derive from caller logical identity, so this fixture is `calls_and_staging`, not snapshot id `calls`.
   Neutral rollout is 7 complete / 2 pending, while native backend admission is 6 complete / 0 pending. Recurring
   proof runs `tools/check_semantic_introspection_six_runtime.sh`: the six exact admitted consumers, three selected
-  5x2 primary no-drift cases, and generated/capability/language ledgers. MCP will provide only native capabilities/query calls
-  over a registered handle; it does not compile, read paths, or own semantics. Perl foundation `.10.3.1` now adds
+  5x2 primary no-drift cases, and generated/capability/language ledgers. ADR `0055` selects stable modern MCP
+  `2026-07-28` over stdio for the pending transport: mandatory `server/discover`, per-request metadata, explicit
+  opaque handles, two read-only native capabilities/query tools, no legacy initialization/session/ping, and no
+  compile, path-read, or semantic authority. Machine artifacts and implementations remain `.10.9.1.1-.7`. Perl
+  foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
   runtime-context failure authority without parser execution or path reads. Static leaf `.10.3.2.1` now retains a
@@ -1445,8 +1448,8 @@ content migration exists yet.
   30/30 and three exact support ledgers, adds seven mutations, and advances only recurring. Current governance is
   6/20/105 at rollout 7/9 and admission 6/6. ADR `0054` and completed planning leaf `.10.9.0` split thin MCP into
   one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, and six runtime admissions because the same
-  Lua source must pass on PUC Lua and LuaJIT. Contract implementation `.10.9.1` is next after the clean
-  behavior-free architecture commit.
+  Lua source must pass on PUC Lua and LuaJIT. ADR `0055` and `.10.9.1.0` now freeze modern-only MCP `2026-07-28`
+  stdio lifecycle, method/error/handle/policy/canonical/shutdown rules; machine contract `.10.9.1.1` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

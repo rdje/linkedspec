@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP contract and implementations pending
+status: native six-runtime rollout admitted; MCP topology/protocol accepted and machine contract pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -21,6 +21,7 @@ evidence_update_2026_07_21_generated_plan_correction: "FUTURE-PARITY-BACKLOG.10.
 evidence_update_2026_07_21_spec_identity_correction: "FUTURE-PARITY-BACKLOG.10.3.3.1.0 derives spec names from caller logical identity after full calls RED found the model alone used short snapshot id calls instead of calls_and_staging. Direct and coordinated identity mutations advance the checker from 55 to 57 without changing any query digest, behavior, rollout, or admission."
 evidence_update_2026_07_21_perl_admission: "FUTURE-PARITY-BACKLOG.10.3.6 composes the implemented Perl surface through one exact 12-role consumer, all 20 response digests, and path/role/driver/registration/admission mutation locks. The checker now rejects 65 mutations; only Perl advances, for rollout 2/9 and native admission 1/6."
 evidence_update_2026_07_29_mcp_topology: "ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0 clarify the transport topology after all native admissions: one exact MCP contract, five native server implementations, and six runtime admissions because one Lua source runs unchanged on PUC Lua and LuaJIT. A future aggregator is outside .10.9 and may only route."
+evidence_update_2026_07_29_mcp_protocol: "ADR 0055 and .10.9.1.0 select stable modern MCP 2026-07-28 over stdio: mandatory server/discover, per-request metadata, explicit handles, two tools, no legacy initialize/session/ping, exact policy/error/canonical/shutdown boundaries, and separately owned future compatibility."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -53,6 +54,11 @@ one wire contract governs native Perl, Rust, Dart, Julia, and Lua implementation
 admitted on PUC Lua and LuaJIT. `.10.2-.10.8` own the executable neutral contract and six-runtime native rollout,
 `.10.9` owns the contract plus five MCP implementations and six-runtime transport admission, and `.10.10` owns
 public no-drift. A future one-endpoint aggregator is outside `.10.9` and may only route.
+
+ADR `0055` now fixes that transport to modern MCP `2026-07-28` over stdio. Each request carries version and client
+capabilities, discovery is mandatory, and the two tools consume out-of-band registered opaque handles. Legacy
+initialization, protocol sessions, and ping are absent; policy can only lower native ceilings, and successful
+semantic payload bytes remain direct/MCP identical.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
