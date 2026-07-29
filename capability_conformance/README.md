@@ -35,7 +35,9 @@ execution, or semantic cache.
 the normative transport contract. It records five native implementation rows and six runtime-admission rows,
 because one Lua source must qualify independently on PUC Lua and LuaJIT. Current exact state is Perl and Rust
 complete at 2/5 implementations and 2/6 runtimes; Dart, Julia, Lua, PUC Lua, and LuaJIT remain pending, and shared
-`thin_mcp_transport` rollout remains pending under `.10.9.7`. It pins the unchanged transport root digest, exact
+`thin_mcp_transport` rollout remains pending under `.10.9.7`. Behavior-free Dart `.10.9.4.0` and ADR `0059` now
+freeze the generated binding/runtime, native secure decoded server, strict stdio, exact admission, and closeout
+seams without changing any implementation/runtime status. The ledger pins the unchanged transport root digest, exact
 case counts, source owners, proof owners, and one twelve-role admission topology per runtime. Run:
 
 ```bash
@@ -66,7 +68,8 @@ Rust behavior-free audit `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR `0058` freeze 
 decoded/wire/admission sequence without altering the transport contract. Exact admission `.10.9.3.3` now passes
 the unchanged inventories and advances only its implementation/runtime rows. No-change `.10.9.3.4` recomposes
 the committed contract/binding/server/admission owners under focused and canonical proof, closes Rust parent
-`.10.9.3`, and leaves Dart `.10.9.4` as the next clean-boundary implementation.
+`.10.9.3`, and hands off to completed behavior-free Dart plan `.10.9.4.0`. Generated binding and decoded server
+`.10.9.4.1` are the next clean-boundary implementation.
 
 `semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
 `0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and

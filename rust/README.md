@@ -223,7 +223,8 @@ borrows prevent the same writer from serving as protocol output and log. Exact t
 runtimes while rollout remains pending; the checker rejects 39 status/source/role/order mutations. There is no MCP
 executable, primary-CLI mode, SDK/network transport, source bootstrap, semantic cache, aggregator, or legacy
 adapter. No-change `.10.9.3.4` recomposes the committed owners under focused and canonical proof and closes the
-Rust MCP parent without another implementation or test owner; Dart `.10.9.4` is the next backend handoff.
+Rust MCP parent without another implementation or test owner. Dart behavior-free plan `.10.9.4.0` and ADR `0059`
+now consume that handoff without changing the 2/5 + 2/6 ledger; Dart implementation begins under `.10.9.4.1`.
 
 ## Lifecycle Loop
 

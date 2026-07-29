@@ -158,4 +158,5 @@ bootstrap and its own task-tree.
 - Exact protocol/transport: ADR `0055`
 - Native embedding: ADR `0022`
 - Perl implementation precedent: ADR `0057`
+- Dart successor plan: ADR `0059`
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9.3.0-.4`)

@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.0 — plan the Dart native MCP server
+
+Added behavior-free ADR `0059` and an exact `.10.9.4.1-.4` dependency split. The admitted public Dart
+`SemanticIndex.capabilities` / `queryNeutral` seam will remain the only semantic authority behind one same-process
+server. Generated contract data, frozen schema/runtime behavior, registry/decoded dispatch, and strict stdio are
+separate private-part owners; exact admission and no-change closeout remain later leaves.
+
+A repository-managed Dart 3.9.2 probe confirms that stock JSON overwrites literal and escape-equivalent duplicate
+keys and emits insertion order. The plan therefore requires bounded strict token preflight and recursive key
+sorting. Core secure entropy, monotonic time, base64url, and existing package-internal SHA-256 preserve the package's
+zero production dependencies. Existing exact MCP 35/10/10/68, byte-fresh Perl/Rust bindings, ledger 2/5 + 2/6
+with rollout pending and 39 mutations, Dart semantic admission 1/1, and analyzer proof pass unchanged. No
+production, test, fixture, contract, ledger, rollout, executable/CLI, SDK/network, aggregator, or legacy behavior
+changes. Canonical CI passes Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds,
+containment/moved-root, CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 769 seconds. Knowledge Map 745/6,019,
+mdBook, all six doctrines, memory, path, and exact 13,456-KiB/one-empty-run cleanup pass; `.10.9.4.1` follows only
+after the clean plan commit.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.4 — close the Rust MCP implementation
 
 Recomposed every committed neutral, Perl, and Rust MCP owner unchanged from clean exact-admission commit

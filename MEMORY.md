@@ -5,15 +5,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.3.4`; repository HEAD after commit with subject
-  `FUTURE-PARITY-BACKLOG.10.9.3.4 - close Rust MCP implementation`, based on clean `13d9ce17`.
-- active_leaf: none after the `.10.9.3.4` completion commit; activate Dart MCP `.10.9.4` only from its clean tree.
-- active_scope: no in-flight work. Perl and Rust parents are closed at 2/5 implementations + 2/6 runtimes; shared
-  MCP rollout remains pending, and no server behavior, ledger status, or transport-contract bytes changed in the
-  Rust closeout.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.0`; commit subject
+  `FUTURE-PARITY-BACKLOG.10.9.4.0 - plan Dart native MCP server`, based on clean `7f44d2a1`.
+- active_leaf: none after the planning commit; `.10.9.4.1` must be activated task-tree-first from that clean HEAD.
+- completed_scope: ADR `0059` freezes generated binding/runtime, native registry/decoded dispatch, strict stdio,
+  security/test seams, exact admission, and no-change closeout under `.10.9.4.1-.4`; the ledger remains 2/5
+  implementations + 2/6 runtimes with shared rollout pending.
 - active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/
   parser/compiler/executor/trace/cache/primary-CLI behavior, ledger status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: activate Dart native MCP `.10.9.4` task-tree-first from the clean closeout commit; no
+- next_after_clean_commit: activate Dart generated-binding/decoded-server leaf `.10.9.4.1` task-tree-first; no
   push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
@@ -39,11 +39,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 77/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; counter 78/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: Rust MCP 15 + 3 + 4 + admission 1, semantic Rust 1/1 in 80.73s, Dart 1/1, Julia 416/416 in
-  28.8s, CLI 66x2, RAM 67%, and Phase 0 1,031/1,031 in 650s pass; MCP 35/10/10/68 and ledger 2/5 + 2/6 exact.
-- blockers: none. next: activate Dart native MCP `.10.9.4` task-tree-first from clean HEAD.
+- canonical_state: Rust MCP 15 + 3 + 4 + admission 1, semantic Rust 1/1 in 82.76s, Dart 1/1, Julia 416/416 in
+  29.9s, CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 769s pass; MCP 35/10/10/68 and ledger 2/5 + 2/6 exact.
+- blockers: none. next: commit the complete Dart MCP plan `.10.9.4.0`, prove clean, then activate `.10.9.4.1`
+  task-tree-first from clean HEAD.

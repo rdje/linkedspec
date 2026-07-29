@@ -3432,7 +3432,9 @@ The dependency order is:
 | `.10.9.3.2` | Rust strict stdio framing, lexical preflight, emission, cancellation, logging, and cleanup | implemented; private/public adversarial proof; admission unchanged |
 | `.10.9.3.3` | Rust exact implementation/runtime admission | complete; one twelve-role external consumer; 2/5 implementations, 2/6 runtimes, rollout pending, 39 mutations |
 | `.10.9.3.4` | committed-owner no-change Rust closeout | complete from clean `13d9ce17`; focused and canonical recomposition green; parent `.10.9.3` closed |
-| `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
+| `.10.9.4.0` | behavior-free Dart native owner/security/wire audit and ADR `0059` | complete from clean `7f44d2a1`; exact `.1-.4` split; no implementation or ledger movement |
+| `.10.9.4.1-.10.9.4.4` | generated/decoded Dart server, strict stdio, admission, and closeout | pending in dependency order |
+| `.10.9.5` | native Julia MCP implementation and admission | pending after Dart parent closure |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
@@ -3479,6 +3481,55 @@ remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases with 68 mutatio
 remains 15 + 3 + 4 + 1, and the ledger remains 2/5 implementations + 2/6 runtimes with pending rollout and 39
 mutations. Focused and canonical recomposition pass, parent `.10.9.3` is closed, and Dart `.10.9.4` is next after
 the clean closeout commit.
+
+### Dart MCP plan (not implemented yet)
+
+Behavior-free `.10.9.4.0` and ADR `0059` now make the Dart handoff exact. The future package umbrella will expose
+one in-process `McpServer` around a caller-created immutable `SemanticIndex`. Four private parts under
+`dart/lib/src/mcp/` will separately own generated contract data, frozen schema/runtime behavior, the secure
+registry and decoded server, and strict stdio. The server may call only `index.capabilities` and
+`index.queryNeutral(request)`; it may not accept source text or paths, compile, execute, enable trace, retain a
+semantic cache, or add a primary-CLI mode.
+
+The plan itself is fully signed off without behavior change: exact MCP 35/10/10/68, byte-fresh Perl/Rust
+bindings, unchanged 2/5 implementation + 2/6 runtime admission, Dart semantic admission/analyzer, and canonical
+CI through Phase 0 1,031/1,031 all pass. Generated binding and decoded server `.10.9.4.1` is therefore the next
+clean-boundary owner.
+
+A repository-managed Dart 3.9.2 probe shows why the wire must be explicit: `jsonDecode` keeps the last value for
+both literal and escape-equivalent duplicate keys, while `jsonEncode` follows insertion order. `mcp_wire.dart`
+will therefore perform bounded strict UTF-8/JSON token preflight before decoding and recursively sort every map's
+string keys before encoding. Core `Random.secure()`, a started monotonic `Stopwatch`, base64url, and the existing
+package-internal SHA-256 owner satisfy handles, expiry, encoding, and authorization without a production package
+dependency.
+
+The planned host shape is shown only to explain ownership; these names do not ship until `.10.9.4.1-.2`:
+
+```dart
+final index = SemanticIndex.fromUtf8(
+  sourceBytes,
+  options: const SemanticIndexOptions(
+    logicalName: 'example.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+  ),
+);
+final server = McpServer();
+final handle = server.registerIndex(
+  index,
+  authorization,
+  options: const McpRegistrationOptions(),
+);
+
+await server.serveStdio(
+  input: stdin,
+  output: stdout,
+  authorizationContext: authorization,
+);
+```
+
+Generated binding/runtime/decoded dispatch belongs to `.10.9.4.1`; strict stdio/lifecycle to `.2`; only exact
+twelve-role admission `.3` may advance Dart to 3/5 implementations and 3/6 runtimes; unchanged-owner closeout
+`.4` then closes the parent. Until those leaves land, the ledger remains 2/5 + 2/6 with rollout pending.
 
 ### Using Rust decoded MCP dispatch
 

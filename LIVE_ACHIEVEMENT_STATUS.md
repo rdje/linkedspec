@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Dart native MCP seams frozen before code
+
+Behavior-free `FUTURE-PARITY-BACKLOG.10.9.4.0` and ADR `0059` freeze one in-process Dart server around the already-
+admitted immutable `SemanticIndex`. Generated binding/runtime, secure registry/decoded dispatch, strict stdio,
+exact admission, and no-change closeout are dependency-ordered under `.1-.4`. Stock Dart JSON duplicate and key-
+order behavior is explicitly closed by a strict raw-token preflight plus canonical recursive sorting; core secure
+entropy, monotonic time, base64url, and existing SHA-256 retain zero production dependencies.
+
+The normative transport and implementation ledger do not move: 35 canonical frames / 10 raw / 10 lifecycle / 68
+mutations, byte-fresh Perl 83,072 and Rust 82,886 bindings, 2/5 implementations + 2/6 runtimes, rollout pending,
+and 39 ledger mutations all pass unchanged. Dart's exact semantic admission and analyzer pass. There is still no
+Dart MCP production module, test, generated binding, executable/CLI mode, source bootstrap, SDK/network stack,
+semantic cache, aggregator, or legacy adapter; `.10.9.4.1` is the next clean-boundary owner after signoff/commit.
+
+Canonical CI passes Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, containment and
+moved-root proofs, both primary CLI environments at 66/66, RAM 68%, and Phase 0 1,031/1,031 in 769 seconds.
+Knowledge Map 745/6,019, mdBook, all six doctrines, memory, path, documentation-only diff, and exact
+13,456-KiB/one-empty-run cleanup pass. No push occurs at 78/300.
+
 ## 2026-07-29 — Rust native MCP implementation composition-closed
 
 `FUTURE-PARITY-BACKLOG.10.9.3.4` recomposes every committed neutral, Perl, and Rust MCP owner unchanged from clean

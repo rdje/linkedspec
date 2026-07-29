@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl and Rust parents closed at 2/5 implementations and 2/6 runtimes, remaining rows pending
+status: current; Perl/Rust parents closed at 2/5 + 2/6, Dart seams frozen, remaining rows pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -58,4 +58,9 @@ and admission owners unchanged. It deliberately adds no umbrella oracle. Canonic
 `.10.9.2` while the shared rollout row remains pending; Rust `.10.9.3` receives the same contract after the clean
 closeout commit. Rust decoded implementation `.10.9.3.1`, strict stdio `.10.9.3.2`, exact admission `.10.9.3.3`,
 and unchanged-owner closeout `.10.9.3.4` are complete. Parent `.10.9.3` is closed without ledger movement; Dart
-`.10.9.4` receives the same contract after the clean closeout commit.
+`.10.9.4.0` and ADR `0059` freeze its generated/runtime/server/wire/admission/closeout seams without status
+movement. Dart generated binding and decoded server `.10.9.4.1` are next; `.10.9.4.3` alone may advance the ledger
+to 3/5 implementations and 3/6 runtimes after exact behavior is complete.
+
+Related facts: [[dart-native-mcp-server-plan]], [[mcp-native-server-topology]], and
+[[mcp-2026-07-28-stdio-contract]].

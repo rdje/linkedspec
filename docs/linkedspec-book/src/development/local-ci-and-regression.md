@@ -60,7 +60,11 @@ governance test reject generated-binding, consumer, tracked-input, and validator
 
 No-change closeout `.10.9.3.4` runs that exact committed sequence again without a replacement implementation,
 fixture, or umbrella oracle. Focused and canonical gates pass unchanged, close parent `.10.9.3`, and preserve Dart
-`.10.9.4` as the next clean-boundary owner.
+`.10.9.4` as the next clean-boundary owner. Behavior-free Dart plan `.10.9.4.0` and ADR `0059` now freeze the next
+generated-binding -> decoded-server -> strict-stdio -> exact-admission -> no-change-closeout sequence. The current
+canonical command order and 2/5 + 2/6 ledger remain unchanged until `.10.9.4.1-.3` add and admit real owners. Its
+behavior-free signoff passes Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, CLI
+66x2, RAM 68%, and Phase 0 1,031/1,031 in 769 seconds.
 
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 

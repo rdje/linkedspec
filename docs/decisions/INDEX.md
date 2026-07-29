@@ -69,6 +69,7 @@ changed* lives in git (layer D), not here.
 | [0056](0056-typed-source-location-and-cursor-algebra.md) | Typed source-location algebra governs cursor, spans, and parser composition | 2026-07-29 | accepted direction; executable contract and implementation pending under `.14.1-.8` | architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability |
 | [0057](0057-perl-native-mcp-server-seams.md) | Perl MCP uses an embedded derived contract and an in-process native server | 2026-07-29 | accepted; implementation/admission/parent closeout complete under `.10.9.2` | architecture, mcp, perl, embedding, handles, authorization, json, stdio, security, portability |
 | [0058](0058-rust-native-mcp-server-seams.md) | Rust MCP uses a generated contract binding and an in-process runtime server | 2026-07-29 | accepted; `.10.9.3.1-.4` implementation, admission, and parent closeout complete at 2/5 + 2/6 | architecture, mcp, rust, embedding, handles, authorization, json, stdio, security, portability |
+| [0059](0059-dart-native-mcp-server-seams.md) | Dart MCP uses a generated contract part and an in-process native server | 2026-07-29 | accepted; behavior-free `.10.9.4.0` plan complete, implementation/admission pending under `.1-.4` | architecture, mcp, dart, embedding, handles, authorization, json, stdio, security, portability |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

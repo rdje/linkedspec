@@ -2,7 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral contract/canonical governance plus Perl and Rust parents complete at 2/5
-  implementations + 2/6 runtimes with rollout pending; Dart, Julia, Lua, and recurring closeout remain pending
+  implementations + 2/6 runtimes with rollout pending; Dart seams frozen by `0059`, implementation plus later
+  runtimes/closeout pending
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context
@@ -264,4 +265,5 @@ rejects omission and validator-before-materializer order without changing any no
 - Native per-backend MCP topology: ADR `0054`
 - Native in-memory embedding: ADR `0022`
 - Rust native implementation plan: ADR `0058`
+- Dart native implementation plan: ADR `0059`
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9.1.0-.10.9.7`)

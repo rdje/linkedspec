@@ -1,0 +1,53 @@
+---
+id: dart-native-mcp-server-plan
+title: Dart MCP will use one generated private-part library around native SemanticIndex values
+answers:
+  - "how will the Dart MCP server be implemented"
+  - "how do I register a Dart SemanticIndex with MCP"
+  - "which Dart files will own MCP"
+  - "will Dart MCP read contract files at runtime"
+  - "does Dart jsonDecode reject duplicate keys"
+  - "does Dart jsonEncode produce canonical JSON"
+  - "how will Dart MCP generate secure handles"
+  - "how will Dart MCP measure handle expiry"
+  - "will Dart MCP add a crypto or MCP SDK dependency"
+  - "how will Dart MCP serve stdio"
+  - "will Dart MCP add a CLI mode or executable"
+  - "what are the Dart MCP implementation leaves"
+  - "when will Dart MCP advance the implementation ledger"
+date: 2026-07-29
+status: accepted behavior-free plan; implementation pending under FUTURE-PARITY-BACKLOG.10.9.4.1-.4
+tags: [dart, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
+evidence: docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.9.4.0; dart/lib/src/semantic/semantic_index.dart; dart/lib/src/semantic/semantic_query.dart; dart/lib/src/semantic/sha256.dart; dart/lib/linkedspec_dart.dart; dart/pubspec.yaml; capability_conformance/mcp_semantic_transport_contract.json; capability_conformance/mcp_implementation_admission.json
+reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py && cd dart && bash ../tools/run_dart_project_data.sh test test/semantic_introspection_dart_admission_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
+---
+
+# Dart Native MCP Server Plan
+
+Behavior-free leaf `FUTURE-PARITY-BACKLOG.10.9.4.0` and ADR `0059` freeze Dart as the third native MCP
+implementation. One `McpServer` will retain caller-created immutable Dart `SemanticIndex` objects in the same
+process, register 43-character opaque handles against out-of-band authorization and lowering-only policy, call
+only `capabilities` and `queryNeutral`, and expose decoded dispatch plus caller-owned stdio streams. It will not
+load paths, compile source, execute parsers, enable trace, cache semantic responses, add a primary-CLI mode, or use
+an MCP/network SDK.
+
+Four private-part owners will live under `dart/lib/src/mcp/`: generated `mcp_contract.dart`, frozen
+`mcp_contract_runtime.dart`, public-host `mcp_server.dart`, and strict `mcp_wire.dart`. A new shared-bundle consumer
+will generate the data-only Dart part after neutral materialization/validation and before all server tests. Runtime
+contract behavior remains filesystem-free. The package umbrella will export only the supported server and value
+types; deterministic entropy/time/failure/emission seams remain in an unexported package-internal test harness.
+
+The repository-managed Dart 3.9.2 probe establishes that stock `jsonDecode` overwrites both literal and escape-
+equivalent duplicate keys and that `jsonEncode` preserves insertion order. Consequently the wire owner must scan
+strict UTF-8 JSON tokens before decoding and recursively sort map keys before encoding. Core `Random.secure()` is
+documented cryptographic and fail-closed, core `Stopwatch` is monotonic, core base64url yields the required handle
+encoding, and the existing package-internal SHA-256 implementation can digest authorization bytes. No production
+dependency is needed.
+
+Work remains omission-safe: `.10.9.4.1` owns generated binding/runtime/registry/decoded dispatch, `.2` owns strict
+stdio and lifecycle, `.3` alone may advance Dart to 3/5 implementations and 3/6 runtimes while rollout stays
+pending, and `.4` recomposes committed owners and closes the Dart parent before Julia starts.
+
+Related facts: [[dart-semantic-query-public-api]], [[dart-semantic-introspection-admission]],
+[[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],
+[[mcp-implementation-admission-ledger]], and [[rust-native-mcp-server-plan]].

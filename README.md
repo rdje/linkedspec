@@ -1062,7 +1062,11 @@ content migration exists yet.
   consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, and rejects 39 ledger/source/role/order
   mutations while shared rollout remains pending. No-change closeout `.10.9.3.4` recomposes those committed
   owners unchanged, closes Rust parent `.10.9.3`, and hands the exact contract to Dart `.10.9.4` after the clean
-  closeout commit.
+  closeout commit. Behavior-free Dart audit `.10.9.4.0` and ADR `0059` now freeze a generated private-part binding,
+  same-process `McpServer`, secure registry/decoded dispatch, strict duplicate-safe/canonical stdio, exact
+  admission, and no-change closeout under `.1-.4`. Stock Dart JSON duplicate/key-order gaps require explicit raw-
+  token preflight and recursive sorting; core secure entropy, monotonic time, base64url, and existing SHA-256 keep
+  the package free of production dependencies. Implementation has not started and the ledger remains 2/5 + 2/6.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1499,8 +1503,9 @@ content migration exists yet.
   silent EOF, fixed diagnostics, and release on read/write/flush failure with private/public adversarial proof.
   Exact twelve-role Rust admission `.10.9.3.3` now advances only Rust to 2/5 implementations + 2/6 runtimes,
   rejects 39 mutations, and preserves pending shared rollout. No-change closeout `.10.9.3.4` is complete with
-  focused/canonical recomposition green; Rust parent `.10.9.3` is closed and Dart `.10.9.4` follows after the clean
-  closeout commit.
+  focused/canonical recomposition green; Rust parent `.10.9.3` is closed. Behavior-free Dart `.10.9.4.0` and ADR
+  `0059` now freeze the native generated/server/wire/security seams and `.1-.4` order without behavior or ledger
+  movement; generated binding and decoded server `.10.9.4.1` follow only after the clean planning commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

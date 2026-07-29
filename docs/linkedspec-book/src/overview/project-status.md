@@ -688,8 +688,12 @@ Three backbone items tracked major structural modernization — all done:
   cancellation through flush, and exact EOF/I/O cleanup. Exact twelve-role admission `.10.9.3.3` now advances
   only Rust to 2/5 implementations + 2/6 runtimes, keeps shared rollout pending, and rejects 39 mutations;
   no-change `.10.9.3.4` recomposes the committed owners under focused/canonical proof and closes parent `.10.9.3`.
-  Dart `.10.9.4` is next after the clean closeout commit. Any future aggregator or legacy adapter is separately
-  owned after `.10.10` and may only route/translate transport.
+  Behavior-free Dart `.10.9.4.0` and ADR `0059` now freeze generated private-part binding/runtime, a same-process
+  secure decoded server, strict duplicate-safe/canonical stdio, exact admission, and no-change closeout under
+  `.1-.4` without implementation or ledger movement. Any future aggregator or legacy adapter is separately owned
+  after `.10.10` and may only route/translate transport. The behavior-free plan passes exact focused proof and
+  canonical CI through Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, both 66-case
+  CLI environments, and Phase 0 1,031/1,031 in 769 seconds; `.10.9.4.1` is the next clean-boundary owner.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

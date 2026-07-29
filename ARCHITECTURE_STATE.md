@@ -5,6 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Dart native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.4.0` and ADR
+  `0059` place one public in-process `McpServer` around caller-owned immutable Dart `SemanticIndex` values. Four
+  private parts will own generated contract data, frozen schema/runtime behavior, the secure decoded server, and
+  strict stdio. SDK 3.9.2 probing proves stock JSON overwrites literal and escape-equivalent duplicates and emits
+  insertion order, so a bounded token preflight and recursive canonical key sort are mandatory. Core
+  `Random.secure()`, monotonic `Stopwatch`, base64url, and the existing package-internal SHA-256 owner avoid a new
+  production dependency. Implementation is split into decoded server `.1`, stdio `.2`, exact 3/5 + 3/6 admission
+  `.3`, and no-change closeout `.4`; the current ledger remains 2/5 + 2/6 with rollout pending. No executable,
+  primary-CLI mode, source bootstrap, SDK/network transport, semantic cache, aggregator, legacy adapter, or
+  production behavior is added by the plan. Focused proof and canonical CI pass unchanged: Rust semantic 1/1 in
+  82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, containment/moved-root, CLI 66x2, RAM 68%, and Phase 0
+  1,031/1,031 in 769 seconds. Knowledge Map 745/6,019, mdBook, doctrines, and exact 13,456-KiB/one-empty-run
+  cleanup pass; `.10.9.4.1` is the next clean-boundary owner.
 - `2026-07-29` Rust native MCP composition closeout: `FUTURE-PARITY-BACKLOG.10.9.3.4` starts from clean exact-
   admission commit `13d9ce17` and adds no production, test, fixture, contract, ledger, API, executable, aggregator,
   or legacy owner. The committed neutral materializer/validator, byte-fresh 83,072-byte Perl and 82,886-byte Rust

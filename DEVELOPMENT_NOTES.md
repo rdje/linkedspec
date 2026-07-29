@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.0` — Dart's stock codec is a value codec, not the MCP wire owner):
+  A repository-managed SDK 3.9.2 probe decodes both `{"a":1,"a":2}` and `{"a":1,"\\u0061":2}` as `{"a":2}`
+  and encodes an insertion-ordered map without sorting. Dart must therefore scan raw UTF-8 JSON before
+  `jsonDecode` and recursively sort string keys before `jsonEncode`; decoded dispatch still uses the generated
+  schema runtime. This is the same contract boundary as Perl/Rust, expressed natively rather than delegated to an
+  SDK.
+
+  ADR `0059` freezes four private-part owners, a small public same-process `McpServer`, 256-bit `Random.secure()`
+  handles, monotonic `Stopwatch` expiry, digest-only authorization, bounded capacity, lowering-only policy,
+  caller-owned `Stream<List<int>>`/borrowed `IOSink` stdio, deterministic unexported test seams, and `.1-.4`
+  implementation/admission/closeout order. Core base64url plus existing SHA-256 keep `pubspec.yaml` free of
+  production dependencies. Existing MCP 35/10/10/68, Perl/Rust binding freshness, ledger 2/5 + 2/6 pending/39,
+  Dart semantic admission 1/1, and analyzer proof pass unchanged; the plan adds no behavior. Canonical CI passes
+  Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, containment/moved-root, CLI 66x2,
+  RAM 68%, and Phase 0 1,031/1,031 in 769 seconds. Knowledge Map 745/6,019, mdBook, all doctrines, memory, path,
+  and exact 13,456-KiB/one-empty-run cleanup pass before the clean `.10.9.4.1` handoff.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.4` — closeout should prove composition, not create another owner):
   The correct Rust parent closeout is deliberately documentation-only. Re-running the neutral materializer and
   independent validator, both binding generators, the committed Perl/Rust binding/decoded/stdio/admission proofs,

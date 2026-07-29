@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; exact neutral contract plus Perl and Rust parents closed at 2/5 implementations + 2/6
-  runtimes with rollout pending; Dart, Julia, Lua, and recurring closeout remain pending
+  runtimes with rollout pending; Dart seams frozen by `0059`, implementation plus Julia/Lua/closeout pending
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context
@@ -72,3 +72,4 @@ decision and split without adding transport behavior.
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9-.10.9.7`)
 - Modern MCP protocol/stdio policy: ADR `0055`
 - Rust native implementation plan: ADR `0058`
+- Dart native implementation plan: ADR `0059`

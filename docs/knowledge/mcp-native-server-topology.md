@@ -12,7 +12,7 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract canonical; Perl and Rust parents closed at 2/5 implementations + 2/6 runtimes
+status: exact neutral contract canonical; Perl/Rust parents closed at 2/5 + 2/6; Dart seams frozen before code
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
@@ -21,6 +21,7 @@ evidence_update_2026_07_29_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 independe
 evidence_update_2026_07_29_contract_closeout: "FUTURE-PARITY-BACKLOG.10.9.1.3 composition-closes the shared contract by requiring ordered materialization and independent validation in canonical CI; Perl implementation .10.9.2 is next."
 evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 closes the first native implementation/runtime at 1/5 + 1/6. Rust .10.9.3.1-.3 implement its generated binding, frozen runtime, secure registry, decoded public server, strict borrowed-stream stdio, and exact twelve-role admission; the ledger is 2/5 + 2/6 while shared rollout remains pending."
 evidence_update_2026_07_29_rust_closeout: "Rust .10.9.3.4 recomposes every committed neutral, Perl, and Rust MCP owner unchanged under focused and canonical proof, closes parent .10.9.3 without status movement, and hands the exact contract to Dart .10.9.4 after the clean closeout commit."
+evidence_update_2026_07_29_dart_plan: "Dart .10.9.4.0 and ADR 0059 freeze a generated private-part binding/runtime, same-process native server, secure handles/authorization/expiry, strict duplicate-safe canonical stdio, exact admission, and no-change closeout under .1-.4 without behavior or 2/5 + 2/6 ledger movement."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 
@@ -37,5 +38,5 @@ A one-endpoint aggregator is deferred outside `FUTURE-PARITY-BACKLOG.10.9`. If s
 task-tree-owned after public closeout, it can only route requests to the native servers and cannot become a
 semantic owner or cache.
 
-Related facts: [[mcp-2026-07-28-stdio-contract]], [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
+Related facts: [[mcp-2026-07-28-stdio-contract]], [[dart-native-mcp-server-plan]], [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]].
