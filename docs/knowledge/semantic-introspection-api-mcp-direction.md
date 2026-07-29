@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP machine contract encoded and implementations pending
+status: native six-runtime rollout admitted; MCP machine contract independently validated and implementations pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -23,7 +23,8 @@ evidence_update_2026_07_21_perl_admission: "FUTURE-PARITY-BACKLOG.10.3.6 compose
 evidence_update_2026_07_29_mcp_topology: "ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0 clarify the transport topology after all native admissions: one exact MCP contract, five native server implementations, and six runtime admissions because one Lua source runs unchanged on PUC Lua and LuaJIT. A future aggregator is outside .10.9 and may only route."
 evidence_update_2026_07_29_mcp_protocol: "ADR 0055 and .10.9.1.0 select stable modern MCP 2026-07-28 over stdio: mandatory server/discover, per-request metadata, explicit handles, two tools, no legacy initialize/session/ping, exact policy/error/canonical/shutdown boundaries, and separately owned future compatibility."
 evidence_update_2026_07_29_mcp_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes one neutral digest-pinned schema/payload/corpus/canonical-frame bundle and deterministic materializer without adding a native server or changing any native semantic response."
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_07_29_mcp_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 adds an independent exact-schema/frame/raw/lifecycle/handle/policy validator and rejects 68 named mutations without a server or semantic-behavior change."
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 Deep semantic introspection is a strong fit for LinkedSpec because the project already constructs and relates
@@ -61,8 +62,8 @@ capabilities, discovery is mandatory, and the two tools consume out-of-band regi
 initialization, protocol sessions, and ping are absent; policy can only lower native ceilings, and successful
 semantic payload bytes remain direct/MCP identical.
 
-Machine leaf `.10.9.1.1` now encodes those rules once in the neutral `linkedspec-mcp-transport-v1` artifact bundle.
-It does not implement a server: the independent validator remains `.10.9.1.2`, contract composition remains
+Machine leaves `.10.9.1.1-.2` now encode and independently validate those rules once in the neutral
+`linkedspec-mcp-transport-v1` artifact bundle. They do not implement a server: contract composition remains
 `.10.9.1.3`, and native implementations remain `.10.9.2-.6` before recurring six-runtime admission `.10.9.7`.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are

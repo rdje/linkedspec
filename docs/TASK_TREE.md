@@ -526,6 +526,12 @@ semantic payloads, 35 canonical LF frames, ten raw inputs, ten lifecycle cases, 
 All five native identities, indistinguishable handle failures, lowering-policy outcomes, and direct/native payload
 identity are fixture-owned without a backend server. Independent validator/mutations `.10.9.1.2` follow next.
 
+Index note 2026-07-29: independent-validation leaf `FUTURE-PARITY-BACKLOG.10.9.1.2` adds one repository-routed,
+dependency-free checker that never imports or executes the materializer. It interprets the exact JSON Schema
+2020-12 keyword profile, proves 28 accepted plus seven deliberately rejected frames, ten raw-input outcomes, ten
+lifecycle transitions, native/restricted payload identity, handle/policy state, and rejects 68 named mutations
+across 14 categories. No server or semantic behavior changes; composition/parent closeout `.10.9.1.3` follows.
+
 Index note 2026-07-09: `FUTURE-PARITY-BACKLOG.0` created the active future-backlog tree for
 the seven deferred/future lanes surfaced after `SPEC-LANG-REFERENCE.8`. ADR `0021` adopts
 the backend rollout order Dart -> Julia -> Lua, all targeting full parity with Perl5 and

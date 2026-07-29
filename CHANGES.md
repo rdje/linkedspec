@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.2 — independently validate MCP contract
+
+Added a repository-routed, dependency-free checker for `linkedspec-mcp-transport-v1`. It does not import or execute
+the deterministic materializer. A strict source pass rejects duplicate keys, BOMs, invalid UTF-8, non-finite JSON,
+unsupported schema keywords, unresolved refs, invalid schema metadata, and topology drift. The checker implements
+the complete JSON Schema 2020-12 keyword profile used by the contract and independently classifies 28 accepted and
+seven intentionally rejected canonical frames.
+
+Added `validator_cases.json` with exact frame classifications, schema definition/top-envelope inventories,
+raw/handle/policy/lifecycle inventories, independent artifact digest anchors, and 68 named mutations across 14
+categories. Independent proof reconstructs every literal/generated frame, embedded tool schema, semantic response,
+and tool error; preserves three native response digests and the one exact restricted-capability projection; checks
+ten raw-input outcomes, four indistinguishable handle states, four policy dispatch cases, and ten explicit lifecycle
+transitions; and requires every mutation to fail at its named invariant, including validator self-wiring.
+
+Extended the machine manifest and materializer digest inventory to pin the validator fixture and checker. The tool
+storage census advances from 20 to 21 Python entrypoints while Python temporary owners remain three and shell
+allocators remain 13. No MCP server, SDK/network dependency, native semantic API, parser/compiler/runtime, primary
+CLI, response digest, semantic rollout, or admission behavior changes; recurring composition remains `.10.9.1.3`.
+
+Focused proof passes the independent validator over 28 accepted/seven rejected frames, ten raw/ten lifecycle/four
+handle/four policy cases, all 68 mutations, exact separate materialization, Python syntax, mdBook, Knowledge Map
+739/5,943, task metadata, all six doctrines, semantic governance 6/20/105 at rollout 7/9 and admission 6/6,
+project-data classification at 1,689 files / 377,476 lines / 28 mutations, and tool locality at 3/13/21. Canonical
+CI passes Perl semantic admission 18, Rust 1/1 in 82.63 seconds, Dart 1/1, Julia 416/416 in 29.7 seconds, process
+containment, moved-root proof, primary CLI 66x2, RAM at 53%, and Phase 0 1,031/1,031 in 642 seconds. Exact cleanup
+removes only the verified ignored 13,208-KiB rendered book and one proven-empty managed-run directory. Push cadence advances
+to 65/300; no push.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.1 — encode exact MCP machine contract
 
 Added `linkedspec-mcp-transport-v1` as one backend-neutral, root-relative artifact bundle. Its normative manifest

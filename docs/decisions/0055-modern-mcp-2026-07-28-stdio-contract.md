@@ -1,8 +1,8 @@
 # ADR 0055: LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio
 
 - Date: 2026-07-29
-- Status: accepted; machine contract encoded under `.10.9.1.1`; independent validation and implementations pending
-  under `FUTURE-PARITY-BACKLOG.10.9.1.2-.7`
+- Status: accepted; machine contract and independent validation encoded under `.10.9.1.1-.2`; composition and
+  implementations pending under `FUTURE-PARITY-BACKLOG.10.9.1.3-.7`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context
@@ -231,12 +231,14 @@ contract parent is dependency-ordered:
 4. `.10.9.2-.6` implement Perl, Rust, Dart, Julia, and one shared Lua source; and
 5. `.10.9.7` admits Perl/Rust/Dart/Julia/PUC Lua/LuaJIT and closes `.10.9`.
 
-Leaf `.10.9.1.1` now realizes item 1 without a backend server. The normative root is
+Leaves `.10.9.1.1-.2` now realize items 1 and 2 without a backend server. The normative root is
 `capability_conformance/mcp_semantic_transport_contract.json`; it digest-pins one closed JSON Schema 2020-12,
 four semantic payloads, a 35-frame canonical JSONL stream, ten raw-byte adversarial inputs, ten lifecycle cases,
-and the repository-routed deterministic materializer. Three payloads are exact admitted native-oracle responses;
-the fourth is the sole schema-preserving restricted-capability projection. Independent semantic validation and
-mutation testing remain item 2 rather than being hidden in the materializer.
+the repository-routed deterministic materializer, a separate validator fixture, and the independent checker.
+Three payloads are exact admitted native-oracle responses; the fourth is the sole schema-preserving restricted-
+capability projection. The checker never imports or executes the materializer: it independently interprets the
+exact JSON Schema 2020-12 keyword profile, classifies 28 accepted and seven intentionally rejected frames, models
+raw errors and lifecycle/handle/policy state, and rejects 68 named omission/alteration/self-wiring mutations.
 
 ## Consequences
 

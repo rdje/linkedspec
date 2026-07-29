@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.2` — independent validation without a package oracle): The routed
+  Python 3.14 environment contains no `jsonschema` distribution. Adding a mutable global or network-fetched
+  dependency would make contract verification host-dependent, so the checker implements precisely the JSON Schema
+  2020-12 keywords present in the neutral bundle. Its meta-pass rejects unknown keywords, unresolved local refs,
+  invalid types/bounds/patterns/URI format, and topology drift; its runtime handles local refs, oneOf/allOf,
+  closed/open objects, property-name checks, prefix/items arrays, scalar bounds, and UTF-8 byte annotations.
+
+  Independence is executable, not rhetorical. The checker never imports or executes the materializer and uses a
+  separately written frame-provenance path, strict JSON loader, canonical encoder, raw-byte classifier, semantic
+  payload/projection oracle, and lifecycle model. The manifest pins both programs and the validator fixture; the
+  validator fixture separately pins the five pre-existing normative artifacts, so changing manifest hashes alone
+  cannot bless coordinated drift.
+
+  The 68 explicit mutations span 14 categories: artifact, authority, contract, envelope, error, frame, handle,
+  identity, lifecycle, payload, policy, raw, schema, and validator wiring. Every row names its expected invariant.
+  During self-test, handle-pattern weakening was correctly caught first by embedded tools/list schema provenance,
+  demonstrating why diagnostic order is itself reviewed rather than accepting any generic failure.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.1` — digest identity and semantic validation are separate proof
   layers): A deterministic materializer must know how normative sources compose into canonical bytes. That makes
   it the right owner for duplicate-key rejection, schema-reference closure, exact source response hashes,

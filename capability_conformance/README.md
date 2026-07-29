@@ -8,18 +8,22 @@ admitted backends. It complements, rather than replaces, the executable 105-fixt
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the
 closed JSON Schema 2020-12 envelope/tool definitions, four semantic payloads, 35 canonical LF-framed JSON-RPC
 messages, ten exact raw-byte inputs, ten lifecycle cases, four indistinguishable handle states, four deployment-
-policy cases, and the deterministic materializer itself. The five native server identities share these exact
+policy cases, the deterministic materializer, the independent validator, and its 68-case mutation corpus. The five native server identities share these exact
 files; PUC Lua and LuaJIT consume the same Lua identity and implementation. Run:
 
 ```bash
 bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
 ```
 
 The materializer rejects duplicate source keys, unresolved schema references, topology/count drift, native
 semantic-response digest drift, text/structured-content mismatch, handle/policy dispatch drift, noncanonical or
 oversized frames, stale generated JSONL, and any artifact digest change. `--write` is the explicit regeneration
-mode; `--print-digests` reports reviewable bootstrap/update hashes. It is intentionally not an MCP server and not
-the independent omission/mutation validator owned by `FUTURE-PARITY-BACKLOG.10.9.1.2`.
+mode; `--print-digests` reports reviewable bootstrap/update hashes. The separate checker never imports or executes
+the materializer. It implements the exact JSON Schema 2020-12 keyword profile, independently proves 28 accepted
+plus seven deliberately rejected frames, raw-input error ownership, native/restricted payload identity, handle/
+policy outcomes, and ten lifecycle transitions, then rejects 68 named mutations across every artifact and its own
+wiring. Neither executable is an MCP server.
 
 `semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
 `0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and

@@ -79,7 +79,9 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `capability_conformance/mcp_semantic_transport/semantic_payloads.json` | Four canonical semantic payloads: three exact admitted native responses and the one allowed restricted-capability projection. |
 | `capability_conformance/mcp_semantic_transport/corpus.json` | Ordered positive, negative, handle, policy, raw-byte, and lifecycle recipes. |
 | `capability_conformance/mcp_semantic_transport/canonical_frames.jsonl` | 35 compact UTF-8 JSON-RPC frames, each followed by exactly one LF. |
-| `tools/materialize_mcp_semantic_transport_contract.py` | Deterministic materializer and byte/digest self-check; not a server or independent mutation checker. |
+| `capability_conformance/mcp_semantic_transport/validator_cases.json` | Independent 28-accepted/7-rejected frame classification, exact scenario inventories, dual digest anchors, and 68 named mutations across 14 categories. |
+| `tools/materialize_mcp_semantic_transport_contract.py` | Deterministic materializer and byte/digest self-check; not a server or independent checker. |
+| `tools/check_mcp_semantic_transport_contract.py` | Dependency-free independent schema/provenance/raw/state/mutation checker; never imports or executes the materializer. |
 
 The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
 four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
@@ -87,6 +89,7 @@ four deployment-policy cases. All five server names occur in canonical responses
 
 ```bash
 bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
 ```
 
 Deliberate regeneration is explicit and reviewable:
@@ -97,8 +100,12 @@ bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_c
 
 Ordinary verification never rewrites the JSONL. The materializer proves source-key uniqueness, schema-reference
 closure, exact semantic-oracle digests, mirrored text/structured content, handle/policy dispatch boundaries,
-canonical LF framing, size/count invariants, and all artifact hashes. The independently implemented semantic and
-omission/mutation checker remains the next contract leaf, `.10.9.1.2`.
+canonical LF framing, size/count invariants, and all artifact hashes. The separate checker implements every JSON
+Schema 2020-12 keyword used by this bundle—including local references, exact alternatives, closed objects,
+property-name and scalar/array bounds, regular-expression constraints, and URI format—then validates the schema
+document itself. It independently reconstructs every frame, verifies the exact semantic payload projection,
+classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
+at their intended invariant. This is still conformance code, not an MCP server.
 
 ### Discovery and request metadata
 
@@ -3301,7 +3308,8 @@ The dependency order is:
 | `.10.9.0` | one-contract/five-implementation/six-runtime MCP topology | complete; behavior-free architecture record |
 | `.10.9.1.0` | select the official protocol and exact transport policy | complete; ADR `0055` selects modern MCP `2026-07-28`, stdio, discovery, explicit handles, and no legacy lifecycle |
 | `.10.9.1.1` | encode the exact MCP schema/payload/corpus/canonical-byte bundle | complete |
-| `.10.9.1.2-.3` | independently validate/mutate, then compose the exact MCP contract | pending |
+| `.10.9.1.2` | independently validate and mutate the exact MCP contract | complete; 28 accepted plus seven rejected frames, ten raw inputs, ten lifecycle cases, and 68 rejected mutations |
+| `.10.9.1.3` | compose recurring governance and close the exact MCP contract | pending |
 | `.10.9.2-.10.9.5` | native Perl, Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |

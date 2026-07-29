@@ -23,14 +23,26 @@
     "semantic_payloads": "capability_conformance/mcp_semantic_transport/semantic_payloads.json",
     "corpus": "capability_conformance/mcp_semantic_transport/corpus.json",
     "canonical_frames": "capability_conformance/mcp_semantic_transport/canonical_frames.jsonl",
-    "materializer": "tools/materialize_mcp_semantic_transport_contract.py"
+    "materializer": "tools/materialize_mcp_semantic_transport_contract.py",
+    "validator_cases": "capability_conformance/mcp_semantic_transport/validator_cases.json",
+    "validator": "tools/check_mcp_semantic_transport_contract.py"
   },
   "artifact_sha256": {
     "schema": "c312b3e6c3533d17416d638f4e5c3ac299221cf972aeedcfe9bab73a79a42b99",
     "semantic_payloads": "d942fe3264c2510a722a76d8897713ded74ec179c01a9017c104f63981be3504",
     "corpus": "345a069c48b27bf2038fa13a30a81d3552ac97c90b4e06c7b29b0bb726479401",
     "canonical_frames": "3dd66a9aca6db0332687a287921e4f3ebf8684dac1d89f98c5cfd36abc21d517",
-    "materializer": "2997c37d7168cdde4898b6126f3c3226c16bd4ada3cc085277a3d439671afb67"
+    "materializer": "3df7e7e69713be05779d9202f1c5a14db01a823707ecf59a1b64d1d17dd0b607",
+    "validator_cases": "386d2eedae8e66c8629f889fd8ea9ab8fee9018bd16d64331819aa05d8f6df35",
+    "validator": "fdab504830731425d6e8f96df8e8816a9cd1644775c5edfc1df547ba1d24a536"
+  },
+  "validation_contract": {
+    "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.2",
+    "schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+    "accepted_canonical_frames": 28,
+    "rejected_canonical_frames": 7,
+    "mutation_cases": 68,
+    "implementation": "independent_no_materializer_import_or_execution"
   },
   "semantic_contract": {
     "path": "capability_conformance/semantic_introspection_contract.json",

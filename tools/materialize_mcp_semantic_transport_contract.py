@@ -24,8 +24,10 @@ SCHEMA_PATH = ARTIFACT_ROOT / "schema.json"
 PAYLOADS_PATH = ARTIFACT_ROOT / "semantic_payloads.json"
 CORPUS_PATH = ARTIFACT_ROOT / "corpus.json"
 CANONICAL_PATH = ARTIFACT_ROOT / "canonical_frames.jsonl"
+VALIDATION_PATH = ARTIFACT_ROOT / "validator_cases.json"
 SEMANTIC_CONTRACT_PATH = ROOT / "capability_conformance" / "semantic_introspection_contract.json"
 MATERIALIZER_PATH = ROOT / "tools" / "materialize_mcp_semantic_transport_contract.py"
+VALIDATOR_PATH = ROOT / "tools" / "check_mcp_semantic_transport_contract.py"
 
 CONTRACT_ID = "linkedspec-mcp-transport-v1"
 PROTOCOL_VERSION = "2026-07-28"
@@ -385,6 +387,8 @@ def artifact_digests(stream: bytes) -> dict[str, str]:
         "corpus": sha256_file(CORPUS_PATH),
         "canonical_frames": sha256_bytes(stream),
         "materializer": sha256_file(MATERIALIZER_PATH),
+        "validator_cases": sha256_file(VALIDATION_PATH),
+        "validator": sha256_file(VALIDATOR_PATH),
     }
 
 

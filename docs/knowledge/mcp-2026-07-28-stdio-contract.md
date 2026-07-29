@@ -22,11 +22,12 @@ answers:
   - how do I regenerate or verify the MCP canonical frames
   - are the native LinkedSpec MCP servers implemented yet
 date: 2026-07-29
-status: machine contract encoded; independent validator and native implementations pending
+status: machine contract and independent validator encoded; native implementations pending
 tags: [mcp, json-rpc, stdio, semantic-api, security, transport, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown."
 evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes the policy once as a digest-pinned neutral manifest, closed JSON Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte inputs, ten lifecycle cases, and one repository-routed deterministic materializer; no native MCP server exists yet."
-reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && rg -n '2026-07-28|server/discover|linkedspec-mcp-transport-v1|linkedspec_mcp_handle_unavailable|linkedspec_mcp_policy_denied' capability_conformance/mcp_semantic_transport_contract.json docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
+evidence_update_2026_07_29_independent_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 adds a no-import/no-execution validator over the exact JSON Schema 2020-12 profile, 28 accepted and seven rejected frames, ten raw inputs, ten lifecycle cases, native/restricted payload identity, handle/policy state, and 68 rejected mutations; no server behavior exists yet."
+reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
 LinkedSpec contract `linkedspec-mcp-transport-v1` targets only stable MCP `2026-07-28` over stdio. This is the
@@ -53,12 +54,13 @@ server identity, so direct/MCP identity means the embedded semantic payload byte
 only; optional sanitized logs use stderr. EOF is graceful shutdown and clears the handle registry.
 
 The machine contract now lives at `capability_conformance/mcp_semantic_transport_contract.json`. It pins its
-schema, semantic payloads, corpus, generated canonical JSONL, and materializer by SHA-256. The corpus contains 35
+schema, semantic payloads, corpus, generated canonical JSONL, materializer, validator cases, and validator by SHA-256. The corpus contains 35
 ordered frames, ten exact raw-byte cases, ten lifecycle cases, all five native identities, four deliberately
 indistinguishable handle states, and four lowering-policy cases. Verify its exact bytes with
 `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py`; use `--write` only
-when deliberately regenerating the JSONL. The independent mutation checker and every native server remain later
-owned work.
+when deliberately regenerating the JSONL. Run
+`bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
+28-positive/7-negative schema and 68-mutation proof. Every native server remains later owned work.
 
 Related facts: [[mcp-native-server-topology]], [[semantic-introspection-api-mcp-direction]],
 [[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]].
