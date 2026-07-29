@@ -3427,7 +3427,9 @@ The dependency order is:
 | `.10.9.2.2` | strict Perl stdio framing, token preflight, emission, cancellation, logging, and cleanup | complete with canonical signoff |
 | `.10.9.2.3` | exact Perl implementation/runtime admission and shared ledger | complete; 1/5 implementations, 1/6 runtimes, rollout pending, 28 mutations, canonical signoff |
 | `.10.9.2.4` | committed-owner no-change Perl closeout | complete from clean `28f84826`; focused and canonical recomposition green; parent `.10.9.2` closed |
-| `.10.9.3-.10.9.5` | native Rust, Dart, and Julia MCP implementations | pending |
+| `.10.9.3.0` | behavior-free Rust native owner/security audit and ADR `0058` | complete from clean `4473a812`; focused/canonical signoff; no implementation behavior |
+| `.10.9.3.1-.10.9.3.4` | Rust generated binding/decoded server, strict stdio, exact admission, and closeout | pending |
+| `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
@@ -3456,3 +3458,11 @@ transport digest; shared rollout remains pending. The admission has canonical si
 `.10.9.2.4` is complete from clean `28f84826` with focused and canonical proof and no replacement behavior;
 parent `.10.9.2` is closed before the other four native servers and recurring/public MCP rollout under
 `.10.9.3-.10.10`.
+
+Rust does not expose an MCP API yet. ADR `0058` fixes the future native shape so implementation cannot drift into a
+second semantic owner: `linkedspec-runtime::McpServer` will retain a caller-created `Arc<SemanticIndex>` and call
+only `capabilities()` or `query_neutral()`; compile-time generated contract data, registry/decoded dispatch, and
+strict wire remain separate owners. Production handles use 256 operating-system random bits and monotonic expiry;
+strict token preflight rejects duplicate keys and numeric/depth drift before `serde_json`; canonical output uses a
+sorted `Value`; and unwind panics become sanitized internal errors. No standalone server binary, primary-CLI mode,
+source/path bootstrap, SDK/network/async runtime, semantic cache, aggregator, or legacy protocol is authorized.

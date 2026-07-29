@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.0 — plan the Rust native MCP server
+
+Audited the admitted Rust semantic authority before implementation. `linkedspec-runtime` already owns opaque
+immutable `SemanticIndex`, exact `capabilities()` and transport-facing `query_neutral()`, typed errors, canonical
+`serde_json::to_value` -> `to_vec` response identity, and the native embedding boundary. Focused proof passes
+semantic foundation 6/6, query 5/5, and the twelve-role Rust semantic admission 1/1 in 82.34 seconds. No Rust MCP
+source, SDK, async/network transport, server executable, or primary-CLI surface exists.
+
+Added ADR `0058` and a Knowledge Map plan card. The implementation will share verified neutral-bundle construction
+with the existing byte-identical Perl generator, emit a filesystem-free Rust binding, retain caller-owned
+`Arc<SemanticIndex>` values, use direct locked `getrandom 0.4.2` OS entropy and server-local monotonic time, close
+`serde_json` duplicate/depth/number gaps with a bounded strict tokenizer, preserve canonical semantic bytes, and
+sanitize native unwind panics. `.1-.4` separately own decoded server, strict stdio, exact Rust admission/ledger
+advance, and no-change closeout. This slice changes no production/API/dependency/test/contract/status behavior.
+
+The audit also repaired stale broad MCP protocol/topology Knowledge Map statuses that still said every server was
+pending after Perl closed. The dedicated admission checker guards the ledger card but not those broad status
+lines; public no-drift `.10.10` now explicitly owns a deterministic guard across both classes of card.
+
+Focused signoff preserves MCP 35/10/10/68, the 83,072-byte Perl binding, Files=3 Tests=22, admission ledger 1/5
+implementations + 1/6 runtimes with rollout pending and 28 mutations, Files=1 Tests=13 admission, capability
+80/0/0, and semantic governance 6/20/105 at 7/9 + 6/6. Canonical CI passes Rust 1/1 in 79.08 seconds, Dart 1/1,
+Julia 416/416 in 28.3 seconds, containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 629 seconds.
+Knowledge Map 744/5,999, mdBook, six doctrines, storage 1,703/381,460/28, path 14/5, tool locality, and whitespace
+pass. Exact cleanup removes only the verified 13,352-KiB rendered book and one empty managed run. Generated Rust
+binding and secure decoded dispatch `.10.9.3.1` follow only after the clean plan commit; no push occurs at 73/300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.4 — close the Perl MCP implementation
 
 Activated the no-change Perl MCP closeout from clean exact-admission commit `28f84826` and recomposed every

@@ -3,7 +3,8 @@
 - Date: 2026-07-29
 - Status: accepted; neutral contract/canonical governance complete under `.10.9.1`; Perl implementation
   `.10.9.2.1-.2`, exact admission `.10.9.2.3`, and no-change closeout `.10.9.2.4` complete at 1/5 implementations
-  + 1/6 runtimes with canonical signoff; parent `.10.9.2` closed; remaining admissions pending under `.10.9.3-.7`
+  + 1/6 runtimes with canonical signoff; parent `.10.9.2` closed; Rust behavior-free plan fixed and complete under
+  ADR `0058`/`.10.9.3.0`; remaining implementation/admission pending under `.10.9.3.1-.7`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context
@@ -264,4 +265,5 @@ rejects omission and validator-before-materializer order without changing any no
 - Semantic model and thin adapter: ADR `0049`
 - Native per-backend MCP topology: ADR `0054`
 - Native in-memory embedding: ADR `0022`
+- Rust native implementation plan: ADR `0058`
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9.1.0-.10.9.7`)

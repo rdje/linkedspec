@@ -3,7 +3,8 @@
 - Date: 2026-07-29
 - Status: accepted; exact neutral contract closed under `.10.9.1`; Perl implementation `.10.9.2.1-.2` complete;
   exact Perl admission `.10.9.2.3` and no-change closeout `.10.9.2.4` complete at 1/5 implementations + 1/6
-  runtimes with canonical signoff; parent `.10.9.2` closed; remaining admissions `.10.9.3-.7`
+  runtimes with canonical signoff; parent `.10.9.2` closed; Rust behavior-free plan fixed and complete under ADR
+  `0058`/`.10.9.3.0`; remaining implementation/admission `.10.9.3.1-.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context
@@ -72,3 +73,4 @@ decision and split without adding transport behavior.
 - Exact user-observable parity: ADR `0023`
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9-.10.9.7`)
 - Modern MCP protocol/stdio policy: ADR `0055`
+- Rust native implementation plan: ADR `0058`

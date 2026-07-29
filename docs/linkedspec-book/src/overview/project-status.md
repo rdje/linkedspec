@@ -661,7 +661,7 @@ Three backbone items tracked major structural modernization — all done:
   or promotion change; rollout/admission stay 4/9 and 3/6, and exact admission `.10.6.7` remains pending.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR. All six native runtime targets are
   now admitted and recurring proof is complete at rollout 7/9, native admission 6/6, and 105 rejected mutations.
-  ADR `0054` makes pending MCP work one exact contract with native Perl, Rust, Dart, Julia, and Lua server
+  ADR `0054` makes MCP one exact contract with native Perl, Rust, Dart, Julia, and Lua server
   implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. ADR `0055` selects stable
   modern MCP `2026-07-28` over stdio, with per-request metadata, mandatory discovery, explicit handles, two
   read-only tools, and no legacy initialization/session/ping. MCP owns no semantic or filesystem behavior.
@@ -679,7 +679,11 @@ Three backbone items tracked major structural modernization — all done:
   consumer and a separate implementation/admission ledger at 1/5 implementations + 1/6 runtimes with rollout
   pending and 28 rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4`
   is complete from clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`
-  before later native servers `.10.9.3-.7`;
+  before later native servers `.10.9.3-.7`. Completed behavior-free Rust preflight `.10.9.3.0` and ADR `0058` freeze a
+  generated filesystem-free binding, in-process `linkedspec-runtime` `Arc<SemanticIndex>` registry, strict bounded
+  wire, OS entropy/monotonic expiry, panic sanitation, exact `.1-.4` implementation/admission order, and no current
+  Rust module/API/dependency/fixture/status behavior; focused and canonical signoff are green, and generated
+  binding plus decoded server `.10.9.3.1` follow the clean plan commit;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

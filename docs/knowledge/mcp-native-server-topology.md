@@ -12,13 +12,14 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract composition-closed and canonical; five native implementations pending
+status: exact neutral contract canonical; Perl implementation closed, Rust behavior-free plan complete and implementation pending
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
 evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 provides the one shared digest-pinned neutral manifest/schema/payload/corpus/JSONL bundle and materializer before any of the five native implementations."
 evidence_update_2026_07_29_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 independently validates the same exact bundle and rejects 68 named mutations without implementing or importing a native server."
 evidence_update_2026_07_29_contract_closeout: "FUTURE-PARITY-BACKLOG.10.9.1.3 composition-closes the shared contract by requiring ordered materialization and independent validation in canonical CI; Perl implementation .10.9.2 is next."
+evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 closes the first native implementation/runtime at 1/5 + 1/6. Rust .10.9.3.0 and ADR 0058 freeze the second backend's behavior-free plan; shared rollout remains pending."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 

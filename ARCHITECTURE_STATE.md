@@ -5,6 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Rust native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR
+  `0058` place the public in-process server in `linkedspec-runtime` around caller-owned `Arc<SemanticIndex>` values.
+  Shared verified-bundle generation will keep the existing Perl binding byte-identical and add a filesystem-free
+  Rust binding; private contract-runtime and wire owners retain exact schema and strict byte authority. Direct
+  locked `getrandom 0.4.2` supplies 256 OS-random bits, a private fixed encoder yields 43-character unpadded
+  base64url, server-local `Instant` supplies monotonic expiry, SHA-256 stores authorization digests, and a bounded
+  `Read` tokenizer closes `serde_json` duplicate/depth/number gaps before value construction. Native calls use
+  `capabilities()`/`query_neutral()` only and sanitize unwind panics. No SDK, async/network dependency, executable,
+  primary-CLI mode, source bootstrap, semantic cache, aggregator, legacy adapter, module, API, fixture, dependency,
+  or behavior is added by the plan. Implementation is split into binding/decoded server `.1`, strict stdio `.2`,
+  exact 2/5 + 2/6 admission `.3`, and no-change closeout `.4`. The plan leaf is complete with focused/canonical
+  signoff; `.10.9.3.1` is the next clean-boundary owner and the ledger remains 1/5 + 1/6 pending until `.3`.
 - `2026-07-29` Perl native MCP committed-owner closeout: no-change `FUTURE-PARITY-BACKLOG.10.9.2.4` is complete
   from clean exact-admission commit `28f84826`. It recomposes the unchanged neutral contract, derived binding,
   binding/decoded/stdio server proofs, admission ledger, and twelve-role consumer rather than adding an umbrella

@@ -1227,7 +1227,9 @@ For conformance or backend rollout work, run the neutral materializer/validator 
 `tools/check_mcp_implementation_admission.py` and `t/mcp_server_perl_admission.t`. Those admission owners verify
 status, topology, direct-native identity, negative authority, and canonical ordering; they do not define a second
 wire contract or alter normal embedding behavior. Completed Perl parent closeout `.10.9.2.4` recomposes those same
-committed owners without changing this API; other native server implementations remain separately owned.
+committed owners without changing this API. Rust behavior-free plan `.10.9.3.0` places its future server beside
+the native `SemanticIndex` in `linkedspec-runtime`, with no standalone executable, source bootstrap, or current API;
+other native server implementations remain separately owned.
 
 Typical shape:
 

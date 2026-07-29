@@ -1051,7 +1051,10 @@ content migration exists yet.
   mutations lock status/topology/authority/canonical order without changing the transport digest. Focused proof is
   green and canonical signoff is complete. No-change `.10.9.2.4` completed from clean `28f84826`; focused and
   canonical committed-owner recomposition pass, Perl parent `.10.9.2` is closed, and Rust `.10.9.3` follows after
-  the clean closeout commit. There is no
+  the clean closeout commit. Behavior-free Rust audit `.10.9.3.0` and ADR `0058` now freeze a generated
+  filesystem-free binding, in-process `linkedspec-runtime` server around caller-owned `Arc<SemanticIndex>`, strict
+  bounded wire, OS entropy/monotonic expiry, panic sanitation, exact `.1-.4` implementation/admission order, and
+  no standalone MCP executable or primary-CLI mode; implementation remains pending. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1480,7 +1483,9 @@ content migration exists yet.
   composes twelve existing roles and records Perl complete at 1/5 implementations + 1/6 runtimes while shared
   rollout stays pending; its 28-mutation checker, focused proof, and canonical signoff are green. No-change
   committed-owner closeout `.10.9.2.4` completed from clean `28f84826`: unchanged-owner recomposition and
-  canonical signoff are green, parent `.10.9.2` is closed, and Rust `.10.9.3` follows after the clean commit.
+  canonical signoff are green, and parent `.10.9.2` is closed. Rust audit/plan `.10.9.3.0` is complete from clean
+  `4473a812` with focused and canonical signoff; it changes no module/API/dependency/test/status behavior, and
+  generated binding plus secure decoded dispatch `.10.9.3.1` follow only after the clean plan commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

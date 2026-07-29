@@ -49,6 +49,11 @@ Perl parent closeout `.10.9.2.4` deliberately reruns this committed chain unchan
 replacement oracle: parent completion is the conjunction of the neutral, derived-binding, server, ledger, and
 admission owners already shown above. Shared rollout remains pending while the other runtime rows qualify.
 
+Completed Rust preflight `.10.9.3.0` adds no gate command yet. It freezes the future canonical order: neutral materialize /
+independent validation, shared verified-bundle construction, byte-fresh Perl binding, byte-fresh Rust binding,
+Rust private contract/decoded/stdio proof, implementation-ledger validation, then the exact Rust twelve-role
+consumer. Each command is added only by its owning `.1-.3` implementation leaf; `.0` changes documentation only.
+
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text

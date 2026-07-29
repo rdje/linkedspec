@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.0` — a native Rust MCP server is a library object, not a second CLI):
+  Rust's admitted `SemanticIndex` already exposes the exact two semantic operations the transport needs. The
+  correct server owner is therefore `linkedspec-runtime`, retaining caller-created indexes through `Arc`; adding
+  MCP to the parser-oriented `linkedspec-rust` command or teaching a new binary to load/compile source would break
+  ADRs `0022`, `0049`, and `0054`. Stdio is a borrowed host stream adapter over the same server, not index bootstrap.
+
+  Rust can reuse existing locked primitives without importing a mutable MCP SDK or async stack. `sha2` is already
+  direct; `getrandom 0.4.2` is already present in the repository-local lock/cache and becomes the explicit OS-CSPRNG
+  dependency. A fixed 32-byte base64url encoder is smaller and more auditable than adding a general dependency.
+  `std::time::Instant` provides server-local monotonic time. `BTreeMap` gives bounded deterministic registry
+  ownership, and a private injected unit-test constructor can exercise collisions, expiry, and capacity without
+  exposing production dependency injection.
+
+  `serde_json` remains suitable for values and canonical output only after `Serialize -> Value -> bytes`; its
+  default map is ordered. It is not a strict admission owner: the installed 1.0.150 `Value` visitor repeatedly
+  calls `Map::insert`, so a later duplicate overwrites an earlier key. Rust must therefore preflight decoded key
+  identity, strings/surrogates, exact numbers and request-id tokens, root kind, size, and depth before constructing
+  `Value`, just as Perl closes its own decoder gap for a different host library.
+
+  A stale-current-state audit found `mcp-2026-07-28-stdio-contract` and `mcp-native-server-topology` still claiming
+  all native implementations were pending after Perl `.10.9.2` closed. The cause is coverage topology: the
+  admission checker owns the separate ledger/card markers, not these broader status lines. This leaf repairs the
+  facts, and `.10.10` now explicitly requires deterministic status markers for both broad cards and the ledger.
+
+  The behavior-free boundary is independently proved rather than inferred from the diff. Focused Rust foundation
+  6/6, query 5/5, and native admission 1/1 in 82.34 seconds pass; MCP remains 35/10/10/68 with byte-fresh Perl
+  binding, server 22, and admission 13. Canonical CI passes Rust 1/1 in 79.08 seconds, Dart 1/1, Julia 416/416 in
+  28.3 seconds, containment/moved-root, both 66-case CLI environments, RAM 61%, and Phase 0 1,031/1,031 in 629
+  seconds. The next leaf may therefore add the generated binding and decoded server from a clean commit without
+  conflating architectural selection with executable behavior.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.4` — close a backend from committed authorities, not a replacement
   test): The Perl MCP parent has independent owners for normative transport, derived binding, decoded/wire server,
   and implementation/runtime admission. Its closeout therefore adds no umbrella executable or alternative oracle.

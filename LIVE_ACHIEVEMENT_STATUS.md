@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Rust native MCP implementation plan complete
+
+Behavior-free `FUTURE-PARITY-BACKLOG.10.9.3.0` is task-tree-first from clean Perl closeout `4473a812`. ADR `0058`
+maps the exact `linkedspec-runtime` `SemanticIndex::capabilities()`/`query_neutral()` authority into a future public
+in-process `McpServer`, generated filesystem-free contract binding, secure `Arc<SemanticIndex>` registry, strict
+stdio owner, and exact Rust admission without adding current code or behavior.
+
+Focused foundation 6/6, query 5/5, and twelve-role native admission 1/1 in 82.34 seconds pass. The plan selects
+already-locked OS entropy, server-local monotonic time, fixed authorization-digest comparison, bounded strict JSON
+preflight before `serde_json`, canonical `Value` encoding, unwind sanitation, and no SDK/async/network/executable/
+primary-CLI/source-bootstrap/cache/aggregator/legacy authority. `.1-.4` own implementation through closeout.
+
+The same audit repaired stale broad MCP Knowledge Map status lines and assigns their durable current-state guard
+to `.10.10`; the implementation ledger itself remains correctly unchanged at 1/5 + 1/6 with rollout pending.
+
+Focused MCP proof remains 35/10/10/68, byte-fresh binding 83,072 bytes, server 22 tests, and admission 13 tests;
+capability remains 80/0/0 and semantic governance remains 6/20/105 at 7/9 + 6/6. Canonical CI passes Rust 1/1 in
+79.08 seconds, Dart 1/1, Julia 416/416 in 28.3 seconds, containment/moved-root, CLI 66x2, RAM 61%, and Phase 0
+1,031/1,031 in 629 seconds. Knowledge Map is 744/5,999; all six doctrines, mdBook, locality, path, and whitespace
+pass. Exact cleanup removes only the verified 13,352-KiB book plus one empty managed run. `.10.9.3.1` follows from
+the clean plan commit; no push occurs at 73/300.
+
 ## 2026-07-29 — Perl native MCP implementation and parent closed
 
 No-change `FUTURE-PARITY-BACKLOG.10.9.2.4` completed task-tree-first from clean exact-admission commit `28f84826`.

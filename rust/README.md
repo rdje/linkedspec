@@ -192,6 +192,19 @@ remain compatible `Result<_, String>` adapters over the same path; successful JS
        JSON output
 ```
 
+### Planned native MCP server (not yet implemented)
+
+ADR `0058` and `FUTURE-PARITY-BACKLOG.10.9.3.0` freeze the Rust MCP implementation boundary before code. The
+future public `McpServer` belongs in `linkedspec-runtime`, where it can retain caller-created immutable
+`Arc<SemanticIndex>` values and call only `capabilities()` plus `query_neutral()`. A generated filesystem-free
+binding will consume the one neutral MCP contract; private registry/contract/wire owners will provide OS-random
+handles, monotonic expiry, lowering-only policy, strict bounded JSON-line input, canonical output, cancellation,
+and cleanup.
+
+This is a plan, not a current API. There is no Rust MCP module, executable, CLI mode, SDK/network transport, source
+loader, semantic cache, aggregator, or legacy adapter today. Implementation/admission remains
+`FUTURE-PARITY-BACKLOG.10.9.3.1-.4`.
+
 ## Lifecycle Loop
 
 For non-repeating rules: `I → LS → match → (acode dispatch) → LE → E`

@@ -60,6 +60,10 @@ No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` runs this exact committed ch
 umbrella proof. Its focused and canonical recomposition are green from clean `28f84826`, and parent `.10.9.2` is
 closed. The ledger correctly stays at Perl 1/5 implementations + 1/6 runtimes with shared rollout pending.
 
+Rust behavior-free audit `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR `0058` freeze a generated binding plus native
+decoded/wire/admission sequence without altering this contract or ledger. Rust remains pending until `.10.9.3.3`
+passes the unchanged inventories and advances only its implementation/runtime rows.
+
 `semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
 `0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and
 `linkedspec-semantic-query-v1`: exact record/relation/fact vocabularies, staged payload/job/result records,
