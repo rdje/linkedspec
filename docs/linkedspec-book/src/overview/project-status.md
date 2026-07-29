@@ -684,8 +684,9 @@ Three backbone items tracked major structural modernization — all done:
   Rust binding, frozen schema runtime, and public decoded `linkedspec-runtime::McpServer` over caller-owned
   `Arc<SemanticIndex>` values. Its OS entropy, digest-only authorization, monotonic expiry, bounded capacity,
   lowering-only policy, exact native payloads, panic sanitation, cancellation, and release boundaries pass focused
-  corpus proof. Strict stdio `.10.9.3.2` and exact admission `.10.9.3.3` remain pending, so the ledger correctly
-  stays at 1/5 implementations + 1/6 runtimes;
+  corpus proof. Strict stdio `.10.9.3.2` adds bounded duplicate-safe borrowed-stream framing, canonical emission,
+  cancellation through flush, and exact EOF/I/O cleanup. Exact twelve-role admission `.10.9.3.3` now advances
+  only Rust to 2/5 implementations + 2/6 runtimes, keeps shared rollout pending, and rejects 39 mutations;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

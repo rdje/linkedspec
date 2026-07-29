@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.3` — admission should compose public behavior without widening the
+  server API): Most Rust admission roles are observable through the public external-crate surface, but
+  cancellation after response preparation and injected native panics deliberately use private deterministic
+  seams. Exporting those hooks solely for admission would weaken the production boundary. Canonical CI therefore
+  orders private `mcp_` unit proof before the one public twelve-role admission consumer; the consumer statically
+  requires the exact unignored private proofs and dynamically composes every public contract outcome.
+
+  The implementation ledger remains separate from the normative transport contract. This leaf changes only the
+  Rust implementation/runtime status rows, four exact production source paths, one exact consumer path, and the
+  ordered proof chain. Perl remains complete, Dart/Julia/Lua and both Lua runtime legs remain pending, and shared
+  rollout cannot advance before all six runtime admissions. The transport digest and every canonical fixture stay
+  unchanged.
+
+  The checker treats source, proof, and command order as admission data rather than documentation. Rust source
+  authority is fenced against filesystem/process/network/trace/parser/bootstrap/cache behavior; the primary CLI
+  remains MCP-free. Rust role declaration, one-time ordered invocation, exact test identity, non-ignored status,
+  completion assertion, source/consumer paths, and CI registration/order are mutation-tested. Together with the
+  existing Perl mutations, the checker now rejects 39 coordinated failure modes.
+
+  Focused proof passes rustfmt, the exact Rust admission 1/1, Perl admission Files=1 Tests=13, ledger 2/5 + 2/6
+  rollout pending/39 mutations, CI shell syntax, and target-local strict clippy. Blanket strict clippy still fails
+  only on established unrelated runtime/parser lint categories; the target-local invocation exempts exactly those
+  categories and retains `-D warnings` for this admission consumer.
+
+  Canonical CI independently rebuilds and passes Rust MCP 15 + 3 + 4 + 1, Perl server Files=3 Tests=22 plus
+  admission Files=1 Tests=13, Rust semantic admission 1/1 in 80.52 seconds, Dart 1/1, Julia 416/416 in 28.5
+  seconds, containment/moved-root, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 648 seconds. Knowledge Map
+  744/6,006, mdBook, six doctrines, storage 1,713/386,137/28, path 14/5, memory, formatting, and whitespace pass.
+  Cleanup is limited to the verified 13,416-KiB book and one empty managed run.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.2` — strict transport must preserve lexical evidence and emission
   state): `serde_json::Value` is the correct frozen value/schema carrier but cannot report duplicate source keys or
   distinguish integer tokens from `1.0`/`1e0` after decoding. The private wire scanner therefore validates UTF-8,

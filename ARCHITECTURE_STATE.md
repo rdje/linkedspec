@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Rust native MCP exact admission: `FUTURE-PARITY-BACKLOG.10.9.3.3` composes the existing public
+  binding/runtime/server/wire through one omission-sensitive twelve-role external consumer while ordered private
+  unit proof retains preparation-time cancellation and injected-panic seams. Only Rust's implementation and
+  runtime rows advance: current state is Perl + Rust at 2/5 implementations and 2/6 runtimes, all other rows and
+  shared rollout pending. The checker rejects 39 status/topology/source/role/authority/CI-order mutations. The
+  normative contract/digest, semantic authority, production API, executable/CLI, source bootstrap, SDK/network,
+  cache, aggregator, and legacy boundaries do not move; no-change `.10.9.3.4` remains the next clean-boundary leaf.
 - `2026-07-29` Rust native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR
   `0058` place the public in-process server in `linkedspec-runtime` around caller-owned `Arc<SemanticIndex>` values.
   Shared verified-bundle generation will keep the existing Perl binding byte-identical and add a filesystem-free

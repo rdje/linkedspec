@@ -218,8 +218,9 @@ before emission suppresses the frame while cancellation after emission cannot re
 Normal operation and clean EOF are silent. EOF, read failure, write failure, or flush failure shuts the server
 down and releases every retained `Arc`; an optional separate log receives only
 `linkedspec_mcp_io_failure\n`, and the caller receives the typed sanitized error. Safe Rust's exclusive mutable
-borrows prevent the same writer from serving as protocol output and log. Exact Rust admission remains
-`.10.9.3.3`; therefore the shared ledger is still 1/5 implementations and 1/6 runtimes. There is no MCP
+borrows prevent the same writer from serving as protocol output and log. Exact twelve-role Rust admission
+`.10.9.3.3` now composes the public behavior and advances the shared ledger to 2/5 implementations and 2/6
+runtimes while rollout remains pending; the checker rejects 39 status/source/role/order mutations. There is no MCP
 executable, primary-CLI mode, SDK/network transport, source bootstrap, semantic cache, aggregator, or legacy
 adapter.
 

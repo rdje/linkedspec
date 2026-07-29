@@ -38,8 +38,9 @@ Perl module, after which focused binding, decoded-server, and adversarial stdio 
 all ten raw and ten lifecycle cases, exact frame/depth/id limits, duplicate/unicode/number mutants, canonical
 emission, cancellation through flush, continuation after rejected frames, EOF release, I/O failures, and sanitized
 logging. The admission checker then verifies a separate five-implementation/six-runtime status ledger, unchanged
-transport digest, one exact twelve-role consumer, production authority fences, and shared rollout still pending;
-the consumer finally proves Perl direct-native/MCP identity and every neutral outcome class. The recurring tool-
+transport digest, one exact twelve-role consumer per admitted runtime, production authority fences, and shared
+rollout still pending. The Perl and Rust consumers each prove direct-native/MCP identity and every neutral outcome
+class. The recurring tool-
 governance test rejects missing owners and invalid ordering. This keeps a backend-derived module from blessing or
 hiding stale normative bytes and keeps a premature status promotion from masquerading as conformance. The focused
 suites use only caller-owned in-memory handles; they read no source path and change no native semantic/primary-CLI
@@ -49,13 +50,13 @@ Perl parent closeout `.10.9.2.4` deliberately reruns this committed chain unchan
 replacement oracle: parent completion is the conjunction of the neutral, derived-binding, server, ledger, and
 admission owners already shown above. Shared rollout remains pending while the other runtime rows qualify.
 
-Completed Rust preflight `.10.9.3.0` froze the dependency order. Implemented decoded-server leaf `.10.9.3.1` now
-adds the shared verified-bundle consumer and byte-fresh Rust binding after neutral materialization, independent
-validation, and the unchanged byte-fresh Perl binding. Canonical CI then runs Rust frozen-runtime/registry unit
-proof and the public decoded-dispatch corpus test before validating the still-unchanged admission ledger. Strict
-stdio proof is added only by `.10.9.3.2`; the exact Rust twelve-role consumer and 2/5 + 2/6 ledger advance remain
-`.10.9.3.3`. The tool-governance test rejects omission of either generated binding and validator/binding order
-drift.
+Completed Rust preflight `.10.9.3.0` froze the dependency order. Decoded-server leaf `.10.9.3.1` adds the shared
+verified-bundle consumer and byte-fresh Rust binding after neutral materialization, independent validation, and
+the unchanged byte-fresh Perl binding. Strict stdio `.10.9.3.2` adds the bounded hostile-byte and lifecycle proof.
+Exact admission `.10.9.3.3` then runs private MCP unit proof, decoded and stdio public proof, and one twelve-role
+external Rust consumer before the ledger checker; only Rust advances to 2/5 implementations + 2/6 runtimes and
+shared rollout stays pending. Perl admission still runs after the checker. The 39-mutation checker and tool-
+governance test reject generated-binding, consumer, tracked-input, and validator/proof-order drift.
 
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 

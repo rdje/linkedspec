@@ -9501,7 +9501,7 @@ _Marker-switch statements outside case/default branches differ across backends_
 _LinkedSpec MCP v1 is modern MCP 2026-07-28 over stdio_
 
 - **answers:** which MCP protocol version does LinkedSpec target | is LinkedSpec MCP modern or legacy | does LinkedSpec MCP implement initialize or notifications initialized | does LinkedSpec MCP implement ping | does LinkedSpec MCP support legacy MCP clients | does LinkedSpec MCP use server discover | what request metadata does LinkedSpec MCP require | what transport does LinkedSpec MCP use | what methods does the LinkedSpec MCP server implement | how are LinkedSpec MCP handles generated and expired | how are MCP handle errors reported | how does MCP deployment policy lower semantic limits | what does direct native MCP response identity mean | can LinkedSpec MCP write logs to stdout | how does LinkedSpec MCP shut down | where is the LinkedSpec MCP machine contract | how many canonical MCP fixtures exist | how do I regenerate or verify the MCP canonical frames | are the native LinkedSpec MCP servers implemented yet
-- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl closed/admitted, Rust decoded/stdio implemented but admission pending
+- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl closed and Rust admitted at 2/5 implementations + 2/6 runtimes
 - **evidence:** `ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py`
 - **source:** [`docs/knowledge/mcp-2026-07-28-stdio-contract.md`](docs/knowledge/mcp-2026-07-28-stdio-contract.md)
@@ -9510,14 +9510,14 @@ _LinkedSpec MCP v1 is modern MCP 2026-07-28 over stdio_
 _MCP implementation and runtime admission ledger_
 
 - **answers:** Where are MCP implementation and runtime admission statuses recorded? | How many LinkedSpec MCP server implementations exist? | Why are there five MCP implementations but six runtime admissions? | Is Perl admitted for MCP? | Is thin MCP transport rollout complete? | Does backend admission change the normative MCP transport digest? | What roles does an MCP admission consumer prove? | How is premature MCP admission detected? | What authority is forbidden to an MCP server implementation?
-- **date:** 2026-07-29 · **status:** current; Perl implementation parent closed, Rust decoded/stdio implemented but unadmitted, remaining rows pending
+- **date:** 2026-07-29 · **status:** current; Perl parent closed, Rust admitted at 2/5 implementations and 2/6 runtimes, remaining rows pending
 - **source:** [`docs/knowledge/mcp-implementation-admission-ledger.md`](docs/knowledge/mcp-implementation-admission-ledger.md)
 
 ### mcp-native-server-topology
 _One MCP contract has five native server implementations and six runtime admissions_
 
 - **answers:** should LinkedSpec use one MCP server for every backend | does each LinkedSpec backend get its own MCP server | how many LinkedSpec MCP server implementations are planned | how many LinkedSpec MCP runtime admissions are planned | do PUC Lua and LuaJIT share one MCP server implementation | what does MCP uniformity mean across LinkedSpec backends | can a LinkedSpec MCP server compile or load a specification | is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9 | what task implements LinkedSpec MCP transport
-- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl closed/admitted, Rust decoded/stdio implemented but admission pending
+- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl closed and Rust admitted at 2/5 implementations + 2/6 runtimes
 - **evidence:** `Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md`
 - **source:** [`docs/knowledge/mcp-native-server-topology.md`](docs/knowledge/mcp-native-server-topology.md)
@@ -11304,7 +11304,7 @@ _Canonical self-hosted rule labels are physical-line-bound and share one five-ru
 _Deep semantic introspection belongs to one backend-neutral native API with MCP as thin transport_
 
 - **answers:** does deep semantic introspection make sense for LinkedSpec | should LinkedSpec expose semantic introspection through MCP | where should LinkedSpec semantic introspection semantics live | should MCP own LinkedSpec semantic behavior | what should a LinkedSpec semantic introspection API expose | how should semantic introspection stay identical across backends | what task owns semantic introspection and MCP design | what did FUTURE-PARITY-BACKLOG.10.0 capture
-- **date:** 2026-07-20 · **status:** native six-runtime rollout admitted; MCP canonical, Perl closed/admitted, Rust decoded/stdio implemented but admission pending
+- **date:** 2026-07-20 · **status:** native six-runtime rollout admitted; MCP canonical, Perl closed and Rust admitted at 2/5 + 2/6
 - **evidence:** `Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - **source:** [`docs/knowledge/semantic-introspection-api-mcp-direction.md`](docs/knowledge/semantic-introspection-api-mcp-direction.md)

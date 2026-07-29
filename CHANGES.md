@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.3 — admit the Rust MCP implementation and runtime
+
+Added one exact external-crate Rust admission consumer over the already-implemented `McpServer`. Its twelve
+omission-sensitive roles compose the frozen contract inventory, all canonical/static dispatch cases, direct
+native capabilities/query identity, every raw/lifecycle/handle/policy outcome, cancellation through emission,
+shutdown and I/O cleanup, hostile-output privacy, and the production authority fences. Private preparation-time
+cancellation and injected-panic seams remain owned by the ordered focused unit proof; admission does not widen the
+production API merely to expose test hooks.
+
+The separate implementation/admission ledger now marks only Rust's implementation and Rust runtime rows
+complete. Exact state advances from Perl-only 1/5 + 1/6 to Perl-and-Rust 2/5 implementations + 2/6 runtimes;
+Dart, Julia, Lua, PUC Lua, and LuaJIT remain pending and shared `thin_mcp_transport` rollout remains pending.
+The normative MCP transport manifest, schema, payloads, corpus, canonical frames, and root digest are unchanged.
+
+The admission checker now validates both language-specific consumers, the four Rust production owners, exact
+Rust source and consumer paths, the Rust-primary-CLI exclusion, and canonical ordering through generated Rust
+binding, unit/decoded/stdio/admission proof, checker, and Perl admission. It rejects 39 status, topology, source,
+role, ignored-test, tracked-input, authority, and command-order mutations.
+
+Focused proof passes the Rust admission 1/1, Perl admission Files=1 Tests=13, ledger 2/5 + 2/6 rollout pending/39
+mutations, rustfmt, CI shell syntax, and task-local strict clippy. The broad strict-clippy command still reaches
+only pre-existing runtime/parser lint debt outside this leaf; the target-local check exempts those established
+library categories and fails on every new admission-consumer diagnostic.
+
+Full canonical CI passes Rust MCP unit 15 + decoded 3 + stdio 4 + admission 1, Perl MCP Files=3 Tests=22 plus
+admission Files=1 Tests=13, Rust semantic admission 1/1 in 80.52 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds,
+containment/moved-root proof, both primary CLI matrices 66/66, RAM 62%, and Phase 0 1,031/1,031 in 648 seconds.
+Knowledge Map 744/6,006, mdBook, all six doctrines, storage 1,713/386,137/28, path 14/5, formatting, memory, and
+whitespace pass. Exact cleanup removes only the verified 13,416-KiB rendered book and one proven-empty managed
+run. No server behavior, executable, primary-CLI mode, source bootstrap, SDK/network/async transport, semantic
+cache/authority, aggregator, or legacy adapter is added. No-change `.10.9.3.4` follows after the clean commit; no
+push occurs at 76/300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.2 — implement Rust MCP strict stdio
 
 Added public `McpServer::serve_stdio` over caller-borrowed `Read`/`Write` values and a private `mcp_wire.rs`

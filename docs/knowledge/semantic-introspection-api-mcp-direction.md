@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP canonical, Perl closed/admitted, Rust decoded/stdio implemented but admission pending
+status: native six-runtime rollout admitted; MCP canonical, Perl closed and Rust admitted at 2/5 + 2/6
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -28,6 +28,7 @@ evidence_update_2026_07_29_perl_mcp: "FUTURE-PARITY-BACKLOG.10.9.2 implements an
 evidence_update_2026_07_29_rust_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.3.0 and ADR 0058 behavior-freeze a generated filesystem-free Rust binding, in-process linkedspec-runtime server, strict wire, OS entropy, monotonic expiry, panic sanitation, exact admission, and no CLI/executable/SDK/aggregator authority."
 evidence_update_2026_07_29_rust_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.3.1 implements the generated binding, frozen schema runtime, secure in-process registry, and decoded public Rust server without stdio, admission, semantic ownership, or ledger movement."
 evidence_update_2026_07_29_rust_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.3.2 implements strict bounded duplicate-safe stdio, canonical LF emission, cancellation through flush, fixed diagnostics, and EOF/read/write/flush release over borrowed streams without admission or ledger movement."
+evidence_update_2026_07_29_rust_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.3.3 composes one exact twelve-role external Rust consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, leaves shared rollout pending, and rejects 39 status/source/role/authority/order mutations without changing the transport digest or server behavior."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

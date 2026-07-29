@@ -1058,8 +1058,9 @@ content migration exists yet.
   registry, lowering-only policy, panic sanitation, and exact decoded dispatch pass focused and canonical proof
   without moving the 1/5 + 1/6 admission ledger. Rust strict stdio `.10.9.3.2` now adds bounded duplicate-safe
   JSON lines, canonical LF output, pre-emission cancellation, sanitized optional logging, and exact EOF/read/
-  write/flush cleanup over borrowed streams. Exact Rust admission `.10.9.3.3` remains next, so the ledger does not
-  move yet.
+  write/flush cleanup over borrowed streams. Exact Rust admission `.10.9.3.3` now composes one twelve-role public
+  consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, and rejects 39 ledger/source/role/order
+  mutations while shared rollout remains pending. No-change closeout `.10.9.3.4` follows from the clean commit.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1494,7 +1495,8 @@ content migration exists yet.
   `.10.9.3.1` completes the generated binding and public decoded Rust server. Strict borrowed-stream stdio
   `.10.9.3.2` now completes duplicate-safe lexical preflight, canonical emission, cancellation-through-flush,
   silent EOF, fixed diagnostics, and release on read/write/flush failure with private/public adversarial proof.
-  Exact Rust admission and shared rollout remain pending.
+  Exact twelve-role Rust admission `.10.9.3.3` now advances only Rust to 2/5 implementations + 2/6 runtimes,
+  rejects 39 mutations, and preserves pending shared rollout; no-change closeout `.10.9.3.4` follows.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

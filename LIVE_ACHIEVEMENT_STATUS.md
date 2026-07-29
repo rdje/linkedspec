@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Rust native MCP implementation and runtime admitted
+
+`FUTURE-PARITY-BACKLOG.10.9.3.3` adds one exact external-crate twelve-role consumer over the committed Rust MCP
+owners. It composes all frozen canonical/raw/lifecycle/handle/policy inventories, exact direct-native semantic
+payload identity, cancellation and shutdown/I/O behavior, privacy, release, and authority fences. Ordered private
+unit proof retains the otherwise unobservable response-preparation cancellation and panic-injection seams, so no
+production API is widened for test access.
+
+Only Rust's implementation and runtime rows advance. The exact ledger is now Perl + Rust at 2/5 implementations
+and 2/6 runtimes, with Dart, Julia, Lua, PUC Lua, and LuaJIT pending and shared rollout pending. The independent
+checker rejects 39 mutations across status, topology, sources, consumers, roles, ignored proof, authority, tracked
+inputs, and canonical command order. The normative transport contract and digest do not change.
+
+Focused proof passes Rust admission 1/1, Perl admission Files=1 Tests=13, ledger 2/5 + 2/6 pending/39 mutations,
+rustfmt, CI syntax, and target-local strict clippy. Canonical CI passes Rust MCP 15 + 3 + 4 + 1, Perl Files=3
+Tests=22 plus admission Files=1 Tests=13, Rust semantic 1/1 in 80.52 seconds, Dart 1/1, Julia 416/416 in 28.5
+seconds, containment/moved-root, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 648 seconds. Knowledge Map
+744/6,006, mdBook, six doctrines, storage 1,713/386,137/28, path 14/5, memory, formatting, and whitespace pass.
+Exact cleanup removes the 13,416-KiB rendered book and one empty managed run. No server behavior, executable/CLI,
+source bootstrap, SDK/network/async transport, semantic cache, aggregator, or legacy adapter is added; `.10.9.3.4`
+follows after the clean commit with no push at 76/300.
+
 ## 2026-07-29 — Rust native MCP strict stdio implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.3.2` completes task-tree-first from clean decoded-server commit `11261ef1`. Public

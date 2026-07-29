@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl implementation parent closed, Rust decoded/stdio implemented but unadmitted, remaining rows pending
+status: current; Perl parent closed, Rust admitted at 2/5 implementations and 2/6 runtimes, remaining rows pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -24,6 +24,7 @@ reverify:
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio
+  - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission
 ---
 
 # MCP implementation and runtime admission ledger
@@ -35,10 +36,11 @@ and the exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and
 
 Topology is five native implementations—Perl, Rust, Dart, Julia, and one Lua-5.1-compatible source—but six runtime
 admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current exact state is Perl
-complete at 1/5 implementations and 1/6 runtimes. Every other implementation/runtime row is pending, and shared
-`thin_mcp_transport` rollout remains pending under `FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes qualify.
+and Rust complete at 2/5 implementations and 2/6 runtimes. Dart, Julia, Lua, PUC Lua, and LuaJIT remain pending,
+and shared `thin_mcp_transport` rollout remains pending under `FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes
+qualify.
 
-The Perl admission consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
+Each admitted consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
 static dispatch, native capabilities identity, native query identity, raw outcomes, lifecycle outcomes, handle
 indistinguishability, policy overlay, cancellation emission, shutdown/I/O, hostile-output/log privacy, and
 authority-surface fences. It composes existing public server, native query, and neutral contract authorities; it
@@ -46,12 +48,13 @@ does not synthesize another expected-response model.
 
 `tools/check_mcp_implementation_admission.py` validates ledger/status/ownership/count topology, unchanged transport
 identity, exact role declaration/invocation, tracked canonical inputs, and canonical command order. It rejects 28
-mutations. Static fences prohibit production MCP owners from parser construction, descriptors, substitution
-handlers, parser-source dumps, trace, shell/process execution, and arbitrary reads; the sole documented production
-`sysopen` is fail-closed `/dev/urandom` for opaque handles.
+mutations for the Perl-only state and 39 after Rust admission. Static fences prohibit production MCP owners from
+parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
+execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
+opaque handles, while Rust uses locked OS entropy without filesystem authority.
 
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` recomposes these committed transport, binding, server, ledger,
 and admission owners unchanged. It deliberately adds no umbrella oracle. Canonical signoff closes parent Perl
 `.10.9.2` while the shared rollout row remains pending; Rust `.10.9.3` receives the same contract after the clean
-closeout commit. Rust decoded implementation `.10.9.3.1` and strict stdio `.10.9.3.2` are now present and
-recurrently tested, but ledger movement correctly waits for the exact admission consumer in `.10.9.3.3`.
+closeout commit. Rust decoded implementation `.10.9.3.1`, strict stdio `.10.9.3.2`, and exact admission
+`.10.9.3.3` are now complete; no-change committed-owner closeout remains `.10.9.3.4`.

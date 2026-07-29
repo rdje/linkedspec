@@ -54,9 +54,14 @@ IMPLEMENTATIONS = [
     {
         "backend": "rust",
         "server_name": "linkedspec-semantic-rust",
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.10.9.3",
-        "source_paths": [],
+        "source_paths": [
+            "rust/linkedspec-runtime/src/mcp_contract.rs",
+            "rust/linkedspec-runtime/src/mcp_contract_runtime.rs",
+            "rust/linkedspec-runtime/src/mcp_server.rs",
+            "rust/linkedspec-runtime/src/mcp_wire.rs",
+        ],
         "runtime_admissions": ["rust"],
     },
     {
@@ -96,9 +101,9 @@ RUNTIME_ADMISSIONS = [
     {
         "backend": "rust",
         "runtime": "rust",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.3",
-        "consumer_path": None,
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.10.9.3.3",
+        "consumer_path": "rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
     },
     {
         "backend": "dart",
@@ -134,7 +139,12 @@ ORDERED_COMMANDS = [
     "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
+    "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
     "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
+    "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -188,6 +198,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file capability_conformance/mcp_implementation_admission.json",
         "require_tracked_file tools/check_mcp_implementation_admission.py",
         "require_tracked_file t/mcp_server_perl_admission.t",
+        "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -195,7 +206,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
             fail(f"canonical tracked/syntax registration drifted: {line}")
 
 
-def validate_consumer_source(source: str) -> None:
+def validate_perl_consumer_source(source: str) -> None:
     declaration = re.search(r"my @ROLE_ORDER = qw\(\n(.*?)\n\);", source, re.DOTALL)
     if declaration is None:
         fail("Perl admission role declaration is missing")
@@ -207,6 +218,35 @@ def validate_consumer_source(source: str) -> None:
         fail("Perl admission roles are not invoked exactly once in order")
     if source.count("done_testing;") != 1:
         fail("Perl admission does not have one explicit test completion")
+
+
+def validate_rust_consumer_source(source: str) -> None:
+    declaration = re.search(
+        r"const ROLE_ORDER: \[&str; 12\] = \[\n(.*?)\n\];", source, re.DOTALL
+    )
+    if declaration is None:
+        fail("Rust admission role declaration is missing")
+    declared = re.findall(r'"([a-z_]+)"', declaration.group(1))
+    if declared != ROLES:
+        fail("Rust admission role declaration/order drifted")
+    calls = re.findall(
+        r'admission_role\(\s*&mut roles_seen,\s*"([a-z_]+)"', source, re.DOTALL
+    )
+    if calls != ROLES:
+        fail("Rust admission roles are not invoked exactly once in order")
+    test_name = "fn exact_rust_mcp_admission_executes_every_role_once()"
+    if source.count(test_name) != 1:
+        fail("Rust admission does not have one exact consumer test")
+    test_declaration = re.search(
+        rf"((?:#\[[^\]\n]+\]\s*)+){re.escape(test_name)}", source
+    )
+    if (
+        test_declaration is None
+        or "#[test]" not in test_declaration.group(1)
+        or "#[ignore" in test_declaration.group(1)
+        or source.count("assert_eq!(roles_seen, ROLE_ORDER);") != 1
+    ):
+        fail("Rust admission completion/order assertion drifted")
 
 
 def validate_authority_sources() -> None:
@@ -239,6 +279,32 @@ def validate_authority_sources() -> None:
     if "sysopen" in sources["perl/LinkedSpec/MCPContractRuntime.pm"] or "sysopen" in sources["perl/LinkedSpec/MCPWire.pm"]:
         fail("a non-registry MCP owner acquired filesystem-open authority")
 
+    rust_sources = {
+        path: (ROOT / path).read_text(encoding="utf-8")
+        for path in IMPLEMENTATIONS[1]["source_paths"]
+    }
+    rust_combined = "\n".join(rust_sources.values())
+    for token in [
+        "std::fs::",
+        "File::open(",
+        "OpenOptions::",
+        "std::process::Command",
+        "Command::new(",
+        "TcpListener",
+        "TcpStream",
+        "UdpSocket",
+        "tokio::",
+        "LINKEDSPEC_TRACE_LEVEL",
+        "dump_parser_source",
+        "return_descriptor",
+        "call_spec_handler",
+    ]:
+        if token in rust_combined:
+            fail(f"Rust MCP production authority fence contains forbidden token: {token}")
+    primary = (ROOT / "bin" / "linkedspec").read_text(encoding="utf-8")
+    if "McpServer" in primary or "serve_stdio" in primary:
+        fail("the primary parser CLI acquired MCP bootstrap authority")
+
 
 def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     exact_fields(
@@ -259,7 +325,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if ledger["format"] != 1 or ledger["contract_id"] != CONTRACT_ID or ledger["task_owner"] != TASK_OWNER:
         fail("ledger identity drifted")
-    if ledger["decisions"] != ["0054", "0055", "0057"]:
+    if ledger["decisions"] != ["0054", "0055", "0057", "0058"]:
         fail("ledger decision provenance drifted")
 
     transport_ref = ledger["transport_contract"]
@@ -292,10 +358,10 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("five-implementation status/identity topology drifted")
     if ledger["runtime_admissions"] != RUNTIME_ADMISSIONS:
         fail("six-runtime admission status/topology drifted")
-    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 1:
-        fail("implementation completion count is not exactly one")
-    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 1:
-        fail("runtime admission completion count is not exactly one")
+    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 2:
+        fail("implementation completion count is not exactly two")
+    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 2:
+        fail("runtime admission completion count is not exactly two")
 
     rollout = ledger["rollout"]
     exact_fields(
@@ -349,10 +415,19 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
             for path in row["source_paths"]:
                 if not (ROOT / path).is_file():
                     fail(f"implemented MCP source is absent: {path}")
-        consumer_path = ROOT / RUNTIME_ADMISSIONS[0]["consumer_path"]
-        if not consumer_path.is_file():
-            fail("Perl MCP admission consumer is absent")
-        validate_consumer_source(consumer_path.read_text(encoding="utf-8"))
+        for row in RUNTIME_ADMISSIONS:
+            if row["status"] != "complete":
+                continue
+            consumer_path = ROOT / row["consumer_path"]
+            if not consumer_path.is_file():
+                fail(f"{row['runtime']} MCP admission consumer is absent")
+            source = consumer_path.read_text(encoding="utf-8")
+            if row["runtime"] == "perl":
+                validate_perl_consumer_source(source)
+            elif row["runtime"] == "rust":
+                validate_rust_consumer_source(source)
+            else:
+                fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
         validate_authority_sources()
 
@@ -376,14 +451,18 @@ LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("implementation reorder", lambda value: value["implementations"].reverse()),
     ("server identity", lambda value: value["implementations"][0].__setitem__("server_name", "wrong")),
     ("Perl implementation regression", lambda value: value["implementations"][0].__setitem__("status", "pending")),
-    ("premature Rust implementation", lambda value: value["implementations"][1].__setitem__("status", "complete")),
+    ("Rust implementation regression", lambda value: value["implementations"][1].__setitem__("status", "pending")),
+    ("premature Dart implementation", lambda value: value["implementations"][2].__setitem__("status", "complete")),
     ("implementation source", lambda value: value["implementations"][0]["source_paths"].pop()),
+    ("Rust implementation source", lambda value: value["implementations"][1]["source_paths"].pop()),
     ("runtime omission", lambda value: value["runtime_admissions"].pop()),
     ("runtime reorder", lambda value: value["runtime_admissions"].reverse()),
     ("Perl admission regression", lambda value: value["runtime_admissions"][0].__setitem__("status", "pending")),
-    ("premature Rust admission", lambda value: value["runtime_admissions"][1].__setitem__("status", "complete")),
+    ("Rust admission regression", lambda value: value["runtime_admissions"][1].__setitem__("status", "pending")),
+    ("premature Dart admission", lambda value: value["runtime_admissions"][2].__setitem__("status", "complete")),
     ("Lua ABI ownership", lambda value: value["runtime_admissions"][5].__setitem__("runtime", "lua54")),
     ("Perl consumer path", lambda value: value["runtime_admissions"][0].__setitem__("consumer_path", "wrong")),
+    ("Rust consumer path", lambda value: value["runtime_admissions"][1].__setitem__("consumer_path", "wrong")),
     ("premature rollout", lambda value: value["rollout"].__setitem__("status", "complete")),
     ("rollout requirement", lambda value: value["rollout"]["requires_runtime_admissions"].pop()),
     ("coordinated premature promotion", coordinated_promotion),
@@ -406,19 +485,20 @@ def run_mutations(ledger: dict[str, Any]) -> int:
 
     ci_source = CI_PATH.read_text(encoding="utf-8")
     ci_mutations = [
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[5] + "\n", "")),
+        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[8] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[9] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
         (
-            "CI admission before checker",
-            ci_source.replace(ORDERED_COMMANDS[4], "__CHECK__")
-            .replace(ORDERED_COMMANDS[5], ORDERED_COMMANDS[4])
-            .replace("__CHECK__", ORDERED_COMMANDS[5]),
+            "CI checker before Rust admission",
+            ci_source.replace(ORDERED_COMMANDS[8], "__RUST_ADMISSION__")
+            .replace(ORDERED_COMMANDS[9], ORDERED_COMMANDS[8])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[9]),
         ),
         (
-            "CI checker before focused server proof",
-            ci_source.replace(ORDERED_COMMANDS[3], "__FOCUSED__")
-            .replace(ORDERED_COMMANDS[4], ORDERED_COMMANDS[3])
-            .replace("__FOCUSED__", ORDERED_COMMANDS[4]),
+            "CI Rust admission before strict stdio proof",
+            ci_source.replace(ORDERED_COMMANDS[7], "__RUST_STDIO__")
+            .replace(ORDERED_COMMANDS[8], ORDERED_COMMANDS[7])
+            .replace("__RUST_STDIO__", ORDERED_COMMANDS[8]),
         ),
         (
             "CI ledger registration omission",
@@ -427,10 +507,58 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 "",
             ),
         ),
+        (
+            "CI Rust admission registration omission",
+            ci_source.replace(
+                "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs\n",
+                "",
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
             validate_ci_source(mutant, ORDERED_COMMANDS)
+        except CheckError:
+            rejected += 1
+            continue
+        fail(f"mutation was accepted: {name}")
+
+    perl_source = (ROOT / RUNTIME_ADMISSIONS[0]["consumer_path"]).read_text(encoding="utf-8")
+    rust_source = (ROOT / RUNTIME_ADMISSIONS[1]["consumer_path"]).read_text(encoding="utf-8")
+    consumer_mutations = [
+        ("Perl role omission", perl_source.replace(" contract_inventory\n", "", 1), validate_perl_consumer_source),
+        (
+            "Rust role omission",
+            rust_source.replace('    "contract_inventory",\n', "", 1),
+            validate_rust_consumer_source,
+        ),
+        (
+            "Rust role invocation omission",
+            rust_source.replace(
+                'admission_role(&mut roles_seen, "contract_inventory", || {',
+                'admission_role(&mut roles_seen, "wrong_role", || {',
+                1,
+            ),
+            validate_rust_consumer_source,
+        ),
+        (
+            "Rust completion omission",
+            rust_source.replace("    assert_eq!(roles_seen, ROLE_ORDER);\n", "", 1),
+            validate_rust_consumer_source,
+        ),
+        (
+            "Rust consumer ignored",
+            rust_source.replace(
+                "#[test]\nfn exact_rust_mcp_admission_executes_every_role_once()",
+                "#[test]\n#[ignore]\nfn exact_rust_mcp_admission_executes_every_role_once()",
+                1,
+            ),
+            validate_rust_consumer_source,
+        ),
+    ]
+    for name, mutant, validator in consumer_mutations:
+        try:
+            validator(mutant)
         except CheckError:
             rejected += 1
             continue
@@ -448,7 +576,7 @@ def main() -> int:
         return 1
     print(
         "MCP implementation/admission: "
-        f"1/5 implementations, 1/6 runtimes, rollout pending, {rejected} rejected mutations"
+        f"2/5 implementations, 2/6 runtimes, rollout pending, {rejected} rejected mutations"
     )
     return 0
 

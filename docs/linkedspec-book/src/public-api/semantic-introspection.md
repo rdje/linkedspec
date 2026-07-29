@@ -3430,7 +3430,8 @@ The dependency order is:
 | `.10.9.3.0` | behavior-free Rust native owner/security audit and ADR `0058` | complete from clean `4473a812`; focused/canonical signoff; no implementation behavior |
 | `.10.9.3.1` | Rust shared binding, frozen runtime, secure registry, and decoded server | implemented; focused public corpus proof; admission unchanged |
 | `.10.9.3.2` | Rust strict stdio framing, lexical preflight, emission, cancellation, logging, and cleanup | implemented; private/public adversarial proof; admission unchanged |
-| `.10.9.3.3-.10.9.3.4` | Rust exact admission and closeout | pending |
+| `.10.9.3.3` | Rust exact implementation/runtime admission | complete; one twelve-role external consumer; 2/5 implementations, 2/6 runtimes, rollout pending, 39 mutations |
+| `.10.9.3.4` | committed-owner no-change Rust closeout | pending after the clean admission commit |
 | `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3467,10 +3468,11 @@ Rust now exposes both decoded in-process and strict borrowed-stream forms of tha
 frozen validation, and registry/decoded dispatch remain separate owners. Production handles use 256 operating-
 system random bits, digest-only authorization, monotonic expiry, bounded capacity, and lowering-only policy.
 Unexpected unwind panics become sanitized internal errors. Private `mcp_wire.rs` supplies duplicate-safe lexical
-preflight and canonical stdio emission without weakening the decoded API. This is a completed Rust stdio
-implementation but not yet an admitted MCP runtime: exact admission and the 2/5 + 2/6 ledger transition remain
-`.10.9.3.3`. No standalone server binary, primary-CLI mode, source/path bootstrap, SDK/network/async runtime,
-semantic cache, aggregator, or legacy protocol is authorized.
+preflight and canonical stdio emission without weakening the decoded API. Exact admission `.10.9.3.3` composes
+all twelve roles through one external consumer and advances only Rust: the ledger is now Perl + Rust at 2/5
+implementations and 2/6 runtimes, with shared rollout still pending and 39 mutations guarding status, sources,
+roles, authority, and CI order. No standalone server binary, primary-CLI mode, source/path bootstrap,
+SDK/network/async runtime, semantic cache, aggregator, or legacy protocol is authorized.
 
 ### Using Rust decoded MCP dispatch
 

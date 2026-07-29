@@ -13579,13 +13579,43 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.3.2 - implement Rust MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.3`
-      Status: `pending`
+      Status: `done` (2026-07-29; task-tree-first from clean strict-stdio commit `83d656e4`)
       Goal: Admit the Rust server and advance only the Rust implementation/runtime ledger rows.
       Depends on: `.10.9.3.2`
       Acceptance: One exact Rust consumer composes every unchanged canonical/raw/lifecycle/handle/policy case,
         native capabilities/query identity, hostile-output/privacy and negative-authority fences; advance the ledger
         to exactly 2/5 implementations + 2/6 runtimes while shared rollout remains pending and mutation-lock the
         status/source/role/canonical wiring.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove strict-stdio commit `83d656e4`, zero-byte brief, clean tree, absent
+        rendered-book/empty-run residue, and `.10.9.3.3` task-tree ownership before admission implementation.
+      - [x] **ONE EXACT RUST ADMISSION CONSUMER** — Add one public external-crate consumer covering every frozen
+        canonical/raw/lifecycle/handle/policy inventory and all twelve omission-sensitive admission roles through
+        the real Rust server, without copying a semantic or protocol oracle.
+      - [x] **NATIVE IDENTITY / AUTHORITY FENCES** — Prove native capabilities/query bytes, cancellation and
+        shutdown/I/O lifecycle, hostile-output privacy, index release, and absence of source/path/compile/execute/
+        trace/cache/CLI/SDK/network/aggregator/legacy authority.
+      - [x] **EXACT RUST-ONLY LEDGER ADVANCE** — Promote only Rust implementation and Rust runtime admission to
+        complete, preserve Perl complete and Dart/Julia/Lua/PUC Lua/LuaJIT pending, keep shared rollout pending at
+        2/5 implementations + 2/6 runtimes, and mutation-lock status/source/role/canonical-order drift.
+      - [x] **LOCKSTEP / CANONICAL SIGNOFF** — Wire the new admission proof after Rust decoded/stdio proof and
+        before the ledger checker; synchronize docs/KM/mdBook/locality; run focused/canonical gates and exact
+        cleanup; commit, clear, and prove clean while no-change closeout remains `.10.9.3.4`.
+
+      Execution record (2026-07-29): Added one exact external-crate twelve-role consumer over the real public Rust
+      server and the unchanged neutral inventories. Ordered private unit proof retains preparation-time
+      cancellation and injected-panic seams without widening production API. Only Rust implementation/runtime
+      rows advance, yielding 2/5 implementations + 2/6 runtimes with shared rollout pending; the checker rejects
+      39 status/topology/source/consumer/role/ignored-proof/authority/tracked-input/order mutations. Focused Rust
+      admission 1/1, Perl admission Files=1 Tests=13, rustfmt, CI syntax, and target-local strict clippy pass.
+      Canonical CI passes Rust MCP 15 + 3 + 4 + 1, Perl Files=3 Tests=22 plus admission 13, Rust semantic 1/1 in
+      80.52 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds, containment/moved-root, CLI 66x2, RAM 62%, and Phase
+      0 1,031/1,031 in 648 seconds. Knowledge Map 744/6,006, mdBook, six doctrines, storage 1,713/386,137/28,
+      path 14/5, memory, formatting, and whitespace pass. Exact cleanup removes only the verified 13,416-KiB book
+      and one proven-empty managed run. No transport/semantic/server behavior or unauthorized surface moves.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.3.3 - admit Rust MCP implementation and runtime`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.4`
       Status: `pending`
@@ -17328,6 +17358,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.3` | Clean base `83d656e4`; one exact twelve-role Rust consumer; MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22 plus admission Files=1 Tests=13; Rust MCP 15 + 3 + 4 + admission 1; ledger 2/5 + 2/6 rollout pending/39 mutations; rustfmt and target-local strict clippy; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,713/386,137/28; path 14/5; canonical Rust semantic 1/1 80.52s, Dart 1/1, Julia 416/416 28.5s, containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/648s; exact 13,416-KiB/one-empty-run cleanup. | PASS. Rust alone advances to 2/5 implementations + 2/6 runtimes without transport/semantic/server/CLI/other-runtime/rollout/aggregator/legacy movement; no-change `.10.9.3.4` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.2` | Clean base `11261ef1`; exact bounded lexical/framing/lifecycle implementation; MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22; Rust MCP unit 15 + decoded public 3 + stdio public 4; production check and task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,712/385,070/28; path 14/5; tool locality; canonical Rust semantic 1/1 79.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, RAM 65%, Phase 0 1,031/643s; exact 13,412-KiB/one-empty-run cleanup. | PASS. Rust owns strict borrowed-stream MCP framing, lexical admission, canonical emission, cancellation through flush, and EOF/I/O release without executable/source/semantic/ledger/rollout/aggregator/legacy movement; exact admission `.10.9.3.3` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.1` | Clean base `a3756d63`; shared verified bundle; byte-fresh Perl 83,072 + Rust 82,886 bindings; MCP 35/10/10/68; Perl Files=4 Tests=35; Rust MCP unit 9 + public 3; task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,001; mdBook; six doctrines; memory; storage 1,710/383,730/28; path 14/5; tool locality; canonical Rust semantic 1/1 82.05s, Dart 1/1, Julia 416/416 28.6s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/658s; exact 13,388-KiB/one-empty-run cleanup. | PASS. Rust owns deterministic embedded contract data, frozen runtime, secure native registry, and exact decoded dispatch without strict wire, executable, source/semantic authority, ledger/rollout, aggregator, or legacy movement; `.10.9.3.2` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.0` | Clean base `4473a812`; KM/Toolbox/ADR/source audit; Rust foundation 6, query 5, native admission 1/1 in 82.34s; unchanged MCP 35/10/10/68, byte-fresh 83,072-byte Perl binding, Files=3 Tests=22, ledger 1/5 + 1/6 rollout pending/28 mutations, Files=1 Tests=13; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; ADR `0058`; mdBook; KM 744/5,999; six doctrines; storage 1,703/381,460/28; path 14/5; tool locality; canonical Rust 1/1 79.08s, Dart 1/1, Julia 416/416 28.3s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/629s; exact 13,352-KiB/one-empty-run cleanup. | PASS. Exact Rust MCP owner/security/generation/transport/admission seams are frozen without production/API/dependency/test/contract/semantic/parser/runtime/CLI/ledger/rollout behavior; `.10.9.3.1` follows only after the clean plan commit. |

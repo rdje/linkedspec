@@ -246,14 +246,17 @@ rejected mutations; focused and canonical proof are green. No-change Perl closeo
 clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
 native/runtime admission `.10.9.3-.7` follows after the clean commit.
 
-Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact; `.10.9.3.1` now implements its first behavior
-slice. Public in-process `linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
+Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact. Public in-process
+`linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
 calls only `capabilities()` and `query_neutral()`. Shared verified-bundle construction feeds the byte-identical
 Perl generator and formatter-stable filesystem-free Rust binding. Direct locked OS entropy, server-local monotonic
 time, SHA-256 authorization digests, lowering-only policy, canonical `Value` payloads, and unwind sanitation are
-implemented and publicly corpus-tested. No MCP mode was added to `linkedspec-rust`; there is no new executable,
-source bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. Bounded duplicate-safe
-stdio remains `.10.9.3.2`, exact admission `.10.9.3.3`, and no-change closeout `.10.9.3.4`.
+implemented and publicly corpus-tested. Strict borrowed-stream stdio `.10.9.3.2` supplies bounded duplicate-safe
+framing, canonical output, cancellation through flush, and EOF/I/O release. Exact admission `.10.9.3.3` composes
+one twelve-role external consumer and advances only Rust to 2/5 implementations + 2/6 runtimes, with rollout
+pending and 39 rejected mutations. No MCP mode was added to `linkedspec-rust`; there is no new executable, source
+bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. No-change closeout remains
+`.10.9.3.4`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the
