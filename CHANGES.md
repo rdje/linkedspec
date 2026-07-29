@@ -1,5 +1,43 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.1 — implement Rust MCP decoded server
+
+Extracted `tools/mcp_contract_binding.py` as the single digest-verified neutral bundle builder. Both backend
+generators consume it after independent transport validation: the existing generated Perl module remains exactly
+83,072 bytes, while new `tools/generate_rust_mcp_contract.py` emits a rustfmt-stable 82,886-byte data-only module.
+The Rust binding embeds the canonical bundle plus SHA-256 and performs no runtime path I/O.
+
+Added a frozen private Rust contract runtime that verifies and parses the embedded bundle once, clones all values,
+implements only the exact schema keyword profile, classifies the complete 28-accepted/seven-rejected canonical
+inventory, and constructs Rust-identity discovery/list/tool/error shells. Neutral artifacts remain normative; no
+protocol table or semantic oracle moved into Rust.
+
+Added public in-process `McpServer` to `linkedspec-runtime`. Hosts can register only an existing caller-owned
+`Arc<SemanticIndex>` with a nonempty bounded opaque authorization context. Production handles use 32 bytes from
+direct `getrandom` OS entropy and fixed 43-character unpadded base64url encoding. Registry entries retain only the
+index, SHA-256 authorization digest, checked monotonic expiry, and effective lowering policy; capacity, collision,
+expiry, revocation, unavailable-state equivalence, and shutdown release fail closed.
+
+Decoded dispatch implements only modern discovery, list, native capabilities/query calls, and cancellation.
+Capabilities are called afresh and projected only downward; allowed queries pass unchanged, while all five policy
+components deny before a native result. Exact native payloads, request/response isolation, sanitized unwind panic
+projection, idempotent cleanup, and absence of source/path/compile/execute/trace/cache/CLI authority are covered by
+private and public corpus proof. Canonical CI now checks both generated bindings and runs Rust MCP unit plus public
+decoded-dispatch tests before validating the unchanged admission ledger.
+
+Strict duplicate-safe stdio remains `.10.9.3.2`, and exact Rust admission remains `.10.9.3.3`. Therefore the MCP
+ledger intentionally stays at 1/5 implementations and 1/6 runtimes with shared rollout pending. No executable,
+primary-CLI mode, SDK, async/network transport, source bootstrap, semantic cache, aggregator, legacy adapter, or
+transport/semantic contract byte changes are part of this slice.
+
+Signoff passes MCP 35/10/10/68, Perl Files=4 Tests=35, Rust MCP unit 9 + public 3, task-local strict clippy,
+unchanged ledger 1/5 + 1/6 with rollout pending/28 mutations, capability 80/0/0, semantic 6/20/105 at 7/9 + 6/6,
+Knowledge Map 744/6,001, all six doctrines, mdBook, storage 1,710/383,730/28, path 14/5, and tool locality.
+Canonical CI passes Rust semantic admission 1/1 in 82.05 seconds, Dart 1/1, Julia 416/416 in 28.6 seconds,
+containment/moved-root, both primary CLI matrices 66/66, RAM 61%, and Phase 0 1,031/1,031 in 658 seconds. Exact
+cleanup removes only the verified 13,388-KiB rendered book and one proven-empty managed run. Strict stdio
+`.10.9.3.2` follows only after the clean commit; no push occurs at 74/300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.0 — plan the Rust native MCP server
 
 Audited the admitted Rust semantic authority before implementation. `linkedspec-runtime` already owns opaque

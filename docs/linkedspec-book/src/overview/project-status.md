@@ -679,11 +679,13 @@ Three backbone items tracked major structural modernization — all done:
   consumer and a separate implementation/admission ledger at 1/5 implementations + 1/6 runtimes with rollout
   pending and 28 rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4`
   is complete from clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`
-  before later native servers `.10.9.3-.7`. Completed behavior-free Rust preflight `.10.9.3.0` and ADR `0058` freeze a
-  generated filesystem-free binding, in-process `linkedspec-runtime` `Arc<SemanticIndex>` registry, strict bounded
-  wire, OS entropy/monotonic expiry, panic sanitation, exact `.1-.4` implementation/admission order, and no current
-  Rust module/API/dependency/fixture/status behavior; focused and canonical signoff are green, and generated
-  binding plus decoded server `.10.9.3.1` follow the clean plan commit;
+  before later native servers `.10.9.3-.7`. Completed behavior-free Rust preflight `.10.9.3.0` and ADR `0058`
+  freeze the Rust seams. `.10.9.3.1` now provides shared verified-bundle generation, a formatter-stable embedded
+  Rust binding, frozen schema runtime, and public decoded `linkedspec-runtime::McpServer` over caller-owned
+  `Arc<SemanticIndex>` values. Its OS entropy, digest-only authorization, monotonic expiry, bounded capacity,
+  lowering-only policy, exact native payloads, panic sanitation, cancellation, and release boundaries pass focused
+  corpus proof. Strict stdio `.10.9.3.2` and exact admission `.10.9.3.3` remain pending, so the ledger correctly
+  stays at 1/5 implementations + 1/6 runtimes;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

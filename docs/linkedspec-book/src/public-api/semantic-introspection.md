@@ -3428,7 +3428,8 @@ The dependency order is:
 | `.10.9.2.3` | exact Perl implementation/runtime admission and shared ledger | complete; 1/5 implementations, 1/6 runtimes, rollout pending, 28 mutations, canonical signoff |
 | `.10.9.2.4` | committed-owner no-change Perl closeout | complete from clean `28f84826`; focused and canonical recomposition green; parent `.10.9.2` closed |
 | `.10.9.3.0` | behavior-free Rust native owner/security audit and ADR `0058` | complete from clean `4473a812`; focused/canonical signoff; no implementation behavior |
-| `.10.9.3.1-.10.9.3.4` | Rust generated binding/decoded server, strict stdio, exact admission, and closeout | pending |
+| `.10.9.3.1` | Rust shared binding, frozen runtime, secure registry, and decoded server | implemented; focused public corpus proof; admission unchanged |
+| `.10.9.3.2-.10.9.3.4` | Rust strict stdio, exact admission, and closeout | pending |
 | `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3459,10 +3460,97 @@ transport digest; shared rollout remains pending. The admission has canonical si
 parent `.10.9.2` is closed before the other four native servers and recurring/public MCP rollout under
 `.10.9.3-.10.10`.
 
-Rust does not expose an MCP API yet. ADR `0058` fixes the future native shape so implementation cannot drift into a
-second semantic owner: `linkedspec-runtime::McpServer` will retain a caller-created `Arc<SemanticIndex>` and call
-only `capabilities()` or `query_neutral()`; compile-time generated contract data, registry/decoded dispatch, and
-strict wire remain separate owners. Production handles use 256 operating-system random bits and monotonic expiry;
-strict token preflight rejects duplicate keys and numeric/depth drift before `serde_json`; canonical output uses a
-sorted `Value`; and unwind panics become sanitized internal errors. No standalone server binary, primary-CLI mode,
-source/path bootstrap, SDK/network/async runtime, semantic cache, aggregator, or legacy protocol is authorized.
+Rust now exposes the decoded in-process part of that API. `linkedspec-runtime::McpServer` retains a caller-created
+`Arc<SemanticIndex>` and calls only `capabilities()` or `query_neutral()`; compile-time generated contract data,
+frozen validation, and registry/decoded dispatch remain separate owners. Production handles use 256 operating-
+system random bits, digest-only authorization, monotonic expiry, bounded capacity, and lowering-only policy.
+Unexpected unwind panics become sanitized internal errors. Strict duplicate-safe token preflight and stdio frame
+emission remain `.10.9.3.2`, so this decoded API must not be described as a completed Rust stdio server or admitted
+runtime yet. No standalone server binary, primary-CLI mode, source/path bootstrap, SDK/network/async runtime,
+semantic cache, aggregator, or legacy protocol is authorized.
+
+### Using Rust decoded MCP dispatch
+
+The host owns index construction and authorization. Registration does not accept source text or a path:
+
+```rust
+use linkedspec_runtime::{
+    McpRegistrationOptions, McpServer,
+    semantic_index::{SemanticIndex, SemanticIndexOptions, SemanticSourceDetail},
+};
+use serde_json::json;
+use std::sync::Arc;
+
+# fn example(source: &[u8]) -> Result<(), Box<dyn std::error::Error>> {
+let index = Arc::new(SemanticIndex::from_utf8(
+    source,
+    SemanticIndexOptions::new("example.spec", SemanticSourceDetail::Text),
+)?);
+let authorization = b"tenant-42/read-only";
+let mut server = McpServer::new()?;
+let handle = server.register_index(
+    index,
+    authorization,
+    McpRegistrationOptions::default(),
+)?;
+
+let request = json!({
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+        "_meta": {
+            "io.modelcontextprotocol/clientCapabilities": {},
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+        },
+        "name": "linkedspec_semantic_capabilities",
+        "arguments": {"handle": handle}
+    }
+});
+let response = server
+    .dispatch(&request, authorization)?
+    .expect("requests, unlike notifications, return a response");
+assert_eq!(response["jsonrpc"], "2.0");
+
+server.shutdown();
+# Ok(())
+# }
+```
+
+The authorization context is opaque host data and never comes from client metadata. Calls must provide the same
+bytes used at registration. Empty contexts and contexts above 4,096 bytes fail as typed host-API errors. A handle
+is valid for 15 minutes by default; `McpRegistrationOptions::lifetime_ms` may select 1 through 86,400,000
+milliseconds. `revoke_handle` is idempotent for a syntactically valid handle, and `shutdown` is idempotent and
+releases all retained `Arc<SemanticIndex>` values.
+
+A registration policy can only reduce native limits:
+
+```rust
+use linkedspec_runtime::{
+    McpBudgetLimits, McpDeploymentPolicy, McpRegistrationOptions,
+    semantic_index::SemanticSourceDetail,
+};
+
+let restricted = McpRegistrationOptions {
+    lifetime_ms: Some(300_000),
+    policy: Some(McpDeploymentPolicy {
+        source_detail_ceiling: Some(SemanticSourceDetail::Identity),
+        page_max: Some(50),
+        budget_maxima: Some(McpBudgetLimits {
+            max_records: 100,
+            max_relations: 200,
+            max_depth: 2,
+        }),
+    }),
+};
+```
+
+The capabilities tool reports the effective lower limits. A query above any effective source, digest, page, or
+budget ceiling returns `linkedspec_mcp_policy_denied` before native query dispatch; an allowed query is forwarded
+unchanged. Unknown, expired, revoked, and unauthorized handles all return
+`linkedspec_mcp_handle_unavailable`, deliberately preventing handle-state enumeration.
+
+`dispatch` accepts already-decoded `serde_json::Value` data. It validates the exact envelope and method schemas,
+but decoded values cannot preserve lexical facts such as duplicate object keys. Do not place untrusted raw JSON
+directly through a generic decoder and call this API as a substitute for the pending strict wire adapter. The
+bounded duplicate-safe JSON-line owner and canonical LF emission arrive in `.10.9.3.2`.

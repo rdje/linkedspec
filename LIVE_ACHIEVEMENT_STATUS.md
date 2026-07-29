@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Rust native MCP decoded server implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.3.1` completes task-tree-first from clean plan commit `a3756d63`. One shared
+digest-verified neutral bundle builder preserves the generated Perl binding at exactly 83,072 bytes and emits a
+formatter-stable 82,886-byte filesystem-free Rust binding. `linkedspec-runtime` now owns the frozen embedded
+contract runtime and public in-process `McpServer` around caller-owned immutable `Arc<SemanticIndex>` values.
+
+The bounded registry uses 256-bit direct OS entropy, fixed unpadded base64url handles, SHA-256-only authorization
+storage, monotonic expiry, indistinguishable unavailable states, collision/capacity/revocation/shutdown cleanup,
+lowering-only policy, and unwind sanitation. Decoded discover/list/capabilities/query/cancel dispatch preserves
+native Rust identity and exact semantic payloads without source, compile, execute, trace, cache, CLI, or filesystem
+authority. Strict hostile-byte JSON-line admission remains the separately owned `.10.9.3.2` wire leaf.
+
+Focused proof passes MCP 35/10/10/68, Perl Files=4 Tests=35, Rust MCP unit 9 + public 3, task-local strict clippy,
+unchanged ledger 1/5 implementations + 1/6 runtimes with rollout pending/28 mutations, capability 80/0/0, semantic
+6/20/105 at 7/9 + 6/6, Knowledge Map 744/6,001, all six doctrines, mdBook, storage 1,710/383,730/28, path 14/5,
+and tool locality. Canonical CI passes Rust semantic 1/1 in 82.05 seconds, Dart 1/1, Julia 416/416 in 28.6 seconds,
+containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 658 seconds. Exact cleanup removes only the
+verified 13,388-KiB rendered book and one empty managed run. `.10.9.3.2` follows after the clean commit; no push at
+74/300.
+
 ## 2026-07-29 — Rust native MCP implementation plan complete
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.3.0` is task-tree-first from clean Perl closeout `4473a812`. ADR `0058`

@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP contract canonical, Perl implementation closed, Rust plan complete and implementation pending
+status: native six-runtime rollout admitted; MCP canonical, Perl closed/admitted, Rust decoded server implemented but stdio/admission pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -26,6 +26,7 @@ evidence_update_2026_07_29_mcp_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1
 evidence_update_2026_07_29_mcp_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 adds an independent exact-schema/frame/raw/lifecycle/handle/policy validator and rejects 68 named mutations without a server or semantic-behavior change."
 evidence_update_2026_07_29_perl_mcp: "FUTURE-PARITY-BACKLOG.10.9.2 implements and admits the native Perl server at 1/5 implementations + 1/6 runtimes, leaves shared rollout pending, and closes by unchanged-owner recomposition."
 evidence_update_2026_07_29_rust_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.3.0 and ADR 0058 behavior-freeze a generated filesystem-free Rust binding, in-process linkedspec-runtime server, strict wire, OS entropy, monotonic expiry, panic sanitation, exact admission, and no CLI/executable/SDK/aggregator authority."
+evidence_update_2026_07_29_rust_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.3.1 implements the generated binding, frozen schema runtime, secure in-process registry, and decoded public Rust server without stdio, admission, semantic ownership, or ledger movement."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -76,8 +77,9 @@ misclassified as generated artifacts.
 The neutral contract is executable through six fixture groups and 20 exact response digests; its independent
 checker rejects 105 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
-admitted, and the recurring six-runtime proof is complete. The MCP machine contract and Perl server are complete;
-Rust, Dart, Julia, Lua, recurring transport admission, and public no-drift remain dependency-ordered.
+admitted, and the recurring six-runtime proof is complete. The MCP machine contract and Perl server are complete.
+Rust decoded dispatch is implemented; Rust stdio/admission, Dart, Julia, Lua, recurring transport admission, and
+public no-drift remain dependency-ordered.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

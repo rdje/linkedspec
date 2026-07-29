@@ -1,7 +1,8 @@
 # ADR 0058: Rust MCP uses a generated contract binding and an in-process runtime server
 
 - Date: 2026-07-29
-- Status: accepted implementation plan; behavior pending under `.10.9.3.1-.4`
+- Status: accepted; generated binding/decoded server `.10.9.3.1` implemented; strict stdio, admission, and closeout
+  pending under `.10.9.3.2-.4`
 - Tags: architecture, mcp, rust, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -23,8 +24,8 @@ The Rust host inventory establishes additional implementation boundaries:
   through the default `serde_json::Map` representation and preserves ordered arrays;
 - `sha2 0.11.0` is already direct, while `getrandom 0.4.2` is present in the locked repository-local dependency
   graph transitively and exposes the operating-system `fill` API; and
-- no Rust MCP module, registry, strict wire owner, SDK, async runtime, network transport, or server executable
-  exists.
+- at the `.10.9.3.0` audit, no Rust MCP module, registry, strict wire owner, SDK, async runtime, network transport,
+  or server executable existed.
 
 Reading the neutral contract at runtime would violate the in-memory embedding boundary. Hand-copying its schema,
 templates, and limits would create a second owner. Reusing `serde_json::from_slice` alone would admit duplicate

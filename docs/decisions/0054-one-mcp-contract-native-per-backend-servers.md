@@ -3,8 +3,8 @@
 - Date: 2026-07-29
 - Status: accepted; exact neutral contract closed under `.10.9.1`; Perl implementation `.10.9.2.1-.2` complete;
   exact Perl admission `.10.9.2.3` and no-change closeout `.10.9.2.4` complete at 1/5 implementations + 1/6
-  runtimes with canonical signoff; parent `.10.9.2` closed; Rust behavior-free plan fixed and complete under ADR
-  `0058`/`.10.9.3.0`; remaining implementation/admission `.10.9.3.1-.7`
+  runtimes with canonical signoff; parent `.10.9.2` closed; Rust generated binding/decoded server `.10.9.3.1`
+  implemented under ADR `0058`; Rust stdio/admission and remaining backends pending under `.10.9.3.2-.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

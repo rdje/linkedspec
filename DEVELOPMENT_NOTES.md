@@ -1,5 +1,38 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.1` — generated contract data should be formatter-stable, and decoded
+  transport should remain a native library boundary): One shared Python builder now verifies the seven neutral
+  artifacts and canonical frame order before either backend renderer runs. This preserves the 83,072-byte Perl
+  binding while giving Rust one embedded JSON bundle with its own digest. The Rust renderer deliberately emits
+  the long digest declaration in rustfmt's stable layout; generator freshness therefore remains true after the
+  mandatory workspace formatter rather than oscillating between generated and formatted bytes.
+
+  The decoded server is intentionally stateful only where the transport contract requires it. A registry entry is
+  the caller's `Arc<SemanticIndex>`, an authorization digest, absolute monotonic expiry, and five effective policy
+  scalars. It is not a semantic cache. Registration validates native capabilities once to establish ceilings;
+  every capabilities request calls native code again, and every allowed query receives the unchanged caller value.
+  This makes policy pre-dispatch possible without creating a second semantic response owner.
+
+  Rust's public type system closes several malformed-policy shapes that Perl must reject dynamically, while the
+  remaining elevation checks are runtime component-wise comparisons. Private deterministic entropy/time injection
+  exercises failure and expiry without leaking dependency injection into production. Direct `getrandom::fill`, a
+  fixed 32-byte encoder, SHA-256-only authorization storage, fixed-work comparison with a dummy digest, bounded
+  retries/capacity, `catch_unwind`, and `Arc` weak-reference proof make each security/lifecycle claim executable.
+
+  Decoded `serde_json::Value` dispatch cannot prove lexical JSON properties that decoding has erased. It validates
+  the full frozen envelope schema and is correct for trusted in-process values, but it is not the strict raw wire.
+  Duplicate decoded keys, exact numeric tokens, depth, framing, canonical LF emission, and activity through flush
+  remain `.10.9.3.2`. Holding that boundary prevents the convenient decoded API from being mislabeled as completed
+  stdio or prematurely moving the 1/5 + 1/6 admission ledger.
+
+  Signoff validates both the narrow implementation and the repository around it. MCP remains 35/10/10/68; Perl
+  passes Files=4 Tests=35; Rust passes 9 frozen-runtime/registry/decoded unit tests and 3 public external-crate
+  corpus tests. Task-local strict clippy passes; a blanket workspace `-D warnings` still exposes only pre-existing
+  warning categories in unrelated generated/parser owners, so this leaf neither masks nor edits them. Canonical CI
+  passes Rust semantic admission 1/1 in 82.05 seconds, Dart 1/1, Julia 416/416 in 28.6 seconds, both 66-case CLI
+  environments, and Phase 0 1,031/1,031 in 658 seconds. The 1/5 + 1/6 admission ledger correctly remains unchanged
+  until strict wire and the exact Rust admission consumer exist.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.0` — a native Rust MCP server is a library object, not a second CLI):
   Rust's admitted `SemanticIndex` already exposes the exact two semantic operations the transport needs. The
   correct server owner is therefore `linkedspec-runtime`, retaining caller-created indexes through `Arc`; adding

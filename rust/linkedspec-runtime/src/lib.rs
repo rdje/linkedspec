@@ -13,6 +13,9 @@ pub mod diagnostic;
 pub mod diagnostic_output;
 pub mod engine;
 pub mod helpers;
+mod mcp_contract;
+mod mcp_contract_runtime;
+pub mod mcp_server;
 pub mod primary_cli;
 pub mod runtime;
 pub mod semantic_index;
@@ -29,6 +32,9 @@ pub use diagnostic_output::{
     RuntimeDiagnosticOutputSink, RuntimeDiagnosticOutputSinkFailure, RuntimeExitNow,
 };
 pub use linkedspec_core::trace;
+pub use mcp_server::{
+    McpBudgetLimits, McpDeploymentPolicy, McpRegistrationOptions, McpServer, McpServerError,
+};
 pub use semantic_observation::{
     RUNTIME_SEMANTIC_OBSERVATION_CONTRACT, RuntimeSemanticObservationEvent,
     RuntimeSemanticObservationEventKind, RuntimeSemanticObservationSink,

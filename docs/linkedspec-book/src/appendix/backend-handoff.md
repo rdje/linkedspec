@@ -246,14 +246,14 @@ rejected mutations; focused and canonical proof are green. No-change Perl closeo
 clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
 native/runtime admission `.10.9.3-.7` follows after the clean commit.
 
-Completed Rust implementation preflight `.10.9.3.0` and ADR `0058` make that next handoff exact without shipping code.
-Place the public in-process server in `linkedspec-runtime`; retain caller-created `Arc<SemanticIndex>` values; call
-only `capabilities()` and `query_neutral()`; share verified neutral-bundle construction with the byte-identical
-Perl generator; and generate a filesystem-free Rust binding. Use direct locked OS entropy, server-local monotonic
-time, SHA-256 authorization digests, a bounded duplicate-safe token preflight before `serde_json`, canonical
-`Value` encoding, and unwind sanitation. Do not add an MCP mode to `linkedspec-rust`, a new executable, source
-bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. Binding/decoded server, strict
-stdio, exact admission, and no-change closeout remain `.10.9.3.1-.4`.
+Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact; `.10.9.3.1` now implements its first behavior
+slice. Public in-process `linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
+calls only `capabilities()` and `query_neutral()`. Shared verified-bundle construction feeds the byte-identical
+Perl generator and formatter-stable filesystem-free Rust binding. Direct locked OS entropy, server-local monotonic
+time, SHA-256 authorization digests, lowering-only policy, canonical `Value` payloads, and unwind sanitation are
+implemented and publicly corpus-tested. No MCP mode was added to `linkedspec-rust`; there is no new executable,
+source bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. Bounded duplicate-safe
+stdio remains `.10.9.3.2`, exact admission `.10.9.3.3`, and no-change closeout `.10.9.3.4`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

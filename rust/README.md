@@ -192,18 +192,24 @@ remain compatible `Result<_, String>` adapters over the same path; successful JS
        JSON output
 ```
 
-### Planned native MCP server (not yet implemented)
+### Native MCP decoded server
 
-ADR `0058` and `FUTURE-PARITY-BACKLOG.10.9.3.0` freeze the Rust MCP implementation boundary before code. The
-future public `McpServer` belongs in `linkedspec-runtime`, where it can retain caller-created immutable
-`Arc<SemanticIndex>` values and call only `capabilities()` plus `query_neutral()`. A generated filesystem-free
-binding will consume the one neutral MCP contract; private registry/contract/wire owners will provide OS-random
-handles, monotonic expiry, lowering-only policy, strict bounded JSON-line input, canonical output, cancellation,
-and cleanup.
+ADR `0058` and `FUTURE-PARITY-BACKLOG.10.9.3.1` provide a public in-process
+`linkedspec_runtime::McpServer`. A host registers an already-created immutable `Arc<SemanticIndex>` with an opaque
+1..4,096-byte authorization context and optional lowering-only policy, then calls `dispatch` with decoded JSON
+values. The server implements only modern `server/discover`, `tools/list`, the capabilities/query `tools/call`
+operations, and cancellation notifications. It never loads source, compiles, executes, traces, or caches semantic
+responses.
 
-This is a plan, not a current API. There is no Rust MCP module, executable, CLI mode, SDK/network transport, source
-loader, semantic cache, aggregator, or legacy adapter today. Implementation/admission remains
-`FUTURE-PARITY-BACKLOG.10.9.3.1-.4`.
+Production handles contain 256 operating-system-random bits encoded as 43 unpadded base64url characters. The
+registry stores only the index, a SHA-256 authorization digest, absolute monotonic expiry, and effective policy;
+unknown, expired, revoked, and unauthorized handles return the same tool error. The generated filesystem-free
+binding is derived from the one neutral MCP contract and checked after independent contract validation. Decoded
+responses carry the Rust server identity while preserving exact native semantic payloads.
+
+Strict bounded stdio is not part of this leaf: it remains `FUTURE-PARITY-BACKLOG.10.9.3.2`, followed by exact
+Rust admission in `.10.9.3.3`. There is still no MCP executable, primary-CLI mode, SDK/network transport, source
+bootstrap, semantic cache, aggregator, or legacy adapter.
 
 ## Lifecycle Loop
 
