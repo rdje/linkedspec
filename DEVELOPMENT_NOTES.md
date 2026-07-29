@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.1` — bind data once, keep runtime authority smaller): The generated
+  Perl binding embeds one canonical JSON bundle rather than generated Perl hash syntax. That preserves JSON
+  booleans and numeric/string identity through the same decoder used by the private schema runtime, keeps the
+  generated module data-only, and lets one byte-fresh generator compare the complete derived file. The generator
+  verifies all seven artifact hashes from the neutral manifest—including materializer and independent validator—
+  before it composes the runtime subset. Canonical order is now three nodes: materialize, independently validate,
+  then prove the backend binding is fresh. A binding can consume validated truth; it cannot validate its own
+  normative source.
+
+  Perl's decoded boundary still needs a real schema evaluator. Relying on native query validation alone would
+  leave discovery/tool envelopes and native outputs asymmetric, while importing a mutable JSON Schema package
+  would add an unnecessary deployment dependency. The private runtime therefore implements exactly the already-
+  frozen profile: local refs, `type`, `const`, `enum`, `oneOf`, `allOf`, closed/open objects, property names,
+  prefix/items arrays, string/UTF-8/pattern/URI bounds, and integer limits. Exact canonical frames classify 28
+  accepted and seven rejected shapes in the focused test. Strict raw-number and duplicate-key meaning remains a
+  wire concern because an already-decoded Perl scalar cannot reconstruct the client's lexical JSON token.
+
+  Registry security is intentionally metadata-only. Successful registration retains the native index, a SHA-256
+  authorization digest, absolute monotonic expiry, and effective five-component policy—never authorization bytes,
+  source, descriptor, request, response, or semantic cache. Registration calls capabilities once to establish
+  native ceilings but does not reuse that response: each capabilities tool call still invokes native code, and an
+  allowed query is passed unchanged. This distinction avoids quietly turning the transport into a stale semantic
+  owner while still allowing above-policy requests to be rejected before native work.
+
+  Prepared-response cancellation is testable without threads or timing hooks. A test native method dispatches a
+  cancellation notification re-entrantly while its request id is active; the returned semantic value is prepared
+  but suppressed. Normal synchronous calls complete before a later notification can be observed and remain valid.
+  This locks the lifecycle seam that `.10.9.2.2` will place between decoded preparation and canonical stdio
+  emission without pretending that synchronous Perl work is preemptible.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.0` — derive native bytes, do not read or hand-copy the contract): The
   Perl server needs exact discovery/tool/schema/error values but ADR `0049` forbids runtime path reads. Embedding a
   deterministic generated data module solves both constraints: one tool derives `LinkedSpec::MCPContract` from the

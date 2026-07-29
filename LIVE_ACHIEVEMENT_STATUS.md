@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Perl native MCP decoded server implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.2.1` adds a generated filesystem-free neutral-contract binding, private frozen-schema
+runtime, and public in-process `LinkedSpec::MCPServer`. The secure registry accepts only existing opaque native
+indexes, uses exact OS entropy and monotonic expiry, retains authorization digests rather than bytes, makes all
+four unavailable-handle states externally identical, bounds capacity/collisions/lifetime, releases references on
+shutdown, and applies only the five contract-approved lowering ceilings.
+
+Decoded discovery/list/capabilities/query/cancellation dispatch now returns exact Perl-identity contract values.
+Capabilities and allowed queries still invoke native operations; no semantic response is cached or synthesized,
+and policy denial occurs before query dispatch. Focused proof covers all canonical frame classifications, binding
+freshness, clone isolation, every policy component, entropy/time/collision/capacity/expiry/revocation/auth failure,
+sanitization, prepared-response cancellation, and shutdown release. Canonical CI now locks materializer ->
+independent validator -> generated binding order and 22 Python tool entrypoints. Strict JSON-byte/stdin/stdout/log/
+EOF behavior remains `.10.9.2.2`; this leaf adds no facade/CLI/source loader, contract digest, semantic behavior,
+rollout promotion, or admission claim.
+
+Signoff passes the 12-suite focused binding/server proof, MCP 35/10/10/68, mdBook, Knowledge Map 742/5,975, six
+doctrines, capability 80/0/0, semantic 6/20/105 at rollout 7/9 + admission 6/6, storage 1,698/379,300/28, and tool
+locality 3/13/22. Canonical CI passes Perl 18, Rust 1/1 in 81.13 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds,
+containment/moved-root, primary CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 631 seconds. Cleanup removes only the
+verified 13,308-KiB rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — Perl native MCP owner and security plan complete
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR `0057` freeze the first native server without adding it.
@@ -109,17 +132,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No successor leaf is active during this closeout. `FUTURE-PARITY-BACKLOG.10.9.2.0` is fully verified from clean
-  neutral-contract commit `9307524a`; it freezes behavior-free Perl MCP ownership and security seams under ADR
-  `0057`. No server behavior exists. Registry/decoded dispatch `.10.9.2.1` activates task-tree-first only after
-  this closeout commit is clean; typed source-location implementation remains pending at `.14.1`.
+- `FUTURE-PARITY-BACKLOG.10.9.2.1` is complete and awaiting only its commit/clean boundary. Strict stdio/lifecycle
+  `.10.9.2.2` is the next eligible leaf after that clean commit; typed source-location implementation remains
+  pending at `.14.1`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
-- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.2.0 — plan Perl native MCP server**
-  (behavior-free native owner/security audit from clean neutral-contract commit `9307524a`).
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.2.1 — implement Perl MCP decoded server**
+  (generated binding, private contract runtime, secure registry, exact decoded dispatch, and complete signoff from
+  clean plan commit `ccc391ae`).
 
   **Result:** ADR `0057` freezes one direct native server, generated filesystem-free contract binding, private
   schema/wire owners, exact registry/auth/expiry/revocation/policy/cancellation/log/EOF boundaries, and `.1-.4`

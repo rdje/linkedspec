@@ -1169,11 +1169,40 @@ All six native runtime targets are admitted and recurring proof is active. Queri
 local ids/order, bounded pagination/traversal, and `none`/`identity`/`span`/`text` source ceilings with explicit
 redactions. Runtime explanations consume only an already captured caller-owned observation.
 
-The neutral modern MCP contract is also complete, but no MCP server is implemented yet. ADR `0057` and behavior-
-free Perl leaf `.10.9.2.0` freeze the future in-process `LinkedSpec::MCPServer` owner, generated filesystem-free
-contract binding, strict duplicate-safe wire, and secure handle lifecycle. Implementation begins in `.10.9.2.1`.
-Continue using the native methods above today; descriptor mode below remains a separate compiler-compatibility
-view, not the semantic wire model.
+The neutral modern MCP contract and Perl's decoded in-process server core are now implemented. Import
+`LinkedSpec::MCPServer` directly, register an already-created index under an opaque host authorization byte string,
+then pass already-decoded requests to `dispatch`:
+
+```perl
+use LinkedSpec::MCPServer;
+
+my $server = LinkedSpec::MCPServer->new();
+my $authorization = "serialized-host-principal";
+my $handle = $server->register_index(
+  $index,
+  authorization_context => $authorization,
+  lifetime_ms => 900_000,
+  policy => {
+    source_detail_ceiling => "identity",
+    page_max => 100,
+    budget_maxima => {max_records => 1000, max_relations => 2000, max_depth => 4},
+  },
+);
+
+my $response = $server->dispatch(
+  $decoded_mcp_request,
+  authorization_context => $authorization,
+);
+$server->revoke_handle($handle);
+$server->shutdown();
+```
+
+The server derives its schemas/templates from a committed filesystem-free binding, retains only the native index,
+authorization digest, expiry, and lowering-only policy, and never compiles, opens a source/contract path, inspects
+the descriptor, or caches a semantic response. Current decoded methods are `server/discover`, `tools/list`, the
+two semantic `tools/call` operations, and `notifications/cancelled`. Strict duplicate-safe JSON bytes, stdio/LF
+framing, optional sanitized logging, and EOF cleanup remain `.10.9.2.2`; `serve_stdio` is therefore not available
+yet. Descriptor mode below remains a separate compiler-compatibility view, not the semantic wire model.
 
 Typical shape:
 

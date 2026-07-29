@@ -49,12 +49,14 @@ The distinction matters:
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
-Lua, and LuaJIT are admitted. MCP does not own semantics and no MCP server is implemented yet. Its architecture,
-protocol policy, neutral machine contract, and independent conformance are complete. The exact neutral contract is
-composition-closed and runs in canonical CI. ADR `0057` and behavior-free Perl audit `.10.9.2.0` now freeze the
-first native implementation's exact owners and security seams; implementation/admission remains pending.
+Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, protocol policy, neutral machine
+contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
+canonical CI. Perl now has the first native implementation core: a generated filesystem-free binding, private
+schema runtime, secure opaque registry, and exact already-decoded discovery/list/call/cancel dispatch. Strict
+JSON bytes and stdio lifecycle remain pending; the other four native server implementations and all six MCP
+runtime admissions remain pending.
 
-## Accepted modern MCP transport (machine contract encoded; servers pending)
+## Accepted modern MCP transport (Perl decoded core implemented; stdio pending)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -83,6 +85,8 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `capability_conformance/mcp_semantic_transport/validator_cases.json` | Independent 28-accepted/7-rejected frame classification, exact scenario inventories, dual digest anchors, and 68 named mutations across 14 categories. |
 | `tools/materialize_mcp_semantic_transport_contract.py` | Deterministic materializer and byte/digest self-check; not a server or independent checker. |
 | `tools/check_mcp_semantic_transport_contract.py` | Dependency-free independent schema/provenance/raw/state/mutation checker; never imports or executes the materializer. |
+| `tools/generate_perl_mcp_contract.py` | Deterministic consumer that verifies every manifest digest and checks or rewrites the committed Perl binding. |
+| `perl/LinkedSpec/MCPContract.pm` | Generated data-only Perl bundle; normative authority remains in the neutral artifacts above. |
 
 The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
 four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
@@ -91,6 +95,7 @@ four deployment-policy cases. All five server names occur in canonical responses
 ```bash
 bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
 ```
 
 Deliberate regeneration is explicit and reviewable:
@@ -108,26 +113,30 @@ document itself. It independently reconstructs every frame, verifies the exact s
 classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
 at their intended invariant. This is still conformance code, not an MCP server.
 
-Canonical local CI requires every listed artifact and both programs, then always runs the materializer before the
-independent validator. The recurring tool-governance proof rejects a missing materializer and reversed execution
-order. This detects stale JSONL/digests before independent semantic validation; it does not add an MCP endpoint.
+Canonical local CI requires every listed artifact and all three programs. It always runs the materializer before
+the independent validator, then checks the generated Perl binding only after both neutral owners pass. The
+recurring tool-governance proof rejects a missing materializer, a missing binding check, and binding-before-
+validator order. This detects stale JSONL/digests before independent semantic validation and prevents a derived
+backend binding from becoming an oracle for its own normative source.
 
-### Accepted Perl implementation plan (no server yet)
+### Current Perl in-process implementation (decoded dispatch; stdio pending)
 
-ADR `0057` turns the neutral requirements into a bounded native implementation plan without adding behavior. The
-future public class is `LinkedSpec::MCPServer`; it accepts an already-created `LinkedSpec::SemanticIndex`, never a
-source path or descriptor. Its private owner split is:
+ADR `0057` turns the neutral requirements into a bounded native implementation. Public
+`LinkedSpec::MCPServer` accepts an already-created `LinkedSpec::SemanticIndex`, never a source path or descriptor.
+Its owner split is:
 
-| Owner | Future responsibility |
+| Owner | Current responsibility |
 |---|---|
-| `LinkedSpec::MCPContract` | Generated, data-only Perl binding derived from the exact neutral artifacts. |
-| `LinkedSpec::MCPContractRuntime` | Deep-cloned templates and the frozen schema-profile validator; no semantic or I/O authority. |
-| `LinkedSpec::MCPServer` | Native handle registry, authorization/expiry/revocation/policy, and decoded dispatch. |
-| `LinkedSpec::MCPWire` | Strict UTF-8 JSON lines, canonical output, prepared-response cancellation, logs, EOF, and I/O status. |
+| `LinkedSpec::MCPContract` | Implemented generated data-only Perl binding derived from the exact neutral artifacts. |
+| `LinkedSpec::MCPContractRuntime` | Implemented deep-cloned templates and frozen schema-profile validator; no semantic or I/O authority. |
+| `LinkedSpec::MCPServer` | Implemented native handle registry, authorization/expiry/revocation/policy, and decoded dispatch. |
+| `LinkedSpec::MCPWire` | Pending `.10.9.2.2`: strict UTF-8 JSON lines, canonical output, logs, EOF, and I/O status. |
 
-This generated binding is necessary because the server may not read contract files at runtime, while hand-copying
-tool schemas and templates would create a second contract. A repository-routed generator will make the committed
-module reproducible and check byte freshness after the neutral materializer and independent validator.
+The generated binding is necessary because the server may not read contract files at runtime, while hand-copying
+tool schemas and templates would create a second contract. The repository-routed generator verifies every digest
+named by the neutral manifest, composes one canonical embedded JSON value, and proves the committed module byte-
+fresh after the neutral materializer and independent validator. Production runtime modules name no neutral
+artifact path and perform no contract-file I/O.
 
 The audit also measured two important Perl-specific boundaries. `return_descriptor` for the graph fixture
 contains two coderefs and five compiled regex objects, whereas the opaque index's canonical capabilities and
@@ -135,10 +144,18 @@ graph-list payloads exactly match the neutral digests. And installed `JSON::PP 4
 keys and escape-equivalent keys such as `"a"` plus `"\u0061"`. The future wire must therefore preflight decoded
 key identity and numeric token kind before ordinary JSON decoding; `JSON::PP->decode` alone is not conformant.
 
-The planned host shape is deliberately in-process and is not current API yet:
+The current decoded host shape is deliberately in-process:
 
 ```perl
-# FUTURE API — implemented only after FUTURE-PARITY-BACKLOG.10.9.2.1-.2 closes.
+use LinkedSpec;
+use LinkedSpec::MCPServer;
+
+my $source = "Top::\n /x/\n";
+my $index = LinkedSpec::semantic_index(
+  \$source,
+  logical_name => "example.spec",
+  source_detail_ceiling => "text",
+);
 my $server = LinkedSpec::MCPServer->new();
 my $handle = $server->register_index(
   $index,
@@ -150,21 +167,28 @@ my $handle = $server->register_index(
     budget_maxima => {max_records => 1000, max_relations => 2000, max_depth => 4},
   },
 );
-$server->serve_stdio(
-  input => $request_fh,
-  output => $response_fh,
+my $response = $server->dispatch(
+  $already_decoded_request,
   authorization_context => $host_authorization,
 );
+$server->revoke_handle($handle);
+$server->shutdown();
 ```
+
+`dispatch` accepts exactly one decoded request plus its out-of-band authorization context and returns a detached
+response hash, or `undef` for a notification/suppressed cancelled response. The current methods are
+`server/discover`, `tools/list`, `tools/call` for the exact capabilities/query tools, and
+`notifications/cancelled`. `serve_stdio` does not exist yet: raw JSON parsing, duplicate-key/numeric-token
+preflight, LF framing, output/log handles, and EOF cleanup remain `.10.9.2.2`.
 
 Production handles read exactly 32 bytes from the OS CSPRNG, encode 43 unpadded base64url characters, and expire
 against a monotonic clock. Missing entropy fails closed; there is no `rand`, wall-time, PID, or hash fallback.
-Authorization context is host-owned out-of-band data and never clientInfo. Only a private test constructor may
-inject deterministic entropy/time. The context is a nonempty opaque byte string bounded at 4,096 octets; the
+Authorization context is host-owned out-of-band data and never clientInfo. Only private `_new_for_test` may inject
+deterministic entropy/time and reduced test bounds. The context is a nonempty opaque byte string bounded at 4,096 octets; the
 server retains only its SHA-256 digest and uses one fixed-length comparison step (including a dummy digest for an
-unknown handle) while making no formal interpreter-level constant-time claim. Implementation remains ordered as
-registry/dispatch `.10.9.2.1`, strict
-stdio/lifecycle `.2`, exact Perl admission and the shared status ledger `.3`, then no-change closeout `.4`.
+unknown handle) while making no formal interpreter-level constant-time claim. Registry/decoded dispatch `.1` is
+implemented; work remains ordered as strict stdio/lifecycle `.2`, exact Perl admission and the shared status
+ledger `.3`, then no-change closeout `.4`.
 
 ### Discovery and request metadata
 
@@ -237,7 +261,7 @@ oracle.
 The canonical unavailable-handle result is identical for unknown, expired, revoked, and unauthorized states:
 
 ```json
-{"id":11,"jsonrpc":"2.0","result":{"_meta":{"io.modelcontextprotocol/serverInfo":{"name":"linkedspec-semantic-lua","version":"0.1.0"}},"content":[{"text":"{\"code\":\"linkedspec_mcp_handle_unavailable\",\"contract\":\"linkedspec-mcp-tool-error-v1\",\"message\":\"No current authorized semantic index is available for this handle.\"}","type":"text"}],"isError":true,"resultType":"complete"}}
+{"id":11,"jsonrpc":"2.0","result":{"_meta":{"io.modelcontextprotocol/serverInfo":{"name":"linkedspec-semantic-perl","version":"0.1.0"}},"content":[{"text":"{\"code\":\"linkedspec_mcp_handle_unavailable\",\"contract\":\"linkedspec-mcp-tool-error-v1\",\"message\":\"No current authorized semantic index is available for this handle.\"}","type":"text"}],"isError":true,"resultType":"complete"}}
 ```
 
 ### Deployment policy can only lower native authority
@@ -253,14 +277,19 @@ boundary fails before native dispatch with tool error `linkedspec_mcp_policy_den
 unchanged to native `query`, and its response remains byte-identical. The adapter never silently rewrites a query
 or synthesizes a semantic response.
 
-### Wire errors, cancellation, logs, and shutdown
+### Decoded errors and cancellation; pending wire, logs, and EOF
 
-Framing/JSON failures use `-32700`; invalid request envelopes use `-32600`; unknown methods use `-32601`; invalid
-metadata, parameters, or tool names use `-32602`; sanitized internal failures use `-32603`; and unsupported MCP
-versions use `-32022`. Unavailable handles and deployment denials are tool execution errors because a model can
-act on them. Unknown, malformed, or completed cancellation notifications are ignored without a response.
+The implemented decoded dispatcher uses `-32600` for invalid request envelopes, `-32601` for unknown methods,
+`-32602` for invalid metadata, parameters, or tool names, `-32603` for sanitized internal failures, and `-32022`
+for unsupported MCP versions. Unavailable handles and deployment denials are tool execution errors because a model
+can act on them. Unknown, malformed, or completed cancellation notifications are ignored without a response. A
+cancellation observed while a response is prepared suppresses it; an ordinary synchronous response that completed
+before a later notification remains valid.
 
-Stdout contains newline-delimited MCP messages only. The server is silent on stderr by default; host-enabled logs
+Pending `.10.9.2.2` adds framing/JSON failures as `-32700`, strict raw-byte admission, and stdio lifecycle while
+retaining these decoded classifications unchanged.
+
+Once `.2` lands, stdout contains newline-delimited MCP messages only. The server is silent on stderr by default; host-enabled logs
 are sanitized and may not contain handles, source/query/response content, logical names, authorization material,
 paths, host objects, or raw exceptions. Closing stdin is graceful shutdown: the server stops accepting work,
 clears the registry, releases index references, finishes complete frames, and exits zero. There is no shutdown
@@ -3370,7 +3399,8 @@ The dependency order is:
 | `.10.9.1.2` | independently validate and mutate the exact MCP contract | complete; 28 accepted plus seven rejected frames, ten raw inputs, ten lifecycle cases, and 68 rejected mutations |
 | `.10.9.1.3` | compose recurring governance and close the exact MCP contract | complete; unconditional ordered canonical proof, two topology mutations, no server |
 | `.10.9.2.0` | audit and freeze Perl native MCP owners/security seams | complete behavior-free plan; ADR `0057`, no server |
-| `.10.9.2.1-.10.9.2.4` | Perl registry/dispatch, stdio/lifecycle, exact admission, and no-change closeout | pending |
+| `.10.9.2.1` | generated Perl binding, private schema runtime, secure registry, and decoded dispatch | implemented; focused proof complete, lockstep signoff active |
+| `.10.9.2.2-.10.9.2.4` | Perl stdio/lifecycle, exact admission, and no-change closeout | pending |
 | `.10.9.3-.10.9.5` | native Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3393,5 +3423,6 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts are encoded; independent validation and native implementations
-remain pending until `.10.9.1.2-.7` close.
+runtime query surfaces now. MCP machine artifacts and independent validation are complete; Perl callers can also
+use the decoded in-process server today. Strict Perl stdio, Perl admission, the other four native servers, and
+recurring/public MCP rollout remain pending under `.10.9.2.2-.10.10`.

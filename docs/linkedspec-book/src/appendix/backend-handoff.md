@@ -237,8 +237,10 @@ native rollout is 7/9 and native admission is 6/6. MCP protocol policy `.10.9.1.
 `.10.9.1.1`, independent 68-mutation validation `.10.9.1.2`, and ordered canonical composition `.10.9.1.3` are
 complete. ADR `0057` and behavior-free Perl `.10.9.2.0` freeze a direct `LinkedSpec::MCPServer`, generated
 filesystem-free contract binding, strict duplicate-safe JSON wire, OS CSPRNG/monotonic expiry, opaque host
-authorization, lowering-only policy, and `.1-.4` implementation/admission split. No server behavior exists yet;
-Perl registry/dispatch `.10.9.2.1` is next, followed by remaining native/runtime admission `.10.9.3-.7`.
+authorization, lowering-only policy, and `.1-.4` implementation/admission split. Perl `.10.9.2.1` now implements
+the generated binding, private schema runtime, secure registry, and exact decoded dispatch with canonical signoff;
+strict stdio/lifecycle
+`.10.9.2.2` follows, then remaining native/runtime admission `.10.9.3-.7`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

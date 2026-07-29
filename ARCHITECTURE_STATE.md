@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Perl native MCP decoded server: `FUTURE-PARITY-BACKLOG.10.9.2.1` implements public in-process
+  `LinkedSpec::MCPServer` over an already-created opaque `LinkedSpec::SemanticIndex`. Deterministic
+  `tools/generate_perl_mcp_contract.py` verifies the neutral manifest and commits the data-only filesystem-free
+  `LinkedSpec::MCPContract`; private `LinkedSpec::MCPContractRuntime` owns deep clones, the frozen schema profile,
+  and exact Perl response shells. The registry uses 32 OS-random bytes, 43-character unpadded base64url handles,
+  monotonic expiry, digest-only out-of-band authorization, revocation, capacity/collision bounds, shutdown release,
+  and five lowering-only policy components. Decoded discovery/list/capabilities/query/cancel dispatch calls only
+  native capabilities/query, stores no semantic response, sanitizes failures, and supports prepared-response
+  cancellation. Strict JSON bytes, stdio/LF emission, logging, and EOF remain exclusively `.10.9.2.2`; no facade,
+  CLI, source/path loader, compilation/execution, semantic-cache, rollout, or admission authority moves.
 - `2026-07-29` Perl native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR
   `0057` map the exact admitted `LinkedSpec::SemanticIndex` capabilities/query seam into a future direct
   `LinkedSpec::MCPServer`. A generated filesystem-free `LinkedSpec::MCPContract` binding consumes the neutral

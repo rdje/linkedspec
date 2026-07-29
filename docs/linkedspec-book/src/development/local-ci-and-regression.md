@@ -20,21 +20,22 @@ bash tools/run_ci_local.sh
 
 This is the canonical regression gate for local development.
 
-The gate unconditionally verifies the neutral MCP transport before any native server exists. It requires every
-contract artifact and runs these exact steps in order:
+The gate unconditionally verifies the neutral MCP transport before checking the derived Perl binding. It requires
+every contract artifact and runs these exact steps in order:
 
 ```bash
 bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
+PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t
 ```
 
 The first step catches stale generated frames/digests; the second independently checks schemas, provenance, raw
-and lifecycle/handle/policy outcomes, and 68 mutations. The recurring tool-governance test rejects omission and
-validator-before-materializer order. Neither step starts a server or changes semantic/CLI behavior.
-
-Behavior-free Perl plan `.10.9.2.0` adds no gate yet. ADR `0057` requires the future generated Perl contract
-binding check to run only after these two neutral owners, so a backend-derived module can never bless or hide stale
-normative bytes. Native registry/dispatch implementation begins in `.10.9.2.1`.
+and lifecycle/handle/policy outcomes, and 68 mutations. Only then may the third verify the byte-exact generated
+Perl module, after which focused binding/decoded-server proofs run. The recurring tool-governance test rejects a
+missing materializer, missing binding check, and binding-before-validator order. This keeps a backend-derived
+module from blessing or hiding stale normative bytes. None of these steps starts stdio, reads a source path, or
+changes the native semantic/primary-CLI contract.
 
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 

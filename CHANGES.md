@@ -1,5 +1,40 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.1 — implement Perl MCP decoded server
+
+Added the first native MCP implementation core. A deterministic repository-routed generator verifies every
+neutral manifest digest and commits one data-only `LinkedSpec::MCPContract` bundle containing the exact schema,
+semantic payloads, corpus, and 35 canonical frames. Private `LinkedSpec::MCPContractRuntime` verifies the embedded
+bundle digest, deep-clones values, implements the frozen JSON Schema keyword profile, and builds exact Perl-
+identity discovery/list/tool/error results without a runtime artifact path or I/O capability.
+
+Added public in-process `LinkedSpec::MCPServer`. Hosts register only an existing opaque
+`LinkedSpec::SemanticIndex`; production handles consume exactly 32 `/dev/urandom` bytes and encode 43 unpadded
+base64url characters with bounded collision retries. The registry enforces contract-derived capacity and absolute
+monotonic lifetime, host revocation, shutdown release, 1..4,096-byte out-of-band authorization, digest-only
+retention, and one fixed 32-byte comparison step including a dummy digest for unknown handles. Unknown, expired,
+revoked, and unauthorized valid handles return one indistinguishable tool error.
+
+Decoded dispatch now supports modern discovery, tool listing, capabilities, query, and cancellation. Registration
+validates native capabilities once but stores no response; every capabilities call invokes native capabilities,
+and every allowed query reaches native query unchanged. Policy can only lower source detail, page maximum, and
+record/relation/depth maxima; capabilities expose the exact schema-preserving projection and above-policy queries
+fail before native dispatch. Native failures and invalid responses become sanitized internal errors, and a
+cancellation observed before emission suppresses the prepared response.
+
+Added focused binding/server proofs and canonical CI integration. The gate now runs neutral materialization,
+independent validation, and generated Perl binding freshness in exact order before the two Perl tests. Tool-
+storage governance advances from 21 to 22 Python entrypoints and rejects a missing generator or generator-before-
+validator order. This slice intentionally adds no JSON-byte parser, stdio/framing, logging, EOF adapter, facade/
+CLI surface, source loader, semantic cache, contract/semantic digest change, rollout promotion, or admission
+claim; those remain `.10.9.2.2-.4`.
+
+Signoff passes the 12-suite focused binding/server proof, MCP 35/10/10/68, mdBook, Knowledge Map 742/5,975, all
+six doctrines, capability 80/0/0, semantic 6/20/105 at rollout 7/9 + admission 6/6, storage 1,698/379,300/28, and
+tool locality 3/13/22. Canonical CI passes Perl 18, Rust 1/1 in 81.13 seconds, Dart 1/1, Julia 416/416 in 28.5
+seconds, process containment, moved-root proof, primary CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 631 seconds.
+Exact cleanup removes only the verified ignored 13,308-KiB rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.0 — plan the Perl native MCP server
 
 Added behavior-free ADR `0057` and a Knowledge Map authority card for the first native MCP implementation.

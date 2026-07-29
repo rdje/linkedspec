@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.2.0`; `(this commit)` freezes the Perl MCP implementation plan.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.2.1`; `(this commit)` implements Perl MCP binding/decoded dispatch.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -32,29 +32,29 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   interpreter and Julia-managed read-only system depots remain necessary external toolchain inputs.
 - current_storage_lua: `tools/test_lua_project_data_storage.sh` proves 16 owners, both ABI module pairs, quoting,
   native/generated/trace use, hostile-output rejection, cleanup, and zero old residue; macOS invokes clang directly.
-- current_storage_tools: tool oracle freezes 3 Python temp/13 shell allocator/21 tool owners; bytecode/map/book/
+- current_storage_tools: tool oracle freezes 3 Python temp/13 shell allocator/22 tool owners; bytecode/map/book/
   CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
 - current_storage_doctrine: `PROJECT-DATA-STORAGE` governs current tracked storage sinks/defaults and commands;
   28 cases pass. Its process complement locks six required families, hostile inputs, relocation, and kernel denial.
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: MCP `.10.9.1` is closed. Behavior-free Perl preflight `.10.9.2.0` is complete from
-  clean `9307524a`; ADR `0057` freezes one direct native server, generated filesystem-free contract binding,
-  strict wire/security/lifecycle seams, and `.1-.4` order without server behavior. Registry/dispatch `.1` follows.
+- current_semantic_frontier: MCP `.10.9.1` is closed. Perl `.10.9.2.1` from clean `ccc391ae` implements the
+  generated filesystem-free binding, private frozen-schema runtime, secure opaque registry, and exact decoded
+  discovery/list/call/cancel dispatch and passes complete signoff. Strict JSON/stdin/stdout/log/EOF `.10.9.2.2` follows only after the clean commit.
   Director-approved ADR `0056` stays pending under `.14.1-.8`; no behavior moves; ADR `0045` keeps gap ownership.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: `.10.9.2.0` aligns ADR/task/index/roadmaps/architecture/KM/book/continuity without behavior. KM
-  741/5,965; MCP 35/10/10/68; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage
-  1,691/377,723/28; canonical Rust 81.54s, Julia 29.0s, CLI 66x2, RAM 58%, and Phase 0 1,031/650s pass. Cleanup
-  removes the 13,284-KiB book/one empty run; permission-correct containment passes.
+- current_signoff: `.10.9.2.1` focused binding/server tests pass 12 top-level suites; MCP remains 35/10/10/68;
+  tool locality passes 3/13/22; mdBook/KM 742/5,975, six doctrines, capability 80/0/0, semantic 6/20/105 at
+  7/9 + 6/6, and storage 1,698/379,300/28 pass. Canonical passes Rust 81.13s, Julia 28.5s, CLI 66x2, RAM 58%,
+  and Phase 0 1,031/1,031 in 631s; cleanup removes the exact 13,308-KiB book and one empty run.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 68/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 69/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: activate `.10.9.2.1` task-tree-first after the clean plan commit; no push.
+- blockers: none. next: commit/clear/verify clean `.10.9.2.1`, then activate strict stdio `.10.9.2.2`; no push.

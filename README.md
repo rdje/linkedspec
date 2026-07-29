@@ -1039,10 +1039,12 @@ content migration exists yet.
   raw/lifecycle/handle/policy state and rejects 68 mutations without importing the materializer. No-change
   `.10.9.1.3` requires both programs as tracked canonical inputs, runs materialization before independent
   validation, rejects omission/order drift, and closes the neutral contract. Native implementations remain
-  `.10.9.2-.7`. Behavior-free Perl audit `.10.9.2.0` and ADR `0057` now freeze a direct
+  `.10.9.2-.7`. Behavior-free Perl audit `.10.9.2.0` and ADR `0057` freeze a direct
   `LinkedSpec::MCPServer`, generated filesystem-free contract binding, strict duplicate-safe wire owner, OS CSPRNG/
   monotonic handle lifecycle, opaque authorization context, lowering-only policy, and `.1-.4` implementation/
-  admission order. No server exists yet; in-process Perl registry/dispatch `.10.9.2.1` is next. Perl
+  admission order. `.10.9.2.1` now implements the generated binding, frozen schema runtime, secure opaque registry,
+  and exact decoded discovery/list/call/cancel dispatch with no filesystem/semantic cache authority. Strict
+  JSON-byte/stdin/stdout/log/EOF handling remains pending under `.10.9.2.2`. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -1464,7 +1466,8 @@ content migration exists yet.
   those rules once with digest-locked neutral artifacts; independent checker `.10.9.1.2` rejects 68 mutations;
   and no-change `.10.9.1.3` runs both owners unconditionally in canonical CI, rejects omission/order drift, and
   closes the neutral contract. ADR `0057` and behavior-free `.10.9.2.0` map exact Perl native/wire/security seams
-  and split implementation through `.10.9.2.1-.4`; no server behavior exists yet and `.10.9.2.1` is next.
+  and split implementation through `.10.9.2.1-.4`; `.10.9.2.1` now supplies the generated contract binding,
+  private schema runtime, secure registry, and decoded in-process server, while strict stdio `.10.9.2.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

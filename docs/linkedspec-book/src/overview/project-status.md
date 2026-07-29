@@ -672,7 +672,10 @@ Three backbone items tracked major structural modernization — all done:
   the neutral contract. ADR `0057` and behavior-free Perl audit `.10.9.2.0` now freeze an in-process
   `LinkedSpec::MCPServer`, generated filesystem-free contract binding, strict duplicate-safe wire, OS CSPRNG/
   monotonic handle lifecycle, authorization/policy seams, and `.1-.4` implementation/admission order. No server
-  behavior exists yet; Perl registry/dispatch `.10.9.2.1` is next and later native servers remain `.10.9.3-.7`;
+  wire behavior exists yet; Perl registry/decoded dispatch `.10.9.2.1` now completely implements and verifies the
+  generated binding, private schema runtime, secure handle lifecycle, exact tools, and cancellation. Strict stdio/lifecycle
+  `.2` and
+  later native servers remain `.10.9.2.2-.7`;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
