@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.8` — recurring semantic proof should own orchestration, not a seventh
+  consumer): All six runtime targets already have omission-sensitive twelve-role admissions. The recurring layer
+  therefore records exact commands for those consumers and invokes them unchanged; it must not add an aggregate
+  semantic fixture, projector, evaluator, observation vocabulary, or cross-backend AST interchange format.
+
+  ADR `0049` explicitly keeps semantic introspection out of the v1 primary CLI. The recurring matrix still needs
+  primary proof, but its job is negative compatibility: one ordinary success, one compilation failure that
+  precedes input loading, and one traced invocation failure run across all commands/environments. Generated,
+  loaded, reconstructed, observed, privacy, page, budget, error, and explanation semantics remain owned by the
+  admitted consumers. Seven recurring mutations then lock orchestration classes without duplicating their
+  existing per-consumer path/role/admission mutations.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.7` — neutral observation JSON is evidence, not a typed event):
   An isolated emitted-module host must derive its semantic response inside that host. JSON-decoded observation
   rows cannot be accepted back into `with_execution_observation` as if they were package-protected typed events;

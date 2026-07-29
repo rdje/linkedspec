@@ -20,7 +20,11 @@ both illegal and coordinated valid-but-wrong family mutations fail. Every semant
 derived from its caller-registered fixture logical name after removing `.spec`; the calls snapshot is therefore
 `calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 6 complete / 3 pending;
 native backend admission is 6 complete / 0 pending. No parser, compiler, runtime, descriptor, generated-source,
-CLI, trace, or MCP behavior was added by the neutral contract. Behavior-free Perl audit `.10.3.0` maps strict source,
+CLI, trace, or MCP behavior was added by the neutral contract. Recurring leaf `.10.8` is behavior-free planned
+composition: one `tools/check_semantic_introspection_six_runtime.sh` driver will run the six exact admitted
+consumers, three existing primary no-drift cases, and generated/capability/language ledgers; canonical execution
+will be opt-in through `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`. Seven recurring mutations will lock that topology and
+only the recurring rollout row may advance. Behavior-free Perl audit `.10.3.0` maps strict source,
 descriptor, typed ActionIR, staged, structured failure, generated-plan, and missing runtime-observation authorities.
 Perl foundation `.10.3.1` implements opaque in-memory construction, strict source normalization/mapping, and
 immutable compiled-or-failed outcomes. Static leaf `.10.3.2.1` adds a private clone-safe projection whose graph,

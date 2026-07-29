@@ -798,6 +798,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   mutations. Each ABI passes exactly 408 assertions; the neutral gate advances to 6 groups / 20 responses / 98
   mutations, rollout 6/9, and admission 6/6. Retrieve [[lua-semantic-introspection-admission]] before editing.
 
+- **RECURRING SIX-RUNTIME PLAN:** `.10.8` will add
+  `tools/check_semantic_introspection_six_runtime.sh`, one repository-routed fail-fast driver that invokes the
+  exact admitted twelve-role consumers for Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT unchanged. It will also run
+  `tools/run_primary_cli_matrix.sh` for `success_named_source_literal_input`,
+  `failure_compile_precedes_input_load`, and `trace_failure_invoke_route_low`, then the generated-source,
+  capability, and language-coverage ledgers. Canonical all-toolchain execution will be opt-in through
+  `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`; ordinary CI will require and syntax-check the driver. Seven recurring
+  mutations lock runtime/command/primary/support/CI/driver/rollout topology, and only recurring may advance.
+  Retrieve [[semantic-introspection-recurring-gate-plan]] before implementation.
+
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque
   detached source/error values. Importing `linkedspec.semantic_index` remains parser-free; constructing an index

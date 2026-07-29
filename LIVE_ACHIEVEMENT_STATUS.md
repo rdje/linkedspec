@@ -8,14 +8,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- Lua semantic adapter/admission parent `FUTURE-PARITY-BACKLOG.10.7` is closed through `.10.7.7`. Recurring
-  six-runtime semantic composition `FUTURE-PARITY-BACKLOG.10.8` is the next pending task-tree-first activation
-  after this implementation commit is clean. No pivot occurs before then.
+- `FUTURE-PARITY-BACKLOG.10.8` is active task-tree-first from clean Lua closeout `e335ea8b`. Its behavior-free
+  plan owns one exact repository-routed driver over the six admitted twelve-role consumers, three 5x2 primary
+  no-drift cases, generated/capability/language ledgers, canonical opt-in, seven recurring topology mutations,
+  premature-MCP denial, and recurring-only promotion. Implementation follows only after this plan commits cleanly.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.8 — activate recurring semantic proof**
+  (behavior-free exact orchestration plan from clean Lua closeout `e335ea8b`).
+
+  **Result:** The frozen implementation is one repository-routed driver over all six exact admitted twelve-role
+  consumers, three 5x2 primary no-drift cases, generated/capability/language ledgers, canonical opt-in, seven
+  recurring mutations, premature-MCP denial, and recurring-only promotion. No behavior or governance value moves.
+
+  **Proof:** Neutral semantics remain 6/20/98 at rollout 6/9 and admission 6/6. Memory architecture, all six
+  doctrines, Knowledge Map 736/5,904, mdBook, and diff hygiene pass. Exact cleanup removes only the verified
+  13,080-KiB rendered book and one proven-empty managed-run directory. Cadence advances to 60/300 with no push;
+  implementation follows only after the clean plan commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.7 — admit exact dual-ABI Lua semantics**
   (one omission-sensitive consumer from clean planning commit `e5a547ac`).
 

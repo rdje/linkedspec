@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.8 — activate recurring semantic proof
+
+Activated recurring six-runtime semantic composition task-tree-first from clean Lua admission commit `e335ea8b`.
+Knowledge Map retrieval covered all five backend admission facts (including one shared dual-ABI Lua consumer),
+ADR `0049`/`0050`, the neutral contract/checker, canonical driver, and proven recurring-gate precedents. The
+frozen implementation is one repository-routed `tools/check_semantic_introspection_six_runtime.sh` over the exact
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT twelve-role consumers, with same-volume disposable Rust/Lua/Julia
+state and no replacement semantic implementation.
+
+The narrow primary projection selects `success_named_source_literal_input`,
+`failure_compile_precedes_input_load`, and `trace_failure_invoke_route_low` across five commands and
+default/POSIX environments. Those cases prove v1 still adds no primary semantic CLI while successful, failed
+compile, and traced failed invocation behavior remains exact. Generated-source, capability, and language-coverage
+ledgers finish the driver.
+
+Seven future mutations lock runtime presence, exact command, primary case inventory, support checks, canonical
+opt-in switch, driver path, and recurring rollback. The former premature-recurring guard becomes premature-MCP;
+only `recurring_six_runtime` may advance. This planning slice changes no production/test consumer, semantic
+model/query/API, response digest, generated format, CLI, transport, rollout, or admission value; baseline remains
+6 groups / 20 responses / 98 mutations at rollout 6/9 and admission 6/6. Memory architecture, all six doctrines,
+Knowledge Map 736/5,904, mdBook, and diff hygiene pass. Exact cleanup removes only the verified 13,080-KiB
+rendered book and one proven-empty managed-run directory.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.7 — admit exact dual-ABI Lua semantics
 
 Added one Lua-5.1-compatible ordered consumer that executes unchanged under PUC Lua and LuaJIT and composes only

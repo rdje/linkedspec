@@ -12854,7 +12854,7 @@ before implementation.
     task-tree-first slice.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.8`
-  Status: `pending`
+  Status: `active` (2026-07-28; behavior-free exact recurring-gate planning from clean Lua closeout `e335ea8b`)
   Goal: Compose one recurring six-runtime semantic-introspection admission.
   Depends on: `.10.7`
   Acceptance: One fail-fast driver composes the exact neutral checker, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT,
@@ -12862,6 +12862,49 @@ before implementation.
     runtime observations, source/redaction/page/budget/explain proofs, support ledgers, rollout state, and omission
     mutations. Direct and observed parsing remain result/diagnostic equivalent and governance advances only this
     recurring row.
+  Verification plan: Add one repository-routed `tools/check_semantic_introspection_six_runtime.sh` that creates
+    one same-volume disposable artifact root, runs the exact neutral checker, and invokes each already-admitted
+    twelve-role consumer once: Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Reuse the canonical consumer commands,
+    build disposable PUC/LuaJIT native modules, isolate Rust target and Julia writable depot under that artifact
+    root, and change no semantic production/test consumer. Run primary cases
+    `success_named_source_literal_input`, `failure_compile_precedes_input_load`, and
+    `trace_failure_invoke_route_low` across five commands and default/POSIX environments to prove v1 adds no CLI
+    surface while success, compile failure, and traced runtime failure remain exact. Finish with generated-source,
+    capability, and language-coverage ledgers. Add exact `recurring_gate` topology to the neutral contract and
+    checker, require the tracked/syntax-checked driver in canonical CI, and expose all-toolchain execution only via
+    `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1`. Seven independent recurring mutations must reject runtime omission,
+    command alteration, primary-case omission, support-check omission, CI-switch alteration, driver alteration,
+    and recurring rollback; replace `advance_recurring_early` with `advance_mcp_early`. Promote only
+    `recurring_six_runtime`, leaving MCP/public pending, then pass focused recurring, all ledgers, complete
+    canonical CI, mdBook/KM/memory/task/doctrines/diff/syntax/storage, and exact safe cleanup before commit.
+
+  #### Acceptance Checklist
+
+  - [x] **RETRIEVE / CLEAN BASE** — Retrieve all five current admission fact cards, recurring-gate precedents,
+    ADRs `0049`/`0050`, neutral topology/checker, canonical driver, and clean Lua closeout `e335ea8b`.
+  - [ ] **EXACT SIX-RUNTIME DRIVER** — One fail-fast repository-routed driver runs the exact Perl/Rust/Dart/Julia/
+    PUC Lua/LuaJIT twelve-role consumers once with same-volume disposable build/depot/native state.
+  - [ ] **ROUTES / ANSWERS / NON-INTERFERENCE** — The admitted consumers re-prove all twenty responses, compiled/
+    failed/observed snapshots, loaded/reconstructed/generated/emitted/traced routes, policy, isolation, and denial.
+  - [ ] **PRIMARY / SUPPORT** — Three exact no-new-CLI cases pass 5x2 and generated-source, capability, and language
+    ledgers remain exact.
+  - [ ] **TOPOLOGY / MUTATIONS** — Neutral governance locks all six commands, primary/support topology, canonical
+    opt-in, seven recurring mutations, and premature-MCP denial.
+  - [ ] **PROMOTE ONLY RECURRING** — Advance only `recurring_six_runtime`; MCP and public no-drift remain pending,
+    and no semantic model/query/API, backend consumer, generated format, CLI, or transport changes.
+  - [ ] **LOCKSTEP / COMMIT** — Pass recurring/full canonical/docs/KM/doctrines/diff/storage/cleanup, commit cleanly,
+    clear the brief, and only then activate thin MCP `.10.9`.
+
+  Planning evidence: Clean commit `e335ea8b` closes all six native admissions at exact 6 groups / 20 responses /
+    98 mutations / rollout 6/9 / admission 6/6. Knowledge Map retrieval confirms recurring gates add composition,
+    not backend behavior: one driver, exact consumer commands, a narrow primary projection, support ledgers,
+    canonical opt-in, and omission mutations. ADR `0049` keeps the primary CLI free of semantic-introspection
+    options and assigns native/generated/diagnostic/execution composition to this leaf; therefore the three
+    selected existing cases prove no-drift rather than introduce a semantic CLI route. The implementation boundary
+    is the one driver, neutral topology/checker, canonical registration, and synchronized docs above. The
+    behavior-free baseline passes the neutral checker unchanged at 6/20/98 and 6/9 + 6/6, memory architecture,
+    all six doctrines, Knowledge Map 736/5,904, mdBook, diff hygiene, and exact cleanup of only the verified
+    13,080-KiB rendered book plus one proven-empty managed-run directory. No behavior or governance value changes.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
   Status: `pending`
@@ -15150,7 +15193,8 @@ cross-backend signoff. No-change composition `.10.7.6.4` passes unchanged ten-ow
 clean `04ab4fec` plus complete lockstep proof and composition-closes parent `.10.7.6`. Exact ordered dual-ABI
 admission `.10.7.7` is complete from clean planning commit `e5a547ac`: one unchanged twelve-role source passes
 408 assertions on each ABI and all eleven semantic owners pass 2,372 per ABI. Parent `.10.7` is closed.
-Semantic governance is 6/20/98 at rollout 6/9 and admission 6/6; recurring composition `.10.8` is next pending.
+Semantic governance is 6/20/98 at rollout 6/9 and admission 6/6. Recurring composition `.10.8` is active
+task-tree-first from clean Lua closeout `e335ea8b`; its behavior-free exact driver/topology plan precedes code.
 
 ### Superseded frontier snapshots
 
@@ -15791,6 +15835,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 74.6.6.3 | `FUTURE-PARITY-BACKLOG.10.7.6.3` | `done` | Generated/emitted direct/traced and isolated dual-ABI propagation passes new 80/focused 1,964 per ABI plus full signoff with unchanged format/governance. |
 | 74.6.6.4 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `done` | Committed focused 1,964 plus complete signoff closes the observation parent without replacement code, format movement, or promotion. |
 | 74.6.7 | `FUTURE-PARITY-BACKLOG.10.7.7` | `done` | One exact 12-role Lua consumer passes 408 assertions per ABI, advances only Lua to 6/9 + 6/6, and closes `.10.7`. |
+| 74.7 | `FUTURE-PARITY-BACKLOG.10.8` | `active` | Freeze one exact recurring six-runtime driver, narrow primary/support proof, seven topology mutations, and recurring-only promotion before implementation. |
 
 ## `FUTURE-PARITY-BACKLOG.5.2.0` Logical-Helper Audit Evidence
 
@@ -16752,6 +16797,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.8` | `FUTURE-PARITY-BACKLOG.10.8 - activate recurring semantic proof` | Behavior-free exact six-runtime driver/primary/support/canonical topology, seven mutations, recurring-only promotion boundary, and clean implementation handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.7` | `FUTURE-PARITY-BACKLOG.10.7.7 - admit Lua semantic introspection` | Exact shared 12-role consumer, 408 assertions per ABI, 98 mutation locks, Lua-only 6/9 + 6/6 promotion, complete signoff, and parent `.10.7` closure. |
 | `FUTURE-PARITY-BACKLOG.10.7.7` | `FUTURE-PARITY-BACKLOG.10.7.7 - activate Lua semantic admission` | Behavior-free shared twelve-role dual-ABI plan, identical two-row topology, nine mutations, Lua-only promotion, full signoff/parent-closeout boundary, and clean implementation handoff. |
 | `FUTURE-PARITY-BACKLOG.10.7.6.4` | `FUTURE-PARITY-BACKLOG.10.7.6.4 - close Lua runtime observation` | No-change ten-suite recomposition at focused 1,964 per ABI, complete signoff, parent `.10.7.6` closure, and clean handoff to admission `.10.7.7`. |
@@ -17019,6 +17065,12 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-28`: Recurring semantic proof `.10.8` activates task-tree-first from clean Lua closeout `e335ea8b`.
+  The behavior-free plan freezes one repository-routed six-runtime driver over the exact admitted twelve-role
+  consumers, three 5x2 no-new-CLI cases, generated/capability/language ledgers, canonical opt-in switch, seven
+  recurring topology mutations, replacement premature-MCP guard, and recurring-only promotion. Baseline remains
+  6/20/98 at rollout 6/9 and admission 6/6 until implementation.
 
 - `2026-07-28`: Exact dual-ABI admission `.10.7.7` adds one Lua-5.1-compatible twelve-role consumer and runs its
   unchanged bytes under PUC Lua and LuaJIT at 408 assertions each. All eleven semantic suites pass 2,372 per ABI;

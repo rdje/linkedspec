@@ -2582,6 +2582,34 @@ doctrines, Rust admission 1/1 in 80.10 seconds, Dart 1/1, Julia 416/416 in 28.5 
 moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 663 seconds. Lua parent `.10.7` is closed;
 Knowledge Map 735/5,894 passes, and recurring six-runtime composition remains separately owned by `.10.8`.
 
+#### Recurring six-runtime proof plan
+
+Leaf `.10.8` is active from clean Lua closeout `e335ea8b`. It will add one orchestration driver,
+`tools/check_semantic_introspection_six_runtime.sh`, without adding a seventh semantic consumer or changing any
+backend model, query evaluator, observation seam, generated format, or public API.
+
+One invocation will run the neutral checker followed by the exact admitted twelve-role consumers for Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT. The existing consumers remain responsible for all twenty responses, compiled/
+failed/observed snapshots, native/loaded/reconstructed/generated/emitted/traced/isolated routes, privacy, pages,
+budgets, portable errors, explanations, isolation, non-execution, and host-leak denial.
+
+The v1 primary CLI deliberately has no semantic-introspection option. Recurring proof therefore selects three
+existing no-drift cases across all five commands and both option environments:
+
+```bash
+bash tools/run_primary_cli_matrix.sh \
+  --case success_named_source_literal_input \
+  --case failure_compile_precedes_input_load \
+  --case trace_failure_invoke_route_low
+```
+
+Generated-source, capability, and language-coverage ledgers complete the proof. Canonical CI will require and
+syntax-check the driver on every run, while `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1` will opt into the expensive
+all-toolchain execution. Seven recurring mutations will lock runtime presence, exact command, primary and support
+inventories, CI switch, driver, and rollout. Only `recurring_six_runtime` may advance; MCP and public no-drift
+remain separate. The behavior-free planning baseline passes at 6 groups / 20 responses / 98 mutations, rollout
+6/9, and admission 6/6; Knowledge Map 736/5,904 and the public book build pass unchanged.
+
 #### Lua private immutable query kernel (historical dependency boundary)
 
 Leaf `.10.7.5.1` implemented the first dependency-safe query layer without exposing the planned API.
@@ -3108,7 +3136,7 @@ The dependency order is:
 | `.10.7.6.4` | Lua runtime-observation composition closeout | complete; committed focused 1,964 plus full signoff closes `.10.7.6` without replacement code, format change, or promotion |
 | `.10.7.7` | Lua exact dual-ABI semantic admission | complete; one shared twelve-role source passes 408 assertions per ABI, identical two-row topology and nine mutations advance only Lua to 6/9 rollout and 6/6 admission |
 | `.10.7` | PUC Lua and LuaJIT identity | complete |
-| `.10.8` | recurring six-runtime proof | pending |
+| `.10.8` | recurring six-runtime proof | active; exact driver/primary/support/canonical/mutation plan frozen before implementation |
 | `.10.9` | thin MCP transport | pending |
 | `.10.10` | public no-drift and closure | pending |
 
