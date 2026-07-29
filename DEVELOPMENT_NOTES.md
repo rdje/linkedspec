@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.2` — make hostile bytes prove their meaning before decoding):
+  `JSON::PP` is retained as the value constructor and canonical encoder, but it cannot own strict wire admission:
+  installed 4.06 silently accepts literal and escape-equivalent duplicate keys. `LinkedSpec::MCPWire` therefore
+  performs one bounded recursive token preflight over the exact UTF-8 bytes, decodes object keys for identity,
+  validates escapes/surrogate pairing and the complete JSON number grammar, records the top-level `id` token kind,
+  and enforces the contract's container-depth limit before `JSON::PP->allow_bignum` constructs values. Safe
+  integer ids survive exactly; decimal/exponent ids and integers outside the interoperable range are rejected,
+  while non-id bignums become schema-invalid null values rather than leaking backend numeric behavior.
+
+  Framing has two independent bounds. The read chunk is fixed at 65,536 bytes and the retained buffer never needs
+  more than the maximum payload plus a possible CR. Once a line is known to be overlong, the adapter drains to LF
+  without retaining its tail, emits one contract parse error, and resumes at the next frame. This makes an
+  adversarial no-newline stream memory-bounded and preserves recovery after a rejected frame. A complete final
+  frame at EOF is still processed; an incomplete/empty tail is not invented into a request.
+
+  Cancellation authority extends through emission rather than ending when decoded dispatch returns. The private
+  wire seam prepares a response while its request remains active, rechecks cancellation immediately before output,
+  and retires it only after a successful write and flush. This does not claim preemptive Perl execution: a later
+  synchronous cancellation cannot retract bytes already emitted. Input/output errors and EOF converge on server
+  shutdown so index references are always released. Caller-owned handles remain open; protocol output and the
+  optional sanitized log must be distinct, and no log handle means no diagnostic output at all.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.1` — bind data once, keep runtime authority smaller): The generated
   Perl binding embeds one canonical JSON bundle rather than generated Perl hash syntax. That preserves JSON
   booleans and numeric/string identity through the same decoder used by the private schema runtime, keeps the

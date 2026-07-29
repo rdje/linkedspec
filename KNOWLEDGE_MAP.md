@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **742** facts · **5975** question keys.
+> **742** facts · **5977** question keys.
 
 ## Questions → fact
 
@@ -15,14 +15,16 @@
 - "How do I register a Perl SemanticIndex with MCP?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "How does Perl MCP compare authorization context and enforce expiry?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "How does Perl MCP enforce deployment policy?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
+- "How does Perl MCP reject duplicate JSON keys and unsafe numeric ids?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "How will Perl MCP avoid reading contract files at runtime?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "How will Perl reject duplicate JSON keys when JSON::PP accepts them?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "Is serve_stdio implemented for Perl MCP yet?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "Is the Perl LinkedSpec MCP server implemented?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "What Perl module will own the native LinkedSpec MCP server?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "What does Perl MCP emit on EOF or an I/O failure?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "Where do Perl MCP handles get 256 bits of entropy?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "Where is the generated Perl MCP contract checked in canonical CI?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
-- "Which Perl MCP methods work before the stdio wire is implemented?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
+- "Which Perl MCP methods work over decoded dispatch and stdio?" -> [perl-mcp-decoded-server](docs/knowledge/perl-mcp-decoded-server.md) · 2026-07-29
 - "Which leaves implement and admit the Perl MCP server?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "Why is the Perl descriptor not an MCP payload?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "after items = [value] what does return(items) read" -> [terse-retired-scalar-assign-spec-surface](docs/knowledge/terse-retired-scalar-assign-spec-surface.md) · 2026-07-06 · reverify: `rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' specs tests/corpus rust/linkedspec-runtime/tests/corpus --glob '*.spec' --glob '*.md' ; rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' docs/linkedspec-book/src ; prove -q -Iperl t/phase0_regression.t ; prove -q -Iperl t/actionir_ast_parser.t ; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_2_bare_identifier_remembers_type_after_initialization`
@@ -9917,10 +9919,10 @@ _Perl logical truthiness distinguishes shared numeric zero from nonempty string 
 - **source:** [`docs/knowledge/perl-logical-truthiness-host-scalars.md`](docs/knowledge/perl-logical-truthiness-host-scalars.md)
 
 ### perl-mcp-decoded-server
-_Perl MCP generated binding and decoded in-process server_
+_Perl MCP generated binding, decoded dispatch, and strict stdio server_
 
-- **answers:** Is the Perl LinkedSpec MCP server implemented? | How do I register a Perl SemanticIndex with MCP? | Does Perl MCP read the neutral JSON contract at runtime? | How are Perl MCP handles generated and authorized? | Which Perl MCP methods work before the stdio wire is implemented? | Does Perl MCP cache semantic query responses? | How does Perl MCP enforce deployment policy? | Can Perl MCP compile a source path or inspect the descriptor? | Where is the generated Perl MCP contract checked in canonical CI? | Is serve_stdio implemented for Perl MCP yet?
-- **date:** 2026-07-29 · **status:** current implementation; decoded dispatch complete, strict stdio pending
+- **answers:** Is the Perl LinkedSpec MCP server implemented? | How do I register a Perl SemanticIndex with MCP? | Does Perl MCP read the neutral JSON contract at runtime? | How are Perl MCP handles generated and authorized? | Which Perl MCP methods work over decoded dispatch and stdio? | Does Perl MCP cache semantic query responses? | How does Perl MCP enforce deployment policy? | Can Perl MCP compile a source path or inspect the descriptor? | Where is the generated Perl MCP contract checked in canonical CI? | Is serve_stdio implemented for Perl MCP yet? | How does Perl MCP reject duplicate JSON keys and unsafe numeric ids? | What does Perl MCP emit on EOF or an I/O failure?
+- **date:** 2026-07-29 · **status:** current implementation; decoded dispatch and strict stdio complete, exact admission pending
 - **source:** [`docs/knowledge/perl-mcp-decoded-server.md`](docs/knowledge/perl-mcp-decoded-server.md)
 
 ### perl-native-mcp-server-plan

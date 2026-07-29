@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Perl native MCP strict stdio: `FUTURE-PARITY-BACKLOG.10.9.2.2` adds private
+  `LinkedSpec::MCPWire` and public `LinkedSpec::MCPServer->serve_stdio`. The bounded LF/CRLF reader performs strict
+  UTF-8 and recursive JSON-token preflight before `JSON::PP`, rejecting BOM/batch/non-object/deep/duplicate-key,
+  malformed-number, non-finite, and invalid numeric-id input while preserving exact decoded dispatch. Output is
+  compact sorted UTF-8 plus one LF; active request state persists through successful flush so pre-emission
+  cancellation can suppress output. EOF releases every index and returns zero; I/O failure uses the same cleanup
+  and returns one, with default silence or one fixed sanitized record on a distinct caller log handle. Focused
+  adversarial and canonical signoff are complete; exact unchanged-contract admission/ledger `.10.9.2.3` remains
+  next after the clean commit. No SDK, executable/facade, source loader, semantic cache, or parser/runtime/CLI
+  authority is added.
 - `2026-07-29` Perl native MCP decoded server: `FUTURE-PARITY-BACKLOG.10.9.2.1` implements public in-process
   `LinkedSpec::MCPServer` over an already-created opaque `LinkedSpec::SemanticIndex`. Deterministic
   `tools/generate_perl_mcp_contract.py` verifies the neutral manifest and commits the data-only filesystem-free
@@ -13,8 +23,8 @@ This document is the current high-level technical reading of the project shape. 
   monotonic expiry, digest-only out-of-band authorization, revocation, capacity/collision bounds, shutdown release,
   and five lowering-only policy components. Decoded discovery/list/capabilities/query/cancel dispatch calls only
   native capabilities/query, stores no semantic response, sanitizes failures, and supports prepared-response
-  cancellation. Strict JSON bytes, stdio/LF emission, logging, and EOF remain exclusively `.10.9.2.2`; no facade,
-  CLI, source/path loader, compilation/execution, semantic-cache, rollout, or admission authority moves.
+  cancellation. Strict JSON bytes, stdio/LF emission, logging, and EOF are now implemented by `.10.9.2.2`; no
+  facade, CLI, source/path loader, compilation/execution, semantic-cache, rollout, or admission authority moves.
 - `2026-07-29` Perl native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR
   `0057` map the exact admitted `LinkedSpec::SemanticIndex` capabilities/query seam into a future direct
   `LinkedSpec::MCPServer`. A generated filesystem-free `LinkedSpec::MCPContract` binding consumes the neutral

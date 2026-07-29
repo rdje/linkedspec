@@ -1,5 +1,44 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.2 — implement Perl MCP strict stdio
+
+Added private `LinkedSpec::MCPWire` and the public host adapter
+`LinkedSpec::MCPServer->serve_stdio(input => ..., output => ..., authorization_context => ...)`. The wire consumes
+bounded LF or CRLF JSON lines, accepts a complete final frame at EOF, rejects BOMs, invalid UTF-8, batches,
+non-object requests, excessive container depth, duplicate decoded keys, malformed/non-finite numbers, and invalid
+request-id number tokens, then emits compact key-sorted UTF-8 JSON followed by exactly one LF. Framing remains
+bounded while an overlong line is drained, so one rejected frame cannot reinterpret its tail or prevent the next
+complete frame from being processed.
+
+The token preflight is deliberately independent of `JSON::PP` object construction because installed
+`JSON::PP 4.06` accepts literal and escape-equivalent duplicate keys. It preserves the request-id lexical
+distinction between safe integer tokens and decimal/exponent or unsafe integers, validates surrogate pairs, and
+counts JSON container depth exactly: depth 64 is admitted and 65 is a parse error. Contract-derived parse errors
+and frozen frame limits remain owned by the generated binding/runtime rather than by a second handwritten
+protocol table.
+
+Decoded response preparation now has a wire-only emission seam. Active request state survives through the output
+write and flush, cancellation observed before emission suppresses the frame, and successful flush is the only
+normal point that retires the active request. EOF performs graceful shutdown and releases registered indexes with
+status zero; input/output failures use the same cleanup path with status one. Logging is absent by default and an
+explicit handle distinct from protocol output receives only the fixed sanitized I/O failure record. No exception,
+handle, authorization value, source, query, response, logical name, path, or host object can cross that boundary.
+
+Added an adversarial stdio proof covering all ten raw-input and ten lifecycle contract cases, exact limits,
+duplicate/unicode/number/depth mutants, canonical non-ASCII output, continuation after rejected frames,
+pre-emission cancellation, capacity pruning, EOF release, partial-read failure, output failure, logging privacy,
+and public-option denial. Canonical CI now tracks the wire owner/test and runs the binding, decoded-dispatch, and
+stdio suites together. This slice adds no SDK, standalone executable, facade, source/path loader, compilation,
+execution, trace, semantic cache, contract digest, rollout, or admission claim; exact Perl admission remains
+`.10.9.2.3`.
+
+Signoff passes syntax and the exact 22-test binding/dispatch/stdio proof, MCP 35/10/10/68, mdBook, Knowledge Map
+742/5,977, all six doctrines, capability 80/0/0, semantic 6/20/105 at rollout 7/9 + admission 6/6, storage
+1,700/380,328/28, path portability 14/5, and tool locality 3/13/22. Canonical CI passes Perl semantic admission
+18, Rust 1/1 in 82.08 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, process containment, moved-root proof,
+primary CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 656 seconds. Exact cleanup removes only the verified ignored
+13,320-KiB rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.1 — implement Perl MCP decoded server
 
 Added the first native MCP implementation core. A deterministic repository-routed generator verifies every

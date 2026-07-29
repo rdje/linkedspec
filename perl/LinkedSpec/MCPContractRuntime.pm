@@ -59,6 +59,11 @@ sub source_sha256 {
  return clone_data($BUNDLE->{source_sha256})
 }
 
+sub corpus {
+ _initialize();
+ return clone_data($BUNDLE->{corpus})
+}
+
 sub protocol_version {
  _initialize();
  return $BUNDLE->{contract}{protocol_version}
@@ -262,6 +267,7 @@ sub json_rpc_error {
  my ($id, $kind, %fields) = @_;
  _initialize();
  my %owner = (
+  parse_error => 'invalid_utf8',
   invalid_request => 'invalid_envelope',
   method_not_found => 'unknown_method',
   invalid_params => 'method_params',

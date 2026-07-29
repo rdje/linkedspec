@@ -1169,9 +1169,9 @@ All six native runtime targets are admitted and recurring proof is active. Queri
 local ids/order, bounded pagination/traversal, and `none`/`identity`/`span`/`text` source ceilings with explicit
 redactions. Runtime explanations consume only an already captured caller-owned observation.
 
-The neutral modern MCP contract and Perl's decoded in-process server core are now implemented. Import
+The neutral modern MCP contract and Perl's decoded plus strict-stdio in-process server are now implemented. Import
 `LinkedSpec::MCPServer` directly, register an already-created index under an opaque host authorization byte string,
-then pass already-decoded requests to `dispatch`:
+then choose decoded dispatch or a caller-owned stream:
 
 ```perl
 use LinkedSpec::MCPServer;
@@ -1197,12 +1197,28 @@ $server->revoke_handle($handle);
 $server->shutdown();
 ```
 
+For modern MCP `2026-07-28` over stdio, use a fresh live server/registration and let EOF own shutdown:
+
+```perl
+my $status = $server->serve_stdio(
+  input => \*STDIN,
+  output => \*STDOUT,
+  authorization_context => $authorization,
+  # Optional and must be distinct from output. Normal operation stays silent.
+  log => \*STDERR,
+);
+die "MCP stdio failed\n" if $status != 0;
+```
+
 The server derives its schemas/templates from a committed filesystem-free binding, retains only the native index,
 authorization digest, expiry, and lowering-only policy, and never compiles, opens a source/contract path, inspects
-the descriptor, or caches a semantic response. Current decoded methods are `server/discover`, `tools/list`, the
-two semantic `tools/call` operations, and `notifications/cancelled`. Strict duplicate-safe JSON bytes, stdio/LF
-framing, optional sanitized logging, and EOF cleanup remain `.10.9.2.2`; `serve_stdio` is therefore not available
-yet. Descriptor mode below remains a separate compiler-compatibility view, not the semantic wire model.
+the descriptor, or caches a semantic response. Decoded and stdio routes implement `server/discover`, `tools/list`,
+the two semantic `tools/call` operations, and `notifications/cancelled`. The stdio route accepts LF/CRLF-delimited
+strict UTF-8 JSON, rejects BOM, malformed/non-finite JSON, batches/non-objects, depth above 64, overlong lines,
+duplicate decoded keys, and invalid numeric ids; it emits compact sorted UTF-8 JSON plus exactly one LF. EOF
+flushes complete frames, clears the registry, releases indexes, and returns zero. I/O failure performs the same
+cleanup, returns nonzero, and writes at most one fixed content-free event to the optional log handle. Descriptor
+mode below remains a separate compiler-compatibility view, not the semantic wire model.
 
 Typical shape:
 

@@ -1,33 +1,36 @@
 ---
 id: perl-mcp-decoded-server
-title: Perl MCP generated binding and decoded in-process server
-status: current implementation; decoded dispatch complete, strict stdio pending
+title: Perl MCP generated binding, decoded dispatch, and strict stdio server
+status: current implementation; decoded dispatch and strict stdio complete, exact admission pending
 date: 2026-07-29
 answers:
   - Is the Perl LinkedSpec MCP server implemented?
   - How do I register a Perl SemanticIndex with MCP?
   - Does Perl MCP read the neutral JSON contract at runtime?
   - How are Perl MCP handles generated and authorized?
-  - Which Perl MCP methods work before the stdio wire is implemented?
+  - Which Perl MCP methods work over decoded dispatch and stdio?
   - Does Perl MCP cache semantic query responses?
   - How does Perl MCP enforce deployment policy?
   - Can Perl MCP compile a source path or inspect the descriptor?
   - Where is the generated Perl MCP contract checked in canonical CI?
   - Is serve_stdio implemented for Perl MCP yet?
+  - How does Perl MCP reject duplicate JSON keys and unsafe numeric ids?
+  - What does Perl MCP emit on EOF or an I/O failure?
 reverify:
   - bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
-  - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t
+  - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
 ---
 
-# Perl MCP generated binding and decoded in-process server
+# Perl MCP generated binding, decoded dispatch, and strict stdio server
 
-`FUTURE-PARITY-BACKLOG.10.9.2.1` implements the first native MCP consumer without adding transport I/O. Public
+`FUTURE-PARITY-BACKLOG.10.9.2.1-.2` implement the first native MCP consumer and its strict stdio transport. Public
 `LinkedSpec::MCPServer` accepts an already-created opaque `LinkedSpec::SemanticIndex`, registers it under one
 out-of-band authorization context, and dispatches already-decoded `server/discover`, `tools/list`, the exact two
-semantic `tools/call` operations, and `notifications/cancelled`. It cannot open source or contract paths, compile,
-execute, inspect descriptors, cache semantic responses, or enter the primary `LinkedSpec` facade/CLI.
+semantic `tools/call` operations, and `notifications/cancelled`. The same object now serves caller-provided handles
+through `serve_stdio(input => ..., output => ..., authorization_context => ..., log => ...)`. It cannot open source
+or contract paths, compile, execute, inspect descriptors, cache semantic responses, or enter the primary facade/CLI.
 
 `tools/generate_perl_mcp_contract.py` verifies every artifact digest named by the neutral manifest and derives the
 committed data-only `perl/LinkedSpec/MCPContract.pm`. `LinkedSpec::MCPContractRuntime` decodes that embedded value
@@ -48,8 +51,13 @@ capabilities tool call still invokes native capabilities; an allowed query is pa
 Policy can lower only source detail, page maximum, and record/relation/depth maxima. Restricted capabilities are a
 schema-preserving projection; an above-policy request is denied before native query. No semantic answer is stored.
 Unexpected native exceptions or invalid responses become sanitized `-32603` errors. Cancellation observed while a
-response is prepared suppresses it; ordinary synchronous completion remains valid.
+response is prepared or waiting for emission suppresses it; ordinary synchronous completion remains valid.
 
-Strict UTF-8 JSON-line parsing, duplicate-key/numeric-token preflight, canonical LF emission, optional sanitized
-logging, caller-provided stdio handles, and EOF/I/O cleanup remain exclusively owned by `.10.9.2.2` and future
-`LinkedSpec::MCPWire`. `serve_stdio(...)` therefore does not exist yet; use decoded `dispatch(...)` in process.
+Private `LinkedSpec::MCPWire` reads bounded chunks, retains at most the exact line ceiling plus a possible CR,
+accepts LF/CRLF and a complete final EOF frame, and drains one rejected overlong line before continuing. It rejects
+invalid UTF-8, BOM, malformed/non-finite JSON, batches/non-objects, depth above 64, literal or escape-equivalent
+duplicate keys, non-integer/unsafe ids, and overlong lines at their contract-owned JSON-RPC layer. `JSON::PP` with
+bignum decoding constructs values only after that token preflight. Output is frozen-schema-validated, sorted compact
+UTF-8 JSON plus one LF. Default stderr is empty; an optional distinct log handle receives only the fixed
+`linkedspec_mcp_io_failure` event on I/O failure. Graceful EOF flushes complete responses, clears the registry,
+releases indexes, and returns zero; input/output failure performs the same cleanup and returns nonzero.

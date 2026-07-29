@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-29` (machine-readable MCP contract leaf `.10.9.1.1` active from clean protocol-policy
-  commit `b0492488`)
+- Last updated: `2026-07-29` (Perl strict wire/lifecycle leaf `.10.9.2.2` complete from clean decoded-server commit
+  `9965dca1`; exact admission `.10.9.2.3` next after the clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -13206,7 +13206,7 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.1.3 - close MCP transport contract`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.2`
-    Status: `active` (2026-07-29; strict stdio/lifecycle `.10.9.2.2` next)
+    Status: `active` (2026-07-29; strict stdio/lifecycle `.10.9.2.2` complete; exact admission `.10.9.2.3` next)
     Goal: Implement and admit the Perl native MCP server against the exact transport contract.
     Depends on: `.10.9.1`
     Children: `.10.9.2.0`, `.10.9.2.1`, `.10.9.2.2`, `.10.9.2.3`, `.10.9.2.4`
@@ -13305,12 +13305,47 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.2.1 - implement Perl MCP decoded server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.2.2`
-      Status: `pending`
+      Status: `done` (2026-07-29; complete canonical signoff from clean decoded-server commit `9965dca1`)
       Goal: Add the exact modern stdio framing, lifecycle, cancellation, and shutdown adapter for Perl.
       Depends on: `.10.9.2.1`
       Acceptance: Consume LF/CRLF bounded UTF-8 JSON lines, reject malformed/duplicate/deep/batch/BOM inputs,
         emit canonical one-LF MCP bytes with stdout purity and sanitized optional stderr logging, honor best-effort
         cancellation, clear the native registry on EOF, and expose no standalone source bootstrap or primary CLI.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove decoded-server commit `9965dca1`, zero-byte brief, clean tree, absent
+        generated residue, and `.10.9.2.2` task-tree ownership before any wire implementation byte.
+      - [x] **STRICT FRAME / TOKEN PREFLIGHT** — Add private `LinkedSpec::MCPWire` with bounded LF/CRLF framing,
+        exact 1,048,576-byte payload limit, strict UTF-8, BOM/batch/non-object/depth rejection, duplicate decoded-key
+        detection, and numeric-token preservation sufficient for exact request-id meaning before `JSON::PP`.
+      - [x] **EXACT CANONICAL EMISSION** — Decode through the embedded frozen schema owner, invoke only decoded
+        server dispatch, validate prepared results, and emit sorted compact UTF-8 JSON plus exactly one LF with no
+        banner/log/content leak to the MCP output handle.
+      - [x] **LIFECYCLE / CANCELLATION / I/O** — Implement caller-handle `serve_stdio`, prepared-response
+        cancellation suppression, synchronous completion semantics, graceful EOF flush/registry release/zero
+        status, and fail-closed input/output cleanup/nonzero status without thread/signal/timing inventions.
+      - [x] **SANITIZED OPTIONAL LOGGING** — Keep stderr silent by default; accept only a distinct caller-provided
+        log handle and emit at most contract-approved fixed UTF-8 event records with no handle, auth, path, source,
+        logical identity, request/response content, host object identity, or raw exception.
+      - [x] **FOCUSED ADVERSARIAL STDIO PROOF** — Cover every ten raw and ten lifecycle contract case, LF/CRLF,
+        boundary lengths, Unicode/duplicate escapes/numeric ids/depth, canonical bytes, output failure, cancellation
+        before emission, EOF cleanup/reference release, log privacy, call counts, and decoded/wire identity.
+      - [x] **NO ADMISSION / LOCKSTEP SIGNOFF** — Add no source/path bootstrap, facade/primary CLI, compile/execute/
+        trace/cache, contract/semantic bytes, rollout, admission ledger, SDK/network, aggregator, or legacy behavior;
+        align live docs/book/KM/continuity, pass focused/canonical gates, commit/clear/clean, and do not push.
+
+      Verification: **PASS 2026-07-29.** Clean base `9965dca1`; exact syntax and binding/dispatch/stdio proof passes
+        Files=3, Tests=22, including all ten raw and ten lifecycle ids, size/depth/UTF-8/decoded-key/numeric-id
+        boundaries, canonical non-ASCII LF bytes, continuation, cancellation through flush, capacity, EOF release,
+        tied partial/input/output failures, and sanitized logging. MCP remains 35/10/10/68; generated binding is
+        byte-fresh at 83,072 bytes; mdBook, KM 742/5,977, six doctrines, capability 80/0/0, semantic 6/20/105 at
+        7/9 + 6/6, storage 1,700/380,328/28, path 14/5, and tools 3/13/22 pass. Canonical CI passes Perl 18, Rust
+        1/1 in 82.08s, Dart 1/1, Julia 416/416 in 29.5s, containment/moved-root, CLI 66x2, RAM 60%, and Phase 0
+        1,031/1,031 in 656s. Exact cleanup removes only the verified 13,320-KiB rendered book and one empty managed
+        run. No SDK/executable/facade/source, compile/execute/trace/cache, contract/semantic/CLI, rollout, or
+        admission behavior moves; exact admission `.10.9.2.3` follows only after the clean commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.2.2 - implement Perl MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.2.3`
       Status: `pending`
@@ -15734,8 +15769,10 @@ validation, and rejects omission/order drift. Parent `.10.9.1` is closed without
 Behavior-free native Perl preflight `.10.9.2.0` is complete from clean `9307524a`: LinkedSpec probes
 and source/runtime inspection identify the opaque admitted index, exact canonical payloads, installed JSON/
 entropy/time constraints, and the future generated-contract/registry/wire owners. ADR `0057` freezes secure host
-API and `.1-.4` implementation/admission order; no server behavior exists. Registry/decoded dispatch `.10.9.2.1`
-activates task-tree-first only after the clean plan commit; `.14.1` remains pending.
+API and `.1-.4` implementation/admission order. Registry/decoded dispatch `.10.9.2.1` is complete from clean plan
+commit `ccc391ae`; strict wire/lifecycle `.10.9.2.2` is complete from clean decoded-server commit `9965dca1` with
+exact focused/canonical signoff. Exact admission `.10.9.2.3` is next only after the clean commit; no-change closeout
+`.4` and typed source-location `.14.1` remain pending.
 
 ### Superseded frontier snapshots
 
@@ -17064,6 +17101,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.2.2` | Clean base `9965dca1`; syntax and exact 22-test binding/dispatch/stdio proof; all ten raw/ten lifecycle ids plus strict size/depth/UTF-8/key/number/id/emission/continuation/cancellation/capacity/EOF/I/O/log boundaries; MCP 35/10/10/68 and byte-fresh 83,072-byte binding; mdBook; KM 742/5,977; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,700/380,328/28, path 14/5, tools 3/13/22; canonical Perl 18, Rust 1/1 82.08s, Dart 1/1, Julia 416/416 29.5s, containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/656s; exact 13,320-KiB/one-empty-run cleanup. | PASS. Perl now owns bounded strict stdio and exact lifecycle cleanup without SDK, executable/facade, source, compile/execute/trace/cache, contract/semantic/CLI, rollout, or admission movement; exact admission `.10.9.2.3` follows the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.2.1` | Clean base `ccc391ae`; exact 83,072-byte generated binding; 12 focused binding/server suites over 35 frames and 28/7 classifications; exact native identity, five policy ceilings, registry/auth/lifecycle/cancellation/sanitation/shutdown proof; MCP 35/10/10/68; mdBook; KM 742/5,975; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,698/379,300/28 and tools 3/13/22; canonical Perl 18, Rust 1/1 81.13s, Dart 1/1, Julia 416/416 28.5s, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/631s; exact 13,308-KiB/one-empty-run cleanup. | PASS. Perl now owns exact secure decoded in-process MCP dispatch without wire, facade, source, semantic-cache, contract, rollout, or admission movement; strict stdio/lifecycle `.10.9.2.2` follows the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.2.0` | Clean base `9307524a`; LinkedSpec descriptor/index and exact digest probes; JSON::PP duplicate-key/numeric, OS entropy/base64url, and monotonic-clock probes; ADR `0057`; `.1-.4` split; MCP 35/10/10/68; mdBook; KM 741/5,965; task/diff; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,691/377,723/28 and tool locality; canonical Perl 18, Rust 1/1 81.54s, Dart 1/1, Julia 416/416 29.0s, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/650s; exact 13,284-KiB/one-empty-run cleanup. | PASS. Native Perl MCP ownership/security/admission seams are frozen without server or behavior; `.10.9.2.1` follows only after the clean plan commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.3` | Clean base `64735109`; unchanged manifest/schema/four payloads/35 frames/10 raw/10 lifecycle/4 handle/4 policy cases; deterministic materializer then independent validator over 68 mutations; canonical tracked-input and exact-order wiring; missing-materializer and reversed-order mutants; mdBook; KM 740/5,958; task/diff; six doctrines; semantic 6/20/105 at 7/9 + 6/6; storage 1,690/377,638/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 83.96s, Dart 1/1, Julia 416/416 30.1s, containment/moved-root, CLI 66x2, RAM 72%, Phase 0 1,031/675s; exact 13,252-KiB/one-empty-run cleanup. | PASS. Canonical CI cannot accept stale or skipped MCP contract proof; no artifact, server, semantic, CLI, rollout, or admission behavior changes; parent `.10.9.1` closes and Perl `.10.9.2` follows the clean commit. |
@@ -17356,6 +17394,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.2.2` | `FUTURE-PARITY-BACKLOG.10.9.2.2 - implement Perl MCP strict stdio` | Bounded strict JSON-line/token preflight, canonical emission, cancellation through flush, sanitized logging, EOF/I/O cleanup, complete signoff, and clean exact-admission handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.2.1` | `FUTURE-PARITY-BACKLOG.10.9.2.1 - implement Perl MCP decoded server` | Generated filesystem-free binding, private exact contract runtime, secure registry, decoded dispatch/policy/cancellation, complete signoff, and clean wire handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.2.0` | `FUTURE-PARITY-BACKLOG.10.9.2.0 - plan Perl native MCP server` | Behavior-free native owner/security audit, ADR `0057`, exact `.1-.4` split, complete signoff, and clean implementation handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.1.3` | `FUTURE-PARITY-BACKLOG.10.9.1.3 - close MCP transport contract` | Canonical tracked-input and ordered materializer/independent-validator governance, omission/order mutations, complete no-change signoff, parent closure, and clean Perl handoff. |
@@ -17631,6 +17670,12 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-29`: Perl strict MCP stdio `.10.9.2.2` completes from clean decoded-server commit `9965dca1`.
+  Private bounded UTF-8/JSON-line token preflight, decoded duplicate-key/numeric-id enforcement, canonical LF
+  output, cancellation through flush, sanitized optional logging, graceful EOF, and exact I/O cleanup pass focused
+  and canonical signoff. No SDK, executable/facade, source bootstrap, compile/execute/trace/cache, contract byte,
+  semantic/CLI behavior, rollout, or admission moves; exact admission `.10.9.2.3` follows the clean commit.
 
 - `2026-07-29`: Perl decoded MCP implementation `.10.9.2.1` completes from clean plan commit `ccc391ae`.
   Deterministic generation commits one 83,072-byte filesystem-free contract binding; private exact schema/runtime,

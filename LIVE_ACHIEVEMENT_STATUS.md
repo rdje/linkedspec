@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Perl native MCP strict stdio implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.2.2` adds private `LinkedSpec::MCPWire` and the host-facing
+`LinkedSpec::MCPServer->serve_stdio` adapter. Bounded LF/CRLF framing, strict UTF-8 and JSON-token preflight,
+decoded duplicate-key and numeric-id enforcement, contract-derived depth/size limits, compact sorted UTF-8 plus
+one LF, and recovery after rejected frames are implemented without an SDK or runtime contract-file access.
+
+Request activity now extends through flush: cancellation observed after preparation but before emission suppresses
+the response; successful flush retires it. Graceful EOF processes a complete last frame, shuts down the registry,
+releases indexes, and returns zero. Input/output errors release the same state and return one. Default operation is
+silent; an explicit log handle distinct from stdout receives only a fixed sanitized I/O-failure record. Focused
+proof covers all ten raw and ten lifecycle inventories plus boundary and failure mutants. Exact unchanged-contract
+admission `.10.9.2.3` follows only after the clean commit.
+
+Signoff passes the exact 22-test binding/dispatch/stdio proof, MCP 35/10/10/68, mdBook, Knowledge Map 742/5,977,
+six doctrines, capability 80/0/0, semantic 6/20/105 at 7/9 + 6/6, storage 1,700/380,328/28, path 14/5, and tools
+3/13/22. Canonical CI passes Perl 18, Rust 1/1 in 82.08s, Dart 1/1, Julia 416/416 in 29.5s, containment/moved-root,
+CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 656s. Cleanup removes only the verified 13,320-KiB book and one
+proven-empty managed run.
+
 ## 2026-07-29 — Perl native MCP decoded server implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.2.1` adds a generated filesystem-free neutral-contract binding, private frozen-schema

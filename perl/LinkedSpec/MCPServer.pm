@@ -19,6 +19,7 @@ use Scalar::Util qw(looks_like_number refaddr);
 use Time::HiRes qw(CLOCK_MONOTONIC clock_gettime);
 
 use LinkedSpec::MCPContractRuntime ();
+use LinkedSpec::MCPWire ();
 use LinkedSpec::SemanticIndex ();
 
 my %STATE_BY_ADDRESS;
@@ -140,6 +141,47 @@ sub revoke_handle {
 
 sub dispatch {
  my ($self, $request, @pairs) = @_;
+ return _dispatch($self, $request, 0, @pairs)
+}
+
+# Private wire path: retain a prepared request until MCPWire confirms that its
+# complete canonical frame has flushed.  Public decoded dispatch remains an
+# immediate prepare-and-return operation.
+sub _dispatch_for_wire {
+ my ($self, $request, @pairs) = @_;
+ my $response = _dispatch($self, $request, 1, @pairs);
+ my $state = _state($self);
+ my $key;
+ if (ref($request) eq 'HASH' && exists($request->{id}) && _valid_request_id($request->{id})) {
+  my $candidate = LinkedSpec::MCPContractRuntime::canonical_json($request->{id});
+  $key = $candidate if exists($state->{active}{$candidate}) && $state->{active}{$candidate}{prepared};
+ }
+ return wantarray ? ($response, $key) : $response
+}
+
+sub _wire_response_emitted {
+ my ($self, $key) = @_;
+ return 1 unless defined $key;
+ my $state = _state($self);
+ delete $state->{active}{$key};
+ return 1
+}
+
+sub _wire_response_ready {
+ my ($self, $key) = @_;
+ return 1 unless defined $key;
+ my $state = _state($self);
+ return 0 unless exists($state->{active}{$key}) && $state->{active}{$key}{prepared};
+ if ($state->{active}{$key}{cancelled}) {
+  delete $state->{active}{$key};
+  return 0
+ }
+ return 1
+}
+
+sub _dispatch {
+ my ($self, $request, @pairs) = @_;
+ my $retain_prepared = shift @pairs;
  my $state = _state($self);
  my $options = _options('dispatch', {authorization_context => 1}, @pairs);
  _throw('linkedspec_mcp_invalid_dispatch', 'Dispatch requires an authorization context.')
@@ -186,14 +228,14 @@ sub dispatch {
  if ($method eq 'server/discover') {
   return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'invalid_params')
    unless LinkedSpec::MCPContractRuntime::validate_named('discoverRequest', $copy);
-  return _prepare_response($state, $id, sub {
+  return _prepare_response($state, $id, $retain_prepared, sub {
    LinkedSpec::MCPContractRuntime::discover_response($id)
   })
  }
  if ($method eq 'tools/list') {
   return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'invalid_params')
    unless LinkedSpec::MCPContractRuntime::validate_named('toolsListRequest', $copy);
-  return _prepare_response($state, $id, sub {
+  return _prepare_response($state, $id, $retain_prepared, sub {
    LinkedSpec::MCPContractRuntime::tools_list_response($id)
   })
  }
@@ -210,7 +252,7 @@ sub dispatch {
  return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'invalid_params')
   unless LinkedSpec::MCPContractRuntime::validate_named($definition, $copy);
 
- return _prepare_response($state, $id, sub {
+ return _prepare_response($state, $id, $retain_prepared, sub {
   my $arguments = $copy->{params}{arguments};
   my $entry = _authorized_entry($state, $arguments->{handle}, $authorization);
   return LinkedSpec::MCPContractRuntime::tool_error_response($id, 'handle_unavailable')
@@ -229,6 +271,37 @@ sub dispatch {
  })
 }
 
+sub serve_stdio {
+ my ($self, @pairs) = @_;
+ my $state = _state($self);
+ _throw('linkedspec_mcp_server_shutdown', 'The MCP server has shut down.') if $state->{stopped};
+ my $options = _options(
+  'stdio',
+  {map { $_ => 1 } qw(input output authorization_context log)},
+  @pairs,
+ );
+ foreach my $required (qw(input output authorization_context)) {
+  _throw('linkedspec_mcp_invalid_stdio', "MCP stdio requires '$required'.")
+   unless exists $options->{$required};
+ }
+ my $authorization = _authorization_bytes($options->{authorization_context});
+ _throw('linkedspec_mcp_invalid_stdio', 'MCP input and output must be caller-provided handles.')
+  unless ref($options->{input}) && ref($options->{output});
+ if (exists $options->{log}) {
+  _throw('linkedspec_mcp_invalid_stdio', 'MCP log must be a caller-provided handle.')
+   unless ref($options->{log});
+  _throw('linkedspec_mcp_invalid_stdio', 'MCP log and protocol output handles must be distinct.')
+   if _same_handle($options->{log}, $options->{output});
+ }
+ return LinkedSpec::MCPWire::serve(
+  server => $self,
+  input => $options->{input},
+  output => $options->{output},
+  authorization_context => $authorization,
+  (exists($options->{log}) ? (log => $options->{log}) : ()),
+ )
+}
+
 sub shutdown {
  my ($self) = @_;
  my $state = _state($self);
@@ -239,7 +312,7 @@ sub shutdown {
 }
 
 sub _prepare_response {
- my ($state, $id, $builder) = @_;
+ my ($state, $id, $retain_prepared, $builder) = @_;
  my $key = LinkedSpec::MCPContractRuntime::canonical_json($id);
  return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'internal_error')
   if exists $state->{active}{$key};
@@ -247,9 +320,19 @@ sub _prepare_response {
  my $response = eval { $builder->() };
  my $failed = $@ ? 1 : 0;
  my $cancelled = $state->{active}{$key}{cancelled} ? 1 : 0;
+ if ($cancelled) {
+  delete $state->{active}{$key};
+  return undef
+ }
+ if ($failed) {
+  delete $state->{active}{$key};
+  return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'internal_error')
+ }
+ if ($retain_prepared) {
+  $state->{active}{$key}{prepared} = 1;
+  return $response
+ }
  delete $state->{active}{$key};
- return undef if $cancelled;
- return LinkedSpec::MCPContractRuntime::json_rpc_error($id, 'internal_error') if $failed;
  return $response
 }
 
@@ -514,6 +597,13 @@ sub _options {
   $options{$name} = $value;
  }
  return \%options
+}
+
+sub _same_handle {
+ my ($left, $right) = @_;
+ return 1 if refaddr($left) == refaddr($right);
+ my ($left_fd, $right_fd) = (fileno($left), fileno($right));
+ return defined($left_fd) && defined($right_fd) && $left_fd >= 0 && $left_fd == $right_fd ? 1 : 0
 }
 
 sub _state {

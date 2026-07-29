@@ -56,7 +56,7 @@ schema runtime, secure opaque registry, and exact already-decoded discovery/list
 JSON bytes and stdio lifecycle remain pending; the other four native server implementations and all six MCP
 runtime admissions remain pending.
 
-## Accepted modern MCP transport (Perl decoded core implemented; stdio pending)
+## Accepted modern MCP transport (Perl decoded core and strict stdio implemented)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -119,7 +119,7 @@ recurring tool-governance proof rejects a missing materializer, a missing bindin
 validator order. This detects stale JSONL/digests before independent semantic validation and prevents a derived
 backend binding from becoming an oracle for its own normative source.
 
-### Current Perl in-process implementation (decoded dispatch; stdio pending)
+### Current Perl in-process implementation (decoded dispatch and strict stdio)
 
 ADR `0057` turns the neutral requirements into a bounded native implementation. Public
 `LinkedSpec::MCPServer` accepts an already-created `LinkedSpec::SemanticIndex`, never a source path or descriptor.
@@ -129,8 +129,8 @@ Its owner split is:
 |---|---|
 | `LinkedSpec::MCPContract` | Implemented generated data-only Perl binding derived from the exact neutral artifacts. |
 | `LinkedSpec::MCPContractRuntime` | Implemented deep-cloned templates and frozen schema-profile validator; no semantic or I/O authority. |
-| `LinkedSpec::MCPServer` | Implemented native handle registry, authorization/expiry/revocation/policy, and decoded dispatch. |
-| `LinkedSpec::MCPWire` | Pending `.10.9.2.2`: strict UTF-8 JSON lines, canonical output, logs, EOF, and I/O status. |
+| `LinkedSpec::MCPServer` | Implemented native handle registry, authorization/expiry/revocation/policy, decoded dispatch, and public `serve_stdio`. |
+| `LinkedSpec::MCPWire` | Implemented private bounded UTF-8 JSON-line preflight, canonical output, logging, EOF, and I/O lifecycle. |
 
 The generated binding is necessary because the server may not read contract files at runtime, while hand-copying
 tool schemas and templates would create a second contract. The repository-routed generator verifies every digest
@@ -141,8 +141,9 @@ artifact path and perform no contract-file I/O.
 The audit also measured two important Perl-specific boundaries. `return_descriptor` for the graph fixture
 contains two coderefs and five compiled regex objects, whereas the opaque index's canonical capabilities and
 graph-list payloads exactly match the neutral digests. And installed `JSON::PP 4.06` accepts both repeated literal
-keys and escape-equivalent keys such as `"a"` plus `"\u0061"`. The future wire must therefore preflight decoded
-key identity and numeric token kind before ordinary JSON decoding; `JSON::PP->decode` alone is not conformant.
+keys and escape-equivalent keys such as `"a"` plus `"\u0061"`. The wire therefore preflights decoded key identity,
+JSON grammar, container depth, surrogate pairing, and top-level numeric-id token kind before ordinary JSON
+decoding; `JSON::PP->decode` alone is not conformant.
 
 The current decoded host shape is deliberately in-process:
 
@@ -178,17 +179,37 @@ $server->shutdown();
 `dispatch` accepts exactly one decoded request plus its out-of-band authorization context and returns a detached
 response hash, or `undef` for a notification/suppressed cancelled response. The current methods are
 `server/discover`, `tools/list`, `tools/call` for the exact capabilities/query tools, and
-`notifications/cancelled`. `serve_stdio` does not exist yet: raw JSON parsing, duplicate-key/numeric-token
-preflight, LF framing, output/log handles, and EOF cleanup remain `.10.9.2.2`.
+`notifications/cancelled`.
+
+For modern MCP over stdio, use a fresh live server/registration and let EOF own shutdown:
+
+```perl
+my $status = $server->serve_stdio(
+  input => \*STDIN,
+  output => \*STDOUT,
+  authorization_context => $host_authorization,
+  # Optional, sanitized, and required to differ from protocol output.
+  log => \*STDERR,
+);
+die "MCP stdio failed\n" if $status != 0;
+```
+
+`serve_stdio` accepts LF or CRLF and a complete final frame at EOF. Each payload is bounded at 1,048,576 bytes;
+an overlong line is drained without retaining its tail, receives one parse-error response, and cannot prevent the
+next frame from being processed. The strict preflight rejects BOMs, invalid UTF-8, batches, non-object requests,
+depth above 64 containers, decoded duplicate keys, malformed/non-finite numbers, decimal/exponent request ids,
+and integers outside the interoperable id range. Accepted output is compact key-sorted UTF-8 JSON followed by
+exactly one LF, including literal non-ASCII text. This is an embeddable server method, not a standalone executable,
+facade, source loader, compiler, or semantic cache.
 
 Production handles read exactly 32 bytes from the OS CSPRNG, encode 43 unpadded base64url characters, and expire
 against a monotonic clock. Missing entropy fails closed; there is no `rand`, wall-time, PID, or hash fallback.
 Authorization context is host-owned out-of-band data and never clientInfo. Only private `_new_for_test` may inject
 deterministic entropy/time and reduced test bounds. The context is a nonempty opaque byte string bounded at 4,096 octets; the
 server retains only its SHA-256 digest and uses one fixed-length comparison step (including a dummy digest for an
-unknown handle) while making no formal interpreter-level constant-time claim. Registry/decoded dispatch `.1` is
-implemented; work remains ordered as strict stdio/lifecycle `.2`, exact Perl admission and the shared status
-ledger `.3`, then no-change closeout `.4`.
+unknown handle) while making no formal interpreter-level constant-time claim. Registry/decoded dispatch `.1` and
+strict stdio/lifecycle `.2` are implemented; exact Perl admission and the shared status ledger `.3`, then
+no-change closeout `.4`, remain ordered.
 
 ### Discovery and request metadata
 
@@ -277,7 +298,7 @@ boundary fails before native dispatch with tool error `linkedspec_mcp_policy_den
 unchanged to native `query`, and its response remains byte-identical. The adapter never silently rewrites a query
 or synthesizes a semantic response.
 
-### Decoded errors and cancellation; pending wire, logs, and EOF
+### Decoded and wire errors, cancellation, logs, and EOF
 
 The implemented decoded dispatcher uses `-32600` for invalid request envelopes, `-32601` for unknown methods,
 `-32602` for invalid metadata, parameters, or tool names, `-32603` for sanitized internal failures, and `-32022`
@@ -286,14 +307,17 @@ can act on them. Unknown, malformed, or completed cancellation notifications are
 cancellation observed while a response is prepared suppresses it; an ordinary synchronous response that completed
 before a later notification remains valid.
 
-Pending `.10.9.2.2` adds framing/JSON failures as `-32700`, strict raw-byte admission, and stdio lifecycle while
-retaining these decoded classifications unchanged.
+Framing/JSON failures use the contract-derived `-32700` parse error while retaining these decoded classifications
+unchanged. Active request state survives decoded preparation through output flush, so a cancellation observed
+before emission suppresses the frame. Successful flush retires the request; a later synchronous cancellation
+cannot retract emitted bytes.
 
-Once `.2` lands, stdout contains newline-delimited MCP messages only. The server is silent on stderr by default; host-enabled logs
+Stdout contains newline-delimited MCP messages only. The server is silent on stderr by default; host-enabled logs
 are sanitized and may not contain handles, source/query/response content, logical names, authorization material,
 paths, host objects, or raw exceptions. Closing stdin is graceful shutdown: the server stops accepting work,
-clears the registry, releases index references, finishes complete frames, and exits zero. There is no shutdown
-RPC.
+clears the registry, releases index references, finishes a complete final frame, and returns zero. Input/output
+failure uses the same release path and returns one; the optional distinct log receives only a fixed sanitized
+failure record. Caller handles are not closed. There is no shutdown RPC.
 
 ## Current Dart source, outcome, and private graph foundation
 
@@ -3399,8 +3423,9 @@ The dependency order is:
 | `.10.9.1.2` | independently validate and mutate the exact MCP contract | complete; 28 accepted plus seven rejected frames, ten raw inputs, ten lifecycle cases, and 68 rejected mutations |
 | `.10.9.1.3` | compose recurring governance and close the exact MCP contract | complete; unconditional ordered canonical proof, two topology mutations, no server |
 | `.10.9.2.0` | audit and freeze Perl native MCP owners/security seams | complete behavior-free plan; ADR `0057`, no server |
-| `.10.9.2.1` | generated Perl binding, private schema runtime, secure registry, and decoded dispatch | implemented; focused proof complete, lockstep signoff active |
-| `.10.9.2.2-.10.9.2.4` | Perl stdio/lifecycle, exact admission, and no-change closeout | pending |
+| `.10.9.2.1` | generated Perl binding, private schema runtime, secure registry, and decoded dispatch | complete with canonical signoff |
+| `.10.9.2.2` | strict Perl stdio framing, token preflight, emission, cancellation, logging, and cleanup | complete with canonical signoff |
+| `.10.9.2.3-.10.9.2.4` | exact Perl admission/ledger and no-change closeout | pending |
 | `.10.9.3-.10.9.5` | native Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3423,6 +3448,6 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts and independent validation are complete; Perl callers can also
-use the decoded in-process server today. Strict Perl stdio, Perl admission, the other four native servers, and
-recurring/public MCP rollout remain pending under `.10.9.2.2-.10.10`.
+runtime query surfaces now. MCP machine artifacts and independent validation are complete; Perl callers can use
+both decoded in-process dispatch and the strict stdio adapter today. Exact Perl admission, the other four native
+servers, and recurring/public MCP rollout remain pending under `.10.9.2.3-.10.10`.

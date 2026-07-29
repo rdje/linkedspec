@@ -72,7 +72,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case lua/src/linkedspec/semantic_index.lua lua/src/linkedspec/semantic_compilation_outcome.lua lua/src/linkedspec/semantic_static_projection.lua lua/src/linkedspec/semantic_query.lua lua/test/project_data_storage_test.lua lua/test/semantic_index_source_foundation_test.lua lua/test/semantic_index_compilation_foundation_test.lua lua/test/semantic_index_static_graph_test.lua lua/test/semantic_index_static_remaining_test.lua lua/test/semantic_index_call_core_test.lua lua/test/semantic_index_call_staged_generated_test.lua lua/test/semantic_index_query_kernel_test.lua tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_mcp_semantic_transport_contract.py tools/materialize_mcp_semantic_transport_contract.py tools/generate_perl_mcp_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_semantic_introspection_contract.py tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/check_unicode_rule_label_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_dart_project_data.sh tools/run_julia_local.sh tools/run_lua_project_data.sh tools/run_primary_cli_matrix.sh tools/run_python_project_data.sh tools/run_cli_conformance.pl tools/test_lua_project_data_storage.sh tools/test_project_data_process_locality.sh tools/test_repo_root_process_portability.sh tools/test_tool_project_data_storage.sh rust/linkedspec-runtime/tests/repository_root_relocation.rs t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t t/repeated_action_result_perl_contract.t t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t lua/test/repeated_action_result_contract_test.lua perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance unicode_case lua/src/linkedspec/semantic_index.lua lua/src/linkedspec/semantic_compilation_outcome.lua lua/src/linkedspec/semantic_static_projection.lua lua/src/linkedspec/semantic_query.lua lua/test/project_data_storage_test.lua lua/test/semantic_index_source_foundation_test.lua lua/test/semantic_index_compilation_foundation_test.lua lua/test/semantic_index_static_graph_test.lua lua/test/semantic_index_static_remaining_test.lua lua/test/semantic_index_call_core_test.lua lua/test/semantic_index_call_staged_generated_test.lua lua/test/semantic_index_query_kernel_test.lua tools/build_lua_native.sh tools/check_callable_codeblock_contract.py tools/check_callable_signature_contract.py tools/check_complete_named_mark_contract.py tools/check_diagnostic_output_contract.py tools/check_diagnostic_output_five_backend.sh tools/check_duplicate_regex_slot_identity_contract.py tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_logical_helper_contract.py tools/check_logical_helper_five_backend.sh tools/check_mcp_semantic_transport_contract.py tools/materialize_mcp_semantic_transport_contract.py tools/generate_perl_mcp_contract.py tools/check_punctuation_light_zero_arg_contract.py tools/check_punctuation_light_five_backend.sh tools/check_repeated_action_result_contract.py tools/check_repeated_action_result_five_backend.sh tools/check_root_rule_selection_contract.py tools/check_root_rule_selection_five_backend.sh tools/check_rule_local_cursor_contract.py tools/check_rule_local_cursor_five_backend.sh tools/check_semantic_introspection_contract.py tools/check_uniform_binding_contract.py tools/check_uniform_binding_mutation_result_surface.py tools/check_capability_conformance.pl tools/check_generated_source_contract.pl tools/check_language_capability_coverage.pl tools/check_native_spec_resolution_contract.pl tools/check_scalar_numeric_contract.py tools/check_unicode_case_contract.py tools/check_unicode_rule_label_contract.py tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_dart_project_data.sh tools/run_julia_local.sh tools/run_lua_project_data.sh tools/run_primary_cli_matrix.sh tools/run_python_project_data.sh tools/run_cli_conformance.pl tools/test_lua_project_data_storage.sh tools/test_project_data_process_locality.sh tools/test_repo_root_process_portability.sh tools/test_tool_project_data_storage.sh rust/linkedspec-runtime/tests/repository_root_relocation.rs t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t t/repeated_action_result_perl_contract.t t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t lua/test/repeated_action_result_contract_test.lua perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -271,6 +271,7 @@ require_tracked_file t/semantic_index_perl_query.t
 require_tracked_file t/semantic_index_perl_runtime_observation.t
 require_tracked_file t/mcp_contract_perl_binding.t
 require_tracked_file t/mcp_server_perl_dispatch.t
+require_tracked_file t/mcp_server_perl_stdio.t
 require_tracked_file perl/LinkedSpec/SemanticCallProjection.pm
 require_tracked_file perl/LinkedSpec/SemanticQuery.pm
 require_tracked_file perl/LinkedSpec/SemanticRuntimeProjection.pm
@@ -288,6 +289,7 @@ require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
 require_tracked_file perl/LinkedSpec/MCPContract.pm
 require_tracked_file perl/LinkedSpec/MCPContractRuntime.pm
 require_tracked_file perl/LinkedSpec/MCPServer.pm
+require_tracked_file perl/LinkedSpec/MCPWire.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
@@ -363,6 +365,7 @@ perl -c -Iperl t/semantic_index_perl_runtime_observation.t
 perl -c -Iperl t/semantic_introspection_perl_admission.t
 perl -c -Iperl t/mcp_contract_perl_binding.t
 perl -c -Iperl t/mcp_server_perl_dispatch.t
+perl -c -Iperl t/mcp_server_perl_stdio.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
@@ -374,6 +377,7 @@ perl -c -Iperl perl/LinkedSpec/RuntimeSemanticObservation.pm
 perl -c -Iperl perl/LinkedSpec/MCPContract.pm
 perl -c -Iperl perl/LinkedSpec/MCPContractRuntime.pm
 perl -c -Iperl perl/LinkedSpec/MCPServer.pm
+perl -c -Iperl perl/LinkedSpec/MCPWire.pm
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -409,8 +413,8 @@ bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contrac
 log "checking the generated filesystem-free Perl MCP contract binding"
 bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
 
-log "running Perl MCP contract-binding and decoded-dispatch proof"
-PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t
+log "running Perl MCP contract-binding, decoded-dispatch, and strict-stdio proof"
+PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
 
 log "running Perl semantic-index source/map/outcome foundation"
 PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t
