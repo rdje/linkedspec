@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Perl native MCP exact admission: `FUTURE-PARITY-BACKLOG.10.9.2.3` adds a separate
+  `linkedspec-mcp-implementation-admission-v1` status/proof ledger without changing the normative transport digest.
+  Its exact topology is five native implementations, six runtime admissions, Perl complete at 1/5 + 1/6, all
+  remaining rows pending, and shared thin rollout pending until six-runtime recurring owner `.10.9.7`. One
+  omission-sensitive twelve-role consumer composes the existing public server, neutral inventories, direct-native
+  identity, lifecycle/handle/policy/cancellation/I/O outcomes, hostile-output privacy, and authority fences. The
+  independent checker rejects 28 ledger/source/role/canonical-wiring mutations. Focused and canonical signoff are
+  complete. No production code, protocol artifact/digest, semantic/parser/runtime/CLI behavior,
+  or admission authority outside the Perl row changes.
 - `2026-07-29` Perl native MCP strict stdio: `FUTURE-PARITY-BACKLOG.10.9.2.2` adds private
   `LinkedSpec::MCPWire` and public `LinkedSpec::MCPServer->serve_stdio`. The bounded LF/CRLF reader performs strict
   UTF-8 and recursive JSON-token preflight before `JSON::PP`, rejecting BOM/batch/non-object/deep/duplicate-key,
@@ -12,8 +21,8 @@ This document is the current high-level technical reading of the project shape. 
   compact sorted UTF-8 plus one LF; active request state persists through successful flush so pre-emission
   cancellation can suppress output. EOF releases every index and returns zero; I/O failure uses the same cleanup
   and returns one, with default silence or one fixed sanitized record on a distinct caller log handle. Focused
-  adversarial and canonical signoff are complete; exact unchanged-contract admission/ledger `.10.9.2.3` remains
-  next after the clean commit. No SDK, executable/facade, source loader, semantic cache, or parser/runtime/CLI
+  adversarial and canonical signoff are complete; exact unchanged-contract admission/ledger `.10.9.2.3` is now
+  complete with focused and canonical proof. No SDK, executable/facade, source loader, semantic cache, or parser/runtime/CLI
   authority is added.
 - `2026-07-29` Perl native MCP decoded server: `FUTURE-PARITY-BACKLOG.10.9.2.1` implements public in-process
   `LinkedSpec::MCPServer` over an already-created opaque `LinkedSpec::SemanticIndex`. Deterministic

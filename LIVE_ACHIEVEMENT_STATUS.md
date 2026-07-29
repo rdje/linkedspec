@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Perl native MCP exact admission complete
+
+`FUTURE-PARITY-BACKLOG.10.9.2.3` adds a separate implementation/admission ledger while leaving the normative MCP
+transport contract and its digest unchanged. The exact topology is five native implementations and six runtime
+admissions: Perl is complete at 1/5 + 1/6, Rust/Dart/Julia/Lua and PUC Lua/LuaJIT are pending, and shared thin
+rollout remains pending under `.10.9.7` until all runtime legs qualify.
+
+One omission-sensitive twelve-role Perl consumer composes existing public server behavior, neutral contract
+inventories, native capabilities/query identity, raw/lifecycle/handle/policy outcomes, cancellation, shutdown/I/O,
+hostile-output privacy, and negative authority fences. A separate checker rejects 28 status, ownership, count,
+topology, role, source-authority, transport-digest, tracked-input, and canonical-order mutations. It adds no
+production behavior or second semantic/protocol oracle.
+
+Focused proof passes MCP 35/10/10/68, the existing binding/dispatch/stdio Files=3 Tests=22, ledger 1/5 + 1/6 with
+rollout pending, the new Files=1 Tests=13 admission, storage 1,703/381,403/28, path 14/5, and tools 3/13/23.
+Signoff passes mdBook, Knowledge Map 743/5,988, six doctrines, capability 80/0/0, semantic 6/20/105 at rollout
+7/9 + admission 6/6, storage 1,703/381,403/28, path 14/5, and tools 3/13/23. Canonical CI passes Perl semantic
+admission 18, Rust 1/1 in 82.82s, Dart 1/1, Julia 416/416 in 29.9s, containment/moved-root proof, CLI 66/66 twice,
+RAM 61%, and Phase 0 1,031/1,031 in 647s. No-change committed-owner closeout `.10.9.2.4` follows only after the
+clean admission commit. Exact cleanup removes only the verified 13,324-KiB book and one proven-empty managed run.
+
 ## 2026-07-29 — Perl native MCP strict stdio implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.2.2` adds private `LinkedSpec::MCPWire` and the host-facing

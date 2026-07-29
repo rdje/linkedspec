@@ -1,7 +1,7 @@
 ---
 id: perl-mcp-decoded-server
 title: Perl MCP generated binding, decoded dispatch, and strict stdio server
-status: current implementation; decoded dispatch and strict stdio complete, exact admission pending
+status: current implementation; decoded dispatch, strict stdio, and exact Perl admission complete
 date: 2026-07-29
 answers:
   - Is the Perl LinkedSpec MCP server implemented?
@@ -16,11 +16,15 @@ answers:
   - Is serve_stdio implemented for Perl MCP yet?
   - How does Perl MCP reject duplicate JSON keys and unsafe numeric ids?
   - What does Perl MCP emit on EOF or an I/O failure?
+  - Is the Perl MCP implementation admitted?
+  - How many MCP implementations and runtimes are admitted?
 reverify:
   - bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
   - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
+  - bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
+  - PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
 ---
 
 # Perl MCP generated binding, decoded dispatch, and strict stdio server
@@ -61,3 +65,9 @@ bignum decoding constructs values only after that token preflight. Output is fro
 UTF-8 JSON plus one LF. Default stderr is empty; an optional distinct log handle receives only the fixed
 `linkedspec_mcp_io_failure` event on I/O failure. Graceful EOF flushes complete responses, clears the registry,
 releases indexes, and returns zero; input/output failure performs the same cleanup and returns nonzero.
+
+`FUTURE-PARITY-BACKLOG.10.9.2.3` admits this implementation through one exact twelve-role consumer and a separate
+status/proof ledger. Current topology is Perl complete at 1/5 native implementations and 1/6 runtime admissions,
+with every other row and shared thin rollout pending. The ledger pins the unchanged transport digest; its checker
+rejects 28 status, topology, role, source-authority, tracked-input, and canonical-order mutations. The admission
+consumer composes existing server/native/neutral authorities and defines no second semantic or protocol oracle.

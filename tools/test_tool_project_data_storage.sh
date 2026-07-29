@@ -36,9 +36,10 @@ mcp_ci_topology_matches() {
   'bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py'
   'bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py'
   'bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py'
+  'bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py'
  )
  mapfile -t actual_commands < <(
-  rg '^bash tools/run_python_project_data[.]sh tools/(materialize_mcp_semantic_transport_contract|check_mcp_semantic_transport_contract|generate_perl_mcp_contract)[.]py$' \
+  rg '^bash tools/run_python_project_data[.]sh tools/(materialize_mcp_semantic_transport_contract|check_mcp_semantic_transport_contract|generate_perl_mcp_contract|check_mcp_implementation_admission)[.]py$' \
    "$ci_path"
  )
  [[ "${actual_commands[*]}" == "${expected_commands[*]}" ]]
@@ -66,8 +67,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 22 )) ||
- fail "Python tool entrypoint inventory drifted from 22 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 23 )) ||
+ fail "Python tool entrypoint inventory drifted from 23 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -123,6 +124,7 @@ python_root="$case_root/python"
 mkdir -p -- "$case_root"
 mcp_omission_mutant="$case_root/mcp-ci-omission.sh"
 mcp_generator_omission_mutant="$case_root/mcp-ci-generator-omission.sh"
+mcp_admission_omission_mutant="$case_root/mcp-ci-admission-omission.sh"
 mcp_order_mutant="$case_root/mcp-ci-order.sh"
 awk '$0 != "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py"' \
  "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_omission_mutant"
@@ -133,6 +135,11 @@ awk '$0 != "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contra
  "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_generator_omission_mutant"
 if mcp_ci_topology_matches "$mcp_generator_omission_mutant"; then
  fail 'MCP canonical topology accepted a missing generated Perl binding check'
+fi
+awk '$0 != "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"' \
+ "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_admission_omission_mutant"
+if mcp_ci_topology_matches "$mcp_admission_omission_mutant"; then
+ fail 'MCP canonical topology accepted a missing implementation/admission checker'
 fi
 awk '
  $0 == "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py" {

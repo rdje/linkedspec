@@ -5,17 +5,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.2.2`; `(this commit)` adds the Perl MCP strict stdio/lifecycle
-  adapter from clean decoded-server commit `9965dca1` with complete canonical signoff.
-- completed_scope: private `LinkedSpec::MCPWire` plus public `LinkedSpec::MCPServer->serve_stdio`; bounded LF/CRLF,
-  strict UTF-8/JSON-token preflight, duplicate decoded keys, numeric-id/depth/size rules, canonical LF emission,
-  prepared cancellation through flush, sanitized optional logging, graceful EOF, and I/O cleanup only.
-- completed_proof: exact binding/dispatch/stdio Files=3, Tests=22; MCP 35/10/10/68; KM 742/5,977; six doctrines;
-  storage 1,700/380,328/28; path 14/5; tools 3/13/22. Canonical passes Rust 82.08s, Julia 29.5s, containment/
-  moved-root, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 656s; exact 13,320-KiB/one-empty-run cleanup.
-- completed_exclusions: no MCP SDK, standalone executable/facade, source/path loader, compilation, execution, trace,
-  semantic cache, contract digest, semantic/parser/runtime/primary-CLI behavior, rollout, or admission claim.
-- next_after_clean_commit: activate exact unchanged-contract Perl MCP admission/ledger `.10.9.2.3`; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.2.3`; `(this commit)` admits the Perl MCP implementation and
+  runtime against the unchanged exact transport contract from clean `f09c7c11`.
+- completed_scope: exact Perl MCP implementation/runtime admission only. Separate status/proof ledger fixes five
+  implementations, six runtimes, Perl complete at 1/5 + 1/6, all other rows pending, and shared rollout pending.
+- completed_proof: one twelve-role public-server consumer; unchanged transport SHA and 35/10/10/4/4 inventories;
+  checker rejects 28 status/topology/role/source/canonical-order mutations; no second semantic/protocol oracle.
+- completed_signoff: MCP 35/10/10/68; existing Files=3 Tests=22; admission Files=1 Tests=13; KM 743/5,988; six
+  doctrines; storage 1,703/381,403/28; path 14/5; tools 3/13/23; canonical Rust 82.82s, Julia 29.9s,
+  containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 647s, and exact 13,324-KiB/one-run cleanup.
+- completed_exclusions: no production/server/transport/schema/semantic/parser/runtime/primary-CLI behavior or digest
+  change; no SDK/executable/facade/source bootstrap/cache; no non-Perl admission or rollout promotion.
+- next_after_clean_commit: activate committed-owner no-change Perl MCP closeout `.10.9.2.4`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -25,7 +26,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   enter one managed run; Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
 - current_storage_backends: Perl 24, Rust 17, Dart 18, Julia 17, and Lua 16 owner proofs route project data to the
   repository volume; only documented read-only toolchain/OS resources remain external.
-- current_storage_tools: tool oracle freezes 3 Python temp / 13 shell allocator / 22 tool owners; bytecode/map/
+- current_storage_tools: tool oracle freezes 3 Python temp / 13 shell allocator / 23 tool owners; bytecode/map/
   book/CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
 - current_storage_doctrine: `PROJECT-DATA-STORAGE` governs current tracked sinks/defaults and commands; 28 cases
   pass. Its process complement locks six required families, hostile inputs, relocation, and kernel denial.
@@ -40,10 +41,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 69/300 after `9965dca1`; never push per commit.
+- push_policy: hard lock at 300 new local commits; counter 70/300 after `f09c7c11`; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- blockers: none. next: commit/clear/prove clean `.10.9.2.2`, then task-tree-first activate exact unchanged-contract
-  Perl MCP admission/ledger `.10.9.2.3`; no push.
+- blockers: none. next: commit/clear/prove clean `.10.9.2.3`, then task-tree-first activate no-change `.10.9.2.4`;
+  no push.

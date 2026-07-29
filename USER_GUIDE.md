@@ -1169,7 +1169,10 @@ All six native runtime targets are admitted and recurring proof is active. Queri
 local ids/order, bounded pagination/traversal, and `none`/`identity`/`span`/`text` source ceilings with explicit
 redactions. Runtime explanations consume only an already captured caller-owned observation.
 
-The neutral modern MCP contract and Perl's decoded plus strict-stdio in-process server are now implemented. Import
+The neutral modern MCP contract and Perl's decoded plus strict-stdio in-process server are now implemented and
+admitted through one exact twelve-role consumer. The separate status/proof ledger reports Perl complete at one of
+five native implementations and one of six runtime admissions; the other backend rows and shared thin rollout
+remain pending. Import
 `LinkedSpec::MCPServer` directly, register an already-created index under an opaque host authorization byte string,
 then choose decoded dispatch or a caller-owned stream:
 
@@ -1219,6 +1222,11 @@ duplicate decoded keys, and invalid numeric ids; it emits compact sorted UTF-8 J
 flushes complete frames, clears the registry, releases indexes, and returns zero. I/O failure performs the same
 cleanup, returns nonzero, and writes at most one fixed content-free event to the optional log handle. Descriptor
 mode below remains a separate compiler-compatibility view, not the semantic wire model.
+
+For conformance or backend rollout work, run the neutral materializer/validator and generated-binding proof before
+`tools/check_mcp_implementation_admission.py` and `t/mcp_server_perl_admission.t`. Those admission owners verify
+status, topology, direct-native identity, negative authority, and canonical ordering; they do not define a second
+wire contract or alter normal embedding behavior.
 
 Typical shape:
 

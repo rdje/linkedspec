@@ -1,0 +1,143 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-mcp-implementation-admission-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.10.9.2.3",
+  "decisions": ["0054", "0055", "0057"],
+  "transport_contract": {
+    "contract_id": "linkedspec-mcp-transport-v1",
+    "path": "capability_conformance/mcp_semantic_transport_contract.json",
+    "sha256": "1f16d25ad1d3351da806428146ac43acff0b27ec4707ca4a26d047e01a444732"
+  },
+  "admission_contract": {
+    "roles": [
+      "contract_inventory",
+      "canonical_static_dispatch",
+      "native_capabilities_identity",
+      "native_query_identity",
+      "raw_input_outcomes",
+      "lifecycle_outcomes",
+      "handle_state_indistinguishability",
+      "policy_overlay",
+      "cancellation_emission",
+      "shutdown_and_io",
+      "hostile_output_and_log_privacy",
+      "authority_surface_fences"
+    ],
+    "role_policy": "one ordered consumer per runtime executes every exact role once",
+    "contract_inventory": {
+      "canonical_frames": 35,
+      "raw_inputs": 10,
+      "lifecycle_cases": 10,
+      "handle_cases": 4,
+      "policy_cases": 4
+    }
+  },
+  "implementations": [
+    {
+      "backend": "perl",
+      "server_name": "linkedspec-semantic-perl",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.2",
+      "source_paths": [
+        "perl/LinkedSpec/MCPContract.pm",
+        "perl/LinkedSpec/MCPContractRuntime.pm",
+        "perl/LinkedSpec/MCPServer.pm",
+        "perl/LinkedSpec/MCPWire.pm"
+      ],
+      "runtime_admissions": ["perl"]
+    },
+    {
+      "backend": "rust",
+      "server_name": "linkedspec-semantic-rust",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.3",
+      "source_paths": [],
+      "runtime_admissions": ["rust"]
+    },
+    {
+      "backend": "dart",
+      "server_name": "linkedspec-semantic-dart",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
+      "source_paths": [],
+      "runtime_admissions": ["dart"]
+    },
+    {
+      "backend": "julia",
+      "server_name": "linkedspec-semantic-julia",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.5",
+      "source_paths": [],
+      "runtime_admissions": ["julia"]
+    },
+    {
+      "backend": "lua",
+      "server_name": "linkedspec-semantic-lua",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
+      "source_paths": [],
+      "runtime_admissions": ["puc_lua", "luajit"]
+    }
+  ],
+  "runtime_admissions": [
+    {
+      "backend": "perl",
+      "runtime": "perl",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.2.3",
+      "consumer_path": "t/mcp_server_perl_admission.t"
+    },
+    {
+      "backend": "rust",
+      "runtime": "rust",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.3",
+      "consumer_path": null
+    },
+    {
+      "backend": "dart",
+      "runtime": "dart",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
+      "consumer_path": null
+    },
+    {
+      "backend": "julia",
+      "runtime": "julia",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.5",
+      "consumer_path": null
+    },
+    {
+      "backend": "lua",
+      "runtime": "puc_lua",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
+      "consumer_path": null
+    },
+    {
+      "backend": "lua",
+      "runtime": "luajit",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
+      "consumer_path": null
+    }
+  ],
+  "rollout": {
+    "semantic_capability": "thin_mcp_transport",
+    "status": "pending",
+    "owner": "FUTURE-PARITY-BACKLOG.10.9.7",
+    "requires_runtime_admissions": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]
+  },
+  "canonical_ci": {
+    "driver": "tools/run_ci_local.sh",
+    "ordered_commands": [
+      "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
+      "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
+      "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
+      "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
+      "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t"
+    ]
+  }
+}

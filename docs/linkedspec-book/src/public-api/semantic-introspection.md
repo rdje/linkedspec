@@ -3425,7 +3425,8 @@ The dependency order is:
 | `.10.9.2.0` | audit and freeze Perl native MCP owners/security seams | complete behavior-free plan; ADR `0057`, no server |
 | `.10.9.2.1` | generated Perl binding, private schema runtime, secure registry, and decoded dispatch | complete with canonical signoff |
 | `.10.9.2.2` | strict Perl stdio framing, token preflight, emission, cancellation, logging, and cleanup | complete with canonical signoff |
-| `.10.9.2.3-.10.9.2.4` | exact Perl admission/ledger and no-change closeout | pending |
+| `.10.9.2.3` | exact Perl implementation/runtime admission and shared ledger | complete; 1/5 implementations, 1/6 runtimes, rollout pending, 28 mutations, canonical signoff |
+| `.10.9.2.4` | committed-owner no-change Perl closeout | pending |
 | `.10.9.3-.10.9.5` | native Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3449,5 +3450,7 @@ cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
 runtime query surfaces now. MCP machine artifacts and independent validation are complete; Perl callers can use
-both decoded in-process dispatch and the strict stdio adapter today. Exact Perl admission, the other four native
-servers, and recurring/public MCP rollout remain pending under `.10.9.2.3-.10.10`.
+both decoded in-process dispatch and the strict stdio adapter today. One exact twelve-role consumer and separate
+status/proof ledger now admit Perl at 1/5 implementations and 1/6 runtimes while preserving the normative
+transport digest; shared rollout remains pending. The admission has canonical signoff. No-change Perl closeout,
+the other four native servers, and recurring/public MCP rollout remain `.10.9.2.4-.10.10`.

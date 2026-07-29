@@ -1,8 +1,9 @@
 # ADR 0054: One MCP contract is implemented by native per-backend servers
 
 - Date: 2026-07-29
-- Status: accepted; exact neutral contract closed under `.10.9.1`; Perl implementation plan accepted under ADR
-  `0057`; native behavior/admission pending under `.10.9.2.1-.7`
+- Status: accepted; exact neutral contract closed under `.10.9.1`; Perl implementation `.10.9.2.1-.2` complete;
+  exact Perl admission `.10.9.2.3` complete at 1/5 implementations + 1/6 runtimes with canonical signoff;
+  remaining native/runtime admissions pending under `.10.9.3-.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

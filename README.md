@@ -1045,7 +1045,11 @@ content migration exists yet.
   admission order. `.10.9.2.1` implements the generated binding, frozen schema runtime, secure opaque registry,
   and exact decoded discovery/list/call/cancel dispatch with no filesystem/semantic cache authority. `.10.9.2.2`
   now adds bounded duplicate-safe JSON lines, canonical LF output, pre-emission cancellation, sanitized optional
-  logging, and exact EOF/I/O cleanup. Exact unchanged-contract Perl admission `.10.9.2.3` follows; there is no
+  logging, and exact EOF/I/O cleanup. Exact unchanged-contract Perl admission `.10.9.2.3` now adds one twelve-role
+  public-server consumer plus a separate implementation/admission ledger and checker: Perl is complete at 1/5
+  native implementations and 1/6 runtime admissions, all other rows and shared rollout remain pending, and 28
+  mutations lock status/topology/authority/canonical order without changing the transport digest. Focused proof is
+  green and canonical signoff is complete. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1470,7 +1474,10 @@ content migration exists yet.
   closes the neutral contract. ADR `0057` and behavior-free `.10.9.2.0` map exact Perl native/wire/security seams
   and split implementation through `.10.9.2.1-.4`; `.10.9.2.1` supplies the generated contract binding, private
   schema runtime, secure registry, and decoded in-process server. `.10.9.2.2` supplies strict bounded stdio,
-  canonical output, pre-emission cancellation, sanitized logging, and cleanup; exact admission `.10.9.2.3` is next.
+  canonical output, pre-emission cancellation, sanitized logging, and cleanup. Exact admission `.10.9.2.3` now
+  composes twelve existing roles and records Perl complete at 1/5 implementations + 1/6 runtimes while shared
+  rollout stays pending; its 28-mutation checker, focused proof, and canonical signoff are green. No-change
+  committed-owner closeout `.10.9.2.4` follows only after the clean admission commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

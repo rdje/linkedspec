@@ -1,7 +1,8 @@
 # ADR 0057: Perl MCP uses an embedded derived contract and an in-process native server
 
 - Date: 2026-07-29
-- Status: accepted implementation plan; behavior pending under `FUTURE-PARITY-BACKLOG.10.9.2.1-.4`
+- Status: accepted; implementation `.10.9.2.1-.2` and exact admission `.10.9.2.3` complete with canonical signoff;
+  no-change closeout `.10.9.2.4` pending
 - Tags: architecture, mcp, perl, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context

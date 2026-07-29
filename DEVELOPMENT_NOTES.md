@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.3` — distinguish implementation truth from protocol truth): The
+  neutral transport contract remains immutable and says what every server must do. A separate
+  `mcp_implementation_admission.json` says which native sources and runtime legs have proved it. Keeping status out
+  of the normative bundle prevents a backend promotion from changing the protocol digest and prevents pending
+  implementations from being mistaken for transport requirements. Hard current rows—Perl complete, every other
+  implementation/runtime pending, shared rollout pending—also make coordinated premature promotion detectable.
+
+  The Perl admission is one twelve-role composition over existing authorities, not a new response oracle. It
+  reads the neutral JSONL and case inventories to prove corpus identity/order, exercises the public server for
+  Perl-identity responses, and compares native capabilities/query results directly. Canonical frames belonging to
+  other server identities are inputs to the shared contract proof; copying their response identity into Perl
+  expectations would incorrectly turn uniformity into byte identity across server names.
+
+  Static admission fences make the transport's negative authority executable: production MCP owners cannot call
+  parser construction, descriptors, substitution handlers, parser-source dumps, traces, shell/process execution,
+  or arbitrary filesystem reads. The sole production `sysopen` remains the documented fail-closed
+  `/dev/urandom` handle source. These checks constrain transport authority without duplicating semantic behavior.
+
+  Canonical order is now materialize, independently validate, generate the Perl binding, run binding/dispatch/
+  stdio proof, validate the implementation ledger, then run the admission consumer. The checker rejects 28
+  mutations across ledger truth, role topology, source authority, and CI wiring; the shared thin rollout remains
+  owned by `.10.9.7`, after all six runtime admissions rather than after the first native server.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.2` — make hostile bytes prove their meaning before decoding):
   `JSON::PP` is retained as the value constructor and canonical encoder, but it cannot own strict wire admission:
   installed 4.06 silently accepts literal and escape-equivalent duplicate keys. `LinkedSpec::MCPWire` therefore

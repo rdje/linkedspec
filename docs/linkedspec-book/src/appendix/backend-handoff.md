@@ -240,8 +240,10 @@ filesystem-free contract binding, strict duplicate-safe JSON wire, OS CSPRNG/mon
 authorization, lowering-only policy, and `.1-.4` implementation/admission split. Perl `.10.9.2.1` implements the
 generated binding, private schema runtime, secure registry, and exact decoded dispatch with canonical signoff.
 Strict stdio/lifecycle `.10.9.2.2` now implements bounded duplicate-safe input, canonical LF output, cancellation
-through flush, sanitized logging, and EOF/I/O cleanup; exact Perl admission `.10.9.2.3` follows, then remaining
-native/runtime admission `.10.9.3-.7`.
+through flush, sanitized logging, and EOF/I/O cleanup. Exact Perl admission `.10.9.2.3` now adds one twelve-role
+consumer and a separate status/proof ledger at 1/5 implementations + 1/6 runtimes, shared rollout pending, and 28
+rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4`
+then precedes remaining native/runtime admission `.10.9.3-.7`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

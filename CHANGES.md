@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.3 — admit the Perl MCP implementation
+
+Added `mcp_implementation_admission.json`, a status and proof ledger deliberately separate from the normative
+`linkedspec-mcp-transport-v1` contract. It fixes five native implementation rows and six runtime-admission rows:
+Perl is the only complete implementation/runtime, Rust/Dart/Julia/Lua and PUC Lua/LuaJIT remain pending, and the
+shared thin-transport rollout remains pending until all six runtimes qualify. The ledger pins the unchanged
+transport digest and exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and four policy cases.
+
+Added one omission-sensitive twelve-role Perl admission consumer. It composes the existing public in-process
+server, native capabilities/query identity, neutral canonical/raw/lifecycle/handle/policy artifacts, cancellation,
+shutdown/I/O, hostile-output privacy, and static authority fences without becoming a second semantic or protocol
+oracle. Other-server canonical responses remain conformance inputs; Perl output identity is derived through the
+Perl server itself. No production code, transport byte, schema, semantic behavior, handle policy, CLI, or rollout
+authority changes in this slice.
+
+Added an independent admission-ledger checker and canonical wiring after the existing materialize -> validate ->
+generate -> Perl binding/dispatch/stdio chain. It rejects 28 status, ownership, count, topology, role, transport-
+digest, authority, tracked-input, and canonical-order mutations. Focused proof passes MCP 35/10/10/68, the existing
+three files / 22 tests, ledger 1/5 implementations + 1/6 runtimes with rollout pending, the new 13-test admission,
+storage 1,703/381,403/28, path 14/5, and tool locality 3/13/23. Canonical CI passes Perl semantic admission 18,
+Rust 1/1 in 82.82s, Dart 1/1, Julia 416/416 in 29.9s, containment/moved-root proof, both primary CLI matrices
+66/66, RAM 61%, and Phase 0 1,031/1,031 in 647s. Exact cleanup removes the verified 13,324-KiB book and one empty run.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.2 — implement Perl MCP strict stdio
 
 Added private `LinkedSpec::MCPWire` and the public host adapter

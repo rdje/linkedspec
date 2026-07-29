@@ -28,6 +28,8 @@ bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_c
 bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
 PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
+bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
+PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
 ```
 
 The first step catches stale generated frames/digests; the second independently checks schemas, provenance, raw
@@ -35,10 +37,13 @@ and lifecycle/handle/policy outcomes, and 68 mutations. Only then may the third 
 Perl module, after which focused binding, decoded-server, and adversarial stdio proofs run. The stdio suite locks
 all ten raw and ten lifecycle cases, exact frame/depth/id limits, duplicate/unicode/number mutants, canonical
 emission, cancellation through flush, continuation after rejected frames, EOF release, I/O failures, and sanitized
-logging. The recurring tool-governance test rejects a
-missing materializer, missing binding check, and binding-before-validator order. This keeps a backend-derived
-module from blessing or hiding stale normative bytes. The focused suite uses only caller-owned in-memory handles;
-it reads no source path and changes no native semantic/primary-CLI contract.
+logging. The admission checker then verifies a separate five-implementation/six-runtime status ledger, unchanged
+transport digest, one exact twelve-role consumer, production authority fences, and shared rollout still pending;
+the consumer finally proves Perl direct-native/MCP identity and every neutral outcome class. The recurring tool-
+governance test rejects missing owners and invalid ordering. This keeps a backend-derived module from blessing or
+hiding stale normative bytes and keeps a premature status promotion from masquerading as conformance. The focused
+suites use only caller-owned in-memory handles; they read no source path and change no native semantic/primary-CLI
+contract.
 
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
