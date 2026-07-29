@@ -122,7 +122,7 @@ ROLLOUT = [
     ("rust_parity", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart_parity", "complete", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia_parity", "complete", "FUTURE-PARITY-BACKLOG.10.6"),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
+    ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
     ("recurring_six_runtime", "pending", "FUTURE-PARITY-BACKLOG.10.8"),
     ("thin_mcp_transport", "pending", "FUTURE-PARITY-BACKLOG.10.9"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.10.10"),
@@ -132,8 +132,8 @@ ADMISSIONS = [
     ("rust", "rust", "complete", "FUTURE-PARITY-BACKLOG.10.4"),
     ("dart", "dart", "complete", "FUTURE-PARITY-BACKLOG.10.5"),
     ("julia", "julia", "complete", "FUTURE-PARITY-BACKLOG.10.6"),
-    ("lua", "puc_lua", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
-    ("lua", "luajit", "pending", "FUTURE-PARITY-BACKLOG.10.7"),
+    ("lua", "puc_lua", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
+    ("lua", "luajit", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
 ]
 PERL_ADMISSION = {
     "path": "t/semantic_introspection_perl_admission.t",
@@ -168,8 +168,13 @@ JULIA_ADMISSION = {
     "canonical_driver": "tools/run_ci_local.sh",
     "roles": PERL_ADMISSION["roles"].copy(),
 }
+LUA_ADMISSION = {
+    "path": "lua/test/semantic_introspection_lua_admission_test.lua",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "roles": PERL_ADMISSION["roles"].copy(),
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 89 rejected mutations, rollout 5 complete / 4 pending, admission 4 complete / 2 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 98 rejected mutations, rollout 6 complete / 3 pending, admission 6 complete / 0 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
@@ -181,8 +186,13 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "Its 12 exact-once roles compose every Dart semantic route",
     "julia --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/semantic_introspection_julia_admission_test.jl",
     "Its 12 exact-once roles compose every Julia semantic route",
+    "bash tools/run_lua_project_data.sh puc lua/test/semantic_introspection_lua_admission_test.lua",
+    "Its 12 exact-once roles compose every Lua semantic route on both admitted ABIs",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
+    "89 rejected mutations",
+    "rollout 5 complete / 4 pending",
+    "admission 4 complete / 2 pending",
     "81 rejected mutations",
     "rollout 4 complete / 5 pending",
     "admission 3 complete / 3 pending",
@@ -237,7 +247,7 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("89 rejected mutations", "88 rejected mutations", 1)
+    wrong = text.replace("98 rejected mutations", "97 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
@@ -498,13 +508,14 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(contract["target_admissions"][1]["consumer"] == RUST_ADMISSION, "Rust admission consumer topology drifted")
     require(contract["target_admissions"][2]["consumer"] == DART_ADMISSION, "Dart admission consumer topology drifted")
     require(contract["target_admissions"][3]["consumer"] == JULIA_ADMISSION, "Julia admission consumer topology drifted")
-    require(all(row["consumer"] is None for row in contract["target_admissions"][4:]), "backend admitted before its owned leaf")
+    require(contract["target_admissions"][4]["consumer"] == LUA_ADMISSION, "PUC Lua admission consumer topology drifted")
+    require(contract["target_admissions"][5]["consumer"] == LUA_ADMISSION, "LuaJIT admission consumer topology drifted")
     for row in contract["rollout"]: require_fields(row, {"capability", "status", "owner"}, f"rollout {row.get('capability')}")
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 89 and len(set(contract["mutations"])) == 89, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 98 and len(set(contract["mutations"])) == 98, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -1052,22 +1063,38 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     require("require_command julia" in ci_text, "canonical CI does not require the Julia SDK")
     julia_test_driver = (ROOT / "julia" / "test" / "runtests.jl").read_text(encoding="utf-8")
     require('include("semantic_introspection_julia_admission_test.jl")' in julia_test_driver, "Julia package tests do not compose the semantic admission consumer")
+
+    lua_consumers = [row["consumer"] for row in contract["target_admissions"][4:]]
+    require(lua_consumers[0] == lua_consumers[1] == LUA_ADMISSION, "Lua ABI consumer topology diverged")
+    lua_consumer = lua_consumers[0]
+    lua_consumer_path = ROOT / lua_consumer["path"]
+    require(lua_consumer_path.is_file(), "Lua semantic admission consumer is missing")
+    lua_consumer_text = lua_consumer_path.read_text(encoding="utf-8")
+    for role in lua_consumer["roles"]:
+        marker = re.compile(rf"^local function role_{re.escape(role)}\(", re.MULTILINE)
+        require(len(marker.findall(lua_consumer_text)) == 1, f"Lua semantic admission role marker drifted: {role}")
+    require(f"require_tracked_file {lua_consumer['path']}" in ci_text, "canonical CI does not require the Lua semantic admission consumer")
+    lua_driver_text = (ROOT / "tools" / "run_lua_local.sh").read_text(encoding="utf-8")
+    require(lua_driver_text.count(lua_consumer["path"]) == 2, "Lua package driver must register the semantic admission consumer exactly once per ABI")
+    require(f'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" {lua_consumer["path"]}' in lua_driver_text, "PUC Lua package driver does not run the semantic admission consumer")
+    require(f'"$LUAJIT_CMD" {lua_consumer["path"]}' in lua_driver_text, "LuaJIT package driver does not run the semantic admission consumer")
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "89 rejected mutations" in readme
-        and "5 complete / 4 pending" in readme
-        and "4 complete / 2 pending" in readme,
+        and "98 rejected mutations" in readme
+        and "6 complete / 3 pending" in readme
+        and "6 complete / 0 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
-        and "4 complete / 2 pending" in book
+        and "6 complete / 0 pending" in book
         and "t/semantic_introspection_perl_admission.t" in book
         and "semantic_introspection_rust_admission" in book
         and "semantic_introspection_dart_admission_test.dart" in book
-        and "semantic_introspection_julia_admission_test.jl" in book,
+        and "semantic_introspection_julia_admission_test.jl" in book
+        and "semantic_introspection_lua_admission_test.lua" in book,
         "mdBook semantic introspection page is not synchronized",
     )
     toolbox = TOOLBOX_PATH.read_text(encoding="utf-8")
@@ -1196,7 +1223,16 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_julia_consumer_driver"] = lambda c, m: c["target_admissions"][3]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
     mutations["unpromote_julia_rollout"] = lambda c, m: c["rollout"][4].update({"status": "pending"})
     mutations["omit_julia_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("julia/test/semantic_introspection_julia_admission_test.jl")
-    mutations["admit_backend_early"] = lambda c, m: c["target_admissions"][4].update({"status": "complete"})
+    mutations["unadmit_lua_puc"] = lambda c, m: c["target_admissions"][4].update({"status": "pending"})
+    mutations["unadmit_luajit"] = lambda c, m: c["target_admissions"][5].update({"status": "pending"})
+    mutations["omit_lua_consumer_path"] = lambda c, m: c["target_admissions"][4]["consumer"].pop("path")
+    mutations["alter_lua_consumer_path"] = lambda c, m: c["target_admissions"][4]["consumer"].update({"path": "lua/test/missing_semantic_consumer_test.lua"})
+    mutations["omit_lua_consumer_role"] = lambda c, m: c["target_admissions"][4]["consumer"]["roles"].pop()
+    mutations["reorder_lua_consumer_roles"] = lambda c, m: c["target_admissions"][4]["consumer"]["roles"].reverse()
+    mutations["alter_lua_consumer_driver"] = lambda c, m: c["target_admissions"][4]["consumer"].update({"canonical_driver": "tools/missing_ci.sh"})
+    mutations["unpromote_lua_rollout"] = lambda c, m: c["rollout"][5].update({"status": "pending"})
+    mutations["omit_lua_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("lua/test/semantic_introspection_lua_admission_test.lua")
+    mutations["advance_recurring_early"] = lambda c, m: c["rollout"][6].update({"status": "complete"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)

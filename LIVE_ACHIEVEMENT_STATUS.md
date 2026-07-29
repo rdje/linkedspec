@@ -8,17 +8,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- `FUTURE-PARITY-BACKLOG.10.7.7` is active task-tree-first from clean commit `17348041`. Its planning boundary
-  owns one Lua-5.1-compatible ordered twelve-role consumer run unchanged on PUC Lua and LuaJIT, all committed
-  snapshot/query/runtime routes, twenty digests, policy/isolation/host denial, identical dual-row topology, nine
-  mutations, Lua-only promotion, and `.10.7` closeout. No implementation or governance value has changed yet.
-  Baseline memory, six doctrines, KM 734/5,883, mdBook, neutral 6/20/89 at 5/9 + 4/6, diff, and exact generated-
-  book/empty-run cleanup pass.
+- Lua semantic adapter/admission parent `FUTURE-PARITY-BACKLOG.10.7` is closed through `.10.7.7`. Recurring
+  six-runtime semantic composition `FUTURE-PARITY-BACKLOG.10.8` is the next pending task-tree-first activation
+  after this implementation commit is clean. No pivot occurs before then.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.7 — admit exact dual-ABI Lua semantics**
+  (one omission-sensitive consumer from clean planning commit `e5a547ac`).
+
+  **Result:** One Lua-5.1-compatible twelve-role file runs unchanged on PUC Lua and LuaJIT at 408 assertions each
+  and composes every committed snapshot, query, observation, generated/emitted/traced/isolated route, policy,
+  isolation, and host-denial boundary. Both rows share one exact topology; nine mutations advance only Lua to
+  semantic 6/20/98 at rollout 6/9 and native admission 6/6. Parent `.10.7` closes.
+
+  **Proof:** All eleven semantic owners pass 2,372 per ABI. Complete Lua passes package 177/177 per ABI, PUC
+  primary 66x2, corpus 105/105, and 16-owner storage; primary passes 5x2x66; Unicode passes 10/10 and all ledgers
+  are exact. Canonical passes six doctrines, Rust 1/1 in 80.10s, Dart 1/1, Julia 416/416 in 28.5s, containment,
+  moved-root, reference 66x2, and Phase 0 1,031/1,031 in 663s. Knowledge Map 735/5,894 and exact 13,064-KiB
+  rendered-book plus empty-run cleanup pass. Cadence advances to 59/300 with no push; recurring semantic
+  composition `.10.8` follows after the clean commit.
+
 - 2026-07-28: **FUTURE-PARITY-BACKLOG.10.7.6.4 — close Lua runtime observation**
   (no-change ten-owner recomposition from clean generated-propagation commit `04ab4fec`).
 

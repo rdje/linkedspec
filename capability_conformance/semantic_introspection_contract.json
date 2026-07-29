@@ -404,8 +404,56 @@
         ]
       }
     },
-    {"backend": "lua", "runtime": "puc_lua", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7", "native_api": "capabilities_plus_query", "consumer": null},
-    {"backend": "lua", "runtime": "luajit", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7", "native_api": "capabilities_plus_query", "consumer": null}
+    {
+      "backend": "lua",
+      "runtime": "puc_lua",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.7",
+      "native_api": "capabilities_plus_query",
+      "consumer": {
+        "path": "lua/test/semantic_introspection_lua_admission_test.lua",
+        "canonical_driver": "tools/run_ci_local.sh",
+        "roles": [
+          "source_normalization",
+          "compiled_snapshots",
+          "failed_snapshot",
+          "runtime_direct",
+          "runtime_loaded",
+          "runtime_generated",
+          "runtime_traced",
+          "native_and_neutral_json",
+          "exact_twenty_queries",
+          "privacy_page_budget_error_explain",
+          "query_non_interference",
+          "stale_host_leak_denial"
+        ]
+      }
+    },
+    {
+      "backend": "lua",
+      "runtime": "luajit",
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.7",
+      "native_api": "capabilities_plus_query",
+      "consumer": {
+        "path": "lua/test/semantic_introspection_lua_admission_test.lua",
+        "canonical_driver": "tools/run_ci_local.sh",
+        "roles": [
+          "source_normalization",
+          "compiled_snapshots",
+          "failed_snapshot",
+          "runtime_direct",
+          "runtime_loaded",
+          "runtime_generated",
+          "runtime_traced",
+          "native_and_neutral_json",
+          "exact_twenty_queries",
+          "privacy_page_budget_error_explain",
+          "query_non_interference",
+          "stale_host_leak_denial"
+        ]
+      }
+    }
   ],
   "rollout": [
     {"capability": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.2"},
@@ -413,7 +461,7 @@
     {"capability": "rust_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.4"},
     {"capability": "dart_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.5"},
     {"capability": "julia_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
-    {"capability": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
+    {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
     {"capability": "recurring_six_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
     {"capability": "thin_mcp_transport", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.9"},
     {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.10"}
@@ -429,7 +477,8 @@
       "t/semantic_introspection_perl_admission.t",
       "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs",
       "dart/test/semantic_introspection_dart_admission_test.dart",
-      "julia/test/semantic_introspection_julia_admission_test.jl"
+      "julia/test/semantic_introspection_julia_admission_test.jl",
+      "lua/test/semantic_introspection_lua_admission_test.lua"
     ],
     "backend_consumers": "not_admitted_before_owned_rollout_leaf",
     "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"
@@ -458,7 +507,10 @@
     "omit_dart_canonical_registration", "unadmit_julia", "omit_julia_consumer_path",
     "alter_julia_consumer_path", "omit_julia_consumer_role", "reorder_julia_consumer_roles",
     "alter_julia_consumer_driver", "unpromote_julia_rollout", "omit_julia_canonical_registration",
-    "admit_backend_early", "omit_runtime", "omit_luajit",
+    "unadmit_lua_puc", "unadmit_luajit", "omit_lua_consumer_path", "alter_lua_consumer_path",
+    "omit_lua_consumer_role", "reorder_lua_consumer_roles", "alter_lua_consumer_driver",
+    "unpromote_lua_rollout", "omit_lua_canonical_registration", "advance_recurring_early",
+    "omit_runtime", "omit_luajit",
     "omit_mcp_rollout", "move_semantics_into_mcp",
     "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration"
   ]

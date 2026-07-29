@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.7` — neutral observation JSON is evidence, not a typed event):
+  An isolated emitted-module host must derive its semantic response inside that host. JSON-decoded observation
+  rows cannot be accepted back into `with_execution_observation` as if they were package-protected typed events;
+  doing so would weaken the authority boundary solely to simplify the admission test. The shared consumer
+  therefore sends the exact digest out of the isolated process and compares it with the in-process native,
+  generated, emitted, traced, and typed/raw-neutral routes.
+
+  The second dual-ABI detail is governance finality. Lua is the last native target, so the former
+  `admit_backend_early` mutation no longer has a pending backend to advance. Admission replaces it with
+  `advance_recurring_early`, preserving one independent premature-rollout boundary for the next owner while nine
+  Lua mutations separately lock both ABI statuses and their shared consumer topology. The test remains one
+  storage owner and one source file on both ABIs; adding it raises Lua's same-volume inventory from 15 to 16
+  without creating ABI-specific fixtures or authority.
+
 - 2026-07-28 (`FUTURE-PARITY-BACKLOG.10.7.7` — one consumer must express two ABI admissions): PUC Lua and LuaJIT
   share the same Lua source implementation, so semantic admission must not create ABI-specific tests or alternate
   projections. One Lua-5.1-compatible consumer file declares the established twelve roles once; the backend driver

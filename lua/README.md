@@ -153,6 +153,13 @@ the retained static topology. It materializes that topology once, adds canonical
 installs a sink, reads a path, or mutates the static index. Invalid observations raise a protected semantic-index
 error with stage `execution_observation` and code `semantic_index_invalid_observation`.
 
+Lua semantic introspection is admitted on both supported ABIs by one unchanged twelve-role consumer,
+`lua/test/semantic_introspection_lua_admission_test.lua`. It passes 408 assertions under PUC Lua and 408 under
+LuaJIT across strict source/failed/runtime snapshots, all twenty typed/raw-neutral query responses, every native/
+loaded/reconstructed/generated/emitted/traced/isolated route, policy and isolation cases, and host-leak denial.
+Both conformance rows share the same consumer topology; neutral governance is six fixture groups, twenty exact
+responses, 98 rejected mutations, rollout 6/9, and native admission 6/6.
+
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
 `body_ast`. Fixed-v1 calls require that staged AST, fail closed on source/AST drift, and carry typed function-owned

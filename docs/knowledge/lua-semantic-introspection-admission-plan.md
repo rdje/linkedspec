@@ -12,9 +12,9 @@ answers:
   - "what semantic governance changes are allowed during Lua admission"
   - "what is the current Lua semantic admission baseline"
 date: 2026-07-28
-status: active behavior-free plan; implementation follows the clean activation commit
+status: superseded
 tags: [lua, luajit, semantic-introspection, admission, conformance, mutations, rollout, parity]
-evidence: "FUTURE-PARITY-BACKLOG.10.7.7 is activated from clean 17348041 after retrieval of the four admitted consumers and the committed Lua semantic/runtime owner chain. Its frozen target is lua/test/semantic_introspection_lua_admission_test.lua, one Lua-5.1-compatible twelve-role source run unchanged by PUC Lua and LuaJIT. Both admission rows must reference its identical path/driver/roles topology; nine independent mutations lock both statuses plus path, role order, driver, rollout, and canonical registration. Baseline remains 6 groups / 20 responses / 89 mutations at rollout 5/9 and admission 4/6 until implementation."
+evidence: "Historical behavior-free plan from FUTURE-PARITY-BACKLOG.10.7.7 at clean 17348041. Implementation completed from planning commit e5a547ac; current topology and proof live in lua-semantic-introspection-admission."
 last_verified: 2026-07-28
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -22,6 +22,9 @@ reverify:
 ---
 
 # Lua semantic-introspection admission plan
+
+This plan is complete and historical. Current admission authority is
+[[lua-semantic-introspection-admission]].
 
 Lua admission is composition, not another implementation layer. The planned consumer calls only the committed
 strict source/outcome owner, static and calls/staged/generated projection, immutable typed/raw-neutral evaluator,

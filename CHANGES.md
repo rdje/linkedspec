@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.7 — admit exact dual-ABI Lua semantics
+
+Added one Lua-5.1-compatible ordered consumer that executes unchanged under PUC Lua and LuaJIT and composes only
+the committed semantic owners. Its twelve roles cover strict source normalization; compiled, failed, and observed
+runtime snapshots; native, loaded, JSON-reconstructed, generated-plan, fresh-emitted, isolated, and traced routes;
+typed/native-neutral JSON; all twenty exact response digests; privacy, pages, budgets, portable errors,
+explanations, request/response isolation, query non-execution, and host-leak denial. Each ABI passes 408 admission
+assertions, and the complete eleven-suite semantic total is 2,372 assertions per ABI.
+
+Both Lua admission rows now reference the same consumer path, driver, and ordered roles. The Lua driver invokes
+that path exactly once per ABI, canonical CI requires it, and nine independent mutations lock both statuses, path
+omission/alteration, role omission/reordering, driver alteration, rollout rollback, and canonical registration.
+The neutral contract reports six fixture groups, twenty responses, and 98 rejected mutations at rollout 6/9 and
+native admission 6/6; only `lua_dual_abi` advanced.
+
+Complete Lua passes package `1..177` on both ABIs, PUC primary 66x2, corpus 105/105, and the 16-owner storage
+oracle. Primary passes 5x2x66 and Unicode 10/10. Canonical CI passes six doctrines, Rust admission 1/1 in 80.10
+seconds, Dart 1/1, Julia 416/416 in 28.5 seconds, process containment, moved-root proof, reference primary 66x2,
+and Phase 0 1,031/1,031 in 663 seconds. Knowledge Map 735/5,894 passes. Exact cleanup removes only the verified
+13,064-KiB rendered book and one proven-empty managed-run directory while retaining repository-local caches.
+Parent `.10.7` closes; recurring six-runtime composition `.10.8` is next.
+
 ## 2026-07-28 — FUTURE-PARITY-BACKLOG.10.7.7 — activate exact Lua semantic admission
 
 Activated the final Lua semantic-introspection leaf task-tree-first from clean runtime-observation closeout commit

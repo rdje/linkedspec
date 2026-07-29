@@ -494,7 +494,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 89 rejected mutations, rollout 5 complete / 4 pending, admission 4 complete / 2 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 98 rejected mutations, rollout 6 complete / 3 pending, admission 6 complete / 0 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -784,17 +784,19 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   non-interference, fresh plus isolated emitted modules, and host-leak denial. Eight independent topology
   mutations advance only Julia to rollout 5/9 and admission 4/6.
 
-- **LUA COMPOSED ADMISSION PLAN:** `.10.7.7` is active from clean `17348041`. Add only
-  `lua/test/semantic_introspection_lua_admission_test.lua`; it must declare the established twelve ordered roles
-  once in Lua-5.1-compatible source and run unchanged through `tools/run_lua_local.sh` on PUC Lua and LuaJIT. Both
-  admission rows must carry the same consumer path/driver/roles object. The consumer composes strict source and
+- **LUA COMPOSED ADMISSION:** `.10.7.7` adds only
+  `lua/test/semantic_introspection_lua_admission_test.lua`; it declares the established twelve ordered roles once
+  in Lua-5.1-compatible source and runs unchanged through `tools/run_lua_local.sh` on PUC Lua and LuaJIT. Run it
+  directly with `bash tools/run_lua_project_data.sh puc lua/test/semantic_introspection_lua_admission_test.lua`
+  and substitute `luajit` for the second ABI. Its 12 exact-once roles compose every Lua semantic route on both admitted ABIs.
+  Both admission rows carry the same consumer path/driver/roles object. The consumer composes strict source and
   compiled/failed/runtime snapshots; all twenty typed/raw-neutral digests; direct, loaded, reconstructed, public
   generated-plan, fresh-emitted direct/traced, isolated emitted, native traced, and generated-helper traced routes;
   privacy/pages/budgets/errors/explain; request/response isolation; query non-execution; and host/path/table/
   metatable/AST/ActionIR/observation/generated-source/pointer denial. The checker must lock both ABI statuses,
   exact shared topology, both driver invocations, Lua-only rollout, canonical registration, and nine independent
-  mutations. Until that leaf passes and commits, the exact baseline remains 6 groups / 20 responses / 89
-  mutations, rollout 5/9, and admission 4/6. Retrieve [[lua-semantic-introspection-admission-plan]] before editing.
+  mutations. Each ABI passes exactly 408 assertions; the neutral gate advances to 6 groups / 20 responses / 98
+  mutations, rollout 6/9, and admission 6/6. Retrieve [[lua-semantic-introspection-admission]] before editing.
 
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque

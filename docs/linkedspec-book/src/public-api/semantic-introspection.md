@@ -47,8 +47,8 @@ The distinction matters:
   later Lua leaves; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission is **4 complete / 2 pending**: Perl, Rust, Dart, and Julia are
-admitted; PUC Lua and LuaJIT remain pending. MCP remains later transport work and does not own semantics.
+The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
+Lua, and LuaJIT are admitted. MCP remains later transport work and does not own semantics.
 
 ## Current Dart source, outcome, and private graph foundation
 
@@ -2556,25 +2556,31 @@ seconds. Parent `.10.7.6` is therefore composition-closed without changing deter
 v2/format 2, semantic rollout 5/9, or native admission 4/6. The separate ordered dual-ABI admission consumer
 remains `.10.7.7`.
 
-#### Lua dual-ABI admission activation
+#### Lua dual-ABI admission
 
-Leaf `.10.7.7` is active task-tree-first from clean runtime-observation closeout commit `17348041`. Its frozen
-implementation adds one file, `lua/test/semantic_introspection_lua_admission_test.lua`, rather than another
-semantic model, projector, evaluator, observation seam, or runtime route. That Lua-5.1-compatible source declares
-the established twelve roles once and must run byte-for-byte unchanged under both PUC Lua and LuaJIT.
+Leaf `.10.7.7` adds one file, `lua/test/semantic_introspection_lua_admission_test.lua`, rather than another semantic
+model, projector, evaluator, observation seam, or runtime route. That Lua-5.1-compatible source declares the
+established twelve roles once and runs byte-for-byte unchanged under both PUC Lua and LuaJIT.
 
-The consumer will compose strict byte/text normalization; compiled graph, calls, privacy, failed, and observed
+The consumer composes strict byte/text normalization; compiled graph, calls, privacy, failed, and observed
 runtime snapshots; direct, loaded, normalized-JSON reconstructed, public generated-plan, fresh-emitted direct/
 traced, isolated emitted, native traced, and generated-helper traced execution; typed/native-neutral JSON; all
 twenty exact response digests; privacy, pages, budgets, errors, explanations, request/response isolation, and query
 non-execution; plus denial of paths, Lua host tables/metatables and implementation/type text, AST/ActionIR,
 observation objects, generated implementation source, trace, and pointer-like identity.
 
-Both Lua admission rows must reference one identical consumer object, `tools/run_lua_local.sh` must invoke its
-same path exactly once per ABI, and canonical CI must require it. Nine independent mutations lock the two ABI
-statuses and the shared path, ordered roles, driver, Lua-only rollout, and registration. This activation changes no
-behavior or governance value: the pre-implementation baseline remains six groups, twenty response hashes, and 89
-rejected mutations at rollout 5/9 and native admission 4/6.
+Both Lua admission rows reference one identical consumer object, `tools/run_lua_local.sh` invokes its same path
+exactly once per ABI, and canonical CI requires it. Nine independent mutations lock the two ABI statuses and the
+shared path, ordered roles, driver, Lua-only rollout, and registration. Each ABI passes exactly 408 assertions;
+the executable neutral gate now reports six groups, twenty response hashes, and 98 rejected mutations at rollout
+6/9 and native admission 6/6.
+
+All eleven Lua semantic owners pass 2,372 assertions per ABI. Complete Lua passes package `1..177` under both
+interpreters, PUC primary 66x2, corpus 105/105, and the 16-owner same-volume storage oracle. The five-backend
+primary matrix passes 5x2x66 and every Unicode-manifest backend/environment leg passes. Canonical CI passes six
+doctrines, Rust admission 1/1 in 80.10 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds, process containment,
+moved-root proof, reference primary 66x2, and Phase 0 1,031/1,031 in 663 seconds. Lua parent `.10.7` is closed;
+Knowledge Map 735/5,894 passes, and recurring six-runtime composition remains separately owned by `.10.8`.
 
 #### Lua private immutable query kernel (historical dependency boundary)
 
@@ -2890,16 +2896,15 @@ bash tools/run_python_project_data.sh tools/check_semantic_introspection_contrac
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 89 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 98 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
 
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
-ordered roles, tracked path, canonical driver, native status, and rollout row all agree; every later backend still
-fails if promoted early. It also reads `TOOLBOX.md` and locks the exact command output plus Perl, Rust, Dart, and
-Julia runtime/admission claims. Internal omission and wrong-value probes prove that documentation guard
-independently of the 89
+ordered roles, tracked path, canonical driver, native status, and rollout row all agree. It also reads
+`TOOLBOX.md` and locks the exact command output plus Perl, Rust, Dart, Julia, and dual-ABI Lua runtime/admission
+claims. Internal omission and wrong-value probes prove that documentation guard independently of the 98
 semantic-contract mutations.
 
 Perl's native evaluator has a separate exact gate:
@@ -3101,8 +3106,8 @@ The dependency order is:
 | `.10.7.6.2` | Lua immutable observed-index derivation | implemented; strict detached topology validation, exact twentieth digest, new 269/focused 1,884 per ABI, generated propagation fenced |
 | `.10.7.6.3` | Lua generated and emitted runtime observation | implemented; public/fresh-emitted direct/traced plus isolated dual-ABI routes, exact callback identity and marker fences, new 80/focused 1,964 per ABI, unchanged v2/format 2 |
 | `.10.7.6.4` | Lua runtime-observation composition closeout | complete; committed focused 1,964 plus full signoff closes `.10.7.6` without replacement code, format change, or promotion |
-| `.10.7.7` | Lua exact dual-ABI semantic admission | active planning; one shared twelve-role source, identical two-row topology, nine mutations, Lua-only promotion, and parent closeout frozen before implementation |
-| `.10.7` | PUC Lua and LuaJIT identity | in progress |
+| `.10.7.7` | Lua exact dual-ABI semantic admission | complete; one shared twelve-role source passes 408 assertions per ABI, identical two-row topology and nine mutations advance only Lua to 6/9 rollout and 6/6 admission |
+| `.10.7` | PUC Lua and LuaJIT identity | complete |
 | `.10.8` | recurring six-runtime proof | pending |
 | `.10.9` | thin MCP transport | pending |
 | `.10.10` | public no-drift and closure | pending |
