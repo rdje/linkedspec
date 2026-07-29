@@ -3431,7 +3431,7 @@ The dependency order is:
 | `.10.9.3.1` | Rust shared binding, frozen runtime, secure registry, and decoded server | implemented; focused public corpus proof; admission unchanged |
 | `.10.9.3.2` | Rust strict stdio framing, lexical preflight, emission, cancellation, logging, and cleanup | implemented; private/public adversarial proof; admission unchanged |
 | `.10.9.3.3` | Rust exact implementation/runtime admission | complete; one twelve-role external consumer; 2/5 implementations, 2/6 runtimes, rollout pending, 39 mutations |
-| `.10.9.3.4` | committed-owner no-change Rust closeout | pending after the clean admission commit |
+| `.10.9.3.4` | committed-owner no-change Rust closeout | complete from clean `13d9ce17`; focused and canonical recomposition green; parent `.10.9.3` closed |
 | `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3473,6 +3473,12 @@ all twelve roles through one external consumer and advances only Rust: the ledge
 implementations and 2/6 runtimes, with shared rollout still pending and 39 mutations guarding status, sources,
 roles, authority, and CI order. No standalone server binary, primary-CLI mode, source/path bootstrap,
 SDK/network/async runtime, semantic cache, aggregator, or legacy protocol is authorized.
+
+No-change closeout `.10.9.3.4` reruns those committed owners rather than adding an umbrella oracle. The transport
+remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases with 68 mutations; Perl remains 22 + 13, Rust
+remains 15 + 3 + 4 + 1, and the ledger remains 2/5 implementations + 2/6 runtimes with pending rollout and 39
+mutations. Focused and canonical recomposition pass, parent `.10.9.3` is closed, and Dart `.10.9.4` is next after
+the clean closeout commit.
 
 ### Using Rust decoded MCP dispatch
 

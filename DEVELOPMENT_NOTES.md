@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.4` — closeout should prove composition, not create another owner):
+  The correct Rust parent closeout is deliberately documentation-only. Re-running the neutral materializer and
+  independent validator, both binding generators, the committed Perl/Rust binding/decoded/stdio/admission proofs,
+  and the ledger checker gives stronger no-drift evidence than an umbrella test that copied their assertions.
+
+  The focused chain remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases / 68 contract mutations,
+  byte-fresh bindings at Perl 83,072 and Rust 82,886 bytes, Perl 22 + 13, Rust 15 + 3 + 4 + 1, and ledger 2/5
+  implementations + 2/6 runtimes with shared rollout pending and 39 mutations. Canonical CI independently passes
+  Rust semantic 1/1 in 80.73 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root, CLI 66x2,
+  RAM 67%, and Phase 0 1,031/1,031 in 650 seconds. This closes `.10.9.3` without production/test/fixture/contract/
+  ledger/API/aggregator/legacy movement and makes Dart `.10.9.4` the next clean-boundary owner. Knowledge Map
+  744/6,006, mdBook, six doctrines, storage 1,713/386,155/28, path 14/5, memory, and whitespace pass; cleanup is
+  exactly the verified 13,416-KiB rendered book plus one empty managed run.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.3` — admission should compose public behavior without widening the
   server API): Most Rust admission roles are observable through the public external-crate surface, but
   cancellation after response preparation and injected native panics deliberately use private deterministic

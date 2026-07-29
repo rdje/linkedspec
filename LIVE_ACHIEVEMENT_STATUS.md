@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Rust native MCP implementation composition-closed
+
+`FUTURE-PARITY-BACKLOG.10.9.3.4` recomposes every committed neutral, Perl, and Rust MCP owner unchanged from clean
+exact-admission commit `13d9ce17`. The contract remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases
+with 68 mutations; generated bindings remain byte-fresh at Perl 83,072 and Rust 82,886 bytes; Perl passes 22 + 13
+tests; Rust passes MCP 15 + 3 + 4 + 1. The separate ledger remains exactly 2/5 implementations + 2/6 runtimes,
+shared rollout pending, with all 39 mutations rejected.
+
+Canonical CI passes Rust semantic 1/1 in 80.73 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment and
+moved-root proofs, both primary CLI environments at 66/66, RAM 67%, and Phase 0 1,031/1,031 in 650 seconds. No
+production, test, fixture, contract, semantic, ledger, API/CLI, aggregator, or legacy behavior changes. Parent
+`.10.9.3` is closed and Dart `.10.9.4` follows only after the clean closeout commit. Knowledge Map 744/6,006,
+mdBook, six doctrines, storage 1,713/386,155/28, path 14/5, memory, and whitespace pass; exact cleanup removes only
+the verified 13,416-KiB rendered book and one empty managed run. No push occurs at 77/300.
+
 ## 2026-07-29 — Rust native MCP implementation and runtime admitted
 
 `FUTURE-PARITY-BACKLOG.10.9.3.3` adds one exact external-crate twelve-role consumer over the committed Rust MCP

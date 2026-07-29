@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl parent closed, Rust admitted at 2/5 implementations and 2/6 runtimes, remaining rows pending
+status: current; Perl and Rust parents closed at 2/5 implementations and 2/6 runtimes, remaining rows pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -56,5 +56,6 @@ opaque handles, while Rust uses locked OS entropy without filesystem authority.
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` recomposes these committed transport, binding, server, ledger,
 and admission owners unchanged. It deliberately adds no umbrella oracle. Canonical signoff closes parent Perl
 `.10.9.2` while the shared rollout row remains pending; Rust `.10.9.3` receives the same contract after the clean
-closeout commit. Rust decoded implementation `.10.9.3.1`, strict stdio `.10.9.3.2`, and exact admission
-`.10.9.3.3` are now complete; no-change committed-owner closeout remains `.10.9.3.4`.
+closeout commit. Rust decoded implementation `.10.9.3.1`, strict stdio `.10.9.3.2`, exact admission `.10.9.3.3`,
+and unchanged-owner closeout `.10.9.3.4` are complete. Parent `.10.9.3` is closed without ledger movement; Dart
+`.10.9.4` receives the same contract after the clean closeout commit.

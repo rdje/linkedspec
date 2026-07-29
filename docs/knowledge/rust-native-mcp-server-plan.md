@@ -21,9 +21,9 @@ answers:
   - How will Rust MCP sanitize native panics?
   - Which leaves implement and admit the Rust MCP server?
 date: 2026-07-29
-status: current decoded and strict-stdio implementation; admission/closeout pending under FUTURE-PARITY-BACKLOG.10.9.3.3-.4
+status: current; implementation, admission, and no-change parent closeout complete under FUTURE-PARITY-BACKLOG.10.9.3.1-.4
 tags: [rust, mcp, semantic-introspection, embedding, json, security, stdio, generated-binding]
-evidence: docs/decisions/0058-rust-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.3.1-.2; tools/mcp_contract_binding.py; tools/generate_rust_mcp_contract.py; rust/linkedspec-runtime/src/mcp_contract.rs; rust/linkedspec-runtime/src/mcp_contract_runtime.rs; rust/linkedspec-runtime/src/mcp_server.rs; rust/linkedspec-runtime/src/mcp_wire.rs; rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs; rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs
+evidence: docs/decisions/0058-rust-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.3.1-.4; tools/mcp_contract_binding.py; tools/generate_rust_mcp_contract.py; rust/linkedspec-runtime/src/mcp_contract.rs; rust/linkedspec-runtime/src/mcp_contract_runtime.rs; rust/linkedspec-runtime/src/mcp_server.rs; rust/linkedspec-runtime/src/mcp_wire.rs; rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs; rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs; rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs
 reverify: "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_ && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio"
 ---
 
@@ -63,5 +63,6 @@ authorization/expiry/revocation, policy, canonical classifications, cancellation
 release. No async runtime, network/SDK/base64 package, executable, source bootstrap, aggregator, or legacy surface
 exists.
 
-`.10.9.3.1-.2` are implemented without admission movement. `.10.9.3.3` adds exact Rust admission and advances only
-Rust to 2/5 + 2/6 with rollout pending, and `.10.9.3.4` is unchanged-owner closeout.
+`.10.9.3.1-.2` implement the server without admission movement, and `.10.9.3.3` advances only Rust to 2/5 + 2/6
+with rollout pending. No-change `.10.9.3.4` recomposes those committed owners under focused/canonical proof,
+closes parent `.10.9.3`, and hands the exact contract to Dart `.10.9.4` after the clean closeout commit.

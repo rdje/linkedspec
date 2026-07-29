@@ -12,7 +12,7 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract canonical; Perl closed and Rust admitted at 2/5 implementations + 2/6 runtimes
+status: exact neutral contract canonical; Perl and Rust parents closed at 2/5 implementations + 2/6 runtimes
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
@@ -20,6 +20,7 @@ evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 pro
 evidence_update_2026_07_29_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 independently validates the same exact bundle and rejects 68 named mutations without implementing or importing a native server."
 evidence_update_2026_07_29_contract_closeout: "FUTURE-PARITY-BACKLOG.10.9.1.3 composition-closes the shared contract by requiring ordered materialization and independent validation in canonical CI; Perl implementation .10.9.2 is next."
 evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 closes the first native implementation/runtime at 1/5 + 1/6. Rust .10.9.3.1-.3 implement its generated binding, frozen runtime, secure registry, decoded public server, strict borrowed-stream stdio, and exact twelve-role admission; the ledger is 2/5 + 2/6 while shared rollout remains pending."
+evidence_update_2026_07_29_rust_closeout: "Rust .10.9.3.4 recomposes every committed neutral, Perl, and Rust MCP owner unchanged under focused and canonical proof, closes parent .10.9.3 without status movement, and hands the exact contract to Dart .10.9.4 after the clean closeout commit."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 

@@ -5,13 +5,22 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Rust native MCP composition closeout: `FUTURE-PARITY-BACKLOG.10.9.3.4` starts from clean exact-
+  admission commit `13d9ce17` and adds no production, test, fixture, contract, ledger, API, executable, aggregator,
+  or legacy owner. The committed neutral materializer/validator, byte-fresh 83,072-byte Perl and 82,886-byte Rust
+  bindings, Perl server 22 plus admission 13, Rust MCP 15 + 3 + 4 + 1, and the unchanged 2/5 implementation + 2/6
+  runtime ledger with pending rollout and 39 mutations all recompose exactly. Canonical CI passes Rust semantic
+  1/1 in 80.73 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root proof, CLI 66x2, RAM 67%,
+  and Phase 0 1,031/1,031 in 650 seconds. Parent `.10.9.3` is closed; Dart `.10.9.4` is the next clean-boundary
+  owner.
 - `2026-07-29` Rust native MCP exact admission: `FUTURE-PARITY-BACKLOG.10.9.3.3` composes the existing public
   binding/runtime/server/wire through one omission-sensitive twelve-role external consumer while ordered private
   unit proof retains preparation-time cancellation and injected-panic seams. Only Rust's implementation and
   runtime rows advance: current state is Perl + Rust at 2/5 implementations and 2/6 runtimes, all other rows and
   shared rollout pending. The checker rejects 39 status/topology/source/role/authority/CI-order mutations. The
   normative contract/digest, semantic authority, production API, executable/CLI, source bootstrap, SDK/network,
-  cache, aggregator, and legacy boundaries do not move; no-change `.10.9.3.4` remains the next clean-boundary leaf.
+  cache, aggregator, and legacy boundaries do not move; no-change `.10.9.3.4` subsequently closes those committed
+  owners without behavior or status movement.
 - `2026-07-29` Rust native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR
   `0058` place the public in-process server in `linkedspec-runtime` around caller-owned `Arc<SemanticIndex>` values.
   Shared verified-bundle generation will keep the existing Perl binding byte-identical and add a filesystem-free

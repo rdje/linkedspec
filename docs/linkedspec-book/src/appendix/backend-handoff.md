@@ -244,7 +244,7 @@ through flush, sanitized logging, and EOF/I/O cleanup. Exact Perl admission `.10
 consumer and a separate status/proof ledger at 1/5 implementations + 1/6 runtimes, shared rollout pending, and 28
 rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4` is complete from
 clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
-native/runtime admission `.10.9.3-.7` follows after the clean commit.
+native/runtime admission `.10.9.4-.7` follows after the clean Rust boundary.
 
 Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact. Public in-process
 `linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
@@ -255,8 +255,9 @@ implemented and publicly corpus-tested. Strict borrowed-stream stdio `.10.9.3.2`
 framing, canonical output, cancellation through flush, and EOF/I/O release. Exact admission `.10.9.3.3` composes
 one twelve-role external consumer and advances only Rust to 2/5 implementations + 2/6 runtimes, with rollout
 pending and 39 rejected mutations. No MCP mode was added to `linkedspec-rust`; there is no new executable, source
-bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. No-change closeout remains
-`.10.9.3.4`.
+bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. No-change closeout `.10.9.3.4`
+recomposes the committed owners under focused and canonical proof, closes parent `.10.9.3`, and hands this exact
+boundary to Dart `.10.9.4` only after the clean closeout commit.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

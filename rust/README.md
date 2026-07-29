@@ -222,7 +222,8 @@ borrows prevent the same writer from serving as protocol output and log. Exact t
 `.10.9.3.3` now composes the public behavior and advances the shared ledger to 2/5 implementations and 2/6
 runtimes while rollout remains pending; the checker rejects 39 status/source/role/order mutations. There is no MCP
 executable, primary-CLI mode, SDK/network transport, source bootstrap, semantic cache, aggregator, or legacy
-adapter.
+adapter. No-change `.10.9.3.4` recomposes the committed owners under focused and canonical proof and closes the
+Rust MCP parent without another implementation or test owner; Dart `.10.9.4` is the next backend handoff.
 
 ## Lifecycle Loop
 

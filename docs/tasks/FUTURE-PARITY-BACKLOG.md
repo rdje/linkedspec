@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-29` (Rust native MCP generated binding/secure decoded server `.10.9.3.1` active
-  task-tree-first from clean Rust plan commit `a3756d63`)
+- Last updated: `2026-07-29` (no-change Rust MCP closeout `.10.9.3.4` complete from clean exact-admission commit
+  `13d9ce17`; parent `.10.9.3` closed and Dart `.10.9.4` next only after the clean closeout commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12921,9 +12921,8 @@ before implementation.
     complete the closure. Thin MCP `.10.9` is next after the clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
-  Status: `active` (2026-07-29; director approved one contract, five native implementations, and six-runtime
-    conformance; architecture `.10.9.0` and modern protocol policy `.10.9.1.0` are complete; machine contract
-    `.10.9.1.1` is active)
+  Status: `active` (2026-07-29; exact contract `.10.9.1`, Perl `.10.9.2`, and Rust `.10.9.3` are parent-closed at
+    2/5 implementations + 2/6 runtimes with rollout pending; Dart `.10.9.4` is next after the clean Rust closeout)
   Goal: Implement one thin MCP semantic contract through five native server implementations and six runtime
     admissions.
   Children: `.10.9.0`, `.10.9.1`, `.10.9.2`, `.10.9.3`, `.10.9.4`, `.10.9.5`, `.10.9.6`, `.10.9.7`
@@ -13425,13 +13424,19 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.2.4 - close Perl MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.3`
-    Status: `active` (2026-07-29; behavior-free audit `.0` and generated binding/decoded server `.1` complete;
-      strict stdio/lifecycle `.2` active task-tree-first from clean commit `11261ef1`)
+    Status: `done` (2026-07-29; `.0-.3` implement and admit Rust, while no-change `.4` recomposes every committed
+      owner from clean exact-admission commit `13d9ce17` and closes the parent)
     Goal: Implement and admit the Rust native MCP server against the exact transport contract.
     Depends on: `.10.9.2`
     Children: `.10.9.3.0`, `.10.9.3.1`, `.10.9.3.2`, `.10.9.3.3`, `.10.9.3.4`
     Acceptance: Register opaque handles for existing Rust `SemanticIndex` values in the owning process and pass the
       same exact contract/corpus/failure/identity boundary without adding semantic ownership or backend leakage.
+    Verification: **PASS 2026-07-29.** Children `.0-.3` freeze, implement, and exactly admit the generated binding,
+      frozen runtime, secure decoded server, strict stdio, and twelve-role public consumer. No-change `.4` reruns
+      every committed neutral/Perl/Rust owner, preserves 2/5 implementations + 2/6 runtimes with rollout pending
+      and 39 mutations, passes canonical CI through Phase 0 1,031/1,031, and closes the parent without replacement
+      code, test, fixture, oracle, aggregator, or legacy adapter.
+    Commit: `FUTURE-PARITY-BACKLOG.10.9.3.4 - close Rust MCP implementation`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.0`
       Status: `done` (2026-07-29)
@@ -13618,12 +13623,48 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.3.3 - admit Rust MCP implementation and runtime`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.4`
-      Status: `pending`
+      Status: `done` (2026-07-29; no-change recomposition from clean exact-admission commit `13d9ce17`)
       Goal: Recompose committed Rust MCP owners unchanged and close `.10.9.3`.
       Depends on: `.10.9.3.3`
       Acceptance: Run every exact owner under recurring canonical governance, prove contract/semantic/status/
         authority/public no-drift, close the Rust parent, and hand off cleanly to Dart `.10.9.4` without replacement
         implementation, fixture, oracle, aggregator, legacy adapter, or rollout behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN COMMITTED BASE / OWNERSHIP** — Prove exact-admission commit `13d9ce17`, zero-byte brief, clean
+        tree, absent rendered-book/empty-run residue, and activate `.10.9.3.4` before any other closeout change.
+      - [x] **UNCHANGED OWNER RECOMPOSITION** — Materialize and independently validate the frozen transport;
+        regenerate byte-fresh Perl/Rust bindings; run committed Perl and Rust binding, decoded-dispatch, strict-
+        stdio, and exact-admission owners unchanged; add no replacement implementation, test, fixture, or oracle.
+      - [x] **IDENTITY / LIFECYCLE / AUTHORITY** — Reprove native/MCP byte identity, raw/lifecycle inventories,
+        opaque-handle indistinguishability, policy, cancellation, cleanup, hostile-output privacy, and denial of
+        semantic/source/bootstrap/parser/compiler/executor/trace/cache/primary-CLI/SDK/network authority.
+      - [x] **NO STATUS OR TOPOLOGY MOVEMENT** — Preserve 2/5 implementations + 2/6 runtimes and shared rollout
+        pending, all 39 admission mutations, unchanged contract digest/corpus, one server per admitted backend,
+        routing-only aggregator deferral, and no legacy adapter.
+      - [x] **LOCKSTEP / PARENT CLOSURE** — Pass focused Rust/Perl, capability/semantic/no-drift, mdBook, Knowledge
+        Map, memory/task/doctrines/diff/syntax/storage, canonical CI, and exact safe cleanup; close `.10.9.3`, hand
+        off Dart `.10.9.4` only after commit/clear/clean proof, and do not push before cadence 300.
+
+      Verification plan: Re-run the checked-in contract materializer and independent validator, both generated-
+        binding owners, all eight committed Perl/Rust binding/server/admission consumers, and the implementation-
+        admission checker before the complete canonical gate. Inspect the staged diff to prove documentation-only
+        closeout with no production/test/fixture/contract/ledger change. Route all writing commands through the
+        repository-local wrappers and remove only exact verified generated residue.
+
+      Verification: **PASS 2026-07-29.** From clean `13d9ce17`, focused recomposition passes MCP 35 canonical / 10
+        raw / 10 lifecycle / 68 mutations; byte-fresh Perl 83,072-byte and Rust 82,886-byte bindings; Perl Files=3
+        Tests=22 plus admission Files=1 Tests=13; Rust MCP unit 15 + decoded 3 + stdio 4 + admission 1; and the
+        unchanged 2/5 implementation + 2/6 runtime ledger with rollout pending and 39 mutations. Canonical CI
+        passes six doctrines, capability 80/0/0, semantic 6/20/105 at 7/9 + 6/6, Rust semantic 1/1 in 80.73
+        seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root proof, CLI 66x2, RAM 67%, and Phase
+        0 1,031/1,031 in 650 seconds. Knowledge Map 744/6,006, mdBook, all six doctrines, memory, storage
+        1,713/386,155/28, path 14/5, syntax, formatting, and whitespace pass; exact cleanup removes only the verified
+        13,416-KiB rendered book and one proven-empty managed run. No production/test/fixture/contract/ledger/API/
+        executable/aggregator/legacy owner changes; parent `.10.9.3` closes and Dart `.10.9.4` follows only after
+        the clean closeout commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.3.4 - close Rust MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.4`
     Status: `pending`
@@ -16023,13 +16064,14 @@ ADR `0056` freezes one typed source-location/cursor algebra and splits exact neu
 public no-drift under `.14.1-.8` without changing syntax or behavior. No-change MCP closeout `.10.9.1.3` is
 complete from clean `64735109`: canonical CI requires tracked artifacts, runs materialization before independent
 validation, and rejects omission/order drift. Parent `.10.9.1` is closed without a server or semantic/CLI behavior.
-Behavior-free native Perl preflight `.10.9.2.0` is complete from clean `9307524a`: LinkedSpec probes
-and source/runtime inspection identify the opaque admitted index, exact canonical payloads, installed JSON/
-entropy/time constraints, and the future generated-contract/registry/wire owners. ADR `0057` freezes secure host
-API and `.1-.4` implementation/admission order. Registry/decoded dispatch `.10.9.2.1` is complete from clean plan
-commit `ccc391ae`; strict wire/lifecycle `.10.9.2.2` is complete from clean decoded-server commit `9965dca1` with
-exact focused/canonical signoff. Exact admission `.10.9.2.3` is next only after the clean commit; no-change closeout
-`.4` and typed source-location `.14.1` remain pending.
+Perl implementation/admission `.10.9.2` is parent-closed from clean no-change commit `4473a812` at 1/5
+implementations + 1/6 runtimes. Behavior-free Rust preflight `.10.9.3.0` and ADR `0058` freeze generated binding,
+native registry/decoded dispatch, strict stdio, admission, and closeout seams. Rust `.10.9.3.1-.3` implement and
+admit the exact server, advancing only Rust to 2/5 implementations + 2/6 runtimes with rollout pending and 39
+mutations. No-change `.10.9.3.4` recomposes every committed neutral, Perl, and Rust owner from clean `13d9ce17`;
+focused and canonical proof pass through Phase 0 1,031/1,031 and close parent `.10.9.3` without behavior or status
+movement. Dart `.10.9.4` is next only after the clean closeout commit; typed source-location `.14.1` remains
+pending.
 
 ### Superseded frontier snapshots
 
@@ -17358,6 +17400,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.4` | Clean base `13d9ce17`; unchanged MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22 plus admission Files=1 Tests=13; Rust MCP 15 + 3 + 4 + admission 1; unchanged ledger 2/5 + 2/6 rollout pending/39 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,713/386,155/28; path 14/5; canonical Rust semantic 1/1 80.73s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, RAM 67%, Phase 0 1,031/650s; exact 13,416-KiB/one-empty-run cleanup. | PASS. Documentation-only committed-owner recomposition closes `.10.9.3.4` and parent `.10.9.3` without production/test/fixture/contract/ledger/API/CLI/rollout/aggregator/legacy movement; Dart `.10.9.4` follows after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.3` | Clean base `83d656e4`; one exact twelve-role Rust consumer; MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22 plus admission Files=1 Tests=13; Rust MCP 15 + 3 + 4 + admission 1; ledger 2/5 + 2/6 rollout pending/39 mutations; rustfmt and target-local strict clippy; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,713/386,137/28; path 14/5; canonical Rust semantic 1/1 80.52s, Dart 1/1, Julia 416/416 28.5s, containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/648s; exact 13,416-KiB/one-empty-run cleanup. | PASS. Rust alone advances to 2/5 implementations + 2/6 runtimes without transport/semantic/server/CLI/other-runtime/rollout/aggregator/legacy movement; no-change `.10.9.3.4` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.2` | Clean base `11261ef1`; exact bounded lexical/framing/lifecycle implementation; MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22; Rust MCP unit 15 + decoded public 3 + stdio public 4; production check and task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,712/385,070/28; path 14/5; tool locality; canonical Rust semantic 1/1 79.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, RAM 65%, Phase 0 1,031/643s; exact 13,412-KiB/one-empty-run cleanup. | PASS. Rust owns strict borrowed-stream MCP framing, lexical admission, canonical emission, cancellation through flush, and EOF/I/O release without executable/source/semantic/ledger/rollout/aggregator/legacy movement; exact admission `.10.9.3.3` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.1` | Clean base `a3756d63`; shared verified bundle; byte-fresh Perl 83,072 + Rust 82,886 bindings; MCP 35/10/10/68; Perl Files=4 Tests=35; Rust MCP unit 9 + public 3; task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,001; mdBook; six doctrines; memory; storage 1,710/383,730/28; path 14/5; tool locality; canonical Rust semantic 1/1 82.05s, Dart 1/1, Julia 416/416 28.6s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/658s; exact 13,388-KiB/one-empty-run cleanup. | PASS. Rust owns deterministic embedded contract data, frozen runtime, secure native registry, and exact decoded dispatch without strict wire, executable, source/semantic authority, ledger/rollout, aggregator, or legacy movement; `.10.9.3.2` follows only after the clean commit. |
@@ -17657,6 +17700,9 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.3.4` | `FUTURE-PARITY-BACKLOG.10.9.3.4 - close Rust MCP implementation` | No-change committed-owner recomposition, complete canonical signoff, Rust parent closure, and clean Dart handoff. |
+| `FUTURE-PARITY-BACKLOG.10.9.3.3` | `FUTURE-PARITY-BACKLOG.10.9.3.3 - admit Rust MCP implementation and runtime` | Exact twelve-role Rust consumer, 2/5 + 2/6 ledger promotion, 39 mutations, complete signoff, and clean no-change closeout handoff. |
+| `FUTURE-PARITY-BACKLOG.10.9.3.2` | `FUTURE-PARITY-BACKLOG.10.9.3.2 - implement Rust MCP strict stdio` | Strict bounded framing/token preflight, cancellation-through-flush, EOF/I/O cleanup, complete signoff, and clean admission handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.3.1` | `FUTURE-PARITY-BACKLOG.10.9.3.1 - implement Rust MCP decoded server` | Shared verified bundle, formatter-stable Rust binding, frozen runtime, secure registry, decoded dispatch, complete signoff, and clean strict-stdio handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.3.0` | `FUTURE-PARITY-BACKLOG.10.9.3.0 - plan Rust native MCP server` | Behavior-free native owner/security audit, ADR `0058`, exact `.1-.4` split, complete signoff, and clean generated-binding/decoded-server handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.2.4` | `FUTURE-PARITY-BACKLOG.10.9.2.4 - close Perl MCP implementation` | Unchanged-owner recomposition, complete canonical signoff, Perl parent closure, and clean Rust handoff. |
@@ -17937,6 +17983,11 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-29`: No-change Rust MCP closeout `.10.9.3.4` recomposes every committed neutral, Perl, and Rust owner
+  from clean exact-admission commit `13d9ce17`. Focused and canonical proof preserve 2/5 implementations + 2/6
+  runtimes, rollout pending, and all 39 mutations; parent `.10.9.3` closes without production/test/fixture/
+  contract/ledger/API/aggregator/legacy movement. Dart `.10.9.4` follows only after the clean closeout commit.
 
 - `2026-07-29`: Behavior-free Rust MCP preflight `.10.9.3.0` completes from clean Perl closeout `4473a812`.
   ADR `0058` freezes one generated filesystem-free binding, native `Arc<SemanticIndex>` registry/decoded server,

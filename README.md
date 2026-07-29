@@ -1060,7 +1060,9 @@ content migration exists yet.
   JSON lines, canonical LF output, pre-emission cancellation, sanitized optional logging, and exact EOF/read/
   write/flush cleanup over borrowed streams. Exact Rust admission `.10.9.3.3` now composes one twelve-role public
   consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, and rejects 39 ledger/source/role/order
-  mutations while shared rollout remains pending. No-change closeout `.10.9.3.4` follows from the clean commit.
+  mutations while shared rollout remains pending. No-change closeout `.10.9.3.4` recomposes those committed
+  owners unchanged, closes Rust parent `.10.9.3`, and hands the exact contract to Dart `.10.9.4` after the clean
+  closeout commit.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1496,7 +1498,9 @@ content migration exists yet.
   `.10.9.3.2` now completes duplicate-safe lexical preflight, canonical emission, cancellation-through-flush,
   silent EOF, fixed diagnostics, and release on read/write/flush failure with private/public adversarial proof.
   Exact twelve-role Rust admission `.10.9.3.3` now advances only Rust to 2/5 implementations + 2/6 runtimes,
-  rejects 39 mutations, and preserves pending shared rollout; no-change closeout `.10.9.3.4` follows.
+  rejects 39 mutations, and preserves pending shared rollout. No-change closeout `.10.9.3.4` is complete with
+  focused/canonical recomposition green; Rust parent `.10.9.3` is closed and Dart `.10.9.4` follows after the clean
+  closeout commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

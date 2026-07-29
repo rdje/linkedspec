@@ -58,6 +58,10 @@ external Rust consumer before the ledger checker; only Rust advances to 2/5 impl
 shared rollout stays pending. Perl admission still runs after the checker. The 39-mutation checker and tool-
 governance test reject generated-binding, consumer, tracked-input, and validator/proof-order drift.
 
+No-change closeout `.10.9.3.4` runs that exact committed sequence again without a replacement implementation,
+fixture, or umbrella oracle. Focused and canonical gates pass unchanged, close parent `.10.9.3`, and preserve Dart
+`.10.9.4` as the next clean-boundary owner.
+
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text

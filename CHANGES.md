@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.4 — close the Rust MCP implementation
+
+Recomposed every committed neutral, Perl, and Rust MCP owner unchanged from clean exact-admission commit
+`13d9ce17`. No production module, test, fixture, contract artifact, implementation-ledger row, protocol digest,
+semantic owner, public API, executable, aggregator, or legacy adapter changed. Rust parent `.10.9.3` is now
+composition-closed and the exact contract hands off to Dart `.10.9.4` after this clean commit.
+
+Focused proof passes the 35-frame/10-raw/10-lifecycle transport with 68 mutations, byte-fresh 83,072-byte Perl and
+82,886-byte Rust bindings, Perl binding/decoded/stdio Files=3 Tests=22 plus admission Files=1 Tests=13, Rust MCP
+unit 15 + decoded 3 + stdio 4 + admission 1, and the unchanged 2/5 implementation + 2/6 runtime ledger with rollout
+pending and 39 mutations. Canonical CI passes Rust semantic 1/1 in 80.73 seconds, Dart 1/1, Julia 416/416 in 28.8
+seconds, containment/moved-root, CLI 66x2, RAM 67%, and Phase 0 1,031/1,031 in 650 seconds. Knowledge Map
+744/6,006, mdBook, six doctrines, storage 1,713/386,155/28, path 14/5, memory, and whitespace pass; cleanup removes
+only the verified 13,416-KiB rendered book and one empty managed run.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.3 — admit the Rust MCP implementation and runtime
 
 Added one exact external-crate Rust admission consumer over the already-implemented `McpServer`. Its twelve

@@ -64,8 +64,9 @@ closed. The ledger correctly stays at Perl 1/5 implementations + 1/6 runtimes wi
 
 Rust behavior-free audit `FUTURE-PARITY-BACKLOG.10.9.3.0` and ADR `0058` freeze a generated binding plus native
 decoded/wire/admission sequence without altering the transport contract. Exact admission `.10.9.3.3` now passes
-the unchanged inventories and advances only its implementation/runtime rows; `.10.9.3.4` remains the no-change
-committed-owner closeout.
+the unchanged inventories and advances only its implementation/runtime rows. No-change `.10.9.3.4` recomposes
+the committed contract/binding/server/admission owners under focused and canonical proof, closes Rust parent
+`.10.9.3`, and leaves Dart `.10.9.4` as the next clean-boundary implementation.
 
 `semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
 `0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and

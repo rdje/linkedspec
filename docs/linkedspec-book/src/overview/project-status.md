@@ -687,7 +687,9 @@ Three backbone items tracked major structural modernization — all done:
   corpus proof. Strict stdio `.10.9.3.2` adds bounded duplicate-safe borrowed-stream framing, canonical emission,
   cancellation through flush, and exact EOF/I/O cleanup. Exact twelve-role admission `.10.9.3.3` now advances
   only Rust to 2/5 implementations + 2/6 runtimes, keeps shared rollout pending, and rejects 39 mutations;
-  any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
+  no-change `.10.9.3.4` recomposes the committed owners under focused/canonical proof and closes parent `.10.9.3`.
+  Dart `.10.9.4` is next after the clean closeout commit. Any future aggregator or legacy adapter is separately
+  owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,
