@@ -962,6 +962,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   them unconditionally in this order, and its tool-topology test rejects omission or reversed order.
 - **BOUNDARY:** neither program is an MCP server. They may not compile/load a spec, create an index, dispatch a
   native query, or rewrite the JSONL unless the materializer is explicitly invoked with `--write`.
+- **PERL IMPLEMENTATION PREFLIGHT:** retrieve [[perl-native-mcp-server-plan]] before changing native MCP code.
+  ADR `0057` fixes future owners `LinkedSpec::MCPServer`, generated `LinkedSpec::MCPContract`,
+  `LinkedSpec::MCPContractRuntime`, and `LinkedSpec::MCPWire`. The measured reference boundary is descriptor
+  `CODE` 2 / `Regexp` 5 versus exact opaque-index capability/query digests
+  `a5f759dc8a5d060a36f86d35d5a86ff8b6745ef87cbe03d2c8b5a3200ddfd141` /
+  `b8872b7340d2d6f4aaa409745fe0083bc744a594e09a05ed5b9786446594df0b`. Installed `JSON::PP 4.06` accepts literal
+  and escape-equivalent duplicate keys, so stdio implementation must use the planned strict preflight rather than
+  treating plain `decode` as conformance. Production handles require exact OS entropy and monotonic time; no weak
+  fallback or runtime contract-file read is allowed. Behavior starts only in `.10.9.2.1`.
 
 ---
 

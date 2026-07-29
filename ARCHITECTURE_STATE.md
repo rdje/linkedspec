@@ -5,6 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Perl native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR
+  `0057` map the exact admitted `LinkedSpec::SemanticIndex` capabilities/query seam into a future direct
+  `LinkedSpec::MCPServer`. A generated filesystem-free `LinkedSpec::MCPContract` binding consumes the neutral
+  artifacts; private contract-runtime and strict-wire owners prevent runtime path reads or hand-copied schemas.
+  Production handles use 32 bytes of fail-closed OS entropy, 43-character unpadded base64url, monotonic expiry,
+  out-of-band authorization context, revocation, and lowering-only policy. Strict preflight is required because
+  installed `JSON::PP 4.06` accepts literal and escape-equivalent duplicate keys. Implementation is split into
+  registry/dispatch `.1`, stdio/lifecycle `.2`, exact Perl admission/ledger `.3`, and no-change closeout `.4`.
+  No module, server, API, dependency, artifact, semantic, parser/runtime, CLI, rollout, or admission behavior is
+  added by the plan.
 - `2026-07-29` typed source-location/cursor direction: completed director-approved behavior-free
   `FUTURE-PARITY-BACKLOG.14.0.1` and ADR `0056` unify cursor, capture, recursion, segmentation, and parser
   composition around immutable source identities, zero-based Unicode-scalar positions, same-source half-open

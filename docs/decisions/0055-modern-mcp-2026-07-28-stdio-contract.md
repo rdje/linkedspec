@@ -1,8 +1,8 @@
 # ADR 0055: LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio
 
 - Date: 2026-07-29
-- Status: accepted; neutral contract and canonical governance complete under `.10.9.1`; native implementations
-  pending under `FUTURE-PARITY-BACKLOG.10.9.2-.7`
+- Status: accepted; neutral contract and canonical governance complete under `.10.9.1`; Perl native seam plan
+  accepted under ADR `0057`; behavior/admission pending under `FUTURE-PARITY-BACKLOG.10.9.2.1-.7`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context

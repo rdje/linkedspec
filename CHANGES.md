@@ -1,5 +1,37 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.0 — plan the Perl native MCP server
+
+Added behavior-free ADR `0057` and a Knowledge Map authority card for the first native MCP implementation.
+LinkedSpec's own `graph.spec` probe proves why the server must register an opaque `LinkedSpec::SemanticIndex`
+rather than serialize the descriptor: the descriptor contains two coderefs and five compiled regex objects, while
+native capabilities and graph-list canonical SHA-256 values exactly match the admitted
+`a5f759dc8a5d060a36f86d35d5a86ff8b6745ef87cbe03d2c8b5a3200ddfd141` and
+`b8872b7340d2d6f4aaa409745fe0083bc744a594e09a05ed5b9786446594df0b` responses.
+
+Froze one future public `LinkedSpec::MCPServer` plus private generated contract, schema-runtime, and strict-wire
+owners. The generated binding consumes the exact neutral artifacts without granting runtime file access or
+creating a hand-maintained second contract. Registration accepts only an existing native index, opaque out-of-band
+authorization context, bounded lifetime, and lowering-only policy; the registry retains lifecycle/policy metadata
+but no semantic response cache.
+
+The audit found that installed `JSON::PP 4.06` accepts literal and escape-equivalent duplicate keys and that no
+`Crypt::URandom`/`Sys::GetRandom` package is available. The accepted plan therefore requires strict key/numeric
+token preflight, exact OS CSPRNG reads, unpadded 43-character base64url handles, monotonic expiry, private-only
+deterministic test dependencies, and fail-closed behavior without a weak entropy or wall-clock fallback. Perl work
+is split into registry/dispatch `.1`, stdio/lifecycle `.2`, exact admission/ledger `.3`, and no-change closeout `.4`.
+
+Corrected the directly relevant `USER_GUIDE.md` semantic section, which still described Perl capabilities/query
+and six-runtime admission as future even though those owners are complete. No Perl module, server, facade API,
+dependency, test fixture, transport artifact, semantic/parser/runtime, primary CLI, rollout, or admission behavior
+changes in this planning slice.
+
+Signoff passes exact MCP 35 frames / ten raw / ten lifecycle / 68 mutations, mdBook, Knowledge Map 741/5,965,
+task/diff, all six doctrines, capability 80/0/0, semantic 6/20/105 at rollout 7/9 and admission 6/6, and storage
+1,691/377,723/28. Canonical CI passes Perl semantic admission 18, Rust 1/1 in 81.54 seconds, Dart 1/1, Julia
+416/416 in 29.0 seconds, containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 650 seconds. Exact
+cleanup removes only the verified 13,284-KiB rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.3 — close MCP transport contract
 
 Composition-closed `linkedspec-mcp-transport-v1` without changing a normative artifact or adding a server. The

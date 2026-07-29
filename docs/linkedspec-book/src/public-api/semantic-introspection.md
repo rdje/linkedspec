@@ -51,7 +51,8 @@ The distinction matters:
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
 Lua, and LuaJIT are admitted. MCP does not own semantics and no MCP server is implemented yet. Its architecture,
 protocol policy, neutral machine contract, and independent conformance are complete. The exact neutral contract is
-composition-closed and runs in canonical CI; only native server implementation/admission remains pending.
+composition-closed and runs in canonical CI. ADR `0057` and behavior-free Perl audit `.10.9.2.0` now freeze the
+first native implementation's exact owners and security seams; implementation/admission remains pending.
 
 ## Accepted modern MCP transport (machine contract encoded; servers pending)
 
@@ -110,6 +111,60 @@ at their intended invariant. This is still conformance code, not an MCP server.
 Canonical local CI requires every listed artifact and both programs, then always runs the materializer before the
 independent validator. The recurring tool-governance proof rejects a missing materializer and reversed execution
 order. This detects stale JSONL/digests before independent semantic validation; it does not add an MCP endpoint.
+
+### Accepted Perl implementation plan (no server yet)
+
+ADR `0057` turns the neutral requirements into a bounded native implementation plan without adding behavior. The
+future public class is `LinkedSpec::MCPServer`; it accepts an already-created `LinkedSpec::SemanticIndex`, never a
+source path or descriptor. Its private owner split is:
+
+| Owner | Future responsibility |
+|---|---|
+| `LinkedSpec::MCPContract` | Generated, data-only Perl binding derived from the exact neutral artifacts. |
+| `LinkedSpec::MCPContractRuntime` | Deep-cloned templates and the frozen schema-profile validator; no semantic or I/O authority. |
+| `LinkedSpec::MCPServer` | Native handle registry, authorization/expiry/revocation/policy, and decoded dispatch. |
+| `LinkedSpec::MCPWire` | Strict UTF-8 JSON lines, canonical output, prepared-response cancellation, logs, EOF, and I/O status. |
+
+This generated binding is necessary because the server may not read contract files at runtime, while hand-copying
+tool schemas and templates would create a second contract. A repository-routed generator will make the committed
+module reproducible and check byte freshness after the neutral materializer and independent validator.
+
+The audit also measured two important Perl-specific boundaries. `return_descriptor` for the graph fixture
+contains two coderefs and five compiled regex objects, whereas the opaque index's canonical capabilities and
+graph-list payloads exactly match the neutral digests. And installed `JSON::PP 4.06` accepts both repeated literal
+keys and escape-equivalent keys such as `"a"` plus `"\u0061"`. The future wire must therefore preflight decoded
+key identity and numeric token kind before ordinary JSON decoding; `JSON::PP->decode` alone is not conformant.
+
+The planned host shape is deliberately in-process and is not current API yet:
+
+```perl
+# FUTURE API — implemented only after FUTURE-PARITY-BACKLOG.10.9.2.1-.2 closes.
+my $server = LinkedSpec::MCPServer->new();
+my $handle = $server->register_index(
+  $index,
+  authorization_context => $host_authorization,
+  lifetime_ms => 900_000,
+  policy => {
+    source_detail_ceiling => "identity",
+    page_max => 100,
+    budget_maxima => {max_records => 1000, max_relations => 2000, max_depth => 4},
+  },
+);
+$server->serve_stdio(
+  input => $request_fh,
+  output => $response_fh,
+  authorization_context => $host_authorization,
+);
+```
+
+Production handles read exactly 32 bytes from the OS CSPRNG, encode 43 unpadded base64url characters, and expire
+against a monotonic clock. Missing entropy fails closed; there is no `rand`, wall-time, PID, or hash fallback.
+Authorization context is host-owned out-of-band data and never clientInfo. Only a private test constructor may
+inject deterministic entropy/time. The context is a nonempty opaque byte string bounded at 4,096 octets; the
+server retains only its SHA-256 digest and uses one fixed-length comparison step (including a dummy digest for an
+unknown handle) while making no formal interpreter-level constant-time claim. Implementation remains ordered as
+registry/dispatch `.10.9.2.1`, strict
+stdio/lifecycle `.2`, exact Perl admission and the shared status ledger `.3`, then no-change closeout `.4`.
 
 ### Discovery and request metadata
 
@@ -3314,7 +3369,9 @@ The dependency order is:
 | `.10.9.1.1` | encode the exact MCP schema/payload/corpus/canonical-byte bundle | complete |
 | `.10.9.1.2` | independently validate and mutate the exact MCP contract | complete; 28 accepted plus seven rejected frames, ten raw inputs, ten lifecycle cases, and 68 rejected mutations |
 | `.10.9.1.3` | compose recurring governance and close the exact MCP contract | complete; unconditional ordered canonical proof, two topology mutations, no server |
-| `.10.9.2-.10.9.5` | native Perl, Rust, Dart, and Julia MCP implementations | pending |
+| `.10.9.2.0` | audit and freeze Perl native MCP owners/security seams | complete behavior-free plan; ADR `0057`, no server |
+| `.10.9.2.1-.10.9.2.4` | Perl registry/dispatch, stdio/lifecycle, exact admission, and no-change closeout | pending |
+| `.10.9.3-.10.9.5` | native Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |

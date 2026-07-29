@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Perl native MCP owner and security plan complete
+
+Behavior-free `FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR `0057` freeze the first native server without adding it.
+One future direct `LinkedSpec::MCPServer` accepts an existing opaque index; generated data-only contract, private
+schema-runtime, and strict-wire owners preserve one neutral contract without runtime paths. Production handles use
+exact OS entropy and monotonic expiry. Bounded out-of-band authorization retains only a SHA-256 digest and uses a
+fixed 32-byte comparison; policy can only lower native ceilings. Registry/decoded dispatch `.1`, stdio/lifecycle
+`.2`, exact admission/ledger `.3`, and no-change closeout `.4` are dependency-ordered.
+
+LinkedSpec probes prove the descriptor's CODE 2 / Regexp 5 non-portability and exact opaque-index payload digests;
+runtime probes prove the JSON duplicate-key, entropy/base64url, and monotonic-clock constraints. Signoff passes
+MCP 35/10/10/68, mdBook, Knowledge Map 741/5,965, six doctrines, capability 80/0/0, semantic 6/20/105 at 7/9 +
+6/6, storage 1,691/377,723/28, and canonical Perl 18, Rust 1/1 in 81.54s, Dart 1/1, Julia 416/416 in 29.0s,
+containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 650s. Cleanup removes only the verified
+13,284-KiB book and one empty run. No server/module/API/dependency/test/semantic/parser/CLI/admission behavior moves.
+
 ## 2026-07-29 — Neutral MCP transport contract composition-closed
 
 `FUTURE-PARITY-BACKLOG.10.9.1.3` closes the exact shared contract before any native server implementation. The
@@ -93,15 +109,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No successor leaf is active during this closeout. MCP contract leaf `FUTURE-PARITY-BACKLOG.10.9.1.3` is fully
-  verified from clean architecture commit `64735109`; it closes parent `.10.9.1`. Native Perl MCP implementation
-  `.10.9.2` activates task-tree-first only after this closeout commit is clean. The independently approved typed
-  source-location implementation program still begins at pending `.14.1`.
+- No successor leaf is active during this closeout. `FUTURE-PARITY-BACKLOG.10.9.2.0` is fully verified from clean
+  neutral-contract commit `9307524a`; it freezes behavior-free Perl MCP ownership and security seams under ADR
+  `0057`. No server behavior exists. Registry/decoded dispatch `.10.9.2.1` activates task-tree-first only after
+  this closeout commit is clean; typed source-location implementation remains pending at `.14.1`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.2.0 — plan Perl native MCP server**
+  (behavior-free native owner/security audit from clean neutral-contract commit `9307524a`).
+
+  **Result:** ADR `0057` freezes one direct native server, generated filesystem-free contract binding, private
+  schema/wire owners, exact registry/auth/expiry/revocation/policy/cancellation/log/EOF boundaries, and `.1-.4`
+  dependency order. No server, API, dependency, fixture, semantic/parser/runtime, CLI, rollout, or admission
+  behavior is added.
+
+  **Proof:** Descriptor CODE 2 / Regexp 5 and exact opaque-index payload digests; MCP 35/10/10/68; mdBook; KM
+  741/5,965; task/diff; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage
+  1,691/377,723/28; canonical Perl 18, Rust 1/1 in 81.54s, Dart 1/1, Julia 416/416 in 29.0s, containment/moved-root,
+  CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 650s. Cleanup removes the 13,284-KiB book and one empty run.
+  Cadence advances to 68/300 without push; `.10.9.2.1` follows after the clean commit.
+
 - 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.3 — close MCP transport contract**
   (no-change canonical composition from clean architecture commit `64735109`).
 

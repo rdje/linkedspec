@@ -5,7 +5,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.1.3`; `(this commit)` composition-closes the neutral MCP contract.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.2.0`; `(this commit)` freezes the Perl MCP implementation plan.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   build/generated output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative;
   absolute runtime roots derive from the current checkout. Cross-volume reads are denied except explicit caller
@@ -39,22 +39,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_path_contract: ADR `0052` is complete. Structural `REPO-ROOT-PATHS` plus
   `tools/test_repo_root_process_portability.sh` lock root-relative tracked identity, Rust executable-over-cwd moved
   selection/marker failure, and exact Perl/Dart/Julia/Lua named-spec execution from outside the checkout.
-- current_semantic_frontier: MCP `.10.9.1` is composition-closed from clean architecture commit `64735109`:
-  35 frames, 10 raw/10 lifecycle/4 handle/4 policy cases and 68 mutations are exact; canonical CI requires tracked
-  artifacts and runs materialization before independent validation. Perl native server `.10.9.2` is next. Director-
-  approved ADR `0056` stays pending under `.14.1-.8`; no syntax/behavior moves and ADR `0045` keeps gap ownership.
+- current_semantic_frontier: MCP `.10.9.1` is closed. Behavior-free Perl preflight `.10.9.2.0` is complete from
+  clean `9307524a`; ADR `0057` freezes one direct native server, generated filesystem-free contract binding,
+  strict wire/security/lifecycle seams, and `.1-.4` order without server behavior. Registry/dispatch `.1` follows.
+  Director-approved ADR `0056` stays pending under `.14.1-.8`; no behavior moves; ADR `0045` keeps gap ownership.
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` in bounded memory until
   tracked governance repair `.22` moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_signoff: `.10.9.1.3` aligns contract/canonical/task/index/roadmap/architecture/KM/book/continuity and
-  omission/order mutations without artifact or behavior change. KM 740/5,958; six doctrines; semantic 6/20/105 at
-  7/9 + 6/6; storage 1,690/377,638/28; canonical Rust 83.96s, Julia 30.1s, CLI 66x2, RAM 72%, and Phase 0
-  1,031/675s pass. Cleanup removes the 13,252-KiB book/one empty run; permission-correct containment passes.
+- current_signoff: `.10.9.2.0` aligns ADR/task/index/roadmaps/architecture/KM/book/continuity without behavior. KM
+  741/5,965; MCP 35/10/10/68; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage
+  1,691/377,723/28; canonical Rust 81.54s, Julia 29.0s, CLI 66x2, RAM 58%, and Phase 0 1,031/650s pass. Cleanup
+  removes the 13,284-KiB book/one empty run; permission-correct containment passes.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, and clean the current leaf first.
-- push_policy: hard lock at 300 new local commits; current counter 67/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; current counter 68/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; do not delete old exact data until its SSD replacement is verified and used; never delete ambiguous data.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level direct commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; allow 30m for canonical.
-- blockers: none. next: activate native Perl MCP server `.10.9.2` task-tree-first after clean commit; no push.
+- blockers: none. next: activate `.10.9.2.1` task-tree-first after the clean plan commit; no push.

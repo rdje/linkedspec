@@ -67,6 +67,7 @@ changed* lives in git (layer D), not here.
 | [0054](0054-one-mcp-contract-native-per-backend-servers.md) | One MCP contract is implemented by native per-backend servers | 2026-07-29 | accepted; protocol fixed by 0055; implementation pending under `.10.9.1.1-.7` | architecture, mcp, semantic-api, backends, transport, embedding, portability, parity |
 | [0055](0055-modern-mcp-2026-07-28-stdio-contract.md) | LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio | 2026-07-29 | accepted; machine contract and implementations pending under `.10.9.1.1-.7` | architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity |
 | [0056](0056-typed-source-location-and-cursor-algebra.md) | Typed source-location algebra governs cursor, spans, and parser composition | 2026-07-29 | accepted direction; executable contract and implementation pending under `.14.1-.8` | architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability |
+| [0057](0057-perl-native-mcp-server-seams.md) | Perl MCP uses an embedded derived contract and an in-process native server | 2026-07-29 | accepted implementation plan; behavior pending under `.10.9.2.1-.4` | architecture, mcp, perl, embedding, handles, authorization, json, stdio, security, portability |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

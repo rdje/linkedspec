@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.0` — derive native bytes, do not read or hand-copy the contract): The
+  Perl server needs exact discovery/tool/schema/error values but ADR `0049` forbids runtime path reads. Embedding a
+  deterministic generated data module solves both constraints: one tool derives `LinkedSpec::MCPContract` from the
+  neutral bundle, check mode proves freshness, and the hand-written runtime only clones/validates that data. The
+  neutral materializer and independent validator remain first in canonical order, so the backend consumer cannot
+  become an oracle for its own source.
+
+  Plain `JSON::PP` is insufficient at the hostile wire boundary even though it is correct for admitted canonical
+  output. Version 4.06 accepts `{"a":1,"a":2}` and the subtler `{"a":1,"\\u0061":2}`. It also needs bignum
+  decoding to preserve the distinction between integer ids and `1.0`/exponent forms. The planned wire therefore
+  performs one strict token preflight over exact bytes, compares unescaped key identity, retains numeric token
+  kind, then delegates data construction to `JSON::PP` and schema validation to the embedded contract runtime.
+
+  Security dependencies are deliberately smaller than an MCP SDK. Core `Time::HiRes` supplies monotonic expiry;
+  core `MIME::Base64` maps 32 OS-random bytes to the required 43-character unpadded base64url handle. The default
+  reads `/dev/urandom` as a documented strictly necessary OS input and fails closed on absence/short read. A weak
+  fallback would make the handle shape pass while destroying its security meaning, so deterministic sources are
+  available only through a private test constructor. Authorization is similarly out of band: one host context is
+  registered and rechecked per call, never inferred from clientInfo or handle possession. The accepted host value
+  is a 1..4,096-octet byte string; only its SHA-256 digest is retained, and each call performs the same fixed
+  32-byte XOR-accumulator comparison (with a dummy digest for unknown handles). This narrows retained secret data
+  and response-path drift without pretending that a Perl interpreter provides formal constant-time execution.
+
+  The earlier `USER_GUIDE.md` construction-only prose was a stale chronological snapshot, not current behavior.
+  The code, exact Perl admission, mdBook, roadmap, and Knowledge Map all showed capabilities/query and six native
+  runtimes complete. This leaf corrects that directly relevant public projection while still saying—accurately—
+  that no MCP server is implemented until `.10.9.2.1` begins.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.3` — canonical order is part of the MCP contract proof): The
   materializer and validator are deliberately different proof owners. Materialization reconstructs generated
   frames and digest identity from normative inputs; independent validation interprets the already reconstructed

@@ -3,11 +3,18 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **740** facts · **5958** question keys.
+> **741** facts · **5965** question keys.
 
 ## Questions → fact
 
 - "Bareword found where operator expected at LinkedSpec::generated_handler AND_ACODE" -> [and-return-edge-codegen-defect](docs/knowledge/and-return-edge-codegen-defect.md) · 2026-06-19 · reverify: `perl -Iperl -e 'require LinkedSpec; my $s=\"Top::AND\\n /a/\\n /b/\\n -> Top[0] { x = 1 }\\n -> Top[1] { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},parse_mode=>q{consume},runtime_ctx_ref=>\\%c); my $in=q{ab}; my $a=$p->(\\$in); print defined($a)?qq{ast def (FIXED)\\n}:qq{ast UNDEF (defect present)\\n}'  # now prints 'ast def (FIXED)'`
+- "How does Perl MCP compare authorization context and enforce expiry?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "How will Perl MCP avoid reading contract files at runtime?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "How will Perl reject duplicate JSON keys when JSON::PP accepts them?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "What Perl module will own the native LinkedSpec MCP server?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "Where do Perl MCP handles get 256 bits of entropy?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "Which leaves implement and admit the Perl MCP server?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
+- "Why is the Perl descriptor not an MCP payload?" -> [perl-native-mcp-server-plan](docs/knowledge/perl-native-mcp-server-plan.md) · 2026-07-29
 - "after items = [value] what does return(items) read" -> [terse-retired-scalar-assign-spec-surface](docs/knowledge/terse-retired-scalar-assign-spec-surface.md) · 2026-07-06 · reverify: `rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' specs tests/corpus rust/linkedspec-runtime/tests/corpus --glob '*.spec' --glob '*.md' ; rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' docs/linkedspec-book/src ; prove -q -Iperl t/phase0_regression.t ; prove -q -Iperl t/actionir_ast_parser.t ; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_2_bare_identifier_remembers_type_after_initialization`
 - "after meta = { key : value } what does copy(meta) read" -> [terse-retired-scalar-assign-spec-surface](docs/knowledge/terse-retired-scalar-assign-spec-surface.md) · 2026-07-06 · reverify: `rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' specs tests/corpus rust/linkedspec-runtime/tests/corpus --glob '*.spec' --glob '*.md' ; rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' docs/linkedspec-book/src ; prove -q -Iperl t/phase0_regression.t ; prove -q -Iperl t/actionir_ast_parser.t ; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_2_bare_identifier_remembers_type_after_initialization`
 - "are == and != implemented as calls" -> [terse-numeric-comparison-symbol-callees](docs/knowledge/terse-numeric-comparison-symbol-callees.md) · 2026-07-02 · reverify: `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodExpr.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm && prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core symbol_callees && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_2_3_4_numeric_comparison_symbol_callees_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle`
@@ -9898,6 +9905,13 @@ _Perl logical truthiness distinguishes shared numeric zero from nonempty string 
 - **evidence:** `FUTURE-PARITY-BACKLOG.5.2.2 introduced perl/LinkedSpec/RuntimeLogical.pm and t/logical_helper_perl_contract.t. A full Phase 0 run exposed count(value) over an empty callback aggregate selecting the true branch. Toolbox lowering showed the condition reached RuntimeLogical::truthy as scalar(@value). Perl's shared false/zero scalar advertises public string, integer, and floating-point slots simultaneously; ordinary nonempty string zero values can acquire one numeric slot after inspection. RuntimeLogical therefore recognizes the simultaneous public integer-plus-floating signature before applying string precedence, while ordinary strings retain nonempty-string truth. The focused contract locks empty aggregate count, false comparison, and numerically inspected string-zero behavior; the canonical hash-tree fixture again preserves A/B leaves.`
 - **reverify:** `prove -Iperl t/logical_helper_perl_contract.t && perl -Iperl -MB -MLinkedSpec::RuntimeLogical -e 'my @empty; my $string = q{0}; my $ignored = 0 + $string; die unless !LinkedSpec::RuntimeLogical::truthy(scalar(@empty)); die unless !LinkedSpec::RuntimeLogical::truthy(1 == 2); die unless LinkedSpec::RuntimeLogical::truthy($string); print qq{perl-logical-host-scalars: OK\\n}'`
 - **source:** [`docs/knowledge/perl-logical-truthiness-host-scalars.md`](docs/knowledge/perl-logical-truthiness-host-scalars.md)
+
+### perl-native-mcp-server-plan
+_Perl native MCP server plan_
+
+- **answers:** What Perl module will own the native LinkedSpec MCP server? | How will Perl MCP avoid reading contract files at runtime? | How will Perl reject duplicate JSON keys when JSON::PP accepts them? | Where do Perl MCP handles get 256 bits of entropy? | How does Perl MCP compare authorization context and enforce expiry? | Why is the Perl descriptor not an MCP payload? | Which leaves implement and admit the Perl MCP server?
+- **date:** 2026-07-29 · **status:** current authority; behavior-free implementation plan, server pending
+- **source:** [`docs/knowledge/perl-native-mcp-server-plan.md`](docs/knowledge/perl-native-mcp-server-plan.md)
 
 ### perl-native-spec-resolution
 _Perl exposes a portable native spec loader separately from legacy get_parser discovery_

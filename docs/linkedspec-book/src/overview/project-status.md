@@ -669,7 +669,10 @@ Three backbone items tracked major structural modernization — all done:
   materializer. Independent leaf `.10.9.1.2` now proves 28 accepted/seven rejected frames, raw and stateful
   outcomes, and 68 mutations without importing the materializer. No-change `.10.9.1.3` now requires both programs
   in canonical CI, runs materialization before independent validation, rejects omission/order drift, and closes
-  the neutral contract. Native servers remain `.10.9.2-.7`;
+  the neutral contract. ADR `0057` and behavior-free Perl audit `.10.9.2.0` now freeze an in-process
+  `LinkedSpec::MCPServer`, generated filesystem-free contract binding, strict duplicate-safe wire, OS CSPRNG/
+  monotonic handle lifecycle, authorization/policy seams, and `.1-.4` implementation/admission order. No server
+  behavior exists yet; Perl registry/dispatch `.10.9.2.1` is next and later native servers remain `.10.9.3-.7`;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

@@ -32,6 +32,10 @@ The first step catches stale generated frames/digests; the second independently 
 and lifecycle/handle/policy outcomes, and 68 mutations. The recurring tool-governance test rejects omission and
 validator-before-materializer order. Neither step starts a server or changes semantic/CLI behavior.
 
+Behavior-free Perl plan `.10.9.2.0` adds no gate yet. ADR `0057` requires the future generated Perl contract
+binding check to run only after these two neutral owners, so a backend-derived module can never bless or hide stale
+normative bytes. Native registry/dispatch implementation begins in `.10.9.2.1`.
+
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text

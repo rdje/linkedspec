@@ -1128,9 +1128,9 @@ Examples:
 
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
-### Semantic-index construction (Perl foundation)
+### Semantic index and query API (Perl)
 
-Perl now has the source/compilation foundation for the planned semantic-query API:
+Perl exposes the admitted immutable semantic-query API:
 
 ```perl
 use LinkedSpec;
@@ -1150,10 +1150,10 @@ UTF-8 bytes for later byte spans/digests, rejects malformed UTF-8 with a typed
 `LinkedSpec::SemanticIndex::Error`, and does not execute the parser.
 
 The returned object is opaque. Both successful compilation and a structured language compilation failure produce
-an immutable snapshot foundation; compiler hashes, handler coderefs, compiled regex objects, and source text are
-not exposed. This is intentionally a staged API: public `capabilities` and `query` methods are not implemented yet,
-and Perl is not admitted to the semantic-query contract merely because construction exists. Use descriptor mode
-below for current introspection answers.
+an immutable queryable snapshot; compiler hashes, handler coderefs, compiled regex objects, and source text are
+not exposed. `$index->capabilities` returns the exact native limits/features response and
+`$index->query($request)` evaluates one `linkedspec-semantic-query-v1` request. Queries clone their private input,
+cannot compile or execute, and return detached plain data suitable for canonical JSON encoding.
 
 ### Descriptor introspection with `return_descriptor => 1`
 Use descriptor mode when you want to inspect rule readiness, migration metadata, or the current compiled-descriptor topology.
@@ -1162,17 +1162,18 @@ The descriptor is not a portable semantic-query wire format. In the Perl referen
 regexes are native coderef/compiled-regex values, while other backends use their own typed projections. Its stable
 facts remain useful inputs, but callers should not attempt to serialize backend objects as a cross-backend model.
 
-ADRs `0049`/`0050` define a separate `linkedspec-semantic-model-v1` /
-`linkedspec-semantic-query-v1` surface. Its later Perl leaves will expose normalized read-only records and relations for rules,
-regex slots, edges, lifecycle actions, symbols/calls, inferred shapes, staged/generated provenance, diagnostics,
-and explain-why evidence. Queries have deterministic snapshot-local ids/order, bounded pagination and traversal,
-and `none`/`identity`/`span`/`text` source ceilings with explicit redactions. Runtime explanations consume an
-already captured caller-owned observation; querying never runs the parser. MCP will be a two-tool handle adapter
-over the same native capabilities/query calls, with no implicit source loading or semantic implementation.
+ADRs `0049`/`0050` define this separate `linkedspec-semantic-model-v1` /
+`linkedspec-semantic-query-v1` surface for normalized read-only rules, regex slots, edges, lifecycle actions,
+symbols/calls, shapes, staged/generated provenance, diagnostics, runtime observations, and explain-why evidence.
+All six native runtime targets are admitted and recurring proof is active. Queries have deterministic snapshot-
+local ids/order, bounded pagination/traversal, and `none`/`identity`/`span`/`text` source ceilings with explicit
+redactions. Runtime explanations consume only an already captured caller-owned observation.
 
-Only the construction foundation is current Perl API. `FUTURE-PARITY-BACKLOG.10.3.2-.10.10` own records/query,
-five-backend/six-runtime rollout, thin MCP transport, and public closeout. Continue using `return_descriptor => 1`
-for current introspection answers until the query leaves close.
+The neutral modern MCP contract is also complete, but no MCP server is implemented yet. ADR `0057` and behavior-
+free Perl leaf `.10.9.2.0` freeze the future in-process `LinkedSpec::MCPServer` owner, generated filesystem-free
+contract binding, strict duplicate-safe wire, and secure handle lifecycle. Implementation begins in `.10.9.2.1`.
+Continue using the native methods above today; descriptor mode below remains a separate compiler-compatibility
+view, not the semantic wire model.
 
 Typical shape:
 
