@@ -517,10 +517,14 @@ Three backbone items tracked major structural modernization — all done:
   zero/one/two-regex rules for coordination, leaves, and entry/exit boundaries; deep recursion belongs in linked
   action-edge OR and blind-call AND structure rather than recursive regexes. Progressive parsing means invoking
   loaded specs over cursor-relative extracted text during a parse; staged parsing means refining selected fields
-  after an AST level returns. ADR `0012` and the function-body `body_parse_job` prototype are the current base.
-  General multi-spec composition remains future work under `FUTURE-PARITY-BACKLOG.14.1-.14.4`; the EBNF recursive-
-  regex and portmap complex-regex walkthrough wording is tracked audit/migration evidence, not the target general
-  authoring idiom.
+  after an AST level returns. ADR `0012` and the function-body `body_parse_job` prototype are the current base. ADR
+  `0056` now adopts one future immutable source-location algebra across cursor, capture, recursion, segmentation,
+  and composition: Unicode-scalar positions, half-open spans, ordered provenance, bounded recognition-only cursor
+  transactions, recursive entry/match/exit observations, progress checks, and span-native parser dispatch. It adds
+  no current syntax or behavior. General contract/implementation/six-runtime admission remains future work under
+  `FUTURE-PARITY-BACKLOG.14.1-.14.8`; ADR `0045` separately retains gap syntax/lifecycle ownership. The EBNF
+  recursive-regex and portmap complex-regex walkthrough wording is tracked audit/migration evidence, not the target
+  general authoring idiom.
 - **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/

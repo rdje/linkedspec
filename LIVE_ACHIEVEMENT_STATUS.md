@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Typed source-location and cursor architecture accepted
+
+Director-approved `FUTURE-PARITY-BACKLOG.14.0.1` and ADR `0056` adopt one minimal immutable algebra for source
+identity, zero-based Unicode-scalar positions, same-source half-open spans, and ordered derived provenance. Current
+helper families become future projections. Explicit cursor transactions perform one recognition attempt over only
+invocation-local cursor/boundary/marks; they add no search tree and cannot undo action, AST/user, output/diagnostic,
+registry, external, or host effects. Recursive boundaries are read-only, progress is required, and span-native
+parser dispatch preserves coordinates without adding authority.
+
+The program is dependency-split under `.14.1-.8`: neutral contract/fixtures; immutable values and six-runtime
+admission; transactions/static safety; recursive provenance; composition with separately owned inter-match gaps;
+progressive span parsing; staged enrichment; then recurring/public no-drift. This behavior-free leaf changes no
+syntax, parser/runtime, generated format, semantic/MCP response, CLI, rollout, admission, or current completeness
+claim. MCP no-change `.10.9.1.3` remains the resume pointer after the planning commit.
+
+Signoff: mdBook, Knowledge Map 740/5,958, task/diff, all six doctrines, cursor 36/18/8 over 75 files at 8/0 with
+60 mutations, capability 80/0/0, semantic 6/20/105 at 7/9 + 6/6, storage 1,690/377,544/28, and tool locality
+3/13/21 pass. Canonical CI passes Perl semantic admission 18, Rust 1/1 in 79.52s, Dart 1/1, Julia 416/416 in 28.5s,
+containment, moved-root proof, primary CLI 66x2, RAM at 68%, and Phase 0 1,031/1,031 in 642s. Exact cleanup removes
+rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — MCP machine contract independently validated
 
 `FUTURE-PARITY-BACKLOG.10.9.1.2` adds a separate repository-routed validator for
@@ -53,14 +74,29 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No successor leaf is active across this closeout boundary. `FUTURE-PARITY-BACKLOG.10.9.1.2` is a fully verified
-  completion candidate from clean machine-contract commit `20741bbd`; no-change contract closeout `.10.9.1.3`
-  becomes active only after this leaf commits and the repository is proven clean.
+- No successor leaf is active during this closeout. Behavior-free architecture leaf
+  `FUTURE-PARITY-BACKLOG.14.0.1` is fully verified from clean MCP-validator commit `283dc841`; its pending
+  implementation program begins at `.14.1`. No-change MCP contract closeout `.10.9.1.3` activates task-tree-first
+  after this planning commit is clean.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.14.0.1 — adopt typed source-location and cursor architecture**
+  (director-approved behavior-free design capture from clean MCP-validator commit `283dc841`).
+
+  **Result:** ADR `0056` defines immutable source identity/position/span/provenance, effect-safe bounded cursor
+  transactions, read-only recursive boundaries, portable progress/safety diagnostics, authority-preserving span-
+  native parser dispatch, and exact non-duplication of ADR `0045` gap ownership. `.14.1-.8` split contract through
+  six-runtime/public no-drift. No syntax or behavior changes.
+
+  **Proof:** mdBook, Knowledge Map 740/5,958, task/diff, all six doctrines, cursor 36/18/8 over 75 files at 8/0
+  with 60 mutations, capability 80/0/0, semantic 6/20/105 at 7/9 + 6/6, storage 1,690/377,544/28, and tool locality
+  3/13/21 pass. Canonical passes Perl 18, Rust 1/1 in 79.52s, Dart 1/1, Julia 416/416 in 28.5s, containment,
+  moved-root, primary 66x2, RAM 68%, and Phase 0 1,031/1,031 in 642s. Cleanup removes the 13,244-KiB book and empty run.
+  Cadence advances to 66/300 without push; no-change MCP `.10.9.1.3` is the clean resume pointer.
+
 - 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.2 — independently validate MCP contract**
   (independent exact validator and omission corpus from clean machine-contract commit `20741bbd`).
 

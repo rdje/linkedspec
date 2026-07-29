@@ -480,9 +480,11 @@ headers, PCRE2, and operating-system libraries remain necessary read-only extern
 - Preserve LinkedSpec strengths (recursive parsing + multi-pass extraction workflows).
 - Keep `.spec` authoring structural: small readable regexes identify leaf or entry/exit boundaries; linked rules
   own deep recursion. Progressive parsing isolates text relative to cursor anchors and composes loaded spec
-  parsers during a parse; staged parsing refines selected fields after an AST level returns. ADR `0012` and the
-  function-body prototype provide the current base, while complete authoring guidance and general multi-spec
-  execution remain owned by `FUTURE-PARITY-BACKLOG.14.1-.14.4` rather than being overstated as fully shipped.
+  parsers during a parse; staged parsing refines selected fields after an AST level returns. ADRs `0012`/`0056`
+  make immutable Unicode-scalar positions, half-open source spans, and exact provenance the accepted unifying
+  direction for cursor/capture/recursive-boundary/composition work. The function-body prototype remains the current
+  base; typed algebra, safe cursor transactions, complete authoring guidance, and general multi-spec execution
+  remain owned by `FUTURE-PARITY-BACKLOG.14.1-.14.8` rather than being overstated as fully shipped.
 - Evolve `.spec` toward language-agnostic action semantics over time.
 - Model scalar, array, harray/hash, and codeblock as the four portable value kinds. For callables whose signature
   accepts a final codeblock, the language direction is one canonical call behind equivalent

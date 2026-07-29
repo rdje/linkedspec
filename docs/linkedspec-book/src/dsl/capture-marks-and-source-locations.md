@@ -6,6 +6,58 @@ This chapter explains the mental model before the exhaustive method list.
 
 For the method-by-method public reference, read [Source Boundary Helper Reference](source-boundary-helper-reference.md) after this chapter.
 
+## Accepted future model: one typed source-location algebra
+
+ADR `0056` adopts one future conceptual core beneath these helper families. This is an architecture direction, not
+yet a shipped value type or new `.spec` syntax:
+
+- a source identity names caller-authorized decoded input, not a path;
+- a position is a zero-based Unicode-scalar offset in that source;
+- a span is a same-source half-open interval `[start, end)` with exact provenance; and
+- derived text retains the ordered spans that contributed to it.
+
+Line/column and UTF-8 byte locations are derived evidence. Backends may use byte indexes internally, but public
+portable position identity remains Unicode-scalar based. Text can be materialized from a span when needed; the span
+does not need to copy the text or retain a regex, parser, stack frame, or backend object.
+
+The current families below remain useful. Their future relationship is straightforward: `cursor_*`, `entry_*`,
+`match_*`, `mark_*`, `capture_*`, and `input_*` project positions, spans, text, or measurements from the same core
+instead of defining unrelated coordinate systems.
+
+### Bounded cursor transactions do not mean general backtracking
+
+The accepted future checkpoint/try/commit/rollback model is one explicit recognition attempt inside one rule
+invocation. Conceptually:
+
+```text
+checkpoint = snapshot(cursor, anonymous_boundary, named_marks)
+candidate = recognize_once()
+if candidate_is_accepted:
+    commit(candidate.cursor_state)
+else:
+    restore(checkpoint)
+```
+
+Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
+output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
+recognition-only; effectful action/lifecycle work occurs after commit. The engine does not search for alternatives,
+unwind callers, or retry automatically. Repetition, recursion, and staged queues must still prove forward progress
+or another well-founded decreasing measure.
+
+Recursive rules may eventually expose immutable entry, selected-match, and accepted-exit positions plus bounded
+parent/child provenance. Those observations do not change rule ownership: each child begins at the caller's current
+position and derives seek/consume from its own authored family.
+
+Progressive and staged parsing can then pass a span directly to another explicitly registered parser. The child
+receives the exact text slice while its diagnostics map back to the original source. A span grants no implicit file
+read, parser lookup, compilation, execution, or policy elevation. Lossless `@capture_gaps` segmentation will use the
+same span representation, but ADR `0045` and the separate inter-match-gap task remain the sole owners of its syntax,
+prefix/tail policy, lifecycle behavior, and compatibility migration.
+
+Executable schemas, fixtures, diagnostics, backend admissions, and final spelling remain future work under
+`FUTURE-PARITY-BACKLOG.14.1-.14.8`. Until those leaves land, use the current helpers documented in this chapter and
+do not assume positions/spans or cursor transactions are available as authored values.
+
 ## Five anchor families
 
 Most source-boundary helpers belong to one of these families:

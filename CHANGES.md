@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.14.0.1 — adopt typed source-location and cursor architecture
+
+Recorded the director-approved architecture in ADR `0056`: one caller-authorized source identity, immutable
+zero-based Unicode-scalar positions, same-source half-open spans, and ordered provenance for derived text form the
+minimal conceptual core beneath cursor, capture, recursion, lossless segmentation, and progressive/staged parser
+composition. Existing capture/mark/cursor/input/entry/match helpers remain current and become future projections;
+this leaf chooses no new helper spelling.
+
+Bounded checkpoint/try/commit/rollback is explicitly one recognition attempt over the owning invocation's cursor,
+anonymous boundary, and named marks. It adds no search tree, does not unwind callers, and cannot roll back actions,
+AST/user mutation, diagnostics/output, registry work, external calls, or host state. Recursive entry/match/accepted-
+exit boundaries are read-only, progress is mandatory, and span-native parser dispatch preserves source coordinates
+without granting path, resolution, compilation, execution, or policy authority.
+
+Expanded `FUTURE-PARITY-BACKLOG.14` into exact neutral contract/fixtures, immutable values and six-runtime
+admission, cursor transactions/static safety, recursive provenance, separately owned gap composition, progressive
+span parsing, staged enrichment, and recurring/public no-drift leaves `.14.1-.8`. ADR `0045` and
+`INTER-MATCH-GAP-CAPTURE` remain the sole syntax/lifecycle/migration owner for `@capture_gaps` and named slots.
+Updated the decision index, task/index/frontier, roadmaps, architecture, Knowledge Map, mdBook, and continuity
+layers. No grammar, helper, parser/compiler/runtime, descriptor, generated format, semantic/MCP response, primary
+CLI, rollout, admission, or current feature-completeness behavior changes.
+
+Focused proof passes mdBook, Knowledge Map 740/5,958, task metadata/diff, all six doctrines, cursor governance
+36/18/8 over 75 files at 8/0 with 60 mutations, capability 80/0/0, and semantic governance 6/20/105 at rollout
+7/9 and admission 6/6; project-data classification 1,690/377,544/28 and tool locality 3/13/21 also pass. Canonical
+CI passes Perl semantic admission 18, Rust 1/1 in 79.52 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds,
+process containment, moved-root proof, primary CLI 66x2, RAM at 68%, and Phase 0 1,031/1,031 in 642 seconds. Cleanup
+proven-empty managed-run directory. Push cadence advances to 66/300; no push. MCP `.10.9.1.3` resumes next.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.1.2 — independently validate MCP contract
 
 Added a repository-routed, dependency-free checker for `linkedspec-mcp-transport-v1`. It does not import or execute

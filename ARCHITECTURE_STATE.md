@@ -5,6 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` typed source-location/cursor direction: completed director-approved behavior-free
+  `FUTURE-PARITY-BACKLOG.14.0.1` and ADR `0056` unify cursor, capture, recursion, segmentation, and parser
+  composition around immutable source identities, zero-based Unicode-scalar positions, same-source half-open
+  spans, and ordered provenance for derived text. Live cursor/anonymous-boundary/named-mark state stays local to
+  one rule invocation; existing helpers become projections rather than a growing second semantic catalogue.
+  Explicit cursor transactions make one bounded recognition attempt and may restore only cursor/boundary/marks;
+  they do not add a search tree or roll back actions, AST/user state, diagnostics/output, registry work, or host
+  effects. Recursive entry/match/accepted-exit boundaries are read-only, progress is mandatory, span-native parser
+  dispatch preserves source authority, and ADR `0045` remains the sole gap syntax/lifecycle owner. Exact neutral
+  contract/fixtures, six-runtime implementation/admission, recurring governance, and public no-drift remain
+  dependency-split under pending `.14.1-.8`; no syntax or behavior is current from this decision.
 - `2026-07-29` MCP independent validation: `FUTURE-PARITY-BACKLOG.10.9.1.2` adds a repository-routed checker that
   neither imports nor executes the materializer and requires no package/network dependency. It meta-validates and
   interprets the exact JSON Schema 2020-12 keyword profile, classifies 28 accepted and seven intentionally rejected
@@ -1176,7 +1187,8 @@ This document is the current high-level technical reading of the project shape. 
   Progressive parsing invokes loaded specs over cursor-relative extracted text during an active parse, while
   staged parsing refines selected fields after an AST level returns. Only the narrow function-body
   `body_parse_job` family is currently proven end to end; general in-parse composition, multiple parser families,
-  public parse jobs, and recursive queues are future-owned by `FUTURE-PARITY-BACKLOG.14.1-.14.4`.
+  public parse jobs, typed source locations/cursor transactions, and recursive queues are future-owned by
+  `FUTURE-PARITY-BACKLOG.14.1-.14.8` under ADR `0056`.
 - `2026-07-12` refresh: Aggregate-selector retirement is admitted. `linkedspec-uniform-binding-v1` defines one observable typed
   binding is storage-neutral; `set` yields the post-assignment target value; mutable helpers yield updated targets;
   absent target creation and wrong-kind errors are typed; static rules precede array mutation in ambiguous push;

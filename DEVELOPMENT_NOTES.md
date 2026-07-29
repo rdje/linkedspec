@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.14.0.1` — power through a smaller semantic core): The current source-boundary
+  API already has more than one hundred helper contracts. Adding pairwise anchor helpers would increase naming
+  burden faster than expressiveness. ADR `0056` instead chooses source identity + immutable Unicode-scalar position
+  + half-open span + ordered derived provenance. Text, lengths, line/column, and current helper results are
+  projections. This keeps portability exact while allowing later spans to move between recursive calls and parser
+  stages without copied text or backend objects.
+
+  “Transaction” needed a strict reconciliation with LinkedSpec's forward-moving non-backtracking doctrine. The
+  accepted scope snapshots only invocation-local cursor, anonymous boundary, and named marks; it performs one
+  explicit recognition attempt and never searches alternatives. Since user variables, AST mutation, output,
+  diagnostics, registry work, external calls, and host effects are not journaled, they cannot honestly roll back.
+  The safe contract therefore requires pre-commit work to be recognition-only. This is more constrained than a
+  general parser-combinator `try`, but it avoids an unsound partial rollback and preserves LinkedSpec's identity.
+
+  Three ownership fences prevent the planning program from becoming a second implementation authority. Rule
+  families still own seek/consume under ADR `0044`; ADR `0045`/`INTER-MATCH-GAP-CAPTURE` still own gap syntax,
+  prefix/tail/failure policy, named slots, and legacy migration; ADRs `0014`/`0015` still own parse-job ids,
+  registry/cache/cycle/cancellation/stitch semantics. The new algebra supplies common values and safety rules.
+  `.14.1-.8` require a versioned neutral contract and mutations before any backend or public syntax changes.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.2` — independent validation without a package oracle): The routed
   Python 3.14 environment contains no `jsonschema` distribution. Adding a mutable global or network-fetched
   dependency would make contract verification host-dependent, so the checker implements precisely the JSON Schema

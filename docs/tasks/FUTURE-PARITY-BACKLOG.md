@@ -13997,14 +13997,16 @@ before implementation.
   Dependencies: `.12.1`
 
 - ID: `FUTURE-PARITY-BACKLOG.14`
-  Status: `pending`
-  Goal: Ratify, document, and implementation-audit LinkedSpec's structural linked-rule and progressive/staged
-    parser-composition authoring model.
-  Children: `.14.0`, `.14.1`, `.14.2`, `.14.3`, `.14.4`
+  Status: `active` (2026-07-29; architecture `.14.0.1` complete; contract `.14.1` pending)
+  Goal: Ratify, document, and implementation-audit LinkedSpec's structural linked-rule, typed source-location,
+    transactional cursor, lossless segmentation, and progressive/staged parser-composition authoring model.
+  Children: `.14.0`, `.14.0.1`, `.14.1`, `.14.2`, `.14.3`, `.14.4`, `.14.5`, `.14.6`, `.14.7`, `.14.8`
   Acceptance: Public guidance teaches small readable boundary regexes and connected recursive rule structure;
-    progressive parsing composes dynamically loaded spec parsers over cursor-relative extracted text; staged
-    parsing can enrich selected returned-AST fields with later spec-driven parses; examples and implementation
-    claims remain proof-backed rather than aspirationally overstated.
+    immutable typed positions/spans form one source-location algebra over invocation-local cursor state; bounded
+    transactional cursor scopes preserve rule-local cursor ownership and prove progress; recursive boundaries and
+    lossless segmentation retain exact provenance; progressive parsing composes loaded spec parsers over spans;
+    staged parsing can enrich selected returned-AST fields with later spec-driven parses; static diagnostics,
+    examples, five-backend admissions, and implementation claims remain proof-backed rather than aspirational.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.0`
   Status: `done`
@@ -14022,25 +14024,93 @@ before implementation.
     evidence rather than silently accepted target idioms. No parser/runtime behavior changes.
   Commit: `FUTURE-PARITY-BACKLOG.14.0 - capture structural progressive parsing doctrine`
 
+- ID: `FUTURE-PARITY-BACKLOG.14.0.1`
+  Status: `done` (2026-07-29; behavior-free architecture adopted from clean `283dc841`)
+  Goal: Capture the director-approved typed source-location and transactional cursor architecture, reconcile it
+    with the existing structural/progressive/staged doctrine, and dependency-split it before syntax or behavior.
+  Depends on: `.14.0`
+  Acceptance: Adopt one immutable source-location algebra rather than another flat helper expansion; define exact
+    architectural invariants for source identity, half-open Unicode-scalar positions/spans, provenance, extraction,
+    bounded checkpoint/try/commit/rollback, progress, recursive entry/match/exit observation, span-native parser
+    composition, lossless named-slot segmentation, and static safety diagnostics. Preserve the current helper
+    surface as projections/compatibility, rule-local intrinsic seek/consume ownership, invocation-local authority,
+    backend neutrality, and existing `INTER-MATCH-GAP-CAPTURE` ownership. Split contract, neutral fixtures,
+    implementation, six-runtime admission, recurring proof, public examples, and no-drift before behavior code.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN OWNED BASE** — Prove clean MCP-validator commit `283dc841`, zero-byte message brief, absent generated
+    residue, and `.14.0.1` ownership before changing an ADR, roadmap, Knowledge Map card, or public documentation.
+  - [x] **CANONICAL RECONCILIATION** — Retrieve and reconcile ADRs `0012`, `0044`, `0045`, Phase 4 capture/mark
+    taxonomy, structural/progressive/staged doctrine, current backend cursor/capture facts, and queued gap capture.
+  - [x] **SOTA ARCHITECTURE** — Freeze minimal immutable value types, provenance and coordinate rules, bounded
+    transaction/progress semantics, recursive observation, span-native composition, lossless segmentation, and
+    static error classes without choosing convenience syntax prematurely or adding hidden authority.
+  - [x] **DEPENDENCY SPLIT / NO DUPLICATE OWNER** — Refine `.14.1-.14.8` so contract/fixtures precede behavior,
+    existing inter-match-gap ownership composes rather than forks, each backend is separately admitted, and
+    recurring/public no-drift close the program.
+  - [x] **NO-OVERCLAIM** — Change no grammar, helper, parser/compiler/runtime, descriptor, generated format,
+    semantic response, MCP surface, primary CLI, rollout, admission, or current feature-completeness claim.
+  - [x] **LOCKSTEP SIGNOFF** — Synchronize ADR/index, task/index/frontier, roadmaps, architecture, Knowledge Map,
+    mdBook, changes/development/live/memory; pass focused and canonical gates, exact cleanup, commit/brief/clean
+    workflow, and do not push.
+
+  Verification: **PASS 2026-07-29.** Clean base `283dc841`, zero-byte brief, absent generated residue, and owning
+    leaf were proved before the ADR or public documentation moved. ADRs `0012`, `0014`, `0015`, `0044`, and `0045`,
+    the Phase 3/4 contracts, current implementation, Knowledge Map, and mdBook were reconciled. ADR `0056` now
+    freezes caller-authorized source identity, immutable zero-based Unicode-scalar positions, same-source half-open
+    spans, ordered provenance, recognition-only invocation-local cursor transactions, read-only recursive
+    boundaries, progress obligations, and authority-preserving span-native composition. Transactions add no
+    systemic backtracking and cannot roll back user/AST/output/diagnostic/registry/external/host effects; ADR `0045`
+    remains the exclusive gap syntax/lifecycle owner. `.14.1-.8` separate contract, implementation/admission,
+    transaction safety, recursion/provenance, segmentation composition, progressive parsing, staged enrichment,
+    and recurring/public proof. Focused mdBook, Knowledge Map 740/5,958, task/diff, six-doctrine, cursor
+    36/18/8 over 75 files with 8/0 rollout and 60 mutations, capability 80/0/0, and semantic 6/20/105 at 7/9 + 6/6
+    pass; storage 1,690/377,544/28 and tool locality 3/13/21 pass. Canonical CI passes Perl semantic admission 18,
+    Rust 1/1 in 79.52 seconds, Dart 1/1, Julia 416/416 in 28.5 seconds, containment, moved-root proof, primary CLI
+    66x2, RAM at 68%, and Phase 0 1,031/1,031 in 642 seconds. Cleanup removes the 13,244-KiB book and one empty run.
+    No syntax, behavior, generated format, semantic/MCP/CLI surface, rollout, admission, or completeness claim moves.
+  Commit: `FUTURE-PARITY-BACKLOG.14.0.1 - adopt typed source location algebra`
+
 - ID: `FUTURE-PARITY-BACKLOG.14.1`
   Status: `pending`
-  Goal: Ratify and teach simple-regex linked-rule structure, including zero/one/two-regex authoring roles and
-    recursion through action-edge OR dispatch plus blind-call AND composition.
+  Goal: Ratify the exact typed source-location algebra and neutral conformance fixtures while teaching simple-regex
+    linked-rule structure, including zero/one/two-regex roles and graph-owned recursion.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2`
   Status: `pending`
-  Goal: Specify and audit progressive in-parse extraction plus dynamic multi-spec parser invocation over captured
-    text at arbitrary safe parsing points.
+  Goal: Implement immutable position/span/provenance values and current-helper projections in the Perl reference,
+    then admit the same neutral contract independently in Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3`
   Status: `pending`
-  Goal: Specify and audit staged AST enrichment where later loaded specs parse selected extracted fields returned
-    by an earlier AST level.
+  Goal: Specify and implement bounded checkpoint/try/commit/rollback cursor transactions plus exact progress,
+    nullable-recursion, stale-mark, reversed-span, and cross-boundary safety diagnostics.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.4`
   Status: `pending`
-  Goal: Close examples, implementation gaps, mdBook/Knowledge Map/tooling alignment, and complete no-drift proof
-    for the structural/progressive/staged authoring model.
+  Goal: Expose immutable recursive rule entry/match/exit positions and parent/child provenance without allowing a
+    parent to override the child's intrinsic cursor policy or retaining backend/runtime objects.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.5`
+  Status: `pending`
+  Goal: Compose stable named regex-slot identity and the separately owned `INTER-MATCH-GAP-CAPTURE` contract into
+    lossless prefix/gap/tail span segmentation without duplicating its syntax, lifecycle, or compatibility owner.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.6`
+  Status: `pending`
+  Goal: Specify and implement span-native progressive in-parse invocation of loaded specs at arbitrary safe points,
+    preserving source provenance, diagnostic coordinates, policy ceilings, cancellation, and zero implicit paths.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.7`
+  Status: `pending`
+  Goal: Specify and implement staged AST enrichment where later loaded specs parse selected exact spans returned by
+    an earlier AST level and stitch typed results through deterministic parse jobs.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.8`
+  Status: `pending`
+  Goal: Recompose six-runtime admissions and recurring governance, close examples/tooling/mdBook/Knowledge Map
+    alignment, reject stale-helper and unsafe-cursor drift, and complete public no-drift for the full authoring model.
 
 - ID: `FUTURE-PARITY-BACKLOG.15`
   Status: `pending`
@@ -15504,7 +15574,10 @@ four semantic payloads, 35 canonical frames, ten raw cases, ten lifecycle cases,
 freeze the exact backend-neutral bytes without a server. Independent validator/mutations `.10.9.1.2` are complete
 from clean `20741bbd`: one separate self-contained validator classifies 28 accepted and seven rejected frames,
 executes ten lifecycle cases, and rejects 68 named mutations across 14 categories without importing the
-materializer or adding a server. No-change recurring-governance closeout `.10.9.1.3` is next after the clean commit.
+materializer or adding a server. Director-approved behavior-free `.14.0.1` is complete from clean `283dc841`:
+ADR `0056` freezes one typed source-location/cursor algebra and splits exact neutral contract through six-runtime/
+public no-drift under `.14.1-.8` without changing syntax or behavior. `.14.1` remains pending; no-change MCP
+recurring-governance closeout `.10.9.1.3` is the immediate clean resume pointer.
 
 ### Superseded frontier snapshots
 
@@ -15779,12 +15852,17 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 93 | `FUTURE-PARITY-BACKLOG.12.1.7.3` | `done` | All 1,356 positive embedded occurrences are removed; recurring scan reports zero positives and 25 classified recognizer occurrences. |
 | 94 | `FUTURE-PARITY-BACKLOG.12.1.8.1` | `done` | Perl rejects authored exact selectors before lowering; live/generated diagnostics and retained constructors are locked. |
 | 95 | `FUTURE-PARITY-BACKLOG.13.1` | `pending` | Restore the codegen inspector after selector retirement. |
-| 96 | `FUTURE-PARITY-BACKLOG.14` | `pending` | Extend the existing staged architecture with structural authoring and complete progressive/staged composition audits. |
+| 96 | `FUTURE-PARITY-BACKLOG.14` | `active` | Extend structural/progressive/staged authoring through one typed source-location/cursor algebra and exact six-runtime/public proof. |
 | 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
-| 98 | `FUTURE-PARITY-BACKLOG.14.1` | `pending` | Ratify and teach simple-regex linked-rule structural recursion. |
-| 99 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Audit and implement intended in-parse progressive multi-spec composition. |
-| 100 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Audit and implement later-stage AST-field enrichment. |
-| 101 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Close examples, implementation gaps, tooling, and no-drift. |
+| 98 | `FUTURE-PARITY-BACKLOG.14.0.1` | `done` | ADR `0056`, exact invariants, existing-owner reconciliation, and `.14.1-.8` dependency split are complete without behavior. |
+| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `pending` | Ratify typed source-location schema/fixtures and teach simple-regex linked recursion. |
+| 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |
+| 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
+| 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |
+| 103 | `FUTURE-PARITY-BACKLOG.14.5` | `pending` | Compose stable slots and separately owned inter-match gap spans without owner duplication. |
+| 104 | `FUTURE-PARITY-BACKLOG.14.6` | `pending` | Implement authority-preserving span-native progressive parser composition. |
+| 105 | `FUTURE-PARITY-BACKLOG.14.7` | `pending` | Implement deterministic exact-span staged AST enrichment. |
+| 106 | `FUTURE-PARITY-BACKLOG.14.8` | `pending` | Close recurring six-runtime governance, public examples/tooling, and no-drift. |
 | 102 | `FUTURE-PARITY-BACKLOG.12.1.8.2` | `done` | Rust rejects exact selectors across compiled/generated boundaries and has no selector runtime dispatch. |
 | 103 | `FUTURE-PARITY-BACKLOG.12.1.8.3` | `done` | Dart exact-selector rejection and complete bounded-bridge no-drift are closed. |
 | 104 | `FUTURE-PARITY-BACKLOG.7.0` | `pending` | Recalibrate the oracle generator's default hard timeout from measured shipped-spec build costs. |
@@ -16821,6 +16899,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.14.0.1` | Clean base `283dc841`; ADR/Phase 3/Phase 4/current-owner reconciliation; ADR `0056`; `.14.1-.8` dependency split; mdBook; KM 740/5,958; task/diff; six doctrines; cursor 36/18/8 over 75 files at 8/0 with 60 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,690/377,544/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 79.52s, Dart 1/1, Julia 416/416 28.5s, containment/moved-root, CLI 66x2, RAM 68%, Phase 0 1,031/642s; exact cleanup. | PASS. One typed source-location/cursor architecture is durable without syntax or behavior; `.14.1` stays pending and MCP `.10.9.1.3` resumes. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.2` | Clean base `20741bbd`; independent schema meta-validation and artifact reconstruction; 28 accepted/7 rejected frames; 10 raw/10 lifecycle/4 handle/4 policy cases; 68 mutations across 14 categories; exact validator/materializer separation and digest pins; mdBook; KM 739/5,943; task/doctrines/diff; semantic 6/20/105 at 7/9 + 6/6; storage 1,689/377,476/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 82.63s, Dart 1/1, Julia 416/416 29.7s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/642s; exact cleanup. | PASS. Every accepted byte and rejected omission is independently governed without a server; `.10.9.1.3` follows the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.1` | Clean base `b0492488`; exact manifest/schema/four payloads/35 frames/10 raw/10 lifecycle/4 handle/4 policy cases; deterministic duplicate-key/digest/topology/framing/materialization proof; mdBook; KM 739/5,943; task/doctrines/diff; semantic 6/20/105 at 7/9 + 6/6; storage 1,688/376,598/28 and tools 3/13/20; canonical Perl 18, Rust 1/1 80.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, Phase 0 1,031/648s; exact cleanup. | PASS. Exact machine bytes are frozen without a server or independent-validator overclaim; `.10.9.1.2` follows the clean commit. |
 | `2026-07-28` | `FUTURE-PARITY-BACKLOG.10.7.6.4` | Clean committed base `04ab4fec`; no production/test/fixture/contract/API/observation/format/ledger replacement; ten committed suites exact 1,964 per ABI; native/loaded/reconstructed/generated/emitted/traced/isolated routes, callback identity, strict detached derivation, twentieth digest, no-sink/non-interference/authority fences; complete Lua 177x2, PUC primary 66x2/corpus 105/storage 15; primary 5x2x66; Unicode 10/10; all ledgers exact; canonical six doctrines, Rust 1/1 in 81.52s, Dart 1/1, Julia 416/416 in 29.0s, containment/moved-root, reference 66x2, Phase 0 1,031/1,031 in 656s; mdBook/KM 733/5,874/memory/task/doctrines/diff/syntax/storage/exact cleanup. | PASS. The committed runtime-observation owners recompose without replacement behavior, format movement, or promotion; parent `.10.7.6` closes and exact dual-ABI admission `.10.7.7` follows the clean commit. |
@@ -17109,6 +17188,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.14.0.1` | `FUTURE-PARITY-BACKLOG.14.0.1 - adopt typed source location algebra` | ADR `0056`, exact ownership/safety invariants, `.14.1-.8` implementation split, complete behavior-free signoff, and clean MCP resume pointer. |
 | `FUTURE-PARITY-BACKLOG.10.9.1.2` | `FUTURE-PARITY-BACKLOG.10.9.1.2 - independently validate MCP contract` | Separate exact schema/artifact/lifecycle oracle, 68 omission-sensitive mutations, complete signoff, and clean handoff to no-change `.1.3`. |
 | `FUTURE-PARITY-BACKLOG.10.9.1.1` | `FUTURE-PARITY-BACKLOG.10.9.1.1 - encode exact MCP machine contract` | One digest-pinned neutral schema/payload/corpus/canonical-stream contract and deterministic materializer; independent validator `.1.2` follows. |
 | `FUTURE-PARITY-BACKLOG.10.8` | `FUTURE-PARITY-BACKLOG.10.8 - add recurring semantic proof` | Exact six-runtime driver, 105 mutations at 7/9 + 6/6, 30-case primary projection, three support ledgers, 40-entrypoint/13-shell locality governance, canonical proof, and clean handoff to thin MCP `.10.9`. |
