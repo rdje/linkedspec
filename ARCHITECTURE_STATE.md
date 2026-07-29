@@ -22,8 +22,9 @@ This document is the current high-level technical reading of the project shape. 
   canonical frames, independently reconstructs frame provenance, checks ten raw-input outcomes, exact native and
   restricted payload identity, four indistinguishable handle states, four lowering-policy cases, and ten explicit
   lifecycle transitions, then rejects 68 named mutations across 14 categories including its own fixture wiring.
-  No server/native semantic/parser/compiler/runtime/primary-CLI/rollout/admission behavior changes; no-change
-  recurring contract composition `.10.9.1.3` follows before native Perl implementation.
+  No server/native semantic/parser/compiler/runtime/primary-CLI/rollout/admission behavior changes. No-change
+  `.10.9.1.3` now requires ordered materialization and validation in canonical CI, rejects omission/order drift,
+  and closes the neutral contract before native Perl implementation `.10.9.2`.
 - `2026-07-29` MCP machine-contract realization: `FUTURE-PARITY-BACKLOG.10.9.1.1` encodes ADR `0055` once at
   `capability_conformance/mcp_semantic_transport_contract.json`. The digest-pinned neutral bundle contains a closed
   JSON Schema 2020-12, four semantic payloads (three exact native-oracle responses plus one lowering-only
@@ -41,7 +42,7 @@ This document is the current high-level technical reading of the project shape. 
   non-enumerating tool errors, while wire/schema/version failures remain JSON-RPC errors. Canonical semantic text
   plus structured content stays direct/native identical; stdout is MCP-only, optional sanitized logs use stderr,
   and EOF clears the registry and exits. Machine schemas and independent validation are now encoded by
-  `.10.9.1.1-.2`; composition/server work remains `.10.9.1.3-.7`. Any legacy adapter or aggregator is separately
+  `.10.9.1.1-.3`; native server work remains `.10.9.2-.7`. Any legacy adapter or aggregator is separately
   owned after public closeout.
 - `2026-07-28` Lua semantic runtime-observation authority freeze: behavior-free
   `FUTURE-PARITY-BACKLOG.10.7.6.0` maps the only accepted-slot seam after match/ordered identity and before

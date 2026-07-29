@@ -1036,8 +1036,10 @@ content migration exists yet.
   compile, path-read, or semantic authority. Machine leaf `.10.9.1.1` now pins one neutral manifest, closed JSON
   Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte cases, ten lifecycle cases, and the
   deterministic materializer. Independent leaf `.10.9.1.2` now validates 28 accepted/seven rejected frames plus
-  raw/lifecycle/handle/policy state and rejects 68 mutations without importing the materializer. Contract
-  composition and native implementations remain `.10.9.1.3-.7`. Perl
+  raw/lifecycle/handle/policy state and rejects 68 mutations without importing the materializer. No-change
+  `.10.9.1.3` requires both programs as tracked canonical inputs, runs materialization before independent
+  validation, rejects omission/order drift, and closes the neutral contract. Native implementations remain
+  `.10.9.2-.7`; Perl is next. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing
@@ -1456,8 +1458,9 @@ content migration exists yet.
   one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, and six runtime admissions because the same
   Lua source must pass on PUC Lua and LuaJIT. ADR `0055` and `.10.9.1.0` freeze modern-only MCP `2026-07-28`
   stdio lifecycle, method/error/handle/policy/canonical/shutdown rules. Machine contract `.10.9.1.1` now encodes
-  those rules once with digest-locked neutral artifacts; independent checker `.10.9.1.2` now rejects 68 mutations,
-  and no-change recurring contract composition `.10.9.1.3` is next.
+  those rules once with digest-locked neutral artifacts; independent checker `.10.9.1.2` rejects 68 mutations;
+  and no-change `.10.9.1.3` runs both owners unconditionally in canonical CI, rejects omission/order drift, and
+  closes the neutral contract. Native Perl server `.10.9.2` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

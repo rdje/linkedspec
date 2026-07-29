@@ -943,6 +943,26 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   returns only permitted fields or rejects elevation. The neutral `privacy_limited` construction oracle therefore
   contains full private refs even though outward identity requests receive no span, excerpt, or digest.
 
+### 4.10 MCP transport materializer and independent validator
+
+- **WHAT:** `tools/materialize_mcp_semantic_transport_contract.py` deterministically reconstructs and digest-checks
+  `linkedspec-mcp-transport-v1`; `tools/check_mcp_semantic_transport_contract.py` independently interprets its
+  schema, frames, raw inputs, lifecycle/handle/policy cases, and 68 mutations without importing the materializer.
+- **WHEN:** changing the modern MCP protocol, schemas, canonical frames, semantic payload projection, native server
+  identity, handle/policy/error/lifecycle rules, canonical CI topology, or any future native MCP implementation.
+- **HOW:** run the materializer first, then the validator:
+
+  ```bash
+  bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
+  bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+  ```
+
+- **OUTPUT:** exact materialization reports 35 frames / 10 raw / 10 lifecycle; independent validation reports the
+  same inventories plus 68 rejected mutations. Canonical CI requires both tracked programs and artifacts, runs
+  them unconditionally in this order, and its tool-topology test rejects omission or reversed order.
+- **BOUNDARY:** neither program is an MCP server. They may not compile/load a spec, create an index, dispatch a
+  native query, or rewrite the JSONL unless the materializer is explicitly invoked with `--write`.
+
 ---
 
 ## 5. Gates & retrieval

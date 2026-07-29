@@ -50,8 +50,8 @@ The distinction matters:
 
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
 Lua, and LuaJIT are admitted. MCP does not own semantics and no MCP server is implemented yet. Its architecture,
-protocol policy, and neutral machine contract are now encoded; independent conformance and native servers remain
-pending.
+protocol policy, neutral machine contract, and independent conformance are complete. The exact neutral contract is
+composition-closed and runs in canonical CI; only native server implementation/admission remains pending.
 
 ## Accepted modern MCP transport (machine contract encoded; servers pending)
 
@@ -106,6 +106,10 @@ property-name and scalar/array bounds, regular-expression constraints, and URI f
 document itself. It independently reconstructs every frame, verifies the exact semantic payload projection,
 classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
 at their intended invariant. This is still conformance code, not an MCP server.
+
+Canonical local CI requires every listed artifact and both programs, then always runs the materializer before the
+independent validator. The recurring tool-governance proof rejects a missing materializer and reversed execution
+order. This detects stale JSONL/digests before independent semantic validation; it does not add an MCP endpoint.
 
 ### Discovery and request metadata
 
@@ -3309,7 +3313,7 @@ The dependency order is:
 | `.10.9.1.0` | select the official protocol and exact transport policy | complete; ADR `0055` selects modern MCP `2026-07-28`, stdio, discovery, explicit handles, and no legacy lifecycle |
 | `.10.9.1.1` | encode the exact MCP schema/payload/corpus/canonical-byte bundle | complete |
 | `.10.9.1.2` | independently validate and mutate the exact MCP contract | complete; 28 accepted plus seven rejected frames, ten raw inputs, ten lifecycle cases, and 68 rejected mutations |
-| `.10.9.1.3` | compose recurring governance and close the exact MCP contract | pending |
+| `.10.9.1.3` | compose recurring governance and close the exact MCP contract | complete; unconditional ordered canonical proof, two topology mutations, no server |
 | `.10.9.2-.10.9.5` | native Perl, Rust, Dart, and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |

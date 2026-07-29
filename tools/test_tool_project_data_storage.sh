@@ -29,6 +29,20 @@ assert_local_real_path() {
  [[ "$(device_id "$path")" == "$repo_device" ]] || fail "generated path crossed the repository filesystem: $path"
 }
 
+mcp_ci_topology_matches() {
+ local ci_path=$1
+ local -a actual_commands
+ local -a expected_commands=(
+  'bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py'
+  'bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py'
+ )
+ mapfile -t actual_commands < <(
+  rg '^bash tools/run_python_project_data[.]sh tools/(materialize|check)_mcp_semantic_transport_contract[.]py$' \
+   "$ci_path"
+ )
+ [[ "${actual_commands[*]}" == "${expected_commands[*]}" ]]
+}
+
 [[ "${LINKEDSPEC_RUN_ACTIVE:-}" == 1 ]] || fail 'focused proof is not inside a managed run'
 [[ -n "${LINKEDSPEC_RUN_DIR:-}" && -d "$LINKEDSPEC_RUN_DIR" ]] || fail 'managed run directory is missing'
 repo_device=$(device_id "$REPO_ROOT")
@@ -86,6 +100,9 @@ rg -q 'dir=managed_temp_root[(][)]' "$REPO_ROOT/tools/check_unicode_rule_label_c
 rg -q 'tools/test_perl_project_data_storage[.]sh' "$REPO_ROOT/tools/run_ci_local.sh" ||
  fail 'the recurring conformance/TAP/oracle storage proof is absent from local CI'
 
+mcp_ci_topology_matches "$REPO_ROOT/tools/run_ci_local.sh" ||
+ fail 'MCP materializer/validator canonical topology drifted'
+
 # Cross-filesystem reads below are deliberate and bounded: they prove hostile output roots are rejected without
 # creating them. No project data is written to the selected external parent.
 external_root=''
@@ -102,6 +119,28 @@ external_probe="$external_root/linkedspec-tool-storage-rejection-$$"
 
 case_root="$LINKEDSPEC_RUN_DIR/tool-project-data"
 python_root="$case_root/python"
+mkdir -p -- "$case_root"
+mcp_omission_mutant="$case_root/mcp-ci-omission.sh"
+mcp_order_mutant="$case_root/mcp-ci-order.sh"
+awk '$0 != "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py"' \
+ "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_omission_mutant"
+if mcp_ci_topology_matches "$mcp_omission_mutant"; then
+ fail 'MCP canonical topology accepted a missing materializer'
+fi
+awk '
+ $0 == "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py" {
+  print "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
+  next
+ }
+ $0 == "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py" {
+  print "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py"
+  next
+ }
+ { print }
+' "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_order_mutant"
+if mcp_ci_topology_matches "$mcp_order_mutant"; then
+ fail 'MCP canonical topology accepted validator-before-materializer order'
+fi
 env \
  LINKEDSPEC_PROJECT_DATA_ROOT="$python_root" \
  LINKEDSPEC_SCRATCH_ROOT="$external_probe/scratch" \

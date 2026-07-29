@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Neutral MCP transport contract composition-closed
+
+`FUTURE-PARITY-BACKLOG.10.9.1.3` closes the exact shared contract before any native server implementation. The
+canonical local gate requires every normative artifact plus both proof programs as tracked inputs, runs the
+repository-routed deterministic materializer before the independent validator, and rejects missing-materializer
+and reversed-order mutations. The unchanged contract remains 35 canonical frames, ten raw, ten lifecycle, four
+handle, four policy cases, and 68 independently rejected mutations across all five future native identities.
+
+No artifact byte, MCP server/SDK/network dependency, semantic model/query/runtime, parser/compiler, primary CLI,
+response digest, rollout, or admission behavior changes. Parent `.10.9.1` is closed. Native Perl server `.10.9.2`
+is the next task-tree leaf after this commit is clean; typed source-location implementation `.14.1` remains pending.
+
+Signoff: exact materialization and validation, shell syntax, two topology mutations, mdBook, Knowledge Map
+740/5,958, task/diff, six doctrines, semantic 6/20/105 at 7/9 + 6/6, storage 1,690/377,638/28, and tool locality
+3/13/21 pass. Canonical CI
+passes Perl semantic admission 18, Rust 1/1 in 83.96 seconds, Dart 1/1, Julia 416/416 in 30.1 seconds, process
+containment, moved-root proof, primary CLI 66x2, RAM at 72%, and Phase 0 1,031/1,031 in 675 seconds. Exact cleanup
+removes only the 13,252-KiB rendered book and one proven-empty managed run.
+
 ## 2026-07-29 — Typed source-location and cursor architecture accepted
 
 Director-approved `FUTURE-PARITY-BACKLOG.14.0.1` and ADR `0056` adopt one minimal immutable algebra for source
@@ -74,15 +93,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Active Slice
-- No successor leaf is active during this closeout. Behavior-free architecture leaf
-  `FUTURE-PARITY-BACKLOG.14.0.1` is fully verified from clean MCP-validator commit `283dc841`; its pending
-  implementation program begins at `.14.1`. No-change MCP contract closeout `.10.9.1.3` activates task-tree-first
-  after this planning commit is clean.
+- No successor leaf is active during this closeout. MCP contract leaf `FUTURE-PARITY-BACKLOG.10.9.1.3` is fully
+  verified from clean architecture commit `64735109`; it closes parent `.10.9.1`. Native Perl MCP implementation
+  `.10.9.2` activates task-tree-first only after this closeout commit is clean. The independently approved typed
+  source-location implementation program still begins at pending `.14.1`.
 
 Repeated-action rollout is closed at 8 complete / 0 pending; its recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh` and its public checker rejects 54 drift mutations.
 
 ## Latest Completed Slice
+- 2026-07-29: **FUTURE-PARITY-BACKLOG.10.9.1.3 — close MCP transport contract**
+  (no-change canonical composition from clean architecture commit `64735109`).
+
+  **Result:** The exact contract/materializer/independent-validator owners now run unconditionally and in stale-
+  byte-first order in canonical CI. The tool-storage oracle rejects both omission and reversed-order drift. Parent
+  `.10.9.1` closes without a server, SDK/network dependency, artifact, semantic, CLI, rollout, or admission change.
+
+  **Proof:** 35 canonical frames, ten raw, ten lifecycle, four handle, four policy cases, and 68 mutations remain
+  exact; focused shell/materializer/validator/topology/book/KM/task/doctrine/semantic/storage proof passes. Canonical
+  passes Perl 18, Rust 1/1 in 83.96s, Dart 1/1, Julia 416/416 in 30.1s, containment, moved-root, primary 66x2, RAM
+  72%, and Phase 0 1,031/1,031 in 675s. Cleanup removes the 13,252-KiB book and one empty run. Cadence advances to
+  67/300 without push; `.10.9.2` is the clean next leaf.
+
 - 2026-07-29: **FUTURE-PARITY-BACKLOG.14.0.1 — adopt typed source-location and cursor architecture**
   (director-approved behavior-free design capture from clean MCP-validator commit `283dc841`).
 

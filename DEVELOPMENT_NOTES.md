@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.1.3` — canonical order is part of the MCP contract proof): The
+  materializer and validator are deliberately different proof owners. Materialization reconstructs generated
+  frames and digest identity from normative inputs; independent validation interprets the already reconstructed
+  contract with separate schema, provenance, lifecycle, and mutation logic. Canonical CI therefore must run them
+  in that order. Validator-first could pass against stale JSONL bytes, while validator-only could make the
+  reconstruction owner effectively optional.
+
+  This is enforced at two levels. `tools/run_ci_local.sh` requires every contract artifact and both programs to be
+  tracked, then invokes the repository-routed materializer immediately before the validator. The tool-storage test
+  treats those exact commands as a two-node topology and proves mutation sensitivity by deleting the materializer
+  and reversing the order. The topology check is intentionally source-shaped: it does not duplicate MCP semantics,
+  and it fails closed if a future refactor changes the canonical invocation without updating the proof owner.
+
+  The first ordinary canonical run exposed an environment boundary rather than a product defect: the outer agent
+  sandbox denied the gate's nested macOS `sandbox-exec` containment test with status 71. Running the same fixed
+  staged candidate with the required permission passed the kernel negative proof and the entire gate. This remains
+  useful evidence that `sandbox-exec` is not application isolation or MCP behavior; it is a hostile-path/process
+  test used only to prove that repository-routed project data cannot escape to an off-volume destination.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.14.0.1` — power through a smaller semantic core): The current source-boundary
   API already has more than one hundred helper contracts. Adding pairwise anchor helpers would increase naming
   burden faster than expressiveness. ADR `0056` instead chooses source identity + immutable Unicode-scalar position

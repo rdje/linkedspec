@@ -20,6 +20,18 @@ bash tools/run_ci_local.sh
 
 This is the canonical regression gate for local development.
 
+The gate unconditionally verifies the neutral MCP transport before any native server exists. It requires every
+contract artifact and runs these exact steps in order:
+
+```bash
+bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+```
+
+The first step catches stale generated frames/digests; the second independently checks schemas, provenance, raw
+and lifecycle/handle/policy outcomes, and 68 mutations. The recurring tool-governance test rejects omission and
+validator-before-materializer order. Neither step starts a server or changes semantic/CLI behavior.
+
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text

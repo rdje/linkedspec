@@ -667,7 +667,9 @@ Three backbone items tracked major structural modernization — all done:
   read-only tools, and no legacy initialization/session/ping. MCP owns no semantic or filesystem behavior.
   Machine leaf `.10.9.1.1` pins one shared schema/payload/corpus/canonical-frame bundle and deterministic
   materializer. Independent leaf `.10.9.1.2` now proves 28 accepted/seven rejected frames, raw and stateful
-  outcomes, and 68 mutations without importing the materializer. Composition and servers remain `.10.9.1.3-.7`;
+  outcomes, and 68 mutations without importing the materializer. No-change `.10.9.1.3` now requires both programs
+  in canonical CI, runs materialization before independent validation, rejects omission/order drift, and closes
+  the neutral contract. Native servers remain `.10.9.2-.7`;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

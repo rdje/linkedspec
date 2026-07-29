@@ -12986,7 +12986,7 @@ before implementation.
     Commit: `FUTURE-PARITY-BACKLOG.10.9.0 - ratify native MCP topology`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.1`
-    Status: `active` (2026-07-29; independent validator `.10.9.1.2` complete; no-change closeout `.10.9.1.3` next)
+    Status: `done` (2026-07-29; exact neutral contract composition-closed and canonical; Perl `.10.9.2` next)
     Goal: Freeze the executable MCP wire, tool, handle, policy, lifecycle, and conformance contract.
     Depends on: `.10.9.0`
     Children: `.10.9.1.0`, `.10.9.1.1`, `.10.9.1.2`, `.10.9.1.3`
@@ -13160,12 +13160,50 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.1.2 - independently validate MCP contract`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.1.3`
-      Status: `pending`
+      Status: `done` (2026-07-29)
       Goal: Recompose the committed neutral MCP contract owners and close `.10.9.1` for Perl implementation.
       Depends on: `.10.9.1.2`
       Acceptance: Run the exact artifacts/checker unchanged, integrate recurring canonical governance, align all
         public/continuity projections, prove no backend implementation or semantic/CLI behavior, close the parent,
         and hand off cleanly to `.10.9.2`.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove architecture commit `64735109`, zero-byte brief, clean tree, absent generated
+        residue, and `.10.9.1.3` ownership before touching MCP governance or public/continuity projections.
+      - [x] **UNCHANGED OWNER RECOMPOSITION** — Execute the committed ADR/policy, manifest/schema/payload/corpus,
+        deterministic materializer, independent validator, raw/lifecycle/handle/policy cases, and all 68 mutations
+        without replacing, weakening, or duplicating an owner.
+      - [x] **RECURRING CANONICAL GOVERNANCE** — Prove the materializer and validator are tracked, repository-routed,
+        fail-fast canonical inputs in their required order and cannot be skipped while a stale contract passes.
+      - [x] **NO BEHAVIOR / NO PREMATURE SERVER** — Change no transport artifact bytes, MCP server/SDK dependency,
+        semantic model/query/runtime, parser/compiler, primary CLI, response digest, rollout, or backend admission.
+      - [x] **PARENT / LOCKSTEP CLOSEOUT** — Close `.10.9.1`, activate only Perl implementation `.10.9.2` after the
+        clean commit, synchronize task/index/roadmaps/architecture/KM/book/continuity, pass focused and canonical
+        gates plus exact cleanup, commit/clear brief/verify clean, and do not push.
+
+      Verification: **PASS 2026-07-29.** Clean architecture commit `64735109`, a zero-byte message brief, absent
+        generated residue, and task-tree-first ownership preceded every governance or projection change. The exact
+        committed manifest, closed schema, four semantic payloads, 35 canonical frames, ten raw-input cases, ten
+        lifecycle cases, four handle cases, four policy cases, deterministic materializer, independent validator,
+        and 68 mutations remain byte-identical and recompose successfully. Canonical CI now requires both programs
+        and every normative input as tracked files, runs repository-routed materialization before independent
+        validation, and the tool-storage oracle rejects both a missing-materializer mutant and validator-first
+        order. The first canonical attempt reached only the nested macOS process-containment proof, where the outer
+        agent sandbox denied `sandbox-exec` with status 71; the permission-correct rerun passed that kernel-enforced
+        negative proof and the complete gate. Focused proof passes shell syntax, exact materialization/validation,
+        both topology mutations, mdBook, Knowledge Map 740 facts / 5,958 question keys, task/diff, all six doctrines,
+        semantic governance 6/20/105 at rollout 7/9 and admission 6/6, project-data classification 1,690 files /
+        377,638 lines / 28 mutations, and tool locality at three Python temporary owners / 13 shell allocators / 21
+        Python tool entrypoints.
+        Canonical CI passes Perl semantic admission 18, Rust 1/1 in 83.96 seconds, Dart 1/1, Julia 416/416 in 30.1
+        seconds, process containment, moved-root proof across all five primary runtime anchors, primary CLI 66x2,
+        RAM at 72%, and Phase 0 1,031/1,031 in 675 seconds. No normative transport artifact byte, MCP server,
+        SDK/network dependency, native semantic API, parser/compiler/runtime, primary CLI, response digest, semantic
+        rollout, or admission behavior changes. Exact cleanup removes only the verified ignored 13,252-KiB rendered
+        book and one proven-empty managed-run directory. Parent `.10.9.1` is closed; native Perl implementation
+        `.10.9.2` follows only after the clean commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.1.3 - close MCP transport contract`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.2`
     Status: `pending`
@@ -15576,8 +15614,10 @@ from clean `20741bbd`: one separate self-contained validator classifies 28 accep
 executes ten lifecycle cases, and rejects 68 named mutations across 14 categories without importing the
 materializer or adding a server. Director-approved behavior-free `.14.0.1` is complete from clean `283dc841`:
 ADR `0056` freezes one typed source-location/cursor algebra and splits exact neutral contract through six-runtime/
-public no-drift under `.14.1-.8` without changing syntax or behavior. `.14.1` remains pending; no-change MCP
-recurring-governance closeout `.10.9.1.3` is the immediate clean resume pointer.
+public no-drift under `.14.1-.8` without changing syntax or behavior. No-change MCP closeout `.10.9.1.3` is
+complete from clean `64735109`: canonical CI requires tracked artifacts, runs materialization before independent
+validation, and rejects omission/order drift. Parent `.10.9.1` is closed without a server or semantic/CLI behavior.
+Native Perl MCP implementation `.10.9.2` is the immediate clean resume pointer; `.14.1` remains pending.
 
 ### Superseded frontier snapshots
 
@@ -16899,6 +16939,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.3` | Clean base `64735109`; unchanged manifest/schema/four payloads/35 frames/10 raw/10 lifecycle/4 handle/4 policy cases; deterministic materializer then independent validator over 68 mutations; canonical tracked-input and exact-order wiring; missing-materializer and reversed-order mutants; mdBook; KM 740/5,958; task/diff; six doctrines; semantic 6/20/105 at 7/9 + 6/6; storage 1,690/377,638/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 83.96s, Dart 1/1, Julia 416/416 30.1s, containment/moved-root, CLI 66x2, RAM 72%, Phase 0 1,031/675s; exact 13,252-KiB/one-empty-run cleanup. | PASS. Canonical CI cannot accept stale or skipped MCP contract proof; no artifact, server, semantic, CLI, rollout, or admission behavior changes; parent `.10.9.1` closes and Perl `.10.9.2` follows the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.14.0.1` | Clean base `283dc841`; ADR/Phase 3/Phase 4/current-owner reconciliation; ADR `0056`; `.14.1-.8` dependency split; mdBook; KM 740/5,958; task/diff; six doctrines; cursor 36/18/8 over 75 files at 8/0 with 60 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,690/377,544/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 79.52s, Dart 1/1, Julia 416/416 28.5s, containment/moved-root, CLI 66x2, RAM 68%, Phase 0 1,031/642s; exact cleanup. | PASS. One typed source-location/cursor architecture is durable without syntax or behavior; `.14.1` stays pending and MCP `.10.9.1.3` resumes. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.2` | Clean base `20741bbd`; independent schema meta-validation and artifact reconstruction; 28 accepted/7 rejected frames; 10 raw/10 lifecycle/4 handle/4 policy cases; 68 mutations across 14 categories; exact validator/materializer separation and digest pins; mdBook; KM 739/5,943; task/doctrines/diff; semantic 6/20/105 at 7/9 + 6/6; storage 1,689/377,476/28 and tools 3/13/21; canonical Perl 18, Rust 1/1 82.63s, Dart 1/1, Julia 416/416 29.7s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/642s; exact cleanup. | PASS. Every accepted byte and rejected omission is independently governed without a server; `.10.9.1.3` follows the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.1.1` | Clean base `b0492488`; exact manifest/schema/four payloads/35 frames/10 raw/10 lifecycle/4 handle/4 policy cases; deterministic duplicate-key/digest/topology/framing/materialization proof; mdBook; KM 739/5,943; task/doctrines/diff; semantic 6/20/105 at 7/9 + 6/6; storage 1,688/376,598/28 and tools 3/13/20; canonical Perl 18, Rust 1/1 80.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, Phase 0 1,031/648s; exact cleanup. | PASS. Exact machine bytes are frozen without a server or independent-validator overclaim; `.10.9.1.2` follows the clean commit. |
@@ -17188,6 +17229,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.1.3` | `FUTURE-PARITY-BACKLOG.10.9.1.3 - close MCP transport contract` | Canonical tracked-input and ordered materializer/independent-validator governance, omission/order mutations, complete no-change signoff, parent closure, and clean Perl handoff. |
 | `FUTURE-PARITY-BACKLOG.14.0.1` | `FUTURE-PARITY-BACKLOG.14.0.1 - adopt typed source location algebra` | ADR `0056`, exact ownership/safety invariants, `.14.1-.8` implementation split, complete behavior-free signoff, and clean MCP resume pointer. |
 | `FUTURE-PARITY-BACKLOG.10.9.1.2` | `FUTURE-PARITY-BACKLOG.10.9.1.2 - independently validate MCP contract` | Separate exact schema/artifact/lifecycle oracle, 68 omission-sensitive mutations, complete signoff, and clean handoff to no-change `.1.3`. |
 | `FUTURE-PARITY-BACKLOG.10.9.1.1` | `FUTURE-PARITY-BACKLOG.10.9.1.1 - encode exact MCP machine contract` | One digest-pinned neutral schema/payload/corpus/canonical-stream contract and deterministic materializer; independent validator `.1.2` follows. |

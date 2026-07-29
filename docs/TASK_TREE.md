@@ -27,7 +27,7 @@ evidence for one top-level task.
 | `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `BACKTRACK-SURFACE-RUST-ALIGNMENT` | `done` / `closed` | `.spec language evolution / backend parity no-drift` | `.2` done 2026-07-09 - Perl, Rust, and Dart now share explicit `save_cursor()` / `restore_cursor()` stack controls, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary capture. EBNF semantic annotations use the boundary helper instead of consume-then-rewind. | [docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md](docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md) |
 | `DART-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Dart first)` | Global proof is 181 tests, 105 interpreter corpus, exact 61x2 CLI, full native trace/API parity, deterministic v1 emission, ten-family direct execution/four rejections, and exact accepted 8/105 host proof. Dart passes all current capabilities. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
-| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | Director-approved behavior-free `.14.0.1` is complete from clean MCP-validator commit `283dc841`: ADR `0056` unifies typed positions/spans/provenance, bounded effect-safe cursor transactions, recursive boundaries, lossless segmentation composition, span-native parser dispatch, static safety, and six-runtime/public proof under pending `.14.1-.8`. No syntax or behavior moves. MCP `.10.9.1.2` is committed; no-change contract closeout `.10.9.1.3` is the immediate clean resume pointer. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
+| `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | MCP `.10.9.1.3` has composition-closed the exact neutral contract from clean architecture commit `64735109`: canonical CI requires all artifacts, runs materialization before independent 68-mutation validation, and rejects omission/order drift without a server or semantic/CLI behavior. Parent `.10.9.1` is closed; native Perl MCP implementation `.10.9.2` is the clean next leaf. Director-approved ADR `0056` remains pending implementation under `.14.1-.8`. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `INTER-MATCH-GAP-CAPTURE` | `proposed` / direction ratified; awaiting explicit activation | `.spec language evolution / lossless segmentation and source preservation` | `.0` is done: ADR `0045` fixes automatic action-edge gaps, target ownership, accepted future `@capture_gaps`, spacing-insensitive `name=/regex/` → `Rule[name]` slots, and the existing Perl/Lua/Rust/Dart/Julia marker divergence without behavior change. Cursor rollout prerequisite is satisfied at 8 complete / 0 pending; `.1-.7` still require explicit activation. | [docs/tasks/INTER-MATCH-GAP-CAPTURE.md](docs/tasks/INTER-MATCH-GAP-CAPTURE.md) |
 | `LUA-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Lua third)` | `.8.4` admits Lua as the fifth exact backend: 16 capabilities, 80/0/0, 177/177 on PUC Lua and LuaJIT, primary 61x2, corpus 105/105, and shared matrix 5x2x61. No Lua frontier remains. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `PROJECT-DATA-SSD-ROOTING` | `done` / `closed` | `Repository architecture / project-data storage locality` | Post-closeout `.6` preserves pre-routing host-temp authority so relocated process containment cannot confuse SSD-routed scratch with the external macOS temp root. Focused mutations and complete canonical proof pass; the tree is closed at 41/300 without push. | [docs/tasks/PROJECT-DATA-SSD-ROOTING.md](docs/tasks/PROJECT-DATA-SSD-ROOTING.md) |
@@ -531,6 +531,12 @@ dependency-free checker that never imports or executes the materializer. It inte
 2020-12 keyword profile, proves 28 accepted plus seven deliberately rejected frames, ten raw-input outcomes, ten
 lifecycle transitions, native/restricted payload identity, handle/policy state, and rejects 68 named mutations
 across 14 categories. No server or semantic behavior changes; composition/parent closeout `.10.9.1.3` follows.
+
+Index note 2026-07-29: no-change leaf `FUTURE-PARITY-BACKLOG.10.9.1.3` requires every neutral MCP artifact and
+both proof programs as tracked canonical inputs, runs deterministic materialization before independent validation,
+and adds omission/order mutations to the repository-local tool-storage oracle. The unchanged 35-frame, 10-raw,
+10-lifecycle, 4-handle, 4-policy, 68-mutation contract passes canonical CI. Parent `.10.9.1` is closed without a
+server or semantic/CLI behavior; native Perl MCP implementation `.10.9.2` is next after the clean commit.
 
 Index note 2026-07-09: `FUTURE-PARITY-BACKLOG.0` created the active future-backlog tree for
 the seven deferred/future lanes surfaced after `SPEC-LANG-REFERENCE.8`. ADR `0021` adopts
@@ -2044,8 +2050,8 @@ boundary/marks only; they add no search tree and cannot roll back action, AST/us
 host effects. Recursive boundaries are read-only, progress is mandatory, and span-native parser dispatch grants no
 implicit authority. Existing helpers project the algebra; ADR `0045`/`INTER-MATCH-GAP-CAPTURE` retain exclusive
 gap syntax/lifecycle ownership. `.14.1-.8` split neutral contract through six-runtime and public no-drift; this
-capture changes no current syntax or behavior. `.14.0.1` is complete; `.14.1` stays pending while MCP no-change
-`.10.9.1.3` becomes the immediate clean resume pointer.
+capture changes no current syntax or behavior. `.14.0.1` is complete and `.14.1` stays pending. MCP no-change
+`.10.9.1.3` has closed the neutral contract; native Perl server `.10.9.2` is next after its clean commit.
 
 Index note 2026-07-12: `FUTURE-PARITY-BACKLOG.15.0-.15.2` own the director's equivalence between any standalone/
 dangling rule-level `{ ... }` block and `I { ... }`. There is currently no dangling-brace rule-body form. Edge code

@@ -1,7 +1,7 @@
 # ADR 0054: One MCP contract is implemented by native per-backend servers
 
 - Date: 2026-07-29
-- Status: accepted; protocol fixed by ADR 0055; implementation pending under `FUTURE-PARITY-BACKLOG.10.9.1.1-.7`
+- Status: accepted; exact neutral contract closed under `.10.9.1`; native implementations pending under `.10.9.2-.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context
