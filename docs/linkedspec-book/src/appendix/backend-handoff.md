@@ -242,8 +242,9 @@ generated binding, private schema runtime, secure registry, and exact decoded di
 Strict stdio/lifecycle `.10.9.2.2` now implements bounded duplicate-safe input, canonical LF output, cancellation
 through flush, sanitized logging, and EOF/I/O cleanup. Exact Perl admission `.10.9.2.3` now adds one twelve-role
 consumer and a separate status/proof ledger at 1/5 implementations + 1/6 runtimes, shared rollout pending, and 28
-rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4`
-then precedes remaining native/runtime admission `.10.9.3-.7`.
+rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4` is complete from
+clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
+native/runtime admission `.10.9.3-.7` follows after the clean commit.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

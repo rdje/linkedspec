@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.4` — close a backend from committed authorities, not a replacement
+  test): The Perl MCP parent has independent owners for normative transport, derived binding, decoded/wire server,
+  and implementation/runtime admission. Its closeout therefore adds no umbrella executable or alternative oracle.
+  It reruns the exact committed command chain and proves that the status ledger, transport digest, semantic model,
+  native identity, and authority fences still compose. This keeps parent completion an AND over durable owners
+  rather than a new test that could silently weaken one of them.
+
+  The closeout also preserves the distinction between implementation completion and shared rollout: Perl can close
+  at 1/5 implementations and 1/6 runtimes while `thin_mcp_transport` correctly remains pending. Rust `.10.9.3`
+  receives the same contract and admission shape after a clean commit; it does not inherit Perl objects, runtime
+  code, or status authority.
+
+  Canonical recomposition passed without a residual: Rust admission 1/1 in 81.52 seconds, Dart 1/1, Julia
+  416/416 in 29.1 seconds, both primary CLI matrices 66/66, RAM 63%, and Phase 0 1,031/1,031 in 657 seconds.
+  Therefore the correct state transition is to close `.10.9.2.4` and parent `.10.9.2` while leaving the shared
+  implementation/runtime ledger at 1/5 + 1/6 and `thin_mcp_transport` pending.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.2.3` — distinguish implementation truth from protocol truth): The
   neutral transport contract remains immutable and says what every server must do. A separate
   `mcp_implementation_admission.json` says which native sources and runtime legs have proved it. Keeping status out

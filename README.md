@@ -1049,7 +1049,9 @@ content migration exists yet.
   public-server consumer plus a separate implementation/admission ledger and checker: Perl is complete at 1/5
   native implementations and 1/6 runtime admissions, all other rows and shared rollout remain pending, and 28
   mutations lock status/topology/authority/canonical order without changing the transport digest. Focused proof is
-  green and canonical signoff is complete. There is no
+  green and canonical signoff is complete. No-change `.10.9.2.4` completed from clean `28f84826`; focused and
+  canonical committed-owner recomposition pass, Perl parent `.10.9.2` is closed, and Rust `.10.9.3` follows after
+  the clean closeout commit. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1477,7 +1479,8 @@ content migration exists yet.
   canonical output, pre-emission cancellation, sanitized logging, and cleanup. Exact admission `.10.9.2.3` now
   composes twelve existing roles and records Perl complete at 1/5 implementations + 1/6 runtimes while shared
   rollout stays pending; its 28-mutation checker, focused proof, and canonical signoff are green. No-change
-  committed-owner closeout `.10.9.2.4` follows only after the clean admission commit.
+  committed-owner closeout `.10.9.2.4` completed from clean `28f84826`: unchanged-owner recomposition and
+  canonical signoff are green, parent `.10.9.2` is closed, and Rust `.10.9.3` follows after the clean commit.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

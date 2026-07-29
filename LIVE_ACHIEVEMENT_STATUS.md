@@ -1,5 +1,19 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Perl native MCP implementation and parent closed
+
+No-change `FUTURE-PARITY-BACKLOG.10.9.2.4` completed task-tree-first from clean exact-admission commit `28f84826`.
+It reruns the committed neutral materializer/validator, generated binding, binding/decoded/stdio suites, admission
+ledger checker, and twelve-role consumer in their existing canonical order; it adds no replacement implementation,
+fixture, response oracle, API, or status authority.
+
+Focused recomposition passes MCP 35/10/10/68, byte-fresh 83,072-byte binding, Files=3 Tests=22, ledger 1/5
+implementations + 1/6 runtimes with rollout pending and 28 mutations, Files=1 Tests=13 admission, capability
+80/0/0, and semantic 6/20/105 at 7/9 + 6/6. Canonical CI passes Perl semantic admission 18, Rust 1/1 in 81.52
+seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, containment/moved-root proof, CLI 66/66 twice, RAM 63%, and
+Phase 0 1,031/1,031 in 657 seconds. Perl parent `.10.9.2` is closed; Rust `.10.9.3` follows only after the clean
+closeout commit.
+
 ## 2026-07-29 — Perl native MCP exact admission complete
 
 `FUTURE-PARITY-BACKLOG.10.9.2.3` adds a separate implementation/admission ledger while leaving the normative MCP

@@ -677,8 +677,9 @@ Three backbone items tracked major structural modernization — all done:
   bounded duplicate-safe frames, canonical output, cancellation through flush, sanitized logging, and exact
   EOF/I/O cleanup; canonical signoff is complete. Exact Perl admission `.10.9.2.3` now composes one twelve-role
   consumer and a separate implementation/admission ledger at 1/5 implementations + 1/6 runtimes with rollout
-  pending and 28 rejected mutations; focused and canonical proof are green. No-change Perl
-  closeout and later native servers remain `.10.9.2.4-.7`;
+  pending and 28 rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4`
+  is complete from clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`
+  before later native servers `.10.9.3-.7`;
   any future aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl admitted, remaining implementations and runtimes pending
+status: current; Perl implementation parent closed, remaining implementations/runtimes pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -45,3 +45,8 @@ identity, exact role declaration/invocation, tracked canonical inputs, and canon
 mutations. Static fences prohibit production MCP owners from parser construction, descriptors, substitution
 handlers, parser-source dumps, trace, shell/process execution, and arbitrary reads; the sole documented production
 `sysopen` is fail-closed `/dev/urandom` for opaque handles.
+
+No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` recomposes these committed transport, binding, server, ledger,
+and admission owners unchanged. It deliberately adds no umbrella oracle. Canonical signoff closes parent Perl
+`.10.9.2` while the shared rollout row remains pending; Rust `.10.9.3` receives the same contract after the clean
+closeout commit.

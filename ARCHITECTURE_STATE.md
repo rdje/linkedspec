@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-29`
+- `2026-07-29` Perl native MCP committed-owner closeout: no-change `FUTURE-PARITY-BACKLOG.10.9.2.4` is complete
+  from clean exact-admission commit `28f84826`. It recomposes the unchanged neutral contract, derived binding,
+  binding/decoded/stdio server proofs, admission ledger, and twelve-role consumer rather than adding an umbrella
+  implementation or oracle. Focused MCP 35/10/10/68, binding 83,072, server 22, ledger 1/5 + 1/6 pending rollout/
+  28 mutations, admission 13, capability 80/0/0, and semantic 6/20/105 at 7/9 + 6/6 pass. Canonical signoff passes
+  Rust 1/1 in 81.52 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, CLI 66x2, RAM 63%, and Phase 0
+  1,031/1,031 in 657 seconds. Perl parent `.10.9.2` is closed; Rust `.10.9.3` follows after the clean commit. No
+  production or status behavior moves beyond closing the already-proved Perl rows.
 - `2026-07-29` Perl native MCP exact admission: `FUTURE-PARITY-BACKLOG.10.9.2.3` adds a separate
   `linkedspec-mcp-implementation-admission-v1` status/proof ledger without changing the normative transport digest.
   Its exact topology is five native implementations, six runtime admissions, Perl complete at 1/5 + 1/6, all

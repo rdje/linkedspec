@@ -45,6 +45,10 @@ hiding stale normative bytes and keeps a premature status promotion from masquer
 suites use only caller-owned in-memory handles; they read no source path and change no native semantic/primary-CLI
 contract.
 
+Perl parent closeout `.10.9.2.4` deliberately reruns this committed chain unchanged. It adds no umbrella test or
+replacement oracle: parent completion is the conjunction of the neutral, derived-binding, server, ledger, and
+admission owners already shown above. Shared rollout remains pending while the other runtime rows qualify.
+
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 
 ```text

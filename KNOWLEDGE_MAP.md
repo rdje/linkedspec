@@ -9492,7 +9492,7 @@ _LinkedSpec MCP v1 is modern MCP 2026-07-28 over stdio_
 _MCP implementation and runtime admission ledger_
 
 - **answers:** Where are MCP implementation and runtime admission statuses recorded? | How many LinkedSpec MCP server implementations exist? | Why are there five MCP implementations but six runtime admissions? | Is Perl admitted for MCP? | Is thin MCP transport rollout complete? | Does backend admission change the normative MCP transport digest? | What roles does an MCP admission consumer prove? | How is premature MCP admission detected? | What authority is forbidden to an MCP server implementation?
-- **date:** 2026-07-29 · **status:** current; Perl admitted, remaining implementations and runtimes pending
+- **date:** 2026-07-29 · **status:** current; Perl implementation parent closed, remaining implementations/runtimes pending
 - **source:** [`docs/knowledge/mcp-implementation-admission-ledger.md`](docs/knowledge/mcp-implementation-admission-ledger.md)
 
 ### mcp-native-server-topology

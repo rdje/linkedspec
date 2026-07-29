@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.4 — close the Perl MCP implementation
+
+Activated the no-change Perl MCP closeout from clean exact-admission commit `28f84826` and recomposed every
+committed owner in canonical order: neutral materializer, independent validator, generated binding, binding/
+decoded/stdio proof, implementation-admission ledger checker, and twelve-role admission consumer. The focused
+result remains exact at MCP 35/10/10/68, byte-fresh 83,072-byte binding, Files=3 Tests=22, ledger 1/5
+implementations + 1/6 runtimes with rollout pending and 28 mutations, and Files=1 Tests=13 admission.
+
+Capability remains 80/0/0 and semantic governance remains 6/20/105 at rollout 7/9 + admission 6/6. Only task-tree
+and lockstep documentation bytes change: no replacement implementation/test/oracle, production API, protocol
+schema/corpus/digest, parser/compiler/runtime/CLI behavior, non-Perl admission, aggregator/legacy surface, or
+public rollout is added. Canonical CI passes Perl semantic admission 18, Rust 1/1 in 81.52 seconds, Dart 1/1,
+Julia 416/416 in 29.1 seconds, containment/moved-root proof, both primary CLI matrices 66/66, RAM 63%, and Phase 0
+1,031/1,031 in 657 seconds. Final locality proof reports 1,703 governed files / 381,414 lines / 28 classifier
+cases, 14 path cases / five primary anchors, and repository-local tool outputs. Exact cleanup removes only the
+verified ignored 13,328-KiB rendered book and one proven-empty managed run. Parent `.10.9.2` is closed; Rust
+`.10.9.3` follows only after this clean commit.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.2.3 — admit the Perl MCP implementation
 
 Added `mcp_implementation_admission.json`, a status and proof ledger deliberately separate from the normative

@@ -2,8 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; exact neutral contract closed under `.10.9.1`; Perl implementation `.10.9.2.1-.2` complete;
-  exact Perl admission `.10.9.2.3` complete at 1/5 implementations + 1/6 runtimes with canonical signoff;
-  remaining native/runtime admissions pending under `.10.9.3-.7`
+  exact Perl admission `.10.9.2.3` and no-change closeout `.10.9.2.4` complete at 1/5 implementations + 1/6
+  runtimes with canonical signoff; parent `.10.9.2` closed; remaining admissions `.10.9.3-.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context
