@@ -1056,7 +1056,10 @@ content migration exists yet.
   schema runtime, and public in-process `linkedspec-runtime::McpServer` around caller-owned
   `Arc<SemanticIndex>`. Its 256-bit OS-random handles, digest-only authorization, monotonic expiry, bounded
   registry, lowering-only policy, panic sanitation, and exact decoded dispatch pass focused and canonical proof
-  without moving the 1/5 + 1/6 admission ledger. Strict stdio `.10.9.3.2` and admission `.10.9.3.3` remain next.
+  without moving the 1/5 + 1/6 admission ledger. Rust strict stdio `.10.9.3.2` now adds bounded duplicate-safe
+  JSON lines, canonical LF output, pre-emission cancellation, sanitized optional logging, and exact EOF/read/
+  write/flush cleanup over borrowed streams. Exact Rust admission `.10.9.3.3` remains next, so the ledger does not
+  move yet.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1488,8 +1491,10 @@ content migration exists yet.
   committed-owner closeout `.10.9.2.4` completed from clean `28f84826`: unchanged-owner recomposition and
   canonical signoff are green, and parent `.10.9.2` is closed. Rust audit/plan `.10.9.3.0` is complete from clean
   `4473a812` with focused and canonical signoff and no behavior. Generated binding plus secure decoded dispatch
-  `.10.9.3.1` completes the public in-process Rust server with focused and canonical signoff while leaving strict
-  stdio, admission, and shared rollout pending.
+  `.10.9.3.1` completes the generated binding and public decoded Rust server. Strict borrowed-stream stdio
+  `.10.9.3.2` now completes duplicate-safe lexical preflight, canonical emission, cancellation-through-flush,
+  silent EOF, fixed diagnostics, and release on read/write/flush failure with private/public adversarial proof.
+  Exact Rust admission and shared rollout remain pending.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 337
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

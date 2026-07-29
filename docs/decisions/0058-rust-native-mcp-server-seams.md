@@ -1,8 +1,8 @@
 # ADR 0058: Rust MCP uses a generated contract binding and an in-process runtime server
 
 - Date: 2026-07-29
-- Status: accepted; generated binding/decoded server `.10.9.3.1` implemented; strict stdio, admission, and closeout
-  pending under `.10.9.3.2-.4`
+- Status: accepted; generated binding/decoded server `.10.9.3.1` and strict stdio/lifecycle `.10.9.3.2`
+  implemented; admission and closeout pending under `.10.9.3.3-.4`
 - Tags: architecture, mcp, rust, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context

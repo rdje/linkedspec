@@ -1,5 +1,41 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.2` — strict transport must preserve lexical evidence and emission
+  state): `serde_json::Value` is the correct frozen value/schema carrier but cannot report duplicate source keys or
+  distinguish integer tokens from `1.0`/`1e0` after decoding. The private wire scanner therefore validates UTF-8,
+  exact JSON grammar, decoded key identity, strings/surrogates, number spelling, root kind, request-id token kind,
+  byte/range limits, and nesting before the normal frozen runtime receives a value. This keeps one decoded method
+  implementation while making the hostile-byte boundary independently strict.
+
+  Framing is a bounded state machine, not `read_line`: fixed 65,536-byte reads accumulate only the contract payload
+  plus a possible CR; once overlong, bytes are discarded through LF before exactly one parse error and normal
+  continuation. The same path handles LF, CRLF, and a complete final EOF frame. Limits come from the digest-checked
+  generated contract rather than a second Rust protocol table.
+
+  A synchronous handler result is not yet a completed wire request. `prepare_response` can retain an active entry;
+  the wire checks cancellation immediately before encoding, writes canonical bytes plus LF, flushes, and only then
+  retires the entry. Thus a cancellation between preparation and emission suppresses output, while a following
+  cancellation cannot retract a flushed frame. Decoded dispatch still retires immediately because no transport
+  emission follows it.
+
+  Borrowed `Read`/`Write` parameters keep process and filesystem authority with the host. Safe Rust requires
+  distinct exclusive borrows for protocol output and the optional log. EOF and every I/O failure clear active
+  requests and registry Arcs; failures expose only one fixed error and optional fixed log record, never the host
+  error text. Public injected readers/writers prove first-read, later-read, write, and flush paths separately.
+
+  Focused proof passes all ten raw classifications in both private and public layers, the ten lifecycle inventory,
+  Rust MCP unit 15, decoded public 3, strict-stdio public 4, unchanged Perl Files=3 Tests=22, production
+  `cargo check`, task-local strict clippy, and repository-local tool storage. Blanket strict clippy reaches only
+  pre-existing runtime/parser/test lint debt and reports no new MCP-owner diagnostic; this leaf does not widen
+  scope to those unrelated owners.
+
+  Final signoff preserves MCP 35/10/10/68 and the 83,072/82,886-byte generated bindings; the ledger deliberately
+  stays 1/5 implementations + 1/6 runtimes with rollout pending and 28 rejected mutations. Knowledge Map
+  744/6,006, mdBook, six doctrines, memory, storage 1,712/385,070/28, path 14/5, tool locality, formatting, and
+  whitespace pass. Canonical CI independently rebuilds and passes Rust MCP 15 + 3 + 4, Rust semantic admission
+  1/1 in 79.85 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root, CLI 66x2, RAM 65%, and
+  Phase 0 1,031/1,031 in 643 seconds. Cleanup is limited to the verified 13,412-KiB book and one empty managed run.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.3.1` — generated contract data should be formatter-stable, and decoded
   transport should remain a native library boundary): One shared Python builder now verifies the seven neutral
   artifacts and canonical frame order before either backend renderer runs. This preserves the 83,072-byte Perl

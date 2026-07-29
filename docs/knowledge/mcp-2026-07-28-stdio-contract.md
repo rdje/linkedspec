@@ -22,13 +22,13 @@ answers:
   - how do I regenerate or verify the MCP canonical frames
   - are the native LinkedSpec MCP servers implemented yet
 date: 2026-07-29
-status: exact neutral contract canonical; Perl closed/admitted, Rust decoded server implemented but stdio/admission pending
+status: exact neutral contract canonical; Perl closed/admitted, Rust decoded/stdio implemented but admission pending
 tags: [mcp, json-rpc, stdio, semantic-api, security, transport, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown."
 evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes the policy once as a digest-pinned neutral manifest, closed JSON Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte inputs, ten lifecycle cases, and one repository-routed deterministic materializer; no native MCP server exists yet."
 evidence_update_2026_07_29_independent_validation: "FUTURE-PARITY-BACKLOG.10.9.1.2 adds a no-import/no-execution validator over the exact JSON Schema 2020-12 profile, 28 accepted and seven rejected frames, ten raw inputs, ten lifecycle cases, native/restricted payload identity, handle/policy state, and 68 rejected mutations; no server behavior exists yet."
 evidence_update_2026_07_29_contract_closeout: "FUTURE-PARITY-BACKLOG.10.9.1.3 makes the exact materializer and independent validator unconditional canonical-CI steps in that order, locks omission/order mutations, closes the neutral contract parent, and adds no server or semantic behavior."
-evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 is implemented, admitted, and parent-closed at 1/5 implementations + 1/6 runtimes with shared rollout pending. Rust .10.9.3.1 now implements the generated binding, frozen schema runtime, secure registry, and decoded public server; its strict stdio and admission rows remain pending."
+evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 is implemented, admitted, and parent-closed at 1/5 implementations + 1/6 runtimes with shared rollout pending. Rust .10.9.3.1-.2 now implement the generated binding, frozen schema runtime, secure registry, decoded public server, and strict borrowed-stream stdio; exact admission remains pending."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -63,7 +63,7 @@ indistinguishable handle states, and four lowering-policy cases. Verify its exac
 when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
 28-positive/7-negative schema and 68-mutation proof. Perl implements and admits that contract. Rust now implements
-decoded in-process dispatch but not strict stdio or admission; Dart/Julia/Lua implementations remain later work.
+decoded in-process dispatch and strict stdio but not exact admission; Dart/Julia/Lua implementations remain later work.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 

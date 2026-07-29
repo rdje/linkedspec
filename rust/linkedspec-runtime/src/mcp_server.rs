@@ -1,10 +1,12 @@
 //! In-process Rust MCP adapter over caller-owned immutable semantic indexes.
 
 use crate::mcp_contract_runtime;
+use crate::mcp_wire;
 use crate::semantic_index::{SemanticIndex, SemanticSourceDetail};
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
+use std::io::{Read, Write};
 use std::panic::{AssertUnwindSafe, catch_unwind};
 use std::sync::Arc;
 use std::time::Instant;
@@ -58,7 +60,7 @@ pub struct McpServerError {
 }
 
 impl McpServerError {
-    const fn new(code: &'static str, message: &'static str) -> Self {
+    pub(crate) const fn new(code: &'static str, message: &'static str) -> Self {
         Self { code, message }
     }
 }
@@ -89,6 +91,7 @@ struct RegistryEntry {
 #[derive(Default)]
 struct ActiveRequest {
     cancelled: bool,
+    prepared: bool,
 }
 
 enum EntropySource {
@@ -221,6 +224,77 @@ impl McpServer {
         request: &Value,
         authorization_context: &[u8],
     ) -> Result<Option<Value>, McpServerError> {
+        self.dispatch_with_preparation(request, authorization_context, false)
+    }
+
+    /// Run the strict modern MCP JSON-line protocol over borrowed caller streams.
+    ///
+    /// Normal operation is silent except for canonical protocol frames on
+    /// `output`. When supplied, `log` receives only a fixed sanitized record on
+    /// an unexpected read, write, or flush failure. EOF and every I/O failure
+    /// shut the server down and release all registered indexes.
+    pub fn serve_stdio<R: Read + ?Sized, W: Write + ?Sized>(
+        &mut self,
+        input: &mut R,
+        output: &mut W,
+        authorization_context: &[u8],
+        log: Option<&mut dyn Write>,
+    ) -> Result<(), McpServerError> {
+        if self.stopped {
+            return Err(server_shutdown());
+        }
+        validate_authorization(authorization_context)?;
+        mcp_wire::serve(self, input, output, authorization_context, log)
+    }
+
+    pub(crate) fn dispatch_for_wire(
+        &mut self,
+        request: &Value,
+        authorization_context: &[u8],
+    ) -> Result<(Option<Value>, Option<String>), McpServerError> {
+        let candidate = request
+            .get("id")
+            .filter(|value| valid_request_id(value))
+            .and_then(|id| mcp_contract_runtime::canonical_json(id).ok());
+        let was_active = candidate
+            .as_ref()
+            .is_some_and(|key| self.active.contains_key(key));
+        let response = self.dispatch_with_preparation(request, authorization_context, true)?;
+        let prepared = candidate.filter(|key| {
+            !was_active && self.active.get(key).is_some_and(|active| active.prepared)
+        });
+        Ok((response, prepared))
+    }
+
+    pub(crate) fn wire_response_ready(&mut self, key: Option<&str>) -> bool {
+        let Some(key) = key else {
+            return true;
+        };
+        let Some(active) = self.active.get(key) else {
+            return false;
+        };
+        if !active.prepared {
+            return false;
+        }
+        if active.cancelled {
+            self.active.remove(key);
+            return false;
+        }
+        true
+    }
+
+    pub(crate) fn wire_response_emitted(&mut self, key: Option<&str>) {
+        if let Some(key) = key {
+            self.active.remove(key);
+        }
+    }
+
+    fn dispatch_with_preparation(
+        &mut self,
+        request: &Value,
+        authorization_context: &[u8],
+        retain_prepared: bool,
+    ) -> Result<Option<Value>, McpServerError> {
         validate_authorization(authorization_context)?;
         let request = request.clone();
         let id = request
@@ -276,7 +350,7 @@ impl McpServer {
                 if !mcp_contract_runtime::validate_named("discoverRequest", &request) {
                     return Ok(Some(protocol_error(Some(&id), "invalid_params", None)));
                 }
-                Ok(self.prepare_response(&id, |_, id| {
+                Ok(self.prepare_response(&id, retain_prepared, |_, id| {
                     mcp_contract_runtime::discover_response(id).map_err(|_| ())
                 }))
             }
@@ -284,11 +358,13 @@ impl McpServer {
                 if !mcp_contract_runtime::validate_named("toolsListRequest", &request) {
                     return Ok(Some(protocol_error(Some(&id), "invalid_params", None)));
                 }
-                Ok(self.prepare_response(&id, |_, id| {
+                Ok(self.prepare_response(&id, retain_prepared, |_, id| {
                     mcp_contract_runtime::tools_list_response(id).map_err(|_| ())
                 }))
             }
-            "tools/call" => self.dispatch_tool_call(&request, &id, authorization_context),
+            "tools/call" => {
+                self.dispatch_tool_call(&request, &id, authorization_context, retain_prepared)
+            }
             _ => unreachable!("method inventory checked above"),
         }
     }
@@ -305,6 +381,7 @@ impl McpServer {
         request: &Value,
         id: &Value,
         authorization_context: &[u8],
+        retain_prepared: bool,
     ) -> Result<Option<Value>, McpServerError> {
         let name = request.pointer("/params/name").and_then(Value::as_str);
         let (definition, operation) = match name {
@@ -321,9 +398,11 @@ impl McpServer {
         }
         let authorization_digest = authorization_digest(authorization_context);
         let request = request.clone();
-        Ok(self.prepare_response(id, move |server, id| {
-            server.build_tool_response(&request, id, operation, authorization_digest)
-        }))
+        Ok(
+            self.prepare_response(id, retain_prepared, move |server, id| {
+                server.build_tool_response(&request, id, operation, authorization_digest)
+            }),
+        )
     }
 
     fn build_tool_response(
@@ -363,7 +442,12 @@ impl McpServer {
         mcp_contract_runtime::tool_success_response(id, &payload).map_err(|_| ())
     }
 
-    fn prepare_response<F>(&mut self, id: &Value, builder: F) -> Option<Value>
+    fn prepare_response<F>(
+        &mut self,
+        id: &Value,
+        retain_prepared: bool,
+        builder: F,
+    ) -> Option<Value>
     where
         F: FnOnce(&mut Self, &Value) -> Result<Value, ()>,
     {
@@ -376,14 +460,22 @@ impl McpServer {
         self.active.insert(key.clone(), ActiveRequest::default());
         let built = catch_unwind(AssertUnwindSafe(|| builder(self, id)));
         let cancelled = self.active.get(&key).is_some_and(|active| active.cancelled);
-        self.active.remove(&key);
         if cancelled {
+            self.active.remove(&key);
             return None;
         }
-        match built {
+        let response = match built {
             Ok(Ok(response)) => Some(response),
             Ok(Err(())) | Err(_) => Some(protocol_error(Some(id), "internal_error", None)),
+        };
+        if retain_prepared {
+            if let Some(active) = self.active.get_mut(&key) {
+                active.prepared = true;
+            }
+        } else {
+            self.active.remove(&key);
         }
+        response
     }
 
     fn authorized_entry(
@@ -450,7 +542,7 @@ impl McpServer {
     }
 
     #[cfg(test)]
-    fn new_for_test(
+    pub(crate) fn new_for_test(
         entropy: impl FnMut() -> Result<[u8; ENTROPY_BYTES], ()> + 'static,
         clock: impl FnMut() -> Result<u64, ()> + 'static,
         maximum_handles: usize,
@@ -972,7 +1064,7 @@ mod tests {
 
         let mut server = server_with([3; 32], Rc::new(Cell::new(0)));
         let response = server
-            .prepare_response(&json!(9), |_, _| panic!("host secret"))
+            .prepare_response(&json!(9), false, |_, _| panic!("host secret"))
             .unwrap();
         assert_eq!(response["error"]["code"], -32603);
         assert!(!response.to_string().contains("host secret"));

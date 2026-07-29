@@ -99,7 +99,6 @@ pub(crate) fn validate_named(name: &str, value: &Value) -> bool {
     validate(value, schema, &bundle.root["schema"], 0).is_ok()
 }
 
-#[cfg(test)]
 pub(crate) fn validate_frame(value: &Value) -> bool {
     let Ok(bundle) = bundle() else {
         return false;

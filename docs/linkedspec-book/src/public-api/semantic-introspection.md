@@ -3429,7 +3429,8 @@ The dependency order is:
 | `.10.9.2.4` | committed-owner no-change Perl closeout | complete from clean `28f84826`; focused and canonical recomposition green; parent `.10.9.2` closed |
 | `.10.9.3.0` | behavior-free Rust native owner/security audit and ADR `0058` | complete from clean `4473a812`; focused/canonical signoff; no implementation behavior |
 | `.10.9.3.1` | Rust shared binding, frozen runtime, secure registry, and decoded server | implemented; focused public corpus proof; admission unchanged |
-| `.10.9.3.2-.10.9.3.4` | Rust strict stdio, exact admission, and closeout | pending |
+| `.10.9.3.2` | Rust strict stdio framing, lexical preflight, emission, cancellation, logging, and cleanup | implemented; private/public adversarial proof; admission unchanged |
+| `.10.9.3.3-.10.9.3.4` | Rust exact admission and closeout | pending |
 | `.10.9.4-.10.9.5` | native Dart and Julia MCP implementations | pending |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3460,13 +3461,15 @@ transport digest; shared rollout remains pending. The admission has canonical si
 parent `.10.9.2` is closed before the other four native servers and recurring/public MCP rollout under
 `.10.9.3-.10.10`.
 
-Rust now exposes the decoded in-process part of that API. `linkedspec-runtime::McpServer` retains a caller-created
+Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
+`linkedspec-runtime::McpServer` retains a caller-created
 `Arc<SemanticIndex>` and calls only `capabilities()` or `query_neutral()`; compile-time generated contract data,
 frozen validation, and registry/decoded dispatch remain separate owners. Production handles use 256 operating-
 system random bits, digest-only authorization, monotonic expiry, bounded capacity, and lowering-only policy.
-Unexpected unwind panics become sanitized internal errors. Strict duplicate-safe token preflight and stdio frame
-emission remain `.10.9.3.2`, so this decoded API must not be described as a completed Rust stdio server or admitted
-runtime yet. No standalone server binary, primary-CLI mode, source/path bootstrap, SDK/network/async runtime,
+Unexpected unwind panics become sanitized internal errors. Private `mcp_wire.rs` supplies duplicate-safe lexical
+preflight and canonical stdio emission without weakening the decoded API. This is a completed Rust stdio
+implementation but not yet an admitted MCP runtime: exact admission and the 2/5 + 2/6 ledger transition remain
+`.10.9.3.3`. No standalone server binary, primary-CLI mode, source/path bootstrap, SDK/network/async runtime,
 semantic cache, aggregator, or legacy protocol is authorized.
 
 ### Using Rust decoded MCP dispatch
@@ -3551,6 +3554,57 @@ unchanged. Unknown, expired, revoked, and unauthorized handles all return
 `linkedspec_mcp_handle_unavailable`, deliberately preventing handle-state enumeration.
 
 `dispatch` accepts already-decoded `serde_json::Value` data. It validates the exact envelope and method schemas,
-but decoded values cannot preserve lexical facts such as duplicate object keys. Do not place untrusted raw JSON
-directly through a generic decoder and call this API as a substitute for the pending strict wire adapter. The
-bounded duplicate-safe JSON-line owner and canonical LF emission arrive in `.10.9.3.2`.
+but decoded values cannot preserve lexical facts such as duplicate object keys. Use `serve_stdio` for untrusted
+raw protocol bytes.
+
+### Using Rust strict MCP stdio
+
+The host supplies already-open streams; the MCP server does not open files, discover a terminal, or claim process
+stdio. `std::io::stdin().lock()` and `stdout().lock()` are one possible host choice, while tests and embedders can
+use pipes, cursors, or other synchronous `Read`/`Write` values without changing protocol behavior:
+
+```rust
+use linkedspec_runtime::McpServer;
+use std::io::{self, BufReader, BufWriter};
+
+# fn example() -> Result<(), Box<dyn std::error::Error>> {
+let authorization = b"tenant-42/read-only";
+let mut server = McpServer::new()?;
+
+// Register caller-created Arc<SemanticIndex> values before entering the loop.
+// server.register_index(index, authorization, options)?;
+
+let stdin = io::stdin();
+let stdout = io::stdout();
+let mut input = BufReader::new(stdin.lock());
+let mut output = BufWriter::new(stdout.lock());
+
+server.serve_stdio(
+    &mut input,
+    &mut output,
+    authorization,
+    None, // or Some(&mut a_separate_sanitized_log_writer)
+)?;
+# Ok(())
+# }
+```
+
+The strict boundary has these exact rules:
+
+- It reads fixed 65,536-byte chunks, retains at most 1,048,576 payload bytes plus a possible CR, and drains an
+  overlong frame through its LF before accepting the next frame.
+- LF, CRLF, and one complete final frame at EOF are accepted. BOM, malformed UTF-8/JSON, batches, duplicate decoded
+  keys, invalid escapes or surrogate pairs, non-JSON numbers, unsafe/fractional/exponent request IDs, and nesting
+  beyond 64 fail at the lexical layer.
+- Validated responses are sorted-key UTF-8 JSON followed by exactly one LF and are flushed before their request
+  leaves the active registry.
+- Cancellation in the preparation-to-emission interval suppresses the response. A response already flushed is
+  final, unknown cancellation is ignored, and rejected frames do not poison the next complete frame.
+- Normal work and clean EOF write no diagnostic bytes. EOF shuts down and releases all registered indexes. Any
+  read, write, or flush failure does the same, returns `linkedspec_mcp_io_failure`, and writes only the fixed
+  `linkedspec_mcp_io_failure\n` record when a separate optional log is supplied.
+
+The type signature requires distinct exclusive mutable borrows for output and optional logging, preventing a safe
+caller from aliasing the protocol and diagnostic channels. Authorization is checked before the first input byte is
+consumed. The adapter never accepts a source path, compiler, parser, executor, cache, SDK, network listener, or
+process-lifecycle option.

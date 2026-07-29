@@ -13426,7 +13426,7 @@ before implementation.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.3`
     Status: `active` (2026-07-29; behavior-free audit `.0` and generated binding/decoded server `.1` complete;
-      strict stdio/lifecycle `.2` follows only after the clean `.1` commit)
+      strict stdio/lifecycle `.2` active task-tree-first from clean commit `11261ef1`)
     Goal: Implement and admit the Rust native MCP server against the exact transport contract.
     Depends on: `.10.9.2`
     Children: `.10.9.3.0`, `.10.9.3.1`, `.10.9.3.2`, `.10.9.3.3`, `.10.9.3.4`
@@ -13533,12 +13533,50 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.3.1 - implement Rust MCP decoded server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.2`
-      Status: `pending`
+      Status: `done` (2026-07-29)
       Goal: Implement strict Rust stdio framing and exact lifecycle cleanup.
       Depends on: `.10.9.3.1`
       Acceptance: Admit only the exact bounded UTF-8/JSON line contract, emit canonical LF frames, preserve request
         activity through flush and pre-emission cancellation, sanitize optional diagnostics, release all indexes on
         EOF/I/O failure, and add no SDK, network transport, facade, or primary-CLI behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNED BASE** — Prove decoded-server commit `11261ef1`, zero-byte brief, clean tree, absent
+        rendered-book/empty-run residue, and `.10.9.3.2` task-tree ownership before wire implementation.
+      - [x] **BOUNDED FRAMING / STRICT TOKENS** — Read fixed 65,536-byte chunks, retain at most the contract limit
+        plus possible CR, drain overlong lines, accept LF/CRLF/complete final EOF frame, and reject malformed UTF-8,
+        BOM, batches/non-objects, decoded duplicate keys, invalid escapes/surrogates/numbers/id tokens, and depth 65.
+      - [x] **CANONICAL RESPONSE / LIFECYCLE** — Serialize validated sorted-key UTF-8 values with exactly one LF,
+        retain active request state through successful flush, suppress pre-emission cancellation, preserve already
+        emitted responses, continue after rejected frames, and remain silent on normal operation.
+      - [x] **EOF / I/O / AUTHORITY SAFETY** — Borrow caller-owned streams, keep optional diagnostics separate and
+        fixed-content only, return a typed sanitized I/O error, release every active request/index on EOF or any
+        read/write/flush failure, and expose no paths, source bootstrap, SDK/network/async/executable/CLI authority.
+      - [x] **ADVERSARIAL / LOCKSTEP SIGNOFF** — Prove all ten raw and ten lifecycle cases plus exact size/depth/
+        Unicode/key/number/id/emission/continuation/cancellation/EOF/I/O boundaries; preserve decoded/native and
+        Perl identity; update CI/docs/KM/mdBook/locality; run focused/canonical gates and exact cleanup; commit,
+        clear, and prove clean while exact admission remains `.10.9.3.3`.
+
+      Verification: **PASS 2026-07-29.** Task-tree-first implementation from clean decoded-server commit
+        `11261ef1` adds public caller-borrowed strict stdio plus one private bounded lexical/framing owner. Exact
+        proof covers all ten raw and ten lifecycle cases, LF/CRLF/final EOF, continuation, size/depth/decoded-key/
+        Unicode/number/id boundaries, canonical LF bytes, cancellation through flush, clean EOF, authorization,
+        injected read/write/flush failures, fixed diagnostics, and complete `Arc<SemanticIndex>` release. Rust MCP
+        unit proof passes 15/15, public decoded dispatch 3/3, public stdio 4/4, production check and task-local strict
+        clippy; unchanged Perl binding/decoded/stdio passes Files=3 Tests=22. MCP remains 35/10/10/68 with byte-fresh
+        83,072-byte Perl and 82,886-byte Rust bindings. The admission ledger intentionally remains 1/5
+        implementations + 1/6 runtimes with rollout pending and 28 rejected mutations; capability remains 80/0/0
+        and semantic governance remains 6/20/105 at rollout 7/9 + admission 6/6. Knowledge Map 744/6,006, mdBook,
+        all six doctrines, memory architecture, storage 1,712/385,070/28, path 14/5, repository-local tool proof,
+        formatting, and whitespace pass. Canonical CI independently passes Rust MCP 15 + 3 + 4, Rust semantic
+        admission 1/1 in 79.85 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root proof, both
+        primary CLI matrices 66/66, RAM 65%, and Phase 0 1,031/1,031 in 643 seconds. Exact cleanup removes only the
+        verified 13,412-KiB rendered book and one proven-empty managed run. No executable, SDK/network/async
+        transport, source bootstrap, parser/compiler/executor/trace/cache/CLI authority, semantic oracle,
+        admission/rollout, aggregator, or legacy behavior moves. Exact admission `.10.9.3.3` follows only after
+        this clean commit.
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.3.2 - implement Rust MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.3.3`
       Status: `pending`
@@ -17290,6 +17328,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.2` | Clean base `11261ef1`; exact bounded lexical/framing/lifecycle implementation; MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; Perl Files=3 Tests=22; Rust MCP unit 15 + decoded public 3 + stdio public 4; production check and task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,006; mdBook; six doctrines; memory; storage 1,712/385,070/28; path 14/5; tool locality; canonical Rust semantic 1/1 79.85s, Dart 1/1, Julia 416/416 28.8s, containment/moved-root, CLI 66x2, RAM 65%, Phase 0 1,031/643s; exact 13,412-KiB/one-empty-run cleanup. | PASS. Rust owns strict borrowed-stream MCP framing, lexical admission, canonical emission, cancellation through flush, and EOF/I/O release without executable/source/semantic/ledger/rollout/aggregator/legacy movement; exact admission `.10.9.3.3` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.1` | Clean base `a3756d63`; shared verified bundle; byte-fresh Perl 83,072 + Rust 82,886 bindings; MCP 35/10/10/68; Perl Files=4 Tests=35; Rust MCP unit 9 + public 3; task-local strict clippy; unchanged ledger 1/5 + 1/6 rollout pending/28 mutations; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 744/6,001; mdBook; six doctrines; memory; storage 1,710/383,730/28; path 14/5; tool locality; canonical Rust semantic 1/1 82.05s, Dart 1/1, Julia 416/416 28.6s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/658s; exact 13,388-KiB/one-empty-run cleanup. | PASS. Rust owns deterministic embedded contract data, frozen runtime, secure native registry, and exact decoded dispatch without strict wire, executable, source/semantic authority, ledger/rollout, aggregator, or legacy movement; `.10.9.3.2` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.3.0` | Clean base `4473a812`; KM/Toolbox/ADR/source audit; Rust foundation 6, query 5, native admission 1/1 in 82.34s; unchanged MCP 35/10/10/68, byte-fresh 83,072-byte Perl binding, Files=3 Tests=22, ledger 1/5 + 1/6 rollout pending/28 mutations, Files=1 Tests=13; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; ADR `0058`; mdBook; KM 744/5,999; six doctrines; storage 1,703/381,460/28; path 14/5; tool locality; canonical Rust 1/1 79.08s, Dart 1/1, Julia 416/416 28.3s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/629s; exact 13,352-KiB/one-empty-run cleanup. | PASS. Exact Rust MCP owner/security/generation/transport/admission seams are frozen without production/API/dependency/test/contract/semantic/parser/runtime/CLI/ledger/rollout behavior; `.10.9.3.1` follows only after the clean plan commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.2.4` | Clean base `28f84826`; unchanged MCP 35/10/10/68 and byte-fresh 83,072-byte binding; Files=3 Tests=22 server proof; ledger 1/5 implementations + 1/6 runtimes, rollout pending, 28 mutations; Files=1 Tests=13 admission; mdBook; KM 743/5,988; six doctrines; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; storage 1,703/381,414/28; path 14/5; repository-local tool proof; canonical Perl semantic 18, Rust 1/1 81.52s, Dart 1/1, Julia 416/416 29.1s, containment/moved-root, CLI 66x2, RAM 63%, Phase 0 1,031/657s; exact 13,328-KiB/one-empty-run cleanup. | PASS. Unchanged committed authorities close `.10.9.2.4` and Perl parent `.10.9.2` without production, contract/digest, semantic/parser/runtime/CLI, other-runtime admission, rollout, aggregator, legacy, or replacement-owner change; Rust `.10.9.3` follows after the clean commit. |

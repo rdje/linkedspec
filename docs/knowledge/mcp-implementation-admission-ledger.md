@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl implementation parent closed, remaining implementations/runtimes pending
+status: current; Perl implementation parent closed, Rust decoded/stdio implemented but unadmitted, remaining rows pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -23,6 +23,7 @@ reverify:
   - PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch
+  - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio
 ---
 
 # MCP implementation and runtime admission ledger
@@ -52,5 +53,5 @@ handlers, parser-source dumps, trace, shell/process execution, and arbitrary rea
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` recomposes these committed transport, binding, server, ledger,
 and admission owners unchanged. It deliberately adds no umbrella oracle. Canonical signoff closes parent Perl
 `.10.9.2` while the shared rollout row remains pending; Rust `.10.9.3` receives the same contract after the clean
-closeout commit. Rust decoded implementation `.10.9.3.1` is now present and recurrently tested, but ledger movement
-correctly waits for strict stdio `.10.9.3.2` plus the exact admission consumer in `.10.9.3.3`.
+closeout commit. Rust decoded implementation `.10.9.3.1` and strict stdio `.10.9.3.2` are now present and
+recurrently tested, but ledger movement correctly waits for the exact admission consumer in `.10.9.3.3`.

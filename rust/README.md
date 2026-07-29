@@ -192,12 +192,13 @@ remain compatible `Result<_, String>` adapters over the same path; successful JS
        JSON output
 ```
 
-### Native MCP decoded server
+### Native MCP server
 
 ADR `0058` and `FUTURE-PARITY-BACKLOG.10.9.3.1` provide a public in-process
 `linkedspec_runtime::McpServer`. A host registers an already-created immutable `Arc<SemanticIndex>` with an opaque
 1..4,096-byte authorization context and optional lowering-only policy, then calls `dispatch` with decoded JSON
-values. The server implements only modern `server/discover`, `tools/list`, the capabilities/query `tools/call`
+values or `serve_stdio` over borrowed `Read`/`Write` streams. The server implements only modern
+`server/discover`, `tools/list`, the capabilities/query `tools/call`
 operations, and cancellation notifications. It never loads source, compiles, executes, traces, or caches semantic
 responses.
 
@@ -205,11 +206,22 @@ Production handles contain 256 operating-system-random bits encoded as 43 unpadd
 registry stores only the index, a SHA-256 authorization digest, absolute monotonic expiry, and effective policy;
 unknown, expired, revoked, and unauthorized handles return the same tool error. The generated filesystem-free
 binding is derived from the one neutral MCP contract and checked after independent contract validation. Decoded
-responses carry the Rust server identity while preserving exact native semantic payloads.
+and wire responses carry the Rust server identity while preserving exact native semantic payloads.
 
-Strict bounded stdio is not part of this leaf: it remains `FUTURE-PARITY-BACKLOG.10.9.3.2`, followed by exact
-Rust admission in `.10.9.3.3`. There is still no MCP executable, primary-CLI mode, SDK/network transport, source
-bootstrap, semantic cache, aggregator, or legacy adapter.
+`serve_stdio(input, output, authorization, log)` consumes strict UTF-8 JSON lines in fixed 65,536-byte reads,
+retains no more than the 1,048,576-byte contract payload plus a possible CR, drains an overlong frame before
+continuing, accepts LF/CRLF and one complete final EOF frame, and rejects decoded duplicate keys, malformed
+escapes/surrogates/numbers, batches, invalid request-id lexemes, and nesting beyond 64. Validated responses use
+sorted-key UTF-8 JSON plus exactly one LF. Request activity remains live until a successful flush, so cancellation
+before emission suppresses the frame while cancellation after emission cannot retract it.
+
+Normal operation and clean EOF are silent. EOF, read failure, write failure, or flush failure shuts the server
+down and releases every retained `Arc`; an optional separate log receives only
+`linkedspec_mcp_io_failure\n`, and the caller receives the typed sanitized error. Safe Rust's exclusive mutable
+borrows prevent the same writer from serving as protocol output and log. Exact Rust admission remains
+`.10.9.3.3`; therefore the shared ledger is still 1/5 implementations and 1/6 runtimes. There is no MCP
+executable, primary-CLI mode, SDK/network transport, source bootstrap, semantic cache, aggregator, or legacy
+adapter.
 
 ## Lifecycle Loop
 

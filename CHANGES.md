@@ -1,5 +1,45 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.2 — implement Rust MCP strict stdio
+
+Added public `McpServer::serve_stdio` over caller-borrowed `Read`/`Write` values and a private `mcp_wire.rs`
+transport owner. The adapter reads fixed 65,536-byte chunks, derives its 1,048,576-byte line and depth-64 limits
+from the embedded contract, bounds retained memory to the payload plus possible CR, drains overlong frames, accepts
+LF/CRLF and one complete final EOF frame, and continues after a rejected frame.
+
+The strict lexical preflight rejects malformed UTF-8, BOM, invalid JSON grammar, batches/non-objects, decoded
+duplicate keys including escape-equivalent and nested keys, invalid escapes/surrogate pairs, non-JSON numbers,
+unsafe/fractional/exponent/boolean/null request IDs, and nesting depth 65 before constructing `serde_json::Value`.
+Validated responses use the existing sorted-key canonical encoder plus exactly one LF. The decoded public API
+remains unchanged for trusted in-process values.
+
+Split response preparation from successful emission so a wire request stays active until `write_all` and `flush`
+succeed. Cancellation in that interval suppresses the frame, while an already-flushed response is final. Clean EOF
+is silent and shuts down the server. Any read, write, or flush failure shuts down, releases all registered
+`Arc<SemanticIndex>` values, returns fixed typed `linkedspec_mcp_io_failure`, and optionally writes only
+`linkedspec_mcp_io_failure\n` to a distinct caller-borrowed log. Authorization is validated before input is
+consumed.
+
+Added six private raw/token/lifecycle tests and four public external-crate tests. They compose every ordered ten-
+raw/ten-lifecycle inventory row, exact size/depth/key/Unicode/number/id boundaries, final-frame and continuation
+behavior, native capabilities/query identity, preparation-to-emission cancellation, clean EOF, later read failure,
+and injected read/write/flush failures with weak-reference release and private-data denial. Canonical CI now
+requires and runs the new wire owner and public stdio test after decoded proof.
+
+The transport adds no executable, process-stdio claim, source/path loader, compiler/parser/executor authority,
+SDK, async/network transport, semantic cache, admission movement, aggregator, or legacy adapter. Exact Rust
+admission remains `.10.9.3.3`; the shared ledger intentionally remains 1/5 implementations and 1/6 runtimes.
+
+Signoff passes MCP 35/10/10/68, byte-fresh Perl 83,072-byte and Rust 82,886-byte bindings, Perl Files=3 Tests=22,
+Rust MCP unit 15 + decoded public 3 + strict-stdio public 4, task-local strict clippy, unchanged admission ledger
+1/5 implementations + 1/6 runtimes with rollout pending/28 mutations, capability 80/0/0, and semantic governance
+6/20/105 at rollout 7/9 + admission 6/6. Knowledge Map 744/6,006, mdBook, all six doctrines, memory architecture,
+storage 1,712/385,070/28, path 14/5, tool locality, formatting, and whitespace pass. Canonical CI passes Rust
+semantic admission 1/1 in 79.85 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds, containment/moved-root proof,
+both primary CLI matrices 66/66, RAM 65%, and Phase 0 1,031/1,031 in 643 seconds. Exact cleanup removes only the
+verified 13,412-KiB rendered book and one proven-empty managed run. Exact Rust admission `.10.9.3.3` follows only
+after this clean commit; no push occurs at 75/300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.3.1 — implement Rust MCP decoded server
 
 Extracted `tools/mcp_contract_binding.py` as the single digest-verified neutral bundle builder. Both backend

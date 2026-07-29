@@ -16,6 +16,7 @@ pub mod helpers;
 mod mcp_contract;
 mod mcp_contract_runtime;
 pub mod mcp_server;
+mod mcp_wire;
 pub mod primary_cli;
 pub mod runtime;
 pub mod semantic_index;

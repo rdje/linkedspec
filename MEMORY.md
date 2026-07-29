@@ -5,13 +5,14 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.3.1`; this commit adds the deterministic embedded Rust MCP
-  contract, frozen runtime, secure native registry, and exact decoded dispatch; ledger stays 1/5 + 1/6 pending.
-- active_leaf: none inside this commit; `.10.9.3.1` is fully verified and closing under the commit workflow.
-- active_scope: close `.10.9.3.1`, clear the message brief, prove clean, then task-tree-first activate strict stdio.
-- active_exclusions: no strict stdio/wire yet, executable, SDK/network/async transport, source bootstrap, semantic/
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.3.2`; completion is repository HEAD with subject
+  `FUTURE-PARITY-BACKLOG.10.9.3.2 - implement Rust MCP strict stdio`, based on clean `11261ef1`.
+- active_leaf: none after the `.10.9.3.2` completion commit; activate `.10.9.3.3` only from its clean tree.
+- active_scope: no in-flight work. Rust owns decoded dispatch plus strict borrowed-stream stdio/lifecycle; the
+  implementation is not admitted and the ledger deliberately remains 1/5 implementations + 1/6 runtimes.
+- active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/
   parser/compiler/executor/trace/cache/primary-CLI behavior, ledger status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: activate strict bounded Rust stdio/lifecycle `.10.9.3.2`; no admission or push.
+- next_after_clean_commit: activate exact Rust twelve-role admission/ledger `.10.9.3.3`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -36,11 +37,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 74/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; counter 75/300 after this commit; never push per commit.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: Rust MCP 9 + 3, semantic Rust 1/1 in 82.05s, Dart 1/1, Julia 416/416 in 28.6s, CLI 66x2,
-  RAM 61%, and Phase 0 1,031/1,031 in 658s pass; MCP 35/10/10/68 and ledger 1/5 + 1/6 remain exact.
-- blockers: none. next: commit/clear/prove `.10.9.3.1`, then activate strict stdio `.10.9.3.2`; no push.
+- canonical_state: Rust MCP 15 + 3 + 4, semantic Rust 1/1 in 79.85s, Dart 1/1, Julia 416/416 in 28.8s, CLI
+  66x2, RAM 65%, and Phase 0 1,031/1,031 in 643s pass; MCP 35/10/10/68 and ledger 1/5 + 1/6 remain exact.
+- blockers: none. next: activate `.10.9.3.3` task-tree-first from clean HEAD, then implement exact admission only.

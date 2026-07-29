@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Rust native MCP strict stdio implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.3.2` completes task-tree-first from clean decoded-server commit `11261ef1`. Public
+`McpServer::serve_stdio` now accepts caller-borrowed streams while a private bounded wire owner performs strict
+UTF-8/JSON lexical preflight, duplicate-decoded-key and request-id enforcement, contract-derived line/depth limits,
+canonical sorted UTF-8 plus LF emission, recovery after rejected frames, and exact LF/CRLF/final-EOF framing.
+
+Prepared requests remain active through successful flush. Pre-emission cancellation suppresses output; flushed
+responses remain final. Clean EOF and read/write/flush failures shut down and release every registered index;
+failures expose only a typed fixed error and an optional fixed record on a distinct borrowed log. No executable,
+SDK/network/async transport, source bootstrap, semantic cache, aggregator, legacy adapter, or ledger status moves.
+
+Focused proof passes MCP 35/10/10/68, Perl Files=3 Tests=22, Rust MCP unit 15 + public decoded 3 + strict stdio 4,
+task-local strict clippy, ledger 1/5 + 1/6 pending/28 mutations, capability 80/0/0, semantic 6/20/105 at 7/9 +
+6/6, Knowledge Map 744/6,006, mdBook, all six doctrines, storage 1,712/385,070/28, path 14/5, and tool locality.
+Canonical CI passes Rust semantic 1/1 in 79.85 seconds, Dart 1/1, Julia 416/416 in 28.8 seconds,
+containment/moved-root, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 643 seconds. Exact cleanup removes the
+13,412-KiB rendered book and one empty managed run. Exact Rust admission `.10.9.3.3` follows after the clean
+commit; no push at 75/300.
+
 ## 2026-07-29 — Rust native MCP decoded server implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.3.1` completes task-tree-first from clean plan commit `a3756d63`. One shared

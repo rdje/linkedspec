@@ -4,7 +4,8 @@
 - Status: accepted; neutral contract/canonical governance complete under `.10.9.1`; Perl implementation
   `.10.9.2.1-.2`, exact admission `.10.9.2.3`, and no-change closeout `.10.9.2.4` complete at 1/5 implementations
   + 1/6 runtimes with canonical signoff; parent `.10.9.2` closed; Rust generated binding/decoded server
-  `.10.9.3.1` implemented under ADR `0058`; Rust stdio/admission and remaining backends pending under `.10.9.3.2-.7`
+  `.10.9.3.1` and strict stdio/lifecycle `.10.9.3.2` implemented under ADR `0058`; Rust admission and remaining
+  backends pending under `.10.9.3.3-.7`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context
