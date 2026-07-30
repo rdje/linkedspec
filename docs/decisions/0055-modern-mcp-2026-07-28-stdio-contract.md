@@ -1,9 +1,9 @@
 # ADR 0055: LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio
 
 - Date: 2026-07-29
-- Status: accepted; neutral contract/canonical governance plus Perl and Rust parents complete at 2/5
-  implementations + 2/6 runtimes with rollout pending; Dart seams frozen by `0059`, implementation plus later
-  runtimes/closeout pending
+- Status: accepted; neutral contract/canonical governance plus Perl/Rust parents complete at 2/5 implementations
+  and 2/6 runtimes with rollout pending; Dart generated/runtime/decoded owners implemented under `0059`, strict
+  stdio/admission plus later runtimes pending
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context

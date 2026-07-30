@@ -22,7 +22,7 @@ answers:
   - how do I regenerate or verify the MCP canonical frames
   - are the native LinkedSpec MCP servers implemented yet
 date: 2026-07-29
-status: exact neutral contract canonical; Perl/Rust parents closed at 2/5 + 2/6; Dart seams frozen before code
+status: exact neutral contract canonical; Perl/Rust admitted at 2/5 + 2/6; Dart decoded core implemented
 tags: [mcp, json-rpc, stdio, semantic-api, security, transport, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown."
 evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes the policy once as a digest-pinned neutral manifest, closed JSON Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte inputs, ten lifecycle cases, and one repository-routed deterministic materializer; no native MCP server exists yet."
@@ -31,6 +31,7 @@ evidence_update_2026_07_29_contract_closeout: "FUTURE-PARITY-BACKLOG.10.9.1.3 ma
 evidence_update_2026_07_29_perl_and_rust: "Perl .10.9.2 is implemented, admitted, and parent-closed at the first 1/5 + 1/6 state. Rust .10.9.3.1-.3 implement the generated binding, frozen schema runtime, secure registry, decoded public server, strict borrowed-stream stdio, and exact admission; the ledger is 2/5 implementations + 2/6 runtimes with shared rollout pending."
 evidence_update_2026_07_29_rust_closeout: "Rust .10.9.3.4 recomposes the committed exact transport, both bindings, both server/admission owners, and the unchanged 2/5 + 2/6 ledger under complete focused/canonical proof; parent .10.9.3 closes and Dart .10.9.4 is next."
 evidence_update_2026_07_29_dart_plan: "Dart .10.9.4.0 and ADR 0059 prove stock Dart JSON overwrites decoded duplicate keys and preserves insertion order, then freeze explicit token preflight/canonical sorting plus core secure entropy, monotonic expiry, generated private-part data, native server, stdio, admission, and closeout seams without implementation."
+evidence_update_2026_07_29_dart_decoded: "Dart .10.9.4.1 implements the generated binding/runtime, secure in-process registry, and exact decoded discovery/list/two-tool/cancellation server; strict raw stdio and formal admission remain .2-.3."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -65,10 +66,10 @@ indistinguishable handle states, and four lowering-policy cases. Verify its exac
 when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
 28-positive/7-negative schema and 68-mutation proof. Perl and Rust implement, admit, and parent-close that
-contract. Dart's native seams are frozen by ADR `0059`, but its production implementation and Dart/Julia/Lua
-admission remain later work.
+contract. Dart implements generated/runtime/decoded production owners under ADR `0059`, while its strict stdio,
+formal admission, and later Julia/Lua work remain pending.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 
-Related facts: [[mcp-native-server-topology]], [[dart-native-mcp-server-plan]], [[semantic-introspection-api-mcp-direction]],
+Related facts: [[mcp-native-server-topology]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[semantic-introspection-api-mcp-direction]],
 [[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]].

@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP canonical, Perl/Rust closed at 2/5 + 2/6, Dart seams frozen
+status: native six-runtime rollout admitted; MCP canonical, Perl/Rust at 2/5 + 2/6, Dart decoded core implemented
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -31,6 +31,7 @@ evidence_update_2026_07_29_rust_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.3.2 imple
 evidence_update_2026_07_29_rust_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.3.3 composes one exact twelve-role external Rust consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, leaves shared rollout pending, and rejects 39 status/source/role/authority/order mutations without changing the transport digest or server behavior."
 evidence_update_2026_07_29_rust_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.3.4 recomposes every committed neutral, Perl, and Rust MCP owner unchanged, passes complete focused/canonical proof, closes parent .10.9.3, and hands off to Dart .10.9.4 only after the clean commit."
 evidence_update_2026_07_29_dart_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.4.0 and ADR 0059 behavior-freeze one generated private-part binding/runtime, native in-process Dart server, secure registry, strict duplicate-safe canonical stdio, exact admission, and no-change closeout under .1-.4 without changing the 2/5 + 2/6 ledger."
+evidence_update_2026_07_29_dart_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.4.1 implements the Dart generated binding/runtime and secure decoded server while leaving strict stdio, formal admission, and the 2/5 + 2/6 ledger unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

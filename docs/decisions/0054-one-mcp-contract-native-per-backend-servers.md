@@ -1,8 +1,8 @@
 # ADR 0054: One MCP contract is implemented by native per-backend servers
 
 - Date: 2026-07-29
-- Status: accepted; exact neutral contract plus Perl and Rust parents closed at 2/5 implementations + 2/6
-  runtimes with rollout pending; Dart seams frozen by `0059`, implementation plus Julia/Lua/closeout pending
+- Status: accepted; neutral/Perl/Rust parents closed at 2/5 implementations + 2/6 runtimes with rollout pending;
+  Dart generated/runtime/decoded owners implemented under `0059`, strict stdio/admission plus Julia/Lua pending
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

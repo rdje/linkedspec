@@ -140,11 +140,13 @@ ORDERED_COMMANDS = [
     "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
+    "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
     "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
+    "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -197,8 +199,14 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
     required = [
         "require_tracked_file capability_conformance/mcp_implementation_admission.json",
         "require_tracked_file tools/check_mcp_implementation_admission.py",
+        "require_tracked_file tools/generate_dart_mcp_contract.py",
         "require_tracked_file t/mcp_server_perl_admission.t",
         "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
+        "require_tracked_file dart/lib/src/mcp/mcp_contract.dart",
+        "require_tracked_file dart/lib/src/mcp/mcp_contract_runtime.dart",
+        "require_tracked_file dart/lib/src/mcp/mcp_server.dart",
+        "require_tracked_file dart/test/mcp_contract_dart_binding_test.dart",
+        "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -301,9 +309,41 @@ def validate_authority_sources() -> None:
     ]:
         if token in rust_combined:
             fail(f"Rust MCP production authority fence contains forbidden token: {token}")
+
+    dart_sources = {
+        path: (ROOT / path).read_text(encoding="utf-8")
+        for path in [
+            "dart/lib/src/mcp/mcp_server.dart",
+            "dart/lib/src/mcp/mcp_contract_runtime.dart",
+        ]
+    }
+    dart_combined = "\n".join(dart_sources.values())
+    for token in [
+        "import 'dart:io'",
+        "import 'dart:ffi'",
+        "import 'dart:isolate'",
+        "File(",
+        "Directory(",
+        "Process.",
+        "Socket",
+        "HttpClient",
+        "parseSpec(",
+        "compileSpec(",
+        "loadSpec(",
+        "LinkedSpecRuntimeEngine",
+        "LINKEDSPEC_TRACE_LEVEL",
+        "emitDartSource",
+    ]:
+        if token in dart_combined:
+            fail(f"Dart MCP production authority fence contains forbidden token: {token}")
     primary = (ROOT / "bin" / "linkedspec").read_text(encoding="utf-8")
     if "McpServer" in primary or "serve_stdio" in primary:
         fail("the primary parser CLI acquired MCP bootstrap authority")
+    dart_primary = (ROOT / "dart" / "bin" / "linkedspec_dart.dart").read_text(
+        encoding="utf-8"
+    )
+    if "McpServer" in dart_primary or "serveStdio" in dart_primary:
+        fail("the primary Dart parser CLI acquired MCP bootstrap authority")
 
 
 def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
@@ -325,7 +365,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if ledger["format"] != 1 or ledger["contract_id"] != CONTRACT_ID or ledger["task_owner"] != TASK_OWNER:
         fail("ledger identity drifted")
-    if ledger["decisions"] != ["0054", "0055", "0057", "0058"]:
+    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059"]:
         fail("ledger decision provenance drifted")
 
     transport_ref = ledger["transport_contract"]
@@ -485,20 +525,22 @@ def run_mutations(ledger: dict[str, Any]) -> int:
 
     ci_source = CI_PATH.read_text(encoding="utf-8")
     ci_mutations = [
-        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[8] + "\n", "")),
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[9] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
+        ("CI Dart generator omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
+        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[9] + "\n", "")),
+        ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
         (
             "CI checker before Rust admission",
-            ci_source.replace(ORDERED_COMMANDS[8], "__RUST_ADMISSION__")
-            .replace(ORDERED_COMMANDS[9], ORDERED_COMMANDS[8])
-            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[9]),
+            ci_source.replace(ORDERED_COMMANDS[9], "__RUST_ADMISSION__")
+            .replace(ORDERED_COMMANDS[11], ORDERED_COMMANDS[9])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[11]),
         ),
         (
             "CI Rust admission before strict stdio proof",
-            ci_source.replace(ORDERED_COMMANDS[7], "__RUST_STDIO__")
-            .replace(ORDERED_COMMANDS[8], ORDERED_COMMANDS[7])
-            .replace("__RUST_STDIO__", ORDERED_COMMANDS[8]),
+            ci_source.replace(ORDERED_COMMANDS[8], "__RUST_STDIO__")
+            .replace(ORDERED_COMMANDS[9], ORDERED_COMMANDS[8])
+            .replace("__RUST_STDIO__", ORDERED_COMMANDS[9]),
         ),
         (
             "CI ledger registration omission",
@@ -511,6 +553,20 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             "CI Rust admission registration omission",
             ci_source.replace(
                 "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs\n",
+                "",
+            ),
+        ),
+        (
+            "CI Dart generator registration omission",
+            ci_source.replace(
+                "require_tracked_file tools/generate_dart_mcp_contract.py\n",
+                "",
+            ),
+        ),
+        (
+            "CI Dart decoded proof registration omission",
+            ci_source.replace(
+                "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart\n",
                 "",
             ),
         ),

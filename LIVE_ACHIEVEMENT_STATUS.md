@@ -1,5 +1,29 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Dart native MCP decoded server implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.4.1` implements the package-native, dependency-free Dart `McpServer` around exact
+caller-owned immutable `SemanticIndex` values. The server registers 256-bit secure opaque handles against copied
+out-of-band authorization and optional lowering-only policy, then dispatches already-decoded discovery/list/two-
+tool/cancellation requests through only fresh native capabilities/query calls. Digest-only authorization,
+monotonic expiry, collision/capacity/lifetime bounds, pruning, revocation/shutdown release, clone isolation, and
+sanitized failures are enforced without filesystem/process/network/parser/compiler/runtime/trace/cache authority.
+
+The new verified-bundle generator emits a formatter-stable 82,875-byte private Dart part while preserving Perl
+83,072-byte and Rust 82,886-byte outputs. The frozen runtime decodes it once without runtime artifact reads.
+Focused Dart proof passes 10/10, analysis is clean, and the complete package passes 347/347. Neutral MCP remains
+35/10/10/68; the formal ledger deliberately stays 2/5 implementations + 2/6 runtimes with rollout pending, while
+expanded canonical topology/source/order governance rejects 43 mutations. Knowledge Map is 746 facts / 6,027
+question keys. Strict Dart stdio `.10.9.4.2` and exact admission `.10.9.4.3` remain separate; no push occurs before
+cadence 300.
+
+Canonical CI passes the complete new Dart MCP chain, Rust semantic admission 1/1 in 81.34 seconds, Dart 1/1,
+Julia 416/416 in 29.9 seconds, containment and moved-root proofs, both primary CLI environments at 66/66, RAM
+70%, and Phase 0 1,031/1,031 in 656 seconds. mdBook, all six doctrines, memory, storage
+1,721/388,654/28, path 14/5, syntax/JSON/whitespace, and exact 13,472-KiB rendered-book plus one-empty-run cleanup
+pass. `.10.9.4.1` is complete and awaits its single clean commit; `.10.9.4.2` remains the next task-tree-first
+owner.
+
 ## 2026-07-29 — Dart native MCP seams frozen before code
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.4.0` and ADR `0059` freeze one in-process Dart server around the already-

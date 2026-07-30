@@ -246,7 +246,8 @@ rejected mutations; focused and canonical proof are green. No-change Perl closeo
 clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
 native/runtime admission `.10.9.4-.7` follows after the clean Rust boundary. Dart behavior-free audit
 `.10.9.4.0` and ADR `0059` now freeze its exact generated/server/wire/security/admission seams without changing
-the 2/5 + 2/6 ledger.
+the 2/5 + 2/6 ledger. Dart `.10.9.4.1` now implements its generated binding/runtime and secure decoded server
+without promoting that ledger; strict stdio `.2` and exact admission `.3` remain ordered.
 
 Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact. Public in-process
 `linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
@@ -259,10 +260,11 @@ one twelve-role external consumer and advances only Rust to 2/5 implementations 
 pending and 39 rejected mutations. No MCP mode was added to `linkedspec-rust`; there is no new executable, source
 bootstrap, SDK/async/network stack, semantic cache, aggregator, or legacy adapter. No-change closeout `.10.9.3.4`
 recomposes the committed owners under focused and canonical proof and closes parent `.10.9.3`. Dart planning
-`.10.9.4.0` consumes that clean handoff: a generated private-part binding/runtime, same-process server around
-caller-owned `SemanticIndex`, core secure entropy/monotonic expiry, strict duplicate-safe/canonical stdio, exact
-admission, and no-change closeout are frozen under `.1-.4`. No Dart production server exists yet; `.10.9.4.1` is
-the next implementation owner.
+`.10.9.4.0` consumes that clean handoff, and `.10.9.4.1` now implements the generated 82,875-byte private part,
+frozen runtime, same-process server around caller-owned `SemanticIndex`, core secure entropy/monotonic expiry,
+digest authorization, lowering-only policy, decoded dispatch, and authority fences. Strict duplicate-safe/
+canonical stdio, exact admission, and no-change closeout remain `.2-.4`. The formal ledger stays 2/5 + 2/6 and
+rejects 43 mutations until admission.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

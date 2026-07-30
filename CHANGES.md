@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.1 — implement the Dart MCP decoded server
+
+Added the public dependency-free Dart `McpServer` around caller-owned immutable `SemanticIndex` values. A host
+registers the exact index with copied opaque authorization bytes and optional lowering-only policy, then uses
+already-decoded `server/discover`, `tools/list`, the two semantic `tools/call` routes, or cancellation. The server
+uses exactly 32 `Random.secure()` bytes per 43-character handle, digest-only authorization with a dummy unknown-
+handle comparison, monotonic absolute expiry, bounded/pruned capacity, revocation/shutdown cleanup, fresh native
+capabilities/query calls, detached response values, and sanitized typed/JSON-RPC failures. It gains no source,
+path, parser/compiler/runtime, process/network/filesystem, trace, primary-CLI, semantic-cache, SDK, or stdio
+authority.
+
+Added `tools/generate_dart_mcp_contract.py` and the 82,875-byte formatter-stable private Dart contract part. The
+frozen runtime verifies and decodes that shared digest-pinned bundle once, owns only the exact schema subset and
+response constructors, and performs no runtime artifact reads. Canonical generator order is now neutral
+materializer/validator followed by byte-fresh Perl 83,072-byte, Rust 82,886-byte, and Dart 82,875-byte bindings.
+Focused Dart proof passes 10 binding/runtime/registry/dispatch/security cases; the complete Dart package passes
+347 tests with clean analysis. The ledger deliberately stays 2/5 implementations and 2/6 runtimes with rollout
+pending, while expanded source/topology/order governance rejects 43 mutations. Strict stdio remains `.10.9.4.2`,
+and only `.10.9.4.3` may formally admit Dart.
+
+Canonical CI passes the Dart MCP chain, Rust semantic admission 1/1 in 81.34 seconds, Dart 1/1, Julia 416/416 in
+29.9 seconds, containment/moved-root, CLI 66x2, RAM 70%, and Phase 0 1,031/1,031 in 656 seconds. Knowledge Map
+746/6,027, mdBook, all six doctrines, memory, storage 1,721/388,654/28, path 14/5, syntax/JSON/whitespace, and
+exact 13,472-KiB/one-empty-run cleanup pass. No push occurs before cadence 300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.0 — plan the Dart native MCP server
 
 Added behavior-free ADR `0059` and an exact `.10.9.4.1-.4` dependency split. The admitted public Dart

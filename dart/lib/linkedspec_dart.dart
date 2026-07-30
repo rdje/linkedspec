@@ -140,6 +140,13 @@ export 'src/io/spec_loader.dart'
         loadSpec,
         resolveSpec,
         validateSpecRequest;
+export 'src/mcp/mcp_server.dart'
+    show
+        McpBudgetLimits,
+        McpDeploymentPolicy,
+        McpRegistrationOptions,
+        McpServer,
+        McpServerError;
 export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
 export 'src/parser/staged_parser_registry.dart'
     show

@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl/Rust parents closed at 2/5 + 2/6, Dart seams frozen, remaining rows pending
+status: current; Perl/Rust admitted at 2/5 + 2/6; Dart decoded server implemented but deliberately unadmitted
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -18,6 +18,7 @@ reverify:
   - bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
   - bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py
+  - bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
   - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
   - bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
   - PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
@@ -25,6 +26,7 @@ reverify:
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission
+  - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart
 ---
 
 # MCP implementation and runtime admission ledger
@@ -35,10 +37,11 @@ not change the protocol schema, corpus, canonical frames, or root digest. The le
 and the exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and four policy inventories.
 
 Topology is five native implementations—Perl, Rust, Dart, Julia, and one Lua-5.1-compatible source—but six runtime
-admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current exact state is Perl
-and Rust complete at 2/5 implementations and 2/6 runtimes. Dart, Julia, Lua, PUC Lua, and LuaJIT remain pending,
-and shared `thin_mcp_transport` rollout remains pending under `FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes
-qualify.
+admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current formal state is Perl
+and Rust complete at 2/5 implementations and 2/6 runtimes. Dart now has generated/frozen/decoded production owners,
+but its row deliberately remains pending until strict stdio and the exact twelve-role admission consumer land.
+Julia, Lua, PUC Lua, and LuaJIT also remain pending, and shared `thin_mcp_transport` rollout remains pending under
+`FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes qualify.
 
 Each admitted consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
 static dispatch, native capabilities identity, native query identity, raw outcomes, lifecycle outcomes, handle
@@ -48,10 +51,12 @@ does not synthesize another expected-response model.
 
 `tools/check_mcp_implementation_admission.py` validates ledger/status/ownership/count topology, unchanged transport
 identity, exact role declaration/invocation, tracked canonical inputs, and canonical command order. It rejects 28
-mutations for the Perl-only state and 39 after Rust admission. Static fences prohibit production MCP owners from
+mutations for the Perl-only state, 39 after Rust admission, and 43 after adding the still-unadmitted Dart decoded
+proof to canonical order. Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
-opaque handles, while Rust uses locked OS entropy without filesystem authority.
+opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`
+without `dart:io`, process, network, or source-tool authority.
 
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` recomposes these committed transport, binding, server, ledger,
 and admission owners unchanged. It deliberately adds no umbrella oracle. Canonical signoff closes parent Perl
@@ -59,8 +64,8 @@ and admission owners unchanged. It deliberately adds no umbrella oracle. Canonic
 closeout commit. Rust decoded implementation `.10.9.3.1`, strict stdio `.10.9.3.2`, exact admission `.10.9.3.3`,
 and unchanged-owner closeout `.10.9.3.4` are complete. Parent `.10.9.3` is closed without ledger movement; Dart
 `.10.9.4.0` and ADR `0059` freeze its generated/runtime/server/wire/admission/closeout seams without status
-movement. Dart generated binding and decoded server `.10.9.4.1` are next; `.10.9.4.3` alone may advance the ledger
-to 3/5 implementations and 3/6 runtimes after exact behavior is complete.
+movement. Dart generated binding and decoded server `.10.9.4.1` are implemented without status movement;
+`.10.9.4.3` alone may advance the ledger to 3/5 implementations and 3/6 runtimes after strict stdio is complete.
 
-Related facts: [[dart-native-mcp-server-plan]], [[mcp-native-server-topology]], and
+Related facts: [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[mcp-native-server-topology]], and
 [[mcp-2026-07-28-stdio-contract]].

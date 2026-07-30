@@ -41,6 +41,64 @@ bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../ru
 bash ../tools/run_dart_local.sh
 ```
 
+## Native decoded MCP server
+
+The package exports a dependency-free, same-process `McpServer` around an already-created immutable
+`SemanticIndex`. It never accepts a source path or source text and calls only the index's native `capabilities`
+and `queryNeutral` surfaces. Register with host-owned authorization bytes, then pass already-decoded requests:
+
+```dart
+import 'dart:convert';
+
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final index = SemanticIndex.fromSource(
+  'Top::\n /x/\n',
+  options: const SemanticIndexOptions(
+    logicalName: 'example.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+  ),
+);
+final authorization = utf8.encode('tenant-42/read-only');
+final server = McpServer();
+final handle = server.registerIndex(index, authorization);
+
+final response = server.dispatch({
+  'jsonrpc': '2.0',
+  'id': 1,
+  'method': 'tools/call',
+  'params': {
+    '_meta': {
+      'io.modelcontextprotocol/clientCapabilities': <String, Object?>{},
+      'io.modelcontextprotocol/protocolVersion': '2026-07-28',
+    },
+    'name': 'linkedspec_semantic_capabilities',
+    'arguments': {'handle': handle},
+  },
+}, authorization);
+
+print(response?['jsonrpc']); // 2.0
+server.shutdown();
+```
+
+Production handles encode exactly 256 secure random bits as 43 unpadded base64url characters. The registry keeps
+only an authorization SHA-256 digest, uses monotonic absolute expiry, defaults to 1,024 live handles and a
+15-minute lifetime, prunes expired entries, and makes unknown/expired/revoked/unauthorized states
+indistinguishable. `McpRegistrationOptions` may lower source detail, digest access, page size, and budgets but can
+never raise native index authority.
+
+The generated 82,875-byte private contract part is verified from the shared neutral MCP bundle and read without
+runtime filesystem access. Raw stdio framing is intentionally not part of this decoded leaf; strict duplicate-safe
+JSON-line input and canonical output are owned by the following task. Use `dispatch` only for already-decoded
+trusted host values until that adapter lands. Verify the current surface from the repository root:
+
+```sh
+bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
+cd dart
+bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings
+bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart
+```
+
 ## Generated rule-label primitives
 
 `lib/src/parser/unicode_rule_label.dart` is generated from the pinned Unicode 17.0.0 `XID_Continue` contract. It

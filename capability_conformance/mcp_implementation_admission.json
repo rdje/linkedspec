@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-mcp-implementation-admission-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.10.9.2.3",
-  "decisions": ["0054", "0055", "0057", "0058"],
+  "decisions": ["0054", "0055", "0057", "0058", "0059"],
   "transport_contract": {
     "contract_id": "linkedspec-mcp-transport-v1",
     "path": "capability_conformance/mcp_semantic_transport_contract.json",
@@ -141,11 +141,13 @@
       "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
       "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
       "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
       "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
+      "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
       "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
       "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t"
     ]

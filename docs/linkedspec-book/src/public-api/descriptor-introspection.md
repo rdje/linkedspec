@@ -53,7 +53,7 @@ bounded; source detail is ceiling-controlled as `none`, `identity`, `span`, or `
 Optional runtime answers use a caller-captured observation and never cause a query to execute the parser.
 
 Each backend exposes idiomatic native construction/capabilities/query APIs plus the same neutral JSON projection.
-MCP will only forward capabilities and query requests for a caller-registered handle. ADR `0054` requires one
+MCP only forwards capabilities and query requests for a caller-registered handle. ADR `0054` requires one
 exact MCP contract with native Perl, Rust, Dart, Julia, and Lua implementations; one Lua source is admitted on PUC
 Lua and LuaJIT. It will not compile a spec, read an implicit path, inspect backend objects, derive facts, or invent
 explanations. The primary CLI gains no v1 command or option. A future aggregator is outside `.10.9` and may only

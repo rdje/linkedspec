@@ -1,8 +1,8 @@
 # ADR 0059: Dart MCP uses a generated contract part and an in-process native server
 
 - Date: 2026-07-29
-- Status: accepted; behavior-free plan complete under `.10.9.4.0`; implementation/admission pending under
-  `.10.9.4.1-.4`
+- Status: accepted; behavior-free plan `.10.9.4.0` complete; generated binding/runtime and decoded server
+  `.10.9.4.1` implemented; strict stdio/admission/closeout pending under `.10.9.4.2-.4`
 - Tags: architecture, mcp, dart, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -155,6 +155,9 @@ transport, aggregator, or legacy protocol adapter.
 
 ## Consequences
 
+- `.10.9.4.1` realizes the first three private owners and the supported decoded host surface exactly as decided:
+  the generated part is 82,875 bytes, the package remains dependency-free, and focused proof passes all ten
+  binding/runtime/registry/dispatch/security cases plus the complete 347-test Dart package.
 - Dart receives a genuine same-runtime server around native immutable indexes, not a Perl/Rust shim or subprocess.
 - Core Dart facilities satisfy entropy, time, base64url, UTF-8, JSON decoding, SHA-256, and stdio needs without a
   production package dependency; strictness and canonical ordering remain explicit LinkedSpec owners.
@@ -162,8 +165,9 @@ transport, aggregator, or legacy protocol adapter.
   depth, numeric, and identity ambiguities.
 - Asynchronous Dart stream mechanics do not broaden MCP into an SDK/network/actor architecture or add semantic
   concurrency.
-- Exact implementation/runtime admission remains separate from production behavior and cannot promote shared
-  rollout before Julia and both Lua runtimes pass.
+- Exact implementation/runtime admission remains separate from production behavior: the ledger intentionally
+  remains 2/5 implementations and 2/6 runtimes until `.10.9.4.3`, and shared rollout cannot promote before Julia
+  and both Lua runtimes pass.
 
 ## Links
 

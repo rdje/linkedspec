@@ -5,16 +5,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.0`; commit subject
-  `FUTURE-PARITY-BACKLOG.10.9.4.0 - plan Dart native MCP server`, based on clean `7f44d2a1`.
-- active_leaf: none after the planning commit; `.10.9.4.1` must be activated task-tree-first from that clean HEAD.
-- completed_scope: ADR `0059` freezes generated binding/runtime, native registry/decoded dispatch, strict stdio,
-  security/test seams, exact admission, and no-change closeout under `.10.9.4.1-.4`; the ledger remains 2/5
-  implementations + 2/6 runtimes with shared rollout pending.
+- latest_commit: `b503dcc9` — `FUTURE-PARITY-BACKLOG.10.9.4.0 - plan Dart native MCP server` (78/300; no push).
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.1`; its generated Dart binding/runtime and secure decoded
+  server are fully signed off from clean planning commit `b503dcc9`; the single leaf commit is pending.
+- active_leaf: none until that commit is clean; do not pivot while the verified `.10.9.4.1` change is staged.
+- active_scope: commit/clear/prove clean for the filesystem-free generated data, frozen runtime, secure registry/
+  decoded dispatch, lowering-only policy, cancellation, sanitized failures, governance, and synchronized docs.
 - active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/
   parser/compiler/executor/trace/cache/primary-CLI behavior, ledger status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: activate Dart generated-binding/decoded-server leaf `.10.9.4.1` task-tree-first; no
-  push.
+- next_after_clean_commit: activate strict Dart MCP stdio leaf `.10.9.4.2` task-tree-first; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -24,7 +23,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   enter one managed run; Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
 - current_storage_backends: Perl 24, Rust 17, Dart 18, Julia 17, and Lua 16 owner proofs route project data to the
   repository volume; only documented read-only toolchain/OS resources remain external.
-- current_storage_tools: tool oracle freezes 3 Python temp / 13 shell allocator / 24 tool owners; bytecode/map/
+- current_storage_tools: tool oracle freezes 3 Python temp / 13 shell allocator / 25 tool owners; bytecode/map/
   book/CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
 - current_storage_doctrine: `PROJECT-DATA-STORAGE` governs current tracked sinks/defaults and commands; 28 cases
   pass. Its process complement locks six required families, hostile inputs, relocation, and kernel denial.
@@ -39,12 +38,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 78/300 after this commit; never push per commit.
+- push_policy: hard lock at 300 new local commits; counter becomes 79/300 after the pending `.1` commit; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: Rust MCP 15 + 3 + 4 + admission 1, semantic Rust 1/1 in 82.76s, Dart 1/1, Julia 416/416 in
-  29.9s, CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 769s pass; MCP 35/10/10/68 and ledger 2/5 + 2/6 exact.
-- blockers: none. next: commit the complete Dart MCP plan `.10.9.4.0`, prove clean, then activate `.10.9.4.1`
-  task-tree-first from clean HEAD.
+- canonical_state: current gate passes the Dart MCP chain, Rust semantic 1/1 in 81.34s, Dart 1/1, Julia 416/416
+  in 29.9s, CLI 66x2, RAM 70%, and Phase 0 1,031/1,031 in 656s. Focused proof passes MCP 35/10/10/68, three
+  byte-fresh bindings, ledger 2/5 + 2/6 pending/43, Dart 10/10 plus complete 347/347, and corpus 105/105.
+- blockers: none. next: run final post-doc/KM/doctrine checks, commit `.10.9.4.1`, clear/prove clean, then activate
+  `.10.9.4.2` task-tree-first; keep strict stdio and formal admission out of the completed decoded-server commit.

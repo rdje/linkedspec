@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.1` — Dart decoded MCP is native, secure, and still unadmitted):
+  `tools/generate_dart_mcp_contract.py` consumes the same digest-verified neutral bundle as Perl/Rust and emits one
+  formatter-stable 82,875-byte private `part`, preserving the earlier bindings byte-identically at 83,072 and
+  82,886 bytes. `mcp_contract_runtime.dart` verifies/decodes it once and owns only clone/canonical-JSON/schema/
+  response mechanics. Public `McpServer` retains caller-owned immutable `SemanticIndex` identity, calls only fresh
+  `capabilities.toJson()`/`queryNeutral(...).toJson()`, and exposes decoded discovery/list/two-tool/cancellation.
+  Its production registry uses exactly 256 `Random.secure()` bits, unpadded base64url, copied 1–4,096-byte
+  authorization hashed through the existing SHA-256 owner, a fixed-work full-digest comparison plus dummy digest,
+  a checked monotonic `Stopwatch`, bounded collision/capacity/lifetime, expiry pruning, lowering-only policy, and
+  sanitized failures. Static and dynamic fences deny filesystem/process/network/parser/compiler/runtime/trace/
+  emitter/primary-CLI/cache authority; the package keeps zero production dependencies. Focused Dart proof is
+  10/10, analyzer clean, and complete package 347/347. Neutral MCP stays 35/10/10/68, the admission ledger remains
+  deliberately 2/5 + 2/6 with rollout pending, and expanded governance rejects 43 mutations. Raw strict stdio is
+  still owned only by `.2`; formal Dart ledger promotion is still owned only by `.3`. Canonical CI independently
+  passes the Dart MCP chain, Rust semantic admission 1/1 in 81.34 seconds, Dart 1/1, Julia 416/416 in 29.9
+  seconds, containment/moved-root, CLI 66x2, RAM 70%, and Phase 0 1,031/1,031 in 656 seconds. Knowledge Map
+  746/6,027, book/doctrines/memory, storage 1,721/388,654/28, path 14/5, syntax/JSON/whitespace, and exact
+  13,472-KiB rendered-book/one-empty-run cleanup pass.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.0` — Dart's stock codec is a value codec, not the MCP wire owner):
   A repository-managed SDK 3.9.2 probe decodes both `{"a":1,"a":2}` and `{"a":1,"\\u0061":2}` as `{"a":2}`
   and encodes an insertion-ordered map without sorting. Dart must therefore scan raw UTF-8 JSON before
