@@ -1,8 +1,8 @@
 # ADR 0061: Lua MCP uses one literal contract binding and one dual-ABI in-process server
 
 - Date: 2026-07-29
-- Status: accepted; plan, decoded implementation, and strict wire complete under `.10.9.6.0-.2`; admission and
-  closeout pending under `.10.9.6.3-.4`
+- Status: accepted; plan, decoded implementation, strict wire, and exact dual-ABI admission complete under
+  `.10.9.6.0-.3`; no-change closeout pending under `.10.9.6.4`
 - Tags: architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -133,8 +133,8 @@ or standalone executable is introduced.
 2. `.1` adds the generated binding, frozen runtime, native system seam, protected decoded server/API, and focused
    identical dual-ABI proof without wire or ledger movement;
 3. `.2` adds strict caller-owned stdio and hostile-I/O/lifecycle proof without ledger movement;
-4. `.3` runs one exact ordered consumer unchanged on PUC Lua and LuaJIT and alone may advance Lua to 5/5
-   implementations and the two ABI rows to 6/6 runtimes while shared rollout remains pending; and
+4. `.3` runs one exact ordered consumer unchanged on PUC Lua and LuaJIT and advances Lua to 5/5 implementations
+   and the two ABI rows to 6/6 runtimes while shared rollout remains pending; and
 5. `.4` recomposes the committed owners without replacement behavior and closes the Lua parent.
 
 Step `.1` now implements this boundary from one unchanged source graph. The generated 82,827-byte module embeds
@@ -150,6 +150,16 @@ the same invalid-request, invalid-params, and silent-notification outcomes on PU
 fractional values in unconstrained client metadata. Caller-owned bytewise framing, canonical LF emission,
 cancellation through successful flush, EOF/I/O release, and fixed optional diagnostics pass 247 assertions per
 runtime; governance rejects 98 mutations while the formal ledger remains unchanged.
+
+Step `.3` now executes one 202-assertion external consumer source independently on PUC Lua and LuaJIT. Both
+runtimes prove all twelve exact roles, including native/MCP identity and the production 1,024-handle boundary;
+the existing private focused seams cover only pre-emission cancellation and injected native failure. The ledger
+is exactly 5/5 implementations plus 6/6 runtimes with shared rollout pending, and governance rejects 114
+mutations without a production-source or transport-byte change.
+
+Canonical signoff passes all six doctrines, the unchanged 35/10/10/68 transport boundary, all five byte-fresh
+bindings, the complete six-runtime admission chain, Phase 0 1,031/1,031 in 659 seconds, and the full PUC
+Lua/LuaJIT package gate. Step `.4` remains the behavior-free committed-owner closeout.
 
 The same neutral corpus, public decoded and stdio paths, exact semantic bytes, all raw/lifecycle classifications,
 production 1,024-handle boundary, authority/privacy fences, and narrow private seams used by prior admissions are

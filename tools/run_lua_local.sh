@@ -46,6 +46,7 @@ log "running primary PUC Lua tests"
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_contract_lua_binding_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_server_lua_dispatch_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_server_lua_stdio_test.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_server_lua_admission_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_source_foundation_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_compilation_foundation_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_static_graph_test.lua
@@ -114,6 +115,8 @@ if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
   "$LUAJIT_CMD" lua/test/mcp_server_lua_dispatch_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/mcp_server_lua_stdio_test.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/mcp_server_lua_admission_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/semantic_index_source_foundation_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \

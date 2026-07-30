@@ -1091,7 +1091,7 @@ content migration exists yet.
   caller-owned streams. Exact admission `.10.9.5.3` now composes those owners through one ordered twelve-role
   external consumer, including the real public 1,024-handle capacity boundary. Focused Julia proof remains
   48 + 139 + 170 assertions, the admission consumer passes 178, and governance rejects 79 mutations. Julia alone
-  advances to 4/5 implementations + 4/6 runtimes while Lua, both Lua ABIs, and shared rollout remain pending.
+  advances at that boundary to 4/5 implementations + 4/6 runtimes while Lua and both Lua ABIs remain pending.
   No-change closeout `.10.9.5.4` now recomposes every committed neutral/Perl/Rust/Dart/Julia owner unchanged,
   closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0` after the clean
   closeout commit. Behavior-free Lua audit `.10.9.6.0` and ADR `0061` froze one common implementation for both
@@ -1101,8 +1101,9 @@ content migration exists yet.
   Focused proof passes 111 binding/runtime plus 210 decoded/security assertions per ABI. Strict wire `.2` now
   adds an iterative JSON-pointer number-kind scanner, bounded `read(1)` LF/CRLF/final-EOF framing, canonical LF,
   cancellation-through-flush, caller-owned streams, and sanitized EOF/I/O release in 247 assertions per ABI.
-  Governance rejects 98 mutations without moving the 4/5 + 4/6 ledger; identical dual-ABI admission `.3` remains
-  next. There is no
+  Exact admission `.3` now runs one ordered 202-assertion consumer unchanged on both ABIs. The complete Lua gate
+  passes 111+210+247+202 per runtime, and governance rejects 114 mutations while advancing only the existing Lua
+  implementation and both runtime rows to 5/5 + 6/6. Shared rollout remains pending for `.10.9.7`. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1561,8 +1562,10 @@ content migration exists yet.
   bundle, frozen runtime, protected secure registry/dispatch, lazy public constructors, and two-function C99
   entropy/monotonic-time seam compiled per ABI at 111 + 210 assertions on each runtime. Strict `.10.9.6.2` now
   adds bounded iterative number-kind-preserving stdio, canonical LF, cancellation-through-flush, fixed optional
-  logging, and EOF/I/O cleanup in 247 assertions per ABI and 98 governance mutations. Formal status remains 4/5
-  + 4/6 until exact shared admission `.10.9.6.3`.
+  logging, and EOF/I/O cleanup in 247 assertions per ABI and 98 governance mutations. Exact shared admission
+  `.10.9.6.3` adds no production behavior: one 202-assertion consumer runs unchanged on both ABIs, governance
+  reaches 114 mutations, and formal status becomes 5/5 implementations + 6/6 runtimes with rollout pending.
+  Canonical signoff passes Phase 0 1,031/1,031 in 659 seconds plus the complete dual-ABI Lua opt-in.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

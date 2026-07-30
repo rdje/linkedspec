@@ -13,7 +13,7 @@ admission, exact number-kind reconstruction, canonical LF emission, cancellation
 optional diagnostics, and EOF/I/O release over caller-owned streams. Focused proof passes 48 + 139 + 170
 assertions. Exact admission `.10.9.5.3` composes all twelve roles through one external consumer with 178
 assertions, including the public 1,024-handle capacity boundary. Governance rejects 79 mutations and Julia alone
-advances formal MCP status to 4/5 implementations + 4/6 runtimes; Lua's two ABI rows and shared rollout remain
+advances formal MCP status at that boundary to 4/5 implementations + 4/6 runtimes; Lua's two ABI rows remain
 pending. No-change `.10.9.5.4` recomposes all committed owners unchanged, closes the Julia parent without
 status movement, and hands the clean boundary to shared Lua planning `.10.9.6.0`.
 
@@ -24,9 +24,11 @@ one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Foc
 assertions on each runtime. Strict-wire leaf `.10.9.6.2` now adds one iterative preflight and caller-owned stdio
 loop unchanged on both ABIs, with 247 assertions per runtime and 98 governance mutations. Its canonical signoff
 passes all six doctrines, the unchanged neutral and four-admitted-backend MCP chain, semantic admission,
-containment, moved-root execution, CLI 66x2, Phase 0 1,031/1,031, and the complete Lua opt-in. Formal status
-deliberately remains 4/5 implementations + 4/6 runtimes, rollout pending, until exact dual-ABI admission
-`.10.9.6.3`.
+containment, moved-root execution, CLI 66x2, Phase 0 1,031/1,031, and the complete Lua opt-in. Exact admission
+`.10.9.6.3` now runs one ordered 202-assertion consumer unchanged on both ABIs. The complete Lua gate passes
+111+210+247+202 per runtime, governance rejects 114 mutations, and formal status is 5/5 implementations + 6/6
+runtimes. Canonical signoff passes all six doctrines, the unchanged neutral and five-implementation MCP chain,
+Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. Shared recurring rollout remains pending.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
@@ -726,8 +728,9 @@ Three backbone items tracked major structural modernization — all done:
   advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change `.4` recomposes those owners and closes parent
   `.10.9.5`. Shared Lua `.10.9.6.0-.2` and ADR `0061` now provide one common generated/runtime/server/wire source,
   strict JSON-pointer number-kind admission, caller-owned canonical stdio, cancellation-through-flush, EOF/I/O
-  release, and a narrow native entropy/clock seam unchanged on PUC Lua/LuaJIT. Focused proof is 111 + 210 + 247
-  assertions per ABI with 98 governance mutations; exact admission `.3` is next and status remains 4/5 + 4/6.
+  release, and a narrow native entropy/clock seam unchanged on PUC Lua/LuaJIT. Exact admission `.3` now runs one
+  202-assertion twelve-role consumer unchanged on both ABIs. Complete proof is 111 + 210 + 247 + 202 per ABI;
+  governance rejects 114 mutations and formal status is 5/5 implementations + 6/6 runtimes with rollout pending.
   Any future aggregator or
   legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 

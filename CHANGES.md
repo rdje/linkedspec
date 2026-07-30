@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.3 — admit the shared Lua MCP implementation
+
+Added one Lua-5.1-compatible external admission consumer and run it unchanged, independently, on PUC Lua and
+LuaJIT. It declares and executes the exact twelve governed roles once in canonical order: contract inventory,
+static dispatch, native capabilities/query identity, raw and lifecycle outcomes, handle indistinguishability,
+policy overlay, cancellation emission, shutdown/I/O, hostile-output/log privacy, and authority fences.
+
+The consumer uses public `mcp_server`, native `SemanticIndex`, decoded dispatch, and caller-owned stdio behavior.
+It composes only the already-private pre-emission-cancellation and injected-native-failure proofs where a
+cooperative synchronous stream cannot create the hostile state, and it executes the production 1,024-live-handle
+boundary. Each ABI passes 202 admission assertions. The complete Lua gate passes 111+210+247+202 per ABI,
+package 177x2, primary CLI 66x2, corpus 105/105, and 16-owner/three-native-module storage proof.
+
+The admission ledger now records all five native implementations and all six runtime admissions complete. Both
+Lua rows point to the same consumer path and source identity; governance rejects 114 owner/ABI/order/omission/
+authority mutations. Shared `thin_mcp_transport` rollout remains pending for `.10.9.7`. No generated binding,
+runtime, server, wire, native system, transport byte, semantic API, parser/runtime, or primary-CLI behavior changed.
+
+Final canonical signoff passes all six doctrines, neutral MCP 35/10/10/68, all five byte-fresh bindings, the
+complete six-runtime admission chain at 5/5 + 6/6 pending/114, Rust semantic 1/1 in 80.95 seconds, Dart 1/1,
+Julia 416/416 in 29.4 seconds, six-family containment, moved-root execution, primary CLI 66x2, RAM 62%, Phase 0
+1,031/1,031 in 659 seconds, and the complete PUC Lua/LuaJIT package, CLI, corpus, and storage gates.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.2 — implement Lua MCP strict stdio
 
 Added one private Lua-5.1-compatible iterative lexical scanner and synchronous caller-owned stdio loop shared

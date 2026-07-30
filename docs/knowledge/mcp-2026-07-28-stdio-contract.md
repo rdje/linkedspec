@@ -22,7 +22,7 @@ answers:
   - how do I regenerate or verify the MCP canonical frames
   - are the native LinkedSpec MCP servers implemented yet
 date: 2026-07-29
-status: exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua strict wire implemented but unadmitted; rollout pending
+status: exact neutral contract canonical; all five implementations and all six runtimes admitted; recurring rollout pending
 tags: [mcp, json-rpc, stdio, semantic-api, security, transport, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown."
 evidence_update_2026_07_29_machine_contract: "FUTURE-PARITY-BACKLOG.10.9.1.1 encodes the policy once as a digest-pinned neutral manifest, closed JSON Schema 2020-12, four semantic payloads, 35 canonical frames, ten raw-byte inputs, ten lifecycle cases, and one repository-routed deterministic materializer; no native MCP server exists yet."
@@ -40,6 +40,7 @@ evidence_update_2026_07_29_julia_decoded: "Julia .10.9.5.1 implements its genera
 evidence_update_2026_07_29_julia_stdio: "Julia .10.9.5.2 implements bounded caller-owned stdio, iterative duplicate-safe lexical preflight, exact number-kind reconstruction, canonical LF emission, cancellation through flush, fixed optional diagnostics, and EOF/I/O release while leaving formal admission and the 3/5 + 3/6 ledger unchanged."
 evidence_update_2026_07_29_julia_admission_closeout: "Julia .10.9.5.3-.4 admit one exact twelve-role consumer and recompose the committed owners, advancing only Julia to 4/5 implementations plus 4/6 runtimes while rollout remains pending."
 evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.1-.2 implement one common generated/runtime/decoded/strict-wire source graph on PUC Lua and LuaJIT. The wire preserves numeric token kinds by JSON-pointer path, emits canonical LF, and releases caller-owned I/O state; exact admission .3 remains pending and the formal ledger stays 4/5 + 4/6."
+evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer unchanged on PUC Lua and LuaJIT. All five implementations and all six runtimes are admitted, governance rejects 114 mutations, the transport digest remains unchanged, and recurring rollout stays pending."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 

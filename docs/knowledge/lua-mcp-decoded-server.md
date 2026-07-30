@@ -10,12 +10,13 @@ answers:
   - does Lua MCP dispatch compile or execute parsers
   - is Lua MCP formally admitted
   - how many Lua MCP decoded tests pass
-  - why does Lua MCP remain 4/5 and 4/6
+  - when was Lua MCP formally admitted
 date: 2026-07-29
-status: decoded implementation and strict wire complete on both ABIs; formal admission pending
+status: decoded implementation, strict wire, and exact one-source dual-ABI admission complete
 tags: [lua, luajit, mcp, decoded-dispatch, security, handles, policy, native-system]
 evidence: "FUTURE-PARITY-BACKLOG.10.9.6.1 adds the generated 82,827-byte literal binding, frozen runtime, protected registry/server, lazy root API, and one common C99 native system source. Binding/runtime proof passes 111 assertions and decoded/security proof passes 210 assertions identically on PUC Lua and LuaJIT; governance rejects 94 mutations while the formal ledger remains 4/5 + 4/6 pending .2-.3."
 evidence_update_2026_07_29_stdio: "FUTURE-PARITY-BACKLOG.10.9.6.2 adds one private iterative strict wire and public caller-owned serve_stdio method. The same source passes 247 framing/lexical/canonical/cancellation/lifecycle assertions on each ABI; governance rejects 98 mutations while formal admission remains pending under .3."
+evidence_update_2026_07_29_admission: "FUTURE-PARITY-BACKLOG.10.9.6.3 runs one exact 202-assertion twelve-role consumer unchanged on PUC Lua and LuaJIT. The formal checker reaches 5/5 implementations + 6/6 runtimes with rollout pending and 114 rejected mutations; no production source or transport byte changes."
 last_verified: 2026-07-29
 reverify:
   - "bash tools/run_lua_local.sh"
@@ -49,10 +50,10 @@ no filesystem or weak fallback.
 
 Private `mcp_wire.lua` and public `server:serve_stdio` now own bounded LF/CRLF/final-EOF framing, iterative
 duplicate-safe UTF-8/JSON admission, numeric-token paths, canonical LF, cancellation through flush, fixed optional
-diagnostics, and terminal release without closing caller streams. Formal status deliberately remains 4/5
-implementations plus 4/6 runtime admissions; one exact consumer must admit the unchanged source independently on
-both ABIs in `.3`.
+diagnostics, and terminal release without closing caller streams. Exact `.3` now runs one 202-assertion consumer
+unchanged on both ABIs and advances the existing owners to 5/5 implementations plus 6/6 runtime admissions.
+Shared recurring rollout remains pending.
 
 Related facts: [[lua-native-mcp-server-plan]], [[mcp-native-server-topology]],
-[[mcp-implementation-admission-ledger]], [[lua-semantic-query-public-api]], and
+[[lua-mcp-implementation-admission]], [[mcp-implementation-admission-ledger]], [[lua-semantic-query-public-api]], and
 [[lua-project-data-ssd-storage]].

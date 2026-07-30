@@ -1,5 +1,32 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Exact shared Lua MCP admission signoff-complete
+
+Strict-wire leaf `FUTURE-PARITY-BACKLOG.10.9.6.2` is committed at clean `15f537df`, its brief is cleared, and
+exact residue checks pass. Admission leaf `.10.9.6.3` is active task-tree-first from that boundary. It owns one
+Lua-5.1-compatible external consumer source invoked independently on PUC Lua and LuaJIT, exact twelve-role
+ordering/completion proof, the single Lua implementation row, both runtime rows, omission-sensitive governance,
+and lockstep signoff. It may advance only 4/5 implementations + 4/6 runtimes to 5/5 + 6/6; shared rollout stays
+pending for `.10.9.7`.
+
+Implementation and focused proof are complete. One external Lua-5.1-compatible consumer declares and executes all
+twelve roles exactly once, unchanged on PUC Lua and LuaJIT, at 202 assertions per ABI. It exercises public native/
+MCP identity, raw/lifecycle/handle/policy/cleanup/privacy behavior, the production 1,024-handle boundary, and only
+the two already-private hostile seams. The complete Lua gate passes 111+210+247+202 per ABI, package 177x2,
+primary CLI 66x2, corpus 105/105, and 16-owner/three-module storage. The ledger is exactly 5/5 implementations +
+6/6 runtimes, shared rollout pending, with 114 rejected mutations.
+
+Lockstep and canonical signoff are complete. The full `LINKEDSPEC_RUN_LUA=1` gate passes all six doctrines;
+neutral MCP 35/10/10/68; all five byte-fresh bindings; Perl 22+13, Rust 15+3+4+1, Dart 15+1, and Julia
+48+139+170+178; the exact 5/5 + 6/6 pending/114 ledger; Rust semantic 1/1 in 80.95 seconds, Dart 1/1, Julia
+416/416 in 29.4 seconds; six-family containment; moved-root execution; primary CLI 66x2; RAM 62%; Phase 0
+1,031/1,031 in 659 seconds; and complete PUC Lua/LuaJIT package/CLI/corpus/storage proof. Knowledge Map is exact
+at 754 facts / 6,108 keys and mdBook renders 79 files at 13,668 KiB.
+
+No production server/wire/contract/fixture/test-hook/semantic/source/parser/compiler/executor/trace/cache/CLI,
+other-backend, aggregator, or legacy behavior changed. Commit, brief-clear, exact cleanup, and clean proof precede
+no-change closeout `.10.9.6.4`.
+
 ## 2026-07-29 — Shared Lua strict MCP stdio complete
 
 Decoded-server leaf `FUTURE-PARITY-BACKLOG.10.9.6.1` is committed at clean `b2e886de`, its brief is cleared,
@@ -19,14 +46,13 @@ neutral MCP 35/10/10/68; all five byte-fresh bindings; Perl 22+13, Rust 15+3+4+1
 48+139+170+178; Rust semantic 1/1 in 82.15 seconds, Dart 1/1, Julia 416/416 in 29.2 seconds; six-family
 containment; moved-root execution; primary CLI 66x2; RAM 63%; Phase 0 1,031/1,031; and the complete Lua opt-in.
 Knowledge Map is exact at 753 facts / 6,099 keys and mdBook renders 79 files at 13,660 KiB. Rendered-book, the
-proven-empty managed run, and bytecode residue are absent. Commit, brief-clear, clean proof, and `.3` activation
-remain in flight.
+proven-empty managed run, and bytecode residue are absent. The leaf is committed at `15f537df`, its brief is
+cleared, the tree is clean, and exact admission `.3` has activated task-tree-first.
 
 This leaf does not own the ordered Lua admission consumer, formal ledger movement, second implementation,
 async/thread/channel, filesystem/process/network/SDK authority, executable, source/parser/compiler/executor,
 trace/cache, primary CLI, aggregator, or legacy adapter. Formal status therefore remains 4/5 implementations +
-4/6 runtimes with rollout pending. Exact dual-ABI admission remains exclusively `.10.9.6.3` after `.2` is
-canonically verified, committed, brief-cleared, and proven clean.
+4/6 runtimes with rollout pending. Exact dual-ABI admission is now active exclusively under `.10.9.6.3`.
 
 ## 2026-07-29 — Shared Lua generated runtime and decoded MCP server complete
 

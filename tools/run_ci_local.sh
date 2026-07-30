@@ -75,7 +75,8 @@ check_no_untracked_ci_inputs() {
   lua/src/linkedspec/mcp_wire.lua \
   lua/test/mcp_contract_lua_binding_test.lua \
   lua/test/mcp_server_lua_dispatch_test.lua \
-  lua/test/mcp_server_lua_stdio_test.lua)
+  lua/test/mcp_server_lua_stdio_test.lua \
+  lua/test/mcp_server_lua_admission_test.lua)
 
  status_line=$(git status --short --untracked-files=all -- lua/test/semantic_introspection_lua_admission_test.lua)
  if [[ "$status_line" == '?? '* ]]; then
@@ -140,7 +141,8 @@ audit_no_machine_specific_absolute_paths() {
   lua/src/linkedspec/mcp_wire.lua \
   lua/test/mcp_contract_lua_binding_test.lua \
   lua/test/mcp_server_lua_dispatch_test.lua \
-  lua/test/mcp_server_lua_stdio_test.lua)
+  lua/test/mcp_server_lua_stdio_test.lua \
+  lua/test/mcp_server_lua_admission_test.lua)
 
  (( found == 0 )) || exit 1
 }
@@ -261,6 +263,7 @@ require_tracked_file lua/src/linkedspec/mcp_wire.lua
 require_tracked_file lua/test/mcp_contract_lua_binding_test.lua
 require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua
 require_tracked_file lua/test/mcp_server_lua_stdio_test.lua
+require_tracked_file lua/test/mcp_server_lua_admission_test.lua
 require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
 require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
 require_tracked_file lua/test/semantic_introspection_lua_admission_test.lua
@@ -559,6 +562,12 @@ bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, 
 
 log "running exact Julia MCP admission consumer"
 bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_server_julia_admission_test.jl")'
+
+log "running exact shared Lua MCP admission consumer on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua
+
+log "running exact shared Lua MCP admission consumer on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua
 
 log "checking MCP implementation/runtime admission ledger"
 bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py

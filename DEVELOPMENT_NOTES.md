@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.3` — one source implementation can support two independently
+  admitted ABI runtimes without duplicating expected behavior): The ledger distinguishes implementation identity
+  from runtime qualification. Lua contributes one generated/runtime/server/wire source graph and one server name,
+  while PUC Lua and LuaJIT each execute the same external consumer path. Both runtime rows therefore carry the
+  same owner, consumer, and twelve-role order; only the repository-routed runtime invocation differs.
+
+  The consumer does not create a second response oracle. It reads the frozen contract inventory, calls public
+  native and MCP surfaces, and compares detached canonical JSON. Public streams exercise every raw/lifecycle/
+  handle/policy/I/O/privacy outcome and the production 1,024-handle limit. Only pre-emission cancellation and an
+  injected native exception remain source-composed from their already-executed private focused tests because a
+  cooperative synchronous caller cannot create those states at the public boundary.
+
+  PUC Lua and LuaJIT each pass 202 admission assertions. Complete Lua proof is 111+210+247+202 per ABI, package
+  177x2, primary CLI 66x2, corpus 105/105, and storage 16x3. The exact ledger becomes 5/5 implementations + 6/6
+  runtimes with shared rollout pending; 114 mutations reject source forks, ABI aliases, missing roles/commands,
+  ignored completion, premature rollout, and authority drift. Production behavior and transport bytes are
+  unchanged.
+
+  Final canonical composition passes all six doctrines; neutral MCP 35/10/10/68; five byte-fresh bindings; the
+  exact 5/5 implementation + 6/6 runtime pending/114 boundary; Rust semantic 1/1 in 80.95 seconds; Dart 1/1;
+  Julia 416/416 in 29.4 seconds; six-family containment; moved-root execution; primary CLI 66x2; RAM 62%; Phase 0
+  1,031/1,031 in 659 seconds; and the complete dual-ABI Lua gate.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.2` — preserve lexical number identity at the narrow transport
   boundary, not throughout decoded Lua values): PUC Lua and LuaJIT do not expose one common decoded distinction
   between integer tokens and integral fraction/exponent tokens. Replacing the established JSON value model would

@@ -68,9 +68,12 @@ fixture, or umbrella oracle. Focused and canonical gates pass unchanged, close p
 `.10.9.4` as the next clean-boundary owner. Dart `.10.9.4.1-.3` has since added its generated binding, decoded
 server, strict stdio, and exact admission; no-change `.10.9.4.4` recomposes that chain and closes the parent.
 Julia `.10.9.5.1-.3` then adds its generated binding, decoded server, strict number-kind-preserving stdio, and
-one ordered twelve-role external admission consumer. The current ledger is 4/5 implementations + 4/6 runtimes
-with rollout pending and 79 rejected implementation/admission mutations. No-change `.10.9.5.4` reruns that exact
-committed chain, closes parent `.10.9.5`, and adds no replacement implementation, fixture, or umbrella oracle.
+one ordered twelve-role external admission consumer. No-change `.10.9.5.4` reruns that exact committed chain,
+closes parent `.10.9.5`, and adds no replacement implementation, fixture, or umbrella oracle. Shared Lua
+`.10.9.6.1-.3` now adds one common implementation plus one 202-assertion consumer run independently on both ABIs;
+the current ledger is 5/5 implementations + 6/6 runtimes with recurring rollout pending and 114 rejected
+implementation/admission mutations. Its canonical signoff passes all six doctrines, the exact cross-runtime MCP
+chain, Phase 0 1,031/1,031 in 659 seconds, and the complete PUC Lua/LuaJIT package gate.
 
 Behavior-free Julia plan `.10.9.5.0` and ADR `0060` freeze the generated-Base64-binding -> decoded-server ->
 strict-number-preserving-stdio -> exact-admission -> no-change-closeout sequence. Leaves `.1-.3` now implement
@@ -91,11 +94,11 @@ generated literal binding, identical PUC Lua/LuaJIT decoded proof, identical str
 invoked once per ABI, then the implementation ledger. Decoded leaf `.10.9.6.1` now registers the Lua generator,
 generated binding, frozen runtime, C99 native system seam, server, and two focused tests. Strict-wire leaf `.2`
 adds one private iterative scanner/stdio loop, public protected `server:serve_stdio`, and a third focused test.
-The complete Lua gate runs 111 binding/runtime, 210 decoded/security, and 247 strict-stdio assertions identically
-on each ABI, beside both 177-test
-package legs, primary 66x2, corpus 105/105, and the 16-owner/three-module storage proof. Source/CI/authority
-governance now rejects 98 mutations while MCP deliberately remains 4/5 + 4/6 pending. Exact admission remains
-`.3`.
+Exact admission `.3` adds one 202-assertion twelve-role consumer source and runs it unchanged on both ABIs. The
+complete Lua gate runs 111 binding/runtime, 210 decoded/security, 247 strict-stdio, and 202 admission assertions
+identically on each ABI, beside both 177-test package legs, primary 66x2, corpus 105/105, and the
+16-owner/three-module storage proof. Source/CI/authority governance now rejects 114 mutations; MCP is exactly 5/5
+implementations + 6/6 runtimes with recurring rollout pending.
 
 The strict-wire leaf's complete signoff runs this composition with `LINKEDSPEC_RUN_LUA=1`: all six doctrines;
 neutral MCP 35/10/10/68; all five byte-fresh bindings; Perl 22+13, Rust 15+3+4+1, Dart 15+1, and Julia

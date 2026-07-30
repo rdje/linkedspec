@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl/Rust/Dart/Julia admitted at 4/5 implementations + 4/6 runtimes; rollout pending
+status: current; all five implementations and all six runtimes admitted; shared rollout pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -32,6 +32,8 @@ reverify:
   - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart
   - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_contract_julia_binding_test.jl"); include("julia/test/mcp_server_julia_dispatch_test.jl"); include("julia/test/mcp_server_julia_stdio_test.jl")'
   - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_server_julia_admission_test.jl")'
+  - bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua
+  - bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua
 ---
 
 # MCP implementation and runtime admission ledger
@@ -42,11 +44,10 @@ not change the protocol schema, corpus, canonical frames, or root digest. The le
 and the exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and four policy inventories.
 
 Topology is five native implementations—Perl, Rust, Dart, Julia, and one Lua-5.1-compatible source—but six runtime
-admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current formal state is Perl,
-Rust, Dart, and Julia complete at 4/5 implementations and 4/6 runtimes. Each ordered consumer composes its
-generated/frozen/decoded/strict-stdio production owners without changing them. Lua, PUC Lua, and LuaJIT remain
-pending, and shared `thin_mcp_transport` rollout remains pending under
-`FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes qualify.
+admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current formal state is all
+five implementations and all six runtimes complete. Each ordered consumer composes its generated/frozen/decoded/
+strict-stdio production owners without changing them. Shared `thin_mcp_transport` rollout remains pending under
+`FUTURE-PARITY-BACKLOG.10.9.7` until the recurring six-runtime composition is separately admitted.
 
 Each admitted consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
 static dispatch, native capabilities identity, native query identity, raw outcomes, lifecycle outcomes, handle
@@ -60,7 +61,9 @@ rejects 28 mutations for the Perl-only state, 39 after Rust admission, 43/46 whi
 remained unadmitted, 58 after exact Dart admission, 65 after registering Julia's still-unadmitted generated/
 runtime/decoded owners, 68 after requiring Julia's strict wire plus stdio proof, 79 after exact Julia admission,
 and 93 after locking Lua's still-unadmitted generated/runtime/native-system/decoded owners and dual-ABI focused
-proof. Static fences prohibit production MCP owners from
+proof. Exact shared Lua admission raises the boundary to 114 mutations: one identical 202-assertion consumer runs
+all twelve roles independently on PUC Lua and LuaJIT, the Lua implementation and both runtime rows are complete,
+and shared rollout remains pending. Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
 opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`;
@@ -91,10 +94,13 @@ binding, server, wire, consumer, and ledger owners unchanged; it preserves all 7
 Behavior-free Lua `.10.9.6.0` and ADR `0061` freeze one generated literal binding, private frozen runtime,
 protected decoded server, strict pre-decode number-kind wire, and one package-private C99 entropy/monotonic-time
 source compiled per ABI. Decoded `.10.9.6.1` implements and gate-registers the generated/frozen/server/native
-owners plus identical 111 + 210 focused assertions on PUC Lua and LuaJIT. They remain deliberately absent from
-the formal implementation row until one unchanged source and admission consumer qualify independently after
-strict wire `.2`. Only exact dual-ABI admission `.3` may advance 5/5 plus 6/6; closeout `.4` remains after it.
+owners plus identical 111 + 210 focused assertions on PUC Lua and LuaJIT. Strict wire `.2` adds one bounded
+iterative transport unchanged on both ABIs. Exact admission `.3` now runs one shared consumer independently on
+PUC Lua and LuaJIT, advances the existing Lua owners to 5/5 implementations plus 6/6 runtimes, and leaves
+recurring rollout pending. Canonical CI passes all six doctrines, the unchanged 35/10/10/68 transport boundary,
+Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-change closeout `.4` follows after
+the clean admission commit.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
-[[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].
+[[lua-mcp-implementation-admission]], [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].

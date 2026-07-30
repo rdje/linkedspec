@@ -93,9 +93,14 @@ IMPLEMENTATIONS = [
     {
         "backend": "lua",
         "server_name": "linkedspec-semantic-lua",
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
-        "source_paths": [],
+        "source_paths": [
+            "lua/src/linkedspec/mcp_contract.lua",
+            "lua/src/linkedspec/mcp_contract_runtime.lua",
+            "lua/src/linkedspec/mcp_server.lua",
+            "lua/src/linkedspec/mcp_wire.lua",
+        ],
         "runtime_admissions": ["puc_lua", "luajit"],
     },
 ]
@@ -132,16 +137,16 @@ RUNTIME_ADMISSIONS = [
     {
         "backend": "lua",
         "runtime": "puc_lua",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
-        "consumer_path": None,
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.10.9.6.3",
+        "consumer_path": "lua/test/mcp_server_lua_admission_test.lua",
     },
     {
         "backend": "lua",
         "runtime": "luajit",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.6",
-        "consumer_path": None,
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.10.9.6.3",
+        "consumer_path": "lua/test/mcp_server_lua_admission_test.lua",
     },
 ]
 
@@ -174,6 +179,7 @@ LUA_OWNERS = {
         "lua/test/mcp_contract_lua_binding_test.lua",
         "lua/test/mcp_server_lua_dispatch_test.lua",
         "lua/test/mcp_server_lua_stdio_test.lua",
+        "lua/test/mcp_server_lua_admission_test.lua",
     ],
 }
 
@@ -188,6 +194,7 @@ ORDERED_COMMANDS = [
     "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py",
+    LUA_GENERATOR_COMMAND,
     "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
@@ -197,6 +204,8 @@ ORDERED_COMMANDS = [
     "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
     "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")'",
     "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_server_julia_admission_test.jl\")'",
+    "bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua",
+    "bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -246,11 +255,6 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         positions.append(source.index(command))
     if positions != sorted(positions):
         fail("canonical MCP commands are out of order")
-    if source.count(LUA_GENERATOR_COMMAND) != 1:
-        fail("Lua MCP binding generator must occur exactly once")
-    lua_generator_position = source.index(LUA_GENERATOR_COMMAND)
-    if not positions[5] < lua_generator_position < positions[6]:
-        fail("Lua MCP binding generator is outside its canonical pre-test position")
     required = [
         "require_tracked_file capability_conformance/mcp_implementation_admission.json",
         "require_tracked_file tools/check_mcp_implementation_admission.py",
@@ -283,6 +287,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file lua/test/mcp_contract_lua_binding_test.lua",
         "require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua",
         "require_tracked_file lua/test/mcp_server_lua_stdio_test.lua",
+        "require_tracked_file lua/test/mcp_server_lua_admission_test.lua",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -379,6 +384,33 @@ def validate_julia_consumer_source(source: str) -> None:
         or "@test_skip" in source
     ):
         fail("Julia admission completion/order assertion drifted")
+
+
+def validate_lua_consumer_source(source: str) -> None:
+    declaration = re.search(
+        r"local ROLE_ORDER = json\.array\(\{\n(.*?)\n\}\)", source, re.DOTALL
+    )
+    if declaration is None:
+        fail("Lua admission role declaration is missing")
+    declared = re.findall(r'"([a-z_]+)"', declaration.group(1))
+    if declared != ROLES:
+        fail("Lua admission role declaration/order drifted")
+    calls = re.findall(
+        r'admission_role\(roles_seen,\s*"([a-z_]+)"', source, re.DOTALL
+    )
+    if calls != ROLES:
+        fail("Lua admission roles are not invoked exactly once in order")
+    completion = (
+        'check_same_json(roles_seen, ROLE_ORDER, '
+        '"all exact admission roles execute once in order")'
+    )
+    if (
+        source.count(completion) != 1
+        or source.count('io.write("[lua-mcp-admission] PASS: "') != 1
+        or "if false" in source
+        or "os.exit(0)" in source
+    ):
+        fail("Lua admission completion/order assertion drifted")
 
 
 def validate_authority_sources() -> None:
@@ -703,7 +735,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if ledger["format"] != 1 or ledger["contract_id"] != CONTRACT_ID or ledger["task_owner"] != TASK_OWNER:
         fail("ledger identity drifted")
-    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059", "0060"]:
+    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059", "0060", "0061"]:
         fail("ledger decision provenance drifted")
 
     transport_ref = ledger["transport_contract"]
@@ -736,10 +768,10 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("five-implementation status/identity topology drifted")
     if ledger["runtime_admissions"] != RUNTIME_ADMISSIONS:
         fail("six-runtime admission status/topology drifted")
-    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 4:
-        fail("implementation completion count is not exactly four")
-    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 4:
-        fail("runtime admission completion count is not exactly four")
+    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 5:
+        fail("implementation completion count is not exactly five")
+    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 6:
+        fail("runtime admission completion count is not exactly six")
 
     rollout = ledger["rollout"]
     exact_fields(
@@ -810,6 +842,8 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
                 validate_dart_consumer_source(source)
             elif row["runtime"] == "julia":
                 validate_julia_consumer_source(source)
+            elif row["runtime"] in {"puc_lua", "luajit"}:
+                validate_lua_consumer_source(source)
             else:
                 fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
@@ -839,21 +873,27 @@ LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("Rust implementation regression", lambda value: value["implementations"][1].__setitem__("status", "pending")),
     ("Dart implementation regression", lambda value: value["implementations"][2].__setitem__("status", "pending")),
     ("Julia implementation regression", lambda value: value["implementations"][3].__setitem__("status", "pending")),
+    ("Lua implementation regression", lambda value: value["implementations"][4].__setitem__("status", "pending")),
     ("implementation source", lambda value: value["implementations"][0]["source_paths"].pop()),
     ("Rust implementation source", lambda value: value["implementations"][1]["source_paths"].pop()),
     ("Dart implementation source", lambda value: value["implementations"][2]["source_paths"].pop()),
     ("Julia implementation source", lambda value: value["implementations"][3]["source_paths"].pop()),
+    ("Lua implementation source", lambda value: value["implementations"][4]["source_paths"].pop()),
     ("runtime omission", lambda value: value["runtime_admissions"].pop()),
     ("runtime reorder", lambda value: value["runtime_admissions"].reverse()),
     ("Perl admission regression", lambda value: value["runtime_admissions"][0].__setitem__("status", "pending")),
     ("Rust admission regression", lambda value: value["runtime_admissions"][1].__setitem__("status", "pending")),
     ("Dart admission regression", lambda value: value["runtime_admissions"][2].__setitem__("status", "pending")),
     ("Julia admission regression", lambda value: value["runtime_admissions"][3].__setitem__("status", "pending")),
+    ("PUC Lua admission regression", lambda value: value["runtime_admissions"][4].__setitem__("status", "pending")),
+    ("LuaJIT admission regression", lambda value: value["runtime_admissions"][5].__setitem__("status", "pending")),
     ("Lua ABI ownership", lambda value: value["runtime_admissions"][5].__setitem__("runtime", "lua54")),
     ("Perl consumer path", lambda value: value["runtime_admissions"][0].__setitem__("consumer_path", "wrong")),
     ("Rust consumer path", lambda value: value["runtime_admissions"][1].__setitem__("consumer_path", "wrong")),
     ("Dart consumer path", lambda value: value["runtime_admissions"][2].__setitem__("consumer_path", "wrong")),
     ("Julia consumer path", lambda value: value["runtime_admissions"][3].__setitem__("consumer_path", "wrong")),
+    ("PUC Lua consumer path", lambda value: value["runtime_admissions"][4].__setitem__("consumer_path", "wrong")),
+    ("LuaJIT consumer path", lambda value: value["runtime_admissions"][5].__setitem__("consumer_path", "wrong")),
     ("premature rollout", lambda value: value["rollout"].__setitem__("status", "complete")),
     ("rollout requirement", lambda value: value["rollout"]["requires_runtime_admissions"].pop()),
     ("coordinated premature promotion", coordinated_promotion),
@@ -878,71 +918,85 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     ci_mutations = [
         ("CI Dart generator omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
         ("CI Julia generator omission", ci_source.replace(ORDERED_COMMANDS[5] + "\n", "")),
-        ("CI Lua generator omission", ci_source.replace(LUA_GENERATOR_COMMAND + "\n", "")),
-        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
-        ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
+        ("CI Lua generator omission", ci_source.replace(ORDERED_COMMANDS[6] + "\n", "")),
+        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
+        ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
         (
             "CI Dart strict stdio proof omission",
             ci_source.replace(
-                ORDERED_COMMANDS[11],
+                ORDERED_COMMANDS[12],
                 "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
                 1,
             ),
         ),
-        ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
-        ("CI Julia focused proof omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
+        ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
+        ("CI Julia focused proof omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
         (
             "CI Julia strict stdio proof omission",
             ci_source.replace(
-                ORDERED_COMMANDS[13],
+                ORDERED_COMMANDS[14],
                 "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")'",
                 1,
             ),
         ),
-        ("CI Julia admission omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[16] + "\n", "")),
+        ("CI Julia admission omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
+        ("CI PUC Lua admission omission", ci_source.replace(ORDERED_COMMANDS[16] + "\n", "")),
+        ("CI LuaJIT admission omission", ci_source.replace(ORDERED_COMMANDS[17] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[18] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[19] + "\n", "")),
         (
             "CI checker before Rust admission",
-            ci_source.replace(ORDERED_COMMANDS[10], "__RUST_ADMISSION__")
-            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[10])
-            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[15]),
+            ci_source.replace(ORDERED_COMMANDS[11], "__RUST_ADMISSION__")
+            .replace(ORDERED_COMMANDS[18], ORDERED_COMMANDS[11])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[18]),
         ),
         (
             "CI Rust admission before strict stdio proof",
-            ci_source.replace(ORDERED_COMMANDS[9], "__RUST_STDIO__")
-            .replace(ORDERED_COMMANDS[10], ORDERED_COMMANDS[9])
-            .replace("__RUST_STDIO__", ORDERED_COMMANDS[10]),
+            ci_source.replace(ORDERED_COMMANDS[10], "__RUST_STDIO__")
+            .replace(ORDERED_COMMANDS[11], ORDERED_COMMANDS[10])
+            .replace("__RUST_STDIO__", ORDERED_COMMANDS[11]),
         ),
         (
             "CI Dart admission before focused proof",
-            ci_source.replace(ORDERED_COMMANDS[11], "__DART_FOCUSED__")
-            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[11])
-            .replace("__DART_FOCUSED__", ORDERED_COMMANDS[12]),
+            ci_source.replace(ORDERED_COMMANDS[12], "__DART_FOCUSED__")
+            .replace(ORDERED_COMMANDS[13], ORDERED_COMMANDS[12])
+            .replace("__DART_FOCUSED__", ORDERED_COMMANDS[13]),
         ),
         (
             "CI checker before Dart admission",
-            ci_source.replace(ORDERED_COMMANDS[12], "__DART_ADMISSION__")
-            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[12])
-            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[15]),
+            ci_source.replace(ORDERED_COMMANDS[13], "__DART_ADMISSION__")
+            .replace(ORDERED_COMMANDS[18], ORDERED_COMMANDS[13])
+            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[18]),
         ),
         (
             "CI checker before Julia focused proof",
-            ci_source.replace(ORDERED_COMMANDS[13], "__JULIA_FOCUSED__")
-            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[13])
-            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[15]),
+            ci_source.replace(ORDERED_COMMANDS[14], "__JULIA_FOCUSED__")
+            .replace(ORDERED_COMMANDS[18], ORDERED_COMMANDS[14])
+            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[18]),
         ),
         (
             "CI Julia admission before focused proof",
-            ci_source.replace(ORDERED_COMMANDS[13], "__JULIA_FOCUSED__")
-            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[13])
-            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[14]),
+            ci_source.replace(ORDERED_COMMANDS[14], "__JULIA_FOCUSED__")
+            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[14])
+            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[15]),
         ),
         (
             "CI checker before Julia admission",
-            ci_source.replace(ORDERED_COMMANDS[14], "__JULIA_ADMISSION__")
-            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[14])
-            .replace("__JULIA_ADMISSION__", ORDERED_COMMANDS[15]),
+            ci_source.replace(ORDERED_COMMANDS[15], "__JULIA_ADMISSION__")
+            .replace(ORDERED_COMMANDS[18], ORDERED_COMMANDS[15])
+            .replace("__JULIA_ADMISSION__", ORDERED_COMMANDS[18]),
+        ),
+        (
+            "CI checker before PUC Lua admission",
+            ci_source.replace(ORDERED_COMMANDS[16], "__PUC_LUA_ADMISSION__")
+            .replace(ORDERED_COMMANDS[18], ORDERED_COMMANDS[16])
+            .replace("__PUC_LUA_ADMISSION__", ORDERED_COMMANDS[18]),
+        ),
+        (
+            "CI LuaJIT admission before PUC Lua admission",
+            ci_source.replace(ORDERED_COMMANDS[16], "__PUC_LUA_ADMISSION__")
+            .replace(ORDERED_COMMANDS[17], ORDERED_COMMANDS[16])
+            .replace("__PUC_LUA_ADMISSION__", ORDERED_COMMANDS[17]),
         ),
         (
             "CI ledger registration omission",
@@ -1096,6 +1150,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 1,
             ),
         ),
+        (
+            "CI Lua admission registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/test/mcp_server_lua_admission_test.lua\n",
+                "",
+                1,
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
@@ -1182,6 +1244,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             },
         ),
         (
+            "Lua admission proof ABI omission",
+            {
+                "gate_source": lua_gate_source.replace(
+                    "lua/test/mcp_server_lua_admission_test.lua", "", 1
+                )
+            },
+        ),
+        (
             "Lua native-system relocated-checkout overlay omission",
             {
                 "process_source": lua_process_source.replace(
@@ -1246,6 +1316,7 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     rust_source = (ROOT / RUNTIME_ADMISSIONS[1]["consumer_path"]).read_text(encoding="utf-8")
     dart_source = (ROOT / RUNTIME_ADMISSIONS[2]["consumer_path"]).read_text(encoding="utf-8")
     julia_source = (ROOT / RUNTIME_ADMISSIONS[3]["consumer_path"]).read_text(encoding="utf-8")
+    lua_source = (ROOT / RUNTIME_ADMISSIONS[4]["consumer_path"]).read_text(encoding="utf-8")
     consumer_mutations = [
         ("Perl role omission", perl_source.replace(" contract_inventory\n", "", 1), validate_perl_consumer_source),
         (
@@ -1334,6 +1405,38 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             ),
             validate_julia_consumer_source,
         ),
+        (
+            "Lua role omission",
+            lua_source.replace('  "contract_inventory",\n', "", 1),
+            validate_lua_consumer_source,
+        ),
+        (
+            "Lua role invocation omission",
+            lua_source.replace(
+                'admission_role(roles_seen, "contract_inventory", function()',
+                'admission_role(roles_seen, "wrong_role", function()',
+                1,
+            ),
+            validate_lua_consumer_source,
+        ),
+        (
+            "Lua completion omission",
+            lua_source.replace(
+                'check_same_json(roles_seen, ROLE_ORDER, "all exact admission roles execute once in order")\n',
+                "",
+                1,
+            ),
+            validate_lua_consumer_source,
+        ),
+        (
+            "Lua consumer skipped",
+            lua_source.replace(
+                "local roles_seen = json.array()",
+                "if false then\nlocal roles_seen = json.array()",
+                1,
+            ),
+            validate_lua_consumer_source,
+        ),
     ]
     for name, mutant, validator in consumer_mutations:
         try:
@@ -1355,7 +1458,7 @@ def main() -> int:
         return 1
     print(
         "MCP implementation/admission: "
-        f"4/5 implementations, 4/6 runtimes, rollout pending, {rejected} rejected mutations"
+        f"5/5 implementations, 6/6 runtimes, rollout pending, {rejected} rejected mutations"
     )
     return 0
 

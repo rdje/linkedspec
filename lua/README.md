@@ -201,8 +201,11 @@ The implemented package-private `lua/native/mcp_system.c` exposes only fixed 32-
 secure entropy and monotonic milliseconds, compiled separately for both ABIs by the existing native builder. It
 uses `arc4random_buf` on Darwin/BSD, an EINTR-safe `getrandom` loop on Linux, and `CLOCK_MONOTONIC`, with no
 filesystem/weak/wall-clock fallback. Focused proof passes 111 generated/runtime, 210 decoded/security, and 247
-strict-wire assertions per ABI; governance rejects 98 mutations. Formal MCP status remains 4/5 implementations + 4/6
-runtimes until exact dual-ABI admission `.10.9.6.3`.
+strict-wire assertions per ABI. Exact admission uses one external Lua-5.1-compatible consumer unchanged on PUC
+Lua and LuaJIT; each runtime passes 202 assertions across all twelve governed roles, including the production
+1,024-handle boundary. Governance rejects 114 mutations and formal MCP status is now 5/5 implementations + 6/6
+runtimes. Canonical signoff passes Phase 0 1,031/1,031 in 659 seconds plus the full PUC Lua/LuaJIT package gate;
+shared rollout remains pending for recurring six-runtime composition `.10.9.7`.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches

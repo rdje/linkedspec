@@ -56,11 +56,11 @@ Dart is the third generated filesystem-free binding, frozen schema runtime, secu
 discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twelve-role public consumer. Julia
 `.10.9.5.1-.3` add the fourth generated binding, digest-verified frozen runtime, secure public decoded server,
 strict synchronous stdio, and one ordered twelve-role admission consumer. No-change `.10.9.5.4` recomposes those
-owners and closes the Julia parent without status movement. The ledger is 4/5 native implementations and 4/6
-runtime admissions with shared rollout pending until one Lua source qualifies on both ABIs. Behavior-free Lua
-audit `.10.9.6.0` and ADR `0061` now freeze that one-source implementation architecture without changing status.
+owners and closes the Julia parent without status movement. Shared Lua `.10.9.6.1-.3` then implement one source
+graph and qualify it independently on both ABIs. The ledger is now 5/5 native implementations and 6/6 runtime
+admissions; shared recurring rollout remains pending.
 
-## Accepted modern MCP transport (Lua decoded server implemented; formal admission pending)
+## Accepted modern MCP transport (all implementations and runtimes admitted)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -3465,9 +3465,9 @@ The dependency order is:
 | `.10.9.6.0` | shared Lua native owner/security/wire audit and ADR `0061` | architecture frozen; behavior and 4/5 + 4/6 ledger unchanged |
 | `.10.9.6.1` | generated Lua literal binding/runtime, native system seam, secure registry, and decoded server | implemented; 111 + 210 assertions per ABI, formal ledger unchanged |
 | `.10.9.6.2` | strict shared Lua stdio and lifecycle | implemented; 247 assertions per ABI, 98 governance mutations, formal admission unchanged |
-| `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | pending; alone may advance 5/5 + 6/6 |
+| `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | complete; one shared 202-assertion consumer per ABI, 5/5 + 6/6, rollout pending, 114 mutations, canonical signoff green |
 | `.10.9.6.4` | committed-owner no-change shared Lua closeout | pending |
-| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; decoded implementation and strict wire complete, exact dual-ABI admission next |
+| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; implementation and dual-ABI admission complete, no-change closeout next |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
 
@@ -3488,11 +3488,10 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, Dart, and
-Julia callers can use decoded in-process dispatch plus strict stdio, and all four have exact twelve-role MCP
-admission. The shared status/proof ledger is therefore 4/5 implementations and 4/6 runtimes, with shared rollout
-pending and the normative transport digest unchanged. Julia's no-change closeout recomposes those committed
-owners without another oracle and hands the same boundary to shared Lua planning `.10.9.6.0`.
+runtime query surfaces now. MCP machine artifacts and independent validation are complete. All five native
+implementations expose decoded in-process dispatch plus strict stdio and exact twelve-role admission; one Lua
+source qualifies independently on PUC Lua and LuaJIT. The shared status/proof ledger is therefore 5/5
+implementations and 6/6 runtimes, with recurring rollout pending and the normative transport digest unchanged.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3734,9 +3733,11 @@ async runtime, standalone executable, source bootstrap, semantic cache, or prima
 
 Decoded leaf `.1` passes 111 binding/runtime plus 210 server/security/authority assertions on each ABI. Strict
 wire leaf `.2` adds 247 assertions per ABI and raises omission-sensitive governance from 94 to 98 mutations
-without status movement. One unchanged exact consumer then runs independently on PUC Lua and LuaJIT in `.3`; only that
-leaf may advance the ledger from 4/5 implementations plus 4/6 runtimes to 5/5 plus 6/6. Shared recurring rollout
-remains `.10.9.7`.
+without status movement. Exact `.3` now runs one unchanged 202-assertion consumer independently on PUC Lua and
+LuaJIT, advancing the ledger to 5/5 implementations plus 6/6 runtimes and governance to 114 mutations. Shared
+recurring rollout remains separately pending under `.10.9.7`. Canonical signoff passes the unchanged 35-frame /
+10-raw / 10-lifecycle / 68-mutation transport boundary, all six runtime admissions, Phase 0 1,031/1,031 in 659
+seconds, and the complete dual-ABI Lua package gate.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

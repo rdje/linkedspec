@@ -71,7 +71,7 @@ changed* lives in git (layer D), not here.
 | [0058](0058-rust-native-mcp-server-seams.md) | Rust MCP uses a generated contract binding and an in-process runtime server | 2026-07-29 | accepted; `.10.9.3.1-.4` implementation, admission, and parent closeout complete at 2/5 + 2/6 | architecture, mcp, rust, embedding, handles, authorization, json, stdio, security, portability |
 | [0059](0059-dart-native-mcp-server-seams.md) | Dart MCP uses a generated contract part and an in-process native server | 2026-07-29 | accepted; `.0-.4` plan/implementation/admission/parent closeout complete at 3/5 + 3/6 | architecture, mcp, dart, embedding, handles, authorization, json, stdio, security, portability |
 | [0060](0060-julia-native-mcp-server-seams.md) | Julia MCP uses a generated contract module and a synchronous in-process server | 2026-07-29 | accepted; `.0-.4` implementation/admission/parent closeout complete | architecture, mcp, julia, embedding, handles, authorization, json, stdio, security, portability |
-| [0061](0061-lua-native-mcp-server-seams.md) | Lua MCP uses one literal contract binding and one dual-ABI in-process server | 2026-07-29 | accepted; plan + decoded + strict wire complete; admission/closeout pending | architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability |
+| [0061](0061-lua-native-mcp-server-seams.md) | Lua MCP uses one literal contract binding and one dual-ABI in-process server | 2026-07-29 | accepted; plan + decoded + strict wire + dual-ABI admission complete; closeout pending | architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
