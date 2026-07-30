@@ -380,6 +380,7 @@ export backend_name,
     register_index!,
     revoke_handle!,
     dispatch_mcp,
+    serve_mcp_stdio!,
     shutdown_mcp!,
     with_execution_observation,
     source_identity,
@@ -478,6 +479,7 @@ include("semantic/SemanticQuery.jl")
 include("mcp/McpContract.jl")
 include("mcp/McpContractRuntime.jl")
 include("mcp/McpServer.jl")
+include("mcp/McpWire.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

@@ -349,11 +349,12 @@ recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/ex
 closes nine-family direct-process conformance and focused-gate/public-status alignment. `.7.3.3` closes local
 outer no-drift; the Julia tree remains active/delegated to global `.1.5`, `.1.6`, and `.3`, not complete.
 
-## Native decoded MCP server
+## Native MCP server and strict stdio
 
-`FUTURE-PARITY-BACKLOG.10.9.5.1` adds one synchronous in-process MCP adapter over the existing semantic API.
-Construct the `SemanticIndex` yourself, register that exact immutable value with opaque host authorization, and
-pass already-decoded JSON-like requests to `dispatch_mcp`:
+`FUTURE-PARITY-BACKLOG.10.9.5.1-.2` add one synchronous in-process MCP adapter over the existing semantic API
+and its strict modern-MCP stdio transport. Construct the `SemanticIndex` yourself, register that exact immutable
+value with opaque host authorization, then either pass already-decoded JSON-like requests to `dispatch_mcp` or
+serve caller-owned byte streams with `serve_mcp_stdio!`:
 
 ```julia
 using LinkedSpecJulia
@@ -403,12 +404,29 @@ revoke_handle!(server, handle)
 shutdown_mcp!(server)
 ```
 
+For a long-lived host process, register every index before entering the blocking stdio loop:
+
+```julia
+server = McpServer()
+handle = register_index!(server, index, authorization)
+serve_mcp_stdio!(server, stdin, stdout, authorization; log = stderr)
+```
+
+`serve_mcp_stdio!` accepts LF, CRLF, and one complete final frame at EOF. It bounds each payload at 1,048,576
+bytes excluding the delimiter, validates strict UTF-8 and JSON before JSON3, rejects decoded duplicate keys and
+batches, preserves integer versus fraction/exponent token kinds, and emits recursively key-sorted canonical JSON
+plus exactly one LF. The optional log is silent unless an I/O failure occurs, when it receives only the fixed
+line `linkedspec_mcp_io_failure`; omit `log` for no diagnostics. Input, output, and log remain caller-owned and
+are never closed, but output and log must be distinct. Graceful EOF and any read/write/flush failure shut down the
+server and release registered indexes; an I/O failure throws sanitized `McpServerError` code
+`linkedspec_mcp_io_failure`.
+
 The exported host values are `McpBudgetLimits`, `McpDeploymentPolicy`, `McpRegistrationOptions`, `McpServer`,
 and `McpServerError`; the exported operations are `register_index!`, `revoke_handle!`, `dispatch_mcp`, and
-`shutdown_mcp!`. `McpServer` is opaque. Authorization must be a nonempty `AbstractVector{UInt8}` of at most 4,096
-bytes. A registration defaults to 15 minutes, may be lowered or extended up to the contract maximum of one day,
-and returns a 43-character handle carrying 256 bits of operating-system entropy. Unknown, unauthorized, expired,
-and revoked handles have the same tool-level response.
+`serve_mcp_stdio!`, and `shutdown_mcp!`. `McpServer` is opaque. Authorization must be a nonempty
+`AbstractVector{UInt8}` of at most 4,096 bytes. A registration defaults to 15 minutes, may be lowered or extended
+up to the contract maximum of one day, and returns a 43-character handle carrying 256 bits of operating-system
+entropy. Unknown, unauthorized, expired, and revoked handles have the same tool-level response.
 
 MCP never creates an index. Capabilities and permitted queries call `semantic_capabilities` and
 `semantic_query_neutral` afresh, then detach through `to_json`; policy may lower source detail, digest access,
@@ -416,10 +434,11 @@ page size, and budgets but cannot elevate native limits. The generated Base64 co
 memory and production MCP code has no source/path, parser/compiler/executor, trace, filesystem, process, network,
 SDK, semantic-cache, or primary-CLI authority.
 
-This leaf intentionally exposes decoded dispatch only. Strict UTF-8/JSON lexical admission, LF/CRLF/final-EOF
-framing, exact number-kind preservation, canonical line emission, caller-owned borrowed `IO`, and I/O lifecycle
-belong to `.10.9.5.2`; do not pass untrusted wire bytes directly to `JSON3.read` and treat the result as admitted
-MCP input. Formal Julia MCP admission remains `.10.9.5.3`.
+Decoded dispatch remains the embedding surface for already-admitted host values; use `serve_mcp_stdio!` for
+untrusted wire bytes instead of decoding them directly with JSON3. Cancellation observed after response
+preparation but before emission suppresses that response; successful flush completes it, so a later cancellation
+cannot retract emitted bytes. Formal Julia MCP admission remains `.10.9.5.3` and is the only leaf authorized to
+move the 3/5-implementation + 3/6-runtime ledger.
 
 ## Commands
 

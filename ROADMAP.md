@@ -484,8 +484,11 @@ server, strict number-kind-preserving stdio, exact admission, and no-change clos
 opaque `McpServer`, 256-bit OS-random handles, digest authorization, monotonic expiry, lower-only policy, and
 exact discovery/list/two-tool/cancellation dispatch. Focused proof is 48 + 139 and the complete Julia local gate,
 storage oracle, CLI, and corpus 105/105 pass. Canonical order includes the fourth generator/focused proof and
-rejects 65 mutations while formal status stays 3/5 implementations + 3/6 runtimes with rollout pending. Strict
-stdio `.10.9.5.2` is next; `.3` alone may admit Julia at 4/5 + 4/6, then `.4` closes committed owners unchanged.
+rejects 65 mutations. Strict stdio `.10.9.5.2` now implements bounded duplicate-safe number-kind-preserving
+framing, canonical LF emission, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over
+caller-owned streams at 170 further assertions and 68 rejected mutations. Formal status stays 3/5
+implementations + 3/6 runtimes with rollout pending; `.3` alone may admit Julia at 4/5 + 4/6, then `.4` closes
+committed owners unchanged.
 
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an

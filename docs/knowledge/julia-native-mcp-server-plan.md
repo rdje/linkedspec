@@ -18,10 +18,10 @@ answers:
   - "what are the Julia MCP implementation leaves"
   - "when will Julia MCP advance the implementation ledger"
 date: 2026-07-29
-status: accepted plan; generated runtime and decoded server implemented, strict stdio/admission pending
+status: accepted plan; generated runtime, decoded server, and strict stdio implemented; admission pending
 tags: [julia, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
-evidence: docs/decisions/0060-julia-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.5.0-.4; julia/src/mcp/McpContract.jl; julia/src/mcp/McpContractRuntime.jl; julia/src/mcp/McpServer.jl; julia/test/mcp_contract_julia_binding_test.jl; julia/test/mcp_server_julia_dispatch_test.jl; tools/generate_julia_mcp_contract.py; tools/check_mcp_implementation_admission.py
-reverify: "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
+evidence: docs/decisions/0060-julia-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.5.0-.4; julia/src/mcp/McpContract.jl; julia/src/mcp/McpContractRuntime.jl; julia/src/mcp/McpServer.jl; julia/src/mcp/McpWire.jl; julia/test/mcp_contract_julia_binding_test.jl; julia/test/mcp_server_julia_dispatch_test.jl; julia/test/mcp_server_julia_stdio_test.jl; tools/generate_julia_mcp_contract.py; tools/check_mcp_implementation_admission.py
+reverify: "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
 ---
 
 # Julia Native MCP Server Plan
@@ -34,7 +34,7 @@ load source or paths, compile or execute a specification, enable trace/runtime o
 responses, emit generated source, or bootstrap from the primary CLI.
 
 The frozen owners are generated `julia/src/mcp/McpContract.jl`, private `McpContractRuntime.jl`, public-host
-`McpServer.jl`, and strict synchronous `McpWire.jl`. The first three are implemented.
+`McpServer.jl`, and strict synchronous `McpWire.jl`. All four are implemented.
 `tools/generate_julia_mcp_contract.py` consumes the same digest-verified bundle as Perl, Rust, and Dart. It embeds
 Base64 rather than raw JSON because Julia raw-string
 quote escaping is not byte-transparent; runtime decoding verifies the canonical JSON SHA-256 before JSON3 and
@@ -50,10 +50,9 @@ the private primary-CLI writer.
 Implemented production `RandomDevice()` supplies OS entropy, `time_ns()` supplies documented monotonic elapsed
 time, core Base64 maps 32 bytes to a 43-character unpadded URL-safe handle, and existing SHA digests
 authorization. Base64 and Random are explicit standard-library dependencies; no third-party package, SDK,
-network stack, task runtime,
-or executable is added. Pending `.2` will use caller-owned borrowed `IO` values for bounded synchronous LF/CRLF/
-final-EOF framing, cancellation through flush, fixed optional diagnostics, and shutdown release without closing
-the streams.
+network stack, task runtime, or executable is added. Implemented `.2` uses caller-owned borrowed `IO` values for
+bounded synchronous LF/CRLF/final-EOF framing, cancellation through flush, fixed optional diagnostics, and
+shutdown release without closing the streams.
 
 The omission-safe split is `.10.9.5.1` generated binding/runtime/secure decoded server, `.2` strict wire and
 lifecycle, `.3` exact twelve-role Julia admission and Julia-only movement to 4/5 implementations plus 4/6
@@ -61,7 +60,7 @@ runtimes, and no-change `.4` parent closeout. Until `.3`, the ledger remains exa
 pending.
 
 Related facts: [[julia-semantic-introspection-authority-map]], [[julia-semantic-query-public-api]],
-[[julia-mcp-decoded-server]],
+[[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-semantic-runtime-observation-authority-map]], [[julia-primary-cli-native-execution-canonical-json]],
 [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],
 [[mcp-implementation-admission-ledger]], and [[dart-native-mcp-server-plan]].

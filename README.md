@@ -1084,9 +1084,12 @@ content migration exists yet.
   standard-library dependencies; no third-party package, SDK, filesystem/process/network authority, executable,
   source bootstrap, semantic cache, or primary-CLI mode is added. Focused proof passes 48 binding/runtime plus 139
   decoded-server assertions, and the complete Julia local gate passes package/storage/CLI/corpus 105/105.
-  JSON3's duplicate-key, malformed-UTF-8, and `1.0`/`1e0` coercion gaps remain isolated to strict wire `.2`, which
-  must reconstruct number kinds before the already-implemented frozen schema runtime. The ledger deliberately
-  remains 3/5 + 3/6 pending; exact twelve-role admission `.3` alone may promote Julia.
+  Strict stdio `.10.9.5.2` now adds public synchronous `serve_mcp_stdio!` plus a private bounded LF/CRLF/final-EOF
+  wire. Its iterative scanner closes JSON3's duplicate-key, malformed-UTF-8, escape/surrogate, depth, id-token,
+  and `1.0`/`1e0` coercion gaps before decoding, reconstructs exact number kinds, emits canonical LF, preserves
+  cancellation through successful flush, and releases all state on EOF or sanitized hostile I/O without closing
+  caller-owned streams. Focused Julia proof is now 48 + 139 + 170 assertions and governance rejects 68 mutations.
+  The ledger deliberately remains 3/5 + 3/6 pending; exact twelve-role admission `.3` alone may promote Julia.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1534,8 +1537,10 @@ content migration exists yet.
   Julia `.10.9.5.0` and ADR `0060` freeze `McpContract.jl` generated Base64 data, private runtime/server/wire
   owners, OS-random handles, monotonic expiry, digest authorization, strict UTF-8/duplicate/number-kind handling,
   synchronous borrowed-`IO` stdio, and `.1-.4` order. Decoded implementation `.10.9.5.1` now ships the
-  119,538-byte binding, frozen runtime, secure registry, public decoded API, and 187 focused assertions. The ledger
-  remains 3/5 + 3/6 pending; strict stdio `.2` is next, and exact admission `.3` alone may promote Julia.
+  119,538-byte binding, frozen runtime, secure registry, and public decoded API. Strict `.10.9.5.2` adds bounded
+  duplicate-safe number-kind-preserving stdio, canonical LF, cancellation through flush, fixed optional logging,
+  and EOF/I/O cleanup over caller-owned streams. Combined focused proof is 48 + 139 + 170 assertions and 68
+  rejected mutations. The ledger remains 3/5 + 3/6 pending; exact admission `.3` alone may promote Julia.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

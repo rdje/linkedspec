@@ -146,10 +146,12 @@ JULIA_PENDING_OWNERS = {
         "julia/src/mcp/McpContract.jl",
         "julia/src/mcp/McpContractRuntime.jl",
         "julia/src/mcp/McpServer.jl",
+        "julia/src/mcp/McpWire.jl",
     ],
     "test_paths": [
         "julia/test/mcp_contract_julia_binding_test.jl",
         "julia/test/mcp_server_julia_dispatch_test.jl",
+        "julia/test/mcp_server_julia_stdio_test.jl",
     ],
 }
 
@@ -167,7 +169,7 @@ ORDERED_COMMANDS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
     "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
     "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
-    "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")'",
+    "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")'",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -235,8 +237,10 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file julia/src/mcp/McpContract.jl",
         "require_tracked_file julia/src/mcp/McpContractRuntime.jl",
         "require_tracked_file julia/src/mcp/McpServer.jl",
+        "require_tracked_file julia/src/mcp/McpWire.jl",
         "require_tracked_file julia/test/mcp_contract_julia_binding_test.jl",
         "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl",
+        "require_tracked_file julia/test/mcp_server_julia_stdio_test.jl",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -420,6 +424,9 @@ def validate_authority_sources() -> None:
         "Sockets",
         "Downloads",
         "HTTP",
+        "@async",
+        "Threads.",
+        "Channel",
         "parse_spec(",
         "compile_spec(",
         "load_spec(",
@@ -432,7 +439,11 @@ def validate_authority_sources() -> None:
     julia_primary = (ROOT / "julia" / "bin" / "linkedspec_julia.jl").read_text(
         encoding="utf-8"
     )
-    if "McpServer" in julia_primary or "dispatch_mcp" in julia_primary:
+    if (
+        "McpServer" in julia_primary
+        or "dispatch_mcp" in julia_primary
+        or "serve_mcp_stdio!" in julia_primary
+    ):
         fail("the primary Julia parser CLI acquired MCP bootstrap authority")
 
 
@@ -453,6 +464,7 @@ def validate_pending_julia_owners() -> None:
         'include("mcp/McpContract.jl")',
         'include("mcp/McpContractRuntime.jl")',
         'include("mcp/McpServer.jl")',
+        'include("mcp/McpWire.jl")',
     ]:
         if module_source.count(include) != 1:
             fail(f"Julia MCP module owner registration drifted: {include}")
@@ -462,6 +474,7 @@ def validate_pending_julia_owners() -> None:
     for include in [
         'include("mcp_contract_julia_binding_test.jl")',
         'include("mcp_server_julia_dispatch_test.jl")',
+        'include("mcp_server_julia_stdio_test.jl")',
     ]:
         if tests_source.count(include) != 1:
             fail(f"Julia MCP package-test registration drifted: {include}")
@@ -667,6 +680,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         ),
         ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
         ("CI Julia focused proof omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
+        (
+            "CI Julia strict stdio proof omission",
+            ci_source.replace(
+                ORDERED_COMMANDS[13],
+                "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")'",
+                1,
+            ),
+        ),
         ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
         ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
         (
@@ -763,6 +784,13 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             ),
         ),
         (
+            "CI Julia wire registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/src/mcp/McpWire.jl\n",
+                "",
+            ),
+        ),
+        (
             "CI Julia binding proof registration omission",
             ci_source.replace(
                 "require_tracked_file julia/test/mcp_contract_julia_binding_test.jl\n",
@@ -773,6 +801,13 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             "CI Julia decoded proof registration omission",
             ci_source.replace(
                 "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl\n",
+                "",
+            ),
+        ),
+        (
+            "CI Julia stdio proof registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/test/mcp_server_julia_stdio_test.jl\n",
                 "",
             ),
         ),

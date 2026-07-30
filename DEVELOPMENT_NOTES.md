@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.2` — Julia's wire boundary must preserve lexical facts that JSON3
+  erases): `McpWire.jl` treats JSON3 only as a post-admission value codec. One iterative scanner proves strict
+  UTF-8/JSON, escape and surrogate validity, decoded key uniqueness, depth, object-only requests, exact id tokens,
+  and number-token order. JSON3 then decodes with `numbertype=Float64`; a recursive converter consumes those
+  lexemes once, rebuilding integral tokens as `Int` and retaining fractional/exponent tokens as finite `Float64`.
+  This keeps `1`, `1.0`, `1e0`, and negative zero contract-distinct without adding a second schema or semantic
+  model.
+
+  Generic Julia `IO` does not provide `IOStream`'s `all=false` keyword. The synchronous reader therefore blocks
+  for exactly one byte with generic `readbytes!`, then drains only the current bounded `bytesavailable` count into
+  fixed repository-owned buffers. It neither assumes transport chunk boundaries nor grows on overlong input.
+  The transport preserves caller ownership, accepts LF/CRLF/final EOF, drains/recoveries after long frames, emits
+  canonical LF, and makes successful flush the response-completion boundary.
+
+  Cancellation remains race-defined without async authority: a private deterministic seam can cancel a prepared
+  request before write; after write/flush, completion removes active state and later cancellation is inert. EOF
+  and hostile input/output/flush all clear the registry and active requests. Optional logging is distinct and
+  fixed-content only; log failure cannot replace the primary sanitized I/O error. Focused proof is 48 + 139 +
+  170 assertions, while omission-sensitive governance rises from 65 to 68 rejected mutations and keeps the
+  formal ledger unchanged until `.10.9.5.3`. The complete Julia local gate independently passes byte-fresh
+  generation, the full package, 17-owner/5-package-tree storage containment, primary CLI conformance, and the
+  105/105 shipped corpus. The first standalone focused composition exposed that the new test inherited `JSON3`
+  from package `runtests.jl`; adding an explicit test-local import makes the exact governance command independently
+  executable instead of relying on include order.
+
+  Final canonical signoff passes the Julia 357-assertion MCP composition, Rust semantic 1/1 in 78.64 seconds,
+  Dart 1/1, Julia 416/416 in 27.6 seconds, containment/moved-root, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in
+  632 seconds. The derived Knowledge Map is 750/6,067 and the ignored mdBook rendering is 13,556 KiB/79 files;
+  both are verified before exact cleanup of only the rendering and task-created bytecode cache.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.1` — decoded Julia MCP must be native, opaque, and generated): The
   implemented server retains the exact caller-created `SemanticIndex`; it never reconstructs an index or derives
   semantic facts. Registration validates one fresh detached native capabilities response, freezes only its

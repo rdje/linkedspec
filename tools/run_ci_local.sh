@@ -62,8 +62,10 @@ check_no_untracked_ci_inputs() {
   julia/src/mcp/McpContract.jl \
   julia/src/mcp/McpContractRuntime.jl \
   julia/src/mcp/McpServer.jl \
+  julia/src/mcp/McpWire.jl \
   julia/test/mcp_contract_julia_binding_test.jl \
-  julia/test/mcp_server_julia_dispatch_test.jl)
+  julia/test/mcp_server_julia_dispatch_test.jl \
+  julia/test/mcp_server_julia_stdio_test.jl)
 
  status_line=$(git status --short --untracked-files=all -- lua/test/semantic_introspection_lua_admission_test.lua)
  if [[ "$status_line" == '?? '* ]]; then
@@ -115,8 +117,10 @@ audit_no_machine_specific_absolute_paths() {
   julia/src/mcp/McpContract.jl \
   julia/src/mcp/McpContractRuntime.jl \
   julia/src/mcp/McpServer.jl \
+  julia/src/mcp/McpWire.jl \
   julia/test/mcp_contract_julia_binding_test.jl \
-  julia/test/mcp_server_julia_dispatch_test.jl)
+  julia/test/mcp_server_julia_dispatch_test.jl \
+  julia/test/mcp_server_julia_stdio_test.jl)
 
  (( found == 0 )) || exit 1
 }
@@ -223,8 +227,10 @@ require_tracked_file dart/test/mcp_server_dart_admission_test.dart
 require_tracked_file julia/src/mcp/McpContract.jl
 require_tracked_file julia/src/mcp/McpContractRuntime.jl
 require_tracked_file julia/src/mcp/McpServer.jl
+require_tracked_file julia/src/mcp/McpWire.jl
 require_tracked_file julia/test/mcp_contract_julia_binding_test.jl
 require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl
+require_tracked_file julia/test/mcp_server_julia_stdio_test.jl
 require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
 require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
 require_tracked_file lua/test/semantic_introspection_lua_admission_test.lua
@@ -515,8 +521,8 @@ log "running exact Dart MCP admission consumer"
  bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart
 )
 
-log "running Julia MCP generated-binding, frozen-runtime, secure-registry, and decoded-dispatch proof"
-bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_contract_julia_binding_test.jl"); include("julia/test/mcp_server_julia_dispatch_test.jl")'
+log "running Julia MCP generated-binding, frozen-runtime, secure-registry, decoded-dispatch, and strict-stdio proof"
+bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_contract_julia_binding_test.jl"); include("julia/test/mcp_server_julia_dispatch_test.jl"); include("julia/test/mcp_server_julia_stdio_test.jl")'
 
 log "checking MCP implementation/runtime admission ledger"
 bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py

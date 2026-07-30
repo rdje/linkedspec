@@ -279,8 +279,10 @@ admission, and no-change closeout under `.1-.4`. Julia's existing `semantic_capa
 `time_ns`, Base64, SHA-256, and borrowed `IO` satisfy the server without a third-party package, SDK, executable,
 or primary-CLI mode. Decoded implementation `.10.9.5.1` now ships the 119,538-byte generated binding, frozen
 runtime, secure opaque registry, lower-only policy, public decoded dispatch, and 48 + 139 focused assertions.
-The ledger remains 3/5 + 3/6 pending until `.10.9.5.3`; strict byte/framing/lifecycle implementation `.2` follows
-only after the clean decoded-server commit.
+Strict byte/framing/lifecycle implementation `.10.9.5.2` now ships bounded duplicate-safe number-kind-preserving
+stdio, canonical LF, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-owned
+streams at 170 further assertions and 68 rejected governance mutations. The ledger remains 3/5 + 3/6 pending
+until exact admission `.10.9.5.3`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

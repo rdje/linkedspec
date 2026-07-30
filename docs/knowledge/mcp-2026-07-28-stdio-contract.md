@@ -37,6 +37,7 @@ evidence_update_2026_07_29_dart_admission: "Dart .10.9.4.3 composes one exact or
 evidence_update_2026_07_29_dart_closeout: "Dart .10.9.4.4 recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, preserves the 3/5 implementation + 3/6 runtime ledger and all 58 mutations, closes parent .10.9.4, and hands the exact contract to Julia .10.9.5."
 evidence_update_2026_07_29_julia_plan: "Julia .10.9.5.0 and ADR 0060 freeze a generated Base64 bundle, native synchronous server, strict UTF-8/duplicate/numeric-token wire, OS-backed entropy, monotonic expiry, digest-only authorization, and .1-.4 order without changing the transport or 3/5 + 3/6 pending ledger."
 evidence_update_2026_07_29_julia_decoded: "Julia .10.9.5.1 implements its generated Base64 bundle, frozen schema/canonical runtime, secure native registry, and decoded public server while leaving strict stdio, formal admission, and the 3/5 + 3/6 ledger unchanged."
+evidence_update_2026_07_29_julia_stdio: "Julia .10.9.5.2 implements bounded caller-owned stdio, iterative duplicate-safe lexical preflight, exact number-kind reconstruction, canonical LF emission, cancellation through flush, fixed optional diagnostics, and EOF/I/O release while leaving formal admission and the 3/5 + 3/6 ledger unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -72,10 +73,10 @@ when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
 28-positive/7-negative schema and 68-mutation proof. Perl, Rust, and Dart implement, admit, and parent-close that
 contract. Dart's generated/runtime/decoded/strict-stdio production owners remain exactly admitted under ADR
-`0059`; ADR `0060` freezes Julia's seams and `.10.9.5.1` implements generated/runtime/decoded behavior. Julia
-strict stdio/admission, Lua, recurring six-runtime admission, and public no-drift remain dependency-ordered.
+`0059`; ADR `0060` freezes Julia's seams and `.10.9.5.1-.2` implement generated/runtime/decoded plus strict-stdio
+behavior. Julia admission, Lua, recurring six-runtime admission, and public no-drift remain dependency-ordered.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 
-Related facts: [[mcp-native-server-topology]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]],
+Related facts: [[mcp-native-server-topology]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]],
 [[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]].

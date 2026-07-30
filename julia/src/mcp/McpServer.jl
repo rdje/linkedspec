@@ -95,6 +95,7 @@ mutable struct McpServer
     maximum_lifetime_ms::Int
     capabilities_of::Function
     query_index::Function
+    before_wire_emit::Union{Nothing,Function}
     stopped::Bool
 end
 
@@ -139,6 +140,7 @@ function McpServer()
         maximum_lifetime_ms = maximum_lifetime_ms,
         capabilities_of = _mcp_native_capabilities,
         query_index = _mcp_native_query,
+        before_wire_emit = nothing,
     )
 end
 
@@ -151,6 +153,7 @@ function _mcp_server(;
     maximum_lifetime_ms,
     capabilities_of,
     query_index,
+    before_wire_emit,
 )
     return McpServer(
         Dict{String,_McpRegistryEntry}(),
@@ -163,6 +166,7 @@ function _mcp_server(;
         maximum_lifetime_ms,
         capabilities_of,
         query_index,
+        before_wire_emit,
         false,
     )
 end
@@ -297,6 +301,43 @@ function _mcp_dispatch_with_preparation!(
         authorization_context;
         retain_prepared,
     )
+end
+
+function _mcp_dispatch_for_wire!(server::McpServer, request, authorization_context)
+    object = _mcp_as_object(request)
+    id = object === nothing ? nothing : get(object, "id", nothing)
+    prepared = try
+        id === nothing ? nothing : _mcp_canonical_json(id)
+    catch
+        nothing
+    end
+    response = _mcp_dispatch_with_preparation!(
+        server,
+        request,
+        authorization_context;
+        retain_prepared = true,
+    )
+    if response === nothing || prepared === nothing
+        return response, nothing
+    end
+    active = get(getfield(server, :active), prepared, nothing)
+    return response, active !== nothing && active.prepared ? prepared : nothing
+end
+
+function _mcp_wire_response_ready!(server::McpServer, prepared::String)
+    active_requests = getfield(server, :active)
+    active = get(active_requests, prepared, nothing)
+    active === nothing && return false
+    if active.cancelled
+        delete!(active_requests, prepared)
+        return false
+    end
+    return active.prepared
+end
+
+function _mcp_wire_response_emitted!(server::McpServer, prepared::String)
+    delete!(getfield(server, :active), prepared)
+    return nothing
 end
 
 """Idempotently clear all registered indexes and active request state."""
@@ -468,6 +509,7 @@ function _mcp_test_server(;
     handle_attempts = _MCP_MAXIMUM_HANDLE_ATTEMPTS,
     capabilities_of = _mcp_native_capabilities,
     query_index = _mcp_native_query,
+    before_wire_emit = nothing,
 )
     1 <= maximum_handles <= _MCP_DEFAULT_MAXIMUM_HANDLES ||
         throw(ArgumentError("maximum_handles is outside the test seam"))
@@ -482,6 +524,7 @@ function _mcp_test_server(;
         maximum_lifetime_ms = _MCP_MAXIMUM_LIFETIME_MS,
         capabilities_of = capabilities_of,
         query_index = query_index,
+        before_wire_emit = before_wire_emit,
     )
 end
 

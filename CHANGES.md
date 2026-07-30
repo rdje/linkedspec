@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.2 — implement strict Julia MCP stdio
+
+Added private synchronous `McpWire.jl` and exported `serve_mcp_stdio!` over caller-owned Julia `IO`. The wire
+accepts bounded LF, CRLF, and complete final-EOF frames; drains an overlong frame before recovering; performs an
+iterative strict UTF-8/JSON lexical pass; rejects BOMs, malformed escapes/surrogates, decoded duplicate keys,
+batches, excessive nesting, and invalid request-id tokens; and reconstructs integer versus fraction/exponent
+values from recorded number lexemes after JSON3 decoding. Output is recursively key-sorted canonical JSON plus
+exactly one LF, with flush included in response completion.
+
+Prepared-response cancellation can suppress emission, while cancellation after a successful synchronous flush
+cannot retract bytes. Graceful EOF and every read/write/flush failure shut down the server and release handles
+without closing the caller's streams. The optional distinct log is silent by default and receives only the fixed
+`linkedspec_mcp_io_failure` line after hostile I/O; callers receive a typed sanitized error. No task, thread,
+channel, SDK, network/filesystem/process authority, executable, source bootstrap, semantic behavior, cache, or
+primary-CLI mode was added.
+
+Focused proof passes 48 generated-binding/runtime, 139 decoded-server, and 170 strict-stdio assertions. Canonical
+Julia ownership now requires the wire source and stdio suite in the exact focused command, and independent
+governance rejects 68 omissions/mutations. Formal status deliberately remains 3/5 implementations + 3/6 runtimes
+with rollout pending; exact twelve-role admission `.10.9.5.3` alone may promote Julia. The complete Julia local
+gate passes byte-fresh binding generation, package tests, repository-volume storage at 17 owners / 5 locked
+package trees, primary CLI process conformance, and all 105 corpus fixtures.
+
+Canonical CI exits 0 with the Julia 357-assertion MCP proof, Rust semantic admission 1/1 in 78.64 seconds, Dart
+1/1, Julia semantic admission 416/416 in 27.6 seconds, repository-volume containment and moved-root proof, primary
+CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 632 seconds. Knowledge Map 750/6,067, mdBook 13,556 KiB/79 files,
+all six doctrines, memory, whitespace, and exact rendered-book/Python-bytecode cleanup pass.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.1 — implement the Julia MCP decoded server
 
 Added the public native Julia `McpServer` around caller-owned immutable `SemanticIndex` values. Hosts register an

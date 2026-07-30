@@ -1,7 +1,7 @@
 # ADR 0060: Julia MCP uses a generated contract module and a synchronous in-process server
 
 - Date: 2026-07-29
-- Status: accepted; `.10.9.5.0` plan and `.10.9.5.1` decoded implementation complete; stdio/admission/closeout pending
+- Status: accepted; `.10.9.5.0-.2` plan, decoded implementation, and strict stdio complete; admission/closeout pending
 - Tags: architecture, mcp, julia, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -168,9 +168,9 @@ transport, aggregator, or legacy adapter.
   becomes a value converter.
 - Julia standard libraries satisfy entropy, time, Base64, SHA-256, and borrowed-I/O needs; the package adds no
   third-party production dependency.
-- `.10.9.5.1` implements generated/runtime/decoded behavior without source/path, wire, semantic, or primary-CLI
-  authority. The ledger remains exactly 3/5 implementations and 3/6 runtimes with rollout pending until
-  `.10.9.5.3` owns promotion.
+- `.10.9.5.1-.2` implement generated/runtime/decoded behavior and strict synchronous stdio without source/path,
+  semantic, async, network, or primary-CLI authority. The ledger remains exactly 3/5 implementations and 3/6
+  runtimes with rollout pending until `.10.9.5.3` owns promotion.
 
 ## Links
 

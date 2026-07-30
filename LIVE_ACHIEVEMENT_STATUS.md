@@ -1,5 +1,32 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Julia native MCP strict stdio implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.5.2` adds private `McpWire.jl` plus public synchronous `serve_mcp_stdio!` over
+caller-owned `IO`. Bounded LF/CRLF/final-EOF framing composes with an iterative strict UTF-8/JSON scanner,
+decoded duplicate-key rejection, exact escape/surrogate/depth/id admission, and recorded-number reconstruction
+that preserves integral versus fraction/exponent kinds through JSON3. Frames recover after overlong or malformed
+input and emit recursively sorted canonical JSON followed by exactly one LF.
+
+Cancellation through the pre-emission boundary suppresses a prepared response; successful flush completes it.
+EOF and every read/write/flush failure release retained indexes and active requests without closing caller-owned
+streams. Optional diagnostics are silent unless hostile I/O occurs and then contain only the fixed
+`linkedspec_mcp_io_failure` line; callers receive a typed sanitized error even if logging also fails. Production
+adds no async/thread/channel, filesystem/process/network, SDK, source/parser/compiler/executor, trace, cache,
+executable, or primary-CLI authority.
+
+Focused proof passes Julia MCP 48 + 139 + 170 assertions and canonical ownership rejects 68 mutations. Formal
+status remains 3/5 implementations + 3/6 runtimes with rollout pending: exact twelve-role admission `.3` alone
+may promote Julia, and `.4` will close its committed owners unchanged. The complete Julia local gate passes the
+byte-fresh binding, full package, repository-volume storage, primary CLI process conformance, and all 105 corpus
+fixtures.
+
+Signoff is complete. Canonical CI exits 0 with the Julia 357-assertion MCP proof, Rust semantic 1/1 in 78.64
+seconds, Dart 1/1, Julia semantic 416/416 in 27.6 seconds, containment/moved-root, CLI 66x2, RAM 60%, and Phase 0
+1,031/1,031 in 632 seconds. Knowledge Map 750/6,067, mdBook 13,556 KiB/79 files, all six doctrines, memory,
+whitespace, and exact generated-artifact cleanup pass. Exact admission `.10.9.5.3` waits for the clean `.2`
+commit boundary.
+
 ## 2026-07-29 — Julia native MCP decoded server implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.5.1` adds the fourth native generated/frozen/decoded MCP stack inside

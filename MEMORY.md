@@ -5,16 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `1b19589d` — `FUTURE-PARITY-BACKLOG.10.9.5.0 - plan Julia native MCP server` (83/300; no push).
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.1`; generated Julia binding/runtime, frozen schema/canonical
-  runtime, secure registry, lower-only policy, decoded dispatch, focused/governance/canonical signoff are complete;
-  commit creation is pending at unchanged 3/5 implementations + 3/6 runtimes, rollout pending/65.
-- active_leaf: none between leaves; `.10.9.5.2` must activate task-tree-first only after the clean `.1` commit.
-- active_scope: `.1` signoff is complete at 48 binding/runtime + 139 decoded assertions, full Julia local proof,
-  and canonical CI; strict token-preserving borrowed-IO stdio remains exclusively `.2`.
+- latest_commit: `ae212a7e` — `FUTURE-PARITY-BACKLOG.10.9.5.1 - implement Julia MCP decoded server` (84/300; no
+  push); commit is brief-cleared/residue-free/clean.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.1`; generated Julia binding/runtime, secure registry,
+  lower-only policy, decoded dispatch, focused/governance/canonical signoff are complete at unchanged 3/5
+  implementations + 3/6 runtimes, rollout pending/65.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.2` — strict synchronous Julia MCP stdio; task-tree-first from clean
+  decoded-server commit `ae212a7e`; signoff is complete and only commit/brief-clear/clean proof remains.
+- active_scope: private bounded lexical preflight, exact number-kind reconstruction, caller-owned borrowed IO,
+  canonical LF emission, cancellation through flush, sanitized logging/failures, and release on every terminal
+  path; focused proof is 48 + 139 + 170 and governance is unchanged 3/5 + 3/6 pending/68.
 - active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/parser/compiler/
-  executor/trace/cache/primary-CLI behavior, non-Dart status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: strict synchronous borrowed-IO Julia MCP stdio `.10.9.5.2`; no push.
+  executor/trace/cache/primary-CLI behavior, non-Julia status, rollout, aggregator, or legacy adapter.
+- next_after_clean_commit: exact twelve-role Julia MCP admission `.10.9.5.3`; no push and no ledger move before it.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -39,14 +42,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 83/300 after `1b19589d`; no push.
+- push_policy: hard lock at 300 new local commits; counter 84/300 after `ae212a7e`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: Julia `.1` passes neutral MCP 35/10/10/68, four byte-fresh bindings, Perl 35, Rust 15+3+4+1,
-  Dart 16/16, Julia MCP 48+139, and ledger 3/5 + 3/6 pending/65. Canonical passes Rust semantic 1/1 78.93s,
-  Dart 1/1, Julia 416/416 27.5s, containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/630s, KM 749/6,057,
-  mdBook 13,548 KiB/79 files, doctrines, memory, whitespace, and exact cleanup.
-- blockers: none. next: commit/clear/prove clean, then activate strict synchronous borrowed-IO Julia MCP stdio
-  `.10.9.5.2` task-tree-first; do not move the ledger before `.3`.
+- canonical_state: `.2` passes exact Julia MCP 48+139+170, full Julia package/storage/CLI/corpus 105/105, ledger
+  3/5 + 3/6 pending/68, KM 750/6,067, mdBook 13,556 KiB/79 files, six doctrines, Rust semantic 1/1 78.64s,
+  Dart 1/1, Julia 416/416 27.6s, containment/moved-root, CLI 66x2, RAM 60%, and Phase 0 1,031/632s.
+- blockers: none. next: exact cleanup, commit/clear/prove clean, then activate exact Julia MCP admission
+  `.10.9.5.3`.

@@ -36,6 +36,7 @@ evidence_update_2026_07_29_dart_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.4.2 imple
 evidence_update_2026_07_29_dart_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.4.3 composes one ordered twelve-role Dart consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, leaves shared rollout pending, and rejects 58 admission mutations without changing production behavior or the transport digest."
 evidence_update_2026_07_29_dart_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.4.4 recomposes every committed neutral, Perl, Rust, and Dart MCP owner unchanged, preserves 3/5 implementations + 3/6 runtimes and all 58 mutations, closes the Dart parent, and hands off to Julia .10.9.5."
 evidence_update_2026_07_29_julia_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.5.1 implements Julia's generated Base64 binding, frozen runtime, secure registry, and public decoded transport over its native SemanticIndex without adding semantic ownership, strict stdio, admission, or status movement."
+evidence_update_2026_07_29_julia_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.5.2 implements Julia's strict bounded duplicate-safe number-kind-preserving stdio, canonical LF, cancellation through flush, and EOF/I/O release without adding semantic ownership, admission, or status movement."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -76,8 +77,9 @@ semantic payload bytes remain direct/MCP identical.
 
 Machine leaves `.10.9.1.1-.2` encode and independently validate those rules once in the neutral
 `linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`,
-Rust `.10.9.3`, and Dart `.10.9.4` are closed. Julia `.10.9.5.1` implements decoded transport while `.2-.4`, Lua
-`.10.9.6`, and recurring six-runtime admission `.10.9.7` remain dependency-ordered.
+Rust `.10.9.3`, and Dart `.10.9.4` are closed. Julia `.10.9.5.1-.2` implement decoded transport and strict stdio
+while admission/closeout `.3-.4`, Lua `.10.9.6`, and recurring six-runtime admission `.10.9.7` remain
+dependency-ordered.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
@@ -88,11 +90,11 @@ checker rejects 105 schema, identity, ordering, topology, privacy, budget, consu
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
 admitted, and the recurring six-runtime proof is complete. The MCP machine contract plus Perl, Rust, and Dart
 servers are parent-closed; the Dart implementation remains exactly admitted at the unchanged 3/5 implementation
-+ 3/6 runtime boundary. Julia decoded dispatch is implemented but unadmitted; its stdio/admission, Lua, recurring
-transport admission, and public no-drift remain dependency-ordered.
++ 3/6 runtime boundary. Julia decoded dispatch and strict stdio are implemented but unadmitted; Julia admission,
+Lua, recurring transport admission, and public no-drift remain dependency-ordered.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],
 [[canonical-primary-cli-trace-protocol]], [[actionir-lowering-stack]],
-[[runtimecontext-boundary]], [[julia-mcp-decoded-server]], [[dart-native-mcp-server-plan]],
+[[runtimecontext-boundary]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]],
 [[dart-mcp-strict-stdio]].
