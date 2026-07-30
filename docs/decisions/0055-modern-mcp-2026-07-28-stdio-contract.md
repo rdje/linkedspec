@@ -2,8 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral contract/canonical governance plus Perl/Rust parents complete at 2/5 implementations
-  and 2/6 runtimes with rollout pending; Dart generated/runtime/decoded owners implemented under `0059`, strict
-  stdio/admission plus later runtimes pending
+  and 2/6 runtimes with rollout pending; Dart generated/runtime/decoded/strict-stdio owners implemented under
+  `0059`, admission plus later runtimes pending
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context

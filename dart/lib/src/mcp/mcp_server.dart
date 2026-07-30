@@ -1,5 +1,7 @@
+import 'dart:async' show Future, Stream;
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io' show IOSink;
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -9,6 +11,7 @@ import '../semantic/sha256.dart' show sha256Hex;
 
 part 'mcp_contract.dart';
 part 'mcp_contract_runtime.dart';
+part 'mcp_wire.dart';
 
 const _authorizationMaximumBytes = 4096;
 const _entropyBytes = 32;
@@ -69,6 +72,8 @@ typedef _EntropySource = List<int> Function();
 typedef _ClockSource = int Function();
 typedef _CapabilitiesSource = Object? Function(SemanticIndex index);
 typedef _QuerySource = Object? Function(SemanticIndex index, Object? request);
+typedef _WireBeforeEmit =
+    void Function(McpServer server, String? preparedRequest);
 
 final class _NativeLimits {
   const _NativeLimits({
@@ -152,6 +157,7 @@ final class McpServer {
         maximumLifetimeMs: maximumLifetimeMs,
         capabilitiesOf: _nativeCapabilities,
         queryIndex: _nativeQuery,
+        wireBeforeEmit: null,
       );
     } on McpServerError {
       rethrow;
@@ -171,6 +177,7 @@ final class McpServer {
     required int maximumLifetimeMs,
     required _CapabilitiesSource capabilitiesOf,
     required _QuerySource queryIndex,
+    required _WireBeforeEmit? wireBeforeEmit,
   }) : _entropy = entropy,
        _nowMs = nowMs,
        _maximumHandles = maximumHandles,
@@ -178,7 +185,8 @@ final class McpServer {
        _defaultLifetimeMs = defaultLifetimeMs,
        _maximumLifetimeMs = maximumLifetimeMs,
        _capabilitiesOf = capabilitiesOf,
-       _queryIndex = queryIndex;
+       _queryIndex = queryIndex,
+       _wireBeforeEmit = wireBeforeEmit;
 
   final Map<String, _RegistryEntry> _entries = {};
   final Map<String, _ActiveRequest> _active = {};
@@ -190,6 +198,7 @@ final class McpServer {
   final int _maximumLifetimeMs;
   final _CapabilitiesSource _capabilitiesOf;
   final _QuerySource _queryIndex;
+  final _WireBeforeEmit? _wireBeforeEmit;
   bool _stopped = false;
 
   /// Register one existing native index and return a fresh opaque handle.
@@ -264,6 +273,80 @@ final class McpServer {
     authorizationContext,
     retainPrepared: false,
   );
+
+  /// Run modern MCP JSON lines over caller-owned input and borrowed sinks.
+  ///
+  /// Normal operation is silent except for canonical protocol frames on
+  /// [output]. An optional distinct [log] receives only one fixed sanitized
+  /// record after an unexpected input, output, or flush failure. Neither sink
+  /// nor [input] is closed by the server. EOF shuts the server down and
+  /// releases every registered index.
+  Future<void> serveStdio(
+    Stream<List<int>> input,
+    IOSink output,
+    List<int> authorizationContext, {
+    IOSink? log,
+  }) {
+    if (_stopped) {
+      throw _serverShutdown();
+    }
+    _authorizationBytes(authorizationContext);
+    if (log != null && identical(output, log)) {
+      throw const McpServerError(
+        'linkedspec_mcp_invalid_stdio',
+        'MCP protocol output and operational log sinks must be distinct.',
+      );
+    }
+    return _mcpServeStdio(this, input, output, authorizationContext, log: log);
+  }
+
+  (Map<String, Object?>?, String?) _dispatchForWire(
+    Object? request,
+    List<int> authorizationContext,
+  ) {
+    String? candidate;
+    final object = _jsonMap(request);
+    final id = object?['id'];
+    if (_validRequestId(id)) {
+      try {
+        candidate = _mcpCanonicalJson(id);
+      } on Object {
+        candidate = null;
+      }
+    }
+    final wasActive = candidate != null && _active.containsKey(candidate);
+    final response = _dispatchWithPreparation(
+      request,
+      authorizationContext,
+      retainPrepared: true,
+    );
+    final prepared =
+        !wasActive && candidate != null && _active[candidate]?.prepared == true
+        ? candidate
+        : null;
+    return (response, prepared);
+  }
+
+  bool _wireResponseReady(String? key) {
+    if (key == null) {
+      return true;
+    }
+    final active = _active[key];
+    if (active == null || !active.prepared) {
+      return false;
+    }
+    if (active.cancelled) {
+      _active.remove(key);
+      return false;
+    }
+    return true;
+  }
+
+  void _wireResponseEmitted(String? key) {
+    if (key != null) {
+      _active.remove(key);
+    }
+  }
 
   Map<String, Object?>? _dispatchWithPreparation(
     Object? request,
@@ -536,6 +619,7 @@ final class McpServerTestHarness {
     Object? Function(SemanticIndex index) capabilitiesOf = _nativeCapabilities,
     Object? Function(SemanticIndex index, Object? request) queryIndex =
         _nativeQuery,
+    void Function(McpServer server, String? preparedRequest)? beforeWireEmit,
   }) {
     if (maximumHandles < 1 || maximumHandles > 1024) {
       throw ArgumentError.value(maximumHandles, 'maximumHandles');
@@ -552,6 +636,7 @@ final class McpServerTestHarness {
       maximumLifetimeMs: 86400000,
       capabilitiesOf: capabilitiesOf,
       queryIndex: queryIndex,
+      wireBeforeEmit: beforeWireEmit,
     );
   }
 

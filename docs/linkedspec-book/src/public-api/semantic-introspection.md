@@ -52,12 +52,12 @@ The neutral contract is complete. Backend admission is **6 complete / 0 pending*
 Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, protocol policy, neutral machine
 contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
 canonical CI. Perl and Rust have complete decoded/strict-stdio implementations and exact runtime admission. Dart
-now has the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, and exact
-already-decoded discovery/list/call/cancel dispatch; its strict JSON stdio and formal admission remain pending.
-The ledger therefore deliberately remains 2/5 native implementations and 2/6 runtime admissions until the Dart
-wire and twelve-role admission leaves land.
+now has the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, exact decoded
+discovery/list/call/cancel dispatch, and bounded strict JSON stdio; its formal admission remains pending. The
+ledger therefore deliberately remains 2/5 native implementations and 2/6 runtime admissions until Dart's exact
+twelve-role admission leaf lands.
 
-## Accepted modern MCP transport (Perl/Rust admitted; Dart decoded core implemented)
+## Accepted modern MCP transport (Perl/Rust admitted; Dart strict stdio implemented)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -3441,7 +3441,8 @@ The dependency order is:
 | `.10.9.3.4` | committed-owner no-change Rust closeout | complete from clean `13d9ce17`; focused and canonical recomposition green; parent `.10.9.3` closed |
 | `.10.9.4.0` | behavior-free Dart native owner/security/wire audit and ADR `0059` | complete from clean `7f44d2a1`; exact `.1-.4` split; no implementation or ledger movement |
 | `.10.9.4.1` | generated Dart binding/runtime, secure registry, and decoded server | implemented; exact focused/public proof; admission unchanged |
-| `.10.9.4.2-.10.9.4.4` | strict Dart stdio, admission, and closeout | pending in dependency order |
+| `.10.9.4.2` | strict Dart stdio, iterative lexical preflight, canonical emission, and lifecycle cleanup | implemented; exact focused/public proof; admission unchanged |
+| `.10.9.4.3-.10.9.4.4` | exact Dart admission and committed-owner closeout | pending in dependency order |
 | `.10.9.5` | native Julia MCP implementation and admission | pending after Dart parent closure |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3466,9 +3467,9 @@ cannot reinterpret transport errors or semantic results.
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
 runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl and Rust callers
 can use decoded in-process dispatch plus strict stdio; both have exact twelve-role MCP admission. Dart callers can
-now use decoded in-process dispatch, while its raw stdio and exact admission remain separately owned. The shared
-status/proof ledger therefore remains Perl + Rust at 2/5 implementations and 2/6 runtimes, with shared rollout
-pending and the normative transport digest unchanged.
+also use decoded in-process dispatch plus strict caller-owned stdio, while its exact admission remains separately
+owned. The shared status/proof ledger therefore remains Perl + Rust at 2/5 implementations and 2/6 runtimes, with
+shared rollout pending and the normative transport digest unchanged.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3485,21 +3486,22 @@ SDK/network/async runtime, semantic cache, aggregator, or legacy protocol is aut
 No-change closeout `.10.9.3.4` reruns those committed owners rather than adding an umbrella oracle. The transport
 remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases with 68 mutations; Perl remains 22 + 13 and Rust
 remains 15 + 3 + 4 + 1. Dart `.10.9.4.1` adds a 10-test generated/runtime/decoded proof and a byte-fresh
-82,875-byte binding without promoting the ledger; expanded governance rejects 43 mutations. Parent `.10.9.3`
-remains closed and strict Dart stdio `.10.9.4.2` follows only after the decoded-server commit.
+82,875-byte binding without promoting the ledger. Strict Dart stdio `.10.9.4.2` adds five focused wire/lifecycle
+tests; expanded governance rejects 46 mutations. Parent `.10.9.3` remains closed and exact Dart admission
+`.10.9.4.3` follows only after the strict-stdio commit.
 
-### Using Dart decoded MCP dispatch
+### Using Dart decoded MCP dispatch and strict stdio
 
-Behavior-free `.10.9.4.0` and ADR `0059` make the Dart ownership exact; `.10.9.4.1` now implements its generated
-binding, frozen runtime, secure registry, and decoded dispatcher. The package umbrella exports one in-process
+Behavior-free `.10.9.4.0` and ADR `0059` make the Dart ownership exact; `.10.9.4.1-.2` implement its generated
+binding, frozen runtime, secure registry, decoded dispatcher, and strict stdio adapter. The package umbrella exports one in-process
 `McpServer` around a caller-created immutable `SemanticIndex`, plus immutable registration/policy/error value
 types. The server calls only `index.capabilities` and `index.queryNeutral(request)`; it cannot accept source text
 or paths, compile, execute, enable trace, retain a semantic cache, or add a primary-CLI mode.
 
-A repository-managed Dart 3.9.2 probe shows why the future wire must be explicit: `jsonDecode` keeps the last
-value for both literal and escape-equivalent duplicate keys, while `jsonEncode` follows insertion order. Future
-`mcp_wire.dart` must therefore perform bounded strict UTF-8/JSON token preflight before decoding and recursively
-sort every map's string keys before encoding. The implemented decoded server already uses core
+A repository-managed Dart 3.9.2 probe shows why the wire is explicit: `jsonDecode` keeps the last value for both
+literal and escape-equivalent duplicate keys, while `jsonEncode` follows insertion order. Private `mcp_wire.dart`
+therefore performs bounded strict UTF-8/JSON token preflight before decoding and recursively sorts every map's
+string keys before encoding. The server uses core
 `Random.secure()`, a started monotonic `Stopwatch`, base64url, and the existing package-internal SHA-256 owner for
 handles, expiry, encoding, and authorization without a production package dependency.
 
@@ -3562,11 +3564,52 @@ minutes by default, may select 1 through 86,400,000 milliseconds, and are bounde
 Lowering policy can reduce source/digest/page/budget authority but cannot raise native limits. Unknown, expired,
 revoked, and unauthorized handles remain indistinguishable.
 
+For MCP clients, the host can lend the same server its byte stream and sinks. This does not add a LinkedSpec
+executable or CLI mode; the embedding remains responsible for constructing the index, registering it, and
+supplying the transport:
+
+```dart
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final index = SemanticIndex.fromUtf8(
+  sourceBytes,
+  options: const SemanticIndexOptions(logicalName: 'example.spec'),
+);
+final authorization = utf8.encode('tenant-42/read-only');
+final server = McpServer();
+server.registerIndex(index, authorization);
+
+await server.serveStdio(
+  stdin,
+  stdout,
+  authorization,
+  log: stderr, // Optional; omit for silent operational diagnostics.
+);
+```
+
+`serveStdio` checks authorization before consuming input. It accepts LF, CRLF, and one complete final frame at
+EOF, with a 1,048,576-byte payload maximum excluding the delimiter. Its iterative preflight rejects invalid
+UTF-8/BOM, duplicate decoded keys (including escape-equivalent spellings), malformed/non-finite numbers,
+incomplete escapes or surrogate pairs, arrays/non-object roots, nesting above 64, and request ids outside the
+nonempty-128-UTF-8-byte-string or interoperable-safe-integer contract. Each admitted response is canonical UTF-8
+with recursively sorted object keys and exactly one LF.
+
+Input, output, and the optional distinct log sink are borrowed and never closed. An accepted request remains
+active until its response flush succeeds: cancellation observed before emission suppresses the prepared response,
+whereas flushed output is final. Graceful EOF flushes, shuts down the server, and releases all registered indexes.
+Input, add, or flush failure performs the same release, optionally emits only the fixed
+`linkedspec_mcp_io_failure` operational code, and throws a sanitized `McpServerException`. A server stopped by
+EOF/failure cannot be restarted; construct another server for another protocol-stream lifecycle.
+
 The generated private part is 82,875 bytes and verified after byte-identical Perl/Rust bindings. Focused proof
 covers all canonical decoded classifications, native payload identity, policy/cancellation/failure behavior,
-clone isolation, entropy/time/capacity/shutdown, and production authority fences; all 347 Dart package tests pass.
-Strict raw stdio remains `.2`; only exact twelve-role admission `.3` may advance Dart to 3/5 implementations and
-3/6 runtimes. Until then the ledger remains 2/5 + 2/6 with rollout pending.
+clone isolation, entropy/time/capacity/shutdown, all ten raw cases, framing boundaries, hostile I/O, caller
+ownership, and production authority fences. The focused MCP set is 15/15, all 352 Dart package tests pass, and
+analysis is clean. Only exact twelve-role admission `.3` may advance Dart to 3/5 implementations and 3/6
+runtimes. Until then the ledger remains 2/5 + 2/6 with rollout pending and 46 rejected governance mutations.
 
 ### Using Rust decoded MCP dispatch
 

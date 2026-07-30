@@ -690,11 +690,12 @@ Three backbone items tracked major structural modernization — all done:
   no-change `.10.9.3.4` recomposes the committed owners under focused/canonical proof and closes parent `.10.9.3`.
   Behavior-free Dart `.10.9.4.0` and ADR `0059` now freeze generated private-part binding/runtime, a same-process
   secure decoded server, strict duplicate-safe/canonical stdio, exact admission, and no-change closeout under
-  `.1-.4`. Dart `.10.9.4.1` now implements the 82,875-byte generated binding, frozen runtime, secure decoded
-  registry, lowering-only policy, native payload identity, cancellation, and authority fences. Focused proof is
-  10/10 and the complete package is 347/347; the formal ledger remains 2/5 + 2/6 with 43 mutations until strict
-  stdio `.2` and exact admission `.3`. Any future aggregator or legacy adapter is separately owned after `.10.10`
-  and may only route/translate transport.
+  `.1-.4`. Dart `.10.9.4.1` implements the 82,875-byte generated binding, frozen runtime, secure decoded registry,
+  lowering-only policy, native payload identity, cancellation, and authority fences. Strict stdio `.10.9.4.2`
+  adds bounded caller-owned framing, iterative duplicate-safe preflight, canonical LF emission, cancellation
+  through flush, fixed optional diagnostics, and EOF/I/O release. Focused MCP proof is 15/15 and the complete
+  package is 352/352; the formal ledger remains 2/5 + 2/6 with 46 mutations until exact admission `.3`. Any future
+  aggregator or legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

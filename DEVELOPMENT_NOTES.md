@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.2` — strict Dart stdio needs two boundaries, not trust in the stock
+  codec): Dart's stock decoder is appropriate only after raw-token admission. The private wire therefore uses one
+  iterative scanner to prove decoded key uniqueness, paired escapes/surrogates, JSON number grammar, request-id
+  lexical identity, and depth 64 before `jsonDecode`; canonical output separately rejects unsupported/non-finite
+  host values and recursively sorts keys before `jsonEncode`. This preserves the stock codec as a value converter
+  without granting it wire-contract authority.
+
+  Async response completion is the second boundary. An accepted id remains active across preparation and
+  successful `IOSink.flush`, so deterministic cancellation before emission suppresses the prepared frame and a
+  flushed frame is final. Keeping input/output/log caller-owned makes cleanup mean server shutdown and registry
+  release, never closing borrowed transport objects. Graceful EOF and input/add/flush failures share that cleanup;
+  failures expose only one typed `linkedspec_mcp_io_failure` plus an optional fixed log code.
+
+  Focused MCP proof is 15/15, complete Dart is 352/352, analyzer is clean, and 92-file formatting is unchanged.
+  Neutral 35/10/10/68 and all three generated bindings stay exact; the still-pending 2/5 + 2/6 ledger now rejects
+  46 mutations. Formal admission remains solely `.10.9.4.3`. Canonical CI independently passes Rust semantic
+  admission 1/1 in 81.01 seconds, Dart 1/1, Julia 416/416 in 28.9 seconds, containment/moved-root, CLI 66x2, RAM
+  77%, and Phase 0 1,031/1,031 in 655 seconds. Knowledge Map 747/6,034, mdBook, doctrines, memory, storage
+  1,724/390,106/28, path 14/5, syntax/JSON/whitespace, and exact 13,488-KiB/one-empty-run cleanup pass.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.1` — Dart decoded MCP is native, secure, and still unadmitted):
   `tools/generate_dart_mcp_contract.py` consumes the same digest-verified neutral bundle as Perl/Rust and emits one
   formatter-stable 82,875-byte private `part`, preserving the earlier bindings byte-identically at 83,072 and

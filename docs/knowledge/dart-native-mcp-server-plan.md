@@ -16,10 +16,10 @@ answers:
   - "what are the Dart MCP implementation leaves"
   - "when will Dart MCP advance the implementation ledger"
 date: 2026-07-29
-status: accepted plan; generated binding/runtime and decoded server implemented; stdio/admission/closeout pending
+status: accepted plan; generated binding/runtime, decoded server, and strict stdio implemented; admission/closeout pending
 tags: [dart, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
-evidence: docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.9.4.1; dart/lib/src/mcp/mcp_contract.dart; dart/lib/src/mcp/mcp_contract_runtime.dart; dart/lib/src/mcp/mcp_server.dart; dart/test/mcp_contract_dart_binding_test.dart; dart/test/mcp_server_dart_dispatch_test.dart; capability_conformance/mcp_implementation_admission.json
-reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py && cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
+evidence: docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.9.4.2; dart/lib/src/mcp/mcp_contract.dart; dart/lib/src/mcp/mcp_contract_runtime.dart; dart/lib/src/mcp/mcp_server.dart; dart/lib/src/mcp/mcp_wire.dart; dart/test/mcp_contract_dart_binding_test.dart; dart/test/mcp_server_dart_dispatch_test.dart; dart/test/mcp_server_dart_stdio_test.dart; capability_conformance/mcp_implementation_admission.json
+reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py && cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
 # Dart Native MCP Server Plan
@@ -31,8 +31,8 @@ lowering-only policy, calls only `capabilities` and `queryNeutral`, and exposes 
 load paths, compile source, execute parsers, enable trace, cache semantic responses, add a primary-CLI mode, or use
 an MCP/network SDK.
 
-The first three private-part owners now live under `dart/lib/src/mcp/`: generated `mcp_contract.dart`, frozen
-`mcp_contract_runtime.dart`, and public-host `mcp_server.dart`; `.2` still owns future strict `mcp_wire.dart`.
+All four private-part owners now live under `dart/lib/src/mcp/`: generated `mcp_contract.dart`, frozen
+`mcp_contract_runtime.dart`, public-host `mcp_server.dart`, and strict transport `mcp_wire.dart`.
 The shared-bundle consumer generates the 82,875-byte data-only Dart part after neutral materialization/validation
 and preserves the Perl/Rust files byte-identically. Runtime contract behavior is filesystem-free. The package
 umbrella exports only supported server/value types; deterministic entropy/time/failure seams remain in an
@@ -46,9 +46,10 @@ encoding, and the existing package-internal SHA-256 implementation can digest au
 dependency is needed.
 
 Work remains omission-safe: `.10.9.4.1` owns the implemented generated binding/runtime/registry/decoded dispatch;
-`.2` owns strict stdio and lifecycle; `.3` alone may advance Dart to 3/5 implementations and 3/6 runtimes while
-rollout stays pending; and `.4` recomposes committed owners and closes the Dart parent before Julia starts.
+`.2` owns the implemented strict stdio and lifecycle surface; `.3` alone may advance Dart to 3/5 implementations
+and 3/6 runtimes while rollout stays pending; and `.4` recomposes committed owners and closes the Dart parent
+before Julia starts.
 
 Related facts: [[dart-semantic-query-public-api]], [[dart-semantic-introspection-admission]],
 [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],
-[[mcp-implementation-admission-ledger]], and [[rust-native-mcp-server-plan]].
+[[dart-mcp-strict-stdio]], [[mcp-implementation-admission-ledger]], and [[rust-native-mcp-server-plan]].

@@ -146,7 +146,7 @@ ORDERED_COMMANDS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
-    "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
+    "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -205,8 +205,10 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file dart/lib/src/mcp/mcp_contract.dart",
         "require_tracked_file dart/lib/src/mcp/mcp_contract_runtime.dart",
         "require_tracked_file dart/lib/src/mcp/mcp_server.dart",
+        "require_tracked_file dart/lib/src/mcp/mcp_wire.dart",
         "require_tracked_file dart/test/mcp_contract_dart_binding_test.dart",
         "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart",
+        "require_tracked_file dart/test/mcp_server_dart_stdio_test.dart",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -315,11 +317,18 @@ def validate_authority_sources() -> None:
         for path in [
             "dart/lib/src/mcp/mcp_server.dart",
             "dart/lib/src/mcp/mcp_contract_runtime.dart",
+            "dart/lib/src/mcp/mcp_wire.dart",
         ]
     }
+    dart_server = dart_sources["dart/lib/src/mcp/mcp_server.dart"]
+    dart_io_import = "import 'dart:io' show IOSink;"
+    if dart_server.count(dart_io_import) != 1:
+        fail("Dart MCP must import exactly the borrowed IOSink authority")
+    for path, source in dart_sources.items():
+        if path != "dart/lib/src/mcp/mcp_server.dart" and "import 'dart:io'" in source:
+            fail(f"non-server Dart MCP owner acquired dart:io authority: {path}")
     dart_combined = "\n".join(dart_sources.values())
     for token in [
-        "import 'dart:io'",
         "import 'dart:ffi'",
         "import 'dart:isolate'",
         "File(",
@@ -528,6 +537,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         ("CI Dart generator omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
         ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[9] + "\n", "")),
         ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
+        (
+            "CI Dart strict stdio proof omission",
+            ci_source.replace(
+                ORDERED_COMMANDS[10],
+                "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
+                1,
+            ),
+        ),
         ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
         ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
         (
@@ -567,6 +584,20 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             "CI Dart decoded proof registration omission",
             ci_source.replace(
                 "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart\n",
+                "",
+            ),
+        ),
+        (
+            "CI Dart wire registration omission",
+            ci_source.replace(
+                "require_tracked_file dart/lib/src/mcp/mcp_wire.dart\n",
+                "",
+            ),
+        ),
+        (
+            "CI Dart stdio proof registration omission",
+            ci_source.replace(
+                "require_tracked_file dart/test/mcp_server_dart_stdio_test.dart\n",
                 "",
             ),
         ),

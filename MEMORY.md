@@ -5,15 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `b503dcc9` — `FUTURE-PARITY-BACKLOG.10.9.4.0 - plan Dart native MCP server` (78/300; no push).
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.1`; its generated Dart binding/runtime and secure decoded
-  server are fully signed off from clean planning commit `b503dcc9`; the single leaf commit is pending.
-- active_leaf: none until that commit is clean; do not pivot while the verified `.10.9.4.1` change is staged.
-- active_scope: commit/clear/prove clean for the filesystem-free generated data, frozen runtime, secure registry/
-  decoded dispatch, lowering-only policy, cancellation, sanitized failures, governance, and synchronized docs.
+- latest_commit: `4a044914` — `FUTURE-PARITY-BACKLOG.10.9.4.1 - implement Dart MCP decoded server` (79/300; no push).
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.1`; generated Dart binding/runtime plus secure decoded
+  server are committed, brief-cleared, residue-free, and clean from planning commit `b503dcc9`.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.4.2` — strict Dart MCP stdio; task-tree-first from clean `4a044914`.
+- active_scope: signoff-complete and staged: bounded UTF-8/JSON-line lexical preflight, canonical LF emission,
+  cancellation through successful flush, sanitized optional logging, EOF/I/O shutdown, and registry release.
+  Only final staged checks, commit, brief clearing, and clean proof remain before the next leaf may activate.
 - active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/
   parser/compiler/executor/trace/cache/primary-CLI behavior, ledger status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: activate strict Dart MCP stdio leaf `.10.9.4.2` task-tree-first; no push.
+- next_after_clean_commit: exact Dart implementation/runtime admission `.10.9.4.3`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -38,13 +39,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter becomes 79/300 after the pending `.1` commit; no push.
+- push_policy: hard lock at 300 new local commits; counter 79/300 after `4a044914`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: current gate passes the Dart MCP chain, Rust semantic 1/1 in 81.34s, Dart 1/1, Julia 416/416
-  in 29.9s, CLI 66x2, RAM 70%, and Phase 0 1,031/1,031 in 656s. Focused proof passes MCP 35/10/10/68, three
-  byte-fresh bindings, ledger 2/5 + 2/6 pending/43, Dart 10/10 plus complete 347/347, and corpus 105/105.
-- blockers: none. next: run final post-doc/KM/doctrine checks, commit `.10.9.4.1`, clear/prove clean, then activate
-  `.10.9.4.2` task-tree-first; keep strict stdio and formal admission out of the completed decoded-server commit.
+- canonical_state: current `.2` passes Dart MCP 15/15, complete package 352/352, clean analysis, format 92/0,
+  neutral MCP 35/10/10/68, three byte-fresh bindings, ledger 2/5 + 2/6 pending with 46 mutations, Rust semantic
+  1/1 in 81.01s, Dart 1/1, Julia 416/416 in 28.9s, containment/moved-root, CLI 66x2, RAM 77%, and Phase 0
+  1,031/1,031 in 655s. KM 747/6,034, mdBook, doctrines, memory, storage 1,724/390,106/28, path 14/5, and exact
+  residue cleanup pass.
+- blockers: none. next: run final staged checks, commit `.10.9.4.2`, clear the brief, prove clean, then activate
+  formal Dart admission `.10.9.4.3` without pushing.

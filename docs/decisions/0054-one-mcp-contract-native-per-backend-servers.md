@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral/Perl/Rust parents closed at 2/5 implementations + 2/6 runtimes with rollout pending;
-  Dart generated/runtime/decoded owners implemented under `0059`, strict stdio/admission plus Julia/Lua pending
+  Dart generated/runtime/decoded/strict-stdio owners implemented under `0059`, admission plus Julia/Lua pending
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

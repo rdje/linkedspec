@@ -467,13 +467,18 @@ void main() {
     },
   );
 
-  test('production authority stays native, in-process, and decoded-only', () {
-    final production = [
-      File('lib/src/mcp/mcp_server.dart').readAsStringSync(),
-      File('lib/src/mcp/mcp_contract_runtime.dart').readAsStringSync(),
-    ].join('\n');
+  test('production authority stays native, in-process, and transport-only', () {
+    final server = File('lib/src/mcp/mcp_server.dart').readAsStringSync();
+    final runtime = File(
+      'lib/src/mcp/mcp_contract_runtime.dart',
+    ).readAsStringSync();
+    final wire = File('lib/src/mcp/mcp_wire.dart').readAsStringSync();
+    expect(server, contains("import 'dart:io' show IOSink;"));
+    expect(server, contains("part 'mcp_wire.dart';"));
+    expect(runtime, isNot(contains("import 'dart:io'")));
+    expect(wire, isNot(contains("import 'dart:io'")));
+    final production = '$server\n$runtime\n$wire';
     for (final forbidden in [
-      "import 'dart:io'",
       "import 'dart:ffi'",
       "import 'dart:isolate'",
       'File(',

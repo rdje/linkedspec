@@ -1,5 +1,33 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.2 — implement Dart MCP strict stdio
+
+Added public asynchronous `McpServer.serveStdio` over a caller-owned `Stream<List<int>>`, borrowed output
+`IOSink`, and optional distinct borrowed log `IOSink`. Private `mcp_wire.dart` owns bounded LF/CRLF/final-EOF
+framing, overlong-line draining, strict UTF-8/JSON preflight before `jsonDecode`, recursive canonical JSON key
+ordering, exactly-one-LF output, prepared-response cancellation, EOF shutdown, and input/add/flush failure cleanup.
+The server checks authorization before consuming input, never closes caller streams or sinks, and releases every
+registered native index on every terminal path.
+
+The iterative preflight rejects BOMs, invalid UTF-8, decoded duplicate keys including escape-equivalent names,
+malformed escapes/surrogate pairs/numbers, non-finite values, arrays and other non-object roots, nesting above 64,
+and request-id token/range/UTF-8-byte ambiguity. A response id remains active until successful flush; deterministic
+pre-emission cancellation suppresses output, while flushed output is final. Optional diagnostics contain only the
+fixed `linkedspec_mcp_io_failure` code, and callers receive the same sanitized typed error. Production imports only
+the exact `IOSink` type from `dart:io`; file/process/socket/HTTP/isolate/parser/compiler/runtime/trace/emitter/cache/
+primary-CLI authority remains forbidden and the package remains dependency-free.
+
+Focused binding/decoded/strict-stdio proof passes 15/15, all 352 package tests pass, analysis is clean, and format
+is unchanged across 92 files. Neutral MCP remains 35 canonical / 10 raw / 10 lifecycle / 68 mutations with all
+three bindings byte-fresh. The formal ledger deliberately remains 2/5 implementations + 2/6 runtimes with rollout
+pending; governance now rejects 46 mutations. Exact admission remains `.10.9.4.3`; no executable, source bootstrap,
+semantic ownership/cache, network/SDK transport, aggregator, legacy adapter, or push is added.
+
+Canonical CI independently passes the Dart MCP chain, Rust semantic admission 1/1 in 81.01 seconds, Dart 1/1,
+Julia 416/416 in 28.9 seconds, containment/moved-root, CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 655 seconds.
+Knowledge Map 747/6,034, mdBook, all six doctrines, memory, storage 1,724/390,106/28, path 14/5,
+syntax/JSON/whitespace, and exact 13,488-KiB rendered-book plus one-empty-run cleanup pass. No push occurs.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.1 — implement the Dart MCP decoded server
 
 Added the public dependency-free Dart `McpServer` around caller-owned immutable `SemanticIndex` values. A host

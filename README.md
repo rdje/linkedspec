@@ -1069,9 +1069,11 @@ content migration exists yet.
   the package free of production dependencies. Dart `.10.9.4.1` now implements the 82,875-byte generated binding,
   frozen schema runtime, secure same-process registry, lowering-only policy, exact decoded discovery/list/two-tool/
   cancellation dispatch, and sanitized authority boundary. Focused Dart binding/server proof passes 10 tests and
-  the complete package passes 347; Perl/Rust bindings stay byte-identical, while the intentionally unpromoted
-  ledger remains 2/5 + 2/6 and now rejects 43 mutations. Strict Dart stdio `.2`, formal admission `.3`, and
-  no-change closeout `.4` remain ordered.
+  strict stdio `.10.9.4.2` now adds bounded LF/CRLF/final-EOF framing, iterative duplicate-safe lexical preflight,
+  canonical LF output, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-
+  owned streams. Focused Dart MCP proof passes 15 tests and the complete package passes 352; Perl/Rust bindings
+  stay byte-identical, while the intentionally unpromoted ledger remains 2/5 + 2/6 and now rejects 46 mutations.
+  Formal admission `.3` and no-change closeout `.4` remain ordered.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1510,10 +1512,11 @@ content migration exists yet.
   rejects 39 mutations, and preserves pending shared rollout. No-change closeout `.10.9.3.4` is complete with
   focused/canonical recomposition green; Rust parent `.10.9.3` is closed. Behavior-free Dart `.10.9.4.0` and ADR
   `0059` freeze the native generated/server/wire/security seams and `.1-.4` order. Dart `.10.9.4.1` now implements
-  the 82,875-byte binding, frozen runtime, secure registry, decoded dispatch, and authority fences with 10 focused
-  plus 347 complete package tests; the ledger remains 2/5 + 2/6 with 43 mutations until stdio `.2` and admission
-  `.3` land.
-- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 347
+  the 82,875-byte binding, frozen runtime, secure registry, decoded dispatch, and authority fences. Strict stdio
+  `.10.9.4.2` adds bounded duplicate-safe framing, canonical LF emission, cancellation through flush, optional
+  fixed diagnostics, and EOF/I/O cleanup. The combined MCP proof is 15 focused tests plus 352 complete package
+  tests; the ledger remains 2/5 + 2/6 with 46 mutations until admission `.3` lands.
+- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 352
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
   standalone 18-owner/47-package offline storage oracle.

@@ -41,14 +41,16 @@ bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../ru
 bash ../tools/run_dart_local.sh
 ```
 
-## Native decoded MCP server
+## Native MCP server
 
 The package exports a dependency-free, same-process `McpServer` around an already-created immutable
 `SemanticIndex`. It never accepts a source path or source text and calls only the index's native `capabilities`
-and `queryNeutral` surfaces. Register with host-owned authorization bytes, then pass already-decoded requests:
+and `queryNeutral` surfaces. Register with host-owned authorization bytes, then either pass already-decoded
+requests to `dispatch` or run the strict stdio adapter:
 
 ```dart
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 
@@ -78,7 +80,11 @@ final response = server.dispatch({
 }, authorization);
 
 print(response?['jsonrpc']); // 2.0
-server.shutdown();
+
+// Alternatively, let the same server own one protocol-stream lifecycle:
+// await server.serveStdio(stdin, stdout, authorization, log: stderr);
+
+server.shutdown(); // omit after serveStdio: EOF/failure already shuts it down
 ```
 
 Production handles encode exactly 256 secure random bits as 43 unpadded base64url characters. The registry keeps
@@ -88,15 +94,23 @@ indistinguishable. `McpRegistrationOptions` may lower source detail, digest acce
 never raise native index authority.
 
 The generated 82,875-byte private contract part is verified from the shared neutral MCP bundle and read without
-runtime filesystem access. Raw stdio framing is intentionally not part of this decoded leaf; strict duplicate-safe
-JSON-line input and canonical output are owned by the following task. Use `dispatch` only for already-decoded
-trusted host values until that adapter lands. Verify the current surface from the repository root:
+runtime filesystem access. `serveStdio(Stream<List<int>>, IOSink, ...)` accepts LF, CRLF, or one final complete
+frame at EOF; bounds retained payload bytes; rejects invalid UTF-8/BOM, duplicate decoded keys, malformed numbers,
+depth above 64, arrays/non-object roots, and ambiguous request ids before decoded dispatch; then emits recursively
+key-sorted canonical UTF-8 plus exactly one LF. Accepted request ids stay active through successful flush, so a
+deterministically observed pre-emission cancellation suppresses output while flushed output is final.
+
+Input, output, and optional distinct log sinks remain caller-owned and are never closed. EOF and input/add/flush
+failure release every registered index; an I/O failure can write only the fixed `linkedspec_mcp_io_failure` code
+to the optional log and throws the same sanitized typed error. The production boundary imports only the `IOSink`
+type from `dart:io`; it gains no file, process, socket, HTTP, isolate, parser, compiler, runtime, trace, cache, or
+CLI authority. Verify the current surface from the repository root:
 
 ```sh
 bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
 cd dart
 bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings
-bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart
+bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart
 ```
 
 ## Generated rule-label primitives

@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Dart native MCP strict stdio implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.4.2` adds public `McpServer.serveStdio` and private `mcp_wire.dart` without changing
+the decoded server's semantic authority. Caller-owned LF/CRLF/final-EOF streams now receive bounded iterative
+UTF-8/JSON preflight, escape-equivalent duplicate-key rejection, depth/number/request-id enforcement, canonical
+UTF-8 output with exactly one LF, cancellation through successful flush, fixed optional I/O diagnostics, and
+registry release on EOF or input/add/flush failure. Caller streams and sinks are never closed.
+
+Production gains only the borrowed `IOSink` type from `dart:io`; filesystem, process, socket, HTTP, isolate,
+parser, compiler, runtime, trace, emitter, cache, primary-CLI, SDK/network transport, source bootstrap, aggregator,
+and legacy authority remain absent. Focused MCP proof passes 15/15, the complete package passes 352/352, analysis
+is clean, and formatting changes zero of 92 files. Neutral MCP remains 35/10/10/68 with byte-fresh Perl/Rust/Dart
+bindings. The ledger deliberately stays 2/5 implementations + 2/6 runtimes with rollout pending and 46 rejected
+mutations; exact admission `.10.9.4.3` remains the next clean-boundary owner.
+
+Canonical CI passes Rust semantic admission 1/1 in 81.01 seconds, Dart 1/1, Julia 416/416 in 28.9 seconds,
+containment/moved-root, CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 655 seconds. Knowledge Map 747/6,034,
+mdBook, all six doctrines, memory, storage 1,724/390,106/28, path 14/5, syntax/JSON/whitespace, and exact
+13,488-KiB rendered-book plus one-empty-run cleanup pass. The slice is signoff-complete and awaits its clean
+commit; no push occurs.
+
 ## 2026-07-29 — Dart native MCP decoded server implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.4.1` implements the package-native, dependency-free Dart `McpServer` around exact
