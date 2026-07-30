@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`README-STABILITY-POLICY.0` — a landing page stays useful by routing volatility, not summarizing it):
+  The 1,615-line / 159,437-byte root README combines stable product entry with status, history, detailed
+  inventories, and gate mechanics already owned elsewhere. The complete section audit establishes a lossless
+  route before trimming: README retains purpose/audience, cursor/capture/recursion/staging differentiators, one
+  verified quick start, stable architecture/invariants, concise navigation, contribution/support, and accurate
+  notices. Detailed public behavior belongs in the mdBook/user guide; sequencing in roadmaps/tasks; structure in
+  architecture state; operations in Toolbox/local-CI docs; rationale/facts in ADRs/Knowledge Map; history and
+  resume state in their continuity owners.
+
+  A deliberately written prototype measures 105 lines / 5,072 bytes while preserving those responsibilities.
+  ADR `0063` therefore sets hard 128-line / 6,144-byte limits: roughly 22%/21% headroom, enough for stable
+  navigation without reopening status accretion. `.1` will make the routing contract normative in
+  `README_POLICY.md` and register a read-only `README-STABILITY` checker. Exact-limit acceptance, three overflow
+  classes, required anchors, drift headings, and staged cap-increase governance are executable requirements; the
+  existing registry already reaches pre-commit and local CI.
+
+  Licensing is deliberately not guessed. Only nested/vendor licenses exist today, so the landing page will say
+  no project-level license is declared and proposed `.3` preserves the choice for the director. This planning
+  slice changes no README content, executable checker, parser, runtime, backend, contract, or CLI behavior.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.7.0` — recurring composition cannot upgrade representative evidence
   into exhaustive evidence by assertion): The semantic contract's six native admission consumers each build the
   governed snapshots and digest-check all twenty query cases. The twelve-role MCP consumers cover the complete

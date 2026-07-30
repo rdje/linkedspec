@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-29 — README-STABILITY-POLICY.0 — plan bounded README adoption
+
+Created the README-sustainability task tree first from clean MCP planning commit `c6f36fe3`, then read the
+director-approved 71-line policy template read-only and audited the complete 1,615-line / 159,437-byte README.
+Every current content class now has a verified canonical owner before any trim: stable purpose/first use/
+architecture/navigation remains; changing status, inventories, gate detail, history, and continuity route to the
+mdBook, guide, roadmaps, task trees, architecture state, Toolbox, decisions/Knowledge Map, changelog, and bootstrap
+documents.
+
+ADR `0063` freezes a reviewed 105-line / 5,072-byte landing-page prototype and hard maxima of 128 lines / 6,144
+bytes. The planned `README-STABILITY` doctrine self-roots, reads without mutation, enforces both caps and stable
+sections/links, emits routing guidance, self-tests exact-boundary and overflow cases, and requires a new indexed
+ADR for any staged cap increase. Existing doctrine-registry execution supplies pre-commit and canonical-local-CI
+wiring. This leaf changes planning/documentation only; README content and executable enforcement remain `.1`.
+
+The audit also found no declared project-level root license. Component/vendor licenses do not authorize inferred
+LinkedSpec terms, so proposed `.3` records a separate director decision while `.1` will state the current fact.
+Focused signoff passes the exact quick start, Knowledge Map at 756 facts / 6,129 keys, mdBook build, memory
+architecture at 56/60 lines, all six current doctrines, whitespace/path/scope checks, and artifact cleanup. Root
+README remains exactly 1,615 lines / 159,437 bytes and no executable behavior changes.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.7.0 — plan recurring MCP composition
 
 Audited the neutral semantic/MCP contracts, all five native implementation owners, all six runtime consumers,

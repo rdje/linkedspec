@@ -10,6 +10,15 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+README sustainability is an active repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
+defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first
+use, stable architecture/invariants, concise canonical navigation, contribution/support, and accurate notices.
+The complete 1,615-line / 159,437-byte baseline is routed losslessly before trimming; a reviewed 105-line /
+5,072-byte prototype supports hard 128-line / 6,144-byte budgets. Leaf `.0` owns the behavior-free adoption plan,
+`.1` owns the repository policy, trim, and registered `README-STABILITY` doctrine, and `.2` owns unchanged
+closeout before the recurring MCP frontier resumes. Project-level licensing remains a separate proposed director
+decision; no terms are inferred from component/vendor licenses.
+
 Project-data storage locality is a completed critical architecture lane (ADR `0053`, task tree
 `PROJECT-DATA-SSD-ROOTING`). Every project-owned build product, generated output, cache, package depot, log,
 trace, and temporary workspace must reside on the repository filesystem; durable paths remain root-relative and

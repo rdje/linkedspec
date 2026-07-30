@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Bounded README adoption plan active
+
+Recurring MCP planning leaf `.10.9.7.0` is committed cleanly at `c6f36fe3` (93/300, no push), with its brief
+cleared and residue absent. The director-requested README policy is now owned task-tree-first by
+`README-STABILITY-POLICY.0`; no README content or executable enforcement changed before ownership.
+
+The approved 71-line external template was read completely and read-only. The current README measures 1,615
+lines / 159,437 bytes. A complete section audit routes changing status, history, inventories, gate mechanics, and
+continuity to canonical owners while a verified 105-line / 5,072-byte prototype preserves stable product entry,
+cursor/capture/recursion/staging identity, one working Perl quick start, architecture and repository invariants,
+navigation, contribution/support, and honest notices.
+
+ADR `0063` fixes 128-line / 6,144-byte hard ceilings and a registered `README-STABILITY` doctrine design. `.1`
+owns the policy, lossless trim, read-only checker, cap-increase ADR guard, registry/prose/bootstrap/book sync, and
+canonical admission; `.2` owns unchanged closeout and MCP handback. No project-level root license currently
+exists, so proposed `.3` tracks that separate director decision without inferring terms from components.
+
+Planning signoff passes the exact quick start, Knowledge Map 756/6,129, mdBook, memory architecture 56/60, all
+six current doctrines, whitespace/path/scope checks, and cleanup. README remains exactly 1,615/159,437 and no
+runtime, parser, backend, contract, fixture, test, CLI, policy-checker, or MCP behavior changes.
+
 ## 2026-07-29 — Recurring six-runtime MCP composition audit signoff-complete
 
 Shared Lua closeout `.10.9.6.4` is committed at clean `d05e17ed`; its brief is cleared and rendered-book,

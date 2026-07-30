@@ -4,6 +4,16 @@ LinkedSpec needs both public documentation and internal continuity documentation
 
 Those two documentation families are intentionally separate.
 
+The repository landing page is a third, deliberately smaller surface. Root `README.md` is for stable purpose,
+one first-use path, top-level architecture, canonical navigation, contribution/support entry points, and accurate
+notices. It is not another public manual, roadmap, status ledger, file inventory, or gate catalog. Route detail to
+the book or continuity owner first, then link from README only when that destination is part of stable navigation.
+
+ADR `0063` and `README_POLICY.md` govern that boundary. The adopted budget is at most 128 lines and 6,144 bytes,
+derived from a reviewed 105-line / 5,072-byte lossless prototype. The registered `README-STABILITY` doctrine
+enforces both limits; raising either requires a new accepted, indexed decision record rather than an ordinary
+feature edit. Policy/checker admission is owned by `README-STABILITY-POLICY.1`.
+
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 
 ## Public book
