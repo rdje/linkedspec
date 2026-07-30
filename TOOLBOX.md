@@ -971,6 +971,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   and escape-equivalent duplicate keys, so stdio implementation must use the planned strict preflight rather than
   treating plain `decode` as conformance. Production handles require exact OS entropy and monotonic time; no weak
   fallback or runtime contract-file read is allowed. Behavior starts only in `.10.9.2.1`.
+- **CURRENT ADMISSION:** retrieve [[mcp-implementation-admission-ledger]]. All five implementations and all six
+  runtimes are complete; shared rollout remains pending with 114 rejected mutations. Verify the exact ledger with
+  `bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py`.
+- **RECURRING PREFLIGHT:** retrieve [[mcp-recurring-six-runtime-plan]] and ADR `0062` before changing recurring MCP
+  proof. Current native semantic consumers cover all twenty cases, but current MCP direct-identity roles cover
+  capabilities plus one representative query. `.10.9.7.1` must extend those same consumers to the twenty neutral
+  requests/digests before the planned routed `LINKEDSPEC_RUN_MCP_MATRIX=1` gate may promote thin transport. Do not
+  add a central expected-response model, embed runtimes, or infer missing MCP comparisons from orchestration.
 
 ---
 

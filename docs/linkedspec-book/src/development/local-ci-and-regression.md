@@ -78,6 +78,26 @@ No-change `.10.9.6.4` reruns that exact committed sequence, passes Phase 0 1,031
 same complete dual-ABI gate, preserves pending/114, and closes the shared Lua parent without a replacement test,
 fixture, consumer, implementation, or umbrella oracle.
 
+Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` freeze the next gate before code. The audit distinguishes
+two facts that must not be conflated: the six native semantic consumers prove all twenty ordered responses, while
+the six current MCP consumer invocations prove complete transport/security/lifecycle coverage but direct/MCP
+identity for capabilities plus one representative graph query. Leaf `.1` must extend those existing identity
+roles to all twenty neutral requests/digests, without copying response bodies or adding production helpers.
+
+The planned `tools/check_mcp_six_runtime.sh` will be repository-routed and fail-fast. In order it validates the
+neutral semantic contract, materializes and independently validates the MCP contract, checks all five generated
+bindings, runs Perl/Rust/Dart/Julia/PUC Lua/LuaJIT MCP consumers exactly once, checks the admission/recurring
+ledger, and runs the existing three-case primary no-drift projection. Rust target and Julia writable-depot state
+will live under its exact managed artifact root. Canonical CI will require and syntax-check the driver, while
+`LINKEDSPEC_RUN_MCP_MATRIX=1` opts into the expensive composition. Only the coordinated `.1` transition may mark
+thin transport complete in both ledgers; `.2` remains the unchanged committed-owner closeout.
+
+The planning leaf's host-authorized canonical signoff passes LinkedSpec's macOS-sandbox containment and moved-root
+proof, semantic 6/20/105, MCP 35/10/10/68, the current six runtime admissions, primary CLI 66x2, RAM 60%, Phase 0
+1,031/1,031 in 772 seconds, and the complete PUC Lua/LuaJIT opt-in gate. Running the same gate inside another
+filesystem sandbox can deny nested `sandbox-exec`; that host restriction is not a locality failure, so canonical
+evidence must come from a run allowed to exercise LinkedSpec's own sandbox profile.
+
 Behavior-free Julia plan `.10.9.5.0` and ADR `0060` freeze the generated-Base64-binding -> decoded-server ->
 strict-number-preserving-stdio -> exact-admission -> no-change-closeout sequence. Leaves `.1-.3` now implement
 and admit the first four owners. Canonical order requires generator freshness, focused binding/decoded/stdio

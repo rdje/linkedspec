@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.7.0 — plan recurring MCP composition
+
+Audited the neutral semantic/MCP contracts, all five native implementation owners, all six runtime consumers,
+both rollout ledgers/checkers, canonical CI, primary-surface fences, the prior semantic recurring gate, and
+repository-storage routing. ADR `0062` freezes one repository-routed recurring MCP driver and the only allowed
+coordinated `thin_mcp_transport` promotion. Formal state remains 5/5 implementations + 6/6 runtimes, rollout
+pending, with 114 rejected mutations; no production, test, fixture, contract, ledger, status, semantic, or CLI
+behavior changes in this planning leaf.
+
+The audit found a foundational evidence gap rather than concealing it: native semantic admission proves all
+twenty ordered responses, while each current MCP admission consumer compares direct/native and MCP output for
+capabilities plus one representative graph query. Composition alone cannot prove all-twenty MCP identity. Leaf
+`.10.9.7.1` must strengthen those same consumer identity roles to the existing twenty neutral requests and
+response digests, without copying expected bodies or adding a seventh model.
+
+The planned driver validates the neutral semantic contract, materializes and independently validates MCP, checks
+all five generated bindings, executes Perl/Rust/Dart/Julia/PUC Lua/LuaJIT MCP consumers exactly once, validates
+the implementation/recurring ledger, and runs the exact three-case primary no-drift projection. Canonical CI will
+require and syntax-check the driver, with expensive execution opt-in through `LINKEDSPEC_RUN_MCP_MATRIX=1`.
+
+Signoff passes the unchanged semantic 6/20/105 and MCP 35/10/10/68 contracts, five byte-fresh bindings, exact
+Perl/Rust/Dart/Julia/Lua admissions, Knowledge Map 755/6,120, mdBook 79 files / 13,692 KiB, memory architecture,
+all six doctrines, and the full host-authorized canonical gate. Canonical proof includes project-sandbox
+containment and moved-root execution, Rust semantic 81.05 seconds, Julia 416/416 in 29.6 seconds, CLI 66x2, RAM
+60%, Phase 0 1,031/1,031 in 772 seconds, and the complete dual-ABI Lua gate. The initial outer-harness run denied
+nested `sandbox-exec`; the authorized rerun exercised LinkedSpec's own sandbox and passed.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.4 — close the shared Lua MCP implementation
 
 Recomposed the committed neutral MCP transport, five generated native implementations, and all six runtime

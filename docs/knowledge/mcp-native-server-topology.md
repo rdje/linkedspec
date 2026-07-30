@@ -34,6 +34,7 @@ evidence_update_2026_07_29_lua_plan: "Lua .10.9.6.0 and ADR 0061 freeze one gene
 evidence_update_2026_07_29_lua_decoded: "Lua .10.9.6.1 implements its one common generated/frozen/server source graph plus ABI-compiled native entropy/clock seam at 111 + 210 assertions per runtime and 94 governance mutations. Strict wire .2 and exact admission .3 remain pending, so the formal ledger intentionally stays 4/5 implementations + 4/6 runtimes."
 evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.2 implements one common private iterative wire and public caller-owned serve_stdio method at 247 assertions per runtime and 98 governance mutations. Exact admission .3 remains pending, so the formal ledger intentionally stays 4/5 implementations + 4/6 runtimes."
 evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer source unchanged and independently on PUC Lua and LuaJIT. The ledger reaches 5/5 implementations + 6/6 runtimes with shared rollout pending, and 114 mutations reject owner/ABI/order/omission/authority drift."
+evidence_update_2026_07_29_recurring_plan: "Behavior-free .10.9.7.0 and ADR 0062 preserve the five-implementation/six-runtime topology and freeze one routed recurring gate. The audit found current MCP consumers compare capabilities plus one representative query; .1 must extend their existing identity roles to all 20 neutral semantic cases before coordinated rollout promotion."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 
@@ -51,4 +52,4 @@ task-tree-owned after public closeout, it can only route requests to the native 
 semantic owner or cache.
 
 Related facts: [[mcp-2026-07-28-stdio-contract]], [[lua-native-mcp-server-plan]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
-[[user-observable-backend-cli-parity-contract]].
+[[user-observable-backend-cli-parity-contract]], and [[mcp-recurring-six-runtime-plan]].

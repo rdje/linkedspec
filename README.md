@@ -1105,7 +1105,12 @@ content migration exists yet.
   passes 111+210+247+202 per runtime, and governance rejects 114 mutations while advancing only the existing Lua
   implementation and both runtime rows to 5/5 + 6/6. No-change closeout `.10.9.6.4` recomposes every committed
   owner unchanged and closes the shared Lua parent; recurring rollout remains pending for `.10.9.7`. There is no
-  standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
+  standalone MCP executable, facade, source bootstrap, or semantic cache. Behavior-free recurring audit
+  `.10.9.7.0` and ADR `0062` found, froze, and completed signoff on the final evidence gap: native semantic admission proves all twenty
+  cases on every runtime, but each current MCP consumer compares capabilities plus one representative query.
+  Leaf `.1` must strengthen those same consumer identity roles to all twenty existing neutral requests/digests,
+  then compose them through one repository-routed opt-in six-runtime gate before coordinated thin-transport
+  promotion; `.2` is the no-change parent closeout. This adds no response oracle or production authority. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
   strict UTF-8 bytes, caller logical name/source ceiling, exact byte/scalar source mapping, and the existing

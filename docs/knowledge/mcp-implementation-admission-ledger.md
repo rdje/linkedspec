@@ -103,6 +103,14 @@ the committed neutral, five implementation, and six runtime owners, preserves 5/
 independent canonical gate with Phase 0 1,031/1,031 in 652 seconds, and closes parent `.10.9.6`. Recurring
 composition `.10.9.7` remains the sole owner of rollout movement.
 
+Behavior-free recurring audit `.10.9.7.0` found that each native semantic consumer proves all twenty neutral
+query cases, while each current MCP consumer's identity roles prove capabilities plus one representative graph
+query. ADR `0062` forbids inferring the missing nineteen MCP comparisons from orchestration. Leaf `.10.9.7.1`
+must strengthen those same consumers to the existing twenty ordered requests and response digests, then compose
+them through one repository-routed six-runtime driver before coordinated rollout promotion. No expected response
+body moves out of the neutral semantic contract.
+
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
-[[lua-mcp-implementation-admission]], [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].
+[[lua-mcp-implementation-admission]], [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]], and
+[[mcp-recurring-six-runtime-plan]].

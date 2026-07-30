@@ -1,5 +1,34 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Recurring six-runtime MCP composition audit signoff-complete
+
+Shared Lua closeout `.10.9.6.4` is committed at clean `d05e17ed`; its brief is cleared and rendered-book,
+managed-run, and non-cache-bytecode residue are absent. Recurring parent `.10.9.7` is split task-tree-first into
+behavior-free architecture/audit `.0`, implementation and thin-transport promotion `.1`, and no-change `.10.9`
+closeout `.2`. Leaf `.0` is signoff-complete from that boundary; `.1` remains dependency-ordered behind its clean
+commit and brief-clear proof.
+
+The audit must freeze one repository-routed driver that consumes the neutral contract and every admitted Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT owner exactly once; proves all twenty native/MCP response bytes plus raw,
+lifecycle, handle, policy, privacy, authority, and no-primary-CLI boundaries; and coordinates only the future
+`thin_mcp_transport` transition. Formal state remains 5/5 implementations + 6/6 runtimes with rollout pending
+and 114 rejected mutations throughout `.0`; no production/test/fixture/contract/ledger/status behavior moves.
+
+Knowledge-first source audit found that the native semantic consumers prove all twenty ordered response digests,
+but the current MCP consumers directly compare capabilities plus one representative graph query. ADR `0062`
+therefore freezes consumer strengthening before composition: `.1` must exercise the same twenty neutral requests,
+direct native bytes, MCP text/structured content, and existing digests in each admitted consumer. The planned
+routed gate then runs semantic validation, neutral MCP materialization/validation, five bindings, six runtime
+consumers, the recurring ledger, and exact primary no-drift proof. No seventh model or production owner is added.
+
+Final signoff passes semantic 6/20/105, MCP 35/10/10/68, all five byte-fresh bindings, exact six-runtime
+admission, unchanged pending/114 governance, Knowledge Map 755/6,120, mdBook 79 files / 13,692 KiB, memory
+architecture, and all six doctrines. The host-authorized canonical gate passes LinkedSpec's own macOS-sandbox
+containment and moved-root proof, Rust semantic 1/1 in 81.05 seconds, Dart 1/1, Julia 416/416 in 29.6 seconds,
+primary CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 772 seconds, and the complete PUC Lua/LuaJIT gate. The first
+in-harness attempt was denied only at nested `sandbox-exec`; rerunning outside the outer harness sandbox exercised
+and passed the project-owned locality boundary.
+
 ## 2026-07-29 — Shared Lua MCP no-change closeout signoff-complete
 
 Exact admission `.10.9.6.3` is committed at clean `4eb008d8`; its brief is cleared, the tree is clean, and exact

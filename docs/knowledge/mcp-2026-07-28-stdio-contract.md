@@ -41,6 +41,7 @@ evidence_update_2026_07_29_julia_stdio: "Julia .10.9.5.2 implements bounded call
 evidence_update_2026_07_29_julia_admission_closeout: "Julia .10.9.5.3-.4 admit one exact twelve-role consumer and recompose the committed owners, advancing only Julia to 4/5 implementations plus 4/6 runtimes while rollout remains pending."
 evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.1-.2 implement one common generated/runtime/decoded/strict-wire source graph on PUC Lua and LuaJIT. The wire preserves numeric token kinds by JSON-pointer path, emits canonical LF, and releases caller-owned I/O state; exact admission .3 remains pending and the formal ledger stays 4/5 + 4/6."
 evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer unchanged on PUC Lua and LuaJIT. All five implementations and all six runtimes are admitted, governance rejects 114 mutations, the transport digest remains unchanged, and recurring rollout stays pending."
+evidence_update_2026_07_29_recurring_plan: "Behavior-free .10.9.7.0 and ADR 0062 freeze a routed recurring composition. Current MCP identity proof covers capabilities plus one graph query; .1 must compare all 20 neutral semantic cases through each existing runtime consumer before rollout can advance."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -74,12 +75,14 @@ indistinguishable handle states, and four lowering-policy cases. Verify its exac
 `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py`; use `--write` only
 when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
-28-positive/7-negative schema and 68-mutation proof. Perl, Rust, and Dart implement, admit, and parent-close that
-contract. Dart's generated/runtime/decoded/strict-stdio production owners remain exactly admitted under ADR
-`0059`; ADR `0060` freezes Julia's seams and `.10.9.5.1-.2` implement generated/runtime/decoded plus strict-stdio
-behavior. Julia admission, Lua, recurring six-runtime admission, and public no-drift remain dependency-ordered.
+28-positive/7-negative schema and 68-mutation proof. Perl, Rust, Dart, Julia, and one shared Lua source implement
+and parent-close that contract; PUC Lua and LuaJIT admit the Lua source independently. The implementation ledger
+is 5/5 + 6/6 with 114 rejected mutations. Recurring `.10.9.7` must extend the existing runtime consumers from one
+representative query to all twenty neutral semantic cases before shared rollout, while public no-drift remains
+separately dependency-ordered.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 
 Related facts: [[mcp-native-server-topology]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]],
-[[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]].
+[[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]], and
+[[mcp-recurring-six-runtime-plan]].

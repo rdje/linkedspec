@@ -14584,14 +14584,114 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.6.4 - close Lua MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.7`
-    Status: `pending`
+    Status: `active` (2026-07-29; behavior-free recurring-composition audit `.0` is signoff-complete and
+      implementation/promotion `.1` is the next dependency-ordered leaf after the clean plan commit)
     Goal: Compose recurring six-runtime MCP conformance and close the thin-transport parent.
     Depends on: `.10.9.6`
+    Children: `.10.9.7.0`, `.10.9.7.1`, `.10.9.7.2`
     Acceptance: One repository-routed recurring driver runs the exact contract and each admitted implementation
       once across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; proves all twenty native/MCP canonical responses,
       transport/handle/auth/expiry/policy failures, tool-topology omissions, no primary CLI surface, and no semantic
       model/cache/filesystem/runtime authority; advances only the MCP rollout row and closes `.10.9` after complete
       lockstep signoff.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.7.0`
+      Status: `done` (2026-07-29; signoff-complete from clean shared Lua closeout commit `d05e17ed`)
+      Goal: Audit and freeze the exact recurring six-runtime MCP composition, promotion, and closeout seams
+        without changing behavior or status.
+      Depends on: `.10.9.6.4`
+      Acceptance: Retrieve the neutral transport, five implementation/six runtime admission, native semantic,
+        primary-surface, canonical-order, project-storage, and prior recurring-driver authorities; specify one
+        repository-routed composition driver that consumes rather than replaces every committed oracle; freeze
+        exact runtime order, twenty native/MCP response identity proof, raw/lifecycle/handle/policy/privacy/
+        authority coverage, ledger and neutral-rollout promotion order, omission mutations, canonical registration,
+        docs/Knowledge Map/mdBook lockstep, and `.1-.2` dependency order without production/test/fixture/contract/
+        ledger/status change.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN COMMITTED BASE / OWNERSHIP** — Prove shared Lua closeout commit `d05e17ed`, zero-byte brief,
+        clean worktree, and absent rendered-book/managed-run/non-cache-bytecode residue; activate `.10.9.7.0`
+        before any audit, decision, child-tree, pointer, or planning change.
+      - [x] **KNOWLEDGE-FIRST OWNER RETRIEVAL** — Retrieve the implementation-admission ledger card, MCP topology/
+        transport decisions, semantic recurring-driver precedent, canonical CI order, all six exact admission
+        consumers, primary-surface fences, and repository-storage doctrine before reading implementation seams.
+        Retrieved the canonical Knowledge Map cards and ADRs `0049`/`0054`/`0055`, both ledgers/checkers, exact CI
+        order, all five consumer sources across six runtime invocations, their primary/authority roles, the prior
+        semantic recurring driver, and repository-routed managed-run pattern.
+      - [x] **EXACT RECURRING COMPOSITION DESIGN** — Freeze one dependency-free repository-routed driver that
+        materializes/validates the neutral contract, checks all five bindings, executes each of the six admitted
+        consumers exactly once in canonical order, validates the ledger, and compares all twenty native/MCP
+        canonical response bytes without embedding a second response model or runtime.
+        Audit finding: the native semantic consumers already prove all twenty cases, but each current MCP consumer
+        proves capabilities plus only one representative native-query identity. ADR `0062` therefore requires `.1`
+        to strengthen those same consumers' existing identity roles to all twenty neutral requests/digests before
+        one routed driver composes them; orchestration alone may not overclaim the missing evidence.
+      - [x] **PROMOTION / GOVERNANCE DESIGN** — Freeze the single allowed coordinated transition: implementation
+        and runtime rows remain complete, `thin_mcp_transport` advances pending -> complete in both the MCP ledger
+        and neutral semantic rollout, owner identity becomes the recurring leaf, and new mutations reject partial,
+        premature, duplicated, reordered, skipped, ignored-failure, topology, authority, and public-CLI drift.
+        ADR `0062` freezes exact owner `.10.9.7.1`, a new MCP recurring-gate ledger block, matching semantic rollout/
+        canonical identity, twenty-case consumer guards, routed-driver/canonical-switch guards, and partial-owner/
+        runtime/order/command/skip/representative-only/digest/primary/authority/storage mutations.
+      - [x] **SECURITY / AUTHORITY / TOPOLOGY FENCES** — Preserve one contract, five server implementations, six
+        runtime admissions, one shared Lua source/two ABI rows, caller-registered native indexes, routing-only
+        future aggregator deferral, no legacy adapter, and no source/path/bootstrap/compile/execute/trace/cache/
+        filesystem/process/network/SDK/primary-CLI authority.
+        The plan changes only test-side snapshot/registration composition, ledgers/checkers, routed orchestration,
+        and projections. Production servers, exact transport bytes, semantic owners, primary commands, aggregator,
+        legacy support, and runtime embedding remain excluded.
+      - [x] **LOCKSTEP / HANDOFF** — Record the decision in task/live/roadmap/ADR/Knowledge Map/mdBook projections,
+        pass focused owner checks, Knowledge Map, mdBook, memory, six doctrines, canonical CI, diff/storage and
+        exact cleanup, commit/clear/prove clean, then activate implementation/promotion `.10.9.7.1` without pushing
+        before cadence 300.
+        Task/index, both roadmaps, root/capability/TOOLBOX projections, ADR `0062`, four MCP Knowledge cards,
+        changes/notes/live/memory, and both affected mdBook chapters agree on the representative-versus-twenty-
+        case evidence boundary, one routed driver, atomic promotion, and unchanged 5/5 + 6/6 pending/114 state.
+
+      Verification plan: Inspect the committed neutral, ledger, checker, canonical driver, six consumers, prior
+        semantic recurring driver/checker, public-surface gate, project-data wrappers, and current projections;
+        run every unchanged focused authority plus complete canonical CI. Prove the staged diff is behavior-free
+        planning only and remove only exact verified generated residue.
+
+      Completion evidence: Clean base `d05e17ed`; neutral semantic 6 groups / 20 responses / 105 mutations;
+        neutral MCP 35/10/10/68; byte-fresh Perl/Rust/Dart/Julia/Lua bindings at 83,072/82,886/82,875/119,538/
+        82,827 bytes; Perl 13, Rust 1, Dart 1, Julia 178, and shared Lua 202x2 exact admission checks; unchanged
+        ledger 5/5 implementations + 6/6 runtimes, rollout pending, 114 rejected mutations; Knowledge Map
+        755 facts / 6,120 keys; mdBook 79 files / 13,692 KiB; memory architecture and all six doctrines pass.
+        Host-authorized canonical `LINKEDSPEC_RUN_LUA=1 bash tools/run_ci_local.sh` passes the project-owned
+        macOS-sandbox containment and moved-root proofs, Rust semantic 1/1 in 81.05 seconds, Dart 1/1, Julia
+        416/416 in 29.6 seconds, primary CLI 66x2, RAM 60% below the 88% ceiling, Phase 0 1,031/1,031 in 772
+        seconds, and the complete PUC Lua/LuaJIT opt-in gate. The initial in-harness attempt stopped only because
+        Codex's outer sandbox denied nested `sandbox-exec`; the authorized rerun exercised LinkedSpec's own sandbox
+        and passed. The staged diff is documentation/architecture only: no production, test, fixture, contract,
+        ledger, status, transport, semantic, source/parser/compiler/executor, trace/cache, CLI, aggregator, or
+        legacy behavior changes.
+
+      Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.0 - plan recurring MCP composition`
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1`
+      Status: `pending`
+      Goal: Implement and admit the recurring six-runtime MCP composition and promote only thin transport.
+      Depends on: `.10.9.7.0`
+      Acceptance: Strengthen each existing MCP consumer's capabilities/query identity roles to compare the exact
+        twenty neutral semantic requests, direct-native canonical bytes, MCP text/structured content, and existing
+        neutral response digests without copying response bodies or changing production; add the planned
+        repository-routed driver and independent omission-sensitive governance; execute the neutral semantic/MCP
+        contracts, five binding generators, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT exact consumers once
+        in frozen order; run the exact primary no-drift projection; prove every transport/lifecycle/security/
+        authority boundary; advance only `thin_mcp_transport` to complete with owner `.10.9.7.1` in the MCP and
+        neutral semantic ledgers; and pass focused, canonical, storage, documentation, Knowledge Map, mdBook,
+        mutation, and clean-boundary signoff.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.7.2`
+      Status: `pending`
+      Goal: Recompose the committed recurring MCP owners unchanged and close `.10.9`.
+      Depends on: `.10.9.7.1`
+      Acceptance: Rerun the exact neutral/five-implementation/six-runtime/recurring/governance chain and canonical
+        signoff without replacement production, fixture, consumer, oracle, ledger, semantic, CLI, aggregator, or
+        legacy behavior; preserve complete rollout; close `.10.9`; and hand the clean boundary to public no-drift
+        `.10.10` only after commit, brief-clear, exact cleanup, and clean proof.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.10`
   Status: `pending`
@@ -18303,6 +18403,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.7.0` | Clean base `d05e17ed`; knowledge-first owner audit; ADR `0062`; neutral semantic 6/20/105; neutral MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; exact admissions Perl 13, Rust 1, Dart 1, Julia 178, Lua 202x2; unchanged ledger 5/5 + 6/6 rollout pending/114; KM 755/6,120; mdBook 13,692 KiB/79; memory architecture; six doctrines; host-authorized canonical Rust semantic 1/1 81.05s, Dart 1/1, Julia 416/416 29.6s, project-sandbox containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 772s, complete dual-ABI Lua opt-in; documentation-only diff and exact cleanup. | PASS. One routed recurring composition, all-twenty consumer strengthening, atomic rollout promotion, and `.1-.2` handoff are frozen without behavior or status movement. The outer-harness nested-sandbox denial is root-caused; the project-owned macOS sandbox passes in the authorized canonical rerun. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.4` | Clean base `4eb008d8`; unchanged neutral MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; Lua 202x2; unchanged ledger 5/5 + 6/6 rollout pending/114; complete Lua 111+210+247+202 per ABI, package 177x2, CLI 66x2, corpus 105/105, storage 16x3; KM 754/6,110; mdBook 13,676 KiB/79; six doctrines; canonical Rust semantic 1/1 81.30s, Dart 1/1, Julia 416/416 28.9s, containment/moved-root, CLI 66x2, RAM 63%, Phase 0 1,031/1,031 in 652s; documentation-only diff and exact cleanup. | PASS. Committed-owner recomposition closes `.10.9.6.4` and parent `.10.9.6` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; recurring `.10.9.7` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.3` | Clean base `15f537df`; one unchanged twelve-role Lua consumer at 202 assertions on PUC Lua and LuaJIT; complete Lua 111+210+247+202 per ABI, package 177x2, CLI 66x2, corpus 105/105, storage 16x3; neutral MCP 35/10/10/68; five byte-fresh bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; exact ledger 5/5 + 6/6 rollout pending/114; KM 754/6,108; mdBook 13,668 KiB/79; six doctrines; canonical Rust semantic 1/1 80.95s, Dart 1/1, Julia 416/416 29.4s, containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659s, complete dual-ABI Lua opt-in; exact cleanup. | PASS. The fifth native implementation and both Lua runtime rows are formally admitted from one source identity without production or transport movement; no-change `.10.9.6.4` follows only after clean commit and brief-clear proof. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.2` | Clean base `b2e886de`; one iterative dual-ABI strict wire and public caller-owned `serve_stdio`; binding/runtime 111x2; decoded/security 210x2; strict stdio 247x2; complete Lua package 177x2, CLI 66x2, corpus 105/105, storage 16x3; neutral MCP 35/10/10/68; five byte-fresh bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/98; aggregate retirement zero-positive; KM 753/6,099; mdBook 13,660 KiB/79; six doctrines; canonical Rust semantic 1/1 82.15s, Dart 1/1, Julia 416/416 29.2s, containment/moved-root, CLI 66x2, RAM 63%, Phase 0 1,031/1,031, complete Lua opt-in; exact cleanup. | PASS. Lua now owns strict number-kind-preserving bounded stdio, canonical LF, cancellation through flush, and EOF/I/O release on both ABIs without formal admission or unrelated authority; exact dual-ABI admission `.10.9.6.3` follows only after clean commit and brief-clear proof. |

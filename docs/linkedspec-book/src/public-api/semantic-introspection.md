@@ -60,6 +60,25 @@ owners and closes the Julia parent without status movement. Shared Lua `.10.9.6.
 graph and qualify it independently on both ABIs. The ledger is now 5/5 native implementations and 6/6 runtime
 admissions; shared recurring rollout remains pending.
 
+Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` make the remaining evidence boundary explicit. Every
+native semantic admission consumer already derives and digest-checks the twenty ordered query cases, while every
+current MCP admission consumer proves the complete transport/security/lifecycle inventory but compares direct
+native and MCP payloads for capabilities plus one representative graph query. Running those consumers together
+cannot honestly be described as all-twenty MCP identity.
+
+Implementation leaf `.10.9.7.1` will therefore strengthen the existing consumers' capabilities/query identity
+roles—not add another semantic model. For each existing neutral case, the runtime consumer will register the
+corresponding native snapshot, send the exact request through MCP, compare tool text bytes and structured content
+with the direct native answer, and verify the already-owned neutral response digest. A planned repository-routed
+`tools/check_mcp_six_runtime.sh` will then compose the neutral semantic/MCP checkers, all five generated bindings,
+Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, the MCP ledger, and exact primary no-drift proof. Canonical CI will
+require and syntax-check it; expensive execution will be opt-in with `LINKEDSPEC_RUN_MCP_MATRIX=1`. Only after
+that evidence passes may both matching `thin_mcp_transport` rollout rows become complete. Production servers,
+protocol bytes, primary CLI behavior, legacy support, and an aggregator remain unchanged and outside the gate.
+The planning leaf's unchanged signoff passes semantic 6/20/105, MCP 35/10/10/68, exact current runtime
+admissions, project-sandbox containment and moved-root proof, primary CLI 66x2, Phase 0 1,031/1,031, and the
+complete PUC Lua/LuaJIT gate; rollout therefore remains pending until the implementation evidence exists.
+
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
@@ -133,8 +152,8 @@ document itself. It independently reconstructs every frame, verifies the exact s
 classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
 at their intended invariant. This is still conformance code, not an MCP server.
 
-Canonical local CI requires every listed artifact and all six programs. It always runs the materializer before
-the independent validator, then checks Perl, Rust, Dart, and Julia generated bindings in that order only after both
+Canonical local CI requires every listed artifact and all seven programs. It always runs the materializer before
+the independent validator, then checks Perl, Rust, Dart, Julia, and Lua generated bindings in that order only after both
 neutral owners pass. Recurring tool-governance proof rejects omission of any generator and binding-before-
 validator order. This detects stale JSONL/digests before independent semantic validation and prevents a derived
 backend binding from becoming an oracle for its own normative source.
@@ -1981,17 +2000,17 @@ local CI also passes all doctrine/contract gates, Rust semantic admission 1/1 in
 1/1, reference primary 66x2, and Phase 0 1,031/1,031 in 636 seconds. The closeout removes only 1,632,888 KiB of
 regenerable build/depot artifacts and preserves source plus reusable package caches.
 
-## Current Lua authority and Unicode foundation
+## Lua authority audit and Unicode foundation (historical pre-implementation boundary)
 
-PUC Lua and LuaJIT remain pending for semantic introspection, and completed behavior-free audit `.10.7.0` fixes
-their implementation boundary before semantic code. The shared Lua source already has strict UTF-8 parsing, typed
+At completed behavior-free audit `.10.7.0`, PUC Lua and LuaJIT were still pending for semantic introspection and
+the following text fixed their pre-implementation boundary. They are now admitted; the current six-runtime state
+is summarized at the start of this chapter. At that audit boundary, the shared Lua source already had strict UTF-8 parsing, typed
 source and ActionIR ASTs, staged function payload/job/result sidecars, ordered compiled state, portable diagnostics,
 generated-source v2, loaded
 and reconstructed execution, fresh-process emitted modules, trace, Unicode cursor conversion, and deterministic
-JSON. It now exposes the opaque semantic source map/SHA-256 and compiled-or-failed foundation described below. It
-now retains the exact private normalized static plus calls/staging/generated projection and evaluates the first
-nine static query cases behind a package-private immutable kernel. It does not yet expose a public query method or
-typed semantic observation sink.
+JSON. The later leaves described below added the opaque semantic source map/SHA-256 and compiled-or-failed
+foundation, exact private normalized static plus calls/staging/generated projection, public query method, typed
+semantic observation sink, all twenty responses, and dual-ABI admission.
 
 The first Unicode implementation leaf is now complete. Generator
 `unicode_case/generate_unicode_rule_label_contract.py` emits private

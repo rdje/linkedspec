@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.7.0` — recurring composition cannot upgrade representative evidence
+  into exhaustive evidence by assertion): The semantic contract's six native admission consumers each build the
+  governed snapshots and digest-check all twenty query cases. The twelve-role MCP consumers cover the complete
+  transport, lifecycle, handle, policy, privacy, I/O, and authority inventories, but their current direct/MCP
+  identity roles exercise capabilities plus one representative graph query. A driver that merely runs those six
+  consumers would therefore be an honest transport composition gate but not the all-twenty identity proof required
+  to promote `thin_mcp_transport`.
+
+  ADR `0062` closes the gap at the existing test adapter seam. Leaf `.1` must extend each admitted MCP consumer's
+  capabilities/query identity roles to iterate the exact neutral query inventory, construct/register the native
+  snapshot already owned by that runtime, compare MCP text and structured content to direct native canonical
+  bytes, and verify the existing neutral digest. Expected records/responses stay solely in the neutral semantic
+  contract; no production helper, second response model, cross-runtime process, or central cache is authorized.
+
+  One repository-routed `tools/check_mcp_six_runtime.sh` then composes semantic validation, MCP materialization/
+  independent validation, five binding generators, six exact runtime consumers, the recurring ledger, and the
+  existing three-case primary no-drift projection. It owns disposable Rust target and Julia writable-depot child
+  roots beneath one managed run. Canonical CI requires/syntax-checks it and exposes only an explicit
+  `LINKEDSPEC_RUN_MCP_MATRIX=1` expensive opt-in.
+
+  Promotion is atomic: implementation/runtime rows stay complete; both thin-transport rollout rows become
+  complete with owner `.10.9.7.1`; canonical direct-identity metadata names the same owner; mutations deny partial
+  owner/status movement, missing/reordered/duplicated commands or runtimes, representative-only proof, skipped
+  consumers, unrouted storage, primary-CLI drift, and authority expansion. `.0` itself changes documentation only
+  and preserves 5/5 + 6/6 pending/114.
+
+  Signoff passes semantic 6/20/105, MCP 35/10/10/68, the five byte-fresh bindings, exact current consumers,
+  Knowledge Map 755/6,120, mdBook 79 files / 13,692 KiB, memory architecture, and all six doctrines. The first
+  canonical attempt reached the process-locality proof and stopped with macOS status 71 because the Codex outer
+  sandbox disallowed nested `sandbox-exec`; this did not establish a LinkedSpec failure. A host-authorized full
+  rerun exercised LinkedSpec's own sandbox successfully, passed containment/moved-root proof, Rust semantic in
+  81.05 seconds, Julia 416/416 in 29.6 seconds, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 772 seconds, and the
+  complete PUC Lua/LuaJIT gate.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.4` — closeout is recomposition evidence, not a sixth implementation
   or a second expected-response model): The committed neutral materializer/validator, five binding generators,
   five native servers, six runtime consumers, and admission ledger already partition the authority needed to
