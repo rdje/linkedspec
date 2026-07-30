@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` — consumer proof should compose native authorities, not
+  duplicate their answers): Exhaustive transport identity needs more setup than a representative query, but it
+  does not need a second response oracle. Each existing consumer now uses public native construction/query APIs
+  to derive six governed snapshot indexes from the already admitted fixtures, registers those indexes through
+  the public MCP seam, and selects the neutral contract's capabilities case plus nineteen query cases. The
+  manifest remains the sole case/digest authority; direct native execution remains the sole response authority.
+
+  The strongest useful equality is four-way and case-generic: native object equals structured content; native
+  canonical JSON equals returned MCP text; decoding that text reproduces the native object; and its SHA-256 equals
+  the existing governed response digest. The runtime case deliberately observes three real trace events instead
+  of fabricating an expected runtime response. This pattern makes future query additions fail closed at the
+  neutral manifest/consumer boundary while avoiding copied bodies, per-language expected maps, or production
+  adapters.
+
+  Extending the two existing identity roles preserves the exact twelve-role topology and all authorization,
+  privacy, policy, lifecycle, malformed-input, and authority checks. One shared Lua source supplies identical
+  proof on PUC Lua and LuaJIT. Formal rollout remains pending until the separate routed governance leaf composes
+  these six invocations and independently rejects omission or weakening. The complete canonical gate repeats the
+  changed admissions on all six runtimes and passes through Phase 0 1,031/1,031 in 661 seconds.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` — transport validation and semantic support are distinct):
   The MCP schema must validate the safe shape of a semantic contract identifier, not decide which semantic
   contract versions exist. A nonempty 128-character/128-UTF-8-byte shape preserves bounded transport admission;

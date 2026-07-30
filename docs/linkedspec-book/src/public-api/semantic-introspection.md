@@ -60,11 +60,11 @@ owners and closes the Julia parent without status movement. Shared Lua `.10.9.6.
 graph and qualify it independently on both ABIs. The ledger is now 5/5 native implementations and 6/6 runtime
 admissions; shared recurring rollout remains pending.
 
-Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` make the remaining evidence boundary explicit. Every
-native semantic admission consumer already derives and digest-checks the twenty ordered query cases, while every
-current MCP admission consumer proves the complete transport/security/lifecycle inventory but compares direct
-native and MCP payloads for capabilities plus one representative graph query. Running those consumers together
-cannot honestly be described as all-twenty MCP identity.
+Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` made the remaining evidence boundary
+explicit. Every native semantic admission consumer already derived and digest-checked the twenty ordered query
+cases, while the pre-`.10.9.7.1.1.2` MCP consumers proved the complete transport/security/lifecycle inventory but
+compared direct native and MCP payloads for only capabilities plus one representative graph query. Running that
+earlier consumer form together could not honestly be described as all-twenty MCP identity.
 
 Real implementation audit `.10.9.7.1.0` sharpened that boundary. A temporary Perl all-twenty spend proved
 capabilities plus sixteen of nineteen query cases retain exact native object, MCP text/structured content, and
@@ -82,10 +82,31 @@ native semantic authority, so native portable version and source-ceiling diagnos
 artifacts, independent validation, five generated bindings, and identical Perl/Rust/Dart/Julia/shared-Lua
 behavior moved together. Focused proof is green on all six runtimes at 35 canonical frames, ten raw inputs, ten
 lifecycle cases, and 76 neutral mutations; the complete canonical gate is also green through repository
-containment, moved-root execution, primary CLI 66x2, and Phase 0 1,031/1,031. All-twenty consumer proof still
-follows under `.2`; only routed
-governance `.3` may promote `thin_mcp_transport`. The weaker seventeen-plus-three claim is not selected. Primary
-CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside the repair.
+containment, moved-root execution, primary CLI 66x2, and Phase 0 1,031/1,031.
+
+All-twenty consumer leaf `.10.9.7.1.1.2` is now complete. The existing twelve-role consumers construct the
+governed graph, calls/staging, failed, runtime-observed, privacy, and privacy-limited native indexes rather than
+copying response bodies. `native_capabilities_identity` checks the capabilities case; `native_query_identity`
+checks the other nineteen cases in contract order. Every case must satisfy all four identity views:
+
+```text
+direct native canonical JSON
+  == MCP content[0].text
+  == canonical JSON of MCP structuredContent
+  == canonical JSON of the decoded MCP text
+sha256(direct native canonical JSON)
+  == semantic_introspection_contract.json response_sha256
+```
+
+That proof passes Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT without a production helper or second semantic
+oracle. Julia advances from its historical 178-assertion admission boundary to 257 current consumer assertions;
+the shared Lua consumer advances from 202 to 281 assertions on each ABI. The twelve role names and all transport,
+security, privacy, lifecycle, and authority fences remain unchanged. Only routed governance `.3` may promote
+`thin_mcp_transport`, so formal state correctly remains pending/114. The weaker seventeen-plus-three claim is
+not selected. Canonical repeats the six changed admissions and passes Rust semantic in 81.63 seconds, Dart 1/1,
+Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in
+661 seconds. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside
+the repair.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -3535,7 +3556,7 @@ The dependency order is:
 | `.10.9.7.1.0` | audit the first real all-twenty MCP spend | complete finding; 17/20 identities, three shared schema/default-policy blockers, exploratory code removed |
 | `.10.9.7.1.1.0` | freeze the director-authorized implementation boundary | complete behavior-free plan; atomic repair → six-runtime proof → promotion → closeout |
 | `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | signoff-complete at 35/10/10/76; rollout unchanged pending/114 |
-| `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | pending after atomic repair |
+| `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | complete; unchanged twelve-role consumers prove capabilities + 19 queries across native/canonical/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia 257, and Lua 281x2; rollout remains pending/114 |
 | `.10.9.7.1.1.3` | add routed governance and promote thin transport | pending after all-twenty proof |
 | `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | pending after promotion |
 | `.10.9.7.2` | recurring MCP committed-owner closeout | pending after `.1.1` |
@@ -3562,7 +3583,9 @@ runtime query surfaces now. MCP machine artifacts and independent validation are
 implementations expose decoded in-process dispatch plus strict stdio and exact twelve-role admission; one Lua
 source qualifies independently on PUC Lua and LuaJIT. The shared status/proof ledger is therefore 5/5
 implementations and 6/6 runtimes, with recurring rollout pending. Atomic repair `.10.9.7.1.1.1` updated the
-normative transport digest and all five generated bindings together; it did not promote rollout.
+normative transport digest and all five generated bindings together; all-twenty consumer proof `.10.9.7.1.1.2`
+now supplies exact six-runtime identity evidence. Neither leaf promotes rollout; routed governance `.3` owns that
+transition.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created

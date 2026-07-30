@@ -1,13 +1,22 @@
 //! FUTURE-PARITY-BACKLOG.10.9.3.3 — exact twelve-role Rust MCP admission.
+//! FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — all-twenty MCP/native identity.
 
+use linkedspec_core::compiler::compile;
+use linkedspec_core::validation::validate;
+use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::{
     McpBudgetLimits, McpDeploymentPolicy, McpRegistrationOptions, McpServer, McpServerError,
+    RuntimeSemanticObservationEvent, RuntimeSemanticObservationSink,
     semantic_index::{SemanticIndex, SemanticIndexOptions, SemanticSourceDetail},
 };
-use serde_json::Value;
+use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
+use std::cell::RefCell;
+use std::collections::BTreeMap;
 use std::hint::spin_loop;
 use std::io::{self, Cursor, Read, Write};
+use std::rc::Rc;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
@@ -36,6 +45,18 @@ const TRANSPORT: &str =
     include_str!("../../../capability_conformance/mcp_semantic_transport_contract.json");
 const GRAPH: &[u8] =
     include_bytes!("../../../capability_conformance/semantic_introspection/graph.spec");
+const CALLS: &[u8] =
+    include_bytes!("../../../capability_conformance/semantic_introspection/calls_and_staging.spec");
+const FAILED: &[u8] =
+    include_bytes!("../../../capability_conformance/semantic_introspection/failed.spec");
+const RUNTIME: &[u8] =
+    include_bytes!("../../../capability_conformance/semantic_introspection/runtime.spec");
+const RUNTIME_INPUT: &[u8] =
+    include_bytes!("../../../capability_conformance/semantic_introspection/runtime.input");
+const PRIVACY: &[u8] =
+    include_bytes!("../../../capability_conformance/semantic_introspection/privacy.spec");
+const SEMANTIC_CONTRACT: &str =
+    include_str!("../../../capability_conformance/semantic_introspection_contract.json");
 const MCP_CONTRACT_SOURCE: &str = include_str!("../src/mcp_contract.rs");
 const MCP_RUNTIME_SOURCE: &str = include_str!("../src/mcp_contract_runtime.rs");
 const MCP_SERVER_SOURCE: &str = include_str!("../src/mcp_server.rs");
@@ -87,13 +108,58 @@ fn rust_identity(mut response: Value) -> Value {
 }
 
 fn graph_index() -> Arc<SemanticIndex> {
-    Arc::new(
-        SemanticIndex::from_utf8(
-            GRAPH,
-            SemanticIndexOptions::new("graph.spec", SemanticSourceDetail::Text),
+    semantic_index_for("graph")
+}
+
+fn semantic_contract() -> Value {
+    serde_json::from_str(SEMANTIC_CONTRACT).expect("semantic contract parses")
+}
+
+fn semantic_index(
+    source: &[u8],
+    logical_name: &str,
+    ceiling: SemanticSourceDetail,
+) -> SemanticIndex {
+    SemanticIndex::from_utf8(source, SemanticIndexOptions::new(logical_name, ceiling))
+        .expect("semantic fixture constructs")
+}
+
+fn runtime_index() -> SemanticIndex {
+    let source = std::str::from_utf8(RUNTIME).expect("runtime source is UTF-8");
+    let parsed = parse_spec_with_user_functions(source).expect("parse runtime fixture");
+    validate(&parsed).expect("validate runtime fixture");
+    let compiled = compile(&parsed).expect("compile runtime fixture");
+    let events = Rc::new(RefCell::new(Vec::<RuntimeSemanticObservationEvent>::new()));
+    let captured = Rc::clone(&events);
+    let options = ExecutionOptions::new().with_semantic_observation_sink(
+        RuntimeSemanticObservationSink::new(move |event| captured.borrow_mut().push(event)),
+    );
+    let result = Engine::new(compiled)
+        .execute_value(
+            std::str::from_utf8(RUNTIME_INPUT).expect("runtime input is UTF-8"),
+            &options,
         )
-        .expect("graph semantic index constructs"),
-    )
+        .expect("execute runtime fixture");
+    assert_eq!(result, json!(["A", "B"]), "MCP runtime snapshot result");
+    let events = events.borrow().clone();
+    assert_eq!(events.len(), 3, "MCP runtime snapshot observation count");
+    semantic_index(RUNTIME, "runtime.spec", SemanticSourceDetail::Text)
+        .with_execution_observation(&events)
+        .expect("derive runtime semantic index")
+}
+
+fn semantic_index_for(snapshot: &str) -> Arc<SemanticIndex> {
+    Arc::new(match snapshot {
+        "graph" => semantic_index(GRAPH, "graph.spec", SemanticSourceDetail::Text),
+        "calls" => semantic_index(CALLS, "calls_and_staging.spec", SemanticSourceDetail::Text),
+        "failed" => semantic_index(FAILED, "failed.spec", SemanticSourceDetail::Span),
+        "runtime" => runtime_index(),
+        "privacy" => semantic_index(PRIVACY, "privacy.spec", SemanticSourceDetail::Text),
+        "privacy_limited" => {
+            semantic_index(PRIVACY, "privacy.spec", SemanticSourceDetail::Identity)
+        }
+        other => panic!("unknown semantic snapshot {other}"),
+    })
 }
 
 fn with_handle(mut request: Value, handle: &str) -> Value {
@@ -411,30 +477,97 @@ fn exact_rust_mcp_admission_executes_every_role_once() {
             actual["result"]["content"][0]["text"],
             Value::String(canonical(&native))
         );
+        let decoded: Value = serde_json::from_str(
+            actual["result"]["content"][0]["text"]
+                .as_str()
+                .expect("capability text"),
+        )
+        .expect("capability text decodes");
+        assert_eq!(decoded, native);
+        let semantic = semantic_contract();
+        let governed = semantic["query_cases"]
+            .as_array()
+            .expect("semantic query cases")
+            .iter()
+            .find(|case| case["id"] == "capabilities")
+            .expect("capabilities case");
+        assert_eq!(
+            sha256_hex(canonical(&native).as_bytes()),
+            governed["expected"]["response_sha256"]
+                .as_str()
+                .expect("capability response digest")
+        );
         server.shutdown();
     });
 
     admission_role(&mut roles_seen, "native_query_identity", || {
-        let index = graph_index();
+        let semantic = semantic_contract();
+        let cases = semantic["query_cases"]
+            .as_array()
+            .expect("semantic query cases")
+            .iter()
+            .filter(|case| case["id"] != "capabilities")
+            .collect::<Vec<_>>();
+        assert_eq!(cases.len(), 19, "all governed MCP query responses");
+        let indexes = BTreeMap::from([
+            ("graph", semantic_index_for("graph")),
+            ("calls", semantic_index_for("calls")),
+            ("failed", semantic_index_for("failed")),
+            ("runtime", semantic_index_for("runtime")),
+            ("privacy", semantic_index_for("privacy")),
+            ("privacy_limited", semantic_index_for("privacy_limited")),
+        ]);
         let mut server = McpServer::new().expect("production MCP server constructs");
-        let handle = server
-            .register_index(
-                Arc::clone(&index),
-                b"query-principal",
-                McpRegistrationOptions::default(),
-            )
-            .expect("native index registers");
-        let request = with_handle(frame("query_call_request"), &handle);
-        let native =
-            serde_json::to_value(index.query_neutral(&request["params"]["arguments"]["request"]))
+        let mut handles = BTreeMap::new();
+        for (snapshot, index) in &indexes {
+            let handle = server
+                .register_index(
+                    Arc::clone(index),
+                    b"query-principal",
+                    McpRegistrationOptions::default(),
+                )
+                .expect("native index registers");
+            handles.insert(*snapshot, handle);
+        }
+        for (ordinal, case) in cases.into_iter().enumerate() {
+            let id = case["id"].as_str().expect("semantic case id");
+            let snapshot = case["snapshot"].as_str().expect("semantic snapshot id");
+            let index = indexes.get(snapshot).expect("semantic index exists");
+            let native = serde_json::to_value(index.query_neutral(&case["request"]))
                 .expect("native query serializes");
-        let actual = response(&mut server, &request, b"query-principal");
-        assert_eq!(actual, frame("query_call_response"));
-        assert_eq!(actual["result"]["structuredContent"], native);
-        assert_eq!(
-            actual["result"]["content"][0]["text"],
-            Value::String(canonical(&native))
-        );
+            let mut request = with_handle(
+                frame("query_call_request"),
+                handles.get(snapshot).expect("registered semantic handle"),
+            );
+            request["params"]["arguments"]["request"] = case["request"].clone();
+            if id != "graph_list_rules" {
+                request["id"] = json!(100 + ordinal);
+            }
+            let actual = response(&mut server, &request, b"query-principal");
+            if id == "graph_list_rules" {
+                assert_eq!(actual, frame("query_call_response"));
+            }
+            assert_eq!(
+                actual["result"]["structuredContent"], native,
+                "{id} structured/native identity"
+            );
+            let text = actual["result"]["content"][0]["text"]
+                .as_str()
+                .expect("MCP query text");
+            assert_eq!(text, canonical(&native), "{id} canonical text identity");
+            assert_eq!(
+                serde_json::from_str::<Value>(text).expect("MCP query text decodes"),
+                native,
+                "{id} decoded/native identity"
+            );
+            assert_eq!(
+                sha256_hex(canonical(&native).as_bytes()),
+                case["expected"]["response_sha256"]
+                    .as_str()
+                    .expect("governed response digest"),
+                "{id} response digest"
+            );
+        }
         server.shutdown();
     });
 

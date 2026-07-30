@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — All-twenty MCP consumer proof signoff-complete
+
+Leaf `.10.9.7.1.1.2` starts from clean repair commit `8352d535` and strengthens only the five existing admission
+consumers plus lockstep documentation. Capabilities and all nineteen governed semantic queries now prove, on
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, that the direct native object, MCP structured content, canonical MCP
+text, decoded text, and existing response digest all describe the same response. Six indexes are derived through
+public native APIs from governed fixtures, including an actual three-event runtime observation; no expected body
+or production adapter is copied into the tests.
+
+Focused proof passes Perl Files=1 Tests=13, Rust admission 1/1 plus formatting, Dart admission 1/1 plus formatting
+and analysis, Julia 257/257, and the shared Lua source 281/281 on each ABI. Neutral semantic remains 6/20/105,
+neutral MCP remains 35/10/10/76, and formal state deliberately remains 5/5 implementations + 6/6 runtimes with
+rollout pending/114. Production servers, contract, generated bindings, fixtures, role count, ledgers, semantic
+model, CLI, aggregator, legacy adapter, and server authority do not move. Knowledge/book/doctrine/canonical
+signoff passes at Knowledge Map 757/6,137, mdBook 13,748 KiB/79 files, all seven doctrines, changed MCP admissions
+on six runtimes, Rust semantic 81.63 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, cursor 288, repository
+containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in 661 seconds. The clean commit is the sole
+remaining action; only then may routed promotion `.10.9.7.1.1.3` activate.
+
 ## 2026-07-30 — Atomic MCP transport repair signoff-complete
 
 Authorized leaf `.10.9.7.1.1.1` is complete from clean `c3273219`. The neutral MCP response schema now derives

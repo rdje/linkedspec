@@ -1,8 +1,8 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` implemented and focused-green;
-  all-twenty consumer proof and rollout remain pending
+- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` and all-twenty six-runtime
+  consumer proof `.10.9.7.1.1.2` implemented; routed governance and rollout remain pending
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -12,13 +12,13 @@ native server implementations, and six runtime admissions. The implementation le
 implementations and 6/6 runtimes, while shared `thin_mcp_transport` rollout remains pending. The final MCP parent
 therefore needs recurring composition rather than another implementation.
 
-The audit found an important proof boundary. Every native semantic admission consumer already derives and
-digest-checks all twenty cases in `semantic_introspection_contract.json`. Every MCP admission consumer already
-executes the twelve exact transport roles, but its direct-native identity roles currently cover capabilities and
-one representative graph query. Running those consumers together proves the full 35-frame, ten-raw-input,
-ten-lifecycle, four-handle, four-policy, privacy, authority, and primary-CLI boundaries; it does not by itself
-prove that all twenty semantic responses survive MCP byte-for-byte. Recurring orchestration may not claim that
-stronger result by inference.
+The audit found an important proof boundary. Every native semantic admission consumer already derived and
+digest-checked all twenty cases in `semantic_introspection_contract.json`. Before `.10.9.7.1.1.2`, every MCP
+admission consumer executed the twelve exact transport roles but its direct-native identity roles covered only
+capabilities and one representative graph query. Running those consumers together proved the full 35-frame,
+ten-raw-input, ten-lifecycle, four-handle, four-policy, privacy, authority, and primary-CLI boundaries, but not
+that all twenty semantic responses survived MCP byte-for-byte. The consumers now carry that missing evidence;
+recurring promotion still waits for routed omission-sensitive governance rather than inferring completion.
 
 Adding a central response generator would create a second semantic oracle. Embedding every language runtime in
 one process would violate the native-server topology. Treating the six existing consumers as sufficient would
@@ -70,8 +70,28 @@ The materializer and independent checker derive these invariants separately and 
 mutations. All five filesystem-free bindings are byte-fresh at Perl 83,411, Rust 83,225, Dart 83,214, Julia
 120,030, and Lua 83,166 bytes. Focused decoded, strict-stdio, and admission proof passes on Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT. The implementation ledger deliberately remains 5/5 implementations + 6/6 runtimes,
-rollout pending, with 114 governance mutations. Leaf `.10.9.7.1.1.2` remains responsible for proving all twenty
-direct-native/MCP/digest identities before any promotion.
+rollout pending, with 114 governance mutations. At that repair boundary, leaf `.10.9.7.1.1.2` remained responsible
+for proving all twenty direct-native/MCP/digest identities before any promotion.
+
+## All-twenty six-runtime consumer evidence — 2026-07-30
+
+Leaf `.10.9.7.1.1.2` strengthens only the existing five MCP admission consumers and runs the shared Lua source
+unchanged under PUC Lua and LuaJIT. Each consumer constructs the six governed snapshot classes through its
+native public APIs: graph, calls/staging, failed compilation, real runtime observation, full-text privacy, and
+identity-ceiling privacy. No expected response body or second production/test oracle was added.
+
+The existing `native_capabilities_identity` role now proves direct native object, canonical MCP text, decoded
+text, structured content, and the governed capabilities digest. The unchanged `native_query_identity` role does
+the same for all nineteen remaining cases in contract order, including calls/shapes, runtime events, pagination,
+budgets, privacy, source-ceiling, unsupported-contract, invalid-operation, and explanation outcomes. Native
+`ok: false` responses remain successful MCP tool envelopes.
+
+Focused execution passes Perl's 13 ordered subtests, Rust 1/1, Dart 1/1 with clean analysis, Julia 257/257, and
+the one Lua consumer at 281 assertions on each ABI. Canonical repeats all six changed admissions and passes Rust
+semantic 1/1 in 81.63 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI
+66x2, RAM 59%, and Phase 0 1,031/1,031 in 661 seconds. The neutral semantic and MCP contracts remain 6/20/105
+and 35/10/10/76. Formal state intentionally remains 5/5 implementations + 6/6 runtimes, rollout pending, with
+114 governance mutations; `.10.9.7.1.1.3` must still add the rooted recurring composition and earn promotion.
 
 ## Director authorization and implementation boundary — 2026-07-30
 
@@ -91,6 +111,8 @@ Implementation child `.10.9.7.1.1.0` keeps the repair atomic where repository co
    not itself establish all-twenty identity or promote rollout.
 2. `.2` strengthens the existing five consumers, with shared Lua run on both ABIs, to prove capabilities plus all
    nineteen query responses through direct canonical bytes, MCP text/structured content, and existing digests.
+   This proof is now implemented and canonical-green without production, contract, binding, fixture, role, or
+   formal-status movement.
 3. `.3` adds the rooted same-volume recurring driver, independent omission governance, coordinated ledger state,
    canonical opt-in, and atomic thin-transport promotion.
 4. `.4` recomposes every committed owner unchanged and closes `.1.1` plus parent `.1` before MCP closeout `.2`.
@@ -103,9 +125,9 @@ rollout promotion remain separate commits so proof precedes status.
 
 ### 1. Strengthen the six admitted consumers; do not add a seventh model
 
-This section remains the target proof after the authorized prerequisite boundary repair. Leaf `.10.9.7.1.1.1`
-repairs the three shared neutral transport seams documented above; `.10.9.7.1.1.2` then performs this consumer
-proof. The original consumer-only restriction is superseded only for that bounded repair;
+This section defines the proof now implemented after the authorized prerequisite boundary repair. Leaf
+`.10.9.7.1.1.1` repairs the three shared neutral transport seams documented above; `.10.9.7.1.1.2` performs this
+consumer proof. The original consumer-only restriction is superseded only for that bounded repair;
 it remains in force for semantic-model ownership and expected response bodies.
 
 Leaf `.10.9.7.1.1.2` extends the existing MCP admission consumers' native-capabilities/native-query identity proof to
@@ -181,6 +203,8 @@ later route only and cannot become part of this proof.
 
 - Shared rollout is earned by direct evidence for all twenty native/MCP payload identities rather than inferred
   from one representative query.
+- That direct evidence is now present on all six runtimes; formal rollout still waits for the separately governed
+  recurring driver and coordinated ledger transition.
 - Expected semantic bytes still have one owner; the recurring layer contains orchestration and test adapters,
   not another semantic implementation.
 - Runtime-specific construction remains inside the native consumer that already owns that runtime's admission.

@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — prove all MCP response identities
+
+Strengthened the five existing MCP admission consumers without adding a production or test-only response oracle.
+Each consumer now derives and registers six governed native snapshot indexes—graph, calls, failure, real
+three-event runtime observation, privacy, and privacy-limited—then exercises capabilities plus all nineteen
+neutral semantic queries. Every response proves direct native object equality with MCP structured content,
+byte identity between direct canonical JSON and MCP text, decoded-text equality with the native object, and the
+exact governed `response_sha256`.
+
+The existing twelve transport roles remain unchanged. Focused proof passes Perl Files=1 Tests=13; Rust admission
+1/1 with workspace formatting clean; Dart admission 1/1 with formatting and analysis clean; Julia 257/257; and
+the shared Lua source at 281/281 on both PUC Lua and LuaJIT. Neutral semantic remains 6 groups/20 responses/105
+mutations, neutral MCP remains 35 canonical frames/10 raw inputs/10 lifecycle cases/76 mutations, and formal MCP
+state deliberately remains 5/5 implementations + 6/6 runtimes with rollout pending/114. No production server,
+contract, binding, fixture, role, ledger, semantic model, CLI, aggregator, legacy adapter, or server authority
+moved. Knowledge Map 757/6,137, memory, all seven doctrines, and the 13,748-KiB/79-file mdBook pass. Canonical CI
+repeats all six changed admissions and passes Rust semantic 81.63 seconds, Dart 1/1, Julia 416/416 in 29.5
+seconds, cursor 288, repository containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in 661 seconds.
+The generated book and exact empty canonical-run directory were removed; reusable project-local caches remain.
+Routed recurring governance and atomic promotion remain owned by `.10.9.7.1.1.3`.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.1 — repair MCP transport boundaries
 
 Repaired the three shared public MCP blockers atomically. `recordFacts` now contains the exact 72-key union from

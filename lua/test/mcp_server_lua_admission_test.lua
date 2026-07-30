@@ -1,9 +1,11 @@
 -- FUTURE-PARITY-BACKLOG.10.9.6.3 — exact shared Lua MCP admission.
+-- FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — all-twenty MCP/native identity.
 
 local linkedspec = require("linkedspec")
 local json = linkedspec.json
 local mcp = require("linkedspec.mcp_server")
 local runtime = require("linkedspec.mcp_contract_runtime")
+local sha256 = require("linkedspec.sha256")
 
 local ROLE_ORDER = json.array({
   "contract_inventory",
@@ -213,9 +215,73 @@ local function admission_role(roles_seen, role, proof)
 end
 
 local corpus = runtime.corpus()
+local semantic_contract = read_object(
+  "capability_conformance/semantic_introspection_contract.json")
+local semantic_sources = {
+  graph = read_file("capability_conformance/semantic_introspection/graph.spec"),
+  calls = read_file(
+    "capability_conformance/semantic_introspection/calls_and_staging.spec"),
+  failed = read_file("capability_conformance/semantic_introspection/failed.spec"),
+  runtime = read_file("capability_conformance/semantic_introspection/runtime.spec"),
+  privacy = read_file("capability_conformance/semantic_introspection/privacy.spec"),
+}
 local graph_index = linkedspec.semantic_index(read_file(
   "capability_conformance/semantic_introspection/graph.spec"
 ), { logical_name = "graph.spec", source_detail_ceiling = "text" })
+local semantic_indexes = { graph = graph_index }
+
+local function semantic_case(id)
+  return find_row(semantic_contract.query_cases, "id", id)
+end
+
+local function runtime_semantic_index()
+  local parsed = linkedspec.parse_spec(semantic_sources.runtime)
+  linkedspec.validate_spec(parsed)
+  local compiled = linkedspec.compile_spec(parsed)
+  local events = {}
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(compiled),
+    read_file("capability_conformance/semantic_introspection/runtime.input"),
+    { semantic_observation_sink = function(event) events[#events + 1] = event end }
+  ).value
+  check_same_json(result, json.array({ "A", "B" }), "MCP runtime snapshot result")
+  check_equal(#events, 3, "MCP runtime snapshot observation count")
+  local base = linkedspec.semantic_index(semantic_sources.runtime, {
+    logical_name = "runtime.spec", source_detail_ceiling = "text",
+  })
+  return base:with_execution_observation(events)
+end
+
+local function semantic_index_for(snapshot)
+  if semantic_indexes[snapshot] ~= nil then return semantic_indexes[snapshot] end
+  if snapshot == "calls" then
+    semantic_indexes[snapshot] = linkedspec.semantic_index(semantic_sources.calls, {
+      logical_name = "calls_and_staging.spec", source_detail_ceiling = "text",
+    })
+  elseif snapshot == "failed" then
+    semantic_indexes[snapshot] = linkedspec.semantic_index(semantic_sources.failed, {
+      logical_name = "failed.spec", source_detail_ceiling = "span",
+    })
+  elseif snapshot == "runtime" then
+    semantic_indexes[snapshot] = runtime_semantic_index()
+  elseif snapshot == "privacy" then
+    semantic_indexes[snapshot] = linkedspec.semantic_index(semantic_sources.privacy, {
+      logical_name = "privacy.spec", source_detail_ceiling = "text",
+    })
+  elseif snapshot == "privacy_limited" then
+    semantic_indexes[snapshot] = linkedspec.semantic_index(semantic_sources.privacy, {
+      logical_name = "privacy.spec", source_detail_ceiling = "identity",
+    })
+  else
+    error("unexpected semantic snapshot " .. tostring(snapshot), 0)
+  end
+  return semantic_indexes[snapshot]
+end
+
+local function semantic_response_digest(value)
+  return sha256.hex(json.encode(value))
+end
+
 local roles_seen = json.array()
 
 admission_role(roles_seen, "contract_inventory", function()
@@ -280,24 +346,51 @@ admission_role(roles_seen, "native_capabilities_identity", function()
     "capabilities MCP response is exact")
   check_same_json(actual.result.structuredContent, native,
     "capabilities structured content equals native bytes")
+  check_equal(actual.result.content[1].text, runtime.canonical_json(native),
+    "capabilities text is exact native canonical JSON")
   check_same_json(json.decode(actual.result.content[1].text), native,
     "capabilities text content equals native bytes")
+  check_equal(semantic_response_digest(native),
+    semantic_case("capabilities").expected.response_sha256,
+    "capabilities governed response digest")
   server:shutdown()
 end)
 
 admission_role(roles_seen, "native_query_identity", function()
+  local query_cases = json.array()
+  for _, governed in ipairs(semantic_contract.query_cases) do
+    if governed.id ~= "capabilities" then query_cases[#query_cases + 1] = governed end
+  end
+  check_equal(#query_cases, 19, "all governed MCP query responses")
   local server = linkedspec.mcp_server()
-  local handle = server:register_index(graph_index, "query-principal")
-  local request = with_handle(frame("query_call_request"), handle)
-  local native = linkedspec.semantic_query_to_json(
-    graph_index:query_neutral(clone(request.params.arguments.request)))
-  local actual = server:dispatch(request, "query-principal")
-  check_same_json(actual, with_lua_identity(frame("query_call_response")),
-    "query MCP response is exact")
-  check_same_json(actual.result.structuredContent, native,
-    "query structured content equals native bytes")
-  check_same_json(json.decode(actual.result.content[1].text), native,
-    "query text content equals native bytes")
+  local handles = {}
+  for _, snapshot in ipairs({
+    "graph", "calls", "failed", "runtime", "privacy", "privacy_limited",
+  }) do
+    handles[snapshot] = server:register_index(
+      semantic_index_for(snapshot), "query-principal")
+  end
+  for ordinal, governed in ipairs(query_cases) do
+    local index = semantic_index_for(governed.snapshot)
+    local native = linkedspec.semantic_query_to_json(
+      index:query_neutral(clone(governed.request)))
+    local request = with_handle(frame("query_call_request"), handles[governed.snapshot])
+    if governed.id ~= "graph_list_rules" then request.id = 99 + ordinal end
+    request.params.arguments.request = clone(governed.request)
+    local actual = server:dispatch(request, "query-principal")
+    if governed.id == "graph_list_rules" then
+      check_same_json(actual, with_lua_identity(frame("query_call_response")),
+        "representative query MCP response is exact")
+    end
+    check_same_json(actual.result.structuredContent, native,
+      governed.id .. " structured/native identity")
+    check_equal(actual.result.content[1].text, runtime.canonical_json(native),
+      governed.id .. " canonical text identity")
+    check_same_json(json.decode(actual.result.content[1].text), native,
+      governed.id .. " decoded/native identity")
+    check_equal(semantic_response_digest(native), governed.expected.response_sha256,
+      governed.id .. " governed response digest")
+  end
   server:shutdown()
 end)
 

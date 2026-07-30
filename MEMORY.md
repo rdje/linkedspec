@@ -5,20 +5,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c3273219` — `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 - plan authorized MCP repair` (98/300; no
-  push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0`; the exact `.1-.4` implementation split is durable.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` — atomic shared contract/binding/five-server repair from
-  clean `c3273219`; implementation and complete canonical signoff pass; commit/brief-clear/clean proof is next.
-- active_scope: exact 72-key fact union, bounded contract string, explicit-component policy presence, neutral
-  artifacts/76 mutations, five generated bindings, five server seams, six runtime proofs, and lockstep docs.
-- active_progress: MCP is focused-green at 35 canonical/10 raw/10 lifecycle/76 mutations; bindings are byte-fresh
-  at 83,411/83,225/83,214/120,030/83,166; Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs pass; rollout remains
-  5/5 implementations + 6/6 runtimes pending/114.
-- active_exclusions: no all-twenty consumer strengthening, recurring driver/promotion, semantic model, primary
-  CLI, aggregator, legacy adapter, package/SDK/service/network authority, or push in `.1`.
-- next_after_clean_commit: activate `.10.9.7.1.1.2` and prove all twenty direct-native/MCP/digest identities in
-  the existing six runtime consumers; no push before 300.
+- latest_commit: `8352d535` — `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1 - repair MCP transport boundaries` (99/300;
+  no push); commit is brief-cleared/residue-free/clean.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1`; atomic neutral/binding/five-server repair is durable.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` — all-twenty six-runtime consumer proof task-tree-first from
+  clean `8352d535`; implementation and complete canonical signoff are green, with clean commit next.
+- active_scope: strengthen only five existing admission consumers so capabilities plus all nineteen queries prove
+  direct canonical JSON/MCP text/structured/decoded/response-digest identity on six runtimes; synchronize docs.
+- active_progress: five existing consumers prove capabilities plus all nineteen queries across direct canonical
+  JSON/MCP text/structured/decoded/digest identity; Perl 13, Rust 1, Dart 1, Julia 257, and Lua 281x2 pass. Repaired
+  MCP remains 35/10/10/76 and formal governance remains pending at 5/5 implementations + 6/6 runtimes/114.
+- active_exclusions: no production oracle/server/contract/binding/fixture behavior, recurring driver/promotion,
+  semantic model, primary CLI, aggregator, legacy adapter, package/SDK/service/network authority, or push in `.2`.
+- next_after_clean_commit: activate `.10.9.7.1.1.3` and add rooted same-volume recurring governance plus atomic
+  `thin_mcp_transport` promotion; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -44,13 +44,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 98/300 after `c3273219`; no push.
+- push_policy: hard lock at 300 new local commits; counter 99/300 after `8352d535`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.1` passes semantic 6/20/105, MCP 35/10/10/76, ledger 5/5 + 6/6 pending/114, all 7 doctrines,
-  Rust semantic 78.48s, Dart, Julia 416/416/27.5s, cursor 288, containment/moved-root, CLI 66x2, RAM 53%, and Phase
-  0 1,031/1,031 in 637s.
+- canonical_state: all-twenty `.2` passes changed MCP admission on six runtimes, semantic 6/20/105, MCP
+  35/10/10/76, ledger 5/5 + 6/6 pending/114, all 7 doctrines, Rust semantic 81.63s, Dart, Julia 416/416/29.5s,
+  cursor 288, containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in 661s.
 - blockers: none; the director authorized the exact all-twenty repair on 2026-07-30. Rollout remains pending until
   `.1-.3` implement and prove the repair, all-twenty identities, and routed promotion.

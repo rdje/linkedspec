@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+# FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — all-twenty MCP/native identity.
 use strict;
 use warnings;
 use utf8;
@@ -15,6 +16,9 @@ use lib "$Bin/../perl";
 use LinkedSpec;
 use LinkedSpec::MCPContractRuntime ();
 use LinkedSpec::MCPServer;
+
+my $SEMANTIC_JSON = JSON::PP->new->canonical(1)->utf8(1);
+my $PLAIN_JSON = JSON::PP->new->canonical(1);
 
 my @ROLE_ORDER = qw(
  contract_inventory
@@ -80,6 +84,14 @@ sub read_bytes {
 
 sub canonical {
  return LinkedSpec::MCPContractRuntime::canonical_json($_[0])
+}
+
+sub clone_plain {
+ return $PLAIN_JSON->decode(canonical($_[0]))
+}
+
+sub response_digest {
+ return sha256_hex(encode('UTF-8', canonical($_[0]), FB_CROAK | LEAVE_SRC))
 }
 
 sub frame_bytes {
@@ -163,16 +175,69 @@ my @policy_ids = qw(
  above_policy_pre_dispatch_denial
 );
 
-my $source = read_bytes(File::Spec->catfile(
+my $semantic_fixture_root = File::Spec->catdir(
  $Bin,
  '..',
- qw(capability_conformance semantic_introspection graph.spec),
-));
-my $index = LinkedSpec::semantic_index(
- \$source,
- logical_name => 'graph.spec',
- source_detail_ceiling => 'text',
+ qw(capability_conformance semantic_introspection),
 );
+my $semantic_contract = $SEMANTIC_JSON->decode(read_bytes(File::Spec->catfile(
+ $Bin,
+ '..',
+ qw(capability_conformance semantic_introspection_contract.json),
+)));
+my %semantic_case = map { $_->{id} => $_ } @{$semantic_contract->{query_cases}};
+my %snapshot_input = (
+ graph => {fixture => 'graph', logical_name => 'graph.spec', ceiling => 'text'},
+ calls => {fixture => 'calls_and_staging', logical_name => 'calls_and_staging.spec', ceiling => 'text'},
+ failed => {fixture => 'failed', logical_name => 'failed.spec', ceiling => 'span'},
+ runtime => {fixture => 'runtime', logical_name => 'runtime.spec', ceiling => 'text'},
+ privacy => {fixture => 'privacy', logical_name => 'privacy.spec', ceiling => 'text'},
+ privacy_limited => {fixture => 'privacy', logical_name => 'privacy.spec', ceiling => 'identity'},
+);
+my %semantic_index;
+
+sub semantic_fixture_bytes {
+ my ($name) = @_;
+ return read_bytes(File::Spec->catfile($semantic_fixture_root, "$name.spec"))
+}
+
+sub semantic_index_for {
+ my ($snapshot) = @_;
+ return $semantic_index{$snapshot} if $semantic_index{$snapshot};
+ my $input = $snapshot_input{$snapshot} or die "unknown semantic snapshot $snapshot";
+ my $source = semantic_fixture_bytes($input->{fixture});
+ my $index;
+ {
+  local *STDOUT;
+  local *STDERR;
+  my ($stdout, $stderr) = ('', '');
+  open STDOUT, '>', \$stdout or die "cannot capture semantic constructor stdout: $!";
+  open STDERR, '>', \$stderr or die "cannot capture semantic constructor stderr: $!";
+  $index = LinkedSpec::semantic_index(
+   \$source,
+   logical_name => $input->{logical_name},
+   source_detail_ceiling => $input->{ceiling},
+  );
+ }
+ if ($snapshot eq 'runtime') {
+  my $parser = LinkedSpec::Get(\$source);
+  my $runtime_input = read_bytes(File::Spec->catfile($semantic_fixture_root, 'runtime.input'));
+  my $input_bytes = $runtime_input;
+  my @events;
+  my $result = $parser->(
+   \$input_bytes,
+   {semantic_observation_sink => sub { push @events, $_[0] }},
+  );
+  is_deeply($result, ['A', 'B'], 'MCP runtime snapshot executes the governed fixture');
+  is($input_bytes, $runtime_input, 'MCP runtime snapshot preserves exact input bytes');
+  is(scalar(@events), 3, 'MCP runtime snapshot captures the governed observation sequence');
+  $index = $index->with_execution_observation(\@events);
+ }
+ $semantic_index{$snapshot} = $index;
+ return $index
+}
+
+my $index = semantic_index_for('graph');
 my $native_capabilities = LinkedSpec::SemanticIndex->can('capabilities');
 my $native_query = LinkedSpec::SemanticIndex->can('query');
 
@@ -259,6 +324,8 @@ admission_role(
   );
   is_deeply($response->{result}{structuredContent}, $native, 'MCP structured capabilities are the native object');
   is($response->{result}{content}[0]{text}, canonical($native), 'MCP capability text is exact native canonical JSON');
+  is_deeply($PLAIN_JSON->decode($response->{result}{content}[0]{text}), $native, 'MCP capability text decodes to the native object');
+  is(response_digest($native), $semantic_case{capabilities}{expected}{response_sha256}, 'MCP capability preserves the governed response digest');
   is(canonical($response), canonical(LinkedSpec::MCPContractRuntime::frame('capabilities_call_response')), 'complete capability envelope is exact');
   $server->shutdown;
  }
@@ -267,14 +334,31 @@ admission_role(
 admission_role(
  'native_query_identity',
  sub {
-  my $server = test_server(entropy => [('C' x 32)]);
-  my $handle = $server->register_index($index, authorization_context => 'principal');
-  my $request = with_handle('query_call_request', $handle);
-  my $native = $index->query($request->{params}{arguments}{request});
-  my $response = $server->dispatch($request, authorization_context => 'principal');
-  is_deeply($response->{result}{structuredContent}, $native, 'MCP structured query result is the native object');
-  is($response->{result}{content}[0]{text}, canonical($native), 'MCP query text is exact native canonical JSON');
-  is(canonical($native), canonical(LinkedSpec::MCPContractRuntime::payload('graph_list_rules')), 'native query remains the admitted payload');
+  my @query_cases = grep { $_->{id} ne 'capabilities' } @{$semantic_contract->{query_cases}};
+  is(scalar(@query_cases), 19, 'the MCP consumer covers all nineteen governed query responses');
+  my $server = test_server(entropy => [map { chr(67 + $_) x 32 } 0 .. 5]);
+  my %handle;
+  foreach my $snapshot (qw(graph calls failed runtime privacy privacy_limited)) {
+   $handle{$snapshot} = $server->register_index(
+    semantic_index_for($snapshot),
+    authorization_context => 'principal',
+   );
+  }
+  foreach my $ordinal (0 .. $#query_cases) {
+   my $query_case = $query_cases[$ordinal];
+   my $id = $query_case->{id};
+   my $native_index = semantic_index_for($query_case->{snapshot});
+   my $native_request = clone_plain($query_case->{request});
+   my $native = $native_index->query($native_request);
+   my $request = with_handle('query_call_request', $handle{$query_case->{snapshot}});
+   $request->{id} = 100 + $ordinal unless $id eq 'graph_list_rules';
+   $request->{params}{arguments}{request} = clone_plain($query_case->{request});
+   my $response = $server->dispatch($request, authorization_context => 'principal');
+   is_deeply($response->{result}{structuredContent}, $native, "$id MCP structured content is the direct native object");
+   is($response->{result}{content}[0]{text}, canonical($native), "$id MCP text is exact direct canonical JSON");
+   is_deeply($PLAIN_JSON->decode($response->{result}{content}[0]{text}), $native, "$id MCP text decodes to the direct native object");
+   is(response_digest($native), $query_case->{expected}{response_sha256}, "$id preserves the governed response digest");
+  }
   $server->shutdown;
  }
 );
@@ -342,7 +426,8 @@ admission_role(
   like($server->register_index($index, authorization_context => 'principal'), qr/\A[A-Za-z0-9_-]{43}\z/, 'registry_capacity prunes expired entries first');
   $server->shutdown;
 
-  my $held = LinkedSpec::semantic_index(\$source, logical_name => 'graph.spec', source_detail_ceiling => 'text');
+  my $held_source = semantic_fixture_bytes('graph');
+  my $held = LinkedSpec::semantic_index(\$held_source, logical_name => 'graph.spec', source_detail_ceiling => 'text');
   my $weak = $held;
   weaken($weak);
   $server = test_server(entropy => [('F' x 32)]);

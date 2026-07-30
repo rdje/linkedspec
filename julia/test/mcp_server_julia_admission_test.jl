@@ -1,4 +1,5 @@
 # FUTURE-PARITY-BACKLOG.10.9.5.3 — exact twelve-role Julia MCP admission.
+# FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — all-twenty MCP/native identity.
 
 import JSON3
 
@@ -72,6 +73,18 @@ const _MCP_ADMISSION_FRAME_LINES = readlines(
         "canonical_frames.jsonl",
     ),
 )
+const _MCP_ADMISSION_SEMANTIC_CONTRACT = JSON3.read(
+    read(
+        joinpath(
+            REPO_ROOT,
+            "capability_conformance",
+            "semantic_introspection_contract.json",
+        ),
+        String,
+    ),
+    Dict{String,Any},
+)
+const _MCP_ADMISSION_SEMANTIC_INDEXES = Dict{String,SemanticIndex}()
 const _MCP_ADMISSION_GRAPH_INDEX = semantic_index(
     read(
         joinpath(
@@ -142,6 +155,90 @@ end
 
 function _mcp_admission_read_object(path::AbstractString)
     return JSON3.read(read(_mcp_admission_repo_file(path), String), Dict{String,Any})
+end
+
+function _mcp_admission_semantic_case(id::AbstractString)
+    return only(
+        query_case for query_case in _MCP_ADMISSION_SEMANTIC_CONTRACT["query_cases"] if
+        query_case["id"] == id
+    )
+end
+
+function _mcp_admission_semantic_fixture(name::AbstractString)
+    return read(
+        joinpath(
+            REPO_ROOT,
+            "capability_conformance",
+            "semantic_introspection",
+            "$(String(name)).spec",
+        ),
+    )
+end
+
+function _mcp_admission_runtime_index()
+    source = String(copy(_mcp_admission_semantic_fixture("runtime")))
+    parsed = parse_spec(source)
+    validate_spec(parsed)
+    compiled = compile_spec(parsed)
+    events = RuntimeSemanticObservationEvent[]
+    result = runtime_parse(
+        LinkedSpecRuntimeEngine(compiled),
+        "ab\n";
+        semantic_observation_sink = event -> push!(events, event),
+    ).value
+    @test result == Any["A", "B"]
+    @test length(events) == 3
+    base = semantic_index(
+        source;
+        logical_name = "runtime.spec",
+        source_detail_ceiling = SemanticSourceTextDetail,
+    )
+    return with_execution_observation(base, events)
+end
+
+function _mcp_admission_semantic_index(snapshot::AbstractString)
+    return get!(_MCP_ADMISSION_SEMANTIC_INDEXES, String(snapshot)) do
+        if snapshot == "graph"
+            _MCP_ADMISSION_GRAPH_INDEX
+        elseif snapshot == "calls"
+            semantic_index(
+                _mcp_admission_semantic_fixture("calls_and_staging");
+                logical_name = "calls_and_staging.spec",
+                source_detail_ceiling = SemanticSourceTextDetail,
+            )
+        elseif snapshot == "failed"
+            semantic_index(
+                _mcp_admission_semantic_fixture("failed");
+                logical_name = "failed.spec",
+                source_detail_ceiling = SemanticSourceSpanDetail,
+            )
+        elseif snapshot == "runtime"
+            _mcp_admission_runtime_index()
+        elseif snapshot == "privacy"
+            semantic_index(
+                _mcp_admission_semantic_fixture("privacy");
+                logical_name = "privacy.spec",
+                source_detail_ceiling = SemanticSourceTextDetail,
+            )
+        elseif snapshot == "privacy_limited"
+            semantic_index(
+                _mcp_admission_semantic_fixture("privacy");
+                logical_name = "privacy.spec",
+                source_detail_ceiling = SemanticSourceIdentityDetail,
+            )
+        else
+            error("Unexpected semantic snapshot: $snapshot")
+        end
+    end
+end
+
+function _mcp_admission_clone(value)
+    return JSON3.read(JSON3.write(value), Dict{String,Any})
+end
+
+function _mcp_admission_response_digest(value)
+    encoded = LinkedSpecJulia._primary_cli_canonical_json(value)
+    return bytes2hex(LinkedSpecJulia.SHA.sha256(codeunits(encoded)))
 end
 
 function _mcp_admission_frame(id::AbstractString)
@@ -325,43 +422,68 @@ end
             _mcp_admission_frame("capabilities_call_response"),
         )
         @test actual["result"]["structuredContent"] == native
+        text = only(actual["result"]["content"])["text"]
+        @test text == LinkedSpecJulia._mcp_canonical_json(native)
         @test JSON3.read(
-            only(actual["result"]["content"])["text"],
+            text,
             Dict{String,Any},
         ) == native
+        @test _mcp_admission_response_digest(native) ==
+              _mcp_admission_semantic_case("capabilities")["expected"]["response_sha256"]
         shutdown_mcp!(server)
     end
 
     _mcp_admission_role!(roles_seen, "native_query_identity") do
+        query_cases = [
+            query_case for query_case in _MCP_ADMISSION_SEMANTIC_CONTRACT["query_cases"] if
+            query_case["id"] != "capabilities"
+        ]
+        @test length(query_cases) == 19
         server = McpServer()
-        handle = register_index!(
-            server,
-            _MCP_ADMISSION_GRAPH_INDEX,
-            _mcp_admission_authorization("query-principal"),
+        indexes = Dict(
+            snapshot => _mcp_admission_semantic_index(snapshot) for snapshot in
+            ("graph", "calls", "failed", "runtime", "privacy", "privacy_limited")
         )
-        request = _mcp_admission_with_handle!(
-            _mcp_admission_frame("query_call_request"),
-            handle,
+        handles = Dict(
+            snapshot => register_index!(
+                server,
+                index,
+                _mcp_admission_authorization("query-principal"),
+            ) for (snapshot, index) in indexes
         )
-        native = to_json(
-            semantic_query_neutral(
-                _MCP_ADMISSION_GRAPH_INDEX,
-                request["params"]["arguments"]["request"],
-            ),
-        )
-        actual = dispatch_mcp(
-            server,
-            request,
-            _mcp_admission_authorization("query-principal"),
-        )
-        @test actual == _mcp_admission_with_julia_identity!(
-            _mcp_admission_frame("query_call_response"),
-        )
-        @test actual["result"]["structuredContent"] == native
-        @test JSON3.read(
-            only(actual["result"]["content"])["text"],
-            Dict{String,Any},
-        ) == native
+        for (ordinal, query_case) in enumerate(query_cases)
+            id = String(query_case["id"])
+            snapshot = String(query_case["snapshot"])
+            native = to_json(
+                semantic_query_neutral(
+                    indexes[snapshot],
+                    _mcp_admission_clone(query_case["request"]),
+                ),
+            )
+            request = _mcp_admission_with_handle!(
+                _mcp_admission_frame("query_call_request"),
+                handles[snapshot],
+            )
+            id == "graph_list_rules" || (request["id"] = 99 + ordinal)
+            request["params"]["arguments"]["request"] =
+                _mcp_admission_clone(query_case["request"])
+            actual = dispatch_mcp(
+                server,
+                request,
+                _mcp_admission_authorization("query-principal"),
+            )
+            if id == "graph_list_rules"
+                @test actual == _mcp_admission_with_julia_identity!(
+                    _mcp_admission_frame("query_call_response"),
+                )
+            end
+            @test actual["result"]["structuredContent"] == native
+            text = only(actual["result"]["content"])["text"]
+            @test text == LinkedSpecJulia._mcp_canonical_json(native)
+            @test JSON3.read(text, Dict{String,Any}) == native
+            @test _mcp_admission_response_digest(native) ==
+                  query_case["expected"]["response_sha256"]
+        end
         shutdown_mcp!(server)
     end
 

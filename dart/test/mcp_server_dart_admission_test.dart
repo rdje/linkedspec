@@ -1,4 +1,5 @@
 // FUTURE-PARITY-BACKLOG.10.9.4.3 — exact twelve-role Dart MCP admission.
+// FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — all-twenty MCP/native identity.
 
 import 'dart:async';
 import 'dart:convert';
@@ -6,6 +7,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_dart/src/semantic/sha256.dart';
 import 'package:test/test.dart';
 
 const _roleOrder = <String>[
@@ -64,6 +66,7 @@ const _ioLogRecord = 'linkedspec_mcp_io_failure\n';
 void main() {
   test('exact Dart MCP admission executes every role once', () async {
     final rolesSeen = <String>[];
+    final semantic = _McpSemanticContext();
 
     await _admissionRole(rolesSeen, 'contract_inventory', () async {
       final corpus = _corpus();
@@ -181,29 +184,78 @@ void main() {
       expect(result['structuredContent'], native);
       final content = (result['content']! as List<Object?>).single;
       final text = (content! as Map<String, Object?>)['text']! as String;
+      expect(text, _canonicalJson(native));
       expect(jsonDecode(text), native);
+      expect(
+        _responseDigest(native),
+        _object(
+          semantic.queryCase('capabilities')['expected'],
+        )['response_sha256'],
+      );
       server.shutdown();
     });
 
     await _admissionRole(rolesSeen, 'native_query_identity', () async {
-      final index = _graphIndex();
+      final queryCases = _objects(
+        semantic.contract['query_cases'],
+      ).where((queryCase) => queryCase['id'] != 'capabilities').toList();
+      expect(queryCases, hasLength(19));
       final server = McpServer();
-      final handle = server.registerIndex(
-        index,
-        utf8.encode('query-principal'),
-      );
-      final request = _withHandle(_frame('query_call_request'), handle);
-      final arguments =
-          (request['params']! as Map<String, Object?>)['arguments']!
-              as Map<String, Object?>;
-      final native = index.queryNeutral(arguments['request']).toJson();
-      final actual = server.dispatch(request, utf8.encode('query-principal'))!;
-      expect(actual, _withDartIdentity(_frame('query_call_response')));
-      final result = actual['result']! as Map<String, Object?>;
-      expect(result['structuredContent'], native);
-      final content = (result['content']! as List<Object?>).single;
-      final text = (content! as Map<String, Object?>)['text']! as String;
-      expect(jsonDecode(text), native);
+      final indexes = <String, SemanticIndex>{
+        for (final snapshot in <String>[
+          'graph',
+          'calls',
+          'failed',
+          'runtime',
+          'privacy',
+          'privacy_limited',
+        ])
+          snapshot: semantic.indexFor(snapshot),
+      };
+      final handles = <String, String>{
+        for (final entry in indexes.entries)
+          entry.key: server.registerIndex(
+            entry.value,
+            utf8.encode('query-principal'),
+          ),
+      };
+      for (var ordinal = 0; ordinal < queryCases.length; ordinal += 1) {
+        final queryCase = queryCases[ordinal];
+        final id = queryCase['id']! as String;
+        final snapshot = queryCase['snapshot']! as String;
+        final native = indexes[snapshot]!
+            .queryNeutral(_cloneObject(queryCase['request']))
+            .toJson();
+        final request = _withHandle(
+          _frame('query_call_request'),
+          handles[snapshot]!,
+        );
+        if (id != 'graph_list_rules') {
+          request['id'] = 100 + ordinal;
+        }
+        final arguments =
+            (request['params']! as Map<String, Object?>)['arguments']!
+                as Map<String, Object?>;
+        arguments['request'] = _cloneObject(queryCase['request']);
+        final actual = server.dispatch(
+          request,
+          utf8.encode('query-principal'),
+        )!;
+        if (id == 'graph_list_rules') {
+          expect(actual, _withDartIdentity(_frame('query_call_response')));
+        }
+        final result = actual['result']! as Map<String, Object?>;
+        expect(result['structuredContent'], native, reason: '$id structured');
+        final content = (result['content']! as List<Object?>).single;
+        final text = (content! as Map<String, Object?>)['text']! as String;
+        expect(text, _canonicalJson(native), reason: '$id canonical text');
+        expect(jsonDecode(text), native, reason: '$id decoded text');
+        expect(
+          _responseDigest(native),
+          _object(queryCase['expected'])['response_sha256'],
+          reason: '$id response digest',
+        );
+      }
       server.shutdown();
     });
 
@@ -655,6 +707,13 @@ Map<String, Object?> _readObject(String rootRelativePath) =>
     jsonDecode(_repoFile(rootRelativePath).readAsStringSync())!
         as Map<String, Object?>;
 
+Map<String, Object?> _object(Object? value) =>
+    (value! as Map).cast<String, Object?>();
+
+List<Map<String, Object?>> _objects(Object? value) => [
+  for (final row in value! as List<Object?>) _object(row),
+];
+
 Map<String, Object?> _corpus() =>
     _readObject('capability_conformance/mcp_semantic_transport/corpus.json');
 
@@ -684,6 +743,85 @@ SemanticIndex _graphIndex() => SemanticIndex.fromUtf8(
   ),
 );
 
+final class _McpSemanticContext {
+  _McpSemanticContext()
+    : contract = _readObject(
+        'capability_conformance/semantic_introspection_contract.json',
+      );
+
+  final Map<String, Object?> contract;
+  final Map<String, SemanticIndex> _indexes = {};
+
+  Map<String, Object?> queryCase(String id) => _objects(
+    contract['query_cases'],
+  ).singleWhere((queryCase) => queryCase['id'] == id);
+
+  SemanticIndex indexFor(String snapshot) => _indexes.putIfAbsent(
+    snapshot,
+    () => switch (snapshot) {
+      'graph' => _staticIndex('graph', 'graph.spec', SemanticSourceDetail.text),
+      'calls' => _staticIndex(
+        'calls_and_staging',
+        'calls_and_staging.spec',
+        SemanticSourceDetail.text,
+      ),
+      'failed' => _staticIndex(
+        'failed',
+        'failed.spec',
+        SemanticSourceDetail.span,
+      ),
+      'runtime' => _runtimeIndex(),
+      'privacy' => _staticIndex(
+        'privacy',
+        'privacy.spec',
+        SemanticSourceDetail.text,
+      ),
+      'privacy_limited' => _staticIndex(
+        'privacy',
+        'privacy.spec',
+        SemanticSourceDetail.identity,
+      ),
+      _ => throw StateError('Unexpected semantic snapshot: $snapshot'),
+    },
+  );
+
+  SemanticIndex _staticIndex(
+    String fixture,
+    String logicalName,
+    SemanticSourceDetail ceiling,
+  ) => SemanticIndex.fromUtf8(
+    _repoFile(
+      'capability_conformance/semantic_introspection/$fixture.spec',
+    ).readAsBytesSync(),
+    options: SemanticIndexOptions(
+      logicalName: logicalName,
+      sourceDetailCeiling: ceiling,
+    ),
+  );
+
+  SemanticIndex _runtimeIndex() {
+    final source = _repoFile(
+      'capability_conformance/semantic_introspection/runtime.spec',
+    ).readAsStringSync();
+    final parsed = parseSpec(source);
+    validateSpec(parsed);
+    final compiled = compileSpec(parsed);
+    final events = <RuntimeSemanticObservationEvent>[];
+    final result = LinkedSpecRuntimeEngine(
+      compiled,
+    ).parse('ab\n', semanticObservationSink: events.add).value;
+    expect(result, ['A', 'B'], reason: 'MCP runtime snapshot result');
+    expect(events, hasLength(3), reason: 'MCP runtime snapshot observations');
+    return SemanticIndex.fromSource(
+      source,
+      options: const SemanticIndexOptions(
+        logicalName: 'runtime.spec',
+        sourceDetailCeiling: SemanticSourceDetail.text,
+      ),
+    ).withExecutionObservation(events);
+  }
+}
+
 Map<String, Object?> _withHandle(Map<String, Object?> request, String handle) {
   final params = request['params']! as Map<String, Object?>;
   final arguments = params['arguments']! as Map<String, Object?>;
@@ -698,6 +836,26 @@ Map<String, Object?> _withDartIdentity(Map<String, Object?> response) {
       metadata['io.modelcontextprotocol/serverInfo']! as Map<String, Object?>;
   server['name'] = _dartServerName;
   return response;
+}
+
+Object? _cloneObject(Object? value) => jsonDecode(jsonEncode(value));
+
+String _canonicalJson(Object? value) => jsonEncode(_canonicalValue(value));
+
+String _responseDigest(Map<String, Object?> value) =>
+    sha256Hex(utf8.encode(_canonicalJson(value)));
+
+Object? _canonicalValue(Object? value) {
+  if (value case Map<Object?, Object?>()) {
+    final keys = value.keys.map((key) => key.toString()).toList()..sort();
+    return <String, Object?>{
+      for (final key in keys) key: _canonicalValue(value[key]),
+    };
+  }
+  if (value case List<Object?>()) {
+    return [for (final item in value) _canonicalValue(item)];
+  }
+  return value;
 }
 
 List<int> _frameBytes(Map<String, Object?> value) =>

@@ -47,10 +47,15 @@ validation, and the source-ceiling response was preempted by default-policy deni
 `.10.9.7.1.1.1` now admits the exact 72 fact keys, bounds query-contract strings at 128 characters and 128 UTF-8
 bytes, and makes explicit overlay-component presence the sole pre-dispatch policy authority in all five servers.
 Neutral MCP is signoff-complete at 35 frames / 10 raw / 10 lifecycle / 76 mutations; all five generated bindings,
-Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs, and the complete canonical local gate are green. Formal status deliberately remains 5/5
-implementations + 6/6 runtimes with rollout pending/114. The next leaf proves all twenty responses on six
-runtimes; only then may the routed recurring gate promote thin transport. The weaker 17-identity plus
-three-outcome claim is not selected.
+Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs, and the complete canonical local gate are green. All-twenty
+consumer leaf `.10.9.7.1.1.2` now strengthens the same twelve-role consumers, not production oracles: capabilities
+plus all nineteen queries preserve direct native object/canonical JSON, MCP structured/text/decoded content, and
+the governed response digest on all six runtimes. Focused proof passes Perl 13, Rust 1, Dart 1 with clean analysis,
+Julia 257, and one Lua source at 281 assertions per ABI. Formal status deliberately remains 5/5 implementations +
+6/6 runtimes with rollout pending/114. Canonical repeats all six changed admissions and passes Rust semantic in
+81.63 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and
+Phase 0 1,031/1,031 in 661 seconds. Only the next rooted recurring-governance leaf may promote thin transport.
+The weaker 17-identity plus three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
