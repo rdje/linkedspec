@@ -34,6 +34,7 @@ evidence_update_2026_07_29_dart_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.4.0 and AD
 evidence_update_2026_07_29_dart_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.4.1 implements the Dart generated binding/runtime and secure decoded server while leaving strict stdio, formal admission, and the 2/5 + 2/6 ledger unchanged."
 evidence_update_2026_07_29_dart_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.4.2 implements bounded duplicate-safe canonical Dart stdio, cancellation through flush, fixed optional diagnostics, and EOF/I/O release while leaving formal admission and the 2/5 + 2/6 ledger unchanged."
 evidence_update_2026_07_29_dart_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.4.3 composes one ordered twelve-role Dart consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, leaves shared rollout pending, and rejects 58 admission mutations without changing production behavior or the transport digest."
+evidence_update_2026_07_29_dart_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.4.4 recomposes every committed neutral, Perl, Rust, and Dart MCP owner unchanged, preserves 3/5 implementations + 3/6 runtimes and all 58 mutations, closes the Dart parent, and hands off to Julia .10.9.5."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -73,10 +74,9 @@ initialization, protocol sessions, and ping are absent; policy can only lower na
 semantic payload bytes remain direct/MCP identical.
 
 Machine leaves `.10.9.1.1-.2` encode and independently validate those rules once in the neutral
-`linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`
-and Rust `.10.9.3` are closed. Dart plan `.10.9.4.0`, decoded implementation `.1`, and strict stdio `.2` are
-implemented; admission `.3`, closeout `.4`, Julia, Lua, and recurring six-runtime admission `.10.9.7` remain
-dependency-ordered.
+`linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`,
+Rust `.10.9.3`, and Dart `.10.9.4` are closed. Julia `.10.9.5`, Lua `.10.9.6`, and recurring six-runtime
+admission `.10.9.7` remain dependency-ordered.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
@@ -85,10 +85,9 @@ misclassified as generated artifacts.
 The neutral contract is executable through six fixture groups and 20 exact response digests; its independent
 checker rejects 105 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
-admitted, and the recurring six-runtime proof is complete. The MCP machine contract plus Perl and Rust servers are
-parent-closed; Dart's generated/decoded/strict-stdio implementation is complete and exactly admitted, while its
-no-change parent closeout remains pending.
-Dart admission/closeout, Julia, Lua, recurring transport admission, and public no-drift remain dependency-ordered.
+admitted, and the recurring six-runtime proof is complete. The MCP machine contract plus Perl, Rust, and Dart
+servers are parent-closed; the Dart implementation remains exactly admitted at the unchanged 3/5 implementation
++ 3/6 runtime boundary. Julia, Lua, recurring transport admission, and public no-drift remain dependency-ordered.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

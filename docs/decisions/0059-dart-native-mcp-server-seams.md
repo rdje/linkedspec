@@ -1,8 +1,8 @@
 # ADR 0059: Dart MCP uses a generated contract part and an in-process native server
 
 - Date: 2026-07-29
-- Status: accepted; behavior-free plan `.10.9.4.0`, generated binding/runtime and decoded server `.1`, strict
-  stdio `.2`, and exact admission `.3` complete; no-change closeout `.4` pending
+- Status: accepted; `.10.9.4.0-.4` plan, implementation, admission, and no-change parent closeout complete at
+  3/5 implementations + 3/6 runtimes with rollout pending
 - Tags: architecture, mcp, dart, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context

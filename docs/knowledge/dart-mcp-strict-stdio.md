@@ -10,7 +10,7 @@ answers:
   - "how does Dart MCP cancellation interact with response flush"
   - "which file owns the Dart MCP wire"
 date: 2026-07-29
-status: strict stdio implemented and admitted through the exact Dart MCP consumer
+status: strict stdio implemented, admitted through the exact Dart MCP consumer, and parent-closed
 tags: [dart, mcp, stdio, json, framing, cancellation, io, security]
 evidence: dart/lib/src/mcp/mcp_wire.dart; dart/lib/src/mcp/mcp_server.dart; dart/test/mcp_server_dart_stdio_test.dart; dart/test/mcp_server_dart_admission_test.dart; docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.9.4.3; tools/check_mcp_implementation_admission.py; tools/run_ci_local.sh
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart test/mcp_server_dart_admission_test.dart && cd .. && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
@@ -40,6 +40,8 @@ file, process, socket, HTTP, isolate, parser, compiler, runtime, trace, emitter,
 Focused binding/decoded/stdio/admission proof is 16/16 and the complete Dart package is 353/353 with clean
 analysis. Exact `.10.9.4.3` admits the unchanged four Dart production owners through one twelve-role consumer;
 the ledger is now 3/5 implementations and 3/6 runtimes with shared rollout still pending.
+No-change `.10.9.4.4` recomposes that committed proof without changing the wire, production owners, consumer,
+contract, or ledger, closes the Dart parent, and hands off to Julia `.10.9.5`.
 
 Related facts: [[dart-mcp-decoded-server]], [[dart-native-mcp-server-plan]],
 [[mcp-2026-07-28-stdio-contract]], and [[mcp-implementation-admission-ledger]].

@@ -13667,9 +13667,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.3.4 - close Rust MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.4`
-    Status: `active` (2026-07-29; behavior-free native server seam audit `.0` complete; generated-binding/decoded-
-      server `.1` committed at `4a044914`; strict stdio `.2` committed at `b3269975`; exact admission `.3` active
-      task-tree-first from that clean commit)
+    Status: `done` (2026-07-29; behavior-free seam audit `.0`, generated/decoded `.1`, strict stdio `.2`, exact
+      admission `.3`, and unchanged-owner composition closeout `.4` complete; ledger remains 3/5 + 3/6 pending)
     Goal: Implement and admit the Dart native MCP server against the exact transport contract.
     Depends on: `.10.9.3`
     Children: `.10.9.4.0`, `.10.9.4.1`, `.10.9.4.2`, `.10.9.4.3`, `.10.9.4.4`
@@ -13806,7 +13805,7 @@ before implementation.
       Planned commit: `FUTURE-PARITY-BACKLOG.10.9.4.2 - implement Dart MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.4.3`
-      Status: `done` (2026-07-29; signoff-complete from clean `b3269975`)
+      Status: `done` (2026-07-29; committed at `956ea5e9` from clean `b3269975`)
       Goal: Admit the Dart MCP implementation and runtime through one exact ordered twelve-role consumer.
       Depends on: `.10.9.4.2`
       Acceptance: Advance only Dart to 3/5 implementations and 3/6 runtime admissions; extend independent source/
@@ -13855,12 +13854,50 @@ before implementation.
       Planned commit: `FUTURE-PARITY-BACKLOG.10.9.4.3 - admit Dart MCP implementation`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.4.4`
-      Status: `pending`
+      Status: `done` (2026-07-29; no-change recomposition and Dart parent closure from clean `956ea5e9`)
       Goal: Recompose committed Dart MCP owners unchanged and close `.10.9.4`.
       Depends on: `.10.9.4.3`
       Acceptance: Run every exact owner under recurring canonical governance, prove contract/semantic/status/
         authority/public no-drift, close the Dart parent, and hand off cleanly to Julia `.10.9.5` without replacement
         implementation, fixture, oracle, aggregator, legacy adapter, or rollout behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN COMMITTED BASE / OWNERSHIP** — Prove exact-admission commit `956ea5e9`, zero-byte brief, clean
+        tree, absent rendered-book/empty-run residue, and activate `.10.9.4.4` before any other closeout change.
+      - [x] **UNCHANGED OWNER RECOMPOSITION** — Materialize and independently validate the frozen transport;
+        regenerate byte-fresh Perl/Rust/Dart bindings; run committed Perl, Rust, and Dart binding, decoded-dispatch,
+        strict-stdio, and exact-admission owners unchanged; add no replacement implementation, test, fixture, or
+        oracle.
+      - [x] **IDENTITY / LIFECYCLE / AUTHORITY** — Reprove native/MCP byte identity, raw/lifecycle inventories,
+        opaque-handle indistinguishability, policy, cancellation, cleanup, hostile-output privacy, and denial of
+        semantic/source/bootstrap/parser/compiler/executor/trace/cache/primary-CLI/SDK/network authority.
+      - [x] **NO STATUS OR TOPOLOGY MOVEMENT** — Preserve 3/5 implementations + 3/6 runtimes and shared rollout
+        pending, all 58 admission mutations, unchanged contract digest/corpus, one server per admitted backend,
+        routing-only aggregator deferral, and no legacy adapter.
+      - [x] **LOCKSTEP / PARENT CLOSURE** — Pass focused Dart/Rust/Perl, capability/semantic/no-drift, mdBook,
+        Knowledge Map, memory/task/doctrines/diff/syntax/storage, canonical CI, and exact safe cleanup; close
+        `.10.9.4`, hand off Julia `.10.9.5` only after commit/clear/clean proof, and do not push before cadence 300.
+
+      Verification plan: Re-run the checked-in contract materializer and independent validator, all three
+        generated-binding owners, every committed Perl/Rust/Dart binding/server/admission consumer, and the
+        implementation-admission checker before the complete canonical gate. Inspect the staged diff to prove a
+        documentation-only closeout with no production/test/fixture/contract/ledger change. Route all writing
+        commands through repository-local wrappers and remove only exact verified generated residue.
+
+      Verification: **PASS 2026-07-29.** From clean exact-admission commit `956ea5e9`, focused unchanged-owner
+        recomposition passes neutral 35 canonical / 10 raw / 10 lifecycle / 68 mutations; byte-fresh Perl 83,072-
+        byte, Rust 82,886-byte, and Dart 82,875-byte bindings; Perl Files=4 Tests=35; Rust MCP 15 + 3 + 4 + 1;
+        Dart MCP 16/16; and the unchanged ledger at 3/5 implementations + 3/6 runtimes, rollout pending, with all
+        58 mutations rejected. Canonical CI passes all six doctrines, Rust semantic admission 1/1 in 81.15
+        seconds, Dart 1/1, Julia 416/416 in 29.1 seconds, process containment, moved-root proof, primary CLI 66x2,
+        RAM 67%, and Phase 0 1,031/1,031 in 645 seconds. Knowledge Map 747/6,034, mdBook, memory, storage
+        1,725/391,021/28, path 14/5, syntax, whitespace, and the documentation-only diff pass. Exact cleanup removes
+        only the verified ignored 13,488-KiB rendered book and one proven-empty managed run. No production/test/
+        fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy owner changes; parent `.10.9.4` closes and
+        Julia `.10.9.5` follows only after the clean closeout commit.
+
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.4.4 - close Dart MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.5`
     Status: `pending`
@@ -17591,6 +17628,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.4.4` | Clean base `956ea5e9`; unchanged MCP 35/10/10/68; byte-fresh Perl/Rust/Dart bindings 83,072/82,886/82,875; Perl Files=4 Tests=35; Rust 15+3+4+1; Dart 16/16; unchanged ledger 3/5 + 3/6 rollout pending/58 mutations; KM 747/6,034; mdBook; six doctrines; memory; storage 1,725/391,021/28; path 14/5; canonical Rust semantic 1/1 81.15s, Dart 1/1, Julia 416/416 29.1s, containment/moved-root, CLI 66x2, RAM 67%, Phase 0 1,031/645s; documentation-only diff; exact 13,488-KiB/one-empty-run cleanup. | PASS. Committed-owner recomposition closes `.10.9.4.4` and parent `.10.9.4` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; Julia `.10.9.5` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.4.3` | Clean base `b3269975`; one ordered twelve-role Dart consumer 1/1; focused Dart MCP 16/16; format 93/0; clean analysis; package 353/353; CLI 66x2; corpus 105/105; neutral MCP 35/10/10/68; byte-fresh Perl/Rust/Dart bindings 83,072/82,886/82,875; Perl Files=4 Tests=35; Rust 15+3+4+1; ledger 3/5 + 3/6 rollout pending/58 mutations; KM 747/6,034; mdBook; six doctrines; memory; storage 1,725/391,014/28; path 14/5; canonical Rust semantic 1/1 80.15s, Dart 1/1, Julia 416/416 28.1s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/644s; exact 13,488-KiB/one-empty-run cleanup. | PASS. Dart alone advances to 3/5 implementations + 3/6 runtimes without production/transport/semantic/CLI/other-runtime/rollout/aggregator/legacy movement; no-change `.10.9.4.4` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.4.2` | Clean base `4a044914`; exact bounded iterative Dart framing/lexical/emission/lifecycle implementation; focused Dart MCP 15/15; format 92/0; clean analysis; package 352/352; CLI 66x2; corpus 105/105; neutral MCP 35/10/10/68; byte-fresh Perl/Rust/Dart bindings 83,072/82,886/82,875; Perl Files=4 Tests=35; unchanged ledger 2/5 + 2/6 rollout pending/46 mutations; KM 747/6,034; mdBook; six doctrines; memory; storage 1,724/390,106/28; path 14/5; canonical Rust semantic 1/1 81.01s, Dart 1/1, Julia 416/416 28.9s, containment/moved-root, CLI 66x2, RAM 77%, Phase 0 1,031/655s; exact 13,488-KiB/one-empty-run cleanup. | PASS. Dart owns strict borrowed-stream MCP framing, lexical admission, canonical emission, cancellation through flush, and EOF/I/O release without executable/source/semantic/ledger/rollout/aggregator/legacy movement; exact admission `.10.9.4.3` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.4.0` | Clean base `7f44d2a1`; Dart 3.9.2 JSON/entropy/clock probe; ADR `0059`; exact `.1-.4` split; unchanged MCP 35/10/10/68; byte-fresh Perl 83,072 + Rust 82,886 bindings; unchanged ledger 2/5 + 2/6 rollout pending/39 mutations; Dart semantic admission 1/1 and analyzer; capability 80/0/0; semantic 6/20/105 at 7/9 + 6/6; KM 745/6,019; mdBook; six doctrines; memory; storage 1,713/386,225/28; path 14/5; canonical Rust semantic 1/1 82.76s, Dart 1/1, Julia 416/416 29.9s, containment/moved-root, CLI 66x2, RAM 68%, Phase 0 1,031/769s; exact 13,456-KiB/one-empty-run cleanup. | PASS. Dart's generated/native/security/wire/admission seams are frozen before code without production/test/fixture/contract/ledger/API/CLI/rollout/aggregator/legacy movement; generated binding and decoded server `.10.9.4.1` follow only after the clean plan commit. |

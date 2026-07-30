@@ -16,9 +16,9 @@ answers:
   - "what are the Dart MCP implementation leaves"
   - "when will Dart MCP advance the implementation ledger"
 date: 2026-07-29
-status: accepted plan; generated binding/runtime, decoded server, strict stdio, and admission complete; closeout pending
+status: complete; generated binding/runtime, decoded server, strict stdio, admission, and parent closeout complete
 tags: [dart, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
-evidence: docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.9.4.3; dart/lib/src/mcp/mcp_contract.dart; dart/lib/src/mcp/mcp_contract_runtime.dart; dart/lib/src/mcp/mcp_server.dart; dart/lib/src/mcp/mcp_wire.dart; dart/test/mcp_contract_dart_binding_test.dart; dart/test/mcp_server_dart_dispatch_test.dart; dart/test/mcp_server_dart_stdio_test.dart; dart/test/mcp_server_dart_admission_test.dart; capability_conformance/mcp_implementation_admission.json
+evidence: docs/decisions/0059-dart-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.4.0-.4; dart/lib/src/mcp/mcp_contract.dart; dart/lib/src/mcp/mcp_contract_runtime.dart; dart/lib/src/mcp/mcp_server.dart; dart/lib/src/mcp/mcp_wire.dart; dart/test/mcp_contract_dart_binding_test.dart; dart/test/mcp_server_dart_dispatch_test.dart; dart/test/mcp_server_dart_stdio_test.dart; dart/test/mcp_server_dart_admission_test.dart; capability_conformance/mcp_implementation_admission.json
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py && cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart test/mcp_server_dart_admission_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -45,10 +45,10 @@ documented cryptographic and fail-closed, core `Stopwatch` is monotonic, core ba
 encoding, and the existing package-internal SHA-256 implementation can digest authorization bytes. No production
 dependency is needed.
 
-Work remains omission-safe: `.10.9.4.1` owns the implemented generated binding/runtime/registry/decoded dispatch;
-`.2` owns the implemented strict stdio and lifecycle surface; `.3` alone may advance Dart to 3/5 implementations
-and 3/6 runtimes while rollout stays pending; and `.4` recomposes committed owners and closes the Dart parent
-before Julia starts.
+The omission-safe split is complete: `.10.9.4.1` owns the generated binding/runtime/registry/decoded dispatch;
+`.2` owns strict stdio and lifecycle; `.3` alone advances Dart to 3/5 implementations and 3/6 runtimes while
+rollout stays pending; and no-change `.4` recomposes those committed owners without replacement behavior or
+status movement, closes the Dart parent, and hands the exact contract to Julia `.10.9.5`.
 
 Related facts: [[dart-semantic-query-public-api]], [[dart-semantic-introspection-admission]],
 [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],

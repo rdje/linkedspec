@@ -696,8 +696,9 @@ Three backbone items tracked major structural modernization — all done:
   through flush, fixed optional diagnostics, and EOF/I/O release. Exact admission `.10.9.4.3` adds one ordered
   twelve-role public consumer without changing production owners. Focused MCP proof is 16/16, the complete package
   is 353/353, and the ledger is 3/5 implementations + 3/6 runtimes with rollout pending and 58 mutations;
-  no-change closeout `.4` follows. Any future aggregator or legacy adapter is separately owned after `.10.10` and
-  may only route/translate transport.
+  no-change closeout `.4` recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, closes parent
+  `.10.9.4`, and makes Julia `.10.9.5` next. Any future aggregator or legacy adapter is separately owned after
+  `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,

@@ -34,6 +34,7 @@ evidence_update_2026_07_29_dart_plan: "Dart .10.9.4.0 and ADR 0059 prove stock D
 evidence_update_2026_07_29_dart_decoded: "Dart .10.9.4.1 implements the generated binding/runtime, secure in-process registry, and exact decoded discovery/list/two-tool/cancellation server; strict raw stdio and formal admission remain .2-.3."
 evidence_update_2026_07_29_dart_stdio: "Dart .10.9.4.2 implements bounded caller-owned stdio, iterative duplicate-safe lexical preflight, canonical LF emission, cancellation through flush, fixed optional diagnostics, and EOF/I/O release; formal admission remains .3 and the ledger stays 2/5 + 2/6."
 evidence_update_2026_07_29_dart_admission: "Dart .10.9.4.3 composes one exact ordered twelve-role consumer over unchanged production owners, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves rollout pending, and rejects 58 status/source/consumer/role/order mutations without changing the transport digest."
+evidence_update_2026_07_29_dart_closeout: "Dart .10.9.4.4 recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, preserves the 3/5 implementation + 3/6 runtime ledger and all 58 mutations, closes parent .10.9.4, and hands the exact contract to Julia .10.9.5."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -67,9 +68,9 @@ indistinguishable handle states, and four lowering-policy cases. Verify its exac
 `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py`; use `--write` only
 when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
-28-positive/7-negative schema and 68-mutation proof. Perl and Rust implement, admit, and parent-close that
-contract. Dart implements and exactly admits its generated/runtime/decoded/strict-stdio production owners under
-ADR `0059`; Dart closeout and later Julia/Lua work remain pending.
+28-positive/7-negative schema and 68-mutation proof. Perl, Rust, and Dart implement, admit, and parent-close that
+contract. Dart's generated/runtime/decoded/strict-stdio production owners remain exactly admitted under ADR
+`0059`; Julia, Lua, recurring six-runtime admission, and public no-drift remain dependency-ordered.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 

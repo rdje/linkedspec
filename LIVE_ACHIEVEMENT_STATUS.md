@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Dart native MCP implementation composition-closed
+
+`FUTURE-PARITY-BACKLOG.10.9.4.4` recomposes every committed neutral, Perl, Rust, and Dart MCP owner unchanged from
+clean exact-admission commit `956ea5e9`. Focused proof remains 35 canonical / 10 raw / 10 lifecycle / 68 neutral
+mutations; byte-fresh bindings at Perl 83,072, Rust 82,886, and Dart 82,875 bytes; Perl Files=4 Tests=35; Rust
+15 + 3 + 4 + 1; Dart 16/16; and ledger 3/5 implementations + 3/6 runtimes, shared rollout pending, with all 58
+admission mutations rejected.
+
+No production source, test, fixture, contract artifact/digest, consumer, ledger row, semantic/CLI surface,
+server topology, aggregator policy, or legacy behavior changes. Parent `.10.9.4` closes and Julia `.10.9.5` is
+next after the clean closeout commit. Canonical CI passes Rust semantic admission 1/1 in 81.15 seconds, Dart 1/1,
+Julia 416/416 in 29.1 seconds, containment/moved-root, CLI 66x2, RAM 67%, and Phase 0 1,031/1,031 in 645 seconds.
+Knowledge Map 747/6,034, mdBook, all six doctrines, memory, storage 1,725/391,021/28, path 14/5, documentation-
+only diff, and exact 13,488-KiB/one-empty-run cleanup pass. No push occurs before cadence 300.
+
 ## 2026-07-29 — Dart native MCP implementation and runtime admitted
 
 `FUTURE-PARITY-BACKLOG.10.9.4.3` adds one ordered twelve-role public Dart consumer over the committed MCP server

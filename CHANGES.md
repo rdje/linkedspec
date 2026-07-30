@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.4 — close the Dart MCP implementation
+
+Recomposed the committed neutral transport, Perl, Rust, and Dart MCP owners without adding a replacement test,
+fixture, oracle, implementation, or public behavior. The exact contract remains 35 canonical frames / 10 raw
+inputs / 10 lifecycle cases with 68 mutations; generated bindings remain byte-fresh at Perl 83,072 bytes, Rust
+82,886 bytes, and Dart 82,875 bytes; Perl passes Files=4 Tests=35; Rust passes 15 + 3 + 4 + 1; and Dart passes
+16/16. The separate ledger remains 3/5 implementations + 3/6 runtimes with shared rollout pending and all 58
+mutations rejected.
+
+This documentation-only closeout preserves every production source, test, fixture, contract artifact/digest,
+consumer, ledger row, semantic/CLI boundary, native-server topology, routing-only aggregator deferral, and modern-
+only protocol decision. Parent `.10.9.4` closes and Julia `.10.9.5` becomes the next clean-boundary owner.
+Canonical CI passes Rust semantic admission 1/1 in 81.15 seconds, Dart 1/1, Julia 416/416 in 29.1 seconds,
+containment/moved-root, CLI 66x2, RAM 67%, and Phase 0 1,031/1,031 in 645 seconds. Knowledge Map 747/6,034,
+mdBook, all six doctrines, memory, storage 1,725/391,021/28, path 14/5, documentation-only diff, and exact
+13,488-KiB rendered-book plus one-empty-run cleanup pass. No push occurs before cadence 300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.3 — admit the Dart MCP implementation and runtime
 
 Added one ordered twelve-role Dart admission consumer over the public `McpServer` and `SemanticIndex` surfaces.

@@ -3442,8 +3442,8 @@ The dependency order is:
 | `.10.9.4.1` | generated Dart binding/runtime, secure registry, and decoded server | implemented; exact focused/public proof; admission unchanged |
 | `.10.9.4.2` | strict Dart stdio, iterative lexical preflight, canonical emission, and lifecycle cleanup | implemented; exact focused/public proof; admission unchanged |
 | `.10.9.4.3` | exact Dart implementation/runtime admission | complete; one ordered twelve-role public consumer; 3/5 implementations, 3/6 runtimes, rollout pending, 58 mutations |
-| `.10.9.4.4` | committed-owner no-change Dart closeout | pending after the admission commit |
-| `.10.9.5` | native Julia MCP implementation and admission | pending after Dart parent closure |
+| `.10.9.4.4` | committed-owner no-change Dart closeout | complete from clean `956ea5e9`; focused recomposition unchanged; parent `.10.9.4` closed |
+| `.10.9.5` | native Julia MCP implementation and admission | next after the clean Dart closeout commit |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
@@ -3488,7 +3488,9 @@ remains 15 + 3 + 4 + 1. Dart `.10.9.4.1` adds a 10-test generated/runtime/decode
 82,875-byte binding without promoting the ledger. Strict Dart stdio `.10.9.4.2` adds five focused wire/lifecycle
 tests. Exact admission `.10.9.4.3` adds one ordered twelve-role public consumer; the focused Dart MCP set is now
 16 tests and expanded governance rejects 58 mutations. Dart alone advances the ledger to 3/5 implementations and
-3/6 runtimes; parent `.10.9.3` remains closed and shared rollout remains pending.
+3/6 runtimes; parent `.10.9.3` remains closed and shared rollout remains pending. No-change closeout `.10.9.4.4`
+recomposes the neutral, Perl, Rust, and Dart owners unchanged, preserves those exact counts and mutations, closes
+the Dart parent, and hands the same contract to Julia `.10.9.5`.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

@@ -1074,7 +1074,8 @@ content migration exists yet.
   owned streams. Exact Dart admission `.10.9.4.3` now adds one ordered twelve-role public consumer without changing
   those production owners, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves shared rollout
   pending, and rejects 58 mutations. Focused Dart MCP proof passes 16 tests and the complete package passes 353;
-  all three generated bindings remain byte-identical. No-change closeout `.4` remains ordered.
+  all three generated bindings remain byte-identical. No-change closeout `.10.9.4.4` recomposes every committed
+  neutral/Perl/Rust/Dart owner unchanged, closes parent `.10.9.4`, and hands the exact contract to Julia `.10.9.5`.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1517,7 +1518,8 @@ content migration exists yet.
   `.10.9.4.2` adds bounded duplicate-safe framing, canonical LF emission, cancellation through flush, optional
   fixed diagnostics, and EOF/I/O cleanup. Exact admission `.10.9.4.3` composes one ordered twelve-role public
   consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves pending shared rollout, and
-  rejects 58 mutations. The combined MCP proof is 16 focused tests plus 353 complete package tests.
+  rejects 58 mutations. No-change `.10.9.4.4` composition-closes the Dart parent without moving that ledger or
+  production behavior. The combined MCP proof is 16 focused tests plus 353 complete package tests.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
