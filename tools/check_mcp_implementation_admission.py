@@ -167,11 +167,13 @@ LUA_OWNERS = {
         "lua/src/linkedspec/mcp_contract.lua",
         "lua/src/linkedspec/mcp_contract_runtime.lua",
         "lua/src/linkedspec/mcp_server.lua",
+        "lua/src/linkedspec/mcp_wire.lua",
         "lua/native/mcp_system.c",
     ],
     "test_paths": [
         "lua/test/mcp_contract_lua_binding_test.lua",
         "lua/test/mcp_server_lua_dispatch_test.lua",
+        "lua/test/mcp_server_lua_stdio_test.lua",
     ],
 }
 
@@ -277,8 +279,10 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file lua/src/linkedspec/mcp_contract.lua",
         "require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua",
         "require_tracked_file lua/src/linkedspec/mcp_server.lua",
+        "require_tracked_file lua/src/linkedspec/mcp_wire.lua",
         "require_tracked_file lua/test/mcp_contract_lua_binding_test.lua",
         "require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua",
+        "require_tracked_file lua/test/mcp_server_lua_stdio_test.lua",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -559,7 +563,7 @@ def validate_lua_owners(
     ]
     for path in owned_paths:
         if not (ROOT / path).is_file():
-            fail(f"Lua MCP decoded-server owner is absent: {path}")
+            fail(f"Lua MCP owner is absent: {path}")
 
     if init_source is None:
         init_source = (ROOT / "lua" / "src" / "linkedspec" / "init.lua").read_text(
@@ -618,6 +622,7 @@ def validate_lua_owners(
 def validate_lua_authority_sources(
     runtime_source: str | None = None,
     server_source: str | None = None,
+    wire_source: str | None = None,
     native_source: str | None = None,
 ) -> None:
     if runtime_source is None:
@@ -628,7 +633,11 @@ def validate_lua_authority_sources(
         server_source = (
             ROOT / "lua" / "src" / "linkedspec" / "mcp_server.lua"
         ).read_text(encoding="utf-8")
-    lua_combined = runtime_source + "\n" + server_source
+    if wire_source is None:
+        wire_source = (
+            ROOT / "lua" / "src" / "linkedspec" / "mcp_wire.lua"
+        ).read_text(encoding="utf-8")
+    lua_combined = runtime_source + "\n" + server_source + "\n" + wire_source
     for token in [
         "io.open(",
         "io.input(",
@@ -1073,6 +1082,20 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 1,
             ),
         ),
+        (
+            "CI Lua wire registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/src/linkedspec/mcp_wire.lua\n", "", 1
+            ),
+        ),
+        (
+            "CI Lua stdio proof registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/test/mcp_server_lua_stdio_test.lua\n",
+                "",
+                1,
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
@@ -1151,6 +1174,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             },
         ),
         (
+            "Lua strict-stdio proof ABI omission",
+            {
+                "gate_source": lua_gate_source.replace(
+                    "lua/test/mcp_server_lua_stdio_test.lua", "", 1
+                )
+            },
+        ),
+        (
             "Lua native-system relocated-checkout overlay omission",
             {
                 "process_source": lua_process_source.replace(
@@ -1173,6 +1204,9 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     lua_server_source = (
         ROOT / "lua" / "src" / "linkedspec" / "mcp_server.lua"
     ).read_text(encoding="utf-8")
+    lua_wire_source = (
+        ROOT / "lua" / "src" / "linkedspec" / "mcp_wire.lua"
+    ).read_text(encoding="utf-8")
     lua_native_source = (ROOT / "lua" / "native" / "mcp_system.c").read_text(
         encoding="utf-8"
     )
@@ -1185,6 +1219,10 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             },
         ),
         (
+            "Lua strict wire filesystem authority",
+            {"wire_source": lua_wire_source + "\nlocal forbidden = io.open()\n"},
+        ),
+        (
             "Lua native-system file authority",
             {"native_source": lua_native_source + "\n/* fopen( */\n"},
         ),
@@ -1193,6 +1231,7 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         arguments = {
             "runtime_source": lua_runtime_source,
             "server_source": lua_server_source,
+            "wire_source": lua_wire_source,
             "native_source": lua_native_source,
         }
         arguments.update(sources)

@@ -72,8 +72,10 @@ check_no_untracked_ci_inputs() {
   lua/src/linkedspec/mcp_contract.lua \
   lua/src/linkedspec/mcp_contract_runtime.lua \
   lua/src/linkedspec/mcp_server.lua \
+  lua/src/linkedspec/mcp_wire.lua \
   lua/test/mcp_contract_lua_binding_test.lua \
-  lua/test/mcp_server_lua_dispatch_test.lua)
+  lua/test/mcp_server_lua_dispatch_test.lua \
+  lua/test/mcp_server_lua_stdio_test.lua)
 
  status_line=$(git status --short --untracked-files=all -- lua/test/semantic_introspection_lua_admission_test.lua)
  if [[ "$status_line" == '?? '* ]]; then
@@ -135,8 +137,10 @@ audit_no_machine_specific_absolute_paths() {
   lua/src/linkedspec/mcp_contract.lua \
   lua/src/linkedspec/mcp_contract_runtime.lua \
   lua/src/linkedspec/mcp_server.lua \
+  lua/src/linkedspec/mcp_wire.lua \
   lua/test/mcp_contract_lua_binding_test.lua \
-  lua/test/mcp_server_lua_dispatch_test.lua)
+  lua/test/mcp_server_lua_dispatch_test.lua \
+  lua/test/mcp_server_lua_stdio_test.lua)
 
  (( found == 0 )) || exit 1
 }
@@ -253,8 +257,10 @@ require_tracked_file lua/native/mcp_system.c
 require_tracked_file lua/src/linkedspec/mcp_contract.lua
 require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua
 require_tracked_file lua/src/linkedspec/mcp_server.lua
+require_tracked_file lua/src/linkedspec/mcp_wire.lua
 require_tracked_file lua/test/mcp_contract_lua_binding_test.lua
 require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua
+require_tracked_file lua/test/mcp_server_lua_stdio_test.lua
 require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
 require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
 require_tracked_file lua/test/semantic_introspection_lua_admission_test.lua

@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.2` — preserve lexical number identity at the narrow transport
+  boundary, not throughout decoded Lua values): PUC Lua and LuaJIT do not expose one common decoded distinction
+  between integer tokens and integral fraction/exponent tokens. Replacing the established JSON value model would
+  spread transport-only complexity through the native semantic server. The strict wire instead performs one
+  bounded iterative preflight, records numeric lexemes at decoded JSON-pointer paths, and substitutes an invalid
+  JSON-kind sentinel only at the contract's integer-only cancellation/page/budget fields before schema
+  validation. JSON-RPC ids are checked directly against their raw token. This preserves identical wire outcomes
+  without rejecting legitimate fractional values in unconstrained metadata.
+
+  The framing loop uses the planning leaf's measured `read(1)` choice so an interactive pipe makes progress
+  without waiting for EOF. It retains at most the exact line ceiling plus one possible CR delimiter byte, drains
+  an overlong line without retaining its bytes, and resumes only at the next LF. The scanner is non-recursive,
+  depth-bounded, strict about UTF-8/escapes/surrogates and decoded duplicate keys, and admits values to the existing
+  decoder only after lexical success.
+
+  Lifecycle ownership stays with the protected server. Canonical response bytes are written and flushed before a
+  prepared request is released; a package-private test hook proves cancellation at the last pre-emission
+  boundary. Clean EOF and every stream failure clear handles and active requests, while caller streams remain
+  open. Stream failures expose one fixed typed error and optional fixed log record; generated-contract failure is
+  not mislabeled as I/O failure.
+
+  Identical focused execution passes 247 strict-stdio assertions per ABI, alongside 111 generated/runtime and 210
+  decoded/security assertions. Complete Lua package 177x2, primary 66x2, corpus 105/105, 16-owner/three-module
+  storage, and 98 governance mutations pass. The checker deliberately leaves Lua unadmitted at 4/5
+  implementations + 4/6 runtimes until `.10.9.6.3` runs the exact ordered consumer independently on both ABIs.
+
+  Final canonical composition passes all six doctrines; neutral MCP 35/10/10/68; all five byte-fresh bindings;
+  the unchanged Perl/Rust/Dart/Julia admitted chain; Rust semantic 1/1 in 82.15 seconds; Dart 1/1; Julia 416/416
+  in 29.2 seconds; six-family containment; moved-root execution; primary CLI 66x2; RAM 63%; Phase 0
+  1,031/1,031; and the complete PUC Lua/LuaJIT gate.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.1` — one decoded server can remain secure and ABI-neutral when host
   authority is explicit): The generated binding is data-only and the frozen runtime verifies its exact SHA-256
   before retaining templates. Lua's weak-key protected state tables keep registry, policies, limits, registration

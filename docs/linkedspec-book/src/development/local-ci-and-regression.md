@@ -89,15 +89,19 @@ pending/79.
 Behavior-free shared Lua plan `.10.9.6.0` and ADR `0061` freeze the remaining canonical order as byte-fresh
 generated literal binding, identical PUC Lua/LuaJIT decoded proof, identical strict-stdio proof, one exact consumer
 invoked once per ABI, then the implementation ledger. Decoded leaf `.10.9.6.1` now registers the Lua generator,
-generated binding, frozen runtime, C99 native system seam, server, and two focused tests. The complete Lua gate
-runs 111 binding/runtime plus 210 decoded/security assertions identically on each ABI, beside both 177-test
+generated binding, frozen runtime, C99 native system seam, server, and two focused tests. Strict-wire leaf `.2`
+adds one private iterative scanner/stdio loop, public protected `server:serve_stdio`, and a third focused test.
+The complete Lua gate runs 111 binding/runtime, 210 decoded/security, and 247 strict-stdio assertions identically
+on each ABI, beside both 177-test
 package legs, primary 66x2, corpus 105/105, and the 16-owner/three-module storage proof. Source/CI/authority
-governance now rejects 94 mutations while MCP deliberately remains 4/5 + 4/6 pending. Strict wire and exact
-admission remain `.2-.3`.
+governance now rejects 98 mutations while MCP deliberately remains 4/5 + 4/6 pending. Exact admission remains
+`.3`.
 
-The decoded-server leaf's complete signoff runs this composition with `LINKEDSPEC_RUN_LUA=1`: all six doctrines,
-the unchanged neutral/four-admitted-backend MCP chain, Rust/Dart/Julia semantic admission, kernel-contained
-relocation, moved-root execution, primary CLI 66x2, Phase 0 1,031/1,031, and the full PUC Lua/LuaJIT gate pass.
+The strict-wire leaf's complete signoff runs this composition with `LINKEDSPEC_RUN_LUA=1`: all six doctrines;
+neutral MCP 35/10/10/68; all five byte-fresh bindings; Perl 22+13, Rust 15+3+4+1, Dart 15+1, and Julia
+48+139+170+178; the unchanged 4/5 + 4/6 pending ledger at 98 mutations; Rust semantic 1/1 in 82.15 seconds,
+Dart 1/1, Julia 416/416 in 29.2 seconds; kernel-contained relocation; moved-root execution; primary CLI 66x2;
+RAM 63%; Phase 0 1,031/1,031; and the full PUC Lua/LuaJIT gate.
 
 The `.10.9.5.0` planning signoff passes the unchanged focused chain and complete canonical gate: Rust semantic
 admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment, moved-root

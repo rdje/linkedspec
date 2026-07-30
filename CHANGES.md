@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.2 — implement Lua MCP strict stdio
+
+Added one private Lua-5.1-compatible iterative lexical scanner and synchronous caller-owned stdio loop shared
+unchanged by PUC Lua and LuaJIT. It derives the exact 1,048,576-byte frame and depth-64 ceilings from the frozen
+contract, accepts LF/CRLF/valid final EOF, drains recoverable overlong lines, and rejects BOMs, malformed UTF-8 or
+JSON, bad escapes/surrogates, duplicate decoded keys, unsafe ids, and excessive nesting before decoded dispatch.
+
+The scanner records number lexemes by decoded JSON-pointer path. Fraction/exponent spellings at JSON-RPC ids and
+integer-only cancellation/page/budget fields therefore retain the contract's invalid-request, silent-
+notification, or invalid-params outcome on LuaJIT even though its host number model collapses `1`, `1.0`, and
+`1e0`; arbitrary fractional client metadata remains valid. The protected public `server:serve_stdio` validates
+caller-owned input/output, a distinct optional log, and authorization before consuming input, then lazily loads
+the wire and dispatches only through the committed decoded server.
+
+Responses are detached, schema-validated canonical JSON followed by one LF. Pre-emission cancellation remains
+effective until write/flush succeeds; later cancellation cannot retract emitted bytes. EOF and hostile
+read/write/flush paths shut down the server and release handles/active requests without closing caller streams;
+the optional log receives only `linkedspec_mcp_io_failure` and a failed log cannot replace the primary typed
+failure. Generated-contract failure remains separately classified from stream failure.
+
+Focused proof passes 247 framing/lexical/canonical/cancellation/lifecycle/authority assertions on each ABI beside
+the unchanged 111 binding/runtime and 210 decoded/security assertions. The complete Lua gate passes package
+177x2, primary CLI 66x2, corpus 105/105, and 16-owner/three-native-module storage proof. Governance now rejects
+98 source/registration/order/authority mutations while deliberately retaining the formal ledger at 4/5
+implementations + 4/6 runtimes with rollout pending; exact dual-ABI admission remains `.10.9.6.3`.
+
+Final canonical signoff passes all six doctrines, neutral MCP 35/10/10/68, all five byte-fresh bindings, the
+unchanged Perl/Rust/Dart/Julia admitted chain, Rust semantic 1/1 in 82.15 seconds, Dart 1/1, Julia 416/416 in
+29.2 seconds, six-family containment, moved-root execution, primary CLI 66x2, RAM 63%, Phase 0 1,031/1,031, and
+the complete dual-ABI Lua gate.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.1 — implement the shared Lua decoded MCP server
 
 Added the fifth backend's generated MCP binding, frozen contract runtime, protected same-process registry, and

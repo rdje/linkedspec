@@ -14211,8 +14211,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.5.4 - close Julia MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.6`
-    Status: `active` (2026-07-29; generated binding/runtime/native-system/secure decoded-server `.1` is active
-      task-tree-first from clean architecture commit `315af596`)
+    Status: `active` (2026-07-29; strict shared stdio `.2` is active task-tree-first from clean decoded-server
+      commit `b2e886de`)
     Goal: Implement one Lua native MCP server and admit its unchanged source on PUC Lua and LuaJIT.
     Depends on: `.10.9.5`
     Children: `.10.9.6.0`, `.10.9.6.1`, `.10.9.6.2`, `.10.9.6.3`, `.10.9.6.4`
@@ -14306,7 +14306,7 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.6.0 - plan shared Lua native MCP server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.6.1`
-      Status: `done` (2026-07-29; implementation and signoff complete; commit preparation from `315af596`)
+      Status: `done` (2026-07-29; implementation/signoff committed cleanly at `b2e886de`)
       Goal: Generate the filesystem-free shared Lua MCP binding and implement the frozen contract runtime, secure
         same-process registry, decoded dispatch, lowering-only policy, and sanitized failure boundary once.
       Depends on: `.10.9.6.0`
@@ -14393,7 +14393,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.6.1 - implement Lua MCP decoded server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.6.2`
-      Status: `pending`
+      Status: `done` (2026-07-29; implementation, focused proof, lockstep, and canonical signoff complete from
+        clean decoded-server commit `b2e886de`)
       Goal: Implement strict shared Lua MCP stdio framing, lexical preflight, canonical emission, cancellation,
         sanitized diagnostics, EOF/I/O cleanup, and registry release on both ABIs.
       Depends on: `.10.9.6.1`
@@ -14401,6 +14402,63 @@ before implementation.
         PUC Lua/LuaJIT, rejects duplicates and hostile input identically, emits canonical LF, retains cancellation
         through flush, releases state on every terminal path, and never closes caller-owned streams or adds async,
         network, SDK, filesystem/source, semantic, or CLI authority.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN BASE / TASK OWNERSHIP** — Prove decoded-server commit `b2e886de`, zero-byte brief, clean tree,
+        and absent rendered-book/managed-run/Python-bytecode residue; activate `.10.9.6.2` before any wire, public
+        method, test, gate, governance, README, book, roadmap, live, Knowledge Map, or memory change.
+      - [x] **BOUNDED LEXICAL PREFLIGHT** — Add one private Lua-5.1-compatible iterative byte scanner shared
+        unchanged by PUC Lua and LuaJIT. Enforce exact 1,048,576-byte framing, depth 64, strict UTF-8/JSON tokens
+        and escapes, duplicate-key rejection, integer versus fraction/exponent identity, schema integer rules,
+        safe numeric bounds, and JSON-RPC id validity before decoding; admit no recursive or host-number shortcut.
+      - [x] **CALLER-OWNED FRAMING / RECOVERY** — Accept exact LF, CRLF, and valid final-EOF frames through bounded
+        `read(1)` without treating embedded whitespace as framing; classify empty, malformed, overlong, and
+        post-error input exactly like the neutral corpus, recover only where the contract permits, and never close
+        or replace caller-owned input, output, or diagnostic sinks.
+      - [x] **CANONICAL EMISSION / CANCELLATION** — Decode only after lexical admission, dispatch through the
+        committed protected server, emit detached canonical JSON followed by one LF, flush before response
+        completion, preserve cancellation through the final pre-encode/pre-write boundary and successful flush,
+        and emit no response for notifications or other neutral no-response classifications.
+      - [x] **TERMINAL CLEANUP / SANITIZED I/O** — Release retained registry/cancellation/request state on ordinary
+        EOF plus every read, decode, dispatch, encode, write, flush, and diagnostic failure; sanitize diagnostics,
+        keep output/log failures fail-closed, prevent post-terminal dispatch, and prove caller streams remain open.
+      - [x] **DUAL-ABI PROOF / GOVERNANCE** — Add the same public/focused strict-wire suite once per PUC Lua and
+        LuaJIT, register it in the package and canonical gates, mutation-lock wire/public/build/storage owners and
+        forbidden authority, and retain the formal ledger exactly at 4/5 implementations + 4/6 runtimes with
+        rollout pending. Exact ordered consumer/admission remains exclusively `.10.9.6.3`.
+      - [x] **LOCKSTEP / SIGNOFF** — Synchronize Lua README, mdBook, roadmap/live/task/KM/memory and implementation
+        notes; pass focused wire plus complete Lua and unchanged neutral/Perl/Rust/Dart/Julia/ledger proof,
+        canonical CI, doctrines, whitespace, exact artifact cleanup, commit/brief-clear/clean proof, and activate
+        `.10.9.6.3` only after the clean `.2` commit without pushing before cadence 300.
+
+      Verification plan: Reuse the canonical raw/lifecycle corpus and the admitted Perl/Rust/Dart/Julia strict-
+        stdio owners, then implement one package-private byte scanner/stdio loop and one public lazy `serve_stdio`
+        seam without expanding decoded authority. Run identical focused tests through both repository-routed Lua
+        ABIs; rerun the neutral materializer/validator, all five byte-fresh bindings, admitted backend MCP proof,
+        unchanged formal ledger, Lua package/primary/corpus/storage gates, Knowledge Map, mdBook, doctrines,
+        canonical CI, diff, and exact residue checks. No exact admission consumer or status movement belongs here.
+
+      Implementation evidence: `lua/src/linkedspec/mcp_wire.lua` is one private iterative Lua-5.1-compatible
+        scanner and bytewise caller-owned stdio loop. It preserves integer token kinds by decoded JSON-pointer
+        path, rejects unsafe/fractional ids and duplicate decoded keys before host-number decoding, emits canonical
+        JSON + LF, retains cancellation through successful flush, and releases state on EOF or sanitized I/O
+        failure. Public `server:serve_stdio` validates streams/options/authorization before consuming input and
+        lazily loads the wire. The identical PUC Lua and LuaJIT focused runs each pass 111 binding/runtime, 210
+        decoded/security, and 247 strict-stdio assertions; package 177x2, primary CLI 66x2, corpus 105/105, and
+        16-owner/three-native-module storage proof pass. Governance rejects 98 mutations while retaining the
+        formal ledger at 4/5 implementations + 4/6 runtimes with rollout pending.
+
+      Signoff verification: **PASS 2026-07-29.** The canonical `LINKEDSPEC_RUN_LUA=1` gate exits 0 with all six
+        doctrines; neutral MCP 35 canonical frames / 10 raw inputs / 10 lifecycle cases / 68 mutations; five
+        byte-fresh generated bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged
+        formal 4/5 implementation + 4/6 runtime status with 98 rejected mutations; Rust semantic 1/1 in 82.15
+        seconds, Dart 1/1, Julia 416/416 in 29.2 seconds; six-family process containment; moved-root execution;
+        primary CLI 66x2; RAM 63%; Phase 0 1,031/1,031; and complete PUC Lua/LuaJIT proof including 111+210+247
+        assertions per ABI. Knowledge Map is exact at 753 facts / 6,099 question keys; mdBook renders 79 files at
+        13,660 KiB. Rendered-book, one proven-empty managed run, and bytecode residue are removed before commit.
+
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.6.2 - implement Lua MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.6.3`
       Status: `pending`
@@ -18133,6 +18191,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.2` | Clean base `b2e886de`; one iterative dual-ABI strict wire and public caller-owned `serve_stdio`; binding/runtime 111x2; decoded/security 210x2; strict stdio 247x2; complete Lua package 177x2, CLI 66x2, corpus 105/105, storage 16x3; neutral MCP 35/10/10/68; five byte-fresh bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/98; aggregate retirement zero-positive; KM 753/6,099; mdBook 13,660 KiB/79; six doctrines; canonical Rust semantic 1/1 82.15s, Dart 1/1, Julia 416/416 29.2s, containment/moved-root, CLI 66x2, RAM 63%, Phase 0 1,031/1,031, complete Lua opt-in; exact cleanup. | PASS. Lua now owns strict number-kind-preserving bounded stdio, canonical LF, cancellation through flush, and EOF/I/O release on both ABIs without formal admission or unrelated authority; exact dual-ABI admission `.10.9.6.3` follows only after clean commit and brief-clear proof. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.1` | Clean base `315af596`; generated 82,827-byte Lua binding over exact 82,543-byte bundle; common dual-ABI C99 system seam; binding/runtime 111x2; decoded/security 210x2; complete Lua package 177x2, PUC primary 66x2, corpus 105/105, storage 16x3; tool storage 27; neutral MCP 35/10/10/68; five byte-fresh bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/94; aggregate retirement zero-positive; KM 753/6,099; six doctrines; canonical Rust semantic 1/1 79.63s, Dart 1/1, Julia 416/416 27.6s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/1,031, complete Lua opt-in; exact cleanup. | PASS. One Lua-5.1-compatible decoded MCP implementation runs unchanged on PUC Lua/LuaJIT with secure native entropy/time, protected registry, lowering-only dispatch, and no strict wire or formal status movement; `.10.9.6.2` follows only after clean commit and brief-clear proof. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.0` | Clean base `88bff190`; Knowledge retrieval; dual-ABI JSON/number/SHA/literal/stream/native-system probes; ADR `0061`; unchanged MCP 35/10/10/68; byte-fresh Perl/Rust/Dart/Julia bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/79; Lua semantic admission 408x2; KM 752/6,090; mdBook 13,640 KiB/79 files; six doctrines; Rust semantic 1/1 78.47s, Dart 1/1, Julia 416/416 27.5s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/638s; documentation-only diff and exact cleanup. | PASS. One Lua-5.1-compatible implementation/source identity, strict lexical wire, and narrow per-ABI native system seam are frozen without behavior or status movement; `.10.9.6.1` follows only after the clean plan commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.5.4` | Clean base `f8fd4a51`; unchanged MCP 35/10/10/68; byte-fresh Perl/Rust/Dart/Julia bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/79 mutations; stale duplicate mdBook pre-admission paragraph root-caused and corrected; KM 751/6,077; mdBook 13,576 KiB/79; canonical six doctrines, Rust semantic 1/1 79.25s, Dart 1/1, Julia 416/416 27.6s, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/631s; documentation-only diff and exact cleanup. | PASS. Committed-owner recomposition closes `.10.9.5.4` and parent `.10.9.5` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; shared Lua `.10.9.6.0` follows only after the clean commit. |
@@ -18442,6 +18501,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.6.2` | `FUTURE-PARITY-BACKLOG.10.9.6.2 - implement Lua MCP strict stdio` | One identical iterative strict wire and caller-owned public stdio seam on both Lua ABIs, 247 assertions per ABI, 98 governance mutations, complete signoff, and clean exact-admission handoff. |
+| `FUTURE-PARITY-BACKLOG.10.9.6.1` | `FUTURE-PARITY-BACKLOG.10.9.6.1 - implement Lua MCP decoded server` | One generated/frozen/protected Lua decoded implementation plus common C99 system seam, 111+210 assertions per ABI, 94 mutations, complete signoff, and clean strict-wire handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.6.0` | `FUTURE-PARITY-BACKLOG.10.9.6.0 - plan shared Lua native MCP server` | Behavior-free one-source dual-ABI owner/security/wire audit, ADR `0061`, complete signoff, and clean generated binding/runtime/decoded-server handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.5.4` | `FUTURE-PARITY-BACKLOG.10.9.5.4 - close Julia MCP implementation` | Documentation-only unchanged-owner recomposition, stale duplicate mdBook status correction, complete canonical signoff, Julia parent closure, and clean shared-Lua handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.5.3` | `FUTURE-PARITY-BACKLOG.10.9.5.3 - admit Julia MCP implementation` | Exact ordered twelve-role Julia consumer, 4/5 + 4/6 ledger promotion, 79 mutations, complete signoff, and clean no-change closeout handoff. |
@@ -18730,6 +18791,15 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-29`: Shared Lua strict MCP stdio `.10.9.6.2` completes from clean decoded-server commit `b2e886de`.
+  One private iterative scanner and public caller-owned `serve_stdio` run unchanged on PUC Lua and LuaJIT,
+  preserving numeric token identity, canonical LF, cancellation through successful flush, and terminal release.
+  Focused proof is 111+210+247 assertions per ABI; complete Lua package/CLI/corpus/storage, unchanged
+  cross-runtime MCP/semantic contracts, 98-mutation governance, Knowledge Map, mdBook, doctrines,
+  relocation/containment, CLI 66x2, Phase 0 1,031/1,031, and canonical CI with the full Lua opt-in all pass.
+  Formal status remains 4/5 implementations + 4/6 runtimes; exact admission `.10.9.6.3` follows only after the
+  clean commit and brief-clear proof.
 
 - `2026-07-29`: Shared Lua decoded MCP implementation `.10.9.6.1` completes from clean architecture commit
   `315af596`. One generated/frozen/protected Lua-5.1-compatible source graph runs unchanged on PUC Lua and

@@ -1098,10 +1098,11 @@ content migration exists yet.
   PUC Lua and LuaJIT. Decoded leaf `.10.9.6.1` now ships its 82,827-byte generated module carrying the exact
   82,543-byte long-bracket bundle, digest-verifying frozen runtime, protected secure registry, lowering-only
   decoded dispatch, lazy root API, and tiny C99 OS-entropy/monotonic-time module compiled separately for each ABI.
-  Focused proof passes 111 binding/runtime plus 210 decoded/security assertions per ABI, and governance rejects
-  94 mutations without moving the 4/5 + 4/6 ledger. Interactive proof selects bounded `read(1)` framing because
-  fixed-size reads block; the full 1 MiB limit costs under 0.10 seconds on both ABIs. Strict wire `.2` and identical
-  dual-ABI admission `.3` remain ordered. There is no
+  Focused proof passes 111 binding/runtime plus 210 decoded/security assertions per ABI. Strict wire `.2` now
+  adds an iterative JSON-pointer number-kind scanner, bounded `read(1)` LF/CRLF/final-EOF framing, canonical LF,
+  cancellation-through-flush, caller-owned streams, and sanitized EOF/I/O release in 247 assertions per ABI.
+  Governance rejects 98 mutations without moving the 4/5 + 4/6 ledger; identical dual-ABI admission `.3` remains
+  next. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1558,8 +1559,10 @@ content migration exists yet.
   planning `.10.9.6.0` the next clean-boundary owner. That audit and ADR `0061` selected one Lua-5.1-compatible
   source graph for both ABIs. Decoded implementation `.10.9.6.1` now provides its exact generated long-bracket
   bundle, frozen runtime, protected secure registry/dispatch, lazy public constructors, and two-function C99
-  entropy/monotonic-time seam compiled per ABI at 111 + 210 assertions on each runtime. Iterative lexical/number-
-  kind stdio remains `.2`; formal status remains 4/5 + 4/6 until exact shared admission `.10.9.6.3`.
+  entropy/monotonic-time seam compiled per ABI at 111 + 210 assertions on each runtime. Strict `.10.9.6.2` now
+  adds bounded iterative number-kind-preserving stdio, canonical LF, cancellation-through-flush, fixed optional
+  logging, and EOF/I/O cleanup in 247 assertions per ABI and 98 governance mutations. Formal status remains 4/5
+  + 4/6 until exact shared admission `.10.9.6.3`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

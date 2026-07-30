@@ -160,7 +160,7 @@ loaded/reconstructed/generated/emitted/traced/isolated route, policy and isolati
 Both conformance rows share the same consumer topology; neutral governance is six fixture groups, twenty exact
 responses, 98 rejected mutations, rollout 6/9, and native admission 6/6.
 
-### Shared native MCP decoded server
+### Shared native MCP server and strict stdio
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.6.0` and ADR `0061` freeze one Lua MCP implementation for both PUC Lua
 and LuaJIT. Decoded implementation `.10.9.6.1` now generates an 82,827-byte `mcp_contract.lua` containing the
@@ -171,20 +171,37 @@ detached contract values without filesystem or environment access.
 The decoded server is a protected same-process Lua object around an already-created semantic index. It may call
 only `index:capabilities()` and `index:query_neutral(request)`. Root constructors are `mcp_server`,
 `mcp_budget_limits`, `mcp_deployment_policy`, and `mcp_registration_options`, with protected server methods
-`register_index`, `revoke_handle`, `dispatch`, and `shutdown`; `serve_stdio` remains owned by `.2`. The server
+`register_index`, `revoke_handle`, `dispatch`, `serve_stdio`, and `shutdown`. The server
 stores digest-only authorization, creates 43-character handles from 32 OS-random bytes, expires them against
 monotonic time, enforces lowering-only policy before native query, and sanitizes failures. It cannot load or
 compile source, read paths, execute parsers, enable trace, retain semantic caches, add a primary-CLI mode, or close
 caller-owned streams.
 
-Strict stdio must classify JSON number tokens before decoding because LuaJIT cannot retain the distinction among
-`1`, `1.0`, and `1e0`. It will use iterative depth-64 lexical admission and bytewise bounded reads: fixed-size
+Strict stdio classifies JSON number tokens before decoding because LuaJIT cannot retain the distinction among
+`1`, `1.0`, and `1e0`. Private `mcp_wire.lua` uses iterative depth-64 lexical admission and bytewise bounded reads:
+it records token paths so fraction/exponent spellings cannot satisfy integer-only request fields, while arbitrary
+fractional client metadata remains admissible. Fixed-size
 reads block on interactive pipes, while `read(1)` processes the full 1 MiB limit in about 0.096 seconds on PUC Lua
-and 0.059 seconds on LuaJIT. The implemented package-private `lua/native/mcp_system.c` exposes only fixed 32-byte
+and 0.059 seconds on LuaJIT. LF, CRLF, and one complete final-EOF frame are accepted; overlong or malformed frames
+recover at the next LF. Responses are canonical JSON plus one LF and complete only after `flush` succeeds.
+
+```lua
+local server = linkedspec.mcp_server()
+local handle = server:register_index(index, authorization)
+server:serve_stdio(io.stdin, io.stdout, authorization, { log = io.stderr })
+```
+
+The input, output, and optional distinct log are caller-owned and never closed. Normal operation does not log.
+EOF releases every registered index and active request. A deterministic pre-emission cancellation suppresses a
+prepared response; cancellation after successful flush cannot retract it. Read, write, or flush failure releases
+state, optionally writes only `linkedspec_mcp_io_failure\n`, and raises the protected error code
+`linkedspec_mcp_io_failure` even if logging also fails.
+
+The implemented package-private `lua/native/mcp_system.c` exposes only fixed 32-byte
 secure entropy and monotonic milliseconds, compiled separately for both ABIs by the existing native builder. It
 uses `arc4random_buf` on Darwin/BSD, an EINTR-safe `getrandom` loop on Linux, and `CLOCK_MONOTONIC`, with no
-filesystem/weak/wall-clock fallback. Focused proof passes 111 generated/runtime and 210 decoded/security
-assertions per ABI; governance rejects 94 mutations. Formal MCP status remains 4/5 implementations + 4/6
+filesystem/weak/wall-clock fallback. Focused proof passes 111 generated/runtime, 210 decoded/security, and 247
+strict-wire assertions per ABI; governance rejects 98 mutations. Formal MCP status remains 4/5 implementations + 4/6
 runtimes until exact dual-ABI admission `.10.9.6.3`.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,

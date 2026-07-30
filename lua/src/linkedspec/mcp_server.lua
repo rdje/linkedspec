@@ -244,6 +244,7 @@ local function construct(dependencies)
     maximum_lifetime_ms = dependencies.maximum_lifetime_ms,
     capabilities_of = dependencies.capabilities_of,
     query_index = dependencies.query_index,
+    before_wire_emit = dependencies.before_wire_emit,
   }
   return result
 end
@@ -283,6 +284,7 @@ function M._server_for_testing(options)
   local copied = plain_options(options, {
     entropy = true, now_ms = true, maximum_handles = true,
     handle_attempts = true, capabilities_of = true, query_index = true,
+    before_wire_emit = true,
   }, "MCP test server")
   if type(copied.entropy) ~= "function" or type(copied.now_ms) ~= "function" then
     error("MCP test server requires entropy and monotonic-time callbacks", 0)
@@ -303,6 +305,9 @@ function M._server_for_testing(options)
   if copied.query_index ~= nil and type(copied.query_index) ~= "function" then
     error("MCP test query seam must be a function", 0)
   end
+  if copied.before_wire_emit ~= nil and type(copied.before_wire_emit) ~= "function" then
+    error("MCP test pre-emission seam must be a function", 0)
+  end
   return construct({
     entropy = copied.entropy,
     now_ms = copied.now_ms,
@@ -312,6 +317,7 @@ function M._server_for_testing(options)
     maximum_lifetime_ms = registry.maximum_lifetime_ms,
     capabilities_of = copied.capabilities_of or native_capabilities,
     query_index = copied.query_index or native_query,
+    before_wire_emit = copied.before_wire_emit,
   })
 end
 
@@ -727,6 +733,44 @@ function SERVER_METHODS.dispatch(server, request, authorization_context)
   return dispatch(server, request, authorization_context, false)
 end
 
+local function has_stream_method(value, name)
+  local value_type = type(value)
+  if value_type ~= "table" and value_type ~= "userdata" then return false end
+  local ok, method = pcall(function() return value[name] end)
+  return ok and type(method) == "function"
+end
+
+function SERVER_METHODS.serve_stdio(server, input, output, authorization_context, options)
+  local state = server_state(server)
+  if state.stopped then fail("linkedspec_mcp_server_shutdown", "The MCP server has shut down.") end
+  local copied
+  if options == nil then
+    copied = {}
+  elseif type(options) == "table" and getmetatable(options) == nil then
+    copied = {}
+    for key, value in next, options do
+      if key ~= "log" then
+        fail("linkedspec_mcp_invalid_stdio", "MCP stdio options contain an unsupported field.")
+      end
+      copied.log = value
+    end
+  else
+    fail("linkedspec_mcp_invalid_stdio", "MCP stdio options must be a plain table.")
+  end
+  local log = copied.log
+  if not has_stream_method(input, "read") or
+      not has_stream_method(output, "write") or
+      not has_stream_method(output, "flush") or
+      (log ~= nil and (not has_stream_method(log, "write") or
+        not has_stream_method(log, "flush") or rawequal(output, log))) then
+    fail("linkedspec_mcp_invalid_stdio",
+      "MCP stdio requires caller-owned streams with a distinct optional log.")
+  end
+  authorization_digest(authorization_context)
+  return require("linkedspec.mcp_wire").serve(M, server, input, output,
+    authorization_context, log)
+end
+
 function M._dispatch_for_wire(server, request, authorization_context)
   local response = dispatch(server, request, authorization_context, true)
   if response == nil or json.kind(request) ~= "harray" or request.id == nil then return response, nil end
@@ -738,16 +782,34 @@ end
 
 function M._wire_response_ready(server, key)
   local state = server_state(server)
+  if key == nil then return true end
   local active = type(key) == "string" and state.active[key] or nil
   if active == nil then return false end
   if active.cancelled then state.active[key] = nil return false end
   return active.prepared
 end
 
+function M._wire_before_emit(server, key)
+  local callback = server_state(server).before_wire_emit
+  if callback ~= nil then callback(server, key) end
+end
+
 function M._wire_response_emitted(server, key)
   local state = server_state(server)
   if type(key) == "string" then state.active[key] = nil end
   return true
+end
+
+function M._protocol_error(id, kind, requested)
+  return protocol_error(id, kind, requested)
+end
+
+function M._raise_io_failure()
+  fail("linkedspec_mcp_io_failure", "The MCP stdio stream failed.")
+end
+
+function M._raise_contract_failure()
+  fail("linkedspec_mcp_contract_failure", "The generated MCP contract is unavailable.")
 end
 
 function SERVER_METHODS.shutdown(server)

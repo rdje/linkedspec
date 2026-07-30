@@ -3464,10 +3464,10 @@ The dependency order is:
 | `.10.9.5.4` | committed-owner no-change Julia closeout | complete from clean `f8fd4a51`; focused/canonical recomposition unchanged; parent `.10.9.5` closed |
 | `.10.9.6.0` | shared Lua native owner/security/wire audit and ADR `0061` | architecture frozen; behavior and 4/5 + 4/6 ledger unchanged |
 | `.10.9.6.1` | generated Lua literal binding/runtime, native system seam, secure registry, and decoded server | implemented; 111 + 210 assertions per ABI, formal ledger unchanged |
-| `.10.9.6.2` | strict shared Lua stdio and lifecycle | pending |
+| `.10.9.6.2` | strict shared Lua stdio and lifecycle | implemented; 247 assertions per ABI, 98 governance mutations, formal admission unchanged |
 | `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | pending; alone may advance 5/5 + 6/6 |
 | `.10.9.6.4` | committed-owner no-change shared Lua closeout | pending |
-| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; decoded implementation complete, strict wire next |
+| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; decoded implementation and strict wire complete, exact dual-ABI admission next |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
 
@@ -3628,16 +3628,16 @@ remains pending until Lua qualifies unchanged on both ABIs. No-change `.10.9.5.4
 Perl, Rust, Dart, and Julia owners, closes parent `.10.9.5`, and makes behavior-free shared Lua plan `.10.9.6.0`
 the next clean-boundary owner.
 
-### Using Lua decoded MCP dispatch; strict stdio pending
+### Using Lua decoded MCP dispatch and strict stdio
 
 Behavior-free `.10.9.6.0` and ADR `0061` select one implementation source, not a PUC implementation plus a
 LuaJIT implementation. Both ABIs execute the same generated binding, frozen runtime, protected decoded server,
-and public decoded API; they will also execute the same strict wire, admission consumer, and ordered role list.
+strict wire, and public API; they will also execute the same admission consumer and ordered role list.
 Their separately compiled native
 modules and separate formal runtime rows are compatibility proofs, not semantic or transport forks. Both report
 wire identity `linkedspec-semantic-lua`.
 
-The production ownership is deliberately narrow; `.1` implements every row except the `.2` wire:
+The production ownership is deliberately narrow; `.1-.2` implement every row:
 
 | Owner | Responsibility |
 |---|---|
@@ -3651,21 +3651,24 @@ The current canonical bundle is 82,543 bytes and round-trips byte-for-byte throu
 codec on both runtimes. The implemented generator chooses the least long-bracket `=` level whose closing delimiter is
 absent and places the first bundle byte immediately after the opener; this avoids both delimiter collision and
 Lua's special initial-newline removal. The runtime verifies exact length and SHA-256 before decoding, then
-allow no file read, environment lookup, or alternate bundle.
+allows no file read, environment lookup, or alternate bundle.
 
 Lua numeric values are not a sufficient wire authority. PUC Lua retains integer versus float subtype but the
 canonical encoder normalizes integral floats, while LuaJIT represents JSON `1`, `1.0`, and `1e0` alike. Private
-wire code will therefore scan the admitted UTF-8 bytes iteratively before `json.decode`, preserving integer versus
-fraction/exponent token kind for schema and JSON-RPC-id checks. Decoded `server:dispatch` remains available for
+wire code therefore scans the admitted UTF-8 bytes iteratively before `json.decode`, preserving numeric lexemes by
+decoded JSON-pointer path. Fraction/exponent request ids are rejected; integer-only cancellation, page, and budget
+fields receive an invalid JSON-kind sentinel before schema validation, so PUC Lua and LuaJIT produce the same
+invalid-request, invalid-params, and silent-notification outcomes. Fractions in unconstrained client metadata
+remain valid. Decoded `server:dispatch` remains available for
 already-admitted host JSON-kind values but makes no lexical-identity claim.
 
-The stream loop will call `input:read(1)` until LF, CRLF, final EOF, or the exact 1,048,576-byte ceiling. This is
+The stream loop calls `input:read(1)` until LF, CRLF, final EOF, or the exact 1,048,576-byte ceiling. This is
 intentional: fixed-size `read(4096)` blocks on an interactive pipe until the writer closes. Bytewise proof handles
 the maximum frame in about 0.096 seconds on PUC Lua and 0.059 seconds on LuaJIT. The scanner is iterative and
 depth-64 bounded. Output is canonical JSON plus one LF and is flushed before emission completes; EOF and every
 hostile read/write/flush path release state without closing caller-owned streams.
 
-The decoded root API is callable under `.10.9.6.1` with these idiomatic shapes:
+The decoded root API is callable with these idiomatic shapes:
 
 ```lua
 local linkedspec = require("linkedspec")
@@ -3707,14 +3710,20 @@ server:revoke_handle(handle)
 server:shutdown()
 ```
 
-For untrusted bytes, strict-wire leaf `.10.9.6.2` will let a host register its indexes first and lend the server
-its streams; this method is intentionally not public in `.1`:
+For untrusted bytes, strict-wire leaf `.10.9.6.2` lets a host register its indexes first and lend the server its
+streams:
 
 ```lua
 local server = linkedspec.mcp_server()
 local handle = server:register_index(index, authorization)
 server:serve_stdio(io.stdin, io.stdout, authorization, { log = io.stderr })
 ```
+
+Input, output, and the optional distinct log remain caller-owned and are never closed. Normal operation is
+silent. Graceful EOF releases all handles and active requests without an unnecessary output flush. Cancellation at the private
+pre-emission seam suppresses a prepared response, while successful flush makes the response final. Read, write,
+or flush failure performs the same release, writes at most the fixed `linkedspec_mcp_io_failure\n` record to the
+optional log, and raises the protected `linkedspec_mcp_io_failure` error even if logging also fails.
 
 Authorization is a copied nonempty binary Lua string of at most 4,096 bytes. The registry retains only SHA-256,
 compares digests in fixed work, creates exact 43-character unpadded base64url handles from 32 OS-random bytes,
@@ -3723,9 +3732,9 @@ Darwin/BSD or an EINTR-safe `getrandom` loop on Linux plus `CLOCK_MONOTONIC`; fa
 `/dev/urandom`, `math.random`, wall-clock, weak fallback, LuaRocks dependency, MCP SDK, socket/HTTP transport,
 async runtime, standalone executable, source bootstrap, semantic cache, or primary-CLI mode.
 
-Decoded leaf `.1` passes 111 binding/runtime plus 210 server/security/authority assertions on each ABI and raises
-omission-sensitive governance from 79 to 94 mutations without status movement. Leaf `.2` implements and proves
-the strict wire. One unchanged exact consumer then runs independently on PUC Lua and LuaJIT in `.3`; only that
+Decoded leaf `.1` passes 111 binding/runtime plus 210 server/security/authority assertions on each ABI. Strict
+wire leaf `.2` adds 247 assertions per ABI and raises omission-sensitive governance from 94 to 98 mutations
+without status movement. One unchanged exact consumer then runs independently on PUC Lua and LuaJIT in `.3`; only that
 leaf may advance the ledger from 4/5 implementations plus 4/6 runtimes to 5/5 plus 6/6. Shared recurring rollout
 remains `.10.9.7`.
 

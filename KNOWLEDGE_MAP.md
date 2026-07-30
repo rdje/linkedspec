@@ -8835,7 +8835,7 @@ _Lua logical helpers and lazy controls share the neutral typed truth seam_
 _Lua MCP decoded dispatch is one protected source on PUC Lua and LuaJIT_
 
 - **answers:** is the Lua MCP decoded server implemented | what does linkedspec mcp_server do | how does Lua MCP store authorization | how are Lua MCP handles generated | what native authority does Lua MCP use | does Lua MCP dispatch compile or execute parsers | is Lua MCP formally admitted | how many Lua MCP decoded tests pass | why does Lua MCP remain 4/5 and 4/6
-- **date:** 2026-07-29 · **status:** decoded implementation complete on both ABIs; strict wire and formal admission pending
+- **date:** 2026-07-29 · **status:** decoded implementation and strict wire complete on both ABIs; formal admission pending
 - **evidence:** `FUTURE-PARITY-BACKLOG.10.9.6.1 adds the generated 82,827-byte literal binding, frozen runtime, protected registry/server, lazy root API, and one common C99 native system source. Binding/runtime proof passes 111 assertions and decoded/security proof passes 210 assertions identically on PUC Lua and LuaJIT; governance rejects 94 mutations while the formal ledger remains 4/5 + 4/6 pending .2-.3.`
 - **source:** [`docs/knowledge/lua-mcp-decoded-server.md`](docs/knowledge/lua-mcp-decoded-server.md)
 
@@ -8861,7 +8861,7 @@ _Lua passes one caller-owned emitter through the complete native parser pipeline
 _Lua MCP is one literal-bound native server source admitted on PUC Lua and LuaJIT_
 
 - **answers:** how will LinkedSpec implement the Lua MCP server | does Lua MCP have one implementation or two | do PUC Lua and LuaJIT use the same MCP source | how does Lua MCP obtain secure random bytes | how does Lua MCP measure monotonic expiry | does Lua MCP read /dev/urandom | how does Lua MCP preserve JSON integer versus number kinds | why does Lua MCP read stdio one byte at a time | how is the MCP contract embedded in Lua | does Lua MCP use Base64 for the contract bundle | what is the public Lua MCP API | does Lua MCP require LuaRocks or an MCP SDK | when will Lua advance the MCP implementation ledger
-- **date:** 2026-07-29 · **status:** architecture and decoded implementation complete; strict wire, admission, and closeout pending under FUTURE-PARITY-BACKLOG.10.9.6.2-.4
+- **date:** 2026-07-29 · **status:** architecture, decoded implementation, and strict wire complete; admission and closeout pending under FUTURE-PARITY-BACKLOG.10.9.6.3-.4
 - **evidence:** `FUTURE-PARITY-BACKLOG.10.9.6.0 and ADR 0061 retrieve the admitted Lua semantic/JSON/SHA/toolchain owners and measure one exact implementation architecture on repository-routed PUC Lua 5.4.8 and LuaJIT 2.1 without changing behavior or the 4/5 + 4/6 MCP ledger.`
 - **source:** [`docs/knowledge/lua-native-mcp-server-plan.md`](docs/knowledge/lua-native-mcp-server-plan.md)
 
@@ -9673,7 +9673,7 @@ _Marker-switch statements outside case/default branches differ across backends_
 _LinkedSpec MCP v1 is modern MCP 2026-07-28 over stdio_
 
 - **answers:** which MCP protocol version does LinkedSpec target | is LinkedSpec MCP modern or legacy | does LinkedSpec MCP implement initialize or notifications initialized | does LinkedSpec MCP implement ping | does LinkedSpec MCP support legacy MCP clients | does LinkedSpec MCP use server discover | what request metadata does LinkedSpec MCP require | what transport does LinkedSpec MCP use | what methods does the LinkedSpec MCP server implement | how are LinkedSpec MCP handles generated and expired | how are MCP handle errors reported | how does MCP deployment policy lower semantic limits | what does direct native MCP response identity mean | can LinkedSpec MCP write logs to stdout | how does LinkedSpec MCP shut down | where is the LinkedSpec MCP machine contract | how many canonical MCP fixtures exist | how do I regenerate or verify the MCP canonical frames | are the native LinkedSpec MCP servers implemented yet
-- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl/Rust/Dart admitted at 3/5 + 3/6; rollout pending
+- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua strict wire implemented but unadmitted; rollout pending
 - **evidence:** `ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py`
 - **source:** [`docs/knowledge/mcp-2026-07-28-stdio-contract.md`](docs/knowledge/mcp-2026-07-28-stdio-contract.md)
@@ -9689,7 +9689,7 @@ _MCP implementation and runtime admission ledger_
 _One MCP contract has five native server implementations and six runtime admissions_
 
 - **answers:** should LinkedSpec use one MCP server for every backend | does each LinkedSpec backend get its own MCP server | how many LinkedSpec MCP server implementations are planned | how many LinkedSpec MCP runtime admissions are planned | do PUC Lua and LuaJIT share one MCP server implementation | what does MCP uniformity mean across LinkedSpec backends | can a LinkedSpec MCP server compile or load a specification | is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9 | what task implements LinkedSpec MCP transport
-- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua decoded implementation complete but unadmitted; rollout pending
+- **date:** 2026-07-29 · **status:** exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua decoded and strict-wire implementation complete but unadmitted; rollout pending
 - **evidence:** `Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md`
 - **source:** [`docs/knowledge/mcp-native-server-topology.md`](docs/knowledge/mcp-native-server-topology.md)

@@ -1,8 +1,8 @@
 # ADR 0061: Lua MCP uses one literal contract binding and one dual-ABI in-process server
 
 - Date: 2026-07-29
-- Status: accepted; plan and decoded implementation complete under `.10.9.6.0-.1`; strict wire, admission, and
-  closeout pending under `.10.9.6.2-.4`
+- Status: accepted; plan, decoded implementation, and strict wire complete under `.10.9.6.0-.2`; admission and
+  closeout pending under `.10.9.6.3-.4`
 - Tags: architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -142,6 +142,14 @@ the exact 82,543-byte bundle; the frozen runtime verifies its digest/schema prof
 owns secure handles, digest-only authorization, monotonic expiry, lowering-only policy, and sanitized dispatch;
 and `mcp_system.c` supplies only OS entropy and monotonic time to both ABI builds. Focused proof is 111 + 210
 assertions per runtime and source/CI/authority governance rejects 94 mutations without formal status movement.
+
+Step `.2` now implements the private iterative wire and public `server:serve_stdio`. The scanner records numeric
+lexemes by decoded JSON-pointer path, rejects fractional/exponent request ids, and substitutes invalid JSON-kind
+sentinels only at the integer-only cancellation/page/budget fields before decoded schema validation. This keeps
+the same invalid-request, invalid-params, and silent-notification outcomes on PUC Lua and LuaJIT without rejecting
+fractional values in unconstrained client metadata. Caller-owned bytewise framing, canonical LF emission,
+cancellation through successful flush, EOF/I/O release, and fixed optional diagnostics pass 247 assertions per
+runtime; governance rejects 98 mutations while the formal ledger remains unchanged.
 
 The same neutral corpus, public decoded and stdio paths, exact semantic bytes, all raw/lifecycle classifications,
 production 1,024-handle boundary, authority/privacy fences, and narrow private seams used by prior admissions are

@@ -21,10 +21,12 @@ That behavior-free Lua audit and ADR `0061` freeze one exact implementation sour
 Decoded leaf `.10.9.6.1` now ships the generated 82,827-byte module carrying the exact 82,543-byte long-bracket
 bundle, digest-verified frozen runtime, protected secure registry, lower-only decoded server, lazy public API, and
 one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Focused proof passes 111 + 210
-assertions on each runtime and governance rejects 94 mutations. Bytewise bounded streaming remains `.2` because
-larger fixed reads block interactively; its measured full 1 MiB cost is under 0.10 seconds on both runtimes.
-Formal status deliberately remains 4/5 implementations + 4/6 runtimes, rollout pending, until exact dual-ABI
-admission `.10.9.6.3`.
+assertions on each runtime. Strict-wire leaf `.10.9.6.2` now adds one iterative preflight and caller-owned stdio
+loop unchanged on both ABIs, with 247 assertions per runtime and 98 governance mutations. Its canonical signoff
+passes all six doctrines, the unchanged neutral and four-admitted-backend MCP chain, semantic admission,
+containment, moved-root execution, CLI 66x2, Phase 0 1,031/1,031, and the complete Lua opt-in. Formal status
+deliberately remains 4/5 implementations + 4/6 runtimes, rollout pending, until exact dual-ABI admission
+`.10.9.6.3`.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
@@ -722,9 +724,11 @@ Three backbone items tracked major structural modernization — all done:
   no-change closeout `.4` recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, closes parent
   `.10.9.4`. Julia `.10.9.5.1-.3` now implements generated/runtime/decoded/strict-stdio owners and exact admission,
   advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change `.4` recomposes those owners and closes parent
-  `.10.9.5`. Shared Lua `.10.9.6.0` and ADR `0061` now freeze one common generated/runtime/server/wire source,
-  strict lexical number-kind admission, and a narrow native entropy/clock seam for unchanged PUC Lua/LuaJIT
-  proof. Implementation `.1` is next; status remains 4/5 + 4/6. Any future aggregator or
+  `.10.9.5`. Shared Lua `.10.9.6.0-.2` and ADR `0061` now provide one common generated/runtime/server/wire source,
+  strict JSON-pointer number-kind admission, caller-owned canonical stdio, cancellation-through-flush, EOF/I/O
+  release, and a narrow native entropy/clock seam unchanged on PUC Lua/LuaJIT. Focused proof is 111 + 210 + 247
+  assertions per ABI with 98 governance mutations; exact admission `.3` is next and status remains 4/5 + 4/6.
+  Any future aggregator or
   legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
