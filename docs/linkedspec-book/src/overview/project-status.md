@@ -45,9 +45,11 @@ exploratory code. Capabilities plus 16/19 query responses cross the public MCP A
 is outside the current MCP fact-key schema, the unsupported-contract response is preempted by constant input
 validation, and the source-ceiling response is preempted by default-policy denial. The same boundary applies to
 all five implementations. Formal status remains 5/5 implementations + 6/6 runtimes with rollout pending/114.
-The recommended next step requires director approval to repair the neutral contract and identical five-server
-default-policy seam before exact all-twenty recurring proof; weakening the claim to 17 identities plus three
-transport outcomes is recorded but not recommended.
+The director authorized the exact repair on 2026-07-30. Plan `.10.9.7.1.1.0` keeps public transport semantics
+coherent by moving the neutral schema/policy profile, exact artifacts and all generated bindings, plus identical
+Perl/Rust/Dart/Julia/shared-Lua behavior in one atomic implementation leaf. A second leaf proves all twenty
+responses on six runtimes; only then may the routed recurring gate promote thin transport. The weaker 17-identity
+plus three-outcome claim is not selected, and current rollout remains pending until that proof lands.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and

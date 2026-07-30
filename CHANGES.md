@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 — plan authorized MCP repair
+
+The director authorized the recommended exact all-twenty correction from clean blocker checkpoint `20ee93c9`.
+Behavior-free plan child `.10.9.7.1.1.0` reconciles the neutral MCP schema/materializer/independent validator,
+generated bindings, five native policy seams, six runtime consumers, recurring-gate precedent, coordinated
+ledgers, canonical/storage owners, roadmaps, live docs, Knowledge Map, and mdBook before implementation.
+
+The dependency split keeps public transport semantics coherent: `.1` atomically changes the exact neutral
+schema/policy artifacts, independent mutations, all five generated bindings, and Perl/Rust/Dart/Julia/shared-Lua
+behavior; `.2` proves all twenty native/MCP/digest identities across six runtimes; `.3` adds rooted same-volume
+composition and only then promotes thin transport; `.4` recomposes committed owners unchanged and closes the
+implementation parents. The weaker seventeen-plus-three claim is not selected.
+
+The approved policy boundary is per explicit component, not one coarse registration boolean. Default native
+source/page/budget ceilings must reach native portable diagnostics. An explicitly supplied source/content, page,
+or individual budget ceiling remains pre-dispatch and dispatch-free; an overlay on one component may not cause
+another component's inherited native limit to preempt its native error. This slice changes no contract, generated
+binding, server, test, fixture, ledger, rollout, or public behavior.
+
+Signoff preserves semantic 6/20/105, neutral MCP 35/10/10/68, five byte-fresh bindings, unchanged six-runtime
+admissions, and rollout-pending 5/5 + 6/6/114 governance. Knowledge Map 757/6,137, memory architecture, all seven
+doctrines, whitespace, and the rendered 13,720-KiB/79-file mdBook pass; exact generated output is removed.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.7.1.0 — expose MCP all-twenty blocker
 
 Activated the recurring MCP implementation task from clean README closeout `0540a72f`, then attempted the

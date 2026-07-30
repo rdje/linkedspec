@@ -5,19 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `0540a72f` — `README-STABILITY-POLICY.2 - close bounded README adoption` (96/300; no push);
-  commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `README-STABILITY-POLICY.2`; bounded README adoption parent closed at `0540a72f`.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.0` — shared all-twenty MCP blocker audit is signoff-complete from
-  clean `0540a72f`; this commit boundary makes the finding durable, and the director choice remains afterward.
-- active_scope: behavior-free real Perl all-twenty probe, shared schema/default-policy root cause, exact code
-  restoration, durable blocker/choices, and safe handoff before `.10.9.7.1.1`.
-- active_progress: capabilities + 16/19 query identities pass; calls fails on missing `effects`/`return_shape`,
-  source-ceiling is policy-preempted, unsupported-contract is const-schema-preempted; exploratory code is absent.
-- active_exclusions: no committed server/contract/binding/consumer/fixture/ledger/rollout/semantic/CLI behavior,
-  test-only bypass, weakened claim by assumption, aggregator, legacy adapter, or push.
-- next_after_clean_commit: wait for director choice; recommended `.10.9.7.1.1` repairs the neutral MCP contract and
-  identical five-server policy seam before exact all-twenty proof; no push before 300.
+- latest_commit: `20ee93c9` — `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker` (97/300; no
+  push); commit is brief-cleared/residue-free/clean.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.0`; 17/20 identity blocker is durable at `20ee93c9`.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` — director-authorized exact-repair plan from clean
+  `20ee93c9`; behavior-free owner audit/split/signoff and commit are in progress.
+- active_scope: freeze atomic neutral contract/bindings/five-server repair `.1`, all-twenty consumers `.2`, rooted
+  promotion `.3`, and unchanged parent closeout `.4` before any behavior change.
+- active_progress: authorization and exact owners are reconciled; per-component explicit-overlay enforcement is
+  required so inherited native limits reach native diagnostics; executable state remains unchanged.
+- active_exclusions: no contract/binding/server/test/fixture/ledger/rollout/semantic/CLI behavior in `.0`, no
+  weakened claim, test-only bypass, aggregator, legacy adapter, or push.
+- next_after_clean_commit: activate `.10.9.7.1.1.1` and implement the atomic shared contract/generated-binding/
+  five-server correction with focused cross-runtime proof; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -40,10 +40,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_future_direction: director-approved ADR `0056` remains pending under `.14.1-.8`; ADR `0045` retains sole
   inter-match-gap ownership. Neither is the current leaf.
-- latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read;
-  director-provided README policy template read fully and read-only.
+- latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
+  consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 96/300 after `0540a72f`; no push.
+- push_policy: hard lock at 300 new local commits; counter 97/300 after `20ee93c9`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
@@ -51,6 +51,5 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - canonical_state: prior MCP `.0` remains semantic 6/20/105, MCP 35/10/10/68, ledger 5/5 + 6/6 pending/114.
   README closeout E4 passes 7 doctrines, Rust semantic 82.85s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
   containment/moved-root, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663s.
-- blockers: director decision required because recommended all-twenty correctness changes neutral transport bytes,
-  five generated bindings, and identical default-policy behavior in five servers beyond ADR `0062`'s original
-  test-only scope. Alternative weaker 17-identity/three-boundary claim is recorded but not recommended.
+- blockers: none; the director authorized the exact all-twenty repair on 2026-07-30. Rollout remains pending until
+  `.1-.3` implement and prove the repair, all-twenty identities, and routed promotion.

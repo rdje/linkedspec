@@ -74,15 +74,15 @@ neutral digest identity. Three valid native outcomes are unreachable through the
 and `source_ceiling_forbidden` is preempted by the default native-derived deployment policy before the native
 ceiling diagnostic. The same schema and policy order apply to all five implementations.
 
-Exploratory code was removed and rollout remains pending. The recommended continuation is a director-approved
-contract/runtime repair: admit the complete governed fact vocabulary, accept a bounded contract string so native
-portable version errors remain reachable, and reserve ceiling pre-denial for explicit deployment overlays while
-preserving native ceilings and every explicit-policy security fence. Five generated bindings and five server
-implementations must then be re-admitted before the original all-twenty consumers and routed
-`tools/check_mcp_six_runtime.sh` may promote `thin_mcp_transport`. The alternative—seventeen identities plus
-three different transport outcomes—preserves current bytes but weakens the accepted all-twenty claim and is not
-recommended. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside
-both paths.
+Exploratory code was removed and rollout remains pending. The director authorized the exact continuation on
+2026-07-30: admit the complete governed fact vocabulary; accept a nonempty query-contract string bounded to 128
+characters and 128 UTF-8 bytes so native portable version errors remain reachable; and reserve pre-dispatch
+policy denial for explicitly supplied source/content/page/budget overlay components while native defaults reach
+native portable diagnostics. Exact contract artifacts/digests, independent validation, five generated bindings,
+and identical Perl/Rust/Dart/Julia/shared-Lua behavior move atomically under `.10.9.7.1.1.1`. All-twenty consumer
+proof across six runtimes follows under `.2`; only routed governance `.3` may then promote
+`thin_mcp_transport`. The weaker seventeen-plus-three claim is not selected. Primary CLI behavior, legacy
+support, aggregator work, and semantic-model ownership remain outside the repair.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -3492,8 +3492,12 @@ The dependency order is:
 | `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | complete; one shared 202-assertion consumer per ABI, 5/5 + 6/6, rollout pending, 114 mutations, canonical signoff green |
 | `.10.9.6.4` | committed-owner no-change shared Lua closeout | complete; unchanged recomposition and canonical signoff green |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | closed; `.0-.4` complete at unchanged 5/5 + 6/6 pending/114 |
-| `.10.9.7.1.0` | audit the first real all-twenty MCP spend | complete finding; 17/20 identities, three shared schema/default-policy blockers, exploratory code removed, director decision pending |
-| `.10.9.7.1.1` | repair the approved boundary, add six-runtime proof, and promote thin transport | pending director choice; full contract/five-server repair recommended |
+| `.10.9.7.1.0` | audit the first real all-twenty MCP spend | complete finding; 17/20 identities, three shared schema/default-policy blockers, exploratory code removed |
+| `.10.9.7.1.1.0` | freeze the director-authorized implementation boundary | active behavior-free plan; atomic repair → six-runtime proof → promotion → closeout |
+| `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | pending after clean plan commit |
+| `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | pending after atomic repair |
+| `.10.9.7.1.1.3` | add routed governance and promote thin transport | pending after all-twenty proof |
+| `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | pending after promotion |
 | `.10.9.7.2` | recurring MCP committed-owner closeout | pending after `.1.1` |
 | `.10.10` | public no-drift and closure | pending |
 

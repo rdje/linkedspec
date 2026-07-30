@@ -1,7 +1,7 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted direction; `.10.9.7.1.0` verified a shared three-case transport blocker; director decision pending
+- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` pending implementation
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -47,18 +47,44 @@ that the original no-production-change plan excluded.
 
 The alternative is to weaken the rollout claim to seventeen direct/MCP identities plus three distinct transport
 outcomes. That preserves current transport bytes but abandons the accepted all-twenty identity objective. Leaf
-`.10.9.7.1.0` records the verified evidence and pauses promotion pending director choice; rollout remains pending.
+`.10.9.7.1.0` records the verified evidence and paused promotion at that boundary; the authorization below resolves
+the choice while rollout remains pending until implementation and proof.
+
+## Director authorization and implementation boundary — 2026-07-30
+
+The director authorized the recommended exact all-twenty correction and rejected no part of the proposed
+one-contract/five-implementation architecture. The weaker seventeen-plus-three claim remains documented history,
+not the selected path. Rollout remains pending until executable proof earns promotion.
+
+Implementation child `.10.9.7.1.1.0` keeps the repair atomic where repository consistency requires it:
+
+1. `.1` updates the neutral schema and policy profile, exact artifacts/digests, independent validator and
+   mutations, all five generated bindings, and the same request-policy semantics in Perl, Rust, Dart, Julia, and
+   shared Lua. `recordFacts` becomes the exact union of governed semantic fact keys; an unknown query contract is
+   a nonempty string bounded to 128 characters and 128 UTF-8 bytes so native version diagnostics remain reachable.
+   Pre-dispatch denial is keyed by explicit per-component deployment-overlay presence—not inherited native
+   defaults—so default requests reach native portable diagnostics while explicit source/content/page/budget
+   ceilings remain strict and dispatch-free.
+2. `.2` strengthens the existing five consumers, with shared Lua run on both ABIs, to prove capabilities plus all
+   nineteen query responses through direct canonical bytes, MCP text/structured content, and existing digests.
+3. `.3` adds the rooted same-volume recurring driver, independent omission governance, coordinated ledger state,
+   canonical opt-in, and atomic thin-transport promotion.
+4. `.4` recomposes every committed owner unchanged and closes `.1.1` plus parent `.1` before MCP closeout `.2`.
+
+Contract/schema/policy/server movement belongs to one commit because splitting those authorities would leave an
+intermediate durable revision with internally inconsistent public transport semantics. Consumer evidence and
+rollout promotion remain separate commits so proof precedes status.
 
 ## Decision
 
 ### 1. Strengthen the six admitted consumers; do not add a seventh model
 
-This section remains the target proof after the director chooses the prerequisite boundary resolution. Under the
-recommended path, `.10.9.7.1.1` first repairs the three shared neutral transport seams documented above and then
-performs this consumer proof. The original consumer-only restriction is superseded only for that bounded repair;
+This section remains the target proof after the authorized prerequisite boundary repair. Leaf `.10.9.7.1.1.1`
+repairs the three shared neutral transport seams documented above; `.10.9.7.1.1.2` then performs this consumer
+proof. The original consumer-only restriction is superseded only for that bounded repair;
 it remains in force for semantic-model ownership and expected response bodies.
 
-Leaf `.10.9.7.1` extends the existing MCP admission consumers' native-capabilities/native-query identity proof to
+Leaf `.10.9.7.1.1.2` extends the existing MCP admission consumers' native-capabilities/native-query identity proof to
 the exact twenty ordered `query_cases` already owned by
 `capability_conformance/semantic_introspection_contract.json`:
 

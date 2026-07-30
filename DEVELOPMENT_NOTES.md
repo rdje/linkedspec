@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` — transport repair is atomic; proof and promotion are not):
+  The director authorized exact all-twenty repair after blocker commit `20ee93c9`. The coherent behavior boundary
+  is larger than one schema edit: the neutral policy profile is embedded in every generated binding and consumed
+  by five servers. Persisting schema, bindings, or server policy separately would create an internally inconsistent
+  public transport revision or churn the exact bundle digest twice. One `.1` commit therefore moves schema,
+  policy profile, artifacts/digests, independent validation/mutations, five generated bindings, five server
+  implementations, and focused policy proofs together.
+
+  Policy enforcement needs component-presence state in addition to effective values. Today each server fills one
+  effective policy from native limits and checks every request against it, so no-overlay registrations preempt
+  native diagnostics; a partial explicit overlay can also unintentionally preempt an unrelated inherited native
+  component. The correction tracks explicit source, page, and budget fields separately. Only an explicitly
+  supplied component owns pre-dispatch denial; inherited limits remain native-query authority. Capability
+  projection may still use the combined effective values. This preserves lowering-only security without turning
+  the MCP layer into a second semantic validator.
+
+  Request-contract forward diagnostics use a nonempty string bounded by both 128 characters and 128 UTF-8 bytes,
+  not an enum/pattern that guesses future version syntax. Output `recordFacts` must equal the union of the neutral
+  semantic contract's governed `fact_keys`, with mutations for omission/extra drift. Consumer proof `.2`, routed
+  promotion `.3`, and unchanged closeout `.4` remain separate so status cannot precede evidence. No behavior moves
+  in the plan slice.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.7.1.0` — native semantic errors must remain reachable through a thin
   transport): Extending a consumer is insufficient when the public transport schema/policy rejects valid native
   requests or responses first. The Perl probe established the exact limit: 17/20 identities work unchanged, while

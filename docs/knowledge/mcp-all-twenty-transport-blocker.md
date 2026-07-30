@@ -11,10 +11,10 @@ answers:
   - "does MCP currently preserve all twenty semantic responses"
   - "what must change before thin_mcp_transport promotion"
 date: 2026-07-29
-status: verified blocker; director decision pending; rollout remains pending
+status: verified blocker; recommended repair director-authorized 2026-07-30; implementation and rollout pending
 tags: [mcp, semantic-introspection, schema, policy, conformance, blocker]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 extends the committed Perl MCP admission consumer only long enough to dispatch all twenty governed native responses, then removes the exploratory diff. Capabilities plus 16/19 query cases retain exact direct/MCP/digest identity. calls_symbols_and_shapes becomes a sanitized internal error because the shared MCP recordFacts propertyNames omit valid effects and return_shape keys. unsupported_contract becomes invalid params because semanticQueryRequest.contract is a const. source_ceiling_forbidden becomes linkedspec_mcp_policy_denied because the default native-derived policy is enforced before native query dispatch. The same neutral schema and policy ordering are implemented by all five servers, so this is a shared contract boundary rather than a Perl-only test defect. No contract, server, consumer, ledger, or rollout behavior changed during the audit."
-last_verified: 2026-07-29
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 extends the committed Perl MCP admission consumer only long enough to dispatch all twenty governed native responses, then removes the exploratory diff. Capabilities plus 16/19 query cases retain exact direct/MCP/digest identity. calls_symbols_and_shapes becomes a sanitized internal error because the shared MCP recordFacts propertyNames omit valid effects and return_shape keys. unsupported_contract becomes invalid params because semanticQueryRequest.contract is a const. source_ceiling_forbidden becomes linkedspec_mcp_policy_denied because the default native-derived policy is enforced before native query dispatch. The same neutral schema and policy ordering are implemented by all five servers, so this is a shared contract boundary rather than a Perl-only test defect. The director authorized the recommended exact repair on 2026-07-30. Child .10.9.7.1.1.0 freezes one atomic contract/bindings/five-server correction before six-runtime identity proof and later promotion; no behavior has changed yet and rollout remains pending."
+last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
   - "rg -n 'recordFacts|effects|return_shape|semanticQueryRequest|const.*linkedspec-semantic-query-v1' capability_conformance/mcp_semantic_transport/schema.json tools/materialize_mcp_semantic_transport_contract.py"
@@ -39,7 +39,7 @@ prove the public API and is therefore invalid. The recommended correction is to 
 the MCP output schema, accept a bounded query-contract string so the native portable error remains reachable, and
 apply pre-dispatch ceiling denial only for an explicit deployment overlay while preserving strict default/native
 and explicit-policy security. That correction changes contract artifacts/digests and identical behavior in five
-servers, so ADR `0062` and task `.10.9.7.1.0` require director approval before implementation.
+servers. The director authorized it on 2026-07-30; task `.10.9.7.1.1.1` owns the atomic repair.
 
-The non-recommended alternative is to weaken the claim to seventeen direct/MCP identities plus three distinct
-transport outcomes. Until one path is approved and implemented, `thin_mcp_transport` remains pending.
+The non-selected alternative was to weaken the claim to seventeen direct/MCP identities plus three distinct
+transport outcomes. Until the authorized path is implemented and proven, `thin_mcp_transport` remains pending.

@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Director-authorized exact MCP repair plan active
+
+Behavior-free blocker audit `.10.9.7.1.0` is committed cleanly at `20ee93c9` (97/300, no push); its brief is zero
+bytes and no exploratory code or generated residue remains. The director authorized the recommended all-twenty
+repair. Child `.10.9.7.1.1.0` activated task-tree-first from that clean boundary and is signoff-complete before
+contract or production movement.
+
+The exact sequence is atomic contract/bindings/five-server correction `.1`, all-twenty consumer identity across
+Perl/Rust/Dart/Julia/PUC Lua/LuaJIT `.2`, rooted same-volume recurring governance and thin-transport promotion
+`.3`, then unchanged recomposition and parent closure `.4`. Explicit deployment overlays retain pre-dispatch
+denial per supplied source/content/page/budget component; inherited native limits return to native diagnostic
+authority. The weaker 17-identity/three-outcome claim is not selected.
+
+Current executable state remains semantic 6/20/105 at rollout 7/9 and native admission 6/6, MCP 35/10/10/68,
+and implementation admission 5/5 + 6/6 with rollout pending/114. This plan slice changes no contract, binding,
+server, test, fixture, ledger, rollout, semantic model, CLI, aggregator, or legacy behavior. Five byte-fresh
+bindings, all six admission rows, Knowledge Map 757/6,137, seven doctrines, and the 13,720-KiB/79-file mdBook
+reverify; `.1` activates only after this leaf is committed and the clean boundary is proven.
+
 ## 2026-07-29 — Recurring MCP all-twenty implementation blocked on shared transport correction
 
 README adoption closeout is committed cleanly at `0540a72f` (96/300, no push). MCP `.10.9.7.1` activated

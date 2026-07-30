@@ -13,10 +13,10 @@ answers:
   - what may promote thin MCP transport
   - does recurring MCP proof add a primary CLI surface
 date: 2026-07-29
-status: accepted direction; shared three-case transport blocker verified; director decision pending
+status: accepted and director-authorized; atomic repair plan active; rollout remains pending
 tags: [mcp, semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral semantic contract, all six native/MCP consumers, the implementation ledger/checker, canonical CI, the semantic recurring precedent, and project-data routing. Current semantic consumers prove all 20 native cases; current MCP consumers prove capabilities plus one representative direct/MCP query. Real Perl probe .10.9.7.1.0 then proves capabilities plus 16/19 query identities and root-causes three shared MCP blockers: missing effects/return_shape output facts, const query-contract input, and default-policy preemption of the native source-ceiling diagnostic. Exploratory code is removed; rollout remains pending; recommended all-twenty continuation requires director-approved contract and five-server repair."
-last_verified: 2026-07-29
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral semantic contract, all six native/MCP consumers, the implementation ledger/checker, canonical CI, the semantic recurring precedent, and project-data routing. Current semantic consumers prove all 20 native cases; current MCP consumers prove capabilities plus one representative direct/MCP query. Real Perl probe .10.9.7.1.0 then proves capabilities plus 16/19 query identities and root-causes three shared MCP blockers: missing effects/return_shape output facts, const query-contract input, and default-policy preemption of the native source-ceiling diagnostic. Exploratory code is removed. On 2026-07-30 the director authorized the exact all-twenty correction; .10.9.7.1.1.0 freezes atomic contract/binding/five-server repair, then six-runtime identities, then routed promotion, while rollout remains pending."
+last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
   - "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
@@ -37,14 +37,15 @@ API. Merely running them together cannot prove the stronger all-twenty direct/MC
 Implementation audit `.10.9.7.1.0` proves a second boundary: a real Perl all-twenty spend preserves capabilities
 plus sixteen of nineteen query identities, while three valid native responses are preempted by shared MCP
 schema/default-policy behavior. See [[mcp-all-twenty-transport-blocker]]. Exploratory code is removed and rollout
-remains pending. The recommended exact all-twenty continuation now requires director-approved contract and
-five-server policy repair; keeping current bytes would require explicitly weakening the claim.
+remains pending. The director authorized the exact all-twenty contract and five-server policy repair on
+2026-07-30; keeping current bytes was the non-selected weaker claim.
 
 ADR `0062` originally required `.10.9.7.1` to extend only the existing MCP consumers. The `.1.0` evidence proves
 that consumer-only scope cannot satisfy the accepted claim. Expected records and responses must still remain
 solely in `semantic_introspection_contract.json`, and no second model is allowed; however, exact all-twenty proof
-now depends on the approved neutral transport and identical five-server policy correction recorded in the blocker
-card.
+now depends on the authorized neutral transport and identical five-server policy correction recorded in the
+blocker card. The repair is atomic: exact schema/policy bytes, independent validation, all generated bindings, and
+all five servers move together; consumer proof, promotion, and unchanged closeout then follow as separate commits.
 
 The planned `tools/check_mcp_six_runtime.sh` runs the neutral semantic checker, MCP materializer/validator, five
 binding generators, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, MCP ledger checker, and three existing primary
