@@ -104,13 +104,15 @@ Input, output, and optional distinct log sinks remain caller-owned and are never
 failure release every registered index; an I/O failure can write only the fixed `linkedspec_mcp_io_failure` code
 to the optional log and throws the same sanitized typed error. The production boundary imports only the `IOSink`
 type from `dart:io`; it gains no file, process, socket, HTTP, isolate, parser, compiler, runtime, trace, cache, or
-CLI authority. Verify the current surface from the repository root:
+CLI authority. Exact admission composes every contract role once through one ordered public consumer; Dart is now
+the third of five complete implementations and the third of six admitted runtimes, while shared rollout remains
+pending. Verify the current surface from the repository root:
 
 ```sh
 bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
 cd dart
 bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings
-bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart
+bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart test/mcp_server_dart_admission_test.dart
 ```
 
 ## Generated rule-label primitives

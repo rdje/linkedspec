@@ -51,13 +51,12 @@ The distinction matters:
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
 Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, protocol policy, neutral machine
 contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
-canonical CI. Perl and Rust have complete decoded/strict-stdio implementations and exact runtime admission. Dart
-now has the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, exact decoded
-discovery/list/call/cancel dispatch, and bounded strict JSON stdio; its formal admission remains pending. The
-ledger therefore deliberately remains 2/5 native implementations and 2/6 runtime admissions until Dart's exact
-twelve-role admission leaf lands.
+canonical CI. Perl, Rust, and Dart have complete decoded/strict-stdio implementations and exact runtime admission.
+Dart is the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, exact decoded
+discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twelve-role public consumer. The ledger
+is now 3/5 native implementations and 3/6 runtime admissions; shared rollout remains pending.
 
-## Accepted modern MCP transport (Perl/Rust admitted; Dart strict stdio implemented)
+## Accepted modern MCP transport (Perl/Rust/Dart admitted)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -3442,7 +3441,8 @@ The dependency order is:
 | `.10.9.4.0` | behavior-free Dart native owner/security/wire audit and ADR `0059` | complete from clean `7f44d2a1`; exact `.1-.4` split; no implementation or ledger movement |
 | `.10.9.4.1` | generated Dart binding/runtime, secure registry, and decoded server | implemented; exact focused/public proof; admission unchanged |
 | `.10.9.4.2` | strict Dart stdio, iterative lexical preflight, canonical emission, and lifecycle cleanup | implemented; exact focused/public proof; admission unchanged |
-| `.10.9.4.3-.10.9.4.4` | exact Dart admission and committed-owner closeout | pending in dependency order |
+| `.10.9.4.3` | exact Dart implementation/runtime admission | complete; one ordered twelve-role public consumer; 3/5 implementations, 3/6 runtimes, rollout pending, 58 mutations |
+| `.10.9.4.4` | committed-owner no-change Dart closeout | pending after the admission commit |
 | `.10.9.5` | native Julia MCP implementation and admission | pending after Dart parent closure |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3465,11 +3465,10 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl and Rust callers
-can use decoded in-process dispatch plus strict stdio; both have exact twelve-role MCP admission. Dart callers can
-also use decoded in-process dispatch plus strict caller-owned stdio, while its exact admission remains separately
-owned. The shared status/proof ledger therefore remains Perl + Rust at 2/5 implementations and 2/6 runtimes, with
-shared rollout pending and the normative transport digest unchanged.
+runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, and Dart
+callers can use decoded in-process dispatch plus strict stdio, and all three have exact twelve-role MCP admission.
+The shared status/proof ledger is therefore 3/5 implementations and 3/6 runtimes, with shared rollout pending and
+the normative transport digest unchanged.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3487,8 +3486,9 @@ No-change closeout `.10.9.3.4` reruns those committed owners rather than adding 
 remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases with 68 mutations; Perl remains 22 + 13 and Rust
 remains 15 + 3 + 4 + 1. Dart `.10.9.4.1` adds a 10-test generated/runtime/decoded proof and a byte-fresh
 82,875-byte binding without promoting the ledger. Strict Dart stdio `.10.9.4.2` adds five focused wire/lifecycle
-tests; expanded governance rejects 46 mutations. Parent `.10.9.3` remains closed and exact Dart admission
-`.10.9.4.3` follows only after the strict-stdio commit.
+tests. Exact admission `.10.9.4.3` adds one ordered twelve-role public consumer; the focused Dart MCP set is now
+16 tests and expanded governance rejects 58 mutations. Dart alone advances the ledger to 3/5 implementations and
+3/6 runtimes; parent `.10.9.3` remains closed and shared rollout remains pending.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 
@@ -3607,9 +3607,9 @@ EOF/failure cannot be restarted; construct another server for another protocol-s
 The generated private part is 82,875 bytes and verified after byte-identical Perl/Rust bindings. Focused proof
 covers all canonical decoded classifications, native payload identity, policy/cancellation/failure behavior,
 clone isolation, entropy/time/capacity/shutdown, all ten raw cases, framing boundaries, hostile I/O, caller
-ownership, and production authority fences. The focused MCP set is 15/15, all 352 Dart package tests pass, and
-analysis is clean. Only exact twelve-role admission `.3` may advance Dart to 3/5 implementations and 3/6
-runtimes. Until then the ledger remains 2/5 + 2/6 with rollout pending and 46 rejected governance mutations.
+ownership, and production authority fences. Exact admission adds one ordered twelve-role public consumer without
+changing production code. The focused MCP set is 16/16, all 353 Dart package tests pass, analysis is clean, and
+the ledger is 3/5 implementations + 3/6 runtimes with rollout pending and 58 rejected governance mutations.
 
 ### Using Rust decoded MCP dispatch
 

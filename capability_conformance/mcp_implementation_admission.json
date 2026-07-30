@@ -62,9 +62,14 @@
     {
       "backend": "dart",
       "server_name": "linkedspec-semantic-dart",
-      "status": "pending",
+      "status": "complete",
       "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
-      "source_paths": [],
+      "source_paths": [
+        "dart/lib/src/mcp/mcp_contract.dart",
+        "dart/lib/src/mcp/mcp_contract_runtime.dart",
+        "dart/lib/src/mcp/mcp_server.dart",
+        "dart/lib/src/mcp/mcp_wire.dart"
+      ],
       "runtime_admissions": ["dart"]
     },
     {
@@ -102,9 +107,9 @@
     {
       "backend": "dart",
       "runtime": "dart",
-      "status": "pending",
-      "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
-      "consumer_path": null
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.4.3",
+      "consumer_path": "dart/test/mcp_server_dart_admission_test.dart"
     },
     {
       "backend": "julia",
@@ -148,6 +153,7 @@
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
       "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
+      "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
       "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
       "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t"
     ]

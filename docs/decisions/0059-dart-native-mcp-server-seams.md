@@ -1,8 +1,8 @@
 # ADR 0059: Dart MCP uses a generated contract part and an in-process native server
 
 - Date: 2026-07-29
-- Status: accepted; behavior-free plan `.10.9.4.0`, generated binding/runtime and decoded server `.1`, and strict
-  stdio `.2` implemented; admission/closeout pending under `.10.9.4.3-.4`
+- Status: accepted; behavior-free plan `.10.9.4.0`, generated binding/runtime and decoded server `.1`, strict
+  stdio `.2`, and exact admission `.3` complete; no-change closeout `.4` pending
 - Tags: architecture, mcp, dart, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -161,6 +161,10 @@ transport, aggregator, or legacy protocol adapter.
 - `.10.9.4.2` realizes the private wire owner and public caller-owned `serveStdio` surface: focused MCP proof is
   15/15, the complete package is 352/352, analysis is clean, and governance rejects 46 premature-admission or
   ordering mutations while the formal ledger remains unchanged.
+- `.10.9.4.3` adds one ordered twelve-role consumer over the unchanged public production API and already-ordered
+  private focused proofs. Dart alone advances to 3/5 implementations and 3/6 runtimes, shared rollout remains
+  pending, focused MCP becomes 16/16, complete Dart becomes 353/353, and 58 independent mutations reject status,
+  source, consumer, role, completion, registration, and canonical-order drift.
 - Dart receives a genuine same-runtime server around native immutable indexes, not a Perl/Rust shim or subprocess.
 - Core Dart facilities satisfy entropy, time, base64url, UTF-8, JSON decoding, SHA-256, and stdio needs without a
   production package dependency; strictness and canonical ordering remain explicit LinkedSpec owners.
@@ -168,9 +172,9 @@ transport, aggregator, or legacy protocol adapter.
   depth, numeric, and identity ambiguities.
 - Asynchronous Dart stream mechanics do not broaden MCP into an SDK/network/actor architecture or add semantic
   concurrency.
-- Exact implementation/runtime admission remains separate from production behavior: the ledger intentionally
-  remains 2/5 implementations and 2/6 runtimes until `.10.9.4.3`, and shared rollout cannot promote before Julia
-  and both Lua runtimes pass.
+- Exact implementation/runtime admission remains separate from production behavior: `.10.9.4.3` changes no
+  server source or transport bytes while admitting Dart at 3/5 implementations and 3/6 runtimes. Shared rollout
+  cannot promote before Julia and both Lua runtimes pass.
 
 ## Links
 

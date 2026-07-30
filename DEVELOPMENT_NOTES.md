@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.3` — admission should consume public Dart behavior without exporting
+  private wire hooks): Eleven of the twelve admission roles are fully composed through public `McpServer` and
+  immutable `SemanticIndex` behavior. Deterministic cancellation between preparation and emission plus injected
+  native failure are intentionally private implementation seams. The single ordered consumer therefore requires
+  the exact unskipped focused proof for those two mechanics and dynamically exercises every public outcome,
+  preserving production encapsulation instead of manufacturing an admission-only API.
+
+  The implementation ledger remains separate from the normative transport contract. This leaf changes only the
+  Dart implementation/runtime status rows, its four exact production-source owners, one exact consumer, and the
+  ordered proof chain. Perl and Rust remain complete; Julia, Lua, PUC Lua, and LuaJIT remain pending; shared
+  rollout cannot advance. Static role declaration/invocation/order, exact one-test identity, completion, no skip,
+  source/consumer paths, tracked CI input, and canonical command order are all mutation-gated.
+
+  Focused proof passes Dart MCP 16/16, complete Dart 353/353, clean analysis/formatting, neutral 35/10/10/68,
+  byte-fresh 83,072-byte Perl, 82,886-byte Rust, and 82,875-byte Dart bindings, Rust 15 + 3 + 4 + 1, and the exact
+  3/5 implementation + 3/6 runtime ledger with rollout pending and 58 rejected mutations. No production source,
+  contract fixture/digest, or user-visible behavior changes. Canonical CI independently passes Rust semantic 1/1
+  in 80.15 seconds, Dart 1/1, Julia 416/416 in 28.1 seconds, containment/moved-root, CLI 66x2, RAM 53%, and Phase 0
+  1,031/1,031 in 644 seconds. Knowledge Map 747/6,034, mdBook, doctrines, memory, storage 1,725/391,014/28, path
+  14/5, syntax/JSON/whitespace, and exact 13,488-KiB/one-empty-run cleanup pass.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.2` — strict Dart stdio needs two boundaries, not trust in the stock
   codec): Dart's stock decoder is appropriate only after raw-token admission. The private wire therefore uses one
   iterative scanner to prove decoded key uniqueness, paired escapes/surrogates, JSON number grammar, request-id

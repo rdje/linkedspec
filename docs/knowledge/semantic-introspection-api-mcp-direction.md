@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP canonical, Perl/Rust at 2/5 + 2/6, Dart strict stdio implemented
+status: native six-runtime rollout admitted; MCP canonical, Perl/Rust/Dart at 3/5 + 3/6, rollout pending
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -33,6 +33,7 @@ evidence_update_2026_07_29_rust_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.3.4 re
 evidence_update_2026_07_29_dart_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.4.0 and ADR 0059 behavior-freeze one generated private-part binding/runtime, native in-process Dart server, secure registry, strict duplicate-safe canonical stdio, exact admission, and no-change closeout under .1-.4 without changing the 2/5 + 2/6 ledger."
 evidence_update_2026_07_29_dart_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.4.1 implements the Dart generated binding/runtime and secure decoded server while leaving strict stdio, formal admission, and the 2/5 + 2/6 ledger unchanged."
 evidence_update_2026_07_29_dart_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.4.2 implements bounded duplicate-safe canonical Dart stdio, cancellation through flush, fixed optional diagnostics, and EOF/I/O release while leaving formal admission and the 2/5 + 2/6 ledger unchanged."
+evidence_update_2026_07_29_dart_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.4.3 composes one ordered twelve-role Dart consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, leaves shared rollout pending, and rejects 58 admission mutations without changing production behavior or the transport digest."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -85,7 +86,8 @@ The neutral contract is executable through six fixture groups and 20 exact respo
 checker rejects 105 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
 admitted, and the recurring six-runtime proof is complete. The MCP machine contract plus Perl and Rust servers are
-parent-closed; Dart's generated/decoded/strict-stdio implementation is complete but deliberately unadmitted.
+parent-closed; Dart's generated/decoded/strict-stdio implementation is complete and exactly admitted, while its
+no-change parent closeout remains pending.
 Dart admission/closeout, Julia, Lua, recurring transport admission, and public no-drift remain dependency-ordered.
 
 Related facts: [[native-in-memory-backend-contract]],

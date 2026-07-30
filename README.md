@@ -1071,9 +1071,10 @@ content migration exists yet.
   cancellation dispatch, and sanitized authority boundary. Focused Dart binding/server proof passes 10 tests and
   strict stdio `.10.9.4.2` now adds bounded LF/CRLF/final-EOF framing, iterative duplicate-safe lexical preflight,
   canonical LF output, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-
-  owned streams. Focused Dart MCP proof passes 15 tests and the complete package passes 352; Perl/Rust bindings
-  stay byte-identical, while the intentionally unpromoted ledger remains 2/5 + 2/6 and now rejects 46 mutations.
-  Formal admission `.3` and no-change closeout `.4` remain ordered.
+  owned streams. Exact Dart admission `.10.9.4.3` now adds one ordered twelve-role public consumer without changing
+  those production owners, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves shared rollout
+  pending, and rejects 58 mutations. Focused Dart MCP proof passes 16 tests and the complete package passes 353;
+  all three generated bindings remain byte-identical. No-change closeout `.4` remains ordered.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1514,9 +1515,10 @@ content migration exists yet.
   `0059` freeze the native generated/server/wire/security seams and `.1-.4` order. Dart `.10.9.4.1` now implements
   the 82,875-byte binding, frozen runtime, secure registry, decoded dispatch, and authority fences. Strict stdio
   `.10.9.4.2` adds bounded duplicate-safe framing, canonical LF emission, cancellation through flush, optional
-  fixed diagnostics, and EOF/I/O cleanup. The combined MCP proof is 15 focused tests plus 352 complete package
-  tests; the ledger remains 2/5 + 2/6 with 46 mutations until admission `.3` lands.
-- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 352
+  fixed diagnostics, and EOF/I/O cleanup. Exact admission `.10.9.4.3` composes one ordered twelve-role public
+  consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves pending shared rollout, and
+  rejects 58 mutations. The combined MCP proof is 16 focused tests plus 353 complete package tests.
+- Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
   standalone 18-owner/47-package offline storage oracle.

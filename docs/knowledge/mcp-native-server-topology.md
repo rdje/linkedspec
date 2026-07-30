@@ -12,7 +12,7 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract canonical; Perl/Rust admitted at 2/5 + 2/6; Dart strict stdio implemented
+status: exact neutral contract canonical; Perl/Rust/Dart admitted at 3/5 + 3/6; rollout pending
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
@@ -24,6 +24,7 @@ evidence_update_2026_07_29_rust_closeout: "Rust .10.9.3.4 recomposes every commi
 evidence_update_2026_07_29_dart_plan: "Dart .10.9.4.0 and ADR 0059 freeze a generated private-part binding/runtime, same-process native server, secure handles/authorization/expiry, strict duplicate-safe canonical stdio, exact admission, and no-change closeout under .1-.4 without behavior or 2/5 + 2/6 ledger movement."
 evidence_update_2026_07_29_dart_decoded: "Dart .10.9.4.1 implements its generated 82,875-byte binding, frozen runtime, native secure registry, lowering-only policy, and decoded server without stdio or formal ledger movement; .2-.4 remain ordered."
 evidence_update_2026_07_29_dart_stdio: "Dart .10.9.4.2 implements its private strict wire and public caller-owned serveStdio surface without formal ledger movement; admission .3 and closeout .4 remain ordered."
+evidence_update_2026_07_29_dart_admission: "Dart .10.9.4.3 admits its unchanged four production owners through one ordered twelve-role consumer, advancing only Dart to 3/5 implementations and 3/6 runtime admissions while rollout remains pending and 58 mutations reject drift."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 

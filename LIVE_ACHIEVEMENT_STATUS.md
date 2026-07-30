@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Dart native MCP implementation and runtime admitted
+
+`FUTURE-PARITY-BACKLOG.10.9.4.3` adds one ordered twelve-role public Dart consumer over the committed MCP server
+owners. It composes the frozen contract inventory, static/native dispatch, all raw/lifecycle/handle/policy
+outcomes, cancellation, shutdown/I/O cleanup, hostile-output privacy, and production authority fences. Required
+focused proof retains the otherwise private pre-emission cancellation and injected-failure seams, so production
+code and API remain unchanged.
+
+Only Dart's implementation and runtime rows advance. The formal ledger is now Perl + Rust + Dart at 3/5
+implementations and 3/6 runtimes, with shared rollout pending and 58 rejected mutations. Focused proof passes Dart
+MCP 16/16, the complete Dart package 353/353 with clean analysis and formatting, neutral MCP 35/10/10/68,
+byte-fresh Perl/Rust/Dart bindings, and Rust MCP 15 + 3 + 4 + 1. Canonical CI passes Rust semantic admission 1/1
+in 80.15 seconds, Dart 1/1, Julia 416/416 in 28.1 seconds, containment/moved-root, CLI 66x2, RAM 53%, and Phase 0
+1,031/1,031 in 644 seconds. Knowledge Map 747/6,034, mdBook, six doctrines, memory, storage 1,725/391,014/28,
+path 14/5, and exact 13,488-KiB/one-empty-run cleanup pass. The slice is signoff-complete for its single commit;
+no push occurs before cadence 300.
+
 ## 2026-07-29 — Dart native MCP strict stdio implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.4.2` adds public `McpServer.serveStdio` and private `mcp_wire.dart` without changing

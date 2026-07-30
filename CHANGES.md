@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.3 — admit the Dart MCP implementation and runtime
+
+Added one ordered twelve-role Dart admission consumer over the public `McpServer` and `SemanticIndex` surfaces.
+It executes the frozen contract inventory, static and native semantic dispatch, every raw and lifecycle outcome,
+all four opaque-handle states, lowering-only policy, cancellation, shutdown/I/O cleanup, hostile-output privacy,
+and production authority fences exactly once. The otherwise unobservable pre-emission cancellation and injected
+native failure remain in the required ordered focused proof, so admission adds no production API or test seam.
+
+The separate implementation/admission ledger advances only Dart: exact state is now Perl, Rust, and Dart at 3/5
+implementations + 3/6 runtimes, with Julia, Lua, PUC Lua, and LuaJIT pending and shared rollout still pending.
+The checker locks the Dart sources, consumer, role order/completion, focused proof, canonical registration/order,
+and unchanged rollout, and rejects 58 mutations. The neutral transport contract, its digest and fixtures, all
+production modules, generated bindings, executable/CLI surface, source bootstrap, semantic ownership/cache,
+network/SDK transport, aggregator, and legacy adapter remain unchanged.
+
+Focused proof passes Dart MCP 16/16, the complete Dart package 353/353 with clean analysis and formatting, neutral
+MCP 35 canonical / 10 raw / 10 lifecycle / 68 mutations, byte-fresh Perl/Rust/Dart bindings, Rust MCP
+15 + 3 + 4 + 1, and ledger 3/5 + 3/6 pending/58 mutations. Canonical CI independently passes Rust semantic
+admission 1/1 in 80.15 seconds, Dart 1/1, Julia 416/416 in 28.1 seconds, containment/moved-root, CLI 66x2, RAM
+53%, and Phase 0 1,031/1,031 in 644 seconds. Knowledge Map 747/6,034, mdBook, all six doctrines, memory, storage
+1,725/391,014/28, path 14/5, syntax/JSON/whitespace, and exact 13,488-KiB rendered-book plus one-empty-run cleanup
+pass. No push occurs before cadence 300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.2 — implement Dart MCP strict stdio
 
 Added public asynchronous `McpServer.serveStdio` over a caller-owned `Stream<List<int>>`, borrowed output

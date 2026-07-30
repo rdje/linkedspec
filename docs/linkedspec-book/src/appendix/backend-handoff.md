@@ -244,12 +244,13 @@ through flush, sanitized logging, and EOF/I/O cleanup. Exact Perl admission `.10
 consumer and a separate status/proof ledger at 1/5 implementations + 1/6 runtimes, shared rollout pending, and 28
 rejected mutations; focused and canonical proof are green. No-change Perl closeout `.10.9.2.4` is complete from
 clean `28f84826`; focused and canonical committed-owner recomposition close parent `.10.9.2`, and remaining
-native/runtime admission `.10.9.4-.7` follows after the clean Rust boundary. Dart behavior-free audit
+native/runtime admission `.10.9.5-.7` follows after the clean Dart boundary. Dart behavior-free audit
 `.10.9.4.0` and ADR `0059` now freeze its exact generated/server/wire/security/admission seams without changing
 the 2/5 + 2/6 ledger. Dart `.10.9.4.1` implements its generated binding/runtime and secure decoded server;
 `.10.9.4.2` implements bounded duplicate-safe canonical stdio, cancellation through flush, fixed optional
-diagnostics, and EOF/I/O release over caller-owned streams. Neither promotes the ledger; exact admission `.3`
-remains ordered.
+diagnostics, and EOF/I/O release over caller-owned streams. Exact admission `.10.9.4.3` now composes one ordered
+twelve-role public consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, keeps rollout pending,
+and rejects 58 mutations; no-change closeout `.4` remains ordered.
 
 Rust preflight `.10.9.3.0` and ADR `0058` made the handoff exact. Public in-process
 `linkedspec-runtime::McpServer` retains caller-created `Arc<SemanticIndex>` values and
@@ -266,8 +267,9 @@ recomposes the committed owners under focused and canonical proof and closes par
 frozen runtime, same-process server around caller-owned `SemanticIndex`, core secure entropy/monotonic expiry,
 digest authorization, lowering-only policy, decoded dispatch, and authority fences. `.10.9.4.2` now implements
 strict duplicate-safe/canonical stdio, cancellation through flush, fixed optional diagnostics, and EOF/I/O release
-over caller-owned streams. Exact admission and no-change closeout remain `.3-.4`. The formal ledger stays
-2/5 + 2/6 and rejects 46 mutations until admission.
+over caller-owned streams. Exact admission `.10.9.4.3` composes one ordered twelve-role public consumer and moves
+the formal ledger to 3/5 implementations + 3/6 runtimes with rollout pending and 58 rejected mutations.
+No-change closeout `.10.9.4.4` remains next.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

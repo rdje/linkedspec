@@ -67,9 +67,14 @@ IMPLEMENTATIONS = [
     {
         "backend": "dart",
         "server_name": "linkedspec-semantic-dart",
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
-        "source_paths": [],
+        "source_paths": [
+            "dart/lib/src/mcp/mcp_contract.dart",
+            "dart/lib/src/mcp/mcp_contract_runtime.dart",
+            "dart/lib/src/mcp/mcp_server.dart",
+            "dart/lib/src/mcp/mcp_wire.dart",
+        ],
         "runtime_admissions": ["dart"],
     },
     {
@@ -108,9 +113,9 @@ RUNTIME_ADMISSIONS = [
     {
         "backend": "dart",
         "runtime": "dart",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.4",
-        "consumer_path": None,
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.10.9.4.3",
+        "consumer_path": "dart/test/mcp_server_dart_admission_test.dart",
     },
     {
         "backend": "julia",
@@ -147,6 +152,7 @@ ORDERED_COMMANDS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
     "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
+    "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -209,6 +215,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file dart/test/mcp_contract_dart_binding_test.dart",
         "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart",
         "require_tracked_file dart/test/mcp_server_dart_stdio_test.dart",
+        "require_tracked_file dart/test/mcp_server_dart_admission_test.dart",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -257,6 +264,29 @@ def validate_rust_consumer_source(source: str) -> None:
         or source.count("assert_eq!(roles_seen, ROLE_ORDER);") != 1
     ):
         fail("Rust admission completion/order assertion drifted")
+
+
+def validate_dart_consumer_source(source: str) -> None:
+    declaration = re.search(
+        r"const _roleOrder = <String>\[\n(.*?)\n\];", source, re.DOTALL
+    )
+    if declaration is None:
+        fail("Dart admission role declaration is missing")
+    declared = re.findall(r"'([a-z_]+)'", declaration.group(1))
+    if declared != ROLES:
+        fail("Dart admission role declaration/order drifted")
+    calls = re.findall(
+        r"await _admissionRole\(\s*rolesSeen,\s*'([a-z_]+)'", source, re.DOTALL
+    )
+    if calls != ROLES:
+        fail("Dart admission roles are not invoked exactly once in order")
+    test_name = "test('exact Dart MCP admission executes every role once', () async {"
+    if source.count(test_name) != 1:
+        fail("Dart admission does not have one exact consumer test")
+    if source.count("expect(rolesSeen, _roleOrder);") != 1 or re.search(
+        r"\n\s*},\s*skip\s*:", source
+    ):
+        fail("Dart admission completion/order assertion drifted")
 
 
 def validate_authority_sources() -> None:
@@ -407,10 +437,10 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("five-implementation status/identity topology drifted")
     if ledger["runtime_admissions"] != RUNTIME_ADMISSIONS:
         fail("six-runtime admission status/topology drifted")
-    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 2:
-        fail("implementation completion count is not exactly two")
-    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 2:
-        fail("runtime admission completion count is not exactly two")
+    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 3:
+        fail("implementation completion count is not exactly three")
+    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 3:
+        fail("runtime admission completion count is not exactly three")
 
     rollout = ledger["rollout"]
     exact_fields(
@@ -475,6 +505,8 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
                 validate_perl_consumer_source(source)
             elif row["runtime"] == "rust":
                 validate_rust_consumer_source(source)
+            elif row["runtime"] == "dart":
+                validate_dart_consumer_source(source)
             else:
                 fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
@@ -501,17 +533,21 @@ LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("server identity", lambda value: value["implementations"][0].__setitem__("server_name", "wrong")),
     ("Perl implementation regression", lambda value: value["implementations"][0].__setitem__("status", "pending")),
     ("Rust implementation regression", lambda value: value["implementations"][1].__setitem__("status", "pending")),
-    ("premature Dart implementation", lambda value: value["implementations"][2].__setitem__("status", "complete")),
+    ("Dart implementation regression", lambda value: value["implementations"][2].__setitem__("status", "pending")),
+    ("premature Julia implementation", lambda value: value["implementations"][3].__setitem__("status", "complete")),
     ("implementation source", lambda value: value["implementations"][0]["source_paths"].pop()),
     ("Rust implementation source", lambda value: value["implementations"][1]["source_paths"].pop()),
+    ("Dart implementation source", lambda value: value["implementations"][2]["source_paths"].pop()),
     ("runtime omission", lambda value: value["runtime_admissions"].pop()),
     ("runtime reorder", lambda value: value["runtime_admissions"].reverse()),
     ("Perl admission regression", lambda value: value["runtime_admissions"][0].__setitem__("status", "pending")),
     ("Rust admission regression", lambda value: value["runtime_admissions"][1].__setitem__("status", "pending")),
-    ("premature Dart admission", lambda value: value["runtime_admissions"][2].__setitem__("status", "complete")),
+    ("Dart admission regression", lambda value: value["runtime_admissions"][2].__setitem__("status", "pending")),
+    ("premature Julia admission", lambda value: value["runtime_admissions"][3].__setitem__("status", "complete")),
     ("Lua ABI ownership", lambda value: value["runtime_admissions"][5].__setitem__("runtime", "lua54")),
     ("Perl consumer path", lambda value: value["runtime_admissions"][0].__setitem__("consumer_path", "wrong")),
     ("Rust consumer path", lambda value: value["runtime_admissions"][1].__setitem__("consumer_path", "wrong")),
+    ("Dart consumer path", lambda value: value["runtime_admissions"][2].__setitem__("consumer_path", "wrong")),
     ("premature rollout", lambda value: value["rollout"].__setitem__("status", "complete")),
     ("rollout requirement", lambda value: value["rollout"]["requires_runtime_admissions"].pop()),
     ("coordinated premature promotion", coordinated_promotion),
@@ -545,19 +581,32 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 1,
             ),
         ),
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
+        ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
         (
             "CI checker before Rust admission",
             ci_source.replace(ORDERED_COMMANDS[9], "__RUST_ADMISSION__")
-            .replace(ORDERED_COMMANDS[11], ORDERED_COMMANDS[9])
-            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[11]),
+            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[9])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[12]),
         ),
         (
             "CI Rust admission before strict stdio proof",
             ci_source.replace(ORDERED_COMMANDS[8], "__RUST_STDIO__")
             .replace(ORDERED_COMMANDS[9], ORDERED_COMMANDS[8])
             .replace("__RUST_STDIO__", ORDERED_COMMANDS[9]),
+        ),
+        (
+            "CI Dart admission before focused proof",
+            ci_source.replace(ORDERED_COMMANDS[10], "__DART_FOCUSED__")
+            .replace(ORDERED_COMMANDS[11], ORDERED_COMMANDS[10])
+            .replace("__DART_FOCUSED__", ORDERED_COMMANDS[11]),
+        ),
+        (
+            "CI checker before Dart admission",
+            ci_source.replace(ORDERED_COMMANDS[11], "__DART_ADMISSION__")
+            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[11])
+            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[12]),
         ),
         (
             "CI ledger registration omission",
@@ -601,6 +650,13 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 "",
             ),
         ),
+        (
+            "CI Dart admission registration omission",
+            ci_source.replace(
+                "require_tracked_file dart/test/mcp_server_dart_admission_test.dart\n",
+                "",
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
@@ -612,6 +668,7 @@ def run_mutations(ledger: dict[str, Any]) -> int:
 
     perl_source = (ROOT / RUNTIME_ADMISSIONS[0]["consumer_path"]).read_text(encoding="utf-8")
     rust_source = (ROOT / RUNTIME_ADMISSIONS[1]["consumer_path"]).read_text(encoding="utf-8")
+    dart_source = (ROOT / RUNTIME_ADMISSIONS[2]["consumer_path"]).read_text(encoding="utf-8")
     consumer_mutations = [
         ("Perl role omission", perl_source.replace(" contract_inventory\n", "", 1), validate_perl_consumer_source),
         (
@@ -642,6 +699,34 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             ),
             validate_rust_consumer_source,
         ),
+        (
+            "Dart role omission",
+            dart_source.replace("  'contract_inventory',\n", "", 1),
+            validate_dart_consumer_source,
+        ),
+        (
+            "Dart role invocation omission",
+            dart_source.replace(
+                "await _admissionRole(rolesSeen, 'contract_inventory', () async {",
+                "await _admissionRole(rolesSeen, 'wrong_role', () async {",
+                1,
+            ),
+            validate_dart_consumer_source,
+        ),
+        (
+            "Dart completion omission",
+            dart_source.replace("    expect(rolesSeen, _roleOrder);\n", "", 1),
+            validate_dart_consumer_source,
+        ),
+        (
+            "Dart consumer skipped",
+            dart_source.replace(
+                "    expect(rolesSeen, _roleOrder);\n  });",
+                "    expect(rolesSeen, _roleOrder);\n  }, skip: true);",
+                1,
+            ),
+            validate_dart_consumer_source,
+        ),
     ]
     for name, mutant, validator in consumer_mutations:
         try:
@@ -663,7 +748,7 @@ def main() -> int:
         return 1
     print(
         "MCP implementation/admission: "
-        f"2/5 implementations, 2/6 runtimes, rollout pending, {rejected} rejected mutations"
+        f"3/5 implementations, 3/6 runtimes, rollout pending, {rejected} rejected mutations"
     )
     return 0
 
