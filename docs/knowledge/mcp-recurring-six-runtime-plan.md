@@ -13,9 +13,9 @@ answers:
   - what may promote thin MCP transport
   - does recurring MCP proof add a primary CLI surface
 date: 2026-07-29
-status: accepted signoff-complete behavior-free plan; implementation and promotion pending
+status: accepted direction; shared three-case transport blocker verified; director decision pending
 tags: [mcp, semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral semantic contract, all six native/MCP consumers, the implementation ledger/checker, canonical CI, the semantic recurring precedent, and project-data routing. Current semantic consumers prove all 20 native cases; current MCP consumers prove capabilities plus one representative direct/MCP query. Leaf .1 must extend those same consumers to all 20 cases before coordinated rollout promotion. Planning signoff passes semantic 6/20/105, MCP 35/10/10/68, current six-runtime admission, repository containment/moved-root proof, CLI 66x2, Phase 0 1,031/1,031, and the complete dual-ABI Lua gate without behavior or status movement."
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral semantic contract, all six native/MCP consumers, the implementation ledger/checker, canonical CI, the semantic recurring precedent, and project-data routing. Current semantic consumers prove all 20 native cases; current MCP consumers prove capabilities plus one representative direct/MCP query. Real Perl probe .10.9.7.1.0 then proves capabilities plus 16/19 query identities and root-causes three shared MCP blockers: missing effects/return_shape output facts, const query-contract input, and default-policy preemption of the native source-ceiling diagnostic. Exploratory code is removed; rollout remains pending; recommended all-twenty continuation requires director-approved contract and five-server repair."
 last_verified: 2026-07-29
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -34,11 +34,17 @@ twenty ordered neutral query cases. The six MCP admissions cover the complete tr
 twelve-role inventory but directly compare only capabilities plus one representative graph query to the native
 API. Merely running them together cannot prove the stronger all-twenty direct/MCP identity claim.
 
-ADR `0062` therefore requires `.10.9.7.1` to extend the existing MCP consumers, not add another semantic model.
-Their capabilities/query identity roles will build the already-governed native snapshots, register those indexes,
-send the exact neutral requests through MCP, compare canonical tool text and structured content with direct native
-answers, and verify the existing neutral response digests for all twenty cases. Expected records and responses
-remain solely in `semantic_introspection_contract.json`; production MCP and semantic owners do not change.
+Implementation audit `.10.9.7.1.0` proves a second boundary: a real Perl all-twenty spend preserves capabilities
+plus sixteen of nineteen query identities, while three valid native responses are preempted by shared MCP
+schema/default-policy behavior. See [[mcp-all-twenty-transport-blocker]]. Exploratory code is removed and rollout
+remains pending. The recommended exact all-twenty continuation now requires director-approved contract and
+five-server policy repair; keeping current bytes would require explicitly weakening the claim.
+
+ADR `0062` originally required `.10.9.7.1` to extend only the existing MCP consumers. The `.1.0` evidence proves
+that consumer-only scope cannot satisfy the accepted claim. Expected records and responses must still remain
+solely in `semantic_introspection_contract.json`, and no second model is allowed; however, exact all-twenty proof
+now depends on the approved neutral transport and identical five-server policy correction recorded in the blocker
+card.
 
 The planned `tools/check_mcp_six_runtime.sh` runs the neutral semantic checker, MCP materializer/validator, five
 binding generators, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, MCP ledger checker, and three existing primary

@@ -40,6 +40,15 @@ Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-cha
 committed owners unchanged, passes Phase 0 1,031/1,031 in 652 seconds plus the same dual-ABI gate, and closes
 parent `.10.9.6`. Shared recurring rollout remains pending under `.10.9.7`.
 
+Recurring implementation audit `.10.9.7.1.0` has now proved a shared all-twenty MCP blocker without retaining
+exploratory code. Capabilities plus 16/19 query responses cross the public MCP API unchanged; the calls response
+is outside the current MCP fact-key schema, the unsupported-contract response is preempted by constant input
+validation, and the source-ceiling response is preempted by default-policy denial. The same boundary applies to
+all five implementations. Formal status remains 5/5 implementations + 6/6 runtimes with rollout pending/114.
+The recommended next step requires director approval to repair the neutral contract and identical five-server
+default-policy seam before exact all-twenty recurring proof; weakening the claim to 17 identities plus three
+transport outcomes is recorded but not recommended.
+
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
 raw `query_neutral` match all 19 static response digests plus 26 malformed-request boundaries. Seven committed

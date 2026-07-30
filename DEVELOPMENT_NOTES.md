@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.7.1.0` — native semantic errors must remain reachable through a thin
+  transport): Extending a consumer is insufficient when the public transport schema/policy rejects valid native
+  requests or responses first. The Perl probe established the exact limit: 17/20 identities work unchanged, while
+  three fail at distinct shared seams.
+
+  The calls response is valid under the semantic model but fails MCP output validation because `recordFacts`
+  omits `effects` and `return_shape`. The unsupported-contract request is a governed native error case but cannot
+  reach native code because MCP declares the supported contract as `const`. A request above the index's own source
+  ceiling should yield the native portable ceiling diagnostic, but default native-derived policy currently turns
+  it into a transport policy denial; only an explicitly supplied deployment overlay should own that pre-dispatch
+  distinction. These are contract/runtime issues shared by five implementations, not a Perl test anomaly.
+
+  The correct architecture keeps the native index as response authority and does not invent test adapters or a
+  second oracle. Recommended repair expands the MCP schema to the complete governed fact vocabulary, accepts a
+  bounded contract string so native version diagnostics are reachable, and distinguishes default native limits
+  from explicit deployment overlays identically in all five servers. That changes transport artifacts/digests and
+  production behavior, so it needs director approval rather than being smuggled into the test-only leaf.
+
 - 2026-07-29 (`README-STABILITY-POLICY.2` — closeout proves composition, not another README rewrite): The
   implementation commit `ca846e7a` is the complete policy/content/enforcement boundary. Closeout changes no
   landing-page byte, cap, policy rule, checker branch, capability owner, or public example. Git showed only the

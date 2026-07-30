@@ -5,19 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `ca846e7a` — `README-STABILITY-POLICY.1 - adopt bounded README doctrine` (95/300; no push);
+- latest_commit: `0540a72f` — `README-STABILITY-POLICY.2 - close bounded README adoption` (96/300; no push);
   commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `README-STABILITY-POLICY.1`; bounded README/policy/checker/seventh doctrine committed.
-- active_leaf: `README-STABILITY-POLICY.2` — unchanged closeout and parent closure are signoff-complete from clean
-  `ca846e7a`; closeout commit/brief-clear/clean remain.
-- active_scope: recompose committed README policy, landing page, canonical destinations, enforcement, public
-  owners, mdBook, and continuity unchanged; close parent and hand back to recurring MCP `.10.9.7.1`.
-- active_progress: README remains 105/5,072 within 128/6,144; quick start exact; 27/27 local links; all seven
-  doctrines/eight owners/KM/memory/book pass. Canonical closeout is green through Phase 0 1,031/1,031 in 663s.
-- active_exclusions: no parser/runtime/backend/MCP/contract/fixture/test/CLI behavior, inferred license terms,
-  external-template mutation, cap expansion, or content outside the audited route map.
-- next_after_clean_commit: resume recurring MCP driver/promotion `FUTURE-PARITY-BACKLOG.10.9.7.1` from the clean
-  closed-adoption boundary; no push before 300.
+- latest_completed_leaf: `README-STABILITY-POLICY.2`; bounded README adoption parent closed at `0540a72f`.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.0` — shared all-twenty MCP blocker audit is signoff-complete from
+  clean `0540a72f`; this commit boundary makes the finding durable, and the director choice remains afterward.
+- active_scope: behavior-free real Perl all-twenty probe, shared schema/default-policy root cause, exact code
+  restoration, durable blocker/choices, and safe handoff before `.10.9.7.1.1`.
+- active_progress: capabilities + 16/19 query identities pass; calls fails on missing `effects`/`return_shape`,
+  source-ceiling is policy-preempted, unsupported-contract is const-schema-preempted; exploratory code is absent.
+- active_exclusions: no committed server/contract/binding/consumer/fixture/ledger/rollout/semantic/CLI behavior,
+  test-only bypass, weakened claim by assumption, aggregator, legacy adapter, or push.
+- next_after_clean_commit: wait for director choice; recommended `.10.9.7.1.1` repairs the neutral MCP contract and
+  identical five-server policy seam before exact all-twenty proof; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -43,7 +43,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read;
   director-provided README policy template read fully and read-only.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 95/300 after `ca846e7a`; no push.
+- push_policy: hard lock at 300 new local commits; counter 96/300 after `0540a72f`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
@@ -51,5 +51,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - canonical_state: prior MCP `.0` remains semantic 6/20/105, MCP 35/10/10/68, ledger 5/5 + 6/6 pending/114.
   README closeout E4 passes 7 doctrines, Rust semantic 82.85s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
   containment/moved-root, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663s.
-- blockers: none. next: finalize/stage `.2`, rerun focused post-edit gates, commit/clear/clean, then activate MCP
-  `.10.9.7.1`; no push.
+- blockers: director decision required because recommended all-twenty correctness changes neutral transport bytes,
+  five generated bindings, and identical default-policy behavior in five servers beyond ADR `0062`'s original
+  test-only scope. Alternative weaker 17-identity/three-boundary claim is recorded but not recommended.

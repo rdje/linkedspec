@@ -14671,9 +14671,11 @@ before implementation.
       Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.0 - plan recurring MCP composition`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1`
-      Status: `pending`
+      Status: `active` (2026-07-29; parent; verified transport contradiction `.1.0` requires director decision
+        before implementation/promotion `.1.1`)
       Goal: Implement and admit the recurring six-runtime MCP composition and promote only thin transport.
       Depends on: `.10.9.7.0`
+      Children: `.10.9.7.1.0`, `.10.9.7.1.1`
       Acceptance: Strengthen each existing MCP consumer's capabilities/query identity roles to compare the exact
         twenty neutral semantic requests, direct-native canonical bytes, MCP text/structured content, and existing
         neutral response digests without copying response bodies or changing production; add the planned
@@ -14683,6 +14685,97 @@ before implementation.
         authority boundary; advance only `thin_mcp_transport` to complete with owner `.10.9.7.1` in the MCP and
         neutral semantic ledgers; and pass focused, canonical, storage, documentation, Knowledge Map, mdBook,
         mutation, and clean-boundary signoff.
+
+      - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.0`
+        Status: `done` (2026-07-29; behavior-free contradiction audit signoff-complete from clean bounded-README
+          closeout commit `0540a72f`; durable finding checkpoint precedes the director decision)
+        Goal: Prove and durably route any contract/runtime contradiction that prevents honest all-twenty MCP
+          identity before implementation claims or rollout promotion.
+        Depends on: `.10.9.7.0`
+        Acceptance: Attempt the smallest real all-twenty consumer spend in one admitted runtime; distinguish test
+          construction errors from shared schema, policy, transport, or production defects; remove exploratory
+          code; record exact reproducible evidence and affected topology; freeze safe resolution choices without
+          changing contract bytes, production behavior, consumer proof, ledgers, or rollout; commit/clear/clean;
+          obtain director judgment before expanding `.1.1` beyond ADR `0062`'s no-production-change boundary.
+
+        #### Acceptance Checklist
+
+        - [x] **CLEAN BASE / TASK FIRST** — Proved clean `0540a72f`, zero-byte brief, absent generated residue,
+          and activated `.10.9.7.1` in this task tree before exploratory consumer work.
+        - [x] **SMALLEST REAL PROBE** — Extended only the Perl consumer in-memory to construct/register the six
+          already-governed native snapshots and dispatch the exact twenty neutral requests; 16/19 query cases plus
+          capabilities preserved direct/MCP/digest identity before three shared-boundary failures.
+        - [x] **EXACT ROOT CAUSE** — Proved `calls_symbols_and_shapes` is rejected because MCP `recordFacts` omits
+          valid `effects`/`return_shape`; `unsupported_contract` is rejected because MCP request schema uses a
+          constant query contract; `source_ceiling_forbidden` is pre-denied because default MCP policy applies the
+          native ceiling before the native query can return its portable diagnostic.
+        - [x] **SHARED TOPOLOGY / NO FALSE LOCAL FIX** — Confirmed all five generated bindings consume the same
+          schema and all five servers implement the same policy boundary; policy options cannot elevate an index
+          ceiling or bypass request-schema validation. A test-only workaround would cease proving the public MCP
+          API and is rejected.
+        - [x] **EXPLORATORY CODE REMOVED** — Restored `t/mcp_server_perl_admission.t` byte-for-byte to committed
+          `0540a72f`; syntax passes and the implementation diff contains no consumer/server/contract/fixture/
+          ledger/status/rollout behavior change.
+        - [x] **DURABLE DECISION BOUNDARY** — Record the finding in ADR `0062`, Knowledge Map, roadmaps, mdBook,
+          live/continuity owners, and this task; recommend repairing the neutral MCP schema plus identical default-
+          policy semantics across five servers before resuming all-twenty proof; preserve rollout pending and ask
+          the director before authorizing that material scope expansion.
+
+        Verification: **PASS 2026-07-29.** Perl exploratory proof passed capabilities plus 16 of 19 query cases
+          and reproduced exact failures for `calls_symbols_and_shapes` (sanitized internal error),
+          `source_ceiling_forbidden` (MCP policy denial), and `unsupported_contract` (invalid params). Independent
+          neutral evaluation found the all-twenty record-fact union and proved only `effects` and `return_shape`
+          are missing from MCP `recordFacts`; the independent MCP validator locates the calls failure at
+          `semanticQueryResponse.records[0].facts.<propertyName>`. Direct named-schema probes prove the unsupported
+          request fails with the v0 contract and passes after replacing only that value with v1. Source inspection
+          proves `_request_within_policy` runs before native query dispatch. Exploratory code is fully absent;
+          Perl syntax and the unchanged 13-test admission baseline pass. The unchanged neutral semantic contract
+          remains 6 groups / 20 responses / 105 mutations; MCP remains 35/10/10/68; implementation admission
+          remains 5/5 implementations + 6/6 runtimes, rollout pending, 114 mutations. Knowledge Map 757/6,137,
+          mdBook 13,720 KiB/79 files, memory architecture, all seven doctrines, whitespace, behavior-free scope,
+          and exact rendered-book/one-empty-managed-run cleanup pass.
+
+        Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker`
+
+      - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1`
+        Status: `pending` (blocked on director choice recorded by `.1.0`)
+        Goal: Resolve the approved transport boundary, implement exact all-twenty six-runtime identity, compose
+          the routed gate, and promote only thin transport.
+        Depends on: `.10.9.7.1.0`
+        Acceptance: Apply only the director-approved resolution. Recommended path: admit all valid semantic facts
+          in the neutral MCP schema, allow a bounded string query-contract input so the native portable unsupported-
+          contract response is reachable, let default native ceilings report native portable errors while keeping
+          explicit deployment overlays pre-dispatch, regenerate/re-admit all five bindings and implementations,
+          then complete the originally frozen consumer/driver/governance/promotion proof below. Alternative path:
+          retain contract bytes and explicitly weaken the rollout claim to seventeen direct/MCP identities plus
+          three distinct transport-boundary outcomes; this is not recommended because it abandons all-twenty
+          identity.
+
+        #### Acceptance Checklist
+
+        - [ ] **CLEAN COMMITTED BASE / OWNERSHIP** — Prove bounded-README closeout commit `0540a72f`, zero-byte
+          brief, clean worktree, and absent rendered-book/managed-run residue; activate `.10.9.7.1` before any
+          consumer, driver, checker, ledger, canonical, documentation, or continuity change.
+        - [ ] **ALL-TWENTY CONSUMER IDENTITY** — Extend the existing `native_capabilities_identity` and
+          `native_query_identity` roles in the Perl, Rust, Dart, Julia, and shared Lua admission consumers so all
+          six runtime invocations compare the exact twenty neutral requests, direct-native canonical bytes, MCP
+          text/structured content, and governed response digests without copying expected bodies or changing a
+          production semantic/MCP owner.
+        - [ ] **ROUTED SIX-RUNTIME COMPOSITION** — Add executable `tools/check_mcp_six_runtime.sh` with the exact
+          ADR-0062 contract/binding/consumer/ledger/primary order, repository-derived managed scratch, disposable
+          Rust/Julia child roots, established Dart/Lua/Python wrappers, fail-fast propagation, and exact cleanup.
+        - [ ] **ATOMIC PROMOTION / OMISSION GOVERNANCE** — Add the recurring topology and independently rejected
+          mutations; promote only `thin_mcp_transport` in both neutral ledgers with owner `.10.9.7.1`; register the
+          exact canonical opt-in/syntax and tracked/storage/documentation owners; reject partial owner/status,
+          runtime/order/command/skip/representative-only/digest/authority/primary-surface drift.
+        - [ ] **SECURITY / TOPOLOGY / NO-DRIFT** — Preserve one contract, five native implementations, six runtime
+          admissions, shared Lua source identity, caller-created index authority, exact transport digest and all
+          lifecycle/security/privacy boundaries; add no aggregator, legacy adapter, server filesystem/process/
+          network/compile/execute/cache authority, package/SDK dependency, or primary CLI behavior.
+        - [ ] **LOCKSTEP / SIGNOFF / HANDOFF** — Synchronize task/index, both roadmaps, ADR/Knowledge Map, mdBook,
+          changes/notes/live/memory, pass focused consumers/contracts/mutations/storage/primary proof plus canonical
+          opt-in CI, inspect the complete diff, clean exact artifacts, commit/clear/prove clean, then activate
+          unchanged closeout `.10.9.7.2` without pushing before cadence 300.
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.7.2`
       Status: `pending`
@@ -18397,12 +18490,19 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None.
+- `FUTURE-PARITY-BACKLOG.10.9.7.1.1` requires director authorization because the smallest real all-twenty
+  consumer probe disproved ADR `0062`'s consumer-only boundary. The shared MCP output schema omits valid
+  `effects`/`return_shape` facts, its request schema rejects the governed unsupported-contract probe before native
+  dispatch, and default transport policy preempts the governed native source-ceiling error. Recommended: repair
+  those three shared transport boundaries, regenerate/re-admit all five bindings and implementations, and retain
+  the promised twenty-case identity. Alternative: preserve current bytes and weaken the claim to seventeen
+  identities plus three transport-boundary outcomes; this is not recommended.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.7.1.0` | Clean base `0540a72f`; smallest real Perl all-twenty probe; capabilities plus 16/19 query identities; independent neutral fact-key census; independent MCP response-schema validation; named request-schema probes; five-server policy-order/source audit; exploratory code removal; unchanged Perl syntax + 13-test admission; neutral semantic 6/20/105; MCP 35/10/10/68; admission 5/5 + 6/6 pending/114; KM 757/6,137; mdBook 13,720 KiB/79; memory architecture; seven doctrines; behavior-free diff and exact cleanup. | PASS/BLOCKED. Three shared production/contract boundaries prevent an honest all-twenty identity claim: missing `effects`/`return_shape`, constant request contract, and default ceiling pre-denial. No exploratory behavior remains and rollout stays pending. ADR `0062`, a canonical fact card, roadmaps, task owners, live docs, and mdBook route the recommended repair and weaker alternative for director choice before `.1.1`. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.7.0` | Clean base `d05e17ed`; knowledge-first owner audit; ADR `0062`; neutral semantic 6/20/105; neutral MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; exact admissions Perl 13, Rust 1, Dart 1, Julia 178, Lua 202x2; unchanged ledger 5/5 + 6/6 rollout pending/114; KM 755/6,120; mdBook 13,692 KiB/79; memory architecture; six doctrines; host-authorized canonical Rust semantic 1/1 81.05s, Dart 1/1, Julia 416/416 29.6s, project-sandbox containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 772s, complete dual-ABI Lua opt-in; documentation-only diff and exact cleanup. | PASS. One routed recurring composition, all-twenty consumer strengthening, atomic rollout promotion, and `.1-.2` handoff are frozen without behavior or status movement. The outer-harness nested-sandbox denial is root-caused; the project-owned macOS sandbox passes in the authorized canonical rerun. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.4` | Clean base `4eb008d8`; unchanged neutral MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; Lua 202x2; unchanged ledger 5/5 + 6/6 rollout pending/114; complete Lua 111+210+247+202 per ABI, package 177x2, CLI 66x2, corpus 105/105, storage 16x3; KM 754/6,110; mdBook 13,676 KiB/79; six doctrines; canonical Rust semantic 1/1 81.30s, Dart 1/1, Julia 416/416 28.9s, containment/moved-root, CLI 66x2, RAM 63%, Phase 0 1,031/1,031 in 652s; documentation-only diff and exact cleanup. | PASS. Committed-owner recomposition closes `.10.9.6.4` and parent `.10.9.6` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; recurring `.10.9.7` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.6.3` | Clean base `15f537df`; one unchanged twelve-role Lua consumer at 202 assertions on PUC Lua and LuaJIT; complete Lua 111+210+247+202 per ABI, package 177x2, CLI 66x2, corpus 105/105, storage 16x3; neutral MCP 35/10/10/68; five byte-fresh bindings; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; exact ledger 5/5 + 6/6 rollout pending/114; KM 754/6,108; mdBook 13,668 KiB/79; six doctrines; canonical Rust semantic 1/1 80.95s, Dart 1/1, Julia 416/416 29.4s, containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659s, complete dual-ABI Lua opt-in; exact cleanup. | PASS. The fifth native implementation and both Lua runtime rows are formally admitted from one source identity without production or transport movement; no-change `.10.9.6.4` follows only after clean commit and brief-clear proof. |
@@ -18716,6 +18816,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.7.1.0` | `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker` | Behavior-free root-cause checkpoint: 17/20 identities, three shared transport blockers, exploratory code removed, and director choice required before contract/production expansion. |
 | `FUTURE-PARITY-BACKLOG.10.9.6.4` | `FUTURE-PARITY-BACKLOG.10.9.6.4 - close Lua MCP implementation` | Documentation-only unchanged-owner recomposition, complete canonical signoff, shared Lua parent closure, and clean recurring six-runtime handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.6.3` | `FUTURE-PARITY-BACKLOG.10.9.6.3 - admit Lua MCP implementation` | One unchanged twelve-role consumer admits the fifth implementation on both Lua ABIs at 202 assertions each, 114 governance mutations, complete signoff, and clean no-change closeout handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.6.2` | `FUTURE-PARITY-BACKLOG.10.9.6.2 - implement Lua MCP strict stdio` | One identical iterative strict wire and caller-owned public stdio seam on both Lua ABIs, 247 assertions per ABI, 98 governance mutations, complete signoff, and clean exact-admission handoff. |
@@ -19008,6 +19109,17 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-29`: Behavior-free contradiction audit `.10.9.7.1.0` starts from clean bounded-README closeout
+  `0540a72f` and spends the smallest real all-twenty proof in the admitted Perl consumer. Capabilities and 16 of
+  19 queries preserve exact direct/MCP/digest identity; independent validation root-causes the remaining three as
+  shared MCP boundaries: `recordFacts` omits valid `effects`/`return_shape`, the constant request contract blocks
+  the governed unsupported-contract response, and default policy pre-denies source detail before the native query
+  can return its governed ceiling error. All five generated bindings and servers share the affected authorities.
+  Exploratory code is removed, rollout remains pending, and ADR `0062`, the Knowledge Map, roadmaps, live docs,
+  task tree, and mdBook route the finding. Director choice is required before `.1.1`: repair the three shared
+  boundaries and retain all-twenty identity (recommended), or weaken the claim to seventeen identities plus three
+  transport-boundary outcomes.
 
 - `2026-07-29`: No-change shared Lua MCP closeout `.10.9.6.4` completes from clean exact-admission commit
   `4eb008d8`. Unchanged neutral/Perl/Rust/Dart/Julia/PUC Lua/LuaJIT owner recomposition, all five byte-fresh

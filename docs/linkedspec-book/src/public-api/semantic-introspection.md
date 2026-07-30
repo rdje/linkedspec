@@ -66,18 +66,23 @@ current MCP admission consumer proves the complete transport/security/lifecycle 
 native and MCP payloads for capabilities plus one representative graph query. Running those consumers together
 cannot honestly be described as all-twenty MCP identity.
 
-Implementation leaf `.10.9.7.1` will therefore strengthen the existing consumers' capabilities/query identity
-roles—not add another semantic model. For each existing neutral case, the runtime consumer will register the
-corresponding native snapshot, send the exact request through MCP, compare tool text bytes and structured content
-with the direct native answer, and verify the already-owned neutral response digest. A planned repository-routed
-`tools/check_mcp_six_runtime.sh` will then compose the neutral semantic/MCP checkers, all five generated bindings,
-Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, the MCP ledger, and exact primary no-drift proof. Canonical CI will
-require and syntax-check it; expensive execution will be opt-in with `LINKEDSPEC_RUN_MCP_MATRIX=1`. Only after
-that evidence passes may both matching `thin_mcp_transport` rollout rows become complete. Production servers,
-protocol bytes, primary CLI behavior, legacy support, and an aggregator remain unchanged and outside the gate.
-The planning leaf's unchanged signoff passes semantic 6/20/105, MCP 35/10/10/68, exact current runtime
-admissions, project-sandbox containment and moved-root proof, primary CLI 66x2, Phase 0 1,031/1,031, and the
-complete PUC Lua/LuaJIT gate; rollout therefore remains pending until the implementation evidence exists.
+Real implementation audit `.10.9.7.1.0` now sharpens that boundary. A temporary Perl all-twenty spend proved
+capabilities plus sixteen of nineteen query cases retain exact native object, MCP text/structured content, and
+neutral digest identity. Three valid native outcomes are unreachable through the current public MCP contract:
+`calls_symbols_and_shapes` uses `effects` and `return_shape` facts absent from the MCP output schema;
+`unsupported_contract` is rejected by the MCP input schema's constant contract before native version handling;
+and `source_ceiling_forbidden` is preempted by the default native-derived deployment policy before the native
+ceiling diagnostic. The same schema and policy order apply to all five implementations.
+
+Exploratory code was removed and rollout remains pending. The recommended continuation is a director-approved
+contract/runtime repair: admit the complete governed fact vocabulary, accept a bounded contract string so native
+portable version errors remain reachable, and reserve ceiling pre-denial for explicit deployment overlays while
+preserving native ceilings and every explicit-policy security fence. Five generated bindings and five server
+implementations must then be re-admitted before the original all-twenty consumers and routed
+`tools/check_mcp_six_runtime.sh` may promote `thin_mcp_transport`. The alternative—seventeen identities plus
+three different transport outcomes—preserves current bytes but weakens the accepted all-twenty claim and is not
+recommended. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside
+both paths.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -3487,7 +3492,9 @@ The dependency order is:
 | `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | complete; one shared 202-assertion consumer per ABI, 5/5 + 6/6, rollout pending, 114 mutations, canonical signoff green |
 | `.10.9.6.4` | committed-owner no-change shared Lua closeout | complete; unchanged recomposition and canonical signoff green |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | closed; `.0-.4` complete at unchanged 5/5 + 6/6 pending/114 |
-| `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
+| `.10.9.7.1.0` | audit the first real all-twenty MCP spend | complete finding; 17/20 identities, three shared schema/default-policy blockers, exploratory code removed, director decision pending |
+| `.10.9.7.1.1` | repair the approved boundary, add six-runtime proof, and promote thin transport | pending director choice; full contract/five-server repair recommended |
+| `.10.9.7.2` | recurring MCP committed-owner closeout | pending after `.1.1` |
 | `.10.10` | public no-drift and closure | pending |
 
 ADRs `0054`/`0055` define one exact modern MCP `2026-07-28` stdio contract rather than one cross-runtime

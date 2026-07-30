@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Recurring MCP all-twenty implementation blocked on shared transport correction
+
+README adoption closeout is committed cleanly at `0540a72f` (96/300, no push). MCP `.10.9.7.1` activated
+task-tree-first from that boundary. Behavior-free prerequisite `.10.9.7.1.0` now proves a real Perl all-twenty
+spend reaches exact identity for capabilities plus 16/19 query cases and fails at three shared MCP boundaries.
+
+`calls_symbols_and_shapes` exposes missing `effects`/`return_shape` output-schema keys;
+`source_ceiling_forbidden` exposes default-policy preemption of the native ceiling diagnostic; and
+`unsupported_contract` exposes constant input-contract preemption of the native portable version error. The same
+schema and policy order govern all five servers. Exploratory consumer code is fully removed; formal MCP state is
+unchanged at 5/5 implementations + 6/6 runtimes, rollout pending, 114 rejected mutations.
+
+Recommended `.10.9.7.1.1` repairs the neutral schema and identical five-server default-policy seam, regenerates
+and re-admits the contract/bindings, then completes all-twenty consumers and the routed recurring gate. This is a
+material expansion beyond ADR `0062`'s original test-only boundary and awaits director approval. Weakening the
+claim to 17 identities plus three transport outcomes is recorded but not recommended.
+
 ## 2026-07-29 — Bounded README adoption closeout signoff-complete
 
 Implementation leaf `.1` is committed at clean `ca846e7a` (95/300, no push), its brief is cleared, and exact

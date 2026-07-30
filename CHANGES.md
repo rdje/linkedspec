@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.7.1.0 — expose MCP all-twenty blocker
+
+Activated the recurring MCP implementation task from clean README closeout `0540a72f`, then attempted the
+smallest real all-twenty spend in the Perl admission consumer. Capabilities plus 16 of 19 query cases preserved
+exact native object, MCP text/structured-content, and neutral response-digest identity. Three governed responses
+were stopped before native MCP success: `calls_symbols_and_shapes` became a sanitized internal error,
+`source_ceiling_forbidden` became MCP policy denial, and `unsupported_contract` became invalid params.
+
+Independent schema evaluation proves the exact shared causes: MCP `recordFacts` omits valid semantic keys
+`effects` and `return_shape`; the MCP request schema fixes the query contract with `const`; and default native-
+derived policy applies the index ceiling before native query dispatch. All five bindings and servers share these
+boundaries. A test-only workaround would not prove the public API. Exploratory Perl code was removed completely;
+the transport, five implementations, consumers, fixtures, ledgers, 5/5 + 6/6 pending/114 state, and runtime
+behavior remain unchanged.
+
+ADR `0062`, task/roadmaps, Knowledge Map, mdBook, and continuity owners now track the blocker. Recommended
+continuation is director-approved neutral-schema plus identical five-server default-policy repair before exact
+all-twenty proof and promotion. Preserving current bytes would weaken the claim to 17 identities plus three
+transport outcomes and is not recommended.
+
 ## 2026-07-29 — README-STABILITY-POLICY.2 — close bounded README adoption
 
 Recomposed the committed README policy, 105-line / 5,072-byte landing page, hard 128-line / 6,144-byte budgets,

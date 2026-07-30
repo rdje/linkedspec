@@ -1,7 +1,7 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted plan; behavior and rollout unchanged until `FUTURE-PARITY-BACKLOG.10.9.7.1`
+- Status: accepted direction; `.10.9.7.1.0` verified a shared three-case transport blocker; director decision pending
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -24,9 +24,39 @@ one process would violate the native-server topology. Treating the six existing 
 leave the parent acceptance claim stronger than its evidence. The recurring boundary must close this gap at the
 existing native adapter seams.
 
+## Implementation audit finding — 2026-07-29
+
+The first real Perl all-twenty spend disproved one assumption in this decision without changing committed code.
+Capabilities and sixteen of nineteen query cases preserve native/MCP/digest identity, but three governed native
+responses cannot cross the current public MCP boundary:
+
+- `calls_symbols_and_shapes` contains valid `effects` and `return_shape` record facts that the shared MCP output
+  schema does not admit, so response validation produces a sanitized internal error;
+- `unsupported_contract` cannot reach the native portable diagnostic because MCP input validation fixes the query
+  contract with `const` and returns invalid params first; and
+- `source_ceiling_forbidden` cannot reach the native portable diagnostic because the default native-derived source
+  ceiling is enforced as pre-dispatch MCP policy and returns policy denial first.
+
+All five generated bindings share the schema and all five servers share the policy ordering. Test-only adaptation
+would stop proving the public MCP API. The recommended correction is therefore a prerequisite contract/runtime
+repair: add the complete governed semantic fact vocabulary, accept a bounded contract string so native version
+diagnostics remain reachable, and reserve ceiling pre-denial for explicit deployment overlays while retaining the
+native index ceiling and every explicit-policy security boundary. This necessarily changes the neutral transport
+artifacts/digest, five generated bindings, and the same policy behavior in five implementations—material scope
+that the original no-production-change plan excluded.
+
+The alternative is to weaken the rollout claim to seventeen direct/MCP identities plus three distinct transport
+outcomes. That preserves current transport bytes but abandons the accepted all-twenty identity objective. Leaf
+`.10.9.7.1.0` records the verified evidence and pauses promotion pending director choice; rollout remains pending.
+
 ## Decision
 
 ### 1. Strengthen the six admitted consumers; do not add a seventh model
+
+This section remains the target proof after the director chooses the prerequisite boundary resolution. Under the
+recommended path, `.10.9.7.1.1` first repairs the three shared neutral transport seams documented above and then
+performs this consumer proof. The original consumer-only restriction is superseded only for that bounded repair;
+it remains in force for semantic-model ownership and expected response bodies.
 
 Leaf `.10.9.7.1` extends the existing MCP admission consumers' native-capabilities/native-query identity proof to
 the exact twenty ordered `query_cases` already owned by
