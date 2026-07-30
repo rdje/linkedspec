@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; Perl/Rust/Dart parents closed at 3/5 implementations + 3/6 runtimes with rollout pending;
-  Julia/Lua implementations remain pending
+  Julia decoded implementation exists but remains formally pending; Julia stdio/admission and Lua remain pending
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

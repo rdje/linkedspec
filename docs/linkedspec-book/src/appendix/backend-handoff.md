@@ -277,8 +277,10 @@ runtime, synchronous native `McpServer`, strict UTF-8/duplicate/number-kind-pres
 admission, and no-change closeout under `.1-.4`. Julia's existing `semantic_capabilities`,
 `semantic_query_neutral`, and `to_json` remain the sole semantic authority. OS-backed `RandomDevice`, monotonic
 `time_ns`, Base64, SHA-256, and borrowed `IO` satisfy the server without a third-party package, SDK, executable,
-or primary-CLI mode. The ledger remains 3/5 + 3/6 pending until `.10.9.5.3`; decoded implementation `.1` follows
-only after the clean planning commit.
+or primary-CLI mode. Decoded implementation `.10.9.5.1` now ships the 119,538-byte generated binding, frozen
+runtime, secure opaque registry, lower-only policy, public decoded dispatch, and 48 + 139 focused assertions.
+The ledger remains 3/5 + 3/6 pending until `.10.9.5.3`; strict byte/framing/lifecycle implementation `.2` follows
+only after the clean decoded-server commit.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

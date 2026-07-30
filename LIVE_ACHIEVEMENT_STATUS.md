@@ -1,5 +1,32 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Julia native MCP decoded server implemented
+
+`FUTURE-PARITY-BACKLOG.10.9.5.1` adds the fourth native generated/frozen/decoded MCP stack inside
+`LinkedSpecJulia`. The public opaque `McpServer` registers exact caller-created immutable `SemanticIndex` values,
+uses copied out-of-band authorization and optional lower-only policy, and dispatches decoded discovery/list/two-
+tool/cancellation requests through only fresh `semantic_capabilities`, `semantic_query_neutral`, and detached
+`to_json` values. It cannot load source or paths, parse/compile/execute, enable trace/observation, cache semantics,
+or acquire filesystem/process/network/CLI authority.
+
+The new deterministic generator emits a 119,538-byte Base64-only `McpContract.jl`; the private runtime verifies
+the canonical bundle SHA before JSON3, implements only the frozen schema profile, clone isolation, canonical JSON,
+and Julia response shells. Production handles use 256 OS-random bits, SHA-256 authorization digests, fixed-work
+dummy comparison, monotonic absolute expiry, bounded/pruned capacity, and sanitized failure paths. Base64 and
+Random become explicit stdlib dependencies; no third-party package or SDK is added.
+
+Focused proof passes 48 binding/runtime plus 139 decoded-server assertions. The full Julia gate passes the package,
+416-role semantic admission, repository-volume storage, CLI process conformance, and corpus 105/105. Canonical
+topology requires the Julia generator and focused command and rejects 65 mutations. Formal state intentionally
+remains 3/5 implementations + 3/6 runtimes, rollout pending: strict number-kind-preserving stdio is `.2`, exact
+twelve-role admission and Julia-only promotion is `.3`, and no-change closeout is `.4`.
+
+Signoff is complete. Canonical CI exits 0 with the Julia 187-assertion MCP proof, Rust semantic 1/1 in 78.93
+seconds, Dart semantic 1/1, Julia semantic 416/416 in 27.5 seconds, containment/moved-root proof, CLI 66x2, RAM
+60%, and Phase 0 1,031/1,031 in 630 seconds. Knowledge Map 749/6,057, mdBook 13,548 KiB/79 files, all six
+doctrines, memory, whitespace, and exact generated-artifact cleanup pass. `.10.9.5.2` waits for the clean `.1`
+commit boundary.
+
 ## 2026-07-29 — Julia native MCP seams frozen before code
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.5.0` and ADR `0060` freeze one synchronous in-process Julia server

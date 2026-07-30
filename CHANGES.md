@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.1 — implement the Julia MCP decoded server
+
+Added the public native Julia `McpServer` around caller-owned immutable `SemanticIndex` values. Hosts register an
+exact index with copied 1–4,096-byte opaque authorization and optional lowering-only limits, then dispatch
+already-decoded discovery, tool-list, capabilities, query, or cancellation requests. Production uses exactly 32
+bytes from `RandomDevice` for each 43-character base64url handle, retains only SHA-256 authorization digests,
+compares against a dummy digest with fixed work, measures absolute expiry from `time_ns()`, bounds/prunes the
+registry, preserves native semantic payload identity, and sanitizes all host and JSON-RPC failures. Shutdown,
+revocation, cancellation, clone isolation, collision, capacity, clock, and entropy behavior are explicit.
+
+Added `tools/generate_julia_mcp_contract.py` and its 119,538-byte generated Base64-only `McpContract.jl`. The
+private frozen runtime verifies the embedded canonical-bundle digest before JSON3 decoding, deep-copies JSON-like
+values, evaluates only the contract's closed schema profile, owns recursively key-sorted canonical JSON, and
+constructs Julia-identity response shells without reading a runtime artifact. Base64 and Random are now explicit
+Julia standard-library dependencies; no third-party package, filesystem/process/network authority, MCP SDK,
+source bootstrap, semantic cache, executable, or primary-CLI mode is added.
+
+Focused proof passes 48 generated-binding/runtime plus 139 decoded-server assertions. The complete Julia local
+gate passes the package, its existing 416-role semantic admission, repository-volume package/temp/generated/trace
+storage, primary CLI process conformance, and all 105 corpus fixtures. Canonical topology now requires the fourth
+binding generator and the exact Julia focused command; governance rejects 65 mutations while the formal ledger
+deliberately remains 3/5 implementations + 3/6 runtimes with rollout pending. Strict number-kind-preserving stdio
+remains `.10.9.5.2`; only exact twelve-role admission `.10.9.5.3` may promote Julia.
+
+Canonical CI exits 0 with the Julia 187-assertion proof in sequence, Rust semantic admission 1/1 in 78.93 seconds,
+Dart 1/1, Julia semantic admission 416/416 in 27.5 seconds, repository-volume containment and moved-root proof,
+primary CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 630 seconds. Knowledge Map 749/6,057, mdBook 13,548 KiB/79
+files, all six doctrines, memory, whitespace, and exact rendered-book/empty-run cleanup pass.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.0 — plan the Julia native MCP server
 
 Added behavior-free ADR `0060` and a Knowledge Map plan that freeze Julia's fourth native MCP implementation

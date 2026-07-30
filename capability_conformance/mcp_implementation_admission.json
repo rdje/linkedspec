@@ -147,6 +147,7 @@
       "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
       "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
       "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py",
       "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
@@ -154,6 +155,7 @@
       "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
       "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
       "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
+      "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")'",
       "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
       "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t"
     ]

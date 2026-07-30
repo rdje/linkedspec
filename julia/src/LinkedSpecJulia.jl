@@ -1,5 +1,8 @@
 module LinkedSpecJulia
 
+import Base64
+import JSON3
+import Random
 import SHA
 
 export backend_name,
@@ -242,6 +245,11 @@ export backend_name,
     SemanticQueryPageState,
     SemanticQueryCost,
     SemanticQueryResponse,
+    McpBudgetLimits,
+    McpDeploymentPolicy,
+    McpRegistrationOptions,
+    McpServer,
+    McpServerError,
     SemanticCompilationAuthority,
     SemanticCompilationDiagnostic,
     SemanticEntrySelection,
@@ -369,6 +377,10 @@ export backend_name,
     semantic_capabilities,
     semantic_query,
     semantic_query_neutral,
+    register_index!,
+    revoke_handle!,
+    dispatch_mcp,
+    shutdown_mcp!,
     with_execution_observation,
     source_identity,
     source_span_for_bytes,
@@ -463,6 +475,9 @@ include("semantic/SemanticStaticProjection.jl")
 include("semantic/SemanticCallProjection.jl")
 include("semantic/SemanticRuntimeProjection.jl")
 include("semantic/SemanticQuery.jl")
+include("mcp/McpContract.jl")
+include("mcp/McpContractRuntime.jl")
+include("mcp/McpServer.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

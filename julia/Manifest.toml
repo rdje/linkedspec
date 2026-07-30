@@ -2,7 +2,11 @@
 
 julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "7f888597c389b695114f2f74c96c786fd06e5168"
+project_hash = "770cb05ce4283cf31dcef792e77a4cec1e4c75fa"
+
+[[deps.Base64]]
+uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+version = "1.11.0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -22,6 +26,7 @@ version = "1.14.3"
     ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
 
 [[deps.LinkedSpecJulia]]
+deps = ["Base64", "JSON3", "Random", "SHA"]
 path = "."
 uuid = "8eec5991-a432-4f89-ae45-eeda2e697757"
 version = "0.1.0"

@@ -349,6 +349,78 @@ recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/ex
 closes nine-family direct-process conformance and focused-gate/public-status alignment. `.7.3.3` closes local
 outer no-drift; the Julia tree remains active/delegated to global `.1.5`, `.1.6`, and `.3`, not complete.
 
+## Native decoded MCP server
+
+`FUTURE-PARITY-BACKLOG.10.9.5.1` adds one synchronous in-process MCP adapter over the existing semantic API.
+Construct the `SemanticIndex` yourself, register that exact immutable value with opaque host authorization, and
+pass already-decoded JSON-like requests to `dispatch_mcp`:
+
+```julia
+using LinkedSpecJulia
+
+index = semantic_index(
+    "Top::\n /x/\n";
+    logical_name = "example.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+)
+authorization = collect(codeunits("tenant-42/read-only"))
+server = McpServer()
+handle = register_index!(
+    server,
+    index,
+    authorization;
+    options = McpRegistrationOptions(
+        lifetime_ms = 300_000,
+        policy = McpDeploymentPolicy(
+            source_detail_ceiling = SemanticSourceIdentityDetail,
+            page_max = 50,
+            budget_maxima = McpBudgetLimits(
+                max_records = 100,
+                max_relations = 200,
+                max_depth = 2,
+            ),
+        ),
+    ),
+)
+
+request = Dict{String,Any}(
+    "jsonrpc" => "2.0",
+    "id" => 1,
+    "method" => "tools/call",
+    "params" => Dict{String,Any}(
+        "_meta" => Dict{String,Any}(
+            "io.modelcontextprotocol/protocolVersion" => "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities" => Dict{String,Any}(),
+        ),
+        "name" => "linkedspec_semantic_capabilities",
+        "arguments" => Dict{String,Any}("handle" => handle),
+    ),
+)
+response = dispatch_mcp(server, request, authorization)
+@assert response["result"]["structuredContent"]["ok"] == true
+
+revoke_handle!(server, handle)
+shutdown_mcp!(server)
+```
+
+The exported host values are `McpBudgetLimits`, `McpDeploymentPolicy`, `McpRegistrationOptions`, `McpServer`,
+and `McpServerError`; the exported operations are `register_index!`, `revoke_handle!`, `dispatch_mcp`, and
+`shutdown_mcp!`. `McpServer` is opaque. Authorization must be a nonempty `AbstractVector{UInt8}` of at most 4,096
+bytes. A registration defaults to 15 minutes, may be lowered or extended up to the contract maximum of one day,
+and returns a 43-character handle carrying 256 bits of operating-system entropy. Unknown, unauthorized, expired,
+and revoked handles have the same tool-level response.
+
+MCP never creates an index. Capabilities and permitted queries call `semantic_capabilities` and
+`semantic_query_neutral` afresh, then detach through `to_json`; policy may lower source detail, digest access,
+page size, and budgets but cannot elevate native limits. The generated Base64 contract module is verified in
+memory and production MCP code has no source/path, parser/compiler/executor, trace, filesystem, process, network,
+SDK, semantic-cache, or primary-CLI authority.
+
+This leaf intentionally exposes decoded dispatch only. Strict UTF-8/JSON lexical admission, LF/CRLF/final-EOF
+framing, exact number-kind preservation, canonical line emission, caller-owned borrowed `IO`, and I/O lifecycle
+belong to `.10.9.5.2`; do not pass untrusted wire bytes directly to `JSON3.read` and treat the result as admitted
+MCP input. Formal Julia MCP admission remains `.10.9.5.3`.
+
 ## Commands
 
 Run the complete repo-owned Julia gate from the repository root:

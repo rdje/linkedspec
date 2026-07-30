@@ -140,12 +140,26 @@ RUNTIME_ADMISSIONS = [
     },
 ]
 
+JULIA_PENDING_OWNERS = {
+    "generator": "tools/generate_julia_mcp_contract.py",
+    "source_paths": [
+        "julia/src/mcp/McpContract.jl",
+        "julia/src/mcp/McpContractRuntime.jl",
+        "julia/src/mcp/McpServer.jl",
+    ],
+    "test_paths": [
+        "julia/test/mcp_contract_julia_binding_test.jl",
+        "julia/test/mcp_server_julia_dispatch_test.jl",
+    ],
+}
+
 ORDERED_COMMANDS = [
     "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
     "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
+    "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py",
     "PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_",
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch",
@@ -153,6 +167,7 @@ ORDERED_COMMANDS = [
     "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
     "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
     "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
+    "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")'",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -206,6 +221,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file capability_conformance/mcp_implementation_admission.json",
         "require_tracked_file tools/check_mcp_implementation_admission.py",
         "require_tracked_file tools/generate_dart_mcp_contract.py",
+        "require_tracked_file tools/generate_julia_mcp_contract.py",
         "require_tracked_file t/mcp_server_perl_admission.t",
         "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
         "require_tracked_file dart/lib/src/mcp/mcp_contract.dart",
@@ -216,6 +232,11 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart",
         "require_tracked_file dart/test/mcp_server_dart_stdio_test.dart",
         "require_tracked_file dart/test/mcp_server_dart_admission_test.dart",
+        "require_tracked_file julia/src/mcp/McpContract.jl",
+        "require_tracked_file julia/src/mcp/McpContractRuntime.jl",
+        "require_tracked_file julia/src/mcp/McpServer.jl",
+        "require_tracked_file julia/test/mcp_contract_julia_binding_test.jl",
+        "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -384,6 +405,67 @@ def validate_authority_sources() -> None:
     if "McpServer" in dart_primary or "serveStdio" in dart_primary:
         fail("the primary Dart parser CLI acquired MCP bootstrap authority")
 
+    julia_sources = {
+        path: (ROOT / path).read_text(encoding="utf-8")
+        for path in JULIA_PENDING_OWNERS["source_paths"][1:]
+    }
+    julia_combined = "\n".join(julia_sources.values())
+    for token in [
+        "open(",
+        "rm(",
+        "mkpath(",
+        "ENV[",
+        "run(",
+        "Cmd(",
+        "Sockets",
+        "Downloads",
+        "HTTP",
+        "parse_spec(",
+        "compile_spec(",
+        "load_spec(",
+        "LinkedSpecRuntimeEngine",
+        "LINKEDSPEC_TRACE_LEVEL",
+        "emit_julia_source",
+    ]:
+        if token in julia_combined:
+            fail(f"Julia MCP production authority fence contains forbidden token: {token}")
+    julia_primary = (ROOT / "julia" / "bin" / "linkedspec_julia.jl").read_text(
+        encoding="utf-8"
+    )
+    if "McpServer" in julia_primary or "dispatch_mcp" in julia_primary:
+        fail("the primary Julia parser CLI acquired MCP bootstrap authority")
+
+
+def validate_pending_julia_owners() -> None:
+    owned_paths = [
+        JULIA_PENDING_OWNERS["generator"],
+        *JULIA_PENDING_OWNERS["source_paths"],
+        *JULIA_PENDING_OWNERS["test_paths"],
+    ]
+    for path in owned_paths:
+        if not (ROOT / path).is_file():
+            fail(f"pending Julia MCP owner is absent: {path}")
+
+    module_source = (ROOT / "julia" / "src" / "LinkedSpecJulia.jl").read_text(
+        encoding="utf-8"
+    )
+    for include in [
+        'include("mcp/McpContract.jl")',
+        'include("mcp/McpContractRuntime.jl")',
+        'include("mcp/McpServer.jl")',
+    ]:
+        if module_source.count(include) != 1:
+            fail(f"Julia MCP module owner registration drifted: {include}")
+    tests_source = (ROOT / "julia" / "test" / "runtests.jl").read_text(
+        encoding="utf-8"
+    )
+    for include in [
+        'include("mcp_contract_julia_binding_test.jl")',
+        'include("mcp_server_julia_dispatch_test.jl")',
+    ]:
+        if tests_source.count(include) != 1:
+            fail(f"Julia MCP package-test registration drifted: {include}")
+
 
 def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     exact_fields(
@@ -490,6 +572,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("semantic checker no longer locks the pending MCP rollout")
 
     if inspect_files:
+        validate_pending_julia_owners()
         for row in ledger["implementations"]:
             for path in row["source_paths"]:
                 if not (ROOT / path).is_file():
@@ -571,42 +654,50 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     ci_source = CI_PATH.read_text(encoding="utf-8")
     ci_mutations = [
         ("CI Dart generator omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
-        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[9] + "\n", "")),
-        ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
+        ("CI Julia generator omission", ci_source.replace(ORDERED_COMMANDS[5] + "\n", "")),
+        ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
+        ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
         (
             "CI Dart strict stdio proof omission",
             ci_source.replace(
-                ORDERED_COMMANDS[10],
+                ORDERED_COMMANDS[11],
                 "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart",
                 1,
             ),
         ),
-        ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
+        ("CI Dart admission omission", ci_source.replace(ORDERED_COMMANDS[12] + "\n", "")),
+        ("CI Julia focused proof omission", ci_source.replace(ORDERED_COMMANDS[13] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
         (
             "CI checker before Rust admission",
-            ci_source.replace(ORDERED_COMMANDS[9], "__RUST_ADMISSION__")
-            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[9])
-            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[12]),
+            ci_source.replace(ORDERED_COMMANDS[10], "__RUST_ADMISSION__")
+            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[10])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[14]),
         ),
         (
             "CI Rust admission before strict stdio proof",
-            ci_source.replace(ORDERED_COMMANDS[8], "__RUST_STDIO__")
-            .replace(ORDERED_COMMANDS[9], ORDERED_COMMANDS[8])
-            .replace("__RUST_STDIO__", ORDERED_COMMANDS[9]),
+            ci_source.replace(ORDERED_COMMANDS[9], "__RUST_STDIO__")
+            .replace(ORDERED_COMMANDS[10], ORDERED_COMMANDS[9])
+            .replace("__RUST_STDIO__", ORDERED_COMMANDS[10]),
         ),
         (
             "CI Dart admission before focused proof",
-            ci_source.replace(ORDERED_COMMANDS[10], "__DART_FOCUSED__")
-            .replace(ORDERED_COMMANDS[11], ORDERED_COMMANDS[10])
-            .replace("__DART_FOCUSED__", ORDERED_COMMANDS[11]),
+            ci_source.replace(ORDERED_COMMANDS[11], "__DART_FOCUSED__")
+            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[11])
+            .replace("__DART_FOCUSED__", ORDERED_COMMANDS[12]),
         ),
         (
             "CI checker before Dart admission",
-            ci_source.replace(ORDERED_COMMANDS[11], "__DART_ADMISSION__")
-            .replace(ORDERED_COMMANDS[12], ORDERED_COMMANDS[11])
-            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[12]),
+            ci_source.replace(ORDERED_COMMANDS[12], "__DART_ADMISSION__")
+            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[12])
+            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[14]),
+        ),
+        (
+            "CI checker before Julia focused proof",
+            ci_source.replace(ORDERED_COMMANDS[13], "__JULIA_FOCUSED__")
+            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[13])
+            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[14]),
         ),
         (
             "CI ledger registration omission",
@@ -654,6 +745,34 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             "CI Dart admission registration omission",
             ci_source.replace(
                 "require_tracked_file dart/test/mcp_server_dart_admission_test.dart\n",
+                "",
+            ),
+        ),
+        (
+            "CI Julia generator registration omission",
+            ci_source.replace(
+                "require_tracked_file tools/generate_julia_mcp_contract.py\n",
+                "",
+            ),
+        ),
+        (
+            "CI Julia server registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/src/mcp/McpServer.jl\n",
+                "",
+            ),
+        ),
+        (
+            "CI Julia binding proof registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/test/mcp_contract_julia_binding_test.jl\n",
+                "",
+            ),
+        ),
+        (
+            "CI Julia decoded proof registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl\n",
                 "",
             ),
         ),

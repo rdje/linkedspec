@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral contract/canonical governance plus Perl/Rust/Dart parents complete at 3/5
-  implementations and 3/6 runtimes with rollout pending; later runtimes remain pending
+  implementations and 3/6 runtimes with rollout pending; Julia decoded server implemented, stdio/admission pending
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context

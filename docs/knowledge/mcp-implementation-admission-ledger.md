@@ -19,6 +19,7 @@ reverify:
   - bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
   - bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py
   - bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
+  - bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
   - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
   - bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
   - PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
@@ -28,6 +29,7 @@ reverify:
   - cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission
   - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart
   - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart
+  - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_contract_julia_binding_test.jl"); include("julia/test/mcp_server_julia_dispatch_test.jl")'
 ---
 
 # MCP implementation and runtime admission ledger
@@ -53,7 +55,8 @@ does not synthesize another expected-response model.
 `tools/check_mcp_implementation_admission.py` validates ledger/status/ownership/count topology, unchanged transport
 identity, exact role declaration/invocation/completion, tracked canonical inputs, and canonical command order. It
 rejects 28 mutations for the Perl-only state, 39 after Rust admission, 43/46 while Dart decoded/strict-stdio proof
-remained unadmitted, and 58 after exact Dart admission. Static fences prohibit production MCP owners from
+remained unadmitted, 58 after exact Dart admission, and 65 after registering Julia's still-unadmitted generated/
+runtime/decoded owners. Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
 opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`;
@@ -72,7 +75,9 @@ without status movement; `.10.9.4.3` now admits their unchanged four owners thro
 No-change `.10.9.4.4` recomposes every committed neutral, Perl, Rust, and Dart owner without replacing an oracle
 or moving status, preserves all 58 mutations, closes parent `.10.9.4`, and hands off to Julia `.10.9.5`.
 Behavior-free Julia `.10.9.5.0` and ADR `0060` freeze generated/runtime/server/wire/admission owners under
-`.1-.4`; no Julia source/consumer row or completion count moves until exact admission `.10.9.5.3`.
+`.1-.4`. Decoded leaf `.10.9.5.1` implements and canonically registers the generated binding, frozen runtime,
+secure registry, public decoded server, and exact focused proof while leaving Julia's formal source/status and
+consumer rows pending. No completion count moves until exact admission `.10.9.5.3`.
 
-Related facts: [[julia-native-mcp-server-plan]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
+Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
 [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].

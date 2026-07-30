@@ -4,6 +4,14 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
+Julia now has a callable native decoded MCP adapter under `FUTURE-PARITY-BACKLOG.10.9.5.1`: a deterministic
+119,538-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only
+policy, and exact decoded discovery/list/capabilities/query/cancellation dispatch over caller-owned
+`SemanticIndex` values. Focused proof passes 48 + 139 assertions and the complete Julia local/storage/CLI/105-
+fixture gate passes. Strict stdio remains `.10.9.5.2`, so formal MCP status intentionally stays at the already-
+admitted Perl/Rust/Dart boundary of 3/5 implementations + 3/6 runtimes with rollout pending until Julia admission
+`.10.9.5.3`.
+
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
 raw `query_neutral` match all 19 static response digests plus 26 malformed-request boundaries. Seven committed

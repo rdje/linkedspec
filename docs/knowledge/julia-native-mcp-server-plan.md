@@ -1,6 +1,6 @@
 ---
 id: julia-native-mcp-server-plan
-title: Julia MCP will use a generated Base64 contract module and synchronous native server
+title: Julia MCP uses a generated Base64 contract module and synchronous native server
 answers:
   - "how will the Julia MCP server be implemented"
   - "how do I register a Julia SemanticIndex with MCP"
@@ -18,23 +18,25 @@ answers:
   - "what are the Julia MCP implementation leaves"
   - "when will Julia MCP advance the implementation ledger"
 date: 2026-07-29
-status: current behavior-free plan; implementation pending under FUTURE-PARITY-BACKLOG.10.9.5.1-.4
+status: accepted plan; generated runtime and decoded server implemented, strict stdio/admission pending
 tags: [julia, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
-evidence: docs/decisions/0060-julia-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.5.0-.4; julia/Project.toml; julia/src/LinkedSpecJulia.jl; julia/src/semantic/SemanticIndex.jl; julia/src/semantic/SemanticQuery.jl; julia/src/cli/LinkedSpecJuliaCli.jl; tools/mcp_contract_binding.py; tools/check_mcp_implementation_admission.py
-reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using JSON3, Base64, Random, SHA, LinkedSpecJulia; bytes=rand(RandomDevice(), UInt8, 32); handle=rstrip(replace(base64encode(bytes), \"+\"=>\"-\", \"/\"=>\"_\"), (Char(61),)); @assert length(handle)==43; @assert typeof(time_ns())==UInt64; duplicate=JSON3.read(\"{\\\"a\\\":1,\\\"\\\\u0061\\\":2}\"); @assert length(collect(pairs(duplicate)))==2; @assert !isvalid(String(UInt8[0xff])); @assert JSON3.read(\"{\\\"n\\\":1.0}\").n isa Int' && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
+evidence: docs/decisions/0060-julia-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.5.0-.4; julia/src/mcp/McpContract.jl; julia/src/mcp/McpContractRuntime.jl; julia/src/mcp/McpServer.jl; julia/test/mcp_contract_julia_binding_test.jl; julia/test/mcp_server_julia_dispatch_test.jl; tools/generate_julia_mcp_contract.py; tools/check_mcp_implementation_admission.py
+reverify: "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
 ---
 
 # Julia Native MCP Server Plan
 
 Behavior-free leaf `FUTURE-PARITY-BACKLOG.10.9.5.0` and ADR `0060` freeze Julia as the fourth native MCP
-implementation before production code. One same-process `McpServer` will retain caller-created opaque immutable
-`SemanticIndex` values and call only `semantic_capabilities`, `semantic_query_neutral`, and `to_json`. MCP cannot
+implementation. Decoded leaf `.10.9.5.1` now implements a same-process `McpServer` that retains caller-created
+opaque immutable `SemanticIndex` values and calls only `semantic_capabilities`, `semantic_query_neutral`, and
+`to_json`. MCP cannot
 load source or paths, compile or execute a specification, enable trace/runtime observation, cache semantic
 responses, emit generated source, or bootstrap from the primary CLI.
 
 The frozen owners are generated `julia/src/mcp/McpContract.jl`, private `McpContractRuntime.jl`, public-host
-`McpServer.jl`, and strict synchronous `McpWire.jl`. `tools/generate_julia_mcp_contract.py` will consume the same
-digest-verified bundle as Perl, Rust, and Dart. It will embed Base64 rather than raw JSON because Julia raw-string
+`McpServer.jl`, and strict synchronous `McpWire.jl`. The first three are implemented.
+`tools/generate_julia_mcp_contract.py` consumes the same digest-verified bundle as Perl, Rust, and Dart. It embeds
+Base64 rather than raw JSON because Julia raw-string
 quote escaping is not byte-transparent; runtime decoding verifies the canonical JSON SHA-256 before JSON3 and
 performs no filesystem read.
 
@@ -45,11 +47,13 @@ record numeric lexemes, decode through JSON3 with floating-number mode, then rec
 fraction/exponent kinds before frozen-schema evaluation. Canonical output is MCP-owned recursive key sorting, not
 the private primary-CLI writer.
 
-Core `RandomDevice()` supplies OS entropy, `time_ns()` supplies documented monotonic elapsed time, core Base64
-maps 32 bytes to a 43-character unpadded URL-safe handle, and existing SHA digests authorization. Base64 and
-Random become explicit standard-library dependencies; no third-party package, SDK, network stack, task runtime,
-or executable is added. Caller-owned borrowed `IO` values provide bounded synchronous LF/CRLF/final-EOF framing,
-cancellation through flush, fixed optional diagnostics, and shutdown release without closing the streams.
+Implemented production `RandomDevice()` supplies OS entropy, `time_ns()` supplies documented monotonic elapsed
+time, core Base64 maps 32 bytes to a 43-character unpadded URL-safe handle, and existing SHA digests
+authorization. Base64 and Random are explicit standard-library dependencies; no third-party package, SDK,
+network stack, task runtime,
+or executable is added. Pending `.2` will use caller-owned borrowed `IO` values for bounded synchronous LF/CRLF/
+final-EOF framing, cancellation through flush, fixed optional diagnostics, and shutdown release without closing
+the streams.
 
 The omission-safe split is `.10.9.5.1` generated binding/runtime/secure decoded server, `.2` strict wire and
 lifecycle, `.3` exact twelve-role Julia admission and Julia-only movement to 4/5 implementations plus 4/6
@@ -57,6 +61,7 @@ runtimes, and no-change `.4` parent closeout. Until `.3`, the ledger remains exa
 pending.
 
 Related facts: [[julia-semantic-introspection-authority-map]], [[julia-semantic-query-public-api]],
+[[julia-mcp-decoded-server]],
 [[julia-semantic-runtime-observation-authority-map]], [[julia-primary-cli-native-execution-canonical-json]],
 [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],
 [[mcp-implementation-admission-ledger]], and [[dart-native-mcp-server-plan]].

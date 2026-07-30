@@ -13900,8 +13900,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.4.4 - close Dart MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.5`
-    Status: `active` (2026-07-29; behavior-free native owner/security/wire audit `.0` complete from clean Dart
-      closeout commit `98cbe61a`; generated binding/runtime/decoded server `.1` is the next clean activation)
+    Status: `active` (2026-07-29; behavior-free native owner/security/wire audit `.0` and generated binding/
+      runtime/decoded server `.1` are complete; strict synchronous stdio `.2` is the next clean activation)
     Goal: Implement and admit the Julia native MCP server against the exact transport contract.
     Depends on: `.10.9.4`
     Children: `.10.9.5.0`, `.10.9.5.1`, `.10.9.5.2`, `.10.9.5.3`, `.10.9.5.4`
@@ -13970,7 +13970,7 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.5.0 - plan Julia native MCP server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.5.1`
-      Status: `pending`
+      Status: `done` (2026-07-29; task-tree-first from clean planning commit `1b19589d`)
       Goal: Generate the filesystem-free Julia MCP binding and implement the frozen contract runtime, secure native
         registry, decoded dispatch, lowering-only policy, and sanitized failure boundary.
       Depends on: `.10.9.5.0`
@@ -13980,6 +13980,65 @@ before implementation.
         digest-only authorization, monotonic expiry, lowering-only policy, sanitized failures, and focused
         binding/decoded proof. Add only explicit Base64/Random standard-library dependencies; do not add wire,
         executable, source, semantic-cache, ledger, rollout, aggregator, or legacy behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **REPRODUCE / ISSUE** — `rg -n` plus the `.10.9.5.0` repository-routed Julia probes established that
+        the admitted native `SemanticIndex` API existed but no Julia MCP generator, contract runtime, registry,
+        decoded dispatcher, public host API, or recurring proof existed.
+      - [x] **ROOT CAUSE (WHY + WHERE)** — Tool-backed owner mapping located the semantic authority at
+        `julia/src/semantic/SemanticIndex.jl` / `SemanticQuery.jl`, while ADR `0060` records why generated Base64
+        data, OS entropy, monotonic time, and an opaque same-process server are required; the missing mechanism was
+        the three-file `julia/src/mcp/` layer, not parser/compiler/runtime or CLI behavior.
+      - [x] **FIX** — Add the deterministic verified-bundle generator, digest-checking frozen runtime, opaque public
+        server/policy/error values, secure registry, decoded dispatch, exact focused tests, and canonical owner
+        registration while retaining strict wire and formal admission in their later leaves.
+      - [x] **ADDRESSED (verified)** — Repository-routed proof is PASS: the Julia generator is byte-fresh at
+        119,538 bytes; binding/runtime is 48/48; decoded server is 139/139; the documentation example executes;
+        and the implementation checker remains 3/5 + 3/6 with all 65 mutations rejected.
+      - [x] **NO REGRESSION** — `bash tools/run_julia_local.sh` exits 0 across the complete package, 416-role semantic
+        admission, repository-volume storage oracle, primary CLI process conformance, and corpus 105/105; `git
+        diff --check` is clean.
+      - [x] **LOCKSTEP** — README/roadmaps/live docs/ADR/KM/mdBook/Julia README/task/memory and canonical CI owners
+        describe decoded-now / stdio-next / admission-later; `mdbook build`, Knowledge Map 749/6,057, and
+        `bash scripts/check_doctrines.sh` are the lockstep gates.
+      - [x] **CLEAN ACTIVATION** — Prove planning commit `1b19589d`, zero-byte brief, clean worktree, and absent
+        rendered-book/managed-run residue; activate `.10.9.5.1` before any Julia source, test, generator, dependency,
+        or governance change.
+      - [x] **GENERATED BINDING** — Add a repository-routed deterministic generator that verifies every neutral
+        manifest digest and checks/rewrites a formatter-stable Base64-only `McpContract.jl`; runtime decode must
+        verify the embedded canonical-bundle SHA before exposing clone-isolated data.
+      - [x] **FROZEN RUNTIME / API** — Implement the private schema/canonical runtime and the frozen public typed
+        Julia API exactly as ADR `0060` specifies, without filesystem/source/parser/compiler/executor/trace/cache/
+        primary-CLI authority or strict stdio behavior.
+      - [x] **SECURE REGISTRY / DECODED DISPATCH** — Retain opaque existing `SemanticIndex` values behind 256-bit
+        OS-random handles; store only authorization digests; use monotonic expiry, fixed-work comparisons, bounded
+        collision/capacity behavior, lower-only policy, exact cancellation/shutdown, and sanitized failures.
+      - [x] **FOCUSED PROOF / GOVERNANCE** — Add exact generated-binding and decoded-server tests plus generator/
+        source/test inventory and canonical ordering without advancing the 3/5 implementation + 3/6 runtime ledger;
+        prove unchanged neutral/Perl/Rust/Dart owners, Julia package/local gates, docs/KM/doctrines/canonical CI,
+        root-relative storage, exact cleanup, per-leaf commit, zero-byte brief, and clean handoff to `.10.9.5.2`.
+
+      Verification: **PASS 2026-07-29.** The deterministic Julia generator is byte-fresh at 119,538 bytes;
+        binding/frozen-runtime proof passes 48/48 and decoded-server proof passes 139/139, including the public
+        mdBook example. `bash tools/run_julia_local.sh` passes the complete package, 416/416 composed semantic
+        admission, 17-owner/five-package-tree storage oracle, primary CLI process conformance, and corpus 105/105.
+        Neutral MCP proof remains 35 canonical / 10 raw / 10 lifecycle / 68 mutations; Perl MCP remains Files=4
+        Tests=35, Rust remains 15 + 3 + 4 + 1, Dart remains 16/16, and the exact ledger remains 3/5
+        implementations + 3/6 runtimes with rollout pending while all 65 implementation-admission mutations are
+        rejected.
+
+        Canonical CI exits 0 after all six doctrines, four byte-fresh generated bindings, the Julia 187-assertion
+        focused proof, Rust semantic admission 1/1 in 78.93 seconds, Dart 1/1, Julia semantic admission 416/416 in
+        27.5 seconds, six-family repository-volume process containment, moved-root proof, primary CLI 66x2, RAM
+        60%, and Phase 0 1,031/1,031 in 630 seconds. Knowledge Map generation/check passes at 749 facts / 6,057
+        question keys; mdBook builds to a verified ignored 13,548-KiB / 79-file rendering; memory, task metadata,
+        whitespace, and exact repository-root-relative storage pass. Exact cleanup removes only that rendering and
+        one proven-empty managed-run directory. No stdio, executable, SDK/network, source/bootstrap, semantic,
+        parser/compiler/executor/trace/cache/primary-CLI, ledger/rollout, aggregator, or legacy behavior moves;
+        `.10.9.5.2` follows only after this clean commit.
+
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.5.1 - implement Julia MCP decoded server`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.5.2`
       Status: `pending`

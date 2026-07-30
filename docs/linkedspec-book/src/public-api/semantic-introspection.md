@@ -53,13 +53,12 @@ Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, prot
 contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
 canonical CI. Perl, Rust, and Dart have complete decoded/strict-stdio implementations and exact runtime admission.
 Dart is the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, exact decoded
-discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twelve-role public consumer. The ledger
-is now 3/5 native implementations and 3/6 runtime admissions; shared rollout remains pending. Behavior-free Julia
-plan `.10.9.5.0` and ADR `0060` freeze its generated/runtime/server/wire/security seams before code; Julia remains
-pending until `.10.9.5.1-.3` implement and admit those owners. The behavior-free plan itself is signoff-complete:
-canonical CI passes all unchanged MCP owners, six-family process containment, CLI 66x2, and Phase 0 1,031/1,031.
+discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twelve-role public consumer. Julia
+`.10.9.5.1` now adds the fourth generated binding plus a digest-verified frozen runtime and secure public decoded
+server; its strict stdio and exact admission remain `.2-.3`. The ledger therefore stays 3/5 native implementations
+and 3/6 runtime admissions with shared rollout pending even though the Julia decoded API is callable now.
 
-## Accepted modern MCP transport (Perl/Rust/Dart admitted; Julia planned)
+## Accepted modern MCP transport (Perl/Rust/Dart admitted; Julia decoded)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -94,6 +93,8 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `rust/linkedspec-runtime/src/mcp_contract.rs` | Generated data-only Rust bundle. |
 | `tools/generate_dart_mcp_contract.py` | Deterministic consumer that checks the formatter-stable, filesystem-free Dart private part. |
 | `dart/lib/src/mcp/mcp_contract.dart` | Generated data-only Dart bundle part. |
+| `tools/generate_julia_mcp_contract.py` | Deterministic consumer that checks the Base64-only, filesystem-free Julia module. |
+| `julia/src/mcp/McpContract.jl` | Generated data-only Julia bundle module. |
 
 The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
 four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
@@ -105,6 +106,7 @@ bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contrac
 bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
 bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py
 bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
+bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
 ```
 
 Deliberate regeneration is explicit and reviewable:
@@ -122,8 +124,8 @@ document itself. It independently reconstructs every frame, verifies the exact s
 classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
 at their intended invariant. This is still conformance code, not an MCP server.
 
-Canonical local CI requires every listed artifact and all five programs. It always runs the materializer before
-the independent validator, then checks Perl, Rust, and Dart generated bindings in that order only after both
+Canonical local CI requires every listed artifact and all six programs. It always runs the materializer before
+the independent validator, then checks Perl, Rust, Dart, and Julia generated bindings in that order only after both
 neutral owners pass. Recurring tool-governance proof rejects omission of any generator and binding-before-
 validator order. This detects stale JSONL/digests before independent semantic validation and prevents a derived
 backend binding from becoming an oracle for its own normative source.
@@ -3447,7 +3449,7 @@ The dependency order is:
 | `.10.9.4.3` | exact Dart implementation/runtime admission | complete; one ordered twelve-role public consumer; 3/5 implementations, 3/6 runtimes, rollout pending, 58 mutations |
 | `.10.9.4.4` | committed-owner no-change Dart closeout | complete from clean `956ea5e9`; focused recomposition unchanged; parent `.10.9.4` closed |
 | `.10.9.5.0` | behavior-free Julia native owner/security/wire audit and ADR `0060` | complete from clean `98cbe61a`; exact `.1-.4` split; no implementation or ledger movement |
-| `.10.9.5.1` | generated Julia Base64 binding/runtime, secure registry, and decoded server | pending after the clean planning commit |
+| `.10.9.5.1` | generated Julia Base64 binding/runtime, secure registry, and decoded server | implemented; 119,538-byte binding, 48 + 139 focused proof, formal admission unchanged |
 | `.10.9.5.2` | strict Julia stdio, lexical/number-kind preflight, canonical emission, and lifecycle cleanup | pending after `.1` |
 | `.10.9.5.3` | exact Julia implementation/runtime admission | pending; this leaf alone may move Julia to 4/5 implementations and 4/6 runtimes |
 | `.10.9.5.4` | committed-owner no-change Julia closeout | pending after exact admission |
@@ -3474,8 +3476,9 @@ cannot reinterpret transport errors or semantic results.
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
 runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, and Dart
 callers can use decoded in-process dispatch plus strict stdio, and all three have exact twelve-role MCP admission.
-The shared status/proof ledger is therefore 3/5 implementations and 3/6 runtimes, with shared rollout pending and
-the normative transport digest unchanged.
+Julia callers can now use decoded in-process dispatch; its strict stdio and admission are still pending. The
+shared status/proof ledger is therefore 3/5 implementations and 3/6 runtimes, with shared rollout pending and the
+normative transport digest unchanged.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3499,52 +3502,94 @@ tests. Exact admission `.10.9.4.3` adds one ordered twelve-role public consumer;
 recomposes the neutral, Perl, Rust, and Dart owners unchanged, preserves those exact counts and mutations, closes
 the Dart parent, and hands the same contract to Julia `.10.9.5`.
 
-### Accepted Julia implementation plan (not yet shipped)
+### Using Julia decoded MCP dispatch (strict stdio next)
 
-Behavior-free `.10.9.5.0` and ADR `0060` define Julia's implementation before any server source exists. The
-existing opaque immutable `SemanticIndex`, `semantic_capabilities(index)`, `semantic_query_neutral(index,
-request)`, and detached `to_json` values are the only semantic authority. The planned server cannot construct an
-index, load source or paths, parse/compile/execute, enable trace or runtime observation, emit generated source,
-cache semantic responses, or add a primary-CLI mode.
+Behavior-free `.10.9.5.0` and ADR `0060` define the ownership, and `.10.9.5.1` now ships the generated binding,
+frozen contract runtime, secure registry, and public decoded API. The existing opaque immutable `SemanticIndex`,
+`semantic_capabilities(index)`, `semantic_query_neutral(index, request)`, and detached `to_json` values remain the
+only semantic authority. MCP cannot construct an index, load source or paths, parse/compile/execute, enable trace
+or runtime observation, emit generated source, cache semantic responses, or add a primary-CLI mode.
 
-The accepted file split under `julia/src/mcp/` is:
+The current file split under `julia/src/mcp/` is:
 
-| Planned owner | Frozen responsibility |
+| Owner | Current responsibility |
 |---|---|
-| `McpContract.jl` | Generated binding format, canonical-bundle SHA-256, and Base64 bundle data; no I/O or semantic logic. |
-| `McpContractRuntime.jl` | One-time digest verification/decoding, detached copies, frozen schema profile, Julia response shells, and MCP canonical JSON. |
-| `McpServer.jl` | Public typed server/policy/error values, secure registry, decoded dispatch, native calls, lowering-only policy, and sanitized failures. |
-| `McpWire.jl` | Bounded synchronous byte framing, strict lexical admission, number-kind reconstruction, canonical LF output, cancellation, diagnostics, EOF, and I/O cleanup. |
+| `McpContract.jl` | Implemented generated binding format, canonical-bundle SHA-256, and Base64 bundle data; no I/O or semantic logic. |
+| `McpContractRuntime.jl` | Implemented one-time digest verification/decoding, detached copies, frozen schema profile, Julia response shells, and MCP canonical JSON. |
+| `McpServer.jl` | Implemented public typed server/policy/error values, secure registry, decoded dispatch, native calls, lowering-only policy, and sanitized failures. |
+| `McpWire.jl` | Pending `.10.9.5.2`: bounded synchronous byte framing, strict lexical admission, number-kind reconstruction, canonical LF output, cancellation, diagnostics, EOF, and I/O cleanup. |
 
-The future public names are `McpServer`, `McpBudgetLimits`, `McpDeploymentPolicy`, `McpRegistrationOptions`,
-`McpServerError`, `register_index!`, `revoke_handle!`, `dispatch_mcp`, `serve_mcp_stdio!`, and
-`shutdown_mcp!`. These names are a ratified implementation contract, not currently callable API; `.10.9.5.1-.2`
-must implement and test them before this chapter presents a runnable Julia example.
+The callable names today are `McpServer`, `McpBudgetLimits`, `McpDeploymentPolicy`, `McpRegistrationOptions`,
+`McpServerError`, `register_index!`, `revoke_handle!`, `dispatch_mcp`, and `shutdown_mcp!`:
 
-Julia needs a stricter codec boundary than a simple `JSON3.read`. Repository-routed Julia 1.12.6 / JSON3 1.14.3
-probes establish all three gaps:
+```julia
+using LinkedSpecJulia
 
-- literal `{"a":1,"a":2}` and escape-equivalent `{"a":1,"\\u0061":2}` expose two lazy pairs, while normalized
-  dictionaries retain only the last value;
-- JSON3 accepts a Julia `String` containing invalid UTF-8 bytes; and
-- JSON number tokens `1.0` and `1e0` become integer values under ordinary decoding.
+index = semantic_index(
+    "Top::\n /x/\n";
+    logical_name = "example.spec",
+    source_detail_ceiling = SemanticSourceTextDetail,
+)
+authorization = collect(codeunits("tenant-42/read-only"))
+server = McpServer()
+handle = register_index!(
+    server,
+    index,
+    authorization;
+    options = McpRegistrationOptions(
+        lifetime_ms = 300_000,
+        policy = McpDeploymentPolicy(
+            source_detail_ceiling = SemanticSourceIdentityDetail,
+            page_max = 50,
+            budget_maxima = McpBudgetLimits(
+                max_records = 100,
+                max_relations = 200,
+                max_depth = 2,
+            ),
+        ),
+    ),
+)
 
-`McpWire.jl` will therefore validate strict UTF-8 and decoded key uniqueness before JSON3, retain all numeric
-lexemes in depth-first value order, decode admitted values with floating-number mode, and recursively reconstruct
-integer lexemes as exact integers while leaving fraction/exponent lexemes as floats. The frozen schema runtime can
-then enforce `integer` without codec coercion. Canonical output is a separate MCP-owned recursively key-sorted
-writer; it does not call the private primary-CLI canonicalizer.
+request = Dict{String,Any}(
+    "jsonrpc" => "2.0",
+    "id" => 1,
+    "method" => "tools/call",
+    "params" => Dict{String,Any}(
+        "_meta" => Dict{String,Any}(
+            "io.modelcontextprotocol/protocolVersion" => "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities" => Dict{String,Any}(),
+        ),
+        "name" => "linkedspec_semantic_capabilities",
+        "arguments" => Dict{String,Any}("handle" => handle),
+    ),
+)
+response = dispatch_mcp(server, request, authorization)
+@assert response["result"]["structuredContent"]["ok"] == true
 
-Production handles will draw exactly 32 bytes from OS-backed `RandomDevice`, map core Base64 to 43 unpadded
-base64url characters, hash copied 1–4,096-byte authorization with SHA-256, and expire against elapsed monotonic
-`time_ns()` milliseconds. Base64 and Random become explicit Julia standard-library dependencies; no third-party
-package, MCP SDK, task runtime, network transport, or executable is added. `serve_mcp_stdio!` remains synchronous
-over caller-owned borrowed `IO`, never closes those streams, retains cancellation through successful flush, and
-releases every index on EOF or sanitized read/write/flush failure.
+revoke_handle!(server, handle)
+shutdown_mcp!(server)
+```
 
-Implementation is omission-safe: `.1` owns generated/runtime/decoded behavior, `.2` owns strict wire/lifecycle,
-`.3` alone adds the exact twelve-role consumer and Julia-only ledger movement, and `.4` recomposes unchanged
-owners. Until `.3`, current state remains 3/5 implementations + 3/6 runtimes with shared rollout pending.
+Authorization is a nonempty `AbstractVector{UInt8}` bounded at 4,096 bytes. Production handles draw exactly 32
+bytes from OS-backed `RandomDevice`, map core Base64 to 43 unpadded base64url characters, retain only an SHA-256
+authorization digest, and expire against elapsed monotonic `time_ns()` milliseconds. Unknown, unauthorized,
+expired, and revoked handles have one indistinguishable tool response. Policy may lower source detail, content-
+digest availability, page size, and budgets but cannot raise native authority. Capabilities are fetched fresh for
+registration and every call; a permitted query passes an unchanged detached request to `semantic_query_neutral`.
+
+`tools/generate_julia_mcp_contract.py` emits the 119,538-byte Base64-only binding from the shared digest-verified
+bundle. The runtime verifies its canonical SHA before JSON3, deep-copies supported JSON values, and evaluates only
+the frozen schema profile without contract-file reads. Base64 and Random are explicit Julia standard-library
+dependencies; no third-party package, MCP SDK, task runtime, network transport, filesystem authority, or
+executable is added.
+
+Decoded dispatch is not the untrusted-byte boundary. JSON3 retains duplicate pairs while ordinary dictionary
+normalization keeps the last literal/escape-equivalent key, accepts malformed-UTF-8 `String`, and turns `1.0` or
+`1e0` into integer values. Pending `McpWire.jl` must therefore validate strict UTF-8/key uniqueness and retain
+numeric lexemes before JSON3, reconstruct exact number kinds, then use the already-implemented frozen validator
+and canonical writer. It will add public synchronous `serve_mcp_stdio!` over caller-owned borrowed `IO` in `.2`.
+Exact twelve-role admission `.3` alone moves Julia to 4/5 implementations and 4/6 runtimes; current formal state
+remains 3/5 + 3/6 with shared rollout pending.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

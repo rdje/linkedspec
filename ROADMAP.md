@@ -478,6 +478,15 @@ rejects 58 status/source/role/order mutations. Combined proof is 16 focused plus
 no-change closeout `.10.9.4.4` recomposes every committed neutral/Perl/Rust/Dart owner unchanged, closes parent
 `.10.9.4`, and hands the exact contract to Julia `.10.9.5`.
 
+Behavior-free Julia `.10.9.5.0` and ADR `0060` freeze generated Base64 data, frozen runtime, secure decoded
+server, strict number-kind-preserving stdio, exact admission, and no-change closeout under `.1-.4`. Decoded leaf
+`.10.9.5.1` now implements the deterministic 119,538-byte binding, digest-verified closed-schema runtime, public
+opaque `McpServer`, 256-bit OS-random handles, digest authorization, monotonic expiry, lower-only policy, and
+exact discovery/list/two-tool/cancellation dispatch. Focused proof is 48 + 139 and the complete Julia local gate,
+storage oracle, CLI, and corpus 105/105 pass. Canonical order includes the fourth generator/focused proof and
+rejects 65 mutations while formal status stays 3/5 implementations + 3/6 runtimes with rollout pending. Strict
+stdio `.10.9.5.2` is next; `.3` alone may admit Julia at 4/5 + 4/6, then `.4` closes committed owners unchanged.
+
 Duplicate-slot contract (2026-07-20): behavior-free audit `FUTURE-PARITY-BACKLOG.9.1.8.1.0` freezes the post-
 cursor identity boundary. Perl live/emitted and Rust native/generated return null when an
 ordered AND requires the later of two identical regex slots. Dart, Julia, PUC Lua, and LuaJIT native/generated

@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.1` — decoded Julia MCP must be native, opaque, and generated): The
+  implemented server retains the exact caller-created `SemanticIndex`; it never reconstructs an index or derives
+  semantic facts. Registration validates one fresh detached native capabilities response, freezes only its
+  effective lower-only limits, stores the index plus authorization digest and absolute monotonic expiry, and
+  returns a 256-bit random handle. Capabilities remain fresh on every call, and permitted query requests pass
+  unchanged through `semantic_query_neutral` before detached `to_json` conversion.
+
+  Julia's generated contract is Base64-only because arbitrary canonical JSON cannot be represented byte-for-byte
+  by Julia raw-string syntax. The generator reuses the shared digest verifier, emits stable 96-character chunks,
+  and the runtime verifies the decoded 119,538-byte module payload's canonical-bundle SHA before JSON3. The runtime
+  then owns only frozen schema evaluation, clone isolation, canonical JSON, and response construction. It has no
+  filesystem, environment, process, network, source, parser, compiler, runtime-engine, trace, emitter, CLI, or
+  semantic-cache authority.
+
+  `McpServer` is deliberately opaque: public property discovery exposes no retained state, display reports only
+  stopped/live state, and all mutation goes through exported registration, revocation, decoded dispatch, and
+  shutdown operations. Production entropy/time are fixed; deterministic entropy, time, native failure, and
+  response-preparation seams stay private and are exercised by 139 assertions. The generated/frozen layer adds 48
+  assertions. Full Julia local proof, storage containment, CLI, and 105/105 corpus are green. Canonical generator/
+  source/test ordering is now omission-sensitive at 65 rejected mutations, but the status rows remain 3/5 + 3/6
+  pending until `.3`; strict bytes/token/framing and borrowed-I/O behavior stay solely in `.2`.
+
+  Final signoff also passes canonical CI end to end: Julia MCP 187 assertions, composed Julia semantics 416/416,
+  both primary CLI environments at 66/66, and Phase 0 at 1,031/1,031 in 630 seconds. The ignored 13,548-KiB/
+  79-file mdBook rendering and one empty managed run were verified before exact cleanup.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.0` — Julia's codec needs lexical evidence, not replacement semantic
   logic): JSON3 is suitable for the generated trusted bundle and admitted wire values, but its ordinary decode is
   not itself the MCP boundary. It exposes duplicate pairs yet a normalized dictionary silently keeps the last

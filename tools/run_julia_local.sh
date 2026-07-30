@@ -31,6 +31,9 @@ mkdir -p "$WRITABLE_JULIA_DEPOT"
 cd "$REPO_ROOT"
 
 log "using Julia depot: $JULIA_DEPOT_PATH"
+log "checking the generated filesystem-free Julia MCP contract binding"
+bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+
 log "running Julia package tests"
 bash tools/run_julia_project_data.sh --project=julia -e 'import Pkg; Pkg.test()'
 
