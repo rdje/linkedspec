@@ -537,7 +537,6 @@
   },
   "public_contract": {
     "documents": [
-      {"path": "README.md", "required_markers": ["tools/check_root_rule_selection_five_backend.sh", "7 complete / 0 pending"]},
       {"path": "USER_GUIDE.md", "required_markers": ["explicit `top_rule` wins", "first authored `Rule::`", "first authored ordinary `Rule:`"]},
       {"path": "rust/README.md", "required_markers": ["Root-selection parity is closed", "7 complete / 0 pending"]},
       {"path": "dart/README.md", "required_markers": ["Root-selection parity is closed", "tools/check_root_rule_selection_five_backend.sh"]},
@@ -565,8 +564,6 @@
     ],
     "forbidden_current_claims": [
       {"path": "USER_GUIDE.md", "text": "If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry."},
-      {"path": "README.md", "text": "Julia and Lua remain `.4-.5`\n  before final five-backend admission `.6`."},
-      {"path": "README.md", "text": "root governance is now 6/1/44 with only final public no-drift pending."},
       {"path": "dart/README.md", "text": "Dart is now admitted while Julia, Lua, and final no-drift remain."},
       {"path": "julia/README.md", "text": "Exact root\nadmission `.4.3` is next, while root rollout stays 4/7."},
       {"path": "lua/README.md", "text": "final topology admission remain separately owned by `.5.2-.3`."},

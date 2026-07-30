@@ -5,21 +5,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `c6f36fe3` — `FUTURE-PARITY-BACKLOG.10.9.7.0 - plan recurring MCP composition` (93/300; no
-  push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.0`; ADR `0062` freezes exhaustive twenty-response consumer
-  strengthening and routed six-runtime composition before thin-transport promotion.
-- active_leaf: `README-STABILITY-POLICY.0` — behavior-free complete README routing, budget, doctrine, and adoption
-  plan from clean commit `c6f36fe3`; README content and executable enforcement remain untouched until `.1`.
-- active_scope: route all 1,615-line / 159,437-byte README content losslessly; freeze a concise verified prototype,
-  hard line/byte budgets, checker/self-tests, doctrine/registry wiring, cap-increase governance, and `.1-.2` seams.
-- active_progress: approved 71-line template read-only; full section routing complete; verified prototype is 105
-  lines / 5,072 bytes with working Lispish quick start; ADR `0063` fixes 128 lines / 6,144 bytes. Missing project-
-  level license is separately proposed in `.3` for director choice; lockstep and signoff remain.
-- active_exclusions: no README trim, policy/checker execution, runtime/parser/backend/contract/fixture/test/CLI
-  behavior, inferred license terms, external-template mutation, or MCP implementation/promotion.
-- next_after_clean_commit: implement `README-STABILITY-POLICY.1`, then unchanged `.2` closeout; resume recurring
-  MCP driver/promotion `.10.9.7.1` only from the clean adoption boundary; no push before 300.
+- latest_commit: `adcc89fe` — `README-STABILITY-POLICY.0 - plan bounded README adoption` (94/300; no push);
+  commit is brief-cleared/residue-free/clean.
+- latest_completed_leaf: `README-STABILITY-POLICY.0`; ADR `0063` freezes lossless routing, a 105-line / 5,072-byte
+  prototype, hard 128-line / 6,144-byte budgets, seventh-doctrine design, and `.1-.2` implementation seams.
+- active_leaf: `README-STABILITY-POLICY.1` — landing-page/policy/checker/doctrine adoption is signoff-complete
+  from clean `adcc89fe`; its per-leaf commit/brief-clear/clean handoff remains.
+- active_scope: exact audited README trim; normative policy; read-only staged-snapshot checker with cap/content/
+  governance self-tests; seventh registry row; E1/E4, ADR/KM/book/roadmap/live/continuity lockstep and signoff.
+- active_progress: README is exact 105/5,072 within 128/6,144; policy/checker and seventh doctrine ship. Six
+  contract pairs + two surface checks route changing markers to canonical owners. All focused checks and the full
+  canonical rerun pass; Phase 0 is 1,031/1,031 in 668s and CLI is 66x2.
+- active_exclusions: no parser/runtime/backend/MCP/contract/fixture/test/CLI behavior, inferred license terms,
+  external-template mutation, cap expansion, or content outside the audited route map.
+- next_after_clean_commit: run unchanged `README-STABILITY-POLICY.2` closeout, then resume recurring MCP driver/
+  promotion `.10.9.7.1` only from the clean adoption boundary; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -45,12 +45,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read;
   director-provided README policy template read fully and read-only.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 93/300 after `c6f36fe3`; no push.
+- push_policy: hard lock at 300 new local commits; counter 94/300 after `adcc89fe`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: prior MCP `.0` signoff is semantic 6/20/105, MCP 35/10/10/68, five byte-fresh bindings, ledger
-  5/5 + 6/6 pending/114, containment/moved-root, CLI 66x2, Phase 0 1,031/1,031, and dual-ABI Lua; README `.0` is
-  documentation-only and still needs Knowledge Map, mdBook, memory/doctrine, whitespace, and scope signoff.
-- blockers: none. next: finish/verify/commit README `.0`, clear brief and prove clean, then implement `.1`; no push.
+- canonical_state: prior MCP `.0` remains semantic 6/20/105, MCP 35/10/10/68, ledger 5/5 + 6/6 pending/114.
+  README E4 rerun passes 7 doctrines, Rust semantic 82.89s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
+  containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668s.
+- blockers: none. next: finalize/stage `.1` signoff docs, rerun focused post-edit gates, commit/clear/clean, then
+  run unchanged `.2`; no push.

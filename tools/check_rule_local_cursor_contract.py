@@ -245,11 +245,6 @@ def forbidden_claim(path: str, text: str) -> dict[str, str]:
 PUBLIC_CONTRACT = {
     "documents": [
         public_document(
-            "README.md",
-            "cursor rollout is closed at 75 migration files, 8 complete / 0 pending, and 60 rejected mutations",
-            "tools/check_rule_local_cursor_five_backend.sh",
-        ),
-        public_document(
             "TOOLBOX.md",
             "cursor policy comes from each authored rule family",
             "former `parse_mode` key is a removal-diagnostic probe only",
@@ -271,27 +266,27 @@ PUBLIC_CONTRACT = {
         ),
         public_document(
             "ROADMAP.md",
-            "Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations",
+            "Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations",
             "tools/check_rule_local_cursor_five_backend.sh",
         ),
         public_document(
             "ROADMAP_V2.md",
-            "Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations",
+            "Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations",
             "selected 5x2x5 recurring and public proof",
         ),
         public_document(
             "ARCHITECTURE_STATE.md",
             "rule-local cursor public no-drift refresh",
-            "75 migration files / 8 complete + 0 pending / 60 mutations",
+            "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),
         public_document(
             "LIVE_ACHIEVEMENT_STATUS.md",
             "FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift",
-            "75 migration files / 8 complete + 0 pending / 60 mutations",
+            "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),
         public_document(
             "docs/TASK_TREE.md",
-            "rule-local cursor recurring/public no-drift at 75 files / 8 complete + 0 pending / 60 mutations",
+            "rule-local cursor recurring/public no-drift at 74 files / 8 complete + 0 pending / 60 mutations",
             "Explicit repeated-OR action-result shape `.9.1.10` remains",
         ),
         public_document(
@@ -307,12 +302,12 @@ PUBLIC_CONTRACT = {
         public_document(
             "docs/knowledge/rule-local-cursor-five-backend-admission.md",
             "recurring and public admission complete; rollout 8 complete / 0 pending",
-            "75 migration files / 8 complete + 0 pending / 60 mutations",
+            "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),
         public_document(
             "docs/knowledge/rule-local-cursor-neutral-contract.md",
             "backend, recurring, and public rollout admitted at 8 complete / 0 pending",
-            "75 migration files / 8 complete + 0 pending / 60 mutations",
+            "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),
         public_document(
             "docs/knowledge/rule-local-cursor-public-no-drift.md",
@@ -325,7 +320,7 @@ PUBLIC_CONTRACT = {
         ),
         public_document(
             "docs/linkedspec-book/src/appendix/backend-handoff.md",
-            "75 migration",
+            "74 migration",
             "8 complete / 0 pending, and 60 rejected mutations",
         ),
         public_document(
@@ -345,7 +340,7 @@ PUBLIC_CONTRACT = {
         ),
         public_document(
             "docs/linkedspec-book/src/overview/project-status.md",
-            "75 migration files / 8 complete + 0 pending / 60 rejected mutations",
+            "74 migration files / 8 complete + 0 pending / 60 rejected mutations",
             "tools/check_rule_local_cursor_five_backend.sh",
         ),
         public_document(
@@ -370,7 +365,7 @@ PUBLIC_CONTRACT = {
         ),
         public_document(
             "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
-            "75 migration files, 8 complete / 0 pending",
+            "74 migration files, 8 complete / 0 pending",
             "60 rejected mutations",
         ),
         public_document(
@@ -380,7 +375,7 @@ PUBLIC_CONTRACT = {
         ),
         public_document(
             "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
-            "Cursor public no-drift is separately closed at 75 migration files, 8 complete / 0 pending",
+            "Cursor public no-drift is separately closed at 74 migration files, 8 complete / 0 pending",
             "authored family, not a caller option",
         ),
         public_document(
@@ -418,7 +413,6 @@ PUBLIC_CONTRACT = {
             "cli_conformance/README.md",
             "ADR `0044`'s future primary-command migration",
         ),
-        forbidden_claim("README.md", "executable cursor rollout is now 7 complete / 1 pending"),
         forbidden_claim("ROADMAP.md", "Public cursor no-drift `.9.1.9` remains next"),
         forbidden_claim("ROADMAP_V2.md", "public cursor no-drift `.9.1.9` remains next"),
         forbidden_claim(

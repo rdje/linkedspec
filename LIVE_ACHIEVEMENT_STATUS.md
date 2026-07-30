@@ -1,5 +1,31 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Bounded README and seventh doctrine implemented
+
+Planning leaf `.0` is committed at clean `adcc89fe` (94/300, no push), its brief is zero bytes, and rendered/
+prototype/managed-run residue is absent. Implementation leaf `README-STABILITY-POLICY.1` activated task-tree-first
+from that boundary and now contains the exact audited content migration and enforcement; no MCP work was mixed in.
+
+Root README is 105 lines / 5,072 bytes, down from 1,615 / 159,437 while retaining stable purpose, first use,
+architecture/invariants, navigation, contribution/support, and accurate notices. `README_POLICY.md` owns routing
+and hard 128-line / 6,144-byte caps. The repository-rooted read-only checker evaluates the staged commit snapshot
+during pre-commit, runs cap boundary self-tests, verifies stable anchors and routed-heading absence, and requires
+accepted ADR `0063` initially plus a new staged/indexed ADR for future increases.
+
+`README-STABILITY` is the seventh registered doctrine; existing registry execution supplies E3/E4. Focused
+checker, seven-doctrine, exact quick-start, retained-link, syntax, whitespace, and full canonical proof pass.
+Canonical proof includes MCP 5/5 implementations + 6/6 runtimes pending/114, Rust semantic 82.89 seconds,
+Julia 416/416 in 29.3 seconds, cursor 288, containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in
+668 seconds. The `.1` commit/brief-clear/cleanup and unchanged `.2` closeout remain. Project-level licensing stays
+the separate proposed `.3` director decision.
+
+Canonical preflight exposed and corrected the former root-README-as-status-input dependency. Six capability
+contracts/checkers now keep their current public markers in the already-governed guide/mdBook/capability owners,
+not the landing page. Removing root README's obsolete migration/status tokens makes the exact current cursor
+inventory 74 migration files / 8 complete + 0 pending / 60 mutations and the aggregate-selector public census
+59 files / 25 classified historical references / zero current examples; runtime semantics and mutation totals do
+not move. Historical 75/27 evidence remains in its dated records.
+
 ## 2026-07-29 — Bounded README adoption plan active
 
 Recurring MCP planning leaf `.10.9.7.0` is committed cleanly at `c6f36fe3` (93/300, no push), with its brief

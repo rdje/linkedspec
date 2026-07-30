@@ -335,7 +335,7 @@ This document is the current high-level technical reading of the project shape. 
   accuracy executable. README/toolbox/user guide, capability/CLI guidance, roadmaps, task/live architecture,
   ADR `0044`, Knowledge Map, and mdBook API/backend/runtime/status/user-model pages carry exact required markers;
   stale current global-option, pending-backend, generated-v1, and pending-public claims fail mechanically. Cursor
-  governance closes at 75 migration files / 8 complete + 0 pending / 60 mutations, while `.9.1`/`.9` remain active
+  governance closes at 74 migration files / 8 complete + 0 pending / 60 mutations, while `.9.1`/`.9` remain active
   because child `.9.1.10` separately owns explicit repeated-OR action-result shape. The recurring driver remains
   `tools/check_rule_local_cursor_five_backend.sh`; inter-match gap capture has satisfied its cursor prerequisite
   but still requires explicit activation.

@@ -305,7 +305,8 @@ progression is 3,291, shared primary is 65/65 twice, corpus is 105/105, and gove
 Julia admission. Lua admission later advanced the ledger to 69 / 6+2 / 49, root-governance scanning moved the
 inventory to 71, recurring admission established 72 / 7+1 / 56, the Julia duplicate-slot proof path advanced it
 to 73, and duplicate-slot public governance added two parse-mode-chapter scanner paths under `.9.1.9`. Final
-public no-drift closes the current boundary at 75 / 8+0 / 60.
+public no-drift closes the current boundary at 74 / 8+0 / 60 after the bounded root README routes its former
+`parse_mode` migration detail to canonical owners.
 
 Dart core leaf `.9.1.1.2.3.1` closes the preflight's 64/65 boundary: validation now
 accepts markerless one-or-more-rule sources, one compiled resolver implements the exact precedence, native and
@@ -471,9 +472,10 @@ results offline with `bash tools/run_python_project_data.sh tools/check_uniform_
 are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5`
 hard-reject the removed exact selectors before execution. Cross-variant `.12.1.8.6` locks their shared contract,
 boundaries, and zero runtime compatibility. The uniform-binding selector retirement is admitted by `.12.1.9`.
-Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs: 56 public files are
-locked at 27 genuine classified removed/history references and zero current examples, including explicit bare-binding
-anchors in the Rust, Dart, Julia, and Lua READMEs.
+Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs. The current 59-file
+inventory is locked at 25 genuine classified removed/history references and zero current examples after the
+bounded root README removed its two duplicate historical selector mentions. Explicit bare-binding anchors remain
+required in the Rust, Dart, Julia, and Lua READMEs.
 Closed follow-up `.12.1.11` reconciles older statement-only array-end result prose and Perl value-position lowering
 with the already-admitted updated-value contract. `bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py`
 gates the public book/backend summaries, current backend fact anchors, and explicitly classified historical cards.

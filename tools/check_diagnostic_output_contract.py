@@ -188,13 +188,6 @@ RECURRING_GATE = {
 PUBLIC_CONTRACT = {
     "documents": [
         {
-            "path": "README.md",
-            "required_markers": [
-                "tools/check_diagnostic_output_five_backend.sh",
-                "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1",
-            ],
-        },
-        {
             "path": "USER_GUIDE_ActionIR_ControlFlow.md",
             "required_markers": [
                 "caller-owned `RuntimeDiagnosticOutputEvent`",

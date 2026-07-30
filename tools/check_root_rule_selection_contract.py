@@ -329,13 +329,6 @@ RECURRING_GATE = {
 PUBLIC_CONTRACT = {
     "documents": [
         {
-            "path": "README.md",
-            "required_markers": [
-                "tools/check_root_rule_selection_five_backend.sh",
-                "7 complete / 0 pending",
-            ],
-        },
-        {
             "path": "USER_GUIDE.md",
             "required_markers": [
                 "explicit `top_rule` wins",
@@ -488,14 +481,6 @@ PUBLIC_CONTRACT = {
         {
             "path": "USER_GUIDE.md",
             "text": "If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry.",
-        },
-        {
-            "path": "README.md",
-            "text": "Julia and Lua remain `.4-.5`\n  before final five-backend admission `.6`.",
-        },
-        {
-            "path": "README.md",
-            "text": "root governance is now 6/1/44 with only final public no-drift pending.",
         },
         {
             "path": "dart/README.md",

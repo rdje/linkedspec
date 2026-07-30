@@ -213,14 +213,6 @@ RECURRING_GATE = {
 PUBLIC_CONTRACT = {
     "documents": [
         {
-            "path": "README.md",
-            "required_markers": [
-                "linkedspec-logical-helper-v1",
-                "tools/check_logical_helper_five_backend.sh",
-                "8 complete / 0 pending",
-            ],
-        },
-        {
             "path": "USER_GUIDE_ActionIR_ControlFlow.md",
             "required_markers": ["ADR `0043`", "`helper_arity_mismatch`", "all five backends"],
         },
@@ -361,7 +353,6 @@ PUBLIC_CONTRACT = {
             "path": "ROADMAP.md",
             "text": "and logical truthiness/arity/lowering `.5.2` is next",
         },
-        {"path": "README.md", "text": "public no-drift `.5.2.9` is next"},
         {
             "path": "capability_conformance/README.md",
             "text": "seven complete / one pending",

@@ -35,7 +35,6 @@ REQUIRED_ANCHORS = {
     "capability_conformance/uniform_binding_contract.json": [
         '"mutation_result": "mutable operations evaluate to the updated typed target value',
     ],
-    "README.md": ["updated-value end mutations", "all 13 ordinary harray names are closed under `.4.3.5`"],
     "dart/README.md": ["updated-value array end mutations"],
     "julia/README.md": ["updated-value named/scalar-held end mutations"],
     "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": [

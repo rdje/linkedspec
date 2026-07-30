@@ -253,7 +253,6 @@
   },
   "public_contract": {
     "documents": [
-      {"path": "README.md", "required_markers": ["linkedspec-logical-helper-v1", "tools/check_logical_helper_five_backend.sh", "8 complete / 0 pending"]},
       {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "required_markers": ["ADR `0043`", "`helper_arity_mismatch`", "all five backends"]},
       {"path": "USER_GUIDE_ActionIR_EmittedPerlReference.md", "required_markers": ["`LinkedSpec::RuntimeLogical::evaluate`", "never use host `&&` / `||`", "generated `ExecuteWithTrace`"]},
       {"path": "rust/README.md", "required_markers": ["## Logical Helpers", "`RuntimeValue::as_bool`", "`execute_generated_parser_v2`", "`success_logical_helpers_eager`"]},
@@ -281,7 +280,6 @@
       {"path": "lua/README.md", "text": "generated/primary, recurring-gate, and public\ncloseout remain `.5.2.7-.9`"},
       {"path": "ROADMAP_V2.md", "text": "Perl typed logical rollout `.5.2.2` advances the ledger to 1/7 before"},
       {"path": "ROADMAP.md", "text": "and logical truthiness/arity/lowering `.5.2` is next"},
-      {"path": "README.md", "text": "public no-drift `.5.2.9` is next"},
       {"path": "capability_conformance/README.md", "text": "seven complete / one pending"},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Rollout is 7 complete / 1 pending"},
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "ledger is 7 complete / 1 pending"},

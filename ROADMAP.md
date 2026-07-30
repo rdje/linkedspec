@@ -3,7 +3,7 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 
 Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.
 
-Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations; recurring backend proof
+Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations; recurring backend proof
 remains `tools/check_rule_local_cursor_five_backend.sh`.
 Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof remains
 `tools/check_duplicate_regex_slot_identity_five_backend.sh`.
@@ -13,9 +13,10 @@ Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof rem
 README sustainability is an active repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
 defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first
 use, stable architecture/invariants, concise canonical navigation, contribution/support, and accurate notices.
-The complete 1,615-line / 159,437-byte baseline is routed losslessly before trimming; a reviewed 105-line /
-5,072-byte prototype supports hard 128-line / 6,144-byte budgets. Leaf `.0` owns the behavior-free adoption plan,
-`.1` owns the repository policy, trim, and registered `README-STABILITY` doctrine, and `.2` owns unchanged
+The complete 1,615-line / 159,437-byte baseline is routed losslessly before trimming; the adopted README is the
+reviewed 105-line / 5,072-byte prototype within hard 128-line / 6,144-byte budgets. Leaf `.0` commits the
+behavior-free adoption plan at `adcc89fe`; `.1` implements the repository policy, trim, and registered
+`README-STABILITY` doctrine and is canonical-signoff-complete awaiting its per-leaf commit; `.2` owns unchanged
 closeout before the recurring MCP frontier resumes. Project-level licensing remains a separate proposed director
 decision; no terms are inferred from component/vendor licenses.
 

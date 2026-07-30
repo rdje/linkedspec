@@ -17,7 +17,7 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > options and `--parse-mode` are removed with targeted diagnostics. Descriptors publish
 > `linkedspec-rule-local-cursor-v1` plus derived per-rule facts, and generated source v2 derives policy from its
 > ordered label/family plan. The recurring gate composes all six runtime legs, selected 5x2x5 primary cases, and
-> support ledgers. Public no-drift closes the executable ledger at 75 migration files, 8 complete / 0 pending,
+> support ledgers. Public no-drift closes the executable ledger at 74 migration files, 8 complete / 0 pending,
 > and 60 rejected mutations. ADR `0048` now accepts per-hit action-result collection for explicit repetition
 > (`*`, `+`, `?`, `OR`, `OR+`, and bounded `OR`) while preserving scalar `|`. Perl, Rust, Dart, Julia, PUC Lua,
 > and LuaJIT implement that rule. The executable neutral contract plus ten-role Perl and byte-identical 15-role
@@ -893,4 +893,4 @@ normalized/loaded/descriptor/emitted/generated/trace/composition/removal/primary
 also requires exact Julia and dual-ABI Lua consumers over the same normalized topology. One recurring gate now
 runs all six runtime legs, five cursor-owned primary cases across five commands and two environments, and the
 support ledgers. With public no-drift admitted, it reports 36 family spellings, 18 edge cases, eight parent/child
-cases, 75 migration files, 8 complete / 0 pending, and 60 rejected drift mutations.
+cases, 74 migration files, 8 complete / 0 pending, and 60 rejected drift mutations.

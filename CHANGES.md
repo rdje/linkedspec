@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-29 — README-STABILITY-POLICY.1 — adopt bounded README and doctrine
+
+Replaced the routed 1,615-line / 159,437-byte mixed landing/status/history/inventory document with the exact
+reviewed 105-line / 5,072-byte landing page. It retains LinkedSpec's purpose and audience, recursion/cursor/
+capture/staging identity, one verified Lispish first use, the one-contract/five-native-implementation architecture,
+relocation and same-volume invariants, canonical documentation/contribution/support links, a concise repository
+map, and the truthful absence of a project-level license. All changing/deep detail remains in the destinations
+audited and committed by `.0`; git preserves the former text and no unique information is stranded.
+
+Added normative root `README_POLICY.md` and executable `scripts/check_readme_stability.sh`. The self-rooted,
+read-only checker enforces unique machine caps of 128 lines / 6,144 bytes, stable headings and links, routed-
+heading exclusions, exact/below/line-only/byte-only/combined cap self-tests, and staged cap governance. Initial
+adoption requires accepted indexed ADR `0063`; a future increase requires a newly added, staged, indexed ADR with
+exact old/new transition markers.
+
+Registered `README-STABILITY` as the seventh doctrine and synchronized enforcement prose, bootstrap discovery,
+Toolbox, canonical tracked-input/syntax checks, ADR/Knowledge Map, task/roadmaps, mdBook, and continuity docs.
+The first canonical run passed all seven doctrines and syntax, then exposed six existing capability contracts/
+checkers and two surface checks that still required volatile root README markers/examples. Routed those
+requirements to the already-governed guide/capability/mdBook owners while retaining root README in broad
+forbidden-syntax discovery. Updated only derived documentation inventories: cursor 75→74 files at unchanged
+8+0/60; selector history 27→25 inside the unchanged 59-file/zero-current surface; logical/root/duplicate/repeated/
+diagnostic mutation totals remain unchanged. All eight affected focused checkers and canonical signoff pass.
+
+Final staged-snapshot signoff passes all seven doctrines, exact README cap/governance proof, mdBook, Knowledge
+Map 756/6,129, memory architecture, MCP 5/5 implementations + 6/6 runtimes pending/114, Rust semantic 1/1 in
+82.89 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, cursor 288, repository containment, moved-root execution,
+primary CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668 seconds. No production or language behavior moves.
+
 ## 2026-07-29 — README-STABILITY-POLICY.0 — plan bounded README adoption
 
 Created the README-sustainability task tree first from clean MCP planning commit `c6f36fe3`, then read the

@@ -371,10 +371,6 @@ RECURRING_GATE = {
 PUBLIC_CONTRACT = {
     "documents": [
         {
-            "path": "README.md",
-            "required_markers": [MIGRATION["recurring_driver"], "7 complete / 0 pending"],
-        },
-        {
             "path": "USER_GUIDE.md",
             "required_markers": [
                 "Duplicate regex text does not merge structural slots",
@@ -472,7 +468,6 @@ PUBLIC_CONTRACT = {
         },
     ],
     "forbidden_current_claims": [
-        {"path": "README.md", "text": "Governance is 6 complete + 1 pending / 46 mutations"},
         {"path": "capability_conformance/README.md", "text": "Governance is 6+1 with 46 rejected"},
         {
             "path": "ROADMAP.md",

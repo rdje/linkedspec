@@ -221,7 +221,6 @@
   },
   "public_contract": {
     "documents": [
-      {"path": "README.md", "required_markers": ["tools/check_duplicate_regex_slot_identity_five_backend.sh", "7 complete / 0 pending"]},
       {"path": "USER_GUIDE.md", "required_markers": ["Duplicate regex text does not merge structural slots", "first authored eligible slot wins"]},
       {"path": "rust/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
       {"path": "dart/README.md", "required_markers": ["Duplicate regex-slot identity is closed", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
@@ -245,7 +244,6 @@
       {"path": "docs/knowledge/duplicate-regex-slot-identity-five-backend-admission.md", "required_markers": ["7 complete / 0 pending", "LINKEDSPEC_RUN_DUPLICATE_SLOT_MATRIX=1"]}
     ],
     "forbidden_current_claims": [
-      {"path": "README.md", "text": "Governance is 6 complete + 1 pending / 46 mutations"},
       {"path": "capability_conformance/README.md", "text": "Governance is 6+1 with 46 rejected"},
       {"path": "ROADMAP.md", "text": "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are now 5 complete + 2 pending / 41 mutations"},
       {"path": "ROADMAP_V2.md", "text": "Duplicate-slot neutral, Perl, Rust, Dart, and Julia are 5 complete + 2 pending / 41 mutations"},

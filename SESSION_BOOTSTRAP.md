@@ -9,6 +9,9 @@ Read `README.md`, then read and thoroughly understand:
 - Active task files listed in `docs/TASK_TREE.md` — the detailed task breakdown and current executable leaf.
 - Relevant records under `docs/decisions/` — durable cross-cutting facts/decisions (memory layer C).
 
+Before editing root `README.md`, read `README_POLICY.md`; changing detail routes to its canonical owner and the
+registered `README-STABILITY` doctrine enforces the reviewed line/byte budgets and cap-increase decision rule.
+
 After reading the above, thoroughly, meticulously and precisely analyze `LinkedSpec.pm` and its import tree.
 
 When done, update `ARCHITECTURE_STATE.md` if deemed necessary, then help me fulfil all the objectives as captured in the roadmap. When PNT is requested, select the first eligible leaf from the active task tree's current frontier.

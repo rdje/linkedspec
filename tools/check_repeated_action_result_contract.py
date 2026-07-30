@@ -268,7 +268,6 @@ RECURRING_GATE = {
 }
 PUBLIC_CONTRACT = {
     "documents": [
-        {"path": "README.md", "required_markers": ["tools/check_repeated_action_result_five_backend.sh", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
         {"path": "USER_GUIDE.md", "required_markers": ["Explicit repetition collects", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
         {"path": "rust/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
         {"path": "dart/README.md", "required_markers": ["Repeated-action result parity is closed", "tools/check_repeated_action_result_five_backend.sh"]},
@@ -295,7 +294,6 @@ PUBLIC_CONTRACT = {
         {"path": "docs/knowledge/rule-local-cursor-public-no-drift.md", "required_markers": ["AND/OR parent is closed", "FUTURE-PARITY-BACKLOG.9.1.10.7"]},
     ],
     "forbidden_current_claims": [
-        {"path": "README.md", "text": "7 complete / 1 pending with 44 rejected"},
         {"path": "capability_conformance/README.md", "text": "Rollout is 7 complete / 1 pending"},
         {"path": "ROADMAP.md", "text": "ADR `0048` repeated-action rollout is 7 complete / 1 pending"},
         {"path": "ROADMAP_V2.md", "text": "Repeated action results are 7 complete / 1 pending"},

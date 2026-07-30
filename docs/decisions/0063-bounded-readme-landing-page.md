@@ -1,7 +1,7 @@
 # ADR 0063: README is a bounded stable landing page
 
 - Date: 2026-07-29
-- Status: accepted plan; content and enforcement adoption pending `README-STABILITY-POLICY.1`
+- Status: accepted; content and enforcement implemented by `README-STABILITY-POLICY.1`
 - Tags: documentation, readme, doctrine, maintenance, navigation, local-ci
 
 ## Context
@@ -41,13 +41,20 @@ not copied, from README. `README_POLICY.md` is the normative routing contract.
 
 ### 2. Initial budgets are 128 lines and 6,144 bytes
 
-Leaf `README-STABILITY-POLICY.1` will trim README to the reviewed 105-line / 5,072-byte prototype class. The
+Leaf `README-STABILITY-POLICY.1` trims README to the reviewed 105-line / 5,072-byte prototype class. The
 mechanical maximum is **128 lines and 6,144 bytes**, leaving 23 lines and 1,072 bytes of headroom (about 22% and
 21%) for stable navigation maintenance without inviting status accretion.
 
 Both limits are hard ceilings. Ordinary feature work must route detail elsewhere. Increasing either limit
 requires a new accepted decision record that states the old and new values, why routing or editing cannot solve
 the need, and what new stable landing-page responsibility justifies the increase.
+
+Machine-auditable initial transition:
+
+- Previous README line cap: `unbounded`
+- New README line cap: `128`
+- Previous README byte cap: `unbounded`
+- New README byte cap: `6144`
 
 ### 3. README stability is a registered doctrine
 
@@ -71,6 +78,10 @@ discarded. Public behavior and examples belong in the mdBook/user guide; directi
 trees; current owner structure in `ARCHITECTURE_STATE.md`; operational proof in `TOOLBOX.md` and the mdBook local-
 CI chapter; rationale in ADRs/Knowledge cards; history in `CHANGES.md`; and resume state in continuity documents.
 
+Capability/public no-drift checkers must follow the same rule. They may scan README for forbidden syntax or stale
+classes, but current capability markers, rollout counts, commands, and examples belong to the governed neutral
+contract, guide, capability/backend documentation, mdBook, roadmap, ADR, or Knowledge owners—not README.
+
 ## Consequences
 
 - README becomes fast to scan and mechanically resistant to unbounded growth.
@@ -79,6 +90,11 @@ CI chapter; rationale in ADRs/Knowledge cards; history in `CHANGES.md`; and resu
 - README edits become uncommon and are justified by changes to purpose, first use, top-level architecture, or
   navigation rather than by every implementation slice.
 - Licensing remains truthful but unresolved until the director chooses project-level terms.
+
+Implementation signoff passes the staged-snapshot checker and the complete canonical local gate, including all
+seven doctrines, repository-volume containment, moved-root execution, primary CLI 66x2, and Phase 0
+1,031/1,031. Capability behavior is unchanged; only canonical documentation ownership and derived public-file
+inventories move.
 
 ## Links
 

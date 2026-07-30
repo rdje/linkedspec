@@ -4,6 +4,12 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
+The root README is now a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
+and the registered `README-STABILITY` doctrine. Hard ceilings are 128 lines and 6,144 bytes; changing status,
+history, inventories, and deep examples route to their canonical owners. Adoption signoff passes all seven
+doctrines, repository-volume and moved-root proof, primary CLI 66x2, and Phase 0 1,031/1,031 without language or
+runtime behavior movement.
+
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic
 119,538-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only
@@ -102,7 +108,8 @@ entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/1
 67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
 cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission and public
 no-drift now compose Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, support ledgers, and
-the current public surface at 75 migration files / 8 complete + 0 pending / 60 rejected mutations. Run
+the current public surface at 74 migration files / 8 complete + 0 pending / 60 rejected mutations after root
+README status detail moved to its canonical owners. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` for the exact recurring proof. A separate shared-source root consumer
 executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary
 65/65x4, and corpus 105/105x2. Final recurring/public admission closes root governance at 7 complete / 0 pending

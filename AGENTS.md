@@ -32,6 +32,8 @@ point back here. The system of record is **`README.md`** (the project) +
 
 - **No change without an owning task-tree leaf first** (`docs/TASK_TREE_README.md`;
   doctrine: `docs/decisions/0001-task-tree-and-commit-doctrine.md`).
+- **Keep `README.md` a bounded stable landing page** (`README_POLICY.md`, ADR `0063`). Route changing detail to
+  its canonical owner; `scripts/check_readme_stability.sh` enforces both budgets and reviewed cap increases.
 - **Route every durable thing to a layer and commit before the turn ends** — resume
   pointer (`MEMORY.md`, overwrite-only, capped) / task-trees (`docs/tasks/`) / decision
   records (`docs/decisions/`) / git history. Nothing important may live only in this

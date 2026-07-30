@@ -405,6 +405,8 @@ require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_doctrines.sh
 require_tracked_file scripts/check_diagnosis_evidence.sh
+require_tracked_file scripts/check_readme_stability.sh
+require_tracked_file README_POLICY.md
 require_tracked_file DOCTRINE_ENFORCEMENT.md
 require_tracked_file TOOLBOX.md
 require_tracked_file MEMORY_ARCHITECTURE.md
@@ -440,6 +442,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_root_rule_selection_five_backend.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
+ scripts/check_readme_stability.sh \
  tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec

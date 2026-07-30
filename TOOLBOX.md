@@ -28,6 +28,9 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   task file to carry the checklist below with LinkedSpec-tool evidence signatures. `REPO-ROOT-PATHS`
   ([`scripts/check_repo_root_path_portability.sh`](scripts/check_repo_root_path_portability.sh)) independently
   scans tracked parent-repository text and locks all five primary-command runtime root anchors on every run.
+  `README-STABILITY` ([`scripts/check_readme_stability.sh`](scripts/check_readme_stability.sh)) keeps the root
+  landing page within the reviewed `README_POLICY.md` line/byte caps, verifies stable navigation, rejects routed
+  status/history/inventory headings, and requires a new indexed ADR for any increase.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 

@@ -1,5 +1,41 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`README-STABILITY-POLICY.1` — enforce the commit snapshot, not a potentially different working
+  copy): The checker selects the git index whenever any staged change exists, so pre-commit evaluates the exact
+  README/policy/ADR snapshot being committed. With no staged changes it evaluates the working tree, which keeps
+  focused and canonical runs intuitive. This prevents an unstaged temporary cap increase from admitting an
+  oversized staged README under the old committed policy.
+
+  Cap markers are unique machine-readable policy lines. The normal check counts exact streamed bytes and lines,
+  verifies stable headings/navigation, and rejects the former status/history/inventory heading classes. Pure
+  in-process boundary tests admit exact and below-limit counts and reject line-only, byte-only, and combined
+  overflow without temporary files. Initial adoption resolves the already accepted/indexed ADR `0063`; later cap
+  increases must add and index a new ADR containing exact previous/new line and byte markers.
+
+  The 105-line / 5,072-byte README is not a lossy summary of the old document. `.0` routed each volatile class to
+  an existing canonical owner first, while `.1` preserves only the stable product entry. The license notice is
+  deliberately factual: no root project license is declared, and nested/vendor terms cannot be promoted by
+  inference. Parser, runtime, backend, MCP, contract, fixture, test, and CLI behavior are unchanged.
+
+  Canonical E4 found an important hidden coupling after doctrines/syntax: logical-helper governance still required
+  its contract id, recurring driver, and 8/0 status from root README. A complete source census found the same class
+  in diagnostic, cursor, root-selection, duplicate-slot, and repeated-action contract/checker pairs plus required
+  current anchors in aggregate-selector and uniform-binding surface checks. Reintroducing those markers would
+  defeat the policy. The correct fix removes only the root required-marker/forbidden-status rows; canonical guide,
+  capability, backend, roadmap, mdBook, ADR, and Knowledge owners remain mechanically required. Root README remains
+  in broad public scans that reject retired syntax, so stability does not create a blind spot.
+
+  Two exact derived inventories legitimately move because their duplicated root tokens disappear: cursor 75→74
+  migration files with rollout/mutations unchanged at 8+0/60, and aggregate-selector classified history 27→25
+  with discovered/current examples unchanged at 59/0. Historical 75/27 records remain dated evidence. All eight
+  affected checkers pass after routing; no executable language or runtime contract moves.
+
+  The authoritative staged-snapshot rerun then passes the complete local gate: all seven doctrines; exact README
+  cap/content/governance checks; MCP 5/5 implementations + 6/6 runtimes pending/114; Rust semantic 1/1 in 82.89
+  seconds; Dart 1/1; Julia 416/416 in 29.3 seconds; cursor 288; repository-volume containment and moved-root proof;
+  primary CLI 66x2; RAM 74%; and Phase 0 1,031/1,031 in 668 seconds. That full rerun, rather than the focused
+  repair alone, is the admission authority for the new doctrine.
+
 - 2026-07-29 (`README-STABILITY-POLICY.0` — a landing page stays useful by routing volatility, not summarizing it):
   The 1,615-line / 159,437-byte root README combines stable product entry with status, history, detailed
   inventories, and gate mechanics already owned elsewhere. The complete section audit establishes a lossless

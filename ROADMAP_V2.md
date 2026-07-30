@@ -1,7 +1,7 @@
 # ROADMAP V2
 Execution-oriented companion to `ROADMAP.md`.
 
-Rule-local cursor rollout is closed at 75 files / 8 complete + 0 pending / 60 mutations, with
+Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with
 selected 5x2x5 recurring and public proof.
 Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof remains
 `tools/check_duplicate_regex_slot_identity_five_backend.sh`.
@@ -10,8 +10,10 @@ Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof rem
 
 Active README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed
-105-line / 5,072-byte trim; hard maxima are 128 lines / 6,144 bytes. `.0` freezes routing and doctrine design,
-`.1` adopts `README_POLICY.md`, the trim, and registered enforcement, and `.2` recomposes unchanged before MCP
+105-line / 5,072-byte trim; hard maxima are 128 lines / 6,144 bytes. `.0` is committed at `adcc89fe`; `.1` has
+adopted `README_POLICY.md`, the exact trim, and registered enforcement and is canonical-signoff-complete awaiting
+its per-leaf commit; `.2`
+recomposes unchanged before MCP
 work resumes. The absence of a project-level license is stated truthfully and tracked separately in proposed
 `.3`; nested/vendor terms are not authority to choose one.
 

@@ -78,7 +78,8 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
   Planned commit: `README-STABILITY-POLICY.0 - plan bounded README adoption`
 
 - ID: `README-STABILITY-POLICY.1`
-  Status: `pending`
+  Status: `done` (2026-07-29; signoff-complete from clean plan commit `adcc89fe`; awaiting this leaf's
+    implementation commit)
   Goal: Adopt the policy, route and trim README content, and mechanically admit the dual-budget doctrine.
   Depends on: `.0`
   Acceptance: Add the repository-owned policy; preserve or route every unique current README fact; produce a
@@ -86,6 +87,42 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
     rejection/acceptance self-tests; register the doctrine and mirror it in enforcement architecture/bootstrap/
     contributor guidance; update affected public and continuity docs; pass focused and canonical signoff; commit,
     clear the brief, remove only exact generated residue, and prove clean.
+
+  #### Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — `wc -l -c README.md` recorded the pre-change 1,615-line / 159,437-byte mixed
+    landing/status/history/inventory surface; `.0` verified every section's canonical destination before removal.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — The `.0` route table and ADR `0063` show duplicate changing detail had
+    accumulated in README despite canonical mdBook/roadmap/task/Toolbox/continuity owners. Canonical E4 then
+    exposed a second mechanism: six capability contracts/checkers plus two public-surface checkers still treated
+    root README status/examples as machine inputs; no parser/runtime defect.
+  - [x] **FIX** — Root `README_POLICY.md`, the 105-line / 5,072-byte landing page, executable self-rooted
+    `scripts/check_readme_stability.sh`, `README-STABILITY` registry/prose/E1/E4 wiring, and exact initial/future
+    cap governance are implemented within this leaf. Capability marker requirements now use their already-
+    canonical guide/capability/mdBook owners; root README remains in broad public forbidden-syntax scans but owns
+    no volatile capability marker.
+  - [x] **ADDRESSED (verified)** — `bash scripts/check_readme_stability.sh` reports README 105/128 lines and
+    5,072/6,144 bytes and cap self-tests/stable anchors/routed headings/governance PASS; the exact Lispish quick
+    start returns `["hello",["world"]]`; every retained local README link exists.
+    Eight affected focused checkers PASS; exact derived current counts are cursor 74/8+0/60, logical 19 docs/12
+    forbidden/26 mutations, root 24/17/54, duplicate 21/11/59, aggregate selector 59/25/0, and uniform-binding 51
+    scanned/12 anchors/9 historical cards.
+  - [x] **NO REGRESSION** — Stage-index initial-ADR proof, all seven doctrines, mdBook, Knowledge Map, memory
+    architecture, canonical `bash tools/run_ci_local.sh`, whitespace/path/scope checks, and cleanup are the named
+    E4 oracles; the canonical rerun independently verifies the claim before commit.
+  - [x] **LOCKSTEP** — Policy/README/checker/registry/enforcement/bootstrap/Toolbox/local-CI requirement, ADR/KM,
+    task/index, roadmaps, public book, changes/notes/live/memory, commit/brief/cleanup are synchronized; focused
+    staged-snapshot checks pass and canonical E4 is the final truth test.
+
+  Verification: **PASS 2026-07-29.** The staged commit snapshot passes all seven doctrines, exact README
+    105/128-line and 5,072/6,144-byte enforcement plus initial-ADR governance, Knowledge Map 756/6,129, mdBook,
+    memory architecture, and the complete canonical local gate. Canonical proof includes MCP 5/5 implementations
+    + 6/6 runtimes pending/114, Perl/Rust/Dart/Julia/Lua admission, Rust semantic 1/1 in 82.89 seconds, Dart 1/1,
+    Julia 416/416 in 29.3 seconds, rule-local cursor 288 assertions, repository-volume containment, moved-root
+    execution, primary CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668 seconds. No parser, runtime, backend,
+    MCP, neutral-contract, fixture, primary-CLI, or user-visible language behavior changes.
+
+  Commit: `README-STABILITY-POLICY.1 - adopt bounded README doctrine`
 
 - ID: `README-STABILITY-POLICY.2`
   Status: `pending`
@@ -112,6 +149,7 @@ Perl quick start returns the exact expected JSON. The retained/routed section cl
 | Current README class | Stable landing-page residue | Canonical owner for changing/deep detail |
 | --- | --- | --- |
 | Current design frontier and milestone history | None; link to status owners | `ROADMAP.md`, `ROADMAP_V2.md`, `docs/tasks/`, `CHANGES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, mdBook project status |
+| Machine-checked capability status/markers | None; stable links only | Neutral contracts, `capability_conformance/README.md`, `USER_GUIDE.md`, backend READMEs, mdBook status/API/DSL/local-CI chapters, Knowledge cards |
 | Repository relocation invariant | One concise invariant and navigation link | ADR `0052`, `REPO-ROOT-PATH-PORTABILITY`, relocation Knowledge card, mdBook local CI |
 | Project-data locality and same-volume storage | One concise invariant and navigation link | ADR `0053`, `PROJECT-DATA-SSD-ROOTING`, storage Knowledge cards, mdBook local CI |
 | Documentation layers | Compact canonical navigation | `MEMORY_ARCHITECTURE.md`, `docs/TASK_TREE.md`, `docs/decisions/INDEX.md`, `KNOWLEDGE_MAP.md`, `DOCTRINE_ENFORCEMENT.md`, mdBook documentation workflow |
@@ -149,8 +187,8 @@ decision records, and git; they do not need a second current-facing copy in READ
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `README-STABILITY-POLICY.0` | `done` | Lossless routing, measured budgets, doctrine design, and implementation seams are frozen in ADR `0063`. |
-| 2 | `README-STABILITY-POLICY.1` | `pending` | Next after `.0` commit/brief-clear/clean proof; implements only the audited content migration and doctrine. |
-| 3 | `README-STABILITY-POLICY.2` | `pending` | Re-verifies committed owners and returns the clean frontier to MCP work. |
+| 2 | `README-STABILITY-POLICY.1` | `done` | Canonical signoff passes from clean `adcc89fe`; implementation awaits its per-leaf commit. |
+| 3 | `README-STABILITY-POLICY.2` | `pending` | Next after `.1` commit/brief-clear/clean; re-verifies committed owners and returns the clean frontier to MCP work. |
 | — | `README-STABILITY-POLICY.3` | `proposed` | Separate director decision; it does not block bounded-README adoption or MCP handback. |
 
 ## Decisions
@@ -165,6 +203,10 @@ decision records, and git; they do not need a second current-facing copy in READ
   Track that governance question in `.3`; adoption states the current truth and does not invent terms.
 - `2026-07-29`: Accept ADR `0063`: a 105-line / 5,072-byte lossless prototype supports hard ceilings of 128 lines
   and 6,144 bytes. Any increase requires a new accepted, indexed ADR and cannot be ordinary feature work.
+- `2026-07-29`: Canonical E4 revealed root README was still a machine input for six capability public contracts
+  and two surface checkers. Route required current markers to their already-governed canonical documents; keep
+  README in broad forbidden-syntax discovery where useful, but never require volatile status/examples from it.
+  The resulting exact current cursor and selector inventories are 74 files and 59/25/0; dated 75/27 history stays.
 
 ## Open Questions
 
@@ -180,13 +222,14 @@ decision records, and git; they do not need a second current-facing copy in READ
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-29` | `README-STABILITY-POLICY.0` | Clean `c6f36fe3`; external policy 71/71 lines read-only; baseline 1,615/159,437; prototype 105/5,072 and quick start exact; Knowledge Map 756/6,129; mdBook, memory 56/60, six doctrines, whitespace, path scan, and scope checks PASS. | DONE. README/policy/checker behavior unchanged; `.1` follows only after commit/brief-clear/clean proof. |
+| `2026-07-29` | `README-STABILITY-POLICY.1` | First E4 run exposed the stale root-marker coupling after seven doctrines/syntax passed. After complete routing, all eight focused owners pass; the canonical rerun passes MCP 5/5 + 6/6 pending/114, Rust semantic 82.89s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668s. | DONE. Signoff-complete; no runtime semantics changed; implementation commit/brief-clear/clean follows. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `README-STABILITY-POLICY.0` | `README-STABILITY-POLICY.0 - plan bounded README adoption` | Behavior-free adoption plan; commit hash recorded by git history. |
-| `README-STABILITY-POLICY.1` | `pending` | Policy, trim, checker, doctrine, and lockstep. |
+| `README-STABILITY-POLICY.1` | `README-STABILITY-POLICY.1 - adopt bounded README doctrine` | Policy, trim, checker, doctrine, and canonical lockstep. |
 | `README-STABILITY-POLICY.2` | `pending` | Unchanged closeout and MCP handback. |
 | `README-STABILITY-POLICY.3` | `proposed` | Project-level license decision; not part of the adoption critical path. |
 
@@ -199,3 +242,11 @@ decision records, and git; they do not need a second current-facing copy in READ
 - `2026-07-29`: Completed `.0`: lossless route table, ADR `0063`, 128-line / 6,144-byte enforcement design,
   implementation/closeout split, public-book explanation, Knowledge fact/map, continuity alignment, and focused
   signoff are complete without changing README or executable behavior.
+- `2026-07-29`: Activated `.1` only after plan commit `adcc89fe`, zero-byte brief, absent rendered/prototype
+  residue, and clean worktree proof.
+- `2026-07-29`: Canonical gate found the old README was an executable status-marker owner. Root-caused and routed
+  all such requirements to canonical public owners, preserved broad forbidden-syntax scans, updated exact derived
+  inventories, and passed every affected focused checker before the canonical rerun.
+- `2026-07-29`: Completed `.1` signoff: the full staged-snapshot canonical rerun exits 0 through all seven
+  doctrines, six-runtime MCP admission, semantic/cursor/storage/relocation proof, primary CLI 66x2, and Phase 0
+  1,031/1,031. The leaf is ready for its per-slice commit; `.2` remains dependency-ordered behind clean handoff.

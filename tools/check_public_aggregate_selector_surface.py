@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_PUBLIC_FILE_COUNT = 59
-EXPECTED_CLASSIFIED_REFERENCE_COUNT = 27
+EXPECTED_CLASSIFIED_REFERENCE_COUNT = 25
 EXACT_SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
 )
@@ -119,11 +119,6 @@ def check_stale_status(paths: list[Path]) -> None:
 
 def require_public_anchors() -> None:
     required = {
-        "README.md": (
-            "Selector retirement is complete",
-            "set(items, [])",
-            "push(items, value)",
-        ),
         "ROADMAP.md": ("Uniform-binding selector retirement `.12.1` is complete",),
         "ARCHITECTURE_STATE.md": ("Aggregate-selector retirement is admitted",),
         "capability_conformance/README.md": (

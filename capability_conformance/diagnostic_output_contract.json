@@ -232,7 +232,6 @@
   },
   "public_contract": {
     "documents": [
-      {"path": "README.md", "required_markers": ["tools/check_diagnostic_output_five_backend.sh", "LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX=1"]},
       {"path": "USER_GUIDE_ActionIR_ControlFlow.md", "required_markers": ["caller-owned `RuntimeDiagnosticOutputEvent`", "`print_each` requires exactly two or three"]},
       {"path": "USER_GUIDE_ActionIR_EmittedPerlReference.md", "required_markers": ["`LinkedSpec::RuntimeDiagnosticOutput::emit`", "never raw host `print`/`say`"]},
       {"path": "rust/README.md", "required_markers": ["## Diagnostic Output Events", "`execute_with_diagnostic_output`", "`execute_with_trace_and_diagnostic_output`"]},
