@@ -281,6 +281,32 @@ def validate_sources(
     )
     require(contract["semantic_contract"]["contract_id"] == semantic_contract["contract_id"], "semantic contract id drifted")
     require(contract["semantic_contract"]["query_id"] == semantic_contract["query_id"], "semantic query id drifted")
+    governed_fact_keys: list[str] = []
+    for keys in semantic_contract["schema"]["fact_keys"].values():
+        for key in keys:
+            if key not in governed_fact_keys:
+                governed_fact_keys.append(key)
+    require(
+        definitions["recordFacts"]["propertyNames"]["enum"] == governed_fact_keys,
+        "MCP record fact keys drifted from the semantic contract union",
+    )
+    require(
+        definitions["semanticQueryRequest"]["properties"]["contract"]
+        == {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "x-linkedspec-maxUtf8Bytes": 128,
+        },
+        "semantic query contract-string boundary drifted",
+    )
+    policy = contract["deployment_policy"]
+    require(
+        policy["pre_dispatch_enforcement"] == "explicit_overlay_component_presence_only"
+        and policy["unsupplied_component"] == "native_dispatch_and_native_portable_response"
+        and policy["partial_overlay"] == "independent_per_component",
+        "deployment policy component-presence boundary drifted",
+    )
     require(len(contract["server_identities"]) == 5, "five native identities are required")
     require(len({row["name"] for row in contract["server_identities"]}) == 5, "server identities repeat")
     require([row["name"] for row in contract["tools"]] == [

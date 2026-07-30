@@ -20,7 +20,7 @@ CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 CONTRACT_ID = "linkedspec-mcp-implementation-admission-v1"
 TRANSPORT_ID = "linkedspec-mcp-transport-v1"
 TASK_OWNER = "FUTURE-PARITY-BACKLOG.10.9.2.3"
-TRANSPORT_SHA256 = "1f16d25ad1d3351da806428146ac43acff0b27ec4707ca4a26d047e01a444732"
+TRANSPORT_SHA256 = "e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3"
 
 ROLES = [
     "contract_inventory",

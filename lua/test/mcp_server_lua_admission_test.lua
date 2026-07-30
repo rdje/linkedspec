@@ -242,7 +242,7 @@ admission_role(roles_seen, "contract_inventory", function()
   end
   local validator = read_object(
     "capability_conformance/mcp_semantic_transport/validator_cases.json")
-  check_equal(#validator.mutation_order, 68, "transport validator mutation count")
+  check_equal(#validator.mutation_order, 76, "transport validator mutation count")
   local transport = read_object("capability_conformance/mcp_semantic_transport_contract.json")
   check_equal(transport.contract_id, "linkedspec-mcp-transport-v1", "transport identity")
   check_equal(transport.protocol_version, "2026-07-28", "protocol version")

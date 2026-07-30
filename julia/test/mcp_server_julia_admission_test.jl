@@ -269,7 +269,7 @@ end
         validator = _mcp_admission_read_object(
             "capability_conformance/mcp_semantic_transport/validator_cases.json",
         )
-        @test length(validator["mutation_order"]) == 68
+        @test length(validator["mutation_order"]) == 76
         transport = _mcp_admission_read_object(
             "capability_conformance/mcp_semantic_transport_contract.json",
         )

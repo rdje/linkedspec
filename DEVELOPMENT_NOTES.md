@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` — transport validation and semantic support are distinct):
+  The MCP schema must validate the safe shape of a semantic contract identifier, not decide which semantic
+  contract versions exist. A nonempty 128-character/128-UTF-8-byte shape preserves bounded transport admission;
+  the native semantic query owner then returns the portable unsupported-version response. Output facts follow the
+  same ownership rule: the MCP enum is independently checked against the semantic contract's exact first-seen
+  72-key union rather than maintained as a second vocabulary.
+
+  Effective policy values alone cannot express lowering authority. Native defaults and caller-supplied overlays
+  may compute the same number while having different dispatch semantics. Each server therefore retains explicit
+  presence beside effective limits. Omitted fields remain descriptive native limits and defer to native portable
+  diagnostics; supplied components become pre-dispatch fences. A non-text source overlay also explicitly removes
+  content-digest availability because that capability is derived from source detail. Typed Rust/Dart/Julia/Lua
+  budget values supply the complete budget component; Perl additionally retains per-field presence for its hash
+  API. In every implementation, schema validation still precedes the policy seam.
+
+  Atomic movement was required because the schema/policy manifest is embedded in five generated bindings and
+  consumed by five servers. The resulting coherent revision is neutral MCP 35/10/10/76 with byte-fresh bindings
+  83,411/83,225/83,214/120,030/83,166. Six-runtime focused and canonical proof is green, while formal rollout
+  correctly remains pending/114 until the separate all-twenty consumer leaf supplies the missing identity
+  evidence.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` — transport repair is atomic; proof and promotion are not):
   The director authorized exact all-twenty repair after blocker commit `20ee93c9`. The coherent behavior boundary
   is larger than one schema edit: the neutral policy profile is embedded in every generated binding and consumed

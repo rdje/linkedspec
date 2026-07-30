@@ -218,6 +218,83 @@ void main() {
     }
   });
 
+  test('omitted and partial overlays preserve native diagnostics', () {
+    final index = _graphIndex(detail: SemanticSourceDetail.identity);
+    var queryCalls = 0;
+    var entropyByte = 0x52;
+    final server = McpServerTestHarness.create(
+      entropy: () => List<int>.filled(32, entropyByte++),
+      nowMs: () => 1000,
+      capabilitiesOf: (received) => received.capabilities.toJson(),
+      queryIndex: (received, request) {
+        queryCalls += 1;
+        return received.queryNeutral(request).toJson();
+      },
+    );
+    final defaultHandle = server.registerIndex(
+      index,
+      utf8.encode('default-policy-principal'),
+    );
+    final sourceRequest = _withHandle(
+      _frame('query_call_request'),
+      defaultHandle,
+    );
+    (_requestArguments(sourceRequest)['source']!
+            as Map<String, Object?>)['detail'] =
+        'span';
+    final sourceResponse = server.dispatch(
+      sourceRequest,
+      utf8.encode('default-policy-principal'),
+    )!;
+    expect(
+      _diagnosticCode(sourceResponse),
+      'semantic_query_source_detail_forbidden',
+    );
+    expect(queryCalls, 1);
+
+    final unsupported = _withHandle(
+      _frame('query_call_request'),
+      defaultHandle,
+    );
+    _requestArguments(unsupported)['contract'] = 'linkedspec-semantic-query-v2';
+    final unsupportedResponse = server.dispatch(
+      unsupported,
+      utf8.encode('default-policy-principal'),
+    )!;
+    expect(
+      _diagnosticCode(unsupportedResponse),
+      'semantic_query_contract_unsupported',
+    );
+    expect(queryCalls, 2);
+
+    final partialHandle = server.registerIndex(
+      index,
+      utf8.encode('partial-policy-principal'),
+      options: const McpRegistrationOptions(
+        policy: McpDeploymentPolicy(pageMax: 50),
+      ),
+    );
+    final partialRequest = _withHandle(
+      _frame('query_call_request'),
+      partialHandle,
+    );
+    (_requestArguments(partialRequest)['page']!
+            as Map<String, Object?>)['limit'] =
+        50;
+    (_requestArguments(partialRequest)['source']!
+            as Map<String, Object?>)['detail'] =
+        'span';
+    final partialResponse = server.dispatch(
+      partialRequest,
+      utf8.encode('partial-policy-principal'),
+    )!;
+    expect(
+      _diagnosticCode(partialResponse),
+      'semantic_query_source_detail_forbidden',
+    );
+    expect(queryCalls, 3);
+  });
+
   test('unavailable states, validation, capacity, and shutdown are safe', () {
     final index = _graphIndex();
     final expectedUnavailable = _withDartIdentity(
@@ -509,13 +586,15 @@ McpServer _testServer(int entropyByte, {_ClockBox? clock}) =>
       nowMs: () => clock?.value ?? 0,
     );
 
-SemanticIndex _graphIndex() => SemanticIndex.fromUtf8(
+SemanticIndex _graphIndex({
+  SemanticSourceDetail detail = SemanticSourceDetail.text,
+}) => SemanticIndex.fromUtf8(
   File(
     '../capability_conformance/semantic_introspection/graph.spec',
   ).readAsBytesSync(),
-  options: const SemanticIndexOptions(
+  options: SemanticIndexOptions(
     logicalName: 'graph.spec',
-    sourceDetailCeiling: SemanticSourceDetail.text,
+    sourceDetailCeiling: detail,
   ),
 );
 
@@ -565,6 +644,13 @@ Map<String, Object?> _withDartIdentity(Map<String, Object?> response) {
       metadata['io.modelcontextprotocol/serverInfo']! as Map<String, Object?>;
   server['name'] = _dartServerName;
   return response;
+}
+
+String? _diagnosticCode(Map<String, Object?> response) {
+  final result = response['result']! as Map<String, Object?>;
+  final structured = result['structuredContent']! as Map<String, Object?>;
+  final diagnostics = structured['diagnostics']! as List<Object?>;
+  return (diagnostics.single as Map<String, Object?>)['code'] as String?;
 }
 
 String _canonical(Object? value) => McpServerTestHarness.canonicalJson(value);

@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Atomic MCP transport repair signoff-complete
+
+Authorized leaf `.10.9.7.1.1.1` is complete from clean `c3273219`. The neutral MCP response schema now derives
+the exact 72 governed semantic fact keys; query-contract input admits nonempty identifiers through 128 characters
+and 128 UTF-8 bytes; and explicit deployment-overlay component presence is the sole pre-dispatch policy
+authority. All five generated bindings and Perl/Rust/Dart/Julia/shared-Lua server seams moved atomically.
+
+Omitted and unrelated partial overlays now dispatch to native portable contract/source diagnostics. Explicit
+source/derived-content/page/budget ceilings still deny with zero native query dispatch. Structural validation,
+opaque authorization, privacy, cancellation, lifecycle, no-path/process/network/compile authority, primary CLI,
+aggregator, legacy, and semantic-model ownership do not move. Formal state deliberately remains 5/5
+implementations + 6/6 runtimes with rollout pending/114; all-twenty consumer identity `.1.1.2` is next only after
+commit/brief-clear/clean proof.
+
+Focused proof passes semantic 6/20/105, MCP 35/10/10/76, five byte-fresh bindings at
+83,411/83,225/83,214/120,030/83,166, Perl 36, Rust 165+3+4+1, complete Dart 354 plus MCP 16+1, Julia
+53+145+170+178, and PUC Lua/LuaJIT 116+216+247+202 each. Knowledge Map remains 757/6,137; memory and all seven
+doctrines pass; mdBook renders at 13,736 KiB/79 files. Host-authorized canonical CI passes Rust semantic 78.48
+seconds, Dart, Julia
+416/416 in 27.5 seconds, containment/moved-root, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 637 seconds.
+
 ## 2026-07-30 — Director-authorized exact MCP repair plan active
 
 Behavior-free blocker audit `.10.9.7.1.0` is committed cleanly at `20ee93c9` (97/300, no push); its brief is zero

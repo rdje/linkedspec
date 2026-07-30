@@ -1,7 +1,8 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` pending implementation
+- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` implemented and focused-green;
+  all-twenty consumer proof and rollout remain pending
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -50,6 +51,28 @@ outcomes. That preserves current transport bytes but abandons the accepted all-t
 `.10.9.7.1.0` records the verified evidence and paused promotion at that boundary; the authorization below resolves
 the choice while rollout remains pending until implementation and proof.
 
+## Atomic transport repair evidence — 2026-07-30
+
+Leaf `.10.9.7.1.1.1` implements the authorized prerequisite without promoting rollout. The shared response
+schema now derives the exact 72-key, first-seen union of governed semantic fact keys, including `effects` and
+`return_shape`. The query `contract` field is now a nonempty string bounded to 128 characters and 128 UTF-8
+bytes. Unknown but structurally valid values therefore reach the native semantic layer and retain its portable
+`semantic_query_contract_unsupported` response.
+
+The neutral deployment profile now names explicit component presence as the sole pre-dispatch enforcement
+authority. Every server records presence separately from the effective native-plus-overlay value. An omitted
+component reaches native dispatch and native portable diagnostics; a page-only overlay, for example, cannot
+preempt a source-detail diagnostic. Explicit source, derived content-digest, page, and budget ceilings remain
+lowering-only and dispatch-free when exceeded. Generated schema validation still rejects malformed requests
+before authorization or native dispatch.
+
+The materializer and independent checker derive these invariants separately and reject 76 named neutral
+mutations. All five filesystem-free bindings are byte-fresh at Perl 83,411, Rust 83,225, Dart 83,214, Julia
+120,030, and Lua 83,166 bytes. Focused decoded, strict-stdio, and admission proof passes on Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT. The implementation ledger deliberately remains 5/5 implementations + 6/6 runtimes,
+rollout pending, with 114 governance mutations. Leaf `.10.9.7.1.1.2` remains responsible for proving all twenty
+direct-native/MCP/digest identities before any promotion.
+
 ## Director authorization and implementation boundary — 2026-07-30
 
 The director authorized the recommended exact all-twenty correction and rejected no part of the proposed
@@ -64,7 +87,8 @@ Implementation child `.10.9.7.1.1.0` keeps the repair atomic where repository co
    a nonempty string bounded to 128 characters and 128 UTF-8 bytes so native version diagnostics remain reachable.
    Pre-dispatch denial is keyed by explicit per-component deployment-overlay presence—not inherited native
    defaults—so default requests reach native portable diagnostics while explicit source/content/page/budget
-   ceilings remain strict and dispatch-free.
+   ceilings remain strict and dispatch-free. This atomic repair is now implemented and focused-green; it does
+   not itself establish all-twenty identity or promote rollout.
 2. `.2` strengthens the existing five consumers, with shared Lua run on both ABIs, to prove capabilities plus all
    nineteen query responses through direct canonical bytes, MCP text/structured content, and existing digests.
 3. `.3` adds the rooted same-volume recurring driver, independent omission governance, coordinated ledger state,

@@ -499,6 +499,18 @@ mod tests {
         let mut extra = request;
         extra["extra"] = Value::Bool(true);
         assert!(!validate_named("discoverRequest", &extra));
+        let mut query =
+            frame("query_call_request").unwrap().unwrap()["params"]["arguments"]["request"].clone();
+        query["contract"] = Value::String("linkedspec-semantic-query-v2".to_string());
+        assert!(validate_named("semanticQueryRequest", &query));
+        query["contract"] = Value::String("a".repeat(128));
+        assert!(validate_named("semanticQueryRequest", &query));
+        query["contract"] = Value::String(String::new());
+        assert!(!validate_named("semanticQueryRequest", &query));
+        query["contract"] = Value::String("a".repeat(129));
+        assert!(!validate_named("semanticQueryRequest", &query));
+        query["contract"] = Value::String("é".repeat(65));
+        assert!(!validate_named("semanticQueryRequest", &query));
     }
 
     #[test]

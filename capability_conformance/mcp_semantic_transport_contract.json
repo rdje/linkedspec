@@ -28,20 +28,20 @@
     "validator": "tools/check_mcp_semantic_transport_contract.py"
   },
   "artifact_sha256": {
-    "schema": "c312b3e6c3533d17416d638f4e5c3ac299221cf972aeedcfe9bab73a79a42b99",
+    "schema": "d974cdec591077d55c31ec48e1d16d3c5c4a4fd349e74392de8d918064326fab",
     "semantic_payloads": "d942fe3264c2510a722a76d8897713ded74ec179c01a9017c104f63981be3504",
     "corpus": "345a069c48b27bf2038fa13a30a81d3552ac97c90b4e06c7b29b0bb726479401",
-    "canonical_frames": "3dd66a9aca6db0332687a287921e4f3ebf8684dac1d89f98c5cfd36abc21d517",
-    "materializer": "3df7e7e69713be05779d9202f1c5a14db01a823707ecf59a1b64d1d17dd0b607",
-    "validator_cases": "386d2eedae8e66c8629f889fd8ea9ab8fee9018bd16d64331819aa05d8f6df35",
-    "validator": "fdab504830731425d6e8f96df8e8816a9cd1644775c5edfc1df547ba1d24a536"
+    "canonical_frames": "618ad136855240e2da72880ba6b23ed865aee56c9019cc6d9900958d88676477",
+    "materializer": "a1c054c3a6c26bbc69bb38a2144b0049f1376f746aa1937dd4315e672befd0d3",
+    "validator_cases": "c1f7040b4f18853a4b2257f36e0e047ac10149a1fe5168f051d407d32392faaa",
+    "validator": "395f70d3cd814602fed984a00b9fed3f6fd72358aac63f1a001d0a99a114d3fd"
   },
   "validation_contract": {
     "task_owner": "FUTURE-PARITY-BACKLOG.10.9.1.2",
     "schema_dialect": "https://json-schema.org/draft/2020-12/schema",
     "accepted_canonical_frames": 28,
     "rejected_canonical_frames": 7,
-    "mutation_cases": 68,
+    "mutation_cases": 76,
     "implementation": "independent_no_materializer_import_or_execution"
   },
   "semantic_contract": {
@@ -155,6 +155,9 @@
     ],
     "effective_maximum": "component_wise_minimum_native_server_registration",
     "effective_default": "native_default_capped_by_effective_maximum",
+    "pre_dispatch_enforcement": "explicit_overlay_component_presence_only",
+    "unsupplied_component": "native_dispatch_and_native_portable_response",
+    "partial_overlay": "independent_per_component",
     "capabilities": "native_first_then_schema_preserving_policy_field_projection",
     "allowed_query": "unchanged_native_dispatch_and_response",
     "denied_query": "tool_execution_error_before_native_dispatch",

@@ -6,7 +6,7 @@
   "transport_contract": {
     "contract_id": "linkedspec-mcp-transport-v1",
     "path": "capability_conformance/mcp_semantic_transport_contract.json",
-    "sha256": "1f16d25ad1d3351da806428146ac43acff0b27ec4707ca4a26d047e01a444732"
+    "sha256": "e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3"
   },
   "admission_contract": {
     "roles": [

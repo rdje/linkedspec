@@ -69,6 +69,10 @@ end
 struct _McpEffectivePolicy
     limits::_McpNativeLimits
     project::Bool
+    explicit::NamedTuple{
+        (:source_detail, :content_digest, :page, :budget),
+        NTuple{4,Bool},
+    }
 end
 
 struct _McpRegistryEntry
@@ -389,7 +393,7 @@ function _mcp_build_tool_response(
     entry = _mcp_authorized_entry!(server, String(handle), authorization_digest)
     entry === nothing && return _mcp_tool_error_response(id; unavailable = true)
     if operation == :query &&
-       !_mcp_request_within_policy(get(arguments, "request", nothing), entry.policy.limits)
+       !_mcp_request_within_policy(get(arguments, "request", nothing), entry.policy)
         return _mcp_tool_error_response(id; unavailable = false)
     end
 
@@ -607,7 +611,13 @@ function _mcp_native_limits(response::Dict{String,Any})
 end
 
 function _mcp_effective_policy(supplied, native::_McpNativeLimits)
-    supplied === nothing && return _McpEffectivePolicy(native, false)
+    empty_explicit = (
+        source_detail = false,
+        content_digest = false,
+        page = false,
+        budget = false,
+    )
+    supplied === nothing && return _McpEffectivePolicy(native, false, empty_explicit)
     supplied isa McpDeploymentPolicy || throw(_mcp_invalid_policy(
         "MCP deployment policy is invalid.",
     ))
@@ -617,18 +627,27 @@ function _mcp_effective_policy(supplied, native::_McpNativeLimits)
     page_max = native.page_max
     budget_defaults = native.budget_defaults
     budget_maxima = native.budget_maxima
+    explicit_source = false
+    explicit_content = false
+    explicit_page = false
+    explicit_budget = false
     if supplied.source_detail_ceiling !== nothing
         detail = supplied.source_detail_ceiling
         _mcp_source_rank(detail) <= _mcp_source_rank(native.source_detail_ceiling) ||
             throw(_mcp_invalid_policy("MCP source-detail policy is invalid or elevating."))
         source = detail
-        detail == SemanticSourceTextDetail || (content_digest = false)
+        if detail != SemanticSourceTextDetail
+            content_digest = false
+            explicit_content = true
+        end
+        explicit_source = true
     end
     if supplied.page_max !== nothing
         1 <= supplied.page_max <= native.page_max ||
             throw(_mcp_invalid_policy("MCP page policy is invalid or elevating."))
         page_max = supplied.page_max
         page_default = min(page_default, page_max)
+        explicit_page = true
     end
     if supplied.budget_maxima !== nothing
         budget = supplied.budget_maxima
@@ -640,6 +659,7 @@ function _mcp_effective_policy(supplied, native::_McpNativeLimits)
             min(budget_defaults.max_relations, budget.max_relations),
             min(budget_defaults.max_depth, budget.max_depth),
         )
+        explicit_budget = true
     end
     return _McpEffectivePolicy(
         _McpNativeLimits(
@@ -650,7 +670,13 @@ function _mcp_effective_policy(supplied, native::_McpNativeLimits)
             budget_defaults,
             budget_maxima,
         ),
-        true,
+        explicit_source || explicit_page || explicit_budget,
+        (
+            source_detail = explicit_source,
+            content_digest = explicit_content,
+            page = explicit_page,
+            budget = explicit_budget,
+        ),
     )
 end
 
@@ -688,24 +714,28 @@ function _mcp_project_capabilities(
     return projected
 end
 
-function _mcp_request_within_policy(value, policy::_McpNativeLimits)
+function _mcp_request_within_policy(value, policy::_McpEffectivePolicy)
     request = _mcp_as_object(value)
     source = request === nothing ? nothing : _mcp_as_object(get(request, "source", nothing))
     detail = source === nothing ? nothing : _mcp_source_detail(get(source, "detail", nothing))
-    if detail === nothing || _mcp_source_rank(detail) >
-                             _mcp_source_rank(policy.source_detail_ceiling)
+    if detail === nothing ||
+       (policy.explicit.source_detail && _mcp_source_rank(detail) >
+                                         _mcp_source_rank(policy.limits.source_detail_ceiling))
         return false
     end
     if get(source, "include_content_digest", false) === true &&
-       (!policy.content_digest_available ||
-        policy.source_detail_ceiling != SemanticSourceTextDetail)
+       policy.explicit.content_digest &&
+       (!policy.limits.content_digest_available ||
+        policy.limits.source_detail_ceiling != SemanticSourceTextDetail)
         return false
     end
     page = request === nothing ? nothing : _mcp_as_object(get(request, "page", nothing))
     limit = page === nothing ? nothing : get(page, "limit", nothing)
-    _mcp_is_integer(limit) && limit <= policy.page_max || return false
+    _mcp_is_integer(limit) &&
+        (!policy.explicit.page || limit <= policy.limits.page_max) || return false
     budget = request === nothing ? nothing : _mcp_budget_limits(get(request, "budget", nothing))
-    return budget !== nothing && _mcp_budget_within(budget, policy.budget_maxima)
+    return budget !== nothing &&
+           (!policy.explicit.budget || _mcp_budget_within(budget, policy.limits.budget_maxima))
 end
 
 function _mcp_budget_limits(value)

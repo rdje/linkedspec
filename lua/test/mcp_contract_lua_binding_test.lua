@@ -50,7 +50,7 @@ for index = 1, #corpus.canonical_order do
 end
 
 check_equal(binding.binding_format, 1, "generated binding format")
-check_equal(#binding.bundle_json, 82543, "generated canonical bundle byte count")
+check_equal(#binding.bundle_json, 82882, "generated canonical bundle byte count")
 check_equal(sha256.hex(binding.bundle_json), binding.bundle_sha256,
   "generated canonical bundle digest")
 check(binding.bundle_sha256:match("^[0-9a-f]+$") ~= nil and #binding.bundle_sha256 == 64,
@@ -89,6 +89,21 @@ request.id = true
 check(not runtime.validate_named("discoverRequest", request), "boolean request id rejected")
 request.id = string.rep("é", 65)
 check(not runtime.validate_named("discoverRequest", request), "request-id UTF-8 byte ceiling")
+local query = runtime.frame("query_call_request").params.arguments.request
+query.contract = "linkedspec-semantic-query-v2"
+check(runtime.validate_named("semanticQueryRequest", query),
+  "bounded future query contract accepted")
+query.contract = string.rep("a", 128)
+check(runtime.validate_named("semanticQueryRequest", query),
+  "exact query-contract character and byte boundary accepted")
+query.contract = ""
+check(not runtime.validate_named("semanticQueryRequest", query), "empty query contract rejected")
+query.contract = string.rep("a", 129)
+check(not runtime.validate_named("semanticQueryRequest", query),
+  "query-contract character overflow rejected")
+query.contract = string.rep("é", 65)
+check(not runtime.validate_named("semanticQueryRequest", query),
+  "query-contract UTF-8 byte overflow rejected")
 check(runtime.validate_named("handle", string.rep("A", 43)), "handle pattern accepted")
 check(not runtime.validate_named("handle", string.rep("A", 42)), "short handle rejected")
 check(not runtime.validate_named("unknownDefinition", json.null), "unknown definition rejected")

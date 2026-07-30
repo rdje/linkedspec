@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-29` (Dart generated-binding/decoded-server `.10.9.4.1` active task-tree-first from clean
-  planning commit `b503dcc9`)
+- Last updated: `2026-07-30` (MCP atomic transport repair `.10.9.7.1.1.1` signoff-complete from clean planning
+  commit `c3273219`; all-twenty consumer proof `.10.9.7.1.1.2` follows after the clean repair commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -14739,7 +14739,7 @@ before implementation.
 
       - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1`
         Status: `active` (2026-07-30; director authorized the recommended exact all-twenty repair; bounded
-          implementation-plan child `.1.1.0` is active before production changes)
+          implementation-plan child `.1.1.0` is committed and atomic repair child `.1.1.1` is in signoff)
         Goal: Resolve the approved transport boundary, implement exact all-twenty six-runtime identity, compose
           the routed gate, and promote only thin transport.
         Depends on: `.10.9.7.1.0`
@@ -14780,7 +14780,7 @@ before implementation.
           unchanged closeout `.10.9.7.2` without pushing before cadence 300.
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0`
-          Status: `done` (2026-07-30; signoff-complete behavior-free director-authorization and implementation-boundary plan)
+          Status: `done` (2026-07-30; committed at `c3273219`)
           Goal: Convert the approved recommendation into one dependency-complete, commit-sized implementation plan
             before changing the neutral contract, generated bindings, servers, consumers, drivers, or ledgers.
           Depends on: `.10.9.7.1.0`
@@ -14815,7 +14815,7 @@ before implementation.
           Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 - plan authorized MCP repair`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1`
-          Status: `pending`
+          Status: `done` (2026-07-30; atomic repair and complete canonical signoff from clean `c3273219`)
           Goal: Repair all three neutral MCP boundaries atomically across contract, bindings, and five servers.
           Depends on: `.10.9.7.1.1.0`
           Acceptance: Expand `recordFacts` to the exact governed semantic fact-key union; replace the supported-
@@ -14826,6 +14826,30 @@ before implementation.
             Prove default native portable diagnostics, explicit source/content/page/each-budget denial with zero
             native dispatch, strict validation/security/privacy/lifecycle behavior, five implementations + six
             runtimes re-admitted, rollout still pending, canonical focused signoff, and clean commit.
+          Progress:
+            - [x] Derive `recordFacts` from the exact 72-key governed semantic union, including `effects` and
+              `return_shape`; independently reject omission and extension.
+            - [x] Admit nonempty query-contract strings through 128 characters and 128 UTF-8 bytes; prove the
+              exact ASCII/Unicode boundaries in all five frozen binding runtimes.
+            - [x] Freeze explicit-component-only pre-dispatch policy, regenerate all artifacts/digests and five
+              filesystem-free bindings, and keep schema/authorization/lifecycle/privacy boundaries unchanged.
+            - [x] Implement presence-aware policy state in Perl, Rust, Dart, Julia, and shared Lua; prove omitted
+              and unrelated partial overlays dispatch to native portable diagnostics.
+            - [x] Prove every explicit source/content/page/budget ceiling denies before native dispatch and
+              re-admit all five implementations on Perl/Rust/Dart/Julia/PUC Lua/LuaJIT without rollout movement.
+            - [x] Complete durable synchronization, Knowledge Map/mdBook rendering, canonical local signoff,
+              exact cleanup, commit/brief-clear/clean proof, then activate `.10.9.7.1.1.2`.
+          Verification: Neutral semantic remains 6 groups/20 responses/105 mutations. MCP passes 35 canonical
+            frames/10 raw inputs/10 lifecycle cases/76 rejected mutations; the exact governed fact union has 72
+            keys. Generated bindings are byte-fresh at Perl 83,411, Rust 83,225, Dart 83,214, Julia 120,030, and
+            Lua 83,166 bytes. Focused MCP proof passes Perl Files=4 Tests=36; Rust library 165 plus public 3/4 and
+            admission 1; Dart complete backend 354 plus MCP 16/admission 1; Julia 53+145+170+178; and PUC Lua plus
+            LuaJIT 116+216+247+202 each. Ledger remains 5/5 implementations + 6/6 runtimes, rollout pending/114.
+            Knowledge Map is 757/6,137; memory architecture, all seven doctrines, and the 13,736-KiB/79-file mdBook
+            pass. Host-authorized canonical
+            signoff passes Rust semantic 1/1 in 78.48 seconds, Dart 1/1, Julia 416/416 in 27.5 seconds,
+            repository containment/moved-root, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 637 seconds.
+          Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1 - repair MCP transport boundaries`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2`
           Status: `pending`
@@ -18569,13 +18593,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. The director authorized the exact all-twenty transport repair on 2026-07-30. Implementation remains
-  dependency-ordered under `.10.9.7.1.1.1-.4`; rollout remains pending until the committed evidence earns it.
+- None. The director authorized the exact all-twenty transport repair on 2026-07-30. Atomic transport repair
+  `.10.9.7.1.1.1` is complete; remaining consumer proof, promotion, and closeout stay dependency-ordered under
+  `.10.9.7.1.1.2-.4`. Rollout remains pending until the committed evidence earns it.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` | Clean base `c3273219`; exact 72-key fact union; bounded 128-character/128-UTF-8-byte contract string; explicit-component overlay policy in five servers; neutral semantic 6/20/105; MCP 35/10/10/76; byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; focused Perl 36, Rust 165+3+4+1, Dart complete 354 and MCP 16+1, Julia 53+145+170+178, Lua 116+216+247+202x2; unchanged ledger 5/5 + 6/6 pending/114; KM 757/6,137; memory; seven doctrines; mdBook; host-authorized canonical Rust semantic 78.48s, Dart 1/1, Julia 416/416/27.5s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/637s; exact cleanup. | PASS. The three shared transport blockers are repaired atomically without rollout promotion or authority expansion. Omitted/unrelated partial overlays reach native portable diagnostics, explicit overlay ceilings remain dispatch-free, and all-twenty consumer proof `.1.1.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` | Clean base `20ee93c9`; director authorization; exact atomic contract/bindings/five-server repair boundary; explicit per-component overlay policy; six-runtime consumer/driver/promotion dependency split; unchanged semantic 6/20/105; MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; unchanged admissions Perl 13, Rust 1, Dart 1, Julia 178, Lua 202x2; ledger 5/5 + 6/6 rollout pending/114; KM 757/6,137; mdBook 13,720 KiB/79; memory architecture; seven doctrines; behavior-free diff and exact cleanup. | PASS. The authorized recommendation is now dependency-complete and commit-sized: exact shared transport repair `.1`, all-twenty consumer identity `.2`, recurring driver/governance/promotion `.3`, then unchanged closeout `.4`; no contract or runtime behavior moved in this leaf. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.7.1.0` | Clean base `0540a72f`; smallest real Perl all-twenty probe; capabilities plus 16/19 query identities; independent neutral fact-key census; independent MCP response-schema validation; named request-schema probes; five-server policy-order/source audit; exploratory code removal; unchanged Perl syntax + 13-test admission; neutral semantic 6/20/105; MCP 35/10/10/68; admission 5/5 + 6/6 pending/114; KM 757/6,137; mdBook 13,720 KiB/79; memory architecture; seven doctrines; behavior-free diff and exact cleanup. | PASS/BLOCKED. Three shared production/contract boundaries prevent an honest all-twenty identity claim: missing `effects`/`return_shape`, constant request contract, and default ceiling pre-denial. No exploratory behavior remains and rollout stays pending. ADR `0062`, a canonical fact card, roadmaps, task owners, live docs, and mdBook route the recommended repair and weaker alternative for director choice before `.1.1`. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.7.0` | Clean base `d05e17ed`; knowledge-first owner audit; ADR `0062`; neutral semantic 6/20/105; neutral MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; exact admissions Perl 13, Rust 1, Dart 1, Julia 178, Lua 202x2; unchanged ledger 5/5 + 6/6 rollout pending/114; KM 755/6,120; mdBook 13,692 KiB/79; memory architecture; six doctrines; host-authorized canonical Rust semantic 1/1 81.05s, Dart 1/1, Julia 416/416 29.6s, project-sandbox containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 772s, complete dual-ABI Lua opt-in; documentation-only diff and exact cleanup. | PASS. One routed recurring composition, all-twenty consumer strengthening, atomic rollout promotion, and `.1-.2` handoff are frozen without behavior or status movement. The outer-harness nested-sandbox denial is root-caused; the project-owned macOS sandbox passes in the authorized canonical rerun. |
@@ -18891,6 +18917,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1 - repair MCP transport boundaries` | Atomic exact fact/contract/policy correction across neutral artifacts, five generated bindings, five native servers, six runtime proofs, and unchanged pending rollout. |
 | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 - plan authorized MCP repair` | Behavior-free director-authorized plan: atomic exact shared-boundary repair, per-component overlay semantics, then six-runtime identity, recurring promotion, and unchanged closeout. |
 | `FUTURE-PARITY-BACKLOG.10.9.7.1.0` | `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker` | Behavior-free root-cause checkpoint: 17/20 identities, three shared transport blockers, exploratory code removed, and director choice required before contract/production expansion. |
 | `FUTURE-PARITY-BACKLOG.10.9.6.4` | `FUTURE-PARITY-BACKLOG.10.9.6.4 - close Lua MCP implementation` | Documentation-only unchanged-owner recomposition, complete canonical signoff, shared Lua parent closure, and clean recurring six-runtime handoff. |
@@ -19186,6 +19213,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-30`: Atomic repair `.10.9.7.1.1.1` closes the three shared MCP transport blockers without promoting
+  rollout. The response schema derives the exact 72-key semantic fact union; bounded future contract strings
+  reach native version diagnostics; and explicit component presence—not inherited native values—owns
+  pre-dispatch policy in Perl, Rust, Dart, Julia, and shared Lua. Neutral validation advances from 68 to 76
+  mutations, all five bindings regenerate coherently, and focused plus canonical six-runtime proof passes.
+  Formal state remains 5/5 implementations + 6/6 runtimes pending/114; all-twenty consumer identity `.2` follows
+  only after the clean commit.
 - `2026-07-30`: Director-authorized planning leaf `.10.9.7.1.1.0` resolves the blocker without moving behavior.
   The exact semantic fact-key union and bounded forward-compatible request contract move atomically with all five
   generated bindings and all five servers; pre-dispatch policy is defined by explicit per-component overlay presence,

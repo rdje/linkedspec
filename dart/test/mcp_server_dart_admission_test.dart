@@ -115,7 +115,7 @@ void main() {
       );
       expect(
         validator['mutation_order'],
-        isA<List<Object?>>().having((value) => value.length, 'length', 68),
+        isA<List<Object?>>().having((value) => value.length, 'length', 76),
       );
       final transport = _readObject(
         'capability_conformance/mcp_semantic_transport_contract.json',

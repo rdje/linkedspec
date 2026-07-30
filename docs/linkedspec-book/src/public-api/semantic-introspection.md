@@ -66,23 +66,26 @@ current MCP admission consumer proves the complete transport/security/lifecycle 
 native and MCP payloads for capabilities plus one representative graph query. Running those consumers together
 cannot honestly be described as all-twenty MCP identity.
 
-Real implementation audit `.10.9.7.1.0` now sharpens that boundary. A temporary Perl all-twenty spend proved
+Real implementation audit `.10.9.7.1.0` sharpened that boundary. A temporary Perl all-twenty spend proved
 capabilities plus sixteen of nineteen query cases retain exact native object, MCP text/structured content, and
-neutral digest identity. Three valid native outcomes are unreachable through the current public MCP contract:
+neutral digest identity. Three valid native outcomes were unreachable through the pre-repair public MCP contract:
 `calls_symbols_and_shapes` uses `effects` and `return_shape` facts absent from the MCP output schema;
 `unsupported_contract` is rejected by the MCP input schema's constant contract before native version handling;
 and `source_ceiling_forbidden` is preempted by the default native-derived deployment policy before the native
 ceiling diagnostic. The same schema and policy order apply to all five implementations.
 
-Exploratory code was removed and rollout remains pending. The director authorized the exact continuation on
-2026-07-30: admit the complete governed fact vocabulary; accept a nonempty query-contract string bounded to 128
-characters and 128 UTF-8 bytes so native portable version errors remain reachable; and reserve pre-dispatch
-policy denial for explicitly supplied source/content/page/budget overlay components while native defaults reach
-native portable diagnostics. Exact contract artifacts/digests, independent validation, five generated bindings,
-and identical Perl/Rust/Dart/Julia/shared-Lua behavior move atomically under `.10.9.7.1.1.1`. All-twenty consumer
-proof across six runtimes follows under `.2`; only routed governance `.3` may then promote
-`thin_mcp_transport`. The weaker seventeen-plus-three claim is not selected. Primary CLI behavior, legacy
-support, aggregator work, and semantic-model ownership remain outside the repair.
+Exploratory code was removed, and the director authorized the exact continuation on 2026-07-30. Atomic repair
+`.10.9.7.1.1.1` is now implemented: the output schema derives the exact 72 governed fact keys; query-contract
+input is a nonempty string bounded to 128 characters and 128 UTF-8 bytes; and only explicitly supplied source,
+derived content, page, or budget overlay components own pre-dispatch denial. Omitted components remain under
+native semantic authority, so native portable version and source-ceiling diagnostics are reachable. The neutral
+artifacts, independent validation, five generated bindings, and identical Perl/Rust/Dart/Julia/shared-Lua
+behavior moved together. Focused proof is green on all six runtimes at 35 canonical frames, ten raw inputs, ten
+lifecycle cases, and 76 neutral mutations; the complete canonical gate is also green through repository
+containment, moved-root execution, primary CLI 66x2, and Phase 0 1,031/1,031. All-twenty consumer proof still
+follows under `.2`; only routed
+governance `.3` may promote `thin_mcp_transport`. The weaker seventeen-plus-three claim is not selected. Primary
+CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside the repair.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -110,7 +113,7 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `capability_conformance/mcp_semantic_transport/semantic_payloads.json` | Four canonical semantic payloads: three exact admitted native responses and the one allowed restricted-capability projection. |
 | `capability_conformance/mcp_semantic_transport/corpus.json` | Ordered positive, negative, handle, policy, raw-byte, and lifecycle recipes. |
 | `capability_conformance/mcp_semantic_transport/canonical_frames.jsonl` | 35 compact UTF-8 JSON-RPC frames, each followed by exactly one LF. |
-| `capability_conformance/mcp_semantic_transport/validator_cases.json` | Independent 28-accepted/7-rejected frame classification, exact scenario inventories, dual digest anchors, and 68 named mutations across 14 categories. |
+| `capability_conformance/mcp_semantic_transport/validator_cases.json` | Independent 28-accepted/7-rejected frame classification, exact scenario inventories, dual digest anchors, and 76 named mutations across 14 categories. |
 | `tools/materialize_mcp_semantic_transport_contract.py` | Deterministic materializer and byte/digest self-check; not a server or independent checker. |
 | `tools/check_mcp_semantic_transport_contract.py` | Dependency-free independent schema/provenance/raw/state/mutation checker; never imports or executes the materializer. |
 | `tools/generate_perl_mcp_contract.py` | Deterministic consumer that verifies every manifest digest and checks or rewrites the committed Perl binding. |
@@ -124,9 +127,9 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `tools/generate_lua_mcp_contract.py` | Deterministic consumer that checks the delimiter-safe, filesystem-free Lua module. |
 | `lua/src/linkedspec/mcp_contract.lua` | Generated data-only Lua bundle shared unchanged by PUC Lua and LuaJIT. |
 
-Lua leaf `.10.9.6.1` adds both paths. The 82,827-byte binding contains the exact current 82,543-byte bundle as a
-deterministic delimiter-safe long-bracket literal, not Base64; the private runtime verifies its SHA-256 and schema
-profile before returning detached values.
+Lua leaf `.10.9.6.1` added both paths. After the atomic repair, the 83,166-byte binding contains the exact current
+82,882-byte bundle as a deterministic delimiter-safe long-bracket literal, not Base64; the private runtime
+verifies its SHA-256 and schema profile before returning detached values.
 
 The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
 four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
@@ -154,8 +157,45 @@ canonical LF framing, size/count invariants, and all artifact hashes. The separa
 Schema 2020-12 keyword used by this bundle—including local references, exact alternatives, closed objects,
 property-name and scalar/array bounds, regular-expression constraints, and URI format—then validates the schema
 document itself. It independently reconstructs every frame, verifies the exact semantic payload projection,
-classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 68 named mutations fail
+classifies ten raw byte inputs, executes the handle/policy/lifecycle oracle, and proves all 76 named mutations fail
 at their intended invariant. This is still conformance code, not an MCP server.
+
+### Query-contract and deployment-overlay boundaries
+
+Transport validation now distinguishes a structurally valid query contract from a semantically supported query
+contract. This request fragment is transport-valid even though v2 is not currently implemented:
+
+```json
+{
+  "contract": "linkedspec-semantic-query-v2",
+  "operation": "list",
+  "subjects": [],
+  "record_kinds": [],
+  "relation_kinds": [],
+  "direction": "both",
+  "source": {"detail": "identity", "include_content_digest": false},
+  "page": {"after_id": null, "limit": 100},
+  "budget": {"max_records": 1000, "max_relations": 2000, "max_depth": 4}
+}
+```
+
+The native semantic index returns `semantic_query_contract_unsupported`. Empty strings, 129 ASCII characters,
+or 65 two-byte `é` characters remain invalid parameters because they violate the transport bounds. This split
+keeps framing and resource validation in MCP while leaving version support with the semantic contract owner.
+
+Deployment policy is component-presence-sensitive:
+
+| Registration policy | Request | Result |
+|---|---|---|
+| omitted | asks an identity-only index for `span` | native dispatch returns `semantic_query_source_detail_forbidden` |
+| `{page_max: 50}` | asks for page 50 and `span` | page is allowed; omitted source overlay still reaches the native source diagnostic |
+| `{source_detail_ceiling: identity}` | asks for `span` | MCP policy denial occurs before native dispatch |
+| explicit budget maxima | exceeds any explicit maximum | MCP policy denial occurs before native dispatch |
+
+Effective capability projection still computes component-wise minima between native limits and supplied
+overlays. The important distinction is that an inherited value is descriptive; only an explicitly supplied
+component becomes a pre-dispatch policy fence. Structural schema failures, handle authorization, expiry,
+revocation, privacy, cancellation, and lifecycle checks are unchanged.
 
 Canonical local CI requires every listed artifact and all seven programs. It always runs the materializer before
 the independent validator, then checks Perl, Rust, Dart, Julia, and Lua generated bindings in that order only after both
@@ -3493,8 +3533,8 @@ The dependency order is:
 | `.10.9.6.4` | committed-owner no-change shared Lua closeout | complete; unchanged recomposition and canonical signoff green |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | closed; `.0-.4` complete at unchanged 5/5 + 6/6 pending/114 |
 | `.10.9.7.1.0` | audit the first real all-twenty MCP spend | complete finding; 17/20 identities, three shared schema/default-policy blockers, exploratory code removed |
-| `.10.9.7.1.1.0` | freeze the director-authorized implementation boundary | active behavior-free plan; atomic repair → six-runtime proof → promotion → closeout |
-| `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | pending after clean plan commit |
+| `.10.9.7.1.1.0` | freeze the director-authorized implementation boundary | complete behavior-free plan; atomic repair → six-runtime proof → promotion → closeout |
+| `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | signoff-complete at 35/10/10/76; rollout unchanged pending/114 |
 | `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | pending after atomic repair |
 | `.10.9.7.1.1.3` | add routed governance and promote thin transport | pending after all-twenty proof |
 | `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | pending after promotion |
@@ -3521,7 +3561,8 @@ Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted nati
 runtime query surfaces now. MCP machine artifacts and independent validation are complete. All five native
 implementations expose decoded in-process dispatch plus strict stdio and exact twelve-role admission; one Lua
 source qualifies independently on PUC Lua and LuaJIT. The shared status/proof ledger is therefore 5/5
-implementations and 6/6 runtimes, with recurring rollout pending and the normative transport digest unchanged.
+implementations and 6/6 runtimes, with recurring rollout pending. Atomic repair `.10.9.7.1.1.1` updated the
+normative transport digest and all five generated bindings together; it did not promote rollout.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created

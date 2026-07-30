@@ -274,7 +274,12 @@
       ],
       "properties": {
         "budget": {"$ref": "#/$defs/budgetRequest"},
-        "contract": {"const": "linkedspec-semantic-query-v1"},
+        "contract": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-linkedspec-maxUtf8Bytes": 128
+        },
         "direction": {"enum": ["outgoing", "incoming", "both"]},
         "operation": {"enum": ["capabilities", "list", "get", "relations", "explain"]},
         "page": {"$ref": "#/$defs/pageRequest"},
@@ -441,7 +446,8 @@
           "compiled_rule_order", "entry_rule_id", "entry_selection_basis", "logical_kind", "origin_kind", "family",
           "cursor_policy", "is_entry_marker", "is_repetition", "rep_min", "rep_max", "edge_ownership", "value_shape",
           "authored_index", "pattern", "flags", "combined_owner_ids", "target_shape", "ownership", "source_form",
-          "has_block", "fluent_call_ids", "marker", "whole_rule_return", "signature", "parameter_kinds", "scope",
+          "has_block", "fluent_call_ids", "marker", "whole_rule_return", "signature", "parameter_kinds",
+          "return_shape", "effects", "scope",
           "mutable", "call_form", "resolution_kind", "argument_shapes", "artifact_kind", "payload_kind", "node_kind",
           "parent_path", "parser_spec_id", "top_rule", "result_policy", "failure_policy", "status", "contract_id",
           "format_version", "plan_family", "code", "stage", "severity", "message", "fields", "decision_kind",

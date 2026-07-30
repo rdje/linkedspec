@@ -82,6 +82,17 @@ subtest 'frozen schema profile accepts and rejects the canonical classifications
  ok(!LinkedSpec::MCPContractRuntime::validate_named('discoverRequest', $request), 'boolean request ids are rejected');
  $request->{id} = 'é' x 65;
  ok(!LinkedSpec::MCPContractRuntime::validate_named('discoverRequest', $request), 'request ids enforce the UTF-8 byte ceiling');
+ my $query = LinkedSpec::MCPContractRuntime::frame('query_call_request')->{params}{arguments}{request};
+ $query->{contract} = 'linkedspec-semantic-query-v2';
+ ok(LinkedSpec::MCPContractRuntime::validate_named('semanticQueryRequest', $query), 'a bounded future query contract is transport-valid');
+ $query->{contract} = 'a' x 128;
+ ok(LinkedSpec::MCPContractRuntime::validate_named('semanticQueryRequest', $query), 'query contract admits the exact character and byte boundary');
+ $query->{contract} = '';
+ ok(!LinkedSpec::MCPContractRuntime::validate_named('semanticQueryRequest', $query), 'empty query contract is rejected');
+ $query->{contract} = 'a' x 129;
+ ok(!LinkedSpec::MCPContractRuntime::validate_named('semanticQueryRequest', $query), 'query contract rejects character overflow');
+ $query->{contract} = 'é' x 65;
+ ok(!LinkedSpec::MCPContractRuntime::validate_named('semanticQueryRequest', $query), 'query contract rejects UTF-8 byte overflow');
 };
 
 subtest 'contract values and builders are isolated from caller mutation' => sub {

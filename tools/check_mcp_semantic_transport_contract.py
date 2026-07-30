@@ -197,7 +197,11 @@ def source_bytes(bundle: Bundle, target: str) -> bytes:
     return bundle.source_bytes[target]
 
 
-def validate_schema_document(schema: dict[str, Any], validation: dict[str, Any]) -> None:
+def validate_schema_document(
+    schema: dict[str, Any],
+    validation: dict[str, Any],
+    semantic_contract: dict[str, Any],
+) -> None:
     require(schema.get("$schema") == SCHEMA_DIALECT, "schema_meta", "wrong JSON Schema dialect")
     require(schema.get("$id") == SCHEMA_ID, "schema_meta", "wrong schema id")
     require(schema.get("contract_id") == CONTRACT_ID, "schema_meta", "wrong contract id")
@@ -275,6 +279,27 @@ def validate_schema_document(schema: dict[str, Any], validation: dict[str, Any])
         schema["$defs"]["requestId"]["oneOf"][0].get("x-linkedspec-maxUtf8Bytes") == 128,
         "schema_profile",
         "request-id UTF-8 byte limit drifted",
+    )
+    require(
+        schema["$defs"]["semanticQueryRequest"]["properties"].get("contract")
+        == {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "x-linkedspec-maxUtf8Bytes": 128,
+        },
+        "schema_profile",
+        "semantic query contract-string boundary drifted",
+    )
+    governed_fact_keys: list[str] = []
+    for keys in semantic_contract["schema"]["fact_keys"].values():
+        for key in keys:
+            if key not in governed_fact_keys:
+                governed_fact_keys.append(key)
+    require(
+        schema["$defs"]["recordFacts"]["propertyNames"].get("enum") == governed_fact_keys,
+        "schema_profile",
+        "MCP record fact keys drifted from the semantic contract union",
     )
 
 
@@ -447,6 +472,13 @@ def validate_contract_profile(bundle: Bundle) -> None:
     policy = contract["deployment_policy"]
     require(policy["mode"] == "lowering_only" and policy["silent_request_lowering"] is False and policy["semantic_response_synthesis"] is False, "policy_profile", "deployment policy drifted")
     require(policy["denied_query"] == "tool_execution_error_before_native_dispatch", "policy_profile", "policy denial dispatch drifted")
+    require(
+        policy.get("pre_dispatch_enforcement") == "explicit_overlay_component_presence_only"
+        and policy.get("unsupplied_component") == "native_dispatch_and_native_portable_response"
+        and policy.get("partial_overlay") == "independent_per_component",
+        "policy_profile",
+        "deployment policy component-presence boundary drifted",
+    )
     tool_errors = [(row["id"], row["code"], row["message"]) for row in contract["tool_execution_errors"]]
     require(tool_errors == [
         ("handle_unavailable", "linkedspec_mcp_handle_unavailable", "No current authorized semantic index is available for this handle."),
@@ -766,7 +798,7 @@ def validate_checker_independence(bundle: Bundle) -> None:
 def validate_bundle(bundle: Bundle) -> None:
     validate_validation_profile(bundle)
     validate_contract_profile(bundle)
-    validate_schema_document(bundle.schema, bundle.validation)
+    validate_schema_document(bundle.schema, bundle.validation, bundle.semantic_contract)
     runtime = SchemaRuntime(bundle.schema)
     payloads = payload_index(bundle)
     validate_frames(bundle, runtime, payloads)

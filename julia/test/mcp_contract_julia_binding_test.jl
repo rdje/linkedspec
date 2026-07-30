@@ -24,6 +24,15 @@
         @test LinkedSpecJulia._mcp_validate_named("discoverRequest", discover)
         discover["extra"] = true
         @test !LinkedSpecJulia._mcp_validate_named("discoverRequest", discover)
+        query = LinkedSpecJulia._mcp_frame("query_call_request")["params"]["arguments"]["request"]
+        query["contract"] = "linkedspec-semantic-query-v2"
+        @test LinkedSpecJulia._mcp_validate_named("semanticQueryRequest", query)
+        query["contract"] = repeat("a", 128)
+        @test LinkedSpecJulia._mcp_validate_named("semanticQueryRequest", query)
+        for invalid in ("", repeat("a", 129), repeat("é", 65))
+            query["contract"] = invalid
+            @test !LinkedSpecJulia._mcp_validate_named("semanticQueryRequest", query)
+        end
     end
 
     @testset "top-level schema classifies the canonical corpus exactly" begin

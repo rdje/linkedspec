@@ -400,7 +400,13 @@ sub _native_limits {
 sub _effective_policy {
  my ($supplied, $native) = @_;
  my $effective = LinkedSpec::MCPContractRuntime::clone_data($native);
- $effective->{project} = defined($supplied) ? 1 : 0;
+ $effective->{explicit} = {
+  source_detail => 0,
+  content_digest => 0,
+  page => 0,
+  budget => {map { $_ => 0 } qw(max_records max_relations max_depth)},
+ };
+ $effective->{project} = 0;
  return $effective unless defined $supplied;
  _throw('linkedspec_mcp_invalid_policy', 'MCP deployment policy must be an object.')
   unless ref($supplied) eq 'HASH';
@@ -414,6 +420,9 @@ sub _effective_policy {
     && $SOURCE_RANK{$value} <= $SOURCE_RANK{$native->{source_detail_ceiling}};
   $effective->{source_detail_ceiling} = "$value";
   $effective->{content_digest_available} = 0 if $value ne 'text';
+  $effective->{explicit}{source_detail} = 1;
+  $effective->{explicit}{content_digest} = 1 if $value ne 'text';
+  $effective->{project} = 1;
  }
  if (exists $supplied->{page_max}) {
   my $value = $supplied->{page_max};
@@ -421,6 +430,8 @@ sub _effective_policy {
    unless _is_positive_integer($value) && $value <= $native->{page_max};
   $effective->{page_max} = 0 + $value;
   $effective->{page_default} = $value if $effective->{page_default} > $value;
+  $effective->{explicit}{page} = 1;
+  $effective->{project} = 1;
  }
  if (exists $supplied->{budget_maxima}) {
   my $budget = $supplied->{budget_maxima};
@@ -436,6 +447,8 @@ sub _effective_policy {
    $effective->{budget_maxima}{$name} = 0 + $value;
    $effective->{budget_defaults}{$name} = $value
     if $effective->{budget_defaults}{$name} > $value;
+   $effective->{explicit}{budget}{$name} = 1;
+   $effective->{project} = 1;
   }
  }
  return $effective
@@ -463,12 +476,14 @@ sub _project_capabilities {
 
 sub _request_within_policy {
  my ($request, $policy) = @_;
- return 0 if $SOURCE_RANK{$request->{source}{detail}} > $SOURCE_RANK{$policy->{source_detail_ceiling}};
- return 0 if $request->{source}{include_content_digest}
+ return 0 if $policy->{explicit}{source_detail}
+  && $SOURCE_RANK{$request->{source}{detail}} > $SOURCE_RANK{$policy->{source_detail_ceiling}};
+ return 0 if $policy->{explicit}{content_digest} && $request->{source}{include_content_digest}
   && (!$policy->{content_digest_available} || $policy->{source_detail_ceiling} ne 'text');
- return 0 if $request->{page}{limit} > $policy->{page_max};
+ return 0 if $policy->{explicit}{page} && $request->{page}{limit} > $policy->{page_max};
  foreach my $name (qw(max_records max_relations max_depth)) {
-  return 0 if $request->{budget}{$name} > $policy->{budget_maxima}{$name};
+  return 0 if $policy->{explicit}{budget}{$name}
+   && $request->{budget}{$name} > $policy->{budget_maxima}{$name};
  }
  return 1
 }

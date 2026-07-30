@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.1 — repair MCP transport boundaries
+
+Repaired the three shared public MCP blockers atomically. `recordFacts` now contains the exact 72-key union from
+the governed semantic contract, including `effects` and `return_shape`. Query `contract` input is now a nonempty
+string bounded to 128 characters and 128 UTF-8 bytes, so structurally valid unknown versions reach native
+`semantic_query_contract_unsupported` handling. The neutral policy profile now makes explicit overlay-component
+presence—not inherited native limits—the sole pre-dispatch denial authority.
+
+The materializer and independent validator derive the new invariants separately and reject 76 mutations. All five
+bindings regenerated together at Perl 83,411, Rust 83,225, Dart 83,214, Julia 120,030, and Lua 83,166 bytes. Perl,
+Rust, Dart, Julia, and shared Lua now retain component-presence state; omitted and unrelated partial overlays
+reach native portable diagnostics, while explicit source/derived-content/page/budget ceilings still deny before
+native dispatch. Structural validation, authorization, privacy, lifecycle, and server authority remain unchanged.
+
+Focused proof passes Perl 36 tests; Rust 165 library plus 3 decoded, 4 stdio, and 1 admission; complete Dart 354
+plus focused MCP 16 and admission 1; Julia 53+145+170+178; and PUC Lua/LuaJIT 116+216+247+202 each. Neutral
+semantic remains 6/20/105; MCP is 35/10/10/76; admission remains 5/5 implementations + 6/6 runtimes with rollout
+pending/114. Knowledge Map 757/6,137, the 13,736-KiB/79-file mdBook, memory, and all seven doctrines pass.
+Host-authorized canonical CI
+passes Rust semantic in 78.48 seconds, Dart, Julia 416/416 in 27.5 seconds, containment/moved-root execution, CLI
+66x2, RAM 53%, and Phase 0 1,031/1,031 in 637 seconds. The generated book and exact empty managed-run directory
+were removed; reusable project-local Rust incremental caches were retained.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 — plan authorized MCP repair
 
 The director authorized the recommended exact all-twenty correction from clean blocker checkpoint `20ee93c9`.

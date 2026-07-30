@@ -1,19 +1,23 @@
 # FUTURE-PARITY-BACKLOG.10.9.5.1 — public Julia decoded MCP dispatch proof.
 
 const _MCP_TEST_SERVER_NAME = "linkedspec-semantic-julia"
-const _MCP_TEST_GRAPH_INDEX = semantic_index(
-    read(
-        joinpath(
-            REPO_ROOT,
-            "capability_conformance",
-            "semantic_introspection",
-            "graph.spec",
-        ),
-        String,
-    );
-    logical_name = "graph.spec",
-    source_detail_ceiling = SemanticSourceTextDetail,
-)
+function _mcp_test_graph_index(detail)
+    return semantic_index(
+        read(
+            joinpath(
+                REPO_ROOT,
+                "capability_conformance",
+                "semantic_introspection",
+                "graph.spec",
+            ),
+            String,
+        );
+        logical_name = "graph.spec",
+        source_detail_ceiling = detail,
+    )
+end
+
+const _MCP_TEST_GRAPH_INDEX = _mcp_test_graph_index(SemanticSourceTextDetail)
 
 mutable struct _McpTestClock
     value::Int
@@ -259,6 +263,82 @@ end
                 )
             end
         end
+    end
+
+    @testset "omitted and partial overlays preserve native diagnostics" begin
+        identity_index = _mcp_test_graph_index(SemanticSourceIdentityDetail)
+        query_calls = Ref(0)
+        entropy_byte = Ref(UInt8(0x52))
+        server = LinkedSpecJulia._mcp_test_server(
+            entropy = () -> begin
+                bytes = fill(entropy_byte[], 32)
+                entropy_byte[] += UInt8(1)
+                bytes
+            end,
+            now_ms = () -> 1_000,
+            capabilities_of = index -> to_json(semantic_capabilities(index)),
+            query_index = (index, request) -> begin
+                query_calls[] += 1
+                to_json(semantic_query_neutral(index, request))
+            end,
+        )
+        default_handle = register_index!(
+            server,
+            identity_index,
+            _mcp_test_authorization("default-policy-principal"),
+        )
+        source_request = _mcp_test_with_handle!(
+            _mcp_test_frame("query_call_request"),
+            default_handle,
+        )
+        _mcp_test_request_arguments(source_request)["source"]["detail"] = "span"
+        source_response = dispatch_mcp(
+            server,
+            source_request,
+            _mcp_test_authorization("default-policy-principal"),
+        )
+        @test source_response["result"]["structuredContent"]["diagnostics"][1]["code"] ==
+              "semantic_query_source_detail_forbidden"
+        @test query_calls[] == 1
+
+        unsupported = _mcp_test_with_handle!(
+            _mcp_test_frame("query_call_request"),
+            default_handle,
+        )
+        _mcp_test_request_arguments(unsupported)["contract"] =
+            "linkedspec-semantic-query-v2"
+        unsupported_response = dispatch_mcp(
+            server,
+            unsupported,
+            _mcp_test_authorization("default-policy-principal"),
+        )
+        @test unsupported_response["result"]["structuredContent"]["diagnostics"][1]["code"] ==
+              "semantic_query_contract_unsupported"
+        @test query_calls[] == 2
+
+        partial_handle = register_index!(
+            server,
+            identity_index,
+            _mcp_test_authorization("partial-policy-principal");
+            options = McpRegistrationOptions(
+                policy = McpDeploymentPolicy(page_max = 50),
+            ),
+        )
+        partial_request = _mcp_test_with_handle!(
+            _mcp_test_frame("query_call_request"),
+            partial_handle,
+        )
+        partial = _mcp_test_request_arguments(partial_request)
+        partial["page"]["limit"] = 50
+        partial["source"]["detail"] = "span"
+        partial_response = dispatch_mcp(
+            server,
+            partial_request,
+            _mcp_test_authorization("partial-policy-principal"),
+        )
+        @test partial_response["result"]["structuredContent"]["diagnostics"][1]["code"] ==
+              "semantic_query_source_detail_forbidden"
+        @test query_calls[] == 3
     end
 
     @testset "unavailable states, validation, capacity, and shutdown are safe" begin

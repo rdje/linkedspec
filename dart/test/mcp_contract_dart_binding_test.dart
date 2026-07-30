@@ -40,6 +40,32 @@ void main() {
       McpServerTestHarness.validateNamed('discoverRequest', discover),
       isFalse,
     );
+    final query =
+        McpServerTestHarness.frame('query_call_request')!['params']!
+            as Map<String, Object?>;
+    final arguments = query['arguments']! as Map<String, Object?>;
+    final request = arguments['request']! as Map<String, Object?>;
+    request['contract'] = 'linkedspec-semantic-query-v2';
+    expect(
+      McpServerTestHarness.validateNamed('semanticQueryRequest', request),
+      isTrue,
+    );
+    request['contract'] = List<String>.filled(128, 'a').join();
+    expect(
+      McpServerTestHarness.validateNamed('semanticQueryRequest', request),
+      isTrue,
+    );
+    for (final invalid in [
+      '',
+      List<String>.filled(129, 'a').join(),
+      List<String>.filled(65, 'é').join(),
+    ]) {
+      request['contract'] = invalid;
+      expect(
+        McpServerTestHarness.validateNamed('semanticQueryRequest', request),
+        isFalse,
+      );
+    }
   });
 
   test('top-level schema classifies the canonical corpus exactly', () {

@@ -208,7 +208,7 @@ admission_role(
   my $validator_bytes = read_bytes($validator_path);
   is(sha256_hex($validator_bytes), $source_sha->{validator_cases}, 'the exact validator-case artifact is unchanged');
   my $validator = JSON::PP->new->utf8(1)->decode($validator_bytes);
-  is(scalar(@{$validator->{mutation_order}}), 68, 'all 68 independent validator mutations remain present');
+  is(scalar(@{$validator->{mutation_order}}), 76, 'all 76 independent validator mutations remain present');
  }
 );
 

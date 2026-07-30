@@ -464,7 +464,13 @@ local function effective_policy(policy_value, native)
     page_max = native.page_max,
     budget_defaults = budget_copy(native.budget_defaults),
     budget_maxima = budget_copy(native.budget_maxima),
-    project = policy_value ~= nil,
+    project = false,
+    explicit = {
+      source_detail = false,
+      content_digest = false,
+      page = false,
+      budget = false,
+    },
   }
   if policy_value == nil then return effective end
   local supplied = POLICY_STATE[policy_value]
@@ -475,7 +481,12 @@ local function effective_policy(policy_value, native)
       fail("linkedspec_mcp_invalid_policy", "MCP source-detail policy is invalid or elevating.")
     end
     effective.source_detail_ceiling = supplied.source_detail_ceiling
-    if supplied.source_detail_ceiling ~= "text" then effective.content_digest_available = false end
+    if supplied.source_detail_ceiling ~= "text" then
+      effective.content_digest_available = false
+      effective.explicit.content_digest = true
+    end
+    effective.explicit.source_detail = true
+    effective.project = true
   end
   if supplied.page_max ~= nil then
     if supplied.page_max > native.page_max then
@@ -483,6 +494,8 @@ local function effective_policy(policy_value, native)
     end
     effective.page_max = supplied.page_max
     effective.page_default = math.min(effective.page_default, supplied.page_max)
+    effective.explicit.page = true
+    effective.project = true
   end
   if supplied.budget_maxima ~= nil then
     local budget = BUDGET_STATE[supplied.budget_maxima]
@@ -494,6 +507,8 @@ local function effective_policy(policy_value, native)
       effective.budget_maxima[name] = budget[name]
       effective.budget_defaults[name] = math.min(effective.budget_defaults[name], budget[name])
     end
+    effective.explicit.budget = true
+    effective.project = true
   end
   return effective
 end
@@ -610,21 +625,23 @@ end
 local function request_within_policy(request, policy)
   local source = json.kind(request) == "harray" and request.source or nil
   if json.kind(source) ~= "harray" or SOURCE_DETAIL_RANK[source.detail] == nil or
-      SOURCE_DETAIL_RANK[source.detail] > SOURCE_DETAIL_RANK[policy.source_detail_ceiling] then
+      (policy.explicit.source_detail and
+        SOURCE_DETAIL_RANK[source.detail] > SOURCE_DETAIL_RANK[policy.source_detail_ceiling]) then
     return false
   end
-  if source.include_content_digest and
+  if policy.explicit.content_digest and source.include_content_digest and
       (not policy.content_digest_available or policy.source_detail_ceiling ~= "text") then
     return false
   end
   local page = request.page
-  if json.kind(page) ~= "harray" or not finite_integer(page.limit) or page.limit > policy.page_max then
+  if json.kind(page) ~= "harray" or not finite_integer(page.limit) or
+      (policy.explicit.page and page.limit > policy.page_max) then
     return false
   end
   local budget = budget_from_json(request.budget)
   if budget == nil then return false end
   for _, name in ipairs({ "max_records", "max_relations", "max_depth" }) do
-    if budget[name] > policy.budget_maxima[name] then return false end
+    if policy.explicit.budget and budget[name] > policy.budget_maxima[name] then return false end
   end
   return true
 end

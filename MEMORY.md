@@ -5,19 +5,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `20ee93c9` — `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker` (97/300; no
+- latest_commit: `c3273219` — `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0 - plan authorized MCP repair` (98/300; no
   push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.0`; 17/20 identity blocker is durable at `20ee93c9`.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` — director-authorized exact-repair plan from clean
-  `20ee93c9`; behavior-free owner audit/split/signoff and commit are in progress.
-- active_scope: freeze atomic neutral contract/bindings/five-server repair `.1`, all-twenty consumers `.2`, rooted
-  promotion `.3`, and unchanged parent closeout `.4` before any behavior change.
-- active_progress: authorization and exact owners are reconciled; per-component explicit-overlay enforcement is
-  required so inherited native limits reach native diagnostics; executable state remains unchanged.
-- active_exclusions: no contract/binding/server/test/fixture/ledger/rollout/semantic/CLI behavior in `.0`, no
-  weakened claim, test-only bypass, aggregator, legacy adapter, or push.
-- next_after_clean_commit: activate `.10.9.7.1.1.1` and implement the atomic shared contract/generated-binding/
-  five-server correction with focused cross-runtime proof; no push before 300.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0`; the exact `.1-.4` implementation split is durable.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` — atomic shared contract/binding/five-server repair from
+  clean `c3273219`; implementation and complete canonical signoff pass; commit/brief-clear/clean proof is next.
+- active_scope: exact 72-key fact union, bounded contract string, explicit-component policy presence, neutral
+  artifacts/76 mutations, five generated bindings, five server seams, six runtime proofs, and lockstep docs.
+- active_progress: MCP is focused-green at 35 canonical/10 raw/10 lifecycle/76 mutations; bindings are byte-fresh
+  at 83,411/83,225/83,214/120,030/83,166; Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs pass; rollout remains
+  5/5 implementations + 6/6 runtimes pending/114.
+- active_exclusions: no all-twenty consumer strengthening, recurring driver/promotion, semantic model, primary
+  CLI, aggregator, legacy adapter, package/SDK/service/network authority, or push in `.1`.
+- next_after_clean_commit: activate `.10.9.7.1.1.2` and prove all twenty direct-native/MCP/digest identities in
+  the existing six runtime consumers; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -43,13 +44,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 97/300 after `20ee93c9`; no push.
+- push_policy: hard lock at 300 new local commits; counter 98/300 after `c3273219`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: prior MCP `.0` remains semantic 6/20/105, MCP 35/10/10/68, ledger 5/5 + 6/6 pending/114.
-  README closeout E4 passes 7 doctrines, Rust semantic 82.85s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
-  containment/moved-root, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663s.
+- canonical_state: `.1` passes semantic 6/20/105, MCP 35/10/10/76, ledger 5/5 + 6/6 pending/114, all 7 doctrines,
+  Rust semantic 78.48s, Dart, Julia 416/416/27.5s, cursor 288, containment/moved-root, CLI 66x2, RAM 53%, and Phase
+  0 1,031/1,031 in 637s.
 - blockers: none; the director authorized the exact all-twenty repair on 2026-07-30. Rollout remains pending until
   `.1-.3` implement and prove the repair, all-twenty identities, and routed promotion.

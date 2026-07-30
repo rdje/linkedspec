@@ -94,10 +94,29 @@ final class _NativeLimits {
 }
 
 final class _EffectivePolicy {
-  const _EffectivePolicy({required this.limits, required this.project});
+  const _EffectivePolicy({
+    required this.limits,
+    required this.project,
+    required this.explicit,
+  });
 
   final _NativeLimits limits;
   final bool project;
+  final _ExplicitPolicy explicit;
+}
+
+final class _ExplicitPolicy {
+  const _ExplicitPolicy({
+    this.sourceDetail = false,
+    this.contentDigest = false,
+    this.page = false,
+    this.budget = false,
+  });
+
+  final bool sourceDetail;
+  final bool contentDigest;
+  final bool page;
+  final bool budget;
 }
 
 final class _RegistryEntry {
@@ -498,7 +517,7 @@ final class McpServer {
       return _mcpToolErrorResponse(id, unavailable: true);
     }
     if (operation == _ToolOperation.query &&
-        !_requestWithinPolicy(arguments['request'], authorized.policy.limits)) {
+        !_requestWithinPolicy(arguments['request'], authorized.policy)) {
       return _mcpToolErrorResponse(id, unavailable: false);
     }
 
@@ -765,8 +784,16 @@ _EffectivePolicy _effectivePolicy(
   var budgetDefaults = native.budgetDefaults;
   var budgetMaxima = native.budgetMaxima;
   if (supplied == null) {
-    return _EffectivePolicy(limits: native, project: false);
+    return _EffectivePolicy(
+      limits: native,
+      project: false,
+      explicit: const _ExplicitPolicy(),
+    );
   }
+  var explicitSource = false;
+  var explicitContent = false;
+  var explicitPage = false;
+  var explicitBudget = false;
   final detail = supplied.sourceDetailCeiling;
   if (detail != null) {
     if (_sourceRank(detail) > _sourceRank(native.sourceDetailCeiling)) {
@@ -775,7 +802,9 @@ _EffectivePolicy _effectivePolicy(
     source = detail;
     if (detail != SemanticSourceDetail.text) {
       contentDigest = false;
+      explicitContent = true;
     }
+    explicitSource = true;
   }
   final suppliedPage = supplied.pageMax;
   if (suppliedPage != null) {
@@ -784,6 +813,7 @@ _EffectivePolicy _effectivePolicy(
     }
     pageMax = suppliedPage;
     pageDefault = min(pageDefault, pageMax);
+    explicitPage = true;
   }
   final suppliedBudget = supplied.budgetMaxima;
   if (suppliedBudget != null) {
@@ -800,6 +830,7 @@ _EffectivePolicy _effectivePolicy(
       ),
       maxDepth: min(budgetDefaults.maxDepth, suppliedBudget.maxDepth),
     );
+    explicitBudget = true;
   }
   return _EffectivePolicy(
     limits: _NativeLimits(
@@ -810,7 +841,13 @@ _EffectivePolicy _effectivePolicy(
       budgetDefaults: budgetDefaults,
       budgetMaxima: budgetMaxima,
     ),
-    project: true,
+    project: explicitSource || explicitPage || explicitBudget,
+    explicit: _ExplicitPolicy(
+      sourceDetail: explicitSource,
+      contentDigest: explicitContent,
+      page: explicitPage,
+      budget: explicitBudget,
+    ),
   );
 }
 
@@ -851,26 +888,32 @@ Map<String, Object?> _projectCapabilities(
   return projected;
 }
 
-bool _requestWithinPolicy(Object? value, _NativeLimits policy) {
+bool _requestWithinPolicy(Object? value, _EffectivePolicy policy) {
   final request = _jsonMap(value);
   final source = _jsonMap(request?['source']);
   final detail = _sourceDetail(source?['detail']);
   if (detail == null ||
-      _sourceRank(detail) > _sourceRank(policy.sourceDetailCeiling)) {
+      (policy.explicit.sourceDetail &&
+          _sourceRank(detail) >
+              _sourceRank(policy.limits.sourceDetailCeiling))) {
     return false;
   }
   if (source?['include_content_digest'] == true &&
-      (!policy.contentDigestAvailable ||
-          policy.sourceDetailCeiling != SemanticSourceDetail.text)) {
+      policy.explicit.contentDigest &&
+      (!policy.limits.contentDigestAvailable ||
+          policy.limits.sourceDetailCeiling != SemanticSourceDetail.text)) {
     return false;
   }
   final page = _jsonMap(request?['page']);
   final limit = page?['limit'];
-  if (limit is! int || limit > policy.pageMax) {
+  if (limit is! int ||
+      (policy.explicit.page && limit > policy.limits.pageMax)) {
     return false;
   }
   final budget = _budgetLimits(request?['budget']);
-  return budget != null && _budgetWithin(budget, policy.budgetMaxima);
+  return budget != null &&
+      (!policy.explicit.budget ||
+          _budgetWithin(budget, policy.limits.budgetMaxima));
 }
 
 McpBudgetLimits? _budgetLimits(Object? value) {

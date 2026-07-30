@@ -13,9 +13,9 @@ answers:
   - what may promote thin MCP transport
   - does recurring MCP proof add a primary CLI surface
 date: 2026-07-29
-status: accepted and director-authorized; atomic repair plan active; rollout remains pending
+status: accepted and director-authorized; atomic repair implemented; all-twenty proof and rollout pending
 tags: [mcp, semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral semantic contract, all six native/MCP consumers, the implementation ledger/checker, canonical CI, the semantic recurring precedent, and project-data routing. Current semantic consumers prove all 20 native cases; current MCP consumers prove capabilities plus one representative direct/MCP query. Real Perl probe .10.9.7.1.0 then proves capabilities plus 16/19 query identities and root-causes three shared MCP blockers: missing effects/return_shape output facts, const query-contract input, and default-policy preemption of the native source-ceiling diagnostic. Exploratory code is removed. On 2026-07-30 the director authorized the exact all-twenty correction; .10.9.7.1.1.0 freezes atomic contract/binding/five-server repair, then six-runtime identities, then routed promotion, while rollout remains pending."
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral contract, six native/MCP consumers, ledgers, canonical CI, recurring precedent, and storage routing. Semantic consumers prove 20 native cases; MCP consumers still prove capabilities plus one representative identity. Probe .10.9.7.1.0 found three shared blockers. Atomic repair .10.9.7.1.1.1 now admits the exact 72 fact keys, bounded future contract strings, and explicit-component-only pre-dispatch policy in all five servers. Focused proof is green across six runtimes at neutral MCP 35/10/10/76 and byte-fresh bindings 83,411/83,225/83,214/120,030/83,166. Rollout remains pending/114; .1.1.2 must still strengthen the six consumers before the recurring driver and promotion."
 last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -34,18 +34,20 @@ twenty ordered neutral query cases. The six MCP admissions cover the complete tr
 twelve-role inventory but directly compare only capabilities plus one representative graph query to the native
 API. Merely running them together cannot prove the stronger all-twenty direct/MCP identity claim.
 
-Implementation audit `.10.9.7.1.0` proves a second boundary: a real Perl all-twenty spend preserves capabilities
-plus sixteen of nineteen query identities, while three valid native responses are preempted by shared MCP
-schema/default-policy behavior. See [[mcp-all-twenty-transport-blocker]]. Exploratory code is removed and rollout
-remains pending. The director authorized the exact all-twenty contract and five-server policy repair on
-2026-07-30; keeping current bytes was the non-selected weaker claim.
+Implementation audit `.10.9.7.1.0` proved a second boundary: a real Perl all-twenty spend preserved capabilities
+plus sixteen of nineteen query identities, while three valid native responses were preempted by shared MCP
+schema/default-policy behavior. See [[mcp-all-twenty-transport-blocker]]. Exploratory code was removed. The
+director authorized the exact all-twenty contract and five-server policy repair on 2026-07-30;
+`.10.9.7.1.1.1` now implements that repair with independently validated neutral artifacts and focused
+six-runtime proof. Keeping the old bytes was the non-selected weaker claim. Rollout remains pending.
 
 ADR `0062` originally required `.10.9.7.1` to extend only the existing MCP consumers. The `.1.0` evidence proves
 that consumer-only scope cannot satisfy the accepted claim. Expected records and responses must still remain
 solely in `semantic_introspection_contract.json`, and no second model is allowed; however, exact all-twenty proof
 now depends on the authorized neutral transport and identical five-server policy correction recorded in the
-blocker card. The repair is atomic: exact schema/policy bytes, independent validation, all generated bindings, and
-all five servers move together; consumer proof, promotion, and unchanged closeout then follow as separate commits.
+blocker card. The repair moved atomically: exact schema/policy bytes, independent validation, all generated
+bindings, and all five servers changed together. Consumer proof, promotion, and unchanged closeout follow as
+separate commits.
 
 The planned `tools/check_mcp_six_runtime.sh` runs the neutral semantic checker, MCP materializer/validator, five
 binding generators, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, MCP ledger checker, and three existing primary

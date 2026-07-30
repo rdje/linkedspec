@@ -57,6 +57,11 @@ my $index = LinkedSpec::semantic_index(
  logical_name => 'graph.spec',
  source_detail_ceiling => 'text',
 );
+my $identity_index = LinkedSpec::semantic_index(
+ \$source,
+ logical_name => 'graph.spec',
+ source_detail_ceiling => 'identity',
+);
 my $original_capabilities = LinkedSpec::SemanticIndex->can('capabilities');
 my $original_query = LinkedSpec::SemanticIndex->can('query');
 my ($capability_calls, $query_calls) = (0, 0);
@@ -143,6 +148,62 @@ sub test_server {
   is(canonical($response), canonical($expected), 'allowed query preserves the exact native payload in the Perl result shell');
   is($query_calls, $before_query + 1, 'allowed query invokes native query once');
   is(canonical($request->{params}{arguments}{request}), $request_before, 'server does not mutate the caller query');
+ };
+
+ subtest 'omitted and partial overlays preserve native portable diagnostics' => sub {
+  my ($default_server) = test_server(entropy => [('b' x 32)]);
+  my $default_handle = $default_server->register_index(
+   $identity_index,
+   authorization_context => 'default-policy-principal',
+  );
+  my $source_request = with_handle('query_call_request', $default_handle);
+  $source_request->{params}{arguments}{request}{source}{detail} = 'span';
+  my $before = $query_calls;
+  my $source_response = $default_server->dispatch(
+   $source_request,
+   authorization_context => 'default-policy-principal',
+  );
+  is(
+   $source_response->{result}{structuredContent}{diagnostics}[0]{code},
+   'semantic_query_source_detail_forbidden',
+   'an omitted source overlay preserves the native source-ceiling diagnostic',
+  );
+  is($query_calls, $before + 1, 'default source ceiling dispatches exactly one native query');
+
+  my $unsupported = with_handle('query_call_request', $default_handle);
+  $unsupported->{params}{arguments}{request}{contract} = 'linkedspec-semantic-query-v2';
+  $before = $query_calls;
+  my $unsupported_response = $default_server->dispatch(
+   $unsupported,
+   authorization_context => 'default-policy-principal',
+  );
+  is(
+   $unsupported_response->{result}{structuredContent}{diagnostics}[0]{code},
+   'semantic_query_contract_unsupported',
+   'a bounded future contract reaches the native portable diagnostic',
+  );
+  is($query_calls, $before + 1, 'unsupported contract dispatches exactly one native query');
+
+  my ($partial_server) = test_server(entropy => [('c' x 32)]);
+  my $partial_handle = $partial_server->register_index(
+   $identity_index,
+   authorization_context => 'partial-policy-principal',
+   policy => {page_max => 50},
+  );
+  my $partial_request = with_handle('query_call_request', $partial_handle);
+  $partial_request->{params}{arguments}{request}{page}{limit} = 50;
+  $partial_request->{params}{arguments}{request}{source}{detail} = 'span';
+  $before = $query_calls;
+  my $partial_response = $partial_server->dispatch(
+   $partial_request,
+   authorization_context => 'partial-policy-principal',
+  );
+  is(
+   $partial_response->{result}{structuredContent}{diagnostics}[0]{code},
+   'semantic_query_source_detail_forbidden',
+   'a page-only overlay does not preempt the native source diagnostic',
+  );
+  is($query_calls, $before + 1, 'partial unrelated overlay dispatches exactly one native query');
  };
 
  subtest 'lowering-only policy projects capabilities and denies every ceiling pre-dispatch' => sub {

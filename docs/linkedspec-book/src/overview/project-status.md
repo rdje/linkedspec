@@ -14,7 +14,7 @@ the bounded-README adoption critical path is closed.
 
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic
-119,538-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only
+120,030-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only
 policy, and exact decoded discovery/list/capabilities/query/cancellation dispatch over caller-owned
 `SemanticIndex` values. The wire adds bounded LF/CRLF/final-EOF framing, iterative duplicate-safe lexical
 admission, exact number-kind reconstruction, canonical LF emission, cancellation through flush, sanitized
@@ -26,7 +26,7 @@ pending. No-change `.10.9.5.4` recomposes all committed owners unchanged, closes
 status movement, and hands the clean boundary to shared Lua planning `.10.9.6.0`.
 
 That behavior-free Lua audit and ADR `0061` freeze one exact implementation source for PUC Lua and LuaJIT.
-Decoded leaf `.10.9.6.1` now ships the generated 82,827-byte module carrying the exact 82,543-byte long-bracket
+Decoded leaf `.10.9.6.1` now ships the generated 83,166-byte module carrying the exact 82,882-byte long-bracket
 bundle, digest-verified frozen runtime, protected secure registry, lower-only decoded server, lazy public API, and
 one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Focused proof passes 111 + 210
 assertions on each runtime. Strict-wire leaf `.10.9.6.2` now adds one iterative preflight and caller-owned stdio
@@ -40,16 +40,17 @@ Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-cha
 committed owners unchanged, passes Phase 0 1,031/1,031 in 652 seconds plus the same dual-ABI gate, and closes
 parent `.10.9.6`. Shared recurring rollout remains pending under `.10.9.7`.
 
-Recurring implementation audit `.10.9.7.1.0` has now proved a shared all-twenty MCP blocker without retaining
+Recurring implementation audit `.10.9.7.1.0` proved a shared all-twenty MCP blocker without retaining
 exploratory code. Capabilities plus 16/19 query responses cross the public MCP API unchanged; the calls response
-is outside the current MCP fact-key schema, the unsupported-contract response is preempted by constant input
-validation, and the source-ceiling response is preempted by default-policy denial. The same boundary applies to
-all five implementations. Formal status remains 5/5 implementations + 6/6 runtimes with rollout pending/114.
-The director authorized the exact repair on 2026-07-30. Plan `.10.9.7.1.1.0` keeps public transport semantics
-coherent by moving the neutral schema/policy profile, exact artifacts and all generated bindings, plus identical
-Perl/Rust/Dart/Julia/shared-Lua behavior in one atomic implementation leaf. A second leaf proves all twenty
-responses on six runtimes; only then may the routed recurring gate promote thin transport. The weaker 17-identity
-plus three-outcome claim is not selected, and current rollout remains pending until that proof lands.
+was outside the old MCP fact-key schema, the unsupported-contract response was preempted by constant input
+validation, and the source-ceiling response was preempted by default-policy denial. Atomic repair
+`.10.9.7.1.1.1` now admits the exact 72 fact keys, bounds query-contract strings at 128 characters and 128 UTF-8
+bytes, and makes explicit overlay-component presence the sole pre-dispatch policy authority in all five servers.
+Neutral MCP is signoff-complete at 35 frames / 10 raw / 10 lifecycle / 76 mutations; all five generated bindings,
+Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs, and the complete canonical local gate are green. Formal status deliberately remains 5/5
+implementations + 6/6 runtimes with rollout pending/114. The next leaf proves all twenty responses on six
+runtimes; only then may the routed recurring gate promote thin transport. The weaker 17-identity plus
+three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and

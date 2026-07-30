@@ -333,7 +333,7 @@ fn exact_rust_mcp_admission_executes_every_role_once() {
                 .as_array()
                 .expect("mutation order")
                 .len(),
-            68
+            76
         );
     });
 

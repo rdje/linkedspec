@@ -79,6 +79,15 @@ struct NativeLimits {
 struct EffectivePolicy {
     limits: NativeLimits,
     project: bool,
+    explicit: ExplicitPolicy,
+}
+
+#[derive(Clone, Copy, Default)]
+struct ExplicitPolicy {
+    source_detail: bool,
+    content_digest: bool,
+    page: bool,
+    budget: bool,
 }
 
 struct RegistryEntry {
@@ -117,6 +126,8 @@ pub struct McpServer {
     handle_attempts: usize,
     default_lifetime_ms: u64,
     maximum_lifetime_ms: u64,
+    #[cfg(test)]
+    native_query_dispatches: usize,
 }
 
 impl McpServer {
@@ -153,6 +164,8 @@ impl McpServer {
             handle_attempts: HANDLE_ATTEMPTS,
             default_lifetime_ms,
             maximum_lifetime_ms,
+            #[cfg(test)]
+            native_query_dispatches: 0,
         })
     }
 
@@ -424,7 +437,7 @@ impl McpServer {
         };
         if operation == ToolOperation::Query {
             let query = request.pointer("/params/arguments/request").ok_or(())?;
-            if !request_within_policy(query, &policy.limits) {
+            if !request_within_policy(query, &policy) {
                 return mcp_contract_runtime::tool_error_response(id, false).map_err(|_| ());
             }
         }
@@ -436,6 +449,10 @@ impl McpServer {
             }
             ToolOperation::Query => {
                 let query = request.pointer("/params/arguments/request").ok_or(())?;
+                #[cfg(test)]
+                {
+                    self.native_query_dispatches += 1;
+                }
                 serde_json::to_value(index.query_neutral(query)).map_err(|_| ())?
             }
         };
@@ -560,6 +577,7 @@ impl McpServer {
             handle_attempts,
             default_lifetime_ms: 900_000,
             maximum_lifetime_ms: 86_400_000,
+            native_query_dispatches: 0,
         }
     }
 }
@@ -702,8 +720,10 @@ fn effective_policy(
         return Ok(EffectivePolicy {
             limits,
             project: false,
+            explicit: ExplicitPolicy::default(),
         });
     };
+    let mut explicit = ExplicitPolicy::default();
     if let Some(detail) = supplied.source_detail_ceiling {
         if source_rank(detail) > source_rank(native.source_detail_ceiling) {
             return Err(invalid_policy(
@@ -713,7 +733,9 @@ fn effective_policy(
         limits.source_detail_ceiling = detail;
         if detail != SemanticSourceDetail::Text {
             limits.content_digest_available = false;
+            explicit.content_digest = true;
         }
+        explicit.source_detail = true;
     }
     if let Some(page_max) = supplied.page_max {
         if page_max == 0 || page_max > native.page_max {
@@ -721,6 +743,7 @@ fn effective_policy(
         }
         limits.page_max = page_max;
         limits.page_default = limits.page_default.min(page_max);
+        explicit.page = true;
     }
     if let Some(budget) = supplied.budget_maxima {
         if !budget_within(&budget, &native.budget_maxima) {
@@ -735,10 +758,12 @@ fn effective_policy(
                 .min(budget.max_relations),
             max_depth: limits.budget_defaults.max_depth.min(budget.max_depth),
         };
+        explicit.budget = true;
     }
     Ok(EffectivePolicy {
         limits,
-        project: true,
+        project: explicit.source_detail || explicit.page || explicit.budget,
+        explicit,
     })
 }
 
@@ -793,7 +818,7 @@ fn project_capabilities(
     Ok(response)
 }
 
-fn request_within_policy(request: &Value, policy: &NativeLimits) -> bool {
+fn request_within_policy(request: &Value, policy: &EffectivePolicy) -> bool {
     let Some(detail) = request
         .pointer("/source/detail")
         .and_then(Value::as_str)
@@ -801,29 +826,32 @@ fn request_within_policy(request: &Value, policy: &NativeLimits) -> bool {
     else {
         return false;
     };
-    if source_rank(detail) > source_rank(policy.source_detail_ceiling) {
+    if policy.explicit.source_detail
+        && source_rank(detail) > source_rank(policy.limits.source_detail_ceiling)
+    {
         return false;
     }
     if request
         .pointer("/source/include_content_digest")
         .and_then(Value::as_bool)
         .unwrap_or(false)
-        && (!policy.content_digest_available
-            || policy.source_detail_ceiling != SemanticSourceDetail::Text)
+        && policy.explicit.content_digest
+        && (!policy.limits.content_digest_available
+            || policy.limits.source_detail_ceiling != SemanticSourceDetail::Text)
     {
         return false;
     }
     if request
         .pointer("/page/limit")
         .and_then(Value::as_u64)
-        .is_none_or(|limit| limit > policy.page_max)
+        .is_none_or(|limit| policy.explicit.page && limit > policy.limits.page_max)
     {
         return false;
     }
     let Some(budget) = budget_limits(request.get("budget")) else {
         return false;
     };
-    budget_within(&budget, &policy.budget_maxima)
+    !policy.explicit.budget || budget_within(&budget, &policy.limits.budget_maxima)
 }
 
 fn budget_limits(value: Option<&Value>) -> Option<McpBudgetLimits> {
@@ -942,14 +970,15 @@ mod tests {
 
     const SOURCE: &str = "Top::AND\n  /(?<word>[A-Za-z]+)/ -> Word\nWord:OR\n  /[A-Za-z]+/\n";
 
-    fn index() -> Arc<SemanticIndex> {
+    fn index_with_detail(detail: SemanticSourceDetail) -> Arc<SemanticIndex> {
         Arc::new(
-            SemanticIndex::from_source(
-                SOURCE,
-                SemanticIndexOptions::new("mcp.spec", SemanticSourceDetail::Text),
-            )
-            .unwrap(),
+            SemanticIndex::from_source(SOURCE, SemanticIndexOptions::new("mcp.spec", detail))
+                .unwrap(),
         )
+    }
+
+    fn index() -> Arc<SemanticIndex> {
+        index_with_detail(SemanticSourceDetail::Text)
     }
 
     fn server_with(bytes: [u8; 32], now: Rc<Cell<u64>>) -> McpServer {
@@ -1127,6 +1156,7 @@ mod tests {
         }
         let expected = mcp_contract_runtime::tool_error_response(&json!(8), false).unwrap();
         for request in denied {
+            let before = server.native_query_dispatches;
             assert_eq!(
                 server
                     .dispatch(&request, b"policy-principal")
@@ -1134,7 +1164,71 @@ mod tests {
                     .unwrap(),
                 expected
             );
+            assert_eq!(server.native_query_dispatches, before);
         }
+    }
+
+    #[test]
+    fn omitted_and_partial_overlays_preserve_native_portable_diagnostics() {
+        let mut default_server = server_with([14; 32], Rc::new(Cell::new(0)));
+        let default_handle = default_server
+            .register_index(
+                index_with_detail(SemanticSourceDetail::Identity),
+                b"default-policy-principal",
+                McpRegistrationOptions::default(),
+            )
+            .unwrap();
+        let mut source_request = with_handle("query_call_request", &default_handle);
+        source_request["params"]["arguments"]["request"]["source"]["detail"] = json!("span");
+        let source_response = default_server
+            .dispatch(&source_request, b"default-policy-principal")
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            source_response.pointer("/result/structuredContent/diagnostics/0/code"),
+            Some(&json!("semantic_query_source_detail_forbidden"))
+        );
+        assert_eq!(default_server.native_query_dispatches, 1);
+
+        let mut unsupported = with_handle("query_call_request", &default_handle);
+        unsupported["params"]["arguments"]["request"]["contract"] =
+            json!("linkedspec-semantic-query-v2");
+        let unsupported_response = default_server
+            .dispatch(&unsupported, b"default-policy-principal")
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            unsupported_response.pointer("/result/structuredContent/diagnostics/0/code"),
+            Some(&json!("semantic_query_contract_unsupported"))
+        );
+        assert_eq!(default_server.native_query_dispatches, 2);
+
+        let mut partial_server = server_with([15; 32], Rc::new(Cell::new(0)));
+        let partial_handle = partial_server
+            .register_index(
+                index_with_detail(SemanticSourceDetail::Identity),
+                b"partial-policy-principal",
+                McpRegistrationOptions {
+                    lifetime_ms: None,
+                    policy: Some(McpDeploymentPolicy {
+                        page_max: Some(50),
+                        ..McpDeploymentPolicy::default()
+                    }),
+                },
+            )
+            .unwrap();
+        let mut partial_request = with_handle("query_call_request", &partial_handle);
+        partial_request["params"]["arguments"]["request"]["page"]["limit"] = json!(50);
+        partial_request["params"]["arguments"]["request"]["source"]["detail"] = json!("span");
+        let partial_response = partial_server
+            .dispatch(&partial_request, b"partial-policy-principal")
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            partial_response.pointer("/result/structuredContent/diagnostics/0/code"),
+            Some(&json!("semantic_query_source_detail_forbidden"))
+        );
+        assert_eq!(partial_server.native_query_dispatches, 1);
     }
 
     #[test]

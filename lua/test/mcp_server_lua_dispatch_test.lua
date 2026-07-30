@@ -87,12 +87,16 @@ local function test_server(start, options)
   })
 end
 
-local graph_index = linkedspec.semantic_index(read_file(
-  "capability_conformance/semantic_introspection/graph.spec"
-), {
-  logical_name = "graph.spec",
-  source_detail_ceiling = "text",
-})
+local function graph_index_with_detail(detail)
+  return linkedspec.semantic_index(read_file(
+    "capability_conformance/semantic_introspection/graph.spec"
+  ), {
+    logical_name = "graph.spec",
+    source_detail_ceiling = detail,
+  })
+end
+
+local graph_index = graph_index_with_detail("text")
 
 -- Public static decoded classifications and request immutability.
 do
@@ -229,6 +233,50 @@ do
         linkedspec.mcp_registration_options({ policy = policy }))
     end, "linkedspec_mcp_invalid_policy", "elevating policy " .. index)
   end
+end
+
+-- Omitted and unrelated partial overlays retain native portable diagnostic authority.
+do
+  local identity_index = graph_index_with_detail("identity")
+  local query_calls = 0
+  local server = test_server(0x2a, {
+    capabilities_of = function(index)
+      return linkedspec.semantic_query_to_json(index:capabilities())
+    end,
+    query_index = function(index, request)
+      query_calls = query_calls + 1
+      return linkedspec.semantic_query_to_json(index:query_neutral(request))
+    end,
+  })
+  local default_handle = server:register_index(identity_index, "default-policy-principal")
+  local source_request = with_handle(frame("query_call_request"), default_handle)
+  source_request.params.arguments.request.source.detail = "span"
+  local source_response = server:dispatch(source_request, "default-policy-principal")
+  check_equal(source_response.result.structuredContent.diagnostics[1].code,
+    "semantic_query_source_detail_forbidden",
+    "omitted source overlay preserves native source-ceiling diagnostic")
+  check_equal(query_calls, 1, "default source ceiling dispatches one native query")
+
+  local unsupported = with_handle(frame("query_call_request"), default_handle)
+  unsupported.params.arguments.request.contract = "linkedspec-semantic-query-v2"
+  local unsupported_response = server:dispatch(unsupported, "default-policy-principal")
+  check_equal(unsupported_response.result.structuredContent.diagnostics[1].code,
+    "semantic_query_contract_unsupported",
+    "bounded future contract reaches native portable diagnostic")
+  check_equal(query_calls, 2, "unsupported contract dispatches one native query")
+
+  local partial_handle = server:register_index(identity_index, "partial-policy-principal",
+    linkedspec.mcp_registration_options({
+      policy = linkedspec.mcp_deployment_policy({ page_max = 50 }),
+    }))
+  local partial_request = with_handle(frame("query_call_request"), partial_handle)
+  partial_request.params.arguments.request.page.limit = 50
+  partial_request.params.arguments.request.source.detail = "span"
+  local partial_response = server:dispatch(partial_request, "partial-policy-principal")
+  check_equal(partial_response.result.structuredContent.diagnostics[1].code,
+    "semantic_query_source_detail_forbidden",
+    "page-only overlay does not preempt native source diagnostic")
+  check_equal(query_calls, 3, "partial unrelated overlay dispatches one native query")
 end
 
 -- Unknown, unauthorized, expired, revoked, capacity, and shutdown states.
