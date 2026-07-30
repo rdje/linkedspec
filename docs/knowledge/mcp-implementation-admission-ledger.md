@@ -86,6 +86,12 @@ and leaves shared rollout pending. No-change Julia closeout `.10.9.5.4` recompos
 binding, server, wire, consumer, and ledger owners unchanged; it preserves all 79 mutations, closes parent
 `.10.9.5`, and hands the same boundary to shared Lua planning `.10.9.6.0`.
 
+Behavior-free Lua `.10.9.6.0` and ADR `0061` freeze one generated literal binding, private frozen runtime,
+protected decoded server, strict pre-decode number-kind wire, and one package-private C99 entropy/monotonic-time
+source compiled per ABI. One unchanged Lua source and admission consumer must qualify independently on PUC Lua
+and LuaJIT. Planning does not create a source/consumer row or move status: implementation `.1`, wire `.2`, exact
+dual-ABI admission `.3`, and no-change closeout `.4` remain ordered, and only `.3` may advance 5/5 plus 6/6.
+
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
 [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].

@@ -160,6 +160,29 @@ loaded/reconstructed/generated/emitted/traced/isolated route, policy and isolati
 Both conformance rows share the same consumer topology; neutral governance is six fixture groups, twenty exact
 responses, 98 rejected mutations, rollout 6/9, and native admission 6/6.
 
+### Planned shared native MCP server
+
+Behavior-free `FUTURE-PARITY-BACKLOG.10.9.6.0` and ADR `0061` freeze one Lua MCP implementation for both PUC Lua
+and LuaJIT before code. One generated `mcp_contract.lua` will embed the exact 82,543-byte canonical bundle as a
+delimiter-safe long-bracket literal; private runtime code will verify its SHA-256 once, decode it through the
+existing strict JSON module, enforce the frozen schema profile, and return detached contract values.
+
+The decoded server will be a protected same-process Lua object around an already-created semantic index. It may
+call only `index:capabilities()` and `index:query_neutral(request)`. Planned root constructors are `mcp_server`,
+`mcp_budget_limits`, `mcp_deployment_policy`, and `mcp_registration_options`, with protected server methods
+`register_index`, `revoke_handle`, `dispatch`, `serve_stdio`, and `shutdown`. This API is not implemented in the
+planning leaf. It will not load or compile source, read paths, execute parsers, enable trace, retain semantic
+caches, add a primary-CLI mode, or close caller-owned streams.
+
+Strict stdio must classify JSON number tokens before decoding because LuaJIT cannot retain the distinction among
+`1`, `1.0`, and `1e0`. It will use iterative depth-64 lexical admission and bytewise bounded reads: fixed-size
+reads block on interactive pipes, while `read(1)` processes the full 1 MiB limit in about 0.096 seconds on PUC Lua
+and 0.059 seconds on LuaJIT. One package-private `lua/native/mcp_system.c` will expose only fixed 32-byte secure
+entropy and monotonic milliseconds, compiled separately for both ABIs by the existing native builder. It has no
+filesystem/weak/wall-clock fallback and introduces no LuaRocks, MCP SDK, socket, HTTP, async runtime, or second
+Lua implementation. Formal MCP status remains 4/5 implementations + 4/6 runtimes until exact dual-ABI admission
+`.10.9.6.3`.
+
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
 `body_ast`. Fixed-v1 calls require that staged AST, fail closed on source/AST drift, and carry typed function-owned
@@ -567,7 +590,7 @@ Run the local gate from the repository root:
 bash tools/run_lua_local.sh
 ```
 
-The gate builds separate PUC Lua and LuaJIT PCRE2/filesystem modules below one
+The gate currently builds separate PUC Lua and LuaJIT PCRE2/filesystem modules below one
 managed repository temporary root and removes them on exit. To load the native
 modules or run a focused repository command, use the targeted wrapper; it owns
 the selected ABI's native directory and module paths for the child:
@@ -589,6 +612,9 @@ they locate `lua/src` themselves, and the wrapper supplies its disposable
 creating it. Direct low-level embedding must first source `tools/project_data_env.sh`
 and build into a repository-filesystem directory; no project-owned state may
 default to an operating-system temporary directory or developer home.
+
+MCP implementation leaf `.10.9.6.1` will add the common two-function system module to this same dual-ABI build
+and cleanup topology; the planning leaf does not yet change the builder or produced module set.
 
 The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
 positionals:

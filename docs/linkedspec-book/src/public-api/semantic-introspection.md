@@ -43,9 +43,9 @@ The distinction matters:
   failed foundation identically on PUC Lua/LuaJIT; four root query helpers plus index `capabilities`, typed `query`,
   and raw `query_neutral` expose all 19 exact immutable static answers and 26 malformed-request boundaries; an
   optional native invocation-local sink now delivers protected typed slot/final observations on direct, loaded,
-  reconstructed, execute-alias, and traced routes; `index:with_execution_observation(events)` validates those
-  handles into the twentieth exact immutable answer, while generated propagation and backend admission remain
-  later Lua leaves; and
+  reconstructed, execute-alias, traced, generated, emitted, and isolated routes;
+  `index:with_execution_observation(events)` validates those handles into the twentieth exact immutable answer,
+  and one unchanged twelve-role consumer admits the complete surface on PUC Lua and LuaJIT; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
@@ -57,9 +57,10 @@ discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twel
 `.10.9.5.1-.3` add the fourth generated binding, digest-verified frozen runtime, secure public decoded server,
 strict synchronous stdio, and one ordered twelve-role admission consumer. No-change `.10.9.5.4` recomposes those
 owners and closes the Julia parent without status movement. The ledger is 4/5 native implementations and 4/6
-runtime admissions with shared rollout pending until one Lua source qualifies on both ABIs.
+runtime admissions with shared rollout pending until one Lua source qualifies on both ABIs. Behavior-free Lua
+audit `.10.9.6.0` and ADR `0061` now freeze that one-source implementation architecture without changing status.
 
-## Accepted modern MCP transport (Perl/Rust/Dart/Julia admitted)
+## Accepted modern MCP transport (Perl/Rust/Dart/Julia admitted; Lua planned)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -96,6 +97,11 @@ Every implementation consumes one root-relative, backend-neutral bundle:
 | `dart/lib/src/mcp/mcp_contract.dart` | Generated data-only Dart bundle part. |
 | `tools/generate_julia_mcp_contract.py` | Deterministic consumer that checks the Base64-only, filesystem-free Julia module. |
 | `julia/src/mcp/McpContract.jl` | Generated data-only Julia bundle module. |
+
+Planned Lua leaf `.10.9.6.1` will add `tools/generate_lua_mcp_contract.py` and generated
+`lua/src/linkedspec/mcp_contract.lua`. The binding will contain the exact current 82,543-byte bundle as a
+deterministic delimiter-safe long-bracket literal, not Base64; neither planned path exists as production behavior
+in `.10.9.6.0`.
 
 The corpus also fixes ten raw inputs, ten lifecycle cases, four indistinguishable unavailable-handle states, and
 four deployment-policy cases. All five server names occur in canonical responses. The largest checked-in frame is
@@ -3454,7 +3460,12 @@ The dependency order is:
 | `.10.9.5.2` | strict Julia stdio, lexical/number-kind preflight, canonical emission, and lifecycle cleanup | implemented; 170 assertions, 68 governance mutations, formal admission unchanged |
 | `.10.9.5.3` | exact Julia implementation/runtime admission | complete; one ordered twelve-role external consumer, 178 assertions, 4/5 implementations, 4/6 runtimes, rollout pending, 79 mutations |
 | `.10.9.5.4` | committed-owner no-change Julia closeout | complete from clean `f8fd4a51`; focused/canonical recomposition unchanged; parent `.10.9.5` closed |
-| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
+| `.10.9.6.0` | shared Lua native owner/security/wire audit and ADR `0061` | architecture frozen; behavior and 4/5 + 4/6 ledger unchanged |
+| `.10.9.6.1` | generated Lua literal binding/runtime, native system seam, secure registry, and decoded server | pending |
+| `.10.9.6.2` | strict shared Lua stdio and lifecycle | pending |
+| `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | pending; alone may advance 5/5 + 6/6 |
+| `.10.9.6.4` | committed-owner no-change shared Lua closeout | pending |
+| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; behavior-free plan complete |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
 
@@ -3614,6 +3625,103 @@ and authority fences. Exact twelve-role admission `.3` composes those public/foc
 remains pending until Lua qualifies unchanged on both ABIs. No-change `.10.9.5.4` reruns the committed neutral,
 Perl, Rust, Dart, and Julia owners, closes parent `.10.9.5`, and makes behavior-free shared Lua plan `.10.9.6.0`
 the next clean-boundary owner.
+
+### Planned Lua decoded MCP dispatch and strict stdio
+
+Behavior-free `.10.9.6.0` and ADR `0061` select one implementation source, not a PUC implementation plus a
+LuaJIT implementation. Both ABIs will execute the same generated binding, frozen runtime, protected decoded
+server, strict wire, public API, admission consumer, and ordered role list. Their separately compiled native
+modules and separate formal runtime rows are compatibility proofs, not semantic or transport forks. Both report
+wire identity `linkedspec-semantic-lua`.
+
+The planned production owners are deliberately narrow:
+
+| Owner | Planned responsibility |
+|---|---|
+| `lua/src/linkedspec/mcp_contract.lua` | Generated exact long-bracket bundle, binding format, length, and SHA-256 only. |
+| `lua/src/linkedspec/mcp_contract_runtime.lua` | One-time digest/JSON/schema verification, frozen templates, detached clones, and canonical MCP values. |
+| `lua/src/linkedspec/mcp_server.lua` | Protected policy/options/error/server values, secure registry, decoded dispatch, native calls, lowering-only policy, and sanitized failures. |
+| `lua/src/linkedspec/mcp_wire.lua` | Bounded byte framing, iterative lexical/number-kind admission, canonical LF output, cancellation, diagnostics, EOF, and I/O cleanup. |
+| `lua/native/mcp_system.c` | Package-private fixed 32-byte OS entropy and monotonic milliseconds, compiled once per ABI. |
+
+The current canonical bundle is 82,543 bytes and round-trips byte-for-byte through the existing pure-Lua JSON
+codec on both runtimes. The generator will choose the least long-bracket `=` level whose closing delimiter is
+absent and place the first bundle byte immediately after the opener; this avoids both delimiter collision and
+Lua's special initial-newline removal. The runtime will verify exact length and SHA-256 before decoding, then
+allow no file read, environment lookup, or alternate bundle.
+
+Lua numeric values are not a sufficient wire authority. PUC Lua retains integer versus float subtype but the
+canonical encoder normalizes integral floats, while LuaJIT represents JSON `1`, `1.0`, and `1e0` alike. Private
+wire code will therefore scan the admitted UTF-8 bytes iteratively before `json.decode`, preserving integer versus
+fraction/exponent token kind for schema and JSON-RPC-id checks. Decoded `server:dispatch` remains available for
+already-admitted host JSON-kind values but makes no lexical-identity claim.
+
+The stream loop will call `input:read(1)` until LF, CRLF, final EOF, or the exact 1,048,576-byte ceiling. This is
+intentional: fixed-size `read(4096)` blocks on an interactive pipe until the writer closes. Bytewise proof handles
+the maximum frame in about 0.096 seconds on PUC Lua and 0.059 seconds on LuaJIT. The scanner is iterative and
+depth-64 bounded. Output is canonical JSON plus one LF and is flushed before emission completes; EOF and every
+hostile read/write/flush path release state without closing caller-owned streams.
+
+The root API is planned—not callable in `.10.9.6.0`—with these idiomatic shapes:
+
+```lua
+local linkedspec = require("linkedspec")
+
+local index = linkedspec.semantic_index("Top::\n /x/\n", {
+  logical_name = "example.spec",
+  source_detail_ceiling = "text",
+})
+local server = linkedspec.mcp_server()
+local handle = server:register_index(index, "tenant-42/read-only", linkedspec.mcp_registration_options({
+  lifetime_ms = 300000,
+  policy = linkedspec.mcp_deployment_policy({
+    source_detail_ceiling = "identity",
+    page_max = 50,
+    budget_maxima = linkedspec.mcp_budget_limits({
+      max_records = 100,
+      max_relations = 200,
+      max_depth = 2,
+    }),
+  }),
+}))
+
+local response = server:dispatch(linkedspec.json.harray({
+  jsonrpc = "2.0",
+  id = 1,
+  method = "tools/call",
+  params = linkedspec.json.harray({
+    _meta = linkedspec.json.harray({
+      ["io.modelcontextprotocol/protocolVersion"] = "2026-07-28",
+      ["io.modelcontextprotocol/clientCapabilities"] = linkedspec.json.harray({}),
+    }),
+    name = "linkedspec_semantic_capabilities",
+    arguments = linkedspec.json.harray({ handle = handle }),
+  }),
+}), "tenant-42/read-only")
+assert(response.result.structuredContent.ok == true)
+
+server:revoke_handle(handle)
+server:shutdown()
+```
+
+For untrusted bytes, a host will register its indexes first and lend the server its streams:
+
+```lua
+local server = linkedspec.mcp_server()
+local handle = server:register_index(index, authorization)
+server:serve_stdio(io.stdin, io.stdout, authorization, { log = io.stderr })
+```
+
+Authorization is a copied nonempty binary Lua string of at most 4,096 bytes. The registry retains only SHA-256,
+compares digests in fixed work, creates exact 43-character unpadded base64url handles from 32 OS-random bytes,
+and expires them against monotonic milliseconds. One package-private C99 module uses `arc4random_buf` on
+Darwin/BSD or an EINTR-safe `getrandom` loop on Linux plus `CLOCK_MONOTONIC`; failures stop closed. There is no
+`/dev/urandom`, `math.random`, wall-clock, weak fallback, LuaRocks dependency, MCP SDK, socket/HTTP transport,
+async runtime, standalone executable, source bootstrap, semantic cache, or primary-CLI mode.
+
+Leaves `.1` and `.2` implement and prove these owners without status movement. One unchanged exact consumer runs
+independently on PUC Lua and LuaJIT in `.3`; only that leaf may advance the ledger from 4/5 implementations plus
+4/6 runtimes to 5/5 plus 6/6. Shared recurring rollout remains `.10.9.7`.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

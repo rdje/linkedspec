@@ -1094,7 +1094,12 @@ content migration exists yet.
   advances to 4/5 implementations + 4/6 runtimes while Lua, both Lua ABIs, and shared rollout remain pending.
   No-change closeout `.10.9.5.4` now recomposes every committed neutral/Perl/Rust/Dart/Julia owner unchanged,
   closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0` after the clean
-  closeout commit. There is no
+  closeout commit. Behavior-free Lua audit `.10.9.6.0` and ADR `0061` now freeze one common implementation for
+  both PUC Lua and LuaJIT: an 82,543-byte generated long-bracket contract binding, digest-verifying frozen runtime,
+  protected decoded server, strict pre-decode number-kind wire, and one tiny C99 OS-entropy/monotonic-time module
+  compiled separately for each ABI. Interactive proof selects bounded `read(1)` framing because fixed-size reads
+  block; the full 1 MiB limit costs under 0.10 seconds on both ABIs. No behavior or 4/5 + 4/6 ledger state moves
+  until implementation `.1-.2` and identical dual-ABI admission `.3`. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1548,7 +1553,10 @@ content migration exists yet.
   sensitive governance to 79 rejected mutations. Combined proof is 48 + 139 + 170 focused plus 178 admission
   assertions; no production server or transport byte changes in the admission leaf. No-change `.10.9.5.4`
   recomposes those committed owners, closes the Julia parent without status movement, and makes shared Lua
-  planning `.10.9.6.0` the next clean-boundary owner.
+  planning `.10.9.6.0` the next clean-boundary owner. That behavior-free audit and ADR `0061` now select one
+  Lua-5.1-compatible source graph for both ABIs: generated exact long-bracket bundle, frozen runtime, protected
+  decoded server, iterative lexical/number-kind stdio, and a two-function C99 secure-entropy/monotonic-time seam
+  compiled per ABI. Formal status remains 4/5 + 4/6 until exact shared admission `.10.9.6.3`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

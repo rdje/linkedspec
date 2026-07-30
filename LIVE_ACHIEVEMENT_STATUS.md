@@ -1,5 +1,30 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Shared Lua native MCP architecture plan complete
+
+`FUTURE-PARITY-BACKLOG.10.9.6.0` completes task-tree-first from clean Julia closeout `88bff190`. The exact child
+order is behavior-free owner/security/wire audit `.0`, generated binding/runtime/secure decoded server `.1`,
+strict caller-owned stdio `.2`, one identical consumer admitted independently on PUC Lua and LuaJIT `.3`, and
+no-change closeout `.4`. This preserves the approved topology: one exact contract, five native source
+implementations, and six runtime admissions.
+
+ADR `0061` and the durable Lua plan now freeze those seams. One deterministic long-bracket binding embeds the
+exact 82,543-byte canonical bundle; existing strict JSON and pure-Lua SHA-256 own decoded values/canonical bytes
+and one-time digest verification. Because LuaJIT collapses `1`, `1.0`, and `1e0`, strict stdio performs iterative
+lexical number-kind admission before decoding. Because fixed-size reads block on interactive pipes, the bounded
+wire uses `read(1)`, measured below 0.10 seconds for a full 1 MiB frame on both ABIs.
+
+One package-private C99 source supplies only fixed 32-byte OS entropy and monotonic milliseconds, compiled from
+the same source for each existing ABI build with no filesystem/weak fallback. One protected Lua public API and
+`linkedspec-semantic-lua` identity serve both runtimes; the same generated/runtime/server/wire/consumer source is
+admitted independently. Focused unchanged-owner proof passes neutral 35/10/10/68, all four byte-fresh bindings,
+Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, ledger 4/5 + 4/6 pending/79, and Lua semantic 408 per
+ABI. Formal status and production behavior remain unchanged. Knowledge Map 752/6,090, mdBook 13,640 KiB/79
+files, all six doctrines, Rust semantic 1/1 in 78.47 seconds, Dart 1/1, Julia 416/416 in 27.5 seconds,
+containment/moved-root,
+CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 638 seconds pass. The diff is documentation-only and exact cleanup
+passes; generated/runtime/decoded server `.10.9.6.1` follows only after commit, brief-clear, and clean proof.
+
 ## 2026-07-29 — Julia native MCP implementation composition-closed
 
 `FUTURE-PARITY-BACKLOG.10.9.5.4` recomposes every committed neutral, Perl, Rust, Dart, and Julia MCP owner

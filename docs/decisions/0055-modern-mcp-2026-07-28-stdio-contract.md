@@ -1,8 +1,8 @@
 # ADR 0055: LinkedSpec MCP v1 uses modern MCP 2026-07-28 over stdio
 
 - Date: 2026-07-29
-- Status: accepted; neutral contract/canonical governance plus Perl/Rust/Dart parents and Julia admission complete
-  at 4/5 implementations and 4/6 runtimes with rollout pending; Julia closeout and Lua remain pending
+- Status: accepted; neutral contract/canonical governance plus Perl/Rust/Dart/Julia parents complete at 4/5
+  implementations and 4/6 runtimes with rollout pending; Lua implementation is planned by ADR `0061`
 - Tags: architecture, mcp, json-rpc, stdio, semantic-api, security, portability, parity
 
 ## Context

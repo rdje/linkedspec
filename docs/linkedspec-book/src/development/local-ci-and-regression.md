@@ -81,6 +81,13 @@ Phase 0 1,031/1,031 in 631 seconds. Focused MCP recomposition remains exact at n
 byte-fresh bindings, Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, and ledger 4/5 + 4/6
 pending/79.
 
+Behavior-free shared Lua plan `.10.9.6.0` and ADR `0061` add no gate owner yet. They freeze the future canonical
+order as byte-fresh generated literal binding, identical PUC Lua/LuaJIT decoded proof, identical strict-stdio
+proof, one exact consumer invoked once per ABI, then the implementation ledger. The measured existing baseline
+passes the unchanged Lua semantic consumer at 408 assertions per ABI while MCP remains 4/5 + 4/6 pending/79.
+Implementation `.1` must register the new generator/native module/tests in the existing repository-routed Lua
+gate and managed dual-ABI build; planning alone must not make canonical CI expect files that do not yet exist.
+
 The `.10.9.5.0` planning signoff passes the unchanged focused chain and complete canonical gate: Rust semantic
 admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment, moved-root
 execution, CLI 66x2, and Phase 0 1,031/1,031 in 642 seconds. The ledger remains 3/5 + 3/6 pending/58.

@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.0 — plan the shared Lua native MCP server
+
+Added behavior-free ADR `0061` and a Knowledge Map plan for the fifth and final native MCP implementation. One
+Lua-5.1-compatible source graph will run unchanged on PUC Lua and LuaJIT: deterministic generated long-bracket
+contract binding, digest-verifying frozen runtime, protected same-process server, strict iterative byte wire, and
+one package-private C99 system module compiled separately for each ABI. The root API is frozen as protected Lua
+constructors plus server `register_index`, `revoke_handle`, `dispatch`, `serve_stdio`, and `shutdown` methods.
+
+Repository-routed probes show the existing JSON codec round-trips the exact 82,543-byte canonical bundle on both
+ABIs, while host number values cannot preserve `1` versus `1.0`/`1e0`; the wire therefore records lexical number
+kind before decoding. Fixed-size stream reads block on interactive pipes, while bytewise reading processes the
+full 1 MiB limit in about 0.096 seconds on PUC Lua and 0.059 seconds on LuaJIT. Existing pure-Lua SHA-256 is
+acceptable for one-time bundle verification. The native seam exposes only fixed OS-random bytes and monotonic
+milliseconds, with Darwin/BSD `arc4random_buf`, Linux `getrandom`, `CLOCK_MONOTONIC`, and no filesystem, weak,
+wall-clock, package, SDK, network, async, executable, or ABI-specific-source fallback.
+
+Corrected retrieved durable drift: the broad MCP topology and decision index now include already-complete Julia
+admission/closeout at 4/5 implementations + 4/6 runtimes, and the Lua semantic query card no longer describes
+already-complete generated observation/admission as pending. Focused unchanged-owner proof passes neutral
+35/10/10/68; four byte-fresh bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 15+1;
+Julia 48+139+170+178; ledger 4/5 + 4/6 rollout pending/79; and the unchanged Lua semantic consumer at 408
+assertions on each ABI. No production/test/fixture/contract/generated-binding/ledger/semantic/CLI behavior moves;
+implementation `.1`, strict stdio `.2`, exact dual-ABI admission `.3`, and no-change closeout `.4` remain ordered.
+
+Complete signoff passes the derived Knowledge Map at 752 facts / 6,090 question keys, a synchronized
+13,640-KiB / 79-file
+mdBook rendering, all six doctrines, Rust semantic admission 1/1 in 78.47 seconds, Dart 1/1, Julia 416/416 in
+27.5 seconds, repository-volume containment, moved-root proof, primary CLI 66x2, RAM 61%, and Phase 0
+1,031/1,031 in 638 seconds. The final diff is documentation-only, and exact probe/build/run residue is removed
+before commit.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.4 — close the Julia MCP implementation
 
 Recomposed the committed neutral transport and Perl, Rust, Dart, and Julia native MCP owners without adding a

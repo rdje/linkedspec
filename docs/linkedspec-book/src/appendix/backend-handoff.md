@@ -286,6 +286,15 @@ at 178 assertions, advances only Julia to 4/5 implementations + 4/6 runtimes, le
 raises omission-sensitive governance to 79 rejected mutations. No-change `.10.9.5.4` recomposes every committed
 owner unchanged, closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0`.
 
+The Lua handoff is now exact under behavior-free `.10.9.6.0` and ADR `0061`. Reuse only protected Lua
+`SemanticIndex` values, `capabilities()`, `query_neutral()`, strict `linkedspec.json`, pure-Lua SHA-256, and the
+existing managed dual-ABI builder. Generate the 82,543-byte canonical bundle as a delimiter-safe long-bracket
+literal; scan number tokens before decoding; read borrowed interactive streams one byte at a time under the 1 MiB
+bound; and compile one two-function C99 entropy/monotonic-time module for each ABI. One exact source and consumer
+must serve PUC Lua and LuaJIT. Do not add `/dev/urandom`, `math.random`, wall-clock, LuaRocks, MCP SDK, network/
+async transport, executable, source bootstrap, semantic cache, ABI-specific source, or a second server. Formal
+status remains 4/5 implementations + 4/6 runtimes until `.10.9.6.3`; recurring rollout remains `.10.9.7`.
+
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the
 runtime's post-match slot/final-result seams. Do not serialize AST JSON or derive semantics from descriptor layout.

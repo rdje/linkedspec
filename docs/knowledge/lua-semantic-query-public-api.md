@@ -13,7 +13,7 @@ answers:
   - "can Lua semantic query compile execute trace access paths or invoke callbacks"
   - "does Lua semantic query include runtime observations"
 date: 2026-07-28
-status: current public static API plus derived runtime answers; generated observation and backend admission pending
+status: current complete public static/runtime API; generated observation and dual-ABI admission complete
 tags: [lua, luajit, semantic-introspection, query, capabilities, public-api, validation, immutability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.7.5.3; lua/src/linkedspec/init.lua; lua/src/linkedspec/semantic_index.lua; lua/src/linkedspec/semantic_query.lua; lua/test/semantic_index_query_kernel_test.lua; capability_conformance/semantic_introspection_contract.json
 reverify: "bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; rg -n 'semantic_query_request|is_semantic_query_(request|response)|semantic_query_to_json|INDEX_METHODS.(capabilities|query|query_neutral)' lua/src/linkedspec lua/test"

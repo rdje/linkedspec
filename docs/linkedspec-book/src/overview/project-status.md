@@ -17,6 +17,13 @@ advances formal MCP status to 4/5 implementations + 4/6 runtimes; Lua's two ABI 
 pending. No-change `.10.9.5.4` recomposes all committed owners unchanged, closes the Julia parent without
 status movement, and hands the clean boundary to shared Lua planning `.10.9.6.0`.
 
+That behavior-free Lua audit and ADR `0061` now freeze one exact implementation source for PUC Lua and LuaJIT:
+generated 82,543-byte long-bracket contract data, frozen runtime, protected decoded server, strict pre-decode
+number-kind wire, and one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Bytewise bounded
+streaming is selected because larger fixed reads block interactively and handles a full 1 MiB frame in under 0.10
+seconds on both runtimes. No production behavior or formal status moves: the ledger remains 4/5 implementations
++ 4/6 runtimes, rollout pending, until exact dual-ABI admission `.10.9.6.3`.
+
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
 raw `query_neutral` match all 19 static response digests plus 26 malformed-request boundaries. Seven committed
@@ -713,7 +720,9 @@ Three backbone items tracked major structural modernization — all done:
   no-change closeout `.4` recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, closes parent
   `.10.9.4`. Julia `.10.9.5.1-.3` now implements generated/runtime/decoded/strict-stdio owners and exact admission,
   advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change `.4` recomposes those owners and closes parent
-  `.10.9.5`. Shared Lua `.10.9.6.0` is next. Any future aggregator or
+  `.10.9.5`. Shared Lua `.10.9.6.0` and ADR `0061` now freeze one common generated/runtime/server/wire source,
+  strict lexical number-kind admission, and a narrow native entropy/clock seam for unchanged PUC Lua/LuaJIT
+  proof. Implementation `.1` is next; status remains 4/5 + 4/6. Any future aggregator or
   legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
