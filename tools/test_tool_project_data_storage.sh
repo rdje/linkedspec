@@ -39,10 +39,11 @@ mcp_ci_topology_matches() {
   'bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py'
   'bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py'
   'bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py'
+  'bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py'
   'bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py'
  )
  mapfile -t actual_commands < <(
-  rg '^bash tools/run_python_project_data[.]sh tools/(materialize_mcp_semantic_transport_contract|check_mcp_semantic_transport_contract|generate_perl_mcp_contract|generate_rust_mcp_contract|generate_dart_mcp_contract|generate_julia_mcp_contract|check_mcp_implementation_admission)[.]py$' \
+  rg '^bash tools/run_python_project_data[.]sh tools/(materialize_mcp_semantic_transport_contract|check_mcp_semantic_transport_contract|generate_perl_mcp_contract|generate_rust_mcp_contract|generate_dart_mcp_contract|generate_julia_mcp_contract|generate_lua_mcp_contract|check_mcp_implementation_admission)[.]py$' \
    "$ci_path"
  )
  [[ "${actual_commands[*]}" == "${expected_commands[*]}" ]]
@@ -70,8 +71,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 26 )) ||
- fail "Python tool entrypoint inventory drifted from 26 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 27 )) ||
+ fail "Python tool entrypoint inventory drifted from 27 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -130,6 +131,7 @@ mcp_generator_omission_mutant="$case_root/mcp-ci-generator-omission.sh"
 mcp_rust_generator_omission_mutant="$case_root/mcp-ci-rust-generator-omission.sh"
 mcp_dart_generator_omission_mutant="$case_root/mcp-ci-dart-generator-omission.sh"
 mcp_julia_generator_omission_mutant="$case_root/mcp-ci-julia-generator-omission.sh"
+mcp_lua_generator_omission_mutant="$case_root/mcp-ci-lua-generator-omission.sh"
 mcp_admission_omission_mutant="$case_root/mcp-ci-admission-omission.sh"
 mcp_order_mutant="$case_root/mcp-ci-order.sh"
 awk '$0 != "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py"' \
@@ -156,6 +158,11 @@ awk '$0 != "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contr
  "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_julia_generator_omission_mutant"
 if mcp_ci_topology_matches "$mcp_julia_generator_omission_mutant"; then
  fail 'MCP canonical topology accepted a missing generated Julia binding check'
+fi
+awk '$0 != "bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py"' \
+ "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_lua_generator_omission_mutant"
+if mcp_ci_topology_matches "$mcp_lua_generator_omission_mutant"; then
+ fail 'MCP canonical topology accepted a missing generated Lua binding check'
 fi
 awk '$0 != "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"' \
  "$REPO_ROOT/tools/run_ci_local.sh" >"$mcp_admission_omission_mutant"

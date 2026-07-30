@@ -1,0 +1,54 @@
+---
+id: lua-mcp-decoded-server
+title: Lua MCP decoded dispatch is one protected source on PUC Lua and LuaJIT
+answers:
+  - is the Lua MCP decoded server implemented
+  - what does linkedspec mcp_server do
+  - how does Lua MCP store authorization
+  - how are Lua MCP handles generated
+  - what native authority does Lua MCP use
+  - does Lua MCP dispatch compile or execute parsers
+  - is Lua MCP formally admitted
+  - how many Lua MCP decoded tests pass
+  - why does Lua MCP remain 4/5 and 4/6
+date: 2026-07-29
+status: decoded implementation complete on both ABIs; strict wire and formal admission pending
+tags: [lua, luajit, mcp, decoded-dispatch, security, handles, policy, native-system]
+evidence: "FUTURE-PARITY-BACKLOG.10.9.6.1 adds the generated 82,827-byte literal binding, frozen runtime, protected registry/server, lazy root API, and one common C99 native system source. Binding/runtime proof passes 111 assertions and decoded/security proof passes 210 assertions identically on PUC Lua and LuaJIT; governance rejects 94 mutations while the formal ledger remains 4/5 + 4/6 pending .2-.3."
+last_verified: 2026-07-29
+reverify:
+  - "bash tools/run_lua_local.sh"
+  - "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
+  - "rg -n 'mcp_server|register_index|query_neutral|mcp_system' lua/src/linkedspec lua/native tools/build_lua_native.sh"
+---
+
+# Lua MCP Decoded Server
+
+`lua/src/linkedspec/mcp_server.lua` is one Lua-5.1-compatible implementation shared unchanged by PUC Lua and
+LuaJIT. The root package lazily exports `mcp_server`, budget/policy/registration constructors, and typed error
+inspection. Protected weak-key state keeps server, registry, policy, limit, registration, and error internals
+non-iterable and immutable.
+
+Production registration accepts only an existing native Lua `SemanticIndex`. It copies and bounds the caller's
+opaque authorization string, retains only its binary SHA-256 digest, compares exactly 32 digest bytes, creates a
+43-character unpadded base64url handle from 32 OS-random bytes, and expires state against monotonic milliseconds.
+Unknown, unauthorized, expired, and revoked handles are deliberately indistinguishable. Registry capacity is the
+contract's 1,024 live entries; revoke and shutdown release retained indexes.
+
+Decoded dispatch clones caller input, implements modern discovery/list/two-tool/cancellation classifications,
+projects canonical detached results, and sanitizes native failures. Policy can only lower native source detail,
+digest visibility, page limit, and budget maxima. Production calls are limited to `index:capabilities()` and
+`index:query_neutral(request)`; the server has no source/path/parser/compiler/executor/trace/cache/filesystem/
+environment/network/process/async/SDK or primary-CLI authority.
+
+`lua/native/mcp_system.c` is compiled separately for each ABI from the same C99 source. It exposes only fixed
+32-byte entropy and monotonic milliseconds, using `arc4random_buf` on Darwin/BSD, an EINTR-safe complete
+`getrandom` loop on Linux, and `CLOCK_MONOTONIC`. Unsupported platforms and runtime failures stop closed; there is
+no filesystem or weak fallback.
+
+Formal status deliberately remains 4/5 implementations plus 4/6 runtime admissions. Strict lexical stdio is
+owned by `.10.9.6.2`; one exact consumer must then admit the unchanged source independently on both ABIs in `.3`.
+
+Related facts: [[lua-native-mcp-server-plan]], [[mcp-native-server-topology]],
+[[mcp-implementation-admission-ledger]], [[lua-semantic-query-public-api]], and
+[[lua-project-data-ssd-storage]].

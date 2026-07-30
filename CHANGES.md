@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.1 — implement the shared Lua decoded MCP server
+
+Added the fifth backend's generated MCP binding, frozen contract runtime, protected same-process registry, and
+decoded dispatcher once in Lua-5.1-compatible source for unchanged use on PUC Lua and LuaJIT. The generated
+82,827-byte module embeds the exact 82,543-byte neutral bundle as delimiter-safe raw data; runtime initialization
+verifies SHA-256, decodes the frozen schema/corpus/templates without filesystem access, and returns only detached
+values. The lazy root API now exposes server, budget, policy, registration, and typed-error constructors without
+adding MCP to the primary parser CLI.
+
+The registry accepts only existing native Lua semantic indexes, stores digest-only authorization, creates
+256-bit OS-random 43-character base64url handles, expires them against monotonic time, caps live state at the
+contract's 1,024 entries, and clears it on revoke/shutdown. Decoded dispatch implements modern discovery,
+list, capabilities/query, cancellation, policy lowering, exact canonical structured/text results, unavailable-
+handle indistinguishability, and sanitized failures using only `capabilities()` and `query_neutral()`.
+
+Added one common C99 native module, compiled separately for both ABIs, with only `arc4random_buf` or EINTR-safe
+`getrandom` entropy and `CLOCK_MONOTONIC` time. The Lua builder/storage oracle now locks three native modules per
+ABI. Focused proof passes 111 binding/runtime plus 210 decoded/security assertions on each ABI; the complete Lua
+gate passes both 177-test package legs, primary 66x2, corpus 105/105, and 16-owner storage. Governance rejects 94
+mutations and deliberately leaves the formal ledger at 4/5 implementations + 4/6 runtimes, rollout pending;
+strict number-kind-preserving stdio remains `.10.9.6.2` and exact two-runtime admission remains `.3`.
+
+Canonical integration caught two omission-sensitive boundaries before signoff. A private decoded-runtime helper
+named `array` matched the retired public aggregate-selector source scanner; renaming it `json_array` preserves
+behavior and restores the zero-positive retirement proof. The moved-checkout process oracle also needed to
+overlay the new uncommitted `mcp_system.c` beside the already-overlaid Lua builder. That overlay is now
+mutation-locked and the kernel-contained six-family relocation proof passes.
+
+Final canonical signoff passes all six doctrines, unchanged neutral and admitted backend MCP proof, the formal
+4/5 implementation + 4/6 runtime ledger with 94 rejected mutations, Rust semantic 1/1 in 79.63 seconds, Dart
+1/1, Julia 416/416 in 27.6 seconds, six-family containment, moved-root execution, primary CLI 66x2, RAM 61%,
+Phase 0 1,031/1,031, and the complete dual-ABI Lua gate.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.0 — plan the shared Lua native MCP server
 
 Added behavior-free ADR `0061` and a Knowledge Map plan for the fifth and final native MCP implementation. One

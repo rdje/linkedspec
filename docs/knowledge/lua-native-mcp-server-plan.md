@@ -16,9 +16,10 @@ answers:
   - does Lua MCP require LuaRocks or an MCP SDK
   - when will Lua advance the MCP implementation ledger
 date: 2026-07-29
-status: behavior-free architecture accepted; implementation and admission pending under FUTURE-PARITY-BACKLOG.10.9.6.1-.4
+status: architecture and decoded implementation complete; strict wire, admission, and closeout pending under FUTURE-PARITY-BACKLOG.10.9.6.2-.4
 tags: [lua, luajit, mcp, generated-binding, json, stdio, security, dual-abi, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.9.6.0 and ADR 0061 retrieve the admitted Lua semantic/JSON/SHA/toolchain owners and measure one exact implementation architecture on repository-routed PUC Lua 5.4.8 and LuaJIT 2.1 without changing behavior or the 4/5 + 4/6 MCP ledger."
+evidence_update_2026_07_29_decoded: "FUTURE-PARITY-BACKLOG.10.9.6.1 implements the generated 82,827-byte literal binding, digest/schema-verifying frozen runtime, protected secure registry/decoded dispatch, lazy root API, and one common C99 entropy/monotonic-time module. Exact focused proof passes 111 + 210 assertions on each ABI; governance rejects 94 mutations while formal status remains 4/5 + 4/6 pending strict wire and admission."
 last_verified: 2026-07-29
 reverify:
   - "bash tools/run_lua_local.sh"
@@ -52,14 +53,14 @@ existing builder compiles it separately for both ABIs in repository-volume manag
 systems and failures stop closed. There is no `/dev/urandom`, filesystem, `math.random`, wall-clock, weak fallback,
 LuaRocks package, MCP SDK, network, async runtime, or executable.
 
-The planned root API is `mcp_server`, `mcp_budget_limits`, `mcp_deployment_policy`,
+The implemented decoded root API is `mcp_server`, `mcp_budget_limits`, `mcp_deployment_policy`,
 `mcp_registration_options`, `is_mcp_server_error`, and `mcp_server_error_to_json`. A protected server supports
-`register_index`, `revoke_handle`, `dispatch`, `serve_stdio`, and `shutdown` methods. It accepts only an existing
+`register_index`, `revoke_handle`, `dispatch`, and `shutdown`; `serve_stdio` remains `.2`. It accepts only an existing
 protected semantic index and a copied nonempty binary authorization string of at most 4,096 bytes, stores only its
 SHA-256 digest, uses fixed-work comparison and 43-character base64url handles, and calls only index
 `capabilities()` or `query_neutral()`.
 
-Implementation order is generated/runtime/decoded/native-system `.1`, strict stdio `.2`, identical dual-ABI
+Implementation order is generated/runtime/decoded/native-system `.1` (complete), strict stdio `.2`, identical dual-ABI
 admission `.3`, and unchanged closeout `.4`. Only `.3` may advance formal MCP status from 4/5 implementations plus
 4/6 runtimes to 5/5 plus 6/6. Recurring rollout remains `.10.9.7`.
 

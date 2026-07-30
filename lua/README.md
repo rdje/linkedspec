@@ -160,28 +160,32 @@ loaded/reconstructed/generated/emitted/traced/isolated route, policy and isolati
 Both conformance rows share the same consumer topology; neutral governance is six fixture groups, twenty exact
 responses, 98 rejected mutations, rollout 6/9, and native admission 6/6.
 
-### Planned shared native MCP server
+### Shared native MCP decoded server
 
 Behavior-free `FUTURE-PARITY-BACKLOG.10.9.6.0` and ADR `0061` freeze one Lua MCP implementation for both PUC Lua
-and LuaJIT before code. One generated `mcp_contract.lua` will embed the exact 82,543-byte canonical bundle as a
-delimiter-safe long-bracket literal; private runtime code will verify its SHA-256 once, decode it through the
-existing strict JSON module, enforce the frozen schema profile, and return detached contract values.
+and LuaJIT. Decoded implementation `.10.9.6.1` now generates an 82,827-byte `mcp_contract.lua` containing the
+exact 82,543-byte canonical bundle as a delimiter-safe long-bracket literal. Private runtime code verifies its
+SHA-256 once, decodes it through the existing strict JSON module, enforces the frozen schema profile, and returns
+detached contract values without filesystem or environment access.
 
-The decoded server will be a protected same-process Lua object around an already-created semantic index. It may
-call only `index:capabilities()` and `index:query_neutral(request)`. Planned root constructors are `mcp_server`,
+The decoded server is a protected same-process Lua object around an already-created semantic index. It may call
+only `index:capabilities()` and `index:query_neutral(request)`. Root constructors are `mcp_server`,
 `mcp_budget_limits`, `mcp_deployment_policy`, and `mcp_registration_options`, with protected server methods
-`register_index`, `revoke_handle`, `dispatch`, `serve_stdio`, and `shutdown`. This API is not implemented in the
-planning leaf. It will not load or compile source, read paths, execute parsers, enable trace, retain semantic
-caches, add a primary-CLI mode, or close caller-owned streams.
+`register_index`, `revoke_handle`, `dispatch`, and `shutdown`; `serve_stdio` remains owned by `.2`. The server
+stores digest-only authorization, creates 43-character handles from 32 OS-random bytes, expires them against
+monotonic time, enforces lowering-only policy before native query, and sanitizes failures. It cannot load or
+compile source, read paths, execute parsers, enable trace, retain semantic caches, add a primary-CLI mode, or close
+caller-owned streams.
 
 Strict stdio must classify JSON number tokens before decoding because LuaJIT cannot retain the distinction among
 `1`, `1.0`, and `1e0`. It will use iterative depth-64 lexical admission and bytewise bounded reads: fixed-size
 reads block on interactive pipes, while `read(1)` processes the full 1 MiB limit in about 0.096 seconds on PUC Lua
-and 0.059 seconds on LuaJIT. One package-private `lua/native/mcp_system.c` will expose only fixed 32-byte secure
-entropy and monotonic milliseconds, compiled separately for both ABIs by the existing native builder. It has no
-filesystem/weak/wall-clock fallback and introduces no LuaRocks, MCP SDK, socket, HTTP, async runtime, or second
-Lua implementation. Formal MCP status remains 4/5 implementations + 4/6 runtimes until exact dual-ABI admission
-`.10.9.6.3`.
+and 0.059 seconds on LuaJIT. The implemented package-private `lua/native/mcp_system.c` exposes only fixed 32-byte
+secure entropy and monotonic milliseconds, compiled separately for both ABIs by the existing native builder. It
+uses `arc4random_buf` on Darwin/BSD, an EINTR-safe `getrandom` loop on Linux, and `CLOCK_MONOTONIC`, with no
+filesystem/weak/wall-clock fallback. Focused proof passes 111 generated/runtime and 210 decoded/security
+assertions per ABI; governance rejects 94 mutations. Formal MCP status remains 4/5 implementations + 4/6
+runtimes until exact dual-ABI admission `.10.9.6.3`.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches

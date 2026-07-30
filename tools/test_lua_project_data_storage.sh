@@ -129,11 +129,11 @@ check_native_dir() {
  local path=$2
 
  require_repo_device "$label native directory" "$path"
- for module in linkedspec_regex_pcre2.so linkedspec_filesystem_native.so; do
+ for module in linkedspec_regex_pcre2.so linkedspec_filesystem_native.so linkedspec_mcp_system.so; do
   [[ -f "$path/$module" && ! -L "$path/$module" ]] || fail "$label native module is missing: $module"
   require_repo_device "$label native module" "$path/$module"
  done
- [[ "$(find "$path" -maxdepth 1 -type f -name '*.so' | wc -l | tr -d ' ')" == 2 ]] ||
+ [[ "$(find "$path" -maxdepth 1 -type f -name '*.so' | wc -l | tr -d ' ')" == 3 ]] ||
   fail "$label native module inventory drifted"
 }
 
@@ -190,4 +190,4 @@ if [[ -n "$owned_native_root" ]]; then rm -rf -- "$owned_native_root"; fi
 [[ ! -e "$probe_root" ]] || fail 'Lua storage probe remained after cleanup'
 [[ -z "$owned_native_root" || ! -e "$owned_native_root" ]] || fail 'Lua native build remained after cleanup'
 
-printf '[lua-project-data-test] PASS: 16 owners, dual-ABI native modules, generated output, and traces stay on repository storage\n'
+printf '[lua-project-data-test] PASS: 16 owners, three dual-ABI native modules, generated output, and traces stay on repository storage\n'

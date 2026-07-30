@@ -730,6 +730,12 @@ function INDEX_METHODS.query_neutral(value, request)
   return load_semantic_query().evaluate_neutral(projection, request)
 end
 
+-- Package-private native identity predicate for in-process transports. The
+-- root module intentionally does not export this capability.
+function M._is_index(value)
+  return INDEX_STATE[value] ~= nil
+end
+
 -- Shared typed immutable query seam. It supplies exactly one fresh static
 -- projection clone and no retained index authority to the evaluator. The
 -- package-private name remains available to the focused kernel proof.

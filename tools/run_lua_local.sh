@@ -27,11 +27,14 @@ primary_native="$native_root/puc"
 secondary_native="$native_root/luajit"
 export LINKEDSPEC_LUA_NATIVE_PUC_DIR="$primary_native"
 
-log "building disposable PUC Lua PCRE2 adapter"
+log "building disposable PUC Lua native modules"
 bash "$REPO_ROOT/tools/build_lua_native.sh" puc "$primary_native"
 export LUA_CPATH="$primary_native/?.so;;"
 
 cd "$REPO_ROOT"
+log "checking the generated filesystem-free Lua MCP contract binding"
+bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py
+
 log "syntax-checking Lua source"
 find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
  while IFS= read -r -d '' file; do
@@ -40,6 +43,8 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
  done
 
 log "running primary PUC Lua tests"
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_contract_lua_binding_test.lua
+LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/mcp_server_lua_dispatch_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_source_foundation_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_compilation_foundation_test.lua
 LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" lua/test/semantic_index_static_graph_test.lua
@@ -99,9 +104,13 @@ printf '%s\n' "$corpus_output" | grep -F 'summary: 105 passed, 0 failed' >/dev/n
  fail "corpus runner complete execution drifted"
 
 if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
- log "building disposable LuaJIT PCRE2 adapter"
+ log "building disposable LuaJIT native modules"
  bash "$REPO_ROOT/tools/build_lua_native.sh" luajit "$secondary_native"
  log "running secondary LuaJIT compatibility tests"
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/mcp_contract_lua_binding_test.lua
+ LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
+  "$LUAJIT_CMD" lua/test/mcp_server_lua_dispatch_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \
   "$LUAJIT_CMD" lua/test/semantic_index_source_foundation_test.lua
  LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \

@@ -1,5 +1,32 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Shared Lua generated runtime and decoded MCP server complete
+
+Architecture leaf `FUTURE-PARITY-BACKLOG.10.9.6.0` is committed at clean `315af596` with its brief cleared and
+all generated residue removed. Leaf `.10.9.6.1` is active task-tree-first from that boundary. It owns the exact
+long-bracket generated binding, digest/schema-verifying frozen runtime, one common C99 entropy/monotonic-time
+module compiled per ABI, protected secure handle registry, decoded MCP dispatch, lowering-only policy, sanitized
+failure boundary, root exports, dual-ABI focused tests, and omission-sensitive governance.
+
+The same Lua-5.1-compatible source must pass unchanged on PUC Lua and LuaJIT. This leaf may add no stdio loop,
+formal Lua admission row, rollout movement, source/path/bootstrap, parser/executor/trace/cache, network/async/SDK,
+standalone executable, or primary-CLI authority. The MCP ledger remains 4/5 implementations + 4/6 runtimes with
+rollout pending until `.10.9.6.3`; strict wire remains owned by `.10.9.6.2`.
+
+Implementation and focused proof are now complete. The 82,827-byte generated module embeds the exact
+82,543-byte bundle; the frozen runtime verifies digest/schema and returns detached values. The protected server
+owns digest-only authorization, secure 43-character handles, monotonic expiry, lowering-only policy, decoded
+discovery/list/two-tool/cancellation dispatch, and sanitized failure. One common C99 source supplies only OS
+entropy and monotonic time to separately compiled PUC Lua/LuaJIT modules. Each ABI passes 111 binding/runtime plus
+210 decoded/security assertions; the complete Lua gate passes 177 tests per ABI, primary 66x2, corpus 105/105,
+and 16-owner/three-module storage. Governance rejects 94 mutations while formal status remains 4/5 + 4/6.
+Lockstep and canonical signoff are complete. The full gate passes all six doctrines, unchanged five-binding and
+four-admitted-implementation MCP composition at 94 mutations, Rust semantic 1/1 in 79.63 seconds, Dart 1/1,
+Julia 416/416 in 27.6 seconds, six-family containment, moved-root execution, primary CLI 66x2, RAM 61%, Phase 0
+1,031/1,031, and the complete dual-ABI Lua gate. The two integration findings—private `array` source spelling
+and missing moved-checkout native overlay—are corrected and mutation/regression locked. Commit, brief-clear, and
+clean proof are the only remaining continuity operations before strict stdio `.10.9.6.2` activates.
+
 ## 2026-07-29 — Shared Lua native MCP architecture plan complete
 
 `FUTURE-PARITY-BACKLOG.10.9.6.0` completes task-tree-first from clean Julia closeout `88bff190`. The exact child

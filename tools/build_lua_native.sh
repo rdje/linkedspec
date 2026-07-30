@@ -103,3 +103,10 @@ fi
  "${link_flags[@]}" \
  "$REPO_ROOT/lua/native/filesystem_native.c" \
  -o "$output/linkedspec_filesystem_native.so"
+
+# shellcheck disable=SC2046
+"$CC_CMD" "${compiler_platform_flags[@]}" -std=c99 -O2 -fPIC -Wall -Wextra -Werror \
+ $(pkg-config --cflags "$lua_pkg") \
+ "${link_flags[@]}" \
+ "$REPO_ROOT/lua/native/mcp_system.c" \
+ -o "$output/linkedspec_mcp_system.so"

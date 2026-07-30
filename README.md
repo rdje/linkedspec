@@ -448,10 +448,10 @@ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_
 bash tools/test_lua_project_data_storage.sh
 ```
 
-The wrapper builds the selected ABI's two native adapters below managed `TMPDIR`, supplies repository module paths
+The wrapper builds the selected ABI's three native adapters below managed `TMPDIR`, supplies repository module paths
 to the child, and removes its disposable tree. The guarded native builder validates the nearest existing output
 ancestor before creation and the resolved directory afterward, rejecting another-filesystem destination without
-creating it. The oracle locks all 13 Lua-family allocation owners, builds both ABIs in a path containing a space,
+creating it. The oracle locks all 16 Lua-family allocation owners, builds both ABIs in a path containing a space,
 checks actual device and non-symlink module identity, performs a native parse, writes generated v2 source and a
 trace, and proves cleanup. `tools/run_lua_local.sh` integrates the same proof with both 177-test ABI suites, primary
 66x2, and corpus 105/105. Exact initial and final `linkedspec-lua-*` residue in both old temporary roots is zero,
@@ -1094,12 +1094,14 @@ content migration exists yet.
   advances to 4/5 implementations + 4/6 runtimes while Lua, both Lua ABIs, and shared rollout remain pending.
   No-change closeout `.10.9.5.4` now recomposes every committed neutral/Perl/Rust/Dart/Julia owner unchanged,
   closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0` after the clean
-  closeout commit. Behavior-free Lua audit `.10.9.6.0` and ADR `0061` now freeze one common implementation for
-  both PUC Lua and LuaJIT: an 82,543-byte generated long-bracket contract binding, digest-verifying frozen runtime,
-  protected decoded server, strict pre-decode number-kind wire, and one tiny C99 OS-entropy/monotonic-time module
-  compiled separately for each ABI. Interactive proof selects bounded `read(1)` framing because fixed-size reads
-  block; the full 1 MiB limit costs under 0.10 seconds on both ABIs. No behavior or 4/5 + 4/6 ledger state moves
-  until implementation `.1-.2` and identical dual-ABI admission `.3`. There is no
+  closeout commit. Behavior-free Lua audit `.10.9.6.0` and ADR `0061` froze one common implementation for both
+  PUC Lua and LuaJIT. Decoded leaf `.10.9.6.1` now ships its 82,827-byte generated module carrying the exact
+  82,543-byte long-bracket bundle, digest-verifying frozen runtime, protected secure registry, lowering-only
+  decoded dispatch, lazy root API, and tiny C99 OS-entropy/monotonic-time module compiled separately for each ABI.
+  Focused proof passes 111 binding/runtime plus 210 decoded/security assertions per ABI, and governance rejects
+  94 mutations without moving the 4/5 + 4/6 ledger. Interactive proof selects bounded `read(1)` framing because
+  fixed-size reads block; the full 1 MiB limit costs under 0.10 seconds on both ABIs. Strict wire `.2` and identical
+  dual-ABI admission `.3` remain ordered. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1553,10 +1555,11 @@ content migration exists yet.
   sensitive governance to 79 rejected mutations. Combined proof is 48 + 139 + 170 focused plus 178 admission
   assertions; no production server or transport byte changes in the admission leaf. No-change `.10.9.5.4`
   recomposes those committed owners, closes the Julia parent without status movement, and makes shared Lua
-  planning `.10.9.6.0` the next clean-boundary owner. That behavior-free audit and ADR `0061` now select one
-  Lua-5.1-compatible source graph for both ABIs: generated exact long-bracket bundle, frozen runtime, protected
-  decoded server, iterative lexical/number-kind stdio, and a two-function C99 secure-entropy/monotonic-time seam
-  compiled per ABI. Formal status remains 4/5 + 4/6 until exact shared admission `.10.9.6.3`.
+  planning `.10.9.6.0` the next clean-boundary owner. That audit and ADR `0061` selected one Lua-5.1-compatible
+  source graph for both ABIs. Decoded implementation `.10.9.6.1` now provides its exact generated long-bracket
+  bundle, frozen runtime, protected secure registry/dispatch, lazy public constructors, and two-function C99
+  entropy/monotonic-time seam compiled per ABI at 111 + 210 assertions on each runtime. Iterative lexical/number-
+  kind stdio remains `.2`; formal status remains 4/5 + 4/6 until exact shared admission `.10.9.6.3`.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
@@ -1579,8 +1582,9 @@ content migration exists yet.
   routes, cursor migration, and exact dual-ABI admission are complete; the shared manifest is 66/66 in all four
   Lua ABI/default-POSIX legs.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, Julia, or Lua toolchains. To
-  opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
-  `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary
+  opt into backend checks, set one or more of `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`,
+  `LINKEDSPEC_RUN_JULIA=1`, and `LINKEDSPEC_RUN_LUA=1` before `bash tools/run_ci_local.sh`. Set
+  `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed five-backend primary
   CLI matrix from that gate. Set `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1` to run the focused recurring root-selection
   composition.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.

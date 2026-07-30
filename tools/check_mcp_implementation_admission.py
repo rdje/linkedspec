@@ -161,6 +161,24 @@ JULIA_OWNERS = {
     ],
 }
 
+LUA_OWNERS = {
+    "generator": "tools/generate_lua_mcp_contract.py",
+    "source_paths": [
+        "lua/src/linkedspec/mcp_contract.lua",
+        "lua/src/linkedspec/mcp_contract_runtime.lua",
+        "lua/src/linkedspec/mcp_server.lua",
+        "lua/native/mcp_system.c",
+    ],
+    "test_paths": [
+        "lua/test/mcp_contract_lua_binding_test.lua",
+        "lua/test/mcp_server_lua_dispatch_test.lua",
+    ],
+}
+
+LUA_GENERATOR_COMMAND = (
+    "bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py"
+)
+
 ORDERED_COMMANDS = [
     "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
     "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
@@ -226,11 +244,17 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         positions.append(source.index(command))
     if positions != sorted(positions):
         fail("canonical MCP commands are out of order")
+    if source.count(LUA_GENERATOR_COMMAND) != 1:
+        fail("Lua MCP binding generator must occur exactly once")
+    lua_generator_position = source.index(LUA_GENERATOR_COMMAND)
+    if not positions[5] < lua_generator_position < positions[6]:
+        fail("Lua MCP binding generator is outside its canonical pre-test position")
     required = [
         "require_tracked_file capability_conformance/mcp_implementation_admission.json",
         "require_tracked_file tools/check_mcp_implementation_admission.py",
         "require_tracked_file tools/generate_dart_mcp_contract.py",
         "require_tracked_file tools/generate_julia_mcp_contract.py",
+        "require_tracked_file tools/generate_lua_mcp_contract.py",
         "require_tracked_file t/mcp_server_perl_admission.t",
         "require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
         "require_tracked_file dart/lib/src/mcp/mcp_contract.dart",
@@ -249,6 +273,12 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl",
         "require_tracked_file julia/test/mcp_server_julia_stdio_test.jl",
         "require_tracked_file julia/test/mcp_server_julia_admission_test.jl",
+        "require_tracked_file lua/native/mcp_system.c",
+        "require_tracked_file lua/src/linkedspec/mcp_contract.lua",
+        "require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua",
+        "require_tracked_file lua/src/linkedspec/mcp_server.lua",
+        "require_tracked_file lua/test/mcp_contract_lua_binding_test.lua",
+        "require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -515,6 +545,136 @@ def validate_julia_owners(tests_source: str | None = None) -> None:
             fail(f"Julia MCP package-test registration drifted: {include}")
 
 
+def validate_lua_owners(
+    init_source: str | None = None,
+    semantic_source: str | None = None,
+    builder_source: str | None = None,
+    gate_source: str | None = None,
+    process_source: str | None = None,
+) -> None:
+    owned_paths = [
+        LUA_OWNERS["generator"],
+        *LUA_OWNERS["source_paths"],
+        *LUA_OWNERS["test_paths"],
+    ]
+    for path in owned_paths:
+        if not (ROOT / path).is_file():
+            fail(f"Lua MCP decoded-server owner is absent: {path}")
+
+    if init_source is None:
+        init_source = (ROOT / "lua" / "src" / "linkedspec" / "init.lua").read_text(
+            encoding="utf-8"
+        )
+    init_tokens = [
+        'local mcp_server',
+        'mcp_server = require("linkedspec.mcp_server")',
+        'M.mcp_server = function(...) return load_mcp_server().server(...) end',
+        'M.mcp_budget_limits = function(...) return load_mcp_server().budget_limits(...) end',
+        'M.mcp_deployment_policy = function(...) return load_mcp_server().deployment_policy(...) end',
+        'M.mcp_registration_options = function(...) return load_mcp_server().registration_options(...) end',
+        'M.is_mcp_server_error = function(...) return load_mcp_server().is_error(...) end',
+        'M.mcp_server_error_to_json = function(...) return load_mcp_server().error_to_json(...) end',
+    ]
+    for token in init_tokens:
+        if init_source.count(token) != 1:
+            fail(f"Lua MCP lazy root registration drifted: {token}")
+
+    if semantic_source is None:
+        semantic_source = (
+            ROOT / "lua" / "src" / "linkedspec" / "semantic_index.lua"
+        ).read_text(encoding="utf-8")
+    if semantic_source.count("function M._is_index(value)") != 1:
+        fail("Lua MCP native semantic-index identity seam drifted")
+
+    if builder_source is None:
+        builder_source = (ROOT / "tools" / "build_lua_native.sh").read_text(
+            encoding="utf-8"
+        )
+    for token in [
+        '"$REPO_ROOT/lua/native/mcp_system.c"',
+        '"$output/linkedspec_mcp_system.so"',
+    ]:
+        if builder_source.count(token) != 1:
+            fail(f"Lua MCP native-system build registration drifted: {token}")
+
+    if gate_source is None:
+        gate_source = (ROOT / "tools" / "run_lua_local.sh").read_text(
+            encoding="utf-8"
+        )
+    if gate_source.count(LUA_GENERATOR_COMMAND) != 1:
+        fail("Lua local gate binding-generator registration drifted")
+    for path in LUA_OWNERS["test_paths"]:
+        if gate_source.count(path) != 2:
+            fail(f"Lua MCP proof is not registered once per ABI: {path}")
+
+    if process_source is None:
+        process_source = (
+            ROOT / "tools" / "test_project_data_process_locality.sh"
+        ).read_text(encoding="utf-8")
+    if process_source.count("lua/native/mcp_system.c") != 1:
+        fail("Lua MCP native-system relocated-checkout overlay drifted")
+
+
+def validate_lua_authority_sources(
+    runtime_source: str | None = None,
+    server_source: str | None = None,
+    native_source: str | None = None,
+) -> None:
+    if runtime_source is None:
+        runtime_source = (
+            ROOT / "lua" / "src" / "linkedspec" / "mcp_contract_runtime.lua"
+        ).read_text(encoding="utf-8")
+    if server_source is None:
+        server_source = (
+            ROOT / "lua" / "src" / "linkedspec" / "mcp_server.lua"
+        ).read_text(encoding="utf-8")
+    lua_combined = runtime_source + "\n" + server_source
+    for token in [
+        "io.open(",
+        "io.input(",
+        "io.output(",
+        "io.popen(",
+        "io.lines(",
+        "io.write(",
+        "os.",
+        "dofile(",
+        "loadfile(",
+        "package.",
+        "debug.",
+        "socket",
+        "http",
+        "ffi",
+        "jit.",
+        "LINKEDSPEC_TRACE_LEVEL",
+        "parse_spec(",
+        "compile_spec(",
+        "load_spec(",
+        "emit_lua_source",
+    ]:
+        if token in lua_combined:
+            fail(f"Lua MCP production authority fence contains forbidden token: {token}")
+
+    if native_source is None:
+        native_source = (ROOT / "lua" / "native" / "mcp_system.c").read_text(
+            encoding="utf-8"
+        )
+    for name in ["fopen", "open", "system", "exec", "fork", "socket", "getenv"]:
+        if re.search(rf"(?<![A-Za-z0-9_]){name}\s*\(", native_source):
+            fail(f"Lua MCP native-system authority fence contains forbidden call: {name}")
+    for token in [
+        "arc4random_buf(bytes, sizeof(bytes));",
+        "getrandom(bytes + offset, sizeof(bytes) - offset, 0U);",
+        "clock_gettime(CLOCK_MONOTONIC, &value)",
+        '#error "LinkedSpec MCP requires arc4random_buf or getrandom"',
+    ]:
+        if native_source.count(token) != 1:
+            fail(f"Lua MCP native-system portability source drifted: {token}")
+
+    primary = (ROOT / "lua" / "bin" / "linkedspec-lua").read_text(encoding="utf-8")
+    if "mcp_server" in primary or "serve_stdio" in primary:
+        fail("the primary Lua parser CLI acquired MCP bootstrap authority")
+
+
 def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     exact_fields(
         ledger,
@@ -621,6 +781,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
 
     if inspect_files:
         validate_julia_owners()
+        validate_lua_owners()
         for row in ledger["implementations"]:
             for path in row["source_paths"]:
                 if not (ROOT / path).is_file():
@@ -644,6 +805,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
                 fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
         validate_authority_sources()
+        validate_lua_authority_sources()
 
 
 def coordinated_promotion(ledger: dict[str, Any]) -> None:
@@ -707,6 +869,7 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     ci_mutations = [
         ("CI Dart generator omission", ci_source.replace(ORDERED_COMMANDS[4] + "\n", "")),
         ("CI Julia generator omission", ci_source.replace(ORDERED_COMMANDS[5] + "\n", "")),
+        ("CI Lua generator omission", ci_source.replace(LUA_GENERATOR_COMMAND + "\n", "")),
         ("CI Rust admission omission", ci_source.replace(ORDERED_COMMANDS[10] + "\n", "")),
         ("CI Dart decoded proof omission", ci_source.replace(ORDERED_COMMANDS[11] + "\n", "")),
         (
@@ -870,6 +1033,46 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 "",
             ),
         ),
+        (
+            "CI Lua generator registration omission",
+            ci_source.replace(
+                "require_tracked_file tools/generate_lua_mcp_contract.py\n", "", 1
+            ),
+        ),
+        (
+            "CI Lua native system registration omission",
+            ci_source.replace("require_tracked_file lua/native/mcp_system.c\n", "", 1),
+        ),
+        (
+            "CI Lua contract runtime registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua\n",
+                "",
+                1,
+            ),
+        ),
+        (
+            "CI Lua server registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/src/linkedspec/mcp_server.lua\n", "", 1
+            ),
+        ),
+        (
+            "CI Lua binding proof registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/test/mcp_contract_lua_binding_test.lua\n",
+                "",
+                1,
+            ),
+        ),
+        (
+            "CI Lua decoded proof registration omission",
+            ci_source.replace(
+                "require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua\n",
+                "",
+                1,
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
@@ -892,6 +1095,113 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         rejected += 1
     else:
         fail("mutation was accepted: Julia package admission registration omission")
+
+    lua_init_source = (ROOT / "lua" / "src" / "linkedspec" / "init.lua").read_text(
+        encoding="utf-8"
+    )
+    lua_semantic_source = (
+        ROOT / "lua" / "src" / "linkedspec" / "semantic_index.lua"
+    ).read_text(encoding="utf-8")
+    lua_builder_source = (ROOT / "tools" / "build_lua_native.sh").read_text(
+        encoding="utf-8"
+    )
+    lua_gate_source = (ROOT / "tools" / "run_lua_local.sh").read_text(
+        encoding="utf-8"
+    )
+    lua_process_source = (
+        ROOT / "tools" / "test_project_data_process_locality.sh"
+    ).read_text(encoding="utf-8")
+    lua_owner_mutations = [
+        (
+            "Lua lazy root registration omission",
+            {"init_source": lua_init_source.replace('local mcp_server\n', "", 1)},
+        ),
+        (
+            "Lua semantic-index identity omission",
+            {
+                "semantic_source": lua_semantic_source.replace(
+                    "function M._is_index(value)", "function M.wrong_index(value)", 1
+                )
+            },
+        ),
+        (
+            "Lua native-system build omission",
+            {
+                "builder_source": lua_builder_source.replace(
+                    '"$REPO_ROOT/lua/native/mcp_system.c"',
+                    '"$REPO_ROOT/lua/native/wrong.c"',
+                    1,
+                )
+            },
+        ),
+        (
+            "Lua binding proof ABI omission",
+            {
+                "gate_source": lua_gate_source.replace(
+                    "lua/test/mcp_contract_lua_binding_test.lua", "", 1
+                )
+            },
+        ),
+        (
+            "Lua decoded proof ABI omission",
+            {
+                "gate_source": lua_gate_source.replace(
+                    "lua/test/mcp_server_lua_dispatch_test.lua", "", 1
+                )
+            },
+        ),
+        (
+            "Lua native-system relocated-checkout overlay omission",
+            {
+                "process_source": lua_process_source.replace(
+                    "lua/native/mcp_system.c ", "", 1
+                )
+            },
+        ),
+    ]
+    for name, sources in lua_owner_mutations:
+        try:
+            validate_lua_owners(**sources)
+        except CheckError:
+            rejected += 1
+            continue
+        fail(f"mutation was accepted: {name}")
+
+    lua_runtime_source = (
+        ROOT / "lua" / "src" / "linkedspec" / "mcp_contract_runtime.lua"
+    ).read_text(encoding="utf-8")
+    lua_server_source = (
+        ROOT / "lua" / "src" / "linkedspec" / "mcp_server.lua"
+    ).read_text(encoding="utf-8")
+    lua_native_source = (ROOT / "lua" / "native" / "mcp_system.c").read_text(
+        encoding="utf-8"
+    )
+    lua_authority_mutations = [
+        (
+            "Lua decoded server filesystem authority",
+            {
+                "server_source": lua_server_source
+                + "\nlocal forbidden = os.execute\n"
+            },
+        ),
+        (
+            "Lua native-system file authority",
+            {"native_source": lua_native_source + "\n/* fopen( */\n"},
+        ),
+    ]
+    for name, sources in lua_authority_mutations:
+        arguments = {
+            "runtime_source": lua_runtime_source,
+            "server_source": lua_server_source,
+            "native_source": lua_native_source,
+        }
+        arguments.update(sources)
+        try:
+            validate_lua_authority_sources(**arguments)
+        except CheckError:
+            rejected += 1
+            continue
+        fail(f"mutation was accepted: {name}")
 
     perl_source = (ROOT / RUNTIME_ADMISSIONS[0]["consumer_path"]).read_text(encoding="utf-8")
     rust_source = (ROOT / RUNTIME_ADMISSIONS[1]["consumer_path"]).read_text(encoding="utf-8")

@@ -1,8 +1,8 @@
 # ADR 0061: Lua MCP uses one literal contract binding and one dual-ABI in-process server
 
 - Date: 2026-07-29
-- Status: accepted; behavior-free plan complete under `.10.9.6.0`; implementation/admission pending under
-  `.10.9.6.1-.4`
+- Status: accepted; plan and decoded implementation complete under `.10.9.6.0-.1`; strict wire, admission, and
+  closeout pending under `.10.9.6.2-.4`
 - Tags: architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -137,6 +137,12 @@ or standalone executable is introduced.
    implementations and the two ABI rows to 6/6 runtimes while shared rollout remains pending; and
 5. `.4` recomposes the committed owners without replacement behavior and closes the Lua parent.
 
+Step `.1` now implements this boundary from one unchanged source graph. The generated 82,827-byte module embeds
+the exact 82,543-byte bundle; the frozen runtime verifies its digest/schema profile; the protected decoded server
+owns secure handles, digest-only authorization, monotonic expiry, lowering-only policy, and sanitized dispatch;
+and `mcp_system.c` supplies only OS entropy and monotonic time to both ABI builds. Focused proof is 111 + 210
+assertions per runtime and source/CI/authority governance rejects 94 mutations without formal status movement.
+
 The same neutral corpus, public decoded and stdio paths, exact semantic bytes, all raw/lifecycle classifications,
 production 1,024-handle boundary, authority/privacy fences, and narrow private seams used by prior admissions are
 required on both ABIs. Recurring six-runtime composition remains solely `.10.9.7`.
@@ -153,7 +159,7 @@ required on both ABIs. Recurring six-runtime composition remains solely `.10.9.7
 - LuaJIT's collapsed number representation cannot weaken the wire contract because lexical classification occurs
   before decoding. Decoded host dispatch remains an explicitly different trust boundary.
 - No primary Lua command, corpus runner, semantic model, query response, generated-parser format, or MCP status row
-  changes in the planning leaf.
+  changes in the planning or decoded implementation leaves.
 
 ## Links
 

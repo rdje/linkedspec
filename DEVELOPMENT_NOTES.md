@@ -1,5 +1,40 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.1` — one decoded server can remain secure and ABI-neutral when host
+  authority is explicit): The generated binding is data-only and the frozen runtime verifies its exact SHA-256
+  before retaining templates. Lua's weak-key protected state tables keep registry, policies, limits, registration
+  options, and typed errors opaque; public objects have protected metatables, reject mutation, and expose no
+  iterable secrets. The root module loads the server lazily, so ordinary parser users do not load the MCP contract
+  or native system module.
+
+  Production construction accepts no dependency injection. It loads one ABI-specific build of the same
+  `mcp_system.c`, which exposes only fixed 32-byte secure randomness and monotonic milliseconds. Deterministic
+  entropy/time/native-query seams are package-private and source-fenced. Authorization is bounded before hashing,
+  only its binary SHA-256 digest is retained, comparisons always examine 32 bytes, collisions are bounded, and
+  unknown, unauthorized, expired, and revoked handles all produce the same tool result.
+
+  The server clones every decoded request before classification and every native response before validation and
+  emission. Deployment policy can only lower source detail, digest visibility, page limits, and budgets relative
+  to freshly queried native capabilities; denial precedes native query. The server calls only native
+  `capabilities()` and raw-neutral `query_neutral()`. It cannot open source, parse, compile, execute, trace, spawn,
+  access network/filesystem/environment, or bootstrap through the primary CLI.
+
+  Focused proof is 111 generated/runtime plus 210 decoded/security assertions on both PUC Lua and LuaJIT. The
+  complete dual-ABI Lua gate, 16-owner/three-module storage proof, 27-entrypoint tool storage proof, and 94
+  omission/authority mutations pass. The implementation checker intentionally retains 4/5 + 4/6 pending status:
+  decoded behavior is real, but strict hostile-byte stdio and exact ordered admission remain separately owned.
+
+  Canonical composition exposed two useful integration contracts. First, the aggregate-selector retirement
+  scanner is intentionally lexical across executable sources, so the private helper spelling `array(value)` was
+  indistinguishable from retired public DSL syntax; the precise `json_array` name removes the collision and the
+  zero-positive scanner remains the regression guard. Second, a moved-checkout fixture created from committed
+  `HEAD` must explicitly overlay every uncommitted source needed by an overlaid builder. Adding `mcp_system.c` to
+  that exact overlay restores the kernel-contained six-family proof, and mutation 94 prevents its omission.
+
+  Final canonical signoff passes six doctrines; unchanged neutral/five-binding and four-admitted-backend MCP
+  proof; Rust semantic 1/1 in 79.63 seconds; Dart 1/1; Julia 416/416 in 27.6 seconds; six-family containment;
+  moved-root execution; primary CLI 66x2; RAM 61%; Phase 0 1,031/1,031; and the complete PUC Lua/LuaJIT gate.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.0` — decoded Lua values cannot be the strict MCP number authority):
   PUC Lua retains integer/float subtype but canonicalizes integral floats, and LuaJIT collapses JSON `1`, `1.0`,
   and `1e0`. ADR `0061` therefore makes one iterative pre-decode scanner own number-token kind, schema-integer

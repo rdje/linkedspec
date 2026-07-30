@@ -22,6 +22,12 @@ local primary_cli = require("linkedspec.primary_cli")
 local trace = require("linkedspec.trace")
 
 local M = {}
+local mcp_server
+
+local function load_mcp_server()
+  if mcp_server == nil then mcp_server = require("linkedspec.mcp_server") end
+  return mcp_server
+end
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
@@ -78,6 +84,12 @@ M.semantic_query_request = semantic_query.request
 M.is_semantic_query_request = semantic_query.is_request
 M.is_semantic_query_response = semantic_query.is_response
 M.semantic_query_to_json = semantic_query.to_json
+M.mcp_server = function(...) return load_mcp_server().server(...) end
+M.mcp_budget_limits = function(...) return load_mcp_server().budget_limits(...) end
+M.mcp_deployment_policy = function(...) return load_mcp_server().deployment_policy(...) end
+M.mcp_registration_options = function(...) return load_mcp_server().registration_options(...) end
+M.is_mcp_server_error = function(...) return load_mcp_server().is_error(...) end
+M.mcp_server_error_to_json = function(...) return load_mcp_server().error_to_json(...) end
 M.primary_cli = primary_cli
 M.primary_cli_help = primary_cli.help
 M.run_primary_cli = primary_cli.run

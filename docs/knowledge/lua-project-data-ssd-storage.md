@@ -17,7 +17,7 @@ answers:
 date: 2026-07-28
 status: current
 tags: [lua, native, storage, filesystem, ssd, temporary-data, generated-source, trace, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.5 adds tools/run_lua_project_data.sh and tools/test_lua_project_data_storage.sh, makes tools/build_lua_native.sh self-rooted and same-filesystem guarded, and initially routes all 13 tracked Lua-family allocation owners through managed TMPDIR. FUTURE-PARITY-BACKLOG.10.7.6.1 adds the native semantic-observation route test as the fourteenth tracked owner and advances the exact manifest with it. The oracle builds the two native modules for PUC Lua and LuaJIT in a path containing a space, checks actual filesystem devices and non-symlink module identity, runs native parsing, writes generated v2 source and trace output, rejects an other-filesystem builder destination before creation, and cleans its owned state. The exact initial and final old-root linkedspec-lua-* censuses are zero. Process proof .4.2 caught the Apple /usr/bin/cc shim attempting an xcrun_db temporary write; the Darwin default now invokes the active developer clang with the active macOS SDK explicitly, and the final contained build has no denied or xcrun_db diagnostic."
+evidence: "PROJECT-DATA-SSD-ROOTING.2.5 adds tools/run_lua_project_data.sh and tools/test_lua_project_data_storage.sh, makes tools/build_lua_native.sh self-rooted and same-filesystem guarded, and initially routes all 13 tracked Lua-family allocation owners through managed TMPDIR. Later semantic/runtime and MCP owners advance the exact manifest to 16. FUTURE-PARITY-BACKLOG.10.9.6.1 adds the common mcp_system.c build, so the oracle now builds three native modules for PUC Lua and LuaJIT in a path containing a space, checks actual filesystem devices and non-symlink module identity, runs native parsing, writes generated v2 source and trace output, rejects an other-filesystem builder destination before creation, and cleans its owned state. The exact initial and final old-root linkedspec-lua-* censuses are zero. Process proof .4.2 caught the Apple /usr/bin/cc shim attempting an xcrun_db temporary write; the Darwin default now invokes the active developer clang with the active macOS SDK explicitly, and the final contained build has no denied or xcrun_db diagnostic."
 reverify: "bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh"
 ---
 
@@ -36,10 +36,10 @@ The wrapper derives the checkout from its own file, enters a managed run, create
 `tools/run_lua_local.sh` gate follows the same contract while building both ABIs once for its full package,
 primary-command, corpus, and integrated storage proof.
 
-`tools/test_lua_project_data_storage.sh` freezes the 14 executable Lua-family allocation owners: 13 Lua tests and
+`tools/test_lua_project_data_storage.sh` freezes the 16 executable Lua-family allocation owners: 15 Lua tests and
 the complete local runner. Every Lua owner reads routed `TMPDIR`; no owner retains a hard-coded operating-system
 temporary template or anonymous `io.tmpfile()`. The oracle builds both two-module ABI sets below a path containing
-a space, rejects symlinks or device drift, performs a real native parse, writes generated-source v2 and trace
+a space, rejects symlinks or device drift, requires the PCRE2/filesystem/MCP-system module trio, performs a real native parse, writes generated-source v2 and trace
 files, and verifies exact cleanup. `tools/build_lua_native.sh` independently checks the nearest existing output
 ancestor before `mkdir` and the resolved output after creation, so an explicit other-filesystem destination fails
 without creating the rejected path.

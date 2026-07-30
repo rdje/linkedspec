@@ -205,8 +205,8 @@ done
 relocated_root="$TMPDIR/relocated checkout"
 mkdir -p -- "$relocated_root"
 git -C "$REPO_ROOT" archive HEAD | tar -xf - -C "$relocated_root"
-for relative in tools/build_lua_native.sh tools/project_data_env.sh tools/run_dart_project_data.sh \
- tools/test_project_data_process_locality.sh; do
+for relative in lua/native/mcp_system.c tools/build_lua_native.sh tools/project_data_env.sh \
+ tools/run_dart_project_data.sh tools/test_project_data_process_locality.sh; do
  cp -- "$REPO_ROOT/$relative" "$relocated_root/$relative"
 done
 chmod +x "$relocated_root/tools/test_project_data_process_locality.sh"

@@ -20,13 +20,17 @@ bash tools/run_ci_local.sh
 
 This is the canonical regression gate for local development.
 
-The gate unconditionally verifies the neutral MCP transport before checking the derived Perl binding. It requires
-every contract artifact and runs these exact steps in order:
+The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
+every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 
 ```bash
 bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py
+bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py
+bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
+bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py
 PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
 bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
 PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
@@ -34,7 +38,8 @@ PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
 
 The first step catches stale generated frames/digests; the second independently checks schemas, provenance, raw
 and lifecycle/handle/policy outcomes, and 68 mutations. Only then may the third verify the byte-exact generated
-Perl module, after which focused binding, decoded-server, and adversarial stdio proofs run. The stdio suite locks
+backend modules, after which focused binding, decoded-server, and adversarial stdio proofs run for every formally
+admitted backend. The stdio suites lock
 all ten raw and ten lifecycle cases, exact frame/depth/id limits, duplicate/unicode/number mutants, canonical
 emission, cancellation through flush, continuation after rejected frames, EOF release, I/O failures, and sanitized
 logging. The admission checker then verifies a separate five-implementation/six-runtime status ledger, unchanged
@@ -81,12 +86,18 @@ Phase 0 1,031/1,031 in 631 seconds. Focused MCP recomposition remains exact at n
 byte-fresh bindings, Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, and ledger 4/5 + 4/6
 pending/79.
 
-Behavior-free shared Lua plan `.10.9.6.0` and ADR `0061` add no gate owner yet. They freeze the future canonical
-order as byte-fresh generated literal binding, identical PUC Lua/LuaJIT decoded proof, identical strict-stdio
-proof, one exact consumer invoked once per ABI, then the implementation ledger. The measured existing baseline
-passes the unchanged Lua semantic consumer at 408 assertions per ABI while MCP remains 4/5 + 4/6 pending/79.
-Implementation `.1` must register the new generator/native module/tests in the existing repository-routed Lua
-gate and managed dual-ABI build; planning alone must not make canonical CI expect files that do not yet exist.
+Behavior-free shared Lua plan `.10.9.6.0` and ADR `0061` freeze the remaining canonical order as byte-fresh
+generated literal binding, identical PUC Lua/LuaJIT decoded proof, identical strict-stdio proof, one exact consumer
+invoked once per ABI, then the implementation ledger. Decoded leaf `.10.9.6.1` now registers the Lua generator,
+generated binding, frozen runtime, C99 native system seam, server, and two focused tests. The complete Lua gate
+runs 111 binding/runtime plus 210 decoded/security assertions identically on each ABI, beside both 177-test
+package legs, primary 66x2, corpus 105/105, and the 16-owner/three-module storage proof. Source/CI/authority
+governance now rejects 94 mutations while MCP deliberately remains 4/5 + 4/6 pending. Strict wire and exact
+admission remain `.2-.3`.
+
+The decoded-server leaf's complete signoff runs this composition with `LINKEDSPEC_RUN_LUA=1`: all six doctrines,
+the unchanged neutral/four-admitted-backend MCP chain, Rust/Dart/Julia semantic admission, kernel-contained
+relocation, moved-root execution, primary CLI 66x2, Phase 0 1,031/1,031, and the full PUC Lua/LuaJIT gate pass.
 
 The `.10.9.5.0` planning signoff passes the unchanged focused chain and complete canonical gate: Rust semantic
 admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment, moved-root
@@ -677,8 +688,10 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
   staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
   signatures,
 - enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results,
+- optionally runs `tools/run_rust_local.sh` when `LINKEDSPEC_RUN_RUST=1` is set,
 - optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set,
 - optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set,
+- optionally runs the dual-ABI `tools/run_lua_local.sh` when `LINKEDSPEC_RUN_LUA=1` is set,
 - optionally runs the complete warmed five-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
 
 The command sequence includes:
@@ -1063,8 +1076,8 @@ $ bash tools/run_lua_project_data.sh puc -e 'local l = require("linkedspec"); pr
 $ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_descriptor_test.lua
 ```
 
-The wrapper enters managed repository scratch, creates a unique native directory, builds the selected ABI's PCRE2
-and filesystem modules, supplies repository `LUA_PATH` and the disposable `LUA_CPATH` to the child, and cleans the
+The wrapper enters managed repository scratch, creates a unique native directory, builds the selected ABI's PCRE2,
+filesystem, and MCP-system modules, supplies repository `LUA_PATH` and the disposable `LUA_CPATH` to the child, and cleans the
 native tree on exit. `tools/build_lua_native.sh` is also self-rooted: it compares the nearest existing output
 ancestor with the repository device before creation and validates the resolved directory afterward. A caller-
 selected output on another filesystem is rejected without creating the requested path.
@@ -1075,12 +1088,13 @@ The recurring process oracle is:
 $ bash tools/test_lua_project_data_storage.sh
 ```
 
-It freezes the exact 13 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
-hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both two-module ABI sets
+It freezes the exact 16 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
+hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both three-module ABI sets
 below a managed path containing a space. It checks actual filesystem identity and non-symlink module files, runs a
 real native parse, writes generated-source v2 and trace output, rejects an other-filesystem builder destination,
 and proves exact cleanup. The complete `tools/run_lua_local.sh` gate reuses its two ABI builds and runs the oracle
-after both 177-test suites, primary 66/66 twice, and corpus 105/105. Three new self-rooted boundaries raise the
+after the standalone MCP 111 + 210 proofs and both 177-test suites per ABI, primary 66/66 twice, and corpus
+105/105. Three new self-rooted boundaries raise the
 hostile outside-cwd routing proof from 30 to 33.
 
 Both initial old-root censuses contained zero exact `linkedspec-lua-*` directories, and the complete proof leaves

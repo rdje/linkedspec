@@ -66,7 +66,14 @@ check_no_untracked_ci_inputs() {
   julia/test/mcp_contract_julia_binding_test.jl \
   julia/test/mcp_server_julia_dispatch_test.jl \
   julia/test/mcp_server_julia_stdio_test.jl \
-  julia/test/mcp_server_julia_admission_test.jl)
+  julia/test/mcp_server_julia_admission_test.jl \
+  tools/generate_lua_mcp_contract.py \
+  lua/native/mcp_system.c \
+  lua/src/linkedspec/mcp_contract.lua \
+  lua/src/linkedspec/mcp_contract_runtime.lua \
+  lua/src/linkedspec/mcp_server.lua \
+  lua/test/mcp_contract_lua_binding_test.lua \
+  lua/test/mcp_server_lua_dispatch_test.lua)
 
  status_line=$(git status --short --untracked-files=all -- lua/test/semantic_introspection_lua_admission_test.lua)
  if [[ "$status_line" == '?? '* ]]; then
@@ -122,7 +129,14 @@ audit_no_machine_specific_absolute_paths() {
   julia/test/mcp_contract_julia_binding_test.jl \
   julia/test/mcp_server_julia_dispatch_test.jl \
   julia/test/mcp_server_julia_stdio_test.jl \
-  julia/test/mcp_server_julia_admission_test.jl)
+  julia/test/mcp_server_julia_admission_test.jl \
+  tools/generate_lua_mcp_contract.py \
+  lua/native/mcp_system.c \
+  lua/src/linkedspec/mcp_contract.lua \
+  lua/src/linkedspec/mcp_contract_runtime.lua \
+  lua/src/linkedspec/mcp_server.lua \
+  lua/test/mcp_contract_lua_binding_test.lua \
+  lua/test/mcp_server_lua_dispatch_test.lua)
 
  (( found == 0 )) || exit 1
 }
@@ -181,6 +195,7 @@ require_tracked_file tools/generate_perl_mcp_contract.py
 require_tracked_file tools/generate_rust_mcp_contract.py
 require_tracked_file tools/generate_dart_mcp_contract.py
 require_tracked_file tools/generate_julia_mcp_contract.py
+require_tracked_file tools/generate_lua_mcp_contract.py
 require_tracked_file tools/check_mcp_implementation_admission.py
 require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
@@ -234,6 +249,12 @@ require_tracked_file julia/test/mcp_contract_julia_binding_test.jl
 require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl
 require_tracked_file julia/test/mcp_server_julia_stdio_test.jl
 require_tracked_file julia/test/mcp_server_julia_admission_test.jl
+require_tracked_file lua/native/mcp_system.c
+require_tracked_file lua/src/linkedspec/mcp_contract.lua
+require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua
+require_tracked_file lua/src/linkedspec/mcp_server.lua
+require_tracked_file lua/test/mcp_contract_lua_binding_test.lua
+require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua
 require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
 require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
 require_tracked_file lua/test/semantic_introspection_lua_admission_test.lua
@@ -502,6 +523,9 @@ bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
 
 log "checking the generated filesystem-free Julia MCP contract binding"
 bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+
+log "checking the generated filesystem-free Lua MCP contract binding"
+bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py
 
 log "running Perl MCP contract-binding, decoded-dispatch, and strict-stdio proof"
 PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t

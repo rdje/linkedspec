@@ -12,7 +12,7 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua architecture frozen; rollout pending
+status: exact neutral contract canonical; Perl/Rust/Dart/Julia admitted at 4/5 + 4/6; Lua decoded implementation complete but unadmitted; rollout pending
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
@@ -31,6 +31,7 @@ evidence_update_2026_07_29_julia_decoded: "Julia .10.9.5.1 implements its 119,53
 evidence_update_2026_07_29_julia_stdio: "Julia .10.9.5.2 implements strict bounded duplicate-safe number-kind-preserving stdio, canonical LF, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-owned IO at 170 assertions without formal ledger movement; admission .3 and closeout .4 remain ordered."
 evidence_update_2026_07_29_julia_admission_closeout: "Julia .10.9.5.3 admits one exact twelve-role consumer at 178 assertions and advances only Julia to 4/5 implementations plus 4/6 runtimes with 79 rejected mutations; no-change .4 recomposes those owners and closes the Julia parent."
 evidence_update_2026_07_29_lua_plan: "Lua .10.9.6.0 and ADR 0061 freeze one generated literal binding, private frozen runtime, one protected decoded server, one strict lexical wire, and one tiny native system seam from common Lua/C sources admitted independently on PUC Lua and LuaJIT; behavior and the 4/5 + 4/6 ledger remain unchanged before implementation."
+evidence_update_2026_07_29_lua_decoded: "Lua .10.9.6.1 implements its one common generated/frozen/server source graph plus ABI-compiled native entropy/clock seam at 111 + 210 assertions per runtime and 94 governance mutations. Strict wire .2 and exact admission .3 remain pending, so the formal ledger intentionally stays 4/5 implementations + 4/6 runtimes."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 

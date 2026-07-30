@@ -20,6 +20,7 @@ reverify:
   - bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py
   - bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py
   - bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+  - bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py
   - PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
   - bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
   - PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
@@ -57,8 +58,9 @@ does not synthesize another expected-response model.
 identity, exact role declaration/invocation/completion, tracked canonical inputs, and canonical command order. It
 rejects 28 mutations for the Perl-only state, 39 after Rust admission, 43/46 while Dart decoded/strict-stdio proof
 remained unadmitted, 58 after exact Dart admission, 65 after registering Julia's still-unadmitted generated/
-runtime/decoded owners, 68 after requiring Julia's strict wire plus stdio proof, and 79 after exact Julia
-admission locks its source/consumer/package/CI/role/order topology. Static fences prohibit production MCP owners from
+runtime/decoded owners, 68 after requiring Julia's strict wire plus stdio proof, 79 after exact Julia admission,
+and 93 after locking Lua's still-unadmitted generated/runtime/native-system/decoded owners and dual-ABI focused
+proof. Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
 opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`;
@@ -88,9 +90,10 @@ binding, server, wire, consumer, and ledger owners unchanged; it preserves all 7
 
 Behavior-free Lua `.10.9.6.0` and ADR `0061` freeze one generated literal binding, private frozen runtime,
 protected decoded server, strict pre-decode number-kind wire, and one package-private C99 entropy/monotonic-time
-source compiled per ABI. One unchanged Lua source and admission consumer must qualify independently on PUC Lua
-and LuaJIT. Planning does not create a source/consumer row or move status: implementation `.1`, wire `.2`, exact
-dual-ABI admission `.3`, and no-change closeout `.4` remain ordered, and only `.3` may advance 5/5 plus 6/6.
+source compiled per ABI. Decoded `.10.9.6.1` implements and gate-registers the generated/frozen/server/native
+owners plus identical 111 + 210 focused assertions on PUC Lua and LuaJIT. They remain deliberately absent from
+the formal implementation row until one unchanged source and admission consumer qualify independently after
+strict wire `.2`. Only exact dual-ABI admission `.3` may advance 5/5 plus 6/6; closeout `.4` remains after it.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],

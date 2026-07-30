@@ -17,12 +17,14 @@ advances formal MCP status to 4/5 implementations + 4/6 runtimes; Lua's two ABI 
 pending. No-change `.10.9.5.4` recomposes all committed owners unchanged, closes the Julia parent without
 status movement, and hands the clean boundary to shared Lua planning `.10.9.6.0`.
 
-That behavior-free Lua audit and ADR `0061` now freeze one exact implementation source for PUC Lua and LuaJIT:
-generated 82,543-byte long-bracket contract data, frozen runtime, protected decoded server, strict pre-decode
-number-kind wire, and one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Bytewise bounded
-streaming is selected because larger fixed reads block interactively and handles a full 1 MiB frame in under 0.10
-seconds on both runtimes. No production behavior or formal status moves: the ledger remains 4/5 implementations
-+ 4/6 runtimes, rollout pending, until exact dual-ABI admission `.10.9.6.3`.
+That behavior-free Lua audit and ADR `0061` freeze one exact implementation source for PUC Lua and LuaJIT.
+Decoded leaf `.10.9.6.1` now ships the generated 82,827-byte module carrying the exact 82,543-byte long-bracket
+bundle, digest-verified frozen runtime, protected secure registry, lower-only decoded server, lazy public API, and
+one package-private C99 secure-entropy/monotonic-time seam compiled per ABI. Focused proof passes 111 + 210
+assertions on each runtime and governance rejects 94 mutations. Bytewise bounded streaming remains `.2` because
+larger fixed reads block interactively; its measured full 1 MiB cost is under 0.10 seconds on both runtimes.
+Formal status deliberately remains 4/5 implementations + 4/6 runtimes, rollout pending, until exact dual-ABI
+admission `.10.9.6.3`.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
