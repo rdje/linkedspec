@@ -1,7 +1,7 @@
 ---
 id: perl-native-mcp-server-plan
 title: Perl native MCP server plan
-status: current authority; behavior-free implementation plan, server pending
+status: current historical plan; implementation, admission, and no-change parent closeout complete under FUTURE-PARITY-BACKLOG.10.9.2.1-.4
 date: 2026-07-29
 answers:
   - What Perl module will own the native LinkedSpec MCP server?
@@ -20,10 +20,10 @@ reverify:
 
 # Perl native MCP server plan
 
-`FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR `0057` freeze a filesystem-free native Perl implementation before code.
-The public owner will be `LinkedSpec::MCPServer`; private generated `LinkedSpec::MCPContract` data,
+`FUTURE-PARITY-BACKLOG.10.9.2.0` and ADR `0057` froze a filesystem-free native Perl implementation before code.
+The implemented public owner is `LinkedSpec::MCPServer`; private generated `LinkedSpec::MCPContract` data,
 `LinkedSpec::MCPContractRuntime`, and strict `LinkedSpec::MCPWire` keep contract, schema, registry/dispatch, and
-stdio authority separate. `tools/generate_perl_mcp_contract.py` will deterministically derive the embedded binding
+stdio authority separate. `tools/generate_perl_mcp_contract.py` deterministically derives the embedded binding
 from the exact neutral bundle and check byte freshness after the neutral materializer/validator.
 
 LinkedSpec's own probe against `graph.spec` finds two `CODE` and five `Regexp` values in `return_descriptor`, so

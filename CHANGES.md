@@ -1,5 +1,38 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.0 — plan the Julia native MCP server
+
+Added behavior-free ADR `0060` and a Knowledge Map plan that freeze Julia's fourth native MCP implementation
+before code. The accepted topology is generated Base64 `McpContract.jl`, private frozen
+`McpContractRuntime.jl`, public synchronous `McpServer.jl`, and strict `McpWire.jl` inside the existing
+`LinkedSpecJulia` module. The public embedding will retain an already-created opaque `SemanticIndex` and call
+only `semantic_capabilities`, `semantic_query_neutral`, and `to_json`; it adds no source/path bootstrap,
+parser/compiler/executor/trace authority, semantic cache, primary-CLI mode, executable, SDK/network transport,
+aggregator, or legacy adapter.
+
+Repository-routed Julia 1.12.6 / JSON3 1.14.3 probes establish the exact security/wire choices. `RandomDevice`
+uses operating-system entropy, `time_ns()` is documented monotonic, core Base64 maps 32 bytes to exactly 43
+unpadded base64url characters, and borrowed `IO` supports bounded reads/writes/flush. JSON3 retains literal and
+escape-equivalent duplicate pairs while dictionary conversion keeps only the last, accepts malformed-UTF-8
+`String`, and converts `1.0`/`1e0` number tokens to integers. Strict wire admission must therefore validate bytes
+and decoded key uniqueness, retain numeric lexemes, decode through JSON3 floating-number mode, and reconstruct
+exact integer versus fraction/exponent kinds before the frozen schema runtime. Base64 and Random will be explicit
+standard-library dependencies; no third-party dependency is authorized.
+
+The dependency order is generated binding/runtime/secure decoded server `.1`, strict stdio/lifecycle `.2`, exact
+twelve-role Julia-only admission `.3`, and no-change closeout `.4`. This planning leaf changes no production,
+test, fixture, contract, generated binding, implementation ledger, semantic API, or CLI behavior. The ledger stays
+3/5 implementations + 3/6 runtimes with shared rollout pending until `.3` owns promotion.
+
+Focused proof passes neutral MCP 35/10/10/68, byte-fresh Perl/Rust/Dart bindings at 83,072/82,886/82,875 bytes,
+Perl Files=4 Tests=35, Rust 15 + 3 + 4 + 1, Dart 16/16, Julia semantic admission, and the unchanged pending/58
+ledger. Canonical CI passes Rust semantic admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds,
+six-family process containment, moved-root execution, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 642 seconds.
+Knowledge Map 748/6,049, mdBook 13,536 KiB / 79 files, all six doctrines, memory, whitespace, documentation-only
+classification, and exact rendered-book/empty-run cleanup pass. The initial in-harness canonical attempt was
+stopped solely by the enclosing Codex sandbox denying nested macOS `sandbox-exec`; the exact oracle and complete
+authoritative rerun pass outside that enclosure. No push occurs before cadence 300.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.4.4 — close the Dart MCP implementation
 
 Recomposed the committed neutral transport, Perl, Rust, and Dart MCP owners without adding a replacement test,

@@ -60,11 +60,21 @@ governance test reject generated-binding, consumer, tracked-input, and validator
 
 No-change closeout `.10.9.3.4` runs that exact committed sequence again without a replacement implementation,
 fixture, or umbrella oracle. Focused and canonical gates pass unchanged, close parent `.10.9.3`, and preserve Dart
-`.10.9.4` as the next clean-boundary owner. Behavior-free Dart plan `.10.9.4.0` and ADR `0059` now freeze the next
-generated-binding -> decoded-server -> strict-stdio -> exact-admission -> no-change-closeout sequence. The current
-canonical command order and 2/5 + 2/6 ledger remain unchanged until `.10.9.4.1-.3` add and admit real owners. Its
-behavior-free signoff passes Rust semantic 1/1 in 82.76 seconds, Dart 1/1, Julia 416/416 in 29.9 seconds, CLI
-66x2, RAM 68%, and Phase 0 1,031/1,031 in 769 seconds.
+`.10.9.4` as the next clean-boundary owner. Dart `.10.9.4.1-.3` has since added its generated binding, decoded
+server, strict stdio, and exact admission; no-change `.10.9.4.4` recomposes that chain and closes the parent. The
+current ledger is 3/5 implementations + 3/6 runtimes with rollout pending and 58 rejected mutations.
+
+Behavior-free Julia plan `.10.9.5.0` and ADR `0060` now freeze the next generated-Base64-binding -> decoded-server
+-> strict-number-preserving-stdio -> exact-admission -> no-change-closeout sequence. Planning does not yet add a
+Julia generator or canonical MCP command, so the committed canonical order and 3/5 + 3/6 ledger remain unchanged.
+When `.10.9.5.1-.3` land, generator freshness, focused binding/decoded/stdio proof, one exact twelve-role consumer,
+Julia source/authority fences, and Julia-only status movement must be inserted before the existing implementation
+ledger checker. No primary-CLI mode, executable, SDK/network stack, async runtime, source bootstrap, semantic
+cache, aggregator, or legacy adapter may enter that proof.
+
+The `.10.9.5.0` planning signoff passes the unchanged focused chain and complete canonical gate: Rust semantic
+admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment, moved-root
+execution, CLI 66x2, and Phase 0 1,031/1,031 in 642 seconds. The ledger remains 3/5 + 3/6 pending/58.
 
 The GitHub workflow is intentionally kept as a thin wrapper around the same command:
 

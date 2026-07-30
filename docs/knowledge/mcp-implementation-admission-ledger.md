@@ -71,6 +71,8 @@ without status movement; `.10.9.4.3` now admits their unchanged four owners thro
 `dart/test/mcp_server_dart_admission_test.dart`, advancing only Dart to 3/5 implementations and 3/6 runtimes.
 No-change `.10.9.4.4` recomposes every committed neutral, Perl, Rust, and Dart owner without replacing an oracle
 or moving status, preserves all 58 mutations, closes parent `.10.9.4`, and hands off to Julia `.10.9.5`.
+Behavior-free Julia `.10.9.5.0` and ADR `0060` freeze generated/runtime/server/wire/admission owners under
+`.1-.4`; no Julia source/consumer row or completion count moves until exact admission `.10.9.5.3`.
 
-Related facts: [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
+Related facts: [[julia-native-mcp-server-plan]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
 [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].

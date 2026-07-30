@@ -1076,6 +1076,15 @@ content migration exists yet.
   pending, and rejects 58 mutations. Focused Dart MCP proof passes 16 tests and the complete package passes 353;
   all three generated bindings remain byte-identical. No-change closeout `.10.9.4.4` recomposes every committed
   neutral/Perl/Rust/Dart owner unchanged, closes parent `.10.9.4`, and hands the exact contract to Julia `.10.9.5`.
+  Behavior-free Julia audit `.10.9.5.0` and ADR `0060` now freeze a generated Base64 contract module, private
+  frozen runtime, synchronous same-process `McpServer`, strict number-preserving JSON wire, exact admission, and
+  no-change closeout under `.1-.4`. Julia 1.12.6 supplies OS-backed `RandomDevice`, monotonic `time_ns`, Base64,
+  SHA-256, and borrowed `IO`; Base64/Random will be explicit standard-library dependencies with no third-party
+  package. JSON3's duplicate-key, malformed-UTF-8, and `1.0`/`1e0` integer-coercion gaps require strict token
+  admission and numeric-lexeme reconstruction before frozen-schema evaluation. Planning changes no server,
+  contract, semantic/CLI behavior, or 3/5 + 3/6 pending ledger; generated decoded Julia implementation `.1` is
+  next only after the clean plan commit. Planning signoff passes the complete canonical gate, including exact
+  six-family process containment, CLI 66x2, and Phase 0 1,031/1,031.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1519,7 +1528,11 @@ content migration exists yet.
   fixed diagnostics, and EOF/I/O cleanup. Exact admission `.10.9.4.3` composes one ordered twelve-role public
   consumer, advances only Dart to 3/5 implementations + 3/6 runtimes, preserves pending shared rollout, and
   rejects 58 mutations. No-change `.10.9.4.4` composition-closes the Dart parent without moving that ledger or
-  production behavior. The combined MCP proof is 16 focused tests plus 353 complete package tests.
+  production behavior. The combined MCP proof is 16 focused tests plus 353 complete package tests. Behavior-free
+  Julia `.10.9.5.0` and ADR `0060` freeze `McpContract.jl` generated Base64 data, private runtime/server/wire
+  owners, OS-random handles, monotonic expiry, digest authorization, strict UTF-8/duplicate/number-kind handling,
+  synchronous borrowed-`IO` stdio, and `.1-.4` order. The ledger remains 3/5 + 3/6 pending; `.10.9.5.1` is the
+  next clean-boundary implementation leaf after complete behavior-free canonical signoff.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

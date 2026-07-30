@@ -13900,11 +13900,113 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.4.4 - close Dart MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.5`
-    Status: `pending`
+    Status: `active` (2026-07-29; behavior-free native owner/security/wire audit `.0` complete from clean Dart
+      closeout commit `98cbe61a`; generated binding/runtime/decoded server `.1` is the next clean activation)
     Goal: Implement and admit the Julia native MCP server against the exact transport contract.
     Depends on: `.10.9.4`
+    Children: `.10.9.5.0`, `.10.9.5.1`, `.10.9.5.2`, `.10.9.5.3`, `.10.9.5.4`
     Acceptance: Register opaque handles for existing Julia `SemanticIndex` values in the owning process and pass
       the same exact contract/corpus/failure/identity boundary without adding semantic ownership or backend leakage.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.5.0`
+      Status: `done` (2026-07-29; behavior-free audit and canonical signoff from clean `98cbe61a`)
+      Goal: Audit and freeze Julia's native MCP embedding, generated-contract, security, wire, and admission seams
+        before implementation.
+      Depends on: `.10.9.4.4`
+      Acceptance: Use the admitted public Julia `SemanticIndex` surface and exact neutral/Perl/Rust/Dart owners to
+        freeze one filesystem-free generated binding, one same-process native server, strict stdio/lifecycle
+        behavior, deterministic test seams, exact Julia admission, and no-change closeout without changing
+        production/test/fixture/contract/ledger/rollout behavior.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN BASE / TASK OWNERSHIP** — Prove clean Dart closeout `98cbe61a`, zero-byte brief, absent rendered-
+        book/managed-run residue, and activate `.10.9.5.0` before any audit projection or Julia behavior change.
+      - [x] **RETRIEVE / NATIVE AUTHORITY** — Follow the Knowledge Map to Julia's immutable semantic index,
+        capabilities/query, canonical JSON, embedding, source/privacy, and runtime-observation facts; retrieve the
+        exact MCP contract, native topology, admitted Perl/Rust/Dart plans, generators, ledger, and canonical order.
+      - [x] **RUNTIME / SECURITY / WIRE AUDIT** — Measure Julia JSON duplicate-key and canonical-output behavior,
+        cryptographic entropy, monotonic time, byte-stream ownership, cancellation/emission, shutdown, dependency,
+        package, and CLI topology through repository-routed probes before choosing implementation seams.
+      - [x] **RATIFY / SPLIT BEFORE CODE** — Add one Julia-specific ADR and durable Knowledge Map fact that freeze
+        public native API, generated data/runtime/server/wire owners, authority fences, exact `.1-.4` dependency
+        order, and unchanged 3/5 implementation + 3/6 runtime ledger boundary before implementation.
+      - [x] **LOCKSTEP / NO BEHAVIOR CHANGE** — Synchronize roadmap/live docs/mdBook/task/index/memory, prove a
+        documentation-only diff, run focused/canonical signoff plus exact cleanup, commit, clear the brief, and
+        activate `.10.9.5.1` only from the clean planning commit without pushing before cadence 300.
+
+      Verification plan: Retrieve first, then run repository-routed Julia probes plus unchanged neutral
+        materializer/validator, all three binding generators, admitted Perl/Rust/Dart consumers, ledger checker,
+        Julia semantic admission/package/analyzer-equivalent checks, capability/semantic/storage/path governance,
+        mdBook, Knowledge Map, doctrines, canonical CI, whitespace, documentation-only diff, and exact cleanup.
+
+      Audit result: the existing opaque `SemanticIndex`, `semantic_capabilities`, `semantic_query_neutral`, and
+        detached `to_json` values are the sole native authority. Repository-routed Julia 1.12.6 / JSON3 1.14.3
+        probes prove OS-backed `RandomDevice`, monotonic `time_ns`, exact 32-byte -> 43-character unpadded
+        base64url encoding, and borrowed bounded `IO` operations. They also prove JSON3 retains literal and
+        escape-equivalent duplicate pairs while normalization keeps the last, accepts malformed-UTF-8 `String`
+        input, and coerces `1.0`/`1e0` to integer values. ADR `0060` therefore freezes a generated Base64 bundle,
+        private frozen runtime, native synchronous server, strict token/number-preserving wire, explicit Base64/
+        Random standard-library dependencies, private deterministic seams, and exact `.1-.4` order. No behavior
+        or ledger state moves in this leaf.
+
+      Verification: **PASS 2026-07-29.** Focused unchanged-owner proof passes neutral 35 canonical / 10 raw / 10
+        lifecycle / 68 mutations; byte-fresh Perl 83,072-byte, Rust 82,886-byte, and Dart 82,875-byte bindings;
+        Perl MCP Files=4 Tests=35; Rust MCP 15 + 3 + 4 + 1; Dart MCP 16/16; Julia semantic admission; and the
+        unchanged implementation ledger at 3/5 implementations + 3/6 runtimes, rollout pending, with all 58
+        mutations rejected. The mdBook builds to a verified ignored 13,536-KiB / 79-file rendering; Knowledge Map
+        generation/check passes at 748 facts / 6,049 question keys; all six doctrines, memory, whitespace, and the
+        documentation-only owner classification pass.
+
+        Canonical CI passes syntax/governance, the exact neutral/generated/native MCP chain, Rust semantic
+        admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family kernel process
+        containment, moved-root proof, primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 642 seconds. The first
+        in-harness attempt reached the containment oracle only to have the enclosing Codex sandbox reject nested
+        `sandbox-exec` with status 71; the exact oracle then passed outside that enclosing sandbox, and the complete
+        authoritative rerun passed it in sequence. Exact cleanup removes only the verified rendered book and one
+        proven-empty managed-run directory. No production/test/fixture/contract/generator/ledger/semantic/CLI/
+        topology/aggregator/legacy behavior changes; `.10.9.5.1` is next only from the clean planning commit.
+
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.5.0 - plan Julia native MCP server`
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.5.1`
+      Status: `pending`
+      Goal: Generate the filesystem-free Julia MCP binding and implement the frozen contract runtime, secure native
+        registry, decoded dispatch, lowering-only policy, and sanitized failure boundary.
+      Depends on: `.10.9.5.0`
+      Acceptance: Add `tools/generate_julia_mcp_contract.py`, generated `julia/src/mcp/McpContract.jl`, private
+        frozen schema/canonical runtime, public `McpServer` and typed policy/error values, exact
+        `register_index!`/`revoke_handle!`/`dispatch_mcp`/`shutdown_mcp!` behavior, OS-random 256-bit handles,
+        digest-only authorization, monotonic expiry, lowering-only policy, sanitized failures, and focused
+        binding/decoded proof. Add only explicit Base64/Random standard-library dependencies; do not add wire,
+        executable, source, semantic-cache, ledger, rollout, aggregator, or legacy behavior.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.5.2`
+      Status: `pending`
+      Goal: Implement strict Julia MCP stdio framing, lexical preflight, canonical emission, cancellation,
+        sanitized logging, EOF/I/O cleanup, and registry release.
+      Depends on: `.10.9.5.1`
+      Acceptance: Add private synchronous `McpWire.jl` plus public `serve_mcp_stdio!` over caller-owned borrowed
+        `IO`; enforce exact line/depth/UTF-8/BOM/root/key/number/id boundaries, reconstruct number token kinds after
+        JSON3, emit canonical LF, preserve cancellation through flush, and release on EOF/read/write/flush failure
+        without async/network/SDK/file/CLI or admission movement.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.5.3`
+      Status: `pending`
+      Goal: Admit the Julia MCP implementation and runtime through one exact ordered twelve-role consumer.
+      Depends on: `.10.9.5.2`
+      Acceptance: Execute all twelve exact roles once through Julia's public server/native index plus required
+        private focused seams; advance only Julia to 4/5 implementations and 4/6 runtimes; register generated,
+        source, consumer, authority, mutation, and canonical-order owners; preserve transport bytes, other rows,
+        semantic APIs, primary CLI, and shared rollout pending.
+
+    - ID: `FUTURE-PARITY-BACKLOG.10.9.5.4`
+      Status: `pending`
+      Goal: Recompose committed Julia MCP owners unchanged and close `.10.9.5`.
+      Depends on: `.10.9.5.3`
+      Acceptance: Rerun the exact neutral + four generated bindings + Perl/Rust/Dart/Julia focused/admission chain
+        and canonical signoff without a replacement implementation, fixture, umbrella oracle, ledger movement,
+        or user-visible behavior; close Julia and hand the clean boundary to shared Lua `.10.9.6`.
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.6`
     Status: `pending`

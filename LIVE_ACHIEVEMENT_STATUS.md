@@ -1,5 +1,33 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Julia native MCP seams frozen before code
+
+Behavior-free `FUTURE-PARITY-BACKLOG.10.9.5.0` and ADR `0060` freeze one synchronous in-process Julia server
+around the admitted opaque immutable `SemanticIndex`. Generated Base64 binding, frozen schema/canonical runtime,
+secure decoded registry/dispatch, strict stdio, exact admission, and no-change closeout are dependency-ordered
+under `.1-.4`. The future public surface calls only `semantic_capabilities`, `semantic_query_neutral`, and
+`to_json`; it cannot load paths/source, parse/compile/execute, enable trace/observation, cache semantics, or add a
+primary-CLI mode, executable, network SDK, aggregator, or legacy adapter.
+
+Repository-routed Julia 1.12.6 / JSON3 1.14.3 probes prove OS-backed secure entropy, monotonic time, exact
+32-byte/43-character base64url handles, borrowed bounded `IO`, and the need for explicit lexical authority:
+JSON3 retains duplicate pairs but normalization keeps the last literal/escape-equivalent key, accepts malformed-
+UTF-8 `String`, and coerces `1.0`/`1e0` to integer values. The frozen wire therefore records numeric lexemes and
+reconstructs exact kinds after decoding, while MCP-owned canonical JSON sorts keys independently of the primary
+CLI. Base64 and Random will be explicit Julia standard-library dependencies; no third-party package is added.
+
+The normative transport and implementation ledger do not move in this planning leaf: 3/5 implementations + 3/6
+runtimes with rollout pending remains authoritative. No production, test, fixture, contract, generated binding,
+semantic API, or CLI behavior changes; generated binding/runtime and secure decoded server `.10.9.5.1` is the
+next clean-boundary owner after the planning commit.
+
+Signoff is complete. Focused proof passes neutral 35/10/10/68, all three byte-fresh bindings, Perl 35, Rust
+15 + 3 + 4 + 1, Dart 16/16, Julia semantic admission, and the unchanged 3/5 + 3/6 pending/58 ledger. Canonical CI
+passes Rust semantic 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment,
+moved-root execution, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 642 seconds. Knowledge Map 748/6,049, mdBook
+13,536 KiB / 79 files, all six doctrines, memory, whitespace, documentation-only classification, and exact
+rendered-book/empty-run cleanup pass. No push occurs before cadence 300.
+
 ## 2026-07-29 — Dart native MCP implementation composition-closed
 
 `FUTURE-PARITY-BACKLOG.10.9.4.4` recomposes every committed neutral, Perl, Rust, and Dart MCP owner unchanged from

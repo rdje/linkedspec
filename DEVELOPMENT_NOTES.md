@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.0` — Julia's codec needs lexical evidence, not replacement semantic
+  logic): JSON3 is suitable for the generated trusted bundle and admitted wire values, but its ordinary decode is
+  not itself the MCP boundary. It exposes duplicate pairs yet a normalized dictionary silently keeps the last
+  literal or escape-equivalent key, accepts an invalid-UTF-8 Julia `String`, and represents `1.0`/`1e0` as an
+  integer. Post-decode validation alone would therefore erase three contract-relevant distinctions.
+
+  ADR `0060` keeps one iterative wire scanner as the lexical authority. It validates UTF-8/JSON/key/depth/id
+  rules and records number tokens in traversal order. JSON3 decodes only after that proof with numbers forced to
+  `Float64`; a recursive converter consumes the recorded tokens, rebuilding integer lexemes exactly and retaining
+  fraction/exponent lexemes as floats before the frozen schema validator runs. This is smaller and safer than a
+  second JSON or semantic model while preventing codec coercion from weakening JSON Schema `integer` meaning.
+
+  The generated bundle uses Base64 rather than a Julia raw string because raw strings still transform
+  backslashes adjacent to quote delimiters and cannot promise byte-exact arbitrary canonical JSON. Core Base64 is
+  already needed for handles, so the generated module can carry alphabet-only data, verify the decoded SHA-256,
+  and remain filesystem-free. Production security uses exactly 32 bytes from OS-backed `RandomDevice`, elapsed
+  `time_ns()` milliseconds, SHA-256 authorization digests, and fixed-work comparison with a dummy digest.
+  Synchronous borrowed `IO` preserves the contract without tasks, async runtime, executable, or network SDK.
+
+  The public plan exports typed `McpServer` policy/error values and `register_index!`, `revoke_handle!`,
+  `dispatch_mcp`, `serve_mcp_stdio!`, and `shutdown_mcp!`; deterministic entropy/time/failure/pre-emission seams
+  stay private. `.1-.4` separate decoded implementation, strict wire, exact Julia admission, and no-change
+  closeout. Planning leaves the ledger at 3/5 + 3/6 pending and changes no production/test/fixture/contract/
+  semantic/CLI behavior.
+
+  Signoff preserves that boundary. Focused neutral/binding/Perl/Rust/Dart/Julia/ledger proof is green; complete
+  canonical CI passes Rust semantic 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, process
+  containment, moved-root execution, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 642 seconds. A first canonical
+  attempt under the enclosing Codex sandbox reached the process oracle but macOS refused the nested
+  `sandbox-exec` profile with status 71. Running the exact oracle and then the complete gate outside only that
+  outer enclosure passed; this distinguishes harness composition from an application or storage-policy failure.
+  Knowledge Map 748/6,049, the 13,536-KiB / 79-file mdBook rendering, six doctrines, memory, whitespace,
+  documentation-only classification, and exact generated cleanup also pass.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.4.4` — parent closeout should recompose owners, not create an umbrella
   oracle): Dart MCP already has separate normative transport, generated binding/runtime, decoded server, strict
   wire, admission consumer, and ledger owners. A new all-in-one closeout test would duplicate their authority and

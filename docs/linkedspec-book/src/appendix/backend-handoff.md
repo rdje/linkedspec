@@ -272,6 +272,13 @@ over caller-owned streams. Exact admission `.10.9.4.3` composes one ordered twel
 the formal ledger to 3/5 implementations + 3/6 runtimes with rollout pending and 58 rejected mutations.
 No-change closeout `.10.9.4.4` recomposes every committed neutral, Perl, Rust, and Dart owner unchanged, preserves
 the same ledger and all 58 mutations, closes parent `.10.9.4`, and hands the exact contract to Julia `.10.9.5`.
+Behavior-free Julia `.10.9.5.0` and ADR `0060` now freeze a generated Base64 contract module, private frozen
+runtime, synchronous native `McpServer`, strict UTF-8/duplicate/number-kind-preserving wire, exact Julia
+admission, and no-change closeout under `.1-.4`. Julia's existing `semantic_capabilities`,
+`semantic_query_neutral`, and `to_json` remain the sole semantic authority. OS-backed `RandomDevice`, monotonic
+`time_ns`, Base64, SHA-256, and borrowed `IO` satisfy the server without a third-party package, SDK, executable,
+or primary-CLI mode. The ledger remains 3/5 + 3/6 pending until `.10.9.5.3`; decoded implementation `.1` follows
+only after the clean planning commit.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the
