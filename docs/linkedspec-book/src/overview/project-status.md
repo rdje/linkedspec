@@ -28,7 +28,9 @@ containment, moved-root execution, CLI 66x2, Phase 0 1,031/1,031, and the comple
 `.10.9.6.3` now runs one ordered 202-assertion consumer unchanged on both ABIs. The complete Lua gate passes
 111+210+247+202 per runtime, governance rejects 114 mutations, and formal status is 5/5 implementations + 6/6
 runtimes. Canonical signoff passes all six doctrines, the unchanged neutral and five-implementation MCP chain,
-Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. Shared recurring rollout remains pending.
+Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-change `.10.9.6.4` recomposes the
+committed owners unchanged, passes Phase 0 1,031/1,031 in 652 seconds plus the same dual-ABI gate, and closes
+parent `.10.9.6`. Shared recurring rollout remains pending under `.10.9.7`.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
@@ -731,6 +733,8 @@ Three backbone items tracked major structural modernization — all done:
   release, and a narrow native entropy/clock seam unchanged on PUC Lua/LuaJIT. Exact admission `.3` now runs one
   202-assertion twelve-role consumer unchanged on both ABIs. Complete proof is 111 + 210 + 247 + 202 per ABI;
   governance rejects 114 mutations and formal status is 5/5 implementations + 6/6 runtimes with rollout pending.
+  No-change `.10.9.6.4` recomposes those owners without another oracle, closes parent `.10.9.6`, and hands the
+  clean unchanged boundary to recurring composition `.10.9.7`.
   Any future aggregator or
   legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 

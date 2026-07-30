@@ -1,8 +1,8 @@
 # ADR 0061: Lua MCP uses one literal contract binding and one dual-ABI in-process server
 
 - Date: 2026-07-29
-- Status: accepted; plan, decoded implementation, strict wire, and exact dual-ABI admission complete under
-  `.10.9.6.0-.3`; no-change closeout pending under `.10.9.6.4`
+- Status: accepted; plan, decoded implementation, strict wire, exact dual-ABI admission, and no-change parent
+  closeout complete under `.10.9.6.0-.4`
 - Tags: architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -157,9 +157,11 @@ the existing private focused seams cover only pre-emission cancellation and inje
 is exactly 5/5 implementations plus 6/6 runtimes with shared rollout pending, and governance rejects 114
 mutations without a production-source or transport-byte change.
 
-Canonical signoff passes all six doctrines, the unchanged 35/10/10/68 transport boundary, all five byte-fresh
-bindings, the complete six-runtime admission chain, Phase 0 1,031/1,031 in 659 seconds, and the full PUC
-Lua/LuaJIT package gate. Step `.4` remains the behavior-free committed-owner closeout.
+Canonical admission signoff passes all six doctrines, the unchanged 35/10/10/68 transport boundary, all five
+byte-fresh bindings, the complete six-runtime admission chain, Phase 0 1,031/1,031 in 659 seconds, and the full
+PUC Lua/LuaJIT package gate. Step `.4` then recomposes those committed owners without production, fixture,
+contract, or ledger change. Its independent canonical closeout passes Phase 0 1,031/1,031 in 652 seconds and the
+same complete dual-ABI Lua gate, closing parent `.10.9.6` while recurring rollout remains `.10.9.7`.
 
 The same neutral corpus, public decoded and stdio paths, exact semantic bytes, all raw/lifecycle classifications,
 production 1,024-handle boundary, authority/privacy fences, and narrow private seams used by prior admissions are

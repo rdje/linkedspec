@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.4 — close the shared Lua MCP implementation
+
+Recomposed the committed neutral MCP transport, five generated native implementations, and all six runtime
+admissions without adding a replacement implementation, test, fixture, consumer, or umbrella oracle. The exact
+ledger remains 5/5 implementations + 6/6 runtimes, shared rollout pending, with 114 rejected mutations and the
+normative transport digest unchanged.
+
+Canonical signoff passes all six doctrines, neutral MCP 35/10/10/68, five byte-fresh bindings, Perl 22+13, Rust
+15+3+4+1, Dart 15+1, Julia 48+139+170+178, Lua admission 202x2, Rust semantic 1/1 in 81.30 seconds, Dart 1/1,
+Julia 416/416 in 28.9 seconds, repository containment, moved-root execution, primary CLI 66x2, RAM 63%, Phase 0
+1,031/1,031 in 652 seconds, the complete PUC Lua/LuaJIT 111+210+247+202/package-177/corpus/storage gate, Knowledge
+Map 754/6,110, and a 79-file / 13,676-KiB mdBook rendering.
+
+The closeout changes documentation only. Parent `.10.9.6` is closed without production, runtime, fixture,
+contract, ledger, semantic, CLI, topology, aggregator, or legacy movement. Recurring six-runtime MCP composition
+`.10.9.7` is the next clean-boundary owner.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.6.3 — admit the shared Lua MCP implementation
 
 Added one Lua-5.1-compatible external admission consumer and run it unchanged, independently, on PUC Lua and

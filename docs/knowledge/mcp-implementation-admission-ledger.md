@@ -98,8 +98,10 @@ owners plus identical 111 + 210 focused assertions on PUC Lua and LuaJIT. Strict
 iterative transport unchanged on both ABIs. Exact admission `.3` now runs one shared consumer independently on
 PUC Lua and LuaJIT, advances the existing Lua owners to 5/5 implementations plus 6/6 runtimes, and leaves
 recurring rollout pending. Canonical CI passes all six doctrines, the unchanged 35/10/10/68 transport boundary,
-Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-change closeout `.4` follows after
-the clean admission commit.
+Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-change closeout `.4` now recomposes
+the committed neutral, five implementation, and six runtime owners, preserves 5/5 + 6/6 pending/114, passes an
+independent canonical gate with Phase 0 1,031/1,031 in 652 seconds, and closes parent `.10.9.6`. Recurring
+composition `.10.9.7` remains the sole owner of rollout movement.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],

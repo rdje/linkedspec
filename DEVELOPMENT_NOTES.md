@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.4` — closeout is recomposition evidence, not a sixth implementation
+  or a second expected-response model): The committed neutral materializer/validator, five binding generators,
+  five native servers, six runtime consumers, and admission ledger already partition the authority needed to
+  prove completion. The closeout therefore reruns those owners unchanged and records their conjunction; it adds
+  no umbrella oracle, facade, fixture, consumer, or status mechanism that could drift from the actual product.
+
+  This preserves the approved topology exactly: one normative contract, five native source implementations, and
+  six runtime admissions because one Lua-5.1-compatible source qualifies independently on PUC Lua and LuaJIT.
+  The ledger remains 5/5 + 6/6 with shared rollout pending and all 114 mutations rejected. Parent closure changes
+  project state, not protocol or runtime behavior; recurring `.10.9.7` owns the first six-runtime recurring
+  composition and the rollout-row transition.
+
+  Final canonical composition passes neutral MCP 35/10/10/68, all five byte-fresh bindings, the complete
+  Perl/Rust/Dart/Julia/Lua owner chain, Rust semantic 81.30 seconds, Julia semantic 28.9 seconds, containment,
+  moved-root execution, CLI 66x2, RAM 63%, Phase 0 1,031/1,031 in 652 seconds, and the complete dual-ABI Lua
+  package gate. The closeout diff remains documentation-only.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.6.3` — one source implementation can support two independently
   admitted ABI runtimes without duplicating expected behavior): The ledger distinguishes implementation identity
   from runtime qualification. Lua contributes one generated/runtime/server/wire source graph and one server name,

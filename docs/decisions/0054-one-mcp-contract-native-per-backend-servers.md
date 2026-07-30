@@ -1,8 +1,8 @@
 # ADR 0054: One MCP contract is implemented by native per-backend servers
 
 - Date: 2026-07-29
-- Status: accepted; Perl/Rust/Dart/Julia parents closed at 4/5 implementations + 4/6 runtimes with rollout
-  pending; Lua dual-ABI implementation/admission is planned by ADR `0061`
+- Status: accepted; all five native implementation parents and six runtime admissions are closed at 5/5 + 6/6;
+  recurring rollout remains pending under `.10.9.7`
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context

@@ -204,8 +204,10 @@ filesystem/weak/wall-clock fallback. Focused proof passes 111 generated/runtime,
 strict-wire assertions per ABI. Exact admission uses one external Lua-5.1-compatible consumer unchanged on PUC
 Lua and LuaJIT; each runtime passes 202 assertions across all twelve governed roles, including the production
 1,024-handle boundary. Governance rejects 114 mutations and formal MCP status is now 5/5 implementations + 6/6
-runtimes. Canonical signoff passes Phase 0 1,031/1,031 in 659 seconds plus the full PUC Lua/LuaJIT package gate;
-shared rollout remains pending for recurring six-runtime composition `.10.9.7`.
+runtimes. Canonical admission signoff passes Phase 0 1,031/1,031 in 659 seconds plus the full PUC Lua/LuaJIT
+package gate. No-change closeout `.10.9.6.4` recomposes those owners unchanged, passes an independent canonical
+gate with Phase 0 1,031/1,031 in 652 seconds, and closes parent `.10.9.6`; shared rollout remains pending for
+recurring six-runtime composition `.10.9.7`.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches

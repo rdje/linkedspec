@@ -15,13 +15,15 @@ answers:
   - what is the public Lua MCP API
   - does Lua MCP require LuaRocks or an MCP SDK
   - when will Lua advance the MCP implementation ledger
+  - is the Lua MCP implementation parent closed
 date: 2026-07-29
-status: architecture, decoded implementation, strict wire, and exact dual-ABI admission complete; closeout pending under FUTURE-PARITY-BACKLOG.10.9.6.4
+status: architecture, decoded implementation, strict wire, exact dual-ABI admission, and parent closeout complete
 tags: [lua, luajit, mcp, generated-binding, json, stdio, security, dual-abi, parity]
 evidence: "FUTURE-PARITY-BACKLOG.10.9.6.0 and ADR 0061 retrieve the admitted Lua semantic/JSON/SHA/toolchain owners and measure one exact implementation architecture on repository-routed PUC Lua 5.4.8 and LuaJIT 2.1 without changing behavior or the 4/5 + 4/6 MCP ledger."
 evidence_update_2026_07_29_decoded: "FUTURE-PARITY-BACKLOG.10.9.6.1 implements the generated 82,827-byte literal binding, digest/schema-verifying frozen runtime, protected secure registry/decoded dispatch, lazy root API, and one common C99 entropy/monotonic-time module. Exact focused proof passes 111 + 210 assertions on each ABI; governance rejects 94 mutations while formal status remains 4/5 + 4/6 pending strict wire and admission."
 evidence_update_2026_07_29_stdio: "FUTURE-PARITY-BACKLOG.10.9.6.2 implements private iterative mcp_wire.lua plus public server:serve_stdio over caller-owned streams. JSON-pointer token metadata preserves integer-only schema outcomes across LuaJIT collapse; bounded framing, canonical LF, cancellation-through-flush, EOF/I/O release, and fixed diagnostics pass 247 assertions per ABI. Governance rejects 98 mutations while formal status remains 4/5 + 4/6 pending exact admission."
 evidence_update_2026_07_29_admission: "FUTURE-PARITY-BACKLOG.10.9.6.3 runs one unchanged 202-assertion twelve-role consumer independently on PUC Lua and LuaJIT. The ledger reaches 5/5 implementations + 6/6 runtimes, rollout pending, with 114 rejected mutations; canonical CI passes Phase 0 1,031/1,031 in 659 seconds and the complete dual-ABI Lua opt-in."
+evidence_update_2026_07_29_closeout: "FUTURE-PARITY-BACKLOG.10.9.6.4 recomposes the committed neutral, five implementation, and six runtime owners unchanged. Canonical CI passes Phase 0 1,031/1,031 in 652 seconds plus the complete dual-ABI Lua gate; the ledger remains 5/5 + 6/6 pending/114 and parent .10.9.6 closes without production, fixture, contract, or topology movement."
 last_verified: 2026-07-29
 reverify:
   - "bash tools/run_lua_local.sh"
@@ -62,10 +64,10 @@ protected semantic index and a copied nonempty binary authorization string of at
 SHA-256 digest, uses fixed-work comparison and 43-character base64url handles, and calls only index
 `capabilities()` or `query_neutral()`.
 
-Implementation order is generated/runtime/decoded/native-system `.1` (complete), strict stdio `.2` (complete),
-identical dual-ABI admission `.3` (canonically complete at 202 assertions per ABI and 114 mutations), and unchanged
-closeout `.4`. Formal MCP status is now 5/5 implementations plus 6/6 runtimes. Recurring rollout remains pending
-and separately owned by `.10.9.7`.
+Implementation order is generated/runtime/decoded/native-system `.1`, strict stdio `.2`, identical dual-ABI
+admission `.3`, and unchanged closeout `.4`; all are complete. The closeout recomposes the committed authorities
+without another oracle or implementation and closes parent `.10.9.6`. Formal MCP status remains 5/5
+implementations plus 6/6 runtimes. Recurring rollout remains pending and separately owned by `.10.9.7`.
 
 Related facts: [[mcp-native-server-topology]], [[mcp-implementation-admission-ledger]],
 [[mcp-2026-07-28-stdio-contract]], [[lua-mcp-implementation-admission]], [[lua-semantic-introspection-admission]],

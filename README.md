@@ -1103,7 +1103,8 @@ content migration exists yet.
   cancellation-through-flush, caller-owned streams, and sanitized EOF/I/O release in 247 assertions per ABI.
   Exact admission `.3` now runs one ordered 202-assertion consumer unchanged on both ABIs. The complete Lua gate
   passes 111+210+247+202 per runtime, and governance rejects 114 mutations while advancing only the existing Lua
-  implementation and both runtime rows to 5/5 + 6/6. Shared rollout remains pending for `.10.9.7`. There is no
+  implementation and both runtime rows to 5/5 + 6/6. No-change closeout `.10.9.6.4` recomposes every committed
+  owner unchanged and closes the shared Lua parent; recurring rollout remains pending for `.10.9.7`. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1565,7 +1566,9 @@ content migration exists yet.
   logging, and EOF/I/O cleanup in 247 assertions per ABI and 98 governance mutations. Exact shared admission
   `.10.9.6.3` adds no production behavior: one 202-assertion consumer runs unchanged on both ABIs, governance
   reaches 114 mutations, and formal status becomes 5/5 implementations + 6/6 runtimes with rollout pending.
-  Canonical signoff passes Phase 0 1,031/1,031 in 659 seconds plus the complete dual-ABI Lua opt-in.
+  Canonical admission signoff passes Phase 0 1,031/1,031 in 659 seconds plus the complete dual-ABI Lua opt-in.
+  No-change `.10.9.6.4` then recomposes the exact committed chain, passes Phase 0 1,031/1,031 in 652 seconds plus
+  the same dual-ABI gate, and closes parent `.10.9.6`; recurring composition `.10.9.7` is next.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

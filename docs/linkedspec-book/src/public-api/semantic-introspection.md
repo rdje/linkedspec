@@ -3466,8 +3466,8 @@ The dependency order is:
 | `.10.9.6.1` | generated Lua literal binding/runtime, native system seam, secure registry, and decoded server | implemented; 111 + 210 assertions per ABI, formal ledger unchanged |
 | `.10.9.6.2` | strict shared Lua stdio and lifecycle | implemented; 247 assertions per ABI, 98 governance mutations, formal admission unchanged |
 | `.10.9.6.3` | exact one-source implementation admission on PUC Lua and LuaJIT | complete; one shared 202-assertion consumer per ABI, 5/5 + 6/6, rollout pending, 114 mutations, canonical signoff green |
-| `.10.9.6.4` | committed-owner no-change shared Lua closeout | pending |
-| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | active; implementation and dual-ABI admission complete, no-change closeout next |
+| `.10.9.6.4` | committed-owner no-change shared Lua closeout | complete; unchanged recomposition and canonical signoff green |
+| `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | closed; `.0-.4` complete at unchanged 5/5 + 6/6 pending/114 |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
 
@@ -3631,12 +3631,12 @@ the next clean-boundary owner.
 
 Behavior-free `.10.9.6.0` and ADR `0061` select one implementation source, not a PUC implementation plus a
 LuaJIT implementation. Both ABIs execute the same generated binding, frozen runtime, protected decoded server,
-strict wire, and public API; they will also execute the same admission consumer and ordered role list.
+strict wire, public API, admission consumer, and ordered role list.
 Their separately compiled native
 modules and separate formal runtime rows are compatibility proofs, not semantic or transport forks. Both report
 wire identity `linkedspec-semantic-lua`.
 
-The production ownership is deliberately narrow; `.1-.2` implement every row:
+The production ownership is deliberately narrow; `.1-.4` implement, admit, and close every row:
 
 | Owner | Responsibility |
 |---|---|
@@ -3737,7 +3737,9 @@ without status movement. Exact `.3` now runs one unchanged 202-assertion consume
 LuaJIT, advancing the ledger to 5/5 implementations plus 6/6 runtimes and governance to 114 mutations. Shared
 recurring rollout remains separately pending under `.10.9.7`. Canonical signoff passes the unchanged 35-frame /
 10-raw / 10-lifecycle / 68-mutation transport boundary, all six runtime admissions, Phase 0 1,031/1,031 in 659
-seconds, and the complete dual-ABI Lua package gate.
+seconds, and the complete dual-ABI Lua package gate. No-change `.4` independently recomposes the same committed
+owners, passes Phase 0 1,031/1,031 in 652 seconds and the complete dual-ABI gate, preserves pending/114 without
+production or ledger movement, and closes parent `.10.9.6`.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

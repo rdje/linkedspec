@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Shared Lua MCP no-change closeout signoff-complete
+
+Exact admission `.10.9.6.3` is committed at clean `4eb008d8`; its brief is cleared, the tree is clean, and exact
+rendered-book/managed-run/non-cache-bytecode residue checks pass. Closeout `.10.9.6.4` completes task-tree-first
+from that boundary by recomposing the committed neutral transport, five generated bindings and native servers,
+six runtime admission consumers, complete dual-ABI Lua package, and existing governance unchanged.
+
+Formal state must remain exactly 5/5 implementations + 6/6 runtimes, shared rollout pending, with 114 rejected
+mutations and the normative transport digest unchanged. No replacement implementation/test/fixture/consumer,
+ledger movement, semantic/source/parser/compiler/executor/trace/cache/CLI behavior, aggregator, or legacy adapter
+belongs to this leaf. The full `LINKEDSPEC_RUN_LUA=1` canonical gate passes all six doctrines; neutral MCP
+35/10/10/68; all five byte-fresh bindings; Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, and Lua
+202x2; the exact pending/114 ledger; Rust semantic 1/1 in 81.30 seconds, Dart 1/1, Julia 416/416 in 28.9 seconds;
+containment and moved-root execution; primary CLI 66x2; RAM 63%; Phase 0 1,031/1,031 in 652 seconds; and complete
+PUC Lua/LuaJIT 111+210+247+202/package-177/corpus/storage proof.
+
+Knowledge Map is synchronized at 754 facts / 6,110 question keys and mdBook renders 79 files at 13,676 KiB.
+
+No generator, production, runtime, test, fixture, transport, contract, ledger, semantic, source, parser/compiler/
+executor, trace/cache, CLI, aggregator, or legacy behavior changes. Parent `.10.9.6` closes without status or
+topology movement. Recurring six-runtime composition `.10.9.7` follows only after this leaf's commit,
+brief-clear, exact cleanup, and clean proof.
+
 ## 2026-07-29 — Exact shared Lua MCP admission signoff-complete
 
 Strict-wire leaf `FUTURE-PARITY-BACKLOG.10.9.6.2` is committed at clean `15f537df`, its brief is cleared, and

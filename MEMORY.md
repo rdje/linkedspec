@@ -5,23 +5,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `15f537df` — `FUTURE-PARITY-BACKLOG.10.9.6.2 - implement Lua MCP strict stdio` (90/300; no
+- latest_commit: `4eb008d8` — `FUTURE-PARITY-BACKLOG.10.9.6.3 - admit Lua MCP implementation` (91/300; no
   push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.6.2`; shared iterative strict wire, caller-owned stdio,
-  247x2 proof, governance, documentation, and canonical signoff are committed.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.6.3` — exact shared Lua MCP implementation/runtime admission, active
-  task-tree-first from clean strict-stdio commit `15f537df`.
-- active_scope: add one Lua-5.1-compatible external ordered twelve-role consumer unchanged on PUC Lua/LuaJIT;
-  execute it independently on both ABIs, advance only Lua to 5/5 implementations and both runtimes to 6/6, and
-  keep shared rollout pending for `.10.9.7`.
-- active_progress: implementation, lockstep, and canonical signoff are complete. One identical 202-assertion twelve-role
-  consumer passes on PUC Lua/LuaJIT; complete Lua passes 111+210+247+202x2, package 177x2, CLI 66x2, corpus
-  105/105, and storage 16x3. The exact ledger is 5/5 + 6/6 rollout pending with 114 rejected mutations. Canonical
-  passes through Phase 0 1,031/1,031 in 659s plus the complete Lua opt-in; commit/cleanup are next.
-- active_exclusions: no production server/wire/contract/fixture/test-hook/semantic/source/parser/compiler/
-  executor/trace/cache/primary-CLI change, ABI fork, second implementation, SDK/network/async/thread/channel,
-  premature shared rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: no-change shared Lua closeout `.10.9.6.4`; no push before 300.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.6.3`; one unchanged 202-assertion consumer admits the fifth
+  implementation independently on PUC Lua/LuaJIT at 5/5 + 6/6 pending/114 with complete canonical signoff.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.6.4` — no-change committed-owner Lua MCP closeout, active task-tree-first
+  from clean exact-admission commit `4eb008d8`.
+- active_scope: recompose the committed neutral transport, five bindings/servers, six runtime admissions, exact
+  5/5 + 6/6 pending/114 ledger, dual-ABI Lua package, and canonical proof unchanged; close parent `.10.9.6`.
+- active_progress: unchanged-owner recomposition and canonical signoff pass. Exact authority is MCP 35/10/10/68,
+  five byte-fresh bindings, pending/114 ledger, Rust semantic 81.30s, Julia semantic 28.9s, RAM 63%, Phase 0
+  1,031/1,031 in 652s, complete dual-ABI Lua proof, KM 754/6,110, and mdBook 79/13,676 KiB.
+  Documentation-only cleanup/commit are next.
+- active_exclusions: no replacement implementation/test/fixture/consumer/oracle, status/digest movement,
+  semantic/source/parser/compiler/executor/trace/cache/primary-CLI change, ABI fork, SDK/network/async/thread/
+  channel, premature shared rollout, aggregator, or legacy adapter.
+- next_after_clean_commit: recurring six-runtime MCP composition `.10.9.7`; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -46,13 +45,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 90/300 after `15f537df`; no push.
+- push_policy: hard lock at 300 new local commits; counter 91/300 after `4eb008d8`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: current `.3` signoff is MCP 35/10/10/68, five byte-fresh bindings, ledger 5/5 + 6/6
-  pending/114, Rust semantic 1/1 80.95s, Dart 1/1, Julia 416/416 29.4s, containment/moved-root, CLI 66x2, RAM 62%,
-  Phase 0 1,031/1,031 in 659s, and complete Lua 111+210+247+202x2/package 177x2/CLI 66x2/corpus 105/storage 16x3.
-- blockers: none. next: regenerate/stage exact lockstep, cleanup, commit/clear/prove clean, then activate no-change
-  closeout `.10.9.6.4`; no push.
+- canonical_state: current `.4` signoff is MCP 35/10/10/68, five byte-fresh bindings, ledger 5/5 + 6/6
+  pending/114, Rust semantic 1/1 81.30s, Dart 1/1, Julia 416/416 28.9s, containment/moved-root, CLI 66x2, RAM 63%,
+  Phase 0 1,031/1,031 in 652s, and complete Lua 111+210+247+202x2/package 177x2/CLI 66x2/corpus 105/storage 16x3.
+- blockers: none. next: finish lockstep and exact cleanup, commit/clear/prove `.10.9.6` clean, then activate
+  recurring six-runtime composition `.10.9.7`; no push.

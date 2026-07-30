@@ -74,6 +74,9 @@ closes parent `.10.9.5`, and adds no replacement implementation, fixture, or umb
 the current ledger is 5/5 implementations + 6/6 runtimes with recurring rollout pending and 114 rejected
 implementation/admission mutations. Its canonical signoff passes all six doctrines, the exact cross-runtime MCP
 chain, Phase 0 1,031/1,031 in 659 seconds, and the complete PUC Lua/LuaJIT package gate.
+No-change `.10.9.6.4` reruns that exact committed sequence, passes Phase 0 1,031/1,031 in 652 seconds plus the
+same complete dual-ABI gate, preserves pending/114, and closes the shared Lua parent without a replacement test,
+fixture, consumer, implementation, or umbrella oracle.
 
 Behavior-free Julia plan `.10.9.5.0` and ADR `0060` freeze the generated-Base64-binding -> decoded-server ->
 strict-number-preserving-stdio -> exact-admission -> no-change-closeout sequence. Leaves `.1-.3` now implement

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **754** facts · **6108** question keys.
+> **754** facts · **6110** question keys.
 
 ## Questions → fact
 
@@ -3469,6 +3469,8 @@
 - "is the LinkedSpec SSD project data migration complete" -> [project-data-ssd-storage-closeout](docs/knowledge/project-data-ssd-storage-closeout.md) · 2026-07-27 · reverify: `bash scripts/check_project_data_storage_locality.sh && bash tools/test_project_data_process_locality.sh && bash tools/project_data_run.sh --list`
 - "is the Lua MCP decoded server implemented" -> [lua-mcp-decoded-server](docs/knowledge/lua-mcp-decoded-server.md) · 2026-07-29
 - "is the Lua MCP implementation admitted" -> [lua-mcp-implementation-admission](docs/knowledge/lua-mcp-implementation-admission.md) · 2026-07-29
+- "is the Lua MCP implementation parent closed" -> [lua-native-mcp-server-plan](docs/knowledge/lua-native-mcp-server-plan.md) · 2026-07-29
+- "is the Lua MCP parent closed" -> [lua-mcp-implementation-admission](docs/knowledge/lua-mcp-implementation-admission.md) · 2026-07-29
 - "is the Lua array helper family complete" -> [lua-runtime-array-helper-closeout](docs/knowledge/lua-runtime-array-helper-closeout.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && rg -n 'local ARRAY_HELPERS|local PURE_ARRAY_HELPERS|ARRAY_END_MUTATIONS|split_tagged_records' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "is the Lua harray helper family complete" -> [lua-runtime-harray-helper-closeout](docs/knowledge/lua-runtime-harray-helper-closeout.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && perl tools/check_capability_conformance.pl && rg -n 'local HASH_HELPERS|local PURE_HASH_HELPERS|evaluate_hash_helper|execute_hash_set_key_statement' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "is the Lua primary CLI parent closed" -> [lua-primary-cli-no-drift-closeout](docs/knowledge/lua-primary-cli-no-drift-closeout.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'LUA_CPATH|LuaRocks|runtime-corpus-primary-cli|corpus/status|8.1' lua/README.md docs/linkedspec-book/src/public-api/native-spec-loading.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/LUA-BACKEND-PARITY.md`
@@ -8851,8 +8853,8 @@ _Lua MCP decoded dispatch is one protected source on PUC Lua and LuaJIT_
 ### lua-mcp-implementation-admission
 _One Lua MCP implementation is admitted independently on PUC Lua and LuaJIT_
 
-- **answers:** is the Lua MCP implementation admitted | which test admits Lua MCP | how many roles does the Lua MCP admission consumer execute | how many assertions does Lua MCP admission run | do PUC Lua and LuaJIT use the same MCP admission consumer | how many MCP implementations and runtimes are admitted after Lua | how many MCP implementation admission mutations are rejected after Lua | does Lua MCP admission change the server or transport contract | what MCP work follows Lua admission
-- **date:** 2026-07-29 · **status:** exact one-source dual-ABI admission implemented and canonically signed off; clean closeout pending
+- **answers:** is the Lua MCP implementation admitted | which test admits Lua MCP | how many roles does the Lua MCP admission consumer execute | how many assertions does Lua MCP admission run | do PUC Lua and LuaJIT use the same MCP admission consumer | how many MCP implementations and runtimes are admitted after Lua | how many MCP implementation admission mutations are rejected after Lua | does Lua MCP admission change the server or transport contract | what MCP work follows Lua admission | is the Lua MCP parent closed
+- **date:** 2026-07-29 · **status:** exact one-source dual-ABI admission and no-change parent closeout complete
 - **evidence:** `FUTURE-PARITY-BACKLOG.10.9.6.3 adds one 202-assertion twelve-role consumer source run unchanged on PUC Lua and LuaJIT. The complete Lua gate passes 111+210+247+202 per ABI, package 177x2, CLI 66x2, corpus 105/105, and storage 16x3. The formal checker reports 5/5 implementations + 6/6 runtimes, shared rollout pending, with 114 rejected mutations. Canonical CI passes all six doctrines and Phase 0 1,031/1,031 in 659 seconds plus the full dual-ABI Lua opt-in.`
 - **source:** [`docs/knowledge/lua-mcp-implementation-admission.md`](docs/knowledge/lua-mcp-implementation-admission.md)
 
@@ -8877,8 +8879,8 @@ _Lua passes one caller-owned emitter through the complete native parser pipeline
 ### lua-native-mcp-server-plan
 _Lua MCP is one literal-bound native server source admitted on PUC Lua and LuaJIT_
 
-- **answers:** how will LinkedSpec implement the Lua MCP server | does Lua MCP have one implementation or two | do PUC Lua and LuaJIT use the same MCP source | how does Lua MCP obtain secure random bytes | how does Lua MCP measure monotonic expiry | does Lua MCP read /dev/urandom | how does Lua MCP preserve JSON integer versus number kinds | why does Lua MCP read stdio one byte at a time | how is the MCP contract embedded in Lua | does Lua MCP use Base64 for the contract bundle | what is the public Lua MCP API | does Lua MCP require LuaRocks or an MCP SDK | when will Lua advance the MCP implementation ledger
-- **date:** 2026-07-29 · **status:** architecture, decoded implementation, strict wire, and exact dual-ABI admission complete; closeout pending under FUTURE-PARITY-BACKLOG.10.9.6.4
+- **answers:** how will LinkedSpec implement the Lua MCP server | does Lua MCP have one implementation or two | do PUC Lua and LuaJIT use the same MCP source | how does Lua MCP obtain secure random bytes | how does Lua MCP measure monotonic expiry | does Lua MCP read /dev/urandom | how does Lua MCP preserve JSON integer versus number kinds | why does Lua MCP read stdio one byte at a time | how is the MCP contract embedded in Lua | does Lua MCP use Base64 for the contract bundle | what is the public Lua MCP API | does Lua MCP require LuaRocks or an MCP SDK | when will Lua advance the MCP implementation ledger | is the Lua MCP implementation parent closed
+- **date:** 2026-07-29 · **status:** architecture, decoded implementation, strict wire, exact dual-ABI admission, and parent closeout complete
 - **evidence:** `FUTURE-PARITY-BACKLOG.10.9.6.0 and ADR 0061 retrieve the admitted Lua semantic/JSON/SHA/toolchain owners and measure one exact implementation architecture on repository-routed PUC Lua 5.4.8 and LuaJIT 2.1 without changing behavior or the 4/5 + 4/6 MCP ledger.`
 - **source:** [`docs/knowledge/lua-native-mcp-server-plan.md`](docs/knowledge/lua-native-mcp-server-plan.md)
 

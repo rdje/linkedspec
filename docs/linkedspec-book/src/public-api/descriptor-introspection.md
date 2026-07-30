@@ -62,10 +62,10 @@ route to the native servers.
 The neutral schema, fixtures, exact evaluator, and 105-mutation gate are executable under
 `FUTURE-PARITY-BACKLOG.10.2`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted through exact native
 semantic APIs and composed 12-role consumers; recurring native rollout is complete. `.10.9.1-.7` own the MCP
-contract, five implementations, and six-runtime admission, while `.10.10` owns public closeout. Behavior-free
-Lua `.10.9.6.0` and ADR `0061` freeze the final one-source implementation architecture; decoded leaf `.1` now
-implements its generated/frozen/server/native-system owners identically on both ABIs. No formal runtime status
-changes until the same consumer admits PUC Lua and LuaJIT under `.10.9.6.3`.
+contract, five implementations, and six-runtime admission, while `.10.10` owns public closeout. Shared Lua
+`.10.9.6.0-.4` and ADR `0061` now complete the final one-source implementation: one consumer admits the unchanged
+source independently on PUC Lua and LuaJIT, the ledger is 5/5 implementations + 6/6 runtimes with recurring
+rollout pending, and no-change closeout closes parent `.10.9.6`.
 [Semantic Introspection](semantic-introspection.md) documents the exact neutral model and current rollout.
 
 For orientation, the executable neutral contract represents “describe `Top`, with spans but no source text” as:
