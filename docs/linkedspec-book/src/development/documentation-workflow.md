@@ -12,7 +12,8 @@ the book or continuity owner first, then link from README only when that destina
 ADR `0063` and `README_POLICY.md` govern that boundary. The adopted budget is at most 128 lines and 6,144 bytes,
 derived from a reviewed 105-line / 5,072-byte lossless prototype. The registered `README-STABILITY` doctrine
 enforces both limits; raising either requires a new accepted, indexed decision record rather than an ordinary
-feature edit. Policy/checker admission was implemented by `README-STABILITY-POLICY.1` and is checked with:
+feature edit. Policy/checker admission was implemented by `README-STABILITY-POLICY.1`, recomposed unchanged and
+closed by `.2`, and is checked with:
 
 ```bash
 bash scripts/check_readme_stability.sh

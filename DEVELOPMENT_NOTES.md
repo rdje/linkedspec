@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`README-STABILITY-POLICY.2` — closeout proves composition, not another README rewrite): The
+  implementation commit `ca846e7a` is the complete policy/content/enforcement boundary. Closeout changes no
+  landing-page byte, cap, policy rule, checker branch, capability owner, or public example. Git showed only the
+  owning `.2` task record before verification; the route table therefore remains the exact `.0` inventory, while
+  27/27 retained local links and the quick start independently reprove usability.
+
+  All eight documentation-sensitive owners remain exact: cursor 74/8+0/60; logical 19/12/26; root 24/17/54;
+  duplicate 21/11/59; diagnostic 8+0/20; repeated 8+0/54; uniform 51/12/9; selector 59/25/0. The second canonical
+  gate passes MCP 5/5 + 6/6 pending/114, Rust semantic 82.85 seconds, Julia 416/416 in 29.3 seconds, cursor 288,
+  containment/moved-root, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663 seconds. This conjunction closes the
+  adoption without creating a second policy oracle or drifting the canonical destinations.
+
 - 2026-07-29 (`README-STABILITY-POLICY.1` — enforce the commit snapshot, not a potentially different working
   copy): The checker selects the git index whenever any staged change exists, so pre-commit evaluates the exact
   README/policy/ADR snapshot being committed. With no staged changes it evaluates the working tree, which keeps

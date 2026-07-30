@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Bounded README adoption closeout signoff-complete
+
+Implementation leaf `.1` is committed at clean `ca846e7a` (95/300, no push), its brief is cleared, and exact
+rendered-book/managed-run residue is absent. Closeout `.2` activates task-tree-first from that boundary and
+recomposes the committed policy, 105-line / 5,072-byte landing page, hard 128-line / 6,144-byte budgets, seventh
+doctrine, checker, and canonical destinations unchanged.
+
+The exact quick start returns the expected nested JSON; 27/27 local links exist; all seven doctrines and eight
+documentation-sensitive public owners pass at cursor 74/8+0/60 and selector 59/25/0; Knowledge Map is 756/6,129;
+memory is 57/60; and mdBook builds. Full canonical closeout passes MCP 5/5 + 6/6 pending/114, Rust semantic 82.85
+seconds, Julia 416/416 in 29.3 seconds, cursor 288, containment/moved-root, CLI 66x2, RAM 64%, and Phase 0
+1,031/1,031 in 663 seconds.
+
+The adoption parent is closed without implementation or behavior movement. After `.2` commit/brief-clear/clean,
+the frontier returns to recurring MCP `.10.9.7.1`. Project-level licensing remains independent proposed `.3`.
+
 ## 2026-07-29 — Bounded README and seventh doctrine implemented
 
 Planning leaf `.0` is committed at clean `adcc89fe` (94/300, no push), its brief is zero bytes, and rendered/

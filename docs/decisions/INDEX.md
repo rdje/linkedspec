@@ -73,7 +73,7 @@ changed* lives in git (layer D), not here.
 | [0060](0060-julia-native-mcp-server-seams.md) | Julia MCP uses a generated contract module and a synchronous in-process server | 2026-07-29 | accepted; `.0-.4` implementation/admission/parent closeout complete | architecture, mcp, julia, embedding, handles, authorization, json, stdio, security, portability |
 | [0061](0061-lua-native-mcp-server-seams.md) | Lua MCP uses one literal contract binding and one dual-ABI in-process server | 2026-07-29 | accepted; plan, implementation, dual-ABI admission, and parent closeout complete | architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability |
 | [0062](0062-recurring-mcp-six-runtime-composition.md) | Recurring MCP proof composes six runtimes and all twenty semantic responses | 2026-07-29 | accepted plan; behavior and rollout unchanged until `.10.9.7.1` | architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity |
-| [0063](0063-bounded-readme-landing-page.md) | README is a bounded stable landing page | 2026-07-29 | accepted; content and enforcement implemented by `README-STABILITY-POLICY.1` | documentation, readme, doctrine, maintenance, navigation, local-ci |
+| [0063](0063-bounded-readme-landing-page.md) | README is a bounded stable landing page | 2026-07-29 | accepted; content/enforcement implemented by `.1`; adoption closed by `.2` | documentation, readme, doctrine, maintenance, navigation, local-ci |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

@@ -8,14 +8,13 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Active README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
+Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed
 105-line / 5,072-byte trim; hard maxima are 128 lines / 6,144 bytes. `.0` is committed at `adcc89fe`; `.1` has
-adopted `README_POLICY.md`, the exact trim, and registered enforcement and is canonical-signoff-complete awaiting
-its per-leaf commit; `.2`
-recomposes unchanged before MCP
-work resumes. The absence of a project-level license is stated truthfully and tracked separately in proposed
-`.3`; nested/vendor terms are not authority to choose one.
+adopted `README_POLICY.md`, the exact trim, and registered enforcement at `ca846e7a`; `.2` recomposes those owners
+unchanged under a second canonical gate and closes the adoption critical path. Recurring MCP `.10.9.7.1`
+resumes after the clean closeout commit. The absence of a project-level license is stated truthfully and tracked
+separately in proposed `.3`; nested/vendor terms are not authority to choose one.
 
 Completed critical project-data locality lane: ADR `0053` plus `PROJECT-DATA-SSD-ROOTING` require every project-owned
 artifact, cache, package depot, log, and temporary workspace to live on the repository filesystem. Runtime roots

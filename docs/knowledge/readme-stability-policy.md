@@ -12,7 +12,7 @@ answers:
   - does LinkedSpec currently have a project level license
   - where is the README policy task tracked
 date: 2026-07-29
-status: accepted, implemented, and canonical-signoff-complete; recurring closeout pending
+status: accepted, implemented, canonical-signoff-complete, and adoption closed
 tags: [readme, documentation, doctrine, navigation, maintenance, license]
 evidence: "README-STABILITY-POLICY.0 reads the approved 71-line policy template, measures the 1,615-line / 159,437-byte baseline, inventories every section, and validates a lossless prototype. README-STABILITY-POLICY.1 adopts that exact 105-line / 5,072-byte landing page, root README_POLICY.md, and registered read-only checker. Canonical E4 exposed six capability contract/checker pairs and two public-surface checks that still used root README status/examples as machine inputs; .1 routes those requirements to the already-governed guide/capability/mdBook owners while retaining broad forbidden-syntax scans. Current derived inventories are cursor 74/8+0/60 and selector public surface 59/25/0. The staged-snapshot canonical rerun passes all seven doctrines, MCP 5/5 + 6/6 pending/114, semantic/cursor/storage/relocation proof, CLI 66x2, and Phase 0 1,031/1,031. ADR 0063 fixes hard maxima of 128 lines and 6,144 bytes, canonical routing, and reviewed cap increases. The repository has nested/vendor licenses but no declared project-level root license; proposed leaf .3 tracks that separate director decision."
 last_verified: 2026-07-29
@@ -39,6 +39,11 @@ Leaf `README-STABILITY-POLICY.1` implements the repository policy, README trim, 
 `README-STABILITY` doctrine. The checker is read-only and repository-rooted, enforces both limits and stable
 sections/links, rejects drift categories, and self-tests exact-boundary acceptance plus line, byte, and combined
 overflow. Registry execution makes it part of pre-commit and canonical local CI.
+
+Closeout `README-STABILITY-POLICY.2` recomposes commit `ca846e7a` without changing README, policy, checker, caps,
+or canonical routes. All 27 local links, the quick start, seven doctrines, eight affected public owners, Knowledge
+Map, mdBook, containment/moved-root proof, CLI 66x2, and Phase 0 1,031/1,031 pass. The adoption critical path is
+closed; project-level licensing remains the independent proposed `.3` director decision.
 
 Its staged-snapshot canonical admission passes all seven doctrines, MCP 5/5 implementations + 6/6 runtimes,
 semantic and cursor consumers, repository-volume containment, moved-root execution, primary CLI 66x2, and Phase

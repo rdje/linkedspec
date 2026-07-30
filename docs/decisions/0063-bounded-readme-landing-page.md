@@ -1,7 +1,7 @@
 # ADR 0063: README is a bounded stable landing page
 
 - Date: 2026-07-29
-- Status: accepted; content and enforcement implemented by `README-STABILITY-POLICY.1`
+- Status: accepted; content/enforcement implemented by `README-STABILITY-POLICY.1`; adoption closed by `.2`
 - Tags: documentation, readme, doctrine, maintenance, navigation, local-ci
 
 ## Context

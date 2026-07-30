@@ -1,5 +1,18 @@
 # CHANGES
 
+## 2026-07-29 — README-STABILITY-POLICY.2 — close bounded README adoption
+
+Recomposed the committed README policy, 105-line / 5,072-byte landing page, hard 128-line / 6,144-byte budgets,
+seventh doctrine, canonical destinations, and eight affected public owners without changing them. The exact
+quick start returns the expected nested JSON; all 27 local README links exist; cursor remains 74/8+0/60;
+aggregate-selector public proof remains 59/25/0; Knowledge Map is 756/6,129; memory is 57/60; and mdBook builds.
+
+The second canonical gate passes MCP 5/5 implementations + 6/6 runtimes pending/114, Rust semantic 1/1 in 82.85
+seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, cursor 288, repository-volume containment, moved-root execution,
+primary CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663 seconds. The adoption parent closes without policy,
+cap, route, checker, implementation, contract, fixture, CLI, or language/runtime behavior movement. Recurring MCP
+`.10.9.7.1` is the next clean-boundary leaf; project-level licensing remains a separate director decision.
+
 ## 2026-07-29 — README-STABILITY-POLICY.1 — adopt bounded README and doctrine
 
 Replaced the routed 1,615-line / 159,437-byte mixed landing/status/history/inventory document with the exact

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `README-STABILITY-POLICY`
-- Status: `active`
+- Status: `done` / `closed`
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-07-29`
 - Last updated: `2026-07-29`
@@ -39,7 +39,8 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
 ## Task Tree
 
 - ID: `README-STABILITY-POLICY`
-  Status: `active`
+  Status: `done` / `closed` (2026-07-29; adoption critical path `.0-.2` complete; `.3` remains an independent
+    proposed director decision)
   Goal: Adopt and mechanically enforce a stable, bounded LinkedSpec repository landing page.
   Children: `.0`, `.1`, `.2`, `.3`
 
@@ -78,8 +79,7 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
   Planned commit: `README-STABILITY-POLICY.0 - plan bounded README adoption`
 
 - ID: `README-STABILITY-POLICY.1`
-  Status: `done` (2026-07-29; signoff-complete from clean plan commit `adcc89fe`; awaiting this leaf's
-    implementation commit)
+  Status: `done` (2026-07-29; committed at `ca846e7a` from clean plan commit `adcc89fe`)
   Goal: Adopt the policy, route and trim README content, and mechanically admit the dual-budget doctrine.
   Depends on: `.0`
   Acceptance: Add the repository-owned policy; preserve or route every unique current README fact; produce a
@@ -125,13 +125,43 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
   Commit: `README-STABILITY-POLICY.1 - adopt bounded README doctrine`
 
 - ID: `README-STABILITY-POLICY.2`
-  Status: `pending`
+  Status: `done` (2026-07-29; unchanged closeout signoff-complete from clean implementation commit `ca846e7a`;
+    awaiting this leaf's closeout commit)
   Goal: Recompose the committed policy, landing page, canonical destinations, and enforcement unchanged; close the
     adoption parent and hand back to the interrupted MCP frontier.
   Depends on: `.1`
   Acceptance: Rerun the exact policy/checker/doctrine/navigation/link/book/canonical chain without cap, README,
     destination, checker, or unrelated behavior movement; prove no unique information was stranded; close the tree;
     commit/clear/clean; resume `FUTURE-PARITY-BACKLOG.10.9.7.1` only from that clean boundary.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN COMMITTED BASE / OWNERSHIP** — Implementation commit `ca846e7a` is clean, the brief is zero bytes,
+    rendered-book and managed-run residue are absent, and `.2` is active before any closeout or continuity change.
+  - [x] **UNCHANGED POLICY / LANDING RECOMPOSITION** — Re-read the committed policy and README; rerun exact cap,
+    stable-anchor, retained-link, quick-start, initial/future governance, and all seven doctrine proofs without
+    changing caps, content, routes, or checker behavior.
+  - [x] **CANONICAL OWNER RECOMPOSITION** — Rerun all eight affected capability/public-surface owners, Knowledge
+    Map, memory architecture, mdBook, and canonical local CI; preserve cursor 74/8+0/60, selector 59/25/0, and
+    every admitted backend/runtime contract unchanged.
+  - [x] **NO REGRESSION / NO STRANDED INFORMATION** — Compare committed `.0` route inventory to the landing page
+    and canonical destinations; prove no unique information or user-visible behavior moved and no policy bypass,
+    off-volume output, generated residue, or unrelated diff exists.
+  - [x] **LOCKSTEP / PARENT CLOSURE** — Close `.2` and parent only after exact proof; synchronize task/index,
+    roadmaps, ADR/KM/book/live/continuity, commit through `COMMIT.md`, clear the brief, prove clean, and resume MCP
+    `.10.9.7.1` without pushing before cadence 300.
+
+  Verification: **PASS 2026-07-29.** From clean implementation commit `ca846e7a`, Git proves only this owning
+    closeout task changed before verification. The committed 105-line / 5,072-byte README, hard 128-line /
+    6,144-byte budgets, policy, and checker are unchanged; the exact quick start returns the expected nested JSON;
+    all 27 local README links exist; all seven doctrines and eight affected owner checks pass at cursor
+    74/8+0/60 and selector 59/25/0; Knowledge Map is 756/6,129; memory is 57/60; and mdBook builds. Canonical CI
+    exits 0 with MCP 5/5
+    implementations + 6/6 runtimes pending/114, Rust semantic 1/1 in 82.85 seconds, Dart 1/1, Julia 416/416 in
+    29.3 seconds, cursor 288, repository containment, moved-root execution, primary CLI 66x2, RAM 64%, and Phase
+    0 1,031/1,031 in 663 seconds. No implementation, policy, cap, route, contract, fixture, or behavior moved.
+
+  Commit: `README-STABILITY-POLICY.2 - close bounded README adoption`
 
 - ID: `README-STABILITY-POLICY.3`
   Status: `proposed` (non-blocking; requires director decision)
@@ -182,13 +212,13 @@ decision records, and git; they do not need a second current-facing copy in READ
   admission. `.2` changes no admitted content or behavior; it recomposes committed owners and closes the critical
   adoption path. Proposed licensing leaf `.3` is independent and requires director direction.
 
-## Current Frontier
+## Closure State
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `README-STABILITY-POLICY.0` | `done` | Lossless routing, measured budgets, doctrine design, and implementation seams are frozen in ADR `0063`. |
-| 2 | `README-STABILITY-POLICY.1` | `done` | Canonical signoff passes from clean `adcc89fe`; implementation awaits its per-leaf commit. |
-| 3 | `README-STABILITY-POLICY.2` | `pending` | Next after `.1` commit/brief-clear/clean; re-verifies committed owners and returns the clean frontier to MCP work. |
+| 2 | `README-STABILITY-POLICY.1` | `done` | Canonical implementation is committed at clean `ca846e7a`; brief and exact residue are cleared. |
+| 3 | `README-STABILITY-POLICY.2` | `done` | Unchanged canonical recomposition passes; closeout awaits its per-leaf commit. |
 | — | `README-STABILITY-POLICY.3` | `proposed` | Separate director decision; it does not block bounded-README adoption or MCP handback. |
 
 ## Decisions
@@ -223,14 +253,15 @@ decision records, and git; they do not need a second current-facing copy in READ
 | --- | --- | --- | --- |
 | `2026-07-29` | `README-STABILITY-POLICY.0` | Clean `c6f36fe3`; external policy 71/71 lines read-only; baseline 1,615/159,437; prototype 105/5,072 and quick start exact; Knowledge Map 756/6,129; mdBook, memory 56/60, six doctrines, whitespace, path scan, and scope checks PASS. | DONE. README/policy/checker behavior unchanged; `.1` follows only after commit/brief-clear/clean proof. |
 | `2026-07-29` | `README-STABILITY-POLICY.1` | First E4 run exposed the stale root-marker coupling after seven doctrines/syntax passed. After complete routing, all eight focused owners pass; the canonical rerun passes MCP 5/5 + 6/6 pending/114, Rust semantic 82.89s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668s. | DONE. Signoff-complete; no runtime semantics changed; implementation commit/brief-clear/clean follows. |
+| `2026-07-29` | `README-STABILITY-POLICY.2` | Clean `ca846e7a`; README/policy/checker unchanged; quick start exact; 27/27 local links; seven doctrines; eight owners; KM 756/6,129; memory 57/60; mdBook; canonical MCP 5/5 + 6/6 pending/114, Rust 82.85s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 64%, Phase 0 1,031/1,031 in 663s. | DONE. Parent closed unchanged; closeout commit/brief-clear/clean then MCP `.10.9.7.1`. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `README-STABILITY-POLICY.0` | `README-STABILITY-POLICY.0 - plan bounded README adoption` | Behavior-free adoption plan; commit hash recorded by git history. |
-| `README-STABILITY-POLICY.1` | `README-STABILITY-POLICY.1 - adopt bounded README doctrine` | Policy, trim, checker, doctrine, and canonical lockstep. |
-| `README-STABILITY-POLICY.2` | `pending` | Unchanged closeout and MCP handback. |
+| `README-STABILITY-POLICY.1` | `ca846e7a` — `README-STABILITY-POLICY.1 - adopt bounded README doctrine` | Policy, trim, checker, doctrine, and canonical lockstep. |
+| `README-STABILITY-POLICY.2` | `README-STABILITY-POLICY.2 - close bounded README adoption` | Unchanged closeout and MCP handback. |
 | `README-STABILITY-POLICY.3` | `proposed` | Project-level license decision; not part of the adoption critical path. |
 
 ## Changelog
@@ -250,3 +281,8 @@ decision records, and git; they do not need a second current-facing copy in READ
 - `2026-07-29`: Completed `.1` signoff: the full staged-snapshot canonical rerun exits 0 through all seven
   doctrines, six-runtime MCP admission, semantic/cursor/storage/relocation proof, primary CLI 66x2, and Phase 0
   1,031/1,031. The leaf is ready for its per-slice commit; `.2` remains dependency-ordered behind clean handoff.
+- `2026-07-29`: Committed `.1` at `ca846e7a`, cleared the brief, removed exact empty managed-run residue, proved
+  the tree clean, and activated unchanged closeout `.2` task-tree-first from that boundary.
+- `2026-07-29`: Completed `.2` and closed the adoption parent after byte-unchanged policy/README/checker proof,
+  27/27 retained links, exact quick start, all seven doctrines/eight public owners, mdBook/KM/memory, and full
+  canonical signoff. MCP `.10.9.7.1` resumes only after closeout commit/brief-clear/clean.

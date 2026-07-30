@@ -5,21 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `adcc89fe` — `README-STABILITY-POLICY.0 - plan bounded README adoption` (94/300; no push);
+- latest_commit: `ca846e7a` — `README-STABILITY-POLICY.1 - adopt bounded README doctrine` (95/300; no push);
   commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `README-STABILITY-POLICY.0`; ADR `0063` freezes lossless routing, a 105-line / 5,072-byte
-  prototype, hard 128-line / 6,144-byte budgets, seventh-doctrine design, and `.1-.2` implementation seams.
-- active_leaf: `README-STABILITY-POLICY.1` — landing-page/policy/checker/doctrine adoption is signoff-complete
-  from clean `adcc89fe`; its per-leaf commit/brief-clear/clean handoff remains.
-- active_scope: exact audited README trim; normative policy; read-only staged-snapshot checker with cap/content/
-  governance self-tests; seventh registry row; E1/E4, ADR/KM/book/roadmap/live/continuity lockstep and signoff.
-- active_progress: README is exact 105/5,072 within 128/6,144; policy/checker and seventh doctrine ship. Six
-  contract pairs + two surface checks route changing markers to canonical owners. All focused checks and the full
-  canonical rerun pass; Phase 0 is 1,031/1,031 in 668s and CLI is 66x2.
+- latest_completed_leaf: `README-STABILITY-POLICY.1`; bounded README/policy/checker/seventh doctrine committed.
+- active_leaf: `README-STABILITY-POLICY.2` — unchanged closeout and parent closure are signoff-complete from clean
+  `ca846e7a`; closeout commit/brief-clear/clean remain.
+- active_scope: recompose committed README policy, landing page, canonical destinations, enforcement, public
+  owners, mdBook, and continuity unchanged; close parent and hand back to recurring MCP `.10.9.7.1`.
+- active_progress: README remains 105/5,072 within 128/6,144; quick start exact; 27/27 local links; all seven
+  doctrines/eight owners/KM/memory/book pass. Canonical closeout is green through Phase 0 1,031/1,031 in 663s.
 - active_exclusions: no parser/runtime/backend/MCP/contract/fixture/test/CLI behavior, inferred license terms,
   external-template mutation, cap expansion, or content outside the audited route map.
-- next_after_clean_commit: run unchanged `README-STABILITY-POLICY.2` closeout, then resume recurring MCP driver/
-  promotion `.10.9.7.1` only from the clean adoption boundary; no push before 300.
+- next_after_clean_commit: resume recurring MCP driver/promotion `FUTURE-PARITY-BACKLOG.10.9.7.1` from the clean
+  closed-adoption boundary; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -45,13 +43,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read;
   director-provided README policy template read fully and read-only.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 94/300 after `adcc89fe`; no push.
+- push_policy: hard lock at 300 new local commits; counter 95/300 after `ca846e7a`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
 - canonical_state: prior MCP `.0` remains semantic 6/20/105, MCP 35/10/10/68, ledger 5/5 + 6/6 pending/114.
-  README E4 rerun passes 7 doctrines, Rust semantic 82.89s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
-  containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668s.
-- blockers: none. next: finalize/stage `.1` signoff docs, rerun focused post-edit gates, commit/clear/clean, then
-  run unchanged `.2`; no push.
+  README closeout E4 passes 7 doctrines, Rust semantic 82.85s, Dart 1/1, Julia 416/416 in 29.3s, cursor 288,
+  containment/moved-root, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 in 663s.
+- blockers: none. next: finalize/stage `.2`, rerun focused post-edit gates, commit/clear/clean, then activate MCP
+  `.10.9.7.1`; no push.

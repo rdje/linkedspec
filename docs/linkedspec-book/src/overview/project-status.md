@@ -4,11 +4,13 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
-The root README is now a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
+The root README is a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
 and the registered `README-STABILITY` doctrine. Hard ceilings are 128 lines and 6,144 bytes; changing status,
 history, inventories, and deep examples route to their canonical owners. Adoption signoff passes all seven
 doctrines, repository-volume and moved-root proof, primary CLI 66x2, and Phase 0 1,031/1,031 without language or
-runtime behavior movement.
+runtime behavior movement. Unchanged closeout `.2` repeats all seven doctrines, 27/27 local links, the exact
+quick start, public owner checks, repository containment/moved-root proof, CLI 66x2, and Phase 0 1,031/1,031;
+the bounded-README adoption critical path is closed.
 
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic
