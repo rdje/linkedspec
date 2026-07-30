@@ -437,8 +437,9 @@ SDK, semantic-cache, or primary-CLI authority.
 Decoded dispatch remains the embedding surface for already-admitted host values; use `serve_mcp_stdio!` for
 untrusted wire bytes instead of decoding them directly with JSON3. Cancellation observed after response
 preparation but before emission suppresses that response; successful flush completes it, so a later cancellation
-cannot retract emitted bytes. Formal Julia MCP admission remains `.10.9.5.3` and is the only leaf authorized to
-move the 3/5-implementation + 3/6-runtime ledger.
+cannot retract emitted bytes. Exact admission `.10.9.5.3` now composes one ordered twelve-role external consumer
+with 178 assertions. Julia alone advances to 4/5 implementations + 4/6 runtimes; shared rollout remains pending
+until the same Lua implementation passes independently on PUC Lua and LuaJIT.
 
 ## Commands
 

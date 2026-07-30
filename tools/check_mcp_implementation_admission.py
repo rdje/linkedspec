@@ -80,9 +80,14 @@ IMPLEMENTATIONS = [
     {
         "backend": "julia",
         "server_name": "linkedspec-semantic-julia",
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.10.9.5",
-        "source_paths": [],
+        "source_paths": [
+            "julia/src/mcp/McpContract.jl",
+            "julia/src/mcp/McpContractRuntime.jl",
+            "julia/src/mcp/McpServer.jl",
+            "julia/src/mcp/McpWire.jl",
+        ],
         "runtime_admissions": ["julia"],
     },
     {
@@ -120,9 +125,9 @@ RUNTIME_ADMISSIONS = [
     {
         "backend": "julia",
         "runtime": "julia",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.5",
-        "consumer_path": None,
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.10.9.5.3",
+        "consumer_path": "julia/test/mcp_server_julia_admission_test.jl",
     },
     {
         "backend": "lua",
@@ -140,7 +145,7 @@ RUNTIME_ADMISSIONS = [
     },
 ]
 
-JULIA_PENDING_OWNERS = {
+JULIA_OWNERS = {
     "generator": "tools/generate_julia_mcp_contract.py",
     "source_paths": [
         "julia/src/mcp/McpContract.jl",
@@ -152,6 +157,7 @@ JULIA_PENDING_OWNERS = {
         "julia/test/mcp_contract_julia_binding_test.jl",
         "julia/test/mcp_server_julia_dispatch_test.jl",
         "julia/test/mcp_server_julia_stdio_test.jl",
+        "julia/test/mcp_server_julia_admission_test.jl",
     ],
 }
 
@@ -170,6 +176,7 @@ ORDERED_COMMANDS = [
     "bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart",
     "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
     "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")'",
+    "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_server_julia_admission_test.jl\")'",
     "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
@@ -241,6 +248,7 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
         "require_tracked_file julia/test/mcp_contract_julia_binding_test.jl",
         "require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl",
         "require_tracked_file julia/test/mcp_server_julia_stdio_test.jl",
+        "require_tracked_file julia/test/mcp_server_julia_admission_test.jl",
         "perl -c -Iperl t/mcp_server_perl_admission.t",
     ]
     for line in required:
@@ -312,6 +320,31 @@ def validate_dart_consumer_source(source: str) -> None:
         r"\n\s*},\s*skip\s*:", source
     ):
         fail("Dart admission completion/order assertion drifted")
+
+
+def validate_julia_consumer_source(source: str) -> None:
+    declaration = re.search(
+        r"const _MCP_ADMISSION_ROLE_ORDER = \[\n(.*?)\n\]", source, re.DOTALL
+    )
+    if declaration is None:
+        fail("Julia admission role declaration is missing")
+    declared = re.findall(r'"([a-z_]+)"', declaration.group(1))
+    if declared != ROLES:
+        fail("Julia admission role declaration/order drifted")
+    calls = re.findall(
+        r'_mcp_admission_role!\(\s*roles_seen,\s*"([a-z_]+)"', source, re.DOTALL
+    )
+    if calls != ROLES:
+        fail("Julia admission roles are not invoked exactly once in order")
+    test_name = '@testset "exact Julia MCP admission executes every role once" begin'
+    if source.count(test_name) != 1:
+        fail("Julia admission does not have one exact consumer test")
+    if (
+        source.count("@test roles_seen == _MCP_ADMISSION_ROLE_ORDER") != 1
+        or "@test_broken" in source
+        or "@test_skip" in source
+    ):
+        fail("Julia admission completion/order assertion drifted")
 
 
 def validate_authority_sources() -> None:
@@ -411,7 +444,7 @@ def validate_authority_sources() -> None:
 
     julia_sources = {
         path: (ROOT / path).read_text(encoding="utf-8")
-        for path in JULIA_PENDING_OWNERS["source_paths"][1:]
+        for path in JULIA_OWNERS["source_paths"][1:]
     }
     julia_combined = "\n".join(julia_sources.values())
     for token in [
@@ -447,15 +480,15 @@ def validate_authority_sources() -> None:
         fail("the primary Julia parser CLI acquired MCP bootstrap authority")
 
 
-def validate_pending_julia_owners() -> None:
+def validate_julia_owners(tests_source: str | None = None) -> None:
     owned_paths = [
-        JULIA_PENDING_OWNERS["generator"],
-        *JULIA_PENDING_OWNERS["source_paths"],
-        *JULIA_PENDING_OWNERS["test_paths"],
+        JULIA_OWNERS["generator"],
+        *JULIA_OWNERS["source_paths"],
+        *JULIA_OWNERS["test_paths"],
     ]
     for path in owned_paths:
         if not (ROOT / path).is_file():
-            fail(f"pending Julia MCP owner is absent: {path}")
+            fail(f"Julia MCP owner is absent: {path}")
 
     module_source = (ROOT / "julia" / "src" / "LinkedSpecJulia.jl").read_text(
         encoding="utf-8"
@@ -468,13 +501,15 @@ def validate_pending_julia_owners() -> None:
     ]:
         if module_source.count(include) != 1:
             fail(f"Julia MCP module owner registration drifted: {include}")
-    tests_source = (ROOT / "julia" / "test" / "runtests.jl").read_text(
-        encoding="utf-8"
-    )
+    if tests_source is None:
+        tests_source = (ROOT / "julia" / "test" / "runtests.jl").read_text(
+            encoding="utf-8"
+        )
     for include in [
         'include("mcp_contract_julia_binding_test.jl")',
         'include("mcp_server_julia_dispatch_test.jl")',
         'include("mcp_server_julia_stdio_test.jl")',
+        'include("mcp_server_julia_admission_test.jl")',
     ]:
         if tests_source.count(include) != 1:
             fail(f"Julia MCP package-test registration drifted: {include}")
@@ -499,7 +534,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if ledger["format"] != 1 or ledger["contract_id"] != CONTRACT_ID or ledger["task_owner"] != TASK_OWNER:
         fail("ledger identity drifted")
-    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059"]:
+    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059", "0060"]:
         fail("ledger decision provenance drifted")
 
     transport_ref = ledger["transport_contract"]
@@ -532,10 +567,10 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("five-implementation status/identity topology drifted")
     if ledger["runtime_admissions"] != RUNTIME_ADMISSIONS:
         fail("six-runtime admission status/topology drifted")
-    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 3:
-        fail("implementation completion count is not exactly three")
-    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 3:
-        fail("runtime admission completion count is not exactly three")
+    if sum(row["status"] == "complete" for row in ledger["implementations"]) != 4:
+        fail("implementation completion count is not exactly four")
+    if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 4:
+        fail("runtime admission completion count is not exactly four")
 
     rollout = ledger["rollout"]
     exact_fields(
@@ -585,7 +620,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("semantic checker no longer locks the pending MCP rollout")
 
     if inspect_files:
-        validate_pending_julia_owners()
+        validate_julia_owners()
         for row in ledger["implementations"]:
             for path in row["source_paths"]:
                 if not (ROOT / path).is_file():
@@ -603,6 +638,8 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
                 validate_rust_consumer_source(source)
             elif row["runtime"] == "dart":
                 validate_dart_consumer_source(source)
+            elif row["runtime"] == "julia":
+                validate_julia_consumer_source(source)
             else:
                 fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
@@ -630,20 +667,22 @@ LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("Perl implementation regression", lambda value: value["implementations"][0].__setitem__("status", "pending")),
     ("Rust implementation regression", lambda value: value["implementations"][1].__setitem__("status", "pending")),
     ("Dart implementation regression", lambda value: value["implementations"][2].__setitem__("status", "pending")),
-    ("premature Julia implementation", lambda value: value["implementations"][3].__setitem__("status", "complete")),
+    ("Julia implementation regression", lambda value: value["implementations"][3].__setitem__("status", "pending")),
     ("implementation source", lambda value: value["implementations"][0]["source_paths"].pop()),
     ("Rust implementation source", lambda value: value["implementations"][1]["source_paths"].pop()),
     ("Dart implementation source", lambda value: value["implementations"][2]["source_paths"].pop()),
+    ("Julia implementation source", lambda value: value["implementations"][3]["source_paths"].pop()),
     ("runtime omission", lambda value: value["runtime_admissions"].pop()),
     ("runtime reorder", lambda value: value["runtime_admissions"].reverse()),
     ("Perl admission regression", lambda value: value["runtime_admissions"][0].__setitem__("status", "pending")),
     ("Rust admission regression", lambda value: value["runtime_admissions"][1].__setitem__("status", "pending")),
     ("Dart admission regression", lambda value: value["runtime_admissions"][2].__setitem__("status", "pending")),
-    ("premature Julia admission", lambda value: value["runtime_admissions"][3].__setitem__("status", "complete")),
+    ("Julia admission regression", lambda value: value["runtime_admissions"][3].__setitem__("status", "pending")),
     ("Lua ABI ownership", lambda value: value["runtime_admissions"][5].__setitem__("runtime", "lua54")),
     ("Perl consumer path", lambda value: value["runtime_admissions"][0].__setitem__("consumer_path", "wrong")),
     ("Rust consumer path", lambda value: value["runtime_admissions"][1].__setitem__("consumer_path", "wrong")),
     ("Dart consumer path", lambda value: value["runtime_admissions"][2].__setitem__("consumer_path", "wrong")),
+    ("Julia consumer path", lambda value: value["runtime_admissions"][3].__setitem__("consumer_path", "wrong")),
     ("premature rollout", lambda value: value["rollout"].__setitem__("status", "complete")),
     ("rollout requirement", lambda value: value["rollout"]["requires_runtime_admissions"].pop()),
     ("coordinated premature promotion", coordinated_promotion),
@@ -688,13 +727,14 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 1,
             ),
         ),
-        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
-        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
+        ("CI Julia admission omission", ci_source.replace(ORDERED_COMMANDS[14] + "\n", "")),
+        ("CI admission checker omission", ci_source.replace(ORDERED_COMMANDS[15] + "\n", "")),
+        ("CI Perl admission omission", ci_source.replace(ORDERED_COMMANDS[16] + "\n", "")),
         (
             "CI checker before Rust admission",
             ci_source.replace(ORDERED_COMMANDS[10], "__RUST_ADMISSION__")
-            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[10])
-            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[14]),
+            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[10])
+            .replace("__RUST_ADMISSION__", ORDERED_COMMANDS[15]),
         ),
         (
             "CI Rust admission before strict stdio proof",
@@ -711,14 +751,26 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         (
             "CI checker before Dart admission",
             ci_source.replace(ORDERED_COMMANDS[12], "__DART_ADMISSION__")
-            .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[12])
-            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[14]),
+            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[12])
+            .replace("__DART_ADMISSION__", ORDERED_COMMANDS[15]),
         ),
         (
             "CI checker before Julia focused proof",
             ci_source.replace(ORDERED_COMMANDS[13], "__JULIA_FOCUSED__")
+            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[13])
+            .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[15]),
+        ),
+        (
+            "CI Julia admission before focused proof",
+            ci_source.replace(ORDERED_COMMANDS[13], "__JULIA_FOCUSED__")
             .replace(ORDERED_COMMANDS[14], ORDERED_COMMANDS[13])
             .replace("__JULIA_FOCUSED__", ORDERED_COMMANDS[14]),
+        ),
+        (
+            "CI checker before Julia admission",
+            ci_source.replace(ORDERED_COMMANDS[14], "__JULIA_ADMISSION__")
+            .replace(ORDERED_COMMANDS[15], ORDERED_COMMANDS[14])
+            .replace("__JULIA_ADMISSION__", ORDERED_COMMANDS[15]),
         ),
         (
             "CI ledger registration omission",
@@ -811,6 +863,13 @@ def run_mutations(ledger: dict[str, Any]) -> int:
                 "",
             ),
         ),
+        (
+            "CI Julia admission registration omission",
+            ci_source.replace(
+                "require_tracked_file julia/test/mcp_server_julia_admission_test.jl\n",
+                "",
+            ),
+        ),
     ]
     for name, mutant in ci_mutations:
         try:
@@ -820,9 +879,24 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             continue
         fail(f"mutation was accepted: {name}")
 
+    julia_tests_source = (ROOT / "julia" / "test" / "runtests.jl").read_text(
+        encoding="utf-8"
+    )
+    try:
+        validate_julia_owners(
+            julia_tests_source.replace(
+                'include("mcp_server_julia_admission_test.jl")\n', "", 1
+            )
+        )
+    except CheckError:
+        rejected += 1
+    else:
+        fail("mutation was accepted: Julia package admission registration omission")
+
     perl_source = (ROOT / RUNTIME_ADMISSIONS[0]["consumer_path"]).read_text(encoding="utf-8")
     rust_source = (ROOT / RUNTIME_ADMISSIONS[1]["consumer_path"]).read_text(encoding="utf-8")
     dart_source = (ROOT / RUNTIME_ADMISSIONS[2]["consumer_path"]).read_text(encoding="utf-8")
+    julia_source = (ROOT / RUNTIME_ADMISSIONS[3]["consumer_path"]).read_text(encoding="utf-8")
     consumer_mutations = [
         ("Perl role omission", perl_source.replace(" contract_inventory\n", "", 1), validate_perl_consumer_source),
         (
@@ -881,6 +955,36 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             ),
             validate_dart_consumer_source,
         ),
+        (
+            "Julia role omission",
+            julia_source.replace('    "contract_inventory",\n', "", 1),
+            validate_julia_consumer_source,
+        ),
+        (
+            "Julia role invocation omission",
+            julia_source.replace(
+                '_mcp_admission_role!(roles_seen, "contract_inventory") do',
+                '_mcp_admission_role!(roles_seen, "wrong_role") do',
+                1,
+            ),
+            validate_julia_consumer_source,
+        ),
+        (
+            "Julia completion omission",
+            julia_source.replace(
+                "    @test roles_seen == _MCP_ADMISSION_ROLE_ORDER\n", "", 1
+            ),
+            validate_julia_consumer_source,
+        ),
+        (
+            "Julia consumer skipped",
+            julia_source.replace(
+                '@testset "exact Julia MCP admission executes every role once" begin',
+                '@testset "exact Julia MCP admission executes every role once" begin\n    @test_skip true',
+                1,
+            ),
+            validate_julia_consumer_source,
+        ),
     ]
     for name, mutant, validator in consumer_mutations:
         try:
@@ -902,7 +1006,7 @@ def main() -> int:
         return 1
     print(
         "MCP implementation/admission: "
-        f"3/5 implementations, 3/6 runtimes, rollout pending, {rejected} rejected mutations"
+        f"4/5 implementations, 4/6 runtimes, rollout pending, {rejected} rejected mutations"
     )
     return 0
 

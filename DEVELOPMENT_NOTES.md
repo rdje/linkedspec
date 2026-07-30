@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.3` — implementation admission must compose existing authority, not
+  create another server or oracle): Julia's generated runtime, decoded server, and strict wire were already
+  behavior-complete at `.1-.2`; their formal pending state represented a missing ownership/proof boundary. The
+  new consumer therefore uses public `McpServer` and the existing immutable `SemanticIndex` for all ordinary
+  outcomes, while source-composing only the two deliberately private focused seams: cancellation between response
+  preparation and emission, and injected native failure sanitation.
+
+  The one-test consumer declares twelve roles and calls each once in the same order. It independently exercises
+  the production 1,024-handle capacity, not the private one-handle deterministic seam. This costs only about four
+  seconds standalone and proves that the contract-sourced default is actually wired into `McpServer()`. Every
+  caller-owned `IO` remains open; EOF and hostile I/O release state; hostile strings do not reach output, log, or
+  typed error text.
+
+  Status movement is coordinated and Julia-only. The ledger gains ADR `0060`, Julia's four source paths, exact
+  `.10.9.5.3` runtime owner, consumer path, and canonical command. The checker validates Julia package and CI
+  registration plus focused-before-admission-before-checker order, and mutations cover status regression,
+  source/consumer omission, registration, role declaration/invocation/completion, and skipped proof. Focused
+  execution passes 48 + 139 + 170 + 178 and the checker rejects 79 mutations at 4/5 implementations + 4/6
+  runtimes with shared rollout still pending.
+
+  Complete Julia proof independently passes byte-fresh generation, package execution including the admission,
+  17-owner/five-package-tree storage containment, primary CLI, and corpus 105/105. The exact cross-runtime MCP
+  chain passes neutral 35/10/10/68, four byte-fresh bindings at 83,072/82,886/82,875/119,538 bytes,
+  Perl 22+13, Rust 15+3+4+1, Dart 16, Julia 48+139+170+178, and the 79-mutation ledger checker. Final canonical
+  CI exits 0 after six doctrines, Rust semantic 1/1 in 79.17 seconds, Dart 1/1, Julia 416/416 in 27.9 seconds,
+  containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 637 seconds.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.2` — Julia's wire boundary must preserve lexical facts that JSON3
   erases): `McpWire.jl` treats JSON3 only as a post-admission value codec. One iterative scanner proves strict
   UTF-8/JSON, escape and surrogate validity, decoded key uniqueness, depth, object-only requests, exact id tokens,

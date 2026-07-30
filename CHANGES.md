@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.3 — admit the Julia MCP implementation
+
+Added `julia/test/mcp_server_julia_admission_test.jl`, one external consumer that declares and executes the
+neutral contract's twelve exact roles once in order. Its 178 assertions compose public decoded dispatch, native
+capabilities/query identity, all ten raw and ten lifecycle outcomes, all four indistinguishable handle states,
+lowering-only policy, cancellation timing, shutdown and hostile I/O/privacy, and narrow production authority.
+The lifecycle proof exercises the production registry's real 1,024-handle limit. Required private pre-emission
+cancellation and injected-native-failure mechanics remain encapsulated and are composed through their existing
+non-skipped focused owners rather than an admission-only public hook.
+
+Julia alone advances in `mcp_implementation_admission.json`: four generated/runtime/server/wire source owners are
+complete, the Julia runtime row points to the new consumer, and formal state is now 4/5 implementations + 4/6
+runtimes. Lua, PUC Lua, LuaJIT, and shared `thin_mcp_transport` rollout remain pending. The normative transport
+digest, 35 canonical frames, semantic APIs, primary CLI, production Julia server, and every other status row are
+unchanged.
+
+Package and canonical CI now require focused Julia 48 + 139 + 170 before the exact 178-assertion admission and
+the ledger checker. Independent governance locks source/consumer paths, package/CI registration, exact test and
+role identity, no-skip completion, order, status regression, and authority fences through 79 rejected mutations.
+
+Complete signoff passes byte-fresh generation for all four admitted backend bindings, unchanged Perl/Rust/Dart
+MCP consumers, the full Julia package/storage/CLI/corpus gate, all six doctrines, Knowledge Map 751/6,075, and
+the canonical local gate. Canonical semantic admission passes Rust 1/1 in 79.17 seconds, Dart 1/1, and Julia
+416/416 in 27.9 seconds; repository containment, moved-root proof, primary CLI 66x2, RAM 61%, and Phase 0
+1,031/1,031 in 637 seconds also pass.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.2 — implement strict Julia MCP stdio
 
 Added private synchronous `McpWire.jl` and exported `serve_mcp_stdio!` over caller-owned Julia `IO`. The wire

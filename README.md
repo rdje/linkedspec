@@ -1088,8 +1088,10 @@ content migration exists yet.
   wire. Its iterative scanner closes JSON3's duplicate-key, malformed-UTF-8, escape/surrogate, depth, id-token,
   and `1.0`/`1e0` coercion gaps before decoding, reconstructs exact number kinds, emits canonical LF, preserves
   cancellation through successful flush, and releases all state on EOF or sanitized hostile I/O without closing
-  caller-owned streams. Focused Julia proof is now 48 + 139 + 170 assertions and governance rejects 68 mutations.
-  The ledger deliberately remains 3/5 + 3/6 pending; exact twelve-role admission `.3` alone may promote Julia.
+  caller-owned streams. Exact admission `.10.9.5.3` now composes those owners through one ordered twelve-role
+  external consumer, including the real public 1,024-handle capacity boundary. Focused Julia proof remains
+  48 + 139 + 170 assertions, the admission consumer passes 178, and governance rejects 79 mutations. Julia alone
+  advances to 4/5 implementations + 4/6 runtimes while Lua, both Lua ABIs, and shared rollout remain pending.
   There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
@@ -1539,8 +1541,10 @@ content migration exists yet.
   synchronous borrowed-`IO` stdio, and `.1-.4` order. Decoded implementation `.10.9.5.1` now ships the
   119,538-byte binding, frozen runtime, secure registry, and public decoded API. Strict `.10.9.5.2` adds bounded
   duplicate-safe number-kind-preserving stdio, canonical LF, cancellation through flush, fixed optional logging,
-  and EOF/I/O cleanup over caller-owned streams. Combined focused proof is 48 + 139 + 170 assertions and 68
-  rejected mutations. The ledger remains 3/5 + 3/6 pending; exact admission `.3` alone may promote Julia.
+  and EOF/I/O cleanup over caller-owned streams. Exact `.10.9.5.3` adds one ordered twelve-role external consumer,
+  advances only Julia to 4/5 implementations + 4/6 runtimes, keeps shared rollout pending, and raises omission-
+  sensitive governance to 79 rejected mutations. Combined proof is 48 + 139 + 170 focused plus 178 admission
+  assertions; no production server or transport byte changes in the admission leaf.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the

@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Julia native MCP implementation and runtime admitted
+
+`FUTURE-PARITY-BACKLOG.10.9.5.3` adds one ordered twelve-role Julia admission consumer over the already-committed
+generated binding/runtime, decoded server, and strict stdio owners. Its 178 assertions exercise the public
+`McpServer` and immutable native `SemanticIndex` for ordinary behavior, the production 1,024-handle limit, every
+canonical/raw/lifecycle/handle/policy outcome, cancellation, shutdown and hostile I/O/privacy, plus narrow
+authority fences. Only the two deliberately private pre-emission-cancellation and injected-native-failure seams
+are composed from their existing non-skipped focused proofs.
+
+Julia alone advances to 4/5 complete MCP implementations and 4/6 complete runtime admissions. Lua, PUC Lua,
+LuaJIT, and the shared transport rollout remain pending. The implementation checker rejects 79 exact status,
+source, consumer, registration, role, order, skip, and authority mutations; no production server, executable,
+transport bytes, semantic/primary-CLI behavior, other-runtime row, aggregator, or legacy adapter changes.
+
+Signoff is complete. Julia MCP passes 48+139+170+178, the full Julia package/storage/CLI/corpus gate passes, and
+the cross-runtime chain retains neutral 35/10/10/68 plus all admitted Perl/Rust/Dart owners. Canonical CI exits 0
+with Rust semantic 1/1 in 79.17 seconds, Dart 1/1, Julia 416/416 in 27.9 seconds, containment/moved-root, CLI
+66x2, RAM 61%, and Phase 0 1,031/1,031 in 637 seconds. Knowledge Map 751/6,075, mdBook 13,564 KiB/79 files, all
+six doctrines, memory, whitespace, and exact generated cleanup pass. No-change closeout `.10.9.5.4` waits for
+the clean `.3` commit boundary.
+
 ## 2026-07-29 — Julia native MCP strict stdio implemented
 
 `FUTURE-PARITY-BACKLOG.10.9.5.2` adds private `McpWire.jl` plus public synchronous `serve_mcp_stdio!` over

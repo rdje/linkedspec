@@ -3451,7 +3451,7 @@ The dependency order is:
 | `.10.9.5.0` | behavior-free Julia native owner/security/wire audit and ADR `0060` | complete from clean `98cbe61a`; exact `.1-.4` split; no implementation or ledger movement |
 | `.10.9.5.1` | generated Julia Base64 binding/runtime, secure registry, and decoded server | implemented; 119,538-byte binding, 48 + 139 focused proof, formal admission unchanged |
 | `.10.9.5.2` | strict Julia stdio, lexical/number-kind preflight, canonical emission, and lifecycle cleanup | implemented; 170 assertions, 68 governance mutations, formal admission unchanged |
-| `.10.9.5.3` | exact Julia implementation/runtime admission | pending; this leaf alone may move Julia to 4/5 implementations and 4/6 runtimes |
+| `.10.9.5.3` | exact Julia implementation/runtime admission | complete; one ordered twelve-role external consumer, 178 assertions, 4/5 implementations, 4/6 runtimes, rollout pending, 79 mutations |
 | `.10.9.5.4` | committed-owner no-change Julia closeout | pending after exact admission |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
@@ -3474,11 +3474,10 @@ one client endpoint only by routing to these native servers; it cannot own index
 cannot reinterpret transport errors or semantic results.
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted native static and caller-captured
-runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, and Dart
-callers can use decoded in-process dispatch plus strict stdio, and all three have exact twelve-role MCP admission.
-Julia callers can now use decoded in-process dispatch plus strict synchronous stdio; exact admission is still pending. The
-shared status/proof ledger is therefore 3/5 implementations and 3/6 runtimes, with shared rollout pending and the
-normative transport digest unchanged.
+runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, Dart, and
+Julia callers can use decoded in-process dispatch plus strict stdio, and all four have exact twelve-role MCP
+admission. The shared status/proof ledger is therefore 4/5 implementations and 4/6 runtimes, with shared rollout
+pending and the normative transport digest unchanged.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3504,7 +3503,7 @@ the Dart parent, and hands the same contract to Julia `.10.9.5`.
 
 ### Using Julia decoded MCP dispatch and strict stdio
 
-Behavior-free `.10.9.5.0` and ADR `0060` define the ownership, and `.10.9.5.1-.2` now ship the generated binding,
+Behavior-free `.10.9.5.0` and ADR `0060` define the ownership, and `.10.9.5.1-.3` now ship the generated binding,
 frozen contract runtime, secure registry, public decoded API, and strict synchronous wire. The existing opaque immutable `SemanticIndex`,
 `semantic_capabilities(index)`, `semantic_query_neutral(index, request)`, and detached `to_json` values remain the
 only semantic authority. MCP cannot construct an index, load source or paths, parse/compile/execute, enable trace
@@ -3608,8 +3607,9 @@ Decoded dispatch remains for already-admitted host values; `serve_mcp_stdio!` is
 The focused proof covers all ten neutral raw classifications, duplicate and escape-equivalent keys, invalid UTF-8
 and BOMs, malformed JSON/surrogates/nonfinite numbers, exact depth/line/id limits, `-0` versus `-0.0`, arbitrary
 chunks, recovery, final EOF, canonical multi-frame responses, cancellation timing, hostile I/O/logging, release,
-and authority fences. Exact twelve-role admission `.3` alone moves Julia to 4/5 implementations and 4/6 runtimes;
-current formal state remains 3/5 + 3/6 with shared rollout pending.
+and authority fences. Exact twelve-role admission `.3` composes those public/focused owners through one external
+178-assertion consumer. Julia alone is now complete at 4/5 implementations and 4/6 runtimes; shared rollout
+remains pending until Lua qualifies unchanged on both ABIs.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 
@@ -3729,8 +3729,9 @@ The generated private part is 82,875 bytes and verified after byte-identical Per
 covers all canonical decoded classifications, native payload identity, policy/cancellation/failure behavior,
 clone isolation, entropy/time/capacity/shutdown, all ten raw cases, framing boundaries, hostile I/O, caller
 ownership, and production authority fences. Exact admission adds one ordered twelve-role public consumer without
-changing production code. The focused MCP set is 16/16, all 353 Dart package tests pass, analysis is clean, and
-the ledger is 3/5 implementations + 3/6 runtimes with rollout pending and 58 rejected governance mutations.
+changing production code. At the Dart admission boundary, the focused MCP set was 16/16, all 353 Dart package
+tests passed, analysis was clean, and the ledger reached 3/5 implementations + 3/6 runtimes with rollout pending
+and 58 rejected governance mutations. Julia admission has since advanced the shared ledger to 4/5 + 4/6 and 79.
 
 ### Using Rust decoded MCP dispatch
 

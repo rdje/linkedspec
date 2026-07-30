@@ -281,8 +281,9 @@ or primary-CLI mode. Decoded implementation `.10.9.5.1` now ships the 119,538-by
 runtime, secure opaque registry, lower-only policy, public decoded dispatch, and 48 + 139 focused assertions.
 Strict byte/framing/lifecycle implementation `.10.9.5.2` now ships bounded duplicate-safe number-kind-preserving
 stdio, canonical LF, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-owned
-streams at 170 further assertions and 68 rejected governance mutations. The ledger remains 3/5 + 3/6 pending
-until exact admission `.10.9.5.3`.
+streams at 170 further assertions. Exact admission `.10.9.5.3` composes one ordered twelve-role external consumer
+at 178 assertions, advances only Julia to 4/5 implementations + 4/6 runtimes, leaves shared rollout pending, and
+raises omission-sensitive governance to 79 rejected mutations.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

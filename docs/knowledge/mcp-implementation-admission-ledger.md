@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; Perl/Rust/Dart admitted at 3/5 implementations + 3/6 runtimes; rollout pending
+status: current; Perl/Rust/Dart/Julia admitted at 4/5 implementations + 4/6 runtimes; rollout pending
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -30,6 +30,7 @@ reverify:
   - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_contract_dart_binding_test.dart test/mcp_server_dart_dispatch_test.dart test/mcp_server_dart_stdio_test.dart
   - cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart
   - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_contract_julia_binding_test.jl"); include("julia/test/mcp_server_julia_dispatch_test.jl"); include("julia/test/mcp_server_julia_stdio_test.jl")'
+  - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_server_julia_admission_test.jl")'
 ---
 
 # MCP implementation and runtime admission ledger
@@ -41,9 +42,9 @@ and the exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and
 
 Topology is five native implementations—Perl, Rust, Dart, Julia, and one Lua-5.1-compatible source—but six runtime
 admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current formal state is Perl,
-Rust, and Dart complete at 3/5 implementations and 3/6 runtimes. Dart's one ordered consumer composes its
-generated/frozen/decoded/strict-stdio production owners without changing them. Julia, Lua, PUC Lua, and LuaJIT
-remain pending, and shared `thin_mcp_transport` rollout remains pending under
+Rust, Dart, and Julia complete at 4/5 implementations and 4/6 runtimes. Each ordered consumer composes its
+generated/frozen/decoded/strict-stdio production owners without changing them. Lua, PUC Lua, and LuaJIT remain
+pending, and shared `thin_mcp_transport` rollout remains pending under
 `FUTURE-PARITY-BACKLOG.10.9.7` until all six runtimes qualify.
 
 Each admitted consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
@@ -56,7 +57,8 @@ does not synthesize another expected-response model.
 identity, exact role declaration/invocation/completion, tracked canonical inputs, and canonical command order. It
 rejects 28 mutations for the Perl-only state, 39 after Rust admission, 43/46 while Dart decoded/strict-stdio proof
 remained unadmitted, 58 after exact Dart admission, 65 after registering Julia's still-unadmitted generated/
-runtime/decoded owners, and 68 after requiring Julia's strict wire plus stdio proof. Static fences prohibit production MCP owners from
+runtime/decoded owners, 68 after requiring Julia's strict wire plus stdio proof, and 79 after exact Julia
+admission locks its source/consumer/package/CI/role/order topology. Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
 opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`;
@@ -78,7 +80,10 @@ Behavior-free Julia `.10.9.5.0` and ADR `0060` freeze generated/runtime/server/w
 `.1-.4`. Decoded leaf `.10.9.5.1` implements and canonically registers the generated binding, frozen runtime,
 secure registry, public decoded server, and exact focused proof while leaving Julia's formal source/status and
 consumer rows pending. Strict `.10.9.5.2` adds the fourth production wire owner and exact stdio proof without
-moving those rows. No completion count moves until exact admission `.10.9.5.3`.
+moving those rows. Exact `.10.9.5.3` now admits their unchanged owners through
+`julia/test/mcp_server_julia_admission_test.jl`, advances only Julia to 4/5 implementations plus 4/6 runtimes,
+and leaves shared rollout pending. No-change Julia closeout `.10.9.5.4` follows.
 
-Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
+Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
+[[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
 [[mcp-native-server-topology]], and [[mcp-2026-07-28-stdio-contract]].

@@ -4,16 +4,17 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
-Julia now has a callable native decoded MCP adapter and strict synchronous stdio under
-`FUTURE-PARITY-BACKLOG.10.9.5.1-.2`: a deterministic
+Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
+`FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic
 119,538-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only
 policy, and exact decoded discovery/list/capabilities/query/cancellation dispatch over caller-owned
 `SemanticIndex` values. The wire adds bounded LF/CRLF/final-EOF framing, iterative duplicate-safe lexical
 admission, exact number-kind reconstruction, canonical LF emission, cancellation through flush, sanitized
 optional diagnostics, and EOF/I/O release over caller-owned streams. Focused proof passes 48 + 139 + 170
-assertions and governance rejects 68 mutations. Formal MCP status intentionally stays at the already-admitted
-Perl/Rust/Dart boundary of 3/5 implementations + 3/6 runtimes with rollout pending until exact Julia admission
-`.10.9.5.3`.
+assertions. Exact admission `.10.9.5.3` composes all twelve roles through one external consumer with 178
+assertions, including the public 1,024-handle capacity boundary. Governance rejects 79 mutations and Julia alone
+advances formal MCP status to 4/5 implementations + 4/6 runtimes; Lua's two ABI rows and shared rollout remain
+pending.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
@@ -706,10 +707,12 @@ Three backbone items tracked major structural modernization — all done:
   adds bounded caller-owned framing, iterative duplicate-safe preflight, canonical LF emission, cancellation
   through flush, fixed optional diagnostics, and EOF/I/O release. Exact admission `.10.9.4.3` adds one ordered
   twelve-role public consumer without changing production owners. Focused MCP proof is 16/16, the complete package
-  is 353/353, and the ledger is 3/5 implementations + 3/6 runtimes with rollout pending and 58 mutations;
+  is 353/353, and that admission boundary reached 3/5 implementations + 3/6 runtimes with rollout pending and
+  58 mutations;
   no-change closeout `.4` recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, closes parent
-  `.10.9.4`, and makes Julia `.10.9.5` next. Any future aggregator or legacy adapter is separately owned after
-  `.10.10` and may only route/translate transport.
+  `.10.9.4`. Julia `.10.9.5.1-.3` now implements generated/runtime/decoded/strict-stdio owners and exact admission,
+  advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change closeout `.4` is next. Any future aggregator or
+  legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position
   with exact case- and normalization-sensitive scalar identity. Dart audit `.10.5.0` proves its typed compiler,
