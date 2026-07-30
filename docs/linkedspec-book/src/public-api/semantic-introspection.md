@@ -51,14 +51,15 @@ The distinction matters:
 The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
 Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, protocol policy, neutral machine
 contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
-canonical CI. Perl, Rust, and Dart have complete decoded/strict-stdio implementations and exact runtime admission.
+canonical CI. Perl, Rust, Dart, and Julia have complete decoded/strict-stdio implementations and exact runtime admission.
 Dart is the third generated filesystem-free binding, frozen schema runtime, secure opaque registry, exact decoded
 discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twelve-role public consumer. Julia
-`.10.9.5.1-.2` now add the fourth generated binding, digest-verified frozen runtime, secure public decoded server,
-and strict synchronous stdio. Exact admission remains `.3`, so the ledger stays 3/5 native implementations and
-3/6 runtime admissions with shared rollout pending even though the complete Julia server is callable now.
+`.10.9.5.1-.3` add the fourth generated binding, digest-verified frozen runtime, secure public decoded server,
+strict synchronous stdio, and one ordered twelve-role admission consumer. No-change `.10.9.5.4` recomposes those
+owners and closes the Julia parent without status movement. The ledger is 4/5 native implementations and 4/6
+runtime admissions with shared rollout pending until one Lua source qualifies on both ABIs.
 
-## Accepted modern MCP transport (Perl/Rust/Dart admitted; Julia implementation complete)
+## Accepted modern MCP transport (Perl/Rust/Dart/Julia admitted)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
 modern stateless protocol instead of implementing the removed legacy lifecycle:
@@ -3452,7 +3453,7 @@ The dependency order is:
 | `.10.9.5.1` | generated Julia Base64 binding/runtime, secure registry, and decoded server | implemented; 119,538-byte binding, 48 + 139 focused proof, formal admission unchanged |
 | `.10.9.5.2` | strict Julia stdio, lexical/number-kind preflight, canonical emission, and lifecycle cleanup | implemented; 170 assertions, 68 governance mutations, formal admission unchanged |
 | `.10.9.5.3` | exact Julia implementation/runtime admission | complete; one ordered twelve-role external consumer, 178 assertions, 4/5 implementations, 4/6 runtimes, rollout pending, 79 mutations |
-| `.10.9.5.4` | committed-owner no-change Julia closeout | pending after exact admission |
+| `.10.9.5.4` | committed-owner no-change Julia closeout | complete from clean `f8fd4a51`; focused/canonical recomposition unchanged; parent `.10.9.5` closed |
 | `.10.9.6` | one Lua MCP implementation admitted on PUC Lua and LuaJIT | pending |
 | `.10.9.7` | recurring six-runtime MCP admission and parent closeout | pending |
 | `.10.10` | public no-drift and closure | pending |
@@ -3477,7 +3478,8 @@ Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted nati
 runtime query surfaces now. MCP machine artifacts and independent validation are complete. Perl, Rust, Dart, and
 Julia callers can use decoded in-process dispatch plus strict stdio, and all four have exact twelve-role MCP
 admission. The shared status/proof ledger is therefore 4/5 implementations and 4/6 runtimes, with shared rollout
-pending and the normative transport digest unchanged.
+pending and the normative transport digest unchanged. Julia's no-change closeout recomposes those committed
+owners without another oracle and hands the same boundary to shared Lua planning `.10.9.6.0`.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created
@@ -3609,7 +3611,9 @@ and BOMs, malformed JSON/surrogates/nonfinite numbers, exact depth/line/id limit
 chunks, recovery, final EOF, canonical multi-frame responses, cancellation timing, hostile I/O/logging, release,
 and authority fences. Exact twelve-role admission `.3` composes those public/focused owners through one external
 178-assertion consumer. Julia alone is now complete at 4/5 implementations and 4/6 runtimes; shared rollout
-remains pending until Lua qualifies unchanged on both ABIs.
+remains pending until Lua qualifies unchanged on both ABIs. No-change `.10.9.5.4` reruns the committed neutral,
+Perl, Rust, Dart, and Julia owners, closes parent `.10.9.5`, and makes behavior-free shared Lua plan `.10.9.6.0`
+the next clean-boundary owner.
 
 ### Using Dart decoded MCP dispatch and strict stdio
 

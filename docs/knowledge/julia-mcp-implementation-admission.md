@@ -10,10 +10,12 @@ answers:
   - "how many MCP implementation admission mutations are rejected after Julia"
   - "does Julia MCP admission change the server or transport contract"
   - "what MCP work follows Julia admission"
+  - "is the Julia MCP implementation parent closed"
+  - "why did one mdBook paragraph still say Julia MCP admission was pending"
 date: 2026-07-29
-status: current exact Julia MCP admission
+status: current exact Julia MCP admission and parent closeout
 tags: [julia, mcp, admission, conformance, mutations, rollout, security]
-evidence: julia/test/mcp_server_julia_admission_test.jl; capability_conformance/mcp_implementation_admission.json; tools/check_mcp_implementation_admission.py; tools/run_ci_local.sh; FUTURE-PARITY-BACKLOG.10.9.5.3
+evidence: julia/test/mcp_server_julia_admission_test.jl; capability_conformance/mcp_implementation_admission.json; tools/check_mcp_implementation_admission.py; tools/run_ci_local.sh; FUTURE-PARITY-BACKLOG.10.9.5.3-.4
 reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_server_julia_admission_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
 ---
 
@@ -39,7 +41,12 @@ recurring rollout can complete.
 `tools/check_mcp_implementation_admission.py` now rejects 79 mutations. Julia-specific guards cover source and
 consumer paths, package and canonical-CI registration, focused-before-admission-before-checker ordering, exact
 role declaration/invocation/completion, no skip/broken markers, status regressions, and production authority
-fences. The next owner is no-change Julia closeout `.10.9.5.4`.
+fences. No-change `.10.9.5.4` reruns those committed owners without another implementation or oracle, preserves
+the exact 4/5 + 4/6 pending/79 boundary, and closes parent `.10.9.5`. Its lockstep review found one early duplicate
+paragraph in the mdBook public-API chapter that still described `.3` as pending even though the same chapter's
+later table and section were current. That prose was outside the present machine ledger inventory; the closeout
+corrects it now and records the escape durably, while `.10.10` remains the later public no-drift owner. Shared Lua
+planning `.10.9.6.0` follows after the clean closeout commit.
 
 Related facts: [[mcp-implementation-admission-ledger]], [[julia-native-mcp-server-plan]],
 [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], and [[mcp-2026-07-28-stdio-contract]].

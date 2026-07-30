@@ -1,8 +1,8 @@
 # ADR 0060: Julia MCP uses a generated contract module and a synchronous in-process server
 
 - Date: 2026-07-29
-- Status: accepted; `.10.9.5.0-.3` plan, decoded implementation, strict stdio, and exact admission complete;
-  no-change closeout pending
+- Status: accepted and complete; `.10.9.5.0-.4` plan, decoded implementation, strict stdio, exact admission, and
+  no-change closeout complete
 - Tags: architecture, mcp, julia, embedding, handles, authorization, json, stdio, security, portability
 
 ## Context
@@ -172,7 +172,8 @@ transport, aggregator, or legacy adapter.
 - `.10.9.5.1-.2` implement generated/runtime/decoded behavior and strict synchronous stdio without source/path,
   semantic, async, network, or primary-CLI authority. Exact `.10.9.5.3` composes those owners through one ordered
   twelve-role external consumer and advances only Julia to 4/5 implementations plus 4/6 runtimes; rollout remains
-  pending for Lua's two ABI admissions.
+  pending for Lua's two ABI admissions. No-change `.10.9.5.4` recomposes the committed owners and closes the Julia
+  parent without changing that status or adding another oracle.
 
 ## Links
 

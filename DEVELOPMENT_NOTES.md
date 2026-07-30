@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.4` — composition closeout should prove the existing ownership graph,
+  not manufacture a fifth Julia oracle): The neutral transport, four generated bindings, per-language frozen
+  runtimes/servers/wires, exact admission consumers, and the separate status ledger already have independent
+  authority. A closeout-only executable would either duplicate one of those models or silently become a new
+  source of truth. This leaf therefore reruns the committed chain unchanged and limits its diff to durable status,
+  evidence, and director-facing documentation.
+
+  Focused recomposition stays exact at neutral 35/10/10/68; binding bytes 83,072/82,886/82,875/119,538; Perl
+  22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; and ledger 4/5 implementations + 4/6 runtimes,
+  rollout pending, with 79 rejected mutations. Canonical CI passes Rust semantic 1/1 in 79.25 seconds, Dart 1/1,
+  Julia 416/416 in 27.6 seconds, containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 631
+  seconds. Knowledge Map 751/6,077 and mdBook 13,576 KiB/79 files pass. The staged diff contains no production,
+  generator, test, fixture, contract, ledger, or runtime owner.
+
+  Retrieval exposed one stale duplicate projection at the start of the mdBook semantic-introspection chapter:
+  it said Julia's implementation was complete but exact admission remained next, while a later table and section
+  in that same chapter already recorded `.10.9.5.3` complete. The root cause is duplicated current-state prose
+  outside the implementation-admission checker's present machine inventory; the pending public no-drift leaf
+  `.10.10` is the eventual mechanical owner, but mdBook-is-authoritative doctrine requires correction now. The
+  closeout updates that paragraph, the corresponding heading, and durable Knowledge Map/task evidence without
+  changing runtime scope. Parent `.10.9.5` then closes and shared Lua `.10.9.6.0` becomes the next clean-boundary
+  planning owner.
+
 - 2026-07-29 (`FUTURE-PARITY-BACKLOG.10.9.5.3` — implementation admission must compose existing authority, not
   create another server or oracle): Julia's generated runtime, decoded server, and strict wire were already
   behavior-complete at `.1-.2`; their formal pending state represented a missing ownership/proof boundary. The

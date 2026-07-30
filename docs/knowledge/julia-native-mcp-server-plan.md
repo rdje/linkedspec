@@ -18,7 +18,7 @@ answers:
   - "what are the Julia MCP implementation leaves"
   - "when will Julia MCP advance the implementation ledger"
 date: 2026-07-29
-status: accepted plan; generated runtime, decoded server, strict stdio, and exact admission complete; closeout pending
+status: accepted and complete; generated runtime, decoded server, strict stdio, exact admission, and closeout complete
 tags: [julia, mcp, semantic-introspection, embedding, handles, json, stdio, security, generated-data]
 evidence: docs/decisions/0060-julia-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.5.0-.4; julia/src/mcp/McpContract.jl; julia/src/mcp/McpContractRuntime.jl; julia/src/mcp/McpServer.jl; julia/src/mcp/McpWire.jl; julia/test/mcp_contract_julia_binding_test.jl; julia/test/mcp_server_julia_dispatch_test.jl; julia/test/mcp_server_julia_stdio_test.jl; julia/test/mcp_server_julia_admission_test.jl; tools/generate_julia_mcp_contract.py; tools/check_mcp_implementation_admission.py
 reverify: "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\"); include(\"julia/test/mcp_server_julia_admission_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
@@ -57,7 +57,9 @@ shutdown release without closing the streams.
 The omission-safe split is `.10.9.5.1` generated binding/runtime/secure decoded server, `.2` strict wire and
 lifecycle, `.3` exact twelve-role Julia admission and Julia-only movement to 4/5 implementations plus 4/6
 runtimes, and no-change `.4` parent closeout. `.3` is now complete with one 178-assertion external consumer and
-79 rejected mutations; shared rollout remains pending for Lua's two runtime admissions.
+79 rejected mutations. `.4` recomposes all committed owners unchanged and closes the Julia parent while shared
+rollout remains pending for Lua's two runtime admissions. Shared Lua planning `.10.9.6.0` follows the clean
+closeout commit.
 
 Related facts: [[julia-semantic-introspection-authority-map]], [[julia-semantic-query-public-api]],
 [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[julia-mcp-implementation-admission]],

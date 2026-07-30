@@ -283,7 +283,8 @@ Strict byte/framing/lifecycle implementation `.10.9.5.2` now ships bounded dupli
 stdio, canonical LF, cancellation through flush, fixed optional diagnostics, and EOF/I/O release over caller-owned
 streams at 170 further assertions. Exact admission `.10.9.5.3` composes one ordered twelve-role external consumer
 at 178 assertions, advances only Julia to 4/5 implementations + 4/6 runtimes, leaves shared rollout pending, and
-raises omission-sensitive governance to 79 rejected mutations.
+raises omission-sensitive governance to 79 rejected mutations. No-change `.10.9.5.4` recomposes every committed
+owner unchanged, closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0`.
 
 For a Dart implementation, reuse staged `SpecFile`/function sidecars, `CompiledSpec`, `UserFunctionRegistry`,
 typed ActionIR resolution, `SpecPortableDiagnostic`, strict loaded source text, `buildGeneratedRulePlan`, and the

@@ -5,22 +5,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `ddb040f0` — `FUTURE-PARITY-BACKLOG.10.9.5.2 - implement Julia MCP strict stdio` (85/300; no
+- latest_commit: `f8fd4a51` — `FUTURE-PARITY-BACKLOG.10.9.5.3 - admit Julia MCP implementation` (86/300; no
   push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.2`; Julia generated/runtime/decoded/strict-stdio owners,
-  48+139+170 focused assertions, full Julia/canonical signoff, and pending 3/5 + 3/6 ledger/68 are complete.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.3` — exact Julia MCP implementation/runtime admission;
-  task-tree-first from clean strict-stdio commit `ddb040f0`.
-- active_scope: one ordered twelve-role external Julia consumer, exact public/native composition, Julia-only
-  ledger promotion to 4/5 implementations + 4/6 runtimes, omission/order/authority mutations, and canonical
-  registration while shared rollout remains pending.
-- active_progress: consumer/ledger/checker/package/CI/docs are implemented; standalone admission 178/178,
-  combined Julia MCP 48+139+170+178, checker 4/5 + 4/6 pending/79, complete Julia/cross-runtime MCP, six
-  doctrines, Knowledge Map, mdBook, and canonical CI all pass. Only exact cleanup, commit, brief-clear, and clean
-  proof remain in flight.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.3`; one ordered Julia admission consumer, exact 178
+  assertions, 4/5 implementation + 4/6 runtime promotion, 79 mutations, and complete signoff are committed.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.5.4` — no-change Julia MCP implementation closeout; signoff-complete
+  from clean exact-admission commit `f8fd4a51`, with only final lockstep checks/cleanup/commit remaining.
+- active_scope: recompose the committed neutral + Perl/Rust/Dart/Julia MCP owners unchanged, preserve 4/5 + 4/6
+  and rollout pending, prove documentation-only diff, close `.10.9.5`, and hand off cleanly to shared Lua `.10.9.6`.
+- active_progress: unchanged-owner focused proof passes neutral 35/10/10/68, byte-fresh bindings
+  83,072/82,886/82,875/119,538, Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, and unchanged
+  ledger 4/5 + 4/6 pending/79. Canonical passes Rust semantic 79.25s, Dart 1/1, Julia 416/27.6s, containment/
+  moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/631s. One stale duplicate mdBook status paragraph is corrected.
 - active_exclusions: no executable, SDK/network/async transport, source bootstrap, semantic/parser/compiler/
   executor/trace/cache/primary-CLI behavior, non-Julia status, rollout, aggregator, or legacy adapter.
-- next_after_clean_commit: unchanged-owner Julia MCP closeout `.10.9.5.4`; no push before cadence 300.
+- next_after_clean_commit: behavior-free shared Lua MCP plan `.10.9.6.0`; no push before cadence 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -45,13 +44,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   inter-match-gap ownership. Neither is the current leaf.
 - latest_bootstrap_read: 2026-07-29 — required bootstrap, code owners, all 46 mdBook pages, KM/Toolbox/ADRs read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 84/300 after `ae212a7e`; no push.
+- push_policy: hard lock at 300 new local commits; counter 86/300 after `f8fd4a51`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.3` passes exact Julia MCP 48+139+170+178, full Julia package/storage 17/5/CLI/corpus 105/105,
-  ledger 4/5 + 4/6 pending/79, KM 751/6,075, mdBook 13,564 KiB/79 files, six doctrines, Rust semantic 1/1 79.17s,
-  Dart 1/1, Julia 416/416 27.9s, containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/637s.
-- blockers: none. next: exact cleanup, commit/clear/prove clean for `.10.9.5.3`, then activate no-change closeout
-  `.10.9.5.4`.
+- canonical_state: `.4` unchanged recomposition passes Julia MCP 48+139+170+178, ledger 4/5 + 4/6 pending/79,
+  KM 751/6,077, mdBook 13,576 KiB/79 files, six doctrines, Rust semantic 1/1 79.25s, Dart 1/1, Julia 416/416
+  27.6s, containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/631s; diff is documentation-only.
+- blockers: none. next: finish lockstep/KM/mdBook/doctrine/diff checks, exact cleanup, commit/clear/prove clean for
+  `.10.9.5.4`, then activate shared Lua plan `.10.9.6.0`.

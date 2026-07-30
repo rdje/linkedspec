@@ -82,7 +82,9 @@ secure registry, public decoded server, and exact focused proof while leaving Ju
 consumer rows pending. Strict `.10.9.5.2` adds the fourth production wire owner and exact stdio proof without
 moving those rows. Exact `.10.9.5.3` now admits their unchanged owners through
 `julia/test/mcp_server_julia_admission_test.jl`, advances only Julia to 4/5 implementations plus 4/6 runtimes,
-and leaves shared rollout pending. No-change Julia closeout `.10.9.5.4` follows.
+and leaves shared rollout pending. No-change Julia closeout `.10.9.5.4` recomposes the committed transport,
+binding, server, wire, consumer, and ledger owners unchanged; it preserves all 79 mutations, closes parent
+`.10.9.5`, and hands the same boundary to shared Lua planning `.10.9.6.0`.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],

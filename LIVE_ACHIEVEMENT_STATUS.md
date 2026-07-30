@@ -1,5 +1,19 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-29 — Julia native MCP implementation composition-closed
+
+`FUTURE-PARITY-BACKLOG.10.9.5.4` recomposes every committed neutral, Perl, Rust, Dart, and Julia MCP owner
+unchanged from clean exact-admission commit `f8fd4a51`. Focused proof remains neutral 35/10/10/68; byte-fresh
+bindings 83,072/82,886/82,875/119,538 bytes; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; and
+ledger 4/5 implementations + 4/6 runtimes, shared rollout pending, with 79 rejected mutations.
+
+Canonical CI exits 0 with Rust semantic 1/1 in 79.25 seconds, Dart 1/1, Julia 416/416 in 27.6 seconds,
+containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 631 seconds. No production source, test,
+fixture, contract, generated binding, ledger, semantic/CLI surface, server topology, aggregator policy, or legacy
+behavior changes. Lockstep review corrects one stale early mdBook paragraph that still described Julia before its
+already-complete admission. Knowledge Map passes at 751/6,077 and mdBook builds at 13,576 KiB/79 files. Parent
+`.10.9.5` closes; shared Lua planning `.10.9.6.0` follows only after the clean closeout commit.
+
 ## 2026-07-29 — Julia native MCP implementation and runtime admitted
 
 `FUTURE-PARITY-BACKLOG.10.9.5.3` adds one ordered twelve-role Julia admission consumer over the already-committed

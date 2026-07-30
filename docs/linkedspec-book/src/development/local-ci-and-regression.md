@@ -64,7 +64,8 @@ fixture, or umbrella oracle. Focused and canonical gates pass unchanged, close p
 server, strict stdio, and exact admission; no-change `.10.9.4.4` recomposes that chain and closes the parent.
 Julia `.10.9.5.1-.3` then adds its generated binding, decoded server, strict number-kind-preserving stdio, and
 one ordered twelve-role external admission consumer. The current ledger is 4/5 implementations + 4/6 runtimes
-with rollout pending and 79 rejected implementation/admission mutations.
+with rollout pending and 79 rejected implementation/admission mutations. No-change `.10.9.5.4` reruns that exact
+committed chain, closes parent `.10.9.5`, and adds no replacement implementation, fixture, or umbrella oracle.
 
 Behavior-free Julia plan `.10.9.5.0` and ADR `0060` freeze the generated-Base64-binding -> decoded-server ->
 strict-number-preserving-stdio -> exact-admission -> no-change-closeout sequence. Leaves `.1-.3` now implement
@@ -73,6 +74,12 @@ proof, then the 178-assertion exact twelve-role consumer before the ledger check
 four source owners, package/CI registration, role declaration/invocation/completion, authority fences, Julia-only
 status movement, and unchanged transport digest. No primary-CLI mode, executable, SDK/network stack, async
 runtime, source bootstrap, semantic cache, aggregator, or legacy adapter enters that proof.
+
+The Julia closeout canonical signoff passes Rust semantic admission 1/1 in 79.25 seconds, Dart 1/1, Julia
+416/416 in 27.6 seconds, repository-volume containment, moved-root execution, primary CLI 66x2, RAM 58%, and
+Phase 0 1,031/1,031 in 631 seconds. Focused MCP recomposition remains exact at neutral 35/10/10/68, four
+byte-fresh bindings, Perl 22+13, Rust 15+3+4+1, Dart 15+1, Julia 48+139+170+178, and ledger 4/5 + 4/6
+pending/79.
 
 The `.10.9.5.0` planning signoff passes the unchanged focused chain and complete canonical gate: Rust semantic
 admission 1/1 in 80.66 seconds, Dart 1/1, Julia 416/416 in 29.3 seconds, six-family process containment, moved-root

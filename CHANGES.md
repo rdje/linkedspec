@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.4 — close the Julia MCP implementation
+
+Recomposed the committed neutral transport and Perl, Rust, Dart, and Julia native MCP owners without adding a
+replacement implementation, test, fixture, umbrella oracle, or status row. The exact focused chain remains 35
+canonical / 10 raw / 10 lifecycle cases with 68 neutral mutations; byte-fresh generated bindings at 83,072,
+82,886, 82,875, and 119,538 bytes; Perl Files=4 Tests=35; Rust 15 + 3 + 4 + 1; Dart 15 + 1; Julia
+48 + 139 + 170 + 178; and the implementation ledger at 4/5 implementations + 4/6 runtimes, shared rollout
+pending, with all 79 mutations rejected.
+
+This documentation-only closeout preserves every production source, runtime, test, fixture, normative transport
+artifact/digest, generated binding, admission consumer, ledger row, semantic/primary-CLI boundary, one-server-per-
+backend topology, routing-only aggregator deferral, and modern-only protocol decision. Lockstep review found one
+stale early paragraph in the mdBook public API chapter that still described Julia immediately before admission,
+while the same chapter's later status and every code/governance owner were current. The paragraph and heading now
+agree with exact admission and parent closure; the task-tree records the duplicate-projection escape so it is not
+lost before the later public no-drift leaf.
+
+Canonical CI passes all six doctrines, Rust semantic admission 1/1 in 79.25 seconds, Dart 1/1, Julia 416/416 in
+27.6 seconds, repository-volume containment, moved-root proof, primary CLI 66x2, RAM 58%, and Phase 0
+1,031/1,031 in 631 seconds. Knowledge Map passes at 751/6,077 and mdBook builds at 13,576 KiB/79 files. Parent
+`.10.9.5` closes without behavior or status movement and hands the clean boundary to shared Lua planning
+`.10.9.6.0`.
+
 ## 2026-07-29 — FUTURE-PARITY-BACKLOG.10.9.5.3 — admit the Julia MCP implementation
 
 Added `julia/test/mcp_server_julia_admission_test.jl`, one external consumer that declares and executes the

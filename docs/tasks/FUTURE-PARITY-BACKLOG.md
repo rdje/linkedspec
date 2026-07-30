@@ -13900,9 +13900,9 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.4.4 - close Dart MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.5`
-    Status: `active` (2026-07-29; behavior-free native owner/security/wire audit `.0` and generated binding/
-      runtime/decoded server `.1` plus strict synchronous stdio `.2` are complete; exact Julia admission `.3` is
-      active task-tree-first from clean strict-stdio commit `ddb040f0`)
+    Status: `done` (2026-07-29; behavior-free native owner/security/wire audit `.0`, generated binding/runtime/
+      decoded server `.1`, strict synchronous stdio `.2`, exact admission `.3`, and no-change closeout `.4` are
+      complete; formal state remains 4/5 implementations + 4/6 runtimes with shared rollout pending)
     Goal: Implement and admit the Julia native MCP server against the exact transport contract.
     Depends on: `.10.9.4`
     Children: `.10.9.5.0`, `.10.9.5.1`, `.10.9.5.2`, `.10.9.5.3`, `.10.9.5.4`
@@ -14100,7 +14100,7 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.5.2 - implement Julia MCP strict stdio`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.5.3`
-      Status: `done` (2026-07-29; signoff-complete from clean strict-stdio commit `ddb040f0`; awaiting commit)
+      Status: `done` (2026-07-29; committed at `f8fd4a51` from clean strict-stdio commit `ddb040f0`)
       Goal: Admit the Julia MCP implementation and runtime through one exact ordered twelve-role consumer.
       Depends on: `.10.9.5.2`
       Acceptance: Execute all twelve exact roles once through Julia's public server/native index plus required
@@ -14156,12 +14156,59 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.5.3 - admit Julia MCP implementation`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.5.4`
-      Status: `pending`
+      Status: `done` (2026-07-29; signoff-complete from clean exact-admission commit `f8fd4a51`; awaiting this
+        leaf's closeout commit)
       Goal: Recompose committed Julia MCP owners unchanged and close `.10.9.5`.
       Depends on: `.10.9.5.3`
       Acceptance: Rerun the exact neutral + four generated bindings + Perl/Rust/Dart/Julia focused/admission chain
         and canonical signoff without a replacement implementation, fixture, umbrella oracle, ledger movement,
         or user-visible behavior; close Julia and hand the clean boundary to shared Lua `.10.9.6`.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN COMMITTED BASE / OWNERSHIP** — Prove exact-admission commit `f8fd4a51`, zero-byte brief, clean
+        tree, and absent rendered-book/managed-run/Python-bytecode residue; activate `.10.9.5.4` before any other
+        closeout change.
+      - [x] **UNCHANGED OWNER RECOMPOSITION** — Materialize and independently validate the frozen transport;
+        regenerate byte-fresh Perl/Rust/Dart/Julia bindings; run committed Perl, Rust, Dart, and Julia binding,
+        decoded-dispatch, strict-stdio, and exact-admission owners unchanged; add no replacement implementation,
+        test, fixture, or umbrella oracle.
+      - [x] **IDENTITY / LIFECYCLE / AUTHORITY** — Reprove native/MCP byte identity, raw/lifecycle inventories,
+        opaque-handle indistinguishability, policy, cancellation, cleanup, hostile-output privacy, and denial of
+        semantic/source/bootstrap/parser/compiler/executor/trace/cache/primary-CLI/SDK/network authority.
+      - [x] **NO STATUS OR TOPOLOGY MOVEMENT** — Preserve 4/5 implementations + 4/6 runtimes and shared rollout
+        pending, all 79 admission mutations, unchanged contract digest/corpus, one server per admitted backend,
+        routing-only aggregator deferral, and no legacy adapter.
+      - [x] **LOCKSTEP / PARENT CLOSURE** — Pass focused Julia/Dart/Rust/Perl, capability/semantic/no-drift,
+        mdBook, Knowledge Map, memory/task/doctrines/diff/syntax/storage, canonical CI, and exact safe cleanup;
+        close `.10.9.5`, hand off shared Lua `.10.9.6` only after commit/clear/clean proof, and do not push before
+        cadence 300.
+
+      Verification plan: Re-run the checked-in contract materializer and independent validator, all four
+        generated-binding owners, every committed Perl/Rust/Dart/Julia binding/server/admission consumer, and the
+        implementation-admission checker before the complete canonical gate. Inspect the staged diff to prove a
+        documentation-only closeout with no production/test/fixture/contract/ledger change. Route all writing
+        commands through repository-local wrappers and remove only exact verified generated residue.
+
+      Verification: **PASS 2026-07-29.** From clean exact-admission commit `f8fd4a51`, focused unchanged-owner
+        recomposition passes neutral 35 canonical / 10 raw / 10 lifecycle / 68 mutations; byte-fresh Perl
+        83,072-byte, Rust 82,886-byte, Dart 82,875-byte, and Julia 119,538-byte bindings; Perl Files=3 Tests=22
+        plus admission Files=1 Tests=13; Rust MCP 15 + 3 + 4 + 1; Dart MCP 15 + 1; Julia MCP 48 + 139 + 170 +
+        178; and the unchanged ledger at 4/5 implementations + 4/6 runtimes, rollout pending, with all 79
+        mutations rejected. No generator, production, runtime, test, fixture, transport, or ledger diff exists.
+
+        Canonical CI exits 0 after all six doctrines, the complete unchanged MCP chain, Rust semantic admission
+        1/1 in 79.25 seconds, Dart 1/1, Julia 416/416 in 27.6 seconds, repository-volume containment, moved-root
+        proof, primary CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 631 seconds. Lockstep review also finds and
+        corrects one stale early mdBook paragraph that still called Julia implemented-but-unadmitted while the
+        same chapter's later status was current; the closeout records this duplicate-projection escape instead of
+        leaving the director-facing book internally contradictory. Knowledge Map passes at 751 facts / 6,077
+        question keys and mdBook builds to a verified ignored 13,576-KiB / 79-file rendering; memory, doctrines,
+        whitespace, documentation-only classification, and exact cleanup complete before commit.
+        Parent `.10.9.5` closes without status/topology movement, and shared Lua planning `.10.9.6.0` follows only
+        after this leaf's commit, brief-clear, and clean proof.
+
+      Commit: `FUTURE-PARITY-BACKLOG.10.9.5.4 - close Julia MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.6`
     Status: `pending`
@@ -17885,6 +17932,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.5.4` | Clean base `f8fd4a51`; unchanged MCP 35/10/10/68; byte-fresh Perl/Rust/Dart/Julia bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 15+1; Julia 48+139+170+178; unchanged ledger 4/5 + 4/6 rollout pending/79 mutations; stale duplicate mdBook pre-admission paragraph root-caused and corrected; KM 751/6,077; mdBook 13,576 KiB/79; canonical six doctrines, Rust semantic 1/1 79.25s, Dart 1/1, Julia 416/416 27.6s, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/631s; documentation-only diff and exact cleanup. | PASS. Committed-owner recomposition closes `.10.9.5.4` and parent `.10.9.5` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; shared Lua `.10.9.6.0` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.5.3` | Clean base `ddb040f0`; one ordered twelve-role Julia consumer 178/178; complete Julia MCP 48+139+170+178; full Julia package/storage 17/5/CLI/corpus 105/105; neutral MCP 35/10/10/68; four byte-fresh bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 16; ledger 4/5 + 4/6 rollout pending/79 mutations; KM 751/6,075; mdBook 13,564 KiB/79; six doctrines; memory; canonical Rust semantic 1/1 79.17s, Dart 1/1, Julia 416/416 27.9s, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/637s; exact rendered-book/empty-run cleanup. | PASS. Julia alone advances to formal implementation/runtime admission without production/transport/semantic/CLI/other-runtime/rollout/aggregator/legacy movement; no-change `.10.9.5.4` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.5.2` | Clean base `ae212a7e`; bounded iterative Julia framing/lexical/number-kind/emission/lifecycle implementation; Julia MCP 48+139+170; complete Julia package/storage 17/5/CLI/corpus 105/105; neutral MCP 35/10/10/68; four byte-fresh bindings 83,072/82,886/82,875/119,538; Perl 22+13; Rust 15+3+4+1; Dart 16; unchanged ledger 3/5 + 3/6 rollout pending/68 mutations; KM 750/6,067; mdBook 13,556 KiB/79; six doctrines; memory; canonical Rust semantic 1/1 78.64s, Dart 1/1, Julia 416/416 27.6s, containment/moved-root, CLI 66x2, RAM 60%, Phase 0 1,031/632s; exact rendered-book/Python-bytecode cleanup. | PASS. Julia owns strict caller-owned MCP stdio, lexical number-kind preservation, canonical LF, cancellation through flush, and EOF/I/O release without executable/source/semantic/CLI/admission/rollout/aggregator/legacy movement; exact admission `.10.9.5.3` follows only after the clean commit. |
 | `2026-07-29` | `FUTURE-PARITY-BACKLOG.10.9.4.4` | Clean base `956ea5e9`; unchanged MCP 35/10/10/68; byte-fresh Perl/Rust/Dart bindings 83,072/82,886/82,875; Perl Files=4 Tests=35; Rust 15+3+4+1; Dart 16/16; unchanged ledger 3/5 + 3/6 rollout pending/58 mutations; KM 747/6,034; mdBook; six doctrines; memory; storage 1,725/391,021/28; path 14/5; canonical Rust semantic 1/1 81.15s, Dart 1/1, Julia 416/416 29.1s, containment/moved-root, CLI 66x2, RAM 67%, Phase 0 1,031/645s; documentation-only diff; exact 13,488-KiB/one-empty-run cleanup. | PASS. Committed-owner recomposition closes `.10.9.4.4` and parent `.10.9.4` without production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy movement; Julia `.10.9.5` follows only after the clean commit. |
@@ -18191,6 +18239,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.10.9.5.4` | `FUTURE-PARITY-BACKLOG.10.9.5.4 - close Julia MCP implementation` | Documentation-only unchanged-owner recomposition, stale duplicate mdBook status correction, complete canonical signoff, Julia parent closure, and clean shared-Lua handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.5.3` | `FUTURE-PARITY-BACKLOG.10.9.5.3 - admit Julia MCP implementation` | Exact ordered twelve-role Julia consumer, 4/5 + 4/6 ledger promotion, 79 mutations, complete signoff, and clean no-change closeout handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.5.2` | `FUTURE-PARITY-BACKLOG.10.9.5.2 - implement Julia MCP strict stdio` | Bounded duplicate-safe number-kind-preserving caller-owned stdio, cancellation through flush, hostile-I/O release, 170 assertions, 68 governance mutations, complete signoff, and clean exact-admission handoff. |
 | `FUTURE-PARITY-BACKLOG.10.9.4.0` | `FUTURE-PARITY-BACKLOG.10.9.4.0 - plan Dart native MCP server` | Behavior-free Dart owner/security/wire audit, ADR `0059`, exact `.1-.4` split, complete signoff, and clean generated-binding/decoded-server handoff. |
@@ -18477,6 +18526,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
+
+- `2026-07-29`: No-change Julia MCP closeout `.10.9.5.4` completes from clean exact-admission commit `f8fd4a51`.
+  Unchanged neutral/Perl/Rust/Dart/Julia focused proof, 79-mutation ledger governance, and canonical CI all pass;
+  formal state remains 4/5 implementations + 4/6 runtimes with shared rollout pending. Lockstep review corrects
+  and durably records one stale duplicate mdBook paragraph outside the current machine-ledger inventory. No
+  production/test/fixture/contract/ledger/semantic/CLI/topology/aggregator/legacy owner moves; parent `.10.9.5`
+  closes and shared Lua planning `.10.9.6.0` follows only after the clean commit.
 
 - `2026-07-29`: Exact Julia MCP admission `.10.9.5.3` completes from clean strict-stdio commit `ddb040f0`.
   One ordered twelve-role external consumer passes 178/178 through the existing public implementation and narrow

@@ -439,7 +439,9 @@ untrusted wire bytes instead of decoding them directly with JSON3. Cancellation 
 preparation but before emission suppresses that response; successful flush completes it, so a later cancellation
 cannot retract emitted bytes. Exact admission `.10.9.5.3` now composes one ordered twelve-role external consumer
 with 178 assertions. Julia alone advances to 4/5 implementations + 4/6 runtimes; shared rollout remains pending
-until the same Lua implementation passes independently on PUC Lua and LuaJIT.
+until the same Lua implementation passes independently on PUC Lua and LuaJIT. No-change `.10.9.5.4` recomposes
+the committed owners without a replacement implementation or oracle, closes parent `.10.9.5`, and hands the
+clean boundary to shared Lua planning `.10.9.6.0`.
 
 ## Commands
 

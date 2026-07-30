@@ -14,7 +14,8 @@ optional diagnostics, and EOF/I/O release over caller-owned streams. Focused pro
 assertions. Exact admission `.10.9.5.3` composes all twelve roles through one external consumer with 178
 assertions, including the public 1,024-handle capacity boundary. Governance rejects 79 mutations and Julia alone
 advances formal MCP status to 4/5 implementations + 4/6 runtimes; Lua's two ABI rows and shared rollout remain
-pending.
+pending. No-change `.10.9.5.4` recomposes all committed owners unchanged, closes the Julia parent without
+status movement, and hands the clean boundary to shared Lua planning `.10.9.6.0`.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
 source/outcome, exact static and calls/staging/generated projections, and index `capabilities`, typed `query`, and
@@ -711,7 +712,8 @@ Three backbone items tracked major structural modernization — all done:
   58 mutations;
   no-change closeout `.4` recomposes the committed neutral, Perl, Rust, and Dart owners unchanged, closes parent
   `.10.9.4`. Julia `.10.9.5.1-.3` now implements generated/runtime/decoded/strict-stdio owners and exact admission,
-  advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change closeout `.4` is next. Any future aggregator or
+  advancing only Julia to 4/5 + 4/6 with 79 mutations; no-change `.4` recomposes those owners and closes parent
+  `.10.9.5`. Shared Lua `.10.9.6.0` is next. Any future aggregator or
   legacy adapter is separately owned after `.10.10` and may only route/translate transport.
 
   ADR `0051` and Rust prerequisite `.10.4.0.2` pin rule labels to Unicode 17.0.0 `XID_Continue` at every position

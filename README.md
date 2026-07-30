@@ -1092,7 +1092,9 @@ content migration exists yet.
   external consumer, including the real public 1,024-handle capacity boundary. Focused Julia proof remains
   48 + 139 + 170 assertions, the admission consumer passes 178, and governance rejects 79 mutations. Julia alone
   advances to 4/5 implementations + 4/6 runtimes while Lua, both Lua ABIs, and shared rollout remain pending.
-  There is no
+  No-change closeout `.10.9.5.4` now recomposes every committed neutral/Perl/Rust/Dart/Julia owner unchanged,
+  closes parent `.10.9.5`, and hands the exact contract to shared Lua planning `.10.9.6.0` after the clean
+  closeout commit. There is no
   standalone MCP executable, facade, source bootstrap, or semantic cache. Perl
   foundation `.10.3.1` now adds
   `LinkedSpec::semantic_index(...)`: an opaque immutable compiled-or-failed snapshot built from decoded text or
@@ -1544,7 +1546,9 @@ content migration exists yet.
   and EOF/I/O cleanup over caller-owned streams. Exact `.10.9.5.3` adds one ordered twelve-role external consumer,
   advances only Julia to 4/5 implementations + 4/6 runtimes, keeps shared rollout pending, and raises omission-
   sensitive governance to 79 rejected mutations. Combined proof is 48 + 139 + 170 focused plus 178 admission
-  assertions; no production server or transport byte changes in the admission leaf.
+  assertions; no production server or transport byte changes in the admission leaf. No-change `.10.9.5.4`
+  recomposes those committed owners, closes the Julia parent without status movement, and makes shared Lua
+  planning `.10.9.6.0` the next clean-boundary owner.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, 353
   package tests, repository-filesystem package/temp/generated/trace storage proof, primary 66/66 in both
   environments, and the 105-fixture corpus execution. Use `bash tools/test_dart_project_data_storage.sh` for the
