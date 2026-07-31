@@ -3060,6 +3060,12 @@ final class LinkedSpecRuntimeEngine {
               ),
             ),
         };
+      case ActionCodeblockLiteralExpr():
+        return _copyValue(expr.toJson());
+      case ActionCodeblockLiteralErrorExpr(:final code):
+        throw RuntimeInterpreterException(
+          'invalid callable-codeblock literal in rule $ruleLabel: $code',
+        );
       case ActionAssignScalarExpr(:final name, :final value):
         final stored = _copyValue(
           _evaluateExpression(
@@ -3805,7 +3811,7 @@ final class LinkedSpecRuntimeEngine {
     final signature = entry.signature;
     if (signature != null) {
       context.bindUserFunctionParam(
-        signature.restParam,
+        signature.restParam!,
         values.sublist(signature.minArity),
       );
     }

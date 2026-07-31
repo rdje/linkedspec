@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Dart callable-codeblock construction signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.5.1` gives Dart exact inert `{|params| body }` / `{|| body }` construction before
+ordinary harray/eager-block classification. The neutral eight-field record retains fixed/final-rest signature,
+typed ActionIR body, exact source, and containing Unicode-character literal/body spans. Runtime values are plain
+recursively copied data, so construction captures no host closure and executes no retained call or `retv` read.
+User-function transport, compiled JSON, generated plans, normalized emitted-source reconstruction, and semantic
+codeblock shapes preserve that identity. Dynamic bound-variable calls remain `.11.5.2`; generic contextual final
+blocks remain `.11.5.3`.
+
+Neutral 7/11/9/7/4/8, focused Dart 8 plus 13 parser/variadic regressions, strict analysis, and the full Dart gate
+pass 362 tests, 18-owner/47-package storage proof, CLI 66x2, and corpus 105/105. The eighth test keeps reconstructed
+variadic user functions from inheriting the literal signature's nullable rest field. Knowledge Map 764/6,204, mdBook
+79 files / 13,908 KiB, all seven doctrines, containment/moved-root, canonical CLI 66x2, RAM 56%, and Phase 0
+1,031/1,031 in 645 seconds pass. Exact cleanup leaves no rendered book or managed run; the leaf is ready for its
+clean commit and then `.11.5.2` activation.
+
 ## 2026-07-30 — Activation-pointer correction independently closed
 
 Leaf `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` independently recomposes ADR `0065` and the committed `.1` checker,

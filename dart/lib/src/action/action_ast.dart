@@ -1,3 +1,5 @@
+import '../ast/spec_ast.dart' show CallableSignature;
+
 typedef ActionJsonObject = Map<String, Object?>;
 
 final class ActionSourceSpan {
@@ -289,6 +291,56 @@ final class ActionBlockValueExpr extends ActionExpr {
 
   @override
   ActionJsonObject toJson() => {...baseJson(), 'block': block.toJson()};
+}
+
+/// An inert, serializable callable-codeblock value.
+///
+/// The body remains typed ActionIR, but construction does not visit or execute
+/// it. Invocation is a separate runtime concern.
+final class ActionCodeblockLiteralExpr extends ActionExpr {
+  const ActionCodeblockLiteralExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.version,
+    required this.signature,
+    required this.bodySource,
+    required this.bodyAst,
+    required this.bodySpan,
+  }) : super(kind: 'codeblock_literal');
+
+  final int version;
+  final CallableSignature signature;
+  final String bodySource;
+  final ActionBlock bodyAst;
+  final ActionSourceSpan bodySpan;
+
+  @override
+  ActionJsonObject toJson() {
+    return {
+      'kind': kind,
+      'version': version,
+      'signature': signature.toJson(),
+      'body_source': bodySource,
+      'body_ast': bodyAst.toJson(),
+      'source_text': source,
+      'source_span': sourceSpan.toJson(),
+      'body_span': bodySpan.toJson(),
+    };
+  }
+}
+
+/// Stable parser result for a malformed callable-codeblock literal.
+final class ActionCodeblockLiteralErrorExpr extends ActionExpr {
+  const ActionCodeblockLiteralErrorExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.code,
+  }) : super(kind: 'codeblock_literal_error');
+
+  final String code;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'code': code};
 }
 
 final class ActionStringLiteralExpr extends ActionExpr {
@@ -859,6 +911,9 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       return null;
     case ActionBlockValueExpr(:final block):
       return findRemovedAggregateSelectorInBlock(block);
+    case ActionCodeblockLiteralExpr():
+    case ActionCodeblockLiteralErrorExpr():
+      return null;
     case ActionControlIfExpr(:final condition, :final args, :final body):
       return findRemovedAggregateSelectorInExpr(condition) ??
           inArgs(args) ??

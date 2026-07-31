@@ -5,6 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 Dart callable-codeblock construction`: `FUTURE-PARITY-BACKLOG.11.5.1` adds exact `{|` recognition
+  before harray/eager-block classification and one typed `ActionCodeblockLiteralExpr` with the neutral eight
+  fields, shared fixed/final-rest signature, retained ActionIR body, exact source, and half-open containing
+  Unicode-character literal/body spans. Recursive child parsers retain the root source so nested literals do not
+  reset coordinates despite Dart's UTF-16 indexing. Runtime construction produces recursively copied plain map
+  data; user functions, compiled ActionIR JSON, generated-plan execution, normalized emitted `SpecFile`
+  reconstruction, and semantic `codeblock` shapes preserve it without a closure or captured environment. Contract
+  and removed-selector traversal treat the retained body as deferred, so calls and `retv` reads are not eager
+  dependencies. Dart bound-variable invocation remains `.11.5.2`; generic final-block equivalence remains
+  `.11.5.3`; capability/MCP and other backends do not move. Signoff passes the complete Dart gate, Knowledge Map
+  764/6,204, mdBook 79/13,908, seven doctrines, containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031
+  in 645 seconds with exact cleanup.
 - `2026-07-30 satisfiable resume-pointer commit identity`: ADR `0065` corrects the old requirement that tracked
   `MEMORY.md` contain the hash of the commit that contains it. Git remains the sole current-`HEAD` authority;
   `MEMORY.md` names the clean `activation_commit`, which is current `HEAD` before a leaf commit and first
@@ -15,7 +27,7 @@ This document is the current high-level technical reading of the project shape. 
   both real hook phases. Independent `.2` then recomposes that committed behavior unchanged, explicitly annotates
   the only two unqualified historical task records, and closes the correction. Closeout passes Knowledge Map
   763/6,194, mdBook, all seven doctrines, containment/moved-root, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in
-  633 seconds. Dart `.11.5.1` is restored as the next clean activation.
+  633 seconds. Dart `.11.5.1` subsequently activated from that clean boundary and now owns inert construction.
 - `2026-07-30 expressive self-containment / EBNF-like profile direction`: ADR `0064` and
   `SPEC-LANGUAGE-SELF-CONTAINMENT` define `.spec` closure inside LinkedSpec's grammar, recursion, cursor/capture,
   scoped state, callable/control, transformation, and result domain without granting ambient filesystem/process/

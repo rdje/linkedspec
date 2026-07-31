@@ -124,7 +124,7 @@ final class CallableSignature {
   final String kind;
   final int version;
   final List<String> positionalParams;
-  final String restParam;
+  final String? restParam;
   final int minArity;
   final int? maxArity;
 
@@ -133,7 +133,13 @@ final class CallableSignature {
       kind: _stringField(json, 'kind'),
       version: _intField(json, 'version'),
       positionalParams: _stringList(json, 'positional_params'),
-      restParam: _stringField(json, 'rest_param'),
+      restParam: switch (json['rest_param']) {
+        null => null,
+        final String value => value,
+        _ => throw const FormatException(
+          "field 'rest_param' must be a string or null",
+        ),
+      },
       minArity: _intField(json, 'min_arity'),
       maxArity: _optionalIntField(json, 'max_arity'),
     );

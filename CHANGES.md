@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.1 — construct Dart callable codeblocks
+
+Dart now recognizes exact `{|params| body }` and `{|| body }` before its existing harray/eager-block brace
+classifier. `ActionCodeblockLiteralExpr` retains the neutral eight fields: version, one fixed/final-rest
+`CallableSignature`, exact body source, typed ActionIR body, exact literal source, and half-open source/body spans.
+Child parsers retain their containing root source so astral prefixes and nested literals report Unicode-character
+coordinates instead of UTF-16 code-unit or body-local offsets. All nine malformed literal forms retain their
+neutral diagnostic codes.
+
+Construction is deliberately inert. The runtime returns recursively copied plain map data; no Dart closure,
+callback object, or environment is captured. Action contract and removed-selector traversal treat the retained
+body as a deferred leaf, preventing body calls or `retv` reads from becoming eager dependencies. Assignment,
+copying, user-function arguments/results, compiled ActionIR JSON, generated plans, normalized emitted `SpecFile`
+reconstruction, and semantic binding shapes all carry the same record and exact callable signature. Dynamic
+`cb(args)` remains `.11.5.2`, and generic contextual final-block equivalence remains `.11.5.3`.
+
+The contract-driven suite passes eight tests covering all brace classes/seven literals, nine invalid forms,
+Unicode/nested spans, non-execution, user-function transport, JSON/generated/emitted identity, eager-dependency
+isolation, semantic descriptors, the intentional dynamic-call exclusion, and rejection of reconstructed variadic
+user-function signatures whose newly nullable shared rest field is absent. The neutral checker and 13 existing
+parser/variadic regressions pass, strict analysis is clean, and the complete Dart gate passes 362 tests,
+18-owner/47-package repository-storage proof, CLI 66/66 in both option environments, and corpus 105/105.
+Knowledge Map 764/6,204, mdBook 79 files / 13,908 KiB, all seven doctrines, repository containment and moved-root
+proof, canonical CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 645 seconds also pass; generated output and the
+single empty managed run are removed exactly.
+
 ## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.2 — close the activation-pointer correction
 
 The committed ADR `0065` enforcement has been independently recomposed without implementation change. Automatic

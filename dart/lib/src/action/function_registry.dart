@@ -187,12 +187,21 @@ final class UserFunctionEntry {
 
   bool acceptsArity(int actual) {
     final callable = signature;
-    return callable == null ? actual == arity : actual >= callable.minArity;
+    if (callable == null) {
+      return actual == arity;
+    }
+    return actual >= callable.minArity &&
+        (callable.maxArity == null || actual <= callable.maxArity!);
   }
 
   String get arityExpectation {
     final callable = signature;
-    return callable == null ? '$arity' : 'at least ${callable.minArity}';
+    if (callable == null) {
+      return '$arity';
+    }
+    return callable.maxArity == null
+        ? 'at least ${callable.minArity}'
+        : 'exactly ${callable.minArity}';
   }
 
   JsonObject toJson() {

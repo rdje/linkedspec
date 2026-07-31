@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.1` — typed deferred data, not a Dart callback): The measured Dart gap
+  had three connected seams. `ActionExpr` represented ordinary eager `block_value` only; `_parseBraceExpr` sent
+  every non-harray brace through that evaluator; and the existing shared `CallableSignature` required a rest name,
+  so it could not describe fixed literal arity. The smallest coherent repair is an exact `{|`-first literal/error
+  node, a nullable rest field whose min/max bounds govern arity, and one ordinary serializable ActionIR record.
+
+  Dart parser offsets remain UTF-16 code-unit indices internally because every existing substring/scanner owner
+  depends on them. Converting that entire parser was outside this leaf and risky. Instead every recursive child
+  parser now retains the containing root source; the new literal converts only its source/body boundaries to rune
+  counts at the record boundary. This gives exact half-open Unicode-character coordinates for astral prefixes and
+  nested literals without silently changing unrelated established ActionIR offsets.
+
+  Construction calls `toJson()` and recursive value copying, producing plain data rather than a host class or
+  closure. The typed body is intentionally a leaf for contract resolution and removed-selector/dependency scans;
+  otherwise a deferred `missing()` or `call(Done)` could diagnose or dispatch while merely constructing the
+  value. Generated-plan execution already uses compiled ActionIR. Emitted Dart deliberately keeps its established
+  normalized-`SpecFile` Base64 owner, then reparses the authored literal through the ordinary compiler/runtime;
+  adding a codeblock-only codec or host callback would have created a second authority.
+
+  Eight focused tests consume the neutral contract and lock exact keys/signatures/spans/errors, inert construction,
+  user-function transport, compiled JSON, generated plans, emitted reconstruction, dependency isolation, and
+  semantic shape. A final assertion keeps `cb()` unresolved in this slice so dynamic dispatch cannot arrive
+  accidentally before `.11.5.2`. The shared `CallableSignature` rest name became nullable for fixed literal
+  signatures, so user-function validation now explicitly retains its non-null rest invariant; a reconstructed
+  variadic signature with a null rest name is rejected before the runtime's guarded binding path. Focused 21 tests
+  and strict analysis pass; the complete Dart gate passes format, analysis, 362 tests, 18 storage owners/47
+  packages, CLI 66x2, and corpus 105/105. Canonical signoff independently
+  passes the neutral callable contract, all seven doctrines, repository containment/moved-root execution, CLI
+  66x2, RAM 56%, and Phase 0 1,031/1,031 in 645 seconds; exact cleanup leaves no managed run or rendered book.
+
 - 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.2` — independent clean-boundary closeout): The committed-state
   audit began only after `.1` landed cleanly at `ed136df2`. It reran automatic pointer selection and all eleven
   hermetic Git cases against the committed implementation, then classified every remaining `latest_commit == HEAD`

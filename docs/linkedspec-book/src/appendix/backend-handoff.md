@@ -1563,10 +1563,11 @@ boundaries remain below as rollout history, not as live gaps:
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, and complete generic first-class/dynamic
 callable-codeblock equivalence are explicit exclusions/future owners rather than silent gaps. Rust now admits
-typed callable-literal construction/state plus exact dynamic invocation across native, serialized, generated-plan,
-and emitted-source execution, but not generic contextual equivalence; Dart, Julia, and Lua still lack explicit
-literal values. Semantic introspection and thin MCP are separately complete. No backend is called complete while a
-current matrix state remains partial or gap.
+typed callable-literal construction/state, exact dynamic invocation, and metadata-governed generic contextual
+equivalence across native, serialized, generated-plan, and emitted-source execution. Dart `.11.5.1` admits the
+same inert explicit-literal construction/state across those transport roles but not dynamic invocation or generic
+contextual equivalence. Julia and Lua still lack explicit literal values. Semantic introspection and thin MCP are
+separately complete. No backend is called complete while a current matrix state remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
 complete backend parity. Its 57/1/2 boundary first advanced to 58/0/2 through strict recurring Rust generated-

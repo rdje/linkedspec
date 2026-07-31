@@ -1,22 +1,35 @@
 import 'action_ast.dart';
+import '../ast/spec_ast.dart' show CallableSignature;
 
 ActionBlock parseActionBlock(String source) {
-  return _ActionParser(source, 0).parseBlock();
+  return _ActionParser(source, 0, source).parseBlock();
 }
 
 ActionStatement parseActionStatement(String source) {
-  return _ActionParser(source, 0).parseStatement();
+  return _ActionParser(source, 0, source).parseStatement();
 }
 
 ActionExpr parseActionExpression(String source) {
-  return _ActionParser(source, 0).parseExpression();
+  return _ActionParser(source, 0, source).parseExpression();
 }
 
 final class _ActionParser {
-  _ActionParser(this.source, this.baseStart);
+  _ActionParser(this.source, this.baseStart, this.rootSource);
 
   final String source;
   final int baseStart;
+  final String rootSource;
+
+  _ActionParser _child(String source, int baseStart) {
+    return _ActionParser(source, baseStart, rootSource);
+  }
+
+  ActionSourceSpan _characterSpan(int start, int end) {
+    return ActionSourceSpan(
+      start: rootSource.substring(0, start).runes.length,
+      end: rootSource.substring(0, end).runes.length,
+    );
+  }
 
   ActionBlock parseBlock() {
     final pieces = _splitTopLevelStatements(source, baseStart);
@@ -25,7 +38,7 @@ final class _ActionParser {
       sourceSpan: _span(baseStart, baseStart + source.length),
       statements: [
         for (final piece in pieces)
-          _ActionParser(piece.text, piece.start).parseStatement(),
+          _child(piece.text, piece.start).parseStatement(),
       ],
     );
   }
@@ -40,7 +53,7 @@ final class _ActionParser {
             sourceMethod: 'next',
             args: const [],
           )
-        : _ActionParser(trimmed.text, trimmed.start).parseExpression();
+        : _child(trimmed.text, trimmed.start).parseExpression();
     return ActionStatement(
       source: trimmed.text,
       sourceSpan: _span(trimmed.start, trimmed.end),
@@ -118,7 +131,7 @@ final class _ActionParser {
     }
     final inner = text.substring(1, text.length - 1);
     final trimmed = _trimWithOffsets(inner, start + 1);
-    return _ActionParser(trimmed.text, trimmed.start).parseExpression();
+    return _child(trimmed.text, trimmed.start).parseExpression();
   }
 
   ActionExpr? _parseLiteral(String text, int start) {
@@ -185,7 +198,7 @@ final class _ActionParser {
       sourceSpan: _span(start, start + text.length),
       items: [
         for (final part in _splitTopLevelCsv(payload, start + 1))
-          _ActionParser(part.text, part.start).parseExpression(),
+          _child(part.text, part.start).parseExpression(),
       ],
     );
   }
@@ -194,14 +207,55 @@ final class _ActionParser {
     if (!_outerDelimiterIsBalanced(text, '{', '}')) {
       return null;
     }
+    if (text.startsWith('{|')) {
+      return _parseCodeblockLiteral(text, start);
+    }
     final payload = text.substring(1, text.length - 1);
+    if (RegExp(r'^\s+\|').hasMatch(payload)) {
+      return _codeblockLiteralError(text, start, 'invalid_codeblock_opener');
+    }
     if (payload.trim().isEmpty || _hasTopLevelHashPairSeparator(payload)) {
       return _parseHashLiteral(text, payload, start);
     }
     return ActionBlockValueExpr(
       source: text,
       sourceSpan: _span(start, start + text.length),
-      block: _ActionParser(payload, start + 1).parseBlock(),
+      block: _child(payload, start + 1).parseBlock(),
+    );
+  }
+
+  ActionExpr _parseCodeblockLiteral(String text, int start) {
+    final signatureEnd = text.indexOf('|', 2);
+    if (signatureEnd < 0) {
+      return _codeblockLiteralError(
+        text,
+        start,
+        'missing_codeblock_signature_closer',
+      );
+    }
+    final parsed = _parseCodeblockSignature(text.substring(2, signatureEnd));
+    if (parsed.signature == null) {
+      return _codeblockLiteralError(text, start, parsed.errorCode!);
+    }
+    final bodyStart = start + signatureEnd + 1;
+    final bodyEnd = start + text.length - 1;
+    final bodySource = text.substring(signatureEnd + 1, text.length - 1);
+    return ActionCodeblockLiteralExpr(
+      source: text,
+      sourceSpan: _characterSpan(start, start + text.length),
+      version: 1,
+      signature: parsed.signature!,
+      bodySource: bodySource,
+      bodyAst: _child(bodySource, bodyStart).parseBlock(),
+      bodySpan: _characterSpan(bodyStart, bodyEnd),
+    );
+  }
+
+  ActionExpr _codeblockLiteralError(String source, int start, String code) {
+    return ActionCodeblockLiteralErrorExpr(
+      source: source,
+      sourceSpan: _characterSpan(start, start + source.length),
+      code: code,
     );
   }
 
@@ -235,8 +289,8 @@ final class _ActionParser {
       );
       entries.add(
         ActionHashLiteralEntry(
-          key: _ActionParser(key.text, key.start).parseExpression(),
-          value: _ActionParser(value.text, value.start).parseExpression(),
+          key: _child(key.text, key.start).parseExpression(),
+          value: _child(value.text, value.start).parseExpression(),
         ),
       );
     }
@@ -298,7 +352,7 @@ final class _ActionParser {
     );
     final body = attached == null
         ? null
-        : _ActionParser(
+        : _child(
             attached.body,
             fullStart + attached.openIndex + 1,
           ).parseBlock();
@@ -474,10 +528,7 @@ final class _ActionParser {
         break;
       }
       final exprText = payload.substring(index, close + 1);
-      final expr = _ActionParser(
-        exprText,
-        payloadStart + index,
-      ).parseExpression();
+      final expr = _child(exprText, payloadStart + index).parseExpression();
       if (expr is ActionControlCaseExpr) {
         cases.add(expr);
       } else if (expr is ActionControlDefaultExpr) {
@@ -512,7 +563,7 @@ final class _ActionParser {
               start + attached.openIndex,
               start + attached.closeIndex + 1,
             ),
-            block: _ActionParser(
+            block: _child(
               attached.body,
               start + attached.openIndex + 1,
             ).parseBlock(),
@@ -608,7 +659,7 @@ final class _ActionParser {
       }
       final payload = text.substring(pos + 1, close);
       final trimmed = _trimWithOffsets(payload, start + pos + 1);
-      final expr = _ActionParser(trimmed.text, trimmed.start).parseExpression();
+      final expr = _child(trimmed.text, trimmed.start).parseExpression();
       final segmentSource = text.substring(pos, close + 1);
       final segmentSpan = _span(start + pos, start + close + 1);
       if (expr is ActionStringLiteralExpr) {
@@ -648,7 +699,7 @@ final class _ActionParser {
         source: text,
         sourceSpan: _span(start, start + text.length),
         name: left,
-        value: _ActionParser(value.text, value.start).parseExpression(),
+        value: _child(value.text, value.start).parseExpression(),
       );
     }
 
@@ -664,7 +715,7 @@ final class _ActionParser {
       text.substring(eqIndex + 1),
       start + eqIndex + 1,
     );
-    final value = _ActionParser(right.text, right.start).parseExpression();
+    final value = _child(right.text, right.start).parseExpression();
     if (_isIdentifier(left.text)) {
       return ActionAssignScalarExpr(
         source: text,
@@ -673,7 +724,7 @@ final class _ActionParser {
         value: value,
       );
     }
-    final target = _ActionParser(
+    final target = _child(
       left.text,
       left.start,
     )._parseVariableOrAccess(left.text, left.start);
@@ -722,11 +773,8 @@ final class _ActionParser {
       return null;
     }
     final receiverSegment = segments.first;
-    final receiver =
-        _ActionParser(
-          receiverSegment.text,
-          start + receiverSegment.start,
-        )._parseExprWithoutChain(
+    final receiver = _child(receiverSegment.text, start + receiverSegment.start)
+        ._parseExprWithoutChain(
           receiverSegment.text,
           start + receiverSegment.start,
         );
@@ -813,7 +861,7 @@ final class _ActionParser {
             start + attached.openIndex,
             start + attached.closeIndex + 1,
           ),
-          block: _ActionParser(
+          block: _child(
             attached.body,
             start + attached.openIndex + 1,
           ).parseBlock(),
@@ -841,7 +889,7 @@ final class _ActionParser {
       if (part.text.trim().isEmpty) {
         continue;
       }
-      final expression = _ActionParser(part.text, part.start).parseExpression();
+      final expression = _child(part.text, part.start).parseExpression();
       final keywordIndex = _findTopLevelAssignmentEquals(part.text);
       if (keywordIndex != null && expression is! ActionAssignScalarExpr) {
         final name = part.text.substring(0, keywordIndex).trim();
@@ -853,7 +901,7 @@ final class _ActionParser {
           args.add(
             ActionKeywordArgument(
               name: name,
-              value: _ActionParser(value.text, value.start).parseExpression(),
+              value: _child(value.text, value.start).parseExpression(),
             ),
           );
           continue;
@@ -933,6 +981,99 @@ final class _Separator {
   final int index;
   final int length;
   final String token;
+}
+
+final class _CodeblockSignatureResult {
+  const _CodeblockSignatureResult.valid(this.signature) : errorCode = null;
+
+  const _CodeblockSignatureResult.invalid(this.errorCode) : signature = null;
+
+  final CallableSignature? signature;
+  final String? errorCode;
+}
+
+const _reservedCodeblockParameters = <String>{
+  'fn',
+  'return',
+  'I',
+  'LS',
+  'LE',
+  'E',
+  'EX',
+  'IT',
+  'LX',
+  'STRING',
+  'descr',
+  'minfo',
+  'LSPOS',
+  'LEPOS',
+  'LMATCH',
+  'LSMATCH',
+  'IMATCH',
+  'IMATCH_LIST',
+  'LMATCH_LIST',
+  'IMATCH_HASH',
+  'LMATCH_HASH',
+  'SELF',
+  'this',
+  'ctx',
+  'runtime_ctx',
+};
+
+_CodeblockSignatureResult _parseCodeblockSignature(String source) {
+  final parts = source.isEmpty
+      ? const <String>[]
+      : source.split(',').map((part) => part.trim()).toList();
+  if (parts.any((part) => part.isEmpty)) {
+    return const _CodeblockSignatureResult.invalid('invalid_parameter');
+  }
+
+  final positional = <String>[];
+  String? rest;
+  final seen = <String>{};
+  for (final (index, part) in parts.indexed) {
+    late final String name;
+    if (part.startsWith('...')) {
+      if (index != parts.length - 1) {
+        return const _CodeblockSignatureResult.invalid(
+          'rest_parameter_must_be_final',
+        );
+      }
+      final match = RegExp(
+        r'^\.\.\.([A-Za-z_][A-Za-z0-9_]*)$',
+      ).firstMatch(part);
+      if (match == null) {
+        return const _CodeblockSignatureResult.invalid(
+          'invalid_rest_parameter',
+        );
+      }
+      name = match[1]!;
+      rest = name;
+    } else {
+      if (!RegExp(r'^[A-Za-z_][A-Za-z0-9_]*$').hasMatch(part)) {
+        return const _CodeblockSignatureResult.invalid('invalid_parameter');
+      }
+      name = part;
+      positional.add(name);
+    }
+    if (!seen.add(name)) {
+      return const _CodeblockSignatureResult.invalid('duplicate_parameter');
+    }
+    if (_reservedCodeblockParameters.contains(name)) {
+      return const _CodeblockSignatureResult.invalid('reserved_parameter');
+    }
+  }
+
+  return _CodeblockSignatureResult.valid(
+    CallableSignature(
+      kind: 'callable_signature',
+      version: 1,
+      positionalParams: List.unmodifiable(positional),
+      restParam: rest,
+      minArity: positional.length,
+      maxArity: rest == null ? positional.length : null,
+    ),
+  );
 }
 
 ActionSourceSpan _span(int start, int end) {

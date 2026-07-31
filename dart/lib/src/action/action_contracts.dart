@@ -783,6 +783,19 @@ final class _ActionContractResolver {
         visitExpr(value);
       case ActionBlockValueExpr(:final block):
         visitBlock(block);
+      case ActionCodeblockLiteralExpr():
+        // Callable bodies are retained state. Construction must not resolve
+        // their helpers or dependencies eagerly.
+        break;
+      case ActionCodeblockLiteralErrorExpr(:final code):
+        _diagnostics.add(
+          ActionContractDiagnostic(
+            code: code,
+            message: 'invalid callable-codeblock literal: $code',
+            source: expr.source,
+            sourceSpan: expr.sourceSpan,
+          ),
+        );
       case ActionArrayLiteralExpr(:final items):
         for (final item in items) {
           visitExpr(item);

@@ -11,6 +11,8 @@ export 'src/action/action_ast.dart'
         ActionBlockValueExpr,
         ActionBooleanLiteralExpr,
         ActionCallExpr,
+        ActionCodeblockLiteralErrorExpr,
+        ActionCodeblockLiteralExpr,
         ActionControlCaseExpr,
         ActionControlDefaultExpr,
         ActionControlElseExpr,

@@ -1206,6 +1206,9 @@ Map<String, Object?> _semanticCallExpressionShape(
   ActionNumberLiteralExpr() => _semanticValueShape('number'),
   ActionBooleanLiteralExpr() => _semanticValueShape('boolean'),
   ActionUndefExpr() => _semanticValueShape('null'),
+  ActionCodeblockLiteralExpr(:final signature) => _semanticCodeblockShape(
+    signature,
+  ),
   ActionVariableExpr(:final name) =>
     variables[name] ?? _semanticValueShape('unknown'),
   ActionAssignScalarExpr(:final value) => _semanticCallExpressionShape(

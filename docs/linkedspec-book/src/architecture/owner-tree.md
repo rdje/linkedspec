@@ -440,6 +440,14 @@ typed body in the same caller context, restores parameters/active identity on ev
 failure fields into the existing structured diagnostic envelope. Native, reconstructed, generated-plan, and
 emitted-source execution all reuse this owner.
 
+Dart construction is owned by `ActionCodeblockLiteralExpr` plus `action_parser.dart`. Exact `{|` recognition runs
+before the existing harray/eager-block classifier; one shared nullable-rest `CallableSignature` carries fixed or
+final-rest arity, and recursive child parsers retain the containing ActionIR source for Unicode-character literal
+and body spans. Runtime construction converts the typed node to recursively copied plain map data. Action-contract
+and removed-selector traversals treat its body as deferred. Ordinary compiled ActionIR JSON, normalized `SpecFile`
+emission/reconstruction, generated-plan execution, user functions, and semantic projection carry the same record;
+there is no Dart closure or separate callback evaluator. Dynamic bound-variable dispatch remains `.11.5.2`.
+
 `linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
 `CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;
 the completed builtin/user-function registry then normalizes only an accepted final candidate to

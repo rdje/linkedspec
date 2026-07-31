@@ -1400,6 +1400,9 @@ Map<String, Object?> _semanticExpressionShape(ActionExpr expression) {
     ActionNumberLiteralExpr() => _semanticValueShape('number'),
     ActionBooleanLiteralExpr() => _semanticValueShape('boolean'),
     ActionUndefExpr() => _semanticValueShape('null'),
+    ActionCodeblockLiteralExpr(:final signature) => _semanticCodeblockShape(
+      signature,
+    ),
     ActionArrayLiteralExpr(:final items) => _semanticArrayShape(
       _semanticCommonShape(items.map(_semanticExpressionShape)),
     ),
@@ -1443,6 +1446,21 @@ Map<String, Object?> _semanticValueShape(String kind) => <String, Object?>{
   'signature': null,
   'members': <Object?>[],
 };
+
+Map<String, Object?> _semanticCodeblockShape(CallableSignature signature) =>
+    <String, Object?>{
+      ..._semanticValueShape('codeblock'),
+      'signature': <String, Object?>{
+        'parameters': [
+          for (final name in signature.positionalParams)
+            <String, Object?>{'name': name, 'kind': 'value', 'required': true},
+        ],
+        'arity_min': signature.minArity,
+        'arity_max': signature.maxArity,
+        'rest_parameter': signature.restParam,
+        'final_codeblock': false,
+      },
+    };
 
 Map<String, Object?> _semanticArrayShape(Map<String, Object?> element) =>
     <String, Object?>{..._semanticValueShape('array'), 'element': element};

@@ -224,6 +224,7 @@ void _checkFunctionRegistry(SpecFile spec) {
         (signature.kind != 'callable_signature' ||
             signature.version != 1 ||
             !_stringListsEqual(signature.positionalParams, function.params) ||
+            signature.restParam == null ||
             signature.minArity != function.arity ||
             signature.minArity != signature.positionalParams.length ||
             signature.maxArity != null)) {
@@ -235,7 +236,7 @@ void _checkFunctionRegistry(SpecFile spec) {
     final seenParams = <String>{};
     final allParams = [
       ...function.params,
-      if (signature != null) signature.restParam,
+      if (signature?.restParam != null) signature!.restParam!,
     ];
     for (final param in allParams) {
       if (!_isIdentifier(param)) {

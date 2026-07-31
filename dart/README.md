@@ -203,6 +203,34 @@ contract fails before payload reconstruction with expected/actual contract ids
 and guidance to regenerate from the original `.spec`. The recurring admission
 test also reads and passes the contract's exact eight-case subset.
 
+## Callable codeblock construction
+
+Dart recognizes the exact deferred-value syntax before ordinary brace classification:
+
+```text
+joiner = {|left, right| return(cat(left, right)) }
+reader = {|| return(state) }
+collector = {|prefix, ...items| return(items) }
+```
+
+Construction produces the neutral eight-field `codeblock_literal` record with a fixed/final-rest
+`callable_signature`, typed ActionIR body, exact source, and half-open Unicode-character spans in the containing
+action source. `{}` and `{ key : value }` remain harrays; `{ statements }` remains an immediately evaluated block.
+The record is plain copied data: its body does not run, no Dart closure or environment is captured, and retained
+body calls are excluded from eager action-contract/dependency traversal.
+
+Assignment, recursive copying, user-function arguments/results, compiled JSON, generated plans, normalized
+emitted-source reconstruction, and semantic `codeblock` shapes preserve the same value. Bound-variable invocation
+such as `joiner("a", "b")` is not current in this construction slice and remains owned by
+`FUTURE-PARITY-BACKLOG.11.5.2`; generic contextual final-block equivalence remains `.11.5.3`. Verify the current
+boundary from the repository root:
+
+```sh
+bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py
+cd dart
+bash ../tools/run_dart_project_data.sh test test/callable_codeblock_literal_contract_test.dart
+```
+
 ## Rule-local cursor policy
 
 `LinkedSpecRuntimeEngine` no longer accepts a parser-wide `parseMode`. Each
