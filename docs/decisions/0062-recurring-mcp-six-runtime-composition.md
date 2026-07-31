@@ -1,7 +1,7 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted, implemented, and implementation-parent-closeout complete through `.10.9.7.1.1.4`
+- Status: accepted and implemented; recurring and MCP parents close through `.10.9.7.2`
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -121,7 +121,23 @@ governance, and primary 30/30.
 
 That unchanged conjunction closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`. It changes no
 production, fixture, contract/binding, consumer, oracle, ledger/status, semantic, CLI, aggregator, legacy, or
-server authority. MCP-parent no-change closeout `.10.9.7.2` remains the next clean-boundary owner.
+server authority. At that boundary, MCP-parent no-change closeout `.10.9.7.2` remained next; the section below
+records its completed evidence.
+
+## Unchanged MCP-parent closeout — 2026-07-30
+
+Leaf `.10.9.7.2` starts from clean implementation-parent commit `77ceb921` and recomposes the entire accepted
+chain without another response model or implementation. Focused execution passes semantic 6/20/110, MCP
+35/10/10/76, byte-fresh bindings at Perl 83,411 / Rust 83,225 / Dart 83,214 / Julia 120,030 / Lua 83,166 bytes,
+Perl 13, Rust 1/1 in 15.70 seconds, Dart 1/1, Julia 257/257 in 6.7 seconds, Lua 281/281 per ABI, complete/141
+governance, and primary 30/30.
+
+The independent host-authorized canonical MCP opt-in exits zero after all seven doctrines, Rust semantic 1/1 in
+80.25 seconds, Dart 1/1, Julia semantic 416/416 in 28.5 seconds, repository containment/moved-root, primary CLI
+66x2, RAM 53%, and Phase 0 1,031/1,031. Its optional recurrence independently repeats Perl 13, Rust 1/1 in 15.52
+seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and primary 30/30.
+No ledger, protocol, semantic, primary, aggregator, legacy, or authority behavior moves. This closes `.10.9.7`
+and `.10.9`; semantic rollout remains 8/9 until public no-drift `.10.10` earns the final row.
 
 ## Director authorization and implementation boundary — 2026-07-30
 
@@ -241,7 +257,7 @@ later route only and cannot become part of this proof.
 - The opt-in gate is reproducible from a moved checkout and cannot strand project data on another volume.
 - Implementation parents `.10.9.7.1.1` and `.10.9.7.1` are closed by unchanged recomposition, not a replacement
   oracle.
-- `.10.9.7.2` can close the MCP parent by rerunning committed owners unchanged; public API/mdBook no-drift remains
+- `.10.9.7.2` closes the MCP parent by rerunning committed owners unchanged; public API/mdBook no-drift remains
   separately owned by `.10.10`.
 
 ## Links

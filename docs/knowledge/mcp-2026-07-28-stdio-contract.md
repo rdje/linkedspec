@@ -43,6 +43,7 @@ evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.1-.2 implement one common gen
 evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer unchanged on PUC Lua and LuaJIT. All five implementations and all six runtimes are admitted, governance rejects 114 mutations, the transport digest remains unchanged, and recurring rollout stays pending."
 evidence_update_2026_07_29_recurring_plan: "Behavior-free .10.9.7.0 and ADR 0062 freeze a routed recurring composition. Current MCP identity proof covers capabilities plus one graph query; .1 must compare all 20 neutral semantic cases through each existing runtime consumer before rollout can advance."
 evidence_update_2026_07_30_recurring_admission: "FUTURE-PARITY-BACKLOG.10.9.7.1.1.1-.3 preserve modern MCP 2026-07-28 while repairing the exact fact/contract/policy boundary, proving all twenty native/MCP identities on six runtimes, and routing the recurring gate. The transport remains 35 canonical frames / 10 raw inputs / 10 lifecycle cases / 76 mutations; formal admission is 5/5 implementations + 6/6 runtimes with rollout complete and 141 ledger mutations."
+evidence_update_2026_07_30_parent_closeout: "FUTURE-PARITY-BACKLOG.10.9.7.2 reruns the modern transport, five native implementations, six runtime admissions, recurring order, authority fences, complete/141 ledger, and primary no-drift unchanged. Focused and canonical MCP-opt-in gates pass, closing .10.9.7 and .10.9 without protocol, lifecycle, policy, legacy, or server-authority movement."
 reverify: "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py"
 ---
 
@@ -81,6 +82,7 @@ and parent-close that contract; PUC Lua and LuaJIT admit the Lua source independ
 is 5/5 + 6/6 with recurring rollout complete and 141 rejected mutations. Rooted
 `tools/check_mcp_six_runtime.sh` proves all twenty native/MCP semantic identities on Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT; public no-drift remains separately dependency-ordered.
+The unchanged MCP-parent recomposition closes `.10.9.7` and `.10.9`; public no-drift remains `.10.10`.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 

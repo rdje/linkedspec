@@ -75,6 +75,10 @@ No-change `.10.9.7.1.1.4` independently recomposes the same authorities and clos
 Julia semantic 416/416 in 29.3 seconds, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 655 seconds, optional Rust
 MCP 1/1 in 15.88 seconds, Julia MCP 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and
 primary 30/30. The ledger, statuses, owners, digests, and server authority remain unchanged.
+Final no-change `.10.9.7.2` repeats that exact conjunction from clean `77ceb921`, passes focused 5/5 + 6/6
+complete/141 and an independent canonical MCP opt-in through Phase 0 1,031/1,031, and closes recurring parent
+`.10.9.7` plus thin-MCP parent `.10.9`. Formal ledger status and common `.10.9.7.1` rollout ownership do not move;
+semantic rollout remains 8/9 until public no-drift `.10.10`.
 Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for

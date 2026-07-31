@@ -76,8 +76,13 @@ partial status movement can bypass contract and admission validation.
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4` reruns this exact chain from clean `de46b26a` without a
 replacement oracle or status movement. Focused and canonical opt-in proof remain green at semantic 6/20/110,
 MCP 35/10/10/76, 5/5 implementations, 6/6 runtimes, complete/141 governance, and primary 30/30; Phase 0 passes
-1,031/1,031 in 655 seconds. Implementation parents `.10.9.7.1.1` and `.10.9.7.1` are closed, and MCP-parent
-closeout `.10.9.7.2` follows the clean commit.
+1,031/1,031 in 655 seconds. It closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`.
+
+Final no-change closeout `FUTURE-PARITY-BACKLOG.10.9.7.2` independently recomposes the same committed chain from
+clean `77ceb921`. Focused proof and the canonical MCP opt-in remain green through all seven doctrines, primary
+CLI 66x2, Phase 0 1,031/1,031, the complete optional six-runtime recurrence, ledger 141, and primary 30/30.
+Parents `.10.9.7` and `.10.9` are closed without protocol, implementation, ledger, behavior, or authority
+movement. Semantic rollout remains 8/9 until public no-drift `.10.10`.
 
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` runs this exact committed chain again rather than adding an
 umbrella proof. Its focused and canonical recomposition are green from clean `28f84826`, and parent `.10.9.2` is
@@ -85,8 +90,9 @@ closed. The ledger correctly stays at Perl 1/5 implementations + 1/6 runtimes wi
 
 Rust, Dart, and Julia each implement their own generated binding, native decoded server, and strict wire without
 altering the transport contract. Their exact admissions advanced only their implementation/runtime rows. Dart,
-Julia, and shared Lua implementation parents are closed; recurring `.10.9.7.1.1.4` has also closed the routed
-implementation/promotion parents without changing the transport contract or ledger state.
+Julia, and shared Lua implementation parents are closed; recurring `.10.9.7.1.1.4` closes the routed
+implementation/promotion parents, and `.10.9.7.2` closes the recurring/MCP parents without changing the
+transport contract or ledger state.
 
 `semantic_introspection_contract.json` (`linkedspec-semantic-introspection-contract-v1`) makes ADRs `0049` and
 `0050` executable before any backend is admitted. Its neutral model fixes `linkedspec-semantic-model-v1` and

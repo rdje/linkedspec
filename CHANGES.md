@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.2 — close MCP implementation parent
+
+Recomposed the complete committed thin-MCP chain from clean `77ceb921` without adding or replacing a production
+server, fixture, contract, binding, consumer, oracle, ledger, or rollout owner. Focused proof again passes
+semantic 6/20/110, MCP 35/10/10/76, byte-fresh Perl/Rust/Dart/Julia/Lua bindings, Perl 13, Rust 1/1, Dart 1/1,
+Julia 257/257, Lua 281/281 on both ABIs, complete/141 governance, and primary 30/30. The unchanged conjunction
+closes recurring parent `.10.9.7` and thin-MCP parent `.10.9`; semantic rollout deliberately remains 8/9 because
+public no-drift is separately owned by `.10.10`.
+
+The independent host-authorized canonical opt-in gate exits zero after all seven doctrines, Rust semantic 1/1
+in 80.25 seconds, Dart 1/1, Julia semantic 416/416 in 28.5 seconds, repository containment/moved-root execution,
+primary CLI 66x2, RAM 53%, and Phase 0 1,031/1,031. Its optional leg independently repeats Perl 13, Rust 1/1 in
+15.52 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and primary
+30/30 before the canonical PASS. No semantic, CLI, aggregator, legacy, package, SDK, service, network, or server
+authority moves. Public semantic/MCP no-drift `.10.10` is the next clean-boundary owner; no push occurs before
+commit cadence 300. Knowledge Map remains exact at 757 facts / 6,137 question keys, and the mdBook renders 79
+files at 13,784 KiB before exact generated-output and empty canonical-run cleanup.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.4 — close recurring implementation parents
 
 Recomposed the approved MCP repair and recurring promotion from clean `de46b26a` without changing production,

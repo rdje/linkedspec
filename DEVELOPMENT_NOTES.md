@@ -1,5 +1,19 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.2` — a global parent closes by exact conjunction, not status
+  invention): The final thin-MCP parent owns no additional implementation or aggregate oracle. Its acceptance is
+  the conjunction of the already independent neutral semantic, neutral transport, generated-binding, native-
+  server, six-runtime consumer, recurring-order, ledger, security/authority, and primary-surface owners. Rerunning
+  that chain from clean `77ceb921` produces the same 6/20/110, 35/10/10/76, 5/5 + 6/6 complete/141, and 30/30
+  state, so `.10.9.7` and `.10.9` can close without changing the formal ledgers.
+
+  The broader semantic rollout must remain 8/9. MCP-parent completion and public semantic/MCP no-drift are
+  different facts: `.10.9` proves the transport implementations and recurring execution; `.10.10` must still
+  freeze every public/native/backend/API/mdBook/roadmap projection and reject stale pending/planned wording.
+  Canonical opt-in signoff independently passes all seven doctrines, containment/moved-root, CLI 66x2, RAM 53%,
+  Phase 0 1,031/1,031, and a rebuilt optional MCP recurrence at Rust 15.52 seconds and Julia 6.8 seconds. Closing
+  the parent while preserving 8/9 prevents metadata completion from overclaiming the separately owned public row.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.4` — parent closure is recomposition, not a new oracle): Once
   contract bytes, native implementations, six admission consumers, routed order, and cross-ledger status are
   each committed and independently guarded, an implementation parent should close by rerunning their conjunction

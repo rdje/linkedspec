@@ -982,6 +982,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers → admission-ledger → primary-no-drift composition. Canonical CI
   requires and syntax-checks it; `LINKEDSPEC_RUN_MCP_MATRIX=1` opts into execution. Do not add a central expected-
   response model, embed runtimes, or infer missing MCP comparisons from orchestration.
+- **MCP PARENT STATUS:** unchanged closeout `.10.9.7.2` has recomposed that exact driver plus the independent
+  canonical MCP opt-in and closed `.10.9.7` and `.10.9`. Formal MCP state remains 5/5 implementations + 6/6
+  runtimes with rollout complete/141; semantic rollout remains 8/9 until public no-drift `.10.10`.
 
 ---
 

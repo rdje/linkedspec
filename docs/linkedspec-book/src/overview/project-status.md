@@ -62,8 +62,10 @@ Rust semantic in 81.29 seconds, Julia 416/416 in 28.9 seconds, containment/moved
 Phase 0 1,031/1,031 in 643 seconds; its optional leg independently repeats all six MCP consumers, complete/141
 governance, and primary 30/30. No-change `.10.9.7.1.1.4` independently repeats those committed owners and passes
 canonical Phase 0 1,031/1,031 in 655 seconds plus the complete optional MCP chain. It changes no behavior or
-authority and closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`; MCP-parent closeout `.10.9.7.2`
-follows the clean commit.
+authority and closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`. Final `.10.9.7.2` independently
+passes the same focused chain and canonical MCP opt-in from clean `77ceb921`, including Phase 0 1,031/1,031 and
+the optional complete/141 recurrence. It closes `.10.9.7` plus `.10.9` without behavior, ledger, or authority
+movement; public semantic/MCP no-drift `.10.10` remains next and semantic rollout remains 8/9.
 The weaker 17-identity plus three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque

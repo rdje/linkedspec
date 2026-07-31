@@ -1,8 +1,8 @@
 # ADR 0054: One MCP contract is implemented by native per-backend servers
 
 - Date: 2026-07-29
-- Status: accepted; all five native implementation parents and six runtime admissions are closed at 5/5 + 6/6;
-  recurring rollout remains pending under `.10.9.7`
+- Status: accepted and implemented; all five native implementations, six runtime admissions, recurring rollout,
+  and MCP parent `.10.9` are closed at 5/5 + 6/6 with rollout complete/141
 - Tags: architecture, mcp, semantic-api, backends, transport, embedding, portability, parity
 
 ## Context
@@ -47,6 +47,20 @@ optional convenience aggregator.
 `FUTURE-PARITY-BACKLOG.10.9` is dependency-ordered as exact contract `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia
 `.5`, shared Lua `.6`, and recurring six-runtime admission/parent closeout `.7`. Planning leaf `.10.9.0` owns this
 decision and split without adding transport behavior.
+
+## Completion evidence — 2026-07-30
+
+The dependency chain is complete. Exact contract `.10.9.1`, native Perl/Rust/Dart/Julia/shared-Lua parents
+`.10.9.2-.6`, all-twenty six-runtime promotion `.10.9.7.1`, and unchanged parent recomposition `.10.9.7.2` pass
+without adding an aggregator or central semantic oracle. Formal state is 5/5 implementations plus 6/6 runtime
+admissions with shared rollout complete and 141 rejected governance mutations. Semantic governance remains
+rollout 8/9 because public no-drift belongs to `.10.10`, not to this transport topology.
+
+Final focused proof passes semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings, Perl/Rust/Dart/
+Julia/PUC-Lua/LuaJIT consumers, complete/141 governance, and primary 30/30. The independent canonical MCP opt-in
+exits zero after all seven doctrines, repository containment/moved-root, primary CLI 66x2, Phase 0 1,031/1,031,
+and a rebuilt six-runtime MCP recurrence. Parents `.10.9.7` and `.10.9` therefore close by exact conjunction;
+the routing-only future-aggregator boundary is unchanged.
 
 ## Consequences
 

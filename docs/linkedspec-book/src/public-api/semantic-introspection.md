@@ -122,6 +122,13 @@ implementation parents `.10.9.7.1.1` and `.10.9.7.1` without changing a server, 
 status, or authority. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain
 outside the repair.
 
+Final MCP-parent closeout `.10.9.7.2` reruns that exact committed conjunction from clean `77ceb921`. Focused
+proof passes semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings, all six runtime consumers,
+complete/141 governance, and primary 30/30. The independent canonical MCP opt-in exits zero after all seven
+doctrines, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/1,031, and a rebuilt optional recurrence.
+This closes `.10.9.7` and `.10.9` without changing protocol, server, semantic, primary, aggregator, legacy, or
+authority behavior. Semantic rollout remains 8/9 because public no-drift is separately owned by `.10.10`.
+
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
 ADR `0055` selects stable MCP `2026-07-28` over stdio for `linkedspec-mcp-transport-v1`. LinkedSpec starts on the
@@ -3575,7 +3582,7 @@ The dependency order is:
 | `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | complete; unchanged twelve-role consumers prove capabilities + 19 queries across native/canonical/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia 257, and Lua 281x2; rollout remains pending/114 |
 | `.10.9.7.1.1.3` | add routed governance and promote thin transport | implemented; rooted recurring six-runtime driver, canonical opt-in, atomic cross-ledger owner/status, rollout complete, MCP 141 mutations and semantic 110 mutations |
 | `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | complete; focused six-runtime and independent canonical opt-in recomposition unchanged; `.1.1` and `.1` closed |
-| `.10.9.7.2` | recurring MCP committed-owner closeout | pending after the clean `.1.1.4` commit |
+| `.10.9.7.2` | recurring MCP committed-owner closeout | complete; unchanged focused and canonical MCP-opt-in recomposition closes `.10.9.7` and `.10.9` |
 | `.10.10` | public no-drift and closure | pending |
 
 ADRs `0054`/`0055` define one exact modern MCP `2026-07-28` stdio contract rather than one cross-runtime
@@ -3612,8 +3619,9 @@ added by that composition.
 The implementation-parent closeout is a separate no-change proof. From clean promotion commit `de46b26a`, leaf
 `.10.9.7.1.1.4` reruns the same contract, binding, server, consumer, driver, ledger, storage, and primary owners.
 Its canonical opt-in pass reaches Phase 0 1,031/1,031 in 655 seconds and independently repeats the optional six-
-runtime MCP chain, so `.10.9.7.1.1` and `.10.9.7.1` close without another semantic oracle. `.10.9.7.2` remains
-the broader MCP-parent closeout.
+runtime MCP chain, so `.10.9.7.1.1` and `.10.9.7.1` close without another semantic oracle. Final `.10.9.7.2`
+then recomposes the same authorities from clean `77ceb921`, closes `.10.9.7` and `.10.9`, and leaves public
+semantic/MCP no-drift to `.10.10`.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created

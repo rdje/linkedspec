@@ -40,6 +40,7 @@ evidence_update_2026_07_29_julia_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.5.2 impl
 evidence_update_2026_07_29_julia_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.5.3 composes one ordered twelve-role Julia consumer with 178 assertions, advances only Julia to 4/5 implementations + 4/6 runtimes, leaves shared rollout pending, and rejects 79 implementation/admission mutations without changing production behavior or the transport digest."
 evidence_update_2026_07_29_julia_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.5.4 recomposes the committed neutral, Perl, Rust, Dart, and Julia owners unchanged, preserves 4/5 implementations + 4/6 runtimes and all 79 mutations, closes the Julia parent, and hands off shared Lua planning .10.9.6.0. Lockstep review also corrects one stale duplicate mdBook paragraph that escaped the current ledger inventory."
 evidence_update_2026_07_30_mcp_recurring_admission: "Shared Lua .10.9.6 closes the fifth implementation and sixth runtime. FUTURE-PARITY-BACKLOG.10.9.7.1.1.1-.3 then repair the three shared transport blockers, prove all twenty direct-native/MCP/digest identities on six runtimes, and route exact recurring composition. Semantic governance is 6 groups / 20 responses / 110 mutations at rollout 8/9 and admission 6/6; MCP is 5/5 implementations + 6/6 runtimes with rollout complete/141. Public no-drift remains .10.10."
+evidence_update_2026_07_30_mcp_parent_closeout: "FUTURE-PARITY-BACKLOG.10.9.7.2 independently recomposes the full committed MCP chain and canonical opt-in unchanged, closes .10.9.7 plus .10.9, and deliberately preserves semantic rollout 8/9 because public API/mdBook/backend/roadmap no-drift remains .10.10."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -82,7 +83,8 @@ Machine leaves `.10.9.1.1-.2` encode and independently validate those rules once
 `linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`,
 Rust `.10.9.3`, Dart `.10.9.4`, Julia `.10.9.5`, and shared Lua `.10.9.6` are closed. Recurring
 `.10.9.7.1.1.1-.3` repair the exact shared boundary, prove all twenty identities on six runtimes, and promote
-thin transport through one rooted recurring gate. Unchanged MCP closeout and public no-drift remain ordered.
+thin transport through one rooted recurring gate. Unchanged `.10.9.7.2` closes the MCP parent; public no-drift
+remains ordered under `.10.10`.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not

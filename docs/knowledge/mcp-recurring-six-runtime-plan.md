@@ -13,9 +13,9 @@ answers:
   - what may promote thin MCP transport
   - does recurring MCP proof add a primary CLI surface
 date: 2026-07-29
-status: implemented, promoted, and implementation-parent-closeout complete
+status: implemented, promoted, and MCP-parent-closeout complete
 tags: [mcp, semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral contract, six native/MCP consumers, ledgers, canonical CI, recurring precedent, and storage routing. Probe .10.9.7.1.0 found three shared blockers; atomic repair .10.9.7.1.1.1 admits the exact 72 fact keys, bounded future contract strings, and explicit-component-only pre-dispatch policy in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus nineteen governed queries across direct native object/canonical JSON, MCP structured/text/decoded payload, and existing response digest on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 adds repository-routed tools/check_mcp_six_runtime.sh, exact order, managed scratch, canonical LINKEDSPEC_RUN_MCP_MATRIX opt-in, and matching rollout owner/status in both ledgers. Governance rejects 141 MCP and 110 neutral-semantic mutations; formal state is 5/5 implementations, 6/6 runtimes, thin transport complete, semantic rollout 8/9. No-change .10.9.7.1.1.4 recomposes all owners and closes .10.9.7.1.1 plus .10.9.7.1. Its canonical opt-in gate exits zero after seven doctrines, Julia semantic 416/416 in 29.3s, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 655s, and an independent optional MCP repeat at Perl 13, Rust 1/15.88s, Dart 1, Julia 257/6.8s, Lua 281x2, ledger 141, and primary 30/30."
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral contract, six native/MCP consumers, ledgers, canonical CI, recurring precedent, and storage routing. Probe .10.9.7.1.0 found three shared blockers; atomic repair .10.9.7.1.1.1 admits the exact 72 fact keys, bounded future contract strings, and explicit-component-only pre-dispatch policy in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus nineteen governed queries across direct native object/canonical JSON, MCP structured/text/decoded payload, and existing response digest on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 adds repository-routed tools/check_mcp_six_runtime.sh, exact order, managed scratch, canonical LINKEDSPEC_RUN_MCP_MATRIX opt-in, and matching rollout owner/status in both ledgers. Governance rejects 141 MCP and 110 neutral-semantic mutations; formal state is 5/5 implementations, 6/6 runtimes, thin transport complete, semantic rollout 8/9. No-change .10.9.7.1.1.4 closes implementation parents. Final .10.9.7.2 independently reruns the unchanged chain and canonical MCP opt-in, then closes .10.9.7 plus .10.9 while public no-drift remains .10.10."
 last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -60,11 +60,17 @@ no-drift cases in exact order. It uses repository-derived managed scratch plus d
 roots. Canonical CI requires and syntax-checks it, with expensive execution opt-in through
 `LINKEDSPEC_RUN_MCP_MATRIX=1`.
 
-Closeout signoff is complete. The independent `.10.9.7.1.1.4` opt-in gate passes all seven doctrines, Rust
+Implementation-parent signoff is complete. The independent `.10.9.7.1.1.4` opt-in gate passes all seven doctrines, Rust
 semantic 1/1, Julia semantic 416/416 in 29.3 seconds, repository containment and moved-root execution, primary
 CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds. The optional driver repeats all six MCP consumers,
-the complete/141 ledger, and primary 30/30 before the local gate exits zero. MCP-parent closeout `.10.9.7.2` is
-the next clean-boundary owner.
+the complete/141 ledger, and primary 30/30 before the local gate exits zero.
+
+Final MCP-parent closeout `.10.9.7.2` independently repeats the same committed owners from clean `77ceb921`.
+Focused proof passes semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings, all six consumers,
+complete/141 governance, and primary 30/30. Canonical MCP opt-in exits zero after all seven doctrines, Rust
+semantic 1/1 in 80.25 seconds, Julia semantic 416/416 in 28.5 seconds, containment/moved-root, CLI 66x2, RAM 53%,
+Phase 0 1,031/1,031, and a rebuilt optional recurrence at Rust 15.52 seconds and Julia 6.8 seconds. This closes
+`.10.9.7` and `.10.9` without behavior or authority movement; public no-drift remains `.10.10`.
 
 Only the coordinated `.1` transition may mark `thin_mcp_transport` complete in both the MCP and semantic ledgers,
 with the same leaf owner. Implementations and runtime rows remain complete. Governance must reject partial or

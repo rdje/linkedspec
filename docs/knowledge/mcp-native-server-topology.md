@@ -36,6 +36,7 @@ evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.2 implements one common priva
 evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer source unchanged and independently on PUC Lua and LuaJIT. The ledger reaches 5/5 implementations + 6/6 runtimes with shared rollout pending, and 114 mutations reject owner/ABI/order/omission/authority drift."
 evidence_update_2026_07_29_recurring_plan: "Behavior-free .10.9.7.0 and ADR 0062 preserve the five-implementation/six-runtime topology and freeze one routed recurring gate. The audit found current MCP consumers compare capabilities plus one representative query; .1 must extend their existing identity roles to all 20 neutral semantic cases before coordinated rollout promotion."
 evidence_update_2026_07_30_recurring_admission: "FUTURE-PARITY-BACKLOG.10.9.7.1.1.1-.3 repair the exact shared schema/policy boundary, prove all twenty response identities on Perl/Rust/Dart/Julia/PUC Lua/LuaJIT, and compose them through rooted tools/check_mcp_six_runtime.sh. Both ledgers promote thin transport under one owner; formal MCP state is 5/5 implementations + 6/6 runtimes with rollout complete and 141 rejected mutations. Canonical opt-in passes Phase 0 1,031/1,031 in 643 seconds and the independent six-runtime recurrence."
+evidence_update_2026_07_30_parent_closeout: "FUTURE-PARITY-BACKLOG.10.9.7.2 independently recomposes the exact contract, five bindings/servers, six all-twenty consumers, recurring driver, complete/141 ledger, authority fences, and primary 30/30 from clean 77ceb921. Focused and canonical MCP-opt-in proof pass unchanged, closing .10.9.7 and .10.9 while semantic public no-drift remains .10.10."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 
@@ -51,6 +52,10 @@ traverse native objects, derive or cache semantic facts, invent explanations, or
 A one-endpoint aggregator is deferred outside `FUTURE-PARITY-BACKLOG.10.9`. If separately justified and
 task-tree-owned after public closeout, it can only route requests to the native servers and cannot become a
 semantic owner or cache.
+
+The topology parent is closed. Final `.10.9.7.2` changes no implementation, runtime row, protocol byte, or
+authority; it proves the committed conjunction and closes `.10.9.7` plus `.10.9` at 5/5 implementations, 6/6
+runtimes, and rollout complete/141. Public no-drift remains separately owned by `.10.10`.
 
 Related facts: [[mcp-2026-07-28-stdio-contract]], [[lua-native-mcp-server-plan]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]], [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]], and [[mcp-recurring-six-runtime-plan]].

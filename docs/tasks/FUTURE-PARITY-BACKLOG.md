@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (recurring MCP implementation parents `.10.9.7.1.1` and `.10.9.7.1` close through
-  no-change recomposition `.10.9.7.1.1.4`; MCP-parent closeout `.10.9.7.2` follows its clean commit)
+- Last updated: `2026-07-30` (unchanged MCP recomposition `.10.9.7.2` closes `.10.9.7` and `.10.9`;
+  public semantic/MCP no-drift `.10.10` follows its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -12921,8 +12921,8 @@ before implementation.
     complete the closure. Thin MCP `.10.9` is next after the clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.10.9`
-  Status: `active` (2026-07-29; exact contract plus all five native implementations and six runtime admissions
-    are parent-closed at 5/5 + 6/6 with rollout pending; recurring composition `.10.9.7` is next)
+  Status: `done` (2026-07-30; exact contract, five native implementations, six runtime admissions, recurring
+    all-twenty promotion, and unchanged parent closeout are complete at 5/5 + 6/6 with rollout complete/141)
   Goal: Implement one thin MCP semantic contract through five native server implementations and six runtime
     admissions.
   Children: `.10.9.0`, `.10.9.1`, `.10.9.2`, `.10.9.3`, `.10.9.4`, `.10.9.5`, `.10.9.6`, `.10.9.7`
@@ -14584,8 +14584,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.6.4 - close Lua MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.7`
-    Status: `active` (2026-07-30; implementation/promotion parent `.1` is signoff-complete through unchanged
-      recomposition `.1.1.4`; MCP-parent closeout `.2` follows the clean closeout commit)
+    Status: `done` (2026-07-30; unchanged full-chain recomposition `.2` closes the recurring and thin-MCP
+      parents without behavior, authority, or ledger movement)
     Goal: Compose recurring six-runtime MCP conformance and close the thin-transport parent.
     Depends on: `.10.9.6`
     Children: `.10.9.7.0`, `.10.9.7.1`, `.10.9.7.2`
@@ -15004,13 +15004,50 @@ before implementation.
           Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4 - close recurring implementation parents`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.7.2`
-      Status: `pending`
+      Status: `done` (2026-07-30; focused and canonical MCP-opt-in recomposition signoff-complete from clean
+        implementation-parent closeout `77ceb921`)
       Goal: Recompose the committed recurring MCP owners unchanged and close `.10.9`.
       Depends on: `.10.9.7.1`
       Acceptance: Rerun the exact neutral/five-implementation/six-runtime/recurring/governance chain and canonical
         signoff without replacement production, fixture, consumer, oracle, ledger, semantic, CLI, aggregator, or
         legacy behavior; preserve complete rollout; close `.10.9`; and hand the clean boundary to public no-drift
         `.10.10` only after commit, brief-clear, exact cleanup, and clean proof.
+
+      #### Acceptance Checklist
+
+      - [x] **CLEAN OWNERSHIP / RETRIEVAL** — Start task-tree-first from clean `77ceb921`, zero-byte brief,
+        absent rendered-book/managed-run residue, and committed implementation-parent closure; retrieve ADRs
+        `0049`/`0054`/`0055`/`0062`, both current ledgers/checkers, the rooted driver, routing/storage/canonical
+        owners, current MCP Knowledge cards, and all affected mdBook/current-status projections.
+      - [x] **UNCHANGED FULL MCP RECOMPOSITION** — Rerun semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh
+        bindings, five native implementations, six runtime all-twenty consumers, complete/141 governance, and
+        primary 30/30 through the committed rooted driver without changing production, fixtures, or oracles.
+      - [x] **PARENT STATUS / AUTHORITY NO-DRIFT** — Prove only `thin_mcp_transport` is complete under common
+        `.10.9.7.1` ownership, semantic remains rollout 8/9 + admission 6/6, MCP remains 5/5 + 6/6, and no CLI,
+        aggregator, legacy, path/process/network, cache, compile/execute, or semantic authority appears.
+      - [x] **FULL SIGNOFF / PUBLIC LOCKSTEP / CLEANUP** — Pass canonical MCP opt-in, seven doctrines, memory/task/
+        Knowledge Map/diff/syntax/storage/path checks, render and inspect the mdBook, synchronize every durable and
+        public current-status owner, and remove exact ignored output plus empty managed-run residue.
+      - [x] **CLOSE / COMMIT / HANDOFF** — Mark `.10.9.7.2`, `.10.9.7`, and `.10.9` done; commit with the leaf id,
+        clear the brief, prove clean, and only then activate public no-drift `.10.10` without pushing before 300.
+
+      Verification: **PASS 2026-07-30.** Focused `tools/check_mcp_six_runtime.sh` passes semantic 6/20/110,
+        MCP 35/10/10/76, byte-fresh bindings at Perl 83,411 / Rust 83,225 / Dart 83,214 / Julia 120,030 /
+        Lua 83,166 bytes, Perl 13, Rust 1/1 in 15.70 seconds, Dart 1/1, Julia 257/257 in 6.7 seconds, Lua 281/281
+        per ABI, complete/141 governance, and primary 30/30. The independent host-authorized canonical
+        `LINKEDSPEC_RUN_MCP_MATRIX=1 bash tools/run_ci_local.sh` exits zero after all seven doctrines, Rust
+        semantic 1/1 in 80.25 seconds, Dart 1/1, Julia semantic 416/416 in 28.5 seconds, repository containment/
+        moved-root proof, primary CLI 66x2, RAM 53%, and Phase 0 1,031/1,031. Its optional leg independently
+        repeats Perl 13, Rust 1/1 in 15.52 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI,
+        complete/141 governance, and primary 30/30 before `[ci] local CI gate passed`. Formal state remains
+        semantic rollout 8/9 + admission 6/6 and MCP 5/5 implementations + 6/6 runtimes with rollout complete;
+        no production, fixture, contract/binding, consumer, oracle, ledger, semantic, CLI, aggregator, legacy,
+        package, SDK, service, network, or authority behavior changes. This unchanged conjunction closes
+        `.10.9.7` and `.10.9`; public no-drift remains solely owned by `.10.10`. Knowledge Map remains exact at
+        757 facts / 6,137 question keys; the mdBook renders 79 files at 13,784 KiB before exact ignored-output
+        and proven-empty canonical-run cleanup.
+
+      Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.2 - close MCP implementation parent`
 
 - ID: `FUTURE-PARITY-BACKLOG.10.10`
   Status: `pending`

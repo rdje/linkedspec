@@ -97,14 +97,21 @@ runs Perl/Rust/Dart/Julia/PUC Lua/LuaJIT MCP consumers exactly once, checks the 
 runs the existing three-case primary no-drift projection. Rust target and Julia writable-depot state live under
 its exact managed artifact root. Canonical CI requires and syntax-checks the driver, while
 `LINKEDSPEC_RUN_MCP_MATRIX=1` opts into the expensive composition. The coordinated `.1` transition has marked
-thin transport complete in both ledgers; no-change `.10.9.7.2` owns the remaining MCP-parent closeout.
+thin transport complete in both ledgers.
 
 No-change implementation closeout `.10.9.7.1.1.4` reruns that same chain independently. Its canonical opt-in
 gate passes all seven doctrines, Rust semantic 1/1, Julia semantic 416/416 in 29.3 seconds, containment/moved-root,
 primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds. The optional leg repeats Perl 13, Rust 1/1 in
 15.88 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and primary
 30/30. Implementation parents `.10.9.7.1.1` and `.10.9.7.1` are closed without a replacement proof or status
-movement; MCP-parent closeout `.10.9.7.2` is next.
+movement. At that historical boundary, MCP-parent closeout `.10.9.7.2` was next.
+
+Final no-change MCP-parent closeout `.10.9.7.2` reruns the same driver and an independent canonical MCP opt-in
+from clean `77ceb921`. Focused proof remains semantic 6/20/110, MCP 35/10/10/76, six runtime consumers,
+complete/141 governance, and primary 30/30. Canonical execution exits zero through all seven doctrines,
+containment/moved-root, primary CLI 66x2, RAM 53%, Phase 0 1,031/1,031, and the rebuilt optional MCP chain.
+Parents `.10.9.7` and `.10.9` close without a replacement proof or status/authority movement. Public no-drift
+remains `.10.10`.
 
 The planning leaf's host-authorized canonical signoff passes LinkedSpec's macOS-sandbox containment and moved-root
 proof, semantic 6/20/105, MCP 35/10/10/68, the current six runtime admissions, primary CLI 66x2, RAM 60%, Phase 0
