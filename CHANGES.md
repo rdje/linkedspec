@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.2 — close the activation-pointer correction
+
+The committed ADR `0065` enforcement has been independently recomposed without implementation change. Automatic
+pointer validation and all eleven repository-volume hermetic cases pass from clean activation commit `ed136df2`;
+the current-contract census finds no contradictory owner. Two completed historical task records whose old
+acceptance wording was otherwise unqualified now explicitly identify the `latest_commit == HEAD` premise as
+superseded by the satisfiable activation-boundary rule. Their historical outcomes remain unchanged.
+
+The correction tree, ADR, roadmaps, architecture snapshot, task index, bounded memory, live docs, and mdBook now
+agree that Git owns current `HEAD`, while committed `MEMORY.md` names the exact clean first-parent activation
+boundary. Knowledge Map 763/6,194, mdBook 79 files / 13,900 KiB, all seven doctrines, containment and moved-root
+proof, CLI 66/66 in both option environments, RAM 51%, and Phase 0 1,031/1,031 in 633 seconds pass. Root
+`README.md`, parser/runtime/backend code, and public `.spec` behavior remain unchanged. Dart callable-codeblock
+construction `.11.5.1` is restored as the next task-tree-first activation.
+
 ## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.1 — enforce the activation boundary
 
 `MEMORY.md` now records a truthful `activation_commit` rather than claiming the new commit can contain its own

@@ -97,6 +97,9 @@ read-only phase-aware checker. The pre-commit hook is a hard gate over staged `M
 and `HEAD^1`. The canonical local gate uses an automatic mode that selects a worktree, staged, or clean
 committed view and rejects ambiguous staged-plus-unstaged pointer edits. Hermetic tests cover the initial
 `root` sentinel, ordinary success, malformed/duplicate fields, genuine drift, and phase ambiguity.
+Closeout `.2` independently recomposed the committed checker, both hook views, all eleven cases, and the current
+and historical documentation owners without implementation change; it found no current contradiction and made
+the only two unqualified historical task statements point explicitly to ADR `0065`.
 
 ## Definition of done
 

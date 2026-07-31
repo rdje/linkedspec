@@ -27,7 +27,9 @@ the durable handoff state current.
 - `perl/.PPlugin.pm.swp` and `git_message_brief.txt` are removed from the index (`--cached`).
 - `rgx` remains tracked as a submodule/gitlink, and `.gitmodules` carries the intended local-dirt ignore policy so
   nested submodule worktree dirt does not dirty the parent status.
-- `MEMORY.md` latest_commit updated to reflect the current HEAD.
+- Historical `.1` acceptance: `MEMORY.md latest_commit` was updated under the then-current convention. ADR `0065`
+  / `MEMORY-COMMIT-POINTER-ENFORCEMENT.0-.1` supersede that self-referential name/comparison with
+  `activation_commit == HEAD` before commit and `HEAD^1` afterward; Git owns current identity.
 - Focused validation passes (memory-arch self-check, perl -c).
 - Live docs updated.
 - Generated build/book artifacts are deleted only when they are rebuildable and safe to remove.

@@ -1,5 +1,18 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Activation-pointer correction independently closed
+
+Leaf `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` independently recomposes ADR `0065` and the committed `.1` checker,
+hooks, workflow, tests, and documentation without implementation drift. The current repository has no conflicting
+pointer owner; two otherwise unqualified historical task statements now explicitly record their supersession.
+Git remains current-commit authority, while `MEMORY.md` carries the clean activation boundary (`HEAD` before the
+leaf commit and `HEAD^1` afterward).
+
+Automatic validation, all eleven hermetic cases, Knowledge Map 763/6,194, mdBook 79 files / 13,900 KiB, all seven
+doctrines, containment/moved-root, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in 633 seconds pass. Root README and
+all language/runtime/backend behavior are unchanged. The corrective tree is closed, and Dart callable-codeblock
+construction `.11.5.1` is restored as the next clean task-tree activation.
+
 ## 2026-07-30 — Satisfiable MEMORY commit-pointer enforcement signoff-complete
 
 Leaf `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` implements ADR `0065` with one read-only phase-aware checker. Staged

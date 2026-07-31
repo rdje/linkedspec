@@ -18,7 +18,9 @@ resume pointer still said the branch was over the 300-commit push threshold.
 
 - Changing push policy.
 - Pushing the branch.
-- Reworking the post-commit hook's soft `latest_commit` hash warning.
+- Historical `.1` boundary: reworking the then-current soft `latest_commit` hook warning. ADR `0065` and
+  `MEMORY-COMMIT-POINTER-ENFORCEMENT.0-.1` later supersede its self-HEAD comparison while retaining non-mutating
+  post-commit verification.
 - Changing parser/runtime behavior or public mdBook content.
 
 ## Acceptance Criteria
@@ -83,3 +85,5 @@ resume pointer still said the branch was over the 300-commit push threshold.
 
 - `2026-07-08`: Created task tree to own the stale push-threshold wording correction before editing `MEMORY.md`.
 - `2026-07-08`: Completed `.1` by replacing the stale threshold-state sentence with policy-oriented push guidance.
+- `2026-07-30`: ADR `0065` / `MEMORY-COMMIT-POINTER-ENFORCEMENT.0-.1` explicitly supersede this tree's historical
+  `latest_commit` hook premise; its push-policy result remains current and unchanged.

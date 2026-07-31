@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `MEMORY-COMMIT-POINTER-ENFORCEMENT`
-- Status: `active`
+- Status: `done` / `closed`
 - Roadmap lane: `Repository continuity and doctrine enforcement`
 - Created: `2026-07-30`
 - Last updated: `2026-07-30`
@@ -48,7 +48,7 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
 ## Task Tree
 
 - ID: `MEMORY-COMMIT-POINTER-ENFORCEMENT`
-  Status: `active`
+  Status: `done`
   Goal: `Make the committed resume-pointer hash invariant precise, satisfiable, and enforced.`
   Children: `MEMORY-COMMIT-POINTER-ENFORCEMENT.0`, `MEMORY-COMMIT-POINTER-ENFORCEMENT.1`, `MEMORY-COMMIT-POINTER-ENFORCEMENT.2`
 
@@ -65,18 +65,18 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
   Verification: `11 hermetic pointer cases; direct auto/pre checks; Knowledge Map 763/6,194; mdBook 79 files/13,896 KiB; seven doctrines; canonical containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 637s`
 
 - ID: `MEMORY-COMMIT-POINTER-ENFORCEMENT.2`
-  Status: `pending`
+  Status: `done`
   Goal: `Independently recompose the committed enforcement, reconcile status, and close the corrective tree.`
   Acceptance: `A clean-boundary audit finds all canonical and historical owners aligned without further implementation change; independent full signoff is green; the repository is clean and the Dart parity frontier is restored.`
-  Verification: `pending`
+  Verification: `Committed-state auto check and all 11 hermetic cases; contradiction census with two explicit historical supersession annotations; Knowledge Map 763/6,194; mdBook 79 files/13,900 KiB; all seven doctrines; containment/moved-root; CLI 66x2; RAM 51%; Phase 0 1,031/1,031 in 633s`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` | `done` | ADR `0065` ratifies the activation-boundary contract. |
-| 2 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` | `done` | Enforcement and complete signoff pass from clean `ddad65aa`; landing commit pending. |
-| 3 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` | `pending` | Independently recompose the committed rule and close the tree after the clean `.1` commit. |
+| 2 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` | `done` | Enforcement landed cleanly at `ed136df2`; both real hook phases passed. |
+| 3 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` | `done` | Committed enforcement recomposed unchanged from `ed136df2`; the corrective tree is closed. |
 
 ## Decisions
 
@@ -91,6 +91,9 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
 - `2026-07-30`: Keep the field/checker/hook/workflow migration atomic in `.1`, including explicit supersession of
   contradictory historical wording. `.2` is an independent clean-boundary recomposition and status closeout,
   not a second partial migration.
+- `2026-07-30`: `.2` committed-state scan found no current contradiction: remaining self-HEAD spellings are
+  explicit supersession explanations or dated history. Add inline supersession notes to the two otherwise
+  unqualified completed task records (`REPO-HYGIENE`, `MEMORY-PUSH-POINTER-SYNC`) without changing their outcomes.
 
 ## Evidence Plan
 
@@ -124,7 +127,7 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
 
 ## Open Questions
 
-- None; `.1` preserves ADR `0065` exactly and `.2` is a no-change committed-state audit.
+- None; `.1` preserves ADR `0065` exactly and `.2` closes the no-change committed-state audit.
 
 ## Blockers
 
@@ -136,14 +139,15 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
 | --- | --- | --- | --- |
 | `2026-07-30` | `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` | Contract/source inspection; 50-commit table; complete first-parent/merge census; ADR/Knowledge review; Knowledge Map; mdBook; memory/task/whitespace/seven-doctrine checks; canonical local CI | PASS — 31 consecutive parseable pointer commits use exact first parent, none use self, and the 2,418-commit branch has zero merges. Knowledge Map 763/6,193, mdBook 79 files/13,892 KiB, canonical CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 643 seconds pass. |
 | `2026-07-30` | `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` | Shell syntax; 11 hermetic cases; direct auto/pre phases; memory/Knowledge/task/whitespace/seven doctrines; mdBook; complete canonical local CI | PASS — Knowledge Map 763/6,194; mdBook 79 files/13,896 KiB; all seven doctrines; containment/moved-root; CLI 66x2; RAM 54%; Phase 0 1,031/1,031 in 637 seconds. Initial canonical attempt rejected the missing task-acceptance checklist; exact evidence was added and the complete rerun passed. |
+| `2026-07-30` | `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` | Committed auto check; 11 hermetic cases; current/historical contradiction census; memory/Knowledge/task/whitespace/seven doctrines; mdBook; complete canonical local CI | PASS — no implementation drift and no current contradictory owner; two historical tasks now carry explicit supersession notes. Knowledge Map 763/6,194; mdBook 79 files/13,900 KiB; all seven doctrines; containment/moved-root; CLI 66x2; RAM 51%; Phase 0 1,031/1,031 in 633 seconds. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` | `ddad65aa` — `MEMORY-COMMIT-POINTER-ENFORCEMENT.0 - ratify satisfiable commit pointer` | Activation and semantic ratification; no hook implementation. |
-| `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` | planned subject `MEMORY-COMMIT-POINTER-ENFORCEMENT.1 - enforce activation commit pointer` | Enforcement implementation and focused/canonical signoff complete; exact hash is derived from Git after landing. |
-| `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` | pending | Documentation reconciliation, signoff, and closeout. |
+| `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` | `ed136df2` — `MEMORY-COMMIT-POINTER-ENFORCEMENT.1 - enforce activation commit pointer` | Enforcement implementation and focused/canonical signoff; real pre/post hooks both accepted exact `ddad65aa`. |
+| `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` | `MEMORY-COMMIT-POINTER-ENFORCEMENT.2 - close activation pointer correction` | Independent no-change recomposition, historical reconciliation, and tree closeout. |
 
 ## Changelog
 
@@ -159,3 +163,11 @@ frontier `FUTURE-PARITY-BACKLOG.11.5.1`.
 - `2026-07-30`: `.1` signoff passes after the doctrine gate caught and required its missing TOOLBOX acceptance
   checklist. Complete evidence is Knowledge Map 763/6,194, mdBook 79/13,896, seven doctrines, containment/
   moved-root, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 637 seconds; `.2` waits for the clean landing commit.
+- `2026-07-30`: `.1` landed at `ed136df2`; its hard pre-hook resolved `ddad65aa` to current `HEAD`, its non-mutating
+  post-hook resolved the same committed value to exact `HEAD^1`, the brief is zero bytes, and the tree/managed-run
+  census is clean. `.2` activated from that durable boundary before any reconciliation change.
+- `2026-07-30`: `.2` independently recomposed the committed checker, 11-case fixture, canonical owners, hooks,
+  and complete local gate without implementation change. The only historical gaps were unqualified old acceptance
+  wording in `REPO-HYGIENE` and `MEMORY-PUSH-POINTER-SYNC`; both now explicitly point to ADR `0065`. Exact closeout
+  is Knowledge Map 763/6,194, mdBook 79/13,900, seven doctrines, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in
+  633 seconds. The correction tree is closed and Dart `.11.5.1` is the next clean activation.

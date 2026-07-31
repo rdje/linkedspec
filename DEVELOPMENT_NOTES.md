@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.2` — independent clean-boundary closeout): The committed-state
+  audit began only after `.1` landed cleanly at `ed136df2`. It reran automatic pointer selection and all eleven
+  hermetic Git cases against the committed implementation, then classified every remaining `latest_commit == HEAD`
+  occurrence. Current owners agree with ADR `0065`; remaining matches are explicit supersession explanations,
+  Knowledge Map retrieval vocabulary, or dated history. The only two old completed task records lacking an inline
+  qualifier were `REPO-HYGIENE` and `MEMORY-PUSH-POINTER-SYNC`, so `.2` adds narrow historical annotations without
+  rewriting their results or changing enforcement.
+
+  This no-change recomposition matters because the invariant crosses staged, committed, historical, and resume
+  views. One successful implementation run could prove the mechanism but not that later readers encounter a
+  contradiction-free repository. The second clean-boundary pass demonstrates that pre-commit `HEAD`, post-commit
+  `HEAD^1`, auto authority selection, the workflow prose, and historical interpretation compose independently.
+
+  Closeout evidence is Knowledge Map 763/6,194, mdBook 79 files / 13,900 KiB, all seven doctrines, exact process
+  containment and moved-root proof, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in 633 seconds. No code, root
+  README, public language, backend, MCP, or runtime surface changes. The temporary continuity detour is closed;
+  Dart `.11.5.1` is again the single next clean task-tree activation.
+
 - 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.1` — one value, three repository views): Commit identity is not
   duplicated. The checker resolves `activation_commit` as a Git commit object, then changes only the authoritative
   `MEMORY.md` view and expected boundary by phase: index/current `HEAD` for hard pre-commit, committed blob/

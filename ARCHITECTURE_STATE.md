@@ -11,9 +11,11 @@ This document is the current high-level technical reading of the project shape. 
   parent `HEAD^1` afterward. Thirty-one consecutive parseable recent pointers already follow that relationship;
   none contains self, and current history has no merges. Ratification `.0` changes no hook; `.1` implements one
   read-only phase-aware checker, hard staged pre-commit/non-mutating committed post-commit boundaries, automatic
-  memory/canonical composition, and 11 repository-volume hermetic cases. Complete signoff passes Knowledge Map
-  763/6,194, mdBook, all seven doctrines, containment/moved-root, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in
-  637 seconds. `.2` independently recomposes the committed state before Dart parity resumes.
+  memory/canonical composition, and 11 repository-volume hermetic cases. The `.1` landing at `ed136df2` passes
+  both real hook phases. Independent `.2` then recomposes that committed behavior unchanged, explicitly annotates
+  the only two unqualified historical task records, and closes the correction. Closeout passes Knowledge Map
+  763/6,194, mdBook, all seven doctrines, containment/moved-root, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in
+  633 seconds. Dart `.11.5.1` is restored as the next clean activation.
 - `2026-07-30 expressive self-containment / EBNF-like profile direction`: ADR `0064` and
   `SPEC-LANGUAGE-SELF-CONTAINMENT` define `.spec` closure inside LinkedSpec's grammar, recursion, cursor/capture,
   scoped state, callable/control, transformation, and result domain without granting ambient filesystem/process/

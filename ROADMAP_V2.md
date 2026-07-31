@@ -14,11 +14,12 @@ AST/HandlerIR/runtime. Lossless authored source maps, explicit semantic differen
 and Perl/Rust/Dart/Julia/Lua parity are mandatory. `.0` is behavior-free routing; `.1+` remains unscheduled behind
 current callable-codeblock parity.
 
-Current continuity detour: `MEMORY-COMMIT-POINTER-ENFORCEMENT` / ADR `0065` correct the self-referential
+Completed continuity correction: `MEMORY-COMMIT-POINTER-ENFORCEMENT` / ADR `0065` correct the self-referential
 `MEMORY.md latest_commit == post-commit HEAD` expectation. Git owns current commit identity; the tracked pointer
 names the clean `activation_commit` (`HEAD` before the leaf commit, `HEAD^1` afterward). `.0` ratifies the
-contract; `.1` has implemented shared pre/post enforcement and 11 hermetic cases with canonical signoff; `.2`
-independently recomposes the committed state and closes before Dart `.11.5.1`.
+contract; `.1` implements shared pre/post enforcement and 11 hermetic cases; `.2` independently recomposes the
+committed state from `ed136df2`, annotates two historical supersessions, and closes the correction. Dart `.11.5.1`
+is restored as the next clean activation.
 
 Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed

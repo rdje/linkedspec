@@ -1,7 +1,7 @@
 # ADR 0065: MEMORY records the clean activation commit, while Git owns current HEAD
 
 - Date: 2026-07-30
-- Status: accepted; enforcement implemented under `MEMORY-COMMIT-POINTER-ENFORCEMENT.1`; closeout pending `.2`
+- Status: accepted/implemented; enforcement committed at `ed136df2`; independent `.2` closeout complete
 - Tags: architecture, memory, continuity, git, commit-workflow, hooks, enforcement, task-tree
 
 ## Context
