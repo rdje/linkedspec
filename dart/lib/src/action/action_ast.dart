@@ -315,6 +315,84 @@ final class ActionBlockValueExpr extends ActionExpr {
   ActionJsonObject toJson() => {...baseJson(), 'block': block.toJson()};
 }
 
+enum ActionContextualBlockSyntax {
+  attached('attached'),
+  parenthesized('parenthesized');
+
+  const ActionContextualBlockSyntax(this.wireName);
+
+  final String wireName;
+}
+
+/// A structurally recognized block argument awaiting callable metadata.
+final class ActionContextualCodeblockCandidateExpr extends ActionExpr {
+  const ActionContextualCodeblockCandidateExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.syntax,
+    required this.version,
+    required this.signature,
+    required this.bodySource,
+    required this.bodyAst,
+    required this.bodySpan,
+  }) : super(kind: 'contextual_codeblock_candidate');
+
+  final ActionContextualBlockSyntax syntax;
+  final int version;
+  final CallableSignature signature;
+  final String bodySource;
+  final ActionBlock bodyAst;
+  final ActionSourceSpan bodySpan;
+
+  @override
+  ActionJsonObject toJson() {
+    return {
+      'kind': kind,
+      'syntax': syntax.wireName,
+      'version': version,
+      'signature': signature.toJson(),
+      'body_source': bodySource,
+      'body_ast': bodyAst.toJson(),
+      'source_text': source,
+      'source_span': sourceSpan.toJson(),
+      'body_span': bodySpan.toJson(),
+    };
+  }
+}
+
+/// A metadata-admitted zero-positional contextual final codeblock argument.
+final class ActionCodeblockArgumentExpr extends ActionExpr {
+  const ActionCodeblockArgumentExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.version,
+    required this.signature,
+    required this.bodySource,
+    required this.bodyAst,
+    required this.bodySpan,
+  }) : super(kind: 'codeblock_argument');
+
+  final int version;
+  final CallableSignature signature;
+  final String bodySource;
+  final ActionBlock bodyAst;
+  final ActionSourceSpan bodySpan;
+
+  @override
+  ActionJsonObject toJson() {
+    return {
+      'kind': kind,
+      'version': version,
+      'signature': signature.toJson(),
+      'body_source': bodySource,
+      'body_ast': bodyAst.toJson(),
+      'source_text': source,
+      'source_span': sourceSpan.toJson(),
+      'body_span': bodySpan.toJson(),
+    };
+  }
+}
+
 /// An inert, serializable callable-codeblock value.
 ///
 /// The body remains typed ActionIR, but construction does not visit or execute
@@ -936,6 +1014,8 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       return null;
     case ActionBlockValueExpr(:final block):
       return findRemovedAggregateSelectorInBlock(block);
+    case ActionContextualCodeblockCandidateExpr():
+    case ActionCodeblockArgumentExpr():
     case ActionCodeblockLiteralExpr():
     case ActionCodeblockLiteralErrorExpr():
       return null;

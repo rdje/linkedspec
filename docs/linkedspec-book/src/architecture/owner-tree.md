@@ -452,7 +452,12 @@ bindings own copied fixed/rest parameter restoration while unrelated caller stor
 active-codeblock list owns recursion rejection. `ActionValueAccessExpr` feeds evaluated results into the existing
 key/index reader, and the ordinary fluent evaluator continues any receiver chain. Native, normalized reconstructed,
 generated-plan, and independently compiled emitted-source execution reuse these owners. Generic contextual
-final-block normalization remains `.11.5.3`.
+final-block admission is owned by `callable_contract.dart`. The parser emits
+`ActionContextualCodeblockCandidateExpr` provenance without granting meaning; the compiler supplies the complete
+builtin/user-function registry and receives either a normalized `ActionCodeblockArgumentExpr`, a restored eager
+block, or a typed contract rejection. `FunctionDefinition`, `StagedParseJob`, and `UserFunctionEntry` retain the
+sole final `parameterKinds` authority. Helper/receiver/tree execution decodes the normalized value through the
+same `_executeCodeblockValue` runtime used by explicit literals rather than a syntax-specific callback path.
 
 `linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
 `CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;

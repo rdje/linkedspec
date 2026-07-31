@@ -783,6 +783,8 @@ final class _ActionContractResolver {
         visitExpr(value);
       case ActionBlockValueExpr(:final block):
         visitBlock(block);
+      case ActionContextualCodeblockCandidateExpr():
+      case ActionCodeblockArgumentExpr():
       case ActionCodeblockLiteralExpr():
         // Callable bodies are retained state. Construction must not resolve
         // their helpers or dependencies eagerly.

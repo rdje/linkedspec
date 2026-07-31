@@ -5,20 +5,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `5e80be32` — clean Dart construction HEAD from which `.11.5.2` activated task-tree-first
-  (112/300; no push); Git derives current landing identity.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.5.2` via subject
-  `FUTURE-PARITY-BACKLOG.11.5.2 - execute Dart callable codeblocks`; Git derives its landing identity.
-- active_leaf: none after this landing; `FUTURE-PARITY-BACKLOG.11.5.3` awaits clean task-tree-first activation.
-- active_scope: none until `.11.5.3` activates; `.11.5.2` owns the completed Dart bound-variable invocation slice.
-- active_progress: dynamic invocation is signoff-complete; focused callable 15/15 and parser/variadic 13/13 pass;
-  operational format 94/0, analyzer, Dart 369/369, storage 19/47, CLI 66x2, and corpus 105/105 are green across
-  native/reconstructed/generated/emitted roles; KM 765/6,213, book 79/13,924, all 7 doctrines, canonical semantic/
-  MCP admissions, containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 650s pass.
-- active_exclusions: generic contextual final blocks `.11.5.3`, capability/
+- activation_commit: `74725ff0` — clean Dart dynamic-invocation HEAD from which `.11.5.3` activated task-tree-first
+  (113/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.5.3` via this landing commit; Dart parent `.11.5` is closed.
+- active_leaf: none at the intended clean landing boundary; Julia construction `.11.6.1` is the next activation.
+- active_scope: completed exact Dart final-only metadata, one signature-governed helper/user/receiver/tree
+  contextual normalizer, native/reconstructed/generated/emitted identity, public no-drift, and parent closeout.
+- active_progress: complete/signoff-green — neutral 7/11/9/7/4/8, callable 21, package 375, format 95/0, strict
+  analysis, storage 19/47, CLI 66x2, corpus 105/105, Knowledge Map 766/6,218, mdBook 79/13,944, and canonical.
+- active_exclusions: new codeblock signatures/closures/callback runtimes, capability/
   MCP movement, lexical capture, other backends, root README, history rewriting, and push.
-- in_flight_uncommitted: none after the `.11.5.2` landing commit and brief clear.
-- next_after_clean_commit: activate generic Dart final blocks `.11.5.3` task-tree-first; no push.
+- in_flight_uncommitted: none in the intended post-landing state; activate `.11.6.1` task-tree-first only when clean.
+- next_after_clean_commit: activate Julia callable-codeblock construction `.11.6.1`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -40,15 +38,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_future_direction: ADR `0064`/`SPEC-LANGUAGE-SELF-CONTAINMENT` owns expressive closure/EBNF profiles;
-  callable parity advances next to Dart `.11.5.2`; ADR `0056` remains pending under `.14.1-.8`.
+  callable parity advances next through Julia `.11.6.1`; ADR `0056` remains pending under `.14.1-.8`.
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 112/300 after this landing; no push.
+- push_policy: hard lock at 300 new local commits; counter 114/300 after this `.11.5.3` landing; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.5.2` passes KM 765/6,213, book 79/13,924, all 7 doctrines, semantic/MCP admissions,
-  containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 650 seconds; exact cleanup passes.
-- blockers: none; activate `.11.5.3` task-tree-first from the clean `.11.5.2` commit; no push.
+- canonical_state: `.11.5.3` passes KM 766/6,218, book 79/13,944, all 7 doctrines, semantic/MCP admissions,
+  containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds; exact cleanup passes.
+- blockers: none; land `.11.5.3`, prove the clean boundary, then activate Julia `.11.6.1`; no push.

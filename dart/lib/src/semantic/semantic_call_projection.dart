@@ -208,7 +208,11 @@ void _extendSemanticCallProjection({
       var localOrder = 0;
       final variables = <String, Map<String, Object?>>{
         for (final name in function.params)
-          name: _semanticValueShape('unknown'),
+          name: _semanticValueShape(
+            function.parameterKinds[name] == 'codeblock'
+                ? 'codeblock'
+                : 'unknown',
+          ),
       };
       final ownerId = _semanticFunctionId(function.name);
       for (final statement in block.statements) {
@@ -1051,6 +1055,7 @@ ActionBlock _semanticTypedFunctionBody(
   UserFunctionRegistry registry,
 ) {
   final block = parseActionBlock(function.bodySource);
+  normalizeActionBlockFinalCodeblocks(block, registry);
   if (function.bodyAst == null ||
       !_plainValuesEqual(function.bodyAst, block.toJson())) {
     throw _semanticCallCorrelationError(
@@ -1062,7 +1067,13 @@ ActionBlock _semanticTypedFunctionBody(
     block,
     functionRegistry: registry,
   );
-  if (!resolution.ok) {
+  final unresolved = resolution.diagnostics.where((diagnostic) {
+    final helperName = diagnostic.helperName;
+    return diagnostic.code != 'unknown_helper' ||
+        helperName == null ||
+        function.parameterKinds[helperName] != 'codeblock';
+  });
+  if (unresolved.isNotEmpty) {
     throw _semanticCallCorrelationError(
       'Typed function body has unresolved contracts',
       function.name,
@@ -1162,7 +1173,11 @@ Map<String, Map<String, Object?>> _inferSemanticFunctionShapes(
       final block = parseActionBlock(function.bodySource);
       final variables = <String, Map<String, Object?>>{
         for (final name in function.params)
-          name: _semanticValueShape('unknown'),
+          name: _semanticValueShape(
+            function.parameterKinds[name] == 'codeblock'
+                ? 'codeblock'
+                : 'unknown',
+          ),
       };
       var shape = _semanticValueShape('unknown');
       for (final statement in block.statements) {
@@ -1238,12 +1253,16 @@ Map<String, Object?> _semanticFunctionSignature(UserFunctionEntry function) {
   return <String, Object?>{
     'parameters': [
       for (final name in parameters)
-        <String, Object?>{'name': name, 'kind': 'value', 'required': true},
+        <String, Object?>{
+          'name': name,
+          'kind': function.parameterKinds[name] ?? 'value',
+          'required': true,
+        },
     ],
     'arity_min': signature?.minArity ?? function.arity,
     'arity_max': signature == null ? function.arity : signature.maxArity,
     'rest_parameter': signature?.restParam,
-    'final_codeblock': false,
+    'final_codeblock': function.parameterKinds.isNotEmpty,
   };
 }
 

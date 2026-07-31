@@ -1,4 +1,5 @@
 import '../action/action_ast.dart';
+import '../action/callable_contract.dart';
 import '../action/action_contracts.dart';
 import '../action/action_parser.dart';
 import '../action/function_registry.dart';
@@ -171,7 +172,20 @@ CompiledSpec compileSpec(
       );
     }
 
-    final functionRegistry = UserFunctionRegistry.fromSpec(spec, trace: trace);
+    final declaredFunctionRegistry = UserFunctionRegistry.fromSpec(spec);
+    final List<FunctionDefinition> normalizedFunctions;
+    try {
+      normalizedFunctions = [
+        for (final function in spec.functions)
+          normalizeFunctionFinalCodeblocks(function, declaredFunctionRegistry),
+      ];
+    } on CallableContractException catch (error) {
+      throw CompiledSpecException(error.message);
+    }
+    final functionRegistry = UserFunctionRegistry.fromFunctions(
+      normalizedFunctions,
+      trace: trace,
+    );
     final definitionOrder = <String>[];
     final rulesByLabel = <String, CompiledRule>{};
     final redefinedRuleLabels = <String>[];
@@ -422,9 +436,13 @@ void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
           ? '${call.method}()'
           : '${call.method}($args)';
       try {
-        validateBlock(parseActionBlock(source), '$context fluent call $index');
+        final block = parseActionBlock(source);
+        normalizeActionBlockFinalCodeblocks(block, compiled.functionRegistry);
+        validateBlock(block, '$context fluent call $index');
       } on CompiledSpecException {
         rethrow;
+      } on CallableContractException catch (error) {
+        throw CompiledSpecException(error.message);
       } on Object {
         // Fluent syntax historically remains runtime-parsed. Do not turn an
         // unrelated deferred parse failure into a new compile-time change.
@@ -434,12 +452,13 @@ void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
 
   for (final function in compiled.functions) {
     try {
-      validateBlock(
-        parseActionBlock(function.bodySource),
-        "function '${function.name}' body",
-      );
+      final block = parseActionBlock(function.bodySource);
+      normalizeActionBlockFinalCodeblocks(block, compiled.functionRegistry);
+      validateBlock(block, "function '${function.name}' body");
     } on CompiledSpecException {
       rethrow;
+    } on CallableContractException catch (error) {
+      throw CompiledSpecException(error.message);
     } on Object {
       // Preserve the existing runtime timing for unrelated function-body parse
       // failures while still rejecting structurally valid removed selectors.
@@ -1112,6 +1131,11 @@ CompiledActionPayload _compileActionPayload({
   String? lifecycle,
 }) {
   final ast = parseActionBlock(code);
+  try {
+    normalizeActionBlockFinalCodeblocks(ast, functionRegistry);
+  } on CallableContractException catch (error) {
+    throw CompiledSpecException(error.message);
+  }
   return CompiledActionPayload(
     role: role,
     line: element.line,

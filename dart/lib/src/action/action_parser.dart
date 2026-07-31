@@ -562,16 +562,17 @@ final class _ActionParser {
       );
       args.add(
         ActionPositionalArgument(
-          ActionBlockValueExpr(
+          _contextualCodeblockCandidate(
             source: blockSource,
             sourceSpan: _span(
               start + attached.openIndex,
               start + attached.closeIndex + 1,
             ),
-            block: _child(
+            bodyAst: _child(
               attached.body,
               start + attached.openIndex + 1,
             ).parseBlock(),
+            syntax: ActionContextualBlockSyntax.attached,
           ),
         ),
       );
@@ -874,13 +875,7 @@ final class _ActionParser {
     }
     final head = _trimWithOffsets(attached.head, start);
     final headCall = _parseCallee(head.text);
-    if (headCall == null ||
-        !const {
-          'with',
-          'walk_leaves',
-          'map_leaves',
-          'reduce_leaves',
-        }.contains(headCall.name)) {
+    if (headCall == null) {
       return null;
     }
     final args = _parseArguments(
@@ -893,16 +888,17 @@ final class _ActionParser {
     );
     args.add(
       ActionPositionalArgument(
-        ActionBlockValueExpr(
+        _contextualCodeblockCandidate(
           source: blockSource,
           sourceSpan: _span(
             start + attached.openIndex,
             start + attached.closeIndex + 1,
           ),
-          block: _child(
+          bodyAst: _child(
             attached.body,
             start + attached.openIndex + 1,
           ).parseBlock(),
+          syntax: ActionContextualBlockSyntax.attached,
         ),
       ),
     );
@@ -935,16 +931,18 @@ final class _ActionParser {
             part.text.substring(separator.index + separator.length),
             part.start + separator.index + separator.length,
           );
+          final expression = _child(value.text, value.start).parseExpression();
           args.add(
             ActionKeywordArgument(
               name: name,
-              value: _child(value.text, value.start).parseExpression(),
+              value: _parenthesizedCodeblockCandidate(expression),
             ),
           );
           continue;
         }
       }
-      final expression = _child(part.text, part.start).parseExpression();
+      final parsedExpression = _child(part.text, part.start).parseExpression();
+      final expression = _parenthesizedCodeblockCandidate(parsedExpression);
       final keywordIndex = _findTopLevelAssignmentEquals(part.text);
       if (keywordIndex != null && expression is! ActionAssignScalarExpr) {
         final name = part.text.substring(0, keywordIndex).trim();
@@ -972,6 +970,43 @@ final class _ActionParser {
       source: text.text,
       sourceSpan: _span(text.start, text.end),
       reason: reason,
+    );
+  }
+
+  ActionExpr _parenthesizedCodeblockCandidate(ActionExpr expression) {
+    if (expression is! ActionBlockValueExpr) {
+      return expression;
+    }
+    return _contextualCodeblockCandidate(
+      source: expression.source,
+      sourceSpan: expression.sourceSpan,
+      bodyAst: expression.block,
+      syntax: ActionContextualBlockSyntax.parenthesized,
+    );
+  }
+
+  ActionContextualCodeblockCandidateExpr _contextualCodeblockCandidate({
+    required String source,
+    required ActionSourceSpan sourceSpan,
+    required ActionBlock bodyAst,
+    required ActionContextualBlockSyntax syntax,
+  }) {
+    return ActionContextualCodeblockCandidateExpr(
+      source: source,
+      sourceSpan: sourceSpan,
+      syntax: syntax,
+      version: 1,
+      signature: const CallableSignature(
+        kind: 'callable_signature',
+        version: 1,
+        positionalParams: [],
+        restParam: null,
+        minArity: 0,
+        maxArity: 0,
+      ),
+      bodySource: bodyAst.source,
+      bodyAst: parseActionBlock(bodyAst.source),
+      bodySpan: bodyAst.sourceSpan,
     );
   }
 }

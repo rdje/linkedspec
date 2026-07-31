@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Dart generic final-codeblock equivalence signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.5.3` carries exact final `name: codeblock` metadata through definition, staged
+sidecars, registry, semantic signature, and descriptor-v3 state. One post-registry contract owner decides whether
+attached or parenthesized blocks are contextual, validates preceding arity, restores ordinary eager blocks, rejects
+unknown attached callees, and lowers accepted helper/user-function/receiver/tree forms to the same zero-positional
+`codeblock_argument`. The existing dynamic evaluator remains the sole executor; explicit signatures, harrays,
+controls, eager blocks, static precedence, and portable failures remain distinct.
+
+Neutral 7/11/9/7/4/8 and focused callable 21/21 proof pass across native, normalized reconstruction, generated
+plans, and an independently compiled emitted Dart package. The complete Dart gate passes format 95/0, strict
+analysis, 375 tests, storage 19 owners / 47 packages, CLI 66x2, and corpus 105/105. Knowledge Map 766/6,218,
+mdBook 79 files / 13,944 KiB, all seven doctrines, canonical semantic/MCP admissions, containment/moved-root,
+RAM 58%, and Phase 0 1,031/1,031 in 646 seconds pass. Parent `.11.5` is closed; only the landing commit and clean
+boundary proof remain before Julia `.11.6.1`. Capability/MCP status, other backends, root README, and push do not
+move.
+
 ## 2026-07-30 — Dart callable-codeblock dynamic invocation signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.5.2` now executes bound Dart callable-codeblock values only after controls,

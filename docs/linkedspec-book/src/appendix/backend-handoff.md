@@ -1566,9 +1566,11 @@ callable-codeblock equivalence are explicit exclusions/future owners rather than
 typed callable-literal construction/state, exact dynamic invocation, and metadata-governed generic contextual
 equivalence across native, serialized, generated-plan, and emitted-source execution. Dart `.11.5.1-.2` admit the
 same inert explicit-literal construction/state plus dynamic invocation, copied/restored caller-context bindings,
-typed result access, portable failures/recursion, and native/reconstructed/generated/emitted identity, but not
-generic contextual equivalence. Julia and Lua still lack explicit literal values. Semantic introspection and thin MCP are
-separately complete. No backend is called complete while a current matrix state remains partial or gap.
+typed result access, portable failures/recursion, and native/reconstructed/generated/emitted identity. Dart
+`.11.5.3` adds exact final-only staged/descriptor metadata and generic contextual equivalence for typed functions,
+helpers, receiver `with`, and tree traversal through the same evaluator. Julia and Lua still lack explicit literal
+values. Semantic introspection and thin MCP are separately complete. No backend is called complete while a current
+matrix state remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
 complete backend parity. Its 57/1/2 boundary first advanced to 58/0/2 through strict recurring Rust generated-

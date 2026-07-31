@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.3` — contextual syntax is provisional until metadata accepts it):
+  Dart action parsing necessarily precedes the complete user-function registry. The parser therefore records
+  attached and parenthesized plain blocks as provenance-bearing candidates and parses receiver attachment
+  generically, but grants neither meaning. `callable_contract.dart` is the single semantic owner: it combines
+  governed helper/receiver contracts with the sole final typed user-function parameter, validates the number of
+  preceding value arguments, restores noncontract parenthesized candidates to eager blocks, rejects unknown
+  attached callees, and emits one zero-positional codeblock argument.
+
+  The shared function shell already returned exact `fixed_params`, `codeblock_param`, and `parameter_kinds` data.
+  Dart now projects that union without fabricating legacy params in the staged sidecars, validates definition/
+  payload/job identity, preserves it through immutable AST/job/registry state, and publishes the existing exact
+  outward descriptor-v3 record. Mutated sidecar metadata fails before stitching. The semantic index marks the
+  declared callback binding as codeblock and exempts only a call through that local binding from unknown-global-
+  helper diagnostics; all other unresolved contracts remain strict.
+
+  Runtime reuse is deliberate. Normalized helper/receiver/tree callbacks decode through `_executeCodeblockValue`,
+  the same evaluator as explicit literals. Contextual blocks receive zero positional values and read dynamic
+  scoped `value`, key/index, path, depth, and accumulator bindings; explicit literals retain their authored
+  fixed/rest signature and receive positional values. The implementation audit caught one subtle ordering rule:
+  helper/receiver `with` must resolve its callback expression before installing the temporary scalar named
+  `value`, or a callback variable with that same name is shadowed. A dedicated regression locks both forms.
+
+  The first complete package run also exposed duplicate public function-registry trace scopes from provisional
+  and authoritative registry construction. Only the final normalized registry now receives the caller's emitter;
+  the existing trace contract remains byte-for-event-order stable. The neutral 7/11/9/7/4/8 checker, focused
+  callable/trace/parser/runtime tests, strict analyzer, and complete operational gate pass: formatter 95/0,
+  package 375, repository storage 19 owners / 47 packages, primary CLI 66x2, and corpus 105/105. No closure,
+  callback runtime, syntax-specific generated executor, capability/MCP promotion, other-backend edit, root README
+  growth, or push is introduced. Final governance proof passes Knowledge Map 766/6,218, mdBook 79 files /
+  13,944 KiB, all seven doctrines, and canonical semantic/MCP admissions, repository containment/moved-root,
+  CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.2` — reuse caller stores, do not build a closure runtime): Dart's
   static call dispatcher already owned controls, helpers, and registered user functions; its default arm alone
   lacked a bound-name fallback. The existing `_VariableSnapshot`/scoped-binding mechanism already copies and

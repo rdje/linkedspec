@@ -237,10 +237,10 @@ Across all backends this shipped surface is still narrower than the complete fiv
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
 signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl and Rust implement that equivalence for metadata-declared `with`, typed user
-functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are documented in its
-backend handoff; explicit callable values remain separately owned there. Dart and Julia do not yet provide the
-generic contract, so the complete five-backend surface is not yet portable. ADR 0031 and completed
+functions, and receiver methods. Perl, Rust, and Dart implement that equivalence for metadata-declared `with`,
+typed user functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are
+documented in its backend handoff; explicit callable values remain separately owned there. Julia does not yet
+provide the generic contract, so the complete five-backend surface is not yet portable. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -288,10 +288,14 @@ existing scoped-variable snapshots for copied fixed/rest parameters while leavin
 an ordered active-name stack rejects direct and mutual recursion. One typed `value_access` ActionIR node lets a
 call result feed existing key/index lookup and then an ordinary receiver chain. Exact callable diagnostics expose
 arity, keyword count, non-callable kind, unknown name, and cycle fields. Native, reconstructed, generated-plan,
-and independently compiled emitted-source execution consume every neutral valid and invalid call. Generic
-contextual final-block normalization remains `.11.5.3`.
+and independently compiled emitted-source execution consume every neutral valid and invalid call. Dart now also
+retains exact final-only `parameter_kinds` through the shared shell, both staged sidecars, typed registry,
+semantic signature, and descriptor-v3 record. The parser records attached/parenthesized provenance first; one
+post-registry pass admits only metadata-declared final blocks, restores ordinary parenthesized blocks to eager
+values, and rejects unknown attached callees. Accepted contextual blocks become the same zero-positional
+`codeblock_argument` and reuse the dynamic evaluator above.
 
-On Perl and Rust, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
+On Perl, Rust, and Dart, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
 `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
@@ -317,8 +321,8 @@ count = collector("p", "a", "b")["items"].length()
 Perl, Rust, and Dart report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, and Dart. Generic
-contextual final-block spellings are complete on Perl and Rust; Dart contextual parity, Julia parity, and Lua
-explicit-literal/dynamic-call parity remain future.
+contextual final-block spellings are complete on those three backends; Julia parity and Lua explicit-literal/
+dynamic-call parity remain future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

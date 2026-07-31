@@ -824,8 +824,9 @@ Three backbone items tracked major structural modernization — all done:
   generated-plan, and emitted-source behavior. Rust `.11.4.3` now adds one metadata-owned normalization pass for
   equivalent attached/parenthesized helper, typed-user-function, and receiver final blocks, exact descriptor-v3
   kinds, preserved eager/control blocks, typed non-codeblock rejection, and identical native/reconstructed/
-  generated/emitted execution. Dart construction and explicit dynamic invocation are current through `.11.5.2`,
-  while Dart contextual parity, Julia parity, and Lua explicit-literal parity remain future.
+  generated/emitted execution. Dart `.11.5.1-.3` now provide the same construction, explicit dynamic invocation,
+  exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia parity and Lua
+  explicit-literal parity remain future.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including
@@ -837,8 +838,12 @@ Three backbone items tracked major structural modernization — all done:
   exact arity/keyword/not-callable/unknown/ordered-recursion diagnostics, and identical native, reconstructed,
   generated-plan, and independently compiled emitted-Dart behavior. Its signoff passes focused callable 15/15,
   complete Dart 369/369, canonical semantic/MCP admissions, containment/moved-root proof, CLI 66x2, and Phase 0
-  1,031/1,031 in 650 seconds. Generic final-block equivalence remains `.11.5.3`, so Dart callable-codeblock
-  behavior is not yet complete.
+  1,031/1,031 in 650 seconds. Completed `.11.5.3` adds exact final `callback: codeblock` declaration/staged/
+  registry/descriptor-v3 state plus one post-registry normalizer. Equivalent attached and parenthesized typed
+  user-function, helper, receiver, and tree callbacks become the same zero-positional codeblock argument and run
+  through the existing evaluator across native, reconstructed, generated-plan, and independently compiled emitted
+  Dart. Eager blocks, controls, explicit literal signatures, harrays, static precedence, and portable failures
+  remain distinct; parent `.11.5` is closed.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

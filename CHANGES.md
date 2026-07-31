@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.3 — close Dart generic final-codeblock equivalence
+
+Dart now preserves an exact final `name: codeblock` declaration from the shared function shell through definition,
+staged payload/job, typed registry, compiled state, semantic signature, and the outward descriptor-v3 record. The
+ActionIR parser retains attached versus parenthesized plain-block provenance until the complete callable registry
+exists. One new metadata owner then validates the declared final slot and value-argument arity, normalizes accepted
+forms to a zero-positional `codeblock_argument`, restores ordinary parenthesized blocks to eager values, and rejects
+unknown attached callees. Parser spelling never grants contextual semantics by itself.
+
+Typed user functions, helper/receiver `with`, and hash/array tree traversal execute normalized contextual blocks
+through the existing dynamic codeblock evaluator. Explicit `{|params| ...}` values retain their own positional
+signatures; contextual `{ ... }` reads dynamic `value` and traversal bindings with zero positional arguments;
+harrays, eager blocks, attached controls, and static callable precedence remain distinct. Portable declaration,
+contract-arity, final-value-kind, unknown-attached, recursion, and body-helper failures remain typed. Callback
+expressions resolve before `with` installs its temporary `value` binding, including when the callback variable is
+itself named `value`.
+
+The neutral checker remains exact at 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid
+declarations / 8 contextual forms. Mutation-sensitive tests cover exact descriptor fields, staged-sidecar drift,
+all three contextual-arity surfaces, canonical attached/parenthesized ASTs, eager/control/harray preservation,
+semantic callback bindings, native/normalized/generated execution, and a fresh independently compiled emitted
+Dart package. The complete Dart operational gate passes formatting over 95 files with zero changes, strict
+analysis, 375 package tests, 19 repository-storage owners / 47 locked packages, primary CLI 66x2, and corpus
+105/105. Knowledge Map 766/6,218, mdBook 79 files / 13,944 KiB, all seven doctrines, and canonical semantic/MCP,
+containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds pass. Capability, MCP, other
+backends, root `README.md`, and push cadence remain unchanged.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.2 — execute Dart callable codeblocks
 
 Dart now executes `cb(args)` when `cb` is bound to the neutral eight-field callable-codeblock record. Existing

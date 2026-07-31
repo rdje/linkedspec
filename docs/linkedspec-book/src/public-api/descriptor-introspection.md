@@ -456,8 +456,9 @@ fixed `params` and `arity`, then adds one exact `parameter_kinds` object:
 The object must contain exactly one entry, its key must be the final parameter name, and its value must be
 `codeblock`. Empty, extra, non-final, or differently valued entries are invalid; version 3 never carries a
 variadic `signature`. The same `parameter_kinds` value is preserved in `body_payload` and `body_parse_job`.
-Perl, Rust, and Lua currently expose this exact record because all three implement contextual final-codeblock user
-functions. Rust preserves it through staged body AST intake, compiled JSON, generated plans, and emitted source.
+Perl, Rust, Dart, and Lua currently expose this exact record because all four implement contextual final-codeblock
+user functions. Rust and Dart preserve it through staged body AST intake, compiled JSON, generated plans, and
+emitted source.
 This descriptor fact does not by itself promote the still-incomplete five-backend callable-codeblock capability.
 
 ## `meta`

@@ -177,6 +177,7 @@ final class UserFunctionEntry {
   String get name => definition.name;
   List<String> get params => definition.params;
   int get arity => definition.arity;
+  Map<String, String> get parameterKinds => definition.parameterKinds;
   CallableSignature? get signature => definition.signature;
   String get bodySource => definition.bodySource;
   Object? get bodyPayload => definition.bodyPayload;
@@ -212,10 +213,11 @@ final class UserFunctionEntry {
     return {
       'index': index,
       'kind': 'user_function_definition',
-      'version': signature == null ? 1 : 2,
+      'version': parameterKinds.isNotEmpty ? 3 : (signature == null ? 1 : 2),
       'name': name,
       if (signature == null) 'params': params,
       if (signature == null) 'arity': arity,
+      if (parameterKinds.isNotEmpty) 'parameter_kinds': parameterKinds,
       if (signature != null) 'signature': signature!.toJson(),
       'source_text': definition.source,
       'source_span': sourceSpan.toJson(),

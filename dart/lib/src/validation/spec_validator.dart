@@ -233,6 +233,19 @@ void _checkFunctionRegistry(SpecFile spec) {
       );
     }
 
+    final parameterKinds = function.parameterKinds;
+    if (parameterKinds.isNotEmpty) {
+      final finalParam = function.params.isEmpty ? null : function.params.last;
+      if (signature != null ||
+          finalParam == null ||
+          parameterKinds.length != 1 ||
+          parameterKinds[finalParam] != 'codeblock') {
+        throw SpecValidationException(
+          "user function '$name' has invalid final-codeblock parameter metadata",
+        );
+      }
+    }
+
     final seenParams = <String>{};
     final allParams = [
       ...function.params,

@@ -168,6 +168,15 @@ public block parser remains eager and attached `if`/`switch`/`while` use their d
 contextual arguments execute through the same dynamic codeblock evaluator as explicit `{|...|...}` values, so
 native, reconstructed, generated-plan, and emitted-source paths have no separate callback implementation.
 
+Dart follows the same two-stage ownership. `ActionContextualCodeblockCandidateExpr` retains whether a plain block
+was attached or parenthesized while the ActionIR parser still lacks the complete function registry.
+`callable_contract.dart` then combines governed helper/receiver contracts with exact typed user-function
+`parameter_kinds`, validates pre-codeblock arity, restores noncontract parenthesized blocks to eager
+`block_value`, rejects unknown attached calls, and emits one `ActionCodeblockArgumentExpr`. The compiler applies
+that pass to function bodies and rule payloads before publishing compiled state. Runtime callbacks for helper
+`with`, receiver `with`, and hash/array tree traversal all decode that value through the established dynamic
+codeblock executor; generated plans and emitted Dart reconstruct and compile the same normalized source state.
+
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
 then configured search roots and registry providers in declared order. The scheduler

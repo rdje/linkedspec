@@ -107,10 +107,10 @@ dispatch rule.
 
 - **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl, Rust, Dart, Julia, and Lua support the attached helper and receiver forms. Perl and Lua
-  additionally normalize `with(value, { ... })` and `.with({ ... })` through declared final-codeblock metadata.
-  Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current surfaces; the parenthesized
-  contextual spellings are not portable until the remaining backends adopt the same metadata contract.
+- **Backend status**: Perl, Rust, Dart, Julia, and Lua support the attached helper and receiver forms. Perl, Rust,
+  Dart, and Lua additionally normalize `with(value, { ... })` and `.with({ ... })` through declared
+  final-codeblock metadata. Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current
+  surfaces; the parenthesized contextual spellings are not portable until Julia adopts the same metadata contract.
 - **Behavior**: Helper form evaluates the optional value argument, binds scoped working value `value` while the trailing
   block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
   binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
@@ -125,7 +125,7 @@ dispatch rule.
   rule/action.
 - **Examples**:
   - `return(with("x") { return(cat(value, "!")) })` yields `"x!"`.
-  - `return(with("x", { return(cat(value, "!")) }))` is the same call on Perl and Lua.
+  - `return(with("x", { return(cat(value, "!")) }))` is the same call on Perl, Rust, Dart, and Lua.
   - `return(with() { return(is_undefined(value)) })` yields true.
   - `return(" x ".with() { return(cat(value, "!")) }.trim())` yields `"x !"`.
   - `return(" a-b ".trim().with() { return(value.split("-")) }.count())` yields `2`.
@@ -143,11 +143,12 @@ dispatch rule.
 > declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
 > function, and receiver surfaces. Rust `.11.4.1-.2` now preserves the same typed literal and invokes `cb(args)`
 > with once-only arguments, dynamic caller stores, copied/restored fixed/rest bindings, local results, exact typed
-> failures, and native/serialized/generated/emitted identity. Rust generic contextual normalization remains
-> `.11.4.3`. Lua `.4.3.6.4` consumes the declaration for built-in helper/receiver `with`, with cleanup-safe copied
+> failures, and native/serialized/generated/emitted identity. Rust `.11.4.3` and Dart `.11.5.3` apply one
+> metadata-owned normalizer to helper, typed-user-function, receiver `with`, and tree-traversal contextual forms.
+> Lua `.4.3.6.4` consumes the declaration for built-in helper/receiver `with`, with cleanup-safe copied
 > scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general user-function `callback: codeblock`
 > execution remains `.5.1`, and explicit literals/dynamic calls remain `.11.7`. Cross-backend parity remains
-> future, so do not treat the parenthesized form as portable yet.
+> future, so do not treat the parenthesized form as universally portable yet.
 
 ## 1. Working Variables and Setup
 

@@ -17,6 +17,16 @@ Map<String, Object?> _contract() {
       .cast<String, Object?>();
 }
 
+Map<String, Object?> _descriptorContract() {
+  return (jsonDecode(
+            File(
+              '../capability_conformance/outward_descriptor_contract.json',
+            ).readAsStringSync(),
+          )
+          as Map)
+      .cast<String, Object?>();
+}
+
 CompiledSpec _compileSource(String source) {
   final parsed = parseSpecWithStagedUserFunctionDefinitions(source);
   validateSpec(parsed);
@@ -66,6 +76,55 @@ String _invalidCallSource(String id) =>
  /x/
  E { ${_invalidCallBody(id)} }
 ''';
+
+String _finalCodeblockEquivalenceSource() =>
+    r'''fn apply(value, callback: codeblock) { return(callback()) }
+fn invoke(value, callback: codeblock) { return(callback(value)) }
+
+Top::
+ /x/
+ E {
+   return([
+     with("x") { return(cat(value, "!")) },
+     with("x", { return(cat(value, "!")) }),
+     with("x", {|item| return(cat(item, "!")) }),
+     "x".with() { return(cat(value, "!")) },
+     "x".with({ return(cat(value, "!")) }),
+     "x".with({|item| return(cat(item, "!")) }),
+     apply("a") { return(cat(value, "!")) },
+     apply("b", { return(cat(value, "?")) }),
+     invoke("c", {|item| return(cat(item, ".")) }),
+     { "b" : 2, "a" : 1 }.map_leaves() { return(cat(value, "!")) },
+     { "b" : 2, "a" : 1 }.map_leaves({ return(cat(value, "!")) })
+   ])
+ }
+''';
+
+Object? _finalArgumentJson(ActionExpr expression) {
+  final encoded = expression.toJson();
+  if (expression is ActionCallExpr) {
+    return (encoded['args']! as List).last;
+  }
+  if (expression is ActionFluentChainExpr) {
+    final calls = encoded['calls']! as List;
+    return (_record(calls.single)['args']! as List).last;
+  }
+  throw StateError('expression ${expression.kind} has no callable argument');
+}
+
+List<Object?> _finalCodeblockExpected() => [
+  'x!',
+  'x!',
+  'x!',
+  'x!',
+  'x!',
+  'x!',
+  'a!',
+  'b?',
+  'c.',
+  {'a': '1!', 'b': '2!'},
+  {'a': '1!', 'b': '2!'},
+];
 
 RuntimeInterpreterException _runtimeFailure(CompiledSpec compiled) {
   try {
@@ -620,11 +679,294 @@ Top::
   });
 
   test(
+    'typed declaration and all neutral contextual AST cases are metadata-owned',
+    () {
+      final contract = _contract();
+      final contextual = (contract['contextual_final_block_cases']! as List)
+          .map(_record)
+          .toList(growable: false);
+      expect(contextual.map((row) => row['id']).toSet(), {
+        'helper_attached',
+        'helper_parenthesized',
+        'user_function_attached',
+        'user_function_parenthesized',
+        'receiver_attached',
+        'receiver_parenthesized',
+        'explicit_literal',
+        'harray_not_promoted',
+      });
+
+      final compiled = _compileSource(_finalCodeblockEquivalenceSource());
+      final apply = _record(
+        (compiled.toDescriptorJson()['functions']! as Map)['apply'],
+      );
+      final descriptorVariant = _record(
+        _record(
+          _descriptorContract()['function_record_variants'],
+        )['final_codeblock_v3'],
+      );
+      expect(apply.keys, descriptorVariant['record_fields']);
+      expect(apply['version'], 3);
+      expect(apply['params'], ['value', 'callback']);
+      expect(apply['arity'], 2);
+      expect(apply['parameter_kinds'], {'callback': 'codeblock'});
+      expect(_record(apply['body_payload'])['parameter_kinds'], {
+        'callback': 'codeblock',
+      });
+      expect(_record(apply['body_parse_job'])['parameter_kinds'], {
+        'callback': 'codeblock',
+      });
+
+      final payload = compiled
+          .rule('Top')!
+          .lifecycleActionPayloads
+          .singleWhere((item) => item.lifecycle == 'E');
+      final returned =
+          payload.actionAst.statements.single.expr as ActionCallExpr;
+      final items =
+          (returned.args.single.value as ActionArrayLiteralExpr).items;
+      for (final (attachedIndex, parenthesizedIndex) in const [
+        (0, 1),
+        (3, 4),
+        (9, 10),
+      ]) {
+        final attached = _record(_finalArgumentJson(items[attachedIndex]));
+        final parenthesized = _record(
+          _finalArgumentJson(items[parenthesizedIndex]),
+        );
+        for (final field in const [
+          'kind',
+          'version',
+          'signature',
+          'body_source',
+          'body_ast',
+        ]) {
+          expect(
+            attached[field],
+            parenthesized[field],
+            reason: '$field for $attachedIndex/$parenthesizedIndex',
+          );
+        }
+        expect(attached['kind'], 'codeblock_argument');
+        expect(_record(attached['signature'])['positional_params'], isEmpty);
+        expect(_record(attached['signature'])['max_arity'], 0);
+      }
+      expect(
+        _record(_finalArgumentJson(items[6]))['kind'],
+        'codeblock_argument',
+      );
+      expect(
+        _record(_finalArgumentJson(items[7]))['kind'],
+        'codeblock_argument',
+      );
+      expect(
+        _record(_finalArgumentJson(items[2]))['kind'],
+        'codeblock_literal',
+      );
+      expect(
+        jsonEncode(compiled.toJson()),
+        isNot(contains('contextual_codeblock_candidate')),
+      );
+
+      final semantic = SemanticIndex.fromSource(
+        _finalCodeblockEquivalenceSource(),
+        options: const SemanticIndexOptions(
+          logicalName: 'callable-codeblock-final-equivalence.spec',
+          sourceDetailCeiling: SemanticSourceDetail.none,
+        ),
+      ).semanticStaticProjectionForTesting();
+      final functionRecord = (semantic['records']! as List<Object?>)
+          .map(_record)
+          .singleWhere(
+            (record) =>
+                record['kind'] == 'function' && record['name'] == 'apply',
+          );
+      final facts = _record(functionRecord['facts']);
+      expect(facts['parameter_kinds'], ['value', 'codeblock']);
+      expect(_record(facts['signature'])['final_codeblock'], isTrue);
+    },
+  );
+
+  test(
+    'contextual forms execute through native reconstructed and generated paths',
+    () {
+      final compiled = _compileSource(_finalCodeblockEquivalenceSource());
+      final expected = _finalCodeblockExpected();
+      expect(LinkedSpecRuntimeEngine(compiled).parse('x').value, expected);
+      expect(
+        LinkedSpecRuntimeEngine(
+          _reconstructFromEmittedPayload(
+            compiled,
+            'callable-codeblock-final-equivalence.spec',
+          ),
+        ).parse('x').value,
+        expected,
+      );
+      expect(
+        executeGeneratedParserV2(
+          compiled,
+          buildGeneratedRulePlan(compiled),
+          'x',
+          'callable-codeblock-final-equivalence.spec',
+        ),
+        expected,
+      );
+    },
+  );
+
+  test('ordinary eager blocks and controls remain distinct', () {
+    final compiled = _compileSource(r'''Top::
+ /x/
+ E {
+   state = "before";
+   eager = array({ state = "eager"; state });
+   if(true) { state = cat(state, "!") };
+   return([state, eager])
+ }
+''');
+    final encoded = jsonEncode(compiled.toJson());
+    expect(encoded, isNot(contains('contextual_codeblock_candidate')));
+    expect(encoded, contains('block_value'));
+    expect(encoded, contains('control_if'));
+    expect(LinkedSpecRuntimeEngine(compiled).parse('x').value, [
+      'eager!',
+      ['eager'],
+    ]);
+
+    expect(
+      () => _compileSource(r'''Top::
+ /x/
+ E { return(custom("x") { return(value) }) }
+'''),
+      throwsA(
+        isA<CompiledSpecException>()
+            .having(
+              (error) => error.message,
+              'message',
+              contains('callable_contract_rejected'),
+            )
+            .having((error) => error.message, 'message', contains('custom')),
+      ),
+    );
+  });
+
+  test('with resolves a callback named value before installing its scope', () {
+    final compiled = _compileSource(r'''Top::
+ /x/
+ E {
+   value = {|item| return(cat(item, "!")) };
+   return([with("a", value), "b".with(value)])
+ }
+''');
+    expect(LinkedSpecRuntimeEngine(compiled).parse('x').value, ['a!', 'b!']);
+  });
+
+  test('typed sidecar drift and contextual arity mismatch fail closed', () {
+    final parsed = parseSpecWithStagedUserFunctionDefinitions(
+      r'''fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+''',
+    );
+    final malformedJson = _record(jsonDecode(jsonEncode(parsed.toJson())));
+    final malformedFunction = _record(
+      (malformedJson['functions']! as List).single,
+    );
+    final malformedJob = _record(malformedFunction['body_parse_job']);
+    malformedJob['parameter_kinds'] = {'value': 'codeblock'};
+    expect(
+      () => stitchFunctionBodyParseJobs(SpecFile.fromJson(malformedJson)),
+      throwsA(
+        isA<StagedParserRegistryException>().having(
+          (error) => error.message,
+          'message',
+          contains('final-codeblock metadata does not match'),
+        ),
+      ),
+    );
+
+    for (final (surface, expression) in const [
+      ('helper', 'with("a", "b") { return(value) }'),
+      ('receiver', '"a".with("b") { return(value) }'),
+      ('user_function', 'apply("a", "b") { return(value) }'),
+    ]) {
+      expect(
+        () => _compileSource(
+          '''fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return($expression) }
+''',
+        ),
+        throwsA(
+          isA<CompiledSpecException>().having(
+            (error) => error.message,
+            'message',
+            contains('callable_contract_arity_mismatch'),
+          ),
+        ),
+        reason: surface,
+      );
+    }
+  });
+
+  test('typed declaration and final-value failures keep neutral codes', () {
+    final declaration = _record(
+      _contract()['final_codeblock_parameter_declaration'],
+    );
+    for (final rawCase in declaration['invalid']! as List) {
+      final row = _record(rawCase);
+      expect(
+        () => parseSpecWithStagedUserFunctionDefinitions('''Top::
+ /x/
+
+fn invalid(${row['source']}) { return(undef) }
+'''),
+        throwsA(
+          predicate<Object>(
+            (error) =>
+                error.toString().contains(row['expected_code']! as String),
+            '${row['id']} preserves ${row['expected_code']}',
+          ),
+        ),
+      );
+    }
+
+    for (final (name, expression) in const [
+      ('typed_function', 'apply("x", { "value" : value })'),
+      ('helper', 'with("x", { "value" : value })'),
+      ('receiver', '"x".with({ "value" : value })'),
+    ]) {
+      final error = _runtimeFailure(
+        _compileSource(
+          '''fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return($expression) }
+''',
+        ),
+      );
+      expect(
+        error.diagnostic!.code,
+        'final_argument_not_codeblock',
+        reason: name,
+      );
+      expect(error.diagnostic!.valueKind, 'harray', reason: name);
+    }
+  });
+
+  test(
     'standalone emitted Dart executes the fixture and all invalid calls',
     () {
       final contract = _contract();
       final fixture = _record(contract['fixture']);
       final fixtureCompiled = _compileSource(fixture['spec_source']! as String);
+      final contextualCompiled = _compileSource(
+        _finalCodeblockEquivalenceSource(),
+      );
       final invalidRows = (contract['invalid_call_cases']! as List)
           .map(_record)
           .toList(growable: false);
@@ -651,6 +993,12 @@ dependencies:
             'callable-codeblock/neutral-fixture.spec',
           ),
         );
+        File('${scratch.path}/lib/contextual.dart').writeAsStringSync(
+          emitDartSourceV2(
+            contextualCompiled,
+            'callable-codeblock/final-equivalence.spec',
+          ),
+        );
         for (final row in invalidRows) {
           final id = row['id']! as String;
           File('${scratch.path}/lib/$id.dart').writeAsStringSync(
@@ -665,6 +1013,9 @@ dependencies:
           ..writeln("import 'dart:convert';")
           ..writeln(
             "import 'package:linkedspec_callable_codeblock_emitted_probe/fixture.dart' as fixture;",
+          )
+          ..writeln(
+            "import 'package:linkedspec_callable_codeblock_emitted_probe/contextual.dart' as contextual;",
           );
         for (final row in invalidRows) {
           final id = row['id']! as String;
@@ -689,6 +1040,7 @@ dependencies:
           ..writeln(
             "    'fixture': fixture.execute(${jsonEncode(fixture['input'])}),",
           )
+          ..writeln("    'contextual': contextual.execute('x'),")
           ..writeln("    'errors': errors,")
           ..writeln('  }));')
           ..writeln('}');
@@ -711,6 +1063,7 @@ dependencies:
         ]);
         final result = _record(jsonDecode((run.stdout as String).trim()));
         expect(result['fixture'], fixture['expected']);
+        expect(result['contextual'], _finalCodeblockExpected());
         final errors = _record(result['errors']);
         for (final row in invalidRows) {
           final id = row['id']! as String;

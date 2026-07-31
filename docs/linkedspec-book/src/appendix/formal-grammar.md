@@ -175,8 +175,11 @@ Unicode-character spans, compiled/generated/emitted state, user-function transpo
 without executing or capturing the body. Dart `.11.5.2` executes bound calls with the same once-only arguments,
 dynamic caller stores, copied/restored fixed/rest bindings, local result access/chaining, static precedence,
 structured failures, and ordered direct/mutual recursion rejection across native/reconstructed/generated/emitted
-roles. Dart contextual normalization remains `.11.5.3`; Julia parity and Lua explicit literals remain future, so
-complete invocation behavior is not yet universally portable.
+roles. Dart `.11.5.3` now preserves exact final-only declaration/staged/registry/descriptor metadata and
+normalizes attached/parenthesized helper, typed-user-function, receiver `with`, and tree-traversal blocks through
+one metadata owner to the same zero-positional `codeblock_argument`. Ordinary eager blocks, controls, explicit
+literal signatures, and harrays remain distinct. Julia parity and Lua explicit literals remain future, so complete
+invocation behavior is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

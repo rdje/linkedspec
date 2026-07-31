@@ -582,7 +582,25 @@ void _validateFunctionBodyJob(
     );
   }
   final signature = function.signature;
-  if (signature != null) {
+  if (function.parameterKinds.isNotEmpty) {
+    final finalParam = function.params.last;
+    final fixedParams = function.params.sublist(0, function.params.length - 1);
+    if (job.params != null || job.arity != null || job.signature != null) {
+      throw StagedParserRegistryException(
+        'function ${function.name} typed body_parse_job must store '
+        'fixed_params plus codeblock_param',
+      );
+    }
+    if (job.fixedParams == null ||
+        !_stringListsEqual(job.fixedParams!, fixedParams) ||
+        job.codeblockParam != finalParam ||
+        !_stringMapsEqual(job.parameterKinds, function.parameterKinds)) {
+      throw StagedParserRegistryException(
+        'function ${function.name} body_parse_job final-codeblock metadata '
+        'does not match',
+      );
+    }
+  } else if (signature != null) {
     if (job.params != null || job.arity != null || job.signature == null) {
       throw StagedParserRegistryException(
         'function ${function.name} body_parse_job must store variadic arity '
@@ -672,6 +690,7 @@ FunctionDefinition _withBodyAst(FunctionDefinition function, Object? bodyAst) {
     name: function.name,
     params: function.params,
     arity: function.arity,
+    parameterKinds: function.parameterKinds,
     signature: function.signature,
     bodySource: function.bodySource,
     bodyPayload: function.bodyPayload,
@@ -689,6 +708,18 @@ bool _stringListsEqual(List<String> left, List<String> right) {
   }
   for (var index = 0; index < left.length; index += 1) {
     if (left[index] != right[index]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool _stringMapsEqual(Map<String, String> left, Map<String, String> right) {
+  if (left.length != right.length) {
+    return false;
+  }
+  for (final entry in left.entries) {
+    if (right[entry.key] != entry.value) {
       return false;
     }
   }

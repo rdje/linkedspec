@@ -101,7 +101,7 @@ void main() {
     final withCall =
         parseActionExpression('with("x") { return(value) }') as ActionCallExpr;
     expect(withCall.trailingBlockArg, isTrue);
-    expect(withCall.args.last.value, isA<ActionBlockValueExpr>());
+    expect(withCall.args.last.value.kind, 'contextual_codeblock_candidate');
 
     final receiverWith =
         parseActionExpression('"x".with() { return(value) }')
@@ -109,8 +109,18 @@ void main() {
     expect(receiverWith.calls.single.method, 'with');
     expect(receiverWith.calls.single.receiverTrailingBlockArg, isTrue);
     expect(
-      receiverWith.calls.single.args.single.value,
-      isA<ActionBlockValueExpr>(),
+      receiverWith.calls.single.args.single.value.kind,
+      'contextual_codeblock_candidate',
+    );
+
+    final genericReceiver =
+        parseActionExpression('"x".custom() { return(value) }')
+            as ActionFluentChainExpr;
+    expect(genericReceiver.calls.single.method, 'custom');
+    expect(genericReceiver.calls.single.receiverTrailingBlockArg, isTrue);
+    expect(
+      genericReceiver.calls.single.args.single.value.kind,
+      'contextual_codeblock_candidate',
     );
   });
 

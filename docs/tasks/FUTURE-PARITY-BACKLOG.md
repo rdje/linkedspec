@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (Dart dynamic callable-codeblock invocation `.11.5.2` is signoff-complete from clean
-  construction commit `5e80be32` and awaiting its commit)
+- Last updated: `2026-07-30` (Dart generic contextual final blocks `.11.5.3` are signoff-complete from clean
+  dynamic-invocation commit `74725ff0`; its landing commit is the only remaining workflow step)
 - Owner: repo-local workflow
 
 ## Goal
@@ -15323,7 +15323,7 @@ before implementation.
   Acceptance: Signature-governed attached/contextual forms and retained `with` pass native/generated/oracle paths.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.5`
-  Status: `in_progress`
+  Status: `done`
   Goal: Implement the unchanged callable-codeblock contract on Dart native and generated execution.
   Children: `.11.5.1`, `.11.5.2`, `.11.5.3`
   Dependencies: `.11.4`
@@ -15343,8 +15343,95 @@ before implementation.
   Goal: Execute Dart codeblock-variable calls with neutral dynamic context and diagnostics.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close Dart generic final-block equivalence, generated execution, docs, and full gates.
+  Verification: **PASS 2026-07-30.** Neutral 7/11/9/7/4/8 checker, focused callable 21/21, strict analysis,
+    complete Dart format 95/0 + 375 tests + 19-owner/47-package storage + CLI 66x2 + corpus 105/105, Knowledge
+    Map 766/6,218, mdBook 79 files / 13,944 KiB, all seven doctrines, canonical semantic/MCP admissions,
+    containment/moved-root proof, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds pass.
+  Commit: `FUTURE-PARITY-BACKLOG.11.5.3 - close Dart final codeblocks`
+
+### `FUTURE-PARITY-BACKLOG.11.5.3` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate only from clean `.11.5.2` commit `74725ff0` after its
+  post-commit pointer proof, zero-byte brief, empty status, absent generated book/cache, and zero managed-run
+  residue. Record `.11.5.3` before any roadmap correction or behavior edit; do not push before cadence 300.
+- [x] **KNOWLEDGE / TOOL-LED BASELINE / DRIFT MAP** — Retrieve ADRs `0031`/`0032`, the neutral contextual cases,
+  Rust metadata-owned normalization, Dart trailing-block/parser/function-registry/runtime/generated facts, and
+  Toolbox probes. Freeze exact attached/parenthesized helper, typed-user-function, receiver, explicit-literal,
+  harray-rejection, eager/control, descriptor, and emission behavior before implementation. Correct the measured
+  stale `ROADMAP_V2.md` `.11.5.2` status under this no-drift/parent-closeout owner.
+- [x] **ONE SIGNATURE-GOVERNED NORMALIZATION** — Admit only a final `name: codeblock` parameter and normalize
+  equivalent attached plus parenthesized contextual blocks to one typed `codeblock_argument`; preserve the
+  codeblock value's own signature, dynamic caller context, and the existing runtime executor. Do not invent a
+  closure, callback runtime, syntax-specific executor, implicit positional parameter, or backend dialect.
+- [x] **PRESERVE DISTINCT SURFACES / PORTABLE FAILURES** — Keep eager block expressions, harrays, attached
+  controls, explicit `{|params| ...}` values, ordinary `with`, static callable precedence, and non-codeblock/
+  unknown/malformed diagnostics exact. Unknown attached callees and non-final/typed-invalid declarations must not
+  gain contextual semantics.
+- [x] **NATIVE / SERIALIZED / GENERATED / EMITTED PROOF** — Consume all eight neutral contextual cases and exact
+  mutation-sensitive Dart positives/negatives across parsed/compiled descriptors, normalized reconstruction,
+  generated plans, independently compiled emitted Dart, user functions, helpers, receivers, and tree callbacks.
+- [x] **SIGNOFF / DOCS / PARENT CLOSE / CLEAN HANDOFF** — Pass focused and complete Dart gates plus neutral,
+  Knowledge Map, mdBook, all doctrines, and warranted canonical proof; synchronize both roadmaps, task/live docs,
+  Dart docs, and public book; close parent `.11.5`; commit `.11.5.3`, clear the brief, prove clean, and only then
+  activate Julia `.11.6.1`; capability/MCP promotion and push remain excluded.
+
+Activation evidence 2026-07-30: `.11.5.2` lands at `74725ff0` as commit 113/300 from activation boundary
+`5e80be32`. The hook proves committed `activation_commit == HEAD^1`; the brief is zero bytes, Git status is empty,
+the rendered book and generated Python cache are absent, and the managed-run census is zero. Retrieval immediately
+finds one bounded public-status drift: `ROADMAP_V2.md` still calls Dart dynamic invocation future while the primary
+roadmap, task tree, live docs, mdBook, and committed implementation say it is complete. `.11.5.3` owns that
+correction as part of its no-drift and Dart-parent closeout obligations; no behavior changes at activation.
+
+Baseline/root-cause evidence 2026-07-30: the neutral checker passes at 7 literals / 11 calls / 9 invalid literals /
+7 invalid calls / 4 invalid declarations / 8 contextual forms, and the existing Dart parser/function-registry/
+staged/runtime/callable selection passes 89 tests. The shared `user_function_definition.spec` already emits exact
+`fixed_params`, `codeblock_param`, and sole-entry `parameter_kinds` in a typed definition and both staged sidecars.
+Dart's projection accepts only fixed-v1 `params`/`arity` or variadic-v2 `signature`; its AST/job/registry/descriptor
+records therefore cannot retain descriptor-v3 intent. Action parsing immediately turns all attached function-form
+blocks into trailing eager `block_value`, hard-codes receiver attachment to `with` plus three traversal names, and
+leaves parenthesized blocks as ordinary eager values because the complete callable registry does not exist yet.
+There is no post-registry normalization owner. The bounded repair is one metadata registry/pass that preserves
+provenance, admits only an exact final `codeblock` slot, emits one zero-positional `codeblock_argument`, restores
+ordinary eager blocks, rejects unknown attached callees, and reuses the `.11.5.2` dynamic executor. The durable
+fact is `docs/knowledge/dart-generic-final-codeblock-gap.md`; no behavior changed during this measurement.
+
+Mutation-sensitive RED evidence 2026-07-30: the focused Dart parser/callable selection retains 21 existing passes
+and fails exactly five new obligations. Attached helper/receiver blocks remain `block_value` instead of a preserved
+`contextual_codeblock_candidate`; the shared typed definition fails projection at missing legacy `params`; unknown
+attached `custom` compiles instead of reporting `callable_contract_rejected`; contextual execution cannot construct;
+and malformed typed declarations collapse to generic `invalid user function definition` instead of the four neutral
+codes. The red suite also fixes the exact descriptor-v3 fields, all eight neutral contextual rows, canonical attached/
+parenthesized AST pairs, native/reconstructed/generated results, eager/control preservation, and harray boundary
+diagnostics before production changes.
+
+Implementation/focused evidence 2026-07-30: Dart now projects the shared typed shell's exact fixed/final metadata
+through immutable definition/job/registry state, both staged sidecars, semantic signatures, and the exact outward
+descriptor-v3 field order. Action parsing records attached/parenthesized provenance without semantic authority;
+one post-registry `callable_contract.dart` owner combines builtin helper/receiver contracts with typed user
+functions, validates pre-codeblock arity, restores noncontract parenthesized blocks to eager values, rejects
+unknown attached callees, and emits one zero-positional `codeblock_argument`. Helper/receiver `with`, hash/array
+tree traversal, and typed user functions decode that value through the existing `.11.5.2` evaluator. Explicit
+literal signatures, harrays, controls, eager blocks, static precedence, and portable failures remain distinct.
+The implementation audit additionally catches and repairs callback lookup ordering when the callback variable is
+itself named `value`, and keeps provisional registry construction out of the public trace.
+
+Neutral proof remains 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8
+contextual forms. Focused parser/registry/runtime/callable proof passes 100 before final mutations; the dedicated
+callable suite then passes 21 including descriptor-field, sidecar-drift, all-three-surface contextual-arity, and
+callback-shadowing mutations. Strict analysis is clean. Complete package proof passes 375 tests after its first
+run exposed and the focused trace regression test locked the duplicate-provisional-registry event repair. Native,
+normalized reconstruction, generated-plan execution, and a fresh independently compiled emitted-Dart package all
+produce the exact contextual fixture and invalid-call outcomes. Operational signoff passes formatting over 95
+files with zero changes, strict analysis, 375 package tests, 19 repository-storage owners / 47 locked packages,
+primary CLI 66x2, and corpus 105/105. Knowledge Map generation and checking pass at 766 facts / 6,218 question
+keys; the mdBook renders 79 files / 13,944 KiB; memory, task metadata, all seven doctrines, and diff checks pass.
+Canonical CI passes exact five-implementation/six-runtime MCP admission, semantic admission, repository
+containment and moved-root execution, primary CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds before
+reporting `local CI gate passed`. Exact generated-output and managed-run cleanup are the final pre-commit checks.
+This closes `.11.5.3` and Dart parent `.11.5`; Julia `.11.6.1` may activate only after the workflow commit,
+zero-byte brief, and clean-boundary proof.
 
 ### `FUTURE-PARITY-BACKLOG.11.5.1` Acceptance Checklist
 
@@ -17685,11 +17772,11 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-07-30):** Rust callable-codeblock parent `.11.4` is closed. Dart construction leaf
-`.11.5.1` is committed clean at `5e80be32`; parent `.11.5` remains active. Dynamic variable-call execution
-`.11.5.2` is signoff-complete from that 112/300 boundary with focused, complete Dart, and canonical proof; only
-its clean workflow commit remains. Generic helper/user/receiver/tree final-block equivalence remains `.11.5.3`
-and cannot activate before that clean handoff.
+**Authoritative frontier (2026-07-30):** Rust callable-codeblock parent `.11.4` is closed. Dart construction
+`.11.5.1` and dynamic invocation `.11.5.2` are committed clean through `74725ff0`; generic helper/user-function/
+receiver/tree contextual final-block equivalence `.11.5.3` and Dart parent `.11.5` are signoff-complete with exact
+native/reconstructed/generated/emitted, documentation, operational, canonical, and cleanup proof. The landing
+commit is the only remaining workflow step; Julia `.11.6.1` may activate only from that clean boundary.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19085,6 +19172,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.5.3` | Clean base `74725ff0`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Dart 21/21 plus complete 375; exact declaration/staged/registry/descriptor-v3 metadata; one metadata-governed attached/parenthesized helper/user/receiver/tree normalization; callback-shadow ordering; native/reconstructed/generated/emitted identity; complete Dart format 95/0, 19-owner/47-package storage, CLI 66x2, corpus 105/105; capability/MCP unchanged; Knowledge Map 766/6,218; mdBook 79 files / 13,944 KiB; seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/1,031 in 646 seconds; exact cleanup. | PASS. Dart generic final-codeblock equivalence and parent `.11.5` close without closure capture, syntax-owned semantics, capability/MCP movement, other-backend change, root README growth, or push. Julia `.11.6.1` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.5.2` | Clean base `5e80be32`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Dart 15/15 plus parser/variadic 13/13; static precedence, once-only ordered evaluation, copied/restored fixed/rest bindings, live nonparameter stores, local return/result access, portable failures/recursion, and native/reconstructed/generated/emitted identity; complete Dart format 94/0, analyzer, 369 tests, 19-owner/47-package storage, CLI 66x2, corpus 105/105; capability 80/0/0 unchanged; Knowledge Map 765/6,213; mdBook 79 files / 13,924 KiB; seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 650 seconds; exact cleanup. | PASS. Dart executes explicit bound callable-codeblock values through one runtime after static callables, without closure capture, host fallback, generic final-block broadening, capability/MCP movement, or other-backend changes. `.11.5.3` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.5.1` | Clean base `0274d47f`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Dart 8/8 plus parser/variadic 13/13; strict analysis; native/compiled/generated/emitted/user-function/semantic identity and reconstructed user-signature guard; complete Dart 362 tests, 18-owner/47-package storage, CLI 66x2, corpus 105/105; capability 80/0/0 unchanged; Knowledge Map 764/6,204; mdBook 79 files / 13,908 KiB; seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 645 seconds; exact cleanup. | PASS. Dart owns exact inert typed callable-codeblock construction, Unicode-coordinate spans, serialized/generated/emitted transport, user-function preservation, and semantic signature shape without closure capture, body execution, variable-call dispatch, capability promotion, MCP movement, or generic final-block broadening. Dynamic invocation `.11.5.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.4.2` | Clean base `91958022`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Rust 13/13; variadic 7/7; semantic query 5/5; generic unknown-helper 1/1; native/compiled/generated/emitted identity; production-library clippy; complete Rust package, long-classifier, 197-integration, semantic-admission, build, 195-cache/17-owner storage, and CLI 66x2 gate; capability 80/0/0; Knowledge Map 760/6,165; mdBook 79 files / 13,864 KiB; seven doctrines; canonical semantic 9/9 + 6/6, MCP 5/5 + 6/6 complete/141, containment/moved-root, CLI 66x2, RAM 44%, Phase 0 1,031/1,031 in 763 seconds; exact cleanup. | PASS. Rust dynamic callable-codeblock invocation matches the governed caller-context/failure contract across every authority without closure capture, generic final-block broadening, capability promotion, MCP movement, other-backend change, or push. `.11.4.3` follows only after the clean commit. |
@@ -19406,6 +19494,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.11.5.3` | `FUTURE-PARITY-BACKLOG.11.5.3 - close Dart final codeblocks` | Exact final-only metadata and one signature-governed contextual normalization across Dart native/reconstructed/generated/emitted roles; closes parent `.11.5`. |
 | `FUTURE-PARITY-BACKLOG.11.5.2` | `FUTURE-PARITY-BACKLOG.11.5.2 - execute Dart callable codeblocks` | Static-precedence bound invocation, dynamic caller context, exact portable failures/recursion, typed result access, and native/reconstructed/generated/emitted identity; generic final blocks remain `.11.5.3`. |
 | `FUTURE-PARITY-BACKLOG.11.5.1` | `FUTURE-PARITY-BACKLOG.11.5.1 - construct Dart callable codeblocks` | Exact inert typed literal/signature/body/source/Unicode-span state across Dart native, compiled, generated, emitted, user-function, and semantic authorities; dynamic invocation remains `.11.5.2`. |
 | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 - prove all MCP response identities` | Five existing consumers prove the exact capabilities-plus-nineteen-query direct/MCP/digest identity on six runtimes; routed promotion remains separate. |

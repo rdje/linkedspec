@@ -17,6 +17,8 @@ import '../action/action_ast.dart'
         ActionStringLiteralExpr,
         ActionUndefExpr,
         ActionVariableExpr;
+import '../action/callable_contract.dart'
+    show normalizeActionBlockFinalCodeblocks;
 import '../action/action_parser.dart' show parseActionBlock;
 import '../action/action_contracts.dart' show resolveActionBlockContracts;
 import '../action/function_registry.dart'

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../action/action_ast.dart';
+import '../action/callable_contract.dart';
 import '../action/action_contracts.dart';
 import '../action/action_parser.dart';
 import '../action/function_registry.dart';
@@ -2583,26 +2584,20 @@ final class LinkedSpecRuntimeEngine {
           );
   }
 
-  Object? _callWithTrailingBlock(
+  Object? _callWithCodeblock(
     ActionCallExpr call,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (!call.trailingBlockArg || call.args.isEmpty || call.args.length > 2) {
+    if (call.args.isEmpty || call.args.length > 2) {
       throw RuntimeInterpreterException(
         "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper "
         "`with(...) { ... }` expects zero or one value argument plus a "
         "trailing block in rule '$ruleLabel'",
       );
     }
-    final blockExpr = call.args.last.value;
-    if (blockExpr is! ActionBlockValueExpr) {
-      throw RuntimeInterpreterException(
-        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` "
-        "requires a trailing block argument in rule '$ruleLabel'",
-      );
-    }
+    final callbackExpr = call.args.last.value;
     final scopedValue = call.args.length == 2
         ? _evaluateExpression(
             call.args.first.value,
@@ -2611,47 +2606,75 @@ final class LinkedSpecRuntimeEngine {
             currentEdge: currentEdge,
           )
         : null;
+    final callbackValue = _evaluateExpression(
+      callbackExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    final callback = _requireFinalCodeblockValue(
+      'with',
+      callbackValue,
+      context,
+      ruleLabel,
+    );
     final binding = context.enterScopedScalar('value', scopedValue);
     try {
-      return _evaluateBlockValue(
-        blockExpr.block,
+      return _executeCodeblockValue(
+        'with',
+        callback,
+        const [],
         context,
         ruleLabel,
-        currentEdge: currentEdge,
+        currentEdge,
+        evaluatedValues: callbackExpr is ActionCodeblockArgumentExpr
+            ? const []
+            : [_copyValue(scopedValue)],
       );
     } finally {
       context.exitScopedVariable(binding);
     }
   }
 
-  Object? _callReceiverWithTrailingBlock(
+  Object? _callReceiverWithCodeblock(
     Object? receiver,
     ActionFluentCall call,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (!call.receiverTrailingBlockArg || call.args.length != 1) {
+    if (call.args.length != 1) {
       throw RuntimeInterpreterException(
         "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver "
         "`.with() { ... }` expects no parenthesized arguments in rule "
         "'$ruleLabel'",
       );
     }
-    final blockExpr = call.args.single.value;
-    if (blockExpr is! ActionBlockValueExpr) {
-      throw RuntimeInterpreterException(
-        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` "
-        "requires a trailing block argument in rule '$ruleLabel'",
-      );
-    }
+    final callbackExpr = call.args.single.value;
+    final callbackValue = _evaluateExpression(
+      callbackExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    final callback = _requireFinalCodeblockValue(
+      'with',
+      callbackValue,
+      context,
+      ruleLabel,
+    );
     final binding = context.enterScopedScalar('value', _copyValue(receiver));
     try {
-      return _evaluateBlockValue(
-        blockExpr.block,
+      return _executeCodeblockValue(
+        'with',
+        callback,
+        const [],
         context,
         ruleLabel,
-        currentEdge: currentEdge,
+        currentEdge,
+        evaluatedValues: callbackExpr is ActionCodeblockArgumentExpr
+            ? const []
+            : [_copyValue(receiver)],
       );
     } finally {
       context.exitScopedVariable(binding);
@@ -2669,7 +2692,7 @@ final class LinkedSpecRuntimeEngine {
     if (!_treeTraversalHelperNames.contains(method)) {
       return null;
     }
-    if (call.args.isEmpty || call.args.last.value is! ActionBlockValueExpr) {
+    if (call.args.isEmpty) {
       throw RuntimeInterpreterException(
         _treeTraversalMalformedMessage(method, ruleLabel),
       );
@@ -2685,20 +2708,36 @@ final class LinkedSpecRuntimeEngine {
         _treeTraversalMalformedMessage(method, ruleLabel),
       );
     }
-    final block = (call.args.last.value as ActionBlockValueExpr).block;
+    final callbackExpr = call.args.last.value;
+    final callbackValue = _evaluateExpression(
+      callbackExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    final callback = _TreeCodeblockCallback(
+      name: method,
+      codeblock: _requireFinalCodeblockValue(
+        method,
+        callbackValue,
+        context,
+        ruleLabel,
+      ),
+      passLeafValue: callbackExpr is! ActionCodeblockArgumentExpr,
+    );
     if (receiver is Map) {
       final hash = _asHash(receiver);
       return switch (method) {
         'walk_leaves' => _walkHashTree(
           hash,
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
         ),
         'map_leaves' => _mapHashTree(
           hash,
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
@@ -2711,7 +2750,7 @@ final class LinkedSpecRuntimeEngine {
             ruleLabel,
             currentEdge: currentEdge,
           ),
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
@@ -2724,14 +2763,14 @@ final class LinkedSpecRuntimeEngine {
       return switch (method) {
         'walk_leaves' => _walkArrayTree(
           items,
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
         ),
         'map_leaves' => _mapArrayTree(
           items,
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
@@ -2744,7 +2783,7 @@ final class LinkedSpecRuntimeEngine {
             ruleLabel,
             currentEdge: currentEdge,
           ),
-          block,
+          callback,
           context,
           ruleLabel,
           currentEdge,
@@ -2769,7 +2808,7 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _walkHashTree(
     Map<String, Object?> hash,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2783,7 +2822,7 @@ final class LinkedSpecRuntimeEngine {
           walk(_asHash(value), nextPath);
         } else {
           _evaluateHashLeafBlock(
-            block,
+            callback,
             value,
             key,
             nextPath,
@@ -2803,7 +2842,7 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _mapHashTree(
     Map<String, Object?> hash,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2817,7 +2856,7 @@ final class LinkedSpecRuntimeEngine {
         result[key] = value is Map
             ? mapNode(_asHash(value), nextPath)
             : _evaluateHashLeafBlock(
-                block,
+                callback,
                 value,
                 key,
                 nextPath,
@@ -2837,7 +2876,7 @@ final class LinkedSpecRuntimeEngine {
   Object? _reduceHashTree(
     Map<String, Object?> hash,
     Object? initial,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2852,7 +2891,7 @@ final class LinkedSpecRuntimeEngine {
           reduceNode(_asHash(value), nextPath);
         } else {
           acc = _evaluateHashLeafBlock(
-            block,
+            callback,
             value,
             key,
             nextPath,
@@ -2871,7 +2910,7 @@ final class LinkedSpecRuntimeEngine {
   }
 
   Object? _evaluateHashLeafBlock(
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     Object? value,
     String key,
     List<String> path,
@@ -2889,11 +2928,16 @@ final class LinkedSpecRuntimeEngine {
       context.enterScopedScalar('depth', path.length),
     ];
     try {
-      return _evaluateBlockValue(
-        block,
+      return _executeCodeblockValue(
+        callback.name,
+        callback.codeblock,
+        const [],
         context,
         ruleLabel,
-        currentEdge: currentEdge,
+        currentEdge,
+        evaluatedValues: callback.passLeafValue
+            ? [_copyValue(value)]
+            : const [],
       );
     } finally {
       for (final binding in bindings.reversed) {
@@ -2904,7 +2948,7 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _walkArrayTree(
     List<Object?> items,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2916,7 +2960,7 @@ final class LinkedSpecRuntimeEngine {
           walk(_asArray(value), nextPath);
         } else {
           _evaluateArrayLeafBlock(
-            block,
+            callback,
             value,
             index,
             nextPath,
@@ -2936,7 +2980,7 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _mapArrayTree(
     List<Object?> items,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2949,7 +2993,7 @@ final class LinkedSpecRuntimeEngine {
           value is List
               ? mapNode(_asArray(value), nextPath)
               : _evaluateArrayLeafBlock(
-                  block,
+                  callback,
                   value,
                   index,
                   nextPath,
@@ -2970,7 +3014,7 @@ final class LinkedSpecRuntimeEngine {
   Object? _reduceArrayTree(
     List<Object?> items,
     Object? initial,
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -2983,7 +3027,7 @@ final class LinkedSpecRuntimeEngine {
           reduceNode(_asArray(value), nextPath);
         } else {
           acc = _evaluateArrayLeafBlock(
-            block,
+            callback,
             value,
             index,
             nextPath,
@@ -3002,7 +3046,7 @@ final class LinkedSpecRuntimeEngine {
   }
 
   Object? _evaluateArrayLeafBlock(
-    ActionBlock block,
+    _TreeCodeblockCallback callback,
     Object? value,
     int index,
     List<int> path,
@@ -3020,11 +3064,16 @@ final class LinkedSpecRuntimeEngine {
       context.enterScopedScalar('depth', path.length),
     ];
     try {
-      return _evaluateBlockValue(
-        block,
+      return _executeCodeblockValue(
+        callback.name,
+        callback.codeblock,
+        const [],
         context,
         ruleLabel,
-        currentEdge: currentEdge,
+        currentEdge,
+        evaluatedValues: callback.passLeafValue
+            ? [_copyValue(value)]
+            : const [],
       );
     } finally {
       for (final binding in bindings.reversed) {
@@ -3091,6 +3140,7 @@ final class LinkedSpecRuntimeEngine {
               ),
             ),
         };
+      case ActionCodeblockArgumentExpr(:final source, :final bodyAst):
       case ActionCodeblockLiteralExpr(:final source, :final bodyAst):
         _codeblockBodyCache[source] = bodyAst;
         return _copyValue(expr.toJson());
@@ -3282,8 +3332,8 @@ final class LinkedSpecRuntimeEngine {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
     _validateDiagnosticOutputArity(call, helperName, context, ruleLabel);
-    if (helperName == 'with' && call.trailingBlockArg) {
-      return _callWithTrailingBlock(call, context, ruleLabel, currentEdge);
+    if (helperName == 'with') {
+      return _callWithCodeblock(call, context, ruleLabel, currentEdge);
     }
     if (statementContext &&
         helperName == 'set_key' &&
@@ -3872,25 +3922,57 @@ final class LinkedSpecRuntimeEngine {
     }
   }
 
+  _RuntimeCodeblockValue _requireFinalCodeblockValue(
+    String callableName,
+    Object? value,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+  ) {
+    final codeblock = _decodeRuntimeCodeblock(value);
+    if (codeblock != null) {
+      return codeblock;
+    }
+    final valueKind = _runtimeCallableValueKind(value);
+    final detail =
+        'final_argument_not_codeblock callable_name="$callableName" '
+        'value_kind="$valueKind" rule_label="$ruleLabel"';
+    throw RuntimeInterpreterException(
+      detail,
+      diagnostic: context.diagnostic(
+        stage: 'callable_codeblock_invocation',
+        summary: 'Dart final codeblock argument validation failed',
+        detail: detail,
+        code: 'final_argument_not_codeblock',
+        callableName: callableName,
+        valueKind: valueKind,
+        ruleLabel: ruleLabel,
+        handlerSourceLabel: 'dart_runtime:codeblock:$callableName',
+      ),
+    );
+  }
+
   Object? _executeCodeblockValue(
     String name,
     _RuntimeCodeblockValue codeblock,
     List<ActionExpr> argExprs,
     _RuntimeExecutionContext context,
     String ruleLabel,
-    _CurrentActionEdge? currentEdge,
-  ) {
-    final values = [
-      for (final arg in argExprs)
-        _copyValue(
-          _evaluateExpression(
-            arg,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
-        ),
-    ];
+    _CurrentActionEdge? currentEdge, {
+    List<Object?>? evaluatedValues,
+  }) {
+    final values =
+        evaluatedValues ??
+        [
+          for (final arg in argExprs)
+            _copyValue(
+              _evaluateExpression(
+                arg,
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            ),
+        ];
     final arityMatches =
         values.length >= codeblock.minArity &&
         (codeblock.maxArity == null || values.length <= codeblock.maxArity!);
@@ -4008,6 +4090,9 @@ final class LinkedSpecRuntimeEngine {
         'got ${values.length} in rule $ruleLabel',
       );
     }
+    if (entry.parameterKinds.isNotEmpty) {
+      _requireFinalCodeblockValue(entry.name, values.last, context, ruleLabel);
+    }
 
     final activeIndex = context.activeUserFunctions.indexOf(entry.name);
     if (activeIndex >= 0) {
@@ -4073,6 +4158,10 @@ final class LinkedSpecRuntimeEngine {
     }
     try {
       final parsed = parseActionBlock(entry.bodySource);
+      normalizeActionBlockFinalCodeblocks(
+        parsed,
+        compiledSpec.functionRegistry,
+      );
       _userFunctionBodyCache[entry.index] = parsed;
       return parsed;
     } catch (error) {
@@ -4101,7 +4190,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final helperName = canonicalActionHelperName(call.method);
     if (helperName == 'with') {
-      return _callReceiverWithTrailingBlock(
+      return _callReceiverWithCodeblock(
         receiver,
         call,
         context,
@@ -8012,7 +8101,8 @@ String _runtimeCallableValueKind(Object? value) {
 
 _RuntimeCodeblockValue? _decodeRuntimeCodeblock(Object? value) {
   if (value is! Map ||
-      value['kind'] != 'codeblock_literal' ||
+      (value['kind'] != 'codeblock_literal' &&
+          value['kind'] != 'codeblock_argument') ||
       value['version'] != 1 ||
       value['source_text'] is! String ||
       value['body_source'] is! String ||
@@ -8069,6 +8159,18 @@ final class _RuntimeCodeblockValue {
   final int? maxArity;
   final String sourceText;
   final String bodySource;
+}
+
+final class _TreeCodeblockCallback {
+  const _TreeCodeblockCallback({
+    required this.name,
+    required this.codeblock,
+    required this.passLeafValue,
+  });
+
+  final String name;
+  final _RuntimeCodeblockValue codeblock;
+  final bool passLeafValue;
 }
 
 Object? _copyValue(Object? value) {

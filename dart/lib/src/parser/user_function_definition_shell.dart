@@ -178,6 +178,7 @@ _ProjectedFunction _functionFromAst(
 
   final List<String> params;
   final int arity;
+  final Map<String, String> parameterKinds;
   final CallableSignature? signature;
   switch (version) {
     case 1:
@@ -187,8 +188,36 @@ _ProjectedFunction _functionFromAst(
           'signature',
         );
       }
-      params = _stringListField(object, 'params', index);
-      arity = _intField(object, 'arity', index);
+      if (object.containsKey('parameter_kinds') ||
+          object.containsKey('fixed_params') ||
+          object.containsKey('codeblock_param')) {
+        if (object.containsKey('params') || object.containsKey('arity')) {
+          throw FormatException(
+            'function_definition node $index typed version 1 must derive '
+            'params and arity from fixed_params plus codeblock_param',
+          );
+        }
+        final fixedParams = _stringListField(object, 'fixed_params', index);
+        final codeblockParam = _stringField(
+          object,
+          'codeblock_param',
+          'function_definition',
+        );
+        parameterKinds = _stringMapField(object, 'parameter_kinds', index);
+        _validateFinalCodeblockMetadata(
+          fixedParams: fixedParams,
+          codeblockParam: codeblockParam,
+          parameterKinds: parameterKinds,
+          index: index,
+          context: 'definition',
+        );
+        params = [...fixedParams, codeblockParam];
+        arity = params.length;
+      } else {
+        params = _stringListField(object, 'params', index);
+        arity = _intField(object, 'arity', index);
+        parameterKinds = const {};
+      }
       signature = null;
     case 2:
       if (object.containsKey('params') || object.containsKey('arity')) {
@@ -200,6 +229,7 @@ _ProjectedFunction _functionFromAst(
       signature = _callableSignatureField(object, 'signature', index);
       params = signature.positionalParams;
       arity = signature.minArity;
+      parameterKinds = const {};
     default:
       throw FormatException(
         'function_definition node $index has unsupported version $version',
@@ -241,6 +271,7 @@ _ProjectedFunction _functionFromAst(
     name,
     params,
     arity,
+    parameterKinds,
     signature,
     bodySource,
     bodySpan,
@@ -256,6 +287,7 @@ _ProjectedFunction _functionFromAst(
     name,
     params,
     arity,
+    parameterKinds,
     signature,
     bodySource,
     bodySpan,
@@ -268,6 +300,7 @@ _ProjectedFunction _functionFromAst(
       name: name,
       params: params,
       arity: arity,
+      parameterKinds: parameterKinds,
       signature: signature,
       bodySource: bodySource,
       bodyPayload: bodyPayload,
@@ -337,6 +370,7 @@ void _validateBodyPayload(
   String name,
   List<String> params,
   int arity,
+  Map<String, String> parameterKinds,
   CallableSignature? signature,
   String bodySource,
   _AstSpan bodySpan,
@@ -361,6 +395,7 @@ void _validateBodyPayload(
     'body_payload',
     params,
     arity,
+    parameterKinds,
     signature,
     index,
   );
@@ -383,6 +418,7 @@ void _validateBodyParseJob(
   String name,
   List<String> params,
   int arity,
+  Map<String, String> parameterKinds,
   CallableSignature? signature,
   String bodySource,
   _AstSpan bodySpan,
@@ -413,6 +449,7 @@ void _validateBodyParseJob(
     'body_parse_job',
     params,
     arity,
+    parameterKinds,
     signature,
     index,
   );
@@ -474,9 +511,43 @@ void _validateStagedSignature(
   String context,
   List<String> params,
   int arity,
+  Map<String, String> parameterKinds,
   CallableSignature? signature,
   int index,
 ) {
+  if (parameterKinds.isNotEmpty) {
+    if (object.containsKey('params') ||
+        object.containsKey('arity') ||
+        object.containsKey('signature')) {
+      throw FormatException(
+        'function_definition node $index $context typed final-codeblock '
+        'metadata must use fixed_params plus codeblock_param',
+      );
+    }
+    final fixedParams = _stringListField(object, 'fixed_params', index);
+    final codeblockParam = _stringField(
+      object,
+      'codeblock_param',
+      'function_definition $context',
+    );
+    final actualKinds = _stringMapField(object, 'parameter_kinds', index);
+    _validateFinalCodeblockMetadata(
+      fixedParams: fixedParams,
+      codeblockParam: codeblockParam,
+      parameterKinds: actualKinds,
+      index: index,
+      context: context,
+    );
+    if (!_stringListsEqual(fixedParams, params.sublist(0, params.length - 1)) ||
+        codeblockParam != params.last ||
+        !_stringMapsEqual(actualKinds, parameterKinds)) {
+      throw FormatException(
+        'function_definition node $index $context final-codeblock metadata '
+        'does not match definition',
+      );
+    }
+    return;
+  }
   if (signature != null) {
     if (object.containsKey('params') || object.containsKey('arity')) {
       throw FormatException(
@@ -507,6 +578,34 @@ void _validateStagedSignature(
   if (_intField(object, 'arity', index) != arity) {
     throw FormatException(
       'function_definition node $index $context arity does not match arity',
+    );
+  }
+}
+
+void _validateFinalCodeblockMetadata({
+  required List<String> fixedParams,
+  required String codeblockParam,
+  required Map<String, String> parameterKinds,
+  required int index,
+  required String context,
+}) {
+  if (!_isIdentifier(codeblockParam)) {
+    throw FormatException(
+      "function_definition node $index $context has invalid final codeblock "
+      "parameter '$codeblockParam'",
+    );
+  }
+  if (fixedParams.contains(codeblockParam)) {
+    throw FormatException(
+      "function_definition node $index $context duplicates final codeblock "
+      "parameter '$codeblockParam'",
+    );
+  }
+  if (parameterKinds.length != 1 ||
+      parameterKinds[codeblockParam] != 'codeblock') {
+    throw FormatException(
+      'function_definition node $index $context must declare exactly one '
+      'final codeblock parameter kind',
     );
   }
 }
@@ -654,6 +753,30 @@ List<String> _stringListField(JsonObject object, String field, int index) {
   ];
 }
 
+Map<String, String> _stringMapField(
+  JsonObject object,
+  String field,
+  int index,
+) {
+  final value = object[field];
+  if (value is! Map) {
+    throw FormatException(
+      "function_definition node $index is missing object field '$field'",
+    );
+  }
+  final result = <String, String>{};
+  for (final entry in value.entries) {
+    if (entry.key is! String || entry.value is! String) {
+      throw FormatException(
+        "function_definition node $index field '$field' must contain only "
+        'string entries',
+      );
+    }
+    result[entry.key as String] = entry.value as String;
+  }
+  return Map.unmodifiable(result);
+}
+
 CallableSignature _callableSignatureField(
   JsonObject object,
   String field,
@@ -770,6 +893,18 @@ bool _stringListsEqual(List<String> left, List<String> right) {
   return true;
 }
 
+bool _stringMapsEqual(Map<String, String> left, Map<String, String> right) {
+  if (left.length != right.length) {
+    return false;
+  }
+  for (final entry in left.entries) {
+    if (right[entry.key] != entry.value) {
+      return false;
+    }
+  }
+  return true;
+}
+
 Object? _copyJson(Object? value) {
   if (value is Map) {
     return {
@@ -794,9 +929,15 @@ SpecParseException _functionError(JsonObject object, int index) {
     }
   }
   final messageValue = object['message'];
-  final message = messageValue is String
-      ? messageValue
-      : 'invalid user function definition';
+  final sourceText = object['source_text'];
+  final typedCode = sourceText is String
+      ? _typedDeclarationErrorCode(sourceText)
+      : null;
+  final message =
+      typedCode ??
+      (messageValue is String
+          ? messageValue
+          : 'invalid user function definition');
   if (line > 0) {
     return SpecParseException(
       line: line,
@@ -807,6 +948,29 @@ SpecParseException _functionError(JsonObject object, int index) {
     line: 1,
     message: 'user function definition parse error at node $index: $message',
   );
+}
+
+String? _typedDeclarationErrorCode(String sourceText) {
+  final openBrace = sourceText.indexOf('{');
+  final header = openBrace < 0
+      ? sourceText
+      : sourceText.substring(0, openBrace);
+  if (RegExp(r':\s*codeblock\s*\(').hasMatch(header)) {
+    return 'codeblock_declaration_has_no_argument_list';
+  }
+  if (RegExp(r':\s*codeblock\s*,').hasMatch(header)) {
+    return 'codeblock_parameter_must_be_final';
+  }
+  if (RegExp(r'\(\s*:\s*codeblock\b').hasMatch(header)) {
+    return 'invalid_codeblock_parameter_name';
+  }
+  final typed = RegExp(
+    r'\b[A-Za-z_][A-Za-z0-9_]*\s*:\s*([A-Za-z_][A-Za-z0-9_]*)',
+  ).firstMatch(header);
+  if (typed != null && typed[1] != 'codeblock') {
+    return 'unknown_parameter_type';
+  }
+  return null;
 }
 
 bool _isIdentifier(String value) {

@@ -49,6 +49,7 @@ final class FunctionDefinition {
     required this.name,
     required this.params,
     required this.arity,
+    this.parameterKinds = const {},
     this.signature,
     required this.bodySource,
     this.bodyPayload,
@@ -62,6 +63,7 @@ final class FunctionDefinition {
   final String name;
   final List<String> params;
   final int arity;
+  final Map<String, String> parameterKinds;
   final CallableSignature? signature;
   final String bodySource;
   final Object? bodyPayload;
@@ -81,6 +83,7 @@ final class FunctionDefinition {
       name: _stringField(json, 'name'),
       params: signature?.positionalParams ?? _stringList(json, 'params'),
       arity: signature?.minArity ?? _intField(json, 'arity'),
+      parameterKinds: _optionalStringMap(json, 'parameter_kinds') ?? const {},
       signature: signature,
       bodySource: _stringField(json, 'body_source'),
       bodyPayload: json['body_payload'],
@@ -99,6 +102,7 @@ final class FunctionDefinition {
       'name': name,
       if (signature == null) 'params': params,
       if (signature == null) 'arity': arity,
+      if (parameterKinds.isNotEmpty) 'parameter_kinds': parameterKinds,
       if (signature != null) 'signature': signature!.toJson(),
       'body_source': bodySource,
       if (bodyPayload != null) 'body_payload': bodyPayload,
@@ -217,6 +221,9 @@ final class StagedParseJob {
     this.functionName,
     this.params,
     this.arity,
+    this.fixedParams,
+    this.codeblockParam,
+    this.parameterKinds = const {},
     this.signature,
     required this.text,
     required this.sourceSpan,
@@ -236,6 +243,9 @@ final class StagedParseJob {
   final String? functionName;
   final List<String>? params;
   final int? arity;
+  final List<String>? fixedParams;
+  final String? codeblockParam;
+  final Map<String, String> parameterKinds;
   final CallableSignature? signature;
   final String text;
   final StagedSourceSpan sourceSpan;
@@ -264,6 +274,9 @@ final class StagedParseJob {
       functionName: _optionalStringField(json, 'function_name'),
       params: _optionalStringList(json, 'params'),
       arity: _optionalIntField(json, 'arity'),
+      fixedParams: _optionalStringList(json, 'fixed_params'),
+      codeblockParam: _optionalStringField(json, 'codeblock_param'),
+      parameterKinds: _optionalStringMap(json, 'parameter_kinds') ?? const {},
       signature: json['signature'] == null
           ? null
           : CallableSignature.fromJson(
@@ -291,6 +304,9 @@ final class StagedParseJob {
       if (functionName != null) 'function_name': functionName,
       if (params != null) 'params': params,
       if (arity != null) 'arity': arity,
+      if (fixedParams != null) 'fixed_params': fixedParams,
+      if (codeblockParam != null) 'codeblock_param': codeblockParam,
+      if (parameterKinds.isNotEmpty) 'parameter_kinds': parameterKinds,
       if (signature != null) 'signature': signature!.toJson(),
       'text': text,
       'source_span': sourceSpan.toJson(),
@@ -849,6 +865,24 @@ List<String>? _optionalStringList(JsonObject json, String field) {
     throw FormatException('$field must be an array when present');
   }
   return [for (final item in value) _stringListItem(item, field)];
+}
+
+Map<String, String>? _optionalStringMap(JsonObject json, String field) {
+  final value = json[field];
+  if (value == null) {
+    return null;
+  }
+  if (value is! Map) {
+    throw FormatException('$field must be an object when present');
+  }
+  final result = <String, String>{};
+  for (final entry in value.entries) {
+    if (entry.key is! String || entry.value is! String) {
+      throw FormatException('$field must contain only string entries');
+    }
+    result[entry.key as String] = entry.value as String;
+  }
+  return Map.unmodifiable(result);
 }
 
 String _stringListItem(Object? value, String field) {

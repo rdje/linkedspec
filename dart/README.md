@@ -228,8 +228,18 @@ yield, call results can enter key/index and receiver chains, and standalone call
 
 Typed runtime failures cover arity, colon-keyword arguments, bound non-codeblocks, unbound calls, and ordered
 direct/mutual recursion. Native execution, normalized reconstruction, generated-plan execution, and independently
-compiled emitted Dart share this behavior. Generic contextual final-block equivalence remains `.11.5.3`; explicit
-dynamic invocation does not promote that pending surface. Verify the current boundary from the repository root:
+compiled emitted Dart share this behavior. A fixed user function may now declare exactly one final
+`callback: codeblock` parameter. The shared shell, staged payload/job, typed AST, registry, semantic signature,
+and exact outward descriptor-v3 record preserve that intent. After the complete callable registry exists, one
+metadata-owned pass normalizes `call(args) { ... }` and `call(args, { ... })` to the same zero-positional
+`codeblock_argument` for typed user functions, `with`, receiver `with`, and tree traversal. It restores ordinary
+parenthesized blocks to eager values and rejects unknown attached callees or wrong contextual arity.
+
+Contextual blocks read dynamic `value`/tree bindings and execute through the existing codeblock evaluator. An
+explicit `{|item| ...}` keeps its own positional signature; a keyed brace remains an harray and a typed final slot
+rejects it as `final_argument_not_codeblock`. Native execution, normalized reconstruction, generated plans, and
+independently compiled emitted Dart produce the same contextual results and failures. Verify the current boundary
+from the repository root:
 
 ```sh
 bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py
