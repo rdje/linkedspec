@@ -1,5 +1,36 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.2 — execute Julia callable codeblocks
+
+Julia now invokes `cb(args)` when `cb` is bound to the neutral eight-field callable-codeblock record. Controls,
+helpers, and registered user functions retain precedence. Positional arguments evaluate exactly once from left to
+right; recursively copied fixed values and a fresh rest array use exception-safe temporary bindings that restore
+all prior same-name scalar/array/harray state. Nonparameter reads and mutations remain in the caller's live stores.
+`return(...)` is invocation-local even when raised below another helper, final expressions yield, standalone
+calls discard only the result, and typed call-result access continues through key/index lookup and receiver chains.
+
+The runtime diagnostic envelope now carries the neutral callable/name/expected/got/value-kind/cycle fields for
+exact arity, colon-keyword, bound-non-codeblock, unknown-body-helper, and direct/mutual-recursion failures. The
+portable unknown-call record is limited to the active codeblock boundary, preserving Julia's established general
+unknown-helper diagnostic elsewhere. Narrow colon parsing retains `cb(value: "x")` as keyword-call data while
+`cb(value = "x")` remains a positional assignment expression. Retained typed bodies are cached by exact literal
+source; no Julia closure, lexical capture, host fallback, or second generated executor is introduced.
+
+Contract-driven proof passes 125 dynamic plus the unchanged 239 construction assertions. It consumes all eleven
+valid calls, all seven invalid calls, the exact fixture, static precedence, once-only order, recursive-copy
+isolation, success/failure restoration, live mutation, nested local return, direct/mutual recursion, and native,
+normalized reconstructed, generated-plan, and freshly loaded emitted-source roles. The complete package suite and
+Julia operational gate pass with the byte-fresh 120,030-byte MCP binding, unchanged 18 repository-storage owners /
+five locked package trees, primary CLI conformance, and corpus 105/105. Generic contextual final blocks remain
+`.11.6.3`; capability/MCP status, other backends, root `README.md`, and push cadence remain unchanged.
+
+Final governance passes Knowledge Map 770 facts / 6,251 question keys, mdBook 79 files / 13,972 KiB, memory/task/
+whitespace/README checks, and all seven doctrines. The fully authorized canonical run passes semantic/MCP
+admissions, repository process containment and moved-root anchors, primary CLI 66x2, RAM 57%, and Phase 0
+1,031/1,031 in 655 seconds. The first outer-sandboxed attempt was unable to invoke the nested macOS containment
+sandbox; its authorized rerun exercised and passed that boundary. Exact generated book and managed-run cleanup
+passes.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.1 — construct Julia callable codeblocks
 
 Julia now recognizes exact `{|params| body }` and `{|| body }` before its existing harray/eager-block brace

@@ -139,6 +139,25 @@ function ActionNestedAccessExpr(; source, source_span, base, segments)
     )
 end
 
+"""A mixed access path whose receiver is an evaluated expression result."""
+struct ActionValueAccessExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    receiver::ActionExpr
+    segments::Vector{ActionAccessSegment}
+end
+
+function ActionValueAccessExpr(; source, source_span, receiver, segments)
+    return ActionValueAccessExpr(
+        "value_access",
+        String(source),
+        source_span,
+        receiver,
+        ActionAccessSegment[segments...],
+    )
+end
+
 struct ActionArrayLiteralExpr <: ActionExpr
     kind::String
     source::String
@@ -725,6 +744,10 @@ function find_removed_aggregate_selector(expr::ActionExpr)
         return find_removed_aggregate_selector(expr.index)
     elseif expr isa ActionNestedAccessExpr
         return _find_removed_aggregate_selector_in_segments(expr.segments)
+    elseif expr isa ActionValueAccessExpr
+        selector = find_removed_aggregate_selector(expr.receiver)
+        return selector === nothing ?
+               _find_removed_aggregate_selector_in_segments(expr.segments) : selector
     elseif expr isa ActionArrayLiteralExpr
         for item in expr.items
             selector = find_removed_aggregate_selector(item)
@@ -861,6 +884,13 @@ end
 function to_json(expr::ActionNestedAccessExpr)
     result = _action_base_json(expr)
     result["base"] = expr.base
+    result["segments"] = [to_json(segment) for segment in expr.segments]
+    return result
+end
+
+function to_json(expr::ActionValueAccessExpr)
+    result = _action_base_json(expr)
+    result["receiver"] = to_json(expr.receiver)
     result["segments"] = [to_json(segment) for segment in expr.segments]
     return result
 end

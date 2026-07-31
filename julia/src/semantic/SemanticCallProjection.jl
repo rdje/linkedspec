@@ -822,6 +822,11 @@ function _semantic_call_visit_children!(
         for segment in expression.segments
             segment isa ActionIndexAccessSegment && visit(segment.expr)
         end
+    elseif expression isa ActionValueAccessExpr
+        visit(expression.receiver)
+        for segment in expression.segments
+            segment isa ActionIndexAccessSegment && visit(segment.expr)
+        end
     end
     return nothing
 end

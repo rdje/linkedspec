@@ -1,5 +1,40 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.2` — reuse scoped bindings and the common interpreter, not a Julia
+  closure): typed probes reduced the measured gap to three seams. Colon keyword calls and access on an evaluated
+  call result degraded to raw ActionIR, while the runtime's static dispatcher ended without checking a bound
+  value. The existing `_RuntimeScopedBinding`, `_runtime_copy`, caller stores, and value-statement executor already
+  owned the required dynamic behavior. Adding a closure frame or codeblock-specific generated executor would have
+  duplicated those authorities.
+
+  The narrow parser repair adds colon keyword data without reclassifying `name = value`, plus one
+  `ActionValueAccessExpr` that feeds existing key/index traversal before fluent evaluation. Runtime fallback runs
+  only after controls, helpers, and registered user functions. It validates the plain eight-field record,
+  evaluates arguments once in an explicit left-to-right loop, binds copied fixed/rest values through reverse-order
+  cleanup, and keeps unrelated caller stores live. Construction registers the retained typed body by literal
+  source; source parsing is only the defensive data-reconstruction fallback. A separate active-codeblock stack
+  owns ordered direct/mutual recursion without conflating user-function recursion.
+
+  The first complete package run caught an important compatibility edge: making every unknown call return the new
+  portable record changed an established general runtime diagnostic outside codeblocks. The final dispatch emits
+  `unknown_helper`/`name` only while a codeblock identity is active and leaves ordinary unknown-helper behavior
+  unchanged. A dedicated existing snapshot plus the seven invalid-call authorities lock that distinction.
+  Another mutation-sensitive case proves that a `return(...)` raised below a helper is caught at the codeblock
+  boundary, allowing the caller rule to continue.
+
+  Focused proof is 125 dynamic + 239 construction assertions across every neutral call/failure and native,
+  reconstructed, generated-plan, and freshly loaded emitted-source paths. Complete package and operational gates
+  pass the byte-fresh 120,030-byte MCP binding, unchanged 18-owner/five-package repository storage, primary CLI,
+  and corpus 105/105. Generic contextual final blocks, capability/MCP promotion, other backends, root README,
+  and push remain excluded.
+
+  Final lockstep proof passes Knowledge Map 770/6,251, mdBook 79/13,972 KiB, all seven doctrines, canonical
+  semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 655 seconds.
+  The first canonical attempt was intentionally not accepted after the outer execution harness denied the
+  project's nested `sandbox-exec`; rerunning the complete gate with that already-authorized boundary proved the
+  relocated six-family process oracle and completed cleanly. This distinguishes harness permission from a
+  project containment defect and preserves the kernel-enforced storage test as mandatory evidence.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.1` — typed deferred data, not a Julia closure): Julia's brace parser
   previously had only harray and eager `block_value` outcomes, while its shared `CallableSignature` required a
   string rest name. The smallest coherent repair adds exact `{|`-first literal/error nodes, makes only the shared

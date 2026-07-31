@@ -322,11 +322,13 @@ shape literals on every current native backend. Ordinary assignment does not def
 `callback = { return("later") }` stores `"later"`. Contextual trailing blocks and explicit
 `{|params| ...}` callable values are separate codeblock paths.
 
-Julia now constructs explicit `{|params| ...}` values as the same inert eight-field typed state used by the
-portable contract, including fixed/final-rest signatures and containing Unicode-character spans. Construction,
-copying, serialization, generated reconstruction, and semantic inspection do not execute or capture the body.
-Julia bound-variable invocation and generic contextual-final-block normalization remain pending, so the governed
-call-site equivalence below is currently implemented on Perl, Rust, and Dart only.
+Julia constructs explicit `{|params| ...}` values as the same inert eight-field typed state used by the portable
+contract, including fixed/final-rest signatures and containing Unicode-character spans. Construction, copying,
+serialization, generated reconstruction, and semantic inspection do not execute or capture the body. Julia now
+invokes a bound value through `cb(args)` after static callables, with copied/restored parameter bindings, live
+nonparameter caller stores, local return/results, typed failures, and ordered recursion rejection. Generic
+contextual-final-block normalization remains pending, so the governed call-site equivalence below is currently
+implemented on Perl, Rust, and Dart only.
 
 On Perl, Rust, and Dart, callable metadata may declare one final codeblock parameter. At those governed call sites,
 `call(args) { statements }` and `call(args, { statements })` defer the immediate block as the same

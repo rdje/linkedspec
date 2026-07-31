@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Julia callable-codeblock dynamic invocation signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.6.2` is active task-tree-first from clean construction commit `3a38338d`
+(115/300). Julia now executes explicit bound `cb(args)` only after static callables, with once-only ordered
+arguments, recursively copied/restored fixed/rest bindings, live caller nonparameter stores, local results/access/
+chaining/discard, portable failures, and ordered recursion rejection. Native, normalized reconstructed,
+generated-plan, and freshly loaded emitted-source paths share the same retained typed body and common runtime;
+ordinary unknown-helper diagnostics outside codeblocks remain compatible.
+
+Focused dynamic 125/125, unchanged construction 239/239 and variadic 55/55, the complete package suite, neutral
+7/11/9/7/4/8, and the Julia local gate pass with the byte-fresh 120,030-byte MCP binding, unchanged 18 storage
+owners / five package trees, primary CLI, and corpus 105/105. Knowledge Map 770/6,251, mdBook 79 files /
+13,972 KiB, all seven doctrines, canonical semantic/MCP admissions, repository containment/moved-root, CLI 66x2,
+RAM 57%, and Phase 0 1,031/1,031 in 655 seconds pass. The workflow commit and clean boundary proof remain before
+`.11.6.3`; generic final blocks, capability/MCP status, other backends, root README, and push do not move.
+
 ## 2026-07-30 — Julia callable-codeblock construction signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.6.1` now gives Julia exact inert `{|params| body }` / `{|| body }` construction

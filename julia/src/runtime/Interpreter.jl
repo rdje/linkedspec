@@ -15,6 +15,12 @@ struct RuntimeDiagnostic
     helper_name::Union{Nothing,String}
     actual_arity::Union{Nothing,Int}
     expected_arity::Union{Nothing,String}
+    callable_name::Union{Nothing,String}
+    expected::Union{Nothing,String}
+    got::Union{Nothing,Int}
+    value_kind::Union{Nothing,String}
+    name::Union{Nothing,String}
+    cycle::Union{Nothing,Vector{String}}
     target_rule::Union{Nothing,String}
     regex_index::Union{Nothing,Int}
     expected_regex_index::Union{Nothing,Int}
@@ -38,6 +44,12 @@ function RuntimeDiagnostic(;
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
+    callable_name = nothing,
+    expected = nothing,
+    got = nothing,
+    value_kind = nothing,
+    name = nothing,
+    cycle = nothing,
     target_rule = nothing,
     regex_index = nothing,
     expected_regex_index = nothing,
@@ -61,6 +73,12 @@ function RuntimeDiagnostic(;
         optional_string(helper_name),
         actual_arity === nothing ? nothing : Int(actual_arity),
         optional_string(expected_arity),
+        optional_string(callable_name),
+        optional_string(expected),
+        got === nothing ? nothing : Int(got),
+        optional_string(value_kind),
+        optional_string(name),
+        cycle === nothing ? nothing : String[String(item) for item in cycle],
         optional_string(target_rule),
         regex_index === nothing ? nothing : Int(regex_index),
         expected_regex_index === nothing ? nothing : Int(expected_regex_index),
@@ -260,6 +278,8 @@ mutable struct _RuntimeExecutionContext
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
     active_user_functions::Vector{String}
     user_function_body_cache::Dict{Int,ActionBlock}
+    active_codeblocks::Vector{String}
+    codeblock_body_cache::Dict{String,ActionBlock}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
     trace::Union{Nothing,LinkedSpecTraceEmitter}
@@ -296,6 +316,8 @@ function _RuntimeExecutionContext(
         Dict{String,_RuntimeRuleLocalBinding}[],
         String[],
         Dict{Int,ActionBlock}(),
+        String[],
+        Dict{String,ActionBlock}(),
         RuntimeLifecycleEvent[],
         String(top_rule),
         trace,
@@ -317,6 +339,15 @@ end
 struct _RuntimeRegexValue
     pattern::String
     flags::String
+end
+
+struct _RuntimeCodeblockValue
+    positional_params::Vector{String}
+    rest_param::Union{Nothing,String}
+    min_arity::Int
+    max_arity::Union{Nothing,Int}
+    source_text::String
+    body_source::String
 end
 
 struct _RuntimeRuleResult
@@ -2379,6 +2410,22 @@ function _evaluate_runtime_action_expr!(
             rule_label,
             current_edge,
         ))
+    elseif expr isa ActionValueAccessExpr
+        root = _evaluate_runtime_action_expr!(
+            engine,
+            expr.receiver,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return _runtime_copy(_read_runtime_nested(
+            engine,
+            root,
+            expr.segments,
+            context,
+            rule_label,
+            current_edge,
+        ))
     elseif expr isa ActionControlIfExpr || expr isa ActionControlWhileExpr ||
            expr isa ActionControlSwitchExpr
         return _evaluate_runtime_structured_control!(
@@ -2427,6 +2474,7 @@ function _evaluate_runtime_action_expr!(
             current_edge,
         )
     elseif expr isa ActionCodeblockLiteralExpr
+        context.codeblock_body_cache[expr.source] = expr.body_ast
         return _runtime_copy(to_json(expr))
     elseif expr isa ActionCodeblockLiteralErrorExpr
         throw(RuntimeInterpreterException(
@@ -2900,9 +2948,198 @@ function _evaluate_runtime_call!(
         return _call_runtime_pure_helper(helper_name, values)
     end
 
+    if !is_known_action_ir_call_name(call.name) &&
+            _runtime_binding_present(context, call.name)
+        value = _runtime_copy(_read_runtime_store(context, call.name))
+        codeblock = _decode_runtime_codeblock(value)
+        if codeblock === nothing
+            value_kind = _runtime_binding_kind(value)
+            detail = "value_not_callable callable_name=$(repr(call.name)) " *
+                     "value_kind=$(repr(value_kind)) rule_label=$(repr(rule_label))"
+            throw(RuntimeInterpreterException(
+                detail;
+                diagnostic = _runtime_context_diagnostic(
+                    engine,
+                    context;
+                    stage = "callable_codeblock_invocation",
+                    summary = "Julia callable codeblock invocation failed",
+                    detail = detail,
+                    code = "value_not_callable",
+                    callable_name = call.name,
+                    value_kind = value_kind,
+                    rule_label = rule_label,
+                    handler_source_label = "julia_runtime:codeblock:$(call.name)",
+                ),
+            ))
+        end
+        if keyword_arg_count > 0
+            expected = "positional arguments"
+            detail = "codeblock_keyword_arguments_unsupported " *
+                     "callable_name=$(repr(call.name)) expected=$(repr(expected)) " *
+                     "got=$keyword_arg_count rule_label=$(repr(rule_label))"
+            throw(RuntimeInterpreterException(
+                detail;
+                diagnostic = _runtime_context_diagnostic(
+                    engine,
+                    context;
+                    stage = "callable_codeblock_invocation",
+                    summary = "Julia callable codeblock invocation failed",
+                    detail = detail,
+                    code = "codeblock_keyword_arguments_unsupported",
+                    callable_name = call.name,
+                    expected = expected,
+                    got = keyword_arg_count,
+                    rule_label = rule_label,
+                    handler_source_label = "julia_runtime:codeblock:$(call.name)",
+                ),
+            ))
+        end
+        return _execute_runtime_codeblock_value!(
+            engine,
+            call.name,
+            codeblock,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif !is_known_action_ir_call_name(call.name) && !isempty(context.active_codeblocks)
+        detail = "unknown_helper name=$(repr(call.name)) rule_label=$(repr(rule_label))"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "callable_codeblock_invocation",
+                summary = "Julia callable codeblock invocation failed",
+                detail = detail,
+                code = "unknown_helper",
+                name = call.name,
+                rule_label = rule_label,
+            ),
+        ))
+    end
+
     throw(RuntimeInterpreterException(
         "unsupported runtime helper '$(call.name)' in rule $rule_label",
     ))
+end
+
+function _execute_runtime_codeblock_value!(
+    engine::LinkedSpecRuntimeEngine,
+    name::String,
+    codeblock::_RuntimeCodeblockValue,
+    arg_exprs::Vector{ActionExpr},
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    current_edge,
+)
+    values = Any[]
+    for arg in arg_exprs
+        push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )))
+    end
+
+    arity_matches = length(values) >= codeblock.min_arity &&
+                    (codeblock.max_arity === nothing || length(values) <= codeblock.max_arity)
+    if !arity_matches
+        expected = codeblock.max_arity == codeblock.min_arity ?
+                   "exactly $(codeblock.min_arity)" : "at least $(codeblock.min_arity)"
+        detail = "codeblock_arity_mismatch callable_name=$(repr(name)) " *
+                 "expected=$(repr(expected)) got=$(length(values)) " *
+                 "rule_label=$(repr(rule_label))"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "callable_codeblock_invocation",
+                summary = "Julia callable codeblock invocation failed",
+                detail = detail,
+                code = "codeblock_arity_mismatch",
+                callable_name = name,
+                expected = expected,
+                got = length(values),
+                rule_label = rule_label,
+                handler_source_label = "julia_runtime:codeblock:$name",
+            ),
+        ))
+    end
+
+    active_index = findfirst(==(name), context.active_codeblocks)
+    if active_index !== nothing
+        cycle = String[context.active_codeblocks[active_index:end]..., name]
+        detail = "codeblock_recursion_unsupported callable_name=$(repr(name)) " *
+                 "cycle=$(repr(cycle)) rule_label=$(repr(rule_label))"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "callable_codeblock_invocation",
+                summary = "Julia callable codeblock invocation failed",
+                detail = detail,
+                code = "codeblock_recursion_unsupported",
+                callable_name = name,
+                cycle = cycle,
+                rule_label = rule_label,
+                handler_source_label = "julia_runtime:codeblock:$name",
+            ),
+        ))
+    end
+
+    body = get!(context.codeblock_body_cache, codeblock.source_text) do
+        parse_action_block(codeblock.body_source)
+    end
+    bindings = _RuntimeScopedBinding[]
+    push!(context.active_codeblocks, name)
+    try
+        for (index, parameter) in enumerate(codeblock.positional_params)
+            push!(bindings, _enter_runtime_scoped_scalar!(
+                context,
+                parameter,
+                values[index],
+            ))
+        end
+        if codeblock.rest_param !== nothing
+            rest_values = Any[
+                _runtime_copy(value) for value in values[(codeblock.min_arity + 1):end]
+            ]
+            push!(bindings, _enter_runtime_scoped_scalar!(
+                context,
+                codeblock.rest_param,
+                rest_values,
+            ))
+        end
+        try
+            flow = _execute_runtime_value_statements!(
+                engine,
+                body.statements,
+                1,
+                length(body.statements) + 1,
+                context,
+                rule_label,
+                current_edge;
+                final_expression_yields = true,
+            )
+            return flow.returned ? _runtime_copy(flow.value) : nothing
+        catch error
+            if error isa _RuntimeActionReturn
+                return _runtime_copy(error.value)
+            end
+            rethrow()
+        end
+    finally
+        for binding in Iterators.reverse(bindings)
+            _exit_runtime_scoped_binding!(context, binding)
+        end
+        pop!(context.active_codeblocks)
+    end
 end
 
 function _execute_runtime_user_function!(
@@ -5827,6 +6064,54 @@ function _runtime_binding_kind(value)
     return "scalar"
 end
 
+function _decode_runtime_codeblock(value)
+    if !(value isa AbstractDict) ||
+            !(get(value, "kind", nothing) in ("codeblock_literal", "codeblock_argument")) ||
+            get(value, "version", nothing) != 1 ||
+            !(get(value, "source_text", nothing) isa AbstractString) ||
+            !(get(value, "body_source", nothing) isa AbstractString)
+        return nothing
+    end
+
+    body_ast = get(value, "body_ast", nothing)
+    if !(body_ast isa AbstractDict) || get(body_ast, "kind", nothing) != "action_block"
+        return nothing
+    end
+    signature = get(value, "signature", nothing)
+    if !(signature isa AbstractDict) ||
+            get(signature, "kind", nothing) != "callable_signature" ||
+            get(signature, "version", nothing) != 1
+        return nothing
+    end
+    raw_params = get(signature, "positional_params", nothing)
+    min_arity = get(signature, "min_arity", nothing)
+    rest_param = get(signature, "rest_param", nothing)
+    max_arity = get(signature, "max_arity", nothing)
+    if !(raw_params isa AbstractVector) ||
+            !all(parameter -> parameter isa AbstractString, raw_params) ||
+            !(min_arity isa Integer) ||
+            !(rest_param === nothing || rest_param isa AbstractString) ||
+            !(max_arity === nothing || max_arity isa Integer)
+        return nothing
+    end
+    positional_params = String[String(parameter) for parameter in raw_params]
+    min_arity = Int(min_arity)
+    max_arity = max_arity === nothing ? nothing : Int(max_arity)
+    if min_arity != length(positional_params) ||
+            (rest_param === nothing && max_arity != min_arity) ||
+            (rest_param !== nothing && max_arity !== nothing)
+        return nothing
+    end
+    return _RuntimeCodeblockValue(
+        positional_params,
+        rest_param === nothing ? nothing : String(rest_param),
+        min_arity,
+        max_arity,
+        String(value["source_text"]),
+        String(value["body_source"]),
+    )
+end
+
 function _runtime_binding_kind_mismatch(name::String, expected_kind::String, value)
     actual_kind = _runtime_binding_kind(value)
     return RuntimeInterpreterException(
@@ -6208,6 +6493,12 @@ function _runtime_diagnostic(
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
+    callable_name = nothing,
+    expected = nothing,
+    got = nothing,
+    value_kind = nothing,
+    name = nothing,
+    cycle = nothing,
     target_rule = nothing,
     regex_index = nothing,
     expected_regex_index = nothing,
@@ -6233,6 +6524,12 @@ function _runtime_diagnostic(
         helper_name = helper_name,
         actual_arity = actual_arity,
         expected_arity = expected_arity,
+        callable_name = callable_name,
+        expected = expected,
+        got = got,
+        value_kind = value_kind,
+        name = name,
+        cycle = cycle,
         target_rule = target_rule,
         regex_index = regex_index,
         expected_regex_index = expected_regex_index,
@@ -6252,6 +6549,12 @@ function _runtime_context_diagnostic(
     helper_name = nothing,
     actual_arity = nothing,
     expected_arity = nothing,
+    callable_name = nothing,
+    expected = nothing,
+    got = nothing,
+    value_kind = nothing,
+    name = nothing,
+    cycle = nothing,
 )
     return _runtime_diagnostic(
         engine;
@@ -6265,6 +6568,12 @@ function _runtime_context_diagnostic(
         helper_name = helper_name,
         actual_arity = actual_arity,
         expected_arity = expected_arity,
+        callable_name = callable_name,
+        expected = expected,
+        got = got,
+        value_kind = value_kind,
+        name = name,
+        cycle = cycle,
     )
 end
 
@@ -6288,6 +6597,12 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "helper_name" => diagnostic.helper_name,
         "actual_arity" => diagnostic.actual_arity,
         "expected_arity" => diagnostic.expected_arity,
+        "callable_name" => diagnostic.callable_name,
+        "expected" => diagnostic.expected,
+        "got" => diagnostic.got,
+        "value_kind" => diagnostic.value_kind,
+        "name" => diagnostic.name,
+        "cycle" => diagnostic.cycle,
         "target_rule" => diagnostic.target_rule,
         "regex_index" => diagnostic.regex_index,
         "expected_regex_index" => diagnostic.expected_regex_index,

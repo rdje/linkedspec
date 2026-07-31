@@ -5,6 +5,22 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 Julia callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.6.2` resolves a bound
+  `codeblock_literal` only after controls, helpers, and registered user functions. Positional arguments evaluate
+  exactly once left-to-right; recursively copied fixed/rest values use exception-safe scoped bindings that
+  restore prior same-name scalar/array/harray state, while nonparameter reads and mutations remain in the caller's
+  live stores. Invocation-local `return`, final results, typed key/index access, receiver continuation, and
+  standalone discard all reuse the common interpreter. Exact arity, colon-keyword, bound-non-codeblock,
+  unknown-body-helper, and ordered direct/mutual-recursion diagnostics use the neutral fields; ordinary unknown
+  helpers outside an active codeblock retain Julia's established general diagnostic. Native, normalized
+  reconstructed, generated-plan, and independently loaded emitted Julia execute the same retained typed body and
+  plain eight-field record without a closure, lexical capture, host fallback, or second executor. Focused proof
+  passes 125/125 dynamic plus unchanged 239/239 construction and 55/55 variadic assertions; the complete package
+  and Julia operational gate pass with the byte-fresh 120,030-byte MCP binding, unchanged 18-owner/five-package
+  storage proof, primary CLI, and corpus 105/105. Knowledge Map 770/6,251, mdBook 79/13,972 KiB, all seven
+  doctrines, canonical containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 655 seconds complete
+  signoff. Generic contextual final-block equivalence remains `.11.6.3`; capability/MCP and other backends do not
+  move.
 - `2026-07-30 Dart callable-codeblock construction`: `FUTURE-PARITY-BACKLOG.11.5.1` adds exact `{|` recognition
   before harray/eager-block classification and one typed `ActionCodeblockLiteralExpr` with the neutral eight
   fields, shared fixed/final-rest signature, retained ActionIR body, exact source, and half-open containing
@@ -798,8 +814,10 @@ This document is the current high-level technical reading of the project shape. 
 - `2026-07-16` refresh: Lua capability admission `.8.4` makes Lua the fifth exact backend in the executable
   16-capability census. Every Lua row is `pass` with direct implementation and recurring proof references, so the
   census is 80 pass / 0 partial / 0 gap; generated-source state is independently `pass`. Satisfied Lua-backend and
-  variadic-function exclusions are removed, while the mixed generic callable-codeblock exclusion is narrowed to
-  explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. PUC Lua 5.4 remains the
+  variadic-function exclusions are removed, while the mixed generic callable-codeblock exclusion was then narrowed
+  to explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. Subsequent Rust and
+  Dart closeout plus Julia construction/invocation leave Julia contextual equivalence and Lua explicit/dynamic
+  parity as the current residual work. PUC Lua 5.4 remains the
   conformance runtime and LuaJIT the behavior-identical compatibility leg. Focused proof is 177/177 on both ABIs,
   primary 61x2, corpus 105/105, and the shared matrix 5x2x61. Canonical local CI passes reference CLI 61x2 and
   Phase 0 `1..1031` in 625 seconds. The Lua parity tree is closed; post-parity work is eligible only after this

@@ -1,4 +1,4 @@
-# FUTURE-PARITY-BACKLOG.11.6.1 — Julia callable-codeblock construction/state.
+# FUTURE-PARITY-BACKLOG.11.6.1-.2 — Julia callable-codeblock state/invocation.
 
 const CALLABLE_CODEBLOCK_CONTRACT = JSON3.read(
     read(
@@ -50,6 +50,342 @@ function _callable_codeblock_construction_source(literal::AbstractString)
 Done::
  /x/
 """
+end
+
+function _callable_codeblock_reconstruct(compiled::CompiledSpec, identity::AbstractString)
+    generated = emit_julia_source_v2(compiled, identity)
+    matched = match(r"const _COMPILED_SPEC_JSON_HEX = \"([^\"]+)\"", generated)
+    @test matched !== nothing
+    matched === nothing && return nothing
+    normalized = JSON3.read(
+        String(hex2bytes(matched.captures[1])),
+        Dict{String,Any},
+    )
+    return compile_spec(from_json(SpecFile, normalized))
+end
+
+function _callable_codeblock_runtime_failure(compiled::CompiledSpec)
+    error = _callable_codeblock_attempt() do
+        runtime_execute(LinkedSpecRuntimeEngine(compiled), "x")
+    end
+    @test error isa RuntimeInterpreterException
+    return error
+end
+
+function _callable_codeblock_invalid_call_source(id::AbstractString)
+    body = if id == "fixed_missing"
+        """cb = {|left, right| return(cat(left, right)) }; return(cb(\"a\"))"""
+    elseif id == "fixed_extra"
+        """cb = {|left, right| return(cat(left, right)) }; return(cb(\"a\", \"b\", \"c\"))"""
+    elseif id == "rest_missing_fixed"
+        """cb = {|prefix, ...items| return(items) }; return(cb())"""
+    elseif id == "keyword_argument"
+        """cb = {|value| return(value) }; return(cb(value: \"x\"))"""
+    elseif id == "bound_non_codeblock"
+        """text = \"not callable\"; return(text())"""
+    elseif id == "unknown_call"
+        """cb = {|| return(missing()) }; return(cb())"""
+    elseif id == "direct_recursion"
+        """reader = {|| return(reader()) }; return(reader())"""
+    else
+        error("unowned invalid callable-codeblock case $id")
+    end
+    return """Top::
+ /x/
+ E { $body }
+"""
+end
+
+@testset "Julia callable-codeblock dynamic invocation contract" begin
+    @testset "call-result access and colon keywords retain typed ActionIR" begin
+        chain = parse_action_expression(
+            """collector(\"p\", \"a\", \"b\")[\"items\"].length()""",
+        )
+        @test chain isa ActionFluentChainExpr
+        if chain isa ActionFluentChainExpr
+            @test chain.receiver isa ActionValueAccessExpr
+            if chain.receiver isa ActionValueAccessExpr
+                @test chain.receiver.receiver isa ActionCallExpr
+                @test chain.receiver.receiver.name == "collector"
+                @test length(chain.receiver.segments) == 1
+                @test only(chain.receiver.segments) isa ActionKeyAccessSegment
+                @test to_json(chain.receiver)["kind"] == "value_access"
+            end
+        end
+
+        keyword = parse_action_expression("""cb(value: \"x\")""")
+        @test keyword isa ActionCallExpr
+        if keyword isa ActionCallExpr
+            @test length(keyword.args) == 1
+            @test only(keyword.args) isa ActionKeywordArgument
+            if only(keyword.args) isa ActionKeywordArgument
+                @test only(keyword.args).name == "value"
+            end
+        end
+
+        assignment = parse_action_expression("""cb(value = \"x\")""")
+        @test assignment isa ActionCallExpr
+        if assignment isa ActionCallExpr
+            @test length(assignment.args) == 1
+            @test only(assignment.args) isa ActionPositionalArgument
+            if only(assignment.args) isa ActionPositionalArgument
+                @test only(assignment.args).value isa ActionAssignScalarExpr
+            end
+        end
+    end
+
+    @testset "exact neutral fixture executes through all in-memory authorities" begin
+        fixture = CALLABLE_CODEBLOCK_CONTRACT["fixture"]
+        expected = fixture["expected"]
+        compiled = _callable_codeblock_compile(fixture["spec_source"])
+        @test Set(row["id"] for row in CALLABLE_CODEBLOCK_CONTRACT["call_cases"]) == Set([
+            "construction_is_deferred",
+            "fixed_exact",
+            "dynamic_read_uses_call_time_state",
+            "nonparameter_mutation_persists",
+            "parameter_binding_restores",
+            "rest_empty",
+            "rest_mixed",
+            "rest_result_receiver_chain",
+            "block_local_return",
+            "standalone_discard_keeps_effects",
+            "static_name_precedence",
+        ])
+
+        @test runtime_execute(
+            LinkedSpecRuntimeEngine(compiled),
+            fixture["input"],
+        ).value == expected
+
+        reconstructed = _callable_codeblock_reconstruct(
+            compiled,
+            "callable-codeblock-fixture.spec",
+        )
+        @test reconstructed isa CompiledSpec
+        if reconstructed isa CompiledSpec
+            @test runtime_execute(
+                LinkedSpecRuntimeEngine(reconstructed),
+                fixture["input"],
+            ).value == expected
+        end
+
+        @test execute_generated_parser_v2(
+            compiled,
+            build_generated_rule_plan(compiled),
+            fixture["input"],
+            "callable-codeblock-fixture.spec",
+        ) == expected
+
+        generated = emit_julia_source_v2(
+            compiled,
+            "callable-codeblock-fixture.spec",
+        )
+        mktempdir() do scratch
+            generated_path = joinpath(scratch, "callable_codeblock_fixture_generated.jl")
+            write(generated_path, generated)
+            host = Module(gensym(:JuliaCallableCodeblockInvocationHost))
+            Base.include(host, generated_path)
+            parser = Base.invokelatest(
+                () -> getfield(host, :LinkedSpecGeneratedParser),
+            )
+            execute = Base.invokelatest(() -> getfield(parser, :execute))
+            @test Base.invokelatest(execute, fixture["input"]) == expected
+        end
+    end
+
+    @testset "remaining calls preserve precedence order copies and effects" begin
+        compiled = _callable_codeblock_compile("""fn choose() { return(\"static\") }
+
+Top::
+ /x/
+ E {
+   state = \"\";
+   append_state = {|value| state = cat(state, value); return(state) };
+   append_state(\"x\");
+   cat = {|left, right| return(\"shadow\") };
+   choose = {|| return(\"shadow\") };
+   order = \"\";
+   tick = {|value| order = cat(order, value); return(value) };
+   joiner = {|left, right| return(cat(left, right)) };
+   original = { \"nested\" : [{ \"value\" : \"outer\" }] };
+   mutate_copy = {|copy| copy[\"nested\"][0][\"value\"] = \"inner\"; return(copy) };
+   mutated = mutate_copy(original);
+   return({
+     \"discard_state\" : state,
+     \"helper_precedence\" : cat(\"a\", \"b\"),
+     \"function_precedence\" : choose(),
+     \"ordered_result\" : joiner(tick(\"a\"), tick(\"b\")),
+     \"ordered_effect\" : order,
+     \"original\" : original,
+     \"mutated\" : mutated
+   })
+ }
+""")
+        @test runtime_execute(LinkedSpecRuntimeEngine(compiled), "x").value == Dict{String,Any}(
+            "discard_state" => "x",
+            "helper_precedence" => "ab",
+            "function_precedence" => "static",
+            "ordered_result" => "ab",
+            "ordered_effect" => "ab",
+            "original" => Dict{String,Any}(
+                "nested" => Any[Dict{String,Any}("value" => "outer")],
+            ),
+            "mutated" => Dict{String,Any}(
+                "nested" => Any[Dict{String,Any}("value" => "inner")],
+            ),
+        )
+    end
+
+    @testset "failure restores every parameter store and active identity" begin
+        engine = LinkedSpecRuntimeEngine(
+            _callable_codeblock_compile("""Top::
+ /x/
+"""),
+        )
+        context = LinkedSpecJulia._RuntimeExecutionContext("x", "Top", nothing)
+        literal = parse_action_expression(
+            """{|value| state = \"changed\"; value = \"inner\"; missing() }""",
+        )
+        context.variables["cb"] = LinkedSpecJulia._evaluate_runtime_action_expr!(
+            engine,
+            literal,
+            context,
+            "Top",
+            nothing,
+        )
+        context.variables["value"] = Dict{String,Any}("scalar" => "outer")
+        context.arrays["value"] = Any["outer-array"]
+        context.hashes["value"] = Dict{String,Any}("key" => "outer-harray")
+        expected_variable = deepcopy(context.variables["value"])
+        expected_array = deepcopy(context.arrays["value"])
+        expected_hash = deepcopy(context.hashes["value"])
+
+        failure = _callable_codeblock_attempt() do
+            LinkedSpecJulia._evaluate_runtime_action_expr!(
+                engine,
+                parse_action_expression("""cb(\"argument\")"""),
+                context,
+                "Top",
+                nothing,
+            )
+        end
+        @test failure isa RuntimeInterpreterException
+        if failure isa RuntimeInterpreterException
+            @test failure.diagnostic isa RuntimeDiagnostic
+            if failure.diagnostic isa RuntimeDiagnostic
+                @test failure.diagnostic.code == "unknown_helper"
+                @test failure.diagnostic.name == "missing"
+            end
+        end
+        @test context.variables["value"] == expected_variable
+        @test context.arrays["value"] == expected_array
+        @test context.hashes["value"] == expected_hash
+        @test context.variables["state"] == "changed"
+        @test isempty(context.active_codeblocks)
+    end
+
+    @testset "return raised below a helper remains invocation-local" begin
+        compiled = _callable_codeblock_compile("""Top::
+ /x/
+ E {
+   cb = {|| copy(return(\"done\")); return(\"wrong\") };
+   result = cb();
+   state = \"after\";
+   return({ \"result\" : result, \"state\" : state })
+ }
+""")
+        @test runtime_execute(LinkedSpecRuntimeEngine(compiled), "x").value ==
+              Dict{String,Any}("result" => "done", "state" => "after")
+    end
+
+    @testset "all seven neutral call failures are typed across authorities" begin
+        for row in CALLABLE_CODEBLOCK_CONTRACT["invalid_call_cases"]
+            id = row["id"]
+            expected = row["expected_error"]
+            compiled = _callable_codeblock_compile(
+                _callable_codeblock_invalid_call_source(id),
+            )
+
+            direct = _callable_codeblock_runtime_failure(compiled)
+            if direct isa RuntimeInterpreterException
+                @test direct.diagnostic isa RuntimeDiagnostic
+                if direct.diagnostic isa RuntimeDiagnostic
+                    diagnostic = to_json(direct.diagnostic)
+                    for (key, value) in expected
+                        @test get(diagnostic, key, nothing) == value
+                    end
+                end
+            end
+
+            reconstructed = _callable_codeblock_reconstruct(
+                compiled,
+                "callable-codeblock-$id.spec",
+            )
+            @test reconstructed isa CompiledSpec
+            if reconstructed isa CompiledSpec
+                round_trip = _callable_codeblock_runtime_failure(reconstructed)
+                if direct isa RuntimeInterpreterException &&
+                        direct.diagnostic isa RuntimeDiagnostic &&
+                        round_trip isa RuntimeInterpreterException &&
+                        round_trip.diagnostic isa RuntimeDiagnostic
+                    @test to_json(round_trip.diagnostic) == to_json(direct.diagnostic)
+                end
+            end
+
+            generated = _callable_codeblock_attempt() do
+                execute_generated_parser_v2(
+                    compiled,
+                    build_generated_rule_plan(compiled),
+                    "x",
+                    "callable-codeblock-$id.spec",
+                )
+            end
+            @test generated isa GeneratedSourceException
+            if generated isa GeneratedSourceException
+                @test occursin(expected["code"], something(generated.detail, ""))
+            end
+
+            emitted_source = emit_julia_source_v2(
+                compiled,
+                "callable-codeblock-$id-emitted.spec",
+            )
+            mktempdir() do scratch
+                generated_path = joinpath(scratch, "callable_codeblock_$id.jl")
+                write(generated_path, emitted_source)
+                host = Module(gensym(:JuliaCallableCodeblockFailureHost))
+                Base.include(host, generated_path)
+                parser = Base.invokelatest(
+                    () -> getfield(host, :LinkedSpecGeneratedParser),
+                )
+                execute = Base.invokelatest(() -> getfield(parser, :execute))
+                emitted = _callable_codeblock_attempt() do
+                    Base.invokelatest(execute, "x")
+                end
+                @test emitted isa GeneratedSourceException
+                if emitted isa GeneratedSourceException
+                    @test occursin(expected["code"], something(emitted.detail, ""))
+                end
+            end
+        end
+    end
+
+    @testset "mutual recursion retains the exact ordered cycle" begin
+        compiled = _callable_codeblock_compile("""Top::
+ /x/
+ E {
+   left = {|| return(right()) };
+   right = {|| return(left()) };
+   return(left())
+ }
+""")
+        failure = _callable_codeblock_runtime_failure(compiled)
+        if failure isa RuntimeInterpreterException && failure.diagnostic isa RuntimeDiagnostic
+            diagnostic = to_json(failure.diagnostic)
+            @test diagnostic["code"] == "codeblock_recursion_unsupported"
+            @test diagnostic["callable_name"] == "left"
+            @test diagnostic["cycle"] == ["left", "right", "left"]
+        end
+    end
 end
 
 @testset "Julia callable-codeblock construction contract" begin

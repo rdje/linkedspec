@@ -5,19 +5,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `bdae816a` — clean Dart final-codeblock closeout HEAD from which Julia `.11.6.1` activated
-  task-tree-first (114/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.6.1` — Julia callable-codeblock construction/inert state;
-  workflow commit is 115/300 and Git derives its identity. Parent `.11.6` remains open.
-- active_leaf: none after landing; Julia dynamic callable-codeblock invocation `.11.6.2` is next but not activated.
-- completed_scope: exact Julia `{|params| body }` parsing, eight-field typed literal/signature/body/source/span
-  state, brace disambiguation, native/serialized/generated/emitted/semantic identity, tests, docs, and gates.
-- completed_proof: callable 239/239; complete Julia package/storage 18/5/CLI/corpus 105/105; neutral 7/11/9/7/4/8;
-  KM 768/6,235; book 79/13,964; seven doctrines; canonical CLI 66x2/RAM 57%/Phase 0 1,031 in 646 seconds.
-- active_exclusions: dynamic codeblock invocation, generic contextual final blocks, closures/callback runtimes,
-  capability/MCP movement, lexical capture, other backends, root README, history rewriting, and push.
-- in_flight_uncommitted: none after the workflow commit; generated output/run residue is absent and brief is empty.
-- next_action: prove the `.11.6.1` post-commit boundary and clean status, then activate `.11.6.2`; no push.
+- activation_commit: `3a38338d` — clean Julia construction HEAD from which dynamic invocation `.11.6.2`
+  activated task-tree-first (115/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.6.2` via the landing commit containing this pointer; parent
+  `.11.6` remains open and Git owns the exact current commit identity.
+- active_leaf: none between clean leaves; Julia generic contextual final-block equivalence `.11.6.3` is next.
+- active_scope: `.11.6.2` is complete; next activation may own only signature-governed attached/parenthesized
+  contextual final blocks, generated identity, docs/gates, and Julia-parent closeout.
+- active_progress: Julia dynamic invocation passes focused 125/125, construction 239/239, variadic 55/55, complete
+  package/local gate, Knowledge Map 770/6,251, mdBook 79/13,972 KiB, all doctrines, and canonical signoff.
+- active_exclusions: until `.11.6.3` activates, no code/doc behavior work; closures/callback runtimes, capability/
+  MCP movement, lexical capture, other backends, root README, history rewriting, and push remain excluded.
+- in_flight_uncommitted: none after the `.11.6.2` landing workflow; brief/output/run cleanup and Git status are
+  proved at the clean boundary before `.11.6.3` activation.
+- next_after_clean_commit: activate Julia generic contextual final-block equivalence `.11.6.3`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -39,15 +40,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_future_direction: ADR `0064`/`SPEC-LANGUAGE-SELF-CONTAINMENT` owns expressive closure/EBNF profiles;
-  callable parity next activates Julia dynamic invocation `.11.6.2`; ADR `0056` remains pending under `.14.1-.8`.
+  callable parity next activates Julia contextual equivalence `.11.6.3`; ADR `0056` stays under `.14.1-.8`.
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 114/300 after `.11.5.3`; no push.
+- push_policy: hard lock at 300 new local commits; counter 116/300 after `.11.6.2`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.6.1` passes KM 768/6,235, book 79/13,964, all 7 doctrines, semantic/MCP admissions,
-  containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 646 seconds; exact cleanup passes.
-- blockers: none; prove the `.11.6.1` workflow/clean boundary, then activate `.11.6.2`; no push.
+- canonical_state: `.11.6.2` passes KM 770/6,251, book 79/13,972, all 7 doctrines, semantic/MCP admissions,
+  containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 655 seconds; exact cleanup passes.
+- blockers: none; after the clean `.11.6.2` landing boundary, activate `.11.6.3` task-tree-first; no push.

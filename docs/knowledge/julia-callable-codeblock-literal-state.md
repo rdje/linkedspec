@@ -15,7 +15,7 @@ answers:
 date: 2026-07-30
 status: current
 tags: [julia, actionir, codeblock, callable, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.6.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, containing Unicode-character-coordinate literal/body spans, inert plain-data runtime state, compiled JSON and generated-source preservation, and semantic codeblock shapes. The focused construction suite passes 239/239 across seven valid literals, nine diagnostics, nested/Unicode spans, non-execution, user-function transport, variadic validation isolation, generated reconstruction, and a freshly loaded emitted module; the complete Julia package suite also passes."
+evidence: "FUTURE-PARITY-BACKLOG.11.6.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, containing Unicode-character-coordinate literal/body spans, inert plain-data runtime state, compiled JSON and generated-source preservation, and semantic codeblock shapes. FUTURE-PARITY-BACKLOG.11.6.2 adds dynamic bound invocation without changing construction. Focused proof passes 239 construction plus 125 invocation assertions across native/reconstructed/generated/emitted roles; the complete Julia package and local gate pass."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/callable_codeblock_literal_contract_test.jl\")' && bash tools/run_julia_local.sh"
 ---
 
@@ -39,9 +39,11 @@ reconstructs it through the same compiler/runtime path in a freshly loaded modul
 object, or second generated executor is introduced. Semantic binding projection reports `kind = codeblock` plus
 the exact fixed/rest callable signature.
 
-Construction/state is intentionally inert. Bound-variable dispatch such as `cb(args)` remains owned by
-`FUTURE-PARITY-BACKLOG.11.6.2`; generic attached/parenthesized final blocks remain `.11.6.3`.
+Construction/state remains intentionally inert. Bound-variable dispatch such as `cb(args)` is now implemented by
+`FUTURE-PARITY-BACKLOG.11.6.2` without changing the stored record; generic attached/parenthesized final blocks
+remain `.11.6.3`.
 
 Related facts: [[callable-codeblock-literal-contract]], [[julia-callable-codeblock-construction-gap]],
 [[julia-variadic-user-functions]], [[julia-generated-source-scaffold]],
-[[dart-callable-codeblock-literal-state]], [[rust-callable-codeblock-literal-state]].
+[[julia-callable-codeblock-dynamic-invocation]], [[dart-callable-codeblock-literal-state]],
+[[rust-callable-codeblock-literal-state]].

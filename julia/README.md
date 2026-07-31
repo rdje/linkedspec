@@ -529,7 +529,8 @@ from left to right, so use `if`, `switch`, or `while` when later side effects mu
 Logical helpers and lazy controls share one `_runtime_truthy` typed policy: `nothing`, false, numeric zero, the empty string,
 and empty vectors/dictionaries are false; nonzero numbers, every nonempty string (including `"0"` and `"false"`),
 and nonempty aggregates are true. A typed codeblock value is true without invocation. Exact explicit
-callable-literal construction is now current; dynamic bound-variable invocation remains a separate future step.
+callable-literal construction and dynamic bound-variable invocation are current; generic contextual final blocks
+remain a separate metadata-owned step.
 
 ```text
 Top::
@@ -549,7 +550,7 @@ effect order, failure attribution, and trace-result identity. The primary comman
 `linkedspec: parser invocation failed` process projection for invalid calls; native callers can inspect
 `to_json(error.diagnostic)` for the structured fields.
 
-## Callable-Codeblock Construction
+## Callable-Codeblock Values and Dynamic Invocation
 
 Julia recognizes an exact brace-pipe literal before ordinary harray and eager-block classification:
 
@@ -571,9 +572,42 @@ ordinary compiler/runtime path rather than creating a Julia closure or a second 
 the nine portable neutral diagnostic codes. `{}` and keyed braces remain harrays; nonempty ordinary braces remain
 eager block values.
 
-This construction slice deliberately does not make `fixed("a", "b")` callable yet. Bound-variable `cb(args)`
-execution and its dynamic caller context are owned by `FUTURE-PARITY-BACKLOG.11.6.2`; metadata-governed attached
-and parenthesized final blocks are owned by `.11.6.3`.
+Bound-variable `cb(args)` execution is now implemented. Controls, helpers, and registered user functions keep
+precedence over a colliding
+binding. Otherwise a bound eight-field codeblock record is invoked with positional arguments evaluated exactly
+once from left to right. Fixed values and a fresh final-rest array are recursively copied into temporary bindings;
+all prior scalar/array/harray state for those parameter names is restored on success or failure. Other names read
+and mutate the caller's current stores, and those mutations persist.
+
+```text
+state = ""
+append_state = {|value|
+  state = cat(state, value)
+  return(state)
+}
+
+append_state("a")
+second = append_state("b")
+
+collector = {|prefix, ...items|
+  return({ "prefix" : prefix, "items" : items })
+}
+count = collector("p", "a", "b")["items"].length()
+```
+
+Here `state` becomes `"ab"`, `second` is `"ab"`, and `count` is `2`. `return(...)` exits only the current
+codeblock invocation, including when reached below another helper; otherwise the final body expression yields.
+A standalone call discards only its result. Call-result key/index access is typed ActionIR and can feed an
+ordinary receiver chain. Direct and mutual active recursion are rejected with an ordered callable cycle.
+
+Structured failures use the portable `codeblock_arity_mismatch`,
+`codeblock_keyword_arguments_unsupported`, `value_not_callable`, `unknown_helper`, and
+`codeblock_recursion_unsupported` codes with their callable/name/expected/got/value-kind/cycle fields. Colon
+syntax such as `cb(value: "x")` is retained as keyword-call data for rejection; `cb(value = "x")` remains a
+positional assignment expression. Ordinary unknown helpers outside a codeblock retain Julia's established general
+runtime diagnostic. Native, compiled-JSON reconstructed, generated-plan, and independently loaded emitted-source
+execution share this one interpreter path. No Julia closure, lexical capture, host fallback, or second generated
+executor is introduced. Metadata-governed attached and parenthesized final blocks remain owned by `.11.6.3`.
 
 Run `bash tools/check_logical_helper_five_backend.sh` from the repository root for the full recurring neutral,
 six-runtime, selected-primary, and support-ledger proof. Canonical local CI exposes the same all-toolchain leg as

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (Julia callable-codeblock construction `.11.6.1` is signoff-complete from clean Dart
-  closeout commit `bdae816a`; dynamic invocation `.11.6.2` is next after the workflow commit)
+- Last updated: `2026-07-30` (Julia callable-codeblock dynamic invocation `.11.6.2` is signoff-complete from
+  clean construction commit `3a38338d`; its workflow commit precedes `.11.6.3` activation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -15621,8 +15621,88 @@ reporting `local CI gate passed`. The workflow commit carries this completed sta
 after the zero-byte brief, post-commit activation-boundary proof, clean Git status, and exact generated/run cleanup.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.6.2`
-  Status: `pending`
+  Status: `done`
   Goal: Execute Julia codeblock-variable calls with neutral dynamic context and diagnostics.
+
+### `FUTURE-PARITY-BACKLOG.11.6.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate only from clean construction commit `3a38338d`, after its
+  post-commit activation-boundary proof, zero-byte brief, empty Git status, absent rendered book/cache, and zero
+  retained managed runs. Record this leaf before any Julia behavior, test, roadmap, or public-doc edit; do not push
+  before cadence 300.
+- [x] **KNOWLEDGE / TOOL-LED BASELINE** — Retrieve ADR `0031`, the neutral callable-codeblock contract and
+  fixture, Perl/Rust/Dart dynamic-invocation facts, Julia inert-state/function/runtime/generated/semantic facts,
+  and the relevant Toolbox probes. Re-run neutral and construction checks, then use typed probes to map exact call
+  parsing, static precedence, stores/scoped bindings, return control, recursive copy, diagnostics, result access,
+  recursion, and generated execution before production edits.
+- [x] **DYNAMIC INVOCATION / CALLER CONTEXT** — Resolve a governed bound codeblock only after controls, helpers,
+  and registered user functions; evaluate positional arguments exactly once left-to-right; recursively copy
+  fixed/rest values into temporary bindings; restore same-name scalar/array/harray state on success/failure; expose
+  nonparameter reads/mutations to caller stores; keep `return` invocation-local and allow result access, chaining,
+  and standalone discard.
+- [x] **PORTABLE FAILURES / RECURSION** — Preserve unknown-call behavior and emit exact neutral arity, keyword,
+  bound-non-codeblock, unknown-body-helper, and direct/mutual active-recursion diagnostics with stable callable/
+  name/expected/got/value-kind/cycle fields and no host fallback. Construction remains closure-free and inert.
+- [x] **NATIVE / SERIALIZED / GENERATED PROOF** — Consume all eleven valid call cases, seven invalid call cases,
+  and the exact governed fixture through native, compiled-JSON reconstruction, generated-plan, and independently
+  loaded emitted-source authority. Prove static precedence, once-only evaluation, recursive-copy isolation,
+  cleanup after failure, caller mutation, parameter restoration, local results, and unchanged semantic state
+  without broadening generic contextual final blocks.
+- [x] **SIGNOFF / DOCS / COMMIT / CLEAN HANDOFF** — Pass focused and complete Julia gates plus neutral, Knowledge
+  Map, mdBook, all doctrines, and warranted canonical proof; synchronize task/roadmap/live docs, Julia docs, and
+  public book; remove exact generated output; commit `.11.6.2`, clear the brief, prove clean, and only then activate
+  `.11.6.3`. Root README, capability/MCP status, other backends, and push remain unchanged.
+
+Activation evidence 2026-07-30: construction/state `.11.6.1` lands at `3a38338d` as commit 115/300 from clean
+activation boundary `bdae816a`. The hook proves the staged pointer before commit and committed `HEAD^1` afterward;
+the brief is zero bytes, Git status is empty, the rendered book and Python cache are absent, and the managed-run
+census is zero. `.11.6.2` owns explicit bound-variable call execution and proof only; no Julia behavior, test,
+capability, MCP, root README, or push change occurs at activation.
+
+Baseline evidence 2026-07-30: the neutral checker remains exact at 7 literals / 11 calls / 9 invalid literals /
+7 invalid calls / 4 invalid declarations / 8 contextual forms, Julia construction remains 239/239, and the
+variadic callable focus remains 55/55. Typed ActionIR probes prove `cb(value: "x")` currently retains one
+`raw_perl` positional argument, `cb(value = "x")` correctly retains one positional `assign_scalar`, and
+`collector("p", "a", "b")["items"].length()` currently gives the fluent chain a `raw_perl` receiver. The exact
+neutral fixture validates and compiles but stops at `reader()` with the untyped message `unsupported runtime
+helper 'reader' in rule Top`; Julia has no active-codeblock stack or bound-codeblock fallback after static calls.
+Existing `_RuntimeScopedBinding`, recursive `_runtime_copy`, `_execute_runtime_value_statements!`, caller stores,
+and generated/reconstructed engine paths are the reusable authority. Knowledge card
+`julia-callable-codeblock-dynamic-invocation-gap` makes this causal baseline durable. No production behavior has
+changed at this checkpoint.
+
+Implementation evidence 2026-07-30: Julia now owns typed colon keyword arguments without reclassifying positional
+`name = value` assignment expressions, plus `ActionValueAccessExpr` for key/index access on an evaluated call
+result before fluent continuation. Runtime bound-name fallback runs only after controls, helpers, and registered
+user functions. It validates the plain eight-field record, evaluates positional arguments once in an explicit
+left-to-right loop, caches the retained typed body by exact literal source, and uses reverse-unwound
+`_RuntimeScopedBinding` frames for recursively copied fixed/rest values while leaving nonparameter caller stores
+live. A separate ordered active-codeblock stack rejects direct/mutual recursion. The callable boundary catches
+raised local returns before rule execution resumes. No closure, capture, host callback/fallback, or second
+generated executor exists.
+
+Regression evidence 2026-07-30: RED was 53 pass / 25 fail / 8 error against the missing typed seams. Final focused
+proof is 125/125 dynamic plus unchanged 239/239 construction and 55/55 variadic. All eleven valid calls, seven
+invalid calls, exact fixture, static precedence, once-only effects, recursive-copy isolation, success/failure
+three-store restoration, live nonparameter mutation, nested local return, exact ordered cycles, and native,
+normalized reconstructed, generated-plan, and freshly loaded emitted-source roles pass. The first complete
+package run caught and prevented an over-broad diagnostic change: portable `unknown_helper` data now applies only
+inside an active codeblock, while Julia's established ordinary unknown-helper record stays unchanged. The rerun
+passes the complete package. `tools/run_julia_local.sh` passes the byte-fresh 120,030-byte MCP binding, package,
+unchanged 18-owner/five-package repository-storage proof, primary CLI, and corpus 105/105. Neutral 7/11/9/7/4/8
+also remains exact. At this Julia-local checkpoint, public/docs/governance/canonical signoff remained in progress;
+capability/MCP status was unchanged.
+
+Signoff evidence 2026-07-30: Knowledge Map regeneration/check passes at 770 facts / 6,251 question keys; the
+mdBook renders 79 files / 13,972 KiB; memory architecture, task metadata, whitespace, root README stability, and
+all seven doctrines pass. The fully authorized canonical rerun passes exact semantic and MCP admissions,
+repository process containment through its nested macOS `sandbox-exec` boundary, moved-root anchors, primary CLI
+66x2, RAM 57%, and Phase 0 1,031/1,031 in 655 seconds before `local CI gate passed`. The initial outer-sandboxed
+attempt had reached the containment oracle but could not invoke nested `sandbox-exec`; it changed no tracked
+state, and the authorized rerun proved the intended kernel boundary. Exact rendered-book and managed-run cleanup
+passes. The workflow commit carries this completed leaf; `.11.6.3` may activate only after the zero-byte brief,
+post-commit activation-boundary proof, clean Git status, and output census. Capability/MCP status, other backends,
+root README, and push remain unchanged.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.6.3`
   Status: `pending`
@@ -17840,11 +17920,11 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 **Authoritative frontier (2026-07-30):** Rust callable-codeblock parent `.11.4` and Dart parent `.11.5` are closed;
-Dart `.11.5.3` lands clean at `bdae816a` as 114/300. Julia construction `.11.6.1` is signoff-complete from that
-boundary with exact inert `{|params| body }` state, brace disambiguation, Unicode-coordinate spans, serialized/
-generated/emitted identity, semantic projection, 239/239 focused proof, complete Julia and canonical gates, and
-durable docs. Its workflow commit and clean-boundary proof are the only remaining transition; dynamic invocation
-`.11.6.2` remains pending until then.
+Julia construction `.11.6.1` lands clean at `3a38338d` as 115/300. Dynamic invocation `.11.6.2` is signoff-
+complete from that boundary: focused 125/125 plus construction 239/239 and variadic 55/55, complete package and
+Julia-local gates, Knowledge Map 770/6,251, mdBook 79/13,972 KiB, all seven doctrines, canonical containment/
+moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 655 seconds pass. Its workflow commit and clean proof are
+the only remaining transition before generic final blocks `.11.6.3` activate task-tree-first.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19232,14 +19312,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. The director authorized the exact all-twenty transport repair on 2026-07-30. Atomic transport repair
-  `.10.9.7.1.1.1` and all-twenty consumer proof `.10.9.7.1.1.2` are complete; promotion and closeout stay
-  dependency-ordered under `.10.9.7.1.1.3-.4`. Rollout remains pending until the recurring gate earns it.
+- None. Julia callable-codeblock dynamic invocation `.11.6.2` is signoff-complete from clean `3a38338d`; its
+  workflow commit and clean-boundary proof precede task-tree-first activation of generic contextual equivalence
+  `.11.6.3`. MCP rollout is already complete and does not move in this callable lane.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.6.2` | Clean base `3a38338d`; neutral 7/11/9/7/4/8; Julia dynamic 125/125 plus construction 239/239 and variadic 55/55; static precedence, once-only argument effects, recursively copied/restored fixed/rest bindings, live caller nonparameter stores, local return/results/access/chaining/discard, typed failures/ordered recursion, native/reconstructed/generated/emitted identity; complete package and Julia gate with byte-fresh 120,030-byte MCP binding, storage 18 owners/five package trees, CLI, corpus 105/105; capability/MCP unchanged; Knowledge Map 770/6,251; mdBook 79 files / 13,972 KiB; memory/task/whitespace/README/seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 655 seconds; exact cleanup pending workflow boundary. | PASS. Julia explicit callable values execute through one common interpreter without closure capture, host fallback, generic final-block broadening, capability/MCP movement, other-backend change, root README growth, or push. `.11.6.3` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.6.1` | Clean base `bdae816a`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Julia 239/239; nullable fixed signatures with preserved variadic user-function validation; inert typed body/source/Unicode spans; native/compiled/generated/emitted/user-function/semantic identity; complete Julia byte-fresh MCP/package/storage 18 owners and five package trees/CLI/corpus 105/105 gate; capability/MCP unchanged; Knowledge Map 768/6,235; mdBook 79 files / 13,964 KiB; memory/task/whitespace/seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 646 seconds; exact cleanup pending workflow boundary. | PASS. Julia owns exact inert callable-codeblock construction without closure capture, body execution, variable-call dispatch, capability promotion, MCP movement, other-backend change, root README growth, or push. Dynamic invocation `.11.6.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.5.3` | Clean base `74725ff0`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Dart 21/21 plus complete 375; exact declaration/staged/registry/descriptor-v3 metadata; one metadata-governed attached/parenthesized helper/user/receiver/tree normalization; callback-shadow ordering; native/reconstructed/generated/emitted identity; complete Dart format 95/0, 19-owner/47-package storage, CLI 66x2, corpus 105/105; capability/MCP unchanged; Knowledge Map 766/6,218; mdBook 79 files / 13,944 KiB; seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 58%, Phase 0 1,031/1,031 in 646 seconds; exact cleanup. | PASS. Dart generic final-codeblock equivalence and parent `.11.5` close without closure capture, syntax-owned semantics, capability/MCP movement, other-backend change, root README growth, or push. Julia `.11.6.1` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.5.2` | Clean base `5e80be32`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Dart 15/15 plus parser/variadic 13/13; static precedence, once-only ordered evaluation, copied/restored fixed/rest bindings, live nonparameter stores, local return/result access, portable failures/recursion, and native/reconstructed/generated/emitted identity; complete Dart format 94/0, analyzer, 369 tests, 19-owner/47-package storage, CLI 66x2, corpus 105/105; capability 80/0/0 unchanged; Knowledge Map 765/6,213; mdBook 79 files / 13,924 KiB; seven doctrines; canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 650 seconds; exact cleanup. | PASS. Dart executes explicit bound callable-codeblock values through one runtime after static callables, without closure capture, host fallback, generic final-block broadening, capability/MCP movement, or other-backend changes. `.11.5.3` follows only after the clean commit. |
@@ -19563,6 +19644,8 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.11.6.2` | `FUTURE-PARITY-BACKLOG.11.6.2 - execute Julia callable codeblocks` | Static-precedence bound invocation, dynamic caller context, exact portable failures/recursion, typed result access, and native/reconstructed/generated/emitted identity; generic final blocks remain `.11.6.3`. |
+| `FUTURE-PARITY-BACKLOG.11.6.1` | `FUTURE-PARITY-BACKLOG.11.6.1 - construct Julia callable codeblocks` | Exact inert typed literal/signature/body/source/Unicode-span state across Julia native, compiled, generated, emitted, user-function, and semantic authorities; dynamic invocation remains `.11.6.2`. |
 | `FUTURE-PARITY-BACKLOG.11.5.3` | `FUTURE-PARITY-BACKLOG.11.5.3 - close Dart final codeblocks` | Exact final-only metadata and one signature-governed contextual normalization across Dart native/reconstructed/generated/emitted roles; closes parent `.11.5`. |
 | `FUTURE-PARITY-BACKLOG.11.5.2` | `FUTURE-PARITY-BACKLOG.11.5.2 - execute Dart callable codeblocks` | Static-precedence bound invocation, dynamic caller context, exact portable failures/recursion, typed result access, and native/reconstructed/generated/emitted identity; generic final blocks remain `.11.5.3`. |
 | `FUTURE-PARITY-BACKLOG.11.5.1` | `FUTURE-PARITY-BACKLOG.11.5.1 - construct Dart callable codeblocks` | Exact inert typed literal/signature/body/source/Unicode-span state across Dart native, compiled, generated, emitted, user-function, and semantic authorities; dynamic invocation remains `.11.5.2`. |

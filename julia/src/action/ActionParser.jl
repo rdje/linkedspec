@@ -129,6 +129,11 @@ function _action_parse_expr_without_chain(text::String, start::Int)
         return control
     end
 
+    value_access = _action_parse_call_result_access(text, start)
+    if value_access !== nothing
+        return value_access
+    end
+
     call = _action_parse_call(text, start)
     if call !== nothing
         return call
@@ -143,6 +148,40 @@ function _action_parse_expr_without_chain(text::String, start::Int)
         source = text,
         source_span = ActionSourceSpan(start, start + _action_len(text)),
         reason = "unsupported_expression",
+    )
+end
+
+function _action_parse_call_result_access(text::String, start::Int)
+    open = _action_find_top_level_open_paren(text)
+    if open === nothing
+        return nothing
+    end
+    close = _action_find_matching_delimiter(text, open, '(', ')')
+    if close === nothing
+        return nothing
+    end
+    chars = collect(text)
+    access_start = close + 1
+    while access_start < length(chars) && isspace(chars[access_start + 1])
+        access_start += 1
+    end
+    if access_start == length(chars) || chars[access_start + 1] != '['
+        return nothing
+    end
+    receiver_source = _action_slice(text, 0, close + 1)
+    receiver = _action_parse_call(receiver_source, start)
+    if receiver === nothing
+        return nothing
+    end
+    segments = _action_parse_access_segments(text, access_start, start)
+    if segments === nothing || isempty(segments)
+        return nothing
+    end
+    return ActionValueAccessExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        receiver = receiver,
+        segments = segments,
     )
 end
 
@@ -923,6 +962,28 @@ function _action_parse_arguments(payload::String, start::Int)
     for part in _action_split_top_level_csv(payload, start)
         if isempty(strip(part.text))
             continue
+        end
+        separator = _action_find_top_level_hash_pair_separator(part.text)
+        if separator !== nothing && separator.token == ":"
+            name = strip(_action_slice(part.text, 0, separator.index))
+            if _action_is_identifier(name)
+                value = _action_trim_with_offsets(
+                    _action_slice(
+                        part.text,
+                        separator.index + separator.length,
+                        _action_len(part.text),
+                    ),
+                    part.start + separator.index + separator.length,
+                )
+                push!(
+                    args,
+                    ActionKeywordArgument(
+                        name = name,
+                        value = parse_action_expression(value.text, value.start),
+                    ),
+                )
+                continue
+            end
         end
         expression = parse_action_expression(part.text, part.start)
         keyword_index = _action_find_top_level_assignment_equals(part.text)

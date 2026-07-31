@@ -459,6 +459,18 @@ block, or a typed contract rejection. `FunctionDefinition`, `StagedParseJob`, an
 sole final `parameterKinds` authority. Helper/receiver/tree execution decodes the normalized value through the
 same `_executeCodeblockValue` runtime used by explicit literals rather than a syntax-specific callback path.
 
+Julia construction is owned by `ActionCodeblockLiteralExpr` and `ActionParser.jl`. Exact `{|` recognition runs
+before harray/eager-block classification; the shared nullable-rest `CallableSignature` carries fixed/final-rest
+arity, typed ActionIR, exact source, and containing Unicode-character spans. Runtime construction stores
+recursively copied plain dictionary state and registers the retained body in the invocation cache. Contract and
+removed-selector traversals stop at the deferred body. `Interpreter.jl` owns bound-name fallback only after
+controls, helpers, and registered functions. `_RuntimeScopedBinding` snapshots all three value stores for each
+copied fixed/rest parameter while unrelated caller stores remain live, and `active_codeblocks` owns ordered
+recursion rejection. `ActionValueAccessExpr` feeds evaluated results into the existing key/index reader before
+ordinary fluent evaluation continues. The optional callable/name/expected/got/value-kind/cycle diagnostic fields
+are emitted only at the codeblock boundary; established unknown-helper behavior outside it is unchanged. Native,
+normalized reconstructed, generated-plan, and freshly loaded emitted-source execution all reuse this owner.
+
 `linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
 `CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;
 the completed builtin/user-function registry then normalizes only an accepted final candidate to

@@ -780,6 +780,9 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
         _visit_expr!(resolver, expr.index)
     elseif expr isa ActionNestedAccessExpr
         _visit_access_segments!(resolver, expr.segments)
+    elseif expr isa ActionValueAccessExpr
+        _visit_expr!(resolver, expr.receiver)
+        _visit_access_segments!(resolver, expr.segments)
     elseif expr isa ActionControlIfExpr
         _record_control_contract!(resolver, expr.keyword, expr.canonical_keyword, expr.source, expr.source_span, expr.args)
         _visit_args!(resolver, expr.args)
