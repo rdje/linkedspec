@@ -79,6 +79,22 @@ Continuity docs answer different questions:
 
 They are optimized for execution continuity, not public onboarding.
 
+## Commit identity and the resume pointer
+
+A tracked file cannot contain the literal hash of the Git commit that contains it: changing that literal changes
+the tree and therefore changes the content-addressed commit identity. Current commit identity belongs to Git and
+is obtained with `git rev-parse HEAD` or `git log`, never copied back into the same commit.
+
+ADR `0065` adopts a satisfiable boundary for `MEMORY.md`. The bounded pointer names the clean
+`activation_commit` from which a leaf started. That value equals `HEAD` while the leaf is being prepared and
+equals `HEAD^1` after its normal commit lands. The leaf ID in the commit subject is the durable join key from the
+activation boundary to the landing commit. Before committing, the rest of `MEMORY.md` is written as the intended
+clean post-landing handoff: completed leaf, next action, and no uncommitted work.
+
+`MEMORY-COMMIT-POINTER-ENFORCEMENT.0` ratifies this contract. Until implementation leaf `.1` lands, the existing
+post-commit hook still checks the older self-referential `latest_commit == HEAD` premise and may emit its legacy
+warning; `.1` owns the field migration and one shared hard pre-commit/non-mutating post-commit checker.
+
 ## Definition of done
 
 If a slice changes what the outside world needs to understand about LinkedSpec, the book should move too.

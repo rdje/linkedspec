@@ -5,20 +5,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `4aebf906` — `FUTURE-PARITY-BACKLOG.11.4.3 - close Rust generic final codeblocks` (107/300;
-  no push); brief-cleared/residue-free/clean, with Rust parent `.11.4` closed.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.4.3`; parent `.11.4` is closed.
-- active_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.0` — signoff-complete behavior-free routing from clean `4aebf906`.
-- active_scope: ADR `0064`, task/roadmap/live/book/Knowledge alignment for portable problem-domain closure and an
-  optional lossless EBNF-like frontend over one canonical AST/HandlerIR/runtime; no behavior or status movement.
-- active_progress: task tree was created first; ADR/fact define no ambient effects/host escape, honest semantic
-  differences/extensions, authored source maps, realistic evidence, and five-backend lockstep. KM 762/6,186,
-  mdBook 79/13,884 with exact cleanup, memory/whitespace, seven doctrines, CLI 66x2, and canonical Phase 0
-  1,031/1,031 in 641s pass. Next: commit/brief-clear/clean.
-- active_exclusions: syntax, parser/compiler/runtime, descriptor/generated format, semantic/MCP schema, capability,
-  backend admission, implementation scheduling, root README, or push in `.0`.
-- next_after_clean_commit: open a separate task-tree owner for the discovered post-commit MEMORY self-hash check
-  defect, close it cleanly, then activate Dart `.11.5.1`; `.1+` stays unscheduled; no push.
+- latest_commit: `b9c3e676` — legacy field carrying this leaf's clean activation boundary; ADR `0065` renames it
+  to `activation_commit` in implementation `.1` (108/300; no push).
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.0`; its long-horizon direction is durably parked.
+- active_leaf: `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` — behavior-free contract ratification from clean `b9c3e676`.
+- active_scope: ADR `0065`, task/index/roadmap/live/book/Knowledge alignment for a satisfiable commit pointer; no
+  hook/checker/runtime/parser/backend behavior in `.0`.
+- active_progress: 31/31 consecutive parseable current pointers equal exact first parent, 0 equal self; the 2,418-
+  commit branch has 0 merges. Git owns current HEAD; activation_commit is HEAD before and HEAD^1 after a leaf.
+- active_exclusions: hook/checker/test implementation, historical wording reconciliation, root README, Dart
+  callable behavior, and push.
+- next_after_clean_commit: activate `.1` task-tree-first, implement/test the shared two-phase checker, then close
+  `.2` cleanly before Dart `.11.5.1`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -40,7 +38,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_future_direction: ADR `0064`/`SPEC-LANGUAGE-SELF-CONTAINMENT` owns expressive closure/EBNF profiles; ADR
-  `0056` remains pending under `.14.1-.8`, and ADR `0045` retains sole inter-match-gap ownership.
+  `0065` owns the current continuity correction; ADR `0056` remains pending under `.14.1-.8`.
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
@@ -49,7 +47,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.0` canonical passes all 7 doctrines, contracts/admissions, containment/moved-root, CLI 66x2,
-  and Phase 0 1,031/1,031 in 641s; its tail did not retain RAM. KM 762/6,186; book 79/13,884 before cleanup.
-- blockers: none; commit/brief-clear/clean `.0`, then durably own the post-commit MEMORY checker defect before
-  activating `.11.5.1` without push.
+- canonical_state: continuity `.0` passes KM 763/6,193, book 79/13,892 before cleanup, memory 52/60, all 7
+  doctrines, containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 643s.
+- blockers: none; commit/brief-clear `.0`, then activate implementation `.1`; no Dart pivot or push.

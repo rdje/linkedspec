@@ -18,6 +18,12 @@ and runtime as ordinary syntax, retain authored source maps/diagnostics, state s
 roll out across Perl/Rust/Dart/Julia/Lua. Behavior-free `.0` routes the full program; `.1+` is unscheduled behind
 current callable-codeblock parity.
 
+Repository-continuity correction `MEMORY-COMMIT-POINTER-ENFORCEMENT` temporarily precedes Dart callable parity.
+ADR `0065` recognizes that a content-addressed Git commit cannot contain its own hash in tracked `MEMORY.md`.
+Git therefore owns current `HEAD`; the bounded pointer will store the exact clean `activation_commit` from which
+the leaf began, equal to `HEAD` before commit and `HEAD^1` afterward. Ratification `.0` is behavior-free;
+implementation `.1` and reconciliation `.2` must close cleanly before Dart `.11.5.1` activates.
+
 README sustainability is a completed repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
 defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first
 use, stable architecture/invariants, concise canonical navigation, contribution/support, and accurate notices.

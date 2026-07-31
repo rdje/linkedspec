@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.0` — commit identity cannot be self-authored): The old hook
+  detects a real continuity concern with an unsatisfiable comparison. A Git commit hash covers the tracked
+  `MEMORY.md` bytes, so putting a predicted hash into that file changes the result. Amending, post-commit rewriting,
+  or adding a metadata commit either leaves the handoff dirty or repeats the same self-reference one commit later.
+
+  ADR `0065` separates two identities that the old `latest_commit` name blurred. Git owns the current landing
+  identity dynamically. `activation_commit` owns the stable clean boundary from which the leaf started. That one
+  value has a mechanically checkable two-phase relation: exact `HEAD` over staged pre-commit state, exact
+  `HEAD^1` over committed post-commit state. The commit subject's mandatory leaf ID connects the two without a
+  second mutable hash ledger.
+
+  This is not only theoretical cleanup. Thirty-one consecutive current-era commits with a parseable pointer all
+  store first parent, and none stores self; the branch has no merges. `.1` therefore codifies actual disciplined
+  practice under one shared checker instead of weakening to “any ancestor.” A future merge workflow must
+  explicitly preserve first-parent activation semantics. `.0` deliberately changes no hook so decision and
+  implementation remain separate recoverable slices.
+
+  Signoff is Knowledge Map 763/6,193, mdBook 79 files / 13,892 KiB before exact cleanup, 52/60-line memory, and
+  all seven doctrines. The canonical gate passes the nested repository-containment and moved-root proofs, CLI
+  66x2, RAM 56%, and Phase 0 1,031/1,031 in 643 seconds. The initial managed-sandbox run correctly stopped when
+  macOS denied nested `sandbox-exec`; the authorized canonical rerun exercised that required kernel boundary and
+  passed it before the recorded green result.
+
 - 2026-07-30 (`SPEC-LANGUAGE-SELF-CONTAINMENT.0` — problem-domain closure, not a second language/runtime): The
   director's “Turing complete” analogy identified an authoring constraint, not a request for arbitrary effects.
   The durable boundary is that ordinary LinkedSpec parsing, extraction, cursor/capture/state control, recursive

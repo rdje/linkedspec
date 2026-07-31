@@ -1,5 +1,19 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Satisfiable MEMORY commit-pointer contract ratified
+
+Behavior-free leaf `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` and ADR `0065` distinguish Git's authoritative current
+`HEAD` from the bounded resume pointer's clean `activation_commit`. The latter equals `HEAD` while a leaf is
+prepared and `HEAD^1` after it lands; a tracked file is no longer expected to contain its own content-addressed
+commit hash. The mandatory leaf ID/subject joins activation and landing identities.
+
+Evidence is 31/31 consecutive parseable current-era pointers equal to exact first parent, 0 equal to self, and 0
+merge commits in the 2,418-commit history. No hook, hard gate, runtime, parser, backend, or public language behavior
+changes in `.0`. `.1` implements the field/checker/test migration and `.2` reconciles prior wording before Dart
+callable construction `.11.5.1` resumes. Knowledge Map 763/6,193, mdBook 79 files / 13,892 KiB before cleanup,
+52/60-line memory, and all seven doctrines pass. Canonical signoff passes containment/moved-root, CLI 66x2, RAM
+56%, and Phase 0 1,031/1,031 in 643 seconds. Root `README.md` remains unchanged.
+
 ## 2026-07-30 — Expressive self-containment and EBNF-like profile direction routed
 
 Behavior-free leaf `SPEC-LANGUAGE-SELF-CONTAINMENT.0` makes the director-approved direction durable under ADR

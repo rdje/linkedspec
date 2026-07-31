@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.0 — ratify a satisfiable commit pointer
+
+ADR `0065` and a dedicated corrective task tree replace the impossible requirement that tracked `MEMORY.md`
+contain the hash of the commit that contains it. Git remains the sole authority for current `HEAD`; the bounded
+pointer will instead name the clean `activation_commit` from which a leaf began. The same literal is knowable and
+truthful in both phases: it equals current `HEAD` before commit and committed `HEAD^1` afterward. The leaf ID and
+planned subject remain the durable join key to the landing commit.
+
+History measurement found 31 consecutive parseable pointers from `4a044914` through `b9c3e676`; every one equals
+its immediate first parent, none equals itself. The current 2,418-commit history contains zero merges. `.0` changes
+no hook or hard gate: `.1` owns the `activation_commit` migration, a shared hard staged pre-commit check, the
+non-mutating post-commit check, and hermetic repository-volume tests; `.2` owns historical/live closeout. The
+root README is unchanged and Dart callable parity remains parked until this correction is clean.
+
+Ratification signoff passes the Knowledge Map at 763 facts / 6,193 question keys, renders the mdBook at 79 files
+/ 13,892 KiB before exact cleanup, keeps `MEMORY.md` at 52/60 lines, and passes all seven doctrines. The canonical
+gate passes repository containment, moved-root proof, CLI 66/66 in both option environments, RAM at 56%, and
+Phase 0 1,031/1,031 in 643 seconds.
+
 ## 2026-07-30 — SPEC-LANGUAGE-SELF-CONTAINMENT.0 — route expressive closure and EBNF-like authoring
 
 ADR `0064` and a new detailed task tree now make the director-approved language direction durable without changing
