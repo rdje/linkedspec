@@ -2,7 +2,7 @@
 
 Read `README.md`, then read and thoroughly understand:
 
-- `MEMORY_ARCHITECTURE.md` — the durable, harness-agnostic memory system (mandatory; mechanically enforced). It defines the four memory layers and the write/read paths; resume from `MEMORY.md` (the bounded layer-A resume pointer).
+- `MEMORY_ARCHITECTURE.md` — the durable, harness-agnostic memory system (mandatory; mechanically enforced). It defines the four memory layers and the write/read paths; derive current `HEAD` from Git, then resume from `MEMORY.md` (the bounded layer-A pointer whose `activation_commit` names the clean leaf base).
 - `COMMIT.md` — commit workflow and hygiene conventions.
 - `ROADMAP_V2.md` — current active lanes and tracker status.
 - `docs/TASK_TREE.md` — active task trees, current frontier, and PNT selection rules.

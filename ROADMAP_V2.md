@@ -16,8 +16,9 @@ current callable-codeblock parity.
 
 Current continuity detour: `MEMORY-COMMIT-POINTER-ENFORCEMENT` / ADR `0065` correct the self-referential
 `MEMORY.md latest_commit == post-commit HEAD` expectation. Git owns current commit identity; the tracked pointer
-will name the clean `activation_commit` (`HEAD` before the leaf commit, `HEAD^1` afterward). `.0` ratifies the
-contract; `.1` implements shared pre/post enforcement; `.2` reconciles and closes before Dart `.11.5.1`.
+names the clean `activation_commit` (`HEAD` before the leaf commit, `HEAD^1` afterward). `.0` ratifies the
+contract; `.1` has implemented shared pre/post enforcement and 11 hermetic cases with canonical signoff; `.2`
+independently recomposes the committed state and closes before Dart `.11.5.1`.
 
 Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed

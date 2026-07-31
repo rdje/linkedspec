@@ -32,7 +32,7 @@ This document defines the standard commit workflow for this repository so any ne
 
 ### 4) `MEMORY.md`
 - **Type:** git-tracked **resume pointer** (memory layer A of `MEMORY_ARCHITECTURE.md`).
-- **Purpose:** point a resuming agent — in any model or harness — at *now*: latest commit, the active task-tree frontier leaf, the single next action, and any in-flight uncommitted work.
+- **Purpose:** point a resuming agent — in any model or harness — at *now*: the clean leaf-activation commit, the active task-tree frontier leaf, the single next action, and any in-flight uncommitted work. Derive current commit identity from Git (`git rev-parse HEAD`); never embed a commit's own hash in that commit.
 - **Lifecycle:** **overwrite** the current-state block each accepted slice; do **not** append. Keep the file within its size cap (≤ ~60 lines), which `scripts/check_memory_architecture.sh` enforces.
 - **Important:** this file is the bounded resume pointer, **not** a cumulative log. Its history lives in git (layer D); per-unit detail lives in the task-trees (layer B); durable cross-cutting facts live in `docs/decisions/` (layer C). If a `MEMORY.md` edit would exceed the cap, that content belongs in B or C instead.
 
@@ -82,7 +82,7 @@ This document defines the standard commit workflow for this repository so any ne
      - `CHANGES.md`
      - `DEVELOPMENT_NOTES.md`
      - `LIVE_ACHIEVEMENT_STATUS.md`
-   - **Overwrite** the current-state block in `MEMORY.md` (the bounded resume pointer, layer A — do not append; keep within the size cap). If the slice established a durable cross-cutting fact, add or refresh a record under `docs/decisions/` (layer C).
+   - **Overwrite** the current-state block in `MEMORY.md` (the bounded resume pointer, layer A — do not append; keep within the size cap). Set `activation_commit` to the current clean `HEAD` from which this leaf started; write the remaining fields as the intended clean post-landing handoff (completed leaf/subject, next action, and no in-flight uncommitted work). Git remains the current-commit authority. If the slice established a durable cross-cutting fact, add or refresh a record under `docs/decisions/` (layer C).
    - If the completed activity belongs to a task-tree leaf, update the owning `docs/tasks/*.md` file (node status, verification log, commit log, blockers, decisions, and changelog).
    - Include validation commands/results.
    - If the slice changes the public understanding of LinkedSpec, update `docs/linkedspec-book/` too.
@@ -98,14 +98,17 @@ This document defines the standard commit workflow for this repository so any ne
 4. **Stage intended files only**
    - Stage source/test/docs for the slice.
    - Do not stage swap/temp files.
+   - Ensure the staged `MEMORY.md` is the exact handoff state; staged and unstaged pointer variants are rejected.
 
 5. **Create commit**
    - Run commit with:
      - `git --no-pager commit -F git_message_brief.txt`
+   - The pre-commit gate requires staged `activation_commit` to resolve to current `HEAD`. After the commit, the verification-only post-commit hook requires the same committed value to resolve to `HEAD^1`.
 
 6. **Post-commit cleanup**
    - Clear `git_message_brief.txt` (truncate to empty).
    - Verify status is clean except expected untracked local artifacts.
+   - Confirm the post-commit activation-boundary check reported success; a warning requires a task-tree-owned correction before another commit.
 
 ## Guardrails
 - Do not bundle unrelated changes in the same commit.

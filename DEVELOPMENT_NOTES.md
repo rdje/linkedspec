@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.1` — one value, three repository views): Commit identity is not
+  duplicated. The checker resolves `activation_commit` as a Git commit object, then changes only the authoritative
+  `MEMORY.md` view and expected boundary by phase: index/current `HEAD` for hard pre-commit, committed blob/
+  `HEAD^1` for post-commit verification, and worktree/index/committed selection for automatic doctrine use. Auto
+  rejects a split staged-plus-unstaged pointer instead of guessing which future state the operator intends.
+
+  The pre-hook must validate before derived-map regeneration and general doctrines; otherwise a stale pointer
+  could reach a broader gate whose own diagnostics obscure the causal error. The post-hook cannot undo a commit,
+  so it remains a non-mutating soft recovery signal while delegating all parsing/comparison semantics to the same
+  pure checker. E2 and E4 compose that owner rather than duplicating regexes or hash relationships.
+
+  The hermetic fixture is a real disposable Git repository under managed repository-volume `TMPDIR`. Its 11 cases
+  prove the initial `root` transition, ordinary two-commit transition, prefix resolution, malformed/stale/duplicate
+  rejection, worktree preparation, and index/worktree ambiguity without modifying production history. The
+  canonical gate's initial stop was also useful governance proof: staged hook/tool changes lacked the required
+  six-label TOOLBOX checklist. Adding the evidence to the owning task made `TASK-ACCEPTANCE` and the complete rerun
+  pass; no gate was bypassed.
+
+  Final evidence is Knowledge Map 763/6,194, mdBook 79 files / 13,896 KiB, all seven doctrines, exact containment/
+  moved-root proof, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 637 seconds. The landing commit itself will be
+  the first end-to-end proof that the hard pre-check accepts `ddad65aa` and the post-hook accepts the same committed
+  value as `HEAD^1` without dirtying the tree.
+
 - 2026-07-30 (`MEMORY-COMMIT-POINTER-ENFORCEMENT.0` — commit identity cannot be self-authored): The old hook
   detects a real continuity concern with an unsatisfiable comparison. A Git commit hash covers the tracked
   `MEMORY.md` bytes, so putting a predicted hash into that file changes the result. Amending, post-commit rewriting,

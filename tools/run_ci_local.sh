@@ -410,6 +410,8 @@ require_tracked_file perl/LinkedSpec/MCPWire.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
+require_tracked_file scripts/check_memory_commit_pointer.sh
+require_tracked_file tools/test_memory_commit_pointer.sh
 require_tracked_file scripts/check_doctrines.sh
 require_tracked_file scripts/check_diagnosis_evidence.sh
 require_tracked_file scripts/check_readme_stability.sh
@@ -453,7 +455,8 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
  tools/check_mcp_six_runtime.sh \
- scripts/check_readme_stability.sh \
+ scripts/check_memory_commit_pointer.sh scripts/check_readme_stability.sh \
+ tools/test_memory_commit_pointer.sh \
  tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
@@ -504,6 +507,9 @@ perl -c -Iperl perl/LinkedSpec/MCPContractRuntime.pm
 perl -c -Iperl perl/LinkedSpec/MCPServer.pm
 perl -c -Iperl perl/LinkedSpec/MCPWire.pm
 perl -c -Iperl t/phase0_regression.t
+
+log "checking the phase-aware MEMORY activation-commit pointer"
+bash tools/test_memory_commit_pointer.sh
 
 log "checking machine-readable backend capability census"
 perl tools/check_capability_conformance.pl

@@ -7,10 +7,13 @@ This document is the current high-level technical reading of the project shape. 
 - Last refreshed: `2026-07-30`
 - `2026-07-30 satisfiable resume-pointer commit identity`: ADR `0065` corrects the old requirement that tracked
   `MEMORY.md` contain the hash of the commit that contains it. Git remains the sole current-`HEAD` authority;
-  `MEMORY.md` will name the clean `activation_commit`, which is current `HEAD` before a leaf commit and first
+  `MEMORY.md` names the clean `activation_commit`, which is current `HEAD` before a leaf commit and first
   parent `HEAD^1` afterward. Thirty-one consecutive parseable recent pointers already follow that relationship;
-  none contains self, and current history has no merges. Ratification `.0` changes no hook yet; `.1` owns shared
-  hard pre-commit/non-mutating post-commit enforcement, and `.2` owns reconciliation before Dart parity resumes.
+  none contains self, and current history has no merges. Ratification `.0` changes no hook; `.1` implements one
+  read-only phase-aware checker, hard staged pre-commit/non-mutating committed post-commit boundaries, automatic
+  memory/canonical composition, and 11 repository-volume hermetic cases. Complete signoff passes Knowledge Map
+  763/6,194, mdBook, all seven doctrines, containment/moved-root, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in
+  637 seconds. `.2` independently recomposes the committed state before Dart parity resumes.
 - `2026-07-30 expressive self-containment / EBNF-like profile direction`: ADR `0064` and
   `SPEC-LANGUAGE-SELF-CONTAINMENT` define `.spec` closure inside LinkedSpec's grammar, recursion, cursor/capture,
   scoped state, callable/control, transformation, and result domain without granting ambient filesystem/process/

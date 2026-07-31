@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.1 — enforce the activation boundary
+
+`MEMORY.md` now records a truthful `activation_commit` rather than claiming the new commit can contain its own
+hash. One read-only `scripts/check_memory_commit_pointer.sh` owns three exact views: staged `MEMORY.md` must name
+current `HEAD` before commit, committed `HEAD:MEMORY.md` must name first parent `HEAD^1` afterward, and automatic
+doctrine mode selects an unambiguous worktree/index/committed view. The initial commit uses the explicit `root`
+sentinel, and commit prefixes are resolved to exact commit objects before comparison.
+
+The pre-commit hook makes the staged boundary a hard gate; the post-commit hook remains non-mutating recovery
+verification; the memory-architecture check and canonical local CI compose the same checker. Eleven hermetic cases
+run in managed repository-volume scratch and cover initial/ordinary pre, post, and auto success plus malformed,
+stale, duplicate, unstaged-preparation, and staged-plus-unstaged ambiguity. Workflow/bootstrap/ADR/Knowledge,
+historical task owners, roadmaps, live architecture, and the mdBook now state the same satisfiable contract. The
+root README and all parser/runtime/backend/public-DSL behavior remain unchanged.
+
+Focused syntax, pointer, memory, Knowledge Map 763/6,194, seven-doctrine, whitespace, and mdBook 79 files /
+13,896 KiB checks pass. The canonical gate passes the new 11-case test, all contracts/admissions, project-data
+containment and moved-root proof, CLI 66/66 in both option environments, RAM 54%, and Phase 0 1,031/1,031 in
+637 seconds. Its first attempt correctly rejected a missing staged TOOLBOX acceptance checklist; adding the exact
+six-label evidence to the owning leaf made the doctrine and complete rerun green.
+
 ## 2026-07-30 — MEMORY-COMMIT-POINTER-ENFORCEMENT.0 — ratify a satisfiable commit pointer
 
 ADR `0065` and a dedicated corrective task tree replace the impossible requirement that tracked `MEMORY.md`

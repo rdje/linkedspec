@@ -42,10 +42,10 @@ MEMORY.md verification via post-commit hook, and backfill the book with the accu
   Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `LINKEDSPEC-LOW-EFFORT.2`
-  Status: `done` (verification-only hook; auto-regeneration wording superseded)
+  Status: `done` (historical exact-HEAD invariant superseded by ADR `0065`; verification-only property retained)
   Goal: `Add post-commit verification for the MEMORY.md current-state pointer.`
-  Acceptance: `After a commit, .githooks/post-commit checks whether MEMORY.md latest_commit contains the current HEAD hash and emits a soft warning on drift. The hook does not rewrite MEMORY.md automatically.`
-  Verification: `classified by TASK-TREE-METADATA-HYGIENE.2 from .githooks/post-commit: the hook is verification-only and warns when latest_commit lacks a parseable hash`
+  Acceptance: `Historical acceptance required latest_commit == current HEAD and a soft non-mutating warning. ADR 0065 proves the equality self-referential and supersedes only that comparison: current enforcement checks activation_commit == HEAD before commit and HEAD^1 afterward while retaining non-mutating post-commit verification.`
+  Verification: `superseded by MEMORY-COMMIT-POINTER-ENFORCEMENT.0-.1; shared checker has 11 hermetic phase cases and the hook remains verification-only`
   Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `LINKEDSPEC-LOW-EFFORT.3`
@@ -97,3 +97,6 @@ MEMORY.md verification via post-commit hook, and backfill the book with the accu
 - `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` reconciled stale frontier, verification, and commit rows against
   the central completed-tree index. The post-commit hook wording was corrected to match the current implementation:
   verification-only soft warning, not automatic MEMORY.md rewriting.
+- `2026-07-30`: ADR `0065` / `MEMORY-COMMIT-POINTER-ENFORCEMENT.0-.1` superseded the impossible
+  exact-self-HEAD comparison. The original non-mutating verification goal remains; the committed pointer now names
+  exact first-parent activation authority.

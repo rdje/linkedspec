@@ -10,8 +10,9 @@ point back here. The system of record is **`README.md`** (the project) +
 1. Read **`README.md`** — project objective, layout, standard commands.
 2. Read **`MEMORY_ARCHITECTURE.md`** — the durable memory system (MANDATORY; it is
    mechanically enforced — see Enforcement below).
-3. Resume from **`MEMORY.md`** — the bounded layer-A resume pointer: latest commit, the
-   active task-tree frontier leaf, the single next action, any in-flight uncommitted work.
+3. Derive current `HEAD` from Git, then resume from **`MEMORY.md`** — the bounded
+   layer-A pointer: clean leaf `activation_commit`, active task-tree frontier leaf,
+   the single next action, any in-flight uncommitted work.
 4. Read **`SESSION_BOOTSTRAP.md`** and open the active **task-tree** under `docs/tasks/`
    (index: `docs/TASK_TREE.md`); its frontier row is your precise next step.
 5. Pull only the relevant **decision records** under `docs/decisions/` (index: `INDEX.md`).

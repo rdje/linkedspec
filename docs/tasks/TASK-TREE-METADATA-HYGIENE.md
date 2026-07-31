@@ -134,6 +134,10 @@ agents can determine the true open/closed task state without re-auditing old tas
   an explicit deferred non-goal; those deferred rows are not stale live frontiers. `.2` also corrected stale
   `LINKEDSPEC-LOW-EFFORT.2` wording after verifying `.githooks/post-commit` is verification-only: it warns when
   `MEMORY.md` lacks a parseable `latest_commit` hash or drifts from HEAD, but it does not rewrite `MEMORY.md`.
+  This is historical 2026-07-08 evidence: ADR `0065` and
+  `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` later replace the self-referential comparison with
+  phase-aware `activation_commit == HEAD` before commit / `HEAD^1` afterward while retaining
+  non-mutating post-commit behavior.
 - `2026-07-08`: `.3` chose a narrow structural gate rather than a broad historical metadata gate. The enforced
   invariant is: task files whose top metadata says `done`, `completed`, or `exhausted` must not advertise
   `pending`, `active`, `in_progress`, or `blocked` status cells in their `Current Frontier` table. Exploratory

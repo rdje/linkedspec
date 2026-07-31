@@ -68,7 +68,7 @@ blob. Keep four layers, each with its own lifecycle:
 
 | Layer | Holds | Lifecycle | Lives in | Read when |
 |---|---|---|---|---|
-| **A — Resume pointer** | where we are *now*; the single next action; latest commit; any in-flight uncommitted work | **Overwritten** each update; **hard size cap** | one bounded file — the demoted `MEMORY.md` | first, on every resume |
+| **A — Resume pointer** | where we are *now*; the single next action; clean leaf-activation commit; any in-flight uncommitted work | **Overwritten** each update; **hard size cap** | one bounded file — the demoted `MEMORY.md` | first, on every resume |
 | **B — Work memory** | what is being built/decided, per unit of work: goal, status, frontier, decisions, verification, commit refs | **Append within a unit**; the unit is the addressable file | the **task-tree** files + their index | the active unit on resume; any unit on demand |
 | **C — Decision / fact records** | durable cross-cutting facts: constraints, learnings, conventions, preferences, environment quirks, "tried X, failed because Y" | **Append once, dedupe, supersede** (never silently rewrite) | one file per record (ADR-style) under `docs/decisions/` + an index | when relevant, by topic/index |
 | **D — Audit trail** | the full history of *what changed and when* | **Append-only, immutable** | `git log` (+ a human-readable `CHANGELOG`) | on demand only — never reloaded wholesale |
@@ -112,8 +112,9 @@ A fresh agent (same or different model/harness) resumes deterministically and wi
 
 1. Read the **tool-neutral entrypoint (§7)** → it names this file and the task-tree +
    commit conventions.
-2. Read the **resume pointer (A)** → current commit, active work unit, the single next
-   action, any in-flight uncommitted work.
+2. Derive the current commit from Git (`git rev-parse HEAD`), then read the **resume pointer
+   (A)** → clean activation commit, active work unit, the single next action, any
+   in-flight uncommitted work.
 3. Open the **active task-tree unit (B)** → its frontier row *is* the precise next step.
 4. Pull only the **decision records (C)** relevant to that step.
 5. Consult **`git log` (D)** only if deeper history is needed.
@@ -152,6 +153,12 @@ lazily — when a durable fact is established or archaeology is caught.
 - **No history** — that's git (D) and the task-tree logs (B).
 - **Prefer derived over hand-written** — a small script can regenerate the
   current-state block from `git log` + each tree's frontier row, so it cannot drift.
+- **No self-hash** — Git is the sole owner of current commit identity. A tracked file
+  cannot contain the hash of the commit that contains it because changing the embedded
+  value changes the content-addressed commit.
+- **Stable activation boundary** — `activation_commit` names the clean `HEAD` from
+  which the leaf started. It equals `HEAD` before the leaf commit and `HEAD^1`
+  afterward. The initial repository commit uses the explicit `root` sentinel.
 
 Existing bloat is **not deleted** — it is already preserved in git history. You simply
 stop carrying it forward.
@@ -167,7 +174,8 @@ stop carrying it forward.
 - Durable facts/decisions live in `docs/decisions/`.
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `<hash>` — "<subject>"   (ahead of origin: <N>; push at ~<threshold>)
+- activation_commit: `<hash | root>` — clean HEAD at leaf activation
+- latest_completed_leaf: `<LEAF-ID>` — planned/landed commit subject `<subject>`
 - active_work_unit: `<TASK-TREE-ID>`  →  frontier leaf: `<LEAF-ID>` (<status>)
 - next_action: <one concrete sentence>
 - in_flight_uncommitted: <none | what is staged/unsaved and how to finish it>
@@ -233,17 +241,22 @@ catches what the previous misses; together they make the easy path the compliant
 `.windsurfrules` (Windsurf), `GEMINI.md` (Gemini CLI). Whatever tool a user brings, its
 first read routes the agent here. Keep each to one line + a pointer so they can't drift.
 
-**E2 — One self-check script (a single source of truth for the invariants).** A tracked
-script (e.g. `scripts/check_memory_architecture.sh`) that exits **nonzero** on any
+**E2 — One composed self-check (a single source of truth for the invariants).** The tracked
+`scripts/check_memory_architecture.sh` exits **nonzero** on any
 violation: `MEMORY.md` missing or over the line cap; a bootstrap file missing or not
 pointing at `MEMORY_ARCHITECTURE.md` + `README.md`; `docs/decisions/` missing or its
-index out of sync with the record files. Everything below calls this one script, so the
-rules live in exactly one place and can't fork.
+index out of sync with the record files. It composes the pure phase-aware
+`scripts/check_memory_commit_pointer.sh` owner: dirty preparation validates the worktree
+or index against current `HEAD`; clean committed state validates `HEAD:MEMORY.md`
+against `HEAD^1`. Everything below calls the composed check, so the rules cannot fork.
 
 **E3 — Git hooks (fast local gate).** Tracked hooks under `.githooks/`, activated by
 `git config core.hooksPath .githooks` (ship a one-line installer and name it in the
 bootstrap): `pre-commit` runs the self-check (a non-compliant tree can't commit);
-`commit-msg` rejects a subject lacking the work-unit id pattern (enforces §8). *Honest
+`pre-commit` first hard-checks the staged activation pointer against current `HEAD`,
+then runs the composed doctrine gate; `post-commit` non-mutatingly verifies the committed
+pointer against `HEAD^1`; `commit-msg` rejects a subject lacking the work-unit id
+pattern (enforces §8). *Honest
 limit:* hooks are local and a determined user can `--no-verify` or skip `hooksPath` —
 they catch the common case cheaply; they are not the backstop.
 
@@ -282,12 +295,22 @@ done
 exit $fail
 ```
 
-**Reference hooks** (`.githooks/pre-commit`, `.githooks/commit-msg`):
+**Reference hooks** (`.githooks/pre-commit`, `.githooks/post-commit`,
+`.githooks/commit-msg`):
 
 ```bash
 # .githooks/pre-commit
 #!/usr/bin/env bash
-exec "$(git rev-parse --show-toplevel)/scripts/check_memory_architecture.sh"
+ROOT="$(git rev-parse --show-toplevel)"
+"$ROOT/scripts/check_memory_commit_pointer.sh" --phase pre-commit
+exec "$ROOT/scripts/check_memory_architecture.sh"
+```
+```bash
+# .githooks/post-commit
+#!/usr/bin/env bash
+ROOT="$(git rev-parse --show-toplevel)"
+"$ROOT/scripts/check_memory_commit_pointer.sh" --phase post-commit ||
+  echo "post-commit: open a task-tree-owned pointer correction before another commit" >&2
 ```
 ```bash
 # .githooks/commit-msg
@@ -316,7 +339,8 @@ three commands:
 **Copy these verbatim** (they make no project-specific assumptions):
 - `MEMORY_ARCHITECTURE.md` — this standard.
 - `scripts/check_memory_architecture.sh` — the single source of truth for the invariants.
-- `.githooks/pre-commit`, `.githooks/commit-msg` — the local gate.
+- `scripts/check_memory_commit_pointer.sh` — the pure phase-aware commit-boundary owner.
+- `.githooks/pre-commit`, `.githooks/post-commit`, `.githooks/commit-msg` — the local gate.
 
 **Add these one-line pointer files** (one per harness you might use; each just points at
 `README.md` + `MEMORY_ARCHITECTURE.md`):

@@ -1,7 +1,7 @@
 # ADR 0065: MEMORY records the clean activation commit, while Git owns current HEAD
 
 - Date: 2026-07-30
-- Status: accepted; enforcement pending under `MEMORY-COMMIT-POINTER-ENFORCEMENT.1`
+- Status: accepted; enforcement implemented under `MEMORY-COMMIT-POINTER-ENFORCEMENT.1`; closeout pending `.2`
 - Tags: architecture, memory, continuity, git, commit-workflow, hooks, enforcement, task-tree
 
 ## Context
@@ -62,9 +62,9 @@ an impossible self-hash. Hermetic tests use only repository-volume disposable st
 
 ### 5. Migrate canonical owners together
 
-Implementation leaf `.1` will update `MEMORY.md`, `MEMORY_ARCHITECTURE.md`, `COMMIT.md`, both hooks as needed,
-the shared memory checker, and focused tests as one atomic workflow change. Closeout `.2` will supersede the
-contradictory historical acceptance wording and reconcile live/book/Knowledge owners.
+Implementation leaf `.1` updates `MEMORY.md`, `MEMORY_ARCHITECTURE.md`, `COMMIT.md`, both hooks, the shared
+memory checker, focused tests, and the directly affected historical/live/book/Knowledge owners as one atomic
+workflow change. Closeout `.2` independently recomposes that committed state and closes the temporary detour.
 
 ## Consequences
 

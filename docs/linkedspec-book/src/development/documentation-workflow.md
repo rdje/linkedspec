@@ -91,9 +91,12 @@ equals `HEAD^1` after its normal commit lands. The leaf ID in the commit subject
 activation boundary to the landing commit. Before committing, the rest of `MEMORY.md` is written as the intended
 clean post-landing handoff: completed leaf, next action, and no uncommitted work.
 
-`MEMORY-COMMIT-POINTER-ENFORCEMENT.0` ratifies this contract. Until implementation leaf `.1` lands, the existing
-post-commit hook still checks the older self-referential `latest_commit == HEAD` premise and may emit its legacy
-warning; `.1` owns the field migration and one shared hard pre-commit/non-mutating post-commit checker.
+`MEMORY-COMMIT-POINTER-ENFORCEMENT.0` ratifies this contract, and `.1` implements it through one
+read-only phase-aware checker. The pre-commit hook is a hard gate over staged `MEMORY.md` and current
+`HEAD`. The post-commit hook is a non-mutating verification signal over committed `HEAD:MEMORY.md`
+and `HEAD^1`. The canonical local gate uses an automatic mode that selects a worktree, staged, or clean
+committed view and rejects ambiguous staged-plus-unstaged pointer edits. Hermetic tests cover the initial
+`root` sentinel, ordinary success, malformed/duplicate fields, genuine drift, and phase ambiguity.
 
 ## Definition of done
 

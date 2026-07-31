@@ -5,18 +5,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `b9c3e676` — legacy field carrying this leaf's clean activation boundary; ADR `0065` renames it
-  to `activation_commit` in implementation `.1` (108/300; no push).
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.0`; its long-horizon direction is durably parked.
-- active_leaf: `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` — behavior-free contract ratification from clean `b9c3e676`.
-- active_scope: ADR `0065`, task/index/roadmap/live/book/Knowledge alignment for a satisfiable commit pointer; no
-  hook/checker/runtime/parser/backend behavior in `.0`.
-- active_progress: 31/31 consecutive parseable current pointers equal exact first parent, 0 equal self; the 2,418-
-  commit branch has 0 merges. Git owns current HEAD; activation_commit is HEAD before and HEAD^1 after a leaf.
-- active_exclusions: hook/checker/test implementation, historical wording reconciliation, root README, Dart
-  callable behavior, and push.
-- next_after_clean_commit: activate `.1` task-tree-first, implement/test the shared two-phase checker, then close
-  `.2` cleanly before Dart `.11.5.1`; no push.
+- activation_commit: `ddad65aa` — clean `MEMORY-COMMIT-POINTER-ENFORCEMENT.1` activation HEAD
+  (110/300 after landing; no push); Git derives current landing identity.
+- latest_completed_leaf: `MEMORY-COMMIT-POINTER-ENFORCEMENT.1`; planned subject
+  `MEMORY-COMMIT-POINTER-ENFORCEMENT.1 - enforce activation commit pointer`.
+- active_leaf: `MEMORY-COMMIT-POINTER-ENFORCEMENT.2` — pending independent committed-state recomposition.
+- active_scope: no-change pointer/hook/workflow/doc audit, independent signoff, close corrective tree, restore Dart.
+- active_progress: `.1` implements one phase-aware checker, hard staged pre-check, non-mutating committed post-check,
+  E2/E4 composition, 11 hermetic cases, and aligned owners; signoff is complete.
+- active_exclusions: parser/runtime/backend behavior, Dart callable parity, root README, merge workflow, history
+  rewriting, post-commit file mutation, and push.
+- in_flight_uncommitted: none after the `.1` landing commit.
+- next_after_clean_commit: activate no-change reconciliation/closeout `.2`, then Dart `.11.5.1`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -42,11 +42,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 107/300 after `4aebf906`; no push.
+- push_policy: hard lock at 300 new local commits; counter 109/300 after `ddad65aa`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: continuity `.0` passes KM 763/6,193, book 79/13,892 before cleanup, memory 52/60, all 7
-  doctrines, containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 643s.
-- blockers: none; commit/brief-clear `.0`, then activate implementation `.1`; no Dart pivot or push.
+- canonical_state: `.1` passed KM 763/6,194, book 79/13,896, all 7 doctrines, pointer 11, CLI 66x2, RAM 54%,
+  and Phase 0 1,031/1,031 in 637s.
+- blockers: none; land `.1`, then independently reconcile/close `.2`; no Dart pivot or push.

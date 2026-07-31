@@ -12,6 +12,9 @@ source "$ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$ROOT/.githooks/pre-commit" "$@"
 cd "$ROOT"
 
+# Hard phase check: the staged pointer must name the clean HEAD from which this commit starts.
+"$ROOT/scripts/check_memory_commit_pointer.sh" --phase pre-commit
+
 # Knowledge Map is DERIVED — regenerate + stage (so it is always in sync at zero agent cost) BEFORE
 # the driver's check_knowledge_map verifies sync. The regenerate-and-stage step makes drift
 # structurally impossible.

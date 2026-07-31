@@ -37,6 +37,17 @@ else
   note "MEMORY.md (the resume pointer) is missing"
 fi
 
+# 2b) The pointer's commit identity must be satisfiable in both dirty preparation and clean committed state.
+if [[ -x scripts/check_memory_commit_pointer.sh ]]; then
+  if scripts/check_memory_commit_pointer.sh --phase auto --repo-root "$ROOT_DIR"; then
+    ok "MEMORY.md activation commit matches its current Git phase"
+  else
+    fail=1
+  fi
+else
+  note "scripts/check_memory_commit_pointer.sh is missing or not executable"
+fi
+
 # 3) Tool-neutral bootstrap pointers must exist and route to the standard (E1).
 for f in "${BOOTSTRAP_FILES[@]}"; do
   if [[ -f "${f}" ]]; then

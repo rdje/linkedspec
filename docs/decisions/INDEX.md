@@ -75,7 +75,7 @@ changed* lives in git (layer D), not here.
 | [0062](0062-recurring-mcp-six-runtime-composition.md) | Recurring MCP proof composes six runtimes and all twenty semantic responses | 2026-07-29 | accepted/implemented; repair, all-twenty proof, promotion, recurring closeout, and MCP-parent closeout complete | architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity |
 | [0063](0063-bounded-readme-landing-page.md) | README is a bounded stable landing page | 2026-07-29 | accepted; content/enforcement implemented by `.1`; adoption closed by `.2` | documentation, readme, doctrine, maintenance, navigation, local-ci |
 | [0064](0064-expressive-self-containment-and-ebnf-profile.md) | Expressive self-containment and EBNF-like authoring use one semantic core | 2026-07-30 | accepted direction; contract and implementation pending | architecture, dsl, expressiveness, self-containment, ebnf, frontend, lowering, source-map, portability, parity |
-| [0065](0065-satisfiable-memory-activation-commit-pointer.md) | MEMORY records the clean activation commit, while Git owns current HEAD | 2026-07-30 | accepted; enforcement pending | architecture, memory, continuity, git, commit-workflow, hooks, enforcement, task-tree |
+| [0065](0065-satisfiable-memory-activation-commit-pointer.md) | MEMORY records the clean activation commit, while Git owns current HEAD | 2026-07-30 | accepted; enforcement implemented, closeout pending | architecture, memory, continuity, git, commit-workflow, hooks, enforcement, task-tree |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
