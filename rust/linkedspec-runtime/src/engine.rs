@@ -33,7 +33,7 @@
 //! child rule to start with. The default (0) uses the first regex.
 
 use crate::helpers::regex_engine::CompiledAlternation;
-use crate::runtime::{RuntimeContext, RuntimeVarKind};
+use crate::runtime::{CallableCodeblockFailure, RuntimeContext, RuntimeVarKind};
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use crate::{
     RuntimeDiagnostic, RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputExecutionError,
@@ -2205,6 +2205,12 @@ impl Engine {
                 regex_index: failure.and_then(|context| context.regex_index),
                 expected_regex_index: failure.and_then(|context| context.expected_regex_index),
                 actual_regex_index: failure.and_then(|context| context.actual_regex_index),
+                callable_name: failure.and_then(|context| context.callable_name.clone()),
+                expected: failure.and_then(|context| context.expected.clone()),
+                got: failure.and_then(|context| context.got),
+                value_kind: failure.and_then(|context| context.value_kind.map(str::to_string)),
+                name: failure.and_then(|context| context.name.clone()),
+                cycle: failure.and_then(|context| context.cycle.clone()),
                 handler_source_label,
             },
         )
@@ -3254,6 +3260,13 @@ impl Engine {
                 AccessSegment::Key { .. } => false,
                 AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
             }),
+            Expr::ValueAccess { receiver, segments } => {
+                Self::expr_calls_rule(receiver, rule_label)
+                    || segments.iter().any(|segment| match segment {
+                        AccessSegment::Key { .. } => false,
+                        AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
+                    })
+            }
             Expr::ArrayLiteral { items } => items
                 .iter()
                 .any(|item| Self::expr_calls_rule(item, rule_label)),
@@ -3313,6 +3326,13 @@ impl Engine {
             Expr::IndexedVar { name, index } => name == "retv" || Self::expr_reads_retv(index),
             Expr::NestedAccess { base, segments } => {
                 base == "retv"
+                    || segments.iter().any(|segment| match segment {
+                        AccessSegment::Key { .. } => false,
+                        AccessSegment::Index { expr } => Self::expr_reads_retv(expr),
+                    })
+            }
+            Expr::ValueAccess { receiver, segments } => {
+                Self::expr_reads_retv(receiver)
                     || segments.iter().any(|segment| match segment {
                         AccessSegment::Key { .. } => false,
                         AccessSegment::Index { expr } => Self::expr_reads_retv(expr),
@@ -4507,6 +4527,40 @@ impl Engine {
         }
     }
 
+    fn eval_access_value(
+        &self,
+        mut current: RuntimeValue,
+        segments: &[AccessSegment],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        for segment in segments {
+            current = match segment {
+                AccessSegment::Key { value } => match current {
+                    RuntimeValue::Hash(entries) => entries
+                        .into_iter()
+                        .find(|(key, _)| key == value)
+                        .map(|(_, value)| value)
+                        .unwrap_or(RuntimeValue::Undef),
+                    _ => RuntimeValue::Undef,
+                },
+                AccessSegment::Index { expr } => {
+                    let index = self
+                        .eval_expr(expr, ctx, rule_label)?
+                        .as_number()
+                        .unwrap_or(0.0) as usize;
+                    match current {
+                        RuntimeValue::Array(items) => {
+                            items.into_iter().nth(index).unwrap_or(RuntimeValue::Undef)
+                        }
+                        _ => RuntimeValue::Undef,
+                    }
+                }
+            };
+        }
+        Ok(current)
+    }
+
     /// Evaluate an expression tree against the runtime context.
     fn eval_expr(
         &self,
@@ -4534,6 +4588,22 @@ impl Engine {
                     return Ok(value);
                 }
                 if let Some(function) = self.spec.find_function(name) {
+                    let keyword_count = args
+                        .iter()
+                        .filter(|arg| matches!(arg, Arg::Keyword { .. }))
+                        .count();
+                    if keyword_count > 0 {
+                        ctx.capture_portable_diagnostic_failure(
+                            "user_function_invocation",
+                            "user_function_keyword_arguments_unsupported",
+                            "Rust user function invocation failed",
+                            Some(rule_label),
+                        );
+                        return Err(format!(
+                            "user function '{}' accepts positional arguments only, got {} keyword argument(s) in rule '{}'",
+                            function.name, keyword_count, rule_label
+                        ));
+                    }
                     if let Some(signature) = &function.signature {
                         if args.len() < signature.min_arity {
                             return Err(format!(
@@ -4591,30 +4661,11 @@ impl Engine {
                 Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
             }
             Expr::NestedAccess { base, segments } => {
-                let mut current = ctx.get_bare_value(base);
-                for segment in segments {
-                    current = match segment {
-                        AccessSegment::Key { value } => match current {
-                            RuntimeValue::Hash(entries) => entries
-                                .iter()
-                                .find(|(key, _)| key == value)
-                                .map(|(_, value)| value.clone())
-                                .unwrap_or(RuntimeValue::Undef),
-                            _ => RuntimeValue::Undef,
-                        },
-                        AccessSegment::Index { expr } => {
-                            let idx_val = self.eval_expr(expr, ctx, rule_label)?;
-                            let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
-                            match current {
-                                RuntimeValue::Array(items) => {
-                                    items.get(idx).cloned().unwrap_or(RuntimeValue::Undef)
-                                }
-                                _ => RuntimeValue::Undef,
-                            }
-                        }
-                    };
-                }
-                Ok(current)
+                self.eval_access_value(ctx.get_bare_value(base), segments, ctx, rule_label)
+            }
+            Expr::ValueAccess { receiver, segments } => {
+                let current = self.eval_expr(receiver, ctx, rule_label)?;
+                self.eval_access_value(current, segments, ctx, rule_label)
             }
             Expr::ArrayLiteral { items } => {
                 let mut values = Vec::new();
@@ -4777,6 +4828,113 @@ impl Engine {
         ctx.restore_variable_stores(caller_stores);
         ctx.exit_user_function(&function.name);
         result.map_err(|err| format!("user function '{}': {}", function.name, err))
+    }
+
+    fn execute_bound_codeblock_call(
+        &self,
+        name: &str,
+        raw_args: &[Arg],
+        args: &[RuntimeValue],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Option<Result<RuntimeValue, String>> {
+        if !ctx.has_bare_binding(name) {
+            return None;
+        }
+        let value = ctx.get_bare_value(name);
+        let RuntimeValue::Codeblock(codeblock) = value else {
+            let value_kind = RuntimeContext::binding_value_kind(&value);
+            ctx.capture_callable_codeblock_failure(
+                rule_label,
+                CallableCodeblockFailure::ValueNotCallable {
+                    callable_name: name.to_string(),
+                    value_kind,
+                },
+            );
+            return Some(Err(format!(
+                "value_not_callable callable_name={name:?} value_kind={value_kind:?} rule_label={rule_label:?}"
+            )));
+        };
+
+        let keyword_count = raw_args
+            .iter()
+            .filter(|arg| matches!(arg, Arg::Keyword { .. }))
+            .count();
+        if keyword_count > 0 {
+            ctx.capture_callable_codeblock_failure(
+                rule_label,
+                CallableCodeblockFailure::KeywordArguments {
+                    callable_name: name.to_string(),
+                    got: keyword_count,
+                },
+            );
+            return Some(Err(format!(
+                "codeblock_keyword_arguments_unsupported callable_name={name:?} expected={:?} got={keyword_count} rule_label={rule_label:?}",
+                "positional arguments"
+            )));
+        }
+
+        let literal = codeblock.literal();
+        let signature = &literal.signature;
+        let arity_matches = args.len() >= signature.min_arity
+            && signature
+                .max_arity
+                .is_none_or(|maximum| args.len() <= maximum);
+        if !arity_matches {
+            let expected = match signature.max_arity {
+                Some(maximum) if maximum == signature.min_arity => {
+                    format!("exactly {}", signature.min_arity)
+                }
+                _ => format!("at least {}", signature.min_arity),
+            };
+            ctx.capture_callable_codeblock_failure(
+                rule_label,
+                CallableCodeblockFailure::Arity {
+                    callable_name: name.to_string(),
+                    expected: expected.clone(),
+                    got: args.len(),
+                },
+            );
+            return Some(Err(format!(
+                "codeblock_arity_mismatch callable_name={name:?} expected={expected:?} got={} rule_label={rule_label:?}",
+                args.len()
+            )));
+        }
+
+        if let Err(cycle) = ctx.enter_codeblock(name) {
+            ctx.capture_callable_codeblock_failure(
+                rule_label,
+                CallableCodeblockFailure::Recursion {
+                    callable_name: name.to_string(),
+                    cycle: cycle.clone(),
+                },
+            );
+            return Some(Err(format!(
+                "codeblock_recursion_unsupported callable_name={name:?} cycle={cycle:?} rule_label={rule_label:?}"
+            )));
+        }
+
+        let mut bindings = Vec::with_capacity(
+            signature.positional_params.len() + usize::from(signature.rest_param.is_some()),
+        );
+        for (param, value) in signature.positional_params.iter().zip(args.iter()) {
+            bindings.push(ctx.enter_scoped_scalar_binding(param, value.clone()));
+        }
+        if let Some(rest_param) = signature.rest_param.as_deref() {
+            let rest = RuntimeValue::Array(args[signature.min_arity..].to_vec());
+            bindings.push(ctx.enter_scoped_scalar_binding(rest_param, rest));
+        }
+
+        let body = linkedspec_core::expr::CodeBlock {
+            statements: literal.body_ast.statements.clone(),
+        };
+        let codeblock_label = format!("codeblock '{name}'");
+        let result = self.eval_block_value(&body, ctx, &codeblock_label);
+        for binding in bindings.into_iter().rev() {
+            ctx.exit_scoped_variable_binding(binding);
+        }
+        ctx.exit_codeblock(name);
+        Some(result.map_err(|error| format!("codeblock '{name}': {error}")))
     }
 
     fn is_statement_only_array_end_mutation_method(method: &str) -> bool {
@@ -8470,6 +8628,22 @@ impl Engine {
             }
             "endswitch" | "endcase" => Ok(RuntimeValue::Undef),
             _ => {
+                if let Some(result) =
+                    self.execute_bound_codeblock_call(name, raw_args, args, ctx, rule_label)
+                {
+                    return result;
+                }
+                if ctx.has_active_codeblock() {
+                    ctx.capture_callable_codeblock_failure(
+                        rule_label,
+                        CallableCodeblockFailure::UnknownHelper {
+                            name: name.to_string(),
+                        },
+                    );
+                    return Err(format!(
+                        "unknown_helper name={name:?} rule_label={rule_label:?}"
+                    ));
+                }
                 eprintln!(
                     "warning: unknown helper '{}' in rule '{}' — returning undef",
                     name, rule_label
@@ -10429,5 +10603,40 @@ Boundary: /END/
         let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "ab,héllo");
         assert_eq!(acc[1].as_f64().unwrap(), 8.0);
+    }
+
+    #[test]
+    fn callable_codeblock_restores_parameters_and_active_identity_after_body_failure() {
+        let parsed = parse_spec("Top::\n /x/\n").unwrap();
+        validate(&parsed).unwrap();
+        let engine = Engine::new(compile(&parsed).unwrap());
+        let block = CodeBlock::parse(r#"cb = {|value| missing() }"#).unwrap();
+        let Expr::AssignScalar { value, .. } = &block.statements[0].expr else {
+            panic!("expected callable assignment");
+        };
+        let Expr::CodeblockLiteral(literal) = value.as_ref() else {
+            panic!("expected callable literal");
+        };
+
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_scalar("value", RuntimeValue::Scalar("outer".into()));
+        ctx.set_scalar(
+            "cb",
+            RuntimeValue::Codeblock(linkedspec_core::types::CodeblockValue::new(literal.clone())),
+        );
+        let raw_args = [Arg::Positional(Expr::StringLiteral {
+            value: "inner".into(),
+        })];
+        let evaluated = [RuntimeValue::Scalar("inner".into())];
+        let error = engine
+            .execute_bound_codeblock_call("cb", &raw_args, &evaluated, &mut ctx, "Top")
+            .expect("bound callable")
+            .unwrap_err();
+        assert!(error.contains("unknown_helper"), "{error}");
+        assert_eq!(
+            ctx.get_scalar("value"),
+            RuntimeValue::Scalar("outer".into())
+        );
+        assert!(!ctx.has_active_codeblock());
     }
 }

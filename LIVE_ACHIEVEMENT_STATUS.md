@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Rust callable-codeblock dynamic invocation signoff-complete
+
+Leaf `.11.4.2` now executes bound Rust callable-codeblock values after controls, helpers, and registered user
+functions. Ordered arguments are copied into temporary fixed/rest bindings, prior bindings restore on every exit,
+nonparameter stores remain caller-visible, and local return/final values support access, receiver chaining, and
+standalone discard. Structured failures retain exact neutral arity, keyword, value-kind, unknown-helper, and
+ordered recursion-cycle fields. The closure-free record remains identical across native, compiled JSON,
+generated-plan, and emitted-source execution.
+
+Focused proof passes the neutral checker, callable suite 13/13, variadic 7/7, semantic query 5/5, and the legacy
+generic unknown-helper regression. The complete Rust operational gate passes all package/integration/classifier,
+build, storage, and CLI 66x2 proof. Canonical CI passes all seven doctrines, exact callable/semantic/MCP contracts
+and admissions, containment/moved-root, CLI 66x2, RAM 44%, and Phase 0 1,031/1,031 in 763 seconds. Knowledge Map
+is 760/6,165 and mdBook is 79 files / 13,864 KiB before exact cleanup. The leaf is ready for its clean commit;
+generic contextual final blocks and capability promotion have not moved, and `.11.4.3` activates only afterward.
+
 ## 2026-07-30 — Rust callable-codeblock construction signoff-complete
 
 Leaf `.11.4.1` now implements exact inert Rust `{|params| body }` / `{|| body }` construction. The neutral
@@ -12,8 +28,8 @@ Focused proof passes seven callable-codeblock tests, variadic 7/7, semantic quer
 package at 193 unit tests plus all integration groups. The full Rust operational gate passes all package tests,
 both long corpus classifiers, primary build, repository-local storage proof, and CLI 66x2. Knowledge Map is
 759/6,156; mdBook and all seven doctrines pass. Canonical CI passes containment/moved-root, CLI 66x2, RAM 55%,
-and Phase 0 1,031/1,031 in 641 seconds. `.11.4.2` owns dynamic invocation; `.11.4.3` retains generic contextual
-final-block equivalence. No push occurs before cadence 300.
+and Phase 0 1,031/1,031 in 641 seconds. `.11.4.2` now implements dynamic invocation; `.11.4.3` retains generic
+contextual final-block equivalence. No push occurs before cadence 300.
 
 ## 2026-07-30 — Semantic introspection public closeout signoff-complete
 

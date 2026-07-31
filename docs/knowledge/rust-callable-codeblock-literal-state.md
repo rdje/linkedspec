@@ -14,7 +14,7 @@ answers:
 date: 2026-07-30
 status: current
 tags: [rust, actionir, codeblock, callable, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.4.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, Unicode character-coordinate spans, inert RuntimeValue state, compiled JSON and generated-source preservation, and semantic codeblock shapes. Seven focused tests cover the neutral literal inventory, nine diagnostics, non-execution, user-function transport, eager-dependency isolation, and descriptors."
+evidence: "FUTURE-PARITY-BACKLOG.11.4.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, Unicode character-coordinate spans, inert RuntimeValue state, compiled JSON and generated-source preservation, and semantic codeblock shapes. Seven focused construction tests cover the neutral literal inventory, nine diagnostics, non-execution, user-function transport, eager-dependency isolation, and descriptors; dynamic invocation subsequently lands in .11.4.2."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract"
 ---
 
@@ -35,8 +35,8 @@ receive and return it as ordinary data. Generated Rust embeds that same serializ
 no `Fn`, closure, or capture object. Semantic binding projection reports `kind = codeblock` plus the exact
 fixed/rest callable signature.
 
-This is construction/state only. Bound-variable dispatch such as `cb(args)` remains owned by
+Construction/state remains inert, while bound-variable dispatch such as `cb(args)` is now current through
 `FUTURE-PARITY-BACKLOG.11.4.2`; generic attached/parenthesized final blocks remain `.11.4.3`.
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],
-[[variadic-callable-signature-seams]].
+[[rust-callable-codeblock-dynamic-invocation]], [[variadic-callable-signature-seams]].

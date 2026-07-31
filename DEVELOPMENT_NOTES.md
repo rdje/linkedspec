@@ -1,5 +1,38 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.2` — dynamic codeblocks belong in the existing call/store engine):
+  Rust already had the right seams: static call arms precede the generic unknown fallback, runtime values clone
+  recursively, scoped bindings snapshot every uniform storage kind, block evaluation owns local final/return
+  results, and emitted source reconstructs one `CompiledSpec`. The smallest robust implementation therefore adds
+  bound-codeblock dispatch only at that fallback, plus an ordered active-name stack and structured portable
+  failure fields. It does not introduce a closure, lexical environment, second evaluator, generated-source
+  special case, or helper-name allowlist.
+
+  Parameter cleanup must cover errors as well as normal results. Enter fixed/rest bindings only after arity,
+  keyword, non-callable, and recursion checks; evaluate the body once; then restore snapshots in reverse and pop
+  the active identity before returning either result. A focused internal failure test proves both a shadowed
+  parameter and the active stack restore after an unknown helper in the body. Dynamic nonparameter mutations stay
+  in the same caller context by design.
+
+  Call-result access is a real expression owner, not string lowering: `Expr::ValueAccess` evaluates its receiver,
+  traverses typed key/index segments, participates in eager dependency analysis, and then feeds existing fluent
+  dispatch. Keyword call data uses the adopted `name: expr` spelling and deliberately does not resurrect retired
+  `name=expr`. Registered user functions reject the now-parseable keyword data before evaluating values, preserving
+  their positional-only contract.
+
+  The focused contract passes 13/13 across native, compiled-JSON, generated-plan, and independently compiled
+  emitted-source roles, all eleven valid calls, all seven failures, restoration, recursive copy, precedence, and
+  effects. Variadic 7/7, semantic query 5/5, and the existing unknown-helper regression also pass. Generic
+  contextual final blocks remain `.11.4.3`; the complete capability is not promoted by explicit invocation.
+
+  Complete signoff passes the full Rust operational gate, including both long classifiers, 197 main integration
+  cases, semantic admission, build/storage proof, and CLI 66x2. The changed production libraries are clean under
+  the repository warning policy. A workspace-wide `clippy --all-targets` probe still reaches unrelated inherited
+  deny-level test debt (for example the existing core-test approximate-constant lint), so that probe is evidence,
+  not a new `.11.4.2` failure or an excuse to broaden this leaf. Canonical CI passes all seven doctrines, exact
+  callable/semantic/MCP contracts and admissions, containment/moved-root, CLI 66x2, RAM 44%, and Phase 0
+  1,031/1,031 in 763 seconds. Knowledge Map is 760/6,165; mdBook is 79 files / 13,864 KiB before cleanup.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.1` — a callable value must be inert data before it becomes executable):
   Rust's existing `BlockValue` is immediate and cannot safely double as a deferred callable. The new
   `CallableCodeblock` therefore owns one versioned signature, exact body/source, typed body AST, and source/body
@@ -25,8 +58,8 @@
   every runtime package test, both long corpus classifiers, the primary build, repository-local project-data
   proof, and both 66/66 CLI environments. The independent canonical gate then passes seven doctrines, exact
   contracts/admissions, containment/moved-root, CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 641 seconds.
-  Invocation, dynamic caller stores, parameter restoration, call diagnostics, and generic contextual final
-  blocks deliberately remain `.11.4.2-.3`.
+  Invocation, dynamic caller stores, parameter restoration, and call diagnostics are now current through
+  `.11.4.2`; generic contextual final blocks deliberately remain `.11.4.3`.
 
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.10` — public closure belongs inside the existing independent semantic
   checker): A new standalone “documentation checker” would create a second place to define semantic scope,

@@ -95,6 +95,9 @@ pub struct RuntimeContext {
     /// Active user-function call stack. User functions are pure MVP value
     /// helpers; recursion is unsupported and must diagnose instead of recursing.
     user_functions_active: Vec<String>,
+    /// Active dynamic codeblock-variable calls. The ordered names retain
+    /// enough identity to reject direct and mutual cycles deterministically.
+    codeblocks_active: Vec<String>,
     /// Scoped child return overrides for action-edge blocks. Perl lowers
     /// `call(child)` inside `-> child { ... }` to the already-dispatched edge
     /// match; this stack lets Rust expose that same value without re-searching.
@@ -150,6 +153,35 @@ pub(crate) struct RuntimeFailureContext {
     pub(crate) regex_index: Option<usize>,
     pub(crate) expected_regex_index: Option<usize>,
     pub(crate) actual_regex_index: Option<usize>,
+    pub(crate) callable_name: Option<String>,
+    pub(crate) expected: Option<String>,
+    pub(crate) got: Option<usize>,
+    pub(crate) value_kind: Option<&'static str>,
+    pub(crate) name: Option<String>,
+    pub(crate) cycle: Option<Vec<String>>,
+}
+
+pub(crate) enum CallableCodeblockFailure {
+    Arity {
+        callable_name: String,
+        expected: String,
+        got: usize,
+    },
+    KeywordArguments {
+        callable_name: String,
+        got: usize,
+    },
+    ValueNotCallable {
+        callable_name: String,
+        value_kind: &'static str,
+    },
+    Recursion {
+        callable_name: String,
+        cycle: Vec<String>,
+    },
+    UnknownHelper {
+        name: String,
+    },
 }
 
 #[derive(Debug, Clone)]
@@ -205,6 +237,7 @@ impl RuntimeContext {
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
             user_functions_active: Vec::new(),
+            codeblocks_active: Vec::new(),
             action_edge_call_results: Vec::new(),
             declaration_scopes: Vec::new(),
             declaration_scope_suppression_depth: 0,
@@ -272,6 +305,12 @@ impl RuntimeContext {
                 regex_index: None,
                 expected_regex_index: None,
                 actual_regex_index: None,
+                callable_name: None,
+                expected: None,
+                got: None,
+                value_kind: None,
+                name: None,
+                cycle: None,
             });
         }
     }
@@ -296,6 +335,12 @@ impl RuntimeContext {
                 regex_index: None,
                 expected_regex_index: None,
                 actual_regex_index: None,
+                callable_name: None,
+                expected: None,
+                got: None,
+                value_kind: None,
+                name: None,
+                cycle: None,
             });
         }
     }
@@ -320,6 +365,91 @@ impl RuntimeContext {
                 regex_index: None,
                 expected_regex_index: None,
                 actual_regex_index: None,
+                callable_name: None,
+                expected: None,
+                got: None,
+                value_kind: None,
+                name: None,
+                cycle: None,
+            });
+        }
+    }
+
+    pub(crate) fn capture_callable_codeblock_failure(
+        &mut self,
+        rule_label: &str,
+        failure: CallableCodeblockFailure,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            let (code, callable_name, expected, got, value_kind, name, cycle) = match failure {
+                CallableCodeblockFailure::Arity {
+                    callable_name,
+                    expected,
+                    got,
+                } => (
+                    "codeblock_arity_mismatch",
+                    Some(callable_name),
+                    Some(expected),
+                    Some(got),
+                    None,
+                    None,
+                    None,
+                ),
+                CallableCodeblockFailure::KeywordArguments { callable_name, got } => (
+                    "codeblock_keyword_arguments_unsupported",
+                    Some(callable_name),
+                    Some("positional arguments".to_string()),
+                    Some(got),
+                    None,
+                    None,
+                    None,
+                ),
+                CallableCodeblockFailure::ValueNotCallable {
+                    callable_name,
+                    value_kind,
+                } => (
+                    "value_not_callable",
+                    Some(callable_name),
+                    None,
+                    None,
+                    Some(value_kind),
+                    None,
+                    None,
+                ),
+                CallableCodeblockFailure::Recursion {
+                    callable_name,
+                    cycle,
+                } => (
+                    "codeblock_recursion_unsupported",
+                    Some(callable_name),
+                    None,
+                    None,
+                    None,
+                    None,
+                    Some(cycle),
+                ),
+                CallableCodeblockFailure::UnknownHelper { name } => {
+                    ("unknown_helper", None, None, None, None, Some(name), None)
+                }
+            };
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage: "callable_codeblock_invocation",
+                summary: "Rust callable codeblock invocation failed",
+                rule_label: Some(rule_label.to_string()),
+                code: Some(code),
+                helper_name: None,
+                actual_arity: None,
+                expected_arity: None,
+                target_rule: None,
+                regex_index: None,
+                expected_regex_index: None,
+                actual_regex_index: None,
+                callable_name,
+                expected,
+                got,
+                value_kind,
+                name,
+                cycle,
             });
         }
     }
@@ -343,6 +473,12 @@ impl RuntimeContext {
                 regex_index: Some(regex_index),
                 expected_regex_index: None,
                 actual_regex_index: None,
+                callable_name: None,
+                expected: None,
+                got: None,
+                value_kind: None,
+                name: None,
+                cycle: None,
             });
         }
     }
@@ -367,6 +503,12 @@ impl RuntimeContext {
                 regex_index: None,
                 expected_regex_index: Some(expected_regex_index),
                 actual_regex_index: Some(actual_regex_index),
+                callable_name: None,
+                expected: None,
+                got: None,
+                value_kind: None,
+                name: None,
+                cycle: None,
             });
         }
     }
@@ -625,11 +767,18 @@ impl RuntimeContext {
         }
     }
 
+    pub(crate) fn has_bare_binding(&self, name: &str) -> bool {
+        self.bare_kinds.contains_key(name)
+            || self.scalars.contains_key(name)
+            || self.arrays.contains_key(name)
+            || self.hashes.contains_key(name)
+    }
+
     pub fn bare_kind(&self, name: &str) -> Option<RuntimeVarKind> {
         self.bare_kinds.get(name).copied()
     }
 
-    fn binding_value_kind(value: &RuntimeValue) -> &'static str {
+    pub(crate) fn binding_value_kind(value: &RuntimeValue) -> &'static str {
         match value {
             RuntimeValue::Array(_) => "array",
             RuntimeValue::Hash(_) => "harray",
@@ -1024,6 +1173,34 @@ impl RuntimeContext {
         {
             self.user_functions_active.remove(index);
         }
+    }
+
+    pub(crate) fn enter_codeblock(&mut self, name: &str) -> Result<(), Vec<String>> {
+        if let Some(index) = self
+            .codeblocks_active
+            .iter()
+            .position(|active| active == name)
+        {
+            let mut cycle = self.codeblocks_active[index..].to_vec();
+            cycle.push(name.to_string());
+            return Err(cycle);
+        }
+        self.codeblocks_active.push(name.to_string());
+        Ok(())
+    }
+
+    pub(crate) fn exit_codeblock(&mut self, name: &str) {
+        if let Some(index) = self
+            .codeblocks_active
+            .iter()
+            .rposition(|active| active == name)
+        {
+            self.codeblocks_active.remove(index);
+        }
+    }
+
+    pub(crate) fn has_active_codeblock(&self) -> bool {
+        !self.codeblocks_active.is_empty()
     }
 
     // ── Child return value (retv) ──

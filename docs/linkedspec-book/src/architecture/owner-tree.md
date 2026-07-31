@@ -433,8 +433,12 @@ exact `{|` into `CallableCodeblock` plus `CodeblockBodyAst` and character-coordi
 `linkedspec_core::types::CodeblockValue` carries that record as inert `RuntimeValue::Codeblock` data. The ordinary
 `CompiledSpec` serde boundary and `source_emitter`'s one embedded compiled JSON payload preserve the same record,
 while semantic projection reports its fixed/rest callable signature as a `codeblock` value shape. Runtime eager
-dependency analysis treats the retained body as deferred. No Rust dynamic variable-call owner exists until
-`FUTURE-PARITY-BACKLOG.11.4.2`.
+dependency analysis treats the retained body as deferred. `linkedspec_runtime::Engine` owns dynamic variable-call
+resolution only after controls, helpers, and registered functions. `RuntimeContext` owns temporary uniform-binding
+snapshots and the ordered active-codeblock stack; the engine deep-copies fixed/rest values, evaluates the retained
+typed body in the same caller context, restores parameters/active identity on every exit, and maps exact portable
+failure fields into the existing structured diagnostic envelope. Native, reconstructed, generated-plan, and
+emitted-source execution all reuse this owner; generic final-block normalization remains `.11.4.3`.
 
 `LinkedSpec::CallableContract` is the Perl metadata owner for contextual final-codeblock acceptance. It declares
 the final `codeblock` slot and pre-codeblock arity for governed helpers and receiver methods, projects the same

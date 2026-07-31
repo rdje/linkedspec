@@ -57,6 +57,24 @@ pub struct RuntimeDiagnostic {
     /// Matcher-reported slot for ordered identity diagnostics.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub actual_regex_index: Option<usize>,
+    /// Dynamic codeblock-variable identity, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub callable_name: Option<String>,
+    /// Neutral expected-value spelling for callable failures.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expected: Option<String>,
+    /// Neutral observed count for callable failures.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub got: Option<usize>,
+    /// Neutral runtime value kind for a non-callable binding.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value_kind: Option<String>,
+    /// Unknown callable/helper name, when applicable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// Ordered active callable cycle, including the closing identity.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cycle: Option<Vec<String>>,
     /// Stable Rust runtime handler identity.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub handler_source_label: Option<String>,

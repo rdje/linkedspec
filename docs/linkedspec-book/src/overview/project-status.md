@@ -811,8 +811,11 @@ Three backbone items tracked major structural modernization — all done:
   `.11.3.4` closes Perl diagnostics/docs/no-drift. Rust `.11.4.1` now provides exact inert construction: brace
   disambiguation, the neutral eight-field fixed/rest record, Unicode character-coordinate spans, typed runtime and
   semantic descriptor state, compiled JSON, generated-plan reconstruction, and emitted-source preservation without
-  a host closure or body execution. Rust dynamic `cb(args)` remains `.11.4.2`, contextual final-block equivalence
-  remains `.11.4.3`, and Dart/Julia/Lua explicit-literal parity remains future.
+  a host closure or body execution. Rust `.11.4.2` now executes dynamic `cb(args)` with static precedence,
+  once-only left-to-right arguments, copied/restored fixed/rest bindings, caller-visible nonparameter stores,
+  local results/chaining/discard, exact typed failures/ordered recursion, and identical native, reconstructed,
+  generated-plan, and emitted-source behavior. Contextual final-block equivalence remains `.11.4.3`, and
+  Dart/Julia/Lua explicit-literal parity remains future.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

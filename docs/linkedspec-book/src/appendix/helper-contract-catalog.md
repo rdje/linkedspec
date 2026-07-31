@@ -141,10 +141,13 @@ dispatch rule.
 > checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
 > caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
 > declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
-> function, and receiver surfaces. Lua `.4.3.6.4` now consumes the same declaration for built-in helper/receiver
-> `with`, with cleanup-safe copied scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general
-> user-function `callback: codeblock` execution remains `.5.1`, and explicit literals/dynamic calls remain `.11.7`.
-> Cross-backend parity remains future, so do not treat the parenthesized form as portable yet.
+> function, and receiver surfaces. Rust `.11.4.1-.2` now preserves the same typed literal and invokes `cb(args)`
+> with once-only arguments, dynamic caller stores, copied/restored fixed/rest bindings, local results, exact typed
+> failures, and native/serialized/generated/emitted identity. Rust generic contextual normalization remains
+> `.11.4.3`. Lua `.4.3.6.4` consumes the declaration for built-in helper/receiver `with`, with cleanup-safe copied
+> scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general user-function `callback: codeblock`
+> execution remains `.5.1`, and explicit literals/dynamic calls remain `.11.7`. Cross-backend parity remains
+> future, so do not treat the parenthesized form as portable yet.
 
 ## 1. Working Variables and Setup
 

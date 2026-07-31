@@ -22,7 +22,7 @@
 //! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and tree traversal receiver methods)
 //! method_call → name '(' args? ')' trailing_block? | final_name
 //! args        → arg (',' arg)*
-//! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
+//! arg         → expr | name ':' expr       (keyword argument only for keyword-aware callees)
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! grouped     → '(' expr ')'
 //! array       → '[' (expr (',' expr)*)? ']'
@@ -141,6 +141,12 @@ pub enum Expr {
         base: String,
         segments: Vec<AccessSegment>,
     },
+    /// A mixed nested-access path whose receiver is an expression result.
+    #[serde(rename = "value_access")]
+    ValueAccess {
+        receiver: Box<Expr>,
+        segments: Vec<AccessSegment>,
+    },
     /// A direct array shape literal: `[]`, `[value, true]`
     #[serde(rename = "array_literal")]
     ArrayLiteral { items: Vec<Expr> },
@@ -189,7 +195,7 @@ pub struct FluentCall {
 pub enum Arg {
     /// A plain positional argument: `expr`
     Positional(Expr),
-    /// A keyword argument: `name=expr`
+    /// A keyword argument: `name: expr`
     Keyword { name: String, value: Box<Expr> },
 }
 
@@ -263,6 +269,9 @@ impl Expr {
             } => in_segments(segments).or_else(|| value.find_removed_aggregate_selector()),
             Expr::IndexedVar { index, .. } => index.find_removed_aggregate_selector(),
             Expr::NestedAccess { segments, .. } => in_segments(segments),
+            Expr::ValueAccess { receiver, segments } => receiver
+                .find_removed_aggregate_selector()
+                .or_else(|| in_segments(segments)),
             Expr::ArrayLiteral { items } => {
                 items.iter().find_map(Expr::find_removed_aggregate_selector)
             }
@@ -311,7 +320,7 @@ impl std::fmt::Display for Expr {
                     }
                     match arg {
                         Arg::Positional(e) => write!(f, "{e}")?,
-                        Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
+                        Arg::Keyword { name, value } => write!(f, "{name}: {value}")?,
                     }
                 }
                 write!(f, ")")
@@ -337,6 +346,16 @@ impl std::fmt::Display for Expr {
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::NestedAccess { base, segments } => {
                 write!(f, "{base}")?;
+                for segment in segments {
+                    match segment {
+                        AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
+                        AccessSegment::Index { expr } => write!(f, "[{expr}]")?,
+                    }
+                }
+                Ok(())
+            }
+            Expr::ValueAccess { receiver, segments } => {
+                write!(f, "{receiver}")?;
                 for segment in segments {
                     match segment {
                         AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
@@ -397,7 +416,7 @@ impl std::fmt::Display for Expr {
                             }
                             match arg {
                                 Arg::Positional(e) => write!(f, "{e}")?,
-                                Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
+                                Arg::Keyword { name, value } => write!(f, "{name}: {value}")?,
                             }
                         }
                         write!(f, ") {}", call.args.last().unwrap().value())?;
@@ -410,7 +429,7 @@ impl std::fmt::Display for Expr {
                         }
                         match arg {
                             Arg::Positional(e) => write!(f, "{e}")?,
-                            Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
+                            Arg::Keyword { name, value } => write!(f, "{name}: {value}")?,
                         }
                     }
                     write!(f, ")")?;
@@ -1361,7 +1380,8 @@ impl<'a> Parser<'a> {
         }
         self.advance(1);
 
-        self.parse_fluent_chain(Expr::Call { name, args })
+        let expr = self.parse_postfix_value_access(Expr::Call { name, args })?;
+        self.parse_fluent_chain(expr)
     }
 
     fn parse_parenthesized_expr(&mut self) -> Result<Expr, String> {
@@ -1373,6 +1393,7 @@ impl<'a> Parser<'a> {
             return Err("expected ')' after parenthesized expression".into());
         }
         self.advance(1);
+        let expr = self.parse_postfix_value_access(expr)?;
         self.parse_fluent_chain(expr)
     }
 
@@ -1632,8 +1653,8 @@ impl<'a> Parser<'a> {
                 {
                     return true;
                 }
-                b':' if !(pos + 1 < bytes.len() && bytes[pos + 1] == b':')
-                    && !(pos > 0 && bytes[pos - 1] == b':')
+                b':' if !(pos + 1 < bytes.len() && bytes[pos + 1] == b':'
+                    || pos > 0 && bytes[pos - 1] == b':')
                     && paren_depth == 0
                     && bracket_depth == 0
                     && brace_depth == 0 =>
@@ -1703,6 +1724,7 @@ impl<'a> Parser<'a> {
             self.advance(1); // consume ')'
 
             let expr = self.parse_optional_trailing_block_arg(name, args)?;
+            let expr = self.parse_postfix_value_access(expr)?;
             // Parse any fluent chain continuations: .method(args)
             self.parse_fluent_chain(expr)
         } else if self.peek() == Some('[') {
@@ -1794,6 +1816,18 @@ impl<'a> Parser<'a> {
             self.skip_whitespace();
         }
         Ok(segments)
+    }
+
+    fn parse_postfix_value_access(&mut self, receiver: Expr) -> Result<Expr, String> {
+        self.skip_inline_whitespace();
+        if self.peek() != Some('[') {
+            return Ok(receiver);
+        }
+        let segments = self.parse_access_segments("expression result")?;
+        Ok(Expr::ValueAccess {
+            receiver: Box::new(receiver),
+            segments,
+        })
     }
 
     /// Parse optional fluent chain continuations: `.method(args).method2(args2)...`
@@ -1904,8 +1938,12 @@ impl<'a> Parser<'a> {
                 break;
             }
 
-            let value = self.parse_expr()?;
-            args.push(Arg::Positional(value));
+            if let Some(keyword) = self.try_parse_keyword_arg()? {
+                args.push(keyword);
+            } else {
+                let value = self.parse_expr()?;
+                args.push(Arg::Positional(value));
+            }
 
             self.skip_whitespace();
             if self.peek() == Some(',') {
@@ -1915,6 +1953,44 @@ impl<'a> Parser<'a> {
             }
         }
         Ok(args)
+    }
+
+    fn try_parse_keyword_arg(&mut self) -> Result<Option<Arg>, String> {
+        let start = self.pos;
+        let Some(first) = self.peek() else {
+            return Ok(None);
+        };
+        if !first.is_ascii_alphabetic() && first != '_' {
+            return Ok(None);
+        }
+        self.advance(first.len_utf8());
+        while let Some(ch) = self.peek() {
+            if ch.is_ascii_alphanumeric() || ch == '_' {
+                self.advance(ch.len_utf8());
+            } else {
+                break;
+            }
+        }
+        let name_end = self.pos;
+        self.skip_inline_whitespace();
+        if self.peek() != Some(':') || self.remaining().starts_with("::") {
+            self.pos = start;
+            return Ok(None);
+        }
+        self.advance(1);
+        self.skip_whitespace();
+        if self.pos >= self.src.len() || matches!(self.peek(), Some(',' | ')')) {
+            return Err(format!(
+                "expected a value after keyword argument '{}' at position {}",
+                &self.src[start..name_end],
+                self.pos
+            ));
+        }
+        let value = self.parse_expr()?;
+        Ok(Some(Arg::Keyword {
+            name: self.src[start..name_end].to_string(),
+            value: Box::new(value),
+        }))
     }
 
     fn parse_name(&mut self) -> String {
@@ -2065,6 +2141,45 @@ mod tests {
             }
             _ => panic!("expected Call"),
         }
+    }
+
+    #[test]
+    fn parse_colon_keyword_argument_as_typed_call_data() {
+        let block = CodeBlock::parse(r#"cb(value: "x")"#).unwrap();
+        let Expr::Call { name, args } = &block.statements[0].expr else {
+            panic!("expected keyword-bearing call");
+        };
+        assert_eq!(name, "cb");
+        assert!(matches!(
+            args.as_slice(),
+            [Arg::Keyword { name, value }]
+                if name == "value"
+                    && matches!(value.as_ref(), Expr::StringLiteral { value } if value == "x")
+        ));
+        assert_eq!(block.statements[0].expr.to_string(), r#"cb(value: "x")"#);
+    }
+
+    #[test]
+    fn parse_call_result_access_before_receiver_chain() {
+        let block = CodeBlock::parse(r#"collector("p", "a")["items"].length()"#).unwrap();
+        let Expr::FluentChain { receiver, calls } = &block.statements[0].expr else {
+            panic!("expected receiver chain");
+        };
+        let Expr::ValueAccess {
+            receiver: call,
+            segments,
+        } = receiver.as_ref()
+        else {
+            panic!("expected access over call result");
+        };
+        assert!(matches!(call.as_ref(), Expr::Call { name, .. } if name == "collector"));
+        assert!(matches!(
+            segments.as_slice(),
+            [AccessSegment::Key { value }] if value == "items"
+        ));
+        assert!(
+            matches!(calls.as_slice(), [FluentCall { method, args }] if method == "length" && args.is_empty())
+        );
     }
 
     #[test]

@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.2 — execute Rust callable codeblocks
+
+Rust now invokes a bound callable-codeblock value after static controls, helpers, and registered user functions.
+Arguments evaluate once left-to-right. Fixed parameters and a fresh final-rest array receive recursive value
+copies in temporary bindings; existing same-name bindings and active callable identity restore after successful
+or failed bodies, while other reads and writes remain attached to the caller's current stores. A final expression
+or invocation-local `return(...)` becomes the result, which can enter typed key/index access and receiver chaining;
+standalone calls execute and discard only that result.
+
+The parser adds typed expression-result access and recognizes the adopted `name: expr` keyword-call spelling
+without reviving retired `name=expr`. Bound arity, keyword, non-codeblock, unknown-body-helper, and direct/mutual
+active-recursion failures use exact neutral codes and fields in Rust's existing structured runtime diagnostics.
+Ordinary unbound calls outside a codeblock retain the pre-existing generic unknown-helper warning/`undef` path.
+Compiled JSON, generated plans, and emitted source continue to carry one closure-free typed record and execute the
+same shared engine rather than a second host-language implementation.
+
+Focused proof passes the neutral checker; 13 callable-codeblock tests covering all eleven valid calls, all seven
+invalid calls, the exact fixture, static precedence, left-to-right effects, recursive copy, restoration after
+failure, native/reconstructed/generated/emitted roles, and emitted cleanup; variadic user functions 7/7; semantic
+query 5/5; and the existing generic unknown-helper unit regression. Generic attached/parenthesized final-block
+equivalence remains `.11.4.3`; lexical capture, capability promotion, MCP, other backends, and push remain out of
+scope.
+
+The complete Rust operational gate passes every core/runtime/package group, both long corpus classifiers, the
+generated-manifest classifier, 197 main integration cases, semantic admission, primary build, the 195-package
+offline-cache/17-owner storage oracle, and CLI 66/66 in both option environments. Canonical CI then passes all
+seven doctrines, semantic and MCP admissions, exact callable governance, containment and moved-root proof, CLI
+66x2, RAM at 44%, and Phase 0 1,031/1,031 in 763 seconds. Knowledge Map is 760 facts / 6,165 question keys and the
+mdBook builds 79 files / 13,864 KiB before exact generated-output cleanup.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.1 — construct Rust callable codeblocks
 
 Added the Rust construction/state subset of `linkedspec-callable-codeblock-v1` without activating bound-variable
@@ -23,8 +53,8 @@ classifier, primary build, repository-local project-data proof, and both 66/66 C
 Knowledge Map regeneration records 759 facts / 6,156 retrieval keys; mdBook and all seven doctrines pass. The
 independent canonical gate passes exact contracts/admissions, containment and moved-root proof, CLI 66x2, RAM
 55%, and Phase 0 1,031/1,031 in 641 seconds.
-Dynamic `cb(args)` execution remains `.11.4.2`; generic final-block equivalence remains `.11.4.3`; no capability
-promotion or push occurs.
+Dynamic `cb(args)` execution is now current through `.11.4.2`; generic final-block equivalence remains `.11.4.3`;
+no capability promotion or push occurs.
 
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.10 — close semantic introspection
 

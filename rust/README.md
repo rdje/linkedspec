@@ -91,9 +91,10 @@ command, and runs the shared byte-exact CLI manifest in default and POSIX option
 slice `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection, so the focused primary
 leg now passes all 63 cases in both environments.
 
-### Callable codeblock construction
+### Callable codeblock values and invocation
 
-Rust recognizes the exact brace-pipe forms `{|params| body }` and `{|| body }` as inert callable-codeblock data:
+Rust recognizes exact brace-pipe forms `{|params| body }` and `{|| body }` as inert callable-codeblock data, then
+executes a bound value through `cb(args)`:
 
 ```text
 Top::
@@ -101,24 +102,43 @@ Top::
    state = "before"
    cb = {|value| state = cat(state, value); return(state) }
    alias = cb
-   return({ "state" : state, "callback" : alias })
+   result = alias("!")
+   return({ "state" : state, "result" : result })
  }
 
 Done::
  /x/
 ```
 
-Constructing and assigning `cb` does not execute its body, so the returned `state` is still `"before"`. The
-stored value has the neutral eight-field `codeblock_literal` shape: version, fixed/rest callable signature, exact
-body source, typed ActionIR body, exact literal source, and half-open source/body spans. Spans use Unicode
-character coordinates in the containing action source, including nested literals. Empty and keyed braces remain
-harrays, and ordinary nonempty `{ statements }` remains an eager block value.
+Constructing and assigning `cb` does not execute its body. Invoking `alias("!")` later updates the caller's
+nonparameter `state` binding and returns `"before!"`, so both result fields are `"before!"`. The stored value has
+the neutral eight-field `codeblock_literal` shape: version, fixed/rest callable signature, exact body source,
+typed ActionIR body, exact literal source, and half-open source/body spans. Spans use Unicode character coordinates
+in the containing action source, including nested literals. Empty and keyed braces remain harrays, and ordinary
+nonempty `{ statements }` remains an eager block value.
 
 The record stays plain data through `CompiledSpec` JSON, user-function arguments/results, generated-plan
 reconstruction, and emitted Rust source; no Rust closure or captured environment is encoded. Semantic binding
-descriptors report a `codeblock` value shape with the same signature. Bound-variable invocation such as
-`cb("!")` is deliberately not current in Rust yet: `FUTURE-PARITY-BACKLOG.11.4.2` owns dynamic caller execution
-and diagnostics, while `.11.4.3` owns generic attached/parenthesized final-block equivalence.
+descriptors report a `codeblock` value shape with the same signature. Controls, helpers, and registered user
+functions win over a same-named codeblock binding. Positional arguments evaluate once from left to right before
+recursively copied fixed/rest values enter temporary bindings; prior same-name bindings restore on success or
+failure, while other caller bindings remain live. `return(...)` exits only the invocation, a final expression is
+the implicit result, receiver chains may continue, and a standalone call discards only the result.
+
+```text
+outer = "kept"
+collector = {|outer, ...items|
+  return({ "outer" : outer, "items" : items })
+}
+count = collector("local", "a", "b")["items"].length()
+# count == 2; outer == "kept"
+```
+
+Runtime failures use the existing structured diagnostic envelope with exact neutral codes:
+`codeblock_arity_mismatch`, `codeblock_keyword_arguments_unsupported`, `value_not_callable`, `unknown_helper`,
+and `codeblock_recursion_unsupported`. They retain callable name, expected/got counts, runtime value kind, unknown
+name, or ordered cycle as applicable. Generic attached/parenthesized final-block equivalence remains separately
+owned by `.11.4.3`.
 
 Rust execution, descriptor projection, generated-source v2, and public option/CLI removal are current through
 `.9.1.4.6`. The parser retains complete-line and header-rest bare edges as
@@ -328,8 +348,8 @@ false `and` value or true `or` value.
 `RuntimeValue::as_bool` is the shared typed truth seam for those helpers and lazy `if`/`switch`/`while` controls.
 Null, false, numeric zero, empty strings, and empty arrays/harrays are false. Nonzero numbers, every nonempty
 string (including `"0"` and `"false"`), and nonempty aggregates are true. A typed codeblock is true without being
-invoked. Explicit callable-literal construction is current as described above; bound-variable invocation remains
-separately owned by `.11.4.2`.
+invoked. Explicit callable-literal construction and bound-variable invocation are current as described above;
+testing truthiness still never invokes the value.
 
 ```text
 Top::

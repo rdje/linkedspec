@@ -265,18 +265,19 @@ parameters, is invoked with zero arguments, and reads the callable's current dyn
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. The Perl reference now parses these
-literals, preserves their signature/body/source/span record through assignment, user functions, and generated
-source, and executes a bound value through `cb(args)`. Arguments evaluate once from left to right before temporary
-copied fixed/rest parameters bind. Prior parameter values restore even when the body fails; nonparameter reads and
-writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the
-implicit result, compatible receiver chains may continue, and a standalone call discards only the result.
+`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl and Rust now parse these
+literals, preserve their signature/body/source/span record through assignment, user functions, serialization, and
+generated source, and execute a bound value through `cb(args)`. Arguments evaluate once from left to right before
+temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
+nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a
+final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
+only the result.
 
-Rust now shares the construction boundary. It classifies exact `{|` before harray/eager braces, retains the same
-eight-field literal and fixed/rest signature with Unicode character-coordinate spans, carries the value through
-compiled JSON, user functions, generated plans, emitted source, and semantic `codeblock` descriptors, and never
-constructs a host closure or executes the body. Rust `cb(args)` execution is the next separately owned slice, so
-the dynamic examples below describe current Perl behavior until Rust invocation is admitted.
+Rust classifies exact `{|` before harray/eager braces, retains the same eight-field literal and fixed/rest
+signature with Unicode character-coordinate spans, and carries it through compiled JSON, user functions,
+generated plans, emitted source, and semantic `codeblock` descriptors. Construction never creates a host closure
+or executes the body. Dynamic execution uses that same reconstructed runtime state; it is not a generated-source
+special case.
 
 On Perl, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
@@ -284,11 +285,11 @@ supported helper and receiver forms. `{|item| ...}` remains an explicit one-posi
 `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
 
 ```text
-state = "";
+state = ""
 append_state = {|value|
   state = cat(state, value)
   return(state)
-};
+}
 
 append_state("a")
 second = append_state("b")
@@ -296,15 +297,16 @@ second = append_state("b")
 
 collector = {|prefix, ...items|
   return({ "prefix" : prefix, "items" : items })
-};
+}
 count = collector("p", "a", "b")["items"].length()
 # count == 2
 ```
 
-Perl reports exact arity, keyword-call, bound-non-codeblock, and active-recursion failures as typed codeblock runtime
-details. A governed helper/control or registered user function still wins over a same-named variable. This is not
-yet portable across backends, and the generic contextual final-block spellings remain `.11.3.3+` work; use explicit
-`{|...|...}` plus `cb(...)` only when targeting the current Perl reference.
+Perl and Rust report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
+failures as typed runtime details. A governed helper/control or registered user function still wins over a
+same-named variable. Explicit `{|...|...}` plus `cb(...)` is current on those two backends. Generic contextual
+final-block spellings are complete on Perl but remain Rust `.11.4.3` work; Dart, Julia, and Lua explicit literal
+and dynamic-call parity remains future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

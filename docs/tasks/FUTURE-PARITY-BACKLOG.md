@@ -15305,10 +15305,17 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.4.1 - construct Rust callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Execute Rust codeblock-variable calls with neutral dynamic context and diagnostics.
   Acceptance: Ordered values, temporary copied bindings/rest, caller nonparameter stores, results, recursion,
     static-name precedence, and failures match Perl and the neutral fixture.
+  Verification: **PASS 2026-07-30.** The neutral checker and Rust 13/13 contract cover all eleven valid calls,
+    seven invalid calls, static precedence, copied/restored fixed/rest state, caller mutations, local results,
+    recursion, and native/compiled/generated/emitted identity; variadic 7/7, semantic 5/5, and unknown-helper
+    preservation pass. The complete Rust operational gate passes all packages, long classifiers, 197 integration
+    cases, build, storage, and CLI 66x2. Knowledge Map 760/6,165, mdBook 79 files / 13,864 KiB, seven doctrines,
+    and canonical CI through CLI 66x2, RAM 44%, and Phase 0 1,031/1,031 in 763 seconds pass with exact cleanup.
+  Commit: `FUTURE-PARITY-BACKLOG.11.4.2 - execute Rust callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4.3`
   Status: `pending`
@@ -15389,6 +15396,59 @@ Baseline 2026-07-30: neutral `linkedspec-callable-codeblock-v1` passes 7 literal
 at the parser/compiler boundary and prove the existing emitter carries it byte-for-byte—not add another codec.
 Current `Engine::eval_expr` has no bound-value call dispatch, which is correct and remains untouched until
 `.11.4.2`. Existing `BlockValue` callback execution and helper/method name gates remain `.11.4.3` closeout scope.
+
+### `FUTURE-PARITY-BACKLOG.11.4.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / KNOWLEDGE FIRST** — Activate only from clean `.11.4.1` commit `91958022`, with the
+  brief at zero bytes and generated residue absent; retrieve ADR `0031`, the neutral callable-codeblock contract,
+  Perl dynamic-invocation fact, Rust inert-state fact, current function/call/runtime owners, and Toolbox commands
+  before any runtime edit.
+- [x] **TOOL-LED RUST BASELINE / GAP MAP** — Re-run the neutral checker and construction regression, then inspect
+  exact call parsing, resolution precedence, runtime store/snapshot/return control, recursive-copy, diagnostics,
+  generated execution, and semantic projection seams. Record the smallest signoff-level implementation boundary
+  before changing behavior.
+- [x] **DYNAMIC INVOCATION / CALLER CONTEXT** — Resolve a governed bound codeblock only after controls, helpers,
+  and registered user functions; evaluate positional arguments once left-to-right; recursively copy fixed/rest
+  values into temporary bindings; restore same-name bindings on success/failure; expose other reads/mutations to
+  caller stores; keep `return` invocation-local and allow ordinary result chaining/discard.
+- [x] **PORTABLE FAILURES / RECURSION** — Preserve unknown-call behavior and emit exact typed arity, keyword,
+  bound-non-codeblock, and direct/mutual active-recursion diagnostics with stable callable/cycle identity and no
+  host fallback. Construction remains closure-free and inert.
+- [x] **NATIVE / SERIALIZED / GENERATED PROOF** — Consume all eleven valid call cases, seven invalid call cases,
+  and the exact neutral fixture through native, compiled-JSON reconstruction, generated-plan, and emitted-source
+  authority without broadening generic contextual final blocks.
+- [x] **SIGNOFF / DOCS / COMMIT / CLEAN HANDOFF** — Pass focused and complete Rust gates plus warranted canonical
+  proof; synchronize task/roadmap/live/Knowledge Map/mdBook/Rust docs; remove exact generated output; commit with
+  `.11.4.2`, clear the brief, prove clean, and only then activate `.11.4.3`; do not push before cadence 300.
+
+Baseline 2026-07-30: the unchanged neutral checker passes 7 literals / 11 calls / 9 invalid literals / 7 invalid
+calls / 4 invalid declarations / 8 contextual forms, and the Rust inert-construction regression remains 7/7.
+The exact fixture reaches typed codeblock construction but its `collector(...)["items"].length()` result chain is
+rejected because access paths can start only from a named binding; with that one expression diagnostically
+simplified, every bound call follows the generic unknown-helper fallback and returns `undef`. `Arg::Keyword`
+survives as dormant typed state, but its retired `name=expr` parser was deliberately purged; the adopted callable
+surface therefore needs narrow `name: expr` recognition without reviving that legacy helper syntax. Static helper
+match arms and the registered-function branch already precede the generic unknown arm, while
+`RuntimeContext::enter_scoped_scalar_binding`, recursive owned-value cloning, `eval_block_value`, and the shared
+serialized/generated `Engine` path provide the required caller-context, copy/restore, local-return, and one-runtime
+seams. The smallest signoff boundary is consequently: add typed postfix value access and colon-keyword parsing;
+dispatch bound codeblocks only from the generic unknown arm; add an active callable-name stack plus exact portable
+failure fields; and prove the unchanged fixture/invalid cases through native, reconstructed, generated-plan, and
+emitted execution. Deferred-body dependency scans already remain inert from `.11.4.1`, so semantic projection and
+generic final-block normalization do not change here.
+
+Implementation proof 2026-07-30: typed `value_access` lets a call result enter ordinary key/index access before a
+receiver chain, and narrow `name: expr` call arguments restore the adopted keyword boundary without reviving
+retired `name=expr`. The Rust engine now resolves a bound codeblock only from the existing generic-unknown arm,
+after controls, helpers, and registered functions. It evaluates arguments once left-to-right, deep-copies fixed
+and fresh-rest values into cleanup-safe temporary bindings, preserves dynamic nonparameter stores, returns the
+local final expression/`return(...)`, and restores parameters plus active-call identity on success or failure.
+Exact typed arity, keyword, non-codeblock, unknown-body-helper, and ordered direct/mutual recursion diagnostics
+share the structured runtime envelope. The 13-test focused suite consumes the neutral fixture, all eleven valid
+calls, all seven invalid calls, native state, compiled-JSON reconstruction, generated plans, and independently
+compiled emitted Rust; it also proves standalone discard, static precedence, recursive copy, failure cleanup, and
+colon-keyword user-function policy. Variadic 7/7, semantic query 5/5, and the existing generic unknown-helper unit
+regression pass. Generic attached/parenthesized final-block normalization remains untouched for `.11.4.3`.
 
 ### `FUTURE-PARITY-BACKLOG.11.1` Acceptance Checklist
 
@@ -17449,9 +17509,10 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 ## Current Frontier
 
 **Authoritative frontier (2026-07-30):** Rust typed callable-codeblock construction/state leaf `.11.4.1` is
-signoff-complete from clean semantic-parent boundary `6cadd6a0`; this commit owns its exact inert typed/serialized/
-descriptor/emitted state and clean handoff. Parent `.11.4` remains active. Dynamic codeblock-variable execution
-`.11.4.2` is the next leaf and may activate only after the `.11.4.1` commit leaves the repository clean.
+committed clean at `91958022`. Parent `.11.4` remains active and dynamic invocation leaf `.11.4.2` is now active
+from that clean boundary. Dynamic resolution/caller stores/copied-restored parameters/local results/typed failures
+and native/serialized/generated/emitted focused proof are implemented; synchronized docs plus complete Rust and
+canonical gates are the exact remaining signoff step. Generic contextual final-block closeout remains `.11.4.3`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -18847,6 +18908,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.4.2` | Clean base `91958022`; neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; callable Rust 13/13; variadic 7/7; semantic query 5/5; generic unknown-helper 1/1; native/compiled/generated/emitted identity; production-library clippy; complete Rust package, long-classifier, 197-integration, semantic-admission, build, 195-cache/17-owner storage, and CLI 66x2 gate; capability 80/0/0; Knowledge Map 760/6,165; mdBook 79 files / 13,864 KiB; seven doctrines; canonical semantic 9/9 + 6/6, MCP 5/5 + 6/6 complete/141, containment/moved-root, CLI 66x2, RAM 44%, Phase 0 1,031/1,031 in 763 seconds; exact cleanup. | PASS. Rust dynamic callable-codeblock invocation matches the governed caller-context/failure contract across every authority without closure capture, generic final-block broadening, capability promotion, MCP movement, other-backend change, or push. `.11.4.3` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.4.1` | Clean base `6cadd6a0`; exact neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; Rust callable construction 7/7, variadic 7/7, semantic query 5/5, complete core 193 plus integration groups, complete Rust runtime/corpus/generated-source/build/storage/CLI 66x2 gate; capability 80/0/0; Knowledge Map 759/6,156; mdBook; seven doctrines; canonical MCP 5/5 + 6/6 complete/141, semantic 9/9 + 6/6, containment/moved-root, CLI 66x2, RAM 55%, Phase 0 1,031/1,031 in 641 seconds; exact cleanup. | PASS. Rust owns exact inert typed callable-codeblock construction, Unicode-coordinate spans, serialized/generated/emitted transport, and semantic signature shape without closure capture, body execution, variable-call dispatch, capability promotion, MCP movement, or generic final-block broadening. Dynamic invocation `.11.4.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` | Clean base `8352d535`; five unchanged-role consumers derive six governed native snapshot indexes and prove capabilities plus all nineteen queries across direct object/canonical JSON, MCP structured/text/decoded content, and exact response digest; Perl 13, Rust admission 1 plus formatting, Dart admission 1 plus formatting/analysis, Julia 257, shared Lua 281x2; unchanged semantic 6/20/105, MCP 35/10/10/76, ledger 5/5 + 6/6 pending/114; KM 757/6,137; memory; seven doctrines; mdBook 13,748 KiB/79; canonical changed admissions 6/6, Rust semantic 81.63s, Dart 1/1, Julia 416/416/29.5s, cursor 288, containment/moved-root, CLI 66x2, RAM 59%, Phase 0 1,031/661s; exact cleanup. | PASS. Exhaustive consumer evidence is complete without production oracle, contract, binding, fixture, role, ledger, semantic, CLI, aggregator, legacy, or authority movement. Routed composition and atomic rollout promotion remain exclusively owned by `.1.1.3`. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` | Clean base `c3273219`; exact 72-key fact union; bounded 128-character/128-UTF-8-byte contract string; explicit-component overlay policy in five servers; neutral semantic 6/20/105; MCP 35/10/10/76; byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; focused Perl 36, Rust 165+3+4+1, Dart complete 354 and MCP 16+1, Julia 53+145+170+178, Lua 116+216+247+202x2; unchanged ledger 5/5 + 6/6 pending/114; KM 757/6,137; memory; seven doctrines; mdBook; host-authorized canonical Rust semantic 78.48s, Dart 1/1, Julia 416/416/27.5s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/637s; exact cleanup. | PASS. The three shared transport blockers are repaired atomically without rollout promotion or authority expansion. Omitted/unrelated partial overlays reach native portable diagnostics, explicit overlay ceilings remain dispatch-free, and all-twenty consumer proof `.1.1.2` follows only after the clean commit. |

@@ -1,6 +1,10 @@
-//! FUTURE-PARITY-BACKLOG.11.4.1 — inert Rust callable-codeblock state.
+//! FUTURE-PARITY-BACKLOG.11.4.1-.2 — Rust callable-codeblock state and invocation.
 
 use std::collections::BTreeSet;
+use std::fs;
+use std::path::{Path, PathBuf};
+use std::process::Command;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::{CodeBlock, Expr};
@@ -11,7 +15,8 @@ use linkedspec_runtime::semantic_index::{
     SemanticIndex, SemanticIndexOptions, SemanticSourceDetail,
 };
 use linkedspec_runtime::source_emitter::{
-    GeneratedPlanRow, classify_generated_rule_family, emit_rust_source, execute_generated_parser,
+    GeneratedPlanRow, classify_generated_rule_family, emit_rust_source, emit_rust_source_v2,
+    execute_generated_parser,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
@@ -54,6 +59,91 @@ Done::
  /x/
 "#
     )
+}
+
+fn generated_plan(compiled: &CompiledSpec) -> Vec<GeneratedPlanRow> {
+    compiled
+        .rules
+        .iter()
+        .map(|rule| GeneratedPlanRow {
+            label: match rule.label.as_str() {
+                "Top" => "Top",
+                "Done" => "Done",
+                "FixedMissing" => "FixedMissing",
+                "FixedExtra" => "FixedExtra",
+                "RestMissingFixed" => "RestMissingFixed",
+                "KeywordArgument" => "KeywordArgument",
+                "BoundNonCodeblock" => "BoundNonCodeblock",
+                "UnknownCall" => "UnknownCall",
+                "DirectRecursion" => "DirectRecursion",
+                other => panic!("unowned generated callable-codeblock rule: {other}"),
+            },
+            family: classify_generated_rule_family(rule).contract_name(),
+        })
+        .collect()
+}
+
+fn invalid_case_body(id: &str) -> &'static str {
+    match id {
+        "fixed_missing" => r#"cb = {|left, right| return(cat(left, right)) }; return(cb("a"))"#,
+        "fixed_extra" => {
+            r#"cb = {|left, right| return(cat(left, right)) }; return(cb("a", "b", "c"))"#
+        }
+        "rest_missing_fixed" => r#"cb = {|prefix, ...items| return(items) }; return(cb())"#,
+        "keyword_argument" => r#"cb = {|value| return(value) }; return(cb(value: "x"))"#,
+        "bound_non_codeblock" => r#"text = "not callable"; return(text())"#,
+        "unknown_call" => r#"cb = {|| return(missing()) }; return(cb())"#,
+        "direct_recursion" => r#"reader = {|| return(reader()) }; return(reader())"#,
+        other => panic!("unowned invalid callable-codeblock case: {other}"),
+    }
+}
+
+fn invalid_case_rule_label(id: &str) -> &'static str {
+    match id {
+        "fixed_missing" => "FixedMissing",
+        "fixed_extra" => "FixedExtra",
+        "rest_missing_fixed" => "RestMissingFixed",
+        "keyword_argument" => "KeywordArgument",
+        "bound_non_codeblock" => "BoundNonCodeblock",
+        "unknown_call" => "UnknownCall",
+        "direct_recursion" => "DirectRecursion",
+        other => panic!("unowned invalid callable-codeblock case: {other}"),
+    }
+}
+
+fn invalid_case_source(id: &str) -> String {
+    format!(
+        "{}::\n /x/\n E {{ {} }}\n",
+        invalid_case_rule_label(id),
+        invalid_case_body(id)
+    )
+}
+
+struct GeneratedTestProject {
+    root: PathBuf,
+}
+
+impl GeneratedTestProject {
+    fn new() -> Self {
+        let nonce = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("system clock")
+            .as_nanos();
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../target/test-workspaces")
+            .join(format!(
+                "callable-codeblock-emitted-{}-{nonce}",
+                std::process::id()
+            ));
+        fs::create_dir_all(root.join("src")).expect("create emitted callable workspace");
+        Self { root }
+    }
+}
+
+impl Drop for GeneratedTestProject {
+    fn drop(&mut self) {
+        let _ = fs::remove_dir_all(&self.root);
+    }
 }
 
 #[test]
@@ -239,6 +329,255 @@ fn construction_copy_compiled_json_and_generated_state_are_inert() {
     assert_eq!(
         execute_generated_parser(&encoded, &plan, "xx").expect("execute generated construction"),
         direct
+    );
+}
+
+#[test]
+fn neutral_fixture_executes_all_nine_fixture_cases_in_every_shared_runtime_path() {
+    let contract = contract();
+    let source = contract["fixture"]["spec_source"].as_str().unwrap();
+    let input = contract["fixture"]["input"].as_str().unwrap();
+    let expected = json!([contract["fixture"]["expected"]]);
+    let compiled = compile_source(source);
+
+    assert_eq!(
+        Engine::new(compiled.clone())
+            .execute(input)
+            .expect("execute native callable fixture"),
+        expected
+    );
+
+    let encoded = serde_json::to_string(&compiled).expect("serialize callable fixture");
+    let decoded: CompiledSpec =
+        serde_json::from_str(&encoded).expect("reconstruct callable fixture");
+    assert_eq!(
+        Engine::new(decoded)
+            .execute(input)
+            .expect("execute reconstructed callable fixture"),
+        expected
+    );
+    assert_eq!(
+        execute_generated_parser(&encoded, &generated_plan(&compiled), input)
+            .expect("execute generated-plan callable fixture"),
+        expected
+    );
+}
+
+#[test]
+fn standalone_effects_static_precedence_order_and_recursive_copy_are_exact() {
+    let source = r#"fn choose() { return("static") }
+
+Top::
+ /x/
+ E {
+   state = "";
+   append_state = {|value| state = cat(state, value); return(state) };
+   append_state("x");
+   cat = {|left, right| return("shadow") };
+   choose = {|| return("shadow") };
+   order = "";
+   tick = {|value| order = cat(order, value); return(value) };
+   joiner = {|left, right| return(cat(left, right)) };
+   original = { "nested" : [{ "value" : "outer" }] };
+   mutate_copy = {|copy| copy["nested"][0]["value"] = "inner"; return(copy) };
+   mutated = mutate_copy(original);
+   return({
+     "discard_state" : state,
+     "helper_precedence" : cat("a", "b"),
+     "function_precedence" : choose(),
+     "ordered_result" : joiner(tick("a"), tick("b")),
+     "ordered_effect" : order,
+     "original" : original,
+     "mutated" : mutated
+   })
+ }
+"#;
+    let actual = Engine::new(compile_source(source))
+        .execute("x")
+        .expect("execute callable behavior extensions");
+    assert_eq!(
+        actual,
+        json!([{
+            "discard_state": "x",
+            "helper_precedence": "ab",
+            "function_precedence": "static",
+            "ordered_result": "ab",
+            "ordered_effect": "ab",
+            "original": {"nested": [{"value": "outer"}]},
+            "mutated": {"nested": [{"value": "inner"}]}
+        }])
+    );
+}
+
+#[test]
+fn all_seven_neutral_failures_are_structured_and_survive_reconstruction() {
+    let contract = contract();
+    for case in contract["invalid_call_cases"].as_array().unwrap() {
+        let id = case["id"].as_str().unwrap();
+        let expected = case["expected_error"].as_object().unwrap();
+        let compiled = compile_source(&invalid_case_source(id));
+
+        let direct = Engine::new(compiled.clone())
+            .execute_with_diagnostics("x")
+            .unwrap_err();
+        let diagnostic = direct.diagnostic().to_json().unwrap();
+        for (field, value) in expected {
+            assert_eq!(&diagnostic[field], value, "{id} field {field}");
+        }
+
+        let encoded = serde_json::to_string(&compiled).unwrap();
+        let decoded: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+        let reconstructed = Engine::new(decoded)
+            .execute_with_diagnostics("x")
+            .unwrap_err();
+        assert_eq!(
+            reconstructed.diagnostic().to_json().unwrap(),
+            diagnostic,
+            "{id} reconstructed diagnostic"
+        );
+
+        let generated_error =
+            execute_generated_parser(&encoded, &generated_plan(&compiled), "x").unwrap_err();
+        assert!(
+            generated_error.contains(expected["code"].as_str().unwrap()),
+            "{id}: {generated_error}"
+        );
+    }
+}
+
+#[test]
+fn mutual_recursion_reports_the_ordered_callable_cycle() {
+    let source = r#"Top::
+ /x/
+ E {
+   left = {|| return(right()) };
+   right = {|| return(left()) };
+   return(left())
+ }
+"#;
+    let error = Engine::new(compile_source(source))
+        .execute_with_diagnostics("x")
+        .unwrap_err();
+    assert_eq!(
+        error.diagnostic().code.as_deref(),
+        Some("codeblock_recursion_unsupported")
+    );
+    assert_eq!(
+        error.diagnostic().cycle,
+        Some(vec!["left".into(), "right".into(), "left".into()])
+    );
+}
+
+#[test]
+fn colon_keyword_syntax_does_not_bypass_registered_function_policy() {
+    let source = r#"fn identity(value) { return(value) }
+
+Top::
+ /x/
+ E { return(identity(value: "x")) }
+"#;
+    let error = Engine::new(compile_source(source))
+        .execute_with_diagnostics("x")
+        .unwrap_err();
+    assert_eq!(
+        error.diagnostic().code.as_deref(),
+        Some("user_function_keyword_arguments_unsupported")
+    );
+}
+
+#[test]
+fn standalone_emitted_source_executes_fixture_and_all_invalid_cases() {
+    let contract = contract();
+    let fixture_compiled = compile_source(contract["fixture"]["spec_source"].as_str().unwrap());
+    let fixture_emitted =
+        emit_rust_source_v2(&fixture_compiled, "callable-codeblock/neutral-fixture.spec")
+            .expect("emit callable fixture");
+
+    let invalid_source = contract["invalid_call_cases"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|case| invalid_case_source(case["id"].as_str().unwrap()))
+        .collect::<Vec<_>>()
+        .join("\n");
+    let invalid_compiled = compile_source(&invalid_source);
+    let invalid_emitted =
+        emit_rust_source_v2(&invalid_compiled, "callable-codeblock/invalid-cases.spec")
+            .expect("emit callable failures");
+
+    let expected_literal = format!(
+        "{:?}",
+        serde_json::to_string(&contract["fixture"]["expected"]).unwrap()
+    );
+    let invalid_assertions = contract["invalid_call_cases"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|case| {
+            let id = case["id"].as_str().unwrap();
+            let label = invalid_case_rule_label(id);
+            let code = case["expected_error"]["code"].as_str().unwrap();
+            format!(
+                r#"let options = linkedspec_runtime::engine::ExecutionOptions::new().with_entry_rule({label:?});
+        let error = super::invalid::execute_with_options("x", &options).unwrap_err();
+        assert!(error.detail.as_deref().unwrap_or_default().contains({code:?}), "{id}: {{error:?}}");"#
+            )
+        })
+        .collect::<Vec<_>>()
+        .join("\n        ");
+    let modules = format!(
+        r#"pub mod fixture {{
+{fixture_emitted}
+}}
+
+pub mod invalid {{
+{invalid_emitted}
+}}
+
+#[cfg(test)]
+mod emitted_callable_tests {{
+    #[test]
+    fn callable_contract_is_exact() {{
+        let expected: serde_json::Value = serde_json::from_str({expected_literal}).unwrap();
+        assert_eq!(super::fixture::execute("xx").unwrap(), expected);
+        {invalid_assertions}
+    }}
+}}
+"#
+    );
+
+    let project = GeneratedTestProject::new();
+    fs::write(
+        project.root.join("Cargo.toml"),
+        r#"[package]
+name = "linkedspec_callable_codeblock_emitted"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+linkedspec-runtime = { path = "../../../linkedspec-runtime" }
+serde_json = "1"
+
+[workspace]
+"#,
+    )
+    .expect("write emitted callable manifest");
+    fs::write(project.root.join("src/lib.rs"), modules).expect("write emitted callable module");
+
+    let output = Command::new("cargo")
+        .arg("test")
+        .arg("--offline")
+        .arg("--quiet")
+        .env("CARGO_TARGET_DIR", project.root.join("target"))
+        .current_dir(&project.root)
+        .output()
+        .expect("run emitted callable workspace");
+    assert!(
+        output.status.success(),
+        "standalone emitted callable test failed\nstatus: {}\nstdout:\n{}\nstderr:\n{}",
+        output.status,
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
     );
 }
 

@@ -5,14 +5,26 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 Rust callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.4.2` executes governed
+  bound `codeblock_literal` values after controls, helpers, and registered functions. Arguments evaluate once
+  left-to-right; fixed values and a fresh rest array are recursively copied into temporary bindings; prior
+  parameter bindings and active-call identity restore on every exit; and all other reads/mutations use the
+  caller's current stores. Final expressions and invocation-local `return(...)` feed ordinary access/receiver
+  chains or standalone discard. Arity, keyword, non-callable, unknown-body-helper, and ordered direct/mutual-cycle
+  failures retain exact neutral fields in the structured diagnostic envelope. Native state, compiled-JSON
+  reconstruction, generated plans, and independently compiled emitted Rust execute the same fixture and failures.
+  Full Rust operational proof and canonical CI are green; canonical closure includes CLI 66x2, RAM 44%, and
+  Phase 0 1,031/1,031 in 763 seconds, with Knowledge Map 760/6,165 and exact generated-output cleanup.
+  Generic attached/parenthesized final-block equivalence remains `.11.4.3`; lexical capture and capability
+  promotion remain excluded.
 - `2026-07-30 Rust callable-codeblock construction`: `FUTURE-PARITY-BACKLOG.11.4.1` adds one inert Rust
   `codeblock_literal` value before any dynamic invocation. Exact `{|` wins before harray/eager-block braces; the
   record preserves the neutral eight fields, fixed/final-rest signature, typed ActionIR body, exact source, and
   half-open Unicode character-coordinate spans, including nested literals. `RuntimeValue::Codeblock`, ordinary
   `CompiledSpec` JSON, user-function transport, generated-plan reconstruction, emitted Rust, and semantic
   `codeblock` shapes carry the same pure data without a closure or captured environment. Retained body calls and
-  `retv` reads are not eager action-edge dependencies. Rust `cb(args)` remains `.11.4.2`; generic contextual
-  final-block equivalence remains `.11.4.3`; the generic capability stays excluded.
+  `retv` reads are not eager action-edge dependencies. Rust `cb(args)` is current through `.11.4.2`; generic
+  contextual final-block equivalence remains `.11.4.3`; the generic capability stays excluded.
 - `2026-07-30 semantic-introspection public closeout`: `FUTURE-PARITY-BACKLOG.10.10` makes the implemented native
   semantic APIs and thin MCP projection one governed current story. The neutral contract remains the sole semantic
   owner at six fixture groups and 20 digest-locked responses; its independent checker now rejects 128 omission-sensitive mutations and closes rollout at 9/9 with native admission 6/6. The public contract requires the Perl guide,
