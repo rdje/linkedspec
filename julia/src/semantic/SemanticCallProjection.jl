@@ -414,7 +414,26 @@ function _semantic_call_validate_staged_authority(entry::UserFunctionEntry)
     end
 
     signature = definition.signature
-    signature_matches = if signature === nothing
+    signature_matches = if !isempty(definition.parameter_kinds)
+        !haskey(payload, "params") &&
+        !haskey(payload, "arity") &&
+        !haskey(payload, "signature") &&
+        _semantic_call_plain_equal(
+            get(payload, "fixed_params", nothing),
+            definition.params[1:(end - 1)],
+        ) &&
+        get(payload, "codeblock_param", nothing) == last(definition.params) &&
+        _semantic_call_plain_equal(
+            get(payload, "parameter_kinds", nothing),
+            definition.parameter_kinds,
+        ) &&
+        job.fixed_params == definition.params[1:(end - 1)] &&
+        job.codeblock_param == last(definition.params) &&
+        job.parameter_kinds == definition.parameter_kinds &&
+        job.signature === nothing &&
+        job.params === nothing &&
+        job.arity === nothing
+    elseif signature === nothing
         !haskey(payload, "signature") &&
         _semantic_call_plain_equal(get(payload, "params", nothing), definition.params) &&
         get(payload, "arity", nothing) == definition.arity &&
@@ -1065,6 +1084,15 @@ function _semantic_call_typed_function_body(
             fields = Dict{String,Any}("error" => sprint(showerror, error)),
         ))
     end
+    try
+        normalize_action_block_final_codeblocks!(block, registry)
+    catch error
+        throw(_semantic_call_correlation_error(
+            "Accepted function body cannot normalize final codeblocks",
+            definition.name;
+            fields = Dict{String,Any}("error" => sprint(showerror, error)),
+        ))
+    end
     if definition.body_ast === nothing ||
        !_semantic_call_plain_equal(definition.body_ast, to_json(block))
         throw(_semantic_call_correlation_error(
@@ -1072,7 +1100,11 @@ function _semantic_call_typed_function_body(
             definition.name,
         ))
     end
-    resolution = resolve_action_block_contracts(block; function_registry = registry)
+    resolution = resolve_action_block_contracts(
+        block;
+        function_registry = registry,
+        callable_bindings = Set{String}(keys(definition.parameter_kinds)),
+    )
     resolution.ok || throw(_semantic_call_correlation_error(
         "Typed function body has unresolved contracts",
         definition.name,
@@ -1200,14 +1232,14 @@ function _semantic_call_function_signature(definition::FunctionDefinition)
         "parameters" => Any[
             Dict{String,Any}(
                 "name" => name,
-                "kind" => "value",
+                "kind" => get(definition.parameter_kinds, name, "value"),
                 "required" => true,
             ) for name in parameters
         ],
         "arity_min" => signature === nothing ? definition.arity : signature.min_arity,
         "arity_max" => signature === nothing ? definition.arity : signature.max_arity,
         "rest_parameter" => signature === nothing ? nothing : signature.rest_param,
-        "final_codeblock" => false,
+        "final_codeblock" => !isempty(definition.parameter_kinds),
     )
 end
 

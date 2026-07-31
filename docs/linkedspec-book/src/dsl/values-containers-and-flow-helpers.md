@@ -235,13 +235,12 @@ surfaces.
 
 Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
-signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
+signature accepts a final codeblock, the contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl, Rust, and Dart implement that equivalence for metadata-declared `with`,
-typed user functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are
-documented in its backend handoff; explicit callable values remain separately owned there. Julia now constructs
-and dynamically invokes explicit callable values but does not yet provide the generic contextual contract, so the
-complete five-backend surface is not yet portable. ADR 0031 and completed
+functions, and receiver methods. Perl, Rust, Dart, and Julia implement that equivalence for metadata-declared
+`with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are
+documented in its backend handoff; explicit callable values remain separately owned there, so the complete
+five-backend surface is not yet portable. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -307,10 +306,13 @@ functions. It validates the plain record, evaluates positional arguments once fr
 fixed/rest values through exception-safe scalar/array/harray snapshots, and leaves nonparameter caller stores
 live. The ordered active-name stack rejects direct and mutual recursion. Typed call-result access feeds existing
 key/index lookup and receiver chains. Native, reconstructed, generated-plan, and freshly loaded emitted-source
-execution share the same interpreter and exact portable failure fields. Contextual final-block normalization
-remains Julia leaf `.11.6.3`.
+execution share the same interpreter and exact portable failure fields. Julia also retains exact final-only
+definition/staged/registry/descriptor-v3 metadata. One post-registry contract pass normalizes only admitted helper,
+typed-user-function, receiver, and tree blocks to the same zero-positional `codeblock_argument`; parser spelling
+alone grants no semantics. Attached and parenthesized forms then reuse the dynamic evaluator across native,
+reconstructed, generated-plan, and freshly loaded emitted-source execution.
 
-On Perl, Rust, and Dart, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
+On Perl, Rust, Dart, and Julia, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
 `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
@@ -336,8 +338,8 @@ count = collector("p", "a", "b")["items"].length()
 Perl, Rust, Dart, and Julia report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia.
-Generic contextual final-block spellings are complete on Perl, Rust, and Dart; Julia generic parity and Lua
-explicit-literal/dynamic-call parity remain future.
+Generic contextual final-block spellings are complete on Perl, Rust, Dart, and Julia; Lua explicit-literal/
+dynamic-call parity and the cross-backend closeout remain future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

@@ -929,7 +929,7 @@ function _action_parse_fluent_call_segment(
     end
     head = _action_trim_with_offsets(attached.head, start)
     head_call = _action_parse_callee(head.text)
-    if head_call === nothing || !(head_call.name in ("with", "walk_leaves", "map_leaves", "reduce_leaves"))
+    if head_call === nothing
         return nothing
     end
     args = _action_parse_arguments(head_call.payload, head.start + head_call.payload_start)

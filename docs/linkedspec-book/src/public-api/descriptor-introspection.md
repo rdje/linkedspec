@@ -439,7 +439,7 @@ generated-plan execution, and reconstruction. Julia's typed value survives canon
 generated-plan execution, and reconstruction through the same compiler/runtime. Consumers must branch on
 function-record `version`, never on field presence alone.
 
-### Final-codeblock descriptor version (Perl, Rust, and Lua implemented)
+### Final-codeblock descriptor version (Perl, Rust, Dart, Julia, and Lua implemented)
 
 A fixed function whose final parameter is declared `name: codeblock` uses version 3. It retains the ordinary
 fixed `params` and `arity`, then adds one exact `parameter_kinds` object:
@@ -456,9 +456,9 @@ fixed `params` and `arity`, then adds one exact `parameter_kinds` object:
 The object must contain exactly one entry, its key must be the final parameter name, and its value must be
 `codeblock`. Empty, extra, non-final, or differently valued entries are invalid; version 3 never carries a
 variadic `signature`. The same `parameter_kinds` value is preserved in `body_payload` and `body_parse_job`.
-Perl, Rust, Dart, and Lua currently expose this exact record because all four implement contextual final-codeblock
-user functions. Rust and Dart preserve it through staged body AST intake, compiled JSON, generated plans, and
-emitted source.
+Perl, Rust, Dart, Julia, and Lua currently expose this exact record because all five implement contextual
+final-codeblock user functions. Rust, Dart, and Julia preserve it through staged body AST intake, compiled JSON,
+generated plans, and emitted source.
 This descriptor fact does not by itself promote the still-incomplete five-backend callable-codeblock capability.
 
 ## `meta`

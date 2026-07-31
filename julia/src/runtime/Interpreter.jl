@@ -2473,7 +2473,7 @@ function _evaluate_runtime_action_expr!(
             rule_label,
             current_edge,
         )
-    elseif expr isa ActionCodeblockLiteralExpr
+    elseif expr isa ActionCodeblockLiteralExpr || expr isa ActionCodeblockArgumentExpr
         context.codeblock_body_cache[expr.source] = expr.body_ast
         return _runtime_copy(to_json(expr))
     elseif expr isa ActionCodeblockLiteralErrorExpr
@@ -2561,19 +2561,14 @@ function _evaluate_runtime_call!(
         ))
     end
 
-    if helper_name == "with" && call.trailing_block_arg
-        return _call_runtime_with_trailing_block!(
+    if helper_name == "with"
+        return _call_runtime_with_codeblock!(
             engine,
             call,
             context,
             rule_label,
             current_edge,
         )
-    elseif call.trailing_block_arg
-        throw(RuntimeInterpreterException(
-            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:$helper_name: trailing block arguments " *
-            "are not supported for helper '$(call.name)' in rule '$rule_label'",
-        ))
     elseif helper_name == "if"
         return _call_runtime_inline_if!(
             engine,
@@ -3033,16 +3028,22 @@ function _execute_runtime_codeblock_value!(
     context::_RuntimeExecutionContext,
     rule_label::String,
     current_edge,
+    ;
+    evaluated_values = nothing,
 )
     values = Any[]
-    for arg in arg_exprs
-        push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
-            engine,
-            arg,
-            context,
-            rule_label,
-            current_edge,
-        )))
+    if evaluated_values === nothing
+        for arg in arg_exprs
+            push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )))
+        end
+    else
+        append!(values, Any[_runtime_copy(value) for value in evaluated_values])
     end
 
     arity_matches = length(values) >= codeblock.min_arity &&
@@ -3167,6 +3168,15 @@ function _execute_runtime_user_function!(
             "got $(length(values)) in rule $rule_label",
         ))
     end
+    if !isempty(definition.parameter_kinds)
+        _require_runtime_final_codeblock_value(
+            engine,
+            definition.name,
+            last(values),
+            context,
+            rule_label,
+        )
+    end
 
     active_index = findfirst(==(definition.name), context.active_user_functions)
     if active_index !== nothing
@@ -3244,6 +3254,10 @@ function _runtime_user_function_body!(
     end
     try
         block = parse_action_block(entry.definition.body_source)
+        normalize_action_block_final_codeblocks!(
+            block,
+            engine.compiled_spec.function_registry,
+        )
         context.user_function_body_cache[entry.index] = block
         return block
     catch error
@@ -3411,20 +3425,14 @@ function _call_runtime_inline_switch!(engine, args, context, rule_label, current
     ) : nothing
 end
 
-function _call_runtime_with_trailing_block!(engine, call, context, rule_label, current_edge)
-    if !call.trailing_block_arg || isempty(call.args) || length(call.args) > 2
+function _call_runtime_with_codeblock!(engine, call, context, rule_label, current_edge)
+    if isempty(call.args) || length(call.args) > 2
         throw(RuntimeInterpreterException(
             "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...) { ... }` " *
             "expects zero or one value argument plus a trailing block in rule '$rule_label'",
         ))
     end
-    block_expr = last(call.args).value
-    if !(block_expr isa ActionBlockValueExpr)
-        throw(RuntimeInterpreterException(
-            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` " *
-            "requires a trailing block argument in rule '$rule_label'",
-        ))
-    end
+    callback_expr = last(call.args).value
     scoped_value = length(call.args) == 2 ? _evaluate_runtime_action_expr!(
         engine,
         first(call.args).value,
@@ -3432,14 +3440,32 @@ function _call_runtime_with_trailing_block!(engine, call, context, rule_label, c
         rule_label,
         current_edge,
     ) : nothing
+    callback_value = _evaluate_runtime_action_expr!(
+        engine,
+        callback_expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    callback = _require_runtime_final_codeblock_value(
+        engine,
+        "with",
+        callback_value,
+        context,
+        rule_label,
+    )
     binding = _enter_runtime_scoped_scalar!(context, "value", scoped_value)
     try
-        return _evaluate_runtime_block_value!(
+        return _execute_runtime_codeblock_value!(
             engine,
-            block_expr.block,
+            "with",
+            callback,
+            ActionExpr[],
             context,
             rule_label,
             current_edge,
+            evaluated_values = callback_expr isa ActionCodeblockArgumentExpr ?
+                               Any[] : Any[_runtime_copy(scoped_value)],
         )
     finally
         _exit_runtime_scoped_binding!(context, binding)
@@ -3871,6 +3897,12 @@ const _RUNTIME_TREE_TRAVERSAL_NAMES = Set{String}([
     "walk_leaves",
 ])
 
+struct _RuntimeTreeCodeblockCallback
+    name::String
+    value::_RuntimeCodeblockValue
+    pass_leaf_value::Bool
+end
+
 function _evaluate_runtime_fluent_chain!(
     engine,
     chain,
@@ -3905,8 +3937,8 @@ function _evaluate_runtime_fluent_chain!(
             end
             continue
         end
-        if helper_name == "with" && call.receiver_trailing_block_arg
-            value = _call_runtime_receiver_with_trailing_block!(
+        if helper_name == "with"
+            value = _call_runtime_receiver_with_codeblock!(
                 engine,
                 value,
                 call,
@@ -3916,7 +3948,7 @@ function _evaluate_runtime_fluent_chain!(
             )
             continue
         elseif helper_name in _RUNTIME_TREE_TRAVERSAL_NAMES
-            value = _call_runtime_tree_traversal_block!(
+            value = _call_runtime_tree_traversal_codeblock!(
                 engine,
                 value,
                 call,
@@ -3994,7 +4026,7 @@ function _evaluate_runtime_fluent_chain!(
     return value
 end
 
-function _call_runtime_receiver_with_trailing_block!(
+function _call_runtime_receiver_with_codeblock!(
     engine,
     receiver,
     call,
@@ -4002,34 +4034,46 @@ function _call_runtime_receiver_with_trailing_block!(
     rule_label,
     current_edge,
 )
-    if !call.receiver_trailing_block_arg || length(call.args) != 1
+    if length(call.args) != 1
         throw(RuntimeInterpreterException(
             "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with() { ... }` " *
             "expects no parenthesized arguments in rule '$rule_label'",
         ))
     end
-    block_expr = first(call.args).value
-    if !(block_expr isa ActionBlockValueExpr)
-        throw(RuntimeInterpreterException(
-            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` " *
-            "requires a trailing block argument in rule '$rule_label'",
-        ))
-    end
+    callback_expr = first(call.args).value
+    callback_value = _evaluate_runtime_action_expr!(
+        engine,
+        callback_expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    callback = _require_runtime_final_codeblock_value(
+        engine,
+        "with",
+        callback_value,
+        context,
+        rule_label,
+    )
     binding = _enter_runtime_scoped_scalar!(context, "value", receiver)
     try
-        return _evaluate_runtime_block_value!(
+        return _execute_runtime_codeblock_value!(
             engine,
-            block_expr.block,
+            "with",
+            callback,
+            ActionExpr[],
             context,
             rule_label,
             current_edge,
+            evaluated_values = callback_expr isa ActionCodeblockArgumentExpr ?
+                               Any[] : Any[_runtime_copy(receiver)],
         )
     finally
         _exit_runtime_scoped_binding!(context, binding)
     end
 end
 
-function _call_runtime_tree_traversal_block!(
+function _call_runtime_tree_traversal_codeblock!(
     engine,
     receiver,
     call,
@@ -4038,7 +4082,7 @@ function _call_runtime_tree_traversal_block!(
     current_edge,
 )
     method = canonical_action_helper_name(call.method)
-    if isempty(call.args) || !(last(call.args).value isa ActionBlockValueExpr) ||
+    if isempty(call.args) ||
        (method in ("walk_leaves", "map_leaves") && length(call.args) != 1) ||
        (method == "reduce_leaves" && length(call.args) != 2)
         signature = method == "reduce_leaves" ? ".reduce_leaves(initial) { ... }" :
@@ -4048,15 +4092,33 @@ function _call_runtime_tree_traversal_block!(
             "requires the accepted tree traversal trailing-block arity in rule '$rule_label'",
         ))
     end
-    block = last(call.args).value.block
+    callback_expr = last(call.args).value
+    callback_value = _evaluate_runtime_action_expr!(
+        engine,
+        callback_expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    callback = _RuntimeTreeCodeblockCallback(
+        method,
+        _require_runtime_final_codeblock_value(
+            engine,
+            method,
+            callback_value,
+            context,
+            rule_label,
+        ),
+        !(callback_expr isa ActionCodeblockArgumentExpr),
+    )
 
     if receiver isa AbstractDict
         hash = _runtime_as_hash(receiver)
         if method == "walk_leaves"
-            _walk_runtime_hash_tree!(engine, hash, block, context, rule_label, current_edge)
+            _walk_runtime_hash_tree!(engine, hash, callback, context, rule_label, current_edge)
             return _runtime_copy(hash)
         elseif method == "map_leaves"
-            return _map_runtime_hash_tree(engine, hash, block, context, rule_label, current_edge)
+            return _map_runtime_hash_tree(engine, hash, callback, context, rule_label, current_edge)
         end
         initial = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
@@ -4069,7 +4131,7 @@ function _call_runtime_tree_traversal_block!(
             engine,
             hash,
             initial,
-            block,
+            callback,
             context,
             rule_label,
             current_edge,
@@ -4077,10 +4139,10 @@ function _call_runtime_tree_traversal_block!(
     elseif receiver isa AbstractVector
         items = _runtime_as_array(receiver)
         if method == "walk_leaves"
-            _walk_runtime_array_tree!(engine, items, block, context, rule_label, current_edge)
+            _walk_runtime_array_tree!(engine, items, callback, context, rule_label, current_edge)
             return _runtime_copy(items)
         elseif method == "map_leaves"
-            return _map_runtime_array_tree(engine, items, block, context, rule_label, current_edge)
+            return _map_runtime_array_tree(engine, items, callback, context, rule_label, current_edge)
         end
         initial = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
@@ -4093,7 +4155,7 @@ function _call_runtime_tree_traversal_block!(
             engine,
             items,
             initial,
-            block,
+            callback,
             context,
             rule_label,
             current_edge,
@@ -4272,7 +4334,7 @@ end
 
 function _evaluate_runtime_tree_leaf!(
     engine,
-    block,
+    callback::_RuntimeTreeCodeblockCallback,
     value,
     path,
     context,
@@ -4297,12 +4359,16 @@ function _evaluate_runtime_tree_leaf!(
         end
         push!(bindings, _enter_runtime_scoped_scalar!(context, "path", path))
         push!(bindings, _enter_runtime_scoped_scalar!(context, "depth", length(path)))
-        return _evaluate_runtime_block_value!(
+        return _execute_runtime_codeblock_value!(
             engine,
-            block,
+            callback.name,
+            callback.value,
+            ActionExpr[],
             context,
             rule_label,
             current_edge,
+            evaluated_values = callback.pass_leaf_value ?
+                               Any[_runtime_copy(value)] : Any[],
         )
     finally
         for binding in Iterators.reverse(bindings)
@@ -6110,6 +6176,37 @@ function _decode_runtime_codeblock(value)
         String(value["source_text"]),
         String(value["body_source"]),
     )
+end
+
+function _require_runtime_final_codeblock_value(
+    engine::LinkedSpecRuntimeEngine,
+    callable_name::String,
+    value,
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    codeblock = _decode_runtime_codeblock(value)
+    if codeblock !== nothing
+        return codeblock
+    end
+    value_kind = _runtime_binding_kind(value)
+    detail = "final_argument_not_codeblock callable_name=$(repr(callable_name)) " *
+             "value_kind=$(repr(value_kind)) rule_label=$(repr(rule_label))"
+    throw(RuntimeInterpreterException(
+        detail;
+        diagnostic = _runtime_context_diagnostic(
+            engine,
+            context;
+            stage = "callable_codeblock_invocation",
+            summary = "Julia final codeblock argument validation failed",
+            detail = detail,
+            code = "final_argument_not_codeblock",
+            callable_name = callable_name,
+            value_kind = value_kind,
+            rule_label = rule_label,
+            handler_source_label = "julia_runtime:codeblock:$callable_name",
+        ),
+    ))
 end
 
 function _runtime_binding_kind_mismatch(name::String, expected_kind::String, value)

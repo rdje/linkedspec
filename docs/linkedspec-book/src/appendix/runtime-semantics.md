@@ -326,11 +326,11 @@ Julia constructs explicit `{|params| ...}` values as the same inert eight-field 
 contract, including fixed/final-rest signatures and containing Unicode-character spans. Construction, copying,
 serialization, generated reconstruction, and semantic inspection do not execute or capture the body. Julia now
 invokes a bound value through `cb(args)` after static callables, with copied/restored parameter bindings, live
-nonparameter caller stores, local return/results, typed failures, and ordered recursion rejection. Generic
-contextual-final-block normalization remains pending, so the governed call-site equivalence below is currently
-implemented on Perl, Rust, and Dart only.
+nonparameter caller stores, local return/results, typed failures, and ordered recursion rejection. Julia also
+preserves exact final-only callable metadata and normalizes only signature-governed attached/parenthesized final
+blocks through the same executor.
 
-On Perl, Rust, and Dart, callable metadata may declare one final codeblock parameter. At those governed call sites,
+On Perl, Rust, Dart, and Julia, callable metadata may declare one final codeblock parameter. At those governed call sites,
 `call(args) { statements }` and `call(args, { statements })` defer the immediate block as the same
 zero-positional `codeblock_argument`; the body reads the current dynamic context when invoked. In every ordinary
 argument position, `{ statements }` remains an eager block value. An explicit `{|params| statements }` always

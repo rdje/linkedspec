@@ -511,6 +511,27 @@ function _validate_function_body_parse_job(
 )
     _normalize_staged_parse_job(job)
     expected_path = ["functions", string(index), "body_source"]
+    payload = definition.body_payload
+    if !isempty(definition.parameter_kinds)
+        fixed_params = definition.params[1:(end - 1)]
+        payload_matches = payload isa AbstractDict &&
+            get(payload, "fixed_params", nothing) == fixed_params &&
+            get(payload, "codeblock_param", nothing) == last(definition.params) &&
+            get(payload, "parameter_kinds", nothing) == definition.parameter_kinds &&
+            !haskey(payload, "params") && !haskey(payload, "arity") &&
+            !haskey(payload, "signature")
+        if !payload_matches
+            throw(StagedParserRegistryException(
+                "function $(definition.name) body_payload final-codeblock metadata does not match",
+            ))
+        end
+    elseif payload isa AbstractDict &&
+            (haskey(payload, "fixed_params") || haskey(payload, "codeblock_param") ||
+             haskey(payload, "parameter_kinds"))
+        throw(StagedParserRegistryException(
+            "function $(definition.name) body_payload has unexpected final-codeblock metadata",
+        ))
+    end
     if job.parent_ast_path != expected_path
         throw(StagedParserRegistryException(
             "function $(definition.name) body_parse_job parent_ast_path must target " *
@@ -527,6 +548,19 @@ function _validate_function_body_parse_job(
     elseif job.function_name !== nothing && job.function_name != definition.name
         throw(StagedParserRegistryException(
             "function $(definition.name) body_parse_job function_name does not match",
+        ))
+    elseif !isempty(definition.parameter_kinds) &&
+            (isempty(definition.params) ||
+             job.fixed_params != definition.params[1:(end - 1)] ||
+             job.codeblock_param != last(definition.params) ||
+             job.parameter_kinds != definition.parameter_kinds ||
+             job.params !== nothing || job.arity !== nothing || job.signature !== nothing)
+        throw(StagedParserRegistryException(
+            "function $(definition.name) body_parse_job final-codeblock metadata does not match",
+        ))
+    elseif isempty(definition.parameter_kinds) && !isempty(job.parameter_kinds)
+        throw(StagedParserRegistryException(
+            "function $(definition.name) body_parse_job has unexpected final-codeblock metadata",
         ))
     elseif definition.signature === nothing && job.signature !== nothing
         throw(StagedParserRegistryException(

@@ -1568,9 +1568,10 @@ equivalence across native, serialized, generated-plan, and emitted-source execut
 same inert explicit-literal construction/state plus dynamic invocation, copied/restored caller-context bindings,
 typed result access, portable failures/recursion, and native/reconstructed/generated/emitted identity. Dart
 `.11.5.3` adds exact final-only staged/descriptor metadata and generic contextual equivalence for typed functions,
-helpers, receiver `with`, and tree traversal through the same evaluator. Julia `.11.6.1` now admits the same inert
-explicit-literal construction/state, generated reconstruction, and semantic shape, but dynamic invocation and
-generic contextual equivalence remain `.11.6.2-.3`; Lua still lacks explicit literal values. Semantic
+helpers, receiver `with`, and tree traversal through the same evaluator. Julia `.11.6.1-.3` now admit the same
+inert explicit-literal construction/state, dynamic invocation, generated reconstruction, semantic shape, exact
+final-only staged/descriptor metadata, and generic contextual equivalence through one post-registry contract owner
+and the existing evaluator. Lua still lacks explicit literal values. Semantic
 introspection and thin MCP are separately complete. No backend is called complete while a current matrix state
 remains partial or gap.
 

@@ -749,6 +749,7 @@ function _generated_effective_spec(compiled::CompiledSpec)
             params = definition.params,
             arity = definition.arity,
             signature = definition.signature,
+            parameter_kinds = definition.parameter_kinds,
             body_source = definition.body_source,
             source = definition.source,
             source_span = definition.source_span,

@@ -529,8 +529,8 @@ from left to right, so use `if`, `switch`, or `while` when later side effects mu
 Logical helpers and lazy controls share one `_runtime_truthy` typed policy: `nothing`, false, numeric zero, the empty string,
 and empty vectors/dictionaries are false; nonzero numbers, every nonempty string (including `"0"` and `"false"`),
 and nonempty aggregates are true. A typed codeblock value is true without invocation. Exact explicit
-callable-literal construction and dynamic bound-variable invocation are current; generic contextual final blocks
-remain a separate metadata-owned step.
+callable-literal construction, dynamic bound-variable invocation, and metadata-governed contextual final blocks
+are current.
 
 ```text
 Top::
@@ -607,7 +607,39 @@ syntax such as `cb(value: "x")` is retained as keyword-call data for rejection; 
 positional assignment expression. Ordinary unknown helpers outside a codeblock retain Julia's established general
 runtime diagnostic. Native, compiled-JSON reconstructed, generated-plan, and independently loaded emitted-source
 execution share this one interpreter path. No Julia closure, lexical capture, host fallback, or second generated
-executor is introduced. Metadata-governed attached and parenthesized final blocks remain owned by `.11.6.3`.
+executor is introduced.
+
+## Contextual Final Codeblocks
+
+A fixed user function can declare exactly one final codeblock-valued parameter:
+
+```text
+fn apply(value, callback: codeblock) {
+  return(callback())
+}
+
+attached = apply("ready") { return(cat(value, "!")) }
+parenthesized = apply("ready", { return(cat(value, "!")) })
+```
+
+The two calls normalize to the same zero-positional `codeblock_argument`. The callback reads the current dynamic
+function frame, so both results are `"ready!"`. The declaration does not repeat an invocation signature:
+`callback: codeblock(item)` is invalid, the typed parameter must be final, and only `codeblock` is a recognized
+parameter kind. Exact final-only metadata is retained through the function definition, staged payload/job,
+registry, version-3 outward descriptor, semantic signature, compiled JSON, generated plan, and emitted-source
+reconstruction.
+
+The same metadata owner governs helper `with`, receiver `.with`, and hash/array `walk_leaves`, `map_leaves`, and
+`reduce_leaves`. Attached and parenthesized plain blocks are admitted only at those governed final positions;
+unknown attached callees and wrong pre-block arities fail during compilation. An ordinary block elsewhere remains
+eager, attached controls retain their dedicated AST, `{ "key" : value }` remains an harray, and an explicit
+`{|item| ...}` keeps its own signature. A non-codeblock value in a typed final slot fails at runtime with
+`final_argument_not_codeblock` and its exact `callable_name`/`value_kind` fields.
+
+Contextual callbacks reuse the dynamic executor above. `with` supplies scoped `value`; tree callbacks supply
+scoped `value`, `key` or `index`, `path`, `depth`, and `acc` where applicable. The callback value is resolved before
+those contextual names are installed, preserving ordinary lookup/shadowing order. Native, reconstructed,
+generated-plan, and freshly loaded emitted Julia all consume the same normalized record and executor.
 
 Run `bash tools/check_logical_helper_five_backend.sh` from the repository root for the full recurring neutral,
 six-runtime, selected-primary, and support-ledger proof. Canonical local CI exposes the same all-toolchain leg as

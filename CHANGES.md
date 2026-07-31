@@ -1,5 +1,39 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.3 — normalize Julia final codeblocks
+
+Julia now preserves an exact final-only `name: codeblock` declaration through the shared function-definition
+projection, staged payload/job, typed definition and registry, version-3 outward descriptor, generated effective
+spec, and semantic signature. Definition, payload, and job metadata are correlated separately so reconstructed
+state cannot add, move, or mutate the typed slot. All four invalid declaration forms retain their neutral codes.
+
+New `CallableContract.jl` is the single post-registry owner for contextual admission. It combines builtin
+helper/receiver contracts with the complete user-function registry, validates the number of values before the
+final block, rejects unknown attached calls, and converts only an admitted immediate block to the neutral
+zero-positional `codeblock_argument`. Receiver attachment parsing no longer embeds a four-name semantic allowlist.
+Ordinary eager blocks, attached controls, harrays, and explicit `{|params| ...}` signatures remain distinct.
+
+Helper/receiver `with`, typed user functions, and hash/array `walk_leaves`/`map_leaves`/`reduce_leaves` validate a
+plain final codeblock value and reuse the `.11.6.2` dynamic executor. Contextual blocks read scoped dynamic
+`value`/`key`/`index`/`path`/`depth`/`acc` bindings with zero positional values; explicit codeblock values keep their
+authored signatures. Callback values resolve before contextual shadow bindings are installed. Invalid final values
+emit `final_argument_not_codeblock`; no Julia closure, host callback, syntax-specific executor, or lexical capture
+is introduced.
+
+Focused proof passes 125/125 dynamic, 118/118 contextual, and 239/239 construction assertions across native,
+compiled-JSON reconstruction, generated plans, and freshly loaded emitted Julia. The complete package suite passes
+after three legacy negative tests were advanced from late runtime failure to the new compile-time
+`callable_contract_rejected`/`callable_contract_arity_mismatch` boundary. Capability and MCP status, other
+backends, root `README.md`, push cadence, and Lua's separately owned explicit-callable gap remain unchanged.
+
+The uninterrupted Julia-local gate passes the byte-fresh 120,030-byte MCP binding, complete package, 18 storage
+owners / five locked package trees, primary CLI, and corpus 105/105. Final governance passes Knowledge Map 771
+facts / 6,256 question keys, mdBook 79 files / 13,980 KiB, memory/task/whitespace/README checks, and all seven
+doctrines. The definitive canonical wrapper exits 0 after semantic/MCP admissions, nested process containment,
+moved-root anchors, primary CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 966 seconds, then reports
+`local CI gate passed`. Exact generated output is removed. Julia parent `.11.6` closes; four-backend no-drift and
+Lua routing `.11.7` is the next clean frontier.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.2 — execute Julia callable codeblocks
 
 Julia now invokes `cb(args)` when `cb` is bound to the neutral eight-field callable-codeblock record. Controls,

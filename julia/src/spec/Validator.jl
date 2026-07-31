@@ -283,6 +283,20 @@ function _check_function_registry(spec::SpecFile)
 
         signature = function_definition.signature
         validated_rest_param = nothing
+        parameter_kinds = function_definition.parameter_kinds
+        if !isempty(parameter_kinds)
+            if signature !== nothing || isempty(function_definition.params)
+                throw(SpecValidationException(
+                    "user function '$name' has invalid final-codeblock metadata",
+                ))
+            end
+            final_param = last(function_definition.params)
+            if parameter_kinds != Dict(final_param => "codeblock")
+                throw(SpecValidationException(
+                    "user function '$name' has invalid final-codeblock parameter kinds",
+                ))
+            end
+        end
         if signature !== nothing
             if signature.kind != "callable_signature" || signature.version != 1
                 throw(SpecValidationException("user function '$name' has unsupported callable signature"))

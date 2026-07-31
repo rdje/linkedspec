@@ -1,8 +1,16 @@
-# FUTURE-PARITY-BACKLOG.11.6.1-.2 — Julia callable-codeblock state/invocation.
+# FUTURE-PARITY-BACKLOG.11.6.1-.3 — Julia callable-codeblock state/invocation/context.
 
 const CALLABLE_CODEBLOCK_CONTRACT = JSON3.read(
     read(
         joinpath(REPO_ROOT, "capability_conformance", "callable_codeblock_contract.json"),
+        String,
+    ),
+    Dict{String,Any},
+)
+
+const CALLABLE_CODEBLOCK_DESCRIPTOR_CONTRACT = JSON3.read(
+    read(
+        joinpath(REPO_ROOT, "capability_conformance", "outward_descriptor_contract.json"),
         String,
     ),
     Dict{String,Any},
@@ -94,6 +102,60 @@ function _callable_codeblock_invalid_call_source(id::AbstractString)
  /x/
  E { $body }
 """
+end
+
+function _callable_codeblock_contextual_source()
+    return """fn apply(value, callback: codeblock) { return(callback()) }
+fn invoke(value, callback: codeblock) { return(callback(value)) }
+
+Top::
+ /x/
+ E {
+   return([
+     with(\"x\") { return(cat(value, \"!\")) },
+     with(\"x\", { return(cat(value, \"!\")) }),
+     with(\"x\", {|item| return(cat(item, \"!\")) }),
+     \"x\".with() { return(cat(value, \"!\")) },
+     \"x\".with({ return(cat(value, \"!\")) }),
+     \"x\".with({|item| return(cat(item, \"!\")) }),
+     apply(\"a\") { return(cat(value, \"!\")) },
+     apply(\"b\", { return(cat(value, \"?\")) }),
+     invoke(\"c\", {|item| return(cat(item, \".\")) }),
+     { \"b\" : 2, \"a\" : 1 }.map_leaves() { return(cat(value, \"!\")) },
+     { \"b\" : 2, \"a\" : 1 }.map_leaves({ return(cat(value, \"!\")) }),
+     [1, 2].map_leaves() { return(cat(value, \"!\")) },
+     [1, 2].map_leaves({ return(cat(value, \"!\")) })
+   ])
+ }
+"""
+end
+
+function _callable_codeblock_contextual_expected()
+    return Any[
+        "x!",
+        "x!",
+        "x!",
+        "x!",
+        "x!",
+        "x!",
+        "a!",
+        "b?",
+        "c.",
+        Dict{String,Any}("a" => "1!", "b" => "2!"),
+        Dict{String,Any}("a" => "1!", "b" => "2!"),
+        Any["1!", "2!"],
+        Any["1!", "2!"],
+    ]
+end
+
+function _callable_codeblock_final_argument_json(expression::ActionExpr)
+    encoded = to_json(expression)
+    if expression isa ActionCallExpr
+        return last(encoded["args"])
+    elseif expression isa ActionFluentChainExpr
+        return last(only(encoded["calls"])["args"])
+    end
+    error("expression $(expression.kind) has no callable final argument")
 end
 
 @testset "Julia callable-codeblock dynamic invocation contract" begin
@@ -384,6 +446,301 @@ Top::
             @test diagnostic["code"] == "codeblock_recursion_unsupported"
             @test diagnostic["callable_name"] == "left"
             @test diagnostic["cycle"] == ["left", "right", "left"]
+        end
+    end
+end
+
+@testset "Julia generic final-codeblock normalization contract" begin
+    @testset "typed declaration and all neutral contextual AST cases are metadata-owned" begin
+        contextual = CALLABLE_CODEBLOCK_CONTRACT["contextual_final_block_cases"]
+        @test Set(row["id"] for row in contextual) == Set([
+            "helper_attached",
+            "helper_parenthesized",
+            "user_function_attached",
+            "user_function_parenthesized",
+            "receiver_attached",
+            "receiver_parenthesized",
+            "explicit_literal",
+            "harray_not_promoted",
+        ])
+
+        source = _callable_codeblock_contextual_source()
+        parsed = parse_spec_with_staged_user_function_definitions(source)
+        apply = only(definition for definition in parsed.functions if definition.name == "apply")
+        @test apply.params == ["value", "callback"]
+        @test apply.arity == 2
+        @test apply.parameter_kinds == Dict("callback" => "codeblock")
+        @test apply.body_payload["fixed_params"] == Any["value"]
+        @test apply.body_payload["codeblock_param"] == "callback"
+        @test apply.body_payload["parameter_kinds"] == Dict("callback" => "codeblock")
+        @test apply.body_parse_job.fixed_params == ["value"]
+        @test apply.body_parse_job.codeblock_param == "callback"
+        @test apply.body_parse_job.parameter_kinds == Dict("callback" => "codeblock")
+
+        compiled = compile_spec(parsed)
+        descriptor = to_descriptor_json(compiled)["functions"]["apply"]
+        variant = CALLABLE_CODEBLOCK_DESCRIPTOR_CONTRACT["function_record_variants"]["final_codeblock_v3"]
+        @test Set(keys(descriptor)) == Set{String}(variant["record_fields"])
+        @test descriptor["version"] == 3
+        @test descriptor["params"] == ["value", "callback"]
+        @test descriptor["arity"] == 2
+        @test descriptor["parameter_kinds"] == Dict("callback" => "codeblock")
+
+        payload = only(compiled.rules_by_label["Top"].lifecycle_action_payloads)
+        returned = only(payload.action_ast.statements).expr
+        @test returned isa ActionCallExpr
+        items = only(returned.args).value.items
+        for (attached_index, parenthesized_index) in (
+            (1, 2),
+            (4, 5),
+            (10, 11),
+            (12, 13),
+        )
+            attached = _callable_codeblock_final_argument_json(items[attached_index])
+            parenthesized = _callable_codeblock_final_argument_json(items[parenthesized_index])
+            for field in ("kind", "version", "signature", "body_source")
+                @test attached[field] == parenthesized[field]
+            end
+            @test attached["body_ast"]["source"] == parenthesized["body_ast"]["source"]
+            @test [row["source"] for row in attached["body_ast"]["statements"]] ==
+                  [row["source"] for row in parenthesized["body_ast"]["statements"]]
+            @test attached["kind"] == "codeblock_argument"
+            @test attached["signature"]["positional_params"] == Any[]
+            @test attached["signature"]["max_arity"] == 0
+        end
+        for explicit_index in (3, 6, 9)
+            @test _callable_codeblock_final_argument_json(items[explicit_index])["kind"] ==
+                  "codeblock_literal"
+        end
+        @test !occursin("contextual_codeblock_candidate", JSON3.write(to_json(compiled)))
+
+        index = semantic_index(
+            source;
+            logical_name = "callable-codeblock-final-equivalence.spec",
+            source_detail_ceiling = SemanticSourceNoneDetail,
+        )
+        projection = LinkedSpecJulia._semantic_static_projection_for_testing(index)
+        function_record = only(
+            record for record in projection["records"] if
+            record["kind"] == "function" && record["name"] == "apply"
+        )
+        @test function_record["facts"]["parameter_kinds"] == Any["value", "codeblock"]
+        @test function_record["facts"]["signature"]["final_codeblock"] == true
+    end
+
+    @testset "contextual forms execute through every Julia authority" begin
+        source = _callable_codeblock_contextual_source()
+        expected = _callable_codeblock_contextual_expected()
+        compiled = _callable_codeblock_compile(source)
+        @test runtime_execute(LinkedSpecRuntimeEngine(compiled), "x").value == expected
+
+        reconstructed = _callable_codeblock_reconstruct(
+            compiled,
+            "callable-codeblock-final-equivalence.spec",
+        )
+        @test reconstructed isa CompiledSpec
+        if reconstructed isa CompiledSpec
+            @test runtime_execute(LinkedSpecRuntimeEngine(reconstructed), "x").value == expected
+        end
+        @test execute_generated_parser_v2(
+            compiled,
+            build_generated_rule_plan(compiled),
+            "x",
+            "callable-codeblock-final-equivalence.spec",
+        ) == expected
+
+        generated = emit_julia_source_v2(
+            compiled,
+            "callable-codeblock-final-equivalence.spec",
+        )
+        mktempdir() do scratch
+            generated_path = joinpath(scratch, "callable_codeblock_contextual_generated.jl")
+            write(generated_path, generated)
+            host = Module(gensym(:JuliaContextualCodeblockHost))
+            Base.include(host, generated_path)
+            parser = Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
+            execute = Base.invokelatest(() -> getfield(parser, :execute))
+            @test Base.invokelatest(execute, "x") == expected
+        end
+    end
+
+    @testset "eager blocks controls and callback resolution remain distinct" begin
+        compiled = _callable_codeblock_compile("""Top::
+ /x/
+ E {
+   state = "before";
+   eager = array({ state = "eager"; state });
+   if(true) { state = cat(state, "!") };
+   return([state, eager])
+ }
+""")
+        encoded = JSON3.write(to_json(compiled))
+        @test occursin("block_value", encoded)
+        @test occursin("control_if", encoded)
+        @test runtime_execute(LinkedSpecRuntimeEngine(compiled), "x").value ==
+              Any["eager!", Any["eager"]]
+
+        unknown = _callable_codeblock_attempt() do
+            _callable_codeblock_compile("""Top::
+ /x/
+ E { return(custom("x") { return(value) }) }
+""")
+        end
+        @test unknown isa CompiledSpecException
+        @test occursin("callable_contract_rejected", sprint(showerror, unknown))
+
+        unknown_receiver = _callable_codeblock_attempt() do
+            _callable_codeblock_compile("""Top::
+ /x/
+ E { return("x".custom() { return(value) }) }
+""")
+        end
+        @test unknown_receiver isa CompiledSpecException
+        @test occursin("callable_contract_rejected", sprint(showerror, unknown_receiver))
+        @test occursin("receiver", sprint(showerror, unknown_receiver))
+
+        resolution = _callable_codeblock_compile("""Top::
+ /x/
+ E {
+   value = {|item| return(cat(item, "!")) };
+   return([with("a", value), "b".with(value)])
+ }
+""")
+        @test runtime_execute(LinkedSpecRuntimeEngine(resolution), "x").value == Any["a!", "b!"]
+    end
+
+    @testset "typed metadata arity declarations and final values fail closed" begin
+        parsed = parse_spec_with_staged_user_function_definitions(
+            """fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+""",
+        )
+        malformed = JSON3.read(JSON3.write(to_json(parsed)), Dict{String,Any})
+        only(malformed["functions"])["body_parse_job"]["parameter_kinds"] =
+            Dict("value" => "codeblock")
+        drift = _callable_codeblock_attempt() do
+            stitch_function_body_parse_jobs(from_json(SpecFile, malformed))
+        end
+        @test drift isa StagedParserRegistryException
+        @test occursin("final-codeblock metadata does not match", sprint(showerror, drift))
+
+        malformed_payload = JSON3.read(JSON3.write(to_json(parsed)), Dict{String,Any})
+        only(malformed_payload["functions"])["body_payload"]["parameter_kinds"] =
+            Dict("value" => "codeblock")
+        payload_drift = _callable_codeblock_attempt() do
+            stitch_function_body_parse_jobs(from_json(SpecFile, malformed_payload))
+        end
+        @test payload_drift isa StagedParserRegistryException
+        @test occursin("body_payload final-codeblock metadata", sprint(showerror, payload_drift))
+
+        malformed_definition = JSON3.read(JSON3.write(to_json(parsed)), Dict{String,Any})
+        only(malformed_definition["functions"])["parameter_kinds"] =
+            Dict("value" => "codeblock")
+        definition_drift = _callable_codeblock_attempt() do
+            validate_spec(from_json(SpecFile, malformed_definition))
+        end
+        @test definition_drift isa SpecValidationException
+        @test occursin("invalid final-codeblock parameter kinds", sprint(showerror, definition_drift))
+
+        for (surface, expression) in (
+            ("helper", "with(\"a\", \"b\") { return(value) }"),
+            ("receiver", "\"a\".with(\"b\") { return(value) }"),
+            ("user_function", "apply(\"a\", \"b\") { return(value) }"),
+        )
+            failure = _callable_codeblock_attempt() do
+                _callable_codeblock_compile("""fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return($expression) }
+""")
+            end
+            @test failure isa CompiledSpecException
+            @test occursin("callable_contract_arity_mismatch", sprint(showerror, failure))
+        end
+
+        declaration = CALLABLE_CODEBLOCK_CONTRACT["final_codeblock_parameter_declaration"]
+        for row in declaration["invalid"]
+            failure = _callable_codeblock_attempt() do
+                parse_spec_with_staged_user_function_definitions("""fn invalid($(row["source"])) { return(undef) }
+
+Top::
+ /x/
+""")
+            end
+            @test occursin(row["expected_code"], sprint(showerror, failure))
+        end
+
+        for (name, expression) in (
+            ("typed_function", "apply(\"x\", { \"value\" : value })"),
+            ("helper", "with(\"x\", { \"value\" : value })"),
+            ("receiver", "\"x\".with({ \"value\" : value })"),
+        )
+            compiled = _callable_codeblock_compile(
+                """fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return($expression) }
+""",
+            )
+            failure = _callable_codeblock_runtime_failure(compiled)
+            @test failure.diagnostic.code == "final_argument_not_codeblock"
+            @test failure.diagnostic.value_kind == "harray"
+
+            reconstructed = _callable_codeblock_reconstruct(
+                compiled,
+                "callable-codeblock-final-$name.spec",
+            )
+            @test reconstructed isa CompiledSpec
+            if reconstructed isa CompiledSpec
+                round_trip = _callable_codeblock_runtime_failure(reconstructed)
+                @test to_json(round_trip.diagnostic) == to_json(failure.diagnostic)
+            end
+            generated = _callable_codeblock_attempt() do
+                execute_generated_parser_v2(
+                    compiled,
+                    build_generated_rule_plan(compiled),
+                    "x",
+                    "callable-codeblock-final-$name.spec",
+                )
+            end
+            @test generated isa GeneratedSourceException
+            @test occursin(
+                "final_argument_not_codeblock",
+                something(generated.detail, ""),
+            )
+        end
+
+        emitted_invalid = _callable_codeblock_compile(
+            """fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return(apply("x", { "value" : value })) }
+""",
+        )
+        generated = emit_julia_source_v2(
+            emitted_invalid,
+            "callable-codeblock-final-invalid-emitted.spec",
+        )
+        mktempdir() do scratch
+            generated_path = joinpath(scratch, "callable_codeblock_contextual_invalid.jl")
+            write(generated_path, generated)
+            host = Module(gensym(:JuliaContextualCodeblockInvalidHost))
+            Base.include(host, generated_path)
+            parser = Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
+            execute = Base.invokelatest(() -> getfield(parser, :execute))
+            failure = _callable_codeblock_attempt() do
+                Base.invokelatest(execute, "x")
+            end
+            @test failure isa GeneratedSourceException
+            @test occursin(
+                "final_argument_not_codeblock",
+                something(failure.detail, ""),
+            )
         end
     end
 end

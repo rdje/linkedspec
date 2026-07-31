@@ -180,7 +180,31 @@ function _function_from_definition_ast(object::Dict{String,Any}, source::String,
     params = String[]
     arity = 0
     signature = nothing
-    if version == 1
+    parameter_kinds = Dict{String,String}()
+    has_final_codeblock = haskey(object, "parameter_kinds") ||
+                          haskey(object, "fixed_params") ||
+                          haskey(object, "codeblock_param")
+    if has_final_codeblock
+        if version != 1 || haskey(object, "params") || haskey(object, "arity") ||
+                haskey(object, "signature")
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index final-codeblock metadata must use " *
+                "version 1 fixed_params plus codeblock_param",
+            ))
+        end
+        fixed_params = _ufd_string_list_field(object, "fixed_params", index)
+        codeblock_param = _ufd_string_field(object, "codeblock_param", "function_definition")
+        parameter_kinds = _ufd_string_map_field(object, "parameter_kinds", index)
+        _validate_final_codeblock_metadata(
+            fixed_params,
+            codeblock_param,
+            parameter_kinds,
+            index,
+            "function_definition",
+        )
+        params = String[fixed_params..., codeblock_param]
+        arity = length(params)
+    elseif version == 1
         if haskey(object, "signature")
             throw(UserFunctionDefinitionException(
                 "function_definition node $index version 1 must not contain signature",
@@ -226,11 +250,31 @@ function _function_from_definition_ast(object::Dict{String,Any}, source::String,
     end
 
     body_payload = _copy_json(_ufd_required_value(object, "body_payload", index))
-    _validate_body_payload(body_payload, name, params, arity, signature, body_source, body_span, index)
+    _validate_body_payload(
+        body_payload,
+        name,
+        params,
+        arity,
+        signature,
+        parameter_kinds,
+        body_source,
+        body_span,
+        index,
+    )
     _normalize_parent_ast_path!(body_payload, index, "body_payload")
 
     body_parse_job = _copy_json(_ufd_required_value(object, "body_parse_job", index))
-    _validate_body_parse_job(body_parse_job, name, params, arity, signature, body_source, body_span, index)
+    _validate_body_parse_job(
+        body_parse_job,
+        name,
+        params,
+        arity,
+        signature,
+        parameter_kinds,
+        body_source,
+        body_span,
+        index,
+    )
     _normalize_body_parse_job!(body_parse_job, index, body_span)
 
     return _ProjectedUserFunction(
@@ -239,6 +283,7 @@ function _function_from_definition_ast(object::Dict{String,Any}, source::String,
             params = params,
             arity = arity,
             signature = signature,
+            parameter_kinds = parameter_kinds,
             body_source = body_source,
             body_payload = body_payload,
             body_parse_job = from_json(StagedParseJob, _ufd_object(body_parse_job, "body_parse_job")),
@@ -292,7 +337,17 @@ function _strip_function_definition_spans(source::String, spans::Vector{_UserFun
     return String(take!(output))
 end
 
-function _validate_body_payload(payload, name::String, params::Vector{String}, arity::Int, signature, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
+function _validate_body_payload(
+    payload,
+    name::String,
+    params::Vector{String},
+    arity::Int,
+    signature,
+    parameter_kinds::Dict{String,String},
+    body_source::String,
+    body_span::_UserFunctionAstSpan,
+    index::Int,
+)
     object = _ufd_object(payload, "function_definition node $index body_payload")
     _ufd_assert_string_field(object, "kind", "staged_payload", index)
     _ufd_assert_string_field(object, "node_kind", "function_definition", index)
@@ -303,7 +358,15 @@ function _validate_body_payload(payload, name::String, params::Vector{String}, a
             "function_definition node $index body_payload function_name does not match name",
         ))
     end
-    _validate_staged_signature(object, "body_payload", params, arity, signature, index)
+    _validate_staged_signature(
+        object,
+        "body_payload",
+        params,
+        arity,
+        signature,
+        parameter_kinds,
+        index,
+    )
     if _ufd_string_field(object, "text", "body_payload") != body_source
         throw(UserFunctionDefinitionException(
             "function_definition node $index body_payload text does not match body_source",
@@ -317,7 +380,17 @@ function _validate_body_payload(payload, name::String, params::Vector{String}, a
     return nothing
 end
 
-function _validate_body_parse_job(job, name::String, params::Vector{String}, arity::Int, signature, body_source::String, body_span::_UserFunctionAstSpan, index::Int)
+function _validate_body_parse_job(
+    job,
+    name::String,
+    params::Vector{String},
+    arity::Int,
+    signature,
+    parameter_kinds::Dict{String,String},
+    body_source::String,
+    body_span::_UserFunctionAstSpan,
+    index::Int,
+)
     object = _ufd_object(job, "function_definition node $index body_parse_job")
     _ufd_assert_string_field(object, "kind", "parse_job", index)
     _ufd_assert_string_field(object, "node_kind", "function_definition", index)
@@ -331,7 +404,15 @@ function _validate_body_parse_job(job, name::String, params::Vector{String}, ari
             "function_definition node $index body_parse_job function_name does not match name",
         ))
     end
-    _validate_staged_signature(object, "body_parse_job", params, arity, signature, index)
+    _validate_staged_signature(
+        object,
+        "body_parse_job",
+        params,
+        arity,
+        signature,
+        parameter_kinds,
+        index,
+    )
     if _ufd_string_field(object, "text", "body_parse_job") != body_source
         throw(UserFunctionDefinitionException(
             "function_definition node $index body_parse_job text does not match body_source",
@@ -369,7 +450,40 @@ function _validate_body_parse_job(job, name::String, params::Vector{String}, ari
     return nothing
 end
 
-function _validate_staged_signature(object::Dict{String,Any}, context::String, params::Vector{String}, arity::Int, signature, index::Int)
+function _validate_staged_signature(
+    object::Dict{String,Any},
+    context::String,
+    params::Vector{String},
+    arity::Int,
+    signature,
+    parameter_kinds::Dict{String,String},
+    index::Int,
+)
+    if !isempty(parameter_kinds)
+        if haskey(object, "params") || haskey(object, "arity") || haskey(object, "signature")
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index $context final-codeblock metadata must use " *
+                "fixed_params plus codeblock_param",
+            ))
+        end
+        fixed_params = _ufd_string_list_field(object, "fixed_params", index)
+        codeblock_param = _ufd_string_field(object, "codeblock_param", context)
+        actual_kinds = _ufd_string_map_field(object, "parameter_kinds", index)
+        _validate_final_codeblock_metadata(
+            fixed_params,
+            codeblock_param,
+            actual_kinds,
+            index,
+            context,
+        )
+        if params != String[fixed_params..., codeblock_param] || actual_kinds != parameter_kinds ||
+                arity != length(params)
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index $context final-codeblock metadata does not match definition",
+            ))
+        end
+        return nothing
+    end
     if signature !== nothing
         if haskey(object, "params") || haskey(object, "arity")
             throw(UserFunctionDefinitionException(
@@ -394,6 +508,33 @@ function _validate_staged_signature(object::Dict{String,Any}, context::String, p
     end
     if _ufd_int_field(object, "arity", index) != arity
         throw(UserFunctionDefinitionException("function_definition node $index $context arity does not match arity"))
+    end
+    return nothing
+end
+
+function _validate_final_codeblock_metadata(
+    fixed_params::Vector{String},
+    codeblock_param::String,
+    parameter_kinds::Dict{String,String},
+    index::Int,
+    context::String,
+)
+    for param in fixed_params
+        if !_is_identifier(param)
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index $context has invalid fixed parameter '$param'",
+            ))
+        end
+    end
+    if !_is_identifier(codeblock_param) || codeblock_param in fixed_params
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index $context has invalid codeblock parameter '$codeblock_param'",
+        ))
+    end
+    if parameter_kinds != Dict(codeblock_param => "codeblock")
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index $context has invalid final-codeblock parameter_kinds",
+        ))
     end
     return nothing
 end
@@ -522,6 +663,25 @@ function _ufd_string_list_field(object::Dict{String,Any}, field::String, index::
     return result
 end
 
+function _ufd_string_map_field(object::Dict{String,Any}, field::String, index::Int)
+    value = get(object, field, nothing)
+    if !(value isa AbstractDict)
+        throw(UserFunctionDefinitionException(
+            "function_definition node $index is missing object field '$field'",
+        ))
+    end
+    result = Dict{String,String}()
+    for (key, item) in value
+        if !(key isa AbstractString) || !(item isa AbstractString)
+            throw(UserFunctionDefinitionException(
+                "function_definition node $index field '$field' must contain string keys and values",
+            ))
+        end
+        result[String(key)] = String(item)
+    end
+    return result
+end
+
 function _ufd_callable_signature_field(object::Dict{String,Any}, field::String, index::Int)
     signature = _ufd_object(
         _ufd_required_value(object, field, index),
@@ -610,9 +770,32 @@ function _function_definition_error(object::Dict{String,Any}, index::Int)
         end
     end
     message_value = get(object, "message", nothing)
-    message = message_value isa AbstractString ? String(message_value) : "invalid user function definition"
+    source_text = get(object, "source_text", nothing)
+    typed_code = source_text isa AbstractString ?
+                 _typed_declaration_error_code(String(source_text)) : nothing
+    message = typed_code !== nothing ? typed_code :
+              (message_value isa AbstractString ? String(message_value) :
+               "invalid user function definition")
     if line > 0
         return SpecParseException(line, "user function definition parse error at line $line: $message")
     end
     return SpecParseException(1, "user function definition parse error at node $index: $message")
+end
+
+function _typed_declaration_error_code(source_text::String)
+    open_brace = findfirst('{', source_text)
+    header = open_brace === nothing ? source_text :
+             String(SubString(source_text, firstindex(source_text), prevind(source_text, open_brace)))
+    if occursin(r":\s*codeblock\s*\(", header)
+        return "codeblock_declaration_has_no_argument_list"
+    elseif occursin(r":\s*codeblock\s*,", header)
+        return "codeblock_parameter_must_be_final"
+    elseif occursin(r"\(\s*:\s*codeblock\b", header)
+        return "invalid_codeblock_parameter_name"
+    end
+    typed = match(r"\b[A-Za-z_][A-Za-z0-9_]*\s*:\s*([A-Za-z_][A-Za-z0-9_]*)", header)
+    if typed !== nothing && typed.captures[1] != "codeblock"
+        return "unknown_parameter_type"
+    end
+    return nothing
 end

@@ -825,10 +825,10 @@ Three backbone items tracked major structural modernization — all done:
   equivalent attached/parenthesized helper, typed-user-function, and receiver final blocks, exact descriptor-v3
   kinds, preserved eager/control blocks, typed non-codeblock rejection, and identical native/reconstructed/
   generated/emitted execution. Dart `.11.5.1-.3` now provide the same construction, explicit dynamic invocation,
-  exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia `.11.6.1-.2` now
-  provide exact inert literal/signature/body/source/Unicode-span state plus dynamic bound-variable invocation
-  across native, serialized, generated, emitted, user-function, and semantic authorities; only Julia generic
-  normalization remains `.11.6.3`. Lua explicit-literal parity remains future.
+  exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia `.11.6.1-.3` now
+  provide exact inert literal/signature/body/source/Unicode-span state, dynamic bound-variable invocation, exact
+  final-only staged/descriptor metadata, and one governed contextual normalizer across native, serialized,
+  generated, emitted, user-function, and semantic authorities. Lua explicit-literal parity remains future.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including
@@ -857,7 +857,11 @@ Three backbone items tracked major structural modernization — all done:
   state, invocation-local return/final results, typed call-result access/chaining, exact neutral failures, and
   ordered recursion rejection. Native, reconstructed, generated-plan, and freshly loaded emitted-source roles
   agree across 125 dynamic plus 239 construction assertions; the complete Julia package and operational gates
-  are green. Generic contextual final blocks remain `.11.6.3`.
+  are green. Completed `.11.6.3` adds exact final-only definition/staged/registry/descriptor-v3 metadata and one
+  post-registry signature-governed normalizer. Attached and parenthesized helper, typed-user-function, receiver,
+  and hash/array tree blocks become the same zero-positional argument and run through the existing evaluator across
+  native, reconstructed, generated-plan, and freshly loaded emitted Julia. Eager blocks, controls, explicit
+  literal signatures, harrays, static precedence, and portable failures remain distinct; parent `.11.6` is closed.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

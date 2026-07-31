@@ -183,8 +183,11 @@ fixed/final-rest signature, typed body, containing Unicode-character spans, user
 compiled/generated/emitted state, and semantic codeblock shape. Julia `.11.6.2` now executes bound calls with the
 same ordered arguments, dynamic caller stores, copied/restored fixed/rest bindings, local return/result access,
 static precedence, typed failures, and ordered recursion rejection across native/reconstructed/generated/emitted
-roles. Julia generic final blocks remain `.11.6.3`; Lua explicit literals remain future, so complete invocation
-behavior is not yet universally portable.
+roles. Julia `.11.6.3` preserves exact final-only typed metadata and applies one post-registry contract pass to
+equivalent attached/parenthesized helper, typed-user-function, receiver, and tree blocks. The normalized
+zero-positional record executes through the same evaluator in native/reconstructed/generated/emitted roles while
+eager blocks, controls, explicit signatures, and harrays remain distinct. Lua explicit literals remain future, so
+complete invocation behavior is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

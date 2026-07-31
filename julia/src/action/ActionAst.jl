@@ -238,6 +238,39 @@ function ActionCodeblockLiteralExpr(;
     )
 end
 
+"""A zero-positional contextual block admitted by a callable's final-parameter contract."""
+struct ActionCodeblockArgumentExpr <: ActionExpr
+    kind::String
+    version::Int
+    signature::CallableSignature
+    body_source::String
+    body_ast::ActionBlock
+    source::String
+    source_span::ActionSourceSpan
+    body_span::ActionSourceSpan
+end
+
+function ActionCodeblockArgumentExpr(;
+    version = 1,
+    signature,
+    body_source,
+    body_ast,
+    source,
+    source_span,
+    body_span,
+)
+    return ActionCodeblockArgumentExpr(
+        "codeblock_argument",
+        version,
+        signature,
+        String(body_source),
+        body_ast,
+        String(source),
+        source_span,
+        body_span,
+    )
+end
+
 """Stable parser result for a malformed callable-codeblock literal."""
 struct ActionCodeblockLiteralErrorExpr <: ActionExpr
     kind::String
@@ -769,7 +802,8 @@ function find_removed_aggregate_selector(expr::ActionExpr)
         return nothing
     elseif expr isa ActionBlockValueExpr
         return find_removed_aggregate_selector(expr.block)
-    elseif expr isa ActionCodeblockLiteralExpr || expr isa ActionCodeblockLiteralErrorExpr
+    elseif expr isa ActionCodeblockLiteralExpr || expr isa ActionCodeblockArgumentExpr ||
+           expr isa ActionCodeblockLiteralErrorExpr
         return nothing
     elseif expr isa ActionControlIfExpr
         selector = find_removed_aggregate_selector(expr.condition)
@@ -916,6 +950,19 @@ function to_json(expr::ActionBlockValueExpr)
 end
 
 function to_json(expr::ActionCodeblockLiteralExpr)
+    return Dict{String,Any}(
+        "kind" => expr.kind,
+        "version" => expr.version,
+        "signature" => to_json(expr.signature),
+        "body_source" => expr.body_source,
+        "body_ast" => to_json(expr.body_ast),
+        "source_text" => expr.source,
+        "source_span" => to_json(expr.source_span),
+        "body_span" => to_json(expr.body_span),
+    )
+end
+
+function to_json(expr::ActionCodeblockArgumentExpr)
     return Dict{String,Any}(
         "kind" => expr.kind,
         "version" => expr.version,

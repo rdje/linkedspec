@@ -104,20 +104,32 @@ function to_json(diagnostic::ActionContractDiagnostic)
     return result
 end
 
-function resolve_action_block_contracts(block::ActionBlock; function_registry = nothing)
-    resolver = _ActionContractResolver(function_registry)
+function resolve_action_block_contracts(
+    block::ActionBlock;
+    function_registry = nothing,
+    callable_bindings = Set{String}(),
+)
+    resolver = _ActionContractResolver(function_registry, callable_bindings)
     _visit_block!(resolver, block)
     return _finish(resolver)
 end
 
-function resolve_action_statement_contracts(statement::ActionStatement; function_registry = nothing)
-    resolver = _ActionContractResolver(function_registry)
+function resolve_action_statement_contracts(
+    statement::ActionStatement;
+    function_registry = nothing,
+    callable_bindings = Set{String}(),
+)
+    resolver = _ActionContractResolver(function_registry, callable_bindings)
     _visit_statement!(resolver, statement)
     return _finish(resolver)
 end
 
-function resolve_action_expression_contracts(expr::ActionExpr; function_registry = nothing)
-    resolver = _ActionContractResolver(function_registry)
+function resolve_action_expression_contracts(
+    expr::ActionExpr;
+    function_registry = nothing,
+    callable_bindings = Set{String}(),
+)
+    resolver = _ActionContractResolver(function_registry, callable_bindings)
     _visit_expr!(resolver, expr)
     return _finish(resolver)
 end
@@ -654,12 +666,14 @@ mutable struct _ActionContractResolver
     contracts::Vector{ActionResolvedContract}
     diagnostics::Vector{ActionContractDiagnostic}
     function_registry::Union{Nothing,UserFunctionRegistry}
+    callable_bindings::Set{String}
 end
 
-_ActionContractResolver(function_registry = nothing) = _ActionContractResolver(
+_ActionContractResolver(function_registry = nothing, callable_bindings = Set{String}()) = _ActionContractResolver(
     ActionResolvedContract[],
     ActionContractDiagnostic[],
     function_registry,
+    Set{String}(String(name) for name in callable_bindings),
 )
 
 function _finish(resolver::_ActionContractResolver)
@@ -754,7 +768,7 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
         _visit_expr!(resolver, expr.value)
     elseif expr isa ActionBlockValueExpr
         _visit_block!(resolver, expr.block)
-    elseif expr isa ActionCodeblockLiteralExpr
+    elseif expr isa ActionCodeblockLiteralExpr || expr isa ActionCodeblockArgumentExpr
         # A callable body is deferred state and has no eager dependencies.
         nothing
     elseif expr isa ActionCodeblockLiteralErrorExpr
@@ -899,6 +913,22 @@ function _resolve_helper_call!(
             )
             return nothing
         end
+    end
+    if surface == "function" && String(name) in resolver.callable_bindings
+        push!(
+            resolver.contracts,
+            ActionResolvedContract(
+                source_name = name,
+                canonical_name = name,
+                family = "codeblock",
+                surface = surface,
+                source = source,
+                source_span = source_span,
+                positional_arg_count = positional_arg_count,
+                keyword_arg_count = keyword_arg_count,
+            ),
+        )
+        return nothing
     end
     if !is_known_action_ir_call_name(name)
         push!(

@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.3` — one registry-complete contract pass, not parser-owned semantics):
+  the shared function-definition parser already emitted `fixed_params`, `codeblock_param`, and final-only
+  `parameter_kinds`; Julia discarded that shape before staged/registry/descriptor state. Attached helper calls
+  retained provenance, but receiver syntax embedded a four-method allowlist and both helper/receiver `with`
+  executed immediate block AST outside the dynamic executor. The missing boundary was metadata projection plus one
+  normalizer after the complete builtin/user-function registry exists.
+
+  `CallableContract.jl` now owns that decision. It recursively visits rule and function ActionIR, recognizes
+  contracts for helper/receiver `with`, tree traversal, and exact typed user functions, validates pre-block arity,
+  rejects unknown attached calls, and replaces only an admitted final `block_value` with the neutral
+  zero-positional `codeblock_argument`. Parser attachment is generic and structural; ordinary parenthesized blocks
+  stay eager, and attached controls retain their dedicated parser path. This prevents syntax recognition from
+  becoming semantic authority.
+
+  Runtime call sites resolve and validate the final plain codeblock before installing scoped callback bindings,
+  then invoke the existing `.11.6.2` executor. Contextual blocks receive zero positional values and read dynamic
+  scope; explicit callable values may still receive the helper/receiver/leaf value according to their authored
+  signature. The same owner covers typed user-function frames and hash/array traversal. Descriptor-v3, staged,
+  generated, semantic, reconstructed, and freshly emitted routes all retain the same metadata and normalized
+  eight-field value; no closure, host callback, or second executor exists.
+
+  The first complete package run did not expose a production regression; it found two older tests whose invalid
+  attached `cat`/receiver-`with` cases still expected runtime failure. After those assertions adopted the new
+  compile-time contract identity, the next run found the analogous malformed `map_leaves` arity expectation.
+  Updating all three to exact `callable_contract_*` messages made the complete package green while its valid legacy
+  block and tree programs remained unchanged. Focused proof is 125 dynamic + 118 contextual + 239 construction.
+
+  One uninterrupted Julia-local gate confirms the byte-fresh 120,030-byte MCP binding, complete package, 18
+  storage owners / five locked package trees, primary CLI, and corpus 105/105. Final lockstep proof passes
+  Knowledge Map 771/6,256, mdBook 79 files / 13,980 KiB, memory/task/whitespace/README checks, all seven doctrines,
+  semantic/MCP admissions, kernel process containment, moved-root anchors, CLI 66x2, RAM 61%, and Phase 0
+  1,031/1,031 in 966 seconds; the canonical wrapper exits 0 with its explicit pass marker. This closes Julia
+  parent `.11.6` without promoting capability/MCP state or creating any additional execution authority.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.2` — reuse scoped bindings and the common interpreter, not a Julia
   closure): typed probes reduced the measured gap to three seams. Colon keyword calls and access on an evaluated
   call result degraded to raw ActionIR, while the runtime's static dispatcher ended without checking a bound

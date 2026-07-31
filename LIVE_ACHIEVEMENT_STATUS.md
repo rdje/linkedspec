@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Julia generic final-codeblock equivalence is signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.6.3` now preserves exact final-only definition/staged/registry/descriptor-v3/
+semantic metadata and applies one post-registry `CallableContract.jl` normalization to governed helper, typed-user,
+receiver, and hash/array tree blocks. All accepted forms reuse the `.11.6.2` executor; eager blocks, controls,
+harrays, explicit literal signatures, and portable failure identities remain distinct. Focused proof is 125/125
+dynamic + 118/118 contextual + 239/239 construction. The complete Julia-local gate passes its byte-fresh
+120,030-byte MCP binding, package, 18-owner/five-package storage proof, CLI, and corpus 105/105. Knowledge Map
+771/6,256, mdBook 79 files / 13,980 KiB, all seven doctrines, canonical semantic/MCP admissions, nested
+containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 966 seconds pass with the explicit local-CI
+marker. Parent `.11.6` is closed; the workflow commit/clean proof remains before `.11.7` becomes active. No
+capability/MCP movement, other-backend behavior, root README edit, or push occurs.
+
+## 2026-07-30 — Julia generic final-codeblock equivalence activated
+
+Leaf `FUTURE-PARITY-BACKLOG.11.6.3` is active task-tree-first from clean dynamic-invocation commit `bc85c0fa`
+(116/300). The post-commit pointer resolves exactly to `3a38338d`; the brief is zero bytes, Git status is empty,
+and rendered book/cache/managed-run residue is absent. This leaf owns final-only typed codeblock-parameter
+metadata, one signature-governed attached/parenthesized contextual normalization, helper/user/receiver/tree
+execution through the existing `.11.6.2` runtime, native/reconstructed/generated/emitted identity, exact negative
+preservation, Julia-parent closeout, docs, and gates. Capability/MCP state, other backends, closures/callback
+runtimes, root README, and push do not move. No Julia behavior changed at activation.
+
 ## 2026-07-30 — Julia callable-codeblock dynamic invocation signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.6.2` is active task-tree-first from clean construction commit `3a38338d`

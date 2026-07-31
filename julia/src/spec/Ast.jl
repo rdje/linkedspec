@@ -71,6 +71,9 @@ struct StagedParseJob
     params::Union{Nothing,Vector{String}}
     arity::Union{Nothing,Int}
     signature::Union{Nothing,CallableSignature}
+    fixed_params::Union{Nothing,Vector{String}}
+    codeblock_param::Union{Nothing,String}
+    parameter_kinds::Dict{String,String}
     text::String
     source_span::StagedSourceSpan
     parser_spec_id::String
@@ -91,6 +94,9 @@ function StagedParseJob(;
     params = nothing,
     arity = nothing,
     signature = nothing,
+    fixed_params = nothing,
+    codeblock_param = nothing,
+    parameter_kinds = Dict{String,String}(),
     text,
     source_span,
     parser_spec_id,
@@ -110,6 +116,9 @@ function StagedParseJob(;
         params === nothing ? nothing : String[params...],
         arity,
         signature,
+        fixed_params === nothing ? nothing : String[fixed_params...],
+        codeblock_param === nothing ? nothing : String(codeblock_param),
+        Dict{String,String}(String(name) => String(kind) for (name, kind) in parameter_kinds),
         text,
         source_span,
         parser_spec_id,
@@ -126,6 +135,7 @@ struct FunctionDefinition
     params::Vector{String}
     arity::Int
     signature::Union{Nothing,CallableSignature}
+    parameter_kinds::Dict{String,String}
     body_source::String
     body_payload::Any
     body_parse_job::Union{Nothing,StagedParseJob}
@@ -140,6 +150,7 @@ function FunctionDefinition(;
     params,
     arity,
     signature = nothing,
+    parameter_kinds = Dict{String,String}(),
     body_source,
     body_payload = nothing,
     body_parse_job = nothing,
@@ -153,6 +164,7 @@ function FunctionDefinition(;
         String[params...],
         arity,
         signature,
+        Dict{String,String}(String(name) => String(kind) for (name, kind) in parameter_kinds),
         body_source,
         body_payload,
         body_parse_job,
@@ -387,7 +399,11 @@ function to_json(job::StagedParseJob)
     )
     _put_if_present!(result, "version", job.version)
     _put_if_present!(result, "function_name", job.function_name)
-    if job.signature === nothing
+    if !isempty(job.parameter_kinds)
+        _put_if_present!(result, "fixed_params", job.fixed_params)
+        _put_if_present!(result, "codeblock_param", job.codeblock_param)
+        result["parameter_kinds"] = job.parameter_kinds
+    elseif job.signature === nothing
         _put_if_present!(result, "params", job.params)
         _put_if_present!(result, "arity", job.arity)
     else
@@ -410,6 +426,9 @@ function to_json(function_definition::FunctionDefinition)
         result["arity"] = function_definition.arity
     else
         result["signature"] = to_json(function_definition.signature)
+    end
+    if !isempty(function_definition.parameter_kinds)
+        result["parameter_kinds"] = function_definition.parameter_kinds
     end
     _put_if_present!(result, "body_payload", function_definition.body_payload)
     if function_definition.body_parse_job !== nothing
@@ -529,6 +548,9 @@ function from_json(::Type{StagedParseJob}, json)
         params = _ast_optional_string_list(object, "params"),
         arity = _ast_optional_int(object, "arity"),
         signature = signature_json === nothing ? nothing : from_json(CallableSignature, signature_json),
+        fixed_params = _ast_optional_string_list(object, "fixed_params"),
+        codeblock_param = _ast_optional_string(object, "codeblock_param"),
+        parameter_kinds = _ast_optional_string_map(object, "parameter_kinds"),
         text = _ast_string(object, "text"),
         source_span = from_json(StagedSourceSpan, _ast_object_field(object, "source_span")),
         parser_spec_id = _ast_string(object, "parser_spec_id"),
@@ -550,6 +572,7 @@ function from_json(::Type{FunctionDefinition}, json)
         params = signature === nothing ? _ast_string_list(object, "params") : signature.positional_params,
         arity = signature === nothing ? _ast_int(object, "arity") : signature.min_arity,
         signature = signature,
+        parameter_kinds = _ast_optional_string_map(object, "parameter_kinds"),
         body_source = _ast_string(object, "body_source"),
         body_payload = _ast_optional_json(object, "body_payload"),
         body_parse_job = parse_job === nothing ? nothing : from_json(StagedParseJob, parse_job),
@@ -768,6 +791,22 @@ function _ast_optional_string_list(json::AbstractDict, field::AbstractString)
         throw(SpecAstException("$field must be an array when present"))
     end
     return [_ast_string_list_item(item, field) for item in value]
+end
+
+function _ast_optional_string_map(json::AbstractDict, field::AbstractString)
+    value = get(json, field, nothing)
+    if value === nothing
+        return Dict{String,String}()
+    end
+    object = _ast_object(value, field)
+    result = Dict{String,String}()
+    for (key, item) in object
+        if !(item isa AbstractString)
+            throw(SpecAstException("$field must contain only string keys and values"))
+        end
+        result[key] = String(item)
+    end
+    return result
 end
 
 function _ast_string_list_item(value, field::AbstractString)

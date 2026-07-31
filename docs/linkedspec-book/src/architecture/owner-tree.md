@@ -470,6 +470,11 @@ recursion rejection. `ActionValueAccessExpr` feeds evaluated results into the ex
 ordinary fluent evaluation continues. The optional callable/name/expected/got/value-kind/cycle diagnostic fields
 are emitted only at the codeblock boundary; established unknown-helper behavior outside it is unchanged. Native,
 normalized reconstructed, generated-plan, and freshly loaded emitted-source execution all reuse this owner.
+Generic contextual admission is owned by `CallableContract.jl`. The action parser retains attached provenance but
+does not grant meaning; after the builtin and user-function registry is complete, one recursive normalizer admits
+only a declared final block and emits `ActionCodeblockArgumentExpr`, or rejects the attached call.
+`FunctionDefinition` and `StagedParseJob` carry exact final-only `parameter_kinds`, while helper/receiver/tree/user-
+function execution validates the resulting plain codeblock and calls the same dynamic executor described above.
 
 `linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
 `CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;

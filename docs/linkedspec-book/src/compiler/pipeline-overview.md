@@ -177,6 +177,15 @@ that pass to function bodies and rule payloads before publishing compiled state.
 `with`, receiver `with`, and hash/array tree traversal all decode that value through the established dynamic
 codeblock executor; generated plans and emitted Dart reconstruct and compile the same normalized source state.
 
+Julia follows the same registry-complete boundary. `ActionParser.jl` retains function and receiver attached-block
+provenance without a receiver-name allowlist, while ordinary parenthesized blocks remain `ActionBlockValueExpr`.
+`CallableContract.jl` combines exact builtin helper/receiver contracts with final-only user-function
+`parameter_kinds`, validates pre-codeblock arity, rejects unknown attached calls, and emits one
+`ActionCodeblockArgumentExpr`. Definition, staged payload/job, validator, registry, descriptor-v3, generated
+effective state, and semantic signature retain and correlate the same metadata. Helper/receiver `with`, typed user
+functions, and hash/array tree traversal decode the normalized value through the existing Julia dynamic codeblock
+executor. Generated plans and emitted Julia reconstruct and compile through that same owner.
+
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
 then configured search roots and registry providers in declared order. The scheduler

@@ -436,11 +436,11 @@ fixed/rest signature, Unicode-coordinate spans, inert construction, compiled JSO
 semantic `codeblock` shapes, caller-context execution, copied/restored parameters, chaining/discard, static
 precedence, and exact typed failures/ordered recursion pass without a host closure. Rust generic final-block
 equivalence is complete through `.11.4.3`. Dart `.11.5.1-.3` likewise complete construction, dynamic invocation,
-and generic final-block equivalence. Julia `.11.6.1-.2` now complete construction plus bound-variable invocation;
-generic final-block equivalence remains `.11.6.3`. Lua's declared contextual helper/user-function/receiver forms
-are current, but its explicit callable values and arbitrary dynamic calls remain future. The overall generic
-capability therefore stays excluded until Julia contextual equivalence, Lua explicit/dynamic parity, and the
-governed cross-backend closeout land.
+and generic final-block equivalence. Julia `.11.6.1-.3` now complete construction, bound-variable invocation, and
+generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
+declared contextual helper/user-function/receiver forms are current, but its explicit callable values and arbitrary
+dynamic calls remain future. The overall generic capability therefore stays excluded until Lua explicit/dynamic
+parity and the governed cross-backend closeout land.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The

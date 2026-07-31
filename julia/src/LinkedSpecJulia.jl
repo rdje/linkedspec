@@ -20,6 +20,7 @@ export backend_name,
     ActionBlockValueExpr,
     ActionBooleanLiteralExpr,
     ActionCallExpr,
+    ActionCodeblockArgumentExpr,
     ActionCodeblockLiteralErrorExpr,
     ActionCodeblockLiteralExpr,
     ActionContractDiagnostic,
@@ -462,6 +463,7 @@ include("semantic/SemanticIndex.jl")
 include("action/ActionAst.jl")
 include("action/ActionParser.jl")
 include("action/FunctionRegistry.jl")
+include("action/CallableContract.jl")
 include("action/ActionContracts.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")

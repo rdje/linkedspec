@@ -3015,22 +3015,26 @@ Top::
 """)); max_iterations = 2)
     @test_throws RuntimeInterpreterException runtime_parse(limited_engine, "x")
 
-    unsupported_block_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+    @test _throws_compiled_spec_message(
+        () -> compile_spec(parse_spec(raw"""
 Top::
  /x/
  E {
    cat("x") { return("bad") }
    return("ok")
  }
-""")))
-    @test_throws RuntimeInterpreterException runtime_parse(unsupported_block_engine, "x")
+""")),
+        "callable_contract_rejected",
+    )
 
-    receiver_arity_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+    @test _throws_compiled_spec_message(
+        () -> compile_spec(parse_spec(raw"""
 Top::
  /x/
  E { return("x".with("bad") { return(value) }) }
-""")))
-    @test_throws RuntimeInterpreterException runtime_parse(receiver_arity_engine, "x")
+""")),
+        "callable_contract_arity_mismatch",
+    )
 end
 
 @testset "Runtime registered user functions" begin
@@ -3251,15 +3255,17 @@ Top::
         "outer-acc",
     ]
 
-    malformed_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+    @test _throws_compiled_spec_message(
+        () -> compile_spec(parse_spec(raw"""
 Top::
  /x/
  E {
    items = ["x"]
    return(items.map_leaves("bad") { return(value) })
  }
-""")))
-    @test_throws RuntimeInterpreterException runtime_parse(malformed_engine, "x")
+""")),
+        "callable_contract_arity_mismatch",
+    )
 end
 
 @testset "Runtime cursor controls and boundary capture" begin

@@ -138,6 +138,7 @@ function function_definition_with_body_ast(definition::FunctionDefinition, body_
         params = definition.params,
         arity = definition.arity,
         signature = definition.signature,
+        parameter_kinds = definition.parameter_kinds,
         body_source = definition.body_source,
         body_payload = definition.body_payload,
         body_parse_job = definition.body_parse_job,
@@ -189,7 +190,8 @@ function to_descriptor_json(entry::UserFunctionEntry)
     result = Dict{String,Any}(
         "index" => entry.index,
         "kind" => "user_function_definition",
-        "version" => definition.signature === nothing ? 1 : 2,
+        "version" => !isempty(definition.parameter_kinds) ? 3 :
+                     (definition.signature === nothing ? 1 : 2),
         "name" => definition.name,
         "source_text" => definition.source,
         "source_span" => to_json(definition.source_span),
@@ -201,6 +203,9 @@ function to_descriptor_json(entry::UserFunctionEntry)
         result["arity"] = definition.arity
     else
         result["signature"] = to_json(definition.signature)
+    end
+    if !isempty(definition.parameter_kinds)
+        result["parameter_kinds"] = definition.parameter_kinds
     end
     _put_if_present!(result, "body_payload", definition.body_payload)
     if definition.body_parse_job !== nothing

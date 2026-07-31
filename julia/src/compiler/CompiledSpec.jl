@@ -360,10 +360,14 @@ function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
             args = strip(call.args)
             source = isempty(args) ? "$(call.method)()" : "$(call.method)($args)"
             try
-                validate_block(parse_action_block(source), "$context fluent call $(index - 1)")
+                block = parse_action_block(source)
+                normalize_action_block_final_codeblocks!(block, compiled.function_registry)
+                validate_block(block, "$context fluent call $(index - 1)")
             catch error
                 if error isa CompiledSpecException
                     rethrow()
+                elseif error isa CallableContractException
+                    throw(CompiledSpecException(error.message))
                 end
                 # Deferred fluent syntax historically remains runtime-parsed.
                 # Preserve unrelated parse-failure timing.
@@ -375,13 +379,14 @@ function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
     for entry in compiled.function_registry.entries
         definition = entry.definition
         try
-            validate_block(
-                parse_action_block(definition.body_source),
-                "function '$(definition.name)' body",
-            )
+            block = parse_action_block(definition.body_source)
+            normalize_action_block_final_codeblocks!(block, compiled.function_registry)
+            validate_block(block, "function '$(definition.name)' body")
         catch error
             if error isa CompiledSpecException
                 rethrow()
+            elseif error isa CallableContractException
+                throw(CompiledSpecException(error.message))
             end
             # Preserve unrelated user-function body parse-failure timing while
             # rejecting structurally valid removed selectors.
@@ -517,7 +522,12 @@ function _compile_spec(
     end
 
     function_registry = try
-        registry = user_function_registry_from_spec(spec)
+        declared_registry = user_function_registry_from_spec(spec)
+        normalized_functions = FunctionDefinition[
+            normalize_function_final_codeblocks(definition, declared_registry) for
+            definition in spec.functions
+        ]
+        registry = user_function_registry_from_functions(normalized_functions)
         if trace !== nothing
             trace_decision!(
                 trace,
@@ -537,6 +547,9 @@ function _compile_spec(
                 "error=$(sprint(showerror, error))",
                 LinkedSpecTraceMedium,
             )
+        end
+        if error isa CallableContractException
+            throw(CompiledSpecException(error.message))
         end
         rethrow()
     end
@@ -1006,6 +1019,14 @@ end
 
 function _compile_action_payload(; role, element::BodyElement, code, function_registry, lifecycle = nothing)
     ast = parse_action_block(code)
+    try
+        normalize_action_block_final_codeblocks!(ast, function_registry)
+    catch error
+        if error isa CallableContractException
+            throw(CompiledSpecException(error.message))
+        end
+        rethrow()
+    end
     return CompiledActionPayload(
         role = role,
         line = element.line,
