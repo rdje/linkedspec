@@ -1,5 +1,9 @@
 # Project Status
 
+Semantic introspection is complete and publicly governed: semantic public rollout is 9/9, native admission is
+6/6, and the independent contract derives 20 exact responses while rejecting 128 mutations. MCP implementation/runtime state is 5/5 + 6/6 with shared rollout complete/141. The neutral mdBook owns nine worked
+query patterns; backend companion books remain accepted but unscaffolded under their separate task tree.
+
 LinkedSpec is an actively evolving system. The current direction is not “freeze everything exactly as it once was.” The direction is to preserve the strengths that make LinkedSpec useful while modernizing the runtime, compiler, diagnostics, and documentation.
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
@@ -65,7 +69,8 @@ canonical Phase 0 1,031/1,031 in 655 seconds plus the complete optional MCP chai
 authority and closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`. Final `.10.9.7.2` independently
 passes the same focused chain and canonical MCP opt-in from clean `77ceb921`, including Phase 0 1,031/1,031 and
 the optional complete/141 recurrence. It closes `.10.9.7` plus `.10.9` without behavior, ledger, or authority
-movement; public semantic/MCP no-drift `.10.10` remains next and semantic rollout remains 8/9.
+  movement. Public semantic/MCP no-drift `.10.10` subsequently closes semantic rollout at 9/9 and parent `.10`
+  without production behavior.
 The weaker 17-identity plus three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
@@ -593,8 +598,8 @@ Three backbone items tracked major structural modernization — all done:
 - **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/
-  runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker rejects
-  81 mutations. ADR `0050` separates staged payload/job/result records from generated artifacts, and descriptors
+  runtime facts, deterministic ids/order/traversal/pages/cost, and structural source privacy; the checker now
+  rejects 128 mutations and closes rollout at 9/9 plus admission 6/6. ADR `0050` separates staged payload/job/result records from generated artifacts, and descriptors
   remain reusable input rather than the wire model. Perl `.10.3.1-.10.3.6` and Rust `.10.4.1-.10.4.6` each ship
   opaque strict in-memory construction, exact byte/scalar source mapping, clone-safe static/call/staged/generated
   projection, all 19 static queries, typed invocation-local runtime observation for the twentieth answer, and one
@@ -725,7 +730,8 @@ Three backbone items tracked major structural modernization — all done:
   Julia/matrix/Unicode/canonical proof and closes `.10.6.6` without production/replacement-test/API/format/runtime
   or promotion change; rollout/admission stay 4/9 and 3/6, and exact admission `.10.6.7` remains pending.
   Queries cannot compile, execute, enable trace, read paths, or expose host IR. All six native runtime targets are
-  now admitted and recurring proof is complete at rollout 7/9, native admission 6/6, and 105 rejected mutations.
+  now admitted and recurring proof is complete; public closeout brings rollout to 9/9, native admission 6/6, and
+  128 rejected mutations.
   ADR `0054` makes MCP one exact contract with native Perl, Rust, Dart, Julia, and Lua server
   implementations; the same Lua source is admitted separately on PUC Lua and LuaJIT. ADR `0055` selects stable
   modern MCP `2026-07-28` over stdio, with per-request metadata, mandatory discovery, explicit handles, two

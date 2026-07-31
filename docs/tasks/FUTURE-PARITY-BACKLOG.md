@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (unchanged MCP recomposition `.10.9.7.2` closes `.10.9.7` and `.10.9`;
-  public semantic/MCP no-drift `.10.10` follows its clean commit)
+- Last updated: `2026-07-30` (public semantic/MCP no-drift `.10.10` is active task-tree-first from clean MCP
+  parent closeout commit `b41e047e`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -6779,7 +6779,7 @@ before implementation.
     canonical CI, whitespace, exact cleanup, and commit workflow; hand off clean before any next pivot.
 
 - ID: `FUTURE-PARITY-BACKLOG.10`
-  Status: `active`
+  Status: `done`
   Goal: Expose deep semantic introspection through one clean backend-neutral API and thin MCP projection.
   Children: `.10.0`, `.10.1`, `.10.2`, `.10.3`, `.10.4`, `.10.5`, `.10.6`, `.10.7`, `.10.8`, `.10.9`,
     `.10.10`
@@ -15050,7 +15050,7 @@ before implementation.
       Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.2 - close MCP implementation parent`
 
 - ID: `FUTURE-PARITY-BACKLOG.10.10`
-  Status: `pending`
+  Status: `done`
   Goal: Close semantic introspection with exact public API, mdBook, backend-companion, and roadmap no-drift.
   Depends on: `.10.9`
   Acceptance: Require and synchronize every public/native/backend/API/mdBook/roadmap/status/ADR/Knowledge Map
@@ -15059,6 +15059,51 @@ before implementation.
     and MCP; reject stale pending/planned or backend-internal claims through deterministic current-state markers;
     pass the recurring driver, public omission/mutation checker, canonical CI, generated cleanup, exact parent
     closure, and clean handoff.
+  Verification: **PASS 2026-07-30.** The existing independent neutral checker now owns an exact public contract
+    over 28 current surfaces, nine worked example families, native/MCP recurring drivers, and the separately
+    accepted-but-unscaffolded backend-companion boundary. Eighteen new omission/status/topology mutations raise
+    governance from 110 to 128 rejected mutations and advance only `public_no_drift`, closing semantic rollout at
+    9/9 with native admission 6/6 while MCP remains 5/5 implementations + 6/6 runtimes complete/141. Public Perl,
+    Rust, Dart, Julia, Lua, neutral-book, roadmap, live, ADR, and Knowledge Map projections are current; no parser,
+    compiler, runtime, server, protocol, binding, CLI, aggregator, legacy, package, SDK, service, network, or
+    authority behavior changes. Focused/recurring/canonical proof and exact artifact cleanup pass as recorded below.
+  Planned commit: `FUTURE-PARITY-BACKLOG.10.10 - close semantic introspection`
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN OWNERSHIP / RETRIEVAL FIRST** — Start task-tree-first from clean MCP-parent closeout `b41e047e`,
+    zero-byte brief, and absent rendered-book/managed-run residue before any public inventory, checker, example,
+    status, or implementation change; retrieve the semantic/MCP contracts, ledgers, decisions, current Knowledge
+    cards, public projections, backend companions, recurring drivers, and relevant mdBook chapters.
+  - [x] **EXHAUSTIVE PUBLIC INVENTORY / RICH EXAMPLES** — Enumerate every public native/API/backend companion,
+    mdBook, guide, roadmap, live-status, ADR, and Knowledge Map projection; make current status exact and document
+    worked graph, resolution, provenance, diagnostics, explanation, privacy, pagination, runtime-observation, and
+    MCP examples without exposing backend IR or adding behavior.
+  - [x] **OMISSION-SENSITIVE PUBLIC GOVERNANCE / FINAL PROMOTION** — Extend the existing independent deterministic
+    neutral checker with one public
+    current-state checker and mutation corpus that rejects missing required surfaces, stale pending/planned text,
+    backend-internal claims, incomplete examples, rollout/owner drift, and loss of recurring MCP/native proof;
+    advance only `public_no_drift` to complete under `.10.10` after that evidence exists.
+  - [x] **RECURRING / CANONICAL / DOCUMENTATION SIGNOFF** — Pass semantic/MCP neutral and admission checks, both
+    six-runtime recurring drivers, public governance, all seven doctrines, memory/task/Knowledge Map/diff/syntax/
+    storage/path checks, mdBook render, canonical CI, and exact artifact cleanup.
+  - [x] **CLOSE / COMMIT / HANDOFF** — Close `.10.10` and semantic-introspection parent `.10`, synchronize every
+    durable/public owner, commit with the leaf id, clear the brief, prove clean, and select the next roadmap-aligned
+    activity without pushing before cadence 300.
+
+  Signoff evidence: The focused semantic checker passes 6 fixture groups, 20 exact queries, and 128 rejected
+    mutations at rollout 9/9 plus admission 6/6. Direct native recurrence passes Perl 18, Rust 1/1 in 78.45
+    seconds, Dart 1/1, Julia 416/416 in 27.5 seconds, PUC Lua 408/408, LuaJIT 408/408, and the selected primary
+    CLI matrix 5 backends x 2 environments x 3 cases. Direct MCP recurrence passes transport 35 frames / 10 raw
+    inputs / 10 lifecycle cases / 76 rejected mutations, five byte-fresh generated bindings, Perl 13, Rust 1/1,
+    Dart 1/1, Julia 257/257, Lua 281/281 per ABI, complete/141 implementation governance, and primary 30/30.
+    The independent host-authorized canonical run with both opt-ins exits zero after all seven doctrines, exact
+    semantic/MCP governance, repository containment and moved-root proof, primary CLI 66x2, RAM 54%, and Phase 0
+    1,031/1,031. Its optional semantic repeat passes Rust in 78.50 seconds, Julia 416/416 in 27.5 seconds, and all
+    other runtime/CLI legs; its optional MCP repeat passes Perl 13, Rust 1/1 in 15.33 seconds, Dart 1/1, Julia
+    257/257, Lua 281/281 per ABI, complete/141 governance, and primary 30/30 before `[ci] local CI gate passed`.
+    Knowledge Map is exact at 758 facts / 6,147 question keys. The mdBook renders 79 files at 13,844 KiB before
+    exact generated-output cleanup; memory, task metadata, all doctrines, syntax, and diff checks pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.11`
   Status: `active`

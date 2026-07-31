@@ -40,7 +40,7 @@ return_descriptor => 1
 
 ## The executable neutral semantic contract is separate
 
-The descriptor is reusable semantic input, not the future semantic-query wire format. This distinction is
+The descriptor is reusable semantic input, but the descriptor is not the semantic wire model. This distinction is
 observable in the Perl reference: handler and dependency-regex entries are native coderef and compiled-regex
 objects, so direct portable JSON encoding is neither supported nor meaningful. Rust, Dart, Julia, and Lua expose
 the same descriptor meanings through their own typed projections.
@@ -59,13 +59,14 @@ Lua and LuaJIT. It will not compile a spec, read an implicit path, inspect backe
 explanations. The primary CLI gains no v1 command or option. A future aggregator is outside `.10.9` and may only
 route to the native servers.
 
-The neutral schema, fixtures, exact evaluator, and 105-mutation gate are executable under
+The neutral schema, fixtures, exact evaluator, and 128-mutation gate are executable under
 `FUTURE-PARITY-BACKLOG.10.2`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted through exact native
 semantic APIs and composed 12-role consumers; recurring native rollout is complete. `.10.9.1-.7` own the MCP
 contract, five implementations, and six-runtime admission, while `.10.10` owns public closeout. Shared Lua
 `.10.9.6.0-.4` and ADR `0061` now complete the final one-source implementation: one consumer admits the unchanged
-source independently on PUC Lua and LuaJIT, the ledger is 5/5 implementations + 6/6 runtimes with recurring
-rollout pending, and no-change closeout closes parent `.10.9.6`.
+source independently on PUC Lua and LuaJIT, and later recurring proof closes the ledger at 5/5 implementations +
+6/6 runtimes with rollout complete/141. Semantic public rollout is complete at 9/9; `.10.10` governs the current
+API/documentation projection without changing descriptor or semantic behavior.
 [Semantic Introspection](semantic-introspection.md) documents the exact neutral model and current rollout.
 
 For orientation, the executable neutral contract represents “describe `Top`, with spans but no source text” as:

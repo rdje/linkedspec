@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.10` — public closure belongs inside the existing independent semantic
+  checker): A new standalone “documentation checker” would create a second place to define semantic scope,
+  rollout, and MCP topology. Extending `semantic_introspection_contract.json` instead keeps one machine-readable
+  status owner while the checker retains an independently hard-coded expected public contract. Contract mutations
+  reject omission/reordering/status/owner drift; in-memory guard probes separately prove that removing a real
+  document marker or adding a stale current claim fails.
+
+  Public examples are organized by user question rather than backend history: graph, resolution, provenance,
+  diagnostics, explanation, privacy, pagination, runtime observation, and MCP. Each backend README shows its
+  idiomatic construction/query call, while the neutral book owns the full envelope and cross-backend meaning.
+  This makes the powerful recursive graph/cursor-derived semantics discoverable without serializing descriptor
+  coderefs, compiled regexes, compiler objects, or host IR.
+
+  Companion books are an important scope boundary, not an omission to paper over. ADR `0040` accepts five
+  implementation companions, but their scaffold/template/navigation/copy-drift gate belongs to
+  `BACKEND-COMPANION-BOOKS.1+`. Public semantic closeout therefore governs the current neutral book and backend
+  READMEs while mechanically preserving `accepted_not_scaffolded_separately_task_owned`. The completed contract
+  is 28 current surfaces, nine examples, two recurring drivers, 128 mutations, rollout 9/9, admission 6/6, and
+  unchanged MCP 5/5 + 6/6 complete/141.
+
+  The two direct recurrences and the independent canonical run agree. Native semantic proof passes Perl 18,
+  Rust 1/1 in 78.45 seconds, Dart 1/1, Julia 416/416 in 27.5 seconds, and Lua 408/408 per ABI; MCP proof passes
+  transport 35/10/10/76, all five byte-fresh bindings, Perl 13, Rust 1, Dart 1, Julia 257, Lua 281 per ABI,
+  complete/141 governance, and primary 30/30. Canonical execution with both optional recurrences passes all
+  seven doctrines, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031, semantic Rust 78.50 seconds /
+  Julia 27.5 seconds, and MCP Rust 15.33 seconds before the final local-CI PASS. The book is 79 files / 13,844
+  KiB and the derived retrieval layer is 758 facts / 6,147 question keys before exact output cleanup.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.2` — a global parent closes by exact conjunction, not status
   invention): The final thin-MCP parent owns no additional implementation or aggregate oracle. Its acceptance is
   the conjunction of the already independent neutral semantic, neutral transport, generated-binding, native-

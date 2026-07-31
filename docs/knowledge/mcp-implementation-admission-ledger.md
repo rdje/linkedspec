@@ -126,6 +126,9 @@ must strengthen those same consumers to the existing twenty ordered requests and
 them through one repository-routed six-runtime driver before coordinated rollout promotion. No expected response
 body moves out of the neutral semantic contract.
 
+Routed `.10.9.7.1` subsequently proves all twenty identities on six runtimes and closes the ledger at 5/5 implementations and 6/6 runtimes with rollout complete/141. The public semantic/MCP closeout is complete under `.10.10`;
+it governs current documentation and recurring proof without changing this ledger or transport digest.
+
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]],
 [[julia-mcp-implementation-admission]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]],
 [[lua-mcp-implementation-admission]], [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]], and

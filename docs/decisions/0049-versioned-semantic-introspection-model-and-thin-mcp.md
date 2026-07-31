@@ -1,7 +1,7 @@
 # 0049 - Semantic introspection uses one versioned native model and a thin MCP transport
 
 - Date: 2026-07-20
-- Status: accepted; native six-runtime and thin-MCP rollout admitted; public no-drift remains `.10.10`;
+- Status: accepted and implemented; native six-runtime, thin-MCP, and public no-drift complete at 9/9 rollout;
   amended/clarified by ADRs 0050/0054/0055
 - Tags: architecture, introspection, semantic-api, mcp, provenance, diagnostics, explainability, portability, parity
 

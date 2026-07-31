@@ -41,6 +41,41 @@ bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../ru
 bash ../tools/run_dart_local.sh
 ```
 
+## Semantic introspection
+
+The package exports one immutable `SemanticIndex` plus typed and raw-neutral `linkedspec-semantic-query-v1`
+requests. Construction copies in-memory text or strict UTF-8 bytes and requires caller-owned logical identity; it
+never accepts or infers a source path:
+
+```dart
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final index = SemanticIndex.fromSource(
+  'Top::\n /x/\n',
+  options: const SemanticIndexOptions(
+    logicalName: 'example.spec',
+    sourceDetailCeiling: SemanticSourceDetail.text,
+  ),
+);
+final response = index.query(
+  SemanticQuery(
+    operation: SemanticQueryOperation.list,
+    recordKinds: const ['rule'],
+    source: const SemanticQuerySource(
+      detail: SemanticSourceDetail.identity,
+    ),
+  ),
+);
+assert(response.ok && response.records.first.id == 'rule:Top');
+```
+
+`SemanticQueryOperation.list` selects the typed list operation. `index.capabilities` reports effective vocabulary and limits. `index.queryNeutral(value)` validates the exact
+JSON-like envelope and shares the typed evaluator. Normal execution can capture typed events through
+`RuntimeSemanticObservationSink`; after completion, `withExecutionObservation` derives a separate immutable index
+containing execution/event records. Query evaluation never parses, compiles, executes, traces, reads paths, exposes
+the compiled Dart model, or mutates either index. Current semantic rollout 9/9 and native admission 6/6 are closed
+under the independent 128-mutation neutral checker and the six-runtime recurring proof.
+
 ## Native MCP server
 
 The package exports a dependency-free, same-process `McpServer` around an already-created immutable
@@ -104,9 +139,9 @@ Input, output, and optional distinct log sinks remain caller-owned and are never
 failure release every registered index; an I/O failure can write only the fixed `linkedspec_mcp_io_failure` code
 to the optional log and throws the same sanitized typed error. The production boundary imports only the `IOSink`
 type from `dart:io`; it gains no file, process, socket, HTTP, isolate, parser, compiler, runtime, trace, cache, or
-CLI authority. Exact admission composes every contract role once through one ordered public consumer; Dart is now
-the third of five complete implementations and the third of six admitted runtimes, while shared rollout remains
-pending. Verify the current surface from the repository root:
+CLI authority. Exact admission composes every contract role once through one ordered public consumer. Subsequent
+Julia and shared Lua admissions plus recurring all-twenty proof close the shared ledger at 5/5 implementations,
+6/6 runtimes, and rollout complete/141. Verify the current surface from the repository root:
 
 ```sh
 bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py

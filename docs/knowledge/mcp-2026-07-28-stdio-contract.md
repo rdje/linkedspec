@@ -81,8 +81,9 @@ when deliberately regenerating the JSONL. Run
 and parent-close that contract; PUC Lua and LuaJIT admit the Lua source independently. The implementation ledger
 is 5/5 + 6/6 with recurring rollout complete and 141 rejected mutations. Rooted
 `tools/check_mcp_six_runtime.sh` proves all twenty native/MCP semantic identities on Perl, Rust, Dart, Julia,
-PUC Lua, and LuaJIT; public no-drift remains separately dependency-ordered.
-The unchanged MCP-parent recomposition closes `.10.9.7` and `.10.9`; public no-drift remains `.10.10`.
+PUC Lua, and LuaJIT; the public projection is now closed and governed.
+The unchanged MCP-parent recomposition closes `.10.9.7` and `.10.9`; public semantic/MCP closeout is complete
+under `.10.10` without changing `linkedspec-mcp-transport-v1`.
 Canonical local CI runs those exact two commands unconditionally in materializer-then-validator order; the tool
 governance test rejects either an omitted materializer or reversed order.
 

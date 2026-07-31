@@ -14,10 +14,11 @@ answers:
   - "how is the semantic recurring gate storage routed"
   - "is semantic introspection recurring proof complete"
 date: 2026-07-28
-status: current
+status: current; native recurring proof retained and public rollout complete
 supersedes: semantic-introspection-recurring-gate-plan
 tags: [semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance, local-ci]
 evidence: "FUTURE-PARITY-BACKLOG.10.8 adds tools/check_semantic_introspection_six_runtime.sh from clean planning commit b1921da0. One repository-routed invocation runs the neutral checker; exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT twelve-role consumers; three existing primary no-drift cases across five commands and two environments; and generated-source, capability, and language-coverage ledgers. Direct proof passes Perl 18, Rust 1/1 in 79.67s, Dart 1/1, Julia 416/416 in 29.0s, Lua 408 per ABI, and primary 30/30. Seven mutations advance only recurring, so governance is 6 groups / 20 responses / 105 mutations at rollout 7/9 and admission 6/6. Canonical CI requires and syntax-checks the driver and runs it only when LINKEDSPEC_RUN_SEMANTIC_MATRIX=1; default canonical proof passes Rust 81.08s, Julia 29.4s, containment, moved-root, reference 66x2, and Phase 0 1,031/646s. The command is the 40th routed entrypoint and 13th shell temporary owner. No semantic model, consumer, CLI option, generated format, transport, or public API changed."
+evidence_update_2026_07_30_public_closeout: "FUTURE-PARITY-BACKLOG.10.10 keeps tools/check_semantic_introspection_six_runtime.sh as the one native recurring driver, adds the separate all-twenty MCP recurring driver to public governance, and closes semantic public rollout at 9/9 under the 128-mutation checker."
 last_verified: 2026-07-28
 reverify:
   - "bash tools/check_semantic_introspection_six_runtime.sh"
@@ -43,7 +44,8 @@ authorities.
 Canonical CI always requires and syntax-checks the driver. `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1` opts into the
 expensive all-toolchain execution. Seven mutations independently lock runtime presence, exact commands, the
 primary inventory, support inventory, canonical switch, driver path, and recurring status. The former premature
-recurring mutation now denies premature MCP promotion. Thin MCP and public no-drift remain pending.
+recurring mutation denies premature MCP promotion. Thin MCP is complete, and public rollout is complete at 9/9;
+this driver remains the native recurring authority.
 
 All temporary build, native-module, and writable-depot state derives from the driver artifact root. Rust and Julia
 receive child roots there; Lua continues through `run_lua_project_data.sh`. The command is governed by the exact

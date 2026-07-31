@@ -4,7 +4,16 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-29`
+- Last refreshed: `2026-07-30`
+- `2026-07-30 semantic-introspection public closeout`: `FUTURE-PARITY-BACKLOG.10.10` makes the implemented native
+  semantic APIs and thin MCP projection one governed current story. The neutral contract remains the sole semantic
+  owner at six fixture groups and 20 digest-locked responses; its independent checker now rejects 128 omission-sensitive mutations and closes rollout at 9/9 with native admission 6/6. The public contract requires the Perl guide,
+  four backend READMEs, conformance guide, both roadmaps, live architecture/toolbox/task state, four semantic/MCP
+  ADRs, seven current Knowledge cards, the neutral mdBook API/status/handoff/descriptor/navigation pages, all nine
+  worked example families, both six-runtime recurring drivers, and the separately task-owned accepted-but-
+  unscaffolded companion-book boundary. MCP remains 5/5 native implementations plus 6/6 runtime admissions with
+  rollout complete/141. No parser, compiler, runtime, server, protocol, binding, CLI, aggregator, legacy, package,
+  SDK, service, network, or authority behavior changes; `.10.10` and parent `.10` close together.
 - `2026-07-29` Dart native MCP implementation plan: behavior-free `FUTURE-PARITY-BACKLOG.10.9.4.0` and ADR
   `0059` place one public in-process `McpServer` around caller-owned immutable Dart `SemanticIndex` values. Four
   private parts will own generated contract data, frozen schema/runtime behavior, the secure decoded server, and

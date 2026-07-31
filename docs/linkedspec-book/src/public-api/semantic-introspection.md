@@ -48,7 +48,156 @@ The distinction matters:
   and one unchanged twelve-role consumer admits the complete surface on PUC Lua and LuaJIT; and
 - the current `return_descriptor` / descriptor APIs remain a separate lower-level compatibility surface.
 
-The neutral contract is complete. Backend admission is **6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
+## Worked semantic query patterns
+
+Every native API maps to the same neutral request and response. Start from this complete request envelope; the
+examples that follow show only the fields that change:
+
+```json
+{
+  "contract": "linkedspec-semantic-query-v1",
+  "operation": "list",
+  "subjects": [],
+  "record_kinds": [],
+  "relation_kinds": [],
+  "direction": "outgoing",
+  "page": {"after_id": null, "limit": 100},
+  "budget": {"max_records": 1000, "max_relations": 2000, "max_depth": 4},
+  "source": {"detail": "identity", "include_content_digest": false}
+}
+```
+
+Perl passes this object to `$index->query(...)`; Rust, Dart, Julia, and Lua provide typed request builders and a
+raw-neutral entry point. Valid typed and neutral requests use one evaluator per backend and return the same exact
+nine-field response envelope.
+
+### Graph — list rules and follow edges
+
+List the canonical rule records with `{"operation":"list","record_kinds":["rule"]}`. For `graph.spec`, the
+first ids are `rule:Top` and `rule:Child`. To discover which authored edges dispatch into `Child`, retain the full
+envelope and change these fields:
+
+```json
+{
+  "operation": "relations",
+  "subjects": ["rule:Child"],
+  "record_kinds": [],
+  "relation_kinds": ["dispatches_to"],
+  "direction": "incoming"
+}
+```
+
+The answer is a canonically ordered pair of relations, one for each authored edge. Duplicate regex text therefore
+does not collapse structural slot or edge identity.
+
+### Resolution — inspect calls and targets
+
+List symbols, bindings, and calls together:
+
+```json
+{"operation":"list","record_kinds":["function","helper","binding","call"]}
+```
+
+The `calls_and_staging.spec` answer distinguishes the user function `function:normalize`, helpers such as
+`helper:trim`, a result binding, and each source-preorder call. Follow `resolves_to`, `reads`, or `writes`
+relations to inspect resolution without exposing a backend AST, callable, or compiler object. Shape facts state
+only what the portable model knows; `unknown` is preserved instead of guessed.
+
+### Provenance — follow staged and generated artifacts
+
+Ask which inputs and outputs belong to a staged parse job:
+
+```json
+{
+  "operation": "relations",
+  "subjects": ["staged:parse_job:function:normalize:1"],
+  "relation_kinds": ["consumes", "produces"]
+}
+```
+
+This returns the payload-to-job-to-result chain in the correct direction. A separate `generated_as` relation from
+`spec:0` reaches `generated:handler_plan:0`; its facts name the portable generated-source contract, format, and
+plan family, never generated implementation text.
+
+### Diagnostics — inspect failed compilation
+
+A language error still yields an immutable `failed_compilation` snapshot. List its portable diagnostic records
+with `{"operation":"list","record_kinds":["diagnostic"]}`. The response remains a successful semantic query
+(`ok: true`) whose record carries stable stage, code, severity, message, and fields. Malformed query envelopes
+instead return `ok: false` with response diagnostics; transport or host exceptions are not substituted for either
+semantic case.
+
+### Explain — ask why a decision was made
+
+Use a decision id, or a subject with exactly one owning decision:
+
+```json
+{
+  "operation": "explain",
+  "subjects": ["decision:entry:spec:0"],
+  "record_kinds": [],
+  "relation_kinds": []
+}
+```
+
+The answer begins with the decision, then its ordered `explanation_step` records and only their `explained_by`
+relations. Every step names portable input ids and one output fact; MCP forwards these native facts and never
+invents explanation prose.
+
+### Privacy — request only permitted source detail
+
+Construction sets a maximum `none`, `identity`, `span`, or `text` ceiling. Each query requests no more than that
+ceiling. `{"source":{"detail":"text","include_content_digest":true}}` asks for exact excerpts and the
+registered-source digest. Use `identity` when a logical name is enough, or `none` to replace source references and
+source-derived facts with `null` plus exact redaction paths. A request above the index ceiling returns
+`semantic_query_source_detail_forbidden`; it is never silently weakened. Registered logical names are caller
+data, not inferred paths.
+
+### Pagination — resume deterministic bounded answers
+
+Set a small page with `{"page":{"after_id":null,"limit":2}}`. If `page.complete` is false, copy
+`page.next_after_id` into the next request's `page.after_id`. A page boundary is not a budget failure. By contrast,
+reaching `max_records`, `max_relations`, or `max_depth` returns a deterministic prefix, leaves `complete` false,
+and adds `semantic_query_budget_exceeded` with logical cost—not host timing or allocation data.
+
+### Runtime observation — capture first, query second
+
+Normal execution may receive an optional typed observation sink. After the invocation succeeds, pass the completed
+events to `with_execution_observation` (Rust/Julia), `withExecutionObservation` (Dart),
+`with_execution_observation` on the Lua index, or the equivalent Perl index method. The result is a new immutable
+index; the base stays static. Then query
+`{"operation":"list","record_kinds":["execution","event"]}`. The canonical runtime fixture returns one
+execution, two selected-slot events, one final rule-result event, and `observed_as` relations. Querying never runs
+a parser, installs a sink, hashes input, enables trace, or mutates the observation.
+
+### MCP — transport the same neutral request
+
+The host first registers an already-created native index and conveys its opaque handle out of band. A client sends
+the unchanged neutral request through the second read-only tool:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 7,
+  "method": "tools/call",
+  "params": {
+    "_meta": {
+      "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+      "io.modelcontextprotocol/clientCapabilities": {}
+    },
+    "name": "linkedspec_semantic_query",
+    "arguments": {"handle": "<opaque-handle>", "request": "<complete-neutral-request>"}
+  }
+}
+```
+
+The successful result's `structuredContent` is the exact native response; decoding `content[0].text` yields the
+same value. Five native MCP implementations serve Perl, Rust, Dart, Julia, and Lua, with the one Lua source admitted
+independently on PUC Lua and LuaJIT. An optional future aggregator may route to them but cannot own indexes,
+compile source, cache semantic responses, or reinterpret results.
+
+The neutral contract is complete. Semantic public rollout is **9 complete / 0 pending**, and backend admission is
+**6 complete / 0 pending**: Perl, Rust, Dart, Julia, PUC
 Lua, and LuaJIT are admitted. MCP does not own semantics. Its architecture, protocol policy, neutral machine
 contract, and independent conformance are complete, and the exact neutral contract is composition-closed in
 canonical CI. Perl, Rust, Dart, and Julia have complete decoded/strict-stdio implementations and exact runtime admission.
@@ -108,10 +257,10 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT order, validates the admission ledger, and r
 primary no-drift matrix. It uses repository-derived managed scratch, disposable Rust target and Julia writable-
 depot roots, and exact cleanup. Canonical CI requires and syntax-checks the driver and opts into it through
 `LINKEDSPEC_RUN_MCP_MATRIX=1`. Both ledgers record `thin_mcp_transport` complete under the same `.10.9.7.1`
-owner; semantic canonical identity points to the recurring driver. Governance rejects 141 MCP mutations and 110
+owner; semantic canonical identity points to the recurring driver. Governance rejects 141 MCP mutations and 128
 neutral semantic mutations, including partial promotion, owner mismatch, runtime/command/order omission,
 unrouted or non-executable execution, missing CI registration, and representative-only identity. Formal state
-is 5/5 implementations, 6/6 runtimes, rollout complete; semantic rollout is 8 complete / 1 pending with admission
+is 5/5 implementations, 6/6 runtimes, rollout complete; semantic public rollout is 9 complete / 0 pending with admission
 6 complete / 0 pending. The weaker seventeen-plus-three claim is not selected. The preceding consumer canonical
 proof passed Rust semantic in 81.63 seconds, Dart 1/1,
 Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in
@@ -127,7 +276,8 @@ proof passes semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings, a
 complete/141 governance, and primary 30/30. The independent canonical MCP opt-in exits zero after all seven
 doctrines, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/1,031, and a rebuilt optional recurrence.
 This closes `.10.9.7` and `.10.9` without changing protocol, server, semantic, primary, aggregator, legacy, or
-authority behavior. Semantic rollout remains 8/9 because public no-drift is separately owned by `.10.10`.
+authority behavior. Public closeout `.10.10` subsequently locks current APIs, examples, decisions, roadmaps,
+Knowledge Map projections, both recurring drivers, and the companion-book boundary without changing behavior.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -3004,8 +3154,8 @@ all-toolchain execution. Seven recurring mutations lock runtime presence, exact 
 inventories, CI switch, driver, and rollout. Only `recurring_six_runtime` advances; MCP and public no-drift
 remain separate. At that `.10.8` boundary the neutral gate reported 6 groups / 20 responses / 105 rejected
 mutations, rollout 7 complete / 2 pending, and admission 6 complete / 0 pending. After recurring MCP promotion,
-the current neutral gate reports 6 groups / 20 responses / 110 rejected mutations, rollout 8 complete / 1
-pending, and admission 6 complete / 0 pending.
+the current neutral gate reports 6 groups / 20 responses / 128 mutations, rollout 9 complete / 0 pending, and
+admission 6 complete / 0 pending.
 
 The direct recurring run passes Perl 18, Rust 1/1 in 79.67 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, and
 the shared Lua consumer at 408 assertions on each ABI. The three primary cases pass all 30 command/environment
@@ -3332,7 +3482,7 @@ bash tools/run_python_project_data.sh tools/check_semantic_introspection_contrac
 ```
 
 The gate validates six fixture groups, derives 20 full canonical responses, compares each response with its fixed
-SHA-256 digest, and reports 105 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
+SHA-256 digest, and reports 128 rejected mutations. The cases cover graph/slot/lifecycle meaning, calls and shapes,
 staged and generated provenance, explanations, failed compilation, caller-captured runtime events, reverse
 relations, page cursors and boundaries, record/relation/depth budgets, all source policies, a lowered ceiling, an
 unsupported contract, and an invalid operation combination.
@@ -3340,8 +3490,9 @@ unsupported contract, and an invalid operation combination.
 The checker runs unconditionally in canonical local CI. It admits only an owned backend whose exact consumer,
 ordered roles, tracked path, canonical driver, native status, and rollout row all agree. It also reads
 `TOOLBOX.md` and locks the exact command output plus Perl, Rust, Dart, Julia, and dual-ABI Lua runtime/admission
-claims. Internal omission and wrong-value probes prove that documentation guard independently of the 98
-semantic-contract mutations.
+claims. Internal omission, stale-claim, and wrong-value probes prove the documentation guards independently of the
+semantic mutation corpus. The public current-state contract additionally locks 28 current documents, all nine
+worked-example families, both recurring drivers, and the separately task-owned companion-book boundary.
 
 Perl's native evaluator has a separate exact gate:
 
@@ -3583,7 +3734,7 @@ The dependency order is:
 | `.10.9.7.1.1.3` | add routed governance and promote thin transport | implemented; rooted recurring six-runtime driver, canonical opt-in, atomic cross-ledger owner/status, rollout complete, MCP 141 mutations and semantic 110 mutations |
 | `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | complete; focused six-runtime and independent canonical opt-in recomposition unchanged; `.1.1` and `.1` closed |
 | `.10.9.7.2` | recurring MCP committed-owner closeout | complete; unchanged focused and canonical MCP-opt-in recomposition closes `.10.9.7` and `.10.9` |
-| `.10.10` | public no-drift and closure | pending |
+| `.10.10` | public no-drift and closure | complete; 28 current documents, nine example families, two recurring drivers, and 128 mutations close rollout at 9/9 |
 
 ADRs `0054`/`0055` define one exact modern MCP `2026-07-28` stdio contract rather than one cross-runtime
 executable. Perl, Rust, Dart, Julia, and

@@ -82,7 +82,7 @@ Final no-change closeout `FUTURE-PARITY-BACKLOG.10.9.7.2` independently recompos
 clean `77ceb921`. Focused proof and the canonical MCP opt-in remain green through all seven doctrines, primary
 CLI 66x2, Phase 0 1,031/1,031, the complete optional six-runtime recurrence, ledger 141, and primary 30/30.
 Parents `.10.9.7` and `.10.9` are closed without protocol, implementation, ledger, behavior, or authority
-movement. Semantic rollout remains 8/9 until public no-drift `.10.10`.
+movement. Public no-drift `.10.10` subsequently closes semantic rollout at 9/9.
 
 No-change closeout `FUTURE-PARITY-BACKLOG.10.9.2.4` runs this exact committed chain again rather than adding an
 umbrella proof. Its focused and canonical recomposition are green from clean `28f84826`, and parent `.10.9.2` is
@@ -101,15 +101,17 @@ snapshot-local ids/order, value and target shapes, request/response envelopes, d
 traversal, page/record/relation/depth budgets, source ceilings/redactions/UTF-8 spans/digests, failed-compilation
 and caller-owned runtime snapshots, explanations, rollout inventory, and the handle-only MCP boundary. Run
 `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`; the checker derives 20 digest-locked responses across
-six fixture groups and reports 110 rejected mutations. Static rule facts are independently derived from
+six fixture groups and reports 128 rejected mutations. Static rule facts are independently derived from
 `rule_local_cursor_contract.json`: default/OR family normalizes to `or`/`seek`, rules without compiled edges use
 `none`, and a failed default-family bare edge retains family-derived `action`. Three coordinated model-plus-hash
 mutations prove response-digest self-consistency cannot hide those facts. Generated artifact identity/family is
 also cross-checked against that contract's generated-source-v2 authority: the calls fixture emits `default`, and
 both illegal and coordinated valid-but-wrong family mutations fail. Every semantic spec name is independently
 derived from its caller-registered fixture logical name after removing `.spec`; the calls snapshot is therefore
-`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 8 complete / 1 pending;
-native backend admission is 6 complete / 0 pending. No parser, compiler, runtime, descriptor, generated-source,
+`calls_and_staging`, and direct plus coordinated old-name mutations fail. Neutral rollout is 9 complete / 0 pending;
+native backend admission is 6 complete / 0 pending. The public contract requires 28 current surfaces, nine worked
+example families, both recurring drivers, and the accepted-but-unscaffolded companion-book boundary. No parser,
+compiler, runtime, descriptor, generated-source,
 CLI, trace, or MCP behavior was added by the neutral contract. Recurring leaf `.10.8` adds behavior-free
 composition: one `tools/check_semantic_introspection_six_runtime.sh` driver runs the six exact admitted
 consumers, three existing primary no-drift cases, and generated/capability/language ledgers; canonical execution

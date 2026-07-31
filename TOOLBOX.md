@@ -490,14 +490,19 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
-- **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, and the owned backend-admission
+- **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission
   topology. It checks the exact schema, source bytes/spans/digests, normalized records/relations, staged payload/job/
   result topology, deterministic query evaluation, digest-locked responses, rollout/admission omissions, privacy,
-  budgets, and the handle-only MCP boundary; backend-native semantics remain owned by each admitted consumer.
+  budgets, the handle-only MCP boundary, and the public current-state contract; backend-native semantics remain
+  owned by each admitted consumer.
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 110 rejected mutations, rollout 8 complete / 1 pending, admission 6 complete / 0 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 128 rejected mutations, rollout 9 complete / 0 pending, admission 6 complete / 0 pending`.
+- **PUBLIC NO-DRIFT:** the same independent checker requires 28 current documents, nine worked example families,
+  native and MCP six-runtime recurring drivers, and the accepted-but-unscaffolded backend-companion boundary. It
+  rejects omitted surfaces/markers, stale current claims, example drift, recurring-proof loss, companion-boundary
+  drift, and public rollout/owner rollback.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as

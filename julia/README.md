@@ -50,6 +50,12 @@ scalar pipe, and retains generated-source v2. The exact recurring proof is
 
 ## Semantic source and compilation foundation
 
+Current semantic rollout 9/9 and native admission 6/6 are complete. Julia's construction, `semantic_query`,
+typed/raw-neutral query, `with_execution_observation`,
+caller-owned runtime observation, generated/emitted propagation, and composed twelve-role admission all consume
+the same backend-neutral contract; the independent checker rejects 128 mutations and the recurring driver proves
+all six admitted runtimes.
+
 Julia now exposes the complete semantic-introspection foundation owner. `semantic_index` accepts either copied
 valid `AbstractString` input or copied strict `AbstractVector{UInt8}` input, builds the exact source map, and then
 retains one staged compiled-or-failed outcome. It does not accept or infer a path. The required caller policy is a
@@ -108,15 +114,15 @@ trace, diagnostic-output sink, or semantic observer. `semantic_snapshot(index).h
 false at this layer. Returned public structs are immutable, and each `to_json` call creates detached mutable JSON
 state.
 
-The owner now also retains the complete private static and call provenance graph; it is deliberately not yet a
-public records/query API. The calls target is exact at 22 records / 25 relations: a typed 18/16 core for functions,
+The owner also retains the complete private static and call provenance graph; callers access it only through the
+public normalized query API below, never through a projection accessor. The calls target is exact at 22 records / 25 relations: a typed 18/16 core for functions,
 helpers, calls, bindings, resolution, and shapes, plus three distinct staged payload/job/result records and one
 selected generated handler-plan record with nine directed provenance relations. Typed native sidecars must match
 their function owner before neutral staging facts are retained. The generated-v2 input must match the caller
 logical identity, complete compiled label order, and unique selected entry row; the owner never emits or executes
 generated source. Native payload/job/body-AST state, implementation text, paths, compiler objects, and mutable
-containers do not cross the private projection boundary. Public semantic query and runtime observation remain
-dependency-ordered later work.
+containers do not cross the private projection boundary. Public semantic query and runtime observation are now
+complete without widening that private authority.
 
 Julia now exposes the complete immutable static query surface. Query reads only one fresh detached materialization
 of the private projection; it cannot reach retained source/map, compiler, staged sidecars, AST/ActionIR, regex,
@@ -437,11 +443,10 @@ SDK, semantic-cache, or primary-CLI authority.
 Decoded dispatch remains the embedding surface for already-admitted host values; use `serve_mcp_stdio!` for
 untrusted wire bytes instead of decoding them directly with JSON3. Cancellation observed after response
 preparation but before emission suppresses that response; successful flush completes it, so a later cancellation
-cannot retract emitted bytes. Exact admission `.10.9.5.3` now composes one ordered twelve-role external consumer
-with 178 assertions. Julia alone advances to 4/5 implementations + 4/6 runtimes; shared rollout remains pending
-until the same Lua implementation passes independently on PUC Lua and LuaJIT. No-change `.10.9.5.4` recomposes
-the committed owners without a replacement implementation or oracle, closes parent `.10.9.5`, and hands the
-clean boundary to shared Lua planning `.10.9.6.0`.
+cannot retract emitted bytes. Exact admission `.10.9.5.3` composes one ordered twelve-role external consumer.
+Subsequent shared Lua admission and recurring all-twenty proof close the shared ledger at 5/5 implementations,
+6/6 runtimes, and rollout complete/141. No-change `.10.9.5.4` closes the Julia MCP parent; final `.10.9.7.2`
+closes the shared MCP parent, and `.10.10` locks the current public projection.
 
 ## Commands
 

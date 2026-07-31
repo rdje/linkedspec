@@ -1168,11 +1168,13 @@ symbols/calls, shapes, staged/generated provenance, diagnostics, runtime observa
 All six native runtime targets are admitted and recurring proof is active. Queries have deterministic snapshot-
 local ids/order, bounded pagination/traversal, and `none`/`identity`/`span`/`text` source ceilings with explicit
 redactions. Runtime explanations consume only an already captured caller-owned observation.
+Semantic public rollout is complete at 9/9. The independent neutral checker locks 20 exact answers, 128 rejected
+mutations, both recurring drivers, every current public projection, and the nine worked example families in the
+LinkedSpec Book.
 
-The neutral modern MCP contract and Perl's decoded plus strict-stdio in-process server are now implemented and
-admitted through one exact twelve-role consumer. The separate status/proof ledger reports Perl complete at one of
-five native implementations and one of six runtime admissions; the other backend rows and shared thin rollout
-remain pending. Import
+The neutral modern MCP contract and all five native decoded plus strict-stdio in-process servers are implemented
+and admitted through exact twelve-role consumers. The separate status/proof ledger reports 5/5 native implementations and 6/6 runtime admissions, because the shared Lua implementation qualifies independently on PUC
+Lua and LuaJIT; recurring thin transport and public no-drift are complete. Import
 `LinkedSpec::MCPServer` directly, register an already-created index under an opaque host authorization byte string,
 then choose decoded dispatch or a caller-owned stream:
 
@@ -1226,10 +1228,9 @@ mode below remains a separate compiler-compatibility view, not the semantic wire
 For conformance or backend rollout work, run the neutral materializer/validator and generated-binding proof before
 `tools/check_mcp_implementation_admission.py` and `t/mcp_server_perl_admission.t`. Those admission owners verify
 status, topology, direct-native identity, negative authority, and canonical ordering; they do not define a second
-wire contract or alter normal embedding behavior. Completed Perl parent closeout `.10.9.2.4` recomposes those same
-committed owners without changing this API. Rust behavior-free plan `.10.9.3.0` places its future server beside
-the native `SemanticIndex` in `linkedspec-runtime`, with no standalone executable, source bootstrap, or current API;
-other native server implementations remain separately owned.
+wire contract or alter normal embedding behavior. Perl, Rust, Dart, Julia, and shared Lua servers remain beside
+their native indexes, with no standalone executable or source bootstrap. Final recurring proof compares all twenty
+native/MCP semantic answers on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
 Typical shape:
 

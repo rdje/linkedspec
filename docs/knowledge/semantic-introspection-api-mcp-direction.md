@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime and MCP rollout admitted; MCP 5/5 implementations + 6/6 runtimes complete
+status: complete; native, MCP, recurring, and public rollout closed
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -30,6 +30,7 @@ evidence_update_2026_07_29_rust_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.3.1 imp
 evidence_update_2026_07_29_rust_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.3.2 implements strict bounded duplicate-safe stdio, canonical LF emission, cancellation through flush, fixed diagnostics, and EOF/read/write/flush release over borrowed streams without admission or ledger movement."
 evidence_update_2026_07_29_rust_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.3.3 composes one exact twelve-role external Rust consumer, advances only Rust to 2/5 implementations + 2/6 runtimes, leaves shared rollout pending, and rejects 39 status/source/role/authority/order mutations without changing the transport digest or server behavior."
 evidence_update_2026_07_29_rust_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.3.4 recomposes every committed neutral, Perl, and Rust MCP owner unchanged, passes complete focused/canonical proof, closes parent .10.9.3, and hands off to Dart .10.9.4 only after the clean commit."
+evidence_update_2026_07_30_public_closeout: "FUTURE-PARITY-BACKLOG.10.10 governs 28 current public surfaces, nine worked example families, both recurring drivers, and the separately task-owned companion-book boundary. Semantic governance is 6/20/128 at rollout 9/9 plus admission 6/6; MCP remains 5/5 + 6/6 complete/141."
 evidence_update_2026_07_29_dart_mcp_plan: "FUTURE-PARITY-BACKLOG.10.9.4.0 and ADR 0059 behavior-freeze one generated private-part binding/runtime, native in-process Dart server, secure registry, strict duplicate-safe canonical stdio, exact admission, and no-change closeout under .1-.4 without changing the 2/5 + 2/6 ledger."
 evidence_update_2026_07_29_dart_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.4.1 implements the Dart generated binding/runtime and secure decoded server while leaving strict stdio, formal admission, and the 2/5 + 2/6 ledger unchanged."
 evidence_update_2026_07_29_dart_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.4.2 implements bounded duplicate-safe canonical Dart stdio, cancellation through flush, fixed optional diagnostics, and EOF/I/O release while leaving formal admission and the 2/5 + 2/6 ledger unchanged."
@@ -83,19 +84,18 @@ Machine leaves `.10.9.1.1-.2` encode and independently validate those rules once
 `linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`,
 Rust `.10.9.3`, Dart `.10.9.4`, Julia `.10.9.5`, and shared Lua `.10.9.6` are closed. Recurring
 `.10.9.7.1.1.1-.3` repair the exact shared boundary, prove all twenty identities on six runtimes, and promote
-thin transport through one rooted recurring gate. Unchanged `.10.9.7.2` closes the MCP parent; public no-drift
-remains ordered under `.10.10`.
+thin transport through one rooted recurring gate. Unchanged `.10.9.7.2` closes the MCP parent. Public semantic/MCP no-drift is complete under `.10.10`, closing semantic parent `.10` without production behavior.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
 misclassified as generated artifacts.
 
 The neutral contract is executable through six fixture groups and 20 exact response digests; its independent
-checker rejects 110 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
+checker rejects 128 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
 admitted, and both native and MCP recurring six-runtime proofs are complete. The MCP machine contract and all
 five native servers are parent-closed; transport governance is 5/5 implementations + 6/6 runtimes with rollout
-complete and 141 rejected mutations. Public no-drift remains dependency-ordered under `.10.10`.
+complete and 141 rejected mutations. The one versioned native model remains the sole semantic authority.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

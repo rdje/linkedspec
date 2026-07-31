@@ -15,9 +15,9 @@ answers:
   - how is semantic introspection TOOLBOX current state guarded
   - does the semantic toolbox guard change the contract mutation count
 date: 2026-07-21
-status: current corrected neutral contract; Perl, Rust, and Dart admitted
+status: current complete neutral contract; all six runtimes admitted and public rollout closed
 tags: [introspection, semantic-api, conformance, fixtures, mutations, privacy, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; corrections derive static rules, generated-plan identity, and spec names from independent authorities. Perl .10.3.6, Rust .10.4.6, and Dart .10.5.6 each compose all 20 exact responses through one 12-role admission consumer. The checker validates six groups, 20 full response digests, and 81 mutations. Neutral rollout is 4 complete / 5 pending; native admission is 3 complete / 3 pending. Leaf .10.4.0.1 makes the checker require exact TOOLBOX output plus current runtime/admission claims, deny stale forms, and self-prove omission/wrong-value rejection."
+evidence: "FUTURE-PARITY-BACKLOG.10.2 freezes linkedspec-semantic-model-v1 and linkedspec-semantic-query-v1 in semantic_introspection_contract.json/model.json; later backend, recurring, MCP, and public leaves preserve that authority. FUTURE-PARITY-BACKLOG.10.10 completes the current checker at six groups, 20 exact response digests, 128 rejected mutations, public rollout 9/9, and native admission 6/6."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && rg -n 'semantic introspection contract|RUNTIME OBSERVATION|COMPOSED ADMISSION' TOOLBOX.md && rg -n 'semantic_introspection_contract|check_semantic_introspection' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -37,9 +37,10 @@ for rule header family/cursor semantics. It derives entry-marker and repetition 
 reconciles rule ownership with normalized edge records. This closes the gap where model rows and response hashes
 could agree with each other while disagreeing with already-admitted parser semantics.
 
-The filesystem leg also owns the corresponding `TOOLBOX.md` diagnostic entry. It requires the exact 6/20/81,
-rollout 4+5, admission 3+3 output and current Perl/Rust/Dart runtime plus 12-role admission claims exactly once, rejects
-known stale forms, and runs omitted-claim plus wrong-value probes internally.
+The filesystem leg also owns the corresponding `TOOLBOX.md` diagnostic entry and public current-state contract.
+It requires exact 6/20/128, rollout 9+0, admission 6+0 output; current runtime/admission claims; 28 public surfaces;
+nine worked examples; both recurring drivers; and the companion-book boundary. Omission, stale-claim, and wrong-
+value probes run internally.
 
 The same external contract owns generated-source-v2 identity, format, and the exact ten handler families. The
 calls snapshot's default entry header must therefore retain generated family `default`; the old `and_acode` value
@@ -57,13 +58,10 @@ prefixes; page cursor/boundary behavior; reverse traversal; source `none`/`ident
 Unicode-scalar coordinates; digests; redactions; a lowered ceiling; invalid requests; and unsupported contracts are
 all executable.
 
-The neutral leaf itself deliberately admitted no native backend. Perl now composes opaque construction, exact
-private static and calls/staging/generated projections, public immutable capabilities/query for all 19 static
-canonical cases, and typed caller-captured runtime projection matching the twentieth case across direct/loaded/
-generated routes. Rust and Dart match all 20 responses through typed/raw-neutral immutable evaluators plus caller-
-owned observations across direct, loaded, reconstructed, generated, emitted, and traced routes. One exact 12-role
-consumer admits each of Perl, Rust, and Dart, so rollout is 4/9 and native admission is 3/6. Julia, dual-ABI Lua,
-recurring six-runtime proof, thin MCP transport, and public no-drift remain pending.
+The neutral leaf itself deliberately admitted no native backend. Subsequent exact twelve-role consumers admit Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT across typed/raw-neutral static and observed-runtime answers. Native and MCP
+recurring proofs are complete, and public rollout is complete at 9/9 with admission 6/6; no second evaluator or
+semantic owner was introduced.
 
 Related facts: [[semantic-introspection-api-mcp-direction]], [[semantic-introspection-static-rule-authority]],
 [[semantic-introspection-generated-plan-authority]],

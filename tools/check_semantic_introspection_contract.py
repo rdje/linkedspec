@@ -46,7 +46,8 @@ GENERATED_PLAN_AUTHORITY = {
 TOP_LEVEL_FIELDS = {
     "format", "contract_id", "model_id", "query_id", "task_owner", "decisions", "scope", "schema",
     "query_contract", "source_contract", "fixture_groups", "source_fixtures", "snapshots", "query_cases",
-    "static_rule_authority", "generated_plan_authority", "target_admissions", "recurring_gate", "rollout", "canonical_ci",
+    "static_rule_authority", "generated_plan_authority", "target_admissions", "recurring_gate", "public_contract",
+    "rollout", "canonical_ci",
     "mutations",
 }
 MODEL_FIELDS = {"format", "model", "query", "snapshots"}
@@ -126,7 +127,7 @@ ROLLOUT = [
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
     ("recurring_six_runtime", "complete", "FUTURE-PARITY-BACKLOG.10.8"),
     ("thin_mcp_transport", "complete", "FUTURE-PARITY-BACKLOG.10.9.7.1"),
-    ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.10.10"),
+    ("public_no_drift", "complete", "FUTURE-PARITY-BACKLOG.10.10"),
 ]
 ADMISSIONS = [
     ("perl", "perl", "complete", "FUTURE-PARITY-BACKLOG.10.3"),
@@ -244,8 +245,122 @@ MCP_DIRECT_IDENTITY = {
     "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1",
     "driver": "tools/check_mcp_six_runtime.sh",
 }
+PUBLIC_CONTRACT = {
+    "documents": [
+        {
+            "path": "USER_GUIDE.md",
+            "required_markers": [
+                "### Semantic index and query API (Perl)",
+                "Semantic public rollout is complete at 9/9.",
+                "5/5 native implementations and 6/6 runtime admissions",
+            ],
+        },
+        {
+            "path": "rust/README.md",
+            "required_markers": [
+                "### Semantic introspection",
+                "`SemanticQuery::new`",
+                "`with_execution_observation`",
+                "semantic rollout 9/9",
+            ],
+        },
+        {
+            "path": "dart/README.md",
+            "required_markers": [
+                "## Semantic introspection",
+                "`SemanticQueryOperation.list`",
+                "`withExecutionObservation`",
+                "semantic rollout 9/9",
+            ],
+        },
+        {
+            "path": "julia/README.md",
+            "required_markers": [
+                "## Semantic source and compilation foundation",
+                "`semantic_query`",
+                "`with_execution_observation`",
+                "semantic rollout 9/9",
+            ],
+        },
+        {
+            "path": "lua/README.md",
+            "required_markers": [
+                "### Semantic introspection",
+                "`semantic_query_request`",
+                "`with_execution_observation`",
+                "semantic rollout 9/9",
+            ],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": [
+                "128 rejected mutations",
+                "9 complete / 0 pending",
+                "6 complete / 0 pending",
+            ],
+        },
+        {"path": "ROADMAP.md", "required_markers": ["128 mutations, rollout 9/9", "public semantic/MCP no-drift `.10.10` is complete"]},
+        {"path": "ROADMAP_V2.md", "required_markers": ["128 mutations, rollout 9/9", "public semantic/MCP no-drift `.10.10` is complete"]},
+        {"path": "ARCHITECTURE_STATE.md", "required_markers": ["2026-07-30 semantic-introspection public closeout", "128 omission-sensitive mutations"]},
+        {"path": "TOOLBOX.md", "required_markers": ["128 rejected mutations, rollout 9 complete / 0 pending", "public current-state contract"]},
+        {"path": "docs/TASK_TREE.md", "required_markers": ["FUTURE-PARITY-BACKLOG.10.10", "128 omission-sensitive mutations"]},
+        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
+        {"path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md", "required_markers": ["public no-drift complete", "9/9 rollout"]},
+        {"path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md", "required_markers": ["Semantic public no-drift is complete", "five native implementations"]},
+        {"path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md", "required_markers": ["Public closeout", "MCP `2026-07-28`"]},
+        {"path": "docs/decisions/0062-recurring-mcp-six-runtime-composition.md", "required_markers": ["Public semantic/MCP no-drift", "all twenty semantic responses"]},
+        {"path": "docs/knowledge/semantic-introspection-api-mcp-direction.md", "required_markers": ["Public semantic/MCP no-drift is complete", "one versioned native model"]},
+        {"path": "docs/knowledge/semantic-introspection-neutral-contract.md", "required_markers": ["public rollout is complete at 9/9", "128 rejected mutations"]},
+        {"path": "docs/knowledge/semantic-introspection-recurring-gate.md", "required_markers": ["public rollout is complete at 9/9", "tools/check_semantic_introspection_six_runtime.sh"]},
+        {"path": "docs/knowledge/mcp-native-server-topology.md", "required_markers": ["Public no-drift is complete", "five source implementations and six runtime admissions"]},
+        {"path": "docs/knowledge/mcp-2026-07-28-stdio-contract.md", "required_markers": ["public semantic/MCP closeout is complete", "linkedspec-mcp-transport-v1"]},
+        {"path": "docs/knowledge/mcp-implementation-admission-ledger.md", "required_markers": ["public semantic/MCP closeout is complete", "5/5 implementations and 6/6 runtimes"]},
+        {"path": "docs/knowledge/semantic-introspection-public-no-drift.md", "required_markers": ["one governed public current state", "nine worked example families"]},
+        {"path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "required_markers": ["## Worked semantic query patterns", "128 rejected mutations", "9 complete / 0 pending"]},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["semantic public rollout is 9/9", "MCP implementation/runtime state is 5/5 + 6/6"]},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["semantic public rollout 9/9", "five native MCP implementations"]},
+        {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["Semantic public rollout is complete at 9/9", "descriptor is not the semantic wire model"]},
+        {"path": "docs/linkedspec-book/src/SUMMARY.md", "required_markers": ["[Semantic Introspection](public-api/semantic-introspection.md)"]},
+    ],
+    "example_families": [
+        {"id": "graph", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Graph — list rules and follow edges"},
+        {"id": "resolution", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Resolution — inspect calls and targets"},
+        {"id": "provenance", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Provenance — follow staged and generated artifacts"},
+        {"id": "diagnostics", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Diagnostics — inspect failed compilation"},
+        {"id": "explain", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Explain — ask why a decision was made"},
+        {"id": "privacy", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Privacy — request only permitted source detail"},
+        {"id": "pagination", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Pagination — resume deterministic bounded answers"},
+        {"id": "runtime_observation", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Runtime observation — capture first, query second"},
+        {"id": "mcp", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### MCP — transport the same neutral request"},
+    ],
+    "recurring_proofs": [
+        {"kind": "native", "driver": "tools/check_semantic_introspection_six_runtime.sh", "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX"},
+        {"kind": "mcp", "driver": "tools/check_mcp_six_runtime.sh", "switch": "LINKEDSPEC_RUN_MCP_MATRIX"},
+    ],
+    "companion_book_boundary": {
+        "decision": "docs/decisions/0040-backend-implementation-companion-books.md",
+        "task": "docs/tasks/BACKEND-COMPANION-BOOKS.md",
+        "neutral_book": "docs/linkedspec-book",
+        "status": "accepted_not_scaffolded_separately_task_owned",
+    },
+    "forbidden_current_claims": [
+        {"path": "USER_GUIDE.md", "text": "Perl complete at one of five native implementations"},
+        {"path": "rust/README.md", "text": "advances the shared ledger to 2/5 implementations and 2/6"},
+        {"path": "dart/README.md", "text": "the third of five complete implementations and the third of six admitted runtimes"},
+        {"path": "julia/README.md", "text": "Julia alone advances to 4/5 implementations + 4/6 runtimes"},
+        {"path": "lua/README.md", "text": "98 rejected mutations, rollout 6/9"},
+        {"path": "lua/README.md", "text": "shared rollout remains pending for recurring six-runtime composition"},
+        {"path": "capability_conformance/README.md", "text": "Neutral rollout is 8 complete / 1 pending"},
+        {"path": "ROADMAP.md", "text": "rollout 8/9"},
+        {"path": "ROADMAP_V2.md", "text": "rollout 8/9"},
+        {"path": "TOOLBOX.md", "text": "110 rejected mutations, rollout 8 complete / 1 pending"},
+        {"path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "text": "Semantic rollout remains 8/9 because public no-drift"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "with recurring rollout pending"},
+        {"path": "docs/knowledge/mcp-native-server-topology.md", "text": "Public no-drift remains separately owned by `.10.10`."},
+    ],
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 110 rejected mutations, rollout 8 complete / 1 pending, admission 6 complete / 0 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 128 rejected mutations, rollout 9 complete / 0 pending, admission 6 complete / 0 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
@@ -322,8 +437,70 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("110 rejected mutations", "109 rejected mutations", 1)
+    wrong = text.replace("128 rejected mutations", "127 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
+
+
+def public_contract_text_errors(texts: dict[str, str]) -> list[str]:
+    errors: list[str] = []
+    for document in PUBLIC_CONTRACT["documents"]:
+        path = document["path"]
+        if path not in texts:
+            errors.append(f"public semantic document is missing: {path}")
+            continue
+        for marker in document["required_markers"]:
+            if marker not in texts[path]:
+                errors.append(f"public semantic marker is missing from {path}: {marker}")
+    for example in PUBLIC_CONTRACT["example_families"]:
+        path = example["path"]
+        if path not in texts or texts[path].count(example["marker"]) != 1:
+            errors.append(f"worked semantic example is missing or duplicated in {path}: {example['id']}")
+    for forbidden in PUBLIC_CONTRACT["forbidden_current_claims"]:
+        path = forbidden["path"]
+        if path in texts and forbidden["text"] in texts[path]:
+            errors.append(f"stale public semantic claim remains in {path}: {forbidden['text']}")
+    return errors
+
+
+def validate_public_contract_filesystem(ci_text: str) -> None:
+    paths = {
+        row["path"] for row in PUBLIC_CONTRACT["documents"]
+    } | {
+        row["path"] for row in PUBLIC_CONTRACT["forbidden_current_claims"]
+    }
+    texts: dict[str, str] = {}
+    for path in sorted(paths):
+        public_path = ROOT / path
+        require(public_path.is_file(), f"public semantic document is missing: {path}")
+        texts[path] = public_path.read_text(encoding="utf-8")
+    errors = public_contract_text_errors(texts)
+    require(not errors, "public semantic current-state drifted: " + "; ".join(errors))
+
+    omitted = copy.deepcopy(texts)
+    first_document = PUBLIC_CONTRACT["documents"][0]
+    first_marker = first_document["required_markers"][0]
+    omitted[first_document["path"]] = omitted[first_document["path"]].replace(first_marker, "", 1)
+    require(public_contract_text_errors(omitted), "public semantic omission guard is ineffective")
+    stale = copy.deepcopy(texts)
+    first_forbidden = PUBLIC_CONTRACT["forbidden_current_claims"][0]
+    stale[first_forbidden["path"]] += "\n" + first_forbidden["text"] + "\n"
+    require(public_contract_text_errors(stale), "public semantic stale-claim guard is ineffective")
+
+    for proof in PUBLIC_CONTRACT["recurring_proofs"]:
+        driver = ROOT / proof["driver"]
+        require(driver.is_file(), f"public semantic recurring driver is missing: {proof['driver']}")
+        require(driver.stat().st_mode & 0o111 != 0, f"public semantic recurring driver is not executable: {proof['driver']}")
+        require(f"require_tracked_file {proof['driver']}" in ci_text, f"canonical CI does not require {proof['driver']}")
+        require(proof["switch"] in ci_text, f"canonical CI switch is missing: {proof['switch']}")
+
+    companion = PUBLIC_CONTRACT["companion_book_boundary"]
+    require((ROOT / companion["decision"]).is_file(), "backend-companion decision is missing")
+    require((ROOT / companion["task"]).is_file(), "backend-companion task tree is missing")
+    require((ROOT / companion["neutral_book"]).is_dir(), "neutral mdBook root is missing")
+    companion_decision = (ROOT / companion["decision"]).read_text(encoding="utf-8")
+    companion_task = (ROOT / companion["task"]).read_text(encoding="utf-8")
+    require("accepted direction; implementation dependency-gated" in companion_decision, "backend-companion decision status drifted")
+    require("BACKEND-COMPANION-BOOKS.1" in companion_task, "backend-companion implementation task is missing")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -586,6 +763,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(contract["target_admissions"][4]["consumer"] == LUA_ADMISSION, "PUC Lua admission consumer topology drifted")
     require(contract["target_admissions"][5]["consumer"] == LUA_ADMISSION, "LuaJIT admission consumer topology drifted")
     require(contract["recurring_gate"] == RECURRING_GATE, "recurring six-runtime gate topology drifted")
+    require(contract["public_contract"] == PUBLIC_CONTRACT, "public semantic current-state contract drifted")
     require(
         [row["consumer_path"] for row in contract["recurring_gate"]["consumers"]]
         == [row["consumer"]["path"] for row in contract["target_admissions"]],
@@ -596,7 +774,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
     require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua", "tools/check_semantic_introspection_six_runtime.sh", "capability_conformance/mcp_implementation_admission.json", "tools/check_mcp_implementation_admission.py", "tools/check_mcp_six_runtime.sh"], "backend_consumers": "six_runtime_native_consumers_complete", "mcp_direct_identity": MCP_DIRECT_IDENTITY}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 110 and len(set(contract["mutations"])) == 110, "mutation inventory drifted")
+    require(len(contract["mutations"]) == 128 and len(set(contract["mutations"])) == 128, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -1221,16 +1399,16 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "110 rejected mutations" in readme
-        and "8 complete / 1 pending" in readme
+        and "128 rejected mutations" in readme
+        and "9 complete / 0 pending" in readme
         and "6 complete / 0 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
-        and "110 rejected mutations" in book
-        and "8 complete / 1 pending" in book
+        and "128 rejected mutations" in book
+        and "9 complete / 0 pending" in book
         and "6 complete / 0 pending" in book
         and "t/semantic_introspection_perl_admission.t" in book
         and "semantic_introspection_rust_admission" in book
@@ -1242,6 +1420,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     toolbox = TOOLBOX_PATH.read_text(encoding="utf-8")
     validate_toolbox_claims(toolbox)
     validate_toolbox_guard_probes(toolbox)
+    validate_public_contract_filesystem(ci_text)
 
 
 def validate_bundle(contract: dict[str, Any], model: dict[str, Any], *, check_filesystem: bool) -> dict[str, str]:
@@ -1395,6 +1574,24 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["unadmit_mcp_direct_identity"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"status": "pending"})
     mutations["alter_mcp_direct_identity_owner"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"owner": "FUTURE-PARITY-BACKLOG.10.9"})
     mutations["alter_mcp_direct_identity_driver"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"driver": "tools/missing_mcp_driver.sh"})
+    mutations["omit_public_contract"] = contract_path("public_contract")
+    mutations["remove_public_document"] = lambda c, m: c["public_contract"]["documents"].pop()
+    mutations["alter_public_document_path"] = lambda c, m: c["public_contract"]["documents"][0].update({"path": "USER_GUIDE_MISSING.md"})
+    mutations["remove_public_marker"] = lambda c, m: c["public_contract"]["documents"][0]["required_markers"].pop()
+    mutations["duplicate_public_marker"] = lambda c, m: c["public_contract"]["documents"][0]["required_markers"].append(c["public_contract"]["documents"][0]["required_markers"][0])
+    mutations["remove_example_family"] = lambda c, m: c["public_contract"]["example_families"].pop()
+    mutations["alter_example_family_id"] = lambda c, m: c["public_contract"]["example_families"][0].update({"id": "rules"})
+    mutations["reorder_example_families"] = lambda c, m: c["public_contract"]["example_families"].reverse()
+    mutations["remove_example_marker"] = lambda c, m: c["public_contract"]["example_families"][0].pop("marker")
+    mutations["remove_forbidden_public_claim"] = lambda c, m: c["public_contract"]["forbidden_current_claims"].pop()
+    mutations["alter_forbidden_public_claim_path"] = lambda c, m: c["public_contract"]["forbidden_current_claims"][0].update({"path": "USER_GUIDE_MISSING.md"})
+    mutations["alter_forbidden_public_claim_text"] = lambda c, m: c["public_contract"]["forbidden_current_claims"][0].update({"text": "wrong stale claim"})
+    mutations["remove_public_recurring_proof"] = lambda c, m: c["public_contract"]["recurring_proofs"].pop()
+    mutations["alter_public_recurring_driver"] = lambda c, m: c["public_contract"]["recurring_proofs"][0].update({"driver": "tools/missing_semantic_driver.sh"})
+    mutations["remove_companion_boundary"] = lambda c, m: c["public_contract"].pop("companion_book_boundary")
+    mutations["alter_companion_boundary_status"] = lambda c, m: c["public_contract"]["companion_book_boundary"].update({"status": "scaffolded"})
+    mutations["unpromote_public_rollout"] = lambda c, m: c["rollout"][8].update({"status": "pending"})
+    mutations["alter_public_rollout_owner"] = lambda c, m: c["rollout"][8].update({"owner": "FUTURE-PARITY-BACKLOG.10"})
     return mutations
 
 

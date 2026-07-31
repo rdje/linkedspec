@@ -53,8 +53,8 @@ decision and split without adding transport behavior.
 The dependency chain is complete. Exact contract `.10.9.1`, native Perl/Rust/Dart/Julia/shared-Lua parents
 `.10.9.2-.6`, all-twenty six-runtime promotion `.10.9.7.1`, and unchanged parent recomposition `.10.9.7.2` pass
 without adding an aggregator or central semantic oracle. Formal state is 5/5 implementations plus 6/6 runtime
-admissions with shared rollout complete and 141 rejected governance mutations. Semantic governance remains
-rollout 8/9 because public no-drift belongs to `.10.10`, not to this transport topology.
+admissions with shared rollout complete and 141 rejected governance mutations. Semantic public no-drift is complete
+under `.10.10`; neutral governance is 9/9 with 128 mutations, while this transport topology remains unchanged.
 
 Final focused proof passes semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings, Perl/Rust/Dart/
 Julia/PUC-Lua/LuaJIT consumers, complete/141 governance, and primary 30/30. The independent canonical MCP opt-in

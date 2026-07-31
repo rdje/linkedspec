@@ -192,6 +192,39 @@ remain compatible `Result<_, String>` adapters over the same path; successful JS
        JSON output
 ```
 
+### Semantic introspection
+
+`linkedspec-runtime` exposes an opaque immutable `SemanticIndex` whose typed and raw-neutral queries implement the
+same `linkedspec-semantic-query-v1` contract as every other backend. Construction accepts copied in-memory text or
+strict UTF-8 bytes plus caller-owned logical identity; it never infers or reads a path:
+
+```rust
+use linkedspec_runtime::semantic_index::{
+    SemanticIndex, SemanticIndexOptions, SemanticQuery, SemanticQueryOperation,
+    SemanticSourceDetail,
+};
+
+let index = SemanticIndex::from_source(
+    "Top::\n /x/\n",
+    SemanticIndexOptions::new("example.spec", SemanticSourceDetail::Text),
+)?;
+let mut request = SemanticQuery::new(SemanticQueryOperation::List);
+request.record_kinds = vec!["rule".to_string()];
+request.source.detail = SemanticSourceDetail::Identity;
+
+let response = index.query(&request);
+assert!(response.ok);
+assert_eq!(response.records[0].id, "rule:Top");
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`SemanticQuery::new` supplies the canonical typed defaults. `index.capabilities()` reports the snapshot's effective vocabulary and limits. `index.query_neutral(&value)`
+validates the exact JSON-like envelope and shares the typed evaluator. Normal execution can receive a
+`RuntimeSemanticObservationSink`; after completion, `with_execution_observation` derives a separate immutable
+index containing execution/event records. Queries never compile, execute, trace, read paths, expose `CompiledSpec`,
+or mutate either index. Current semantic rollout 9/9 and native admission 6/6 are closed under the independent
+128-mutation neutral checker and the six-runtime recurring proof.
+
 ### Native MCP server
 
 ADR `0058` and `FUTURE-PARITY-BACKLOG.10.9.3.1` provide a public in-process
@@ -219,12 +252,11 @@ Normal operation and clean EOF are silent. EOF, read failure, write failure, or 
 down and releases every retained `Arc`; an optional separate log receives only
 `linkedspec_mcp_io_failure\n`, and the caller receives the typed sanitized error. Safe Rust's exclusive mutable
 borrows prevent the same writer from serving as protocol output and log. Exact twelve-role Rust admission
-`.10.9.3.3` now composes the public behavior and advances the shared ledger to 2/5 implementations and 2/6
-runtimes while rollout remains pending; the checker rejects 39 status/source/role/order mutations. There is no MCP
+`.10.9.3.3` composes the public behavior; subsequent Dart, Julia, and shared Lua admissions plus recurring
+all-twenty proof close the shared ledger at 5/5 implementations, 6/6 runtimes, and rollout complete/141. There is no MCP
 executable, primary-CLI mode, SDK/network transport, source bootstrap, semantic cache, aggregator, or legacy
-adapter. No-change `.10.9.3.4` recomposes the committed owners under focused and canonical proof and closes the
-Rust MCP parent without another implementation or test owner. Dart behavior-free plan `.10.9.4.0` and ADR `0059`
-now consume that handoff without changing the 2/5 + 2/6 ledger; Dart implementation begins under `.10.9.4.1`.
+adapter. No-change `.10.9.3.4` recomposes the committed Rust owners without another implementation or test owner;
+final `.10.9.7.2` closes the MCP parent, and `.10.10` locks the current public projection.
 
 ## Lifecycle Loop
 

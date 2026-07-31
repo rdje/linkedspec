@@ -1,7 +1,7 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted and implemented; recurring and MCP parents close through `.10.9.7.2`
+- Status: accepted and implemented; recurring/MCP parents and public semantic/MCP no-drift are complete
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
@@ -257,8 +257,9 @@ later route only and cannot become part of this proof.
 - The opt-in gate is reproducible from a moved checkout and cannot strand project data on another volume.
 - Implementation parents `.10.9.7.1.1` and `.10.9.7.1` are closed by unchanged recomposition, not a replacement
   oracle.
-- `.10.9.7.2` closes the MCP parent by rerunning committed owners unchanged; public API/mdBook no-drift remains
-  separately owned by `.10.10`.
+- `.10.9.7.2` closes the MCP parent by rerunning committed owners unchanged. Public semantic/MCP no-drift
+  `.10.10` subsequently governs current APIs/examples/status and closes semantic rollout at 9/9 without changing
+  the all-twenty semantic responses or the recurring driver.
 
 ## Links
 

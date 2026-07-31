@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Semantic introspection public closeout signoff-complete
+
+Leaf `.10.10` extends the existing independent neutral checker with 28 governed public surfaces, nine worked
+example families, native and MCP recurring-driver identity, and the separately accepted-but-unscaffolded backend-
+companion boundary. Eighteen new omissions/rollbacks raise semantic governance to 6/20/128, close rollout at 9/9,
+and retain native admission 6/6. MCP remains 5/5 implementations + 6/6 runtimes complete/141. Perl, Rust, Dart,
+Julia, Lua, neutral-book, roadmap, live, ADR, and Knowledge Map projections agree without production or authority
+movement; parent `.10` closes with the public leaf. No push occurs before commit cadence 300.
+
+Direct recurrence passes semantic Perl 18, Rust 1/1 in 78.45 seconds, Dart 1/1, Julia 416/416 in 27.5 seconds,
+Lua 408/408 per ABI, and selected primary 30/30; MCP passes 35/10/10/76, all five byte-fresh bindings, Perl 13,
+Rust 1, Dart 1, Julia 257, Lua 281 per ABI, complete/141 governance, and primary 30/30. The independent canonical
+run with both optional recurrences exits zero after all seven doctrines, containment/moved-root, CLI 66x2, RAM
+54%, Phase 0 1,031/1,031, semantic Rust 78.50 seconds / Julia 27.5 seconds, and MCP Rust 15.33 seconds plus all
+six admissions. Knowledge Map is 758/6,147 and mdBook is 79 files / 13,844 KiB before exact output cleanup.
+
 ## 2026-07-30 — Thin MCP parent signoff-complete
 
 Leaf `.10.9.7.2` starts from clean implementation-parent closeout `77ceb921` and recomposes the committed neutral

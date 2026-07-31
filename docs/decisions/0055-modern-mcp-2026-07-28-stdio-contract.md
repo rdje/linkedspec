@@ -253,7 +253,9 @@ contract, binding, server, consumer, recurring-order, ledger, authority, and pri
 through all seven doctrines, primary CLI 66x2, Phase 0 1,031/1,031, and the independent optional recurrence.
 
 This closes `.10.9.7` and `.10.9` without changing protocol bytes, methods, lifecycle, policy, errors, transport,
-legacy support, or server authority. Public API and mdBook no-drift remain separately owned by `.10.10`.
+legacy support, or server authority. Public closeout `.10.10` subsequently governs the current MCP `2026-07-28`
+examples, backend projections, decisions, roadmaps, Knowledge Map cards, and recurring proof. It changes no
+protocol, transport, server, binding, or semantic behavior.
 
 ## Consequences
 
@@ -262,7 +264,7 @@ legacy support, or server authority. Public API and mdBook no-drift remain separ
 - Explicit opaque handles are native to the protocol model and remain out-of-band registration references, not
   hidden connection sessions.
 - Current SDK adoption may lag a protocol released one day before this decision. That is a deployment
-  compatibility risk, not a reason to duplicate the first native contract; public closeout will document the
+  compatibility risk, not a reason to duplicate the first native contract; public closeout documents the
   version requirement, and later compatibility work requires evidence and a separate owner.
 - A strict frame/id/JSON boundary prevents cross-runtime parser and number drift before semantic dispatch.
 - Default-policy direct/native identity remains exact. The only authorized stricter-policy difference is the

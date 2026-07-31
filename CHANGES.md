@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.10 — close semantic introspection
+
+Extended the existing independent semantic contract checker with an exact public current-state contract rather
+than creating another semantic or documentation oracle. It now requires 28 current surfaces, all nine worked
+example families, the native and all-twenty MCP recurring drivers, and the accepted-but-unscaffolded companion-
+book boundary. Eighteen omissions, stale/status rollbacks, example/topology changes, and companion-boundary drift
+raise governance from 110 to 128 rejected mutations. Only `public_no_drift` advances: semantic rollout closes at
+9/9 with native admission 6/6; MCP remains 5/5 implementations + 6/6 runtimes complete/141.
+
+The Perl guide; Rust, Dart, Julia, and Lua READMEs; conformance guide; both roadmaps; architecture/toolbox/task
+state; ADRs `0049`, `0054`, `0055`, and `0062`; current Knowledge cards; and neutral mdBook API/status/handoff/
+descriptor/navigation pages now agree. The book adds practical graph, resolution, provenance, diagnostics,
+explanation, privacy, pagination, runtime-observation, and MCP examples. Five backend companion books remain
+separately task-owned and unscaffolded. No parser, compiler, runtime, server, protocol, binding, CLI, aggregator,
+legacy, package, SDK, service, network, or authority behavior changes. Focused proof reports semantic
+6/20/128 at 9/9 + 6/6. Direct semantic recurrence passes Perl 18, Rust 1/1 in 78.45 seconds, Dart 1/1, Julia
+416/416 in 27.5 seconds, and Lua 408/408 per ABI; direct MCP recurrence passes 35/10/10/76, all five byte-fresh
+bindings, Perl 13, Rust 1, Dart 1, Julia 257, Lua 281 per ABI, complete/141 governance, and primary 30/30.
+
+The independent canonical run with both recurrences enabled exits zero after all seven doctrines, repository
+containment/moved-root proof, primary CLI 66x2, RAM 54%, Phase 0 1,031/1,031, a semantic repeat including Rust
+78.50 seconds and Julia 27.5 seconds, and an MCP repeat including Rust 15.33 seconds plus complete six-runtime
+admission and primary 30/30. Knowledge Map is exact at 758 facts / 6,147 question keys; the mdBook renders 79
+files at 13,844 KiB before exact generated-output cleanup. No push occurs before commit cadence 300.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.2 — close MCP implementation parent
 
 Recomposed the complete committed thin-MCP chain from clean `77ceb921` without adding or replacing a production

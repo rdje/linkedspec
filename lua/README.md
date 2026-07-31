@@ -76,6 +76,32 @@ unchanged. The runtime emits balanced parse/rule scopes plus exact regex,
 action/blind dispatch, recursion, lifecycle, cursor, source-boundary, and
 governed mark/capture events.
 
+### Semantic introspection
+
+The shared PUC Lua/LuaJIT package exposes `semantic_query_request`, `with_execution_observation`, one opaque immutable semantic index, and typed/raw-neutral
+`linkedspec-semantic-query-v1` requests. Construction copies in-memory source and requires caller-owned logical
+identity; it does not accept or infer a path:
+
+```lua
+local index = linkedspec.semantic_index("Top::\n /x/\n", {
+  logical_name = "example.spec",
+  source_detail_ceiling = "text",
+})
+local request = linkedspec.semantic_query_request("list", {
+  record_kinds = { "rule" },
+  source = { detail = "identity", include_content_digest = false },
+})
+local response = index:query(request)
+assert(response.ok and response.records[1].id == "rule:Top")
+```
+
+`index:capabilities()` reports effective vocabulary and limits. `index:query_neutral(value)` accepts the exact
+explicit JSON-kind tree and shares the typed evaluator. After normal execution captures a completed typed event
+sequence, `index:with_execution_observation(events)` derives a separate immutable index. Queries never compile,
+execute, trace, read paths, invoke callbacks, expose private tables/metatables, or mutate either index. Current
+semantic rollout 9/9 and native admission 6/6 are closed under the independent 128-mutation neutral checker and
+one unchanged six-runtime recurring proof.
+
 Semantic observation is a separate invocation-local channel. Pass a function as
 `semantic_observation_sink` to `runtime_parse`, `runtime_execute`, or either traced convenience entrypoint:
 
@@ -157,8 +183,8 @@ Lua semantic introspection is admitted on both supported ABIs by one unchanged t
 `lua/test/semantic_introspection_lua_admission_test.lua`. It passes 408 assertions under PUC Lua and 408 under
 LuaJIT across strict source/failed/runtime snapshots, all twenty typed/raw-neutral query responses, every native/
 loaded/reconstructed/generated/emitted/traced/isolated route, policy and isolation cases, and host-leak denial.
-Both conformance rows share the same consumer topology; neutral governance is six fixture groups, twenty exact
-responses, 98 rejected mutations, rollout 6/9, and native admission 6/6.
+Both conformance rows share the same consumer topology; current neutral governance is six fixture groups, twenty
+exact responses, 128 rejected mutations, semantic rollout 9/9, and native admission 6/6.
 
 ### Shared native MCP server and strict stdio
 
@@ -206,8 +232,9 @@ Lua and LuaJIT; each runtime passes 202 assertions across all twelve governed ro
 1,024-handle boundary. Governance rejects 114 mutations and formal MCP status is now 5/5 implementations + 6/6
 runtimes. Canonical admission signoff passes Phase 0 1,031/1,031 in 659 seconds plus the full PUC Lua/LuaJIT
 package gate. No-change closeout `.10.9.6.4` recomposes those owners unchanged, passes an independent canonical
-gate with Phase 0 1,031/1,031 in 652 seconds, and closes parent `.10.9.6`; shared rollout remains pending for
-recurring six-runtime composition `.10.9.7`.
+gate with Phase 0 1,031/1,031 in 652 seconds, and closes parent `.10.9.6`. Recurring all-twenty composition
+`.10.9.7.1`, final MCP closeout `.10.9.7.2`, and public no-drift `.10.10` subsequently close shared rollout and
+the public projection without changing the Lua server.
 
 The later minimal staged registry validates and stable-sorts exact function-body jobs,
 records the governed ActionIR-body provider/digest/cache identity, parses exact body text, and immutably stitches
@@ -639,8 +666,8 @@ creating it. Direct low-level embedding must first source `tools/project_data_en
 and build into a repository-filesystem directory; no project-owned state may
 default to an operating-system temporary directory or developer home.
 
-MCP implementation leaf `.10.9.6.1` will add the common two-function system module to this same dual-ABI build
-and cleanup topology; the planning leaf does not yet change the builder or produced module set.
+MCP implementation leaf `.10.9.6.1` added the common two-function system module to this same dual-ABI build and
+cleanup topology; both ABI admissions and shared recurring/public closeout are now complete.
 
 The primary parser command accepts exactly one source selector and one input selector. It has no subcommands or
 positionals:

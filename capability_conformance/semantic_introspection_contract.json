@@ -520,6 +520,120 @@
       "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX"
     }
   },
+  "public_contract": {
+    "documents": [
+      {
+        "path": "USER_GUIDE.md",
+        "required_markers": [
+          "### Semantic index and query API (Perl)",
+          "Semantic public rollout is complete at 9/9.",
+          "5/5 native implementations and 6/6 runtime admissions"
+        ]
+      },
+      {
+        "path": "rust/README.md",
+        "required_markers": [
+          "### Semantic introspection",
+          "`SemanticQuery::new`",
+          "`with_execution_observation`",
+          "semantic rollout 9/9"
+        ]
+      },
+      {
+        "path": "dart/README.md",
+        "required_markers": [
+          "## Semantic introspection",
+          "`SemanticQueryOperation.list`",
+          "`withExecutionObservation`",
+          "semantic rollout 9/9"
+        ]
+      },
+      {
+        "path": "julia/README.md",
+        "required_markers": [
+          "## Semantic source and compilation foundation",
+          "`semantic_query`",
+          "`with_execution_observation`",
+          "semantic rollout 9/9"
+        ]
+      },
+      {
+        "path": "lua/README.md",
+        "required_markers": [
+          "### Semantic introspection",
+          "`semantic_query_request`",
+          "`with_execution_observation`",
+          "semantic rollout 9/9"
+        ]
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "required_markers": [
+          "128 rejected mutations",
+          "9 complete / 0 pending",
+          "6 complete / 0 pending"
+        ]
+      },
+      {"path": "ROADMAP.md", "required_markers": ["128 mutations, rollout 9/9", "public semantic/MCP no-drift `.10.10` is complete"]},
+      {"path": "ROADMAP_V2.md", "required_markers": ["128 mutations, rollout 9/9", "public semantic/MCP no-drift `.10.10` is complete"]},
+      {"path": "ARCHITECTURE_STATE.md", "required_markers": ["2026-07-30 semantic-introspection public closeout", "128 omission-sensitive mutations"]},
+      {"path": "TOOLBOX.md", "required_markers": ["128 rejected mutations, rollout 9 complete / 0 pending", "public current-state contract"]},
+      {"path": "docs/TASK_TREE.md", "required_markers": ["FUTURE-PARITY-BACKLOG.10.10", "128 omission-sensitive mutations"]},
+      {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
+      {"path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md", "required_markers": ["public no-drift complete", "9/9 rollout"]},
+      {"path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md", "required_markers": ["Semantic public no-drift is complete", "five native implementations"]},
+      {"path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md", "required_markers": ["Public closeout", "MCP `2026-07-28`"]},
+      {"path": "docs/decisions/0062-recurring-mcp-six-runtime-composition.md", "required_markers": ["Public semantic/MCP no-drift", "all twenty semantic responses"]},
+      {"path": "docs/knowledge/semantic-introspection-api-mcp-direction.md", "required_markers": ["Public semantic/MCP no-drift is complete", "one versioned native model"]},
+      {"path": "docs/knowledge/semantic-introspection-neutral-contract.md", "required_markers": ["public rollout is complete at 9/9", "128 rejected mutations"]},
+      {"path": "docs/knowledge/semantic-introspection-recurring-gate.md", "required_markers": ["public rollout is complete at 9/9", "tools/check_semantic_introspection_six_runtime.sh"]},
+      {"path": "docs/knowledge/mcp-native-server-topology.md", "required_markers": ["Public no-drift is complete", "five source implementations and six runtime admissions"]},
+      {"path": "docs/knowledge/mcp-2026-07-28-stdio-contract.md", "required_markers": ["public semantic/MCP closeout is complete", "linkedspec-mcp-transport-v1"]},
+      {"path": "docs/knowledge/mcp-implementation-admission-ledger.md", "required_markers": ["public semantic/MCP closeout is complete", "5/5 implementations and 6/6 runtimes"]},
+      {"path": "docs/knowledge/semantic-introspection-public-no-drift.md", "required_markers": ["one governed public current state", "nine worked example families"]},
+      {"path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "required_markers": ["## Worked semantic query patterns", "128 rejected mutations", "9 complete / 0 pending"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["semantic public rollout is 9/9", "MCP implementation/runtime state is 5/5 + 6/6"]},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["semantic public rollout 9/9", "five native MCP implementations"]},
+      {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["Semantic public rollout is complete at 9/9", "descriptor is not the semantic wire model"]},
+      {"path": "docs/linkedspec-book/src/SUMMARY.md", "required_markers": ["[Semantic Introspection](public-api/semantic-introspection.md)"]}
+    ],
+    "example_families": [
+      {"id": "graph", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Graph — list rules and follow edges"},
+      {"id": "resolution", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Resolution — inspect calls and targets"},
+      {"id": "provenance", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Provenance — follow staged and generated artifacts"},
+      {"id": "diagnostics", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Diagnostics — inspect failed compilation"},
+      {"id": "explain", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Explain — ask why a decision was made"},
+      {"id": "privacy", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Privacy — request only permitted source detail"},
+      {"id": "pagination", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Pagination — resume deterministic bounded answers"},
+      {"id": "runtime_observation", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### Runtime observation — capture first, query second"},
+      {"id": "mcp", "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "marker": "### MCP — transport the same neutral request"}
+    ],
+    "recurring_proofs": [
+      {"kind": "native", "driver": "tools/check_semantic_introspection_six_runtime.sh", "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX"},
+      {"kind": "mcp", "driver": "tools/check_mcp_six_runtime.sh", "switch": "LINKEDSPEC_RUN_MCP_MATRIX"}
+    ],
+    "companion_book_boundary": {
+      "decision": "docs/decisions/0040-backend-implementation-companion-books.md",
+      "task": "docs/tasks/BACKEND-COMPANION-BOOKS.md",
+      "neutral_book": "docs/linkedspec-book",
+      "status": "accepted_not_scaffolded_separately_task_owned"
+    },
+    "forbidden_current_claims": [
+      {"path": "USER_GUIDE.md", "text": "Perl complete at one of five native implementations"},
+      {"path": "rust/README.md", "text": "advances the shared ledger to 2/5 implementations and 2/6"},
+      {"path": "dart/README.md", "text": "the third of five complete implementations and the third of six admitted runtimes"},
+      {"path": "julia/README.md", "text": "Julia alone advances to 4/5 implementations + 4/6 runtimes"},
+      {"path": "lua/README.md", "text": "98 rejected mutations, rollout 6/9"},
+      {"path": "lua/README.md", "text": "shared rollout remains pending for recurring six-runtime composition"},
+      {"path": "capability_conformance/README.md", "text": "Neutral rollout is 8 complete / 1 pending"},
+      {"path": "ROADMAP.md", "text": "rollout 8/9"},
+      {"path": "ROADMAP_V2.md", "text": "rollout 8/9"},
+      {"path": "TOOLBOX.md", "text": "110 rejected mutations, rollout 8 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "text": "Semantic rollout remains 8/9 because public no-drift"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "with recurring rollout pending"},
+      {"path": "docs/knowledge/mcp-native-server-topology.md", "text": "Public no-drift remains separately owned by `.10.10`."}
+    ]
+  },
   "rollout": [
     {"capability": "neutral_contract_and_inventory", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.2"},
     {"capability": "perl_reference", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.3"},
@@ -529,7 +643,7 @@
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
     {"capability": "recurring_six_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
     {"capability": "thin_mcp_transport", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1"},
-    {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.10"}
+    {"capability": "public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.10"}
   ],
   "canonical_ci": {
     "driver": "tools/run_ci_local.sh",
@@ -590,6 +704,12 @@
     "omit_mcp_rollout", "move_semantics_into_mcp",
     "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration",
     "omit_mcp_canonical_registration", "unadmit_mcp_direct_identity", "alter_mcp_direct_identity_owner",
-    "alter_mcp_direct_identity_driver"
+    "alter_mcp_direct_identity_driver",
+    "omit_public_contract", "remove_public_document", "alter_public_document_path", "remove_public_marker",
+    "duplicate_public_marker", "remove_example_family", "alter_example_family_id", "reorder_example_families",
+    "remove_example_marker", "remove_forbidden_public_claim", "alter_forbidden_public_claim_path",
+    "alter_forbidden_public_claim_text", "remove_public_recurring_proof", "alter_public_recurring_driver",
+    "remove_companion_boundary", "alter_companion_boundary_status", "unpromote_public_rollout",
+    "alter_public_rollout_owner"
   ]
 }
