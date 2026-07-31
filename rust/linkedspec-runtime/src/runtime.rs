@@ -633,6 +633,7 @@ impl RuntimeContext {
         match value {
             RuntimeValue::Array(_) => "array",
             RuntimeValue::Hash(_) => "harray",
+            RuntimeValue::Codeblock(_) => "codeblock",
             RuntimeValue::Undef
             | RuntimeValue::Scalar(_)
             | RuntimeValue::Number(_)

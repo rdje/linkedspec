@@ -15286,16 +15286,23 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.3.4 - close Perl callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the unchanged callable-codeblock contract on Rust native and generated execution.
   Children: `.11.4.1`, `.11.4.2`, `.11.4.3`
   Dependencies: `.11.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add typed Rust callable-codeblock AST/signature/compiled/serialized state.
   Acceptance: Exact brace disambiguation, spans, signature/body data, validation, descriptors, and source emission
     round-trip without evaluating or encoding a Rust closure.
+  Verification: **PASS 2026-07-30.** Exact neutral construction, Unicode/nested spans, diagnostics, inert runtime
+    transport, compiled/generated/emitted state, semantic signature descriptors, and eager-dependency isolation
+    pass the seven-test Rust contract; variadic 7/7, semantic query 5/5, complete core, and full Rust operational
+    gates pass. Knowledge Map 759/6,156, mdBook, seven doctrines, and canonical CI through CLI 66x2, RAM 55%, and
+    Phase 0 1,031/1,031 in 641 seconds pass. No dynamic invocation, generic final-block, MCP, or capability scope
+    moves.
+  Commit: `FUTURE-PARITY-BACKLOG.11.4.1 - construct Rust callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4.2`
   Status: `pending`
@@ -15353,6 +15360,35 @@ before implementation.
     block execution is routed through `.5.1`, and explicit callable literals/dynamic calls/generated obligations
     are added to dependency-complete Lua leaves without premature behavior claims. Lexical capture remains
     explicitly deferred and requires a new decision/task if later justified.
+
+### `FUTURE-PARITY-BACKLOG.11.4.1` Acceptance Checklist
+
+- [x] **CLEAN OWNERSHIP / RETRIEVAL FIRST** — Activate `.11.4`/`.11.4.1` from clean semantic-parent commit
+  `6cadd6a0`, zero-byte brief, and absent generated residue; retrieve ADRs `0031`/`0032`, the neutral callable-
+  codeblock/signature contracts and checkers, Perl reference facts, current Rust parser/compiler/runtime/emitter
+  owners, routing/storage constraints, and the intervening completed selector-retirement dependency.
+- [x] **TOOL-LED BASELINE / EXACT GAP MAP** — Use the neutral checker, governed fixture, Rust typed-state tests,
+  and LinkedSpec probes before editing behavior; classify exact parser, typed AST, signature, compiled-state,
+  serialization, descriptor, and emitted-source gaps without guessing from `.spec` text.
+- [x] **TYPED CONSTRUCTION / NO EXECUTION** — Recognize exact `{|params| body }` / `{|| body }` before harray and
+  eager-block classification; preserve source/spans, fixed/rest signature, typed body, and stable diagnostics as
+  inert Rust data; construct no host closure and execute no literal body or variable call in this leaf.
+- [x] **STATE / DESCRIPTOR / EMISSION ROUND-TRIP** — Preserve the same typed record through compilation,
+  serialization/descriptors, generated-plan state, and emitted Rust source with exact neutral fixture identity;
+  keep contextual final-block execution, dynamic invocation, and generic equivalence owned by `.11.4.2-.3`.
+- [x] **SIGNOFF / DOCS / COMMIT / CLEAN HANDOFF** — Pass focused contract and Rust checks plus warranted broad
+  gates, synchronize task/roadmap/live/Knowledge Map/mdBook/current Rust documentation, remove exact generated
+  output, commit with `.11.4.1`, clear the brief, prove clean, and only then activate `.11.4.2`; do not push before
+  cadence 300.
+
+Baseline 2026-07-30: neutral `linkedspec-callable-codeblock-v1` passes 7 literals / 11 calls / 9 invalid literals /
+7 invalid calls / 4 invalid declarations / 8 contextual forms. Rust `expr.rs` has only harray and eager
+`BlockValue` brace branches, a fixed/variadic-function-oriented `CallableSignature`, and no deferred codeblock
+`Expr`/`RuntimeValue`; therefore compiled JSON, public typed state, and emitted Rust have nothing to preserve.
+`source_emitter.rs` already embeds the one serialized `CompiledSpec`, so the correct repair is to add typed state
+at the parser/compiler boundary and prove the existing emitter carries it byte-for-byte—not add another codec.
+Current `Engine::eval_expr` has no bound-value call dispatch, which is correct and remains untouched until
+`.11.4.2`. Existing `BlockValue` callback execution and helper/method name gates remain `.11.4.3` closeout scope.
 
 ### `FUTURE-PARITY-BACKLOG.11.1` Acceptance Checklist
 
@@ -17412,7 +17448,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
+**Authoritative frontier (2026-07-30):** Rust typed callable-codeblock construction/state leaf `.11.4.1` is
+signoff-complete from clean semantic-parent boundary `6cadd6a0`; this commit owns its exact inert typed/serialized/
+descriptor/emitted state and clean handoff. Parent `.11.4` remains active. Dynamic codeblock-variable execution
+`.11.4.2` is the next leaf and may activate only after the `.11.4.1` commit leaves the repository clean.
+
+**Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
 coordinates, four ceilings, one retained compiled-or-failed authority, native/fallback diagnostic, entry, and
 generated-v2 plan without caller path or target execution on either ABI. Behavior-free static-authority audit
@@ -18806,6 +18847,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.4.1` | Clean base `6cadd6a0`; exact neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms; Rust callable construction 7/7, variadic 7/7, semantic query 5/5, complete core 193 plus integration groups, complete Rust runtime/corpus/generated-source/build/storage/CLI 66x2 gate; capability 80/0/0; Knowledge Map 759/6,156; mdBook; seven doctrines; canonical MCP 5/5 + 6/6 complete/141, semantic 9/9 + 6/6, containment/moved-root, CLI 66x2, RAM 55%, Phase 0 1,031/1,031 in 641 seconds; exact cleanup. | PASS. Rust owns exact inert typed callable-codeblock construction, Unicode-coordinate spans, serialized/generated/emitted transport, and semantic signature shape without closure capture, body execution, variable-call dispatch, capability promotion, MCP movement, or generic final-block broadening. Dynamic invocation `.11.4.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` | Clean base `8352d535`; five unchanged-role consumers derive six governed native snapshot indexes and prove capabilities plus all nineteen queries across direct object/canonical JSON, MCP structured/text/decoded content, and exact response digest; Perl 13, Rust admission 1 plus formatting, Dart admission 1 plus formatting/analysis, Julia 257, shared Lua 281x2; unchanged semantic 6/20/105, MCP 35/10/10/76, ledger 5/5 + 6/6 pending/114; KM 757/6,137; memory; seven doctrines; mdBook 13,748 KiB/79; canonical changed admissions 6/6, Rust semantic 81.63s, Dart 1/1, Julia 416/416/29.5s, cursor 288, containment/moved-root, CLI 66x2, RAM 59%, Phase 0 1,031/661s; exact cleanup. | PASS. Exhaustive consumer evidence is complete without production oracle, contract, binding, fixture, role, ledger, semantic, CLI, aggregator, legacy, or authority movement. Routed composition and atomic rollout promotion remain exclusively owned by `.1.1.3`. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.1` | Clean base `c3273219`; exact 72-key fact union; bounded 128-character/128-UTF-8-byte contract string; explicit-component overlay policy in five servers; neutral semantic 6/20/105; MCP 35/10/10/76; byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; focused Perl 36, Rust 165+3+4+1, Dart complete 354 and MCP 16+1, Julia 53+145+170+178, Lua 116+216+247+202x2; unchanged ledger 5/5 + 6/6 pending/114; KM 757/6,137; memory; seven doctrines; mdBook; host-authorized canonical Rust semantic 78.48s, Dart 1/1, Julia 416/416/27.5s, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/637s; exact cleanup. | PASS. The three shared transport blockers are repaired atomically without rollout promotion or authority expansion. Omitted/unrelated partial overlays reach native portable diagnostics, explicit overlay ceilings remain dispatch-free, and all-twenty consumer proof `.1.1.2` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.10.9.7.1.1.0` | Clean base `20ee93c9`; director authorization; exact atomic contract/bindings/five-server repair boundary; explicit per-component overlay policy; six-runtime consumer/driver/promotion dependency split; unchanged semantic 6/20/105; MCP 35/10/10/68; five byte-fresh bindings at 83,072/82,886/82,875/119,538/82,827 bytes; unchanged admissions Perl 13, Rust 1, Dart 1, Julia 178, Lua 202x2; ledger 5/5 + 6/6 rollout pending/114; KM 757/6,137; mdBook 13,720 KiB/79; memory architecture; seven doctrines; behavior-free diff and exact cleanup. | PASS. The authorized recommendation is now dependency-complete and commit-sized: exact shared transport repair `.1`, all-twenty consumer identity `.2`, recurring driver/governance/promotion `.3`, then unchanged closeout `.4`; no contract or runtime behavior moved in this leaf. |

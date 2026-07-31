@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.1` — a callable value must be inert data before it becomes executable):
+  Rust's existing `BlockValue` is immediate and cannot safely double as a deferred callable. The new
+  `CallableCodeblock` therefore owns one versioned signature, exact body/source, typed body AST, and source/body
+  spans, while `CodeblockValue` serializes through the same internally tagged `Expr::CodeblockLiteral` shape.
+  `CallableSignature.rest_param` becomes optional: old variadic user-function JSON remains byte-shaped as a string
+  for `Some`, while fixed literals serialize `null`; validation still requires a rest name on every variadic
+  function. No second emitted-source codec is needed because `source_emitter` already embeds the complete
+  serialized `CompiledSpec`.
+
+  Public spans use Unicode character offsets, but parsing still needs byte indices internally. A parser character
+  base lets nested deferred bodies keep the containing ActionIR coordinate space without changing general byte-
+  indexed scanning. The semantic value-shape vocabulary already admitted `codeblock`; projecting the literal's
+  exact signature closes the descriptor seam without altering existing semantic fixture digests.
+
+  Deferred syntax must also remain deferred during static runtime analysis. The first exhaustive match repair
+  descended into a literal body when searching for action-edge child calls and `retv` reads. That would have run a
+  child before the expression that merely constructs a codeblock. The correct eager dependency result for
+  `CodeblockLiteral` is always false; a focused state-mutation regression now proves the child is not pre-
+  dispatched. Syntax-level validation may still recursively inspect the body because that does not execute it.
+
+  Focused proof passes the seven-test contract suite, variadic 7/7, semantic query 5/5, and the complete core
+  package (193 unit tests plus all integration groups). The complete Rust operational gate additionally passes
+  every runtime package test, both long corpus classifiers, the primary build, repository-local project-data
+  proof, and both 66/66 CLI environments. The independent canonical gate then passes seven doctrines, exact
+  contracts/admissions, containment/moved-root, CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 641 seconds.
+  Invocation, dynamic caller stores, parameter restoration, call diagnostics, and generic contextual final
+  blocks deliberately remain `.11.4.2-.3`.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.10` — public closure belongs inside the existing independent semantic
   checker): A new standalone “documentation checker” would create a second place to define semantic scope,
   rollout, and MCP topology. Extending `semantic_introspection_contract.json` instead keeps one machine-readable

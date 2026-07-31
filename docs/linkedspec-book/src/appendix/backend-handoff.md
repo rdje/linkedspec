@@ -1561,9 +1561,11 @@ boundaries remain below as rollout history, not as live gaps:
 | Generated parser source | Perl, Rust, Dart, Julia, and Lua pass contract v1. Rust compiles/runs 105/105. Dart, Julia, and Lua pass deterministic emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Lua uses fresh PUC Lua/LuaJIT hosts and exact v1/v2/v3 callable state. | closed `.3.5`; Lua admission `.8.4` |
 | Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 80/0/0 after Lua `.8.4` |
 
-Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, and generic
-first-class/dynamic callable-codeblock equivalence are explicit exclusions/future owners rather than
-silent gaps. No backend is called complete while a current matrix state remains partial or gap.
+Deprecated Perl plugins, general future `parse_job(...)` authoring, and complete generic first-class/dynamic
+callable-codeblock equivalence are explicit exclusions/future owners rather than silent gaps. Rust now admits
+typed callable-literal construction/state but not dynamic invocation or generic contextual equivalence; Dart,
+Julia, and Lua still lack explicit literal values. Semantic introspection and thin MCP are separately complete.
+No backend is called complete while a current matrix state remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
 complete backend parity. Its 57/1/2 boundary first advanced to 58/0/2 through strict recurring Rust generated-

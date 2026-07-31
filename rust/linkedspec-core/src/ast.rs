@@ -36,14 +36,14 @@ pub struct FunctionDefinition {
     pub body_span: SourceSpan,
 }
 
-/// Backend-neutral signature for a variadic user-defined function.
+/// Backend-neutral callable signature shared by user functions and codeblocks.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct CallableSignature {
     pub kind: String,
     pub version: usize,
     pub positional_params: Vec<String>,
-    pub rest_param: String,
+    pub rest_param: Option<String>,
     pub min_arity: usize,
     pub max_arity: Option<usize>,
 }

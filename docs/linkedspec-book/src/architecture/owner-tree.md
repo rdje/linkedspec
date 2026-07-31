@@ -428,6 +428,14 @@ slots on every exit, and returns typed failures through the existing runtime-con
 plain serialized data—no Perl coderef or lexical environment is captured. Governed helper and registered
 user-function resolution stays in `MethodLowering` before this variable-call fallback.
 
+Rust construction is split across typed data owners rather than a host callable. `linkedspec_core::expr` parses
+exact `{|` into `CallableCodeblock` plus `CodeblockBodyAst` and character-coordinate spans;
+`linkedspec_core::types::CodeblockValue` carries that record as inert `RuntimeValue::Codeblock` data. The ordinary
+`CompiledSpec` serde boundary and `source_emitter`'s one embedded compiled JSON payload preserve the same record,
+while semantic projection reports its fixed/rest callable signature as a `codeblock` value shape. Runtime eager
+dependency analysis treats the retained body as deferred. No Rust dynamic variable-call owner exists until
+`FUTURE-PARITY-BACKLOG.11.4.2`.
+
 `LinkedSpec::CallableContract` is the Perl metadata owner for contextual final-codeblock acceptance. It declares
 the final `codeblock` slot and pre-codeblock arity for governed helpers and receiver methods, projects the same
 contract from typed user-function descriptors, and converts contextual `block_value` nodes into one

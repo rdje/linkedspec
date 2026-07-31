@@ -876,7 +876,7 @@ fn callable_signature_field(
         kind: "callable_signature".to_string(),
         version,
         positional_params,
-        rest_param,
+        rest_param: Some(rest_param),
         min_arity,
         max_arity: None,
     })

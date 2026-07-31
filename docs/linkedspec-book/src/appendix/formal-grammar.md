@@ -134,7 +134,7 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
-### Callable-codeblock literal (current on Perl; future cross-backend)
+### Callable-codeblock literal (construction current on Perl and Rust)
 
 ADR 0031 adopts callable literals; ADR 0032 adds a final contextual-codeblock parameter declaration:
 
@@ -157,7 +157,10 @@ capture is excluded from version 1. Neutral contract `.11.2` locks this grammar,
 diagnostics, and fixture. Perl `.11.3.1` preserves the eight-field typed record through generated source and
 `.11.3.2` executes bound variable calls with the specified dynamic context, restoration, result, and failure
 semantics. ADR 0032 declaration `.11.3.3.1` is adopted and Perl generic normalization `.11.3.3.2` is implemented
-for metadata-declared helper, user-function, and receiver forms. Non-Perl backends remain future, so this grammar
+for metadata-declared helper, user-function, and receiver forms. Rust `.11.4.1` now preserves the same literal,
+signature, body, source, Unicode-coordinate spans, compiled/serialized state, generated source, and semantic
+codeblock shape without executing it. Rust bound-variable calls remain `.11.4.2`, generic Rust contextual
+equivalence remains `.11.4.3`, and Dart/Julia/Lua explicit literals remain future, so complete invocation behavior
 is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,

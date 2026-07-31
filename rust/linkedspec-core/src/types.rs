@@ -3,7 +3,9 @@
 //! These types are the contract between the compiler (in linkedspec-core) and the
 //! runtime engine (in linkedspec-runtime). They are idiomatic Rust — no Perl mimicry.
 
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize, Serializer, de::Error as _};
+
+use crate::expr::{CallableCodeblock, Expr};
 
 /// Parse mode for a rule handler.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -26,6 +28,45 @@ impl ParseMode {
 
 // ── Runtime value types (shared between core and runtime) ──
 
+/// An inert callable-codeblock record carried as runtime data.
+#[derive(Debug, Clone, PartialEq)]
+pub struct CodeblockValue {
+    literal: CallableCodeblock,
+}
+
+impl CodeblockValue {
+    pub fn new(literal: CallableCodeblock) -> Self {
+        Self { literal }
+    }
+
+    pub fn literal(&self) -> &CallableCodeblock {
+        &self.literal
+    }
+}
+
+impl Serialize for CodeblockValue {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        Expr::CodeblockLiteral(self.literal.clone()).serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for CodeblockValue {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        match Expr::deserialize(deserializer)? {
+            Expr::CodeblockLiteral(literal) => Ok(Self::new(literal)),
+            _ => Err(D::Error::custom(
+                "runtime codeblock value must contain a codeblock_literal",
+            )),
+        }
+    }
+}
+
 /// A runtime value — the data that flows through lifecycle code execution.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -42,6 +83,8 @@ pub enum RuntimeValue {
     Hash(Vec<(String, RuntimeValue)>),
     /// A boolean value.
     Bool(bool),
+    /// An inert typed callable-codeblock record.
+    Codeblock(CodeblockValue),
 }
 
 impl RuntimeValue {
@@ -68,6 +111,8 @@ impl RuntimeValue {
                 }
                 serde_json::Value::Object(map)
             }
+            Self::Codeblock(value) => serde_json::to_value(value)
+                .expect("serializing an in-memory codeblock record cannot fail"),
         }
     }
 
@@ -91,6 +136,7 @@ impl RuntimeValue {
             Self::Bool(_) => true,
             Self::Array(a) => !a.is_empty(),
             Self::Hash(h) => !h.is_empty(),
+            Self::Codeblock(_) => true,
         }
     }
 
@@ -115,7 +161,7 @@ impl RuntimeValue {
             }
             Self::Bool(b) => (if *b { "1" } else { "0" }).to_string(),
             Self::Undef => String::new(),
-            Self::Array(_) | Self::Hash(_) => String::new(),
+            Self::Array(_) | Self::Hash(_) | Self::Codeblock(_) => String::new(),
         }
     }
 
@@ -133,7 +179,9 @@ impl RuntimeValue {
                 format!("{value}")
             }),
             Self::Bool(value) => Some(if *value { "1" } else { "0" }.to_string()),
-            Self::Undef | Self::Array(_) | Self::Hash(_) | Self::Number(_) => None,
+            Self::Undef | Self::Array(_) | Self::Hash(_) | Self::Codeblock(_) | Self::Number(_) => {
+                None
+            }
         }
     }
 
@@ -159,6 +207,7 @@ impl RuntimeValue {
             Self::Scalar(s) => !s.is_empty(),
             Self::Array(a) => !a.is_empty(),
             Self::Hash(h) => !h.is_empty(),
+            Self::Codeblock(_) => true,
         }
     }
 
@@ -177,6 +226,7 @@ impl RuntimeValue {
             Self::Bool(_) => 1,
             Self::Array(a) => a.len(),
             Self::Hash(h) => h.len(),
+            Self::Codeblock(_) => 1,
         }
     }
 }
@@ -220,6 +270,7 @@ impl std::fmt::Display for RuntimeValue {
                 }
                 write!(f, "}}")
             }
+            Self::Codeblock(_) => write!(f, "<codeblock>"),
         }
     }
 }

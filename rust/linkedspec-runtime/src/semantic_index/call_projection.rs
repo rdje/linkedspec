@@ -5,7 +5,8 @@
 //! neither host layouts nor generated implementation source are retained.
 
 use super::static_projection::{
-    SemanticSourceReference, SemanticStaticProjection, record, relation, value_shape,
+    SemanticSourceReference, SemanticStaticProjection, codeblock_shape, record, relation,
+    value_shape,
 };
 use super::{
     SemanticEntrySelection, SemanticGeneratedPlanInput, SemanticIndexError, SemanticSourceMap,
@@ -1046,6 +1047,7 @@ fn infer_expr_shape(
         Expr::NumberLiteral { .. } => value_shape("number"),
         Expr::BooleanLiteral { .. } => value_shape("boolean"),
         Expr::Undef => value_shape("null"),
+        Expr::CodeblockLiteral(literal) => codeblock_shape(&literal.signature),
         Expr::Variable { name } => variables
             .get(name)
             .cloned()

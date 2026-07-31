@@ -11,9 +11,9 @@ answers:
   - "can codeblock literals have a rest parameter"
   - "does with remain after callable codeblocks"
 date: 2026-07-12
-status: accepted-design
+status: current-partial-rollout
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, and Perl .11.3.1-.11.3.3.2 consume literal, invocation, and contextual-final-block behavior while backend parity remains future."
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, Perl .11.3 consumes literal/invocation/contextual-final behavior, and Rust .11.4.1 consumes exact inert construction/state while Rust invocation and remaining backend parity stay future."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -51,8 +51,10 @@ arguments and read dynamic context.
 `linkedspec-callable-codeblock-v1` machine-locks seven literals, eleven valid calls, sixteen invalid syntax/call
 cases, four invalid declarations, eight contextual forms, and one deterministic fixture. Perl `.11.3.1` implements typed literal
 construction/preservation, `.11.3.2` executes `cb(args)` with the neutral dynamic-context behavior, and
-`.11.3.3.2` normalizes declared helper/user-function/receiver contextual final blocks. Backend parity remains
-future, so the complete feature is not yet portable behavior.
+`.11.3.3.2` normalizes declared helper/user-function/receiver contextual final blocks. Rust `.11.4.1` now preserves
+the same inert literal/signature/body/source/span record through compiled JSON, user functions, semantic
+descriptors, generated plans, and emitted source. Rust invocation remains `.11.4.2`, contextual equivalence
+remains `.11.4.3`, and Dart/Julia/Lua explicit values remain future, so the complete feature is not yet portable.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]],

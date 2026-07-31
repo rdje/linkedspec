@@ -422,16 +422,21 @@ Ordinary `{ statements }` remains an eager block value, while empty and top-leve
 literals. The contract also fixes diagnostics, exact final-only `name: codeblock`, eight contextual helper/
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
-`bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. Backend admission remains future until the owned rollout
-leaves supply generic final-block and cross-backend evidence. Perl now consumes the literal and invocation subset
+`bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. Full backend admission remains
+future until the owned rollout leaves supply generic final-block and cross-backend evidence. Perl consumes the
+literal and invocation subset
 through `prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert canonical generated data,
 assignment/copying, user-function preservation, dynamic caller execution, temporary fixed/rest restoration,
 standalone discard, receiver continuation, static precedence, and typed failures pass. Generic Perl final-block
 normalization audit `.11.3.3.0` found the declaration gap, ADR 0032 closes it in `.11.3.3.1`, and `.11.3.3.2`
 preserves metadata plus executes equivalent attached/parenthesized helper/user-function/receiver contextual forms.
-Perl construction, invocation, normalization, and closeout `.11.3` are complete. Lua's declared contextual
-helper/user-function/receiver forms are also current, but explicit callable literals and arbitrary dynamic calls
-remain future alongside Rust/Dart/Julia generic parity; the overall generic capability therefore stays excluded.
+Perl construction, invocation, normalization, and closeout `.11.3` are complete. Rust `.11.4.1` now consumes the
+construction/state subset: exact brace classification, the same eight-field typed record and fixed/rest signature,
+Unicode-coordinate spans, inert runtime values, compiled JSON and generated-source preservation, and semantic
+`codeblock` shapes pass without a host closure or body execution. Rust bound-variable invocation remains
+`.11.4.2`, and generic final-block equivalence remains `.11.4.3`. Lua's declared contextual helper/user-function/
+receiver forms are also current, but explicit values remain future on Dart/Julia/Lua and arbitrary dynamic calls
+remain future outside Perl; the overall generic capability therefore stays excluded.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The

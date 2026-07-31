@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 Rust callable-codeblock construction`: `FUTURE-PARITY-BACKLOG.11.4.1` adds one inert Rust
+  `codeblock_literal` value before any dynamic invocation. Exact `{|` wins before harray/eager-block braces; the
+  record preserves the neutral eight fields, fixed/final-rest signature, typed ActionIR body, exact source, and
+  half-open Unicode character-coordinate spans, including nested literals. `RuntimeValue::Codeblock`, ordinary
+  `CompiledSpec` JSON, user-function transport, generated-plan reconstruction, emitted Rust, and semantic
+  `codeblock` shapes carry the same pure data without a closure or captured environment. Retained body calls and
+  `retv` reads are not eager action-edge dependencies. Rust `cb(args)` remains `.11.4.2`; generic contextual
+  final-block equivalence remains `.11.4.3`; the generic capability stays excluded.
 - `2026-07-30 semantic-introspection public closeout`: `FUTURE-PARITY-BACKLOG.10.10` makes the implemented native
   semantic APIs and thin MCP projection one governed current story. The neutral contract remains the sole semantic
   owner at six fixture groups and 20 digest-locked responses; its independent checker now rejects 128 omission-sensitive mutations and closes rollout at 9/9 with native admission 6/6. The public contract requires the Perl guide,

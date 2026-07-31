@@ -4,7 +4,7 @@ use super::{
     SemanticEntrySelection, SemanticGeneratedPlanInput, SemanticIndexError, SemanticSnapshot,
     SemanticSourceMap, SemanticSourceSpan, call_projection,
 };
-use linkedspec_core::ast::{BodyElement, BodyElementKind, RuleMode, SpecFile};
+use linkedspec_core::ast::{BodyElement, BodyElementKind, CallableSignature, RuleMode, SpecFile};
 use linkedspec_core::error::PortableDiagnostic;
 use linkedspec_core::expr::{Arg, CodeBlock, Expr};
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
@@ -1188,6 +1188,7 @@ fn expression_shape(expression: &Expr) -> Value {
             array_shape(element)
         }
         Expr::HashLiteral { .. } => value_shape("object"),
+        Expr::CodeblockLiteral(literal) => codeblock_shape(&literal.signature),
         Expr::Call { name, args } if name == "return" => args
             .first()
             .map(Arg::value)
@@ -1217,6 +1218,22 @@ pub(super) fn value_shape(kind: &str) -> Value {
         "signature": null,
         "members": [],
     })
+}
+
+pub(super) fn codeblock_shape(signature: &CallableSignature) -> Value {
+    let mut shape = value_shape("codeblock");
+    shape["signature"] = json!({
+        "parameters": signature
+            .positional_params
+            .iter()
+            .map(|name| json!({"name": name, "kind": "value", "required": true}))
+            .collect::<Vec<_>>(),
+        "arity_min": signature.min_arity,
+        "arity_max": signature.max_arity,
+        "rest_parameter": signature.rest_param,
+        "final_codeblock": false,
+    });
+    shape
 }
 
 fn array_shape(element: Value) -> Value {

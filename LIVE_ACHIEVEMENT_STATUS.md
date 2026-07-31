@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Rust callable-codeblock construction signoff-complete
+
+Leaf `.11.4.1` now implements exact inert Rust `{|params| body }` / `{|| body }` construction. The neutral
+eight-field fixed/rest record retains typed ActionIR, exact source, and Unicode character-coordinate source/body
+spans; `RuntimeValue`, compiled JSON, user functions, generated plans, emitted source, and semantic codeblock
+descriptors preserve it without a host closure, captured environment, body execution, or variable-call dispatch.
+Calls and `retv` reads inside a retained body are excluded from eager action-edge dependency scans.
+
+Focused proof passes seven callable-codeblock tests, variadic 7/7, semantic query 5/5, and the complete Rust core
+package at 193 unit tests plus all integration groups. The full Rust operational gate passes all package tests,
+both long corpus classifiers, primary build, repository-local storage proof, and CLI 66x2. Knowledge Map is
+759/6,156; mdBook and all seven doctrines pass. Canonical CI passes containment/moved-root, CLI 66x2, RAM 55%,
+and Phase 0 1,031/1,031 in 641 seconds. `.11.4.2` owns dynamic invocation; `.11.4.3` retains generic contextual
+final-block equivalence. No push occurs before cadence 300.
+
 ## 2026-07-30 — Semantic introspection public closeout signoff-complete
 
 Leaf `.10.10` extends the existing independent neutral checker with 28 governed public surfaces, nine worked

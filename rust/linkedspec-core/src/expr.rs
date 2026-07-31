@@ -42,10 +42,39 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::ast::CallableSignature;
+
 /// A complete lifecycle code block, parsed into a sequence of statements.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CodeBlock {
     pub statements: Vec<Stmt>,
+}
+
+/// Half-open character span within the containing ActionIR source.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ExpressionSpan {
+    pub start: usize,
+    pub end: usize,
+}
+
+/// Typed ActionIR body retained by a deferred callable codeblock.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct CodeblockBodyAst {
+    pub kind: String,
+    pub source: String,
+    pub statements: Vec<Stmt>,
+}
+
+/// Inert version-1 callable-codeblock data. It captures no host closure or environment.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct CallableCodeblock {
+    pub version: usize,
+    pub signature: CallableSignature,
+    pub body_source: String,
+    pub body_ast: CodeblockBodyAst,
+    pub source_text: String,
+    pub source_span: ExpressionSpan,
+    pub body_span: ExpressionSpan,
 }
 
 /// A single statement within a lifecycle block.
@@ -121,6 +150,9 @@ pub enum Expr {
     /// A value-returning block expression: `{ set(x, "a"); x }`
     #[serde(rename = "block_value")]
     BlockValue { block: CodeBlock },
+    /// A deferred first-class codeblock literal: `{|value| return(value) }`.
+    #[serde(rename = "codeblock_literal")]
+    CodeblockLiteral(CallableCodeblock),
     /// A string literal: `"hello"`, `'world'`
     #[serde(rename = "string")]
     StringLiteral { value: String },
@@ -241,6 +273,11 @@ impl Expr {
                     .or_else(|| entry.value.find_removed_aggregate_selector())
             }),
             Expr::BlockValue { block } => block.find_removed_aggregate_selector(),
+            Expr::CodeblockLiteral(literal) => literal
+                .body_ast
+                .statements
+                .iter()
+                .find_map(|statement| statement.expr.find_removed_aggregate_selector()),
             Expr::FluentChain { receiver, calls } => receiver
                 .find_removed_aggregate_selector()
                 .or_else(|| calls.iter().find_map(|call| in_args(&call.args))),
@@ -338,6 +375,7 @@ impl std::fmt::Display for Expr {
                 }
                 write!(f, "}}")
             }
+            Expr::CodeblockLiteral(literal) => f.write_str(&literal.source_text),
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
             Expr::NumberLiteral { value } => write!(f, "{value}"),
             Expr::BooleanLiteral { value } => write!(f, "{value}"),
@@ -386,7 +424,11 @@ impl std::fmt::Display for Expr {
 impl CodeBlock {
     /// Parse a lifecycle code string into a CodeBlock of statements.
     pub fn parse(source: &str) -> Result<Self, String> {
-        let mut parser = Parser::new(source);
+        Self::parse_with_character_base(source, 0)
+    }
+
+    fn parse_with_character_base(source: &str, character_base: usize) -> Result<Self, String> {
+        let mut parser = Parser::with_character_base(source, character_base);
         parser.parse_block()
     }
 
@@ -398,16 +440,125 @@ impl CodeBlock {
     }
 }
 
+fn parse_callable_signature(source: &str) -> Result<CallableSignature, String> {
+    let mut positional_params = Vec::new();
+    let mut rest_param = None;
+    if !source.trim().is_empty() {
+        let parts = source.split(',').collect::<Vec<_>>();
+        for (index, raw) in parts.iter().enumerate() {
+            let parameter = raw.trim();
+            if parameter.is_empty() {
+                return Err("invalid_parameter: empty callable parameter".to_string());
+            }
+            if let Some(rest_name) = parameter.strip_prefix("...") {
+                if index + 1 != parts.len() {
+                    return Err(
+                        "rest_parameter_must_be_final: rest parameter must be final".to_string()
+                    );
+                }
+                if rest_name.is_empty()
+                    || rest_name.chars().next().is_some_and(char::is_whitespace)
+                    || !is_callable_parameter_identifier(rest_name)
+                {
+                    return Err(
+                        "invalid_rest_parameter: expected ... immediately followed by an identifier"
+                            .to_string(),
+                    );
+                }
+                validate_callable_parameter_name(rest_name, &positional_params)?;
+                rest_param = Some(rest_name.to_string());
+                continue;
+            }
+            if !is_callable_parameter_identifier(parameter) {
+                return Err(format!(
+                    "invalid_parameter: invalid callable parameter '{parameter}'"
+                ));
+            }
+            validate_callable_parameter_name(parameter, &positional_params)?;
+            positional_params.push(parameter.to_string());
+        }
+    }
+    let min_arity = positional_params.len();
+    let max_arity = rest_param.is_none().then_some(min_arity);
+    Ok(CallableSignature {
+        kind: "callable_signature".to_string(),
+        version: 1,
+        positional_params,
+        rest_param,
+        min_arity,
+        max_arity,
+    })
+}
+
+fn validate_callable_parameter_name(name: &str, fixed: &[String]) -> Result<(), String> {
+    if fixed.iter().any(|parameter| parameter == name) {
+        return Err(format!(
+            "duplicate_parameter: duplicate callable parameter '{name}'"
+        ));
+    }
+    if is_reserved_callable_parameter(name) {
+        return Err(format!(
+            "reserved_parameter: callable parameter '{name}' is reserved"
+        ));
+    }
+    Ok(())
+}
+
+fn is_callable_parameter_identifier(name: &str) -> bool {
+    let mut characters = name.chars();
+    matches!(characters.next(), Some(first) if first.is_ascii_alphabetic() || first == '_')
+        && characters.all(|character| character.is_ascii_alphanumeric() || character == '_')
+}
+
+fn is_reserved_callable_parameter(name: &str) -> bool {
+    matches!(
+        name,
+        "fn" | "return"
+            | "I"
+            | "LS"
+            | "LE"
+            | "E"
+            | "EX"
+            | "IT"
+            | "LX"
+            | "STRING"
+            | "descr"
+            | "minfo"
+            | "LSPOS"
+            | "LEPOS"
+            | "LMATCH"
+            | "LSMATCH"
+            | "IMATCH"
+            | "IMATCH_LIST"
+            | "LMATCH_LIST"
+            | "IMATCH_HASH"
+            | "LMATCH_HASH"
+            | "SELF"
+            | "this"
+            | "ctx"
+            | "runtime_ctx"
+    )
+}
+
 // ── Recursive-descent parser ──
 
 struct Parser<'a> {
     src: &'a str,
     pos: usize,
+    character_base: usize,
 }
 
 impl<'a> Parser<'a> {
     fn new(src: &'a str) -> Self {
-        Self { src, pos: 0 }
+        Self::with_character_base(src, 0)
+    }
+
+    fn with_character_base(src: &'a str, character_base: usize) -> Self {
+        Self {
+            src,
+            pos: 0,
+            character_base,
+        }
     }
 
     fn remaining(&self) -> &'a str {
@@ -1320,6 +1471,14 @@ impl<'a> Parser<'a> {
 
     fn parse_brace_expr(&mut self) -> Result<Expr, String> {
         let start = self.pos;
+        if self.remaining().starts_with("{|") {
+            return self.parse_callable_codeblock_literal();
+        }
+        if self.remaining()[1..].trim_start().starts_with('|') {
+            return Err(format!(
+                "invalid_codeblock_opener: codeblock opener must be exact '{{|' at position {start}"
+            ));
+        }
         let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
         let payload = &self.src[payload_start..payload_end];
 
@@ -1341,6 +1500,53 @@ impl<'a> Parser<'a> {
 
         self.pos = after_close;
         Ok(Expr::BlockValue { block })
+    }
+
+    fn parse_callable_codeblock_literal(&mut self) -> Result<Expr, String> {
+        let start = self.pos;
+        let (_, close, after_close) = self.scan_brace_payload_bounds()?;
+        let signature_start = start + 2;
+        let signature_closer = self.src[signature_start..close]
+            .find('|')
+            .map(|offset| signature_start + offset)
+            .ok_or_else(|| {
+                format!(
+                    "missing_codeblock_signature_closer: missing signature-closing '|' at position {start}"
+                )
+            })?;
+        let signature = parse_callable_signature(&self.src[signature_start..signature_closer])?;
+        let body_start = signature_closer + 1;
+        let body_source = &self.src[body_start..close];
+        let body =
+            CodeBlock::parse_with_character_base(body_source, self.character_offset(body_start))
+                .map_err(|error| {
+                    format!("invalid_codeblock_body: codeblock at position {start}: {error}")
+                })?;
+        let literal = CallableCodeblock {
+            version: 1,
+            signature,
+            body_source: body_source.to_string(),
+            body_ast: CodeblockBodyAst {
+                kind: "action_block".to_string(),
+                source: body_source.to_string(),
+                statements: body.statements,
+            },
+            source_text: self.src[start..after_close].to_string(),
+            source_span: ExpressionSpan {
+                start: self.character_offset(start),
+                end: self.character_offset(after_close),
+            },
+            body_span: ExpressionSpan {
+                start: self.character_offset(body_start),
+                end: self.character_offset(close),
+            },
+        };
+        self.pos = after_close;
+        Ok(Expr::CodeblockLiteral(literal))
+    }
+
+    fn character_offset(&self, byte_offset: usize) -> usize {
+        self.character_base + self.src[..byte_offset].chars().count()
     }
 
     fn scan_brace_payload_bounds(&self) -> Result<(usize, usize, usize), String> {

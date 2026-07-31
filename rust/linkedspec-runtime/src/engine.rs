@@ -636,6 +636,7 @@ fn runtime_value_trace_kind(value: &RuntimeValue) -> &'static str {
         RuntimeValue::Scalar(_) => "scalar",
         RuntimeValue::Array(_) => "array",
         RuntimeValue::Hash(_) => "hash",
+        RuntimeValue::Codeblock(_) => "codeblock",
     }
 }
 
@@ -3261,6 +3262,9 @@ impl Engine {
                     || Self::expr_calls_rule(&entry.value, rule_label)
             }),
             Expr::BlockValue { block } => Self::block_calls_rule(block, rule_label),
+            // Construction is inert. A call inside the retained body is not an
+            // eager dependency of the expression that creates the codeblock.
+            Expr::CodeblockLiteral(_) => false,
             Expr::FluentChain { receiver, calls } => {
                 Self::expr_calls_rule(receiver, rule_label)
                     || calls.iter().any(|call| {
@@ -3319,6 +3323,9 @@ impl Engine {
                 Self::expr_reads_retv(&entry.key) || Self::expr_reads_retv(&entry.value)
             }),
             Expr::BlockValue { block } => Self::block_reads_retv(block),
+            // Construction is inert. A retv read inside the retained body does
+            // not make the creating expression depend on an action-edge child.
+            Expr::CodeblockLiteral(_) => false,
             Expr::FluentChain { receiver, calls } => {
                 Self::expr_reads_retv(receiver)
                     || calls
@@ -4635,6 +4642,9 @@ impl Engine {
                 Ok(RuntimeValue::Hash(values))
             }
             Expr::BlockValue { block } => self.eval_block_value(block, ctx, rule_label),
+            Expr::CodeblockLiteral(literal) => Ok(RuntimeValue::Codeblock(
+                linkedspec_core::types::CodeblockValue::new(literal.clone()),
+            )),
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
@@ -4752,8 +4762,12 @@ impl Engine {
         if let Some(signature) = &function.signature {
             let values = args[signature.min_arity..].to_vec();
             let rest = RuntimeValue::Array(values.clone());
-            ctx.set_scalar(&signature.rest_param, rest);
-            ctx.set_array(&signature.rest_param, values);
+            let rest_param = signature
+                .rest_param
+                .as_deref()
+                .expect("variadic user-function signature must retain its rest parameter");
+            ctx.set_scalar(rest_param, rest);
+            ctx.set_array(rest_param, values);
         }
 
         let function_label = format!("function '{}'", function.name);

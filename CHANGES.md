@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.1 — construct Rust callable codeblocks
+
+Added the Rust construction/state subset of `linkedspec-callable-codeblock-v1` without activating bound-variable
+calls. `linkedspec-core` now recognizes exact `{|params| body }` and `{|| body }` before harray and eager-block
+classification, reuses one optional-rest `CallableSignature`, and stores the neutral eight-field literal with a
+typed ActionIR body, exact source, and half-open Unicode character-coordinate spans. Nested literal spans retain
+the containing coordinate space. Nine malformed forms preserve their neutral diagnostic codes.
+
+`RuntimeValue::Codeblock` carries the inert record through assignment, user-function arguments/results, compiled
+JSON reconstruction, generated-plan execution, and the one compiled-state payload embedded by emitted Rust.
+Semantic binding shapes expose `codeblock` plus the exact fixed/rest signature. Construction creates no `Fn`,
+closure, coderef, or environment and never executes the body. A review found and fixed one eager-analysis hazard:
+calls or `retv` reads inside a retained body no longer pre-dispatch an action-edge child.
+
+The contract-driven Rust suite passes seven tests covering all seven literals, three brace classes, nine invalid
+literals, Unicode/nested spans, non-execution, user-function transport, JSON/generated-source identity,
+action-edge dependency isolation, and semantic descriptors. The neutral checker, variadic 7/7 regression,
+semantic query 5/5 digest suite, and complete core package (193 unit tests plus all integration groups) pass.
+The complete Rust operational gate also passes every core/runtime package test, corpus and generated-source
+classifier, primary build, repository-local project-data proof, and both 66/66 CLI environments.
+Knowledge Map regeneration records 759 facts / 6,156 retrieval keys; mdBook and all seven doctrines pass. The
+independent canonical gate passes exact contracts/admissions, containment and moved-root proof, CLI 66x2, RAM
+55%, and Phase 0 1,031/1,031 in 641 seconds.
+Dynamic `cb(args)` execution remains `.11.4.2`; generic final-block equivalence remains `.11.4.3`; no capability
+promotion or push occurs.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.10 — close semantic introspection
 
 Extended the existing independent semantic contract checker with an exact public current-state contract rather

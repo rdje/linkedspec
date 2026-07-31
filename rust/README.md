@@ -91,6 +91,35 @@ command, and runs the shared byte-exact CLI manifest in default and POSIX option
 slice `FUTURE-PARITY-BACKLOG.9.1.4.6` removes the retired global option/trace projection, so the focused primary
 leg now passes all 63 cases in both environments.
 
+### Callable codeblock construction
+
+Rust recognizes the exact brace-pipe forms `{|params| body }` and `{|| body }` as inert callable-codeblock data:
+
+```text
+Top::
+ /x/ -> Done {
+   state = "before"
+   cb = {|value| state = cat(state, value); return(state) }
+   alias = cb
+   return({ "state" : state, "callback" : alias })
+ }
+
+Done::
+ /x/
+```
+
+Constructing and assigning `cb` does not execute its body, so the returned `state` is still `"before"`. The
+stored value has the neutral eight-field `codeblock_literal` shape: version, fixed/rest callable signature, exact
+body source, typed ActionIR body, exact literal source, and half-open source/body spans. Spans use Unicode
+character coordinates in the containing action source, including nested literals. Empty and keyed braces remain
+harrays, and ordinary nonempty `{ statements }` remains an eager block value.
+
+The record stays plain data through `CompiledSpec` JSON, user-function arguments/results, generated-plan
+reconstruction, and emitted Rust source; no Rust closure or captured environment is encoded. Semantic binding
+descriptors report a `codeblock` value shape with the same signature. Bound-variable invocation such as
+`cb("!")` is deliberately not current in Rust yet: `FUTURE-PARITY-BACKLOG.11.4.2` owns dynamic caller execution
+and diagnostics, while `.11.4.3` owns generic attached/parenthesized final-block equivalence.
+
 Rust execution, descriptor projection, generated-source v2, and public option/CLI removal are current through
 `.9.1.4.6`. The parser retains complete-line and header-rest bare edges as
 typed nodes; validation derives AND bare edges as blind calls and OR/default bare edges as action edges, rejects
@@ -299,7 +328,8 @@ false `and` value or true `or` value.
 `RuntimeValue::as_bool` is the shared typed truth seam for those helpers and lazy `if`/`switch`/`while` controls.
 Null, false, numeric zero, empty strings, and empty arrays/harrays are false. Nonzero numbers, every nonempty
 string (including `"0"` and `"false"`), and nonempty aggregates are true. A typed codeblock is true without being
-invoked; this does not activate the separately owned explicit callable-literal syntax.
+invoked. Explicit callable-literal construction is current as described above; bound-variable invocation remains
+separately owned by `.11.4.2`.
 
 ```text
 Top::

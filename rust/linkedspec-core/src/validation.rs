@@ -296,6 +296,7 @@ fn check_function_registry(spec: &SpecFile) -> Result<()> {
                 || signature.positional_params != function.params
                 || signature.min_arity != function.arity
                 || signature.min_arity != signature.positional_params.len()
+                || signature.rest_param.is_none()
                 || signature.max_arity.is_some()
             {
                 return Err(LinkedSpecError::Validation(format!(
@@ -310,7 +311,7 @@ fn check_function_registry(spec: &SpecFile) -> Result<()> {
             function
                 .signature
                 .iter()
-                .map(|signature| &signature.rest_param),
+                .filter_map(|signature| signature.rest_param.as_ref()),
         );
         for param in all_params {
             if !is_identifier(param) {

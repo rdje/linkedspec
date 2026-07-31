@@ -272,6 +272,12 @@ copied fixed/rest parameters bind. Prior parameter values restore even when the 
 writes use the caller's current working slots. `return(...)` exits only the codeblock, a final expression is the
 implicit result, compatible receiver chains may continue, and a standalone call discards only the result.
 
+Rust now shares the construction boundary. It classifies exact `{|` before harray/eager braces, retains the same
+eight-field literal and fixed/rest signature with Unicode character-coordinate spans, carries the value through
+compiled JSON, user functions, generated plans, emitted source, and semantic `codeblock` descriptors, and never
+constructs a host closure or executes the body. Rust `cb(args)` execution is the next separately owned slice, so
+the dynamic examples below describe current Perl behavior until Rust invocation is admitted.
+
 On Perl, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
